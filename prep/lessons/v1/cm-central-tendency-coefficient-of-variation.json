@@ -15,11 +15,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "cv1", "label": "Take standard deviation and mean" },
-          { "id": "cv2", "label": "Divide SD by mean" },
-          { "id": "cv3", "label": "Multiply by 100 for percent" }
+          {
+            "id": "cv1",
+            "label": "Take standard deviation and mean"
+          },
+          {
+            "id": "cv2",
+            "label": "Divide SD by mean"
+          },
+          {
+            "id": "cv3",
+            "label": "Multiply by 100 for percent"
+          }
         ],
-        "edges": [["cv1", "cv2"], ["cv2", "cv3"]]
+        "edges": [
+          [
+            "cv1",
+            "cv2"
+          ],
+          [
+            "cv2",
+            "cv3"
+          ]
+        ]
       }
     },
     {
@@ -28,12 +46,27 @@
       "say": "A small SD can still mean large relative spread. Convert both series to CV and the larger percentage wins.",
       "vis": {
         "kind": "table",
-        "cols": ["Series", "Mean, SD, and CV"],
+        "cols": [
+          "Series",
+          "Mean, SD, and CV"
+        ],
         "rows": [
-          ["Infant weight", "5 kg, SD 1 kg, CV 20 percent"],
-          ["Adult weight", "60 kg, SD 6 kg, CV 10 percent"],
-          ["Verdict", "Infants relatively more variable"],
-          ["Rule", "Compare CV, never raw SD, across units"]
+          [
+            "Infant weight",
+            "5 kg, SD 1 kg, CV 20 percent"
+          ],
+          [
+            "Adult weight",
+            "60 kg, SD 6 kg, CV 10 percent"
+          ],
+          [
+            "Verdict",
+            "Infants relatively more variable"
+          ],
+          [
+            "Rule",
+            "Compare CV, never raw SD, across units"
+          ]
         ]
       }
     },
@@ -45,11 +78,19 @@
         "kind": "compare",
         "left": {
           "title": "Healthy assay",
-          "points": ["Low stable CV, under 3 to 5 percent", "Controls inside 2 SD limits", "Results released confidently"]
+          "points": [
+            "Low stable CV, under 3 to 5 percent",
+            "Controls inside 2 SD limits",
+            "Results released confidently"
+          ]
         },
         "right": {
           "title": "Failing assay",
-          "points": ["Rising CV over days", "Controls breaching 3 SD", "Halt, recalibrate, repeat controls"]
+          "points": [
+            "Rising CV over days",
+            "Controls breaching 3 SD",
+            "Halt, recalibrate, repeat controls"
+          ]
         }
       }
     },
@@ -60,11 +101,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "q1", "label": "Order all values ascending" },
-          { "id": "q2", "label": "Q1 at 25 percent, median at 50" },
-          { "id": "q3", "label": "Q3 at 75 percent completes quartiles" }
+          {
+            "id": "q1",
+            "label": "Order all values ascending"
+          },
+          {
+            "id": "q2",
+            "label": "Q1 at 25 percent, median at 50"
+          },
+          {
+            "id": "q3",
+            "label": "Q3 at 75 percent completes quartiles"
+          }
         ],
-        "edges": [["q1", "q2"], ["q2", "q3"]]
+        "edges": [
+          [
+            "q1",
+            "q2"
+          ],
+          [
+            "q2",
+            "q3"
+          ]
+        ]
       }
     },
     {
@@ -84,12 +143,27 @@
       "say": "Interquartile range is Q3 minus Q1, the middle half. Beyond one point five times it from the box lie outliers.",
       "vis": {
         "kind": "table",
-        "cols": ["Box plot landmark", "Value"],
+        "cols": [
+          "Box plot landmark",
+          "Value"
+        ],
         "rows": [
-          ["Lower box edge", "First quartile (25th percentile)"],
-          ["Upper box edge", "Third quartile (75th percentile)"],
-          ["Box height", "Interquartile range"],
-          ["Fences", "1.5 times IQR beyond box edges"]
+          [
+            "Lower box edge",
+            "First quartile (25th percentile)"
+          ],
+          [
+            "Upper box edge",
+            "Third quartile (75th percentile)"
+          ],
+          [
+            "Box height",
+            "Interquartile range"
+          ],
+          [
+            "Fences",
+            "1.5 times IQR beyond box edges"
+          ]
         ]
       }
     },
@@ -101,11 +175,19 @@
         "kind": "compare",
         "left": {
           "title": "Percentile uses",
-          "points": ["Growth chart channels", "Reference ranges for tests", "Cut offs for undernutrition screening"]
+          "points": [
+            "Growth chart channels",
+            "Reference ranges for tests",
+            "Cut offs for undernutrition screening"
+          ]
         },
         "right": {
           "title": "Percentile traps",
-          "points": ["Not a percent score in an exam", "Depends on reference population", "Crossing channels matters more than one point"]
+          "points": [
+            "Not a percent score in an exam",
+            "Depends on reference population",
+            "Crossing channels matters more than one point"
+          ]
         }
       }
     },
@@ -116,11 +198,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "si1", "label": "Find Q3 minus Q1 (the IQR)" },
-          { "id": "si2", "label": "Divide by two" },
-          { "id": "si3", "label": "Report as quartile deviation around median" }
+          {
+            "id": "si1",
+            "label": "Find Q3 minus Q1 (the IQR)"
+          },
+          {
+            "id": "si2",
+            "label": "Divide by two"
+          },
+          {
+            "id": "si3",
+            "label": "Report as quartile deviation around median"
+          }
         ],
-        "edges": [["si1", "si2"], ["si2", "si3"]]
+        "edges": [
+          [
+            "si1",
+            "si2"
+          ],
+          [
+            "si2",
+            "si3"
+          ]
+        ]
       }
     },
     {
@@ -129,12 +229,27 @@
       "say": "Absolute spread carries units; relative spread is a pure percentage. Coefficient of variation heads the relative family.",
       "vis": {
         "kind": "table",
-        "cols": ["Family", "Members"],
+        "cols": [
+          "Family",
+          "Members"
+        ],
         "rows": [
-          ["Absolute (with units)", "Range, IQR, mean deviation, SD"],
-          ["Relative (unit free)", "Coefficient of variation, quartile coefficient"],
-          ["Cross unit comparison", "Only relative measures allowed"],
-          ["Same unit comparison", "Either family acceptable"]
+          [
+            "Absolute (with units)",
+            "Range, IQR, mean deviation, SD"
+          ],
+          [
+            "Relative (unit free)",
+            "Coefficient of variation, quartile coefficient"
+          ],
+          [
+            "Cross unit comparison",
+            "Only relative measures allowed"
+          ],
+          [
+            "Same unit comparison",
+            "Either family acceptable"
+          ]
         ]
       }
     },
@@ -146,12 +261,61 @@
         "kind": "compare",
         "left": {
           "title": "Stem asks more variable",
-          "points": ["Compute CV for both groups", "Higher CV is more variable", "Ignore raw SD comparison"]
+          "points": [
+            "Compute CV for both groups",
+            "Higher CV is more variable",
+            "Ignore raw SD comparison"
+          ]
         },
         "right": {
           "title": "Stem asks more consistent",
-          "points": ["Same CV computation", "Lower CV is more consistent", "State both CV values as proof"]
+          "points": [
+            "Same CV computation",
+            "Lower CV is more consistent",
+            "State both CV values as proof"
+          ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: The coefficient of variation is standard deviation divided by the mean, multiplied by one hundred percent. Because it is dimensionless, it allows comparison of dispersion across variables with different units or vastly different means. In symmetrical, normally distributed data, the mean, median, and mode coincide. Standard error of the mean equals standard deviation divided by the square root of sample size, quantifying sampling variability.",
+      "say": "The coefficient of variation is standard deviation divided by the mean, multiplied by one hundred percent. Because it is dimensionless, it allows comparison of dispersion across variables with different units or vastly different means. In symmetrical, normally distributed data, the mean, median, and mode coincide. Standard error of the mean equals standard deviation divided by the square root of sample size, quantifying sampling variability.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Coefficient of variation formula",
+            "Standard deviation divided by mean multiplied by one hundred"
+          ],
+          [
+            "CV primary utility",
+            "Comparing variability between datasets with different measurement units"
+          ],
+          [
+            "Measure of central tendency",
+            "Arithmetic mean most efficient for normally distributed numerical data"
+          ],
+          [
+            "Best measure for skewed data",
+            "Median resists extreme outlier values and open-ended classes"
+          ],
+          [
+            "Empirical normal rule",
+            "68 percent of observations fall within one standard deviation"
+          ],
+          [
+            "95 percent coverage limits",
+            "Mean plus or minus 1.96 standard deviations"
+          ],
+          [
+            "Standard error of mean",
+            "Standard deviation divided by square root of sample size n"
+          ]
+        ]
       }
     }
   ]

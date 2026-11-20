@@ -13,11 +13,27 @@
    "say": "Give BCG, oral polio zero dose and hepatitis B within 24 hours of birth. The hepatitis B shot prevents vertical transmission and loses its protective window if given late.",
    "vis": {
     "kind": "table",
-    "cols": ["Vaccine", "Dose and route", "Injection site"],
+    "cols": [
+     "Vaccine",
+     "Dose and route",
+     "Injection site"
+    ],
     "rows": [
-     ["BCG", "0.05 ml intradermal", "Left upper arm deltoid"],
-     ["bOPV zero dose", "2 drops oral", "Mouth"],
-     ["Hepatitis B birth", "0.5 ml intramuscular", "Anterolateral left mid-thigh"]
+     [
+      "BCG",
+      "0.05 ml intradermal",
+      "Left upper arm deltoid"
+     ],
+     [
+      "bOPV zero dose",
+      "2 drops oral",
+      "Mouth"
+     ],
+     [
+      "Hepatitis B birth",
+      "0.5 ml intramuscular",
+      "Anterolateral left mid-thigh"
+     ]
     ]
    }
   },
@@ -40,11 +56,19 @@
     "kind": "compare",
     "left": {
      "title": "Injectable vaccines",
-     "points": ["Pentavalent at 6, 10, 14 weeks", "Fractional IPV at 6 and 14 weeks", "Anterolateral thigh and right deltoid"]
+     "points": [
+      "Pentavalent at 6, 10, 14 weeks",
+      "Fractional IPV at 6 and 14 weeks",
+      "Anterolateral thigh and right deltoid"
+     ]
     },
     "right": {
      "title": "Oral vaccines",
-     "points": ["bOPV 1, 2, 3 at 6, 10, 14 weeks", "Rotavirus 5 drops at 6, 10, 14 weeks", "Mucosal gut IgA induction"]
+     "points": [
+      "bOPV 1, 2, 3 at 6, 10, 14 weeks",
+      "Rotavirus 5 drops at 6, 10, 14 weeks",
+      "Mucosal gut IgA induction"
+     ]
     }
    }
   },
@@ -55,11 +79,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Dose 1 at 6 weeks"},
-     {"id": "b", "label": "Dose 2 at 14 weeks"},
-     {"id": "c", "label": "Booster at 9 months"}
+     {
+      "id": "a",
+      "label": "Dose 1 at 6 weeks"
+     },
+     {
+      "id": "b",
+      "label": "Dose 2 at 14 weeks"
+     },
+     {
+      "id": "c",
+      "label": "Booster at 9 months"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -68,12 +110,32 @@
    "say": "Nine months marks the transition to measles rubella, the first dose of vitamin A, the PCV booster, and Japanese encephalitis vaccine in endemic districts.",
    "vis": {
     "kind": "table",
-    "cols": ["Intervention", "Dose and route", "Special instruction"],
+    "cols": [
+     "Intervention",
+     "Dose and route",
+     "Special instruction"
+    ],
     "rows": [
-     ["Measles rubella 1", "0.5 ml subcutaneous", "Right upper arm deltoid"],
-     ["Vitamin A dose 1", "100,000 IU oral", "Given with 1 ml spoon"],
-     ["JE vaccine dose 1", "0.5 ml subcutaneous", "Endemic districts only"],
-     ["PCV booster", "0.5 ml intramuscular", "Right anterolateral thigh"]
+     [
+      "Measles rubella 1",
+      "0.5 ml subcutaneous",
+      "Right upper arm deltoid"
+     ],
+     [
+      "Vitamin A dose 1",
+      "100,000 IU oral",
+      "Given with 1 ml spoon"
+     ],
+     [
+      "JE vaccine dose 1",
+      "0.5 ml subcutaneous",
+      "Endemic districts only"
+     ],
+     [
+      "PCV booster",
+      "0.5 ml intramuscular",
+      "Right anterolateral thigh"
+     ]
     ]
    }
   },
@@ -95,11 +157,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "16-24 months DPT booster 1"},
-     {"id": "b", "label": "MR-2 and OPV booster"},
-     {"id": "c", "label": "Vitamin A every 6 months to 5 years"}
+     {
+      "id": "a",
+      "label": "16-24 months DPT booster 1"
+     },
+     {
+      "id": "b",
+      "label": "MR-2 and OPV booster"
+     },
+     {
+      "id": "c",
+      "label": "Vitamin A every 6 months to 5 years"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -108,12 +188,32 @@
    "say": "The second DPT booster arrives at five years. At ten and sixteen years, Td vaccine replaces tetanus toxoid to prevent adult diphtheria outbreaks.",
    "vis": {
     "kind": "table",
-    "cols": ["Age point", "Vaccine supplied", "Clinical objective"],
+    "cols": [
+     "Age point",
+     "Vaccine supplied",
+     "Clinical objective"
+    ],
     "rows": [
-     ["5 to 6 years", "DPT second booster", "Preschool immunity renewal"],
-     ["10 years", "Td vaccine 0.5 ml IM", "Diphtheria and tetanus booster"],
-     ["16 years", "Td vaccine 0.5 ml IM", "Adolescent booster protection"],
-     ["Pregnancy", "Td 1, Td 2 or Td booster", "Prevents maternal and neonatal tetanus"]
+     [
+      "5 to 6 years",
+      "DPT second booster",
+      "Preschool immunity renewal"
+     ],
+     [
+      "10 years",
+      "Td vaccine 0.5 ml IM",
+      "Diphtheria and tetanus booster"
+     ],
+     [
+      "16 years",
+      "Td vaccine 0.5 ml IM",
+      "Adolescent booster protection"
+     ],
+     [
+      "Pregnancy",
+      "Td 1, Td 2 or Td booster",
+      "Prevents maternal and neonatal tetanus"
+     ]
     ]
    }
   },
@@ -124,11 +224,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Vulnerability microplan mapping"},
-     {"id": "b", "label": "Household dropout identification"},
-     {"id": "c", "label": "Special catch-up immunization sessions"}
+     {
+      "id": "a",
+      "label": "Vulnerability microplan mapping"
+     },
+     {
+      "id": "b",
+      "label": "Household dropout identification"
+     },
+     {
+      "id": "c",
+      "label": "Special catch-up immunization sessions"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -139,11 +257,19 @@
     "kind": "compare",
     "left": {
      "title": "Legacy tracking",
-     "points": ["Paper mother-child registers", "Lost records on migration", "Manual dropout counting"]
+     "points": [
+      "Paper mother-child registers",
+      "Lost records on migration",
+      "Manual dropout counting"
+     ]
     },
     "right": {
      "title": "U-WIN digital system",
-     "points": ["Cloud-based beneficiary registry", "Portable records across states", "Automated SMS reminders"]
+     "points": [
+      "Cloud-based beneficiary registry",
+      "Portable records across states",
+      "Automated SMS reminders"
+     ]
     }
    }
   },
@@ -153,12 +279,77 @@
    "say": "For children presenting late, never restart an interrupted vaccination series. Administer all overdue eligible vaccines at separate anatomical sites during the same visit.",
    "vis": {
     "kind": "table",
-    "cols": ["Vaccine antigen", "Upper age limit", "Action if presented late"],
+    "cols": [
+     "Vaccine antigen",
+     "Upper age limit",
+     "Action if presented late"
+    ],
     "rows": [
-     ["BCG", "Up to 1 year of age", "Give 0.1 ml if over 1 month old"],
-     ["Pentavalent", "Up to 1 year of age", "Resume from last documented dose"],
-     ["Rotavirus", "Up to 1 year of age", "Do not initiate after 12 months"],
-     ["DPT booster", "Up to 7 years of age", "Administer Td if older than 7 years"]
+     [
+      "BCG",
+      "Up to 1 year of age",
+      "Give 0.1 ml if over 1 month old"
+     ],
+     [
+      "Pentavalent",
+      "Up to 1 year of age",
+      "Resume from last documented dose"
+     ],
+     [
+      "Rotavirus",
+      "Up to 1 year of age",
+      "Do not initiate after 12 months"
+     ],
+     [
+      "DPT booster",
+      "Up to 7 years of age",
+      "Administer Td if older than 7 years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Three birth doses precede discharge: BCG 0.05 ml intradermal on the left deltoid, two drops of oral polio zero dose, and hepatitis B 0.5 ml intramuscular within 24 hours. Pentavalent, oral polio and rotavirus vaccines repeat at 6, 10 and 14 weeks, with fractional IPV at 6 and 14 weeks. At nine months come measles rubella vaccine, PCV booster and vitamin A 100,000 units.",
+   "say": "High-yield for the exam: Three birth doses precede discharge: BCG 0.05 ml intradermal on the left deltoid, two drops of oral polio zero dose, and hepatitis B 0.5 ml intramuscular within 24 hours. Pentavalent, oral polio and rotavirus vaccines repeat at 6, 10 and 14 weeks, with fractional IPV at 6 and 14 weeks. At nine months come measles rubella vaccine, PCV booster and vitamin A 100,000 units.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "BCG birth dose",
+      "0.05 ml intradermal, left deltoid"
+     ],
+     [
+      "Hepatitis B birth dose",
+      "0.5 ml intramuscular within 24 hours"
+     ],
+     [
+      "Primary series ages",
+      "6, 10 and 14 weeks"
+     ],
+     [
+      "Fractional IPV ages",
+      "6 and 14 weeks, right deltoid"
+     ],
+     [
+      "PCV schedule pattern",
+      "6 weeks, 14 weeks, booster 9 months"
+     ],
+     [
+      "Nine month MR dose",
+      "0.5 ml subcutaneous, right upper arm"
+     ],
+     [
+      "First vitamin A dose",
+      "100,000 units orally at 9 months"
+     ],
+     [
+      "Later vitamin A doses",
+      "200,000 units six monthly to five years"
+     ]
     ]
    }
   }

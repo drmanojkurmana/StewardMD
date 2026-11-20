@@ -1,0 +1,337 @@
+{
+ "v": 1,
+ "module": "spu-ntm-fungal",
+ "subject": "ss-pulmonology",
+ "title": "Nontuberculous mycobacteria and pulmonary mycoses",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "ATS/ERS/ESCMID/IDSA 2020",
+  "Harrison 2025, 22nd Edition"
+ ],
+ "steps": [
+  {
+   "tx": "Nontuberculous mycobacteria (**NTM**) are environmental organisms causing chronic nodular bronchiectatic or cavitary lung disease, notably **M avium complex** and **M kansasii**. Smear may turn positive while **Xpert** stays negative for tuberculosis, and underlying bronchiectasis or prior TB favours disease by providing damaged airways for persistence.",
+   "say": "NTM cause chronic lung disease in damaged airways daily. Smear positivity with negative Xpert suggests NTM disease in patients. Prior TB and bronchiectasis favour disease development in damaged lungs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "NTM disease",
+     "TB comparison"
+    ],
+    "rows": [
+     [
+      "Smear",
+      "Positive",
+      "Also positive"
+     ],
+     [
+      "Xpert",
+      "Negative for TB",
+      "Positive detects TB"
+     ],
+     [
+      "Films",
+      "Nodular or cavitary",
+      "Upper lobe cavitary"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "NTM diagnosis needs compatible symptoms and imaging plus repeated isolation of the same species with microbiological confirmation. Speciation by **culture** directs therapy and prognosis, since species differ sharply in drug susceptibility and regrowth risk, and bronchoscopy sampling with Xpert, smear and culture helps difficult cases.",
+   "say": "NTM diagnosis needs symptoms, imaging and repeated isolation in patients. Culture speciation directs therapy in all cases treated daily. Single isolates may only mean colonisation here in practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Compatible symptoms"
+     },
+     {
+      "id": "b",
+      "label": "Imaging pattern"
+     },
+     {
+      "id": "c",
+      "label": "Repeated culture isolation"
+     },
+     {
+      "id": "d",
+      "label": "Species directed therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "NTM therapy is prolonged and **species guided**, usually built around a **macrolide backbone** with companion agents chosen by susceptibility testing. Surgical resection suits localised cavitary disease, and treatment success tracks culture conversion, so adherence support and airway clearance matter as much as drug selection in practice.",
+   "say": "NTM therapy is prolonged and species guided always in practice. Macrolide backbone therapy leads management daily in clinics. Culture conversion tracks success in clinics in practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "NTM pillars",
+     "points": [
+      "Species identification",
+      "Macrolide based regimen",
+      "Prolonged duration",
+      "Airway clearance"
+     ]
+    },
+    "right": {
+     "title": "Response markers",
+     "points": [
+      "Symptom improvement",
+      "Imaging stability",
+      "Culture conversion",
+      "Function maintenance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Aspergillosis** spans invasive disease in immunocompromised hosts, chronic cavitary disease after prior lung damage, and allergic syndromes such as **ABPA**. **A fumigatus** causes most invasive disease and over **95 percent** of chronic aspergillosis, and only species growing at **37** degrees cause invasive human infection.",
+   "say": "Aspergillosis spans invasive, chronic and allergic forms in practice. Fumigatus causes most disease in practice daily in series. Only species growing at body temperature invade in humans.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Host",
+     "Typical course"
+    ],
+    "rows": [
+     [
+      "Invasive",
+      "Neutropenia, steroids, HIV",
+      "Acute angioinvasive"
+     ],
+     [
+      "Chronic cavitary",
+      "Prior lung disease",
+      "Subacute cavitary"
+     ],
+     [
+      "Allergic",
+      "Asthma or cystic fibrosis",
+      "Th2 hypersensitivity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Invasive aspergillosis follows profound neutropenia, steroid exposure, phagocyte defects such as chronic granulomatous disease, advanced HIV and relapsed leukaemia, with angioinvasion and haemorrhagic infarction. **Over 80 percent** of cases begin in the lungs and disseminate most often to the brain, carrying mortality **30 to 70 percent** when treated and near **100 percent** when missed.",
+   "say": "Invasive disease follows neutropenia and steroids in patients treated. Most cases begin in lungs in series reported daily. Missed disease is almost always fatal in patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk state",
+     "Why invasion occurs",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Neutropenia",
+      "Phagocytes absent",
+      "Angioinvasive nodules"
+     ],
+     [
+      "Steroid therapy",
+      "Immune suppression",
+      "Subacute invasion"
+     ],
+     [
+      "Advanced HIV",
+      "Cell mediated failure",
+      "Disseminated risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **halo sign** on CT shows a ground glass haemorrhagic rim around a nodule early, appearing for about **7 days** in neutropenic patients as a favourable early diagnosis marker. Later the **air crescent** marks cavitation, while urgent thoracic CT plus antigen and molecular testing beats culture, since only **10 to 30 percent** of invasive cases grow fungus.",
+   "say": "Halo sign appears early in neutropenia cases in practice. Air crescent appears later with cavitation daily on scans. Culture fails in most invasive cases widely in practice daily.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Neutropenia fever"
+     },
+     {
+      "id": "b",
+      "label": "Halo sign CT"
+     },
+     {
+      "id": "c",
+      "label": "Antigen PCR positive"
+     },
+     {
+      "id": "d",
+      "label": "Triazole started"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Aspergillus IgG** antibody is detectable in about **90 percent** of chronic cavitary disease and about **65 percent** of aspergillus nodules, while **ABPA** needs specific IgE plus total IgE usually above **1000**. Chronic pulmonary aspergillosis follows tuberculosis in **6 to 13 percent** of treated cases and over **90 percent** of cavitary cases involve prior lung disease.",
+   "say": "IgG antibody indicates chronic cavitary disease well in practice daily. Total IgE above one thousand helps ABPA diagnosis in clinic practice. Prior TB leads to chronic disease development in lungs daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Cutoff or yield",
+     "Best in"
+    ],
+    "rows": [
+     [
+      "IgG antibody",
+      "90 percent cavitary disease",
+      "Chronic forms"
+     ],
+     [
+      "Total IgE",
+      "Usually above 1000",
+      "ABPA diagnosis"
+     ],
+     [
+      "Culture",
+      "Only 10 to 30 percent",
+      "Invasive disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Invasive disease starts with **voriconazole** or isavuconazole as mould active triazoles, with liposomal amphotericin B or an echinocandin as alternatives. Chronic disease needs long term **itraconazole** or voriconazole, and allergic disease pairs corticosteroids with antifungals, where about **60 percent** respond to itraconazole and about **80 percent** to voriconazole or posaconazole.",
+   "say": "Voriconazole leads invasive therapy in most guidelines used daily. Itraconazole is preferred in chronic disease cases long term in practice. Allergic disease is paired with steroids and antifungals in practice daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "First choice",
+     "Alternative"
+    ],
+    "rows": [
+     [
+      "Invasive",
+      "Voriconazole",
+      "Amphotericin B liposomal"
+     ],
+     [
+      "Chronic",
+      "Itraconazole long term",
+      "Voriconazole"
+     ],
+     [
+      "Allergic",
+      "Steroids plus antifungal",
+      "Anti IgE omalizumab selected"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Symptomatic **aspergilloma** or localised chronic cavitary disease suits surgical resection, while bronchial artery embolisation best controls problematic haemoptysis. Untreated chronic cavitary disease deteriorates in about **70 percent**, and treated mortality reaches **15 to 20 percent** in year one, about **40 percent** over **5 years** and **50 to 60 percent** over **10 years** with treatment failure near **30 percent**.",
+   "say": "Surgery suits localised aspergilloma cases in practice daily. Embolisation controls troublesome bleeding effectively in patients. Chronic disease still carries heavy mortality rates in studies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Mortality anchor",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Invasive treated",
+      "30 to 70 percent",
+      "Near 100 percent if missed"
+     ],
+     [
+      "Chronic year one",
+      "15 to 20 percent",
+      "Treated cohort"
+     ],
+     [
+      "Chronic decade",
+      "50 to 60 percent",
+      "Failure near 30 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High yield anchors: NTM suspects show smear positive with **Xpert** negative for TB, fumigatus causes over **95 percent** of chronic aspergillosis, only organisms growing at **37** degrees invade, halo sign lasts about **7 days** early, culture grows only **10 to 30 percent** of invasive cases, **IgG** yields about **90 percent** in chronic cavitary disease, total **IgE** above **1000** suits ABPA, chronic disease follows TB in **6 to 13 percent**, and invasive mortality is **30 to 70 percent** treated against near **100 percent** missed.",
+   "say": "Halo sign appears for about seven days early in neutropenia. Culture grows a minority of invasive cases in practice daily. IgG is the marker for chronic cavitary disease well in practice daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anchor",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "NTM clue",
+      "Smear positive, Xpert negative"
+     ],
+     [
+      "Fumigatus share",
+      "Over 95 percent chronic"
+     ],
+     [
+      "Invasion temperature",
+      "37 degrees"
+     ],
+     [
+      "Halo duration",
+      "About 7 days"
+     ],
+     [
+      "Culture yield",
+      "10 to 30 percent"
+     ],
+     [
+      "Chronic IgG",
+      "About 90 percent"
+     ],
+     [
+      "ABPA IgE",
+      "Above 1000"
+     ],
+     [
+      "Invasive mortality",
+      "30 to 70 percent treated"
+     ]
+    ]
+   }
+  }
+ ]
+}

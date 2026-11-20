@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-vitamins-trace",
+ "subject": "ss-general-medicine",
+ "title": "Vitamin and Trace Element Disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Vitamin A deficiency** (retinol lack) causes **xerophthalmia** (dry eye) and **night blindness** (dim vision loss). **Vitamin D deficiency** (calcitriol lack) causes **rickets** (childhood bone disease) and osteomalacia. **Vitamin K deficiency** (clotting factor lack) causes bleeding. **Vitamin C deficiency** (scurvy) causes bleeding gums and poor wound healing. **Vitamin B12 deficiency** (cobalamin lack) causes megaloblastic anaemia. **Folate deficiency** (folate lack) causes neural tube defects.",
+   "say": "Vitamin A deficiency is characterised by retinol lack, and it causes dry eye and night blindness that progress to blindness. Vitamin D deficiency is characterised by calcitriol lack, and it causes rickets and osteomalacia that progress to deformity. Vitamin K deficiency is characterised by clotting factor lack, and it causes bleeding that requires coagulation factor replacement.",
+   "vis": null
+  },
+  {
+   "tx": "**Fat malabsorption** (coeliac, pancreatic failure) causes fat soluble vitamin deficiencies. **Alcoholism** (thiamine lack) causes Wernicke encephalopathy. **Strict vegetarian diet** (no animal products) causes B12 deficiency. **Isoniazid therapy** (tuberculosis drug) causes B6 deficiency. **Warfarin therapy** (anticoagulant) antagonises vitamin K. **Pregnancy** (folate demand) causes neural tube defects without supplementation.",
+   "say": "Fat malabsorption is characterised by coeliac and pancreatic failure, and it causes fat soluble vitamin deficiencies that require replacement. Alcoholism is characterised by thiamine lack, and it causes Wernicke encephalopathy that requires thiamine before glucose. Strict vegetarian diet is characterised by no animal products, and it causes B12 deficiency that requires supplementation.",
+   "vis": null
+  },
+  {
+   "tx": "Fat soluble vitamins need **micellar absorption** (bile dependent uptake) for entry. **B12 absorption** (intrinsic factor dependent) requires gastric parietal function. **Folate enterohepatic circulation** (gut recycling) sustains stores. **Thiamine utilisation** (pyruvate dehydrogenase) requires Magnesium. **Vitamin K carboxylation** (clotting factor activation) requires hepatic synthesis. **Vitamin A storage** (liver reserves) delays deficiency onset.",
+   "say": "Fat soluble vitamins are characterised by micellar absorption, and they need bile dependent uptake for entry that fails in malabsorption. B12 absorption is characterised by intrinsic factor dependence, and it requires gastric parietal function that fails in pernicious anaemia. Folate enterohepatic circulation is characterised by gut recycling, and it sustains stores that deplete in alcoholism.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Deficient intake"
+     },
+     {
+      "id": "b",
+      "label": "Malabsorption"
+     },
+     {
+      "id": "c",
+      "label": "Store depletion"
+     },
+     {
+      "id": "d",
+      "label": "Enzyme failure"
+     },
+     {
+      "id": "e",
+      "label": "Deficiency disease"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Night blindness** (dim vision loss) is the earliest vitamin A sign. **Bitot spots** (foamy eye patches) are pathognomonic. **Bow legs** (genu varum) mark rickets. **Bleeding gums** (scurvy gingivitis) mark vitamin C deficiency. **Glossitis** (smooth tongue) marks B12 deficiency. **Ophthalmoplegia** (eye palsy) marks Wernicke disease. **Coagulopathy** (INR rise) marks vitamin K deficiency.",
+   "say": "Night blindness is characterised by dim vision loss, and it is the earliest vitamin A sign that progresses to dry eye. Bitot spots are characterised by foamy eye patches, and they are pathognomonic of vitamin A deficiency that requires immediate replacement. Bow legs are characterised by genu varum, and they mark rickets that requires vitamin D therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Serum retinol** (vitamin A level) confirms deficiency. **25 hydroxyvitamin D** (vitamin D level) confirms rickets. **INR** (clotting time) corrects with vitamin K. **B12 level** (cobalamin test) confirms anaemia cause. **Folate level** (folate test) confirms neural risk. **Thiamine challenge** (response test) supports Wernicke diagnosis. **Scurvy response** (clinical response) confirms vitamin C deficiency.",
+   "say": "Serum retinol is characterised by vitamin A testing, and it confirms deficiency that requires replacement therapy. Twenty five hydroxyvitamin D is characterised by vitamin D testing, and it confirms rickets that requires high dose replacement. INR is characterised by clotting time testing, and it corrects with vitamin K that confirms deficiency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Serum retinol",
+      "Vitamin A",
+      "Night blindness"
+     ],
+     [
+      "25-hydroxyvitamin D",
+      "Rickets",
+      "Bow legs"
+     ],
+     [
+      "INR",
+      "Vitamin K",
+      "Corrects with K"
+     ],
+     [
+      "B12 level",
+      "Anaemia cause",
+      "Glossitis"
+     ],
+     [
+      "Folate level",
+      "Neural risk",
+      "Pregnancy supplementation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vitamin A replacement** (200,000 IU) treats xerophthalmia urgently. **Vitamin D replacement** (60,000 IU weekly) treats rickets. **Vitamin K injection** (phytonadione) treats coagulopathy. **Thiamine injection** (100 mg intravenous) treats Wernicke disease before glucose. **B12 injection** (1000 mcg) treats pernicious anaemia. **Folic acid supplementation** (400 mcg) prevents neural tube defects.",
+   "say": "Vitamin A replacement is characterised by two hundred thousand international units, and it treats xerophthalmia urgently that prevents blindness. Vitamin D replacement is characterised by sixty thousand units weekly, and it treats rickets that heals bone disease. Vitamin K injection is characterised by phytonadione, and it treats coagulopathy that corrects INR rapidly.",
+   "vis": null
+  },
+  {
+   "tx": "**Vitamin A megadose** (twice yearly) prevents blindness in endemic regions. **Vitamin D fortification** (food fortification) prevents rickets. **Thiamine before glucose** (Wernicke prevention) is mandatory in alcoholism. **Folate periconceptional** (pregnancy supplementation) prevents neural defects. **B12 fortification** (food fortification) suits vegetarian populations. **Iron folate** (anaemia control) suits childbearing women.",
+   "say": "Vitamin A megadose is characterised by twice yearly dosing, and it prevents blindness in endemic regions that require supplementation. Vitamin D fortification is characterised by food fortification, and it prevents rickets that deforms growing bones. Thiamine before glucose is characterised by Wernicke prevention, and it is mandatory in alcoholism that requires injection therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fat soluble vitamins",
+     "points": [
+      "A D K E",
+      "Night blindness rickets bleeding",
+      "Micellar absorption",
+      "Food fortification"
+     ]
+    },
+    "right": {
+     "title": "Water soluble vitamins",
+     "points": [
+      "B complex C",
+      "Anaemia neuropathy scurvy",
+      "Intrinsic factor B12",
+      "Supplement in pregnancy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Vitamin A hypervitaminosis** (liver failure) follows megadose chronic use. **Vitamin D hypervitaminosis** (hypercalcaemia) follows excess replacement. **Vitamin K allergy** (anaphylaxis) is rare. **Thiamine allergy** (injection reaction) is rare. **B12 acne** (skin eruption) follows high dose therapy. **Folate masking** (B12 anaemia masked) requires B12 correction first.",
+   "say": "Vitamin A hypervitaminosis is characterised by liver failure, and it follows megadose chronic use that requires cessation. Vitamin D hypervitaminosis is characterised by hypercalcaemia, and it follows excess replacement that requires hydration. Vitamin K allergy is characterised by anaphylaxis, and it is rare that requires alternative therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Vitamin A** deficiency blindness is preventable with mega doses. Rickets deformity is preventable with fortification. Wernicke encephalopathy recovery needs early thiamine. Scurvy recovery is rapid with vitamin C. B12 neuropathy is irreversible if delayed. Neural tube defects are preventable with periconceptional folate.",
+   "say": "Vitamin A deficiency blindness is characterised by being preventable with mega doses, and it is prevented with twice yearly dosing. Rickets deformity is characterised by being preventable with fortification, and it is prevented with vitamin D food programs. Wernicke encephalopathy recovery is characterised by needing early thiamine, and it is achieved with injection therapy.",
+   "vis": null
+  },
+  {
+   "tx": "World Health Organization guidance stresses vitamin A megadoses, folate periconceptional supplementation and thiamine before glucose. **Bitot spots** (foamy eye patches) is a favourite examination sign. **Folate 400 mcg** (periconceptional dose) is the classic numerical vignette. Traps include giving glucose before thiamine, missing B12 before folate, and omitting periconceptional folate. **Wernicke triad** (confusion ophthalmoplegia ataxia) is the classic vignette.",
+   "say": "Current guidance is characterised by vitamin A megadoses and folate periconceptional supplementation and thiamine before glucose, and it is stressed by the World Health Organization for deficiency prevention. Bitot spots are characterised by foamy eye patches, and they are a favourite examination sign that indicates vitamin A deficiency. Folate four hundred micrograms is characterised by periconceptional dose, and it is the classic numerical vignette that prevents neural defects.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers night blindness, Bitot spots and folate doses. Two hundred thousand units and four hundred micrograms are the most asked points in theory and viva examinations. Focused review of megadose schedules aids viva responses. Thiamine before glucose prevents Wernicke precipitation reliably.",
+   "say": "This table is characterised by night blindness and Bitot spots and folate doses, and it gathers the high yield points for revision in theory. Two hundred thousand units and four hundred micrograms are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Vitamin A dose",
+      "200,000 IU"
+     ],
+     [
+      "Folate pregnancy dose",
+      "400 mcg daily"
+     ],
+     [
+      "Wernicke order",
+      "Thiamine before glucose"
+     ],
+     [
+      "Bitot spots",
+      "Vitamin A deficiency"
+     ],
+     [
+      "Rickets therapy",
+      "Vitamin D 60,000 IU"
+     ],
+     [
+      "B12 anaemia",
+      "Megaloblastic glossitis"
+     ],
+     [
+      "Scurvy sign",
+      "Bleeding gums"
+     ],
+     [
+      "Vitamin K test",
+      "INR corrects"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

@@ -1,0 +1,353 @@
+{
+ "v": 1,
+ "module": "spu-rare-ild",
+ "subject": "ss-pulmonology",
+ "title": "Rare diffuse lung diseases: LAM, alveolar proteinosis and Langerhans histiocytosis",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025, 22nd Edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Lymphangioleiomyomatosis** (**LAM**) is a slow cystic lung disease of **premenopausal women** where **TSC1** or **TSC2** mutations unleash smooth muscle like cells around airways, vessels and lymphatics. Airway walls thicken, cysts stay thin walled, and renal angiomyolipomas often share the same biology.",
+   "say": "LAM involves smooth muscle like cells that escape TSC control over the mTOR pathway in affected women. Thin walled cysts spread diffusely through both lungs on imaging studies performed. Ruptured cysts leak air into the pleura while blocked lymphatics collect chyle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "LAM clues",
+     "points": [
+      "Premenopausal woman",
+      "Diffuse thin walled cysts",
+      "Recurrent pneumothorax",
+      "Chylous effusion or ascites",
+      "Renal angiomyolipoma"
+     ]
+    },
+    "right": {
+     "title": "Other cystic mimics",
+     "points": [
+      "Birt Hogg Dube syndrome",
+      "Pulmonary Langerhans histiocytosis",
+      "Emphysema in the young",
+      "Lymphocytic interstitial pneumonia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Premenopausal women with progressive breathlessness or recurrent pneumothorax deserve a full **LAM** workup, since missed cases are often labelled emphysema or asthma. **Chylous pleural effusions** and ascites, plus **renal angiomyolipomas**, support the diagnosis strongly on the history and imaging review.",
+   "say": "Recurrent pneumothorax in a young woman should always raise suspicion of underlying LAM disease in clinic. Chylous fluid with kidney involvement supports that suspicion greatly in most patients. Dismissing cystic change as emphysema delays helpful and targeted testing for patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Clue",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Premenopausal woman",
+      "Diffuse cysts",
+      "High resolution CT review"
+     ],
+     [
+      "Recurrent pneumothorax",
+      "Thin walled cysts",
+      "Screen skin and kidneys"
+     ],
+     [
+      "Chylous effusion",
+      "Lymphatic obstruction",
+      "Measure VEGF D"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High resolution CT** shows numerous round thin walled cysts scattered through otherwise normal lung. A raised serum **VEGF D** level supports LAM without a lung biopsy in the right setting, while **pulmonary function tests** typically show obstruction with reduced gas transfer on spirometry.",
+   "say": "High resolution imaging reveals diffuse round cysts within otherwise normal lung tissue in patients. A raised VEGF D level supports the diagnosis in the right clinical setting. Lung function usually shows obstruction featuring reduced gas transfer in clinic.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Diffuse cysts on CT"
+     },
+     {
+      "id": "b",
+      "label": "Serum VEGF D"
+     },
+     {
+      "id": "c",
+      "label": "Kidney and skin screen"
+     },
+     {
+      "id": "d",
+      "label": "TSC genetic review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sirolimus** or **everolimus** inhibits mTOR and is the disease modifying drug for declining lung function, chylous complications and symptomatic angiomyolipomas. **Oestrogen** containing therapy worsens disease, so avoid it, counsel about pregnancy, and manage recurrent pneumothorax early with drainage and **pleurodesis**.",
+   "say": "Sirolimus or everolimus stabilises lung function and shrinks angiomyolipomas over time for patients. Oestrogen containing therapy should be avoided in every affected woman daily. Recurrence rates stay high, so pleurodesis follows early drainage in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Problem",
+     "Treatment",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Declining function",
+      "Sirolimus or everolimus",
+      "mTOR inhibition stabilises"
+     ],
+     [
+      "Chylous collections",
+      "mTOR inhibition",
+      "Shrinks lymphatic disease"
+     ],
+     [
+      "Recurrent pneumothorax",
+      "Drain then pleurodesis",
+      "High recurrence rate"
+     ],
+     [
+      "Pregnancy risk",
+      "Avoid oestrogen",
+      "Hormones worsen disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pulmonary alveolar proteinosis** (**PAP**) fills alveoli with surfactant derived lipoprotein because macrophages fail to clear it. In **autoimmune PAP**, neutralising **anti GM CSF antibodies** block the pathway, while the hereditary form carries **CSF2RA** or **CSF2RB** mutations with high circulating GM CSF levels.",
+   "say": "PAP results from failed surfactant clearance by alveolar macrophages over time in patients. Autoimmune disease involves neutralising antibodies against GM CSF signalling pathways in adults. Hereditary disease involves receptor mutations with high circulating GM CSF levels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Autoimmune PAP",
+     "points": [
+      "Adults",
+      "Anti GM CSF antibody present",
+      "GM CSF normal",
+      "GM CSF strategy used"
+     ]
+    },
+    "right": {
+     "title": "Hereditary PAP",
+     "points": [
+      "Childhood onset",
+      "Antibody absent",
+      "CSF2RA or CSF2RB mutation",
+      "Repeated lavage needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Patients describe exertional breathlessness with dry cough and hypoxaemia that seems disproportionate to examination. **Crazy paving** on high resolution CT means ground glass opacity overlaid with septal thickening, and **BAL** returns milky lipoproteinaceous fluid that stains positive with **periodic acid Schiff** on cytology.",
+   "say": "Breathlessness with dry cough is the dominant feature in many adults with PAP. High resolution imaging shows crazy paving with ground glass change on scans. Milky lavage fluid stains positive for lipoproteinaceous material on cytology testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "High resolution CT",
+      "Crazy paving",
+      "Ground glass plus septal lines"
+     ],
+     [
+      "BAL",
+      "Milky opaque fluid",
+      "Lipoproteinaceous material"
+     ],
+     [
+      "Stain",
+      "Periodic acid Schiff positive",
+      "Confirms surfactant accumulation"
+     ],
+     [
+      "Function tests",
+      "Restrictive pattern",
+      "Reduced gas transfer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Whole lung lavage** is the mainstay for clearing accumulated surfactant and can give substantial relief, though hereditary disease often needs repeated procedures. Secondary infection with opportunistic organisms can complicate retained material, so surveillance, vaccination and prompt treatment of superinfection remain essential parts of care.",
+   "say": "Whole lung lavage clears surfactant and improves symptoms substantially after treatment in patients. Hereditary disease often needs the procedure repeated several times for control. Retained material invites secondary infection that needs close watching daily.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "PAP confirmed"
+     },
+     {
+      "id": "b",
+      "label": "Whole lung lavage"
+     },
+     {
+      "id": "c",
+      "label": "Better gas exchange"
+     },
+     {
+      "id": "d",
+      "label": "Infection watch"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pulmonary Langerhans cell histiocytosis** (**PLCH**) is driven by clonal Langerhans type dendritic cells around small airways, almost always in cigarette smokers. Cells carry activating **BRAF V600E** and other **MAP kinase** mutations, and the nodules cavitate into cysts with an upper zone predominance on imaging.",
+   "say": "PLCH is driven by clonal Langerhans cells around small airways in smokers daily. Smoking provokes almost every case in modern clinical practice seen. Nodules cavitate and coalesce into upper zone cysts on imaging studies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Smoking around airways"
+     },
+     {
+      "id": "b",
+      "label": "Langerhans nodules"
+     },
+     {
+      "id": "c",
+      "label": "Cavitating nodules"
+     },
+     {
+      "id": "d",
+      "label": "Upper zone cysts"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complete and sustained **smoking cessation** is the cornerstone for PLCH and can stabilise or regress disease, while continued smoking worsens cyst destruction and pulmonary hypertension. When confirmation is needed, **BAL** or lung biopsy showing **CD1a** and **Langerin** positive cells settles the diagnosis against other cystic diseases.",
+   "say": "Smoking cessation stabilises PLCH or allows full regression over several months for patients. Continued smoking worsens destruction and raises pulmonary pressures over time in patients. CD1a and Langerin stains confirm the diagnosis on lung tissue samples.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cystic disease",
+     "Pattern",
+     "Fit"
+    ],
+    "rows": [
+     [
+      "LAM",
+      "Diffuse thin cysts",
+      "Premenopausal women"
+     ],
+     [
+      "PLCH",
+      "Upper zone cystic nodules",
+      "Smokers"
+     ],
+     [
+      "Birt Hogg Dube",
+      "Lower zone cysts",
+      "Family history"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High yield anchors: **sirolimus** modifies LAM lung function, raised **VEGF D** supports LAM without biopsy, **crazy paving** plus milky periodic acid Schiff positive lavage defines PAP, **CSF2RA** mutations mark hereditary childhood PAP, **whole lung lavage** treats PAP, **oestrogen** worsens LAM, **CD1a** and **Langerin** mark PLCH, and **BRAF V600E** mutations occur in PLCH.",
+   "say": "Sirolimus modifies LAM and VEGF D supports it without biopsy in many cases seen. Crazy paving with milky lavage defines PAP in exams quite clearly for students. Smoking cessation anchors PLCH care and CD1a marks cells in tissue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anchor",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "LAM therapy",
+      "Sirolimus or everolimus"
+     ],
+     [
+      "LAM test",
+      "Raised VEGF D supports diagnosis"
+     ],
+     [
+      "PAP imaging",
+      "Crazy paving on CT"
+     ],
+     [
+      "PAP fluid",
+      "Milky, periodic acid Schiff positive"
+     ],
+     [
+      "Hereditary PAP",
+      "CSF2RA or CSF2RB mutation"
+     ],
+     [
+      "PAP procedure",
+      "Whole lung lavage mainstay"
+     ],
+     [
+      "PLCH trigger",
+      "Smoking cessation cornerstone"
+     ],
+     [
+      "PLCH stain",
+      "CD1a and Langerin positive"
+     ]
+    ]
+   }
+  }
+ ]
+}

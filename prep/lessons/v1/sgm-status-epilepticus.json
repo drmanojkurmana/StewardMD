@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgm-status-epilepticus",
+ "subject": "ss-general-medicine",
+ "title": "Status epilepticus",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Status epilepticus** is continuous seizure beyond 5 minutes in these patients. **Benzodiazepine** first line with **lorazepam** with **diazepam** in these patients. **Midazolam** is an alternative benzodiazepine in these patients. **Thiamine** prevents Wernicke in these patients. Timing matters in these patients.",
+   "say": "Status epilepticus is continuous seizure beyond five minutes in these patients. Benzodiazepine therapy with lorazepam and diazepam is the first line option in these patients. Midazolam is an alternative benzodiazepine in these patients. Thiamine prevents Wernicke in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Seizure beyond 5 minutes"
+     },
+     {
+      "id": "b",
+      "label": "Lorazepam given"
+     },
+     {
+      "id": "c",
+      "label": "Second line loaded"
+     },
+     {
+      "id": "d",
+      "label": "ICU if refractory"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Levetiracetam** with **fosphenytoin** with **valproate** are second line in these patients. **Phenobarbital** is an alternative in these patients. **Propofol** with **ketamine** are third line in these patients. **Magnesium sulfate** treats eclampsia in these patients. Dosing is loaded in these patients.",
+   "say": "Levetiracetam with fosphenytoin and valproate are second line in these patients. Phenobarbital is an alternative in these patients. Propofol with ketamine are third line in these patients. Magnesium sulfate is the treatment for eclampsia in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Line",
+     "Drugs",
+     "Note"
+    ],
+    "rows": [
+     [
+      "First line",
+      "Lorazepam, midazolam",
+      "Benzodiazepine standard"
+     ],
+     [
+      "Second line",
+      "Levetiracetam, fosphenytoin, valproate",
+      "Loaded dosing"
+     ],
+     [
+      "Third line",
+      "Propofol, ketamine",
+      "ICU care needed"
+     ],
+     [
+      "Eclampsia",
+      "Magnesium sulfate",
+      "Obstetric emergency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pyridoxine** 5 g IV treats isoniazid seizures in these patients. **Isoniazid** antagonism is pyridoxine deficiency in these patients. **Aciclovir** treats encephalitis seizures in these patients. **Ceftriaxone** treats meningitis seizures in these patients. **CSF analysis** with culture interpretation guides antimicrobial choice in these patients during evaluation.",
+   "say": "Pyridoxine five grams IV is the treatment for isoniazid seizures in these patients with deficiency correction. Isoniazid antagonism is pyridoxine deficiency in these patients with depletion mechanism. Aciclovir is the treatment for encephalitis seizures in these patients with viral cover. Ceftriaxone is the treatment for meningitis seizures in these patients with bacterial cover.",
+   "vis": null
+  },
+  {
+   "tx": "**Electrolytes** monitoring is needed in these patients. **Sodium** derangement needs slow careful correction in these patients. **EEG** monitoring detects subclinical seizures in these patients. **MRI** detects causes in these patients. **Imaging** with EEG correlation guides cause identification in these patients during evaluation.",
+   "say": "Electrolytes monitoring is needed in these patients with frequent sampling. Glucose correction is needed in these patients with immediate action. Sodium derangement needs slow careful correction in these patients with one hundred twenty as the severe mark. EEG monitoring is used to detect subclinical seizures in these patients with continuous recording. MRI is used to detect causes in these patients with structural imaging.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Test",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Hypoglycaemia",
+      "Glucose measurement",
+      "Correct immediately"
+     ],
+     [
+      "Hyponatraemia",
+      "Electrolyte panel",
+      "Correct cautiously"
+     ],
+     [
+      "Encephalitis",
+      "CSF and PCR",
+      "Aciclovir therapy"
+     ],
+     [
+      "Eclampsia",
+      "BP and proteinuria",
+      "Magnesium therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Febrile infection related epilepsy** is childhood refractory status in these patients. **Thiamine** is co-prescription in these patients. **Phenytoin** is loaded in these patients. **Fosphenytoin** 20 mg PE per kg is used to load second line in these patients. **Monitoring** with EEG correlation guides therapy adjustment in these patients during follow-up care.",
+   "say": "Febrile infection related epilepsy is childhood refractory status in these patients with prolonged course. Thiamine is co-prescription in these patients with ongoing therapy. Phenytoin is the loaded drug option in these patients with second line use. Fosphenytoin twenty milligrams PE per kilogram is used to load second line in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Refractory status** needs ICU anaesthesia in these patients. **EEG** guides coma depth in these patients. **Hypothermia** is an option in these patients. **Midazolam** infusion is an option in these patients. **Propofol** infusion with haemodynamic watch is used in refractory status in these patients. **Burst suppression** on EEG is the coma depth aim in these patients.",
+   "say": "Refractory status needs ICU anaesthesia in these patients with airway protection. EEG guides coma depth in these patients with burst suppression targeting. Hypothermia is an option in these patients with supportive care planning. Midazolam infusion is an option in these patients with titration to control. Propofol infusion with haemodynamic watch is used in refractory status in these patients. Burst suppression on EEG is the coma depth aim in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Refractory status"
+     },
+     {
+      "id": "b",
+      "label": "ICU anaesthesia"
+     },
+     {
+      "id": "c",
+      "label": "EEG burst suppression"
+     },
+     {
+      "id": "d",
+      "label": "Taper when controlled"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Driving** restrictions apply after status in these patients. **Maintenance** therapy starts after control in these patients. **Follow up** needs neurology review in these patients. **Family** counselling is needed in these patients. **Driving** bans apply for months after status in these patients.",
+   "say": "Driving restrictions are required after status in these patients with legal advice. Maintenance therapy starts after control in these patients with maintenance planning. Follow up needs neurology review in these patients with periodic assessment. Family counselling is needed in these patients with adherence education. Driving bans apply for months after status in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Eclampsia** seizures need magnesium in these patients. **Magnesium** 4 g IV loads eclampsia control in these patients. **Delivery** is definitive in these patients. **Reversal** agent counters magnesium excess in these patients during monitoring. **Blood pressure** control is needed in these patients. Obstetric care is needed in these patients during delivery planning.",
+   "say": "Eclampsia seizures need magnesium in these patients with seizure control goal. Magnesium four grams IV loads eclampsia control in these patients. Delivery is definitive in these patients with timely obstetric action. Reversal agent counters magnesium excess in these patients during monitoring care. Blood pressure control is needed in these patients with regular assessment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Convulsive status",
+     "points": [
+      "Continuous tonic clonic",
+      "Lorazepam first line",
+      "Second line loaded",
+      "ICU if refractory"
+     ]
+    },
+    "right": {
+     "title": "Eclamptic seizures",
+     "points": [
+      "Pregnancy hypertension",
+      "Magnesium first line",
+      "Delivery definitive therapy",
+      "BP control needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Non convulsive status** needs EEG diagnosis in these patients. **Coma** without convulsions is the pattern in these patients. **Levetiracetam** treats these patients. **Lorazepam** 4 mg IV is first line in these patients. **Midazolam** 10 mg IM is used in prehospital care in these patients. Underlying cause treatment should parallel seizure control in these patients.",
+   "say": "Non convulsive status needs EEG diagnosis in these patients with continuous recording. Coma without convulsions is the pattern in these patients with ICU care. Levetiracetam is the treatment in these patients with effective control. Lorazepam four milligrams IV is first line in these patients. Midazolam ten milligrams IM is used in prehospital care in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Prognosis** depends on cause in these patients. **Age** predicts outcomes in these patients. **Refractory** disease has worse outcomes in these patients. **Early therapy** improves outcomes in these patients. **Status** beyond 30 minutes is linked with neuronal injury in these patients. **STESS** scoring combines age with consciousness to predict outcome in these patients.",
+   "say": "Prognosis depends on cause in these patients with underlying etiology assessment. Age is predictive of outcomes in these patients with demographic correlation. Refractory disease has worse outcomes in these patients with advanced care needs. Early therapy improves outcomes in these patients with prompt intervention benefits. Status beyond thirty minutes is linked with neuronal injury in these patients. STESS scoring combines age with consciousness to predict outcome in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** titles this closing summary for the lesson specifically. Remember lorazepam first line, levetiracetam and fosphenytoin second line and propofol with ketamine third line. Magnesium treats eclampsia while pyridoxine treats isoniazid seizures. Thiamine prevents Wernicke in these patients clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Lorazepam is first line for status epilepticus clearly. Levetiracetam with fosphenytoin are second line options in practice. Propofol with ketamine are third line ICU options in cases. Magnesium is the treatment for eclampsia cases in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "First line",
+      "Lorazepam for status epilepticus"
+     ],
+     [
+      "Second line",
+      "Levetiracetam and fosphenytoin options"
+     ],
+     [
+      "Third line",
+      "Propofol and ketamine ICU options"
+     ],
+     [
+      "Eclampsia therapy",
+      "Magnesium treats eclamptic seizures"
+     ],
+     [
+      "Isoniazid seizures",
+      "Pyridoxine treats isoniazid seizures"
+     ],
+     [
+      "Wernicke prevention",
+      "Thiamine prevents Wernicke syndrome"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

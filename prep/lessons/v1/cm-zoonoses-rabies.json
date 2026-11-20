@@ -24,12 +24,32 @@
    "say": "Stray dogs cause ninety-six percent of human rabies deaths in India. Wild jackals, foxes and monkeys also transmit the virus, whereas domestic rodents and squirrels do not spread rabies.",
    "vis": {
     "kind": "table",
-    "cols": ["Animal species", "Share of Indian rabies cases", "Prophylaxis requirement"],
+    "cols": [
+     "Animal species",
+     "Share of Indian rabies cases",
+     "Prophylaxis requirement"
+    ],
     "rows": [
-     ["Stray and pet dogs", "96 to 97 percent of all cases", "Immediate wound care and full PEP required"],
-     ["Domestic cats", "1 to 2 percent of human cases", "Immediate wound care and full PEP required"],
-     ["Monkeys, foxes, jackals", "Under 1 percent, high risk", "Treat as Category III with vaccine and RIG"],
-     ["Rats, mice, squirrels", "Negligible to zero transmission", "Clean wound; routine rabies PEP not indicated"]
+     [
+      "Stray and pet dogs",
+      "96 to 97 percent of all cases",
+      "Immediate wound care and full PEP required"
+     ],
+     [
+      "Domestic cats",
+      "1 to 2 percent of human cases",
+      "Immediate wound care and full PEP required"
+     ],
+     [
+      "Monkeys, foxes, jackals",
+      "Under 1 percent, high risk",
+      "Treat as Category III with vaccine and RIG"
+     ],
+     [
+      "Rats, mice, squirrels",
+      "Negligible to zero transmission",
+      "Clean wound; routine rabies PEP not indicated"
+     ]
     ]
    }
   },
@@ -39,11 +59,27 @@
    "say": "Category one exposures involve touching animals on intact skin and require no shots. Category two covers minor scratches without bleeding, demanding immediate wound washing and vaccination.",
    "vis": {
     "kind": "table",
-    "cols": ["Exposure class", "Defining animal contact", "Mandatory intervention"],
+    "cols": [
+     "Exposure class",
+     "Defining animal contact",
+     "Mandatory intervention"
+    ],
     "rows": [
-     ["Category I", "Touching, feeding, licks on intact skin", "Wash exposed skin; no vaccine or RIG needed"],
-     ["Category II", "Minor scratches or abrasions without bleeding", "Immediate wound washing + full vaccine series"],
-     ["Category III", "Single or multiple bites with bleeding, mucosal contact", "Wound washing + full vaccine series + local RIG"]
+     [
+      "Category I",
+      "Touching, feeding, licks on intact skin",
+      "Wash exposed skin; no vaccine or RIG needed"
+     ],
+     [
+      "Category II",
+      "Minor scratches or abrasions without bleeding",
+      "Immediate wound washing + full vaccine series"
+     ],
+     [
+      "Category III",
+      "Single or multiple bites with bleeding, mucosal contact",
+      "Wound washing + full vaccine series + local RIG"
+     ]
     ]
    }
   },
@@ -54,12 +90,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Category III exposure verified"},
-     {"id": "b", "label": "Immediate 15-minute soap and water wound wash"},
-     {"id": "c", "label": "Active vaccine series started on day 0"},
-     {"id": "d", "label": "Rabies immunoglobulin infiltrated into all wounds"}
+     {
+      "id": "a",
+      "label": "Category III exposure verified"
+     },
+     {
+      "id": "b",
+      "label": "Immediate 15-minute soap and water wound wash"
+     },
+     {
+      "id": "c",
+      "label": "Active vaccine series started on day 0"
+     },
+     {
+      "id": "d",
+      "label": "Rabies immunoglobulin infiltrated into all wounds"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["b", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -79,12 +140,32 @@
    "say": "Washing the bite under running water with soap for fifteen minutes physically removes the virus. Never stitch an animal bite immediately, because needles push virus deeper into nerves.",
    "vis": {
     "kind": "table",
-    "cols": ["Wound care action", "Recommended standard technique", "Clinical rationale"],
+    "cols": [
+     "Wound care action",
+     "Recommended standard technique",
+     "Clinical rationale"
+    ],
     "rows": [
-     ["Running water flush", "Vigorous soap and tap water for >= 15 min", "Mechanically dislodges saliva and viral load"],
-     ["Antiseptic virucide", "Povidone-iodine 5% or 70% alcohol", "Destroys viral lipid envelope chemically"],
-     ["Primary wound closure", "Strictly prohibited; avoid early sutures", "Prevents inoculating virus into deep nerve branches"],
-     ["Tetanus and antibiotic", "Td booster and amoxicillin-clavulanate", "Prevents tetanus and polymicrobial wound sepsis"]
+     [
+      "Running water flush",
+      "Vigorous soap and tap water for >= 15 min",
+      "Mechanically dislodges saliva and viral load"
+     ],
+     [
+      "Antiseptic virucide",
+      "Povidone-iodine 5% or 70% alcohol",
+      "Destroys viral lipid envelope chemically"
+     ],
+     [
+      "Primary wound closure",
+      "Strictly prohibited; avoid early sutures",
+      "Prevents inoculating virus into deep nerve branches"
+     ],
+     [
+      "Tetanus and antibiotic",
+      "Td booster and amoxicillin-clavulanate",
+      "Prevents tetanus and polymicrobial wound sepsis"
+     ]
     ]
    }
   },
@@ -96,11 +177,19 @@
     "kind": "compare",
     "left": {
      "title": "Slow viral centripetal ascent",
-     "points": ["Travels along axoplasm at 12 to 24 mm/day", "Hidden inside protected neural pathways", "Takes weeks to reach spinal cord and brain"]
+     "points": [
+      "Travels along axoplasm at 12 to 24 mm/day",
+      "Hidden inside protected neural pathways",
+      "Takes weeks to reach spinal cord and brain"
+     ]
     },
     "right": {
      "title": "Active antibody induction",
-     "points": ["Vaccine triggers IgG by day 7 to 14", "Antibody titre exceeds 0.5 IU/ml", "Neutralises virus before brain invasion"]
+     "points": [
+      "Vaccine triggers IgG by day 7 to 14",
+      "Antibody titre exceeds 0.5 IU/ml",
+      "Neutralises virus before brain invasion"
+     ]
     }
    }
   },
@@ -112,11 +201,19 @@
     "kind": "compare",
     "left": {
      "title": "Intradermal route (public health)",
-     "points": ["0.1 ml injected over two deltoid sites", "Uses 0.2 ml total volume per clinic visit", "Reduces procurement expenditure by 80%"]
+     "points": [
+      "0.1 ml injected over two deltoid sites",
+      "Uses 0.2 ml total volume per clinic visit",
+      "Reduces procurement expenditure by 80%"
+     ]
     },
     "right": {
      "title": "Intramuscular route (private sector)",
-     "points": ["Full 0.5 ml or 1.0 ml vial per dose", "Single deltoid site per clinic visit", "Higher financial burden per patient"]
+     "points": [
+      "Full 0.5 ml or 1.0 ml vial per dose",
+      "Single deltoid site per clinic visit",
+      "Higher financial burden per patient"
+     ]
     }
    }
   },
@@ -127,12 +224,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Universal free PEP in public hospitals"},
-     {"id": "b", "label": "Mass dog vaccination reaching 70% coverage"},
-     {"id": "c", "label": "Animal birth control and stray management"},
-     {"id": "d", "label": "Interruption of canine rabies transmission"}
+     {
+      "id": "a",
+      "label": "Universal free PEP in public hospitals"
+     },
+     {
+      "id": "b",
+      "label": "Mass dog vaccination reaching 70% coverage"
+     },
+     {
+      "id": "c",
+      "label": "Animal birth control and stray management"
+     },
+     {
+      "id": "d",
+      "label": "Interruption of canine rabies transmission"
+     }
     ],
-    "edges": [["a", "d"], ["b", "d"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "d"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -141,12 +263,77 @@
    "say": "India is working toward zero human rabies deaths by 2030. Achieving this goal requires digital reporting of all animal bites, school education, and guaranteed access to vaccines and immunoglobulin.",
    "vis": {
     "kind": "table",
-    "cols": ["Action pillar", "Operational component", "Strategic outcome"],
+    "cols": [
+     "Action pillar",
+     "Operational component",
+     "Strategic outcome"
+    ],
     "rows": [
-     ["Universal PEP access", "Free intradermal vaccine and RIG at PHCs", "Zero preventable deaths from dog bites"],
-     ["Canine vaccination", "70% coverage of stray and pet dog herds", "Eliminates animal virus transmission cycle"],
-     ["Surveillance and reporting", "Mandatory notification of human and dog cases", "Rapid investigation and containment of clusters"],
-     ["Community education", "Safe behavior around dogs and immediate washing", "Early presentation for medical management"]
+     [
+      "Universal PEP access",
+      "Free intradermal vaccine and RIG at PHCs",
+      "Zero preventable deaths from dog bites"
+     ],
+     [
+      "Canine vaccination",
+      "70% coverage of stray and pet dog herds",
+      "Eliminates animal virus transmission cycle"
+     ],
+     [
+      "Surveillance and reporting",
+      "Mandatory notification of human and dog cases",
+      "Rapid investigation and containment of clusters"
+     ],
+     [
+      "Community education",
+      "Safe behavior around dogs and immediate washing",
+      "Early presentation for medical management"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Dogs cause almost all human rabies in India, while rodent bites rarely need prophylaxis. Category I touches intact skin and needs no vaccine, Category II minor scratches need vaccine alone, and Category III bleeding bites need vaccine plus immunoglobulin infiltrated around wounds. First wash every wound with soap under running water for at least 15 minutes and avoid early suturing.",
+   "say": "High-yield for the exam: Dogs cause almost all human rabies in India, while rodent bites rarely need prophylaxis. Category I touches intact skin and needs no vaccine, Category II minor scratches need vaccine alone, and Category III bleeding bites need vaccine plus immunoglobulin infiltrated around wounds. First wash every wound with soap under running water for at least 15 minutes and avoid early suturing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Main source in India",
+      "Dogs cause 96 to 97 percent"
+     ],
+     [
+      "Rodent bite rule",
+      "Routine prophylaxis usually not indicated"
+     ],
+     [
+      "Category I exposure",
+      "Licks on intact skin, no vaccine"
+     ],
+     [
+      "Category II exposure",
+      "Scratches without bleeding, vaccine only"
+     ],
+     [
+      "Category III exposure",
+      "Bleeding bites, vaccine plus immunoglobulin"
+     ],
+     [
+      "First wound action",
+      "Soap and running water 15 minutes"
+     ],
+     [
+      "Closure rule",
+      "Avoid or delay wound suturing"
+     ],
+     [
+      "Dog vaccination target",
+      "70 percent coverage stops transmission"
+     ]
     ]
    }
   }

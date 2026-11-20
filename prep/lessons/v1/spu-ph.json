@@ -1,0 +1,352 @@
+{
+ "v": 1,
+ "module": "spu-ph",
+ "subject": "ss-pulmonology",
+ "title": "Pulmonary hypertension: groups, echo probability and centre therapy",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "ESC/ERS 2022",
+  "Harrison 2025, 22nd Edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Pulmonary hypertension** (**PH**) means mean pulmonary arterial pressure above **20 mmHg** on **right heart catheterisation**. Precapillary disease requires wedge pressure **15 mmHg** or less with vascular resistance above **2 Wood units**, so precise haemodynamics separate precapillary from postcapillary disease every time.",
+   "say": "PH is defined by pressures above twenty millimetres of mercury in practice. Right heart catheterisation confirms the diagnosis correctly in practice for patients. Wedge pressure and resistance separate the types reliably in PH centres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Haemodynamic pattern",
+     "Wedge pressure",
+     "Resistance"
+    ],
+    "rows": [
+     [
+      "Precapillary",
+      "15 mmHg or less",
+      "Above 2 Wood units"
+     ],
+     [
+      "Isolated postcapillary",
+      "Above 15 mmHg",
+      "2 Wood units or less"
+     ],
+     [
+      "Combined",
+      "Above 15 mmHg",
+      "Above 2 Wood units"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Five groups organise the differential: **group 1** pulmonary arterial hypertension, **group 2** left heart disease, **group 3** lung disease or hypoxia, **group 4** chronic thromboembolic obstruction, and **group 5** unclear multifactorial disease. Groups **2** and **3** dominate in practice through valve disease and chronic lung disease burden.",
+   "say": "Five groups classify pulmonary hypertension for exams in detail for students learning. Left heart and lung disease cause most cases overall worldwide in series. Group one and group four have specific therapy available today.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Cause",
+     "Key action"
+    ],
+    "rows": [
+     [
+      "1",
+      "PAH idiopathic, heritable, connective tissue disease, HIV, portal hypertension",
+      "Centre PAH therapy"
+     ],
+     [
+      "2",
+      "Left heart disease",
+      "Treat the left heart"
+     ],
+     [
+      "3",
+      "Lung disease or hypoxia",
+      "Treat lung and oxygenation"
+     ],
+     [
+      "4",
+      "CTEPH and artery obstruction",
+      "Anticoagulate, endarterectomy assess"
+     ],
+     [
+      "5",
+      "Unclear multifactorial",
+      "Individualised care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Symptoms progress from exertional breathlessness and fatigue to exertional chest pain, presyncope and syncope, with later ankle oedema, ascites, raised jugular venous pressure, loud **P2** and right ventricular heave. Rapid progression, **WHO functional class III to IV**, syncope, right heart failure signs or low output demand urgent **PH centre** referral.",
+   "say": "Breathlessness and fatigue start the story in most patients diagnosed with PH. Syncope and right heart failure indicate danger ahead in PH patients presenting daily. Functional class three or four requires urgent referral daily in practice for patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Typical features",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Early",
+      "Exertional breathlessness, fatigue",
+      "Baseline tests"
+     ],
+     [
+      "Advanced",
+      "Chest pain, presyncope, syncope",
+      "Refer to PH centre"
+     ],
+     [
+      "Right failure",
+      "Oedema, ascites, raised JVP",
+      "Immediate centre care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Echocardiography grades probability by peak **TR velocity** above **3.4 m/s** for high probability, **2.9 to 3.4 m/s** for intermediate, and **2.8 m/s** or less for low probability, adjusted by supporting signs. Other signs include right to left ventricular ratio above **1.0**, inferior vena cava above **21 mm**, pulmonary artery above **25 mm** and right atrial area above **18 cm2**.",
+   "say": "Echocardiography grades probability from TR velocity measurements daily in clinic. Above three point four means high probability in practice for clinicians. Supporting signs shift intermediate cases upward in grading performed daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "TR velocity",
+     "Probability",
+     "Other signs"
+    ],
+    "rows": [
+     [
+      "Above 3.4 m/s",
+      "High",
+      "Supportive signs strengthen"
+     ],
+     [
+      "2.9 to 3.4 m/s",
+      "Intermediate",
+      "Two categories push high"
+     ],
+     [
+      "2.8 m/s or less",
+      "Low",
+      "Signs can push intermediate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First line tests include **ECG**, chest radiograph, **BNP** or NT proBNP, spirometry with volumes and **DLCO**, arterial blood gas and transthoracic echo. A **V/Q scan** screens for chronic thromboembolic disease and outperforms **CT angiography** for chronic clot, while cause hunting adds high resolution CT, autoimmune serology, **HIV** testing, liver assessment and thyroid and sleep studies.",
+   "say": "First line tests cover heart, lung and blood markers together in clinic. VQ scanning screens chronic clot better than CT imaging performed. Cause hunting includes serology and HIV testing in clinic practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect PH"
+     },
+     {
+      "id": "b",
+      "label": "Echo probability"
+     },
+     {
+      "id": "c",
+      "label": "VQ scan for CTEPH"
+     },
+     {
+      "id": "d",
+      "label": "RHC at PH centre"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Right heart catheterisation** at a PH centre confirms type before any PAH specific drug, and **vasoreactivity testing** guides high dose calcium channel blocker therapy in idiopathic, heritable or drug associated PAH. General care uses **diuretics** for congestion, oxygen when arterial PO2 falls below **8 kPa**, iron correction, vaccination, supervised exercise, and pregnancy avoidance in PAH.",
+   "say": "Right heart catheterisation confirms PH before therapy starts always in practice. Vasoreactivity predicts blocker response in selected cases well for patients. Diuretics and oxygen support every group of PH patients daily.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Treat the cause first",
+     "points": [
+      "Optimise heart failure in group 2",
+      "Treat lung disease in group 3",
+      "Long term oxygen if PO2 below 8",
+      "Vaccinate and exercise"
+     ]
+    },
+    "right": {
+     "title": "Avoid in PAH",
+     "points": [
+      "Pregnancy carries high mortality",
+      "Endothelin antagonists harm pregnancy",
+      "Avoid PAH drugs in group 2",
+      "Refer before specific therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Low or intermediate risk PAH without cardiopulmonary comorbidity starts with combination **endothelin receptor antagonist** plus **PDE5 inhibitor**, for example **ambrisentan** plus **tadalafil**. High risk disease adds an **IV or SC prostacyclin analogue** such as **treprostinil** and prompts transplant discussion, with reassessment every **3 to 6 months** using walk distance above **440 m** for low risk and NT proBNP below **300** for low risk.",
+   "say": "Low risk PAH starts with combination therapy for most patients treated. High risk disease needs prostacyclin early in care daily for patients presenting. Reassessment tracks walk distance and natriuretic peptides regularly in clinic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk",
+     "Therapy anchor",
+     "Reassess"
+    ],
+    "rows": [
+     [
+      "Low or intermediate",
+      "Ambrisentan plus tadalafil",
+      "Walk above 440 m low risk"
+     ],
+     [
+      "High risk",
+      "Add prostacyclin analogue",
+      "Walk below 165 m high risk"
+     ],
+     [
+      "Vasoreactive",
+      "Calcium channel blocker",
+      "Close response check"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CTEPH** needs lifelong therapeutic anticoagulation, **pulmonary endarterectomy** for operable disease, and **balloon pulmonary angioplasty** or **riociguat** for inoperable or residual PH. In PH with interstitial disease, inhaled **treprostinil** may help, while **ambrisentan** stays not recommended in PH with idiopathic fibrosis and riociguat stays avoided in idiopathic interstitial pneumonia.",
+   "say": "CTEPH needs lifelong anticoagulation in every patient treated in clinic. Operable disease needs endarterectomy best of all treatments available in centres. Inoperable disease may need balloon angioplasty or riociguat daily in centres.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CTEPH diagnosed"
+     },
+     {
+      "id": "b",
+      "label": "Lifelong anticoagulant"
+     },
+     {
+      "id": "c",
+      "label": "Operable"
+     },
+     {
+      "id": "d",
+      "label": "Inoperable"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Traps include diagnosing PH from echo alone, since echo gives probability while catheterisation confirms disease, and starting **sildenafil** or other PAH drugs in group **2** or **3** without centre assessment. Excluding chronic clot on **CT angiography** alone fails because **V/Q scanning** is more sensitive, and combining PDE5 inhibitors with nitrates or riociguat risks severe hypotension.",
+   "say": "Echo only estimates probability in pulmonary hypertension always in practice. Catheterisation confirms PH before drug therapy starts in patients. CT scanning can miss chronic clot that VQ scanning finds in clinic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Correct move",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Echo only diagnosis",
+      "Confirm with RHC",
+      "Probability is not proof"
+     ],
+     [
+      "PAH drugs in group 2",
+      "Treat left disease first",
+      "Drugs lack benefit"
+     ],
+     [
+      "CTPA excludes CTEPH",
+      "Use V/Q scan",
+      "VQ is more sensitive"
+     ],
+     [
+      "PDE5 plus nitrate",
+      "Never combine",
+      "Severe hypotension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High yield anchors: mean pressure above **20 mmHg** defines PH, wedge **15 mmHg** and resistance **2 Wood units** split types, TR velocity above **3.4 m/s** means high echo probability, walk above **440 m** marks low risk and below **165 m** marks high risk, NT proBNP below **300** low and above **1100** high, reassess every **3 to 6 months**. **Sildenafil** is **20 mg** three times daily, **tadalafil** **40 mg** daily and macitentan **10 mg** daily.",
+   "say": "Twenty millimetres is the defining cutoff for PH in practice daily for students learning. High echo probability needs TR above three point four in clinic. Walk and peptide thresholds guide escalation decisions in clinic practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anchor",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "PH threshold",
+      "Mean pressure above 20 mmHg"
+     ],
+     [
+      "Precapillary",
+      "Wedge 15 or less, resistance above 2 Wood units"
+     ],
+     [
+      "Echo high",
+      "TR velocity above 3.4 m/s"
+     ],
+     [
+      "Low risk walk",
+      "Above 440 m"
+     ],
+     [
+      "High risk walk",
+      "Below 165 m"
+     ],
+     [
+      "Low risk peptide",
+      "NT proBNP below 300"
+     ],
+     [
+      "High risk peptide",
+      "NT proBNP above 1100"
+     ],
+     [
+      "Reassess",
+      "Every 3 to 6 months"
+     ]
+    ]
+   }
+  }
+ ]
+}

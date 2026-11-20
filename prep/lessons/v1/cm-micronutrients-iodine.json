@@ -24,11 +24,27 @@
    "say": "Iodine deficiency causes much more than neck goitres. In pregnancy, it causes miscarriages, deaf-mutism, severe physical stunting, and irreversible intellectual disability in cretinism.",
    "vis": {
     "kind": "table",
-    "cols": ["Life stage", "Clinical manifestations of iodine deficiency", "Public health severity"],
+    "cols": [
+     "Life stage",
+     "Clinical manifestations of iodine deficiency",
+     "Public health severity"
+    ],
     "rows": [
-     ["Fetus / Neonate", "Spontaneous abortion, stillbirth, neurological cretinism", "Severe brain damage and deaf-mutism"],
-     ["Infant / Child", "Subclinical intellectual loss (13.5 IQ point reduction)", "Impaired school performance and growth"],
-     ["Adolescent / Adult", "Endemic goitre, multinodular goitre, hypothyroidism", "Decreased productivity and lethargy"]
+     [
+      "Fetus / Neonate",
+      "Spontaneous abortion, stillbirth, neurological cretinism",
+      "Severe brain damage and deaf-mutism"
+     ],
+     [
+      "Infant / Child",
+      "Subclinical intellectual loss (13.5 IQ point reduction)",
+      "Impaired school performance and growth"
+     ],
+     [
+      "Adolescent / Adult",
+      "Endemic goitre, multinodular goitre, hypothyroidism",
+      "Decreased productivity and lethargy"
+     ]
     ]
    }
   },
@@ -51,11 +67,19 @@
     "kind": "compare",
     "left": {
      "title": "Production point standard",
-     "points": ["Minimum 30 parts per million (ppm)", "Added as stable potassium iodate", "Monitored at salt refinery exit"]
+     "points": [
+      "Minimum 30 parts per million (ppm)",
+      "Added as stable potassium iodate",
+      "Monitored at salt refinery exit"
+     ]
     },
     "right": {
      "title": "Household consumer level",
-     "points": ["Minimum 15 parts per million (ppm)", "Compensates for transport and storage losses", "Tested by ASHA using MBI testing kits"]
+     "points": [
+      "Minimum 15 parts per million (ppm)",
+      "Compensates for transport and storage losses",
+      "Tested by ASHA using MBI testing kits"
+     ]
     }
    }
   },
@@ -65,13 +89,37 @@
    "say": "Urine iodine testing is the gold standard for measuring community iodine levels. A community median between one hundred and two hundred micrograms per litre confirms healthy iodine intake.",
    "vis": {
     "kind": "table",
-    "cols": ["Median urinary iodine (mcg/L)", "Iodine nutritional status", "Recommended public action"],
+    "cols": [
+     "Median urinary iodine (mcg/L)",
+     "Iodine nutritional status",
+     "Recommended public action"
+    ],
     "rows": [
-     ["Less than 20 mcg/L", "Severe iodine deficiency", "Urgent iodised salt supply and monitoring"],
-     ["20 to 49 mcg/L", "Moderate iodine deficiency", "Enforce refinery quality control and testing"],
-     ["50 to 99 mcg/L", "Mild iodine deficiency", "Strengthen consumer awareness campaigns"],
-     ["100 to 199 mcg/L", "Optimal iodine nutrition", "Maintain universal iodisation standards"],
-     ["200 to 299 mcg/L", "More than adequate", "Monitor for iodine-induced hyperthyroidism"]
+     [
+      "Less than 20 mcg/L",
+      "Severe iodine deficiency",
+      "Urgent iodised salt supply and monitoring"
+     ],
+     [
+      "20 to 49 mcg/L",
+      "Moderate iodine deficiency",
+      "Enforce refinery quality control and testing"
+     ],
+     [
+      "50 to 99 mcg/L",
+      "Mild iodine deficiency",
+      "Strengthen consumer awareness campaigns"
+     ],
+     [
+      "100 to 199 mcg/L",
+      "Optimal iodine nutrition",
+      "Maintain universal iodisation standards"
+     ],
+     [
+      "200 to 299 mcg/L",
+      "More than adequate",
+      "Monitor for iodine-induced hyperthyroidism"
+     ]
     ]
    }
   },
@@ -82,12 +130,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Diet rich in plant non-haem iron"},
-     {"id": "b", "label": "Phytates and tannins inhibit duodenal absorption"},
-     {"id": "c", "label": "Depletion of bone marrow ferritin stores"},
-     {"id": "d", "label": "Microcytic hypochromic anaemia development"}
+     {
+      "id": "a",
+      "label": "Diet rich in plant non-haem iron"
+     },
+     {
+      "id": "b",
+      "label": "Phytates and tannins inhibit duodenal absorption"
+     },
+     {
+      "id": "c",
+      "label": "Depletion of bone marrow ferritin stores"
+     },
+     {
+      "id": "d",
+      "label": "Microcytic hypochromic anaemia development"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -96,13 +169,37 @@
    "say": "Iron deficiency progresses from depleted marrow stores to low serum iron and finally frank microcytic anaemia. Symptoms include extreme fatigue, spoon-shaped nails and cravings for clay.",
    "vis": {
     "kind": "table",
-    "cols": ["Laboratory parameter", "Normal healthy value", "Iron deficiency anaemia finding"],
+    "cols": [
+     "Laboratory parameter",
+     "Normal healthy value",
+     "Iron deficiency anaemia finding"
+    ],
     "rows": [
-     ["Haemoglobin", ">= 12 g/dl (women), >= 13 g/dl (men)", "Decreased below normal cut-offs"],
-     ["Serum ferritin", "30 to 200 ng/ml", "Severely reduced (< 15 ng/ml)"],
-     ["Serum iron", "60 to 170 mcg/dl", "Reduced (< 30 mcg/dl)"],
-     ["Total Iron Binding Capacity (TIBC)", "250 to 400 mcg/dl", "Markedly elevated (> 400 mcg/dl)"],
-     ["Transferrin saturation", "20 to 50 percent", "Severely depressed (< 16 percent)"]
+     [
+      "Haemoglobin",
+      ">= 12 g/dl (women), >= 13 g/dl (men)",
+      "Decreased below normal cut-offs"
+     ],
+     [
+      "Serum ferritin",
+      "30 to 200 ng/ml",
+      "Severely reduced (< 15 ng/ml)"
+     ],
+     [
+      "Serum iron",
+      "60 to 170 mcg/dl",
+      "Reduced (< 30 mcg/dl)"
+     ],
+     [
+      "Total Iron Binding Capacity (TIBC)",
+      "250 to 400 mcg/dl",
+      "Markedly elevated (> 400 mcg/dl)"
+     ],
+     [
+      "Transferrin saturation",
+      "20 to 50 percent",
+      "Severely depressed (< 16 percent)"
+     ]
     ]
    }
   },
@@ -112,13 +209,37 @@
    "say": "The Anemia Mukt Bharat programme provides colour-coded iron tablets across life stages: pink syrup for toddlers, blue tablets for teenagers, and daily red tablets for pregnant mothers.",
    "vis": {
     "kind": "table",
-    "cols": ["Target beneficiary group", "IFA formulation and dose", "Frequency and colour coding"],
+    "cols": [
+     "Target beneficiary group",
+     "IFA formulation and dose",
+     "Frequency and colour coding"
+    ],
     "rows": [
-     ["Children 6 to 59 months", "20 mg elemental iron + 100 mcg folic acid", "Biweekly (1 ml pink syrup)"],
-     ["Children 5 to 9 years", "45 mg elemental iron + 400 mcg folic acid", "Weekly (1 pink tablet)"],
-     ["Adolescents 10 to 19 years", "60 mg elemental iron + 500 mcg folic acid", "Weekly (1 blue tablet)"],
-     ["Pregnant women (from 2nd tri)", "60 mg elemental iron + 500 mcg folic acid", "Daily for 180 days (1 red tablet)"],
-     ["Lactating mothers (0-6 mos)", "60 mg elemental iron + 500 mcg folic acid", "Daily for 180 days (1 red tablet)"]
+     [
+      "Children 6 to 59 months",
+      "20 mg elemental iron + 100 mcg folic acid",
+      "Biweekly (1 ml pink syrup)"
+     ],
+     [
+      "Children 5 to 9 years",
+      "45 mg elemental iron + 400 mcg folic acid",
+      "Weekly (1 pink tablet)"
+     ],
+     [
+      "Adolescents 10 to 19 years",
+      "60 mg elemental iron + 500 mcg folic acid",
+      "Weekly (1 blue tablet)"
+     ],
+     [
+      "Pregnant women (from 2nd tri)",
+      "60 mg elemental iron + 500 mcg folic acid",
+      "Daily for 180 days (1 red tablet)"
+     ],
+     [
+      "Lactating mothers (0-6 mos)",
+      "60 mg elemental iron + 500 mcg folic acid",
+      "Daily for 180 days (1 red tablet)"
+     ]
     ]
    }
   },
@@ -129,12 +250,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Periconceptional folic acid 400 mcg daily"},
-     {"id": "b", "label": "Optimal nucleotide synthesis and DNA methylation"},
-     {"id": "c", "label": "Complete embryonic neural tube closure by day 28"},
-     {"id": "d", "label": "70% reduction in spina bifida and anencephaly"}
+     {
+      "id": "a",
+      "label": "Periconceptional folic acid 400 mcg daily"
+     },
+     {
+      "id": "b",
+      "label": "Optimal nucleotide synthesis and DNA methylation"
+     },
+     {
+      "id": "c",
+      "label": "Complete embryonic neural tube closure by day 28"
+     },
+     {
+      "id": "d",
+      "label": "70% reduction in spina bifida and anencephaly"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -145,12 +291,65 @@
     "kind": "compare",
     "left": {
      "title": "Fortified staple distribution",
-     "points": ["Fortified rice kernels with iron, folate, B12", "Distributed via ration shops and school meals", "Universal population reach without pill fatigue"]
+     "points": [
+      "Fortified rice kernels with iron, folate, B12",
+      "Distributed via ration shops and school meals",
+      "Universal population reach without pill fatigue"
+     ]
     },
     "right": {
      "title": "Biannual deworming (NDD)",
-     "points": ["Single 400 mg albendazole chewable tablet", "February and August National Deworming Days", "Eliminates Ancylostoma hookworm blood loss"]
+     "points": [
+      "Single 400 mg albendazole chewable tablet",
+      "February and August National Deworming Days",
+      "Eliminates Ancylostoma hookworm blood loss"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Salt must contain at least 30 parts per million iodine at production and 15 parts per million at household level. Median urinary iodine 100 to 199 micrograms per litre means optimal nutrition. Serum ferritin below 15 indicates iron depletion. Folic acid 400 micrograms periconceptionally cuts neural tube defects by up to 70 percent.",
+   "say": "Salt must contain at least 30 parts per million iodine at production and 15 parts per million at household level. Median urinary iodine 100 to 199 micrograms per litre means optimal nutrition. Serum ferritin below 15 indicates iron depletion. Folic acid 400 micrograms periconceptionally cuts neural tube defects by up to 70 percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Salt iodine at manufacture",
+      "Minimum 30 parts per million required"
+     ],
+     [
+      "Salt iodine at household",
+      "Minimum 15 parts per million required"
+     ],
+     [
+      "Optimal urinary iodine",
+      "Median 100 to 199 micrograms per litre"
+     ],
+     [
+      "Severe iodine deficiency",
+      "Median urinary iodine below 20 micrograms"
+     ],
+     [
+      "Daily adult iodine need",
+      "About 150 micrograms per day"
+     ],
+     [
+      "Iron depletion marker",
+      "Serum ferritin below 15 nanograms per millilitre"
+     ],
+     [
+      "Adolescent IFA tablet",
+      "Weekly blue tablet 60 milligrams iron"
+     ],
+     [
+      "Periconceptional folic acid",
+      "400 micrograms daily prevents neural defects"
+     ]
+    ]
    }
   }
  ],

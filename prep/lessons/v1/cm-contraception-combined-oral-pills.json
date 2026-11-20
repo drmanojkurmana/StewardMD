@@ -15,11 +15,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "o1", "label": "Estrogen plus progestogen absorbed daily" },
-          { "id": "o2", "label": "LH surge and ovulation suppressed" },
-          { "id": "o3", "label": "Mucus thickens, endometrium thins" }
+          {
+            "id": "o1",
+            "label": "Estrogen plus progestogen absorbed daily"
+          },
+          {
+            "id": "o2",
+            "label": "LH surge and ovulation suppressed"
+          },
+          {
+            "id": "o3",
+            "label": "Mucus thickens, endometrium thins"
+          }
         ],
-        "edges": [["o1", "o2"], ["o2", "o3"]]
+        "edges": [
+          [
+            "o1",
+            "o2"
+          ],
+          [
+            "o2",
+            "o3"
+          ]
+        ]
       }
     },
     {
@@ -28,12 +46,27 @@
       "say": "Mala-N is free in government supply: twenty one hormone pills plus seven iron pills. The iron week keeps the habit and fights anaemia.",
       "vis": {
         "kind": "table",
-        "cols": ["Strip segment", "Contents and purpose"],
+        "cols": [
+          "Strip segment",
+          "Contents and purpose"
+        ],
         "rows": [
-          ["Days 1 to 21", "Levonorgestrel plus ethinyl estradiol tablets"],
-          ["Days 22 to 28", "Ferrous fumarate (iron) tablets"],
-          ["Next strip", "Start immediately, no gap"],
-          ["Mala-D variant", "Same drug, socially marketed price"]
+          [
+            "Days 1 to 21",
+            "Levonorgestrel plus ethinyl estradiol tablets"
+          ],
+          [
+            "Days 22 to 28",
+            "Ferrous fumarate (iron) tablets"
+          ],
+          [
+            "Next strip",
+            "Start immediately, no gap"
+          ],
+          [
+            "Mala-D variant",
+            "Same drug, socially marketed price"
+          ]
         ]
       }
     },
@@ -56,11 +89,19 @@
         "kind": "compare",
         "left": {
           "title": "One pill missed",
-          "points": ["Take as soon as remembered", "Take next pill at usual time", "No backup method needed"]
+          "points": [
+            "Take as soon as remembered",
+            "Take next pill at usual time",
+            "No backup method needed"
+          ]
         },
         "right": {
           "title": "Two or more missed",
-          "points": ["Take latest pill, discard others", "Condoms for seven days", "Consider emergency contraception"]
+          "points": [
+            "Take latest pill, discard others",
+            "Condoms for seven days",
+            "Consider emergency contraception"
+          ]
         }
       }
     },
@@ -70,12 +111,27 @@
       "say": "Smoking after thirty five, migraine with aura, past clots, and current breast cancer forbid combined pills. Blood pressure must be checked before supply.",
       "vis": {
         "kind": "table",
-        "cols": ["Category 4 bar", "Reason"],
+        "cols": [
+          "Category 4 bar",
+          "Reason"
+        ],
         "rows": [
-          ["Age 35 plus heavy smoking", "Arterial thrombosis and infarction risk"],
-          ["Migraine with aura", "Ischaemic stroke risk"],
-          ["Past venous thromboembolism", "Recurrent clot risk with estrogen"],
-          ["Current breast cancer", "Hormone sensitive tumour growth"]
+          [
+            "Age 35 plus heavy smoking",
+            "Arterial thrombosis and infarction risk"
+          ],
+          [
+            "Migraine with aura",
+            "Ischaemic stroke risk"
+          ],
+          [
+            "Past venous thromboembolism",
+            "Recurrent clot risk with estrogen"
+          ],
+          [
+            "Current breast cancer",
+            "Hormone sensitive tumour growth"
+          ]
         ]
       }
     },
@@ -87,11 +143,19 @@
         "kind": "compare",
         "left": {
           "title": "Benefits",
-          "points": ["Regular light painless cycles", "Less ovarian and endometrial cancer", "Less anaemia and pelvic infection sequelae"]
+          "points": [
+            "Regular light painless cycles",
+            "Less ovarian and endometrial cancer",
+            "Less anaemia and pelvic infection sequelae"
+          ]
         },
         "right": {
           "title": "Risks to screen",
-          "points": ["Venous thromboembolism", "Hypertension emergence", "Gall bladder disease"]
+          "points": [
+            "Venous thromboembolism",
+            "Hypertension emergence",
+            "Gall bladder disease"
+          ]
         }
       }
     },
@@ -101,12 +165,27 @@
       "say": "Rifampicin and epilepsy drugs make pills fail. Ordinary antibiotics do not, despite what older textbooks said.",
       "vis": {
         "kind": "table",
-        "cols": ["Interacting drug", "Action"],
+        "cols": [
+          "Interacting drug",
+          "Action"
+        ],
         "rows": [
-          ["Rifampicin (TB therapy)", "Use non oral method"],
-          ["Phenytoin, carbamazepine", "Use non oral method"],
-          ["Amoxicillin, doxycycline", "No extra precaution needed"],
-          ["St John's wort (herbal)", "Avoid or add barrier method"]
+          [
+            "Rifampicin (TB therapy)",
+            "Use non oral method"
+          ],
+          [
+            "Phenytoin, carbamazepine",
+            "Use non oral method"
+          ],
+          [
+            "Amoxicillin, doxycycline",
+            "No extra precaution needed"
+          ],
+          [
+            "St John's wort (herbal)",
+            "Avoid or add barrier method"
+          ]
         ]
       }
     },
@@ -117,11 +196,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "a1", "label": "User reports an ACHES symptom" },
-          { "id": "a2", "label": "Stop pill, same day evaluation" },
-          { "id": "a3", "label": "Switch to non hormonal method" }
+          {
+            "id": "a1",
+            "label": "User reports an ACHES symptom"
+          },
+          {
+            "id": "a2",
+            "label": "Stop pill, same day evaluation"
+          },
+          {
+            "id": "a3",
+            "label": "Switch to non hormonal method"
+          }
         ],
-        "edges": [["a1", "a2"], ["a2", "a3"]]
+        "edges": [
+          [
+            "a1",
+            "a2"
+          ],
+          [
+            "a2",
+            "a3"
+          ]
+        ]
       }
     },
     {
@@ -132,11 +229,19 @@
         "kind": "compare",
         "left": {
           "title": "Combined pill",
-          "points": ["Estrogen plus progestogen", "Regular withdrawal bleeds", "Not in early breastfeeding"]
+          "points": [
+            "Estrogen plus progestogen",
+            "Regular withdrawal bleeds",
+            "Not in early breastfeeding"
+          ]
         },
         "right": {
           "title": "Progestogen only pill",
-          "points": ["No estrogen, lactation safe", "Irregular bleeding common", "Three hour timing discipline"]
+          "points": [
+            "No estrogen, lactation safe",
+            "Irregular bleeding common",
+            "Three hour timing discipline"
+          ]
         }
       }
     },
@@ -146,12 +251,68 @@
       "say": "Recheck blood pressure and warning symptoms, then resupply generously. Easy continuation beats repeated clinic hurdles for real world efficacy.",
       "vis": {
         "kind": "table",
-        "cols": ["Follow up item", "Interval"],
+        "cols": [
+          "Follow up item",
+          "Interval"
+        ],
         "rows": [
-          ["Blood pressure", "At 3 months, then yearly"],
-          ["ACHES symptom review", "Every resupply visit"],
-          ["New drug interaction check", "Whenever medicines change"],
-          ["Strip resupply", "Up to one year at a time"]
+          [
+            "Blood pressure",
+            "At 3 months, then yearly"
+          ],
+          [
+            "ACHES symptom review",
+            "Every resupply visit"
+          ],
+          [
+            "New drug interaction check",
+            "Whenever medicines change"
+          ],
+          [
+            "Strip resupply",
+            "Up to one year at a time"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Combined oral contraceptive pills prevent pregnancy primarily by suppressing the pituitary LH surge to inhibit ovulation. Mala-N and Mala-D contain 30 micrograms ethinylestradiol and 150 micrograms levonorgestrel, taken for 21 active days followed by seven ferrous fumarate tablets. Absolute contraindications include current breast cancer, history of deep vein thrombosis, and smoking over age thirty-five. Saheli (centchroman) is a non-steroidal selective estrogen receptor modulator taken twice weekly for three months, then once weekly.",
+      "say": "Combined oral contraceptive pills prevent pregnancy primarily by suppressing the pituitary LH surge to inhibit ovulation. Mala-N and Mala-D contain 30 micrograms ethinylestradiol and 150 micrograms levonorgestrel, taken for 21 active days followed by seven ferrous fumarate tablets. Absolute contraindications include current breast cancer, history of deep vein thrombosis, and smoking over age thirty-five. Saheli (centchroman) is a non-steroidal selective estrogen receptor modulator taken twice weekly for three months, then once weekly.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Primary mechanism of action",
+            "Suppression of pituitary LH surge prevents ovulation"
+          ],
+          [
+            "Mala-N active formulation",
+            "30 mcg ethinylestradiol plus 150 mcg levonorgestrel"
+          ],
+          [
+            "Inactive tablet component",
+            "Seven brown tablets contain 60 mg elemental ferrous fumarate"
+          ],
+          [
+            "Absolute contraindication",
+            "Smoker aged 35 or older with cardiovascular disease risk"
+          ],
+          [
+            "Missed pill rule",
+            "Take missed pill immediately; use backup barrier if two pills missed"
+          ],
+          [
+            "MEC Category 4 condition",
+            "Active breast cancer or acute thromboembolic deep vein thrombosis"
+          ],
+          [
+            "Centchroman Saheli dosing",
+            "Twice weekly for 12 weeks, thereafter once weekly"
+          ]
         ]
       }
     }

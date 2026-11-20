@@ -15,11 +15,19 @@
     "kind": "compare",
     "left": {
      "title": "What staff see",
-     "points": ["Normal looking vial and label", "Normal injection experience", "No complaint at session"]
+     "points": [
+      "Normal looking vial and label",
+      "Normal injection experience",
+      "No complaint at session"
+     ]
     },
     "right": {
      "title": "What actually happened",
-     "points": ["Potency lost hour by warm hour", "Child left unprotected", "Failure found only by audit or outbreak"]
+     "points": [
+      "Potency lost hour by warm hour",
+      "Child left unprotected",
+      "Failure found only by audit or outbreak"
+     ]
     }
    }
   },
@@ -29,12 +37,27 @@
    "say": "Scale shrinks down the chain. Freezers at the top freeze polio vaccine in bulk; coolers hold the rest refrigerated. Each level's equipment matches its dose volume and temperature needs, down to dozens of doses in a session carrier.",
    "vis": {
     "kind": "table",
-    "cols": ["Equipment", "Level and temperature"],
+    "cols": [
+     "Equipment",
+     "Level and temperature"
+    ],
     "rows": [
-     ["Walk-in freezer", "State store, frozen OPV bulk"],
-     ["Walk-in cooler", "State store, +2 to +8 degrees bulk"],
-     ["Deep freezer", "District and facility, ice packs"],
-     ["Ice-lined refrigerator", "Facility, +2 to +8 degrees working stock"]
+     [
+      "Walk-in freezer",
+      "State store, frozen OPV bulk"
+     ],
+     [
+      "Walk-in cooler",
+      "State store, +2 to +8 degrees bulk"
+     ],
+     [
+      "Deep freezer",
+      "District and facility, ice packs"
+     ],
+     [
+      "Ice-lined refrigerator",
+      "Facility, +2 to +8 degrees working stock"
+     ]
     ]
    }
   },
@@ -45,12 +68,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Power cut begins"},
-     {"id": "b", "label": "Ice lining releases cold"},
-     {"id": "c", "label": "Temperature holds in range"},
-     {"id": "d", "label": "Hold-over time expires, risk begins"}
+     {
+      "id": "a",
+      "label": "Power cut begins"
+     },
+     {
+      "id": "b",
+      "label": "Ice lining releases cold"
+     },
+     {
+      "id": "c",
+      "label": "Temperature holds in range"
+     },
+     {
+      "id": "d",
+      "label": "Hold-over time expires, risk begins"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -70,11 +118,23 @@
    "say": "Freezers serve ice packs first. Only freeze-tolerant stock belongs inside. Adsorbed vaccines entering one lose their adjuvant structure forever. Most real freeze damage happens in freezers or against unconditioned packs touching vials in carriers.",
    "vis": {
     "kind": "table",
-    "cols": ["Belongs in deep freezer", "Never belongs"],
+    "cols": [
+     "Belongs in deep freezer",
+     "Never belongs"
+    ],
     "rows": [
-     ["Ice packs being frozen", "DPT and pentavalent vials"],
-     ["OPV where directed", "Hepatitis B and tetanus toxoid"],
-     ["Frozen control vial for shake test", "Any adsorbed vaccine"]
+     [
+      "Ice packs being frozen",
+      "DPT and pentavalent vials"
+     ],
+     [
+      "OPV where directed",
+      "Hepatitis B and tetanus toxoid"
+     ],
+     [
+      "Frozen control vial for shake test",
+      "Any adsorbed vaccine"
+     ]
     ]
    }
   },
@@ -86,11 +146,19 @@
     "kind": "compare",
     "left": {
      "title": "Conditioned ice pack",
-     "points": ["Frozen then rested at room air", "Water audibly moves inside", "Safe against adsorbed vials"]
+     "points": [
+      "Frozen then rested at room air",
+      "Water audibly moves inside",
+      "Safe against adsorbed vials"
+     ]
     },
     "right": {
      "title": "Unconditioned ice pack",
-     "points": ["Straight from deep freezer", "Surface below zero degrees", "Freezes adsorbed vaccines on contact"]
+     "points": [
+      "Straight from deep freezer",
+      "Surface below zero degrees",
+      "Freezes adsorbed vaccines on contact"
+     ]
     }
    }
   },
@@ -111,11 +179,27 @@
    "say": "Three monitors, three enemies. Vial labels remember cumulative heat, charts remember storage, shake tests expose freezing. Vial monitors never detect freezing, so reading all three together forms the complete habit.",
    "vis": {
     "kind": "table",
-    "cols": ["Monitor", "Detects", "Misses"],
+    "cols": [
+     "Monitor",
+     "Detects",
+     "Misses"
+    ],
     "rows": [
-     ["Vaccine vial monitor", "Cumulative heat exposure", "Freezing entirely"],
-     ["Temperature chart and logger", "Storage excursions", "Transit exposure of single vials"],
-     ["Shake test", "Freeze damage in adsorbed vials", "Heat damage"]
+     [
+      "Vaccine vial monitor",
+      "Cumulative heat exposure",
+      "Freezing entirely"
+     ],
+     [
+      "Temperature chart and logger",
+      "Storage excursions",
+      "Transit exposure of single vials"
+     ],
+     [
+      "Shake test",
+      "Freeze damage in adsorbed vials",
+      "Heat damage"
+     ]
     ]
    }
   },
@@ -126,12 +210,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Vaccines travel down cold"},
-     {"id": "b", "label": "Child vaccinated at session"},
-     {"id": "c", "label": "Stool specimen collected if AFP"},
-     {"id": "d", "label": "Specimen travels up cold to lab"}
+     {
+      "id": "a",
+      "label": "Vaccines travel down cold"
+     },
+     {
+      "id": "b",
+      "label": "Child vaccinated at session"
+     },
+     {
+      "id": "c",
+      "label": "Stool specimen collected if AFP"
+     },
+     {
+      "id": "d",
+      "label": "Specimen travels up cold to lab"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -140,12 +249,27 @@
    "say": "Breakdowns demand choreography. Move stock cold at once, record excursion and duration, then let monitor and freeze status decide use, priority use or discard with the officer. Silent guessing and re-serving is the only unforgivable response.",
    "vis": {
     "kind": "table",
-    "cols": ["Step on breakdown", "Purpose"],
+    "cols": [
+     "Step on breakdown",
+     "Purpose"
+    ],
     "rows": [
-     ["Shift stock to working cold unit", "Stop further damage"],
-     ["Record temperature and duration", "Evidence for the decision"],
-     ["Assess VVM and freeze status", "Use, use-first or discard"],
-     ["Inform cold chain officer", "Authorised disposition"]
+     [
+      "Shift stock to working cold unit",
+      "Stop further damage"
+     ],
+     [
+      "Record temperature and duration",
+      "Evidence for the decision"
+     ],
+     [
+      "Assess VVM and freeze status",
+      "Use, use-first or discard"
+     ],
+     [
+      "Inform cold chain officer",
+      "Authorised disposition"
+     ]
     ]
    }
   },
@@ -157,12 +281,65 @@
     "kind": "compare",
     "left": {
      "title": "Solar direct drive",
-     "points": ["Ice bank frozen by daylight", "Cools through night and cloud", "No battery to maintain"]
+     "points": [
+      "Ice bank frozen by daylight",
+      "Cools through night and cloud",
+      "No battery to maintain"
+     ]
     },
     "right": {
      "title": "Passive cold box",
-     "points": ["Conditioned packs only", "Days of hold with ice", "Suits outreach and transport"]
+     "points": [
+      "Conditioned packs only",
+      "Days of hold with ice",
+      "Suits outreach and transport"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Vaccines stay between plus 2 and plus 8 degrees, and heat damage accumulates irreversibly even when vials look normal. The ice lined refrigerator holds that range through power cuts, with temperature recorded twice daily including holidays. Adsorbed vaccines such as pentavalent and hepatitis B must never freeze in a deep freezer, conditioned ice packs prevent contact freezing, and vial monitors detect heat but never freezing.",
+   "say": "High-yield for the exam: Vaccines stay between plus 2 and plus 8 degrees, and heat damage accumulates irreversibly even when vials look normal. The ice lined refrigerator holds that range through power cuts, with temperature recorded twice daily including holidays. Adsorbed vaccines such as pentavalent and hepatitis B must never freeze in a deep freezer, conditioned ice packs prevent contact freezing, and vial monitors detect heat but never freezing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Safe vaccine temperature range",
+      "Plus 2 to plus 8 degrees"
+     ],
+     [
+      "Heat damaged vaccine appearance",
+      "Looks normal but potency lost irreversibly"
+     ],
+     [
+      "ILR power cut protection",
+      "Ice lining gives hold over time"
+     ],
+     [
+      "Temperature recording frequency",
+      "Twice daily, morning and evening, holidays included"
+     ],
+     [
+      "Deep freezer forbidden contents",
+      "Adsorbed vaccines never enter deep freezer"
+     ],
+     [
+      "Conditioned ice pack sign",
+      "Rested until water moves inside pack"
+     ],
+     [
+      "Vaccine vial monitor detects",
+      "Cumulative heat, misses freezing entirely"
+     ],
+     [
+      "Reverse cold chain carries",
+      "AFP stool specimens back to laboratory"
+     ]
+    ]
    }
   }
  ],

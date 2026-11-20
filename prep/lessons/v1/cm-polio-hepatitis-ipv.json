@@ -13,12 +13,27 @@
    "say": "Killed virus, zero replication, type 2 cover restored. IPV returned because the oral vaccine's type 2 virus outlived its wild enemy.",
    "vis": {
     "kind": "table",
-    "cols": ["Trait", "IPV fact"],
+    "cols": [
+     "Trait",
+     "IPV fact"
+    ],
     "rows": [
-     ["Contents", "Killed virus, all three types"],
-     ["Replication", "None in the gut"],
-     ["VAPP risk", "Absent"],
-     ["Role", "Individual paralysis protection"]
+     [
+      "Contents",
+      "Killed virus, all three types"
+     ],
+     [
+      "Replication",
+      "None in the gut"
+     ],
+     [
+      "VAPP risk",
+      "Absent"
+     ],
+     [
+      "Role",
+      "Individual paralysis protection"
+     ]
     ]
    }
   },
@@ -30,11 +45,21 @@
     "kind": "compare",
     "left": {
      "title": "After IPV",
-     "points": ["Strong blood antibody", "Paralysis prevented", "Gut carriage possible", "Shedding can continue"]
+     "points": [
+      "Strong blood antibody",
+      "Paralysis prevented",
+      "Gut carriage possible",
+      "Shedding can continue"
+     ]
     },
     "right": {
      "title": "After OPV",
-     "points": ["Strong gut immunity", "Transmission blocked", "Brief vaccine virus shedding", "Rare vaccine virus risks"]
+     "points": [
+      "Strong gut immunity",
+      "Transmission blocked",
+      "Brief vaccine virus shedding",
+      "Rare vaccine virus risks"
+     ]
     }
    }
   },
@@ -44,12 +69,27 @@
    "say": "One fifth dose into skin, not muscle, harvests the skin's immune density. Two fractional doses cover infants while vials stretch five times further.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Fractional IPV"],
+    "cols": [
+     "Feature",
+     "Fractional IPV"
+    ],
     "rows": [
-     ["Volume", "0.1 ml, one fifth dose"],
-     ["Route", "Intradermal"],
-     ["Doses in schedule", "Two in infancy"],
-     ["Purpose", "Supply stretching with protection"]
+     [
+      "Volume",
+      "0.1 ml, one fifth dose"
+     ],
+     [
+      "Route",
+      "Intradermal"
+     ],
+     [
+      "Doses in schedule",
+      "Two in infancy"
+     ],
+     [
+      "Purpose",
+      "Supply stretching with protection"
+     ]
     ]
    }
   },
@@ -70,25 +110,40 @@
    "say": "Flat needle, pale bleb raised, nothing leaked. Technique is the dose here. Training and syringes decide whether fractional policy becomes fractional failure.",
    "vis": {
     "kind": "table",
-    "cols": ["Step", "Check"],
+    "cols": [
+     "Step",
+     "Check"
+    ],
     "rows": [
-     ["Needle angle", "Almost flat to skin"],
-     ["Volume", "0.1 ml measured exactly"],
-     ["Endpoint", "Visible pale wheal"],
-     ["Failure sign", "Leakage, no bleb formed"]
+     [
+      "Needle angle",
+      "Almost flat to skin"
+     ],
+     [
+      "Volume",
+      "0.1 ml measured exactly"
+     ],
+     [
+      "Endpoint",
+      "Visible pale wheal"
+     ],
+     [
+      "Failure sign",
+      "Leakage, no bleb formed"
+     ]
     ]
    }
   },
   {
-    "tx": "An infant session gives pentavalent vaccine, oral polio drops and a fractional inactivated polio dose together. **Intradermal technique** keeps a short bevel needle nearly flat on the skin so 0.1 millilitre raises a pale wheal. If fluid leaks or slips under the skin, the fractional dose is wasted. Training in the BCG style of injection, the right syringe and the correct site decide whether the policy dose becomes real immunity at that session.",
-    "say": "An infant session gives pentavalent vaccine, oral polio drops and a fractional inactivated polio dose together. Intradermal technique keeps a short bevel needle nearly flat on the skin so 0.1 millilitre raises a pale wheal. If fluid leaks or slips under the skin, the fractional dose is wasted. Training in the BCG style of injection, the right syringe and the correct site decide whether the policy dose becomes real immunity at that session.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n522-cm-polio-hepatitis-ipv.webp",
-      "alt": "Infant receiving pentavalent vaccine, oral polio drops and fractional intradermal polio vaccine",
-      "caption": "Pentavalent vaccine, oral polio vaccine and fractional intradermal polio vaccine are given at one infant session. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "An infant session gives pentavalent vaccine, oral polio drops and a fractional inactivated polio dose together. **Intradermal technique** keeps a short bevel needle nearly flat on the skin so 0.1 millilitre raises a pale wheal. If fluid leaks or slips under the skin, the fractional dose is wasted. Training in the BCG style of injection, the right syringe and the correct site decide whether the policy dose becomes real immunity at that session.",
+   "say": "An infant session gives pentavalent vaccine, oral polio drops and a fractional inactivated polio dose together. Intradermal technique keeps a short bevel needle nearly flat on the skin so 0.1 millilitre raises a pale wheal. If fluid leaks or slips under the skin, the fractional dose is wasted. Training in the BCG style of injection, the right syringe and the correct site decide whether the policy dose becomes real immunity at that session.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n522-cm-polio-hepatitis-ipv.webp",
+    "alt": "Infant receiving pentavalent vaccine, oral polio drops and fractional intradermal polio vaccine",
+    "caption": "Pentavalent vaccine, oral polio vaccine and fractional intradermal polio vaccine are given at one infant session. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Schedule position in the Indian programme",
@@ -97,12 +152,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Birth OPV dose"},
-     {"id": "b", "label": "Infant visits: pentavalent plus bOPV"},
-     {"id": "c", "label": "Two fractional IPV doses added"},
-     {"id": "d", "label": "Boosters complete the wall"}
+     {
+      "id": "a",
+      "label": "Birth OPV dose"
+     },
+     {
+      "id": "b",
+      "label": "Infant visits: pentavalent plus bOPV"
+     },
+     {
+      "id": "c",
+      "label": "Two fractional IPV doses added"
+     },
+     {
+      "id": "d",
+      "label": "Boosters complete the wall"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -111,12 +191,27 @@
    "say": "Sore arm, mild fever, no paralysis risk. Where immunity is compromised at home, killed vaccine answers the question live vaccine cannot.",
    "vis": {
     "kind": "table",
-    "cols": ["Question", "Answer"],
+    "cols": [
+     "Question",
+     "Answer"
+    ],
     "rows": [
-     ["Can it cause polio", "No, virus is inactivated"],
-     ["Common reactions", "Local pain, low fever"],
-     ["Immunodeficient child", "Preferred over live OPV"],
-     ["Contraindication", "Severe component allergy"]
+     [
+      "Can it cause polio",
+      "No, virus is inactivated"
+     ],
+     [
+      "Common reactions",
+      "Local pain, low fever"
+     ],
+     [
+      "Immunodeficient child",
+      "Preferred over live OPV"
+     ],
+     [
+      "Contraindication",
+      "Severe component allergy"
+     ]
     ]
    }
   },
@@ -126,12 +221,27 @@
    "say": "Six antigens, one prick in private rooms; price and vial volume argue back in public planning. Same antigens, different packaging logic.",
    "vis": {
     "kind": "table",
-    "cols": ["Factor", "Programme weight"],
+    "cols": [
+     "Factor",
+     "Programme weight"
+    ],
     "rows": [
-     ["Injections per visit", "Fewer with combinations"],
-     ["Price per dose", "Higher for combinations"],
-     ["Cold chain volume", "Larger combination vials"],
-     ["Antigen coverage", "Identical targets"]
+     [
+      "Injections per visit",
+      "Fewer with combinations"
+     ],
+     [
+      "Price per dose",
+      "Higher for combinations"
+     ],
+     [
+      "Cold chain volume",
+      "Larger combination vials"
+     ],
+     [
+      "Antigen coverage",
+      "Identical targets"
+     ]
     ]
    }
   },
@@ -142,12 +252,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Wild serotype certified gone"},
-     {"id": "b", "label": "Matching OPV type withdrawn"},
-     {"id": "c", "label": "IPV maintained universally"},
-     {"id": "d", "label": "Surveillance and containment audited"}
+     {
+      "id": "a",
+      "label": "Wild serotype certified gone"
+     },
+     {
+      "id": "b",
+      "label": "Matching OPV type withdrawn"
+     },
+     {
+      "id": "c",
+      "label": "IPV maintained universally"
+     },
+     {
+      "id": "d",
+      "label": "Surveillance and containment audited"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -156,12 +291,72 @@
    "say": "Drops won the war here; the injection guards the peace against rare vaccine risks and imports. Explain both honours, attendance follows understanding.",
    "vis": {
     "kind": "table",
-    "cols": ["Parent worry", "Response"],
+    "cols": [
+     "Parent worry",
+     "Response"
+    ],
     "rows": [
-     ["Why injection now", "Type 2 cover after OPV switch"],
-     ["Are drops unsafe", "Drops eradicated polio in India"],
-     ["Extra visit needed", "Given at existing infant visits"],
-     ["If a dose is missed", "Catch up at next contact"]
+     [
+      "Why injection now",
+      "Type 2 cover after OPV switch"
+     ],
+     [
+      "Are drops unsafe",
+      "Drops eradicated polio in India"
+     ],
+     [
+      "Extra visit needed",
+      "Given at existing infant visits"
+     ],
+     [
+      "If a dose is missed",
+      "Catch up at next contact"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: IPV holds killed virus of all three types, cannot replicate, and never causes vaccine associated paralysis. Fractional IPV is 0.1 ml, one fifth of a full dose, injected intradermally to raise a pale bleb, with two infant doses stretching supply. Blood immunity after IPV blocks paralysis strongly, yet gut immunity stays weaker than after OPV, so silent shedding remains possible.",
+   "say": "High-yield for the exam: IPV holds killed virus of all three types, cannot replicate, and never causes vaccine associated paralysis. Fractional IPV is 0.1 ml, one fifth of a full dose, injected intradermally to raise a pale bleb, with two infant doses stretching supply. Blood immunity after IPV blocks paralysis strongly, yet gut immunity stays weaker than after OPV, so silent shedding remains possible.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "IPV virus state",
+      "Killed virus, all three types"
+     ],
+     [
+      "IPV paralysis risk",
+      "No vaccine associated paralytic poliomyelitis"
+     ],
+     [
+      "Fractional dose volume",
+      "0.1 ml, one fifth full dose"
+     ],
+     [
+      "Fractional dose route",
+      "Intradermal injection raising pale bleb"
+     ],
+     [
+      "Fractional doses scheduled",
+      "Two doses during infancy"
+     ],
+     [
+      "IPV blood immunity",
+      "Strong protection against paralysis"
+     ],
+     [
+      "IPV gut immunity",
+      "Weaker than oral vaccine immunity"
+     ],
+     [
+      "Preferred in immunodeficiency",
+      "IPV safer than live OPV"
+     ]
     ]
    }
   }

@@ -1,0 +1,366 @@
+{
+ "gen": "hand",
+ "minutes": 8,
+ "module": "spu-abg-physiology",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e pulmonary physiology and arterial blood gas chapters",
+  "ATS ERS spirometry and DLCO standards"
+ ],
+ "steps": [
+  {
+   "say": "Arterial blood gases read the lung as a gas exchanger. Alveolar ventilation sets carbon dioxide while alveolar capillary diffusion sets oxygen. Everything else is compensation and acid base maths.",
+   "tx": "**Arterial blood gas** (a blood test of oxygen, carbon dioxide and acidity) reads the lung as a gas exchanger, with **alveolar ventilation** (air movement into tiny air sacs) fixing carbon dioxide and **diffusion** (gas crossing the air blood barrier) fixing oxygen. Read pH first, then carbon dioxide, then bicarbonate to name the primary disorder before judging compensation.",
+   "vis": {
+    "cols": [
+     "Variable",
+     "Normal arterial value",
+     "Primary control"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "pH",
+      "7.35 to 7.45",
+      "Acid base balance"
+     ],
+     [
+      "PaCO2",
+      "35 to 45 mmHg",
+      "Alveolar ventilation"
+     ],
+     [
+      "PaO2",
+      "80 to 100 mmHg",
+      "Diffusion and ventilation"
+     ],
+     [
+      "Bicarbonate",
+      "22 to 26 mmol per L",
+      "Kidney buffering"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The alveolar gas equation predicts what alveolar oxygen should be. Subtracting arterial oxygen gives the alveolar arterial gradient, which widens in diffusion and shunt defects.",
+   "tx": "The **alveolar gas equation** (a bedside formula for expected alveolar oxygen) predicts alveolar oxygen from inspired oxygen minus carbon dioxide divided by the respiratory quotient. Subtracting measured arterial oxygen gives the **A-a gradient** (the alveolar arterial oxygen gap), which stays near **10** mmHg at sea level and widens in **diffusion** and **shunt** disease.",
+   "vis": {
+    "edges": [
+     [
+      "pio2",
+      "paco2"
+     ],
+     [
+      "paco2",
+      "pao2"
+     ],
+     [
+      "pao2",
+      "gradient"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pio2",
+      "label": "Inspired oxygen"
+     },
+     {
+      "id": "paco2",
+      "label": "Divide CO2 by R"
+     },
+     {
+      "id": "pao2",
+      "label": "Alveolar O2 predicted"
+     },
+     {
+      "id": "gradient",
+      "label": "Minus arterial O2 = A-a gap"
+     }
+    ]
+   }
+  },
+  {
+   "say": "The anion gap finds hidden acid. Subtract sodium from chloride plus bicarbonate. A high gap means lactate, ketones, renal failure, toxins or sepsis are adding acid.",
+   "tx": "The **anion gap** (sodium minus chloride plus bicarbonate) unmasks unmeasured acids, and a value above **12** mmol per L points to **lactic acidosis**, **ketoacidosis**, renal failure or toxins. Albumin correction matters because low albumin shrinks the gap falsely, so add **2.5** per gram per decilitre below 4 before judging the result.",
+   "vis": {
+    "cols": [
+     "Gap result",
+     "Likely cause",
+     "Confirm with"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Above 12",
+      "Lactate, ketones, toxins",
+      "Lactate, ketone, osmolarity"
+     ],
+     [
+      "Corrected for albumin",
+      "True high gap",
+      "Recalculate at bedside"
+     ],
+     [
+      "Normal gap",
+      "Diarrhoea, renal tubular acidosis",
+      "Chloride and urine pH"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Respiratory acidosis means hypercapnia from hypoventilation, respiratory alkalosis means hypocapnia from hyperventilation, and metabolic disorders move bicarbonate first.",
+   "tx": "**Respiratory acidosis** (carbon dioxide retention from hypoventilation) and **respiratory alkalosis** (carbon dioxide loss from hyperventilation) are named by the carbon dioxide direction, while **metabolic acidosis** or **alkalosis** moves bicarbonate first. The pH direction follows the primary disorder, and **compensation** (the body response) is incomplete, so pH never normalises fully.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "High CO2, low pH",
+      "Acute rise 10 mmHg drops pH 0.08",
+      "Chronic rise 10 mmHg drops pH 0.03"
+     ],
+     "title": "Respiratory acidosis"
+    },
+    "right": {
+     "points": [
+      "Low CO2, high pH",
+      "Acute fall 10 mmHg raises pH 0.08",
+      "Chronic fall 10 mmHg raises pH 0.03"
+     ],
+     "title": "Respiratory alkalosis"
+    }
+   }
+  },
+  {
+   "say": "Ventilation perfusion mismatch and shunt spoil oxygen but not much carbon dioxide, because carbon dioxide diffuses twenty times faster across the alveolar membrane.",
+   "tx": "**Ventilation perfusion mismatch** (air and blood reaching different units) and **shunt** (blood bypassing ventilated units) lower oxygen far more than carbon dioxide, since carbon dioxide diffuses about **20** times faster across the alveolar membrane. Incoming **overventilation** keeps carbon dioxide normal or low until severe disease or fatigue, so a normal carbon dioxide never excludes severe hypoxaemia.",
+   "vis": {
+    "cols": [
+     "Defect",
+     "Oxygen effect",
+     "Carbon dioxide effect"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Mismatch",
+      "Lowers PaO2",
+      "Stays normal early"
+     ],
+     [
+      "Shunt",
+      "Severe refractory drop",
+      "Rises only late"
+     ],
+     [
+      "Hypoventilation",
+      "Lowers both",
+      "Raises CO2 early"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Oxygen delivery is cardiac output times arterial content, and ferritin of haemoglobin matters. Packed red cell transfusion asks content, cardiac failure asks output, so they are not interchangeable.",
+   "tx": "**Oxygen delivery** (oxygen reaching tissues per minute) equals **cardiac output** multiplied by **arterial oxygen content** (oxygen per decilitre of blood), and content depends on **haemoglobin** plus dissolved oxygen. Transfuse for low content and support output for low flow, because each fixes a different limb of delivery and the wrong fix leaves tissue hypoxia unchanged.",
+   "vis": {
+    "edges": [
+     [
+      "co",
+      "do2"
+     ],
+     [
+      "content",
+      "do2"
+     ],
+     [
+      "do2",
+      "tissues"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "co",
+      "label": "Cardiac output"
+     },
+     {
+      "id": "content",
+      "label": "Arterial O2 content"
+     },
+     {
+      "id": "do2",
+      "label": "Oxygen delivery"
+     },
+     {
+      "id": "tissues",
+      "label": "Tissue uptake"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Winter formula predicts the respiratory compensation for metabolic acidosis. A carbon dioxide outside that range means a second disorder is hiding beside the first.",
+   "tx": "**Winter formula** (expected carbon dioxide for metabolic acidosis) predicts respiratory compensation as carbon dioxide equals **1.5** times bicarbonate plus **8**, with a band of **2** either side. A measured value outside that band signals a mixed disorder, and **delta ratio** (excess gap over fall in bicarbonate) separates a pure acid from combined acid and alkali states.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "CO2 inside band",
+      "Pure metabolic acidosis",
+      "Observe compensation"
+     ],
+     "title": "Inside Winter band"
+    },
+    "right": {
+     "points": [
+      "CO2 below band",
+      "Added respiratory alkalosis",
+      "CO2 above band means acidosis"
+     ],
+     "title": "Outside Winter band"
+    }
+   }
+  },
+  {
+   "say": "Diffusing capacity measures gas transfer across the alveolar membrane. Low values favour emphysema, fibrosis and anaemia, high values favour haemorrhage, left to right shunts and raised blood volume.",
+   "tx": "**DLCO** (diffusing capacity of the lung for carbon monoxide) measures gas transfer across the alveolar membrane and falls in **emphysema**, **fibrosis**, pulmonary vascular disease and **anaemia**. It rises in **alveolar haemorrhage**, left to right shunts and raised blood volume, and the **KCO** (DLCO per unit alveolar volume) corrects for lung size when spirometry is abnormal.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Suggested disease",
+     "Next test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Low DLCO, low volumes",
+      "Interstitial fibrosis",
+      "HRCT chest"
+     ],
+     [
+      "Low DLCO, high volumes",
+      "Emphysema",
+      "CT and spirometry"
+     ],
+     [
+      "High DLCO",
+      "Haemorrhage or shunt",
+      "Blood and echo study"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Spirometry separates obstructive from restrictive disease and reversibility is judged after bronchodilator. Lung volumes confirm restriction and total lung capacity is the volume that matters most.",
+   "tx": "**Spirometry** (breathing test of forced volumes) separates **obstructive** disease with a low **FEV1** to FVC ratio from **restrictive** disease with small volumes and a preserved ratio. **Reversibility** (improvement after bronchodilator) helps in asthma, but does not exclude chronic obstructive disease, and **total lung capacity** decides true restriction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Low FEV1 to FVC ratio",
+      "Chronic obstructive disease, asthma",
+      "Bronchodilator response varies"
+     ],
+     "title": "Obstructive pattern"
+    },
+    "right": {
+     "points": [
+      "Small volumes, ratio kept",
+      "Fibrosis, scoliosis, obesity",
+      "Total lung capacity reduced"
+     ],
+     "title": "Restrictive pattern"
+    }
+   }
+  },
+  {
+   "say": "Always verify the gas sample before interpreting it. Air bubbles, late analysis and wrong temperature all distort the numbers, and a pre heparinised syringe is the standard container.",
+   "tx": "Sample errors mimic disease, so inspect the **preheparinised syringe** (a gas-tight syringe with anticoagulant), eject air bubbles at once, analyse within **15** minutes and record temperature, because delay lets cells consume oxygen and carbon dioxide rises. Venous blood underestimates oxygen and overestimates carbon dioxide, so arterial sampling stays mandatory for hypoxaemia and ventilation decisions.",
+   "vis": {
+    "edges": [
+     [
+      "draw",
+      "eject"
+     ],
+     [
+      "eject",
+      "analyse"
+     ],
+     [
+      "analyse",
+      "interpret"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "draw",
+      "label": "Arterial draw, no air"
+     },
+     {
+      "id": "eject",
+      "label": "Eject bubbles, ice or fast run"
+     },
+     {
+      "id": "analyse",
+      "label": "Analyse within 15 min"
+     },
+     {
+      "id": "interpret",
+      "label": "Correct for temperature"
+     }
+    ]
+   }
+  },
+  {
+   "say": "The six most tested physiology facts are the normal values, the alveolar gas equation, Winter formula, DLCO patterns, spirometry ratios and the anion gap.",
+   "tx": "Remember the normal arterial values, the alveolar gas equation, **Winter formula**, **DLCO** direction patterns, spirometry ratio rules and **anion gap** correction, since the paper repeatedly converts these five bedside calculations into clinical vignettes. Compensation never normalises pH, and oxygen delivery needs both flow and content to stay intact.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Value",
+     "Use"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "PaCO2 normal",
+      "35 to 45 mmHg",
+      "Ventilation readout"
+     ],
+     [
+      "A-a gradient",
+      "Near 10 mmHg",
+      "Diffusion and shunt"
+     ],
+     [
+      "Winter formula",
+      "1.5 times bicarbonate plus 8",
+      "Mixed disorder check"
+     ],
+     [
+      "Anion gap",
+      "Above 12 is high",
+      "Unmeasured acid"
+     ],
+     [
+      "DLCO low",
+      "Fibrosis, emphysema, anaemia",
+      "Membrane disease"
+     ],
+     [
+      "DLCO high",
+      "Haemorrhage, shunt, obesity",
+      "Blood filled alveoli"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-pulmonology",
+ "title": "ABG and pulmonary physiology for the super speciality exam",
+ "v": 1
+}

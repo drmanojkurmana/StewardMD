@@ -21,8 +21,21 @@
    "say": "Domains fold independently and combine into modular proteins with disordered linkers folding on binding. Myoglobin versus haemoglobin teaches tertiary similarity meeting quaternary invention as a pair.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Myoglobin (tertiary only)", "points": ["One chain, one heme", "Hyperbolic oxygen curve", "Muscle store and buffer"]},
-    "right": {"title": "Haemoglobin (quaternary)", "points": ["Alpha2 beta2, four hemes", "Sigmoid cooperative curve", "T to R switching, BPG pocket"]
+    "left": {
+     "title": "Myoglobin (tertiary only)",
+     "points": [
+      "One chain, one heme",
+      "Hyperbolic oxygen curve",
+      "Muscle store and buffer"
+     ]
+    },
+    "right": {
+     "title": "Haemoglobin (quaternary)",
+     "points": [
+      "Alpha2 beta2, four hemes",
+      "Sigmoid cooperative curve",
+      "T to R switching, BPG pocket"
+     ]
     }
    }
   },
@@ -31,12 +44,27 @@
    "say": "Quaternary association creates cooperativity and allosteric regulation from haemoglobin to proteasome. Transthyretin dissociation seeds amyloid and is treated by the stabiliser tafamidis therapeutically.",
    "vis": {
     "kind": "table",
-    "cols": ["Quaternary gain", "Exemplar"],
+    "cols": [
+     "Quaternary gain",
+     "Exemplar"
+    ],
     "rows": [
-     ["Cooperativity and allostery", "Haemoglobin T/R, ATCase"],
-     ["Active site at interfaces", "HIV protease dimer (drug target)"],
-     ["Stability through association", "Transthyretin (tafamidis stabilises tetramer)"],
-     ["Combinatorial diversity", "Antibodies, haemoglobin variants HbA/A2/F"]
+     [
+      "Cooperativity and allostery",
+      "Haemoglobin T/R, ATCase"
+     ],
+     [
+      "Active site at interfaces",
+      "HIV protease dimer (drug target)"
+     ],
+     [
+      "Stability through association",
+      "Transthyretin (tafamidis stabilises tetramer)"
+     ],
+     [
+      "Combinatorial diversity",
+      "Antibodies, haemoglobin variants HbA/A2/F"
+     ]
     ]
    }
   },
@@ -50,8 +78,21 @@
    "say": "Salting out with ammonium sulfate fractionates proteins by hydrophobicity without fully denaturing most enzymes. Isoelectric precipitation exploits zero net charge at pI for recovery in proteomics.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Salting in (low salt)", "points": ["Charges shielded by ions", "Solubility rises", "Physiological saline logic"]},
-    "right": {"title": "Salting out (high ammonium sulfate)", "points": ["Water competed away", "Hydrophobics precipitate first, albumin last", "Reversible fractionation"]
+    "left": {
+     "title": "Salting in (low salt)",
+     "points": [
+      "Charges shielded by ions",
+      "Solubility rises",
+      "Physiological saline logic"
+     ]
+    },
+    "right": {
+     "title": "Salting out (high ammonium sulfate)",
+     "points": [
+      "Water competed away",
+      "Hydrophobics precipitate first, albumin last",
+      "Reversible fractionation"
+     ]
     }
    }
   },
@@ -62,12 +103,82 @@
     "kind": "flow",
     "title": "Hierarchy in one ascent",
     "nodes": [
-     {"id": "p", "label": "Primary: sequence"},
-     {"id": "s", "label": "Secondary: helix and sheet (H-bonds)"},
-     {"id": "t", "label": "Tertiary: domains folded (hydrophobic core)"},
-     {"id": "q", "label": "Quaternary: subunits cooperate"}
+     {
+      "id": "p",
+      "label": "Primary: sequence"
+     },
+     {
+      "id": "s",
+      "label": "Secondary: helix and sheet (H-bonds)"
+     },
+     {
+      "id": "t",
+      "label": "Tertiary: domains folded (hydrophobic core)"
+     },
+     {
+      "id": "q",
+      "label": "Quaternary: subunits cooperate"
+     }
     ],
-    "edges": [["p", "s"], ["s", "t"], ["t", "q"]]
+    "edges": [
+     [
+      "p",
+      "s"
+     ],
+     [
+      "s",
+      "t"
+     ],
+     [
+      "t",
+      "q"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The hydrophobic effect drives tertiary folding by burying nonpolar side chains. Disulfide bonds are the strongest stabilising bonds, followed by ionic bonds, hydrogen bonds and van der Waals forces. Denaturation disrupts tertiary and secondary structure but never breaks peptide bonds. Myoglobin stores oxygen in muscle, whereas haemoglobin transports it cooperatively in blood.",
+   "say": "High-yield for the exam. The hydrophobic effect drives tertiary folding by burying nonpolar side chains. Disulfide bonds are the strongest stabilising bonds, followed by ionic bonds, hydrogen bonds and van der Waals forces. Denaturation disrupts tertiary and secondary structure but never breaks peptide bonds. Myoglobin stores oxygen in muscle, whereas haemoglobin transports it cooperatively in blood.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Main folding driver",
+      "Hydrophobic effect buries nonpolar residues"
+     ],
+     [
+      "Strongest stabilising bond",
+      "Covalent disulfide bond"
+     ],
+     [
+      "Myoglobin curve",
+      "Hyperbolic, monomeric oxygen store"
+     ],
+     [
+      "Haemoglobin curve",
+      "Sigmoid, cooperative tetramer"
+     ],
+     [
+      "Denaturation spares",
+      "Primary sequence and peptide bonds"
+     ],
+     [
+      "Salting out",
+      "High ammonium sulfate precipitates proteins"
+     ],
+     [
+      "Isoelectric point",
+      "Zero net charge, lowest solubility"
+     ],
+     [
+      "Cryo electron microscopy",
+      "Near atomic structure, membrane proteins"
+     ]
+    ]
    }
   }
  ],

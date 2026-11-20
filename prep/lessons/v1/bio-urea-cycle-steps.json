@@ -21,13 +21,37 @@
    "say": "Carbamoyl phosphate synthetase one spends two ATP and absolutely requires N-acetylglutamate. Ornithine transcarbamoylase then makes citrulline. Without the activator the cycle idles despite abundant ammonia.",
    "vis": {
     "kind": "table",
-    "cols": ["Step (enzyme)", "Place", "Energy or activator"],
+    "cols": [
+     "Step (enzyme)",
+     "Place",
+     "Energy or activator"
+    ],
     "rows": [
-     ["CPS-I makes carbamoyl phosphate", "Mitochondria", "2 ATP, NAG essential"],
-     ["OTC makes citrulline", "Mitochondria", "Ornithine consumed, regenerated later"],
-     ["Argininosuccinate synthetase", "Cytosol", "ATP to AMP (2 bonds), aspartate in"],
-     ["Argininosuccinate lyase", "Cytosol", "Fumarate out to TCA"],
-     ["Arginase makes urea", "Cytosol", "Ornithine regenerated, manganese"]
+     [
+      "CPS-I makes carbamoyl phosphate",
+      "Mitochondria",
+      "2 ATP, NAG essential"
+     ],
+     [
+      "OTC makes citrulline",
+      "Mitochondria",
+      "Ornithine consumed, regenerated later"
+     ],
+     [
+      "Argininosuccinate synthetase",
+      "Cytosol",
+      "ATP to AMP (2 bonds), aspartate in"
+     ],
+     [
+      "Argininosuccinate lyase",
+      "Cytosol",
+      "Fumarate out to TCA"
+     ],
+     [
+      "Arginase makes urea",
+      "Cytosol",
+      "Ornithine regenerated, manganese"
+     ]
     ]
    }
   },
@@ -38,12 +62,37 @@
     "kind": "flow",
     "title": "Krebs bicycle link",
     "nodes": [
-     {"id": "fum", "label": "Fumarate leaves cycle"},
-     {"id": "oaa", "label": "Malate to oxaloacetate (NADH)"},
-     {"id": "asp", "label": "Aspartate by transamination"},
-     {"id": "back", "label": "Aspartate re-enters urea cycle"}
+     {
+      "id": "fum",
+      "label": "Fumarate leaves cycle"
+     },
+     {
+      "id": "oaa",
+      "label": "Malate to oxaloacetate (NADH)"
+     },
+     {
+      "id": "asp",
+      "label": "Aspartate by transamination"
+     },
+     {
+      "id": "back",
+      "label": "Aspartate re-enters urea cycle"
+     }
     ],
-    "edges": [["fum", "oaa"], ["oaa", "asp"], ["asp", "back"]]
+    "edges": [
+     [
+      "fum",
+      "oaa"
+     ],
+     [
+      "oaa",
+      "asp"
+     ],
+     [
+      "asp",
+      "back"
+     ]
+    ]
    }
   },
   {
@@ -51,8 +100,21 @@
    "say": "Each urea costs four high energy bonds, partly offset by fumarate NADH, so net cost approaches one and a half. Protein load induces cycle enzymes and raises the activator, matching disposal to dietary nitrogen.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Gross cost per urea", "points": ["CPS-I: 2 ATP to ADP", "Synthetase: ATP to AMP (counts 2)", "Total 4 bonds spent"]},
-    "right": {"title": "Offset per urea", "points": ["Fumarate to OAA makes NADH", "About 2.5 ATP recovered", "Net about 1.5 bonds"]
+    "left": {
+     "title": "Gross cost per urea",
+     "points": [
+      "CPS-I: 2 ATP to ADP",
+      "Synthetase: ATP to AMP (counts 2)",
+      "Total 4 bonds spent"
+     ]
+    },
+    "right": {
+     "title": "Offset per urea",
+     "points": [
+      "Fumarate to OAA makes NADH",
+      "About 2.5 ATP recovered",
+      "Net about 1.5 bonds"
+     ]
     }
    }
   },
@@ -66,12 +128,77 @@
    "say": "Mitochondrial blocks present with low citrulline, cytosolic blocks accumulate intermediates, and arginase deficiency raises arginine with spasticity. The next lesson reads those patterns to name the block.",
    "vis": {
     "kind": "table",
-    "cols": ["Block site", "Citrulline pattern", "Extra flag"],
+    "cols": [
+     "Block site",
+     "Citrulline pattern",
+     "Extra flag"
+    ],
     "rows": [
-     ["CPS-I or NAGS (mitochondrial entry)", "Low", "Orotic low, carglumic acid helps NAGS"],
-     ["OTC (mitochondrial)", "Low", "Orotic HIGH (spill to pyrimidines)"],
-     ["Synthetase or lyase (cytosolic)", "High citrulline or ASA", "Arginine therapy helps"],
-     ["Arginase", "Arginine high", "Spasticity, fewer coma episodes"]
+     [
+      "CPS-I or NAGS (mitochondrial entry)",
+      "Low",
+      "Orotic low, carglumic acid helps NAGS"
+     ],
+     [
+      "OTC (mitochondrial)",
+      "Low",
+      "Orotic HIGH (spill to pyrimidines)"
+     ],
+     [
+      "Synthetase or lyase (cytosolic)",
+      "High citrulline or ASA",
+      "Arginine therapy helps"
+     ],
+     [
+      "Arginase",
+      "Arginine high",
+      "Spasticity, fewer coma episodes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Each urea costs four high energy phosphate bonds, partly offset by fumarate oxidation to about one and a half bonds net. Fumarate links the cycle to the Krebs cycle through oxaloacetate and aspartate. Mitochondrial blocks lower citrulline, while arginase deficiency raises arginine and causes spastic paraparesis.",
+   "say": "High-yield for the exam. Each urea costs four high energy phosphate bonds, partly offset by fumarate oxidation to about one and a half bonds net. Fumarate links the cycle to the Krebs cycle through oxaloacetate and aspartate. Mitochondrial blocks lower citrulline, while arginase deficiency raises arginine and causes spastic paraparesis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "First nitrogen source",
+      "Free ammonia enters carbamoyl phosphate"
+     ],
+     [
+      "Second nitrogen source",
+      "Aspartate donates second nitrogen"
+     ],
+     [
+      "Carbon source",
+      "Bicarbonate provides urea carbon"
+     ],
+     [
+      "Gross energy cost",
+      "Four high energy bonds per urea"
+     ],
+     [
+      "Net energy cost",
+      "About one and a half bonds after fumarate"
+     ],
+     [
+      "Krebs bicycle link",
+      "Fumarate to oxaloacetate to aspartate"
+     ],
+     [
+      "Cytosolic synthetase step",
+      "Citrulline plus aspartate, ATP to AMP"
+     ],
+     [
+      "Arginase defect clue",
+      "High arginine with spastic paraparesis"
+     ]
     ]
    }
   }

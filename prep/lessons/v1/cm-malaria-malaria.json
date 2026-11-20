@@ -24,12 +24,32 @@
    "say": "Anopheles culicifacies drives rural malaria in India. It breeds in clean irrigation channels and riverbed pools, biting indoors during evening and night hours.",
    "vis": {
     "kind": "table",
-    "cols": ["Vector parameter", "Characteristic in nature", "Programmatic implication"],
+    "cols": [
+     "Vector parameter",
+     "Characteristic in nature",
+     "Programmatic implication"
+    ],
     "rows": [
-     ["Primary habitat", "Rural agricultural belts", "Dominates rural transmission"],
-     ["Breeding sites", "Clean streams and irrigation canals", "Surges after monsoon rains"],
-     ["Feeding preference", "Zoophilic with opportunistic human bites", "Indoor resting allows IRS targeting"],
-     ["Insecticide status", "Widespread resistance to organochlorines", "Requires synthetic pyrethroid sprays"]
+     [
+      "Primary habitat",
+      "Rural agricultural belts",
+      "Dominates rural transmission"
+     ],
+     [
+      "Breeding sites",
+      "Clean streams and irrigation canals",
+      "Surges after monsoon rains"
+     ],
+     [
+      "Feeding preference",
+      "Zoophilic with opportunistic human bites",
+      "Indoor resting allows IRS targeting"
+     ],
+     [
+      "Insecticide status",
+      "Widespread resistance to organochlorines",
+      "Requires synthetic pyrethroid sprays"
+     ]
     ]
    }
   },
@@ -41,11 +61,19 @@
     "kind": "compare",
     "left": {
      "title": "Anopheles culicifacies (rural)",
-     "points": ["Breeds in clean riverbeds and canals", "Rural agricultural plain distribution", "Indoor rester in cattle sheds and huts"]
+     "points": [
+      "Breeds in clean riverbeds and canals",
+      "Rural agricultural plain distribution",
+      "Indoor rester in cattle sheds and huts"
+     ]
     },
     "right": {
      "title": "Anopheles stephensi (urban)",
-     "points": ["Breeds in overhead tanks and cisterns", "Towns, ports and building sites", "Adapts to artificial domestic water storage"]
+     "points": [
+      "Breeds in overhead tanks and cisterns",
+      "Towns, ports and building sites",
+      "Adapts to artificial domestic water storage"
+     ]
     }
    }
   },
@@ -55,11 +83,27 @@
    "say": "Annual parasite incidence measures confirmed cases per thousand population yearly. An incidence below one signals pre-elimination, while two or higher triggers intensive vector control.",
    "vis": {
     "kind": "table",
-    "cols": ["Endemicity strata", "API threshold", "Strategic action"],
+    "cols": [
+     "Endemicity strata",
+     "API threshold",
+     "Strategic action"
+    ],
     "rows": [
-     ["Category 1 (Elimination)", "API less than 1 per 1,000", "Case investigation and focal tracking"],
-     ["Category 2 (Pre-elimination)", "API between 1 and 2 per 1,000", "Active case search and targeted LLINs"],
-     ["Category 3 (Intensified control)", "API 2 or greater per 1,000", "Universal IRS rounds and mass LLIN coverage"]
+     [
+      "Category 1 (Elimination)",
+      "API less than 1 per 1,000",
+      "Case investigation and focal tracking"
+     ],
+     [
+      "Category 2 (Pre-elimination)",
+      "API between 1 and 2 per 1,000",
+      "Active case search and targeted LLINs"
+     ],
+     [
+      "Category 3 (Intensified control)",
+      "API 2 or greater per 1,000",
+      "Universal IRS rounds and mass LLIN coverage"
+     ]
     ]
    }
   },
@@ -70,11 +114,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Annual blood examination rate >= 10%"},
-     {"id": "b", "label": "Reliable denominator coverage confirmed"},
-     {"id": "c", "label": "Calculated API reflects true transmission"}
+     {
+      "id": "a",
+      "label": "Annual blood examination rate >= 10%"
+     },
+     {
+      "id": "b",
+      "label": "Reliable denominator coverage confirmed"
+     },
+     {
+      "id": "c",
+      "label": "Calculated API reflects true transmission"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -83,11 +145,27 @@
    "say": "Slide positivity rate reveals the percentage of examined slides containing parasites. The falciparum proportion determines antimalarial stockpiles because falciparum causes life-threatening complications.",
    "vis": {
     "kind": "table",
-    "cols": ["Surveillance index", "Mathematical formula", "Epidemiological value"],
+    "cols": [
+     "Surveillance index",
+     "Mathematical formula",
+     "Epidemiological value"
+    ],
     "rows": [
-     ["Slide Positivity Rate (SPR)", "(Total positive slides / Total examined) x 100", "Tracks transmission surges and outbreaks"],
-     ["Slide Falciparum Rate (SFR)", "(Falciparum positive slides / Total examined) x 100", "Measures burden of life-threatening species"],
-     ["Pf Percentage", "(Falciparum positive / Total positive) x 100", "Determines ACT drug supply logistics"]
+     [
+      "Slide Positivity Rate (SPR)",
+      "(Total positive slides / Total examined) x 100",
+      "Tracks transmission surges and outbreaks"
+     ],
+     [
+      "Slide Falciparum Rate (SFR)",
+      "(Falciparum positive slides / Total examined) x 100",
+      "Measures burden of life-threatening species"
+     ],
+     [
+      "Pf Percentage",
+      "(Falciparum positive / Total positive) x 100",
+      "Determines ACT drug supply logistics"
+     ]
     ]
    }
   },
@@ -110,11 +188,19 @@
     "kind": "compare",
     "left": {
      "title": "Adult mosquito control",
-     "points": ["Indoor residual spraying on walls", "Long-lasting insecticidal nets", "Thermal fogging during outbreaks"]
+     "points": [
+      "Indoor residual spraying on walls",
+      "Long-lasting insecticidal nets",
+      "Thermal fogging during outbreaks"
+     ]
     },
     "right": {
      "title": "Larval mosquito control",
-     "points": ["Temephos chemical larvicide", "Gambusia and Poecilia biological fish", "Covering overhead domestic tanks"]
+     "points": [
+      "Temephos chemical larvicide",
+      "Gambusia and Poecilia biological fish",
+      "Covering overhead domestic tanks"
+     ]
     }
    }
   },
@@ -125,11 +211,74 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Fortnightly household fever screening"},
-     {"id": "b", "label": "On-site blood smear and rapid test"},
-     {"id": "c", "label": "Immediate treatment and IHIP reporting"}
+     {
+      "id": "a",
+      "label": "Fortnightly household fever screening"
+     },
+     {
+      "id": "b",
+      "label": "On-site blood smear and rapid test"
+     },
+     {
+      "id": "c",
+      "label": "Immediate treatment and IHIP reporting"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Anopheles culicifacies is the main rural vector and Anopheles stephensi the main urban vector in India. Annual parasite incidence is confirmed cases per 1000 population per year. Annual blood examination rate must reach at least 10 percent. Slide positivity rate shows transmission intensity, while falciparum sequestration causes severe and cerebral malaria.",
+   "say": "Anopheles culicifacies is the main rural vector and Anopheles stephensi the main urban vector in India. Annual parasite incidence is confirmed cases per 1000 population per year. Annual blood examination rate must reach at least 10 percent. Slide positivity rate shows transmission intensity, while falciparum sequestration causes severe and cerebral malaria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rural malaria vector",
+      "Anopheles culicifacies breeding in clean water"
+     ],
+     [
+      "Urban malaria vector",
+      "Anopheles stephensi breeding in overhead tanks"
+     ],
+     [
+      "Annual parasite incidence",
+      "Confirmed cases per 1000 population yearly"
+     ],
+     [
+      "Elimination API category",
+      "Below 1 per 1000 population yearly"
+     ],
+     [
+      "Annual blood examination rate",
+      "Minimum 10 percent population examined yearly"
+     ],
+     [
+      "Slide positivity rate",
+      "Positive slides divided by slides examined"
+     ],
+     [
+      "Severe malaria mechanism",
+      "Falciparum cytoadherence and microvascular sequestration"
+     ],
+     [
+      "Larvivorous fish",
+      "Gambusia affinis and Poecilia reticulata used"
+     ]
+    ]
    }
   }
  ],

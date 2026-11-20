@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "module": "sgm-cardio-oncology-pregnancy",
+ "subject": "ss-general-medicine",
+ "title": "Cardio-oncology, Cardiac Tumours and Heart Disease in Pregnancy",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Cardio-oncology studies heart injury from cancer therapy. **Anthracycline cardiomyopathy** (heart muscle damage from doxorubicin) is cumulative and largely irreversible, while **trastuzumab dysfunction** (heart failure from HER2 blockade) is usually reversible after stopping the drug. **Fluoropyrimidine vasospasm** (artery spasm from 5-fluorouracil) causes angina without plaque. Heart disease in pregnancy (valve disease, pulmonary hypertension, aortopathy) needs prepregnancy counselling.",
+   "say": "Cardio-oncology looks at heart damage caused by cancer treatment. The anthracycline heart muscle injury builds up with total dose and often does not recover, while the trastuzumab heart failure often improves after the drug is held. Fluoropyrimidine drugs can spasm the coronary arteries and cause chest pain even when arteries look normal. Separately, heart diseases in pregnancy such as valve narrowing or pulmonary hypertension need planning before conception.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anthracycline injury",
+     "points": [
+      "Dose dependent and cumulative",
+      "Myocyte death and emptying defect",
+      "Often irreversible injury",
+      "Dexrazoxane protection considered"
+     ]
+    },
+    "right": {
+     "title": "Trastuzumab dysfunction",
+     "points": [
+      "Not clearly dose dependent",
+      "Contractile stunning without death",
+      "Often recovers after holding",
+      "Restarts after recovery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Risk rises with age over 65 years, prior chest radiation, prior heart disease and planned cumulative doxorubicin above **450 mg per m2**. **Baseline echocardiography** (heart ultrasound) with left ventricular ejection fraction tells the starting grade, and serial **global longitudinal strain** (muscle shortening measurement) catches subclinical injury earlier. **Natriuretic peptides** (blood heart stress markers) and high sensitivity troponin add prognostic value. Pregnancy risk scores use **modified World Health Organization class** to grade maternal danger.",
+   "say": "The risk climbs with older age and with prior chest radiation and with high total anthracycline dose and this is examined in viva examinations for revision. A baseline heart ultrasound with ejection fraction gives the starting record, and strain measurement detects injury before the fraction falls. Blood markers of heart stress and heart injury add useful warning. In pregnancy, the modified World Health Organization class grades the risk of death and guides advice about attempting pregnancy.",
+   "vis": null
+  },
+  {
+   "tx": "Anthracyclines kill myocytes through topoisomerase two beta inhibition and iron mediated oxidative stress. Trastuzumab blocks HER2 survival signalling in cardiomyocytes, so stressed cells stun and recover. **Five fluorouracil** (chemotherapy drug) injures endothelium and provokes vasospasm, while **immune checkpoint inhibitors** (PD1 and CTLA4 blockers) trigger T cell myocarditis. **Cardiac tumours** (primary heart growths) are rare, mostly myxoma, and behave differently from metastatic deposits.",
+   "say": "Anthracyclines damage heart muscle through iron driven oxidation and enzyme blockade, causing killed cells that do not heal. Trastuzumab removes survival signals, so cells stop contracting but often recover. Five fluorouracil injures the lining and spasm follows. The newer immune checkpoint drugs can trigger immune inflammation of the heart. True heart tumours are uncommon, and myxoma is the classic primary growth, whereas deposits from other organs are more frequent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Drug exposure"
+     },
+     {
+      "id": "b",
+      "label": "Myocyte or vessel injury"
+     },
+     {
+      "id": "c",
+      "label": "Dysfunction or spasm"
+     },
+     {
+      "id": "d",
+      "label": "Strain and biomarker rise"
+     },
+     {
+      "id": "e",
+      "label": "Hold drug, treat failure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exertional dyspnoea, orthopnoea, oedema and chest pain flag therapy related failure, while new murmurs and peripheral stigmata raise tumour suspicion. **Myxoma** (benign heart tumour) presents classically with positional dyspnoea, diastolic murmur and constitutional symptoms from interleukin six. **Fibroelastoma** (small frondy valve tumour) embolises to brain. In pregnancy, **peripartum cardiomyopathy** (heart failure around delivery) appears in the last month of pregnancy or within 5 months after delivery with ejection fraction below 45%.",
+   "say": "Breathlessness on effort and swelling and chest pain warn of heart failure during cancer therapy. A benign heart tumour called myxoma causes breathlessness that changes with posture, plus fever and joint aches. Tiny valve tumours can break off and stroke the brain. Around delivery, a distinct heart failure called peripartum cardiomyopathy appears late in pregnancy or in the months after birth with a clearly reduced ejection fraction.",
+   "vis": null
+  },
+  {
+   "tx": "Twelve lead electrocardiogram shows QT prolongation and conduction delays, and **transoesophageal echocardiography** (probe in oesophagus) is the gold standard for myxoma attachment. **Cardiac magnetic resonance** (magnetic heart scan) characterises tissue and is ideal for anthracycline fibrosis and myocarditis. **Coronary angiography** (catheter artery imaging) excludes atherosclerosis when 5-fluorouracil vasospasm is suspected. In pregnancy, **maternal echocardiography** (heart ultrasound) plus obstetric Doppler guides delivery timing.",
+   "say": "The electrocardiogram is marked by rhythm delays and QT prolongation. The probe in the gullet gives the best view of a suspected heart tumour. Magnetic resonance scanning is marked by scar and inflammation and is excellent for anthracycline injury. Catheter imaging of the coronary arteries excludes permanent plaque when spasm is suspected. In pregnancy, heart ultrasound together with obstetric Doppler decides how and when to deliver and this is examined in viva examinations for revision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Use",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Transoesophageal echo",
+      "Tumour diagnosis",
+      "Gold standard for myxoma"
+     ],
+     [
+      "Cardiac magnetic resonance",
+      "Fibrosis and myocarditis",
+      "Tissue characterisation"
+     ],
+     [
+      "Coronary angiography",
+      "Vasospasm workup",
+      "Excludes fixed plaque"
+     ],
+     [
+      "Maternal echocardiography",
+      "Pregnancy care",
+      "Times delivery safely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Heart failure follows guidelines with **angiotensin converting enzyme inhibitors** (heart afterload reducers) when not pregnant, beta blockers and mineralocorticoid antagonists, while **dexrazoxane** (iron chelator) protects during anthracycline therapy. Suspected vasospasm stops 5-fluorouracil and starts calcium channel blockers with nitrates. Myxoma needs prompt **surgical excision** (tumour removal) after coronary assessment. Peripartum cardiomyopathy uses hydralazine nitrates and bromocriptine in selected severe cases.",
+   "say": "Heart failure is treated like other failures, but some drugs are forbidden in pregnancy. An iron chelator called dexrazoxane can protect the heart during anthracycline treatment. If five fluorouracil spasm is suspected, the drug is stopped and calcium blockers with nitrates are given. A symptomatic heart tumour should be cut out after assessing the coronary arteries. Severe peripartum heart failure may need additional clot prevention in selected patients.",
+   "vis": null
+  },
+  {
+   "tx": "Pregnancy heart care is organised by **modified World Health Organization class I to IV**. Class IV (pulmonary hypertension, severe systemic dysfunction, severe symptomatic aortic stenosis) carries prohibitive risk and advised termination is discussed. **Low molecular weight heparin** (injectable blood thinner) covers mechanical valves, while warfarin is fetotoxic. Delivery is timed by vaginal birth for stable patients and caesarean for obstetric or severe cardiac reasons, with regional anaesthesia preferred.",
+   "say": "Heart disease in pregnancy is graded from class one to four. The highest class carries a very high risk of maternal death, so advising against pregnancy is appropriate. Mechanical heart valves need injected heparin because warfarin harms the fetus. Stable patients deliver vaginally with pain relief, while severe disease or obstetric reasons need caesarean delivery. Regional anaesthesia is generally preferred when feasible.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low risk classes I-II",
+     "points": [
+      "Vaginal birth usually safe",
+      "Regional anaesthesia preferred",
+      "Routine anticoagulation often unneeded",
+      "Close cardiology follow up"
+     ]
+    },
+    "right": {
+     "title": "High risk classes III-IV",
+     "points": [
+      "Tertiary centre delivery",
+      "Planned assisted second stage",
+      "Heparin for mechanical valves",
+      "Termination advised in class IV"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Checkpoint inhibitor myocarditis presents with heart block and ventricular tachycardia and needs urgent high dose steroids and temporary pacing. Radiation heart disease (pericardial constriction, valve fibrosis, coronary ostial disease) appears years after mediastinal radiotherapy. **Endocarditis** (valve infection) complicates prosthetic material and must be excluded in febrile cancer patients with murmur. Antenatal **valve intervention** (catheter repair) is reserved for severe symptomatic stenosis refractory to medical therapy.",
+   "say": "Immune checkpoint heart inflammation can cause heart block and dangerous fast rhythms, so high dose steroids and temporary pacing are needed urgently. Radiation to the chest causes heart constriction and valve scarring years later. Valve infection complicates prosthetic material and must be excluded. In pregnancy, catheter intervention on a tight valve is uncommon and only for severe symptoms not responding to medical care.",
+   "vis": null
+  },
+  {
+   "tx": "Anthracycline systolic failure without treatment carries high mortality, while early **strain guided therapy** (serial muscle shortening checks) improves recovery. Most trastuzumab dysfunction recovers, although recurrence on rechallenge occurs in a minority. Myxoma survivors need echo surveillance because rare recurrence happens. Peripartum cardiomyopathy recovers fully in about half of patients, with persistence predicting worse outcomes in subsequent pregnancies. Late radiation disease is progressive and needs lifelong echo and coronary surveillance.",
+   "say": "Anthracycline heart failure has poor outcomes without treatment, while early strain guided therapy improves chances. Most trastuzumab hearts recover, but a small number relapse when the drug restarts and this is examined in viva examinations for revision. After tumour surgery, regular heart ultrasounds watch for rare regrowth and this is examined in viva examinations for revision. Half of peripartum cardiomyopathy patients recover fully, and persistent weakness warns of danger in the next pregnancy and this is examined in viva examinations for revision. Radiation heart disease progresses slowly and needs lifelong watching.",
+   "vis": null
+  },
+  {
+   "tx": "Recent cardio-oncology guidance stresses **baseline strain surveillance** (pre treatment muscle shortening record), biomarker guided surveillance and dexrazoxane protection, while pregnancy guidance (**European Society of Cardiology 2024**) updates pulmonary hypertension thresholds and mechanical valve management. Pitfalls are missing QT prolongation before arsenic and ATRA therapy, continuing trastuzumab through symptomatic failure, and offering warfarin after the first trimester without counselling. Tumour traps include attributing myxoma embolism to endocarditis and forgetting metastatic disease dominates over primary tumours.",
+   "say": "Current guidance asks for strain surveillance and careful protection with iron chelators during anthracyclines. Pregnancy guidance updates pulmonary hypertension cutoffs and valve anticoagulation rules. Common traps include forgetting QT prolongation with arsenic therapy, pushing trastuzumab through poor heart function, and misreading tumour embolism as valve infection. Remember that deposits on the heart from other organs are far more common than true primary tumours.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** collects dose limits, strain rules, tumour signs and pregnancy classes. Anthracycline limits, dexrazoxane use, trastuzumab holds, myxoma eponyms and modified World Health Organization classes are the favourite theory and viva points. Pregnancy class IV prohibition and heparin for mechanical valves are repeated examination traps.",
+   "say": "This table gathers the dose limits and strain rules and tumour signs and pregnancy classes for quick revision and this is examined in viva examinations for revision. Anthracycline thresholds and dexrazoxane protection and trastuzumab holds are frequently examined. Myxoma positional symptoms and pregnancy class four prohibition are favourite viva points. Heparin for mechanical valves in pregnancy is a classic trap question.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Doxorubicin cumulative limit",
+      "450 mg per m2 caution zone"
+     ],
+     [
+      "Protective drug",
+      "Dexrazoxane with anthracycline"
+     ],
+     [
+      "Trastuzumab hold trigger",
+      "Symptomatic failure or LVEF drop"
+     ],
+     [
+      "Myxoma gold test",
+      "Transoesophageal echocardiography"
+     ],
+     [
+      "Peripartum definition",
+      "LVEF below 45 percent near delivery"
+     ],
+     [
+      "Pregnancy prohibitive class",
+      "Modified WHO class IV"
+     ],
+     [
+      "Mechanical valve cover",
+      "Low molecular weight heparin"
+     ],
+     [
+      "Checkpoint myocarditis care",
+      "High dose steroids urgently"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

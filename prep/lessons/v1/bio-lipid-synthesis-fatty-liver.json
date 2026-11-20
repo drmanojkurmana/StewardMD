@@ -10,12 +10,32 @@
    "say": "Steatosis means inflow and synthesis outrun oxidation and VLDL export for weeks. Bright liver and raised transaminases are consequences, not definitions. Imaging fat quantification defines the condition.",
    "vis": {
     "kind": "table",
-    "cols": ["Balance term", "Raises liver fat when", "Lowers liver fat when"],
+    "cols": [
+     "Balance term",
+     "Raises liver fat when",
+     "Lowers liver fat when"
+    ],
     "rows": [
-     ["Inflow (lipolysis, diet)", "Insulin resistance frees adipose fat", "Weight loss, insulin sensitivity"],
-     ["Lipogenesis", "Fructose, alcohol, insulin driven", "Fasting, AMP kinase active"],
-     ["Oxidation", "Blocked by alcohol NADH, CPT faults", "Exercise, fibrates (PPAR alpha)"],
-     ["VLDL export", "ApoB or choline failure traps fat", "Adequate protein and choline"]
+     [
+      "Inflow (lipolysis, diet)",
+      "Insulin resistance frees adipose fat",
+      "Weight loss, insulin sensitivity"
+     ],
+     [
+      "Lipogenesis",
+      "Fructose, alcohol, insulin driven",
+      "Fasting, AMP kinase active"
+     ],
+     [
+      "Oxidation",
+      "Blocked by alcohol NADH, CPT faults",
+      "Exercise, fibrates (PPAR alpha)"
+     ],
+     [
+      "VLDL export",
+      "ApoB or choline failure traps fat",
+      "Adequate protein and choline"
+     ]
     ]
    }
   },
@@ -26,12 +46,37 @@
     "kind": "flow",
     "title": "Coat failure traps fat",
     "nodes": [
-     {"id": "cho", "label": "Choline short"},
-     {"id": "pc", "label": "Phosphatidylcholine short"},
-     {"id": "vldl", "label": "VLDL export fails"},
-     {"id": "fat", "label": "Droplets swell hepatocytes"}
+     {
+      "id": "cho",
+      "label": "Choline short"
+     },
+     {
+      "id": "pc",
+      "label": "Phosphatidylcholine short"
+     },
+     {
+      "id": "vldl",
+      "label": "VLDL export fails"
+     },
+     {
+      "id": "fat",
+      "label": "Droplets swell hepatocytes"
+     }
     ],
-    "edges": [["cho", "pc"], ["pc", "vldl"], ["vldl", "fat"]]
+    "edges": [
+     [
+      "cho",
+      "pc"
+     ],
+     [
+      "pc",
+      "vldl"
+     ],
+     [
+      "vldl",
+      "fat"
+     ]
+    ]
    }
   },
   {
@@ -39,8 +84,21 @@
    "say": "Alcohol supplies lipogenic carbon, blocks oxidation through NADH, and injures export machinery. Steatosis reverses within weeks of abstinence if fibrosis has not supervened. AST above ALT with high GGT suggests alcoholic dominance.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Alcoholic fatty liver pattern", "points": ["AST above ALT (about 2:1)", "GGT high, MCV high", "Abstinence reverses early fat"]},
-    "right": {"title": "Metabolic (NAFLD) pattern", "points": ["ALT above AST early", "Central obesity, diabetes", "Weight loss reverses early fat"]
+    "left": {
+     "title": "Alcoholic fatty liver pattern",
+     "points": [
+      "AST above ALT (about 2:1)",
+      "GGT high, MCV high",
+      "Abstinence reverses early fat"
+     ]
+    },
+    "right": {
+     "title": "Metabolic (NAFLD) pattern",
+     "points": [
+      "ALT above AST early",
+      "Central obesity, diabetes",
+      "Weight loss reverses early fat"
+     ]
     }
    }
   },
@@ -54,12 +112,32 @@
    "say": "Valproate injures mitochondria, amiodarone mimics metabolic disease, and acute fatty liver of pregnancy links to fetal LCHAD defects. Classify steatosis by which balance term each drug attacks.",
    "vis": {
     "kind": "table",
-    "cols": ["Cause", "Term attacked", "Vesicle pattern"],
+    "cols": [
+     "Cause",
+     "Term attacked",
+     "Vesicle pattern"
+    ],
     "rows": [
-     ["Alcohol, fructose excess", "Synthesis up, oxidation down", "Macrovesicular"],
-     ["Valproate, tetracycline, Reye aspirin link", "Mitochondrial oxidation", "Microvesicular, liver failure"],
-     ["Choline deficiency (TPN)", "Export coat", "Macrovesicular, reversible"],
-     ["Acute fatty liver of pregnancy", "Fetal and placental oxidation", "Microvesicular, deliver"]
+     [
+      "Alcohol, fructose excess",
+      "Synthesis up, oxidation down",
+      "Macrovesicular"
+     ],
+     [
+      "Valproate, tetracycline, Reye aspirin link",
+      "Mitochondrial oxidation",
+      "Microvesicular, liver failure"
+     ],
+     [
+      "Choline deficiency (TPN)",
+      "Export coat",
+      "Macrovesicular, reversible"
+     ],
+     [
+      "Acute fatty liver of pregnancy",
+      "Fetal and placental oxidation",
+      "Microvesicular, deliver"
+     ]
     ]
    }
   },
@@ -70,12 +148,82 @@
     "kind": "flow",
     "title": "Reversing the balance",
     "nodes": [
-     {"id": "in", "label": "Cut inflow (weight, alcohol, fructose)"},
-     {"id": "ox", "label": "Raise oxidation (exercise)"},
-     {"id": "out", "label": "Restore export (protein, choline)"},
-     {"id": "rev", "label": "Steatosis regresses"}
+     {
+      "id": "in",
+      "label": "Cut inflow (weight, alcohol, fructose)"
+     },
+     {
+      "id": "ox",
+      "label": "Raise oxidation (exercise)"
+     },
+     {
+      "id": "out",
+      "label": "Restore export (protein, choline)"
+     },
+     {
+      "id": "rev",
+      "label": "Steatosis regresses"
+     }
     ],
-    "edges": [["in", "rev"], ["ox", "rev"], ["out", "rev"]]
+    "edges": [
+     [
+      "in",
+      "rev"
+     ],
+     [
+      "ox",
+      "rev"
+     ],
+     [
+      "out",
+      "rev"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Fatty liver reflects excess fatty acid inflow and lipogenesis over oxidation and VLDL export. Choline deficiency impairs phosphatidylcholine for VLDL coat and traps triglyceride. Alcohol raises NADH, blocks oxidation and gives AST above ALT, often near two to one. Metabolic disease usually gives ALT above AST. Acute fatty liver of pregnancy needs urgent delivery. Weight loss of seven to ten percent reverses metabolic steatosis.",
+   "say": "High-yield for the exam. Fatty liver reflects excess fatty acid inflow and lipogenesis over oxidation and very low density lipoprotein export. Choline deficiency impairs phosphatidylcholine for very low density lipoprotein coat and traps triglyceride. Alcohol raises reduced nicotinamide adenine dinucleotide, blocks oxidation and gives aspartate transaminase above alanine transaminase, often near two to one. Metabolic disease usually gives alanine transaminase above aspartate transaminase. Acute fatty liver of pregnancy needs urgent delivery. Weight loss of seven to ten percent reverses metabolic steatosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Steatosis balance",
+      "Inflow plus lipogenesis exceeds oxidation plus export"
+     ],
+     [
+      "Key lipotrope",
+      "Choline enables phosphatidylcholine VLDL coat"
+     ],
+     [
+      "Alcohol mechanism",
+      "High NADH blocks fatty acid oxidation"
+     ],
+     [
+      "Alcohol enzyme pattern",
+      "AST above ALT, raised GGT"
+     ],
+     [
+      "Metabolic enzyme pattern",
+      "ALT usually above AST"
+     ],
+     [
+      "Microvesicular culprits",
+      "Valproate and tetracyclines injure mitochondria"
+     ],
+     [
+      "Pregnancy emergency",
+      "Acute fatty liver, hypoglycaemia, delivery needed"
+     ],
+     [
+      "Progression risk",
+      "Steatohepatitis, fibrosis, cirrhosis, hepatocellular carcinoma"
+     ]
+    ]
    }
   }
  ],

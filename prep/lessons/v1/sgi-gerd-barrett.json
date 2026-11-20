@@ -33,15 +33,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Document Barrett segment (Prague C and M)"},
-          {"id": "b", "label": "4-quadrant biopsies at 1-2 cm intervals"},
-          {"id": "c", "label": "Targeted biopsies from visible lesions"},
-          {"id": "d", "label": "Histopathology: grade dysplasia"}
+          {
+            "id": "a",
+            "label": "Document Barrett segment (Prague C and M)"
+          },
+          {
+            "id": "b",
+            "label": "4-quadrant biopsies at 1-2 cm intervals"
+          },
+          {
+            "id": "c",
+            "label": "Targeted biopsies from visible lesions"
+          },
+          {
+            "id": "d",
+            "label": "Histopathology: grade dysplasia"
+          }
         ],
         "edges": [
-          ["a", "b", "then"],
-          ["b", "c", "plus"],
-          ["c", "d", "sent for"]
+          [
+            "a",
+            "b",
+            "then"
+          ],
+          [
+            "b",
+            "c",
+            "plus"
+          ],
+          [
+            "c",
+            "d",
+            "sent for"
+          ]
         ]
       }
     },
@@ -51,15 +75,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "HGD or intramucosal adenocarcinoma"},
-          {"id": "b", "label": "EMR: resect visible lesion, stage tissue"},
-          {"id": "c", "label": "RFA: ablate remaining flat Barrett"},
-          {"id": "d", "label": "Surveillance: confirm complete eradication"}
+          {
+            "id": "a",
+            "label": "HGD or intramucosal adenocarcinoma"
+          },
+          {
+            "id": "b",
+            "label": "EMR: resect visible lesion, stage tissue"
+          },
+          {
+            "id": "c",
+            "label": "RFA: ablate remaining flat Barrett"
+          },
+          {
+            "id": "d",
+            "label": "Surveillance: confirm complete eradication"
+          }
         ],
         "edges": [
-          ["a", "b", "step 1"],
-          ["b", "c", "step 2"],
-          ["c", "d", "follow-up"]
+          [
+            "a",
+            "b",
+            "step 1"
+          ],
+          [
+            "b",
+            "c",
+            "step 2"
+          ],
+          [
+            "c",
+            "d",
+            "follow-up"
+          ]
         ]
       }
     },
@@ -116,12 +164,32 @@
       "say": "Reflux hypersensitivity, as defined by Rome IV, involves typical heartburn with acid exposure time below four percent, but with a positive symptom-reflux correlation. The symptom index must exceed fifty percent or the symptom association probability must exceed ninety-five percent for the correlation to be considered positive. Oesophageal sensitisation is the underlying mechanism, allowing physiological reflux to trigger symptoms. Neuromodulators that target visceral hypersensitivity are more effective than further acid suppression.",
       "vis": {
         "kind": "table",
-        "cols": ["Feature", "Reflux Hypersensitivity", "Functional Heartburn"],
+        "cols": [
+          "Feature",
+          "Reflux Hypersensitivity",
+          "Functional Heartburn"
+        ],
         "rows": [
-          ["AET", "Below 4.0%", "Below 4.0%"],
-          ["Symptom-reflux correlation", "Positive (SI > 50% or SAP > 95%)", "Negative"],
-          ["Endoscopy", "Normal", "Normal"],
-          ["Best treatment", "Neuromodulators", "Neuromodulators"]
+          [
+            "AET",
+            "Below 4.0%",
+            "Below 4.0%"
+          ],
+          [
+            "Symptom-reflux correlation",
+            "Positive (SI > 50% or SAP > 95%)",
+            "Negative"
+          ],
+          [
+            "Endoscopy",
+            "Normal",
+            "Normal"
+          ],
+          [
+            "Best treatment",
+            "Neuromodulators",
+            "Neuromodulators"
+          ]
         ]
       }
     },
@@ -131,17 +199,89 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Refractory heartburn on PPI"},
-          {"id": "b", "label": "Normal endoscopy, AET below 4.0%"},
-          {"id": "c", "label": "Symptom-reflux correlation?"},
-          {"id": "d", "label": "Reflux hypersensitivity"},
-          {"id": "e", "label": "Functional heartburn"}
+          {
+            "id": "a",
+            "label": "Refractory heartburn on PPI"
+          },
+          {
+            "id": "b",
+            "label": "Normal endoscopy, AET below 4.0%"
+          },
+          {
+            "id": "c",
+            "label": "Symptom-reflux correlation?"
+          },
+          {
+            "id": "d",
+            "label": "Reflux hypersensitivity"
+          },
+          {
+            "id": "e",
+            "label": "Functional heartburn"
+          }
         ],
         "edges": [
-          ["a", "b", "confirm"],
-          ["b", "c", "assess"],
-          ["c", "d", "Positive"],
-          ["c", "e", "Negative"]
+          [
+            "a",
+            "b",
+            "confirm"
+          ],
+          [
+            "b",
+            "c",
+            "assess"
+          ],
+          [
+            "c",
+            "d",
+            "Positive"
+          ],
+          [
+            "c",
+            "e",
+            "Negative"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Conclusive GERD is diagnosed by Lyon Consensus two point zero by Los Angeles Grade C or D erosive esophagitis, long-segment Barrett esophagus, peptic stricture, or acid exposure time exceeding six percent on pH monitoring. Barrett esophagus represents intestinal metaplasia with goblet cells, reported using Prague C and M criteria for circumferential and maximal extent. The Seattle biopsy protocol requires four-quadrant biopsies every one to two centimeters. Confirmed low-grade or high-grade dysplasia warrants endoscopic eradication therapy with radiofrequency ablation and endoscopic mucosal resection.",
+      "say": "Conclusive GERD is diagnosed by Lyon Consensus two point zero by Los Angeles Grade C or D erosive esophagitis, long-segment Barrett esophagus, peptic stricture, or acid exposure time exceeding six percent on pH monitoring. Barrett esophagus represents intestinal metaplasia with goblet cells, reported using Prague C and M criteria for circumferential and maximal extent. The Seattle biopsy protocol requires four-quadrant biopsies every one to two centimeters. Confirmed low-grade or high-grade dysplasia warrants endoscopic eradication therapy with radiofrequency ablation and endoscopic mucosal resection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Conclusive GERD criteria Lyon 2.0",
+            "LA Grade C/D esophagitis, Barrett esophagus, stricture, or AET over 6%"
+          ],
+          [
+            "Barrett esophagus histological hallmark",
+            "Specialized intestinal metaplasia with mucin-containing goblet cells"
+          ],
+          [
+            "Prague classification parameters",
+            "C value for circumferential extent, M value for maximal extent"
+          ],
+          [
+            "Seattle biopsy surveillance protocol",
+            "Four-quadrant biopsies every one to two centimetres throughout Barrett length"
+          ],
+          [
+            "Management of dysplastic Barrett esophagus",
+            "Endoscopic mucosal resection for nodular lesions plus radiofrequency ablation"
+          ],
+          [
+            "Non-dysplastic Barrett surveillance interval",
+            "Surveillance endoscopy every three to five years"
+          ],
+          [
+            "Surgical anti-reflux procedure gold standard",
+            "Laparoscopic Nissen three-hundred-sixty-degree complete fundoplication"
+          ]
         ]
       }
     }

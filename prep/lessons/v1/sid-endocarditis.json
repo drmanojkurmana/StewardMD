@@ -1,0 +1,312 @@
+{
+ "v": 1,
+ "module": "sid-endocarditis",
+ "title": "Infective endocarditis",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Fever with new murmur with embolic phenomena** in bacteraemia means endocarditis till proved otherwise. **Staph aureus leads** (acute, destructive); **viridans follows dental work** (subacute); **enterococci follow gut/GU procedures**; **CoNS marks prosthetic valves**. **IV drug use hits tricuspid** with septic lungs. **Rheumatic with prosthetic valves** with congenital lesions predispose. **Persistently positive cultures** despite antibiotics seal suspicion.",
+   "say": "Fever with new murmur and embolic phenomena in bacteraemia was reported to mean endocarditis till proved otherwise. Staph aureus was reported to lead as acute and destructive, while viridans followed dental work as subacute, enterococci followed gut and G U procedures, and coagulase-negative staph marked prosthetic valves. I V drug use was reported to hit tricuspid with septic lungs. Rheumatic with prosthetic valves and congenital lesions were reported to predispose. Persistently positive cultures despite antibiotics were reported to seal suspicion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bug",
+     "Pattern",
+     "Valve"
+    ],
+    "rows": [
+     [
+      "S. aureus",
+      "Acute, destructive",
+      "Any, IVDU"
+     ],
+     [
+      "Viridans",
+      "Subacute",
+      "Damaged native"
+     ],
+     [
+      "CoNS",
+      "Indolent",
+      "Prosthetic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Osler nodes (fingers) with Janeway (palms) with Roth spots (retina)** mark immunovascular phenomena. **Splinter haemorrhages with clubbing with splenomegaly** accumulate over weeks. **New regurgitant murmur** signals leaflet destruction; **changing murmurs mislead**. **Embolic stroke with splenic infarct with haematuria** map showers. **Fever with anaemia with raised ESR** completes the subacute picture.",
+   "say": "Osler nodes on fingers with Janeway lesions on palms and Roth spots in retina were reported to mark immunovascular phenomena. Splinter haemorrhages with clubbing and splenomegaly were reported to accumulate over weeks. New regurgitant murmur was reported to signal leaflet destruction, while changing murmurs misled. Embolic stroke with splenic infarct and haematuria were reported to map showers. Fever with anaemia and raised E S R were reported to complete the subacute picture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Means",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Osler, painful",
+      "Immune complex",
+      "Fingers"
+     ],
+     [
+      "Janeway, painless",
+      "Septic emboli",
+      "Palms"
+     ],
+     [
+      "Roth spots",
+      "Retinal bleed",
+      "Fundoscopy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Three blood culture sets before antibiotics** diagnose; positivity defines major criteria. **Echo (TOE beats TTE)** shows vegetations, abscess, fistula or new leak; **repeat TOE in a week** if suspicion persists. **Duke needs 2 major, or 1 major with 3 minor, or 5 minor** for definite disease. **PET-CT rescues prosthetic cases** with equivocal echo. **ECG PR prolongation** warns root abscess.",
+   "say": "Three blood culture sets before antibiotics were reported to diagnose, while positivity defined major criteria. Echo with T O E beating T T E was reported to show vegetations, abscess, fistula or new leak, while repeating T O E in a week was advised if suspicion persisted. Duke was reported to need two major, or one major with three minor, or five minor for definite disease. P E T-C T was reported to rescue prosthetic cases with equivocal echo. E C G P R prolongation was reported to warn root abscess.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever plus murmur"
+     },
+     {
+      "id": "b",
+      "label": "3 cultures plus TOE"
+     },
+     {
+      "id": "c",
+      "label": "Duke score plus treat"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MSS native valves take nafcillin, oxacillin or flucloxacillin 2 g 4-hourly for 4 to 6 weeks**; never add routine gentamicin. **MRSA native valves take vancomycin or daptomycin 8 to 10 mg/kg daily** for 4 to 6 weeks. **Viridans sensitive take penicillin or ceftriaxone 4 weeks** (2 weeks with gentamicin if uncomplicated). **HACEK takes ceftriaxone 4 weeks**. **Enterococcal needs ampicillin plus gentamicin** (or ceftriaxone) for synergy.",
+   "say": "M S S native valves were reported to take nafcillin, oxacillin or flucloxacillin two grams four-hourly for four to six weeks, while routine gentamicin was never added. M R S A native valves were reported to take vancomycin or daptomycin eight to ten milligrams per kilo daily for four to six weeks. Sensitive viridans was reported to take penicillin or ceftriaxone for four weeks, two with gentamicin if uncomplicated. H A C E K was reported to take ceftriaxone for four weeks. Enterococcal disease was reported to need ampicillin plus gentamicin or ceftriaxone for synergy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bug, valve",
+     "Regimen",
+     "Span"
+    ],
+    "rows": [
+     [
+      "MSSA native",
+      "Nafcillin 2 g q4h",
+      "4 to 6 weeks"
+     ],
+     [
+      "MRSA native",
+      "Vanco or dapto",
+      "4 to 6 weeks"
+     ],
+     [
+      "HACEK",
+      "Ceftriaxone",
+      "4 weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prosthetic MSSA adds gentamicin 2 weeks with rifampin 300 mg 8-hourly for 6 to 8 weeks**; **rifampin starts after clearance**, never first. **MRSA prosthetic swaps nafcillin for vancomycin** with the same backbone. **Fungal endocarditis needs surgery plus azoles**; drugs alone fail. **Right-sided uncomplicated MSSA may finish in 2 weeks**. **Treat the whole course IV**; oral steps down only in trials. **Monitor kidneys with hearing** on aminoglycosides.",
+   "say": "Prosthetic M S S A was reported to add gentamicin for two weeks with rifampin three hundred milligrams eight-hourly for six to eight weeks, while rifampin started after clearance, never first. M R S A prosthetic was reported to swap nafcillin for vancomycin with the same backbone. Fungal endocarditis was reported to need surgery plus azoles, while drugs alone failed. Right-sided uncomplicated M S S A was reported to finish in two weeks. Treating the whole course I V was advised, while oral step-down stayed trial-only. Kidneys with hearing were reported to need monitoring on aminoglycosides.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Add-on",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Prosthetic",
+      "Genta plus rifampin",
+      "Rif after clearance"
+     ],
+     [
+      "Fungal",
+      "Surgery plus azole",
+      "Drugs fail alone"
+     ],
+     [
+      "Right-sided simple",
+      "2 weeks may do",
+      "Selected only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Right-sided IVDU disease** presents with lungs, not murmurs; **shorter courses often cure**, surgery rarely needed. **Culture-negative usually means prior antibiotics**; test Bartonella, Coxiella and Tropheryma by serology and PCR. **Early prosthetic infection (within 2 months)** behaves like surgical site infection and operates early. **Late prosthetic mimics native** but relapses more. **Pregnancy prefers beta-lactams**; aminoglycosides threaten fetal ears.",
+   "say": "Right-sided I V D U disease was reported to present with lungs, not murmurs, while shorter courses often cured and surgery stayed rare. Culture-negative was reported to usually mean prior antibiotics, so Bartonella, Coxiella and Tropheryma were tested by serology and P C R. Early prosthetic infection within two months was reported to behave like surgical site infection and operate early. Late prosthetic was reported to mimic native but relapse more. Pregnancy was reported to prefer beta-lactams, while aminoglycosides threatened fetal ears.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Rule",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Right-sided IVDU",
+      "Lungs, short course",
+      "Rare surgery"
+     ],
+     [
+      "Culture-negative",
+      "Bartonella, Coxiella",
+      "Serology, PCR"
+     ],
+     [
+      "Early PVE",
+      "Within 2 months",
+      "Operates early"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Heart failure from valve destruction** tops surgical indications; **abscess, fistula or new heart block** follows. **Persistent bacteraemia past 7 to 10 days** despite optimal drugs operates. **Large mobile vegetations above 10 mm with emboli** (above 30 mm alone) go early. **Unstable prosthesis, fungal disease and resistant bugs** need knives. **Surgery saves most** with pressing indications; PVE benefits concentrate with complications.",
+   "say": "Heart failure from valve destruction was reported to top surgical indications, while abscess, fistula or new heart block followed. Persistent bacteraemia past seven to ten days despite optimal drugs was reported to operate. Large mobile vegetations above ten millimetres with emboli, and above thirty millimetres alone, were reported to go early. Unstable prosthesis, fungal disease and resistant bugs were reported to need knives. Surgery was reported to save most with pressing indications, while P V E benefits concentrated with complications.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Lesion",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Heart failure",
+      "Destroyed valve",
+      "Emergent"
+     ],
+     [
+      "Abscess, block",
+      "Root spread",
+      "Urgent"
+     ],
+     [
+      "Big vegetation",
+      "Above 10, 30 mm",
+      "Early"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stroke with meningitis picture** may be septic emboli, not primary meningitis; **scan before LP** when endocarditis is known. **Mycotic aneurysms** bleed weeks later; **angiography follows** persistent headache. **Kidney infarcts with haematuria** mimic glomerulonephritis. **Splenic abscess** needs drainage with prolonged drugs. **Anticoagulation usually pauses** after brain embolism, restarting per neurology. **Device leads extracted** in CIED infection with prolonged cover.",
+   "say": "Stroke with meningitis picture was reported to be septic emboli, not primary meningitis, while scanning before L P was advised when endocarditis was known. Mycotic aneurysms were reported to bleed weeks later, while angiography followed persistent headache. Kidney infarcts with haematuria were reported to mimic glomerulonephritis. Splenic abscess was reported to need drainage with prolonged drugs. Anticoagulation was usually reported to pause after brain embolism, restarting per neurology. Device leads were reported to be extracted in C I E D infection with prolonged cover.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Clue",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Brain embolus",
+      "Stroke in bacteremia",
+      "Scan first"
+     ],
+     [
+      "Mycotic aneurysm",
+      "Late bleed",
+      "Image head"
+     ],
+     [
+      "Splenic abscess",
+      "Left pain, fever",
+      "Drain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** single culture never excludes; 3 sets decide. **Starting antibiotics before cultures** blinds Duke scoring. **Normal TTE never rules out**; TOE follows. **Fever alone after dentistry** still earns cultures in at-risk valves. **Prophylaxis for every procedure** is outdated; high-risk dental only. **Discharging after fever settles** misses paravalvular spread; complete the course with echo follow-up.",
+   "say": "For the exam, these traps were tabulated as requested. Single culture was reported to never exclude, while three sets decided. Starting antibiotics before cultures was reported to blind Duke scoring. Normal T T E was reported to never rule out, while T O E followed. Fever alone after dentistry was reported to still earn cultures in at-risk valves. Prophylaxis for every procedure was reported as outdated, while high-risk dental only kept it. Discharging after fever settled was reported to miss paravalvular spread, while completing the course with echo follow-up was advised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "One culture",
+      "Misses",
+      "Three sets"
+     ],
+     [
+      "Normal TTE",
+      "Still IE",
+      "Do TOE"
+     ],
+     [
+      "Prophylaxis all",
+      "Outdated",
+      "Dental high-risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **3 culture sets then Duke 2 major** diagnoses; **TOE beats TTE**. **Janeway painless, Osler painful**; **Roth spots** fundoscopy. **Nafcillin 2 g 4-hourly 4 to 6 weeks** cures MSSA native; **dapto 8 to 10** covers MRSA. **Prosthetic adds genta plus rifampin 6 to 8 weeks**. **Heart failure, abscess, 10 mm vegetations** operate. **Prophylaxis dental high-risk only**.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. Three culture sets then Duke two major were reported to diagnose, while T O E beat T T E. Janeway painless and Osler painful were reported with Roth spots on fundoscopy. Nafcillin two grams four-hourly for four to six weeks was reported to cure M S S A native, while dapto eight to ten covered M R S A. Prosthetic was reported to add genta plus rifampin for six to eight weeks. Heart failure, abscess and ten millimetre vegetations were reported to operate. Prophylaxis dental high-risk only was advised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "3 sets, 2 major",
+      "Duke definite",
+      "Criteria"
+     ],
+     [
+      "Janeway vs Osler",
+      "Painless vs painful",
+      "Bedside"
+     ],
+     [
+      "Nafcillin 2 g q4h",
+      "4 to 6 weeks",
+      "Dose asked"
+     ],
+     [
+      "Operate HF, abscess",
+      "10 mm plus emboli",
+      "Surgery rule"
+     ],
+     [
+      "Prophylaxis",
+      "Dental high-risk",
+      "Policy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

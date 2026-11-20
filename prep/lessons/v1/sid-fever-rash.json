@@ -1,0 +1,324 @@
+{
+ "v": 1,
+ "module": "sid-fever-rash",
+ "title": "Fever with rash and lymphadenopathy",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Fever with rash and lymphadenopathy is a broad syndrome** where time decides outcome. All rickettsial illnesses look alike for **first 5 days** with fever, headache and myalgia, while distinguishing rash, eschar and organ findings appear later. **Untreated spotted fever mortality is 20 to 25 percent** versus 3 to 5 percent when treated early, so **empiric therapy never waits for serology**.",
+   "say": "Fever with rash and lymphadenopathy was reported as a broad syndrome where time decides outcome. All rickettsial illnesses were reported to look alike for the first five days with fever, headache and myalgia, while distinguishing rash, eschar and organ findings appear later. Untreated spotted fever mortality of twenty to twenty five percent versus three to five percent when treated early was reported, so empiric therapy was reported to never wait for serology.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Meaning",
+     "Next"
+    ],
+    "rows": [
+     [
+      "First 5 days",
+      "Fever, headache, myalgia",
+      "Treat on suspicion"
+     ],
+     [
+      "Later",
+      "Rash, eschar, organ injury",
+      "Confirms cause"
+     ],
+     [
+      "Untreated risk",
+      "20 to 25 percent fatal",
+      "Early therapy saves"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ticks spread spotted fever group disease**, while chiggers and mites spread scrub typhus with eschar. **Two rat-bite forms** differ by geography: streptobacillary disease in Americas and Europe, spirillary sodoku in Asia, plus foodborne Haverhill fever. **Kikuchi disease favours young women of Asian descent** with tender posterior cervical nodes, fever and maculopapular rash. Exposure history decides.",
+   "say": "Ticks were reported to spread spotted fever group disease, while chiggers and mites spread scrub typhus with eschar. Two rat-bite forms were reported to differ by geography, with streptobacillary disease in the Americas and Europe, spirillary sodoku in Asia, plus foodborne Haverhill fever. Kikuchi disease was reported to favour young women of Asian descent with tender posterior cervical nodes, fever and maculopapular rash, and exposure history was reported to decide.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spotted fever group",
+     "points": [
+      "Tick transmitted",
+      "Maculopapular or petechial rash",
+      "Eschar uncommon"
+     ]
+    },
+    "right": {
+     "title": "Scrub typhus",
+     "points": [
+      "Chigger mite transmitted",
+      "Eschar in 50 percent",
+      "Marked lymphadenopathy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Rickettsiae are obligately intracellular** and primarily infect **vascular endothelial cells** through tick saliva. They spread lymphohaematogenously to contiguous endothelium, producing **infectious vasculitis with vascular leakage** and organ injury without occlusive thrombosis. **After 6 hours of feeding** dissemination begins. By contrast **Kikuchi necrosis** is T-cell and histiocyte immune injury, and **Streptobacillus** disseminates haematogenously.",
+   "say": "Rickettsiae were reported to be obligately intracellular and to infect vascular endothelial cells through tick saliva first. They were reported to spread lymphohaematogenously to contiguous endothelium and to produce infectious vasculitis with vascular leakage and organ injury without occlusive thrombosis. Dissemination after six hours of feeding was reported to begin, by contrast Kikuchi necrosis was reported to be T-cell and histiocyte immune injury, and Streptobacillus was reported to disseminate haematogenously.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tick saliva inoculation"
+     },
+     {
+      "id": "b",
+      "label": "Endothelial infection"
+     },
+     {
+      "id": "c",
+      "label": "Vasculitis with leakage"
+     },
+     {
+      "id": "d",
+      "label": "Rash with organ injury"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Classic sign is the inoculation eschar**, a painless black-crusted tache noire with erythematous halo, in 90 percent of African tick-bite fever and 50 percent of Mediterranean spotted fever but under 1 percent of RMSF. **RMSF rash evolves centrifugally** from wrists and ankles to trunk and palms and soles, becoming **non-blanching petechiae**. **Palms and soles are involved after day 5 in 43 percent** only, so absence misleads.",
+   "say": "Classic sign was reported to be the inoculation eschar, a painless black-crusted tache noire with erythematous halo, in ninety percent of African tick-bite fever and fifty percent of Mediterranean spotted fever but under one percent of RMSF. RMSF rash was reported to evolve centrifugally from wrists and ankles to trunk and palms and soles and to become non-blanching petechiae. Palms and soles were reported to be involved after day five in forty three percent only, so absence was reported to mislead.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Frequency",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Tache noire",
+      "90 percent, African tick bite",
+      "Multiple with nodes"
+     ],
+     [
+      "Tache noire",
+      "50 percent, Mediterranean",
+      "Single eschar"
+     ],
+     [
+      "Palms and soles",
+      "43 percent after day 5",
+      "Late and inconsistent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gold for Kikuchi is excisional biopsy** showing paracortical necrosis with histiocytes and **karyorrhectic debris without neutrophils**; fine-needle aspiration is often non-diagnostic. **Gold for spotted fever is punch biopsy PCR** with immunohistology, as **blood PCR is insensitive**. **IFA IgG is confirmatory but negative at presentation**, becoming detectable at **7 to 10 days** with **titre 64 or more**, sensitivity 89 to 100 percent and specificity 99 to 100 percent. **Blood cultures with prolonged incubation** plus **dark-field microscopy** diagnose rat-bite fever.",
+   "say": "Gold for Kikuchi was reported to be excisional biopsy showing paracortical necrosis with histiocytes and karyorrhectic debris without neutrophils, while fine-needle aspiration was reported to be often non-diagnostic. Gold for spotted fever was reported to be punch biopsy PCR with immunohistology, as blood PCR was reported to be insensitive. IFA IgG was reported to be confirmatory but negative at presentation and to become detectable at seven to ten days with titre sixty four or more, with sensitivity eighty nine to one hundred percent and specificity ninety nine to one hundred percent. Blood cultures with prolonged incubation plus dark-field microscopy were reported to diagnose rat-bite fever.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "First test",
+     "Gold test"
+    ],
+    "rows": [
+     [
+      "Kikuchi",
+      "Blood count with leucopenia",
+      "Excisional biopsy"
+     ],
+     [
+      "Spotted fever",
+      "Clinical with platelets, sodium",
+      "Punch PCR or IFA"
+     ],
+     [
+      "Rat-bite fever",
+      "Blood cultures, prolonged",
+      "Dark-field microscopy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Suspected spotted fever gets Doxycycline promptly** at 100 mg twice daily without waiting for serology, given excellent response and delay risk. **Rat-bite fever gets Penicillin first-line** for both streptobacillary and spirillary forms, with **Doxycycline or cephalosporin** as alternatives and prolonged IV therapy for endovascular disease. **Kikuchi disease gets supportive NSAIDs and antipyretics**, with **Corticosteroids** reserved for severe or recurrent disease and **Hydroxychloroquine** for refractory cases.",
+   "say": "Suspected spotted fever was reported to get doxycycline promptly at one hundred milligrams twice daily without waiting for serology, given excellent response and delay risk. Rat-bite fever was reported to get penicillin as first-line for both streptobacillary and spirillary forms, with doxycycline or cephalosporin as alternatives and prolonged intravenous therapy for endovascular disease. Kikuchi disease was reported to get supportive NSAIDs and antipyretics, with corticosteroids reserved for severe or recurrent disease and hydroxychloroquine for refractory cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "First line",
+     "Duration cue"
+    ],
+    "rows": [
+     [
+      "Spotted fever",
+      "Doxycycline 100 mg twice daily",
+      "Promptly, minimum course"
+     ],
+     [
+      "Rat-bite fever",
+      "Penicillin",
+      "Prolonged if endocarditis"
+     ],
+     [
+      "Kikuchi",
+      "Supportive care",
+      "Steroids if severe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Modern rule is to finish 3 days after fever settles with minimum 5 to 7 days total** for rickettsial disease, not a fixed 7-day stop. **Serology never delays the first Doxycycline dose**, and cross-reactive titres prove group disease not single species. **Kikuchi resolves over weeks to months** with structured follow-up for recurrence and later lupus. **Rat-bite therapy continues until endovascular and CNS foci are excluded** with echocardiography when needed.",
+   "say": "Modern rule was reported to be finishing three days after fever settles with minimum five to seven days total for rickettsial disease, not a fixed seven-day stop. Serology was reported to never delay the first doxycycline dose, and cross-reactive titres were reported to prove group disease not single species. Kikuchi was reported to resolve over weeks to months with structured follow-up for recurrence and later lupus, and rat-bite therapy was reported to continue until endovascular and CNS foci are excluded with echocardiography when needed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rule",
+     "Detail",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Rickettsial stop",
+      "3 days after settle, minimum 5 to 7 days",
+      "Avoid relapse"
+     ],
+     [
+      "Kikuchi course",
+      "Weeks to months, observe",
+      "Benign course"
+     ],
+     [
+      "Rat-bite course",
+      "Until foci excluded",
+      "Prevent endocarditis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Delayed RMSF treatment sharply raises death**, with historic mortality 20 to 25 percent falling to 3 to 5 percent with early therapy, and **severe Mediterranean disease fatal in 50 percent** without treatment. **Epidemic typhus historically killed 60 percent** and still exceeds 10 to 15 percent. **Untreated rat-bite fever kills** mainly through endocarditis and metastatic sepsis. **Kikuchi is benign** with minority recurrence and rare aseptic meningitis, but mandates **lupus surveillance**.",
+   "say": "Delayed RMSF treatment was reported to sharply raise death, with historic mortality twenty to twenty five percent falling to three to five percent with early therapy, and severe Mediterranean disease fatal in fifty percent without treatment. Epidemic typhus was reported to have historically killed sixty percent and still exceed ten to fifteen percent. Untreated rat-bite fever was reported to kill mainly through endocarditis and metastatic sepsis. Kikuchi was reported to be benign with minority recurrence and rare aseptic meningitis, but lupus surveillance was reported to be mandatory.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Untreated risk",
+     "Treated course"
+    ],
+    "rows": [
+     [
+      "RMSF",
+      "20 to 25 percent fatal",
+      "3 to 5 percent early"
+     ],
+     [
+      "Mediterranean severe",
+      "50 percent fatal",
+      "Improves with 1 day therapy"
+     ],
+     [
+      "Epidemic typhus",
+      "60 percent historic",
+      "10 to 15 percent now"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** the **full triad of fever, rash and tick exposure occurs in 3 percent** on day 1 and only forty nine percent by day 3, so absence never excludes disease. **Rash present in fourteen percent on day one**, **60 percent recall a tick bite**, and **10 to 15 percent never develop rash**. **Fine-needle aspiration for Kikuchi**, **short blood culture incubation**, and **attempting to culture Spirillum** all fail. **Antibiotics for Kikuchi** treat a non-infective process.",
+   "say": "For the exam, the full triad of fever, rash and tick exposure was reported to occur in three percent on day one and only forty nine percent by day three, so absence was reported to never exclude disease. Rash was reported to be present in fourteen percent on day one, sixty percent were reported to recall a tick bite, and ten to fifteen percent were reported to never develop rash. Fine-needle aspiration for Kikuchi was reported to fail, short blood culture incubation was reported to fail, and attempting to culture Spirillum was reported to fail, while antibiotics for Kikuchi were reported to treat a non-infective process.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Wait for triad",
+      "3 percent early",
+      "Treat on suspicion"
+     ],
+     [
+      "FNA for Kikuchi",
+      "Non-diagnostic",
+      "Excisional biopsy"
+     ],
+     [
+      "Culture Spirillum",
+      "Will not grow",
+      "Dark-field microscopy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **first 5 days look alike**, then rash and eschar separate causes; **6 hours feeding for RMSF** before dissemination; **tache noire 50 to 90 percent** in Mediterranean and African disease; **centrifugal petechiae** and **43 percent palms after day 5**. **IFA 89 to 100 sensitive, 99 to 100 specific, titre 64 at 7 to 10 days**. **Doxycycline 100 mg twice daily promptly**. **Excisional biopsy** for Kikuchi. **Penicillin** for rat-bite. **No culture for Spirillum**.",
+   "say": "For the exam, the first five days were reported to look alike and rash plus eschar were reported to separate causes later, with six hours feeding for RMSF and tache noire in fifty to ninety percent in Mediterranean and African disease. Centrifugal petechiae and forty three percent palms after day five were reported, and IFA eighty nine to one hundred sensitive with ninety nine to one hundred specific and titre sixty four at seven to ten days was reported. Doxycycline one hundred milligrams twice daily promptly was reported to be first-line for spotted fever, excisional biopsy was reported to be gold for Kikuchi, penicillin was reported to be first-line for rat-bite, and Spirillum was reported to never culture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why asked"
+    ],
+    "rows": [
+     [
+      "Timeline",
+      "First 5 days look alike",
+      "Do not wait"
+     ],
+     [
+      "Eschar",
+      "50 to 90 percent",
+      "Exam sign"
+     ],
+     [
+      "Rash",
+      "Centrifugal, 43 percent late",
+      "Pattern"
+     ],
+     [
+      "IFA",
+      "89 to 100 sensitive",
+      "Gold serology"
+     ],
+     [
+      "Treatment",
+      "Doxycycline promptly",
+      "First line"
+     ],
+     [
+      "Biopsy",
+      "Excisional for Kikuchi",
+      "Histology"
+     ],
+     [
+      "Rat-bite",
+      "Penicillin first line",
+      "Exposure history"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -15,11 +15,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "i1", "label": "Check danger signs in every sick child" },
-          { "id": "i2", "label": "Classify by colour: pink, yellow, green" },
-          { "id": "i3", "label": "Treat at facility or refer urgently" }
+          {
+            "id": "i1",
+            "label": "Check danger signs in every sick child"
+          },
+          {
+            "id": "i2",
+            "label": "Classify by colour: pink, yellow, green"
+          },
+          {
+            "id": "i3",
+            "label": "Treat at facility or refer urgently"
+          }
         ],
-        "edges": [["i1", "i2"], ["i2", "i3"]]
+        "edges": [
+          [
+            "i1",
+            "i2"
+          ],
+          [
+            "i2",
+            "i3"
+          ]
+        ]
       }
     },
     {
@@ -28,11 +46,23 @@
       "say": "Pink means refer urgently, yellow means treat here, green means care at home. The same colour logic covers the young infant and the older child charts.",
       "vis": {
         "kind": "table",
-        "cols": ["Colour", "Meaning and action"],
+        "cols": [
+          "Colour",
+          "Meaning and action"
+        ],
         "rows": [
-          ["Pink", "Severe classification, pre referral dose, urgent hospital transfer"],
-          ["Yellow", "Facility treatment with oral antibiotic or ORS and fixed review"],
-          ["Green", "Home care, feeding counsel, return if danger signs appear"]
+          [
+            "Pink",
+            "Severe classification, pre referral dose, urgent hospital transfer"
+          ],
+          [
+            "Yellow",
+            "Facility treatment with oral antibiotic or ORS and fixed review"
+          ],
+          [
+            "Green",
+            "Home care, feeding counsel, return if danger signs appear"
+          ]
         ]
       }
     },
@@ -42,11 +72,23 @@
       "say": "Count breaths for one full minute. Sixty, fifty, and forty are the cut offs by age band, and chest indrawing makes it severe pneumonia.",
       "vis": {
         "kind": "table",
-        "cols": ["Age band", "Fast breathing at or above"],
+        "cols": [
+          "Age band",
+          "Fast breathing at or above"
+        ],
         "rows": [
-          ["Under 2 months", "60 breaths per minute"],
-          ["2 to 12 months", "50 breaths per minute"],
-          ["1 to 5 years", "40 breaths per minute"]
+          [
+            "Under 2 months",
+            "60 breaths per minute"
+          ],
+          [
+            "2 to 12 months",
+            "50 breaths per minute"
+          ],
+          [
+            "1 to 5 years",
+            "40 breaths per minute"
+          ]
         ]
       }
     },
@@ -69,11 +111,19 @@
         "kind": "compare",
         "left": {
           "title": "Some dehydration (Plan B)",
-          "points": ["Restless, thirsty, drinks eagerly", "Skin pinch goes back slowly", "ORS 75 millilitres per kilogram over 4 hours"]
+          "points": [
+            "Restless, thirsty, drinks eagerly",
+            "Skin pinch goes back slowly",
+            "ORS 75 millilitres per kilogram over 4 hours"
+          ]
         },
         "right": {
           "title": "Severe dehydration (Plan C)",
-          "points": ["Lethargic or unconscious, drinks poorly", "Skin pinch returns in 2 seconds or more", "Rapid intravenous Ringer lactate by age schedule"]
+          "points": [
+            "Lethargic or unconscious, drinks poorly",
+            "Skin pinch returns in 2 seconds or more",
+            "Rapid intravenous Ringer lactate by age schedule"
+          ]
         }
       }
     },
@@ -84,11 +134,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "y1", "label": "Young infant with danger or severe signs" },
-          { "id": "y2", "label": "First dose gentamicin plus amoxicillin" },
-          { "id": "y3", "label": "Keep warm and refer to hospital" }
+          {
+            "id": "y1",
+            "label": "Young infant with danger or severe signs"
+          },
+          {
+            "id": "y2",
+            "label": "First dose gentamicin plus amoxicillin"
+          },
+          {
+            "id": "y3",
+            "label": "Keep warm and refer to hospital"
+          }
         ],
-        "edges": [["y1", "y2"], ["y2", "y3"]]
+        "edges": [
+          [
+            "y1",
+            "y2"
+          ],
+          [
+            "y2",
+            "y3"
+          ]
+        ]
       }
     },
     {
@@ -108,12 +176,27 @@
       "say": "The direction of the growth line matters more than one weight. Flat is a warning, falling is danger, and arm circumference under eleven point five centimetres means severe acute malnutrition.",
       "vis": {
         "kind": "table",
-        "cols": ["Signal", "Interpretation"],
+        "cols": [
+          "Signal",
+          "Interpretation"
+        ],
         "rows": [
-          ["Line rising parallel to channels", "Healthy growth, continue feeding advice"],
-          ["Flat line over two months", "Growth faltering, find cause and counsel"],
-          ["Falling line crossing channels", "Urgent nutrition and illness work up"],
-          ["MUAC below 11.5 centimetres", "Severe acute malnutrition, therapeutic feeding"]
+          [
+            "Line rising parallel to channels",
+            "Healthy growth, continue feeding advice"
+          ],
+          [
+            "Flat line over two months",
+            "Growth faltering, find cause and counsel"
+          ],
+          [
+            "Falling line crossing channels",
+            "Urgent nutrition and illness work up"
+          ],
+          [
+            "MUAC below 11.5 centimetres",
+            "Severe acute malnutrition, therapeutic feeding"
+          ]
         ]
       }
     },
@@ -125,11 +208,19 @@
         "kind": "compare",
         "left": {
           "title": "Screened by mobile teams",
-          "points": ["Birth defects such as cleft lip and club foot", "Anaemia and vitamin deficiencies", "Developmental delay and vision or hearing loss"]
+          "points": [
+            "Birth defects such as cleft lip and club foot",
+            "Anaemia and vitamin deficiencies",
+            "Developmental delay and vision or hearing loss"
+          ]
         },
         "right": {
           "title": "Managed at DEIC",
-          "points": ["Confirmatory tests and specialist review", "Free surgery and therapy", "Early stimulation and follow up plan"]
+          "points": [
+            "Confirmatory tests and specialist review",
+            "Free surgery and therapy",
+            "Early stimulation and follow up plan"
+          ]
         }
       }
     },
@@ -140,11 +231,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "t1", "label": "Antenatal nutrition and safe delivery" },
-          { "id": "t2", "label": "Exclusive breastfeeding then complementary food" },
-          { "id": "t3", "label": "Immunisation plus prompt illness care" }
+          {
+            "id": "t1",
+            "label": "Antenatal nutrition and safe delivery"
+          },
+          {
+            "id": "t2",
+            "label": "Exclusive breastfeeding then complementary food"
+          },
+          {
+            "id": "t3",
+            "label": "Immunisation plus prompt illness care"
+          }
         ],
-        "edges": [["t1", "t2"], ["t2", "t3"]]
+        "edges": [
+          [
+            "t1",
+            "t2"
+          ],
+          [
+            "t2",
+            "t3"
+          ]
+        ]
       }
     },
     {
@@ -153,12 +262,68 @@
       "say": "End every visit with drug teaching, return signs, and a written review date. Good counselling is what turns a classification into a cured child.",
       "vis": {
         "kind": "table",
-        "cols": ["Counsel point", "Example instruction"],
+        "cols": [
+          "Counsel point",
+          "Example instruction"
+        ],
         "rows": [
-          ["Drug teaching", "Show first dose, mark doses on the packet"],
-          ["Fluid advice", "Extra fluid with every loose stool"],
-          ["Return at once", "Unable to drink, blood in stool, fever, fast breathing"],
-          ["Fixed review", "Pneumonia in 2 days, dysentery in 2 days, anaemia in 14 days"]
+          [
+            "Drug teaching",
+            "Show first dose, mark doses on the packet"
+          ],
+          [
+            "Fluid advice",
+            "Extra fluid with every loose stool"
+          ],
+          [
+            "Return at once",
+            "Unable to drink, blood in stool, fever, fast breathing"
+          ],
+          [
+            "Fixed review",
+            "Pneumonia in 2 days, dysentery in 2 days, anaemia in 14 days"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Integrated Management of Neonatal and Childhood Illness prioritises pink for urgent hospital referral, yellow for outpatient clinic therapy, and green for home care. Fast breathing cut-offs for pneumonia are sixty or more breaths per minute under two months, fifty or more from two to eleven months, and forty or more from twelve months to five years. Chest indrawing indicates severe pneumonia requiring referral. Severe dehydration mandates immediate intravenous Plan C rehydration.",
+      "say": "Integrated Management of Neonatal and Childhood Illness prioritises pink for urgent hospital referral, yellow for outpatient clinic therapy, and green for home care. Fast breathing cut-offs for pneumonia are sixty or more breaths per minute under two months, fifty or more from two to eleven months, and forty or more from twelve months to five years. Chest indrawing indicates severe pneumonia requiring referral. Severe dehydration mandates immediate intravenous Plan C rehydration.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Triage color coding",
+            "Pink urgent referral, yellow clinic treatment, green home management"
+          ],
+          [
+            "Fast breathing under 2 months",
+            "60 or more breaths per minute indicates pneumonia"
+          ],
+          [
+            "Fast breathing 2 to 11 months",
+            "50 or more breaths per minute indicates pneumonia"
+          ],
+          [
+            "Fast breathing 12 to 59 months",
+            "40 or more breaths per minute indicates pneumonia"
+          ],
+          [
+            "Severe pneumonia sign",
+            "Chest indrawing or stridor in calm child warrants referral"
+          ],
+          [
+            "General danger signs",
+            "Unable to drink, vomits everything, convulsions, or lethargic"
+          ],
+          [
+            "First-line pneumonia oral drug",
+            "Oral amoxicillin dispersible tablets given twice daily"
+          ]
         ]
       }
     }

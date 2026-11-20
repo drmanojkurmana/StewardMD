@@ -1,0 +1,334 @@
+{
+  "v": 1,
+  "module": "rep-endocrine-surgery",
+  "subject": "ss-reproductive-medicine",
+  "title": "Reproductive surgery: endometriosis, fibroids, cysts and tubal disease",
+  "minutes": 8,
+  "gen": "hand",
+  "quiz": [],
+  "refs": [
+    "Sabiston Surgery 22nd edition"
+  ],
+  "steps": [
+    {
+      "tx": "**Endometriosis** is growth of endometrial-like tissue outside the uterus, most often on the ovaries, pelvic peritoneum and uterosacral ligaments. About 13 to 15 percent of menstruating women have it, and prevalence rises to 30 to 40 percent in infertility clinics. Lesions bleed with each cycle, causing pain, inflammation and adhesions over time.",
+      "say": "Endometriosis means endometrial like tissue growing outside the uterus, most often on the ovaries and pelvic lining. It affects about thirteen to fifteen percent of menstruating women and up to thirty to forty percent in infertility clinics. The implants bleed each cycle and cause pain and adhesions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Typical lesion"
+        ],
+        "rows": [
+          [
+            "Ovary",
+            "Endometrioma with chocolate coloured fluid"
+          ],
+          [
+            "Pelvic peritoneum",
+            "Dark puckered implants and adhesions"
+          ],
+          [
+            "Uterosacral ligaments",
+            "Tender nodularity and pain on touch"
+          ],
+          [
+            "Bladder and bowel",
+            "Cyclical bleeding or pain with cycle"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Early menarche** before 12 years, short cycles under 27 days and heavy prolonged bleeding all raise the load of retrograde flow. Nulliparity, family history in a first degree relative and prior pelvic infection further mark higher risk. A prior history of delayed childbirth after 28 years is also repeatedly reported in clinic series worldwide.",
+      "say": "Certain periods place women at higher risk, such as starting before twelve years or cycles shorter than twenty seven days. Never having given birth and a close relative being affected also raise the chance. Older age at first birth is another pattern seen in clinic populations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Early menarche",
+            "sub": "before 12 years"
+          },
+          {
+            "id": "b",
+            "label": "Short frequent cycles",
+            "sub": "more bleeding days"
+          },
+          {
+            "id": "c",
+            "label": "Nulliparity",
+            "sub": "no pregnancy history"
+          },
+          {
+            "id": "d",
+            "label": "Family history",
+            "sub": "mother or sister"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Retrograde menstruation** pushes menstrual blood through the tubes into the pelvis in most women, but only some develop disease. Estrogen drives lesion growth while progesterone resistance stops normal suppression. The tissue recruits nerves and blood vessels, then scarring and adhesion formation lock 2 to 5 organs together over months.",
+      "say": "In most women some menstrual blood flows backward into the pelvis, yet only a few develop implants. Estrogen feeds the lesions and the tissue resists progesterone, so it keeps growing. Nerves and vessels follow, and scarring joins nearby organs together within months.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Retrograde flow",
+            "sub": "blood enters pelvis"
+          },
+          {
+            "id": "b",
+            "label": "Implantation",
+            "sub": "tissue takes root"
+          },
+          {
+            "id": "c",
+            "label": "Estrogen drive",
+            "sub": "continued growth"
+          },
+          {
+            "id": "d",
+            "label": "Adhesions",
+            "sub": "organs fixed together"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cyclical pain** is the hallmark, with pain starting days before flow and peaking during bleeding days. Deep dyspareunia, dyschezia and dysuria track the cycle, and chronic pelvic pain persists between cycles. About 25 to 30 percent suffer infertility, with pain severity rising from 6 to 9 on a 10 point scale.",
+      "say": "Pain that follows the cycle is the classic story, starting days before the period and peaking during bleeding. Pain during intercourse and during bowel motions can point to the site involved. Many women also struggle to conceive, and pain scores often run high.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pain centred",
+          "points": [
+            "Pain peaks with bleeding days",
+            "Pain eases after flow ends",
+            "Acute flares with rupture"
+          ]
+        },
+        "right": {
+          "title": "Infertility centred",
+          "points": [
+            "No conception for 12 months",
+            "Ovulation usually preserved",
+            "Tubal distortion blocks egg pickup"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Fibroids** are benign smooth muscle tumours that distort the uterine cavity and often cause heavy bleeding and pelvic pressure. Ovarian cysts in this field include endometriomas that mimic other 5 to 10 cm adnexal masses. Tubal disease from adhesions blocks the tube, and hydrosalpinx fluid harms embryo implantation directly.",
+      "say": "Alongside endometriosis, fibroids distort the womb and cause heavy periods and pressure. Ovarian cysts include chocolate cysts that mimic other lumps on scans. Damaged tubes and fluid collections block egg entry and harm implantation, so they matter in infertility workups.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Finding",
+          "Key effect"
+        ],
+        "rows": [
+          [
+            "Submucosal fibroid",
+            "Heavy bleeding and miscarriage"
+          ],
+          [
+            "Large fibroid above 8 cm",
+            "Pressure and bladder symptoms"
+          ],
+          [
+            "Endometrioma",
+            "Ovarian damage and pain"
+          ],
+          [
+            "Hydrosalpinx",
+            "Blocked tube and poor implantation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Transvaginal ultrasound** detects endometriomas and fibroids with 85 to 90 percent accuracy in skilled hands. MRI pelvis maps deep disease and bowel involvement before major surgery. CA-125 rises modestly in 3 to 5 percent of cases but never confirms the diagnosis alone. Definitive proof still needs laparoscopy with histology in 1 sitting.",
+      "say": "Ultrasound through the vagina picks up chocolate cysts and fibroids well in skilled hands. MRI maps deep disease and bowel involvement before big operations. A blood marker can rise slightly but never confirms the diagnosis alone. Laparoscopy with tissue study remains the final proof.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "First line",
+          "points": [
+            "Transvaginal ultrasound for cysts",
+            "Clinical pelvic examination",
+            "CA-125 only as support"
+          ]
+        },
+        "right": {
+          "title": "Definitive",
+          "points": [
+            "MRI for deep disease mapping",
+            "Laparoscopy with biopsy",
+            "Histology confirms endometriosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**First line suppression** uses nonsteroidal anti-inflammatory drugs and combined oral contraceptive pills to shrink pain with each cycle. Progestins such as dienogest and levonorgestrel releasing systems control pain for 6 to 12 months. GnRH analogues need bone protection with add back therapy after 6 months of continuous use.",
+      "say": "Pain relief begins with anti inflammatory medicines and combined pills that steady the cycle. Progestin tablets and hormone coils control symptoms for many months. Stronger hormone injections need bone protection after six months because bone density can fall.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Pain relief first",
+            "sub": "anti inflammatory drugs"
+          },
+          {
+            "id": "b",
+            "label": "Hormonal control",
+            "sub": "pills or dienogest"
+          },
+          {
+            "id": "c",
+            "label": "Escalation",
+            "sub": "hormone injections"
+          },
+          {
+            "id": "d",
+            "label": "Bone protection",
+            "sub": "after 6 months"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Conservative laparoscopy** excises implants and frees adhesions while preserving the uterus and ovaries in 95 percent of cases. Ovarian cystectomy for endometrioma keeps 2 to 3 cm of healthy ovarian rim. Myomectomy removes large fibroids over 5 cm, and tubal surgery opens blocked tubes in selected cases under 35 years.",
+      "say": "Surgery stays conservative so fertility is preserved in most women. Cyst removal keeps a rim of healthy ovary and myomectomy removes large fibroids. Tube repair is offered only in selected younger women with a clear blockage pattern.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Procedure",
+          "Surgical principle"
+        ],
+        "rows": [
+          [
+            "Endometrioma cystectomy",
+            "Peel cyst wall, keep ovarian rim"
+          ],
+          [
+            "Myomectomy",
+            "Remove fibroid, repair uterine muscle"
+          ],
+          [
+            "Adhesiolysis",
+            "Divide bands, restore tubal mobility"
+          ],
+          [
+            "Tubal surgery",
+            "Open blocked tube in select cases"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Recurrence** after surgery reaches 15 to 20 percent at 5 years without maintenance hormone therapy. Infertility persists in 10 to 15 percent despite adequate surgery, needing assisted reproduction. Bowel or bladder injury complicates 2 to 4 percent of deep excisions. Malignant transformation stays rare at under 1 percent of cases.",
+      "say": "Symptoms return in a fair share of women within five years without maintenance treatment. Infertility can persist despite good surgery and may need assisted reproduction. Serious bowel or bladder injury is uncommon but must be consented for deep disease. Cancer change is very rare.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Outcome",
+          "Approximate rate"
+        ],
+        "rows": [
+          [
+            "Recurrence at 5 years",
+            "About 15 to 20 percent"
+          ],
+          [
+            "Persistent infertility",
+            "About 10 to 15 percent"
+          ],
+          [
+            "Bowel or bladder injury",
+            "About 2 to 4 percent"
+          ],
+          [
+            "Malignant change",
+            "Under 1 percent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Chocolate cyst** on scan plus cyclical pain in a 25 year old woman should trigger endometriosis workup before 2 operations. Tubes blocked by adhesions need adhesiolysis plus 6 months of hormone suppression, not repeated ovulation drugs alone. Postoperative dienogest maintenance cuts recurrence by half compared with no therapy.",
+      "say": "High-yield for the exam: remember chocolate cyst plus cyclical pain pointing to endometriosis in a young woman. Blocked tubes need adhesion release plus six months of hormone suppression. Postoperative maintenance halves recurrence, so counsel every patient on continuation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Signal",
+          "Exam action"
+        ],
+        "rows": [
+          [
+            "Chocolate cyst",
+            "Start endometriosis workup"
+          ],
+          [
+            "Blocked tubes",
+            "Plan adhesion release plus suppression"
+          ],
+          [
+            "Postoperative maintenance",
+            "Continue hormones to halve recurrence"
+          ],
+          [
+            "Dense adhesions",
+            "Prefer laparoscopy over repeated laparotomy"
+          ]
+        ]
+      }
+    }
+  ]
+}

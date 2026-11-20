@@ -14,12 +14,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Incubation about 10 days"},
-     {"id": "b", "label": "Prodrome: fever, 3 Cs"},
-     {"id": "c", "label": "Koplik spots appear"},
-     {"id": "d", "label": "Rash spreads downward"}
+     {
+      "id": "a",
+      "label": "Incubation about 10 days"
+     },
+     {
+      "id": "b",
+      "label": "Prodrome: fever, 3 Cs"
+     },
+     {
+      "id": "c",
+      "label": "Koplik spots appear"
+     },
+     {
+      "id": "d",
+      "label": "Rash spreads downward"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -39,12 +64,27 @@
    "say": "The rash fades; complications kill. Pneumonia leads, diarrhoea and vitamin A collapse follow, encephalitis scars survivors. Fatality doubles digits where malnutrition and crowding meet, against two to three percent generally.",
    "vis": {
     "kind": "table",
-    "cols": ["Complication", "Consequence"],
+    "cols": [
+     "Complication",
+     "Consequence"
+    ],
     "rows": [
-     ["Pneumonia", "Commonest cause of measles death"],
-     ["Diarrhoea with malnutrition", "Prolonged wasting cycle"],
-     ["Vitamin A deficiency flare", "Keratomalacia and blindness"],
-     ["Encephalitis", "Death or neurological sequelae"]
+     [
+      "Pneumonia",
+      "Commonest cause of measles death"
+     ],
+     [
+      "Diarrhoea with malnutrition",
+      "Prolonged wasting cycle"
+     ],
+     [
+      "Vitamin A deficiency flare",
+      "Keratomalacia and blindness"
+     ],
+     [
+      "Encephalitis",
+      "Death or neurological sequelae"
+     ]
     ]
    }
   },
@@ -54,11 +94,23 @@
    "say": "Every measles case earns vitamin A. Doses scale by age, given on diagnosis and repeated next day, third dose when eye signs show. Mortality falls where deficiency reigns; this is treatment, not supplementation trivia.",
    "vis": {
     "kind": "table",
-    "cols": ["Age", "Dose on day 1 and 2"],
+    "cols": [
+     "Age",
+     "Dose on day 1 and 2"
+    ],
     "rows": [
-     ["Under 6 months", "50000 IU"],
-     ["6 to 11 months", "100000 IU"],
-     ["12 months and above", "200000 IU"]
+     [
+      "Under 6 months",
+      "50000 IU"
+     ],
+     [
+      "6 to 11 months",
+      "100000 IU"
+     ],
+     [
+      "12 months and above",
+      "200000 IU"
+     ]
     ]
    }
   },
@@ -70,11 +122,19 @@
     "kind": "compare",
     "left": {
      "title": "Acute complications",
-     "points": ["Pneumonia and diarrhoea", "Otitis media, croup", "Days to weeks after rash"]
+     "points": [
+      "Pneumonia and diarrhoea",
+      "Otitis media, croup",
+      "Days to weeks after rash"
+     ]
     },
     "right": {
      "title": "SSPE",
-     "points": ["Years after early infection", "Progressive fatal dementia", "Prevented only by vaccination"]
+     "points": [
+      "Years after early infection",
+      "Progressive fatal dementia",
+      "Prevented only by vaccination"
+     ]
     }
    }
   },
@@ -85,12 +145,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Measles case identified"},
-     {"id": "b", "label": "Isolate, airborne precautions"},
-     {"id": "c", "label": "Contacts listed same day"},
-     {"id": "d", "label": "Vaccine 72h or Ig 6 days"}
+     {
+      "id": "a",
+      "label": "Measles case identified"
+     },
+     {
+      "id": "b",
+      "label": "Isolate, airborne precautions"
+     },
+     {
+      "id": "c",
+      "label": "Contacts listed same day"
+     },
+     {
+      "id": "d",
+      "label": "Vaccine 72h or Ig 6 days"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -99,12 +184,27 @@
    "say": "Respond before laboratories answer. Search houses, vaccinate the susceptible band widely, dose cases with vitamin A, open pneumonia referral paths. The ring works in week one or not at all.",
    "vis": {
     "kind": "table",
-    "cols": ["Action", "Timing"],
+    "cols": [
+     "Action",
+     "Timing"
+    ],
     "rows": [
-     ["Active case search", "Immediately, house to house"],
-     ["MR vaccination of susceptibles", "Within days, wide age band"],
-     ["Vitamin A to cases", "At first contact"],
-     ["Pneumonia referral readiness", "Throughout outbreak"]
+     [
+      "Active case search",
+      "Immediately, house to house"
+     ],
+     [
+      "MR vaccination of susceptibles",
+      "Within days, wide age band"
+     ],
+     [
+      "Vitamin A to cases",
+      "At first contact"
+     ],
+     [
+      "Pneumonia referral readiness",
+      "Throughout outbreak"
+     ]
     ]
    }
   },
@@ -127,11 +227,19 @@
     "kind": "compare",
     "left": {
      "title": "Classic measles",
-     "points": ["Full prodrome, Koplik spots", "Confluent downward rash", "Clinically diagnosable"]
+     "points": [
+      "Full prodrome, Koplik spots",
+      "Confluent downward rash",
+      "Clinically diagnosable"
+     ]
     },
     "right": {
      "title": "Modified measles",
-     "points": ["Milder, shorter course", "Partial immunity background", "Needs IgM confirmation"]
+     "points": [
+      "Milder, shorter course",
+      "Partial immunity background",
+      "Needs IgM confirmation"
+     ]
     }
    }
   },
@@ -142,12 +250,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Borderline nutrition"},
-     {"id": "b", "label": "Measles infection strikes"},
-     {"id": "c", "label": "Appetite loss, vitamin A fall"},
-     {"id": "d", "label": "Wasting, keratomalacia risk"}
+     {
+      "id": "a",
+      "label": "Borderline nutrition"
+     },
+     {
+      "id": "b",
+      "label": "Measles infection strikes"
+     },
+     {
+      "id": "c",
+      "label": "Appetite loss, vitamin A fall"
+     },
+     {
+      "id": "d",
+      "label": "Wasting, keratomalacia risk"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -156,11 +289,68 @@
    "say": "Fever plus rash enters the net. Laboratory confirmation and genotyping sort measles from rubella, and discard rates prove the net is fishing. Elimination surveillance must demonstrate sensitivity, never merely report zero.",
    "vis": {
     "kind": "table",
-    "cols": ["Indicator", "What it proves"],
+    "cols": [
+     "Indicator",
+     "What it proves"
+    ],
     "rows": [
-     ["Suspected cases reported and tested", "System captures fever-rash illness"],
-     ["Non-measles discard rate adequate", "Sensitivity is real, not silence"],
-     ["Genotypes characterised", "Importation versus endemic chains"]
+     [
+      "Suspected cases reported and tested",
+      "System captures fever-rash illness"
+     ],
+     [
+      "Non-measles discard rate adequate",
+      "Sensitivity is real, not silence"
+     ],
+     [
+      "Genotypes characterised",
+      "Importation versus endemic chains"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Measles incubates about 10 days, then fever with cough, coryza and conjunctivitis precedes Koplik spots. Rash spreads downward from the hairline, with infectivity four days before and after onset. Pneumonia is the commonest killer. Vitamin A is 200000 IU at 12 months and above, repeated next day.",
+   "say": "High-yield for the exam: Measles incubates about 10 days, then fever with cough, coryza and conjunctivitis precedes Koplik spots. Rash spreads downward from the hairline, with infectivity four days before and after onset. Pneumonia is the commonest killer. Vitamin A is 200000 IU at 12 months and above, repeated next day.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Measles incubation period",
+      "About 10 days before prodrome"
+     ],
+     [
+      "Prodrome three Cs",
+      "Cough, coryza, conjunctivitis with fever"
+     ],
+     [
+      "Koplik spot site",
+      "Buccal mucosa before rash appears"
+     ],
+     [
+      "Rash spread direction",
+      "Downward from hairline, maculopapular"
+     ],
+     [
+      "Infectivity window",
+      "Four days before to after rash"
+     ],
+     [
+      "Commonest fatal complication",
+      "Pneumonia causing most measles deaths"
+     ],
+     [
+      "Vitamin A under 6 months",
+      "50000 IU on diagnosis, repeated next day"
+     ],
+     [
+      "Post exposure vaccine window",
+      "Within 72 hours for susceptible contacts"
+     ]
     ]
    }
   }

@@ -1,0 +1,347 @@
+{
+ "v": 1,
+ "module": "spu-tb",
+ "subject": "ss-pulmonology",
+ "title": "Pulmonary tuberculosis: spread, granulomas, diagnosis and resistance",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025, 22nd Edition",
+  "WHO"
+ ],
+ "steps": [
+  {
+   "tx": "**Mycobacterium tuberculosis** is an aerobic acid fast bacillus that spreads by airborne droplet nuclei sized **5 to 10** micrometres from infectious pulmonary or laryngeal disease. Cavitary cases carry the highest bacillary loads, often **10** to the power of **5** to **7** per mL of sputum, and drive transmission through cough generated aerosols.",
+   "say": "TB spreads through droplet nuclei five to ten micrometres wide daily. Cavitary disease carries the highest loads in sputum samples. Coughing patients infect close contacts daily in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Source",
+     "Infectivity",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Cavitary disease",
+      "Highest loads",
+      "Cough generation"
+     ],
+     [
+      "Laryngeal disease",
+      "High",
+      "Smear positive"
+     ],
+     [
+      "Paucibacillary disease",
+      "Lower",
+      "Still confirm properly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inhaled bacilli reach alveoli and are phagocytosed by **alveolar macrophages**, yet the bacillus arrests phagosome maturation and replicates inside. About **2 to 4 weeks** later, **Th1 IFN gamma** driven CD4 T cell activation and delayed hypersensitivity form granulomas with caseous necrosis where low oxygen limits but never kills bacilli completely.",
+   "say": "Macrophages take up bacilli yet fail to kill them properly in patients. Helper T cells activate after two to four weeks in infected patients. Granulomas form around bacilli with caseous centres in practice daily.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bacilli inhaled"
+     },
+     {
+      "id": "b",
+      "label": "Macrophage ingestion"
+     },
+     {
+      "id": "c",
+      "label": "Th1 activation 2 to 4 weeks"
+     },
+     {
+      "id": "d",
+      "label": "Granuloma caseous"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Only about **10 percent** of immunocompetent infected persons progress to active disease over a lifetime, with about half progressing within **18 months**. Weak macrophage activation lets delayed hypersensitivity liquefy caseous foci into cavities, while lymphohaematogenous seeding spreads miliary disease and meningitis in those with poor immune control.",
+   "say": "Primary TB involves lower zones and children mostly in practice. Postprimary disease involves upper lobes in adults daily. Many adult cases reflect recent infection recently in studies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Strong activation",
+     "points": [
+      "Organised granulomas",
+      "Contained caseous foci",
+      "Limited progression",
+      "About half progress late"
+     ]
+    },
+    "right": {
+     "title": "Weak activation",
+     "points": [
+      "Cavitary liquefaction",
+      "High bacillary multiplication",
+      "Bronchial and vascular erosion",
+      "Miliary spread"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Primary TB** follows soon after infection with middle or lower zone shadows, common in children, while postprimary disease reactivates in apical posterior upper lobes with cavitation. Genetic fingerprints show many adult cases in endemic areas follow recent transmission rather than old reactivation, so timing labels mislead when taken too literally in exams.",
+   "say": "Xpert gives diagnosis and resistance within two hours in practice. Sensitivity is near eighty five percent overall daily in studies reported. Culture remains the gold standard always in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Zones",
+     "Typical host"
+    ],
+    "rows": [
+     [
+      "Primary",
+      "Middle or lower",
+      "Children"
+     ],
+     [
+      "Postprimary",
+      "Apical posterior upper lobes",
+      "Adults"
+     ],
+     [
+      "Miliary",
+      "Diffuse millet pattern",
+      "Poor immunity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Xpert MTB RIF** delivers TB and rifampin resistance results in under **2 hours** with overall detection near **85 percent**. When smear is positive, sensitivity climbs to **98 percent**, while smear negative disease still yields about **70 percent**, and specificity stays **98 percent**. **Culture** remains the gold standard, and a negative rapid test never excludes TB since further workup must continue regardless.",
+   "say": "HIV causes different TB patterns at low CD4 counts in patients daily. Diffuse infiltrates with effusion suggest primary like disease in patients. Urine LAM helps advanced HIV cases in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Strength",
+     "Limit"
+    ],
+    "rows": [
+     [
+      "Smear",
+      "Widely available",
+      "At least 2 samples"
+     ],
+     [
+      "Xpert",
+      "Under 2 hours, sensitivity 85 percent",
+      "Negative test excludes nothing"
+     ],
+     [
+      "Culture",
+      "Gold standard",
+      "Slow but definitive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "HIV reshapes the picture: preserved immunity keeps classic upper lobe cavitation, while **CD4** below **200** brings diffuse subtle infiltrates, little cavitation, pleural effusion and adenopathy resembling primary disease. **Urine LF LAM** helps advanced HIV, and TB **HIV** co infection changes therapy through ART timing and drug interactions, so testing always accompanies TB workup.",
+   "say": "MDR is isoniazid plus rifampin resistance together in practice daily. Rifampin resistance is a proxy for MDR in clinics daily. XDR requires an extra group A drug always in classification.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Immunity",
+     "Radiology",
+     "Tests"
+    ],
+    "rows": [
+     [
+      "Preserved CD4",
+      "Upper lobe cavitation",
+      "Standard workup"
+     ],
+     [
+      "CD4 below 200",
+      "Diffuse, effusion, adenopathy",
+      "Urine LAM, HIV test"
+     ],
+     [
+      "Advanced HIV",
+      "Primary like pattern",
+      "ART timing matters"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MDR TB** means resistance to at least **isoniazid** and **rifampin**, with rifampin resistance alone used as a practical proxy. **Pre XDR** adds fluoroquinolone resistance and **XDR** adds fluoroquinolone plus another group A drug such as **bedaquiline** or **linezolid**, defining the very hardest regimens in modern classification.",
+   "say": "Carcinoma and NTM have features mimicking TB films in practice daily. Smear cannot separate TB from NTM species reliably. Molecular or culture confirmation confirms each case in practice directly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Label",
+     "Resistance added",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Rifampin resistance",
+      "Rifampin",
+      "Practical MDR proxy"
+     ],
+     [
+      "MDR",
+      "Isoniazid plus rifampin",
+      "Standard MDR"
+     ],
+     [
+      "Pre XDR",
+      "Adds fluoroquinolone",
+      "Narrower options"
+     ],
+     [
+      "XDR",
+      "Adds bedaquiline or linezolid",
+      "Hardest regimens"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mimics include bronchogenic carcinoma as an upper lobe mass, nontuberculous mycobacteria such as **M avium complex** and **M kansasii**, chronic aspergillosis colonising old cavities, bacterial lung abscess and solitary nodules. **Sputum smear** cannot separate TB from nontuberculous mycobacteria, so **Xpert** or culture must adjudicate every smear positive case properly.",
+   "say": "Confirmation must precede antitubercular therapy in all cases treated. Empiric treatment is a cause of resistance in communities daily in practice. Proper therapy heals most patients daily in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mimic",
+     "Clue",
+     "Test"
+    ],
+    "rows": [
+     [
+      "Bronchogenic carcinoma",
+      "Mass, haemoptysis, weight loss",
+      "Bronchoscopy biopsy"
+     ],
+     [
+      "NTM disease",
+      "AFB positive, Xpert negative",
+      "Culture speciation"
+     ],
+     [
+      "Aspergilloma",
+      "Fungal ball in old cavity",
+      "Aspergillus IgG"
+     ],
+     [
+      "Bacterial abscess",
+      "Air fluid level",
+      "Culture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Microbiological confirmation must precede antitubercular therapy since empiric treatment on suspicion alone carries toxicity, resistance and missed diagnoses. Proper therapy cures the vast majority, while improper therapy breeds chronic infectious drug resistant disease and about one third of untreated patients die within **1 year** of diagnosis without care.",
+   "say": "Untreated TB kills about one third within a year in patients. Proper regimens heal most patients today in practice directly. Residual lung disease affects many survivors afterwards in studies reported.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect TB"
+     },
+     {
+      "id": "b",
+      "label": "Smear Xpert culture"
+     },
+     {
+      "id": "c",
+      "label": "Confirmed regimen"
+     },
+     {
+      "id": "d",
+      "label": "Adherence support"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High yield anchors: droplet nuclei measure **5 to 10** micrometres, Th1 activation arrives **2 to 4 weeks** after infection, lifetime progression is about **10 percent** with half inside **18 months**, **Xpert** finishes in under **2 hours** with sensitivity **85 percent** and specificity **98 percent**, **CD4** below **200** shifts disease to primary like patterns, **culture** stays the gold standard, **MDR** means **isoniazid** plus **rifampin** resistance, and about one third die within **1 year** untreated.",
+   "say": "Xpert is completed within two hours in most centres in India daily. Culture is the gold standard for diagnosis in practice daily. MDR is isoniazid plus rifampin resistance in practice daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anchor",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Droplet size",
+      "5 to 10 micrometres"
+     ],
+     [
+      "Progression",
+      "About 10 percent lifetime"
+     ],
+     [
+      "Xpert time",
+      "Under 2 hours"
+     ],
+     [
+      "Xpert sensitivity",
+      "About 85 percent"
+     ],
+     [
+      "CD4 threshold",
+      "Below 200 primary like"
+     ],
+     [
+      "Gold standard",
+      "Culture"
+     ],
+     [
+      "MDR drugs",
+      "Isoniazid plus rifampin"
+     ],
+     [
+      "Untreated",
+      "One third die within 1 year"
+     ]
+    ]
+   }
+  }
+ ]
+}

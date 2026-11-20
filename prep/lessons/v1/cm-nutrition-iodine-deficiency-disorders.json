@@ -13,12 +13,27 @@
    "say": "Deficiency writes across a lifetime. Lost pregnancies, cretinism, deaf-mutism, dull schooling, goitre last. The spectrum framing exists because neck swellings were the least of the damage all along.",
    "vis": {
     "kind": "table",
-    "cols": ["Life stage", "Disorder"],
+    "cols": [
+     "Life stage",
+     "Disorder"
+    ],
     "rows": [
-     ["Fetus", "Abortion, stillbirth, cretinism"],
-     ["Neonate", "Neonatal hypothyroidism"],
-     ["Child and adolescent", "Goitre, impaired cognition"],
-     ["Adult", "Goitre and its complications"]
+     [
+      "Fetus",
+      "Abortion, stillbirth, cretinism"
+     ],
+     [
+      "Neonate",
+      "Neonatal hypothyroidism"
+     ],
+     [
+      "Child and adolescent",
+      "Goitre, impaired cognition"
+     ],
+     [
+      "Adult",
+      "Goitre and its complications"
+     ]
     ]
    }
   },
@@ -28,11 +43,23 @@
    "say": "Three grades, fingers and eyes. Palpable only, then visible at rest. Over five percent in schoolchildren declares a public health problem. School surveys by palpation remain the standard field instrument.",
    "vis": {
     "kind": "table",
-    "cols": ["Grade", "Finding"],
+    "cols": [
+     "Grade",
+     "Finding"
+    ],
     "rows": [
-     ["0", "Neither palpable nor visible"],
-     ["1", "Palpable, not visible in normal position"],
-     ["2", "Visible in normal neck position"]
+     [
+      "0",
+      "Neither palpable nor visible"
+     ],
+     [
+      "1",
+      "Palpable, not visible in normal position"
+     ],
+     [
+      "2",
+      "Visible in normal neck position"
+     ]
     ]
    }
   },
@@ -55,11 +82,19 @@
     "kind": "compare",
     "left": {
      "title": "Population tools",
-     "points": ["Median urinary iodine, schoolchildren", "Total goitre rate by palpation", "Neonatal TSH proportions"]
+     "points": [
+      "Median urinary iodine, schoolchildren",
+      "Total goitre rate by palpation",
+      "Neonatal TSH proportions"
+     ]
     },
     "right": {
      "title": "Misuses to avoid",
-     "points": ["Single urine diagnosing a person", "Goitre rate reflecting last month's intake", "Old surveys guiding current salt policy"]
+     "points": [
+      "Single urine diagnosing a person",
+      "Goitre rate reflecting last month's intake",
+      "Old surveys guiding current salt policy"
+     ]
     }
    }
   },
@@ -70,12 +105,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Iodate added at production, 30 ppm"},
-     {"id": "b", "label": "Storage and transport losses"},
-     {"id": "c", "label": "Consumer level target, 15 ppm"},
-     {"id": "d", "label": "Daily intake meets requirement"}
+     {
+      "id": "a",
+      "label": "Iodate added at production, 30 ppm"
+     },
+     {
+      "id": "b",
+      "label": "Storage and transport losses"
+     },
+     {
+      "id": "c",
+      "label": "Consumer level target, 15 ppm"
+     },
+     {
+      "id": "d",
+      "label": "Daily intake meets requirement"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -95,12 +155,27 @@
    "say": "Pregnancy pays the premium: one fifty rising toward two fifty micrograms daily. Fetal brains suffer first and permanently, before any neck swells. Goitrogen foods add pressure in cassava ecologies.",
    "vis": {
     "kind": "table",
-    "cols": ["Group", "Approximate daily need"],
+    "cols": [
+     "Group",
+     "Approximate daily need"
+    ],
     "rows": [
-     ["Adult", "150 micrograms"],
-     ["Pregnancy", "About 250 micrograms"],
-     ["Lactation", "About 250 micrograms"],
-     ["Schoolchild", "90 to 120 micrograms by age"]
+     [
+      "Adult",
+      "150 micrograms"
+     ],
+     [
+      "Pregnancy",
+      "About 250 micrograms"
+     ],
+     [
+      "Lactation",
+      "About 250 micrograms"
+     ],
+     [
+      "Schoolchild",
+      "90 to 120 micrograms by age"
+     ]
     ]
    }
   },
@@ -110,12 +185,27 @@
    "say": "Programme machinery surveys, supplies, tests and teaches. Salt checked at factory and shop, districts resurveyed on rotation. Goitre shrinks years behind intake correction, so vigilance outlasts early victories.",
    "vis": {
     "kind": "table",
-    "cols": ["Component", "Instrument"],
+    "cols": [
+     "Component",
+     "Instrument"
+    ],
     "rows": [
-     ["Surveys", "Goitre palpation, urinary iodine"],
-     ["Salt monitoring", "Spot testing kits, titration"],
-     ["Supply policy", "Iodised salt mandate"],
-     ["Education", "Storage in dry closed containers"]
+     [
+      "Surveys",
+      "Goitre palpation, urinary iodine"
+     ],
+     [
+      "Salt monitoring",
+      "Spot testing kits, titration"
+     ],
+     [
+      "Supply policy",
+      "Iodised salt mandate"
+     ],
+     [
+      "Education",
+      "Storage in dry closed containers"
+     ]
     ]
    }
   },
@@ -127,11 +217,19 @@
     "kind": "compare",
     "left": {
      "title": "Iodine lost",
-     "points": ["Salt stored open near heat", "Loose salt from humid sacks", "Prolonged boiling after early addition"]
+     "points": [
+      "Salt stored open near heat",
+      "Loose salt from humid sacks",
+      "Prolonged boiling after early addition"
+     ]
     },
     "right": {
      "title": "Iodine kept",
-     "points": ["Closed dry container away from stove", "Packaged iodised salt purchased", "Salt added late in cooking"]
+     "points": [
+      "Closed dry container away from stove",
+      "Packaged iodised salt purchased",
+      "Salt added late in cooking"
+     ]
     }
    }
   },
@@ -141,11 +239,23 @@
    "say": "Correction carries a small backlash. Older nodular glands can tip into hyperthyroidism as iodine returns, so scale-up watches for harm. The curve is U-shaped; that refines dosing vigilance, never reverses policy.",
    "vis": {
     "kind": "table",
-    "cols": ["Intake zone", "Risk"],
+    "cols": [
+     "Intake zone",
+     "Risk"
+    ],
     "rows": [
-     ["Deficient", "Goitre, cretinism, cognitive loss"],
-     ["Adequate", "Normal thyroid development"],
-     ["Excessive", "Iodine-induced hyperthyroidism, autoimmune flare"]
+     [
+      "Deficient",
+      "Goitre, cretinism, cognitive loss"
+     ],
+     [
+      "Adequate",
+      "Normal thyroid development"
+     ],
+     [
+      "Excessive",
+      "Iodine-induced hyperthyroidism, autoimmune flare"
+     ]
     ]
    }
   },
@@ -156,12 +266,82 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Salt coverage above 90 percent"},
-     {"id": "b", "label": "Urinary iodine adequate median"},
-     {"id": "c", "label": "Goitre rate under 5 percent"},
-     {"id": "d", "label": "Elimination verified, surveillance continues"}
+     {
+      "id": "a",
+      "label": "Salt coverage above 90 percent"
+     },
+     {
+      "id": "b",
+      "label": "Urinary iodine adequate median"
+     },
+     {
+      "id": "c",
+      "label": "Goitre rate under 5 percent"
+     },
+     {
+      "id": "d",
+      "label": "Elimination verified, surveillance continues"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Goitre grade 1 is palpable but invisible with the neck normal, grade 2 is visible in that position, and total goitre rate above 5 percent in schoolchildren marks a public health problem. Median urinary iodine 100 to 199 shows adequacy, while below 20 shows severe deficiency. Iodised salt carries 30 ppm at production and 15 ppm for consumers.",
+   "say": "High-yield for the exam: Goitre grade 1 is palpable but invisible with the neck normal, grade 2 is visible in that position, and total goitre rate above 5 percent in schoolchildren marks a public health problem. Median urinary iodine 100 to 199 shows adequacy, while below 20 shows severe deficiency. Iodised salt carries 30 ppm at production and 15 ppm for consumers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Goitre grade 0",
+      "Neither palpable nor visible goitre"
+     ],
+     [
+      "Goitre grade 1",
+      "Palpable but not visible at rest"
+     ],
+     [
+      "Goitre grade 2",
+      "Visible with neck in normal position"
+     ],
+     [
+      "Public health problem cutoff",
+      "Total goitre rate above 5 percent"
+     ],
+     [
+      "Adequate urinary iodine median",
+      "100 to 199 micrograms per litre"
+     ],
+     [
+      "Severe deficiency median",
+      "Urinary iodine below 20 micrograms"
+     ],
+     [
+      "Salt iodine at production",
+      "30 parts per million classic standard"
+     ],
+     [
+      "Salt iodine at consumer",
+      "15 parts per million classic standard"
+     ]
+    ]
    }
   }
  ],

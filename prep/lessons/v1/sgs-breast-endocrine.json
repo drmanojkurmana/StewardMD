@@ -1,0 +1,345 @@
+{
+ "v": 1,
+ "module": "sgs-breast-endocrine",
+ "subject": "ss-general-surgery",
+ "title": "Breast and endocrine surgery: cancer, goitre, Graves and hyperparathyroidism",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22nd edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Ductal carcinoma in situ** means malignant cells confined by the basement membrane, found in 20 percent of screen detected cancers. Most patients are women between 45 and 60 years, and 70 percent present as calcifications on mammography. Size above 2.5 cm predicts higher recurrence after breast conservation surgery alone.",
+   "say": "Ductal carcinoma in situ means malignant cells confined by the basement membrane, found in twenty percent of screen detected cancers. Most patients are women between forty five and sixty years. Seventy percent present as calcifications on mammography. Size above two point five centimetres predicts higher recurrence after breast conservation alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "DCIS",
+     "Invasive cancer"
+    ],
+    "rows": [
+     [
+      "Cells",
+      "Duct only",
+      "Stroma invaded"
+     ],
+     [
+      "Metastasis",
+      "None",
+      "Nodes possible"
+     ],
+     [
+      "Size clue",
+      "Calcification extent",
+      "Tumour diameter"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Invasive ductal carcinoma** is the commonest invasive cancer at 75 percent of cases, and oestrogen receptor positivity occurs in 70 percent. Women over 50 carry higher risk, and a first degree relative raises risk 2.5 times. ** Nottingham grade 3** tumours grow faster and need chemotherapy even at 1.5 cm size.",
+   "say": "Invasive ductal carcinoma is the commonest invasive cancer at seventy five percent of cases. Oestrogen receptor positivity occurs in seventy percent. Women over fifty carry higher risk, and a first degree relative raises risk two and a half times. Grade three tumours grow faster and need chemotherapy even at one point five centimetres size.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Risk factors",
+     "points": [
+      "Age over 50",
+      "Family history",
+      "Early menarche"
+     ]
+    },
+    "right": {
+     "title": "Prognosis",
+     "points": [
+      "Receptor status",
+      "Grade and size",
+      "Node involvement"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Nodular goitre** surgery is needed for compression causing stridor in 5 percent, and for suspicious nodules found in 10 percent of cases. **Substernal extension** beyond 3 cm below the suprasternal notch needs a collar incision in 80 percent. Total thyroidectomy reduces recurrence from 15 percent to under 2 percent at 10 years.",
+   "say": "Nodular goitre surgery is needed for compression causing noisy breathing in five percent, and for suspicious nodules found in ten percent of cases. Substernal extension beyond three centimetres below the notch needs a collar incision in eighty percent. Total thyroidectomy reduces recurrence from fifteen percent to under two percent long term.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Sign",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Compression",
+      "Stridor",
+      "Surgery"
+     ],
+     [
+      "Suspicious nodule",
+      "USG TI-RADS 5",
+      "FNAC first"
+     ],
+     [
+      "Toxicity",
+      "Weight loss",
+      "Operate after control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Graves disease** causes toxic diffuse goitre in women aged 20 to 50, with TSH suppressed below 0.01 and T3 elevated. **Exophthalmos** occurs in 30 percent, and pretibial myxoedema in 5 percent. Antithyroid drugs like **methimazole** 10 to 20 mg control symptoms before surgery in 90 percent of patients.",
+   "say": "Graves disease causes toxic diffuse goitre in women aged twenty to fifty, with TSH suppressed below zero point zero one. Eye protrusion occurs in thirty percent, and shin changes in five percent. Methimazole ten to twenty milligrams controls symptoms before surgery in ninety percent of patients who take it regularly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "TSH suppressed"
+     },
+     {
+      "id": "g2",
+      "label": "T3 elevated"
+     },
+     {
+      "id": "g3",
+      "label": "Antithyroid drug"
+     },
+     {
+      "id": "g4",
+      "label": "Surgery"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2"
+     ],
+     [
+      "g2",
+      "g3"
+     ],
+     [
+      "g3",
+      "g4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Primary hyperparathyroidism** presents with stones, bones, groans and moans in 15 percent of cases at diagnosis. Serum calcium exceeds 10.2 mg per decilitre, and parathyroid hormone rises above 65 pg per millilitre. A **sestamibi scan** localises adenoma in 85 percent, and surgery cures 95 percent with 2.5 percent risk of relapse.",
+   "say": "Primary hyperparathyroidism presents with stones, bones, groans and moans in fifteen percent of cases at diagnosis. Serum calcium exceeds ten point two milligrams per decilitre, and parathyroid hormone rises above sixty five. Sestamibi scan localises adenoma in eighty five percent, and surgery cures ninety five percent with low relapse risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Manifestation",
+     "Finding",
+     "Frequency"
+    ],
+    "rows": [
+     [
+      "Renal stones",
+      "Hypercalciuria",
+      "15 percent"
+     ],
+     [
+      "Bone disease",
+      "Osteoporosis",
+      "20 percent"
+     ],
+     [
+      "Gut pain",
+      "Ulcer",
+      "10 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Triple assessment** for breast lumps combines clinic, imaging and core biopsy, and it beats fine needle aspiration for grading in 90 percent. **BI-RADS 4** lesions carry 20 to 90 percent malignancy risk and need biopsy, while **BI-RADS 2** carries under 2 percent risk. Core biopsy gives oestrogen receptor status before any surgery.",
+   "say": "Triple assessment for breast lumps combines clinic, imaging and core biopsy, and it beats fine needle aspiration for grading in ninety percent of cases. BI-RADS four lesions carry twenty to ninety percent malignancy risk and need biopsy, while BI-RADS two carries under two percent risk. Core biopsy gives receptor status before any surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "BI-RADS 2",
+     "points": [
+      "Benign",
+      "Under 2 percent risk",
+      "Follow up"
+     ]
+    },
+    "right": {
+     "title": "BI-RADS 4",
+     "points": [
+      "Suspicious",
+      "20 to 90 percent",
+      "Needs biopsy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Breast conservation** suits tumours under 3 cm with clear margins of 2 mm, while mastectomy suits multicentric disease in 10 percent. **Sentinel node biopsy** stages the axilla with 5 percent false negative rate, and **axillary clearance** follows when 3 or more nodes are positive. Radiotherapy after conservation cuts local recurrence by half.",
+   "say": "Breast conservation suits tumours under three centimetres with clear margins, while mastectomy suits multicentric disease in ten percent. Sentinel node biopsy stages the axilla with low false negative rate. Axillary clearance follows when three or more nodes are positive. Radiotherapy after conservation cuts local recurrence by half in long follow up.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Core biopsy"
+     },
+     {
+      "id": "b2",
+      "label": "Receptor test"
+     },
+     {
+      "id": "b3",
+      "label": "Conserve or mastectomy"
+     },
+     {
+      "id": "b4",
+      "label": "Sentinel node"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ],
+     [
+      "b3",
+      "b4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Thyroid storm** after goitre surgery kills 10 percent, so preoperative control with **potassium iodide** 5 drops three times daily for 10 days helps. **Hypoparathyroidism** after thyroidectomy drops calcium below 8.0 mg per decilitre in 5 percent. Recurrent laryngeal nerve injury causes hoarseness in 2 percent and needs speech therapy.",
+   "say": "Thyroid storm after goitre surgery kills ten percent, so preoperative control with potassium iodide helps. Low calcium after thyroidectomy appears in five percent of cases and needs supplementation. Recurrent laryngeal nerve injury causes hoarseness in two percent and needs speech therapy in most patients affected by this complication.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "After surgery",
+     "Rate",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Low calcium",
+      "5 percent",
+      "Calcium tablets"
+     ],
+     [
+      "Voice change",
+      "2 percent",
+      "Speech therapy"
+     ],
+     [
+      "Bleeding",
+      "1 percent",
+      "Reoperation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neck haematoma** after thyroid surgery needs bedside release of sutures within 10 minutes, because airway closes fast. **Drain output** above 200 mL in 24 hours signals bleeding. Postoperative calcium is checked at 6 hours, and **dextran** has no role in stopping this bleeding complication.",
+   "say": "Neck haematoma after thyroid surgery needs bedside release of sutures within ten minutes, because the airway closes fast. Drain output above two hundred milliliters in twenty four hours signals bleeding. Postoperative calcium is checked at six hours, and preventive measures reduce this life threatening complication to a great extent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Swelling"
+     },
+     {
+      "id": "h2",
+      "label": "Airway risk"
+     },
+     {
+      "id": "h3",
+      "label": "Open sutures"
+     },
+     {
+      "id": "h4",
+      "label": "Rush to theatre"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ],
+     [
+      "h3",
+      "h4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tamoxifen** 20 mg daily for 5 years cuts recurrence by 40 percent in receptor positive disease, while **aromatase inhibitors** suit postmenopausal women with 60 percent benefit. **Anastrozole** 1 mg daily improves survival over tamoxifen in postmenopausal patients. Endocrine therapy plus chemotherapy together beats either alone by 15 percent.",
+   "say": "Tamoxifen twenty milligrams daily for five years cuts recurrence by forty percent in receptor positive disease. Aromatase inhibitors suit postmenopausal women with greater benefit in that group. Anastrozole one milligram daily improves survival over tamoxifen in postmenopausal patients. Combined therapy beats either alone by fifteen percent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tamoxifen",
+     "points": [
+      "Pre and post menopause",
+      "20 mg daily",
+      "Uterus risk"
+     ]
+    },
+    "right": {
+     "title": "Aromatase inhibitor",
+     "points": [
+      "Postmenopausal only",
+      "Bone loss risk",
+      "Better survival"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**DCIS** needs complete excision with 2 mm margins, and radiotherapy halves recurrence from 20 percent to 8 percent. All breast cancers need **axillary staging** by sentinel node, and node positivity above 3 changes chemotherapy. Thyroid surgery needs **2.5 cm lenses** for eye assessment preoperatively in Graves disease.",
+   "say": "High-yield for the exam. DCIS needs complete excision with two millimeters margins, and radiotherapy halves recurrence from twenty percent to eight percent. All breast cancers need axillary staging by sentinel node. Thyroid surgery needs careful eye assessment preoperatively in Graves disease, with attention to neck swelling and calcium levels also.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Key number",
+     "Action"
+    ],
+    "rows": [
+     [
+      "DCIS",
+      "2 mm margin",
+      "Excise plus radiotherapy"
+     ],
+     [
+      "Invasive cancer",
+      "3 nodes positive",
+      "Axillary clearance"
+     ],
+     [
+      "Hyperparathyroid",
+      "10.2 mg calcium",
+      "Parathyroidectomy"
+     ]
+    ]
+   }
+  }
+ ]
+}

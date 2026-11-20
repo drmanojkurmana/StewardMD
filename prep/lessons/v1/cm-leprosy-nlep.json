@@ -25,11 +25,23 @@
    "say": "Three signs, one suffices. Patch that cannot feel, thickened tender nerve, bacilli on smear. The numb patch is the screening hook taught first because communities can be searched for exactly that.",
    "vis": {
     "kind": "table",
-    "cols": ["Cardinal sign", "How checked"],
+    "cols": [
+     "Cardinal sign",
+     "How checked"
+    ],
     "rows": [
-     ["Patch with sensory loss", "Light touch or pinprick testing"],
-     ["Thickened peripheral nerve", "Palpation: ulnar, peroneal, great auricular"],
-     ["Acid-fast bacilli", "Slit-skin smear microscopy"]
+     [
+      "Patch with sensory loss",
+      "Light touch or pinprick testing"
+     ],
+     [
+      "Thickened peripheral nerve",
+      "Palpation: ulnar, peroneal, great auricular"
+     ],
+     [
+      "Acid-fast bacilli",
+      "Slit-skin smear microscopy"
+     ]
     ]
    }
   },
@@ -41,11 +53,19 @@
     "kind": "compare",
     "left": {
      "title": "Paucibacillary (PB)",
-     "points": ["Few lesions (up to 5)", "Smear negative", "MDT for 6 months"]
+     "points": [
+      "Few lesions (up to 5)",
+      "Smear negative",
+      "MDT for 6 months"
+     ]
     },
     "right": {
      "title": "Multibacillary (MB)",
-     "points": ["More lesions or smear positive", "Greater infectiousness", "MDT for 12 months"]
+     "points": [
+      "More lesions or smear positive",
+      "Greater infectiousness",
+      "MDT for 12 months"
+     ]
     }
    }
   },
@@ -55,11 +75,27 @@
    "say": "Reactions are the emergencies. Type one inflames nerves toward permanent damage in days; type two storms systemically in lepromatous disease. Steroids rescue nerves urgently. MDT continues through reactions, never stopped for them.",
    "vis": {
     "kind": "table",
-    "cols": ["Reaction", "Setting", "Danger"],
+    "cols": [
+     "Reaction",
+     "Setting",
+     "Danger"
+    ],
     "rows": [
-     ["Type 1 reversal", "Borderline disease", "Rapid nerve function loss"],
-     ["Type 2 ENL", "Lepromatous disease", "Neuritis, eye and systemic injury"],
-     ["Lucio phenomenon", "Diffuse lepromatous, rare", "Necrotising skin infarction"]
+     [
+      "Type 1 reversal",
+      "Borderline disease",
+      "Rapid nerve function loss"
+     ],
+     [
+      "Type 2 ENL",
+      "Lepromatous disease",
+      "Neuritis, eye and systemic injury"
+     ],
+     [
+      "Lucio phenomenon",
+      "Diffuse lepromatous, rare",
+      "Necrotising skin infarction"
+     ]
     ]
    }
   },
@@ -81,12 +117,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Silent nerve damage accumulates"},
-     {"id": "b", "label": "Detection delayed for years"},
-     {"id": "c", "label": "Grade-2 disability at diagnosis"},
-     {"id": "d", "label": "Case audited as system failure"}
+     {
+      "id": "a",
+      "label": "Silent nerve damage accumulates"
+     },
+     {
+      "id": "b",
+      "label": "Detection delayed for years"
+     },
+     {
+      "id": "c",
+      "label": "Grade-2 disability at diagnosis"
+     },
+     {
+      "id": "d",
+      "label": "Case audited as system failure"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -97,11 +158,19 @@
     "kind": "compare",
     "left": {
      "title": "Elimination (achieved)",
-     "points": ["Prevalence under 1 per 10000", "India declared in 2005", "Transmission continues at low level"]
+     "points": [
+      "Prevalence under 1 per 10000",
+      "India declared in 2005",
+      "Transmission continues at low level"
+     ]
     },
     "right": {
      "title": "Eradication (not achieved)",
-     "points": ["Zero transmission worldwide", "Long incubation hides reservoirs", "No declaration exists"]
+     "points": [
+      "Zero transmission worldwide",
+      "Long incubation hides reservoirs",
+      "No declaration exists"
+     ]
     }
    }
   },
@@ -111,11 +180,23 @@
    "say": "Indicators fingerprint transmission. Child proportion proves ongoing spread; multibacillary proportion grades infectious load; disability proportion grades delay. Child cases with deformity together form the worst district signal possible.",
    "vis": {
     "kind": "table",
-    "cols": ["Indicator", "Reads"],
+    "cols": [
+     "Indicator",
+     "Reads"
+    ],
     "rows": [
-     ["Annual new case detection rate", "Case finding intensity and incidence proxy"],
-     ["Child proportion among new cases", "Recent ongoing transmission"],
-     ["Grade-2 proportion among new cases", "Diagnostic delay in the system"]
+     [
+      "Annual new case detection rate",
+      "Case finding intensity and incidence proxy"
+     ],
+     [
+      "Child proportion among new cases",
+      "Recent ongoing transmission"
+     ],
+     [
+      "Grade-2 proportion among new cases",
+      "Diagnostic delay in the system"
+     ]
     ]
    }
   },
@@ -126,12 +207,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Index case diagnosed"},
-     {"id": "b", "label": "Household contacts examined"},
-     {"id": "c", "label": "Eligible contacts offered prophylaxis"},
-     {"id": "d", "label": "Periodic re-examination scheduled"}
+     {
+      "id": "a",
+      "label": "Index case diagnosed"
+     },
+     {
+      "id": "b",
+      "label": "Household contacts examined"
+     },
+     {
+      "id": "c",
+      "label": "Eligible contacts offered prophylaxis"
+     },
+     {
+      "id": "d",
+      "label": "Periodic re-examination scheduled"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -140,11 +246,68 @@
    "say": "Society needs treatment too. Discriminatory laws fall, surgery and footwear restore function, community rehabilitation restores livelihoods. The patient's bacilli cure in months; public reaction takes the longer course.",
    "vis": {
     "kind": "table",
-    "cols": ["Burden", "Response"],
+    "cols": [
+     "Burden",
+     "Response"
+    ],
     "rows": [
-     ["Deformity and ulcers", "Surgery, self-care, footwear"],
-     ["Livelihood loss", "Vocational rehabilitation"],
-     ["Legal discrimination", "Repeal and rights protection"]
+     [
+      "Deformity and ulcers",
+      "Surgery, self-care, footwear"
+     ],
+     [
+      "Livelihood loss",
+      "Vocational rehabilitation"
+     ],
+     [
+      "Legal discrimination",
+      "Repeal and rights protection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: One cardinal sign diagnoses leprosy operationally: an anaesthetic patch, a thickened nerve, or acid fast bacilli on slit skin smear. Paucibacillary MDT lasts six months and multibacillary twelve months with rifampicin, dapsone and clofazimine. MDT continues through reactions, with urgent steroids for nerve involvement. Elimination means prevalence below one per ten thousand, achieved by India in 2005.",
+   "say": "High-yield for the exam: One cardinal sign diagnoses leprosy operationally: an anaesthetic patch, a thickened nerve, or acid fast bacilli on slit skin smear. Paucibacillary MDT lasts six months and multibacillary twelve months with rifampicin, dapsone and clofazimine. MDT continues through reactions, with urgent steroids for nerve involvement. Elimination means prevalence below one per ten thousand, achieved by India in 2005.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Cardinal sign one",
+      "Hypopigmented patch with definite sensory loss"
+     ],
+     [
+      "Cardinal sign two",
+      "Thickened peripheral nerve with loss function"
+     ],
+     [
+      "Cardinal sign three",
+      "Acid fast bacilli on slit skin smear"
+     ],
+     [
+      "Paucibacillary MDT duration",
+      "Six months, few lesions smear negative"
+     ],
+     [
+      "Multibacillary MDT duration",
+      "Twelve months rifampicin dapsone clofazimine blister packs"
+     ],
+     [
+      "Type 1 reaction",
+      "Reversal reaction inflames lesions nerves, urgent steroids"
+     ],
+     [
+      "Type 2 reaction",
+      "ENL fever tender nodules neuritis iritis orchitis"
+     ],
+     [
+      "Reaction treatment trap",
+      "MDT continues through reactions, never stopped"
+     ]
     ]
    }
   }

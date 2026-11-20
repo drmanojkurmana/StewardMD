@@ -35,12 +35,32 @@
       "say": "Endoscopic examination distinguishes intestinal tuberculosis from Crohn disease by evaluating ulcer orientation and valve configuration. Intestinal tuberculosis classically produces transverse circular ulcers aligned perpendicular to the bowel axis, frequently alongside a patulous ileocecal valve. In contrast, Crohn disease features longitudinal linear ulcers and cobblestoning.",
       "vis": {
         "kind": "table",
-        "cols": ["Endoscopic Feature", "Intestinal Tuberculosis", "Crohn Disease"],
+        "cols": [
+          "Endoscopic Feature",
+          "Intestinal Tuberculosis",
+          "Crohn Disease"
+        ],
         "rows": [
-          ["Ulcer orientation", "Transverse circular (perpendicular to axis)", "Longitudinal linear (parallel to axis)"],
-          ["Ileocecal valve appearance", "Patulous, gaping, incompetent valve", "Strictured, fixed, deformed valve"],
-          ["Mucosal background", "Surrounding mucosal erythema", "Normal intervening mucosa (skip lesions)"],
-          ["Cobblestoning & aphthae", "Rare or absent", "Commonly present"]
+          [
+            "Ulcer orientation",
+            "Transverse circular (perpendicular to axis)",
+            "Longitudinal linear (parallel to axis)"
+          ],
+          [
+            "Ileocecal valve appearance",
+            "Patulous, gaping, incompetent valve",
+            "Strictured, fixed, deformed valve"
+          ],
+          [
+            "Mucosal background",
+            "Surrounding mucosal erythema",
+            "Normal intervening mucosa (skip lesions)"
+          ],
+          [
+            "Cobblestoning & aphthae",
+            "Rare or absent",
+            "Commonly present"
+          ]
         ]
       }
     },
@@ -61,15 +81,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Mucosal biopsies from ulcer margin or base"},
-          {"id": "b", "label": "Ziehl-Neelsen acid-fast staining (low yield)"},
-          {"id": "c", "label": "GeneXpert MTB/RIF assay on biopsy tissue"},
-          {"id": "d", "label": "Rapid confirmation of MTB and rifampicin sensitivity"}
+          {
+            "id": "a",
+            "label": "Mucosal biopsies from ulcer margin or base"
+          },
+          {
+            "id": "b",
+            "label": "Ziehl-Neelsen acid-fast staining (low yield)"
+          },
+          {
+            "id": "c",
+            "label": "GeneXpert MTB/RIF assay on biopsy tissue"
+          },
+          {
+            "id": "d",
+            "label": "Rapid confirmation of MTB and rifampicin sensitivity"
+          }
         ],
         "edges": [
-          ["a", "b", "histology"],
-          ["a", "c", "molecular PCR"],
-          ["c", "d", "provides"]
+          [
+            "a",
+            "b",
+            "histology"
+          ],
+          [
+            "a",
+            "c",
+            "molecular PCR"
+          ],
+          [
+            "c",
+            "d",
+            "provides"
+          ]
         ]
       }
     },
@@ -78,12 +122,32 @@
       "say": "Computed tomography enterography provides valuable cross-sectional findings that help differentiate intestinal tuberculosis from Crohn disease. Intestinal tuberculosis characteristically demonstrates necrotic mesenteric lymph nodes with peripheral rim enhancement around central hypoattenuation. In contrast, Crohn disease lymph nodes have uniform homogeneous contrast enhancement.",
       "vis": {
         "kind": "table",
-        "cols": ["Radiological Sign", "Intestinal Tuberculosis", "Crohn Disease"],
+        "cols": [
+          "Radiological Sign",
+          "Intestinal Tuberculosis",
+          "Crohn Disease"
+        ],
         "rows": [
-          ["Mesenteric lymph nodes", "Low-density necrotic centres with rim enhancement", "Homogeneously enhancing without necrosis"],
-          ["Bowel wall thickening", "Concentric, symmetric, localized to ileocecal", "Eccentric, asymmetric, transmural"],
-          ["Mesenteric vasculature", "Mild vascular engorgement", "Marked 'comb sign' of engorged vasa recta"],
-          ["Fibrofatty proliferation", "Absent or minimal", "Prominent creeping fat around bowel"]
+          [
+            "Mesenteric lymph nodes",
+            "Low-density necrotic centres with rim enhancement",
+            "Homogeneously enhancing without necrosis"
+          ],
+          [
+            "Bowel wall thickening",
+            "Concentric, symmetric, localized to ileocecal",
+            "Eccentric, asymmetric, transmural"
+          ],
+          [
+            "Mesenteric vasculature",
+            "Mild vascular engorgement",
+            "Marked 'comb sign' of engorged vasa recta"
+          ],
+          [
+            "Fibrofatty proliferation",
+            "Absent or minimal",
+            "Prominent creeping fat around bowel"
+          ]
         ]
       }
     },
@@ -93,15 +157,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Indeterminate ileocecal ulceration in endemic region"},
-          {"id": "b", "label": "Empirical therapeutic trial with ATT (never steroids alone)"},
-          {"id": "c", "label": "Surveillance colonoscopy at 8 to 12 weeks"},
-          {"id": "d", "label": "Complete mucosal healing: confirms intestinal TB"}
+          {
+            "id": "a",
+            "label": "Indeterminate ileocecal ulceration in endemic region"
+          },
+          {
+            "id": "b",
+            "label": "Empirical therapeutic trial with ATT (never steroids alone)"
+          },
+          {
+            "id": "c",
+            "label": "Surveillance colonoscopy at 8 to 12 weeks"
+          },
+          {
+            "id": "d",
+            "label": "Complete mucosal healing: confirms intestinal TB"
+          }
         ],
         "edges": [
-          ["a", "b", "initiate"],
-          ["b", "c", "re-evaluate"],
-          ["c", "d", "verifies"]
+          [
+            "a",
+            "b",
+            "initiate"
+          ],
+          [
+            "b",
+            "c",
+            "re-evaluate"
+          ],
+          [
+            "c",
+            "d",
+            "verifies"
+          ]
         ]
       }
     },
@@ -110,10 +198,25 @@
       "say": "The standard curative antitubercular therapy regimen for drug-sensitive intestinal tuberculosis requires a six-month course of oral treatment. The regimen comprises a two-month intensive phase with isoniazid, rifampicin, pyrazinamide, and ethambutol, designated as HRZE, followed by a four-month continuation phase with isoniazid and rifampicin, designated as HR.",
       "vis": {
         "kind": "table",
-        "cols": ["Regimen Phase", "Duration", "Drug Components", "Therapeutic Objective"],
+        "cols": [
+          "Regimen Phase",
+          "Duration",
+          "Drug Components",
+          "Therapeutic Objective"
+        ],
         "rows": [
-          ["Intensive phase", "2 months", "HRZE (Isoniazid, Rifampicin, Pyrazinamide, Ethambutol)", "Rapid bactericidal action, prevents resistance"],
-          ["Continuation phase", "4 months", "HR (Isoniazid, Rifampicin)", "Sterilizing activity, clears persisting bacilli"]
+          [
+            "Intensive phase",
+            "2 months",
+            "HRZE (Isoniazid, Rifampicin, Pyrazinamide, Ethambutol)",
+            "Rapid bactericidal action, prevents resistance"
+          ],
+          [
+            "Continuation phase",
+            "4 months",
+            "HR (Isoniazid, Rifampicin)",
+            "Sterilizing activity, clears persisting bacilli"
+          ]
         ]
       }
     },
@@ -126,6 +229,51 @@
         "alt": "Left panel shows a macrophage presenting Mycobacterium tuberculosis to a helper T cell, with interleukin-12, interferon-gamma, and TNF-alpha, then epithelioid cells and a Langhans giant cell. Right panel is a caseating granuloma with caseous necrosis, epithelioid macrophages, Langhans giant cells, helper and cytotoxic T lymphocytes, and a fibroblast capsule.",
         "caption": "TNF-alpha is one signal that holds this granuloma together. Blocking TNF in untreated intestinal tuberculosis lets the contained bacilli disseminate. Illustration: StewardMD.",
         "ar": 1.3405
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Intestinal tuberculosis prefers the ileocecal region in over 70 percent of cases. Ulcers are transverse and the ileocecal valve is patulous, the opposite of Crohn disease. Granulomas are large and caseating. GeneXpert on tissue also reads rifampicin resistance. A drug trial of 8 to 12 weeks that heals mucosa confirms the diagnosis. Treatment lasts 6 months: HRZE for 2 months, then HR for 4.",
+      "say": "High-yield for the exam: Intestinal tuberculosis prefers the ileocecal region in over 70 percent of cases. Ulcers are transverse and the ileocecal valve is patulous, the opposite of Crohn disease. Granulomas are large and caseating. GeneXpert on tissue also reads rifampicin resistance. A drug trial of 8 to 12 weeks that heals mucosa confirms the diagnosis. Treatment lasts 6 months: HRZE for 2 months, then HR for 4.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Favourite site",
+            "Ileocecal region in over 70 percent"
+          ],
+          [
+            "Ulcer shape",
+            "Transverse rather than longitudinal"
+          ],
+          [
+            "Valve",
+            "Patulous instead of strictured"
+          ],
+          [
+            "Histology",
+            "Large caseating granulomas over 400"
+          ],
+          [
+            "Nodes on CT",
+            "Rim enhancement around necrosis"
+          ],
+          [
+            "Unclear case",
+            "Healing after 8 to 12 weeks of drugs"
+          ],
+          [
+            "Regimen",
+            "HRZE for 2 months, then HR for 4"
+          ],
+          [
+            "Danger",
+            "Anti-TNF therapy can disseminate infection"
+          ]
+        ]
       }
     }
   ],

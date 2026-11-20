@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-platelet-disorders",
+ "subject": "ss-general-medicine",
+ "title": "Platelet disorders and thrombotic microangiopathy",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Thrombocytopenia** is defined by counts below 150,000 in adults. **Bleeding time** is obsolete and platelet function assessment uses aggregometry and flow cytometry instead. A **blood film** showing schistocytes points toward microangiopathy in many patients. Marrow examination separates underproduction from destruction in unclear cases.",
+   "say": "Thrombocytopenia is defined by counts below one hundred fifty thousand in adults. Bleeding time is obsolete and platelet function assessment is by aggregometry and flow cytometry instead. A blood film showing schistocytes points toward microangiopathy in many patients. Marrow examination is required to separate underproduction from destruction in unclear cases.",
+   "vis": null
+  },
+  {
+   "tx": "**Immune thrombocytopenia** is isolated platelet destruction without other cytopenias. **Helicobacter** infection and drugs are secondary triggers that must be excluded clinically. **Prednisolone** is first line therapy for adults with bleeding or very low counts. **Eltrombopag** and **romiplostim** are thrombopoietin agents that raise counts in refractory disease.",
+   "say": "Immune thrombocytopenia is isolated platelet destruction without other cytopenias. Helicobacter infection and drugs are secondary triggers that must be excluded clinically. Prednisolone is first line therapy for adults with bleeding or very low counts. Eltrombopag and romiplostim are thrombopoietin agents that raise counts in refractory disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Isolated thrombocytopenia"
+     },
+     {
+      "id": "b",
+      "label": "Exclude secondary causes"
+     },
+     {
+      "id": "c",
+      "label": "Prednisolone first line"
+     },
+     {
+      "id": "d",
+      "label": "TPO agent if refractory"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**TTP** combines thrombocytopenia with haemolytic anaemia and schistocytes. **ADAMTS13** deficiency with large von Willebrand multimers is the mechanism of TTP. **Caplacizumab** blocks platelet adhesion and improves organ recovery in acute TTP. **Rituximab** suppresses autoantibody production as relapse prevention in many protocols.",
+   "say": "TTP is thrombocytopenia with haemolytic anaemia and schistocytes combined. ADAMTS thirteen deficiency with large von Willebrand multimers is the mechanism of TTP. Caplacizumab blocks platelet adhesion and improves organ recovery in acute TTP. Rituximab is used to suppress autoantibody production as relapse prevention in many protocols.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "TTP",
+     "HUS"
+    ],
+    "rows": [
+     [
+      "Schistocytes",
+      "Present",
+      "Present"
+     ],
+     [
+      "ADAMTS thirteen",
+      "Severely deficient",
+      "Normal activity"
+     ],
+     [
+      "Neurologic signs",
+      "Prominent",
+      "Less common"
+     ],
+     [
+      "Renal failure",
+      "Moderate",
+      "Severe and dominant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HUS** follows Shiga toxin infection with bloody diarrhoea in children classically. **Complement mediated HUS** is a genetic complement dysregulation disorder in adults mostly. **Complement blockade** therapy is the modern mainstay for complement mediated disease. **Folic acid** supports red cell production during haemolysis in many patients today.",
+   "say": "HUS follows Shiga toxin infection with bloody diarrhoea in children classically. Complement mediated HUS is a genetic complement dysregulation disorder in adults mostly. Complement blockade therapy is the modern mainstay for complement mediated disease. Folic acid supports red cell production during haemolysis in many patients today.",
+   "vis": null
+  },
+  {
+   "tx": "**Heparin induced thrombocytopenia** is an antibodymediated platelet fall with thrombosis risk. **4Ts** scoring guides pretest probability before testing for antibodies. Platelet fall exceeding 50% with thrombosis is the hallmark pattern. **Argatroban** and **bivalirudin** are direct anticoagulants that avoid heparin exposure safely.",
+   "say": "Heparin induced thrombocytopenia is an antibody mediated platelet fall with thrombosis risk. Four Ts scoring guides pretest probability before testing for antibodies. Platelet fall exceeding fifty percent with thrombosis is the hallmark pattern. Argatroban and bivalirudin are direct anticoagulants that avoid heparin exposure safely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Timing",
+     "Thrombosis"
+    ],
+    "rows": [
+     [
+      "Typical HIT",
+      "5 to 10 days",
+      "Frequent arterial and venous"
+     ],
+     [
+      "Delayed HIT",
+      "After heparin stopped",
+      "Still possible risk"
+     ],
+     [
+      "Rapid HIT",
+      "Within a day",
+      "Prior exposure history"
+     ],
+     [
+      "TTP",
+      "No heparin link",
+      "Microvascular thrombosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Glanzmann thrombasthenia** lacks platelet aggregation with normal counts and morphology. **Bernard Soulier** lacks GPIb adhesion with giant platelets on the film. **Factor XI** deficiency extends clot formation time without platelet defects in many cases. Platelet transfusion suits Glanzmann bleeding with antifibrinolytic cover in many protocols.",
+   "say": "Glanzmann thrombasthenia is absent platelet aggregation with normal counts and morphology. Bernard Soulier is absent GPIb adhesion with giant platelets on the film. Factor eleven deficiency extends clot formation time without platelet defects in many cases. Platelet transfusion is the treatment for Glanzmann bleeding with antifibrinolytic cover in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**Aspirin** irreversibly acetylates platelet cyclooxygenase for antiplatelet effect. **Fostamatinib** inhibits spleen tyrosine kinase in refractory immune thrombocytopenia in many protocols. **Methylprednisolone** pulses rescue severe bleeding with refractory counts in acute settings. **Dexamethasone** is the alternative steroid course for first line immune therapy.",
+   "say": "Aspirin irreversibly acetylates platelet cyclooxygenase for antiplatelet effect. Fostamatinib inhibits spleen tyrosine kinase in refractory immune thrombocytopenia in many protocols. Methylprednisolone pulses rescue severe bleeding with refractory counts in acute settings. Dexamethasone is the alternative steroid course for first line immune therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low platelets",
+     "points": [
+      "Immune destruction commonest",
+      "Steroids first line therapy",
+      "TPO agents for refractory cases",
+      "Rituximab for relapse control"
+     ]
+    },
+    "right": {
+     "title": "Dysfunctional platelets",
+     "points": [
+      "Normal counts, poor function",
+      "Glanzmann and Bernard Soulier",
+      "Platelet transfusion for bleeding",
+      "Operative cover with platelets"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Plasma exchange** is urgent therapy for TTP and must not be delayed. **Quinine** dependent thrombocytopenia is a classic drug triggered cause in many histories. **Gemcitabine** induced microangiopathy is drug endothelial injury with renal failure. **Fondaparinux** and direct oral anticoagulants avoid heparin in HIT workup settings.",
+   "say": "Plasma exchange is urgent therapy for TTP and must not be delayed. Quinine dependent thrombocytopenia is a classic drug triggered cause in many histories. Gemcitabine induced microangiopathy is drug endothelial injury with renal failure. Fondaparinux and direct oral anticoagulants are options for HIT thrombosis prophylaxis in select patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Disseminated intravascular coagulation** consumes platelets with clotting factors in sepsis. **Sodium citrate** is the blood bank anticoagulant that chelates calcium in stored blood. **Warfarin** necrosis reflects protein C deficiency during initiation in rare cases. **Apixaban** and **rivaroxaban** are oral agents for HIT thrombosis prophylaxis in select patients.",
+   "say": "Disseminated intravascular coagulation consumes platelets with clotting factors in sepsis. Sodium citrate is the blood bank anticoagulant that chelates calcium in stored blood. Warfarin necrosis reflects protein C deficiency during initiation in rare cases. Apixaban and rivaroxaban are oral agents for HIT thrombosis prophylaxis in select patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Platelet pattern",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Immune destruction",
+      "Isolated low count",
+      "Steroids and TPO agents"
+     ],
+     [
+      "Microangiopathy",
+      "Low with schistocytes",
+      "Plasma exchange if TTP"
+     ],
+     [
+      "Heparin induced",
+      "Fall more than half",
+      "Argatroban or bivalirudin"
+     ],
+     [
+      "DIC",
+      "Low with clotting derangement",
+      "Treat underlying sepsis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Splenectomy** remains an option for refractory immune thrombocytopenia after medical failure. Childhood immune thrombocytopenia is usually self limited and post viral in nature. **Dabigatran** is an oral thrombin inhibitor for thrombosis during HIT in published series. **Aspirin** avoidance matters before surgery when counts are low in these patients.",
+   "say": "Splenectomy remains an option for refractory immune thrombocytopenia after medical failure. Childhood immune thrombocytopenia is usually self limited and post viral in nature. Dabigatran is an oral thrombin inhibitor for thrombosis during HIT in published series. Aspirin avoidance matters before surgery when counts are low in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** wraps up platelet teaching clearly. Remember schistocytes with ADAMTS13 deficiency for TTP, plasma exchange as its urgent therapy and caplacizumab as the adhesion blocker. 4Ts scoring guides HIT probability while aspirin acetylates cyclooxygenase irreversibly. Isolated thrombocytopenia with bleeding is immune thrombocytopenia until proven otherwise.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Schistocytes with ADAMTS thirteen deficiency are the mechanism of TTP clearly. Plasma exchange is the urgent therapy for acute TTP. Caplacizumab is the adhesion blocker that improves recovery. Four Ts scoring is required to guide HIT probability assessment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "TTP mechanism",
+      "ADAMTS thirteen deficiency with schistocytes"
+     ],
+     [
+      "TTP urgent therapy",
+      "Plasma exchange must not be delayed"
+     ],
+     [
+      "Adhesion blocker",
+      "Caplacizumab improves organ recovery"
+     ],
+     [
+      "HIT scoring",
+      "Four Ts guides pretest probability"
+     ],
+     [
+      "Aspirin action",
+      "Irreversible cyclooxygenase acetylation effect"
+     ],
+     [
+      "Isolated low platelets",
+      "Immune thrombocytopenia until proven otherwise"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

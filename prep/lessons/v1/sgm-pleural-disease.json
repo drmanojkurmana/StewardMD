@@ -1,0 +1,191 @@
+{
+ "v": 1,
+ "module": "sgm-pleural-disease",
+ "subject": "ss-general-medicine",
+ "title": "Pleural disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "The pleural space normally holds 5 to 15 millilitres of **pleural fluid** (a thin lubricating layer) between visceral and parietal pleura. A **pleural effusion** (excess fluid) shows stony dullness with reduced breath sounds. **Light criteria** (biochemical cutoffs) label an effusion exudative when any one of three rules is met, and chest ultrasound finds even small collections.",
+   "say": "The pleural space has five to fifteen millilitres of fluid as a thin lubricating layer between the pleural surfaces. A pleural effusion is excess fluid, and it presents with stony dullness and reduced breath sounds. Light criteria are biochemical cutoffs that label an effusion as exudative. Chest ultrasound can find even small collections before tapping is attempted.",
+   "vis": null
+  },
+  {
+   "tx": "**Transudates** (low protein fluid) come from heart failure (raised hydrostatic pressure), **cirrhosis** (low plasma proteins and portal pressure) and **nephrotic syndrome** (protein loss in urine). **BNP** (brain natriuretic peptide, a cardiac hormone) above 500 picograms per millilitre supports a cardiac cause. Treat the cause first, since transudates resolve when filling pressures fall, and diuretics are first line for cardiac effusions.",
+   "say": "Transudates are low protein fluid from heart failure, cirrhosis and nephrotic syndrome. Heart failure is the commonest cause, and BNP above five hundred picograms per millilitre supports a cardiac origin. The cause should be treated first, and diuretics are first line for cardiac effusions. The fluid can disappear when filling pressures fall, and repeat taps are rarely required.",
+   "vis": null
+  },
+  {
+   "tx": "**Exudates** (high protein fluid) come from malignancy, infection including tuberculosis (TB, a granulomatous lung disease), **pulmonary embolism** (clot in lung arteries) and pancreatitis. Light criteria declare exudate when pleural protein exceeds half of serum protein, pleural lactate dehydrogenase (LDH, an enzyme) exceeds 2/3 of the normal serum upper limit, or pleural LDH exceeds 200 U/L. Haemorrhagic fluid suggests malignancy or embolism.",
+   "say": "Exudates are high protein fluid from malignancy, infection, pulmonary embolism and pancreatitis. Light criteria declare an effusion exudative when any one of three rules is met. Pleural protein is more than half of serum protein, and pleural lactate dehydrogenase is more than two thirds of the normal limit. Haemorrhagic fluid suggests malignancy or embolism, and cytology is required for confirmation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Light rule",
+     "Cutoff",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Protein ratio",
+      "Pleural over 0.5 of serum",
+      "Exudate"
+     ],
+     [
+      "LDH ratio",
+      "Pleural over 0.6 of serum",
+      "Exudate"
+     ],
+     [
+      "LDH absolute",
+      "Above 200 units per litre",
+      "Exudate"
+     ],
+     [
+      "Serum minus pleural albumin",
+      "More than 1.2 grams per decilitre",
+      "Pseudoexudate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pleural fluid forms because pleural capillaries filter plasma and lymphatics drain it continuously. **Transudates** form when hydrostatic pressure rises (heart failure) or oncotic pressure falls (low albumin), pushing extra fluid out. **Exudates** form when inflammation makes pleural capillaries leaky, so protein rich fluid escapes, as in infection and malignancy. Lymphatic blockage from tumour or fibrosis also raises pleural volume.",
+   "say": "Pleural fluid forms when pleural capillaries filter plasma, and lymphatics drain the fluid continuously. Transudates form when hydrostatic pressure rises or oncotic pressure falls, and extra fluid is pushed out. Exudates form when inflammation makes pleural capillaries leaky, and protein rich fluid escapes. Lymphatic blockage from tumour or fibrosis also increases pleural volume by reducing drainage.",
+   "vis": null
+  },
+  {
+   "tx": "A large effusion causes dyspnoea (breathlessness), pleuritic pain (pain on breathing) and dry cough. Examination shows tracheal deviation away from the effusion, absent breath sounds and **stony dullness** (a dull percussion note like an axillary bone) over the fluid. A pleural rub (grating sound from inflamed surfaces) means fibrinous pleuritis. Breath sounds return and dullness clears when fluid is tapped.",
+   "say": "A large effusion causes breathlessness, pleuritic pain and dry cough. Tracheal deviation away from the effusion is the classic sign, and breath sounds are absent over the fluid. Stony dullness is the classic percussion finding over pleural fluid. A pleural rub indicates fibrinous pleuritis, and breath sounds return when the fluid is tapped.",
+   "vis": null
+  },
+  {
+   "tx": "Diagnostic tap (pleural aspiration) is the first test and needs ultrasound guidance. Fluid protein, LDH, cell count, culture, cytology and **adenosine deaminase** (ADA, an enzyme raised in tuberculosis) decide the cause. **Medical thoracoscopy** (direct vision of pleura with biopsy) is the gold standard for undiagnosed effusions. Contrast computed tomography (CT, cross sectional imaging) shows pleural thickening and loculations.",
+   "say": "Diagnostic tap with ultrasound guidance is the first test for an undiagnosed effusion. Fluid protein, lactate dehydrogenase, cell count, culture and cytology can decide the cause. Adenosine deaminase is raised in tuberculous effusions, and thoracoscopy is the gold standard test. Thoracoscopy provides direct vision with biopsy, and contrast imaging shows pleural thickening and loculations.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ultrasound guided tap"
+     },
+     {
+      "id": "b",
+      "label": "Protein and LDH"
+     },
+     {
+      "id": "c",
+      "label": "Cytology and culture"
+     },
+     {
+      "id": "d",
+      "label": "Thoracoscopy if undiagnosed"
+     },
+     {
+      "id": "e",
+      "label": "Treat the cause"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Small symptomatic effusions are tapped with a **ultrasound guided needle** and sent for analysis. Large effusions need a chest drain, and pus means **empyema** (infected effusion) that needs immediate drainage. **Fibrinolytics** (agents that break fibrin strands) help loculated empyemas liquefy. Recurrent malignant effusions need **pleurodesis** (adhesion of pleural surfaces) or an indwelling pleural catheter.",
+   "say": "Small symptomatic effusions are tapped with an ultrasound guided needle and sent for analysis. Large effusions need a chest drain, and pus means empyema that needs immediate drainage. Fibrinolytics can help loculated empyemas liquefy, and intrapleural therapy is required for non resolving collections. Recurrent malignant effusions need pleurodesis, and an indwelling pleural catheter is an alternative.",
+   "vis": null
+  },
+  {
+   "tx": "Empyema progresses through stages: exudative with free fluid, fibrinopurulent with loculations and fibrin strands, and organising (fibrous peel) with trapped lung. Fever, leucocytosis (raised white cells) and pleuritic pain mark infection. **Decortication** (surgical removal of fibrous peel) frees a trapped lung. Early drainage prevents the organising stage, since a thin peel matures into thick fibrosis over weeks.",
+   "say": "Empyema has three stages that appear in sequence, from exudative through fibrinopurulent to organising. Fever, raised white cells and pleuritic pain indicate infection, and imaging shows loculations. Decortication is required to free a trapped lung by removing the fibrous peel. Early drainage prevents the organising stage, and delayed drainage increases the risk of fibrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Exudative empyema",
+     "points": [
+      "Free flowing fluid",
+      "Early stage",
+      "Drains easily"
+     ]
+    },
+    "right": {
+     "title": "Organising empyema",
+     "points": [
+      "Fibrous peel",
+      "Trapped lung",
+      "Needs decortication"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Tuberculous effusions are lymphocytic exudates with raised ADA and often resolve spontaneously. **Anti tubercular therapy** (ATT, combined antibiotics) is first line, and steroids (**prednisolone** 0.5 mg/kg) reduce adhesions and fibrosis in selected patients. Pleural thickening with trapped lung needs decortication, and long term follow up catches recurrence. Cytology excludes malignancy before steroids are given.",
+   "say": "Tuberculous effusions are lymphocytic exudates with raised adenosine deaminase, and they often resolve spontaneously. Anti tubercular therapy is the first line treatment, and steroids can reduce adhesions in selected patients. Pleural thickening with trapped lung needs decortication, and long term follow up catches recurrence. Cytology is required to exclude malignancy before steroids are given.",
+   "vis": null
+  },
+  {
+   "tx": "Recurrent effusions need definitive control, since each tap risks pneumothorax (collapsed lung from air entry). Bilateral effusions suggest cardiac, renal or hepatic cause. **Pseudoexudate** (diuretic concentrated transudate) tricks Light criteria, and albumin gradient above 1.2 g/dL exposes it. Prognosis is good once the cause is treated, and drainage of empyema is the most common exam answer.",
+   "say": "Recurrent effusions need definitive control, and each tap increases the risk of pneumothorax. Bilateral effusions suggest a cardiac, renal or hepatic cause. Pseudoexudate is a diuretic concentrated transudate, and albumin gradient exposes it reliably. Prognosis is good once the cause is treated, and empyema drainage is the commonest exam answer.",
+   "vis": null
+  },
+  {
+   "tx": "High yield numbers: normal fluid 5 to 15 millilitres. Light cutoffs are protein ratio 0.5, LDH ratio 0.6 and LDH above 200 U/L. ADA above 40 U/L suggests tuberculosis. **Thoracoscopy** is the gold standard test, **decortication** frees trapped lung, and **pleurodesis** prevents recurrent malignant effusion. Albumin gradient above 1.2 g/dL exposes pseudoexudate.",
+   "say": "Normal pleural fluid is five to fifteen millilitres, and Light cutoffs decide exudate from transudate. The protein ratio cutoff is zero point five, and the lactate dehydrogenase ratio cutoff is zero point six. Adenosine deaminase above forty units per litre suggests tuberculosis. Thoracoscopy is the gold standard test, and albumin gradient exposes pseudoexudate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "High yield point",
+     "Value or rule"
+    ],
+    "rows": [
+     [
+      "Normal pleural fluid",
+      "5 to 15 millilitres"
+     ],
+     [
+      "Protein ratio cutoff",
+      "0.5"
+     ],
+     [
+      "LDH ratio cutoff",
+      "0.6"
+     ],
+     [
+      "LDH absolute cutoff",
+      "200 units per litre"
+     ],
+     [
+      "ADA cutoff",
+      "40 units per litre"
+     ],
+     [
+      "Gold standard",
+      "Thoracoscopy"
+     ],
+     [
+      "Pseudoexudate clue",
+      "Albumin gradient above 1.2"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

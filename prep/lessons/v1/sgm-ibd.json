@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "module": "sgm-ibd",
+ "subject": "ss-general-medicine",
+ "title": "Inflammatory bowel disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Inflammatory bowel disease** (IBD, chronic relapsing bowel inflammation) has two main forms: Crohn disease (transmural disease anywhere along the gut) and ulcerative colitis (continuous mucosal disease from the rectum). Peak onset is at 15 to 30 years, with a second peak after 60 years. Incidence is about 10 to 20 per 100000 yearly in high incidence regions. About 20% of patients have extraintestinal manifestations such as arthritis and skin lesions. Diagnosis rests on endoscopy, histology and imaging taken together.",
+   "say": "Inflammatory bowel disease is chronic relapsing inflammation of the bowel. Crohn disease is transmural disease anywhere along the gut in patients. Ulcerative colitis is continuous mucosal disease that starts in rectum. Peak onset is at fifteen to thirty years in most patients. About twenty percent have joint and skin manifestations beyond the gut over time.",
+   "vis": null
+  },
+  {
+   "tx": "Genetic risk involves **NOD2 gene** (bacterial sensing receptor) in Crohn disease and IL10 pathway genes in colitis. Smoking worsens Crohn disease but may protect against ulcerative colitis. Appendicectomy raises Crohn risk. Oral contraceptives and infections can trigger flares. **Primary sclerosing cholangitis** (fibrosing bile duct disease) has a strong link with ulcerative colitis. Family history is present in 10 to 25% of patients. Diet and stress are modulators of symptoms, not the primary cause of bowel inflammation in most cases.",
+   "say": "Genetic risk involves bacterial sensing genes in Crohn disease and IL ten pathway. Smoking worsens Crohn disease but it may protect against ulcerative colitis. Appendicectomy raises Crohn risk in affected patients over years. Primary sclerosing cholangitis has a strong link with ulcerative colitis. Family history is present in ten to twenty five percent of patients with disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Crohn disease markers",
+     "points": [
+      "Transmural inflammation",
+      "Anywhere from mouth to anus",
+      "Skip lesions and strictures",
+      "Fistulae and abscesses common"
+     ]
+    },
+    "right": {
+     "title": "Ulcerative colitis markers",
+     "points": [
+      "Mucosal inflammation only",
+      "Starts in rectum, proximal spread",
+      "Continuous disease without skips",
+      "Toxic megacolon risk high"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Crohn disease is driven by defective microbial sensing with NFKB activation, granuloma formation and Th1 and Th17 cytokine excess. Transmural inflammation causes fibrosis, strictures and fistulae because all wall layers are involved. Ulcerative colitis is driven by mucosal barrier failure with Th2 skewing, continuous inflammation and pseudopolyps. **Granulomas** (collection of activated macrophages) on biopsy favour Crohn disease. Pyoderma (neutrophilic skin ulcers) and episcleritis are extraintestinal features of both diseases. Serological markers support but do not confirm diagnosis in routine practice.",
+   "say": "Crohn disease is driven by defective microbial sensing with cytokine excess. Transmural inflammation causes strictures and fistulae because all layers are involved. Ulcerative colitis is driven by barrier failure with continuous mucosal inflammation. Granulomas on biopsy indicate Crohn disease in practice. Pyoderma and episcleritis are extraintestinal features that occur in both diseases over time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Microbial sensing defect"
+     },
+     {
+      "id": "b",
+      "label": "Cytokine excess rises"
+     },
+     {
+      "id": "c",
+      "label": "Transmural inflammation"
+     },
+     {
+      "id": "d",
+      "label": "Stricture and fistula"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Crohn disease gives periumbilical pain, diarrhoea, weight loss, fever and **perianal fistula** (tract between bowel and skin near anus). Terminal ileitis causes right iliac fossa pain mimicking appendicitis. Ulcerative colitis gives bloody diarrhoea with urgency, tenesmus (painful straining) and mucus. Toxic megacolon (colonic dilatation above 6 cm) is the feared colitic emergency. **Erythema nodosum** (tender red leg nodules) parallels bowel activity. Mouth ulcers, ankylosing spondylitis and uveitis are also seen. Failure to thrive in children is common.",
+   "say": "Crohn disease gives pain, diarrhoea, weight loss and perianal fistula. Terminal ileal disease causes right iliac fossa pain mimicking appendicitis. Ulcerative colitis gives bloody diarrhoea with urgency and mucus. Tender red leg nodules are seen and they parallel bowel activity in colitis. Mouth ulcers and eye inflammation are also seen in both diseases over time.",
+   "vis": null
+  },
+  {
+   "tx": "Infection must be excluded with stool culture, ova and parasites, and Clostridioides difficile toxin before labelling a flare. **Faecal calprotectin** (stool inflammation marker protein) is the first test separating inflammatory disease from irritable bowel syndrome. **Colonoscopy with biopsies** (endoscopic inspection with tissue sampling) is the gold standard, with segmental biopsies even where mucosa looks normal. **Magnetic resonance enterography** (non radiation bowel imaging) assesses Crohn disease extent. Barium studies are obsolete. Cross sectional imaging shows wall thickening and fistula tracts well.",
+   "say": "Infection must be excluded with stool tests before labelling a flare. Faecal calprotectin is the first test separating inflammation from irritable bowel syndrome. Colonoscopy with biopsies is the gold standard for diagnosis in most patients. Segmental biopsies are taken even where mucosa looks normal at endoscopy. Magnetic resonance enterography assesses Crohn extent and fistula tracts safely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Faecal calprotectin",
+      "First test for inflammation"
+     ],
+     [
+      "Colonoscopy with biopsies",
+      "Gold standard for IBD"
+     ],
+     [
+      "MR enterography",
+      "Crohn extent and fistulae"
+     ],
+     [
+      "Stool culture and toxin",
+      "Exclude infection in flare"
+     ],
+     [
+      "Barium studies",
+      "Obsolete for diagnosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mild colitis uses **5 aminosalicylic acid** (mesalazine, topical and oral agent) with rectally administered mesalazine as first line for ulcerative colitis. Moderate disease uses systemic corticosteroids such as prednisolone 40 mg daily for short courses. Crohn disease flare is treated with budesonide or prednisolone depending on site. Maintenance therapy includes mesalazine, azathioprine, methotrexate, and biologics such as **infliximab** (anti tumour necrosis factor antibody) and vedolizumab for refractory cases. Antibiotics treat perianal sepsis. Surgery is reserved for complications and dysplasia.",
+   "say": "Mild colitis is treated with mesalazine by oral and rectal routes. Moderate disease needs systemic corticosteroids for short courses in many patients. Crohn flare is treated with budesonide or prednisolone by site. Maintenance therapy has azathioprine and biologics for refractory cases. Antibiotics treat perianal sepsis, and surgery is reserved for complications and dysplasia.",
+   "vis": null
+  },
+  {
+   "tx": "Recent guidance pushes early effective therapy. The **STRIDE II targets** (treat to target consensus) define clinical response by 3 months, remission by 6 to 12 months, and mucosal healing including histology as the long term goal. The **ACG 2025 Crohn guideline** (American gastroenterology consensus) recommends early biologic therapy in moderate to severe disease rather than step up care. For ulcerative colitis, early vedolizumab or upadacitinib is favoured in high risk patients. Therapeutic drug monitoring guides biologic dosing in practice.",
+   "say": "Recent guidance is for early effective therapy rather than slow step up care. The STRIDE targets define response by three months and remission by six to twelve months. Mucosal healing is the long term goal in treated patients. The American guideline of twenty twenty five says that early biologic therapy is given in severe disease. Therapeutic drug monitoring guides biologic dosing in practice over time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Active flare confirmed"
+     },
+     {
+      "id": "b",
+      "label": "Infection excluded"
+     },
+     {
+      "id": "c",
+      "label": "Mesalazine or steroids"
+     },
+     {
+      "id": "d",
+      "label": "Early biologic if severe"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications divide into bowel and extraintestinal groups. Bowel complications are strictures, fistulae, abscesses, perforation and toxic megacolon. **Toxic megacolon** (colonic dilatation above 6 cm) with peritoneal signs is a surgical emergency. Dysplasia risk rises after 8 to 10 years of colitis and needs surveillance colonoscopy. Primary sclerosing cholangitis, osteoporosis, thrombosis and malnutrition worsen outcomes. Mortality is low except in toxic megacolon and perforation. Prognosis improves with mucosal healing and strict control of inflammation in compliant patients.",
+   "say": "Complications are bowel events and extraintestinal events after years. Bowel complications are strictures, fistulae, perforation and toxic megacolon. Toxic megacolon with peritoneal signs is a surgical emergency in practice. Dysplasia risk rises after eight to ten years of colitis duration. Prognosis improves with mucosal healing and strict control of inflammation over time.",
+   "vis": null
+  },
+  {
+   "tx": "Examination traps test the Crohn versus colitis distinction. Granulomas, transmural inflammation, skip lesions and perianal fistula point to **Crohn disease** (transmural anywhere disease). Continuous rectal disease, bloody diarrhoea, pseudopolyps and primary sclerosing cholangitis point to ulcerative colitis. Smoking worsens Crohn disease but may protect in colitis. Appendicectomy raises Crohn risk. Toxic megacolon is commoner in colitis. Mesalazine is a maintenance drug for colitis, while Crohn disease often needs immunosuppressants and biologics for durable control.",
+   "say": "Granulomas and skip lesions point to Crohn disease of bowel. Continuous rectal disease and bloody diarrhoea point to ulcerative colitis. Smoking worsens Crohn disease but it may protect in colitis. Appendicectomy raises Crohn risk in affected patients. Mesalazine is maintenance therapy for colitis, while Crohn disease often needs biologics for control.",
+   "vis": null
+  },
+  {
+   "tx": "Keep the **numbers, targets and distinctions** together for vivas. Peak onset is 15 to 30 years, extraintestinal features occur in about 20%, toxic megacolon threshold is above 6 cm, dysplasia surveillance starts after 8 to 10 years of colitis, clinical response is by 3 months, and remission is by 6 to 12 months. Hold the core pairs: Crohn disease is transmural, discontinuous and fistulising, while ulcerative colitis is mucosal, continuous and bloody. Early effective therapy now beats slow step up care.",
+   "say": "Keep numbers, targets and distinctions together for viva preparation. Peak onset is fifteen to thirty years, and joint features occur in about twenty percent. Toxic megacolon threshold is above six centimetres in colitis. Dysplasia surveillance starts after eight to ten years of disease. Response is by three months, and remission is by six to twelve months after therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield detail"
+    ],
+    "rows": [
+     [
+      "Peak onset age",
+      "15 to 30 years, second peak after 60"
+     ],
+     [
+      "Extraintestinal features",
+      "About 20 percent of patients"
+     ],
+     [
+      "Toxic megacolon diameter",
+      "Above 6 cm with peritoneal signs"
+     ],
+     [
+      "Dysplasia surveillance start",
+      "After 8 to 10 years of colitis"
+     ],
+     [
+      "First inflammation test",
+      "Faecal calprotectin"
+     ],
+     [
+      "Gold standard test",
+      "Colonoscopy with biopsies"
+     ],
+     [
+      "First line colitis drug",
+      "Mesalazine oral plus rectal"
+     ],
+     [
+      "Long term target",
+      "Mucosal healing per STRIDE II"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

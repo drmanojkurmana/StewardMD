@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-neuro-oncology-ophthalmology",
+ "subject": "ss-general-medicine",
+ "title": "Brain tumours, neuro-ophthalmology and cranial nerves",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Brain tumours** are primary or metastatic lesions here. **Glioma** is the commonest primary brain tumour. **Meningioma** arises from meninges with slow growth. **Metastases** arise from lung with breast primaries. Tumour assessment guides oncology management in these patients during evaluation today clearly. Oncology evaluation guides tumour management in these patients during assessment today clearly.",
+   "say": "Brain tumours are primary or metastatic lesions here for tumour definition. Glioma is the commonest primary brain tumour for glioma pattern. Meningioma arises from meninges with slow growth for meningioma pattern. Metastases arise from lung with breast primaries for metastatic pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Glioma",
+     "points": [
+      "Primary brain tumour",
+      "Infiltrative growth pattern",
+      "Unfavorable prognosis often",
+      "Temozolomide therapy used"
+     ]
+    },
+    "right": {
+     "title": "Metastases",
+     "points": [
+      "Secondary brain lesions",
+      "Lung with breast primaries",
+      "Multiple lesions often",
+      "Radiation therapy used"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Glioblastoma** is the aggressive primary glioma. **Low grade glioma** grows slowly here. **Meningioma** grows slowly with compression. **Pituitary adenoma** affects vision with bitemporal hemianopia. Tumour assessment guides oncology management in these patients during evaluation today clearly. Oncology evaluation guides tumour management in these patients during assessment today clearly.",
+   "say": "Glioblastoma is the aggressive primary glioma for glioblastoma pattern. Low grade glioma grows slowly here for low grade pattern. Meningioma grows slowly with compression for meningioma pattern. Pituitary adenoma affects vision with bitemporal hemianopia for chiasmal pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour",
+     "Pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Glioblastoma",
+      "Aggressive glioma",
+      "Poor prognosis pattern"
+     ],
+     [
+      "Low grade glioma",
+      "Slow growth",
+      "Seizures common"
+     ],
+     [
+      "Meningioma",
+      "Slow compression",
+      "Older women affected"
+     ],
+     [
+      "Pituitary adenoma",
+      "Chiasmal compression",
+      "Bitemporal hemianopia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**IDH mutation** marks low grade gliomas clearly. **MGMT methylation** predicts temozolomide benefit clearly. **Vorasidenib** targets IDH mutated gliomas. **Temozolomide** treats glioblastoma in these patients. Tumour assessment guides oncology management in these patients during evaluation today clearly. Oncology evaluation guides tumour management in these patients during assessment today clearly.",
+   "say": "IDH mutation marks low grade gliomas clearly for IDH pattern. MGMT methylation is predictive of temozolomide benefit clearly for MGMT pattern. Vorasidenib targets IDH mutated gliomas for IDH therapy. Temozolomide is the therapy for glioblastoma in these patients for glioblastoma therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Blurred vision** with headache suggests raised ICP. **Bitemporal hemianopia** marks chiasmal compression. **Papilloedema** marks raised ICP here. **Visual acuity** tracks chiasmal disease here. Tumour assessment guides oncology management in these patients during evaluation today clearly. Oncology evaluation guides tumour management in these patients during assessment today clearly.",
+   "say": "Blurred vision with headache suggests raised ICP for visual presentation. Bitemporal hemianopia is the chiasmal compression mark for chiasmal pattern. Papilloedema is the raised ICP mark here for fundus pattern. Visual acuity tracks chiasmal disease here for acuity tracking.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Pattern",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Bitemporal hemianopia",
+      "Chiasmal compression",
+      "Chiasmal marker"
+     ],
+     [
+      "Papilloedema",
+      "Raised ICP",
+      "Pressure marker"
+     ],
+     [
+      "Blurred vision",
+      "Raised ICP",
+      "Pressure presentation"
+     ],
+     [
+      "Visual acuity",
+      "Chiasmal disease",
+      "Tracking tool"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MRI** is the gold standard for tumours. **CT** helps calcification in these patients. **Biopsy** confirms histology in these patients. **Visual fields** track chiasmal disease here. Tumour assessment guides oncology management in these patients during evaluation today clearly. Oncology evaluation guides tumour management in these patients during assessment today clearly.",
+   "say": "MRI is the gold standard for tumours for imaging standard. CT helps calcification in these patients for calcification assessment. Biopsy confirms histology in these patients for histological confirmation. Visual fields track chiasmal disease here for field tracking.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Headache with vision loss"
+     },
+     {
+      "id": "b",
+      "label": "MRI tumour seen"
+     },
+     {
+      "id": "c",
+      "label": "Biopsy histology done"
+     },
+     {
+      "id": "d",
+      "label": "Therapy started"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dexamethasone** reduces edema in these patients. **Temozolomide** treats glioblastoma in these patients. **Bevacizumab** treats recurrent glioblastoma in many patients. **Surgery** decompresses mass effect urgently. Tumour assessment guides oncology management in these patients during evaluation today clearly. Oncology evaluation guides tumour management in these patients during assessment today clearly.",
+   "say": "Dexamethasone reduces edema in these patients for edema control. Temozolomide is the therapy for glioblastoma in these patients for glioblastoma therapy. Bevacizumab is the therapy for recurrent glioblastoma in many patients for recurrent therapy. Surgery is the decompression for mass effect urgently for definitive decompression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Disease",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Dexamethasone",
+      "Edema control",
+      "Peritumoural edema"
+     ],
+     [
+      "Temozolomide",
+      "Glioblastoma",
+      "First line therapy"
+     ],
+     [
+      "Bevacizumab",
+      "Recurrent disease",
+      "Recurrent option"
+     ],
+     [
+      "Surgery",
+      "Mass effect",
+      "Decompression option"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Seizures** complicate gliomas during course. **Headache** complicates raised ICP during course. **Focal deficits** complicate tumours during course. **Cognitive decline** complicates tumours during course. Tumour assessment guides oncology management in these patients during evaluation today clearly. Oncology evaluation guides tumour management in these patients during assessment today clearly.",
+   "say": "Seizures complicate gliomas during course for seizure complication. Headache complicates raised ICP during course for headache complication. Focal deficits complicate tumours during course for deficit complication. Cognitive decline complicates tumours during course for cognitive complication.",
+   "vis": null
+  },
+  {
+   "tx": "**Radiation** treats residual disease after surgery. **Chemotherapy** treats glioblastoma after surgery. **Seizure prophylaxis** prevents seizures in these patients. **Dexamethasone** tapering follows surgery in these patients. Tumour assessment guides oncology management in these patients during evaluation today clearly. Oncology evaluation guides tumour management in these patients during assessment today clearly.",
+   "say": "Radiation is the therapy for residual disease after surgery for adjuvant therapy. Chemotherapy is the therapy for glioblastoma after surgery for adjuvant therapy. Seizure prophylaxis prevents seizures in these patients for seizure prophylaxis. Dexamethasone tapering follows surgery in these patients for tapering schedule.",
+   "vis": null
+  },
+  {
+   "tx": "**Prognosis** depends on grade with molecular markers. **IDH status** predicts prognosis in gliomas. **MGMT status** predicts prognosis in gliomas. **Age** predicts prognosis in these patients. Tumour assessment guides oncology management in these patients during evaluation today clearly. Oncology evaluation guides tumour management in these patients during assessment today clearly.",
+   "say": "Prognosis depends on grade with molecular markers for prognostic tracking. IDH status is predictive of prognosis in gliomas for IDH prediction. MGMT status is predictive of prognosis in gliomas for MGMT prediction. Age is predictive of prognosis in these patients for age prediction.",
+   "vis": null
+  },
+  {
+   "tx": "**Pregnancy** with brain tumour needs special care. **Temozolomide** is avoided in pregnancy here. **Radiation** is avoided in pregnancy here. **Supportive care** is the mainstay in many oncology cases today. Tumour assessment guides oncology management in these patients during evaluation today clearly. Oncology evaluation guides tumour management in these patients during assessment today clearly.",
+   "say": "Pregnancy with brain tumour needs special care for pregnancy management. Temozolomide is avoided in pregnancy here for teratogenic avoidance. Radiation is avoided in pregnancy here for teratogenic avoidance. Supportive care is the mainstay in many oncology cases today.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on neuro-oncology. Remember temozolomide for glioblastoma, bitemporal hemianopia for chiasmal compression and MRI as the standard. IDH mutation marks low grade gliomas with MGMT predicting benefit. Dexamethasone reduces edema with surgery for decompression. Tumour assessment guides oncology management in these patients during evaluation today clearly. Oncology evaluation guides tumour management in these patients during assessment today clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Temozolomide is the glioblastoma therapy for glioblastoma treatment. Bitemporal hemianopia is the chiasmal compression sign for chiasmal pattern. MRI is the diagnostic standard for tumour assessment. IDH mutation marks low grade gliomas for IDH pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Glioblastoma therapy",
+      "Temozolomide is first line therapy"
+     ],
+     [
+      "Chiasmal sign",
+      "Bitemporal hemianopia marks compression"
+     ],
+     [
+      "Diagnostic standard",
+      "MRI is the gold standard"
+     ],
+     [
+      "IDH marker",
+      "IDH mutation marks low grade gliomas"
+     ],
+     [
+      "Edema therapy",
+      "Dexamethasone reduces edema"
+     ],
+     [
+      "MGMT predictor",
+      "MGMT methylation predicts benefit"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "module": "sgm-neurocritical-care",
+ "subject": "ss-general-medicine",
+ "title": "Coma, raised intracranial pressure and neurocritical care",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Coma** is unresponsiveness without eye opening here. **Raised ICP** reduces cerebral perfusion during course. **Cushing response** is hypertension with bradycardia clearly. **Herniation** causes death in raised ICP here. Monitoring is advised in these patients for monitoring care. Neurocritical assessment guides ICU management in these patients during evaluation today clearly. ICU evaluation guides neurocritical management in these patients during assessment today clearly.",
+   "say": "Coma is unresponsiveness without eye opening here for coma definition. Raised ICP reduces cerebral perfusion during course for ICP effect. Cushing response is hypertension with bradycardia clearly for Cushing pattern. Herniation causes death in raised ICP here for herniation risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Coma",
+     "points": [
+      "Unresponsive without opening",
+      "No eye opening",
+      "Airway at risk",
+      "ICU care advised"
+     ]
+    },
+    "right": {
+     "title": "Raised ICP",
+     "points": [
+      "Perfusion reduced",
+      "Cushing response seen",
+      "Herniation risk present",
+      "Monitoring advised"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Glasgow coma scale** grades consciousness in coma. **Pupils** guide herniation assessment during care. **CT head** excludes bleed in coma. **ICP monitoring** guides therapy in these patients. Neurocritical assessment guides ICU management in these patients during evaluation today clearly. ICU evaluation guides neurocritical management in these patients during assessment today clearly.",
+   "say": "Glasgow coma scale grades consciousness in coma for consciousness grading. Pupils guide herniation assessment during care for herniation surveillance. CT head excludes bleed in coma for imaging exclusion. ICP monitoring guides therapy in these patients for pressure guidance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Glasgow coma scale",
+      "Consciousness grading",
+      "Severity assessment"
+     ],
+     [
+      "Pupil examination",
+      "Herniation signs",
+      "Surveillance tool"
+     ],
+     [
+      "CT head",
+      "Bleed exclusion",
+      "Imaging standard"
+     ],
+     [
+      "ICP monitoring",
+      "Pressure guidance",
+      "Therapy monitor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Head elevation** reduces ICP in these patients. **Hyperventilation** reduces ICP transiently here. **Mannitol** with **hypertonic saline** reduce edema. **Barbiturate coma** helps refractory ICP here. Neurocritical assessment guides ICU management in these patients during evaluation today clearly. ICU evaluation guides neurocritical management in these patients during assessment today clearly.",
+   "say": "Head elevation reduces ICP in these patients for positioning benefit. Hyperventilation reduces ICP transiently here for hyperventilation effect. Mannitol with hypertonic saline reduce edema for edema control. Barbiturate coma helps refractory ICP here for refractory control.",
+   "vis": null
+  },
+  {
+   "tx": "**Seizures** complicate neurocritical illness during course. **Levetiracetam** with **phenytoin** prevent seizures here. **Fever** worsens brain injury during course. **Hyperglycaemia** worsens brain injury during course. Neurocritical assessment guides ICU management in these patients during evaluation today clearly. ICU evaluation guides neurocritical management in these patients during assessment today clearly.",
+   "say": "Seizures complicate neurocritical illness during course for seizure complication. Levetiracetam with phenytoin prevent seizures here for seizure control. Fever worsens brain injury during course for fever effect. Hyperglycaemia worsens brain injury during course for glucose effect.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Neurocritical illness"
+     },
+     {
+      "id": "b",
+      "label": "Seizure monitoring done"
+     },
+     {
+      "id": "c",
+      "label": "Levetiracetam started"
+     },
+     {
+      "id": "d",
+      "label": "ICP controlled"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anticoagulation** reverses with idarucizumab clearly. **Warfarin** excess is corrected with reversal agents here. **Thrombin** mediates coagulopathy in these patients. **Tranexamic acid** stabilizes clot in these patients. Neurocritical assessment guides ICU management in these patients during evaluation today clearly. ICU evaluation guides neurocritical management in these patients during assessment today clearly.",
+   "say": "Anticoagulation reversal is with idarucizumab clearly for reversal therapy. Warfarin excess is corrected with reversal agents here for reversal therapy. Thrombin mediates coagulopathy in these patients for coagulopathy mechanism. Tranexamic acid stabilizes clot in these patients for antifibrinolytic effect.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Reversal",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Idarucizumab",
+      "Dabigatran reversal",
+      "Reversal agent"
+     ],
+     [
+      "Warfarin",
+      "Reversal agent",
+      "Reversal agent"
+     ],
+     [
+      "Tranexamic acid",
+      "Clot stabilization",
+      "Bleeding support"
+     ],
+     [
+      "Heparin",
+      "Anticoagulation",
+      "Thromboprophylaxis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Airway protection** is advised in coma. **Ventilation** supports respiration in these patients. **Sodium chloride** with mannitol manage edema. **ICU care** is advised in these patients. Neurocritical assessment guides ICU management in these patients during evaluation today clearly. ICU evaluation guides neurocritical management in these patients during assessment today clearly.",
+   "say": "Airway protection is advised in coma for airway safety. Ventilation supports respiration in these patients for ventilatory support. Sodium chloride with mannitol manage edema for edema control. ICU care is advised in these patients for supportive care.",
+   "vis": null
+  },
+  {
+   "tx": "**Glucose control** is advised in neurocritical care. **Temperature control** is advised in neurocritical care. **Ventilation control** is advised in neurocritical care. **Sodium control** is advised in neurocritical care. Neurocritical assessment guides ICU management in these patients during evaluation today clearly. ICU evaluation guides neurocritical management in these patients during assessment today clearly.",
+   "say": "Glucose control is advised in neurocritical care for glucose management. Temperature control is advised in neurocritical care for temperature management. Ventilation control is advised in neurocritical care for ventilation control. Sodium control is advised in neurocritical care for sodium management.",
+   "vis": null
+  },
+  {
+   "tx": "**Age** predicts neurocritical outcomes. **GCS** predicts neurocritical outcomes. **Pupils** predict herniation outcomes. **Early therapy** improves neurocritical outcomes here. Neurocritical assessment guides ICU management in these patients during evaluation today clearly. ICU evaluation guides neurocritical management in these patients during assessment today clearly.",
+   "say": "Age is predictive of neurocritical outcomes for prognostic tracking in these patients. GCS is predictive of neurocritical outcomes for prognostic tracking in these patients. Pupils are predictive of herniation outcomes for herniation prediction in these patients. Early therapy is the improvement of neurocritical outcomes here for timing benefit.",
+   "vis": null
+  },
+  {
+   "tx": "**Pregnancy** with raised ICP needs special care. **Antiplatelet** therapy is avoided without indication. **Anticoagulant** therapy is avoided without indication. **Supportive care** is the mainstay in many neurocritical cases today. Neurocritical assessment guides ICU management in these patients during evaluation today clearly. ICU evaluation guides neurocritical management in these patients during assessment today clearly.",
+   "say": "Pregnancy with raised ICP needs special care for pregnancy management. Antiplatelet therapy is avoided without indication for bleeding avoidance. Anticoagulant therapy is avoided without indication for bleeding avoidance. Supportive care is the mainstay in many neurocritical cases today.",
+   "vis": null
+  },
+  {
+   "tx": "**Brain death** is irreversible cessation clearly. **Apnoea testing** confirms brain death here. **Organ donation** follows brain death diagnosis. **Family counselling** is advised in these patients. Neurocritical assessment guides ICU management in these patients during evaluation today clearly. ICU evaluation guides neurocritical management in these patients during assessment today clearly.",
+   "say": "Brain death is irreversible cessation clearly for brain death definition. Apnoea testing confirms brain death here for confirmatory testing. Organ donation follows brain death diagnosis for donation pathway. Family counselling is advised in these patients for support provision.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on neurocritical care. Remember GCS grading, mannitol for edema and idarucizumab for dabigatran reversal. Levetiracetam with phenytoin prevent seizures with head elevation for positioning. Cushing response with herniation risk guides monitoring. Neurocritical assessment guides ICU management in these patients during evaluation today clearly. ICU evaluation guides neurocritical management in these patients during assessment today clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. GCS is the consciousness grading scale for coma assessment. Mannitol is the edema therapy for ICP control. Idarucizumab is the dabigatran reversal agent for reversal therapy. Levetiracetam with phenytoin are the seizure prevention for seizure control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Consciousness grading",
+      "GCS grades coma severity"
+     ],
+     [
+      "Edema therapy",
+      "Mannitol reduces edema"
+     ],
+     [
+      "Reversal agent",
+      "Idarucizumab reverses dabigatran"
+     ],
+     [
+      "Seizure prevention",
+      "Levetiracetam with phenytoin prevent seizures"
+     ],
+     [
+      "Positioning",
+      "Head elevation reduces ICP"
+     ],
+     [
+      "Cushing sign",
+      "Hypertension with bradycardia clearly"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

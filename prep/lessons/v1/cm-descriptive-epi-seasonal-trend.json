@@ -13,25 +13,40 @@
    "say": "The calendar predicts disease. Measles and chickenpox crest in early spring, chest infections in winter, gut infections in summer heat. Dengue builds from July to an autumn peak with the rains. Weather and vector life cycles conduct the rhythm.",
    "vis": {
     "kind": "table",
-    "cols": ["Season", "Typical excess"],
+    "cols": [
+     "Season",
+     "Typical excess"
+    ],
     "rows": [
-     ["Early spring", "Measles and varicella"],
-     ["Winter", "Upper respiratory infections"],
-     ["Summer", "Bacterial gastrointestinal infections"],
-     ["Post monsoon months", "Dengue rise toward autumn peak"]
+     [
+      "Early spring",
+      "Measles and varicella"
+     ],
+     [
+      "Winter",
+      "Upper respiratory infections"
+     ],
+     [
+      "Summer",
+      "Bacterial gastrointestinal infections"
+     ],
+     [
+      "Post monsoon months",
+      "Dengue rise toward autumn peak"
+     ]
     ]
    }
   },
   {
-    "tx": "**Dengue seasonality** in India shows cases beginning around July and reaching their highest counts from September to November, tracking the late summer rains. The same seasonal logic puts measles and varicella in early spring, upper respiratory infection in winter, and bacterial gut infection in summer when warmth and flies increase organisms. Temperature, humidity, rainfall and the life cycle of the vector set that calendar.",
-    "say": "Dengue seasonality in India shows cases beginning around July and reaching their highest counts from September to November, tracking the late summer rains. The same seasonal logic puts measles and varicella in early spring, upper respiratory infection in winter, and bacterial gut infection in summer when warmth and flies increase organisms. Temperature, humidity, rainfall and the life cycle of the vector set that calendar.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n186-cm-descriptive-epi-seasonal-trend.webp",
-      "alt": "Twelve month line of dengue cases in India rising from July and peaking between September and November",
-      "caption": "Dengue cases are plotted across twelve months, starting near July and peaking from September to November. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "**Dengue seasonality** in India shows cases beginning around July and reaching their highest counts from September to November, tracking the late summer rains. The same seasonal logic puts measles and varicella in early spring, upper respiratory infection in winter, and bacterial gut infection in summer when warmth and flies increase organisms. Temperature, humidity, rainfall and the life cycle of the vector set that calendar.",
+   "say": "Dengue seasonality in India shows cases beginning around July and reaching their highest counts from September to November, tracking the late summer rains. The same seasonal logic puts measles and varicella in early spring, upper respiratory infection in winter, and bacterial gut infection in summer when warmth and flies increase organisms. Temperature, humidity, rainfall and the life cycle of the vector set that calendar.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n186-cm-descriptive-epi-seasonal-trend.webp",
+    "alt": "Twelve month line of dengue cases in India rising from July and peaking between September and November",
+    "caption": "Dengue cases are plotted across twelve months, starting near July and peaking from September to November. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Cyclic trend: susceptibles rebuild",
@@ -40,12 +55,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Epidemic depletes susceptibles"},
-     {"id": "b", "label": "Herd immunity high, quiet years"},
-     {"id": "c", "label": "Births rebuild susceptibles"},
-     {"id": "d", "label": "Next epidemic ignites"}
+     {
+      "id": "a",
+      "label": "Epidemic depletes susceptibles"
+     },
+     {
+      "id": "b",
+      "label": "Herd immunity high, quiet years"
+     },
+     {
+      "id": "c",
+      "label": "Births rebuild susceptibles"
+     },
+     {
+      "id": "d",
+      "label": "Next epidemic ignites"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -56,11 +96,19 @@
     "kind": "compare",
     "left": {
      "title": "Upward secular trends",
-     "points": ["Coronary heart disease", "Lung cancer", "Diabetes in developed countries"]
+     "points": [
+      "Coronary heart disease",
+      "Lung cancer",
+      "Diabetes in developed countries"
+     ]
     },
     "right": {
      "title": "Downward secular trends",
-     "points": ["Tuberculosis and typhoid fever", "Diphtheria", "Poliomyelitis"]
+     "points": [
+      "Tuberculosis and typhoid fever",
+      "Diphtheria",
+      "Poliomyelitis"
+     ]
     }
    }
   },
@@ -70,12 +118,27 @@
    "say": "Four words grade presence. Endemic means constantly present; hyperendemic means intensely so. Epidemic exceeds expectation locally; pandemic crosses continents. Sporadic cases scatter irregularly without links, often the first whisper of an emerging infection.",
    "vis": {
     "kind": "table",
-    "cols": ["Term", "Pattern"],
+    "cols": [
+     "Term",
+     "Pattern"
+    ],
     "rows": [
-     ["Endemic", "Constant presence in an area"],
-     ["Hyperendemic", "Intense persistent transmission"],
-     ["Pandemic", "Spread across countries or continents"],
-     ["Sporadic", "Irregular scattered cases, no clear link"]
+     [
+      "Endemic",
+      "Constant presence in an area"
+     ],
+     [
+      "Hyperendemic",
+      "Intense persistent transmission"
+     ],
+     [
+      "Pandemic",
+      "Spread across countries or continents"
+     ],
+     [
+      "Sporadic",
+      "Irregular scattered cases, no clear link"
+     ]
     ]
    }
   },
@@ -87,11 +150,19 @@
     "kind": "compare",
     "left": {
      "title": "Fast epidemics",
-     "points": ["Days to weeks of rise", "Infectious agent usually single", "Outbreak investigation applies"]
+     "points": [
+      "Days to weeks of rise",
+      "Infectious agent usually single",
+      "Outbreak investigation applies"
+     ]
     },
     "right": {
      "title": "Slow epidemics",
-     "points": ["Years to decades of rise", "Mixed behavioural causes", "Risk factor control applies"]
+     "points": [
+      "Years to decades of rise",
+      "Mixed behavioural causes",
+      "Risk factor control applies"
+     ]
     }
    }
   },
@@ -102,12 +173,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Rates in origin population"},
-     {"id": "b", "label": "Rates in migrants"},
-     {"id": "c", "label": "Rates in host population"},
-     {"id": "d", "label": "Genes or environment judged"}
+     {
+      "id": "a",
+      "label": "Rates in origin population"
+     },
+     {
+      "id": "b",
+      "label": "Rates in migrants"
+     },
+     {
+      "id": "c",
+      "label": "Rates in host population"
+     },
+     {
+      "id": "d",
+      "label": "Genes or environment judged"
+     }
     ],
-    "edges": [["a", "b"], ["c", "b"], ["b", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "c",
+      "b"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -127,11 +223,23 @@
    "say": "Trust migration evidence cautiously. The fit migrate more than the frail, so travellers never mirror home. Long incubation delays change for years, and critical age windows hide effects. Nobody randomises migration, so these defects stay built in.",
    "vis": {
     "kind": "table",
-    "cols": ["Defect", "Consequence"],
+    "cols": [
+     "Defect",
+     "Consequence"
+    ],
     "rows": [
-     ["Healthy migrant selection", "Rates start artificially low"],
-     ["Long incubation period", "Change invisible for years"],
-     ["Critical age exposure", "Arrival age decides the effect"]
+     [
+      "Healthy migrant selection",
+      "Rates start artificially low"
+     ],
+     [
+      "Long incubation period",
+      "Change invisible for years"
+     ],
+     [
+      "Critical age exposure",
+      "Arrival age decides the effect"
+     ]
     ]
    }
   },
@@ -143,11 +251,19 @@
     "kind": "compare",
     "left": {
      "title": "Ecological strength",
-     "points": ["Uses routine national statistics", "Fast and cheap hypothesis building", "Compares whole populations"]
+     "points": [
+      "Uses routine national statistics",
+      "Fast and cheap hypothesis building",
+      "Compares whole populations"
+     ]
     },
     "right": {
      "title": "Ecological weakness",
-     "points": ["No individual exposure data", "Ecological fallacy in conclusions", "Confounders differ between groups"]
+     "points": [
+      "No individual exposure data",
+      "Ecological fallacy in conclusions",
+      "Confounders differ between groups"
+     ]
     }
    }
   },
@@ -158,12 +274,78 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Unusual time or place cluster"},
-     {"id": "b", "label": "Shared exposure suspected"},
-     {"id": "c", "label": "Hypothesis stated precisely"},
-     {"id": "d", "label": "Analytical study tests it"}
+     {
+      "id": "a",
+      "label": "Unusual time or place cluster"
+     },
+     {
+      "id": "b",
+      "label": "Shared exposure suspected"
+     },
+     {
+      "id": "c",
+      "label": "Hypothesis stated precisely"
+     },
+     {
+      "id": "d",
+      "label": "Analytical study tests it"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Time patterns in epidemiology include short-term fluctuations, periodic trends, and secular trends. Common source epidemics present with a sharp clustering of cases within one incubation period without secondary waves. Propagated epidemics exhibit successive progressive waves transmitted from person to person. Seasonal variations recur annually, such as gastroenteritis in summer and respiratory infections in winter. Secular trends represent progressive increases or decreases over decades, exemplified by coronary artery disease.",
+   "say": "Time patterns in epidemiology include short-term fluctuations, periodic trends, and secular trends. Common source epidemics present with a sharp clustering of cases within one incubation period without secondary waves. Propagated epidemics exhibit successive progressive waves transmitted from person to person. Seasonal variations recur annually, such as gastroenteritis in summer and respiratory infections in winter. Secular trends represent progressive increases or decreases over decades, exemplified by coronary artery disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Point-source epidemic curve",
+      "Single sharp peak within one incubation period; no secondary waves"
+     ],
+     [
+      "Continuous common-source curve",
+      "Prolonged plateau without decline until the contaminated source is removed"
+     ],
+     [
+      "Propagated epidemic curve",
+      "Successive peaks spaced one serial interval apart from person-to-person spread"
+     ],
+     [
+      "Cyclic trend example",
+      "Measles or rubella outbreaks recurring every two to three years"
+     ],
+     [
+      "Seasonal trend example",
+      "Vector-borne dengue fever surging during post-monsoon months"
+     ],
+     [
+      "Secular trend definition",
+      "Long-term progressive changes in disease incidence over several decades"
+     ],
+     [
+      "Migrant study objective",
+      "Separates genetic susceptibility from environmental factors in disease etiology"
+     ]
+    ]
    }
   }
  ],

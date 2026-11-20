@@ -13,12 +13,27 @@
    "say": "For every paralysed child, hundreds are silently infected. Faeco oral spread, motor neurons rarely reached. Silence is this virus's camouflage and surveillance's problem.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Fact"],
+    "cols": [
+     "Feature",
+     "Fact"
+    ],
     "rows": [
-     ["Family", "Enterovirus, picornavirus"],
-     ["Spread", "Faeco oral mainly"],
-     ["Paralysis ratio", "Well under 1 in 100 infections"],
-     ["Serotypes", "Three originally, type 2 and 3 eradicated"]
+     [
+      "Family",
+      "Enterovirus, picornavirus"
+     ],
+     [
+      "Spread",
+      "Faeco oral mainly"
+     ],
+     [
+      "Paralysis ratio",
+      "Well under 1 in 100 infections"
+     ],
+     [
+      "Serotypes",
+      "Three originally, type 2 and 3 eradicated"
+     ]
     ]
    }
   },
@@ -29,12 +44,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "AFP case detected under 15 years"},
-     {"id": "b", "label": "Notify immediately"},
-     {"id": "c", "label": "Two stools 24 h apart, within 14 days"},
-     {"id": "d", "label": "Cold chain to accredited laboratory"}
+     {
+      "id": "a",
+      "label": "AFP case detected under 15 years"
+     },
+     {
+      "id": "b",
+      "label": "Notify immediately"
+     },
+     {
+      "id": "c",
+      "label": "Two stools 24 h apart, within 14 days"
+     },
+     {
+      "id": "d",
+      "label": "Cold chain to accredited laboratory"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -56,24 +96,34 @@
     "kind": "compare",
     "left": {
      "title": "Poliomyelitis pattern",
-     "points": ["Asymmetric flaccid weakness", "Sensation preserved", "Fever at onset", "Proximal predominance"]
+     "points": [
+      "Asymmetric flaccid weakness",
+      "Sensation preserved",
+      "Fever at onset",
+      "Proximal predominance"
+     ]
     },
     "right": {
      "title": "Guillain Barre pattern",
-     "points": ["Symmetric ascending weakness", "Paraesthesiae common", "Afebrile progression", "Autonomic features possible"]
+     "points": [
+      "Symmetric ascending weakness",
+      "Paraesthesiae common",
+      "Afebrile progression",
+      "Autonomic features possible"
+     ]
     }
    }
   },
   {
-    "tx": "On a national immunisation day, a Pulse Polio booth gives oral drops to every child under five, regardless of earlier doses. **Poliomyelitis paralysis** is asymmetric and flaccid, proximal weakness exceeding distal loss, with reflexes gone, sensation spared and bladder function kept, and fever is present as weakness appears over days. Guillain Barre syndrome, the main mimic, is usually symmetric and ascends. Programme staff recheck residual paralysis at sixty days to classify acute flaccid paralysis outcomes.",
-    "say": "On a national immunisation day, a Pulse Polio booth gives oral drops to every child under five, regardless of earlier doses. Poliomyelitis paralysis is asymmetric and flaccid, proximal weakness exceeding distal loss, with reflexes gone, sensation spared and bladder function kept, and fever is present as weakness appears over days. Guillain Barre syndrome, the main mimic, is usually symmetric and ascends. Programme staff recheck residual paralysis at sixty days to classify acute flaccid paralysis outcomes.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n520-cm-polio-hepatitis-poliomyelitis.webp",
-      "alt": "Pulse Polio booth where children under five receive oral vaccine drops on immunisation day",
-      "caption": "Children under five receive oral polio drops at a Pulse Polio booth on a national immunisation day. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "On a national immunisation day, a Pulse Polio booth gives oral drops to every child under five, regardless of earlier doses. **Poliomyelitis paralysis** is asymmetric and flaccid, proximal weakness exceeding distal loss, with reflexes gone, sensation spared and bladder function kept, and fever is present as weakness appears over days. Guillain Barre syndrome, the main mimic, is usually symmetric and ascends. Programme staff recheck residual paralysis at sixty days to classify acute flaccid paralysis outcomes.",
+   "say": "On a national immunisation day, a Pulse Polio booth gives oral drops to every child under five, regardless of earlier doses. Poliomyelitis paralysis is asymmetric and flaccid, proximal weakness exceeding distal loss, with reflexes gone, sensation spared and bladder function kept, and fever is present as weakness appears over days. Guillain Barre syndrome, the main mimic, is usually symmetric and ascends. Programme staff recheck residual paralysis at sixty days to classify acute flaccid paralysis outcomes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n520-cm-polio-hepatitis-poliomyelitis.webp",
+    "alt": "Pulse Polio booth where children under five receive oral vaccine drops on immunisation day",
+    "caption": "Children under five receive oral polio drops at a Pulse Polio booth on a national immunisation day. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "India's last case and certification",
@@ -81,12 +131,27 @@
    "say": "Last Indian case January 2011, regional certification March 2014. Pulse rounds, booth then doorstep, built the wall. Certification audited silence until it proved absence.",
    "vis": {
     "kind": "table",
-    "cols": ["Milestone", "Date"],
+    "cols": [
+     "Milestone",
+     "Date"
+    ],
     "rows": [
-     ["Last wild case in India", "January 2011"],
-     ["Regional certification", "March 2014"],
-     ["Global type 2 declaration", "2015"],
-     ["Global type 3 declaration", "2019"]
+     [
+      "Last wild case in India",
+      "January 2011"
+     ],
+     [
+      "Regional certification",
+      "March 2014"
+     ],
+     [
+      "Global type 2 declaration",
+      "2015"
+     ],
+     [
+      "Global type 3 declaration",
+      "2019"
+     ]
     ]
    }
   },
@@ -96,12 +161,27 @@
    "say": "OPV blocks transmission in the gut and immunises contacts free. Rare paralysis and vaccine derived outbreaks in undercovered pockets are its price. Coverage decides which face shows.",
    "vis": {
     "kind": "table",
-    "cols": ["OPV trait", "Consequence"],
+    "cols": [
+     "OPV trait",
+     "Consequence"
+    ],
     "rows": [
-     ["Gut replication", "Strong intestinal immunity"],
-     ["Secondary spread", "Contacts immunised passively"],
-     ["VAPP", "Rare paralysis, recipient or contact"],
-     ["cVDPV", "Outbreaks where coverage gaps persist"]
+     [
+      "Gut replication",
+      "Strong intestinal immunity"
+     ],
+     [
+      "Secondary spread",
+      "Contacts immunised passively"
+     ],
+     [
+      "VAPP",
+      "Rare paralysis, recipient or contact"
+     ],
+     [
+      "cVDPV",
+      "Outbreaks where coverage gaps persist"
+     ]
     ]
    }
   },
@@ -113,11 +193,21 @@
     "kind": "compare",
     "left": {
      "title": "OPV",
-     "points": ["Oral, easy mass delivery", "Strong gut immunity", "Rare vaccine virus risks", "Blocks transmission best"]
+     "points": [
+      "Oral, easy mass delivery",
+      "Strong gut immunity",
+      "Rare vaccine virus risks",
+      "Blocks transmission best"
+     ]
     },
     "right": {
      "title": "IPV",
-     "points": ["Injection, trained staff", "Strong blood antibody", "No vaccine virus risk", "Weaker gut blocking"]
+     "points": [
+      "Injection, trained staff",
+      "Strong blood antibody",
+      "No vaccine virus risk",
+      "Weaker gut blocking"
+     ]
     }
    }
   },
@@ -128,12 +218,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Type 2 wild virus eradicated"},
-     {"id": "b", "label": "Synchronised tOPV to bOPV switch"},
-     {"id": "c", "label": "IPV introduced universally"},
-     {"id": "d", "label": "Stock containment and audits"}
+     {
+      "id": "a",
+      "label": "Type 2 wild virus eradicated"
+     },
+     {
+      "id": "b",
+      "label": "Synchronised tOPV to bOPV switch"
+     },
+     {
+      "id": "c",
+      "label": "IPV introduced universally"
+     },
+     {
+      "id": "d",
+      "label": "Stock containment and audits"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -142,12 +257,27 @@
    "say": "Sewage speaks before children fall. One positive sample starts investigation and targeted rounds. Waiting for paralysis wastes the warning the drains provided.",
    "vis": {
     "kind": "table",
-    "cols": ["Signal", "Response"],
+    "cols": [
+     "Signal",
+     "Response"
+    ],
     "rows": [
-     ["Sewage positive, no cases", "Investigate, review coverage"],
-     ["Repeated positives", "Targeted vaccination rounds"],
-     ["AFP stool positive", "Outbreak response protocol"],
-     ["Coverage pocket found", "Microplan revision"]
+     [
+      "Sewage positive, no cases",
+      "Investigate, review coverage"
+     ],
+     [
+      "Repeated positives",
+      "Targeted vaccination rounds"
+     ],
+     [
+      "AFP stool positive",
+      "Outbreak response protocol"
+     ],
+     [
+      "Coverage pocket found",
+      "Microplan revision"
+     ]
     ]
    }
   },
@@ -157,12 +287,72 @@
    "say": "Type 1 survives in two country corridors; vaccine derived fires start wherever coverage collapsed. Surveillance and routine rounds stay until the world, not the map, is certified.",
    "vis": {
     "kind": "table",
-    "cols": ["Risk", "Standing defence"],
+    "cols": [
+     "Risk",
+     "Standing defence"
+    ],
     "rows": [
-     ["Importation by travel", "AFP plus sewage surveillance"],
-     ["Coverage collapse", "Routine immunisation strengthening"],
-     ["Vaccine derived outbreak", "Stockpile vaccine response"],
-     ["Surveillance fatigue", "Performance indicators audited"]
+     [
+      "Importation by travel",
+      "AFP plus sewage surveillance"
+     ],
+     [
+      "Coverage collapse",
+      "Routine immunisation strengthening"
+     ],
+     [
+      "Vaccine derived outbreak",
+      "Stockpile vaccine response"
+     ],
+     [
+      "Surveillance fatigue",
+      "Performance indicators audited"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Polio paralysis is asymmetric, flaccid and proximal, with sensation intact and fever at onset. Every acute flaccid paralysis case under 15 years needs two stools 24 hours apart within 14 days. Oral vaccine gives strong gut immunity but rarely causes vaccine associated paralysis. Inactivated vaccine gives strong blood antibody but weaker gut immunity.",
+   "say": "Polio paralysis is asymmetric, flaccid and proximal, with sensation intact and fever at onset. Every acute flaccid paralysis case under 15 years needs two stools 24 hours apart within 14 days. Oral vaccine gives strong gut immunity but rarely causes vaccine associated paralysis. Inactivated vaccine gives strong blood antibody but weaker gut immunity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Polio spread route",
+      "Faeco oral spread mainly through gut"
+     ],
+     [
+      "Paralysis frequency",
+      "Well under 1 in 100 infections"
+     ],
+     [
+      "Polio weakness pattern",
+      "Asymmetric flaccid proximal weakness, sensation intact"
+     ],
+     [
+      "Guillain Barre contrast",
+      "Symmetric ascending weakness, paraesthesia common"
+     ],
+     [
+      "AFP reporting age",
+      "Every case under 15 years reported"
+     ],
+     [
+      "Environmental surveillance",
+      "Sewage sampling detects silent virus circulation"
+     ],
+     [
+      "OPV main advantage",
+      "Strong intestinal immunity blocks transmission"
+     ],
+     [
+      "IPV main limitation",
+      "Weaker gut immunity, silent shedding possible"
+     ]
     ]
    }
   }

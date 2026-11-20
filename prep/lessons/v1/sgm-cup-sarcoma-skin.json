@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgm-cup-sarcoma-skin",
+ "subject": "ss-general-medicine",
+ "title": "Cancer of unknown primary, sarcoma and skin cancers",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Cancer of unknown primary** presents with metastatic disease and an occult primary site. A complete history with examination is the first step in the workup of these patients. **CT** imaging of chest, abdomen and pelvis localises the likely primary site in many cases. **PET CT** refines localisation before site directed therapy is chosen in these patients.",
+   "say": "Cancer of unknown primary presents with metastatic disease and an occult primary site. A complete history with examination is the first step in the workup of these patients. CT imaging of chest, abdomen and pelvis localises the likely primary site in many cases. PET CT refines localisation before site directed therapy is chosen in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Metastatic presentation"
+     },
+     {
+      "id": "b",
+      "label": "History and examination"
+     },
+     {
+      "id": "c",
+      "label": "CT chest abdomen pelvis"
+     },
+     {
+      "id": "d",
+      "label": "PET CT localisation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Immunohistochemistry** assigns lineage from metastatic tissue samples in most cases. **Squamous** markers suggest lung, head and neck or skin primaries in these patients. **Adenocarcinoma** patterns suggest lung, breast or gastrointestinal primaries in many cases. **Neuroendocrine** differentiation suggests lung, skin or gut primaries in these patients.",
+   "say": "Immunohistochemistry is the lineage assignment test from metastatic tissue samples in most cases. Squamous markers suggest lung, head and neck or skin primaries in these patients. Adenocarcinoma patterns suggest lung, breast or gastrointestinal primaries in many cases. Neuroendocrine differentiation suggests lung, skin or gut primaries in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Suggests",
+     "Next step"
+    ],
+    "rows": [
+     [
+      "Squamous",
+      "Lung, head neck, skin",
+      "Local imaging directed"
+     ],
+     [
+      "Adenocarcinoma",
+      "Lung, breast, gut",
+      "Organ markers panel"
+     ],
+     [
+      "Neuroendocrine",
+      "Lung, skin, gut",
+      "Markers and imaging"
+     ],
+     [
+      "Poorly differentiated",
+      "Unclassified",
+      "Gene panel testing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gene expression profiling** classifies the primary site in favourable CUP subsets in many centres. **Platinum doublets** remain the empirical backbone while site directed therapy awaits classification. **Performance status** guides the intensity of first line therapy in these patients. **CNS** involvement needs radiation independent of systemic therapy choices in these patients.",
+   "say": "Gene expression profiling classifies the primary site in favourable CUP subsets in many centres. Platinum doublets remain the empirical backbone while site directed therapy awaits classification. Performance status guides the intensity of first line therapy in these patients. CNS involvement needs radiation independent of systemic therapy choices in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Soft tissue sarcoma** presents as deep enlarging masses in extremities in many cases. **MRI** defines compartment involvement before surgical planning in these patients. **Wide excision** with clear margins is the surgical standard for localised sarcoma in many cases. **Radiation** improves local control in large high grade extremity sarcoma in many protocols.",
+   "say": "Soft tissue sarcoma presents as deep enlarging masses in extremities in many cases. MRI defines compartment involvement before surgical planning in these patients. Wide excision with clear margins is the surgical standard for localised sarcoma in many cases. Radiation improves local control in large high grade extremity sarcoma in many protocols.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Presentation",
+     "Hallmark"
+    ],
+    "rows": [
+     [
+      "Liposarcoma",
+      "Deep thigh mass",
+      "Fatty tumour with lipoblasts"
+     ],
+     [
+      "Leiomyosarcoma",
+      "Deep abdominal mass",
+      "Smooth muscle origin"
+     ],
+     [
+      "Angiosarcoma",
+      "Cutaneous bruise like lesion",
+      "Vascular differentiation"
+     ],
+     [
+      "Merkel cell carcinoma",
+      "Red nodule in sun skin",
+      "Neuroendocrine skin tumour"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Merkel cell carcinoma** is an aggressive skin neuroendocrine tumour of sun exposed skin. **Sentinel node** assessment stages clinically negative Merkel disease in many centres. **Radiation** is adjuvant therapy for localised Merkel disease in many protocols globally. **Mohs surgery** spares tissue in facial basal cell carcinoma in many centres today.",
+   "say": "Merkel cell carcinoma is an aggressive skin neuroendocrine tumour of sun exposed skin. Sentinel node assessment is the staging test for clinically negative Merkel disease in many centres. Radiation is adjuvant therapy for localised Merkel disease in many protocols globally. Mohs micrographic surgery is tissue sparing in facial basal cell carcinoma in many centres today.",
+   "vis": null
+  },
+  {
+   "tx": "**Basal cell carcinoma** grows slowly and rarely metastasises in sun exposed skin. **Squamous cell carcinoma** of skin metastasises more often than basal cell disease in many cases. **Melanoma** depth guides sentinel node decisions in early disease management in many protocols. **Excision** margins widen with melanoma depth in many surgical guidelines for this disease.",
+   "say": "Basal cell carcinoma grows slowly and rarely metastasises in sun exposed skin. Squamous cell carcinoma of skin metastasises more often than basal cell disease in many cases. Melanoma depth is the determinant of sentinel node decisions in early disease management in many protocols. Excision margins are wider with deeper melanoma in many surgical guidelines for this disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Basal cell carcinoma",
+     "points": [
+      "Slow growing tumour",
+      "Rare metastasis pattern",
+      "Mohs surgery sparing",
+      "Sun exposed sites common"
+     ]
+    },
+    "right": {
+     "title": "Melanoma",
+     "points": [
+      "Depth guides node decision",
+      "Metastasis higher risk",
+      "Margins widen by depth",
+      "Sentinel node staging early"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**CUP favourable subsets** include isolated axillary nodes in women with breast like disease. **Peritoneal** presentation in women suggests ovarian primary in many cases with this pattern. **Neck nodes** with squamous histology suggest head and neck cancer in many patients. **Inguinal nodes** need local excision and surveillance in many of these cases.",
+   "say": "CUP favourable subsets include isolated axillary nodes in women with breast like disease. Peritoneal presentation in women suggests ovarian primary in many cases with this pattern. Neck nodes with squamous histology suggest head and neck cancer in many patients. Inguinal nodes need local excision and surveillance in many of these cases.",
+   "vis": null
+  },
+  {
+   "tx": "**Retroperitoneal sarcoma** presents as a large abdominal mass in many patients. **Liposarcoma** retroperitoneal disease needs complete surgical excision in many centres. **Neoadjuvant** radiation is considered for high risk retroperitoneal disease in many protocols. Pathology grading drives adjuvant decisions in these patients in many centres.",
+   "say": "Retroperitoneal sarcoma presents as a large abdominal mass in many patients. Liposarcoma retroperitoneal disease needs complete surgical excision in many centres. Neoadjuvant radiation is considered for high risk retroperitoneal disease in many protocols. Pathology grading drives adjuvant decisions in these patients in many centres.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Large abdominal mass"
+     },
+     {
+      "id": "b",
+      "label": "CT staging assessment"
+     },
+     {
+      "id": "c",
+      "label": "Surgical referral"
+     },
+     {
+      "id": "d",
+      "label": "Radiation consideration"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Skin examination** in CUP patients reveals the primary site in a minority of cases. **Scar examination** and old lesion history are part of CUP assessment in these patients. **Testicular examination** is mandatory in young men with CUP in many protocols globally. **Pelvic examination** completes the CUP assessment in these patients in many centres.",
+   "say": "Skin examination in CUP patients is the reveal test for the primary site in a minority of cases. Scar examination and old lesion history are part of CUP assessment in these patients. Testicular examination is mandatory in young men with CUP in many protocols globally. Pelvic examination is the completion of CUP assessment in these patients in many centres.",
+   "vis": null
+  },
+  {
+   "tx": "**Follow up** in CUP needs early detection of the primary site in many cases. **Symptomatic** bone metastases need radiation in many of these cases. **Performance status** at presentation predicts survival in CUP in many series. Supportive care is integral to CUP management in these patients in every centre.",
+   "say": "Follow up in CUP needs early detection of the primary site in many cases. Symptomatic bone metastases need radiation in many of these cases. Performance status at presentation is predictive of survival in CUP in many series. Supportive care is integral to CUP management in these patients in every centre.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** crowns the CUP and sarcoma summary here. Remember immunohistochemistry for lineage assignment in CUP, platinum doublets as the empirical backbone and gene profiling for favourable subsets. Sentinel node assessment stages Merkel disease while melanoma depth guides node decisions. Mohs surgery spares tissue in facial basal cell carcinoma.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Immunohistochemistry is required for lineage assignment in CUP. Platinum doublets remain the empirical backbone for CUP therapy. Sentinel node assessment is the staging test for Merkel disease reliably. Melanoma depth guides sentinel node decisions in early disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "CUP lineage",
+      "Immunohistochemistry assigns lineage"
+     ],
+     [
+      "CUP backbone",
+      "Platinum doublets empirical therapy"
+     ],
+     [
+      "Merkel staging",
+      "Sentinel node assessment stages disease"
+     ],
+     [
+      "Melanoma depth",
+      "Depth guides sentinel node decisions"
+     ],
+     [
+      "BCC surgery",
+      "Mohs surgery spares facial tissue"
+     ],
+     [
+      "Sarcoma surgery",
+      "Wide excision with clear margins"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

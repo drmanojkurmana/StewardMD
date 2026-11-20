@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-aldosteronism-pheo",
+ "subject": "ss-general-medicine",
+ "title": "Primary Aldosteronism and Phaeochromocytoma",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Primary aldosteronism** (Conn syndrome, autonomous aldosterone excess) is the commonest secondary hypertension cause. **Phaeochromocytoma** (adrenal medulla tumour) causes episodic catecholamine excess. **Paraganglioma** (extra adrenal tumour) is the extra adrenal equivalent. **Apparent mineralocorticoid excess** (licorice like disease) mimics aldosteronism. **Liddle syndrome** (sodium channel excess) causes young onset hypertension.",
+   "say": "Primary aldosteronism is the commonest secondary hypertension cause. Adrenal medulla tumour causes episodic catecholamine excess. Extra adrenal equivalent is the paraganglioma and licorice like disease mimics aldosteronism and sodium channel excess causes young onset hypertension.",
+   "vis": null
+  },
+  {
+   "tx": "**Adrenal adenoma** (Conn adenoma) causes 70 percent of aldosteronism. **Adrenal hyperplasia** (bilateral hyperplasia) causes 30 percent. **Phaeochromocytoma** (medulla tumour) is sporadic or MEN associated. **Paraganglioma** (head neck tumours) is sympathetic or parasympathetic. **RET mutation** (MEN 2) links medullary cancer and phaeochromocytoma. **von Hippel Lindau** (VHL mutation) links renal cancer and paraganglioma.",
+   "say": "Adrenal adenoma causes seventy percent of aldosteronism. Bilateral hyperplasia causes thirty percent. Medulla tumours are sporadic or MEN associated and head neck tumours are sympathetic or parasympathetic and proto oncogene mutation links medullary cancer and phaeochromocytoma and vHL mutation links renal cancer and paraganglioma.",
+   "vis": null
+  },
+  {
+   "tx": "Aldosterone drives **sodium retention** (volume expansion) with **potassium and hydrogen loss**. Volume expansion suppresses **renin** (pressure hormone) with high aldosterone. Catecholamines cause **alpha vasoconstriction** (vessel tightening) and **beta inotropy** (heart strengthening). **Episodic discharge** (tumour rupture) causes paroxysmal hypertension. **Metanephrines** (metabolites) persist after attacks. **Glucose intolerance** (diabetes) follows catecholamine mobilisation.",
+   "say": "Aldosterone drives sodium retention with potassium and hydrogen loss and this is examined in viva examinations for revision. Volume expansion suppresses renin with high aldosterone and this is examined in viva examinations for revision. Catecholamines tighten vessels and strengthen heart and tumour rupture causes paroxysmal hypertension and metabolites persist after attacks and glucose intolerance follows mobilisation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Aldosterone or catecholamine"
+     },
+     {
+      "id": "b",
+      "label": "Volume or vessel effect"
+     },
+     {
+      "id": "c",
+      "label": "Hypertension"
+     },
+     {
+      "id": "d",
+      "label": "Potassium fall or spells"
+     },
+     {
+      "id": "e",
+      "label": "Tumour diagnosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Resistant hypertension** (above target on 3 drugs) with **hypokalaemia** (low potassium) marks aldosteronism. **Incidentaloma hypertension** (adrenal tumour with hypertension) needs screening. **Paroxysmal spells** (headache, palpitations, sweating) mark phaeochromocytoma. **Pallor with hypertension** (vasoconstriction) during spells is classic. **Postural hypotension** (blood pooling) between spells marks volume depletion. **Glucose intolerance** (diabetes) complicates catecholamine excess.",
+   "say": "Above target on three drugs with low potassium marks aldosteronism and this is examined in viva examinations for revision. Adrenal tumour with hypertension needs screening. Headache with palpitations and sweating marks phaeochromocytoma and pallor with hypertension during spells is classic and blood pooling between spells marks depletion and glucose intolerance complicates excess.",
+   "vis": null
+  },
+  {
+   "tx": "**Aldosterone renin ratio** (ARR screen) is the first test for aldosteronism. **Confirmatory saline suppression** (sodium load test) confirms autonomy. **Plasma metanephrines** (free metabolites) are the gold standard for phaeochromocytoma. **Twenty four hour urine metanephrines** support plasma testing. **Adrenal computed tomography** (adrenal scan) localises adenomas. **MIBG scan** (functional imaging) localises paraganglioma.",
+   "say": "Aldosterone renin ratio is the first test for aldosteronism. Sodium load confirms autonomy. Free metabolites are the gold standard for phaeochromocytoma and urine metabolites support plasma testing and adrenal scan localises adenomas and functional imaging localises paraganglioma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Aldosterone renin ratio",
+      "Screen",
+      "Aldosteronism first"
+     ],
+     [
+      "Saline suppression",
+      "Confirm",
+      "Autonomy proof"
+     ],
+     [
+      "Plasma metanephrines",
+      "Gold standard",
+      "Phaeochromocytoma"
+     ],
+     [
+      "Urine metanephrines",
+      "Support",
+      "Twenty four hour collection"
+     ],
+     [
+      "Adrenal CT",
+      "Localise",
+      "Adenoma anatomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adrenalectomy** (adrenal removal) cures Conn adenoma. **Spironolactone** (aldosterone blocker) treats hyperplasia. **Alpha blockade** (phenoxybenzamine) is mandatory before phaeochromocytoma surgery. **Beta blockade** (propranolol) is added after alpha blockade for tachycardia. **Preoperative hydration** (salt and fluid loading) prevents hypotension. **MIBG therapy** (functional radiotherapy) treats malignant paraganglioma.",
+   "say": "Adrenal removal cures Conn adenoma and this is examined in viva examinations for revision. Spironolactone treats hyperplasia. Alpha blockade is mandatory before phaeochromocytoma surgery and beta blockade is added after alpha blockade and salt and fluid loading prevents low pressure and functional radiotherapy treats malignant disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Conn adenoma** needs adrenalectomy with potassium correction. **Bilateral hyperplasia** needs spironolactone lifelong. **Phaeochromocytoma** needs alpha blockade for 7 to 14 days before surgery. **MEN 2 prophylactic adrenalectomy** (cortical sparing) is debated. **Licorice abstinence** (liquorice cessation) cures apparent excess. **Liddle syndrome** needs amiloride therapy.",
+   "say": "Conn adenoma needs adrenalectomy with potassium correction. Bilateral hyperplasia needs spironolactone lifelong. Phaeochromocytoma needs alpha blockade for seven to fourteen days and cortical sparing is debated and liquorice cessation cures apparent excess and channel disease needs amiloride.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aldosteronism",
+     "points": [
+      "High aldosterone low renin",
+      "Hypokalaemia prominent",
+      "Spironolactone for hyperplasia",
+      "Adrenalectomy for adenoma"
+     ]
+    },
+    "right": {
+     "title": "Phaeochromocytoma",
+     "points": [
+      "High metanephrines",
+      "Paroxysmal spells",
+      "Alpha blockade first",
+      "Adrenalectomy after blockade"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Phaeochromocytoma crisis** (hypertensive emergency) needs phentolamine infusion. **Pulmonary oedema** (catecholamine cardiomyopathy) needs alpha blockade. **Hypotension after tumour removal** needs fluid support. **Hyperglycaemia** (diabetes) needs insulin. **Anesthesia crisis** (manipulation discharge) needs invasive monitoring. **Malignant paraganglioma** (metastatic disease) needs MIBG therapy. Focused rehearsal of blockade sequencing aids viva answers.",
+   "say": "Hypertensive emergency needs phentolamine infusion. Catecholamine heart failure needs alpha blockade. Low pressure after removal needs fluids and diabetes needs insulin and manipulation discharge needs invasive monitoring and metastatic disease needs MIBG therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Aldosteronism with** treatment has normal survival, with mortality driven by cardiovascular disease. Phaeochromocytoma after surgery has excellent survival in benign disease. Malignant paraganglioma survival is guarded. Conn adenoma hypertension resolves in 70 percent after adrenalectomy. Spironolactone therapy needs potassium surveillance. MEN 2 families need genetic screening.",
+   "say": "Aldosteronism with treatment has normal survival. Phaeochromocytoma after surgery has excellent survival in benign disease. Malignant disease survival is guarded and hypertension resolves in seventy percent after adrenalectomy and spironolactone needs potassium surveillance and mEN families need genetic screening.",
+   "vis": null
+  },
+  {
+   "tx": "Endocrine Society 2016 aldosteronism guidance stresses ARR screening, saline confirmation and adrenalectomy for adenoma. **Phaeochromocytoma blockade order** (alpha before beta) is a favourite examination rule. Traps include beta blockade before alpha, missing ARR screening in resistant hypertension, and omitting metanephrines in spells. **Spells triad** (headache palpitations sweating) is the classic phaeochromocytoma vignette.",
+   "say": "Current guidance stresses screening and confirmation and adrenalectomy for adenoma. Blockade order of alpha before beta is a favourite examination rule. Traps include beta blockade before alpha and missing screening and omitting metanephrines and headache palpitations sweating is the classic vignette.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers ARR screening, metanephrine gold standards and blockade order. Alpha before beta and ARR screening are the most asked points in theory and viva examinations. Focused rehearsal of blockade sequencing aids viva answers. Alpha blockade precedes beta blockade always.",
+   "say": "This table gathers screening ratios and gold standards and blockade order for revision. Alpha before beta and screening are the most asked points and spells triad is a classic vignette theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Screen test",
+      "Aldosterone renin ratio"
+     ],
+     [
+      "Confirm test",
+      "Saline suppression"
+     ],
+     [
+      "Gold test",
+      "Plasma metanephrines"
+     ],
+     [
+      "Conn adenoma share",
+      "70 percent"
+     ],
+     [
+      "Blockade order",
+      "Alpha before beta"
+     ],
+     [
+      "Adenoma therapy",
+      "Adrenalectomy"
+     ],
+     [
+      "Hyperplasia therapy",
+      "Spironolactone"
+     ],
+     [
+      "Spells triad",
+      "Headache palpitations sweating"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

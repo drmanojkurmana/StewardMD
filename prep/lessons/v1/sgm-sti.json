@@ -1,0 +1,180 @@
+{
+  "v": 1,
+  "module": "sgm-sti",
+  "subject": "ss-general-medicine",
+  "title": "Sexually transmitted infections",
+  "minutes": 11,
+  "steps": [
+    {
+      "tx": "**Sexually transmitted infections** are infections spread mainly by sexual contact, though blood and vertical routes also occur. The **World Health Organization** estimates three hundred and seventy four million adults aged fifteen to forty nine acquired at least one curable infection in twenty twenty. Chlamydia caused one hundred and twenty eight point five million cases, trichomoniasis one hundred and fifty six million, gonorrhoea eighty two point four million and syphilis seven point one million cases. Most infections stay asymptomatic and quietly sustain transmission.",
+      "say": "Sexually transmitted infections spread mainly through sexual contact, though blood and vertical spread also occur. The World Health Organization estimates three hundred and seventy four million adults acquired at least one curable infection in twenty twenty. Chlamydia caused more than one hundred and twenty eight million cases and trichomoniasis one hundred and fifty six million cases. Gonorrhoea caused eighty two point four million cases and syphilis seven point one million cases. Most infections remain silent and still spread transmission.",
+      "vis": null
+    },
+    {
+      "tx": "Causative agents are **curable** (**Neisseria gonorrhoeae**, **Chlamydia trachomatis**, Treponema pallidum, Trichomonas vaginalis) or incurable but manageable (herpes simplex virus, human papillomavirus, hepatitis B virus, human immunodeficiency virus). Risk factors include early sexual debut before twenty five years, multiple or concurrent partners, condomless sex, prior sexually transmitted infection and sex work. Human immunodeficiency virus infection, substance use and inconsistent condom use further raise individual risk markedly.",
+      "say": "The causative agents are either curable or incurable but manageable. Curable causes include gonorrhoea, chlamydia, syphilis and trichomonas. Incurable causes include herpes, human papillomavirus, hepatitis B and human immunodeficiency virus. Risk factors are early sexual debut before twenty five years, multiple partners, condomless sex and prior infection. Sex work, substance use and untreated human immunodeficiency virus further raise individual risk markedly.",
+      "vis": null
+    },
+    {
+      "tx": "Pathogenesis begins with **direct mucosal invasion** through microabrasions and binding to columnar epithelium in the urethra and cervix. **Chlamydia trachomatis** cycles between elementary bodies and reticulate bodies and drives ascension in ten to twenty percent of untreated infections. **Treponema pallidum** escapes immunity and disseminates within hours via lymphatics. **Herpes simplex virus** travels retrogradely to sacral ganglia within days. **Human immunodeficiency virus** integrates into lymphocyte DNA and emerges over eight to ten years.",
+      "say": "Pathogenesis begins with direct mucosal invasion through microabrasions and binding to columnar epithelium in the urethra and cervix. Chlamydia cycles between elementary bodies and reticulate bodies and drives ascension in ten to twenty percent of untreated infections. The syphilis organism escapes immunity and disseminates within hours via lymphatics. Herpes remains dormant in sacral ganglia after travelling upstream within days. Human immunodeficiency virus integrates into lymphocyte DNA and emerges over eight to ten years.",
+      "vis": null
+    },
+    {
+      "tx": "Gonorrhoea and chlamydia ascend through mucosal deficiency to cause **pelvic inflammatory disease** and **epididymitis** in ten to twenty percent of untreated genital infections. Treponema pallidum invades through microabrasions and disseminates via lymphatics and blood. Trichomonas vaginalis elicits a local neutrophil response without systemic invasion. Herpes simplex virus establishes **latency** in sacral ganglia and reactivates episodically. Human immunodeficiency virus destroys CD4 T cells and predisposes to opportunistic infection over eight to ten years.",
+      "say": "Gonorrhoea and chlamydia ascend to cause pelvic inflammatory disease and epididymitis in ten to twenty percent of untreated genital infections. The syphilis organism invades through microabrasions and disseminates through lymphatics and blood. Trichomonas causes a local neutrophil response without systemic invasion. Herpes establishes latency in sacral ganglia and reactivates episodically. Human immunodeficiency virus reduces helper T cells over eight to ten years and predisposes to opportunistic infection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Mucosal contact with infected secretions"
+          },
+          {
+            "id": "b",
+            "label": "Local replication and inflammation"
+          },
+          {
+            "id": "c",
+            "label": "Ascending or systemic spread"
+          },
+          {
+            "id": "d",
+            "label": "Asymptomatic shedding"
+          },
+          {
+            "id": "e",
+            "label": "Partner transmission"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ],
+          [
+            "d",
+            "e"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Classic clinical syndromes include **urethral discharge** with dysuria, painless **genital ulcer** with regional lymphadenopathy in primary syphilis, and strawberry cervix with frothy discharge in trichomoniasis. Condylomata acuminata, **mucopurulent cervicitis** and inguinal bubo point towards human papillomavirus, chlamydia and lymphogranuloma venereum. Secondary syphilis produces palmoplantar rash and condylomata lata. Painful grouped vesicles suggest herpes simplex virus 2. Painful ulcer with friable base suits chancroid.",
+      "say": "Classic syndromes include urethral discharge with burning micturition and painless genital ulcer with regional lymph node swelling in primary syphilis. Strawberry cervix with frothy discharge points to trichomoniasis and genital warts point to human papillomavirus. Mucopurulent cervicitis and inguinal bubo suggest chlamydia and lymphogranuloma venereum. Secondary syphilis causes rash over palms and soles with broad moist warts. Painful grouped vesicles suggest herpes and painful friable ulcer suggests chancroid.",
+      "vis": null
+    },
+    {
+      "tx": "The **first test** at the point of care is **gram stain** urethral smear showing intracellular diplococci, plus rapid human immunodeficiency virus and syphilis serology for every patient. Microscopy for **whiff test**, wet mount motile trichomonads and **KOH mount** aids vaginal syndromes. The **gold standard** is **nucleic acid amplification testing** such as polymerase chain reaction for gonorrhoea and chlamydia. Culture on Thayer Martin medium confirms gonococcal sensitivity and guides therapy.",
+      "say": "The first test at the point of care is gram stain urethral smear showing intracellular diplococci, plus rapid human immunodeficiency virus and syphilis serology for every patient. Whiff test, wet mount motile trichomonads and potassium hydroxide mount aid vaginal syndromes. The gold standard is nucleic acid amplification testing, especially polymerase chain reaction, for gonorrhoea and chlamydia. Culture on Thayer Martin medium confirms sensitivity and guides therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Syndromic care",
+          "points": [
+            "Treat syndrome now without tests",
+            "Covers most likely pathogens together",
+            "Immediate interruption of transmission",
+            "Needs periodic laboratory audit"
+          ]
+        },
+        "right": {
+          "title": "Aetiological care",
+          "points": [
+            "Test first then target therapy",
+            "Nucleic acid testing as gold standard",
+            "Guides resistance surveillance",
+            "Often unaffordable in low resource settings"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "First line therapy for urethral discharge and cervicitis is **ceftriaxone 500 mg intramuscular single dose** plus **azithromycin 1 g oral single dose** when chlamydia persists. Genital ulcer disease needs benzathine penicillin for syphilis plus antiviral treatment 400 mg three times daily for 7 to 10 days when herpes coexists. Trichomoniasis responds to 2 g single dose metronidazole. Chancroid needs azithromycin 1 g single dose. Expedited partner therapy and abstinence till cure remain mandatory.",
+      "say": "First line therapy for urethral discharge and cervicitis is ceftriaxone five hundred milligrams intramuscular as a single dose plus azithromycin one gram orally as a single dose when chlamydia persists. Genital ulcer needs benzathine penicillin for syphilis plus antiviral treatment four hundred milligrams thrice daily for seven to ten days when herpes coexists and Trichomoniasis responds to two grams single dose metronidazole and chancroid to azithromycin one gram single dose. Partner therapy and abstinence till cure remain mandatory.",
+      "vis": null
+    },
+    {
+      "tx": "Flow on the first visit includes **condom promotion**, abstinence counselling till 7 days after therapy, expedited partner therapy and test of cure at 3 weeks. Human immunodeficiency virus testing, hepatitis B vaccination and cervical cytology screening anchor prevention. Syphilis serology at 6 weeks and 3 months confirms response and detects reinfection. Repeat nucleic acid testing at 3 months is advised for gonorrhoea and chlamydia because reinfection exceeds 10%. Reporting to surveillance systems protects the community.",
+      "say": "Flow on the first visit includes condom promotion, abstinence counselling till seven days after therapy, expedited partner therapy and test of cure at three weeks. Human immunodeficiency virus testing, hepatitis B vaccination and cervical screening anchor prevention. Syphilis serology at six weeks and three months confirms response and detects reinfection. Repeat testing at three months is advised for gonorrhoea and chlamydia because reinfection exceeds ten percent. Reporting to surveillance systems protects the community.",
+      "vis": null
+    },
+    {
+      "tx": "Complications include **infertility** from tubal occlusion after pelvic inflammatory disease, ectopic pregnancy, chronic pelvic pain and epididymal obstruction. Syphilis progresses through **tertiary** cardiovascular and neurological stages decades later with thirty percent untreated risk. Gonococcal infection may disseminate to skin and joints. Human papillomavirus 16 and 18 cause cervical cancer in seventy percent of cases. Congenital syphilis causes stillbirth in forty percent and ophthalmic damage. Prevention thus outweighs cure for long term harm.",
+      "say": "Complications are infertility from tubal occlusion after pelvic inflammatory disease, ectopic pregnancy, chronic pelvic pain and epididymal obstruction. Syphilis progresses to tertiary cardiovascular and neurological stages decades later with thirty percent risk if untreated. Gonococcal infection may disseminate to skin and joints. Human papillomavirus types sixteen and eighteen cause seventy percent of cervical cancers. Congenital syphilis causes stillbirth in forty percent and ophthalmic damage. Prevention thus prevents long term harm better than cure.",
+      "vis": null
+    },
+    {
+      "tx": "Learn the **exam traps**: painless ulcer with regional nodes is syphilis, not chancroid; painful ulcer with soft friable base is chancroid. **Epididymitis** under age thirty five is sexually transmitted, above thirty five is coliform. Single dose azithromycin 1 g is adjunct, not standalone gonorrhoea therapy now. **Benzathine penicillin** 2.4 million units intramuscular is the single dose for early syphilis. Penicillin is mandatory for neurosyphilis and for syphilis in pregnancy. Treating the syndrome without testing human immunodeficiency virus is incomplete.",
+      "say": "Learn the exam traps. Painless ulcer with regional nodes is syphilis, not chancroid, while painful ulcer with soft friable base is chancroid. Epididymitis under thirty five years is sexually transmitted, above thirty five years is coliform. Single dose azithromycin one gram is now only an adjunct for gonorrhoea. Benzathine penicillin two point four million units intramuscular is the single dose for early syphilis. Penicillin is mandatory for neurosyphilis and syphilis in pregnancy.",
+      "vis": null
+    },
+    {
+      "tx": "**High-yield for the exam** table summarises drug, dose and target. Ceftriaxone 500 mg intramuscular single dose covers gonorrhoea. Azithromycin 1 g single dose covers chlamydia adjunct. Benzathine penicillin 2.4 million units intramuscular treats early syphilis. Antiviral treatment 400 mg three times daily for 7 to 10 days treats herpes. Metronidazole 2 g single dose treats trichomoniasis. Partners, abstinence till cure and repeat testing at 3 months complete care.",
+      "say": "This high yield table summarises drug, dose and target. Ceftriaxone five hundred milligrams intramuscular as a single dose covers gonorrhoea. Azithromycin one gram single dose covers chlamydia adjunct. Benzathine penicillin two point four million units intramuscular treats early syphilis. Antiviral treatment four hundred milligrams thrice daily for seven to ten days treats herpes. Metronidazole two grams single dose treats trichomoniasis. Partners, abstinence till cure and repeat testing at three months complete care.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syndrome",
+          "First line drug",
+          "Dose",
+          "Add on action"
+        ],
+        "rows": [
+          [
+            "Urethral discharge",
+            "Ceftriaxone",
+            "500 mg intramuscular single dose",
+            "Add azithromycin 1 g"
+          ],
+          [
+            "Genital ulcer with syphilis",
+            "Benzathine penicillin",
+            "2.4 million units intramuscular",
+            "Add antiviral treatment when herpes"
+          ],
+          [
+            "Trichomoniasis",
+            "Metronidazole",
+            "2 g oral single dose",
+            "Treat all partners"
+          ],
+          [
+            "Herpes genitalis",
+            "Antiviral treatment",
+            "400 mg three times daily for 7 to 10 days",
+            "Counselling on recurrence"
+          ],
+          [
+            "Chancroid",
+            "Azithromycin",
+            "1 g oral single dose",
+            "Test for human immunodeficiency virus"
+          ],
+          [
+            "Lymphogranuloma venereum",
+            "Doxycycline",
+            "100 mg twice daily for 21 days",
+            "Review at 3 months"
+          ],
+          [
+            "Mucopurulent cervicitis",
+            "Ceftriaxone plus azithromycin",
+            "500 mg plus 1 g single dose",
+            "Screen for chlamydia"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

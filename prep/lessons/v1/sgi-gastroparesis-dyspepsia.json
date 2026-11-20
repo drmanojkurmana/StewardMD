@@ -21,10 +21,22 @@
       "say": "Diagnostic confirmation of delayed gastric transit in gastroparesis relies on gastric emptying scintigraphy using a radiolabeled technetium-99m solid meal. Standard criteria require gastric retention exceeding sixty percent at two hours or retention greater than ten percent at four hours. Mechanical obstruction must be ruled out by endoscopy first.",
       "vis": {
         "kind": "table",
-        "cols": ["Scintigraphy Timepoint", "Diagnostic Retention Threshold", "Clinical Significance"],
+        "cols": [
+          "Scintigraphy Timepoint",
+          "Diagnostic Retention Threshold",
+          "Clinical Significance"
+        ],
         "rows": [
-          ["2 hours", "Retention greater than 60%", "Early indicator of delayed gastric emptying"],
-          ["4 hours", "Retention greater than 10%", "Definitive gold standard diagnostic criterion"]
+          [
+            "2 hours",
+            "Retention greater than 60%",
+            "Early indicator of delayed gastric emptying"
+          ],
+          [
+            "4 hours",
+            "Retention greater than 10%",
+            "Definitive gold standard diagnostic criterion"
+          ]
         ]
       }
     },
@@ -34,15 +46,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Chronic hyperglycemia and oxidative stress"},
-          {"id": "b", "label": "Autonomic neuropathy and vagal degeneration"},
-          {"id": "c", "label": "Loss of interstitial cells of Cajal and nNOS"},
-          {"id": "d", "label": "Impaired antral motility and delayed emptying"}
+          {
+            "id": "a",
+            "label": "Chronic hyperglycemia and oxidative stress"
+          },
+          {
+            "id": "b",
+            "label": "Autonomic neuropathy and vagal degeneration"
+          },
+          {
+            "id": "c",
+            "label": "Loss of interstitial cells of Cajal and nNOS"
+          },
+          {
+            "id": "d",
+            "label": "Impaired antral motility and delayed emptying"
+          }
         ],
         "edges": [
-          ["a", "b", "induces"],
-          ["b", "c", "leads to"],
-          ["c", "d", "results in"]
+          [
+            "a",
+            "b",
+            "induces"
+          ],
+          [
+            "b",
+            "c",
+            "leads to"
+          ],
+          [
+            "c",
+            "d",
+            "results in"
+          ]
         ]
       }
     },
@@ -63,15 +99,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Mucosal entry incision in gastric antrum"},
-          {"id": "b", "label": "Submucosal tunneling towards pyloric ring"},
-          {"id": "c", "label": "Myotomy of pyloric circular muscle bundle"},
-          {"id": "d", "label": "Endoclip closure of mucosal entry site"}
+          {
+            "id": "a",
+            "label": "Mucosal entry incision in gastric antrum"
+          },
+          {
+            "id": "b",
+            "label": "Submucosal tunneling towards pyloric ring"
+          },
+          {
+            "id": "c",
+            "label": "Myotomy of pyloric circular muscle bundle"
+          },
+          {
+            "id": "d",
+            "label": "Endoclip closure of mucosal entry site"
+          }
         ],
         "edges": [
-          ["a", "b", "submucosal knife"],
-          ["b", "c", "selective division"],
-          ["c", "d", "closure clips"]
+          [
+            "a",
+            "b",
+            "submucosal knife"
+          ],
+          [
+            "b",
+            "c",
+            "selective division"
+          ],
+          [
+            "c",
+            "d",
+            "closure clips"
+          ]
         ]
       }
     },
@@ -106,15 +166,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Chronic daily cannabis exposure"},
-          {"id": "b", "label": "Downregulation of enteric CB1 receptors and hypothalamic dysregulation"},
-          {"id": "c", "label": "Cyclical vomiting and compulsive hot-water bathing"},
-          {"id": "d", "label": "Symptom resolution following cannabis cessation"}
+          {
+            "id": "a",
+            "label": "Chronic daily cannabis exposure"
+          },
+          {
+            "id": "b",
+            "label": "Downregulation of enteric CB1 receptors and hypothalamic dysregulation"
+          },
+          {
+            "id": "c",
+            "label": "Cyclical vomiting and compulsive hot-water bathing"
+          },
+          {
+            "id": "d",
+            "label": "Symptom resolution following cannabis cessation"
+          }
         ],
         "edges": [
-          ["a", "b", "causes"],
-          ["b", "c", "triggers"],
-          ["c", "d", "sustained abstinence"]
+          [
+            "a",
+            "b",
+            "causes"
+          ],
+          [
+            "b",
+            "c",
+            "triggers"
+          ],
+          [
+            "c",
+            "d",
+            "sustained abstinence"
+          ]
         ]
       }
     },
@@ -123,12 +207,77 @@
       "say": "Rumination syndrome is an involuntary functional disorder characterized by effortless repetitive regurgitation of recently ingested food into the mouth. It occurs within minutes of eating, without preceding nausea or retching. The first-line therapy is behavioral retraining using diaphragmatic breathing exercises practiced immediately after meals to abort thoracic and abdominal wall contractions.",
       "vis": {
         "kind": "table",
-        "cols": ["Feature", "Rumination Syndrome", "Gastroesophageal Reflux / Gastroparesis"],
+        "cols": [
+          "Feature",
+          "Rumination Syndrome",
+          "Gastroesophageal Reflux / Gastroparesis"
+        ],
         "rows": [
-          ["Timing of regurgitation", "Minutes after eating (during or post-meal)", "Hours after eating or nocturnal"],
-          ["Effort / Sensations", "Effortless, no nausea, pleasant or neutral taste", "Effortful retching, sour/acid taste, burning"],
-          ["Mechanism", "Involuntary rectus abdominis contraction", "LES incompetence or delayed gastric emptying"],
-          ["First-line therapy", "Postprandial diaphragmatic breathing exercises", "Acid suppression, prokinetics, dietary modification"]
+          [
+            "Timing of regurgitation",
+            "Minutes after eating (during or post-meal)",
+            "Hours after eating or nocturnal"
+          ],
+          [
+            "Effort / Sensations",
+            "Effortless, no nausea, pleasant or neutral taste",
+            "Effortful retching, sour/acid taste, burning"
+          ],
+          [
+            "Mechanism",
+            "Involuntary rectus abdominis contraction",
+            "LES incompetence or delayed gastric emptying"
+          ],
+          [
+            "First-line therapy",
+            "Postprandial diaphragmatic breathing exercises",
+            "Acid suppression, prokinetics, dietary modification"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Scintigraphy diagnoses gastroparesis when retention exceeds sixty percent at two hours or ten percent at four hours after excluding obstruction. Metoclopramide carries a tardive dyskinesia warning beyond twelve weeks of use. Hot water bathing points to cannabinoid hyperemesis, and diaphragmatic breathing treats rumination without drugs.",
+      "say": "High-yield for the exam: Scintigraphy diagnoses gastroparesis when retention exceeds sixty percent at two hours or ten percent at four hours after excluding obstruction. Metoclopramide carries a tardive dyskinesia warning beyond twelve weeks of use. Hot water bathing points to cannabinoid hyperemesis, and diaphragmatic breathing treats rumination without drugs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Gastric retention 2 hours",
+            "Above 60 percent abnormal"
+          ],
+          [
+            "Gastric retention 4 hours",
+            "Above 10 percent abnormal"
+          ],
+          [
+            "First exclusion step",
+            "Endoscopy excludes mechanical obstruction"
+          ],
+          [
+            "Metoclopramide boxed warning",
+            "Tardive dyskinesia beyond 12 weeks"
+          ],
+          [
+            "Refractory procedure",
+            "G POEM pyloric myotomy"
+          ],
+          [
+            "Cannabinoid hallmark behaviour",
+            "Compulsive hot water bathing"
+          ],
+          [
+            "Cyclic vomiting link",
+            "Migraine association, tricyclic prophylaxis"
+          ],
+          [
+            "Rumination first line",
+            "Diaphragmatic breathing after meals"
+          ]
         ]
       }
     }

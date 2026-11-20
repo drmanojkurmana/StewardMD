@@ -13,12 +13,27 @@
    "say": "Start with the sentence itself. Health means complete physical, mental and social well-being, not just having no disease. That wording dates from 1948, and a later addition speaks of leading a socially and economically productive life.",
    "vis": {
     "kind": "table",
-    "cols": ["Phrase in the definition", "What it adds"],
+    "cols": [
+     "Phrase in the definition",
+     "What it adds"
+    ],
     "rows": [
-     ["Complete physical well-being", "Body structure and function at their best"],
-     ["Complete mental well-being", "Mind at ease, able to cope and decide"],
-     ["Complete social well-being", "Full part in family and community life"],
-     ["Not merely absence of disease", "Health is more than a negative state"]
+     [
+      "Complete physical well-being",
+      "Body structure and function at their best"
+     ],
+     [
+      "Complete mental well-being",
+      "Mind at ease, able to cope and decide"
+     ],
+     [
+      "Complete social well-being",
+      "Full part in family and community life"
+     ],
+     [
+      "Not merely absence of disease",
+      "Health is more than a negative state"
+     ]
     ]
    }
   },
@@ -30,11 +45,19 @@
     "kind": "compare",
     "left": {
      "title": "Strengths of the WHO wording",
-     "points": ["Positive goal, not just no disease", "Covers mind and society, not body alone", "Shared target for all countries"]
+     "points": [
+      "Positive goal, not just no disease",
+      "Covers mind and society, not body alone",
+      "Shared target for all countries"
+     ]
     },
     "right": {
      "title": "Common criticisms",
-     "points": ["Complete well-being is rarely attained", "Sounds static, health is dynamic", "Hard to measure directly"]
+     "points": [
+      "Complete well-being is rarely attained",
+      "Sounds static, health is dynamic",
+      "Hard to measure directly"
+     ]
     }
    }
   },
@@ -44,11 +67,23 @@
    "say": "Picture the top end of the scale. Body systems work at their best together, the person feels in control, and social participation is complete. Teachers call that a mirage because life keeps changing the target, yet the idea lifts care above mere survival.",
    "vis": {
     "kind": "table",
-    "cols": ["Domain", "Positive health looks like"],
+    "cols": [
+     "Domain",
+     "Positive health looks like"
+    ],
     "rows": [
-     ["Biological", "Every organ at optimum capacity in harmony"],
-     ["Psychological", "Sense of well-being and mastery over surroundings"],
-     ["Social", "Full capacity to participate in the social system"]
+     [
+      "Biological",
+      "Every organ at optimum capacity in harmony"
+     ],
+     [
+      "Psychological",
+      "Sense of well-being and mastery over surroundings"
+     ],
+     [
+      "Social",
+      "Full capacity to participate in the social system"
+     ]
     ]
    }
   },
@@ -59,26 +94,65 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Positive health"},
-     {"id": "b", "label": "Better health"},
-     {"id": "c", "label": "Freedom from sickness"},
-     {"id": "d", "label": "Unrecognised sickness"},
-     {"id": "e", "label": "Mild or severe sickness"},
-     {"id": "f", "label": "Death"}
+     {
+      "id": "a",
+      "label": "Positive health"
+     },
+     {
+      "id": "b",
+      "label": "Better health"
+     },
+     {
+      "id": "c",
+      "label": "Freedom from sickness"
+     },
+     {
+      "id": "d",
+      "label": "Unrecognised sickness"
+     },
+     {
+      "id": "e",
+      "label": "Mild or severe sickness"
+     },
+     {
+      "id": "f",
+      "label": "Death"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"], ["e", "f"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
    }
   },
   {
-    "tx": "**Spectrum of health** runs as a single horizontal bar from positive health, through better health and freedom from sickness, into unrecognised, mild and severe sickness, ending at death. Arrows point both ways. Treatment, rest and rehabilitation move a person toward the healthy pole, whereas a new exposure drives the opposite way. Health and sickness share no sharp boundary, so a borderline finding still needs judgement.",
-    "say": "Spectrum of health runs as a single horizontal bar from positive health, through better health and freedom from sickness, into unrecognised, mild and severe sickness, ending at death. Arrows point both ways. Treatment, rest and rehabilitation move a person toward the healthy pole, whereas a new exposure drives the opposite way. Health and sickness share no sharp boundary, so a borderline finding still needs judgement.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n130-cm-health-indicators-who-definition-of-health.webp",
-      "alt": "Horizontal bar from positive health through sickness stages to death, with arrows in both directions",
-      "caption": "Positive health, unrecognised sickness, severe sickness and death sit on one bar, with movement possible either way. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "**Spectrum of health** runs as a single horizontal bar from positive health, through better health and freedom from sickness, into unrecognised, mild and severe sickness, ending at death. Arrows point both ways. Treatment, rest and rehabilitation move a person toward the healthy pole, whereas a new exposure drives the opposite way. Health and sickness share no sharp boundary, so a borderline finding still needs judgement.",
+   "say": "Spectrum of health runs as a single horizontal bar from positive health, through better health and freedom from sickness, into unrecognised, mild and severe sickness, ending at death. Arrows point both ways. Treatment, rest and rehabilitation move a person toward the healthy pole, whereas a new exposure drives the opposite way. Health and sickness share no sharp boundary, so a borderline finding still needs judgement.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n130-cm-health-indicators-who-definition-of-health.webp",
+    "alt": "Horizontal bar from positive health through sickness stages to death, with arrows in both directions",
+    "caption": "Positive health, unrecognised sickness, severe sickness and death sit on one bar, with movement possible either way. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Four changing concepts of health",
@@ -86,12 +160,32 @@
    "say": "Four labels organise this history. Biomedical thinking equates health with no disease. Ecological thinking stresses balance with surroundings. Psychosocial thinking adds culture and economics. Holistic thinking joins them all, echoing a sound mind in a sound body, family and environment.",
    "vis": {
     "kind": "table",
-    "cols": ["Concept", "Core idea", "Main limit"],
+    "cols": [
+     "Concept",
+     "Core idea",
+     "Main limit"
+    ],
     "rows": [
-     ["Biomedical", "No disease means healthy", "Ignores mind and society"],
-     ["Ecological", "Balance with environment", "Hard to apply at the bedside"],
-     ["Psychosocial", "Social forces shape health", "Broad and hard to measure"],
-     ["Holistic", "All sectors affect health", "Needs action beyond medicine"]
+     [
+      "Biomedical",
+      "No disease means healthy",
+      "Ignores mind and society"
+     ],
+     [
+      "Ecological",
+      "Balance with environment",
+      "Hard to apply at the bedside"
+     ],
+     [
+      "Psychosocial",
+      "Social forces shape health",
+      "Broad and hard to measure"
+     ],
+     [
+      "Holistic",
+      "All sectors affect health",
+      "Needs action beyond medicine"
+     ]
     ]
    }
   },
@@ -101,12 +195,27 @@
    "say": "Examiners love named dimensions. Physical signs include clear skin, bright eyes, sound sleep and normal pulse and blood pressure. Mental health means inner balance. Social health means real relationships and a role. Spiritual, emotional and vocational dimensions round out the list.",
    "vis": {
     "kind": "table",
-    "cols": ["Dimension", "Sign of health"],
+    "cols": [
+     "Dimension",
+     "Sign of health"
+    ],
     "rows": [
-     ["Physical", "Normal pulse, blood pressure and exercise tolerance"],
-     ["Mental", "Balance within self and with others"],
-     ["Social", "Fulfilling relationships and a useful role"],
-     ["Vocational", "Capacity to work and earn"]
+     [
+      "Physical",
+      "Normal pulse, blood pressure and exercise tolerance"
+     ],
+     [
+      "Mental",
+      "Balance within self and with others"
+     ],
+     [
+      "Social",
+      "Fulfilling relationships and a useful role"
+     ],
+     [
+      "Vocational",
+      "Capacity to work and earn"
+     ]
     ]
    }
   },
@@ -116,24 +225,40 @@
    "say": "Some determinants travel with the person. Genes set susceptibility to diabetes, colour blindness and chromosomal disorders. Ageing raises risk as immunity falls, and sex patterns many diseases. Since none of these change, prevention answers with screening and early care.",
    "vis": {
     "kind": "table",
-    "cols": ["Determinant", "Exam example", "Service response"],
+    "cols": [
+     "Determinant",
+     "Exam example",
+     "Service response"
+    ],
     "rows": [
-     ["Genetic make-up", "Chromosomal disorders", "Counselling and prenatal screening"],
-     ["Ageing", "Falling immunity with age", "Adult vaccination and screening"],
-     ["Sex", "Sex patterned disease rates", "Sex specific screening ages"]
+     [
+      "Genetic make-up",
+      "Chromosomal disorders",
+      "Counselling and prenatal screening"
+     ],
+     [
+      "Ageing",
+      "Falling immunity with age",
+      "Adult vaccination and screening"
+     ],
+     [
+      "Sex",
+      "Sex patterned disease rates",
+      "Sex specific screening ages"
+     ]
     ]
    }
   },
   {
-    "tx": "**Biological determinants** sit at the centre of the wheel: inherited genes (colour blindness, diabetes, chromosomal disorders), ageing that wears tissues and lowers immunity, and sex, which clusters some diseases in men and others in women. Around that core sit behaviour, the physical environment, socio economic conditions and health services. Genes, age and sex cannot be rewritten, so screening and earlier care work around them while the outer segments remain open to change.",
-    "say": "Biological determinants sit at the centre of the wheel: inherited genes (colour blindness, diabetes, chromosomal disorders), ageing that wears tissues and lowers immunity, and sex, which clusters some diseases in men and others in women. Around that core sit behaviour, the physical environment, socio economic conditions and health services. Genes, age and sex cannot be rewritten, so screening and earlier care work around them while the outer segments remain open to change.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n131-cm-health-indicators-who-definition-of-health.webp",
-      "alt": "Wheel with biological factors at the centre and behaviour, environment, socioeconomics and health services around them",
-      "caption": "Biological factors occupy the centre, ringed by behaviour, environment, socio economic conditions and health services. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "**Biological determinants** sit at the centre of the wheel: inherited genes (colour blindness, diabetes, chromosomal disorders), ageing that wears tissues and lowers immunity, and sex, which clusters some diseases in men and others in women. Around that core sit behaviour, the physical environment, socio economic conditions and health services. Genes, age and sex cannot be rewritten, so screening and earlier care work around them while the outer segments remain open to change.",
+   "say": "Biological determinants sit at the centre of the wheel: inherited genes (colour blindness, diabetes, chromosomal disorders), ageing that wears tissues and lowers immunity, and sex, which clusters some diseases in men and others in women. Around that core sit behaviour, the physical environment, socio economic conditions and health services. Genes, age and sex cannot be rewritten, so screening and earlier care work around them while the outer segments remain open to change.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n131-cm-health-indicators-who-definition-of-health.webp",
+    "alt": "Wheel with biological factors at the centre and behaviour, environment, socioeconomics and health services around them",
+    "caption": "Biological factors occupy the centre, ringed by behaviour, environment, socio economic conditions and health services. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Determinants outside the person",
@@ -143,11 +268,19 @@
     "kind": "compare",
     "left": {
      "title": "Social determinants",
-     "points": ["Income and occupation", "Education and literacy", "Housing and crowding"]
+     "points": [
+      "Income and occupation",
+      "Education and literacy",
+      "Housing and crowding"
+     ]
     },
     "right": {
      "title": "Service determinants",
-     "points": ["Accessible primary care", "Immunisation coverage", "Early detection services"]
+     "points": [
+      "Accessible primary care",
+      "Immunisation coverage",
+      "Early detection services"
+     ]
     }
    }
   },
@@ -159,12 +292,65 @@
     "kind": "compare",
     "left": {
      "title": "Protective environment",
-     "points": ["Safe water and clean air", "Safe food supply", "Vector control in surroundings"]
+     "points": [
+      "Safe water and clean air",
+      "Safe food supply",
+      "Vector control in surroundings"
+     ]
     },
     "right": {
      "title": "Hostile environment",
-     "points": ["Diarrhoea from polluted water", "Respiratory disease from smoke", "Vector borne illness from breeding sites"]
+     "points": [
+      "Diarrhoea from polluted water",
+      "Respiratory disease from smoke",
+      "Vector borne illness from breeding sites"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The WHO definition from 1948 calls health complete physical, mental and social well being, not merely absence of disease. The spectrum runs from positive health through freedom from sickness to severe sickness and death, with movement both ways. The holistic concept joins biomedical, ecological and psychosocial views. Genes, age and sex are biological determinants that cannot be rewritten.",
+   "say": "High-yield for the exam: The WHO definition from 1948 calls health complete physical, mental and social well being, not merely absence of disease. The spectrum runs from positive health through freedom from sickness to severe sickness and death, with movement both ways. The holistic concept joins biomedical, ecological and psychosocial views. Genes, age and sex are biological determinants that cannot be rewritten.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "WHO definition year",
+      "1948 constitution, complete physical mental social well being"
+     ],
+     [
+      "Definition added phrase",
+      "Ability to lead socially economically productive life"
+     ],
+     [
+      "Spectrum top and bottom",
+      "Positive health at top, death at bottom"
+     ],
+     [
+      "Biomedical concept",
+      "Health as absence of disease, germ theory based"
+     ],
+     [
+      "Ecological concept",
+      "Dynamic equilibrium between people and surroundings"
+     ],
+     [
+      "Holistic concept",
+      "Sound mind body family and environment together"
+     ],
+     [
+      "Biological determinants",
+      "Genes ageing and sex, not modifiable directly"
+     ],
+     [
+      "Socioeconomic determinants",
+      "Income education occupation housing track death rates"
+     ]
+    ]
    }
   }
  ],

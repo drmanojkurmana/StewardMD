@@ -1,0 +1,253 @@
+{
+ "v": 1,
+ "module": "sgm-osteoarthritis-soft-tissue",
+ "subject": "ss-general-medicine",
+ "title": "Osteoarthritis, fibromyalgia and regional pain syndromes",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Osteoarthritis** is cartilage loss with joint space narrowing in these patients. **Heberden nodes** are bony finger changes in these patients. **Crepitus** with movement is the examination clue in these patients. **Pain** worsens with activity and eases with rest in these patients.",
+   "say": "Osteoarthritis is cartilage loss with joint space narrowing in these patients. Heberden nodes are bony finger changes in these patients. Crepitus with movement is the examination clue in these patients. Pain worsens with activity and eases with rest in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Osteoarthritis",
+     "Rheumatoid"
+    ],
+    "rows": [
+     [
+      "Stiffness",
+      "Brief morning stiffness",
+      "Prolonged stiffness"
+     ],
+     [
+      "Joints",
+      "Weight bearing joints",
+      "Small hand joints"
+     ],
+     [
+      "Erosion",
+      "Osteophytes present",
+      "Marginal erosions"
+     ],
+     [
+      "Inflammation",
+      "Non inflammatory pain",
+      "Synovitis dominant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Weight loss** reduces knee load in these patients. **Quadriceps** strengthening preserves joint function in these patients. **Physiotherapy** with heat helps these patients. **Footwear** modification helps these patients. Graded activity improves symptoms in these patients worldwide. Detailed counselling is provided in these patients.",
+   "say": "Weight loss programme reduces knee load substantially in these patients with overweight and osteoarthritis. Quadriceps strengthening preserves joint function in these patients during daily activities and walking. Physiotherapy with heat therapy helps these patients with stiffness and pain during morning routine. Footwear modification helps these patients during walking and standing in daily life.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Knee osteoarthritis"
+     },
+     {
+      "id": "b",
+      "label": "Weight loss programme"
+     },
+     {
+      "id": "c",
+      "label": "Quadriceps strengthening"
+     },
+     {
+      "id": "d",
+      "label": "Function review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fibromyalgia** causes widespread pain with tender points in these patients. **Non restorative sleep** is the sleep complaint in these patients. **Fatigue** with cognitive fog is common in these patients. **Normal** investigations are the rule in these patients. Examination confirms the pattern in these patients.",
+   "say": "Fibromyalgia causes widespread pain with tender points in these patients during daily life and activities. Non restorative sleep is the sleep complaint in these patients with poor sleep quality. Fatigue with cognitive fog is common in these patients with long term widespread pain. Normal investigations are the rule in these patients after thorough evaluation in clinic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "Feature",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Pain",
+      "Widespread pain index",
+      "Tender point count"
+     ],
+     [
+      "Sleep",
+      "Unrefreshing sleep",
+      "Poor sleep quality"
+     ],
+     [
+      "Fatigue",
+      "Persistent tiredness",
+      "Exertion intolerance"
+     ],
+     [
+      "Cognition",
+      "Fibro fog",
+      "Memory difficulties"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tennis elbow** is lateral epicondylitis in these patients. **Carpal tunnel** causes nocturnal tingling in these patients. **Frozen shoulder** restricts movements in these patients. **Regional** syndromes need physiotherapy in these patients. Simple measures help most patients over time. Detailed counselling is provided in these patients.",
+   "say": "Tennis elbow is lateral epicondylitis in these patients with overuse during sports and work. Carpal tunnel syndrome causes nocturnal tingling in these patients with median nerve compression. Frozen shoulder is restriction of movements in these patients with capsular stiffness and pain. Regional syndromes need physiotherapy in these patients with graded rehabilitation programmes.",
+   "vis": null
+  },
+  {
+   "tx": "**Exercise** is the mainstay of fibromyalgia therapy in these patients. **Graded** activity improves symptoms in these patients. **Sleep** hygiene improves outcomes in these patients. **Cognitive** therapy helps these patients. Rehabilitation is guided in these patients. Detailed counselling is provided in these patients.",
+   "say": "Exercise programme is the mainstay of fibromyalgia therapy in these patients with widespread pain. Graded activity improves symptoms in these patients with pacing and rest periods. Sleep hygiene improves outcomes in these patients with regular routines. Cognitive therapy helps these patients with coping strategies for pain.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Widespread pain diagnosis"
+     },
+     {
+      "id": "b",
+      "label": "Graded exercise started"
+     },
+     {
+      "id": "c",
+      "label": "Sleep hygiene counsel"
+     },
+     {
+      "id": "d",
+      "label": "Function reassessment"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Joint replacement** suits end stage osteoarthritis in these patients. **Physiotherapy** after surgery restores function in these patients. **Return** to activity is guided in these patients. **Diabetes** care helps these patients. Long term follow-up is advised in these patients. Detailed counselling is provided in these patients.",
+   "say": "Joint replacement surgery is the option for end stage osteoarthritis in these patients with severe pain. Physiotherapy after surgery is the restoration of function in these patients with rehabilitation programmes. Return to activity is guided in these patients with staged rehabilitation plans. Diabetes care helps these patients with wound healing and infection prevention.",
+   "vis": null
+  },
+  {
+   "tx": "**Nerve** entrapment needs splinting in these patients. **Ergonomics** helps these patients. **Rest** helps these patients. **Imaging** guides these patients. Ergonomics helps these patients worldwide today. Detailed counselling is provided in these patients. Community support is arranged in these patients. Self care education is provided in these patients.",
+   "say": "Nerve entrapment needs splinting in these patients with nocturnal symptoms and pain. Ergonomics helps these patients with work station adjustments and rest breaks. Rest helps these patients with activity modification and pacing. Imaging guides these patients with nerve compression and joint damage assessment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Site",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Tennis elbow",
+      "Lateral elbow",
+      "Physiotherapy and rest"
+     ],
+     [
+      "Carpal tunnel",
+      "Wrist median nerve",
+      "Splinting and review"
+     ],
+     [
+      "Frozen shoulder",
+      "Shoulder capsule",
+      "Physiotherapy graded"
+     ],
+     [
+      "Knee osteoarthritis",
+      "Medial compartment",
+      "Weight loss programme"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Depression** screening is needed in these patients. **Referral** to psychiatry helps these patients. **Social** support helps these patients. **Activity** pacing helps these patients. Holistic care helps these patients worldwide. Detailed counselling is provided in these patients. Community support is arranged in these patients.",
+   "say": "Depression screening is needed in these patients with chronic widespread pain. Referral to psychiatry helps these patients with mood and sleep disorders. Social support helps these patients with family and community networks. Activity pacing helps these patients with flare prevention strategies.",
+   "vis": null
+  },
+  {
+   "tx": "**Education** improves coping in these patients. **Pacing** prevents flares in these patients. **Relaxation** helps these patients. **Support** groups help these patients. Support networks help these patients worldwide. Detailed counselling is provided in these patients. Community support is arranged in these patients.",
+   "say": "Education improves coping in these patients with chronic pain conditions. Pacing prevents flares in these patients with activity scheduling. Relaxation helps these patients with stress and tension management. Support groups help these patients with shared experiences and advice.",
+   "vis": null
+  },
+  {
+   "tx": "**Follow up** needs function scores in these patients. **Review** of therapy is needed in these patients. **Comorbidity** care is needed in these patients. **Referral** pathways help these patients. Care coordination helps these patients worldwide. Detailed counselling is provided in these patients.",
+   "say": "Follow up needs function scores in these patients with chronic pain. Review of therapy is needed in these patients with periodic reassessment. Comorbidity care is needed in these patients with multiple health conditions. Referral pathways help these patients with secondary care access.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** opens this closing summary for the lesson specifically. Remember Heberden nodes with knee pain for osteoarthritis, widespread pain with non restorative sleep for fibromyalgia and graded exercise as the mainstay for these patients. Weight loss reduces knee load while physiotherapy preserves function clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Heberden nodes with knee pain is the pattern of osteoarthritis clearly. Widespread pain with non restorative sleep is the pattern of fibromyalgia cases. Graded exercise is the mainstay for these patients. Weight loss reduces knee load in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Osteoarthritis clue",
+      "Heberden nodes with knee pain"
+     ],
+     [
+      "Fibromyalgia pattern",
+      "Widespread pain, unrefreshing sleep"
+     ],
+     [
+      "Mainstay therapy",
+      "Graded exercise for fibromyalgia"
+     ],
+     [
+      "Knee load",
+      "Weight loss reduces knee load"
+     ],
+     [
+      "Function therapy",
+      "Physiotherapy preserves joint function"
+     ],
+     [
+      "Regional example",
+      "Tennis elbow lateral epicondylitis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

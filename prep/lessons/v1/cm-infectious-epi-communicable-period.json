@@ -14,12 +14,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Agent enters the host"},
-     {"id": "b", "label": "Silent multiplication"},
-     {"id": "c", "label": "First sign or symptom"},
-     {"id": "d", "label": "Exposure traced backward"}
+     {
+      "id": "a",
+      "label": "Agent enters the host"
+     },
+     {
+      "id": "b",
+      "label": "Silent multiplication"
+     },
+     {
+      "id": "c",
+      "label": "First sign or symptom"
+     },
+     {
+      "id": "d",
+      "label": "Exposure traced backward"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -28,12 +53,27 @@
    "say": "Timing accuses the organism. Cases clustering half a day after a meal suggest one family; three days suggest another. Earliest and latest cases bound the exposure window. Outliers usually mean secondary spread, not statistical tails.",
    "vis": {
     "kind": "table",
-    "cols": ["Onset after meal", "Investigative reading"],
+    "cols": [
+     "Onset after meal",
+     "Investigative reading"
+    ],
     "rows": [
-     ["1 to 6 hours", "Preformed toxin suspected"],
-     ["12 to 24 hours", "One organism family favoured"],
-     ["48 to 72 hours", "Another organism family favoured"],
-     ["Far outside range", "Secondary case or new exposure"]
+     [
+      "1 to 6 hours",
+      "Preformed toxin suspected"
+     ],
+     [
+      "12 to 24 hours",
+      "One organism family favoured"
+     ],
+     [
+      "48 to 72 hours",
+      "Another organism family favoured"
+     ],
+     [
+      "Far outside range",
+      "Secondary case or new exposure"
+     ]
     ]
    }
   },
@@ -45,11 +85,19 @@
     "kind": "compare",
     "left": {
      "title": "Before symptoms",
-     "points": ["Measles infectious in catarrhal stage", "Incubatory carriers shed late incubation", "Case isolation starts too late"]
+     "points": [
+      "Measles infectious in catarrhal stage",
+      "Incubatory carriers shed late incubation",
+      "Case isolation starts too late"
+     ]
     },
     "right": {
      "title": "After symptoms",
-     "points": ["Convalescent shedding continues", "Chronic carriage may never end", "Treatment shortens the window"]
+     "points": [
+      "Convalescent shedding continues",
+      "Chronic carriage may never end",
+      "Treatment shortens the window"
+     ]
     }
    }
   },
@@ -59,11 +107,27 @@
    "say": "Two intervals time the chain. Onset to onset in linked cases is observable; infection to infection is not. Plotting generations by the observable interval shows whether control is bending transmission or merely watching it.",
    "vis": {
     "kind": "table",
-    "cols": ["Interval", "From, to", "Observable?"],
+    "cols": [
+     "Interval",
+     "From, to",
+     "Observable?"
+    ],
     "rows": [
-     ["Incubation period", "Infection to symptoms", "Partly, by exposure history"],
-     ["Serial interval", "Onset to onset in next case", "Yes, from case dates"],
-     ["Generation time", "Infection to infection", "No, inferred only"]
+     [
+      "Incubation period",
+      "Infection to symptoms",
+      "Partly, by exposure history"
+     ],
+     [
+      "Serial interval",
+      "Onset to onset in next case",
+      "Yes, from case dates"
+     ],
+     [
+      "Generation time",
+      "Infection to infection",
+      "No, inferred only"
+     ]
     ]
    }
   },
@@ -86,11 +150,19 @@
     "kind": "compare",
     "left": {
      "title": "Infectious before symptoms",
-     "points": ["Latent period shorter than incubation", "Presymptomatic spread occurs", "Symptom isolation fails"]
+     "points": [
+      "Latent period shorter than incubation",
+      "Presymptomatic spread occurs",
+      "Symptom isolation fails"
+     ]
     },
     "right": {
      "title": "Infectious after symptoms",
-     "points": ["Latent period longer than incubation", "Cases declare before spreading", "Symptom isolation can win"]
+     "points": [
+      "Latent period longer than incubation",
+      "Cases declare before spreading",
+      "Symptom isolation can win"
+     ]
     }
    }
   },
@@ -101,12 +173,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Immune share rises"},
-     {"id": "b", "label": "Transmission chains break"},
-     {"id": "c", "label": "Susceptibles rarely meet agent"},
-     {"id": "d", "label": "Unimmunised protected indirectly"}
+     {
+      "id": "a",
+      "label": "Immune share rises"
+     },
+     {
+      "id": "b",
+      "label": "Transmission chains break"
+     },
+     {
+      "id": "c",
+      "label": "Susceptibles rarely meet agent"
+     },
+     {
+      "id": "d",
+      "label": "Unimmunised protected indirectly"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -115,11 +212,23 @@
    "say": "Persistence has a tipping point. Above the threshold immune share, disease cannot sustain itself; measles sets that bar far higher than slower diseases. Serological surveys measure the real share, replacing dose-count guessing.",
    "vis": {
     "kind": "table",
-    "cols": ["Threshold rises with", "Example direction"],
+    "cols": [
+     "Threshold rises with",
+     "Example direction"
+    ],
     "rows": [
-     ["Higher transmissibility", "Measles needs very high coverage"],
-     ["Lower vaccine efficacy", "More doses for same protection"],
-     ["Denser contact patterns", "Cities need higher shares"]
+     [
+      "Higher transmissibility",
+      "Measles needs very high coverage"
+     ],
+     [
+      "Lower vaccine efficacy",
+      "More doses for same protection"
+     ],
+     [
+      "Denser contact patterns",
+      "Cities need higher shares"
+     ]
     ]
    }
   },
@@ -142,11 +251,19 @@
     "kind": "compare",
     "left": {
      "title": "Active immunity",
-     "points": ["After infection or vaccination", "Slow onset, long duration", "Memory cells persist"]
+     "points": [
+      "After infection or vaccination",
+      "Slow onset, long duration",
+      "Memory cells persist"
+     ]
     },
     "right": {
      "title": "Passive immunity",
-     "points": ["Ready antibody transferred", "Immediate, short duration", "No memory formed"]
+     "points": [
+      "Ready antibody transferred",
+      "Immediate, short duration",
+      "No memory formed"
+     ]
     }
    }
   },
@@ -156,11 +273,68 @@
    "say": "Some agents outwait immunity. Balanced parasitism, vectors, animal reservoirs and soil all maintain transmission beyond human immune shares. Elimination then needs vector and reservoir control standing beside vaccine coverage, never behind it.",
    "vis": {
     "kind": "table",
-    "cols": ["Persistence route", "Control implication"],
+    "cols": [
+     "Persistence route",
+     "Control implication"
+    ],
     "rows": [
-     ["Vector maintained", "Vector control beside vaccination"],
-     ["Animal reservoir", "Animal measures required"],
-     ["Soil reservoir (tetanus)", "Herd immunity irrelevant, wound care rules"]
+     [
+      "Vector maintained",
+      "Vector control beside vaccination"
+     ],
+     [
+      "Animal reservoir",
+      "Animal measures required"
+     ],
+     [
+      "Soil reservoir (tetanus)",
+      "Herd immunity irrelevant, wound care rules"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Incubation runs from agent entry to first symptoms, while the communicable period covers when transmission can occur. The serial interval runs from onset in the primary case to onset in its secondary case. The latent period ends when infectiousness begins, so latent shorter than incubation means presymptomatic spread. Herd immunity never protects against tetanus from soil.",
+   "say": "High-yield for the exam: Incubation runs from agent entry to first symptoms, while the communicable period covers when transmission can occur. The serial interval runs from onset in the primary case to onset in its secondary case. The latent period ends when infectiousness begins, so latent shorter than incubation means presymptomatic spread. Herd immunity never protects against tetanus from soil.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Incubation period definition",
+      "Agent entry to first sign or symptom"
+     ],
+     [
+      "Communicable period definition",
+      "Interval when agent passes to susceptible person"
+     ],
+     [
+      "Serial interval definition",
+      "Onset primary case to onset secondary case"
+     ],
+     [
+      "Generation time definition",
+      "Infection of infector to infection of infectee, unobservable"
+     ],
+     [
+      "Latent period definition",
+      "Infection to start of infectiousness"
+     ],
+     [
+      "Presymptomatic spread condition",
+      "Latent period shorter than incubation period"
+     ],
+     [
+      "Herd immunity exception",
+      "Never protects tetanus, soil reservoir not people"
+     ],
+     [
+      "Measles threshold trap",
+      "Highly transmissible measles needs highest immune proportion"
+     ]
     ]
    }
   }

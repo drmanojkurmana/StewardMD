@@ -1,0 +1,312 @@
+{
+ "v": 1,
+ "module": "sid-malaria",
+ "title": "Malaria",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Falciparum kills; vivax relapses** from liver dormants; ovale relapses, malariae persists decades, knowlesi mimics severe fast. **Anopheles night bite** spreads all; **no person-to-person** except transfusion with congenital. **Fever with chills with sweats** in paroxysms suggests tertian cycles. **Splenomegaly with anaemia with low platelets** marks chronic carriage. **Travellers without immunity** die fastest; **partial immunity** softens endemic disease.",
+   "say": "Falciparum was reported to kill, while vivax relapsed from liver dormants, ovale relapsed, malariae persisted decades and knowlesi mimicked severe fast. Anopheles night bite was reported to spread all, while no person-to-person spread existed except transfusion with congenital. Fever with chills and sweats in paroxysms was reported to suggest tertian cycles. Splenomegaly with anaemia and low platelets were reported to mark chronic carriage. Travellers without immunity were reported to die fastest, while partial immunity softened endemic disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Species",
+     "Threat",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Falciparum",
+      "Kills fast",
+      "Treat as default"
+     ],
+     [
+      "Vivax, ovale",
+      "Relapse",
+      "Radical cure"
+     ],
+     [
+      "Knowlesi",
+      "Severe fast",
+      "Mimics falciparum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Paroxysms every 48 hours** (tertian) or 72 hours (quartan) follow cold, hot and sweating stages. **Daily fever** is commonest in practice; periodicity misleads. **Headache with vomiting with myalgia** mimics viral illness early. **Jaundice with dark urine** warns haemolysis with liver injury. **Splenic rupture** threatens chronic carriers with trauma. **Algid malaria** presents cold and clammy with shock.",
+   "say": "Paroxysms every forty eight hours tertian or seventy two hours quartan were reported to follow cold, hot and sweating stages. Daily fever was reported as commonest in practice, while periodicity misled. Headache with vomiting and myalgia was reported to mimic viral illness early. Jaundice with dark urine was reported to warn haemolysis with liver injury. Splenic rupture was reported to threaten chronic carriers with trauma. Algid malaria was reported to present cold and clammy with shock.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Means",
+     "Next"
+    ],
+    "rows": [
+     [
+      "48-hour cycles",
+      "Tertian",
+      "Think vivax, ovale"
+     ],
+     [
+      "72-hour cycles",
+      "Quartan",
+      "Think malariae"
+     ],
+     [
+      "Daily fever",
+      "Commonest",
+      "Test anyway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cerebral malaria (GCS below 11)** with **more than 2 convulsions in 24 hours** defines severe brain disease. **Acidosis with lactate 5 or more**, glucose below 40, Hb below 5 in kids and 7 in adults with high parasites mark severity. **Creatinine above 3, bilirubin above 3 with 100,000 parasites, shock, bleeding and 10% parasitaemia** complete the list. **Pulmonary oedema with SpO2 below 92** kills adults fast. **Same criteria minus density** judge vivax with knowlesi.",
+   "say": "Cerebral malaria with G C S below eleven and more than two convulsions in twenty four hours was reported to define severe brain disease. Acidosis with lactate five or more, glucose below forty, H b below five in kids and seven in adults with high parasites were reported to mark severity. Creatinine above three, bilirubin above three with one hundred thousand parasites, shock, bleeding and ten percent parasitaemia were reported to complete the list. Pulmonary oedema with S p O two below ninety two was reported to kill adults fast. Same criteria minus density were reported to judge vivax with knowlesi.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Criterion",
+     "Cutoff",
+     "Acts"
+    ],
+    "rows": [
+     [
+      "Coma",
+      "GCS below 11",
+      "Airway, artesunate"
+     ],
+     [
+      "Acidosis",
+      "Lactate 5 plus",
+      "ICU"
+     ],
+     [
+      "Anaemia",
+      "Hb below 5, 7",
+      "Transfuse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Microscopy stays gold**; **RDT confirms where labs lack**, but HRP2 lingers weeks after cure. **Species unknown means falciparum**; treat the worst first. **Daily parasite counts** track response; **microscopy confirms failure**, not lingering RDT. **Lumbar puncture in coma** excludes bacterial meningitis once safe. **Glucose with Hb with renal function at once** stages severity. **G6PD before primaquine** prevents haemolysis deaths.",
+   "say": "Microscopy was reported to stay gold, while R D T confirmed where labs lacked, though H R P two lingered weeks after cure. Species unknown was reported to mean falciparum, so the worst was treated first. Daily parasite counts were reported to track response, while microscopy confirmed failure, not lingering R D T. Lumbar puncture in coma was reported to exclude bacterial meningitis once safe. Glucose with H b and renal function at once were reported to stage severity. G six P D before primaquine was reported to prevent haemolysis deaths.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever plus travel"
+     },
+     {
+      "id": "b",
+      "label": "Smear plus RDT"
+     },
+     {
+      "id": "c",
+      "label": "Species or falciparum"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**IV artesunate 2.4 mg/kg at 0, 12 and 24 hours, then daily** (3 mg/kg under 20 kg) for at least 24 hours treats all severe malaria in every trimester. **Full 3-day ACT follows** once swallowing returns. **Artemether 3.2 then 1.6 mg/kg IM** substitutes if artesunate is absent; **quinine 20 then 10 mg salt/kg 8-hourly** only as last resort, never bolus. **Pre-referral single IM dose**; **rectal 10 mg/kg under 6 years** where no injection exists.",
+   "say": "I V artesunate two point four milligrams per kilo at nought, twelve and twenty four hours, then daily, with three milligrams per kilo under twenty kilos, was reported to treat all severe malaria for at least twenty four hours in every trimester. Full three-day A C T was reported to follow once swallowing returned. Artemether three point two then one point six milligrams per kilo I M was reported to substitute if artesunate was absent, while quinine twenty then ten milligrams salt per kilo eight-hourly stayed only last resort, never bolus. Pre-referral single I M dose was advised, with rectal ten milligrams per kilo under six years where no injection existed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dose",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Artesunate IV",
+      "2.4 at 0, 12, 24h",
+      "All trimesters"
+     ],
+     [
+      "Artemether IM",
+      "3.2 then 1.6",
+      "If no artesunate"
+     ],
+     [
+      "Quinine IV",
+      "20 then 10 q8h",
+      "Last resort"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Artemether-lumefantrine twice daily for 3 days** (6 doses with fat) cures uncomplicated falciparum; **weight bands decide tablets**. **Single primaquine 0.25 mg/kg on day 1** blocks transmission in low areas; skip in pregnancy and tiny infants. **Failure within 28 days switches ACT**; later recurrence retreats first-line (avoid mefloquine within 60 days). **Chloroquine 25 mg base/kg over 3 days** still cures sensitive vivax. **HIV with efavirenz or zidovudine** avoids amodiaquine combos.",
+   "say": "Artemether-lumefantrine twice daily for three days with six doses and fat was reported to cure uncomplicated falciparum, while weight bands decided tablets. Single primaquine zero point two five milligrams per kilo on day one was reported to block transmission in low areas, while pregnancy and tiny infants were skipped. Failure within twenty eight days was reported to switch A C T, while later recurrence retreated first-line with mefloquine avoided within sixty days. Chloroquine twenty five milligrams base per kilo over three days was reported to still cure sensitive vivax. H I V with efavirenz or zidovudine was reported to avoid amodiaquine combos.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regimen",
+     "Span",
+     "Note"
+    ],
+    "rows": [
+     [
+      "AL twice daily",
+      "3 days, 6 doses",
+      "With fat"
+     ],
+     [
+      "Primaquine 0.25",
+      "Single, day 1",
+      "Block spread"
+     ],
+     [
+      "Chloroquine",
+      "25 mg base, 3 days",
+      "Sensitive vivax"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cure dormants with 7 mg/kg total primaquine**: 0.5 mg/kg each day for 14 days; 1 mg/kg each day for 7 days suits G6PD 70% or more. **Below 30% activity is deficient**; 30 to 70% reads intermediate. **Deficient patients take 0.75 mg/kg weekly for 8 weeks** supervised. **Tafenoquine single dose** suits South America from age 2 with G6PD 70% or more, never in pregnancy. **Dark urine stops the drug** at once. **No G6PD test?** weigh relapse against haemolysis risk.",
+   "say": "Radical cure was reported to need seven milligrams per kilo primaquine total: zero point five daily for fourteen days, or one daily for seven days only if G six P D was seventy percent or more. Below thirty percent activity was defined as deficient, while thirty to seventy percent read intermediate. Deficient patients were reported to take zero point seven five weekly for eight weeks supervised. Tafenoquine single dose was reported to suit South America from age two with G six P D seventy percent or more, never in pregnancy. Dark urine was reported to stop the drug at once. Without G six P D test, relapse was weighed against haemolysis risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "G6PD",
+     "Regimen",
+     "Span"
+    ],
+    "rows": [
+     [
+      "70 percent plus",
+      "1 mg/kg daily",
+      "7 days"
+     ],
+     [
+      "Normal test",
+      "0.5 mg/kg daily",
+      "14 days"
+     ],
+     [
+      "Below 30 percent",
+      "0.75 weekly",
+      "8 weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Glucose 4-hourly**, treat below 40 (below 54 under age 5); quinine and pregnancy drop it repeatedly. **Fluids individually**: adults drown easily, kids run dry; **boluses are banned**. **Transfuse below Hb 5 in kids, below 7 in adults**; dialyse AKI early. **Seizures get benzodiazepines**, never preventive phenobarbital. **No steroids, heparin, adrenaline or exchange transfusion**. **Antibiotics with shock, sepsis or aspiration**, and in all severe kids in endemic zones.",
+   "say": "Glucose four-hourly was ordered, treating below forty and below fifty four under age five, while quinine and pregnancy were reported to drop it repeatedly. Fluids individually were advised, as adults drowned easily and kids ran dry, while boluses were banned. Transfusion below H b five in kids and below seven in adults was ordered, while A K I was dialysed early. Seizures were reported to get benzodiazepines, never preventive phenobarbital. Steroids, heparin, adrenaline and exchange transfusion were never advised. Antibiotics with shock, sepsis or aspiration were ordered, and in all severe kids in endemic zones.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Support",
+     "Rule",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Glucose",
+      "4-hourly, treat low",
+      "Quinine drops"
+     ],
+     [
+      "Fluids",
+      "Individual",
+      "No bolus"
+     ],
+     [
+      "Transfuse",
+      "Below 5, 7",
+      "By setting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** RDT positive weeks after cure is not failure; microscopy decides. **Quinine loading bolus** kills; infuse over 4 hours. **Steroids for cerebral malaria** harm. **Exchange transfusion** is not advised. **Discharging after fever settles** misses delayed haemolysis; check Hb weekly for 4 weeks post-artesunate. **Primaquine without G6PD** haemolyses silently. **Treating vivax blood only** guarantees relapse.",
+   "say": "For the exam, these traps were tabulated as requested. R D T positive weeks after cure was reported as not failure, while microscopy decided. Quinine loading bolus was reported to kill, while infusing over four hours was advised. Steroids for cerebral malaria were reported to harm. Exchange transfusion was reported as not advised. Discharging after fever settled was reported to miss delayed haemolysis, so H b weekly for four weeks post-artesunate was checked. Primaquine without G six P D was reported to haemolyse silently. Treating vivax blood only was reported to guarantee relapse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "RDT still positive",
+      "Old antigen",
+      "Smear decides"
+     ],
+     [
+      "Quinine bolus",
+      "Kills",
+      "4-hour infusion"
+     ],
+     [
+      "Stop at fever gone",
+      "Relapse, haemolysis",
+      "Follow 4 weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **artesunate 2.4 mg/kg at 0, 12, 24 hours** then daily treats all severe; **3-day ACT follows**. **AL twice daily 3 days** cures uncomplicated; **primaquine 0.25 single** blocks spread. **Radical cure 0.5 for 14 days** (1 for 7 if G6PD 70 plus); **0.75 weekly 8 weeks** if deficient. **GCS below 11, lactate 5 plus, Hb below 5 or 7** mark severe. **Transfuse only below cutoffs**; **no bolus fluids**.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. Artesunate two point four milligrams per kilo at nought, twelve and twenty four hours then daily was reported to treat all severe. A L twice daily for three days was reported to cure uncomplicated, while primaquine zero point two five single blocked spread. Radical cure zero point five for fourteen days, one for seven if G six P D seventy plus, and zero point seven five weekly for eight weeks if deficient, were reported. G C S below eleven, lactate five plus and H b below five or seven were reported to mark severe.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Artesunate 2.4",
+      "At 0, 12, 24h",
+      "Dose asked"
+     ],
+     [
+      "AL 3 days",
+      "Twice daily",
+      "Regimen"
+     ],
+     [
+      "Primaquine totals",
+      "7 or 0.75 weekly",
+      "G6PD rule"
+     ],
+     [
+      "GCS below 11",
+      "Lactate 5 plus",
+      "Severe marks"
+     ],
+     [
+      "No bolus",
+      "No steroids",
+      "Trap"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

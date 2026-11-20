@@ -1,0 +1,351 @@
+{
+ "v": 1,
+ "module": "sgs-oncology-principles",
+ "subject": "ss-general-surgery",
+ "title": "Surgical oncology principles: margins, sentinel node, desmoid and peritoneal disease",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22nd edition"
+ ],
+ "steps": [
+  {
+   "tx": "**R0 resection** means no tumour at the cut edge with margins of 1 mm or more, and 5 year survival exceeds 60 percent. **R1** means tumour at the edge, while **R2** leaves gross disease in 10 percent of cases. A margin of 2.5 cm in sarcoma improves local control from 70 to 90 percent.",
+   "say": "R zero resection means no tumour at the cut edge with margins of one millimeter or more. Five year survival exceeds sixty percent. R one means tumour at the edge, while R two leaves gross disease in ten percent of cases. A margin of two point five centimetres in sarcoma improves local control from seventy to ninety percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Margin",
+     "Meaning",
+     "Survival"
+    ],
+    "rows": [
+     [
+      "R0",
+      "Clear by 1 mm",
+      "Over 60 percent"
+     ],
+     [
+      "R1",
+      "Microscopic edge",
+      "Under 40 percent"
+     ],
+     [
+      "R2",
+      "Gross left",
+      "Under 15 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sentinel lymph node** mapping identifies the first draining node with **blue dye** plus **technetium** in 95 percent of cases. False negative rate stays under 5 percent when 3 nodes are mapped. **Ultrastaging** with immunohistochemistry finds micrometastasis below 2 mm in 15 percent of node negative cases.",
+   "say": "Sentinel lymph node mapping identifies the first draining node with blue dye plus technetium in ninety five percent of cases. False negative rate stays under five percent when three nodes are mapped. Ultrastaging with immunohistochemistry finds tiny deposits below two millimeters in fifteen percent of node negative cases here.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "k1",
+      "label": "Inject dye"
+     },
+     {
+      "id": "k2",
+      "label": "Find blue node"
+     },
+     {
+      "id": "k3",
+      "label": "Frozen section"
+     },
+     {
+      "id": "k4",
+      "label": "Stage"
+     }
+    ],
+    "edges": [
+     [
+      "k1",
+      "k2"
+     ],
+     [
+      "k2",
+      "k3"
+     ],
+     [
+      "k3",
+      "k4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Desmoid tumour** is a locally aggressive **fibromatosis** with no metastasis in 99 percent, yet local recurrence reaches 40 percent. Women aged 20 to 40 with **APC mutation** carry higher risk, and surgery alone fails in 30 percent. **Imatinib** 400 mg daily controls 50 percent of progressive cases within 6 months.",
+   "say": "Desmoid tumour is a locally aggressive fibromatosis with no spread to distant organs in ninety nine percent. Women aged twenty to forty with APC mutation carry higher risk, and surgery alone fails in thirty percent. Imatinib four hundred milligrams daily controls fifty percent of progressive cases within six months in reported series.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surgery",
+     "points": [
+      "Wide excision",
+      "40 percent relapse",
+      "Hormone therapy"
+     ]
+    },
+    "right": {
+     "title": "Medical",
+     "points": [
+      "Imatinib 400 mg",
+      "Progression free",
+      "Less disfigurement"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Peritoneal carcinomatosis** occurs in 15 percent of colorectal cancers and 50 percent of advanced ovarian cancers. **Peritoneal cancer index** above 20 predicts poor survival under 12 months. **Cytoreductive surgery** plus **HIPEC** extends survival to 36 months from 15 months in selected patients.",
+   "say": "Peritoneal carcinomatosis occurs in fifteen percent of colorectal cancers and fifty percent of advanced ovarian cancers. Peritoneal cancer index above twenty predicts poor survival under twelve months. Cytoreductive surgery plus HIPEC extends survival to thirty six months from fifteen months in carefully selected patients in specialised centres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Index",
+     "Disease burden",
+     "Survival"
+    ],
+    "rows": [
+     [
+      "PCI under 10",
+      "Limited",
+      "36 months"
+     ],
+     [
+      "PCI 10 to 20",
+      "Moderate",
+      "18 months"
+     ],
+     [
+      "PCI over 20",
+      "Diffuse",
+      "12 months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neoadjuvant therapy** shrinks tumours before surgery and raises R0 rates from 60 to 85 percent in rectal cancer. **Adjuvant chemotherapy** for 6 months cuts recurrence from 40 to 25 percent in stage 3 colon cancer. **FOLFOX** uses oxaliplatin 85 mg per square metre every 2 weeks for 12 cycles.",
+   "say": "Neoadjuvant therapy shrinks tumours before surgery and raises R zero rates from sixty to eighty five percent in rectal cancer. Adjuvant chemotherapy for six months cuts recurrence from forty to twenty five percent in stage three colon cancer. FOLFOX uses oxaliplatin every two weeks for twelve cycles in most regimens used today.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Aim",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Neoadjuvant",
+      "Shrink before surgery",
+      "Chemoradiation"
+     ],
+     [
+      "Adjuvant",
+      "Clear spread",
+      "FOLFOX 6 months"
+     ],
+     [
+      "Palliative",
+      "Control symptoms",
+      "Single agent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Catastrophic tumour lysis** releases potassium above 6.0 mmol per litre within 72 hours of chemotherapy. **Rasburicase** 3 mg lowers uric acid by 80 percent in high risk patients. **Allopurinol** 300 mg daily prevents lysis in 90 percent of low risk cases under 25 years.",
+   "say": "Catastrophic tumour lysis releases potassium above six millimoles per litre within seventy two hours of chemotherapy. Rasburicase lowers uric acid by eighty percent in high risk patients. Allopurinol three hundred milligrams daily prevents lysis in ninety percent of low risk cases under twenty five years in most centres today.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "l1",
+      "label": "Chemo"
+     },
+     {
+      "id": "l2",
+      "label": "Cell death"
+     },
+     {
+      "id": "l3",
+      "label": "Lysis"
+     },
+     {
+      "id": "l4",
+      "label": "Renal failure"
+     }
+    ],
+    "edges": [
+     [
+      "l1",
+      "l2"
+     ],
+     [
+      "l2",
+      "l3"
+     ],
+     [
+      "l3",
+      "l4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lynch syndrome** raises colorectal risk 10 times by age 50, and **BRCA1 mutation** raises ovarian risk to 40 percent by age 70. **FAP** with 100 polyps needs **prophylactic colectomy** by age 25, reducing risk from 100 to 5 percent. Screening colonoscopy every 2 years cuts mortality by 60 percent.",
+   "say": "Lynch syndrome raises colorectal risk ten times by age fifty, and BRCA one mutation raises ovarian risk to forty percent by age seventy. FAP with one hundred polyps needs preventive removal of colon by age twenty five, reducing risk from one hundred to five percent. Screening colonoscopy every two years cuts mortality by sixty percent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lynch",
+     "points": [
+      "MSH2 and MLH1",
+      "Colon plus endometrium",
+      "Colonoscopy 2 yearly"
+     ]
+    },
+    "right": {
+     "title": "FAP",
+     "points": [
+      "APC gene",
+      "100 polyps",
+      "Colectomy by 25"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Doxorubicin** 50 mg per square metre causes heart failure in 5 percent above cumulative 550 mg doses. **Cisplatin** 75 mg causes kidney damage in 30 percent, needing hydration. **5 fluorouracil** 500 mg bolus causes hand foot syndrome in 20 percent, so dose falls by 25 percent.",
+   "say": "Doxorubicin fifty milligrams per square metre causes heart failure in five percent above cumulative doses. Cisplatin seventy five milligrams causes kidney damage in thirty percent, needing hydration. Five fluorouracil bolus causes hand foot syndrome in twenty percent, so dose falls by twenty five percent to protect the patient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dose",
+     "Toxicity"
+    ],
+    "rows": [
+     [
+      "Doxorubicin",
+      "50 mg",
+      "Heart failure"
+     ],
+     [
+      "Cisplatin",
+      "75 mg",
+      "Kidney injury"
+     ],
+     [
+      "Capecitabine",
+      "850 mg",
+      "Hand foot"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Enhanced recovery** shortens hospital stay from 10 to 5 days after colorectal surgery without raising complications. **Drain amylase** above 1000 on day 3 predicts leak with 80 percent accuracy. **Early mobilisation** within 24 hours cuts chest infection from 15 to 5 percent in elderly patients.",
+   "say": "Enhanced recovery shortens hospital stay from ten to five days after colorectal surgery without raising complications. Drain amylase above one thousand on day three predicts leak with eighty percent accuracy. Early mobilisation within twenty four hours cuts chest infection from fifteen to five percent in elderly patients after major surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "ERAS protocol"
+     },
+     {
+      "id": "e2",
+      "label": "Early eating"
+     },
+     {
+      "id": "e3",
+      "label": "Mobilise"
+     },
+     {
+      "id": "e4",
+      "label": "Discharge"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ],
+     [
+      "e3",
+      "e4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Local recurrence** after R1 resection reaches 50 percent, while **distant spread** to liver occurs in 40 percent of stage 3 patients. **Peritoneal relapse** after HIPEC stays under 10 percent when PCI is below 10. Surveillance **CT chest** every 6 months finds relapse in 20 percent before symptoms appear in these patients.",
+   "say": "Local recurrence after R one resection reaches fifty percent, while distant spread to liver occurs in forty percent of stage three patients. Peritoneal relapse after HIPEC stays under ten percent when PCI is below ten. Surveillance CT chest every six months finds relapse in twenty percent before symptoms appear in these patients over time.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Rate",
+     "Follow up"
+    ],
+    "rows": [
+     [
+      "Local",
+      "50 percent after R1",
+      "MRI pelvis"
+     ],
+     [
+      "Liver",
+      "40 percent stage 3",
+      "CT 6 monthly"
+     ],
+     [
+      "Peritoneal",
+      "10 percent after HIPEC",
+      "CEA 3 monthly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**R0** with 1 mm margin is the gold standard, and **sentinel node** false negatives stay under 5 percent. **Desmoid** needs medical control first, while **PCI above 20** means palliation only. **Doxorubicin** heart failure appears above 550 mg, so cumulative dose must be tracked carefully in every cycle.",
+   "say": "High-yield for the exam. R zero with one millimeter margin is the gold standard, and sentinel node false negatives stay under five percent. Desmoid needs medical control first, while PCI above twenty means palliation only. Doxorubicin heart failure appears above five hundred fifty milligrams, so cumulative dose must be tracked in every cycle.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Cutoff",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "R0",
+      "1 mm clear",
+      "Curative intent"
+     ],
+     [
+      "Sentinel",
+      "Under 5 percent FN",
+      "Accurate staging"
+     ],
+     [
+      "HIPEC",
+      "PCI under 10",
+      "Best benefit"
+     ]
+    ]
+   }
+  }
+ ]
+}
