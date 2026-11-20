@@ -22,6 +22,10 @@ this; every design choice below traces back to that one incident.
 - `scripts/ota-stage.mjs` — runs in CI on every push to `main`. Hashes `www/`, uploads only NEW
   content-addressed files (`ota/known-hashes.json` index avoids re-uploading unchanged files),
   writes a manifest + the `candidate` pointer. **Never touches the live channel.**
+- **Upload concurrency fix (2026-11-20):** `r2PutFile` used `execFileSync`, so `pool(…, 24)` actually ran ONE
+  `wrangler r2 object put` at a time (measured with a fake wrangler: 48 files 25 s serial, max concurrency 1). A big
+  merge (about 2,000 new files after the calculators and lessons bundles) sat in "Stage to R2" for 15+ minutes and every
+  newer push to main cancelled it. Now `r2PutFile` is async (`promisify(execFile)`): same 48 files 1.7 s, 24 at once.
 - `.github/workflows/ota-stage.yml` — the trigger. Builds `www/`, runs the stage script. Reuses
   the existing `CLOUDFLARE_API_TOKEN`/`CLOUDFLARE_ACCOUNT_ID` repo secrets (already used by
   `deploy-worker.yml`) — no new secrets needed.

@@ -18,7 +18,9 @@ import { createHash } from "node:crypto";
 import { readdirSync, statSync, readFileSync, mkdtempSync, writeFileSync, rmSync, existsSync } from "node:fs";
 import { join, relative, extname, dirname } from "node:path";
 import { tmpdir } from "node:os";
-import { execFileSync } from "node:child_process";
+import { execFileSync, execFile } from "node:child_process";
+import { promisify } from "node:util";
+const execFileP = promisify(execFile);
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -69,18 +71,21 @@ function r2PutJSON(key, obj) {
   if (DRY) { console.log(`  [dry-run] would write ${key} (${JSON.stringify(obj).length}B)`); return; }
   wrangler(["r2", "object", "put", `${BUCKET}/${key}`, "--file", tmp, "--content-type", "application/json", "--remote"], { quiet: true });
 }
-function r2PutFile(key, path, contentType) {
+/* Asynchronous on purpose (2026-11-20): this used execFileSync, which blocks the event loop, so pool(…, 24) below ran
+   ONE upload at a time and a large change (about 2,000 new files after the calculators and lessons merges) took most of
+   the 120-minute job, cancelled again by every newer push to main. Awaiting a child process lets 24 run at once. */
+async function r2PutFile(key, path, contentType) {
   if (DRY) { console.log(`  [dry-run] would upload ${key}`); return; }
   let lastErr = null;
   for (let attempt = 1; attempt <= 3; attempt++) {
     try {
-      wrangler(["r2", "object", "put", `${BUCKET}/${key}`, "--file", path, "--content-type", contentType, "--remote"], { quiet: true });
+      await execFileP("wrangler", ["r2", "object", "put", `${BUCKET}/${key}`, "--file", path, "--content-type", contentType, "--remote"], { encoding: "utf8", maxBuffer: 16 * 1024 * 1024 });
       return;
     } catch (e) {
       lastErr = e;
       if (attempt < 3) {
         console.warn(`  ⚠️ Retry ${attempt}/3 for ${key}: ${e.message}`);
-        execFileSync("sleep", ["2"]);
+        await new Promise((r) => setTimeout(r, 2000));
       }
     }
   }
@@ -128,7 +133,7 @@ async function main() {
   // upload what the first one didn't finish, converging instead of repeating.
   try {
     await pool(toUpload, 24, async (e) => {
-      r2PutFile(`ota/files/${e.hash}`, e.abs, mimeFor(e.rel));
+      await r2PutFile(`ota/files/${e.hash}`, e.abs, mimeFor(e.rel));
       known.add(e.hash);
       uploaded++;
       if (uploaded % 50 === 0) console.log(`  … ${uploaded}/${toUpload.length} uploaded`);
@@ -152,7 +157,7 @@ async function main() {
   if (existsSync(zipPath)) {
     const zipBuf = readFileSync(zipPath);
     zipHash = sha256(zipBuf); zipSize = zipBuf.length;
-    if (!known.has(zipHash)) { r2PutFile(`ota/files/${zipHash}`, zipPath, "application/zip"); known.add(zipHash); }
+    if (!known.has(zipHash)) { await r2PutFile(`ota/files/${zipHash}`, zipPath, "application/zip"); known.add(zipHash); }
     console.log(`  zip: ${(zipSize / 1e6).toFixed(1)} MB, sha256 ${zipHash.slice(0, 12)}…`);
   }
 
