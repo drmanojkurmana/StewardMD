@@ -89,8 +89,8 @@ try {
   await ev(`PREP.open({ subject: "anatomy" }); return 1;`);
   ok(await until(`return !!(PREP._st.ix && PREP._st.ix.anatomy && PREP._st.ix.anatomy.topics.length);`, 8000), "the anatomy index is loaded");
   await startSet("study");
-  ok(await until(`return /Buddy question 0/.test(document.querySelector("#smdPrep .pn-q").textContent) && !!document.querySelector("#pnBuddy .mkc-a");`, 6000), "practice set: the buddy stands in the corner");
-  ok(await until(`var r=document.querySelector("#pnBuddy .mkc-a").getBoundingClientRect(); return r.right <= innerWidth && r.bottom <= innerHeight && r.width > 30;`, 4000), "he walks in and stands fully on screen");
+  ok(await until(`return /Buddy question 0/.test(document.querySelector("#smdPrep .pn-q").textContent) && !!document.querySelector("#pnBuddy .pnm-hit");`, 6000), "practice set: Nucleo stands in the corner");
+  ok(await until(`var r=document.querySelector("#pnBuddy .pnm-hit").getBoundingClientRect(); return r.right <= innerWidth && r.bottom <= innerHeight && r.width > 30;`, 4000), "he walks in and stands fully on screen");
   ok(await ev(`return document.querySelector("#smdPrep").classList.contains("pnb-on") && parseFloat(getComputedStyle(document.querySelector("#smdPrep .pn-run")).paddingBottom) >= 60;`) === true, "the question body gets room under him");
 
   // 3 right in a row: the streak line and the hop.
@@ -103,7 +103,7 @@ try {
   m = await mood(); ok(m && m.mood < 0.2 && (m.gesture === "shrug" || m.mouth === "frown" || m.face === "concern"), "a wrong answer: he looks sad (" + JSON.stringify(m && { mood: m.mood, g: m.gesture, mouth: m.mouth }) + ")");
   ok((await bub()).length > 0, "first miss: a word of encouragement (" + await bub() + ")");
   await sleep(400);
-  ok(await ev(`var bar=document.querySelector("#smdPrep .pn-fb + .pn-navrow"), a=document.querySelector("#pnBuddy .mkc-a"); if (!bar||!a) return "missing"; var br=bar.getBoundingClientRect(), r=a.getBoundingClientRect(); return br.bottom < innerHeight - 4 || r.bottom <= br.top + 2;`) === true, "with the sticky Next bar on screen he stands on it, not over the button");
+  ok(await ev(`var bar=document.querySelector("#smdPrep .pn-fb + .pn-navrow"), a=document.querySelector("#pnBuddy .pnm-hit"); if (!bar||!a) return "missing"; var br=bar.getBoundingClientRect(), r=a.getBoundingClientRect(); return br.bottom < innerHeight - 4 || r.bottom <= br.top + 2;`) === true, "with the sticky Next bar on screen he stands on it, not over the button");
   ok(await ev(`var b=document.querySelector(".pnb-bub"), bar=document.querySelector("#smdPrep .pn-fb + .pn-navrow"); if (!b||!bar) return true; return b.getBoundingClientRect().bottom <= bar.getBoundingClientRect().top;`) === true, "his bubble stays above the Next bar");
   await shot("wrong");
   // Two more wrong: the slump offers revising the topic.
@@ -114,7 +114,7 @@ try {
   await click(".pnb-bub [data-b=rev]"); await sleep(800);
   ok(await until(`return !document.querySelector("#pnBuddy") && !/Buddy question/.test((document.querySelector("#smdPrep .pn-q")||{textContent:""}).textContent);`, 4000), "Revise topic opens the module screen; the buddy leaves with the set");
   await ev(`PREP.back(); return 1;`);
-  ok(await until(`return /Buddy question 5/.test((document.querySelector("#smdPrep .pn-q")||{}).textContent||"") && !!document.querySelector("#pnBuddy .mkc-a");`, 4000), "back returns to the set, and he is back");
+  ok(await until(`return /Buddy question 5/.test((document.querySelector("#smdPrep .pn-q")||{}).textContent||"") && !!document.querySelector("#pnBuddy .pnm-hit");`, 4000), "back returns to the set, and he is back");
   // Comeback after the misses.
   await next(); await pickAns(0);
   ok(/track|comeback|form/i.test(await bub()), "right after the misses: the comeback (" + await bub() + ")");
@@ -148,6 +148,33 @@ try {
   await pickAns(1); await next(); await pickAns(1); await next(); await pickAns(1);
   ok(await until(`return /after this set/.test((document.querySelector(".pnb-bub")||{}).textContent||"");`, 2000) && await ev(`return !document.querySelector(".pnb-bub [data-b=rev]");`) === true, "no module to open: no Revise button, revise after the set (" + await bub() + ")");
   await ev(`PREP.back(); return 1;`); await sleep(200);
+
+  // The MaiK companion is still there for those who prefer him: smd_prep_mascot = "maik".
+  await ev(`localStorage.setItem("smd_prep_mascot","maik"); return 1;`);
+  await startSet("study");
+  ok(await until(`return !!document.querySelector("#pnBuddy .mkc-a") && !document.querySelector("#pnBuddy .pnm");`, 4000), "smd_prep_mascot=maik: the MaiK companion instead of Nucleo");
+  await pickAns(0); await next(); await pickAns(0); await next(); await pickAns(0);
+  ok(/Three|straight/.test(await bub()), "the MaiK companion gets the same lines");
+  await ev(`localStorage.removeItem("smd_prep_mascot"); PREP.back(); return 1;`); await sleep(200);
+
+  // Every face and pose, side by side (for the owner's review; SHOTS only).
+  if (process.env.SHOTS) {
+    await ev(`var w=document.createElement("div"); w.id="pnmShow"; w.style.cssText="position:fixed;inset:0;z-index:99999;background:#f3f2ee;display:flex;flex-wrap:wrap;gap:6px;padding:20px;align-content:flex-start";
+      [["normal","rest","Idle"],["proud","thumbs","Right"],["happy","cheer","3 in a row"],["sad","droop","Wrong"],["cry","droop","3 wrong"],["think","hug","Low score"],["wow","rest","Wow"],["happy","wave","Hello"]].forEach(function(f){
+        var c=document.createElement("div"); c.style.cssText="width:170px;height:200px;position:relative;text-align:center;font:600 12px Inter,sans-serif;color:#13203d";
+        var h=document.createElement("div"); h.style.cssText="position:absolute;left:53px;top:30px;width:64px;height:76px;transform:scale(1.9);transform-origin:50% 40%"; c.appendChild(h);
+        var m=PREP_MASCOT.mount(h,{reduceMotion:true,hideKey:"x_show"}); m.el.setAttribute("data-face",f[0]); m.el.setAttribute("data-pose",f[1]);
+        var l=document.createElement("div"); l.textContent=f[2]; l.style.cssText="position:absolute;left:0;right:0;top:172px"; c.appendChild(l); w.appendChild(c); });
+      document.body.appendChild(w); return 1;`);
+    await sleep(500);
+    const r = await call("Page.captureScreenshot", { format: "png" });
+    if (r.result) fs.writeFileSync(join(process.env.SHOTS, "nucleo-faces.png"), Buffer.from(r.result.data, "base64"));
+    await ev(`document.body.classList.add("dark"); document.getElementById("pnmShow").style.background="#1a1a2e"; [].forEach.call(document.querySelectorAll("#pnmShow div div:last-child"),function(l){l.style.color="#e8eef2";}); return 1;`);
+    await sleep(300);
+    const r2 = await call("Page.captureScreenshot", { format: "png" });
+    if (r2.result) fs.writeFileSync(join(process.env.SHOTS, "nucleo-faces-dark.png"), Buffer.from(r2.result.data, "base64"));
+    await ev(`document.getElementById("pnmShow").remove(); document.body.classList.remove("dark"); return 1;`);
+  }
 
   // Flag off: no buddy.
   await ev(`localStorage.setItem("smd_prep_buddy","0"); return 1;`);

@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-20 · Nucleo: PrepNucleus gets its own mascot (owner: "Create new mascot to suit prepnucleus")
+
+**Decision.** A new character, Nucleo (`prep-mascot.js`), replaces the MaiK companion as the PrepNucleus buddy by
+default: a cell nucleus stained hematoxylin blue-violet, in a graduation cap with an amber tassel. Pure SVG + CSS states
+and keyframes, same mount API as the companion. `smd_prep_mascot = "maik"` restores the MaiK companion.
+**Why.** PrepNucleus has its own identity (amber and navy, exam prep); a nucleus is the module's name made literal and a
+histology image every medical student knows; the cap says exam. CSS states are cheaper than the companion's spring/IK rig
+and need no animation loop.
+**Trade-off.** Two characters to keep; Nucleo does not walk around (he stays in his corner and reacts in place).
+**Status.** Default on with the buddy (`smd_prep_buddy`). Needs build-www + cap sync + native rebuild/OTA.
+
 ## 2026-11-20 · PrepNucleus MaiK buddy reacts to MCQ answers (owner: "celebrate ... feel sad if wrong ... asking to prepare topic again")
 
 **Decision.** Reuse the existing MaiK companion (`maik-companion.js`) rather than a new mascot: new `cue("quiz")` body

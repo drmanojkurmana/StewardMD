@@ -1,4 +1,5 @@
-/* PrepNucleus MaiK buddy: the MaiK companion (maik-companion.js) stands in the corner of a practice set and reacts to
+/* PrepNucleus buddy: Nucleo (prep-mascot.js, default since 2026-11-20 "create new mascot to suit prepnucleus"), or with
+   smd_prep_mascot = "maik" the MaiK companion (maik-companion.js), stands in the corner of a practice set and reacts to
    each answer. window.PREP_BUDDY. ES5.
    Owner 2026-11-20: "mascot to celebrate user if gets correct mcq or three in a row correct, motivate user, feel sad if
    wrong mcqs, more wrongs asking to prepare topic again". Tapping him opens a small quick-ask bubble (owner's pick)
@@ -86,11 +87,16 @@
   var D = document, S = { box: null, mk: null, run: null, host: null, bub: null, bubT: 0, lateSaid: false };
   function on() { try { return G.localStorage.getItem("smd_prep_buddy") !== "0"; } catch (e) { return true; } }
   function reduced() { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
+  // Which character: "nucleo" (prep-mascot.js, PrepNucleus's own, default) or "maik" (the MaiK companion). smd_prep_mascot.
+  function charOf() { var v = ""; try { v = G.localStorage.getItem("smd_prep_mascot") || ""; } catch (e) {} return v === "maik" || !G.PREP_MASCOT ? "maik" : "nucleo"; }
   function styleOf() { var v = ""; try { v = G.localStorage.getItem("smd_maik_doc_style") || ""; } catch (e) {} return v === "oncall" || v === "bot" ? v : "attending"; }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   // --pnb-lift: the height of the sticky Next bar when it is on screen (place()), so he stands on it, never over it.
   var CSS = "#pnBuddy{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(var(--pnb-lift,0px) + 8px + var(--pnb-safe,env(safe-area-inset-bottom,0px)));width:150px;height:36px;z-index:886;pointer-events:none;transition:bottom .22s cubic-bezier(.23,1,.32,1)}" +
     "#pnBuddy .mkc{top:0}" +
+    "#pnBuddy.pnb-nuc{width:64px;height:76px}" +
+    "body.pnb-nucleo .pnb-bub{bottom:calc(var(--pnb-lift,0px) + 90px + var(--pnb-safe,env(safe-area-inset-bottom,0px)))}" +
+    "body.pnb-nucleo .pn-root.pnb-on .pn-run{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}" +
     "#pnBuddy .mkc-tab{left:auto;right:0;bottom:2px;border-left:1px solid var(--pn-edge,#d5dde6);border-right:0;border-radius:10px 0 0 10px;pointer-events:auto}" +
     "body:has(#pnAsk) #pnBuddy,body:has(.pn-zoom) #pnBuddy{display:none}" +
     ".pnb-bub{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(var(--pnb-lift,0px) + 76px + var(--pnb-safe,env(safe-area-inset-bottom,0px)));z-index:887;max-width:min(300px,calc(100vw - 24px));box-sizing:border-box;padding:10px 12px;border-radius:14px;" +
@@ -118,9 +124,10 @@
 
   function mount() {
     if (S.box) return true;
-    var MC = G.MaiKCompanion; if (!MC || !MC.mount) return false;
+    var who = charOf(), MC = who === "nucleo" ? G.PREP_MASCOT : G.MaiKCompanion; if (!MC || !MC.mount) return false;
     css();
-    var box = D.createElement("div"); box.id = "pnBuddy"; D.body.appendChild(box); S.box = box;
+    var box = D.createElement("div"); box.id = "pnBuddy"; if (who === "nucleo") box.className = "pnb-nuc"; D.body.appendChild(box); S.box = box;
+    D.body.classList.toggle("pnb-nucleo", who === "nucleo");
     try {
       S.mk = MC.mount(box, { style: styleOf(), reduceMotion: reduced(), greet: false, hideKey: "smd_prep_buddy_off", sleepMs: 60000, onTap: quickAsk });
     } catch (e) { S.mk = null; }
@@ -132,6 +139,7 @@
     if (S.mk) { try { S.mk.destroy(); } catch (e) {} S.mk = null; }
     if (S.box && S.box.parentNode) S.box.parentNode.removeChild(S.box);
     S.box = null;
+    D.body.classList.remove("pnb-nucleo");
     try { D.documentElement.style.removeProperty("--pnb-lift"); D.documentElement.style.removeProperty("--pnb-safe"); } catch (e) {}
     var rt = S.host && S.host.root && S.host.root(); if (rt) rt.classList.remove("pnb-on");
   }

@@ -92,6 +92,15 @@ more wrongs asking to prepare topic again"; tap = "mini quick-ask bubble".
 - **Tests:** `test/prep-buddy.test.mjs` (decide/doneLine), `test/run-prep-buddy-ui.mjs` (headless, SHOTS=<dir>).
   Not seen on a phone yet.
 
+- **Nucleo, PrepNucleus's own mascot (2026-11-20, `prep-mascot.js`, `?v=prep190`, owner: "create new mascot to suit
+  prepnucleus"):** default character of the buddy. A cell nucleus in hematoxylin blue-violet (membrane with pores,
+  nucleolus, chromatin curl) in a graduation cap with a PrepNucleus-amber tassel. One inline SVG; faces (`data-face`:
+  normal, proud, happy, sad, cry, think, wow) and arm poses (`data-pose`: rest, thumbs, cheer, wave, droop, hug) are CSS
+  states, motion is CSS keyframes (bob, jump, nod, sink, squish, cap toss on 80%+ and perfect). No rAF loop. Reduced
+  motion: faces only. `window.PREP_MASCOT.mount(host, opts)` has the companion's shape (`cue("quiz")`, `state()`,
+  `destroy()`), so `prep-buddy.js` drives either. `smd_prep_mascot = "maik"` brings back the MaiK companion.
+  Face sheet: `SHOTS=<dir> node test/run-prep-buddy-ui.mjs` writes `nucleo-faces.png` / `-dark.png`.
+
 ## Arena server (2026-10-06, merged into `feat/prepnucleus`, not deployed)
 Plan: [[plans/PrepNucleus-Arena]] (deviations listed there). Flags `smd_prep` + `smd_prep_arena` stay OFF.
 - **Pages:** `functions/api/prep/arena/[[path]].js` (consent, events, start, submit, event board, rating board,
