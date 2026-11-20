@@ -405,3 +405,6 @@ else ignore." So the step 8 (V1 1:07-1:12) and step 13 (V2 3:31-3:50, no retriev
 and a focused short video (`med.surgx.app-vid-NN`, found by YouTube search, embeddable per oEmbed, allow-listed in the
 shim) covers steps 1, 2, 3, 5, 6, 11, 12, 15, 16, 17, 18, 19. Step 14 (haemostasis) found nothing and has none.
 Picked by title and channel only; none watched.
+
+## Batch 2 prompts (2026-11-20)
+Lap cholecystectomy, Lichtenstein hernia repair, LSCS and total thyroidectomy (70 steps): [[SURGX-batch2-image-prompt]] and [[SURGX-batch2-video-prompt]].
