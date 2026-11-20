@@ -98,11 +98,22 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     const ix = kvGet("prep:fixix") || {};
     for (const mod of Object.keys(ix)) {
       const rec = kvGet("prep:fixmod:" + mod);
+      /* Questions published straight to the module (rec.a, functions/api/ai/_prep-qgen.js op publish) carry their own image. */
+      for (const n of (rec && Array.isArray(rec.a) ? rec.a : [])) {
+        if (!n || !n.id || !n.sub || !Array.isArray(n.img)) continue;
+        for (const key of n.img) {
+          const e = entryFor(n, key, n.sub, mod, credById.get("q-" + n.id.slice(0, 12)));
+          if (e) { out.set(key, e); fixes++; }
+        }
+      }
       for (const [qid, fx] of Object.entries((rec && rec.q) || {})) {
         if (!fx || !Array.isArray(fx.img) || !fx.img.length) continue;
         const src = byId.get(qid);
         if (!src) continue;
+        /* A rewritten question (fix q/o/a/kp) is captioned from its new text, as the app shows it (prep.js applyFix). */
         const it = Object.assign({}, src.it, { imgPlace: fx.imgPlace });
+        for (const k of ["q", "o", "a", "exp", "kp"]) if (fx[k] != null) it[k] = fx[k];
+        if (fx.o || fx.exp != null) { delete it.x; delete it.meta; }
         for (const key of fx.img) {
           const e = entryFor(it, key, src.subject, src.module, credById.get("q-" + qid.slice(0, 12)));
           if (e) { out.set(key, e); fixes++; }
