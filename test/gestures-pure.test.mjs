@@ -53,7 +53,8 @@ test("toast exit duration is seeded with swipe speed", () => {
 test("swipe-back commit: distance OR flick, back-flick cancels", () => {
   assert.equal(sb.swipeCommit(200, 900, 0, 400, true), true);
   assert.equal(sb.swipeCommit(50, 900, 0, 400, true), false);
-  assert.equal(sb.swipeCommit(30, 300, 0.5, 400, true), true);
+  assert.equal(sb.swipeCommit(30, 300, 0.5, 400, true), false, "a short brush at the edge is not a swipe (owner 2026-11-19)");
+  assert.equal(sb.swipeCommit(60, 300, 0.5, 400, true), true, "a real flick still counts");
   assert.equal(sb.swipeCommit(200, 300, -0.5, 400, true), false);
 });
 
