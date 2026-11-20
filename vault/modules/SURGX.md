@@ -377,3 +377,15 @@ ids `fpTqrJVSxpI`, `H7LyCwzaZEo`, `D1NmYz66D9w`), listed in the procedure's `med
   Videos are whole-operation, not per step: chapter timestamps could not be read from here.
 - Revert: delete the three media entries and their ids from `media.steps`.
 - The shim change is live only once `main` deploys; the app change needs build-www + native rebuild.
+
+## Step pictures (2026-11-20, owner experiment)
+Appendicectomy: one AI-generated 3D teaching picture per step (19), made in Gemini from the prompt in this session,
+reviewed only by eye. `surgx/media/appendicectomy/*.webp` (1200x900, 852 KB total), registry ids
+`med.surgx.app-step-01..19`, attribution `StewardMD` (passes `isOwnerProduced`).
+- Pictures attach to the PROCEDURE's step reference (`{ "ref": ..., "media": [id] }`), not the shared step, because a
+  shared step serves many procedures. `compileProcedure()` concatenates `ref.media` onto the step's own `media`.
+- `renderStep()` renders step media when `smd_surgx_step_images` is on (def true, `?surgxstepimg=0` hides).
+- Tests: `test/surgx-content.test.mjs` (cleared image must be StewardMD-produced and the file must exist; step-ref
+  media ids must exist), `test/run-surgx-ui.mjs` (19 distinct pictures, every file loads).
+- Known inaccuracies to regenerate: 04 table is flat (no head-down/left tilt shown); 14 endoloop drawn as a bow;
+  16 and 15 carry pseudo-text. Clinician review of all 19 is still owed.

@@ -209,6 +209,9 @@ try {
   ok((await ev("[].slice.call(document.querySelectorAll('#surgxRoot .sgx-embed iframe')).map(function (f) { return f.src.split('v=')[1]; }).join(',')")) ===
     "fpTqrJVSxpI,H7LyCwzaZEo,D1NmYz66D9w",
     "VIDEO: the Steps tab plays the three appendicectomy videos through the stewardmd.in YouTube shim");
+  ok(await waitFor("#surgxRoot .sgx-step .sgx-media img"), "IMAGES: step pictures render");
+  ok((await ev("(function () { var st = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step')); var src = st.map(function (x) { var i = x.querySelector('.sgx-media img'); return i ? i.src : ''; }); if (st.length !== 19 || src.indexOf('') >= 0 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES: each of the 19 appendicectomy steps shows its own picture, and every file loads");
 
   await clickText("#surgxRoot .sgx-tab", "Anatomy");
   await sleep(300);

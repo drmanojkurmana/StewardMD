@@ -50,6 +50,11 @@
       desc: "Render media whose licence is not cleared. ON by explicit owner instruction 2026-09-28 " +
         "(the owner takes responsibility for the media shown; disclosed in Terms/Disclaimer v3.2)."
     },
+    smd_surgx_step_images: {
+      type: "bool", def: true, query: "surgxstepimg",
+      desc: "Show a teaching picture inside each procedure step (appendicectomy first, AI-generated " +
+        "with Gemini, 2026-11-20 owner experiment). Off = steps are text only, exactly as before."
+    },
     smd_surgx_haptics: {
       type: "bool", def: true, query: "surgxhaptics",
       desc: "Haptic feedback on protocol band reveal and note field confirmation (native only)."
