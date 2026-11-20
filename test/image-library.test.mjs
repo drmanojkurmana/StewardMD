@@ -131,7 +131,7 @@ test("commons import: helpers keep the uploader's text and drop empty captions",
 
 test("commons import: every merged image is openly licensed, attributed and linked to its Commons page", () => {
   const d = data();
-  const all = Object.values(d.bySystem).flat().filter((e) => e.lk === "commons");
+  const all = Object.values(d.bySystem).flat().filter((e) => e.lk === "commons" && e.f !== "Qbank");
   assert.ok(all.length > 300, "pathology and histology images merged, got " + all.length);
   for (const e of all) {
     assert.match(e.s, /^https:\/\/(upload|thumb)\.wikimedia\.org\/[^?]+$/);
@@ -143,4 +143,43 @@ test("commons import: every merged image is openly licensed, attributed and link
   }
   const sys = new Set(Object.keys(d.bySystem).filter((s) => d.bySystem[s].some((e) => e.lk === "commons")));
   for (const s of ["gastroenterology", "dermatology", "oncology", "anatomy"]) assert.ok(sys.has(s), "commons images in " + s);
+});
+
+import { bankKey, captionFor, entryFor, firstSentence, titleOf } from "../tools/snapshot-qbank-images.mjs";
+
+test("qbank snapshot: overlay bare names resolve the way the app serves them", () => {
+  assert.equal(bankKey("i-01b1aec04712.webp", ["overlay", "maikimg1", "surgery", "sur-periop.json"]), "img/maikimg/i-01b1aec04712.webp");
+  assert.equal(bankKey("v16/ss-radiology/img/i-a.webp", ["v16", "ss-radiology"]), "v16/ss-radiology/img/i-a.webp");
+  assert.equal(bankKey("i-a.webp", ["v16", "ss-radiology"]), "", "a bare name outside an overlay is not guessed");
+  assert.equal(bankKey("../x.webp", ["overlay", "maikimg1"]), "");
+});
+
+test("qbank snapshot: caption is the question's own key point, title never names the wrong option", () => {
+  const it = { id: "q1", q: "Which is the most likely diagnosis?", o: ["Galeazzi fracture", "Monteggia", "Colles", "Smith"], a: 0,
+    kp: "Galeazzi fracture is a distal radius shaft fracture with distal radioulnar joint dislocation. More text here.", exp: "x" };
+  assert.equal(captionFor(it), "Galeazzi fracture is a distal radius shaft fracture with distal radioulnar joint dislocation.");
+  assert.equal(titleOf(it), "Galeazzi fracture");
+  assert.equal(titleOf({ ...it, q: "All of the following are true EXCEPT" }), "", "an EXCEPT key is not what the image shows");
+  assert.equal(titleOf({ ...it, meta: { topic: "Forearm fractures" } }), "Forearm fractures");
+  assert.equal(firstSentence("short"), "short");
+  assert.equal(entryFor({ ...it, kp: "", exp: "" }, "v90/img/fx-a.webp", "orthopaedics", "m", null), null, "no caption, no entry");
+  const credit = { author: "Jane Doe", licence: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:X.jpg" };
+  const e = entryFor(it, "v90/img/fx-a.webp", "orthopaedics", "m", credit);
+  assert.equal(e.licence, "CC BY-SA 4.0");
+  assert.equal(e.page, credit.sourceUrl);
+  assert.equal(entryFor(it, "v90/img/fx-a.webp", "orthopaedics", "m", { author: "A", licence: "x", sourceUrl: "https://example.com" }).page, undefined);
+});
+
+test("builder: Qbank images join the bank, Commons ones attributed and linked", () => {
+  const d = data();
+  const qb = Object.values(d.bySystem).flat().filter((e) => e.f === "Qbank");
+  assert.ok(qb.length > 500, "Qbank images present, got " + qb.length);
+  for (const e of qb) {
+    assert.match(e.s, /^\/api\/prep\/bank\/(v\d+|img)\/[\w./-]+\.(webp|png|jpe?g)$/i, "bank URL: " + e.s);
+    assert.ok(e.c.length >= 20 && e.t, "caption and title: " + e.s);
+    if (e.o === "commons") {
+      assert.ok(e.cr && e.li && /^https:\/\/commons\.wikimedia\.org\//.test(e.u), "attributed: " + e.s);
+      assert.equal(e.lk, "commons");
+    } else assert.equal(e.lk, "prep");
+  }
 });

@@ -288,6 +288,24 @@ export function buildAll(root = ROOT) {
       cr: clean(c.author), li: clean(c.licence), lk: "prep", sys: slugify(system), sysName: system });
   }
 
+  /* 7b. Qbank question images (owner 2026-11-20: every Qbank image also goes to the Image Bank). Snapshot from
+   *    tools/snapshot-qbank-images.mjs: built-in bank images plus images attached through the fix route. The caption is
+   *    the question's own key point; Commons images keep author, licence and their file page for attribution.
+   *    Placed before the Commons pathology top-up so the per-system byte budget is spent on Qbank images first. */
+  const qb = readJSON(path.join(root, "kb/imglib/qbank-images.json"));
+  for (const m of (qb && qb.items) || []) {
+    const cap = clean(m && m.caption);
+    /* Keys are paths under prep-bank/: versioned bank images (v16/...) or overlay images (img/<set>/...). */
+    if (!m || !/^(v\d{1,3}|img)\/[\w./-]+$/.test(String(m.key || "")) || cap.length < 20) continue;
+    const system = canonicalSystem(subjectName(m.subject));
+    const commons = !!(m.page && /^https:\/\/commons\.wikimedia\.org\//.test(m.page) && m.licence);
+    const title = clean(m.title) || subjectName(m.subject);
+    push({ s: "/api/prep/bank/" + m.key, t: title, c: cap, a: title, ar: null, k: kindOf(cap + " " + title, "Clinical photo"),
+      o: commons ? "commons" : "stewardmd", f: "Qbank", ri: m.module, rn: subjectName(m.subject),
+      cr: commons ? clean(m.author) : "", li: commons ? clean(m.licence) : "", lk: commons ? "commons" : "prep",
+      ...(commons ? { u: m.page } : {}), sys: slugify(system), sysName: sysName(slugify(system), system) });
+  }
+
   /* 8. Openly licensed pathology and histology micrographs from Wikimedia Commons (tools/fetch-commons-pathology.mjs:
    *    CC BY, CC BY-SA, CC0 or public domain only; the uploader's own English description is the caption). The
    *    viewer shows author and licence and links to the Commons file page, which is the attribution CC BY asks for. */
