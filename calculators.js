@@ -8135,10 +8135,10 @@
   /* ====================================================================== *
    * RENDERING — full-screen browser overlay + per-calculator panel
    * ====================================================================== */
-  var CAT_ORDER = ["Cardiovascular","Critical care","Infectious disease","Renal","Hepatology","Neurology","Respiratory","Endocrine","Gastroenterology","Haematology","Oncology","Rheumatology","Musculoskeletal","Dermatology","Psychiatry","Paediatrics","Obstetrics","Ophthalmology","Toxicology","General"];
+  var CAT_ORDER = ["Cardiovascular","Critical care","Infectious disease","Renal","Hepatology","Neurology","Respiratory","Endocrine","Gastroenterology","Haematology","Oncology","Rheumatology","Musculoskeletal","Dermatology","Psychiatry","Paediatrics","Neonatology","Obstetrics","Anaesthesia","Surgery","Radiology","Ophthalmology","ENT","Toxicology","Community medicine","Forensic medicine","General"];
   // Category → shared line-icon NAME (window.ICONS catalog). Each calculator inherits its
   // category's icon (no per-calc emoji). Replaces the old emoji map for a consistent, pro look.
-  var CAT_ICON = { "Cardiovascular":"heart","Critical care":"siren","Infectious disease":"microbe","Renal":"kidney","Hepatology":"liver","Neurology":"brain","General":"scales","Respiratory":"lungs","Endocrine":"endocrine","Gastroenterology":"stomach","Haematology":"droplet","Oncology":"ribbon","Rheumatology":"joint","Musculoskeletal":"bone","Dermatology":"skin","Psychiatry":"psych","Paediatrics":"baby","Obstetrics":"pregnant","Ophthalmology":"eye","Toxicology":"skull" };
+  var CAT_ICON = { "Cardiovascular":"heart","Critical care":"siren","Infectious disease":"microbe","Renal":"kidney","Hepatology":"liver","Neurology":"brain","General":"scales","Respiratory":"lungs","Endocrine":"endocrine","Gastroenterology":"stomach","Haematology":"droplet","Oncology":"ribbon","Rheumatology":"joint","Musculoskeletal":"bone","Dermatology":"skin","Psychiatry":"psych","Paediatrics":"baby","Obstetrics":"pregnant","Ophthalmology":"eye","Toxicology":"skull","Anaesthesia":"narke","Surgery":"surgx","Radiology":"xray","Community medicine":"globe","Neonatology":"neo","Forensic medicine":"fingerprint","ENT":"steth" };
   // Icon accessor — guarded for load order; falls back to empty string (never a crash / emoji).
   function mcIco(name, cls){ return (window.ICONS && ICONS.get) ? ICONS.get(name, cls || "mc-ico") : ""; }
   function mcCatIco(cat, cls){ return mcIco(CAT_ICON[cat] || "calc", cls); }
