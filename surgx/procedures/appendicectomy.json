@@ -79,25 +79,25 @@
     ]
   },
   "steps": [
-    { "ref": "step.core.consent-check" },
-    { "ref": "step.core.timeout" },
-    { "ref": "step.core.prophylaxis" },
-    { "ref": "step.core.positioning", "emphasis": "Steep Trendelenburg with left tilt slides the small bowel out of the right iliac fossa and does most of the retraction for you." },
-    { "ref": "step.core.prep-drape" },
-    { "ref": "step.lap.access" },
-    { "ref": "step.lap.ports", "emphasis": "Umbilical camera port, left iliac fossa and suprapubic working ports. Placing both working ports on the left keeps the surgeon out of their own way." },
-    { "ref": "step.lap.survey", "emphasis": "Inspect the terminal ileum for Meckel diverticulum and Crohn disease, and the pelvis for gynaecological pathology, before committing to the appendix." },
-    { "ref": "step.app.mobilise" },
-    { "ref": "step.app.mesoappendix" },
-    { "ref": "step.app.base" },
-    { "ref": "step.abd.lavage", "emphasis": "Aspirate contaminated fluid from the pelvis and both paracolic gutters. Do not irrigate widely in a contaminated abdomen: it spreads what it does not remove." },
-    { "ref": "step.lap.specimen-retrieval" },
-    { "ref": "step.core.haemostasis" },
-    { "ref": "step.core.counts" },
-    { "ref": "step.core.specimen", "emphasis": "Every appendix goes to histology, including the ones that look normal." },
-    { "ref": "step.lap.closure" },
-    { "ref": "step.core.skin-closure" },
-    { "ref": "step.core.debrief" }
+    { "ref": "step.core.consent-check", "media": ["med.surgx.app-step-01", "med.surgx.app-vid-01"] },
+    { "ref": "step.core.timeout", "media": ["med.surgx.app-step-02", "med.surgx.app-vid-02"] },
+    { "ref": "step.core.prophylaxis", "media": ["med.surgx.app-step-03", "med.surgx.app-vid-03"] },
+    { "ref": "step.core.positioning", "media": ["med.surgx.app-step-04", "med.surgx.app-clip-04"], "emphasis": "Steep Trendelenburg with left tilt slides the small bowel out of the right iliac fossa and does most of the retraction for you." },
+    { "ref": "step.core.prep-drape", "media": ["med.surgx.app-step-05", "med.surgx.app-vid-05"] },
+    { "ref": "step.lap.access", "media": ["med.surgx.app-step-06", "med.surgx.app-vid-06"] },
+    { "ref": "step.lap.ports", "media": ["med.surgx.app-step-07", "med.surgx.app-clip-07"], "emphasis": "Umbilical camera port, left iliac fossa and suprapubic working ports. Placing both working ports on the left keeps the surgeon out of their own way." },
+    { "ref": "step.lap.survey", "media": ["med.surgx.app-step-08", "med.surgx.app-clip-08"], "emphasis": "Inspect the terminal ileum for Meckel diverticulum and Crohn disease, and the pelvis for gynaecological pathology, before committing to the appendix." },
+    { "ref": "step.app.mobilise", "media": ["med.surgx.app-step-09", "med.surgx.app-clip-09"] },
+    { "ref": "step.app.mesoappendix", "media": ["med.surgx.app-step-10", "med.surgx.app-clip-10"] },
+    { "ref": "step.app.base", "media": ["med.surgx.app-step-11", "med.surgx.app-vid-11"] },
+    { "ref": "step.abd.lavage", "media": ["med.surgx.app-step-12", "med.surgx.app-vid-12"], "emphasis": "Aspirate contaminated fluid from the pelvis and both paracolic gutters. Do not irrigate widely in a contaminated abdomen: it spreads what it does not remove." },
+    { "ref": "step.lap.specimen-retrieval", "media": ["med.surgx.app-step-13", "med.surgx.app-clip-13"] },
+    { "ref": "step.core.haemostasis", "media": ["med.surgx.app-step-14"] },
+    { "ref": "step.core.counts", "media": ["med.surgx.app-step-15", "med.surgx.app-vid-15"] },
+    { "ref": "step.core.specimen", "media": ["med.surgx.app-step-16", "med.surgx.app-vid-16"], "emphasis": "Every appendix goes to histology, including the ones that look normal." },
+    { "ref": "step.lap.closure", "media": ["med.surgx.app-step-17", "med.surgx.app-vid-17"] },
+    { "ref": "step.core.skin-closure", "media": ["med.surgx.app-step-18", "med.surgx.app-vid-18"] },
+    { "ref": "step.core.debrief", "media": ["med.surgx.app-step-19", "med.surgx.app-vid-19"] }
   ],
   "steps_local": {
     "step.app.mobilise": {
@@ -143,6 +143,6 @@
   },
   "media": {
     "anatomy": ["med.surgx.appendix-anatomy"],
-    "steps": ["med.surgx.appendix-base"]
+    "steps": ["med.surgx.appendix-video-animation", "med.surgx.appendix-video-technique", "med.surgx.appendix-base"]
   }
 }

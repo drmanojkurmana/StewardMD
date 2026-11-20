@@ -206,6 +206,38 @@ try {
     "the step runner renders the shared + local steps in order");
   ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('At risk:')")) === true,
     "structures at risk are surfaced on the steps that carry them");
+  ok((await ev("[].slice.call(document.querySelectorAll('#surgxRoot .sgx-embed iframe')).map(function (f) { return (f.closest('.sgx-step') ? 'step' + f.closest('.sgx-step').querySelector('.n').textContent + ':' : '') + f.src.split('v=')[1]; }).join(',')")) ===
+    "step1:IX0DNOBEItE,step2:_jE5NgLkTo4,step3:pqCD1bVDXvI,step4:H7LyCwzaZEo&start=62&end=77,step5:uny6rK8Mbs0,step6:m5u1kHwGDk8,step7:H7LyCwzaZEo&start=94&end=111,step8:fpTqrJVSxpI&start=67&end=72,step9:H7LyCwzaZEo&start=134&end=153,step10:H7LyCwzaZEo&start=154&end=171,step11:zIcHlU-L1-E,step12:hxnSwIdtagA,step13:H7LyCwzaZEo&start=211&end=230,step15:eUr-Mj2qCgI,step16:LzfLvDLCD7Y,step17:5nCCHgU0LDE,step18:6OERElPC3EI,step19:3HhXz5QhDzw,fpTqrJVSxpI,H7LyCwzaZEo",
+    "VIDEO: every step except 14 carries its video or timed clip, the two whole videos follow the steps, all through the stewardmd.in YouTube shim");
+  ok(await waitFor("#surgxRoot .sgx-step .sgx-media img"), "IMAGES: step pictures render");
+  ok((await ev("(function () { var st = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step')); var src = st.map(function (x) { var i = x.querySelector('.sgx-media img'); return i ? i.src : ''; }); if (st.length !== 19 || src.indexOf('') >= 0 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES: each of the 19 appendicectomy steps shows its own picture, and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Laparoscopic cholecystectomy");
+  await waitFor("#surgxRoot .sgx-tab");
+  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 18,
+    "VIDEO batch 2: lap cholecystectomy shows its 18 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 19 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 2: lap cholecystectomy shows 19 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Right hemicolectomy");
+  await waitFor("#surgxRoot .sgx-tab");
+  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 22,
+    "VIDEO batch 3: right hemicolectomy shows its 22 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 23 || new Set(src).size !== 23) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 3: right hemicolectomy shows 23 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Appendicectomy");
+  await waitFor("#surgxRoot .sgx-tab");
+  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await sleep(300);
 
   await clickText("#surgxRoot .sgx-tab", "Anatomy");
   await sleep(300);

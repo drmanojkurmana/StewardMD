@@ -45,6 +45,53 @@
   // Only the videos CliniX teaches with. Each was verified embeddable via the YouTube oEmbed
   // endpoint (HTTP 200 = public AND embedding enabled by the rights holder).
   var ALLOW = {
+    "1moD-3GX2Zs": 1,   // Patient positioning 6 - Laparoscopic position - Merivaara
+    "z-BkSSjNuGw": 1,   // Skill Station: Thyroidectomy position - zeeshan sarwar
+    "pwKqwcVNuMY": 1,   // Understanding Rhesus Status and Anti-D in Pregnancy - Zero To Finals
+    "uiigShhQyH4": 1,   // Anatomy of the rectum and anal canal -  Quick Anatomy | Kenhub - Kenhub - Learn Human Anatomy
+    "KX09ncH8A3E": 1,   // Quick Hits on TKA Gap Balancing - Nailed It Ortho Clips
+    "hQtQknPSez8": 1,   // Lower limb Neurovascular assessment - Orthobuzz - Orthobuzz
+    "-WJ9BgoWMIg": 1,   // Patient positioning 5 - Lithotomy position - Merivaara
+    "IMapGAFvqkc": 1,   // Draping a patient in lithotomy position - SurgTech Academy
+    "5JK19QSYCTU": 1,   // TURP Syndrome Explained | Anaesthesia Lecture with Dr. Haitham Mekkawi - Anesthesia SD
+    "IX0DNOBEItE": 1,   // How to Obtain a Proper Surgical Consent - Paul Del Prado MD
+    "_jE5NgLkTo4": 1,   // How To Do The WHO Surgical Safety Checklist - NHSNPSA
+    "pqCD1bVDXvI": 1,   // Antibiotic Prophylaxis: The Critical Dos and Don'ts - Paul Del Prado MD
+    "uny6rK8Mbs0": 1,   // Prepping of Abdomen - Perioperative Nursing Program at GBC
+    "m5u1kHwGDk8": 1,   // Open (Hasson) Technique for Laparoscopic Entry - VirtualSurgicalCoaching
+    "zIcHlU-L1-E": 1,   // Simple and Safe Extracorporeal Knotting Technique for Laparoscopic Appendectomy - SurgMedia
+    "hxnSwIdtagA": 1,   // APPENDECTOMY SURGERY - Irrigation or Suction? | BTK/RAS-ACS Journal Cast #3 - Behind The Knife: The Surgery Podcast
+    "eUr-Mj2qCgI": 1,   // Guideline Essentials - Prevention of Retained Surgical Items: Count Process - AORN
+    "LzfLvDLCD7Y": 1,   // SPECIMENS IN THE OR - Surgical Tech Tips
+    "5nCCHgU0LDE": 1,   // Suturing Techniques : Laparoscopic Portside Closures - JOMI - Journal of Medical Insight
+    "6OERElPC3EI": 1,   // Subcuticular Suture - Stanford Surgery
+    "3HhXz5QhDzw": 1,   // PACU: The Handoff - Jeffrey D. Shapiro, M.D.
+    "PuC7iJffTpw": 1,   // 12-Minute Laparoscopic Cholecystectomy - Dr. R. K. Mishra
+    "IdgXe1qva5Y": 1,   // WHO Surgical Safety Checklist Training - Gloucestershire Hospitals NHS Foundation Trust
+    "iI4cTOpMgKM": 1,   // Cambridge OR - Surgical Skin Prep - Lindsey Hurlbut
+    "z9epRIuT9dw": 1,   // Laparoscopic Endobag Insertion - Simulation - Dr Kunal Rathod
+    "DCnWU0spnCY": 1,   // Open inguinal hernia repair - whistle stop - David Luke
+    "SqANh9VNx8s": 1,   // Draping a patient in supine or prone position - SurgTech Academy
+    "VkxwN8xQz80": 1,   // Primary vertex caesarean section - TVASurg
+    "k8wOIGhZObY": 1,   // C-Section Surgery Step-by-Step - AAUN Obs and Gynae
+    "7E1ivPB_zn0": 1,   // Safe Surgical Checklist - Ochsner Health
+    "inP686H0_fY": 1,   // Minimally Invasive Total Thyroidectomy - Columbia University Department of Surgery
+    "Wg7eb7p8Fd8": 1,   // Precise Neuromonitoring for Thyroid Surgery - Endotherapeutics
+    "jJ74igAVDng": 1,   // Hemorrhoid Surgery animation - SCI Hospital
+    "MFDcTI9KKzs": 1,   // Anal Examination Under Anesthesia - JOMI
+    "XmBPhgkuYEk": 1,   // Low Lithotomy With Arms Tucked - Matt Mangan
+    "k0nu8mLmuaQ": 1,   // Tonsillectomy Procedure - Silverback Creative Solutions
+    "kAMuP2MNqUo": 1,   // Total Knee Replacement - OrthoInfo
+    "FhU-s1LCgGw": 1,   // TKA Bone Cement Technique - Mark A. Rowley M.D.
+    "mtmNQ9XHzR0": 1,   // Application of Tourniquet - Orthopaedic Trauma
+    "xburFVnvSzU": 1,   // Laparoscopic Right Hemicolectomy with CME - Mans ColoRectal Center
+    "EkVI7aIH8Ko": 1,   // Laparoscopic Right Hemicolectomy, Cranial Priority - ZJU-SAH
+    "h8WwDNbji_c": 1,   // Port Placement for Laparoscopic Colonic Resections - Colorectal Disease Journal
+    "SG_og6wGhLA": 1,   // TURP - Cure Stone by Dr Deepanshu Gupta
+    "mbK6TstYcmI": 1,   // Bipolar TURP instruments - Divakar Dalela
+    "vZ7GSQBdDF4": 1,   // TURis 2.0 Bipolar Resection - Olympus Corporation
+    "fpTqrJVSxpI": 1,   // Laparoscopic and open appendicectomy: medical animation - E-Pulsepoints
+    "H7LyCwzaZEo": 1,   // Laparoscopic appendicectomy: step-by-step technique and landmarks - Visceral Focus
     "0sqCIzuotWo": 1,   // Deep Tendon Reflexes - Stanford Medicine 25
     "4Ii_lFmd7hw": 1,   // Cerebellar Examination - OSCE Guide - Geeky Medics
     "7KF5_Br9MaE": 1,   // Respiratory History - OSCE Tips - Geeky Medics
@@ -289,6 +336,7 @@
   if (ALLOW[v] !== 1) { fail("That video is not part of CliniX."); return; }
 
   var start = parseInt(param("start") || param("t") || "0", 10);
+  var end = parseInt(param("end") || "0", 10);   // SURGX step clips stop where the step ends
   // autoplay=1 (PrepReels): start as soon as the card is on screen. With sound when the WebView allows it,
   // otherwise muted (YouTube's own unmute button stays), so a blocked autoplay never leaves a paused frame.
   var auto = param("autoplay") === "1";
@@ -297,7 +345,7 @@
   // link card if it did not. playsinline keeps it in the lesson on iOS instead of going fullscreen.
   f.src = "https://www.youtube.com/embed/" + v +
           "?rel=0&modestbranding=1&playsinline=1&enablejsapi=1" +
-          (start > 0 ? "&start=" + start : "") + (auto ? "&autoplay=1" : "") +
+          (start > 0 ? "&start=" + start : "") + (end > start ? "&end=" + end : "") + (auto ? "&autoplay=1" : "") +
           "&origin=" + encodeURIComponent(location.origin);
   f.setAttribute("allow", "autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen");
   f.setAttribute("allowfullscreen", "");

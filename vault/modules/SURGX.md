@@ -363,3 +363,66 @@ as CliniX `.cx-hero-close`), the monogram inline with the live-text wordmark (`.
 heading and one grouped card (`.sgx-secs`) of rows with icon tiles (`SECTIONS[].icon`). The educational-content
 note moved to the footer disclaimer. Inner screens still use `head()` and its sticky bar. CSS block at the end
 of `surgx.css`.
+
+## YouTube videos in Procedures (2026-11-20, owner experiment)
+Owner asked for YouTube surgery videos in the Steps tab while per-step 3D images (Gemini) are being made.
+Appendicectomy first: three `kind:"embed"` entries in `surgx/media/manifest.json` (`med.surgx.appendix-video-*`,
+ids `fpTqrJVSxpI`, `H7LyCwzaZEo`; `D1NmYz66D9w` removed 2026-11-20 as an audio podcast with no footage), listed in the procedure's `media.steps`.
+- `surgx-screens.js` `mediaBlock()` plays an embed through the CliniX shim `https://stewardmd.in/_site/yt?v=`
+  (YouTube rejects the `capacitor://` origin). Each id must be in `_site/yt.html` `ALLOW`, or the shim refuses it.
+- Licence gate: a cleared embed must pass `isEmbeddable()` AND be in the shim allow-list
+  (`test/surgx-content.test.mjs`). Embedding was confirmed allowed by the uploader via YouTube oEmbed (200, not 401).
+  The Nucleus Medical Media animations refuse embedding (401), so they are not used.
+- **Not clinically vetted.** The videos were chosen by title and channel; nobody has watched them for accuracy.
+  Videos are whole-operation, not per step: chapter timestamps could not be read from here.
+- Revert: delete the three media entries and their ids from `media.steps`.
+- The shim change is live only once `main` deploys; the app change needs build-www + native rebuild.
+
+## Step pictures (2026-11-20, owner experiment)
+Appendicectomy: one AI-generated 3D teaching picture per step (19), made in Gemini from the prompt in this session,
+reviewed only by eye. `surgx/media/appendicectomy/*.webp` (1200x900, 852 KB total), registry ids
+`med.surgx.app-step-01..19`. Credit line reads "StewardMD original" (owner 2026-11-20); the AI origin is kept in
+the entry's `generator` field, not shown. `mediaBlock()` prints the licence only when it differs from the attribution.
+- Pictures attach to the PROCEDURE's step reference (`{ "ref": ..., "media": [id] }`), not the shared step, because a
+  shared step serves many procedures. `compileProcedure()` concatenates `ref.media` onto the step's own `media`.
+- `renderStep()` renders step media when `smd_surgx_step_images` is on (def true, `?surgxstepimg=0` hides).
+- Tests: `test/surgx-content.test.mjs` (cleared image must be StewardMD-produced and the file must exist; step-ref
+  media ids must exist), `test/run-surgx-ui.mjs` (19 distinct pictures, every file loads).
+- Round 2 (owner, same day): 04, 14, 15, 16 regenerated and shipped as `*-v2.webp` (new names so no cached copy is
+  shown). Clinician review of all 19 is still owed. 04 still has the arms out.
+- **The prompt template and every lesson are in [[SURGX-image-prompt]]. Build the next procedure's prompt from it.**
+
+## Timed step clips (2026-11-20)
+Gemini watched V1/V2 and gave per-step timestamps. Steps 4, 7, 9, 10 carry a clip of V2 (`med.surgx.app-clip-NN`,
+`start`/`end` seconds) after the step picture. `_site/yt.html` now honours `end=` (YouTube `end` player var).
+Not used: V1 at step 8 (low confidence, 5 s), and step 13 from V1/V2 (both pull the appendix out WITHOUT a retrieval
+bag, contradicting the step). Gemini's concerns: V2 advises razor shaving nipples to pubis and no retrieval bag;
+V1 omits base ligation and the bag. The two whole videos still render after the steps pending the owner's call.
+
+## A video on every step (2026-11-20, owner)
+Owner: "videos cannot be the same as the book or guidelines; use video steps where available, search for more where not,
+else ignore." So the step 8 (V1 1:07-1:12) and step 13 (V2 3:31-3:50, no retrieval bag, said in the caption) clips are in,
+and a focused short video (`med.surgx.app-vid-NN`, found by YouTube search, embeddable per oEmbed, allow-listed in the
+shim) covers steps 1, 2, 3, 5, 6, 11, 12, 15, 16, 17, 18, 19. Step 14 (haemostasis) found nothing and has none.
+Picked by title and channel only; none watched.
+
+## Batch 2 prompts (2026-11-20)
+Lap cholecystectomy, Lichtenstein hernia repair, LSCS and total thyroidectomy (70 steps): [[SURGX-batch2-image-prompt]] and [[SURGX-batch2-video-prompt]].
+
+## Batch 3 prompts (2026-11-20)
+Haemorrhoidectomy, tonsillectomy, total knee replacement, laparoscopic right hemicolectomy and TURP (94 steps): [[SURGX-batch3-image-prompt]] and [[SURGX-batch3-video-prompt]].
+
+## Batch 2 video clips (2026-11-20)
+Gemini returned 12 videos; all embeddable (oEmbed 200). The best clip per step is wired as `med.surgx.{chole,hern,cs,thyr}-clip-NN` (59 clips); 11 ids added to the `_site/yt.html` ALLOW list (hM-WA6WOw1Y unused). Gaps with no clip: chole 4 and 14, hernia 10, LSCS 4, 11, 12 and 17, thyroid 2, 5, 14 and 15. The safety-step clips come from a WHO checklist video on another operation, and the hernia clips from a bench model; both caveats are in the captions. Thyroid step 11 uses the Columbia animation so it does not duplicate the step 13 clip.
+
+## Batch 3 video clips (2026-11-20)
+73 clips as `med.surgx.{hmd,tons,tkr,rhc,turp}-clip-NN`; 13 ids added to the shim ALLOW list. TVASurg 0twYSCkEnYk refuses embedding (oEmbed 401), so right hemicolectomy step 7 uses the Colorectal Disease Journal trocar clip. Changed from Gemini picks: TKR step 4 uses the body-exhaust-suit clip, not hand rub; right hemicolectomy step 14 uses the ZJU-SAH exteriorisation clip so it does not sit inside the step 18 clip. Gaps: haemorrhoidectomy 8, 9, 10, 13, 14; tonsillectomy 11; TKR 10, 11, 12, 14, 16, 18, 19; right hemicolectomy 6, 17, 21, 22; TURP 4, 5, 11, 14.
+
+## Batch 2 step pictures (2026-11-20)
+All 70 wired as `med.surgx.{chole,hern,cs,thyr}-step-NN`, WebP 1200x900 q78 in `surgx/media/<procedure>/`. Lap chole 04 and thyroid 05 (positioning) came first as a generic flat table; redrawn as side views from the Round 2 prompt in [[SURGX-batch2-image-prompt]] and wired 2026-11-20 (captions written by hand). Gemini also used near-identical scenes for the shared safety steps (time-out, counts, labelling) across operations; acceptable for generic steps.
+
+## Batch 3 step pictures (2026-11-20)
+92 of 94 wired as `med.surgx.{hmd,tons,tkr,rhc,turp}-step-NN` (WebP 1200x900 q78), picture first then clip on each step. Captions are the prompt's Teach lines; "Common" steps take the COMMON SAFETY STEPS Teach line, positioning steps a sentence from PRECISE FACTS. TURP 09 (lateral lobes) left out: Gemini drew the adenoma yellow and fatty, which reads as perforation fat; Tonsillectomy 04 (the hand on the arm board sits beside the feet; the needle goes into the skin, not the cannula port) and 09 (tube running over the uvula, no capsular plane, swab on the tonsil, left side instead of right) were wired, then pulled after the owner caught them: the first review was done on thumbnails only. Review every image at full size. Tonsil 04 redrawn and wired 2026-11-20. Tonsil 09 redo still wrong (face-on view with cheek retractors, not the Boyle-Davis gag of image 08; tube ends in mid-air) and held back, with TURP 09 (not yet redrawn). The redo prompts are at the end of [[SURGX-batch3-image-prompt]].
+
+## Gap clips (2026-11-20)
+Steps Gemini left without a clip, searched again on YouTube (headless browser search; watch pages ask for a bot check, so no transcripts). 9 new short single-topic videos embedded whole (no start or end), each oEmbed 200 and on the shim ALLOW list: lap chole 4 and TURP 4 (table maker's positioning demos), thyroid 5, LSCS 17 (anti-D), haemorrhoid 8 (sphincter anatomy), TKR 10 (gap balancing), TKR 19 (NV check), TURP 5 (lithotomy draping), TURP 11 (TUR syndrome). 4 reused existing clips: right hemicolectomy 6 (abdominal prep), 21 (port closure), 22 and TKR 18 (subcuticular closure). Not watched; picked by title, channel and thumbnail. Still empty: generic haemostasis steps, LSCS 4 and 11, thyroid 2 and 14, haemorrhoid 9, 10 and 14, tonsil 11, TKR 11, 12 and 14, right hemicolectomy 17, TURP 14.
