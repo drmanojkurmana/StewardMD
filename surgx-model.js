@@ -587,7 +587,8 @@
         pitfalls: arr(s.pitfalls).map(String),
         structuresAtRisk: arr(s.structuresAtRisk).map(String),
         critical: s.critical === true,
-        media: arr(s.media),
+        // A procedure-specific picture rides on the reference, because shared steps serve every procedure.
+        media: arr(s.media).concat(isObj(ref) ? arr(ref.media) : []),
         emphasis: isStr(emph) ? emph : (isObj(emph) && isStr(emph.note) ? emph.note : "")
       });
     });

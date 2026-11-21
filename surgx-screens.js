@@ -181,10 +181,16 @@
     var body = "";
     if (m.inline && DIA()) body = DIA().get(m.diagramId) || "";
     else if (m.src) body = '<img src="' + attr(m.src) + '" alt="' + attr(m.caption) + '" loading="lazy">';
+    // YouTube rejects capacitor://localhost as an origin, so play through the https shim CliniX uses (ids allow-listed there).
+    else if (m.kind === "embed" && m.embeddable) {
+      body = '<div class="sgx-embed"><iframe src="https://stewardmd.in/_site/yt?v=' + attr(m.videoId) + (m.start ? "&start=" + m.start : "") + (m.end ? "&end=" + m.end : "") + '" title="' + attr(m.title) +
+        '" loading="lazy" allowfullscreen allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe></div>' +
+        '<div class="cap"><b>' + esc(m.title) + "</b></div>";
+    }
     if (!body) return "";
     return '<div class="sgx-media">' + body +
       '<div class="cap">' + esc(m.caption) + "</div>" +
-      '<div class="attr">' + esc(m.attribution) + (m.licence ? " · " + esc(m.licence) : "") + "</div></div>";
+      '<div class="attr">' + esc(m.attribution) + (m.licence && m.licence !== m.attribution ? " · " + esc(m.licence) : "") + "</div></div>";
   }
 
   /* ── citations ───────────────────────────────────────────────────────────── */
@@ -639,7 +645,7 @@
 
     if (active.id === "steps") {
       body += '<div class="sgx-card">' + (active.steps.length
-        ? active.steps.map(renderStep).join("")
+        ? active.steps.map(function (s) { return renderStep(s, p.__built && p.__built.media); }).join("")
         : '<div class="sgx-empty">No steps are listed for this procedure.</div>') + "</div>";
     } else {
       body += '<div class="sgx-card"><h4>' + esc(active.title) + "</h4>" +
@@ -661,7 +667,7 @@
     return head(p.title, "03 · " + (p.system || "Procedure")) + tabBar + wrap(body);
   }
 
-  function renderStep(s) {
+  function renderStep(s, registry) {
     var h = '<div class="sgx-step' + (s.critical ? " crit" : "") + '"><div class="n">' + s.n + "</div><div class=\"b\">" +
       '<div class="t">' + esc(s.title) + (s.critical ? " " + ic("priority_high") : "") + "</div>" +
       '<div class="w">' + esc(s.why) + "</div>";
@@ -669,6 +675,7 @@
     if (s.emphasis) h += '<div class="w" style="margin-top:7px;font-weight:600">' + esc(s.emphasis) + "</div>";
     if (s.structuresAtRisk.length) h += '<div class="risk">' + ic("warning") + " At risk: " + esc(s.structuresAtRisk.join(" · ")) + "</div>";
     if (s.pitfalls.length) h += '<div class="pit">' + ic("error") + " " + esc(s.pitfalls.join(" · ")) + "</div>";
+    if (flag("smd_surgx_step_images")) s.media.forEach(function (mid) { h += mediaBlock(registry, mid); });
     return h + "</div></div>";
   }
 
