@@ -557,3 +557,8 @@ Fix (same day): the six held-back images came back in `surgx-batch6-fix.zip`, pa
 101 of 102 (`med.surgx.{ivi,dcr,chal,fb,evis,strab,ppv}-step-NN`), every image reviewed four to a sheet. Held back
 evisceration 16 (cornea still on in a post-evisceration step); redo prompt at the end of [[SURGX-batch7-image-prompt]].
 Evisceration 16 redraw wired the same day; batch 7 now 102 of 102.
+
+### Batch 8 prompts (2026-11-21)
+[[SURGX-batch8-image-prompt]] (128 images) and [[SURGX-batch8-video-prompt]] for the 7 non-eye operations: kidney
+transplant, laparoscopic donor nephrectomy, aortic valve replacement, subxiphoid pericardial window, escharotomy,
+rhomboid flap, unilateral cleft lip repair. Made by `make8.py` (the batch 6 and 7 generator with the eye wording swapped out).
