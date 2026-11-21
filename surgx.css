@@ -646,3 +646,14 @@ body.dark #surgxRoot .sgx-hero-logo, body.v3-dark #surgxRoot .sgx-hero-logo { fi
 body.dark #surgxRoot .sgx-secs, body.v3-dark #surgxRoot .sgx-secs { box-shadow: 0 0 0 1px var(--sgx-line); }
 @media (min-width: 720px) { #surgxRoot .sgx-hero { padding: calc(env(safe-area-inset-top, 0px) + 70px) 24px 6px; } #surgxRoot .sgx-hero-mark { font-size: 34px; } }
 @media (prefers-reduced-motion: reduce) { #surgxRoot .sgx-hero-close { transition: none; } #surgxRoot .sgx-hero-close:active { transform: none; } }
+
+/* iPad (owner 2026-11-21: "SurgX is not iPad optimised", it read stretched at 960px): one 700px reading column (renders wider under the app's iPad text scale),
+   and the top bar, section tabs, sticky bar and home hero line up with that same column instead of the screen edges. */
+@media (min-width: 700px) {
+  #surgxRoot .sgx-wrap { max-width: 700px; padding-left: 0; padding-right: 0; }
+  #surgxRoot .sgx-head,
+  #surgxRoot .sgx-tabs,
+  #surgxRoot .sgx-sticky { padding-left: max(16px, calc((100% - 700px) / 2)); padding-right: max(16px, calc((100% - 700px) / 2)); }
+  #surgxRoot .sgx-hero { max-width: 700px; padding-left: 0; padding-right: 0; }
+  #surgxRoot .sgx-hero-close { right: max(16px, calc((100% - 700px) / 2)); }
+}
