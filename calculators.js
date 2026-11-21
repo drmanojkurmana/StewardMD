@@ -8171,6 +8171,20 @@
     var M=window.SMD_MAIK_MARK, tile=M?M.html("tile",{size:32}):"";
     return '<span class="mc-maik-av" aria-hidden="true">'+(tile||'<img src="/assets/maik-mark-white.webp" width="22" height="22" alt="" draggable="false">')+'</span><span class="mc-maik-lbl">'+(M?M.label("Ask MaiK"):"Ask MaiK")+'</span>';
   }
+  // Row monogram (owner 2026-11-21): the calculator's own short code instead of a repeated category icon.
+  // A short bracketed abbreviation (QTc), else a leading capital run (CHA, TIMI), else word initials (MAP), else three letters (Oak).
+  var MONO_SKIP={the:1,of:1,for:1,and:1,in:1,a:1,to:1,with:1,score:1,calculator:1,on:1,by:1};
+  function calcMono(c){
+    var full=String(c.title||""), t=shortTitle(full), m;
+    if((m=/\(([A-Za-z][A-Za-z0-9]{1,4})\)\s*$/.exec(full))) return m[1];
+    if((m=/^([A-Z][A-Z0-9]{1,4})(?![a-z])/.exec(t))) return m[1];
+    var w=t.replace(/\s*\([^()]*\)\s*$/,"").split(/[^A-Za-z0-9]+/).filter(function(x){ return x && !MONO_SKIP[x.toLowerCase()]; });
+    if(!w.length) return t.slice(0,3);
+    if(w.length===1) return w[0].charAt(0).toUpperCase()+w[0].slice(1,3).toLowerCase();
+    var out="";
+    for(var i=0;i<w.length&&out.length<4;i++) out+=(/^[A-Z0-9]{2,}$/.test(w[i])&&i>0)?w[i]:w[i].charAt(0).toUpperCase();
+    return out.slice(0,4);
+  }
   function subFix(html){ return String(html).replace(/([\u2080-\u2089]+)/g, '<span class="mc-sub">$1</span>'); }
   function hlText(text){
     var t=String(text||""); if(!q) return esc(t);
@@ -8312,7 +8326,7 @@
         ? '<button class="mc-star on" data-fav="'+c.id+'" aria-pressed="true" aria-label="Remove from'+(W||" starred")+'">'+mcIco("star","mc-fav on")+'</button>'
         : '<span class="mc-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>';
       return '<div class="mc-card mc-row" data-id="'+c.id+'">'+
-        '<button class="mc-card-head mc-row-main" data-open="'+c.id+'"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t" title="'+esc(c.title)+'">'+subFix(hlText(shortTitle(c.title)))+'</span><span class="mc-card-d">'+hlText(c.desc)+'</span></span></button>'+tail+
+        '<button class="mc-card-head mc-row-main" data-open="'+c.id+'"><span class="mc-ic mc-mono'+(calcMono(c).length>3?" mc-mono4":"")+'" aria-hidden="true">'+esc(calcMono(c))+'</span><span class="mc-card-main"><span class="mc-card-t" title="'+esc(c.title)+'">'+subFix(hlText(shortTitle(c.title)))+'</span><span class="mc-card-d">'+hlText(c.desc)+'</span></span></button>'+tail+
       '</div>';
     }
     return '<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'">'+
@@ -9418,6 +9432,11 @@
       Q+" .mc-switch:not(.on){background:var(--a-seg)!important;box-shadow:inset 0 0 0 1px var(--a-line)}",
       Q+" .mc-score-src,"+Q+" .mc-bd-pt{color:var(--a-mut)!important}",
       Q+" .mc-seg-btn.on{box-shadow:0 1px 0 var(--a-edge),0 1px 3px var(--a-sh)!important}",
+      /* monogram tile: white, hairline, soft top-lit gradient and a 1px raised edge; forest serif letters */
+      Q+" .mc-ic.mc-mono{width:44px!important;height:40px!important;overflow:hidden;border-radius:10px!important;background:linear-gradient(180deg,#FFFFFF,#F7F2E7)!important;border:1px solid var(--a-line)!important;box-shadow:0 1px 0 var(--a-edge),0 2px 5px var(--a-sh)!important;color:var(--a-acc)!important;font:600 14px/1 var(--a-serif)!important;letter-spacing:-.01em;display:flex!important;align-items:center!important;justify-content:center!important;font-variant-numeric:lining-nums;flex:0 0 auto}",
+      Q+" .mc-ic.mc-mono.mc-mono4{font-size:11px!important;letter-spacing:-.03em}",
+      Q.replace("html body ","html body.dark ")+" .mc-ic.mc-mono,"+Q.replace("html body ","html body.v3-dark ")+" .mc-ic.mc-mono{background:linear-gradient(180deg,#223026,#18221B)!important}",
+      Q+" .mc-card.mc-row+.mc-card.mc-row:before{left:72px!important}",
       "@media(prefers-reduced-motion:reduce){"+Q+" .mc-fill-link,"+Q+" .mc-maik-btn,"+Q+" .mc-copy-btn,"+Q+" .mc-reset-btn,"+Q+" .mc-cats .mc-cat{transition:none!important}}"
     ].join("");
   }
