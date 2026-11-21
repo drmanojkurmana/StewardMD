@@ -12563,3 +12563,14 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
   84.8), so it is excluded. BGE-small/base and MedEmbed were measured and lost to EmbeddingGemma 2.
 - **Device risk**: 42.5 MB extra download and ~42 MB of int8 in memory while MaiK Lite answers; not yet
   measured on a phone.
+
+## 2026-11-22 - StewardMD Edge: Needle and FunctionGemma removed, rules only
+- **Owner**: "Remove Needle ... edge completely from app ... keep embedding gemma 2 only"; chose "Models only"
+  (keep the rule-based instant lookups and KB navigation).
+- **Decision**: delete the Needle plugin (npm, iOS SPM, Android gradle, MainActivity hook, preflight step,
+  device and native-host harnesses) and the FunctionGemma Edge pack; edge-router.js is rules only
+  (engineChoice() = "rules", no adapters, no warm-up); the Edge engine picker leaves Settings. Phones that had
+  FunctionGemma delete the 291 MB file once (maik-models.js purgeRetired, key smd_maik_retired_v1).
+- **Kept**: Layer 0 rules under `smd_edge`; EmbeddingGemma 2 search pack; scripts/edge dataset tooling (dev only).
+- **Side effect**: the "phone is hot" hint in MaiK read thermal state through Needle; it no longer shows.
+- **Native**: the Needle removal reaches phones only with the next store build; OTA carries the JS side.

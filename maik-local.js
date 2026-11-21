@@ -765,8 +765,8 @@
         .then(null, function () { return null; })
         .then(function () { return ensureLoaded(packId, loadOpts); });
     }
-    // SHARED PLUGIN: StewardMD Edge's FunctionGemma (edge-router.js llamaAdapter) loads into this same
-    // llama plugin and evicts our pack, while available().loaded still says true (ITS model is loaded).
+    // SHARED PLUGIN: another holder (SMD_LLAMA_HOLDER) may have evicted our pack while available().loaded
+    // still says true. (The Edge FunctionGemma holder was removed 2026-11-22; the check stays as a guard.)
     if (_loadedPack && _engine !== "mlx" && llamaHeldByOther()) { _loadedPack = null; _warmed = null; }
     if (_loadedPack === packId) {
       // The plugin drops the model on app pause, so confirm it is still resident before answering.
@@ -2099,13 +2099,8 @@
     var L = llama();
     _loadedPack = null;
     _warmed = null;
-    // Whoever held the plugin (Edge too) has nothing loaded after this; Edge reloads on its next call.
-    var wasMaik = false;
-    try { wasMaik = window.SMD_LLAMA_HOLDER === "maik"; window.SMD_LLAMA_HOLDER = null; } catch (e) {}
-    // MaiK is idle and has let go: Edge may warm FunctionGemma back up (it checks its own rules).
-    var edgeWarm = function () { try { if (wasMaik && window.SMD_EDGE && SMD_EDGE.warmSoon) SMD_EDGE.warmSoon(); } catch (e) {} };
-    if (L && L.release) { try { return Promise.resolve(L.release()).then(function (r) { edgeWarm(); return r; }); } catch (e) {} }
-    edgeWarm();
+    try { window.SMD_LLAMA_HOLDER = null; } catch (e) {}
+    if (L && L.release) { try { return Promise.resolve(L.release()); } catch (e) {} }
   }
 
   /* IDLE UNLOAD (owner, 2026-09-04): a 1 to 4 GB model must not sit resident, warming the phone and
