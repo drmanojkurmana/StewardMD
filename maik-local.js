@@ -1218,7 +1218,16 @@
     var KB = (typeof window !== "undefined") && window.SMD_MAIK_KB_STORE;
     if (!RAG || !KB) return Promise.resolve(null);
     var rt = routerToks(topic);
+    /* Meaning search (kb/ai/maik-book-vec.js, flag smd_maik_book_vec, default off) joins ONLY when
+     * the router named no disease: measured, it lifts router-miss key points 49.0% -> 54.5% and
+     * does nothing useful when the router matched. Any missing piece yields null = keyword only. */
+    var BV = (typeof window !== "undefined") && window.SMD_MAIK_BOOK_VEC;
+    var useVec = !rt.length && !!(BV && BV.available());
     return KB.loadBook(RAG).then(function (bk) {
+      if (!useVec) return [bk, null];
+      return BV.topRows(question, BV.POOL, bk.rows).then(function (d) { return [bk, d]; }, function () { return [bk, null]; });
+    }).then(function (pair) {
+      var bk = pair[0], dense = pair[1];
       var A = anchorsFor(bk, RAG, question);
       if (!A || !A.topic) A = { topic: A || [], drugs: [], mods: [] };
       // Router anchors first: the disease the router named is the strongest evidence of topic.
@@ -1241,7 +1250,8 @@
       if (expansion.length) q += " " + expansion.slice(0, 4).join(" ");
       // Search wider than we keep: the relevant passages are often ranks 2-8 behind a glossary
       // chapter that matches every word. The rerank below is what picks from this pool.
-      var hits = bk.search(q, RAG.TOPK * 4);
+      var hits = dense ? BV.fuse(bk.search(q, BV.POOL), dense, RAG.TOPK * 4, RAG.MIN_SCORE)
+                       : bk.search(q, RAG.TOPK * 4);
       if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
       // A value question also searches its own words: the expansion ("valve") pushed the passage with
       // "target INR of 2.5-3.5" out of the pool. Value questions only, so other answers are unchanged.

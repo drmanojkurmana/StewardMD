@@ -12549,3 +12549,17 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
   86.0) and ~5 on cancer (42.7 -> 49.8); BGE-base and MedEmbed-small did no better. Next step is only a
   check that the app's llama.cpp build can run BGE-small embeddings on the phone.
 - **Copyright**: notes are rewritten facts, not copied text; the owner made the call.
+
+## 2026-11-21 - MaiK Lite: meaning search over the book only when the router misses (smd_maik_book_vec)
+- **Owner**: "Ok" to building the targeted hybrid and uploading its vectors.
+- **Decision**: `kb/ai/maik-book-vec.js` + one hook in `maik-local.js` retrieveGrounding. When the router
+  named NO disease, the keyword pool is fused (RRF, k=60) with the 30 nearest book rows by EmbeddingGemma 2
+  (the existing On-phone search pack). When the router named a disease, nothing changes.
+  Vectors: `maik-lite-kb-onco1.vec-q8.{i8,json}` on models.stewardmd.in (55,385 x 768 int8, 42.5 MB,
+  built with the phone's exact prefixes; tied to the onco1 book sha). Default OFF; needs flag "1" +
+  `smd_maik_kb_onco` book + search pack + native embed; any missing piece = keyword only.
+- **Why**: real maik-local + hosted vectors on the 54-case bench, router-miss path: 47.0% -> 54.8%
+  (fully covered 11 -> 14). Cancer questions 42.7% -> 50.6%. Router-matched path measured flat (85.4 ->
+  84.8), so it is excluded. BGE-small/base and MedEmbed were measured and lost to EmbeddingGemma 2.
+- **Device risk**: 42.5 MB extra download and ~42 MB of int8 in memory while MaiK Lite answers; not yet
+  measured on a phone.
