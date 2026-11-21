@@ -1,0 +1,250 @@
+{
+  "id": "escharotomy",
+  "title": "Escharotomy for circumferential burns",
+  "subtitle": "Releasing constricting full-thickness burn eschar on the limbs and chest",
+  "system": "skin and soft tissue",
+  "aliases": [
+    "escharotomy",
+    "burn escharotomy",
+    "chest escharotomy",
+    "limb escharotomy"
+  ],
+  "estMinutes": 45,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "isbi-2016",
+      "org": "ISBI Practice Guidelines Committee. Burns 42:953",
+      "title": "ISBI Practice Guidelines for Burn Care",
+      "year": 2016,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=ISBI+Practice+Guidelines+for+Burn+Care",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "orgill-2009",
+      "org": "Orgill DP, Piccolo N. J Burn Care Res 30:759",
+      "title": "Escharotomy and decompressive therapies in burns",
+      "year": 2009,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Escharotomy+and+decompressive+therapies+in+burns",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Circumferential or near-circumferential full-thickness burn of a limb with impaired distal perfusion (or at high risk during resuscitation).",
+      "Full-thickness burn of the chest or abdomen restricting ventilation (rising airway pressures, falling tidal volumes) or causing abdominal compartment problems."
+    ],
+    "contraindications": [
+      "Partial-thickness burns that are not constricting.",
+      "Prophylactic escharotomy without indication, outside agreed protocols for transfer."
+    ],
+    "preparation": [
+      "Assess depth and extent; check perfusion (capillary refill, Doppler, pulse oximetry on the digits) and ventilation repeatedly during resuscitation.",
+      "Discuss with the burns centre; often they advise before transfer.",
+      "Mark the lines; plan analgesia or anaesthesia (eschar is insensate, but the edges and deeper tissues are not)."
+    ],
+    "positioning": [
+      "Supine, limbs abducted on boards, burns kept warm; the theatre or resuscitation bay warm."
+    ],
+    "equipment": [
+      "Scalpel or electrocautery with a needle tip, bipolar, haemostatic dressings, antimicrobial burn dressings, Doppler probe."
+    ],
+    "anatomy": [
+      "Limbs: mid-medial and mid-lateral lines; at the elbow and knee the lines pass anterior to the medial epicondyle (ulnar nerve) and posterior to the fibular head (common peroneal nerve).",
+      "Chest: anterior axillary lines joined across the costal margin and upper chest to make a mobile shield."
+    ],
+    "criticalSafety": [
+      "Cut through the full thickness of eschar into fat, along the whole constricted length, across joints.",
+      "Avoid the ulnar nerve at the elbow and the common peroneal nerve at the fibular head.",
+      "Re-assess perfusion afterwards; a persistent problem may need fasciotomy."
+    ],
+    "structuresAtRisk": [
+      "Ulnar nerve",
+      "Common peroneal nerve",
+      "Superficial veins",
+      "Digital neurovascular bundles (hand)"
+    ],
+    "commonErrors": [
+      "An incision that is too shallow or stops short of the constriction.",
+      "Cutting the ulnar or common peroneal nerve.",
+      "Missing a compartment syndrome that needs fasciotomy."
+    ],
+    "complications": [
+      "Bleeding.",
+      "Infection of the wounds.",
+      "Nerve injury.",
+      "Incomplete release."
+    ],
+    "postop": [
+      "Elevate the limbs; continue resuscitation by formula and urine output.",
+      "Repeat perfusion checks hourly.",
+      "Antimicrobial dressings; the incisions are included in later excision and grafting."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Often an emergency: record a best-interests decision if the patient cannot consent."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis",
+      "emphasis": "Routine systemic antibiotics are not indicated for burns; tetanus status checked."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine, limbs out on boards, keep the patient warm."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.esc.indication"
+    },
+    {
+      "ref": "step.esc.limb"
+    },
+    {
+      "ref": "step.esc.hand"
+    },
+    {
+      "ref": "step.esc.chest"
+    },
+    {
+      "ref": "step.esc.release-check"
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "Bipolar or electrocautery on bleeding points in the fat; escharotomies can bleed more than expected."
+    },
+    {
+      "ref": "step.st.pack",
+      "emphasis": "Cover the incisions with an antimicrobial burn dressing; do not pack tightly."
+    },
+    {
+      "ref": "step.ortho.nv-check",
+      "emphasis": "Re-check perfusion distally and record it."
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.esc.indication": {
+      "id": "step.esc.indication",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Confirming the indication and marking the lines",
+      "why": "Escharotomy is for constriction by full-thickness burn; doing it on partial-thickness burns adds wounds without benefit, and missing it costs limbs or ventilation.",
+      "how": [
+        "Confirm a full-thickness circumferential burn and the evidence of constriction (perfusion, ventilation).",
+        "Mark the lines with the limb in the anatomical position: mid-medial and mid-lateral.",
+        "Agree analgesia or anaesthesia with the anaesthetist."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Treating swelling of a partial-thickness burn as constriction."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.esc.limb": {
+      "id": "step.esc.limb",
+      "kind": "resection",
+      "critical": true,
+      "title": "Limb escharotomy",
+      "why": "The incision must go through the whole eschar into the fat, along the whole constricted segment, so the tissue can spring apart.",
+      "how": [
+        "Incise along the mid-lateral and, if needed, mid-medial lines, from normal skin above to normal skin below.",
+        "Deepen through eschar until fat bulges and the edges separate; do not cut into the deep fascia unless a fasciotomy is intended.",
+        "Cross joints: at the elbow pass anterior to the medial epicondyle, at the knee posterior to the fibular head."
+      ],
+      "structuresAtRisk": [
+        "Ulnar nerve",
+        "Common peroneal nerve",
+        "Superficial veins"
+      ],
+      "pitfalls": [
+        "Stopping short of the constricted segment.",
+        "A shallow cut through only part of the eschar."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.esc.hand": {
+      "id": "step.esc.hand",
+      "kind": "resection",
+      "title": "Hand and digit escharotomy (when needed)",
+      "why": "The hand is the most common place for an escharotomy to be needed and also the easiest place to injure nerves and tendons. It is done by, or with, someone experienced.",
+      "how": [
+        "Release the dorsum of the hand with incisions over the second and fourth intermetacarpal spaces.",
+        "Release digits along the mid-lateral line on the non-contact side (ulnar side of the index to ring fingers, radial side of the thumb and little finger), keeping dorsal to the neurovascular bundle.",
+        "Get burns-centre advice if unsure."
+      ],
+      "structuresAtRisk": [
+        "Digital neurovascular bundles",
+        "Extensor tendons"
+      ],
+      "pitfalls": [
+        "Volar incisions on the digits.",
+        "Cutting the neurovascular bundles."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.esc.chest": {
+      "id": "step.esc.chest",
+      "kind": "resection",
+      "title": "Chest and abdominal escharotomy",
+      "why": "A stiff burned chest wall cannot expand; releasing it as a mobile shield restores ventilation within minutes.",
+      "how": [
+        "Incise along both anterior axillary lines from the clavicle level down to the costal margin.",
+        "Join them with a transverse incision along the costal margin, and across the upper chest if needed; extend onto the abdomen if it is also constricted.",
+        "Watch the airway pressures and tidal volumes improve with the anaesthetist."
+      ],
+      "structuresAtRisk": [
+        "Breast tissue",
+        "Intercostal vessels (deep cuts)"
+      ],
+      "pitfalls": [
+        "Only longitudinal lines with no transverse release."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.esc.release-check": {
+      "id": "step.esc.release-check",
+      "kind": "checkpoint",
+      "title": "Checking the release worked",
+      "why": "Perfusion should improve within minutes. If it does not, the problem is deeper: compartment syndrome under the fascia needs a fasciotomy.",
+      "how": [
+        "Re-check capillary refill, Doppler signals and digit oximetry, and the ventilation pressures.",
+        "If perfusion remains poor, measure compartment pressures or proceed to fasciotomy, with burns or plastics advice.",
+        "Record the findings and the times."
+      ],
+      "structuresAtRisk": [
+        "Muscle compartments"
+      ],
+      "pitfalls": [
+        "Assuming the escharotomy is enough when perfusion has not returned."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

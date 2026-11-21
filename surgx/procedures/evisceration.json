@@ -1,0 +1,247 @@
+{
+  "id": "evisceration",
+  "title": "Evisceration with orbital implant",
+  "subtitle": "Removal of the eye contents, scleral shell with implant and conformer",
+  "system": "ophthalmic",
+  "aliases": [
+    "evisceration",
+    "evisceration of the eye",
+    "removal of eye contents"
+  ],
+  "estMinutes": 75,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "phan-2012",
+      "org": "Phan LT, Hwang TN, McCulley TJ. Middle East Afr J Ophthalmol 19:24",
+      "title": "Evisceration in the modern age",
+      "year": 2012,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Evisceration+in+the+modern+age",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "A blind painful eye not controlled medically.",
+      "Endophthalmitis not responding to treatment in a blind eye.",
+      "A disfiguring blind eye (phthisis) after counselling."
+    ],
+    "contraindications": [
+      "Suspected intraocular malignancy: enucleation is required, not evisceration.",
+      "An eye with useful vision.",
+      "Inadequate counselling or consent."
+    ],
+    "preparation": [
+      "Confirm no perception of light (or that the patient accepts its loss), and rule out a tumour: ultrasound B-scan when the fundus cannot be seen.",
+      "Counsel about the prosthesis, sympathetic ophthalmia, implant exposure or extrusion, and the irreversibility.",
+      "Mark the eye and photograph it; the wrong eye is the most catastrophic error in this specialty."
+    ],
+    "positioning": [
+      "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    ],
+    "equipment": [
+      "Evisceration spoon, Westcott and enucleation scissors, toothed and non-toothed forceps, scleral blades, absolute alcohol on sponges (per technique), orbital implant sizers and implant, absorbable sutures, conformer, pressure dressing."
+    ],
+    "anatomy": [
+      "The sclera with its posterior emissary canals and the optic nerve, the uveal tract (choroid, ciliary body, iris) which must be removed completely, Tenon's capsule, the four recti attached to the sclera (preserved, giving prosthesis movement)."
+    ],
+    "criticalSafety": [
+      "Wrong-eye prevention: mark, confirm at sign-in and time-out, and look at the mark again before the first cut.",
+      "Remove all uveal tissue to lower the risk of sympathetic ophthalmia.",
+      "Never eviscerate an eye that may contain a tumour."
+    ],
+    "structuresAtRisk": [
+      "Fellow eye (wrong eye)",
+      "Extraocular muscles",
+      "Orbital fat"
+    ],
+    "commonErrors": [
+      "Operating on the wrong eye.",
+      "Leaving uveal tissue behind.",
+      "An oversized implant under tension that later extrudes."
+    ],
+    "complications": [
+      "Implant exposure or extrusion.",
+      "Orbital infection, haemorrhage.",
+      "Socket contraction.",
+      "Sympathetic ophthalmia (rare)."
+    ],
+    "postop": [
+      "Pressure dressing for one to several days; antibiotic cover per protocol.",
+      "Analgesia and anti-emetics; the first days are often painful.",
+      "Conformer in place until the prosthesis is fitted (about six weeks)."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Mark the eye clearly and confirm with the patient and the notes; check the B-scan excluding a tumour is in the notes."
+    },
+    {
+      "ref": "step.core.timeout",
+      "emphasis": "Read the eye aloud twice and look at the mark: wrong-eye removal is a never event."
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.eye.anaesthesia",
+      "emphasis": "General anaesthesia with a long-acting retrobulbar or peribulbar block for post-operative pain."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    },
+    {
+      "ref": "step.eye.povidone-iodine"
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.eye.lid-speculum"
+    },
+    {
+      "ref": "step.eye.conj-peritomy",
+      "emphasis": "A 360 degree peritomy at the limbus, freeing Tenon's from the anterior sclera."
+    },
+    {
+      "ref": "step.evis.keratectomy"
+    },
+    {
+      "ref": "step.evis.contents"
+    },
+    {
+      "ref": "step.evis.implant"
+    },
+    {
+      "ref": "step.evis.closure"
+    },
+    {
+      "ref": "step.eye.conj-closure",
+      "emphasis": "Close conjunctiva as a separate layer over Tenon's, without tension."
+    },
+    {
+      "ref": "step.core.specimen",
+      "emphasis": "Send the contents for histology."
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.evis.conformer"
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.evis.keratectomy": {
+      "id": "step.evis.keratectomy",
+      "kind": "access",
+      "title": "Removing the cornea",
+      "why": "Removing the cornea gives access to the contents and allows the scleral shell to close without tension over the implant.",
+      "how": [
+        "Enter the anterior chamber at the limbus and excise the cornea circumferentially."
+      ],
+      "structuresAtRisk": [
+        "Sclera"
+      ],
+      "pitfalls": [
+        "An irregular excision that makes closure difficult."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.evis.contents": {
+      "id": "step.evis.contents",
+      "kind": "resection",
+      "critical": true,
+      "title": "Removing the intraocular contents completely",
+      "why": "Retained uveal tissue is linked to sympathetic ophthalmia in the remaining eye. Complete clearance of the shell is the purpose of this step.",
+      "how": [
+        "Separate the uvea from the sclera with an evisceration spoon, working round the whole circumference to the optic nerve.",
+        "Lift out the contents in one piece where possible.",
+        "Clean the inner sclera of residual pigment with gauze, and with absolute alcohol on a sponge if used (protecting surrounding tissue), then irrigate."
+      ],
+      "structuresAtRisk": [
+        "Sclera (perforation)",
+        "Optic nerve stump"
+      ],
+      "pitfalls": [
+        "Leaving pigmented uveal tissue."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.evis.implant": {
+      "id": "step.evis.implant",
+      "kind": "reconstruction",
+      "title": "Sizing and placing the orbital implant",
+      "why": "The implant replaces volume so the prosthesis sits level with the other eye. Too large and it extrudes; too small and the socket looks sunken.",
+      "how": [
+        "Make relaxing sclerotomies posteriorly if needed to fit a larger implant.",
+        "Size with sizers and choose the implant that fits without tension.",
+        "Insert it into the scleral shell (or behind posterior sclera, per technique)."
+      ],
+      "structuresAtRisk": [
+        "Sclera (tension)"
+      ],
+      "pitfalls": [
+        "An oversized implant."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.evis.closure": {
+      "id": "step.evis.closure",
+      "kind": "closure",
+      "title": "Closing the sclera and Tenon's",
+      "why": "Layered closure over the implant is the barrier against exposure and extrusion.",
+      "how": [
+        "Close the sclera over the implant with absorbable sutures, overlapping or edge to edge without tension.",
+        "Close Tenon's as a separate layer over it."
+      ],
+      "structuresAtRisk": [
+        "Implant (exposure)"
+      ],
+      "pitfalls": [
+        "Closure under tension."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.evis.conformer": {
+      "id": "step.evis.conformer",
+      "kind": "closure",
+      "title": "Conformer and pressure dressing",
+      "why": "The conformer holds the fornices open so a prosthesis can be fitted later; the pressure dressing limits swelling and bleeding.",
+      "how": [
+        "Insert a conformer of suitable size into the fornices.",
+        "Apply antibiotic ointment and a firm pressure dressing.",
+        "Arrange the prosthesis referral and the dressing removal date."
+      ],
+      "structuresAtRisk": [
+        "Fornices (contraction)"
+      ],
+      "pitfalls": [
+        "No conformer, leading to a contracted socket."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

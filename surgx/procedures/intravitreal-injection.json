@@ -1,0 +1,197 @@
+{
+  "id": "intravitreal-injection",
+  "title": "Intravitreal anti-VEGF injection",
+  "subtitle": "Asepsis, pars plana injection and a perfusion check",
+  "system": "ophthalmic",
+  "aliases": [
+    "intravitreal injection",
+    "IVI",
+    "anti-VEGF injection",
+    "ranibizumab injection",
+    "aflibercept injection",
+    "bevacizumab injection"
+  ],
+  "estMinutes": 10,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "avery-2014",
+      "org": "Avery RL et al. Retina 34 Suppl 12:S1",
+      "title": "Intravitreal injection technique and monitoring: updated guidelines of an expert panel",
+      "year": 2014,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Intravitreal+injection+technique+and+monitoring%3A+updated+guidelines+of+an+expert+panel",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "rcophth-ivi",
+      "org": "Royal College of Ophthalmologists",
+      "title": "Intravitreal Injection Therapy guidelines",
+      "year": 2018,
+      "url": "https://www.rcophth.ac.uk/resources-listing/intravitreal-injection-therapy/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Neovascular age-related macular degeneration.",
+      "Diabetic macular oedema and proliferative diabetic retinopathy (selected).",
+      "Macular oedema from retinal vein occlusion; myopic choroidal neovascularisation; other indications per protocol."
+    ],
+    "contraindications": [
+      "Active ocular or periocular infection (blepharitis with discharge, conjunctivitis).",
+      "Known hypersensitivity to the drug."
+    ],
+    "preparation": [
+      "Confirm the indication, drug and dose from the treatment plan and today's imaging; check the eye.",
+      "Check recent cardiovascular events per drug guidance; check pregnancy where relevant.",
+      "Consent: endophthalmitis (rare but sight-threatening), raised pressure, retinal tear or detachment, cataract from lens touch, subconjunctival haemorrhage, floaters."
+    ],
+    "positioning": [
+      "Supine or reclined with the head supported and the eye looking slightly away from the injection site."
+    ],
+    "equipment": [
+      "Lid speculum, povidone-iodine 5%, topical anaesthetic, the drug in a prefilled syringe or drawn up with a filter needle, a 30G needle, calipers, sterile cotton buds."
+    ],
+    "anatomy": [
+      "The pars plana, about 3.5 to 4 mm behind the limbus, is between the ciliary body in front and the retina behind: entering there avoids both the lens and the retina."
+    ],
+    "criticalSafety": [
+      "Right patient, right eye, right drug.",
+      "Povidone-iodine 5% and no lash contact with the needle.",
+      "Check the optic disc is perfused afterwards."
+    ],
+    "structuresAtRisk": [
+      "Lens",
+      "Retina",
+      "Optic nerve (perfusion)"
+    ],
+    "commonErrors": [
+      "A needle touching the lashes.",
+      "Injecting through the limbus or too far back.",
+      "Not checking perfusion in a glaucomatous eye."
+    ],
+    "complications": [
+      "Endophthalmitis.",
+      "Raised pressure and central retinal artery occlusion.",
+      "Lens injury, retinal tear or detachment.",
+      "Subconjunctival haemorrhage."
+    ],
+    "postop": [
+      "Usually no pad; lubricants as needed.",
+      "Same-day return for increasing pain, redness or falling vision in the days after.",
+      "Next injection and review per the treatment protocol."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Confirm the eye against the treatment plan; patients with bilateral disease are a wrong-eye risk."
+    },
+    {
+      "ref": "step.core.timeout",
+      "emphasis": "Read the patient, eye, drug, dose and batch aloud."
+    },
+    {
+      "ref": "step.eye.anaesthesia",
+      "emphasis": "Topical drops, with a pledget or subconjunctival local if preferred."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine or reclined, head supported, the eye looking away from the injection quadrant."
+    },
+    {
+      "ref": "step.eye.povidone-iodine",
+      "emphasis": "Povidone-iodine 5% to the conjunctiva and the injection site, and to the lid margins; masks or no talking to limit droplets."
+    },
+    {
+      "ref": "step.eye.lid-speculum",
+      "emphasis": "A speculum keeps lashes and lid margins away from the needle."
+    },
+    {
+      "ref": "step.ivi.site"
+    },
+    {
+      "ref": "step.ivi.inject"
+    },
+    {
+      "ref": "step.ivi.perfusion"
+    },
+    {
+      "ref": "step.eye.shield-postop",
+      "emphasis": "Explain the endophthalmitis warning signs for the coming days and give the emergency number."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.ivi.site": {
+      "id": "step.ivi.site",
+      "kind": "access",
+      "title": "Choosing and marking the injection site",
+      "why": "The pars plana window is narrow: too anterior hits the ciliary body or lens, too posterior risks the retina.",
+      "how": [
+        "Measure 3.5 to 4 mm from the limbus with calipers (3.5 mm in pseudophakic eyes, 4 mm in phakic eyes), usually inferotemporal.",
+        "Reapply povidone-iodine to the marked site."
+      ],
+      "structuresAtRisk": [
+        "Lens",
+        "Ciliary body",
+        "Retina"
+      ],
+      "pitfalls": [
+        "Estimating the distance by eye."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ivi.inject": {
+      "id": "step.ivi.inject",
+      "kind": "resection",
+      "critical": true,
+      "title": "Injecting the drug",
+      "why": "A controlled, slow injection with the needle aimed at the centre of the globe avoids the lens and the retina and limits reflux.",
+      "how": [
+        "Steady the globe; insert the 30G needle perpendicular to the sclera, aimed towards the centre of the eye.",
+        "Inject the dose slowly, withdraw the needle, and press the site briefly with a sterile cotton bud to limit reflux."
+      ],
+      "structuresAtRisk": [
+        "Lens",
+        "Retina"
+      ],
+      "pitfalls": [
+        "Aiming towards the lens in a phakic eye.",
+        "Touching the needle to the lashes or lids."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ivi.perfusion": {
+      "id": "step.ivi.perfusion",
+      "kind": "checkpoint",
+      "title": "Perfusion and pressure check",
+      "why": "The injected volume raises the eye pressure briefly; in a glaucomatous eye it can stop the central retinal artery. A quick check of vision and the optic disc finds this before the patient leaves.",
+      "how": [
+        "Ask the patient to count fingers or see hand movements, or look at the optic disc for perfusion.",
+        "Measure the pressure if vision is poor or the eye has glaucoma.",
+        "If the artery is not perfused, lower the pressure (anterior chamber paracentesis by a trained doctor, pressure-lowering drugs) and recheck."
+      ],
+      "structuresAtRisk": [
+        "Optic nerve and central retinal artery"
+      ],
+      "pitfalls": [
+        "Sending the patient home without checking vision."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

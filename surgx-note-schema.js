@@ -1710,7 +1710,263 @@
           f("cavityClips", "Cavity clips placed", {"type": "text", "aiFillable": false, "ph": "Number and position"})
         ]
       }
-    }
+    },
+    "phacoemulsification": {
+      base: "operative", title: "Phacoemulsification with foldable lens implant",
+      prefill: {"procedure": "Phacoemulsification with foldable intraocular lens implant"},
+      extra: {
+        "Operative detail": [
+          f("operativeEye", "Operative eye", {"type": "text", "required": true, "aiFillable": false, "ph": "Right / Left"}),
+          f("anaesthesiaType", "Anaesthesia", {"type": "text", "required": true, "aiFillable": true, "ph": "Topical + intracameral / sub-Tenon / peribulbar / GA"}),
+          f("iolImplant", "Implant: model, power, placement, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "ph": "Model, power (D), in the bag / sulcus, sticker", "rows": 2, "help": "Copy from the implant sticker. A physical record, never AI-filled."}),
+          f("capsuleIntegrity", "Posterior capsule and vitreous", {"type": "text", "required": true, "aiFillable": false, "ph": "Intact / tear, vitreous loss, anterior vitrectomy"}),
+          f("intracameralDrug", "Intracameral antibiotic: drug, dose and batch", {"type": "text", "required": true, "aiFillable": false, "ph": "Cefuroxime 1 mg / 0.1 mL, batch"}),
+          f("woundSealed", "Wounds sealed, pressure", {"type": "text", "required": false, "aiFillable": true, "ph": "Self-sealing, Seidel negative, pressure normal"})
+        ]
+      }
+    },
+    "manual-sics": {
+      base: "operative", title: "Manual small-incision cataract surgery (SICS)",
+      prefill: {"procedure": "Manual small-incision cataract surgery with intraocular lens implant"},
+      extra: {
+        "Operative detail": [
+          f("operativeEye", "Operative eye", {"type": "text", "required": true, "aiFillable": false, "ph": "Right / Left"}),
+          f("tunnelDetail", "Tunnel: site, external length, entry", {"type": "text", "required": true, "aiFillable": true, "ph": "Superior / temporal, 6.5 mm, self-sealing"}),
+          f("deliveryMethod", "Nucleus delivery", {"type": "text", "required": true, "aiFillable": true, "ph": "Irrigating vectis / viscoexpression / fish hook"}),
+          f("iolImplant", "Implant: model, power, placement, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "ph": "Model, power (D), in the bag / sulcus / AC", "rows": 2, "help": "Copy from the implant sticker. A physical record, never AI-filled."}),
+          f("capsuleIntegrity", "Posterior capsule and vitreous", {"type": "text", "required": true, "aiFillable": false, "ph": "Intact / tear, vitreous loss, anterior vitrectomy"}),
+          f("intracameralDrug", "Intracameral antibiotic: drug, dose and batch", {"type": "text", "required": true, "aiFillable": false})
+        ]
+      }
+    },
+    "trabeculectomy": {
+      base: "operative", title: "Trabeculectomy with mitomycin C",
+      prefill: {"procedure": "Trabeculectomy with mitomycin C"},
+      extra: {
+        "Operative detail": [
+          f("operativeEye", "Operative eye", {"type": "text", "required": true, "aiFillable": false, "ph": "Right / Left"}),
+          f("mmcDetail", "Mitomycin C: concentration, time, sponges counted out", {"type": "text", "required": true, "aiFillable": false, "ph": "0.2 mg/mL, 2 min, 3 sponges in and out"}),
+          f("flapSutures", "Flap sutures: number, releasable or adjustable", {"type": "text", "required": true, "aiFillable": true, "ph": "2 fixed + 2 releasable 10-0 nylon"}),
+          f("conjClosure", "Conjunctival closure and Seidel test", {"type": "text", "required": true, "aiFillable": false, "ph": "Watertight, Seidel negative"}),
+          f("endPressure", "Chamber depth and pressure at the end", {"type": "text", "required": false, "aiFillable": true, "ph": "Deep, pressure normal to palpation"})
+        ]
+      }
+    },
+    "prk": {
+      base: "operative", title: "Photorefractive keratectomy (PRK)",
+      prefill: {"procedure": "Photorefractive keratectomy"},
+      extra: {
+        "Operative detail": [
+          f("operativeEye", "Eye(s) treated", {"type": "text", "required": true, "aiFillable": false, "ph": "Right / Left / Both"}),
+          f("treatmentProfile", "Laser treatment: refraction entered, optical zone, ablation depth", {"type": "textarea", "required": true, "aiFillable": false, "ph": "Copied from the laser printout", "rows": 2}),
+          f("epitheliumMethod", "Epithelial removal", {"type": "text", "required": true, "aiFillable": true, "ph": "Alcohol 20% / brush / transepithelial"}),
+          f("mmcDetail", "Mitomycin C: concentration and time (or none)", {"type": "text", "required": true, "aiFillable": false, "ph": "0.02%, 15 s / none"}),
+          f("trackingEvents", "Tracking loss or interruption", {"type": "text", "required": false, "aiFillable": true, "ph": "None / percentage completed and action"})
+        ]
+      }
+    },
+    "lasik": {
+      base: "operative", title: "Laser in situ keratomileusis (LASIK)",
+      prefill: {"procedure": "Laser in situ keratomileusis"},
+      extra: {
+        "Operative detail": [
+          f("operativeEye", "Eye(s) treated", {"type": "text", "required": true, "aiFillable": false, "ph": "Right / Left / Both"}),
+          f("flapDetail", "Flap: device, thickness, diameter, hinge", {"type": "text", "required": true, "aiFillable": false, "ph": "Femtosecond, 110 microns, 9.0 mm, superior hinge"}),
+          f("treatmentProfile", "Laser treatment: refraction entered, optical zone, ablation depth, residual bed", {"type": "textarea", "required": true, "aiFillable": false, "ph": "Copied from the laser printout", "rows": 2}),
+          f("flapEvents", "Flap or suction events", {"type": "text", "required": false, "aiFillable": true, "ph": "None / suction loss, action"}),
+          f("interfaceCheck", "Flap position and interface at the end", {"type": "text", "required": true, "aiFillable": true, "ph": "Aligned, no striae, clean interface"})
+        ]
+      }
+    },
+    "pterygium-excision-autograft": {
+      base: "operative", title: "Pterygium excision with conjunctival autograft",
+      prefill: {"procedure": "Pterygium excision with conjunctival autograft"},
+      extra: {
+        "Operative detail": [
+          f("operativeEye", "Operative eye and side", {"type": "text", "required": true, "aiFillable": false, "ph": "Right nasal / Left nasal / temporal"}),
+          f("cornealExtent", "Extent onto the cornea", {"type": "text", "required": false, "aiFillable": true, "ph": "mm from the limbus"}),
+          f("graftDetail", "Graft: size, donor site, fixation", {"type": "text", "required": true, "aiFillable": true, "ph": "8 x 6 mm, superior, fibrin glue"}),
+          f("specimenSent", "Specimen sent for histology", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No"})
+        ]
+      }
+    },
+    "intravitreal-injection": {
+      base: "operative", title: "Intravitreal anti-VEGF injection",
+      prefill: {"procedure": "Intravitreal injection"},
+      extra: {
+        "Operative detail": [
+          f("operativeEye", "Eye injected", {"type": "text", "required": true, "aiFillable": false, "ph": "Right / Left"}),
+          f("drugDose", "Drug, dose and batch number", {"type": "text", "required": true, "aiFillable": false, "ph": "Aflibercept 2 mg / 0.05 mL, batch"}),
+          f("injectionSite", "Site and distance from the limbus", {"type": "text", "required": true, "aiFillable": true, "ph": "Inferotemporal, 4.0 mm"}),
+          f("postCheck", "Post-injection vision and perfusion", {"type": "text", "required": true, "aiFillable": false, "ph": "Counts fingers, disc perfused"})
+        ]
+      }
+    },
+    "external-dcr": {
+      base: "operative", title: "External dacryocystorhinostomy",
+      prefill: {"procedure": "External dacryocystorhinostomy"},
+      extra: {
+        "Operative detail": [
+          f("operativeSide", "Side", {"type": "text", "required": true, "aiFillable": false, "ph": "Right / Left"}),
+          f("ostiumSize", "Ostium size", {"type": "text", "required": true, "aiFillable": true, "ph": "about 15 x 15 mm"}),
+          f("flapsTubes", "Flaps sutured and tubes", {"type": "text", "required": true, "aiFillable": true, "ph": "Anterior and posterior flaps; silicone tubes yes / no"}),
+          f("packsCount", "Nasal packs and swab count", {"type": "text", "required": true, "aiFillable": false, "ph": "Packs in and out, count correct"}),
+          f("sacFindings", "Sac findings and specimen", {"type": "text", "required": false, "aiFillable": false, "ph": "Normal / stone / mass, biopsy sent"})
+        ]
+      }
+    },
+    "chalazion-incision-curettage": {
+      base: "operative", title: "Chalazion incision and curettage",
+      prefill: {"procedure": "Incision and curettage of chalazion"},
+      extra: {
+        "Operative detail": [
+          f("lidSite", "Lid and site", {"type": "text", "required": true, "aiFillable": false, "ph": "Right upper lid, central"}),
+          f("contents", "Contents found", {"type": "text", "required": false, "aiFillable": true, "ph": "Gelatinous / firm / atypical"}),
+          f("specimenSent", "Specimen sent for histology", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No, reason"})
+        ]
+      }
+    },
+    "corneal-foreign-body-removal": {
+      base: "operative", title: "Corneal and subtarsal foreign body removal",
+      prefill: {"procedure": "Removal of corneal or subtarsal foreign body"},
+      extra: {
+        "Operative detail": [
+          f("operativeEye", "Eye", {"type": "text", "required": true, "aiFillable": false, "ph": "Right / Left"}),
+          f("mechanism", "Mechanism of injury", {"type": "text", "required": true, "aiFillable": true, "ph": "Grinding metal / wind-blown / unknown"}),
+          f("seidelResult", "Seidel test before and after", {"type": "text", "required": true, "aiFillable": false, "ph": "Negative / positive"}),
+          f("defectSize", "Site, depth and epithelial defect size", {"type": "text", "required": true, "aiFillable": true, "ph": "Paracentral, superficial, 1 mm"}),
+          f("rustRing", "Rust ring", {"type": "text", "required": false, "aiFillable": true, "ph": "None / removed / residual for review"})
+        ]
+      }
+    },
+    "evisceration": {
+      base: "operative", title: "Evisceration with orbital implant",
+      prefill: {"procedure": "Evisceration with orbital implant"},
+      extra: {
+        "Operative detail": [
+          f("operativeEye", "Eye eviscerated (confirmed at time-out)", {"type": "text", "required": true, "aiFillable": false, "ph": "Right / Left"}),
+          f("tumourExcluded", "Tumour excluded before surgery", {"type": "text", "required": true, "aiFillable": false, "ph": "B-scan date and result"}),
+          f("implantDetail", "Orbital implant: type, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "help": "Copy from the implant sticker."}),
+          f("uveaRemoved", "Uveal tissue cleared", {"type": "text", "required": true, "aiFillable": true, "ph": "Complete, alcohol used yes / no"}),
+          f("specimenSent", "Specimen sent for histology", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No"})
+        ]
+      }
+    },
+    "strabismus-recession-resection": {
+      base: "operative", title: "Strabismus surgery: rectus recession and resection",
+      prefill: {"procedure": "Strabismus surgery"},
+      extra: {
+        "Operative detail": [
+          f("musclePlan", "Muscles and amounts (each eye)", {"type": "textarea", "required": true, "aiFillable": false, "ph": "RE medial rectus recession 5.0 mm; RE lateral rectus resection 6.0 mm", "rows": 2}),
+          f("forcedDuction", "Forced duction findings", {"type": "text", "required": true, "aiFillable": true, "ph": "Free / restricted (direction)"}),
+          f("sutureTechnique", "Suture and technique", {"type": "text", "required": true, "aiFillable": true, "ph": "6-0 polyglactin, fixed / hang-back / adjustable"}),
+          f("ocrEvent", "Oculocardiac reflex", {"type": "text", "required": false, "aiFillable": true, "ph": "None / bradycardia, action"})
+        ]
+      }
+    },
+    "pars-plana-vitrectomy": {
+      base: "operative", title: "Pars plana vitrectomy for retinal detachment",
+      prefill: {"procedure": "Pars plana vitrectomy"},
+      extra: {
+        "Operative detail": [
+          f("operativeEye", "Operative eye", {"type": "text", "required": true, "aiFillable": false, "ph": "Right / Left"}),
+          f("maculaStatus", "Macula on or off and the breaks found", {"type": "text", "required": true, "aiFillable": true, "ph": "Macula off; U-tear at 1 o'clock"}),
+          f("gauge", "Gauge and ports", {"type": "text", "required": false, "aiFillable": true, "ph": "25G, three ports"}),
+          f("tamponade", "Tamponade agent and concentration", {"type": "text", "required": true, "aiFillable": false, "ph": "SF6 20% / C3F8 14% / silicone oil"}),
+          f("postureGas", "Posture instructions and gas wristband given", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, face down 5 days; wristband on"})
+        ]
+      }
+    },
+    "kidney-transplant": {
+      base: "operative", title: "Kidney transplant (recipient operation)",
+      prefill: {"procedure": "Kidney transplant"},
+      extra: {
+        "Operative detail": [
+          f("donorType", "Donor type and organ", {"type": "text", "required": true, "aiFillable": false, "ph": "Deceased (DBD / DCD) / living; left / right kidney"}),
+          f("compatibility", "ABO and crossmatch confirmed at time-out", {"type": "text", "required": true, "aiFillable": false, "ph": "ABO compatible, crossmatch negative"}),
+          f("ischaemiaTimes", "Cold and warm ischaemia times", {"type": "text", "required": true, "aiFillable": false, "ph": "Cold h:min, anastomosis time min"}),
+          f("anastomoses", "Vascular anastomoses", {"type": "textarea", "required": true, "aiFillable": true, "ph": "Vein to EIV end to side; artery with patch to EIA end to side", "rows": 2}),
+          f("reperfusion", "Reperfusion quality and urine", {"type": "text", "required": true, "aiFillable": false, "ph": "Uniform, urine on table yes / no"}),
+          f("stentRecord", "Ureteric stent and removal date", {"type": "text", "required": true, "aiFillable": false, "ph": "6 Fr 12 cm double-J, remove at 4 to 6 weeks"})
+        ]
+      }
+    },
+    "lap-donor-nephrectomy": {
+      base: "operative", title: "Laparoscopic living donor nephrectomy",
+      prefill: {"procedure": "Laparoscopic living donor nephrectomy"},
+      extra: {
+        "Operative detail": [
+          f("operativeSide", "Kidney removed", {"type": "text", "required": true, "aiFillable": false, "ph": "Left / Right"}),
+          f("authorisation", "Authorisation and donor consent documents checked", {"type": "text", "required": true, "aiFillable": false, "ph": "Committee approval reference, consent confirmed on the day"}),
+          f("vesselAnatomy", "Arteries, veins and their division", {"type": "textarea", "required": true, "aiFillable": false, "ph": "Single artery, transfixing stapler; vein stapled", "rows": 2}),
+          f("warmIschaemia", "Warm ischaemia time", {"type": "text", "required": true, "aiFillable": false, "ph": "minutes"}),
+          f("stumpCheck", "Stumps and field inspected at low pressure", {"type": "text", "required": true, "aiFillable": false, "ph": "Dry, spleen and colon intact"})
+        ]
+      }
+    },
+    "aortic-valve-replacement": {
+      base: "operative", title: "Aortic valve replacement (surgical)",
+      prefill: {"procedure": "Surgical aortic valve replacement"},
+      extra: {
+        "Operative detail": [
+          f("prosthesis", "Prosthesis: type, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "help": "Copy from the implant sticker. A physical record, never AI-filled."}),
+          f("bypassTimes", "Bypass and cross-clamp times", {"type": "text", "required": true, "aiFillable": false, "ph": "Bypass min, cross-clamp min"}),
+          f("cardioplegia", "Cardioplegia route and type", {"type": "text", "required": true, "aiFillable": true, "ph": "Antegrade ostial / retrograde, cold blood"}),
+          f("echoResult", "Post-bypass echo: gradient, paravalvular leak, function", {"type": "text", "required": true, "aiFillable": false}),
+          f("rhythmPacing", "Rhythm and pacing wires", {"type": "text", "required": true, "aiFillable": true, "ph": "Sinus / heart block; atrial and ventricular wires"})
+        ]
+      }
+    },
+    "subxiphoid-pericardial-window": {
+      base: "operative", title: "Subxiphoid pericardial window",
+      prefill: {"procedure": "Subxiphoid pericardial window"},
+      extra: {
+        "Operative detail": [
+          f("fluidVolume", "Fluid drained: volume and appearance", {"type": "text", "required": true, "aiFillable": true, "ph": "mL; serous / blood-stained / purulent"}),
+          f("haemodynamicResponse", "Haemodynamic response", {"type": "text", "required": false, "aiFillable": true, "ph": "BP and heart rate before and after"}),
+          f("specimenSent", "Specimens sent: fluid and tissue", {"type": "text", "required": true, "aiFillable": false, "ph": "Cytology, culture, TB, histology"}),
+          f("drainDetail", "Pericardial drain", {"type": "text", "required": true, "aiFillable": false, "ph": "28 Fr via separate stab"})
+        ]
+      }
+    },
+    "escharotomy": {
+      base: "operative", title: "Escharotomy for circumferential burns",
+      prefill: {"procedure": "Escharotomy"},
+      extra: {
+        "Operative detail": [
+          f("indication", "Indication and evidence of constriction", {"type": "text", "required": true, "aiFillable": true, "ph": "Circumferential FT burn R arm, absent radial Doppler"}),
+          f("sitesLines", "Sites and lines released", {"type": "textarea", "required": true, "aiFillable": true, "ph": "R arm mid-lateral and mid-medial; chest shield", "rows": 2}),
+          f("perfusionAfter", "Perfusion and ventilation after release", {"type": "text", "required": true, "aiFillable": false, "ph": "Doppler signals returned; airway pressure fell"}),
+          f("fasciotomyNeeded", "Fasciotomy needed", {"type": "text", "required": false, "aiFillable": true, "ph": "No / yes, compartments"})
+        ]
+      }
+    },
+    "rhomboid-flap": {
+      base: "operative", title: "Rhomboid (Limberg) transposition flap",
+      prefill: {"procedure": "Excision and rhomboid transposition flap"},
+      extra: {
+        "Operative detail": [
+          f("lesionSite", "Lesion, site and size", {"type": "text", "required": true, "aiFillable": true, "ph": "Suspected BCC, left cheek, 12 mm"}),
+          f("margins", "Excision margin", {"type": "text", "required": true, "aiFillable": true, "ph": "4 mm peripheral, to fat"}),
+          f("flapDesign", "Flap orientation chosen and why", {"type": "text", "required": true, "aiFillable": true, "ph": "Inferolateral flap, donor in the nasolabial line"}),
+          f("flapViability", "Flap colour and refill at the end", {"type": "text", "required": true, "aiFillable": false, "ph": "Pink, brisk refill"}),
+          f("specimenOriented", "Specimen sent and orientation stitch", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, long stitch superior"})
+        ]
+      }
+    },
+    "unilateral-cleft-lip-repair": {
+      base: "operative", title: "Unilateral cleft lip repair",
+      prefill: {"procedure": "Unilateral cleft lip repair"},
+      extra: {
+        "Operative detail": [
+          f("cleftSide", "Cleft side and type", {"type": "text", "required": true, "aiFillable": false, "ph": "Left complete / incomplete"}),
+          f("technique", "Technique", {"type": "text", "required": true, "aiFillable": true, "ph": "Anatomical subunit (Fisher) / rotation-advancement"}),
+          f("heightsMeasured", "Lip heights measured (cleft and non-cleft side)", {"type": "text", "required": true, "aiFillable": false, "ph": "mm and mm"}),
+          f("nasalRepair", "Primary nasal repair", {"type": "text", "required": false, "aiFillable": true, "ph": "Yes, alar cartilage repositioned"}),
+          f("throatPack", "Throat pack in and out", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, counted out"})
+        ]
+      }
+    },
     /* ── end specialty templates ── */
   };
 

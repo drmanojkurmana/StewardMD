@@ -1,0 +1,317 @@
+{
+  "id": "lap-donor-nephrectomy",
+  "title": "Laparoscopic living donor nephrectomy",
+  "subtitle": "Transperitoneal left nephrectomy preserving vessel length and the ureteric blood supply",
+  "system": "genitourinary",
+  "aliases": [
+    "living donor nephrectomy",
+    "LDN",
+    "laparoscopic donor nephrectomy",
+    "kidney donation surgery"
+  ],
+  "estMinutes": 210,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "bts-ld-2018",
+      "org": "British Transplantation Society",
+      "title": "Guidelines for Living Donor Kidney Transplantation, 4th edition",
+      "year": 2018,
+      "url": "https://bts.org.uk/guidelines-standards/",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "kdigo-2017-ld",
+      "org": "KDIGO. Transplantation 101(8S1)",
+      "title": "KDIGO Clinical Practice Guideline on the Evaluation and Care of Living Kidney Donors",
+      "year": 2017,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=KDIGO+Clinical+Practice+Guideline+on+the+Evaluation+and+Care+of+Living+Kidney+Donors",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "thota-1994",
+      "org": "Government of India",
+      "title": "Transplantation of Human Organs and Tissues Act, 1994 (amended 2011) and Rules 2014",
+      "year": 2014,
+      "url": "https://www.indiacode.nic.in/handle/123456789/1919",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "A healthy living donor, fully assessed, independently counselled and legally authorised, donating to a compatible (or paired) recipient."
+    ],
+    "contraindications": [
+      "Any doubt about voluntary consent or authorisation.",
+      "Donor medical contraindications identified in assessment (kidney disease, uncontrolled hypertension, diabetes, high lifetime risk)."
+    ],
+    "preparation": [
+      "CT angiography for arteries, veins and the collecting system; split function if kidneys differ; choose the side (usually left for the longer vein).",
+      "Independent assessment and authorisation (in India, the hospital or state Authorisation Committee under THOTA).",
+      "Consent: the donor has no medical benefit; bleeding, conversion to open, injury to bowel, spleen or pancreas, chyle leak, long-term kidney function and hypertension, and the right to withdraw."
+    ],
+    "positioning": [
+      "Right lateral decubitus (for a left kidney) at about 60 to 90 degrees, table flexed at the flank, all pressure points padded, strapped securely."
+    ],
+    "equipment": [
+      "Laparoscopic set, 30 degree camera, energy device, vascular staplers (transfixing), large clips for small branches, retrieval bag, Pfannenstiel extraction set, cold perfusion solution and ice for the recipient team."
+    ],
+    "anatomy": [
+      "The left kidney, renal artery and vein, the gonadal, adrenal and lumbar tributaries of the left renal vein, the ureter with the gonadal vein, the descending colon and splenic flexure, the spleen and the tail of pancreas."
+    ],
+    "criticalSafety": [
+      "Secure the donor renal artery with a transfixing stapler or a technique that cannot slip; non-transfixing clips have caused donor deaths on the artery stump.",
+      "Keep the ureter with its periureteric tissue and the gonadal vein.",
+      "Keep warm ischaemia short: the extraction incision is open and the recipient team ready before the vessels are divided."
+    ],
+    "structuresAtRisk": [
+      "Renal artery stump",
+      "Spleen and tail of pancreas",
+      "Colon",
+      "Aorta and inferior vena cava",
+      "Ureteric blood supply"
+    ],
+    "commonErrors": [
+      "Non-transfixing clips on the arterial stump.",
+      "Stripping the ureter.",
+      "Missing a lumbar vein, which tears on traction."
+    ],
+    "complications": [
+      "Haemorrhage, conversion to open.",
+      "Injury to spleen, pancreas, colon.",
+      "Chylous ascites.",
+      "Long-term reduced kidney function and hypertension; follow-up for life."
+    ],
+    "postop": [
+      "Enhanced recovery; donor kidney function and blood pressure checked before discharge.",
+      "Lifelong annual follow-up of the donor.",
+      "Same-day return for abdominal pain, distension or fever."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Donor consent is separate from the recipient's; confirm the authorisation papers are complete."
+    },
+    {
+      "ref": "step.ldn.donor-check"
+    },
+    {
+      "ref": "step.core.timeout",
+      "emphasis": "Confirm side, number of arteries, the stapler for the artery, and that the recipient team is ready."
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Right lateral decubitus with the table flexed, axillary roll, all pressure points padded and strapped."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.lap.access"
+    },
+    {
+      "ref": "step.lap.ports"
+    },
+    {
+      "ref": "step.lap.survey"
+    },
+    {
+      "ref": "step.bowel.splenic-flexure",
+      "emphasis": "Mobilise the descending colon and splenic flexure medially to expose the kidney, protecting spleen and pancreas."
+    },
+    {
+      "ref": "step.ldn.ureter"
+    },
+    {
+      "ref": "step.ldn.vein"
+    },
+    {
+      "ref": "step.ldn.artery"
+    },
+    {
+      "ref": "step.ldn.extraction-site"
+    },
+    {
+      "ref": "step.ldn.divide"
+    },
+    {
+      "ref": "step.hpb.major-bleed",
+      "emphasis": "Bleeding from the renal artery stump or the vena cava is the donor's main life-threatening risk: press, tell, call, convert."
+    },
+    {
+      "ref": "step.ldn.flush"
+    },
+    {
+      "ref": "step.lap.closure",
+      "emphasis": "Close the extraction incision in layers."
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.ldn.donor-check": {
+      "id": "step.ldn.donor-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Donor safety and authorisation check",
+      "why": "The donor gains nothing medically, so every safeguard is checked again on the day: identity, legal authorisation, free consent and the anatomy that was planned.",
+      "how": [
+        "Confirm the donor's identity, the authorisation documents, and that the donor still wishes to proceed, privately.",
+        "Review the CT angiogram: side, number and length of arteries and veins, the ureter.",
+        "Confirm the recipient is in theatre or ready, so cold ischaemia is short."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Proceeding with incomplete authorisation.",
+        "Unplanned anatomy discovered in theatre."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ldn.ureter": {
+      "id": "step.ldn.ureter",
+      "kind": "dissection",
+      "title": "Mobilising the ureter with the gonadal vein",
+      "why": "The ureter's blood supply runs in the tissue around it. Taking the ureter together with the gonadal vein and the tissue between keeps it alive in the recipient.",
+      "how": [
+        "Identify the gonadal vein and the ureter at the pelvic brim.",
+        "Lift them together off the psoas, preserving the tissue between them up to the lower pole.",
+        "Do not skeletonise the ureter or use energy close to it."
+      ],
+      "structuresAtRisk": [
+        "Ureter",
+        "Iliac vessels"
+      ],
+      "pitfalls": [
+        "Stripping the ureter.",
+        "Thermal injury from the energy device."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ldn.vein": {
+      "id": "step.ldn.vein",
+      "kind": "dissection",
+      "title": "Dissecting the left renal vein and its tributaries",
+      "why": "The left renal vein's tributaries (adrenal, gonadal, lumbar) must be divided to give length, and a missed lumbar vein tears when the kidney is lifted.",
+      "how": [
+        "Expose the renal vein from the kidney to its crossing of the aorta.",
+        "Clip and divide the gonadal, adrenal and lumbar veins.",
+        "Free the vein circumferentially."
+      ],
+      "structuresAtRisk": [
+        "Renal vein",
+        "Lumbar veins",
+        "Adrenal gland"
+      ],
+      "pitfalls": [
+        "Missing a posterior lumbar vein."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ldn.artery": {
+      "id": "step.ldn.artery",
+      "kind": "dissection",
+      "title": "Dissecting the renal artery",
+      "why": "Length on the artery helps the recipient anastomosis. Handling it gently avoids spasm, which reduces kidney perfusion before removal.",
+      "how": [
+        "Dissect the artery posterior to the vein back to its origin at the aorta.",
+        "Divide the lymphatic and neural tissue around it with care; avoid traction (spasm).",
+        "Free the kidney from its lateral and upper attachments, leaving the adrenal gland behind."
+      ],
+      "structuresAtRisk": [
+        "Renal artery",
+        "Aorta",
+        "Superior mesenteric artery (on the right side of the aorta)"
+      ],
+      "pitfalls": [
+        "Traction on the artery causing spasm.",
+        "Dissecting into the aortic wall."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ldn.extraction-site": {
+      "id": "step.ldn.extraction-site",
+      "kind": "access",
+      "title": "Extraction incision ready before the vessels are divided",
+      "why": "Warm ischaemia starts when the artery is stapled. Making the extraction incision ready beforehand keeps it to a few minutes.",
+      "how": [
+        "Make the Pfannenstiel (or other) extraction incision down to, but not through, the peritoneum, or place a hand port.",
+        "Give heparin or mannitol per protocol; confirm the recipient team and the ice and perfusion fluid are ready.",
+        "Divide the ureter low, clipping the distal stump, and confirm urine flows."
+      ],
+      "structuresAtRisk": [
+        "Bladder",
+        "Inferior epigastric vessels"
+      ],
+      "pitfalls": [
+        "Dividing the artery before the extraction route is ready."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ldn.divide": {
+      "id": "step.ldn.divide",
+      "kind": "resection",
+      "critical": true,
+      "title": "Dividing the artery and vein and retrieving the kidney",
+      "why": "The vascular division is the most dangerous moment for the donor: the arterial stump must be secure, and the kidney must come out quickly.",
+      "how": [
+        "Staple and divide the renal artery with a transfixing vascular stapler (or a secure locking technique per protocol; never non-transfixing clips alone).",
+        "Staple and divide the renal vein.",
+        "Bag the kidney and deliver it through the extraction incision; hand it to the bench team immediately."
+      ],
+      "structuresAtRisk": [
+        "Renal artery stump",
+        "Aorta",
+        "Vena cava"
+      ],
+      "pitfalls": [
+        "Non-transfixing clips on the artery stump.",
+        "Slow retrieval prolonging warm ischaemia."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ldn.flush": {
+      "id": "step.ldn.flush",
+      "kind": "checkpoint",
+      "title": "Cold flush and checking the stumps",
+      "why": "The kidney is cooled and flushed at once; meanwhile the donor's vascular stumps and the field are checked under lower pneumoperitoneum.",
+      "how": [
+        "On the bench: flush the kidney with cold preservation solution until the effluent is clear; record warm ischaemia time.",
+        "In the donor: reinflate, lower the pressure, inspect the arterial and venous stumps, the adrenal bed, spleen and colon."
+      ],
+      "structuresAtRisk": [
+        "Arterial and venous stumps"
+      ],
+      "pitfalls": [
+        "Not re-inspecting the stumps at low pressure."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

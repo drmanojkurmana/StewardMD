@@ -1,0 +1,218 @@
+{
+  "id": "corneal-foreign-body-removal",
+  "title": "Corneal and subtarsal foreign body removal",
+  "subtitle": "Slit-lamp removal, rust ring, and ruling out a penetrating injury",
+  "system": "ophthalmic",
+  "aliases": [
+    "corneal foreign body",
+    "subtarsal foreign body",
+    "rust ring removal",
+    "eye foreign body"
+  ],
+  "estMinutes": 15,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "coo-fb",
+      "org": "College of Optometrists",
+      "title": "Clinical Management Guideline: Foreign body, corneal",
+      "year": 2026,
+      "url": "https://www.college-optometrists.org/clinical-guidance/clinical-management-guidelines/foreignbody_corneal",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "A superficial corneal or conjunctival foreign body.",
+      "A subtarsal foreign body causing linear corneal abrasions."
+    ],
+    "contraindications": [
+      "Suspected penetrating injury: high-velocity mechanism (hammering metal on metal, grinding), a positive Seidel test, an irregular pupil, shallow chamber or hyphaema. Shield and refer; do not remove at the slit lamp.",
+      "A deep stromal or central foreign body beyond the operator's competence."
+    ],
+    "preparation": [
+      "History of the mechanism; visual acuity before anything else.",
+      "Fluorescein at the slit lamp, including a Seidel test; evert the upper lid.",
+      "Orbit X-ray or CT when a high-velocity metallic fragment is possible (never MRI)."
+    ],
+    "positioning": [
+      "Seated at the slit lamp, chin on the rest and forehead against the band, eyes looking at a fixation target."
+    ],
+    "equipment": [
+      "Slit lamp, topical anaesthetic, fluorescein, sterile cotton buds, 25G or 27G needle (bevel up) or a foreign body spud, a battery-powered burr for rust rings, antibiotic ointment or drops."
+    ],
+    "anatomy": [
+      "The corneal epithelium and Bowman's layer superficially; the central visual axis; the upper tarsal conjunctiva where subtarsal foreign bodies lodge."
+    ],
+    "criticalSafety": [
+      "Exclude a penetrating injury before removing anything.",
+      "Approach the cornea tangentially with the needle bevel up, never towards the eye.",
+      "Avoid deep digging in the visual axis."
+    ],
+    "structuresAtRisk": [
+      "Cornea (perforation)",
+      "Visual axis (scarring)"
+    ],
+    "commonErrors": [
+      "Missing an intraocular foreign body after a high-velocity injury.",
+      "Pointing the needle at the eye.",
+      "Over-zealous rust ring removal centrally."
+    ],
+    "complications": [
+      "Corneal abrasion and infection.",
+      "Scarring in the visual axis.",
+      "Missed intraocular foreign body and endophthalmitis or siderosis."
+    ],
+    "postop": [
+      "Antibiotic ointment or drops for several days; no patch routinely.",
+      "Review if a rust ring was left or the defect was large.",
+      "Return the same day for increasing pain, discharge or reduced vision; eye protection at work."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Verbal consent; record the visual acuity first."
+    },
+    {
+      "ref": "step.fb.mechanism-check"
+    },
+    {
+      "ref": "step.eye.anaesthesia",
+      "emphasis": "Topical anaesthetic drops only."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "At the slit lamp, chin on the rest, forehead against the band, fixating on a target."
+    },
+    {
+      "ref": "step.fb.evert"
+    },
+    {
+      "ref": "step.fb.remove"
+    },
+    {
+      "ref": "step.fb.fluorescein"
+    },
+    {
+      "ref": "step.fb.penetrating-bailout"
+    },
+    {
+      "ref": "step.eye.shield-postop",
+      "emphasis": "Antibiotic cover and clear return advice; eye protection advice for work."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.fb.mechanism-check": {
+      "id": "step.fb.mechanism-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Mechanism and penetrating injury check",
+      "why": "A tiny entry wound from a high-velocity metal fragment can hide an intraocular foreign body. Removing what is visible on the surface and sending the patient home misses it.",
+      "how": [
+        "Ask how it happened: hammering metal on metal, grinding, or anything high-velocity raises suspicion of penetration.",
+        "Look for a full-thickness wound, a positive Seidel test, an irregular pupil, a shallow chamber, hyphaema or a lens opacity.",
+        "If suspected, stop: shield the eye, nil by mouth, imaging (X-ray or CT, never MRI) and urgent ophthalmology."
+      ],
+      "structuresAtRisk": [
+        "Globe (missed penetration)"
+      ],
+      "pitfalls": [
+        "Skipping the mechanism history."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.fb.evert": {
+      "id": "step.fb.evert",
+      "kind": "access",
+      "title": "Everting the upper lid",
+      "why": "Subtarsal foreign bodies scratch the cornea with every blink and are missed if the lid is not everted.",
+      "how": [
+        "Ask the patient to look down; evert the upper lid over a cotton bud placed at the upper border of the tarsus.",
+        "Sweep the tarsal conjunctiva with a moist cotton bud; double-evert with a retractor if the history suggests a particle high in the fornix."
+      ],
+      "structuresAtRisk": [
+        "Cornea"
+      ],
+      "pitfalls": [
+        "Not everting the lid when there are vertical linear abrasions."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.fb.remove": {
+      "id": "step.fb.remove",
+      "kind": "resection",
+      "critical": true,
+      "title": "Removing the foreign body and rust ring",
+      "why": "Removal should take the foreign body and as little cornea as possible. The needle always approaches tangentially, bevel up, so a sudden movement cannot drive it into the eye.",
+      "how": [
+        "Try a moist cotton bud first for loose particles.",
+        "For embedded particles, rest your hand on the patient's cheek and lift the particle out with the bevel of a 25G or 27G needle held tangentially to the cornea.",
+        "Remove a rust ring with a burr gently; leave a deep or central residue for review in a day or two, when it loosens."
+      ],
+      "structuresAtRisk": [
+        "Cornea (perforation)",
+        "Visual axis (scar)"
+      ],
+      "pitfalls": [
+        "Approaching the cornea head-on.",
+        "Digging deep in the visual axis."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.fb.fluorescein": {
+      "id": "step.fb.fluorescein",
+      "kind": "checkpoint",
+      "title": "Fluorescein and Seidel check after removal",
+      "why": "Checking the defect afterwards shows its size for follow-up and confirms the cornea is not leaking.",
+      "how": [
+        "Stain with fluorescein; measure the epithelial defect.",
+        "Repeat the Seidel test over the site.",
+        "Recheck the visual acuity."
+      ],
+      "structuresAtRisk": [
+        "Cornea"
+      ],
+      "pitfalls": [
+        "Not documenting the defect size."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.fb.penetrating-bailout": {
+      "id": "step.fb.penetrating-bailout",
+      "kind": "bailout",
+      "title": "Bailout: a leak or signs of penetration",
+      "why": "If the eye is open, every further manipulation can push contents out. Protecting it and transferring it is the treatment.",
+      "how": [
+        "Stop; do not press on the eye or remove a protruding object.",
+        "Apply a rigid shield (no pad), give anti-emetic and analgesia, keep nil by mouth.",
+        "Arrange imaging and urgent ophthalmology; consider tetanus status and systemic antibiotics per protocol."
+      ],
+      "structuresAtRisk": [
+        "Globe"
+      ],
+      "pitfalls": [
+        "Padding an open globe with pressure."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}
