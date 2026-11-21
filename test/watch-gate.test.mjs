@@ -31,8 +31,8 @@ const src = rd("calculators.js");
 const a = src.indexOf("function calcCardHTML(c){"), b = src.indexOf("function renderList(){");
 assert.ok(a > 0 && b > a, "found calcCardHTML");
 // v2 = the redesigned list (flag smd_calc_v2): its rows carry the star button only when starred.
-const card = (hasWatch, v2, fav) => new Function("window", "isWatchFav", "openId", "mcIco", "mcCatIco", "esc", "calcV2On", "hlText",
-  src.slice(a, b) + "; return calcCardHTML;")({ SMD_HAS_WATCH: hasWatch }, () => !!fav, null, () => "", () => "", (s) => s, () => !!v2, (s) => s)({ id: "x", title: "T", desc: "D", cat: "c" });
+const card = (hasWatch, v2, fav) => new Function("window", "isWatchFav", "openId", "mcIco", "mcCatIco", "esc", "calcV2On", "hlText", "shortTitle", "subFix",
+  src.slice(a, b) + "; return calcCardHTML;")({ SMD_HAS_WATCH: hasWatch }, () => !!fav, null, () => "", () => "", (s) => s, () => !!v2, (s) => s, (s) => s, (s) => s)({ id: "x", title: "T", desc: "D", cat: "c" });
 
 test("calculator card: Apple Watch wording only on ios", () => {
   assert.match(card(true), /Apple Watch/);
