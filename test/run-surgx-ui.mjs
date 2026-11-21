@@ -195,12 +195,12 @@ try {
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   ok(await waitFor("#surgxRoot .sgx-row"), "the procedure index loads");
   await clickText("#surgxRoot .sgx-row", "Appendicectomy");
-  ok(await waitFor("#surgxRoot .sgx-tab"), "the procedure opens with its chapter tabs");
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-tab').length >= 10")) === true,
+  ok(await waitFor("#surgxRoot .sgx-secbtn"), "the procedure opens with its numbered section buttons");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-secbtn').length >= 10")) === true,
     "the fixed chapter set renders");
   ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('Educational reference')")) === true,
     "the educational framing is present and not dismissible");
-  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
   ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step').length >= 10")) === true,
     "the step runner renders the shared + local steps in order");
@@ -220,8 +220,8 @@ try {
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Laparoscopic cholecystectomy");
-  await waitFor("#surgxRoot .sgx-tab");
-  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
   ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 18,
     "VIDEO batch 2: lap cholecystectomy shows its 18 step clips through the shim");
@@ -230,8 +230,8 @@ try {
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Right hemicolectomy");
-  await waitFor("#surgxRoot .sgx-tab");
-  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
   ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 22,
     "VIDEO batch 3: right hemicolectomy shows its 22 step clips through the shim");
@@ -240,8 +240,8 @@ try {
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Total hip replacement");
-  await waitFor("#surgxRoot .sgx-tab");
-  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
   ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 22,
     "VIDEO batch 4: total hip replacement shows its 22 step clips through the shim");
@@ -250,8 +250,8 @@ try {
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Ventriculoperitoneal shunt insertion");
-  await waitFor("#surgxRoot .sgx-tab");
-  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
   ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 19,
     "VIDEO batch 5: VP shunt shows its 19 step clips through the shim");
@@ -260,11 +260,11 @@ try {
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Appendicectomy");
-  await waitFor("#surgxRoot .sgx-tab");
-  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
 
-  await clickText("#surgxRoot .sgx-tab", "Anatomy");
+  await clickText("#surgxRoot .sgx-secbtn", "Anatomy");
   await sleep(300);
   ok((await ev("!!document.querySelector('#surgxRoot .sgx-media svg')")) === true,
     "LICENCE GATE: a self-authored inline diagram renders");
@@ -272,7 +272,7 @@ try {
     "and it is attributed");
 
   /* ── 5. THE LICENCE GATE, the other way ────────────────────────────────── */
-  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
   ok((await ev("!document.querySelector('#surgxRoot .sgx-media.pending')")) === true,
     "ALL ON: smd_surgx_uncleared_media defaults ON (owner 2026-09-28), so no 'visual pending' placeholder is shown");
@@ -347,7 +347,7 @@ try {
     const procs = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
     ok(procs.some((t) => /Tonsillectomy/i.test(t)), "SPEC: the ENT filter is shared with Procedures and shows tonsillectomy");
     await clickText("#surgxRoot .sgx-row", "Tonsillectomy");
-    ok(await waitFor("#surgxRoot .sgx-tab"), "SPEC: a new-specialty procedure opens with its chapters");
+    ok(await waitFor("#surgxRoot .sgx-secbtn"), "SPEC: a new-specialty procedure opens with its chapters");
     await clickText("#surgxRoot .sgx-spec .sgx-chip", "All");
   }
   // Eye operations (2026-11-21): the Ophthalmology chip lists the 13 operations and one opens with the shared eye steps.
@@ -360,8 +360,8 @@ try {
     ok(eye.length === 13 && eye.some((t) => /Phacoemulsification/.test(t)) && eye.some((t) => /small-incision/i.test(t)),
       `EYE: the Ophthalmology filter lists the 13 eye operations (${eye.length})`);
     await clickText("#surgxRoot .sgx-row", "Phacoemulsification");
-    await waitFor("#surgxRoot .sgx-tab");
-    await clickText("#surgxRoot .sgx-tab", "Steps");
+    await waitFor("#surgxRoot .sgx-secbtn");
+    await clickText("#surgxRoot .sgx-secbtn", "Steps");
     await sleep(300);
     const st = await ev("[...document.querySelectorAll('#surgxRoot .sgx-step')].map(e => e.textContent)");
     ok(st.length === 20 && st.some((t) => /Povidone-iodine 5%/.test(t)) && st.some((t) => /posterior capsule rupture/i.test(t)),
