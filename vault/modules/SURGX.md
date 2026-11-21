@@ -578,3 +578,8 @@ Prompts: [[SURGX-batch9a-image-prompt]] (104) + [[SURGX-batch9a-video-prompt]], 
 checked in the embedded player with a referrer; 19 new ALLOW ids. Dropped as wrong or weak: Ochsner checklist (fails embed),
 the intercostal chest tube for AVR drains, the TXA/adrenaline packing demo for escharotomy, the generic "separate the
 kidney" schematic for donor artery and vein division, the verbal-only cleft positioning.
+Batch 8 images (same day): 106 of 128 wired via `img8.py`, every image reviewed four to a sheet. Held back 22: KT 16
+(native-kidney stent), LDN 12, 13, 15 (open retractors in a laparoscopic view), LDN 17 (two panels stitched), AVR 06, 18
+(whole rib cage bare), PW 07, 08, 09, 11 (patient swapped to a man; sternotomy-sized opening), escharotomy 07 (volar
+midline cut) and 12 (different patient), rhomboid 01 to 05 and 17 (older man; the operative series is a young woman),
+cleft 15, 18, 19 (lip still cleft after repair).
