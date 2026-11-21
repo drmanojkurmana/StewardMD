@@ -486,3 +486,9 @@ set is lectures, skull models and animation: few embeddable live cranial videos 
 ones at full size. Held back: CSDH 05, EDH 05 and VP 05 (head straight up, not turned), EDH 09 (a dry skull with the orbit
 and facial bones inside the wound), EVD 10 (catheter tip bent into a hook), VP 13 (a different patient). Redo prompt at
 the end of [[SURGX-batch5-image-prompt]]. The zips again had no folders inside; extracted per operation.
+
+## Batch 4 complete (2026-11-21)
+Round 3 redraws wired: hip 12 cropped to the wound (trial head in the cup, femur running on under the muscle; the wide
+view lifted the leg straight up, which reads as abduction, not 90 degrees of flexion with internal rotation) and
+hysterectomy 5 (whole table tilted head down, legs flat on the table; the tilt is only about 5 degrees, milder than the
+10 to 15 asked). All 93 batch 4 steps now have a picture.
