@@ -535,3 +535,12 @@ re-upload), the evisceration speculum clip (same animation segment as the kerate
 footage (lid eversion, vitrectomy, DCR local), the model eye and 20G needle (foreign body), and the patient animations.
 Empty: positioning, speculum and povidone in most of them, DCR bailout and haemostasis, squint lost-muscle bailout,
 vitrectomy wound check.
+
+## Batch 6 clips wired (2026-11-21)
+104 timed clips (`med.surgx.{phaco,sics,trab,prk,lasik,ptg}-clip-NN`): phaco 20 of 20, SICS 20 of 20, trabeculectomy 19
+of 19, PRK 14 of 14, LASIK 15 of 15, pterygium 16 of 17. Gemini's JSON was saved as a file (`in6/b6v.json` in the
+scratchpad) and wired by `wire6v.py` straight from each step's best clip, with overrides. The Ochsner checklist video
+(7E1ivPB_zn0) failed the real-player check, so its timeout, count and debrief clips use the Gloucestershire one; the
+trabeculectomy suprachoroidal clip (choroidal drainage, later management) was replaced by the stop-and-close chalk-talk.
+Captions flag the left-eye pterygium footage, the LASIK flap relift, the Hindi MMC preparation, and lectures that quote
+3% or 4% povidone-iodine. A channel name from oEmbed carried an em-dash; replaced with a comma.
