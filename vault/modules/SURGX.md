@@ -471,3 +471,12 @@ trauma craniotomy for EDH (20), EVD at Kocher point (17), VP shunt (22) and lumb
 cases are RIGHT-sided; the prompt fixes the field orientation per operation, states CT/MRI in radiological convention
 (a right-sided clot on the LEFT of the scan), and asks for a folder inside each zip. Same block format as batch 4, so
 `img4.py` parses it; D05 (head fixation) has no Teach line and needs a hand-written caption like the positioning steps.
+
+## Batch 5 clips wired (2026-11-21)
+79 timed clips across the neurosurgery set (`med.surgx.{csdh,edh,evd,vps,ces}-clip-NN`): CSDH 13 of 16, EDH 16 of 20,
+EVD 15 of 17, VP shunt 19 of 22, CES 13 of 17. All 19 videos pass the real embedded-player check with a referrer; 17 new
+ALLOW ids. Dropped from Gemini's answer: EDH 14 (same tack-up clip as 15, not a duraplasty), EVD 15 (same one-line clip
+as 12), VP shunt 11 (low-confidence patient diagram), CES 15 (low confidence, closure only mentioned); EDH 4 and VP 4 moved
+to the standard checklist prophylaxis clip. Gemini found nothing for CSDH 11 (drain), EDH 8 (scalp flap), EVD 5
+(positioning), VP 18 (bailout), VP 20 (closure), CES 6 (prep) and CES 13 (haemostasis), or the skin closures. Much of the
+set is lectures, skull models and animation: few embeddable live cranial videos exist that are not age-restricted.
