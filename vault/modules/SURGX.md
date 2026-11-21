@@ -429,3 +429,91 @@ Steps Gemini left without a clip, searched again on YouTube (headless browser se
 
 ## Age-restricted videos (2026-11-21)
 YouTube oEmbed returns 200 for AGE-RESTRICTED videos, but the embedded player refuses them ("only available on YouTube"). The owner saw this on the phone on appendicectomy step 6 (m5u1kHwGDk8); replaced with Molnlycke's Hasson trocar demo (vBj5vn41Ixs). Check every new video in the real embedded player, not just oEmbed: load https://www.youtube.com/embed/ID in headless Chromium WITH a referer (Playwright goto option referer 'https://stewardmd.in/'; without one every video shows Error 153) and look for 'age-restricted' or 'Playback on other websites has been disabled'. Run over all 47 ids on 2026-11-21: only m5u1kHwGDk8 failed.
+
+## Bold high-yield points in step text (2026-11-21)
+Owner asked for Knowledge Library-style bolding on every surgery step. `renderStep` runs `why` and each `how` line through
+`rich()` (surgx-screens.js): first reasoning.js `window.SMD_MEDFORMAT` (the library's medFormat; it escapes; plain
+`esc()` fallback), then `SGX_BOLD`, a SURGX-only surgical rule set applied to text outside existing spans: measurements
+(mm, cm, mmHg, degrees, hours, minutes, mL), "within the hour", "under (direct) vision", "before incision/induction/
+closure/...", "aloud", "never event", "stops the closure", "any discrepancy", "two-person", convert/call for help,
+"critical view of safety", and a capital NOT. Library rules unchanged. CSS: `.sgx-step [class^="md-"]:not(.md-hi)` bold
+ink, never colour (`md-hi` is the last opened article's terms, which would leak in). Pitfall, risk and emphasis lines keep
+their own styling. Coverage estimate: 26% of 2,097 steps with library rules alone, about 70% with both; appendicectomy 17/19.
+
+## Batch 4 prompts (2026-11-21)
+[[SURGX-batch4-image-prompt]] (93 images) and [[SURGX-batch4-video-prompt]] for laparotomy (19), modified radical
+mastectomy (18), total hip replacement (22), total abdominal hysterectomy (22) and chest drain insertion (12). The
+image prompt carries every batch 2 and 3 lesson: a NEW side view per positioning step with the angle drawn, bodies whole
+and connected, fat yellow only where real fat is, laterality per operation, a full-size quality check. The video prompt
+forbids age-restricted videos and whole-video clips and asks for the first and last spoken line of every clip.
+
+## Whole videos cut to segments (2026-11-21)
+Owner: a 11-minute video played in full instead of the step. Gemini timed all 21 whole-video clips (prompt in chat, its
+JSON quotes the first and last spoken line of each); every clip now has `start` and `end`. Two replaced because no part
+showed the step: appendicectomy 6 -> Bhm7cCcr1Qc (TAMC OBGYN Simulation, Hasson entry), port closure (app-vid-17, also
+right hemicolectomy 21) -> h5D8sU8btyI (CooperSurgical). Both pass the real embedded-player check; the old ids left the
+ALLOW list. Timestamps are Gemini's; not re-verified here (transcript reading from YouTube's player is blocked in this
+environment). Thyroid 5 caption now says the narration is Hindi and Urdu.
+
+## Batch 4 wired (2026-11-21)
+Clips: 91 of 93 steps (`med.surgx.{lapa,mrm,thr,tah,cd}-clip-NN`), every video checked in the real embedded player with a
+referrer; TVASurg GthlK0Bv0aI refuses embedding, so mastectomy 10 and 11 use the PreOp animation and Prof Chintamani's
+operative clip. Left empty: mastectomy 9 (Gemini found nothing) and chest drain 7 (the only Seldinger clip is done
+bare-handed with the LA needle left in as a guide). Pictures: 88 of 93 (`med.surgx.<ab>-step-NN`), every image reviewed at
+half resolution and doubtful ones at full size. Held back: mastectomy 5 (arm not at 90 degrees), hip 12 (a bare pelvis
+in the wound), hip 16 (patient supine, crack barely visible), hysterectomy 5 (only the leg section raised, not a
+head-down tilt), chest drain 9 (drain on the left). Redo prompt at the end of [[SURGX-batch4-image-prompt]]. The Gemini
+zips had no folders inside: extract each into its own folder or same-named files overwrite each other.
+
+## Batch 5 prompts (2026-11-21)
+[[SURGX-batch5-image-prompt]] (92 images) and [[SURGX-batch5-video-prompt]] for the neurosurgery set: burr-hole CSDH (16),
+trauma craniotomy for EDH (20), EVD at Kocher point (17), VP shunt (22) and lumbar discectomy for CES (17). All cranial
+cases are RIGHT-sided; the prompt fixes the field orientation per operation, states CT/MRI in radiological convention
+(a right-sided clot on the LEFT of the scan), and asks for a folder inside each zip. Same block format as batch 4, so
+`img4.py` parses it; D05 (head fixation) has no Teach line and needs a hand-written caption like the positioning steps.
+
+## Batch 5 clips wired (2026-11-21)
+79 timed clips across the neurosurgery set (`med.surgx.{csdh,edh,evd,vps,ces}-clip-NN`): CSDH 14 of 16, EDH 17 of 20,
+EVD 15 of 17, VP shunt 19 of 22, CES 14 of 17. All 19 videos pass the real embedded-player check with a referrer; 17 new
+ALLOW ids. Dropped from Gemini's answer: EDH 14 (same tack-up clip as 15, not a duraplasty), EVD 15 (same one-line clip
+as 12), VP shunt 11 (low-confidence patient diagram), CES 15 (low confidence, closure only mentioned); EDH 4 and VP 4 moved
+to the standard checklist prophylaxis clip. Gemini found nothing for CSDH 11 (drain), EDH 8 (scalp flap), EVD 5
+(positioning), VP 18 (bailout), VP 20 (closure), CES 6 (prep) and CES 13 (haemostasis), or the skin closures. Much of the
+set is lectures, skull models and animation: few embeddable live cranial videos exist that are not age-restricted.
+
+## Batch 5 pictures wired (2026-11-21)
+86 of 92 (`med.surgx.{csdh,edh,evd,vps,ces}-step-NN`), every image reviewed four to a sheet at half size and the doubtful
+ones at full size. Held back: CSDH 05, EDH 05 and VP 05 (head straight up, not turned), EDH 09 (a dry skull with the orbit
+and facial bones inside the wound), EVD 10 (catheter tip bent into a hook), VP 13 (a different patient). Redo prompt at
+the end of [[SURGX-batch5-image-prompt]]. The zips again had no folders inside; extracted per operation.
+
+## Batch 4 complete (2026-11-21)
+Round 3 redraws wired: hip 12 cropped to the wound (trial head in the cup, femur running on under the muscle; the wide
+view lifted the leg straight up, which reads as abduction, not 90 degrees of flexion with internal rotation) and
+hysterectomy 5 (whole table tilted head down, legs flat on the table; the tilt is only about 5 degrees, milder than the
+10 to 15 asked). All 93 batch 4 steps now have a picture.
+
+## Batch 5 complete (2026-11-21)
+Round 2 redraws all passed full-size review and are wired: CSDH 05, EDH 05 and VP 05 (viewed from the foot, face turned
+to the left, roll under the right shoulder), EDH 09 (flat skull bone only), EVD 10 (straight catheter to the frontal
+horn), VP 13 (same patient). All 92 batch 5 steps now have a picture.
+
+## Round 3: eye operations and the remaining gaps (2026-11-21)
+Owner: "What about ophthalmology surgeries like cataract, PRK" then "build rest, ignore MDS" (oral and maxillofacial
+left out on purpose). 20 new procedures, so **128 procedures**, all `ai_drafted`:
+- **Ophthalmology (13):** phacoemulsification, manual SICS, trabeculectomy with MMC, PRK, LASIK, pterygium with
+  conjunctival autograft, intravitreal anti-VEGF, external DCR, chalazion I and C, corneal and subtarsal foreign body,
+  evisceration, strabismus recession and resection, pars plana vitrectomy (awareness level).
+- **Transplant (2, under urology):** kidney transplant recipient, laparoscopic living donor nephrectomy (THOTA 1994
+  authorisation in the donor check; transfixing stapler on the donor artery, never non-transfixing clips).
+- **Cardiac (2):** surgical AVR (outline level, like CABG), subxiphoid pericardial window (induce only with the surgeon
+  scrubbed in tamponade).
+- **Plastics (3):** escharotomy, rhomboid (Limberg) flap, unilateral cleft lip repair.
+- New shared pack `steps/eye.json` (14 steps: anaesthesia, povidone-iodine 5%, speculum, biometry/IOL check,
+  intracameral antibiotic, wound check, PCR and suprachoroidal haemorrhage bailouts, peritomy and closure, refractive
+  check, excimer ablation, laser interruption, shield and warning signs). Reuse: new 20 at 70%, overall 77%.
+- Specialty `ophthalmology` retitled "Ophthalmology" (was "Eye emergencies") and added to `MUST_HAVE_PROCEDURES`.
+- 20 operative note templates (eye side, implant sticker, MMC time, ABO and crossmatch, ischaemia times, prosthesis).
+- UI test: the Ophthalmology chip lists 13 operations and phaco opens with its 20 steps.
+- No pictures or clips yet; these are candidates for the next Gemini batches. Need ophthalmologist, transplant,
+  cardiac and plastics sign-off.

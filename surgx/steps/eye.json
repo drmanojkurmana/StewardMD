@@ -1,0 +1,322 @@
+{
+  "_comment": "Shared ophthalmic steps. Used by the cataract, glaucoma, refractive, cornea, retina, strabismus, orbit and lacrimal operations.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.eye.anaesthesia": {
+      "id": "step.eye.anaesthesia",
+      "kind": "prep",
+      "title": "Ocular anaesthesia: topical, sub-Tenon, peribulbar or general",
+      "why": "The anaesthetic decides how still the eye is, how much the patient feels and which complications are possible. Needle blocks can perforate a long eye or bleed into the orbit; topical anaesthesia needs a cooperative patient and a gentle surgeon.",
+      "how": [
+        "Agree the technique with the anaesthetist and the patient: topical (with or without intracameral local), sub-Tenon, peribulbar, retrobulbar, or general anaesthesia for children, long cases and patients who cannot lie still.",
+        "Read the axial length before any sharp-needle block: a long myopic eye or a staphyloma raises the risk of globe perforation, so prefer sub-Tenon or topical.",
+        "Check anticoagulant and antiplatelet status; a blunt sub-Tenon cannula is safer than a sharp needle if they are continued.",
+        "After a block, check for proptosis and a tense orbit (retrobulbar haemorrhage) before starting, and record the block, the drug and the volume."
+      ],
+      "structuresAtRisk": [
+        "Globe (perforation by a needle block)",
+        "Optic nerve",
+        "Orbital vessels (retrobulbar haemorrhage)",
+        "Brainstem (central spread of local anaesthetic)"
+      ],
+      "pitfalls": [
+        "A sharp-needle block in a long myopic eye.",
+        "Starting surgery on a tense, proptosed orbit after a block."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.povidone-iodine": {
+      "id": "step.eye.povidone-iodine",
+      "kind": "prep",
+      "critical": true,
+      "title": "Povidone-iodine 5% to the conjunctival sac",
+      "why": "Endophthalmitis is the infection that loses an eye after intraocular surgery, and the bacteria come from the patient's own lids and conjunctiva. Povidone-iodine in the conjunctival sac is the single antiseptic step with the strongest evidence.",
+      "how": [
+        "Instil povidone-iodine 5% into the conjunctival sac and paint the lids and lashes with 5 to 10%.",
+        "Leave it in contact for about three minutes before the first incision or injection.",
+        "If the patient has a true iodine allergy (rare), use aqueous chlorhexidine 0.05% to the sac per local policy, never alcohol-based solutions."
+      ],
+      "structuresAtRisk": [
+        "Corneal epithelium (higher concentrations)"
+      ],
+      "pitfalls": [
+        "Instilling it and starting immediately, before it has had contact time.",
+        "Skipping it because a topical antibiotic was given."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.lid-speculum": {
+      "id": "step.eye.lid-speculum",
+      "kind": "access",
+      "title": "Microscope, lash drape and lid speculum",
+      "why": "The lashes and lid margins carry the bacteria that cause endophthalmitis, and a poorly set microscope makes every later step harder. Isolating the lashes and setting the microscope before the first incision is part of the operation.",
+      "how": [
+        "Set the microscope: patient's head level, the eye centred, focus and red reflex checked, foot pedal and the surgeon's posture comfortable.",
+        "Apply an adhesive drape that tucks the lashes and lid margins away from the field.",
+        "Insert the lid speculum gently, opening it only as far as needed, without pressing on the globe."
+      ],
+      "structuresAtRisk": [
+        "Lid margins and lashes",
+        "Globe (pressure from the speculum)"
+      ],
+      "pitfalls": [
+        "Lashes left free in the field.",
+        "Opening the speculum hard, which raises the eye pressure and pushes vitreous forward."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.biometry-iol-check": {
+      "id": "step.eye.biometry-iol-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Biometry and lens implant check",
+      "why": "A wrong lens implant gives a large refractive surprise that needs another operation. Most wrong-implant events come from the wrong patient's biometry, the wrong eye, or a lens picked from the shelf without checking against the plan.",
+      "how": [
+        "Before the patient is in theatre, confirm the biometry belongs to this patient and this eye: axial length, keratometry, the formula and the target refraction.",
+        "Choose the implant model and power from the plan, plus a back-up lens for the sulcus if the capsule fails.",
+        "At the time-out, read aloud the patient, the eye, the implant model and power against the biometry printout; open the lens only after this check."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Using the fellow eye's biometry.",
+        "Opening the implant before the time-out check."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.intracameral-antibiotic": {
+      "id": "step.eye.intracameral-antibiotic",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Intracameral antibiotic at the end of cataract surgery",
+      "why": "Intracameral antibiotic at the end of cataract surgery substantially reduces endophthalmitis. The danger is a wrong dilution: concentrated drug in the eye is toxic to the retina.",
+      "how": [
+        "Use the agent and dose of local policy, for example cefuroxime 1 mg in 0.1 mL or moxifloxacin, prepared and checked by two people or from a ready-made product.",
+        "Inject into the anterior chamber through the side port after the wound is sealed.",
+        "Record the drug, dose and batch in the operation note."
+      ],
+      "structuresAtRisk": [
+        "Retina (toxicity from a dilution error)"
+      ],
+      "pitfalls": [
+        "Preparing the dilution alone at the end of a long list.",
+        "Giving it to a patient with a true cephalosporin allergy."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.wound-check": {
+      "id": "step.eye.wound-check",
+      "kind": "checkpoint",
+      "title": "Watertight wound and eye pressure check",
+      "why": "A leaking wound lets bacteria in and lets the eye go soft; a pressure that is too high hurts and can close the retinal circulation. Both are found in seconds now and cost a great deal if missed.",
+      "how": [
+        "Hydrate the corneal or scleral wound edges if needed and check that they hold when pressed gently.",
+        "Paint fluorescein over the wound (Seidel test) or watch for a leak while pressing beside it.",
+        "Feel the eye pressure with a finger or use a tonometer; aim for normal pressure, neither soft nor hard.",
+        "Suture any wound that leaks; one stitch is cheaper than endophthalmitis."
+      ],
+      "structuresAtRisk": [
+        "Wound integrity",
+        "Optic nerve and retinal circulation (pressure too high)"
+      ],
+      "pitfalls": [
+        "Leaving a soft eye with a gaping wound.",
+        "Overfilling the eye at the end."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.posterior-capsule-rupture": {
+      "id": "step.eye.posterior-capsule-rupture",
+      "kind": "bailout",
+      "title": "Bailout: posterior capsule rupture and vitreous loss",
+      "why": "A tear in the posterior capsule is the commonest serious complication of cataract surgery. Handled calmly it costs little; handled by carrying on as before it drops the nucleus into the vitreous and pulls on the retina.",
+      "how": [
+        "Stop the phaco or irrigation: keep the instrument in the eye and inject dispersive viscoelastic before withdrawing, so the chamber does not collapse.",
+        "Tell the team. Lower the bottle height and the flow.",
+        "Remove any vitreous from the anterior chamber and the wound with an anterior vitrectomy (cutter, separated irrigation); triamcinolone stains it.",
+        "Do not chase a dropped nucleus into the vitreous: leave it for a vitreoretinal surgeon.",
+        "Place the lens in the sulcus (with optic capture if possible) or leave the eye aphakic, and record the event for the patient and the follow-up."
+      ],
+      "structuresAtRisk": [
+        "Retina (traction from vitreous)",
+        "Dropped lens fragments",
+        "Corneal endothelium"
+      ],
+      "pitfalls": [
+        "Pulling out the phaco probe and collapsing the chamber.",
+        "Sponge and scissors vitrectomy that pulls on the retina.",
+        "Chasing a dropped nucleus."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.suprachoroidal-haemorrhage": {
+      "id": "step.eye.suprachoroidal-haemorrhage",
+      "kind": "bailout",
+      "critical": true,
+      "title": "Bailout: suprachoroidal haemorrhage",
+      "why": "Bleeding into the suprachoroidal space can push the eye contents out of an open wound within minutes. The response is to close the eye, not to keep operating.",
+      "how": [
+        "Recognise it: the red reflex darkens, the chamber shallows, the eye hardens and the iris or lens comes forward.",
+        "Close every wound immediately with sutures, with a finger over the wound while the stitch is placed.",
+        "Tell the anaesthetist: lower the blood pressure, deepen anaesthesia and stop any coughing or straining.",
+        "Do not try to drain it at the time; record it, explain it to the patient, and arrange vitreoretinal review."
+      ],
+      "structuresAtRisk": [
+        "Whole eye (expulsion of the contents)"
+      ],
+      "pitfalls": [
+        "Continuing the operation through a darkening red reflex.",
+        "Leaving a wound open while trying to drain the blood."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.conj-peritomy": {
+      "id": "step.eye.conj-peritomy",
+      "kind": "access",
+      "title": "Conjunctival peritomy and Tenon's dissection",
+      "why": "Conjunctiva is the covering that protects a bleb, a muscle repair or an implant. A ragged or buttonholed peritomy leaks, scars or exposes what lies beneath.",
+      "how": [
+        "Lift the conjunctiva with non-toothed forceps and open it at the limbus (limbus-based or fornix-based as planned) with blunt-tipped scissors.",
+        "Dissect Tenon's capsule from the sclera bluntly in the plane above the muscles.",
+        "Keep the conjunctival edges moist and handle them only with smooth forceps so they can be closed watertight."
+      ],
+      "structuresAtRisk": [
+        "Conjunctiva (buttonholes)",
+        "Rectus muscles and their vessels",
+        "Vortex veins"
+      ],
+      "pitfalls": [
+        "Toothed forceps on the conjunctival edge.",
+        "Cutting through Tenon's into a muscle belly."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.conj-closure": {
+      "id": "step.eye.conj-closure",
+      "kind": "closure",
+      "title": "Conjunctival closure",
+      "why": "A conjunctival closure has to cover what lies under it: a leak over a bleb drains the eye flat, and an exposed suture or implant becomes infected.",
+      "how": [
+        "Lay the conjunctiva back in its anatomical position, edges flat and not inverted.",
+        "Close with fine absorbable sutures or tissue glue, anchoring to the limbus where needed.",
+        "Check for a leak with fluorescein where a watertight seal matters (over a bleb)."
+      ],
+      "structuresAtRisk": [
+        "Conjunctiva",
+        "Underlying bleb, muscle or implant"
+      ],
+      "pitfalls": [
+        "A gap at the limbus that leaks.",
+        "Inverting the conjunctival edge so it does not heal."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.refractive-check": {
+      "id": "step.eye.refractive-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Refractive surgery check: stable refraction, corneal safety and the laser plan",
+      "why": "Laser refractive surgery is elective surgery on a healthy eye, so the threshold for harm is very low. The two avoidable disasters are treating the wrong prescription and treating a cornea that will later bulge (ectasia).",
+      "how": [
+        "Confirm a stable refraction for at least a year, from records, and a cycloplegic refraction where indicated.",
+        "Review topography and tomography for keratoconus or forme fruste keratoconus, and pachymetry for enough residual stromal bed.",
+        "Check the treatment plan in the laser against the patient, the eye and the refraction, and set the optical zone.",
+        "Confirm realistic expectations, contact lenses out for the agreed period, and no contraindicating eye or systemic disease."
+      ],
+      "structuresAtRisk": [
+        "Cornea (ectasia after treatment)"
+      ],
+      "pitfalls": [
+        "Treating a suspect topography.",
+        "Entering the refraction for the wrong eye."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.excimer-ablation": {
+      "id": "step.eye.excimer-ablation",
+      "kind": "resection",
+      "title": "Excimer laser ablation with eye tracking",
+      "why": "The ablation removes a precise depth of stroma to change the corneal curvature. Its accuracy depends on centration, a dry but not desiccated stromal bed, and a patient who keeps fixating.",
+      "how": [
+        "Check the laser has passed its calibration test that day.",
+        "Ask the patient to fixate on the light; engage the eye tracker and confirm centration over the pupil or visual axis before firing.",
+        "Keep the stromal bed evenly moist and treat without pauses unless the tracker loses the eye.",
+        "Watch throughout; the surgeon's foot comes off the pedal the moment fixation is lost."
+      ],
+      "structuresAtRisk": [
+        "Cornea (decentred ablation)",
+        "Visual axis"
+      ],
+      "pitfalls": [
+        "Firing without confirming centration.",
+        "A wet or dried-out bed giving an under- or over-correction."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.laser-interruption": {
+      "id": "step.eye.laser-interruption",
+      "kind": "bailout",
+      "title": "Bailout: laser interruption, decentration or loss of tracking",
+      "why": "A treatment that has gone off centre or stopped half way cannot simply be repeated from the start. Stopping cleanly and recording exactly where it stopped allows a safe completion.",
+      "how": [
+        "Take the foot off the pedal as soon as the patient moves, the tracker disengages or the laser faults.",
+        "Re-establish fixation and centration; most lasers allow the treatment to resume from where it stopped.",
+        "If the fault persists, abandon the rest of the treatment, record the percentage completed, and plan completion after the cornea has stabilised.",
+        "Tell the patient what happened."
+      ],
+      "structuresAtRisk": [
+        "Cornea (decentred or incomplete ablation)"
+      ],
+      "pitfalls": [
+        "Restarting the full treatment after a partial ablation.",
+        "Continuing while the patient looks away."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.eye.shield-postop": {
+      "id": "step.eye.shield-postop",
+      "kind": "closure",
+      "title": "Eye protection, drops and the warning signs",
+      "why": "Most sight-threatening problems after eye surgery declare themselves at home: increasing pain, redness and falling vision mean endophthalmitis or raised pressure until proven otherwise. The patient has to know what to watch for and whom to call that day.",
+      "how": [
+        "Apply a clear shield or pad as the operation requires; tell the patient to wear the shield at night.",
+        "Prescribe the post-operative drops (antibiotic, steroid, others) with a written schedule.",
+        "Tell the patient and carer in plain words: increasing pain, increasing redness or worsening vision means come back the same day, with a phone number that answers out of hours.",
+        "Book the first review at the interval the operation needs."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Discharging without a same-day emergency contact.",
+        "Drops written but not explained."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

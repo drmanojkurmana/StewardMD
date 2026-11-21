@@ -12528,6 +12528,15 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
 - Guard: `test/run-swipe-guard-ui.mjs`. `test/run-swipe-back-ui.mjs` has 5 checks failing on main before this change
   (it cannot open KardiQ, the later home checks follow from it).
 
+## 2026-11-21 - SURGX operates on the eye; ophthalmology is no longer emergencies-only
+- **Context**: on 2026-11-04 ophthalmology was scoped as on-call eye emergencies (protocols only); operations were left
+  to the Ophthalmós module, which is imaging and clinic teaching and has none. Owner asked for cataract, PRK and the rest,
+  and for the remaining gaps except oral and maxillofacial surgery.
+- **Decision**: 13 eye operations, 2 transplant (filed under urology, no new specialty), 2 cardiac and 3 plastics
+  procedures, a shared `eye` step pack; the specialty title becomes "Ophthalmology"; the coverage test now requires eye
+  procedures. Oral and maxillofacial surgery stays out by owner choice.
+- **Reversible**: content only (JSON, note templates, a test list); revert the commit to remove.
+
 ## 2026-11-21 - MaiK offline book: oncology notes behind a switch (smd_maik_kb_onco)
 - **Owner**: "1,2 yes and upload" (add the cancer notes to the on-device book; check embeddings).
 - **Decision**: a second published book, `maik-lite-kb-onco1.jsonl` on `models.stewardmd.in/maik/`

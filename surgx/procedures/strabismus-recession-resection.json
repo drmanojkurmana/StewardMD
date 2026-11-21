@@ -1,0 +1,295 @@
+{
+  "id": "strabismus-recession-resection",
+  "title": "Strabismus surgery: rectus recession and resection",
+  "subtitle": "Isolating, securing and moving a rectus muscle by measured amounts",
+  "system": "ophthalmic",
+  "aliases": [
+    "squint surgery",
+    "strabismus surgery",
+    "recess resect",
+    "rectus muscle recession",
+    "rectus muscle resection"
+  ],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "aao-strab",
+      "org": "American Academy of Ophthalmology",
+      "title": "Esotropia and Exotropia Preferred Practice Pattern",
+      "year": 2022,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Esotropia+and+Exotropia+Preferred+Practice+Pattern",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Manifest strabismus causing loss of binocular function, diplopia, abnormal head posture or psychosocial impact, after optical and amblyopia treatment.",
+      "Childhood esotropia or exotropia meeting the surgical threshold."
+    ],
+    "contraindications": [
+      "Untreated refractive error or amblyopia that should be addressed first.",
+      "Unstable angle of deviation."
+    ],
+    "preparation": [
+      "Orthoptic measurements on at least two occasions; the surgical plan with each muscle and the amount in millimetres.",
+      "Consent: under- or over-correction, further surgery, diplopia, a slipped or lost muscle, scleral perforation and retinal detachment, infection, and anterior segment ischaemia with multiple muscles."
+    ],
+    "positioning": [
+      "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    ],
+    "equipment": [
+      "Muscle hooks (Jameson, Stevens, Green), Westcott scissors, 6-0 double-armed polyglactin on spatulated needles, calipers, fine forceps, bipolar cautery."
+    ],
+    "anatomy": [
+      "The rectus insertions at increasing distances from the limbus (medial about 5.5, inferior 6.5, lateral 6.9, superior 7.7 mm, the spiral of Tillaux), the thin sclera just behind the insertions, the intermuscular septum and check ligaments, the vortex veins near the oblique muscles."
+    ],
+    "criticalSafety": [
+      "Confirm the muscle and the amount aloud at time-out and before each move.",
+      "Partial-thickness scleral passes only: the sclera behind the insertion is the thinnest.",
+      "Warn the anaesthetist before pulling on a muscle (oculocardiac reflex)."
+    ],
+    "structuresAtRisk": [
+      "Sclera (perforation)",
+      "Muscle (slip or loss)",
+      "Vortex veins",
+      "Anterior ciliary arteries"
+    ],
+    "commonErrors": [
+      "Operating on the wrong muscle or amount.",
+      "A full-thickness scleral pass.",
+      "Losing the muscle after disinsertion."
+    ],
+    "complications": [
+      "Under- or over-correction; diplopia.",
+      "Slipped or lost muscle.",
+      "Scleral perforation, retinal detachment, endophthalmitis.",
+      "Anterior segment ischaemia, conjunctival cysts or scarring."
+    ],
+    "postop": [
+      "Antibiotic and steroid drops; analgesia.",
+      "Orthoptic review at one to two weeks and at intervals.",
+      "Same-day return for pain, redness or falling vision; urgent review for sudden limitation of movement (slipped muscle)."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Mark the eye or eyes and record the plan: muscle, recession or resection, millimetres."
+    },
+    {
+      "ref": "step.core.timeout",
+      "emphasis": "Read each muscle and amount aloud against the written plan."
+    },
+    {
+      "ref": "step.eye.anaesthesia",
+      "emphasis": "General anaesthesia is usual; adults with adjustable sutures may have local."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    },
+    {
+      "ref": "step.eye.povidone-iodine"
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.eye.lid-speculum"
+    },
+    {
+      "ref": "step.strab.forced-duction"
+    },
+    {
+      "ref": "step.eye.conj-peritomy",
+      "emphasis": "Limbal or fornix incision over the muscle to be operated."
+    },
+    {
+      "ref": "step.strab.isolate"
+    },
+    {
+      "ref": "step.strab.secure"
+    },
+    {
+      "ref": "step.strab.recess"
+    },
+    {
+      "ref": "step.strab.resect"
+    },
+    {
+      "ref": "step.strab.oculocardiac"
+    },
+    {
+      "ref": "step.strab.lost-muscle"
+    },
+    {
+      "ref": "step.eye.conj-closure"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.eye.shield-postop"
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.strab.forced-duction": {
+      "id": "step.strab.forced-duction",
+      "kind": "checkpoint",
+      "title": "Forced duction test",
+      "why": "A restricted eye (thyroid, scarring, fracture) behaves differently from a weak muscle; the plan changes if passive movement is limited.",
+      "how": [
+        "Grasp the conjunctiva at the limbus with toothed forceps and move the eye passively in each direction, pushing it slightly back into the orbit.",
+        "Compare with the expected free movement and record any restriction."
+      ],
+      "structuresAtRisk": [
+        "Conjunctiva"
+      ],
+      "pitfalls": [
+        "Skipping it in a patient with a restrictive history."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.strab.isolate": {
+      "id": "step.strab.isolate",
+      "kind": "dissection",
+      "title": "Isolating the rectus muscle",
+      "why": "The whole muscle must be on the hook: a split muscle is undercorrected and may slip.",
+      "how": [
+        "Pass a muscle hook under the insertion from behind, then a second hook from the other side to confirm the entire width is engaged.",
+        "Clear the intermuscular septum and check ligaments a short way back, staying close to the muscle.",
+        "For the inferior and superior recti, avoid the oblique muscles and vortex veins."
+      ],
+      "structuresAtRisk": [
+        "Vortex veins",
+        "Oblique muscles",
+        "Anterior ciliary vessels"
+      ],
+      "pitfalls": [
+        "Hooking only part of the muscle.",
+        "Dissecting too far back into fat (adhesion syndrome)."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.strab.secure": {
+      "id": "step.strab.secure",
+      "kind": "resection",
+      "critical": true,
+      "title": "Securing and disinserting the muscle",
+      "why": "A secure locking suture through the muscle before it is cut is what stops the muscle being lost into the orbit.",
+      "how": [
+        "Place a double-armed 6-0 absorbable suture through the muscle near the insertion with a full-width weave and locking bites at each edge.",
+        "Cut the muscle from the sclera close to the insertion, leaving a small stump.",
+        "Control bleeding from the anterior ciliary vessels with bipolar."
+      ],
+      "structuresAtRisk": [
+        "Muscle (loss)",
+        "Sclera"
+      ],
+      "pitfalls": [
+        "Cutting before the suture is locked.",
+        "A partial-width bite."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.strab.recess": {
+      "id": "step.strab.recess",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Recession: reattaching the muscle further back",
+      "why": "Moving the insertion back weakens the muscle by a measured amount. The measurement and a partial-thickness scleral pass decide the result and the safety.",
+      "how": [
+        "Measure the recession from the original insertion with calipers (or use a hang-back technique).",
+        "Pass each needle partial-thickness through the sclera, tangentially, with the bevel visible through the sclera.",
+        "Tie the muscle down at the new position, the full width flat on the sclera."
+      ],
+      "structuresAtRisk": [
+        "Sclera (perforation)",
+        "Retina"
+      ],
+      "pitfalls": [
+        "A deep needle pass.",
+        "Measuring from the wrong reference."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.strab.resect": {
+      "id": "step.strab.resect",
+      "kind": "reconstruction",
+      "title": "Resection: shortening the muscle",
+      "why": "Removing a measured length and reattaching at the original insertion strengthens the muscle.",
+      "how": [
+        "Measure the planned length back from the insertion and place the locking suture there.",
+        "Clamp, excise the muscle in front of the suture, and reattach to the original insertion stump with partial-thickness passes."
+      ],
+      "structuresAtRisk": [
+        "Sclera",
+        "Muscle (loss)"
+      ],
+      "pitfalls": [
+        "Excising before the suture is secure."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.strab.oculocardiac": {
+      "id": "step.strab.oculocardiac",
+      "kind": "bailout",
+      "title": "Bailout: oculocardiac reflex",
+      "why": "Traction on an extraocular muscle can slow the heart abruptly, especially in children. Releasing traction is the first and usually sufficient treatment.",
+      "how": [
+        "Warn the anaesthetist before traction; watch the heart rate.",
+        "If bradycardia occurs, release traction immediately.",
+        "Resume gently once the rate recovers; the anaesthetist gives atropine or glycopyrrolate if it persists or recurs."
+      ],
+      "structuresAtRisk": [
+        "Heart (bradycardia, asystole)"
+      ],
+      "pitfalls": [
+        "Continuing to pull through a falling heart rate."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.strab.lost-muscle": {
+      "id": "step.strab.lost-muscle",
+      "kind": "bailout",
+      "title": "Bailout: a slipped or lost muscle",
+      "why": "A muscle that retracts into the orbit becomes hard to find quickly; a calm, structured search through Tenon's usually recovers it.",
+      "how": [
+        "Stop pulling; use good light and two assistants with retractors.",
+        "Follow the capsule (the muscle's sheath) hand over hand posteriorly without grabbing fat.",
+        "If not found, close, image, and refer to an experienced strabismus or orbital surgeon."
+      ],
+      "structuresAtRisk": [
+        "Orbital fat (adhesions)",
+        "Muscle"
+      ],
+      "pitfalls": [
+        "Blind grabbing of orbital fat."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

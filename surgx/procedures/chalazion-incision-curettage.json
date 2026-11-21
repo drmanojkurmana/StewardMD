@@ -1,0 +1,166 @@
+{
+  "id": "chalazion-incision-curettage",
+  "title": "Chalazion incision and curettage",
+  "subtitle": "Clamp, vertical conjunctival incision, curettage and histology when atypical",
+  "system": "ophthalmic",
+  "aliases": [
+    "chalazion",
+    "meibomian cyst",
+    "I and C",
+    "incision and curettage"
+  ],
+  "estMinutes": 15,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "bensimon-2011",
+      "org": "Ben Simon GJ et al. Am J Ophthalmol 151:714",
+      "title": "Intralesional triamcinolone acetonide injection versus incision and curettage for primary chalazia: a prospective, randomized study",
+      "year": 2011,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Intralesional+triamcinolone+acetonide+injection+versus+incision+and+curettage+for+primary+chalazia%3A+a+prospective%2C+randomized+study",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "A chalazion persisting despite warm compresses and lid hygiene for several weeks.",
+      "A large chalazion causing astigmatism, ptosis or cosmetic concern."
+    ],
+    "contraindications": [
+      "Acute infection with cellulitis (treat first).",
+      "A recurrent chalazion in the same place, or one with atypical features, in an older adult: biopsy for sebaceous carcinoma rather than curette alone."
+    ],
+    "preparation": [
+      "Check the lid for signs of malignancy (loss of lashes, ulceration, distortion of the lid margin, recurrence).",
+      "Consent: recurrence, bleeding and bruising, a visible lid notch rarely, and histology if indicated."
+    ],
+    "positioning": [
+      "Supine or semi-reclined, head supported; children usually under general anaesthesia."
+    ],
+    "equipment": [
+      "Chalazion clamp, 11 blade, small curette, fine scissors, local anaesthetic with adrenaline, topical anaesthetic, antibiotic ointment, eye pad."
+    ],
+    "anatomy": [
+      "The tarsal plate with the meibomian glands running vertically within it, the conjunctival surface behind, the lid margin and lash line in front."
+    ],
+    "criticalSafety": [
+      "Incise vertically on the conjunctival side, at least 2 to 3 mm from the lid margin.",
+      "Send tissue for histology when recurrent or atypical.",
+      "Protect the cornea from the clamp and instruments."
+    ],
+    "structuresAtRisk": [
+      "Lid margin",
+      "Cornea",
+      "Lacrimal punctum (medial lesions)"
+    ],
+    "commonErrors": [
+      "A horizontal incision that cuts across glands.",
+      "An incision too close to the lid margin.",
+      "Curetting a sebaceous carcinoma without histology."
+    ],
+    "complications": [
+      "Recurrence.",
+      "Bleeding and haematoma.",
+      "Lid margin notching.",
+      "Missed malignancy."
+    ],
+    "postop": [
+      "Pad for a few hours; antibiotic ointment for a few days.",
+      "Warm compresses and lid hygiene to prevent new chalazia.",
+      "Return if it recurs in the same place."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Mark the lid (upper or lower, right or left)."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.eye.anaesthesia",
+      "emphasis": "Topical drops, then local anaesthetic with adrenaline infiltrated subcutaneously and subconjunctivally around the lesion."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine or semi-reclined, head supported."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.chal.clamp"
+    },
+    {
+      "ref": "step.chal.incise"
+    },
+    {
+      "ref": "step.core.specimen",
+      "emphasis": "Send the contents and wall for histology if recurrent or atypical, and in older adults."
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "Remove the clamp and press firmly for several minutes."
+    },
+    {
+      "ref": "step.eye.shield-postop",
+      "emphasis": "Antibiotic ointment and a firm pad for a few hours."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.chal.clamp": {
+      "id": "step.chal.clamp",
+      "kind": "access",
+      "title": "Applying the chalazion clamp",
+      "why": "The clamp everts the lid, controls bleeding and protects the cornea, so the incision can be made accurately on the conjunctival side.",
+      "how": [
+        "Place the ring of the clamp on the conjunctival side around the lesion and the solid plate on the skin side.",
+        "Tighten it just enough to stop bleeding and evert the lid."
+      ],
+      "structuresAtRisk": [
+        "Cornea",
+        "Lid skin (pressure)"
+      ],
+      "pitfalls": [
+        "Over-tightening.",
+        "Clamp ring not centred on the lesion."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.chal.incise": {
+      "id": "step.chal.incise",
+      "kind": "resection",
+      "critical": true,
+      "title": "Vertical incision and curettage",
+      "why": "A vertical incision follows the meibomian glands and spares the lid margin; thorough curettage and removal of the wall reduce recurrence.",
+      "how": [
+        "Incise vertically through the conjunctiva and tarsus over the lesion, stopping 2 to 3 mm short of the lid margin.",
+        "Curette out the contents in all directions, and excise the wall with fine scissors.",
+        "Inspect the contents: unusual yellow, firm or gritty tissue raises the suspicion of carcinoma."
+      ],
+      "structuresAtRisk": [
+        "Lid margin",
+        "Tarsal plate",
+        "Punctum and canaliculus (medial lower lid)"
+      ],
+      "pitfalls": [
+        "Incising horizontally across the glands.",
+        "Leaving the wall behind."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}
