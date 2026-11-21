@@ -544,3 +544,8 @@ scratchpad) and wired by `wire6v.py` straight from each step's best clip, with o
 trabeculectomy suprachoroidal clip (choroidal drainage, later management) was replaced by the stop-and-close chalk-talk.
 Captions flag the left-eye pterygium footage, the LASIK flap relift, the Hindi MMC preparation, and lectures that quote
 3% or 4% povidone-iodine. A channel name from oEmbed carried an em-dash; replaced with a comma.
+
+## Batch 6 pictures, part A (2026-11-21)
+56 of 59 wired (phaco 20, SICS 17, trabeculectomy 19; `med.surgx.{phaco,sics,trab}-step-NN`) via scratchpad
+`img6.py` (letters A to G, eye-specific prep-drape caption). Held back SICS 10, 14, 15; redo prompt at the end of
+[[SURGX-batch6-image-prompt]]. PRK, LASIK and pterygium images not yet received.

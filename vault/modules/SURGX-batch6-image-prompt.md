@@ -534,3 +534,40 @@ named exactly as above:
 Put credits.txt in each zip: for each image the filename, a one-line description and the reference sources you
 studied (titles and links). Then give me the zips as downloads.
 ```
+
+## Round 1 part A result and redo prompt (3 images)
+
+Gemini's first share held only phaco, SICS and trabeculectomy. Wired 56 of 59. Held back: SICS 10 (a different, distorted
+eye with pink lumps above and beside it), SICS 14 (a gel blob lying on the nasal conjunctiva outside the eye), SICS 15
+(a finger pressing on the globe instead of over the wound). Note: trabeculectomy 09 to 16 show a grey-green iris and
+lighter skin than 07 and 08 (brown iris); kept because the surgery is right.
+
+```
+Three SICS images are wrong. Regenerate ONLY these three with the IMAGE GENERATION MODEL (never code), in exactly the
+same style, microscope view, patient (dark iris, dense yellow-brown cataract), speculum and drape as images 08, 09, 11
+and 12 of manual-sics. RIGHT eye, forehead at the TOP, the nose and the pink caruncle on the viewer's RIGHT only.
+
+1. manual-sics/10_capsulotomy.png
+   - The same eye as image 09: the small fornix-based conjunctival flap at 12 o'clock folded back, the scleral tunnel
+     opening at the top. ONE caruncle, on the viewer's right. No other pink tissue.
+   - The anterior chamber filled with viscoelastic; a bent cystotome needle entering through the tunnel making a LARGE
+     round capsulorhexis (about 6 to 7 mm) over the dense yellow-brown nucleus; trypan blue staining the capsule edge.
+   - Teach: a large opening so the nucleus can come out of the bag. Check: same eye as image 09.
+
+2. manual-sics/14_posterior-capsule-rupture.png
+   - The same eye after the nucleus is out: a tear in the posterior capsule seen against the red reflex, clear vitreous
+     strands coming forward through the tear towards the tunnel at 12 o'clock.
+   - A vitrectomy cutter entering through the tunnel, with a separate irrigation cannula through a side port.
+   - NOTHING lying on the conjunctiva outside the eye. Small cross-section inset of the torn posterior capsule.
+   - Teach: stop, keep the chamber formed, clear the vitreous with a cutter. Check: everything is inside the eye.
+
+3. manual-sics/15_suprachoroidal-haemorrhage.png
+   - The same eye: the red reflex turning dark red to black, the iris bulging forward, the chamber shallow.
+   - The surgeon placing a quick suture across the scleral tunnel at 12 o'clock with a needle holder, while an
+     assistant's gloved fingertip presses GENTLY ON THE TUNNEL WOUND ITSELF (not on the globe elsewhere).
+   - Small inset: a dark dome of blood under the choroid.
+   - Teach: close the eye at once; do not keep operating. Check: no pressure on the globe away from the wound.
+
+No text, numbers or labels. Landscape 4:3, 1600 x 1200 px, PNG, same filenames, in a folder named manual-sics.
+Put all three in ONE zip: surgx-batch6-fix.zip
+```
