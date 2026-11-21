@@ -491,3 +491,21 @@ named exactly as above:
 Put credits.txt in each zip: for each image the filename, a one-line description and the reference sources you
 studied (titles and links). Then give me the zips as downloads.
 ```
+
+## Round 1 result and redo prompt (1 image)
+
+101 of 102 wired (scratchpad `img7.py`). Held back: evisceration 16 (haemostasis drawn on an eye with the cornea still
+on, after the contents were removed in 10 and 11).
+
+```
+One image is wrong. Regenerate ONLY this one with the IMAGE GENERATION MODEL (never code), same style, patient,
+speculum and microscope view as evisceration images 11 to 14. RIGHT eye.
+
+evisceration/16_haemostasis.png
+- The stage AFTER image 11: the cornea already removed, the empty white scleral shell open (no iris, no cornea, no
+  lens), the inner sclera clean.
+- A fine wet-field cautery tip touching one small bleeding point on the cut scleral edge; the rest of the shell dry.
+- Teach: a dry shell before the implant goes in. Check: no cornea and no iris anywhere.
+No text, numbers or labels. Landscape 4:3, 1600 x 1200 px, PNG, same filename, in a folder named evisceration.
+Put it in ONE zip: surgx-batch7-fix.zip
+```
