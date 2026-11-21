@@ -604,3 +604,10 @@ pictures yet (positioning and precise facts taken from each procedure's own chap
 - [[SURGX-batch24-image-prompt]] (103) + [[SURGX-batch24-video-prompt]]: Open carpal tunnel release, Trigger finger release, Flexor tendon repair (zone II), Craniotomy for supratentorial tumour, Decompressive craniectomy (planned)
 - [[SURGX-batch25-image-prompt]] (100) + [[SURGX-batch25-video-prompt]]: Anterior cervical discectomy and fusion, Lumbar laminectomy for canal stenosis, Posterior lumbar instrumented fusion (TLIF), VATS bullectomy with pleurodesis, Median sternotomy and closure
 - [[SURGX-batch26-image-prompt]] (86) + [[SURGX-batch26-video-prompt]]: Coronary artery bypass grafting, Hemithyroidectomy (thyroid lobectomy), Parathyroidectomy, Laparoscopic adrenalectomy
+
+### Batch 9b clips wired (2026-11-21)
+82 clips over pyeloplasty, partial nephrectomy, radical prostatectomy, cystectomy with ileal conduit and
+nephroureterectomy (`wire9b.py`, ids `med.surgx.{pyelo,pn,rp,rc,nu}-clip-NN`), all embed-checked; 17 new ALLOW ids.
+Not used: the two operative nephroureterectomy videos for the hilum (vein divided before artery there; the animation
+shows artery first), the nurse explainer's debrief (says the catheter comes out in theatre), the high-extended node
+dissection above the aortic bifurcation (debated; the standard pelvic dissection clip is used).
