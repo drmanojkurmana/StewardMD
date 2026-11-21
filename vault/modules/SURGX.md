@@ -517,3 +517,48 @@ left out on purpose). 20 new procedures, so **128 procedures**, all `ai_drafted`
 - UI test: the Ophthalmology chip lists 13 operations and phaco opens with its 20 steps.
 - No pictures or clips yet; these are candidates for the next Gemini batches. Need ophthalmologist, transplant,
   cardiac and plastics sign-off.
+
+## Batches 6 and 7 prompts (2026-11-21)
+[[SURGX-batch6-image-prompt]] (105 images: phaco, SICS, trabeculectomy, PRK, LASIK, pterygium) and
+[[SURGX-batch7-image-prompt]] (102 images: intravitreal injection, DCR, chalazion, foreign body, evisceration,
+strabismus, vitrectomy), each with a video prompt. Scene lines are generated from the step's own `how`, `why` and
+`pitfalls` by scratchpad `gen/prompts.py`; orientation, positioning and precise facts are hand-written. Convention: the
+RIGHT eye, microscope views with the forehead at the top and the nose on the viewer's RIGHT. Operations use letters A to
+G, so the wiring regex needs `[A-G]` (batch 4 script used `[A-E]`). Still without prompts: kidney transplant, donor
+nephrectomy, AVR, pericardial window, escharotomy, rhomboid flap, cleft lip (128 steps).
+
+## Batch 7 clips wired (2026-11-21)
+83 timed clips (`med.surgx.{ivi,dcr,chal,fb,evis,strab,ppv}-clip-NN`): intravitreal 11 of 11, DCR 12 of 16, chalazion
+10 of 11, foreign body 10 of 10, evisceration 13 of 19, strabismus 14 of 19, vitrectomy 13 of 16. All 24 videos pass the
+real-player check; 21 new ALLOW ids. Not used: the chalazion consent and aftercare talking-head clip (a TikTok
+re-upload), the evisceration speculum clip (same animation segment as the keratectomy). Captions flag the left-eye
+footage (lid eversion, vitrectomy, DCR local), the model eye and 20G needle (foreign body), and the patient animations.
+Empty: positioning, speculum and povidone in most of them, DCR bailout and haemostasis, squint lost-muscle bailout,
+vitrectomy wound check.
+
+## Batch 6 clips wired (2026-11-21)
+104 timed clips (`med.surgx.{phaco,sics,trab,prk,lasik,ptg}-clip-NN`): phaco 20 of 20, SICS 20 of 20, trabeculectomy 19
+of 19, PRK 14 of 14, LASIK 15 of 15, pterygium 16 of 17. Gemini's JSON was saved as a file (`in6/b6v.json` in the
+scratchpad) and wired by `wire6v.py` straight from each step's best clip, with overrides. The Ochsner checklist video
+(7E1ivPB_zn0) failed the real-player check, so its timeout, count and debrief clips use the Gloucestershire one; the
+trabeculectomy suprachoroidal clip (choroidal drainage, later management) was replaced by the stop-and-close chalk-talk.
+Captions flag the left-eye pterygium footage, the LASIK flap relift, the Hindi MMC preparation, and lectures that quote
+3% or 4% povidone-iodine. A channel name from oEmbed carried an em-dash; replaced with a comma.
+
+## Batch 6 pictures, part A (2026-11-21)
+56 of 59 wired (phaco 20, SICS 17, trabeculectomy 19; `med.surgx.{phaco,sics,trab}-step-NN`) via scratchpad
+`img6.py` (letters A to G, eye-specific prep-drape caption). Held back SICS 10, 14, 15; redo prompt at the end of
+[[SURGX-batch6-image-prompt]]. PRK, LASIK and pterygium images not yet received.
+Part B (same day): PRK 14 of 14, LASIK 13 of 15, pterygium 16 of 17 wired via `img6b.py`; batch 6 now 99 of 105.
+Held back LASIK 09, LASIK 12, pterygium 12 (second redo prompt in [[SURGX-batch6-image-prompt]]).
+Fix (same day): the six held-back images came back in `surgx-batch6-fix.zip`, passed full-size review and were wired; batch 6 is 105 of 105.
+
+## Batch 7 pictures wired (2026-11-21)
+101 of 102 (`med.surgx.{ivi,dcr,chal,fb,evis,strab,ppv}-step-NN`), every image reviewed four to a sheet. Held back
+evisceration 16 (cornea still on in a post-evisceration step); redo prompt at the end of [[SURGX-batch7-image-prompt]].
+Evisceration 16 redraw wired the same day; batch 7 now 102 of 102.
+
+### Batch 8 prompts (2026-11-21)
+[[SURGX-batch8-image-prompt]] (128 images) and [[SURGX-batch8-video-prompt]] for the 7 non-eye operations: kidney
+transplant, laparoscopic donor nephrectomy, aortic valve replacement, subxiphoid pericardial window, escharotomy,
+rhomboid flap, unilateral cleft lip repair. Made by `make8.py` (the batch 6 and 7 generator with the eye wording swapped out).
