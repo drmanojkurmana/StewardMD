@@ -679,3 +679,10 @@ body.dark #surgxRoot .sgx-secs, body.v3-dark #surgxRoot .sgx-secs { box-shadow: 
 body.dark #surgxRoot .sgx-secbtn.on .ct, body.v3-dark #surgxRoot .sgx-secbtn.on .ct { color: #0b1a1d; }
 @media (min-width: 700px) { #surgxRoot .sgx-secnav { padding-left: max(16px, calc((100% - 700px) / 2)); padding-right: max(16px, calc((100% - 700px) / 2)); } }
 @media (prefers-reduced-motion: reduce) { #surgxRoot .sgx-secbtn, #surgxRoot .sgx-nextsec { transition: none; } }
+
+/* Owner 2026-11-21: sections as ONE horizontal sliding row, not wrapped lines. Snap scrolling, a soft fade at the right
+   edge says there is more, and the active button is scrolled into view after every change (surgx-screens.js). */
+#surgxRoot .sgx-secnav { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding-left: 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); }
+#surgxRoot .sgx-secnav::-webkit-scrollbar { display: none; }
+#surgxRoot .sgx-secbtn { flex: 0 0 auto; scroll-snap-align: start; white-space: nowrap; }
+@media (min-width: 700px) { #surgxRoot .sgx-secnav { scroll-padding-left: max(16px, calc((100% - 700px) / 2)); } }

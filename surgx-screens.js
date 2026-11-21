@@ -1897,7 +1897,7 @@
       }
 
       // procedures
-      if (act === "tab") { state.procTab = t.getAttribute("data-id"); render(); try { state.host.scrollTop = 0; } catch (er) {} return; }
+      if (act === "tab") { state.procTab = t.getAttribute("data-id"); render(); try { state.host.scrollTop = 0; } catch (er) {} try { var sOn = state.host.querySelector(".sgx-secbtn.on"); if (sOn && sOn.parentNode) sOn.parentNode.scrollLeft = Math.max(0, sOn.offsetLeft - 16); } catch (er2) {} return; }
 
       // cases
       if (act === "spec") { state.spec = t.getAttribute("data-id") || ""; haptic("light"); render(); return; }
