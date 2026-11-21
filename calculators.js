@@ -8880,8 +8880,8 @@
       var cpl=cp.querySelector("span"); if(cpl){ cpl.textContent="Copied"; setTimeout(function(){ cpl.textContent="Copy result"; }, 1200); }
     });
   }
-  function fillFromSnapshot(c, run){
-    var snap=patientSnapshot();
+  function fillFromSnapshot(c, run, given){
+    var snap=given||patientSnapshot();
     var noteEl=document.getElementById("mcAFnote_"+c.id);
     if(!snap.has){
       if(noteEl) noteEl.innerHTML='<div class="mc-af-msg">Open a patient first. Open Ward, ICU or an OPD patient, then return here.</div>';
@@ -8967,7 +8967,21 @@
       b.classList.toggle("on", on); b.setAttribute("aria-pressed", on?"true":"false");
       renderList();
     });
-    view.querySelector("#mcAuto_"+id).addEventListener("click", function(){ fillFromSnapshot(c, run); });
+    // Owner 2026-11-21: Fill from patient opens Ward Sync with a Select button on every patient; the chosen patient's
+    // age, sex and Ward Sync labs fill the calculator. Without Ward Sync it falls back to the open ICU/OPD patient.
+    view.querySelector("#mcAuto_"+id).addEventListener("click", function(){
+      if(!(window.GHIS && GHIS.pickPatient)){ fillFromSnapshot(c, run); return; }
+      GHIS.pickPatient(function(p){
+        var note=document.getElementById("mcAFnote_"+id), who=p.patientFirstName||p.patientId||"patient";
+        if(note) note.innerHTML='<div class="mc-af-msg">Fetching '+esc(who)+'\u2019s labs from Ward Sync\u2026</div>';
+        var ageP=parseInt(p.dob,10);
+        var snap={ has:true, src:"Ward Sync \u00b7 "+who, ts:Date.now(), age:(ageP>0&&ageP<130)?ageP:null, sex:p.gender||"", vitals:{}, labs:{}, srcMap:{} };
+        (GHIS.fetchLabTests ? GHIS.fetchLabTests(p.patientId) : Promise.resolve([])).then(function(rows){
+          var a=extractAnalytes(rows||[]);
+          for(var k in a){ if(a[k] && a[k].value!=null) snap.labs[k]=a[k].value; }
+        }).catch(function(){}).then(function(){ fillFromSnapshot(c, run, snap); });
+      });
+    });
     view.querySelector("#mcAsk_"+id).addEventListener("click", function(){
       var qq=buildMaikQuestion(c);
       try{ if(window.SMD_askMaik) SMD_askMaik(qq); else if(window.SMD_askMaikHandoff) SMD_askMaikHandoff({ prefill:qq }); }catch(e){}
