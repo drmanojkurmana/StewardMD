@@ -60,7 +60,7 @@ try {
   await sleep(600); b = await band();
   ok(b.h >= 72 && b.dash < 0.01 && /Let go/.test(b.t) && /armed/.test(b.cls) && b.heart > 0.9, `past the trigger: trace complete, the heart pops, "Let go" (${Math.round(b.h)} px)`);
   ok(b.pulling, 'body.hv-pulling while open');
-  ok(await ev(`(()=>{const bb=document.querySelector('#homeV2 > .hv-pull').getBoundingClientRect(),h=document.querySelector('#homeV2 .hrf-hero').getBoundingClientRect();return Math.abs(bb.bottom-h.top)<=2})()`), 'no strip of page between the band and the hero');
+  ok(await ev(`(()=>{const bb=document.querySelector('#homeV2 > .hv-pull').getBoundingClientRect(),h=document.querySelector('#homeV2 .hrf-hero').getBoundingClientRect();return bb.bottom>=h.top && bb.bottom-h.top<=4})()`), 'no strip of page between the band and the hero (the band tucks under it)');
   await ev(`window.SMD_SWIPE_BACK && SMD_SWIPE_BACK.syncHandle && SMD_SWIPE_BACK.syncHandle();1`);
   ok(await ev(`(()=>{const k=document.getElementById('smdTopBack');return !k||getComputedStyle(k).visibility==='hidden'})()`), 'no Back button over Home while it is pulled');
   await shot('pulled-light');
@@ -77,6 +77,16 @@ try {
   await sleep(300);
   const tf = await ev(`document.querySelector('#homeV2 > .v3-main').style.transform`);
   ok(!tf, 'the scroller is back in place (no transform left: "' + tf + '")');
+  // the start of a pull, in fine fractional steps: at every step the band reaches under the hero (no hairline of page)
+  await touch('touchStart', 195, 260);
+  let gaps = [];
+  for (let k = 1; k <= 30; k++) { await touch('touchMove', 195, 260 + k * 1.37); await sleep(16);
+    gaps.push(await ev(`(()=>{const bb=document.querySelector('#homeV2 > .hv-pull').getBoundingClientRect(),h=document.querySelector('#homeV2 .hrf-hero').getBoundingClientRect();return bb.height<1||bb.bottom>=h.top-0.01})()`)); }
+  await touch('touchEnd'); await sleep(800);
+  ok(gaps.every(Boolean), 'the start of a pull, step by step: never a gap between the band and the hero (' + gaps.filter(g => !g).length + ' gaps in 30 steps)');
+  // a native bounce at fractional offsets: same
+  const nat = await ev(`(()=>{const out=[];for(const y of [0.4,1.6,3.3,7.75,12.5]){SMD_HOME_PULL._draw(y,'pull',true);const bb=document.querySelector('#homeV2 > .hv-pull').getBoundingClientRect(),sc=document.querySelector('#homeV2 > .v3-main').getBoundingClientRect();out.push(bb.bottom>=sc.top+y-0.01)}SMD_HOME_PULL._draw(0,'home',true);return out.every(Boolean)})()`);
+  ok(nat === true, 'a native bounce at fractional offsets: the band always covers the gap it opens');
   // a pull that is let go early: no pearl, straight home
   await pullTo(40); await touch('touchEnd');
   await sleep(150);
@@ -89,7 +99,7 @@ try {
   await ev(`document.body.classList.remove('dark');1`);
   // a native bounce (iOS fling past the top) draws the band without words
   await ev(`SMD_HOME_PULL._draw(50,'pull',true);1`); await sleep(300);
-  ok(await ev(`getComputedStyle(document.querySelector('#homeV2 > .hv-pull .hvp-t')).opacity==='0' && document.querySelector('#homeV2 > .hv-pull').getBoundingClientRect().height===50`), 'a native bounce: teal and trace, no prompt');
+  ok(await ev(`getComputedStyle(document.querySelector('#homeV2 > .hv-pull .hvp-t')).opacity==='0' && document.querySelector('#homeV2 > .hv-pull').getBoundingClientRect().height>=50`), 'a native bounce: teal and trace, no prompt');
   await ev(`SMD_HOME_PULL._draw(0,'home',true);1`);
   // the pure helpers
   ok(await ev(`SMD_HOME_PULL._pure.prog(36,72)===0.5 && SMD_HOME_PULL._pure.prog(200,72)===1 && SMD_HOME_PULL._pure.pick(['a','b'],3)==='b'`), 'progress and pearl rotation');
