@@ -422,6 +422,8 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 #surgxRoot .sgx-step .w { margin-top: 4px; font: 500 12.5px/1.55 var(--sgx-sans); color: var(--sgx-muted); }
 #surgxRoot .sgx-step ul { margin: 7px 0 0; padding-left: 17px; }
 #surgxRoot .sgx-step li { font: 500 13px/1.55 var(--sgx-sans); margin: 3px 0; }
+/* high-yield bolding from reasoning.js medFormat (same rule as the Knowledge Library: bold ink, never colour) */
+#surgxRoot .sgx-step [class^="md-"]:not(.md-hi) { font-weight: 700; color: inherit; }  /* md-hi = another open article's terms, not ours */
 #surgxRoot .sgx-step .risk { margin-top: 7px; font: 600 12px/1.5 var(--sgx-sans); color: var(--sgx-bad); }
 #surgxRoot .sgx-step .pit { margin-top: 6px; font: 500 12px/1.5 var(--sgx-sans); color: var(--sgx-warn); }
 

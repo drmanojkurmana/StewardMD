@@ -206,9 +206,14 @@ try {
     "the step runner renders the shared + local steps in order");
   ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('At risk:')")) === true,
     "structures at risk are surfaced on the steps that carry them");
+  ok((await ev("(function () { var st = [].filter.call(document.querySelectorAll('#surgxRoot .sgx-step'), function (x) { return /Peritoneal toilet/.test(x.querySelector('.t').textContent); })[0]; var b = st && [].filter.call(st.querySelectorAll('.w [class^=\"md-\"], li [class^=\"md-\"]'), function (s) { return /^do not$/i.test(s.textContent) && +getComputedStyle(s).fontWeight >= 700; }); return !!(b && b.length); })()")) === true,
+    "BOLD: step text gets the Knowledge Library high-yield bolding ('Do not' is bold in peritoneal toilet)");
+  ok((await ev("(function () { var b = [].map.call(document.querySelectorAll('#surgxRoot .sgx-step li [class^=\"md-\"]'), function (s) { return s.textContent; }); var t = document.querySelector('#surgxRoot .sgx-wrap').textContent; return b.indexOf('90 degrees') >= 0 && b.indexOf('under direct vision') >= 0 && b.indexOf('aloud') >= 0 && t.indexOf('Abduct the arm no more than 90 degrees; pad the ulnar groove') >= 0 && !/&lt;|&amp;|<span/.test(t); })()")) === true,
+    "BOLD: surgical points (90 degrees, under direct vision, aloud) are bold and the step text reads unchanged");
+  console.log("   bold coverage:", await ev("(function () { var st = document.querySelectorAll('#surgxRoot .sgx-step'); return [].filter.call(st, function (x) { return x.querySelector('.w [class^=\"md-\"], li [class^=\"md-\"]'); }).length + ' of ' + st.length + ' appendicectomy steps have a bold point'; })()"));
   ok((await ev("[].slice.call(document.querySelectorAll('#surgxRoot .sgx-embed iframe')).map(function (f) { return (f.closest('.sgx-step') ? 'step' + f.closest('.sgx-step').querySelector('.n').textContent + ':' : '') + f.src.split('v=')[1]; }).join(',')")) ===
-    "step1:IX0DNOBEItE,step2:_jE5NgLkTo4,step3:pqCD1bVDXvI,step4:H7LyCwzaZEo&start=62&end=77,step5:uny6rK8Mbs0,step6:vBj5vn41Ixs,step7:H7LyCwzaZEo&start=94&end=111,step8:fpTqrJVSxpI&start=67&end=72,step9:H7LyCwzaZEo&start=134&end=153,step10:H7LyCwzaZEo&start=154&end=171,step11:zIcHlU-L1-E,step12:hxnSwIdtagA,step13:H7LyCwzaZEo&start=211&end=230,step15:eUr-Mj2qCgI,step16:LzfLvDLCD7Y,step17:5nCCHgU0LDE,step18:6OERElPC3EI,step19:3HhXz5QhDzw,fpTqrJVSxpI,H7LyCwzaZEo",
-    "VIDEO: every step except 14 carries its video or timed clip, the two whole videos follow the steps, all through the stewardmd.in YouTube shim");
+    "step1:IX0DNOBEItE&start=22&end=119,step2:_jE5NgLkTo4&start=92&end=166,step3:pqCD1bVDXvI&start=375&end=463,step4:H7LyCwzaZEo&start=62&end=77,step5:uny6rK8Mbs0&start=238&end=342,step6:Bhm7cCcr1Qc&start=14&end=83,step7:H7LyCwzaZEo&start=94&end=111,step8:fpTqrJVSxpI&start=67&end=72,step9:H7LyCwzaZEo&start=134&end=153,step10:H7LyCwzaZEo&start=154&end=171,step11:zIcHlU-L1-E&end=36,step12:hxnSwIdtagA&start=224&end=293,step13:H7LyCwzaZEo&start=211&end=230,step15:eUr-Mj2qCgI&end=63,step16:LzfLvDLCD7Y&start=585&end=670,step17:h5D8sU8btyI&start=29&end=51,step18:6OERElPC3EI&start=85&end=185,step19:3HhXz5QhDzw&start=78&end=153,fpTqrJVSxpI,H7LyCwzaZEo",
+    "VIDEO: every step except 14 carries a timed clip, the two whole videos follow the steps, all through the stewardmd.in YouTube shim");
   ok(await waitFor("#surgxRoot .sgx-step .sgx-media img"), "IMAGES: step pictures render");
   ok((await ev("(function () { var st = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step')); var src = st.map(function (x) { var i = x.querySelector('.sgx-media img'); return i ? i.src : ''; }); if (st.length !== 19 || src.indexOf('') >= 0 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
     "IMAGES: each of the 19 appendicectomy steps shows its own picture, and every file loads");
@@ -232,6 +237,26 @@ try {
     "VIDEO batch 3: right hemicolectomy shows its 22 step clips through the shim");
   ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 23 || new Set(src).size !== 23) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
     "IMAGES batch 3: right hemicolectomy shows 23 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Total hip replacement");
+  await waitFor("#surgxRoot .sgx-tab");
+  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 22,
+    "VIDEO batch 4: total hip replacement shows its 22 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 22 || new Set(src).size !== 22) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 4: total hip replacement shows all 22 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Ventriculoperitoneal shunt insertion");
+  await waitFor("#surgxRoot .sgx-tab");
+  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 19,
+    "VIDEO batch 5: VP shunt shows its 19 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 22 || new Set(src).size !== 22) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 5: VP shunt shows all 22 distinct step pictures and every file loads");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Appendicectomy");
@@ -324,6 +349,23 @@ try {
     await clickText("#surgxRoot .sgx-row", "Tonsillectomy");
     ok(await waitFor("#surgxRoot .sgx-tab"), "SPEC: a new-specialty procedure opens with its chapters");
     await clickText("#surgxRoot .sgx-spec .sgx-chip", "All");
+  }
+  // Eye operations (2026-11-21): the Ophthalmology chip lists the 13 operations and one opens with the shared eye steps.
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await sleep(500);
+  {
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "Ophthalmology");
+    await sleep(300);
+    const eye = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
+    ok(eye.length === 13 && eye.some((t) => /Phacoemulsification/.test(t)) && eye.some((t) => /small-incision/i.test(t)),
+      `EYE: the Ophthalmology filter lists the 13 eye operations (${eye.length})`);
+    await clickText("#surgxRoot .sgx-row", "Phacoemulsification");
+    await waitFor("#surgxRoot .sgx-tab");
+    await clickText("#surgxRoot .sgx-tab", "Steps");
+    await sleep(300);
+    const st = await ev("[...document.querySelectorAll('#surgxRoot .sgx-step')].map(e => e.textContent)");
+    ok(st.length === 20 && st.some((t) => /Povidone-iodine 5%/.test(t)) && st.some((t) => /posterior capsule rupture/i.test(t)),
+      `EYE: phaco opens with its 20 steps, the shared eye steps included (${st.length})`);
   }
   await ev("(() => { const S = window.SMD_SURGX_SCREENS._state(); S.spec = ''; S.find = ''; return true; })()");
 
