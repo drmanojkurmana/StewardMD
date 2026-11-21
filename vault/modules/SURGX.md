@@ -517,3 +517,12 @@ left out on purpose). 20 new procedures, so **128 procedures**, all `ai_drafted`
 - UI test: the Ophthalmology chip lists 13 operations and phaco opens with its 20 steps.
 - No pictures or clips yet; these are candidates for the next Gemini batches. Need ophthalmologist, transplant,
   cardiac and plastics sign-off.
+
+## Batches 6 and 7 prompts (2026-11-21)
+[[SURGX-batch6-image-prompt]] (105 images: phaco, SICS, trabeculectomy, PRK, LASIK, pterygium) and
+[[SURGX-batch7-image-prompt]] (102 images: intravitreal injection, DCR, chalazion, foreign body, evisceration,
+strabismus, vitrectomy), each with a video prompt. Scene lines are generated from the step's own `how`, `why` and
+`pitfalls` by scratchpad `gen/prompts.py`; orientation, positioning and precise facts are hand-written. Convention: the
+RIGHT eye, microscope views with the forehead at the top and the nose on the viewer's RIGHT. Operations use letters A to
+G, so the wiring regex needs `[A-G]` (batch 4 script used `[A-E]`). Still without prompts: kidney transplant, donor
+nephrectomy, AVR, pericardial window, escharotomy, rhomboid flap, cleft lip (128 steps).
