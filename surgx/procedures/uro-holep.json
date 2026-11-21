@@ -1,0 +1,259 @@
+{
+  "id": "uro-holep",
+  "title": "Holmium laser enucleation of the prostate (HoLEP)",
+  "subtitle": "Enucleate along the capsule, coagulate, then morcellate in a full bladder",
+  "system": "urology",
+  "aliases": [
+    "HoLEP",
+    "laser enucleation of prostate",
+    "ThuLEP",
+    "endoscopic enucleation of the prostate",
+    "EEP"
+  ],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "eau-2025-luts",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Management of Non-neurogenic Male LUTS",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/management-of-non-neurogenic-male-luts",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "baus-cons",
+      "org": "British Association of Urological Surgeons",
+      "title": "BAUS procedure-specific patient information and consent guidance",
+      "year": 2024,
+      "url": "https://www.baus.org.uk/patients/information_leaflets/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Bothersome lower urinary tract symptoms or retention from benign prostatic obstruction, any prostate size."
+    ],
+    "contraindications": [
+      "Untreated infection.",
+      "Suspected prostate cancer not assessed.",
+      "Inability to position in lithotomy."
+    ],
+    "preparation": [
+      "Prostate volume, flow, residual; PSA and cancer assessment where indicated.",
+      "Urine culture.",
+      "Consent: retrograde ejaculation (most), temporary incontinence, bleeding, infection, stricture, bladder injury from the morcellator."
+    ],
+    "positioning": [
+      "Lithotomy, legs well padded."
+    ],
+    "equipment": [
+      "Holmium laser with a 550 micron end-firing fibre, continuous-flow laser resectoscope, morcellator with nephroscope, saline irrigation, three-way catheter, laser goggles."
+    ],
+    "anatomy": [
+      "Verumontanum, external sphincter, bladder neck, ureteric orifices, the surgical capsule."
+    ],
+    "criticalSafety": [
+      "Release the apex early and gently to protect the sphincter.",
+      "Morcellate only with a full bladder and the blades in view."
+    ],
+    "structuresAtRisk": [
+      "External sphincter",
+      "Ureteric orifices",
+      "Bladder wall (morcellator)",
+      "Capsule (perforation)"
+    ],
+    "commonErrors": [
+      "Pulling at the apex and tearing the sphincter.",
+      "Morcellating in a collapsed bladder."
+    ],
+    "complications": [
+      "Temporary stress incontinence, urgency.",
+      "Bleeding, clot retention.",
+      "Bladder injury.",
+      "Urethral stricture or bladder neck contracture."
+    ],
+    "postop": [
+      "Catheter for about one day; trial without catheter.",
+      "Pelvic floor exercises.",
+      "Histology reviewed."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check"
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.uro.urine-check"
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Lithotomy with well-padded leg supports."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.uro.cystoscopy",
+      "emphasis": "Note the ureteric orifices, the median lobe and the verumontanum before any laser."
+    },
+    {
+      "ref": "step.holep.laser-safety"
+    },
+    {
+      "ref": "step.holep.enucleation"
+    },
+    {
+      "ref": "step.holep.lobes"
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "Coagulate capsular vessels with the laser before morcellation; it is far harder after."
+    },
+    {
+      "ref": "step.holep.morcellation"
+    },
+    {
+      "ref": "step.holep.morcellator-injury"
+    },
+    {
+      "ref": "step.uro.perforation-check",
+      "emphasis": "Inspect the capsule and the bladder wall after morcellation."
+    },
+    {
+      "ref": "step.uro.three-way-catheter"
+    },
+    {
+      "ref": "step.core.specimen",
+      "emphasis": "All morcellated tissue sent for histology."
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.holep.laser-safety": {
+      "id": "step.holep.laser-safety",
+      "kind": "checkpoint",
+      "title": "Laser safety check",
+      "why": "A holmium laser damages eyes and burns drapes. The laser officer, goggles, signs and fibre are checked before the first firing.",
+      "how": [
+        "Confirm the laser safety officer, the warning sign on the door and goggles for everyone in the room.",
+        "Inspect the fibre tip and set the energy and frequency per protocol; standby until the fibre is in the scope.",
+        "Fire only with the fibre tip visible beyond the scope."
+      ],
+      "structuresAtRisk": [
+        "Eyes of staff",
+        "Scope (fibre fired inside it)"
+      ],
+      "pitfalls": [
+        "Firing with the fibre tip inside the scope.",
+        "Staff without goggles."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.holep.enucleation": {
+      "id": "step.holep.enucleation",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Find the capsule plane and release the apex",
+      "why": "The adenoma peels off the surgical capsule like an orange segment. An early, gentle apical release protects the external sphincter and continence.",
+      "how": [
+        "Make incisions at the bladder neck (5 and 7 o'clock, or 6 o'clock) down to the capsule, from the bladder neck towards the verumontanum.",
+        "At the verumontanum, open the plane between adenoma and capsule and use the scope beak to sweep the adenoma off the capsule.",
+        "Release the apical mucosa early with the laser rather than tearing it with the scope."
+      ],
+      "structuresAtRisk": [
+        "External sphincter",
+        "Capsule"
+      ],
+      "pitfalls": [
+        "Tearing the apical mucosa with traction.",
+        "Going outside the capsule."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.holep.lobes": {
+      "id": "step.holep.lobes",
+      "kind": "resection",
+      "title": "Enucleate the lobes into the bladder",
+      "why": "Following the capsule all the way round leaves a smooth, wide channel with little residual tissue.",
+      "how": [
+        "Enucleate the median lobe (if present) and push it into the bladder.",
+        "Enucleate each lateral lobe from apex to bladder neck along the capsule (or en bloc in one piece).",
+        "Free each lobe at the bladder neck, keeping away from the ureteric orifices."
+      ],
+      "structuresAtRisk": [
+        "Ureteric orifices",
+        "Bladder neck"
+      ],
+      "pitfalls": [
+        "Undermining the trigone at the bladder neck."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.holep.morcellation": {
+      "id": "step.holep.morcellation",
+      "kind": "resection",
+      "critical": true,
+      "title": "Morcellation in a full bladder",
+      "why": "The morcellator blades suck in anything they touch. A full bladder keeps the wall away; the blades must always be in view.",
+      "how": [
+        "Exchange to the nephroscope and fill the bladder well, using two inflow sources if available.",
+        "Bring the morcellator to a floating adenoma piece, pedal suction first and cut only with the tissue held in the mouth of the blade.",
+        "Stop if vision is lost or the bladder empties."
+      ],
+      "structuresAtRisk": [
+        "Bladder wall"
+      ],
+      "pitfalls": [
+        "Morcellating in a collapsing bladder.",
+        "Cutting without seeing the blade window."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.holep.morcellator-injury": {
+      "id": "step.holep.morcellator-injury",
+      "kind": "bailout",
+      "title": "Bailout: bladder wall caught by the morcellator",
+      "why": "A morcellator injury can perforate the bladder. Stop at once, assess and repair rather than continuing.",
+      "how": [
+        "Stop morcellating and release the pedal; inspect the bladder wall.",
+        "A superficial injury: coagulate and continue carefully, or leave fragments for a second session.",
+        "A full-thickness or intraperitoneal perforation: abandon, drain with a catheter and arrange repair; call a senior."
+      ],
+      "structuresAtRisk": [
+        "Bladder wall",
+        "Bowel (intraperitoneal perforation)"
+      ],
+      "pitfalls": [
+        "Continuing after an unrecognised perforation."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

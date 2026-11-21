@@ -1,7 +1,7 @@
 {
   "_comment": "SURGX catalog. Small on purpose: the app fetches this first (no-store, so it is never the stale copy), then only the unit the clinician actually opened. Modelled on clinix/manifest.json and atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load). Protocols marked kind:'engine' are NOT authored here - they are projections of the ws-surgery.js decision engine, which remains the single home of that clinical logic.",
   "schemaVersion": 1,
-  "contentVersion": "0.3.7-b6fix",
+  "contentVersion": "0.3.8-uro2",
   "updated": "2026-11-04",
   "categories": [
     {
@@ -3004,6 +3004,189 @@
       "review": "ai_drafted",
       "estMinutes": 120,
       "specialty": "plastics"
+    },
+    {
+      "id": "uro-flexible-cystoscopy",
+      "title": "Flexible cystoscopy (and stent removal)",
+      "subtitle": "Systematic look at the whole bladder under local anaesthetic, with retroflexion",
+      "system": "urology",
+      "file": "procedures/uro-flexible-cystoscopy.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 15,
+      "specialty": "urology"
+    },
+    {
+      "id": "uro-transperineal-prostate-biopsy",
+      "title": "Transperineal prostate biopsy",
+      "subtitle": "MRI targets first, then a systematic template, through the perineum",
+      "system": "urology",
+      "file": "procedures/uro-transperineal-prostate-biopsy.json",
+      "stepPacks": [
+        "core",
+        "urology",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 30,
+      "specialty": "urology"
+    },
+    {
+      "id": "uro-optical-urethrotomy",
+      "title": "Optical internal urethrotomy",
+      "subtitle": "Wire across the stricture first, then cut at 12 o'clock under vision",
+      "system": "urology",
+      "file": "procedures/uro-optical-urethrotomy.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 30,
+      "specialty": "urology"
+    },
+    {
+      "id": "uro-cystolitholapaxy",
+      "title": "Cystolitholapaxy (bladder stone)",
+      "subtitle": "Break the stone, clear every fragment, and treat the cause",
+      "system": "urology",
+      "file": "procedures/uro-cystolitholapaxy.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45,
+      "specialty": "urology"
+    },
+    {
+      "id": "uro-holep",
+      "title": "Holmium laser enucleation of the prostate (HoLEP)",
+      "subtitle": "Enucleate along the capsule, coagulate, then morcellate in a full bladder",
+      "system": "urology",
+      "file": "procedures/uro-holep.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90,
+      "specialty": "urology"
+    },
+    {
+      "id": "uro-vasectomy",
+      "title": "No-scalpel vasectomy",
+      "subtitle": "Fix each vas under the skin, divide, seal the lumen and interpose fascia",
+      "system": "urology",
+      "file": "procedures/uro-vasectomy.json",
+      "stepPacks": [
+        "core"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 30,
+      "specialty": "urology"
+    },
+    {
+      "id": "uro-pyeloplasty",
+      "title": "Laparoscopic or robotic pyeloplasty (Anderson-Hynes)",
+      "subtitle": "Dismember the narrow junction, spatulate, and join over a stent",
+      "system": "urology",
+      "file": "procedures/uro-pyeloplasty.json",
+      "stepPacks": [
+        "core",
+        "urology",
+        "laparoscopy",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180,
+      "specialty": "urology"
+    },
+    {
+      "id": "uro-partial-nephrectomy",
+      "title": "Robotic partial nephrectomy",
+      "subtitle": "Short clamp, clear margin, two-layer renorrhaphy",
+      "system": "urology",
+      "file": "procedures/uro-partial-nephrectomy.json",
+      "stepPacks": [
+        "core",
+        "urology",
+        "onco",
+        "laparoscopy",
+        "abdomen",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 210,
+      "specialty": "urology"
+    },
+    {
+      "id": "uro-radical-prostatectomy",
+      "title": "Robotic radical prostatectomy",
+      "subtitle": "Bladder neck, seminal vesicles, nerves, apex, then a watertight anastomosis",
+      "system": "urology",
+      "file": "procedures/uro-radical-prostatectomy.json",
+      "stepPacks": [
+        "core",
+        "urology",
+        "onco",
+        "laparoscopy",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 210,
+      "specialty": "urology"
+    },
+    {
+      "id": "uro-radical-cystectomy-ileal-conduit",
+      "title": "Radical cystectomy with ileal conduit",
+      "subtitle": "Remove the bladder and nodes, isolate ileum, join the ureters over stents",
+      "system": "urology",
+      "file": "procedures/uro-radical-cystectomy-ileal-conduit.json",
+      "stepPacks": [
+        "core",
+        "urology",
+        "onco",
+        "abdomen",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 300,
+      "specialty": "urology"
+    },
+    {
+      "id": "uro-nephroureterectomy",
+      "title": "Radical nephroureterectomy with bladder cuff",
+      "subtitle": "Kidney, whole ureter and a bladder cuff out in one piece, without opening the tract",
+      "system": "urology",
+      "file": "procedures/uro-nephroureterectomy.json",
+      "stepPacks": [
+        "core",
+        "urology",
+        "onco",
+        "laparoscopy",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 240,
+      "specialty": "urology"
+    },
+    {
+      "id": "uro-buccal-urethroplasty",
+      "title": "Bulbar urethroplasty with buccal mucosa graft",
+      "subtitle": "Open the stricture fully, then augment with a quilted buccal graft",
+      "system": "urology",
+      "file": "procedures/uro-buccal-urethroplasty.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180,
+      "specialty": "urology"
     }
   ],
   "cases": [

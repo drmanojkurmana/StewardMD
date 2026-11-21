@@ -1,0 +1,291 @@
+{
+  "id": "uro-partial-nephrectomy",
+  "title": "Robotic partial nephrectomy",
+  "subtitle": "Short clamp, clear margin, two-layer renorrhaphy",
+  "system": "urology",
+  "aliases": [
+    "partial nephrectomy",
+    "nephron-sparing surgery",
+    "RAPN",
+    "robotic partial nephrectomy",
+    "small renal mass surgery"
+  ],
+  "estMinutes": 210,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "eau-2025-rcc",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Renal Cell Carcinoma",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/renal-cell-carcinoma",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "baus-cons",
+      "org": "British Association of Urological Surgeons",
+      "title": "BAUS procedure-specific patient information and consent guidance",
+      "year": 2024,
+      "url": "https://www.baus.org.uk/patients/information_leaflets/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "A localised renal tumour (usually T1) where removing only the tumour keeps kidney function, especially with a solitary kidney or reduced function."
+    ],
+    "contraindications": [
+      "Tumour too large or central to remove safely with margin.",
+      "Unfit for surgery (active surveillance or ablation instead)."
+    ],
+    "preparation": [
+      "Contrast CT or MRI; complexity score (for example RENAL); chest imaging.",
+      "Renal function and split function if needed.",
+      "Consent: bleeding and transfusion, urine leak, conversion to radical nephrectomy, positive margin."
+    ],
+    "positioning": [
+      "Flank position about 60 degrees, padded, strapped, table flexed."
+    ],
+    "equipment": [
+      "Robot, intraoperative ultrasound probe, bulldog clamps, sliding-clip renorrhaphy sutures, haemostatic agents, retrieval bag."
+    ],
+    "anatomy": [
+      "Renal artery and its branches, renal vein, collecting system, the tumour and its depth."
+    ],
+    "criticalSafety": [
+      "Record warm ischaemia; aim for under about 25 minutes.",
+      "Close the collecting system and any opened vessels."
+    ],
+    "structuresAtRisk": [
+      "Renal artery and vein",
+      "Collecting system",
+      "Colon, duodenum, spleen"
+    ],
+    "commonErrors": [
+      "A missed accessory artery and bleeding on excision.",
+      "Cutting into the tumour."
+    ],
+    "complications": [
+      "Bleeding (early or late from a pseudoaneurysm).",
+      "Urine leak.",
+      "Positive margin.",
+      "Reduced kidney function."
+    ],
+    "postop": [
+      "Haemoglobin and creatinine checks.",
+      "Late bleeding or haematuria: think pseudoaneurysm and angiography.",
+      "Follow-up imaging per risk."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check"
+    },
+    {
+      "ref": "step.onco.mdt-check",
+      "emphasis": "Imaging, complexity score and the plan for a solitary or normal kidney reviewed."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Flank position about 60 degrees, padded and strapped, table flexed."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.lap.access"
+    },
+    {
+      "ref": "step.uro.robot-dock"
+    },
+    {
+      "ref": "step.lap.survey"
+    },
+    {
+      "ref": "step.pn.hilum"
+    },
+    {
+      "ref": "step.pn.ultrasound"
+    },
+    {
+      "ref": "step.pn.clamp"
+    },
+    {
+      "ref": "step.pn.excise"
+    },
+    {
+      "ref": "step.pn.renorrhaphy"
+    },
+    {
+      "ref": "step.pn.unclamp"
+    },
+    {
+      "ref": "step.hpb.major-bleed",
+      "emphasis": "Hilar or parenchymal bleeding: press, tell the anaesthetist, add a port or convert; consider clamping again."
+    },
+    {
+      "ref": "step.lap.specimen-retrieval",
+      "emphasis": "Tumour in a bag, out intact."
+    },
+    {
+      "ref": "step.onco.specimen-orientation"
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "With the pneumoperitoneum lowered, check the renorrhaphy and the hilum."
+    },
+    {
+      "ref": "step.abd.drain"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.lap.closure"
+    },
+    {
+      "ref": "step.core.debrief",
+      "emphasis": "Record warm ischaemia time, collecting system entry and repair, and margins seen."
+    }
+  ],
+  "steps_local": {
+    "step.pn.hilum": {
+      "id": "step.pn.hilum",
+      "kind": "dissection",
+      "title": "Expose and control the hilum",
+      "why": "The artery must be controlled before the tumour is cut. Every artery is found, because a missed branch bleeds during excision.",
+      "how": [
+        "Reflect the colon, find the ureter and gonadal vein and follow them up to the hilum.",
+        "Dissect the renal artery (and any accessory arteries) and the vein; place vessel loops.",
+        "Compare the arteries found with the CT."
+      ],
+      "structuresAtRisk": [
+        "Renal artery and vein",
+        "Lumbar and gonadal veins"
+      ],
+      "pitfalls": [
+        "Missing an accessory artery."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pn.ultrasound": {
+      "id": "step.pn.ultrasound",
+      "kind": "checkpoint",
+      "title": "Ultrasound and score the margin",
+      "why": "The tumour's deep edge is not visible. Ultrasound shows its depth and outline so the cut keeps a rim of normal kidney.",
+      "how": [
+        "Defat the kidney around the tumour, keeping the fat over the tumour.",
+        "Scan with the intraoperative probe to see the tumour edge and depth.",
+        "Score a line with cautery a few millimetres outside the edge."
+      ],
+      "structuresAtRisk": [
+        "Tumour capsule"
+      ],
+      "pitfalls": [
+        "Scoring too close and entering the tumour."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pn.clamp": {
+      "id": "step.pn.clamp",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Clamp the artery and start the clock",
+      "why": "Clamping makes the field bloodless. Warm ischaemia beyond about 25 to 30 minutes adds to kidney damage.",
+      "how": [
+        "Tell the anaesthetist; give mannitol if used locally.",
+        "Place bulldog clamps on the artery (and accessory arteries); clamp the vein only if needed.",
+        "Start a timer called aloud at intervals."
+      ],
+      "structuresAtRisk": [
+        "Renal artery"
+      ],
+      "pitfalls": [
+        "No timer.",
+        "Incomplete clamping and a bloody field."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pn.excise": {
+      "id": "step.pn.excise",
+      "kind": "resection",
+      "title": "Excise the tumour with a rim",
+      "why": "A thin rim of normal kidney around the tumour gives a clear margin without wasting kidney.",
+      "how": [
+        "Cut along the scored line with cold scissors, following the tumour's curve.",
+        "Keep a thin layer of normal kidney on the tumour all round; open the collecting system if needed.",
+        "Put the tumour aside in the abdomen for the bag."
+      ],
+      "structuresAtRisk": [
+        "Collecting system",
+        "Segmental vessels"
+      ],
+      "pitfalls": [
+        "Entering the tumour.",
+        "Cutting deeper than needed."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pn.renorrhaphy": {
+      "id": "step.pn.renorrhaphy",
+      "kind": "reconstruction",
+      "title": "Two-layer renorrhaphy",
+      "why": "The inner layer closes opened vessels and the collecting system; the outer layer brings the kidney edges together and stops bleeding.",
+      "how": [
+        "Inner layer: running absorbable suture along the base, closing the collecting system and open vessels.",
+        "Outer layer: interrupted or sliding-clip sutures across the defect, tightened without cutting through.",
+        "Haemostatic agent in the bed if used."
+      ],
+      "structuresAtRisk": [
+        "Segmental vessels",
+        "Hilar vessels (deep bites)"
+      ],
+      "pitfalls": [
+        "Sutures that cut through the parenchyma.",
+        "Deep bites catching hilar vessels."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pn.unclamp": {
+      "id": "step.pn.unclamp",
+      "kind": "checkpoint",
+      "title": "Unclamp and record the warm time",
+      "why": "The kidney must pink up and stop bleeding. The warm ischaemia time is part of the operation note.",
+      "how": [
+        "Remove the bulldogs and call the warm ischaemia time aloud.",
+        "Watch the kidney reperfuse and the renorrhaphy for bleeding; add sutures as needed.",
+        "Record the time in the note."
+      ],
+      "structuresAtRisk": [
+        "Renorrhaphy"
+      ],
+      "pitfalls": [
+        "Leaving a bulldog clamp on."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

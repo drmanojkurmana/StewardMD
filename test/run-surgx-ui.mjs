@@ -387,6 +387,24 @@ try {
     ok(st.length === 20 && st.some((t) => /Povidone-iodine 5%/.test(t)) && st.some((t) => /posterior capsule rupture/i.test(t)),
       `EYE: phaco opens with its 20 steps, the shared eye steps included (${st.length})`);
   }
+  // Urology completed (2026-11-21): 26 operations; HoLEP opens with its 18 steps including the shared urine check.
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await sleep(500);
+  {
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "Urology");
+    await sleep(300);
+    const uro = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
+    ok(uro.length === 26 && uro.some((t) => /HoLEP/.test(t)) && uro.some((t) => /Vasectomy/i.test(t)),
+      `URO: the Urology filter lists the 26 operations (${uro.length})`);
+    await clickText("#surgxRoot .sgx-row", "Holmium laser enucleation");
+    await waitFor("#surgxRoot .sgx-secbtn");
+    await clickText("#surgxRoot .sgx-secbtn", "Steps");
+    await sleep(300);
+    const st = await ev("[...document.querySelectorAll('#surgxRoot .sgx-step')].map(e => e.textContent)");
+    ok(st.length === 18 && st.some((t) => /Sterile urine before instrumentation/.test(t)) && st.some((t) => /full bladder/i.test(t)),
+      `URO: HoLEP opens with its 18 steps (${st.length})`);
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "All").catch(() => {});
+  }
   await ev("(() => { const S = window.SMD_SURGX_SCREENS._state(); S.spec = ''; S.find = ''; return true; })()");
 
   /* ── 8. NOTES: the finalise gate ───────────────────────────────────────── */

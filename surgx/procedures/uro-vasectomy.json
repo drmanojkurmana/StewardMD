@@ -1,0 +1,234 @@
+{
+  "id": "uro-vasectomy",
+  "title": "No-scalpel vasectomy",
+  "subtitle": "Fix each vas under the skin, divide, seal the lumen and interpose fascia",
+  "system": "urology",
+  "aliases": [
+    "vasectomy",
+    "NSV",
+    "male sterilisation",
+    "no-scalpel vasectomy"
+  ],
+  "estMinutes": 30,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "aua-2012-vas",
+      "org": "American Urological Association",
+      "title": "Vasectomy: AUA Guideline (amended 2015)",
+      "year": 2015,
+      "url": "https://www.auanet.org/guidelines-and-quality/guidelines/vasectomy-guideline",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "baus-cons",
+      "org": "British Association of Urological Surgeons",
+      "title": "BAUS procedure-specific patient information and consent guidance",
+      "year": 2024,
+      "url": "https://www.baus.org.uk/patients/information_leaflets/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "A man who has decided on permanent contraception after counselling."
+    ],
+    "contraindications": [
+      "Uncertainty about the decision.",
+      "Scrotal infection, or a scrotum where the vas cannot be felt (needs a different setting)."
+    ],
+    "preparation": [
+      "Counselling: permanent, not immediately effective, failure about 1 in 2000 after clearance, chronic scrotal pain in a few, reversal is not guaranteed.",
+      "Both vasa felt in clinic.",
+      "Shave or trim the scrotum if needed."
+    ],
+    "positioning": [
+      "Supine, the penis taped up on the abdomen, a warm room so the scrotum is relaxed."
+    ],
+    "equipment": [
+      "Ring clamp, sharp dissecting forceps, diathermy needle or fine cautery, absorbable ties or clips, local anaesthetic."
+    ],
+    "anatomy": [
+      "Vas deferens (firm cord at the back of the spermatic cord), testicular artery and pampiniform veins, the median raphe."
+    ],
+    "criticalSafety": [
+      "Both vasa are divided; the patient knows he is not sterile until a clear semen test."
+    ],
+    "structuresAtRisk": [
+      "Testicular artery",
+      "Pampiniform veins (haematoma)"
+    ],
+    "commonErrors": [
+      "Dividing a vein or nerve instead of the vas.",
+      "Telling the patient he is sterile on the day."
+    ],
+    "complications": [
+      "Haematoma, infection.",
+      "Chronic scrotal pain.",
+      "Early or late recanalisation (failure)."
+    ],
+    "postop": [
+      "Scrotal support, simple analgesia, rest for 1 to 2 days.",
+      "Other contraception until a semen test about 12 weeks later shows no sperm (or rare non-motile sperm per guideline).",
+      "Return for a growing swelling or fever."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Permanent; not immediate; a later semen test; the failure and pain rates."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine, penis taped up onto the abdomen, scrotum relaxed in a warm room."
+    },
+    {
+      "ref": "step.core.prep-drape",
+      "emphasis": "Clean the scrotum; a fenestrated drape."
+    },
+    {
+      "ref": "step.vas.fix"
+    },
+    {
+      "ref": "step.vas.local"
+    },
+    {
+      "ref": "step.vas.deliver"
+    },
+    {
+      "ref": "step.vas.divide"
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "Check both ends and the sheath for bleeding before returning the vas."
+    },
+    {
+      "ref": "step.vas.other-side"
+    },
+    {
+      "ref": "step.core.specimen",
+      "emphasis": "Short vas segments sent if local policy requires histology."
+    },
+    {
+      "ref": "step.core.skin-closure",
+      "emphasis": "The small puncture usually needs no stitch; pressure and a dry dressing."
+    },
+    {
+      "ref": "step.core.debrief",
+      "emphasis": "Contraception continues until the semen test is clear; give the test date and pot."
+    }
+  ],
+  "steps_local": {
+    "step.vas.fix": {
+      "id": "step.vas.fix",
+      "kind": "prep",
+      "title": "Three-finger fix of the vas",
+      "why": "Holding the vas firmly under the skin at one spot makes the procedure short and keeps the vessels out of the way.",
+      "how": [
+        "Feel the right vas at the back of the cord and roll it to the front under the median raphe.",
+        "Trap it between thumb, index and middle finger (three-finger technique) so it lies just under thin skin.",
+        "Confirm it is the vas: firm, cord-like and separate from the softer vessels."
+      ],
+      "structuresAtRisk": [
+        "Testicular artery",
+        "Pampiniform veins"
+      ],
+      "pitfalls": [
+        "Fixing a vein instead of the vas."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.vas.local": {
+      "id": "step.vas.local",
+      "kind": "prep",
+      "title": "Local anaesthetic block of the vas",
+      "why": "A vasal block numbs the vas and its sheath; a skin weal alone is not enough.",
+      "how": [
+        "Raise a skin weal over the fixed vas.",
+        "Advance the needle along the vas towards the inguinal ring and inject a few ml into the sheath (or use a no-needle jet injector).",
+        "Wait about a minute."
+      ],
+      "structuresAtRisk": [
+        "Testicular artery"
+      ],
+      "pitfalls": [
+        "Injecting into a vessel."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.vas.deliver": {
+      "id": "step.vas.deliver",
+      "kind": "access",
+      "title": "Puncture and deliver a loop of vas",
+      "why": "A small puncture with sharp forceps heals without stitches and causes fewer haematomas than a scalpel incision.",
+      "how": [
+        "Hold the vas in the ring clamp through the skin.",
+        "Puncture skin and sheath with one blade of the sharp forceps, spread to open a small hole down to the vas.",
+        "Lift a loop of bare vas out of the hole, stripping the sheath off it."
+      ],
+      "structuresAtRisk": [
+        "Sheath vessels"
+      ],
+      "pitfalls": [
+        "Spreading too widely and tearing vessels."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.vas.divide": {
+      "id": "step.vas.divide",
+      "kind": "resection",
+      "critical": true,
+      "title": "Divide, seal and interpose fascia",
+      "why": "Sealing the cut lumen and putting a layer of fascia between the ends gives the lowest failure rate.",
+      "how": [
+        "Divide the vas and remove a short segment if policy requires.",
+        "Cauterise the lumen of each end for about 1 cm with a fine needle cautery.",
+        "Close the sheath over one end (fascial interposition) with a tie or clip so the ends lie in different planes."
+      ],
+      "structuresAtRisk": [
+        "Testicular artery"
+      ],
+      "pitfalls": [
+        "Leaving the two ends lying together without interposition."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.vas.other-side": {
+      "id": "step.vas.other-side",
+      "kind": "checkpoint",
+      "title": "The other side, same way",
+      "why": "Both vasa must be divided. The left side is done through the same puncture once the right is returned.",
+      "how": [
+        "Return the right vas and confirm no bleeding.",
+        "Fix the left vas under the same puncture and repeat block, delivery and division.",
+        "Confirm two divided vasa before finishing."
+      ],
+      "structuresAtRisk": [
+        "Testicular artery",
+        "Pampiniform veins"
+      ],
+      "pitfalls": [
+        "Dividing the same vas twice and missing the other."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

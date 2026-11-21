@@ -562,3 +562,13 @@ Evisceration 16 redraw wired the same day; batch 7 now 102 of 102.
 [[SURGX-batch8-image-prompt]] (128 images) and [[SURGX-batch8-video-prompt]] for the 7 non-eye operations: kidney
 transplant, laparoscopic donor nephrectomy, aortic valve replacement, subxiphoid pericardial window, escharotomy,
 rhomboid flap, unilateral cleft lip repair. Made by `make8.py` (the batch 6 and 7 generator with the eye wording swapped out).
+
+### Urology completed (2026-11-21)
+Owner: "Now give urology complete it". 12 operations added (urology now 26), all `ai_drafted` with note templates:
+flexible cystoscopy, transperineal prostate biopsy, optical urethrotomy, cystolitholapaxy, HoLEP, no-scalpel vasectomy,
+buccal graft urethroplasty, pyeloplasty, robotic partial nephrectomy, robotic radical prostatectomy, radical cystectomy
+with ileal conduit, nephroureterectomy. Four new shared steps in `steps/urology.json`: `step.uro.urine-check`,
+`step.uro.robot-dock`, `step.uro.bladder-leak-test`, `step.uro.catheter-plan`. Template field keys must not reuse base
+operative keys (`indication`, `side`, `incision`, `anaesthesia` ...): the specialties test fails on a collision.
+Prompts: [[SURGX-batch9a-image-prompt]] (104) + [[SURGX-batch9a-video-prompt]], [[SURGX-batch9b-image-prompt]] (115)
++ [[SURGX-batch9b-video-prompt]], made by `make9.py`.
