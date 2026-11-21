@@ -54,10 +54,23 @@
    * so in the sheet header so the answer is never labelled with sources it did not read.
    */
   var KEY_RAG_LINK = "smd_maik_rag_linked";
+  // Offline book extras (2026-11-21). Read once by kb/ai/maik-lite-kb-store.js and
+  // kb/ai/maik-book-vec.js when the app starts, so a change applies on the next app start.
+  var KEY_KB_ONCO = "smd_maik_kb_onco";      // "1" = book with the cancer notes (45 MB download)
+  var KEY_BOOK_VEC = "smd_maik_book_vec";    // "1" = meaning search when the router names no disease
 
   function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function lrem(k) { try { localStorage.removeItem(k); } catch (e) {} }
+
+  // ── Offline book extras (see KEY_KB_ONCO / KEY_BOOK_VEC); absent key = off ──
+  function oncoBookOn() { return lget(KEY_KB_ONCO) === "1"; }
+  function setOncoBook(on) { if (on) lset(KEY_KB_ONCO, "1"); else lrem(KEY_KB_ONCO); return oncoBookOn(); }
+  function bookVecOn() { return lget(KEY_BOOK_VEC) === "1"; }
+  function setBookVec(on) { if (on) lset(KEY_BOOK_VEC, "1"); else lrem(KEY_BOOK_VEC); return bookVecOn(); }
+  function searchPackReady() {
+    try { var E = window.SMD_EMBED_LOCAL; return !!(E && E.packReady && E.packReady()); } catch (e) { return false; }
+  }
 
   // ── RAG link (see KEY_RAG_LINK) ──
   /** Is the Knowledge Base connected to the on-device model? Absent key = connected. */
@@ -934,6 +947,7 @@
           '<div data-me-device style="font:500 11.5px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px">' + esc(devLine) + '</div>' +
         '</div>' +
         ragLinkHTML() +
+        bookExtrasHTML() +
       '</div>';
   }
 
@@ -1292,6 +1306,38 @@
   }
 
   /**
+   * Two more switches for the offline book, the same .smd-nav-row / .smd-nav-sw control as the
+   * Knowledge Base switch above (owner 2026-11-21: "give on button just like knowledge base has").
+   * 1. Cancer notes: the bigger book (13,209 oncology notes). 2. Meaning search: needs switch 1 and
+   * the On-phone search pack, so it is disabled, with the reason, until both are there.
+   * Both are read when the app starts, so each sub-label says the change applies after a restart.
+   */
+  function bookExtrasHTML() {
+    var onc = oncoBookOn(), pack = searchPackReady(), vec = bookVecOn(), canVec = onc && pack;
+    function row(key, on, label, sub, disabled) {
+      return '<div class="smd-nav-row">' +
+          '<div class="smd-nav-rl">' +
+            '<div class="smd-nav-lbl">' + label + '</div>' +
+            '<div class="smd-nav-sub">' + sub + '</div>' +
+          '</div>' +
+          '<button class="smd-nav-sw' + (on ? " on" : "") + '" data-me-book="' + key + '" role="switch" aria-checked="' + on + '"' +
+            (disabled ? ' disabled aria-disabled="true" style="opacity:.45"' : "") +
+            ' aria-label="' + label + '"><span></span></button>' +
+        '</div>';
+    }
+    var vecSub = !onc ? "Turn on cancer knowledge first."
+      : !pack ? "Needs the On-phone search pack (210 MB) from the model list above."
+      : vec ? "When MaiK cannot tell which disease you mean, it also finds passages that mean the same thing. One 43 MB download. Applies after you restart the app."
+      : "Off: MaiK finds passages by their words only. On: one 43 MB download, applies after you restart the app.";
+    return '<div class="me-kb" style="border-top:1px solid var(--line,#e2e8f0);padding:2px 14px">' +
+        row(KEY_KB_ONCO, onc, "Cancer knowledge in the offline book",
+          onc ? "The book includes 13,209 cancer notes: diagnosis, staging, treatment and trials. Applies after you restart the app."
+              : "Off: the standard book. On: adds 13,209 cancer notes, one 45 MB download, applies after you restart the app.", false) +
+        row(KEY_BOOK_VEC, vec && canVec, "Search by meaning", vecSub, !canVec) +
+      '</div>';
+  }
+
+  /**
    * The optional image-reading add-on for one pack.
    *
    * Shown only when (a) the model can see at all - Apex is text-only and never gets this row - and
@@ -1433,6 +1479,18 @@
     });
     // Knowledge Base link. rerender() redraws the row so the label flips Connected/Disconnected and
     // the sub-label swaps with it; setRagLinked() already re-syncs the sheet header disclaimer.
+    // Offline book extras: flip the key, redraw the card (the meaning-search row's state depends on
+    // the cancer-notes row). Turning cancer knowledge off also turns meaning search off: its
+    // vectors belong to that book.
+    root.querySelectorAll("[data-me-book]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        if (b.disabled) return;
+        var k = b.getAttribute("data-me-book");
+        if (k === KEY_KB_ONCO) { if (!setOncoBook(!oncoBookOn())) setBookVec(false); }
+        else if (k === KEY_BOOK_VEC) setBookVec(!bookVecOn());
+        rerender(b, root);
+      });
+    });
     root.querySelectorAll("[data-me-rag]").forEach(function (b) {
       b.addEventListener("click", function () {
         setRagLinked(!ragLinked());
@@ -1954,6 +2012,8 @@
     discLabel: discLabel, syncDisc: syncDisc, knowSub: knowSub,
     // RAG link: maik-local.js reads ragLinked() in ragEligible() to decide whether to retrieve.
     KEY_RAG_LINK: KEY_RAG_LINK, ragLinked: ragLinked, setRagLinked: setRagLinked, ragLinkHTML: ragLinkHTML,
+    KEY_KB_ONCO: KEY_KB_ONCO, KEY_BOOK_VEC: KEY_BOOK_VEC, oncoBookOn: oncoBookOn, setOncoBook: setOncoBook,
+    bookVecOn: bookVecOn, setBookVec: setBookVec, bookExtrasHTML: bookExtrasHTML,
     warmIfLocal: warmIfLocal,
     // Scheme package lookup and the disease-word spelling fix, shared with the Edge cards in home.js.
     schemeLookup: schemeLookup, schemePrice: schemePrice, fixTerm: fixTerm,
