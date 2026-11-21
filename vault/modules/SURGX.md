@@ -611,3 +611,12 @@ nephroureterectomy (`wire9b.py`, ids `med.surgx.{pyelo,pn,rp,rc,nu}-clip-NN`), a
 Not used: the two operative nephroureterectomy videos for the hilum (vein divided before artery there; the animation
 shows artery first), the nurse explainer's debrief (says the catheter comes out in theatre), the high-extended node
 dissection above the aortic bifurcation (debated; the standard pelvic dissection clip is used).
+
+### Batch 8 fix, batch 9a clips, batch 9b images (2026-11-21)
+- Batch 8 fix: 19 of 22 redraws wired (`img8fix.py`); batch 8 now 125 of 128. Still held: escharotomy 07 (cut
+  still runs down the front of the forearm, not mid-lateral), LDN 12 (open ring-handled scissors in the laparoscopic
+  view), AVR 18 (sternal wires look like a skin closure).
+- Batch 9a clips: 90 over the 7 smaller urology operations (`wire9a.py`), all embed-checked; 20 new ALLOW ids.
+- Batch 9b images: 98 of 115 (`img9b.py`). Held: pyeloplasty 12, partial nephrectomy 11, 12, 13, 15, 17, prostatectomy
+  18, 19, 24, cystectomy 08, 13, nephroureterectomy 06, 10, 11, 12, 15, 18 (open retractors or ring scissors in a
+  robotic or laparoscopic view, bare pelvic bones, a laparotomy wound after robotic surgery, wrong position).
