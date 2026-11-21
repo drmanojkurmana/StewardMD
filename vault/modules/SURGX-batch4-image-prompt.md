@@ -493,3 +493,37 @@ the same style, patient and team as the rest of their operation. Draw each one N
 No text, numbers or labels. Landscape 4:3, 1600 x 1200 px, PNG, same filenames, each in its operation's folder.
 Put all five in ONE zip: surgx-batch4-fix.zip
 ```
+
+## Round 3: redo prompt (2 images)
+
+Round 2 result: mastectomy 05, hip 16 (cropped to the wound close-up; the wide view drew the femur and crack on the
+skin of the buttock) and chest drain 09 wired. Hip 12 still shows the femur as a short stub ending in mid-air and no
+visible 90 degree flexion; hysterectomy 05 has the whole table tilted correctly but the lower legs float above the leg
+section.
+
+```
+Two images are still wrong. Regenerate ONLY these two with the IMAGE GENERATION MODEL (never code), same style,
+patient and team as the rest of their operation. Draw each one NEW.
+
+1. total-hip-replacement/12_trial-reduction.png
+   - Wide view from the patient's BACK: the patient lying on the LEFT side (right hip up), head to the viewer's LEFT.
+   - The assistant holds the RIGHT knee and lower leg and has bent the hip to a clear RIGHT ANGLE (thigh pointing
+     straight forwards, away from the viewer, knee bent), with the lower leg turned so the foot swings UP towards
+     the ceiling (internal rotation).
+   - In the wound only: the metal trial head sitting inside the cup, its neck running into the femur, and the femur
+     CONTINUING out of sight under the muscle down the thigh. No bone end, no stub, no bone visible outside the wound.
+   - Keep the small inset of both knees side by side at the same level.
+   - Teach: test stability in flexion and internal rotation, and leg length, with the trials. Check: right angle at
+     the hip is obvious; femur continuous.
+
+2. total-abdominal-hysterectomy/05_positioning.png
+   - Same as before: pure side view, floor line, the WHOLE table top in one straight line tilted 10 to 15 degrees
+     head DOWN, shoulder support, catheter bag below the table.
+   - The legs lie FLAT ON the leg section along their whole length, heels resting on a gel pad. No gap between the
+     legs and the table anywhere.
+   - Both arms out on arm boards. A drape over the patient from chest to knees.
+   - Teach: head down lets the bowel fall out of the pelvis. Check: legs touching the table; the whole table slopes.
+
+No text, numbers or labels. Landscape 4:3, 1600 x 1200 px, PNG, same filenames, each inside a folder with the
+operation's name. Put both in ONE zip: surgx-batch4-fix2.zip
+```
