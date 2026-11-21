@@ -549,3 +549,5 @@ Captions flag the left-eye pterygium footage, the LASIK flap relift, the Hindi M
 56 of 59 wired (phaco 20, SICS 17, trabeculectomy 19; `med.surgx.{phaco,sics,trab}-step-NN`) via scratchpad
 `img6.py` (letters A to G, eye-specific prep-drape caption). Held back SICS 10, 14, 15; redo prompt at the end of
 [[SURGX-batch6-image-prompt]]. PRK, LASIK and pterygium images not yet received.
+Part B (same day): PRK 14 of 14, LASIK 13 of 15, pterygium 16 of 17 wired via `img6b.py`; batch 6 now 99 of 105.
+Held back LASIK 09, LASIK 12, pterygium 12 (second redo prompt in [[SURGX-batch6-image-prompt]]).

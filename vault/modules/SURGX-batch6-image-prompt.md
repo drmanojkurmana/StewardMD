@@ -571,3 +571,40 @@ and 12 of manual-sics. RIGHT eye, forehead at the TOP, the nose and the pink car
 No text, numbers or labels. Landscape 4:3, 1600 x 1200 px, PNG, same filenames, in a folder named manual-sics.
 Put all three in ONE zip: surgx-batch6-fix.zip
 ```
+
+## Round 1 part B result and redo prompt (3 images)
+
+PRK 14 of 14, LASIK 13 of 15, pterygium 16 of 17 wired. Held back: LASIK 09 (a pink mass beside the eye, unclear
+half-cut cornea), LASIK 12 (an extra lens-like blob sitting over the pupil), pterygium 12 (a blue gel blob and a red fan
+of tissue that read as nothing).
+
+```
+Three more images are wrong. Regenerate ONLY these three with the IMAGE GENERATION MODEL (never code), same style,
+patient and microscope view as the rest of their operation. RIGHT eye, forehead at the TOP, nose and caruncle on the
+viewer's RIGHT only; no extra pink lumps or blobs anywhere.
+
+1. lasik/09_suction-loss.png
+   - The same blue-eyed patient as LASIK 07, 08 and 10. A suction ring on the cornea that has just lost suction: the
+     ring tilted and lifting off at one edge; on the cornea an INCOMPLETE flap, a faint arc of cut that stops part way
+     round (not a straight line through the pupil).
+   - The surgeon's gloved hand lifting the ring away. Nothing else beside the eye.
+   - Teach: if suction is lost or the flap is incomplete, stop; do not lift it and do not ablate.
+
+2. lasik/12_laser-interruption.png
+   - Same as LASIK 11: the flap folded back up over its SUPERIOR hinge, the bare stromal bed exposed, the laser spot
+     pattern on the bed.
+   - The eye has drifted so the pupil is OFF the centre of the treatment ring (orange ring shifted to one side), the
+     laser spots stopped. Inset: the surgeon's foot lifted OFF the pedal.
+   - Nothing lying over the pupil. Teach: foot off the pedal the moment fixation is lost; recentre before resuming.
+
+3. pterygium-excision-autograft/12_bailout.png
+   - The same brown-eyed patient as pterygium 07 to 11, the bare scleral bed on the NASAL side (viewer's RIGHT).
+   - Show one clear problem: the MEDIAL RECTUS muscle (red, striated, about 5 mm behind the limbus) exposed in the bed,
+     with a muscle hook gently under it so it can be identified and protected.
+   - Small inset: a different, gelatinous whitish limbal lesion with corkscrew vessels (OSSN), to show the lesion that
+     must go for biopsy instead.
+   - Teach: stop and identify the muscle; atypical lesions need biopsy with margins.
+
+No text, numbers or labels. Landscape 4:3, 1600 x 1200 px, PNG, same filenames, each inside a folder with the
+operation's name. Put all three in ONE zip: surgx-batch6-fix2.zip
+```
