@@ -37,6 +37,10 @@
   var CSS = "html #homeV2#homeV2 > .hv-pull{position:absolute;left:0;right:0;top:0;height:0;z-index:0;overflow:hidden;pointer-events:none;" +
       "background:var(--hvp-bg,var(--hrf-h0,#0c3b3e));display:flex;flex-direction:column;align-items:center;justify-content:flex-end;contain:strict}" +
     // a whisper of light from the line, so the band reads as one lit surface with the hero rather than a flat slab
+    // the hero artwork's top edge, mirrored: at the join the pixels are the hero's own, and its waves carry on upward
+    "#homeV2 > .hv-pull .hvp-art{position:absolute;left:0;right:0;bottom:0;height:88px;background-repeat:no-repeat;transform:scaleY(-1);" +
+      // only a short strip at the join, fading into the band's flat colour above (a full mirror reflected the stethoscope)
+      "-webkit-mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.55) 45%,transparent 100%);mask-image:linear-gradient(180deg,#000 0,rgba(0,0,0,.55) 45%,transparent 100%)}" +
     "#homeV2 > .hv-pull::before{content:'';position:absolute;inset:0;background:radial-gradient(56% 64% at 50% 70%,rgba(245,196,98,.10),transparent 72%);opacity:0;transition:opacity .4s ease;" +
       // the glow fades out before the band's bottom edge, so it never draws a line where the band meets the hero
       "-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 92%);mask-image:linear-gradient(180deg,#000 55%,transparent 92%)}" +
@@ -81,10 +85,10 @@
     if (S.band && S.band.isConnected && S.band.parentNode === S.home) return S.band;
     css();
     var b = document.createElement("div"); b.className = "hv-pull"; b.setAttribute("aria-hidden", "true");
-    b.innerHTML = '<div class="hvp-in"><svg viewBox="0 0 502.98 108.61" preserveAspectRatio="xMidYMid meet">' + DEFS +
+    b.innerHTML = '<div class="hvp-art"></div><div class="hvp-in"><svg viewBox="0 0 502.98 108.61" preserveAspectRatio="xMidYMid meet">' + DEFS +
       '<path class="gl" pathLength="1" d="' + LINE + '"/><g transform="translate(238 56) scale(.8) translate(-249.1 -54.6)"><path class="ht" d="' + HEART + '"/></g><path class="ln" pathLength="1" d="' + LINE + '"/><circle class="dot" r="5.5" cx="5" cy="78"/></svg><p class="hvp-t">Pull for a pearl</p></div>';
     S.home.insertBefore(b, S.home.firstChild);
-    S.band = b; S.path = b.querySelector(".ln"); S.glow = b.querySelector(".gl"); S.dot = b.querySelector(".dot"); S.heart = b.querySelector(".ht"); S.txt = b.querySelector(".hvp-t");
+    S.band = b; S.inner = b.querySelector(".hvp-in"); S.path = b.querySelector(".ln"); S.glow = b.querySelector(".gl"); S.dot = b.querySelector(".dot"); S.heart = b.querySelector(".ht"); S.txt = b.querySelector(".hvp-t");
     try { S.len = S.path.getTotalLength(); } catch (e) { S.len = 0; }
     tone();
     return b;
@@ -97,7 +101,14 @@
       var img = S.home.querySelector(".hrf-art"), hero = S.home.querySelector(".hrf-hero");
       if (!img || !hero || !img.complete || !img.naturalWidth) { if (img && !img.complete) img.addEventListener("load", tone, { once: true }); return; }
       var ir = img.getBoundingClientRect(), hr = hero.getBoundingClientRect();
-      if (Math.abs(ir.top - hr.top) > 2 || ir.width < hr.width * 0.9) { S.band.style.removeProperty("--hvp-bg"); return; }   // art not along the top edge (wide screens)
+      if (Math.abs(ir.top - hr.top) > 2 || ir.width < hr.width * 0.9) { S.band.style.removeProperty("--hvp-bg"); var a0 = S.band.querySelector(".hvp-art"); if (a0) a0.style.backgroundImage = ""; return; }   // art not along the top edge (wide screens)
+      // The mirror: the same image at the same width and left edge as the hero's, flipped, so its top row meets the hero's.
+      var art = S.band.querySelector(".hvp-art"), hm = S.home.getBoundingClientRect();
+      if (art) {
+        art.style.backgroundImage = "url(\"" + (img.currentSrc || img.src) + "\")";
+        art.style.backgroundSize = Math.round(ir.width) + "px auto";
+        art.style.backgroundPosition = Math.round(ir.left - hm.left) + "px top";
+      }
       var c = document.createElement("canvas"); c.width = 24; c.height = 2;
       var x = c.getContext("2d"); x.drawImage(img, 0, 0, img.naturalWidth, Math.max(2, img.naturalHeight * 0.006), 0, 0, 24, 2);
       var d = x.getImageData(0, 0, 24, 2).data, r = 0, g = 0, bl = 0, n = 0;
@@ -122,16 +133,19 @@
   /* setH(px, phase, native): the band's height is the gap the pull opened; the trace draws with the pull. */
   function setH(px, phase, native) {
     if (!S.home) return;
-    var b = band(), h = Math.max(0, Math.round(px));
+    // raw: the exact (fractional) gap; a bounce under half a pixel must still be covered, so sizing never rounds to 0.
+    var b = band(), raw = Math.max(0, +px || 0), h = raw > 0 ? Math.max(1, Math.round(raw)) : 0;
     S.h = h; S.phase = phase;
     // The band fills from the top of Home down to wherever the scroller's top is now (the drag translates the scroller;
     // a native bounce moves its content), so no strip of page shows between the band and the hero on any layout.
     var gap = 0;
     if (h > 0) try {
       var top = S.sc.getBoundingClientRect().top - S.home.getBoundingClientRect().top;
-      gap = native ? top + h : top;
-    } catch (e) { gap = h; }
-    b.style.height = Math.max(h, Math.round(gap)) + "px";
+      gap = native ? top + raw : top;
+    } catch (e) { gap = raw; }
+    // Ceil plus 2 px: the band tucks under the hero (which covers it), so a fractional hero top can never leave a hairline
+    // of the pale page between them (owner recording 2026-11-21: a light line flashed in at the start of a pull).
+    b.style.height = (raw > 0 ? Math.ceil(Math.max(raw, gap)) + 2 : 0) + "px";
     b.classList.toggle("native", !!native);
     b.classList.toggle("armed", phase === "armed");
     var wasBusy = b.classList.contains("busy");
@@ -145,7 +159,7 @@
       S.txt.textContent = phase === "armed" ? "Let go" : "Pull for a pearl";
       trace(PURE.prog(h, 72), !native && phase !== "armed");
     }
-    b.firstChild.style.opacity = String(Math.min(1, h / 44));
+    S.inner.style.opacity = String(Math.min(1, h / 44));
     document.body.classList.toggle("hv-pulling", h > 0);
   }
 
@@ -193,6 +207,7 @@
     sc.addEventListener("scroll", onScroll, { passive: true });
     band();
     try { new MutationObserver(function () { setTimeout(tone, 60); }).observe(document.body, { attributes: true, attributeFilter: ["class"] }); } catch (e) {}
+    window.addEventListener("resize", function () { clearTimeout(S.rt); S.rt = setTimeout(tone, 150); });
     // Home can rebuild its scroller: follow it.
     if (S.mo) S.mo.disconnect();
     try { S.mo = new MutationObserver(function () { if (!S.sc || !S.sc.isConnected || S.sc.parentNode !== S.home) attach(); }); S.mo.observe(home, { childList: true }); } catch (e) {}
