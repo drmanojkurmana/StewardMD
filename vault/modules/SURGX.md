@@ -473,8 +473,8 @@ cases are RIGHT-sided; the prompt fixes the field orientation per operation, sta
 `img4.py` parses it; D05 (head fixation) has no Teach line and needs a hand-written caption like the positioning steps.
 
 ## Batch 5 clips wired (2026-11-21)
-79 timed clips across the neurosurgery set (`med.surgx.{csdh,edh,evd,vps,ces}-clip-NN`): CSDH 13 of 16, EDH 16 of 20,
-EVD 15 of 17, VP shunt 19 of 22, CES 13 of 17. All 19 videos pass the real embedded-player check with a referrer; 17 new
+79 timed clips across the neurosurgery set (`med.surgx.{csdh,edh,evd,vps,ces}-clip-NN`): CSDH 14 of 16, EDH 17 of 20,
+EVD 15 of 17, VP shunt 19 of 22, CES 14 of 17. All 19 videos pass the real embedded-player check with a referrer; 17 new
 ALLOW ids. Dropped from Gemini's answer: EDH 14 (same tack-up clip as 15, not a duraplasty), EVD 15 (same one-line clip
 as 12), VP shunt 11 (low-confidence patient diagram), CES 15 (low confidence, closure only mentioned); EDH 4 and VP 4 moved
 to the standard checklist prophylaxis clip. Gemini found nothing for CSDH 11 (drain), EDH 8 (scalp flap), EVD 5
