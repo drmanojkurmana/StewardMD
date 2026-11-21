@@ -429,3 +429,13 @@ Steps Gemini left without a clip, searched again on YouTube (headless browser se
 
 ## Age-restricted videos (2026-11-21)
 YouTube oEmbed returns 200 for AGE-RESTRICTED videos, but the embedded player refuses them ("only available on YouTube"). The owner saw this on the phone on appendicectomy step 6 (m5u1kHwGDk8); replaced with Molnlycke's Hasson trocar demo (vBj5vn41Ixs). Check every new video in the real embedded player, not just oEmbed: load https://www.youtube.com/embed/ID in headless Chromium WITH a referer (Playwright goto option referer 'https://stewardmd.in/'; without one every video shows Error 153) and look for 'age-restricted' or 'Playback on other websites has been disabled'. Run over all 47 ids on 2026-11-21: only m5u1kHwGDk8 failed.
+
+## Bold high-yield points in step text (2026-11-21)
+Owner asked for Knowledge Library-style bolding on every surgery step. `renderStep` runs `why` and each `how` line through
+`rich()` (surgx-screens.js): first reasoning.js `window.SMD_MEDFORMAT` (the library's medFormat; it escapes; plain
+`esc()` fallback), then `SGX_BOLD`, a SURGX-only surgical rule set applied to text outside existing spans: measurements
+(mm, cm, mmHg, degrees, hours, minutes, mL), "within the hour", "under (direct) vision", "before incision/induction/
+closure/...", "aloud", "never event", "stops the closure", "any discrepancy", "two-person", convert/call for help,
+"critical view of safety", and a capital NOT. Library rules unchanged. CSS: `.sgx-step [class^="md-"]:not(.md-hi)` bold
+ink, never colour (`md-hi` is the last opened article's terms, which would leak in). Pitfall, risk and emphasis lines keep
+their own styling. Coverage estimate: 26% of 2,097 steps with library rules alone, about 70% with both; appendicectomy 17/19.
