@@ -92,16 +92,16 @@
   },
   "steps": [
     {
-      "ref": "step.core.consent-check", "media": ["med.surgx.fcs-clip-01"]
+      "ref": "step.core.consent-check", "media": ["med.surgx.fcs-step-01", "med.surgx.fcs-clip-01"]
     },
     {
-      "ref": "step.core.timeout", "media": ["med.surgx.fcs-clip-02"]
+      "ref": "step.core.timeout", "media": ["med.surgx.fcs-step-02", "med.surgx.fcs-clip-02"]
     },
     {
-      "ref": "step.uro.urine-check", "media": ["med.surgx.fcs-clip-03"]
+      "ref": "step.uro.urine-check", "media": ["med.surgx.fcs-step-03", "med.surgx.fcs-clip-03"]
     },
     {
-      "ref": "step.core.prophylaxis",
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.fcs-step-04"],
       "emphasis": "Usually no antibiotic for a diagnostic look; give one only for risk factors or stent removal per local policy."
     },
     {
@@ -109,27 +109,27 @@
       "emphasis": "Supine for men; frog-leg or lithotomy for women; a screen for the patient to watch."
     },
     {
-      "ref": "step.core.prep-drape", "media": ["med.surgx.fcs-clip-06"],
+      "ref": "step.core.prep-drape", "media": ["med.surgx.fcs-step-06", "med.surgx.fcs-clip-06"],
       "emphasis": "Clean the meatus and glans or vulva; a fenestrated drape."
     },
     {
-      "ref": "step.fcs.la-gel", "media": ["med.surgx.fcs-clip-07"]
+      "ref": "step.fcs.la-gel", "media": ["med.surgx.fcs-step-07", "med.surgx.fcs-clip-07"]
     },
     {
-      "ref": "step.uro.cystoscopy", "media": ["med.surgx.fcs-clip-08"],
+      "ref": "step.uro.cystoscopy", "media": ["med.surgx.fcs-step-08", "med.surgx.fcs-clip-08"],
       "emphasis": "Pass the flexible scope under vision along the urethra, then map the bladder wall in order."
     },
     {
-      "ref": "step.fcs.retroflex"
+      "ref": "step.fcs.retroflex", "media": ["med.surgx.fcs-step-09"]
     },
     {
-      "ref": "step.fcs.stent-removal", "media": ["med.surgx.fcs-clip-10"]
+      "ref": "step.fcs.stent-removal", "media": ["med.surgx.fcs-step-10", "med.surgx.fcs-clip-10"]
     },
     {
-      "ref": "step.fcs.finding", "media": ["med.surgx.fcs-clip-11"]
+      "ref": "step.fcs.finding", "media": ["med.surgx.fcs-step-11", "med.surgx.fcs-clip-11"]
     },
     {
-      "ref": "step.core.debrief", "media": ["med.surgx.fcs-clip-12"],
+      "ref": "step.core.debrief", "media": ["med.surgx.fcs-step-12", "med.surgx.fcs-clip-12"],
       "emphasis": "Explain the findings, document the bladder map, and book any biopsy or TURBT."
     }
   ],

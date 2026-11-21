@@ -620,3 +620,6 @@ dissection above the aortic bifurcation (debated; the standard pelvic dissection
 - Batch 9b images: 98 of 115 (`img9b.py`). Held: pyeloplasty 12, partial nephrectomy 11, 12, 13, 15, 17, prostatectomy
   18, 19, 24, cystectomy 08, 13, nephroureterectomy 06, 10, 11, 12, 15, 18 (open retractors or ring scissors in a
   robotic or laparoscopic view, bare pelvic bones, a laparotomy wound after robotic surgery, wrong position).
+- Batch 9a images: 98 of 104 (`img9a.py`). Held: flexible cystoscopy 05 (two panels stitched), vasectomy 08 (wide open
+  wound, not a puncture) and 09 (two cuts with vas ends through the skin), urethroplasty 09, 13, 14 (perineum drawn as
+  female anatomy).
