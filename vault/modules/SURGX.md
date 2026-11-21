@@ -464,3 +464,10 @@ half resolution and doubtful ones at full size. Held back: mastectomy 5 (arm not
 in the wound), hip 16 (patient supine, crack barely visible), hysterectomy 5 (only the leg section raised, not a
 head-down tilt), chest drain 9 (drain on the left). Redo prompt at the end of [[SURGX-batch4-image-prompt]]. The Gemini
 zips had no folders inside: extract each into its own folder or same-named files overwrite each other.
+
+## Batch 5 prompts (2026-11-21)
+[[SURGX-batch5-image-prompt]] (92 images) and [[SURGX-batch5-video-prompt]] for the neurosurgery set: burr-hole CSDH (16),
+trauma craniotomy for EDH (20), EVD at Kocher point (17), VP shunt (22) and lumbar discectomy for CES (17). All cranial
+cases are RIGHT-sided; the prompt fixes the field orientation per operation, states CT/MRI in radiological convention
+(a right-sided clot on the LEFT of the scan), and asks for a folder inside each zip. Same block format as batch 4, so
+`img4.py` parses it; D05 (head fixation) has no Teach line and needs a hand-written caption like the positioning steps.
