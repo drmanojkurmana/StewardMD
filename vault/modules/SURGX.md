@@ -526,3 +526,12 @@ strabismus, vitrectomy), each with a video prompt. Scene lines are generated fro
 RIGHT eye, microscope views with the forehead at the top and the nose on the viewer's RIGHT. Operations use letters A to
 G, so the wiring regex needs `[A-G]` (batch 4 script used `[A-E]`). Still without prompts: kidney transplant, donor
 nephrectomy, AVR, pericardial window, escharotomy, rhomboid flap, cleft lip (128 steps).
+
+## Batch 7 clips wired (2026-11-21)
+83 timed clips (`med.surgx.{ivi,dcr,chal,fb,evis,strab,ppv}-clip-NN`): intravitreal 11 of 11, DCR 12 of 16, chalazion
+10 of 11, foreign body 10 of 10, evisceration 13 of 19, strabismus 14 of 19, vitrectomy 13 of 16. All 24 videos pass the
+real-player check; 21 new ALLOW ids. Not used: the chalazion consent and aftercare talking-head clip (a TikTok
+re-upload), the evisceration speculum clip (same animation segment as the keratectomy). Captions flag the left-eye
+footage (lid eversion, vitrectomy, DCR local), the model eye and 20G needle (foreign body), and the patient animations.
+Empty: positioning, speculum and povidone in most of them, DCR bailout and haemostasis, squint lost-muscle bailout,
+vitrectomy wound check.

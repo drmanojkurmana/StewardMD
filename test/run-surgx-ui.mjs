@@ -259,6 +259,14 @@ try {
     "IMAGES batch 5: VP shunt shows all 22 distinct step pictures and every file loads");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Intravitreal anti-VEGF injection");
+  await waitFor("#surgxRoot .sgx-tab");
+  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 11,
+    "VIDEO batch 7: intravitreal injection shows its 11 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Appendicectomy");
   await waitFor("#surgxRoot .sgx-tab");
   await clickText("#surgxRoot .sgx-tab", "Steps");
