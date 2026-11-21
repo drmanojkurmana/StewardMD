@@ -8591,21 +8591,36 @@
     var c=byId(id); if(!c) return;
     pushRecent(id); openId=id;
     var view=root.querySelector("#mcCalcView");
-    var bodyEl=root.querySelector("#mcBody"), pin=root.querySelector(".mc-pin"), top=root.querySelector(".mc-top");
-    if(bodyEl) bodyEl.style.display="none";
-    if(pin) pin.style.display="none";
-    if(top) top.style.display="none";
     view.hidden=false;
+    layoutSplit();
     view.classList.remove("mc-push"); void view.offsetWidth; view.classList.add("mc-push");
     renderPanel(id);
+    markSel(id);
   }
+  /* iPad landscape (owner 2026-11-21: "iPad looks ugly stretched"): at 1000px and wider the list stays on the left
+     and the open calculator fills the right, instead of a full-width form. Narrower screens keep the pushed view. */
+  var SPLIT_MQ=null; try{ SPLIT_MQ=window.matchMedia("(min-width: 1000px)"); }catch(e){}
+  function isSplit(){ return !!(SPLIT_MQ&&SPLIT_MQ.matches&&calcV2On()); }
+  function layoutSplit(){
+    if(!root) return;
+    var view=root.querySelector("#mcCalcView"); if(!view) return;
+    var open=!view.hidden, split=isSplit(), showList=!open||split;
+    root.classList.toggle("mc-split", open&&split);
+    var bodyEl=root.querySelector("#mcBody"), pin=root.querySelector(".mc-pin"), top=root.querySelector(".mc-top");
+    if(bodyEl) bodyEl.style.display=showList?"":"none";
+    if(pin) pin.style.display=(showList&&(!q||split))?"":"none";
+    if(top) top.style.display=showList?"":"none";
+  }
+  function markSel(id){
+    if(!root) return;
+    var rows=root.querySelectorAll("#mcList .mc-row");
+    for(var i=0;i<rows.length;i++) rows[i].classList.toggle("mc-sel", rows[i].getAttribute("data-id")===id);
+  }
+  if(SPLIT_MQ){ var onSplit=function(){ layoutSplit(); }; if(SPLIT_MQ.addEventListener) SPLIT_MQ.addEventListener("change", onSplit); else if(SPLIT_MQ.addListener) SPLIT_MQ.addListener(onSplit); }
   function closeCalcView(){
     var view=root.querySelector("#mcCalcView");
     view.hidden=true; view.innerHTML="";
-    var bodyEl=root.querySelector("#mcBody"), pin=root.querySelector(".mc-pin"), top=root.querySelector(".mc-top");
-    if(bodyEl) bodyEl.style.display="";
-    if(pin) pin.style.display=q?"none":"";
-    if(top) top.style.display="";
+    layoutSplit();
     openId=null;
     renderList();
   }
@@ -9450,6 +9465,27 @@
       Q+" .mc-ic.mc-mono{background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.7))!important;border:1px solid var(--a-glass-edge)!important;box-shadow:0 0 0 1px var(--a-line),0 2px 6px var(--a-sh)!important}",
       Q.replace("html body ","html body.dark ")+" .mc-ic.mc-mono,"+Q.replace("html body ","html body.v3-dark ")+" .mc-ic.mc-mono{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04))!important}",
       Q+" .mc-sbox{background:var(--a-field)!important}",
+      /* Dark mode: true black with iOS dark grey panels (owner 2026-11-21), green kept only as the accent. */
+      Q.replace("html body ","html body.dark ")+","+Q.replace("html body ","html body.v3-dark ")+"{--a-bg:#000000;--a-card:rgba(28,28,30,.92);--a-glass-edge:rgba(255,255,255,.06);--a-line:rgba(255,255,255,.10);--a-edge:rgba(0,0,0,.7);--a-sh:rgba(0,0,0,.5);--a-ink:#F2F2F7;--a-mut:#98989F;--a-acc:#7DC59A;--a-acc-edge:#3F7A57;--a-soft:rgba(125,197,154,.14);--a-field:rgba(255,255,255,.08);--a-seg:rgba(255,255,255,.08)}",
+      Q.replace("html body ","html body.dark ")+","+Q.replace("html body ","html body.v3-dark ")+","+Q.replace("html body ","html body.dark ")+" .mc-body,"+Q.replace("html body ","html body.dark ")+" #mcList,"+Q.replace("html body ","html body.dark ")+" .mc-top,"+Q.replace("html body ","html body.dark ")+" .mc-pin,"+Q.replace("html body ","html body.dark ")+" .mc-calcview,"+Q.replace("html body ","html body.v3-dark ")+" .mc-body,"+Q.replace("html body ","html body.v3-dark ")+" #mcList,"+Q.replace("html body ","html body.v3-dark ")+" .mc-top,"+Q.replace("html body ","html body.v3-dark ")+" .mc-pin,"+Q.replace("html body ","html body.v3-dark ")+" .mc-calcview{background:#000000!important;background-image:none!important}",
+      Q.replace("html body ","html body.dark ")+" .mc-ic.mc-mono,"+Q.replace("html body ","html body.v3-dark ")+" .mc-ic.mc-mono{background:linear-gradient(180deg,#2C2C2E,#1C1C1E)!important}",
+      /* iPad and wider: one centred 720px column instead of full-width stretched rows and forms */
+      "@media(min-width:700px){"+
+        Q+" .mc-top.mc-top2,"+Q+" .mc-pin,"+Q+" #mcList{padding-left:max(16px,calc((100vw - 720px)/2))!important;padding-right:max(16px,calc((100vw - 720px)/2))!important}"+
+        Q+" .mc-pin .mc-cats{margin:0!important;padding-left:0!important;padding-right:0!important}"+
+        Q+" .mc-calcview{padding-left:max(0px,calc((100vw - 720px)/2))!important;padding-right:max(0px,calc((100vw - 720px)/2))!important}"+
+        Q+" .mc-score{left:max(0px,calc((100vw - 720px)/2))!important;right:max(0px,calc((100vw - 720px)/2))!important;border-radius:18px 18px 0 0!important;border-left:1px solid var(--a-line)!important;border-right:1px solid var(--a-line)!important}"+
+      "}",
+      /* iPad landscape: list on the left (400px), the open calculator on the right */
+      "@media(min-width:1000px){"+
+        Q+".mc-split .mc-top2,"+Q+".mc-split .mc-pin,"+Q+".mc-split .mc-body{width:400px!important;max-width:400px!important;box-sizing:border-box}"+
+        Q+".mc-split .mc-top.mc-top2,"+Q+".mc-split .mc-pin,"+Q+".mc-split #mcList{padding-left:16px!important;padding-right:16px!important}"+
+        Q+".mc-split .mc-body{border-right:1px solid var(--a-line)}"+
+        Q+".mc-split .mc-calcview{left:400px!important;border-left:1px solid var(--a-line);padding-left:max(0px,calc((100vw - 400px - 720px)/2))!important;padding-right:max(0px,calc((100vw - 400px - 720px)/2))!important}"+
+        Q+".mc-split .mc-score{left:calc(400px + max(0px,calc((100vw - 400px - 720px)/2)))!important;right:max(0px,calc((100vw - 400px - 720px)/2))!important}"+
+        Q+" .mc-row.mc-sel{background:var(--a-soft)!important}"+
+        Q+" .mc-row.mc-sel .mc-card-t{color:var(--a-acc)!important}"+
+      "}",
       "@media(prefers-reduced-motion:reduce){"+Q+" .mc-fill-link,"+Q+" .mc-maik-btn,"+Q+" .mc-copy-btn,"+Q+" .mc-reset-btn,"+Q+" .mc-cats .mc-cat{transition:none!important}}"
     ].join("");
   }
