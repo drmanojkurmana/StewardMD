@@ -446,3 +446,11 @@ mastectomy (18), total hip replacement (22), total abdominal hysterectomy (22) a
 image prompt carries every batch 2 and 3 lesson: a NEW side view per positioning step with the angle drawn, bodies whole
 and connected, fat yellow only where real fat is, laterality per operation, a full-size quality check. The video prompt
 forbids age-restricted videos and whole-video clips and asks for the first and last spoken line of every clip.
+
+## Whole videos cut to segments (2026-11-21)
+Owner: a 11-minute video played in full instead of the step. Gemini timed all 21 whole-video clips (prompt in chat, its
+JSON quotes the first and last spoken line of each); every clip now has `start` and `end`. Two replaced because no part
+showed the step: appendicectomy 6 -> Bhm7cCcr1Qc (TAMC OBGYN Simulation, Hasson entry), port closure (app-vid-17, also
+right hemicolectomy 21) -> h5D8sU8btyI (CooperSurgical). Both pass the real embedded-player check; the old ids left the
+ALLOW list. Timestamps are Gemini's; not re-verified here (transcript reading from YouTube's player is blocked in this
+environment). Thyroid 5 caption now says the narration is Hindi and Urdu.
