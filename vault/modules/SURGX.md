@@ -623,3 +623,6 @@ dissection above the aortic bifurcation (debated; the standard pelvic dissection
 - Batch 9a images: 98 of 104 (`img9a.py`). Held: flexible cystoscopy 05 (two panels stitched), vasectomy 08 (wide open
   wound, not a puncture) and 09 (two cuts with vas ends through the skin), urethroplasty 09, 13, 14 (perineum drawn as
   female anatomy).
+- Fix round 2 (`surgx-fix-b8-b9b.zip`): 17 of 20 wired (`img8fix2.py`, `img9bfix.py`). Still held: escharotomy 07
+  (different bald patient, cut still on the palm side), AVR 18 (ribs drawn inside the sternal wound), NU 06 (patient
+  supine, not on her side). Batch 8 now 126 of 128; batch 9b 114 of 115.
