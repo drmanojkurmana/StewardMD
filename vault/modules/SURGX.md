@@ -572,3 +572,9 @@ with ileal conduit, nephroureterectomy. Four new shared steps in `steps/urology.
 operative keys (`indication`, `side`, `incision`, `anaesthesia` ...): the specialties test fails on a collision.
 Prompts: [[SURGX-batch9a-image-prompt]] (104) + [[SURGX-batch9a-video-prompt]], [[SURGX-batch9b-image-prompt]] (115)
 + [[SURGX-batch9b-video-prompt]], made by `make9.py`.
+
+### Batch 8 clips wired (2026-11-21)
+100 clips over the 7 non-eye operations (`med.surgx.{tx,ldn,avr,pw,esc,rhomb,cleft}-clip-NN`, `wire8.py`), every video
+checked in the embedded player with a referrer; 19 new ALLOW ids. Dropped as wrong or weak: Ochsner checklist (fails embed),
+the intercostal chest tube for AVR drains, the TXA/adrenaline packing demo for escharotomy, the generic "separate the
+kidney" schematic for donor artery and vein division, the verbal-only cleft positioning.
