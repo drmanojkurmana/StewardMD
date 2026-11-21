@@ -551,6 +551,7 @@ Captions flag the left-eye pterygium footage, the LASIK flap relift, the Hindi M
 [[SURGX-batch6-image-prompt]]. PRK, LASIK and pterygium images not yet received.
 Part B (same day): PRK 14 of 14, LASIK 13 of 15, pterygium 16 of 17 wired via `img6b.py`; batch 6 now 99 of 105.
 Held back LASIK 09, LASIK 12, pterygium 12 (second redo prompt in [[SURGX-batch6-image-prompt]]).
+Fix (same day): the six held-back images came back in `surgx-batch6-fix.zip`, passed full-size review and were wired; batch 6 is 105 of 105.
 
 ## Batch 7 pictures wired (2026-11-21)
 101 of 102 (`med.surgx.{ivi,dcr,chal,fb,evis,strab,ppv}-step-NN`), every image reviewed four to a sheet. Held back
