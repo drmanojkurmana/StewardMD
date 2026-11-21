@@ -8830,14 +8830,13 @@
     main.innerHTML=h;
     var v=readValuesSafe(c);
     det.innerHTML=breakdownHTML(c, v, out)+   // the verdict line above already carries the full interpretation
-      '<div class="mc-score-actions"><button type="button" class="mc-copy-btn" id="mcCopy_'+c.id+'">Copy result</button>'+(c.ref?'<div class="mc-score-src">Source: '+esc(c.ref)+'</div>':"")+'</div>';
+      '<div class="mc-score-actions"><button type="button" class="mc-copy-btn" id="mcCopy_'+c.id+'"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></svg><span>Copy result</span></button>'+(c.ref?'<div class="mc-score-src">Source: '+esc(c.ref)+'</div>':"")+'</div>';
     card.classList.add("mc-score-done");
     var cp=document.getElementById("mcCopy_"+c.id);
     if(cp) cp.addEventListener("click", function(){
       var txt=c.title+": "+out.v+(out.u?" "+out.u:"")+". "+stripTags(out.i||"");
       try{ if(navigator.clipboard) navigator.clipboard.writeText(txt); }catch(e){}
-      cp.textContent="Copied";
-      setTimeout(function(){ cp.textContent="Copy result"; }, 1200);
+      var cpl=cp.querySelector("span"); if(cpl){ cpl.textContent="Copied"; setTimeout(function(){ cpl.textContent="Copy result"; }, 1200); }
     });
   }
   function fillFromSnapshot(c, run){
@@ -8890,7 +8889,7 @@
     view.innerHTML=
       '<div class="mc-cv-head"><button type="button" class="mc-cv-back" id="mcCvBack"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Calculators</button><button type="button" class="mc-cv-star'+(favOn?" on":"")+'" id="mcCvStar" aria-pressed="'+(favOn?"true":"false")+'" aria-label="'+(favOn?"Remove from":"Add to")+(window.SMD_HAS_WATCH?" Apple Watch":" starred")+'">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button></div>'+
       '<div class="mc-cv-title"><h2 title="'+esc(c.title)+'">'+subFix(esc(shortTitle(c.title)))+'</h2><p>'+esc(c.desc)+'</p></div>'+
-      '<div class="mc-action-row"><button type="button" class="mc-act-btn" id="mcAuto_'+id+'">Auto-fill from patient</button><button type="button" class="mc-act-btn" id="mcAsk_'+id+'">Ask MaiK</button></div>'+
+      '<div class="mc-action-row"><button type="button" class="mc-fill-link" id="mcAuto_'+id+'"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>Fill from patient</button><button type="button" class="mc-maik-btn" id="mcAsk_'+id+'"><img src="/assets/maik-mark-white.webp" width="20" height="20" alt="" draggable="false">Ask MaiK</button></div>'+
       '<div id="mcAFnote_'+id+'"></div>'+
       '<div class="mc-panel" id="mcPanel_'+id+'">'+
         (calcHasLab(c)?'<div class="mc-af"><button class="mc-af-btn" id="mcAFbtn_'+id+'">'+mcIco("flask")+' Choose patient (Ward Sync labs)</button><div class="mc-af-body" id="mcAFbody_'+id+'"></div></div>':"")+
@@ -9316,8 +9315,18 @@
       Q+" .mc-cv-title{padding:4px 16px 0!important}",
       Q+" .mc-cv-title h2{font:800 23px/1.2 var(--a-font)!important;color:var(--a-ink)!important;letter-spacing:-.01em}",
       Q+" .mc-cv-title p{font:500 14px/1.4 var(--a-font)!important;color:var(--a-mut)!important;white-space:normal!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:6px!important}",
-      Q+" .mc-action-row{padding:12px 16px 0!important;gap:8px!important}",
-      Q+" .mc-act-btn{min-height:40px!important;border:none!important;background:var(--a-card)!important;border-radius:10px!important;font:700 13.5px var(--a-font)!important;color:var(--a-acc)!important}",
+      Q+" .mc-action-row{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:14px 16px 0!important;gap:12px!important}",
+      Q+" .mc-fill-link{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0;margin-left:-2px;background:none;border:none;color:var(--a-acc);font:600 14.5px var(--a-font);cursor:pointer}",
+      Q+" .mc-fill-link svg,"+Q+" .mc-copy-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}",
+      Q+" .mc-fill-link:active,"+Q+" .mc-copy-btn:active{opacity:.6}",
+      Q+" .mc-maik-btn{display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 16px 0 10px;border:none;border-radius:20px;background:#0B6B52;color:#fff;font:700 14.5px var(--a-font);cursor:pointer;transition:transform .12s ease,background-color .12s ease}",
+      Q+" .mc-maik-btn img{width:22px;height:22px;display:block}",
+      Q+" .mc-maik-btn:active{transform:scale(.97);background:#085641}",
+      "body.dark "+Q+" .mc-maik-btn,body.v3-dark "+Q+" .mc-maik-btn{background:#0E7A5E}",
+      "@media(prefers-reduced-motion:reduce){"+Q+" .mc-maik-btn{transition:none}}",
+      Q+" .mc-score-actions{display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin-top:6px}",
+      Q+" .mc-copy-btn{display:inline-flex!important;align-items:center;gap:6px;min-height:44px!important;margin:0!important;padding:0!important;border:none!important;background:none!important;color:var(--a-acc)!important;font:600 14.5px var(--a-font)!important}",
+      Q+" .mc-score-src{margin-top:0!important}",
       Q+" .mc-form{margin:12px 16px 0!important;background:var(--a-card)!important;border:none!important;border-radius:12px!important}",
       Q+" .mc-frow{position:relative;min-height:52px!important;padding:6px 14px!important;border:none!important;gap:10px!important}",
       Q+" .mc-frow+.mc-frow:before{content:'';position:absolute;left:14px;right:0;top:0;border-top:1px solid var(--a-line)}",
