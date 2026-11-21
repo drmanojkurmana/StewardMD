@@ -493,3 +493,55 @@ it, named exactly as above:
 Put credits.txt in each zip: for each image the filename, a one-line description and the reference sources you
 studied (titles and links). Then give me the five zips as downloads.
 ```
+
+## Round 2: redo prompt (6 images)
+
+Round 1 (2026-11-21): 86 of 92 wired. Held back: CSDH 05, EDH 05 and VP 05 (head straight up, not turned to the
+left; table flat), EDH 09 (a bare dry skull with the orbit and facial bones showing inside the wound), EVD 10 (the
+catheter tip bent into a hook), VP 13 (a different patient: a bald young man instead of the elderly woman).
+
+```
+Six of the 92 images are wrong. Regenerate ONLY these six with the IMAGE GENERATION MODEL (never code), in exactly the
+same style, patient and team as the rest of their operation. Draw each one NEW; do not edit the earlier image.
+
+1, 2 and 3. burr-hole-csdh/05_positioning.png, trauma-craniotomy-edh/05_positioning.png and
+   vp-shunt-insertion/05_head-position.png (each with its own operation's patient: the elderly man, the young
+   intubated man, the elderly woman)
+   - View from the FOOT of the table, slightly above, looking up the body to the head, so the head turn is obvious.
+   - The face is turned clearly to the patient's LEFT (towards the viewer's RIGHT), about 60 degrees, so the RIGHT
+     side of the head and the right ear face the ceiling. NOT looking straight up.
+   - The head rests on a padded horseshoe headrest; a rolled towel under the RIGHT shoulder only (not across both).
+   - CSDH and EDH: the head end of the table raised about 20 degrees (head higher than the chest).
+   - VP shunt: a faint dotted line on the skin running in ONE straight line from behind the right ear down the side
+     of the neck, over the right collarbone, down the right chest to the right upper abdomen. Chest covered by a drape.
+   - Teach: turn the head so the operative side is uppermost without kinking the neck. Check: face turned to the left.
+
+4. trauma-craniotomy-edh/09_first-burr-hole.png
+   - Same field as image 08: the scalp and temporalis flap turned forwards with blue Raney clips on the edges; inside
+     the wound ONLY the flat outer surface of the temporal and parietal bone (ivory, with a suture line).
+   - NO eye socket, NO cheekbone, NO jaw, NO teeth and NO facial bones anywhere in the wound. It is a living patient
+     under drapes, not a dry skull.
+   - The perforator held perpendicular on the temporal bone just above the ear; dark clot welling out of the new hole.
+   - Teach: the first burr hole over the thickest clot relieves pressure. Check: only flat skull bone in the wound.
+
+5. evd-insertion/10_ventricular-cannulation.png
+   - Same layout as before: a see-through head from the RIGHT side with the brain and the lateral ventricle; two small
+     insets (front view and side view).
+   - The catheter is a STRAIGHT line from Kocher point (just in front of the coronal suture, high on the forehead) down
+     to its tip in the FRONTAL HORN, just in front of the foramen of Monro. No bend, no hook, no curl at the tip.
+   - Front inset: the entry point on the patient's RIGHT (the viewer's LEFT of the midline), with ONE dotted line to the
+     medial corner of the patient's RIGHT eye (the eye on the viewer's LEFT). Side inset: one dotted line to the ear.
+   - Teach: aim at the medial canthus and the ear; stop after three passes. Check: catheter straight.
+
+6. vp-shunt-insertion/13_subcutaneous-tunnel.png
+   - The SAME elderly woman with grey hair as in every other image of this operation (not a young or bald man).
+   - Seen from her RIGHT side, head turned to the LEFT on the horseshoe, the iodine drape covering the whole tunnel
+     path, chest covered.
+   - A long malleable tunneller visible as a ridge under the skin from the incision behind the right ear, down the
+     neck, OVER the collarbone and down the chest towards the abdomen; the surgeon's free hand feels its tip.
+   - Inset cutaway at the collarbone: the tunneller in the fat ABOVE the collarbone, far from the lung.
+   - Teach: stay subcutaneous and cross over the collarbone superficially. Check: same patient as images 01 to 12.
+
+No text, numbers or labels. Landscape 4:3, 1600 x 1200 px, PNG, same filenames, each inside a folder with the
+operation's name. Put all six in ONE zip: surgx-batch5-fix.zip
+```

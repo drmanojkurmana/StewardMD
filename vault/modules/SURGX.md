@@ -480,3 +480,9 @@ as 12), VP shunt 11 (low-confidence patient diagram), CES 15 (low confidence, cl
 to the standard checklist prophylaxis clip. Gemini found nothing for CSDH 11 (drain), EDH 8 (scalp flap), EVD 5
 (positioning), VP 18 (bailout), VP 20 (closure), CES 6 (prep) and CES 13 (haemostasis), or the skin closures. Much of the
 set is lectures, skull models and animation: few embeddable live cranial videos exist that are not age-restricted.
+
+## Batch 5 pictures wired (2026-11-21)
+86 of 92 (`med.surgx.{csdh,edh,evd,vps,ces}-step-NN`), every image reviewed four to a sheet at half size and the doubtful
+ones at full size. Held back: CSDH 05, EDH 05 and VP 05 (head straight up, not turned), EDH 09 (a dry skull with the orbit
+and facial bones inside the wound), EVD 10 (catheter tip bent into a hook), VP 13 (a different patient). Redo prompt at
+the end of [[SURGX-batch5-image-prompt]]. The zips again had no folders inside; extracted per operation.
