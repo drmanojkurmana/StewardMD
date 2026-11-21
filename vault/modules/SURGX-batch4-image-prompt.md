@@ -443,3 +443,53 @@ Make FIVE zip files, one per operation, with the PNGs named exactly as above:
 Put credits.txt in each zip: for each image the filename, a one-line description and the reference sources you
 studied (titles and links). Then give me the five zips as downloads.
 ```
+
+## Round 2: redo prompt (5 images)
+
+```
+Five of the 93 images are wrong. Regenerate ONLY these five, with the IMAGE GENERATION MODEL (never code), in exactly
+the same style, patient and team as the rest of their operation. Draw each one NEW; do not edit the earlier image.
+
+1. modified-radical-mastectomy/05_positioning.png
+   - View from the FOOT of the table, looking up the table at table height, so the arm angle is obvious.
+   - Patient supine; the RIGHT arm (viewer's LEFT) out on a padded arm board at EXACTLY 90 degrees to the body,
+     straight out sideways, palm up, the arm board at right angles to the table. NOT along the side.
+   - A small folded sheet under the right shoulder blade lifting the right chest slightly; the left arm at the side.
+   - Teach: arm out at 90 degrees and no more, to open the axilla without stretching the brachial plexus.
+     Check: the right angle between arm and body is the first thing the eye sees.
+
+2. total-hip-replacement/12_trial-reduction.png
+   - Same LEFT lateral decubitus patient and posterior wound as images 07 to 11 (patient's head to the TOP of the frame,
+     back to the viewer's LEFT). Inside the wound: a trial femoral neck and head seated in the acetabular cup; only the
+     parts visible through a real incision (no loose or whole pelvis bone, no bone held in the hand).
+   - The assistant holds the leg below the knee and has flexed the hip to 90 degrees with internal rotation to test
+     posterior stability; the head stays in the cup.
+   - Small inset: both knees side by side at the same level (leg length check).
+   - Teach: test stability and length with the trials before choosing implants. Check: anatomy looks like a real wound.
+
+3. total-hip-replacement/16_periprosthetic-fracture.png
+   - Same LEFT lateral decubitus patient as images 05 to 15 (lying on the left side, right hip up), NOT on the back.
+   - Close-up of the wound: the broach handle stopped in the femoral canal; a clear, thin, dark crack running a few
+     centimetres DOWN the medial calcar of the proximal femur, gently highlighted so it is obvious.
+   - In the background, a radiographer bringing a C-arm image intensifier towards the hip.
+   - Teach: stop when the feel or sound changes, find the full extent. Check: crack clearly visible; patient lateral.
+
+4. total-abdominal-hysterectomy/05_positioning.png
+   - Pure side view at table height, the floor line drawn.
+   - The WHOLE table top (one straight line from head to foot) tilted 10 to 15 degrees HEAD DOWN (Trendelenburg):
+     the head end clearly lower than the foot end. Do NOT bend the table or raise only the leg section.
+   - Patient supine, legs flat, both arms out on boards, a shoulder support at the top of the table, a urinary
+     catheter bag hanging below the table.
+   - Teach: head down lets the bowel fall out of the pelvis. Check: the whole table slopes, head lowest.
+
+5. chest-drain-insertion/09_secure-seal.png
+   - Same patient as images 03 to 08: sitting up at 45 degrees, the drain in the RIGHT lateral chest wall.
+     Draw him from his RIGHT side so the right chest faces the viewer (his face turned towards the viewer's RIGHT,
+     exactly as in image 04). The drain must NOT be on the left side.
+   - The drain stitched to the skin, a transparent dressing, a tape tag holding the tube; the tube running down to an
+     underwater seal bottle on the floor BELOW the chest, its end submerged about 2 to 3 cm.
+   - Teach: secure it, bottle below the chest, tube under water. Check: right side; bottle below the chest.
+
+No text, numbers or labels. Landscape 4:3, 1600 x 1200 px, PNG, same filenames, each in its operation's folder.
+Put all five in ONE zip: surgx-batch4-fix.zip
+```

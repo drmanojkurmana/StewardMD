@@ -454,3 +454,13 @@ showed the step: appendicectomy 6 -> Bhm7cCcr1Qc (TAMC OBGYN Simulation, Hasson 
 right hemicolectomy 21) -> h5D8sU8btyI (CooperSurgical). Both pass the real embedded-player check; the old ids left the
 ALLOW list. Timestamps are Gemini's; not re-verified here (transcript reading from YouTube's player is blocked in this
 environment). Thyroid 5 caption now says the narration is Hindi and Urdu.
+
+## Batch 4 wired (2026-11-21)
+Clips: 91 of 93 steps (`med.surgx.{lapa,mrm,thr,tah,cd}-clip-NN`), every video checked in the real embedded player with a
+referrer; TVASurg GthlK0Bv0aI refuses embedding, so mastectomy 10 and 11 use the PreOp animation and Prof Chintamani's
+operative clip. Left empty: mastectomy 9 (Gemini found nothing) and chest drain 7 (the only Seldinger clip is done
+bare-handed with the LA needle left in as a guide). Pictures: 88 of 93 (`med.surgx.<ab>-step-NN`), every image reviewed at
+half resolution and doubtful ones at full size. Held back: mastectomy 5 (arm not at 90 degrees), hip 12 (a bare pelvis
+in the wound), hip 16 (patient supine, crack barely visible), hysterectomy 5 (only the leg section raised, not a
+head-down tilt), chest drain 9 (drain on the left). Redo prompt at the end of [[SURGX-batch4-image-prompt]]. The Gemini
+zips had no folders inside: extract each into its own folder or same-named files overwrite each other.
