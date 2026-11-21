@@ -626,3 +626,10 @@ dissection above the aortic bifurcation (debated; the standard pelvic dissection
 - Fix round 2 (`surgx-fix-b8-b9b.zip`): 17 of 20 wired (`img8fix2.py`, `img9bfix.py`). Still held: escharotomy 07
   (different bald patient, cut still on the palm side), AVR 18 (ribs drawn inside the sternal wound), NU 06 (patient
   supine, not on her side). Batch 8 now 126 of 128; batch 9b 114 of 115.
+
+### Step typography: atlas style (2026-11-21)
+Owner: "better font, better visibility, bold formatting of steps; classic premium professional, not AI slop". Step titles
+in Newsreader serif (bundled `assets/fonts/newsreader-latin.woff2`, declared in surgx.css as "SGX Serif"), the "why" in
+serif italic, how-lines in Inter 15px as a numbered list, the lead clause (or opening imperative verb) of each how-line
+bold via `howLine()` in surgx-screens.js, ringed serif step numerals, and labelled AT RISK / PITFALL lines. No side
+stripes (test/no-side-stripes.test.mjs forbids them).

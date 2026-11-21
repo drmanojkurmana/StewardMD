@@ -702,14 +702,25 @@
     return head(p.title, "03 · " + (p.system || "Procedure")) + tabBar + wrap(body);
   }
 
+  /* The action that opens a "how" line reads in bold, the way an operative atlas sets it: the lead
+   * clause up to the first comma, colon or semicolon, only when it is short and something follows. */
+  var HOW_NOT_VERB = /^(at|in|on|if|for|with|the|a|an|once|when|after|before|under|through|from|to|as|by|while|where|only|each|every|both|no|do|this|that|it|its|one|two|three|first|then|now|and|or|but|all|any|always|never)$/i;
+  function howLine(l) {
+    l = String(l || "");
+    var m = /^([^,;:.]{3,48})([,;:][\s\S]+)$/.exec(l);
+    if (m) return '<b class="lead">' + rich(m[1]) + "</b>" + rich(m[2]);
+    var v = /^([A-Z][a-z]+)\s+([\s\S]+)$/.exec(l);   // otherwise the opening imperative verb, as an atlas sets it
+    return v && !HOW_NOT_VERB.test(v[1]) ? '<b class="lead">' + esc(v[1]) + "</b> " + rich(v[2]) : rich(l);
+  }
+
   function renderStep(s, registry) {
     var h = '<div class="sgx-step' + (s.critical ? " crit" : "") + '"><div class="n">' + s.n + "</div><div class=\"b\">" +
       '<div class="t">' + esc(s.title) + (s.critical ? " " + ic("priority_high") : "") + "</div>" +
       '<div class="w">' + rich(s.why) + "</div>";
-    if (s.how.length) h += "<ul>" + s.how.map(function (l) { return "<li>" + rich(l) + "</li>"; }).join("") + "</ul>";
-    if (s.emphasis) h += '<div class="w" style="margin-top:7px;font-weight:600">' + esc(s.emphasis) + "</div>";
-    if (s.structuresAtRisk.length) h += '<div class="risk">' + ic("warning") + " At risk: " + esc(s.structuresAtRisk.join(" · ")) + "</div>";
-    if (s.pitfalls.length) h += '<div class="pit">' + ic("error") + " " + esc(s.pitfalls.join(" · ")) + "</div>";
+    if (s.how.length) h += '<ol class="how">' + s.how.map(function (l) { return "<li>" + howLine(l) + "</li>"; }).join("") + "</ol>";
+    if (s.emphasis) h += '<div class="emph">' + esc(s.emphasis) + "</div>";
+    if (s.structuresAtRisk.length) h += '<div class="risk"><span class="lb">' + ic("warning") + " At risk</span>" + esc(s.structuresAtRisk.join(" · ")) + "</div>";
+    if (s.pitfalls.length) h += '<div class="pit"><span class="lb">' + ic("error") + " Pitfall</span>" + esc(s.pitfalls.join(" · ")) + "</div>";
     if (flag("smd_surgx_step_images")) s.media.forEach(function (mid) { h += mediaBlock(registry, mid); });
     return h + "</div></div>";
   }

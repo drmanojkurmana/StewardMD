@@ -409,23 +409,58 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 
 /* ── procedure steps ──────────────────────────────────────────────────────── */
 
-#surgxRoot .sgx-step { display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid var(--sgx-line); }
-#surgxRoot .sgx-step:first-child { border-top: none; }
-#surgxRoot .sgx-step .n {
-  flex: 0 0 auto; width: 25px; height: 25px; border-radius: 50%;
-  background: var(--sgx-steel-soft); color: var(--sgx-steel);
-  font: 700 12px/25px var(--sgx-mono); text-align: center;
+/* Set like an operative atlas: a serif step title over a clean sans body, a ringed serif numeral,
+   the opening action of each instruction in bold, and labelled hazard lines. Newsreader and Inter
+   are both bundled in assets/fonts, so nothing loads from the network. */
+@font-face {
+  font-family: "SGX Serif"; font-style: normal; font-weight: 200 800; font-display: swap;
+  src: url("assets/fonts/newsreader-latin.woff2") format("woff2");
 }
-#surgxRoot .sgx-step.crit .n { background: var(--sgx-bad-bg); color: var(--sgx-bad); }
+#surgxRoot {
+  --sgx-serif: "SGX Serif", "Newsreader", Georgia, "Times New Roman", serif;
+  --sgx-text: "Inter Variable", var(--sgx-sans);
+  --sgx-body: #2B3A44;
+}
+#surgxRoot .sgx-step { display: flex; gap: 14px; padding: 18px 0 16px; border-top: 1px solid var(--sgx-line); }
+#surgxRoot .sgx-step:first-child { border-top: none; padding-top: 8px; }
+#surgxRoot .sgx-step .n {
+  flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%; box-sizing: border-box;
+  border: 1.5px solid var(--sgx-steel); background: var(--sgx-surface); color: var(--sgx-steel);
+  font: 600 15px/29px var(--sgx-serif); text-align: center; font-variant-numeric: lining-nums tabular-nums;
+}
+#surgxRoot .sgx-step.crit .n { border-color: var(--sgx-bad); color: var(--sgx-bad); background: var(--sgx-bad-bg); }
 #surgxRoot .sgx-step .b { flex: 1 1 auto; min-width: 0; }
-#surgxRoot .sgx-step .t { font: 650 14px/1.35 var(--sgx-sans); }
-#surgxRoot .sgx-step .w { margin-top: 4px; font: 500 12.5px/1.55 var(--sgx-sans); color: var(--sgx-muted); }
-#surgxRoot .sgx-step ul { margin: 7px 0 0; padding-left: 17px; }
-#surgxRoot .sgx-step li { font: 500 13px/1.55 var(--sgx-sans); margin: 3px 0; }
+#surgxRoot .sgx-step .t {
+  font: 650 18px/1.3 var(--sgx-serif); letter-spacing: -.005em; color: var(--sgx-ink);
+  display: flex; align-items: baseline; gap: 6px; text-wrap: balance;
+}
+#surgxRoot .sgx-step .t .material-symbols-rounded { font-size: 18px; color: var(--sgx-bad); align-self: center; }
+#surgxRoot .sgx-step .w { margin-top: 6px; font: italic 400 15.5px/1.55 var(--sgx-serif); color: var(--sgx-body); }
+#surgxRoot .sgx-step ol.how { list-style: none; margin: 10px 0 0; padding: 0; counter-reset: sgxhow; }
+#surgxRoot .sgx-step ol.how li {
+  position: relative; padding-left: 22px; margin: 7px 0; counter-increment: sgxhow;
+  font: 450 15px/1.6 var(--sgx-text); color: var(--sgx-ink);
+}
+#surgxRoot .sgx-step ol.how li::before {
+  content: counter(sgxhow); position: absolute; left: 0; top: .2em; width: 15px;
+  font: 700 11px/1.6 var(--sgx-text); color: var(--sgx-steel); text-align: right; font-variant-numeric: tabular-nums;
+}
+#surgxRoot .sgx-step ol.how li b.lead { font-weight: 700; color: var(--sgx-ink); }
+#surgxRoot .sgx-step .emph {
+  margin-top: 10px; padding: 9px 12px; background: var(--sgx-steel-soft); border-radius: 8px;
+  font: 600 14px/1.55 var(--sgx-text); color: var(--sgx-ink);
+}
 /* high-yield bolding from reasoning.js medFormat (same rule as the Knowledge Library: bold ink, never colour) */
 #surgxRoot .sgx-step [class^="md-"]:not(.md-hi) { font-weight: 700; color: inherit; }  /* md-hi = another open article's terms, not ours */
-#surgxRoot .sgx-step .risk { margin-top: 7px; font: 600 12px/1.5 var(--sgx-sans); color: var(--sgx-bad); }
-#surgxRoot .sgx-step .pit { margin-top: 6px; font: 500 12px/1.5 var(--sgx-sans); color: var(--sgx-warn); }
+#surgxRoot .sgx-step .risk, #surgxRoot .sgx-step .pit { margin-top: 9px; font: 500 13.5px/1.55 var(--sgx-text); }
+#surgxRoot .sgx-step .risk { color: var(--sgx-bad); }
+#surgxRoot .sgx-step .pit { color: var(--sgx-warn); }
+#surgxRoot .sgx-step .risk .lb, #surgxRoot .sgx-step .pit .lb {
+  display: inline-flex; align-items: center; gap: 3px; margin-right: 7px;
+  font: 750 11px/1 var(--sgx-text); letter-spacing: .08em; text-transform: uppercase; vertical-align: 1px;
+}
+#surgxRoot .sgx-step .lb .material-symbols-rounded { font-size: 15px; }
+body.dark #surgxRoot, body.v3-dark #surgxRoot { --sgx-body: #C9D4DA; }
 
 #surgxRoot .sgx-tabs {
   display: flex; gap: 18px; overflow-x: auto; padding: 0 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none;
