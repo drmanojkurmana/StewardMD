@@ -439,3 +439,10 @@ closure/...", "aloud", "never event", "stops the closure", "any discrepancy", "t
 "critical view of safety", and a capital NOT. Library rules unchanged. CSS: `.sgx-step [class^="md-"]:not(.md-hi)` bold
 ink, never colour (`md-hi` is the last opened article's terms, which would leak in). Pitfall, risk and emphasis lines keep
 their own styling. Coverage estimate: 26% of 2,097 steps with library rules alone, about 70% with both; appendicectomy 17/19.
+
+## Batch 4 prompts (2026-11-21)
+[[SURGX-batch4-image-prompt]] (93 images) and [[SURGX-batch4-video-prompt]] for laparotomy (19), modified radical
+mastectomy (18), total hip replacement (22), total abdominal hysterectomy (22) and chest drain insertion (12). The
+image prompt carries every batch 2 and 3 lesson: a NEW side view per positioning step with the angle drawn, bodies whole
+and connected, fat yellow only where real fat is, laterality per operation, a full-size quality check. The video prompt
+forbids age-restricted videos and whole-video clips and asks for the first and last spoken line of every clip.
