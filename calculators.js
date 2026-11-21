@@ -8166,6 +8166,11 @@
   }
   // Display title for the v2 list and header: a trailing bracket longer than 14 characters is an expansion the description repeats.
   function shortTitle(t){ t=String(t||""); var m=t.match(/^(.{3,}?)\s*\(([^()]*)\)\s*$/); return (m && m[2].length>14) ? m[1] : t; }
+  // Ask MaiK exactly as PrepNucleus draws it (prep.js askBtn): the MaiK tile mark, then the label in the MaiK wordmark lettering.
+  function maikAskInner(){
+    var M=window.SMD_MAIK_MARK, tile=M?M.html("tile",{size:32}):"";
+    return '<span class="mc-maik-av" aria-hidden="true">'+(tile||'<img src="/assets/maik-mark-white.webp" width="22" height="22" alt="" draggable="false">')+'</span><span class="mc-maik-lbl">'+(M?M.label("Ask MaiK"):"Ask MaiK")+'</span>';
+  }
   function subFix(html){ return String(html).replace(/([\u2080-\u2089]+)/g, '<span class="mc-sub">$1</span>'); }
   function hlText(text){
     var t=String(text||""); if(!q) return esc(t);
@@ -8889,7 +8894,7 @@
     view.innerHTML=
       '<div class="mc-cv-head"><button type="button" class="mc-cv-back" id="mcCvBack"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Calculators</button><button type="button" class="mc-cv-star'+(favOn?" on":"")+'" id="mcCvStar" aria-pressed="'+(favOn?"true":"false")+'" aria-label="'+(favOn?"Remove from":"Add to")+(window.SMD_HAS_WATCH?" Apple Watch":" starred")+'">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button></div>'+
       '<div class="mc-cv-title"><h2 title="'+esc(c.title)+'">'+subFix(esc(shortTitle(c.title)))+'</h2><p>'+esc(c.desc)+'</p></div>'+
-      '<div class="mc-action-row"><button type="button" class="mc-fill-link" id="mcAuto_'+id+'"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>Fill from patient</button><button type="button" class="mc-maik-btn" id="mcAsk_'+id+'"><img src="/assets/maik-mark-white.webp" width="20" height="20" alt="" draggable="false">Ask MaiK</button></div>'+
+      '<div class="mc-action-row"><button type="button" class="mc-fill-link" id="mcAuto_'+id+'"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>Fill from patient</button><button type="button" class="mc-maik-btn" id="mcAsk_'+id+'">'+maikAskInner()+'</button></div>'+
       '<div id="mcAFnote_'+id+'"></div>'+
       '<div class="mc-panel" id="mcPanel_'+id+'">'+
         (calcHasLab(c)?'<div class="mc-af"><button class="mc-af-btn" id="mcAFbtn_'+id+'">'+mcIco("flask")+' Choose patient (Ward Sync labs)</button><div class="mc-af-body" id="mcAFbody_'+id+'"></div></div>':"")+
@@ -9315,14 +9320,16 @@
       Q+" .mc-cv-title{padding:4px 16px 0!important}",
       Q+" .mc-cv-title h2{font:800 23px/1.2 var(--a-font)!important;color:var(--a-ink)!important;letter-spacing:-.01em}",
       Q+" .mc-cv-title p{font:500 14px/1.4 var(--a-font)!important;color:var(--a-mut)!important;white-space:normal!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:6px!important}",
-      Q+" .mc-action-row{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:14px 16px 0!important;gap:12px!important}",
+      Q+" .mc-action-row{display:flex!important;flex-direction:column-reverse!important;align-items:stretch!important;padding:14px 16px 0!important;gap:4px!important}",
       Q+" .mc-fill-link{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0;margin-left:-2px;background:none;border:none;color:var(--a-acc);font:600 14.5px var(--a-font);cursor:pointer}",
       Q+" .mc-fill-link svg,"+Q+" .mc-copy-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}",
       Q+" .mc-fill-link:active,"+Q+" .mc-copy-btn:active{opacity:.6}",
-      Q+" .mc-maik-btn{display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 16px 0 10px;border:none;border-radius:20px;background:#0B6B52;color:#fff;font:700 14.5px var(--a-font);cursor:pointer;transition:transform .12s ease,background-color .12s ease}",
-      Q+" .mc-maik-btn img{width:22px;height:22px;display:block}",
-      Q+" .mc-maik-btn:active{transform:scale(.97);background:#085641}",
-      "body.dark "+Q+" .mc-maik-btn,body.v3-dark "+Q+" .mc-maik-btn{background:#0E7A5E}",
+      Q+" .mc-maik-btn{display:flex;align-items:center;justify-content:flex-start;gap:12px;width:100%;min-height:50px;padding:0 18px 0 10px;border:1px solid var(--a-line);border-radius:12px;background:var(--a-card);color:var(--a-ink);font:600 15px var(--a-font);letter-spacing:-.005em;text-align:left;cursor:pointer;transition:transform .12s ease,background-color .12s ease}",
+      Q+" .mc-maik-av{width:32px;height:32px;border-radius:10px;overflow:hidden;flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:transparent}",
+      Q+" .mc-maik-av svg,"+Q+" .mc-maik-av img{width:32px;height:32px;display:block}",
+      Q+" .mc-maik-btn:active{transform:translateY(1px);background:color-mix(in srgb,var(--a-ink) 4%,var(--a-card))}",
+      Q+" .mc-maik-btn:focus-visible{outline:2px solid var(--a-acc);outline-offset:2px}",
+      Q+" .mc-fill-link{align-self:flex-start}",
       "@media(prefers-reduced-motion:reduce){"+Q+" .mc-maik-btn{transition:none}}",
       Q+" .mc-score-actions{display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin-top:6px}",
       Q+" .mc-copy-btn{display:inline-flex!important;align-items:center;gap:6px;min-height:44px!important;margin:0!important;padding:0!important;border:none!important;background:none!important;color:var(--a-acc)!important;font:600 14.5px var(--a-font)!important}",
