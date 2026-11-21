@@ -3,142 +3,515 @@
  "module": "shm-chronic-myeloid-leukaemia",
  "subject": "ss-haematology",
  "title": "Chronic myeloid leukaemia: BCR-ABL1 phases and TKI milestones",
- "minutes": 8,
- "gen": "hand",
+ "minutes": 10,
+ "gen": "AI",
  "quiz": [],
  "refs": [
-  "Harrison 2025 22nd Edition, leukaemia and myeloproliferative chapters",
-  "ELN guidelines on chronic myeloid leukaemia 2020"
+  "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology, CML chapter",
+  "CMDT, chronic myeloid leukaemia"
  ],
  "steps": [
   {
-   "tx": "**Chronic myeloid leukaemia** is a stem cell disease defined by **BCR-ABL1** fusion gene from **t(9;22)** translocation forming the **Philadelphia chromosome**. Basophilia, thrombocytosis and a high **alkaline phosphatase** mark the blood picture. Splenomegaly dominates the examination in late presentation. Tyrosine kinase inhibitors have transformed a fatal disease into a chronic one.",
-   "say": "Chronic myeloid leukaemia is a stem cell cancer driven by a single fusion gene. The translocation creates an always-on kinase that floods the marrow. Spleen enlargement and basophilia are the clinical clues the examiner loves. This lesson tracks phases, scores and the kinase inhibitor milestones.",
+   "tx": "**Chronic myeloid leukaemia** (CML) arises from a **pluripotent haematopoietic stem cell**. A reciprocal **t(9;22)(q34;q11)** translocation, the **Philadelphia (Ph) chromosome**, fuses **BCR** on chromosome 22 with **ABL1** from chromosome 9 to form **BCR-ABL1**. The fusion encodes a **constitutively active tyrosine kinase** (TK) that the leukaemic clone depends on, a state called **oncogene addiction**.",
+   "say": "Every case carries this one rearranged chromosome, so the disease has a single, known driver. The fusion protein stays switched on and sits in the cytoplasm, while normal ABL1 is tightly controlled and lives in the nucleus. That constant signal is exactly what a targeted tablet can block.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Clue", "Why it matters"],
+    "cols": [
+     "Transcript",
+     "Protein",
+     "Typical disease"
+    ],
     "rows": [
-     ["Fusion gene", "BCR-ABL1 from t(9;22)", "Diagnosis and monitoring target"],
-     ["Blood clue", "Basophilia, thrombocytosis", "Distinguishes from other myeloproliferative neoplasms"],
-     ["Enzyme", "High alkaline phosphatase", "Classic board association"],
-     ["Examination", "Splenomegaly grade", "Symptoms and prognosis"]
+     [
+      "e13a2 or e14a2 (b2a2, b3a2)",
+      "p210",
+      "CML, the usual breakpoint pattern"
+     ],
+     [
+      "e1a2",
+      "p190",
+      "Mostly Ph-positive acute lymphoblastic leukaemia; kinase activity higher than p210"
+     ],
+     [
+      "e19a2",
+      "p230",
+      "Rare, very slow CML; kinase activity lower than p210"
+     ]
     ]
    }
   },
   {
-   "tx": "Three phases decide therapy: **chronic phase**, **accelerated phase** and **blast phase**, with **blast crisis** when blasts reach **20** percent in blood or marrow. Accelerated phase carries **10** to **19** percent blasts plus drug resistance or additional cytogenetic changes. Blast crisis behaves like acute leukaemia with poor survival. Early detection in chronic phase gives the best outcomes.",
-   "say": "Phases decide everything in chronic myeloid leukaemia. Chronic phase is the indolent window where treatment works best. Accelerated phase shows rising blasts and resistance. Blast crisis is acute leukaemia in a chronic leukaemia patient. Ask the blast percentage first in every stem.",
+   "tx": "CML makes up **15%** to **20%** of adult leukaemias, with an incidence of **0.6** to **2** per **100,000** per year, and it is less frequent in children. The **male-to-female ratio** is **1.3** to **1.8**, and incidence peaks at **64** to **68** years in the Western world. Most patients (**90%** to **95%**) are diagnosed in **chronic phase**, and **50%** of patients in the United States have no symptoms at diagnosis.",
+   "say": "Many patients are found on a routine blood count and feel well. When symptoms appear they are tiredness, weight loss and discomfort from an enlarged spleen. Advanced disease adds bone pain, night sweats, infections, bleeding and symptoms of leukostasis.",
    "vis": {
     "kind": "table",
-    "cols": ["Phase", "Blasts", "Course"],
+    "cols": [
+     "Feature",
+     "Book figure"
+    ],
     "rows": [
-     ["Chronic", "Under 10 percent", "Indolent, best response"],
-     ["Accelerated", "10 to 19 percent", "Resistant, aggressive"],
-     ["Blast crisis", "20 percent or more", "Acute leukaemia like, poor"]
+     [
+      "Share of adult leukaemias",
+      "15% to 20%"
+     ],
+     [
+      "Incidence (adults)",
+      "0.6 to 2 per 100,000 per year"
+     ],
+     [
+      "Male to female ratio",
+      "1.3 to 1.8"
+     ],
+     [
+      "Peak age, Western world",
+      "64 to 68 years"
+     ],
+     [
+      "Diagnosed in chronic phase",
+      "90% to 95%"
+     ],
+     [
+      "Asymptomatic at diagnosis (United States)",
+      "50%"
+     ],
+     [
+      "Fatigue or malaise",
+      "60%"
+     ],
+     [
+      "Weight loss",
+      "21%"
+     ],
+     [
+      "Symptoms from splenomegaly",
+      "72%"
+     ]
     ]
    }
   },
   {
-   "tx": "Diagnostic workup needs **karyotype** for **t(9;22)**, **FISH** for faster detection, and quantitative **PCR** for **BCR-ABL1** transcripts on the **International Scale**. Baseline **Sokal** and **ELTS** risk scores use age, spleen size, platelet count and blasts. Bone marrow examination confirms phase before therapy starts. PCR monitoring drives every later decision.",
-   "say": "Diagnosis rests on cytogenetics, fluorescence testing and quantitative polymerase chain reaction. The International Scale makes results comparable across laboratories. Risk scores at diagnosis predict survival and guide the choice of first inhibitor. Spleen size and blast count remain the oldest prognostic factors.",
+   "tx": "The hallmark of new CML is **hyperleukocytosis** with a marked **left shift**, including **basophilia** and **eosinophilia**. WBC can exceed **450,000/µL**, and the **G:E index** (granulopoiesis to erythropoiesis) in marrow is often above **3:1**. Raised **lactate dehydrogenase** and **uric acid** reflect hyperproliferation, while platelets may be high or low.",
+   "say": "Reactive leukocytosis rarely goes above 50 × 10⁹/L and has no basophilia. Other myeloproliferative neoplasms lack the BCR-ABL1 fusion, and atypical CML has no Ph chromosome, so the molecular test is what separates them. Treatment is usually not an emergency even at very high counts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Key difference from CML"
+    ],
+    "rows": [
+     [
+      "Reactive leukocytosis (infection, steroids)",
+      "WBC usually rarely above 50 × 10⁹/L; toxic granulation; no basophilia or peripheral myeloblasts; no BCR-ABL1"
+     ],
+     [
+      "Other chronic myeloproliferative neoplasms",
+      "No BCR-ABL1; mutant JAK2, CALR or MPL usually found"
+     ],
+     [
+      "Atypical CML (MDS/MPN with neutrophilia)",
+      "No Ph chromosome or BCR-ABL1 rearrangement; SETBP1 or ETNK1 mutation in about 40%; no basophilia; median survival 2 to 3 years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Three **phases** decide prognosis: **chronic phase (CP)**, **accelerated phase (AP)** and **blast crisis (BC)**. **AP** is blasts **15%** to **29%** in blood or marrow, blasts plus promyelocytes above **30%** with blasts below **30%**, basophils **20%** or more, or **persistent thrombocytopenia** below **100 × 10⁹/L** unrelated to therapy. **BC** needs blasts above **30%** or extramedullary blast proliferation excluding the spleen.",
+   "say": "Phase drives the whole plan. Chronic phase responds best to TKIs. Accelerated phase still has real chances of durable response, only slightly lower than chronic phase. Blast crisis acts like acute leukaemia with a poor outlook, and the 30 percent blast line is the number to remember.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Book criteria",
+     "Course and treatment"
+    ],
+    "rows": [
+     [
+      "Chronic (CP)",
+      "Patients who meet neither AP nor BC criteria",
+      "Most patients are diagnosed here; TKI monotherapy; best response"
+     ],
+     [
+      "Accelerated (AP)",
+      "Blasts 15% to 29%; or blasts plus promyelocytes above 30% with blasts below 30%; basophils 20% or more; persistent thrombocytopenia below 100 × 10⁹/L",
+      "Durable response still possible; allogeneic transplant to be considered; long-term TKI an option when blasts are not increased; 4-year PFS 49% and OS 59% with bosutinib in one phase II study"
+     ],
+     [
+      "Blast crisis (BC)",
+      "Blasts above 30% or extramedullary blast proliferation excluding the spleen",
+      "Expected survival under 1 year; restore haematologic response with TKI or intensive chemotherapy, then allogeneic transplant, the only option with long-term survival"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosis needs a demonstrated **BCR-ABL1** fusion, shown by **karyotype** with the Ph chromosome in at least **20** bone marrow metaphases (typical t(9;22) in **80%** to **90%**) or by **PCR** for the transcript. **FISH** (fluorescence in situ hybridisation) is used for masked or variant translocations, and a multiplex PCR is mandatory when splenomegaly and high WBC exist without a visible Ph chromosome. Baseline risk is graded by scores such as **Sokal**.",
+   "say": "Cytogenetics needs dividing marrow cells, which is why a marrow aspirate is part of the workup. Scores grade risk before treatment starts. The molecular PCR tests are what track response afterwards.",
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "suspect", "label": "High white count plus basophilia"},
-     {"id": "karyo", "label": "Karyotype and FISH"},
-     {"id": "pcr", "label": "Quantitative PCR baseline"},
-     {"id": "score", "label": "ELTS score and phase"}
+     {
+      "id": "suspect",
+      "label": "Splenomegaly, high WBC, basophilia"
+     },
+     {
+      "id": "karyo",
+      "label": "Karyotype: Ph in at least 20 metaphases"
+     },
+     {
+      "id": "pcr",
+      "label": "Multiplex PCR if no Ph seen"
+     },
+     {
+      "id": "fish",
+      "label": "FISH for masked or variant translocation"
+     },
+     {
+      "id": "confirm",
+      "label": "BCR-ABL1 confirmed; phase and risk set"
+     }
     ],
-    "edges": [["suspect", "karyo"], ["karyo", "pcr"], ["pcr", "score"]]
-   }
-  },
-  {
-   "tx": "First line **imatinib** **400** mg daily stays standard in chronic phase with **complete cytogenetic response** rates near **80** percent. **Dasatinib** **100** mg and **nilotinib** **300** mg twice daily give deeper early responses in high risk disease. Elderly patients tolerate imatinib best. Dose holds for myelosuppression rather than permanent cessation.",
-   "say": "Imatinib remains the benchmark first line drug in chronic phase. Second generation inhibitors achieve faster deep responses but carry distinct toxicities. Age and comorbidity shape the choice more than potency alone. Never stop the drug permanently for early cytopenias.",
-   "vis": {
-    "kind": "compare",
-    "left": {"title": "Imatinib 400 mg daily", "points": ["Best tolerated long term", "Complete cytogenetic response near 80 percent", "Renal and cardiac caution"]},
-    "right": {"title": "Dasatinib or nilotinib", "points": ["Deeper faster responses", "Pleural effusion with dasatinib", "Vascular events with nilotinib"]}
-   }
-  },
-  {
-   "tx": "Monitoring uses quantitative **PCR** with targets: **complete cytogenetic response** by **12** months, **major molecular response** with **3** percent International Scale by **18** months, and **MR4.5** with **0.1** percent or less as the deep response. Loss of major molecular response triggers kinase domain mutation testing. Rising transcripts need adherence review before switching drugs.",
-   "say": "Molecular milestones are the heart of chronic myeloid leukaemia care. Failure to reach major molecular response predicts inferior survival. Deep response opens the door to treatment free remission trials. Always check adherence and drug interactions before labeling resistance.",
-   "vis": {
-    "kind": "table",
-    "cols": ["Milestone", "Target", "Action"],
-    "rows": [
-     ["12 months", "Complete cytogenetic response", "Continue if reached"],
-     ["18 months", "3 percent International Scale", "Switch if failed"],
-     ["Deep response", "0.1 percent or less MR4.5", "Consider stopping trial"]
+    "edges": [
+     [
+      "suspect",
+      "karyo"
+     ],
+     [
+      "karyo",
+      "confirm"
+     ],
+     [
+      "karyo",
+      "pcr"
+     ],
+     [
+      "pcr",
+      "fish"
+     ],
+     [
+      "fish",
+      "confirm"
+     ]
     ]
    }
   },
   {
-   "tx": "**Ponatinib** covers the **T315I** gatekeeper mutation that resists all earlier inhibitors, dosed by **45** mg daily with dose reduction for deep response. **Asciminib** targets the **myristoyl pocket** and suits heavily pretreated patients. Achieving major molecular response after ponatinib restores survival curves. Vascular events and pancreatitis need active surveillance.",
-   "say": "The gatekeeper mutation defeats every standard inhibitor. Ponatinib was built to cover that single amino acid change. Asciminib attacks a different pocket of the same protein. Either drug rescues patients after earlier failures. Dose reduction after deep response reduces vascular harm.",
+   "tx": "Four **TKIs** are approved for first-line chronic phase CML: **imatinib**, **dasatinib**, **nilotinib** and **bosutinib**. Treatment starts as soon as the diagnosis is confirmed, and **hydroxyurea** is needed only if the patient is symptomatic or diagnostics take longer than **3** to **5** days. **Allopurinol** (**100** to **300** mg per day) controls hyperuricaemia until a complete haematologic response.",
+   "say": "Imatinib is the reference drug, and most data come from it. Tumour lysis is rarely seen with TKIs, so generous fluid intake is the main precaution. Symptoms usually fade within one to two weeks.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {"id": "fail", "label": "Loss of major response"},
-     {"id": "mut", "label": "Kinase mutation test"},
-     {"id": "t315i", "label": "T315I: ponatinib"},
-     {"id": "other", "label": "Other: asciminib or switch"}
+    "kind": "table",
+    "cols": [
+     "TKI",
+     "Usual first-line dose",
+     "Approval note (book)"
     ],
-    "edges": [["fail", "mut"], ["mut", "t315i"], ["mut", "other"]]
-   }
-  },
-  {
-   "tx": "Drug toxicities are examination favourites: **dasatinib** causes **pleural effusion** and pulmonary arterial hypertension, **nilotinib** causes arterial events, hyperglycaemia and **QT prolongation**, and **ponatinib** causes arterial thrombosis. **Imatinib** causes periorbital oedema and muscle cramps. Baseline **echocardiogram** and **electrocardiogram** plus blood sugar and lipids are mandatory. Interrupt and reduce before switching.",
-   "say": "Toxicity patterns identify the inhibitor in the question stem. Pleural effusion points to dasatinib and arterial events to nilotinib or ponatinib. Baseline cardiac assessment is never optional. Most toxicities improve with dose holds and diuresis.",
-   "vis": {
-    "kind": "table",
-    "cols": ["Inhibitor", "Signature harm", "Monitor"],
     "rows": [
-     ["Dasatinib", "Pleural effusion", "Chest imaging, breathlessness"],
-     ["Nilotinib", "Arterial events, QT prolongation, diabetes", "Electrocardiogram, lipids, sugar"],
-     ["Ponatinib", "Arterial thrombosis", "Vascular risk, dose reduction"],
-     ["Imatinib", "Periorbital oedema, cramps", "Fluid balance, electrolytes"]
+     [
+      "Imatinib",
+      "400 mg daily",
+      "FDA approval 2001; first-line standard from the IRIS trial"
+     ],
+     [
+      "Dasatinib",
+      "100 mg daily",
+      "First-line approval 2010"
+     ],
+     [
+      "Nilotinib",
+      "300 mg twice daily, fasting",
+      "First-line approval 2010"
+     ],
+     [
+      "Bosutinib",
+      "400 mg",
+      "First-line approval 2018"
+     ]
     ]
    }
   },
   {
-   "tx": "Blast crisis needs **acute leukaemia** style intensive chemotherapy plus a potent inhibitor, while accelerated phase needs early transplant evaluation. **Allogeneic transplant** remains curative in young fit patients with blast crisis or resistant disease. **Treatment free remission** requires sustained deep response with monthly molecular surveillance. Non adherence explains most apparent resistance.",
-   "say": "Blast crisis is treated as acute leukaemia, not chronic disease. Transplant remains the only curative option once transformation occurs. Sustained deep responders may attempt supervised stopping. Missed doses mimic resistant disease, so inspect the pill box first.",
-   "vis": {
-    "kind": "compare",
-    "left": {"title": "Blast crisis", "points": ["Acute leukaemia chemotherapy", "Ponatinib backbone", "Urgent transplant evaluation"]},
-    "right": {"title": "Sustained deep response", "points": ["Stop inhibitor in trial", "Monthly polymerase chain reaction", "Restart at loss of response"]}
-   }
-  },
-  {
-   "tx": "Exam traps: **Philadelphia chromosome** equals chronic myeloid leukaemia, **low leukocyte alkaline phosphatase** distinguishes it from reactive leukocytosis, and **basophilia** is the hallmark clue. **Sokal** and **ELTS** are baseline scores, not monitoring tools. **20** percent blasts define blast crisis. **T315I** needs ponatinib, and **pleural effusion** blames dasatinib even when asked about second generation toxicity.",
-   "say": "The classic triad is Philadelphia chromosome, low enzyme score and basophilia. Scores stratify only at diagnosis, while molecular milestones guide follow up. Blasts of twenty percent or more mean transformation. Gatekeeper mutation and pleural effusion are the two toxicity answers that never fail.",
+   "tx": "The **IRIS** trial randomised **1,106** chronic phase patients to imatinib or interferon, and imatinib gave significantly higher haematologic and major cytogenetic response rates. Fifteen controlled first-line studies found second-generation TKIs gave **faster** and **deeper** falls in BCR-ABL1 transcripts, but no study showed a difference in progression-free or overall survival. Second-generation drugs carry **more serious** adverse events, especially cardiovascular ones, so the choice weighs response speed against toxicity.",
+   "say": "Imatinib set the standard every newer drug had to match. Second-generation drugs buy speed and depth at the price of more serious side effects. Stems often name the toxicity and expect you to name the drug, so learn the signature harm of each one.",
    "vis": {
     "kind": "table",
-    "cols": ["Trap", "Correct answer", "Confuser"],
+    "cols": [
+     "Drug",
+     "Main harm (book)",
+     "Detail"
+    ],
     "rows": [
-     ["Low enzyme score", "Chronic myeloid leukaemia", "Reactive leukocytosis is high"],
-     ["20 percent blasts", "Blast crisis", "Accelerated phase is 10 to 19"],
-     ["Gatekeeper mutation", "Ponatinib", "Imatinib cannot cover T315I"],
-     ["Pleural effusion", "Dasatinib", "Nilotinib causes arterial events"]
+     [
+      "Imatinib",
+      "Oedema and muscle cramps",
+      "Reference first-line drug; the non-cardiovascular benchmark"
+     ],
+     [
+      "Dasatinib",
+      "Pleural and pericardial effusions in 30% to 40%",
+      "Pulmonary hypertension in under 5%; lymphocytosis up to 73%; flu-like syndrome eased by paracetamol 1 g for 5 to 7 days"
+     ],
+     [
+      "Nilotinib",
+      "Metabolic syndrome: hyperglycaemia, raised cholesterol and triglycerides; peripheral arterial disease",
+      "Over 10 years on 300 mg twice daily: diabetes 9%, cardiovascular events 24.8%, against 6.3% cardiovascular events on imatinib; pancreatitis and bilirubin rise described"
+     ],
+     [
+      "Bosutinib",
+      "Diarrhoea, usually resolving in 1 to 2 weeks",
+      "Grade 3/4 liver test rise in about 24%; rash about 20%; pleural or pericardial effusion under 5%; dose 500, 300 or 200 mg daily"
+     ],
+     [
+      "Ponatinib",
+      "Arterial and venous events (arterial 35%, venous 6% on 45 mg)",
+      "Reduced doses of 30 mg and 15 mg showed fewer cardiovascular events; first-line EPIC trial stopped early for excess cardiovascular events"
+     ]
     ]
    }
   },
   {
-   "tx": "High yield for the exam: genetics is **t(9;22)** **BCR-ABL1**, blast threshold for crisis is **20** percent, first line **imatinib 400 mg**, **T315I** is covered by **ponatinib**, major response target is **3** percent International Scale, deep response **MR4.5** is **0.1** percent or less, **Sokal** and **ELTS** are diagnostic scores, **dasatinib** causes **pleural effusion**, and **nilotinib** causes arterial events with **QT prolongation**.",
-   "say": "Memorise the numbers as a set: twenty percent blasts, three percent major response, point one percent deep response. Pair every inhibitor with its signature harm. Gatekeeper mutation always maps to ponatinib. Scores are one time at diagnosis, milestones are lifelong.",
+   "tx": "Response is measured at **three levels**. A **complete haematologic response** (CHR) needs normal blood counts, no symptoms and normal spleen size. A **complete cytogenetic response** (CCyR) means no **Ph-positive** metaphase in at least **20** evaluated, while a **partial** response shows **1%** to **35%** Ph-positive metaphases. **Molecular response** is read by quantitative PCR on the International Scale (IS), and **major molecular response** (MMR) is a BCR-ABL1 ratio below **0.1%**.",
+   "say": "Haematologic response only shows that proliferation has slowed, and hydroxyurea can also achieve it. A cytogenetic response means normal marrow is regrowing, and it predicts long-term control. Molecular PCR is the most sensitive level, reaching about one leukaemic cell in 100,000.",
    "vis": {
     "kind": "table",
-    "cols": ["Fact", "Value", "Use"],
+    "cols": [
+     "Level",
+     "Definition (book)",
+     "Meaning"
+    ],
     "rows": [
-     ["Genetics", "t(9;22) BCR-ABL1", "Diagnosis"],
-     ["Blast crisis", "20 percent blasts", "Phase label"],
-     ["First line", "Imatinib 400 mg daily", "Chronic phase"],
-     ["Gatekeeper", "T315I needs ponatinib", "Resistance"],
-     ["Major response", "3 percent International Scale", "Milestone"],
-     ["Deep response", "0.1 percent or less", "Stopping trials"],
-     ["Signature harm", "Dasatinib pleural effusion", "Toxicity stem"]
+     [
+      "Haematologic (CHR)",
+      "Normal counts, symptoms gone, spleen normal",
+      "Proliferation slowed; hydroxyurea can achieve it"
+     ],
+     [
+      "Cytogenetic: PCyR",
+      "1% to 35% Ph-positive metaphases",
+      "Partial regrowth of normal marrow"
+     ],
+     [
+      "Cytogenetic: CCyR",
+      "0 Ph-positive of at least 20 metaphases",
+      "Normal marrow; strongest predictor of survival"
+     ],
+     [
+      "Cytogenetic: MCyR",
+      "PCyR plus CCyR",
+      "Major cytogenetic response"
+     ],
+     [
+      "Molecular: MMR",
+      "BCR-ABL1 ratio below 0.1% on IS",
+      "Major molecular response"
+     ],
+     [
+      "Molecular: MR4",
+      "Ratio below 1/10,000",
+      "Deep response"
+     ],
+     [
+      "Molecular: MR4.5",
+      "Ratio below 1/32,000",
+      "Deeper response"
+     ],
+     [
+      "Molecular: MR5",
+      "Ratio below 1/100,000",
+      "Deepest level named"
+     ],
+     [
+      "Complete molecular remission (CMR)",
+      "No BCR-ABL1 amplification; written CMR/4, CMR/4.5, CMR/5 by control gene level",
+      "Absence of any detectable BCR-ABL1"
+     ],
+     [
+      "QPCR 1% or below after CCyR",
+      "Considered equivalent to CCyR",
+      "Used when cytogenetics is already documented"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Three **milestones** must not be missed: **CHR by 1 month**, **Ph-negative haematopoiesis** at least in part by **3 or 6 months**, and **CCyR by 12 months**. QPCR should fall steadily and may reach below **10%** by the **3rd** or **6th** month. If CCyR is lost or QPCR rises by at least **0.5 log**, check adherence first, then study the residual cells, and repeat cytogenetics every **3** months until CCyR.",
+   "say": "Milestones are checkpoints, not verdicts. The first step when a checkpoint is missed is always a careful adherence check with the patient and family. Only after that does a mutation screen earn its place.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Checkpoint",
+     "Target (book)",
+     "If missed"
+    ],
+    "rows": [
+     [
+      "1 month",
+      "CHR, reached in over 80% of patients within 4 weeks",
+      "Check adherence and dose"
+     ],
+     [
+      "3 or 6 months",
+      "Ph-negative haematopoiesis at least in part; QPCR possibly below 10% by 3rd or 6th month",
+      "Study the patient more deeply"
+     ],
+     [
+      "12 months",
+      "CCyR, reached in 65% to 85% of patients within 12 months",
+      "Mutation screen; FISH for BCR-ABL1 amplification"
+     ],
+     [
+      "Any time",
+      "Loss of CCyR, or QPCR rise of 0.5 log or more",
+      "Adherence check, then residual cell study"
+     ],
+     [
+      "12 months (second textbook)",
+      "Major molecular response, ratio at or below 0.1%",
+      "Same review as above"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mutation screening after at least **3** months of treatment finds a mutation in **30%** to **40%** of failures; repeat it after **1** to **2** months if there is still no response. The **T315I** gatekeeper mutation resists all TKIs except **ponatinib** in the mutation data, and **asciminib** binds the **myristoyl pocket** and shows activity against T315I. **BCR-ABL1 amplification** causes resistance in **10%** to **15%** of cases and responds to a dose increase.",
+   "say": "The mutation map tells you which drug to drop, not which drug will work. A clone can carry extra mutations outside the kinase domain that defeat even a well-matched drug. Slow deterioration is often rescued by an imatinib dose increase before any switch.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug or finding",
+     "Book fact"
+    ],
+    "rows": [
+     [
+      "T315I",
+      "Impairs imatinib and all second-generation TKIs; all TKIs except ponatinib inactive in the mutation data"
+     ],
+     [
+      "Ponatinib",
+      "Inhibits all known BCR-ABL1 mutations including T315I; approved 2012; initial dose 45 mg daily"
+     ],
+     [
+      "Asciminib",
+      "Binds the myristoyl pocket; FDA approved October 2021 for T315I or after two or more TKIs"
+     ],
+     [
+      "Omacetaxine",
+      "Protein synthesis inhibitor active against T315I; FDA approved October 2012 after failure of two or more TKIs"
+     ],
+     [
+      "Nilotinib",
+      "Fails P-loop (residues 248 to 255) and 359 mutants"
+     ],
+     [
+      "Dasatinib",
+      "Selects mutants at position 317"
+     ],
+     [
+      "Bosutinib",
+      "Inactive against V299L"
+     ],
+     [
+      "Imatinib dose increase",
+      "New response in more than 80% when response was lost slowly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stopping a TKI is a trial, not a cure. In the STIM trial, patients on imatinib in **continuous complete molecular remission (CMR) for at least 2 years** were enrolled, and about **50%** relapsed, most within the first **7** to **8** months, with late relapses up to **48** months. Remission is more likely after treatment longer than **5** years, CMR longer than **2** years, a negative digital PCR before stopping, and older age.",
+   "say": "TKIs do not kill leukaemic stem cells, so almost every patient keeps residual disease, and even deep responders can relapse. Patients who stop need close molecular checks, monthly or every other month for the first 8 months. Relapse is treated by restarting the drug.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Book criterion or figure"
+    ],
+    "rows": [
+     [
+      "Eligibility to stop",
+      "Continuous CMR for at least 2 years; MR4 or higher has a similar chance of staying in remission as CMR"
+     ],
+     [
+      "Relapse after stopping",
+      "About 50%; most within 7 to 8 months; late relapse up to 48 months"
+     ],
+     [
+      "Second attempt",
+      "After a new CMR, about 30% stay in remission"
+     ],
+     [
+      "Predictors of remission",
+      "Treatment over 5 years; CMR over 2 years; negative digital PCR; older age"
+     ],
+     [
+      "Monitoring after stopping",
+      "Monthly or bimonthly for the first 8 months; every 3 to 4 months for 4 years; then once or twice a year indefinitely"
+     ],
+     [
+      "On-treatment QPCR",
+      "Every 3 to 4 months in the first 5 years, then every 6 to 12 months; continue indefinitely, as relapse is documented beyond 20 years from diagnosis"
+     ],
+     [
+      "Residual cells",
+      "BCR-ABL1 positive cells persist in almost all patients who stop, including those who do not restart"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High-yield for the exam: the genetics is **t(9;22)** making **BCR-ABL1**, and **AP** is **15%** to **29%** blasts while **BC** is above **30%** blasts. First-line doses are **imatinib 400 mg** daily, **dasatinib 100 mg** daily, **nilotinib 300 mg** twice daily fasting and **bosutinib 400 mg**, with **T315I** needing **ponatinib** or **asciminib**. Milestones are **CHR by 1 month**, **CCyR by 12 months**, **MMR** below **0.1%** on the IS, **MR4.5** below **1/32,000**, and mutation screening after **3** months finds **30%** to **40%**. Pleural effusion marks **dasatinib**, metabolic and arterial harm marks **nilotinib**, and arterial and venous events mark **ponatinib**; stopping needs **CMR** for at least **2** years and about **50%** relapse.",
+   "say": "Memorise the numbers as a set. The blast percentages set the phase, the dose list is the first-line choice, and the mutation map tells you which drug to drop. Remember that MMR is the 0.1 percent line, and that MR4.5 is a much deeper ratio.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Value",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Genetics",
+      "t(9;22), BCR-ABL1",
+      "Diagnosis"
+     ],
+     [
+      "Accelerated phase",
+      "15% to 29% blasts",
+      "Phase label"
+     ],
+     [
+      "Blast crisis",
+      "Above 30% blasts",
+      "Phase label"
+     ],
+     [
+      "First line",
+      "Imatinib 400 mg daily",
+      "Chronic phase"
+     ],
+     [
+      "Gatekeeper",
+      "T315I: ponatinib or asciminib",
+      "Resistance"
+     ],
+     [
+      "Milestone",
+      "CHR by 1 month; CCyR by 12 months",
+      "Response checks"
+     ],
+     [
+      "Major molecular response",
+      "Ratio below 0.1% on IS",
+      "Molecular milestone"
+     ],
+     [
+      "Deep response",
+      "MR4.5 below 1/32,000",
+      "Stopping trials"
+     ],
+     [
+      "Stopping",
+      "CMR for at least 2 years; about 50% relapse",
+      "Treatment-free remission"
+     ]
     ]
    }
   }
