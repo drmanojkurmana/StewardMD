@@ -555,3 +555,4 @@ Held back LASIK 09, LASIK 12, pterygium 12 (second redo prompt in [[SURGX-batch6
 ## Batch 7 pictures wired (2026-11-21)
 101 of 102 (`med.surgx.{ivi,dcr,chal,fb,evis,strab,ppv}-step-NN`), every image reviewed four to a sheet. Held back
 evisceration 16 (cornea still on in a post-evisceration step); redo prompt at the end of [[SURGX-batch7-image-prompt]].
+Evisceration 16 redraw wired the same day; batch 7 now 102 of 102.
