@@ -22,13 +22,27 @@
 
   var DIR = "DATA";                 // Directory.Data -> Documents on iOS, matches maik-models.js
   var SUBDIR = "maik-kb";
-  var NAME = "maik-lite-kb.jsonl";
-  var URL = "https://models.stewardmd.in/maik/maik-lite-kb.jsonl";
-  var BYTES = 37976783;             // exact, from the upload
-  var ROWS = 42176;                 // exact line count of the upload; loadBook() requires it
+  // Two published books. "base" is the original 42,176-row book. "onco1" is the same rows plus
+  // 13,209 oncology study notes rewritten from a cancer textbook (2026-11-21, owner approved).
+  // Flag smd_maik_kb_onco = "1" picks onco1; anything else keeps the base book, byte for byte
+  // the previous behaviour. Read once at load: a switch takes effect on the next app start, and
+  // the SHA marker below makes the device fetch the other file (each keeps its own file name).
+  var BOOKS = {
+    base: { name: "maik-lite-kb.jsonl", bytes: 37976783, rows: 42176,
+            sha: "96b4504ac62dfa50d672913aa7d52fbdb5f949de0b52dc9aed2fd73e74be480b" },
+    onco1: { name: "maik-lite-kb-onco1.jsonl", bytes: 44952641, rows: 55385,
+             sha: "9de2045d281fc05473b809401bd7dc2b3df9520505ab84c58be03d76dc5f4b43" }
+  };
+  var FLAG_ONCO = "smd_maik_kb_onco";
+  function oncoOn() { try { return localStorage.getItem(FLAG_ONCO) === "1"; } catch (e) { return false; } }
+  var BOOK = oncoOn() ? BOOKS.onco1 : BOOKS.base;
+  var NAME = BOOK.name;
+  var URL = "https://models.stewardmd.in/maik/" + BOOK.name;
+  var BYTES = BOOK.bytes;           // exact, from the upload
+  var ROWS = BOOK.rows;             // exact line count of the upload; loadBook() requires it
   // Identifies WHICH published asset was verified (the staleness marker), not a live digest -
   // see the comment in ensure() for why the on-device hash was removed.
-  var SHA256 = "96b4504ac62dfa50d672913aa7d52fbdb5f949de0b52dc9aed2fd73e74be480b";
+  var SHA256 = BOOK.sha;
   var CHUNK_BYTES = 2 * 1024 * 1024;
   var CHUNK_TRIES = 5;
   var MARK = "smd_maik_kb_installed";
@@ -329,5 +343,5 @@
   }
 
   return { installedCached: installedCached, installed: installed, ensure: ensure, state: state,
-           subscribe: subscribe, loadBook: loadBook, BYTES: BYTES, SHA256: SHA256 };
+           subscribe: subscribe, loadBook: loadBook, BYTES: BYTES, SHA256: SHA256, ROWS: ROWS, NAME: NAME, URL: URL };
 });
