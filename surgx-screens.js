@@ -654,10 +654,25 @@
     tabs.forEach(function (c) { if (c.id === state.procTab) active = c; });
     if (!active) { active = tabs[0]; state.procTab = active.id; }
 
-    var tabBar = '<div class="sgx-tabs">' + tabs.map(function (c) {
-      return '<button class="sgx-tab' + (c.id === active.id ? " on" : "") + '" data-sgx="tab" data-id="' + attr(c.id) + '">' +
-        esc(c.title) + "</button>";
-    }).join("") + "</div>";
+    /* Owner 2026-11-21: "no one understands these buttons and leaves without using steps or the other tabs".
+     * The sections are now numbered, bordered buttons that wrap (none hidden off-screen), Steps is
+     * highlighted with its count, and every section ends with a Next button that walks to the following one. */
+    var stepsCh = null, ai = 0;
+    tabs.forEach(function (c, i) { if (c.id === "steps") stepsCh = c; if (c.id === active.id) ai = i; });
+    var tabBar = '<nav class="sgx-secnav" aria-label="Sections of this procedure">' + tabs.map(function (c, i) {
+      var isSteps = c.id === "steps";
+      return '<button class="sgx-secbtn' + (c.id === active.id ? " on" : "") + (isSteps ? " steps" : "") + '" data-sgx="tab" data-id="' + attr(c.id) + '"' +
+        (c.id === active.id ? ' aria-current="true"' : "") + '><span class="n">' + (i + 1) + "</span>" + esc(c.title) +
+        (isSteps && c.steps.length ? '<span class="ct">' + c.steps.length + "</span>" : "") + "</button>";
+    }).join("") + "</nav>";
+    var next = tabs[ai + 1] || null;
+    var nextBtn = next
+      ? '<button class="sgx-nextsec" data-sgx="tab" data-id="' + attr(next.id) + '"><span>Next: ' + esc(next.title) +
+        (next.id === "steps" && next.steps.length ? " (" + next.steps.length + ")" : "") + '</span>' + ic("arrow_forward") + "</button>"
+      : "";
+    var toSteps = (stepsCh && active.id !== "steps" && ai === 0)
+      ? '<button class="sgx-tosteps" data-sgx="tab" data-id="steps">' + ic("format_list_numbered") + " Go to the " + stepsCh.steps.length + " operative steps</button>"
+      : "";
 
     var body = "";
     body += metaStrip(p, '<span class="sgx-pill">' + ic("school") + " Educational reference</span>");
@@ -678,6 +693,7 @@
     active.media.forEach(function (mid) {
       body += mediaBlock(p.__built ? p.__built.media : null, mid);
     });
+    body += nextBtn + toSteps;
 
     body += calcChips(p.calcs);
     body += sourcesCard(p.sources);
@@ -1881,7 +1897,7 @@
       }
 
       // procedures
-      if (act === "tab") { state.procTab = t.getAttribute("data-id"); render(); try { state.host.scrollTop = 0; } catch (er) {} return; }
+      if (act === "tab") { state.procTab = t.getAttribute("data-id"); render(); try { state.host.scrollTop = 0; } catch (er) {} try { var sOn = state.host.querySelector(".sgx-secbtn.on"); if (sOn && sOn.parentNode) sOn.parentNode.scrollLeft = Math.max(0, sOn.offsetLeft - 16); } catch (er2) {} return; }
 
       // cases
       if (act === "spec") { state.spec = t.getAttribute("data-id") || ""; haptic("light"); render(); return; }
