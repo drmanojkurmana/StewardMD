@@ -1,0 +1,271 @@
+{
+  "id": "uro-nephroureterectomy",
+  "title": "Radical nephroureterectomy with bladder cuff",
+  "subtitle": "Kidney, whole ureter and a bladder cuff out in one piece, without opening the tract",
+  "system": "urology",
+  "aliases": [
+    "nephroureterectomy",
+    "NU",
+    "RNU",
+    "upper tract urothelial cancer surgery",
+    "UTUC surgery"
+  ],
+  "estMinutes": 240,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "eau-2025-utuc",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Upper Urinary Tract Urothelial Carcinoma",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/upper-urinary-tract-urothelial-cell-carcinoma",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "baus-cons",
+      "org": "British Association of Urological Surgeons",
+      "title": "BAUS procedure-specific patient information and consent guidance",
+      "year": 2024,
+      "url": "https://www.baus.org.uk/patients/information_leaflets/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "High-risk upper tract urothelial carcinoma of the renal pelvis or ureter."
+    ],
+    "contraindications": [
+      "Metastatic disease.",
+      "Low-risk disease suitable for kidney-sparing treatment.",
+      "A solitary kidney or poor function where the patient would need dialysis (discuss alternatives)."
+    ],
+    "preparation": [
+      "CT urogram, ureteroscopy with biopsy and cytology, cystoscopy to exclude bladder tumour.",
+      "Renal function and the effect of losing the kidney on chemotherapy eligibility.",
+      "Consent: bleeding, conversion, urine leak from the cuff, bladder recurrence and the need for check cystoscopies."
+    ],
+    "positioning": [
+      "Flank position for the kidney; repositioning or a lower incision for the distal ureter if needed."
+    ],
+    "equipment": [
+      "Laparoscopic set, clips, vascular stapler, retrieval bag, catheter, fine absorbable sutures for the bladder."
+    ],
+    "anatomy": [
+      "Renal artery and vein, the ureter along its length, its intramural part and orifice, gonadal vein, colon."
+    ],
+    "criticalSafety": [
+      "Clip the ureter early, below the tumour, so cells do not drop into the bladder.",
+      "Never open the urinary tract; take the specimen out intact."
+    ],
+    "structuresAtRisk": [
+      "Renal vessels",
+      "Colon, duodenum, spleen",
+      "Contralateral ureteric orifice"
+    ],
+    "commonErrors": [
+      "Leaving a ureteric stump.",
+      "Morcellating or opening the specimen."
+    ],
+    "complications": [
+      "Bleeding, urine leak.",
+      "Bladder recurrence (common).",
+      "Reduced kidney function."
+    ],
+    "postop": [
+      "Single intravesical chemotherapy instillation per guideline.",
+      "Catheter until the cuff heals.",
+      "Regular cystoscopy surveillance."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.nu-step-01", "med.surgx.nu-clip-01"]
+    },
+    {
+      "ref": "step.onco.mdt-check", "media": ["med.surgx.nu-step-02", "med.surgx.nu-clip-02"],
+      "emphasis": "Biopsy and cytology, cystoscopy, renal function and the chemotherapy plan confirmed."
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.nu-step-03", "med.surgx.nu-clip-03"]
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.nu-step-04", "med.surgx.nu-clip-04"]
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.nu-step-05", "med.surgx.nu-clip-05"],
+      "emphasis": "Flank position for the kidney; plan for the distal ureter (reposition or extend)."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.nu-clip-06"]
+    },
+    {
+      "ref": "step.lap.access", "media": ["med.surgx.nu-step-07"]
+    },
+    {
+      "ref": "step.lap.ports", "media": ["med.surgx.nu-step-08"]
+    },
+    {
+      "ref": "step.lap.survey", "media": ["med.surgx.nu-step-09"]
+    },
+    {
+      "ref": "step.onco.tumour-handling", "media": ["med.surgx.nu-step-10", "med.surgx.nu-clip-10"],
+      "emphasis": "No entry into the collecting system or ureter at any point."
+    },
+    {
+      "ref": "step.nu.clip-ureter", "media": ["med.surgx.nu-step-11", "med.surgx.nu-clip-11"]
+    },
+    {
+      "ref": "step.nu.hilum", "media": ["med.surgx.nu-step-12", "med.surgx.nu-clip-12"]
+    },
+    {
+      "ref": "step.nu.kidney", "media": ["med.surgx.nu-step-13", "med.surgx.nu-clip-13"]
+    },
+    {
+      "ref": "step.nu.bladder-cuff", "media": ["med.surgx.nu-step-14", "med.surgx.nu-clip-14"]
+    },
+    {
+      "ref": "step.uro.bladder-leak-test", "media": ["med.surgx.nu-step-15"],
+      "emphasis": "Fill the bladder and check the cuff closure."
+    },
+    {
+      "ref": "step.lap.specimen-retrieval", "media": ["med.surgx.nu-step-16", "med.surgx.nu-clip-16"],
+      "emphasis": "Kidney, ureter and cuff in one bag, out intact, no morcellation."
+    },
+    {
+      "ref": "step.onco.specimen-orientation", "media": ["med.surgx.nu-step-17", "med.surgx.nu-clip-17"]
+    },
+    {
+      "ref": "step.abd.drain", "media": ["med.surgx.nu-step-18"]
+    },
+    {
+      "ref": "step.uro.catheter-plan", "media": ["med.surgx.nu-step-19", "med.surgx.nu-clip-19"],
+      "emphasis": "Catheter until the cuff closure heals; cystogram first if needed."
+    },
+    {
+      "ref": "step.nu.instillation", "media": ["med.surgx.nu-step-20"]
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.nu-step-21", "med.surgx.nu-clip-21"]
+    },
+    {
+      "ref": "step.lap.closure", "media": ["med.surgx.nu-step-22", "med.surgx.nu-clip-22"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.nu-step-23", "med.surgx.nu-clip-23"]
+    }
+  ],
+  "steps_local": {
+    "step.nu.clip-ureter": {
+      "id": "step.nu.clip-ureter",
+      "kind": "checkpoint",
+      "title": "Clip the ureter early",
+      "why": "Clipping below the tumour before handling the kidney stops tumour cells being pushed into the bladder.",
+      "how": [
+        "Find the ureter below the tumour early in the dissection.",
+        "Place a clip across it without dividing it.",
+        "Handle the kidney and ureter gently from then on."
+      ],
+      "structuresAtRisk": [
+        "Ureter",
+        "Gonadal vein"
+      ],
+      "pitfalls": [
+        "Leaving the ureter open while the kidney is squeezed."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.nu.hilum": {
+      "id": "step.nu.hilum",
+      "kind": "dissection",
+      "title": "Control the renal hilum, artery before vein",
+      "why": "Securing the artery first stops the kidney swelling with blood when the vein is closed.",
+      "how": [
+        "Dissect the renal artery and vein at the hilum.",
+        "Clip or staple the artery and divide it; then staple the vein.",
+        "Check for accessory vessels against the CT."
+      ],
+      "structuresAtRisk": [
+        "Renal artery and vein",
+        "Vena cava (right)",
+        "Lumbar veins"
+      ],
+      "pitfalls": [
+        "Dividing the vein before the artery."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.nu.kidney": {
+      "id": "step.nu.kidney",
+      "kind": "dissection",
+      "title": "Free the kidney outside Gerota's fascia",
+      "why": "The kidney, perinephric fat and ureter come out as one oncological block.",
+      "how": [
+        "Free the kidney outside Gerota's fascia, taking the adrenal only if involved.",
+        "Follow the ureter down to the bladder, keeping it intact.",
+        "Keep everything in one piece."
+      ],
+      "structuresAtRisk": [
+        "Adrenal",
+        "Spleen and pancreas (left)",
+        "Duodenum (right)"
+      ],
+      "pitfalls": [
+        "Breaching Gerota's fascia over the tumour."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.nu.bladder-cuff": {
+      "id": "step.nu.bladder-cuff",
+      "kind": "resection",
+      "critical": true,
+      "title": "Excise the bladder cuff",
+      "why": "The intramural ureter and its orifice can carry tumour. Taking a cuff of bladder around it removes it and lowers local recurrence.",
+      "how": [
+        "Free the ureter down into the bladder wall, tenting it up.",
+        "Excise a cuff of bladder around the orifice (extravesically, or opened under vision), keeping clear of the other orifice.",
+        "Close the bladder in two layers with absorbable suture."
+      ],
+      "structuresAtRisk": [
+        "Contralateral ureteric orifice",
+        "Bladder"
+      ],
+      "pitfalls": [
+        "Leaving the intramural ureter behind."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.nu.instillation": {
+      "id": "step.nu.instillation",
+      "kind": "closure",
+      "title": "Single intravesical chemotherapy instillation",
+      "why": "One dose of chemotherapy into the bladder after surgery reduces the chance of a bladder recurrence.",
+      "how": [
+        "Check the bladder closure is watertight and there is no suspicion of leak.",
+        "Give a single instillation (for example mitomycin C) per protocol, timed as the local guideline says.",
+        "Record it; follow cytotoxic handling rules."
+      ],
+      "structuresAtRisk": [
+        "Bladder closure (leak of chemotherapy)"
+      ],
+      "pitfalls": [
+        "Instilling into a bladder that may leak."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

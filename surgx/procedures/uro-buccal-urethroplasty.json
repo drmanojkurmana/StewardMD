@@ -1,0 +1,231 @@
+{
+  "id": "uro-buccal-urethroplasty",
+  "title": "Bulbar urethroplasty with buccal mucosa graft",
+  "subtitle": "Open the stricture fully, then augment with a quilted buccal graft",
+  "system": "urology",
+  "aliases": [
+    "urethroplasty",
+    "buccal mucosa graft urethroplasty",
+    "BMG urethroplasty",
+    "augmentation urethroplasty",
+    "bulbar urethroplasty"
+  ],
+  "estMinutes": 180,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "eau-2025-urethra",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Urethral Strictures",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/urethral-strictures",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "baus-cons",
+      "org": "British Association of Urological Surgeons",
+      "title": "BAUS procedure-specific patient information and consent guidance",
+      "year": 2024,
+      "url": "https://www.baus.org.uk/patients/information_leaflets/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "A bulbar urethral stricture too long for excision and primary anastomosis, or recurrent after urethrotomy."
+    ],
+    "contraindications": [
+      "Untreated infection.",
+      "Active lichen sclerosus in the mouth or oral disease at the donor site.",
+      "Unfit for anaesthesia."
+    ],
+    "preparation": [
+      "Retrograde and voiding urethrogram for length and site; cystoscopy.",
+      "Suprapubic catheter in place if the patient was in retention.",
+      "Consent: recurrence, mouth pain and numbness, erectile and ejaculatory change, urinary dribbling, wound problems."
+    ],
+    "positioning": [
+      "Lithotomy with legs well supported and padded; nasal intubation so the mouth is free."
+    ],
+    "equipment": [
+      "Urethroplasty set, ring retractor, bougies, fine absorbable sutures, guidewire, cystoscope, buccal harvest set with mouth gag."
+    ],
+    "anatomy": [
+      "Bulbar urethra and corpus spongiosum, bulbospongiosus muscle, corpora cavernosa; in the cheek, Stensen's duct and the mental nerve near the lip."
+    ],
+    "criticalSafety": [
+      "Open the urethra into healthy calibre at both ends.",
+      "Keep the harvest away from Stensen's duct opening."
+    ],
+    "structuresAtRisk": [
+      "Stensen's duct",
+      "Corpus spongiosum (bleeding)",
+      "Perineal nerves",
+      "Leg nerves and compartments (lithotomy)"
+    ],
+    "commonErrors": [
+      "Stopping short of healthy urethra.",
+      "A graft that does not lie flat on a bed."
+    ],
+    "complications": [
+      "Stricture recurrence.",
+      "Oral pain or numbness.",
+      "Wound infection, haematoma, sexual change."
+    ],
+    "postop": [
+      "Catheter about 2 to 3 weeks; pericatheter urethrogram before removal.",
+      "Flow rate and symptom checks; urethrogram if symptoms return."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.urp-step-01", "med.surgx.urp-clip-01"],
+      "emphasis": "Mouth donor site and recurrence discussed."
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.urp-step-02", "med.surgx.urp-clip-02"]
+    },
+    {
+      "ref": "step.uro.urine-check", "media": ["med.surgx.urp-step-03", "med.surgx.urp-clip-03"]
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.urp-step-04", "med.surgx.urp-clip-04"]
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.urp-step-05", "med.surgx.urp-clip-05"],
+      "emphasis": "Lithotomy, legs well padded and limited in time; nasal tube so the mouth is free."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.urp-step-06", "med.surgx.urp-clip-06"],
+      "emphasis": "Perineum prepared; the mouth prepared separately with its own instruments."
+    },
+    {
+      "ref": "step.uro.cystoscopy", "media": ["med.surgx.urp-step-07", "med.surgx.urp-clip-07"],
+      "emphasis": "Look at the stricture and pass a wire into the bladder if possible."
+    },
+    {
+      "ref": "step.urp.harvest", "media": ["med.surgx.urp-step-08"]
+    },
+    {
+      "ref": "step.urp.expose", "media": ["med.surgx.urp-clip-09"]
+    },
+    {
+      "ref": "step.urp.open", "media": ["med.surgx.urp-step-10", "med.surgx.urp-clip-10"]
+    },
+    {
+      "ref": "step.urp.graft", "media": ["med.surgx.urp-step-11", "med.surgx.urp-clip-11"]
+    },
+    {
+      "ref": "step.uro.catheter-plan", "media": ["med.surgx.urp-step-12", "med.surgx.urp-clip-12"],
+      "emphasis": "Catheter stays 2 to 3 weeks; urethrogram before removal."
+    },
+    {
+      "ref": "step.core.haemostasis", "media": ["med.surgx.urp-clip-13"],
+      "emphasis": "Check the spongiosum edges and the cheek."
+    },
+    {
+      "ref": "step.core.skin-closure",
+      "emphasis": "Close bulbospongiosus and the perineum in layers."
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.urp-step-15", "med.surgx.urp-clip-15"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.urp-step-16", "med.surgx.urp-clip-16"],
+      "emphasis": "Record stricture length, graft size and position, and the urethrogram date."
+    }
+  ],
+  "steps_local": {
+    "step.urp.harvest": {
+      "id": "step.urp.harvest",
+      "kind": "prep",
+      "title": "Harvest the buccal graft",
+      "why": "Inner cheek mucosa is wet, thick and takes well. Staying away from the duct and the lip keeps the mouth healthy.",
+      "how": [
+        "Open the mouth with a gag, mark Stensen's duct opening (opposite the second upper molar) and stay below it.",
+        "Mark a graft about 1.5 to 2.5 cm wide and as long as needed; inject local anaesthetic with adrenaline.",
+        "Take the mucosa only, thin the graft of fat on the back table; close or leave the cheek per preference."
+      ],
+      "structuresAtRisk": [
+        "Stensen's duct",
+        "Mental nerve (near the lip)"
+      ],
+      "pitfalls": [
+        "Harvesting over the duct opening.",
+        "Leaving fat on the graft."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.urp.expose": {
+      "id": "step.urp.expose",
+      "kind": "access",
+      "title": "Expose the bulbar urethra",
+      "why": "A midline perineal approach with the bulbospongiosus split gives access to the whole bulbar urethra.",
+      "how": [
+        "Make a midline or inverted-Y perineal incision.",
+        "Split the bulbospongiosus muscle in the midline to show the corpus spongiosum.",
+        "Mobilise the urethra as needed for the graft (dorsal or ventral)."
+      ],
+      "structuresAtRisk": [
+        "Perineal nerves",
+        "Bulbar arteries"
+      ],
+      "pitfalls": [
+        "Damaging the bulbar arteries."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.urp.open": {
+      "id": "step.urp.open",
+      "kind": "resection",
+      "critical": true,
+      "title": "Open the stricture into healthy urethra",
+      "why": "Recurrence comes from scar left at the ends. The stricture is opened until healthy calibre is seen at both ends.",
+      "how": [
+        "Open the urethra along the stricture (dorsal or ventral stricturotomy).",
+        "Extend the opening beyond the stricture at both ends until a 24 to 26 Fr bougie passes easily.",
+        "Measure the length of the opened urethra for the graft."
+      ],
+      "structuresAtRisk": [
+        "Corpus spongiosum",
+        "Sphincter (proximal)"
+      ],
+      "pitfalls": [
+        "Stopping in scar at either end."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.urp.graft": {
+      "id": "step.urp.graft",
+      "kind": "reconstruction",
+      "title": "Quilt and sew the graft",
+      "why": "The graft lives on its bed in the first days. Quilting it flat and fixing it on all sides lets it take.",
+      "how": [
+        "Lay the graft on its bed (corpora dorsally or spongiosum ventrally) and quilt it with fine sutures so it lies flat.",
+        "Sew the urethral edges to the graft over a catheter with fine absorbable sutures, apex first.",
+        "Close the spongiosum over the graft where possible."
+      ],
+      "structuresAtRisk": [
+        "Graft"
+      ],
+      "pitfalls": [
+        "A loose graft with fluid under it.",
+        "Tension on the graft edges."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

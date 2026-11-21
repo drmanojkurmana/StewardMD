@@ -1,0 +1,221 @@
+{
+  "id": "uro-flexible-cystoscopy",
+  "title": "Flexible cystoscopy (and stent removal)",
+  "subtitle": "Systematic look at the whole bladder under local anaesthetic, with retroflexion",
+  "system": "urology",
+  "aliases": [
+    "flexi cystoscopy",
+    "flexible cystourethroscopy",
+    "check cystoscopy",
+    "stent removal",
+    "haematuria cystoscopy"
+  ],
+  "estMinutes": 15,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "eau-2025-nmibc",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Non-muscle-invasive Bladder Cancer",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/non-muscle-invasive-bladder-cancer",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "eau-2025-infect",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Urological Infections",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/urological-infections",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "baus-cons",
+      "org": "British Association of Urological Surgeons",
+      "title": "BAUS procedure-specific patient information and consent guidance",
+      "year": 2024,
+      "url": "https://www.baus.org.uk/patients/information_leaflets/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Visible or persistent non-visible haematuria.",
+      "Surveillance after bladder cancer.",
+      "Removal of a ureteric stent.",
+      "Lower urinary tract symptoms where the urethra or bladder must be seen."
+    ],
+    "contraindications": [
+      "Untreated urinary infection.",
+      "Acute urinary retention or a stricture that the flexible scope cannot pass (needs a different plan)."
+    ],
+    "preparation": [
+      "Urine dip or culture; treat infection first.",
+      "Check anticoagulants (usually continued for a diagnostic look).",
+      "Consent: discomfort, bleeding, infection, and a possible later biopsy."
+    ],
+    "positioning": [
+      "Supine (men) or frog-leg (women), the genitalia exposed, a screen so the patient can watch if wished."
+    ],
+    "equipment": [
+      "Flexible cystoscope with camera stack, sterile water or saline irrigation, lidocaine gel, graspers for stents, specimen pots."
+    ],
+    "anatomy": [
+      "Urethra (meatus, penile, bulbar, membranous, prostatic), verumontanum, bladder neck, trigone, ureteric orifices, dome and anterior wall."
+    ],
+    "criticalSafety": [
+      "Look at every part of the bladder, including the anterior wall and the bladder neck in retroflexion.",
+      "Stent removal is matched to the stent register."
+    ],
+    "structuresAtRisk": [
+      "Urethra (false passage)",
+      "Bladder wall"
+    ],
+    "commonErrors": [
+      "Missing the anterior wall or the area behind the bladder neck.",
+      "Forcing the scope through a stricture."
+    ],
+    "complications": [
+      "Urinary infection.",
+      "Bleeding.",
+      "Dysuria for a day or two."
+    ],
+    "postop": [
+      "Drink more for 24 hours; return for fever, rigors or retention.",
+      "Results and the next step discussed before the patient leaves."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.fcs-step-01", "med.surgx.fcs-clip-01"]
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.fcs-step-02", "med.surgx.fcs-clip-02"]
+    },
+    {
+      "ref": "step.uro.urine-check", "media": ["med.surgx.fcs-step-03", "med.surgx.fcs-clip-03"]
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.fcs-step-04"],
+      "emphasis": "Usually no antibiotic for a diagnostic look; give one only for risk factors or stent removal per local policy."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine for men; frog-leg or lithotomy for women; a screen for the patient to watch."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.fcs-step-06", "med.surgx.fcs-clip-06"],
+      "emphasis": "Clean the meatus and glans or vulva; a fenestrated drape."
+    },
+    {
+      "ref": "step.fcs.la-gel", "media": ["med.surgx.fcs-step-07", "med.surgx.fcs-clip-07"]
+    },
+    {
+      "ref": "step.uro.cystoscopy", "media": ["med.surgx.fcs-step-08", "med.surgx.fcs-clip-08"],
+      "emphasis": "Pass the flexible scope under vision along the urethra, then map the bladder wall in order."
+    },
+    {
+      "ref": "step.fcs.retroflex", "media": ["med.surgx.fcs-step-09"]
+    },
+    {
+      "ref": "step.fcs.stent-removal", "media": ["med.surgx.fcs-step-10", "med.surgx.fcs-clip-10"]
+    },
+    {
+      "ref": "step.fcs.finding", "media": ["med.surgx.fcs-step-11", "med.surgx.fcs-clip-11"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.fcs-step-12", "med.surgx.fcs-clip-12"],
+      "emphasis": "Explain the findings, document the bladder map, and book any biopsy or TURBT."
+    }
+  ],
+  "steps_local": {
+    "step.fcs.la-gel": {
+      "id": "step.fcs.la-gel",
+      "kind": "prep",
+      "title": "Lidocaine gel and gentle urethral entry",
+      "why": "Gel left in place for a few minutes makes the look painless and lubricates the scope, so the patient stays still and the urethra is not damaged.",
+      "how": [
+        "Instil sterile lidocaine gel into the urethra and wait about 3 to 5 minutes.",
+        "Hold the penis upright and stretched (men) and advance the scope only where the lumen is seen ahead.",
+        "Ask the patient to breathe out or try to pass urine as the scope reaches the external sphincter."
+      ],
+      "structuresAtRisk": [
+        "Urethra",
+        "External sphincter"
+      ],
+      "pitfalls": [
+        "Pushing the scope blind.",
+        "Starting before the gel has worked."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.fcs.retroflex": {
+      "id": "step.fcs.retroflex",
+      "kind": "dissection",
+      "title": "Retroflexion to see the bladder neck",
+      "why": "Tumours at the bladder neck and around the internal opening are hidden from the straight view; retroflexion shows them.",
+      "how": [
+        "In the bladder with moderate filling, deflect the tip fully so the scope looks back at its own entry point.",
+        "Rotate the scope through 360 degrees to inspect the whole bladder neck and the area around it.",
+        "Straighten the tip before withdrawing the scope."
+      ],
+      "structuresAtRisk": [
+        "Bladder neck"
+      ],
+      "pitfalls": [
+        "Withdrawing the scope while it is still retroflexed."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.fcs.stent-removal": {
+      "id": "step.fcs.stent-removal",
+      "kind": "closure",
+      "title": "Stent removal with graspers",
+      "why": "A stent left in too long encrusts and can block or break. Removing it and closing the register entry ends that risk.",
+      "how": [
+        "Identify the stent coming out of the ureteric orifice.",
+        "Pass graspers down the working channel, grasp the stent end and withdraw the scope and stent together.",
+        "Check the stent is complete and mark it removed in the stent register."
+      ],
+      "structuresAtRisk": [
+        "Ureteric orifice"
+      ],
+      "pitfalls": [
+        "Pulling only part of an encrusted stent.",
+        "Not closing the register entry."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.fcs.finding": {
+      "id": "step.fcs.finding",
+      "kind": "bailout",
+      "title": "A suspicious finding",
+      "why": "A flexible look is for diagnosis. A tumour needs resection under anaesthetic for staging, not a clinic biopsy that loses the muscle layer.",
+      "how": [
+        "Record the site, size, number and appearance of any lesion on a bladder diagram, with photographs.",
+        "Explain the finding to the patient and book a TURBT and staging scans as indicated.",
+        "Send urine cytology if the bladder looks red or flat-abnormal (possible carcinoma in situ)."
+      ],
+      "structuresAtRisk": [
+        "Bladder"
+      ],
+      "pitfalls": [
+        "Taking a small cold-cup biopsy and calling it staged."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

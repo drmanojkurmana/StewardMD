@@ -562,3 +562,67 @@ Evisceration 16 redraw wired the same day; batch 7 now 102 of 102.
 [[SURGX-batch8-image-prompt]] (128 images) and [[SURGX-batch8-video-prompt]] for the 7 non-eye operations: kidney
 transplant, laparoscopic donor nephrectomy, aortic valve replacement, subxiphoid pericardial window, escharotomy,
 rhomboid flap, unilateral cleft lip repair. Made by `make8.py` (the batch 6 and 7 generator with the eye wording swapped out).
+
+### Urology completed (2026-11-21)
+Owner: "Now give urology complete it". 12 operations added (urology now 26), all `ai_drafted` with note templates:
+flexible cystoscopy, transperineal prostate biopsy, optical urethrotomy, cystolitholapaxy, HoLEP, no-scalpel vasectomy,
+buccal graft urethroplasty, pyeloplasty, robotic partial nephrectomy, robotic radical prostatectomy, radical cystectomy
+with ileal conduit, nephroureterectomy. Four new shared steps in `steps/urology.json`: `step.uro.urine-check`,
+`step.uro.robot-dock`, `step.uro.bladder-leak-test`, `step.uro.catheter-plan`. Template field keys must not reuse base
+operative keys (`indication`, `side`, `incision`, `anaesthesia` ...): the specialties test fails on a collision.
+Prompts: [[SURGX-batch9a-image-prompt]] (104) + [[SURGX-batch9a-video-prompt]], [[SURGX-batch9b-image-prompt]] (115)
++ [[SURGX-batch9b-video-prompt]], made by `make9.py`.
+
+### Batch 8 clips wired (2026-11-21)
+100 clips over the 7 non-eye operations (`med.surgx.{tx,ldn,avr,pw,esc,rhomb,cleft}-clip-NN`, `wire8.py`), every video
+checked in the embedded player with a referrer; 19 new ALLOW ids. Dropped as wrong or weak: Ochsner checklist (fails embed),
+the intercostal chest tube for AVR drains, the TXA/adrenaline packing demo for escharotomy, the generic "separate the
+kidney" schematic for donor artery and vein division, the verbal-only cleft positioning.
+Batch 8 images (same day): 106 of 128 wired via `img8.py`, every image reviewed four to a sheet. Held back 22: KT 16
+(native-kidney stent), LDN 12, 13, 15 (open retractors in a laparoscopic view), LDN 17 (two panels stitched), AVR 06, 18
+(whole rib cage bare), PW 07, 08, 09, 11 (patient swapped to a man; sternotomy-sized opening), escharotomy 07 (volar
+midline cut) and 12 (different patient), rhomboid 01 to 05 and 17 (older man; the operative series is a young woman),
+cleft 15, 18, 19 (lip still cleft after repair).
+
+### Prompts for every remaining operation (2026-11-21)
+Owner: "Give left over all surgeries prompts". `make10.py` builds batches 10 to 26 for every operation with no
+pictures yet (positioning and precise facts taken from each procedure's own chapters), about 100 images each:
+- [[SURGX-batch10-image-prompt]] (98) + [[SURGX-batch10-video-prompt]]: Abscess incision and drainage, Hartmann's procedure, Loop ileostomy: formation and closure, Laparoscopic repair of perforated duodenal ulcer, Small bowel resection with anastomosis
+- [[SURGX-batch11-image-prompt]] (98) + [[SURGX-batch11-video-prompt]]: Laparoscopic inguinal hernia repair, Open umbilical and incisional hernia repair with mesh, Lateral internal sphincterotomy, Fistula-in-ano: fistulotomy and seton, Pilonidal sinus excision
+- [[SURGX-batch12-image-prompt]] (109) + [[SURGX-batch12-video-prompt]]: Laparoscopic Nissen fundoplication, Laparoscopic sleeve gastrectomy, Left hemicolectomy and sigmoid colectomy, Open and subtotal cholecystectomy, Laparoscopic common bile duct exploration
+- [[SURGX-batch13-image-prompt]] (108) + [[SURGX-batch13-video-prompt]]: Splenectomy: trauma and elective, Laparoscopic anterior resection with total mesorectal excision, Pancreaticoduodenectomy (Whipple), Right hepatectomy, Modified radical neck dissection
+- [[SURGX-batch14-image-prompt]] (112) + [[SURGX-batch14-video-prompt]]: D2 gastrectomy for gastric cancer, Oesophagectomy (Ivor Lewis principles), Transurethral resection of bladder tumour (TURBT), Scrotal exploration with bilateral orchidopexy, Suprapubic catheter insertion, Ureteroscopy with laser lithotripsy
+- [[SURGX-batch15-image-prompt]] (96) + [[SURGX-batch15-video-prompt]]: Retrograde double-J ureteric stent insertion, Percutaneous nephrolithotomy (PCNL), Radical nephrectomy (open and laparoscopic principles), Hydrocele repair (Jaboulay or Lord), Adult circumcision
+- [[SURGX-batch16-image-prompt]] (112) + [[SURGX-batch16-video-prompt]]: Subinguinal microsurgical varicocelectomy, Radical inguinal orchidectomy for testicular tumour, Pyloromyotomy (Ramstedt), Paediatric inguinal herniotomy, Inguinal orchidopexy for undescended testis, Paediatric circumcision
+- [[SURGX-batch17-image-prompt]] (101) + [[SURGX-batch17-video-prompt]]: Operative reduction of intussusception, Laparotomy for malrotation (Ladd procedure), Laparoscopic salpingectomy for ectopic pregnancy, Laparoscopic ovarian cystectomy, Surgical management of miscarriage: manual or electric vacuum aspiration
+- [[SURGX-batch18-image-prompt]] (110) + [[SURGX-batch18-video-prompt]]: Transvaginal cervical cerclage (McDonald), Open (abdominal) myomectomy, Wide local excision with sentinel node biopsy, Axillary lymph node dissection, Excision of a benign breast lump (fibroadenoma), Open repair of ruptured abdominal aortic aneurysm
+- [[SURGX-batch19-image-prompt]] (100) + [[SURGX-batch19-video-prompt]]: Femoral embolectomy, Below-knee amputation, Carotid endarterectomy, Femoro-popliteal bypass (above knee, vein graft), Radiocephalic arteriovenous fistula
+- [[SURGX-batch20-image-prompt]] (100) + [[SURGX-batch20-video-prompt]]: Great saphenous vein surgery, Above-knee amputation, Open surgical tracheostomy, Functional endoscopic sinus surgery (FESS), Myringotomy and grommet insertion, Septoplasty
+- [[SURGX-batch21-image-prompt]] (102) + [[SURGX-batch21-video-prompt]]: Adenoidectomy, Cortical and modified radical mastoidectomy, Tympanoplasty type 1 (underlay), Superficial parotidectomy with facial nerve identification, Direct laryngoscopy and microlaryngoscopy with biopsy
+- [[SURGX-batch22-image-prompt]] (91) + [[SURGX-batch22-video-prompt]]: Peritonsillar abscess (quinsy) drainage under local anaesthetic, Dynamic hip screw, Intramedullary nailing of the tibia, Debridement of an open fracture with external fixation, Fasciotomy of the leg
+- [[SURGX-batch23-image-prompt]] (103) + [[SURGX-batch23-video-prompt]]: Hemiarthroplasty of the hip, Open reduction and internal fixation of the ankle, Distal radius fracture fixation, Arthroscopic ACL reconstruction (hamstring graft), Split-thickness skin graft
+- [[SURGX-batch24-image-prompt]] (103) + [[SURGX-batch24-video-prompt]]: Open carpal tunnel release, Trigger finger release, Flexor tendon repair (zone II), Craniotomy for supratentorial tumour, Decompressive craniectomy (planned)
+- [[SURGX-batch25-image-prompt]] (100) + [[SURGX-batch25-video-prompt]]: Anterior cervical discectomy and fusion, Lumbar laminectomy for canal stenosis, Posterior lumbar instrumented fusion (TLIF), VATS bullectomy with pleurodesis, Median sternotomy and closure
+- [[SURGX-batch26-image-prompt]] (86) + [[SURGX-batch26-video-prompt]]: Coronary artery bypass grafting, Hemithyroidectomy (thyroid lobectomy), Parathyroidectomy, Laparoscopic adrenalectomy
+
+### Batch 9b clips wired (2026-11-21)
+82 clips over pyeloplasty, partial nephrectomy, radical prostatectomy, cystectomy with ileal conduit and
+nephroureterectomy (`wire9b.py`, ids `med.surgx.{pyelo,pn,rp,rc,nu}-clip-NN`), all embed-checked; 17 new ALLOW ids.
+Not used: the two operative nephroureterectomy videos for the hilum (vein divided before artery there; the animation
+shows artery first), the nurse explainer's debrief (says the catheter comes out in theatre), the high-extended node
+dissection above the aortic bifurcation (debated; the standard pelvic dissection clip is used).
+
+### Batch 8 fix, batch 9a clips, batch 9b images (2026-11-21)
+- Batch 8 fix: 19 of 22 redraws wired (`img8fix.py`); batch 8 now 125 of 128. Still held: escharotomy 07 (cut
+  still runs down the front of the forearm, not mid-lateral), LDN 12 (open ring-handled scissors in the laparoscopic
+  view), AVR 18 (sternal wires look like a skin closure).
+- Batch 9a clips: 90 over the 7 smaller urology operations (`wire9a.py`), all embed-checked; 20 new ALLOW ids.
+- Batch 9b images: 98 of 115 (`img9b.py`). Held: pyeloplasty 12, partial nephrectomy 11, 12, 13, 15, 17, prostatectomy
+  18, 19, 24, cystectomy 08, 13, nephroureterectomy 06, 10, 11, 12, 15, 18 (open retractors or ring scissors in a
+  robotic or laparoscopic view, bare pelvic bones, a laparotomy wound after robotic surgery, wrong position).
+- Batch 9a images: 98 of 104 (`img9a.py`). Held: flexible cystoscopy 05 (two panels stitched), vasectomy 08 (wide open
+  wound, not a puncture) and 09 (two cuts with vas ends through the skin), urethroplasty 09, 13, 14 (perineum drawn as
+  female anatomy).
+- Fix round 2 (`surgx-fix-b8-b9b.zip`): 17 of 20 wired (`img8fix2.py`, `img9bfix.py`). Still held: escharotomy 07
+  (different bald patient, cut still on the palm side), AVR 18 (ribs drawn inside the sternal wound), NU 06 (patient
+  supine, not on her side). Batch 8 now 126 of 128; batch 9b 114 of 115.

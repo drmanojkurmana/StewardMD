@@ -1,0 +1,218 @@
+{
+  "id": "uro-pyeloplasty",
+  "title": "Laparoscopic or robotic pyeloplasty (Anderson-Hynes)",
+  "subtitle": "Dismember the narrow junction, spatulate, and join over a stent",
+  "system": "urology",
+  "aliases": [
+    "pyeloplasty",
+    "Anderson-Hynes pyeloplasty",
+    "PUJ obstruction repair",
+    "UPJ obstruction",
+    "dismembered pyeloplasty"
+  ],
+  "estMinutes": 180,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "eau-2025-paeds",
+      "org": "European Association of Urology / ESPU",
+      "title": "EAU Guidelines on Paediatric Urology (UPJ obstruction)",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/paediatric-urology",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "baus-cons",
+      "org": "British Association of Urological Surgeons",
+      "title": "BAUS procedure-specific patient information and consent guidance",
+      "year": 2024,
+      "url": "https://www.baus.org.uk/patients/information_leaflets/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Pelviureteric junction obstruction with symptoms, falling split function or infection, confirmed on a diuretic renogram."
+    ],
+    "contraindications": [
+      "Untreated infection.",
+      "A kidney with very poor function (consider nephrectomy).",
+      "Unfit for general anaesthesia."
+    ],
+    "preparation": [
+      "Diuretic renogram (MAG3) for obstruction and split function; CT for anatomy and crossing vessels.",
+      "Urine culture.",
+      "Consent: failure, urine leak, stent symptoms and its removal, bleeding, conversion."
+    ],
+    "positioning": [
+      "Flank (lateral) position, about 45 to 60 degrees, padded and strapped."
+    ],
+    "equipment": [
+      "Laparoscopic or robotic set, fine absorbable sutures (4-0 or 5-0), double-J stent and guidewire, drain."
+    ],
+    "anatomy": [
+      "Renal pelvis, pelviureteric junction, ureter, lower pole crossing vessel, colon, gonadal vein."
+    ],
+    "criticalSafety": [
+      "Transpose the junction in front of a crossing vessel; never divide a lower pole artery.",
+      "A tension-free, watertight, dependent anastomosis."
+    ],
+    "structuresAtRisk": [
+      "Lower pole crossing vessel",
+      "Ureteric blood supply",
+      "Colon and duodenum"
+    ],
+    "commonErrors": [
+      "Leaving the narrow segment in.",
+      "A twisted or tight anastomosis."
+    ],
+    "complications": [
+      "Urine leak, stent problems.",
+      "Recurrent obstruction.",
+      "Bleeding, infection."
+    ],
+    "postop": [
+      "Stent removal at about 4 to 6 weeks.",
+      "Renogram at about 3 to 6 months."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.pyelo-step-01", "med.surgx.pyelo-clip-01"]
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.pyelo-step-02", "med.surgx.pyelo-clip-02"]
+    },
+    {
+      "ref": "step.uro.urine-check", "media": ["med.surgx.pyelo-step-03"]
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.pyelo-step-04", "med.surgx.pyelo-clip-04"]
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.pyelo-step-05", "med.surgx.pyelo-clip-05"],
+      "emphasis": "Flank position about 45 to 60 degrees, padded and strapped, table flexed slightly."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.pyelo-step-06", "med.surgx.pyelo-clip-06"]
+    },
+    {
+      "ref": "step.lap.access", "media": ["med.surgx.pyelo-step-07", "med.surgx.pyelo-clip-07"]
+    },
+    {
+      "ref": "step.lap.ports", "media": ["med.surgx.pyelo-step-08", "med.surgx.pyelo-clip-08"]
+    },
+    {
+      "ref": "step.uro.robot-dock", "media": ["med.surgx.pyelo-step-09"],
+      "emphasis": "For the robotic approach; otherwise go straight to the survey."
+    },
+    {
+      "ref": "step.lap.survey", "media": ["med.surgx.pyelo-step-10", "med.surgx.pyelo-clip-10"]
+    },
+    {
+      "ref": "step.pyelo.expose", "media": ["med.surgx.pyelo-step-11", "med.surgx.pyelo-clip-11"]
+    },
+    {
+      "ref": "step.pyelo.divide", "media": ["med.surgx.pyelo-step-12", "med.surgx.pyelo-clip-12"]
+    },
+    {
+      "ref": "step.uro.dj-stent", "media": ["med.surgx.pyelo-step-13", "med.surgx.pyelo-clip-13"],
+      "emphasis": "Pass the double-J antegrade over a wire after the back wall is sewn, checking the lower curl lies in the bladder."
+    },
+    {
+      "ref": "step.pyelo.anastomosis", "media": ["med.surgx.pyelo-step-14", "med.surgx.pyelo-clip-14"]
+    },
+    {
+      "ref": "step.core.haemostasis", "media": ["med.surgx.pyelo-step-15", "med.surgx.pyelo-clip-15"],
+      "emphasis": "Check the pelvis edges and the mesocolon window."
+    },
+    {
+      "ref": "step.abd.drain", "media": ["med.surgx.pyelo-step-16", "med.surgx.pyelo-clip-16"],
+      "emphasis": "A drain near the anastomosis, not on it."
+    },
+    {
+      "ref": "step.uro.stent-register", "media": ["med.surgx.pyelo-step-17"]
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.pyelo-step-18", "med.surgx.pyelo-clip-18"]
+    },
+    {
+      "ref": "step.lap.closure", "media": ["med.surgx.pyelo-step-19"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.pyelo-step-20", "med.surgx.pyelo-clip-20"]
+    }
+  ],
+  "steps_local": {
+    "step.pyelo.expose": {
+      "id": "step.pyelo.expose",
+      "kind": "dissection",
+      "title": "Expose the pelvis, junction and any crossing vessel",
+      "why": "Seeing the whole junction and its relation to a lower pole vessel decides the repair.",
+      "how": [
+        "Reflect the colon (or go through the mesocolon on the left in thin patients) to the renal pelvis.",
+        "Find the ureter below and follow it up to the junction, keeping its adventitia.",
+        "Identify any lower pole crossing vessel and free the junction from it."
+      ],
+      "structuresAtRisk": [
+        "Lower pole vessel",
+        "Gonadal vein",
+        "Duodenum (right side)"
+      ],
+      "pitfalls": [
+        "Stripping the ureter of its blood supply."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pyelo.divide": {
+      "id": "step.pyelo.divide",
+      "kind": "resection",
+      "title": "Dismember and spatulate",
+      "why": "Removing the narrow segment and opening the ureter along its side makes a wide, funnel-shaped join.",
+      "how": [
+        "Divide the ureter just below the junction and excise the narrow segment with excess pelvis if redundant.",
+        "Spatulate the ureter on its lateral side for about 1.5 to 2 cm.",
+        "Bring the ureter in front of any crossing vessel."
+      ],
+      "structuresAtRisk": [
+        "Crossing vessel",
+        "Ureter"
+      ],
+      "pitfalls": [
+        "Spatulating on the wrong side and twisting the ureter."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pyelo.anastomosis": {
+      "id": "step.pyelo.anastomosis",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Pelvi-ureteric anastomosis",
+      "why": "A watertight, tension-free and dependent anastomosis drains well and does not leak.",
+      "how": [
+        "Place the first stitch from the tip of the spatulation to the lowest point of the pelvis.",
+        "Sew the back wall with fine absorbable running suture, place the stent, then the front wall.",
+        "Close any remaining pelvis; check the join is untwisted and drains."
+      ],
+      "structuresAtRisk": [
+        "Anastomosis"
+      ],
+      "pitfalls": [
+        "A tight or twisted join.",
+        "Bites through the stent."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

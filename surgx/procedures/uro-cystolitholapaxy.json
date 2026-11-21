@@ -1,0 +1,165 @@
+{
+  "id": "uro-cystolitholapaxy",
+  "title": "Cystolitholapaxy (bladder stone)",
+  "subtitle": "Break the stone, clear every fragment, and treat the cause",
+  "system": "urology",
+  "aliases": [
+    "bladder stone removal",
+    "endoscopic cystolitholapaxy",
+    "laser cystolithotripsy",
+    "vesical calculus"
+  ],
+  "estMinutes": 45,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "eau-2025-stones",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Urolithiasis",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/urolithiasis",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "eau-2025-luts",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Management of Non-neurogenic Male LUTS",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/management-of-non-neurogenic-male-luts",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "baus-cons",
+      "org": "British Association of Urological Surgeons",
+      "title": "BAUS procedure-specific patient information and consent guidance",
+      "year": 2024,
+      "url": "https://www.baus.org.uk/patients/information_leaflets/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "A symptomatic or obstructing bladder stone."
+    ],
+    "contraindications": [
+      "Untreated infection.",
+      "A stone too large for endoscopic clearance in reasonable time (open or percutaneous cystolithotomy)."
+    ],
+    "preparation": [
+      "Imaging for size and number, and ultrasound for upper tracts.",
+      "Urine culture.",
+      "Consent: bleeding, infection, bladder injury, residual fragments, and treatment of the cause (often the prostate)."
+    ],
+    "positioning": [
+      "Lithotomy."
+    ],
+    "equipment": [
+      "Cystoscope or nephroscope, holmium laser or pneumatic lithotripter, Ellik evacuator, three-way catheter."
+    ],
+    "anatomy": [
+      "Bladder neck, prostate, trigone and ureteric orifices, bladder diverticula."
+    ],
+    "criticalSafety": [
+      "Keep the energy on the stone and off the bladder wall.",
+      "Look for the cause: outflow obstruction, diverticulum, foreign body, or a tumour hidden under the stone."
+    ],
+    "structuresAtRisk": [
+      "Bladder wall",
+      "Ureteric orifices"
+    ],
+    "commonErrors": [
+      "Lasering with the bladder wall in front of the fibre.",
+      "Leaving the cause untreated."
+    ],
+    "complications": [
+      "Bleeding, infection.",
+      "Bladder perforation.",
+      "Residual stone or recurrence."
+    ],
+    "postop": [
+      "Stone analysis and metabolic review.",
+      "Outflow treatment if obstruction was the cause."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.clp-step-01", "med.surgx.clp-clip-01"]
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.clp-step-02", "med.surgx.clp-clip-02"]
+    },
+    {
+      "ref": "step.uro.urine-check", "media": ["med.surgx.clp-step-03"]
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.clp-step-04", "med.surgx.clp-clip-04"]
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.clp-step-05", "med.surgx.clp-clip-05"],
+      "emphasis": "Lithotomy."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.clp-step-06", "med.surgx.clp-clip-06"]
+    },
+    {
+      "ref": "step.uro.cystoscopy", "media": ["med.surgx.clp-step-07", "med.surgx.clp-clip-07"],
+      "emphasis": "Note stone size and number, the prostate, any diverticulum, and the bladder mucosa."
+    },
+    {
+      "ref": "step.uro.lithotripsy", "media": ["med.surgx.clp-step-08", "med.surgx.clp-clip-08"],
+      "emphasis": "In the bladder: fibre on the stone, the bladder moderately full, the wall never in front of the fibre."
+    },
+    {
+      "ref": "step.uro.fragment-clearance", "media": ["med.surgx.clp-step-09", "med.surgx.clp-clip-09"],
+      "emphasis": "Evacuate fragments with the Ellik and recheck every part of the bladder."
+    },
+    {
+      "ref": "step.clp.cause", "media": ["med.surgx.clp-step-10", "med.surgx.clp-clip-10"]
+    },
+    {
+      "ref": "step.uro.perforation-check", "media": ["med.surgx.clp-step-11", "med.surgx.clp-clip-11"]
+    },
+    {
+      "ref": "step.uro.catheter-plan", "media": ["med.surgx.clp-step-12", "med.surgx.clp-clip-12"],
+      "emphasis": "A catheter for drainage; a three-way catheter if bleeding."
+    },
+    {
+      "ref": "step.core.specimen", "media": ["med.surgx.clp-step-13", "med.surgx.clp-clip-13"],
+      "emphasis": "Stone fragments sent for analysis."
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.clp-step-14", "med.surgx.clp-clip-14"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.clp-step-15", "med.surgx.clp-clip-15"],
+      "emphasis": "Record clearance, the cause found and the plan to treat it."
+    }
+  ],
+  "steps_local": {
+    "step.clp.cause": {
+      "id": "step.clp.cause",
+      "kind": "checkpoint",
+      "title": "Find and treat the cause",
+      "why": "Bladder stones usually form behind outflow obstruction or in stagnant urine. Without treating the cause they come back, and a tumour may hide under the stone.",
+      "how": [
+        "Once the stone is cleared, inspect the mucosa where it lay for tumour.",
+        "Assess the prostate and the bladder neck, look for diverticula, foreign bodies or a retained stent.",
+        "Treat obstruction now (for example TURP or HoLEP in the same sitting if consented) or book it."
+      ],
+      "structuresAtRisk": [
+        "Bladder mucosa"
+      ],
+      "pitfalls": [
+        "Clearing the stone and missing a tumour under it."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

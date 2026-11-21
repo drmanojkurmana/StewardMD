@@ -1,0 +1,187 @@
+{
+  "id": "uro-optical-urethrotomy",
+  "title": "Optical internal urethrotomy",
+  "subtitle": "Wire across the stricture first, then cut at 12 o'clock under vision",
+  "system": "urology",
+  "aliases": [
+    "DVIU",
+    "direct vision internal urethrotomy",
+    "urethrotomy",
+    "Sachse urethrotomy",
+    "urethral stricture incision"
+  ],
+  "estMinutes": 30,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "eau-2025-urethra",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Urethral Strictures",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/urethral-strictures",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "baus-cons",
+      "org": "British Association of Urological Surgeons",
+      "title": "BAUS procedure-specific patient information and consent guidance",
+      "year": 2024,
+      "url": "https://www.baus.org.uk/patients/information_leaflets/",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "eau-2025-infect",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Urological Infections",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/urological-infections",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "A short (under about 2 cm) bulbar urethral stricture not previously treated, or a symptomatic recurrence where the patient declines urethroplasty."
+    ],
+    "contraindications": [
+      "Untreated infection.",
+      "Long, dense, penile or multiple strictures, and failure of a previous urethrotomy (urethroplasty is better)."
+    ],
+    "preparation": [
+      "Retrograde and voiding urethrogram reviewed for length and site.",
+      "Urine culture.",
+      "Consent: recurrence is common; bleeding, infection, erectile change, and self-calibration after."
+    ],
+    "positioning": [
+      "Lithotomy, legs well supported and padded."
+    ],
+    "equipment": [
+      "Urethrotome with a cold knife (Sachse), cystoscope, hydrophilic guidewire, fluoroscopy and contrast, catheters, suprapubic catheter set."
+    ],
+    "anatomy": [
+      "Bulbar urethra, membranous urethra and the external sphincter, corpus spongiosum, the corpora cavernosa above the urethra."
+    ],
+    "criticalSafety": [
+      "A guidewire passes through the stricture into the bladder before cutting.",
+      "Cut only at 12 o'clock and only scar."
+    ],
+    "structuresAtRisk": [
+      "External sphincter",
+      "Corpus spongiosum and corpora (bleeding, erectile change)",
+      "Rectum"
+    ],
+    "commonErrors": [
+      "Cutting without a wire and making a false passage.",
+      "Cutting deep into the corpus spongiosum."
+    ],
+    "complications": [
+      "Recurrence.",
+      "Bleeding, extravasation, infection.",
+      "Erectile change, incontinence (if the sphincter is cut)."
+    ],
+    "postop": [
+      "Catheter for a short time per the surgeon.",
+      "Flow rate and symptom review; self-calibration if planned.",
+      "Refer for urethroplasty after a recurrence."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.dviu-step-01", "med.surgx.dviu-clip-01"]
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.dviu-step-02", "med.surgx.dviu-clip-02"]
+    },
+    {
+      "ref": "step.uro.urine-check", "media": ["med.surgx.dviu-step-03"]
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.dviu-step-04", "med.surgx.dviu-clip-04"]
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.dviu-step-05", "med.surgx.dviu-clip-05"],
+      "emphasis": "Lithotomy with well-padded leg supports."
+    },
+    {
+      "ref": "step.uro.fluoro-setup", "media": ["med.surgx.dviu-step-06", "med.surgx.dviu-clip-06"]
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.dviu-step-07", "med.surgx.dviu-clip-07"]
+    },
+    {
+      "ref": "step.uro.cystoscopy", "media": ["med.surgx.dviu-step-08", "med.surgx.dviu-clip-08"],
+      "emphasis": "Urethroscopy to the stricture: note its site and look for a lumen."
+    },
+    {
+      "ref": "step.uro.safety-guidewire", "media": ["med.surgx.dviu-step-09", "med.surgx.dviu-clip-09"],
+      "emphasis": "Pass the wire through the stricture into the bladder and confirm it coils in the bladder on fluoroscopy."
+    },
+    {
+      "ref": "step.dviu.incise", "media": ["med.surgx.dviu-step-10", "med.surgx.dviu-clip-10"]
+    },
+    {
+      "ref": "step.dviu.false-passage", "media": ["med.surgx.dviu-step-11"]
+    },
+    {
+      "ref": "step.uro.catheter-plan", "media": ["med.surgx.dviu-step-12", "med.surgx.dviu-clip-12"],
+      "emphasis": "A catheter over the wire into the bladder; write the removal date."
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.dviu-step-13", "med.surgx.dviu-clip-13"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.dviu-step-14", "med.surgx.dviu-clip-14"],
+      "emphasis": "Record the stricture site and length, the cut, the catheter plan, and the urethroplasty discussion."
+    }
+  ],
+  "steps_local": {
+    "step.dviu.incise": {
+      "id": "step.dviu.incise",
+      "kind": "resection",
+      "critical": true,
+      "title": "Cold-knife incision at 12 o'clock",
+      "why": "Cutting the scar at 12 o'clock releases the narrowing with the least bleeding and keeps away from the rectum and the corpora at the sides.",
+      "how": [
+        "With the wire in view, place the cold knife at 12 o'clock on the stricture.",
+        "Cut the scar in short strokes until healthy spongiosum and the lumen open and the scope passes easily into the bladder.",
+        "Inspect the bladder and confirm the urethra above the stricture is normal."
+      ],
+      "structuresAtRisk": [
+        "Corpus spongiosum",
+        "External sphincter"
+      ],
+      "pitfalls": [
+        "Cutting deep into the corpus spongiosum.",
+        "Extending the cut into the sphincter."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.dviu.false-passage": {
+      "id": "step.dviu.false-passage",
+      "kind": "bailout",
+      "title": "Bailout: lost lumen or false passage",
+      "why": "A blind cut makes a false passage that turns a simple stricture into a complex one. If the lumen is lost, stop and divert urine.",
+      "how": [
+        "If the wire will not pass or the scope leaves the lumen, stop cutting.",
+        "Place a suprapubic catheter and plan imaging and a formal urethroplasty.",
+        "Record exactly what happened and where."
+      ],
+      "structuresAtRisk": [
+        "Corpus spongiosum",
+        "Rectum"
+      ],
+      "pitfalls": [
+        "Persisting with blind cuts."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

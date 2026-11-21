@@ -1967,6 +1967,156 @@
         ]
       }
     },
+    "uro-flexible-cystoscopy": {
+      base: "operative", title: "Flexible cystoscopy (and stent removal)",
+      prefill: {"procedure": "Flexible cystoscopy"},
+      extra: {
+        "Operative detail": [
+          f("scopeReason", "Reason for cystoscopy", {"type": "text", "required": true, "aiFillable": true, "ph": "Visible haematuria / surveillance / stent removal"}),
+          f("urethra", "Urethra and prostate", {"type": "text", "required": false, "aiFillable": true, "ph": "Normal; prostate occlusive / not"}),
+          f("bladderMap", "Bladder findings (including retroflexion)", {"type": "textarea", "required": true, "aiFillable": true, "ph": "Site, size, number, appearance", "rows": 3}),
+          f("stent", "Stent removed and register closed", {"type": "text", "required": false, "aiFillable": false, "ph": "Left 6 Fr removed intact; register updated"}),
+          f("plan", "Plan", {"type": "textarea", "required": false, "aiFillable": true, "ph": "TURBT, cytology, imaging, discharge", "rows": 2})
+        ]
+      }
+    },
+    "uro-transperineal-prostate-biopsy": {
+      base: "operative", title: "Transperineal prostate biopsy",
+      prefill: {"procedure": "Transperineal prostate biopsy"},
+      extra: {
+        "Operative detail": [
+          f("mri", "MRI result and targets", {"type": "text", "required": true, "aiFillable": true, "ph": "PI-RADS 4 left PZ mid; target 1"}),
+          f("targetCores", "Targeted cores per lesion", {"type": "text", "required": true, "aiFillable": false, "ph": "Target 1: 4 cores"}),
+          f("systematicCores", "Systematic cores by zone", {"type": "text", "required": true, "aiFillable": false, "ph": "12 cores, template"}),
+          f("voided", "Voided before discharge", {"type": "text", "required": false, "aiFillable": false, "ph": "Yes / catheter"})
+        ]
+      }
+    },
+    "uro-optical-urethrotomy": {
+      base: "operative", title: "Optical internal urethrotomy",
+      prefill: {"procedure": "Optical internal urethrotomy"},
+      extra: {
+        "Operative detail": [
+          f("stricture", "Stricture site and length", {"type": "text", "required": true, "aiFillable": true, "ph": "Bulbar, 1 cm"}),
+          f("wire", "Guidewire into bladder confirmed", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, fluoroscopy"}),
+          f("cut", "Urethrotomy cut", {"type": "text", "required": false, "aiFillable": true, "ph": "Cold knife 12 o'clock until scope passes"}),
+          f("catheterPlan", "Catheter and removal", {"type": "text", "required": true, "aiFillable": false, "ph": "16 Ch, remove day 3"})
+        ]
+      }
+    },
+    "uro-cystolitholapaxy": {
+      base: "operative", title: "Cystolitholapaxy (bladder stone)",
+      prefill: {"procedure": "Cystolitholapaxy"},
+      extra: {
+        "Operative detail": [
+          f("stone", "Stone size and number", {"type": "text", "required": true, "aiFillable": true, "ph": "Single 3 cm"}),
+          f("energy", "Lithotripsy method", {"type": "text", "required": false, "aiFillable": true, "ph": "Holmium laser / pneumatic"}),
+          f("clearance", "Clearance", {"type": "text", "required": true, "aiFillable": false, "ph": "Complete"}),
+          f("cause", "Cause found", {"type": "textarea", "required": false, "aiFillable": true, "ph": "BPO, diverticulum, foreign body", "rows": 2})
+        ]
+      }
+    },
+    "uro-holep": {
+      base: "operative", title: "Holmium laser enucleation of the prostate (HoLEP)",
+      prefill: {"procedure": "HoLEP"},
+      extra: {
+        "Operative detail": [
+          f("prostateVolume", "Prostate volume (preop)", {"type": "text", "required": false, "aiFillable": true, "ph": "80 ml"}),
+          f("laserSettings", "Laser settings", {"type": "text", "required": false, "aiFillable": true, "ph": "2 J, 50 Hz"}),
+          f("enucleation", "Enucleation technique", {"type": "text", "required": false, "aiFillable": true, "ph": "Three-lobe / two-lobe / en bloc"}),
+          f("morcellation", "Morcellation and bladder check", {"type": "text", "required": true, "aiFillable": true, "ph": "Complete, bladder intact"}),
+          f("catheterPlan", "Catheter and trial without catheter", {"type": "text", "required": true, "aiFillable": false, "ph": "22 Ch three-way, TWOC day 1"})
+        ]
+      }
+    },
+    "uro-vasectomy": {
+      base: "operative", title: "No-scalpel vasectomy",
+      prefill: {"procedure": "Vasectomy"},
+      extra: {
+        "Operative detail": [
+          f("technique", "Technique", {"type": "text", "required": false, "aiFillable": true, "ph": "No-scalpel, cautery with fascial interposition"}),
+          f("bothDivided", "Both vasa divided", {"type": "text", "required": true, "aiFillable": false, "ph": "Right and left confirmed"}),
+          f("segments", "Segments sent", {"type": "text", "required": false, "aiFillable": false, "ph": "Yes / no"}),
+          f("semenTest", "Semen test date and advice", {"type": "text", "required": true, "aiFillable": true, "ph": "12 weeks; contraception until clear"})
+        ]
+      }
+    },
+    "uro-pyeloplasty": {
+      base: "operative", title: "Laparoscopic or robotic pyeloplasty (Anderson-Hynes)",
+      prefill: {"procedure": "Pyeloplasty"},
+      extra: {
+        "Operative detail": [
+          f("approach", "Approach", {"type": "text", "required": false, "aiFillable": true, "ph": "Laparoscopic / robotic, transperitoneal"}),
+          f("crossingVessel", "Crossing vessel", {"type": "text", "required": false, "aiFillable": true, "ph": "Present, transposed / absent"}),
+          f("anastomosis", "Anastomosis", {"type": "textarea", "required": false, "aiFillable": true, "ph": "Dismembered, spatulated, 5-0 running", "rows": 2}),
+          f("stent", "Stent and removal date", {"type": "text", "required": true, "aiFillable": false, "ph": "4.7 Fr 24 cm, remove 6 weeks"})
+        ]
+      }
+    },
+    "uro-partial-nephrectomy": {
+      base: "operative", title: "Robotic partial nephrectomy",
+      prefill: {"procedure": "Partial nephrectomy"},
+      extra: {
+        "Operative detail": [
+          f("tumour", "Tumour (side, size, score)", {"type": "text", "required": true, "aiFillable": true, "ph": "Left 3.2 cm, RENAL 7"}),
+          f("arteries", "Arteries clamped", {"type": "text", "required": false, "aiFillable": false, "ph": "Single main artery"}),
+          f("warmIschaemia", "Warm ischaemia time", {"type": "text", "required": true, "aiFillable": false, "ph": "18 min"}),
+          f("collecting", "Collecting system", {"type": "text", "required": false, "aiFillable": true, "ph": "Opened and closed / intact"}),
+          f("margin", "Margin seen", {"type": "text", "required": false, "aiFillable": true, "ph": "Clear rim on specimen"})
+        ]
+      }
+    },
+    "uro-radical-prostatectomy": {
+      base: "operative", title: "Robotic radical prostatectomy",
+      prefill: {"procedure": "Radical prostatectomy"},
+      extra: {
+        "Operative detail": [
+          f("nerveSparing", "Nerve sparing", {"type": "text", "required": true, "aiFillable": true, "ph": "Bilateral / left / right / none"}),
+          f("nodes", "Lymph node dissection", {"type": "text", "required": false, "aiFillable": true, "ph": "Extended bilateral / none"}),
+          f("bladderNeck", "Bladder neck", {"type": "text", "required": false, "aiFillable": true, "ph": "Preserved / reconstructed"}),
+          f("leakTest", "Anastomosis leak test", {"type": "text", "required": true, "aiFillable": false, "ph": "Watertight at 150 ml"}),
+          f("catheterPlan", "Catheter and removal", {"type": "text", "required": true, "aiFillable": false, "ph": "18 Ch, remove day 7"})
+        ]
+      }
+    },
+    "uro-radical-cystectomy-ileal-conduit": {
+      base: "operative", title: "Radical cystectomy with ileal conduit",
+      prefill: {"procedure": "Radical cystectomy with ileal conduit"},
+      extra: {
+        "Operative detail": [
+          f("specimen", "Specimen removed", {"type": "text", "required": true, "aiFillable": false, "ph": "Cystoprostatectomy / anterior exenteration"}),
+          f("nodes", "Lymph node dissection", {"type": "text", "required": false, "aiFillable": true, "ph": "Standard / extended bilateral"}),
+          f("ureterMargins", "Ureteric margins", {"type": "text", "required": false, "aiFillable": false, "ph": "Sent for frozen section: clear"}),
+          f("conduit", "Conduit", {"type": "textarea", "required": false, "aiFillable": true, "ph": "15 cm ileum, 20 cm from ICV; Wallace; stoma RIF", "rows": 2}),
+          f("stents", "Ureteric stents and removal date", {"type": "text", "required": true, "aiFillable": false, "ph": "Two single-J, remove day 10"})
+        ]
+      }
+    },
+    "uro-nephroureterectomy": {
+      base: "operative", title: "Radical nephroureterectomy with bladder cuff",
+      prefill: {"procedure": "Nephroureterectomy"},
+      extra: {
+        "Operative detail": [
+          f("tumourSite", "Side and tumour site", {"type": "text", "required": true, "aiFillable": true, "ph": "Left, lower ureter"}),
+          f("ureterClipped", "Ureter clipped early", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes"}),
+          f("cuff", "Bladder cuff technique", {"type": "text", "required": false, "aiFillable": true, "ph": "Extravesical, two-layer closure"}),
+          f("specimenIntact", "Specimen intact, no morcellation", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes"}),
+          f("instillation", "Intravesical chemotherapy", {"type": "text", "required": false, "aiFillable": false, "ph": "Mitomycin 40 mg day 1 / not given (reason)"})
+        ]
+      }
+    },
+    "uro-buccal-urethroplasty": {
+      base: "operative", title: "Bulbar urethroplasty with buccal mucosa graft",
+      prefill: {"procedure": "Buccal mucosa graft urethroplasty"},
+      extra: {
+        "Operative detail": [
+          f("stricture", "Stricture site and length", {"type": "text", "required": true, "aiFillable": true, "ph": "Bulbar 4 cm"}),
+          f("graft", "Graft size and position", {"type": "text", "required": true, "aiFillable": true, "ph": "4.5 x 2 cm, dorsal onlay"}),
+          f("donorSite", "Donor site", {"type": "text", "required": false, "aiFillable": true, "ph": "Right cheek, closed / left open"}),
+          f("catheterPlan", "Catheter and urethrogram date", {"type": "text", "required": true, "aiFillable": false, "ph": "16 Ch silicone, urethrogram 3 weeks"})
+        ]
+      }
+    },
     /* ── end specialty templates ── */
   };
 
