@@ -26,9 +26,9 @@ const SPEC_IDS = (manifest.specialties || []).map((s) => s.id);
 // The specialties the audit named. Removing one is a product decision, so it fails here.
 const MUST_HAVE_PROTOCOLS = ["general", "trauma", "periop", "ent", "urology", "neurosurgery", "orthopaedics",
   "plastics", "vascular", "cardiothoracic", "paediatric", "obgyn", "ophthalmology", "oncology", "breast", "endocrine"];
-// Ophthalmology here is the on-call non-ophthalmologist's emergencies; peri-operative care is not
+// Ophthalmology covers the on-call eye emergencies and, since 2026-11-21, eye operations; peri-operative care is not
 // an operation; breast and oncology share the cancer operations below.
-const MUST_HAVE_PROCEDURES = ["general", "ent", "urology", "neurosurgery", "orthopaedics", "plastics", "vascular",
+const MUST_HAVE_PROCEDURES = ["general", "ent", "urology", "neurosurgery", "orthopaedics", "plastics", "vascular", "ophthalmology",
   "cardiothoracic", "paediatric", "obgyn", "endocrine"];
 
 test("manifest declares its specialties, each with an id and a title, no duplicates", () => {

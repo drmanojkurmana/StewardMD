@@ -40,6 +40,25 @@
     });
   }
   function attr(s) { return esc(s).replace(/\s/g, " "); }
+  // Step text gets the Knowledge Library's high-yield bolding (reasoning.js medFormat, which escapes; plain esc() if it is
+  // not loaded), then the surgical points its medical rules miss: measurements, safety gates, a capital NOT.
+  var SGX_BOLD = new RegExp([
+    "\\b\\d+(?:[.,]\\d+)?(?:\\s*(?:to|-|\\u2013)\\s*\\d+(?:[.,]\\d+)?)?\\s*(?:mm|cm|mmHg|cmH2O|degrees?|\\u00b0|hours?|minutes?|mins?|mL|ml)\\b",
+    "\\bwithin the (?:first )?hour\\b", "\\bunder (?:direct )?vision\\b",
+    "\\bbefore (?:the )?(?:incision|induction|knife|draping|diathermy|closure|entry|tilting|every tilt|touching the target|applying anything|dividing anything|clipping|cutting|the patient (?:is asleep|leaves theatre))\\b",
+    "\\baloud\\b", "\\bnever events?\\b", "\\b(?:stops?|halts?) the (?:closure|operation)\\b", "\\bany discrepancy\\b", "\\btwo[- ]person\\b",
+    "\\b(?:convert(?:ing)? to (?:open|laparotomy)|call(?:ing)? for (?:senior )?help|senior help|stop and)\\b", "\\bcritical view of safety\\b"
+  ].join("|"), "gi");
+  function rich(s) {
+    var f = window.SMD_MEDFORMAT, h;
+    try { h = typeof f === "function" ? f(s) : esc(s); } catch (e) { h = esc(s); }
+    var depth = 0;   // only text outside an existing highlight span, never inside a tag
+    return h.split(/(<[^>]+>)/).map(function (part) {
+      if (part.charAt(0) === "<") { if (/^<span\b/.test(part)) depth++; else if (/^<\/span>/.test(part) && depth) depth--; return part; }
+      if (depth) return part;
+      return part.replace(SGX_BOLD, '<span class="md-key">$&</span>').replace(/\bNOT\b/g, '<span class="md-key">NOT</span>');
+    }).join("");
+  }
   // Privacy mode (privacy-mode.js): wrap a patient identifier so it can be masked on screen; plain esc() without it.
   function phi(kind, v, html) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
   function phiIn(kind, text, v) { var P = window.SMD_PRIVACY_MODE; return P && v ? P.wrapIn(kind, text, v) : esc(text); }
@@ -670,8 +689,8 @@
   function renderStep(s, registry) {
     var h = '<div class="sgx-step' + (s.critical ? " crit" : "") + '"><div class="n">' + s.n + "</div><div class=\"b\">" +
       '<div class="t">' + esc(s.title) + (s.critical ? " " + ic("priority_high") : "") + "</div>" +
-      '<div class="w">' + esc(s.why) + "</div>";
-    if (s.how.length) h += "<ul>" + s.how.map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>";
+      '<div class="w">' + rich(s.why) + "</div>";
+    if (s.how.length) h += "<ul>" + s.how.map(function (l) { return "<li>" + rich(l) + "</li>"; }).join("") + "</ul>";
     if (s.emphasis) h += '<div class="w" style="margin-top:7px;font-weight:600">' + esc(s.emphasis) + "</div>";
     if (s.structuresAtRisk.length) h += '<div class="risk">' + ic("warning") + " At risk: " + esc(s.structuresAtRisk.join(" · ")) + "</div>";
     if (s.pitfalls.length) h += '<div class="pit">' + ic("error") + " " + esc(s.pitfalls.join(" · ")) + "</div>";

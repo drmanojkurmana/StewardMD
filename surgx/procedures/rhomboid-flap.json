@@ -1,0 +1,282 @@
+{
+  "id": "rhomboid-flap",
+  "title": "Rhomboid (Limberg) transposition flap",
+  "subtitle": "Excision of a skin lesion and closure with a local transposition flap",
+  "system": "skin and soft tissue",
+  "aliases": [
+    "Limberg flap",
+    "rhombic flap",
+    "rhomboid flap",
+    "local transposition flap"
+  ],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "baker-flaps",
+      "org": "Baker SR (ed). Elsevier",
+      "title": "Local Flaps in Facial Reconstruction, 3rd edition",
+      "year": 2014,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Baker+local+flaps+in+facial+reconstruction+rhombic+flap",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "A skin defect after excision of a lesion (often a skin cancer) that cannot be closed directly without distortion or tension, in an area with adjacent lax skin.",
+      "Pilonidal sinus excision closed off the midline with a Limberg flap (a separate indication)."
+    ],
+    "contraindications": [
+      "Uncertain margins for a malignant lesion: confirm clearance before moving tissue (or delay reconstruction).",
+      "Poor local skin quality (radiotherapy, scarring), heavy smoking without counselling, uncontrolled infection."
+    ],
+    "preparation": [
+      "Plan the excision margin by the lesion's diagnosis; photograph and mark.",
+      "Identify the relaxed skin tension lines and the lines of maximum extensibility, and choose which of the four possible flaps closes best.",
+      "Consent: flap necrosis, infection, bleeding, a scar longer than the lesion, distortion, and further surgery if margins are involved."
+    ],
+    "positioning": [
+      "Positioned for the site, the area flat and accessible, the surrounding skin visible."
+    ],
+    "equipment": [
+      "Marking pen and ruler, scalpel, skin hooks, fine scissors, bipolar, absorbable deep dermal and fine skin sutures, local anaesthetic with adrenaline."
+    ],
+    "anatomy": [
+      "Skin and subcutaneous fat; the subdermal plexus that perfuses a random-pattern flap through its base; the relaxed skin tension lines and nearby free margins (eyelid, lip, nostril) that must not be pulled."
+    ],
+    "criticalSafety": [
+      "Clear margins before reconstruction for cancers.",
+      "Keep the flap base broad and handle the tip with hooks, not forceps.",
+      "Close the donor site first, so the flap moves without tension."
+    ],
+    "structuresAtRisk": [
+      "Flap tip (blood supply)",
+      "Free margins (eyelid, lip, nasal ala)",
+      "Local nerves (e.g. facial nerve branches on the face)"
+    ],
+    "commonErrors": [
+      "Designing the flap with the wrong orientation, so closure pulls a free margin.",
+      "Undermining in the wrong plane.",
+      "Crushing the flap tip."
+    ],
+    "complications": [
+      "Flap tip necrosis.",
+      "Haematoma, infection.",
+      "Incomplete excision needing re-excision.",
+      "Trapdoor or pincushion deformity, visible scar."
+    ],
+    "postop": [
+      "Light dressing, elevation, avoid pressure on the flap.",
+      "Check for haematoma at 24 to 48 hours if at risk; remove sutures per site.",
+      "Follow up the histology and margins."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Mark the lesion and the planned flap; photograph."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Area flat and accessible, surrounding skin visible."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.flap.plan"
+    },
+    {
+      "ref": "step.flap.local"
+    },
+    {
+      "ref": "step.flap.excise"
+    },
+    {
+      "ref": "step.onco.specimen-orientation",
+      "emphasis": "Orientate the specimen with a stitch (for example long superior) for margin reporting."
+    },
+    {
+      "ref": "step.flap.raise"
+    },
+    {
+      "ref": "step.flap.transpose"
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "Bipolar only on the bed; avoid cautery on the flap edges."
+    },
+    {
+      "ref": "step.flap.inset"
+    },
+    {
+      "ref": "step.flap.compromise"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.skin-closure",
+      "emphasis": "A light, non-compressive dressing over the flap."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.flap.plan": {
+      "id": "step.flap.plan",
+      "kind": "prep",
+      "critical": true,
+      "title": "Planning the rhombus and the flap",
+      "why": "A rhomboid flap works only if it borrows skin from where it is lax. Of the four possible flaps, the right one closes along the lines of maximum extensibility and does not pull a free margin.",
+      "how": [
+        "Mark the defect as a rhombus with angles of 60 and 120 degrees, with the short diagonal along the line of maximal extensibility.",
+        "Extend the short diagonal by one side length, then draw a line parallel to an adjacent side of the same length: this is the flap.",
+        "Of the four options, choose the one whose donor closure lies in lax skin and in or near a skin crease."
+      ],
+      "structuresAtRisk": [
+        "Free margins"
+      ],
+      "pitfalls": [
+        "Choosing the flap by habit rather than by laxity."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.flap.local": {
+      "id": "step.flap.local",
+      "kind": "prep",
+      "title": "Local anaesthetic with adrenaline",
+      "why": "Infiltration with adrenaline gives anaesthesia and a drier field; waiting for the vasoconstriction makes the dissection easier.",
+      "how": [
+        "Infiltrate the lesion and the whole flap territory in the subcutaneous plane, calculating the maximum safe dose.",
+        "Wait several minutes before incising."
+      ],
+      "structuresAtRisk": [
+        "Flap perfusion (excess adrenaline at the tip in fragile skin)"
+      ],
+      "pitfalls": [
+        "Exceeding the maximum dose for the weight."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.flap.excise": {
+      "id": "step.flap.excise",
+      "kind": "resection",
+      "title": "Excising the lesion as a rhombus",
+      "why": "The excision follows the marked rhombus and the oncological margin; it is checked before any flap is raised.",
+      "how": [
+        "Incise along the rhombus to the planned depth (into subcutaneous fat or deeper as the lesion requires).",
+        "Remove the specimen in one piece and orientate it.",
+        "If the margins are uncertain for a cancer, consider delaying the flap until histology confirms clearance."
+      ],
+      "structuresAtRisk": [
+        "Underlying structures at the site"
+      ],
+      "pitfalls": [
+        "A shallow excision under a deep lesion."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.flap.raise": {
+      "id": "step.flap.raise",
+      "kind": "dissection",
+      "title": "Raising the flap",
+      "why": "A random-pattern flap lives on the subdermal plexus at its base; raising it in the right plane keeps that intact.",
+      "how": [
+        "Incise the flap lines and raise it in the subcutaneous plane with a little fat under the dermis.",
+        "Undermine around the defect and the donor site in the same plane to let the tissues move.",
+        "Handle the flap with skin hooks only."
+      ],
+      "structuresAtRisk": [
+        "Subdermal plexus",
+        "Local nerves"
+      ],
+      "pitfalls": [
+        "Raising it too thin, cutting the plexus.",
+        "Crushing the tip with forceps."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.flap.transpose": {
+      "id": "step.flap.transpose",
+      "kind": "reconstruction",
+      "title": "Transposing the flap and closing the donor site",
+      "why": "The key stitch closes the donor site first; once that is closed, the flap should fall into the defect with little tension.",
+      "how": [
+        "Place the first (key) suture to close the donor site at the point of greatest tension.",
+        "Rotate and transpose the flap into the defect.",
+        "Check that no free margin is pulled."
+      ],
+      "structuresAtRisk": [
+        "Free margins"
+      ],
+      "pitfalls": [
+        "Forcing the flap in before the donor site is closed."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.flap.inset": {
+      "id": "step.flap.inset",
+      "kind": "closure",
+      "title": "Insetting the flap",
+      "why": "Deep dermal sutures take the tension so the skin sutures only align the edges; this gives the best scar and protects the flap tip.",
+      "how": [
+        "Place interrupted buried deep dermal absorbable sutures, starting with the corners.",
+        "Close the skin with fine interrupted or running sutures; a half-buried corner stitch for the flap tip.",
+        "Deal with any dog-ear by excision along a skin line."
+      ],
+      "structuresAtRisk": [
+        "Flap tip"
+      ],
+      "pitfalls": [
+        "Skin sutures taking the tension.",
+        "A tight tip stitch strangling it."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.flap.compromise": {
+      "id": "step.flap.compromise",
+      "kind": "bailout",
+      "title": "Bailout: a pale or congested flap",
+      "why": "A flap that is white or blue at the end of surgery is under tension or kinked. Releasing it on the table can still save it.",
+      "how": [
+        "Check the colour and capillary refill of the flap tip.",
+        "If it is pale, remove sutures under tension and check the base is not kinked; if congested, look for a haematoma.",
+        "Leave part of the defect to heal secondarily or graft it rather than close under tension; record the decision."
+      ],
+      "structuresAtRisk": [
+        "Flap"
+      ],
+      "pitfalls": [
+        "Leaving a blanched flap closed under tension."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

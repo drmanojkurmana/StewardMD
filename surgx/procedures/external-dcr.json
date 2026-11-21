@@ -1,0 +1,268 @@
+{
+  "id": "external-dcr",
+  "title": "External dacryocystorhinostomy",
+  "subtitle": "Bony ostium, sac and nasal mucosal flaps, with or without silicone intubation",
+  "system": "ophthalmic",
+  "aliases": [
+    "DCR",
+    "external DCR",
+    "dacryocystorhinostomy",
+    "lacrimal bypass"
+  ],
+  "estMinutes": 75,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "tarbet-1995",
+      "org": "Tarbet KJ, Custer PL. Ophthalmology 102:1065",
+      "title": "External dacryocystorhinostomy: surgical success, patient satisfaction, and economic cost",
+      "year": 1995,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=External+dacryocystorhinostomy%3A+surgical+success%2C+patient+satisfaction%2C+and+economic+cost",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Nasolacrimal duct obstruction with epiphora or recurrent dacryocystitis.",
+      "A lacrimal sac mucocele.",
+      "Before intraocular surgery in a patient with chronic dacryocystitis."
+    ],
+    "contraindications": [
+      "Acute dacryocystitis with abscess (treat first, often by drainage and antibiotics).",
+      "Suspected lacrimal sac tumour (bloody discharge, mass above the medial canthal tendon): biopsy, imaging and a different plan."
+    ],
+    "preparation": [
+      "Syringing and probing confirm the level of obstruction; nasal endoscopy for septal deviation or other disease.",
+      "Stop or bridge anticoagulants per plan; the field is vascular.",
+      "Consent: failure, bleeding including from the nose, a visible scar, infection, tube problems, and rarely cerebrospinal fluid leak."
+    ],
+    "positioning": [
+      "Supine, head up 15 to 20 degrees, head on a ring; the nose packed with a vasoconstrictor."
+    ],
+    "equipment": [
+      "Bowman probes, punctal dilator, Rollet rougine, bone punches (Kerrison), nasal speculum, bipolar diathermy, silicone tubes, 6-0 absorbable suture for flaps, nasal packs with vasoconstrictor."
+    ],
+    "anatomy": [
+      "The medial canthal tendon, angular vein, lacrimal sac in the fossa between the anterior and posterior lacrimal crests, the thin lamina papyracea, the nasal mucosa over the middle meatus, and the cribriform plate above."
+    ],
+    "criticalSafety": [
+      "Stay below the medial canthal tendon and the frontoethmoidal suture: the cribriform plate is above.",
+      "Avoid the angular vein in the incision.",
+      "Count the nasal packs in and out."
+    ],
+    "structuresAtRisk": [
+      "Angular vein",
+      "Medial canthal tendon",
+      "Cribriform plate",
+      "Canaliculi"
+    ],
+    "commonErrors": [
+      "An ostium too small or placed too high.",
+      "Damaging the common canaliculus.",
+      "Forgetting a nasal pack."
+    ],
+    "complications": [
+      "Haemorrhage (early or delayed nasal bleed).",
+      "Failure from ostium closure or canalicular stenosis.",
+      "Wound infection, visible scar.",
+      "Tube prolapse or erosion; rarely cerebrospinal fluid leak."
+    ],
+    "postop": [
+      "Head up, no nose blowing for a week; antibiotic and nasal decongestant drops per protocol.",
+      "Remove sutures and tubes at the planned time.",
+      "Same-day return for heavy bleeding or swelling."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Mark the side; bilateral disease is common."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis",
+      "emphasis": "Antibiotic prophylaxis per local policy, especially with a history of dacryocystitis."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine, head up 15 to 20 degrees on a head ring."
+    },
+    {
+      "ref": "step.ent.bloodless-field",
+      "emphasis": "Pack the nose with vasoconstrictor on the operative side; infiltrate the incision with local anaesthetic and adrenaline."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.dcr.incision"
+    },
+    {
+      "ref": "step.dcr.sac"
+    },
+    {
+      "ref": "step.dcr.ostium"
+    },
+    {
+      "ref": "step.dcr.flaps"
+    },
+    {
+      "ref": "step.dcr.tubes"
+    },
+    {
+      "ref": "step.dcr.bailout"
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.core.counts",
+      "emphasis": "Count every nasal pack out as well as swabs and needles."
+    },
+    {
+      "ref": "step.core.skin-closure",
+      "emphasis": "Close orbicularis and skin carefully; this scar is on the face."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.dcr.incision": {
+      "id": "step.dcr.incision",
+      "kind": "access",
+      "title": "Skin incision and exposure of the anterior lacrimal crest",
+      "why": "The incision gives access to the lacrimal fossa while avoiding the angular vein and keeping a good scar.",
+      "how": [
+        "Make a straight or gently curved incision about 10 mm medial to the medial canthus, starting at the level of the tendon and running down for 10 to 15 mm.",
+        "Spread orbicularis bluntly, retract the angular vein laterally or medially, and expose the anterior lacrimal crest.",
+        "Incise the periosteum along the crest."
+      ],
+      "structuresAtRisk": [
+        "Angular vein",
+        "Medial canthal tendon"
+      ],
+      "pitfalls": [
+        "Cutting the angular vein.",
+        "An incision too high or onto the nasal dorsum."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.dcr.sac": {
+      "id": "step.dcr.sac",
+      "kind": "dissection",
+      "title": "Reflecting periosteum and the lacrimal sac",
+      "why": "The sac is lifted out of its fossa so the bone behind can be removed without opening the sac prematurely.",
+      "how": [
+        "Elevate the periosteum and the sac laterally out of the lacrimal fossa with a rougine, back to the posterior lacrimal crest.",
+        "Identify the sac and confirm it with a probe through the canaliculus."
+      ],
+      "structuresAtRisk": [
+        "Lacrimal sac",
+        "Lamina papyracea"
+      ],
+      "pitfalls": [
+        "Tearing the sac during elevation."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.dcr.ostium": {
+      "id": "step.dcr.ostium",
+      "kind": "resection",
+      "critical": true,
+      "title": "Creating the bony ostium",
+      "why": "The ostium is the new drainage route into the nose: it needs to be large (about 15 by 15 mm) and low enough, without going up into the skull base.",
+      "how": [
+        "Break into the thin lacrimal bone and enlarge the opening with bone punches.",
+        "Extend it to about 15 mm, including the anterior lacrimal crest, keeping below the level of the medial canthal tendon.",
+        "Protect the nasal mucosa as the bone is removed."
+      ],
+      "structuresAtRisk": [
+        "Cribriform plate (going too high)",
+        "Nasal mucosa"
+      ],
+      "pitfalls": [
+        "An ostium too small to stay open.",
+        "Removing bone above the frontoethmoidal suture."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.dcr.flaps": {
+      "id": "step.dcr.flaps",
+      "kind": "reconstruction",
+      "title": "Sac and nasal mucosal flaps",
+      "why": "Joining the sac lining to the nasal mucosa as a mucosa-lined channel is what keeps the ostium open.",
+      "how": [
+        "Open the sac with an H-shaped or U-shaped incision guided by a probe, and the nasal mucosa in the same way.",
+        "Suture the posterior flaps together (if feasible), then the anterior flaps, with fine absorbable sutures.",
+        "Check the common canalicular opening is clear."
+      ],
+      "structuresAtRisk": [
+        "Common canaliculus",
+        "Nasal mucosa"
+      ],
+      "pitfalls": [
+        "Flaps under tension.",
+        "A sac opening that misses the canalicular opening."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.dcr.tubes": {
+      "id": "step.dcr.tubes",
+      "kind": "reconstruction",
+      "title": "Silicone intubation (when used)",
+      "why": "Tubes support the canalicular system and the ostium in canalicular disease or a small sac; they are not needed in every case.",
+      "how": [
+        "Pass the probes of the silicone tube through the upper and lower canaliculi into the ostium and out through the nose.",
+        "Tie or clip the ends in the nose loosely, so they do not cheese-wire the punctum.",
+        "Record the planned removal date."
+      ],
+      "structuresAtRisk": [
+        "Canaliculi and punctum"
+      ],
+      "pitfalls": [
+        "Tubes tied too tight.",
+        "No removal plan."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.dcr.bailout": {
+      "id": "step.dcr.bailout",
+      "kind": "bailout",
+      "title": "Bailout: an unexpected sac finding or bleeding that will not stop",
+      "why": "A stone, a tumour or uncontrolled bleeding changes the operation. Taking a biopsy and stopping is safer than completing a DCR over a tumour.",
+      "how": [
+        "If the sac contains a mass or looks abnormal, take a biopsy and send it; do not complete the drainage until the histology is known.",
+        "For heavy bleeding, pack, raise the head, ask the anaesthetist about blood pressure, use bone wax or bipolar, and repack the nose.",
+        "For a cerebrospinal fluid leak (clear fluid from above), stop, repair or pack, and involve ENT or neurosurgery."
+      ],
+      "structuresAtRisk": [
+        "Lacrimal sac",
+        "Cribriform plate"
+      ],
+      "pitfalls": [
+        "Completing the anastomosis over an unrecognised tumour."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}
