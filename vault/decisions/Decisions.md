@@ -12527,3 +12527,16 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
   no menu-swipe, also on the Settings pages; Back buttons and Android's system back keep working.
 - Guard: `test/run-swipe-guard-ui.mjs`. `test/run-swipe-back-ui.mjs` has 5 checks failing on main before this change
   (it cannot open KardiQ, the later home checks follow from it).
+
+## 2026-11-21 - MaiK offline book: oncology notes behind a switch (smd_maik_kb_onco)
+- **Owner**: "1,2 yes and upload" (add the cancer notes to the on-device book; check embeddings).
+- **Decision**: a second published book, `maik-lite-kb-onco1.jsonl` on `models.stewardmd.in/maik/`
+  (55,385 rows = the original 42,176 + 13,209 oncology study notes rewritten in original wording from
+  a cancer textbook; 44,952,641 bytes; sha256 9de2045d...). `kb/ai/maik-lite-kb-store.js` picks it only
+  when `smd_maik_kb_onco` is "1"; anything else is the original book, byte for byte. OFF by default.
+- **Why**: on 390 held-out cancer questions the key facts found in the top 3 passages rose from 26.6%
+  to 42.7% (keyword search). The 54-case general bench is unchanged (real router 85.4% either book).
+- **Embeddings measured, not shipped**: BGE-small hybrid added ~1 point on the general bench (85.4 ->
+  86.0) and ~5 on cancer (42.7 -> 49.8); BGE-base and MedEmbed-small did no better. Next step is only a
+  check that the app's llama.cpp build can run BGE-small embeddings on the phone.
+- **Copyright**: notes are rewritten facts, not copied text; the owner made the call.
