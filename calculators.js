@@ -8822,16 +8822,23 @@
     try { if (window.SMD_KU) SMD_KU.emit("calc", c.id); } catch(e){}
     var sc=scaleFor(c, out);
     var verdict=stripTags(out.i||"");
-    var first=verdict.split(".")[0]||"";
-    var rest=verdict.slice(first.length).replace(/^\.\s*/,"");
-    var h='<div class="mc-score-top"><span class="mc-score-lbl">Total</span><span class="mc-score-num">'+esc(out.v)+(sc?' <small>/ '+esc(sc.max)+'</small>':(out.u?' <small>'+esc(out.u)+'</small>':""))+'</span></div>';
+    // The band word is the calculator's own bold lead (<b>Admit</b>); otherwise the first sentence.
+    var bm=/^\s*<b>([^<]{1,60})<\/b>/.exec(String(out.i||""));
+    var first=bm?bm[1]:(verdict.split(".")[0]||"");
+    var rest=bm?stripTags(String(out.i).slice(bm[0].length)):verdict.slice(first.length).replace(/^\.\s*/,"");
+    // Colour only where the calculator's own cut-off says which side the value is on; never guessed.
+    var band=(sc&&sc.cuts.length)?(sc.val>sc.cuts[0]?"mc-band-hi":"mc-band-lo"):"";
+    card.classList.remove("mc-band-hi","mc-band-lo"); if(band) card.classList.add(band);
+    var h='<div class="mc-score-top"><span class="mc-score-lbl">Total</span><span class="mc-score-num"><b>'+esc(out.v)+'</b>'+(sc?'<small>/ '+esc(sc.max)+'</small>':(out.u?'<small>'+esc(out.u)+'</small>':""))+'</span></div>';
     if(sc && sc.cuts.length){
       var pct=Math.max(0,Math.min(100,((sc.val-sc.min)/(sc.max-sc.min))*100));
       var cutPct=((sc.cuts[0]-sc.min)/(sc.max-sc.min))*100;
       h+='<div class="mc-scale" aria-hidden="true"><span class="mc-scale-lo" style="width:'+cutPct+'%"></span><span class="mc-scale-hi" style="left:'+cutPct+'%;width:'+(100-cutPct)+'%"></span><span class="mc-scale-mark" style="left:'+pct+'%"></span></div>';
       h+='<div class="mc-scale-lab"><span>'+esc(sc.min)+'</span><span>'+esc(sc.cuts[0])+' cut-off</span><span>'+esc(sc.max)+'</span></div>';
     }
-    h+='<div class="mc-score-verdict"><b>'+esc(first)+'</b>'+(rest?esc(". "+rest):"")+'</div>';
+    rest=rest.replace(/^[\s.:]+/,"");
+    var fw=first.replace(/[.\s]+$/,"");
+    h+='<div class="mc-score-verdict">'+(/^\(/.test(rest)?'<b>'+esc(fw)+'</b> '+esc(rest):'<b>'+esc(fw)+'.</b>'+(rest?' '+esc(rest):""))+'</div>';
     main.innerHTML=h;
     var v=readValuesSafe(c);
     det.innerHTML=breakdownHTML(c, v, out)+   // the verdict line above already carries the full interpretation
@@ -8906,7 +8913,7 @@
         (c.ref?'<div class="mc-ref">'+mcIco("book")+' <b>Reference:</b> '+esc(c.ref)+'</div>':"")+
         (c.srcHtml||"")+
       '</div>'+
-      '<div class="mc-score" id="mcScore_'+id+'" aria-live="polite"><button type="button" class="mc-score-bar" id="mcScoreBar_'+id+'" aria-expanded="false"><span class="mc-score-grab"></span><span class="mc-score-main"></span></button><div class="mc-score-detail" hidden></div></div>';
+      '<div class="mc-score" id="mcScore_'+id+'" aria-live="polite"><button type="button" class="mc-score-bar" id="mcScoreBar_'+id+'" aria-expanded="false"><span class="mc-score-main"></span></button><div class="mc-score-detail" hidden></div></div>';
     function run(fromBtn){
       var vals=readValuesSafe(c);
       var out; try { out=c.compute(vals); } catch(e){ out={err:"Could not compute. Check the inputs."}; }
@@ -9320,16 +9327,17 @@
       Q+" .mc-cv-title{padding:4px 16px 0!important}",
       Q+" .mc-cv-title h2{font:800 23px/1.2 var(--a-font)!important;color:var(--a-ink)!important;letter-spacing:-.01em}",
       Q+" .mc-cv-title p{font:500 14px/1.4 var(--a-font)!important;color:var(--a-mut)!important;white-space:normal!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:6px!important}",
-      Q+" .mc-action-row{display:flex!important;flex-direction:column-reverse!important;align-items:stretch!important;padding:14px 16px 0!important;gap:4px!important}",
-      Q+" .mc-fill-link{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0;margin-left:-2px;background:none;border:none;color:var(--a-acc);font:600 14.5px var(--a-font);cursor:pointer}",
+      Q+" .mc-action-row{display:grid!important;grid-template-columns:1fr 1fr!important;align-items:stretch!important;padding:14px 16px 0!important;gap:8px!important}",
+      Q+" .mc-fill-link{display:flex;align-items:center;justify-content:flex-start;gap:10px;min-height:50px;padding:0 12px;border:1px solid var(--a-line);border-radius:12px;background:var(--a-card);color:var(--a-ink);font:600 15px var(--a-font);letter-spacing:-.005em;text-align:left;cursor:pointer;min-width:0}",
       Q+" .mc-fill-link svg,"+Q+" .mc-copy-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}",
       Q+" .mc-fill-link:active,"+Q+" .mc-copy-btn:active{opacity:.6}",
       Q+" .mc-maik-btn{display:flex;align-items:center;justify-content:flex-start;gap:12px;width:100%;min-height:50px;padding:0 18px 0 10px;border:1px solid var(--a-line);border-radius:12px;background:var(--a-card);color:var(--a-ink);font:600 15px var(--a-font);letter-spacing:-.005em;text-align:left;cursor:pointer;transition:transform .12s ease,background-color .12s ease}",
-      Q+" .mc-maik-av{width:32px;height:32px;border-radius:10px;overflow:hidden;flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:transparent}",
-      Q+" .mc-maik-av svg,"+Q+" .mc-maik-av img{width:32px;height:32px;display:block}",
+      Q+" .mc-maik-av{width:32px;height:32px;border-radius:50%;overflow:hidden;flex:0 0 auto;display:block;background:none}",
+      Q+" .mc-maik-av svg,"+Q+" .mc-maik-av img{width:100%!important;height:100%!important;display:block}",
       Q+" .mc-maik-btn:active{transform:translateY(1px);background:color-mix(in srgb,var(--a-ink) 4%,var(--a-card))}",
       Q+" .mc-maik-btn:focus-visible{outline:2px solid var(--a-acc);outline-offset:2px}",
-      Q+" .mc-fill-link{align-self:flex-start}",
+      Q+" .mc-fill-link svg{width:32px!important;height:32px!important;padding:7px;border-radius:10px;background:var(--a-soft);color:var(--a-acc);box-sizing:border-box}",
+      Q+" .mc-maik-btn{gap:10px!important;padding:0 12px 0 9px!important;min-width:0}",
       "@media(prefers-reduced-motion:reduce){"+Q+" .mc-maik-btn{transition:none}}",
       Q+" .mc-score-actions{display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin-top:6px}",
       Q+" .mc-copy-btn{display:inline-flex!important;align-items:center;gap:6px;min-height:44px!important;margin:0!important;padding:0!important;border:none!important;background:none!important;color:var(--a-acc)!important;font:600 14.5px var(--a-font)!important}",
@@ -9353,6 +9361,27 @@
       Q+" .mc-reset-btn{color:var(--a-mut)!important;font:600 14px var(--a-font)!important}",
       Q+" .mc-score-todo,"+Q+" .mc-score-bar,"+Q+" .mc-score-num,"+Q+" .mc-score-verdict,"+Q+" .mc-bd-row{color:var(--a-ink)!important}",
       Q+" .mc-score-grab{background:var(--a-line)!important}",
+      /* Score card: variant C exactly (owner 2026-11-21). Flat full-width panel, mono figures, band-coloured total and verdict word. */
+      Q+" .mc-score{left:0!important;right:0!important;bottom:0!important;border-radius:0!important;border:none!important;border-top:1px solid var(--a-line)!important;box-shadow:none!important;background:var(--a-card)!important;--a-hi:#B4231C;--a-lo:#0F766E}",
+      Q.replace("html body ","html body.dark ")+" .mc-score,"+Q.replace("html body ","html body.v3-dark ")+" .mc-score{--a-hi:#F08A7E;--a-lo:#6FD1BC}",
+      Q+" .mc-score-bar{padding:18px 20px calc(16px + env(safe-area-inset-bottom))!important}",
+      Q+" .mc-score-grab{display:none!important}",
+      Q+" .mc-score-top{display:flex!important;align-items:baseline!important;justify-content:space-between!important}",
+      Q+" .mc-score-lbl{font:700 13px var(--a-font)!important;letter-spacing:.1em!important;text-transform:uppercase;color:var(--a-mut)!important}",
+      Q+" .mc-score-num{display:flex;align-items:baseline;gap:14px;font-family:ui-monospace,'SF Mono','JetBrains Mono',Menlo,monospace!important;color:var(--a-ink)!important}",
+      Q+" .mc-score-num b{font-size:38px;font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--a-ink)}",
+      Q+" .mc-score-num small{font-size:16px!important;font-weight:700!important;color:var(--a-mut)!important}",
+      Q+".mc-band-hi .mc-score-num b,"+Q+" .mc-band-hi .mc-score-num b,"+Q+" .mc-band-hi .mc-score-verdict b{color:var(--a-hi)!important}",
+      Q+" .mc-band-lo .mc-score-num b,"+Q+" .mc-band-lo .mc-score-verdict b{color:var(--a-lo)!important}",
+      Q+" .mc-scale{height:10px!important;border-radius:5px!important;margin:16px 0 6px!important;overflow:visible!important;background:var(--a-hi)!important}",
+      Q+" .mc-scale-lo{background:var(--a-lo)!important;border-radius:5px 0 0 5px}",
+      Q+" .mc-scale-hi{background:var(--a-hi)!important;opacity:.85;border-radius:0 5px 5px 0}",
+      Q+" .mc-scale-mark{top:-5px!important;width:4px!important;height:20px!important;border-radius:2px!important;background:var(--a-card)!important;box-shadow:0 0 0 1px var(--a-mut)!important;transform:translateX(-2px)!important}",
+      Q+" .mc-scale-lab{font:600 13px ui-monospace,'SF Mono',Menlo,monospace!important;color:var(--a-mut)!important}",
+      Q+" .mc-score-verdict{margin-top:12px!important;font:500 15.5px/1.45 var(--a-font)!important;color:var(--a-ink)!important}",
+      Q+" .mc-score-verdict b{font-weight:800}",
+      Q+" .mc-score-todo{font:700 16px var(--a-font)!important}",
+      Q+" .mc-score-detail{padding:0 20px 16px!important}",
       "body.dark "+Q+",body.dark "+Q+" .mc-body,body.dark "+Q+" #mcList,body.v3-dark "+Q+",body.v3-dark "+Q+" .mc-body,body.v3-dark "+Q+" #mcList,"+"body.dark "+Q+" .mc-top,body.dark "+Q+" .mc-pin,body.v3-dark "+Q+" .mc-top,body.v3-dark "+Q+" .mc-pin{background:#071318!important}"
     ].join("");
   }
