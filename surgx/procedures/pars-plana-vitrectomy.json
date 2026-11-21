@@ -1,0 +1,232 @@
+{
+  "id": "pars-plana-vitrectomy",
+  "title": "Pars plana vitrectomy for retinal detachment",
+  "subtitle": "Small-gauge ports, vitrectomy, retinal reattachment, laser and tamponade",
+  "system": "ophthalmic",
+  "aliases": [
+    "PPV",
+    "vitrectomy",
+    "vitreoretinal surgery",
+    "retinal detachment repair"
+  ],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "aao-rd",
+      "org": "American Academy of Ophthalmology",
+      "title": "Posterior Vitreous Detachment, Retinal Breaks, and Lattice Degeneration Preferred Practice Pattern",
+      "year": 2019,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Posterior+Vitreous+Detachment+Retinal+Breaks+Lattice+Degeneration+Preferred+Practice+Pattern",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "heimann-2007",
+      "org": "Heimann H et al. Ophthalmology 114:2142",
+      "title": "Scleral buckling versus primary vitrectomy in rhegmatogenous retinal detachment: a prospective randomized multicenter clinical study",
+      "year": 2007,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Scleral+buckling+versus+primary+vitrectomy+in+rhegmatogenous+retinal+detachment%3A+a+prospective+randomized+multicenter+clinical+study",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Rhegmatogenous retinal detachment (particularly pseudophakic, with posterior breaks, or vitreous haemorrhage).",
+      "Non-clearing vitreous haemorrhage, macular hole, epiretinal membrane, endophthalmitis and other indications per specialist practice."
+    ],
+    "contraindications": [
+      "Operator or unit without vitreoretinal expertise: this is a specialist operation, included here for awareness and for the trainee who assists."
+    ],
+    "preparation": [
+      "Document macula on or off, the breaks and extent; plan tamponade.",
+      "Consent: failure and re-detachment, cataract, raised pressure, the gas bubble and the need to posture, no flying or nitrous oxide anaesthesia while gas remains, endophthalmitis, and silicone oil removal later if used."
+    ],
+    "positioning": [
+      "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    ],
+    "equipment": [
+      "Vitrectomy machine with cutter, light pipe and wide-angle viewing system, 23G, 25G or 27G trocar cannulas, infusion line, endolaser, perfluorocarbon liquid, gases (SF6, C3F8) or silicone oil, scleral depressor."
+    ],
+    "anatomy": [
+      "The pars plana (3.5 to 4 mm behind the limbus), the vitreous base and its attachment to the peripheral retina, the retinal breaks, the macula and optic disc."
+    ],
+    "criticalSafety": [
+      "Confirm the infusion cannula tip is inside the vitreous cavity before turning the infusion on.",
+      "Use a non-expansile gas concentration.",
+      "Give the patient a gas warning wristband and posture instructions."
+    ],
+    "structuresAtRisk": [
+      "Lens",
+      "Retina",
+      "Choroid (suprachoroidal infusion)"
+    ],
+    "commonErrors": [
+      "Infusion into the suprachoroidal space.",
+      "Iatrogenic retinal breaks at the vitreous base.",
+      "Expansile gas concentration causing a pressure spike."
+    ],
+    "complications": [
+      "Re-detachment, proliferative vitreoretinopathy.",
+      "Raised pressure, cataract.",
+      "Endophthalmitis, suprachoroidal haemorrhage.",
+      "Gas expansion with flying or nitrous oxide."
+    ],
+    "postop": [
+      "Posturing as instructed; gas wristband on; no flying or high altitude until the gas has gone.",
+      "Steroid, antibiotic and pressure drops as needed; review the next day.",
+      "Same-day return for pain, falling vision or a shadow."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Mark the eye; record macula on or off, which sets the urgency."
+    },
+    {
+      "ref": "step.core.timeout",
+      "emphasis": "Confirm the eye, the tamponade agent and its concentration; tell the anaesthetist not to use nitrous oxide."
+    },
+    {
+      "ref": "step.eye.anaesthesia",
+      "emphasis": "Peribulbar, sub-Tenon or general anaesthesia."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    },
+    {
+      "ref": "step.eye.povidone-iodine"
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.eye.lid-speculum"
+    },
+    {
+      "ref": "step.ppv.ports"
+    },
+    {
+      "ref": "step.ppv.core"
+    },
+    {
+      "ref": "step.ppv.retina"
+    },
+    {
+      "ref": "step.ppv.tamponade"
+    },
+    {
+      "ref": "step.eye.suprachoroidal-haemorrhage"
+    },
+    {
+      "ref": "step.eye.wound-check",
+      "emphasis": "Remove the cannulas and check each sclerotomy for a leak; suture any that leak, especially with gas or oil."
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.eye.shield-postop",
+      "emphasis": "Gas wristband on, posture explained in writing, no flying or nitrous oxide."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.ppv.ports": {
+      "id": "step.ppv.ports",
+      "kind": "access",
+      "critical": true,
+      "title": "Placing the trocar cannulas and the infusion",
+      "why": "The infusion maintains the eye's pressure throughout. If its tip lies under the choroid or retina when it is turned on, fluid floods the suprachoroidal or subretinal space.",
+      "how": [
+        "Insert three trocar cannulas through the pars plana 3.5 mm (pseudophakic) or 4 mm (phakic) behind the limbus, with an oblique tunnel.",
+        "Connect the infusion to the inferotemporal cannula.",
+        "Look through the pupil and confirm the cannula tip is in the vitreous cavity before turning the infusion on."
+      ],
+      "structuresAtRisk": [
+        "Lens",
+        "Choroid",
+        "Retina"
+      ],
+      "pitfalls": [
+        "Turning on the infusion before seeing the tip.",
+        "Placing cannulas too anterior in a phakic eye."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ppv.core": {
+      "id": "step.ppv.core",
+      "kind": "resection",
+      "title": "Core vitrectomy and posterior vitreous detachment",
+      "why": "Removing the vitreous relieves traction on the retina. The vitreous base, where it is firmly attached, is shaved carefully to avoid new breaks.",
+      "how": [
+        "Remove the central vitreous with a high cut rate and moderate vacuum under wide-angle viewing.",
+        "Induce a posterior vitreous detachment if not present (triamcinolone helps visualise the gel).",
+        "Shave the vitreous base with scleral depression, especially around the breaks."
+      ],
+      "structuresAtRisk": [
+        "Retina (iatrogenic breaks)",
+        "Lens (touch)"
+      ],
+      "pitfalls": [
+        "High vacuum near mobile retina.",
+        "Lens touch with the instruments."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ppv.retina": {
+      "id": "step.ppv.retina",
+      "kind": "reconstruction",
+      "title": "Flattening the retina and treating the breaks",
+      "why": "The retina must be flat and every break sealed with laser or cryotherapy, or it will detach again.",
+      "how": [
+        "Drain subretinal fluid through a break or a drainage retinotomy, or flatten with perfluorocarbon liquid.",
+        "Apply endolaser around every break (and 360 degrees if planned).",
+        "Remove perfluorocarbon completely."
+      ],
+      "structuresAtRisk": [
+        "Macula",
+        "Retina"
+      ],
+      "pitfalls": [
+        "Missing a break.",
+        "Retained perfluorocarbon."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ppv.tamponade": {
+      "id": "step.ppv.tamponade",
+      "kind": "reconstruction",
+      "title": "Fluid-air exchange and tamponade",
+      "why": "The gas or oil holds the retina against the wall while the laser scars mature. The wrong gas concentration can raise the pressure dangerously.",
+      "how": [
+        "Exchange fluid for air, draining residual subretinal fluid.",
+        "Inject the tamponade: a non-expansile gas mixture (for example SF6 about 20%, C3F8 about 14%) or silicone oil.",
+        "Check the eye pressure."
+      ],
+      "structuresAtRisk": [
+        "Optic nerve (pressure spike)"
+      ],
+      "pitfalls": [
+        "Pure expansile gas.",
+        "Overfilling the eye."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

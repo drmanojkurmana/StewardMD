@@ -1,0 +1,224 @@
+{
+  "id": "lasik",
+  "title": "Laser in situ keratomileusis (LASIK)",
+  "subtitle": "Femtosecond or microkeratome flap, excimer stromal ablation and flap reposition",
+  "system": "ophthalmic",
+  "aliases": [
+    "LASIK",
+    "femto-LASIK",
+    "FS-LASIK",
+    "laser eye surgery"
+  ],
+  "estMinutes": 20,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "aao-refractive",
+      "org": "American Academy of Ophthalmology",
+      "title": "Refractive Errors Preferred Practice Pattern",
+      "year": 2022,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Refractive+Errors+Preferred+Practice+Pattern+American+Academy+of+Ophthalmology",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "rcophth-refractive",
+      "org": "Royal College of Ophthalmologists",
+      "title": "Professional Standards for Refractive Surgery",
+      "year": 2017,
+      "url": "https://www.rcophth.ac.uk/resources-listing/professional-standards-for-refractive-surgery/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Stable refractive error within the laser's range, in an adult with adequate corneal thickness and normal topography, who wants less dependence on glasses."
+    ],
+    "contraindications": [
+      "Keratoconus or suspicious tomography, thin cornea or insufficient residual stromal bed, unstable refraction.",
+      "Severe dry eye, active ocular surface disease, uncontrolled autoimmune disease, pregnancy.",
+      "High risk of eye trauma (prefer surface ablation)."
+    ],
+    "preparation": [
+      "As for PRK, with calculated flap thickness and residual stromal bed (commonly at least 250 to 300 microns) and percent tissue altered.",
+      "Consent: flap complications, epithelial ingrowth, diffuse lamellar keratitis, ectasia, dry eye, glare and halos, enhancement, and presbyopia later."
+    ],
+    "positioning": [
+      "Supine under the femtosecond laser and the excimer laser in turn, head level; fellow eye covered."
+    ],
+    "equipment": [
+      "Femtosecond laser with suction interface (or microkeratome and suction ring), excimer laser with tracker, flap spatula, irrigating cannula, sponges, marking pen."
+    ],
+    "anatomy": [
+      "The cornea: epithelium, Bowman's layer and anterior stroma lifted as a hinged flap of about 100 to 120 microns; the stromal bed beneath which is ablated."
+    ],
+    "criticalSafety": [
+      "Correct eye and programme confirmed at both lasers.",
+      "If suction is lost during flap creation, do not lift a partial flap and do not ablate.",
+      "Reposition the flap carefully with no debris or striae."
+    ],
+    "structuresAtRisk": [
+      "Cornea (flap and stromal bed)",
+      "Visual axis"
+    ],
+    "commonErrors": [
+      "Ablating on a buttonholed or incomplete flap.",
+      "Debris left in the interface.",
+      "Flap striae or a displaced flap."
+    ],
+    "complications": [
+      "Flap complications (buttonhole, free cap, incomplete flap), flap striae or dislocation.",
+      "Diffuse lamellar keratitis, infection, epithelial ingrowth.",
+      "Ectasia.",
+      "Dry eye, glare and halos, under- or over-correction."
+    ],
+    "postop": [
+      "Shield at night for about a week; no rubbing; antibiotic and steroid drops.",
+      "Review the next day to check the flap.",
+      "Same-day return for pain or falling vision."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Elective surgery on healthy eyes: written consent at a separate visit."
+    },
+    {
+      "ref": "step.eye.refractive-check"
+    },
+    {
+      "ref": "step.core.timeout",
+      "emphasis": "At each laser: patient, eye, refraction and treatment read aloud."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine under each laser in turn, head level; fellow eye covered."
+    },
+    {
+      "ref": "step.eye.anaesthesia",
+      "emphasis": "Topical anaesthetic drops; an oral anxiolytic per local practice."
+    },
+    {
+      "ref": "step.core.prep-drape",
+      "emphasis": "Clean the lids, drape the lashes away."
+    },
+    {
+      "ref": "step.eye.lid-speculum"
+    },
+    {
+      "ref": "step.lasik.flap"
+    },
+    {
+      "ref": "step.lasik.suction-loss"
+    },
+    {
+      "ref": "step.lasik.flap-lift"
+    },
+    {
+      "ref": "step.eye.excimer-ablation"
+    },
+    {
+      "ref": "step.eye.laser-interruption"
+    },
+    {
+      "ref": "step.lasik.reposition"
+    },
+    {
+      "ref": "step.eye.shield-postop",
+      "emphasis": "Shield at night, no rubbing, review the next day."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.lasik.flap": {
+      "id": "step.lasik.flap",
+      "kind": "access",
+      "critical": true,
+      "title": "Creating the corneal flap",
+      "why": "The flap gives LASIK its fast, painless recovery but is also where its specific complications come from. Suction and a stable interface decide whether the flap is complete and even.",
+      "how": [
+        "Mark the cornea so the flap can be realigned.",
+        "Dock the suction interface centred on the cornea; check suction before creating the flap.",
+        "Create the flap with the femtosecond laser (or microkeratome) with the planned diameter, depth and superior or nasal hinge."
+      ],
+      "structuresAtRisk": [
+        "Cornea",
+        "Raised eye pressure under suction (transient)"
+      ],
+      "pitfalls": [
+        "A decentred dock.",
+        "Proceeding after suction loss."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.lasik.suction-loss": {
+      "id": "step.lasik.suction-loss",
+      "kind": "bailout",
+      "title": "Bailout: suction loss or an incomplete flap",
+      "why": "A flap cut through after suction loss can be irregular, thin or incomplete. Lifting it and ablating risks irregular astigmatism; stopping and treating later is safe.",
+      "how": [
+        "If suction breaks during flap creation, stop. With a femtosecond laser, redocking and repeating may be possible per the manufacturer.",
+        "If the flap is incomplete, buttonholed or a free cap, do not lift it and do not ablate: replace it, protect it, and plan surface ablation or a new flap after the cornea has settled (often three months).",
+        "Record what happened and tell the patient."
+      ],
+      "structuresAtRisk": [
+        "Cornea (irregular astigmatism)"
+      ],
+      "pitfalls": [
+        "Lifting and ablating on a buttonholed flap."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.lasik.flap-lift": {
+      "id": "step.lasik.flap-lift",
+      "kind": "access",
+      "title": "Lifting the flap",
+      "why": "A clean lift exposes the bed evenly for the ablation without tearing the flap or the hinge.",
+      "how": [
+        "Under the excimer microscope, open the flap edge with a spatula and lift it smoothly to the hinge.",
+        "Fold it back onto a dry surface, protecting the hinge from the laser."
+      ],
+      "structuresAtRisk": [
+        "Flap and hinge"
+      ],
+      "pitfalls": [
+        "Tearing the flap edge.",
+        "Letting the flap lie where it will be ablated."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.lasik.reposition": {
+      "id": "step.lasik.reposition",
+      "kind": "closure",
+      "title": "Flap reposition and interface irrigation",
+      "why": "Debris or folds left in the interface cause inflammation, striae and poor vision. Careful reposition is the end of the operation, not an afterthought.",
+      "how": [
+        "Lay the flap back and irrigate the interface to wash out debris.",
+        "Smooth the flap from the hinge outwards with a moist sponge; align the marks and the gutter evenly all round.",
+        "Wait for adherence, then check for striae at the slit lamp or microscope before the patient leaves."
+      ],
+      "structuresAtRisk": [
+        "Flap (striae, displacement)"
+      ],
+      "pitfalls": [
+        "Leaving debris in the interface.",
+        "Uneven gutters indicating misalignment."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

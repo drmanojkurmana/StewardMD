@@ -497,3 +497,23 @@ hysterectomy 5 (whole table tilted head down, legs flat on the table; the tilt i
 Round 2 redraws all passed full-size review and are wired: CSDH 05, EDH 05 and VP 05 (viewed from the foot, face turned
 to the left, roll under the right shoulder), EDH 09 (flat skull bone only), EVD 10 (straight catheter to the frontal
 horn), VP 13 (same patient). All 92 batch 5 steps now have a picture.
+
+## Round 3: eye operations and the remaining gaps (2026-11-21)
+Owner: "What about ophthalmology surgeries like cataract, PRK" then "build rest, ignore MDS" (oral and maxillofacial
+left out on purpose). 20 new procedures, so **128 procedures**, all `ai_drafted`:
+- **Ophthalmology (13):** phacoemulsification, manual SICS, trabeculectomy with MMC, PRK, LASIK, pterygium with
+  conjunctival autograft, intravitreal anti-VEGF, external DCR, chalazion I and C, corneal and subtarsal foreign body,
+  evisceration, strabismus recession and resection, pars plana vitrectomy (awareness level).
+- **Transplant (2, under urology):** kidney transplant recipient, laparoscopic living donor nephrectomy (THOTA 1994
+  authorisation in the donor check; transfixing stapler on the donor artery, never non-transfixing clips).
+- **Cardiac (2):** surgical AVR (outline level, like CABG), subxiphoid pericardial window (induce only with the surgeon
+  scrubbed in tamponade).
+- **Plastics (3):** escharotomy, rhomboid (Limberg) flap, unilateral cleft lip repair.
+- New shared pack `steps/eye.json` (14 steps: anaesthesia, povidone-iodine 5%, speculum, biometry/IOL check,
+  intracameral antibiotic, wound check, PCR and suprachoroidal haemorrhage bailouts, peritomy and closure, refractive
+  check, excimer ablation, laser interruption, shield and warning signs). Reuse: new 20 at 70%, overall 77%.
+- Specialty `ophthalmology` retitled "Ophthalmology" (was "Eye emergencies") and added to `MUST_HAVE_PROCEDURES`.
+- 20 operative note templates (eye side, implant sticker, MMC time, ABO and crossmatch, ischaemia times, prosthesis).
+- UI test: the Ophthalmology chip lists 13 operations and phaco opens with its 20 steps.
+- No pictures or clips yet; these are candidates for the next Gemini batches. Need ophthalmologist, transplant,
+  cardiac and plastics sign-off.

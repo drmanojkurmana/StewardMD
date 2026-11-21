@@ -350,6 +350,23 @@ try {
     ok(await waitFor("#surgxRoot .sgx-tab"), "SPEC: a new-specialty procedure opens with its chapters");
     await clickText("#surgxRoot .sgx-spec .sgx-chip", "All");
   }
+  // Eye operations (2026-11-21): the Ophthalmology chip lists the 13 operations and one opens with the shared eye steps.
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await sleep(500);
+  {
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "Ophthalmology");
+    await sleep(300);
+    const eye = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
+    ok(eye.length === 13 && eye.some((t) => /Phacoemulsification/.test(t)) && eye.some((t) => /small-incision/i.test(t)),
+      `EYE: the Ophthalmology filter lists the 13 eye operations (${eye.length})`);
+    await clickText("#surgxRoot .sgx-row", "Phacoemulsification");
+    await waitFor("#surgxRoot .sgx-tab");
+    await clickText("#surgxRoot .sgx-tab", "Steps");
+    await sleep(300);
+    const st = await ev("[...document.querySelectorAll('#surgxRoot .sgx-step')].map(e => e.textContent)");
+    ok(st.length === 20 && st.some((t) => /Povidone-iodine 5%/.test(t)) && st.some((t) => /posterior capsule rupture/i.test(t)),
+      `EYE: phaco opens with its 20 steps, the shared eye steps included (${st.length})`);
+  }
   await ev("(() => { const S = window.SMD_SURGX_SCREENS._state(); S.spec = ''; S.find = ''; return true; })()");
 
   /* ── 8. NOTES: the finalise gate ───────────────────────────────────────── */

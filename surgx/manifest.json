@@ -1,7 +1,7 @@
 {
   "_comment": "SURGX catalog. Small on purpose: the app fetches this first (no-store, so it is never the stale copy), then only the unit the clinician actually opened. Modelled on clinix/manifest.json and atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load). Protocols marked kind:'engine' are NOT authored here - they are projections of the ws-surgery.js decision engine, which remains the single home of that clinical logic.",
   "schemaVersion": 1,
-  "contentVersion": "0.2.23-b5fix",
+  "contentVersion": "0.3.0-eye1",
   "updated": "2026-11-04",
   "categories": [
     {
@@ -1143,6 +1143,12 @@
       "id": "neck",
       "file": "steps/neck.json",
       "title": "Shared central neck steps (thyroid, parathyroid, neck dissection)",
+      "shared": true
+    },
+    {
+      "id": "eye",
+      "file": "steps/eye.json",
+      "title": "Shared ophthalmic steps",
       "shared": true
     }
   ],
@@ -2710,6 +2716,294 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 360
+    },
+    {
+      "id": "phacoemulsification",
+      "title": "Phacoemulsification with foldable lens implant",
+      "subtitle": "Clear corneal incision, capsulorhexis, phaco and in-the-bag implant",
+      "system": "ophthalmic",
+      "file": "procedures/phacoemulsification.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 25,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "manual-sics",
+      "title": "Manual small-incision cataract surgery (SICS)",
+      "subtitle": "Sutureless scleral tunnel, nucleus delivery and rigid or foldable implant",
+      "system": "ophthalmic",
+      "file": "procedures/manual-sics.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 25,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "trabeculectomy",
+      "title": "Trabeculectomy with mitomycin C",
+      "subtitle": "Guarded filtration surgery with a scleral flap and adjustable sutures",
+      "system": "ophthalmic",
+      "file": "procedures/trabeculectomy.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "prk",
+      "title": "Photorefractive keratectomy (PRK)",
+      "subtitle": "Epithelial removal, excimer surface ablation and bandage contact lens",
+      "system": "ophthalmic",
+      "file": "procedures/prk.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 15,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "lasik",
+      "title": "Laser in situ keratomileusis (LASIK)",
+      "subtitle": "Femtosecond or microkeratome flap, excimer stromal ablation and flap reposition",
+      "system": "ophthalmic",
+      "file": "procedures/lasik.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 20,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "pterygium-excision-autograft",
+      "title": "Pterygium excision with conjunctival autograft",
+      "subtitle": "Excision, bare sclera bed and a limbal-oriented conjunctival graft",
+      "system": "ophthalmic",
+      "file": "procedures/pterygium-excision-autograft.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "intravitreal-injection",
+      "title": "Intravitreal anti-VEGF injection",
+      "subtitle": "Asepsis, pars plana injection and a perfusion check",
+      "system": "ophthalmic",
+      "file": "procedures/intravitreal-injection.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 10,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "external-dcr",
+      "title": "External dacryocystorhinostomy",
+      "subtitle": "Bony ostium, sac and nasal mucosal flaps, with or without silicone intubation",
+      "system": "ophthalmic",
+      "file": "procedures/external-dcr.json",
+      "stepPacks": [
+        "core",
+        "eye",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "chalazion-incision-curettage",
+      "title": "Chalazion incision and curettage",
+      "subtitle": "Clamp, vertical conjunctival incision, curettage and histology when atypical",
+      "system": "ophthalmic",
+      "file": "procedures/chalazion-incision-curettage.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 15,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "corneal-foreign-body-removal",
+      "title": "Corneal and subtarsal foreign body removal",
+      "subtitle": "Slit-lamp removal, rust ring, and ruling out a penetrating injury",
+      "system": "ophthalmic",
+      "file": "procedures/corneal-foreign-body-removal.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 15,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "evisceration",
+      "title": "Evisceration with orbital implant",
+      "subtitle": "Removal of the eye contents, scleral shell with implant and conformer",
+      "system": "ophthalmic",
+      "file": "procedures/evisceration.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "strabismus-recession-resection",
+      "title": "Strabismus surgery: rectus recession and resection",
+      "subtitle": "Isolating, securing and moving a rectus muscle by measured amounts",
+      "system": "ophthalmic",
+      "file": "procedures/strabismus-recession-resection.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "pars-plana-vitrectomy",
+      "title": "Pars plana vitrectomy for retinal detachment",
+      "subtitle": "Small-gauge ports, vitrectomy, retinal reattachment, laser and tamponade",
+      "system": "ophthalmic",
+      "file": "procedures/pars-plana-vitrectomy.json",
+      "stepPacks": [
+        "core",
+        "eye"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90,
+      "specialty": "ophthalmology"
+    },
+    {
+      "id": "kidney-transplant",
+      "title": "Kidney transplant (recipient operation)",
+      "subtitle": "Extraperitoneal iliac fossa implantation, vascular anastomoses and ureteroneocystostomy",
+      "system": "genitourinary",
+      "file": "procedures/kidney-transplant.json",
+      "stepPacks": [
+        "core",
+        "vascular",
+        "urology",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180,
+      "specialty": "urology"
+    },
+    {
+      "id": "lap-donor-nephrectomy",
+      "title": "Laparoscopic living donor nephrectomy",
+      "subtitle": "Transperitoneal left nephrectomy preserving vessel length and the ureteric blood supply",
+      "system": "genitourinary",
+      "file": "procedures/lap-donor-nephrectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "bowel",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 210,
+      "specialty": "urology"
+    },
+    {
+      "id": "aortic-valve-replacement",
+      "title": "Aortic valve replacement (surgical)",
+      "subtitle": "Outline level: sternotomy, bypass, cardioplegia, excision, sizing, implantation, de-airing and weaning",
+      "system": "cardiac",
+      "file": "procedures/aortic-valve-replacement.json",
+      "stepPacks": [
+        "core",
+        "thoracic",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 240,
+      "specialty": "cardiothoracic"
+    },
+    {
+      "id": "subxiphoid-pericardial-window",
+      "title": "Subxiphoid pericardial window",
+      "subtitle": "Drainage and biopsy of the pericardium through an upper midline incision",
+      "system": "cardiac",
+      "file": "procedures/subxiphoid-pericardial-window.json",
+      "stepPacks": [
+        "core",
+        "thoracic"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45,
+      "specialty": "cardiothoracic"
+    },
+    {
+      "id": "escharotomy",
+      "title": "Escharotomy for circumferential burns",
+      "subtitle": "Releasing constricting full-thickness burn eschar on the limbs and chest",
+      "system": "skin and soft tissue",
+      "file": "procedures/escharotomy.json",
+      "stepPacks": [
+        "core",
+        "softtissue",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45,
+      "specialty": "plastics"
+    },
+    {
+      "id": "rhomboid-flap",
+      "title": "Rhomboid (Limberg) transposition flap",
+      "subtitle": "Excision of a skin lesion and closure with a local transposition flap",
+      "system": "skin and soft tissue",
+      "file": "procedures/rhomboid-flap.json",
+      "stepPacks": [
+        "core",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60,
+      "specialty": "plastics"
+    },
+    {
+      "id": "unilateral-cleft-lip-repair",
+      "title": "Unilateral cleft lip repair",
+      "subtitle": "Anthropometric marking, orbicularis oris reconstruction and primary nasal repair",
+      "system": "skin and soft tissue",
+      "file": "procedures/unilateral-cleft-lip-repair.json",
+      "stepPacks": [
+        "core",
+        "paeds",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120,
+      "specialty": "plastics"
     }
   ],
   "cases": [
@@ -3023,7 +3317,7 @@
     },
     {
       "id": "ophthalmology",
-      "title": "Eye emergencies"
+      "title": "Ophthalmology"
     },
     {
       "id": "orthopaedics",
