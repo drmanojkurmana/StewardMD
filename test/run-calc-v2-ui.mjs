@@ -38,6 +38,7 @@ try {
   await ev(`window.MEDCALC.open("oakland_lgib"); 1`);
   ok(await until(`!!document.getElementById('mcScore_oakland_lgib')`), "calculator opens full-screen with score card");
   ok(/Answer \d+ more/.test(await ev(`document.querySelector('#mcScore_oakland_lgib .mc-score-main').textContent`)), "score card says Answer N more before inputs");
+  await ev(`window.__gp = window.GHIS && GHIS.pickPatient; if (window.GHIS) GHIS.pickPatient = undefined; 1`);
   await ev(`document.getElementById('mcAuto_oakland_lgib').click(); 1`); await sleep(300);
   const filled = await ev(`(['age','hb','hr','sbp'].map(function(k){return document.getElementById('mc_oakland_lgib_'+k).value}).join('|'))`);
   ok(filled === "72|10|95|115", `auto-fill fills mapped inputs and leaves the rest (got ${filled})`);
@@ -55,5 +56,13 @@ try {
   await ev(`document.getElementById('mcCvBack').click(); 1`); await sleep(200);
   ok(await until(`!!document.querySelector('#mcList .mc-card')`), "back returns to the list");
   ok((await ev(`JSON.parse(localStorage.getItem('smd_calc_recent')||'[]').indexOf('oakland_lgib')>=0`)) === true, "opening records Recent");
+  // Ward Sync path (owner 2026-11-21): Fill from patient asks Ward Sync for a patient; Select hands it back.
+  await ev(`window.GHIS = window.GHIS || {}; window.__picked = 0; GHIS.pickPatient = function(cb){ window.__picked++; cb({ episodeId:'E1', patientId:'P1', name:'Ward Test' }); }; GHIS.getPatients = function(){ return [{ patientFirstName:'Ward Test', patientId:'P1', dob:'72', gender:'M' }]; }; GHIS.fetchLabTests = function(){ return Promise.resolve([{ test:'Haemoglobin', result:'10', units:'g/dL' }]); }; window.ICU_STATE = null; 1`);
+  await ev(`window.MEDCALC.open('oakland_lgib'); 1`); await until(`!!document.getElementById('mcAuto_oakland_lgib')`);
+  await ev(`document.getElementById('mcAuto_oakland_lgib').click(); 1`); await sleep(600);
+  ok((await ev(`window.__picked`)) === 1, "Fill from patient opens the Ward Sync patient picker");
+  const wf = await ev(`['age','hb','sex'].map(function(k){ return document.getElementById('mc_oakland_lgib_'+k).value; }).join('|')`);
+  ok(wf === '72|10|M', `the selected Ward Sync patient fills age, haemoglobin and sex (got ${wf})`);
+  ok(/Ward Sync/.test(await ev(`document.getElementById('mcAFnote_oakland_lgib').textContent`)), "the fill note names Ward Sync as the source");
 } catch (e) { console.log("FAIL", e.message); failures++; } finally { try { ws.close(); } catch {} chrome.kill(); server.close(); }
 console.log(failures ? failures + " failed" : "all passed"); process.exit(failures ? 1 : 0);

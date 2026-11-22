@@ -914,7 +914,7 @@
           return;
         }
         renderAddTarget();
-        el.innerHTML = list.map(function(p, i) {
+        el.innerHTML = (GHIS._pickCb ? '<div class="ghis-pick-banner">Tap <b>Select</b> on the patient you want.</div>' : '') + list.map(function(p, i) {
           var age = p.dob ? p.dob : '';
           var nm = (p.patientFirstName && String(p.patientFirstName).trim()) ? p.patientFirstName : '(no name)';
           var doc = (p.employeeFirstName || '').trim();
@@ -934,6 +934,7 @@
             '</div>' +
             ((dept || showDoc) ? '<div class="ghis-pt-dept">' + [esc(dept), (showDoc ? 'Dr. ' + esc(doc) : '')].filter(Boolean).join(' · ') + '</div>' : '') +
             '<div class="ghis-pt-actions">' +
+              (GHIS._pickCb ? '<button class="ghis-pt-call ghis-pt-select" type="button" onclick="event.stopPropagation();GHIS.onPatient(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')">Select</button>' : '') +
               '<button class="ghis-pt-call ghis-pt-assess" type="button" title="Initial assessment" onclick="event.stopPropagation();GHIS.openAssessment(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M12 12v6"/></svg> Assess</button>' +
               '<button class="ghis-pt-call" type="button" title="Call patient" onclick="event.stopPropagation();GHIS.callPatient(\'' + jsq(p.patientId) + '\',this)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg> Call</button></div>' +
           '</div>';
@@ -1357,9 +1358,18 @@
         pickPatient: function(cb) {
           GHIS._pickCb = (typeof cb === 'function') ? cb : null;
           GHIS._importMode = false;
+          if (!document.getElementById('ghisPickCss')) {
+            var st = document.createElement('style'); st.id = 'ghisPickCss';
+            st.textContent = '#ghisPanel .ghis-pick-banner{margin:0 0 10px;padding:11px 12px;border-radius:10px;background:rgba(15,118,110,.10);color:var(--teal,#0F766E);font:600 14px/1.35 var(--sans,system-ui)}' +
+              '#ghisPanel .ghis-pt-call.ghis-pt-select{background:var(--teal,#0F766E);border-color:var(--teal,#0F766E);color:#fff;font-weight:700;min-width:84px;justify-content:center}';
+            document.head.appendChild(st);
+          }
           try { window.openGHIS(); } catch (e) {}
+          // Already connected with a roster (signed in, or the demo hospital): show the patients to pick from, with Select.
+          try { if (_connected && _patients && _patients.length) { showScreen('ward'); if (window.ghisApplyFilters) window.ghisApplyFilters(); } } catch (e) {}
         },
         cancelPick: function() { GHIS._pickCb = null; },
+        isPicking: function() { return !!GHIS._pickCb; },
         /* QA BUG-018: newest lab values for one ward patient, for modules that only need a few numbers
          * (the oncology Calvert calculator wants creatinine + demographics). Resolves
          * { patient:{age,sex,name,weightKg?}, labs:{creatinine,creatinineDate,...} }. Uses the same
@@ -1669,6 +1679,7 @@
     
       window.closeGHIS = function() {
         document.getElementById('ghisPanel').classList.remove('open');
+        GHIS._pickCb = null;   // leaving Ward Sync without Select cancels a pending pick
         // If the Drug Interactions overlay is open behind us, refresh it so the
         // Ward Sync card + patient pill reflect the patient just selected here.
         try {
