@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### VID2 gap-fill videos (2026-11-22, contentVersion 0.4.17)
+84 clips across 17 operations (sleeve, left hemicolectomy, open subtotal cholecystectomy, CBD exploration, gastrectomy, oesophagectomy, urology). 38 new ALLOW ids; IOAhfgHnsAY blocked again, so CBD exploration got 7 of 11.
+
 ### VID1 gap-fill videos (2026-11-22, contentVersion 0.4.16)
 First of the 100-steps-per-prompt video prompts (generator `gen/make100v.py`, only steps with no embed). 66 clips across 15 general and colorectal operations, 25 new ALLOW ids, all embeddable. LIS step 9 clip dropped (surgeon arguing against operating, not the step). Hernia repair 10, haemorrhoidectomy 9, 10, 13, 14 and fistula-in-ano 14, 15 still have no clip.
 

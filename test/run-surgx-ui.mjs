@@ -235,8 +235,8 @@ try {
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 22,
-    "VIDEO batch 3: right hemicolectomy shows its 22 step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 23,
+    "VIDEO batch 3: right hemicolectomy shows its 23 step clips through the shim");
   ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 23 || new Set(src).size !== 23) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
     "IMAGES batch 3: right hemicolectomy shows 23 distinct step pictures and every file loads");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
@@ -353,16 +353,16 @@ try {
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 21,
-    "VIDEO batch 13: Modified radical neck dissection shows its 21 step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 22,
+    "VIDEO batch 13: Modified radical neck dissection shows its 22 step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Percutaneous nephrolithotomy (PCNL)");
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 19,
-    "VIDEO batch 15: Percutaneous nephrolithotomy (PCNL) shows its 19 step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 21,
+    "VIDEO batch 15: Percutaneous nephrolithotomy (PCNL) shows its 21 step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Adenoidectomy");
@@ -385,8 +385,8 @@ try {
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 15,
-    "VIDEO batch 14: Ivor Lewis oesophagectomy shows its 15 step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 21,
+    "VIDEO batch 14: Ivor Lewis oesophagectomy shows its 21 step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Open carpal tunnel release");
