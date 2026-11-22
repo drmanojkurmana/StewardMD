@@ -57,7 +57,7 @@ try {
   ok(await until(`!!document.querySelector('#mcList .mc-card')`), "back returns to the list");
   ok((await ev(`JSON.parse(localStorage.getItem('smd_calc_recent')||'[]').indexOf('oakland_lgib')>=0`)) === true, "opening records Recent");
   // Ward Sync path (owner 2026-11-21): Fill from patient asks Ward Sync for a patient; Select hands it back.
-  await ev(`window.GHIS = window.GHIS || {}; window.__picked = 0; GHIS.pickPatient = function(cb){ window.__picked++; cb({ patientFirstName:'Ward Test', patientId:'P1', dob:'72', gender:'M' }); }; GHIS.fetchLabTests = function(){ return Promise.resolve([{ test:'Haemoglobin', result:'10', units:'g/dL' }]); }; window.ICU_STATE = null; 1`);
+  await ev(`window.GHIS = window.GHIS || {}; window.__picked = 0; GHIS.pickPatient = function(cb){ window.__picked++; cb({ episodeId:'E1', patientId:'P1', name:'Ward Test' }); }; GHIS.getPatients = function(){ return [{ patientFirstName:'Ward Test', patientId:'P1', dob:'72', gender:'M' }]; }; GHIS.fetchLabTests = function(){ return Promise.resolve([{ test:'Haemoglobin', result:'10', units:'g/dL' }]); }; window.ICU_STATE = null; 1`);
   await ev(`window.MEDCALC.open('oakland_lgib'); 1`); await until(`!!document.getElementById('mcAuto_oakland_lgib')`);
   await ev(`document.getElementById('mcAuto_oakland_lgib').click(); 1`); await sleep(600);
   ok((await ev(`window.__picked`)) === 1, "Fill from patient opens the Ward Sync patient picker");

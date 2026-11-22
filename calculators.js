@@ -8971,8 +8971,11 @@
     // age, sex and Ward Sync labs fill the calculator. Without Ward Sync it falls back to the open ICU/OPD patient.
     view.querySelector("#mcAuto_"+id).addEventListener("click", function(){
       if(!(window.GHIS && GHIS.pickPatient)){ fillFromSnapshot(c, run); return; }
-      GHIS.pickPatient(function(p){
-        var note=document.getElementById("mcAFnote_"+id), who=p.patientFirstName||p.patientId||"patient";
+      GHIS.pickPatient(function(sel){
+        // The picker returns {episodeId, patientId, name}; age and sex come from the same ward roster.
+        var p=sel||{}, ros=(GHIS.getPatients&&GHIS.getPatients())||[];
+        for(var ri=0;ri<ros.length;ri++){ if(String(ros[ri].patientId)===String(sel&&sel.patientId)){ p=ros[ri]; break; } }
+        var note=document.getElementById("mcAFnote_"+id), who=p.patientFirstName||(sel&&sel.name)||p.patientId||"patient";
         if(note) note.innerHTML='<div class="mc-af-msg">Fetching '+esc(who)+'\u2019s labs from Ward Sync\u2026</div>';
         var ageP=parseInt(p.dob,10);
         var snap={ has:true, src:"Ward Sync \u00b7 "+who, ts:Date.now(), age:(ageP>0&&ageP<130)?ageP:null, sex:p.gender||"", vitals:{}, labs:{}, srcMap:{} };
