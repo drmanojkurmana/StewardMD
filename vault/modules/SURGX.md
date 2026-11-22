@@ -633,3 +633,8 @@ in Newsreader serif (bundled `assets/fonts/newsreader-latin.woff2`, declared in 
 serif italic, how-lines in Inter 15px as a numbered list, the lead clause (or opening imperative verb) of each how-line
 bold via `howLine()` in surgx-screens.js, ringed serif step numerals, and labelled AT RISK / PITFALL lines. No side
 stripes (test/no-side-stripes.test.mjs forbids them).
+
+### Batch 21 images (2026-11-22, contentVersion 0.4.5)
+78 of 84 wired for mastoidectomy (mx), tympanoplasty-underlay (tux), superficial-parotidectomy (spx), microlaryngoscopy-biopsy (mbx). Adenoidectomy (A) not delivered yet.
+Held back: mastoidectomy 12 (tegmen and sigmoid fully exposed) and 13 (cochlea opened); tympanoplasty 06 (head not turned), 10 and 18 (wound in front of the ear); microlaryngoscopy 12 (ring-handled open instruments).
+Gemini shares from batch 10 on carry inline images, not zips: scratchpad g4.cjs pulls them with their filename captions; imgB.py wires any batch from its prompt file. Known drift: the patient's face and the drawing style change within some operations.
