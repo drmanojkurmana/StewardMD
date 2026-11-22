@@ -381,6 +381,14 @@ try {
     "VIDEO batch 18: McDonald cerclage shows its 12 step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Oesophagectomy (Ivor Lewis principles)");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 15,
+    "VIDEO batch 14: Ivor Lewis oesophagectomy shows its 15 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Phacoemulsification");
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");
