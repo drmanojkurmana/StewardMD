@@ -640,5 +640,5 @@ Held back: mastoidectomy 12 (tegmen and sigmoid fully exposed) and 13 (cochlea o
 Gemini shares from batch 10 on carry inline images, not zips: scratchpad g4.cjs pulls them with their filename captions; imgB.py wires any batch from its prompt file. Known drift: the patient's face and the drawing style change within some operations.
 
 ### Batch 22 images (2026-11-22, contentVersion 0.4.6)
-74 of 76 wired: dynamic-hip-screw (dhsx), tibial-im-nail (tinx), open-fracture-debridement (ofdx), leg-fasciotomy (lfx). Quinsy drainage (A) not delivered yet.
+74 of 76 wired (plus quinsy-drainage qdx 14 of 15, 14 held: neck dressing on a transoral drainage): dynamic-hip-screw (dhsx), tibial-im-nail (tinx), open-fracture-debridement (ofdx), leg-fasciotomy (lfx).
 Held back: tibial nail 07 (AP fluoro shows the awl entering sideways), fasciotomy 07 (both incisions drawn on one face of the leg).
