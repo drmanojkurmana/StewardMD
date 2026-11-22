@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### VID5 gap-fill videos (2026-11-22, contentVersion 0.4.23)
+92 clips across 8 paediatric and gynaecology operations: Ladd 21, ovarian cystectomy 20, salpingectomy 18, evacuation of RPOC 16 (all from none), open myomectomy 8, intussusception 5, cerclage 3, LSCS 1. 16 new ALLOW ids, all embeddable. VID4 not received yet.
+
 ### VID3 gap-fill videos (2026-11-22, contentVersion 0.4.22)
 100 clips across 17 urology and transplant operations; varicocelectomy and inguinal orchidectomy go from no clips to complete. 38 new ALLOW ids, all embeddable.
 
