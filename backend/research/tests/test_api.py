@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from app.main import app
+from app.main import app  # service root is added to PYTHONPATH by Research CI
 
 @pytest.fixture
 def client(monkeypatch):
