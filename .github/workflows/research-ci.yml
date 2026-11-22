@@ -27,5 +27,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --input-type=module --check < ../../functions/api/research/[[path]].js
+      - run: node --input-type=module --check < '../../functions/api/research/[[path]].js'
       - run: node --input-type=module --check < ../../workers/research-orchestrator/src/index.js
