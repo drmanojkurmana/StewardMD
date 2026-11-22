@@ -654,3 +654,6 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
+
+### Batch 21 adenoidectomy and redos, batch 18 cerclage videos (2026-11-22, contentVersion 0.4.12)
+Adenoidectomy (ax) 17 of 18; 06 held back (pharynx drawn as a cutaway on the outside of the face). Redos wired: mastoidectomy 12 and 13, tympanoplasty 10 and 18, microlaryngoscopy 12. Tympanoplasty 06 held back again (head still not turned). mcdonald-cerclage 12 clips; open myomectomy video JSON arrived truncated.
