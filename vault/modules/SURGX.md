@@ -749,3 +749,5 @@ The exit button is labelled "Back to steps", so Android back / swipe-back presse
 `swipe-back.js topBackControl()` now prefers controls that are actually visible at their centre (elementFromPoint),
 so a covered "Back to home" on a layer underneath can no longer win; SURGX is in `moduleOpen()`.
 Pre-existing, unrelated: `run-swipe-back-ui.mjs` has 5 failing checks on main with or without this change.
+- 2026-11-22 VID10: 82 clips wired (plastics, hand, neurosurgery, cardiothoracic, thyroid), 18 new ALLOW ids, all embeddable.
+  Dropped the suture-pad subcuticular clip for neurosurgical scalp closures (burr hole, EDH, EVD, VP shunt). contentVersion 0.4.40.
