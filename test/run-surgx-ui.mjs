@@ -345,8 +345,8 @@ try {
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 17,
-    "VIDEO batch 21: Superficial parotidectomy with facial nerve identification shows its 17 step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 21,
+    "VIDEO batch 21: Superficial parotidectomy with facial nerve identification shows its 21 step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Modified radical neck dissection");

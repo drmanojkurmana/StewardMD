@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### VID8 gap-fill videos (2026-11-22, contentVersion 0.4.31)
+93 clips: DHS 18, tibial nail 18, open fracture debridement 21, quinsy 13 (from none) plus ENT and fasciotomy gaps. VID8 used videoId as key and a clip object as "best"; normalised. One id typo fixed (step.oex.temp-cover); leg fasciotomy steps came misnumbered and were matched to positions by step id. All 23 new ids embeddable.
+
 ### VID11 gap-fill videos (2026-11-22, contentVersion 0.4.30)
 Endocrine and eye gaps: parathyroidectomy, adrenalectomy, hemithyroidectomy, DCR, evisceration, strabismus, vitrectomy, chalazion. Adrenalectomy 08 (prone retroperitoneoscopic ports) and 14 (Bengali cholecystectomy lecture) dropped. All 16 new ids embeddable. VID8 and VID10 not received yet.
 
