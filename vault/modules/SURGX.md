@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### IMG7 and IMG8 pictures (2026-11-22, contentVersion 0.4.33)
+IMG7: Gemini delivered 28 of 100; 15 wired, 13 rejected (adult circumcision and urethroplasty fields drawn with female-looking anatomy, hydrocele 16, vasectomy 09). IMG8 (re-shared): 88 recovered, 74 wired; rejected salpingectomy 05 (male face), 07, 09, 10 (bones or odd glow in laparoscopic view); intussusception 09 (vertical incision), 15 to 17 and Ladd 12, 14 to 17, 20 (adult head on an infant).
+
 ### IMG6 pictures (2026-11-22, contentVersion 0.4.32)
 80 of 84 recovered wired (16 PCNL pictures lost in a truncated Gemini zip; `salvage.py` recovers intact PNGs, `imgM.py` now skips missing files). Rejected (wound or prep window drawn like genitalia): DJ stent 06, ureteroscopy 06, hydrocele 12, suprapubic catheter 13.
 
