@@ -194,7 +194,7 @@ export async function onRequest({ request, env, params }) {
     return json({ ok: true, requestId }, 200, { "x-request-id": requestId });
   }
 
-  if (env.RESEARCH_ENABLED !== "1" || env.RESEARCH_PILOT_MODE !== "1")
+  if (env.RESEARCH_MODE !== "pilot")
     return err(404, "not_found", "Research pilot is not enabled", requestId);
   const claims = await caller(request, env);
   if (!claims || !claims.sub) return err(401, "unauthorized", "Sign in to use StewardMD Research", requestId);
