@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### VID3 gap-fill videos (2026-11-22, contentVersion 0.4.22)
+100 clips across 17 urology and transplant operations; varicocelectomy and inguinal orchidectomy go from no clips to complete. 38 new ALLOW ids, all embeddable.
+
 ### IMG4 pictures (2026-11-22, contentVersion 0.4.21)
 93 of 100 wired: CBD exploration 18 to 22, splenectomy, anterior resection TME, Whipple, right hepatectomy, neck dissection 01 to 09. Rejected: TME 12, 14, 16 (bony pelvis drawn in the laparoscopic view), 18 (end colostomy on the right); right hepatectomy 07 (sternum split open), 21 (costal margin and liver drawn above the closed fascia); splenectomy 05 (whole body and legs painted, face under a towel).
 
