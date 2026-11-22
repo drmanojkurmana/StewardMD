@@ -85,7 +85,8 @@ def calculate_meta_analysis(
     q = sum(w * (r["yi"] - fixed_y) ** 2 for w, r in zip(w_fixed, rows))
     df = len(rows) - 1
     c = sum_w - sum(w*w for w in w_fixed) / sum_w
-    tau2 = max(0.0, (q - df) / c) if c > 0 else 0.0
+    tau2_dl = max(0.0, (q - df) / c) if c > 0 else 0.0
+    tau2 = tau2_dl if model == "random_dl" else 0.0
     weights = w_fixed if model == "fixed" else [1 / (r["vi"] + tau2) for r in rows]
     sw = sum(weights)
     pooled = sum(w * r["yi"] for w, r in zip(weights, rows)) / sw
