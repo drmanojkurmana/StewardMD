@@ -28,8 +28,21 @@ async function member(db, projectId, uid, roles = ["owner", "editor", "analyst",
   return row && roles.includes(row.role) ? row : null;
 }
 async function bodyJson(request) {
-  const bytes = await request.arrayBuffer();
-  if (bytes.byteLength > MAX_JSON) throw new Error("payload_too_large");
+  const announced = Number(request.headers.get("content-length") || 0);
+  if (announced > MAX_JSON) throw new Error("payload_too_large");
+  if (!request.body) throw new Error("invalid_json");
+  const reader = request.body.getReader(), chunks = [];
+  let size = 0;
+  while (true) {
+    const part = await reader.read();
+    if (part.done) break;
+    size += part.value.byteLength;
+    if (size > MAX_JSON) { await reader.cancel(); throw new Error("payload_too_large"); }
+    chunks.push(part.value);
+  }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
   const body = JSON.parse(new TextDecoder().decode(bytes));
   if (!body || typeof body !== "object" || Array.isArray(body)) throw new Error("invalid_json");
   return body;
