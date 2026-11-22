@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### IMG14 pictures (2026-11-22, contentVersion 0.4.38)
+96 recovered (ACDF zip damaged), 86 wired: ACDF, craniotomy, decompressive craniectomy, escharotomy 07, flexor tendon 19 to 21, laminectomy, TLIF 01 to 11. Rejected: craniotomy 09, 10 (incision and bone flap over the face), 14 (awake patient with open brain); decompressive 08, 09, 11 (face and orbit cut away), 14, 19, 20 (open brain in closure or background); laminectomy 12 (cross-section on the back).
+
 ### IMG13 pictures (2026-11-22, contentVersion 0.4.37)
 98 recovered, 96 wired: ACL, carpal tunnel, distal radius 16 to 22, flexor tendon, split skin graft, trigger finger. Rejected flexor tendon 11 (drape inside the wound) and 14 (tendon drawn on the skin).
 
