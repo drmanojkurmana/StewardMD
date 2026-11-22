@@ -45,10 +45,10 @@ Configure preview bindings separately if preview testing is wanted. Keep Researc
 Use Cloudflare Pages environment variables/secrets; never commit them:
 
 - RESEARCH_CALLBACK_TOKEN: random 32+ byte secret shared only with the queue consumer.
-- RESEARCH_ENABLED: keep unset or 0 until approved.
-- RESEARCH_PILOT_MODE: keep unset or 0 until the pilot is authorised.
+- RESEARCH_MODE: keep unset or disabled; set to pilot only for the approved test cohort.
+- (No second feature flag is required; this keeps the Pages text-binding count low.)
 
-The API currently requires both flags to equal 1. Pilot mode is not credit metering; keep it limited to explicitly authorised test accounts until credit reservation is integrated.
+The API currently requires RESEARCH_MODE=pilot. Pilot mode is not credit metering; keep it limited to explicitly authorised test accounts until credit reservation is integrated.
 
 ## Python Research API
 
