@@ -106,12 +106,19 @@ async function submitMetaAnalysis(db, queue, uid, projectId, body, requestId) {
     confidence_level: analysis.confidence_level || 0.95, studies: analysis.studies });
   const hashBytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(input));
   const inputHash = [...new Uint8Array(hashBytes)].map(x => x.toString(16).padStart(2, "0")).join("");
-  await db.batch([
-    db.prepare("INSERT INTO research_jobs (id,project_id,job_type,status,idempotency_key,input_json,created_by,created_ts) VALUES (?,?, 'meta_analysis','queued',?,?,?,?)")
-      .bind(jobId, projectId, idempotencyKey, JSON.stringify({ analysisId }), uid, now),
-    db.prepare("INSERT INTO research_meta_analyses (id,project_id,job_id,model,effect_measure,input_hash,input_json,created_by,created_ts) VALUES (?,?,?,?,?,?,?,?,?)")
-      .bind(analysisId, projectId, jobId, analysis.model || "random_dl", analysis.effect_measure, inputHash, input, uid, now),
-  ]);
+  try {
+    await db.batch([
+      db.prepare("INSERT INTO research_jobs (id,project_id,job_type,status,idempotency_key,input_json,created_by,created_ts) VALUES (?,?, 'meta_analysis','queued',?,?,?,?)")
+        .bind(jobId, projectId, idempotencyKey, JSON.stringify({ analysisId }), uid, now),
+      db.prepare("INSERT INTO research_meta_analyses (id,project_id,job_id,model,effect_measure,input_hash,input_json,created_by,created_ts) VALUES (?,?,?,?,?,?,?,?,?)")
+        .bind(analysisId, projectId, jobId, analysis.model || "random_dl", analysis.effect_measure, inputHash, input, uid, now),
+    ]);
+  } catch (e) {
+    const raced = await db.prepare("SELECT id,status FROM research_jobs WHERE project_id=? AND idempotency_key=?")
+      .bind(projectId, idempotencyKey).first();
+    if (raced) return json({ jobId: raced.id, status: raced.status, idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+    throw e;
+  }
   try {
     await queue.send({ type: "meta-analysis", jobId, analysisId, projectId, input: JSON.parse(input), requestedBy: uid, requestId });
   } catch (e) {
@@ -140,6 +147,8 @@ export async function onRequest({ request, env, params }) {
     const body = await bodyJson(request);
     const job = await db.prepare("SELECT id,project_id FROM research_jobs WHERE id=? AND job_type='meta_analysis'").bind(callback[1]).first();
     if (!job) return err(404, "job_not_found", "Job not found", requestId);
+    const analysisRow = await db.prepare("SELECT id FROM research_meta_analyses WHERE job_id=?").bind(job.id).first();
+    if (!analysisRow || analysisRow.id !== body.analysisId) return err(409, "callback_mismatch", "Callback does not match the analysis job", requestId);
     const now = Date.now();
     const succeeded = body.status === "succeeded" && body.result && typeof body.result === "object";
     const terminalStatus = succeeded ? "succeeded" : "failed";
