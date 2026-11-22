@@ -16,7 +16,7 @@
   function wIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
 
   var CSS = "#ghisPanel {\n  position: fixed; inset: 0; z-index: 18000;\n  background: var(--paper, #ffffff); display: flex; flex-direction: column;\n  transform: translateX(100%);\n  transition: transform 0.3s cubic-bezier(.4,0,.2,1);\n}\n#ghisPanel.open { transform: translateX(0); }\n.ghis-header {\n  display: flex; align-items: center; gap: 10px;\n  padding: calc(14px + env(safe-area-inset-top)) 16px 14px; border-bottom: 1px solid var(--line, #e2e8f0);\n  background: var(--panel, #f8fafc); flex-shrink: 0;\n}\n.ghis-back { background: none; border: none; cursor: pointer; font-size: 20px; color: var(--teal, #14b8a6); padding: 4px 8px; }\n.ghis-title { flex: 1; font-size: 16px; font-weight: 700; color: var(--ink, #0f172a); display: flex; align-items: center; gap: 8px; }\n.ghis-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }\n.ghis-dot-off { background: #aaa; }\n.ghis-dot-on { background: #22c55e; box-shadow: 0 0 6px #22c55e88; }\n.ghis-refresh-btn { background: none; border: 1px solid var(--line, #e2e8f0); border-radius: 8px; cursor: pointer; font-size: 16px; color: var(--teal, #14b8a6); padding: 4px 10px; }\n.ghis-body { flex: 1; overflow-y: auto; padding: 16px; }\n.ghis-setup-card { background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 14px; padding: 20px; max-width: 480px; margin: 20px auto; }\n.ghis-setup-title { font-size: 15px; font-weight: 700; color: var(--ink, #0f172a); margin-bottom: 14px; }\n.ghis-setup-sub { font-size: 12px; color: var(--slate, #64748b); margin: -8px 0 14px; }\n.ghis-login-input { width: 100%; background: var(--paper, #ffffff); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); font-size: 14px; padding: 11px; box-sizing: border-box; margin-bottom: 10px; }\n.ghis-login-input:focus { outline: none; border-color: var(--teal, #14b8a6); }\n.ghis-remember { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--slate, #64748b); margin-bottom: 4px; cursor: pointer; }\n.ghis-remember input { width: 15px; height: 15px; }\n.ghis-setup-steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }\n.ghis-step { font-size: 13px; color: var(--slate, #64748b); display: flex; gap: 10px; align-items: flex-start; }\n.ghis-step-num { background: var(--teal, #14b8a6); color: #fff; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }\n.ghis-step code { background: var(--paper, #ffffff); border: 1px solid var(--line, #e2e8f0); border-radius: 5px; padding: 1px 5px; font-size: 12px; color: var(--teal, #14b8a6); }\n.ghis-cookie-input { width: 100%; min-height: 80px; background: var(--paper, #ffffff); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); font-size: 11px; padding: 8px; box-sizing: border-box; resize: vertical; font-family: monospace; }\n.ghis-connect-btn { margin-top: 10px; width: 100%; background: var(--teal, #14b8a6); color: #fff; border: none; border-radius: 10px; padding: 11px; font-size: 14px; font-weight: 700; cursor: pointer; }\n.ghis-connect-btn:hover { opacity: 0.88; }\n.ghis-setup-error { color: #ef4444; font-size: 12px; margin-top: 8px; min-height: 16px; }\n.ghis-logout-btn { background: none; border: 1px solid var(--line, #e2e8f0); border-radius: 8px; cursor: pointer; font-size: 14px; color: var(--slate, #64748b); padding: 6px 10px; }\n.ghis-filter-row { display: flex; gap: 8px; margin-bottom: 8px; }\n.ghis-filter-input { flex: 1; background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); padding: 8px 12px; font-size: 13px; }\n.ghis-filter-row2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px; margin-bottom: 8px; }\n@media (min-width: 560px) { .ghis-filter-row2 { grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr); } }\n.ghis-filter-sel { min-width: 0; background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); padding: 8px 10px; font-size: 12.5px; cursor: pointer; }\n.ghis-filter-sel:focus { outline: none; border-color: var(--teal, #14b8a6); }\n.ghis-count { font-size: 12px; color: var(--slate, #64748b); margin: 0 2px 10px; font-weight: 600; }\n.ghis-pt-list { display: flex; flex-direction: column; gap: 8px; }\n.ghis-pt-card { background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 12px; padding: 12px 14px; cursor: pointer; transition: border-color 0.15s; }\n.ghis-pt-card:hover { border-color: var(--teal, #14b8a6); }\n.ghis-pt-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }\n.ghis-pt-name { font-size: 14px; font-weight: 700; color: var(--ink, #0f172a); }\n.ghis-pt-status { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; white-space: nowrap; }\n.ghis-status-occupied { background: #dcfce7; color: #16a34a; }\n.ghis-status-bed { background: #fef9c3; color: #b45309; }\n.ghis-status-discharge { background: #fee2e2; color: #dc2626; }\n.ghis-status-other { background: var(--paper, #ffffff); color: var(--slate, #64748b); }\n.ghis-pt-meta { font-size: 12px; color: var(--slate, #64748b); margin-top: 4px; }\n.ghis-pt-dept { font-size: 12px; color: var(--teal, #14b8a6); font-weight: 600; margin-top: 2px; }\n.ghis-pt-actions { margin-top: 10px; }\n.ghis-pt-call { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--teal, #14b8a6); background: transparent; color: var(--teal, #14b8a6); font: 700 12px var(--sans, system-ui); padding: 7px 14px; border-radius: 8px; cursor: pointer; }\n.ghis-pt-call:active { transform: scale(0.96); }\n.ghis-pt-call:disabled { opacity: 0.5; }\n.ghis-pt-call svg { width: 15px; height: 15px; }\n.ghis-loading { text-align: center; color: var(--slate, #64748b); font-size: 13px; padding: 30px; }\n.ghis-empty { text-align: center; color: var(--slate, #64748b); font-size: 13px; padding: 30px; }\n/* Lab drawer */\n#ghisWard { position: relative; }\n.ghis-lab-drawer { position: fixed; inset: 0; background: var(--paper, #ffffff); z-index: 18001; display: flex; flex-direction: column; }\n.ghis-lab-header { display: flex; align-items: center; gap: 10px; padding: calc(12px + env(safe-area-inset-top)) 16px 12px; border-bottom: 1px solid var(--line, #e2e8f0); background: var(--panel, #f8fafc); flex-shrink: 0; }\n.ghis-back-sm { background: none; border: none; cursor: pointer; font-size: 14px; color: var(--teal, #14b8a6); font-weight: 700; padding: 4px 8px; }\n.ghis-lab-title { font-size: 14px; font-weight: 700; color: var(--ink, #0f172a); }\n.ghis-lab-body { padding: 14px 16px; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }\n.ghis-lab-group { margin-bottom: 14px; }\n.ghis-lab-group-name { font-size: 12px; font-weight: 700; color: var(--teal, #14b8a6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }\n.ghis-lab-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--line, #e2e8f0); font-size: 13px; }\n.ghis-lab-test { color: var(--ink, #0f172a); }\n.ghis-lab-val { font-weight: 700; }\n.ghis-lab-val.abnormal { color: #ef4444; }\n.ghis-lab-date { font-size: 11px; color: var(--slate, #64748b); }\n.ghis-lab-empty { color: var(--slate, #64748b); font-size: 13px; text-align: center; padding: 20px; }\n.ghis-lab-count { font-size: 12px; color: var(--slate, #64748b); margin-bottom: 10px; }\n.ghis-lab-order { border: 1px solid var(--line, #e2e8f0); border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; cursor: pointer; transition: background .12s; }\n.ghis-lab-order:hover { background: rgba(20,184,166,0.05); }\n.ghis-lab-order.open { border-color: var(--teal, #14b8a6); background: rgba(20,184,166,0.04); }\n.ghis-lab-order-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }\n.ghis-lab-order-name { font-weight: 600; font-size: 13px; color: var(--ink, #0f172a); }\n.ghis-lab-order-dept { font-size: 11px; color: var(--slate, #64748b); white-space: nowrap; }\n.ghis-lab-detail { margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--line, #e2e8f0); }\n.ghis-lab-detail-empty { color: var(--slate, #64748b); font-size: 12px; padding: 6px 0; }\n.ghis-lab-abx { font-size: 12px; color: var(--ink, #0f172a); background: rgba(20,184,166,0.06); border-radius: 6px; padding: 6px 8px; margin: 4px 0 8px; white-space: pre-wrap; }\n.ghis-lab-section-title { font-size: 13px; font-weight: 700; color: var(--ink, #0f172a); margin: 4px 0 10px; }\n.ghis-rad-order { border-color: rgba(99,102,241,0.35); }\n.ghis-rad-order:hover { background: rgba(99,102,241,0.05); }\n.ghis-rad-order.open { border-color: #6366f1; background: rgba(99,102,241,0.05); }\n.ghis-rad-meta { font-size: 11px; color: var(--slate, #64748b); margin-bottom: 6px; }\n.ghis-rad-report { font-size: 13px; line-height: 1.5; color: var(--ink, #0f172a); white-space: pre-wrap; }\n.ghis-rad-divider { height: 1px; background: var(--line, #e2e8f0); margin: 14px 0; }\n/* dark mode overrides */\nbody.dark .ghis-status-occupied { background: #14532d; color: #86efac; }\nbody.dark .ghis-status-bed { background: #451a03; color: #fcd34d; }\nbody.dark .ghis-status-discharge { background: #450a0a; color: #fca5a5; }\n\n.ghis-ward-fab {\n  position: fixed; bottom: calc(20px + env(safe-area-inset-bottom)); right: 20px; z-index: 17000;\n  display: inline-flex; align-items: center; gap: 6px;\n  padding: 10px 16px; border: none; border-radius: 999px; cursor: pointer;\n  background: var(--teal, #14b8a6); color: #fff; font-size: 14px; font-weight: 600;\n  box-shadow: 0 4px 14px rgba(0,0,0,0.18); font-family: inherit;\n}\n.ghis-ward-fab:hover { filter: brightness(1.05); }\n/* App-consistent header + control icons (SVG, no emoji) */\n#ghisPanel .ghis-header svg { width: 20px; height: 20px; }\n.ghis-back, .ghis-refresh-btn { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; padding: 0; transition: transform .1s ease; }\n.ghis-back { border: 1px solid var(--line, #e2e8f0); background: var(--paper, #fff); color: var(--teal, #14b8a6); }\n.ghis-back:active, .ghis-refresh-btn:active, .ghis-logout-btn:active { transform: scale(0.93); }\n.ghis-title svg { width: 20px; height: 20px; color: var(--teal, #14b8a6); flex: 0 0 auto; }\n.ghis-flip { display: inline-flex; }\n.ghis-flip svg { transform: scaleX(-1); }\n.ghis-logout-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; }\n.ghis-logout-btn svg { width: 18px; height: 18px; }\n.ghis-back-sm { display: inline-flex; align-items: center; gap: 5px; }\n.ghis-back-sm svg { width: 15px; height: 15px; }\n";
-  var PANEL_HTML = "<div id=\"ghisPanel\">\n  <div class=\"ghis-header\">\n    <button class=\"ghis-back\" onclick=\"closeGHIS();try{window.SMD_showHome&&window.SMD_showHome()}catch(e){}\" aria-label=\"Back to home\">{{ic:back}}</button>\n    <div class=\"ghis-title\">{{ic:ward}} Ward Sync <span id=\"ghisConnDot\" class=\"ghis-dot ghis-dot-off\"></span></div>\n    <button class=\"ghis-refresh-btn\" id=\"ghisWatchedBtn\" onclick=\"if(window.SMD_WATCH&&window.SMD_WATCH.openManager)window.SMD_WATCH.openManager();else alert('Sign in with your Google/Apple account to see watched patients.')\" title=\"Lab Watch 24/7, background lab alerts\" aria-label=\"Lab Watch\">{{ic:bell}}</button>\n    <button class=\"ghis-refresh-btn\" id=\"ghisRefreshBtn\" onclick=\"ghisRefresh()\" title=\"Refresh\" aria-label=\"Refresh\">{{ic:refresh}}</button>\n  </div>\n\n  <div id=\"ghisSetup\" class=\"ghis-body\">\n    <div class=\"ghis-setup-card\">\n      <div class=\"ghis-setup-title\">Sign in to GHIS</div>\n      <div class=\"ghis-setup-sub\">Use your own GITAM HIS login.</div>\n      <input id=\"ghisUserId\" class=\"ghis-login-input\" type=\"text\" autocomplete=\"username\" placeholder=\"GHIS User ID\">\n      <input id=\"ghisPassword\" class=\"ghis-login-input\" type=\"password\" autocomplete=\"current-password\" placeholder=\"Password\"\n             onkeydown=\"if(event.key==='Enter') ghisConnect()\">\n      <div class=\"ghis-setup-sub\" style=\"margin:2px 0 12px\">Your password is used only to sign in and is never stored on our servers. If your session times out, just sign in again.</div>\n      <button class=\"ghis-connect-btn\" onclick=\"ghisConnect()\">Sign in</button>\n      <div id=\"ghisSetupError\" class=\"ghis-setup-error\"></div>\n    </div>\n  </div>\n\n  <div id=\"ghisWard\" class=\"ghis-body\" style=\"display:none;\">\n    <div id=\"ghisAddTarget\" style=\"display:none;align-items:center;box-sizing:border-box;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line,#e4eae8);border-radius:10px;background:var(--paper,#f6f8f6)\"></div>\n    <div class=\"ghis-filter-row\">\n      <input id=\"ghisSearchPt\" data-phi-input class=\"ghis-filter-input\" placeholder=\"Search patient ID or name…\" oninput=\"ghisApplyFilters()\" />\n      <button class=\"ghis-logout-btn\" onclick=\"ghisDisconnect()\" title=\"Sign out\" aria-label=\"Sign out\">{{ic:logout}}</button>\n    </div>\n    <div class=\"ghis-filter-row2\">\n      <select id=\"ghisFBranch\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by branch/department\"><option value=\"\">All branches</option></select>\n      <select id=\"ghisFDoctor\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by treating doctor\"><option value=\"\">All doctors</option></select>\n      <select id=\"ghisFGender\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Filter by gender\"><option value=\"\">All genders</option><option value=\"m\">Male</option><option value=\"f\">Female</option></select>\n      <select id=\"ghisFSort\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\" title=\"Sort patients\"><option value=\"\">Default order</option><option value=\"name\">Name A–Z</option><option value=\"branch\">Branch</option><option value=\"doctor\">Doctor</option><option value=\"bed\">Bed</option></select>\n    </div>\n    <div id=\"ghisCount\" class=\"ghis-count\"></div>\n\n    <div id=\"ghisPatientList\" class=\"ghis-pt-list\"></div>\n\n    <div id=\"ghisLabDrawer\" class=\"ghis-lab-drawer\" style=\"display:none;\">\n      <div class=\"ghis-lab-header\">\n        <button class=\"ghis-back-sm\" onclick=\"closeLabDrawer()\">{{ic:back}} Back</button>\n        <div class=\"ghis-lab-title\" id=\"ghisLabTitle\"></div>\n      </div>\n      <div id=\"ghisLabBody\" class=\"ghis-lab-body\"></div>\n    </div>\n  </div>\n</div>";
+  var PANEL_HTML = "<div id=\"ghisPanel\">\n  <div class=\"ghis-header\">\n    <button class=\"ghis-back\" onclick=\"closeGHIS();try{window.SMD_showHome&&window.SMD_showHome()}catch(e){}\" aria-label=\"Back to home\">{{ic:back}}</button>\n    <div class=\"ghis-title\">{{ic:ward}} Ward Sync <span id=\"ghisConnDot\" class=\"ghis-dot ghis-dot-off\"></span></div>\n    <button class=\"ghis-refresh-btn\" id=\"ghisWatchedBtn\" onclick=\"if(window.SMD_WATCH&&window.SMD_WATCH.openManager)window.SMD_WATCH.openManager();else alert('Sign in with your Google/Apple account to see watched patients.')\" title=\"Lab Watch 24/7, background lab alerts\" aria-label=\"Lab Watch\">{{ic:bell}}</button>\n    <button class=\"ghis-refresh-btn\" id=\"ghisRefreshBtn\" onclick=\"ghisRefresh()\" title=\"Refresh\" aria-label=\"Refresh\">{{ic:refresh}}</button>\n  </div>\n\n  <div id=\"ghisSetup\" class=\"ghis-body\">\n    <div class=\"ghis-setup-card\">\n      <div class=\"ghis-setup-title\">Sign in to GHIS</div>\n      <div class=\"ghis-setup-sub\">Use your own GITAM HIS login.</div>\n      <input id=\"ghisUserId\" class=\"ghis-login-input\" type=\"text\" autocomplete=\"username\" placeholder=\"GHIS User ID\">\n      <input id=\"ghisPassword\" class=\"ghis-login-input\" type=\"password\" autocomplete=\"current-password\" placeholder=\"Password\"\n             onkeydown=\"if(event.key==='Enter') ghisConnect()\">\n      <div class=\"ghis-setup-sub\" style=\"margin:2px 0 12px\">Your password is used only to sign in and is never stored on our servers. If your session times out, just sign in again.</div>\n      <button class=\"ghis-connect-btn\" onclick=\"ghisConnect()\">Sign in</button>\n      <div id=\"ghisSetupError\" class=\"ghis-setup-error\"></div>\n    </div>\n  </div>\n\n  <div id=\"ghisWard\" class=\"ghis-body\" style=\"display:none;\">\n    <div id=\"ghisAddTarget\" style=\"display:none;align-items:center;box-sizing:border-box;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line,#e4eae8);border-radius:10px;background:var(--paper,#f6f8f6)\"></div>\n    <div class=\"ghis-filter-row\">\n      <input id=\"ghisSearchPt\" data-phi-input class=\"ghis-filter-input\" placeholder=\"Search name, ID or bed\" oninput=\"ghisApplyFilters()\" />\n      <button class=\"ghis-ftoggle\" id=\"ghisFToggle\" type=\"button\" onclick=\"ghisToggleFilters()\" aria-expanded=\"false\" aria-controls=\"ghisFilterPanel\"><svg viewBox=\"0 0 24 24\" width=\"17\" height=\"17\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M4 6h16M7 12h10M10 18h4\"/></svg><span>Filters</span><b id=\"ghisFCount\" hidden></b></button>\n      <button class=\"ghis-logout-btn\" onclick=\"ghisDisconnect()\" title=\"Sign out\" aria-label=\"Sign out\">{{ic:logout}}</button>\n    </div>\n    <div id=\"ghisFilterPanel\" class=\"ghis-fpanel\" hidden>\n      <label class=\"ghis-fl\" data-fl=\"ghisFFloor\"><span>Floor</span><select id=\"ghisFFloor\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\"><option value=\"\">All floors</option></select></label>\n      <label class=\"ghis-fl\" data-fl=\"ghisFWard\"><span>Ward</span><select id=\"ghisFWard\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\"><option value=\"\">All wards</option></select></label>\n      <label class=\"ghis-fl\" data-fl=\"ghisFBranch\"><span>Department</span><select id=\"ghisFBranch\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\"><option value=\"\">All departments</option></select></label>\n      <label class=\"ghis-fl\" data-fl=\"ghisFDoctor\"><span>Doctor</span><select id=\"ghisFDoctor\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\"><option value=\"\">All doctors</option></select></label>\n      <label class=\"ghis-fl\" data-fl=\"ghisFStatus\"><span>Status</span><select id=\"ghisFStatus\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\"><option value=\"\">Any status</option></select></label>\n      <label class=\"ghis-fl\" data-fl=\"ghisFGender\"><span>Gender</span><select id=\"ghisFGender\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\"><option value=\"\">All genders</option><option value=\"m\">Male</option><option value=\"f\">Female</option></select></label>\n      <label class=\"ghis-fl\" data-fl=\"ghisFSort\"><span>Sort</span><select id=\"ghisFSort\" class=\"ghis-filter-sel\" onchange=\"ghisApplyFilters()\"><option value=\"\">Hospital order</option><option value=\"bed\">Bed</option><option value=\"name\">Name A to Z</option><option value=\"ward\">Ward</option><option value=\"floor\">Floor</option><option value=\"doctor\">Doctor</option></select></label>\n      <button class=\"ghis-fclear\" type=\"button\" onclick=\"ghisClearFilters()\">Clear all filters</button>\n    </div>\n    <div id=\"ghisActiveF\" class=\"ghis-activef\"></div>\n    <div id=\"ghisCount\" class=\"ghis-count\"></div>\n\n    <div id=\"ghisPatientList\" class=\"ghis-pt-list\"></div>\n\n    <div id=\"ghisLabDrawer\" class=\"ghis-lab-drawer\" style=\"display:none;\">\n      <div class=\"ghis-lab-header\">\n        <button class=\"ghis-back-sm\" onclick=\"closeLabDrawer()\">{{ic:back}} Back</button>\n        <div class=\"ghis-lab-title\" id=\"ghisLabTitle\"></div>\n      </div>\n      <div id=\"ghisLabBody\" class=\"ghis-lab-body\"></div>\n    </div>\n  </div>\n</div>";
 
   function inject() {
     var GHIS = window.GHIS = window.GHIS || {};
@@ -823,6 +823,36 @@
           });
       };
     
+      // Ward Sync redesign styles (owner 2026-11-22): injected once, scoped to #ghisPanel, app colour tokens throughout.
+      function _ensureWardCss() {
+        if (document.getElementById('ghisWardCss')) return;
+        var st = document.createElement('style'); st.id = 'ghisWardCss';
+        st.textContent = "#ghisPanel .ghis-filter-row{display:flex;gap:8px;align-items:center;margin:0}#ghisPanel .ghis-filter-input{flex:1;min-width:0;height:46px;border-radius:12px;font-size:16px}#ghisPanel .ghis-ftoggle{display:inline-flex;align-items:center;gap:6px;height:46px;padding:0 14px;border-radius:12px;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:700 14.5px var(--sans,system-ui);cursor:pointer;flex:0 0 auto}#ghisPanel .ghis-ftoggle[aria-expanded=true]{border-color:var(--teal,#0F766E);color:var(--teal,#0F766E)}#ghisPanel .ghis-ftoggle b{min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--teal,#0F766E);color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center}#ghisPanel .ghis-ftoggle b[hidden]{display:none}#ghisPanel .ghis-logout-btn{height:46px;width:46px;flex:0 0 auto}#ghisPanel .ghis-fpanel{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin:10px 0 2px;padding:12px;border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff)}#ghisPanel .ghis-fpanel[hidden]{display:none}#ghisPanel .ghis-fl{display:flex;flex-direction:column;gap:5px;min-width:0;font:700 11.5px var(--sans,system-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--slate,#5a7184)}#ghisPanel .ghis-fl select{width:100%;min-width:0;height:44px;margin:0}#ghisPanel .ghis-fclear{grid-column:1/-1;min-height:42px;border:none;background:none;color:var(--teal,#0F766E);font:700 14.5px var(--sans,system-ui);cursor:pointer}#ghisPanel .ghis-activef{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}#ghisPanel .ghis-activef:empty{display:none}#ghisPanel .ghis-achip{display:inline-flex;align-items:center;gap:4px;min-height:34px;padding:0 10px 0 12px;border-radius:17px;border:1px solid var(--teal,#0F766E);background:rgba(15,118,110,.08);color:var(--teal,#0F766E);font:700 13px var(--sans,system-ui);cursor:pointer}#ghisPanel .ghis-achip span{font-weight:600;opacity:.8}#ghisPanel .ghis-achip b{font-size:17px;line-height:1;margin-left:2px}#ghisPanel .ghis-count{margin:10px 2px 0}#ghisPanel .ghis-grp-h{font:800 12px var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--slate,#5a7184);padding:16px 4px 7px}#ghisPanel .ghis-grp-h span{font-weight:700;opacity:.85}#ghisPanel .ghis-grp{background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden}#ghisPanel #ghisPatientList .ghis-pt-card.ghis-row{display:flex!important;align-items:center;gap:12px;margin:0!important;padding:10px 10px 10px 12px!important;min-height:64px;border:none!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;position:relative;cursor:pointer}#ghisPanel .ghis-row+.ghis-row:before{content:'';position:absolute;left:64px;right:0;top:0;border-top:1px solid var(--line,#e2e8f0)}#ghisPanel .ghis-row:active{background:rgba(15,118,110,.06)!important}#ghisPanel .ghis-row:focus-visible{outline:2px solid var(--teal,#0F766E);outline-offset:-2px}#ghisPanel .ghis-bed{flex:0 0 auto;min-width:42px;height:42px;padding:0 5px;border-radius:12px;background:rgba(15,118,110,.10);color:var(--teal,#0F766E);display:flex;align-items:center;justify-content:center;font:800 12.5px var(--sans,system-ui);font-variant-numeric:tabular-nums;box-sizing:border-box}#ghisPanel .ghis-bed.none{color:var(--slate,#5a7184);background:rgba(90,113,132,.10)}#ghisPanel .ghis-row-t{flex:1;min-width:0}#ghisPanel .ghis-row-n{font:700 16px/1.25 var(--sans,system-ui);color:var(--ink,#0f172a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#ghisPanel .ghis-row-n .ghis-pt-status{font-size:10.5px;padding:2px 6px;vertical-align:2px}#ghisPanel .ghis-row-m{font:500 13.5px/1.3 var(--sans,system-ui);color:var(--slate,#5a7184);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}#ghisPanel .ghis-add{position:relative;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-width:58px;height:34px;padding:0 10px;border-radius:17px;border:1px solid var(--line,#e2e8f0);color:var(--teal,#0F766E);font:700 12.5px var(--sans,system-ui);cursor:pointer}#ghisPanel .ghis-add input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}#ghisPanel .ghis-add.on{background:var(--teal,#0F766E);border-color:var(--teal,#0F766E);color:#fff}#ghisPanel .ghis-chev{flex:0 0 auto;width:18px;height:18px;fill:none;stroke:var(--slate,#9aa8b2);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.7}#ghisPanel .ghis-row .ghis-pt-select{flex:0 0 auto;min-height:38px;padding:0 16px;border-radius:19px}#ghisPanel .ghis-empty{display:grid;gap:6px;justify-items:center;text-align:center;padding:28px 12px;color:var(--slate,#5a7184)}#ghisPanel .ghis-empty b{color:var(--ink,#0f172a);font-size:15.5px}#ghisPanel .ghis-empty .ghis-fclear{grid-column:auto}#ghisPanel .ghis-pv-h{padding:2px 2px 12px}#ghisPanel .ghis-pv-n{font:800 21px/1.2 var(--sans,system-ui);color:var(--ink,#0f172a)}#ghisPanel .ghis-pv-m{font:500 13.5px/1.4 var(--sans,system-ui);color:var(--slate,#5a7184);margin-top:3px}#ghisPanel .ghis-acts{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px;margin:0 0 14px}#ghisPanel .ghis-act{position:relative;min-height:66px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:6px 4px;border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff);color:var(--teal,#0F766E);font:700 12.5px/1.2 var(--sans,system-ui);text-align:center;cursor:pointer;box-shadow:0 1px 0 var(--line,#e2e8f0)}#ghisPanel .ghis-act:active{transform:translateY(1px)}#ghisPanel .ghis-act.pri{background:var(--teal,#0F766E);border-color:var(--teal,#0F766E);color:#fff}#ghisPanel .ghis-act.on{background:rgba(15,118,110,.10);border-color:var(--teal,#0F766E)}#ghisPanel .ghis-act input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}#ghisPanel .ghis-act svg{width:20px;height:20px}#ghisPanel .ghis-act:focus-visible,#ghisPanel .ghis-act:focus-within{outline:2px solid var(--teal,#0F766E);outline-offset:2px}#ghisPanel .ghis-sec{background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;margin:0 0 14px}#ghisPanel .ghis-sec-h{display:flex;justify-content:space-between;gap:8px;padding:11px 12px 7px;font:800 12px var(--sans,system-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--slate,#5a7184)}#ghisPanel .ghis-sec-h span+span{text-transform:none;letter-spacing:0;font-weight:600}#ghisPanel .ghis-tr{display:grid;grid-template-columns:minmax(0,1fr) 72px 58px 46px;gap:10px;align-items:center;padding:9px 12px;border-top:1px solid var(--line,#e2e8f0);font:500 14px var(--sans,system-ui);color:var(--ink,#0f172a)}#ghisPanel .ghis-tr-n{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#ghisPanel .ghis-tr-n small{display:block;font-size:11.5px;color:var(--slate,#5a7184);margin-top:1px}#ghisPanel .ghis-flag{justify-self:end}#ghisPanel .ghis-tr-v{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}#ghisPanel .ghis-tr-v small{font-weight:500;color:var(--slate,#5a7184);font-size:11.5px}#ghisPanel .ghis-tr-v.bad{color:#B4231C}#ghisPanel .ghis-spark{width:72px;height:22px;fill:none;stroke:var(--teal,#0F766E);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}#ghisPanel .ghis-spark .band{fill:var(--teal,#0F766E);opacity:.12;stroke:none}#ghisPanel .ghis-spark circle{fill:var(--teal,#0F766E);stroke:none}#ghisPanel .ghis-spark.bad path{stroke:#B4231C}#ghisPanel .ghis-spark.bad circle{fill:#B4231C}#ghisPanel .ghis-spark.none{display:inline-block}#ghisPanel .ghis-flag{font:800 10.5px var(--sans,system-ui);padding:3px 6px;border-radius:6px;text-transform:uppercase;letter-spacing:.03em}#ghisPanel .ghis-flag.hi,#ghisPanel .ghis-flag.lo{background:#FCECEA;color:#B4231C}#ghisPanel .ghis-flag.ok{background:rgba(15,118,110,.10);color:var(--teal,#0F766E)}body.dark #ghisPanel .ghis-tr-v.bad,body.v3-dark #ghisPanel .ghis-tr-v.bad{color:#F08A7E}body.dark #ghisPanel .ghis-spark.bad path,body.v3-dark #ghisPanel .ghis-spark.bad path{stroke:#F08A7E}body.dark #ghisPanel .ghis-spark.bad circle,body.v3-dark #ghisPanel .ghis-spark.bad circle{fill:#F08A7E}body.dark #ghisPanel .ghis-flag.hi,body.dark #ghisPanel .ghis-flag.lo,body.v3-dark #ghisPanel .ghis-flag.hi,body.v3-dark #ghisPanel .ghis-flag.lo{background:rgba(240,138,126,.16);color:#F08A7E}#ghisPanel .ghis-grp-h{display:flex;align-items:center;justify-content:space-between;gap:8px}#ghisPanel .ghis-grp-h i{font-style:normal;font-weight:700;opacity:.85}#ghisPanel .ghis-grp-sel{flex:0 0 auto;min-height:32px;padding:0 12px;border-radius:16px;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--teal,#0F766E);font:700 12.5px var(--sans,system-ui);letter-spacing:0;text-transform:none;cursor:pointer}#ghisPanel .ghis-grp-sel[aria-pressed=true]{background:var(--teal,#0F766E);border-color:var(--teal,#0F766E);color:#fff}#ghisPanel .ghis-grp-sel[hidden]{display:none}#ghisPanel .ghis-selhint{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0 0;padding:10px 12px;border-radius:12px;background:rgba(15,118,110,.07);color:var(--ink,#0f172a);font:500 13.5px/1.35 var(--sans,system-ui)}#ghisPanel .ghis-selbox{position:relative;flex:0 0 auto;width:44px;height:44px;margin:-6px -6px -6px -8px;display:flex;align-items:center;justify-content:center;cursor:pointer}#ghisPanel .ghis-selbox input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}#ghisPanel .ghis-selbox span,#ghisPanel .ghis-selbox.in{width:24px;height:24px;border-radius:50%;border:2px solid var(--slate,#9aa8b2);display:flex;align-items:center;justify-content:center;box-sizing:border-box}#ghisPanel .ghis-selbox.in{margin:0 4px 0 2px;border:none;background:rgba(15,118,110,.14);color:var(--teal,#0F766E)}#ghisPanel .ghis-selbox svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0}#ghisPanel .ghis-selbox.in svg{opacity:1}#ghisPanel .ghis-selbox input:checked+span{background:var(--teal,#0F766E);border-color:var(--teal,#0F766E);color:#fff}#ghisPanel .ghis-selbox input:checked+span svg{opacity:1}#ghisPanel .ghis-selbox input:focus-visible+span{outline:2px solid var(--teal,#0F766E);outline-offset:2px}#ghisPanel #ghisPatientList .ghis-pt-card.ghis-row.sel{background:rgba(15,118,110,.07)!important}#ghisPanel .ghis-row+.ghis-row:before{left:100px}#ghisPanel .ghis-inunit{flex:0 0 auto;font:700 11.5px var(--sans,system-ui);color:var(--teal,#0F766E);background:rgba(15,118,110,.10);padding:4px 8px;border-radius:8px}#ghisPanel .ghis-selbar{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;gap:10px;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--panel,#fff);border-top:1px solid var(--line,#e2e8f0);box-shadow:0 -6px 18px rgba(16,32,40,.10)}#ghisPanel .ghis-selbar[hidden]{display:none}#ghisPanel .ghis-selbar #ghisSelTxt{flex:1;min-width:0;font:600 15px var(--sans,system-ui);color:var(--ink,#0f172a)}#ghisPanel .ghis-selclear{min-height:44px;padding:0 14px;border:none;background:none;color:var(--slate,#5a7184);font:700 14.5px var(--sans,system-ui);cursor:pointer}#ghisPanel .ghis-seladd{min-height:46px;padding:0 18px;border:none;border-radius:12px;background:var(--teal,#0F766E);color:#fff;font:800 15px var(--sans,system-ui);cursor:pointer;max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#ghisPanel .ghis-selbar.busy .ghis-seladd,#ghisPanel .ghis-selbar.busy .ghis-selclear{opacity:.5;pointer-events:none}#ghisPanel #ghisWard.ghis-has-sel{padding-bottom:96px}@media (min-width:900px){#ghisPanel #ghisLabBody > *{max-width:760px;margin-left:auto;margin-right:auto}}@media (prefers-reduced-motion:reduce){#ghisPanel .ghis-act:active{transform:none}}";
+        document.head.appendChild(st);
+      }
+      // "21-NOV-2026 07:51", ISO, or anything Date.parse reads; 0 when unknown so it sorts first.
+      var _MON = { JAN: 0, FEB: 1, MAR: 2, APR: 3, MAY: 4, JUN: 5, JUL: 6, AUG: 7, SEP: 8, OCT: 9, NOV: 10, DEC: 11 };
+      function _whenMs(s) {
+        var m = /^(\d{1,2})[-\/ ]([A-Za-z]{3})[-\/ ](\d{4})(?:\s+(\d{1,2}):(\d{2}))?/.exec(String(s || '').trim());
+        if (m && _MON[m[2].toUpperCase()] != null) return new Date(+m[3], _MON[m[2].toUpperCase()], +m[1], +(m[4] || 0), +(m[5] || 0)).getTime();
+        var t = Date.parse(String(s || '')); return isNaN(t) ? 0 : t;
+      }
+      // Trend line for one lab (needs two points): normal range as a faint band, latest point marked.
+      function _spark(it) {
+        var pts = it.pts.slice(-8);
+        if (pts.length < 2) return '<span class="ghis-spark none"></span>';
+        var vals = pts.map(function(p) { return p.v; });
+        if (!isNaN(it.low)) vals.push(it.low);
+        if (!isNaN(it.high)) vals.push(it.high);
+        var mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals), W = 72, H = 22, pad = 3;
+        if (mx === mn) { mx += 1; mn -= 1; }
+        function y(v) { return (H - pad - (v - mn) / (mx - mn) * (H - 2 * pad)).toFixed(1); }
+        var step = (W - 2 * pad) / (pts.length - 1);
+        var d = pts.map(function(p, i) { return (i ? 'L' : 'M') + (pad + i * step).toFixed(1) + ' ' + y(p.v); }).join(' ');
+        var band = (!isNaN(it.low) && !isNaN(it.high)) ? '<rect x="0" y="' + y(it.high) + '" width="' + W + '" height="' + Math.max(1, (y(it.low) - y(it.high))).toFixed(1) + '" class="band"/>' : '';
+        var lx = (pad + (pts.length - 1) * step).toFixed(1), ly = y(pts[pts.length - 1].v);
+        return '<svg class="ghis-spark' + (it.flag ? ' bad' : '') + '" viewBox="0 0 ' + W + ' ' + H + '" aria-hidden="true">' + band + '<path d="' + d + '"/><circle cx="' + lx + '" cy="' + ly + '" r="2.4"/></svg>';
+      }
       function statusBadge(status) {
         var cls = 'ghis-status-other', label = status || 'Unknown';
         if (!status) return '<span class="ghis-pt-status ghis-status-other">—</span>';
@@ -906,41 +936,107 @@
         el.innerHTML = '<span style="font:700 12px var(--sans,system-ui);color:var(--slate,#5a7184);flex:0 0 auto">Adding to</span>' +
           '<select onchange="GHIS.setAddTarget(this.value)" style="flex:1;min-width:0;margin-left:8px;padding:7px 8px;border:1px solid var(--line,#e4eae8);border-radius:8px;font:600 13px var(--sans,system-ui);background:var(--panel,#fff);color:var(--ink,#0f172a)">' + opts + '</select>';
       }
-      function renderPatients(list) {
+      /* Ward list (owner 2026-11-22, variant A): grouped one-line rows, bed badge first, so ~9 patients fit a phone screen.
+       * Tap a row to open the patient (Assess, Call, Lab Watch and trends live there). The Add toggle stays on the row
+       * for bulk-adding to a dashboard unit, and Select replaces it while another module is picking a patient. */
+      function _bedBadge(b) {
+        var t = String(b || '').trim();
+        if (!t) return '';
+        return t.length > 6 ? t.slice(-6) : t;
+      }
+      var _lastGroups = [], _lastShown = [];
+      function _unitLabel() { try { return (window.ICU && ICU.currentUnitLabel && ICU.currentUnitLabel()) || 'the unit'; } catch (e) { return 'the unit'; } }
+      // Bottom bar for multi-select: "N selected", Clear, "Add N to <unit>". Hidden while nothing is ticked or while picking one.
+      function renderSelBar() {
+        var ward = document.getElementById('ghisWard'); if (!ward) return;
+        var bar = document.getElementById('ghisSelBar');
+        if (!bar) {
+          bar = document.createElement('div'); bar.id = 'ghisSelBar'; bar.className = 'ghis-selbar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Selected patients');
+          ward.appendChild(bar);
+        }
+        var n = Object.keys(GHIS._sel || {}).length;
+        if (!n || GHIS._pickCb) { bar.hidden = true; ward.classList.remove('ghis-has-sel'); return; }
+        if (bar.classList.contains('busy')) return;
+        bar.hidden = false; ward.classList.add('ghis-has-sel');
+        bar.innerHTML = '<span id="ghisSelTxt" aria-live="polite"><b>' + n + '</b> selected</span>' +
+          '<button type="button" class="ghis-selclear" onclick="GHIS.clearSel()">Clear</button>' +
+          '<button type="button" class="ghis-seladd" onclick="GHIS.addSelected()">Add ' + n + ' to ' + esc(_unitLabel()) + '</button>';
+      }
+      function renderGroupButtons() {
+        Array.prototype.forEach.call(document.querySelectorAll('#ghisPatientList .ghis-grp-sel'), function(b) {
+          var gi = b.getAttribute('data-gi'), g = gi === 'all' ? { items: _lastShown } : _lastGroups[+gi];
+          var pending = g ? g.items.filter(function(p) { return !_addedPids[p.patientId]; }) : [];
+          var all = pending.length && pending.every(function(p) { return GHIS._sel[p.patientId]; });
+          b.hidden = !pending.length;
+          b.textContent = all ? 'Clear' : (gi === 'all' ? 'Select all ' + pending.length + ' shown' : 'Select all');
+          b.setAttribute('aria-pressed', all ? 'true' : 'false');
+        });
+      }
+      function syncSelBoxes() {
+        Array.prototype.forEach.call(document.querySelectorAll('#ghisPatientList input[data-sel-pid]'), function(i) {
+          i.checked = !!GHIS._sel[i.getAttribute('data-sel-pid')];
+          var r = i.closest ? i.closest('.ghis-row') : null; if (r) r.classList.toggle('sel', i.checked);
+        });
+      }
+      function renderPatients(list, groupBy) {
         var el = document.getElementById('ghisPatientList');
         if (!el) return;
+        _ensureWardCss();
         if (!list || list.length === 0) {
-          el.innerHTML = '<div class="ghis-empty">No patients found. Try searching with no filters.</div>';
+          el.innerHTML = '<div class="ghis-empty"><b>No patients match.</b><span>Clear a filter or the search to see more.</span>' +
+            '<button type="button" class="ghis-fclear" onclick="ghisClearFilters();var s=document.getElementById(\'ghisSearchPt\');if(s){s.value=\'\';ghisApplyFilters();}">Show all patients</button></div>';
           return;
         }
         renderAddTarget();
-        el.innerHTML = (GHIS._pickCb ? '<div class="ghis-pick-banner">Tap <b>Select</b> on the patient you want.</div>' : '') + list.map(function(p, i) {
-          var age = p.dob ? p.dob : '';
+        var picking = !!GHIS._pickCb;
+        // Choosing one patient for a module is not adding to a unit: hide the unit bar while picking.
+        try { var at = document.getElementById('ghisAddTarget'); if (at && picking) at.style.display = 'none'; } catch (e) {}
+        var keyOf = groupBy === 'dept' ? function(p) { return String(p.deptDescription || '').trim() || 'Other'; }
+          : groupBy === 'ward' ? function(p) { return _wardOf(p) || 'No ward'; }
+          : groupBy === 'floor' ? function(p) { return _floorOf(p) || 'No floor'; }
+          : groupBy === 'doctor' ? function(p) { var d = String(p.employeeFirstName || '').trim(); return d && !/^dr\.?$/i.test(d) ? 'Dr. ' + d : 'No doctor'; } : null;
+        function row(p) {
           var nm = (p.patientFirstName && String(p.patientFirstName).trim()) ? p.patientFirstName : '(no name)';
           var doc = (p.employeeFirstName || '').trim();
           var showDoc = doc && doc.toLowerCase() !== 'dr' && doc.toLowerCase() !== 'dr.';
-          var dept = (p.deptDescription || '').trim();
+          var sx = String(p.gender || '').trim().charAt(0).toUpperCase();
           var added = !!_addedPids[p.patientId];
-          return '<div class="ghis-pt-card" data-pid="' + esc(p.patientId) + '" onclick="GHIS.onPatient(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')">' +
-            '<div class="ghis-pt-top">' +
-              '<label style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:0 0 auto;margin-right:10px;cursor:pointer;font:700 10px var(--sans,system-ui);color:' + (added ? 'var(--teal,#0e6e63)' : 'var(--slate,#5a7184)') + '" onclick="event.stopPropagation()" title="Add to the current dashboard unit">' +
-                '<input type="checkbox"' + (added ? ' checked' : '') + ' style="width:20px;height:20px" onchange="GHIS.toggleAdd(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\',this)"><span>' + (added ? 'Added' : 'Add') + '</span>' +
-              '</label>' +
-              '<div style="flex:1;min-width:0">' +
-                '<div class="ghis-pt-name">' + phi('name', p.patientFirstName, esc(nm)) + ' <span style="font-weight:400;font-size:12px;color:var(--slate)">· ' + phi('id', p.patientId, esc(p.patientId)) + '</span></div>' +
-                '<div class="ghis-pt-meta">' + [esc(age), (p.gender ? esc(p.gender) : ''), (p.bedName ? 'Bed ' + esc(p.bedName) : '')].filter(Boolean).join(' · ') + '</div>' +
-              '</div>' +
-              statusBadge(p.queueStatus) +
-            '</div>' +
-            ((dept || showDoc) ? '<div class="ghis-pt-dept">' + [esc(dept), (showDoc ? 'Dr. ' + esc(doc) : '')].filter(Boolean).join(' · ') + '</div>' : '') +
-            '<div class="ghis-pt-actions">' +
-              (GHIS._pickCb ? '<button class="ghis-pt-call ghis-pt-select" type="button" onclick="event.stopPropagation();GHIS.onPatient(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')">Select</button>' : '') +
-              '<button class="ghis-pt-call ghis-pt-assess" type="button" title="Initial assessment" onclick="event.stopPropagation();GHIS.openAssessment(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M12 12v6"/></svg> Assess</button>' +
-              '<button class="ghis-pt-call" type="button" title="Call patient" onclick="event.stopPropagation();GHIS.callPatient(\'' + jsq(p.patientId) + '\',this)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg> Call</button></div>' +
-          '</div>';
-        }).join('');
+          var open = 'GHIS.onPatient(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')';
+          var meta = [[esc(p.dob || ''), sx].filter(Boolean).join(' '), (showDoc ? 'Dr. ' + esc(doc) : ''), phi('id', p.patientId, esc(p.patientId))].filter(Boolean).join(' · ');
+          var bed = _bedBadge(p.bedName);
+          var selOn = !!GHIS._sel[p.patientId];
+          var lead = picking ? '' : (added
+            ? '<span class="ghis-selbox in" title="Already in ' + esc(_unitLabel()) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>'
+            : '<label class="ghis-selbox" onclick="event.stopPropagation()"><input type="checkbox" data-sel-pid="' + esc(p.patientId) + '"' + (selOn ? ' checked' : '') +
+                ' aria-label="Select ' + esc(nm) + '" onchange="this.closest(\'.ghis-row\').classList.toggle(\'sel\',this.checked);GHIS.toggleSel(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\',this.checked)">' +
+                '<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></label>');
+          var tail = picking
+            ? '<button class="ghis-pt-call ghis-pt-select" type="button" onclick="event.stopPropagation();' + open + '">Select</button>'
+            : (added ? '<span class="ghis-inunit">In unit</span>' : '') + '<svg class="ghis-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+          return '<div class="ghis-pt-card ghis-row' + (selOn ? ' sel' : '') + '" role="button" tabindex="0" data-pid="' + esc(p.patientId) + '" onclick="' + open + '" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();' + open + '}">' + lead +
+            '<span class="ghis-bed' + (bed ? '' : ' none') + '" aria-label="' + (bed ? 'Bed ' + esc(p.bedName) : 'No bed') + '">' + (bed ? esc(bed) : '&middot;') + '</span>' +
+            '<div class="ghis-row-t"><div class="ghis-row-n">' + phi('name', p.patientFirstName, esc(nm)) + (p.queueStatus ? ' ' + statusBadge(p.queueStatus) : '') + '</div>' +
+              '<div class="ghis-row-m">' + meta + '</div></div>' + tail + '</div>';
+        }
+        var html = picking ? '<div class="ghis-pick-banner">Tap <b>Select</b> on the patient you want.</div>'
+          : '<div class="ghis-selhint"><span>Tick patients to add to <b>' + esc(_unitLabel()) + '</b>, or a whole group.</span><button type="button" class="ghis-grp-sel" data-gi="all" onclick="GHIS.selectGroup(\'all\')">Select all shown</button></div>';
+        var groups = [];
+        if (keyOf) {
+          var idx = {};
+          list.forEach(function(p) { var k = keyOf(p); if (!(k in idx)) { idx[k] = groups.length; groups.push({ k: k, items: [] }); } groups[idx[k]].items.push(p); });
+          html += groups.map(function(g, gi) {
+            return '<div class="ghis-grp-h"><span>' + esc(g.k) + ' <i>&middot; ' + g.items.length + '</i></span>' +
+              (picking ? '' : '<button type="button" class="ghis-grp-sel" data-gi="' + gi + '" onclick="GHIS.selectGroup(' + gi + ')">Select all</button>') + '</div>' +
+              '<div class="ghis-grp">' + g.items.map(row).join('') + '</div>';
+          }).join('');
+        } else {
+          html += '<div class="ghis-grp">' + list.map(row).join('') + '</div>';
+        }
+        _lastGroups = groups; _lastShown = list;
+        el.innerHTML = html;
+        renderGroupButtons(); renderSelBar();
       }
-    
+
       function abnormalClass(t) {
         // numeric result outside [low, high] → abnormal
         if (t.critical && String(t.critical).trim() && String(t.critical) !== '0') return ' abnormal';
@@ -1019,7 +1115,7 @@
           (dataset && dataset.branches || []).forEach(function (b) {
             (b.patients || []).forEach(function (p) {
               flat.push({ patientId: p.patientId, episodeId: p.episodeId, patientFirstName: p.name,
-                gender: p.gender, bedName: p.bed, employeeFirstName: p.doctor, deptDescription: b.dept,
+                gender: p.gender, bedName: p.bed, employeeFirstName: p.doctor, deptDescription: b.dept, wardName: p.ward || b.ward || '', floorName: p.floor || b.floor || '',
                 dob: String(p.age) });
               labsById[p.patientId] = p.labs || [];
               imgById[p.patientId] = p.imaging || [];
@@ -1129,9 +1225,25 @@
           // Compact single header: one Lab Watch control (opens the unified sheet — in-app now, with
           // "turn on 24/7" inside). Adding to the dashboard is done via the list checkbox; auto-fetch
           // lives in the dashboard (removed here).
+          /* Patient screen (owner 2026-11-22, variant A + B's trend lines): who, four actions, then the latest results
+           * with a trend line each (normal range shaded), then medications, imaging and every lab order as before. */
+          _ensureWardCss();
+          var pr = null, ros = _patients || [];
+          for (var pi = 0; pi < ros.length; pi++) { if (String(ros[pi].patientId) === String(patientId)) { pr = ros[pi]; break; } }
+          var pdoc = pr && String(pr.employeeFirstName || '').trim(), psx = pr ? String(pr.gender || '').trim().charAt(0).toUpperCase() : '';
+          var pmeta = pr ? [[esc(pr.dob || ''), psx].filter(Boolean).join(' '), (pr.bedName ? 'Bed ' + esc(pr.bedName) : ''), esc(String(pr.deptDescription || '').trim()),
+            (pdoc && !/^dr\.?$/i.test(pdoc) ? 'Dr. ' + esc(pdoc) : '')].filter(Boolean).join(' &middot; ') : '';
+          var padded = !!_addedPids[patientId], q3 = '\'' + jsq(episodeId) + '\',\'' + jsq(patientId) + '\',\'' + jsq(name) + '\'';
           body.innerHTML =
-            (lwOk ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0d5c54" onclick="GHIS.watchLabs(\'' + jsq(patientId) + '\')">' + wIco("bell") + ' Lab Watch — alerts on new labs</button>' : '') +
-            '<div id="ghisMedSection"></div><div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
+            '<div class="ghis-pv-h"><div class="ghis-pv-n">' + phi('name', name, esc(name)) + '</div><div class="ghis-pv-m">' + (pmeta ? pmeta + ' &middot; ' : '') + phi('id', patientId, esc(patientId)) + '</div></div>' +
+            '<div class="ghis-acts">' +
+              '<button type="button" class="ghis-act pri ghis-pt-assess" title="Initial assessment" onclick="event.stopPropagation();GHIS.openAssessment(' + q3 + ')">' + '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M12 12v6"/></svg>' + '<span>Assess</span></button>' +
+              '<button type="button" class="ghis-act" onclick="GHIS.callPatient(\'' + jsq(patientId) + '\',this)">' + '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg>' + '<span>Call</span></button>' +
+              (lwOk ? '<button type="button" class="ghis-act" onclick="GHIS.watchLabs(\'' + jsq(patientId) + '\')">' + wIco("bell") + '<span>Lab Watch</span></button>' : '') +
+              '<label class="ghis-act' + (padded ? ' on' : '') + '" title="Add to the current dashboard unit"><input type="checkbox"' + (padded ? ' checked' : '') + ' onchange="this.parentNode.classList.toggle(\'on\',this.checked);GHIS.toggleAdd(' + q3 + ',this)">' + '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>' + '<span>' + (padded ? 'Added' : 'Add to unit') + '</span></label>' +
+            '</div>' +
+            '<div id="ghisTrendSection"><div class="ghis-loading">Loading latest results\u2026</div></div>' +
+            '<div id="ghisMedSection"></div><div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders\u2026</div></div>';
           drawer.style.display = '';
           // Open at the TOP. The drawer is position:absolute; inset:0 inside #ghisWard, which is a
           // scrolled container (the patient list). If the list is scrolled down when a patient is
@@ -1156,6 +1268,45 @@
           GHIS.loadMedications(patientId);
           GHIS.loadRadiology(patientId);
           GHIS.loadLabs(patientId);
+          GHIS.renderTrends(patientId);
+        },
+        // Latest value of every numeric lab with its trend line (normal range shaded when the lab gives one).
+        // Abnormal results first. Values are only shown and flagged, never interpreted.
+        renderTrends: function(patientId) {
+          var box = document.getElementById('ghisTrendSection');
+          if (!box || !GHIS.fetchLabTests) { if (box) box.innerHTML = ''; return; }
+          GHIS.fetchLabTests(patientId).then(function(rows) {
+            if (String(GHIS._patientId) !== String(patientId)) return;   // the doctor already opened someone else
+            var by = {}, keys = [];
+            (rows || []).forEach(function(r) {
+              var v = parseFloat(String(r.result == null ? '' : r.result).replace(/[^\d.\-]/g, ''));
+              var nm = String(r.test || '').trim();
+              if (isNaN(v) || !nm) return;
+              var k = nm.toLowerCase();
+              if (!by[k]) { by[k] = { name: nm, units: r.units || '', pts: [], low: NaN, high: NaN }; keys.push(k); }
+              by[k].pts.push({ v: v, t: _whenMs(r.date), d: r.date || '' });
+              var lo = parseFloat(r.low), hi = parseFloat(r.high);
+              if (!isNaN(lo)) by[k].low = lo;
+              if (!isNaN(hi)) by[k].high = hi;
+            });
+            var items = keys.map(function(k) {
+              var it = by[k];
+              it.pts.sort(function(a, b) { return a.t - b.t; });
+              it.last = it.pts[it.pts.length - 1];
+              it.flag = (!isNaN(it.high) && it.last.v > it.high) ? 'High' : (!isNaN(it.low) && it.last.v < it.low) ? 'Low' : '';
+              return it;
+            });
+            if (!items.length) { box.innerHTML = ''; return; }
+            items.sort(function(a, b) { return ((b.flag ? 1 : 0) - (a.flag ? 1 : 0)) || (b.last.t - a.last.t); });
+            var newest = items.reduce(function(m, it) { return it.last.t > m.t ? it.last : m; }, items[0].last);
+            box.innerHTML = '<div class="ghis-sec"><div class="ghis-sec-h"><span>Latest results</span><span>' + esc(newest.d || '') + '</span></div>' +
+              items.slice(0, 12).map(function(it) {
+                var fl = it.flag ? '<span class="ghis-flag ' + (it.flag === 'High' ? 'hi' : 'lo') + '">' + it.flag + '</span>' : '<span class="ghis-flag ok">OK</span>';
+                if (isNaN(it.low) && isNaN(it.high)) fl = '';
+                return '<div class="ghis-tr"><span class="ghis-tr-n">' + esc(it.name) + (it.units ? '<small>' + esc(it.units) + '</small>' : '') + '</span>' + _spark(it) +
+                  '<b class="ghis-tr-v' + (it.flag ? ' bad' : '') + '">' + esc(String(it.last.v)) + '</b>' + (fl || '<span></span>') + '</div>';
+              }).join('') + '</div>';
+          }).catch(function() { box.innerHTML = ''; });
         },
         // Bridge a ward patient into the ICU dashboard. Transfers DEMOGRAPHICS only
         // (name/age/sex/bed/dept) — structured lab auto-import is deliberately NOT done
@@ -1233,22 +1384,26 @@
         },
         // Tick-to-add: build FULL demographics + fetch labs, then file the patient into the CURRENTLY
         // selected unit's board WITHOUT navigating (ICU.addWardPatientToRoster). Supports multi-add.
-        addToDashboard: function(episodeId, patientId, name) {
-          if (!window.ICU || !ICU.addWardPatientToRoster) { alert('Dashboard not loaded.'); return; }
+        addToDashboard: function(episodeId, patientId, name, quiet) {
+          if (!window.ICU || !ICU.addWardPatientToRoster) { if (!quiet) alert('Dashboard not loaded.'); return Promise.reject(new Error('no_dashboard')); }
           var p = null, list = (typeof _patients !== 'undefined' && _patients) || [];
           for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
           var dem = demoFromPatient(p), labs = [];
-          authFetch('/lab?patientId=' + encodeURIComponent(patientId)).then(function (j) {
+          return authFetch('/lab?patientId=' + encodeURIComponent(patientId)).then(function (j) {
             var orders = ((j && j.orders) || []).slice(0, 25);
             return Promise.all(orders.map(function (o) {
               return authFetch('/lab-detail?renderId=' + encodeURIComponent(o.renderId) + '&episodeId=' + encodeURIComponent(o.episodeId) + '&patientId=' + encodeURIComponent(patientId))
                 .then(function (d) { (d && d.tests || []).forEach(function (t) { labs.push({ test: t.test, result: t.result, units: t.units, low: t.low, high: t.high, date: o.orderDate || o.date }); }); }).catch(function () {});
             }));
           }).catch(function () {}).then(function () {
-            Promise.resolve(ICU.addWardPatientToRoster({ patient: dem, patientId: patientId, episodeId: episodeId, source: 'Ward Sync', labs: labs })).then(function () {
+            return Promise.resolve(ICU.addWardPatientToRoster({ patient: dem, patientId: patientId, episodeId: episodeId, source: 'Ward Sync', labs: labs })).then(function () {
               _addedPids[patientId] = true;
-              try { if (window.toast) toast('Added ' + (dem.name ? pv('name', dem.name) : 'patient') + ' to ' + (ICU.currentUnitLabel ? ICU.currentUnitLabel() : 'dashboard')); } catch (e) {}
-            }, function () { delete _addedPids[patientId]; try { if (window.toast) toast('Couldn’t add — open the dashboard and choose a unit first.'); } catch (e) {} if (typeof ghisApplyFilters === 'function') ghisApplyFilters(); });
+              if (!quiet) { try { if (window.toast) toast('Added ' + (dem.name ? pv('name', dem.name) : 'patient') + ' to ' + (ICU.currentUnitLabel ? ICU.currentUnitLabel() : 'dashboard')); } catch (e) {} }
+            }, function (err) {
+              delete _addedPids[patientId];
+              if (!quiet) { try { if (window.toast) toast('Couldn’t add — open the dashboard and choose a unit first.'); } catch (e) {} if (typeof ghisApplyFilters === 'function') ghisApplyFilters(); }
+              throw err || new Error('add_failed');
+            });
           });
         },
         // Checkbox handler (list). Tick = add to the dashboard, untick = remove it (a real toggle).
@@ -1338,7 +1493,7 @@
           // One-shot "pick a patient for another module" handoff (see pickPatient below). Checked
           // before the import and lab paths so the caller gets the tap instead of the ward drawer.
           if (GHIS._pickCb) {
-            var cb = GHIS._pickCb; GHIS._pickCb = null;
+            var cb = GHIS._pickCb; GHIS._pickCb = null; GHIS._pickCancel = null;
             try { var pk = document.getElementById('ghisPanel'); if (pk) pk.classList.remove('open'); } catch (e) {}
             try { cb({ episodeId: episodeId, patientId: patientId, name: name }); } catch (e) {}
             return;
@@ -1355,8 +1510,9 @@
          * second ward list inside another module would duplicate all of that and drift from it.
          * The callback is cleared before firing, so a stale handoff can never hijack a later tap;
          * cancel() drops it if the doctor backs out instead. */
-        pickPatient: function(cb) {
+        pickPatient: function(cb, opts) {
           GHIS._pickCb = (typeof cb === 'function') ? cb : null;
+          GHIS._pickCancel = (opts && typeof opts.onCancel === 'function') ? opts.onCancel : null;
           GHIS._importMode = false;
           if (!document.getElementById('ghisPickCss')) {
             var st = document.createElement('style'); st.id = 'ghisPickCss';
@@ -1370,6 +1526,45 @@
         },
         cancelPick: function() { GHIS._pickCb = null; },
         isPicking: function() { return !!GHIS._pickCb; },
+        /* Multi-select for adding to ICU or a unit (owner 2026-11-22): tick patients, or a whole department, ward, floor
+         * or doctor group, then one "Add N" button adds them all. Ticking selects only; nothing is added until Add. */
+        _sel: {},
+        toggleSel: function(episodeId, patientId, name, on) {
+          if (on) GHIS._sel[patientId] = { episodeId: episodeId, patientId: patientId, name: name };
+          else delete GHIS._sel[patientId];
+          renderSelBar(); renderGroupButtons();
+        },
+        selectGroup: function(gi) {
+          var g = gi === 'all' ? { items: _lastShown } : _lastGroups[gi]; if (!g) return;
+          var pending = g.items.filter(function(p) { return !_addedPids[p.patientId]; });
+          var all = pending.length && pending.every(function(p) { return GHIS._sel[p.patientId]; });
+          pending.forEach(function(p) {
+            if (all) delete GHIS._sel[p.patientId];
+            else GHIS._sel[p.patientId] = { episodeId: p.episodeId, patientId: p.patientId, name: p.patientFirstName };
+          });
+          syncSelBoxes(); renderSelBar(); renderGroupButtons();
+        },
+        clearSel: function() { GHIS._sel = {}; syncSelBoxes(); renderSelBar(); renderGroupButtons(); },
+        addSelected: function() {
+          var items = Object.keys(GHIS._sel).map(function(k) { return GHIS._sel[k]; });
+          if (!items.length) return;
+          if (!window.ICU || !ICU.addWardPatientToRoster) { try { if (window.toast) toast('Open the ICU dashboard and choose a unit first.'); } catch (e) {} return; }
+          var done = 0, ok = 0, bar = document.getElementById('ghisSelBar');
+          if (bar) bar.classList.add('busy');
+          function progress() { var t = document.getElementById('ghisSelTxt'); if (t) t.textContent = 'Adding ' + (done + 1) + ' of ' + items.length + '\u2026'; }
+          items.reduce(function(chain, it) {
+            return chain.then(function() {
+              progress();
+              return GHIS.addToDashboard(it.episodeId, it.patientId, it.name, true).then(function() { ok++; }, function() {});
+            }).then(function() { done++; });
+          }, Promise.resolve()).then(function() {
+            GHIS._sel = {};
+            if (bar) bar.classList.remove('busy');
+            var unit = (window.ICU && ICU.currentUnitLabel) ? ICU.currentUnitLabel() : 'the dashboard';
+            try { if (window.toast) toast(ok === items.length ? 'Added ' + ok + (ok === 1 ? ' patient' : ' patients') + ' to ' + unit : 'Added ' + ok + ' of ' + items.length + '. Open the dashboard to check the rest.'); } catch (e) {}
+            if (typeof window.ghisApplyFilters === 'function') window.ghisApplyFilters(); else renderSelBar();
+          });
+        },
         /* QA BUG-018: newest lab values for one ward patient, for modules that only need a few numbers
          * (the oncology Calvert calculator wants creatinine + demographics). Resolves
          * { patient:{age,sex,name,weightKg?}, labs:{creatinine,creatinineDate,...} }. Uses the same
@@ -1679,7 +1874,10 @@
     
       window.closeGHIS = function() {
         document.getElementById('ghisPanel').classList.remove('open');
-        GHIS._pickCb = null;   // leaving Ward Sync without Select cancels a pending pick
+        // Leaving Ward Sync without Select cancels a pending pick; the caller can restore its own screen.
+        var pc = GHIS._pickCb ? GHIS._pickCancel : null;
+        GHIS._pickCb = null; GHIS._pickCancel = null;
+        if (pc) { try { pc(); } catch (e) {} }
         // If the Drug Interactions overlay is open behind us, refresh it so the
         // Ward Sync card + patient pill reflect the patient just selected here.
         try {
@@ -1822,10 +2020,44 @@
         }).join('');
         if (cur && values.indexOf(cur) !== -1) sel.value = cur;   // preserve selection across refresh
       }
+      /* Floor and ward are read from whatever the hospital's roster carries (names differ by HIS); a filter shows
+       * only when the roster has at least two values for it, so nothing is invented. */
+      function _floorOf(p) { return String((p && (p.floorName || p.floorDescription || p.floor)) || '').trim(); }
+      function _wardOf(p) { return String((p && (p.wardName || p.wardDescription || p.ward)) || '').trim(); }
       function populateFilterOptions() {
-        _fillSelect('ghisFBranch', _distinct(_patients.map(function(p) { return p.deptDescription; })));
-        _fillSelect('ghisFDoctor', _distinct(_patients.map(function(p) { return p.employeeFirstName; })));
+        var sets = {
+          ghisFFloor: _distinct(_patients.map(_floorOf)),
+          ghisFWard: _distinct(_patients.map(_wardOf)),
+          ghisFBranch: _distinct(_patients.map(function(p) { return p.deptDescription; })),
+          ghisFDoctor: _distinct(_patients.map(function(p) { return p.employeeFirstName; })),
+          ghisFStatus: _distinct(_patients.map(function(p) { return p.queueStatus; }))
+        };
+        Object.keys(sets).forEach(function(id) {
+          _fillSelect(id, sets[id]);
+          var lab = document.querySelector('#ghisFilterPanel [data-fl="' + id + '"]');
+          if (lab) lab.style.display = sets[id].length >= 2 ? '' : 'none';
+        });
       }
+      var FILTER_NAMES = { ghisFFloor: 'Floor', ghisFWard: 'Ward', ghisFBranch: 'Department', ghisFDoctor: 'Doctor', ghisFStatus: 'Status', ghisFGender: 'Gender' };
+      function renderActiveFilters() {
+        var box = document.getElementById('ghisActiveF'), badge = document.getElementById('ghisFCount');
+        var on = Object.keys(FILTER_NAMES).filter(function(id) { return _val(id); });
+        if (badge) { badge.hidden = !on.length; badge.textContent = on.length ? String(on.length) : ''; }
+        if (!box) return;
+        box.innerHTML = on.map(function(id) {
+          var el = document.getElementById(id), txt = el && el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : _val(id);
+          return '<button type="button" class="ghis-achip" onclick="ghisClearFilter(\'' + id + '\')" aria-label="Remove ' + esc(FILTER_NAMES[id]) + ' filter">' +
+            '<span>' + esc(FILTER_NAMES[id]) + ':</span> ' + esc(txt) + ' <b aria-hidden="true">&times;</b></button>';
+        }).join('');
+      }
+      window.ghisToggleFilters = function() {
+        var pnl = document.getElementById('ghisFilterPanel'), btn = document.getElementById('ghisFToggle');
+        if (!pnl) return;
+        pnl.hidden = !pnl.hidden;
+        if (btn) btn.setAttribute('aria-expanded', pnl.hidden ? 'false' : 'true');
+      };
+      window.ghisClearFilter = function(id) { var el = document.getElementById(id); if (el) el.value = ''; window.ghisApplyFilters(); };
+      window.ghisClearFilters = function() { Object.keys(FILTER_NAMES).forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; }); window.ghisApplyFilters(); };
       function _genderMatch(g, sel) {
         if (!sel) return true;
         return String(g || '').trim().toLowerCase().charAt(0) === sel;   // 'm' / 'f'
@@ -1833,9 +2065,14 @@
       window.ghisApplyFilters = function() {
         var q = (_val('ghisSearchPt') || '').toLowerCase().trim();
         var br = _val('ghisFBranch'), dr = _val('ghisFDoctor'), gn = _val('ghisFGender'), sort = _val('ghisFSort');
+        var fl = _val('ghisFFloor'), wd = _val('ghisFWard'), stt = _val('ghisFStatus');
         var list = _patients.filter(function(p) {
           if (q && String(p.patientFirstName || '').toLowerCase().indexOf(q) === -1 &&
-                   String(p.patientId || '').toLowerCase().indexOf(q) === -1) return false;
+                   String(p.patientId || '').toLowerCase().indexOf(q) === -1 &&
+                   String(p.bedName || '').toLowerCase().indexOf(q) === -1) return false;
+          if (fl && _floorOf(p) !== fl) return false;
+          if (wd && _wardOf(p) !== wd) return false;
+          if (stt && String(p.queueStatus || '') !== stt) return false;
           if (br && String(p.deptDescription || '') !== br) return false;
           if (dr && String(p.employeeFirstName || '') !== dr) return false;
           if (!_genderMatch(p.gender, gn)) return false;
@@ -1844,7 +2081,10 @@
         var key = sort === 'name' ? 'patientFirstName' : sort === 'branch' ? 'deptDescription'
                 : sort === 'doctor' ? 'employeeFirstName' : sort === 'bed' ? 'bedName' : null;
         if (key) list = list.slice().sort(function(a, b) { return _cmp(a[key], b[key]); });
-        renderPatients(list);
+        else if (sort === 'ward') list = list.slice().sort(function(a, b) { return _cmp(_wardOf(a), _wardOf(b)) || _cmp(a.bedName, b.bedName); });
+        else if (sort === 'floor') list = list.slice().sort(function(a, b) { return _cmp(_floorOf(a), _floorOf(b)) || _cmp(a.bedName, b.bedName); });
+        renderPatients(list, !sort ? 'dept' : (sort === 'ward' ? 'ward' : sort === 'floor' ? 'floor' : sort === 'doctor' ? 'doctor' : ''));
+        renderActiveFilters();
         try { renderFavs(); } catch (e) {}
         var cnt = document.getElementById('ghisCount');
         if (cnt) cnt.textContent = _patients.length

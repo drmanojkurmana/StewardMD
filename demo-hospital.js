@@ -147,7 +147,7 @@
   }
 
   var BRANCHES = [
-    { dept: "General Medicine", patients: [
+    { dept: "General Medicine", ward: "Ward 3A", floor: "3rd floor", patients: [
       P("Ramesh Iyer", "M", 62, "GM-1", "Priya Nair",
         { Sodium: 122, Potassium: 3.8, "Serum Creatinine": 0.9, "Blood Urea": 28, Haemoglobin: 13.2 }, 3,
         [ usg("Liver, gallbladder, pancreas, spleen and both kidneys normal. No free fluid.", "Radiology"),
@@ -168,7 +168,7 @@
         [ usg("All abdominal organs normal in size and echotexture.", "Radiology"),
           cect("Unremarkable study, no acute findings.", "Radiology") ])
     ]},
-    { dept: "StewardMD MICU", patients: [
+    { dept: "StewardMD MICU", ward: "MICU", floor: "2nd floor", patients: [
       // Unit Head: Dr. Kavita Subramanian. Five named residents below, one per patient,
       // not two names shared across all five (a real ICU rotates several residents).
       P("Mohammed Ali", "M", 58, "ICU-1", "Ritika Sen",
@@ -199,7 +199,7 @@
           cect("No retroperitoneal or intra-abdominal haemorrhage. Splenomegaly.", "Radiology", 12) ],
         mkVitals({ hr: [92, 118], sbp: [116, 88], dbp: [72, 54], rr: [16, 24], spo2: [97, 93], temp: [37.4, 38.6], uop: [42, 20], gcs: 15 }))
     ]},
-    { dept: "Nephrology", patients: [
+    { dept: "Nephrology", ward: "Ward 4B", floor: "4th floor", patients: [
       // Deliberate spread of renal function for the dosing demo: normal -> mild -> moderate -> severe -> AKI-on-CKD.
       P("Krishna Murthy", "M", 50, "NEPH-5", "Meera Iyengar",
         { "Serum Creatinine": 0.9, "Blood Urea": 24, Haemoglobin: 13.8 }, 4,
@@ -222,7 +222,7 @@
         [ usg("Right kidney normal, left kidney shows mild pelvicalyceal fullness.", "Radiology"),
           cect("Mild left hydroureteronephrosis, no definite calculus seen. Correlate clinically.", "Radiology") ])
     ]},
-    { dept: "Cardiology", patients: [
+    { dept: "Cardiology", ward: "Ward 4A", floor: "4th floor", patients: [
       P("Vijay Anand", "M", 67, "CARD-1", "Rohit Malhotra",
         { Potassium: [3.4, 2.9], "Serum Creatinine": 1.1 }, 3,
         [ usg("Liver mildly enlarged with smooth margins, congestive pattern.", "Radiology"),
@@ -243,7 +243,7 @@
         [ usg("Normal abdominal ultrasound.", "Radiology"),
           cect("No acute abdominal pathology.", "Radiology") ])
     ]},
-    { dept: "General Surgery", patients: [
+    { dept: "General Surgery", ward: "Ward 3B", floor: "3rd floor", patients: [
       P("Arun Prakash", "M", 34, "SURG-1", "Divya Menon",
         { Haemoglobin: [12.8, 11.8], "Total WBC Count": [10200, 12400] }, 20,
         [ usg("Post-appendicectomy status. No collection in the right iliac fossa.", "Radiology", 30),
