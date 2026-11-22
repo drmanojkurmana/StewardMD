@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### VID6 gap-fill videos (2026-11-22, contentVersion 0.4.28)
+97 clips across 7 operations, returned as vid6.json inside a zip: ruptured AAA 20, axillary clearance 19, WLE sentinel node 18, fibroadenoma 14, femoral embolectomy 14 (all from none), myomectomy 11, mastectomy 1. GthlK0Bv0aI blocks embedding.
+
 ### VID4 gap-fill videos (2026-11-22, contentVersion 0.4.27)
 VID4 came back in a different shape (top-level `videos` dict plus `operations` lists keyed by videoId); converted to the usual shape before wiring. 84 clips across 8 operations: orchidopexy 20, herniotomy 15, intussusception 15, pyloromyotomy 14, circumcision 13 (paediatric ones from none), plus 7 urology gaps. Blocked embeds: Jql4Xoy-VTs, StBecaGEqWs, bnZ_lOCvBYo (so the pyloromyotomy core steps have no clip). Pyloromyotomy 10 clip dropped (adult flank port animation).
 
