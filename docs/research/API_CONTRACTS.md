@@ -19,7 +19,7 @@ The following are implemented in the current pilot code. Other endpoint families
 - `GET /projects/{projectId}/meta-analyses/{analysisId}` — stored meta-analysis result and forest-plot-ready JSON.
 - Internal callback: `POST /internal/jobs/{jobId}/complete` — queue worker only; requires the callback secret.
 
-The meta-analysis engine currently supports OR/RR/HR on the log scale and MD/SMD on the linear scale, with fixed inverse-variance or DerSimonian–Laird random-effects pooling. It reports Q, I² and tau². The current API is pilot-gated by both RESEARCH_ENABLED=1 and RESEARCH_PILOT_MODE=1, and also requires the dedicated D1, R2 (for PDF uploads) and Queue bindings.
+The meta-analysis engine currently supports OR/RR/HR on the log scale and MD/SMD on the linear scale, with fixed inverse-variance or DerSimonian–Laird random-effects pooling. It reports Q, I² and tau². The current API is pilot-gated by both RESEARCH_MODE=pilot, and also requires the dedicated D1, R2 (for PDF uploads) and Queue bindings.
 
 Credits are not charged in this pilot. The full paper-credit quote/reserve/settle contract below is a target, not yet wired into the edge API. No PDF extraction, citation extraction, manuscript generation or approval/export endpoint is implemented yet.
 
