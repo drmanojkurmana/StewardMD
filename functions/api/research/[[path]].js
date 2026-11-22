@@ -135,17 +135,19 @@ export async function onRequest({ request, env, params }) {
   // Queue consumer callback: internal service-to-service auth, no Firebase token.
   const callback = path.match(/^\/v1\/internal\/jobs\/([^/]+)\/complete$/);
   if (callback && request.method === "POST") {
-    if (!safeEqual(request.headers.get("x-research-callback-token") || "", env.RESEARCH_CALLBACK_TOKEN || ""))
+    if (!env.RESEARCH_CALLBACK_TOKEN || !safeEqual(request.headers.get("x-research-callback-token") || "", env.RESEARCH_CALLBACK_TOKEN))
       return err(401, "unauthorized", "Invalid callback credentials", requestId);
     const body = await bodyJson(request);
     const job = await db.prepare("SELECT id,project_id FROM research_jobs WHERE id=? AND job_type='meta_analysis'").bind(callback[1]).first();
     if (!job) return err(404, "job_not_found", "Job not found", requestId);
     const now = Date.now();
+    const succeeded = body.status === "succeeded" && body.result && typeof body.result === "object";
+    const terminalStatus = succeeded ? "succeeded" : "failed";
     await db.batch([
-      db.prepare("UPDATE research_jobs SET status='succeeded',output_json=?,completed_ts=? WHERE id=? AND status IN ('queued','running')")
-        .bind(JSON.stringify({ analysisId: body.analysisId }), now, job.id),
+      db.prepare("UPDATE research_jobs SET status=?,output_json=?,error_code=?,completed_ts=? WHERE id=? AND status IN ('queued','running')")
+        .bind(terminalStatus, JSON.stringify({ analysisId: body.analysisId }), succeeded ? "" : String(body.errorCode || "analysis_failed").slice(0, 80), now, job.id),
       db.prepare("UPDATE research_meta_analyses SET result_json=?,completed_ts=? WHERE job_id=?")
-        .bind(JSON.stringify(body.result || {}), now, job.id),
+        .bind(JSON.stringify(succeeded ? body.result : { error: body.errorCode || "analysis_failed" }), now, job.id),
     ]);
     return json({ ok: true, requestId }, 200, { "x-request-id": requestId });
   }
