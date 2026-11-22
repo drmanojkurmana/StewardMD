@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### IMG1 pictures (2026-11-22, contentVersion 0.4.18)
+First of the 100-per-prompt picture prompts (generator `gen/make100.py`, only steps without a picture; Gemini returned zips, fetched from the share page by `zipdl.cjs`, wired by `imgM.py`). 92 of 100 wired: abscess drainage 11, Hartmann 20, loop ileostomy 19, perforated ulcer 17, small bowel resection 23, lap inguinal hernia 2. Rejected: Hartmann 05 (not in Lloyd-Davies stirrups), 06 (stoma site left unprepped), 11 (open bowel lumen before division), 12 (bare spine and sacrum drawn in the field); perforated ulcer 07 (trocar through the epigastric vessels), 09 (tube coming out of the perforation), 15 (resection staple lines on a patch repair); loop ileostomy 15 (long midline closed instead of the stoma-site fascia).
+
 ### VID2 gap-fill videos (2026-11-22, contentVersion 0.4.17)
 84 clips across 17 operations (sleeve, left hemicolectomy, open subtotal cholecystectomy, CBD exploration, gastrectomy, oesophagectomy, urology). 38 new ALLOW ids; IOAhfgHnsAY blocked again, so CBD exploration got 7 of 11.
 
