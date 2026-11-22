@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### IMG13 pictures (2026-11-22, contentVersion 0.4.37)
+98 recovered, 96 wired: ACL, carpal tunnel, distal radius 16 to 22, flexor tendon, split skin graft, trigger finger. Rejected flexor tendon 11 (drape inside the wound) and 14 (tendon drawn on the skin).
+
 ### IMG12 pictures (2026-11-22, contentVersion 0.4.36)
 89 recovered (hip hemiarthroplasty zip truncated), 11 rejected: septoplasty 09 to 15 (nose drawn as an external cut-away instead of an endonasal view), distal radius 11 (radius and ulna both exposed), 15 (open wound for percutaneous K-wires), leg fasciotomy 07 (bones through the skin), tympanoplasty 06 (head still not turned, third time).
 
