@@ -642,3 +642,6 @@ Gemini shares from batch 10 on carry inline images, not zips: scratchpad g4.cjs 
 ### Batch 22 images (2026-11-22, contentVersion 0.4.6)
 74 of 76 wired (plus quinsy-drainage qdx 14 of 15, 14 held: neck dressing on a transoral drainage): dynamic-hip-screw (dhsx), tibial-im-nail (tinx), open-fracture-debridement (ofdx), leg-fasciotomy (lfx).
 Held back: tibial nail 07 (AP fluoro shows the awl entering sideways), fasciotomy 07 (both incisions drawn on one face of the leg).
+
+### Batch 10 videos (2026-11-22, contentVersion 0.4.8)
+49 clips across abscess-drainage (adx), hartmanns-procedure (hpx), loop-ileostomy (lix), lap-perforated-duodenal-ulcer (lpdux), small-bowel-resection (sbrx). Gemini Chat-mode JSON wired directly by scratchpad wireJ.py (best watched clip per step, max 150 s, captions from "shows"). Dropped: 4 age-restricted embeds (D8YRoYRtI3Q, U00zOHu2fqo, daisKWjxK2w, ekddeHIYIJs) and the unwatched Hartmann's operation video, so Hartmann's, loop ileostomy and perforated ulcer have safety-step clips only.
