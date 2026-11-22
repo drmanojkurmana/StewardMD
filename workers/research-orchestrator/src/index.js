@@ -7,7 +7,7 @@ function log(event, fields = {}) {
 }
 async function execute(message, env) {
   const job = message.body || {};
-  if (job.type !== "meta-analysis" || !job.jobId || !job.analysisId || !job.input) {
+  if (job.type !== "meta-analysis" || !job.jobId || !job.analysisId) {
     log("invalid-message", { id: message.id });
     message.ack();
     return;
@@ -19,10 +19,11 @@ async function execute(message, env) {
   }
   try {
     await callback(job, env, { status: "started" }, "start");
+    const stored = await loadInput(job, env);
     const response = await fetch(env.RESEARCH_API_URL.replace(/\/$/, "") + "/v1/meta-analysis/compute", {
       method: "POST",
       headers: { "content-type": "application/json", "x-research-worker-token": env.RESEARCH_WORKER_TOKEN },
-      body: JSON.stringify(job.input),
+      body: JSON.stringify(stored.input),
       signal: AbortSignal.timeout(90000)
     });
     const text = await response.text();
@@ -41,6 +42,15 @@ async function execute(message, env) {
     log("retry", { jobId: job.jobId, reason: String(error && error.message || error).slice(0, 120) });
     message.retry({ delaySeconds: 30 });
   }
+}
+async function loadInput(job, env) {
+  const url = env.RESEARCH_CALLBACK_URL.replace(/\/$/, "") +
+    "/api/research/v1/internal/jobs/" + encodeURIComponent(job.jobId) + "/input";
+  const response = await fetch(url, { headers: { "x-research-callback-token": env.RESEARCH_CALLBACK_TOKEN } });
+  if (!response.ok) throw new Error("job_input_unavailable_" + response.status);
+  const payload = await response.json();
+  if (payload.analysisId !== job.analysisId || !payload.input) throw new Error("job_input_mismatch");
+  return payload;
 }
 async function callback(job, env, payload, phase = "complete") {
   const url = env.RESEARCH_CALLBACK_URL.replace(/\/$/, "") +
