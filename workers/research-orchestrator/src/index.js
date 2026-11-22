@@ -18,6 +18,7 @@ async function execute(message, env) {
     return;
   }
   try {
+    await callback(job, env, { status: "started" }, "start");
     const response = await fetch(env.RESEARCH_API_URL.replace(/\/$/, "") + "/v1/meta-analysis/compute", {
       method: "POST",
       headers: { "content-type": "application/json", "x-research-worker-token": env.RESEARCH_WORKER_TOKEN },
@@ -41,9 +42,9 @@ async function execute(message, env) {
     message.retry({ delaySeconds: 30 });
   }
 }
-async function callback(job, env, payload) {
+async function callback(job, env, payload, phase = "complete") {
   const url = env.RESEARCH_CALLBACK_URL.replace(/\/$/, "") +
-    "/api/research/v1/internal/jobs/" + encodeURIComponent(job.jobId) + "/complete";
+    "/api/research/v1/internal/jobs/" + encodeURIComponent(job.jobId) + "/" + phase;
   const response = await fetch(url, {
     method: "POST",
     headers: { "content-type": "application/json", "x-research-callback-token": env.RESEARCH_CALLBACK_TOKEN },
