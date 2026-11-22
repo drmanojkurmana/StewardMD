@@ -1294,11 +1294,35 @@
       : !pack ? "Needs the On-phone search pack (210 MB) from the model list above."
       : vec ? "When MaiK cannot tell which disease you mean, it also finds passages that mean the same thing. One 43 MB download. Applies after you restart the app."
       : "Off: MaiK finds passages by their words only. On: one 43 MB download, applies after you restart the app.";
+    /* Download lines (owner 2026-11-22: "give buttons for both cancer book and search data downloads").
+     * The book store and the vector module read their switch when the app starts, so until a restart
+     * the line says so instead of offering a download of the wrong file. */
+    function dlLine(kind, label, mb, have, st, needRestart) {
+      var txt = needRestart ? "Restart the app to finish turning this on."
+        : have ? label + " downloaded (" + mb + " MB)."
+        : st && st.downloading ? "Downloading " + label.toLowerCase() + ", " + Math.round((st.frac || 0) * 100) + "%"
+        : st && st.err ? "Download stopped. Tap Download to try again."
+        : label + " is not on this phone, " + mb + " MB.";
+      var btn = (!needRestart && !have && !(st && st.downloading))
+        ? '<button class="smd-nav-btn" data-me-bookdl="' + kind + '" style="margin:0;min-height:44px;flex:0 0 auto">Download</button>' : "";
+      return '<div class="me-bookdl" style="display:flex;align-items:center;gap:12px;margin:0 0 12px;padding:0 16px">' +
+          '<span data-me-bookst="' + kind + '" aria-live="polite" style="flex:1;min-width:0;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' + txt + '</span>' +
+          btn + '</div>';
+    }
+    var KB = window.SMD_MAIK_KB_STORE, BV = window.SMD_MAIK_BOOK_VEC;
+    var bookLine = !onc ? "" : dlLine("book", "Cancer book", 45,
+      !!(KB && KB.installedCached && KB.installedCached()), KB && KB.state ? KB.state() : null,
+      !(KB && KB.NAME === "maik-lite-kb-onco1.jsonl"));
+    var vecLine = !(vec && canVec) ? "" : dlLine("vec", "Search data", 43,
+      !!(BV && BV.downloaded && BV.downloaded()), BV && BV.state ? BV.state() : null,
+      !(KB && KB.NAME === "maik-lite-kb-onco1.jsonl"));
     return '<div class="me-kb" style="border-top:1px solid var(--line,#e2e8f0);padding:2px 14px">' +
         row(KEY_KB_ONCO, onc, "Cancer knowledge in the offline book",
           onc ? "The book includes 13,209 cancer notes: diagnosis, staging, treatment and trials. Applies after you restart the app."
               : "Off: the standard book. On: adds 13,209 cancer notes, one 45 MB download, applies after you restart the app.", false) +
+        bookLine +
         row(KEY_BOOK_VEC, vec && canVec, "Search by meaning", vecSub, !canVec) +
+        vecLine +
       '</div>';
   }
 
@@ -1428,6 +1452,27 @@
     // Offline book extras: flip the key, redraw the card (the meaning-search row's state depends on
     // the cancer-notes row). Turning cancer knowledge off also turns meaning search off: its
     // vectors belong to that book.
+    // Download buttons for the cancer book and its search data. Progress patches the status text in
+    // place (no full redraw per percent); the card is redrawn once when the download ends.
+    root.querySelectorAll("[data-me-bookdl]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var kind = b.getAttribute("data-me-bookdl"), KB = window.SMD_MAIK_KB_STORE, BV = window.SMD_MAIK_BOOK_VEC;
+        var src = kind === "book" ? KB : BV;
+        if (!src) return;
+        var label = kind === "book" ? "cancer book" : "search data";
+        var stop = src.subscribe ? src.subscribe(function (st) {
+          var el = document.querySelector('[data-me-bookst="' + kind + '"]');
+          if (el && st && st.downloading) el.textContent = "Downloading " + label + ", " + Math.round((st.frac || 0) * 100) + "%";
+        }) : null;
+        b.disabled = true;
+        var run = kind === "book" ? KB.ensure() : BV.load();
+        Promise.resolve(run).then(function () {
+          toast(kind === "book" ? "Cancer book is on this phone." : "Search data is on this phone.");
+        }, function () {
+          toast("Download stopped. Tap Download to try again.");
+        }).then(function () { if (stop) stop(); rerender(b, root); });
+      });
+    });
     root.querySelectorAll("[data-me-book]").forEach(function (b) {
       b.addEventListener("click", function () {
         if (b.disabled) return;
