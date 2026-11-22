@@ -26,6 +26,10 @@ pytest -q
 
 Do not use for clinical decision-making. Before publication, independently verify extracted data, analysis choices and results with a qualified statistician/researcher.
 
+## CI
+
+The dedicated Research CI workflow runs tests with PYTHONPATH set to the service root. Local equivalent: PYTHONPATH=. pytest.
+
 ## Deployment and queue topology
 
 Cloudflare Pages authenticates Firebase users and persists project/job metadata in the dedicated D1 database. PDFs are written to the private Research R2 bucket. Pages sends study-level effect inputs to the Research Queue. The queue consumer Worker calls this FastAPI service using X-Research-Worker-Token, then calls the authenticated Pages completion callback. See docs/research/DEPLOYMENT_RUNBOOK.md for provisioning. Production must remain disabled until the bindings and secrets are provisioned and reviewed.
