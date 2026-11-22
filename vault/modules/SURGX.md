@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### IMG11 pictures (2026-11-22, contentVersion 0.4.35)
+92 recovered (FESS zip truncated), wired the rest less 14 rejects: AKA 07 (femur drawn through skin), 11 (head above a thigh wound); AV fistula 14 (artery lying on the skin); fem-pop 10, 11, 22 (different patient from 01 to 06), 18, 20 (wound looks genital); GSV 09, 10 (open wound for percutaneous steps); tracheostomy 07 to 10 (whole larynx and trachea laid open, wrong scale).
+
 ### IMG10 pictures (2026-11-22, contentVersion 0.4.34)
 82 recovered (below-knee amputation zip truncated), 74 wired: fibroadenoma, carotid endarterectomy, fem-pop 01 to 06, femoral embolectomy, ruptured AAA. Rejected: carotid 07, 08 (clavicle and cut-away neck), 15 (midline neck incision), 16 (abdominal wound); embolectomy 12 (male face on a female patient), 13 (abdominal wound); RAAA 08 (aneurysm under an open chest), 20 (staples on the back).
 
