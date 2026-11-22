@@ -56,6 +56,36 @@ try {
   await ev(`document.getElementById("mcAuto_oakland_lgib").click(); return 1;`); await sleep(400);
   await ev(`closeGHIS(); return 1;`);
   ok((await ev(`return GHIS.isPicking();`)) === false, "closing Ward Sync without Select cancels the pick");
+  // Owner 2026-11-23: MELD-Na filled "0 of 5" though the patient had LFT, electrolytes and INR (fields had no lab tag).
+  await ev(`GHIS.loadDemoHospital(window.SMD_TEST_HOSPITAL); closeGHIS(); MEDCALC.open("meld_na"); return 1;`);
+  ok(await until(`document.getElementById("mcAuto_meld_na")`), "MELD-Na open");
+  await ev(`document.getElementById("mcAuto_meld_na").click(); return 1;`);
+  ok(await until(`document.querySelector("#ghisPatientList .ghis-pt-select")`), "MELD-Na Fill opens Ward Sync");
+  await ev(`var b=[].slice.call(document.querySelectorAll("#ghisPatientList .ghis-row")).filter(function(r){return /Ravi Kumar/.test(r.textContent);})[0]; b.querySelector(".ghis-pt-select").click(); return 1;`);
+  ok(await until(`/Filled 4 of 5/.test((document.getElementById("mcAFnote_meld_na")||{}).textContent||"")`, 15000), "MELD-Na fills bilirubin, INR, creatinine and sodium");
+  const mv = await ev(`return ["bili","inr","creat","na"].map(function(k){ return document.getElementById("mc_meld_na_"+k).value; }).join("|");`);
+  ok(/^8\.4\|2\.4\|/.test(mv), `MELD-Na takes the newest bilirubin and INR (${mv})`);
+  ok(/\d/.test(String(await ev(`return (document.getElementById("mcScore_meld_na")||{}).textContent||"";`))), "MELD-Na calculates a score");
+  await shot("3-meld-filled");
+  // Any EMR (owner 2026-11-23): a FHIR Connect hospital's Select returns the patient and its Observations fill the calculator.
+  await ev(`window.SMD_CONNECT = Object.assign({}, window.SMD_CONNECT || {}, {
+    connections: function(){ return Promise.resolve([{ connectionId: "c1" }]); },
+    worklist: function(){ return Promise.resolve({ rows: [{ patientId: "F1", episodeId: "F1", patientFirstName: "Fhir Patient", gender: "female", bedName: "9", employeeFirstName: "Rao", deptDescription: "Hepatology", dob: "55" }] }); },
+    pullContext: function(){ return Promise.resolve({ ok: true, bundle: { observations: [
+      { category: "laboratory", code: { text: "Bilirubin, Total" }, value: { value: 3.0, unit: "mg/dL" }, effectiveDateTime: "2026-11-20T08:00:00Z" },
+      { category: "laboratory", code: { text: "Bilirubin, Total" }, value: { value: 4.1, unit: "mg/dL" }, effectiveDateTime: "2026-11-22T08:00:00Z" },
+      { category: "laboratory", code: { text: "INR" }, value: { value: 1.6, unit: "" }, effectiveDateTime: "2026-11-22T08:00:00Z" },
+      { category: "laboratory", code: { text: "Creatinine" }, value: { value: 1.1, unit: "mg/dL" }, effectiveDateTime: "2026-11-22T08:00:00Z" },
+      { category: "laboratory", code: { text: "Sodium" }, value: { value: 131, unit: "mmol/L" }, effectiveDateTime: "2026-11-22T08:00:00Z" } ] } }); }
+  }); MEDCALC.open("meld_na"); return 1;`);
+  await sleep(300);
+  await ev(`document.getElementById("mcAuto_meld_na").click(); return 1;`); await sleep(500);
+  await ev(`ghisLoadConnectRoster("t1", "FHIR Test Hospital"); return 1;`);
+  ok(await until(`document.querySelector("#ghisPatientList .ghis-pt-select")`), "FHIR hospital roster shows Select");
+  await ev(`document.querySelector("#ghisPatientList .ghis-pt-select").click(); return 1;`);
+  ok(await until(`/Filled 4 of 5/.test((document.getElementById("mcAFnote_meld_na")||{}).textContent||"")`, 15000), "FHIR hospital: MELD-Na fills 4 of 5 from Observations");
+  const fv = await ev(`return ["bili","inr","creat","na"].map(function(k){ return document.getElementById("mc_meld_na_"+k).value; }).join("|");`);
+  ok(fv === "4.1|1.6|1.1|131", `FHIR hospital: newest values used (${fv})`);
   console.log(fails === 0 ? "\nALL GREEN: Fill from patient picks the patient in Ward Sync" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
