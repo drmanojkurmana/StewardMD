@@ -8933,7 +8933,6 @@
       '<div class="mc-action-row"><button type="button" class="mc-fill-link" id="mcAuto_'+id+'"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>Fill from patient</button><button type="button" class="mc-maik-btn" id="mcAsk_'+id+'">'+maikAskInner()+'</button></div>'+
       '<div id="mcAFnote_'+id+'"></div>'+
       '<div class="mc-panel" id="mcPanel_'+id+'">'+
-        (calcHasLab(c)?'<div class="mc-af"><button class="mc-af-btn" id="mcAFbtn_'+id+'">'+mcIco("flask")+' Choose patient (Ward Sync labs)</button><div class="mc-af-body" id="mcAFbody_'+id+'"></div></div>':"")+
         '<div class="mc-form">'+inputHTML(c)+'</div>'+
         '<button class="mc-calc-btn'+(_resultCb&&id===_resultCbId?" mc-use":"")+'" id="mcCalc_'+id+'">'+(_resultCb&&id===_resultCbId?"Use this result":"Calculate")+'</button>'+
         '<button type="button" class="mc-reset-btn" id="mcReset_'+id+'">Reset</button>'+

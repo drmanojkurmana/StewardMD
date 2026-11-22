@@ -827,7 +827,7 @@
       function _ensureWardCss() {
         if (document.getElementById('ghisWardCss')) return;
         var st = document.createElement('style'); st.id = 'ghisWardCss';
-        st.textContent = "#ghisPanel .ghis-filter-row{display:flex;gap:8px;align-items:center;margin:0}#ghisPanel .ghis-filter-input{flex:1;min-width:0;height:46px;border-radius:12px;font-size:16px}#ghisPanel .ghis-ftoggle{display:inline-flex;align-items:center;gap:6px;height:46px;padding:0 14px;border-radius:12px;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:700 14.5px var(--sans,system-ui);cursor:pointer;flex:0 0 auto}#ghisPanel .ghis-ftoggle[aria-expanded=true]{border-color:var(--teal,#0F766E);color:var(--teal,#0F766E)}#ghisPanel .ghis-ftoggle b{min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--teal,#0F766E);color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center}#ghisPanel .ghis-ftoggle b[hidden]{display:none}#ghisPanel .ghis-logout-btn{height:46px;width:46px;flex:0 0 auto}#ghisPanel .ghis-fpanel{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin:10px 0 2px;padding:12px;border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff)}#ghisPanel .ghis-fpanel[hidden]{display:none}#ghisPanel .ghis-fl{display:flex;flex-direction:column;gap:5px;min-width:0;font:700 11.5px var(--sans,system-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--slate,#5a7184)}#ghisPanel .ghis-fl select{width:100%;min-width:0;height:44px;margin:0}#ghisPanel .ghis-fclear{grid-column:1/-1;min-height:42px;border:none;background:none;color:var(--teal,#0F766E);font:700 14.5px var(--sans,system-ui);cursor:pointer}#ghisPanel .ghis-activef{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}#ghisPanel .ghis-activef:empty{display:none}#ghisPanel .ghis-achip{display:inline-flex;align-items:center;gap:4px;min-height:34px;padding:0 10px 0 12px;border-radius:17px;border:1px solid var(--teal,#0F766E);background:rgba(15,118,110,.08);color:var(--teal,#0F766E);font:700 13px var(--sans,system-ui);cursor:pointer}#ghisPanel .ghis-achip span{font-weight:600;opacity:.8}#ghisPanel .ghis-achip b{font-size:17px;line-height:1;margin-left:2px}#ghisPanel .ghis-count{margin:10px 2px 0}#ghisPanel .ghis-grp-h{font:800 12px var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--slate,#5a7184);padding:16px 4px 7px}#ghisPanel .ghis-grp-h span{font-weight:700;opacity:.85}#ghisPanel .ghis-grp{background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden}#ghisPanel #ghisPatientList .ghis-pt-card.ghis-row{display:flex!important;align-items:center;gap:12px;margin:0!important;padding:10px 10px 10px 12px!important;min-height:64px;border:none!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;position:relative;cursor:pointer}#ghisPanel .ghis-row+.ghis-row:before{content:'';position:absolute;left:64px;right:0;top:0;border-top:1px solid var(--line,#e2e8f0)}#ghisPanel .ghis-row:active{background:rgba(15,118,110,.06)!important}#ghisPanel .ghis-row:focus-visible{outline:2px solid var(--teal,#0F766E);outline-offset:-2px}#ghisPanel .ghis-bed{flex:0 0 auto;min-width:42px;height:42px;padding:0 5px;border-radius:12px;background:rgba(15,118,110,.10);color:var(--teal,#0F766E);display:flex;align-items:center;justify-content:center;font:800 12.5px var(--sans,system-ui);font-variant-numeric:tabular-nums;box-sizing:border-box}#ghisPanel .ghis-bed.none{color:var(--slate,#5a7184);background:rgba(90,113,132,.10)}#ghisPanel .ghis-row-t{flex:1;min-width:0}#ghisPanel .ghis-row-n{font:700 16px/1.25 var(--sans,system-ui);color:var(--ink,#0f172a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#ghisPanel .ghis-row-n .ghis-pt-status{font-size:10.5px;padding:2px 6px;vertical-align:2px}#ghisPanel .ghis-row-m{font:500 13.5px/1.3 var(--sans,system-ui);color:var(--slate,#5a7184);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}#ghisPanel .ghis-add{position:relative;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-width:58px;height:34px;padding:0 10px;border-radius:17px;border:1px solid var(--line,#e2e8f0);color:var(--teal,#0F766E);font:700 12.5px var(--sans,system-ui);cursor:pointer}#ghisPanel .ghis-add input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}#ghisPanel .ghis-add.on{background:var(--teal,#0F766E);border-color:var(--teal,#0F766E);color:#fff}#ghisPanel .ghis-chev{flex:0 0 auto;width:18px;height:18px;fill:none;stroke:var(--slate,#9aa8b2);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.7}#ghisPanel .ghis-row .ghis-pt-select{flex:0 0 auto;min-height:38px;padding:0 16px;border-radius:19px}#ghisPanel .ghis-empty{display:grid;gap:6px;justify-items:center;text-align:center;padding:28px 12px;color:var(--slate,#5a7184)}#ghisPanel .ghis-empty b{color:var(--ink,#0f172a);font-size:15.5px}#ghisPanel .ghis-empty .ghis-fclear{grid-column:auto}#ghisPanel .ghis-pv-h{padding:2px 2px 12px}#ghisPanel .ghis-pv-n{font:800 21px/1.2 var(--sans,system-ui);color:var(--ink,#0f172a)}#ghisPanel .ghis-pv-m{font:500 13.5px/1.4 var(--sans,system-ui);color:var(--slate,#5a7184);margin-top:3px}#ghisPanel .ghis-acts{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px;margin:0 0 14px}#ghisPanel .ghis-act{position:relative;min-height:66px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:6px 4px;border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff);color:var(--teal,#0F766E);font:700 12.5px/1.2 var(--sans,system-ui);text-align:center;cursor:pointer;box-shadow:0 1px 0 var(--line,#e2e8f0)}#ghisPanel .ghis-act:active{transform:translateY(1px)}#ghisPanel .ghis-act.pri{background:var(--teal,#0F766E);border-color:var(--teal,#0F766E);color:#fff}#ghisPanel .ghis-act.on{background:rgba(15,118,110,.10);border-color:var(--teal,#0F766E)}#ghisPanel .ghis-act input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}#ghisPanel .ghis-act svg{width:20px;height:20px}#ghisPanel .ghis-act:focus-visible,#ghisPanel .ghis-act:focus-within{outline:2px solid var(--teal,#0F766E);outline-offset:2px}#ghisPanel .ghis-sec{background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;margin:0 0 14px}#ghisPanel .ghis-sec-h{display:flex;justify-content:space-between;gap:8px;padding:11px 12px 7px;font:800 12px var(--sans,system-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--slate,#5a7184)}#ghisPanel .ghis-sec-h span+span{text-transform:none;letter-spacing:0;font-weight:600}#ghisPanel .ghis-tr{display:grid;grid-template-columns:minmax(0,1fr) 72px 58px 46px;gap:10px;align-items:center;padding:9px 12px;border-top:1px solid var(--line,#e2e8f0);font:500 14px var(--sans,system-ui);color:var(--ink,#0f172a)}#ghisPanel .ghis-tr-n{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#ghisPanel .ghis-tr-n small{display:block;font-size:11.5px;color:var(--slate,#5a7184);margin-top:1px}#ghisPanel .ghis-flag{justify-self:end}#ghisPanel .ghis-tr-v{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}#ghisPanel .ghis-tr-v small{font-weight:500;color:var(--slate,#5a7184);font-size:11.5px}#ghisPanel .ghis-tr-v.bad{color:#B4231C}#ghisPanel .ghis-spark{width:72px;height:22px;fill:none;stroke:var(--teal,#0F766E);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}#ghisPanel .ghis-spark .band{fill:var(--teal,#0F766E);opacity:.12;stroke:none}#ghisPanel .ghis-spark circle{fill:var(--teal,#0F766E);stroke:none}#ghisPanel .ghis-spark.bad path{stroke:#B4231C}#ghisPanel .ghis-spark.bad circle{fill:#B4231C}#ghisPanel .ghis-spark.none{display:inline-block}#ghisPanel .ghis-flag{font:800 10.5px var(--sans,system-ui);padding:3px 6px;border-radius:6px;text-transform:uppercase;letter-spacing:.03em}#ghisPanel .ghis-flag.hi,#ghisPanel .ghis-flag.lo{background:#FCECEA;color:#B4231C}#ghisPanel .ghis-flag.ok{background:rgba(15,118,110,.10);color:var(--teal,#0F766E)}body.dark #ghisPanel .ghis-tr-v.bad,body.v3-dark #ghisPanel .ghis-tr-v.bad{color:#F08A7E}body.dark #ghisPanel .ghis-spark.bad path,body.v3-dark #ghisPanel .ghis-spark.bad path{stroke:#F08A7E}body.dark #ghisPanel .ghis-spark.bad circle,body.v3-dark #ghisPanel .ghis-spark.bad circle{fill:#F08A7E}body.dark #ghisPanel .ghis-flag.hi,body.dark #ghisPanel .ghis-flag.lo,body.v3-dark #ghisPanel .ghis-flag.hi,body.v3-dark #ghisPanel .ghis-flag.lo{background:rgba(240,138,126,.16);color:#F08A7E}@media (min-width:900px){#ghisPanel #ghisLabBody > *{max-width:760px;margin-left:auto;margin-right:auto}}@media (prefers-reduced-motion:reduce){#ghisPanel .ghis-act:active{transform:none}}";
+        st.textContent = "#ghisPanel .ghis-filter-row{display:flex;gap:8px;align-items:center;margin:0}#ghisPanel .ghis-filter-input{flex:1;min-width:0;height:46px;border-radius:12px;font-size:16px}#ghisPanel .ghis-ftoggle{display:inline-flex;align-items:center;gap:6px;height:46px;padding:0 14px;border-radius:12px;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--ink,#0f172a);font:700 14.5px var(--sans,system-ui);cursor:pointer;flex:0 0 auto}#ghisPanel .ghis-ftoggle[aria-expanded=true]{border-color:var(--teal,#0F766E);color:var(--teal,#0F766E)}#ghisPanel .ghis-ftoggle b{min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--teal,#0F766E);color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center}#ghisPanel .ghis-ftoggle b[hidden]{display:none}#ghisPanel .ghis-logout-btn{height:46px;width:46px;flex:0 0 auto}#ghisPanel .ghis-fpanel{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;margin:10px 0 2px;padding:12px;border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff)}#ghisPanel .ghis-fpanel[hidden]{display:none}#ghisPanel .ghis-fl{display:flex;flex-direction:column;gap:5px;min-width:0;font:700 11.5px var(--sans,system-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--slate,#5a7184)}#ghisPanel .ghis-fl select{width:100%;min-width:0;height:44px;margin:0}#ghisPanel .ghis-fclear{grid-column:1/-1;min-height:42px;border:none;background:none;color:var(--teal,#0F766E);font:700 14.5px var(--sans,system-ui);cursor:pointer}#ghisPanel .ghis-activef{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}#ghisPanel .ghis-activef:empty{display:none}#ghisPanel .ghis-achip{display:inline-flex;align-items:center;gap:4px;min-height:34px;padding:0 10px 0 12px;border-radius:17px;border:1px solid var(--teal,#0F766E);background:rgba(15,118,110,.08);color:var(--teal,#0F766E);font:700 13px var(--sans,system-ui);cursor:pointer}#ghisPanel .ghis-achip span{font-weight:600;opacity:.8}#ghisPanel .ghis-achip b{font-size:17px;line-height:1;margin-left:2px}#ghisPanel .ghis-count{margin:10px 2px 0}#ghisPanel .ghis-grp-h{font:800 12px var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--slate,#5a7184);padding:16px 4px 7px}#ghisPanel .ghis-grp-h span{font-weight:700;opacity:.85}#ghisPanel .ghis-grp{background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden}#ghisPanel #ghisPatientList .ghis-pt-card.ghis-row{display:flex!important;align-items:center;gap:12px;margin:0!important;padding:10px 10px 10px 12px!important;min-height:64px;border:none!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;position:relative;cursor:pointer}#ghisPanel .ghis-row+.ghis-row:before{content:'';position:absolute;left:64px;right:0;top:0;border-top:1px solid var(--line,#e2e8f0)}#ghisPanel .ghis-row:active{background:rgba(15,118,110,.06)!important}#ghisPanel .ghis-row:focus-visible{outline:2px solid var(--teal,#0F766E);outline-offset:-2px}#ghisPanel .ghis-bed{flex:0 0 auto;min-width:42px;height:42px;padding:0 5px;border-radius:12px;background:rgba(15,118,110,.10);color:var(--teal,#0F766E);display:flex;align-items:center;justify-content:center;font:800 12.5px var(--sans,system-ui);font-variant-numeric:tabular-nums;box-sizing:border-box}#ghisPanel .ghis-bed.none{color:var(--slate,#5a7184);background:rgba(90,113,132,.10)}#ghisPanel .ghis-row-t{flex:1;min-width:0}#ghisPanel .ghis-row-n{font:700 16px/1.25 var(--sans,system-ui);color:var(--ink,#0f172a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#ghisPanel .ghis-row-n .ghis-pt-status{font-size:10.5px;padding:2px 6px;vertical-align:2px}#ghisPanel .ghis-row-m{font:500 13.5px/1.3 var(--sans,system-ui);color:var(--slate,#5a7184);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}#ghisPanel .ghis-add{position:relative;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-width:58px;height:34px;padding:0 10px;border-radius:17px;border:1px solid var(--line,#e2e8f0);color:var(--teal,#0F766E);font:700 12.5px var(--sans,system-ui);cursor:pointer}#ghisPanel .ghis-add input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}#ghisPanel .ghis-add.on{background:var(--teal,#0F766E);border-color:var(--teal,#0F766E);color:#fff}#ghisPanel .ghis-chev{flex:0 0 auto;width:18px;height:18px;fill:none;stroke:var(--slate,#9aa8b2);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.7}#ghisPanel .ghis-row .ghis-pt-select{flex:0 0 auto;min-height:38px;padding:0 16px;border-radius:19px}#ghisPanel .ghis-empty{display:grid;gap:6px;justify-items:center;text-align:center;padding:28px 12px;color:var(--slate,#5a7184)}#ghisPanel .ghis-empty b{color:var(--ink,#0f172a);font-size:15.5px}#ghisPanel .ghis-empty .ghis-fclear{grid-column:auto}#ghisPanel .ghis-pv-h{padding:2px 2px 12px}#ghisPanel .ghis-pv-n{font:800 21px/1.2 var(--sans,system-ui);color:var(--ink,#0f172a)}#ghisPanel .ghis-pv-m{font:500 13.5px/1.4 var(--sans,system-ui);color:var(--slate,#5a7184);margin-top:3px}#ghisPanel .ghis-acts{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px;margin:0 0 14px}#ghisPanel .ghis-act{position:relative;min-height:66px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:6px 4px;border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff);color:var(--teal,#0F766E);font:700 12.5px/1.2 var(--sans,system-ui);text-align:center;cursor:pointer;box-shadow:0 1px 0 var(--line,#e2e8f0)}#ghisPanel .ghis-act:active{transform:translateY(1px)}#ghisPanel .ghis-act.pri{background:var(--teal,#0F766E);border-color:var(--teal,#0F766E);color:#fff}#ghisPanel .ghis-act.on{background:rgba(15,118,110,.10);border-color:var(--teal,#0F766E)}#ghisPanel .ghis-act input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}#ghisPanel .ghis-act svg{width:20px;height:20px}#ghisPanel .ghis-act:focus-visible,#ghisPanel .ghis-act:focus-within{outline:2px solid var(--teal,#0F766E);outline-offset:2px}#ghisPanel .ghis-sec{background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;margin:0 0 14px}#ghisPanel .ghis-sec-h{display:flex;justify-content:space-between;gap:8px;padding:11px 12px 7px;font:800 12px var(--sans,system-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--slate,#5a7184)}#ghisPanel .ghis-sec-h span+span{text-transform:none;letter-spacing:0;font-weight:600}#ghisPanel .ghis-tr{display:grid;grid-template-columns:minmax(0,1fr) 72px 58px 46px;gap:10px;align-items:center;padding:9px 12px;border-top:1px solid var(--line,#e2e8f0);font:500 14px var(--sans,system-ui);color:var(--ink,#0f172a)}#ghisPanel .ghis-tr-n{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#ghisPanel .ghis-tr-n small{display:block;font-size:11.5px;color:var(--slate,#5a7184);margin-top:1px}#ghisPanel .ghis-flag{justify-self:end}#ghisPanel .ghis-tr-v{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}#ghisPanel .ghis-tr-v small{font-weight:500;color:var(--slate,#5a7184);font-size:11.5px}#ghisPanel .ghis-tr-v.bad{color:#B4231C}#ghisPanel .ghis-spark{width:72px;height:22px;fill:none;stroke:var(--teal,#0F766E);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;overflow:visible}#ghisPanel .ghis-spark .band{fill:var(--teal,#0F766E);opacity:.12;stroke:none}#ghisPanel .ghis-spark circle{fill:var(--teal,#0F766E);stroke:none}#ghisPanel .ghis-spark.bad path{stroke:#B4231C}#ghisPanel .ghis-spark.bad circle{fill:#B4231C}#ghisPanel .ghis-spark.none{display:inline-block}#ghisPanel .ghis-flag{font:800 10.5px var(--sans,system-ui);padding:3px 6px;border-radius:6px;text-transform:uppercase;letter-spacing:.03em}#ghisPanel .ghis-flag.hi,#ghisPanel .ghis-flag.lo{background:#FCECEA;color:#B4231C}#ghisPanel .ghis-flag.ok{background:rgba(15,118,110,.10);color:var(--teal,#0F766E)}body.dark #ghisPanel .ghis-tr-v.bad,body.v3-dark #ghisPanel .ghis-tr-v.bad{color:#F08A7E}body.dark #ghisPanel .ghis-spark.bad path,body.v3-dark #ghisPanel .ghis-spark.bad path{stroke:#F08A7E}body.dark #ghisPanel .ghis-spark.bad circle,body.v3-dark #ghisPanel .ghis-spark.bad circle{fill:#F08A7E}body.dark #ghisPanel .ghis-flag.hi,body.dark #ghisPanel .ghis-flag.lo,body.v3-dark #ghisPanel .ghis-flag.hi,body.v3-dark #ghisPanel .ghis-flag.lo{background:rgba(240,138,126,.16);color:#F08A7E}#ghisPanel .ghis-grp-h{display:flex;align-items:center;justify-content:space-between;gap:8px}#ghisPanel .ghis-grp-h i{font-style:normal;font-weight:700;opacity:.85}#ghisPanel .ghis-grp-sel{flex:0 0 auto;min-height:32px;padding:0 12px;border-radius:16px;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--teal,#0F766E);font:700 12.5px var(--sans,system-ui);letter-spacing:0;text-transform:none;cursor:pointer}#ghisPanel .ghis-grp-sel[aria-pressed=true]{background:var(--teal,#0F766E);border-color:var(--teal,#0F766E);color:#fff}#ghisPanel .ghis-grp-sel[hidden]{display:none}#ghisPanel .ghis-selhint{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0 0;padding:10px 12px;border-radius:12px;background:rgba(15,118,110,.07);color:var(--ink,#0f172a);font:500 13.5px/1.35 var(--sans,system-ui)}#ghisPanel .ghis-selbox{position:relative;flex:0 0 auto;width:44px;height:44px;margin:-6px -6px -6px -8px;display:flex;align-items:center;justify-content:center;cursor:pointer}#ghisPanel .ghis-selbox input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}#ghisPanel .ghis-selbox span,#ghisPanel .ghis-selbox.in{width:24px;height:24px;border-radius:50%;border:2px solid var(--slate,#9aa8b2);display:flex;align-items:center;justify-content:center;box-sizing:border-box}#ghisPanel .ghis-selbox.in{margin:0 4px 0 2px;border:none;background:rgba(15,118,110,.14);color:var(--teal,#0F766E)}#ghisPanel .ghis-selbox svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0}#ghisPanel .ghis-selbox.in svg{opacity:1}#ghisPanel .ghis-selbox input:checked+span{background:var(--teal,#0F766E);border-color:var(--teal,#0F766E);color:#fff}#ghisPanel .ghis-selbox input:checked+span svg{opacity:1}#ghisPanel .ghis-selbox input:focus-visible+span{outline:2px solid var(--teal,#0F766E);outline-offset:2px}#ghisPanel #ghisPatientList .ghis-pt-card.ghis-row.sel{background:rgba(15,118,110,.07)!important}#ghisPanel .ghis-row+.ghis-row:before{left:100px}#ghisPanel .ghis-inunit{flex:0 0 auto;font:700 11.5px var(--sans,system-ui);color:var(--teal,#0F766E);background:rgba(15,118,110,.10);padding:4px 8px;border-radius:8px}#ghisPanel .ghis-selbar{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;align-items:center;gap:10px;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--panel,#fff);border-top:1px solid var(--line,#e2e8f0);box-shadow:0 -6px 18px rgba(16,32,40,.10)}#ghisPanel .ghis-selbar[hidden]{display:none}#ghisPanel .ghis-selbar #ghisSelTxt{flex:1;min-width:0;font:600 15px var(--sans,system-ui);color:var(--ink,#0f172a)}#ghisPanel .ghis-selclear{min-height:44px;padding:0 14px;border:none;background:none;color:var(--slate,#5a7184);font:700 14.5px var(--sans,system-ui);cursor:pointer}#ghisPanel .ghis-seladd{min-height:46px;padding:0 18px;border:none;border-radius:12px;background:var(--teal,#0F766E);color:#fff;font:800 15px var(--sans,system-ui);cursor:pointer;max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#ghisPanel .ghis-selbar.busy .ghis-seladd,#ghisPanel .ghis-selbar.busy .ghis-selclear{opacity:.5;pointer-events:none}#ghisPanel #ghisWard.ghis-has-sel{padding-bottom:96px}@media (min-width:900px){#ghisPanel #ghisLabBody > *{max-width:760px;margin-left:auto;margin-right:auto}}@media (prefers-reduced-motion:reduce){#ghisPanel .ghis-act:active{transform:none}}";
         document.head.appendChild(st);
       }
       // "21-NOV-2026 07:51", ISO, or anything Date.parse reads; 0 when unknown so it sorts first.
@@ -944,6 +944,40 @@
         if (!t) return '';
         return t.length > 6 ? t.slice(-6) : t;
       }
+      var _lastGroups = [], _lastShown = [];
+      function _unitLabel() { try { return (window.ICU && ICU.currentUnitLabel && ICU.currentUnitLabel()) || 'the unit'; } catch (e) { return 'the unit'; } }
+      // Bottom bar for multi-select: "N selected", Clear, "Add N to <unit>". Hidden while nothing is ticked or while picking one.
+      function renderSelBar() {
+        var ward = document.getElementById('ghisWard'); if (!ward) return;
+        var bar = document.getElementById('ghisSelBar');
+        if (!bar) {
+          bar = document.createElement('div'); bar.id = 'ghisSelBar'; bar.className = 'ghis-selbar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Selected patients');
+          ward.appendChild(bar);
+        }
+        var n = Object.keys(GHIS._sel || {}).length;
+        if (!n || GHIS._pickCb) { bar.hidden = true; ward.classList.remove('ghis-has-sel'); return; }
+        if (bar.classList.contains('busy')) return;
+        bar.hidden = false; ward.classList.add('ghis-has-sel');
+        bar.innerHTML = '<span id="ghisSelTxt" aria-live="polite"><b>' + n + '</b> selected</span>' +
+          '<button type="button" class="ghis-selclear" onclick="GHIS.clearSel()">Clear</button>' +
+          '<button type="button" class="ghis-seladd" onclick="GHIS.addSelected()">Add ' + n + ' to ' + esc(_unitLabel()) + '</button>';
+      }
+      function renderGroupButtons() {
+        Array.prototype.forEach.call(document.querySelectorAll('#ghisPatientList .ghis-grp-sel'), function(b) {
+          var gi = b.getAttribute('data-gi'), g = gi === 'all' ? { items: _lastShown } : _lastGroups[+gi];
+          var pending = g ? g.items.filter(function(p) { return !_addedPids[p.patientId]; }) : [];
+          var all = pending.length && pending.every(function(p) { return GHIS._sel[p.patientId]; });
+          b.hidden = !pending.length;
+          b.textContent = all ? 'Clear' : (gi === 'all' ? 'Select all ' + pending.length + ' shown' : 'Select all');
+          b.setAttribute('aria-pressed', all ? 'true' : 'false');
+        });
+      }
+      function syncSelBoxes() {
+        Array.prototype.forEach.call(document.querySelectorAll('#ghisPatientList input[data-sel-pid]'), function(i) {
+          i.checked = !!GHIS._sel[i.getAttribute('data-sel-pid')];
+          var r = i.closest ? i.closest('.ghis-row') : null; if (r) r.classList.toggle('sel', i.checked);
+        });
+      }
       function renderPatients(list, groupBy) {
         var el = document.getElementById('ghisPatientList');
         if (!el) return;
@@ -955,9 +989,12 @@
         }
         renderAddTarget();
         var picking = !!GHIS._pickCb;
+        // Choosing one patient for a module is not adding to a unit: hide the unit bar while picking.
+        try { var at = document.getElementById('ghisAddTarget'); if (at && picking) at.style.display = 'none'; } catch (e) {}
         var keyOf = groupBy === 'dept' ? function(p) { return String(p.deptDescription || '').trim() || 'Other'; }
           : groupBy === 'ward' ? function(p) { return _wardOf(p) || 'No ward'; }
-          : groupBy === 'floor' ? function(p) { return _floorOf(p) || 'No floor'; } : null;
+          : groupBy === 'floor' ? function(p) { return _floorOf(p) || 'No floor'; }
+          : groupBy === 'doctor' ? function(p) { var d = String(p.employeeFirstName || '').trim(); return d && !/^dr\.?$/i.test(d) ? 'Dr. ' + d : 'No doctor'; } : null;
         function row(p) {
           var nm = (p.patientFirstName && String(p.patientFirstName).trim()) ? p.patientFirstName : '(no name)';
           var doc = (p.employeeFirstName || '').trim();
@@ -967,27 +1004,37 @@
           var open = 'GHIS.onPatient(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')';
           var meta = [[esc(p.dob || ''), sx].filter(Boolean).join(' '), (showDoc ? 'Dr. ' + esc(doc) : ''), phi('id', p.patientId, esc(p.patientId))].filter(Boolean).join(' · ');
           var bed = _bedBadge(p.bedName);
+          var selOn = !!GHIS._sel[p.patientId];
+          var lead = picking ? '' : (added
+            ? '<span class="ghis-selbox in" title="Already in ' + esc(_unitLabel()) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>'
+            : '<label class="ghis-selbox" onclick="event.stopPropagation()"><input type="checkbox" data-sel-pid="' + esc(p.patientId) + '"' + (selOn ? ' checked' : '') +
+                ' aria-label="Select ' + esc(nm) + '" onchange="this.closest(\'.ghis-row\').classList.toggle(\'sel\',this.checked);GHIS.toggleSel(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\',this.checked)">' +
+                '<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></label>');
           var tail = picking
             ? '<button class="ghis-pt-call ghis-pt-select" type="button" onclick="event.stopPropagation();' + open + '">Select</button>'
-            : '<label class="ghis-add' + (added ? ' on' : '') + '" onclick="event.stopPropagation()" title="Add to the current dashboard unit">' +
-                '<input type="checkbox"' + (added ? ' checked' : '') + ' onchange="this.parentNode.classList.toggle(\'on\',this.checked);GHIS.toggleAdd(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\',this)"><span>' + (added ? 'Added' : 'Add') + '</span></label>' +
-              '<svg class="ghis-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
-          return '<div class="ghis-pt-card ghis-row" role="button" tabindex="0" data-pid="' + esc(p.patientId) + '" onclick="' + open + '" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();' + open + '}">' +
+            : (added ? '<span class="ghis-inunit">In unit</span>' : '') + '<svg class="ghis-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+          return '<div class="ghis-pt-card ghis-row' + (selOn ? ' sel' : '') + '" role="button" tabindex="0" data-pid="' + esc(p.patientId) + '" onclick="' + open + '" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();' + open + '}">' + lead +
             '<span class="ghis-bed' + (bed ? '' : ' none') + '" aria-label="' + (bed ? 'Bed ' + esc(p.bedName) : 'No bed') + '">' + (bed ? esc(bed) : '&middot;') + '</span>' +
             '<div class="ghis-row-t"><div class="ghis-row-n">' + phi('name', p.patientFirstName, esc(nm)) + (p.queueStatus ? ' ' + statusBadge(p.queueStatus) : '') + '</div>' +
               '<div class="ghis-row-m">' + meta + '</div></div>' + tail + '</div>';
         }
-        var html = picking ? '<div class="ghis-pick-banner">Tap <b>Select</b> on the patient you want.</div>' : '';
+        var html = picking ? '<div class="ghis-pick-banner">Tap <b>Select</b> on the patient you want.</div>'
+          : '<div class="ghis-selhint"><span>Tick patients to add to <b>' + esc(_unitLabel()) + '</b>, or a whole group.</span><button type="button" class="ghis-grp-sel" data-gi="all" onclick="GHIS.selectGroup(\'all\')">Select all shown</button></div>';
+        var groups = [];
         if (keyOf) {
-          var groups = [], idx = {};
+          var idx = {};
           list.forEach(function(p) { var k = keyOf(p); if (!(k in idx)) { idx[k] = groups.length; groups.push({ k: k, items: [] }); } groups[idx[k]].items.push(p); });
-          html += groups.map(function(g) {
-            return '<div class="ghis-grp-h">' + esc(g.k) + ' <span>&middot; ' + g.items.length + '</span></div><div class="ghis-grp">' + g.items.map(row).join('') + '</div>';
+          html += groups.map(function(g, gi) {
+            return '<div class="ghis-grp-h"><span>' + esc(g.k) + ' <i>&middot; ' + g.items.length + '</i></span>' +
+              (picking ? '' : '<button type="button" class="ghis-grp-sel" data-gi="' + gi + '" onclick="GHIS.selectGroup(' + gi + ')">Select all</button>') + '</div>' +
+              '<div class="ghis-grp">' + g.items.map(row).join('') + '</div>';
           }).join('');
         } else {
           html += '<div class="ghis-grp">' + list.map(row).join('') + '</div>';
         }
+        _lastGroups = groups; _lastShown = list;
         el.innerHTML = html;
+        renderGroupButtons(); renderSelBar();
       }
 
       function abnormalClass(t) {
@@ -1190,7 +1237,7 @@
           body.innerHTML =
             '<div class="ghis-pv-h"><div class="ghis-pv-n">' + phi('name', name, esc(name)) + '</div><div class="ghis-pv-m">' + (pmeta ? pmeta + ' &middot; ' : '') + phi('id', patientId, esc(patientId)) + '</div></div>' +
             '<div class="ghis-acts">' +
-              '<button type="button" class="ghis-act pri" onclick="GHIS.openAssessment(' + q3 + ')">' + '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M12 12v6"/></svg>' + '<span>Assess</span></button>' +
+              '<button type="button" class="ghis-act pri ghis-pt-assess" title="Initial assessment" onclick="event.stopPropagation();GHIS.openAssessment(' + q3 + ')">' + '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M12 12v6"/></svg>' + '<span>Assess</span></button>' +
               '<button type="button" class="ghis-act" onclick="GHIS.callPatient(\'' + jsq(patientId) + '\',this)">' + '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg>' + '<span>Call</span></button>' +
               (lwOk ? '<button type="button" class="ghis-act" onclick="GHIS.watchLabs(\'' + jsq(patientId) + '\')">' + wIco("bell") + '<span>Lab Watch</span></button>' : '') +
               '<label class="ghis-act' + (padded ? ' on' : '') + '" title="Add to the current dashboard unit"><input type="checkbox"' + (padded ? ' checked' : '') + ' onchange="this.parentNode.classList.toggle(\'on\',this.checked);GHIS.toggleAdd(' + q3 + ',this)">' + '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>' + '<span>' + (padded ? 'Added' : 'Add to unit') + '</span></label>' +
@@ -1337,22 +1384,26 @@
         },
         // Tick-to-add: build FULL demographics + fetch labs, then file the patient into the CURRENTLY
         // selected unit's board WITHOUT navigating (ICU.addWardPatientToRoster). Supports multi-add.
-        addToDashboard: function(episodeId, patientId, name) {
-          if (!window.ICU || !ICU.addWardPatientToRoster) { alert('Dashboard not loaded.'); return; }
+        addToDashboard: function(episodeId, patientId, name, quiet) {
+          if (!window.ICU || !ICU.addWardPatientToRoster) { if (!quiet) alert('Dashboard not loaded.'); return Promise.reject(new Error('no_dashboard')); }
           var p = null, list = (typeof _patients !== 'undefined' && _patients) || [];
           for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
           var dem = demoFromPatient(p), labs = [];
-          authFetch('/lab?patientId=' + encodeURIComponent(patientId)).then(function (j) {
+          return authFetch('/lab?patientId=' + encodeURIComponent(patientId)).then(function (j) {
             var orders = ((j && j.orders) || []).slice(0, 25);
             return Promise.all(orders.map(function (o) {
               return authFetch('/lab-detail?renderId=' + encodeURIComponent(o.renderId) + '&episodeId=' + encodeURIComponent(o.episodeId) + '&patientId=' + encodeURIComponent(patientId))
                 .then(function (d) { (d && d.tests || []).forEach(function (t) { labs.push({ test: t.test, result: t.result, units: t.units, low: t.low, high: t.high, date: o.orderDate || o.date }); }); }).catch(function () {});
             }));
           }).catch(function () {}).then(function () {
-            Promise.resolve(ICU.addWardPatientToRoster({ patient: dem, patientId: patientId, episodeId: episodeId, source: 'Ward Sync', labs: labs })).then(function () {
+            return Promise.resolve(ICU.addWardPatientToRoster({ patient: dem, patientId: patientId, episodeId: episodeId, source: 'Ward Sync', labs: labs })).then(function () {
               _addedPids[patientId] = true;
-              try { if (window.toast) toast('Added ' + (dem.name ? pv('name', dem.name) : 'patient') + ' to ' + (ICU.currentUnitLabel ? ICU.currentUnitLabel() : 'dashboard')); } catch (e) {}
-            }, function () { delete _addedPids[patientId]; try { if (window.toast) toast('Couldn’t add — open the dashboard and choose a unit first.'); } catch (e) {} if (typeof ghisApplyFilters === 'function') ghisApplyFilters(); });
+              if (!quiet) { try { if (window.toast) toast('Added ' + (dem.name ? pv('name', dem.name) : 'patient') + ' to ' + (ICU.currentUnitLabel ? ICU.currentUnitLabel() : 'dashboard')); } catch (e) {} }
+            }, function (err) {
+              delete _addedPids[patientId];
+              if (!quiet) { try { if (window.toast) toast('Couldn’t add — open the dashboard and choose a unit first.'); } catch (e) {} if (typeof ghisApplyFilters === 'function') ghisApplyFilters(); }
+              throw err || new Error('add_failed');
+            });
           });
         },
         // Checkbox handler (list). Tick = add to the dashboard, untick = remove it (a real toggle).
@@ -1442,7 +1493,7 @@
           // One-shot "pick a patient for another module" handoff (see pickPatient below). Checked
           // before the import and lab paths so the caller gets the tap instead of the ward drawer.
           if (GHIS._pickCb) {
-            var cb = GHIS._pickCb; GHIS._pickCb = null;
+            var cb = GHIS._pickCb; GHIS._pickCb = null; GHIS._pickCancel = null;
             try { var pk = document.getElementById('ghisPanel'); if (pk) pk.classList.remove('open'); } catch (e) {}
             try { cb({ episodeId: episodeId, patientId: patientId, name: name }); } catch (e) {}
             return;
@@ -1459,8 +1510,9 @@
          * second ward list inside another module would duplicate all of that and drift from it.
          * The callback is cleared before firing, so a stale handoff can never hijack a later tap;
          * cancel() drops it if the doctor backs out instead. */
-        pickPatient: function(cb) {
+        pickPatient: function(cb, opts) {
           GHIS._pickCb = (typeof cb === 'function') ? cb : null;
+          GHIS._pickCancel = (opts && typeof opts.onCancel === 'function') ? opts.onCancel : null;
           GHIS._importMode = false;
           if (!document.getElementById('ghisPickCss')) {
             var st = document.createElement('style'); st.id = 'ghisPickCss';
@@ -1474,6 +1526,45 @@
         },
         cancelPick: function() { GHIS._pickCb = null; },
         isPicking: function() { return !!GHIS._pickCb; },
+        /* Multi-select for adding to ICU or a unit (owner 2026-11-22): tick patients, or a whole department, ward, floor
+         * or doctor group, then one "Add N" button adds them all. Ticking selects only; nothing is added until Add. */
+        _sel: {},
+        toggleSel: function(episodeId, patientId, name, on) {
+          if (on) GHIS._sel[patientId] = { episodeId: episodeId, patientId: patientId, name: name };
+          else delete GHIS._sel[patientId];
+          renderSelBar(); renderGroupButtons();
+        },
+        selectGroup: function(gi) {
+          var g = gi === 'all' ? { items: _lastShown } : _lastGroups[gi]; if (!g) return;
+          var pending = g.items.filter(function(p) { return !_addedPids[p.patientId]; });
+          var all = pending.length && pending.every(function(p) { return GHIS._sel[p.patientId]; });
+          pending.forEach(function(p) {
+            if (all) delete GHIS._sel[p.patientId];
+            else GHIS._sel[p.patientId] = { episodeId: p.episodeId, patientId: p.patientId, name: p.patientFirstName };
+          });
+          syncSelBoxes(); renderSelBar(); renderGroupButtons();
+        },
+        clearSel: function() { GHIS._sel = {}; syncSelBoxes(); renderSelBar(); renderGroupButtons(); },
+        addSelected: function() {
+          var items = Object.keys(GHIS._sel).map(function(k) { return GHIS._sel[k]; });
+          if (!items.length) return;
+          if (!window.ICU || !ICU.addWardPatientToRoster) { try { if (window.toast) toast('Open the ICU dashboard and choose a unit first.'); } catch (e) {} return; }
+          var done = 0, ok = 0, bar = document.getElementById('ghisSelBar');
+          if (bar) bar.classList.add('busy');
+          function progress() { var t = document.getElementById('ghisSelTxt'); if (t) t.textContent = 'Adding ' + (done + 1) + ' of ' + items.length + '\u2026'; }
+          items.reduce(function(chain, it) {
+            return chain.then(function() {
+              progress();
+              return GHIS.addToDashboard(it.episodeId, it.patientId, it.name, true).then(function() { ok++; }, function() {});
+            }).then(function() { done++; });
+          }, Promise.resolve()).then(function() {
+            GHIS._sel = {};
+            if (bar) bar.classList.remove('busy');
+            var unit = (window.ICU && ICU.currentUnitLabel) ? ICU.currentUnitLabel() : 'the dashboard';
+            try { if (window.toast) toast(ok === items.length ? 'Added ' + ok + (ok === 1 ? ' patient' : ' patients') + ' to ' + unit : 'Added ' + ok + ' of ' + items.length + '. Open the dashboard to check the rest.'); } catch (e) {}
+            if (typeof window.ghisApplyFilters === 'function') window.ghisApplyFilters(); else renderSelBar();
+          });
+        },
         /* QA BUG-018: newest lab values for one ward patient, for modules that only need a few numbers
          * (the oncology Calvert calculator wants creatinine + demographics). Resolves
          * { patient:{age,sex,name,weightKg?}, labs:{creatinine,creatinineDate,...} }. Uses the same
@@ -1783,7 +1874,10 @@
     
       window.closeGHIS = function() {
         document.getElementById('ghisPanel').classList.remove('open');
-        GHIS._pickCb = null;   // leaving Ward Sync without Select cancels a pending pick
+        // Leaving Ward Sync without Select cancels a pending pick; the caller can restore its own screen.
+        var pc = GHIS._pickCb ? GHIS._pickCancel : null;
+        GHIS._pickCb = null; GHIS._pickCancel = null;
+        if (pc) { try { pc(); } catch (e) {} }
         // If the Drug Interactions overlay is open behind us, refresh it so the
         // Ward Sync card + patient pill reflect the patient just selected here.
         try {
@@ -1989,7 +2083,7 @@
         if (key) list = list.slice().sort(function(a, b) { return _cmp(a[key], b[key]); });
         else if (sort === 'ward') list = list.slice().sort(function(a, b) { return _cmp(_wardOf(a), _wardOf(b)) || _cmp(a.bedName, b.bedName); });
         else if (sort === 'floor') list = list.slice().sort(function(a, b) { return _cmp(_floorOf(a), _floorOf(b)) || _cmp(a.bedName, b.bedName); });
-        renderPatients(list, !sort ? 'dept' : (sort === 'ward' ? 'ward' : sort === 'floor' ? 'floor' : ''));
+        renderPatients(list, !sort ? 'dept' : (sort === 'ward' ? 'ward' : sort === 'floor' ? 'floor' : sort === 'doctor' ? 'doctor' : ''));
         renderActiveFilters();
         try { renderFavs(); } catch (e) {}
         var cnt = document.getElementById('ghisCount');

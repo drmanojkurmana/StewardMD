@@ -171,6 +171,9 @@
       "@media(prefers-reduced-motion:reduce){.db-renal-btn{animation:none}}",
       "body.dark .db-renal-btn{background:var(--teal,#0e857a);color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.4)}",
       "body.dark .db-renal-btn:hover{background:var(--teal-dk,#0aa090)}",
+      ".rd-pick{width:100%;min-height:46px;border-radius:12px;border:1px solid var(--teal,#0F766E);background:var(--teal,#0F766E);color:#fff;font:700 15px var(--sans,system-ui);cursor:pointer}",
+      ".rd-picked{margin-top:6px;font:600 14px var(--sans,system-ui);color:var(--ink,#0f172a)}",
+      ".rd-picked:empty{display:none}",
       ".rd-scrim{position:fixed;inset:0;z-index:2147482000;background:rgba(8,12,18,.55);display:flex;align-items:flex-end;justify-content:center;animation:rdFade .18s ease}",
       "@media(min-width:560px){.rd-scrim{align-items:center}}",
       "@keyframes rdFade{from{opacity:0}to{opacity:1}}",
@@ -291,6 +294,19 @@
         var branches = rdDistinct(pats.map(function (p) { return p.deptDescription; }));
         var doctors = rdDistinct(pats.map(function (p) { return p.employeeFirstName; }));
         var opts = rdPatientOptions(pats, "", "");
+        /* Owner 2026-11-22: choosing the patient happens in Ward Sync itself (one roster, Select on every patient).
+         * The select below stays as the hidden source of truth so the lookup code is unchanged. */
+        var pickable = !!(window.GHIS && GHIS.pickPatient);
+        if (pickable) {
+          return '<div class="rd-patients">' +
+            '<div class="rd-field"><label for="rdPick">Ward Sync patient</label>' +
+              '<button type="button" class="rd-pick" id="rdPick">Choose patient in Ward Sync</button>' +
+              '<div class="rd-picked" id="rdPicked" aria-live="polite"></div>' +
+              '<select id="rdPt" hidden aria-hidden="true">' + opts + '</select></div>' +
+            '<div class="rd-note" id="rdWardNote">Pulls the latest eGFR / creatinine from the patient’s report. Weight isn’t on the EMR — enter it below only if no eGFR is reported.</div>' +
+            '<div class="rd-field"><label for="rdWt2">Weight (kg) — for CrCl if no eGFR</label><input id="rdWt2" type="number" inputmode="decimal" min="0" step="0.5" placeholder="optional"></div>' +
+            '</div>';
+        }
         return '<div class="rd-patients">' +
           (pats.length > 6 ?
             '<div class="rd-filters">' +
@@ -392,6 +408,22 @@
       if (fDr) fDr.addEventListener("change", rdRefilter);
 
       var pt = inputs.querySelector("#rdPt");
+      var pickBtn = inputs.querySelector("#rdPick");
+      if (pickBtn && pt) pickBtn.addEventListener("click", function () {
+        // This sheet sits above Ward Sync: step aside while the doctor picks, come back on Select or on cancel.
+        if (_el) _el.style.display = "none";
+        GHIS.pickPatient(function (sel) {
+          if (_el) _el.style.display = "";
+          var id = sel && sel.patientId; if (!id) return;
+          if (!Array.prototype.some.call(pt.options, function (o) { return String(o.value) === String(id); })) {
+            var o = document.createElement("option"); o.value = id; o.textContent = (sel.name || id); pt.appendChild(o);
+          }
+          pt.value = id;
+          var picked = inputs.querySelector("#rdPicked"); if (picked) picked.textContent = (sel.name || "") + " · " + id;
+          pickBtn.textContent = "Change patient";
+          pt.dispatchEvent(new Event("change"));
+        }, { onCancel: function () { if (_el) _el.style.display = ""; } });
+      });
       if (pt) pt.addEventListener("change", function () {
         var id = pt.value; fetched = null; recompute();
         if (!id) return;
