@@ -429,6 +429,14 @@ try {
     "IMAGES IMG2: pilonidal sinus excision shows its 18 distinct step pictures and every file loads");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Laparoscopic common bile duct exploration");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 17 || new Set(src).size !== 17) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES IMG3: CBD exploration shows its first 17 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Phacoemulsification");
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");

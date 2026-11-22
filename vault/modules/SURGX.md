@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### IMG3 pictures (2026-11-22, contentVersion 0.4.20)
+86 of 100 wired: CBD exploration 17 (steps 1 to 17; the rest are in IMG4), Nissen 15, sleeve 16, left hemicolectomy 19, open subtotal cholecystectomy 19. Rejected: Nissen 05 and 21 (a man; the Nissen patient is a woman); sleeve 06 (trocar into the stomach), 11 (hole in the oesophagus), 12 (aorta in front of the hiatus), 13 (stomach cut open to show the bougie), 18 and 21 (whole stomach as the specimen); left hemicolectomy 12, 15, 16 (bony pelvis drawn in the laparoscopic view); open subtotal 07 (a man), 12 (vessels spraying out of the field), 13 (liver and porta drawn under the umbilicus).
+
 ### IMG2 pictures (2026-11-22, contentVersion 0.4.19)
 90 of 100 wired: lap inguinal hernia 18, open ventral hernia 19, sphincterotomy 15, fistula-in-ano 16, pilonidal 18, Nissen 4. Rejected, mostly for cross-section anatomy drawn straight onto the patient instead of in an inset: fistula 09, 10, 13; sphincterotomy 08, 11, 12; also sphincterotomy 10 (incision far too large), lap inguinal 07 (whole abdominal wall cut away) and 20 (open groin wound for a port closure), open ventral 13 (mesh laid over the skin).
 
