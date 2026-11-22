@@ -648,3 +648,6 @@ Held back: tibial nail 07 (AP fluoro shows the awl entering sideways), fasciotom
 
 ### Batches 11, 12, 20, 21 videos (2026-11-22, contentVersion 0.4.9)
 71 + 42 + 89 + 83 clips via wireJ.py. Batch 11 and 12 dropped 8 embeds (7 age-restricted, 1 embedding disabled), which leaves Nissen and sleeve thin. Batch 20 and 21 arrived as slim JSON without "shows", so the caption is the step title plus the source kind; their clips are as Gemini timed them and have not been checked by eye.
+
+### Batch 18 images, cerclage only (2026-11-22, contentVersion 0.4.10)
+mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and sentinel node, ALND, fibroadenoma, open rAAA) has not been delivered.
