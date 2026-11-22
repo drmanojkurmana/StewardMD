@@ -651,3 +651,6 @@ Held back: tibial nail 07 (AP fluoro shows the awl entering sideways), fasciotom
 
 ### Batch 18 images, cerclage only (2026-11-22, contentVersion 0.4.10)
 mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and sentinel node, ALND, fibroadenoma, open rAAA) has not been delivered.
+
+### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
+105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
