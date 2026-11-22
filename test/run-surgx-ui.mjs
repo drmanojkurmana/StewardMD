@@ -214,8 +214,8 @@ try {
     "ATLAS: step titles are set in the serif and the lead action of a how-line is bold");
   console.log("   bold coverage:", await ev("(function () { var st = document.querySelectorAll('#surgxRoot .sgx-step'); return [].filter.call(st, function (x) { return x.querySelector('.w [class^=\"md-\"], li [class^=\"md-\"]'); }).length + ' of ' + st.length + ' appendicectomy steps have a bold point'; })()"));
   ok((await ev("[].slice.call(document.querySelectorAll('#surgxRoot .sgx-embed iframe')).map(function (f) { return (f.closest('.sgx-step') ? 'step' + f.closest('.sgx-step').querySelector('.n').textContent + ':' : '') + f.src.split('v=')[1]; }).join(',')")) ===
-    "step1:IX0DNOBEItE&start=22&end=119,step2:_jE5NgLkTo4&start=92&end=166,step3:pqCD1bVDXvI&start=375&end=463,step4:H7LyCwzaZEo&start=62&end=77,step5:uny6rK8Mbs0&start=238&end=342,step6:Bhm7cCcr1Qc&start=14&end=83,step7:H7LyCwzaZEo&start=94&end=111,step8:fpTqrJVSxpI&start=67&end=72,step9:H7LyCwzaZEo&start=134&end=153,step10:H7LyCwzaZEo&start=154&end=171,step11:zIcHlU-L1-E&end=36,step12:hxnSwIdtagA&start=224&end=293,step13:H7LyCwzaZEo&start=211&end=230,step15:eUr-Mj2qCgI&end=63,step16:LzfLvDLCD7Y&start=585&end=670,step17:h5D8sU8btyI&start=29&end=51,step18:6OERElPC3EI&start=85&end=185,step19:3HhXz5QhDzw&start=78&end=153,fpTqrJVSxpI,H7LyCwzaZEo",
-    "VIDEO: every step except 14 carries a timed clip, the two whole videos follow the steps, all through the stewardmd.in YouTube shim");
+    "step1:IX0DNOBEItE&start=22&end=119,step2:_jE5NgLkTo4&start=92&end=166,step3:pqCD1bVDXvI&start=375&end=463,step4:H7LyCwzaZEo&start=62&end=77,step5:uny6rK8Mbs0&start=238&end=342,step6:Bhm7cCcr1Qc&start=14&end=83,step7:H7LyCwzaZEo&start=94&end=111,step8:fpTqrJVSxpI&start=67&end=72,step9:H7LyCwzaZEo&start=134&end=153,step10:H7LyCwzaZEo&start=154&end=171,step11:zIcHlU-L1-E&end=36,step12:hxnSwIdtagA&start=224&end=293,step13:H7LyCwzaZEo&start=211&end=230,step14:BVeIjWho8kI&start=98&end=111,step15:eUr-Mj2qCgI&end=63,step16:LzfLvDLCD7Y&start=585&end=670,step17:h5D8sU8btyI&start=29&end=51,step18:6OERElPC3EI&start=85&end=185,step19:3HhXz5QhDzw&start=78&end=153,fpTqrJVSxpI,H7LyCwzaZEo",
+    "VIDEO: every step carries a timed clip, the two whole videos follow the steps, all through the stewardmd.in YouTube shim");
   ok(await waitFor("#surgxRoot .sgx-step .sgx-media img"), "IMAGES: step pictures render");
   ok((await ev("(function () { var st = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step')); var src = st.map(function (x) { var i = x.querySelector('.sgx-media img'); return i ? i.src : ''; }); if (st.length !== 19 || src.indexOf('') >= 0 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
     "IMAGES: each of the 19 appendicectomy steps shows its own picture, and every file loads");
@@ -225,8 +225,8 @@ try {
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 18,
-    "VIDEO batch 2: lap cholecystectomy shows its 18 step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 19,
+    "VIDEO batch 2: lap cholecystectomy shows its 19 step clips through the shim");
   ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 19 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
     "IMAGES batch 2: lap cholecystectomy shows 19 distinct step pictures and every file loads");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
@@ -321,16 +321,16 @@ try {
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 12,
-    "VIDEO batch 10: small bowel resection shows its 12 step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 18,
+    "VIDEO batch 10: small bowel resection shows its 18 step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Laparoscopic inguinal hernia repair");
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 20,
-    "VIDEO batch 11: Laparoscopic inguinal hernia repair shows its 20 step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 22,
+    "VIDEO batch 11: Laparoscopic inguinal hernia repair shows its 22 step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Above-knee amputation");
@@ -403,6 +403,14 @@ try {
   await sleep(300);
   ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 22,
     "VIDEO batch 25: ACDF shows its 22 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Laparoscopic Nissen fundoplication");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 20,
+    "VIDEO VID1 gap-fill: Nissen fundoplication shows 20 step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Phacoemulsification");
