@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### IMG4 pictures (2026-11-22, contentVersion 0.4.21)
+93 of 100 wired: CBD exploration 18 to 22, splenectomy, anterior resection TME, Whipple, right hepatectomy, neck dissection 01 to 09. Rejected: TME 12, 14, 16 (bony pelvis drawn in the laparoscopic view), 18 (end colostomy on the right); right hepatectomy 07 (sternum split open), 21 (costal margin and liver drawn above the closed fascia); splenectomy 05 (whole body and legs painted, face under a towel).
+
 ### IMG3 pictures (2026-11-22, contentVersion 0.4.20)
 86 of 100 wired: CBD exploration 17 (steps 1 to 17; the rest are in IMG4), Nissen 15, sleeve 16, left hemicolectomy 19, open subtotal cholecystectomy 19. Rejected: Nissen 05 and 21 (a man; the Nissen patient is a woman); sleeve 06 (trocar into the stomach), 11 (hole in the oesophagus), 12 (aorta in front of the hiatus), 13 (stomach cut open to show the bougie), 18 and 21 (whole stomach as the specimen); left hemicolectomy 12, 15, 16 (bony pelvis drawn in the laparoscopic view); open subtotal 07 (a man), 12 (vessels spraying out of the field), 13 (liver and porta drawn under the umbilicus).
 
