@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### Batch 25 videos (2026-11-22, contentVersion 0.4.15)
+acdf 22, lumbar-laminectomy-stenosis 16, posterior-lumbar-fusion-tlif 20, vats-bullectomy-pleurodesis 17, median-sternotomy 16 clips (91). 9CAu68c6YFg blocks embedding: laminectomy 10 and 11 use the animation instead, 12 has no clip. Video batches 16, 17 and 19 failed in Gemini.
+
 ### Batch 24 videos (2026-11-22, contentVersion 0.4.14)
 carpal-tunnel-release 16, trigger-finger-release 18, flexor-tendon-repair 20, craniotomy-supratentorial-tumour 22, decompressive-craniectomy 19 clips (95). 40 new ALLOW ids, all embeddable. Captions use the full "shows" text the peer sent separately (its JSON cut them at 150 characters).
 
