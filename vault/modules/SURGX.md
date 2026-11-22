@@ -638,3 +638,7 @@ stripes (test/no-side-stripes.test.mjs forbids them).
 78 of 84 wired for mastoidectomy (mx), tympanoplasty-underlay (tux), superficial-parotidectomy (spx), microlaryngoscopy-biopsy (mbx). Adenoidectomy (A) not delivered yet.
 Held back: mastoidectomy 12 (tegmen and sigmoid fully exposed) and 13 (cochlea opened); tympanoplasty 06 (head not turned), 10 and 18 (wound in front of the ear); microlaryngoscopy 12 (ring-handled open instruments).
 Gemini shares from batch 10 on carry inline images, not zips: scratchpad g4.cjs pulls them with their filename captions; imgB.py wires any batch from its prompt file. Known drift: the patient's face and the drawing style change within some operations.
+
+### Batch 22 images (2026-11-22, contentVersion 0.4.6)
+74 of 76 wired: dynamic-hip-screw (dhsx), tibial-im-nail (tinx), open-fracture-debridement (ofdx), leg-fasciotomy (lfx). Quinsy drainage (A) not delivered yet.
+Held back: tibial nail 07 (AP fluoro shows the awl entering sideways), fasciotomy 07 (both incisions drawn on one face of the leg).
