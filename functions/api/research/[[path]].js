@@ -28,9 +28,9 @@ async function member(db, projectId, uid, roles = ["owner", "editor", "analyst",
   return row && roles.includes(row.role) ? row : null;
 }
 async function bodyJson(request) {
-  const len = Number(request.headers.get("content-length") || 0);
-  if (len > MAX_JSON) throw new Error("payload_too_large");
-  const body = await request.json();
+  const bytes = await request.arrayBuffer();
+  if (bytes.byteLength > MAX_JSON) throw new Error("payload_too_large");
+  const body = JSON.parse(new TextDecoder().decode(bytes));
   if (!body || typeof body !== "object" || Array.isArray(body)) throw new Error("invalid_json");
   return body;
 }
@@ -170,6 +170,15 @@ export async function onRequest({ request, env, params }) {
     if (!env.RESEARCH_QUEUE) return err(503, "queue_unavailable", "Research job queue is not provisioned", requestId);
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid analysis payload", requestId); }
     return submitMetaAnalysis(db, env.RESEARCH_QUEUE, uid, meta[1], body, requestId);
+  }
+
+  const resultMatch = path.match(/^\\/v1\\/projects\\/([^/]+)\\/meta-analyses\\/([^/]+)$/);
+  if (resultMatch && request.method === "GET") {
+    if (!(await member(db, resultMatch[1], uid))) return err(404, "analysis_not_found", "Analysis not found", requestId);
+    const row = await db.prepare("SELECT id,job_id,model,effect_measure,input_hash,result_json,created_ts,completed_ts FROM research_meta_analyses WHERE id=? AND project_id=?")
+      .bind(resultMatch[2], resultMatch[1]).first();
+    if (!row) return err(404, "analysis_not_found", "Analysis not found", requestId);
+    return json({ analysis: { ...row, result: JSON.parse(row.result_json || "{}") }, requestId }, 200, { "x-request-id": requestId });
   }
 
   const jobMatch = path.match(/^\/v1\/jobs\/([^/]+)$/);
