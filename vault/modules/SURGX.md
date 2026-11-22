@@ -751,3 +751,5 @@ so a covered "Back to home" on a layer underneath can no longer win; SURGX is in
 Pre-existing, unrelated: `run-swipe-back-ui.mjs` has 5 failing checks on main with or without this change.
 - 2026-11-22 VID10: 82 clips wired (plastics, hand, neurosurgery, cardiothoracic, thyroid), 18 new ALLOW ids, all embeddable.
   Dropped the suture-pad subcuticular clip for neurosurgical scalp closures (burr hole, EDH, EVD, VP shunt). contentVersion 0.4.40.
+- 2026-11-22 REDO1-5 pictures: 175 of 201 wired, 26 rejected (cut-away bone, wounds that read as genitalia, wrong incision site,
+  adult head on a child, wrong patient sex). contentVersion 0.4.41.
