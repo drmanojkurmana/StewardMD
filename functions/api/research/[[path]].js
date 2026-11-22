@@ -111,14 +111,17 @@ async function submitMetaAnalysis(db, queue, uid, projectId, body, requestId) {
       !Array.isArray(analysis.studies) || analysis.studies.length < 2 || analysis.studies.length > 500) {
     return err(400, "invalid_analysis", "Provide 2–500 studies, a supported effect measure and pooling model", requestId);
   }
-  const existing = await db.prepare("SELECT id,status FROM research_jobs WHERE project_id=? AND idempotency_key=?")
-    .bind(projectId, idempotencyKey).first();
-  if (existing) return json({ jobId: existing.id, status: existing.status, idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
   const jobId = uuid("job_"), analysisId = uuid("ma_"), now = Date.now();
   const input = JSON.stringify({ effect_measure: analysis.effect_measure, model: analysis.model || "random_dl",
     confidence_level: analysis.confidence_level || 0.95, studies: analysis.studies });
   const hashBytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(input));
   const inputHash = [...new Uint8Array(hashBytes)].map(x => x.toString(16).padStart(2, "0")).join("");
+  const existing = await db.prepare("SELECT j.id,j.status,m.input_hash FROM research_jobs j JOIN research_meta_analyses m ON m.job_id=j.id WHERE j.project_id=? AND j.idempotency_key=?")
+    .bind(projectId, idempotencyKey).first();
+  if (existing) {
+    if (existing.input_hash !== inputHash) return err(409, "idempotency_conflict", "This idempotencyKey was already used with different analysis input", requestId);
+    return json({ jobId: existing.id, status: existing.status, idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+  }
   try {
     await db.batch([
       db.prepare("INSERT INTO research_jobs (id,project_id,job_type,status,idempotency_key,input_json,created_by,created_ts) VALUES (?,?, 'meta_analysis','queued',?,?,?,?)")
@@ -127,9 +130,12 @@ async function submitMetaAnalysis(db, queue, uid, projectId, body, requestId) {
         .bind(analysisId, projectId, jobId, analysis.model || "random_dl", analysis.effect_measure, inputHash, input, uid, now),
     ]);
   } catch (e) {
-    const raced = await db.prepare("SELECT id,status FROM research_jobs WHERE project_id=? AND idempotency_key=?")
+    const raced = await db.prepare("SELECT j.id,j.status,m.input_hash FROM research_jobs j JOIN research_meta_analyses m ON m.job_id=j.id WHERE j.project_id=? AND j.idempotency_key=?")
       .bind(projectId, idempotencyKey).first();
-    if (raced) return json({ jobId: raced.id, status: raced.status, idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+    if (raced) {
+      if (raced.input_hash !== inputHash) return err(409, "idempotency_conflict", "This idempotencyKey was already used with different analysis input", requestId);
+      return json({ jobId: raced.id, status: raced.status, idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+    }
     throw e;
   }
   try {
