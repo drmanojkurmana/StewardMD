@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### IMG16 pictures (2026-11-22, contentVersion 0.4.25)
+34 of 35 wired: laparoscopic adrenalectomy 21 (complete), parathyroidectomy 09 to 22 except 12 (chaotic, unreadable field). IMG6 to IMG15 not received yet.
+
 ### IMG5 pictures (2026-11-22, contentVersion 0.4.24)
 89 of 100 wired: gastrectomy, oesophagectomy, neck dissection 10 to 22, TURBT, scrotal exploration, suprapubic catheter 01 to 09. Rejected: gastrectomy 06 (stripe down the sternum), 13 (stomach floating above the drapes); oesophagectomy 12 (jejunum lying on the skin), 15, 16, 17, 19 (front-on chest views, not a right thoracotomy); neck dissection 10 (midline, not the posterior triangle); scrotal 11 and 12 (wound looks like a vulva); TURBT 07 (cross-section drawn on the body).
 
