@@ -1505,17 +1505,17 @@
         },
 
         onPatient: function(episodeId, patientId, name) {
-          if (_connectCtx) {   // Connect-hospital roster: tap -> pull this patient from the FHIR EMR into ICU
-            try { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); } catch (e) {}
-            if (window.SMD_openConnectPatient) window.SMD_openConnectPatient(_connectCtx.tid, patientId, _connectCtx.cid, name);
-            return;
-          }
           // One-shot "pick a patient for another module" handoff (see pickPatient below). Checked
-          // before the import and lab paths so the caller gets the tap instead of the ward drawer.
+          // first (before FHIR hospitals, import and lab paths) so the caller gets the tap instead of the ward drawer.
           if (GHIS._pickCb) {
             var cb = GHIS._pickCb; GHIS._pickCb = null; GHIS._pickCancel = null;
             try { var pk = document.getElementById('ghisPanel'); if (pk) pk.classList.remove('open'); } catch (e) {}
             try { cb({ episodeId: episodeId, patientId: patientId, name: name }); } catch (e) {}
+            return;
+          }
+          if (_connectCtx) {   // Connect-hospital roster: tap -> pull this patient from the FHIR EMR into ICU
+            try { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); } catch (e) {}
+            if (window.SMD_openConnectPatient) window.SMD_openConnectPatient(_connectCtx.tid, patientId, _connectCtx.cid, name);
             return;
           }
           if (GHIS._importMode) { GHIS._importMode = false; GHIS.importPatientReports(patientId, name); }
@@ -1874,6 +1874,20 @@
           }, function() { done(); try { if (window.toast) toast('Could not fetch the number.'); } catch (e) {} });
         },
         fetchLabTests: function(patientId) {
+          // Any hospital: Connect Agent EMRs answer /lab and /lab-detail through the adapter proxy below;
+          // FHIR hospitals return Observations, mapped to the same row shape (newest first).
+          if (_connectCtx && window.SMD_CONNECT && SMD_CONNECT.pullContext) {
+            return SMD_CONNECT.pullContext({ tenantId: _connectCtx.tid, patientRef: patientId, connectionId: _connectCtx.cid }).then(function(r) {
+              var obs = (r && r.ok && r.bundle && r.bundle.observations) || [];
+              var rows = obs.filter(function(o) { return o && o.category !== 'vital-signs'; }).map(function(o) {
+                var v = o.value || {}, rr = o.referenceRange || {};
+                return { test: (o.code && o.code.text) || '', result: v.value != null ? v.value : (v.text != null ? v.text : ''), units: v.unit || '',
+                  low: rr.low && rr.low.value, high: rr.high && rr.high.value, order: '', date: o.effectiveDateTime || '' };
+              }).filter(function(x) { return x.test && x.result !== ''; });
+              rows.sort(function(a, b) { return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0); });
+              return rows;
+            });
+          }
           return authFetch('/lab?patientId=' + encodeURIComponent(patientId)).then(function(j) {
             var orders = ((j && j.orders) || []).slice(0, 25);
             var per = [];
