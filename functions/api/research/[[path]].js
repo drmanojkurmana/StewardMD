@@ -113,7 +113,7 @@ async function submitMetaAnalysis(db, queue, uid, projectId, body, requestId) {
   }
   const jobId = uuid("job_"), analysisId = uuid("ma_"), now = Date.now();
   const input = JSON.stringify({ effect_measure: analysis.effect_measure, model: analysis.model || "random_dl",
-    confidence_level: analysis.confidence_level || 0.95, studies: analysis.studies });
+    confidence_level: analysis.confidence_level ?? 0.95, studies: analysis.studies });
   const hashBytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(input));
   const inputHash = [...new Uint8Array(hashBytes)].map(x => x.toString(16).padStart(2, "0")).join("");
   const existing = await db.prepare("SELECT j.id,j.status,m.input_hash FROM research_jobs j JOIN research_meta_analyses m ON m.job_id=j.id WHERE j.project_id=? AND j.idempotency_key=?")
@@ -139,7 +139,7 @@ async function submitMetaAnalysis(db, queue, uid, projectId, body, requestId) {
     throw e;
   }
   try {
-    await queue.send({ type: "meta-analysis", jobId, analysisId, projectId, input: JSON.parse(input), requestedBy: uid, requestId });
+    await queue.send({ type: "meta-analysis", jobId, analysisId, projectId, requestedBy: uid, requestId });
   } catch (e) {
     await db.prepare("UPDATE research_jobs SET status='failed',error_code='queue_unavailable',completed_ts=? WHERE id=?")
       .bind(Date.now(), jobId).run();
@@ -155,6 +155,17 @@ export async function onRequest({ request, env, params }) {
   const path = "/" + parts.join("/");
   if (!env.RESEARCH_DB) return err(503, "database_unavailable", "Research database is not provisioned", requestId);
   const db = env.RESEARCH_DB;
+
+  // Queue consumer retrieves the persisted, bounded analysis payload by job ID; queue messages stay tiny.
+  const inputLookup = path.match(/^\\/v1\\/internal\\/jobs\\/([^/]+)\\/input$/);
+  if (inputLookup && request.method === "GET") {
+    if (!env.RESEARCH_CALLBACK_TOKEN || !safeEqual(request.headers.get("x-research-callback-token") || "", env.RESEARCH_CALLBACK_TOKEN))
+      return err(401, "unauthorized", "Invalid worker credentials", requestId);
+    const row = await db.prepare("SELECT j.id,m.id AS analysis_id,m.input_json FROM research_jobs j JOIN research_meta_analyses m ON m.job_id=j.id WHERE j.id=? AND j.job_type='meta_analysis'")
+      .bind(inputLookup[1]).first();
+    if (!row) return err(404, "job_not_found", "Job not found", requestId);
+    return json({ analysisId: row.analysis_id, input: JSON.parse(row.input_json) }, 200, { "x-request-id": requestId });
+  }
 
   // Internal callbacks may finish already-queued work even after new submissions are disabled.
   const callback = path.match(/^\/v1\/internal\/jobs\/([^/]+)\/(start|complete)$/);
