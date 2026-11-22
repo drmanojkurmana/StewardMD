@@ -37,6 +37,28 @@
   function embedder() { var E = g().SMD_EMBED_LOCAL; return (E && E.packReady && E.packReady() && E.embedAvailable && E.embedAvailable()) ? E : null; }
 
   var _meta = null, _vec = null, _p = null;
+  // Download state for the Settings button (maik-engine.js): progress while fetching, and a marker
+  // (the vector file's sha) once it is stored, so the row can say "downloaded" without opening IndexedDB.
+  var MARK = "smd_maik_book_vec_have";
+  var _st = { downloading: false, frac: 0, err: null }, _subs = [];
+  function emit() { _subs.slice().forEach(function (fn) { try { fn(_st); } catch (e) {} }); }
+  function subscribe(fn) { _subs.push(fn); return function () { _subs = _subs.filter(function (f) { return f !== fn; }); }; }
+  function state() { return _st; }
+  function downloaded() { return lget(MARK) === META_SHA; }
+  function readWithProgress(r, total) {
+    if (!r.body || !r.body.getReader || !total) return r.arrayBuffer();
+    var reader = r.body.getReader(), buf = new Uint8Array(total), got = 0;
+    function pump() {
+      return reader.read().then(function (x) {
+        if (x.done) return buf.buffer;
+        if (got + x.value.length > total) throw new Error("vector file larger than expected");
+        buf.set(x.value, got); got += x.value.length;
+        _st = { downloading: true, frac: got / total, err: null }; emit();
+        return pump();
+      });
+    }
+    return pump();
+  }
 
   /** Cheap synchronous gate: flag, search pack, native embed. The book check happens in load(). */
   function available() { return flagOn() && !!embedder(); }
@@ -73,15 +95,25 @@
         return (opt && opt.store === false ? Promise.resolve(null) : idb("readonly", function (s) { return s.get(META_SHA); }))
           .then(function (cached) {
             if (cached && cached.byteLength === m.rows * DIMS) return { m: m, ab: cached };
-            return fx(BASE + ".i8").then(function (r) { if (!r.ok) throw new Error("vectors " + r.status); return r.arrayBuffer(); })
+            _st = { downloading: true, frac: 0, err: null }; emit();
+            return fx(BASE + ".i8").then(function (r) { if (!r.ok) throw new Error("vectors " + r.status); return readWithProgress(r, m.rows * DIMS); })
               .then(function (ab) {
                 if (ab.byteLength !== m.rows * DIMS) throw new Error("vector size " + ab.byteLength);
-                if (!(opt && opt.store === false)) idb("readwrite", function (s) { s.clear(); return s.put(ab, META_SHA); });
+                if (!(opt && opt.store === false)) {
+                  idb("readwrite", function (s) { s.clear(); return s.put(ab, META_SHA); }).then(function () {
+                    try { g().localStorage.setItem(MARK, META_SHA); } catch (e) {}
+                    emit();
+                  });
+                }
                 return { m: m, ab: ab };
               });
           });
-      }).then(function (x) { _meta = x.m; _vec = new Int8Array(x.ab); return { meta: _meta, vec: _vec }; })
-      .catch(function (e) { _p = null; throw e; });
+      }).then(function (x) {
+        _meta = x.m; _vec = new Int8Array(x.ab);
+        _st = { downloading: false, frac: 1, err: null }; emit();
+        return { meta: _meta, vec: _vec };
+      })
+      .catch(function (e) { _p = null; _st = { downloading: false, frac: 0, err: String((e && e.message) || e) }; emit(); throw e; });
     return _p;
   }
 
@@ -132,6 +164,7 @@
 
   function reset() { _meta = null; _vec = null; _p = null; }
 
-  return { FLAG: FLAG, DIMS: DIMS, POOL: POOL, available: available, load: load, topRows: topRows,
+  return { FLAG: FLAG, DIMS: DIMS, POOL: POOL, BYTES: 55385 * DIMS, available: available, load: load, topRows: topRows,
+           state: state, subscribe: subscribe, downloaded: downloaded,
            topRowsFor: topRowsFor, fuse: fuse, reset: reset };
 });

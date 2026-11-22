@@ -43,3 +43,28 @@ test("setters write the exact keys the book store and vector module read", () =>
   E.setOncoBook(false); assert.equal(m.has("smd_maik_kb_onco"), false);
   E.setBookVec(false); assert.equal(m.has("smd_maik_book_vec"), false);
 });
+
+function loadWith(keys, win) {
+  const m = new Map(Object.entries(keys));
+  const ls = { getItem: (k) => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)), removeItem: (k) => m.delete(k) };
+  const w = { localStorage: ls, addEventListener() {}, document: { querySelector: () => null }, ...win };
+  const mod = { exports: {} };
+  new Function("window", "localStorage", "module", ENGINE)(w, ls, mod);
+  return w.SMD_MAIK_ENGINE || mod.exports;
+}
+const ON = { smd_maik_kb_onco: "1", smd_maik_book_vec: "1" };
+const pack = { packReady: () => true };
+const kb = (name, have, st) => ({ NAME: name, installedCached: () => have, state: () => st || { downloading: false } });
+const bv = (have, st) => ({ downloaded: () => have, state: () => st || { downloading: false } });
+
+test("download lines: restart first, then a Download button for each, then 'downloaded'", () => {
+  let h = loadWith(ON, { SMD_EMBED_LOCAL: pack, SMD_MAIK_KB_STORE: kb("maik-lite-kb.jsonl", true), SMD_MAIK_BOOK_VEC: bv(false) }).bookExtrasHTML();
+  assert.equal((h.match(/Restart the app to finish turning this on\./g) || []).length, 2, "old book still loaded: both lines ask for a restart");
+  assert.doesNotMatch(h, /data-me-bookdl/);
+  h = loadWith(ON, { SMD_EMBED_LOCAL: pack, SMD_MAIK_KB_STORE: kb("maik-lite-kb-onco1.jsonl", false), SMD_MAIK_BOOK_VEC: bv(false) }).bookExtrasHTML();
+  assert.match(h, /data-me-bookdl="book"/); assert.match(h, /data-me-bookdl="vec"/);
+  assert.match(h, /Cancer book is not on this phone, 45 MB\./); assert.match(h, /Search data is not on this phone, 43 MB\./);
+  h = loadWith(ON, { SMD_EMBED_LOCAL: pack, SMD_MAIK_KB_STORE: kb("maik-lite-kb-onco1.jsonl", false, { downloading: true, frac: 0.42 }), SMD_MAIK_BOOK_VEC: bv(true) }).bookExtrasHTML();
+  assert.match(h, /Downloading cancer book, 42%/); assert.match(h, /Search data downloaded \(43 MB\)\./);
+  assert.doesNotMatch(h, /—/);
+});
