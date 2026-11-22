@@ -151,24 +151,27 @@ async function submitMetaAnalysis(db, queue, uid, projectId, body, requestId) {
 
 export async function onRequest({ request, env, params }) {
   const requestId = request.headers.get("x-request-id") || uuid("req_");
-  if (env.RESEARCH_ENABLED !== "1" || env.RESEARCH_PILOT_MODE !== "1")
-    return err(404, "not_found", "Research pilot is not enabled", requestId);
-  if (!env.RESEARCH_DB) return err(503, "database_unavailable", "Research database is not provisioned", requestId);
-  const db = env.RESEARCH_DB;
   const parts = Array.isArray(params.path) ? params.path : (params.path ? [params.path] : []);
   const path = "/" + parts.join("/");
+  if (!env.RESEARCH_DB) return err(503, "database_unavailable", "Research database is not provisioned", requestId);
+  const db = env.RESEARCH_DB;
 
-  // Queue consumer callback: internal service-to-service auth, no Firebase token.
-  const callback = path.match(/^\/v1\/internal\/jobs\/([^/]+)\/complete$/);
+  // Internal callbacks may finish already-queued work even after new submissions are disabled.
+  const callback = path.match(/^\/v1\/internal\/jobs\/([^/]+)\/(start|complete)$/);
   if (callback && request.method === "POST") {
     if (!env.RESEARCH_CALLBACK_TOKEN || !safeEqual(request.headers.get("x-research-callback-token") || "", env.RESEARCH_CALLBACK_TOKEN))
       return err(401, "unauthorized", "Invalid callback credentials", requestId);
-    const body = await bodyJson(request);
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid callback payload", requestId); }
     const job = await db.prepare("SELECT id,project_id FROM research_jobs WHERE id=? AND job_type='meta_analysis'").bind(callback[1]).first();
     if (!job) return err(404, "job_not_found", "Job not found", requestId);
     const analysisRow = await db.prepare("SELECT id FROM research_meta_analyses WHERE job_id=?").bind(job.id).first();
     if (!analysisRow || analysisRow.id !== body.analysisId) return err(409, "callback_mismatch", "Callback does not match the analysis job", requestId);
     const now = Date.now();
+    if (callback[2] === "start") {
+      await db.prepare("UPDATE research_jobs SET status='running',started_ts=COALESCE(started_ts,?) WHERE id=? AND status IN ('queued','running')")
+        .bind(now, job.id).run();
+      return json({ ok: true, requestId }, 200, { "x-request-id": requestId });
+    }
     const succeeded = body.status === "succeeded" && body.result && typeof body.result === "object";
     const terminalStatus = succeeded ? "succeeded" : "failed";
     await db.batch([
@@ -180,6 +183,8 @@ export async function onRequest({ request, env, params }) {
     return json({ ok: true, requestId }, 200, { "x-request-id": requestId });
   }
 
+  if (env.RESEARCH_ENABLED !== "1" || env.RESEARCH_PILOT_MODE !== "1")
+    return err(404, "not_found", "Research pilot is not enabled", requestId);
   const claims = await caller(request, env);
   if (!claims || !claims.sub) return err(401, "unauthorized", "Sign in to use StewardMD Research", requestId);
   const uid = claims.sub;
