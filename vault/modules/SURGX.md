@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### VID7 and VID9 gap-fill videos (2026-11-22, contentVersion 0.4.29)
+VID7 (zip): 83 clips across vascular operations (carotid endarterectomy 22, fem-pop bypass 18, AV fistula 19, below-knee amputation 11, from none) plus ENT and embolectomy gaps. VID9: 98 clips across orthopaedics (hip hemiarthroplasty, ankle ORIF, distal radius, ACL, from none) plus fasciotomy, TKR and skin graft gaps. All 55 new ids embeddable. VID8 not received yet.
+
 ### VID6 gap-fill videos (2026-11-22, contentVersion 0.4.28)
 97 clips across 7 operations, returned as vid6.json inside a zip: ruptured AAA 20, axillary clearance 19, WLE sentinel node 18, fibroadenoma 14, femoral embolectomy 14 (all from none), myomectomy 11, mastectomy 1. GthlK0Bv0aI blocks embedding.
 
