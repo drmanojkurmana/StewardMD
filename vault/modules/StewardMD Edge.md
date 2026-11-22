@@ -5,6 +5,13 @@ flag: smd_edge (default ON for all since 2026-10-04, owner; "0" turns it off)
 ---
 # StewardMD Edge
 
+> **2026-11-22 (owner): models removed, rules only.** The Needle plugin (`local-plugins/capacitor-needle`,
+> native wiring, preflight step, device/native-host harnesses) and the FunctionGemma picker pack are gone;
+> phones that downloaded FunctionGemma delete it once at startup (`maik-models.js` `purgeRetired`). The
+> Edge engine picker is gone from Settings. Layer 0 rules (exact calculator/tool/drug/ICD/KB names) still
+> answer under `smd_edge`. EmbeddingGemma 2 (On-phone search pack) is unaffected. Sections below describe
+> the old model design and are history.
+
 On-device request router and value extractor. Plan: [[Edge-Master-Plan]]. Evidence: [[Needle-Audit]].
 
 ## What exists (2026-10-01 sprint)

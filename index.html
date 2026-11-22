@@ -2488,11 +2488,11 @@ window.openExternal = function (u) {
 <!-- MaiK Answer Engine chooser (MaiK Edge · Cloud · On-device). DECORATES window.SMD_AI, so it must
      load after reasoning.js; the Settings row is rendered by home.js. Default pref is "cloud", so
      an untouched install is byte-for-byte the current behaviour. -->
-<script src="/maik-engine.js?v=hardlocal3-dose1-raglink1-uigroups1-thread1-gate1-free1-picker1-hap1-onepage1-codedb1-audOff-fr1-qa16-mlx3-eng1-maikedge1-conv5-sui1-bookext1" defer></script>
+<script src="/maik-engine.js?v=hardlocal3-dose1-raglink1-uigroups1-thread1-gate1-free1-picker1-hap1-onepage1-codedb1-audOff-fr1-qa16-mlx3-eng1-maikedge1-conv5-sui1-bookext1-noedgemodel1" defer></script>
 <!-- On-device MaiK: model pack download/cache (SMD_MAIK_MODELS) + llama.cpp inference
      (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
      capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
-<script src="/maik-models.js?v=hardlocal3-ground1-bonsai2-gate1-grades1-perf1-nocortex1-audOff-cortex9b1-sha1-mlx3-ntb1-eng1-b2gone1" defer></script>
+<script src="/maik-models.js?v=hardlocal3-ground1-bonsai2-gate1-grades1-perf1-nocortex1-audOff-cortex9b1-sha1-mlx3-ntb1-eng1-b2gone1-noedgemodel1" defer></script>
 <!-- MaiK Lite on-device RAG (window.SMD_MAIK_RAG / SMD_MAIK_KB_STORE): BM25 over the book chunks +
      evidence gate, ported from the server pipeline, so MaiK Lite's answers are checked against the
      actual book text instead of trusting its own recollection. Loaded before maik-local.js, which
@@ -2508,7 +2508,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-book-vec.js?v=bookvec1" defer></script>
 <!-- MaiK AI mark: the icon on every "Ask MaiK" entry (one SVG in assets/maik-ai-mark.svg). Before home.js. -->
 <script src="/maik-ai-mark.js?v=mkai7" defer></script>
-<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs2-len1-mem1-bal1-audOff-nopass1-litemeta1-literet1-literx1-mlx1-convo1002-liteproto1-litedrug1-ntb1-tools1-eng1-liteval1-fgwarm1-adultref1-bookvec1" defer></script>
+<script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs2-len1-mem1-bal1-audOff-nopass1-litemeta1-literet1-literx1-mlx1-convo1002-liteproto1-litedrug1-ntb1-tools1-eng1-liteval1-fgwarm1-adultref1-bookvec1-noedgemodel1" defer></script>
 <!-- On-phone semantic search (window.SMD_EMBED_LOCAL): EmbeddingGemma disease vectors through
      the prep-bank API plus IndexedDB cache, read lazily by steward-ai.browser.js (only when the
      smd_local_embed flag is on and the search pack is on disk). Defining the global is harmless
@@ -2532,7 +2532,7 @@ window.openExternal = function (u) {
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
-<link rel="stylesheet" href="/settings-ui.css?v=settings1005-ipad2-ipad3-ios9-inner1-ai1">
+<link rel="stylesheet" href="/settings-ui.css?v=settings1005-ipad2-ipad3-ios9-inner1-ai1-noedgemodel1">
 <script defer src="/settings-ui.js?v=settings1005-ios3-admin1"></script>
 <script defer src="/sidebar-redesign.js?v=surgx1-settings1005-dd1-acct1-prog1-otaonly1-push3-ios1-sbtheme1-swg1"></script>
 <!-- Settings ▸ Apple Watch page (SMD_APPLE_WATCH). Additive; the sidebar's Apple Watch row
@@ -2878,7 +2878,7 @@ window.openExternal = function (u) {
 <script src="/calc-prefill.js?v=cpf1" defer></script>
 <script src="/edge-schemas.js?v=schemas1" defer></script>
 <script src="/edge-runtime.js?v=edge3" defer></script>
-<script src="/edge-router.js?v=edge19-kbnav1-conv5-adultref1-dose1-neg2-mcq1" defer></script>
+<script src="/edge-router.js?v=edge19-kbnav1-conv5-adultref1-dose1-neg2-mcq1-noedgemodel1" defer></script>
 <script src="/insulin.js?v=ins17-cel1-pf1" defer></script>
 <!-- FollowCare AI · post-discharge recovery follow-up (additive, flag-gated smd_followcare, DEFAULT OFF;
      enable with ?fc=1 or Settings). Doctor module only — patients use the login-free web portal
