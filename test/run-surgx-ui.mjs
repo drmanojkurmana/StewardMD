@@ -325,6 +325,30 @@ try {
     "VIDEO batch 10: small bowel resection shows its 12 step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Laparoscopic inguinal hernia repair");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 20,
+    "VIDEO batch 11: Laparoscopic inguinal hernia repair shows its 20 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Above-knee amputation");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 19,
+    "VIDEO batch 20: Above-knee amputation shows its 19 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Superficial parotidectomy with facial nerve identification");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 17,
+    "VIDEO batch 21: Superficial parotidectomy with facial nerve identification shows its 17 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Phacoemulsification");
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");

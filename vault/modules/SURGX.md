@@ -645,3 +645,6 @@ Held back: tibial nail 07 (AP fluoro shows the awl entering sideways), fasciotom
 
 ### Batch 10 videos (2026-11-22, contentVersion 0.4.8)
 49 clips across abscess-drainage (adx), hartmanns-procedure (hpx), loop-ileostomy (lix), lap-perforated-duodenal-ulcer (lpdux), small-bowel-resection (sbrx). Gemini Chat-mode JSON wired directly by scratchpad wireJ.py (best watched clip per step, max 150 s, captions from "shows"). Dropped: 4 age-restricted embeds (D8YRoYRtI3Q, U00zOHu2fqo, daisKWjxK2w, ekddeHIYIJs) and the unwatched Hartmann's operation video, so Hartmann's, loop ileostomy and perforated ulcer have safety-step clips only.
+
+### Batches 11, 12, 20, 21 videos (2026-11-22, contentVersion 0.4.9)
+71 + 42 + 89 + 83 clips via wireJ.py. Batch 11 and 12 dropped 8 embeds (7 age-restricted, 1 embedding disabled), which leaves Nissen and sleeve thin. Batch 20 and 21 arrived as slim JSON without "shows", so the caption is the step title plus the source kind; their clips are as Gemini timed them and have not been checked by eye.
