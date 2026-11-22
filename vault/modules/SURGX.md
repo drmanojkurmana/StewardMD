@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### IMG2 pictures (2026-11-22, contentVersion 0.4.19)
+90 of 100 wired: lap inguinal hernia 18, open ventral hernia 19, sphincterotomy 15, fistula-in-ano 16, pilonidal 18, Nissen 4. Rejected, mostly for cross-section anatomy drawn straight onto the patient instead of in an inset: fistula 09, 10, 13; sphincterotomy 08, 11, 12; also sphincterotomy 10 (incision far too large), lap inguinal 07 (whole abdominal wall cut away) and 20 (open groin wound for a port closure), open ventral 13 (mesh laid over the skin).
+
 ### IMG1 pictures (2026-11-22, contentVersion 0.4.18)
 First of the 100-per-prompt picture prompts (generator `gen/make100.py`, only steps without a picture; Gemini returned zips, fetched from the share page by `zipdl.cjs`, wired by `imgM.py`). 92 of 100 wired: abscess drainage 11, Hartmann 20, loop ileostomy 19, perforated ulcer 17, small bowel resection 23, lap inguinal hernia 2. Rejected: Hartmann 05 (not in Lloyd-Davies stirrups), 06 (stoma site left unprepped), 11 (open bowel lumen before division), 12 (bare spine and sacrum drawn in the field); perforated ulcer 07 (trocar through the epigastric vessels), 09 (tube coming out of the perforation), 15 (resection staple lines on a patch repair); loop ileostomy 15 (long midline closed instead of the stoma-site fascia).
 
