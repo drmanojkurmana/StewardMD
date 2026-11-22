@@ -32,9 +32,9 @@ def require_worker_token(x_research_worker_token: Annotated[str | None, Header()
 class StudyInput(BaseModel):
     study_id: str = Field(min_length=1, max_length=120)
     label: str = Field(min_length=1, max_length=240)
-    effect: float = Field(gt=0, allow_inf_nan=False)
-    ci_lower: float = Field(gt=0, allow_inf_nan=False)
-    ci_upper: float = Field(gt=0, allow_inf_nan=False)
+    effect: float = Field(allow_inf_nan=False)
+    ci_lower: float = Field(allow_inf_nan=False)
+    ci_upper: float = Field(allow_inf_nan=False)
 
     @model_validator(mode="after")
     def ordered_ci(self):
