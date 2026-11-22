@@ -37,7 +37,10 @@ try {
   await ev(`openGHIS(); GHIS.loadDemoHospital(window.SMD_TEST_HOSPITAL); return 1;`);
   ok(await until(`document.querySelectorAll("#ghisPatientList .ghis-row").length >= 20`), "demo ward renders");
   await sleep(800); await ev(`window.__added = []; return 1;`);   // the demo pre-fills its MICU unit through the same call
-  ok((await ev(`return document.querySelectorAll("#ghisPatientList input[data-sel-pid]").length;`)) >= 20, "every patient row has a selection box");
+  ok((await ev(`return document.querySelectorAll("#ghisPatientList input[data-sel-pid]").length;`)) === 0, "the plain list (variant A) has no selection boxes");
+  await ev(`document.getElementById("ghisChipSel").click(); return 1;`); await sleep(300);
+  ok((await ev(`return document.querySelectorAll("#ghisPatientList input[data-sel-pid]").length;`)) >= 20, "Select puts a selection box on every patient row");
+  ok((await ev(`return document.getElementById("ghisChipSel").textContent;`)) === "Done", "the Select chip turns into Done");
   ok((await ev(`return !!document.querySelector("#ghisPatientList .ghis-grp-sel[data-gi='0']");`)) === true, "each group has Select all");
   ok((await ev(`var b=document.getElementById("ghisSelBar"); return !b || b.hidden;`)) === true, "no bar before anything is ticked");
   // Tick one row
@@ -57,6 +60,9 @@ try {
   ok((await ev(`var b=document.getElementById("ghisSelBar"); return !b || b.hidden;`)) === true, "the bar goes away after adding");
   ok((await ev(`return document.querySelectorAll("#ghisPatientList .ghis-grp")[0].querySelectorAll(".ghis-inunit").length;`)) === n0, "added patients show 'In unit'");
   await shot("2-added");
+  // ICU's "Add patients from Ward Sync" opens straight into Select mode
+  await ev(`GHIS.toggleSelMode(false); GHIS.openForAdd(); return 1;`); await sleep(300);
+  ok((await ev(`return document.querySelectorAll("#ghisPatientList input[data-sel-pid]").length;`)) > 0, "openForAdd starts in Select mode");
   // Single pick mode: Select buttons, no boxes, no bar
   await ev(`GHIS.pickPatient(function(sel){ window.__picked = sel; }); return 1;`); await sleep(500);
   ok((await ev(`return document.querySelectorAll("#ghisPatientList input[data-sel-pid]").length;`)) === 0, "pick mode hides the selection boxes");

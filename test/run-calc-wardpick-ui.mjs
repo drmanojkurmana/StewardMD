@@ -56,6 +56,17 @@ try {
   await ev(`document.getElementById("mcAuto_oakland_lgib").click(); return 1;`); await sleep(400);
   await ev(`closeGHIS(); return 1;`);
   ok((await ev(`return GHIS.isPicking();`)) === false, "closing Ward Sync without Select cancels the pick");
+  // Owner 2026-11-23: MELD-Na filled "0 of 5" though the patient had LFT, electrolytes and INR (fields had no lab tag).
+  await ev(`GHIS.loadDemoHospital(window.SMD_TEST_HOSPITAL); closeGHIS(); MEDCALC.open("meld_na"); return 1;`);
+  ok(await until(`document.getElementById("mcAuto_meld_na")`), "MELD-Na open");
+  await ev(`document.getElementById("mcAuto_meld_na").click(); return 1;`);
+  ok(await until(`document.querySelector("#ghisPatientList .ghis-pt-select")`), "MELD-Na Fill opens Ward Sync");
+  await ev(`var b=[].slice.call(document.querySelectorAll("#ghisPatientList .ghis-row")).filter(function(r){return /Ravi Kumar/.test(r.textContent);})[0]; b.querySelector(".ghis-pt-select").click(); return 1;`);
+  ok(await until(`/Filled 4 of 5/.test((document.getElementById("mcAFnote_meld_na")||{}).textContent||"")`, 15000), "MELD-Na fills bilirubin, INR, creatinine and sodium");
+  const mv = await ev(`return ["bili","inr","creat","na"].map(function(k){ return document.getElementById("mc_meld_na_"+k).value; }).join("|");`);
+  ok(/^8\.4\|2\.4\|/.test(mv), `MELD-Na takes the newest bilirubin and INR (${mv})`);
+  ok(/\d/.test(String(await ev(`return (document.getElementById("mcScore_meld_na")||{}).textContent||"";`))), "MELD-Na calculates a score");
+  await shot("3-meld-filled");
   console.log(fails === 0 ? "\nALL GREEN: Fill from patient picks the patient in Ward Sync" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

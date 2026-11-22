@@ -46,6 +46,8 @@ try {
     await shot(`${scheme}-3-list-scrolled`);
     await ev(`var c=document.querySelector("#ghisPatientList .ghis-pt-card"); if(c) c.click(); return 1;`); await sleep(2500);
     await shot(`${scheme}-4-patient`);
+    await ev(`var b=document.getElementById('ghisLabBody'); if(b) b.scrollTop=b.scrollHeight; var d=document.getElementById('ghisLabDrawer'); if(d) d.scrollTop=d.scrollHeight; return 1;`); await sleep(400);
+    await shot(`${scheme}-5-patient-bottom`);
   }
 } catch (e) { console.error("HARNESS ERROR:", e.message); }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(0); }

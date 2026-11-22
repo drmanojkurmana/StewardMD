@@ -8636,7 +8636,7 @@
     bili:  { kw:/bilirubin/i, ex:/direct|indirect|conjugat|neonat/i },   // total only
     pt:    { kw:/prothrombin|(^|[^a-z])pt([^a-z]|$|\/)/i, ex:/aptt|partial|activated|control/i, unit:/sec/i },
     ptctrl:{ kw:/\bcontrol\b/i, ex:/internal|quality|\bqc\b|glyc/i, unit:/sec/i },   // explicit "CONTROL." row in the PT/INR panel (seconds)
-    inr:   { kw:/\binr\b/i, ex:null },
+    inr:   { kw:/\binr\b|i\.n\.r|international normali[sz]ed/i, ex:null },
     creat: { kw:/creatinine/i, ex:/urin|clearance|ratio/i },
     na:    { kw:/\bsodium\b|serum na\b/i, ex:/urin|spot|fractional|excretion/i },
     k:     { kw:/\bpotassium\b|serum k\b/i, ex:/urin/i },
@@ -8712,8 +8712,30 @@
       out.ptctrl={ value:Math.round(((ptLo+ptHi)/2)*10)/10, units:ptUnit, order:"ref-range midpoint "+(ptRange||(ptLo+"–"+ptHi)), derived:true };
     return out;
   }
-  function calcLabKeys(c){ var s={}; c.inputs.forEach(function(f){ if(f.lab && f.type==="number") s[f.lab]=1; }); return Object.keys(s); }
-  function calcHasLab(c){ return c.inputs.some(function(f){ return (f.lab && f.type==="number") || f.demo; }); }
+  // Most calculators have no `lab:` tag (53 of 885 fields had one, so MELD-Na filled 0 of 5, owner 2026-11-23).
+  // Untagged number fields map by label, only for a blood value in the unit Indian labs (GHIS) report.
+  // shortcut: assumes the ward lab reports conventional units below; add conversions if a hospital sends SI units.
+  var LAB_UNIT_OK = {
+    bili:/^mg\/dl$/, creat:/^mg\/dl$/, bun:/^mg\/dl$/, glu:/^mg\/dl$/, ca:/^mg\/dl$/,
+    na:/^(meq|mmol)\/l$/, k:/^(meq|mmol)\/l$/, cl:/^(meq|mmol)\/l$/, hco3:/^(meq|mmol)\/l$/,
+    alb:/^g\/dl$/, hb:/^g\/dl$/, plt:/^×10⁹\/l$/, wbc:/^×10⁹\/l$/, inr:/^$/
+  };
+  var LAB_LABEL_EX = /urin|stool|ascit|fluid|csf|target|desired|goal|\bpre[- ]|\bpost[- ]|baseline|previous|prior|change|delta|transfus|nucleated|per 100|same units|unit below|uncorrected|corrected|24 ?h|\/day|optional|ratio|predicted|normal/i;
+  function labOf(f){
+    if(!f || f.type!=="number") return null;
+    if(f.lab) return f.lab;
+    if(f._lab!==undefined) return f._lab;
+    var lbl=String(f.label||""), u=String(f.unit||"").toLowerCase().replace(/\s+/g,""), hit=null;
+    if(!LAB_LABEL_EX.test(lbl)) Object.keys(LAB_UNIT_OK).some(function(k){
+      var m=LAB_RX[k];
+      if(m.kw.test(lbl) && !(m.ex && m.ex.test(lbl)) && LAB_UNIT_OK[k].test(u)){ hit=k; return true; }
+      return false;
+    });
+    f._lab=hit;
+    return hit;
+  }
+  function calcLabKeys(c){ var s={}; c.inputs.forEach(function(f){ var k=labOf(f); if(k) s[k]=1; }); return Object.keys(s); }
+  function calcHasLab(c){ return c.inputs.some(function(f){ return labOf(f) || f.demo; }); }
   // Write values into the calculator's inputs. Lab analytes: Ward Sync wins, then a
   // photo/PDF imported value (ICU dashboard) when Ward has none. Demographics
   // (demo:"age"|"sex") come from the selected patient / ICU patient. Everything is
@@ -8736,16 +8758,16 @@
         else missing.push(f.label);
         return;
       }
-      if(!f.lab || f.type!=="number") return;
-      var got=analytes && analytes[f.lab];
+      var lk=labOf(f); if(!lk) return;
+      var got=analytes && analytes[lk];
       if(got && got.value!=null){
         inp.value=got.value;
         var src=got.derived?"Ward · "+(got.order||"ref-range"):"Ward Sync"+(got.order?" · "+got.order:"");
         if(got.note) src+=" · "+got.note;
         filled.push({ label:f.label, val:got.value, units:got.units, src:src });
-      } else if(photoRec && photoRec[f.lab]!=null && !isNaN(parseFloat(photoRec[f.lab]))){
-        inp.value=parseFloat(photoRec[f.lab]);
-        filled.push({ label:f.label, val:parseFloat(photoRec[f.lab]), units:"", src:"Imported report" });
+      } else if(photoRec && photoRec[lk]!=null && !isNaN(parseFloat(photoRec[lk]))){
+        inp.value=parseFloat(photoRec[lk]);
+        filled.push({ label:f.label, val:parseFloat(photoRec[lk]), units:"", src:"Imported report" });
       } else { missing.push(f.label); }
     });
     return { filled:filled, missing:missing };
@@ -8895,7 +8917,8 @@
     c.inputs.forEach(function(f){
       var inp=document.getElementById("mc_"+c.id+"_"+f.id); if(!inp) return;
       var val=null, isSex=false;
-      if(f.lab && snap.labs[f.lab]!=null) val=snap.labs[f.lab];
+      var lk=labOf(f);
+      if(lk && snap.labs[lk]!=null) val=snap.labs[lk];
       // Haemoglobin fields without a lab hint (many added calculators): fill only a g/dL field with a plausible g/dL value, never a g/L one.
       else if(/haemoglobin|hemoglobin/i.test(f.label||"") && /g\/dl/i.test(f.unit||"") && snap.labs.hb!=null && +snap.labs.hb>=2 && +snap.labs.hb<=25) val=snap.labs.hb;
       else {
