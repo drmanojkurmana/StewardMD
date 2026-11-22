@@ -655,6 +655,9 @@ mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and
 ### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
 105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
 
+### IMG15 pictures (2026-11-22, contentVersion 0.4.39)
+98 recovered, 88 wired: AVR 18, CABG, hemithyroidectomy, median sternotomy, parathyroidectomy 01 to 08, TLIF 12 to 22, VATS. Rejected: CABG 05 and sternotomy 05 (face and whole body painted); hemithyroidectomy 10, 19 (male face on the female patient); TLIF 14, 16 (whole dural tube exposed); VATS 05 (prone, not lateral), 06 (supine abdominal prep), 07 and 14 (cut-away chest wall on the skin).
+
 ### IMG14 pictures (2026-11-22, contentVersion 0.4.38)
 96 recovered (ACDF zip damaged), 86 wired: ACDF, craniotomy, decompressive craniectomy, escharotomy 07, flexor tendon 19 to 21, laminectomy, TLIF 01 to 11. Rejected: craniotomy 09, 10 (incision and bone flap over the face), 14 (awake patient with open brain); decompressive 08, 09, 11 (face and orbit cut away), 14, 19, 20 (open brain in closure or background); laminectomy 12 (cross-section on the back).
 
