@@ -479,6 +479,27 @@ body.dark #surgxRoot, body.v3-dark #surgxRoot { --sgx-body: #C9D4DA; }
 #surgxRoot .sgx-media img, #surgxRoot .sgx-media svg { width: 100%; height: auto; display: block; border-radius: var(--sgx-r-ctl); }
 #surgxRoot .sgx-embed { aspect-ratio: 16 / 9; border-radius: var(--sgx-r-ctl); overflow: hidden; background: #000; }
 #surgxRoot .sgx-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+/* App-owned full screen (surgx-screens.js fsOpen). The button sits over the player's own fullscreen
+   button, which Android's WebView ignores. Semi-transparent so the frame under it still reads. */
+#surgxRoot .sgx-embed, #surgxRoot .sgx-pic { position: relative; }
+#surgxRoot .sgx-fs {
+  position: absolute; right: 4px; bottom: 4px; z-index: 2; width: 44px; height: 44px; padding: 0;
+  display: grid; place-items: center; border: 0; border-radius: 12px; cursor: pointer;
+  background: rgba(0, 0, 0, .28); color: #fff; -webkit-tap-highlight-color: transparent;
+}
+#surgxRoot .sgx-fs:active { background: rgba(0, 0, 0, .5); }
+#surgxRoot .sgx-fs-on {
+  position: fixed; inset: 0; z-index: 2147483000; margin: 0; border-radius: 0; aspect-ratio: auto;
+  background: #000; display: flex; align-items: center; justify-content: center;
+}
+#surgxRoot .sgx-fs-on img { width: 100%; height: 100%; object-fit: contain; border-radius: 0; }
+#surgxRoot .sgx-fs-on .sgx-fs { right: max(10px, env(safe-area-inset-right)); bottom: max(10px, env(safe-area-inset-bottom)); }
+/* Phone upright: turn the clip sideways so it fills the screen without needing auto-rotate. The size comes
+   from fsSize() because the app zooms <html> (0.95) and 100vh under that zoom falls short of the screen. */
+@media (orientation: portrait) {
+  #surgxRoot .sgx-fs-on { inset: auto; top: 50%; left: 50%; width: var(--sgx-fs-w, 100vh); height: var(--sgx-fs-h, 100vw); transform: translate(-50%, -50%) rotate(90deg); }
+  #surgxRoot .sgx-fs-on .sgx-fs { right: 10px; bottom: 10px; }
+}
 #surgxRoot .sgx-media .cap { margin-top: 6px; font: 500 11.5px/1.5 var(--sgx-sans); color: var(--sgx-muted); }
 #surgxRoot .sgx-media .attr { margin-top: 3px; font: 500 10.5px/1.4 var(--sgx-sans); color: var(--sgx-faint); }
 #surgxRoot .sgx-media.pending {

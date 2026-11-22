@@ -219,6 +219,21 @@ try {
   ok(await waitFor("#surgxRoot .sgx-step .sgx-media img"), "IMAGES: step pictures render");
   ok((await ev("(function () { var st = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step')); var src = st.map(function (x) { var i = x.querySelector('.sgx-media img'); return i ? i.src : ''; }); if (st.length !== 19 || src.indexOf('') >= 0 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
     "IMAGES: each of the 19 appendicectomy steps shows its own picture, and every file loads");
+  // Android's WebView cancels YouTube's own fullscreen, so the app owns it (owner 2026-11-22).
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-embed .sgx-fs').length === document.querySelectorAll('#surgxRoot .sgx-embed').length && document.querySelectorAll('#surgxRoot .sgx-pic .sgx-fs').length === document.querySelectorAll('#surgxRoot .sgx-pic').length")) === true,
+    "FULL SCREEN: every clip and every picture carries a full screen button");
+  await ev("(function () { var b = document.querySelector('#surgxRoot .sgx-embed .sgx-fs'); b.scrollIntoView(); b.click(); return true; })()");
+  await sleep(200);
+  ok((await ev("(function () { var e = document.querySelector('#surgxRoot .sgx-fs-on'); if (!e) return false; var r = e.getBoundingClientRect(); return Math.abs(r.width - innerWidth) < 2 && Math.abs(r.height - innerHeight) < 2 && e.querySelector('.sgx-fs').getAttribute('aria-label') === 'Back to steps'; })()")) === true,
+    "FULL SCREEN: the clip fills the whole phone screen");
+  await ev("window.SMD_SWIPE_BACK.hardwareBack()");
+  await sleep(500);
+  ok((await ev("!document.querySelector('#surgxRoot .sgx-fs-on') && window.SURGX.isOpen() && !!document.querySelector('#surgxRoot .sgx-step')")) === true,
+    "FULL SCREEN: Android back leaves full screen and stays on the steps");
+  await ev("window.SMD_SWIPE_BACK.hardwareBack()");
+  await sleep(500);
+  ok((await ev("window.SURGX.isOpen() && !!document.querySelector('#surgxRoot .sgx-row')")) === true,
+    "BACK: Android back from the steps returns to the procedure list, not the app home");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Laparoscopic cholecystectomy");

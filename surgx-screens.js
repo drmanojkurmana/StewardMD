@@ -95,7 +95,9 @@
     // "Urology" once sees urology in every section
     catalog: null, spec: "", find: "",
     // notes
-    noteIndex: null, note: null, noteSchema: null, noteType: "", noteTemplate: ""
+    noteIndex: null, note: null, noteSchema: null, noteType: "", noteTemplate: "",
+    // full-screen clip or picture (fsOpen), and whether turning the phone sideways opened it
+    fs: null, fsAuto: false
   };
 
   function route() { return state.stack[state.stack.length - 1] || "home"; }
@@ -188,6 +190,59 @@
 
   /* ── media (licence gate applied by surgx-content.js) ────────────────────── */
 
+  /* Full screen is the app's own: Capacitor's Android WebView cancels the YouTube player's fullscreen request
+   * (BridgeWebChromeClient.onShowCustomView hides the custom view at once), so its button does nothing there.
+   * Our button sits over the player's own bottom-right fullscreen button and pins the clip or picture to the
+   * whole screen with CSS, turned sideways while the phone is upright. The exit button is labelled "Back..."
+   * so swipe-back.js's hardware/gesture back presses it first and the steps stay where they were. */
+  var FS_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  var FSX_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
+  var FS_BTN = '<button type="button" class="sgx-fs" data-sgx="fs" aria-label="Full screen">' + FS_SVG + "</button>";
+
+  function fsStatusBar(hide) {
+    try { var SB = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.StatusBar; if (SB) { if (hide) SB.hide(); else SB.show(); } } catch (e) {}
+  }
+  function fsSize() {
+    var box = state.fs; if (!box) return;
+    var z = 1; try { z = parseFloat(getComputedStyle(document.documentElement).zoom) || 1; } catch (e) {}
+    box.style.setProperty("--sgx-fs-w", (window.innerHeight / z) + "px");
+    box.style.setProperty("--sgx-fs-h", (window.innerWidth / z) + "px");
+  }
+  function fsOpen(box, auto) {
+    if (!box || state.fs) return;
+    state.fs = box; state.fsAuto = !!auto;
+    box.classList.add("sgx-fs-on"); fsSize();
+    var b = box.querySelector(".sgx-fs");
+    if (b) { b.setAttribute("data-sgx", "fsx"); b.setAttribute("aria-label", "Back to steps"); b.innerHTML = FSX_SVG; }
+    fsStatusBar(true);
+  }
+  function fsClose() {
+    var box = state.fs; state.fs = null; state.fsAuto = false;
+    if (!box) return false;
+    box.classList.remove("sgx-fs-on");
+    var b = box.querySelector(".sgx-fs");
+    if (b) { b.setAttribute("data-sgx", "fs"); b.setAttribute("aria-label", "Full screen"); b.innerHTML = FS_SVG; }
+    fsStatusBar(false);
+    return true;
+  }
+  // Auto full screen: turning a phone sideways on a procedure fills the screen with the clip most in view;
+  // turning it back upright returns to the steps. Phones only (a landscape tablet is a normal reading position).
+  function fsOrient() {
+    try {
+      if (!state.root || !window.SURGX || !SURGX.isOpen()) return;
+      var land = window.innerWidth > window.innerHeight && window.innerHeight < 520;
+      fsSize();
+      if (!land) { if (state.fsAuto) fsClose(); return; }
+      if (state.fs || routeHead() !== "procedure") return;
+      var best = null, bestA = 0, H = window.innerHeight;
+      [].forEach.call(state.root.querySelectorAll(".sgx-embed"), function (el) {
+        var r = el.getBoundingClientRect(), a = Math.max(0, Math.min(r.bottom, H) - Math.max(r.top, 0));
+        if (a > bestA) { bestA = a; best = el; }
+      });
+      if (best) fsOpen(best, true);
+    } catch (e) {}
+  }
+
   function mediaBlock(registry, id) {
     var cc = C(); if (!cc) return "";
     var m = cc.media(registry, id);
@@ -199,11 +254,11 @@
     }
     var body = "";
     if (m.inline && DIA()) body = DIA().get(m.diagramId) || "";
-    else if (m.src) body = '<img src="' + attr(m.src) + '" alt="' + attr(m.caption) + '" loading="lazy">';
+    else if (m.src) body = '<div class="sgx-pic"><img src="' + attr(m.src) + '" alt="' + attr(m.caption) + '" loading="lazy">' + FS_BTN + "</div>";
     // YouTube rejects capacitor://localhost as an origin, so play through the https shim CliniX uses (ids allow-listed there).
     else if (m.kind === "embed" && m.embeddable) {
       body = '<div class="sgx-embed"><iframe src="https://stewardmd.in/_site/yt?v=' + attr(m.videoId) + (m.start ? "&start=" + m.start : "") + (m.end ? "&end=" + m.end : "") + '" title="' + attr(m.title) +
-        '" loading="lazy" allowfullscreen allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe></div>' +
+        '" loading="lazy" allowfullscreen allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>' + FS_BTN + "</div>" +
         '<div class="cap"><b>' + esc(m.title) + "</b></div>";
     }
     if (!body) return "";
@@ -1673,6 +1728,7 @@
      ═══════════════════════════════════════════════════════════════════════ */
 
   function render() {
+    fsClose();
     var r = routeHead();
     var html;
     switch (r) {
@@ -1762,6 +1818,8 @@
 
       if (act === "close") { haptic("light"); if (window.SURGX) window.SURGX.close(); return; }
       if (act === "back") { haptic("light"); back(); return; }
+      if (act === "fs") { haptic("light"); fsOpen(t.parentNode); return; }
+      if (act === "fsx") { haptic("light"); fsClose(); return; }
       if (act === "go") { haptic("light"); go(t.getAttribute("data-r")); return; }
       // iPad split: picking another note from the side list swaps the detail in place (no deeper stack).
       if (act === "noteswap") {
@@ -2303,13 +2361,16 @@
       rootEl.innerHTML = '<div class="sgx-scroll" id="surgxScroll"></div>';
       state.host = rootEl.querySelector("#surgxScroll");
     }
-    if (!_wired) { wire(rootEl); _wired = true; }
+    if (!_wired) {
+      wire(rootEl); _wired = true;
+      try { window.addEventListener("resize", fsOrient); window.addEventListener("orientationchange", function () { setTimeout(fsOrient, 300); }); } catch (e) {}
+    }
     state.stack = ["home"];
     if (deepRoute && /^[a-z]+(\/[A-Za-z0-9_.-]+)?$/.test(deepRoute)) state.stack.push(deepRoute);
     render();
   }
 
-  function onClose() { /* state is intentionally retained so reopening returns you to context */ }
+  function onClose() { fsClose(); /* other state is intentionally retained so reopening returns you to context */ }
 
   // _mdLite is exposed for the same reason _state is: the evidence-review renderer is a small parser
   // and needs a runnable check (test/run-surgx-md-ui.mjs). It is pure and reads no state.

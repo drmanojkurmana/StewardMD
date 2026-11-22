@@ -738,3 +738,14 @@ d2-gastrectomy 12, ivor-lewis-oesophagectomy 15, uro-turbt 11, uro-scrotal-explo
 
 ### Batch 21 adenoidectomy and redos, batch 18 cerclage videos (2026-11-22, contentVersion 0.4.12)
 Adenoidectomy (ax) 17 of 18; 06 held back (pharynx drawn as a cutaway on the outside of the face). Redos wired: mastoidectomy 12 and 13, tympanoplasty 10 and 18, microlaryngoscopy 12. Tympanoplasty 06 held back again (head still not turned). mcdonald-cerclage 12 clips; open myomectomy video JSON arrived truncated.
+
+## Full screen and Android back (2026-11-22)
+Capacitor's `BridgeWebChromeClient.onShowCustomView` cancels the custom view at once, so YouTube's own fullscreen
+button does nothing on Android. SURGX owns full screen instead: every clip (`.sgx-embed`) and picture (`.sgx-pic`)
+has a semi-transparent `.sgx-fs` button over the player's bottom-right corner. `fsOpen()` pins the box to the
+screen with CSS (rotated 90 degrees while the phone is upright; size from `fsSize()` because `<html>` is zoomed 0.95).
+Turning a phone sideways on a procedure auto-opens the clip most in view; upright again closes it.
+The exit button is labelled "Back to steps", so Android back / swipe-back presses it first.
+`swipe-back.js topBackControl()` now prefers controls that are actually visible at their centre (elementFromPoint),
+so a covered "Back to home" on a layer underneath can no longer win; SURGX is in `moduleOpen()`.
+Pre-existing, unrelated: `run-swipe-back-ui.mjs` has 5 failing checks on main with or without this change.

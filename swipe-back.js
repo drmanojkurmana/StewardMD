@@ -75,6 +75,11 @@
   function topBackControl() {
     var els = [].slice.call(document.querySelectorAll(BACK_SEL)).filter(function (el) { return el.id !== "smdTopBack" && onScreen(el) && interactive(el); });
     if (!els.length) return null;
+    // A control the user can actually see wins over one buried under another screen. onScreen() passes a covered
+    // control (owner 2026-11-22: Android back in SURGX steps went home, i.e. a "Back to home" control left on a layer
+    // underneath was pressed instead of the SURGX Back on top). Falls back to all candidates if none is hit.
+    var seen = els.filter(visibleAtCentre);
+    if (seen.length) els = seen;
     els.sort(function (a, b) {
       var za = zOf(a), zb = zOf(b);
       if (za !== zb) return za - zb;
@@ -84,6 +89,14 @@
     var top = els.filter(function (el) { return zOf(el) === topZ; });
     var backs = top.filter(isBack);
     return backs.length ? backs[backs.length - 1] : top[top.length - 1];
+  }
+  function visibleAtCentre(el) {
+    try {
+      var r = el.getBoundingClientRect();
+      var x = Math.min(Math.max(r.left + r.width / 2, 1), window.innerWidth - 1), y = Math.min(Math.max(r.top + r.height / 2, 1), window.innerHeight - 1);
+      var hit = document.elementFromPoint(x, y);
+      return !!hit && (hit === el || el.contains(hit));
+    } catch (e) { return false; }
   }
   // Home is the true foreground screen (nothing covering it) — the same check refreshFab() in
   // home.js uses for the FAB's own visibility. If home owns the screen center there is nowhere
@@ -227,7 +240,7 @@
      home is NOT the screen, whatever the layer test says. Owner 2026-11-19: the menu opened BEHIND PrepNucleus and
      its scroll lock froze PrepNucleus. Belt and braces with homeIsForeground(). */
   function moduleOpen() {
-    var W = window, mods = ["PREP", "ATLAS", "OPHTHALMOS", "TOKOS", "NARKE", "KARDIA", "FUNDX", "CLINIX"];
+    var W = window, mods = ["PREP", "ATLAS", "OPHTHALMOS", "TOKOS", "NARKE", "KARDIA", "FUNDX", "CLINIX", "SURGX"];
     for (var i = 0; i < mods.length; i++) { try { var m = W[mods[i]]; if (m && m.isOpen && m.isOpen()) return true; } catch (e) {} }
     try {
       var de = document.documentElement, b = document.body;
