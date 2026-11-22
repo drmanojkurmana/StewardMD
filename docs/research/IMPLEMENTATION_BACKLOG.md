@@ -1,6 +1,6 @@
 # StewardMD Research — implementation backlog
 
-Status: architecture baseline; implementation not yet started. Branch: `feat/stewardmd-research-foundation`.
+Status: Sprint 1 code scaffold committed; Cloudflare resources and production deployment remain unprovisioned. Branch: `feat/stewardmd-research-foundation`.
 
 ## Product decisions (locked)
 - Pricing: per-paper credits.
@@ -32,12 +32,17 @@ Status: architecture baseline; implementation not yet started. Branch: `feat/ste
 ### P0 — foundation and safety (must pass before pilot)
 - [ ] Confirm current production bindings, deployment target, auth helper and AI gateway integration with live config; do not assume repo config equals deployed config.
 - [ ] Add Research feature flag, routes and navigation entry hidden unless enabled.
-- [ ] Implement Firebase-authenticated edge proxy using `verifiedClaimsFor` / `identify`; enforce project membership server-side on every resource.
-- [ ] Add D1 migration from `DATABASE_SCHEMA.sql`; create private R2 bucket/binding and lifecycle policy for abandoned uploads.
-- [ ] Add FastAPI service skeleton, health/version endpoints, typed settings, structured logs, request correlation and internal service-token authentication.
-- [ ] Add upload preflight, MIME/magic-byte/size checks, signed upload/download, checksum, malware-scan hook and deletion.
-- [ ] Implement job state machine, idempotency key, lease/heartbeat, retry budget, cancellation and audit events.
-- [ ] Implement credit quote → reserve → settle/refund with atomic ledger semantics; integrate existing MaiK Token wallet through a single adapter. No direct client-side balance writes.
+- [x] Add Firebase-authenticated Pages edge route using `verifyFirebaseClaims`; enforce project membership on implemented project resources.
+- [ ] Add complete role/permission matrix and project/member management endpoints.
+- [x] Add pilot D1 migration at `functions/db/research_schema.sql`; apply remotely only after dedicated database provisioning.
+- [ ] Create private R2 bucket/binding and lifecycle policy for abandoned uploads.
+- [x] Add FastAPI service skeleton, health endpoint, typed request models and internal service-token authentication for meta-analysis.
+- [ ] Add production structured logging, request correlation and service observability.
+- [x] Add PDF upload MIME/magic-byte/size checks, SHA-256 and private R2 storage path.
+- [ ] Add malware scanning, download authorization, retention/deletion and resumable multipart upload.
+- [x] Add idempotent meta-analysis job submission, Cloudflare Queue consumer, Python worker call and authenticated completion callback.
+- [ ] Add lease/heartbeat, cancellation, progress, stale-job recovery and end-to-end retry/dead-letter tests.
+- [ ] Implement credit quote → reserve → settle/refund with atomic ledger semantics; integrate existing MaiK Token wallet through a single adapter. No direct client-side balance writes. (Pilot route is feature-flagged and does not charge credits.)
 - [ ] Threat model PHI, tenant isolation, BYOK key custody, prompt injection, citation poisoning, upload abuse and export controls.
 - [ ] Add unit/integration tests, migration tests, auth tests and deterministic fake provider.
 
@@ -46,7 +51,8 @@ Status: architecture baseline; implementation not yet started. Branch: `feat/ste
 - [ ] Upload CSV/XLSX/SPSS/Stata/REDCap export; inspect schema and produce data dictionary.
 - [ ] Deterministic data profiling, validation, missingness report, duplicate detection and immutable cleaned dataset version.
 - [ ] Statistical analysis plan (SAP) builder with explicit endpoint/variable definitions and researcher sign-off.
-- [ ] Run deterministic descriptive statistics and common tests using Python libraries; save code, package versions, input hash and outputs.
+- [x] Implement first deterministic meta-analysis engine: inverse-variance fixed effect and DerSimonian–Laird random effects; persist input hash and outputs.
+- [ ] Add independent validation against R/metafor and save a complete reproducibility manifest.
 - [ ] Produce tables/figures from analysis artefacts, never from LLM-invented numbers.
 - [ ] Literature discovery via PubMed/Europe PMC/Crossref/Semantic Scholar adapters; deduplicate DOI/PMID and retain provenance.
 - [ ] Evidence extraction with quoted span/page/section provenance and human verification status.
@@ -70,6 +76,14 @@ Status: architecture baseline; implementation not yet started. Branch: `feat/ste
 - [ ] Usage/cost dashboard per project, paper, stage, model and provider.
 - [ ] Version comparison, reproducibility bundle and signed audit export.
 - [ ] Optional journal submission integrations only after user confirmation and provider terms review.
+
+## Sprint 1 implementation status
+- [x] Dedicated D1 pilot schema migration added (not yet applied remotely).
+- [x] FastAPI Research service, Dockerfile and unit/API tests added.
+- [x] Firebase-authenticated Pages API for projects, PDF upload, meta-analysis submission, job status and result retrieval added.
+- [x] Hybrid Queue consumer Worker added with Python service call and authenticated callback.
+- [x] Research deployment runbook added. Production resources, bindings, secrets and deployments remain operator actions.
+- [ ] Execute CI, provision resources, deploy services and run end-to-end pilot with test accounts.
 
 ## First coding tasks (recommended order)
 1. Add schema migration + migration test.
