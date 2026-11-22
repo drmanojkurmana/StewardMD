@@ -193,7 +193,9 @@ try {
   ok(await waitFor(`return document.querySelectorAll("#ghisPatientList .ghis-pt-card").length===2;`, 8000), "after sign in, two real-looking patient rows render via renderPatients");
   ok(await ev(`return window.__calls.some(function(c){return c.path==="/sessions/sess-1/handoff"&&c.method==="POST";}) && window.__calls.some(function(c){return c.path==="/versions/ver-1";});`) === true, "handoff was posted and the active version detail fetched");
   const card = await ev(`return document.querySelector("#ghisPatientList .ghis-pt-card").innerText;`);
-  ok(card.indexOf("Ravi Kumar") >= 0 && card.indexOf("K001") >= 0 && card.indexOf("45") >= 0 && card.indexOf("Bed 12A") >= 0 && card.indexOf("MICU") >= 0, "first card shows name, UHID, age, bed, ward -> " + card.replace(/\s+/g, " "));
+  // Redesigned rows (2026-11-22): the bed is the row badge and the department is the group heading above the row.
+  const grpHead = await ev(`var h=document.querySelector("#ghisPatientList .ghis-grp-h"); return h?h.innerText:"";`);
+  ok(card.indexOf("Ravi Kumar") >= 0 && card.indexOf("K001") >= 0 && card.indexOf("45") >= 0 && card.indexOf("12A") >= 0 && grpHead.indexOf("MICU") >= 0, "first row shows name, UHID, age, bed; its group heading shows the ward -> " + card.replace(/\s+/g, " ") + " | " + grpHead);
   // The adapter answers the GHIS proxy: the same fetches the patient workspace, the drawers and
   // medication review make are served on the phone from the adapter's views.
   ok(await ev(`return window.GHIS.ensureSession().then(function(ok){ return ok; });`) === true, "ensureSession is true through an adapter session (Assess can open)");
