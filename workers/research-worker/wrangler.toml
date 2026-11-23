@@ -37,9 +37,9 @@ crons = ["* * * * *"]
 # Non-secret config, forwarded to the container via start({env}).
 # Fill CF_ACCOUNT_ID / CF_QUEUE_ID / R2_ENDPOINT at provisioning (D-2).
 RESEARCH_CALLBACK_URL = "https://stewardmd.in"
-CF_ACCOUNT_ID = ""
-CF_QUEUE_ID = ""
-R2_ENDPOINT = ""
+CF_ACCOUNT_ID = "5476a757e49205bd1cce40b144eb59a9"
+CF_QUEUE_ID = "891f623c654c4f29ab09d78e54f8b464"
+R2_ENDPOINT = "https://5476a757e49205bd1cce40b144eb59a9.r2.cloudflarestorage.com"
 R2_BUCKET = "stewardmd-research"
 
 # Secrets (never commit; set with `npx wrangler secret put <NAME>`):
