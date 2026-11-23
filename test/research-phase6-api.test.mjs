@@ -34,7 +34,8 @@ const CLAIMS = {
 };
 const realAuth = await import("../functions/_fbauth.js");
 mock.module("../functions/_fbauth.js", {
-  namedExports: { ...realAuth, verifyFirebaseClaims: async (token) => CLAIMS[token] || null },
+  namedExports: { ...realAuth, verifyFirebaseClaims: async (token) => CLAIMS[token] || null,
+    verifiedClaimsFor: async (request) => CLAIMS[((request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, ""))] || null },
 });
 const llm = { calls: [], impl: async () => "mock answer" };
 mock.module("../functions/api/ai/[[path]].js", {

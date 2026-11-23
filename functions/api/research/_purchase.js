@@ -17,6 +17,7 @@
  * grant route stays; this adds the owner-claim surface + invoice workflow.
  */
 import { adminAuth, adminErr } from "./_institutions.js";
+import { verifiedClaimsFor } from "../../_fbauth.js";
 import { grantInstitutionCredits, institutionBalance, usdInrRate } from "./_credits.js";
 
 const TOKEN_PRODUCT_RE = /^in\.stewardmd\.tokens\.([a-z]+)$/;
@@ -26,7 +27,10 @@ async function billingModule() {
 }
 /* Forward to the existing billing route; return its Response verbatim. */
 async function forwardToBilling(ctx, billingPath, body) {
-  const { request, env } = ctx;
+  const { request, env, requestId, api } = ctx;
+  // defence in depth: money routes re-check the sign-in themselves, not only the router
+  const claims = await verifiedClaimsFor(request, env);
+  if (!claims || !claims.sub) return api.err(401, "unauthorized", "Sign in to buy credits", requestId);
   const mod = await billingModule();
   const headers = { "Content-Type": "application/json" };
   const auth = request.headers.get("authorization");
