@@ -754,3 +754,4 @@ Pre-existing, unrelated: `run-swipe-back-ui.mjs` has 5 failing checks on main wi
 - 2026-11-22 REDO1-5 pictures: 175 of 201 wired, 26 rejected (cut-away bone, wounds that read as genitalia, wrong incision site,
   adult head on a child, wrong patient sex). contentVersion 0.4.41.
 - 2026-11-22 FIMG1/2/3/5/6 pictures (only steps still missing): 66 wired, 30 rejected. contentVersion 0.4.42.
+- 2026-11-23 FVID2: 8 clips (fasciotomy, TKR, adrenalectomy, pterygium, evisceration, vitrectomy). contentVersion 0.4.43.
