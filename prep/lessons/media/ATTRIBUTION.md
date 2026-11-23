@@ -7615,6 +7615,7 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | need-n62-phy-hormone-pituitary-hormone-receptors.webp (R2) | Growth hormone and prolactin receptors dimerising and recruiting JAK2 to activate STAT proteins. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-n620-cm-air-housing-noise-air-pollution-indicators.webp (R2) | A thick brown layer of photochemical smog hangs over a city basin. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-n621-cm-air-housing-noise-air-pollution-indicators.webp (R2) | A Kata thermometer shows a large cylindrical alcohol bulb and calibration marks. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-n621-cm-air-housing-noise-air-pollution-indicators-ph1.webp (R2) | Photograph of a Kata thermometer: red alcohol bulb, stem marked 38 and 35 degrees Celsius. | photograph (StewardMD) | CC BY 4.0 (StewardMD original) |
 | need-n622-cm-air-housing-noise-comfort-zone.webp (R2) | A casualty with heat stroke is cooled at once in a tub of cold water. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-n623-cm-air-housing-noise-comfort-zone.webp (R2) | A floor plan marks room areas used to judge whether a dwelling is overcrowded. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-n624-cm-air-housing-noise-daylight-factor.webp (R2) | A lux meter measures daylight on a desk beside a classroom window. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
