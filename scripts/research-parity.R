@@ -16,12 +16,12 @@
 #   escalc(measure="OR"|"RR", ai, bi, ci, di, add=1/2, to="only0", drop00=TRUE)
 #   escalc(measure="RD", ai, n1i, ci, n2i, add=1/2, to="only0", drop00=FALSE)
 #   rma(yi, vi, method="FE" | "DL" | "REML",
-#       control=list(stepadj=0.5, maxiter=1000)); tau2 clamped at 0
+#       control=list(stepadj=0.5, maxiter=1000, threshold=1e-10)); tau2 clamped at 0
 #   HKSJ: rma(..., test="knha") without truncation by default. The truncated
 #     variant (adhoc per Roever et al.) is hand-computed here as
 #     estimate +/- qt((1+level)/2, k-1) * max(se_knha, se_wald) and recorded
 #     only when the HKSJ CI is narrower than the Wald CI, matching the engine.
-#   Prediction intervals: predict(fit) (t with k-2 df under test="knha",
+#   Prediction intervals: predict(fit) (pi.type="Riley", t with k-2 df, under test="knha",
 #     normal otherwise); not recorded when k < 3, matching the engine.
 #
 # Datasets (dat.bcg plus 5 more metadat sets; role stated per case):
@@ -110,9 +110,9 @@ run_fits <- function(yi, vi) {
   fe <- rma(yi, vi, data = d, method = "FE")
   dl <- rma(yi, vi, data = d, method = "DL")
   re <- rma(yi, vi, data = d, method = "REML",
-            control = list(stepadj = 0.5, maxiter = 1000))
+            control = list(stepadj = 0.5, maxiter = 1000, threshold = 1e-10))
   rek <- rma(yi, vi, data = d, method = "REML", test = "knha",
-             control = list(stepadj = 0.5, maxiter = 1000))
+             control = list(stepadj = 0.5, maxiter = 1000, threshold = 1e-10))
   half_w <- ZW * re$se
   half_h <- qt((1 + LEVEL) / 2, df = k - 1L) * rek$se
   tr <- NULL
@@ -123,16 +123,17 @@ run_fits <- function(yi, vi) {
   }
   fits <- list(FE = fit_rec(fe), DL = fit_rec(dl), REML = fit_rec(re),
                REML_knha = c(fit_rec(rek), list(truncated = tr)))
-  pi_one <- function(f) {
+  # pi.type = "Riley": t on k-2 df under knha (Cochrane Handbook 10.10.4.3); metafor's default uses k-1
+  pi_one <- function(f, type = "default") {
     if (k < 3L) return(NULL)
-    pr <- predict(f)
+    pr <- predict(f, pi.type = type)
     # FE fits carry no pi.lb: with tau2 = 0 the prediction interval is the CI
     if (is.null(pr$pi.lb)) return(list(lower = unname(pr$ci.lb), upper = unname(pr$ci.ub)))
     list(lower = unname(pr$pi.lb), upper = unname(pr$pi.ub))
   }
   list(fits = fits,
        pi = list(FE = pi_one(fe), DL = pi_one(dl),
-                 REML = pi_one(re), REML_knha = pi_one(rek)))
+                 REML = pi_one(re), REML_knha = pi_one(rek, "Riley")))
 }
 
 ## ---- case builders (each returns studies + yi/vi + dropped ids) ----
