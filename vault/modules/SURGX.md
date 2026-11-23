@@ -761,3 +761,4 @@ Pre-existing, unrelated: `run-swipe-back-ui.mjs` has 5 failing checks on main wi
 - 2026-11-23 23 clips filled by reusing the clip already shown for the same shared step in another operation. contentVersion 0.4.47.
 - 2026-11-23 HVID1: 5 clips (haemorrhoidectomy plan, TURBT bimanual, failed DJ access, paeds circumcision excision, fibroadenoma not found). 7 steps have no suitable video. contentVersion 0.4.48.
 - 2026-11-23 First teaching GIFs (Gemini, labelled, <1 MB): lap chole access (pneumoperitoneum) and critical view, intussusception reduction. Shown as kind image after the step picture, id med.surgx.<ab>-anim-NN. contentVersion 0.4.49.
+- 2026-11-23 PIMG1 refused by Gemini (genital/surgical content). 4 gaps filled by reusing a matching picture from a sibling operation (fem-emb 13, DC 8, hemithyroid 19, CABG 5). The other 30 steps stay text-only (mostly genital surgery Gemini will not draw). contentVersion 0.4.50.
