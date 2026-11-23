@@ -370,9 +370,10 @@ l4_fe <- leave1out(fe4)
 l4_dl <- leave1out(dl4)
 
 ## Egger: regtest of the FE fit, classic lm form with sei as predictor.
-## For model="lm" the intercept test is t on k-2 df ($zval is the t value).
+## For model="lm" the test is on the sei coefficient, t on k-2 df ($zval is the t value).
 rt4 <- regtest(fe4, model = "lm", predictor = "sei")
-egger4 <- list(intercept = unname(rt4$b), se = unname(rt4$se),
+cf4 <- coef(summary(rt4$fit))["Xsei", ]   # the tested coefficient (metafor 5 has no $b/$se here)
+egger4 <- list(slope = unname(cf4[1]), se = unname(cf4[2]), est = unname(rt4$est),
                t = unname(rt4$zval), p = unname(rt4$pval),
                df = unname(rt4$dfs), k = nrow(d4))
 
@@ -386,7 +387,7 @@ groups4 <- lapply(sort(unique(d4$alloc)), function(g) {
        DL = fit_rec(rma(yi, vi, data = sub, method = "DL")))
 })
 subgroup4 <- list(
-  between = list(q = unname(mods4$QM), df = unname(mods4$QMdf),
+  between = list(q = unname(mods4$QM), df = unname(mods4$QMdf[1]),   # QMdf is c(df, NA) under z tests
                  p = unname(mods4$QMp)),
   groups = groups4
 )

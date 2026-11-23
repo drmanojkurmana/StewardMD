@@ -841,9 +841,14 @@
    * sei, t test of the intercept against 0 on k - 2 df. Publication bias is
    * only assessed at 10+ studies (plan Phase 4), so k < 10 throws.
    * Returns {intercept, se, t, df, p, k, slope, predictor: "sei", model: "lm"}. */
+  /* Egger regression test as metafor regtest(rma FE, model="lm", predictor="sei"):
+   * weighted least squares of yi on sei with weights 1/vi; the asymmetry test
+   * is the t test of the sei coefficient on k - 2 df (algebraically the classic
+   * Egger intercept of yi/sei on 1/sei). est is the WLS intercept, the limit
+   * estimate at sei = 0 (metafor $est). */
   function egger(project) {
-    var prep, inc, k, i, sx, sy, sxx, sxy, syy, xbar, ybar, sxxC, slope, intercept;
-    var rss, r, df, s2, seInt, t;
+    var prep, inc, k, i, w, x, y, sw, swx, swy, swxx, swxy, xbar, sxx, slope, est;
+    var rss, r, df, s2, seSlope, t;
     prep = prepareProject(project);
     inc = includedRows(prep.rows);
     k = inc.length;
@@ -851,39 +856,38 @@
       throw new Error("research: Egger test needs at least 10 studies (got " + k +
         "); publication bias is only assessed at 10+ studies");
     }
-    sx = 0; sy = 0; sxx = 0; sxy = 0; syy = 0;
+    sw = 0; swx = 0; swy = 0; swxx = 0; swxy = 0;
     for (i = 0; i < k; i++) {
-      sx += inc[i].se; sy += inc[i].yi;
-      sxx += inc[i].se * inc[i].se; sxy += inc[i].se * inc[i].yi;
-      syy += inc[i].yi * inc[i].yi;
+      x = inc[i].se; y = inc[i].yi; w = 1 / (x * x);
+      sw += w; swx += w * x; swy += w * y; swxx += w * x * x; swxy += w * x * y;
     }
-    xbar = sx / k; ybar = sy / k;
-    sxxC = sxx - sx * sx / k;
-    /* Relative guards: with equal se (or exactly collinear yi) the centred
-     * sums cancel to floating-point dust, not exact zero. */
-    if (!(sxxC > 1e-12 * sxx)) throw new Error("research: Egger test needs variation in the standard errors");
-    slope = (sxy - sx * sy / k) / sxxC;
-    intercept = ybar - slope * xbar;
+    xbar = swx / sw;
+    sxx = swxx - swx * swx / sw;
+    /* Relative guard: with equal se the centred sum cancels to floating-point dust. */
+    if (!(sxx > 1e-12 * swxx)) throw new Error("research: Egger test needs variation in the standard errors");
+    slope = (swxy - swx * swy / sw) / sxx;
+    est = (swy - slope * swx) / sw;
     rss = 0;
     for (i = 0; i < k; i++) {
-      r = inc[i].yi - intercept - slope * inc[i].se;
-      rss += r * r;
+      r = inc[i].yi - est - slope * inc[i].se;
+      rss += r * r / (inc[i].se * inc[i].se);
     }
-    if (!(rss > 1e-24 * Math.max(1, syy))) {
+    if (!(rss > 1e-24 * Math.max(1, swy * swy / sw))) {
       throw new Error("research: Egger test has zero residual variance (yi is an exact linear function of se)");
     }
     df = k - 2;
     s2 = rss / df;
-    seInt = Math.sqrt(s2 * (1 / k + xbar * xbar / sxxC));
-    if (!(seInt > 0) || !isFin(seInt)) {
+    seSlope = Math.sqrt(s2 / sxx);
+    if (!(seSlope > 0) || !isFin(seSlope)) {
       throw new Error("research: Egger test has zero residual variance (yi is an exact linear function of se)");
     }
-    t = intercept / seInt;
+    t = slope / seSlope;
     return {
-      intercept: intercept, se: seInt, t: t, df: df, p: tTwoSidedP(t, df),
-      k: k, slope: slope, predictor: "sei", model: "lm"
+      slope: slope, se: seSlope, t: t, df: df, p: tTwoSidedP(t, df),
+      est: est, k: k, predictor: "sei", model: "lm"
     };
   }
+
 
   /* Funnel plot DATA (no drawing): included-study points {id, yi, se} on the
    * analysis scale, the fixed-effect reference estimate, and the pseudo 95%

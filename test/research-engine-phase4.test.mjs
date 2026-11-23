@@ -299,16 +299,11 @@ test("sensitivity: validation errors", function () {
 
 /* ---- egger -------------------------------------------------------------- */
 
-test("egger: hand-checked OLS of yi on sei (k = 10)", function () {
-  /* sei x_i = 1..10, yi = 1 + 2 x_i + r_i with r alternating +1, -1:
-   * yi = 4, 4, 8, 8, 12, 12, 16, 16, 20, 20.
-   * xbar = 5.5, Sxx = 82.5, sum((x-xbar)*r) = -5, so
-   * slope = 2 - 5/82.5 = 64/33, intercept = 12 - (64/33)*5.5 = 4/3.
-   * Residuals: odd i (11+x_i)/16.5, even i (x_i-22)/16.5, so
-   * RSS = 2*(12^2+14^2+16^2+18^2+20^2)/16.5^2 = 2640/272.25 = 320/33.
-   * s^2 = RSS/8 = 40/33; se(intercept) = sqrt((40/33)*(1/10 + 5.5^2/82.5))
-   *     = sqrt((40/33)*(7/15)) = sqrt(56/99) = 0.75210143...
-   * t = (4/3)/sqrt(56/99) = 1.77281052..., df = 8, two-sided p ~ 0.114. */
+test("egger: weighted lm of yi on sei (k = 10), values from R", function () {
+  /* sei x_i = 1..10, yi = 1 + 2 x_i + (+1, -1 alternating). Reference:
+   * R 4.6.2 lm(yi ~ x, weights = 1/x^2), the regression regtest(model="lm") fits:
+   *   x coefficient 1.79834702743418, se 0.161930332462890, t 11.1056835373713,
+   *   p 3.85963175934692e-06; intercept (limit estimate) 1.90890867208489. */
   const studies = [];
   for (let i = 1; i <= 10; i++) {
     studies.push({ id: "e" + i, yi: 1 + 2 * i + (i % 2 === 1 ? 1 : -1), se: i });
@@ -318,13 +313,13 @@ test("egger: hand-checked OLS of yi on sei (k = 10)", function () {
   assert.equal(res.df, 8);
   assert.equal(res.predictor, "sei");
   assert.equal(res.model, "lm");
-  close(res.slope, 64 / 33, "slope");
-  close(res.intercept, 4 / 3, "intercept");
-  close(res.se, Math.sqrt(56 / 99), "intercept se");
-  close(res.t, (4 / 3) / Math.sqrt(56 / 99), "t");
-  assert.ok(res.p > 0.10 && res.p < 0.15, "p about 0.114, got " + res.p);
+  close(res.slope, 1.79834702743418, "sei coefficient");
+  close(res.se, 0.161930332462890, "sei coefficient se");
+  close(res.t, 11.1056835373713, "t");
+  close(res.est, 1.90890867208489, "limit estimate");
+  close(res.p, 3.85963175934692e-06, "p", 1e-9);
   /* Self-consistency with the exposed inverse t CDF. */
-  close(ENGINE.tQuantile(1 - res.p / 2, 8), res.t, "t from p", 1e-5);
+  close(ENGINE.tQuantile(1 - res.p / 2, 8), res.t, "t from p", 1e-4);
 });
 
 test("egger: refuses k < 10 (publication bias only at 10+ studies)", function () {
@@ -336,7 +331,7 @@ test("egger: refuses k < 10 (publication bias only at 10+ studies)", function ()
   const res = ENGINE.egger(bcgProject("fixed"));
   assert.equal(res.k, 13);
   assert.equal(res.df, 11);
-  assert.ok(isFinite(res.intercept) && isFinite(res.p) && res.p >= 0 && res.p <= 1);
+  assert.ok(isFinite(res.slope) && isFinite(res.p) && res.p >= 0 && res.p <= 1);
 });
 
 test("egger: refuses zero variation in se and exact collinearity", function () {

@@ -91,8 +91,10 @@ deterministic re-run, checked against `run()` on the subset.
 
 Classic Egger regression test, pinned to metafor
 `regtest(rma(yi, vi, method = "FE"), model = "lm", predictor = "sei")`:
-unweighted OLS of `yi` on `sei` (the study standard errors), t test of the
-intercept against 0 on k - 2 df. The model/test of the project do not
+weighted least squares of `yi` on `sei` with weights `1/vi`, t test of the
+`sei` coefficient against 0 on k - 2 df (algebraically the classic Egger
+intercept). Returns `{slope, se, t, df, p, est, k, predictor, model}`; `est` is
+the WLS intercept, the limit estimate at `sei = 0`. The model/test of the project do not
 change the regression (it is always the lm/sei form); the project only
 supplies the studies.
 
@@ -102,8 +104,8 @@ throws when all SEs are equal (no predictor variation) or yi is an exact
 linear function of se (zero residual variance); both guards are relative
 to floating-point scale.
 
-Returns `{intercept, se, t, df, p, k, slope, predictor: "sei", model:
-"lm"}` where `se` is the intercept's standard error, `t = intercept / se`,
+Returns `{slope, se, t, df, p, est, k, predictor: "sei", model: "lm"}`
+where `se` is the sei coefficient's standard error, `t = slope / se`,
 `df = k - 2`, and `p` is the two-sided Student-t p-value (regularised
 incomplete beta, same machinery as tQuantile).
 
@@ -229,8 +231,8 @@ Recorded by `scripts/research-parity.R` under `parity.json.phase4`:
 - `leaveOneOut.FE` / `leaveOneOut.DL`: `leave1out(rma FE)` /
   `leave1out(rma DL)` estimate, se, ci.lb, ci.ub, Q, Qp, tau2, I2 per
   omitted study, in fit order.
-- `egger`: `regtest(rma FE, model="lm", predictor="sei")` intercept (`b`),
-  se, t (`zval`), p (`pval`), df (`dfs`), k.
+- `egger`: `regtest(rma FE, model="lm", predictor="sei")` sei coefficient and se
+  (from `$fit`), limit estimate (`$est`), t (`zval`), p (`pval`), df (`dfs`), k.
 - `subgroup.between`: `rma(yi, vi, mods=~factor(alloc), method="FE")`
   QM / QMdf / QMp; `subgroup.groups`: per-alloc FE and DL fits.
 - `funnel`: FE estimate, FE se, max study se.

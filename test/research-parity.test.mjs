@@ -296,8 +296,9 @@ if (!existsSync(PARITY_PATH)) {
     const exp = p4.egger;
     assert.equal(res.k, exp.k, "k (exact)");
     assert.equal(res.df, exp.df, "df k-2 (exact)");
-    closeGate(res.intercept, exp.intercept, "Egger intercept");
-    closeGate(res.se, exp.se, "Egger intercept se");
+    closeGate(res.slope, exp.slope, "Egger sei coefficient");
+    closeGate(res.se, exp.se, "Egger sei coefficient se");
+    closeGate(res.est, exp.est, "Egger limit estimate");
     closeGate(res.t, exp.t, "Egger t");
     closeP(res.p, exp.p, "Egger");
   });
