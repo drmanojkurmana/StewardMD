@@ -19,7 +19,7 @@
   var D = G.document;
   var CACHE = "smd-media-v1";
   var KEY_BASE = "https://stewardmd.in/__smd_media/";
-  var BUNDLE_PREFIXES = ["clinix/media/practicals/", "clinix/media/skills/", "prep/lessons/media/"];
+  var BUNDLE_PREFIXES = ["clinix/media/practicals/", "clinix/media/skills/", "prep/lessons/media/", "media/anim/"];
   var BLANK = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
   var MAX_PARALLEL = 4;
 

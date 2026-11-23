@@ -37,7 +37,7 @@ test("builder: teaching animations are listed and every GIF file ships", () => {
     assert.ok(fs.existsSync(path.join(import.meta.dirname, "..", e.s)), "GIF file exists: " + e.s);
   }
   const sh = fs.readFileSync(path.join(import.meta.dirname, "..", "scripts/build-www.sh"), "utf8");
-  assert.ok(sh.includes("media/gif"), "build-www copies media/gif into the app bundle");
+  assert.ok(sh.includes("media/anim"), "build-www copies media/anim (left out with SMD_REMOTE_MEDIA=1)");
 });
 
 test("builder: ECGs sit under Cardiology with ECG kind, eye images under Eye", () => {

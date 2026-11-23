@@ -21,6 +21,12 @@ test("bundle paths map to app/<same path> only when the bundle leaves them out",
   }
 });
 
+test("teaching animations (media/anim) load from R2 when left out of the app, and the server serves that path", () => {
+  assert.equal(RM.key("/media/anim/gif011_immune-response.webp", { remoteBundle: true, isGated: gated }), "app/media/anim/gif011_immune-response.webp");
+  assert.equal(RM.key("/media/anim/gif011_immune-response.webp", { remoteBundle: false, isGated: gated }), null);
+  assert.ok(SOURCES.some((s) => s.dir === "media/anim"), "upload tool sends media/anim");
+});
+
 test("gated bank pictures are claimed (signature dropped), public ones and other images are left alone", () => {
   assert.equal(RM.key("https://stewardmd.in/api/prep/bank/v1/lessons/media/x-y.webp?s=1&exp=2&sig=3", { isGated: gated }), "v1/lessons/media/x-y.webp");
   for (const s of ["/api/prep/bank/v1/kb/media/x-y.webp", "/clinix-logo.png", "blob:abc", "data:image/png;base64,AA", "/clinix/media/../secret.webp", "/api/prep/bank/v1/lessons/media/../../x.webp"]) {

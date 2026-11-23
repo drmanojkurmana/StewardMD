@@ -24,6 +24,7 @@ export const SOURCES = [
   { dir: "prep/lessons/media", re: /^[a-z0-9_-]{2,80}\.(?:svg|webp)$/ },
   { dir: "clinix/media/practicals", re: /^[a-z0-9_-]{2,120}\.webp$/ },
   { dir: "clinix/media/skills", re: /^[a-z0-9_-]{2,120}\.webp$/ },
+  { dir: "media/anim", re: /^[a-z0-9_-]{2,80}\.webp$/ },
 ];
 export function contentType(f) { return /\.svg$/.test(f) ? "image/svg+xml" : /\.webp$/.test(f) ? "image/webp" : "application/json"; }
 

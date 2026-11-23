@@ -11,7 +11,7 @@ tags: [infra]
 - **D1** — drug gold data. **R2** — FollowCare media, KardiQ X models bucket (`stewardmd-kardiox-models`, public India weights), on-demand assets.
 
 ## Learning content on R2 (2026-11-12)
-- Bucket `stewardmd-offline`, prefix `prep-bank/app/` mirrors the bundle paths of PrepNucleus lessons + diagrams and CliniX photos (about 5,500 files, 99 MB). Upload: `node tools/upload-app-media.mjs --yes` from a normal `www/` build; verify with `--check` (tool token). Served by `functions/api/prep/bank/[[path]].js`, always signed-in only. Flags: build `SMD_REMOTE_MEDIA=1` (app leaves them out: download 251 -> 175 MB); server `PREP_LESSONS_GATED=1` (bank lessons signed-in only).
+- Bucket `stewardmd-offline`, prefix `prep-bank/app/` mirrors the bundle paths of PrepNucleus lessons + diagrams, CliniX photos and the teaching animations (`media/anim/`, 155 animated WebP, 62 MB, added 2026-11-23) (about 5,500 files, 99 MB). Upload: `node tools/upload-app-media.mjs --yes` from a normal `www/` build; verify with `--check` (tool token). Served by `functions/api/prep/bank/[[path]].js`, always signed-in only. Flags: build `SMD_REMOTE_MEDIA=1` (app leaves them out: download 251 -> 175 MB); server `PREP_LESSONS_GATED=1` (bank lessons signed-in only).
 
 ## Apple Hide My Email (private relay) delivery
 Mail to `@privaterelay.appleid.com` is rejected by Apple unless the sender is registered: Apple

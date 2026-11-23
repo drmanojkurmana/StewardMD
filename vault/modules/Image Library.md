@@ -71,7 +71,7 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   (opens `SMD_KB.open(ka)` and scrolls to the figure); entries with neither keep the old single link.
   Test: `test/run-imglib-links-ui.mjs`. Larger entries leave a little less of each system's Commons budget.
 - **Teaching animations (owner 2026-11-23):** one GIF per mechanism, shared by every module (KB, PrepNucleus, CliniX,
-  Drugs, SurgX). Files in `media/gif/` (copied by `scripts/build-www.sh`), listed with title, caption and system in
+  Drugs, SurgX). Animated WebP in `media/anim/` (converted from the Gemini GIFs, same frames and timing, 151 MB of GIF to 62 MB; owner 2026-11-23: kept in Cloudflare storage). `scripts/build-www.sh` copies them, and with `SMD_REMOTE_MEDIA=1` leaves them out: `remote-media.js` then loads `/media/anim/*` from R2 `app/media/anim/` (signed-in, cached on the phone), uploaded by `tools/upload-app-media.mjs`, listed with title, caption and system in
   `kb/imglib/gifs.json`; the builder adds them as kind "Animation", from "Animations", credit "AI-generated with Google
   Gemini", licence "StewardMD original". The 3 SurgX GIFs stay in `surgx/media/` and are listed in place. Made by
   Gemini (Nano Banana keyframes, Python only to join them and write the labels) from prompts GIF1 to GIF4, topics

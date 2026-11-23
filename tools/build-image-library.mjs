@@ -291,7 +291,7 @@ export function buildAll(root = ROOT) {
   /* 7a. Teaching animations (kb/imglib/gifs.json, owner 2026-11-23): one GIF per mechanism, shared by every module. */
   const gifs = readJSON(path.join(root, "kb/imglib/gifs.json"));
   for (const g of (gifs && gifs.items) || []) {
-    if (!g || !/^[\w./-]+\.gif$/.test(String(g.file || ""))) continue;
+    if (!g || !/^[\w./-]+\.(?:gif|webp)$/.test(String(g.file || ""))) continue;
     const system = canonicalSystem(g.system);
     pushL({ s: "/" + g.file, t: clean(g.title), c: clean(g.caption), a: clean(g.title), ar: 1.778, k: "Animation",
       o: "stewardmd", f: "Animations", rn: clean(g.title), cr: clean(gifs.credit), li: clean(gifs.licence),

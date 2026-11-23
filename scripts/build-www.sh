@@ -175,8 +175,9 @@ done
 [ -d kb/dist/v2 ] && mkdir -p "$WWW/kb/dist/v2" && cp kb/dist/v2/*.json "$WWW/kb/dist/v2/"
 # Image Library index (tools/build-image-library.mjs): one small JSON per system, lazy loaded by image-library.js.
 [ -d kb/dist/imglib ] && mkdir -p "$WWW/kb/dist/imglib" && cp kb/dist/imglib/*.json "$WWW/kb/dist/imglib/"
-# Teaching animations shared by every module (kb/imglib/gifs.json lists them for the Image Library).
-[ -d media/gif ] && mkdir -p "$WWW/media/gif" && cp media/gif/*.gif "$WWW/media/gif/"
+# Teaching animations (animated WebP) shared by every module; kb/imglib/gifs.json lists them for the Image Library.
+# With SMD_REMOTE_MEDIA=1 they are left out below and load from R2 (app/media/anim/).
+[ -d media/anim ] && mkdir -p "$WWW/media/anim" && cp media/anim/*.webp "$WWW/media/anim/"
 # Patient handouts: 64 on-demand buckets (kb/tools/build-handouts.mjs), plain JSON.
 [ -d kb/dist/handouts ] && mkdir -p "$WWW/kb/dist/handouts" && cp kb/dist/handouts/*.json "$WWW/kb/dist/handouts/"
 [ -d kb/treatments ] && cp -R kb/treatments/. "$WWW/kb/treatments/"
@@ -377,7 +378,7 @@ fi
 if [ "${SMD_REMOTE_MEDIA:-}" = "1" ]; then
   find "$WWW/prep/lessons/v1" -name '*.json' ! -name 'index.json' -delete 2>/dev/null || true
   find "$WWW/prep/lessons/media" -type f \( -name '*.svg' -o -name '*.webp' \) -delete 2>/dev/null || true
-  rm -rf "$WWW/clinix/media/practicals" "$WWW/clinix/media/skills"
+  rm -rf "$WWW/clinix/media/practicals" "$WWW/clinix/media/skills" "$WWW/media/anim"
   grep -q "window.SMD_REMOTE_MEDIA_ON=0;" "$WWW/index.html" || { echo "  remote media: index.html has no SMD_REMOTE_MEDIA_ON flag"; exit 1; }
   sed -i.bak 's/window\.SMD_REMOTE_MEDIA_ON=0;/window.SMD_REMOTE_MEDIA_ON=1;/' "$WWW/index.html" && rm -f "$WWW/index.html.bak"
   echo "  remote media: lessons, lesson diagrams and CliniX photos load from R2 (SMD_REMOTE_MEDIA_ON=1)"
