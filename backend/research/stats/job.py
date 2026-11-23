@@ -25,8 +25,15 @@ Message shape (input pointers, no content, no PHI):
     {v: 1, kind: "stats_model", jobId, projectId, idempotencyKey, createdAt,
      input: {r2Key: "projects/<pid>/data/snapshots/<importId>.csv",
              model: {family: "linear"|"logistic"|"km"|"logrank"|"cox"|"diagnostic", ...},
-             compliance: {ipdApproved: true, evidenceId: "..."}},
+             compliance: {ipdApproved: true, evidenceId: "..."},
+             envelope?: {alg: "AES-256-GCM", wrap: "AES-KW", iv, wrappedKey}},
      ceilings: {maxSeconds: 1..240, maxRows: 1..100000}}
+
+input.envelope (optional) is the D1 envelope_json of an IPD snapshot,
+verbatim (phase-6/ipd.md). When present the R2 bytes are ciphertext and
+the worker decrypts via ipd_crypto (KEK from env RESEARCH_IPD_KEK) after
+re-checking the compliance flag; plaintext stays in memory only. Without
+an envelope the snapshot is plaintext and the existing path is unchanged.
 
 Model specs:
     linear/logistic: {family, formula: "y ~ x1 + x2", robust?: "HC3" (linear)}
@@ -42,8 +49,9 @@ process only; result.json carries aggregates and a data hash, never rows.
 The callback carries codes and pointers only (callback.md).
 
 Stable error codes: input_missing, invalid_message, dataset_invalid,
-invalid_spec, ipd_gate, ceiling_rows, ceiling_seconds, stats_failed, plus
-the model-level codes (invalid_formula, zero_cell, no_events, ...).
+invalid_spec, ipd_gate, ipd_kek_unconfigured, ipd_decrypt_failed,
+ceiling_rows, ceiling_seconds, stats_failed, plus the model-level codes
+(invalid_formula, zero_cell, no_events, ...).
 """
 from __future__ import annotations
 
@@ -54,7 +62,8 @@ import logging
 import re
 import time
 
-from ._common import IpdGateError, __version__
+from . import ipd_crypto
+from ._common import IpdGateError, __version__, require_ipd_approval
 from .diagnostic import per_study_accuracy, reitsma
 from .regression import linear_regression, logistic_regression
 from .survival import cox_ph, kaplan_meier, log_rank
@@ -110,6 +119,9 @@ def validate_message(msg) -> None:
         raise ValueError("bad input.model")
     if not isinstance(inp.get("compliance"), dict):
         raise ValueError("bad input.compliance")
+    envelope = inp.get("envelope")
+    if envelope is not None:
+        ipd_crypto.validate_envelope(envelope)
 
 
 def _parse_dataset(data: bytes, key: str) -> dict:
@@ -140,6 +152,19 @@ def _parse_dataset(data: bytes, key: str) -> dict:
         return columns
     except (UnicodeDecodeError, json.JSONDecodeError, csv.Error) as exc:
         raise StatsJobError("dataset_invalid") from exc
+
+
+def _decrypt_input(data: bytes, inp: dict) -> bytes:
+    """Envelope-encrypted IPD snapshot -> plaintext bytes (memory only).
+
+    The compliance flag is re-checked BEFORE any unwrap: no flag, no
+    decryption (ipd_gate). No envelope means a plaintext snapshot.
+    """
+    envelope = inp.get("envelope")
+    if envelope is None:
+        return data
+    require_ipd_approval(inp.get("compliance"))
+    return ipd_crypto.decrypt_snapshot(envelope, data)
 
 
 def _column(columns: dict, name: str):
@@ -254,12 +279,15 @@ def run_job(
         return {"status": "failed", "settled": ok, "skipped": False, "error": code}
 
     try:
+        data = _decrypt_input(data, msg["input"])
         columns = _parse_dataset(data, msg["input"]["r2Key"])
         n_rows = len(next(iter(columns.values())))
         if n_rows > min(msg["ceilings"]["maxRows"], GLOBAL_MAX_ROWS):
             return fail("ceiling_rows")
         result = _run_model(msg["input"]["model"], columns, msg["input"]["compliance"])
     except IpdGateError as exc:
+        return fail(exc.code)
+    except ipd_crypto.IpdCryptoError as exc:
         return fail(exc.code)
     except StatsJobError as exc:
         return fail(exc.code)

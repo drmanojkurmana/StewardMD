@@ -26,6 +26,8 @@ const ENV_KEYS = [
   "R2_BUCKET",
   "RESEARCH_CALLBACK_SECRET",
   "RESEARCH_CALLBACK_URL",
+  "RESEARCH_IPD_KEK",
+  "DRAIN_TOKEN",
 ];
 
 export class ResearchWorkerContainer extends DurableObject {

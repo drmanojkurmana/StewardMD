@@ -175,3 +175,41 @@ only through the ordinary PHI-gated path (token insertion stays deterministic).
 - US: BA-to-CE / individuals / OCR <= 60 calendar days; < 500 annual log note.
 `encrypted_flag` records whether the affected data was envelope-encrypted
 (GDPR Art. 34(3)(a) / HIPAA safe harbor context for the responder).
+
+## Worker decryption (Phase 5D seam)
+
+`backend/research/stats/ipd_crypto.py` decrypts envelope snapshots in the
+Python worker, byte-compatible with this module's `deriveKek` /
+`encryptSnapshot` (cryptography library):
+
+- KEK: HKDF-SHA256 over env `RESEARCH_IPD_KEK` (UTF-8 bytes), salt
+  `research-ipd-kek-v1`, info `ipd-snapshot-wrap`, 32-byte output. Unset or
+  shorter than 16 chars fails `ipd_kek_unconfigured`. The worker secret must
+  be the SAME value as the Pages API secret; it never enters D1, R2 or logs.
+- Unwrap: AES-KW (RFC 3394, no padding) over the 40-byte `wrappedKey` ->
+  32-byte data key. Decrypt: AES-256-GCM, 12-byte IV, 128-bit tag appended
+  to the ciphertext (WebCrypto layout), no AAD.
+- Delivery: the stats message carries `input.envelope`, the D1
+  `envelope_json` object verbatim (`{alg, wrap, iv, wrappedKey}`). Producer
+  wiring still open on the API side: `createStatsJob` must attach
+  `envelope: JSON.parse(dataset.envelope_json)` to `input` when enqueuing
+  (functions/ is not edited by the worker seam). A message without
+  `input.envelope` is a plaintext snapshot and follows the existing path.
+- Gate order (`stats/job.py`): `require_ipd_approval` runs BEFORE any
+  unwrap. Without `{ipdApproved:true, evidenceId}` the job fails `ipd_gate`
+  and never touches the KEK. A wrong KEK or tampered ciphertext, wrapped
+  key or IV fails `ipd_decrypt_failed` (stable code, no detail; mirrors the
+  API's 500). A malformed envelope fails `validate_message` (DLQ).
+- Plaintext stays in worker memory only: never written to R2, disk or
+  logs. `result.json` keeps aggregates + manifest only. Idempotent replay
+  and cancel paths need no KEK.
+- Container env: `RESEARCH_IPD_KEK` reaches the container only if listed in
+  `ENV_KEYS` (`workers/research-worker/src/index.js`); add it there at
+  provisioning. Set with `npx wrangler secret put RESEARCH_IPD_KEK` in
+  `workers/research-worker` (its README lists every worker secret).
+- Cross-language test: `node test/fixtures/research/ipd/make-vector.mjs`
+  regenerates `test/fixtures/research/ipd/vector.json` using this module's
+  own `encryptSnapshot` with a fixed TEST KEK (committed fixture, not a
+  production secret). `backend/research/tests/test_stats_ipd_crypto.py`
+  decrypts the vector byte-exactly, runs a stats_model job on it end to
+  end, and asserts wrong-KEK, tamper and no-flag refusals.

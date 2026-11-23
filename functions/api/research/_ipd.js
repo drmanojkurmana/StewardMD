@@ -674,7 +674,7 @@ export async function createStatsJob(ctx, projectId, body) {
       JSON.stringify(compliance), checked.ethicsEvidenceId, JSON.stringify(ceilings), uid, now).run();
   const message = {
     v: 1, kind: "stats_model", jobId, projectId, idempotencyKey,
-    input: { r2Key: dataset.storage_key, model: body.model, compliance },
+    input: { r2Key: dataset.storage_key, model: body.model, compliance, envelope: JSON.parse(dataset.envelope_json) },
     ceilings, createdAt: Math.floor(now / 1000),
   };
   if (!validateStatsMessage(message)) {
