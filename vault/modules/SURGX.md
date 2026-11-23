@@ -759,3 +759,4 @@ Pre-existing, unrelated: `run-swipe-back-ui.mjs` has 5 failing checks on main wi
 - 2026-11-23 GVID2: 18 clips (hand, escharotomy, cleft lip, neurosurgery, pericardial window, hemithyroidectomy), 14 new ALLOW ids. contentVersion 0.4.45.
 - 2026-11-23 GVID1: 65 clips across 39 operations, 32 new ALLOW ids; dropped a neonatal Mogen-shield clip for paediatric circumcision excision. contentVersion 0.4.46.
 - 2026-11-23 23 clips filled by reusing the clip already shown for the same shared step in another operation. contentVersion 0.4.47.
+- 2026-11-23 HVID1: 5 clips (haemorrhoidectomy plan, TURBT bimanual, failed DJ access, paeds circumcision excision, fibroadenoma not found). 7 steps have no suitable video. contentVersion 0.4.48.
