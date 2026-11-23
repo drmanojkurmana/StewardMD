@@ -14,9 +14,16 @@ CREATE TABLE IF NOT EXISTS research_projects (
   research_question TEXT NOT NULL DEFAULT '',
   status TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('active','archived','deleted')),
   created_ts INTEGER NOT NULL,
-  updated_ts INTEGER NOT NULL
+  updated_ts INTEGER NOT NULL,
+  -- 0005 (Phase 6): institution ownership + 5C.2 residency pin (locked at
+  -- IPD enablement). Added via ALTER on live databases; appended here.
+  institution_id TEXT REFERENCES research_institutions(id) ON DELETE SET NULL,
+  data_region TEXT NOT NULL DEFAULT 'GLOBAL_DEID'
+    CHECK(data_region IN ('IN','EU','US','GLOBAL_DEID'))
 );
 CREATE INDEX IF NOT EXISTS idx_research_projects_owner ON research_projects(owner_uid, updated_ts DESC);
+CREATE INDEX IF NOT EXISTS idx_research_projects_institution
+  ON research_projects(institution_id, updated_ts DESC);
 
 CREATE TABLE IF NOT EXISTS research_members (
   project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
@@ -512,12 +519,14 @@ CREATE TABLE IF NOT EXISTS research_institutions (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
   created_by TEXT NOT NULL DEFAULT '',
-  created_ts INTEGER NOT NULL
+  created_ts INTEGER NOT NULL,
+  seats INTEGER NOT NULL DEFAULT 10 CHECK(seats >= 1) -- 0005 (6.5)
 );
 CREATE TABLE IF NOT EXISTS research_institution_members (
   institution_id TEXT NOT NULL REFERENCES research_institutions(id) ON DELETE CASCADE,
   uid TEXT NOT NULL,
   created_ts INTEGER NOT NULL,
+  role TEXT NOT NULL DEFAULT 'member' CHECK(role IN ('admin','member')), -- 0005 (6.5)
   PRIMARY KEY(institution_id, uid)
 );
 CREATE INDEX IF NOT EXISTS idx_research_institution_members_uid
@@ -697,3 +706,194 @@ CREATE TABLE IF NOT EXISTS research_grade_assessments (
 );
 CREATE INDEX IF NOT EXISTS idx_research_grade_assessments_project
   ON research_grade_assessments(project_id, updated_ts DESC);
+
+-- Phase 6 contract 0005 (docs/research/contracts/phase-6/0005_research_v5.sql):
+-- IPD compliance (5C.2/5C.3), institution invoicing + workspaces (6.1/6.5),
+-- journals (5B.3), reviewer responses (5B.5), stats_model jobs (5D). The
+-- definitions below are IDENTICAL to the 0005 migration's CREATE statements;
+-- the four ALTER-added columns (projects.institution_id / data_region,
+-- institutions.seats, institution_members.role) are folded into the CREATE
+-- definitions above. NOTE: 0005 is NOT idempotent over this mirror (the
+-- ALTERs would duplicate columns); fresh databases run 0001..0005 in order.
+
+CREATE TABLE IF NOT EXISTS research_ipd_config (
+  project_id TEXT PRIMARY KEY REFERENCES research_projects(id) ON DELETE CASCADE,
+  data_region TEXT NOT NULL CHECK(data_region IN ('IN','EU','US','GLOBAL_DEID')),
+  jurisdictions_json TEXT NOT NULL DEFAULT '[]',
+  identifiability_tier TEXT NOT NULL
+    CHECK(identifiability_tier IN ('anonymised_deid','hipaa_lds','coded_pseudonymised')),
+  legal_basis_json TEXT NOT NULL DEFAULT '{}',
+  attestation_json TEXT NOT NULL DEFAULT '{}',
+  agreements_json TEXT NOT NULL DEFAULT '{}',
+  locked_ts INTEGER NOT NULL,
+  updated_by TEXT NOT NULL,
+  updated_ts INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS research_ipd_evidence (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  kind TEXT NOT NULL CHECK(kind IN ('irb_approval','exemption_waiver','consent_basis',
+    'dua','baa','dpa','safe_harbor','expert_determination','authorization','other')),
+  jurisdiction TEXT NOT NULL DEFAULT '' CHECK(jurisdiction IN ('','IN','EU','US')),
+  title TEXT NOT NULL DEFAULT '',
+  r2_key TEXT NOT NULL,
+  sha256 TEXT NOT NULL,
+  bytes INTEGER NOT NULL CHECK(bytes >= 0),
+  content_type TEXT NOT NULL DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','approved','rejected')),
+  metadata_json TEXT NOT NULL DEFAULT '{}',
+  uploaded_by TEXT NOT NULL,
+  approved_by TEXT NOT NULL DEFAULT '',
+  approved_ts INTEGER,
+  expires_ts INTEGER,
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_ipd_evidence_project
+  ON research_ipd_evidence(project_id, kind, status, created_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_ipd_datasets (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  version INTEGER NOT NULL CHECK(version >= 1),
+  storage_key TEXT NOT NULL,
+  sha256 TEXT NOT NULL,
+  bytes INTEGER NOT NULL CHECK(bytes >= 0),
+  row_count INTEGER NOT NULL DEFAULT 0 CHECK(row_count >= 0),
+  identifiability_tier TEXT NOT NULL
+    CHECK(identifiability_tier IN ('anonymised_deid','hipaa_lds','coded_pseudonymised')),
+  jurisdictions_json TEXT NOT NULL DEFAULT '[]',
+  data_region TEXT NOT NULL CHECK(data_region IN ('IN','EU','US','GLOBAL_DEID')),
+  evidence_id TEXT NOT NULL,
+  envelope_json TEXT NOT NULL,
+  contains_ipd INTEGER NOT NULL DEFAULT 1 CHECK(contains_ipd IN (0,1)),
+  created_by TEXT NOT NULL,
+  created_ts INTEGER NOT NULL,
+  UNIQUE(project_id, version)
+);
+CREATE INDEX IF NOT EXISTS idx_research_ipd_datasets_project
+  ON research_ipd_datasets(project_id, version DESC);
+
+CREATE TABLE IF NOT EXISTS research_ipd_access_log (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  dataset_id TEXT NOT NULL DEFAULT '',
+  user_id TEXT NOT NULL,
+  action TEXT NOT NULL CHECK(action IN ('upload','read','analysis','delete','key_rotation')),
+  result TEXT NOT NULL CHECK(result IN ('ok','denied','error')),
+  ip_hash TEXT NOT NULL DEFAULT '',
+  ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_ipd_access_log_project
+  ON research_ipd_access_log(project_id, ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_security_incidents (
+  id TEXT PRIMARY KEY,
+  description TEXT NOT NULL DEFAULT '',
+  jurisdictions_json TEXT NOT NULL DEFAULT '[]',
+  affected_projects_json TEXT NOT NULL DEFAULT '[]',
+  encrypted_flag INTEGER NOT NULL DEFAULT 0 CHECK(encrypted_flag IN (0,1)),
+  discovered_ts INTEGER NOT NULL,
+  sla_json TEXT NOT NULL DEFAULT '{}',
+  status TEXT NOT NULL DEFAULT 'open' CHECK(status IN ('open','contained','closed')),
+  status_note TEXT NOT NULL DEFAULT '',
+  created_by TEXT NOT NULL,
+  created_ts INTEGER NOT NULL,
+  updated_ts INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS research_invoices (
+  id TEXT PRIMARY KEY,
+  institution_id TEXT NOT NULL REFERENCES research_institutions(id) ON DELETE CASCADE,
+  amount_micro_usd INTEGER NOT NULL CHECK(amount_micro_usd > 0),
+  reference TEXT NOT NULL DEFAULT '',
+  note TEXT NOT NULL DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'issued' CHECK(status IN ('issued','paid','void')),
+  issued_by TEXT NOT NULL,
+  paid_ts INTEGER,
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_invoices_institution
+  ON research_invoices(institution_id, created_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_institution_onboarding (
+  institution_id TEXT PRIMARY KEY REFERENCES research_institutions(id) ON DELETE CASCADE,
+  items_json TEXT NOT NULL DEFAULT '{}',
+  updated_by TEXT NOT NULL DEFAULT '',
+  updated_ts INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS research_journals (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  issn TEXT NOT NULL DEFAULT '',
+  scope_json TEXT NOT NULL DEFAULT '[]',
+  designs_json TEXT NOT NULL DEFAULT '[]',
+  author_instructions_url TEXT,
+  word_limit_abstract INTEGER,
+  word_limit_main INTEGER,
+  reference_style TEXT,
+  checked_ts INTEGER,
+  created_ts INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS research_reviewer_comments (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  round INTEGER NOT NULL DEFAULT 1 CHECK(round >= 1),
+  reviewer_label TEXT NOT NULL,
+  text TEXT NOT NULL,
+  section_ref TEXT NOT NULL DEFAULT '',
+  created_by TEXT NOT NULL,
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_reviewer_comments_project
+  ON research_reviewer_comments(project_id, round, created_ts);
+
+CREATE TABLE IF NOT EXISTS research_reviewer_responses (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  comment_id TEXT NOT NULL REFERENCES research_reviewer_comments(id) ON DELETE CASCADE,
+  text TEXT NOT NULL,
+  manuscript_version_id TEXT NOT NULL,
+  section_id TEXT NOT NULL,
+  change_note TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','final')),
+  version INTEGER NOT NULL DEFAULT 1 CHECK(version >= 1),
+  created_by TEXT NOT NULL,
+  created_ts INTEGER NOT NULL,
+  updated_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_reviewer_responses_comment
+  ON research_reviewer_responses(comment_id, created_ts);
+CREATE INDEX IF NOT EXISTS idx_research_reviewer_responses_project
+  ON research_reviewer_responses(project_id, created_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_stats_jobs (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  kind TEXT NOT NULL DEFAULT 'stats_model' CHECK(kind IN ('stats_model')),
+  status TEXT NOT NULL DEFAULT 'queued'
+    CHECK(status IN ('queued','running','succeeded','failed','cancelled')),
+  idempotency_key TEXT NOT NULL,
+  dataset_id TEXT NOT NULL DEFAULT '',
+  input_r2_key TEXT NOT NULL,
+  result_r2_key TEXT NOT NULL DEFAULT '',
+  model_json TEXT NOT NULL DEFAULT '{}',
+  compliance_json TEXT NOT NULL DEFAULT '{}',
+  contains_ipd INTEGER NOT NULL DEFAULT 1 CHECK(contains_ipd IN (0,1)),
+  evidence_id TEXT NOT NULL DEFAULT '',
+  ceilings_json TEXT NOT NULL DEFAULT '{}',
+  usage_json TEXT NOT NULL DEFAULT '{}',
+  error_code TEXT NOT NULL DEFAULT '',
+  created_by TEXT NOT NULL,
+  created_ts INTEGER NOT NULL,
+  started_ts INTEGER,
+  completed_ts INTEGER,
+  cancel_requested_ts INTEGER,
+  UNIQUE(project_id, idempotency_key)
+);
+CREATE INDEX IF NOT EXISTS idx_research_stats_jobs_project
+  ON research_stats_jobs(project_id, created_ts DESC);
+CREATE INDEX IF NOT EXISTS idx_research_stats_jobs_queue
+  ON research_stats_jobs(status, created_ts);

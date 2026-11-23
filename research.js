@@ -636,7 +636,12 @@
         ["run", "Run"],
         ["grade", "GRADE"],
         ["manuscript", "Manuscript"],
-        ["checklist", "Checklist"]
+        ["checklist", "Checklist"],
+        ["ipd", "IPD"],
+        ["credits", "Credits"],
+        ["institution", "Institution"],
+        ["templates", "Templates"],
+        ["journals", "Journals"]
       ];
       h.push('<nav class="rmd-shell-tabs" aria-label="Research screens">');
       for (var t = 0; t < tabs.length; t++) {

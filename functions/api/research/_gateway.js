@@ -119,11 +119,29 @@ export async function llmRoute(ctx) {
   if (body.maxOutputTokens !== undefined && (!Number.isInteger(body.maxOutputTokens) || body.maxOutputTokens < 1))
     return err(400, "invalid_body", "maxOutputTokens must be a positive integer", requestId);
   const job = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(token.jobId).first();
-  if (!job) return err(404, "job_not_found", "Job not found", requestId);
+  if (!job) {
+    /* 5C.3: a stats_model job over IPD can never mint an LLM call, even with
+     * a valid per-job token. Patient-level rows never reach a provider. */
+    const statsJob = await db.prepare("SELECT * FROM research_stats_jobs WHERE id=?").bind(token.jobId).first();
+    if (statsJob && statsJob.contains_ipd === 1) {
+      await audit(db, statsJob.project_id, "worker", "ai_ipd_blocked", statsJob.id, { reason: "ipd_job" });
+      return err(422, "ipd_blocked", "Patient-level data cannot be sent to the AI gateway.", requestId);
+    }
+    return err(404, "job_not_found", "Job not found", requestId);
+  }
   if (body.projectId !== job.project_id || body.userId !== job.created_by)
     return err(409, "job_mismatch", "Request does not match the stored job", requestId);
   if (SETTLED.indexOf(job.status) >= 0)
     return err(409, "job_settled", "Job already settled", requestId);
+
+  /* 0. IPD isolation (5C.3, plan rule 10): any payload TAGGED as patient-level
+   * is refused before the PHI gate and before any provider call. Fail-closed:
+   * any truthy containsIpd/ipd tag blocks. Only aggregated, small-cell-
+   * suppressed summaries may enter drafting, through the ordinary PHI gate. */
+  if (body.containsIpd || body.ipd) {
+    await audit(db, job.project_id, "worker", "ai_ipd_blocked", job.id, { reason: "payload_tag" });
+    return err(422, "ipd_blocked", "Patient-level data cannot be sent to the AI gateway.", requestId);
+  }
 
   /* 1. PHI gate FIRST, on the exact text about to leave (system included). */
   const finalSystem = RESEARCH_FRAMING + (body.system ? "\n\n" + body.system : "");

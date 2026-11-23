@@ -51,6 +51,29 @@ import { robTools, getRob, submitRob, listRobConflicts, resolveRobConflict, robA
 import { getDictionary, putDictionary, uploadData, createDataImport,
   listDataImports, getDataImport, getDataSnapshot, freezeDataImport } from "./_data.js";
 import { listGrade, getGrade, putGrade, summaryOfFindings, gradeSuggestions } from "./_grade.js";
+/* Phase 6 (docs/research/contracts/phase-6): IPD compliance (_ipd.js, 5C.2/5C.3),
+ * credit purchase + institution invoicing (_purchase.js, 6.1), cost reports
+ * (_reports.js, 6.3), institution workspaces (_institutions.js, 6.5), study
+ * templates (_templates.js, 5D.1), journals (_journals.js, 5B.3) and the
+ * reviewer-response workspace (_responses.js, 5B.5). Small route hooks below;
+ * every user route verifies Firebase claims (above) and the project or
+ * institution role, and an outsider gets 404. Admin routes use adminAuth
+ * (the existing research admin token OR the app's owner claim). */
+import { uploadEvidence, listEvidence, getEvidence, evidenceFile, decideEvidence,
+  putIpdConfig, getIpdConfig, uploadIpd, listIpdDatasets, getIpdDataset, ipdSnapshot,
+  ipdAccessLog, createStatsJob, getStatsJob, cancelStatsJob, statsJobCallback,
+  createIncident, listIncidents, getIncident, updateIncidentStatus } from "./_ipd.js";
+import { purchasePacks, purchaseOrder, purchaseIapVerify, grantCreditsRoute,
+  createInvoice, listInvoices, markInvoicePaid } from "./_purchase.js";
+import { projectCostReport, userCostReport, pricingNote } from "./_reports.js";
+import { createInstitution, listAllInstitutions, myInstitutions, getInstitutionRoute,
+  institutionSeats, addInstitutionMember, updateInstitutionMember, removeInstitutionMember,
+  listInstitutionProjects, createInstitutionProject, institutionOnboarding,
+  putInstitutionOnboarding } from "./_institutions.js";
+import { listTemplates, getTemplate } from "./_templates.js";
+import { listJournals, getJournal, matchJournals } from "./_journals.js";
+import { createComment, listComments, createResponse, listResponses,
+  listProjectResponses, updateResponse } from "./_responses.js";
 
 const MAX_JSON = 1024 * 1024;
 const MAX_PDF = 25 * 1024 * 1024;
@@ -1787,8 +1810,51 @@ export async function onRequest({ request, env, params }) {
   /* Shared helpers handed to the Phase 3 modules (small route hooks only). */
   const P3 = { json, err, audit, uuid, safeEqual, member, getProject, projectGate, gateErr, bodyJson, sha256Hex };
 
+  /* ---- Phase 6 admin surface (adminAuth inside each handler: the existing
+   * research admin token OR a verified Firebase owner claim). Hooked before
+   * the pilot gate, like the Phase 3 admin routes. ---- */
+  const p6Ctx = { request, env, db, requestId, api: P3 };
+  const p6Body = async () => { try { return await bodyJson(request); } catch (e) { return null; } };
+  if (path === "/v1/institutions" && request.method === "POST") {
+    const body = await p6Body(); if (!body) return err(400, "invalid_body", "Invalid institution payload", requestId);
+    return createInstitution(p6Ctx, body);
+  }
+  if (path === "/v1/admin/institutions" && request.method === "GET") return listAllInstitutions(p6Ctx);
+  if (path === "/v1/admin/pricing-note" && request.method === "GET") return pricingNote(p6Ctx);
+  if (path === "/v1/admin/incidents" && request.method === "POST") {
+    const body = await p6Body(); if (!body) return err(400, "invalid_body", "Invalid incident payload", requestId);
+    return createIncident(p6Ctx, body);
+  }
+  if (path === "/v1/admin/incidents" && request.method === "GET") return listIncidents(p6Ctx);
+  const p6IncOne = path.match(/^\/v1\/admin\/incidents\/([^/]+)$/);
+  if (p6IncOne && request.method === "GET") return getIncident(p6Ctx, p6IncOne[1]);
+  const p6IncStatus = path.match(/^\/v1\/admin\/incidents\/([^/]+)\/status$/);
+  if (p6IncStatus && request.method === "POST") {
+    const body = await p6Body(); if (!body) return err(400, "invalid_body", "Invalid incident payload", requestId);
+    return updateIncidentStatus(p6Ctx, p6IncStatus[1], body);
+  }
+  const p6InstCredits = path.match(/^\/v1\/institutions\/([^/]+)\/credits$/);
+  if (p6InstCredits && request.method === "POST") {
+    const body = await p6Body(); if (!body) return err(400, "invalid_body", "Invalid credit payload", requestId);
+    return grantCreditsRoute(p6Ctx, p6InstCredits[1], body);
+  }
+  const p6InstInvoices = path.match(/^\/v1\/institutions\/([^/]+)\/invoices$/);
+  if (p6InstInvoices && request.method === "POST") {
+    const body = await p6Body(); if (!body) return err(400, "invalid_body", "Invalid invoice payload", requestId);
+    return createInvoice(p6Ctx, p6InstInvoices[1], body);
+  }
+  const p6InvoicePaid = path.match(/^\/v1\/invoices\/([^/]+)\/mark-paid$/);
+  if (p6InvoicePaid && request.method === "POST") return markInvoicePaid(p6Ctx, p6InvoicePaid[1]);
+
   /* ---- Phase 3 worker-facing routes (NO Firebase auth: the worker holds no
    * user tokens; HMAC / per-job token is its only credential). ---- */
+  /* stats_model callbacks (Phase 5C/5D) dispatch here when the job id lives in
+   * research_stats_jobs; pdf_extract callbacks fall through to jobCallback. */
+  const p6StatsCb = path.match(/^\/(?:v1\/)?jobs\/([^/]+)\/callback$/);
+  if (p6StatsCb && request.method === "POST") {
+    const isStats = await db.prepare("SELECT id FROM research_stats_jobs WHERE id=?").bind(p6StatsCb[1]).first();
+    if (isStats) return statsJobCallback(p6Ctx, p6StatsCb[1]);
+  }
   const p3Callback = path.match(/^\/(?:v1\/)?jobs\/([^/]+)\/callback$/);
   if (p3Callback && request.method === "POST")
     return jobCallback({ request, env, db, requestId, api: P3 }, p3Callback[1]);
@@ -1958,6 +2024,131 @@ export async function onRequest({ request, env, params }) {
   if (sofRoute && request.method === "GET") return summaryOfFindings(p3Ctx, sofRoute[1]);
   const gradeSug = path.match(/^\/v1\/projects\/([^/]+)\/grade-suggestions$/);
   if (gradeSug && request.method === "GET") return gradeSuggestions(p3Ctx, gradeSug[1], url);
+
+  /* ---- Phase 6 user routes (Firebase auth above; each module enforces the
+   * project / institution role and answers 404 to an outsider). ---- */
+
+  /* 5C.2/5C.3 IPD compliance (_ipd.js). */
+  const ipdEvCol = path.match(/^\/v1\/projects\/([^/]+)\/ipd-evidence$/);
+  if (ipdEvCol && request.method === "POST") return uploadEvidence(Object.assign({}, p3Ctx, { projectId: ipdEvCol[1] }));
+  if (ipdEvCol && request.method === "GET") return listEvidence(p3Ctx, ipdEvCol[1]);
+  const ipdEvFile = path.match(/^\/v1\/ipd-evidence\/([^/]+)\/file$/);
+  if (ipdEvFile && request.method === "GET") return evidenceFile(p3Ctx, ipdEvFile[1]);
+  const ipdEvDecide = path.match(/^\/v1\/ipd-evidence\/([^/]+)\/(approve|reject)$/);
+  if (ipdEvDecide && request.method === "POST") return decideEvidence(p3Ctx, ipdEvDecide[1], ipdEvDecide[2] === "approve");
+  const ipdEvOne = path.match(/^\/v1\/ipd-evidence\/([^/]+)$/);
+  if (ipdEvOne && request.method === "GET") return getEvidence(p3Ctx, ipdEvOne[1]);
+  const ipdConfig = path.match(/^\/v1\/projects\/([^/]+)\/ipd-config$/);
+  if (ipdConfig && request.method === "GET") return getIpdConfig(p3Ctx, ipdConfig[1]);
+  if (ipdConfig && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid IPD config payload", requestId);
+    return putIpdConfig(p3Ctx, ipdConfig[1], body);
+  }
+  const ipdUp = path.match(/^\/v1\/projects\/([^/]+)\/ipd-uploads$/);
+  if (ipdUp && request.method === "POST") return uploadIpd(Object.assign({}, p3Ctx, { projectId: ipdUp[1] }));
+  const ipdDsCol = path.match(/^\/v1\/projects\/([^/]+)\/ipd-datasets$/);
+  if (ipdDsCol && request.method === "GET") return listIpdDatasets(p3Ctx, ipdDsCol[1]);
+  const ipdDsSnap = path.match(/^\/v1\/ipd-datasets\/([^/]+)\/snapshot$/);
+  if (ipdDsSnap && request.method === "GET") return ipdSnapshot(p3Ctx, ipdDsSnap[1]);
+  const ipdDsOne = path.match(/^\/v1\/ipd-datasets\/([^/]+)$/);
+  if (ipdDsOne && request.method === "GET") return getIpdDataset(p3Ctx, ipdDsOne[1]);
+  const ipdLogRoute = path.match(/^\/v1\/projects\/([^/]+)\/ipd-access-log$/);
+  if (ipdLogRoute && request.method === "GET") return ipdAccessLog(p3Ctx, ipdLogRoute[1]);
+  const statsJobCol = path.match(/^\/v1\/projects\/([^/]+)\/stats-jobs$/);
+  if (statsJobCol && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid stats job payload", requestId);
+    return createStatsJob(p3Ctx, statsJobCol[1], body);
+  }
+  const statsJobCancel = path.match(/^\/v1\/stats-jobs\/([^/]+)\/cancel$/);
+  if (statsJobCancel && request.method === "POST") return cancelStatsJob(p3Ctx, statsJobCancel[1]);
+  const statsJobOne = path.match(/^\/v1\/stats-jobs\/([^/]+)$/);
+  if (statsJobOne && request.method === "GET") return getStatsJob(p3Ctx, statsJobOne[1]);
+
+  /* 6.1 purchase through the existing MaiK route (_purchase.js). */
+  if (path === "/v1/purchase/packs" && request.method === "GET") return purchasePacks(p3Ctx);
+  if (path === "/v1/purchase/order" && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid purchase payload", requestId);
+    return purchaseOrder(p3Ctx, body);
+  }
+  if (path === "/v1/purchase/iap-verify" && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid purchase payload", requestId);
+    return purchaseIapVerify(p3Ctx, body);
+  }
+
+  /* 6.3 cost reports (_reports.js). */
+  const costProjectCsv = path.match(/^\/v1\/projects\/([^/]+)\/cost-report\.csv$/);
+  if (costProjectCsv && request.method === "GET") return projectCostReport(p3Ctx, costProjectCsv[1], url, true);
+  const costProject = path.match(/^\/v1\/projects\/([^/]+)\/cost-report$/);
+  if (costProject && request.method === "GET") return projectCostReport(p3Ctx, costProject[1], url, false);
+  if (path === "/v1/cost-report.csv" && request.method === "GET") return userCostReport(p3Ctx, url, true);
+  if (path === "/v1/cost-report" && request.method === "GET") return userCostReport(p3Ctx, url, false);
+
+  /* 6.5 institution workspaces (_institutions.js). */
+  if (path === "/v1/institutions" && request.method === "GET") return myInstitutions(p3Ctx);
+  const instInvoices = path.match(/^\/v1\/institutions\/([^/]+)\/invoices$/);
+  if (instInvoices && request.method === "GET") return listInvoices(p3Ctx, instInvoices[1]);
+  const instSeats = path.match(/^\/v1\/institutions\/([^/]+)\/seats$/);
+  if (instSeats && request.method === "GET") return institutionSeats(p3Ctx, instSeats[1]);
+  const instMembers = path.match(/^\/v1\/institutions\/([^/]+)\/members$/);
+  if (instMembers && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid member payload", requestId);
+    return addInstitutionMember(p3Ctx, instMembers[1], body);
+  }
+  const instMemberOne = path.match(/^\/v1\/institutions\/([^/]+)\/members\/([^/]+)$/);
+  if (instMemberOne && request.method === "PUT") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid member payload", requestId);
+    return updateInstitutionMember(p3Ctx, instMemberOne[1], instMemberOne[2], body);
+  }
+  if (instMemberOne && request.method === "DELETE") return removeInstitutionMember(p3Ctx, instMemberOne[1], instMemberOne[2]);
+  const instProjects = path.match(/^\/v1\/institutions\/([^/]+)\/projects$/);
+  if (instProjects && request.method === "GET") return listInstitutionProjects(p3Ctx, instProjects[1]);
+  if (instProjects && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid project payload", requestId);
+    return createInstitutionProject(p3Ctx, instProjects[1], body);
+  }
+  const instOnboarding = path.match(/^\/v1\/institutions\/([^/]+)\/onboarding$/);
+  if (instOnboarding && request.method === "GET") return institutionOnboarding(p3Ctx, instOnboarding[1]);
+  if (instOnboarding && request.method === "PUT") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid onboarding payload", requestId);
+    return putInstitutionOnboarding(p3Ctx, instOnboarding[1], body);
+  }
+  const instOne = path.match(/^\/v1\/institutions\/([^/]+)$/);
+  if (instOne && request.method === "GET") return getInstitutionRoute(p3Ctx, instOne[1]);
+
+  /* 5D.1 study templates (_templates.js, read-only). */
+  if (path === "/v1/study-templates" && request.method === "GET") return listTemplates(p3Ctx);
+  const templateOne = path.match(/^\/v1\/study-templates\/([^/]+)$/);
+  if (templateOne && request.method === "GET") return getTemplate(p3Ctx, templateOne[1]);
+
+  /* 5B.3 journals (_journals.js, read-only + deterministic match). */
+  if (path === "/v1/journals/match" && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid match payload", requestId);
+    return matchJournals(p3Ctx, body);
+  }
+  if (path === "/v1/journals" && request.method === "GET") return listJournals(p3Ctx, url);
+  const journalOne = path.match(/^\/v1\/journals\/([^/]+)$/);
+  if (journalOne && request.method === "GET") return getJournal(p3Ctx, journalOne[1]);
+
+  /* 5B.5 reviewer-response workspace (_responses.js). */
+  const rcCol = path.match(/^\/v1\/projects\/([^/]+)\/reviewer-comments$/);
+  if (rcCol && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid reviewer comment payload", requestId);
+    return createComment(p3Ctx, rcCol[1], body);
+  }
+  if (rcCol && request.method === "GET") return listComments(p3Ctx, rcCol[1], url);
+  const rrCol = path.match(/^\/v1\/reviewer-comments\/([^/]+)\/responses$/);
+  if (rrCol && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid reviewer response payload", requestId);
+    return createResponse(p3Ctx, rrCol[1], body);
+  }
+  if (rrCol && request.method === "GET") return listResponses(p3Ctx, rrCol[1]);
+  const rrProject = path.match(/^\/v1\/projects\/([^/]+)\/reviewer-responses$/);
+  if (rrProject && request.method === "GET") return listProjectResponses(p3Ctx, rrProject[1]);
+  const rrOne = path.match(/^\/v1\/reviewer-responses\/([^/]+)$/);
+  if (rrOne && request.method === "PUT") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid reviewer response payload", requestId);
+    return updateResponse(p3Ctx, rrOne[1], body);
+  }
 
   if (path === "/v1/projects" && request.method === "POST") {
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid project payload", requestId); }

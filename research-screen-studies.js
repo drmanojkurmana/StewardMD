@@ -166,7 +166,7 @@
         h.push('            </div>');
         h.push('            <div class="rmd-study-data-str">' + esc(formatStudyData(s.measure, s.inputs)) + '</div>');
         if (s.locator && s.locator.citation) {
-          h.push('            <div class="rmd-study-loc-str"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> ' + esc(s.locator.citation) + (s.locator.page ? ', p. ' + esc(s.locator.page) : '') + '</div>');
+          h.push('            <div class="rmd-study-loc-str smd-books-keep"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg> ' + esc(s.locator.citation) + (s.locator.page ? ', p. ' + esc(s.locator.page) : '') + '</div>');
         }
         h.push('          </div>');
 
@@ -256,7 +256,7 @@
     h.push('    <div class="rmd-provenance-box">');
     h.push('      <div class="rmd-prov-row"><span class="rmd-prov-lbl">Citation:</span> <span>' + esc(loc.citation || "No citation provided") + '</span></div>');
     if (loc.page) {
-      h.push('      <div class="rmd-prov-row"><span class="rmd-prov-lbl">Page:</span> <span>p. ' + esc(loc.page) + '</span></div>');
+      h.push('      <div class="rmd-prov-row smd-books-keep"><span class="rmd-prov-lbl">Page:</span> <span>p. ' + esc(loc.page) + '</span></div>');
     }
     if (loc.section) {
       h.push('      <div class="rmd-prov-row"><span class="rmd-prov-lbl">Section:</span> <span>' + esc(loc.section) + '</span></div>');
