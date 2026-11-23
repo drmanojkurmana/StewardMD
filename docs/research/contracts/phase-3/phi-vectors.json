@@ -1,0 +1,677 @@
+{
+  "description": "Shared PHI gate vectors (phi-gate.md). Run by test/research-phase3-api.test.mjs AND backend/research/tests/test_phi_vectors.py. All identifiers synthetic. expect=block cases must block in BOTH gates with the named category present; expect=allow cases must pass BOTH. Hit positions must match exactly.",
+  "cases": [
+    {
+      "id": "phi-mrn-001",
+      "text": "Patient Ramesh Kumar, MRN 483920, admitted on 12/03/2024",
+      "expect": "block",
+      "category": "mrn",
+      "note": "contract example phi-001"
+    },
+    {
+      "id": "phi-mrn-002",
+      "text": "UHID: AB123456",
+      "expect": "block",
+      "category": "mrn",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-mrn-003",
+      "text": "medical record no 998877",
+      "expect": "block",
+      "category": "mrn",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-mrn-004",
+      "text": "hospital no 445566",
+      "expect": "block",
+      "category": "mrn",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-mrn-005",
+      "text": "IP no 778899",
+      "expect": "block",
+      "category": "mrn",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-mrn-006",
+      "text": "OP no 123456",
+      "expect": "block",
+      "category": "mrn",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-mrn-007",
+      "text": "MRN-48392012",
+      "expect": "block",
+      "category": "mrn",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-mrn-008",
+      "text": "Medical Record #12345678",
+      "expect": "block",
+      "category": "mrn",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-mrn-009",
+      "text": "uhid 2024ABC99",
+      "expect": "block",
+      "category": "mrn",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-mrn-010",
+      "text": "IP/OP no 55667788",
+      "expect": "block",
+      "category": "mrn",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-aid-001",
+      "text": "Aadhaar 123456789010",
+      "expect": "block",
+      "category": "aadhaar",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-aid-002",
+      "text": "Aadhaar 2345 6789 0124",
+      "expect": "block",
+      "category": "aadhaar",
+      "note": "spaced 4-4-4"
+    },
+    {
+      "id": "phi-aid-003",
+      "text": "UID 9876-5432-1096",
+      "expect": "block",
+      "category": "aadhaar",
+      "note": "hyphen 4-4-4"
+    },
+    {
+      "id": "phi-aid-004",
+      "text": "Identity number 123456789010 verified",
+      "expect": "block",
+      "category": "aadhaar",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-aid-005",
+      "text": "234567890124",
+      "expect": "block",
+      "category": "aadhaar",
+      "note": "bare valid 12 digits"
+    },
+    {
+      "id": "phi-ssn-001",
+      "text": "SSN 123-45-6789",
+      "expect": "block",
+      "category": "ssn",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-ssn-002",
+      "text": "Social security 234-56-7890",
+      "expect": "block",
+      "category": "ssn",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-ssn-003",
+      "text": "345-67-8901",
+      "expect": "block",
+      "category": "ssn",
+      "note": "bare valid ssn"
+    },
+    {
+      "id": "phi-nhs-001",
+      "text": "NHS number 1234567881",
+      "expect": "block",
+      "category": "nhs",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-nhs-002",
+      "text": "NHS 9876543210",
+      "expect": "block",
+      "category": "nhs",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-nhs-003",
+      "text": "4567891236",
+      "expect": "block",
+      "category": "nhs",
+      "note": "bare valid 10 digits"
+    },
+    {
+      "id": "phi-phn-001",
+      "text": "Call +919876543210",
+      "expect": "block",
+      "category": "phone",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-phn-002",
+      "text": "Mobile 9876543210",
+      "expect": "block",
+      "category": "phone",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-phn-003",
+      "text": "Phone 09876543210",
+      "expect": "block",
+      "category": "phone",
+      "note": "0 prefix"
+    },
+    {
+      "id": "phi-phn-004",
+      "text": "Contact +14155552671",
+      "expect": "block",
+      "category": "phone",
+      "note": "E.164"
+    },
+    {
+      "id": "phi-phn-005",
+      "text": "+91 9876543210",
+      "expect": "block",
+      "category": "phone",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-phn-006",
+      "text": "Tel +442071838750",
+      "expect": "block",
+      "category": "phone",
+      "note": "E.164 UK"
+    },
+    {
+      "id": "phi-eml-001",
+      "text": "patient@example.com",
+      "expect": "block",
+      "category": "email",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-eml-002",
+      "text": "Contact ramesh.kumar@hospital.org",
+      "expect": "block",
+      "category": "email",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-eml-003",
+      "text": "Email: jane.doe+tag@clinic.co.in",
+      "expect": "block",
+      "category": "email",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-dob-001",
+      "text": "DOB: 12/03/1980",
+      "expect": "block",
+      "category": "dob",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-dob-002",
+      "text": "date of birth 1980-03-12",
+      "expect": "block",
+      "category": "dob",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-dob-003",
+      "text": "born on 12 March 1980",
+      "expect": "block",
+      "category": "dob",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-dob-004",
+      "text": "birth date: March 12, 1980",
+      "expect": "block",
+      "category": "dob",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-dob-005",
+      "text": "DOB 1-2-80",
+      "expect": "block",
+      "category": "dob",
+      "note": "short year"
+    },
+    {
+      "id": "phi-adr-001",
+      "text": "Lives at 12 MG Road",
+      "expect": "block",
+      "category": "address",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-adr-002",
+      "text": "Residence 45 Gandhi Nagar",
+      "expect": "block",
+      "category": "address",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-adr-003",
+      "text": "Residence 7 Rose Colony",
+      "expect": "block",
+      "category": "address",
+      "note": "number-first street token per the literal rule"
+    },
+    {
+      "id": "phi-adr-004",
+      "text": "221B Baker Street",
+      "expect": "block",
+      "category": "address",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-adr-005",
+      "text": "PIN code 560001",
+      "expect": "block",
+      "category": "address",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-adr-006",
+      "text": "postal code: 110022",
+      "expect": "block",
+      "category": "address",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-adr-007",
+      "text": "12 Park Avenue",
+      "expect": "block",
+      "category": "address",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-adr-008",
+      "text": "zip code 902101",
+      "expect": "block",
+      "category": "address",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-nam-001",
+      "text": "Patient Ramesh Kumar",
+      "expect": "block",
+      "category": "patient_name",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-nam-002",
+      "text": "Mr.John Smith",
+      "expect": "block",
+      "category": "patient_name",
+      "note": "Mr. label adjacency: the literal rule needs a word char after the dot"
+    },
+    {
+      "id": "phi-nam-003",
+      "text": "Mrs. Jane Doe was admitted",
+      "expect": "block",
+      "category": "patient_name",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-nam-004",
+      "text": "Ms. Alice Brown diagnosed with asthma",
+      "expect": "block",
+      "category": "patient_name",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-nam-005",
+      "text": "Ramesh Kumar, ward 4 bed no 12",
+      "expect": "block",
+      "category": "patient_name",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-nam-006",
+      "text": "The patient Priya Sharma is stable",
+      "expect": "block",
+      "category": "patient_name",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-adm-001",
+      "text": "The patient was admitted on 12/03/2024.",
+      "expect": "block",
+      "category": "admission_date",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-adm-002",
+      "text": "admission date 2024-03-12, patient stable",
+      "expect": "block",
+      "category": "admission_date",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-adm-003",
+      "text": "discharged on 15/03/2024; patient improved",
+      "expect": "block",
+      "category": "admission_date",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-adm-004",
+      "text": "Patient admitted on 12 March 2024",
+      "expect": "block",
+      "category": "admission_date",
+      "note": "synthetic"
+    },
+    {
+      "id": "phi-mix-001",
+      "text": "Mr. John Smith, MRN 123456, DOB 01/01/1970, phone 9876543210",
+      "expect": "block",
+      "category": "mrn",
+      "note": "multi-hit"
+    },
+    {
+      "id": "phi-mix-002",
+      "text": "Patient Jane Doe (jane@example.com) admitted on 2024-01-15",
+      "expect": "block",
+      "category": "email",
+      "note": "multi-hit"
+    },
+    {
+      "id": "clean-id-001",
+      "text": "Accession 123456789011",
+      "expect": "allow",
+      "category": "near_miss_aadhaar",
+      "note": "invalid Verhoeff must not block on the id rule"
+    },
+    {
+      "id": "clean-id-002",
+      "text": "Sample id 1234567890",
+      "expect": "allow",
+      "category": "near_miss_nhs",
+      "note": "invalid mod-11"
+    },
+    {
+      "id": "clean-id-003",
+      "text": "Batch 000-12-3456",
+      "expect": "allow",
+      "category": "near_miss_ssn",
+      "note": "area 000"
+    },
+    {
+      "id": "clean-id-004",
+      "text": "Batch 666-12-3456",
+      "expect": "allow",
+      "category": "near_miss_ssn",
+      "note": "area 666"
+    },
+    {
+      "id": "clean-id-005",
+      "text": "Batch 900-12-3456",
+      "expect": "allow",
+      "category": "near_miss_ssn",
+      "note": "area 9xx"
+    },
+    {
+      "id": "clean-id-006",
+      "text": "Batch 123-00-4567",
+      "expect": "allow",
+      "category": "near_miss_ssn",
+      "note": "group 00"
+    },
+    {
+      "id": "clean-id-007",
+      "text": "Batch 123-45-0000",
+      "expect": "allow",
+      "category": "near_miss_ssn",
+      "note": "serial 0000"
+    },
+    {
+      "id": "clean-id-008",
+      "text": "Specimen 9988776655443",
+      "expect": "allow",
+      "category": "near_miss",
+      "note": "13 digits, no rule"
+    },
+    {
+      "id": "clean-001",
+      "text": "Smith J, Doe A. Hospital of Example, London. Enrolled between January 2018 and March 2020.",
+      "expect": "allow",
+      "category": "byline",
+      "note": "contract example clean-001"
+    },
+    {
+      "id": "clean-doi-001",
+      "text": "doi:10.1234/6123456789",
+      "expect": "allow",
+      "category": "doi",
+      "note": "DOI suffix is not a phone"
+    },
+    {
+      "id": "clean-doi-002",
+      "text": "DOI 10.1000/182",
+      "expect": "allow",
+      "category": "doi",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-pmid-001",
+      "text": "PMID 12345678",
+      "expect": "allow",
+      "category": "pmid",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-pmid-002",
+      "text": "PMID: 34567890; PMCID PMC1234567",
+      "expect": "allow",
+      "category": "pmid",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-trial-001",
+      "text": "NCT01234567",
+      "expect": "allow",
+      "category": "trial_id",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-trial-002",
+      "text": "CTRI/2020/01/023456",
+      "expect": "allow",
+      "category": "trial_id",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-grant-001",
+      "text": "Grant 5R01AI123456",
+      "expect": "allow",
+      "category": "grant",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-date-001",
+      "text": "between January 2018 and March 2020",
+      "expect": "allow",
+      "category": "enrolment_period",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-date-002",
+      "text": "enrolled from 2015 to 2019",
+      "expect": "allow",
+      "category": "enrolment_period",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-date-003",
+      "text": "The patient was enrolled between January 2018 and March 2020",
+      "expect": "allow",
+      "category": "enrolment_period",
+      "note": "patient label but month-year only"
+    },
+    {
+      "id": "clean-date-004",
+      "text": "Study period March 2020 to December 2021",
+      "expect": "allow",
+      "category": "study_dates",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-date-005",
+      "text": "Published 2020 Jan",
+      "expect": "allow",
+      "category": "pubdate",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-age-001",
+      "text": "aged 45-64 years",
+      "expect": "allow",
+      "category": "age_bracket",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-age-002",
+      "text": "mean age 58.2",
+      "expect": "allow",
+      "category": "summary_age",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-age-003",
+      "text": "median 61 (IQR 52-70)",
+      "expect": "allow",
+      "category": "summary_age",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-stat-001",
+      "text": "OR 1.25 (95% CI 1.02-1.53)",
+      "expect": "allow",
+      "category": "stats",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-stat-002",
+      "text": "I2 = 45%, tau2 = 0.03",
+      "expect": "allow",
+      "category": "stats",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-stat-003",
+      "text": "n = 120; 120 patients were enrolled",
+      "expect": "allow",
+      "category": "sample_size",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-stat-004",
+      "text": "pp. 123-130",
+      "expect": "allow",
+      "category": "page_range",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-stat-005",
+      "text": "pages 45-52",
+      "expect": "allow",
+      "category": "page_range",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-stat-006",
+      "text": "RR 0.88 (0.71-1.09), p = 0.24",
+      "expect": "allow",
+      "category": "stats",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-byline-001",
+      "text": "Ramesh Kumar, Priya Sharma and John Doe",
+      "expect": "allow",
+      "category": "author_list",
+      "note": "names without a patient label"
+    },
+    {
+      "id": "clean-byline-002",
+      "text": "Department of Medicine, Apollo Hospital, Chennai",
+      "expect": "allow",
+      "category": "affiliation",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-byline-003",
+      "text": "Smith J, Jones A, Brown B. Example University, London.",
+      "expect": "allow",
+      "category": "byline",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-byline-004",
+      "text": "FirstAuthor et al (2020) reported similar findings",
+      "expect": "allow",
+      "category": "citation",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-byline-005",
+      "text": "All India Institute of Medical Sciences, New Delhi",
+      "expect": "allow",
+      "category": "affiliation",
+      "note": "institution name, no street"
+    },
+    {
+      "id": "clean-byline-006",
+      "text": "Correspondence: department office, Example Hospital, Mumbai",
+      "expect": "allow",
+      "category": "affiliation",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-text-001",
+      "text": "Patients were randomised to intervention or control",
+      "expect": "allow",
+      "category": "clinical_text",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-text-002",
+      "text": "The ward reported no adverse events during follow-up",
+      "expect": "allow",
+      "category": "clinical_text",
+      "note": "ward label but no name bigram"
+    },
+    {
+      "id": "clean-text-003",
+      "text": "Participants aged 18 years or older were eligible",
+      "expect": "allow",
+      "category": "clinical_text",
+      "note": "synthetic"
+    },
+    {
+      "id": "clean-text-004",
+      "text": "Discharged patients were followed for 12 months",
+      "expect": "allow",
+      "category": "clinical_text",
+      "note": "no day-level date, no name"
+    },
+    {
+      "id": "clean-text-005",
+      "text": "A total of 250 participants completed the study",
+      "expect": "allow",
+      "category": "clinical_text",
+      "note": "synthetic"
+    }
+  ]
+}

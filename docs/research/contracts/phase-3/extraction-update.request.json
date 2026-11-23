@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-3/extraction-update.request.json",
+  "title": "PUT /v1/projects/{projectId}/studies/{studyId}/extraction request",
+  "type": "object",
+  "required": ["template", "version", "fields"],
+  "additionalProperties": false,
+  "properties": {
+    "template": { "type": "string", "enum": ["rct_binary", "rct_continuous", "generic_effect"] },
+    "version": { "type": "integer", "minimum": 0 },
+    "artifactId": { "type": ["string", "null"] },
+    "fields": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "value": { "type": ["string", "number", "null"] },
+          "locator": { "oneOf": [{ "$ref": "../phase-1/locator.schema.json" }, { "type": "null" }] },
+          "quote": { "type": "string", "maxLength": 2000 }
+        }
+      }
+    }
+  }
+}

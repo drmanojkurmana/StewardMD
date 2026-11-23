@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-3/extraction.schema.json",
+  "title": "ResearchMD extraction resource",
+  "type": "object",
+  "required": ["id", "projectId", "studyId", "template", "status", "version", "fields"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "projectId": { "type": "string" },
+    "studyId": { "type": "string" },
+    "artifactId": { "type": ["string", "null"] },
+    "template": { "type": "string", "enum": ["rct_binary", "rct_continuous", "generic_effect"] },
+    "status": { "type": "string", "enum": ["draft", "verified"] },
+    "version": { "type": "integer", "minimum": 0 },
+    "fields": {
+      "type": "object",
+      "description": "Map keyed by template field key.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "value": { "type": ["string", "number", "null"] },
+          "locator": { "oneOf": [{ "$ref": "../phase-1/locator.schema.json" }, { "type": "null" }] },
+          "quote": { "type": "string", "maxLength": 2000 },
+          "status": { "type": "string", "enum": ["unverified", "verified", "corrected"] },
+          "source": { "type": "string", "enum": ["human", "suggestion"] },
+          "verifier": { "type": ["string", "null"] },
+          "verifiedAt": { "type": ["integer", "null"] }
+        }
+      }
+    },
+    "suggestions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "fieldKey", "status"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "fieldKey": { "type": "string" },
+          "value": { "type": ["string", "number", "null"] },
+          "locator": { "oneOf": [{ "$ref": "../phase-1/locator.schema.json" }, { "type": "null" }] },
+          "quote": { "type": "string" },
+          "model": { "type": "string" },
+          "status": { "const": "unverified" },
+          "createdTs": { "type": "integer" }
+        }
+      }
+    },
+    "createdBy": { "type": "string" },
+    "createdTs": { "type": "integer" },
+    "updatedTs": { "type": "integer" }
+  }
+}

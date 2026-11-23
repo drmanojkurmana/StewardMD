@@ -418,3 +418,107 @@ SELECT
      AND c.status = 'open')
     AS conflicts_open
 FROM research_projects p;
+
+-- Phase 3 contract 0003 (docs/research/contracts/phase-3/0003_research_v3.sql):
+-- jobs v2, PDFs, AI usage, credit ledger, institutions. The definitions below
+-- are IDENTICAL to the 0003 migration (IF NOT EXISTS, so applying the
+-- migration over this file is a no-op). The new jobs table is
+-- research_job_runs, NOT research_jobs: the pilot research_jobs above stays
+-- untouched for the pilot meta-analysis routes (decision documented in the
+-- 0003 header). Stored job statuses follow callback.md: queued, running,
+-- succeeded, failed, cancelled (callback body "done" -> stored "succeeded").
+-- Credit deltas and AI costs are integer micro-USD; the MaiK wallet stays INR.
+-- Ledger owner_id for user rows is the MaiK WALLET KEY (em:<email> or
+-- fb:<uid>), pinned at reserve time; for institutions it is the institution
+-- id and the ledger is the balance store. See the 0003 header.
+
+CREATE TABLE IF NOT EXISTS research_job_runs (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  kind TEXT NOT NULL CHECK(kind IN ('pdf_extract')),
+  status TEXT NOT NULL DEFAULT 'queued'
+    CHECK(status IN ('queued','running','succeeded','failed','cancelled')),
+  idempotency_key TEXT NOT NULL,
+  input_r2_key TEXT NOT NULL DEFAULT '',
+  result_r2_key TEXT NOT NULL DEFAULT '',
+  ceilings_json TEXT NOT NULL DEFAULT '{}',
+  usage_json TEXT NOT NULL DEFAULT '{}',
+  output_json TEXT NOT NULL DEFAULT '{}',
+  error_code TEXT NOT NULL DEFAULT '',
+  created_by TEXT NOT NULL,
+  created_ts INTEGER NOT NULL,
+  started_ts INTEGER,
+  completed_ts INTEGER,
+  cancel_requested_ts INTEGER,
+  UNIQUE(project_id, idempotency_key)
+);
+CREATE INDEX IF NOT EXISTS idx_research_job_runs_queue
+  ON research_job_runs(status, created_ts);
+CREATE INDEX IF NOT EXISTS idx_research_job_runs_project
+  ON research_job_runs(project_id, created_ts DESC);
+CREATE INDEX IF NOT EXISTS idx_research_job_runs_creator
+  ON research_job_runs(created_by, created_ts);
+
+CREATE TABLE IF NOT EXISTS research_pdfs (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  report_id TEXT REFERENCES research_reports(id) ON DELETE SET NULL,
+  sha256 TEXT NOT NULL,
+  r2_key TEXT NOT NULL,
+  bytes INTEGER NOT NULL CHECK(bytes >= 0),
+  pages INTEGER,
+  uploaded_by TEXT NOT NULL,
+  ts INTEGER NOT NULL,
+  UNIQUE(project_id, sha256)
+);
+CREATE INDEX IF NOT EXISTS idx_research_pdfs_project
+  ON research_pdfs(project_id, ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_ai_usage (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  user_id TEXT NOT NULL,
+  job_id TEXT NOT NULL DEFAULT '',
+  step TEXT NOT NULL DEFAULT '',
+  tier TEXT NOT NULL CHECK(tier IN ('T1','T2','T3')),
+  model TEXT NOT NULL DEFAULT '',
+  tokens_in INTEGER NOT NULL DEFAULT 0 CHECK(tokens_in >= 0),
+  tokens_out INTEGER NOT NULL DEFAULT 0 CHECK(tokens_out >= 0),
+  cost_micro_usd INTEGER NOT NULL DEFAULT 0 CHECK(cost_micro_usd >= 0),
+  ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_ai_usage_project
+  ON research_ai_usage(project_id, ts);
+CREATE INDEX IF NOT EXISTS idx_research_ai_usage_user
+  ON research_ai_usage(user_id, ts);
+CREATE INDEX IF NOT EXISTS idx_research_ai_usage_job
+  ON research_ai_usage(job_id);
+
+CREATE TABLE IF NOT EXISTS research_credit_ledger (
+  id TEXT PRIMARY KEY,
+  owner_type TEXT NOT NULL CHECK(owner_type IN ('user','institution')),
+  owner_id TEXT NOT NULL,
+  delta INTEGER NOT NULL,
+  reason TEXT NOT NULL CHECK(reason IN ('grant','reserve','release','settle')),
+  job_id TEXT NOT NULL DEFAULT '',
+  ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_credit_ledger_owner
+  ON research_credit_ledger(owner_type, owner_id, ts);
+CREATE INDEX IF NOT EXISTS idx_research_credit_ledger_job
+  ON research_credit_ledger(job_id);
+
+CREATE TABLE IF NOT EXISTS research_institutions (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  created_by TEXT NOT NULL DEFAULT '',
+  created_ts INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS research_institution_members (
+  institution_id TEXT NOT NULL REFERENCES research_institutions(id) ON DELETE CASCADE,
+  uid TEXT NOT NULL,
+  created_ts INTEGER NOT NULL,
+  PRIMARY KEY(institution_id, uid)
+);
+CREATE INDEX IF NOT EXISTS idx_research_institution_members_uid
+  ON research_institution_members(uid, institution_id);

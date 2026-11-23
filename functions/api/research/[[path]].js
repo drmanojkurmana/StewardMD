@@ -28,6 +28,16 @@ import * as crossrefConnector from "./_connectors/crossref.js";
 import * as s2Connector from "./_connectors/semanticscholar.js";
 import { parseImport } from "./_connectors/import.js";
 import { dedupRecords } from "./_dedup.js";
+/* Phase 3 server side (docs/research/contracts/phase-3): jobs v2 + PDFs
+ * (_jobs.js), HMAC worker callback (_callback.js), ceilings and daily caps
+ * (_caps.js), credit lifecycle on the MaiK wallet + institution ledger
+ * (_credits.js), PHI gate (_phi.js) and the central AI gateway (_gateway.js,
+ * reusing callGemini from ../ai/[[path]].js). The pilot routes below are
+ * untouched; Phase 3 jobs live in research_job_runs (0003 header decision). */
+import { uploadPdf, createJob, getJob, cancelJob } from "./_jobs.js";
+import { jobCallback } from "./_callback.js";
+import { llmRoute, literatureSearchRoute } from "./_gateway.js";
+import { adminInstitutionRoute, creditsView } from "./_credits.js";
 
 const MAX_JSON = 1024 * 1024;
 const MAX_PDF = 25 * 1024 * 1024;
@@ -1761,6 +1771,23 @@ export async function onRequest({ request, env, params }) {
   const path = "/" + parts.join("/");
   if (!env.RESEARCH_DB) return err(503, "database_unavailable", "Research database is not provisioned", requestId);
   const db = env.RESEARCH_DB;
+  /* Shared helpers handed to the Phase 3 modules (small route hooks only). */
+  const P3 = { json, err, audit, uuid, safeEqual, member, getProject, projectGate, gateErr, bodyJson, sha256Hex };
+
+  /* ---- Phase 3 worker-facing routes (NO Firebase auth: the worker holds no
+   * user tokens; HMAC / per-job token is its only credential). ---- */
+  const p3Callback = path.match(/^\/(?:v1\/)?jobs\/([^/]+)\/callback$/);
+  if (p3Callback && request.method === "POST")
+    return jobCallback({ request, env, db, requestId, api: P3 }, p3Callback[1]);
+  if (path === "/v1/internal/llm" && request.method === "POST")
+    return llmRoute({ request, env, db, requestId, api: P3 });
+  if (path === "/v1/internal/literature-search" && request.method === "POST")
+    return literatureSearchRoute({ request, env, db, requestId, api: P3 });
+  const p3Admin = path.match(/^\/v1\/admin\/institutions(?:\/([^/]+)\/(members|credits))?$/);
+  if (p3Admin && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid admin payload", requestId); }
+    return adminInstitutionRoute({ request, env, db, requestId, api: P3 }, p3Admin[1] || null, p3Admin[2] || null, body);
+  }
 
   // Queue consumer retrieves the persisted, bounded analysis payload by job ID; queue messages stay tiny.
   const inputLookup = path.match(/^\/v1\/internal\/jobs\/([^/]+)\/input$/);
@@ -1806,6 +1833,26 @@ export async function onRequest({ request, env, params }) {
   if (!claims || !claims.sub) return err(401, "unauthorized", "Sign in to use StewardMD Research", requestId);
   const uid = claims.sub;
   const url = new URL(request.url);
+
+  /* ---- Phase 3 user routes (Firebase auth + project role, same as above). */
+  const p3Ctx = { request, env, db, uid, claims, requestId, api: P3 };
+  const p3Pdfs = path.match(/^\/v1\/projects\/([^/]+)\/pdfs$/);
+  if (p3Pdfs && request.method === "POST")
+    return uploadPdf(Object.assign({}, p3Ctx, { projectId: p3Pdfs[1] }));
+  const p3Jobs = path.match(/^\/v1\/projects\/([^/]+)\/jobs$/);
+  if (p3Jobs && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid job payload", requestId); }
+    return createJob(Object.assign({}, p3Ctx, { projectId: p3Jobs[1] }), body);
+  }
+  const p3JobOne = path.match(/^\/v1\/jobs\/([^/]+)$/);
+  if (p3JobOne && request.method === "GET") {
+    const out = await getJob(p3Ctx, p3JobOne[1]);
+    if (out) return out; /* null -> not a Phase 3 job; pilot lookup below */
+  }
+  const p3Cancel = path.match(/^\/v1\/jobs\/([^/]+)\/cancel$/);
+  if (p3Cancel && request.method === "POST")
+    return cancelJob(p3Ctx, p3Cancel[1]);
+  if (path === "/v1/credits" && request.method === "GET") return creditsView(p3Ctx);
 
   if (path === "/v1/projects" && request.method === "POST") {
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid project payload", requestId); }
