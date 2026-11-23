@@ -756,3 +756,4 @@ Pre-existing, unrelated: `run-swipe-back-ui.mjs` has 5 failing checks on main wi
 - 2026-11-22 FIMG1/2/3/5/6 pictures (only steps still missing): 66 wired, 30 rejected. contentVersion 0.4.42.
 - 2026-11-23 FVID2: 8 clips (fasciotomy, TKR, adrenalectomy, pterygium, evisceration, vitrectomy). contentVersion 0.4.43.
 - 2026-11-23 FIMG4: 15 pictures (salpingectomy, intussusception, Ladd, 1 circumcision), 6 circumcision rejected. contentVersion 0.4.44.
+- 2026-11-23 GVID2: 18 clips (hand, escharotomy, cleft lip, neurosurgery, pericardial window, hemithyroidectomy), 14 new ALLOW ids. contentVersion 0.4.45.
