@@ -5,7 +5,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
-import { buildAll, canonicalSystem, captionOf, commonsSrc, commonsTitle, kindOf, tidyCommonsCaption, writeIndex } from "../tools/build-image-library.mjs";
+import { buildAll, buildTopics, topicKey, canonicalSystem, captionOf, commonsSrc, commonsTitle, kindOf, tidyCommonsCaption, writeIndex } from "../tools/build-image-library.mjs";
 
 const require = createRequire(import.meta.url);
 const PURE = require("../image-library.js");
@@ -193,4 +193,23 @@ test("builder: Qbank images join the bank, Commons ones attributed and linked", 
       assert.equal(e.lk, "commons");
     } else assert.equal(e.lk, "prep");
   }
+});
+
+test("topics: one bank reused by every module (drug, class, disease, operation)", () => {
+  const d = data(), T = buildTopics(d);
+  const titles = (q) => (T.t[topicKey(q)] || []).map((r) => d.bySystem[T.sys[r[0]]][r[1]].t);
+  assert.ok(titles("tamsulosin").some((t) => /alpha-adrenergic blocker/i.test(t)), "Tamsulosin reaches the alpha-blocker mechanism picture");
+  assert.ok(titles("tamsulosin").includes("Tamsulosin"), "and its animation");
+  assert.ok(titles("sepsis").length >= 5, "sepsis has pictures");
+  assert.ok(titles("inguinal hernia").length >= 3, "inguinal hernia has pictures");
+  for (const refs of Object.values(T.t)) assert.ok(refs.length <= 16);
+});
+
+test("client topicKeys: same key rule as the builder, longest topics only", () => {
+  assert.equal(PURE.topicWords("Septic Shocks").join(" "), topicKey("Septic Shocks"));
+  const has = (k) => ["septic shock", "shock", "sepsi", "liver abscess", "liver"].includes(k);
+  assert.deepEqual(PURE.topicKeys(["Septic shock management"], has), ["septic shock"]);
+  assert.deepEqual(PURE.topicKeys(["Sepsis and septic shock"], has), ["sepsi", "septic shock"]);
+  assert.deepEqual(PURE.topicKeys(["Liver abscess"], has), ["liver abscess"]);
+  assert.deepEqual(PURE.topicKeys(["Septic shock (severe)"], has, true), ["septic shock", "shock"]);
 });

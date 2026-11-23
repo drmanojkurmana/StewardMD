@@ -666,6 +666,11 @@
     }
 
     host.innerHTML = html;
+    // Shared pictures and animations for this topic from the one Image Library bank (owner 2026-11-23).
+    try {
+      var rail = host.querySelector(".cx-rail");
+      if (window.SMD_IMGLIB && SMD_IMGLIB.strip && rail && rail.parentNode === host) SMD_IMGLIB.strip(host, [d.name], { before: rail });
+    } catch (e) {}
   }
 
   /* ── screen: chapter ─────────────────────────────────────────────────────── */

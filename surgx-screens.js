@@ -749,6 +749,8 @@
       body += mediaBlock(p.__built ? p.__built.media : null, mid);
     });
     body += nextBtn + toSteps;
+    // Shared pictures and animations for this operation (filled after paint from SMD_IMGLIB, first section only).
+    if (ai === 0) body += '<div class="sgx-related" id="sgxRelated"></div>';
 
     body += calcChips(p.calcs);
     body += sourcesCard(p.sources);
@@ -1727,6 +1729,12 @@
      render + events
      ═══════════════════════════════════════════════════════════════════════ */
 
+  /* One shared picture bank (owner 2026-11-23): the Image Library's pictures and animations for this operation's topic. */
+  function relatedPictures(r) {
+    var box = r === "procedure" && document.getElementById("sgxRelated"), p = state.proc;
+    if (!box || !p || !p.title || !window.SMD_IMGLIB || !window.SMD_IMGLIB.strip) return;
+    window.SMD_IMGLIB.strip(box, [p.title].concat(p.aliases || []));
+  }
   function render() {
     fsClose();
     var r = routeHead();
@@ -1747,6 +1755,7 @@
     }
     if (html && r === "note" && tabletSplit()) html = noteSplit(html, routeArg());
     if (html) paint(html);
+    relatedPictures(r);
     try { if (ST()) ST().setLastSection(r); } catch (e) {}
   }
 

@@ -1064,6 +1064,11 @@
     L.dir = 0;
     if (!L.fin) { bindSwipe(r.querySelector("#pnLsn")); bindIx(r); if (!L.playing) primeVoice(); }
     if (L.zoom) bindPinch(r.querySelector(".pn-zoom-sc"));
+    // Finished: more pictures and animations on this topic from the shared Image Library bank (owner 2026-11-23).
+    if (L.fin && G.SMD_IMGLIB && G.SMD_IMGLIB.strip) {
+      var fb = r.querySelector(".pn-body"), own = lessonImages(L.les).map(function (u) { return String(u).split("/").pop(); });
+      if (fb) G.SMD_IMGLIB.strip(fb, [L.les.title], { skip: function (s) { return own.indexOf(String(s).split("/").pop()) >= 0; } });
+    }
   }
   function bindIx(r) {
     [].forEach.call(r.querySelectorAll("[data-spot]"), function (st) { ON(st, "lsn-spot", "click", function (e) { spotTap(st, e); }); });

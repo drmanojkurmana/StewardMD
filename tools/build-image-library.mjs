@@ -368,14 +368,92 @@ export function writeIndex(outDir, data) {
   return sizes;
 }
 
+/* ---------- Topics: one shared picture bank reused by every module (owner 2026-11-23) ----------
+ * Each picture is tagged, automatically, with the topics its title and caption name: KB disease and reference article
+ * names and aliases, drug generics, drug classes (prep/figures/figures.json terms, so a class picture also reaches every
+ * drug in that class: Tamsulosin gets the alpha-blocker pictures), SurgX operations and the animation titles.
+ * Writes topics.json { v, sys: [slug...], t: { "<topic key>": [[sysIndex, itemIndex], ...] } }; a screen looks up the
+ * longest topic phrases in its own title (SMD_IMGLIB.topicKeys) and shows those pictures in a strip. */
+const TOPIC_GENERIC = new Set(["pain", "fever", "cell", "cells", "blood", "heart", "lung", "lungs", "liver", "kidney", "skin",
+  "bone", "brain", "eye", "ear", "nose", "infection", "disease", "syndrome", "injury", "tumour", "tumor", "cancer", "shock",
+  "anatomy", "physiology", "pharmacology", "pathology", "surgery", "medicine", "drug", "drugs", "normal", "acute", "chronic",
+  "trauma", "mass", "cyst", "ulcer", "fracture", "headache", "cough", "rash", "oedema", "edema", "anaemia", "anemia", "insulin",
+  "oxygen", "water", "sodium", "potassium", "calcium", "iron", "vitamin", "hormone", "receptor", "enzyme", "protein",
+  // qualifiers that name no topic on their own ("Community acquired pneumonia (non-severe)" must not pull "severe")
+  "severe", "mild", "moderate", "non", "nonsevere", "early", "late", "primary", "secondary", "type", "stage", "grade",
+  "left", "right", "upper", "lower", "adult", "child", "children", "paediatric", "pediatric", "male", "female", "simple",
+  "complex", "complete", "partial", "total", "open", "closed", "minor", "major", "common", "rare", "overview", "introduction",
+  "management", "treatment", "diagnosi", "clinical", "feature", "sign", "symptom", "approach", "basic", "advanced", "review",
+  "summary", "case", "example", "image", "picture", "diagram", "figure", "illustration", "photo", "view", "section", "part"]);
+export function topicWords(s) {
+  return String(s || "").toLowerCase().replace(/[’']/g, "").split(/[^a-z0-9]+/).filter(Boolean)
+    .map((w) => (w.length > 4 && /[^s]s$/.test(w) ? w.slice(0, -1) : w));
+}
+export function topicKey(s) { return topicWords(s).join(" "); }
+function phrasesOf(name) {
+  return String(name || "").replace(/\([^)]*\)/g, " ").split(/\s*(?:\/|,|;|:| - | and | or )\s*/i)
+    .map(topicKey).filter((k) => k.length >= 4 && !TOPIC_GENERIC.has(k) && !STOP.has(k) && !/^\d+$/.test(k));
+}
+export function ngrams(words, max = 6) {
+  const out = new Set();
+  for (let i = 0; i < words.length; i++) for (let n = 1; n <= max && i + n <= words.length; n++) out.add(words.slice(i, i + n).join(" "));
+  return out;
+}
+export function buildTopics(data, root = ROOT, cap = 16) {
+  const vocab = new Set();
+  const addName = (n) => { for (const k of phrasesOf(n)) vocab.add(k); };
+  for (const dir of ["kb/diseases", "kb/reference"]) for (const f of listJSON(path.join(root, dir))) {
+    const d = readJSON(path.join(root, dir, f)); if (!d) continue;
+    addName(d.name); for (const a of Array.isArray(d.aliases) ? d.aliases : []) addName(a);
+  }
+  for (const f of listJSON(path.join(root, "surgx/procedures"))) {
+    const d = readJSON(path.join(root, "surgx/procedures", f)); if (!d) continue;
+    addName(d.title); for (const a of Array.isArray(d.aliases) ? d.aliases : []) addName(a);
+  }
+  const figs = (readJSON(path.join(root, "prep/figures/figures.json")) || {}).figures || [];
+  for (const fg of figs) for (const g of Object.keys(fg.drugs || {})) addName(g);
+  for (const m of fs.readFileSync(path.join(root, "drugs.js"), "utf8").matchAll(/\bgeneric:"([^"]{3,60})"/g)) addName(m[1]);
+  const gifs = readJSON(path.join(root, "kb/imglib/gifs.json"));
+  for (const g of (gifs && gifs.items) || []) addName(g.title);
+  for (const fg of figs) for (const k of phrasesOf(fg.title)) if (k.includes(" ")) vocab.add(k);
+  // Short picture titles are topics too ("Pneumonia", "Appendicitis"), so a lesson or article of that name finds them.
+  for (const slug of Object.keys(data.bySystem)) for (const e of data.bySystem[slug]) if (topicWords(e.t).length <= 4) addName(e.t);
+
+  const sys = data.systems.map((s) => s.slug), direct = new Map(), byClass = new Map();
+  // Order inside a topic: named in the picture's title before only in its caption, then animation, own, Commons.
+  const rank = (e, inTitle) => (inTitle ? 0 : 3) + (e.k === "Animation" ? 0 : e.o === "stewardmd" ? 1 : 2);
+  const classRe = figs.map((fg) => { try { return new RegExp("\\b(?:" + (fg.terms || []).join("|") + ")", "i"); } catch { return null; } });
+  sys.forEach((slug, si) => (data.bySystem[slug] || []).forEach((e, ii) => {
+    const text = [e.t, e.c, e.rn].join(" "), tg = ngrams(topicWords(e.t));
+    for (const g of ngrams(topicWords(text))) if (vocab.has(g)) { if (!direct.has(g)) direct.set(g, []); direct.get(g).push([si, ii, rank(e, tg.has(g))]); }
+    figs.forEach((fg, fi) => { if (classRe[fi] && (fg.terms || []).length && classRe[fi].test(text)) { if (!byClass.has(fi)) byClass.set(fi, []); byClass.get(fi).push([si, ii, rank(e, classRe[fi].test(e.t))]); } });
+  }));
+  const t = {};
+  const put = (k, refs) => {
+    const seen = new Set((t[k] || []).map((r) => r[0] + ":" + r[1])), out = t[k] || [];
+    for (const r of refs.slice().sort((a, b) => a[2] - b[2])) { if (out.length >= cap) break; const id = r[0] + ":" + r[1]; if (!seen.has(id)) { seen.add(id); out.push([r[0], r[1]]); } }
+    if (out.length) t[k] = out;
+  };
+  for (const [k, refs] of direct) put(k, refs);
+  figs.forEach((fg, fi) => {
+    const refs = byClass.get(fi); if (!refs) return;
+    for (const g of Object.keys(fg.drugs || {})) put(topicKey(g), refs);
+    for (const k of phrasesOf(fg.title)) if (k.includes(" ")) put(k, refs);
+  });
+  return { v: 1, sys, t };
+}
+
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   const oi = process.argv.indexOf("--out");
   const outDir = oi >= 0 ? path.resolve(process.argv[oi + 1]) : path.join(ROOT, "kb/dist/imglib");
   const data = buildAll(ROOT);
   const sizes = writeIndex(outDir, data);
+  const topics = buildTopics(data, ROOT);
+  fs.writeFileSync(path.join(outDir, "topics.json"), JSON.stringify(topics));
   if (!process.argv.includes("--quiet")) {
     console.log(`image-library: ${data.total} images, ${data.dupes} duplicates skipped, ${data.systems.length} systems`);
     for (const s of data.systems) console.log(`  ${s.slug}: ${s.count} (${Math.round(sizes[s.slug] / 1024)} KB)`);
+    console.log(`  topics.json: ${Object.keys(topics.t).length} topics, ${Math.round(fs.statSync(path.join(outDir, "topics.json")).size / 1024)} KB`);
     console.log(`  index.json: ${Math.round(fs.statSync(path.join(outDir, "index.json")).size / 1024)} KB -> ${outDir}`);
   }
 }

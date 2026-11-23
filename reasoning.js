@@ -4782,6 +4782,15 @@
     try { el.querySelectorAll("[data-act='fig-open']").forEach(function (b) { b.addEventListener("click", function () { if (window.SMD_FIG) window.SMD_FIG.openFig(b.getAttribute("data-f"), b.getAttribute("data-q"), b); }); }); } catch (e) {}
     try { kbWireJump(el); } catch (e) {}   // the chips are a convenience; never let them block the page
     try { kbWireRelated(el, id, opts); } catch (e) {}
+    // Shared pictures and animations for this topic from the one Image Library bank, minus the ones this article
+    // already shows (owner 2026-11-23: one picture bank reused by every module).
+    try {
+      var kbRead = el.querySelector(".kbr-read"), kbContent = el.querySelector(".dx-reader-content");
+      if (kbRead && window.SMD_IMGLIB && SMD_IMGLIB.strip) SMD_IMGLIB.strip(kbRead, [name], { before: kbContent, skip: function (s) {
+        var f = String(s).split("/").pop();
+        return !!f && [].some.call(el.querySelectorAll("img"), function (i) { return String(i.getAttribute("src") || "").indexOf(f) >= 0; });
+      } });
+    } catch (e) {}
     if (!el.__kbProtoWired) {
       el.__kbProtoWired = true;
       el.addEventListener("click", function (ev) {
