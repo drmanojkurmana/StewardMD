@@ -323,11 +323,17 @@ def cox_ph(
             step *= 0.5
             new_ll, new_score, new_info = _efron_terms(beta + step, ts, es, Xs, blocks)
             halt += 1
+        if new_ll < ll:
+            break  # no ascent left at floating-point precision; score check below guards it
+        rel = abs(1.0 - ll / new_ll) if new_ll != 0 else abs(new_ll - ll)
         beta = beta + step
         ll, score, info = new_ll, new_score, new_info
+        if rel < 1e-14:
+            break  # R coxph-style log-likelihood convergence; BLAS noise can keep the step above 1e-10
     else:
         raise ValueError("cox_not_converged")
-    if np.max(np.abs(score)) > 1e-6:
+    # scale-free check: the remaining Newton step, not the raw score (score grows with covariate scale, e.g. age)
+    if np.max(np.abs(np.linalg.solve(info, score))) > 1e-6:
         raise ValueError("cox_not_converged")
 
     if not np.all(np.isfinite(beta)) or np.max(np.abs(beta)) > 1e6:
