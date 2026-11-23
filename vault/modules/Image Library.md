@@ -75,5 +75,5 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   `kb/imglib/gifs.json`; the builder adds them as kind "Animation", from "Animations", credit "AI-generated with Google
   Gemini", licence "StewardMD original". The 3 SurgX GIFs stay in `surgx/media/` and are listed in place. Made by
   Gemini (Nano Banana keyframes, Python only to join them and write the labels) from prompts GIF1 to GIF4, topics
-  ranked by how many modules mention them. GIF2 (gif011 to gif060) is in; GIF3 and GIF4 pending. Not yet shown inline
+  ranked by how many modules mention them. GIF2, GIF3 and GIF4 are in (158 GIFs with GIF1, about 150 MB). Left out for errors: gif077 P2Y12 (platelets drawn as red cells), gif114 urinary catheter (balloon labelled in the urethra). Not yet shown inline
   inside KB articles, lessons or drug pages; that needs a topic-to-GIF lookup per module.
