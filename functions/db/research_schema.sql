@@ -27,6 +27,45 @@ CREATE TABLE IF NOT EXISTS research_members (
 );
 CREATE INDEX IF NOT EXISTS idx_research_members_uid ON research_members(uid, project_id);
 
+-- Phase 1 contract 0001 (docs/research/contracts/phase-1/0001_research_v1.sql):
+-- study rows with optimistic-concurrency version, evidence locator JSON and
+-- human verification; saved runs computed server-side by research-engine.js
+-- with the manifest and engine version. Identical to the 0001 migration.
+CREATE TABLE IF NOT EXISTS research_studies (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  label TEXT NOT NULL DEFAULT '',
+  measure TEXT NOT NULL CHECK(measure IN ('OR','RR','HR','RD','MD','SMD')),
+  inputs_json TEXT NOT NULL DEFAULT '{}',
+  locator_json TEXT NOT NULL DEFAULT '{}',
+  quote TEXT NOT NULL DEFAULT '',
+  verified INTEGER NOT NULL DEFAULT 0 CHECK(verified IN (0, 1)),
+  verified_by TEXT NOT NULL DEFAULT '',
+  verified_at INTEGER,
+  version INTEGER NOT NULL DEFAULT 1 CHECK(version >= 1),
+  created_by TEXT NOT NULL DEFAULT '',
+  created_ts INTEGER NOT NULL,
+  updated_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_studies_project ON research_studies(project_id, updated_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_runs (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  measure TEXT NOT NULL CHECK(measure IN ('OR','RR','HR','RD','MD','SMD')),
+  model TEXT NOT NULL DEFAULT 'random_dl' CHECK(model IN ('fixed','random_dl','random_reml')),
+  test TEXT NOT NULL DEFAULT 'wald' CHECK(test IN ('wald','knha')),
+  level REAL NOT NULL DEFAULT 0.95 CHECK(level > 0 AND level < 1),
+  study_versions_json TEXT NOT NULL DEFAULT '[]',
+  manifest_json TEXT NOT NULL DEFAULT '{}',
+  result_json TEXT NOT NULL DEFAULT '{}',
+  engine TEXT NOT NULL DEFAULT 'research-engine',
+  engine_version TEXT NOT NULL DEFAULT 'rmd1',
+  created_by TEXT NOT NULL DEFAULT '',
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_runs_project ON research_runs(project_id, created_ts DESC);
+
 CREATE TABLE IF NOT EXISTS research_jobs (
   id TEXT PRIMARY KEY,
   project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,

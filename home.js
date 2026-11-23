@@ -1071,6 +1071,7 @@
     speckit: function () { if (window.SMD_KITS && SMD_KITS.open) SMD_KITS.open(); else toast("Specialty kits loading…"); },
     icdsearch: function () { if (window.SMD_ICD) SMD_ICD.open(); },
     dosecalc: function () { if (window.SMD_DOSECALC) SMD_DOSECALC.open({ source: "Drugs" }); else toast("Dose calculator loading…"); },
+    research: function () { if (window.SMD_RESEARCH && SMD_RESEARCH.open) SMD_RESEARCH.open(); else toast("ResearchMD loading…"); },
     // Neonatal hub (neo-hub.js), flag smd_neo DEFAULT ON (Beta, owner 2026-10-01).
     neo: function () { if (window.SMD_NEO_HUB) SMD_NEO_HUB.open(); else toast("Neonatal tools loading…"); },
     // Adult normal values (adult-ref.js): sourced adult lab reference ranges, review pending.
@@ -2176,6 +2177,10 @@
     if (window.SMD_DOSECALC && SMD_DOSECALC.on) return SMD_DOSECALC.on();
     try { var q = (location.search.match(/[?&]dosecalc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_dose_calc") !== "0"; } catch (e) { return true; }
   }
+  // ResearchMD (research.js): flag smd_research, DEFAULT OFF; "1" turns it on. Read directly: home.js loads first.
+  function researchOn() {
+    try { var q = (location.search.match(/[?&]research=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_research") === "1"; } catch (e) { return false; }
+  }
   // Neonatal layer (neo-flags.js), master flag smd_neo DEFAULT ON under a Beta label (owner 2026-10-01);
   // "0" turns it off. Read directly: home.js loads first.
   function neoOn() {
@@ -2284,6 +2289,9 @@
     // Read directly: home.js loads before dose-calc.js.
     { act: "dosecalc", ic: "medication", tt: "Dose calculator", sub: "Dose for one patient", defOn: false,
       eligible: function () { return doseCalcOn(); } },
+    // ResearchMD meta-analysis workspace (research.js). Flag smd_research, DEFAULT OFF.
+    { act: "research", ic: "science", tt: "ResearchMD", sub: "Meta-analysis with sources", defOn: true, beta: true,
+      eligible: function () { return researchOn(); } },
     // Neonatal hub: dosing, preparation, infusions, fluids, growth, bilirubin, scores, reference values,
     // procedures, drug levels. Shown on Home by default once the flag is on.
     { act: "neo", ic: "child_care", tt: "Neonatal", sub: "Newborn and NICU care", defOn: true, beta: true,

@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-1/schemas/study-create.request.json",
+  "title": "POST /v1/projects/{projectId}/studies request",
+  "description": "inputs holds exactly one shape: rawCounts (OR/RR/RD), rawMeans (MD/SMD), reported (OR/RR/HR/RD/MD/SMD effect with CI at its own ciLevel), or generic (log-scale yi with se, sei or vi; for ratio measures the caller passes the logged yi). New studies start unverified; verification is a separate update.",
+  "type": "object",
+  "required": ["measure", "inputs", "locator"],
+  "additionalProperties": false,
+  "properties": {
+    "label": { "type": "string", "maxLength": 240 },
+    "measure": { "type": "string", "enum": ["OR", "RR", "HR", "RD", "MD", "SMD"] },
+    "inputs": {
+      "type": "object",
+      "oneOf": [
+        {
+          "title": "rawCounts",
+          "required": ["events1", "n1", "events2", "n2"],
+          "additionalProperties": false,
+          "properties": {
+            "events1": { "type": "integer", "minimum": 0 },
+            "n1": { "type": "integer", "minimum": 1 },
+            "events2": { "type": "integer", "minimum": 0 },
+            "n2": { "type": "integer", "minimum": 1 }
+          }
+        },
+        {
+          "title": "rawMeans",
+          "required": ["mean1", "sd1", "n1", "mean2", "sd2", "n2"],
+          "additionalProperties": false,
+          "properties": {
+            "mean1": { "type": "number" },
+            "sd1": { "type": "number", "exclusiveMinimum": 0 },
+            "n1": { "type": "integer", "minimum": 1 },
+            "mean2": { "type": "number" },
+            "sd2": { "type": "number", "exclusiveMinimum": 0 },
+            "n2": { "type": "integer", "minimum": 1 }
+          }
+        },
+        {
+          "title": "reported",
+          "required": ["effect", "ciLower", "ciUpper"],
+          "additionalProperties": false,
+          "properties": {
+            "effect": { "type": "number" },
+            "ciLower": { "type": "number" },
+            "ciUpper": { "type": "number" },
+            "ciLevel": { "type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1, "default": 0.95 }
+          }
+        },
+        {
+          "title": "generic",
+          "required": ["yi"],
+          "additionalProperties": false,
+          "properties": {
+            "yi": { "type": "number" },
+            "se": { "type": "number", "exclusiveMinimum": 0 },
+            "sei": { "type": "number", "exclusiveMinimum": 0 },
+            "vi": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        }
+      ]
+    },
+    "locator": { "$ref": "../locator.schema.json" },
+    "quote": { "type": "string", "maxLength": 2000 }
+  }
+}

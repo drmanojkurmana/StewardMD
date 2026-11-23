@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-1/schemas/project-create.response.json",
+  "title": "POST /v1/projects response (201)",
+  "type": "object",
+  "required": ["project", "requestId"],
+  "additionalProperties": false,
+  "properties": {
+    "project": {
+      "type": "object",
+      "required": ["id", "title", "discipline", "specialty", "studyType", "role", "createdAt"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "discipline": { "type": "string" },
+        "specialty": { "type": "string" },
+        "studyType": { "type": "string" },
+        "role": { "type": "string", "enum": ["owner"] },
+        "createdAt": { "type": "integer" }
+      }
+    },
+    "requestId": { "type": "string" }
+  }
+}

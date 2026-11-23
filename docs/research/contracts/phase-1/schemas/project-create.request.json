@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-1/schemas/project-create.request.json",
+  "title": "POST /v1/projects request",
+  "type": "object",
+  "required": ["title"],
+  "additionalProperties": false,
+  "properties": {
+    "title": { "type": "string", "minLength": 1, "maxLength": 180 },
+    "discipline": { "type": "string", "maxLength": 40, "default": "medicine" },
+    "specialty": { "type": "string", "maxLength": 80 },
+    "studyType": { "type": "string", "maxLength": 80 },
+    "researchQuestion": { "type": "string", "maxLength": 2000 }
+  }
+}
