@@ -4,10 +4,20 @@ on:
     branches: [main]
     paths:
       - 'backend/research/**'
+      - 'research-engine.js'
+      - 'scripts/research-parity.R'
+      - 'test/research-*.test.mjs'
+      - 'test/fixtures/research/**'
+      - 'docs/research/**'
       - '.github/workflows/research-ci.yml'
   pull_request:
     paths:
       - 'backend/research/**'
+      - 'research-engine.js'
+      - 'scripts/research-parity.R'
+      - 'test/research-*.test.mjs'
+      - 'test/fixtures/research/**'
+      - 'docs/research/**'
       - '.github/workflows/research-ci.yml'
 jobs:
   test:
@@ -29,3 +39,25 @@ jobs:
           node-version: '22'
       - run: node --input-type=module --check < '../../functions/api/research/[[path]].js'
       - run: node --input-type=module --check < ../../workers/research-orchestrator/src/index.js
+  parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+      - name: Resolve R library path
+        run: echo "R_LIB=$(Rscript -e 'cat(.libPaths()[1L])')" >> "$GITHUB_ENV"
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.R_LIB }}
+          key: ${{ runner.os }}-r-parity-${{ hashFiles('scripts/research-parity.R') }}
+          restore-keys: |
+            ${{ runner.os }}-r-parity-
+      - name: Install metafor and metadat
+        run: Rscript -e 'for (p in c("metafor", "metadat")) if (!requireNamespace(p, quietly = TRUE)) install.packages(p, repos = "https://cloud.r-project.org")'
+      - name: Generate R parity fixtures
+        run: Rscript scripts/research-parity.R
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run engine and R parity tests
+        run: node --test --experimental-test-module-mocks --experimental-sqlite test/research-engine.test.mjs test/research-parity.test.mjs

@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/invitation-accept.response.json",
+  "title": "POST /v1/invitations/accept response",
+  "description": "The new membership row. No token material is echoed.",
+  "type": "object",
+  "required": ["membership"],
+  "additionalProperties": false,
+  "properties": {
+    "membership": {
+      "type": "object",
+      "required": ["projectId", "uid", "role"],
+      "additionalProperties": false,
+      "properties": {
+        "projectId": { "type": "string" },
+        "uid": { "type": "string" },
+        "role": { "type": "string", "enum": ["owner", "editor", "analyst", "reviewer", "viewer"] }
+      }
+    }
+  }
+}

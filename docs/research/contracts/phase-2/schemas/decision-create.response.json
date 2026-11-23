@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/decision-create.response.json",
+  "title": "POST decision response (records and reports)",
+  "description": "The stored vote plus the item outcome after this vote. outcome is pending until both reviewers have decided (or a conflict is resolved); a fresh disagreement opens a conflict and returns its id. The peer vote is never echoed here; read the blinded list view instead.",
+  "type": "object",
+  "required": ["decision", "outcome"],
+  "additionalProperties": false,
+  "properties": {
+    "decision": {
+      "type": "object",
+      "required": ["id", "stage", "decision", "createdTs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "stage": { "type": "string", "enum": ["title_abstract", "full_text"] },
+        "decision": { "type": "string", "enum": ["include", "exclude", "uncertain"] },
+        "reasonCode": { "type": "string" },
+        "createdTs": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "outcome": { "type": "string", "enum": ["pending", "include", "exclude", "conflict"] },
+    "conflictId": { "type": "string" }
+  }
+}

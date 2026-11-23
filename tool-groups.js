@@ -15,7 +15,7 @@
   var ROLE_ORDER = ["student", "intern", "resident", "doctor"];
   var GROUPS = [
     { role: "student", tt: "Students", sub: "Learn and practise",
-      acts: ["clinix", "prep", "kxlearn", "atlas", "ophthalmos", "tokos", "narke", "guidelines", "codeblue"] },
+      acts: ["clinix", "prep", "kxlearn", "atlas", "ophthalmos", "tokos", "narke", "guidelines", "codeblue", "research"] },
     { role: "intern", tt: "Interns", sub: "Bedside and ward work",
       acts: ["startcase", "reasoning", "askai", "drugmenu", "calculators", "dosecalc", "dosing", "insulin", "electrolytes",
         "interactions", "syndromes", "antibiogram", "neo", "icu", "speckit", "docs", "dictate", "icdsearch"] },
@@ -48,6 +48,7 @@
     dictate: "Speak a note and get it written up.",
     interactions: "Photograph medicines and check their interactions.",
     guidelines: "Clinical protocols and guidelines to read.",
+    research: "Meta analysis with sources.",
     atlas: "Radiological anatomy atlas.",
     ophthalmos: "Eye imaging clinic trainer.",
     tokos: "Obstetrics and gynaecology: learn, CTG clinic, drills.",
@@ -165,7 +166,7 @@
    * Flag: smd_home_tabs, default ON; "0" (localStorage) or ?hometabs=0 restores the single grid. */
   var TASKS = [
     { id: "learn", tt: "Learn", sub: "Study, practise and prepare for exams",
-      acts: ["prep", "kxlearn", "kardia", "clinix", "atlas", "ophthalmos", "tokos", "narke", "guidelines"] },
+      acts: ["prep", "kxlearn", "kardia", "clinix", "atlas", "ophthalmos", "tokos", "narke", "guidelines", "research"] },
     { id: "bedside", tt: "Bedside", sub: "For the patient in front of you",
       acts: ["dosecalc", "icu", "neo", "codeblue", "insulin", "electrolytes", "interactions", "speckit", "surgx", "oncohome", "oncotree",
         "staging", "kardiox", "thorex", "sknx", "retinalscan", "docs", "dictate", "icdsearch"] },

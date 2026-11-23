@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/protocol-create.request.json",
+  "title": "POST /v1/projects/{projectId}/protocols request",
+  "description": "Creates a draft protocol at version 1. content holds the full PICO/PECO protocol; the API validates its shape and stores it verbatim as content_json. Owner or editor only.",
+  "type": "object",
+  "required": ["content"],
+  "additionalProperties": false,
+  "properties": {
+    "title": { "type": "string", "minLength": 1, "maxLength": 240 },
+    "content": {
+      "type": "object",
+      "required": ["pico", "eligibility", "outcomes"],
+      "additionalProperties": false,
+      "properties": {
+        "pico": {
+          "type": "object",
+          "required": ["population", "intervention", "comparison", "outcome"],
+          "additionalProperties": false,
+          "properties": {
+            "population": { "type": "string", "minLength": 1, "maxLength": 2000 },
+            "intervention": { "type": "string", "minLength": 1, "maxLength": 2000 },
+            "comparison": { "type": "string", "maxLength": 2000 },
+            "outcome": { "type": "string", "minLength": 1, "maxLength": 2000 }
+          }
+        },
+        "eligibility": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+        },
+        "outcomes": {
+          "type": "object",
+          "required": ["primary"],
+          "additionalProperties": false,
+          "properties": {
+            "primary": { "type": "string", "minLength": 1, "maxLength": 500 },
+            "secondary": {
+              "type": "array",
+              "maxItems": 50,
+              "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+            },
+            "timePoints": {
+              "type": "array",
+              "maxItems": 50,
+              "items": { "type": "string", "minLength": 1, "maxLength": 200 }
+            }
+          }
+        },
+        "subgroups": {
+          "type": "array",
+          "maxItems": 50,
+          "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+        },
+        "prospero": {
+          "type": "object",
+          "description": "PROSPERO-field export block, filled by the 2.1 builder.",
+          "additionalProperties": true
+        }
+      }
+    }
+  }
+}

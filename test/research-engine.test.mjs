@@ -340,46 +340,8 @@ test("DL-only runs carry a method notice; REML and HKSJ runs do not", function (
   assert.ok(knha.hksj !== null && knha.hksj.df === 12, "knha reports the HKSJ block with df k-1");
 });
 
-test("TODO: HKSJ numeric parity with metafor (needs R on the CI runner)", function () {
-  // R command that generates the reference values (Phase 1.5 parity script):
-  // R -q -e 'library(metafor); library(metadat); data(dat.bcg);
-  //   d <- escalc(measure="RR", ai=tpos, bi=tneg, ci=cpos, di=cneg, data=dat.bcg, add=1/2, to="only0", drop00=TRUE);
-  //   f <- rma(yi, vi, data=d, method="REML", test="knha");
-  //   print(c(est=f$b[1], se=f$se, ci.lb=f$ci.lb, ci.ub=f$ci.ub))'
-  // Then assert closeGate() on pooled.effect/se/ciLower/ciUpper and hksj.df === 12.
-  const res = ENGINE.run(bcgProject("random_reml", { test: "knha" }));
-  assert.equal(typeof res.pooled.se, "number");
-  assert.equal(res.hksj.df, 12);
-});
-
-test("TODO: prediction-interval numeric parity with metafor predict() (needs R)", function () {
-  // R commands that generate the reference values (Phase 1.5 parity script):
-  // R -q -e 'library(metafor); library(metadat); data(dat.bcg);
-  //   d <- escalc(measure="RR", ai=tpos, bi=tneg, ci=cpos, di=cneg, data=dat.bcg, add=1/2, to="only0", drop00=TRUE);
-  //   print(predict(rma(yi, vi, data=d, method="REML")))'                            # wald PI
-  // R -q -e 'library(metafor); library(metadat); data(dat.bcg);
-  //   d <- escalc(measure="RR", ai=tpos, bi=tneg, ci=cpos, di=cneg, data=dat.bcg, add=1/2, to="only0", drop00=TRUE);
-  //   print(predict(rma(yi, vi, data=d, method="REML", test="knha")))'              # knha PI
-  // Then assert closeGate() on predictionInterval.lower/upper for both tests.
-  const wald = ENGINE.run(bcgProject("random_reml"));
-  const knha = ENGINE.run(bcgProject("random_reml", { test: "knha" }));
-  assert.ok(wald.predictionInterval.lower < wald.predictionInterval.upper);
-  assert.ok(knha.predictionInterval.lower < knha.predictionInterval.upper);
-});
-
-test("TODO: truncated-HKSJ numeric parity with the Roever adhoc (needs R + hand calc)", function () {
-  // The pinned plan reports the truncated variant (adhoc per Roever et al.)
-  // when the HKSJ CI is narrower than the Wald CI. dat.bcg does not trigger
-  // it (halfH > halfW there), so the reference needs a low-heterogeneity set;
-  // compute the expected CI as estimate +/- t(k-1) * max(seHKSJ, seWald):
-  // R -q -e 'library(metafor); d <- escalc(measure="RR", ai=tpos, bi=tneg, ci=cpos, di=cneg, data=dat.bcg, add=1/2, to="only0", drop00=TRUE);
-  //   f <- rma(yi, vi, data=d, subset=(trial %in% c(5, 8, 9, 11, 13)), method="REML", test="knha");
-  //   print(c(est=f$b[1], se=f$se, ci.lb=f$ci.lb, ci.ub=f$ci.ub))'
-  // Then assert the engine truncated block matches when halfH < halfW.
-  const even = ENGINE.pool(
-    [{ id: "a", yi: 0.5, vi: 0.04 }, { id: "b", yi: 0.52, vi: 0.04 }, { id: "c", yi: 0.48, vi: 0.04 }],
-    { model: "fixed", test: "knha" }
-  );
-  assert.equal(even.hksj.truncated === null, false, "near-identical studies trigger the truncated variant");
-  assert.equal(even.hksj.truncated.reason, "hksj-narrower-than-wald");
-});
+/* Phase 1.5: HKSJ, prediction-interval and truncated-HKSJ numeric parity with
+ * metafor live in test/research-parity.test.mjs, driven by the R reference
+ * values in test/fixtures/research/parity.json (generated in CI by
+ * scripts/research-parity.R), including the truncated-HKSJ branch via the
+ * homogeneous bcg-rr-hom4 slice. */

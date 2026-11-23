@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/conflict-resolve.response.json",
+  "title": "POST /v1/conflicts/{conflictId}/resolve response",
+  "description": "The resolved conflict. Both votes stay stored; the item outcome follows the resolution.",
+  "type": "object",
+  "required": ["conflict"],
+  "additionalProperties": false,
+  "properties": {
+    "conflict": { "$ref": "conflict-list.response.json#/properties/conflicts/items" }
+  }
+}

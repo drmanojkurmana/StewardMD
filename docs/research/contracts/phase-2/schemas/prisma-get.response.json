@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/prisma-get.response.json",
+  "title": "GET /v1/projects/{projectId}/prisma response",
+  "description": "PRISMA 2020 counts for the project, read straight from the research_prisma_counts view plus the by-reason breakdown. Counts are derived from stored decisions only, so they equal the stored decisions by construction (plan section 12). excludedByReason counts full-text exclusions by reason code, latest vote per reviewer.",
+  "type": "object",
+  "required": ["prisma", "generatedTs"],
+  "additionalProperties": false,
+  "properties": {
+    "prisma": {
+      "type": "object",
+      "required": ["projectId", "recordsIdentified", "recordsFromDatabases", "recordsFromOtherSources", "recordsDuplicatesRemoved", "recordsScreened", "recordsExcluded", "reportsSought", "reportsNotRetrieved", "reportsAssessed", "reportsExcluded", "studiesIncluded", "conflictsOpen", "excludedByReason"],
+      "additionalProperties": false,
+      "properties": {
+        "projectId": { "type": "string" },
+        "recordsIdentified": { "type": "integer", "minimum": 0 },
+        "recordsFromDatabases": { "type": "integer", "minimum": 0 },
+        "recordsFromOtherSources": { "type": "integer", "minimum": 0 },
+        "recordsDuplicatesRemoved": { "type": "integer", "minimum": 0 },
+        "recordsScreened": { "type": "integer", "minimum": 0 },
+        "recordsExcluded": { "type": "integer", "minimum": 0 },
+        "reportsSought": { "type": "integer", "minimum": 0 },
+        "reportsNotRetrieved": { "type": "integer", "minimum": 0 },
+        "reportsAssessed": { "type": "integer", "minimum": 0 },
+        "reportsExcluded": { "type": "integer", "minimum": 0 },
+        "studiesIncluded": { "type": "integer", "minimum": 0 },
+        "conflictsOpen": { "type": "integer", "minimum": 0 },
+        "excludedByReason": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["reasonCode", "count"],
+            "additionalProperties": false,
+            "properties": {
+              "reasonCode": { "type": "string" },
+              "count": { "type": "integer", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "generatedTs": { "type": "integer", "minimum": 0 }
+  }
+}

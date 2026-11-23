@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/protocol-lock.response.json",
+  "title": "POST /v1/protocols/{protocolId}/lock response",
+  "description": "The locked version with its hash and timestamp. The screen shows both before screening unlocks.",
+  "type": "object",
+  "required": ["protocol"],
+  "additionalProperties": false,
+  "properties": {
+    "protocol": { "$ref": "protocol-get.response.json#/properties/protocol" }
+  }
+}
