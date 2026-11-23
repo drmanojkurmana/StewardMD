@@ -29,6 +29,18 @@ _CITE_RE = re.compile(r"\\cite\{([^}]+)\}|\[@([A-Za-z0-9_:-]+)\]")
 IMRAD_ORDER = ["abstract", "introduction", "methods", "results", "discussion"]
 
 
+def _token_table_for_gates(runs, build_token_table):
+    """Canonical dot-keyed token table for the hard gates, from any runs shape
+    the renderer accepts (list of run dicts, runId-keyed dict, or token table)."""
+    if isinstance(runs, dict):
+        if any("." in k for k in runs):
+            return runs  # already a canonical token table
+        runs = list(runs.values())
+    if isinstance(runs, list):
+        return build_token_table([r for r in runs if isinstance(r, dict) and r.get("runId")])
+    return {}
+
+
 class UnresolvedCitationError(ValueError):
     """Raised when an in-text citation cannot be resolved against references."""
 
@@ -297,6 +309,29 @@ def export(
             raise UnresolvedCitationError(key, "citation has neither DOI nor PMID")
         citation_map[key] = num
         vancouver_records.append(format_vancouver(entry, num))
+
+    # 2b. Hard gates (5A.2) on the canonical, still-tokenised draft. First
+    # prove every token resolves (strict render raises UnresolvedTokenError);
+    # then run numbers/citations/claim-links/direction. Any gate violation
+    # blocks export with the full failure list (GateError.violations) and
+    # nothing is written. Gates see tokens, never rendered numbers.
+    from paperorchestra.adapter.po_adapter import gates as _gates
+    from paperorchestra.adapter.po_adapter.loader import build_token_table
+
+    render_tokens(title, runs, strict=True)
+    if abstract_text:
+        render_tokens(abstract_text, runs, strict=True)
+    for s in sorted_sections:
+        render_tokens(s.get("heading", ""), runs, strict=True)
+        render_tokens(s.get("text", ""), runs, strict=True)
+
+    token_table = _token_table_for_gates(runs, build_token_table)
+    refs_list = references if isinstance(references, list) else list(refs_by_key.values())
+    gate_manifest = {"references": refs_list,
+                     "evidence": manuscript_json.get("evidence") or []}
+    violations = _gates.run_gates(sorted_sections, token_table, refs_by_key, gate_manifest)
+    if violations:
+        raise _gates.GateError(violations)
 
     # 3. Validate and render all tokens in memory (strict=True)
     # If any token is unresolved, UnresolvedTokenError raises before any file is written.

@@ -79,8 +79,8 @@ DRAFT_V0 = (
     "\\section{Introduction} Outcome Y is common \\cite{ref1}.\n"
     "\\section{Methods} We searched three databases. Two reviewers screened records.\n"
     "\\section{Results} The intervention reduced mortality "
-    "(OR {{run:r1:estimate}}, 95% CI {{run:r1:ciLower}} to {{run:r1:ciUpper}}; "
-    "p {{run:r1:p}}).\n"
+    "(OR {{run:r1.estimate}}, 95% CI {{run:r1.ciLower}} to {{run:r1.ciUpper}}; "
+    "p {{run:r1.p}}).\n"
     "\\section{Discussion} The pooled effect supports X \\cite{ref1}.\n"
 )
 

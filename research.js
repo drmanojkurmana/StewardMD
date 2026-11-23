@@ -634,7 +634,9 @@
         ["rob", "Risk of Bias"],
         ["data", "Data"],
         ["run", "Run"],
-        ["grade", "GRADE"]
+        ["grade", "GRADE"],
+        ["manuscript", "Manuscript"],
+        ["checklist", "Checklist"]
       ];
       h.push('<nav class="rmd-shell-tabs" aria-label="Research screens">');
       for (var t = 0; t < tabs.length; t++) {

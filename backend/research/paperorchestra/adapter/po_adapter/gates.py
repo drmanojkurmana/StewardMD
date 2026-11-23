@@ -5,9 +5,12 @@ and again on the final manuscript (pipeline.py). Any violation fails the job
 with code gate_failed; partial work is never saved as a result.
 
 Gates:
-  numbers      every number in Abstract/Results is a {{run:<runId>:<path>}}
-               token. Allowed bare numbers (plan section 12): years, counts
-               of reviewers, stated thresholds. Unknown tokens fail anywhere.
+  numbers      every number in Abstract/Results is a {{run:<runId>.<fieldPath>}}
+               token (the canonical format, contracts/phase-5/tokens.md).
+               Allowed bare numbers (plan section 12): years, counts
+               of reviewers, stated thresholds. Unknown tokens fail anywhere;
+               a non-canonical {{run:...}} (e.g. the retired colon form) fails
+               as malformed_token.
   citations    every \cite{key} / [@key] resolves to a DOI or PMID present in
                the manifest (references or evidence sources).
   claim_links  every claim sentence in Abstract/Results/Discussion carries a
@@ -23,7 +26,10 @@ import re
 
 from .writer import parse_latex_sections
 
-TOKEN_RE = re.compile(r"\{\{run:([A-Za-z0-9_-]+):([A-Za-z0-9_.]+)\}\}")
+# Canonical token: {{run:<runId>.<fieldPath>}} (contracts/phase-5/tokens.md).
+TOKEN_RE = re.compile(r"\{\{run:([A-Za-z0-9_-]+)\.([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*)\}\}")
+# Any {{run:...}} spelling, used only to flag non-canonical tokens.
+LOOSE_TOKEN_RE = re.compile(r"\{\{run:([^}]*)\}\}")
 _NUMBER_RE = re.compile(r"(?<![A-Za-z0-9_])\d+(?:\.\d+)?(?![A-Za-z0-9_])")
 _YEAR_RE = re.compile(r"^(?:19|20)\d{2}$")
 _REVIEWER_COUNT_RE = re.compile(
@@ -48,6 +54,8 @@ _SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
 
 NUMBER_GATE_SECTIONS = {"abstract", "results"}
 CLAIM_GATE_SECTIONS = {"abstract", "results", "discussion"}
+# Composite CI fields resolve when the run carries both bounds (tokens.md).
+CI_ALIASES = {"ci", "ci95", "confidence_interval", "confidenceinterval"}
 
 
 class GateError(Exception):
@@ -91,9 +99,19 @@ def check_numbers(sections, token_table) -> list:
                                    "start": match.start(), "end": match.end(),
                                    "number": raw})
         for match in TOKEN_RE.finditer(text):
-            key = f"{match.group(1)}:{match.group(2)}"
-            if key not in token_table:
-                violations.append({"gate": "unknown_token", "section": sid or heading,
+            run_id, field = match.group(1), match.group(2)
+            key = f"{run_id}.{field}"
+            if key in token_table:
+                continue
+            if (field.lower() in CI_ALIASES
+                    and f"{run_id}.ciLower" in token_table
+                    and f"{run_id}.ciUpper" in token_table):
+                continue
+            violations.append({"gate": "unknown_token", "section": sid or heading,
+                               "token": match.group(0)})
+        for match in LOOSE_TOKEN_RE.finditer(text):
+            if TOKEN_RE.fullmatch(match.group(0)) is None:
+                violations.append({"gate": "malformed_token", "section": sid or heading,
                                    "token": match.group(0)})
     return violations
 
@@ -168,7 +186,7 @@ def check_claim_links(sections) -> list:
 
 
 def _run_field(token_table, run_id, field):
-    entry = token_table.get(f"{run_id}:{field}")
+    entry = token_table.get(f"{run_id}.{field}")
     return entry["value"] if entry else None
 
 

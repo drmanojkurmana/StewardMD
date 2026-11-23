@@ -89,7 +89,7 @@ def valid_manuscript():
                 "id": "abstract",
                 "heading": "Abstract",
                 "level": 1,
-                "text": "Background: Condition Y is common.\n\nMethods: We searched MEDLINE and Embase.\n\nResults: Pooled analysis showed significant reduction (OR {{run:r1:estimate}}, {{run:r1:ci}}; p {{run:r1:p}}).\n\nConclusions: Intervention X is effective.",
+                "text": "Background: Condition Y is common.\n\nMethods: We searched MEDLINE and Embase.\n\nResults: Pooled analysis showed significant reduction (OR {{run:r1.estimate}}, {{run:r1.ci}}; p {{run:r1.p}}).\n\nConclusions: Intervention X is effective.",
             },
             {
                 "id": "introduction",
@@ -107,7 +107,7 @@ def valid_manuscript():
                 "id": "results",
                 "heading": "Results",
                 "level": 1,
-                "text": "A total of {{run:r1:k}} trials were included. The pooled effect demonstrated an odds ratio of {{run:r1:estimate}} {{run:r1:ci}} (p {{run:r1:p}}). Heterogeneity was I2 = {{run:r1:i2}}.\n\nSecondary outcome difference was {{run:r2:estimate}} {{run:r2:ci}} with p {{run:r2:p}} across {{run:r2:k}} trials.",
+                "text": "A total of {{run:r1.k}} trials were included. The pooled effect demonstrated an odds ratio of {{run:r1.estimate}} {{run:r1.ci}} (p {{run:r1.p}}). Heterogeneity was I2 = {{run:r1.i2}}.\n\nSecondary outcome difference was {{run:r2.estimate}} {{run:r2.ci}} with p {{run:r2.p}} across {{run:r2.k}} trials.",
             },
             {
                 "id": "discussion",
@@ -141,7 +141,7 @@ def test_unresolved_token_refusal_writes_nothing(tmp_path, valid_manuscript, val
     # Tamper section with non-existent token
     bad_manuscript = dict(valid_manuscript)
     bad_manuscript["sections"] = [
-        {"id": "results", "heading": "Results", "level": 1, "text": "Ghost token {{run:r99:estimate}}."}
+        {"id": "results", "heading": "Results", "level": 1, "text": "Ghost token {{run:r99.estimate}}."}
     ]
 
     with pytest.raises(UnresolvedTokenError) as exc_info:
@@ -221,8 +221,8 @@ def test_docx_export_full_imrad_opens_and_contains_rendered_numbers(
             "title": "Table 1: Study Characteristics and Summary Estimates",
             "headers": ["Outcome", "Estimate", "95% CI", "p-value", "Studies (k)"],
             "rows": [
-                ["Primary Mortality", "{{run:r1:estimate}}", "{{run:r1:ci}}", "{{run:r1:p}}", "{{run:r1:k}}"],
-                ["Secondary Score", "{{run:r2:estimate}}", "{{run:r2:ci}}", "{{run:r2:p}}", "{{run:r2:k}}"],
+                ["Primary Mortality", "{{run:r1.estimate}}", "{{run:r1.ci}}", "{{run:r1.p}}", "{{run:r1.k}}"],
+                ["Secondary Score", "{{run:r2.estimate}}", "{{run:r2.ci}}", "{{run:r2.p}}", "{{run:r2.k}}"],
             ],
         }
     ]
@@ -321,3 +321,20 @@ def test_citation_order_determines_vancouver_numbering(tmp_path, valid_runs, val
     # ref_second should now be numbered 1, ref_first numbered 2
     assert any(p.startswith("1. Brown K, Davis M. Earlier Study on Outcome.") for p in paragraphs)
     assert any(p.startswith("2. Smith J, Doe A, Adams B") for p in paragraphs)
+
+
+def test_hard_gate_blocks_export_with_violation_list(tmp_path, valid_runs, valid_references):
+    from paperorchestra.adapter.po_adapter.gates import GateError
+
+    manuscript = {
+        "title": "Blocked Review",
+        "sections": [
+            {"id": "results", "heading": "Results", "level": 1,
+             "text": "The intervention reduced mortality (OR 0.62)."},
+        ],
+    }
+    out_file = tmp_path / "blocked.docx"
+    with pytest.raises(GateError) as exc:
+        export(manuscript, valid_runs, valid_references, out_file)
+    assert any(v["gate"] == "untokenised_number" for v in exc.value.violations)
+    assert not out_file.exists()  # nothing written on a gate failure

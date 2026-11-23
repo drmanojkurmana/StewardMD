@@ -11,7 +11,7 @@ def test_parse_latex_sections():
     ids = [s["id"] for s in sections]
     assert ids == ["introduction", "methods", "results", "discussion"]
     results = sections[2]
-    assert "{{run:r1:estimate}}" in results["text"]
+    assert "{{run:r1.estimate}}" in results["text"]
     assert "\\section" not in results["text"]
 
 
@@ -58,16 +58,16 @@ def test_build_manuscript_imrad_order_and_citation_numbering():
     assert model["provenance"]["protocolHash"] == "a" * 64
     assert model["provenance"]["runIds"] == ["r1"]
     # Canonical text keeps tokens.
-    assert "{{run:r1:estimate}}" in model["sections"][2]["text"]
+    assert "{{run:r1.estimate}}" in model["sections"][2]["text"]
 
 
 def test_render_tokens_deterministic():
     manifest = make_manifest()
     table = build_token_table(manifest["runs"])
-    text = "OR {{run:r1:estimate}} ({{run:r1:ciLower}} to {{run:r1:ciUpper}})"
+    text = "OR {{run:r1.estimate}} ({{run:r1.ciLower}} to {{run:r1.ciUpper}})"
     assert writer.render_tokens(text, table) == "OR 0.62 (0.41 to 0.93)"
     # Unknown tokens are left for the gates to flag.
-    assert writer.render_tokens("{{run:r9:x}}", table) == "{{run:r9:x}}"
+    assert writer.render_tokens("{{run:r9.x}}", table) == "{{run:r9.x}}"
 
 
 def test_unresolved_reference_marked():

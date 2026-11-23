@@ -522,3 +522,178 @@ CREATE TABLE IF NOT EXISTS research_institution_members (
 );
 CREATE INDEX IF NOT EXISTS idx_research_institution_members_uid
   ON research_institution_members(uid, institution_id);
+
+-- Phase 3 contract 0004 (docs/research/contracts/phase-3/0004_research_v4.sql)
+-- plus the Phase 4.3 GRADE store: extraction values + audit + suggestions,
+-- PDF artifacts, risk-of-bias assessments + consensus, study-level data
+-- dictionaries + imports + snapshots, screening suggestions, GRADE
+-- assessments. The definitions below are IDENTICAL to the 0004 migration
+-- (IF NOT EXISTS, so applying the migration over this file is a no-op).
+-- Extraction values reach analysis only through promote (verified/corrected
+-- fields -> a verified research_studies row); T1 suggestions stay unverified
+-- and are never auto-applied. RoB blinding is API-enforced (blinding.md).
+-- Data import is study-level only (IPD gate 5C enforced in the API); every
+-- import freezes an R2 snapshot. GRADE certainty arithmetic stays in
+-- research-grade.js; this store only persists human judgments per saved run.
+
+CREATE TABLE IF NOT EXISTS research_extraction_artifacts (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  pdf_id TEXT NOT NULL REFERENCES research_pdfs(id) ON DELETE CASCADE,
+  filename TEXT NOT NULL DEFAULT '',
+  sha256 TEXT NOT NULL,
+  bytes INTEGER NOT NULL CHECK(bytes >= 0),
+  pages INTEGER,
+  job_id TEXT REFERENCES research_job_runs(id) ON DELETE SET NULL,
+  status TEXT NOT NULL DEFAULT 'queued'
+    CHECK(status IN ('queued','running','succeeded','failed','cancelled')),
+  created_by TEXT NOT NULL,
+  created_ts INTEGER NOT NULL,
+  UNIQUE(project_id, pdf_id)
+);
+CREATE INDEX IF NOT EXISTS idx_research_extraction_artifacts_project
+  ON research_extraction_artifacts(project_id, created_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_extractions (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  study_id TEXT NOT NULL REFERENCES research_studies(id) ON DELETE CASCADE,
+  artifact_id TEXT,
+  template TEXT NOT NULL
+    CHECK(template IN ('rct_binary','rct_continuous','generic_effect')),
+  status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','verified')),
+  version INTEGER NOT NULL DEFAULT 0 CHECK(version >= 0),
+  fields_json TEXT NOT NULL DEFAULT '{}',
+  created_by TEXT NOT NULL DEFAULT '',
+  created_ts INTEGER NOT NULL,
+  updated_ts INTEGER NOT NULL,
+  UNIQUE(project_id, study_id)
+);
+CREATE INDEX IF NOT EXISTS idx_research_extractions_project
+  ON research_extractions(project_id, updated_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_extraction_suggestions (
+  id TEXT PRIMARY KEY,
+  extraction_id TEXT NOT NULL REFERENCES research_extractions(id) ON DELETE CASCADE,
+  field_key TEXT NOT NULL,
+  value_json TEXT NOT NULL DEFAULT 'null',
+  locator_json TEXT,
+  quote TEXT NOT NULL DEFAULT '',
+  model TEXT NOT NULL DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'unverified'
+    CHECK(status IN ('unverified','accepted','rejected')),
+  created_by TEXT NOT NULL DEFAULT '',
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_extraction_suggestions_extraction
+  ON research_extraction_suggestions(extraction_id, status, created_ts);
+
+CREATE TABLE IF NOT EXISTS research_extraction_audit (
+  id TEXT PRIMARY KEY,
+  extraction_id TEXT NOT NULL REFERENCES research_extractions(id) ON DELETE CASCADE,
+  kind TEXT NOT NULL
+    CHECK(kind IN ('field_saved','verified','corrected','suggestion_accepted','promoted')),
+  field_key TEXT NOT NULL DEFAULT '',
+  old_json TEXT,
+  new_json TEXT,
+  reason TEXT NOT NULL DEFAULT '',
+  by_uid TEXT NOT NULL,
+  ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_extraction_audit_extraction
+  ON research_extraction_audit(extraction_id, ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_rob_assessments (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  study_id TEXT NOT NULL REFERENCES research_studies(id) ON DELETE CASCADE,
+  tool TEXT NOT NULL CHECK(tool IN ('rob2','robins_i','quadas2','nos')),
+  assessor_uid TEXT NOT NULL,
+  domains_json TEXT NOT NULL DEFAULT '[]',
+  overall TEXT NOT NULL DEFAULT '',
+  stars INTEGER,
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_rob_assessments_latest
+  ON research_rob_assessments(project_id, study_id, tool, assessor_uid, created_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_rob_conflicts (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  study_id TEXT NOT NULL REFERENCES research_studies(id) ON DELETE CASCADE,
+  tool TEXT NOT NULL CHECK(tool IN ('rob2','robins_i','quadas2','nos')),
+  status TEXT NOT NULL DEFAULT 'open' CHECK(status IN ('open','resolved')),
+  consensus_json TEXT,
+  note TEXT NOT NULL DEFAULT '',
+  resolved_by TEXT NOT NULL DEFAULT '',
+  resolved_ts INTEGER,
+  created_ts INTEGER NOT NULL,
+  UNIQUE(project_id, study_id, tool)
+);
+CREATE INDEX IF NOT EXISTS idx_research_rob_conflicts_project
+  ON research_rob_conflicts(project_id, status, created_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_data_dictionaries (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  version INTEGER NOT NULL CHECK(version >= 1),
+  columns_json TEXT NOT NULL DEFAULT '[]',
+  created_by TEXT NOT NULL DEFAULT '',
+  created_ts INTEGER NOT NULL,
+  UNIQUE(project_id, version)
+);
+CREATE INDEX IF NOT EXISTS idx_research_data_dictionaries_project
+  ON research_data_dictionaries(project_id, version DESC);
+
+CREATE TABLE IF NOT EXISTS research_data_imports (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  version INTEGER NOT NULL CHECK(version >= 1),
+  storage_key TEXT NOT NULL,
+  snapshot_key TEXT NOT NULL,
+  row_count INTEGER NOT NULL DEFAULT 0 CHECK(row_count >= 0),
+  rows_imported INTEGER NOT NULL DEFAULT 0 CHECK(rows_imported >= 0),
+  status TEXT NOT NULL CHECK(status IN ('ok','warnings','errors')),
+  checks_json TEXT NOT NULL DEFAULT '[]',
+  dictionary_version INTEGER NOT NULL CHECK(dictionary_version >= 1),
+  frozen INTEGER NOT NULL DEFAULT 0 CHECK(frozen IN (0, 1)),
+  frozen_ts INTEGER,
+  created_by TEXT NOT NULL DEFAULT '',
+  created_ts INTEGER NOT NULL,
+  UNIQUE(project_id, version)
+);
+CREATE INDEX IF NOT EXISTS idx_research_data_imports_project
+  ON research_data_imports(project_id, version DESC);
+
+CREATE TABLE IF NOT EXISTS research_screening_suggestions (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  record_id TEXT NOT NULL REFERENCES research_records(id) ON DELETE CASCADE,
+  payload_json TEXT NOT NULL DEFAULT '{}',
+  model TEXT NOT NULL DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'unverified'
+    CHECK(status IN ('unverified','accepted','rejected')),
+  created_by TEXT NOT NULL DEFAULT '',
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_screening_suggestions_record
+  ON research_screening_suggestions(project_id, record_id, created_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_grade_assessments (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  run_id TEXT NOT NULL REFERENCES research_runs(id) ON DELETE CASCADE,
+  outcome TEXT NOT NULL,
+  design TEXT NOT NULL CHECK(design IN ('rct','observational')),
+  input_json TEXT NOT NULL DEFAULT '{}',
+  result_json TEXT NOT NULL DEFAULT '{}',
+  baseline_risk REAL,
+  mid REAL,
+  version INTEGER NOT NULL DEFAULT 1 CHECK(version >= 1),
+  created_by TEXT NOT NULL DEFAULT '',
+  created_ts INTEGER NOT NULL,
+  updated_ts INTEGER NOT NULL,
+  UNIQUE(project_id, run_id)
+);
+CREATE INDEX IF NOT EXISTS idx_research_grade_assessments_project
+  ON research_grade_assessments(project_id, updated_ts DESC);

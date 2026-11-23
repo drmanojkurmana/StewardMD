@@ -1,6 +1,7 @@
 """Deterministic token renderer for ResearchMD manuscripts (Package 5A.3).
 
-Renders {{run:<runId>:<field>}} tokens to formatted strings per a strict rule table:
+Renders the canonical {{run:<runId>.<fieldPath>}} token (plan rule 6;
+contracts/phase-5/tokens.md) to formatted strings per a strict rule table:
 - effects: 2 decimals (e.g. 0.62)
 - p values: APA 7th edition rules (< .001, > .999, exact as .020 without leading zero)
 - CIs: formatted as (95% CI a to b)
@@ -14,7 +15,11 @@ from __future__ import annotations
 import re
 from typing import Any, Callable
 
-TOKEN_RE = re.compile(r"\{\{run:([A-Za-z0-9_-]+)[:.]([A-Za-z0-9_.]+)\}\}")
+# Canonical token: {{run:<runId>.<fieldPath>}} (contracts/phase-5/tokens.md).
+# The retired colon form {{run:<runId>:<path>}} is NOT accepted; in strict mode
+# it raises UnresolvedTokenError (malformed), in preview it is left untouched.
+TOKEN_RE = re.compile(r"\{\{run:([A-Za-z0-9_-]+)\.([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*)\}\}")
+LOOSE_TOKEN_RE = re.compile(r"\{\{run:([^}]*)\}\}")
 
 
 class UnresolvedTokenError(ValueError):
@@ -121,11 +126,13 @@ def normalize_runs(runs: list | dict) -> dict[str, dict]:
                 out[str(r["runId"])] = r
         return out
     if isinstance(runs, dict):
-        if any(":" in k for k in runs.keys()):
-            # Token table format: reconstruct run dicts
+        if any("." in k for k in runs.keys()):
+            # Token table format (canonical dot keys): reconstruct run dicts.
+            # runIds never contain a dot, so the first dot separates runId
+            # from the (possibly dotted) field path.
             out = {}
             for k, entry in runs.items():
-                run_id, _, field_path = k.partition(":")
+                run_id, _, field_path = k.partition(".")
                 if run_id not in out:
                     out[run_id] = {"runId": run_id, "result": {}}
                 val = entry.get("value") if isinstance(entry, dict) else entry
@@ -210,4 +217,11 @@ def render_tokens(text: str, runs: list | dict, *, strict: bool = False) -> str:
 
         return format_value_for_field(field_path, value)
 
-    return TOKEN_RE.sub(sub, text or "")
+    text = text or ""
+    if strict:
+        # A non-canonical {{run:...}} (e.g. the retired colon form) must never
+        # silently survive an export; fail loud with the offending token.
+        for match in LOOSE_TOKEN_RE.finditer(text):
+            if TOKEN_RE.fullmatch(match.group(0)) is None:
+                raise UnresolvedTokenError(match.group(0), "malformed token; canonical form is {{run:<runId>.<fieldPath>}}")
+    return TOKEN_RE.sub(sub, text)

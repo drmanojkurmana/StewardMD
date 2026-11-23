@@ -86,12 +86,13 @@ def _citation_keys_in_order(sections) -> list:
 
 def render_tokens(text: str, token_table: dict) -> str:
     """Deterministic token -> value substitution for previews. The canonical
-    manuscript text keeps tokens (plan rule 6). Unknown tokens are left as-is
-    so the gates can still flag them."""
+    manuscript text keeps tokens (plan rule 6; contracts/phase-5/tokens.md).
+    Unknown tokens are left as-is so the gates can still flag them."""
     def sub(match):
-        entry = token_table.get(f"{match.group(1)}:{match.group(2)}")
+        entry = token_table.get(f"{match.group(1)}.{match.group(2)}")
         return str(entry["value"]) if entry else match.group(0)
-    return re.sub(r"\{\{run:([A-Za-z0-9_-]+):([A-Za-z0-9_.]+)\}\}", sub, text)
+    return re.sub(r"\{\{run:([A-Za-z0-9_-]+)\.([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*)\}\}",
+                  sub, text)
 
 
 def build_manuscript(*, title, sections, token_table, references=None,

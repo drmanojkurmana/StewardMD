@@ -22,17 +22,17 @@ def test_builds_upstream_inputs(tmp_path):
     assert "Protocol lock hash" in idea
     assert "10.1000/trial1" in idea
     log = inputs.experimental_log_file.read_text()
-    assert "{{run:r1:estimate}}" in log
-    assert "{{run:r1:ciLower}}" in log
+    assert "{{run:r1.estimate}}" in log
+    assert "{{run:r1.ciLower}}" in log
     assert "research-engine.js" in log
 
 
 def test_token_table_flattens_runs():
     table = loader.build_token_table(make_manifest()["runs"])
-    assert table["r1:estimate"]["value"] == 0.62
-    assert table["r1:estimate"]["null"] == 1.0  # OR
-    assert table["r1:p"]["value"] == 0.02
-    assert table["r1:k"]["value"] == 12
+    assert table["r1.estimate"]["value"] == 0.62
+    assert table["r1.estimate"]["null"] == 1.0  # OR
+    assert table["r1.p"]["value"] == 0.02
+    assert table["r1.k"]["value"] == 12
 
 
 def test_null_for_ratio_vs_difference_measures():
@@ -94,3 +94,36 @@ def test_manifest_not_mutated(tmp_path):
     snapshot = copy.deepcopy(manifest)
     loader.build_inputs(manifest, tmp_path)
     assert manifest == snapshot
+
+
+def test_renders_rob_and_grade(tmp_path):
+    manifest = make_manifest()
+    manifest["rob"] = [{"studyId": "s1", "tool": "RoB 2", "domain": "randomization",
+                        "judgment": "low risk", "verified": True,
+                        "locator": {"page": 3}, "quote": "random sequence generated"}]
+    manifest["grade"] = [{"outcome": "Y", "certainty": "moderate",
+                          "rationale": "downgraded for risk of bias",
+                          "domains": {"risk_of_bias": "serious"}}]
+    inputs = loader.build_inputs(manifest, tmp_path)
+    idea = inputs.idea_file.read_text()
+    assert "Risk of bias" in idea and "low risk" in idea
+    assert "random sequence generated" in idea
+    assert "GRADE" in idea and "moderate certainty" in idea
+
+
+def test_refuses_unverified_rob(tmp_path):
+    manifest = make_manifest()
+    manifest["rob"] = [{"studyId": "s1", "tool": "RoB 2", "domain": "d",
+                        "judgment": "low", "verified": False,
+                        "locator": {"page": 1}, "quote": "q"}]
+    with pytest.raises(loader.LoaderError) as exc:
+        loader.build_inputs(manifest, tmp_path)
+    assert exc.value.code == "unverified_rob"
+
+
+def test_refuses_invalid_grade_certainty(tmp_path):
+    manifest = make_manifest()
+    manifest["grade"] = [{"outcome": "Y", "certainty": "certain"}]
+    with pytest.raises(loader.LoaderError) as exc:
+        loader.build_inputs(manifest, tmp_path)
+    assert exc.value.code == "invalid_grade"

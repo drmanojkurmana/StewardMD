@@ -46,7 +46,7 @@ def test_outline_step_end_to_end_with_mocked_llm(tmp_path):
     assert body["tier"] == "T2"
     # The assembled prompt carried the ResearchMD inputs, not CVPR materials.
     assert "Protocol lock hash" in body["prompt"]
-    assert "{{run:r1:estimate}}" in body["prompt"]
+    assert "{{run:r1.estimate}}" in body["prompt"]
     assert "IMRAD" in body["prompt"]
 
     # Token usage recorded; no provider client was ever created.
@@ -98,7 +98,7 @@ def test_full_manuscript_chain_with_mocked_llm(tmp_path):
     assert len(requests) == len(client.usage)
     assert all(str(r.url) == GATEWAY_URL for r in requests)
     results = next(s for s in manuscript["sections"] if s["id"] == "results")
-    assert "{{run:r1:estimate}}" in results["text"]
+    assert "{{run:r1.estimate}}" in results["text"]
 
 
 def test_literature_suggester_uses_our_connectors(tmp_path, monkeypatch):
@@ -142,12 +142,12 @@ def test_gate_violation_blocks_autorater_score(tmp_path):
     client, requests = make_gateway(review_scores=[5, 7, 8])
     manifest = make_manifest()
     table = build_token_table(manifest["runs"])
-    bad_draft = DRAFT_V0.replace("{{run:r1:estimate}}", "0.62")
+    bad_draft = DRAFT_V0.replace("{{run:r1.estimate}}", "0.62")
     final_tex, ctx = pipeline.run_refinement(
         manifest, tmp_path, client, bad_draft,
         {"ref1": manifest["references"][0]}, table)
     # The untokenised draft was blocked BEFORE any reviewer call; the loop
     # then refined to a clean draft which scored and was accepted.
     assert any(v["gate"] == "untokenised_number" for v in ctx["gate_hits"])
-    assert "{{run:r1:estimate}}" in final_tex
+    assert "{{run:r1.estimate}}" in final_tex
     assert "OR 0.62" not in final_tex

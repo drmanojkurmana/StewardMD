@@ -22,13 +22,13 @@ def test_version_hash_stable_across_key_order():
         "title": "Meta-analysis of Intervention X",
         "sections": [
             {"id": "introduction", "heading": "Introduction", "level": 1, "text": "Background info."},
-            {"id": "results", "heading": "Results", "level": 1, "text": "OR {{run:r1:estimate}}."},
+            {"id": "results", "heading": "Results", "level": 1, "text": "OR {{run:r1.estimate}}."},
         ],
         "references": [
             {"key": "ref1", "doi": "10.1000/1", "title": "Paper 1"},
         ],
         "tokens": {
-            "r1:estimate": {"value": 0.62},
+            "r1.estimate": {"value": 0.62},
         },
         "metadata": {"tags": ["review", "cardiology"], "author_count": 2},
     }
@@ -36,14 +36,14 @@ def test_version_hash_stable_across_key_order():
     m2 = {
         "metadata": {"author_count": 2, "tags": ["review", "cardiology"]},
         "tokens": {
-            "r1:estimate": {"value": 0.62},
+            "r1.estimate": {"value": 0.62},
         },
         "references": [
             {"title": "Paper 1", "key": "ref1", "doi": "10.1000/1"},
         ],
         "sections": [
             {"heading": "Introduction", "level": 1, "text": "Background info.", "id": "introduction"},
-            {"level": 1, "heading": "Results", "text": "OR {{run:r1:estimate}}.", "id": "results"},
+            {"level": 1, "heading": "Results", "text": "OR {{run:r1.estimate}}.", "id": "results"},
         ],
         "title": "Meta-analysis of Intervention X",
     }

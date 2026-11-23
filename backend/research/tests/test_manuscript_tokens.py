@@ -122,8 +122,8 @@ def test_rule_table_coverage():
 
 def test_render_tokens_deterministic(sample_runs):
     text = (
-        "Primary outcome OR {{run:r1:estimate}} {{run:r1:ci}} (p {{run:r1:p}}). "
-        "Heterogeneity I2 was {{run:r1:i2}} across {{run:r1:k}} trials."
+        "Primary outcome OR {{run:r1.estimate}} {{run:r1.ci}} (p {{run:r1.p}}). "
+        "Heterogeneity I2 was {{run:r1.i2}} across {{run:r1.k}} trials."
     )
     rendered = render_tokens(text, sample_runs, strict=True)
     expected = (
@@ -134,34 +134,43 @@ def test_render_tokens_deterministic(sample_runs):
 
 
 def test_render_tokens_apa_p_boundary(sample_runs):
-    text_small_p = "Effect {{run:r2:estimate}} {{run:r2:ci}} with p {{run:r2:p}}."
+    text_small_p = "Effect {{run:r2.estimate}} {{run:r2.ci}} with p {{run:r2.p}}."
     rendered_small = render_tokens(text_small_p, sample_runs, strict=True)
     assert "Effect -2.41 (95% CI -4.10 to -0.71) with p < .001." == rendered_small
 
-    text_large_p = "Effect {{run:r3:estimate}} with p {{run:r3:p}}."
+    text_large_p = "Effect {{run:r3.estimate}} with p {{run:r3.p}}."
     rendered_large = render_tokens(text_large_p, sample_runs, strict=True)
     assert "Effect 1.00 with p > .999." == rendered_large
 
 
 def test_render_tokens_nested_dot_path(sample_runs):
-    text = "Subgroup effect was {{run:r1:subgroup.active.estimate}}."
+    text = "Subgroup effect was {{run:r1.subgroup.active.estimate}}."
     rendered = render_tokens(text, sample_runs, strict=True)
     assert rendered == "Subgroup effect was 0.55."
 
 
 def test_render_tokens_unresolved_strict_raises(sample_runs):
-    text_bad_run = "Result {{run:r99:estimate}}."
+    text_bad_run = "Result {{run:r99.estimate}}."
     with pytest.raises(UnresolvedTokenError) as exc_info:
         render_tokens(text_bad_run, sample_runs, strict=True)
     assert "r99" in str(exc_info.value)
 
-    text_bad_field = "Result {{run:r1:nonexistent_metric}}."
+    text_bad_field = "Result {{run:r1.nonexistent_metric}}."
     with pytest.raises(UnresolvedTokenError) as exc_info2:
         render_tokens(text_bad_field, sample_runs, strict=True)
     assert "nonexistent_metric" in str(exc_info2.value)
 
 
 def test_render_tokens_preview_preserves_unknown(sample_runs):
-    text = "Known {{run:r1:estimate}}, unknown {{run:r99:metric}}."
+    text = "Known {{run:r1.estimate}}, unknown {{run:r99.metric}}."
     rendered = render_tokens(text, sample_runs, strict=False)
-    assert rendered == "Known 0.62, unknown {{run:r99:metric}}."
+    assert rendered == "Known 0.62, unknown {{run:r99.metric}}."
+
+
+def test_render_tokens_strict_rejects_retired_colon_form(sample_runs):
+    with pytest.raises(UnresolvedTokenError):
+        render_tokens("Effect {{run:r1:estimate}}.", sample_runs, strict=True)
+
+
+def test_render_tokens_preview_leaves_colon_form(sample_runs):
+    assert render_tokens("{{run:r1:estimate}}", sample_runs, strict=False) == "{{run:r1:estimate}}"

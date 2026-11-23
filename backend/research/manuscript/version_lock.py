@@ -34,7 +34,8 @@ def _extract_run_ids(manuscript_json: dict, run_ids: list[str] | None = None) ->
     tokens = manuscript_json.get("tokens") or {}
     if isinstance(tokens, dict):
         for k in tokens.keys():
-            run_id = k.split(":")[0] if ":" in k else k
+            # Canonical token keys are "<runId>.<fieldPath>"; runIds carry no dot.
+            run_id = k.split(".", 1)[0]
             if run_id:
                 ids.add(run_id)
     return sorted(ids)

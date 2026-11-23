@@ -18,12 +18,15 @@ Manifest shape (v1):
   "runs": [{"runId", "engine", "engineVersion", "measure", "method",
             "result": {"estimate", "ciLower", "ciUpper", "p", "k", ...}}],
   "references": [{"key", "title", "authors", "year", "venue",
-                  "doi", "pmid", "volume", "pages"}]
+                  "doi", "pmid", "volume", "pages"}],
+  "rob": [{"studyId", "tool", "domain", "judgment", "verified": true,
+           "locator": {...}, "quote": "..."}],
+  "grade": [{"outcome", "certainty", "rationale", "domains": {...}}]
 }
 
-Numbers reach the model as {{run:<runId>:<path>}} tokens (task 3.7 form; plan
-rule 6 writes {{run:<id>.<field>}} - the colon form is what the 3.7 gates and
-tests use; flagged in SEAMS.md as a contract wording drift to reconcile).
+Numbers reach the model as {{run:<runId>.<fieldPath>}} tokens, the ONE canonical
+format (plan rule 6; contracts/phase-5/tokens.md). The 3.7 colon form
+{{run:<runId>:<path>}} is retired; gates flag it as malformed_token.
 The log also shows the internal value so the model can reason about direction;
 the hard gates (gates.py) reject any untokenised number in Results/Abstract.
 """
@@ -34,7 +37,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 RATIO_MEASURES = {"OR", "RR", "HR", "ROM", "IRR", "RRR"}
-TOKEN_TEMPLATE = "{{run:%s:%s}}"
+# Canonical token format (contracts/phase-5/tokens.md): {{run:<runId>.<fieldPath>}}.
+TOKEN_TEMPLATE = "{{run:%s.%s}}"
+GRADE_CERTAINTIES = {"high", "moderate", "low", "very low"}
 
 
 class LoaderError(ValueError):
@@ -64,7 +69,7 @@ def build_token_table(runs: list) -> dict:
             raise LoaderError("invalid_run", str(run_id))
         null = null_for_measure(run.get("measure", ""))
         for path, value in _flatten_numeric(run["result"]):
-            table[f"{run_id}:{path}"] = {
+            table[f"{run_id}.{path}"] = {
                 "value": value, "null": null,
                 "measure": run.get("measure", ""), "runId": run_id,
             }
@@ -86,6 +91,19 @@ def validate_manifest(manifest: dict) -> None:
             if not value.get("locator") or not value.get("quote"):
                 raise LoaderError("missing_provenance",
                                   f"{study.get('studyId')}.{value.get('field')}")
+    for assessment in manifest.get("rob") or []:
+        if assessment.get("verified") is not True:
+            raise LoaderError("unverified_rob",
+                              f"{assessment.get('studyId')}.{assessment.get('domain')}")
+        if not assessment.get("locator") or not assessment.get("quote"):
+            raise LoaderError("missing_provenance",
+                              f"rob {assessment.get('studyId')}.{assessment.get('domain')}")
+    for row in manifest.get("grade") or []:
+        if not row.get("outcome"):
+            raise LoaderError("invalid_grade", "GRADE row without outcome")
+        if str(row.get("certainty", "")).lower() not in GRADE_CERTAINTIES:
+            raise LoaderError("invalid_grade",
+                              f"unknown certainty {row.get('certainty')!r}")
     for ref in manifest.get("references") or []:
         if not ref.get("key"):
             raise LoaderError("invalid_reference", "reference without key")
@@ -126,7 +144,7 @@ References: Vancouver style, numbered in order of first citation.
 Integrity rules (hard gates enforce these in code before any reviewer score):
 1. Every statistical number in Abstract and Results (effects, confidence
    intervals, p-values, sample sizes, heterogeneity) MUST be inserted as the
-   token {{run:<runId>:<path>}} exactly as listed in experimental_log.md.
+   token {{run:<runId>.<fieldPath>}} exactly as listed in experimental_log.md.
    Never type a raw statistical number. Years, reviewer counts and stated
    thresholds are the only allowed bare numbers.
 2. Every citation MUST use a key from the provided reference library
@@ -169,6 +187,28 @@ def _render_idea(manifest: dict) -> str:
             lines.append(f"- {value.get('field')}: {value.get('value')} "
                          f"(locator: {loc_str}; quote: \"{value.get('quote')}\")")
         lines.append("")
+    rob = manifest.get("rob") or []
+    if rob:
+        lines.append("## Risk of bias (human-verified judgments)")
+        for assessment in rob:
+            loc = assessment.get("locator") or {}
+            loc_str = loc.get("page") or loc.get("section") or json.dumps(loc, sort_keys=True)
+            lines.append(
+                f"- {assessment.get('studyId', '')} [{assessment.get('tool', '')}] "
+                f"{assessment.get('domain', '')}: {assessment.get('judgment', '')} "
+                f"(locator: {loc_str}; quote: \"{assessment.get('quote', '')}\")")
+        lines.append("")
+    grade = manifest.get("grade") or []
+    if grade:
+        lines.append("## GRADE certainty of evidence (Summary of Findings)")
+        for row in grade:
+            lines.append(f"- {row.get('outcome', '')}: {row.get('certainty', '')} certainty. "
+                         f"{row.get('rationale', '')}".rstrip())
+            domains = row.get("domains") or {}
+            if domains:
+                lines.append("  domains: " + ", ".join(
+                    f"{k}={v}" for k, v in domains.items()))
+        lines.append("")
     return "\n".join(lines)
 
 
@@ -181,8 +221,8 @@ def _render_log(manifest: dict, token_table: dict) -> str:
         for path, entry in token_table.items():
             if entry["runId"] != run.get("runId"):
                 continue
-            token = TOKEN_TEMPLATE % (entry["runId"], path.split(":", 1)[1])
-            lines.append(f"- {path.split(':', 1)[1]}: {token} "
+            token = TOKEN_TEMPLATE % (entry["runId"], path.split(".", 1)[1])
+            lines.append(f"- {path.split('.', 1)[1]}: {token} "
                          f"(internal value {entry['value']}; null {entry['null']}. "
                          f"Insert the TOKEN in Abstract/Results, never the number.)")
         lines.append("")

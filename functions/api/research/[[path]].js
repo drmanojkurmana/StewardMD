@@ -38,6 +38,19 @@ import { uploadPdf, createJob, getJob, cancelJob } from "./_jobs.js";
 import { jobCallback } from "./_callback.js";
 import { llmRoute, literatureSearchRoute } from "./_gateway.js";
 import { adminInstitutionRoute, creditsView } from "./_credits.js";
+/* Phase 3.4/3.5/3.6/3.8 + Phase 4.3 (docs/research/contracts/phase-3 and
+ * phase-4/grade.md): extraction (_extraction.js), T1 suggestions (_suggest.js),
+ * risk of bias (_rob.js), study-level data import (_data.js) and GRADE
+ * (_grade.js). Small route hooks below; every route verifies Firebase claims
+ * (above) and the project role, and an outsider gets 404. */
+import { extractionTemplates, getExtraction, putExtraction, verifyExtraction,
+  correctExtraction, extractionAudit, acceptSuggestion, promoteExtraction,
+  listArtifacts, uploadPdfArtifact, artifactResult } from "./_extraction.js";
+import { extractionSuggestions, screeningSuggestion, listScreeningSuggestions } from "./_suggest.js";
+import { robTools, getRob, submitRob, listRobConflicts, resolveRobConflict, robAudit } from "./_rob.js";
+import { getDictionary, putDictionary, uploadData, createDataImport,
+  listDataImports, getDataImport, getDataSnapshot, freezeDataImport } from "./_data.js";
+import { listGrade, getGrade, putGrade, summaryOfFindings, gradeSuggestions } from "./_grade.js";
 
 const MAX_JSON = 1024 * 1024;
 const MAX_PDF = 25 * 1024 * 1024;
@@ -1853,6 +1866,98 @@ export async function onRequest({ request, env, params }) {
   if (p3Cancel && request.method === "POST")
     return cancelJob(p3Ctx, p3Cancel[1]);
   if (path === "/v1/credits" && request.method === "GET") return creditsView(p3Ctx);
+
+  /* ---- Phase 3.4/3.5/3.6/3.8 + Phase 4.3 routes (Firebase auth above; each
+   * module enforces the project role and answers 404 to an outsider). ---- */
+  const p3bBody = async () => { try { return await bodyJson(request); } catch (e) { return null; } };
+  if (path === "/v1/extraction-templates" && request.method === "GET") return extractionTemplates(p3Ctx);
+  if (path === "/v1/rob-tools" && request.method === "GET") return robTools(p3Ctx);
+
+  const extStudy = path.match(/^\/v1\/projects\/([^/]+)\/studies\/([^/]+)\/extraction$/);
+  if (extStudy && request.method === "GET") return getExtraction(p3Ctx, extStudy[1], extStudy[2], url);
+  if (extStudy && request.method === "PUT") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid extraction payload", requestId);
+    return putExtraction(p3Ctx, extStudy[1], extStudy[2], body);
+  }
+  const extSug = path.match(/^\/v1\/projects\/([^/]+)\/studies\/([^/]+)\/extraction\/suggestions$/);
+  if (extSug && request.method === "POST") {
+    const body = await p3bBody();
+    return extractionSuggestions(p3Ctx, extSug[1], extSug[2], body || {});
+  }
+  const extAction = path.match(/^\/v1\/extractions\/([^/]+)\/(verify|correct|audit|promote)$/);
+  if (extAction && request.method === "GET" && extAction[2] === "audit") return extractionAudit(p3Ctx, extAction[1]);
+  if (extAction && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid extraction payload", requestId);
+    if (extAction[2] === "verify") return verifyExtraction(p3Ctx, extAction[1], body);
+    if (extAction[2] === "correct") return correctExtraction(p3Ctx, extAction[1], body);
+    if (extAction[2] === "promote") return promoteExtraction(p3Ctx, extAction[1], body);
+  }
+  const extAccept = path.match(/^\/v1\/extractions\/([^/]+)\/suggestions\/([^/]+)\/accept$/);
+  if (extAccept && request.method === "POST") {
+    const body = await p3bBody();
+    return acceptSuggestion(p3Ctx, extAccept[1], extAccept[2], body || {});
+  }
+
+  const robStudy = path.match(/^\/v1\/projects\/([^/]+)\/studies\/([^/]+)\/rob$/);
+  if (robStudy && request.method === "GET") return getRob(p3Ctx, robStudy[1], robStudy[2], url);
+  if (robStudy && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid risk-of-bias payload", requestId);
+    return submitRob(p3Ctx, robStudy[1], robStudy[2], body);
+  }
+  const robAuditRoute = path.match(/^\/v1\/projects\/([^/]+)\/studies\/([^/]+)\/rob\/audit$/);
+  if (robAuditRoute && request.method === "GET") return robAudit(p3Ctx, robAuditRoute[1], robAuditRoute[2], url);
+  const robConfCol = path.match(/^\/v1\/projects\/([^/]+)\/rob-conflicts$/);
+  if (robConfCol && request.method === "GET") return listRobConflicts(p3Ctx, robConfCol[1], url);
+  const robConfResolve = path.match(/^\/v1\/rob-conflicts\/([^/]+)\/resolve$/);
+  if (robConfResolve && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid consensus payload", requestId);
+    return resolveRobConflict(p3Ctx, robConfResolve[1], body);
+  }
+
+  const artCol = path.match(/^\/v1\/projects\/([^/]+)\/artifacts$/);
+  if (artCol && request.method === "GET") return listArtifacts(p3Ctx, artCol[1]);
+  const pdfUp = path.match(/^\/v1\/projects\/([^/]+)\/pdf-uploads$/);
+  if (pdfUp && request.method === "POST") return uploadPdfArtifact(Object.assign({}, p3Ctx, { projectId: pdfUp[1] }));
+  const artResult = path.match(/^\/v1\/artifacts\/([^/]+)\/result$/);
+  if (artResult && request.method === "GET") return artifactResult(p3Ctx, artResult[1]);
+
+  const dictRoute = path.match(/^\/v1\/projects\/([^/]+)\/data-dictionary$/);
+  if (dictRoute && request.method === "GET") return getDictionary(p3Ctx, dictRoute[1]);
+  if (dictRoute && request.method === "PUT") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid dictionary payload", requestId);
+    return putDictionary(p3Ctx, dictRoute[1], body);
+  }
+  const dataUp = path.match(/^\/v1\/projects\/([^/]+)\/data-uploads$/);
+  if (dataUp && request.method === "POST") return uploadData(Object.assign({}, p3Ctx, { projectId: dataUp[1] }));
+  const dataImpCol = path.match(/^\/v1\/projects\/([^/]+)\/data-imports$/);
+  if (dataImpCol && request.method === "GET") return listDataImports(p3Ctx, dataImpCol[1], url);
+  if (dataImpCol && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid data import payload", requestId);
+    return createDataImport(p3Ctx, dataImpCol[1], body);
+  }
+  const dataImpSnap = path.match(/^\/v1\/data-imports\/([^/]+)\/snapshot$/);
+  if (dataImpSnap && request.method === "GET") return getDataSnapshot(p3Ctx, dataImpSnap[1]);
+  const dataImpFreeze = path.match(/^\/v1\/data-imports\/([^/]+)\/freeze$/);
+  if (dataImpFreeze && request.method === "POST") return freezeDataImport(p3Ctx, dataImpFreeze[1]);
+  const dataImpOne = path.match(/^\/v1\/data-imports\/([^/]+)$/);
+  if (dataImpOne && request.method === "GET") return getDataImport(p3Ctx, dataImpOne[1]);
+
+  const screenSug = path.match(/^\/v1\/projects\/([^/]+)\/records\/([^/]+)\/screening-suggestions$/);
+  if (screenSug && request.method === "GET") return listScreeningSuggestions(p3Ctx, screenSug[1], screenSug[2]);
+  if (screenSug && request.method === "POST") return screeningSuggestion(p3Ctx, screenSug[1], screenSug[2]);
+
+  const gradeCol = path.match(/^\/v1\/projects\/([^/]+)\/grade-assessments$/);
+  if (gradeCol && request.method === "GET") return listGrade(p3Ctx, gradeCol[1]);
+  if (gradeCol && request.method === "PUT") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid GRADE payload", requestId);
+    return putGrade(p3Ctx, gradeCol[1], body);
+  }
+  const gradeOne = path.match(/^\/v1\/projects\/([^/]+)\/grade-assessments\/([^/]+)$/);
+  if (gradeOne && request.method === "GET") return getGrade(p3Ctx, gradeOne[1], gradeOne[2]);
+  const sofRoute = path.match(/^\/v1\/projects\/([^/]+)\/summary-of-findings$/);
+  if (sofRoute && request.method === "GET") return summaryOfFindings(p3Ctx, sofRoute[1]);
+  const gradeSug = path.match(/^\/v1\/projects\/([^/]+)\/grade-suggestions$/);
+  if (gradeSug && request.method === "GET") return gradeSuggestions(p3Ctx, gradeSug[1], url);
 
   if (path === "/v1/projects" && request.method === "POST") {
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid project payload", requestId); }

@@ -205,6 +205,23 @@ def run_job(
     return {"status": "done", "settled": ok, "skipped": False, "error": None}
 
 
+def handler_for(kind):
+    """Resolve (validate_message, run_job) for a job kind, or None for an
+    unknown kind (the message retries to the DLQ). Handler modules are imported
+    lazily so the pdf_extract worker never pays for the stats/manuscript deps
+    unless that kind is actually delivered. Each handler owns its own message
+    validation and ceilings (stats/job.py, manuscript/job.py)."""
+    if kind == "pdf_extract":
+        return validate_message, run_job
+    if kind == "stats_model":
+        from stats import job as stats_job
+        return stats_job.validate_message, stats_job.run_job
+    if kind == "manuscript_draft":
+        from manuscript import job as manuscript_job
+        return manuscript_job.validate_message, manuscript_job.run_job
+    return None
+
+
 def drain_once(
     queue,
     storage,
@@ -230,15 +247,23 @@ def drain_once(
             queue.retry(message.lease_id, delay_seconds=RETRY_DELAY_SECONDS)
             counts["retried"] += 1
             continue
+        handler = handler_for(message.body.get("kind"))
+        if handler is None:
+            log.warning("unknown kind %r in %s; retrying to DLQ",
+                        message.body.get("kind"), message.id)
+            queue.retry(message.lease_id, delay_seconds=RETRY_DELAY_SECONDS)
+            counts["retried"] += 1
+            continue
+        validate, runner = handler
         try:
-            validate_message(message.body)
+            validate(message.body)
         except ValueError as exc:
             log.warning("invalid message %s: %s; retrying to DLQ", message.id, exc)
             queue.retry(message.lease_id, delay_seconds=RETRY_DELAY_SECONDS)
             counts["retried"] += 1
             continue
         try:
-            outcome = run_job(
+            outcome = runner(
                 message.body,
                 storage=storage,
                 callback_client=callback_client,

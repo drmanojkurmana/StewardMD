@@ -105,18 +105,23 @@ records with DOI/PMID enter the citation library.
 
 Adapter: `po_adapter/loader.py` `build_inputs(manifest, workdir)`. No upstream
 patch needed: the loader writes the files upstream reads. Builds idea.md
-(protocol + PICO + verified evidence with locator and quote per value),
-experimental_log.md (analysis runs as `{{run:<runId>:<path>}}` tokens with
-engine name/version), an adapter-authored IMRAD template.tex and
-guidelines.md (NOT the vendored CVPR/ICLR templates), figures/info.json = []
-(plots deterministic). REFUSES: unverified extraction values
-(`unverified_value`), missing locator/quote (`missing_provenance`), unlocked
-protocol (`protocol_unlocked`), malformed runs/manifest. Token table written
-to workdir/token_table.json for gates and writer.
+(protocol + PICO + verified evidence with locator and quote per value, plus
+human-verified RoB judgments and GRADE certainty rows), experimental_log.md
+(analysis runs as `{{run:<runId>.<fieldPath>}}` tokens with engine name/version),
+an adapter-authored IMRAD template.tex and guidelines.md (NOT the vendored
+CVPR/ICLR templates), figures/info.json = [] (plots deterministic). REFUSES:
+unverified extraction values (`unverified_value`), unverified RoB judgments
+(`unverified_rob`), missing locator/quote (`missing_provenance`), unlocked
+protocol (`protocol_unlocked`), invalid GRADE certainty (`invalid_grade`),
+malformed runs/manifest. Token table written to workdir/token_table.json for
+gates and writer.
 
-Contract wording drift to reconcile: plan rule 6 writes `{{run:<id>.<field>}}`
-(dot); the 3.7 brief and these gates use `{{run:<runId>:<path>}}` (colon).
-Implemented: colon form. One reviewed contract edit should pick one.
+Token format drift RESOLVED (Phase 5A): the canonical format is the plan's dot
+form `{{run:<id>.<field>}}`, written down in
+`docs/research/contracts/phase-5/tokens.md`. The 3.7 colon form
+`{{run:<runId>:<path>}}` is retired; gates flag it `malformed_token` and strict
+rendering raises `UnresolvedTokenError`. Loader, gates, writer, the manuscript
+renderer and version lock all use dot keys.
 
 ## Seam 4: output writer
 
@@ -228,7 +233,8 @@ Conditions / costs to accept with the adapter route:
 3. The literature-search API endpoint and the gateway wire shape are
    proposals pending the 3.5/API builders (functions/** is another package).
 4. scholar_utils.py:28 prints the S2 key env at import (None in the worker).
-5. Token format drift (dot vs colon) needs one reviewed contract edit.
+5. Token format drift (dot vs colon) RESOLVED in Phase 5A: canonical dot form,
+   `docs/research/contracts/phase-5/tokens.md`; colon form rejected.
 
 If any of these proves blocking in 5A, the prompts-only fallback is cheap:
 the prompts live in `methods/prompts/*` and `autoraters/prompts/*` and the

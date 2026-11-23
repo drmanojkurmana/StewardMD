@@ -19,8 +19,8 @@
     },
     "kind": {
       "type": "string",
-      "enum": ["pdf_extract"],
-      "description": "Phase 3.2 implements pdf_extract only. New kinds are a contract change, not a silent extension."
+      "enum": ["pdf_extract", "stats_model", "manuscript_draft"],
+      "description": "Registered job kinds. pdf_extract (Phase 3.2) is fully described by the input/ceilings blocks below. stats_model (Phase 5D) and manuscript_draft (Phase 5A) carry their own input/ceilings shapes, documented in docs/research/contracts/phase-5/job-messages.md; the worker routes each kind to its own validator (research_worker.jobs.handler_for). New kinds are a contract change, not a silent extension."
     },
     "projectId": {
       "type": "string",
