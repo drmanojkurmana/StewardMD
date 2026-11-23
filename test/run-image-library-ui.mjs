@@ -83,7 +83,51 @@ try {
   const pos1 = await ev(`return document.querySelector('#smdImgLib .igl-vpos').textContent;`);
   await click('#smdImgLib [data-igl="vnext"]');
   ok(await until(`return document.querySelector('#smdImgLib .igl-vpos').textContent!==${JSON.stringify(pos1)};`, 5000), "Next moves to the next image (swipe target)");
-  await ev(`var s=document.querySelector('#smdImgLib .igl-vstage'); ['touchstart','touchmove','touchend'].forEach(function(n){}); return 1;`);
+
+  /* Drive viewer gestures: double tap, pan, swipe navigation at fit size */
+  const dblTap = `
+    var st = document.querySelector('#smdImgLib .igl-vstage');
+    var r = st.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    st.dispatchEvent(new PointerEvent('pointerdown', { pointerId: 1, clientX: cx + 30, clientY: cy + 20, bubbles: true }));
+    st.dispatchEvent(new PointerEvent('pointerup', { pointerId: 1, clientX: cx + 30, clientY: cy + 20, bubbles: true }));
+    st.dispatchEvent(new PointerEvent('pointerdown', { pointerId: 1, clientX: cx + 30, clientY: cy + 20, bubbles: true }));
+    st.dispatchEvent(new PointerEvent('pointerup', { pointerId: 1, clientX: cx + 30, clientY: cy + 20, bubbles: true }));
+    return 1;
+  `;
+  await ev(dblTap);
+  ok(await until(`var st = SMD_IMGLIB._state(); return !!(st && st.s >= 2.4);`, 3000), "double tap zooms to 2.5x at the tap point");
+  ok(await ev(`var img = document.querySelector('#smdImgLib .igl-vimg'); return /translate3d/.test(img.style.transform) && /scale\\(2\\.5/.test(img.style.transform);`) === true, "transform includes translate3d and scale(2.5)");
+
+  await sleep(400); // let transition complete
+  // Double tap again settles back to fit
+  await ev(dblTap);
+  ok(await until(`var st = SMD_IMGLIB._state(); return !!(st && st.s === 1);`, 3000), "second double tap zooms back to fit (100%)");
+  await sleep(350); // wait for 260ms transition to settle
+
+  // Swipe left at fit size navigates to next image
+  const posBeforeSwipe = await ev(`return document.querySelector('#smdImgLib .igl-vpos').textContent;`);
+  const swipeLeft = `
+    var st = document.querySelector('#smdImgLib .igl-vstage');
+    var r = st.getBoundingClientRect(), cy = r.top + r.height / 2;
+    st.dispatchEvent(new PointerEvent('pointerdown', { pointerId: 2, clientX: 280, clientY: cy, bubbles: true }));
+    st.dispatchEvent(new PointerEvent('pointermove', { pointerId: 2, clientX: 180, clientY: cy + 2, bubbles: true }));
+    st.dispatchEvent(new PointerEvent('pointerup', { pointerId: 2, clientX: 180, clientY: cy + 2, bubbles: true }));
+    return 1;
+  `;
+  await ev(swipeLeft);
+  ok(await until(`return document.querySelector('#smdImgLib .igl-vpos').textContent!==${JSON.stringify(posBeforeSwipe)};`, 5000), "swipe left at fit size navigates to next image");
+
+  // Zoom in, then swipe left: does NOT navigate while zoomed
+  await ev(dblTap);
+  ok(await until(`var st = SMD_IMGLIB._state(); return !!(st && st.s >= 2.4);`, 3000), "zoomed in again");
+  await sleep(350); // wait for transition
+  const posWhileZoomed = await ev(`return document.querySelector('#smdImgLib .igl-vpos').textContent;`);
+  await ev(swipeLeft);
+  await sleep(400);
+  ok(await ev(`return document.querySelector('#smdImgLib .igl-vpos').textContent===${JSON.stringify(posWhileZoomed)};`) === true, "swipe left while zoomed does NOT navigate (pans instead)");
+  await ev(dblTap);
+  await sleep(350);
+
   await shot("viewer");
   await click('#smdImgLib [data-igl="vclose"]');
   ok(await until(`return document.querySelector('#smdImgLib .igl-viewer').hidden;`, 5000), "viewer close returns to the grid");

@@ -194,3 +194,55 @@ test("builder: Qbank images join the bank, Commons ones attributed and linked", 
     } else assert.equal(e.lk, "prep");
   }
 });
+
+test("viewer gesture maths: pinch about an off-centre point keeps that point still", () => {
+  const pure = PURE.getViewerPure();
+  const t = { x: 20, y: -30 };
+  const s = 1.5;
+  const s2 = 3.0;
+  const f = { x: 120, y: 60 }; // off-centre focal point
+
+  const t2 = pure.zoomAt(t, s, s2, f);
+
+  // The point on the image under f before zoom is q:
+  const q = { x: (f.x - t.x) / s, y: (f.y - t.y) / s };
+  // After zoom to s2 and translation t2, q must still be under f:
+  assert.ok(Math.abs(t2.x + s2 * q.x - f.x) < 1e-9, "X focal point is stationary");
+  assert.ok(Math.abs(t2.y + s2 * q.y - f.y) < 1e-9, "Y focal point is stationary");
+});
+
+test("viewer gesture maths: pan is clamped to image bounds", () => {
+  const pure = PURE.getViewerPure();
+  // Image laid out 300x200 in 400x600 stage at 2x scale:
+  // Rendered image is 600x400. In W=400, overflow is 200, so bounds.x = 100.
+  // In H=600, 400 < 600, so bounds.y = 0 (centred).
+  assert.deepEqual(pure.bounds(2, 300, 200, 400, 600), { x: 100, y: 0 });
+
+  // Excessive pan is clamped to bounds:
+  assert.deepEqual(pure.clampPan({ x: 500, y: -80 }, 2, 300, 200, 400, 600), { x: 100, y: 0 });
+  assert.deepEqual(pure.clampPan({ x: -250, y: 80 }, 2, 300, 200, 400, 600), { x: -100, y: 0 });
+
+  // Pan at 1x fit size is clamped to (0, 0):
+  assert.deepEqual(pure.clampPan({ x: 50, y: 50 }, 1, 300, 200, 400, 600), { x: 0, y: 0 });
+
+  // Soft pan applies rubber band resistance past edge:
+  const p = pure.softPan({ x: 300, y: 0 }, 2, 300, 200, 400, 600);
+  assert.ok(p.x > 100, "moves past the edge");
+  assert.ok(p.x < 100 + 400 / 3, "rubber banding limits movement to at most a third of stage");
+});
+
+test("viewer gesture maths: swipe navigates only at fit (scale <= 1.01)", () => {
+  // At fit size (scale 1.0): horizontal drag triggers navigation
+  assert.equal(PURE.shouldSwipeNav(1.0, -80, 10), true, "left swipe at 1x navigates to next");
+  assert.equal(PURE.shouldSwipeNav(1.0, 80, 10), true, "right swipe at 1x navigates to prev");
+  assert.equal(PURE.shouldSwipeNav(1.01, -70, 5), true, "swipe at threshold 1.01x navigates");
+
+  // While zoomed (scale > 1.01): drag MUST pan the image, never navigate
+  assert.equal(PURE.shouldSwipeNav(1.02, -80, 10), false, "drag at 1.02x does not navigate");
+  assert.equal(PURE.shouldSwipeNav(2.0, -150, 0), false, "horizontal drag at 2x does not navigate");
+  assert.equal(PURE.shouldSwipeNav(2.5, 200, 10), false, "horizontal drag at 2.5x does not navigate");
+
+  // Non-swipe drags at 1x (below threshold or vertical) do not navigate
+  assert.equal(PURE.shouldSwipeNav(1.0, -30, 5), false, "small drag (<60px) does not navigate");
+  assert.equal(PURE.shouldSwipeNav(1.0, -70, 60), false, "vertical/diagonal drag does not navigate");
+});
