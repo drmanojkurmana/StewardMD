@@ -70,3 +70,10 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   `kb/tools/kb-placement.mjs`). The viewer shows "Open the lesson" (Pro; paywall without) and "Read the article"
   (opens `SMD_KB.open(ka)` and scrolls to the figure); entries with neither keep the old single link.
   Test: `test/run-imglib-links-ui.mjs`. Larger entries leave a little less of each system's Commons budget.
+- **Teaching animations (owner 2026-11-23):** one GIF per mechanism, shared by every module (KB, PrepNucleus, CliniX,
+  Drugs, SurgX). Files in `media/gif/` (copied by `scripts/build-www.sh`), listed with title, caption and system in
+  `kb/imglib/gifs.json`; the builder adds them as kind "Animation", from "Animations", credit "AI-generated with Google
+  Gemini", licence "StewardMD original". The 3 SurgX GIFs stay in `surgx/media/` and are listed in place. Made by
+  Gemini (Nano Banana keyframes, Python only to join them and write the labels) from prompts GIF1 to GIF4, topics
+  ranked by how many modules mention them. GIF2 (gif011 to gif060) is in; GIF3 and GIF4 pending. Not yet shown inline
+  inside KB articles, lessons or drug pages; that needs a topic-to-GIF lookup per module.

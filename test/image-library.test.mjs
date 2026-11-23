@@ -29,6 +29,17 @@ test("builder: every entry has src and caption, no duplicates", () => {
   assert.equal(seen.size, d.total);
 });
 
+test("builder: teaching animations are listed and every GIF file ships", () => {
+  const anims = Object.values(data().bySystem).flat().filter((e) => e.f === "Animations");
+  assert.ok(anims.length >= 60, "animations in the bank, got " + anims.length);
+  for (const e of anims) {
+    assert.equal(e.k, "Animation");
+    assert.ok(fs.existsSync(path.join(import.meta.dirname, "..", e.s)), "GIF file exists: " + e.s);
+  }
+  const sh = fs.readFileSync(path.join(import.meta.dirname, "..", "scripts/build-www.sh"), "utf8");
+  assert.ok(sh.includes("media/gif"), "build-www copies media/gif into the app bundle");
+});
+
 test("builder: ECGs sit under Cardiology with ECG kind, eye images under Eye", () => {
   const d = data();
   const cardio = d.bySystem["cardiology"] || [];
