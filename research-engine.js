@@ -21,6 +21,16 @@
  * form: it needs a reported effect (effect + CI at its own level, or log-HR
  * yi + se). RD keeps double-zero studies (1/2 correction, finite variance).
  * run() takes createdAt from the caller for the manifest and never calls Date.
+ *
+ * Phase 4 additions (contract: docs/research/contracts/phase-4/engine-api-4.md):
+ *  - subgroup / leaveOneOut / sensitivity / egger / funnel take the same
+ *    project shape as run(). Egger is regtest(fit, model="lm", predictor="sei")
+ *    (OLS of yi on sei, t test on the intercept, k-2 df) and refuses k < 10.
+ *    Subgroup differences use the fixed-effect between-group Q on the subgroup
+ *    estimates (metafor rma(..., mods=~factor(g), method="FE") QM).
+ *  - splitSharedControl / clusterAdjust / crossoverAdjust / medianToMean /
+ *    rangeToMean are study-level helpers (Cochrane Handbook 23.3.4, 23.1.4,
+ *    23.2.6; Wan et al. 2014 scenarios S2 and S1).
  */
 (function (G) {
   "use strict";
@@ -608,13 +618,14 @@
     return v;
   }
 
-  /* Full project -> pool result plus a manifest. Every study must carry
-   * verified === true or run throws listing the unverified ids. Studies with
-   * an `effect` field pool via effectFromCI, studies with a `yi` field via
-   * effectFromGeneric, the rest via effectFromRaw. createdAt comes from the
-   * caller; the engine never calls Date. */
-  function run(project) {
-    var measure, model, test, level, studies, bad, rows, res, i;
+  /* Shared project validation + row building for run and the Phase 4.1
+   * functions. Every study must carry verified === true or this throws
+   * listing the unverified ids. Studies with an `effect` field pool via
+   * effectFromCI, studies with a `yi` field via effectFromGeneric, the rest
+   * via effectFromRaw. Returns rows in study order (one row per study,
+   * exclusions included). */
+  function prepareProject(project) {
+    var measure, model, test, level, studies, bad, rows, i;
     project = project || {};
     measure = project.measure;
     checkMeasure(measure);
@@ -641,18 +652,446 @@
         rows.push(effectFromRaw(studies[i], measure, level));
       }
     }
-    res = pool(rows, { model: model, level: level, test: test });
+    return { measure: measure, model: model, test: test, level: level, studies: studies, rows: rows };
+  }
+
+  /* Full project -> pool result plus a manifest. createdAt comes from the
+   * caller; the engine never calls Date. */
+  function run(project) {
+    var prep, res;
+    project = project || {};
+    prep = prepareProject(project);
+    res = pool(prep.rows, { model: prep.model, level: prep.level, test: prep.test });
     res.manifest = {
       engine: ENGINE_NAME,
       engineVersion: VERSION,
-      measure: measure,
-      model: model,
-      test: test,
-      level: level,
-      inputs: studies.map(function (s) { return { id: s.id, values: rawValues(s) }; }),
+      measure: prep.measure,
+      model: prep.model,
+      test: prep.test,
+      level: prep.level,
+      inputs: prep.studies.map(function (s) { return { id: s.id, values: rawValues(s) }; }),
       createdAt: project.createdAt !== undefined ? project.createdAt : null
     };
     return res;
+  }
+
+  /* ================= Phase 4.1: subgroup, sensitivity, publication bias ==== */
+
+  function includedRows(rows) {
+    var out = [], i;
+    for (i = 0; i < rows.length; i++) {
+      if (!(rows[i] && rows[i].excluded)) out.push(rows[i]);
+    }
+    return out;
+  }
+
+  /* Two-sided Student-t p-value P(|T| >= |t|) on df >= 1, via the regularised
+   * incomplete beta: p = I_x(df/2, 1/2) with x = df / (df + t^2). */
+  function tTwoSidedP(t, df) {
+    if (!isFin(t) || !isFin(df) || !(df >= 1)) throw new Error("research: bad t-test inputs");
+    return betai(df / 2, 0.5, df / (df + t * t));
+  }
+
+  /* Per-subgroup runs plus the test for subgroup differences. `key` names a
+   * study field (for example "alloc"); every study needs a string or number
+   * value there. Each subgroup is pooled with run() using the project's own
+   * measure/model/test/level, so subgroup results carry manifests too.
+   *
+   * between is the FIXED-EFFECT between-group Q on the subgroup estimates:
+   * Q_between = sum_g w_g (theta_g - theta_bar)^2 with w_g = 1 / se_g^2 from
+   * each subgroup's reported pooled SE, df = G - 1, chi-square upper-tail p.
+   * With model fixed + test wald this equals metafor
+   * rma(yi, vi, mods = ~ factor(g), method = "FE") QM / QMdf / QMp exactly.
+   * Under random models the subgroup estimates come from the chosen model
+   * but the between-group Q stays this fixed-effect form (a common-tau2
+   * random-effects QM is NOT implemented); under knha the reported HKSJ SE
+   * feeds w_g. Documented in the phase-4 contract. */
+  function subgroup(project, key) {
+    var prep, i, s, v, g, order, byGroup, inc, results, sub, res;
+    var sumW, sumWY, thetaBar, w, theta, q, df;
+    if (typeof key !== "string" || key === "") {
+      throw new Error("research: subgroup needs a study field name as key");
+    }
+    prep = prepareProject(project);
+    order = []; byGroup = {};
+    for (i = 0; i < prep.studies.length; i++) {
+      s = prep.studies[i];
+      v = s[key];
+      if (v === undefined || v === null || v === "") {
+        throw new Error("research: study " + sid(s) + " is missing subgroup field " + key);
+      }
+      if (typeof v !== "string" && typeof v !== "number") {
+        throw new Error("research: study " + sid(s) + " subgroup field " + key + " must be a string or number");
+      }
+      g = String(v);
+      if (!byGroup[g]) { byGroup[g] = { group: v, studies: [], rows: [] }; order.push(g); }
+      byGroup[g].studies.push(s);
+      byGroup[g].rows.push(prep.rows[i]);
+    }
+    if (order.length < 2) {
+      throw new Error("research: subgroup needs at least two groups (got " + order.length + ")");
+    }
+    results = [];
+    for (i = 0; i < order.length; i++) {
+      g = order[i];
+      inc = includedRows(byGroup[g].rows).length;
+      if (inc < 2) {
+        throw new Error("research: subgroup " + g + " needs at least two included studies (got " + inc + ")");
+      }
+      sub = {
+        measure: prep.measure, model: prep.model, test: prep.test, level: prep.level,
+        createdAt: project.createdAt, studies: byGroup[g].studies
+      };
+      res = run(sub);
+      results.push({ group: byGroup[g].group, k: inc, result: res });
+    }
+    sumW = 0; sumWY = 0;
+    for (i = 0; i < results.length; i++) {
+      w = 1 / (results[i].result.pooled.se * results[i].result.pooled.se);
+      sumW += w; sumWY += w * results[i].result.pooled.effect;
+    }
+    thetaBar = sumWY / sumW;
+    q = 0;
+    for (i = 0; i < results.length; i++) {
+      w = 1 / (results[i].result.pooled.se * results[i].result.pooled.se);
+      theta = results[i].result.pooled.effect;
+      q += w * (theta - thetaBar) * (theta - thetaBar);
+    }
+    df = results.length - 1;
+    return {
+      key: key,
+      measure: prep.measure,
+      model: prep.model,
+      test: prep.test,
+      groups: results,
+      between: {
+        q: q, df: df, p: chiSqUpper(q, df),
+        method: "fixed-effect between-group Q on the subgroup estimates"
+      }
+    };
+  }
+
+  /* One refit per omitted study, matching metafor leave1out(rma_fit).
+   * Iterates the INCLUDED studies only (double-zero drops are not studies in
+   * the fit). Needs at least three included studies so every refit keeps two.
+   * Each record: {id, effect, se, ciLower, ciUpper, q, df, p, tau2, i2,
+   * tau2Estimator}; effect is on the analysis scale. tau2/i2 follow the
+   * engine convention: the reported (DL or REML) heterogeneity estimate,
+   * labelled, even under model fixed (which pools with tau2 0). */
+  function leaveOneOut(project) {
+    var prep, inc, i, rest, res, out;
+    prep = prepareProject(project);
+    inc = includedRows(prep.rows);
+    if (inc.length < 3) {
+      throw new Error("research: leave-one-out needs at least three included studies (got " + inc.length + ")");
+    }
+    out = [];
+    for (i = 0; i < inc.length; i++) {
+      rest = inc.slice(0, i).concat(inc.slice(i + 1));
+      res = pool(rest, { model: prep.model, level: prep.level, test: prep.test });
+      out.push({
+        id: inc[i].id,
+        effect: res.pooled.effect,
+        se: res.pooled.se,
+        ciLower: res.pooled.ciLower,
+        ciUpper: res.pooled.ciUpper,
+        q: res.heterogeneity.q,
+        df: res.heterogeneity.df,
+        p: res.heterogeneity.p,
+        tau2: res.heterogeneity.tau2,
+        i2: res.heterogeneity.i2,
+        tau2Estimator: res.heterogeneity.tau2Estimator
+      });
+    }
+    return out;
+  }
+
+  /* Re-run excluding studies. Second argument is either an array of study ids
+   * or an EXCLUSION predicate: filterFn(study) === true drops the study.
+   * Returns {run: <run result on the kept studies>, excluded: [ids removed]}.
+   * Unknown ids are ignored; removing down to fewer than two studies throws. */
+  function sensitivity(project, exclude) {
+    var prep, pred, ids, i, s, drop, kept, removed, res;
+    prep = prepareProject(project);
+    if (typeof exclude === "function") {
+      pred = exclude; ids = null;
+    } else if (Object.prototype.toString.call(exclude) === "[object Array]") {
+      pred = null; ids = exclude;
+    } else {
+      throw new Error("research: sensitivity needs an array of study ids or an exclusion function");
+    }
+    kept = []; removed = [];
+    for (i = 0; i < prep.studies.length; i++) {
+      s = prep.studies[i];
+      drop = pred ? pred(s) === true : ids.indexOf(s.id) !== -1;
+      if (drop) removed.push(s.id); else kept.push(s);
+    }
+    if (kept.length < 2) {
+      throw new Error("research: sensitivity leaves fewer than two studies (got " + kept.length + ")");
+    }
+    res = run({
+      measure: prep.measure, model: prep.model, test: prep.test, level: prep.level,
+      createdAt: project.createdAt, studies: kept
+    });
+    return { run: res, excluded: removed };
+  }
+
+  /* Classic Egger regression test, pinned to metafor
+   * regtest(fit, model = "lm", predictor = "sei"): unweighted OLS of yi on
+   * sei, t test of the intercept against 0 on k - 2 df. Publication bias is
+   * only assessed at 10+ studies (plan Phase 4), so k < 10 throws.
+   * Returns {intercept, se, t, df, p, k, slope, predictor: "sei", model: "lm"}. */
+  function egger(project) {
+    var prep, inc, k, i, sx, sy, sxx, sxy, syy, xbar, ybar, sxxC, slope, intercept;
+    var rss, r, df, s2, seInt, t;
+    prep = prepareProject(project);
+    inc = includedRows(prep.rows);
+    k = inc.length;
+    if (k < 10) {
+      throw new Error("research: Egger test needs at least 10 studies (got " + k +
+        "); publication bias is only assessed at 10+ studies");
+    }
+    sx = 0; sy = 0; sxx = 0; sxy = 0; syy = 0;
+    for (i = 0; i < k; i++) {
+      sx += inc[i].se; sy += inc[i].yi;
+      sxx += inc[i].se * inc[i].se; sxy += inc[i].se * inc[i].yi;
+      syy += inc[i].yi * inc[i].yi;
+    }
+    xbar = sx / k; ybar = sy / k;
+    sxxC = sxx - sx * sx / k;
+    /* Relative guards: with equal se (or exactly collinear yi) the centred
+     * sums cancel to floating-point dust, not exact zero. */
+    if (!(sxxC > 1e-12 * sxx)) throw new Error("research: Egger test needs variation in the standard errors");
+    slope = (sxy - sx * sy / k) / sxxC;
+    intercept = ybar - slope * xbar;
+    rss = 0;
+    for (i = 0; i < k; i++) {
+      r = inc[i].yi - intercept - slope * inc[i].se;
+      rss += r * r;
+    }
+    if (!(rss > 1e-24 * Math.max(1, syy))) {
+      throw new Error("research: Egger test has zero residual variance (yi is an exact linear function of se)");
+    }
+    df = k - 2;
+    s2 = rss / df;
+    seInt = Math.sqrt(s2 * (1 / k + xbar * xbar / sxxC));
+    if (!(seInt > 0) || !isFin(seInt)) {
+      throw new Error("research: Egger test has zero residual variance (yi is an exact linear function of se)");
+    }
+    t = intercept / seInt;
+    return {
+      intercept: intercept, se: seInt, t: t, df: df, p: tTwoSidedP(t, df),
+      k: k, slope: slope, predictor: "sei", model: "lm"
+    };
+  }
+
+  /* Funnel plot DATA (no drawing): included-study points {id, yi, se} on the
+   * analysis scale, the fixed-effect reference estimate, and the pseudo 95%
+   * limit lines for that FE estimate as two-point segments over se in
+   * [0, max(se)]: yi = theta_FE +/- z * se (metafor funnel() default region).
+   * Returns {points, fe: {effect, se}, limits: {level, z, seFrom, seTo,
+   * lower: [{se, yi}, {se, yi}], upper: [...]}}. */
+  function funnel(project) {
+    var prep, inc, fe, theta, z, seMax, i, points;
+    prep = prepareProject(project);
+    inc = includedRows(prep.rows);
+    fe = pool(inc, { model: "fixed", level: prep.level, test: "wald" });
+    theta = fe.pooled.effect;
+    z = criticalValue(prep.level);
+    seMax = 0; points = [];
+    for (i = 0; i < inc.length; i++) {
+      if (inc[i].se > seMax) seMax = inc[i].se;
+      points.push({ id: inc[i].id, yi: inc[i].yi, se: inc[i].se });
+    }
+    return {
+      points: points,
+      fe: { effect: theta, se: fe.pooled.se },
+      limits: {
+        level: prep.level, z: z, seFrom: 0, seTo: seMax,
+        lower: [{ se: 0, yi: theta }, { se: seMax, yi: theta - z * seMax }],
+        upper: [{ se: 0, yi: theta }, { se: seMax, yi: theta + z * seMax }]
+      }
+    };
+  }
+
+  /* ================= Phase 4.2: study-design helpers ====================== */
+
+  function countField(obj, field, label) {
+    var v = obj ? obj[field] : undefined;
+    if (typeof v === "string" && v !== "") v = Number(v);
+    if (typeof v !== "number" || !isFinite(v) || Math.floor(v) !== v || v < 0) {
+      throw new Error("research: " + label + " needs an integer " + field + " >= 0");
+    }
+    return v;
+  }
+
+  function finiteArg(v, label) {
+    if (typeof v === "string" && v !== "") v = Number(v);
+    if (!isFin(v)) throw new Error("research: " + label + " must be a finite number");
+    return v;
+  }
+
+  /* Multi-arm trial helper (Cochrane Handbook 23.3.4): divide the shared
+   * control group's events and n evenly across the treatment comparisons.
+   * arms = {control: {events, n}, treatments: [{id?, events, n}, ...]}.
+   * Integer handling: each of events and n is split as evenly as possible;
+   * the first (value mod t) comparisons receive one extra unit, so shares
+   * sum exactly to the original control totals and events never exceed n
+   * in any share. No fractional counts and no rounding of effects.
+   * Returns study-shaped comparisons [{id?, events1, n1, events2, n2}] with
+   * the treatment arm as arm 1 and the control share as arm 2, ready for
+   * effectFromRaw / run. */
+  function splitSharedControl(arms) {
+    var ctrl, trts, t, ce, cn, i, tr, te, tn, out, baseE, remE, baseN, remN, e2, n2;
+    if (!arms || typeof arms !== "object") throw new Error("research: splitSharedControl needs {control, treatments}");
+    ctrl = arms.control;
+    trts = arms.treatments;
+    if (!ctrl || typeof ctrl !== "object") throw new Error("research: splitSharedControl needs a control arm {events, n}");
+    if (Object.prototype.toString.call(trts) !== "[object Array]" || trts.length < 1) {
+      throw new Error("research: splitSharedControl needs a treatments array with at least one arm");
+    }
+    t = trts.length;
+    ce = countField(ctrl, "events", "control arm");
+    cn = countField(ctrl, "n", "control arm");
+    if (cn < 1) throw new Error("research: control arm needs n >= 1");
+    if (ce > cn) throw new Error("research: control arm has events above n");
+    baseE = Math.floor(ce / t); remE = ce % t;
+    baseN = Math.floor(cn / t); remN = cn % t;
+    out = [];
+    for (i = 0; i < t; i++) {
+      tr = trts[i];
+      te = countField(tr, "events", "treatment arm " + (i + 1));
+      tn = countField(tr, "n", "treatment arm " + (i + 1));
+      if (tn < 1) throw new Error("research: treatment arm " + (i + 1) + " needs n >= 1");
+      if (te > tn) throw new Error("research: treatment arm " + (i + 1) + " has events above n");
+      e2 = baseE + (i < remE ? 1 : 0);
+      n2 = baseN + (i < remN ? 1 : 0);
+      if (e2 > n2) throw new Error("research: splitSharedControl gave a control share with events above n");
+      var cmp = { events1: te, n1: tn, events2: e2, n2: n2 };
+      if (tr && tr.id !== undefined && tr.id !== null) cmp.id = tr.id;
+      out.push(cmp);
+    }
+    return out;
+  }
+
+  /* Cluster-randomised adjustment (Cochrane Handbook 23.1.4): design effect
+   * DE = 1 + (m - 1) * ICC with mean cluster size m. Binary studies divide
+   * both events and n by DE in each arm; continuous studies divide n only
+   * (means and SDs are unchanged). Effective counts are kept FRACTIONAL (no
+   * rounding), so feed them to generic inverse-variance input or round
+   * explicitly before raw-count pooling. Returns {study, designEffect, icc,
+   * meanClusterSize}. */
+  function clusterAdjust(study, icc, meanClusterSize) {
+    var m, de, out, e1, n1, e2, n2, m1, s1, m2, s2;
+    if (!study || typeof study !== "object") throw new Error("research: clusterAdjust needs a study object");
+    icc = finiteArg(icc, "icc");
+    m = finiteArg(meanClusterSize, "meanClusterSize");
+    if (!(icc >= 0 && icc <= 1)) throw new Error("research: icc must be between 0 and 1");
+    if (!(m >= 1)) throw new Error("research: meanClusterSize must be >= 1");
+    de = 1 + (m - 1) * icc;
+    out = {};
+    if (study.id !== undefined && study.id !== null) out.id = study.id;
+    if (study.events1 !== undefined && study.events1 !== null) {
+      e1 = countField(study, "events1", "cluster study");
+      n1 = countField(study, "n1", "cluster study");
+      e2 = countField(study, "events2", "cluster study");
+      n2 = countField(study, "n2", "cluster study");
+      if (n1 < 1 || n2 < 1) throw new Error("research: cluster study needs n1 and n2 >= 1");
+      if (e1 > n1 || e2 > n2) throw new Error("research: cluster study has events above n");
+      out.events1 = e1 / de; out.n1 = n1 / de;
+      out.events2 = e2 / de; out.n2 = n2 / de;
+    } else if (study.mean1 !== undefined && study.mean1 !== null) {
+      m1 = finiteArg(study.mean1, "mean1"); s1 = finiteArg(study.sd1, "sd1");
+      m2 = finiteArg(study.mean2, "mean2"); s2 = finiteArg(study.sd2, "sd2");
+      n1 = countField(study, "n1", "cluster study");
+      n2 = countField(study, "n2", "cluster study");
+      if (n1 < 1 || n2 < 1) throw new Error("research: cluster study needs n1 and n2 >= 1");
+      if (!(s1 > 0) || !(s2 > 0)) throw new Error("research: cluster study needs sd1 and sd2 > 0");
+      out.mean1 = m1; out.sd1 = s1; out.n1 = n1 / de;
+      out.mean2 = m2; out.sd2 = s2; out.n2 = n2 / de;
+    } else {
+      throw new Error("research: clusterAdjust needs a binary (events1/n1/events2/n2) or continuous (mean1/sd1/n1/mean2/sd2/n2) study");
+    }
+    return { study: out, designEffect: de, icc: icc, meanClusterSize: m };
+  }
+
+  /* Crossover trial paired analysis (Cochrane Handbook 23.2.6 approach).
+   * Two shapes:
+   *  1. {md, se}: the reported paired mean difference and its SE are used
+   *     as-is (method "paired-reported").
+   *  2. {mean1, sd1, mean2, sd2, n, corr}: arm summaries plus the
+   *     within-patient correlation r between periods. The paired-difference
+   *     variance is Var(MD) = (s1^2 + s2^2 - 2 * r * s1 * s2) / n, i.e.
+   *     SD_diff = sqrt(s1^2 + s2^2 - 2 r s1 s2) and SE = SD_diff / sqrt(n)
+   *     (method "paired-imputed-corr"). r = 0 reproduces the unpaired MD
+   *     variance; the correlation must be supplied, never assumed.
+   * Returns {id?, yi, vi, se, method} on the natural scale. */
+  function crossoverAdjust(input) {
+    var md, se, m1, s1, m2, s2, n, r, varDiff, vi, res;
+    if (!input || typeof input !== "object") throw new Error("research: crossoverAdjust needs a study object");
+    if (input.md !== undefined && input.md !== null) {
+      md = finiteArg(input.md, "md");
+      if (input.se === undefined || input.se === null) {
+        throw new Error("research: crossoverAdjust needs se alongside md");
+      }
+      se = finiteArg(input.se, "se");
+      if (!(se > 0)) throw new Error("research: crossoverAdjust needs se > 0 alongside md");
+      res = { yi: md, vi: se * se, se: se, method: "paired-reported" };
+    } else if (input.mean1 !== undefined && input.mean1 !== null) {
+      m1 = finiteArg(input.mean1, "mean1"); s1 = finiteArg(input.sd1, "sd1");
+      m2 = finiteArg(input.mean2, "mean2"); s2 = finiteArg(input.sd2, "sd2");
+      n = countField(input, "n", "crossover study");
+      r = finiteArg(input.corr, "corr");
+      if (n < 1) throw new Error("research: crossover study needs n >= 1");
+      if (!(s1 > 0) || !(s2 > 0)) throw new Error("research: crossover study needs sd1 and sd2 > 0");
+      if (!(r >= -1 && r <= 1)) throw new Error("research: corr must be between -1 and 1");
+      md = m1 - m2;
+      varDiff = s1 * s1 + s2 * s2 - 2 * r * s1 * s2;
+      if (!(varDiff > 0)) {
+        throw new Error("research: crossoverAdjust gives a non-positive paired variance (check corr)");
+      }
+      vi = varDiff / n;
+      res = { yi: md, vi: vi, se: Math.sqrt(vi), method: "paired-imputed-corr" };
+    } else {
+      throw new Error("research: crossoverAdjust needs md with se, or mean1/sd1/mean2/sd2 with n and corr");
+    }
+    if (input.id !== undefined && input.id !== null) res.id = input.id;
+    return res;
+  }
+
+  /* Wan et al. 2014 (BMC Med Res Methodol 14:135) scenario S2: median and
+   * quartiles. mean = (q1 + median + q3) / 3;
+   * SD = (q3 - q1) / (2 * Phi^-1((0.75 n - 0.125) / (n + 0.25))).
+   * Returns {mean, sd, method: "wan2014-s2-iqr"} so the UI can show the
+   * formula used. Assumes an approximately normal underlying distribution. */
+  function medianToMean(q1, median, q3, n) {
+    var mean, z, sd;
+    q1 = finiteArg(q1, "q1"); median = finiteArg(median, "median"); q3 = finiteArg(q3, "q3");
+    n = finiteArg(n, "n");
+    if (Math.floor(n) !== n || n < 2) throw new Error("research: medianToMean needs an integer n >= 2");
+    if (!(q1 <= median && median <= q3)) throw new Error("research: medianToMean needs q1 <= median <= q3");
+    if (!(q3 > q1)) throw new Error("research: medianToMean needs q3 > q1 (no spread)");
+    mean = (q1 + median + q3) / 3;
+    z = normalQuantile((0.75 * n - 0.125) / (n + 0.25));
+    sd = (q3 - q1) / (2 * z);
+    return { mean: mean, sd: sd, method: "wan2014-s2-iqr" };
+  }
+
+  /* Wan et al. 2014 scenario S1: minimum, median, maximum.
+   * mean = (min + 2 * median + max) / 4;
+   * SD = (max - min) / (2 * Phi^-1((n - 0.375) / (n + 0.25))).
+   * Returns {mean, sd, method: "wan2014-s1-range"}. */
+  function rangeToMean(min, median, max, n) {
+    var mean, z, sd;
+    min = finiteArg(min, "min"); median = finiteArg(median, "median"); max = finiteArg(max, "max");
+    n = finiteArg(n, "n");
+    if (Math.floor(n) !== n || n < 2) throw new Error("research: rangeToMean needs an integer n >= 2");
+    if (!(min <= median && median <= max)) throw new Error("research: rangeToMean needs min <= median <= max");
+    if (!(max > min)) throw new Error("research: rangeToMean needs max > min (no spread)");
+    mean = (min + 2 * median + max) / 4;
+    z = normalQuantile((n - 0.375) / (n + 0.25));
+    sd = (max - min) / (2 * z);
+    return { mean: mean, sd: sd, method: "wan2014-s1-range" };
   }
 
   var ENGINE = {
@@ -662,7 +1101,18 @@
     effectFromGeneric: effectFromGeneric,
     pool: pool,
     run: run,
-    tQuantile: tQuantile
+    tQuantile: tQuantile,
+    normalQuantile: normalQuantile,
+    subgroup: subgroup,
+    leaveOneOut: leaveOneOut,
+    sensitivity: sensitivity,
+    egger: egger,
+    funnel: funnel,
+    splitSharedControl: splitSharedControl,
+    clusterAdjust: clusterAdjust,
+    crossoverAdjust: crossoverAdjust,
+    medianToMean: medianToMean,
+    rangeToMean: rangeToMean
   };
 
   if (typeof module !== "undefined" && module.exports) { module.exports = ENGINE; }

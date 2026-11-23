@@ -23,6 +23,11 @@
 #     only when the HKSJ CI is narrower than the Wald CI, matching the engine.
 #   Prediction intervals: predict(fit) (pi.type="Riley", t with k-2 df, under test="knha",
 #     normal otherwise); not recorded when k < 3, matching the engine.
+# Phase 4 (dat.bcg RR only, recorded under the top-level "phase4" key):
+#   leave1out(rma FE) and leave1out(rma DL)
+#   regtest(rma FE, model="lm", predictor="sei") (classic Egger, t on k-2 df)
+#   rma(yi, vi, mods=~factor(alloc), method="FE") QM/QMdf/QMp for the
+#     fixed-effect between-group subgroup test, plus per-group FE/DL fits
 #
 # Datasets (dat.bcg plus 5 more metadat sets; role stated per case):
 #   dat.bcg          RR  raw 2x2 counts (primary reference, 13 trials)
@@ -332,6 +337,73 @@ if (is.null(hom4$fits$REML_knha$truncated)) {
   stop("coverage guard failed: bcg-rr-hom4 does not trigger truncated HKSJ")
 }
 
+## ---- Phase 4 references (dat.bcg RR, 13 trials) ----
+## Pinned Phase 4 calls (docs/research/contracts/phase-4/engine-api-4.md):
+##   leave1out(rma(yi, vi, method="FE")) and leave1out(rma(yi, vi, method="DL"))
+##   regtest(rma(yi, vi, method="FE"), model="lm", predictor="sei")
+##   rma(yi, vi, mods=~factor(alloc), method="FE") for the subgroup QM test,
+##     plus per-group FE and DL fits for the subgroup estimates.
+## The engine's fixed-effect between-group Q on the subgroup estimates must
+## equal QM/QMdf/QMp of the mods FE fit; a common-tau2 random-effects QM is
+## not implemented, so no DL mods fit is recorded.
+e4 <- escalc(measure = "RR", ai = tpos, bi = tneg, ci = cpos, di = cneg,
+             data = dat.bcg, add = 1 / 2, to = "only0", drop00 = TRUE)
+ok4 <- which(!is.na(e4$yi))
+stopifnot(length(ok4) == 13L)  # dat.bcg has no double-zero trials
+d4 <- data.frame(yi = unname(e4$yi[ok4]), vi = unname(e4$vi[ok4]),
+                 alloc = dat.bcg$alloc[ok4],
+                 id = sprintf("bcg-%d", dat.bcg$trial[ok4]))
+fe4 <- rma(yi, vi, data = d4, method = "FE")
+dl4 <- rma(yi, vi, data = d4, method = "DL")
+
+## leave1out: one refit per omitted study, in fit (row) order.
+l1_rec <- function(l1) {
+  lapply(seq_len(nrow(d4)), function(i) {
+    list(id = d4$id[i],
+         est = unname(l1$estimate[i]), se = unname(l1$se[i]),
+         lo = unname(l1$ci.lb[i]), hi = unname(l1$ci.ub[i]),
+         q = unname(l1$Q[i]), p = unname(l1$Qp[i]),
+         tau2 = unname(l1$tau2[i]), i2 = unname(l1$I2[i]))
+  })
+}
+l4_fe <- leave1out(fe4)
+l4_dl <- leave1out(dl4)
+
+## Egger: regtest of the FE fit, classic lm form with sei as predictor.
+## For model="lm" the intercept test is t on k-2 df ($zval is the t value).
+rt4 <- regtest(fe4, model = "lm", predictor = "sei")
+egger4 <- list(intercept = unname(rt4$b), se = unname(rt4$se),
+               t = unname(rt4$zval), p = unname(rt4$pval),
+               df = unname(rt4$dfs), k = nrow(d4))
+
+## Subgroup by allocation: FE moderator fit for QM, per-group FE and DL fits.
+mods4 <- rma(yi, vi, mods = ~ factor(alloc), data = d4, method = "FE")
+groups4 <- lapply(sort(unique(d4$alloc)), function(g) {
+  sub <- d4[d4$alloc == g, , drop = FALSE]
+  stopifnot(nrow(sub) >= 2L)
+  list(group = g, k = nrow(sub),
+       FE = fit_rec(rma(yi, vi, data = sub, method = "FE")),
+       DL = fit_rec(rma(yi, vi, data = sub, method = "DL")))
+})
+subgroup4 <- list(
+  between = list(q = unname(mods4$QM), df = unname(mods4$QMdf),
+                 p = unname(mods4$QMp)),
+  groups = groups4
+)
+
+## Funnel: FE reference estimate and the se range of the pseudo-95% region.
+funnel4 <- list(feEst = unname(fe4$b[1]), feSe = unname(fe4$se),
+                seMax = max(sqrt(d4$vi)))
+
+phase4 <- list(
+  dataset = "dat.bcg", measure = "RR", level = LEVEL,
+  ids = as.list(d4$id),
+  leaveOneOut = list(FE = l1_rec(l4_fe), DL = l1_rec(l4_dl)),
+  egger = egger4,
+  subgroup = subgroup4,
+  funnel = funnel4
+)
+
 top <- list(
   meta = list(
     generatedAt = format(Sys.time(), "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"),
@@ -353,11 +425,16 @@ top <- list(
                         "control=list(stepadj=0.5, maxiter=1000))"),
       truncated = paste0("estimate +/- qt((1+level)/2, k-1) * ",
                          "max(se_knha, se_wald), only when halfH < halfW"),
-      predict = "predict(fit)"
+      predict = "predict(fit)",
+      leave1out = "leave1out(rma(yi, vi, method=\"FE\" | \"DL\"))",
+      regtest = paste0("regtest(rma(yi, vi, method=\"FE\"), ",
+                       "model=\"lm\", predictor=\"sei\")"),
+      rma_mods_FE = "rma(yi, vi, mods=~factor(alloc), method=\"FE\")"
     )
   ),
-  cases = cases
+  cases = cases,
+  phase4 = phase4
 )
 
 writeLines(json_val(top), OUT)
-cat(sprintf("wrote %s (%d cases)\n", OUT, length(cases)))
+cat(sprintf("wrote %s (%d cases + phase4)\n", OUT, length(cases)))

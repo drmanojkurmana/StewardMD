@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-3/job-message.schema.json",
+  "title": "ResearchMD Phase 3 job message",
+  "description": "The only shape the Pages API puts on the research-jobs pull queue and the only shape the worker accepts. Pointers, not content: no user tokens, no Firebase claims, no PHI, no PDF bytes. The worker reads everything else from R2. Messages that fail this schema are never worked; they retry to the DLQ and alert.",
+  "type": "object",
+  "required": ["v", "jobId", "kind", "projectId", "idempotencyKey", "input", "ceilings", "createdAt"],
+  "additionalProperties": false,
+  "properties": {
+    "v": {
+      "const": 1,
+      "description": "Message schema version. Workers refuse any other value."
+    },
+    "jobId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "research_jobs.id. One job id per (projectId, idempotencyKey); the API enforces the unique pair."
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["pdf_extract"],
+      "description": "Phase 3.2 implements pdf_extract only. New kinds are a contract change, not a silent extension."
+    },
+    "projectId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "research_projects.id. Scopes every R2 key the job may touch."
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Client-supplied key, echoed in the callback. Same key plus project means same job; a replayed delivery skips work (see callback.md)."
+    },
+    "input": {
+      "type": "object",
+      "required": ["r2Key"],
+      "additionalProperties": false,
+      "properties": {
+        "r2Key": {
+          "type": "string",
+          "pattern": "^projects/[A-Za-z0-9_-]+/pdf/[0-9a-f]{64}\\.pdf$",
+          "description": "Private R2 object key of the uploaded PDF (retention.md layout). The projectId inside the key must equal the message projectId; the worker checks this before reading."
+        }
+      }
+    },
+    "ceilings": {
+      "type": "object",
+      "required": ["maxPages", "maxSeconds"],
+      "additionalProperties": false,
+      "properties": {
+        "maxPages": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60,
+          "description": "Hard page ceiling for this job. The worker also enforces the global 60 even if a message asks for more."
+        },
+        "maxSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 240,
+          "description": "Wall-clock ceiling for extraction. The worker also enforces the global 240."
+        }
+      }
+    },
+    "createdAt": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Unix seconds when the API enqueued the message. Audit only; never used for auth."
+    }
+  }
+}

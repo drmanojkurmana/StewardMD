@@ -12574,3 +12574,18 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
 - **Kept**: Layer 0 rules under `smd_edge`; EmbeddingGemma 2 search pack; scripts/edge dataset tooling (dev only).
 - **Side effect**: the "phone is hot" hint in MaiK read thermal state through Needle; it no longer shows.
 - **Native**: the Needle removal reaches phones only with the next store build; OTA carries the JS side.
+
+## 2026-11-23 - ResearchMD Phase 2 integration: two contract additions, chain-handle protocol list
+- **Context**: screens and API were built in parallel; the protocol screen calls GET /v1/projects/{id}/protocols
+  and the search screen posts multipart to /v1/projects/{id}/import-uploads. Neither was frozen in 2.0.
+- **Decision**: add the two small API routes instead of changing screens (documented in
+  `docs/research/contracts/phase-2/contract-additions.md` + schemas). import-uploads stores bytes in R2 at
+  `projects/{id}/imports/{sha256}.{ext}` (5 MiB, .ris/.bib/.bibtex/.csv, owner/editor/analyst) and returns
+  `{storageKey, sha256, bytes}` for POST /imports. The protocol list returns protocol objects whose `id` is the
+  chain handle (first version's id), because the screen groups versions by id and every /v1/protocols/{id} route
+  already resolves any chain id to the project; per-version identity is (id, version).
+- **GRADE wiring**: research-grade.js + research-screen-grade.js load with `?v=rmd2` before research.js; GRADE tab
+  after Run. Assessments stay device-local until the 4.3 API contract lands.
+- **Gate**: test/research-phase2-e2e.test.mjs drives the exact screen sequence in-process (SQLite D1 mock, R2 stub,
+  connector fetch mocked) and asserts GET /prisma equals counts derived independently from stored decision rows;
+  an outsider gets 404 on every route in the sequence.

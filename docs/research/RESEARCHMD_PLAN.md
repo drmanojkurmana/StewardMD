@@ -288,9 +288,9 @@ Also tracked: screening agreement, human correction rate, time saved, failure an
 | ID | Decision | Needed by |
 |---|---|---|
 | D-1 | Tablet/landscape layouts for heavy screens within the mobile-only rule | Locked in v2.1 (section 1) |
-| D-2 | Approve D1, then R2/Queue provisioning | 1.8, 3.1 |
-| D-3 | Worker host (an external container service) | 3.0 |
-| D-4 | Credit purchase route: in-app purchase (store fee) vs institutional invoicing vs credits bought outside the app where store rules allow. Decided early because it shapes accounts and the wallet | Phase 3.0 |
+| D-2 | Approve D1, then R2/Queue provisioning | Decided 2026-11-23: provisioned (D1 stewardmd-research, R2 stewardmd-research, queues research-jobs + research-jobs-dlq, HTTP pull consumer) |
+| D-3 | Worker host (an external container service) | Decided 2026-11-23: Cloudflare Containers |
+| D-4 | Credit purchase route | Decided 2026-11-23: reuse the MaiK wallet, plus institution invoicing (admin-granted credits) |
 | D-5 | PaperOrchestra adapter vs prompts-only fallback, after the 3.7 spike | 3.7 |
 | D-6 | Offer BYOK at all | Phase 6 |
 | D-7 | Human statistician for 4.5 sign-off | Phase 4 |

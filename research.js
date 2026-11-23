@@ -26,6 +26,135 @@
   }
   SMD.esc = esc;
 
+  /* Phase 2 API client: calls stewardmd.in/api/research/v1 per the frozen
+   * contracts (docs/research/contracts/phase-2). Firebase ID token from
+   * SMD_AUTH when present; errors normalize to {code, status, current}. */
+  function apiRequest(method, path, body) {
+    var headers = { "Accept": "application/json" };
+    var opts = { method: method, headers: headers };
+    if (body !== undefined && body !== null) {
+      headers["Content-Type"] = "application/json";
+      opts.body = JSON.stringify(body);
+    }
+    var tokenP;
+    try {
+      var u = G.SMD_AUTH && G.SMD_AUTH.currentUser;
+      tokenP = (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null);
+    } catch (e) { tokenP = Promise.resolve(null); }
+    return Promise.resolve(tokenP).then(function (token) {
+      if (token) headers["Authorization"] = "Bearer " + token;
+      return G.fetch("/api/research" + path, opts);
+    }).then(function (res) {
+      return res.text().then(function (txt) {
+        var data = null;
+        try { data = txt ? JSON.parse(txt) : null; } catch (e) {}
+        if (!res.ok) {
+          var env = (data && data.error) || {};
+          var err = new Error(env.message || ("Request failed (HTTP " + res.status + "). Retry, or check the project role."));
+          err.status = res.status;
+          err.code = env.code || ("http_" + res.status);
+          err.current = data && data.current;
+          err.requestId = env.requestId;
+          throw err;
+        }
+        return data || {};
+      });
+    }).catch(function (e) {
+      if (e && e.code) throw e;
+      var net = new Error("Cannot reach the research service. Check the connection and retry.");
+      net.code = "network";
+      net.status = 0;
+      throw net;
+    });
+  }
+
+  function apiUpload(path, formData) {
+    var headers = { "Accept": "application/json" };
+    var tokenP;
+    try {
+      var u = G.SMD_AUTH && G.SMD_AUTH.currentUser;
+      tokenP = (u && u.getIdToken) ? u.getIdToken() : Promise.resolve(null);
+    } catch (e) { tokenP = Promise.resolve(null); }
+    return Promise.resolve(tokenP).then(function (token) {
+      if (token) headers["Authorization"] = "Bearer " + token;
+      return G.fetch("/api/research" + path, { method: "POST", headers: headers, body: formData });
+    }).then(function (res) {
+      return res.text().then(function (txt) {
+        var data = null;
+        try { data = txt ? JSON.parse(txt) : null; } catch (e) {}
+        if (!res.ok) {
+          var env = (data && data.error) || {};
+          var err = new Error(env.message || ("Upload failed (HTTP " + res.status + "). Retry with a smaller file."));
+          err.status = res.status;
+          err.code = env.code || ("http_" + res.status);
+          throw err;
+        }
+        return data || {};
+      });
+    }).catch(function (e) {
+      if (e && e.code) throw e;
+      var net = new Error("Cannot reach the research service. Check the connection and retry.");
+      net.code = "network";
+      net.status = 0;
+      throw net;
+    });
+  }
+
+  SMD.api = { request: apiRequest, upload: apiUpload };
+
+  /* Shared Phase 2 screen helpers (one escaping helper above, one date
+   * formatter, one error banner, one download path). */
+  function fmtTs(ts) {
+    if (!ts) return "";
+    try {
+      var d = new Date(ts);
+      return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }) +
+        " " + d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
+    } catch (e) { return ""; }
+  }
+
+  function errHtml(err, retryAttr) {
+    var e = err || {};
+    var h = '<div class="rmd-banner rmd-banner-error" role="alert">';
+    h += '<strong>' + esc(e.message || "Something went wrong.") + '</strong>';
+    if (e.code) h += '<span class="rmd-banner-code">Code: ' + esc(e.code) + (e.status ? " (HTTP " + e.status + ")" : "") + '</span>';
+    if (retryAttr) h += '<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="' + esc(retryAttr) + '">Retry</button>';
+    h += '</div>';
+    return h;
+  }
+
+  function loadingHtml(label) {
+    return '<div class="rmd-loading" aria-live="polite">' + esc(label || "Loading") + '&#8230;</div>';
+  }
+
+  function reasonLabel(code, reasons) {
+    if (!code) return "";
+    for (var i = 0; i < (reasons || []).length; i++) {
+      if (reasons[i].code === code) return reasons[i].label || code;
+    }
+    return code;
+  }
+
+  function downloadText(filename, text, mime) {
+    var blob = new Blob([text], { type: (mime || "text/plain") + ";charset=utf-8;" });
+    var url = URL.createObjectURL(blob);
+    var a = D.createElement("a");
+    a.href = url;
+    a.download = filename;
+    D.body.appendChild(a);
+    a.click();
+    D.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  SMD.p2 = {
+    fmtTs: fmtTs,
+    errHtml: errHtml,
+    loadingHtml: loadingHtml,
+    reasonLabel: reasonLabel,
+    downloadText: downloadText
+  };
+
   /* Feature flag: DEFAULT OFF. On per device with ?research=1 or localStorage.smd_research = "1" */
   function on() {
     try {
@@ -303,6 +432,74 @@
       "}",
       "@media (min-width: 1024px) {",
       "  #researchMD .rmd-project-grid { grid-template-columns: 1fr 1fr 1fr; }",
+      "}",
+      "/* Phase 2: shell screen tabs */",
+      "#researchMD .rmd-shell-tabs { display: flex; gap: 6px; padding: 8px 14px; overflow-x: auto; background: var(--rmd-panel); border-bottom: 1px solid var(--rmd-line); scrollbar-width: none; }",
+      "#researchMD .rmd-shell-tabs::-webkit-scrollbar { display: none; }",
+      "#researchMD .rmd-tab { flex: 0 0 auto; border: 0; background: none; font: 500 13px var(--rmd-f); color: var(--rmd-mut); padding: 7px 12px; border-radius: 999px; cursor: pointer; min-height: 34px; touch-action: manipulation; }",
+      "#researchMD .rmd-tab:hover { background: var(--rmd-fill); color: var(--rmd-ink); }",
+      "#researchMD .rmd-tab-active { background: var(--rmd-acc-soft); color: var(--rmd-acc); font-weight: 600; }",
+      "#researchMD button:focus-visible, #researchMD a:focus-visible { outline: 2px solid var(--rmd-acc); outline-offset: 2px; }",
+      "/* Phase 2: shared screen scaffolding */",
+      "#researchMD .rmd-p2-screen { padding: 16px 16px 48px; display: flex; flex-direction: column; gap: 16px; max-width: 1080px; margin: 0 auto; width: 100%; }",
+      "#researchMD .rmd-p2-cols { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: start; }",
+      "#researchMD .rmd-banner { border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; align-items: flex-start; }",
+      "#researchMD .rmd-banner-error { background: var(--rmd-bad-soft); border: 1px solid var(--rmd-bad); color: var(--rmd-bad); }",
+      "#researchMD .rmd-banner-warn { background: var(--rmd-warn-soft); border: 1px solid var(--rmd-warn); color: var(--rmd-warn); }",
+      "#researchMD .rmd-banner-info { background: var(--rmd-acc-soft); border: 1px solid var(--rmd-acc); color: var(--rmd-acc); }",
+      "#researchMD .rmd-banner-code { font: 500 11.5px var(--rmd-mono); opacity: 0.85; }",
+      "#researchMD .rmd-loading { padding: 32px 16px; text-align: center; color: var(--rmd-mut); font-size: 13.5px; }",
+      "#researchMD .rmd-muted { color: var(--rmd-mut); }",
+      "#researchMD .rmd-mono-sm { font: 500 12px var(--rmd-mono); overflow-wrap: anywhere; }",
+      "#researchMD .rmd-row-btn { display: flex; flex-direction: column; gap: 3px; width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--rmd-line); background: none; padding: 12px 16px; cursor: pointer; font: 400 14px var(--rmd-f); color: var(--rmd-ink); touch-action: manipulation; }",
+      "#researchMD .rmd-row-btn:hover { background: var(--rmd-acc-soft); }",
+      "#researchMD .rmd-row-selected { background: var(--rmd-acc-soft); outline: 2px solid var(--rmd-acc); outline-offset: -2px; }",
+      "#researchMD .rmd-row-title { font-weight: 600; font-size: 14px; line-height: 1.4; overflow-wrap: anywhere; }",
+      "#researchMD .rmd-row-meta { font-size: 12px; color: var(--rmd-mut); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }",
+      "#researchMD .rmd-item-title { margin: 0; font: 600 16px/1.4 var(--rmd-f); overflow-wrap: anywhere; }",
+      "#researchMD .rmd-item-meta { font-size: 12.5px; color: var(--rmd-mut); display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }",
+      "#researchMD .rmd-abstract-box { background: var(--rmd-fill); border-radius: 8px; padding: 12px 14px; max-height: 240px; overflow-y: auto; overscroll-behavior: contain; font-size: 13.5px; line-height: 1.55; overflow-wrap: anywhere; white-space: pre-wrap; }",
+      "/* Phase 2: protocol */",
+      "#researchMD .rmd-field-list { display: flex; flex-direction: column; gap: 8px; }",
+      "#researchMD .rmd-field-list-row { display: flex; gap: 8px; align-items: center; }",
+      "#researchMD .rmd-field-list-row input { flex: 1; min-width: 0; }",
+      "#researchMD .rmd-lock-box { background: var(--rmd-acc-soft); border: 1px solid var(--rmd-acc); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; }",
+      "#researchMD .rmd-lock-hash { font: 500 12px var(--rmd-mono); overflow-wrap: anywhere; color: var(--rmd-ink); }",
+      "#researchMD .rmd-proto-view { display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; }",
+      "#researchMD .rmd-proto-view dt { font: 600 12px var(--rmd-f); text-transform: uppercase; letter-spacing: 0.04em; color: var(--rmd-mut); margin-top: 6px; }",
+      "#researchMD .rmd-proto-view dd { margin: 2px 0 0; overflow-wrap: anywhere; white-space: pre-wrap; }",
+      "#researchMD .rmd-proto-view ul { margin: 2px 0 0; padding-left: 18px; }",
+      "/* Phase 2: screening votes */",
+      "#researchMD .rmd-vote-bar { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }",
+      "#researchMD .rmd-vote-btn { border: 1px solid var(--rmd-line); border-radius: 10px; min-height: 54px; font: 600 15px var(--rmd-f); cursor: pointer; touch-action: manipulation; background: var(--rmd-panel); color: var(--rmd-ink); }",
+      "#researchMD .rmd-vote-btn:active { opacity: 0.7; }",
+      "#researchMD .rmd-vote-include { background: var(--rmd-acc-soft); border-color: var(--rmd-acc); color: var(--rmd-acc); }",
+      "#researchMD .rmd-vote-exclude { background: var(--rmd-bad-soft); border-color: var(--rmd-bad); color: var(--rmd-bad); }",
+      "#researchMD .rmd-vote-uncertain { background: var(--rmd-warn-soft); border-color: var(--rmd-warn); color: var(--rmd-warn); }",
+      "#researchMD .rmd-vote-btn[disabled] { opacity: 0.45; cursor: default; }",
+      "#researchMD .rmd-reason-grid { display: flex; flex-wrap: wrap; gap: 8px; }",
+      "#researchMD .rmd-reason-chip { border: 1px solid var(--rmd-line); background: var(--rmd-panel); color: var(--rmd-ink); border-radius: 999px; padding: 8px 14px; font: 500 13px var(--rmd-f); cursor: pointer; min-height: 38px; touch-action: manipulation; }",
+      "#researchMD .rmd-reason-chip:hover { border-color: var(--rmd-bad); color: var(--rmd-bad); }",
+      "#researchMD .rmd-votes-box { display: flex; flex-direction: column; gap: 8px; }",
+      "#researchMD .rmd-vote-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13.5px; background: var(--rmd-fill); border-radius: 8px; padding: 8px 12px; }",
+      "#researchMD .rmd-vote-who { font: 600 11.5px var(--rmd-f); text-transform: uppercase; letter-spacing: 0.04em; color: var(--rmd-mut); min-width: 52px; }",
+      "#researchMD .rmd-peer-hidden { color: var(--rmd-mut); font-style: italic; }",
+      "#researchMD .rmd-decision-include { color: var(--rmd-acc); font-weight: 600; }",
+      "#researchMD .rmd-decision-exclude { color: var(--rmd-bad); font-weight: 600; }",
+      "#researchMD .rmd-decision-uncertain { color: var(--rmd-warn); font-weight: 600; }",
+      "#researchMD .rmd-progress-line { font: 500 12.5px var(--rmd-f); color: var(--rmd-mut); display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }",
+      "/* Phase 2: PRISMA */",
+      "#researchMD .rmd-prisma-svg { width: 100%; min-width: 560px; height: auto; display: block; }",
+      "#researchMD .rmd-count-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }",
+      "#researchMD .rmd-count-table td { padding: 8px 10px; border-bottom: 1px solid var(--rmd-line); }",
+      "#researchMD .rmd-count-table td:last-child { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }",
+      "/* Phase 2: responsive */",
+      "@media (min-width: 768px) {",
+      "  #researchMD .rmd-p2-cols { grid-template-columns: minmax(300px, 380px) 1fr; }",
+      "  #researchMD .rmd-p2-screen { padding: 20px 22px 56px; }",
+      "}",
+      "@media (max-width: 767px) {",
+      "  #researchMD .rmd-vote-btn { min-height: 58px; }",
       "}"
     ].join("\n");
     D.head.appendChild(s);
@@ -357,6 +554,25 @@
     h.push('  </div>');
     h.push('</div>');
 
+    if (currentScreen !== "projects") {
+      var tabs = [
+        ["studies", "Studies"],
+        ["protocol", "Protocol"],
+        ["search", "Search"],
+        ["screening", "Screening"],
+        ["conflicts", "Conflicts"],
+        ["prisma", "PRISMA"],
+        ["run", "Run"],
+        ["grade", "GRADE"]
+      ];
+      h.push('<nav class="rmd-shell-tabs" aria-label="Research screens">');
+      for (var t = 0; t < tabs.length; t++) {
+        var active = currentScreen === tabs[t][0];
+        h.push('<button type="button" class="rmd-tab' + (active ? ' rmd-tab-active' : '') + '" data-rmd-tab="' + tabs[t][0] + '"' + (active ? ' aria-current="page"' : '') + '>' + tabs[t][1] + '</button>');
+      }
+      h.push('</nav>');
+    }
+
     h.push('<div class="rmd-shell-body" id="rmdScreenBody"></div>');
 
     root.innerHTML = h.join("\n");
@@ -384,6 +600,14 @@
         }
       };
     }
+
+    var tabBtns = root.querySelectorAll("[data-rmd-tab]");
+    for (var i = 0; i < tabBtns.length; i++) {
+      tabBtns[i].onclick = function () {
+        var name = this.getAttribute("data-rmd-tab");
+        if (name && name !== currentScreen) navigate(name, {});
+      };
+    }
   }
 
   function navigate(screenName, params, isBack) {
@@ -396,12 +620,9 @@
     var body = root.querySelector("#rmdScreenBody");
     if (!body) return;
 
-    if (screenName === "projects" && SMD.screens && SMD.screens.projects) {
-      SMD.screens.projects.render(body);
-    } else if (screenName === "studies" && SMD.screens && SMD.screens.studies) {
-      SMD.screens.studies.render(body);
-    } else if (screenName === "run" && SMD.screens && SMD.screens.run) {
-      SMD.screens.run.render(body);
+    var screen = SMD.screens && SMD.screens[screenName];
+    if (screen && screen.render) {
+      screen.render(body);
     } else if (SMD.screens && SMD.screens.projects) {
       SMD.screens.projects.render(body);
     }
