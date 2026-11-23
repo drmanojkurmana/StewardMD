@@ -336,8 +336,8 @@ try {
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 20,
-    "VIDEO batch 10: small bowel resection shows its 20 step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 22,
+    "VIDEO batch 10: small bowel resection shows its 22 step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Laparoscopic inguinal hernia repair");
@@ -400,8 +400,8 @@ try {
   await waitFor("#surgxRoot .sgx-secbtn");
   await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 21,
-    "VIDEO batch 14: Ivor Lewis oesophagectomy shows its 21 step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 22,
+    "VIDEO batch 14: Ivor Lewis oesophagectomy shows its 22 step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Open carpal tunnel release");
