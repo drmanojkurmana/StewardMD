@@ -73,6 +73,26 @@ try {
   ok((await titles("#clinixScroll")).some((t) => /append/i.test(t)), "CliniX: pictures are about the appendix " + JSON.stringify((await titles("#clinixScroll")).slice(0, 3)));
   await shot("clinix");
 
+  /* PrepNucleus: the breast cancer lesson's finish screen shows related pictures, not the lesson's own */
+  await page.evaluate(() => { localStorage.setItem("smd_prep", "1"); localStorage.removeItem("smd_prep_v1"); });
+  await page.goto(BASE + "?prep=1", { waitUntil: "load" });
+  await page.waitForFunction(() => window.PREP && window.SMD_IMGLIB, null, { timeout: 40000 });
+  await page.evaluate(() => { ["introPoster", "splash", "accountGate", "introOverlay", "smdBootSplash", "verifyGate"].forEach((k) => { const e = document.getElementById(k); if (e) e.remove(); }); PREP.open({ subject: "surgery" }); });
+  await page.waitForSelector("#smdPrep .pn-mod[data-m=sur-breast-cancer]", { timeout: 20000 });
+  await page.evaluate(() => { const w = document.getElementById("pnSetup"); if (w) w.remove(); document.querySelector("#smdPrep .pn-mod[data-m=sur-breast-cancer]").click(); });
+  await page.waitForSelector("#smdPrep [data-act=l-open]", { timeout: 8000 });
+  await page.evaluate(() => document.querySelector("#smdPrep [data-act=l-open]").click());
+  await page.waitForSelector("#smdPrep .pn-lsn-tx", { timeout: 8000 });
+  for (let i = 0; i < 20 && !(await page.$("#smdPrep .pn-lsn-fin")); i++) { await page.evaluate(() => { const b = document.querySelector("#smdPrep [data-act=l-next]"); b && b.click(); }); await sleep(150); }
+  ok(!!(await page.$("#smdPrep .pn-lsn-fin")), "PrepNucleus: the lesson reaches its finish screen");
+  ok(await waitStrip("#smdPrep"), "PrepNucleus: the finish screen shows the strip");
+  const pt = await titles("#smdPrep");
+  ok(pt.some((t) => /breast/i.test(t)), "PrepNucleus: pictures are about breast cancer " + JSON.stringify(pt.slice(0, 3)));
+  const own = await page.evaluate(() => PREP_LESSONS._pure.lessonImages(PREP_LESSONS._l.les).map((u) => String(u).split("/").pop()));
+  const shown = await page.evaluate(() => [...document.querySelectorAll("#smdPrep .igl-strip-it img")].map((i) => (i.getAttribute("src") || "").split("/").pop()));
+  ok(!shown.some((s) => own.includes(s)), "PrepNucleus: the lesson's own pictures are left out");
+  await shot("prep");
+
   ok(errs.length === 0, "no uncaught error " + JSON.stringify(errs.slice(0, 3)));
 } finally {
   await browser.close();
