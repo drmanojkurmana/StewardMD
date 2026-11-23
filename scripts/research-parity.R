@@ -96,7 +96,7 @@ json_val <- function(x) {
 fit_rec <- function(f) {
   list(est = unname(f$b[1]), se = unname(f$se),
        lo = unname(f$ci.lb), hi = unname(f$ci.ub),
-       q = unname(f$QE), df = unname(f$k - f$p), p = unname(f$QMp),
+       q = unname(f$QE), df = unname(f$k - f$p), p = unname(f$QEp),
        i2 = unname(f$I2), tau2 = unname(f$tau2),
        w = 100 * as.numeric(weights(f)) / sum(as.numeric(weights(f))))
 }
@@ -126,6 +126,8 @@ run_fits <- function(yi, vi) {
   pi_one <- function(f) {
     if (k < 3L) return(NULL)
     pr <- predict(f)
+    # FE fits carry no pi.lb: with tau2 = 0 the prediction interval is the CI
+    if (is.null(pr$pi.lb)) return(list(lower = unname(pr$ci.lb), upper = unname(pr$ci.ub)))
     list(lower = unname(pr$pi.lb), upper = unname(pr$pi.ub))
   }
   list(fits = fits,
@@ -158,7 +160,9 @@ case_bcg <- function(rows) {
 case_bourassa_or <- function() {
   data("dat.bourassa1996", package = "metadat")
   b <- dat.bourassa1996
-  cc <- which(complete.cases(b[, c("lh.le", "lh.re", "rh.le", "rh.re")]))
+  # an arm with no subjects is not a comparison (escalc's 1/2 add would still pool it)
+  cc <- which(complete.cases(b[, c("lh.le", "lh.re", "rh.le", "rh.re")]) &
+              b$lh.le + b$lh.re > 0 & b$rh.le + b$rh.re > 0)
   stopifnot(length(cc) >= 3L)
   e <- escalc(measure = "OR", ai = lh.le, bi = lh.re, ci = rh.le, di = rh.re,
               data = b, add = 1 / 2, to = "only0", drop00 = TRUE,
