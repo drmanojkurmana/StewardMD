@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-1/schemas/error-envelope.json",
+  "title": "ResearchMD error envelope",
+  "description": "Every API error is {error: {code, message, requestId}} with the x-request-id header echoed. The stale_version conflict also carries the current resource so the screen can show both values (see errors.md).",
+  "type": "object",
+  "required": ["error"],
+  "additionalProperties": false,
+  "properties": {
+    "error": {
+      "type": "object",
+      "required": ["code", "message", "requestId"],
+      "additionalProperties": false,
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "requestId": { "type": "string" }
+      }
+    },
+    "current": {
+      "type": "object",
+      "description": "Present only on 409 stale_version: the current study so the screen can show both values."
+    }
+  }
+}

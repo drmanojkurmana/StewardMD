@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/search-run-create.request.json",
+  "title": "POST /v1/projects/{projectId}/searches request",
+  "description": "Runs one database search through the 2.3 connector (see connector-api.md). query is the per-database query string, stored verbatim for replay. filters holds database-native filters (language, study type, date range); dateTo is the YYYY-MM-DD upper bound that makes re-runs comparable. Owner, editor or analyst only.",
+  "type": "object",
+  "required": ["database", "query"],
+  "additionalProperties": false,
+  "properties": {
+    "database": { "type": "string", "enum": ["pubmed", "europe_pmc", "crossref", "semantic_scholar"] },
+    "query": { "type": "string", "minLength": 1, "maxLength": 4000 },
+    "filters": { "type": "object", "maxProperties": 50 },
+    "dateTo": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "apiVersion": { "type": "string", "maxLength": 40 }
+  }
+}

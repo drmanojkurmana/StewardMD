@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-1/schemas/run-get.response.json",
+  "title": "Run resource (run create 201 and run get 200)",
+  "description": "POST runs returns {run, requestId} with this run shape; GET one run returns the same envelope. result mirrors the research-engine.js pool() return: pooled.effect is on the analysis scale (log for OR/RR/HR). Either party may re-run research-engine.js over manifest.inputs and must get the same result.",
+  "type": "object",
+  "required": ["run", "requestId"],
+  "additionalProperties": false,
+  "properties": {
+    "run": {
+      "type": "object",
+      "required": ["id", "projectId", "measure", "model", "test", "level", "studyVersions", "manifest", "result", "createdAt"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "projectId": { "type": "string" },
+        "measure": { "type": "string", "enum": ["OR", "RR", "HR", "RD", "MD", "SMD"] },
+        "model": { "type": "string", "enum": ["fixed", "random_dl", "random_reml"] },
+        "test": { "type": "string", "enum": ["wald", "knha"] },
+        "level": { "type": "number" },
+        "studyVersions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["studyId", "version"],
+            "additionalProperties": false,
+            "properties": {
+              "studyId": { "type": "string" },
+              "version": { "type": "integer", "minimum": 1 }
+            }
+          }
+        },
+        "manifest": {
+          "type": "object",
+          "required": ["engine", "engineVersion", "measure", "model", "test", "level", "inputs", "createdAt"],
+          "properties": {
+            "engine": { "type": "string" },
+            "engineVersion": { "type": "string" },
+            "measure": { "type": "string" },
+            "model": { "type": "string" },
+            "test": { "type": "string" },
+            "level": { "type": "number" },
+            "inputs": { "type": "array" },
+            "createdAt": { "type": ["integer", "string", "null"] }
+          }
+        },
+        "result": {
+          "type": "object",
+          "required": ["pooled", "heterogeneity", "weights", "excluded", "notices"],
+          "properties": {
+            "pooled": { "type": "object" },
+            "wald": { "type": "object" },
+            "hksj": { "type": ["object", "null"] },
+            "predictionInterval": { "type": ["object", "null"] },
+            "heterogeneity": { "type": "object" },
+            "weights": { "type": "array", "items": { "type": "number" } },
+            "excluded": { "type": "array" },
+            "notices": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "integer" }
+      }
+    },
+    "requestId": { "type": "string" }
+  }
+}

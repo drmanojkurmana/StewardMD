@@ -1,0 +1,50 @@
+# ResearchMD Phase 3 worker front door (D-3: Cloudflare Containers).
+# Cron every minute -> Durable Object -> container POST /drain.
+# Config fields verified against Cloudflare docs 2026-11-23. The legacy
+# @cloudflare/containers Container class is superseded by the Durable Object
+# Container API (ctx.container + [exports]); see
+# docs/research/contracts/phase-3/worker-runtime.md.
+# DO NOT DEPLOY from a builder session: provisioning and deploy are
+# owner-approved steps (plan 3.1).
+
+name = "stewardmd-research-worker"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+workers_dev = false
+
+[[containers]]
+class_name = "ResearchWorkerContainer"
+image = "../../backend/research/worker/Dockerfile"
+image_build_context = "../../backend/research"
+# standard-1: 1/2 vCPU, 4 GiB memory, 8 GB disk (OCR headroom over basic).
+instance_type = "standard-1"
+# Upper bound. v1 routes every cron tick to one named DO ("singleton"), so
+# effective concurrency is one container; scale-out is a contract change.
+max_instances = 3
+
+[[durable_objects.bindings]]
+name = "RESEARCH_WORKER"
+class_name = "ResearchWorkerContainer"
+
+[exports.ResearchWorkerContainer]
+type = "durable-object"
+storage = "sqlite"
+
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+# Non-secret config, forwarded to the container via start({env}).
+# Fill CF_ACCOUNT_ID / CF_QUEUE_ID / R2_ENDPOINT at provisioning (D-2).
+RESEARCH_CALLBACK_URL = "https://stewardmd.in"
+CF_ACCOUNT_ID = "5476a757e49205bd1cce40b144eb59a9"
+CF_QUEUE_ID = "891f623c654c4f29ab09d78e54f8b464"
+R2_ENDPOINT = "https://5476a757e49205bd1cce40b144eb59a9.r2.cloudflarestorage.com"
+R2_BUCKET = "stewardmd-research"
+
+# Secrets (never commit; set with `npx wrangler secret put <NAME>`):
+#   DRAIN_TOKEN                 shared by the cron header and the container check
+#   CF_QUEUES_TOKEN             Queues HTTP pull API token (queues read + write)
+#   R2_ACCESS_KEY_ID            R2 S3 API access key
+#   R2_SECRET_ACCESS_KEY        R2 S3 API secret key
+#   RESEARCH_CALLBACK_SECRET    HMAC secret for worker -> Pages callbacks

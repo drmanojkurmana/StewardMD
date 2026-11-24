@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/protocol-update.request.json",
+  "title": "POST /v1/protocols/{protocolId}/versions request",
+  "description": "Appends a new draft version with the full replacement content. baseVersion must equal the current latest version or the API answers 409 stale_version with the current protocol. Versioning a locked protocol answers 409 protocol_locked.",
+  "type": "object",
+  "required": ["content", "baseVersion"],
+  "additionalProperties": false,
+  "properties": {
+    "content": {
+      "type": "object",
+      "description": "Full replacement protocol body, same shape as protocol-create content."
+    },
+    "baseVersion": { "type": "integer", "minimum": 1 }
+  }
+}

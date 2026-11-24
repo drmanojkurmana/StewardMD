@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/reason-list.response.json",
+  "title": "GET /v1/projects/{projectId}/exclusion-reasons response",
+  "description": "Global reasons (scope global) plus this project's own codes. Votes may only cite codes from this list.",
+  "type": "object",
+  "required": ["reasons"],
+  "additionalProperties": false,
+  "properties": {
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "label", "scope"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string" },
+          "label": { "type": "string" },
+          "description": { "type": "string" },
+          "scope": { "type": "string", "enum": ["global", "project"] }
+        }
+      }
+    }
+  }
+}

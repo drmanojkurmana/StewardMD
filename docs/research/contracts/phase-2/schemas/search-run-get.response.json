@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/search-run-get.response.json",
+  "title": "GET /v1/searches/{searchRunId} response",
+  "description": "One search run with its replay evidence.",
+  "type": "object",
+  "required": ["searchRun"],
+  "additionalProperties": false,
+  "properties": {
+    "searchRun": {
+      "type": "object",
+      "required": ["id", "projectId", "database", "query", "filters", "resultCount", "r2Key", "createdBy", "createdTs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "projectId": { "type": "string" },
+        "database": { "type": "string", "enum": ["pubmed", "europe_pmc", "crossref", "semantic_scholar", "import"] },
+        "query": { "type": "string" },
+        "filters": { "type": "object" },
+        "dateTo": { "type": ["string", "null"] },
+        "apiVersion": { "type": "string" },
+        "resultCount": { "type": "integer", "minimum": 0 },
+        "r2Key": { "type": "string" },
+        "createdBy": { "type": "string" },
+        "createdTs": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

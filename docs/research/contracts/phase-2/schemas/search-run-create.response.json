@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/search-run-create.response.json",
+  "title": "POST /v1/projects/{projectId}/searches response",
+  "description": "The finished search run. The connector pages through every result; r2Key points at the private-R2 object with the full ID list, so replaying from the archive reproduces 100% (plan section 12).",
+  "type": "object",
+  "required": ["searchRun"],
+  "additionalProperties": false,
+  "properties": {
+    "searchRun": { "$ref": "search-run-get.response.json#/properties/searchRun" }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-3/rob-tools.response.json",
+  "title": "GET /v1/rob-tools response",
+  "type": "object",
+  "required": ["tools"],
+  "additionalProperties": false,
+  "properties": {
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "source", "domains", "overallRule"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "enum": ["rob2", "robins_i", "quadas2", "nos"] },
+          "name": { "type": "string" },
+          "source": { "type": "string" },
+          "scale": { "type": "string" },
+          "overallRule": { "type": "string", "enum": ["worst_domain_rob2", "worst_domain", "domain_level", "stars_threshold"] },
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["key", "label"],
+              "additionalProperties": false,
+              "properties": {
+                "key": { "type": "string" },
+                "label": { "type": "string" },
+                "judgments": { "type": "array", "items": { "type": "string" } },
+                "maxStars": { "type": "integer" },
+                "applicability": { "type": "boolean" },
+                "signallingQuestions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["key", "text"],
+                    "additionalProperties": false,
+                    "properties": { "key": { "type": "string" }, "text": { "type": "string" } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

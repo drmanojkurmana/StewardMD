@@ -1,0 +1,143 @@
+{
+  "title": "BCG vaccination and tuberculosis in children: a systematic review",
+  "protocol": {
+    "title": "BCG vaccination and tuberculosis in children: a systematic review",
+    "question": "What is the effect of BCG vaccination on tuberculosis in children?",
+    "objectives": "Estimate the risk ratio of tuberculosis after BCG vaccination in children.",
+    "rationale": "BCG policy differs by latitude and the evidence needs a structured synthesis.",
+    "eligibility": {
+      "include": "Randomized trials of BCG in children",
+      "exclude": "Studies without a tuberculosis outcome",
+      "grouping": "By latitude band"
+    },
+    "outcomes": [
+      { "name": "Tuberculosis", "measure": "RR", "timepoint": "5 years" }
+    ],
+    "otherVariables": ["age", "latitude"],
+    "registration": { "name": "PROSPERO", "number": "CRD42025000001" },
+    "access": "https://example.test/protocol",
+    "amendments": "None"
+  },
+  "searches": [
+    {
+      "database": "PubMed",
+      "query": "BCG AND tuberculosis",
+      "lastSearchDate": "2024-01-15",
+      "resultCount": 80
+    },
+    {
+      "database": "Europe PMC",
+      "query": "",
+      "lastSearchDate": "2024-01-16",
+      "resultCount": 40
+    }
+  ],
+  "screening": {
+    "reviewers": 2,
+    "independent": true,
+    "automation": "none",
+    "recordsScreened": 100
+  },
+  "prisma": {
+    "recordsIdentified": 120,
+    "recordsScreened": 100,
+    "recordsExcluded": 80,
+    "reportsSought": 20,
+    "reportsAssessed": 18,
+    "reportsExcluded": 6,
+    "studiesIncluded": 12,
+    "recordsFromDatabases": 110,
+    "recordsFromOtherSources": 10,
+    "recordsDuplicatesRemoved": 20,
+    "reportsNotRetrieved": 2
+  },
+  "excludedStudies": [
+    { "citation": "Smith 2010", "reason": "Wrong population" }
+  ],
+  "extractions": [
+    {
+      "citation": "Aronson 1948",
+      "verified": true,
+      "characteristics": { "n": 262, "setting": "schools" },
+      "effect": { "estimate": 0.5, "ciLower": 0.25, "ciUpper": 0.75 }
+    }
+  ],
+  "extractionProcess": { "reviewers": 2, "independent": true },
+  "rob": [
+    { "citation": "Aronson 1948", "tool": "RoB 2", "overall": "some concerns" }
+  ],
+  "robProcess": { "tool": "RoB 2", "reviewers": 2, "independent": true },
+  "runs": [
+    {
+      "measure": "RR",
+      "model": "random effects",
+      "software": "research-engine",
+      "effect": 0.5,
+      "ciLower": 0.25,
+      "ciUpper": 0.75,
+      "i2": 40,
+      "tau2": 0.25,
+      "q": 12,
+      "preparation": "Log risk ratios and their variances",
+      "display": "Forest plot",
+      "subgroup": { "method": "Latitude bands", "result": "The latitude bands differed." },
+      "sensitivity": { "method": "Leave one study out", "result": "The estimate stayed in the same range." },
+      "reportingBias": { "method": "Funnel plot", "result": "The funnel plot was inspected." }
+    }
+  ],
+  "grade": [],
+  "declarations": {
+    "funding": "No specific funding.",
+    "conflicts": "The authors declare no competing interests.",
+    "dataAvailability": "Data are in the project record."
+  },
+  "manuscript": {
+    "sections": [
+      {
+        "heading": "Title",
+        "paragraphs": [
+          "BCG vaccination and tuberculosis in children: a systematic review"
+        ]
+      },
+      {
+        "heading": "Abstract",
+        "paragraphs": [
+          "Methods searched two databases. Results included 12 studies."
+        ]
+      },
+      {
+        "heading": "Introduction",
+        "paragraphs": [
+          "Tuberculosis in children remains a reason to examine BCG."
+        ]
+      },
+      {
+        "heading": "Information sources",
+        "paragraphs": [
+          "PubMed was last searched on 2024-01-15. Europe PMC was last searched on 2024-01-16."
+        ]
+      },
+      {
+        "heading": "Methods",
+        "paragraphs": [
+          "Eligibility followed the protocol."
+        ]
+      },
+      {
+        "heading": "Results",
+        "paragraphs": [
+          "The flow diagram shows 120 records identified and 12 studies included."
+        ]
+      },
+      {
+        "heading": "Discussion",
+        "paragraphs": [
+          "We read these findings in the light of other evidence from earlier BCG trials.",
+          "Limitations of the included evidence include short follow-up in some trials.",
+          "Limitations of the review methods include searching two databases only.",
+          "Implications for practice and future research remain open until more trials report."
+        ]
+      }
+    ]
+  }
+}

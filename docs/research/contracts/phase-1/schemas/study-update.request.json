@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-1/schemas/study-update.request.json",
+  "title": "PUT /v1/projects/{projectId}/studies/{studyId} request",
+  "description": "Optimistic concurrency: version must equal the stored version or the API answers 409 stale_version with the current study (see errors.md). Setting verified true records verifiedBy and verifiedAt server-side; verifiedBy in the body is ignored.",
+  "type": "object",
+  "required": ["version"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "label": { "type": "string", "maxLength": 240 },
+    "inputs": {
+      "type": "object",
+      "description": "Same oneOf shapes as study-create.request inputs."
+    },
+    "locator": { "$ref": "../locator.schema.json" },
+    "quote": { "type": "string", "maxLength": 2000 },
+    "verified": { "type": "boolean" }
+  }
+}
