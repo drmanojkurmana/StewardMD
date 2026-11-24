@@ -32,6 +32,28 @@ const TYPES = {
 
 const server = http.createServer((req, res) => {
   const p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+  if (p === '/api/research/v1/projects' && req.method === 'POST') {
+    let body = '';
+    req.on('data', (c) => { body += c; });
+    req.on('end', () => {
+      let b = {};
+      try { b = JSON.parse(body || '{}'); } catch { b = {}; }
+      res.writeHead(201, { 'content-type': 'application/json' });
+      res.end(JSON.stringify({
+        project: {
+          id: 'prj_srv_phase1',
+          title: b.title || 'Untitled project',
+          discipline: b.discipline || 'medicine',
+          specialty: b.specialty || '',
+          studyType: b.studyType || '',
+          role: 'owner',
+          createdAt: Date.now()
+        },
+        requestId: 'req_phase1'
+      }));
+    });
+    return;
+  }
   if (p.startsWith('/api/')) {
     res.writeHead(404, { 'content-type': 'application/json' });
     res.end('{"error":"not_found"}');
@@ -238,7 +260,8 @@ try {
   })()`);
   ok(conflictSim, 'version mismatch triggers 409 stale_version error');
   ok(await until(`!!document.querySelector('#rmdConflictModal')`, 3000), '409 conflict dialog rendered on screen');
-  ok(/Version Conflict \(HTTP 409/.test(await text('#rmdConflictModal')), 'conflict dialog explains HTTP 409 stale version');
+  ok(/This study changed while you were editing/.test(await text('#rmdConflictModal')), 'conflict dialog explains the stale version in plain words');
+  ok(/Details for support/.test(await ev(`document.querySelector('#rmdConflictModal').innerHTML`)), 'raw code kept only in collapsed support details');
   ok(/Your Changes/i.test(await text('#rmdConflictModal')) && /Server Stored/i.test(await text('#rmdConflictModal')), 'side-by-side local vs server comparison shown');
   await shot('phone-375-conflict409');
 
@@ -306,6 +329,29 @@ try {
     return !!manData && manData.size > 100;
   })()`);
   ok(manifestCheck, 'manifest JSON export triggers and produces valid contract blob');
+
+  // 9b. Native export path: Capacitor Filesystem CACHE + Share (stubbed plugins)
+  const nativeCsv = await ev(`(async()=>{
+    window.__exports = [];
+    window.Capacitor = {
+      isNativePlatform: function () { return true; },
+      Plugins: {
+        Filesystem: { writeFile: function (o) { window.__exports.push({ kind: 'write', opts: { path: o.path, directory: o.directory, dataLen: (o.data || '').length } }); return Promise.resolve({ uri: 'file:///cache/' + o.path }); } },
+        Share: { share: function (o) { window.__exports.push({ kind: 'share', opts: o }); return Promise.resolve({}); } }
+      }
+    };
+    const store = SMD_RESEARCH.store;
+    await SMD_RESEARCH.screens.run.exportCsv(store.getActiveRunResult(), store.getActiveProject(), store.getStudies());
+    const w = (window.__exports.filter(function (x) { return x.kind === 'write'; })[0] || {}).opts;
+    const s = (window.__exports.filter(function (x) { return x.kind === 'share'; })[0] || {}).opts;
+    delete window.Capacitor;
+    return { w: w || null, s: s || null };
+  })()`);
+  ok(nativeCsv.w && nativeCsv.w.directory === 'CACHE', 'native CSV export writes via Filesystem with directory CACHE');
+  ok(nativeCsv.w && /^[A-Za-z0-9-]+-results\.csv$/.test(nativeCsv.w.path || '') && nativeCsv.w.dataLen > 100, 'native CSV export uses readable ASCII -results.csv filename with base64 data');
+  ok(nativeCsv.w && nativeCsv.s && nativeCsv.s.url === 'file:///cache/' + nativeCsv.w.path, 'native CSV export shares the written file uri');
+  ok(nativeCsv.s && nativeCsv.s.dialogTitle === 'Save or send your file', 'native CSV share sheet has plain dialog title');
+  ok(await ev(`/Your file is ready to save or share/.test(document.body.textContent)`), 'native CSV export shows plain confirmation');
 
   // 10. Viewport 2: Tablet Portrait (768 x 1024)
   await call('Emulation.setDeviceMetricsOverride', { width: 768, height: 1024, deviceScaleFactor: 2, mobile: true });

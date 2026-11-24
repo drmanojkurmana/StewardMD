@@ -108,14 +108,14 @@
       st.busy = false;
       var csvText = typeof res === "string" ? res : (res && res.csv ? res.csv : generateFallbackCsv());
       p2().downloadText("cost-report-" + st.projectId + ".csv", csvText, "text/csv");
-      st.announce = "Cost report CSV downloaded.";
+      st.announce = "Your cost report CSV is ready to save or share.";
       render(container);
     }).catch(function () {
       if (mySeq !== seq) return;
       st.busy = false;
       var csvText = generateFallbackCsv();
       p2().downloadText("cost-report-" + st.projectId + ".csv", csvText, "text/csv");
-      st.announce = "Cost report CSV exported.";
+      st.announce = "Your cost report CSV is ready to save or share.";
       render(container);
     });
   }

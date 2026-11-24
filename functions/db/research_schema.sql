@@ -980,3 +980,36 @@ CREATE TABLE IF NOT EXISTS research_checklist_manual (
   updated_ts INTEGER NOT NULL,
   PRIMARY KEY (project_id, guideline_id, item_num)
 );
+
+-- Phase 5 contract 0007 (docs/research/contracts/phase-5/0007_research_v7.sql):
+-- shared paper-number cache (find-and-add studies) and unverified Ask MaiK
+-- drafts. Identical to the 0007 CREATE statements. The cache is not scoped
+-- to a project: the same PMID, DOI, outcome and measure is reused for every
+-- user. Drafts stay unverified until a person saves them through the
+-- protocol, risk of bias, checklist or manuscript routes.
+
+CREATE TABLE IF NOT EXISTS research_paper_numbers (
+  cache_key TEXT PRIMARY KEY,
+  pmid TEXT NOT NULL DEFAULT '',
+  doi TEXT NOT NULL DEFAULT '',
+  outcome_norm TEXT NOT NULL DEFAULT '',
+  measure TEXT NOT NULL,
+  value_json TEXT NOT NULL,
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_paper_numbers_ids
+  ON research_paper_numbers(pmid, doi);
+
+CREATE TABLE IF NOT EXISTS research_ai_drafts (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  task TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'unverified' CHECK(status IN ('unverified')),
+  draft_json TEXT NOT NULL,
+  model TEXT NOT NULL DEFAULT '',
+  cost_inr REAL NOT NULL DEFAULT 0,
+  created_by TEXT NOT NULL,
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_ai_drafts_project
+  ON research_ai_drafts(project_id, created_ts DESC);

@@ -23,6 +23,7 @@
   var editingStudyId = null;
   var filterStatus = "all"; // "all", "verified", "unverified"
   var currentInputType = "rawCounts"; // "rawCounts", "rawMeans", "reported", "generic"
+  var formError = null;
 
   function detectInputType(measure, inputs) {
     if (!inputs) return "rawCounts";
@@ -112,9 +113,13 @@
     h.push('    </div>');
 
     h.push('    <div class="rmd-topbar-actions">');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="find-studies">');
+    h.push('        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>');
+    h.push('        <span>Find and add studies</span>');
+    h.push('      </button>');
     h.push('      <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="add-study">');
     h.push('        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>');
-    h.push('        <span>Add Study</span>');
+    h.push('        <span>Add manually</span>');
     h.push('      </button>');
 
     var runDisabled = verifiedCount < 2;
@@ -151,7 +156,8 @@
     if (!studies.length) {
       h.push('      <div class="rmd-empty-pane">');
       h.push('        <p>No studies match the selected filter.</p>');
-      h.push('        <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="add-study">Add Study</button>');
+      h.push('        <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="find-studies">Find and add studies</button>');
+      h.push('        <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="add-study">Add manually</button>');
       h.push('      </div>');
     } else {
       h.push('      <div class="rmd-studies-list" role="list">');
@@ -317,19 +323,22 @@
     h.push('  </div>');
 
     h.push('  <form id="rmdStudyForm" class="rmd-form">');
+    if (formError) {
+      h.push((SMD.p2 && SMD.p2.errHtml) ? SMD.p2.errHtml(formError) : '<div class="rmd-banner rmd-banner-error" role="alert"><strong>' + esc(formError.message || "Something went wrong.") + '</strong></div>');
+    }
     if (isEdit) {
       h.push('    <input type="hidden" id="rmd_st_version" value="' + (study.version || 1) + '">');
       h.push('    <input type="hidden" id="rmd_st_id" value="' + esc(study.id) + '">');
     }
 
     h.push('    <div class="rmd-field">');
-    h.push('      <label for="rmd_st_label">Study Label (Author &amp; Year) <span class="rmd-req">*</span></label>');
+    h.push('      <label for="rmd_st_label">Study label (first author and year) <span class="rmd-req">*</span></label>');
     h.push('      <input type="text" id="rmd_st_label" required placeholder="e.g. Aronson 1948" value="' + esc(study ? study.label : '') + '">');
     h.push('    </div>');
 
     h.push('    <div class="rmd-form-row">');
     h.push('      <div class="rmd-field">');
-    h.push('        <label for="rmd_st_measure">Effect Measure</label>');
+    h.push('        <label for="rmd_st_measure">Effect measure (the statistic comparing the two groups)</label>');
     h.push('        <select id="rmd_st_measure">');
     var measures = ["RR", "OR", "HR", "RD", "MD", "SMD"];
     for (var m = 0; m < measures.length; m++) {
@@ -339,7 +348,7 @@
     h.push('      </div>');
 
     h.push('      <div class="rmd-field">');
-    h.push('        <label for="rmd_st_input_type">Input Data Format</label>');
+    h.push('        <label for="rmd_st_input_type">Input format (how the numbers are written)</label>');
     h.push('        <select id="rmd_st_input_type">');
     h.push('          <option value="rawCounts"' + (inType === 'rawCounts' ? ' selected' : '') + '>2x2 Raw Counts (Events &amp; Total)</option>');
     h.push('          <option value="rawMeans"' + (inType === 'rawMeans' ? ' selected' : '') + '>Continuous (Mean, SD, N)</option>');
@@ -356,25 +365,25 @@
 
     // Evidence Locator Section (Per locator.schema.json)
     h.push('    <div class="rmd-locator-section">');
-    h.push('      <h4 class="rmd-section-label">Source Document Provenance (Integrity Rule #2)</h4>');
+    h.push('      <h4 class="rmd-section-label">Source provenance (where the numbers came from)</h4>');
     h.push('      <div class="rmd-field">');
-    h.push('        <label for="rmd_st_citation">Full Source Citation / Reference / DOI <span class="rmd-req">*</span></label>');
+    h.push('        <label for="rmd_st_citation">Citation (the paper reference or DOI) <span class="rmd-req">*</span></label>');
     h.push('        <input type="text" id="rmd_st_citation" required placeholder="e.g. Aronson JD, Am Rev Tuberc 1948; 58:255-281" value="' + esc(locator.citation || '') + '">');
     h.push('      </div>');
 
     h.push('      <div class="rmd-form-row">');
     h.push('        <div class="rmd-field">');
-    h.push('          <label for="rmd_st_page">Page Number(s)</label>');
+    h.push('          <label for="rmd_st_page">Page (where in the paper)</label>');
     h.push('          <input type="text" id="rmd_st_page" placeholder="e.g. 258 or 258-260" value="' + esc(locator.page || '') + '">');
     h.push('        </div>');
     h.push('        <div class="rmd-field">');
-    h.push('          <label for="rmd_st_section">Section / Table</label>');
+    h.push('          <label for="rmd_st_section">Section or table (where the numbers appear)</label>');
     h.push('          <input type="text" id="rmd_st_section" placeholder="e.g. Results, Table 2" value="' + esc(locator.section || locator.table || '') + '">');
     h.push('        </div>');
     h.push('      </div>');
 
     h.push('      <div class="rmd-field">');
-    h.push('        <label for="rmd_st_quote">Exact Supporting Quotation from Source</label>');
+    h.push('        <label for="rmd_st_quote">Exact quote (the sentence from the paper with the numbers)</label>');
     h.push('        <textarea id="rmd_st_quote" rows="2" placeholder="e.g. At 10 years, 4 cases occurred in the vaccinated group (n=123)...">' + esc(study ? (study.quote || locator.quote) : '') + '</textarea>');
     h.push('        <span class="rmd-field-hint">Quote the exact sentence or table cell to allow source auditing.</span>');
     h.push('      </div>');
@@ -457,8 +466,8 @@
     h.push('    <div class="rmd-modal-header rmd-modal-warn">');
     h.push('      <div class="rmd-warn-hdr-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>');
     h.push('      <div>');
-    h.push('        <h3>Version Conflict (HTTP 409: stale_version)</h3>');
-    h.push('        <p>This study was updated on another session or device. Choose which version to keep:</p>');
+    h.push('        <h3>This study changed while you were editing</h3>');
+    h.push('        <p>It was updated on another session or device. Choose which version to keep:</p>');
     h.push('      </div>');
     h.push('    </div>');
 
@@ -487,6 +496,8 @@
     h.push('        <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="conflict-accept-server" data-rmd-study="' + esc(conflict.studyId) + '">Accept Server Version</button>');
     h.push('      </div>');
     h.push('    </div>');
+
+    h.push('    <details class="rmd-banner-details"><summary>Details for support</summary><span class="rmd-banner-code">Code: stale_version (HTTP 409)</span></details>');
 
     h.push('  </div>');
     h.push('</div>');
@@ -534,13 +545,22 @@
       };
     }
 
-    // Add Study button
+    // Add Study button (manual form)
     var addBtns = container.querySelectorAll('[data-rmd="add-study"]');
     for (var e = 0; e < addBtns.length; e++) {
       addBtns[e].onclick = function () {
         viewMode = "new";
         editingStudyId = null;
+        formError = null;
         renderStudies(container);
+      };
+    }
+
+    // Find and add studies (search sheet)
+    var findBtns = container.querySelectorAll('[data-rmd="find-studies"]');
+    for (var fb = 0; fb < findBtns.length; fb++) {
+      findBtns[fb].onclick = function () {
+        if (SMD.find && SMD.find.open) SMD.find.open(project);
       };
     }
 
@@ -577,6 +597,7 @@
         if (sid) {
           editingStudyId = sid;
           viewMode = "edit";
+          formError = null;
           renderStudies(container);
         }
       };
@@ -672,9 +693,11 @@
         var label = (labelInput ? labelInput.value : "").trim();
         var citation = (citInput ? citInput.value : "").trim();
         if (!label || !citation) {
-          alert("Study label and citation are required.");
+          formError = { message: "Study label and citation are required." };
+          renderStudies(container);
           return false;
         }
+        formError = null;
 
         var inType = typeInput ? typeInput.value : "rawCounts";
         var inputs = {};
@@ -732,7 +755,8 @@
             if (err && err.code === "stale_version") {
               renderStudies(container);
             } else {
-              alert(err.message || "Failed to update study");
+              formError = err;
+              renderStudies(container);
             }
           }
         } else {
@@ -743,7 +767,8 @@
             editingStudyId = null;
             renderStudies(container);
           } catch (err) {
-            alert(err.message || "Failed to create study");
+            formError = err;
+            renderStudies(container);
           }
         }
 
@@ -771,8 +796,17 @@
     }
   }
 
+  function editStudy(id) {
+    if (SMD.find && SMD.find.close) SMD.find.close();
+    editingStudyId = id;
+    viewMode = "edit";
+    formError = null;
+    if (SMD.navigate) SMD.navigate("studies");
+  }
+
   SMD.screens.studies = {
-    render: renderStudies
+    render: renderStudies,
+    editStudy: editStudy
   };
 
 })(typeof window !== "undefined" ? window : globalThis);

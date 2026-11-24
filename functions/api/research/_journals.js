@@ -114,13 +114,19 @@ export async function listJournals(ctx, url) {
     j.name.toLowerCase().includes(q) || j.scope.some((s) => s.toLowerCase().includes(q)));
   return api.json({ journals }, 200, { "x-request-id": requestId });
 }
+/* One journal row, or null. Seeds on first read. Used by format-check. */
+export async function loadJournal(db, id) {
+  await ensureSeeded(db);
+  const row = await db.prepare("SELECT * FROM research_journals WHERE id=?").bind(id).first();
+  return row ? journalOf(row) : null;
+}
+
 /* GET /v1/journals/{id} */
 export async function getJournal(ctx, id) {
   const { db, requestId, api } = ctx;
-  await ensureSeeded(db);
-  const row = await db.prepare("SELECT * FROM research_journals WHERE id=?").bind(id).first();
-  if (!row) return api.err(404, "journal_not_found", "Journal not found", requestId);
-  return api.json({ journal: journalOf(row) }, 200, { "x-request-id": requestId });
+  const journal = await loadJournal(db, id);
+  if (!journal) return api.err(404, "journal_not_found", "Journal not found", requestId);
+  return api.json({ journal }, 200, { "x-request-id": requestId });
 }
 /* POST /v1/journals/match {keywords, design?}: deterministic scoring.
  * score = 2 * distinct scope hits + 3 * design match; zero-score omitted. */

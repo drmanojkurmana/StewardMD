@@ -40,6 +40,66 @@
     return p.toFixed(4);
   }
 
+  var MEASURE_LABELS = {
+    RR: "Risk ratio (RR)",
+    OR: "Odds ratio (OR)",
+    HR: "Hazard ratio (HR)",
+    RD: "Risk difference (RD)",
+    MD: "Mean difference (MD)",
+    SMD: "Standardised mean difference (SMD)"
+  };
+
+  var REPORT_WHY = {
+    counts: "Risk ratio (RR): the chance of the event with treatment divided by the chance without it.",
+    average: "Mean difference (MD): the average in one group minus the average in the other.",
+    ratio: "The ratio each study reported, with its 95% confidence interval (CI)."
+  };
+
+  /* Normal CDF (Zelen & Severo approximation), same as the manuscript screen,
+   * for the two-sided p of the pooled effect. */
+  function normCdf(x) {
+    var t = 1 / (1 + 0.2316419 * Math.abs(x));
+    var d = 0.3989422804014327 * Math.exp(-x * x / 2);
+    var p = d * t * (0.31938153 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+    return x >= 0 ? 1 - p : p;
+  }
+
+  function pooledP(result) {
+    var pooled = result && result.pooled;
+    if (!pooled || pooled.effect == null || !pooled.se) return undefined;
+    return 2 * (1 - normCdf(Math.abs(pooled.effect / pooled.se)));
+  }
+
+  /* Deterministic "What this means" lines under the result cards. RD has no
+   * plain-words rule in the helper, so only heterogeneity and p are shown. */
+  function whatMeansHtml(result, measure) {
+    var explain = G.SMD_RESEARCH_EXPLAIN;
+    if (!explain || !result) return "";
+    var isRatio = !!RATIO_MEASURES[measure];
+    var pooled = result.pooled || {};
+    var het = result.heterogeneity || {};
+    var est = isRatio ? Math.exp(pooled.effect) : pooled.effect;
+    var lo = isRatio ? Math.exp(pooled.ciLower) : pooled.ciLower;
+    var hi = isRatio ? Math.exp(pooled.ciUpper) : pooled.ciUpper;
+    var lines = [];
+    if (measure !== "RD" && isFinite(est) && isFinite(lo) && isFinite(hi)) {
+      try {
+        lines.push(explain.effect({ measure: measure, estimate: est, ciLower: lo, ciUpper: hi, p: pooledP(result) }));
+      } catch (e) {}
+    }
+    if (het.i2 != null) {
+      try { lines.push(explain.heterogeneity(het.i2, het.tau2)); } catch (e) {}
+    }
+    if (het.p != null) {
+      try { lines.push("Test of Homogeneity: " + explain.pValue(het.p)); } catch (e) {}
+    }
+    if (!lines.length) return "";
+    var h = ['<div class="rmd-what-mean-box">', '<p class="rmd-what-mean-title">What this means</p>'];
+    for (var i = 0; i < lines.length; i++) h.push('<p class="rmd-what-mean">' + esc(lines[i]) + '</p>');
+    h.push('</div>');
+    return h.join("");
+  }
+
   function renderRunScreen(container) {
     var store = SMD.store;
     var engine = G.SMD_RESEARCH_ENGINE;
@@ -82,11 +142,11 @@
       h.push('    <div class="rmd-topbar-actions">');
       h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="export-csv">');
       h.push('        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>');
-      h.push('        <span>Export CSV</span>');
+      h.push('        <span>Download CSV</span>');
       h.push('      </button>');
       h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="export-manifest">');
       h.push('        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>');
-      h.push('        <span>Manifest JSON</span>');
+      h.push('        <span>Download details (JSON)</span>');
       h.push('      </button>');
       h.push('    </div>');
     }
@@ -99,6 +159,41 @@
     h.push('    <div class="rmd-run-settings-panel">');
     h.push('      <div class="rmd-card">');
     h.push('        <h3 class="rmd-card-heading">Analysis Specification</h3>');
+
+    // Plain choosers: set the measure and model selects below without jargon.
+    var reportKind = "counts";
+    if (verifiedStudies.length && verifiedStudies[0].inputs) {
+      var inp0 = verifiedStudies[0].inputs;
+      if (inp0.mean1 !== undefined) reportKind = "average";
+      else if (inp0.effect !== undefined || inp0.yi !== undefined) reportKind = "ratio";
+    }
+    var reportOpts = [
+      { key: "counts", label: "Counts of people with the event" },
+      { key: "average", label: "An average with spread" },
+      { key: "ratio", label: "A ratio with its range" }
+    ];
+    h.push('        <div class="rmd-plain-chooser">');
+    h.push('          <p class="rmd-plain-q">What did each study report?</p>');
+    h.push('          <div class="rmd-plain-opts">');
+    for (var ro = 0; ro < reportOpts.length; ro++) {
+      h.push('            <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-plain-report="' + reportOpts[ro].key + '" aria-pressed="' + (reportKind === reportOpts[ro].key ? 'true' : 'false') + '">' + reportOpts[ro].label + '</button>');
+    }
+    h.push('          </div>');
+    h.push('          <p class="rmd-plain-why" id="rmdPlainReportWhy">' + esc(REPORT_WHY[reportKind]) + '</p>');
+    h.push('        </div>');
+
+    var sameThing = runSettings.model === "fixed";
+    var explainInit = G.SMD_RESEARCH_EXPLAIN;
+    var modelWhyText = explainInit ? explainInit.model(sameThing ? "fixed" : "random") : "";
+    h.push('        <div class="rmd-plain-chooser">');
+    h.push('          <p class="rmd-plain-q">Should we assume every study measures the same thing?</p>');
+    h.push('          <div class="rmd-plain-opts">');
+    h.push('            <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-plain-model="same" aria-pressed="' + (sameThing ? 'true' : 'false') + '">Yes, the same thing</button>');
+    h.push('            <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-plain-model="different" aria-pressed="' + (sameThing ? 'false' : 'true') + '">Not sure, probably a bit different</button>');
+    h.push('          </div>');
+    h.push('          <p class="rmd-plain-why" id="rmdPlainModelWhy">' + esc(modelWhyText) + '</p>');
+    h.push('        </div>');
+
     h.push('        <form id="rmdRunConfigForm" class="rmd-form">');
 
     h.push('          <div class="rmd-field">');
@@ -106,7 +201,8 @@
     h.push('            <select id="rmd_run_measure">');
     var measures = ["RR", "OR", "HR", "RD", "MD", "SMD"];
     for (var m = 0; m < measures.length; m++) {
-      h.push('              <option value="' + measures[m] + '"' + (measure === measures[m] ? ' selected' : '') + '>' + measures[m] + '</option>');
+      var mLabel = MEASURE_LABELS[measures[m]];
+      h.push('              <option value="' + measures[m] + '"' + (measure === measures[m] ? ' selected' : '') + '>' + mLabel + '</option>');
     }
     h.push('            </select>');
     h.push('          </div>');
@@ -192,7 +288,7 @@
 
     // KPI 1: Pooled Effect
     h.push('    <div class="rmd-kpi-card rmd-kpi-highlight">');
-    h.push('      <span class="rmd-kpi-lbl">Pooled ' + esc(measure) + ' (' + (manifest.model === 'fixed' ? 'Fixed Effect' : 'Random Effects') + ')</span>');
+    h.push('      <span class="rmd-kpi-lbl">Pooled ' + esc(MEASURE_LABELS[measure] || measure) + ', ' + (manifest.model === 'fixed' ? 'fixed-effect model' : 'random-effects model') + '</span>');
     h.push('      <div class="rmd-kpi-val">' + fmtNum(pooledEst, 3) + '</div>');
     h.push('      <div class="rmd-kpi-sub">95% CI [' + fmtNum(pooledLower, 3) + ' to ' + fmtNum(pooledUpper, 3) + ']</div>');
     h.push('    </div>');
@@ -226,6 +322,8 @@
 
     h.push('  </div>'); // .rmd-kpi-grid
 
+    h.push(whatMeansHtml(result, measure));
+
     // Method Notices / Warnings
     if (result.notices && result.notices.length > 0) {
       h.push('  <div class="rmd-notices-box">');
@@ -252,6 +350,15 @@
     h.push('    <div class="rmd-svg-scroll-container">');
     h.push(generateForestPlotSvg(result, manifest, verifiedStudies));
     h.push('    </div>');
+
+    // One-time plain caption, shown the first time a forest plot appears.
+    var explainCap = G.SMD_RESEARCH_EXPLAIN;
+    var capSeen = false;
+    try { capSeen = localStorage.getItem("smd_rmd_forest_caption") === "1"; } catch (e) {}
+    if (explainCap && !capSeen) {
+      h.push('    <p class="rmd-what-mean rmd-forest-caption">' + esc(explainCap.forestCaption()) + '</p>');
+      try { localStorage.setItem("smd_rmd_forest_caption", "1"); } catch (e) {}
+    }
 
     h.push('  </div>'); // .rmd-forest-card
     h.push('</div>'); // .rmd-results-wrap
@@ -554,18 +661,20 @@
       '""'
     ].join(","));
 
-    var blob = new Blob([csvRows.join("\n")], { type: "text/csv;charset=utf-8;" });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement("a");
-    a.href = url;
-    a.download = "researchmd-meta-analysis-" + measure.toLowerCase() + "-" + Date.now() + ".csv";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    return deliverExport(csvRows.join("\n"), "text/csv",
+      SMD.p2.fileSlug(project && project.title, "meta-analysis") + "-results.csv");
   }
 
-  function exportManifest(activeResult) {
+  function deliverExport(text, mime, filename) {
+    var container = document.querySelector(".rmd-run-screen") || document.getElementById("rmdScreenBody");
+    return SMD.p2.downloadText(filename, text, mime).then(function () {
+      SMD.p2.flashNotice(container, "Your file is ready to save or share.", "info");
+    }, function (err) {
+      SMD.p2.flashNotice(container, SMD.p2.friendlyError(err).message, "error");
+    });
+  }
+
+  function exportManifest(activeResult, project) {
     var manifestExport = {
       engine: "research-engine",
       engineVersion: "rmd1",
@@ -580,15 +689,8 @@
     };
 
     var jsonStr = JSON.stringify(manifestExport, null, 2);
-    var blob = new Blob([jsonStr], { type: "application/json;charset=utf-8;" });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement("a");
-    a.href = url;
-    a.download = "researchmd-manifest-" + activeResult.manifest.measure.toLowerCase() + "-" + Date.now() + ".json";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    return deliverExport(jsonStr, "application/json",
+      SMD.p2.fileSlug(project && project.title, "meta-analysis") + "-analysis-details.json");
   }
 
   function bindEvents(container, project, verifiedStudies) {
@@ -617,7 +719,53 @@
     if (expManBtn) {
       expManBtn.onclick = function () {
         var activeRes = store.getActiveRunResult();
-        if (activeRes) exportManifest(activeRes);
+        if (activeRes) exportManifest(activeRes, project);
+      };
+    }
+
+    // Plain choosers drive the advanced selects; the selects stay editable.
+    var measSel0 = container.querySelector("#rmd_run_measure");
+    var modSel0 = container.querySelector("#rmd_run_model");
+    var reportWhy = container.querySelector("#rmdPlainReportWhy");
+    var modelWhy = container.querySelector("#rmdPlainModelWhy");
+    var explain = G.SMD_RESEARCH_EXPLAIN;
+
+    function markPressed(attr, key) {
+      var btns = container.querySelectorAll("[" + attr + "]");
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].setAttribute("aria-pressed", btns[i].getAttribute(attr) === key ? "true" : "false");
+      }
+    }
+
+    var reportBtns = container.querySelectorAll("[data-rmd-plain-report]");
+    for (var rb = 0; rb < reportBtns.length; rb++) {
+      reportBtns[rb].onclick = function () {
+        var key = this.getAttribute("data-rmd-plain-report");
+        if (measSel0) {
+          if (key === "counts") measSel0.value = "RR";
+          else if (key === "average") measSel0.value = "MD";
+          else if (!RATIO_MEASURES[measSel0.value]) measSel0.value = "RR";
+        }
+        markPressed("data-rmd-plain-report", key);
+        if (reportWhy) reportWhy.textContent = REPORT_WHY[key] || "";
+      };
+    }
+
+    var modelBtns = container.querySelectorAll("[data-rmd-plain-model]");
+    for (var mb = 0; mb < modelBtns.length; mb++) {
+      modelBtns[mb].onclick = function () {
+        var fixed = this.getAttribute("data-rmd-plain-model") === "same";
+        if (modSel0) modSel0.value = fixed ? "fixed" : "random_dl";
+        runSettings.model = fixed ? "fixed" : "random_dl";
+        markPressed("data-rmd-plain-model", fixed ? "same" : "different");
+        if (modelWhy && explain) modelWhy.textContent = explain.model(fixed ? "fixed" : "random");
+      };
+    }
+    if (modSel0) {
+      modSel0.onchange = function () {
+        var fixed = modSel0.value === "fixed";
+        markPressed("data-rmd-plain-model", fixed ? "same" : "different");
+        if (modelWhy && explain) modelWhy.textContent = explain.model(fixed ? "fixed" : "random");
       };
     }
 

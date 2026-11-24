@@ -268,6 +268,8 @@
       studyType: "Systematic Review & Meta-Analysis",
       researchQuestion: "Does BCG vaccination reduce tuberculosis incidence in clinical trials?",
       role: "owner",
+      practice: true,
+      serverId: null,
       createdAt: 1732360000000,
       updatedAt: 1732360000000
     };
@@ -363,6 +365,67 @@
       return project;
     },
 
+    adoptServerProject: function (sp) {
+      var now = Date.now();
+      var project = {
+        id: sp.id,
+        serverId: sp.id,
+        practice: false,
+        title: sp.title || "Untitled project",
+        discipline: sp.discipline || "medicine",
+        specialty: sp.specialty || "",
+        studyType: sp.studyType || "Systematic Review",
+        researchQuestion: sp.researchQuestion || "",
+        role: sp.role || "owner",
+        createdAt: sp.createdAt || now,
+        updatedAt: now
+      };
+      var replaced = false;
+      for (var i = 0; i < state.projects.length; i++) {
+        if (state.projects[i].id === project.id) { state.projects[i] = project; replaced = true; break; }
+      }
+      if (!replaced) state.projects.unshift(project);
+      if (!state.studies[project.id]) state.studies[project.id] = [];
+      if (!state.runs[project.id]) state.runs[project.id] = [];
+      state.activeProjectId = project.id;
+      state.activeStudyId = state.studies[project.id][0] ? state.studies[project.id][0].id : null;
+      state.activeRunResult = null;
+      saveState();
+      notify();
+      return project;
+    },
+
+    migrateLocalProject: function (oldId, sp, serverStudies) {
+      var project = STORE.adoptServerProject(sp);
+      var oldRuns = state.runs[oldId] || [];
+      state.studies[project.id] = (serverStudies || []).slice();
+      var runs = [];
+      for (var i = 0; i < oldRuns.length; i++) {
+        var r = {};
+        for (var k in oldRuns[i]) { r[k] = oldRuns[i][k]; }
+        r.projectId = project.id;
+        runs.push(r);
+      }
+      state.runs[project.id] = runs;
+      if (oldId !== project.id) {
+        state.projects = state.projects.filter(function (p) { return p.id !== oldId; });
+        delete state.studies[oldId];
+        delete state.runs[oldId];
+      }
+      state.offlineQueue = state.offlineQueue.filter(function (q) {
+        var pl = q.payload || {};
+        if (pl.projectId === oldId) return false;
+        if (q.type === "project_create" && pl.id === oldId) return false;
+        return true;
+      });
+      state.activeProjectId = project.id;
+      state.activeStudyId = state.studies[project.id][0] ? state.studies[project.id][0].id : null;
+      state.activeRunResult = null;
+      saveState();
+      notify();
+      return project;
+    },
+
     deleteProject: function (id) {
       state.projects = state.projects.filter(function (p) { return p.id !== id; });
       delete state.studies[id];
@@ -438,6 +501,48 @@
       state.activeStudyId = id;
 
       STORE.queueAction("study_create", study);
+      saveState();
+      notify();
+      return study;
+    },
+
+    // Adopt a study already persisted on the server (auto-add, verification).
+    // Keeps the server id/version; no offline queue entry because the server
+    // already holds this exact row.
+    adoptServerStudy: function (projectId, sp) {
+      var pid = projectId || state.activeProjectId;
+      if (!pid || !sp || !sp.id) return null;
+      var locator = sp.locator || {};
+      var study = {
+        id: sp.id,
+        projectId: pid,
+        label: (sp.label || "Untitled Study").trim(),
+        measure: sp.measure || "RR",
+        inputs: sp.inputs || {},
+        locator: {
+          kind: locator.kind || "manual",
+          citation: (locator.citation || "").trim(),
+          page: locator.page != null ? String(locator.page).trim() : "",
+          section: (locator.section || "").trim(),
+          table: (locator.table || "").trim(),
+          quote: (sp.quote || locator.quote || "").trim()
+        },
+        quote: (sp.quote || locator.quote || "").trim(),
+        verified: !!sp.verified,
+        verifiedBy: sp.verifiedBy || null,
+        verifiedAt: sp.verifiedAt || null,
+        version: sp.version || 1,
+        createdBy: sp.createdBy || "clinician",
+        createdAt: sp.createdAt || Date.now(),
+        updatedAt: sp.updatedAt || Date.now()
+      };
+      if (!state.studies[pid]) state.studies[pid] = [];
+      var replaced = false;
+      for (var i = 0; i < state.studies[pid].length; i++) {
+        if (state.studies[pid][i].id === study.id) { state.studies[pid][i] = study; replaced = true; break; }
+      }
+      if (!replaced) state.studies[pid].unshift(study);
+      state.activeStudyId = study.id;
       saveState();
       notify();
       return study;

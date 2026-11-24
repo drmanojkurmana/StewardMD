@@ -423,8 +423,10 @@ try {
   await call('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
   await call('Page.navigate', { url: `http://localhost:${PORT}/?research=1` });
   ok(await until('!!window.SMD_RESEARCH && !!SMD_RESEARCH.screens && !!SMD_RESEARCH.screens.protocol && !!SMD_RESEARCH.screens.search && !!SMD_RESEARCH.screens.screening && !!SMD_RESEARCH.screens.conflicts && !!SMD_RESEARCH.screens.prisma', 30000), 'app loaded with all five Phase 2 screens');
-  ok(await ev(`!!document.querySelector('script[src*="research-screen-protocol.js?v=rmd2"]') && !!document.querySelector('script[src*="research-screen-prisma.js?v=rmd"]')`), 'index.html carries the new script tags');
+  ok(await ev(`!!document.querySelector('script[src*="research-screen-protocol.js?v=rmd4"]') && !!document.querySelector('script[src*="research-screen-prisma.js?v=rmd"]')`), 'index.html carries the new script tags');
 
+  // Mark the seed project as server-backed so server screens mount (practice gate skips it).
+  await ev(`(function(){var s=JSON.parse(localStorage.getItem('smd_research_state_v1'));s.projects[0].serverId=s.projects[0].id;s.projects[0].practice=false;localStorage.setItem('smd_research_state_v1',JSON.stringify(s));return 1})()`);
   await ev(`SMD_RESEARCH.open({screen:'protocol'});1`);
   ok(await until(`!!document.querySelector('#researchMD:not([hidden]) .rmd-p2-screen')`, 5000), 'protocol screen opens');
   ok(await until(`/No protocol yet/.test(document.querySelector('#rmdScreenBody').innerText)`, 5000), 'protocol empty state names the next action');
@@ -500,7 +502,7 @@ try {
   await ev(`(()=>{const f=new File(['TY  - JOUR\\nTI  - Imported trial\\nER  - \\n'],'refs.ris',{type:'text/plain'});const input=document.getElementById('rmd_import_file');Object.defineProperty(input,'files',{value:[f],configurable:true});input.dispatchEvent(new Event('change',{bubbles:true}));return true})()`);
   ok(await until(`/1 entries detected/.test(document.querySelector('#rmdScreenBody').innerText)`, 5000), 'RIS file preview counts entries deterministically');
   await click('[data-rmd="import-run"]');
-  ok(await until(`/Import complete: 2 records added, 1 duplicates flagged/.test(document.querySelector('#rmdScreenBody').innerText)`, 8000), 'import reports added records and flagged duplicates');
+  ok(await until(`/Import complete: 2 added, 1 duplicates flagged/.test(document.querySelector('#rmdScreenBody').innerText)`, 8000), 'import reports added records and flagged duplicates');
   await click('[data-rmd="dedup-run"]');
   ok(await until(`/1 duplicates removed across 1 groups/.test(document.querySelector('#rmdScreenBody').innerText)`, 5000), 'dedup run reports groups and duplicates removed');
   await shot('phone-375-search');

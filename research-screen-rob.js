@@ -37,7 +37,7 @@
     tools: [], tool: "rob2", studies: [], studyId: null,
     assessment: null, assessmentLoading: false,
     draft: {}, busy: false, actionError: null, announce: "",
-    consensus: {}, note: "", phoneView: "assess"
+    consensus: {}, note: "", phoneView: "assess", ai: null
   };
   var seq = 0;
 
@@ -52,6 +52,20 @@
   function draftFor(key) {
     if (!st.draft[key]) st.draft[key] = { judgment: "", quote: "", page: "", signallingAnswers: {}, stars: 0, applicability: "" };
     return st.draft[key];
+  }
+  function domainByKey(key) {
+    var doms = toolDef().domains || [];
+    for (var i = 0; i < doms.length; i++) if (doms[i].key === key) return doms[i];
+    return null;
+  }
+  /* Source text a drafted quote must be a substring of, else the domain stays empty. */
+  function studySourceText() {
+    var s = currentStudy() || {};
+    var loc = s.locator || {};
+    var parts = [s.title, s.abstract, s.quote, loc.quote, loc.citation, s.label];
+    var out = [];
+    for (var i = 0; i < parts.length; i++) if (parts[i]) out.push(String(parts[i]));
+    return out.join("\n");
   }
 
   function load(container) {
@@ -83,7 +97,7 @@
     SMD.api.request("GET", url).then(function (data) {
       if (mySeq !== seq) return;
       st.assessmentLoading = false; st.assessment = data.assessment;
-      st.draft = {}; st.consensus = {};
+      st.draft = {}; st.consensus = {}; st.ai = null;
       var self = st.assessment && st.assessment.self;
       if (self && self.domains) {
         for (var i = 0; i < self.domains.length; i++) {
@@ -171,6 +185,7 @@
     var h = [];
     h.push('<div class="rmd-rob-domain" data-rmd-domain="' + esc(dom.key) + '">');
     h.push('<h4 class="rmd-rob-domain-label">' + esc(dom.label) + '</h4>');
+    if (st.ai) h.push(SMD.ai.noteHtml(st.ai, dom.key));
     if (def.id === "nos") {
       var max = dom.maxStars || 1;
       h.push('<div class="rmd-rob-stars">');
@@ -341,6 +356,8 @@
     if (st.announce) h.push('<div class="rmd-banner rmd-banner-info" aria-live="polite">' + esc(st.announce) + '</div>');
     if (a && a.outcome === "conflict") h.push('<div class="rmd-banner rmd-banner-warn">A conflict is open. Resolve it by consensus on the Summary pane.</div>');
     if (canAssess && (!a || !a.self || !a.self.submitted || a.outcome === "conflict")) {
+      if (!st.ai) st.ai = SMD.ai.state();
+      h.push(SMD.ai.barHtml(st.ai, { task: "rob", label: "risk of bias assessment", cost: 2 }));
       for (var d = 0; d < def.domains.length; d++) h.push(domainFormHtml(def.domains[d]));
       h.push('<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-block" data-rmd="rob-submit"' + (st.busy ? " disabled" : "") + '>Submit assessment</button>');
       h.push('<p class="rmd-muted">Your assessment is independent. The other assessor cannot see it until you both submit.</p>');
@@ -378,7 +395,7 @@
     if (studySel) studySel.onchange = function () { st.studyId = this.value; st.draft = {}; st.consensus = {}; loadAssessment(container); };
 
     var jSels = container.querySelectorAll("[data-rmd-judgment]");
-    for (var j = 0; j < jSels.length; j++) jSels[j].onchange = function () { draftFor(this.getAttribute("data-rmd-judgment")).judgment = this.value; };
+    for (var j = 0; j < jSels.length; j++) jSels[j].onchange = function () { var k = this.getAttribute("data-rmd-judgment"); draftFor(k).judgment = this.value; SMD.ai.clearNote(st.ai, k); };
     var appSels = container.querySelectorAll("[data-rmd-app]");
     for (var ap = 0; ap < appSels.length; ap++) appSels[ap].onchange = function () { draftFor(this.getAttribute("data-rmd-app")).applicability = this.value; };
     var sqSels = container.querySelectorAll("[data-rmd-sq]");
@@ -387,7 +404,7 @@
       draftFor(parts[0]).signallingAnswers[parts[1]] = this.value;
     };
     var quotes = container.querySelectorAll("[data-rmd-quote]");
-    for (var q2 = 0; q2 < quotes.length; q2++) quotes[q2].oninput = function () { draftFor(this.getAttribute("data-rmd-quote")).quote = this.value; };
+    for (var q2 = 0; q2 < quotes.length; q2++) quotes[q2].oninput = function () { var k = this.getAttribute("data-rmd-quote"); draftFor(k).quote = this.value; SMD.ai.clearNote(st.ai, k); };
     var pages = container.querySelectorAll("[data-rmd-page]");
     for (var p = 0; p < pages.length; p++) pages[p].oninput = function () { draftFor(this.getAttribute("data-rmd-page")).page = this.value; };
     var stars = container.querySelectorAll("[data-rmd-star]");
@@ -396,6 +413,47 @@
       draftFor(parts[0]).stars = parseInt(parts[1], 10); render(container);
     };
     on('[data-rmd="rob-submit"]', function () { submit(container); });
+
+    if (st.ai) {
+      SMD.ai.bind(container, st.ai, {
+        pid: st.projectId, task: "rob", label: "risk of bias assessment", cost: 2,
+        input: function () {
+          var s = currentStudy() || {};
+          var def = toolDef();
+          var doms = [];
+          for (var i = 0; i < def.domains.length; i++) doms.push({ key: def.domains[i].key, label: def.domains[i].label });
+          return { tool: st.tool, studyLabel: s.label || "", text: studySourceText(), domains: doms };
+        },
+        apply: function (draft) {
+          var d = draft || {};
+          var items = d.domains || [];
+          if (!items.length && d.studies) {
+            /* server shape: studies[{ studyId, domains }]; take the study on screen */
+            for (var si = 0; si < d.studies.length; si++) if (d.studies[si] && d.studies[si].studyId === st.studyId) items = d.studies[si].domains || [];
+          }
+          var text = studySourceText();
+          var keys = [];
+          for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (!item || !item.key) continue;
+            var quote = typeof item.quote === "string" ? item.quote : "";
+            if (!quote || text.indexOf(quote) < 0) continue;
+            var dom = domainByKey(item.key);
+            if (!dom) continue;
+            var df = draftFor(item.key);
+            df.quote = quote;
+            var judgement = item.judgement || item.judgment || "";
+            var allowed = dom.judgments || [];
+            for (var j = 0; j < allowed.length; j++) {
+              if (allowed[j] === judgement) { df.judgment = judgement; break; }
+            }
+            keys.push(item.key);
+          }
+          return keys;
+        },
+        render: function () { render(container); }
+      });
+    }
 
     var cSels = container.querySelectorAll("[data-rmd-consensus]");
     for (var c = 0; c < cSels.length; c++) cSels[c].onchange = function () { var k = this.getAttribute("data-rmd-consensus"); if (!st.consensus[k]) st.consensus[k] = {}; st.consensus[k].judgment = this.value; };

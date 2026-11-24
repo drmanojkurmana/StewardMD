@@ -21,7 +21,7 @@ import { RESEARCH_FRAMING, tierModel } from "./_gateway.js";
 import { scan, phiCategories } from "./_phi.js";
 import { TIER_CEILINGS, estimateTokens, checkAiCaps, HARD_STOP_MESSAGES } from "./_caps.js";
 import { quoteAiCall, aiActualMicroUsd, availableCredits, reserveCredits,
-  settleCredits, releaseCredits } from "./_credits.js";
+  settleCredits, releaseCredits, microUsdToInr, usdInrRate } from "./_credits.js";
 import { TEMPLATES, templateById, extractionOf, rowFor } from "./_extraction.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
@@ -29,9 +29,12 @@ const VOTE_ROLES = ["owner", "editor", "analyst", "reviewer"];
 const DOC_CHAR_BUDGET = 28000; /* keeps the assembled T1 prompt under 8000 tokens */
 
 /* The ordered gateway pipeline for one user-facing T1 call. Returns either
- * {error: Response} or {text, model, usage}. refId traces the ledger/usage rows
- * (there is no worker job; the suggestion request id is the pointer). */
-async function runT1(ctx, projectId, purpose, system, prompt, refId) {
+ * {error: Response} or {text, model, usage, costInr}. refId traces the
+ * ledger/usage rows (there is no worker job; the suggestion request id is
+ * the pointer). opts.temperature defaults to 0.2 (extraction and screening).
+ * opts.maxOutputTokens caps the T1 output ceiling. opts.insufficientMessage
+ * replaces the 402 text. The cheapest routed model is T1 (tierModel). */
+export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, opts = {}) {
   const { env, db, uid, claims, requestId, api } = ctx;
   const { json, err, audit, uuid } = api;
   const email = claims && claims.email;
@@ -50,21 +53,25 @@ async function runT1(ctx, projectId, purpose, system, prompt, refId) {
   if (estimateTokens(assembled) > ceiling.maxInputTokens)
     return { error: err(400, "ceiling_input_tokens", HARD_STOP_MESSAGES.ceiling_input_tokens, requestId) };
   const model = tierModel(env, "T1");
-  const maxOut = ceiling.maxOutputTokens;
+  const maxOut = opts.maxOutputTokens
+    ? Math.min(ceiling.maxOutputTokens, opts.maxOutputTokens)
+    : ceiling.maxOutputTokens;
+  const temperature = opts.temperature === undefined ? 0.2 : opts.temperature;
   const quote = quoteAiCall(env, "T1", model);
   const now = Date.now();
   const capBreach = await checkAiCaps(db, projectId, uid, quote, now);
   if (capBreach) return { error: err(429, capBreach.code, capBreach.message, requestId) };
-  /* 3. Credits: available -> reserve. */
+  /* 3. Credits: available -> reserve. The reserve is the full T1 ceiling. */
   const credits = await availableCredits(db, env, uid, email);
   if (credits.availableMicroUsd < quote)
-    return { error: err(402, "insufficient_credits", "Not enough research credits for this AI suggestion.", requestId) };
+    return { error: err(402, "insufficient_credits",
+      opts.insufficientMessage || "Not enough research credits for this AI suggestion.", requestId) };
   const reservation = await reserveCredits(db, env, uuid, { uid, email, jobId: refId, quote });
   /* 4. One provider call through the existing facade. No tools. */
   const meta = {};
   let text;
   try {
-    text = await callGemini(env, [{ text: prompt }], maxOut, { model, system: finalSystem, temperature: 0.2, meta });
+    text = await callGemini(env, [{ text: prompt }], maxOut, { model, system: finalSystem, temperature, meta });
   } catch (e) {
     await releaseCredits(db, uuid, reservation);
     return { error: err(502, "ai_provider_error", "The AI service could not complete this request. Try again.", requestId) };
@@ -79,12 +86,20 @@ async function runT1(ctx, projectId, purpose, system, prompt, refId) {
     .bind(uuid("aiu_"), projectId, uid, refId, purpose, "T1", usedModel, inTok, outTok, actual, Date.now()).run();
   await settleCredits(db, env, uuid, reservation, actual);
   await audit(db, projectId, uid, "ai_call", refId, { tier: "T1", model: usedModel, purpose, tokensIn: inTok, tokensOut: outTok, costMicroUsd: actual });
-  return { text: String(text || ""), model: usedModel, usage: { inputTokens: inTok, outputTokens: outTok } };
+  return {
+    text: String(text || ""), model: usedModel,
+    usage: { inputTokens: inTok, outputTokens: outTok },
+    costInr: microUsdToInr(actual, usdInrRate(env)),
+  };
+}
+
+async function runT1(ctx, projectId, purpose, system, prompt, refId) {
+  return runUserAi(ctx, projectId, purpose, system, prompt, refId);
 }
 
 /* Pull the first JSON value (array or object) out of a model reply, tolerating
  * code fences and prose. Deterministic; never evaluates the text. */
-function extractJson(text) {
+export function extractJson(text) {
   const s = String(text || "").replace(/```(?:json)?/gi, "");
   const start = s.search(/[[{]/);
   if (start < 0) return null;
