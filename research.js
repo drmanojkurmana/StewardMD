@@ -1058,7 +1058,10 @@
     templates: "Templates", journals: "Journals",
     thesis: "Thesis", "thesis-type": "Paper type", "thesis-journal": "Journal",
     "thesis-draft": "Draft", "thesis-tables": "Tables", "thesis-refs": "References",
-    masterchart: "Master chart"
+    masterchart: "Master chart",
+    casefile: "Case file", novelty: "Novelty", iec: "Ethics committee",
+    pubconsent: "Consent for publication", images: "Images", ctri: "CTRI",
+    randomise: "Randomise", consort: "CONSORT flow", backup: "Backup"
   };
 
   var HELP = {
@@ -1257,6 +1260,55 @@
       eg: "",
       gloss: "",
       action: { label: "Back to my project", fallback: "studies" }
+    },
+    casefile: {
+      name: "Case file",
+      do: "Record the case in CARE order (the case report checklist): what brought the patient in, the history, examination, tests, diagnosis, treatment and what happened next.",
+      eg: "Zinc phosphide poisoning presenting as a heart attack.",
+      gloss: "New words: CARE (the checklist journals use for a case report).",
+      action: { label: "Next: check novelty", fallback: "novelty" }
+    },
+    novelty: {
+      name: "Novelty",
+      do: "See whether similar cases are already published (novelty means the case adds something new).",
+      eg: "Search the diagnosis plus the unusual finding.",
+      gloss: "",
+      action: { label: "Next: ethics committee", fallback: "iec" }
+    },
+    iec: {
+      name: "Ethics committee",
+      do: "Record the ethics committee (IEC) decision before you publish patient information.",
+      eg: "A waiver, or the approval number from your hospital committee.",
+      gloss: "New words: IEC (Institutional Ethics Committee, the hospital group that approves research).",
+      action: { label: "Next: consent for publication", fallback: "pubconsent" }
+    },
+    pubconsent: {
+      name: "Consent for publication",
+      do: "Get consent to publish the case (permission to print the story, which is separate from treatment consent).",
+      eg: "The patient, or a relative if the patient cannot consent, signs in their language.",
+      gloss: "",
+      action: { label: "Next: images", fallback: "images" }
+    },
+    images: {
+      name: "Images",
+      do: "Add photos only after you hide anything that could identify the patient.",
+      eg: "Cover the eyes and remove names from the scan.",
+      gloss: "",
+      action: { label: "Next: write the paper", fallback: "manuscript" }
+    },
+    ctri: {
+      name: "CTRI",
+      do: "Register the trial on CTRI (Clinical Trials Registry - India) before the first patient.",
+      eg: "A CTRI number looks like CTRI/2026/01/123456.",
+      gloss: "New words: CTRI (Clinical Trials Registry - India, where a trial is registered before it starts).",
+      action: { label: "Next: randomise", fallback: "randomise" }
+    },
+    randomise: {
+      name: "Randomise",
+      do: "Make the allocation list (who gets which treatment) and keep it hidden.",
+      eg: "Blocks of 4 or 6, two arms, one list per centre.",
+      gloss: "New words: randomise (assign each patient to a treatment by chance, not by choice).",
+      action: { label: "Next: master chart", fallback: "masterchart" }
     }
   };
 
@@ -1283,24 +1335,83 @@
     "thesis-draft": "shape the draft, checking every number.",
     "thesis-tables": "keep up to 3 tables.",
     "thesis-refs": "check the references.",
-    masterchart: "upload your chart and pick the tests."
+    masterchart: "upload your chart and pick the tests.",
+    casefile: "record the case without a name or hospital number.",
+    novelty: "see whether similar cases are already published.",
+    iec: "record the ethics committee decision.",
+    pubconsent: "get consent to publish the case.",
+    images: "hide anything that could identify the patient.",
+    ctri: "register the trial before the first patient.",
+    randomise: "make the allocation list and keep it hidden."
   };
 
-  function journeyFor(project) {
+  var FALLBACK_JOURNEYS = {
+    "case-report": ["casefile", "novelty", "iec", "pubconsent", "images", "manuscript", "checklist", "ready"],
+    "case-series": ["casefile", "novelty", "iec", "pubconsent", "images", "masterchart", "manuscript", "checklist", "ready"],
+    "case-control": ["plan", "protocol", "iec", "masterchart", "manuscript", "checklist", "ready"],
+    "cohort": ["plan", "protocol", "iec", "masterchart", "manuscript", "checklist", "ready"],
+    "rct": ["plan", "protocol", "iec", "ctri", "randomise", "masterchart", "manuscript", "checklist", "ready"]
+  };
+
+  var FALLBACK_CHECKLISTS = {
+    "case-report": { protocol: "none", publication: "care" },
+    "case-series": { protocol: "none", publication: "care" },
+    "case-control": { protocol: "none", publication: "strobe" },
+    "cohort": { protocol: "none", publication: "strobe" },
+    "rct": { protocol: "spirit", publication: "consort" }
+  };
+
+  function copySteps(list) {
+    var out = [];
+    var i;
+    for (i = 0; i < list.length; i++) out.push(list[i]);
+    return out;
+  }
+
+  /* Match case-control and case-series before case-report. Never test the bare word case. */
+  function studyKey(project) {
     var t = ((project && project.studyType) || "").toLowerCase();
+    if (t.indexOf("case-control") >= 0 || t.indexOf("case control") >= 0) return "case-control";
+    if (t.indexOf("case-series") >= 0 || t.indexOf("case series") >= 0) return "case-series";
+    if (t.indexOf("case-report") >= 0 || t.indexOf("case report") >= 0) return "case-report";
+    if (t.indexOf("rct") >= 0 || t.indexOf("randomized") >= 0 || t.indexOf("randomised") >= 0 || t.indexOf("trial") >= 0) return "rct";
+    if (t.indexOf("cohort") >= 0 && t.indexOf("synthesis") < 0) return "cohort";
+    return "";
+  }
+
+  function journeyFor(project) {
+    var key = studyKey(project);
+    var C = G.SMD_RESEARCH_CONTRACTS;
+    var journeys = C && C.JOURNEYS;
+    var steps = (journeys && journeys[key]) || FALLBACK_JOURNEYS[key];
+    var t;
+    if (steps) return copySteps(steps);
+    t = ((project && project.studyType) || "").toLowerCase();
     if (t.indexOf("master chart") >= 0 || t.indexOf("masterchart") >= 0 ||
-        t.indexOf("case-control") >= 0 || t.indexOf("case control") >= 0 ||
-        t.indexOf("cross-sectional") >= 0 || t.indexOf("cross sectional") >= 0 ||
-        (t.indexOf("cohort") >= 0 && t.indexOf("synthesis") < 0)) {
+        t.indexOf("cross-sectional") >= 0 || t.indexOf("cross sectional") >= 0) {
       return ["plan", "protocol", "masterchart", "manuscript", "checklist", "ready"];
     }
     if (t.indexOf("thesis") >= 0) return ["thesis", "thesis-type", "thesis-journal", "thesis-draft", "thesis-tables", "thesis-refs", "checklist", "ready"];
-    if (t.indexOf("case") >= 0) return ["manuscript", "checklist", "ready"];
-    if (t.indexOf("trial") >= 0 || t.indexOf("randomized") >= 0) return ["plan", "protocol", "masterchart", "checklist", "manuscript", "ready"];
     if (t.indexOf("observational") >= 0 || t.indexOf("cohort") >= 0 || t.indexOf("survey") >= 0 || t.indexOf("diagnostic") >= 0) {
       return ["plan", "protocol", "masterchart", "manuscript", "checklist", "ready"];
     }
     return ["studies", "protocol", "search", "screening", "conflicts", "prisma", "pdf", "extract", "rob", "data", "run", "grade", "manuscript", "checklist", "ready"];
+  }
+
+  function checklistFor(project, step) {
+    var key = studyKey(project);
+    var C = G.SMD_RESEARCH_CONTRACTS;
+    var tables = C && C.CHECKLISTS;
+    var row = (tables && tables[key]) || FALLBACK_CHECKLISTS[key];
+    var t, which;
+    if (row) {
+      which = step === "protocol" ? row.protocol : row.publication;
+      return which || "none";
+    }
+    t = ((project && project.studyType) || "").toLowerCase();
+    if (t.indexOf("thesis") >= 0) return preferredChecklist(project && (project.serverId || project.id)) || "strobe";
+    if (t.indexOf("observational") >= 0 || t.indexOf("cohort") >= 0 || t.indexOf("survey") >= 0 || t.indexOf("diagnostic") >= 0) return "strobe";
+    return "prisma2020";
   }
 
   function localOnly(p) {
@@ -1327,6 +1438,8 @@
   }
   SMD.preferredChecklist = preferredChecklist;
   SMD.setPreferredChecklist = setPreferredChecklist;
+  SMD.journeyFor = journeyFor;
+  SMD.checklistFor = checklistFor;
 
   function seenPrefs() {
     try { return JSON.parse(localStorage.getItem("smd_rmd_seen") || "{}") || {}; } catch (e) { return {}; }
@@ -1655,9 +1768,7 @@
     container.innerHTML = '<div class="rmd-p2-screen">' + loadingHtml("Checking what is ready") + '</div>';
     var base = "/v1/projects/" + encodeURIComponent(proj.serverId || proj.id);
     var t = (proj.studyType || "").toLowerCase();
-    var gid;
-    if (t.indexOf("thesis") >= 0) gid = preferredChecklist(proj.serverId || proj.id) || "strobe";
-    else gid = t.indexOf("case") >= 0 ? "care" : (t.indexOf("trial") >= 0 || t.indexOf("randomized") >= 0 ? "spirit" : (t.indexOf("observational") >= 0 || t.indexOf("cohort") >= 0 || t.indexOf("survey") >= 0 || t.indexOf("diagnostic") >= 0 ? "strobe" : "prisma2020"));
+    var gid = checklistFor(proj, "publication");
     function softFail(err) {
       var f = friendlyError(err);
       if (f.action === "signin" || f.action === "save-or-back" || f.action === "back" || (err && (err.code === "network" || (err.status || 0) >= 500))) throw err;
@@ -1680,7 +1791,8 @@
         try { counts = G.SMD_RESEARCH_CHECKLIST.fill(checklist, snap).counts; } catch (e) { counts = null; }
       }
       var checklistDone = counts ? (counts.missing === 0 && counts.partial === 0) : !!snap;
-      var isReview = t.indexOf("thesis") >= 0 ? gid === "prisma2020" : (t.indexOf("case") < 0 && t.indexOf("trial") < 0 && t.indexOf("randomized") < 0);
+      var typeKey = studyKey(proj);
+      var isReview = t.indexOf("thesis") >= 0 ? gid === "prisma2020" : (typeKey !== "case-report" && typeKey !== "case-series" && typeKey !== "case-control" && typeKey !== "rct");
       var flowDone = !isReview || !!(snap && snap.prisma && snap.prisma.studiesIncluded > 0);
       var items = [
         { done: approved, yes: "The manuscript is approved by a clinician.", no: "The manuscript still needs clinician approval.", screen: "manuscript" },
@@ -1854,6 +1966,9 @@
   function open(opts) {
     injectCSS();
     if (SMD.store) SMD.store.init();
+    if (G.RMDStore && G.RMDStore.available) {
+      G.RMDStore.available().then(function () {}, function () {});
+    }
 
     if (opts && opts.projectId && SMD.store) {
       SMD.store.setActiveProject(opts.projectId);

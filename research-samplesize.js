@@ -357,6 +357,13 @@
     };
   }
 
+  function notBuiltYet() {
+    return { ok: false, warnings: ["Not built yet"] };
+  }
+
+  function caseControl() { return notBuiltYet(); }
+  function logRankEvents() { return notBuiltYet(); }
+
   var SAMPLESIZE = {
     name: NAME,
     version: VERSION,
@@ -365,7 +372,9 @@
     singleProportion: singleProportion,
     singleMean: singleMean,
     correlation: correlation,
-    probit: probit
+    probit: probit,
+    caseControl: caseControl,
+    logRankEvents: logRankEvents
   };
 
   if (typeof module !== "undefined" && module.exports) { module.exports = SAMPLESIZE; }

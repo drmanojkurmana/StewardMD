@@ -54,7 +54,31 @@
       eg: "A case report. Example: a rare reaction to a common drug.",
       studyType: "Case Report",
       defaultTitle: "My case report",
-      firstScreen: "manuscript"
+      firstScreen: "casefile"
+    },
+    {
+      key: "case-series",
+      title: "Case series (a few patients with the same condition)",
+      eg: "A few patients with the same condition. Example: five cases of zinc phosphide poisoning.",
+      studyType: "Case series",
+      defaultTitle: "My case series",
+      firstScreen: "casefile"
+    },
+    {
+      key: "case-control",
+      title: "Compare people with a condition and people without it",
+      eg: "A case-control study. Example: diet in people who had a heart attack and people who did not.",
+      studyType: "Case-control study",
+      defaultTitle: "My case-control study",
+      firstScreen: "plan"
+    },
+    {
+      key: "cohort",
+      title: "Follow a group of patients over time",
+      eg: "A cohort study. Example: kidney function a year after a new clinic pathway.",
+      studyType: "Cohort study",
+      defaultTitle: "My cohort study",
+      firstScreen: "plan"
     },
     {
       key: "trial",

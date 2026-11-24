@@ -2171,6 +2171,15 @@
     return "";
   }
 
+  function notBuiltYet() {
+    return { ok: false, warnings: ["Not built yet"] };
+  }
+
+  function kaplanMeier() { return notBuiltYet(); }
+  function logRank() { return notBuiltYet(); }
+  function cox() { return notBuiltYet(); }
+  function matchedOr() { return notBuiltYet(); }
+
   var STATS = {
     parseCsv: parseCsv,
     inferColumn: inferColumn,
@@ -2182,6 +2191,10 @@
     logistic: logistic,
     formatP: formatP,
     resultsSentence: resultsSentence,
+    kaplanMeier: kaplanMeier,
+    logRank: logRank,
+    cox: cox,
+    matchedOr: matchedOr,
     _rank: { mannWhitney: mannWhitney, wilcoxonSigned: wilcoxonSigned } /* exposed for the R parity tests */
   };
 
