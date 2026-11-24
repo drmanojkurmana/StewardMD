@@ -1,0 +1,243 @@
+{
+  "id": "strobe",
+  "name": "STROBE (Combined Checklist)",
+  "version": "2007 (v4 combined)",
+  "source": "von Elm E, Altman DG, Egger M, Pocock SJ, Gotzsche PC, Vandenbroucke JP; STROBE Initiative. The Strengthening the Reporting of Observational Studies in Epidemiology (STROBE) Statement: Guidelines for Reporting Observational Studies. PLoS Med. 2007;4(10):e296. https://www.strobe-statement.org/checklists/ | https://pmc.ncbi.nlm.nih.gov/articles/PMC2020495/",
+  "licence": "CC BY (PLoS Medicine, version number not printed); copyright reserved by authors on strobe-statement.org",
+  "sections": [
+    {
+      "title": "Title and abstract",
+      "items": [
+        {
+          "number": "1a",
+          "topic": "Title and abstract",
+          "text": "State the observational study design using a standard term in the title or abstract.",
+          "projectField": "manuscript"
+        },
+        {
+          "number": "1b",
+          "topic": "Title and abstract",
+          "text": "Provide a balanced, informative abstract summarizing study methods and key findings.",
+          "projectField": "manuscript"
+        }
+      ]
+    },
+    {
+      "title": "Introduction",
+      "items": [
+        {
+          "number": "2",
+          "topic": "Background/rationale",
+          "text": "Explain the scientific background and rationale for the observational study.",
+          "projectField": "manuscript"
+        },
+        {
+          "number": "3",
+          "topic": "Objectives",
+          "text": "State specific study objectives, including any pre-specified hypotheses.",
+          "projectField": "protocol"
+        }
+      ]
+    },
+    {
+      "title": "Methods",
+      "items": [
+        {
+          "number": "4",
+          "topic": "Study design",
+          "text": "Summarize key elements of the observational study design early in the report.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "5",
+          "topic": "Setting",
+          "text": "Describe study settings, locations, and dates of recruitment, exposure, follow-up, and data collection.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "6a",
+          "topic": "Participants",
+          "text": "Specify eligibility criteria, participant selection or case-control ascertainment methods, and follow-up procedures.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "6b",
+          "topic": "Participants",
+          "text": "For matched cohort or case-control studies, state matching criteria and exposed-unexposed or control-per-case ratios.",
+          "projectField": "manual"
+        },
+        {
+          "number": "7",
+          "topic": "Variables",
+          "text": "Define all outcomes, exposures, predictors, confounders, effect modifiers, and diagnostic criteria.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "8*",
+          "topic": "Data sources/measurement",
+          "text": "Describe data sources and measurement methods for each variable, noting comparability across groups.",
+          "projectField": "extraction"
+        },
+        {
+          "number": "9",
+          "topic": "Bias",
+          "text": "Describe efforts taken to identify and address potential sources of bias.",
+          "projectField": "manual"
+        },
+        {
+          "number": "10",
+          "topic": "Study size",
+          "text": "Explain how the study sample size was determined.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "11",
+          "topic": "Quantitative variables",
+          "text": "Explain how quantitative variables were analyzed and justify any groupings chosen.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "12a",
+          "topic": "Statistical methods",
+          "text": "Describe all statistical methods, including approaches used to control for confounding.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "12b",
+          "topic": "Statistical methods",
+          "text": "Describe methods used to evaluate subgroups and statistical interactions.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "12c",
+          "topic": "Statistical methods",
+          "text": "Explain how missing data were handled in the analysis.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "12d",
+          "topic": "Statistical methods",
+          "text": "Explain design-specific adjustments for loss to follow-up, case-control matching, or sampling strategy.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "12e",
+          "topic": "Statistical methods",
+          "text": "Describe any sensitivity analyses performed.",
+          "projectField": "analysis"
+        }
+      ]
+    },
+    {
+      "title": "Results",
+      "items": [
+        {
+          "number": "13a*",
+          "topic": "Participants",
+          "text": "Report participant counts at each stage from potentially eligible through follow-up and final analysis.",
+          "projectField": "manual"
+        },
+        {
+          "number": "13b*",
+          "topic": "Participants",
+          "text": "State reasons for non-participation at each stage of the study.",
+          "projectField": "manual"
+        },
+        {
+          "number": "13c*",
+          "topic": "Participants",
+          "text": "Consider presenting participant flow in a diagram.",
+          "projectField": "manual"
+        },
+        {
+          "number": "14a*",
+          "topic": "Descriptive data",
+          "text": "Summarize participant demographics, clinical features, exposures, and potential confounders.",
+          "projectField": "extraction"
+        },
+        {
+          "number": "14b*",
+          "topic": "Descriptive data",
+          "text": "Report the number of participants with missing data for each variable of interest.",
+          "projectField": "extraction"
+        },
+        {
+          "number": "14c*",
+          "topic": "Descriptive data",
+          "text": "For cohort studies, summarize average and total follow-up duration.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "15*",
+          "topic": "Outcome data",
+          "text": "Report outcome event counts or summary measures (or exposure counts for case-control studies).",
+          "projectField": "analysis"
+        },
+        {
+          "number": "16a",
+          "topic": "Main results",
+          "text": "Report unadjusted and confounder-adjusted estimates with precision, specifying which confounders were included and why.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "16b",
+          "topic": "Main results",
+          "text": "State category boundaries whenever continuous variables were categorized.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "16c",
+          "topic": "Main results",
+          "text": "Consider translating relative risk estimates into absolute risk over a meaningful time period.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "17",
+          "topic": "Other analyses",
+          "text": "Report results of subgroup, interaction, and sensitivity analyses.",
+          "projectField": "analysis"
+        }
+      ]
+    },
+    {
+      "title": "Discussion",
+      "items": [
+        {
+          "number": "18",
+          "topic": "Key results",
+          "text": "Summarize the main findings in relation to the study objectives.",
+          "projectField": "manuscript"
+        },
+        {
+          "number": "19",
+          "topic": "Limitations",
+          "text": "Discuss study limitations, addressing direction and magnitude of potential bias or imprecision.",
+          "projectField": "manuscript"
+        },
+        {
+          "number": "20",
+          "topic": "Interpretation",
+          "text": "Give a cautious overall interpretation considering objectives, limitations, multiplicity, and prior evidence.",
+          "projectField": "manuscript"
+        },
+        {
+          "number": "21",
+          "topic": "Generalisability",
+          "text": "Discuss external validity and generalizability of the study findings.",
+          "projectField": "manuscript"
+        }
+      ]
+    },
+    {
+      "title": "Other information",
+      "items": [
+        {
+          "number": "22",
+          "topic": "Funding",
+          "text": "State funding sources and funders' roles for the current and any parent study.",
+          "projectField": "manuscript"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+fastapi>=0.111,<1.0
+uvicorn[standard]>=0.30
+pydantic>=2.7,<3.0
+pydantic-settings>=2.3
+structlog>=24.1
+pdfplumber>=0.11
+pytesseract>=0.3.10
+boto3>=1.34
+httpx>=0.27
+# PaperOrchestra upstream import-time deps (paperorchestra/UPSTREAM.md).
+# Only the subset imported by the adapter's modules; opencv-python-headless
+# provides cv2 without GUI libs (upstream lists opencv-python).
+google-genai>=3.6
+openai>=3.57
+requests>=2.32
+thefuzz>=0.22
+python-dotenv>=1.0
+opencv-python-headless>=4.10
+PyMuPDF>=1.24
+pymupdf4llm>=0.0.17
+numpy>=1.26
+# Phase 5D stats package (backend/research/stats): regression, survival,
+# diagnostic models; canonical for these models with R parity in CI.
+scipy>=1.13
+statsmodels>=0.14
+# Worker-side IPD envelope decryption (stats/ipd_crypto.py, 5C.2 seam):
+# HKDF-SHA256 KEK, AES-KW unwrap, AES-256-GCM; byte-compatible with _ipd.js.
+cryptography>=42.0
+rich>=13.0
+pypdf>=4.0
+python-docx>=1.1.0

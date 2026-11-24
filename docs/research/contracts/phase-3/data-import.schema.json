@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-3/data-import.schema.json",
+  "title": "ResearchMD study-level data import resource",
+  "type": "object",
+  "required": ["id", "projectId", "version", "status", "checks"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string" },
+    "projectId": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "storageKey": { "type": "string" },
+    "snapshotKey": { "type": "string" },
+    "rowCount": { "type": "integer" },
+    "rowsImported": { "type": "integer" },
+    "status": { "type": "string", "enum": ["ok", "warnings", "errors"] },
+    "dictionaryVersion": { "type": "integer" },
+    "frozen": { "type": "boolean" },
+    "frozenTs": { "type": ["integer", "null"] },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "severity", "message"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string", "enum": ["missing_required", "type_mismatch", "out_of_range", "not_allowed", "duplicate_study_id", "unknown_column", "missing_column", "missing_optional"] },
+          "severity": { "type": "string", "enum": ["error", "warning"] },
+          "row": { "type": ["integer", "null"] },
+          "column": { "type": ["string", "null"] },
+          "message": { "type": "string" }
+        }
+      }
+    },
+    "createdBy": { "type": "string" },
+    "createdTs": { "type": "integer" }
+  }
+}

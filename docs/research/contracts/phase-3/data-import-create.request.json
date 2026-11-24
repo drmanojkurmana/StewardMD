@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-3/data-import-create.request.json",
+  "title": "POST /v1/projects/{projectId}/data-imports request",
+  "type": "object",
+  "required": ["storageKey"],
+  "additionalProperties": false,
+  "properties": {
+    "storageKey": { "type": "string", "minLength": 1 },
+    "dictionaryVersion": { "type": "integer", "minimum": 1 }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/invitation-list.response.json",
+  "title": "GET /v1/projects/{projectId}/invitations response",
+  "description": "Pending and decided invitations, newest first. Token hashes are never exposed.",
+  "type": "object",
+  "required": ["invitations"],
+  "additionalProperties": false,
+  "properties": {
+    "invitations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "projectId", "email", "role", "status", "createdBy", "createdTs", "expiresTs"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "projectId": { "type": "string" },
+          "email": { "type": "string" },
+          "role": { "type": "string", "enum": ["owner", "editor", "analyst", "reviewer", "viewer"] },
+          "status": { "type": "string", "enum": ["pending", "accepted", "declined", "expired", "revoked"] },
+          "createdBy": { "type": "string" },
+          "createdTs": { "type": "integer", "minimum": 0 },
+          "expiresTs": { "type": "integer", "minimum": 0 },
+          "decidedTs": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "nextCursor": { "type": "string" }
+  }
+}

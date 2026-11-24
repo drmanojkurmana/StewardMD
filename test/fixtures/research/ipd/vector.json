@@ -1,0 +1,14 @@
+{
+  "generator": "test/fixtures/research/ipd/make-vector.mjs",
+  "note": "Fixed TEST KEK fixture; not a production secret.",
+  "kek": "test-kek-0123456789abcdef",
+  "plaintextCsv": "y,x,note\n3.1,1,café\n4.9,2,naïve\n7.2,3,zürich\n8.9,4,São Paulo\n11.1,5,Malmö\n12.8,6,Kraków\n15.2,7,Genève\n16.9,8,Tōkyō\n",
+  "plaintextSha256": "579f26683817e3c201a8766317964d9797356a8cdcdaee754c12e0b460cd5733",
+  "ciphertextB64": "XUHi2slLTYAAmXwICuESCBCPyDLE1ARH14bVqmLPdiNA1HqZXu9tv3beo6Z4ABZfbt4Qj2jd/xO7gq56Og0pTIsPCjmd6o7AQ56HCyRebu2/uWE0321iKGnB3YXZwLX9VTB/0l46UEtwsgp4kirwTPUXxZjHK7qGYr7ICVwd0ZltTMeRkk4k501DkXo=",
+  "envelope": {
+    "alg": "AES-256-GCM",
+    "wrap": "AES-KW",
+    "iv": "sRCUF3hJo9nk3e1f",
+    "wrappedKey": "OFbcwR6KiavqET1lwloT7+i9C+0gCMrciNl9aY5lVEB/t++am8eRXw=="
+  }
+}

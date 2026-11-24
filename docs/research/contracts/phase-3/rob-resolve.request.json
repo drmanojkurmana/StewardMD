@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-3/rob-resolve.request.json",
+  "title": "POST /v1/rob-conflicts/{conflictId}/resolve request",
+  "type": "object",
+  "required": ["domains", "note"],
+  "additionalProperties": false,
+  "properties": {
+    "note": { "type": "string", "minLength": 1, "maxLength": 1000 },
+    "domains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "judgment", "quote", "locator"],
+        "additionalProperties": false,
+        "properties": {
+          "key": { "type": "string" },
+          "judgment": { "type": "string" },
+          "quote": { "type": "string", "minLength": 1 },
+          "locator": { "$ref": "../phase-1/locator.schema.json" },
+          "applicability": { "type": "string" },
+          "stars": { "type": "integer" }
+        }
+      }
+    }
+  }
+}

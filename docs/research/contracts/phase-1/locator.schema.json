@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-1/locator.schema.json",
+  "title": "ResearchMD evidence locator",
+  "description": "One shape for Phase 1 manual citation plus page and Phase 3 PDF page plus box. Phase 1 writers set kind manual with citation and page; Phase 3 adds the pdf block. Readers must accept both and must never drop the pdf block.",
+  "type": "object",
+  "required": ["kind", "citation"],
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": ["manual", "pdf"],
+      "description": "manual: typed or pasted citation (Phase 1). pdf: pinned to a stored PDF page (Phase 3)."
+    },
+    "citation": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "description": "Human-readable source reference, for example FirstAuthor et al 2020 or a DOI."
+    },
+    "page": {
+      "type": ["string", "integer"],
+      "description": "Phase 1: the page as the researcher writes it (12 or 12-14). Phase 3 mirrors pdf.page."
+    },
+    "section": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Section heading the value came from, when known."
+    },
+    "table": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Table or figure label the value came from, for example Table 2."
+    },
+    "quote": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Exact quoted snippet supporting the value."
+    },
+    "pdf": {
+      "type": ["object", "null"],
+      "description": "Phase 3 only; null or absent in Phase 1.",
+      "required": ["artifactId", "page"],
+      "additionalProperties": false,
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "description": "research_artifacts id of the stored PDF."
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "1-based PDF page number."
+        },
+        "box": {
+          "type": "object",
+          "description": "Normalized bounding box of the value on the page, 0 to 1.",
+          "required": ["x", "y", "w", "h"],
+          "additionalProperties": false,
+          "properties": {
+            "x": { "type": "number", "minimum": 0, "maximum": 1 },
+            "y": { "type": "number", "minimum": 0, "maximum": 1 },
+            "w": { "type": "number", "minimum": 0, "maximum": 1 },
+            "h": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    }
+  }
+}

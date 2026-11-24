@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/protocol-get.response.json",
+  "title": "GET /v1/protocols/{protocolId} response",
+  "description": "One protocol version (?version=N, default latest). lockHash and lockedAt are present only when status is locked.",
+  "type": "object",
+  "required": ["protocol"],
+  "additionalProperties": false,
+  "properties": {
+    "protocol": {
+      "type": "object",
+      "required": ["id", "projectId", "version", "status", "content", "createdBy", "createdTs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "projectId": { "type": "string" },
+        "version": { "type": "integer", "minimum": 1 },
+        "status": { "type": "string", "enum": ["draft", "locked"] },
+        "content": { "type": "object" },
+        "lockHash": { "type": "string" },
+        "lockedAt": { "type": "integer", "minimum": 0 },
+        "createdBy": { "type": "string" },
+        "createdTs": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

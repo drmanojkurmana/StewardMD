@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-3/extraction-artifact-result.response.json",
+  "title": "GET /v1/artifacts/{artifactId}/result response (worker result.json)",
+  "description": "Coordinates are pdfplumber points in display space (top-left origin, y down). width/height in points. The PDF screen normalizes by width/height to render offline; no PDF bytes or external library.",
+  "type": "object",
+  "required": ["status", "pages"],
+  "additionalProperties": false,
+  "properties": {
+    "jobId": { "type": "string" },
+    "idempotencyKey": { "type": "string" },
+    "status": { "const": "done" },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": { "pages": { "type": "integer" }, "seconds": { "type": "number" } }
+    },
+    "ocr": { "type": "boolean" },
+    "sha256": { "type": "string" },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["n", "width", "height", "words"],
+        "additionalProperties": false,
+        "properties": {
+          "n": { "type": "integer", "minimum": 1 },
+          "width": { "type": "number", "exclusiveMinimum": 0 },
+          "height": { "type": "number", "exclusiveMinimum": 0 },
+          "text": { "type": "string" },
+          "ocr": { "type": "boolean" },
+          "words": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["t", "x0", "y0", "x1", "y1"],
+              "additionalProperties": false,
+              "properties": {
+                "t": { "type": "string" },
+                "x0": { "type": "number" }, "y0": { "type": "number" },
+                "x1": { "type": "number" }, "y1": { "type": "number" }
+              }
+            }
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["bbox", "rows"],
+              "additionalProperties": false,
+              "properties": {
+                "bbox": { "type": "array", "items": { "type": "number" }, "minItems": 4, "maxItems": 4 },
+                "rows": { "type": "array", "items": { "type": "array", "items": { "type": ["string", "null"] } } }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-1/schemas/study-get.response.json",
+  "title": "Study resource (create response, update response, get response)",
+  "description": "Study create (201) and update (200) responses are {study, requestId} with this study shape; GET one study (200) is the same envelope.",
+  "type": "object",
+  "required": ["study", "requestId"],
+  "additionalProperties": false,
+  "properties": {
+    "study": {
+      "type": "object",
+      "required": ["id", "projectId", "measure", "inputs", "locator", "verified", "version", "createdAt", "updatedAt"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "projectId": { "type": "string" },
+        "label": { "type": "string" },
+        "measure": { "type": "string", "enum": ["OR", "RR", "HR", "RD", "MD", "SMD"] },
+        "inputs": { "type": "object" },
+        "locator": { "$ref": "../locator.schema.json" },
+        "quote": { "type": "string" },
+        "verified": { "type": "boolean" },
+        "verifiedBy": { "type": "string" },
+        "verifiedAt": { "type": ["integer", "null"] },
+        "version": { "type": "integer", "minimum": 1 },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "integer" },
+        "updatedAt": { "type": "integer" }
+      }
+    },
+    "requestId": { "type": "string" }
+  }
+}

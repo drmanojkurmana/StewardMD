@@ -345,3 +345,21 @@ bucket_name = "wardsynq-backups"
 binding = "PREP_BANK_R2"
 bucket_name = "stewardmd-offline"
 
+
+# ResearchMD (flag smd_research, default OFF). Owner approved provisioning 2026-11-23 (plan decision D-2).
+# Schema: docs/research/contracts/phase-*/NNNN_*.sql applied in order, each with a rollback script.
+[[d1_databases]]
+binding = "RESEARCH_DB"
+database_name = "stewardmd-research"
+database_id = "fcb5adad-89d8-4d32-a6d1-315b007d2b7a"
+
+# Private bucket: PDFs, search ID lists, run manifests, worker results. Never public.
+[[r2_buckets]]
+binding = "RESEARCH_R2"
+bucket_name = "stewardmd-research"
+
+# Pull queue (plan 5.3): the API produces job messages; the worker polls over HTTP (consumer: http pull,
+# visibility 900 s, 3 retries, dead letters to research-jobs-dlq).
+[[queues.producers]]
+binding = "RESEARCH_QUEUE"
+queue = "research-jobs"

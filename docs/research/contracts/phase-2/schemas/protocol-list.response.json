@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/protocol-list.response.json",
+  "title": "GET /v1/projects/{projectId}/protocols response",
+  "description": "Contract addition 2026-11-23 (integration, see ../contract-additions.md): the protocol version list the protocol screen loads with ?limit=100. One version chain per project (0002 UNIQUE(project_id, version)). Every item carries the chain handle (the first version's id) as id, because the screen groups versions by id; per-version identity is (id, version). All /v1/protocols/{id} routes resolve any chain id to the project, so the handle works for GET (?version=N), POST versions and POST lock. Items are protocol objects exactly as in protocol-get.response.json (lockHash/lockedAt only on locked rows). All member roles may read. Pagination: ?limit 1-100 default 20, opaque ?cursor, nextCursor; created_ts DESC, id DESC.",
+  "type": "object",
+  "required": ["protocols"],
+  "additionalProperties": false,
+  "properties": {
+    "protocols": {
+      "type": "array",
+      "items": { "$ref": "protocol-get.response.json#/properties/protocol" }
+    },
+    "nextCursor": { "type": "string" }
+  }
+}

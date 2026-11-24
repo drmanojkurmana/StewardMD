@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/reason-create.response.json",
+  "title": "POST /v1/projects/{projectId}/exclusion-reasons response",
+  "description": "The created project reason.",
+  "type": "object",
+  "required": ["reason"],
+  "additionalProperties": false,
+  "properties": {
+    "reason": { "$ref": "reason-list.response.json#/properties/reasons/items" }
+  }
+}

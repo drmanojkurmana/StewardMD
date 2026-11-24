@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/import-create.request.json",
+  "title": "POST /v1/projects/{projectId}/imports request",
+  "description": "Imports a reference file the researcher uploaded to private R2 via POST /v1/projects/{projectId}/import-uploads (contract addition 2026-11-23, see ../contract-additions.md and import-upload.response.json). The API parses it deterministically (T0 code, no LLM), normalises each entry, and files one search run with database import plus one record per entry. Owner, editor or analyst only.",
+  "type": "object",
+  "required": ["format", "storageKey"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "type": "string", "enum": ["ris", "bibtex", "csv"] },
+    "storageKey": { "type": "string", "minLength": 1, "maxLength": 500 }
+  }
+}
