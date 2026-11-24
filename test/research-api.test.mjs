@@ -1,3 +1,4 @@
+import "./helpers/json-import-attr.mjs";
 /* ResearchMD Phase 1.3 API: projects, members, studies CRUD with version,
  * server-side runs via research-engine.js, audit events.
  *

@@ -5,13 +5,13 @@
  * are omitted. PRISMA counts come from prismaCounts (the same helper the
  * PRISMA route uses). Manual entries are the researcher's own text.
  */
-import consort2010 from "../../../docs/research/checklists/consort2010.json" with { type: "json" };
-import spirit from "../../../docs/research/checklists/spirit.json" with { type: "json" };
-import strobe from "../../../docs/research/checklists/strobe.json" with { type: "json" };
-import stard2015 from "../../../docs/research/checklists/stard2015.json" with { type: "json" };
-import tripod from "../../../docs/research/checklists/tripod.json" with { type: "json" };
-import prisma2020 from "../../../docs/research/checklists/prisma2020.json" with { type: "json" };
-import care from "../../../docs/research/checklists/care.json" with { type: "json" };
+import consort2010 from "../../../docs/research/checklists/consort2010.json";
+import spirit from "../../../docs/research/checklists/spirit.json";
+import strobe from "../../../docs/research/checklists/strobe.json";
+import stard2015 from "../../../docs/research/checklists/stard2015.json";
+import tripod from "../../../docs/research/checklists/tripod.json";
+import prisma2020 from "../../../docs/research/checklists/prisma2020.json";
+import care from "../../../docs/research/checklists/care.json";
 import { ingestProjectDrafts } from "./_manuscript.js";
 
 const READ_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];

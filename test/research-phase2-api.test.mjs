@@ -1,3 +1,4 @@
+import "./helpers/json-import-attr.mjs";
 /* ResearchMD Phase 2 API: protocol lock immutability (409), invitations and
  * roles, blinded dual screening, conflicts and resolution, exclusion reasons,
  * search-run persistence + idempotency, import + dedup, and the PRISMA 2020

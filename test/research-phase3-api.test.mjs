@@ -1,3 +1,4 @@
+import "./helpers/json-import-attr.mjs";
 /* ResearchMD Phase 3 server-side API tests (node:test, no network).
  * Covers: 0003 migration + rollback, PDF upload (25 MB, sha256 dedupe),
  * job create with idempotency, cancel, the HMAC callback (valid / invalid /

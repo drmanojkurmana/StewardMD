@@ -1,3 +1,4 @@
+import "./helpers/json-import-attr.mjs";
 /* ResearchMD Phase 5 manuscript (5A.3) and checklist (5B) API tests.
  * node:sqlite D1 shim, same mocking pattern as test/research-phase6-api.test.mjs.
  *

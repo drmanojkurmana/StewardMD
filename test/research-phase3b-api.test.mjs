@@ -1,3 +1,4 @@
+import "./helpers/json-import-attr.mjs";
 /* ResearchMD Phase 3.4/3.5/3.6/3.8 + Phase 4.3 server-side API tests
  * (node:test, no network). Covers: 0004 migration + rollback + mirror no-op;
  * extraction templates / scaffold / PUT / stale 409; verify (locator_required),

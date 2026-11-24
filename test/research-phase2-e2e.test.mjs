@@ -1,3 +1,4 @@
+import "./helpers/json-import-attr.mjs";
 /* ResearchMD Phase 2 integration e2e: drives the real API in-process through
  * the exact call sequence the screens perform (project -> invite + accept ->
  * protocol create/version/lock + 409 -> connector search (fetch mocked) ->

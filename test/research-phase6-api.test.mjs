@@ -1,3 +1,4 @@
+import "./helpers/json-import-attr.mjs";
 /* ResearchMD Phase 6 server-side API tests (node:test, no network).
  * Covers: 0005 migration + rollback + mirror parity; 5C evidence upload /
  * owner approval, IPD config + residency lock, the upload gate (403 before
