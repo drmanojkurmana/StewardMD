@@ -154,6 +154,11 @@
     // The picture's size before it loads: the deck item's, else the lesson's w and h (a diagram's viewBox).
     function picSize(see) { return deckSize(see) || (see.w > 0 && see.h > 0 ? { w: see.w, h: see.h } : null); }
     function mediaUrl(m) { return BASE + "learn/media/" + m.file; }
+    function remoteFetch(url) {
+      var RM = G.SMD_REMOTE_MEDIA;
+      var pending = RM && RM.resolve ? RM.resolve(url) : Promise.resolve(url);
+      return pending.then(function (u) { return G.fetch(u); });
+    }
     function moreIds(l) { return ((l && l.see.more) || []).filter(function (id) { return W.media && W.media[id]; }); }
     // An animation's SVG source, fetched once and inlined (scoped per instance by D.scopeSvg) so it can pause and
     // its own reduced-motion rule applies; photos and still illustrations stay <img>.
@@ -161,7 +166,7 @@
       var c = W.svg[id];
       if (c) return c.p;
       c = W.svg[id] = { t: null };
-      c.p = G.fetch(mediaUrl(W.media[id])).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      c.p = remoteFetch(mediaUrl(W.media[id])).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
         .then(function (t) { c.t = t; return t; }, function (e) { delete W.svg[id]; throw e; });
       return c.p;
     }

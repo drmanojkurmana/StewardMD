@@ -16,8 +16,11 @@ await new Promise((r) => setTimeout(r, 1200));
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 ok(/window\.SMD_REMOTE_MEDIA_ON=1;/.test(fs.readFileSync(ROOT + "www/index.html", "utf8")), "bundle built with SMD_REMOTE_MEDIA=1");
 ok(!fs.existsSync(ROOT + "www/clinix/media/practicals"), "CliniX photos are not in the bundle");
+ok(!fs.existsSync(ROOT + "www/surgx/media/acl-reconstruction/04_eua.webp"), "a SurgX picture is not in the bundle");
+ok(fs.existsSync(ROOT + "www/surgx/media/manifest.json"), "the SurgX manifest stays in the bundle");
 
 const PHOTO = "/clinix/media/practicals/obg-ins-veress-needle.webp";
+const SURGX = "/surgx/media/acl-reconstruction/04_eua.webp";
 const DIAGRAM = "/prep/lessons/media/" + fs.readdirSync(ROOT + "prep/lessons/media").find((f) => /\.svg$/.test(f));
 const GATED = "/api/prep/bank/v1/lessons/media/neck-us.webp";
 const LESSON = Object.keys(JSON.parse(fs.readFileSync(ROOT + "prep/lessons/v1/index.json", "utf8")).modules)[0];
@@ -45,24 +48,24 @@ async function run(name, { signedIn, bankUp, ctx }) {
   await page.goto(`http://localhost:${port}/`, { waitUntil: "load" });
   await page.waitForTimeout(4000);
   if (process.env.RM_DEBUG) console.log("DEBUG", name, await page.evaluate(async () => ({ keys: await caches.keys(), media: (await (await caches.open("smd-media-v1")).keys()).length, sw: !!(navigator.serviceWorker && navigator.serviceWorker.controller) })));
-  await page.evaluate(([a, b, c]) => {
+  await page.evaluate(([a, b, c, d]) => {
     window.SMD_IDTOKEN = function () { return window.__si ? "tok" : null; };
     window.SMD_IDTOKEN_REFRESH = function () { return Promise.resolve(window.__si ? "tok" : null); };
     ["introPoster", "splash", "accountGate", "introOverlay"].forEach(function (k) { var e = document.getElementById(k); if (e) e.remove(); });
     var box = document.createElement("div"); box.id = "rmTest"; box.style.cssText = "position:fixed;top:0;left:0;z-index:99999;background:#fff";
-    box.innerHTML = '<img id="i1" width="120" height="80" src="' + a + '"><img id="i2" width="120" height="80" src="' + b + '"><img id="i3" width="120" height="80" src="' + c + '">';
+    box.innerHTML = '<img id="i1" width="120" height="80" src="' + a + '"><img id="i2" width="120" height="80" src="' + b + '"><img id="i3" width="120" height="80" src="' + c + '"><img id="i4" width="120" height="80" src="' + d + '">';
     document.body.appendChild(box);
-  }, [PHOTO, DIAGRAM, GATED]);
+  }, [PHOTO, DIAGRAM, GATED, SURGX]);
   await page.waitForTimeout(3000);
-  const st = await page.evaluate(() => ["i1", "i2", "i3"].map((id) => { const e = document.getElementById(id); return { state: e.getAttribute("data-smd-rm-state"), src: e.src.slice(0, 30), w: e.naturalWidth }; }));
+  const st = await page.evaluate(() => ["i1", "i2", "i3", "i4"].map((id) => { const e = document.getElementById(id); return { state: e.getAttribute("data-smd-rm-state"), src: e.src.slice(0, 30), w: e.naturalWidth }; }));
   return { page, ctx, st, hits, errs };
 }
 
 // 1. signed in, online
 let r = await run("signed-in", { signedIn: true, bankUp: true });
-ok(r.st.every((x) => x.state === "ok" && x.src.startsWith("blob:") && x.w > 0), "signed in: photo, diagram and lesson picture load as on-phone images " + JSON.stringify(r.st));
+ok(r.st.every((x) => x.state === "ok" && x.src.startsWith("blob:") && x.w > 0), "signed in: photo, diagram, lesson picture and SurgX picture load as on-phone images " + JSON.stringify(r.st));
 const imgHits = r.hits.filter((h) => /\.(?:webp|svg)$/.test(h.p));
-ok(imgHits.length === 3 && imgHits.every((h) => h.sig), "each picture fetched once, through a signed URL (" + imgHits.map((h) => h.p).join(", ") + ")");
+ok(imgHits.length === 4 && imgHits.every((h) => h.sig), "each picture fetched once, through a signed URL (" + imgHits.map((h) => h.p).join(", ") + ")");
 const lesson = await r.page.evaluate((k) => window.PREP_BANK_CLIENT.fetchBankJSON("/api/prep/bank/app/prep/lessons/v1/" + k + ".json").then((j) => !!(j && j.steps), (e) => String(e)), LESSON);
 ok(lesson === true && r.hits.some((h) => h.p.startsWith("app/prep/lessons/v1/") && h.proof), "a moved lesson file is fetched with app proof");
 // The lesson reader's own loader: a lesson that used to ship in the app comes from R2 once, then from the phone.
@@ -93,7 +96,7 @@ await r.page.unroute("**/api/prep/session");
 await r.page.route("**/api/prep/session", (rt) => rt.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ sessionId: "s1", sessionKey: "a".repeat(64), expiresAt: Math.floor(Date.now() / 1000) + 600 }) }));
 await r.page.evaluate(() => window.SMD_REMOTE_MEDIA.retry());
 await r.page.waitForTimeout(2500);
-const after = await r.page.evaluate(() => ["i1", "i2", "i3"].map((id) => document.getElementById(id).getAttribute("data-smd-rm-state")));
+const after = await r.page.evaluate(() => ["i1", "i2", "i3", "i4"].map((id) => document.getElementById(id).getAttribute("data-smd-rm-state")));
 ok(after.every((s) => s === "ok"), "after signing in, the same pictures load " + JSON.stringify(after));
 await r.page.screenshot({ path: (process.env.CLAUDE_JOB_DIR || "/tmp") + "/remote-media.png" });
 

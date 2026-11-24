@@ -379,9 +379,19 @@ if [ "${SMD_REMOTE_MEDIA:-}" = "1" ]; then
   find "$WWW/prep/lessons/v1" -name '*.json' ! -name 'index.json' -delete 2>/dev/null || true
   find "$WWW/prep/lessons/media" -type f \( -name '*.svg' -o -name '*.webp' \) -delete 2>/dev/null || true
   rm -rf "$WWW/clinix/media/practicals" "$WWW/clinix/media/skills" "$WWW/media/anim"
+  # Pictures and clips only. Every .json stays (manifests and credits). SurgX GIFs stay (three files).
+  # ProbeLab stays: its iframe loads hashed scripts that fetch same-origin files and never see this loader.
+  # Tokos explorer mechanism frames stay: they are not under tokos/media or tokos/learn.
+  find "$WWW/surgx/media" -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \) -delete 2>/dev/null || true
+  find "$WWW/kardia/media/clips" -type f -name '*.mp4' -delete 2>/dev/null || true
+  find "$WWW/kardia/learn/diagrams" -type f -name '*.svg' -delete 2>/dev/null || true
+  find "$WWW/tokos/media" -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.svg' \) -delete 2>/dev/null || true
+  find "$WWW/tokos/learn" -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.svg' \) -delete 2>/dev/null || true
+  find "$WWW/ophthalmos/learn/media" -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.svg' \) -delete 2>/dev/null || true
+  find "$WWW/ophthalmos/learn/diagrams" -type f \( -name '*.svg' -o -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \) -delete 2>/dev/null || true
   grep -q "window.SMD_REMOTE_MEDIA_ON=0;" "$WWW/index.html" || { echo "  remote media: index.html has no SMD_REMOTE_MEDIA_ON flag"; exit 1; }
   sed -i.bak 's/window\.SMD_REMOTE_MEDIA_ON=0;/window.SMD_REMOTE_MEDIA_ON=1;/' "$WWW/index.html" && rm -f "$WWW/index.html.bak"
-  echo "  remote media: lessons, lesson diagrams and CliniX photos load from R2 (SMD_REMOTE_MEDIA_ON=1)"
+  echo "  remote media: lessons, diagrams, CliniX photos, SurgX, Kardia clips, Tokos and Ophthalmos pictures load from R2 (SMD_REMOTE_MEDIA_ON=1)"
 fi
 
 # ── 5a. No textbook citations or page numbers in the shipped bundle (copyright, owner 2026-09-24) ─────

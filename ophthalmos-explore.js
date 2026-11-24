@@ -203,6 +203,11 @@
   function reduced() { try { return !!(G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) { return false; } }
   function $(id) { return G.document.getElementById(id); }
   function mediaUrl(file) { return BASE + "learn/media/" + file; }
+  function remoteFetch(url) {
+    var RM = G.SMD_REMOTE_MEDIA;
+    var pending = RM && RM.resolve ? RM.resolve(url) : Promise.resolve(url);
+    return pending.then(function (u) { return G.fetch(u); });
+  }
   function LW() { return (O._learn && O._learn._w) || {}; }
 
   /* ---------- the five explorers ---------- */
@@ -298,7 +303,7 @@
   function svgText(file) {
     var c = EX.svg[file];
     if (c) return c;
-    c = EX.svg[file] = G.fetch(mediaUrl(file)).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
+    c = EX.svg[file] = remoteFetch(mediaUrl(file)).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
     c.then(null, function () { delete EX.svg[file]; });
     return c;
   }

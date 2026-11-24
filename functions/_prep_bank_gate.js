@@ -70,8 +70,9 @@ export function isGatedBankPath(p) {
   return classifyBankPath(p) === "gated";
 }
 
+/* Pictures and clips. A matching path uses the short-lived signed URL and is streamed, not watermarked. */
 export function isImagePath(p) {
-  return /\.(?:webp|svg|png|jpg)$/i.test(String(p || ""));
+  return /\.(?:webp|svg|png|jpe?g|mp4)$/i.test(String(p || ""));
 }
 
 /* HMAC-SHA256 via WebCrypto (standard in Cloudflare Workers and Node.js >= 18) */
