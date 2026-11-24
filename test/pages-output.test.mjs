@@ -65,3 +65,9 @@ test("atlas ships on the media host, not Pages", () => {
   const excluded = pagesExclusions();
   assert.ok(excluded.includes("atlas"), "scripts/pages-build.sh must exclude atlas (it moved to the media host)");
 });
+
+test("app media ships from R2, not Pages (20,000-file cap)", () => {
+  const excluded = pagesExclusions();
+  for (const d of ["media/anim", "clinix/media", "prep/lessons/media"])
+    assert.ok(excluded.includes(d), `scripts/pages-build.sh must exclude ${d}`);
+});

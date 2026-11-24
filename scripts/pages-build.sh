@@ -42,6 +42,8 @@ cd "$(dirname "$0")/.."
 
 # data/history (Today in Medical History: 12 month files + 338 banner pictures) is read only from the app's own
 # www/ bundle (build-www.sh) and reaches phones by OTA from R2 (ota-stage.mjs), never from Pages.
+# media/anim, clinix/media and prep/lessons/media: the app bundles them or fetches them from R2 via
+# /api/prep/bank/app/; nothing loads them from Pages, and with them the deploy crossed 20,000 files (2026-11-24).
 
 rm -rf \
   test docs vault android ios atlas \
@@ -52,7 +54,8 @@ rm -rf \
   local-plugins Packages atlas-pipeline scrollcraft \
   store-assets voice-service voice-benchmark \
   prompts infra qa-report archive .fleet-reports .github .planning .claude \
-  data/history
+  data/history \
+  media/anim clinix/media prep/lessons/media
 
 # Pages rejects an output directory with broken symlinks ("build output directory contains links to files that
 # can't be accessed", build log 2026-10-14 20:16Z). npm clean-install links file: dependencies such as
