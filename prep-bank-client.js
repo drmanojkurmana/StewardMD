@@ -119,7 +119,8 @@
   }
 
   function isImagePath(p) {
-    return /\.(?:webp|svg|png|jpg)$/i.test(String(p || ""));
+    // Pictures and clips. mp4 and jpeg use the same short-lived signed URL as webp (the bank streams the bytes).
+    return /\.(?:webp|svg|png|jpe?g|mp4)$/i.test(String(p || ""));
   }
 
   function extractBankPath(urlOrPath) {

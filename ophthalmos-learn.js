@@ -233,6 +233,11 @@
   function picSize(see) { return deckSize(see) || (see.w > 0 && see.h > 0 ? { w: see.w, h: see.h } : null); }
   // Image library: files under learn/media/, beside the lessons (so the host's base URL covers them).
   function mediaUrl(m) { return BASE + "learn/media/" + m.file; }
+  function remoteFetch(url) {
+    var RM = G.SMD_REMOTE_MEDIA;
+    var pending = RM && RM.resolve ? RM.resolve(url) : Promise.resolve(url);
+    return pending.then(function (u) { return G.fetch(u); });
+  }
   function moreIds(l) { return ((l && l.see.more) || []).filter(function (id) { return W.media && W.media[id]; }); }
   // An animation's SVG source, fetched once. It is inlined (scoped per instance by D.scopeSvg) so it can be paused
   // and so its own reduced-motion rule applies; photos and still illustrations stay <img>.
@@ -240,7 +245,7 @@
     var c = W.svg[id];
     if (c) return c.p;
     c = W.svg[id] = { t: null };
-    c.p = G.fetch(mediaUrl(W.media[id])).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+    c.p = remoteFetch(mediaUrl(W.media[id])).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
       .then(function (t) { c.t = t; return t; }, function (e) { delete W.svg[id]; throw e; });
     return c.p;
   }
@@ -727,7 +732,10 @@
     img.decoding = "async";
     img.onload = function () { o.ok = true; o.wait.splice(0).forEach(function (f) { f(); }); };
     img.onerror = function () { o.bad = true; o.wait.splice(0).forEach(function (f) { f(); }); };
-    img.src = mediaUrl(m);
+    var raw = mediaUrl(m);
+    var RM = G.SMD_REMOTE_MEDIA;
+    var pending = RM && RM.resolve ? RM.resolve(raw) : Promise.resolve(raw);
+    pending.then(function (u) { img.src = u; }, function () { img.src = raw; });
     return o;
   }
   // The loss mask for one canvas: a small alpha map (MW x MH) computed from the pattern model in ophthalmos-data.js,

@@ -116,6 +116,71 @@ test("app/ routes only the moved content: other names and traversal are 404", as
   }
 });
 
+test("app/ routes the new pictures and clips, streams a clip, and refuses traversal and the wrong type", async () => {
+  gate.resetBankGateMemory();
+  const clip = "app/kardia/media/clips/tte-a2c-2.mp4";
+  const body = new ReadableStream({
+    start(controller) {
+      controller.enqueue(new Uint8Array([9, 8, 7]));
+      controller.close();
+    },
+  });
+  const files = {
+    ["prep-bank/" + clip]: null,
+  };
+  const typed = {
+    "app/surgx/media/acl-reconstruction/04_eua.webp": "image/webp",
+    "app/kardia/learn/diagrams/dop_cw.svg": "image/svg+xml",
+    "app/tokos/media/ctg/1020.svg": "image/svg+xml",
+    "app/tokos/learn/diagrams/gy5-fibroid.svg": "image/svg+xml",
+    "app/tokos/learn/media/real/gy5-fibroid.webp": "image/webp",
+    "app/ophthalmos/learn/media/photos/sim-amd.webp": "image/webp",
+    "app/ophthalmos/learn/diagrams/pg-ted.svg": "image/svg+xml",
+    "app/surgx/media/prk/still.png": "image/png",
+    "app/surgx/media/prk/still.jpg": "image/jpeg",
+    [clip]: "video/mp4",
+  };
+  for (const p of Object.keys(typed)) if (p !== clip) files["prep-bank/" + p] = "BYTES";
+  const bucket = {
+    get: async (k) => {
+      if (k === "prep-bank/" + clip) {
+        return {
+          body,
+          httpEtag: '"e1"',
+          text() { throw new Error("buffered"); },
+          arrayBuffer() { throw new Error("buffered"); },
+        };
+      }
+      return k in files && files[k] != null ? { body: files[k], httpEtag: '"e1"' } : null;
+    },
+  };
+  const env = { PREP_BANK_ENFORCE: "0", MAIK_KV: kv(), PREP_BANK_R2: bucket };
+  assert.equal((await get(env, clip)).status, 401, "a clip is refused with no signature");
+  const sess = await gate.mintBankSession({ id: "fb:u-a" }, env);
+  for (const p of Object.keys(typed)) {
+    const q = await gate.signImagePath(sess.sessionKey, sess.sessionId, p, 300);
+    const r = await get(env, p, new Request("https://stewardmd.in/api/prep/bank/" + p + "?" + q, { headers: { Origin: "https://localhost" } }));
+    assert.equal(r.status, 200, p);
+    assert.equal(r.headers.get("Content-Type"), typed[p], p);
+    assert.match(r.headers.get("Cache-Control"), /^private/, p);
+    if (p === clip) assert.deepEqual([...(new Uint8Array(await r.arrayBuffer()))], [9, 8, 7]);
+  }
+  for (const p of [
+    "app/surgx/media/lap-cholecystectomy/gif09_cvs.gif",
+    "app/surgx/media/manifest.json",
+    "app/surgx/media/../secret.webp",
+    "app/kardia/media/clips/tte-a2c-2.webp",
+    "app/kardia/probelab/assets/media/CinePLAX.mp4",
+    "app/tokos/explorer/mechanism/frame.svg",
+    "app/tokos/learn/index.json",
+    "app/tokos/learn/media/credits.json",
+    "app/ophthalmos/learn/media/credits.json",
+    "app/prep/lessons/media/x-y.png",
+  ]) {
+    assert.equal((await get(env, p)).status, 404, p);
+  }
+});
+
 test("lessons: public until PREP_LESSONS_GATED=1, then signed-in only; the lesson list stays public", async () => {
   gate.resetBankGateMemory();
   const open = { PREP_BANK_ENFORCE: "1", PREP_BANK_R2: r2(FILES) };

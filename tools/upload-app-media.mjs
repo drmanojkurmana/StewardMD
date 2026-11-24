@@ -25,21 +25,48 @@ export const SOURCES = [
   { dir: "clinix/media/practicals", re: /^[a-z0-9_-]{2,120}\.webp$/ },
   { dir: "clinix/media/skills", re: /^[a-z0-9_-]{2,120}\.webp$/ },
   { dir: "media/anim", re: /^[a-z0-9_-]{2,80}\.(?:webp|av1\.mp4|mp4)$/ },
+  { dir: "surgx/media", re: /^[a-z0-9_-]{2,80}\/[a-z0-9_-]{2,80}\.(?:webp|png|jpe?g)$/, skip: /\.json$/i },
+  { dir: "kardia/media/clips", re: /^[a-z0-9_-]{2,80}\.mp4$/ },
+  { dir: "kardia/learn/diagrams", re: /^[a-z0-9_-]{2,80}\.svg$/ },
+  { dir: "tokos/media", re: /^[a-z0-9_-]{2,40}\/[a-z0-9_-]{2,80}\.(?:webp|svg|png|jpe?g)$/, skip: /\.json$/i },
+  { dir: "tokos/learn", re: /^(?:[a-z0-9_-]{1,40}\/){1,2}[a-z0-9_-]{2,80}\.(?:webp|svg|png|jpe?g)$/, skip: /\.json$/i },
+  { dir: "ophthalmos/learn/media", re: /^[a-z0-9_-]{2,40}\/[a-z0-9_-]{2,80}\.(?:webp|svg|png|jpe?g)$/, skip: /\.json$/i },
+  { dir: "ophthalmos/learn/diagrams", re: /^[a-z0-9_-]{2,80}\.svg$/ },
 ];
-export function contentType(f) { return /\.mp4$/.test(f) ? "video/mp4" : /\.svg$/.test(f) ? "image/svg+xml" : /\.webp$/.test(f) ? "image/webp" : "application/json"; }
+const MEDIA_EXT = /\.(?:json|svg|webp|png|jpe?g|mp4)$/i;
+export function contentType(f) {
+  if (/\.mp4$/i.test(f)) return "video/mp4";
+  if (/\.svg$/i.test(f)) return "image/svg+xml";
+  if (/\.png$/i.test(f)) return "image/png";
+  if (/\.jpe?g$/i.test(f)) return "image/jpeg";
+  if (/\.webp$/i.test(f)) return "image/webp";
+  return "application/json";
+}
 
-/* listFiles(www) -> [{ src, rel, key, bytes }], or throws when a file name would not pass the server's route. */
+function walkFiles(dir, rel, out) {
+  for (const name of fs.readdirSync(dir)) {
+    const abs = path.join(dir, name);
+    const child = rel ? `${rel}/${name}` : name;
+    if (fs.statSync(abs).isDirectory()) walkFiles(abs, child, out);
+    else out.push({ name, rel: child, abs, bytes: fs.statSync(abs).size });
+  }
+}
+
+/* listFiles(www) -> [{ src, rel, key, bytes }], or throws when a file name would not pass the server's route.
+ * JSON manifests and credits under the new folders are skipped (they stay in the app). GIF stays in the app too. */
 export function listFiles(www) {
   const out = [], bad = [];
   for (const s of SOURCES) {
     const d = path.join(www, s.dir);
     if (!fs.existsSync(d)) throw new Error(`${d} is missing: run a normal "npm run build:www" first (without SMD_REMOTE_MEDIA)`);
-    for (const f of fs.readdirSync(d)) {
-      if (s.skip && s.skip.test(f)) continue;
-      if (!/\.(?:json|svg|webp)$/.test(f)) continue;
-      if (!s.re.test(f)) { bad.push(`${s.dir}/${f}`); continue; }
-      const rel = `${s.dir}/${f}`;
-      out.push({ src: path.join(d, f), rel, key: PREFIX + rel, bytes: fs.statSync(path.join(d, f)).size });
+    const found = [];
+    walkFiles(d, "", found);
+    for (const f of found) {
+      if (s.skip && (s.skip.test(f.name) || s.skip.test(f.rel))) continue;
+      if (!MEDIA_EXT.test(f.name)) continue;
+      if (!s.re.test(f.rel)) { bad.push(`${s.dir}/${f.rel}`); continue; }
+      const rel = `${s.dir}/${f.rel}`;
+      out.push({ src: f.abs, rel, key: PREFIX + rel, bytes: f.bytes });
     }
   }
   if (bad.length) throw new Error("names the server would refuse:\n  " + bad.join("\n  "));
