@@ -258,7 +258,9 @@ CREDIT_CONVERSION = "0.5"            # ₹50 → ₹25 of AI
 FOUNDING_AI_GRANT_INR = "120"        # founding annual pool: ₹120 + one ₹120 refill = ₹240/yr ceiling
 FOUNDING_AI_REFILL_INR = "120"
 FOUNDING_DAILY_CAP_INR = "0.01"      # ~0 free daily → founding AI draws the annual pool
-FOUNDING_SEATS = "500"
+# FOUNDING_SEATS dropped (code defaults to 500) to stay under the Pages 128 text-binding cap.
+# ResearchMD server routes on (owner: "flag on", 2026-11-24). Unset or any other value answers 404.
+RESEARCH_MODE = "pilot"
 # NMC PG Logbook verification domain (public). Named envs do NOT inherit top-level [vars], so it is
 # repeated here. The SIGNING KEY is a Pages secret, never a var — see the note in [vars] above.
 # PGLOG_VERIFY_BASE, MAIK_CACHE_VERSION and DEVICE_LOCK_ON removed from production 2026-09-13: each equalled the code default (see functions/_pglog_verify.js, _maik_cache.js, _devices.js), and Cloudflare caps a Pages Function at 128 text bindings (vars + secrets). Removing them changes nothing at runtime.
@@ -361,5 +363,20 @@ bucket_name = "stewardmd-research"
 # Pull queue (plan 5.3): the API produces job messages; the worker polls over HTTP (consumer: http pull,
 # visibility 900 s, 3 retries, dead letters to research-jobs-dlq).
 [[queues.producers]]
+binding = "RESEARCH_QUEUE"
+queue = "research-jobs"
+
+# Production copies of the three research bindings: Wrangler environments do not inherit top-level
+# bindings, so without these the live API answered 503 "Research database is not provisioned".
+[[env.production.d1_databases]]
+binding = "RESEARCH_DB"
+database_name = "stewardmd-research"
+database_id = "fcb5adad-89d8-4d32-a6d1-315b007d2b7a"
+
+[[env.production.r2_buckets]]
+binding = "RESEARCH_R2"
+bucket_name = "stewardmd-research"
+
+[[env.production.queues.producers]]
 binding = "RESEARCH_QUEUE"
 queue = "research-jobs"
