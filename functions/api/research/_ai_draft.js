@@ -81,9 +81,10 @@ import { checklistItems } from "./_checklists.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const TOKENS_MESSAGE = "You need more MaiK tokens";
-const TASKS = [
+export const TASKS = [
   "protocol", "search_query", "rob", "checklist", "title_abstract", "thesis_to_paper", "polish",
   "iec_application", "consent_form", "ctri_fields",
+  "publication_consent", "case_report_draft",
 ];
 const MAX_OUT = {
   protocol: 1200,
@@ -96,6 +97,8 @@ const MAX_OUT = {
   iec_application: 2000,
   consent_form: 2000,
   ctri_fields: 1500,
+  publication_consent: 2000,
+  case_report_draft: 2500,
 };
 /* One T1 call has to return the whole section. 5000 characters leaves room
  * for the polished text inside the 2000 token output ceiling. */
@@ -488,6 +491,67 @@ function ctriDraft(parsed) {
     regulatoryClearance,
     fundingSource,
     briefSummary,
+  };
+}
+
+const LANG_MAP = {
+  en: "English", english: "English",
+  te: "Telugu", telugu: "Telugu",
+  hi: "Hindi", hindi: "Hindi",
+  ta: "Tamil", tamil: "Tamil",
+  kn: "Kannada", kannada: "Kannada",
+  ml: "Malayalam", malayalam: "Malayalam",
+  mr: "Marathi", marathi: "Marathi",
+  bn: "Bengali", bengali: "Bengali",
+  gu: "Gujarati", gujarati: "Gujarati",
+};
+
+function publicationConsentDraft(parsed, requestedLang) {
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+  const english = stripContactInfo(asText(parsed.english, 10000));
+  const local = stripContactInfo(asText(parsed.local, 10000));
+  const reqLower = String(requestedLang || "").toLowerCase();
+  const languageName = asText(parsed.languageName, 80) || LANG_MAP[reqLower] || requestedLang || "English";
+  if (!english) return null;
+  const finalLocal = local || (languageName === "English" ? english : "");
+  if (!finalLocal) return null;
+  return {
+    english,
+    local: finalLocal,
+    languageName,
+  };
+}
+
+function caseReportDraft(parsed) {
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+  const sec = parsed.sections && typeof parsed.sections === "object" && !Array.isArray(parsed.sections) ? parsed.sections : parsed;
+  const title = asText(sec.title, 500);
+  const abstract = asText(sec.abstract, 4000);
+  const introduction = asText(sec.introduction, 4000);
+  const casePresentation = asText(sec.casePresentation || sec.presentation || sec.case_presentation, 8000);
+  const timeline = asText(sec.timeline, 4000);
+  const discussion = asText(sec.discussion, 8000);
+  const conclusion = asText(sec.conclusion, 4000);
+  const patientPerspective = asText(sec.patientPerspective || sec.perspective || "", 2000);
+  let learningPoints = [];
+  if (Array.isArray(sec.learningPoints || sec.learning_points)) {
+    learningPoints = (sec.learningPoints || sec.learning_points).map((lp) => asText(lp, 500)).filter(Boolean);
+  }
+  if (!title || !abstract || !introduction || !casePresentation || !discussion || !conclusion) {
+    return null;
+  }
+  return {
+    sections: {
+      title,
+      abstract,
+      introduction,
+      casePresentation,
+      timeline,
+      discussion,
+      conclusion,
+      patientPerspective,
+      learningPoints,
+    },
   };
 }
 
@@ -958,10 +1022,25 @@ export async function aiDraft(ctx, projectId, body) {
   if (gate.status) return gateErr(gate, gate.status === 404 ? "Project not found" : "Ask MaiK needs an owner, editor or analyst role", requestId);
   const task = body && typeof body.task === "string" ? body.task : "";
   if (TASKS.indexOf(task) < 0)
-    return err(400, "invalid_task", "Unknown task. Use protocol, search_query, rob, checklist, title_abstract, thesis_to_paper, polish, iec_application, consent_form or ctri_fields.", requestId);
+    return err(400, "invalid_task", "Unknown task. Use protocol, search_query, rob, checklist, title_abstract, thesis_to_paper, polish, iec_application, consent_form, ctri_fields, publication_consent or case_report_draft.", requestId);
   const input = inputOf(body);
   if (task === "thesis_to_paper") return thesisTask(ctx, projectId, input);
   if (task === "polish") return polishTask(ctx, projectId, input);
+  if (task === "case_report_draft") {
+    const caseText = typeof input.caseText === "string" ? input.caseText : "";
+    if (!caseText.trim()) {
+      return err(400, "invalid_body", "Case text is required.", requestId);
+    }
+    const report = scan(caseText);
+    if (report.blocked) {
+      const categories = phiCategories(report.hits);
+      await api.audit(db, projectId, uid, "ai_phi_blocked", "case_report_draft", { categories, purpose: "case_report_draft" });
+      return ctx.api.json({
+        error: { code: "phi_blocked", message: "Patient identifiers detected in case text.", requestId },
+        categories,
+      }, 422, { "x-request-id": requestId });
+    }
+  }
 
   const bits = await loadProjectBits(db, projectId);
   const project = bits.project || {};
@@ -1072,6 +1151,40 @@ export async function aiDraft(ctx, projectId, body) {
       "\nProtocol: " + JSON.stringify(proto).slice(0, 3000) +
       (ss ? "\nSample size: " + ss : "") +
       (notes ? "\nNotes: " + notes : "");
+  } else if (task === "publication_consent") {
+    const reqLower = String(input.language || "").toLowerCase();
+    const lang = LANG_MAP[reqLower] || input.language || "English";
+    const includesImages = !!input.includesImages;
+    const journalName = asText(input.journalName, 200);
+    system = "You draft a formal patient consent for publication document for a medical case report according to international guidelines (COPE and ICMJE). " +
+      "Reading level: clear and respectful for patients or their representatives. " +
+      "Return ONLY JSON {english: string, local: string, languageName: string}. " +
+      "The document must cover all required elements in both English and " + lang + ": " +
+      "1) What will be published (text, clinical details, and " + (includesImages ? "clinical images" : "images if any") + "); " +
+      "2) May be read worldwide including online access; " +
+      "3) Name will not be used, but someone may still recognise the case; " +
+      "4) Patient can withdraw consent at any time before publication; " +
+      "5) Medical care and treatment will not be affected in any way; " +
+      "6) Signature or thumb impression with witness; " +
+      "7) Date; " +
+      "8) Next of kin or legally acceptable representative option (if patient is unable to sign); " +
+      "9) List of images included. " +
+      "Also include the note: 'Get the patient or next of kin to sign this before you submit. Some journals insist on their own form; check the journal\\'s instructions.' " +
+      "Do not invent contact phone numbers or emails. Leave contact lines empty or as blank lines.";
+    prompt = "Title: " + (project.title || "") +
+      "\nStudy type: " + (project.study_type || "case-report") +
+      "\nLanguage: " + lang +
+      (journalName ? "\nJournal: " + journalName : "") +
+      "\nIncludes images: " + includesImages;
+  } else if (task === "case_report_draft") {
+    const caseText = typeof input.caseText === "string" ? input.caseText : "";
+    system = "You draft a clinical case report manuscript from de-identified case notes following CARE guidelines. " +
+      "Return ONLY JSON {sections:{title, abstract, introduction, casePresentation, timeline, discussion, conclusion, patientPerspective, learningPoints}}. " +
+      "learningPoints must be an array of strings. patientPerspective is a string or empty string ''. " +
+      "Do not invent facts, numbers, dates, patient names, or hospital numbers. " +
+      "All facts and numbers must come directly from the case text.";
+    prompt = "Project title: " + (project.title || "") +
+      "\nCase notes:\n" + caseText;
   }
 
   const out = await oneCall(ctx, projectId, task, system, prompt);
@@ -1084,6 +1197,8 @@ export async function aiDraft(ctx, projectId, body) {
   else if (task === "iec_application") draft = iecDraft(parsed);
   else if (task === "consent_form") draft = consentDraft(parsed, input.language);
   else if (task === "ctri_fields") draft = ctriDraft(parsed);
+  else if (task === "publication_consent") draft = publicationConsentDraft(parsed, input.language);
+  else if (task === "case_report_draft") draft = caseReportDraft(parsed);
   if (!draft) return err(422, "invalid_draft", "MaiK did not return a draft that matched the required fields.", requestId);
   const stored = await storeDraft(ctx, projectId, task, draft, out.model, out.costInr || 0);
   return respond(ctx, stored, out.model, out.costInr || 0);

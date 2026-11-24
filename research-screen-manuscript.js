@@ -454,6 +454,235 @@
     });
   }
 
+  function openCaseReportDraftModal(container) {
+    var store = SMD.store;
+    var proj = store ? store.getActiveProject() : null;
+    var pid = (proj && proj.id) || activeProjectId();
+
+    var getPromise = (G.RMDStore && G.RMDStore.get)
+      ? G.RMDStore.get(pid, "casefile", "main")
+      : Promise.resolve(null);
+
+    getPromise.then(function (casefile) {
+      if (!casefile) {
+        casefile = {
+          age: (proj && proj.patientAge) || 45,
+          sex: (proj && proj.patientSex) || "Female",
+          presentingComplaint: (proj && proj.researchQuestion) || (proj && proj.title) || "Acute symptoms requiring clinical evaluation.",
+          history: "Patient presented with acute clinical symptoms.",
+          examination: "Physical examination was completed and documented.",
+          investigations: [
+            { date: "Day 0", test: "Diagnostic workup", value: "abnormal", unit: "" }
+          ],
+          diagnosis: (proj && proj.title) || "Clinical case report",
+          treatment: "Supportive care and guideline-directed therapy.",
+          outcome: "Patient improved and was discharged in stable condition.",
+          unusual: "Unusual clinical features and therapeutic response."
+        };
+      }
+
+      var prep = (G.RMDPhi && G.RMDPhi.prepareCaseText)
+        ? G.RMDPhi.prepareCaseText(casefile, {})
+        : { text: JSON.stringify(casefile), blocked: false, findings: [] };
+
+      showDraftPreviewModal(container, pid, prep.text, prep.findings, prep.blocked);
+    }).catch(function () {
+      showDraftPreviewModal(container, pid, "Error loading case file.", [], false);
+    });
+  }
+
+  function showDraftPreviewModal(container, pid, initialText, initialFindings, initialBlocked) {
+    var modal = D.getElementById("rmdCaseReportDraftModal");
+    if (modal && modal.parentNode) modal.parentNode.removeChild(modal);
+
+    var currentText = initialText || "";
+    var currentFindings = initialFindings || [];
+    var currentBlocked = !!initialBlocked;
+
+    modal = D.createElement("div");
+    modal.id = "rmdCaseReportDraftModal";
+    modal.className = "rmd-modal-overlay";
+    modal.style.cssText = "position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:9999; padding:16px;";
+
+    var box = D.createElement("div");
+    box.className = "rmd-modal-card";
+    box.style.cssText = "background:#0D1D23; border:1px solid #1f363d; border-radius:8px; max-width:680px; width:100%; max-height:90vh; overflow-y:auto; padding:20px; color:#fff;";
+
+    function updateView() {
+      if (G.RMDPhi && G.RMDPhi.prepareCaseText) {
+        var res = G.RMDPhi.prepareCaseText(currentText, {});
+        currentFindings = res.findings || [];
+        currentBlocked = res.blocked || currentFindings.length > 0;
+      } else {
+        currentBlocked = false;
+        currentFindings = [];
+      }
+
+      var findingsHtml = "";
+      if (currentBlocked && currentFindings.length) {
+        findingsHtml = '<div id="rmd-cr-findings" style="margin-top:10px; padding:10px; background:rgba(255,107,107,0.1); border:1px solid #ff6b6b; border-radius:4px;">' +
+          '<strong style="color:#ff6b6b; font-size:13px;">De-identification findings (must fix before sending):</strong>' +
+          '<ul style="margin:6px 0 0 16px; padding:0; font-size:12px; color:#ff8787;">' +
+          currentFindings.map(function (f) {
+            var fix = f.indexOf("phone") >= 0 ? "Remove phone number." :
+                      f.indexOf("date") >= 0 ? "Convert dates to Day N." :
+                      f.indexOf("email") >= 0 ? "Remove email address." :
+                      f.indexOf("aadhaar") >= 0 ? "Remove Aadhaar number." :
+                      f.indexOf("uhid") >= 0 ? "Remove hospital identification number." : "Remove personal identifier.";
+            return '<li><span class="rmd-finding-match">' + esc(f) + '</span>: ' + esc(fix) + '</li>';
+          }).join("") +
+          '</ul></div>';
+      }
+
+      var tickEl = box.querySelector("#rmd-cr-tick-noid");
+      var isTicked = tickEl ? tickEl.checked : false;
+
+      var sendBtn = box.querySelector("#rmd-cr-send-btn");
+      if (sendBtn) {
+        sendBtn.disabled = currentBlocked || !isTicked;
+      }
+
+      var fContainer = box.querySelector("#rmd-cr-findings-container");
+      if (fContainer) {
+        fContainer.innerHTML = findingsHtml;
+      }
+    }
+
+    var h = [];
+    h.push('<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">');
+    h.push('  <h3 style="margin:0; font-size:18px;">Draft Case Report with MaiK</h3>');
+    h.push('  <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" id="rmd-cr-close-modal">Cancel</button>');
+    h.push('</div>');
+    h.push('<p style="font-size:13px; color:#8ea3a6; margin-bottom:12px;">Preview of the exact text that will be sent to MaiK. Ensure all personal identifiers are removed.</p>');
+
+    h.push('<div>');
+    h.push('  <label style="display:block; font-size:13px; font-weight:600; margin-bottom:4px;">De-identified Case Text:</label>');
+    h.push('  <textarea id="rmd-cr-preview-text" rows="10" style="width:100%; padding:10px; background:#071318; border:1px solid #1f363d; color:#fff; border-radius:4px; font-family:inherit; font-size:13px; line-height:1.4;">' + esc(currentText) + '</textarea>');
+    h.push('</div>');
+
+    h.push('<div id="rmd-cr-findings-container"></div>');
+
+    h.push('<div style="margin:14px 0 16px 0;">');
+    h.push('  <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer;">');
+    h.push('    <input type="checkbox" id="rmd-cr-tick-noid" />');
+    h.push('    <strong>This text has no name, hospital number, address or phone number</strong>');
+    h.push('  </label>');
+    h.push('</div>');
+
+    h.push('<div style="display:flex; justify-content:flex-end; gap:8px;">');
+    h.push('  <button type="button" class="rmd-btn rmd-btn-subtle" id="rmd-cr-cancel-btn">Cancel</button>');
+    h.push('  <button type="button" class="rmd-btn rmd-btn-primary" id="rmd-cr-send-btn" disabled>Send to MaiK</button>');
+    h.push('</div>');
+    h.push('<div id="rmd-cr-status-msg" style="margin-top:10px; font-size:13px;"></div>');
+
+    box.innerHTML = h.join("\n");
+    modal.appendChild(box);
+    D.body.appendChild(modal);
+
+    var txtArea = box.querySelector("#rmd-cr-preview-text");
+    var tickBox = box.querySelector("#rmd-cr-tick-noid");
+    var closeBtn = box.querySelector("#rmd-cr-close-modal");
+    var cancelBtn = box.querySelector("#rmd-cr-cancel-btn");
+    var sendBtn = box.querySelector("#rmd-cr-send-btn");
+    var statusMsg = box.querySelector("#rmd-cr-status-msg");
+
+    function closeModal() {
+      if (modal && modal.parentNode) modal.parentNode.removeChild(modal);
+    }
+    if (closeBtn) closeBtn.onclick = closeModal;
+    if (cancelBtn) cancelBtn.onclick = closeModal;
+
+    txtArea.oninput = function () {
+      currentText = txtArea.value;
+      updateView();
+    };
+
+    tickBox.onchange = function () {
+      updateView();
+    };
+
+    updateView();
+
+    sendBtn.onclick = function () {
+      if (currentBlocked || !tickBox.checked) return;
+      sendBtn.disabled = true;
+      if (statusMsg) statusMsg.innerHTML = '<span style="color:#42CDB5;">Drafting case report sections with MaiK...</span>';
+
+      var body = {
+        task: "case_report_draft",
+        input: { caseText: currentText }
+      };
+
+      var token = (SMD.auth && SMD.auth.getToken) ? SMD.auth.getToken() : null;
+      var headers = { "Content-Type": "application/json" };
+      if (token) headers.Authorization = "Bearer " + token;
+
+      fetch("/api/research/v1/projects/" + encodeURIComponent(pid) + "/ai-draft", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body)
+      }).then(function (res) {
+        return res.json().then(function (data) {
+          return { status: res.status, data: data };
+        });
+      }).then(function (resp) {
+        if (resp.status >= 200 && resp.status < 300 && resp.data && resp.data.draft && resp.data.draft.sections) {
+          var secMap = resp.data.draft.sections;
+          var fullDraftText = "";
+
+          if (!st.manuscript) st.manuscript = defaultManuscript(pid);
+          if (!st.manuscript.sections) st.manuscript.sections = [];
+
+          var keys = ["title", "abstract", "introduction", "casePresentation", "timeline", "discussion", "conclusion", "patientPerspective", "learningPoints"];
+          for (var k = 0; k < keys.length; k++) {
+            var key = keys[k];
+            var val = secMap[key];
+            if (!val) continue;
+            var textVal = Array.isArray(val) ? val.join("\n- ") : String(val);
+            if (Array.isArray(val)) textVal = "- " + textVal;
+            fullDraftText += " " + textVal;
+
+            var existingSec = getSection(key);
+            var markPrefix = "Drafted by MaiK, check it:\n";
+            if (existingSec) {
+              if (existingSec.text && existingSec.text.trim()) {
+                existingSec.text = existingSec.text + "\n\n" + markPrefix + textVal;
+              } else {
+                existingSec.text = markPrefix + textVal;
+              }
+            } else {
+              var heading = key === "casePresentation" ? "Case Presentation" :
+                            key === "patientPerspective" ? "Patient Perspective" :
+                            key === "learningPoints" ? "Learning Points" :
+                            key.charAt(0).toUpperCase() + key.slice(1);
+              st.manuscript.sections.push({
+                id: key,
+                heading: heading,
+                text: markPrefix + textVal
+              });
+            }
+          }
+
+          if (G.RMDPhi && G.RMDPhi.numbersNotIn) {
+            st.caseReportMissingNumbers = G.RMDPhi.numbersNotIn(fullDraftText, currentText);
+          } else {
+            st.caseReportMissingNumbers = [];
+          }
+
+          closeModal();
+          render(container);
+        } else {
+          sendBtn.disabled = false;
+          var msg = (resp.data && resp.data.error && resp.data.error.message) || "Draft request failed";
+          if (statusMsg) statusMsg.innerHTML = '<span style="color:#ff6b6b;">' + esc(msg) + '</span>';
+        }
+      }).catch(function (err) {
+        sendBtn.disabled = false;
+        if (statusMsg) statusMsg.innerHTML = '<span style="color:#ff6b6b;">Error: ' + esc(err.message || String(err)) + '</span>';
+      });
+    };
+  }
+
   /* manuscript_draft is an async server job: POST it, then poll until it
    * finishes. Cap the wait so a stuck job never spins forever. */
   function pollManuscriptJob(jid, tries) {
@@ -1487,6 +1716,11 @@
     } else if (!isLocked) {
       h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="manuscript-lock">Lock this version</button>');
     }
+    var proj = (SMD.store && SMD.store.getActiveProject) ? SMD.store.getActiveProject() : null;
+    var isCaseReport = proj && (proj.studyType === "case-report" || proj.study_type === "case-report");
+    if (isCaseReport && !isLocked) {
+      h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="ask-maik-case-report">Ask MaiK to draft it</button>');
+    }
     h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="manuscript-export">Download Word file</button>');
     h.push('  </div>');
     h.push('</div>');
@@ -1533,6 +1767,9 @@
       h.push('        <span class="rmd-section-item-label">' + esc(item.label) + '</span>');
       h.push('        <span class="rmd-section-item-meta">' + words + ' words</span>');
       h.push('      </div>');
+      if (secObj && secObj.text && secObj.text.indexOf("Drafted by MaiK") >= 0) {
+        h.push('      <span class="rmd-drafted-by-maik" style="display:block; font-size:11px; color:#42CDB5; margin-top:2px;">Drafted by MaiK, check it</span>');
+      }
       h.push('      <span class="rmd-section-item-desc">' + esc(item.hint) + '</span>');
       h.push('    </button>');
     }
@@ -1685,6 +1922,12 @@
       }
       h.push('  </div>');
 
+      if (st.caseReportMissingNumbers && st.caseReportMissingNumbers.length) {
+        h.push('  <div class="rmd-numbers-warning rmd-missing-number-flag" style="margin: 8px 0; padding: 10px; background: rgba(245,159,0,0.1); border: 1px solid #f59f00; border-radius: 4px; color: #fcc419; font-size: 13px;">');
+        h.push('    <strong>Verification warning:</strong> This number is not in your case file. Check it: ' + esc(st.caseReportMissingNumbers.join(", ")));
+        h.push('  </div>');
+      }
+
       if (st.polishBusy) {
         h.push('  <div class="rmd-banner rmd-banner-info" role="status"><span>MaiK is polishing the wording...</span></div>');
       }
@@ -1818,6 +2061,13 @@
       btnDiff.onclick = function () {
         st.viewMode = "diff";
         render(container);
+      };
+    }
+
+    var btnDraftCr = container.querySelector('[data-rmd="ask-maik-case-report"]');
+    if (btnDraftCr) {
+      btnDraftCr.onclick = function () {
+        openCaseReportDraftModal(container);
       };
     }
 
