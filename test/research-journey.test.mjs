@@ -125,8 +125,13 @@ test("item 0 engine stubs and status helpers", async function () {
   assert.equal(await globalThis.RMDCtri.registered("p1"), false);
 });
 
-test("empty screens render a step banner, Next line and Coming soon", function () {
-  const keys = ["casefile", "novelty", "iec", "pubconsent", "images", "ctri", "randomise", "consort", "backup"];
+/* Minimal DOM-like container: real screens bind() against querySelector(All). */
+function domStub() {
+  return { innerHTML: "", querySelector: function () { return null; }, querySelectorAll: function () { return []; } };
+}
+
+test("still-stub screens render a step banner, Next line and Coming soon", function () {
+  const keys = ["pubconsent", "ctri", "randomise", "consort", "backup"];
   SMD.store = {
     getActiveProject: function () { return { studyType: "Case Report" }; }
   };
@@ -145,10 +150,24 @@ test("empty screens render a step banner, Next line and Coming soon", function (
     }
     SMD.screens[key].render(null);
   });
+});
+
+test("implemented case screens render a real step, not Coming soon", function () {
+  const keys = ["casefile", "novelty", "iec", "images"];
   SMD.store = {
     getActiveProject: function () { return { studyType: "Case Report" }; }
   };
-  const el = { innerHTML: "" };
+  keys.forEach(function (key) {
+    require("../research-screen-" + key + ".js");
+    const el = domStub();
+    SMD.screens[key].render(el);
+    assert.match(el.innerHTML, /rmd-step-banner/);
+    assert.equal(el.innerHTML.indexOf("rmdStepBanner"), -1);
+    assert.match(el.innerHTML, /Next:/);
+    assert.equal(el.innerHTML.indexOf("Coming soon"), -1);
+    SMD.screens[key].render(null);
+  });
+  const el = domStub();
   SMD.screens.casefile.render(el);
   assert.match(el.innerHTML, /Step 1 of 8/);
   assert.match(el.innerHTML, /Next: Novelty/);
