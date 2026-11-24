@@ -9,7 +9,7 @@ import { setTimeout as sleep } from "node:timers/promises";
 const BASE = (process.env.BASE || "http://localhost:5173/").replace(/\/?$/, "/");
 const PORT = Number(process.env.CDP_PORT || 9523);
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${(process.env.CLAUDE_JOB_DIR || "/tmp")}/tmp/usearch-chrome`, "--no-first-run", "--disable-gpu"], { stdio: "ignore" });
+const chrome = spawn(CHROME, ["--headless=new", "--no-sandbox", `--remote-debugging-port=${PORT}`, `--user-data-dir=${(process.env.CLAUDE_JOB_DIR || "/tmp")}/tmp/usearch-chrome`, "--no-first-run", "--disable-gpu"], { stdio: "ignore" });
 let id = 1; const pend = new Map(); let ws, sid;
 const call = (m, p) => { const i = id++; return new Promise((r) => { pend.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId: sid })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return '__ERR__'+x.message}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : null; };
@@ -58,6 +58,10 @@ try {
   chk("selecting a chip filters to one category", filtered.every(r => /^calcs:|^ask:/.test(r)) && filtered.length > 5, String(filtered.length));
   chk("sections other than the chosen one and Ask are gone", await ev(`return document.querySelectorAll("#usBody .us-sec[data-cat]").length`) === 2);
 
+  // Owner 2026-11-24: the chips are one segmented bar: one row, no page overflow, a sideways scroll that a repaint keeps.
+  chk("type bar is one row and fits the panel", await ev(`var b=document.getElementById("usChips"), c=b.querySelectorAll(".us-chip"), t=c[0].getBoundingClientRect().top; return [].every.call(c,function(x){return Math.abs(x.getBoundingClientRect().top-t)<1;}) && b.getBoundingClientRect().right<=innerWidth+0.5 && document.documentElement.scrollWidth<=innerWidth;`) === true);
+  chk("chosen segment is a raised pill", await ev(`var c=document.querySelector('#usChips .us-chip[aria-pressed="true"]'); return getComputedStyle(c).boxShadow!=="none" && getComputedStyle(c).backgroundColor!=="rgba(0, 0, 0, 0)";`) === true);
+  chk("a repaint keeps the bar's sideways scroll", await ev(`var b=document.getElementById("usChips"); if(b.scrollWidth<=b.clientWidth) return true; b.scrollLeft=40; var x=b.scrollLeft; var c=document.querySelector('#usChips .us-chip[data-cat="calcs"]'); c.click(); return document.getElementById("usChips").scrollLeft===x;`) === true);
   await ev(`var c=document.querySelector('#usChips .us-chip[data-cat="all"]'); c.click(); return 1;`); await sleep(100);
   await type("antibiogram");
   await ev(`var i=document.getElementById("usInput"); i.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",bubbles:true})); return 1;`); await sleep(300);

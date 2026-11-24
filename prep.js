@@ -3790,7 +3790,28 @@
    * Home's search button. One box: a shared ID (Q-, L-) or a pearl ID (PN-) opens it; words search the lessons and
    * pearls (title, key, module), the modules (title), and the questions of every subject in the chosen scope (the
    * subject search indexes, read one subject at a time and shown as they arrive). Scope: my plan, or every subject. */
-  var fnd = { q: "", scope: "plan", timer: 0, seq: 0 };
+  var fnd = { q: "", scope: "plan", kind: "all", timer: 0, seq: 0 };
+  // Owner 2026-11-24: a type bar under the box (All, Questions, Lessons, Modules), like a QBank search. Lessons carry
+  // the pearl IDs (the lesson index has no pearl flag, so pearls are not a tab of their own).
+  var FIND_KINDS = [["all", "All"], ["q", "Questions"], ["les", "Lessons"], ["mod", "Modules"]];
+  function findKindHtml() {
+    var fi = 0; FIND_KINDS.forEach(function (k, i) { if (fnd.kind === k[0]) fi = i; });
+    return '<div class="pn-filters pn-seg pn-fkind" role="group" aria-label="Show" style="--n:' + FIND_KINDS.length + ";--i:" + fi + '"><span class="pn-seg-th" aria-hidden="true"></span>' + FIND_KINDS.map(function (k) {
+      return '<button type="button" class="pn-chip' + (fnd.kind === k[0] ? " on" : "") + '" aria-pressed="' + (fnd.kind === k[0]) + '" data-act="find-kind" data-v="' + k[0] + '">' + k[1] + "</button>";
+    }).join("") + "</div>";
+  }
+  // In place, so the thumb slides and the box keeps its text and focus.
+  function setFindKind(v) {
+    var ok = false; FIND_KINDS.forEach(function (k) { if (k[0] === v) ok = true; });
+    fnd.kind = ok ? v : "all";
+    var seg = root && root.querySelector(".pn-fkind");
+    if (seg) {
+      var i = 0; FIND_KINDS.forEach(function (k, j) { if (k[0] === fnd.kind) i = j; });
+      seg.style.setProperty("--i", String(i));
+      Array.prototype.forEach.call(seg.querySelectorAll(".pn-chip"), function (c) { var on = c.getAttribute("data-v") === fnd.kind; c.classList.toggle("on", on); c.setAttribute("aria-pressed", String(on)); });
+    }
+    runFind();
+  }
   function findWords(q) { return String(q).toLowerCase().split(/[^a-z0-9]+/).filter(function (x) { return x.length >= 2; }); }
   function findAll(text, words) { var t = String(text).toLowerCase(); for (var i = 0; i < words.length; i++) if (t.indexOf(words[i]) < 0) return false; return !!words.length; }
   function findSubjects() { var s = load(); return fnd.scope === "all" ? subjectsOf(s.exam) : (ssScope() ? planSubjects() : subjectsOf(s.exam)); }
@@ -3798,7 +3819,7 @@
   function renderFind() {
     paint(bar("Search", "Questions, lessons, pearls and IDs", "back") + '<div class="pn-body"><label class="pn-sl" for="pnFind"><span class="pn-mut pn-small">A word, or an ID such as Q-XXX-XXX-XXX, L-XXXX-XXXX-X or PN-XXXX</span>' +
       '<span class="pn-srch">' + ico("search") + '<input id="pnFind" class="pn-in" type="search" autocomplete="off" enterkeyhint="search" value="' + esc(fnd.q) + '"></span></label>' +
-      (G.PREP_IDS ? G.PREP_IDS.searchExtra() : "") +
+      findKindHtml() + (G.PREP_IDS ? G.PREP_IDS.searchExtra() : "") +
       '<div class="pn-seg4 pn-fscope" role="group" aria-label="Where to search">' + [["plan", "My plan"], ["all", "All subjects"]].map(function (c) {
         return '<button type="button" class="pn-chip' + (fnd.scope === c[0] ? " on" : "") + '" aria-pressed="' + (fnd.scope === c[0]) + '" data-act="find-scope" data-v="' + c[0] + '">' + c[1] + "</button>";
       }).join("") + "</div>" +
@@ -3808,7 +3829,9 @@
   function runFind() {
     var box = root && root.querySelector("#pnFound"), q = fnd.q.trim(), seq = ++fnd.seq;
     if (!box) return;
-    if (!q) { box.innerHTML = '<p class="pn-empty pn-art-sc pn-hint">Search every question, lesson and pearl by a word, or open one by its ID.</p>'; return; }
+    var K = fnd.kind, wantL = K === "all" || K === "les", wantM = K === "all" || K === "mod", wantQ = K === "all" || K === "q";
+    var capL = K === "les" ? 60 : 15, capM = K === "mod" ? 60 : 8;
+    if (!q) { box.innerHTML = '<p class="pn-empty pn-art-sc pn-hint">' + (K === "q" ? "Search every question by a word from its stem or options." : K === "les" ? "Search every lesson and pearl by a word, or open a pearl by its PN- ID." : K === "mod" ? "Search every module by a word from its title." : "Search every question, lesson and pearl by a word, or open one by its ID.") + "</p>"; return; }
     // IDs: a shared question or lesson ID, or a pearl ID (PN-XXXX = the first four characters of its lesson's ID).
     var idh = G.PREP_IDS ? G.PREP_IDS.searchHtml(q) : null;
     if (idh) { box.innerHTML = idh; return; }
@@ -3827,18 +3850,20 @@
         var hit = pm ? pid && pid.toUpperCase() === ("PN-" + pm[1]).toUpperCase() : findAll(e.title + " " + key + " " + mod.replace(/-/g, " ") + " " + pid, words);
         if (hit) { var sid = subjectOfModule(mod); if (sid) les.push({ key: key, e: e, mod: mod, sid: sid, pid: pid }); }
       });
-      if (les.length) out += '<h2 class="pn-sec">Lessons and pearls</h2><ul class="pn-mods">' + les.slice(0, 15).map(function (x) {
+      if (!wantL) les = [];
+      if (les.length) out += '<h2 class="pn-sec">Lessons and pearls</h2><ul class="pn-mods">' + les.slice(0, capL).map(function (x) {
         return '<li><button type="button" class="pn-mod" data-act="l-open" data-s="' + esc(x.sid) + '" data-m="' + esc(x.mod) + '" data-l="' + esc(x.key) + '"><span class="pn-ic sm" style="--h:' + subjHue(x.sid) + '" aria-hidden="true">' + ico("book") + '</span><span class="pn-mb"><b>' + hl(esc(x.e.title || x.key), q) + "</b><small>" + (x.pid ? esc(x.pid) + " · " : "") + (x.e.minutes ? x.e.minutes + " min" : "Lesson") + "</small></span>" + ico("chev") + "</button></li>";
-      }).join("") + "</ul>" + (les.length > 15 ? '<p class="pn-mut pn-small">' + (les.length - 15) + " more lessons. Add a word to narrow.</p>" : "");
+      }).join("") + "</ul>" + (les.length > capL ? '<p class="pn-mut pn-small">' + (les.length - capL) + " more lessons. " + (K === "all" ? "Tap Lessons to see more, or add a word." : "Add a word to narrow.") + "</p>" : "");
       // modules
       var mods = [];
-      if (!pm) subs.forEach(function (sb) { var x = st.ix[sb.id]; if (x) (x.topics || []).forEach(function (t) { if (t.group !== "mixed" && t.group !== "xlist" && findAll(tx(t.title) + " " + t.id.replace(/-/g, " "), words)) mods.push({ sb: sb, t: t }); }); });
-      if (mods.length) out += '<h2 class="pn-sec">Modules</h2><ul class="pn-mods">' + mods.slice(0, 8).map(function (x) {
+      if (!pm && wantM) subs.forEach(function (sb) { var x = st.ix[sb.id]; if (x) (x.topics || []).forEach(function (t) { if (t.group !== "mixed" && t.group !== "xlist" && findAll(tx(t.title) + " " + t.id.replace(/-/g, " "), words)) mods.push({ sb: sb, t: t }); }); });
+      if (mods.length) out += '<h2 class="pn-sec">Modules</h2><ul class="pn-mods">' + mods.slice(0, capM).map(function (x) {
         var n = countFor(x.t, load().exam);
         return '<li><button type="button" class="pn-mod" data-act="module" data-s="' + esc(x.sb.id) + '" data-m="' + esc(x.t.id) + '"><span class="pn-ic sm" style="--h:' + subjHue(x.sb.id) + '" aria-hidden="true">' + ico("grid") + '</span><span class="pn-mb"><b>' + hl(esc(tx(x.t.title)), q) + "</b><small>" + esc(tx(x.sb.name)) + (n ? " · " + n + " MCQs" : "") + "</small></span>" + ico("chev") + "</button></li>";
-      }).join("") + "</ul>";
+      }).join("") + "</ul>" + (mods.length > capM ? '<p class="pn-mut pn-small">' + (mods.length - capM) + " more modules. " + (K === "all" ? "Tap Modules to see more, or add a word." : "Add a word to narrow.") + "</p>" : "");
       box.innerHTML = out + '<div id="pnFoundQ"></div>';
-      if (!out) box.querySelector("#pnFoundQ").innerHTML = pm ? '<p class="pn-empty pn-art-sc">No pearl has that ID.</p>' : "";
+      if (!out) box.querySelector("#pnFoundQ").innerHTML = pm ? (wantL ? '<p class="pn-empty pn-art-sc">No pearl has that ID.</p>' : '<p class="pn-mut pn-small">A PN- ID is a pearl. Tap Lessons or All to open it.</p>') : "";
+      if (!wantQ) { if (!out && !pm) box.querySelector("#pnFoundQ").innerHTML = '<p class="pn-empty pn-art-sc">No ' + (K === "les" ? "lesson" : "module") + " matches. Try fewer or other words.</p>"; return; }
       if (pm || words.join("").length < 3) { if (!pm && !out) box.querySelector("#pnFoundQ").innerHTML = '<p class="pn-mut pn-small">Type at least 3 letters to search the questions.</p>'; return; }
       if (!BANK) { box.querySelector("#pnFoundQ").innerHTML = '<p class="pn-err">Question search did not load. Close and open PrepNucleus again.</p>'; return; }
       // questions: one subject at a time (three in flight), shown as they arrive
@@ -4575,7 +4600,8 @@
     if (a === "filter") { st.filter = v; nav(0); return rerender(); }
     if (a === "search") { srch.sid = b.getAttribute("data-s"); srch.q = ""; return loadIndex(srch.sid).then(function () { push(renderSearch); }); }
     if (a === "hit") return openHit(b.getAttribute("data-m"), b.getAttribute("data-i"));
-    if (a === "find") { fnd.q = ""; return push(renderFind); }
+    if (a === "find") { fnd.q = ""; fnd.kind = "all"; return push(renderFind); }
+    if (a === "find-kind") return setFindKind(v);
     if (a === "find-scope") { fnd.scope = b.getAttribute("data-v") === "all" ? "all" : "plan"; return rerender(); }
     if (a === "find-hit") { srch.sid = b.getAttribute("data-s"); return openHit(b.getAttribute("data-m"), b.getAttribute("data-i")); }
     if (a === "find-retry") return runFind();
