@@ -16,8 +16,6 @@ const randomise = require("../research-randomise.js");
 const phi = require("../research-phi.js");
 const backup = require("../research-backup.js");
 
-const NOT_BUILT = { ok: false, warnings: ["Not built yet"] };
-
 function journey(studyType) {
   return SMD.journeyFor({ studyType: studyType });
 }
@@ -91,19 +89,37 @@ test("start choices exist for all five study types", function () {
 });
 
 test("item 0 engine stubs and status helpers", async function () {
-  assert.deepEqual(stats.kaplanMeier(), NOT_BUILT);
-  assert.deepEqual(stats.logRank(), NOT_BUILT);
-  assert.deepEqual(stats.cox(), NOT_BUILT);
-  assert.deepEqual(stats.matchedOr(), NOT_BUILT);
-  assert.deepEqual(sampleSize.caseControl(), NOT_BUILT);
-  assert.deepEqual(sampleSize.logRankEvents(), NOT_BUILT);
-  assert.deepEqual(randomise.blockList(), NOT_BUILT);
+  // Survival, sample size, randomisation and backup are implemented.
+  // A call with no data stays a soft failure and does not throw.
+  assert.equal(stats.kaplanMeier().ok, false);
+  assert.deepEqual(stats.kaplanMeier().warnings, []);
+  assert.equal(stats.logRank().ok, false);
+  assert.deepEqual(stats.logRank().warnings, []);
+  assert.equal(stats.cox().ok, false);
+  assert.deepEqual(stats.cox().warnings, []);
+  assert.equal(stats.matchedOr().ok, false);
+  assert.deepEqual(stats.matchedOr().warnings, []);
+  assert.equal(sampleSize.caseControl().ok, false);
+  assert.deepEqual(sampleSize.caseControl().warnings, []);
+  assert.equal(sampleSize.logRankEvents().ok, false);
+  assert.deepEqual(sampleSize.logRankEvents().warnings, []);
+  assert.equal(randomise.blockList().ok, false);
+  assert.deepEqual(randomise.blockList().warnings, []);
   assert.deepEqual(phi.prepareCaseText(), { text: "", removed: [], blocked: false, findings: [] });
   assert.deepEqual(phi.scan(), []);
   assert.deepEqual(phi.numbersNotIn(), []);
-  assert.deepEqual(await backup.exportFile(), NOT_BUILT);
-  assert.deepEqual(await backup.readFile(), NOT_BUILT);
-  assert.deepEqual(await backup.restore(), NOT_BUILT);
+  const exported = await backup.exportFile();
+  assert.equal(exported.ok, false);
+  assert.equal(exported.reason, "not-a-backup");
+  const read = await backup.readFile();
+  assert.equal(read.ok, false);
+  assert.equal(read.reason, "wrong-passphrase");
+  const restored = await backup.restore();
+  assert.equal(restored.ok, false);
+  assert.equal(restored.added, 0);
+  assert.equal(restored.updated, 0);
+  assert.equal(restored.skipped, 0);
+  assert.deepEqual(restored.warnings, []);
   assert.equal(await backup.isDue(), false);
   assert.equal(await globalThis.RMDIec.status("p1"), "none");
   assert.equal(await globalThis.RMDCtri.registered("p1"), false);
@@ -121,7 +137,12 @@ test("empty screens render a step banner, Next line and Coming soon", function (
     assert.match(el.innerHTML, /rmd-step-banner/);
     assert.equal(el.innerHTML.indexOf("rmdStepBanner"), -1);
     assert.match(el.innerHTML, /Next:/);
-    assert.match(el.innerHTML, /Coming soon/);
+    if (key === "backup") {
+      assert.equal(el.innerHTML.indexOf("Coming soon"), -1);
+      assert.match(el.innerHTML, /If you forget this passphrase, nobody can open the backup, including us\./);
+    } else {
+      assert.match(el.innerHTML, /Coming soon/);
+    }
     SMD.screens[key].render(null);
   });
   SMD.store = {

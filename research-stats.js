@@ -1215,6 +1215,15 @@
     var outcomeType, groups, paired, normal, smallExpected, key;
     if (!opts || typeof opts !== "object") bad("chooseTest needs an options object");
     outcomeType = opts.outcomeType;
+    if (outcomeType === "survival") {
+      return {
+        test: "log_rank",
+        label: "Kaplan-Meier with log-rank test",
+        why: "(compares time to the event between groups)",
+        ok: true,
+        warnings: []
+      };
+    }
     if (outcomeType !== "numeric" && outcomeType !== "binary" && outcomeType !== "categorical") {
       bad("chooseTest needs an outcome type of numeric, binary, or categorical");
     }
@@ -2171,14 +2180,944 @@
     return "";
   }
 
-  function notBuiltYet() {
-    return { ok: false, warnings: ["Not built yet"] };
+  /* Survival, log-rank, Cox and matched odds ratio.
+   * These return { ok, warnings } and do not throw on bad data.
+   * The proportional hazards reminder is shown by the screen, not here. */
+
+  var MSG_NO_EVENTS = "No events yet, so the groups cannot be compared.";
+  var MSG_NOT_SETTLED = "The model did not settle on an answer. Do not report a hazard ratio; ask your statistician.";
+  var MSG_SEPARATION = "One group had no events (or only events), so its hazard ratio cannot be estimated.";
+  var MSG_TOO_FEW = "Too few events for this many factors; use fewer factors.";
+  var MSG_NO_PAIRS = "No pairs differ in exposure, so the matched odds ratio cannot be calculated.";
+  var MSG_OR_HUGE = "The odds ratio is very large; report only the lower limit.";
+  var MSG_OR_WIDE = "Very few pairs differ; the interval is wide.";
+
+  function softFail(extra) {
+    var out = { ok: false, warnings: [] };
+    var k;
+    if (extra) for (k in extra) if (Object.prototype.hasOwnProperty.call(extra, k)) out[k] = extra[k];
+    return out;
   }
 
-  function kaplanMeier() { return notBuiltYet(); }
-  function logRank() { return notBuiltYet(); }
-  function cox() { return notBuiltYet(); }
-  function matchedOr() { return notBuiltYet(); }
+  function msgExcluded(n) {
+    return n + " rows were left out because the time or event value was missing or invalid.";
+  }
+
+  function msgSmall(name, n) {
+    return "Group " + name + " has only " + n + " patients; treat these numbers as unreliable.";
+  }
+
+  function msgNoEvent(name) {
+    return "No one in group " + name + " had the event, so median survival is not reached.";
+  }
+
+  function coerceEvent(v) {
+    var s;
+    if (v === true || v === 1) return 1;
+    if (v === false || v === 0) return 0;
+    if (typeof v === "number") return null;
+    if (v == null) return null;
+    s = trim(String(v)).toLowerCase();
+    if (s === "1" || s === "yes" || s === "y" || s === "true" || s === "dead" || s === "died" || s === "event") return 1;
+    if (s === "0" || s === "no" || s === "n" || s === "false" || s === "alive" || s === "censored") return 0;
+    return null;
+  }
+
+  function coerceTime(v) {
+    var n;
+    if (typeof v === "number" && isFinite(v) && v >= 0) return v;
+    if (typeof v === "string" && trim(v) !== "") {
+      n = Number(trim(v));
+      if (isFinite(n) && n >= 0) return n;
+    }
+    return null;
+  }
+
+  function asCovariateNumber(v) {
+    var n;
+    if (typeof v === "number" && isFinite(v)) return v;
+    if (typeof v === "string" && trim(v) !== "") {
+      n = Number(trim(v));
+      if (isFinite(n)) return n;
+    }
+    return null;
+  }
+
+  function zForLevel(level) {
+    var p;
+    if (!isFin(level) || !(level > 0) || !(level < 1)) return null;
+    p = 0.5 + level / 2;
+    try { return normalQuantile(p); } catch (e) { return null; }
+  }
+
+  function kmCi(surv, se, z, confType) {
+    var logS, loPow, hiPow, lo, hi;
+    if (se == null || !isFinite(se) || !isFinite(surv)) return { lo: null, hi: null };
+    if (!(surv > 0)) return { lo: null, hi: null };
+    if (surv === 1 && se === 0) return { lo: 1, hi: 1 };
+    if (confType === "plain") {
+      lo = surv - z * surv * se;
+      hi = surv + z * surv * se;
+    } else if (confType === "log-log") {
+      logS = Math.log(surv);
+      if (!(logS < 0)) return { lo: 1, hi: 1 };
+      loPow = Math.exp(-z * se / logS);
+      hiPow = Math.exp(z * se / logS);
+      lo = Math.pow(surv, loPow);
+      hi = Math.pow(surv, hiPow);
+    } else {
+      lo = surv * Math.exp(-z * se);
+      hi = surv * Math.exp(z * se);
+    }
+    if (!isFinite(lo) || !isFinite(hi)) return { lo: null, hi: null };
+    if (lo < 0) lo = 0;
+    if (hi > 1) hi = 1;
+    if (lo > 1) lo = 1;
+    return { lo: lo, hi: hi };
+  }
+
+  function kmQuantile(steps, field) {
+    var i, v, hitT, hitV, lastT;
+    if (!steps.length) return null;
+    lastT = steps[steps.length - 1].t;
+    hitT = null;
+    hitV = null;
+    for (i = 0; i < steps.length; i++) {
+      v = steps[i][field];
+      if (v == null || !isFinite(v)) continue;
+      if (v <= 0.5 + 1e-12) { hitT = steps[i].t; hitV = v; break; }
+    }
+    if (hitT == null) return null;
+    if (hitV < 0.5 - 1e-9) return hitT;
+    for (i = 0; i < steps.length; i++) {
+      if (steps[i].t > hitT && steps[i].events > 0) return (hitT + steps[i].t) / 2;
+    }
+    return (hitT + lastT) / 2;
+  }
+
+  function kmOne(recs, z, confType) {
+    var steps, i, n, atRisk, surv, cum, seInf, t, d, c, risk, se, band;
+    recs.sort(function (a, b) {
+      if (a.t < b.t) return -1;
+      if (a.t > b.t) return 1;
+      return b.e - a.e;
+    });
+    steps = [];
+    n = recs.length;
+    atRisk = n;
+    surv = 1;
+    cum = 0;
+    seInf = false;
+    i = 0;
+    while (i < n) {
+      t = recs[i].t;
+      d = 0;
+      c = 0;
+      risk = atRisk;
+      while (i < n && recs[i].t === t) {
+        if (recs[i].e === 1) d += 1; else c += 1;
+        i += 1;
+        atRisk -= 1;
+      }
+      if (d > 0 && risk > 0) {
+        surv = surv * (1 - d / risk);
+        if (risk === d) seInf = true;
+        else if (!seInf) cum += d / (risk * (risk - d));
+      }
+      se = seInf ? null : Math.sqrt(cum);
+      if (se != null && !isFinite(se)) se = null;
+      band = kmCi(surv, se, z, confType);
+      steps.push({
+        t: t,
+        atRisk: risk,
+        events: d,
+        censored: c,
+        survival: surv,
+        seLogS: se,
+        ciLower: band.lo,
+        ciUpper: band.hi
+      });
+    }
+    return steps;
+  }
+
+  function prepTimeEvent(times, events, groups) {
+    var i, t, e, name, order, map, recs, badTE, badGroup, g;
+    if (!isArray(times) || !isArray(events) || times.length !== events.length) return null;
+    if (groups != null && (!isArray(groups) || groups.length !== times.length)) return null;
+    order = [];
+    map = {};
+    badTE = 0;
+    badGroup = 0;
+    for (i = 0; i < times.length; i++) {
+      t = coerceTime(times[i]);
+      e = coerceEvent(events[i]);
+      if (t == null || e == null) { badTE += 1; continue; }
+      if (groups == null) name = "All";
+      else if (groups[i] == null) { badGroup += 1; continue; }
+      else name = String(groups[i]);
+      if (!map[name]) {
+        map[name] = [];
+        order.push(name);
+      }
+      map[name].push({ t: t, e: e });
+    }
+    recs = [];
+    for (i = 0; i < order.length; i++) {
+      g = map[order[i]];
+      recs.push({ name: order[i], recs: g });
+    }
+    return { badTE: badTE, badGroup: badGroup, groups: recs };
+  }
+
+  function kaplanMeier(times, events, groups, opts) {
+    try {
+      var confType, confLevel, z, prep, warnings, outGroups, i, g, steps, nEvents, gi;
+      confType = "log";
+      confLevel = 0.95;
+      if (opts != null && typeof opts === "object") {
+        if (opts.confType != null) confType = opts.confType;
+        if (opts.confLevel != null) confLevel = opts.confLevel;
+      } else if (opts != null) {
+        return softFail({ nExcluded: 0, groups: [] });
+      }
+      if (confType !== "log" && confType !== "log-log" && confType !== "plain") {
+        return softFail({ nExcluded: 0, groups: [] });
+      }
+      z = zForLevel(confLevel);
+      if (z == null) return softFail({ nExcluded: 0, groups: [] });
+      prep = prepTimeEvent(times, events, groups);
+      if (!prep) return softFail({ nExcluded: 0, groups: [] });
+      warnings = [];
+      if (prep.badTE > 0) warnings.push(msgExcluded(prep.badTE));
+      for (i = 0; i < prep.groups.length; i++) {
+        if (prep.groups[i].recs.length < 5) {
+          warnings.push(msgSmall(prep.groups[i].name, prep.groups[i].recs.length));
+        }
+      }
+      outGroups = [];
+      for (i = 0; i < prep.groups.length; i++) {
+        g = prep.groups[i];
+        nEvents = 0;
+        for (gi = 0; gi < g.recs.length; gi++) if (g.recs[gi].e === 1) nEvents += 1;
+        if (nEvents === 0) warnings.push(msgNoEvent(g.name));
+        steps = kmOne(g.recs, z, confType);
+        outGroups.push({
+          name: g.name,
+          n: g.recs.length,
+          nEvents: nEvents,
+          steps: steps,
+          median: {
+            value: kmQuantile(steps, "survival"),
+            lower: kmQuantile(steps, "ciLower"),
+            upper: kmQuantile(steps, "ciUpper")
+          }
+        });
+      }
+      return {
+        ok: true,
+        warnings: warnings,
+        nExcluded: prep.badTE + prep.badGroup,
+        groups: outGroups
+      };
+    } catch (errKm) {
+      return softFail({ nExcluded: 0, groups: [] });
+    }
+  }
+
+  function logRank(times, events, groups) {
+    try {
+      var prep, warnings, i, j, k, g, nEvents, rows, names, observed, expected, nCount;
+      var timeMap, timesKey, t, rec, risk, deaths, n, d, ng, dg, eAdd, varAdd;
+      var keep, use, V, rhs, solved, chi2, df, p, gi, a, b, varTerms;
+      prep = prepTimeEvent(times, events, groups);
+      if (!prep) return softFail({ chi2: null, df: null, p: null, table: [] });
+      warnings = [];
+      if (prep.badTE > 0) warnings.push(msgExcluded(prep.badTE));
+      nEvents = 0;
+      names = [];
+      observed = [];
+      expected = [];
+      nCount = [];
+      rows = [];
+      for (i = 0; i < prep.groups.length; i++) {
+        g = prep.groups[i];
+        names.push(g.name);
+        nCount.push(g.recs.length);
+        observed.push(0);
+        expected.push(0);
+        if (g.recs.length < 5) warnings.push(msgSmall(g.name, g.recs.length));
+        for (j = 0; j < g.recs.length; j++) {
+          rows.push({ t: g.recs[j].t, e: g.recs[j].e, g: i });
+          if (g.recs[j].e === 1) nEvents += 1;
+        }
+      }
+      if (nEvents === 0) {
+        warnings.push(MSG_NO_EVENTS);
+        deaths = [];
+        for (j = 0; j < names.length; j++) {
+          deaths.push({ group: names[j], n: nCount[j], observed: 0, expected: 0 });
+        }
+        return { ok: false, warnings: warnings, chi2: null, df: null, p: null, table: deaths };
+      }
+      timeMap = {};
+      timesKey = [];
+      for (i = 0; i < rows.length; i++) {
+        rec = rows[i];
+        t = String(rec.t);
+        if (!timeMap[t]) {
+          timeMap[t] = { t: rec.t, risk: [], deaths: [] };
+          for (j = 0; j < names.length; j++) {
+            timeMap[t].risk.push(0);
+            timeMap[t].deaths.push(0);
+          }
+          timesKey.push(t);
+        }
+        timeMap[t].risk[rec.g] += 1;
+        if (rec.e === 1) timeMap[t].deaths[rec.g] += 1;
+      }
+      /* Risk set is everyone with time >= t, so accumulate from the latest time. */
+      timesKey.sort(function (x, y) { return Number(y) - Number(x); });
+      risk = [];
+      varTerms = [];
+      for (j = 0; j < names.length; j++) risk.push(0);
+      for (k = 0; k < timesKey.length; k++) {
+        rec = timeMap[timesKey[k]];
+        for (j = 0; j < names.length; j++) risk[j] += rec.risk[j];
+        d = 0;
+        n = 0;
+        for (j = 0; j < names.length; j++) {
+          d += rec.deaths[j];
+          n += risk[j];
+        }
+        if (d <= 0 || n <= 0) continue;
+        for (j = 0; j < names.length; j++) {
+          eAdd = risk[j] * d / n;
+          expected[j] += eAdd;
+          observed[j] += rec.deaths[j];
+        }
+        if (n <= 1) continue;
+        varAdd = d * (n - d) / (n * n * (n - 1));
+        varTerms.push({ risk: risk.slice(), nAt: n, varAdd: varAdd });
+      }
+      keep = [];
+      for (j = 0; j < names.length; j++) if (expected[j] > 0) keep.push(j);
+      df = keep.length - 1;
+      chi2 = null;
+      p = null;
+      if (df >= 1) {
+        use = [];
+        for (j = 1; j < keep.length; j++) use.push(keep[j]);
+        V = [];
+        for (a = 0; a < use.length; a++) {
+          V[a] = [];
+          for (b = 0; b < use.length; b++) V[a][b] = 0;
+        }
+        for (k = 0; k < varTerms.length; k++) {
+          rec = varTerms[k];
+          for (a = 0; a < use.length; a++) {
+            for (b = 0; b < use.length; b++) {
+              gi = use[a];
+              j = use[b];
+              if (gi === j) V[a][b] += rec.risk[gi] * (rec.nAt - rec.risk[gi]) * rec.varAdd;
+              else V[a][b] += -rec.risk[gi] * rec.risk[j] * rec.varAdd;
+            }
+          }
+        }
+        rhs = [];
+        for (a = 0; a < use.length; a++) rhs.push(observed[use[a]] - expected[use[a]]);
+        solved = solveLinear(V, rhs);
+        if (solved) {
+          chi2 = 0;
+          for (a = 0; a < rhs.length; a++) chi2 += rhs[a] * solved[a];
+          if (chi2 < 0 && chi2 > -1e-8) chi2 = 0;
+          if (chi2 >= 0) {
+            try { p = chiSqUpper(chi2, df); } catch (eP) { p = null; }
+          } else {
+            chi2 = null;
+          }
+        }
+      } else {
+        df = df < 0 ? 0 : df;
+      }
+      deaths = [];
+      for (j = 0; j < names.length; j++) {
+        deaths.push({ group: names[j], n: nCount[j], observed: observed[j], expected: expected[j] });
+      }
+      return {
+        ok: true,
+        warnings: warnings,
+        chi2: chi2,
+        df: df,
+        p: p,
+        table: deaths
+      };
+    } catch (errLr) {
+      return softFail({ chi2: null, df: null, p: null, table: [] });
+    }
+  }
+
+  function solveLinear(A, b) {
+    var n, M, i, j, k, max, maxR, tmp, pivot, factor, x, sum;
+    n = b.length;
+    if (!n || A.length !== n) return null;
+    M = [];
+    for (i = 0; i < n; i++) {
+      M[i] = [];
+      for (j = 0; j < n; j++) M[i][j] = A[i][j];
+      M[i][n] = b[i];
+    }
+    for (k = 0; k < n; k++) {
+      max = Math.abs(M[k][k]);
+      maxR = k;
+      for (i = k + 1; i < n; i++) {
+        if (Math.abs(M[i][k]) > max) { max = Math.abs(M[i][k]); maxR = i; }
+      }
+      if (!(max > 1e-12)) return null;
+      if (maxR !== k) { tmp = M[k]; M[k] = M[maxR]; M[maxR] = tmp; }
+      pivot = M[k][k];
+      for (i = k + 1; i < n; i++) {
+        factor = M[i][k] / pivot;
+        for (j = k; j <= n; j++) M[i][j] -= factor * M[k][j];
+      }
+    }
+    x = [];
+    for (i = n - 1; i >= 0; i--) {
+      sum = M[i][n];
+      for (j = i + 1; j < n; j++) sum -= M[i][j] * x[j];
+      x[i] = sum / M[i][i];
+      if (!isFinite(x[i])) return null;
+    }
+    return x;
+  }
+
+  function zerosVec(p) {
+    var a = [], i;
+    for (i = 0; i < p; i++) a.push(0);
+    return a;
+  }
+
+  function zeroMat(p) {
+    var a = [], i, j, row;
+    for (i = 0; i < p; i++) {
+      row = [];
+      for (j = 0; j < p; j++) row.push(0);
+      a.push(row);
+    }
+    return a;
+  }
+
+  function dotVec(x, beta) {
+    var s = 0, i;
+    for (i = 0; i < beta.length; i++) s += x[i] * beta[i];
+    return s;
+  }
+
+  function accumCov(x, w, sumX, sumXX) {
+    var i, j, xw;
+    for (i = 0; i < x.length; i++) {
+      xw = w * x[i];
+      sumX[i] += xw;
+      for (j = 0; j < x.length; j++) sumXX[i][j] += xw * x[j];
+    }
+  }
+
+  /* Partial log likelihood, score and observed information. subjects sorted by time. */
+  function coxPartial(subjects, beta, ties, wantDeriv) {
+    var p, ll, score, info, n, idx, etas, t, start, deathIdx, dcount, maxEta, j, dw, w;
+    var sumW, sumWx, sumWxx, sumDW, sumDWx, sumDWxx, sumDx, sumDeta, di, k, frac, s0, s1, invS0, i1, j1, v;
+    p = beta.length;
+    ll = 0;
+    score = zerosVec(p);
+    info = zeroMat(p);
+    n = subjects.length;
+    etas = [];
+    idx = 0;
+    while (idx < n) {
+      t = subjects[idx].t;
+      start = idx;
+      deathIdx = [];
+      while (idx < n && subjects[idx].t === t) {
+        if (subjects[idx].e === 1) deathIdx.push(idx);
+        idx += 1;
+      }
+      dcount = deathIdx.length;
+      if (dcount === 0) continue;
+      maxEta = -1e300;
+      for (j = start; j < n; j++) {
+        etas[j] = dotVec(subjects[j].x, beta);
+        if (etas[j] > maxEta) maxEta = etas[j];
+      }
+      sumW = 0;
+      sumWx = zerosVec(p);
+      sumWxx = zeroMat(p);
+      sumDW = 0;
+      sumDWx = zerosVec(p);
+      sumDWxx = zeroMat(p);
+      sumDx = zerosVec(p);
+      sumDeta = 0;
+      for (j = start; j < n; j++) {
+        dw = etas[j] - maxEta;
+        w = dw < -745 ? 0 : Math.exp(dw);
+        sumW += w;
+        if (wantDeriv) accumCov(subjects[j].x, w, sumWx, sumWxx);
+      }
+      if (!(sumW > 0)) return null;
+      for (di = 0; di < dcount; di++) {
+        j = deathIdx[di];
+        sumDeta += etas[j];
+        dw = etas[j] - maxEta;
+        w = dw < -745 ? 0 : Math.exp(dw);
+        sumDW += w;
+        for (i1 = 0; i1 < p; i1++) sumDx[i1] += subjects[j].x[i1];
+        if (wantDeriv) accumCov(subjects[j].x, w, sumDWx, sumDWxx);
+      }
+      if (ties === "breslow") {
+        ll += sumDeta - dcount * (maxEta + Math.log(sumW));
+        if (wantDeriv) {
+          invS0 = 1 / sumW;
+          for (i1 = 0; i1 < p; i1++) score[i1] += sumDx[i1] - dcount * sumWx[i1] * invS0;
+          for (i1 = 0; i1 < p; i1++) {
+            for (j1 = 0; j1 < p; j1++) {
+              info[i1][j1] += dcount * (sumWxx[i1][j1] * invS0 - sumWx[i1] * sumWx[j1] * invS0 * invS0);
+            }
+          }
+        }
+      } else {
+        ll += sumDeta;
+        for (k = 0; k < dcount; k++) {
+          frac = k / dcount;
+          s0 = sumW - frac * sumDW;
+          if (!(s0 > 0)) return null;
+          ll -= maxEta + Math.log(s0);
+          if (wantDeriv) {
+            s1 = zerosVec(p);
+            for (i1 = 0; i1 < p; i1++) s1[i1] = sumWx[i1] - frac * sumDWx[i1];
+            invS0 = 1 / s0;
+            for (i1 = 0; i1 < p; i1++) score[i1] -= s1[i1] * invS0;
+            for (i1 = 0; i1 < p; i1++) {
+              for (j1 = 0; j1 < p; j1++) {
+                v = (sumWxx[i1][j1] - frac * sumDWxx[i1][j1]) * invS0 - s1[i1] * s1[j1] * invS0 * invS0;
+                info[i1][j1] += v;
+              }
+            }
+          }
+        }
+        if (wantDeriv) {
+          for (i1 = 0; i1 < p; i1++) score[i1] += sumDx[i1];
+        }
+      }
+    }
+    if (!isFinite(ll)) return null;
+    return { ll: ll, score: score, info: info };
+  }
+
+  function coxFail(extra) {
+    var base = {
+      ok: false,
+      warnings: [],
+      n: 0,
+      nEvents: 0,
+      nExcluded: 0,
+      converged: false,
+      iterations: 0,
+      logLik: null,
+      lrTest: null,
+      coefficients: []
+    };
+    var key;
+    if (extra) for (key in extra) if (Object.prototype.hasOwnProperty.call(extra, key)) base[key] = extra[key];
+    return base;
+  }
+
+  function cox(rows, opts) {
+    try {
+      var preds, ties, maxIter, eps, confLevel, zcrit, i, j, k, row, t, e, pred, num, raw, missing;
+      var included, badTE, missCov, levels, seen, columns, ref, found, lv, p, subjects, x, means, nSub, nEvents;
+      var beta, fit0, ll0, ll, iterations, converged, sep, prevAbs, grow, iter, parts, step, scale, h, trial, trialFit;
+      var oldLL, dll, absb, sepFlag, finalFit, variances, col, unit, allEst, warnings, coefficients, coef, se, zstat, hr, lo, hi, wp, chi, lp;
+      var vals, name, cat, xi;
+      if (!isArray(rows) || !opts || typeof opts !== "object") return coxFail();
+      preds = opts.predictors;
+      if (!isArray(preds) || !preds.length) return coxFail();
+      ties = opts.ties == null ? "efron" : opts.ties;
+      if (ties !== "efron" && ties !== "breslow") return coxFail();
+      maxIter = opts.maxIter == null ? 20 : opts.maxIter;
+      if (typeof maxIter !== "number" || !isFinite(maxIter) || maxIter < 0 || Math.floor(maxIter) !== maxIter) return coxFail();
+      eps = opts.eps == null ? 1e-9 : opts.eps;
+      if (!isFin(eps) || !(eps > 0)) return coxFail();
+      confLevel = opts.confLevel == null ? 0.95 : opts.confLevel;
+      zcrit = zForLevel(confLevel);
+      if (zcrit == null) return coxFail();
+      if (opts.time == null || opts.event == null) return coxFail();
+      for (i = 0; i < preds.length; i++) {
+        pred = preds[i];
+        if (!pred || typeof pred !== "object" || pred.name == null || pred.name === "") return coxFail();
+        if (pred.type !== "numeric" && pred.type !== "categorical") return coxFail();
+      }
+      included = [];
+      badTE = 0;
+      missCov = 0;
+      for (i = 0; i < rows.length; i++) {
+        row = rows[i];
+        if (!row || typeof row !== "object" || isArray(row)) { badTE += 1; continue; }
+        t = coerceTime(row[opts.time]);
+        e = coerceEvent(row[opts.event]);
+        if (t == null || e == null) { badTE += 1; continue; }
+        vals = [];
+        missing = false;
+        for (j = 0; j < preds.length; j++) {
+          pred = preds[j];
+          if (pred.type === "numeric") {
+            num = asCovariateNumber(row[pred.name]);
+            if (num == null) { missing = true; break; }
+            vals.push(num);
+          } else {
+            raw = row[pred.name];
+            if (raw == null) { missing = true; break; }
+            cat = trim(String(raw));
+            if (cat === "") { missing = true; break; }
+            vals.push(cat);
+          }
+        }
+        if (missing) { missCov += 1; continue; }
+        included.push({ t: t, e: e, vals: vals });
+      }
+      columns = [];
+      for (j = 0; j < preds.length; j++) {
+        pred = preds[j];
+        name = String(pred.name);
+        if (pred.type === "numeric") {
+          columns.push({ predictor: name, level: null, term: name, predIndex: j });
+        } else {
+          seen = {};
+          levels = [];
+          for (i = 0; i < included.length; i++) {
+            cat = included[i].vals[j];
+            if (!seen[cat]) { seen[cat] = 1; levels.push(cat); }
+          }
+          levels.sort();
+          if (!levels.length) continue;
+          ref = levels[0];
+          if (pred.reference != null && trim(String(pred.reference)) !== "") {
+            ref = trim(String(pred.reference));
+            found = false;
+            for (k = 0; k < levels.length; k++) if (levels[k] === ref) found = true;
+            if (!found) ref = levels[0];
+          }
+          for (k = 0; k < levels.length; k++) {
+            lv = levels[k];
+            if (lv === ref) continue;
+            columns.push({ predictor: name, level: lv, term: name + "=" + lv, predIndex: j });
+          }
+        }
+      }
+      p = columns.length;
+      nSub = included.length;
+      nEvents = 0;
+      for (i = 0; i < nSub; i++) if (included[i].e === 1) nEvents += 1;
+      warnings = [];
+      if (badTE > 0) warnings.push(msgExcluded(badTE));
+      if (!p || !nSub) {
+        return coxFail({ n: nSub, nEvents: nEvents, nExcluded: badTE + missCov, warnings: warnings });
+      }
+      if (nEvents === 0) {
+        warnings.push(MSG_NO_EVENTS);
+        return coxFail({ ok: false, n: nSub, nEvents: 0, nExcluded: badTE + missCov, warnings: warnings });
+      }
+      if (nEvents < 10 * p) warnings.push(MSG_TOO_FEW);
+      means = zerosVec(p);
+      subjects = [];
+      for (i = 0; i < nSub; i++) {
+        x = [];
+        for (j = 0; j < p; j++) {
+          if (columns[j].level == null) xi = included[i].vals[columns[j].predIndex];
+          else xi = included[i].vals[columns[j].predIndex] === columns[j].level ? 1 : 0;
+          x.push(xi);
+          means[j] += xi;
+        }
+        subjects.push({ t: included[i].t, e: included[i].e, x: x });
+      }
+      for (j = 0; j < p; j++) means[j] /= nSub;
+      for (i = 0; i < nSub; i++) {
+        for (j = 0; j < p; j++) subjects[i].x[j] -= means[j];
+      }
+      subjects.sort(function (a, b) {
+        if (a.t < b.t) return -1;
+        if (a.t > b.t) return 1;
+        return 0;
+      });
+      beta = zerosVec(p);
+      fit0 = coxPartial(subjects, beta, ties, true);
+      if (!fit0) {
+        warnings.push(MSG_NOT_SETTLED);
+        return coxFail({ n: nSub, nEvents: nEvents, nExcluded: badTE + missCov, warnings: warnings });
+      }
+      ll0 = fit0.ll;
+      ll = ll0;
+      iterations = 0;
+      converged = false;
+      sep = [];
+      prevAbs = zerosVec(p);
+      grow = zerosVec(p);
+      for (j = 0; j < p; j++) sep.push(false);
+      sepFlag = false;
+      parts = fit0;
+      for (iter = 0; iter < maxIter; iter++) {
+        if (iter > 0) {
+          parts = coxPartial(subjects, beta, ties, true);
+          if (!parts) break;
+          ll = parts.ll;
+        }
+        step = solveLinear(parts.info, parts.score);
+        if (!step) {
+          for (j = 0; j < p; j++) if (Math.abs(beta[j]) > 15) { sep[j] = true; sepFlag = true; }
+          break;
+        }
+        scale = 1;
+        trialFit = null;
+        for (h = 0; h <= 10; h++) {
+          trial = [];
+          for (j = 0; j < p; j++) trial.push(beta[j] + scale * step[j]);
+          trialFit = coxPartial(subjects, trial, ties, false);
+          if (trialFit && isFinite(trialFit.ll) && trialFit.ll >= ll) break;
+          trialFit = null;
+          scale *= 0.5;
+        }
+        if (!trialFit) break;
+        oldLL = ll;
+        beta = trial;
+        ll = trialFit.ll;
+        iterations += 1;
+        dll = Math.abs(ll - oldLL);
+        for (j = 0; j < p; j++) {
+          absb = Math.abs(beta[j]);
+          if (!isFinite(absb)) { sep[j] = true; sepFlag = true; }
+          else {
+            if (dll < 1e-6 && absb > prevAbs[j] + 1e-12) grow[j] += 1;
+            else grow[j] = 0;
+            prevAbs[j] = absb;
+            if (absb > 15 || grow[j] >= 3) { sep[j] = true; sepFlag = true; }
+          }
+        }
+        if (sepFlag) break;
+        if (dll <= eps * Math.max(1, Math.abs(ll))) { converged = true; break; }
+      }
+      if (sepFlag) converged = false;
+      finalFit = coxPartial(subjects, beta, ties, true);
+      variances = [];
+      for (j = 0; j < p; j++) variances.push(null);
+      if (finalFit) {
+        ll = finalFit.ll;
+        for (j = 0; j < p; j++) {
+          unit = zerosVec(p);
+          unit[j] = 1;
+          col = solveLinear(finalFit.info, unit);
+          if (col && isFinite(col[j]) && col[j] > 1e-16) variances[j] = col[j];
+        }
+      }
+      if (!converged && !sepFlag) warnings.push(MSG_NOT_SETTLED);
+      if (sepFlag) warnings.push(MSG_SEPARATION);
+      coefficients = [];
+      allEst = converged && !sepFlag;
+      for (j = 0; j < p; j++) {
+        coef = {
+          term: columns[j].term,
+          predictor: columns[j].predictor,
+          level: columns[j].level,
+          beta: beta[j],
+          se: variances[j] == null ? null : Math.sqrt(variances[j]),
+          hr: null,
+          ciLower: null,
+          ciUpper: null,
+          z: null,
+          p: null,
+          estimable: false
+        };
+        if (converged && !sep[j] && variances[j] != null) {
+          se = Math.sqrt(variances[j]);
+          zstat = beta[j] / se;
+          hr = Math.exp(beta[j]);
+          lo = Math.exp(beta[j] - zcrit * se);
+          hi = Math.exp(beta[j] + zcrit * se);
+          wp = null;
+          if (isFinite(zstat) && isFinite(hr) && isFinite(lo) && isFinite(hi)) {
+            try { wp = chiSqUpper(zstat * zstat, 1); } catch (eWald) { wp = null; }
+          }
+          if (wp != null) {
+            coef.se = se;
+            coef.hr = hr;
+            coef.ciLower = lo;
+            coef.ciUpper = hi;
+            coef.z = zstat;
+            coef.p = wp;
+            coef.estimable = true;
+          }
+        }
+        if (!coef.estimable) allEst = false;
+        if (!converged) {
+          coef.hr = null;
+          coef.ciLower = null;
+          coef.ciUpper = null;
+          coef.z = null;
+          coef.p = null;
+          coef.estimable = false;
+        }
+        coefficients.push(coef);
+      }
+      lp = null;
+      chi = null;
+      if (allEst) {
+        chi = 2 * (ll - ll0);
+        if (chi < 0 && chi > -1e-7) chi = 0;
+        if (chi >= 0) {
+          try { lp = chiSqUpper(chi, p); } catch (eLr) { lp = null; chi = null; }
+        } else chi = null;
+      }
+      return {
+        ok: converged || sepFlag,
+        warnings: warnings,
+        n: nSub,
+        nEvents: nEvents,
+        nExcluded: badTE + missCov,
+        converged: converged,
+        iterations: iterations,
+        logLik: ll,
+        lrTest: (chi != null && lp != null) ? { chi2: chi, df: p, p: lp } : null,
+        coefficients: coefficients
+      };
+    } catch (errCox) {
+      return coxFail();
+    }
+  }
+
+  function qbetaPolished(a, b, p) {
+    var x, i, cdf, dens, g, step;
+    if (!(p > 0)) return 0;
+    if (!(p < 1)) return 1;
+    x = invBetai(a, b, p);
+    for (i = 0; i < 12; i++) {
+      if (!(x > 0) || !(x < 1)) break;
+      try { cdf = betai(a, b, x); } catch (eBeta) { break; }
+      g = gammln(a + b) - gammln(a) - gammln(b);
+      if (a !== 1) g += (a - 1) * Math.log(x);
+      if (b !== 1) g += (b - 1) * Math.log(1 - x);
+      dens = Math.exp(g);
+      if (!(dens > 0) || !isFinite(dens)) break;
+      step = (cdf - p) / dens;
+      if (!isFinite(step)) break;
+      if (Math.abs(step) < 1e-15) break;
+      x = x - step;
+      if (x < 1e-16) x = 1e-16;
+      if (x > 1 - 1e-16) x = 1 - 1e-16;
+    }
+    return x;
+  }
+
+  function binomTwoSided(b, c) {
+    var n, k, j, term, sum, p;
+    n = b + c;
+    k = b < c ? b : c;
+    if (n > 1000) {
+      try { p = 2 * betai(n - k, k + 1, 0.5); } catch (eBin) { return null; }
+      if (p > 1) p = 1;
+      if (p < 0) p = 0;
+      return p;
+    }
+    term = Math.pow(0.5, n);
+    sum = term;
+    for (j = 0; j < k; j++) {
+      term = term * (n - j) / (j + 1);
+      sum += term;
+    }
+    p = 2 * sum;
+    if (p > 1) p = 1;
+    if (!(p >= 0)) p = 0;
+    return p;
+  }
+
+  function matchedFail(warnings, b, c) {
+    return {
+      ok: false,
+      warnings: warnings || [],
+      b: b == null ? null : b,
+      c: c == null ? null : c,
+      or: null,
+      ciLower: null,
+      ciUpper: null,
+      p: null,
+      method: "exact conditional"
+    };
+  }
+
+  function exposedFlag(v) {
+    var s;
+    if (v === true || v === 1) return true;
+    if (v === false || v === 0) return false;
+    if (typeof v === "string") {
+      s = trim(v).toLowerCase();
+      if (s === "1" || s === "yes" || s === "y" || s === "true") return true;
+      if (s === "0" || s === "no" || s === "n" || s === "false") return false;
+    }
+    return null;
+  }
+
+  function isWhole(v) {
+    return typeof v === "number" && isFinite(v) && v >= 0 && Math.floor(v) === v;
+  }
+
+  function matchedOr(input) {
+    try {
+      var b, c, i, pair, aExp, bExp, warnings, pL, pU, or, lo, hi, p;
+      b = null;
+      c = null;
+      if (isArray(input)) {
+        b = 0;
+        c = 0;
+        for (i = 0; i < input.length; i++) {
+          pair = input[i];
+          if (!pair || typeof pair !== "object") return matchedFail([]);
+          aExp = exposedFlag(pair.caseExposed);
+          bExp = exposedFlag(pair.controlExposed);
+          if (aExp == null || bExp == null) return matchedFail([]);
+          if (aExp && !bExp) b += 1;
+          else if (!aExp && bExp) c += 1;
+        }
+      } else if (input && typeof input === "object") {
+        if (!isWhole(input.b) || !isWhole(input.c)) return matchedFail([]);
+        b = input.b;
+        c = input.c;
+      } else {
+        return matchedFail([]);
+      }
+      if (b + c === 0) return matchedFail([MSG_NO_PAIRS], b, c);
+      warnings = [];
+      if (c === 0) warnings.push(MSG_OR_HUGE);
+      if (b + c < 10) warnings.push(MSG_OR_WIDE);
+      if (b === 0) pL = 0;
+      else pL = qbetaPolished(b, c + 1, 0.025);
+      if (c === 0) pU = 1;
+      else pU = qbetaPolished(b + 1, c, 0.975);
+      or = c === 0 ? Infinity : b / c;
+      lo = pL <= 0 ? 0 : pL / (1 - pL);
+      hi = !(pU < 1) ? Infinity : pU / (1 - pU);
+      p = binomTwoSided(b, c);
+      if (p == null || !isFinite(lo)) return matchedFail(warnings, b, c);
+      return {
+        ok: true,
+        warnings: warnings,
+        b: b,
+        c: c,
+        or: or,
+        ciLower: lo,
+        ciUpper: hi,
+        p: p,
+        method: "exact conditional"
+      };
+    } catch (errOr) {
+      return matchedFail([]);
+    }
+  }
 
   var STATS = {
     parseCsv: parseCsv,
