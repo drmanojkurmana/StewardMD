@@ -24,9 +24,9 @@ export const SOURCES = [
   { dir: "prep/lessons/media", re: /^[a-z0-9_-]{2,80}\.(?:svg|webp)$/ },
   { dir: "clinix/media/practicals", re: /^[a-z0-9_-]{2,120}\.webp$/ },
   { dir: "clinix/media/skills", re: /^[a-z0-9_-]{2,120}\.webp$/ },
-  { dir: "media/anim", re: /^[a-z0-9_-]{2,80}\.webp$/ },
+  { dir: "media/anim", re: /^[a-z0-9_-]{2,80}\.(?:webp|av1\.mp4|mp4)$/ },
 ];
-export function contentType(f) { return /\.svg$/.test(f) ? "image/svg+xml" : /\.webp$/.test(f) ? "image/webp" : "application/json"; }
+export function contentType(f) { return /\.mp4$/.test(f) ? "video/mp4" : /\.svg$/.test(f) ? "image/svg+xml" : /\.webp$/.test(f) ? "image/webp" : "application/json"; }
 
 /* listFiles(www) -> [{ src, rel, key, bytes }], or throws when a file name would not pass the server's route. */
 export function listFiles(www) {

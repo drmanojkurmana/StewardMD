@@ -42,6 +42,9 @@ try {
   await page.click(".igl-strip .igl-strip-it");
   ok(await page.waitForSelector("#smdImgLib .igl-vimg", { timeout: 8000 }).then(() => true, () => false), "Drugs: tap opens the full-screen viewer");
   ok(await page.evaluate(() => { const r = document.getElementById("smdImgLib"); return +getComputedStyle(r).zIndex > 100000; }), "viewer sits above the module");
+  // The tamsulosin animation plays as a muted looping video (AV1 here, HEVC on phones without AV1), poster first.
+  const vid = await page.waitForFunction(() => { const v = document.querySelector("#smdImgLib video.igl-vimg"); return v && v.currentTime > 0.5 && { src: v.currentSrc, loop: v.loop, muted: v.muted, poster: v.poster, w: v.videoWidth }; }, null, { timeout: 15000 }).then((h) => h.jsonValue(), () => null);
+  ok(vid && /gif\d+_tamsulosin\.av1\.mp4$/.test(vid.src) && vid.loop && vid.muted && /\.webp$/.test(vid.poster) && vid.w === 800, "Drugs: the animation plays as AV1 video with a poster " + JSON.stringify(vid));
   await page.evaluate(() => SMD_IMGLIB.back());
   ok(await page.evaluate(() => document.getElementById("smdImgLib").hidden && !!document.querySelector(".igl-strip")), "Back closes the viewer and the drug page stays");
   await page.evaluate(() => { try { MEDDB.close && MEDDB.close(); } catch (e) {} });

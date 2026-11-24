@@ -175,9 +175,9 @@ done
 [ -d kb/dist/v2 ] && mkdir -p "$WWW/kb/dist/v2" && cp kb/dist/v2/*.json "$WWW/kb/dist/v2/"
 # Image Library index (tools/build-image-library.mjs): one small JSON per system, lazy loaded by image-library.js.
 [ -d kb/dist/imglib ] && mkdir -p "$WWW/kb/dist/imglib" && cp kb/dist/imglib/*.json "$WWW/kb/dist/imglib/"
-# Teaching animations (animated WebP) shared by every module; kb/imglib/gifs.json lists them for the Image Library.
+# Teaching animations (still WebP poster + AV1 and HEVC MP4) shared by every module; kb/imglib/gifs.json lists them for the Image Library.
 # With SMD_REMOTE_MEDIA=1 they are left out below and load from R2 (app/media/anim/).
-[ -d media/anim ] && mkdir -p "$WWW/media/anim" && cp media/anim/*.webp "$WWW/media/anim/"
+[ -d media/anim ] && mkdir -p "$WWW/media/anim" && cp media/anim/*.webp media/anim/*.mp4 "$WWW/media/anim/"
 # Patient handouts: 64 on-demand buckets (kb/tools/build-handouts.mjs), plain JSON.
 [ -d kb/dist/handouts ] && mkdir -p "$WWW/kb/dist/handouts" && cp kb/dist/handouts/*.json "$WWW/kb/dist/handouts/"
 [ -d kb/treatments ] && cp -R kb/treatments/. "$WWW/kb/treatments/"

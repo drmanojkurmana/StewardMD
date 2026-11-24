@@ -62,7 +62,18 @@
     // all: the shorter topics inside them follow, as a top-up ("community acquired pneumonia" then "pneumonia").
     return all ? longest.concat(found.filter(function (k) { return longest.indexOf(k) < 0; })) : longest;
   }
-  var PURE = { enabled: enabled, imgUrl: imgUrl, matches: matches, filterItems: filterItems, topicWords: topicWords, topicKeys: topicKeys };
+  /* A teaching animation ships as a still poster (media/anim/NAME.webp) plus NAME.av1.mp4 and NAME.mp4 (HEVC).
+     animBase(e) -> "…/media/anim/NAME" or null; animSrc picks AV1 when the phone can play it, else HEVC. */
+  function animBase(e) {
+    var m = e && e.k === "Animation" && /^(.*media\/anim\/[\w-]+)\.webp$/.exec(String(e.s || ""));
+    return m ? m[1] : null;
+  }
+  function animSrc(base, canPlay) {
+    var av1 = false;
+    try { av1 = !!(canPlay && canPlay('video/mp4; codecs="av01.0.05M.08"')); } catch (x) {}
+    return base + (av1 ? ".av1.mp4" : ".mp4");
+  }
+  var PURE = { enabled: enabled, imgUrl: imgUrl, matches: matches, filterItems: filterItems, topicWords: topicWords, topicKeys: topicKeys, animBase: animBase, animSrc: animSrc };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
   if (!enabled()) { G.SMD_IMGLIB = { enabled: enabled, open: function () { return false; }, close: function () {}, back: function () { return false; }, _pure: PURE }; return; }
 
@@ -264,11 +275,26 @@
       '<button type="button" class="igl-vnav" data-igl="vprev" aria-label="Previous image">‹ Prev</button>' +
       '<button type="button" class="igl-vnav" data-igl="vnext" aria-label="Next image">Next ›</button>' +
       (G.SMD_IMGZOOM ? '<button type="button" class="igl-vnav" data-igl="vreport" aria-label="Report this image">Report</button>' : "") + '</div>' +
-      '<div class="igl-vstage"><img class="igl-vimg" src="' + esc(imgUrl(e.s)) + '" alt="' + esc(e.a || e.t) + '" draggable="false"></div>' +
+      '<div class="igl-vstage">' + (animBase(e)
+        ? '<video class="igl-vimg" autoplay loop muted playsinline disablepictureinpicture aria-label="' + esc(e.a || e.t) + '"></video>'
+        : '<img class="igl-vimg" src="' + esc(imgUrl(e.s)) + '" alt="' + esc(e.a || e.t) + '" draggable="false">') + '</div>' +
       '<div class="igl-vmeta"><h2>' + esc(e.t) + '</h2><p class="igl-vcap">' + esc(e.c) + "</p>" +
       '<p class="igl-vfrom">From ' + esc(e.f) + (e.rn && e.rn !== e.t ? ": " + esc(e.lk === "kb" && e.kn ? e.kn : e.rn) : "") + " · " + esc(e.k) + "</p>" +
       (credit ? '<p class="igl-vcredit">' + esc(credit) + "</p>" : "") + viewerLinks(e) + "</div>";
+    if (animBase(e)) playAnim(v.querySelector("video.igl-vimg"), e);
     bindViewerTouch(v);
+  }
+  /* Bundled build: plain paths. SMD_REMOTE_MEDIA build: the poster and the video come from R2 as blob URLs. */
+  function playAnim(vid, e) {
+    var base = animBase(e), RM = G.SMD_REMOTE_MEDIA, remote = G.SMD_REMOTE_MEDIA_ON === 1;
+    function put(path, attr) {
+      var p = RM && RM.key(path, { remoteBundle: remote });
+      if (!p) { vid[attr] = imgUrl(path); return; }
+      RM.load(p).then(function (u) { if (vid.isConnected) vid[attr] = u; }, function () {});
+    }
+    put(e.s, "poster");
+    put(animSrc(base, function (t) { return vid.canPlayType(t); }), "src");
+    try { var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (x) {}
   }
   function bindViewerTouch(v) {
     var stage = v.querySelector(".igl-vstage"), img = v.querySelector(".igl-vimg");

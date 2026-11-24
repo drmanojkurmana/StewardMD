@@ -34,10 +34,26 @@ test("builder: teaching animations are listed and every GIF file ships", () => {
   assert.ok(anims.length >= 463, "animations in the bank, got " + anims.length);
   for (const e of anims) {
     assert.equal(e.k, "Animation");
-    assert.ok(fs.existsSync(path.join(import.meta.dirname, "..", e.s)), "GIF file exists: " + e.s);
+    assert.ok(fs.existsSync(path.join(import.meta.dirname, "..", e.s)), "file exists: " + e.s);
+    const base = PURE.animBase(e);
+    if (/^media\/anim\//.test(e.s)) {
+      assert.ok(base, "media/anim entries play as video: " + e.s);
+      for (const x of [".av1.mp4", ".mp4"]) assert.ok(fs.existsSync(path.join(import.meta.dirname, "..", base + x)), "video ships: " + base + x);
+    }
   }
   const sh = fs.readFileSync(path.join(import.meta.dirname, "..", "scripts/build-www.sh"), "utf8");
   assert.ok(sh.includes("media/anim"), "build-www copies media/anim (left out with SMD_REMOTE_MEDIA=1)");
+  assert.ok(/media\/anim\/\*\.mp4/.test(sh), "build-www copies the animation videos");
+});
+
+test("animations: poster plus AV1 when the phone can play it, HEVC otherwise", () => {
+  const e = { s: "media/anim/gif011_immune-response.webp", k: "Animation" };
+  assert.equal(PURE.animBase(e), "media/anim/gif011_immune-response");
+  assert.equal(PURE.animBase({ s: e.s, k: "Photo" }), null, "only animations");
+  assert.equal(PURE.animBase({ s: "surgx/media/x.gif", k: "Animation" }), null, "SurgX GIFs stay images");
+  assert.equal(PURE.animSrc("media/anim/a", (t) => (/av01/.test(t) ? "probably" : "")), "media/anim/a.av1.mp4");
+  assert.equal(PURE.animSrc("media/anim/a", () => ""), "media/anim/a.mp4");
+  assert.equal(PURE.animSrc("media/anim/a", () => { throw new Error("x"); }), "media/anim/a.mp4");
 });
 
 test("builder: ECGs sit under Cardiology with ECG kind, eye images under Eye", () => {

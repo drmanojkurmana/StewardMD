@@ -89,7 +89,7 @@ const CREDITS_RE = /^image-credits\.json$/;
 /* Content that used to ship inside the app and now loads from R2 on first open (owner 2026-11-12), at the SAME path it
  * had in the bundle under app/: the bundled PrepNucleus lessons and their diagrams, and the CliniX photos. Gated like the
  * question bank (signed-in user; pictures through short-lived signed URLs). tools/upload-app-media.mjs puts them there. */
-const APP_RE = /^app\/(?:prep\/lessons\/v1\/[a-z0-9-]{2,80}\.json|prep\/lessons\/media\/[a-z0-9_-]{2,80}\.(?:svg|webp)|clinix\/media\/(?:practicals|skills)\/[a-z0-9_-]{2,120}\.webp|media\/anim\/[a-z0-9_-]{2,80}\.webp)$/;
+const APP_RE = /^app\/(?:prep\/lessons\/v1\/[a-z0-9-]{2,80}\.json|prep\/lessons\/media\/[a-z0-9_-]{2,80}\.(?:svg|webp)|clinix\/media\/(?:practicals|skills)\/[a-z0-9_-]{2,120}\.webp|media\/anim\/[a-z0-9_-]{2,80}\.(?:webp|av1\.mp4|mp4))$/;
 // On-phone search vectors (kb/ai/embed-local.js): the EmbeddingGemma disease vectors,
 // v<n>/kb/kb-vectors-q5.json (the id list plus dims/scale) and v<n>/kb/kb-vectors-q5.i8
 // (the raw int8 rows). Immutable like every other versioned bank file: a rebuild goes to
@@ -150,6 +150,7 @@ function contentTypeFor(p, obj) {
       : "image/webp";
   }
   if (/\.svg$/.test(p)) return "image/svg+xml";
+  if (/\.mp4$/.test(p)) return "video/mp4";
   if (/\.i8$/.test(p)) return "application/octet-stream";
   return "application/json; charset=utf-8";
 }

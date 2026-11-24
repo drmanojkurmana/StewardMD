@@ -49,7 +49,7 @@
   }
   if (!D || !D.documentElement) { if (typeof module !== "undefined" && module.exports) module.exports = { key: key, prefixes: BUNDLE_PREFIXES }; return; }
   if (G.SMD_REMOTE_MEDIA) return;
-  function typeOf(p) { return /\.svg$/i.test(p) ? "image/svg+xml" : /\.png$/i.test(p) ? "image/png" : /\.jpe?g$/i.test(p) ? "image/jpeg" : "image/webp"; }
+  function typeOf(p) { return /\.mp4$/i.test(p) ? "video/mp4" : /\.svg$/i.test(p) ? "image/svg+xml" : /\.png$/i.test(p) ? "image/png" : /\.jpe?g$/i.test(p) ? "image/jpeg" : "image/webp"; }
 
   function note(text) {
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360"><rect width="640" height="360" fill="#e9eef1"/>' +
@@ -112,7 +112,7 @@
           return r.blob();
         }).then(function (b) {
           if (!b || !b.size) throw { why: "gone" };
-          var typed = b.type && /^image\//.test(b.type) ? b : new G.Blob([b], { type: typeOf(p) });
+          var typed = b.type && /^(?:image|video)\//.test(b.type) ? b : new G.Blob([b], { type: typeOf(p) });
           cacheOpen().then(function (c) { return c.put(KEY_BASE + p, new G.Response(typed, { headers: { "Content-Type": typed.type } })); }).catch(function () {});
           return typed;
         }).then(resolve, function (e) { reject(e && e.why ? e : { why: "offline" }); })

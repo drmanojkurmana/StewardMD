@@ -25,6 +25,10 @@ test("teaching animations (media/anim) load from R2 when left out of the app, an
   assert.equal(RM.key("/media/anim/gif011_immune-response.webp", { remoteBundle: true, isGated: gated }), "app/media/anim/gif011_immune-response.webp");
   assert.equal(RM.key("/media/anim/gif011_immune-response.webp", { remoteBundle: false, isGated: gated }), null);
   assert.ok(SOURCES.some((s) => s.dir === "media/anim"), "upload tool sends media/anim");
+  for (const f of ["gif011_immune-response.av1.mp4", "gif011_immune-response.mp4"]) {
+    assert.equal(RM.key("/media/anim/" + f, { remoteBundle: true, isGated: gated }), "app/media/anim/" + f);
+    assert.ok(SOURCES.find((s) => s.dir === "media/anim").re.test(f), "upload tool sends " + f);
+  }
 });
 
 test("gated bank pictures are claimed (signature dropped), public ones and other images are left alone", () => {
