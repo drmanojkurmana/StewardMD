@@ -37,3 +37,7 @@ settings toggles. Category chips filter; an "Ask MaiK about ..." row is always l
   and `.us-panel:not(.on) { pointer-events: none !important; }` are strictly mandatory; `close()` immediately
   disables `input.disabled = true` to force iOS WebKit to drop the keyboard and accessory touch bar (`^`, `v`, `✓`)
   without leaving invisible click traps over the homepage.
+- Type bar (2026-11-24, owner screenshot of a QBank search's All/QBank/Videos/Tests/Pearls tabs): `.us-chips` is one
+  segmented capsule, one row, scrolls sideways when the categories do not fit; the chosen one is a raised pill.
+  `render()` rebuilds the chips, so it saves and restores `chips.scrollLeft` (else a tap on a far-right chip jumps
+  the bar back to the start). Checked in `test/run-universal-search.mjs`.

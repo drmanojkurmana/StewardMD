@@ -67,6 +67,15 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
 - Share IDs: `prep-ids.js` + `prep-ids.css` (optional), `tools/prep-ids.mjs` (fetch, build, verify, publish the
   `v1/ids/` index). See "Share IDs".
 
+## Search type bar (2026-11-24, `?v=prep197`)
+Owner screenshot of a QBank search with All / QBank / Videos / Tests / Pearls tabs: "need this type of division filter".
+- `renderFind` (Home's search) has a `.pn-seg.pn-fkind` bar under the box: All, Questions, Lessons, Modules (`fnd.kind`,
+  reset to All on each open). `setFindKind` patches the bar in place (thumb slides, box keeps text and focus) and reruns
+  `runFind`, which skips the sections not chosen; a single type lifts its cap (lessons 15 -> 60, modules 8 -> 60).
+- No Pearls tab: the lessons index has no pearl flag (`PREP_PEARL.isPearl` needs the full lesson), and every lesson has
+  a PN- ID, so pearls live under Lessons.
+- CSS `.pn-fkind` drops the side inset of `.pn-seg` (it sits inside `.pn-body`). Test: `test/run-prep-subject-ui.mjs`.
+
 ## MaiK buddy (2026-11-20, `prep-buddy.js`, `?v=prep189`)
 Owner: "mascot to celebrate user if gets correct mcq or three in a row correct, motivate user, feel sad if wrong mcqs,
 more wrongs asking to prepare topic again"; tap = "mini quick-ask bubble".

@@ -1595,6 +1595,10 @@ body.dark .pn-root .pn-seg-th { background: var(--pn-c-prussian-hi); box-shadow:
 .pn-root .pn-seg .pn-chip.on { color: var(--pn-text); }
 body.dark .pn-root .pn-seg .pn-chip.on { color: var(--pn-c-amber); }
 .pn-root .pn-seg .pn-chip:active { transform: scale(.96); }
+/* Search type bar (All, Questions, Lessons, Modules): the same capsule, inside the body under the box, so no side inset */
+.pn-root .pn-body .pn-filters.pn-fkind { padding: 10px 0 12px; margin: 0; max-width: none; }
+.pn-root .pn-fkind::before { left: 0; right: 0; top: 10px; }
+.pn-root .pn-fkind .pn-seg-th { left: 3px; top: 13px; width: calc((100% - 6px) / var(--n, 4)); }
 
 /* ---- Module list: a timeline. Numbered nodes on a rail; the rail between two modules turns amber once the first is done ---- */
 .pn-root .pn-mods { gap: 14px; }

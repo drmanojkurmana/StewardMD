@@ -16,13 +16,20 @@ body.dark .us-backdrop{background:rgba(0,0,0,.5)}
 .us-input{flex:1;min-width:0;border:0;background:transparent;color:inherit;font:inherit;font-size:16px;outline:none;-webkit-appearance:none}
 .us-input::-webkit-search-cancel-button{display:none}
 .us-clear,.us-cancel{min-height:44px;min-width:44px;border:0;background:transparent;color:var(--teal);font:inherit;font-size:15px;font-weight:600;cursor:pointer;border-radius:10px}
-.us-clear:active,.us-cancel:active,.us-row:active,.us-chip:active,.us-browse:active,.us-recent:active{background:var(--teal-soft)}
+.us-chip:active{transform:scale(.96)}
+.us-clear:active,.us-cancel:active,.us-row:active,.us-browse:active,.us-recent:active{background:var(--teal-soft)}
 .us-ico{width:20px;height:20px;flex:none;color:var(--slate-soft)}
-.us-chips{display:flex;flex-wrap:wrap;gap:8px;padding:10px 12px 4px}
-.us-chip{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--slate);font:inherit;font-size:13px;font-weight:600;letter-spacing:.01em;cursor:pointer}
-.us-chip b{font-weight:600;color:var(--slate-soft);margin-left:2px}
-.us-chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
-.us-chip[aria-pressed="true"] b{color:rgba(255,255,255,.8)}
+/* Type bar (owner 2026-11-24): one segmented capsule under the box, like a QBank search. One row; scrolls sideways
+   when the categories do not fit; the chosen segment is a raised pill. */
+.us-chips{display:flex;flex-wrap:nowrap;gap:2px;margin:10px 12px 4px;padding:3px;border-radius:999px;background:color-mix(in srgb,var(--ink) 7%,transparent);overflow-x:auto;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x}
+.us-chips::-webkit-scrollbar{display:none}
+.us-chips:empty{display:none}
+body.dark .us-chips{background:color-mix(in srgb,#fff 8%,transparent)}
+.us-chip{flex:1 0 auto;min-height:38px;padding:0 14px;border-radius:999px;border:0;background:transparent;color:var(--slate);font:inherit;font-size:13.5px;font-weight:600;letter-spacing:.01em;white-space:nowrap;cursor:pointer;transition:background 160ms ease-out,color 160ms ease-out,box-shadow 160ms ease-out}
+.us-chip b{font-weight:600;color:var(--slate-soft);margin-left:3px;font-variant-numeric:tabular-nums}
+.us-chip[aria-pressed="true"]{background:var(--panel);color:var(--teal);box-shadow:0 1px 2px rgba(19,32,61,.1),0 4px 10px -4px rgba(19,32,61,.18)}
+body.dark .us-chip[aria-pressed="true"]{box-shadow:inset 0 0 0 1px var(--line)}
+.us-chip[aria-pressed="true"] b{color:var(--teal);opacity:.75}
 .us-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4px 12px calc(24px + env(safe-area-inset-bottom));overscroll-behavior:contain}
 .us-sec{margin-top:14px}
 .us-sec-h{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--slate-soft);padding:0 4px 6px}
@@ -53,7 +60,7 @@ body.dark .us-backdrop{background:rgba(0,0,0,.5)}
 body.us-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.us-panel{transition:opacity 150ms ease;transform:none}.us-skel i{animation:none}.us-flash{animation:none;background:var(--teal-soft)}}
 @media (prefers-reduced-transparency:reduce){.us-head{background:var(--panel);backdrop-filter:none;-webkit-backdrop-filter:none}}
-@media (prefers-contrast:more){.us-row,.us-chip,.us-field{border-color:var(--ink)}}
+@media (prefers-contrast:more){.us-row,.us-field{border-color:var(--ink)}.us-chip[aria-pressed="true"]{box-shadow:inset 0 0 0 1px var(--ink)}}
 
 /* iPad landscape (iPad pass 2026-10-16): the search field was 1,270 px and each result's chevron 1,000 px from its label. */
-@media (min-width:900px){.us-head,.us-body{padding-left:max(12px,calc(50% - 400px));padding-right:max(12px,calc(50% - 400px))}}
+@media (min-width:900px){.us-chips{margin-left:max(12px,calc(50% - 400px));margin-right:max(12px,calc(50% - 400px))}.us-head,.us-body{padding-left:max(12px,calc(50% - 400px));padding-right:max(12px,calc(50% - 400px))}}
