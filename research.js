@@ -910,7 +910,14 @@
       "#researchMD .rmd-format-check-icon { flex-shrink: 0; margin-top: 2px; display: inline-flex; }",
       "#researchMD .rmd-format-check-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }",
       "#researchMD .rmd-format-check-label { font: 600 13.5px var(--rmd-f); color: var(--rmd-ink); }",
-      "#researchMD .rmd-format-check-detail { font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); line-height: 1.4; }"
+      "#researchMD .rmd-format-check-detail { font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); line-height: 1.4; }",
+      "#researchMD .rmd-shell-footer { display: flex; justify-content: center; padding: 10px 16px 14px; }",
+      "#researchMD .rmd-footer-feedback { background: none; border: none; padding: 6px 10px; font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); text-decoration: underline; cursor: pointer; }",
+      "#researchMD .rmd-feedback-card { max-width: 480px; }",
+      "#researchMD .rmd-feedback-note { font: 400 13px var(--rmd-f); color: var(--rmd-mut); margin: 8px 0; }",
+      "#researchMD .rmd-feedback-text { width: 100%; box-sizing: border-box; font: 400 14px var(--rmd-f); color: var(--rmd-ink); background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 10px; padding: 10px; resize: vertical; }",
+      "#researchMD .rmd-feedback-status { font: 400 13px var(--rmd-f); color: var(--rmd-mut); margin: 8px 0; min-height: 18px; }",
+      "#researchMD .rmd-feedback-actions { display: flex; gap: 8px; margin-top: 4px; }"
     ].join("\n");
     D.head.appendChild(s);
   }
@@ -994,6 +1001,7 @@
 
     h.push('<div id="rmdHelpWrap"></div>');
     h.push('<div class="rmd-shell-body" id="rmdScreenBody"></div>');
+    h.push('<div class="rmd-shell-footer"><button type="button" class="rmd-footer-feedback" data-rmd-action="feedback">Tell us what went wrong</button></div>');
 
     root.innerHTML = h.join("\n");
     bindShellEvents();
@@ -1049,7 +1057,8 @@
     ipd: "IPD", credits: "Credits", institution: "Institution",
     templates: "Templates", journals: "Journals",
     thesis: "Thesis", "thesis-type": "Paper type", "thesis-journal": "Journal",
-    "thesis-draft": "Draft", "thesis-tables": "Tables", "thesis-refs": "References"
+    "thesis-draft": "Draft", "thesis-tables": "Tables", "thesis-refs": "References",
+    masterchart: "Master chart"
   };
 
   var HELP = {
@@ -1066,6 +1075,13 @@
       eg: "",
       gloss: "",
       action: { label: "Start guided", fallback: "start" }
+    },
+    masterchart: {
+      name: "Analyse my master chart",
+      do: "Upload your Excel master chart. We check for patient identifiers, pick the right tests and write Table 1 and the results. Your chart stays on this phone.",
+      eg: "Compare HbA1c at 12 weeks between Drug A and Drug B.",
+      gloss: "New words: master chart (the spreadsheet with one row per patient), p value (how likely a difference this big is due to chance).",
+      action: { label: "Next: write the paper", fallback: "manuscript" }
     },
     thesis: {
       name: "Upload your thesis",
@@ -1266,16 +1282,23 @@
     "thesis-journal": "pick the target journal.",
     "thesis-draft": "shape the draft, checking every number.",
     "thesis-tables": "keep up to 3 tables.",
-    "thesis-refs": "check the references."
+    "thesis-refs": "check the references.",
+    masterchart: "upload your chart and pick the tests."
   };
 
   function journeyFor(project) {
     var t = ((project && project.studyType) || "").toLowerCase();
+    if (t.indexOf("master chart") >= 0 || t.indexOf("masterchart") >= 0 ||
+        t.indexOf("case-control") >= 0 || t.indexOf("case control") >= 0 ||
+        t.indexOf("cross-sectional") >= 0 || t.indexOf("cross sectional") >= 0 ||
+        (t.indexOf("cohort") >= 0 && t.indexOf("synthesis") < 0)) {
+      return ["plan", "protocol", "masterchart", "manuscript", "checklist", "ready"];
+    }
     if (t.indexOf("thesis") >= 0) return ["thesis", "thesis-type", "thesis-journal", "thesis-draft", "thesis-tables", "thesis-refs", "checklist", "ready"];
     if (t.indexOf("case") >= 0) return ["manuscript", "checklist", "ready"];
-    if (t.indexOf("trial") >= 0 || t.indexOf("randomized") >= 0) return ["plan", "protocol", "checklist", "manuscript", "ready"];
+    if (t.indexOf("trial") >= 0 || t.indexOf("randomized") >= 0) return ["plan", "protocol", "masterchart", "checklist", "manuscript", "ready"];
     if (t.indexOf("observational") >= 0 || t.indexOf("cohort") >= 0 || t.indexOf("survey") >= 0 || t.indexOf("diagnostic") >= 0) {
-      return ["plan", "protocol", "studies", "extract", "data", "run", "manuscript", "checklist", "ready"];
+      return ["plan", "protocol", "masterchart", "manuscript", "checklist", "ready"];
     }
     return ["studies", "protocol", "search", "screening", "conflicts", "prisma", "pdf", "extract", "rob", "data", "run", "grade", "manuscript", "checklist", "ready"];
   }
@@ -1356,6 +1379,86 @@
     document.addEventListener("keydown", glossaryKeyHandler);
   }
   SMD.openGlossary = openGlossary;
+
+  var feedbackKeyHandler = null;
+  function closeFeedback() {
+    var m = root ? root.querySelector("#rmdFeedbackModal") : null;
+    if (m && m.parentNode) m.parentNode.removeChild(m);
+    if (feedbackKeyHandler) {
+      document.removeEventListener("keydown", feedbackKeyHandler);
+      feedbackKeyHandler = null;
+    }
+  }
+
+  function openFeedback() {
+    if (!root) return;
+    closeFeedback();
+    var back = document.createElement("div");
+    back.className = "rmd-modal-backdrop";
+    back.id = "rmdFeedbackModal";
+    back.innerHTML = '<div class="rmd-modal-card rmd-feedback-card" role="dialog" aria-modal="true" aria-labelledby="rmdFeedbackTitle">' +
+      '<div class="rmd-modal-header"><h3 id="rmdFeedbackTitle">Tell us what went wrong</h3>' +
+      '<button type="button" class="rmd-btn-close" data-rmd-feedback-close="1" aria-label="Close feedback">&times;</button></div>' +
+      '<p class="rmd-feedback-note">Please do not include patient details or your master chart. We only receive what you type here.</p>' +
+      '<textarea id="rmdFeedbackText" class="rmd-feedback-text" rows="4" maxlength="2000" placeholder="What happened? What did you expect?"></textarea>' +
+      '<div class="rmd-feedback-status" id="rmdFeedbackStatus" role="status"></div>' +
+      '<div class="rmd-feedback-actions"><button type="button" class="rmd-btn rmd-btn-primary" id="rmdFeedbackSend">Send</button></div></div>';
+    root.appendChild(back);
+    back.addEventListener("click", function (e) { if (e.target === back) closeFeedback(); });
+    var closeBtn = back.querySelector("[data-rmd-feedback-close]");
+    if (closeBtn) closeBtn.onclick = closeFeedback;
+    var textarea = back.querySelector("#rmdFeedbackText");
+    var status = back.querySelector("#rmdFeedbackStatus");
+    var send = back.querySelector("#rmdFeedbackSend");
+    if (send && textarea && status) {
+      send.onclick = function () {
+        var text = (textarea.value || "").replace(/^\s+|\s+$/g, "");
+        if (!text) {
+          status.textContent = "Please type a few words first.";
+          return;
+        }
+        var u = null;
+        try { u = G.SMD_AUTH && G.SMD_AUTH.currentUser; } catch (e) { u = null; }
+        if (!u || !u.getIdToken) {
+          status.innerHTML = 'Sign in to send feedback. <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-action="signin">Sign in</button>';
+          return;
+        }
+        send.disabled = true;
+        status.textContent = "Sending...";
+        var tokenP;
+        try { tokenP = u.getIdToken(); } catch (e) { tokenP = Promise.resolve(null); }
+        Promise.resolve(tokenP).then(function (token) {
+          if (!token) throw { status: 401 };
+          return fetch("/api/support", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Authorization": "Bearer " + token },
+            body: JSON.stringify({
+              action: "create",
+              kind: "feedback",
+              subject: "ResearchMD: " + (TAB_LABELS[currentScreen] || currentScreen),
+              text: text
+            })
+          });
+        }).then(function (resp) {
+          if (!resp) return;
+          if (resp.status === 401) {
+            status.innerHTML = 'Sign in to send feedback. <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-action="signin">Sign in</button>';
+            send.disabled = false;
+            return;
+          }
+          if (!resp.ok) throw new Error("support " + resp.status);
+          status.textContent = "Sent. We read every message.";
+          textarea.value = "";
+          send.disabled = false;
+        }).catch(function () {
+          status.textContent = "Could not send just now. Check your connection and try again.";
+          send.disabled = false;
+        });
+      };
+    }
+    feedbackKeyHandler = function (e) { if (e.key === "Escape") closeFeedback(); };
+    document.addEventListener("keydown", feedbackKeyHandler);
+  }
 
   function renderHelp(screenName, proj) {
     var wrap = root ? root.querySelector("#rmdHelpWrap") : null;
@@ -1513,6 +1616,8 @@
       navigate("start", {});
     } else if (act === "glossary") {
       openGlossary();
+    } else if (act === "feedback") {
+      openFeedback();
     } else if (act === "retry") {
       navigate(currentScreen, {}, true);
     } else if (act === "toggle-more") {

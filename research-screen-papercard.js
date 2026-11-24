@@ -79,7 +79,7 @@
       ".rmd-collapsed-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; font-size: 13px; line-height: 1.45; color: var(--rmd-ink); }",
       ".rmd-expanded-text { display: block; font-size: 13px; line-height: 1.45; color: var(--rmd-ink); }",
       ".rmd-more-btn { background: none; border: none; padding: 4px 0; color: var(--rmd-acc); font: 600 12px var(--rmd-f); cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; }",
-      ".rmd-papercard-conclusion { padding: 12px 14px; background: var(--rmd-bg); border-left: 3px solid var(--rmd-acc); border-radius: 0 8px 8px 0; margin: 12px 0 16px; }",
+      ".rmd-papercard-conclusion { padding: 12px 14px; background: var(--rmd-bg); border: 1px solid var(--rmd-line); border-radius: 8px; margin: 12px 0 16px; }",
       ".rmd-papercard-conclusion-text { margin: 4px 0 0 0; font-size: 13.5px; line-height: 1.5; color: var(--rmd-ink); }",
       ".rmd-papercard-explain-box { margin: 14px 0; padding: 12px 14px; background: var(--rmd-bg); border: 1px dashed var(--rmd-line); border-radius: 8px; }",
       ".rmd-ai-pico-box { display: flex; flex-direction: column; gap: 6px; }",

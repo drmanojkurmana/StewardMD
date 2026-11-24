@@ -361,14 +361,14 @@
     Promise.all([pMan, pVers]).then(function (res) {
       if (mySeq !== seq) return;
       st.loading = false;
-      st.manuscript = (res[0] && res[0].manuscript) || defaultManuscript(st.projectId);
+      st.manuscript = (res[0] && res[0].manuscript) || localManuscript(st.projectId) || defaultManuscript(st.projectId);
       st.versions = (res[1] && res[1].versions) || defaultVersions();
       render(container);
     }).catch(function (err) {
       if (mySeq !== seq) return;
       st.loading = false;
       /* Fallback to local default if API unmocked or offline */
-      st.manuscript = defaultManuscript(st.projectId);
+      st.manuscript = localManuscript(st.projectId) || defaultManuscript(st.projectId);
       st.versions = defaultVersions();
       render(container);
     });
@@ -2035,6 +2035,82 @@
       });
     }
   }
+
+  /* ---------- Local drafts + master chart append ---------- */
+
+  var LOCAL_DRAFT_KEY = "smd_rmd_manuscript_local_v1";
+
+  function readLocalDrafts() {
+    try {
+      return JSON.parse(localStorage.getItem(LOCAL_DRAFT_KEY) || "{}") || {};
+    } catch (e) { return {}; }
+  }
+
+  function localManuscript(pid) {
+    var d = readLocalDrafts()[pid];
+    if (!d || !d.sections) return null;
+    var man = defaultManuscript(pid);
+    for (var i = 0; i < man.sections.length; i++) {
+      if (d.sections[man.sections[i].id] != null) man.sections[i].text = d.sections[man.sections[i].id];
+    }
+    return man;
+  }
+
+  function appendLocalResults(pid, text) {
+    var all = readLocalDrafts();
+    var d = all[pid] || { sections: {} };
+    var base = d.sections.results;
+    if (base == null) {
+      var def = defaultManuscript(pid);
+      for (var i = 0; i < def.sections.length; i++) {
+        if (def.sections[i].id === "results") base = def.sections[i].text;
+      }
+    }
+    d.sections.results = (base ? base + "\n\n" : "") + text;
+    all[pid] = d;
+    try {
+      localStorage.setItem(LOCAL_DRAFT_KEY, JSON.stringify(all));
+    } catch (e) { /* storage full: the append stays in memory for this session */ }
+    return Promise.resolve({ local: true });
+  }
+
+  function appendManuscriptResults(pid, text) {
+    var store = SMD.store;
+    var proj = store && store.getProject ? store.getProject(pid) : null;
+    if (!SMD.api || !proj || !proj.serverId) return appendLocalResults(pid, text);
+    var base = "/v1/projects/" + encodeURIComponent(proj.serverId);
+    return SMD.api.request("GET", base + "/manuscript").then(function (res) {
+      var man = (res && res.manuscript) || defaultManuscript(pid);
+      var sec = null;
+      for (var i = 0; i < man.sections.length; i++) {
+        if (man.sections[i].id === "results" || /^results$/i.test(man.sections[i].heading || "")) {
+          sec = man.sections[i];
+          break;
+        }
+      }
+      if (!sec) {
+        sec = { id: "results", heading: "Results", level: 1, text: "" };
+        man.sections.push(sec);
+      }
+      var merged = (sec.text ? sec.text + "\n\n" : "") + text;
+      return SMD.api.request("PUT", base + "/manuscript/sections/" + encodeURIComponent(sec.id), {
+        version: man.version,
+        heading: sec.heading,
+        text: merged
+      }).then(function (r) {
+        return r || { ok: true };
+      }, function () {
+        return appendLocalResults(pid, text);
+      });
+    }, function () {
+      return appendLocalResults(pid, text);
+    });
+  }
+
+  SMD.appendManuscriptResults = appendManuscriptResults;
+  SMD.docxFromSections = function (title, sections) {
+    return buildDocxBytes({ title: title, sections: sections || [] });
+  };
 
   /* Register screen */
   SMD.screens.manuscript = {

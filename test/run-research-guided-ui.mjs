@@ -193,7 +193,7 @@ try {
   await ev(`SMD_RESEARCH.open({screen:'start'});1`);
   ok(await until(`!!document.querySelector('.rmd-start-screen')`, 5000), 'start screen rendered');
   ok(/What do you want to publish\?/.test(await text('.rmd-start-screen')), 'start screen asks what to publish');
-  ok(await ev(`document.querySelectorAll('[data-rmd-start-choice]').length === 5`), 'five publication choices offered');
+  ok(await ev(`document.querySelectorAll('[data-rmd-start-choice]').length === 6`), 'six publication choices offered');
   ok(/Combine many studies into one answer/.test(await text('.rmd-start-screen')), 'systematic review choice present');
   ok(/Write up an interesting patient/.test(await text('.rmd-start-screen')), 'case report choice present');
   await shot('phone-375-start');

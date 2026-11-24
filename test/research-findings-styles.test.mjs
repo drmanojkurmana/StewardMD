@@ -12,6 +12,7 @@ test("reads estimate + 95% CI in common journal styles", () => {
   assert.deepEqual(one("Stroke was reduced (relative risk [RR] 0.78; 95% CI: 0.67, 0.91)."), [["RR", 0.78, 0.67, 0.91]]);
   assert.deepEqual(one("Response was higher (OR = 2.1, 95% CI 1.4 to 3.2)."), [["OR", 2.1, 1.4, 3.2]]);
   assert.deepEqual(one("adjusted HR 0.69 [95% CI 0.55–0.86]"), [["HR", 0.69, 0.55, 0.86]]);
+  assert.deepEqual(one("Events occurred in fewer patients (hazard ratio for cardiovascular death or hospitalization for heart failure, 0.75; 95% confidence interval [CI], 0.65 to 0.86; P<0.001)."), [["HR", 0.75, 0.65, 0.86]]);
   assert.deepEqual(one("Smoking was associated (adjusted odds ratio [aOR] 1.85, 95% CI 1.20 to 2.85, p = 0.005)."), [["OR", 1.85, 1.2, 2.85]]);
 });
 

@@ -33,6 +33,14 @@
       firstScreen: "thesis"
     },
     {
+      key: "masterchart",
+      title: "Analyse my thesis data (master chart)",
+      eg: "Upload your Excel master chart; we pick the right tests and write Table 1 and the results",
+      studyType: "Original Study (Master Chart)",
+      defaultTitle: "My master chart study",
+      firstScreen: "masterchart"
+    },
+    {
       key: "sr",
       title: "Combine many studies into one answer",
       eg: "A systematic review and meta-analysis. Example: does BCG prevent tuberculosis?",

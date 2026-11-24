@@ -328,9 +328,9 @@ const MEASURE_NAMES = {
   RD: ["risk difference", "absolute risk difference"],
 };
 const NUM = "([-+]?\\d+(?:\\.\\d+)?)\\s*%?";
-/* label, up to 14 words or marks of filler (words may hold digits, as HbA1c) ("in HbA1c was", ", 0.74; 95% confidence interval [CI],"), estimate,
+/* label, up to 40 words or marks of filler (an outcome name can sit between "hazard ratio for" and the number) (words may hold digits, as HbA1c) ("in HbA1c was", ", 0.74; 95% confidence interval [CI],"), estimate,
  * then the 95% CI in any common journal style, then the two limits. */
-const TAIL = "(?:[A-Za-z][A-Za-z0-9]*|[^\\dA-Za-z+\\-]){0,14}?" + NUM +
+const TAIL = "(?:[A-Za-z][A-Za-z0-9]*|[^\\dA-Za-z+\\-]){0,40}?" + NUM +
   "\\s*[,;:(\\[]?\\s*(?:95\\s*%\\s*)?(?:confidence\\s+interval|CI)?\\s*(?:\\[CI\\]|\\(CI\\))?\\s*[,:;]?\\s*" +
   NUM + "\\s*(?:to|-|,|;)\\s*" + NUM;
 function estimateRegexes(measure) {

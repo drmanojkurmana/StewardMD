@@ -277,7 +277,7 @@ try {
   // 1. Start choice present.
   await ev(`SMD_RESEARCH.open({screen:'start'});1`);
   ok(await until(`!!document.querySelector('.rmd-start-screen')`, 5000), 'start screen rendered');
-  ok(await ev(`document.querySelectorAll('[data-rmd-start-choice]').length === 5`), 'five publication choices offered');
+  ok(await ev(`document.querySelectorAll('[data-rmd-start-choice]').length === 6`), 'six publication choices offered');
   ok(/Turn my thesis into a journal paper/.test(await text('.rmd-start-screen')), 'thesis choice present');
   ok(/Upload your MD\/MS\/DNB thesis/.test(await text('.rmd-start-screen')), 'thesis choice explains the upload');
   await shot('phone-375-start');
