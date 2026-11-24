@@ -74,7 +74,7 @@
 
   function svgBox(x, y, w, h, lines, count, countFor, highlight) {
     var s = [];
-    s.push('<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="10" fill="' + (highlight ? "var(--rmd-acc-soft, #e6edff)" : "var(--rmd-panel, #fffdf9)") + '" stroke="' + (highlight ? "var(--rmd-acc, #2457ff)" : "var(--rmd-line, #e5ddce)") + '" stroke-width="1.5"/>');
+    s.push('<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="10" fill="' + (highlight ? "var(--rmd-acc-soft, #e4e9f8)" : "var(--rmd-panel, #fffdf9)") + '" stroke="' + (highlight ? "var(--rmd-acc, #1b41bf)" : "var(--rmd-line, #e5ddce)") + '" stroke-width="1.5"/>');
     for (var i = 0; i < lines.length; i++) {
       s.push('<text x="' + (x + 14) + '" y="' + (y + 22 + i * 15) + '" class="rp-label">' + esc(lines[i]) + '</text>');
     }

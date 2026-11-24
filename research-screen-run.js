@@ -366,11 +366,11 @@
     svg.push('    .rf-bold { font-weight: 600; }');
     svg.push('    .rf-mono { font-family: ui-monospace, "SF Mono", monospace; font-size: 11.5px; }');
     svg.push('    .rf-null-line { stroke: var(--rmd-line, #e5ddce); stroke-width: 1.5; stroke-dasharray: 4,3; }');
-    svg.push('    .rf-pool-line { stroke: var(--rmd-acc, #2457ff); stroke-width: 1.2; stroke-dasharray: 2,2; opacity: 0.7; }');
+    svg.push('    .rf-pool-line { stroke: var(--rmd-acc, #1b41bf); stroke-width: 1.2; stroke-dasharray: 2,2; opacity: 0.7; }');
     svg.push('    .rf-axis-line { stroke: var(--rmd-mut, #5b607a); stroke-width: 1; }');
     svg.push('    .rf-ci-line { stroke: var(--rmd-ink, #111c44); stroke-width: 1.8; stroke-linecap: round; }');
-    svg.push('    .rf-box { fill: var(--rmd-acc, #2457ff); }');
-    svg.push('    .rf-diamond { fill: var(--rmd-acc, #2457ff); stroke: var(--rmd-acc-dark, #1638b8); stroke-width: 1; }');
+    svg.push('    .rf-box { fill: var(--rmd-acc, #1b41bf); }');
+    svg.push('    .rf-diamond { fill: var(--rmd-acc, #1b41bf); stroke: var(--rmd-acc-dark, #142f8c); stroke-width: 1; }');
     svg.push('  </style>');
 
     // 1. Column Headers

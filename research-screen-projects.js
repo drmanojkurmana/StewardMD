@@ -82,7 +82,7 @@
           h.push('          <span class="rmd-badge rmd-badge-soft">' + esc(p.specialty) + '</span>');
         }
         if (p.studyType) {
-          h.push('          <span class="rmd-badge rmd-badge-neutral">' + esc(p.studyType) + '</span>');
+          h.push('          <span class="rmd-badge rmd-badge-soft">' + esc(p.studyType) + '</span>');
         }
         h.push('        </div>');
         h.push('        <span class="rmd-role-tag">' + esc(p.role || "owner") + '</span>');
@@ -105,7 +105,7 @@
 
         h.push('      <div class="rmd-card-actions">');
         h.push('        <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-open-project="' + esc(p.id) + '">Open Workspace</button>');
-        h.push('        <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-delete-project="' + esc(p.id) + '">Delete</button>');
+        h.push('        <button type="button" class="rmd-btn rmd-btn-quiet rmd-btn-sm" data-rmd-delete-project="' + esc(p.id) + '">Delete</button>');
         h.push('      </div>');
         h.push('    </div>');
       }

@@ -104,7 +104,7 @@
     h.push('      </button>');
     h.push('      <div class="rmd-topbar-proj-info">');
     h.push('        <h2 class="rmd-topbar-proj-title">' + esc(project.title) + '</h2>');
-    h.push('        <span class="rmd-badge rmd-badge-pill">' + esc(project.discipline || "Medicine") + '</span>');
+    h.push('        <span class="rmd-badge rmd-badge-pill rmd-cap">' + esc(project.discipline || "Medicine") + '</span>');
     if (project.specialty) {
       h.push('        <span class="rmd-badge rmd-badge-soft">' + esc(project.specialty) + '</span>');
     }
