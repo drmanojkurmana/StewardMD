@@ -81,7 +81,10 @@ import { checklistItems } from "./_checklists.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const TOKENS_MESSAGE = "You need more MaiK tokens";
-const TASKS = ["protocol", "search_query", "rob", "checklist", "title_abstract", "thesis_to_paper", "polish"];
+const TASKS = [
+  "protocol", "search_query", "rob", "checklist", "title_abstract", "thesis_to_paper", "polish",
+  "iec_application", "consent_form", "ctri_fields",
+];
 const MAX_OUT = {
   protocol: 1200,
   search_query: 500,
@@ -90,6 +93,9 @@ const MAX_OUT = {
   title_abstract: 800,
   thesis_to_paper: 1200,
   polish: 2000,
+  iec_application: 2000,
+  consent_form: 2000,
+  ctri_fields: 1500,
 };
 /* One T1 call has to return the whole section. 5000 characters leaves room
  * for the polished text inside the 2000 token output ceiling. */
@@ -304,6 +310,185 @@ function titleDraft(parsed) {
   };
   if (!abstract.background && !abstract.methods && !abstract.results && !abstract.conclusions) return null;
   return { title, abstract };
+}
+
+const CONSENT_LANGUAGES = new Set([
+  "English", "Hindi", "Telugu", "Tamil", "Kannada", "Malayalam", "Marathi", "Bengali", "Gujarati",
+]);
+
+function stripContactInfo(text) {
+  if (!text || typeof text !== "string") return "";
+  let s = text.replace(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, "");
+  s = s.replace(/(?:\+?\d{1,3}[-.\s]?)?\(?\d{2,5}\)?[-.\s]?\d{3,4}[-.\s]?\d{3,4}\b/g, "");
+  s = s.replace(/\b\d{10}\b/g, "");
+  return s.replace(/\s{2,}/g, " ").trim();
+}
+
+function iecDraft(parsed) {
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+  const clean = (s, max = 4000) => stripContactInfo(asText(s, max));
+  const title = clean(parsed.title, 300);
+  if (!title) return null;
+  const background = clean(parsed.background, 4000);
+  const design = clean(parsed.design, 1000);
+  const setting = clean(parsed.setting, 1000);
+  const duration = clean(parsed.duration, 500);
+  const sampleSize = clean(parsed.sampleSize, 1000);
+  const methodology = clean(parsed.methodology, 4000);
+  const statisticalAnalysis = clean(parsed.statisticalAnalysis, 2000);
+  const risks = clean(parsed.risks, 2000);
+  const benefits = clean(parsed.benefits, 2000);
+  const confidentiality = clean(parsed.confidentiality, 2000);
+  const compensation = clean(parsed.compensation, 2000);
+  const conflictOfInterest = clean(parsed.conflictOfInterest, 2000);
+  const funding = clean(parsed.funding, 2000);
+  const consentProcess = clean(parsed.consentProcess, 2000);
+  const vulnerablePopulations = clean(parsed.vulnerablePopulations, 2000);
+
+  const cleanArr = (arr) => Array.isArray(arr) ? arr.map((item) => clean(item, 500)).filter(Boolean) : [];
+  const investigators = cleanArr(parsed.investigators);
+  const objectives = cleanArr(parsed.objectives);
+  const inclusion = cleanArr(parsed.inclusion);
+  const exclusion = cleanArr(parsed.exclusion);
+
+  if (!background || !design || !methodology || !risks || !benefits) return null;
+
+  return {
+    title,
+    investigators,
+    background,
+    objectives,
+    design,
+    setting,
+    duration,
+    sampleSize,
+    inclusion,
+    exclusion,
+    methodology,
+    statisticalAnalysis,
+    risks,
+    benefits,
+    confidentiality,
+    compensation,
+    conflictOfInterest,
+    funding,
+    consentProcess,
+    vulnerablePopulations,
+  };
+}
+
+function consentVersionDraft(src, lang) {
+  if (!src || typeof src !== "object" || Array.isArray(src)) return null;
+  const pis = src.participantInformationSheet && typeof src.participantInformationSheet === "object" ? src.participantInformationSheet : {};
+  const cf = src.consentForm && typeof src.consentForm === "object" ? src.consentForm : {};
+
+  const clean = (s) => stripContactInfo(asText(s, 3000));
+  const participantInformationSheet = {
+    title: clean(pis.title),
+    purpose: clean(pis.purpose),
+    procedures: clean(pis.procedures),
+    duration: clean(pis.duration),
+    risks: clean(pis.risks),
+    benefits: clean(pis.benefits),
+    alternatives: clean(pis.alternatives),
+    confidentiality: clean(pis.confidentiality),
+    voluntary: clean(pis.voluntary),
+    contact: clean(pis.contact),
+  };
+
+  const statements = Array.isArray(cf.statements) ? cf.statements.map(clean).filter(Boolean) : [];
+  const signatureBlock = clean(cf.signatureBlock);
+  const consentForm = { statements, signatureBlock };
+
+  if (!participantInformationSheet.title || !participantInformationSheet.purpose || !participantInformationSheet.procedures || !statements.length) {
+    return null;
+  }
+  return { participantInformationSheet, consentForm, language: lang || "English" };
+}
+
+function consentDraft(parsed, requestedLang) {
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+  const lang = CONSENT_LANGUAGES.has(requestedLang) ? requestedLang : "English";
+
+  if (lang === "English") {
+    const v = consentVersionDraft(parsed.englishVersion || parsed, "English");
+    if (!v) return null;
+    return v;
+  }
+
+  // When language is not English, return BOTH englishVersion and translatedVersion objects of the same shape.
+  const eng = consentVersionDraft(parsed.englishVersion, "English");
+  const trans = consentVersionDraft(parsed.translatedVersion || parsed, lang);
+  if (!eng || !trans) return null;
+  return {
+    participantInformationSheet: trans.participantInformationSheet,
+    consentForm: trans.consentForm,
+    language: lang,
+    englishVersion: eng,
+    translatedVersion: trans,
+  };
+}
+
+function ctriDraft(parsed) {
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+  const clean = (s, max = 2000) => stripContactInfo(asText(s, max));
+  const publicTitle = clean(parsed.publicTitle, 300);
+  const scientificTitle = clean(parsed.scientificTitle, 300);
+  if (!publicTitle || !scientificTitle) return null;
+
+  const studyType = clean(parsed.studyType, 200);
+  const phase = clean(parsed.phase, 100);
+  const condition = clean(parsed.condition, 500);
+  const intervention = clean(parsed.intervention, 2000);
+  const comparator = clean(parsed.comparator, 2000);
+  const inclusion = clean(parsed.inclusion, 3000);
+  const exclusion = clean(parsed.exclusion, 3000);
+
+  const po = parsed.primaryOutcome && typeof parsed.primaryOutcome === "object" ? parsed.primaryOutcome : {};
+  const primaryOutcome = {
+    outcome: clean(po.outcome, 1000),
+    timepoint: clean(po.timepoint, 500),
+  };
+  if (!primaryOutcome.outcome) return null;
+
+  const secondaryOutcomes = Array.isArray(parsed.secondaryOutcomes)
+    ? parsed.secondaryOutcomes.map((s) => clean(s, 1000)).filter(Boolean)
+    : [];
+
+  let targetSampleSize = parsed.targetSampleSize;
+  if (typeof targetSampleSize === "string") targetSampleSize = parseInt(targetSampleSize, 10) || targetSampleSize;
+
+  const sites = clean(parsed.sites, 1000);
+  const recruitmentStatus = "Not Yet Recruiting";
+  const ethicsCommittee = "";
+  const regulatoryClearance = "";
+  const fundingSource = clean(parsed.fundingSource, 500);
+
+  let briefSummary = clean(parsed.briefSummary, 5000);
+  if (briefSummary) {
+    briefSummary = trimWords(briefSummary, 300);
+  }
+
+  return {
+    publicTitle,
+    scientificTitle,
+    studyType,
+    phase,
+    condition,
+    intervention,
+    comparator,
+    inclusion,
+    exclusion,
+    primaryOutcome,
+    secondaryOutcomes,
+    targetSampleSize: targetSampleSize || "",
+    sites,
+    recruitmentStatus,
+    ethicsCommittee,
+    regulatoryClearance,
+    fundingSource,
+    briefSummary,
+  };
 }
 
 function suggestDesign(text) {
@@ -773,7 +958,7 @@ export async function aiDraft(ctx, projectId, body) {
   if (gate.status) return gateErr(gate, gate.status === 404 ? "Project not found" : "Ask MaiK needs an owner, editor or analyst role", requestId);
   const task = body && typeof body.task === "string" ? body.task : "";
   if (TASKS.indexOf(task) < 0)
-    return err(400, "invalid_task", "Unknown task. Use protocol, search_query, rob, checklist, title_abstract, thesis_to_paper or polish.", requestId);
+    return err(400, "invalid_task", "Unknown task. Use protocol, search_query, rob, checklist, title_abstract, thesis_to_paper, polish, iec_application, consent_form or ctri_fields.", requestId);
   const input = inputOf(body);
   if (task === "thesis_to_paper") return thesisTask(ctx, projectId, input);
   if (task === "polish") return polishTask(ctx, projectId, input);
@@ -845,6 +1030,48 @@ export async function aiDraft(ctx, projectId, body) {
     prompt = "Title: " + (project.title || "") +
       "\nProtocol: " + JSON.stringify(bits.protocol).slice(0, 2000) +
       "\nAllowed tokens (use these exact strings, do not invent numbers): " + (tokens.join(", ") || "(none saved yet)");
+  } else if (task === "iec_application") {
+    const proto = bits.protocol || {};
+    const ss = input.sampleSize ? JSON.stringify(input.sampleSize) : "";
+    const notes = asText(input.notes || input.note, 2000);
+    system = "You draft an Institutional Ethics Committee (IEC) application following ICMR National Ethical Guidelines (2017). " +
+      "Return ONLY JSON with title, investigators (array of strings), background, objectives (array of strings), design, setting, duration, sampleSize, inclusion (array of strings), exclusion (array of strings), methodology, statisticalAnalysis, risks, benefits, confidentiality, compensation, conflictOfInterest, funding, consentProcess, vulnerablePopulations. " +
+      "Use plain clear English. Do not invent investigator names, phone numbers or emails. If not provided, leave investigators as an empty array [].";
+    prompt = "Title: " + (project.title || "") +
+      "\nStudy type: " + (project.study_type || "") +
+      "\nQuestion: " + (project.research_question || "") +
+      "\nProtocol: " + JSON.stringify(proto).slice(0, 3000) +
+      (ss ? "\nSample size: " + ss : "") +
+      (notes ? "\nNotes: " + notes : "");
+  } else if (task === "consent_form") {
+    const proto = bits.protocol || {};
+    const lang = CONSENT_LANGUAGES.has(input.language) ? input.language : "English";
+    const notes = asText(input.notes || input.note, 2000);
+    system = "You draft an informed consent document including a Participant Information Sheet (PIS) and Informed Consent Form (ICF) according to ICMR ethical guidelines. " +
+      "Reading level: simple sentences for participants. " +
+      "Return ONLY JSON {participantInformationSheet:{title, purpose, procedures, duration, risks, benefits, alternatives, confidentiality, voluntary, contact}, consentForm:{statements:[string], signatureBlock:string}, language:string}. " +
+      "Do not invent contact phone numbers or emails. Leave contact empty or 'Fill this in'. " +
+      (lang !== "English" ? "Since the language is " + lang + ", return BOTH englishVersion and translatedVersion objects in the JSON, each of the same {participantInformationSheet, consentForm, language} shape." : "");
+    prompt = "Title: " + (project.title || "") +
+      "\nStudy type: " + (project.study_type || "") +
+      "\nQuestion: " + (project.research_question || "") +
+      "\nLanguage: " + lang +
+      (notes ? "\nNotes: " + notes : "") +
+      "\nProtocol: " + JSON.stringify(proto).slice(0, 3000);
+  } else if (task === "ctri_fields") {
+    const proto = bits.protocol || {};
+    const ss = input.sampleSize ? JSON.stringify(input.sampleSize) : "";
+    const notes = asText(input.notes || input.note, 2000);
+    system = "You draft Clinical Trials Registry - India (CTRI) registration fields. Return ONLY JSON with: " +
+      "publicTitle, scientificTitle, studyType, phase, condition, intervention, comparator, inclusion, exclusion, primaryOutcome {outcome, timepoint}, secondaryOutcomes (array of strings), targetSampleSize, sites, recruitmentStatus, ethicsCommittee, regulatoryClearance, fundingSource, briefSummary. " +
+      "briefSummary must be at most 300 words. recruitmentStatus must be 'Not Yet Recruiting'. " +
+      "Do not invent investigator names, phone numbers, emails, ethics committee approval numbers or regulatory clearance numbers. Leave ethicsCommittee and regulatoryClearance as empty string ''.";
+    prompt = "Title: " + (project.title || "") +
+      "\nStudy type: " + (project.study_type || "") +
+      "\nQuestion: " + (project.research_question || "") +
+      "\nProtocol: " + JSON.stringify(proto).slice(0, 3000) +
+      (ss ? "\nSample size: " + ss : "") +
+      (notes ? "\nNotes: " + notes : "");
   }
 
   const out = await oneCall(ctx, projectId, task, system, prompt);
@@ -854,6 +1081,9 @@ export async function aiDraft(ctx, projectId, body) {
   if (task === "protocol") draft = protocolDraft(parsed);
   else if (task === "search_query") draft = searchDraft(parsed);
   else if (task === "title_abstract") draft = titleDraft(parsed);
+  else if (task === "iec_application") draft = iecDraft(parsed);
+  else if (task === "consent_form") draft = consentDraft(parsed, input.language);
+  else if (task === "ctri_fields") draft = ctriDraft(parsed);
   if (!draft) return err(422, "invalid_draft", "MaiK did not return a draft that matched the required fields.", requestId);
   const stored = await storeDraft(ctx, projectId, task, draft, out.model, out.costInr || 0);
   return respond(ctx, stored, out.model, out.costInr || 0);

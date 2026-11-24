@@ -541,6 +541,8 @@
       "#researchMD .rmd-ai-cost { margin: 0; font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); }",
       "#researchMD .rmd-ai-progress { margin: 0; font: 500 13px var(--rmd-f); color: var(--rmd-acc); }",
       "#researchMD .rmd-ai-note { display: inline-block; font: 500 11.5px var(--rmd-f); color: var(--rmd-acc); background: var(--rmd-acc-soft); border-radius: 999px; padding: 2px 8px; margin-top: 4px; }",
+      "#researchMD .rmd-fillin-note { display: inline-block; font: 500 11.5px var(--rmd-f); color: var(--rmd-warn); background: var(--rmd-warn-soft); border-radius: 999px; padding: 2px 8px; margin-top: 4px; }",
+      "#researchMD .rmd-consent-preview { font-size: 13.5px; color: var(--rmd-ink); background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 8px; padding: 8px 12px; white-space: pre-wrap; }",
       "#researchMD .rmd-field { display: flex; flex-direction: column; gap: 5px; }",
       "#researchMD .rmd-field label { font: 600 12.5px var(--rmd-f); color: var(--rmd-mut); }",
       "#researchMD .rmd-req { color: var(--rmd-bad); }",
@@ -1039,6 +1041,7 @@
   var accountSaveNotice = "";
 
   var TAB_LABELS = {
+    plan: "Plan",
     studies: "Studies", protocol: "Protocol", search: "Search", screening: "Screening",
     conflicts: "Conflicts", prisma: "PRISMA", pdf: "PDF", extract: "Extract",
     rob: "Risk of Bias", data: "Data", run: "Run", grade: "GRADE",
@@ -1050,6 +1053,13 @@
   };
 
   var HELP = {
+    plan: {
+      name: "Plan your study",
+      do: "Calculate sample size, draft ethics committee application, consent form, and CTRI registration.",
+      eg: "118 patients per group needed for 80% power.",
+      gloss: "New words: Sample size (how many patients you need), IEC (Institutional Ethics Committee), CTRI (Clinical Trials Registry - India).",
+      action: { label: "Next: write protocol", fallback: "protocol" }
+    },
     projects: {
       name: "Your projects",
       do: "Open a project to continue, or start a new one with a guide.",
@@ -1235,6 +1245,7 @@
   };
 
   var STEP_TIPS = {
+    plan: "calculate sample size, draft ethics, consent and CTRI.",
     studies: "add the studies to combine.",
     protocol: "write your question first.",
     search: "find papers for your question.",
@@ -1262,9 +1273,9 @@
     var t = ((project && project.studyType) || "").toLowerCase();
     if (t.indexOf("thesis") >= 0) return ["thesis", "thesis-type", "thesis-journal", "thesis-draft", "thesis-tables", "thesis-refs", "checklist", "ready"];
     if (t.indexOf("case") >= 0) return ["manuscript", "checklist", "ready"];
-    if (t.indexOf("trial") >= 0 || t.indexOf("randomized") >= 0) return ["protocol", "checklist", "manuscript", "ready"];
+    if (t.indexOf("trial") >= 0 || t.indexOf("randomized") >= 0) return ["plan", "protocol", "checklist", "manuscript", "ready"];
     if (t.indexOf("observational") >= 0 || t.indexOf("cohort") >= 0 || t.indexOf("survey") >= 0 || t.indexOf("diagnostic") >= 0) {
-      return ["protocol", "studies", "extract", "data", "run", "manuscript", "checklist", "ready"];
+      return ["plan", "protocol", "studies", "extract", "data", "run", "manuscript", "checklist", "ready"];
     }
     return ["studies", "protocol", "search", "screening", "conflicts", "prisma", "pdf", "extract", "rob", "data", "run", "grade", "manuscript", "checklist", "ready"];
   }

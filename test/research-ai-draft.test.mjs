@@ -449,4 +449,278 @@ describe("research ai draft", { concurrency: false, skip: SKIP }, () => {
     assert.equal(llm.calls.length, 0);
     assert.equal(n(poor, "research_ai_drafts", poorProject.id), 0);
   });
+
+  test("iec_application drafts ICMR 2017 fields, strips invented phone/email, blocks PHI, 402 on empty wallet, 403 for viewer", async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 100);
+    const project = await makeProject(env);
+    const pid = project.id;
+
+    const validIec = {
+      title: "BCG and hospital admission trial",
+      investigators: ["Dr. A. Sharma 9876543210 doc@example.com", "Dr. B. Patel"],
+      background: "Tuberculosis remains a major health problem in India. Reach support@hospital.org or 9876543210 for queries.",
+      objectives: ["To evaluate reduction in hospital admission rates"],
+      design: "Randomised controlled trial",
+      setting: "Tertiary care teaching hospital in New Delhi",
+      duration: "18 months",
+      sampleSize: "118 patients per group, total 236 patients",
+      inclusion: ["Adults aged 18 to 65 years", "Confirmed diagnosis of tuberculosis"],
+      exclusion: ["Severe immunosuppression", "Previous adverse reaction to BCG"],
+      methodology: "Double blind randomised allocation with concealed envelopes",
+      statisticalAnalysis: "Intention-to-treat analysis comparing risk ratios with 95% confidence intervals",
+      risks: "Mild local pain and swelling at the injection site",
+      benefits: "Potential reduced risk of severe complications and hospitalization",
+      confidentiality: "All records coded and stored in encrypted databases",
+      compensation: "Free medical management of trial related injuries",
+      conflictOfInterest: "None declared by any investigator",
+      funding: "Institutional research grant",
+      consentProcess: "Written informed consent obtained in participant preferred language",
+      vulnerablePopulations: "None included",
+    };
+
+    resetLlm(async () => JSON.stringify(validIec));
+    const ok = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "iec_application",
+      input: { sampleSize: { nPerGroup: 118, total: 236 } }
+    });
+    assert.equal(ok.http, 200, JSON.stringify(ok));
+    assert.equal(ok.draft.status, "unverified");
+    assert.equal(ok.draft.task, "iec_application");
+    assert.equal(ok.draft.title, "BCG and hospital admission trial");
+    assert.equal(ok.draft.design, "Randomised controlled trial");
+    assert.equal(ok.draft.sampleSize, "118 patients per group, total 236 patients");
+    // Invented email and phone must be stripped from text and arrays
+    assert.equal(ok.draft.investigators[0].includes("doc@example.com"), false);
+    assert.equal(ok.draft.investigators[0].includes("9876543210"), false);
+    assert.ok(ok.draft.investigators[0].includes("Dr. A. Sharma"));
+    assert.equal(ok.draft.background.includes("support@hospital.org"), false);
+    assert.equal(ok.draft.background.includes("9876543210"), false);
+    assert.equal(llm.calls.length, 1);
+    assert.equal(llm.calls[0].maxTokens, 2000);
+    assert.equal(llm.calls[0].opts.temperature, 0);
+    assert.equal(n(env, "research_ai_drafts", pid), 1);
+
+    // Bad JSON returns 422 invalid_draft
+    resetLlm(async () => JSON.stringify({ title: "Incomplete", background: "" }));
+    const bad = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "iec_application"
+    });
+    assert.equal(bad.http, 422);
+    assert.equal(bad.error.code, "invalid_draft");
+
+    // PHI in prompt refused
+    resetLlm(async () => JSON.stringify(validIec));
+    const phi = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "iec_application",
+      input: { sampleSize: { note: "Patient John Doe john@hospital.org" } }
+    });
+    assert.equal(phi.http, 422);
+    assert.equal(phi.error.code, "phi_blocked");
+
+    // Viewer gets 403
+    await setRole(env, pid, "viewer");
+    const viewer = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-bob", {
+      task: "iec_application"
+    });
+    assert.equal(viewer.http, 403);
+
+    // Empty wallet gets 402
+    const empty = freshEnv();
+    const p2 = await makeProject(empty);
+    resetLlm();
+    const poor = await call(empty, "POST", "v1/projects/" + p2.id + "/ai-draft", "tok-alice", {
+      task: "iec_application"
+    });
+    assert.equal(poor.http, 402);
+    assert.equal(poor.error.code, "insufficient_credits");
+  });
+
+  test("consent_form returns participant info and consent form, returns both versions for non-English, strips phone/email, 402/403/PHI", async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 100);
+    const project = await makeProject(env);
+    const pid = project.id;
+
+    const engForm = {
+      participantInformationSheet: {
+        title: "Information for participants",
+        purpose: "This study aims to test if BCG vaccination reduces hospital stay.",
+        procedures: "You will receive a single injection and 3 follow up visits.",
+        duration: "12 months",
+        risks: "Soreness at injection site. Call 9876543210 or email test@example.com for queries.",
+        benefits: "You may have a lower chance of complications.",
+        alternatives: "Standard care without vaccination.",
+        confidentiality: "Your records are kept private with a code number.",
+        voluntary: "Participation is completely voluntary. You can withdraw anytime.",
+        contact: "Principal Investigator 9876543210 pi@hospital.org",
+      },
+      consentForm: {
+        statements: [
+          "I have read and understood the information sheet.",
+          "I have had the opportunity to ask questions.",
+          "I agree to participate in this study.",
+        ],
+        signatureBlock: "Participant signature: ________ Date: ________",
+      },
+      language: "English",
+    };
+
+    resetLlm(async () => JSON.stringify(engForm));
+    const eng = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "consent_form",
+      input: { language: "English" }
+    });
+    assert.equal(eng.http, 200, JSON.stringify(eng));
+    assert.equal(eng.draft.status, "unverified");
+    assert.equal(eng.draft.language, "English");
+    assert.equal(eng.draft.participantInformationSheet.title, "Information for participants");
+    assert.equal(eng.draft.participantInformationSheet.contact.includes("pi@hospital.org"), false);
+    assert.equal(eng.draft.participantInformationSheet.contact.includes("9876543210"), false);
+    assert.equal(eng.draft.participantInformationSheet.risks.includes("test@example.com"), false);
+    assert.equal(eng.draft.consentForm.statements.length, 3);
+    assert.equal(llm.calls[0].maxTokens, 2000);
+
+    // Non-English (Telugu) must return BOTH englishVersion and translatedVersion
+    const teluguForm = {
+      englishVersion: engForm,
+      translatedVersion: {
+        participantInformationSheet: {
+          title: "పాల్గొనేవారి సమాచార పత్రం",
+          purpose: "ఈ అధ్యయనం BCG టీకా ఆసుపత్రిలో చేరికను తగ్గిస్తుందో లేదో పరీక్షిస్తుంది.",
+          procedures: "మీరు ఒక ఇంజెక్షన్ మరియు 3 తదుపరి సందర్శనలను స్వీకరిస్తారు.",
+          duration: "12 నెలలు",
+          risks: "ఇంజెక్షన్ చేసిన ప్రదేశంలో నొప్పి.",
+          benefits: "సమస్యల ప్రమాదం తగ్గే అవకాశం ఉంది.",
+          alternatives: "టీకా లేకుండా ప్రామాణిక సంరక్షణ.",
+          confidentiality: "మీ రికార్డులు కోడ్ నంబరుతో రహస్యంగా ఉంచబడతాయి.",
+          voluntary: "పాల్గొనడం పూర్తిగా స్వచ్ఛందం. మీరు ఎప్పుడైనా వైదొలగవచ్చు.",
+          contact: "ప్రధాన పరిశోధకుడు",
+        },
+        consentForm: {
+          statements: [
+            "నేను సమాచార పత్రాన్ని చదివి అర్థం చేసుకున్నాను.",
+            "ప్రశ్నలు అడగడానికి నాకు అవకాశం లభించింది.",
+            "నేను ఈ అధ్యయనంలో పాల్గొనడానికి అంగీకరిస్తున్నాను.",
+          ],
+          signatureBlock: "పాల్గొనేవారి సంతకం: ________ తేదీ: ________",
+        },
+        language: "Telugu",
+      },
+    };
+
+    resetLlm(async () => JSON.stringify(teluguForm));
+    const tel = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "consent_form",
+      input: { language: "Telugu" }
+    });
+    assert.equal(tel.http, 200, JSON.stringify(tel));
+    assert.equal(tel.draft.language, "Telugu");
+    assert.ok(tel.draft.englishVersion, "must return englishVersion");
+    assert.ok(tel.draft.translatedVersion, "must return translatedVersion");
+    assert.equal(tel.draft.englishVersion.language, "English");
+    assert.equal(tel.draft.translatedVersion.language, "Telugu");
+    assert.equal(tel.draft.participantInformationSheet.title, "పాల్గొనేవారి సమాచార పత్రం");
+    assert.equal(tel.draft.englishVersion.participantInformationSheet.title, "Information for participants");
+
+    // Missing englishVersion on non-English request returns 422
+    resetLlm(async () => JSON.stringify(teluguForm.translatedVersion));
+    const badTrans = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "consent_form",
+      input: { language: "Telugu" }
+    });
+    assert.equal(badTrans.http, 422);
+    assert.equal(badTrans.error.code, "invalid_draft");
+
+    // PHI in input blocked
+    const phi = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "consent_form",
+      input: { language: "English", notes: "Patient John Doe nurse@hospital.org" }
+    });
+    assert.equal(phi.http, 422);
+    assert.equal(phi.error.code, "phi_blocked");
+
+    // Viewer gets 403
+    await setRole(env, pid, "viewer");
+    const viewer = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-bob", {
+      task: "consent_form"
+    });
+    assert.equal(viewer.http, 403);
+  });
+
+  test("ctri_fields drafts registry fields, leaves ethics/clearance empty, trims summary to 300 words, strips phone/email", async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 100);
+    const project = await makeProject(env);
+    const pid = project.id;
+
+    const summaryWords = Array(350).fill("clinical").join(" ");
+    const ctriData = {
+      publicTitle: "BCG trial in adults",
+      scientificTitle: "Evaluation of BCG vaccine for prevention of hospitalization in pulmonary tuberculosis",
+      studyType: "Interventional",
+      phase: "Phase 3",
+      condition: "Pulmonary tuberculosis",
+      intervention: "BCG vaccine intradermal 0.1 mL",
+      comparator: "Normal saline 0.1 mL placebo",
+      inclusion: "Adults aged 18 to 65 years with diagnosed pulmonary tuberculosis",
+      exclusion: "HIV positive, immunosuppressed, prior BCG allergy",
+      primaryOutcome: {
+        outcome: "Hospital admission due to tuberculosis complication",
+        timepoint: "12 months post vaccination"
+      },
+      secondaryOutcomes: ["All-cause mortality at 12 months", "Adverse events at 30 days"],
+      targetSampleSize: 262,
+      sites: "Department of Medicine, AIIMS, New Delhi. Call 9876543210 or email ctri@hospital.org for recruitment.",
+      recruitmentStatus: "Recruiting", // Model returned Recruiting; must be forced to Not Yet Recruiting
+      ethicsCommittee: "IEC approval 2026/09/123", // Model invented approval; must be cleared to ""
+      regulatoryClearance: "DCGI/CT/2026/456", // Model invented clearance; must be cleared to ""
+      fundingSource: "Indian Council of Medical Research (ICMR)",
+      briefSummary: summaryWords,
+    };
+
+    resetLlm(async () => JSON.stringify(ctriData));
+    const res = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "ctri_fields",
+      input: { sampleSize: { targetSampleSize: 262 } }
+    });
+    assert.equal(res.http, 200, JSON.stringify(res));
+    assert.equal(res.draft.status, "unverified");
+    assert.equal(res.draft.task, "ctri_fields");
+    assert.equal(res.draft.publicTitle, "BCG trial in adults");
+    assert.equal(res.draft.scientificTitle, "Evaluation of BCG vaccine for prevention of hospitalization in pulmonary tuberculosis");
+    assert.equal(res.draft.recruitmentStatus, "Not Yet Recruiting");
+    assert.equal(res.draft.ethicsCommittee, "");
+    assert.equal(res.draft.regulatoryClearance, "");
+    assert.equal(res.draft.targetSampleSize, 262);
+    assert.equal(res.draft.sites.includes("ctri@hospital.org"), false);
+    assert.equal(res.draft.sites.includes("9876543210"), false);
+    // summary must be trimmed to <= 300 words
+    const words = res.draft.briefSummary.trim().split(/\s+/).length;
+    assert.ok(words <= 300, "briefSummary should be <= 300 words, got " + words);
+    assert.equal(words, 300);
+
+    // Bad JSON returns 422
+    resetLlm(async () => JSON.stringify({ publicTitle: "", scientificTitle: "" }));
+    const bad = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "ctri_fields"
+    });
+    assert.equal(bad.http, 422);
+    assert.equal(bad.error.code, "invalid_draft");
+
+    // PHI refusal
+    const phi = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "ctri_fields",
+      input: { sampleSize: { note: "Patient John Doe nurse@hospital.org" } }
+    });
+    assert.equal(phi.http, 422);
+    assert.equal(phi.error.code, "phi_blocked");
+
+    // Viewer gets 403
+    await setRole(env, pid, "viewer");
+    const viewer = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-bob", {
+      task: "ctri_fields"
+    });
+    assert.equal(viewer.http, 403);
+  });
 });

@@ -54,7 +54,7 @@
       eg: "A trial protocol. Example: testing a new dressing for burns.",
       studyType: "Randomized Controlled Trial",
       defaultTitle: "My trial protocol",
-      firstScreen: "protocol"
+      firstScreen: "plan"
     },
     {
       key: "obs",
@@ -62,7 +62,7 @@
       eg: "An observational study. Example: outcomes after a new clinic pathway.",
       studyType: "Observational Study",
       defaultTitle: "My observational study",
-      firstScreen: "protocol"
+      firstScreen: "plan"
     }
   ];
 

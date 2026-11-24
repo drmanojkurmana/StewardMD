@@ -272,3 +272,134 @@ The citation must be an exact substring of the thesis or the item is dropped.
 `doi` and `pmid` are kept only when they appear verbatim in the thesis.
 A kept reference with neither identifier has `flag` `"check this reference"`. Otherwise `flag` is `""`.
 The server does not reformat the reference list into a journal style.
+
+### iec_application (max 2000 tokens)
+
+`input.sampleSize` is optional: `{ n, total, paragraph, ... }`. The server also sends the project
+title, study type, research question and stored protocol.
+
+`draft` adds:
+
+```json
+{
+  "title": "Title of study",
+  "investigators": [],
+  "background": "Scientific rationale and background",
+  "objectives": ["Primary objective", "Secondary objective"],
+  "design": "Study design (e.g. Randomized controlled trial)",
+  "setting": "Study setting / institution",
+  "duration": "12 months",
+  "sampleSize": "118 per group (262 in total allowing for 10% dropout)",
+  "inclusion": ["Age >= 18 years"],
+  "exclusion": ["Known contraindication"],
+  "methodology": "Detailed methodology",
+  "statisticalAnalysis": "Statistical plan",
+  "risks": "Potential risks and mitigation",
+  "benefits": "Potential direct or indirect benefits",
+  "confidentiality": "Data protection measures",
+  "compensation": "Compensation for trial-related injury",
+  "conflictOfInterest": "None declared",
+  "funding": "Institutional funding",
+  "consentProcess": "Informed written consent procedure",
+  "vulnerablePopulations": "None included or safeguards applied"
+}
+```
+
+Follows ICMR National Ethical Guidelines (2017) headings. Plain clear English.
+Investigator names, contact numbers, and emails are scrubbed if invented.
+Missing title or background returns 422 `invalid_draft`.
+
+### consent_form (max 2500 tokens)
+
+`input.language` is optional: `"English"`, `"Hindi"`, `"Telugu"`, `"Tamil"`, `"Kannada"`,
+`"Malayalam"`, `"Marathi"`, `"Bengali"`, `"Gujarati"`. Default `"English"`.
+
+When `language` is `"English"`, returns a single version object:
+
+```json
+{
+  "participantInformationSheet": {
+    "title": "Information for participants",
+    "purpose": "Why this study is being done",
+    "procedures": "What will happen if you take part",
+    "duration": "How long you will take part",
+    "risks": "Side effects or discomforts",
+    "benefits": "How this might help you or others",
+    "alternatives": "Other treatments available",
+    "confidentiality": "How your information is kept private",
+    "voluntary": "Taking part is your choice",
+    "contact": ""
+  },
+  "consentForm": {
+    "statements": [
+      "I have read and understood the information sheet.",
+      "I have had the opportunity to ask questions.",
+      "I agree to take part voluntarily."
+    ],
+    "signatureBlock": "Signature of participant: ________  Date: ________"
+  },
+  "language": "English"
+}
+```
+
+When `language` is not `"English"`, returns BOTH `englishVersion` and `translatedVersion`
+objects of the same shape, plus top-level `participantInformationSheet`, `consentForm` and `language`
+matching the translated version:
+
+```json
+{
+  "participantInformationSheet": { },
+  "consentForm": { },
+  "language": "Telugu",
+  "englishVersion": {
+    "participantInformationSheet": { },
+    "consentForm": { },
+    "language": "English"
+  },
+  "translatedVersion": {
+    "participantInformationSheet": { },
+    "consentForm": { },
+    "language": "Telugu"
+  }
+}
+```
+
+Reading level: simple sentences for participants. Phone numbers and emails are scrubbed.
+
+### ctri_fields (max 2500 tokens)
+
+`input.sampleSize` is optional: `{ n, total, ... }`.
+
+`draft` adds Clinical Trials Registry - India (CTRI) registration fields:
+
+```json
+{
+  "publicTitle": "Plain-language title",
+  "scientificTitle": "Full scientific title",
+  "studyType": "Interventional",
+  "phase": "Phase 3",
+  "condition": "Condition or disease being studied",
+  "intervention": "Description of intervention",
+  "comparator": "Description of comparator / control",
+  "inclusion": "Inclusion criteria",
+  "exclusion": "Exclusion criteria",
+  "primaryOutcome": {
+    "outcome": "Primary outcome measure",
+    "timepoint": "Timepoint for primary outcome"
+  },
+  "secondaryOutcomes": ["Secondary outcome 1", "Secondary outcome 2"],
+  "targetSampleSize": 262,
+  "sites": "Study sites",
+  "recruitmentStatus": "Not Yet Recruiting",
+  "ethicsCommittee": "",
+  "regulatoryClearance": "",
+  "fundingSource": "Funding details",
+  "briefSummary": "Brief summary of the study (maximum 300 words)"
+}
+```
+
+`recruitmentStatus` is always `"Not Yet Recruiting"`.
+`ethicsCommittee` and `regulatoryClearance` are left empty `""` (client displays "Fill this in").
+Invented phone numbers and emails are stripped.
+`briefSummary` is capped at 300 words.
+
