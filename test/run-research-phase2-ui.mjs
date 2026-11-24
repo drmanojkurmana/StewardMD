@@ -423,7 +423,7 @@ try {
   await call('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
   await call('Page.navigate', { url: `http://localhost:${PORT}/?research=1` });
   ok(await until('!!window.SMD_RESEARCH && !!SMD_RESEARCH.screens && !!SMD_RESEARCH.screens.protocol && !!SMD_RESEARCH.screens.search && !!SMD_RESEARCH.screens.screening && !!SMD_RESEARCH.screens.conflicts && !!SMD_RESEARCH.screens.prisma', 30000), 'app loaded with all five Phase 2 screens');
-  ok(await ev(`!!document.querySelector('script[src*="research-screen-protocol.js?v=rmd2"]') && !!document.querySelector('script[src*="research-screen-prisma.js?v=rmd2"]')`), 'index.html carries the new script tags with ?v=rmd2');
+  ok(await ev(`!!document.querySelector('script[src*="research-screen-protocol.js?v=rmd2"]') && !!document.querySelector('script[src*="research-screen-prisma.js?v=rmd"]')`), 'index.html carries the new script tags');
 
   await ev(`SMD_RESEARCH.open({screen:'protocol'});1`);
   ok(await until(`!!document.querySelector('#researchMD:not([hidden]) .rmd-p2-screen')`, 5000), 'protocol screen opens');

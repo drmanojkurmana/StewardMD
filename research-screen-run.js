@@ -362,15 +362,15 @@
     svg.push('<svg class="rmd-forest-svg" viewBox="0 0 ' + totalWidth + ' ' + totalHeight + '" width="100%" height="' + totalHeight + '" xmlns="http://www.w3.org/2000/svg">');
     svg.push('  <style>');
     svg.push('    .rf-text { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; font-size: 12px; fill: currentColor; }');
-    svg.push('    .rf-hdr { font-weight: 600; font-size: 11.5px; fill: var(--rmd-mut, #5b6b75); text-transform: uppercase; letter-spacing: 0.03em; }');
+    svg.push('    .rf-hdr { font-weight: 600; font-size: 11.5px; fill: var(--rmd-mut, #5b607a); text-transform: uppercase; letter-spacing: 0.03em; }');
     svg.push('    .rf-bold { font-weight: 600; }');
     svg.push('    .rf-mono { font-family: ui-monospace, "SF Mono", monospace; font-size: 11.5px; }');
-    svg.push('    .rf-null-line { stroke: var(--rmd-line, #dce4e2); stroke-width: 1.5; stroke-dasharray: 4,3; }');
-    svg.push('    .rf-pool-line { stroke: var(--rmd-acc, #0f766e); stroke-width: 1.2; stroke-dasharray: 2,2; opacity: 0.7; }');
-    svg.push('    .rf-axis-line { stroke: var(--rmd-mut, #5b6b75); stroke-width: 1; }');
-    svg.push('    .rf-ci-line { stroke: var(--rmd-ink, #12202a); stroke-width: 1.8; stroke-linecap: round; }');
-    svg.push('    .rf-box { fill: var(--rmd-acc, #0f766e); }');
-    svg.push('    .rf-diamond { fill: var(--rmd-acc, #0f766e); stroke: var(--rmd-acc-dark, #094e48); stroke-width: 1; }');
+    svg.push('    .rf-null-line { stroke: var(--rmd-line, #e5ddce); stroke-width: 1.5; stroke-dasharray: 4,3; }');
+    svg.push('    .rf-pool-line { stroke: var(--rmd-acc, #2457ff); stroke-width: 1.2; stroke-dasharray: 2,2; opacity: 0.7; }');
+    svg.push('    .rf-axis-line { stroke: var(--rmd-mut, #5b607a); stroke-width: 1; }');
+    svg.push('    .rf-ci-line { stroke: var(--rmd-ink, #111c44); stroke-width: 1.8; stroke-linecap: round; }');
+    svg.push('    .rf-box { fill: var(--rmd-acc, #2457ff); }');
+    svg.push('    .rf-diamond { fill: var(--rmd-acc, #2457ff); stroke: var(--rmd-acc-dark, #1638b8); stroke-width: 1; }');
     svg.push('  </style>');
 
     // 1. Column Headers
@@ -379,7 +379,7 @@
     svg.push('  <text x="' + colDataX + '" y="' + headerY + '" class="rf-hdr">Data</text>');
     svg.push('  <text x="' + colEffectX + '" y="' + headerY + '" class="rf-hdr">' + esc(measure) + ' [95% CI]</text>');
     svg.push('  <text x="' + colWeightX + '" y="' + headerY + '" class="rf-hdr" text-anchor="end">Weight</text>');
-    svg.push('  <line x1="' + colStudyX + '" y1="' + (headerY + 10) + '" x2="' + (totalWidth - 15) + '" y2="' + (headerY + 10) + '" stroke="var(--rmd-line, #dce4e2)" stroke-width="1" />');
+    svg.push('  <line x1="' + colStudyX + '" y1="' + (headerY + 10) + '" x2="' + (totalWidth - 15) + '" y2="' + (headerY + 10) + '" stroke="var(--rmd-line, #e5ddce)" stroke-width="1" />');
 
     // 2. Reference line of no effect (dashed)
     var plotTopY = topPadding - 10;
@@ -437,7 +437,7 @@
 
     // 5. Divider before summary diamond
     var summaryY = topPadding + (rows.length * rowHeight) + 12;
-    svg.push('  <line x1="' + colStudyX + '" y1="' + (summaryY - 8) + '" x2="' + (totalWidth - 15) + '" y2="' + (summaryY - 8) + '" stroke="var(--rmd-line, #dce4e2)" stroke-width="1" />');
+    svg.push('  <line x1="' + colStudyX + '" y1="' + (summaryY - 8) + '" x2="' + (totalWidth - 15) + '" y2="' + (summaryY - 8) + '" stroke="var(--rmd-line, #e5ddce)" stroke-width="1" />');
 
     // 6. Summary Diamond & Text
     var summaryLabel = manifest.model === "fixed" ? "Fixed Effect Model" : "Random Effects Model (" + (manifest.model === "random_reml" ? "REML" : "DL") + ")";

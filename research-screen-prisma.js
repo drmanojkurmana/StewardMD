@@ -74,7 +74,7 @@
 
   function svgBox(x, y, w, h, lines, count, countFor, highlight) {
     var s = [];
-    s.push('<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="10" fill="' + (highlight ? "var(--rmd-acc-soft, #e3f2ef)" : "var(--rmd-panel, #ffffff)") + '" stroke="' + (highlight ? "var(--rmd-acc, #0f766e)" : "var(--rmd-line, #dce4e2)") + '" stroke-width="1.5"/>');
+    s.push('<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="10" fill="' + (highlight ? "var(--rmd-acc-soft, #e6edff)" : "var(--rmd-panel, #fffdf9)") + '" stroke="' + (highlight ? "var(--rmd-acc, #2457ff)" : "var(--rmd-line, #e5ddce)") + '" stroke-width="1.5"/>');
     for (var i = 0; i < lines.length; i++) {
       s.push('<text x="' + (x + 14) + '" y="' + (y + 22 + i * 15) + '" class="rp-label">' + esc(lines[i]) + '</text>');
     }
@@ -93,12 +93,12 @@
     var s = [];
     s.push('<svg class="rmd-prisma-svg" viewBox="0 0 720 ' + totalH + '" role="img" aria-label="PRISMA 2020 flow diagram" xmlns="http://www.w3.org/2000/svg">');
     s.push('<title>PRISMA 2020 flow: records, reports and studies through screening</title>');
-    s.push('<defs><marker id="rpArrowHead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--rmd-mut, #5b6b75)"/></marker></defs>');
+    s.push('<defs><marker id="rpArrowHead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--rmd-mut, #5b607a)"/></marker></defs>');
     s.push('<style>');
-    s.push('.rp-label { font: 500 12.5px -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; fill: var(--rmd-ink, #12202a); }');
-    s.push('.rp-count { font: 700 20px -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; fill: var(--rmd-ink, #12202a); font-variant-numeric: tabular-nums; }');
-    s.push('.rp-reason { font: 400 12px -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; fill: var(--rmd-mut, #5b6b75); }');
-    s.push('.rp-arrow { stroke: var(--rmd-mut, #5b6b75); stroke-width: 1.5; fill: none; }');
+    s.push('.rp-label { font: 500 12.5px -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; fill: var(--rmd-ink, #111c44); }');
+    s.push('.rp-count { font: 700 20px -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; fill: var(--rmd-ink, #111c44); font-variant-numeric: tabular-nums; }');
+    s.push('.rp-reason { font: 400 12px -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; fill: var(--rmd-mut, #5b607a); }');
+    s.push('.rp-arrow { stroke: var(--rmd-mut, #5b607a); stroke-width: 1.5; fill: none; }');
     s.push('</style>');
 
     // Identification row

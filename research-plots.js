@@ -64,12 +64,12 @@
       muted: "#64748b",
       line: "#e2e8f0",
       nullLine: "#94a3b8",
-      poolLine: "#0f766e",
+      poolLine: "#111c44",
       axis: "#475569",
       ci: "#12202a",
-      box: "#0f766e",
-      diamondFill: "#0f766e",
-      diamondStroke: "#094e48",
+      box: "#111c44",
+      diamondFill: "#111c44",
+      diamondStroke: "#0a1230",
       piBar: "#b45309"
     };
 
@@ -466,10 +466,10 @@
       muted: "#64748b",
       line: "#e2e8f0",
       axis: "#475569",
-      feLine: "#0f766e",
+      feLine: "#111c44",
       limitLine: "#64748b",
       coneFill: "rgba(15, 118, 110, 0.07)",
-      pointFill: "#0f766e",
+      pointFill: "#111c44",
       pointStroke: "#ffffff"
     };
 
