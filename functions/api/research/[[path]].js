@@ -83,6 +83,7 @@ import { listVersions, getManuscript, putSection, requestApproval, approveManusc
 import { listChecklists, getChecklist, checklistSnapshot, getManual, putManual } from "./_checklists.js";
 import { findStudies, autoAddStudies } from "./_auto_studies.js";
 import { aiDraft } from "./_ai_draft.js";
+import { paperCard, explainPaperCard } from "./_paper_card.js";
 import { formatCheck } from "./_format_check.js";
 
 const MAX_JSON = 1024 * 1024;
@@ -2252,6 +2253,16 @@ export async function onRequest({ request, env, params }) {
   if (aiDraftRoute && request.method === "POST") {
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid draft payload", requestId); }
     return aiDraft(p3Ctx, aiDraftRoute[1], body);
+  }
+  const paperExplainRoute = path.match(/^\/v1\/projects\/([^/]+)\/paper-card\/explain$/);
+  if (paperExplainRoute && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid study card payload", requestId); }
+    return explainPaperCard(p3Ctx, paperExplainRoute[1], body);
+  }
+  const paperCardRoute = path.match(/^\/v1\/projects\/([^/]+)\/paper-card$/);
+  if (paperCardRoute && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid study card payload", requestId); }
+    return paperCard(p3Ctx, paperCardRoute[1], body);
   }
 
   const stCol = path.match(/^\/v1\/projects\/([^/]+)\/studies$/);

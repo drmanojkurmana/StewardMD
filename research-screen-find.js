@@ -198,6 +198,7 @@
   function renderSearch() {
     var h = [];
     h.push('<div class="rmd-find-body">');
+    h.push('  <div class="rmd-find-paste-wrap" id="rmdFindPasteWrap"></div>');
     h.push('  <div class="rmd-find-field">');
     h.push('    <label class="rmd-find-label" for="rmd_find_outcome">What result are you combining?</label>');
     h.push('    <input id="rmd_find_outcome" class="rmd-find-input" type="text" value="' + esc(state.outcome) + '" placeholder="e.g. confirmed tuberculosis at any follow-up" />');
@@ -361,6 +362,20 @@
     for (var b = 0; b < toProj.length; b++) toProj[b].onclick = function () { close(); if (SMD.navigate) SMD.navigate("projects"); };
     var toStud = el.querySelectorAll('[data-find="to-studies"]');
     for (var c = 0; c < toStud.length; c++) toStud[c].onclick = function () { close(); if (SMD.navigate) SMD.navigate("studies"); };
+
+    var findPasteWrap = el.querySelector("#rmdFindPasteWrap");
+    if (findPasteWrap && SMD.paperCard && SMD.paperCard.mountPasteBox) {
+      SMD.paperCard.mountPasteBox(findPasteWrap, {
+        project: state.project,
+        pid: state.pid,
+        onAdded: function () {
+          if (SMD.screens && SMD.screens.studies && SMD.screens.studies.render) {
+            var sc = D.getElementById("rmdScreenBody");
+            if (sc) SMD.screens.studies.render(sc);
+          }
+        }
+      });
+    }
 
     var outcomeInput = D.getElementById("rmd_find_outcome");
     if (outcomeInput) outcomeInput.oninput = function () { state.outcome = outcomeInput.value; refreshFooter(); };

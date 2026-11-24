@@ -61,7 +61,9 @@ const MEASURE_WORDS = {
   HR: ["hazard ratio", "hr"],
   MD: ["mean difference", "md"],
   SMD: ["standardised mean difference", "standardized mean difference", "smd"],
+  RD: ["risk difference", "rd"],
 };
+const FINDING_MEASURES = ["RR", "OR", "HR", "MD", "SMD", "RD"];
 const STOP = new Set(["with", "from", "that", "this", "were", "have", "been", "into", "over", "under", "than", "then", "them", "they", "their", "about", "after", "before", "between", "among", "using", "used", "study", "trial", "patients", "patient"]);
 
 function configOf(env) {
@@ -273,13 +275,20 @@ function numberPresent(quote, n) {
    * and 49 matching inside 0.49. */
   const target = Number(n);
   if (!Number.isFinite(target)) return false;
-  const re = /(?<![0-9.])\d+(?:\.\d+)?(?![0-9])(?!\.\d)/g;
+  /* a leading minus (hyphen or unicode minus) belongs to the number, so -0.52 and 0.52 differ */
+  const re = /(?<![0-9.])([-\u2212]?)(\d+(?:\.\d+)?)(?![0-9])(?!\.\d)/g;
   const text = String(quote || "");
   let m;
   while ((m = re.exec(text)) !== null) {
-    if (Number(m[0]) === target) return true;
+    const v = Number(m[2]);
+    const signed = m[1] && !isRangeHyphen(text, m.index) ? -v : v;
+    if (signed === target) return true;
   }
   return false;
+}
+/* "0.70-0.91": that hyphen is a range, not a sign on 0.91 */
+function isRangeHyphen(text, i) {
+  return i > 0 && /[0-9]/.test(text.charAt(i - 1));
 }
 function rowNumbers(row) {
   if (!row) return [];
@@ -307,21 +316,49 @@ function parseCounts(sentence) {
   if (events1 > total1 || events2 > total2) return null;
   return { format: "counts", events1, total1, events2, total2 };
 }
-function parseEstimate(sentence, measure) {
-  const words = MEASURE_WORDS[measure] || [];
-  if (!words.length) return null;
-  const re = new RegExp(
-    "\\b(" + words.join("|") + ")\\b\\s*(?:=|was|:)?\\s*(\\d+(?:\\.\\d+)?)\\s*\\(\\s*(?:95\\s*%\\s*)?(?:CI|confidence interval)?\\s*(\\d+(?:\\.\\d+)?)\\s*(?:to|-|,)\\s*(\\d+(?:\\.\\d+)?)",
-    "i");
-  const m = sentence.match(re);
-  if (!m) return null;
-  const estimate = Number(m[2]), ciLower = Number(m[3]), ciUpper = Number(m[4]);
-  if (![estimate, ciLower, ciUpper].every((n) => Number.isFinite(n))) return null;
-  if (!(ciLower < estimate && estimate < ciUpper)) return null;
-  if ((measure === "RR" || measure === "OR" || measure === "HR") && !(estimate > 0 && ciLower > 0 && ciUpper > 0)) return null;
-  return { format: "estimate", estimate, ciLower, ciUpper };
+/* Long names match any case; abbreviations only in capitals, so the English
+ * word "or" is never read as an odds ratio. */
+const MEASURE_ABBR = { RR: ["RR", "RRR"], OR: ["OR", "aOR"], HR: ["HR", "aHR"], MD: ["MD", "WMD"], SMD: ["SMD"], RD: ["RD", "ARD"] };
+const MEASURE_NAMES = {
+  RR: ["risk ratio", "relative risk", "rate ratio"],
+  OR: ["odds ratio"],
+  HR: ["hazard ratio"],
+  MD: ["mean difference", "difference in means"],
+  SMD: ["standardised mean difference", "standardized mean difference"],
+  RD: ["risk difference", "absolute risk difference"],
+};
+const NUM = "([-+]?\\d+(?:\\.\\d+)?)\\s*%?";
+/* label, up to 14 words or marks of filler (words may hold digits, as HbA1c) ("in HbA1c was", ", 0.74; 95% confidence interval [CI],"), estimate,
+ * then the 95% CI in any common journal style, then the two limits. */
+const TAIL = "(?:[A-Za-z][A-Za-z0-9]*|[^\\dA-Za-z+\\-]){0,14}?" + NUM +
+  "\\s*[,;:(\\[]?\\s*(?:95\\s*%\\s*)?(?:confidence\\s+interval|CI)?\\s*(?:\\[CI\\]|\\(CI\\))?\\s*[,:;]?\\s*" +
+  NUM + "\\s*(?:to|-|,|;)\\s*" + NUM;
+function estimateRegexes(measure) {
+  const out = [];
+  const names = MEASURE_NAMES[measure] || [];
+  const abbr = MEASURE_ABBR[measure] || [];
+  if (names.length) out.push(new RegExp("\\b(?:" + names.join("|") + ")\\b(?:\\s*[\\[(][A-Za-z]{2,4}[\\])])?" + TAIL, "i"));
+  if (abbr.length) out.push(new RegExp("\\b(?:" + abbr.join("|") + ")\\b" + TAIL));
+  return out;
 }
-function parseText(text, measure, words, location) {
+function normaliseDashes(sentence) {
+  /* unicode minus is a sign; en and em dashes and the non-breaking hyphen are range separators */
+  return String(sentence || "").replace(/\u2212/g, "-").replace(/\s*[\u2013\u2014\u2011]\s*/g, " to ");
+}
+function parseEstimate(sentence, measure) {
+  const text = normaliseDashes(sentence);
+  for (const re of estimateRegexes(measure)) {
+    const m = text.match(re);
+    if (!m) continue;
+    const estimate = Number(m[1]), ciLower = Number(m[2]), ciUpper = Number(m[3]);
+    if (![estimate, ciLower, ciUpper].every((n) => Number.isFinite(n))) continue;
+    if (!(ciLower < estimate && estimate < ciUpper)) continue;
+    if ((measure === "RR" || measure === "OR" || measure === "HR") && !(estimate > 0 && ciLower > 0 && ciUpper > 0)) continue;
+    return { format: "estimate", estimate, ciLower, ciUpper };
+  }
+  return null;
+}
+export function parseText(text, measure, words, location) {
   for (const sentence of sentencesOf(text)) {
     if (!sentenceMatches(sentence, words)) continue;
     let row = null;
@@ -333,6 +370,52 @@ function parseText(text, measure, words, location) {
     return Object.assign({ quote, location: location || "abstract", confidence: 1, measure }, row);
   }
   return null;
+}
+
+/* p next to an estimate, kept as the comparison the abstract printed ("<0.001"). */
+function pValue(sentence) {
+  const m = String(sentence || "").match(/\bp\s*([<=>])\s*(\d*\.\d+|\d+)/i);
+  return m ? m[1] + m[2] : "";
+}
+
+/* Every counts row and estimate-with-CI that parseCounts / parseEstimate can
+ * read, in sentence order, at most 5. The paper card calls this. Auto-add
+ * still uses parseText, which returns one row for one measure. */
+export function parseFindings(text) {
+  const out = [];
+  const seen = new Set();
+  for (const sentence of sentencesOf(text)) {
+    const quote = sentence.slice(0, 2000);
+    const counts = parseCounts(sentence);
+    if (counts && numbersInQuote(counts, quote)) {
+      const key = "c:" + counts.events1 + ":" + counts.total1 + ":" + counts.events2 + ":" + counts.total2;
+      if (!seen.has(key)) {
+        seen.add(key);
+        out.push({
+          format: "counts", events1: counts.events1, total1: counts.total1,
+          events2: counts.events2, total2: counts.total2, quote,
+        });
+        if (out.length >= 5) return out;
+      }
+    }
+    for (let i = 0; i < FINDING_MEASURES.length; i++) {
+      const measure = FINDING_MEASURES[i];
+      const est = parseEstimate(sentence, measure);
+      if (!est || !numbersInQuote(est, quote)) continue;
+      const key = measure + ":" + est.estimate + ":" + est.ciLower + ":" + est.ciUpper;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const row = {
+        measure, format: "estimate", estimate: est.estimate,
+        ciLower: est.ciLower, ciUpper: est.ciUpper, quote,
+      };
+      const p = pValue(sentence);
+      if (p) row.p = p;
+      out.push(row);
+      if (out.length >= 5) return out;
+    }
+  }
+  return out;
 }
 
 function emptyItem(status, message) {

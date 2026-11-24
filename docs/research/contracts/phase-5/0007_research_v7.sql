@@ -11,6 +11,9 @@
 --    risk of bias row, checklist answer or manuscript section.
 -- 3. CREATE IF NOT EXISTS, so applying 0007 over the schema mirror is a
 --    no-op. Run once on a live database that already has 0001 through 0006.
+-- 4. research_paper_cards is a shared study-card cache. The key is
+--    "pmid:<digits>" or "doi:<lowercased doi>". card_json is the card.
+--    It has no project_id. A hit serves every user and charges nothing.
 
 PRAGMA foreign_keys = ON;
 
@@ -39,3 +42,9 @@ CREATE TABLE IF NOT EXISTS research_ai_drafts (
 );
 CREATE INDEX IF NOT EXISTS idx_research_ai_drafts_project
   ON research_ai_drafts(project_id, created_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_paper_cards (
+  cache_key TEXT PRIMARY KEY,
+  card_json TEXT NOT NULL,
+  created_ts INTEGER NOT NULL
+);

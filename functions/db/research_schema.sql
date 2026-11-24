@@ -1013,3 +1013,13 @@ CREATE TABLE IF NOT EXISTS research_ai_drafts (
 );
 CREATE INDEX IF NOT EXISTS idx_research_ai_drafts_project
   ON research_ai_drafts(project_id, created_ts DESC);
+
+-- Shared study-card cache (docs/research/contracts/phase-5/0007_research_v7.sql).
+-- Key is "pmid:<digits>" or "doi:<lowercased doi>". Not scoped to a project.
+-- Identical to the 0007 CREATE statement.
+
+CREATE TABLE IF NOT EXISTS research_paper_cards (
+  cache_key TEXT PRIMARY KEY,
+  card_json TEXT NOT NULL,
+  created_ts INTEGER NOT NULL
+);

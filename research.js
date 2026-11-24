@@ -124,6 +124,15 @@
     if (!code && !status) {
       return { message: e.message || "Something went wrong on our side.", action: "retry", actionLabel: "Try again" };
     }
+    if (code === "link_unrecognised") {
+      return { message: e.message || "We could not recognise this link. Check the link and try again.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "paper_not_found") {
+      return { message: "We could not find this study. Check the link.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "not_needed") {
+      return { message: e.message || "An explanation is not needed for this study.", action: "retry", actionLabel: "Close" };
+    }
     if (code === "unauthorized" || status === 401) {
       return { message: "Please sign in to use ResearchMD.", action: "signin", actionLabel: "Sign in" };
     }
@@ -137,7 +146,7 @@
         action: "back", actionLabel: "Back to projects"
       };
     }
-    if (code === "insufficient_credits") {
+    if (code === "insufficient_credits" || status === 402) {
       return { message: "You need more MaiK tokens for this step.", action: "credits", actionLabel: "Add tokens" };
     }
     if (code === "token_mismatch" || code === "token_missing") {
@@ -170,7 +179,7 @@
     } else {
       h += '<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-action="retry">Try again</button>';
     }
-    if (e.code || e.status) {
+    if ((e.code || e.status) && e.code !== "link_unrecognised") {
       h += '<details class="rmd-banner-details"><summary>Details for support</summary>';
       h += '<span class="rmd-banner-code">Code: ' + esc(e.code || "unknown") + (e.status ? " (HTTP " + e.status + ")" : "") + '</span>';
       h += '</details>';
