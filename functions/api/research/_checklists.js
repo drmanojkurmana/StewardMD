@@ -1,17 +1,17 @@
 /* ResearchMD Phase 5B checklist API (ES module, server side).
- * GET /v1/checklists and /v1/checklists/{id} serve docs/research/checklists
+ * GET /v1/checklists and /v1/checklists/{id} serve data/research-checklists (data/ ships to Pages; docs/ is removed by scripts/pages-build.sh)
  * (README excluded). Short names used by _templates.js map onto the file ids.
  * The project snapshot is assembled from stored rows only. Keys with no rows
  * are omitted. PRISMA counts come from prismaCounts (the same helper the
  * PRISMA route uses). Manual entries are the researcher's own text.
  */
-import consort2010 from "../../../docs/research/checklists/consort2010.json";
-import spirit from "../../../docs/research/checklists/spirit.json";
-import strobe from "../../../docs/research/checklists/strobe.json";
-import stard2015 from "../../../docs/research/checklists/stard2015.json";
-import tripod from "../../../docs/research/checklists/tripod.json";
-import prisma2020 from "../../../docs/research/checklists/prisma2020.json";
-import care from "../../../docs/research/checklists/care.json";
+import consort2010 from "../../../data/research-checklists/consort2010.json";
+import spirit from "../../../data/research-checklists/spirit.json";
+import strobe from "../../../data/research-checklists/strobe.json";
+import stard2015 from "../../../data/research-checklists/stard2015.json";
+import tripod from "../../../data/research-checklists/tripod.json";
+import prisma2020 from "../../../data/research-checklists/prisma2020.json";
+import care from "../../../data/research-checklists/care.json";
 import { ingestProjectDrafts } from "./_manuscript.js";
 
 const READ_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];

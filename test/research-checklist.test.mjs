@@ -3,7 +3,7 @@
  * node --test --experimental-test-module-mocks --experimental-sqlite test/research-checklist.test.mjs
  *
  * Fixtures live under test/fixtures/research/checklist/ so this file does not
- * read docs/research/checklists (another tool is writing those).
+ * read data/research-checklists (another tool is writing those).
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
