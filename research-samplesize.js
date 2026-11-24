@@ -357,12 +357,111 @@
     };
   }
 
-  function notBuiltYet() {
-    return { ok: false, warnings: ["Not built yet"] };
+  var MSG_CC = "The odds ratio must differ from 1 and exposure must be between 0% and 100%.";
+  var MSG_HR = "A hazard ratio of 1 means no difference; choose the smallest difference that matters.";
+
+  function ssFail(warnings) {
+    return { ok: false, warnings: warnings || [] };
   }
 
-  function caseControl() { return notBuiltYet(); }
-  function logRankEvents() { return notBuiltYet(); }
+  function ceilEps(x) {
+    var nearest;
+    if (!isFin(x)) return null;
+    nearest = Math.round(x);
+    if (Math.abs(x - nearest) <= 1e-8) return nearest;
+    return Math.ceil(x - 1e-10);
+  }
+
+  function caseControl(opts) {
+    try {
+      var p0, or, ratio, alpha, power, dropout, p1, q0, q1, pbar, qbar, zA, zB, nPrime, diff, n, cases, controls, uncorrected;
+      if (!opts || typeof opts !== "object") return ssFail([]);
+      p0 = opts.p0;
+      or = opts.or;
+      ratio = opts.ratio == null ? 1 : opts.ratio;
+      alpha = opts.alpha == null ? 0.05 : opts.alpha;
+      power = opts.power == null ? 0.8 : opts.power;
+      dropout = opts.dropout == null ? 0 : opts.dropout;
+      if (!isFin(ratio) || !(ratio > 0)) return ssFail([]);
+      if (!isFin(alpha) || !(alpha > 0) || !(alpha < 1)) return ssFail([]);
+      if (!isFin(power) || !(power > 0) || !(power < 1)) return ssFail([]);
+      if (!isFin(dropout) || dropout < 0 || dropout >= 1) return ssFail([]);
+      if (!isFin(p0) || !(p0 > 0) || !(p0 < 1) || !isFin(or) || !(or > 0) || or === 1) return ssFail([MSG_CC]);
+      p1 = p0 * or / (1 + p0 * (or - 1));
+      if (!(p1 > 0) || !(p1 < 1)) return ssFail([MSG_CC]);
+      q0 = 1 - p0;
+      q1 = 1 - p1;
+      pbar = (p1 + ratio * p0) / (ratio + 1);
+      qbar = 1 - pbar;
+      zA = probit(1 - alpha / 2);
+      zB = probit(power);
+      if (!isFin(zA) || !isFin(zB)) return ssFail([]);
+      diff = Math.abs(p1 - p0);
+      if (!(diff > 0)) return ssFail([MSG_CC]);
+      nPrime = Math.pow(zA * Math.sqrt((ratio + 1) * pbar * qbar) + zB * Math.sqrt(ratio * p1 * q1 + p0 * q0), 2) / (ratio * diff * diff);
+      n = nPrime / 4 * Math.pow(1 + Math.sqrt(1 + 2 * (ratio + 1) / (nPrime * ratio * diff)), 2);
+      uncorrected = ceilEps(nPrime);
+      cases = ceilEps(n / (1 - dropout));
+      controls = ceilEps(ratio * cases);
+      if (uncorrected == null || cases == null || controls == null) return ssFail([]);
+      return {
+        ok: true,
+        warnings: [],
+        p1: p1,
+        method: "Fleiss with continuity correction",
+        casesUncorrected: uncorrected,
+        cases: cases,
+        controls: controls,
+        total: cases + controls
+      };
+    } catch (errCc) {
+      return ssFail([]);
+    }
+  }
+
+  function logRankEvents(opts) {
+    try {
+      var hr, alpha, power, allocation, dropout, prob, zA, zB, events, total, ln;
+      if (!opts || typeof opts !== "object") return ssFail([]);
+      hr = opts.hr;
+      alpha = opts.alpha == null ? 0.05 : opts.alpha;
+      power = opts.power == null ? 0.8 : opts.power;
+      allocation = opts.allocation == null ? 0.5 : opts.allocation;
+      dropout = opts.dropout == null ? 0 : opts.dropout;
+      if (!isFin(alpha) || !(alpha > 0) || !(alpha < 1)) return ssFail([]);
+      if (!isFin(power) || !(power > 0) || !(power < 1)) return ssFail([]);
+      if (!isFin(allocation) || !(allocation > 0) || !(allocation < 1)) return ssFail([]);
+      if (!isFin(dropout) || dropout < 0 || dropout >= 1) return ssFail([]);
+      if (!isFin(hr) || !(hr > 0)) return ssFail([]);
+      if (hr === 1) return ssFail([MSG_HR]);
+      if (opts.probEvent != null) {
+        prob = opts.probEvent;
+        if (!isFin(prob) || !(prob > 0) || prob > 1) return ssFail([]);
+      } else {
+        prob = null;
+      }
+      zA = probit(1 - alpha / 2);
+      zB = probit(power);
+      ln = Math.log(hr);
+      if (!isFin(zA) || !isFin(zB) || !isFin(ln) || ln === 0) return ssFail([]);
+      events = ceilEps(Math.pow(zA + zB, 2) / (allocation * (1 - allocation) * ln * ln));
+      if (events == null) return ssFail([]);
+      total = null;
+      if (prob != null) {
+        total = ceilEps(events / prob / (1 - dropout));
+        if (total == null) return ssFail([]);
+      }
+      return {
+        ok: true,
+        warnings: [],
+        method: "Schoenfeld",
+        events: events,
+        total: total
+      };
+    } catch (errEv) {
+      return ssFail([]);
+    }
+  }
 
   var SAMPLESIZE = {
     name: NAME,
