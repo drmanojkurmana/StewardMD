@@ -138,14 +138,15 @@ try {
     try { localStorage.removeItem('smd_research'); } catch (e) {}
     history.replaceState(null, '', '/');
     const a = SMD_RESEARCH.on();
-    localStorage.setItem('smd_research', '1');
+    localStorage.setItem('smd_research', '0');
     const b = SMD_RESEARCH.on();
     localStorage.removeItem('smd_research');
-    history.replaceState(null, '', '/?research=1');
+    history.replaceState(null, '', '/?research=0');
     const c = SMD_RESEARCH.on();
-    return a === false && b === true && c === true;
+    history.replaceState(null, '', '/');
+    return a === true && b === false && c === false;
   })()`);
-  ok(flagOffCheck, 'flag smd_research: default OFF; on with smd_research=1 or ?research=1');
+  ok(flagOffCheck, 'flag smd_research: default ON; off with smd_research=0 or ?research=0');
 
   // 2. Shell Overlay Opening & Closing
   await ev(`SMD_RESEARCH.open();1`);

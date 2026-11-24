@@ -292,7 +292,7 @@ Also tracked: screening agreement, human correction rate, time saved, failure an
 | D-3 | Worker host (an external container service) | Decided 2026-11-23: Cloudflare Containers |
 | D-4 | Credit purchase route | Decided 2026-11-23: reuse the MaiK wallet, plus institution invoicing (admin-granted credits) |
 | D-5 | PaperOrchestra adapter vs prompts-only fallback, after the 3.7 spike | 3.7 |
-| D-6 | Offer BYOK at all | Phase 6 |
+| D-6 | Offer BYOK at all: **No** (owner 2026-11-24). Credits only via MaiK Wallet; 6.2 closed as not doing | Phase 6 |
 | D-7 | Human statistician for 4.5 sign-off | Phase 4 |
 
 ## 14. Definition of done (every package)

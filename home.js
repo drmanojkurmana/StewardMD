@@ -2177,9 +2177,9 @@
     if (window.SMD_DOSECALC && SMD_DOSECALC.on) return SMD_DOSECALC.on();
     try { var q = (location.search.match(/[?&]dosecalc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_dose_calc") !== "0"; } catch (e) { return true; }
   }
-  // ResearchMD (research.js): flag smd_research, DEFAULT OFF; "1" turns it on. Read directly: home.js loads first.
+  // ResearchMD (research.js): flag smd_research, DEFAULT ON (owner 2026-11-24); "0" turns it off. Read directly: home.js loads first.
   function researchOn() {
-    try { var q = (location.search.match(/[?&]research=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_research") === "1"; } catch (e) { return false; }
+    try { var q = (location.search.match(/[?&]research=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_research") !== "0"; } catch (e) { return true; }
   }
   // Neonatal layer (neo-flags.js), master flag smd_neo DEFAULT ON under a Beta label (owner 2026-10-01);
   // "0" turns it off. Read directly: home.js loads first.
@@ -2289,7 +2289,7 @@
     // Read directly: home.js loads before dose-calc.js.
     { act: "dosecalc", ic: "medication", tt: "Dose calculator", sub: "Dose for one patient", defOn: false,
       eligible: function () { return doseCalcOn(); } },
-    // ResearchMD meta-analysis workspace (research.js). Flag smd_research, DEFAULT OFF.
+    // ResearchMD meta-analysis workspace (research.js). Flag smd_research, DEFAULT ON.
     { act: "research", ic: "science", tt: "ResearchMD", sub: "Meta-analysis with sources", defOn: true, beta: true,
       eligible: function () { return researchOn(); } },
     // Neonatal hub: dosing, preparation, infusions, fluids, growth, bilirubin, scores, reference values,

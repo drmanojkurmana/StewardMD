@@ -6,7 +6,7 @@ tags: [module, research]
 Meta-analysis and systematic-review workspace inside the app. A doctor enters study data, cites the source page for every number, marks it verified, runs a fixed-effect or DerSimonian-Laird pool and sees a forest plot; Phase 2 adds the full review workflow (protocol lock, searches, import, dedup, blinded dual screening, conflicts, PRISMA 2020). Plan (v2.1, phases 0 to 7, owner decisions D-1 to D-7): `docs/research/RESEARCHMD_PLAN.md`; long-term vision and integrity rules: `docs/research/RESEARCHMD_MASTER_PLAN.md`.
 
 ## Flag + default
-- `smd_research`: **DEFAULT OFF**. On per device with `localStorage.smd_research = "1"` or `?research=1`.
+- `smd_research`: **DEFAULT ON** (owner 2026-11-24). Off per device with `localStorage.smd_research = "0"` or `?research=0`.
 - While OFF: no Home tile, no All tools or search entry. `research.js` still loads.
 - **Apply migration 0002 before turning the flag on** (see Resources); the Phase 2 API routes fail without its tables and the PRISMA view.
 

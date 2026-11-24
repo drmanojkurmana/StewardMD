@@ -12589,3 +12589,8 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
 - **Gate**: test/research-phase2-e2e.test.mjs drives the exact screen sequence in-process (SQLite D1 mock, R2 stub,
   connector fetch mocked) and asserts GET /prisma equals counts derived independently from stored decision rows;
   an outsider gets 404 on every route in the sequence.
+
+## 2026-11-24 ResearchMD: no BYOK, flag default ON
+- D-6: no BYOK. Research AI is paid with platform credits through MaiK Wallet only; no user API keys stored. Package 6.2 closed.
+- `smd_research` flips to DEFAULT ON at merge of PR #2730; `"0"` / `?research=0` is the per-device kill switch.
+- CARE and SPIRIT checklists: owner will supply the Case Report and clinical trial protocol checklist PDFs to use in place of the CC BY-NC-ND text.

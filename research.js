@@ -155,7 +155,7 @@
     downloadText: downloadText
   };
 
-  /* Feature flag: DEFAULT OFF. On per device with ?research=1 or localStorage.smd_research = "1" */
+  /* Feature flag: DEFAULT ON (owner 2026-11-24). Off per device with ?research=0 or localStorage.smd_research = "0" */
   function on() {
     try {
       if (typeof location !== "undefined" && location.search) {
@@ -165,10 +165,10 @@
     } catch (e) {}
     try {
       if (typeof localStorage !== "undefined") {
-        return localStorage.getItem(FLAG) === "1";
+        return localStorage.getItem(FLAG) !== "0";
       }
     } catch (e) {}
-    return false;
+    return true;
   }
 
   function injectCSS() {
