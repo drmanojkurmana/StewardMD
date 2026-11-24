@@ -1,28 +1,25 @@
 {
   "id": "care",
-  "name": "CARE (Case Report Guidelines)",
-  "version": "2013",
-  "source": "Gagnier JJ, Kienle G, Altman DG, Moher D, Sox H, Riley D; CARE Group. The CARE Guidelines: Consensus-based Clinical Case Reporting Guideline Development. Glob Adv Health Med. 2013;2(5):38-43. https://www.care-statement.org/checklist | https://pmc.ncbi.nlm.nih.gov/articles/PMC3833570/",
-  "licence": "CC BY-NC-ND 3.0 (non-commercial only; no derivatives)",
+  "name": "Case Report Checklist",
+  "version": "2026-11",
+  "source": "Owner-supplied checklist (StewardMD, 2026-11-24), provided in place of the CC BY-NC-ND official text.",
+  "licence": "Owner-supplied text for StewardMD ResearchMD use",
+  "instructions": "Tick each item after confirming that the corresponding information is adequately addressed in the manuscript.",
+  "finalCheck": "Check that the manuscript is internally consistent, patient details are de-identified, all reported investigations and interventions are accurately described, and the target journal's author instructions are followed.",
   "sections": [
     {
-      "title": "Title",
+      "title": "Title and keywords",
       "items": [
         {
-          "number": "1",
+          "number": "1a",
           "topic": "Title",
-          "text": "Include the primary diagnosis or intervention and the phrase 'case report' in the title.",
+          "text": "State the principal diagnosis, clinical condition or intervention being reported, and include the words \"Case Report\" in the title.",
           "projectField": "manuscript"
-        }
-      ]
-    },
-    {
-      "title": "Key Words",
-      "items": [
+        },
         {
-          "number": "2",
-          "topic": "Key Words",
-          "text": "Provide 2 to 5 keywords covering key diagnoses or interventions, including 'case report'.",
+          "number": "1b",
+          "topic": "Keywords",
+          "text": "Provide 2-5 terms that identify the main diagnosis or intervention and include \"Case Report\" as one of the keywords.",
           "projectField": "manuscript"
         }
       ]
@@ -31,27 +28,27 @@
       "title": "Abstract",
       "items": [
         {
-          "number": "3a",
-          "topic": "Abstract",
-          "text": "Summarize what is unique about the case and what it adds to medical literature.",
+          "number": "2a",
+          "topic": "Background and rationale",
+          "text": "Briefly explain what is distinctive about the case and what useful information it contributes to the medical literature. Do not cite references in the abstract.",
           "projectField": "manuscript"
         },
         {
-          "number": "3b",
-          "topic": "Abstract",
-          "text": "State the patient's primary concerns and key clinical findings.",
+          "number": "2b",
+          "topic": "Clinical presentation",
+          "text": "Summarise the patient's principal symptoms and the most important clinical findings.",
           "projectField": "manuscript"
         },
         {
-          "number": "3c",
-          "topic": "Abstract",
-          "text": "Summarize the main diagnoses, therapeutic interventions, and clinical outcomes.",
+          "number": "2c",
+          "topic": "Diagnosis, treatment and outcome",
+          "text": "State the main diagnosis, key therapeutic measures and the resulting clinical outcome.",
           "projectField": "manuscript"
         },
         {
-          "number": "3d",
-          "topic": "Abstract",
-          "text": "State the main takeaway lessons from the case report.",
+          "number": "2d",
+          "topic": "Conclusion",
+          "text": "State the central lesson or practical message that readers should take away from the case.",
           "projectField": "manuscript"
         }
       ]
@@ -60,142 +57,154 @@
       "title": "Introduction",
       "items": [
         {
-          "number": "4",
-          "topic": "Introduction",
-          "text": "Briefly explain why the case is unique, supported by relevant medical literature references.",
+          "number": "3a",
+          "topic": "Clinical context",
+          "text": "Explain the clinical context and why the condition or presentation is relevant.",
+          "projectField": "manuscript"
+        },
+        {
+          "number": "3b",
+          "topic": "Why noteworthy",
+          "text": "Summarise in approximately one or two paragraphs why this case is noteworthy or unusual.",
+          "projectField": "manuscript"
+        },
+        {
+          "number": "3c",
+          "topic": "Distinctive contribution",
+          "text": "Clarify what makes the case distinctive and how it may add to existing knowledge; relevant references may be included.",
           "projectField": "manuscript"
         }
       ]
     },
     {
-      "title": "Patient Information",
+      "title": "Patient information",
       "items": [
         {
-          "number": "5a",
-          "topic": "Patient Information",
-          "text": "Provide de-identified patient demographic and case-specific details.",
+          "number": "4a",
+          "topic": "Patient details",
+          "text": "Present relevant patient-specific information while removing identifying details.",
           "projectField": "manual"
         },
         {
-          "number": "5b",
-          "topic": "Patient Information",
-          "text": "Describe the patient's chief complaints and presenting symptoms.",
-          "projectField": "manual"
+          "number": "4b",
+          "topic": "Presenting concerns",
+          "text": "Describe the patient's main complaints, symptoms and reason for seeking care.",
+          "projectField": "manuscript"
         },
         {
-          "number": "5c",
-          "topic": "Patient Information",
-          "text": "Summarize relevant medical, family, psychosocial, and genetic history.",
-          "projectField": "manual"
+          "number": "4c",
+          "topic": "Relevant background",
+          "text": "Include pertinent medical, family and psychosocial history, together with relevant genetic information.",
+          "projectField": "manuscript"
         },
         {
-          "number": "5d",
-          "topic": "Patient Information",
-          "text": "Describe relevant past interventions and their clinical outcomes.",
-          "projectField": "manual"
+          "number": "4d",
+          "topic": "Previous interventions",
+          "text": "Describe relevant treatments or procedures received before the current episode and their outcomes.",
+          "projectField": "manuscript"
         }
       ]
     },
     {
-      "title": "Clinical Findings",
+      "title": "Clinical findings",
+      "items": [
+        {
+          "number": "5",
+          "topic": "Clinical findings",
+          "text": "Describe the important findings from the physical examination and any other clinically significant observations.",
+          "projectField": "manuscript"
+        }
+      ]
+    },
+    {
+      "title": "Clinical timeline",
       "items": [
         {
           "number": "6",
-          "topic": "Clinical Findings",
-          "text": "Report pertinent physical examination and important clinical findings.",
-          "projectField": "manual"
+          "topic": "Clinical timeline",
+          "text": "Arrange the relevant past and current events from the episode of care in chronological order, showing the progression from presentation through assessment, treatment and outcome.",
+          "projectField": "manuscript"
         }
       ]
     },
     {
-      "title": "Timeline",
+      "title": "Diagnostic assessment",
       "items": [
         {
-          "number": "7",
-          "topic": "Timeline",
-          "text": "Organize key historical and current care events chronologically in a table or figure.",
-          "projectField": "manual"
+          "number": "7a",
+          "topic": "Diagnostic investigations",
+          "text": "Report the relevant assessments and tests, including physical examination, laboratory investigations, imaging and validated surveys or other assessments, as applicable.",
+          "projectField": "manuscript"
+        },
+        {
+          "number": "7b",
+          "topic": "Diagnostic difficulties",
+          "text": "Describe obstacles affecting the diagnostic process, such as limited access to investigations, financial constraints or cultural factors.",
+          "projectField": "manuscript"
+        },
+        {
+          "number": "7c",
+          "topic": "Diagnostic conclusion",
+          "text": "State the final diagnosis and identify other diagnoses that were considered.",
+          "projectField": "manuscript"
+        },
+        {
+          "number": "7d",
+          "topic": "Prognosis and classification",
+          "text": "Include the relevant prognostic assessment, disease stage or severity classification where applicable (for example, cancer staging).",
+          "projectField": "manuscript"
         }
       ]
     },
     {
-      "title": "Diagnostic Assessment",
+      "title": "Therapeutic intervention",
       "items": [
         {
           "number": "8a",
-          "topic": "Diagnostic Assessment",
-          "text": "Describe diagnostic methods used, including examination, lab tests, imaging, or surveys.",
-          "projectField": "manual"
+          "topic": "Intervention type",
+          "text": "Describe the treatment provided, including drug therapy, surgery, preventive measures, procedures or self-care interventions, as relevant.",
+          "projectField": "manuscript"
         },
         {
           "number": "8b",
-          "topic": "Diagnostic Assessment",
-          "text": "Describe diagnostic challenges such as access, cost, language, or cultural factors.",
-          "projectField": "manual"
+          "topic": "How treatment was delivered",
+          "text": "Specify the details needed to understand the intervention, including medication name, dose or strength, route and duration, where applicable.",
+          "projectField": "manuscript"
         },
         {
           "number": "8c",
-          "topic": "Diagnostic Assessment",
-          "text": "State the final diagnosis and other differential diagnoses considered.",
-          "projectField": "manual"
-        },
-        {
-          "number": "8d",
-          "topic": "Diagnostic Assessment",
-          "text": "Report prognostic characteristics, such as staging, when applicable.",
-          "projectField": "manual"
+          "topic": "Changes to treatment",
+          "text": "Record any alteration, addition or discontinuation of an intervention and explain the reason for the change.",
+          "projectField": "manuscript"
         }
       ]
     },
     {
-      "title": "Therapeutic Intervention",
+      "title": "Follow-up and outcomes",
       "items": [
         {
           "number": "9a",
-          "topic": "Therapeutic Intervention",
-          "text": "Specify types of therapeutic interventions used, such as pharmacologic, surgical, or preventive.",
-          "projectField": "manual"
+          "topic": "Clinical outcomes",
+          "text": "Report outcomes assessed by the treating clinician and by the patient, if available.",
+          "projectField": "manuscript"
         },
         {
           "number": "9b",
-          "topic": "Therapeutic Intervention",
-          "text": "Detail intervention administration, including dosage, strength, and duration.",
-          "projectField": "manual"
+          "topic": "Follow-up investigations",
+          "text": "Include important results from repeat diagnostic tests and other follow-up assessments.",
+          "projectField": "manuscript"
         },
         {
           "number": "9c",
-          "topic": "Therapeutic Intervention",
-          "text": "Describe any changes to interventions and the clinical rationale.",
-          "projectField": "manual"
-        }
-      ]
-    },
-    {
-      "title": "Follow-up and Outcomes",
-      "items": [
-        {
-          "number": "10a",
-          "topic": "Follow-up and Outcomes",
-          "text": "Report clinician-assessed and patient-assessed outcomes when available.",
-          "projectField": "manual"
+          "topic": "Adherence and tolerability",
+          "text": "Describe whether the patient followed the intervention and how adherence and tolerability were evaluated.",
+          "projectField": "manuscript"
         },
         {
-          "number": "10b",
-          "topic": "Follow-up and Outcomes",
-          "text": "Summarize important follow-up diagnostic and test results.",
-          "projectField": "manual"
-        },
-        {
-          "number": "10c",
-          "topic": "Follow-up and Outcomes",
-          "text": "Report intervention adherence and tolerability and how they were assessed.",
-          "projectField": "manual"
-        },
-        {
-          "number": "10d",
-          "topic": "Follow-up and Outcomes",
-          "text": "Report any adverse or unanticipated events.",
-          "projectField": "manual"
+          "number": "9d",
+          "topic": "Adverse or unexpected events",
+          "text": "Document any complications, adverse effects or unanticipated events during the course of care.",
+          "projectField": "manuscript"
         }
       ]
     },
@@ -203,49 +212,55 @@
       "title": "Discussion",
       "items": [
         {
-          "number": "11a",
-          "topic": "Discussion",
-          "text": "Discuss strengths and limitations in the clinical management of this case.",
+          "number": "10a",
+          "topic": "Strengths and limitations",
+          "text": "Provide a balanced discussion of the scientific strengths of the report and its limitations.",
           "projectField": "manuscript"
         },
         {
-          "number": "11b",
-          "topic": "Discussion",
-          "text": "Discuss the case in the context of relevant medical literature.",
+          "number": "10b",
+          "topic": "Relevant literature",
+          "text": "Discuss previously published medical evidence relevant to the case and support the discussion with references.",
           "projectField": "manuscript"
         },
         {
-          "number": "11c",
-          "topic": "Discussion",
-          "text": "Explain the rationale supporting the conclusions, including causality considerations.",
+          "number": "10c",
+          "topic": "Rationale for conclusions",
+          "text": "Explain the scientific reasoning behind the conclusions, including assessment of possible causes or mechanisms where relevant.",
           "projectField": "manuscript"
         },
         {
-          "number": "11d",
-          "topic": "Discussion",
-          "text": "State the primary takeaway lessons in a single-paragraph conclusion without references.",
+          "number": "10d",
+          "topic": "Take-home message",
+          "text": "End with a concise paragraph stating the main lessons from the case; do not include references in this concluding paragraph.",
           "projectField": "manuscript"
         }
       ]
     },
     {
-      "title": "Patient Perspective",
+      "title": "Patient perspective",
       "items": [
         {
-          "number": "12",
-          "topic": "Patient Perspective",
-          "text": "Include the patient's own perspective on the treatments received, when appropriate.",
+          "number": "11",
+          "topic": "Patient perspective",
+          "text": "Include the patient's own account, in approximately one or two paragraphs, describing their perspective on the treatment or treatments received.",
           "projectField": "manual"
         }
       ]
     },
     {
-      "title": "Informed Consent",
+      "title": "Informed consent",
       "items": [
         {
-          "number": "13",
-          "topic": "Informed Consent",
-          "text": "Confirm that the patient provided informed consent for publication, available on request.",
+          "number": "12a",
+          "topic": "Consent obtained",
+          "text": "Confirm whether the patient provided informed consent for publication.",
+          "projectField": "manual"
+        },
+        {
+          "number": "12b",
+          "topic": "Consent documentation",
+          "text": "Ensure that consent documentation can be provided if requested.",
           "projectField": "manual"
         }
       ]
