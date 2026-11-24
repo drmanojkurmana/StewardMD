@@ -27,7 +27,9 @@
     { id: "two_means", label: "compare two groups on a measurement" },
     { id: "single_proportion", label: "estimate how common something is" },
     { id: "single_mean", label: "estimate an average" },
-    { id: "correlation", label: "check if two measurements are related" }
+    { id: "correlation", label: "check if two measurements are related" },
+    { id: "case_control", label: "Case-control (from an expected odds ratio)" },
+    { id: "time_to_event", label: "Time to event (from a hazard ratio)" }
   ];
 
   var CONSENT_LANGS = [
@@ -200,7 +202,12 @@
       power: 0.80,
       ratio: 1,
       dropout: 0.10,
-      population: ""
+      population: "",
+      p0: 0.40,
+      or: 2,
+      hr: 0.70,
+      allocation: 0.50,
+      probEvent: 0.70
     },
     ssResult: null,
 
@@ -279,6 +286,13 @@
     }
   };
 
+  function controlsParagraph() {
+    var k = Number(st.ssInputs.ratio) || 1;
+    return "Controls were selected from the same source population as the cases (the population that gave rise to the cases). " +
+      "We matched on age and sex to control confounding (mixing of effects), avoiding over-matching on factors linked to the exposure. " +
+      "We used " + k + " control" + (k === 1 ? "" : "s") + " per case; beyond about 4 controls per case the gain in power (chance of detecting a real difference) flattens.";
+  }
+
   function calculateSampleSize() {
     var ss = G.SMD_RESEARCH_SAMPLESIZE;
     if (!ss) return null;
@@ -323,6 +337,24 @@
           r: Number(inp.r),
           alpha: Number(inp.alpha) || 0.05,
           power: Number(inp.power) || 0.80,
+          dropout: Number(inp.dropout) || 0
+        });
+      } else if (st.aim === "case_control") {
+        return ss.caseControl({
+          p0: Number(inp.p0),
+          or: Number(inp.or),
+          ratio: Number(inp.ratio) || 1,
+          alpha: Number(inp.alpha) || 0.05,
+          power: Number(inp.power) || 0.80,
+          dropout: Number(inp.dropout) || 0
+        });
+      } else if (st.aim === "time_to_event") {
+        return ss.logRankEvents({
+          hr: Number(inp.hr),
+          alpha: Number(inp.alpha) || 0.05,
+          power: Number(inp.power) || 0.80,
+          allocation: Number(inp.allocation) || 0.5,
+          probEvent: Number(inp.probEvent),
           dropout: Number(inp.dropout) || 0
         });
       }
@@ -388,7 +420,22 @@
     return "";
   }
 
+  function injectCss() {
+    var D = G.document;
+    if (!D || D.getElementById("rmdPlanCss")) return;
+    var s = D.createElement("style");
+    s.id = "rmdPlanCss";
+    /* Shared base only forces 44px targets at iPad width and skips date inputs; scope phone fixes here. */
+    s.textContent = [
+      "#researchMD .rmd-plan-screen .rmd-btn, #researchMD .rmd-plan-screen label.rmd-btn { min-height: 44px; }",
+      "#researchMD .rmd-plan-screen input[type=text], #researchMD .rmd-plan-screen input[type=number], #researchMD .rmd-plan-screen input[type=date], #researchMD .rmd-plan-screen select, #researchMD .rmd-plan-screen textarea { min-height: 44px; }",
+      "#researchMD .rmd-plan-screen input[type=date] { width: 100%; border: 1px solid var(--rmd-line); border-radius: 8px; padding: 9px 12px; font: 400 14.5px var(--rmd-f); color: var(--rmd-ink); background: var(--rmd-panel); }"
+    ].join("\n");
+    D.head.appendChild(s);
+  }
+
   function render(container) {
+    injectCss();
     var store = SMD.store;
     var proj = store ? store.getActiveProject() : null;
     if (!proj) {
@@ -489,6 +536,32 @@
       h.push('        <label for="rmd_ss_power">Power (chance of detecting a real difference)</label>');
       h.push('        <input type="number" id="rmd_ss_power" step="0.05" min="0.5" max="0.999" value="' + esc(inp.power) + '">');
       h.push('      </div>');
+    } else if (st.aim === "case_control") {
+      h.push('      <div class="rmd-field">');
+      h.push('        <label for="rmd_ss_p0">Exposure in controls (p0) (e.g. 0.40 for 40%)</label>');
+      h.push('        <input type="number" id="rmd_ss_p0" step="0.01" min="0.001" max="0.999" value="' + esc(inp.p0) + '">');
+      h.push('      </div>');
+      h.push('      <div class="rmd-field">');
+      h.push('        <label for="rmd_ss_or">Expected odds ratio (OR) (must differ from 1)</label>');
+      h.push('        <input type="number" id="rmd_ss_or" step="0.1" min="0.01" value="' + esc(inp.or) + '">');
+      h.push('      </div>');
+      h.push('      <div class="rmd-field">');
+      h.push('        <label for="rmd_ss_ratio">Controls per case (gains flatten beyond 4)</label>');
+      h.push('        <input type="number" id="rmd_ss_ratio" step="1" min="1" max="10" value="' + esc(inp.ratio) + '">');
+      h.push('      </div>');
+    } else if (st.aim === "time_to_event") {
+      h.push('      <div class="rmd-field">');
+      h.push('        <label for="rmd_ss_hr">Expected hazard ratio (HR) (must differ from 1)</label>');
+      h.push('        <input type="number" id="rmd_ss_hr" step="0.05" min="0.01" value="' + esc(inp.hr) + '">');
+      h.push('      </div>');
+      h.push('      <div class="rmd-field">');
+      h.push('        <label for="rmd_ss_probev">Chance of the event happening (e.g. 0.70 for 70%)</label>');
+      h.push('        <input type="number" id="rmd_ss_probev" step="0.05" min="0.01" max="0.999" value="' + esc(inp.probEvent) + '">');
+      h.push('      </div>');
+      h.push('      <div class="rmd-field">');
+      h.push('        <label for="rmd_ss_alloc">Share in group 1 (allocation) (e.g. 0.50 for equal groups)</label>');
+      h.push('        <input type="number" id="rmd_ss_alloc" step="0.05" min="0.05" max="0.95" value="' + esc(inp.allocation) + '">');
+      h.push('      </div>');
     }
     h.push('    </div>');
 
@@ -498,7 +571,7 @@
     h.push('        <label for="rmd_ss_alpha">Significance (alpha) (false positive risk)</label>');
     h.push('        <input type="number" id="rmd_ss_alpha" step="0.01" min="0.001" max="0.2" value="' + esc(inp.alpha) + '">');
     h.push('      </div>');
-    if (st.aim === "two_proportions" || st.aim === "two_means") {
+    if (st.aim === "two_proportions" || st.aim === "two_means" || st.aim === "case_control" || st.aim === "time_to_event") {
       h.push('      <div class="rmd-field">');
       h.push('        <label for="rmd_ss_power">Power (chance of detecting a real difference)</label>');
       h.push('        <input type="number" id="rmd_ss_power" step="0.05" min="0.5" max="0.999" value="' + esc(inp.power) + '">');
@@ -517,11 +590,19 @@
     h.push('    </div>');
 
     // Live result
-    if (st.ssResult) {
+    if (st.ssResult && st.ssResult.ok === false) {
+      h.push('    <div class="rmd-banner rmd-banner-warn" style="margin-top:8px;">');
+      h.push('      <p style="margin:0;">' + esc((st.ssResult.warnings || []).join(" ")) + '</p>');
+      h.push('    </div>');
+    } else if (st.ssResult) {
       var r = st.ssResult;
       h.push('    <div class="rmd-data-box" style="margin-top:8px;">');
       h.push('      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;">');
-      if (r.nPerGroup) {
+      if (r.cases != null) {
+        h.push('        <div><strong style="font-size:16px;">' + r.cases + ' cases</strong> <span class="rmd-mut">and ' + r.controls + ' controls (' + r.total + ' total)</span></div>');
+      } else if (r.events != null) {
+        h.push('        <div><strong style="font-size:16px;">' + r.events + ' events</strong> <span class="rmd-mut">(' + r.total + ' patients total)</span></div>');
+      } else if (r.nPerGroup) {
         h.push('        <div><strong style="font-size:16px;">' + r.nPerGroup + ' per group</strong> <span class="rmd-mut">(' + r.total + ' total)</span></div>');
         if (r.withDropout) {
           h.push('        <div><span class="rmd-mut">With ' + Math.round((Number(inp.dropout) || 0) * 100) + '% loss to follow-up:</span> <strong>' + r.withDropout.nPerGroup + ' per group</strong> <span class="rmd-mut">(' + r.withDropout.total + ' total)</span></div>');
@@ -533,6 +614,9 @@
         }
       }
       h.push('      </div>');
+      if (r.method) {
+        h.push('      <div style="font-size:12.5px;color:var(--rmd-mut);margin-top:4px;">Method: ' + esc(r.method) + '</div>');
+      }
       if (r.continuityCorrected) {
         h.push('      <div style="font-size:12.5px;color:var(--rmd-mut);margin-top:4px;">');
         h.push('        Continuity-corrected: ' + r.continuityCorrected.nPerGroup + ' per group (' + r.continuityCorrected.total + ' total; ' + (r.continuityCorrected.withDropout ? r.continuityCorrected.withDropout.total : '') + ' with dropout)');
@@ -548,6 +632,26 @@
       h.push('    </div>');
     }
     h.push('  </div>'); // End Card 1
+
+    // CARD 1b: Choosing controls (case-control guidance, 0 MaiK tokens)
+    h.push('  <div class="rmd-card" id="rmdCardControls">');
+    h.push('    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">');
+    h.push('      <h3 class="rmd-card-heading">Choosing controls (who to compare against)</h3>');
+    h.push('      <span class="rmd-badge rmd-badge-pill" style="font-weight:600;">0 MaiK tokens</span>');
+    h.push('    </div>');
+    h.push('    <ul class="rmd-list" style="margin:8px 0 0;">');
+    h.push('      <li>Source of controls: pick controls from the same source population (the population that gave rise to the cases), not from a different hospital or clinic.</li>');
+    h.push('      <li>Matching on age and sex removes their confounding (mixing of effects); do not over-match on factors tied to the exposure, or you hide the very link you are studying.</li>');
+    h.push('      <li>Controls per case: each extra control adds power (chance of detecting a real difference), but the gain flattens beyond about 4 controls per case.</li>');
+    h.push('    </ul>');
+    h.push('    <div class="rmd-quote-block" style="margin-top:10px;">');
+    h.push('      <div class="rmd-quote-tag">Methods paragraph</div>');
+    h.push('      <blockquote id="rmd_controls_paragraph">' + esc(controlsParagraph()) + '</blockquote>');
+    h.push('    </div>');
+    h.push('    <div style="display:flex;justify-content:flex-end;margin-top:8px;">');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="controls-copy">Copy paragraph</button>');
+    h.push('    </div>');
+    h.push('  </div>'); // End Card 1b
 
     // CARD 2: Ethics committee (IEC) application
     h.push('  <div class="rmd-card" id="rmdCardIec">');
@@ -870,6 +974,8 @@
     // Under CTRI card notice
     h.push('  <p class="rmd-field-hint" style="margin:2px 4px 16px;">Register on ctri.nic.in before enrolling the first patient (required for clinical trials in India).</p>');
 
+    h.push('  <p class="rmd-next-line">Next: Protocol (the full study plan).</p>');
+
     h.push('</div>'); // End screen
 
     container.innerHTML = h.join("\n");
@@ -906,7 +1012,13 @@
       { id: "rmd_ss_alpha", k: "alpha" },
       { id: "rmd_ss_power", k: "power" },
       { id: "rmd_ss_dropout", k: "dropout" },
-      { id: "rmd_ss_pop", k: "population" }
+      { id: "rmd_ss_pop", k: "population" },
+      { id: "rmd_ss_p0", k: "p0" },
+      { id: "rmd_ss_or", k: "or" },
+      { id: "rmd_ss_ratio", k: "ratio" },
+      { id: "rmd_ss_hr", k: "hr" },
+      { id: "rmd_ss_probev", k: "probEvent" },
+      { id: "rmd_ss_alloc", k: "allocation" }
     ];
     for (var i = 0; i < ssFields.length; i++) {
       (function (item) {
@@ -926,6 +1038,11 @@
       if (st.ssResult && st.ssResult.paragraph) {
         copyToClipboard(st.ssResult.paragraph, container, "Synopsis paragraph copied.");
       }
+    });
+
+    // Copy Choosing controls methods paragraph
+    on('[data-rmd="controls-copy"]', function () {
+      copyToClipboard(controlsParagraph(), container, "Methods paragraph copied.");
     });
 
     // IEC Form inputs
