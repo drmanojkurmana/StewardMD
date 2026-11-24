@@ -31,7 +31,7 @@ test("builder: every entry has src and caption, no duplicates", () => {
 
 test("builder: teaching animations are listed and every GIF file ships", () => {
   const anims = Object.values(data().bySystem).flat().filter((e) => e.f === "Animations");
-  assert.ok(anims.length >= 226, "animations in the bank, got " + anims.length);
+  assert.ok(anims.length >= 417, "animations in the bank, got " + anims.length);
   for (const e of anims) {
     assert.equal(e.k, "Animation");
     assert.ok(fs.existsSync(path.join(import.meta.dirname, "..", e.s)), "GIF file exists: " + e.s);
