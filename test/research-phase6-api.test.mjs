@@ -328,6 +328,7 @@ test("0005 applies on live 0001-0004, rolls back cleanly, mirror matches", { ski
   mirror.exec(SCHEMA);
   const live = new DatabaseSync(":memory:");
   for (const sql of m) live.exec(sql);
+  live.exec(readFileSync(new URL("../docs/research/contracts/phase-5/0006_research_v6.sql", import.meta.url), "utf8"));
   const tset = (d) => d.prepare("SELECT name FROM sqlite_master WHERE type='table'").all().map((r) => r.name).filter((n) => !PILOT.has(n)).sort();
   assert.deepEqual(tset(mirror), tset(live));
   for (const t of tset(mirror)) {

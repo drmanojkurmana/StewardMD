@@ -442,7 +442,9 @@ FROM research_projects p;
 CREATE TABLE IF NOT EXISTS research_job_runs (
   id TEXT PRIMARY KEY,
   project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
-  kind TEXT NOT NULL CHECK(kind IN ('pdf_extract')),
+  -- 0006 widens kind to pdf_extract|manuscript_draft (table rebuild; the
+  -- 0003 CHECK cannot be altered in place). Fresh databases get it here.
+  kind TEXT NOT NULL CHECK(kind IN ('pdf_extract','manuscript_draft')),
   status TEXT NOT NULL DEFAULT 'queued'
     CHECK(status IN ('queued','running','succeeded','failed','cancelled')),
   idempotency_key TEXT NOT NULL,
@@ -897,3 +899,84 @@ CREATE INDEX IF NOT EXISTS idx_research_stats_jobs_project
   ON research_stats_jobs(project_id, created_ts DESC);
 CREATE INDEX IF NOT EXISTS idx_research_stats_jobs_queue
   ON research_stats_jobs(status, created_ts);
+
+-- Phase 5 contract 0006 (docs/research/contracts/phase-5/0006_research_v6.sql):
+-- manuscript versions, sections, approvals, DOCX export jobs, checklist
+-- manual entries. The definitions below are IDENTICAL to the 0006 CREATE
+-- statements. The research_job_runs kind CHECK above already includes
+-- manuscript_draft; 0006 rebuilds that table on a live v5 database.
+-- NOTE: 0006 is NOT idempotent over this mirror (the job_runs rebuild
+-- drops and recreates the table). Fresh databases run 0001..0006 in order.
+
+CREATE TABLE IF NOT EXISTS research_manuscript_versions (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  version INTEGER NOT NULL CHECK(version >= 1),
+  title TEXT NOT NULL DEFAULT '',
+  authors_json TEXT NOT NULL DEFAULT '[]',
+  affiliations TEXT NOT NULL DEFAULT '',
+  status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft','review','approved','locked')),
+  references_json TEXT NOT NULL DEFAULT '[]',
+  tokens_json TEXT NOT NULL DEFAULT '{}',
+  job_id TEXT NOT NULL DEFAULT '',
+  version_hash TEXT,
+  locked_by TEXT NOT NULL DEFAULT '',
+  locked_at INTEGER,
+  lock_json TEXT NOT NULL DEFAULT '',
+  created_by TEXT NOT NULL DEFAULT '',
+  created_ts INTEGER NOT NULL,
+  UNIQUE(project_id, version)
+);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_research_manuscript_versions_job
+  ON research_manuscript_versions(project_id, job_id) WHERE job_id != '';
+CREATE INDEX IF NOT EXISTS idx_research_manuscript_versions_project
+  ON research_manuscript_versions(project_id, version DESC);
+
+CREATE TABLE IF NOT EXISTS research_manuscript_sections (
+  version_id TEXT NOT NULL REFERENCES research_manuscript_versions(id) ON DELETE CASCADE,
+  section_id TEXT NOT NULL,
+  heading TEXT NOT NULL DEFAULT '',
+  level INTEGER NOT NULL DEFAULT 1 CHECK(level >= 1),
+  text TEXT NOT NULL DEFAULT '',
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  updated_by TEXT NOT NULL DEFAULT '',
+  updated_ts INTEGER NOT NULL,
+  PRIMARY KEY (version_id, section_id)
+);
+
+CREATE TABLE IF NOT EXISTS research_manuscript_approvals (
+  id TEXT PRIMARY KEY,
+  version_id TEXT NOT NULL REFERENCES research_manuscript_versions(id) ON DELETE CASCADE,
+  status TEXT NOT NULL CHECK(status IN ('requested','approved')),
+  requested_by TEXT NOT NULL DEFAULT '',
+  requested_at INTEGER,
+  approved_by TEXT NOT NULL DEFAULT '',
+  approved_at INTEGER,
+  note TEXT NOT NULL DEFAULT '',
+  decision TEXT NOT NULL DEFAULT '',
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_manuscript_approvals_version
+  ON research_manuscript_approvals(version_id, created_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_manuscript_exports (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  version_id TEXT NOT NULL,
+  format TEXT NOT NULL DEFAULT 'docx' CHECK(format IN ('docx')),
+  status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending')),
+  created_by TEXT NOT NULL,
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_manuscript_exports_project
+  ON research_manuscript_exports(project_id, created_ts DESC);
+
+CREATE TABLE IF NOT EXISTS research_checklist_manual (
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  guideline_id TEXT NOT NULL,
+  item_num TEXT NOT NULL,
+  text TEXT NOT NULL DEFAULT '',
+  updated_by TEXT NOT NULL,
+  updated_ts INTEGER NOT NULL,
+  PRIMARY KEY (project_id, guideline_id, item_num)
+);

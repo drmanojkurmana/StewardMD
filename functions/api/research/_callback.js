@@ -16,6 +16,7 @@
  */
 import { jobOf } from "./_jobs.js";
 import { pdfActualMicroUsd, settleCredits, releaseCredits } from "./_credits.js";
+import { ingestManuscriptJob } from "./_manuscript.js";
 
 const MAX_CALLBACK_BYTES = 65536;
 const SKEW_SECONDS = 300;
@@ -156,6 +157,15 @@ export async function jobCallback(ctx, pathJobId) {
   }
   await audit(db, job.project_id, "worker", "job_settled", job.id,
     { status: terminal, usage: body.usage, errorCode });
+  /* A finished manuscript_draft result becomes a manuscript version. A bad
+   * draft must not fail the callback; GET /manuscript ingests again. */
+  if (terminal === "succeeded" && job.kind === "manuscript_draft") {
+    try {
+      await ingestManuscriptJob({ db, env, api, requestId }, Object.assign({}, job, {
+        status: "succeeded", result_r2_key: resultKey,
+      }));
+    } catch { /* retried on the next manuscript read */ }
+  }
   const fresh = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(job.id).first();
   return json({ job: jobOf(fresh), requestId }, 200, { "x-request-id": requestId });
 }

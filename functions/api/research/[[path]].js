@@ -74,6 +74,13 @@ import { listTemplates, getTemplate } from "./_templates.js";
 import { listJournals, getJournal, matchJournals } from "./_journals.js";
 import { createComment, listComments, createResponse, listResponses,
   listProjectResponses, updateResponse } from "./_responses.js";
+/* Phase 5A.3 / 5B (docs/research/contracts/phase-5/manuscript-api.md):
+ * manuscript versions (_manuscript.js) and reporting checklists
+ * (_checklists.js). Firebase auth is the block above; each project route
+ * uses projectGate and an outsider gets 404. */
+import { listVersions, getManuscript, putSection, requestApproval, approveManuscript,
+  lockManuscript, manuscriptGates, exportManuscript } from "./_manuscript.js";
+import { listChecklists, getChecklist, checklistSnapshot, getManual, putManual } from "./_checklists.js";
 
 const MAX_JSON = 1024 * 1024;
 const MAX_PDF = 25 * 1024 * 1024;
@@ -1747,11 +1754,10 @@ async function listDedupGroups(db, uid, projectId, url, requestId) {
 
 /* ---- PRISMA 2020 counts (2.6) -------------------------------------------------- */
 
-async function prismaRoute(db, uid, projectId, requestId) {
-  const gate = await projectGate(db, projectId, uid, ["owner", "editor", "analyst", "reviewer", "viewer"]);
-  if (gate.status) return gateErr(gate, "Project access denied", requestId);
+/* Shared with the checklist snapshot (_checklists.js). One SQL path. */
+async function prismaCounts(db, projectId) {
   const row = await db.prepare("SELECT * FROM research_prisma_counts WHERE project_id=?").bind(projectId).first();
-  if (!row) return err(404, "project_not_found", "Project not found", requestId);
+  if (!row) return null;
   /* excludedByReason: the only API-computed part. Latest full-text vote per
    * reviewer on exclude-outcome reports; a resolved exclusion counts its
    * resolution reason once. Same decision rows the view reads. */
@@ -1779,26 +1785,30 @@ async function prismaRoute(db, uid, projectId, requestId) {
   }
   const excludedByReason = [...counts.entries()].map(([reasonCode, count]) => ({ reasonCode, count }))
     .sort((a, b) => b.count - a.count || (a.reasonCode < b.reasonCode ? -1 : 1));
+  return {
+    projectId,
+    recordsIdentified: row.records_identified,
+    recordsFromDatabases: row.records_from_databases,
+    recordsFromOtherSources: row.records_from_other_sources,
+    recordsDuplicatesRemoved: row.records_duplicates_removed,
+    recordsScreened: row.records_screened,
+    recordsExcluded: row.records_excluded,
+    reportsSought: row.reports_sought,
+    reportsNotRetrieved: row.reports_not_retrieved,
+    reportsAssessed: row.reports_assessed,
+    reportsExcluded: row.reports_excluded,
+    studiesIncluded: row.studies_included,
+    conflictsOpen: row.conflicts_open,
+    excludedByReason,
+  };
+}
+async function prismaRoute(db, uid, projectId, requestId) {
+  const gate = await projectGate(db, projectId, uid, ["owner", "editor", "analyst", "reviewer", "viewer"]);
+  if (gate.status) return gateErr(gate, "Project access denied", requestId);
+  const prisma = await prismaCounts(db, projectId);
+  if (!prisma) return err(404, "project_not_found", "Project not found", requestId);
   await audit(db, projectId, uid, "prisma_viewed", projectId, {});
-  return json({
-    prisma: {
-      projectId,
-      recordsIdentified: row.records_identified,
-      recordsFromDatabases: row.records_from_databases,
-      recordsFromOtherSources: row.records_from_other_sources,
-      recordsDuplicatesRemoved: row.records_duplicates_removed,
-      recordsScreened: row.records_screened,
-      recordsExcluded: row.records_excluded,
-      reportsSought: row.reports_sought,
-      reportsNotRetrieved: row.reports_not_retrieved,
-      reportsAssessed: row.reports_assessed,
-      reportsExcluded: row.reports_excluded,
-      studiesIncluded: row.studies_included,
-      conflictsOpen: row.conflicts_open,
-      excludedByReason,
-    },
-    generatedTs: Date.now(),
-  }, 200, { "x-request-id": requestId });
+  return json({ prisma, generatedTs: Date.now() }, 200, { "x-request-id": requestId });
 }
 
 export async function onRequest({ request, env, params }) {
@@ -1808,7 +1818,7 @@ export async function onRequest({ request, env, params }) {
   if (!env.RESEARCH_DB) return err(503, "database_unavailable", "Research database is not provisioned", requestId);
   const db = env.RESEARCH_DB;
   /* Shared helpers handed to the Phase 3 modules (small route hooks only). */
-  const P3 = { json, err, audit, uuid, safeEqual, member, getProject, projectGate, gateErr, bodyJson, sha256Hex };
+  const P3 = { json, err, audit, uuid, safeEqual, member, getProject, projectGate, gateErr, bodyJson, sha256Hex, prismaCounts };
 
   /* ---- Phase 6 admin surface (adminAuth inside each handler: the existing
    * research admin token OR a verified Firebase owner claim). Hooked before
@@ -2024,6 +2034,50 @@ export async function onRequest({ request, env, params }) {
   if (sofRoute && request.method === "GET") return summaryOfFindings(p3Ctx, sofRoute[1]);
   const gradeSug = path.match(/^\/v1\/projects\/([^/]+)\/grade-suggestions$/);
   if (gradeSug && request.method === "GET") return gradeSuggestions(p3Ctx, gradeSug[1], url);
+
+  /* ---- Phase 5A.3 manuscript + 5B checklists (Firebase auth above). ---- */
+  if (path === "/v1/checklists" && request.method === "GET") return listChecklists(p3Ctx);
+  const checklistOne = path.match(/^\/v1\/checklists\/([^/]+)$/);
+  if (checklistOne && request.method === "GET") return getChecklist(p3Ctx, checklistOne[1]);
+  const snapRoute = path.match(/^\/v1\/projects\/([^/]+)\/checklist-snapshot$/);
+  if (snapRoute && request.method === "GET") return checklistSnapshot(p3Ctx, snapRoute[1]);
+  const manualRoute = path.match(/^\/v1\/projects\/([^/]+)\/checklist-manual\/([^/]+)$/);
+  if (manualRoute && request.method === "GET") return getManual(p3Ctx, manualRoute[1], manualRoute[2]);
+  if (manualRoute && request.method === "PUT") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid checklist payload", requestId);
+    return putManual(p3Ctx, manualRoute[1], manualRoute[2], body);
+  }
+  const manVersions = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/versions$/);
+  if (manVersions && request.method === "GET") return listVersions(p3Ctx, manVersions[1]);
+  const manSection = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/sections\/([^/]+)$/);
+  if (manSection && request.method === "PUT") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid manuscript payload", requestId);
+    return putSection(p3Ctx, manSection[1], manSection[2], body);
+  }
+  const manRequest = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/approval\/request$/);
+  if (manRequest && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid manuscript payload", requestId);
+    return requestApproval(p3Ctx, manRequest[1], body);
+  }
+  const manApprove = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/approval\/approve$/);
+  if (manApprove && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid manuscript payload", requestId);
+    return approveManuscript(p3Ctx, manApprove[1], body);
+  }
+  const manLock = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/lock$/);
+  if (manLock && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid manuscript payload", requestId);
+    return lockManuscript(p3Ctx, manLock[1], body);
+  }
+  const manExport = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/export$/);
+  if (manExport && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid manuscript payload", requestId);
+    return exportManuscript(p3Ctx, manExport[1], body);
+  }
+  const manGates = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/gates$/);
+  if (manGates && request.method === "GET") return manuscriptGates(p3Ctx, manGates[1], url);
+  const manGet = path.match(/^\/v1\/projects\/([^/]+)\/manuscript$/);
+  if (manGet && request.method === "GET") return getManuscript(p3Ctx, manGet[1], url);
 
   /* ---- Phase 6 user routes (Firebase auth above; each module enforces the
    * project / institution role and answers 404 to an outsider). ---- */
