@@ -273,9 +273,12 @@
       "#researchMD .rmd-sync-queue { color: var(--rmd-warn); background: var(--rmd-warn-soft); }",
       "#researchMD .rmd-sync-conflict { color: var(--rmd-bad); background: var(--rmd-bad-soft); }",
       "#researchMD .rmd-shell-close {",
-      "  border: 0; background: none; color: var(--rmd-acc); font: 600 16px var(--rmd-f);",
-      "  padding: 6px 10px; cursor: pointer; min-height: 40px; display: inline-flex; align-items: center;",
+      "  border: 0; width: 40px; height: 40px; border-radius: 999px; padding: 0; cursor: pointer;",
+      "  display: inline-flex; align-items: center; justify-content: center; flex: none;",
+      "  color: var(--rmd-ink); background: color-mix(in srgb, var(--rmd-panel) 72%, transparent);",
+      "  box-shadow: 0 1px 2px rgba(17, 28, 68, 0.12); transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);",
       "}",
+      "#researchMD .rmd-shell-close:active { transform: scale(0.92); }",
       "/* Body Screen Mount */",
       "#researchMD .rmd-shell-body {",
       "  flex: 1; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;",
@@ -648,7 +651,7 @@
 
     h.push('  <div class="rmd-shell-right">');
     h.push(getSyncBadgeHtml(syncState, queueCount));
-    h.push('    <button type="button" class="rmd-shell-close" data-rmd="close" aria-label="Close ResearchMD">Close</button>');
+    h.push('    <button type="button" class="rmd-shell-close" data-rmd="close" aria-label="Close ResearchMD"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>');
     h.push('  </div>');
     h.push('</div>');
 
