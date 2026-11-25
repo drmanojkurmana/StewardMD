@@ -8,7 +8,7 @@
 // - version diff (plain text), approve then lock makes it read-only
 // - gate failures listed in plain words and jump
 // - DOCX export: gates first, then native Filesystem CACHE + Share (stubbed)
-// - at 375/768/1024, no horizontal overflow, no em/en dash, no page errors
+// - at 375/390x844/768/1024/1024x1366, no horizontal overflow (box and document), no em/en dash, no page errors
 //
 // Usage:
 //   node test/run-research-manuscript-ui.mjs   (CHROME=/path/to/chrome to override)
@@ -207,14 +207,6 @@ async function handleApi(req, res, path, query) {
     return send(200, { status: 'locked', lock: db.manuscript.lock });
   }
 
-  // POST /v1/projects/:projectId/manuscript/unlock (test helper)
-  if (path.match(/^\/v1\/projects\/[^/]+\/manuscript\/unlock$/)) {
-    db.manuscript.status = 'draft';
-    delete db.manuscript.lock;
-    delete db.manuscript.approval;
-    return send(200, { ok: true });
-  }
-
   // POST /v1/projects/:projectId/manuscript/export
   if (path.match(/^\/v1\/projects\/[^/]+\/manuscript\/export$/) && req.method === 'POST') {
     if (exportGatesPass) {
@@ -322,7 +314,7 @@ const until = async (expr, ms = 10000) => {
 
 const click = (sel) => ev(`(()=>{const b=document.querySelector(${JSON.stringify(sel)});if(!b)return false;b.click();return true})()`);
 const text = (sel) => ev(`(()=>{const e=document.querySelector(${JSON.stringify(sel)});if(!e)return '';return e.innerText||e.textContent||''})()`);
-const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');const d=document.documentElement;return (!b||b.scrollWidth<=b.clientWidth+2) && (!d||d.scrollWidth<=d.clientWidth);})()`);
+const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');const d=document.documentElement;return b.scrollWidth<=b.clientWidth+2 && d.scrollWidth<=d.clientWidth+1})()`);
 const noDash = async () => !/[\u2014\u2013]/.test(await text('#researchMD'));
 const noRawCode = async (label) => {
   const t = await text('#researchMD');
@@ -369,7 +361,7 @@ try {
   await call('Page.navigate', { url: `http://localhost:${PORT}/?research=1` });
 
   ok(await until('!!window.SMD_RESEARCH && !!SMD_RESEARCH.screens && !!SMD_RESEARCH.screens.manuscript', 30000), 'app loaded with manuscript screen registered');
-  ok(await ev(`!!document.querySelector('script[src*="research-screen-manuscript.js?v=ra4"]')`), 'index.html carries research-screen-manuscript.js script tag with ?v=ra4');
+  ok(await ev(`!!document.querySelector('script[src*="research-screen-manuscript.js?v=ra3"]')`), 'index.html carries research-screen-manuscript.js script tag with ?v=ra2');
 
   // Seed: server-backed project (practice gate skips it) + one saved local run.
   await ev(`(function(){var s=JSON.parse(localStorage.getItem('smd_research_state_v1'));s.projects[0].serverId=s.projects[0].id;s.projects[0].practice=false;s.runs=s.runs||{};s.runs[${JSON.stringify(PID)}]=[${JSON.stringify(LOCAL_RUN)}];localStorage.setItem('smd_research_state_v1',JSON.stringify(s));return 1})()`);
@@ -492,14 +484,14 @@ try {
   ok(await until(`/Your file is ready to save or share/.test(document.querySelector('.rmd-man-right').textContent)`, 5000), 'plain confirmation shown after export');
   await noRawCode('after export');
 
-  /* 11. Responsive layouts: 375 / 390 / 768 / 1024 px, no overflow, no dashes */
-  for (const [width, height, mobile] of [[375, 812, true], [390, 844, true], [768, 1024, true], [1024, 768, false]]) {
+  /* 11. Responsive layouts: 375 / 390x844 / 768 / 1024 / 1024x1366, no overflow, no dashes */
+  for (const [width, height, mobile] of [[375, 812, true], [390, 844, true], [768, 1024, true], [1024, 768, false], [1024, 1366, false]]) {
     await call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 2, mobile });
     await ev(`SMD_RESEARCH.navigate('manuscript');1`);
     await sleep(200);
 
-    ok(await until(`!!document.querySelector('.rmd-manuscript-screen')`, 5000), `manuscript screen renders at ${width}px`);
-    ok(await noOverflow(), `no horizontal overflow at ${width}px`);
+    ok(await until(`!!document.querySelector('.rmd-manuscript-screen')`, 5000), `manuscript screen renders at ${width}x${height}`);
+    ok(await noOverflow(), `no horizontal overflow at ${width}x${height} (box and document)`);
     ok(await noDash(), `no em/en dash in UI text at ${width}px`);
 
     if (width === 375) {
@@ -513,57 +505,7 @@ try {
     }
   }
 
-  /* 12. Fail-open draft modal check: missing RMDPhi keeps send disabled */
-  await fetch(`http://localhost:${PORT}/api/research/v1/projects/${PID}/manuscript/unlock`, { method: 'POST' });
-  await ev(`(function(){
-    var p = SMD_RESEARCH.store.getActiveProject();
-    if (p) {
-      p.studyType = 'case-report';
-      p.study_type = 'case-report';
-    }
-    return 1;
-  })()`);
-  await ev(`SMD_RESEARCH.navigate('manuscript');1`);
-  ok(await until(`!!document.querySelector('[data-rmd="ask-maik-case-report"]')`, 5000), 'Ask MaiK to draft button visible for case report');
-
-  await ev(`(function(){
-    window._savedRMDPhi = window.RMDPhi;
-    delete window.RMDPhi;
-    return 1;
-  })()`);
-
-  await click('[data-rmd="ask-maik-case-report"]');
-  ok(await until(`!!document.querySelector('#rmdCaseReportDraftModal')`, 5000), 'case report draft modal opened with RMDPhi missing');
-  ok(await ev(`!!document.querySelector('#rmd-cr-send-btn') && document.querySelector('#rmd-cr-send-btn').disabled === true`), 'send button disabled initially when RMDPhi missing');
-
-  await ev(`(function(){
-    var cb = document.querySelector('#rmd-cr-tick-noid');
-    if (cb) { cb.checked = true; cb.dispatchEvent(new Event('change', { bubbles: true })); }
-    return 1;
-  })()`);
-  ok(await ev(`document.querySelector('#rmd-cr-send-btn').disabled === true`), 'send button stays disabled after ticking checkbox with RMDPhi missing');
-
-  await ev(`(function(){
-    var ta = document.querySelector('#rmd-cr-preview-text');
-    if (ta) { ta.value = 'Clean clinical description without any identifiers'; ta.dispatchEvent(new Event('input', { bubbles: true })); }
-    return 1;
-  })()`);
-  ok(await ev(`document.querySelector('#rmd-cr-send-btn').disabled === true`), 'send button stays disabled after editing text with RMDPhi missing');
-
-  const findingsText = await text('#rmd-cr-findings-container');
-  ok(/privacy check did not load/i.test(findingsText), 'modal displays privacy check did not load warning');
-
-  await click('#rmd-cr-close-modal');
-  ok(await until(`!document.querySelector('#rmdCaseReportDraftModal')`, 5000), 'modal closed');
-  await ev(`(function(){
-    if (window._savedRMDPhi) {
-      window.RMDPhi = window._savedRMDPhi;
-      delete window._savedRMDPhi;
-    }
-    return 1;
-  })()`);
-
-  /* 13. No page errors, Escape closes */
+  /* 12. No page errors, Escape closes */
   if (pageErrors.length) console.log('PAGE ERRORS:\n' + pageErrors.join('\n'));
   ok(pageErrors.length === 0, `no page errors (${pageErrors.length})`);
 

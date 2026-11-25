@@ -1,5 +1,7 @@
 // End-to-end walk: cohort, from the first question to the DOCX export.
 //   node test/run-research-walk-cohort-ui.mjs
+// Both viewport sweeps (390x844 and 1024x1366) and the document-level overflow
+// assertions (documentElement.scrollWidth <= clientWidth) run in research-walk-lib.mjs (docFits).
 import { runResearchWalk } from "./research-walk-lib.mjs";
 
 runResearchWalk({
