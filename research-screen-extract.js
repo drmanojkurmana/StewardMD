@@ -28,7 +28,7 @@
     form: {}, activeField: null, correctFor: null,
     busy: false, actionError: null, announce: "",
     showAudit: false, audit: [], promoteMeasure: "RR",
-    phoneView: "form"
+    phoneView: "form", ai: null
   };
   var seq = 0;
 
@@ -82,7 +82,7 @@
       st.extractionLoading = false;
       st.extraction = data.extraction;
       st.template = st.extraction.template || st.template;
-      st.form = {};
+      st.form = {}; st.ai = null;
       var fields = st.extraction.fields || {};
       for (var k in fields) {
         st.form[k] = { value: fields[k].value == null ? "" : fields[k].value, locator: fields[k].locator || null, quote: fields[k].quote || "" };
@@ -309,6 +309,7 @@
     var sugg = (st.extraction && st.extraction.suggestions) || [];
     if (!sugg.length) return "";
     var h = ['<div class="rmd-section-block"><h4 class="rmd-section-label">AI suggestions</h4>'];
+    if (st.ai) h.push(SMD.ai.noteHtml(st.ai, "suggestions"));
     h.push('<p class="rmd-muted">Suggestions are unverified. Accepting one never verifies it; a human must verify before analysis.</p>');
     for (var i = 0; i < sugg.length; i++) {
       var s = sugg[i];
@@ -358,6 +359,13 @@
     if (st.announce) h.push('<div class="rmd-banner rmd-banner-info" aria-live="polite">' + esc(st.announce) + '</div>');
 
     if (st.extraction) {
+      var proj = SMD.store ? SMD.store.getActiveProject() : null;
+      var role = (proj && proj.role) || "owner";
+      var canEdit = role === "owner" || role === "editor" || role === "analyst";
+      if (canEdit) {
+        if (!st.ai) st.ai = SMD.ai.state();
+        h.push(SMD.ai.barHtml(st.ai, { task: "extract", label: "extraction suggestions", cost: 2 }));
+      }
       var fields = templateDef().fields || [];
       for (var f = 0; f < fields.length; f++) h.push(fieldHtml(fields[f].key));
       h.push(suggestionsHtml());
@@ -486,6 +494,20 @@
     on('[data-rmd="extract-promote"]', function () { promote(container); });
     var pm = container.querySelector("#rmdPromoteMeasure");
     if (pm) pm.onchange = function () { st.promoteMeasure = this.value; };
+
+    if (st.ai) {
+      SMD.ai.bind(container, st.ai, {
+        pid: st.projectId, task: "extract", label: "extraction suggestions", cost: 2,
+        request: function () {
+          return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(st.projectId) + "/studies/" + encodeURIComponent(st.studyId) + "/extraction/suggestions", { template: st.template, artifactId: st.artifactId });
+        },
+        apply: function () {
+          loadExtraction(container);
+          return ["suggestions"];
+        },
+        render: function () { render(container); }
+      });
+    }
 
     var wrap = container.querySelector("#rmdPdfScroll");
     var page = currentPage();

@@ -37,6 +37,24 @@ export function resolveChecklistId(id) {
   return alias && BY_ID[alias] ? alias : null;
 }
 
+/* Flat item list for Ask MaiK checklist drafts. Null when the id is unknown. */
+export function checklistItems(id) {
+  const canonical = resolveChecklistId(id);
+  if (!canonical) return null;
+  const c = BY_ID[canonical];
+  const items = [];
+  for (const sec of c.sections || []) {
+    for (const item of sec.items || []) {
+      items.push({
+        itemNum: String(item.number),
+        topic: String(item.topic || ""),
+        sectionTitle: String(sec.title || ""),
+      });
+    }
+  }
+  return { id: canonical, name: c.name, items };
+}
+
 function summaryOf(c) {
   return { id: c.id, name: c.name, version: c.version };
 }

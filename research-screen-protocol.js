@@ -34,7 +34,8 @@
     startingNew: false,
     showLockConfirm: false,
     busy: false,
-    announce: ""
+    announce: "",
+    ai: null
   };
   var seq = 0;
 
@@ -205,6 +206,7 @@
       st.showLockConfirm = false;
       st.busy = false;
       st.announce = "";
+      st.ai = null;
     }
     if (!st.loaded && !st.loading) {
       container.innerHTML = '<div class="rmd-p2-screen">' + p2().loadingHtml("Loading protocol") + '</div>';
@@ -254,6 +256,7 @@
     }
 
     if (st.editing && st.draft) {
+      if (!st.ai) st.ai = SMD.ai.state();
       h.push(renderForm(canEdit));
     } else if (proto) {
       h.push(renderView(proto, canEdit, canLock));
@@ -298,8 +301,10 @@
     h.push('<button type="button" class="rmd-btn-close" data-rmd="proto-cancel" aria-label="Cancel editing">&times;</button></div>');
     h.push('<form id="rmdProtoForm" class="rmd-form">');
 
+    if (canEdit && st.ai) h.push(SMD.ai.barHtml(st.ai, { task: "protocol", label: "protocol", cost: 2 }));
+
     h.push('<div class="rmd-field"><label for="rmd_proto_title">Review Title</label>');
-    h.push('<input type="text" id="rmd_proto_title" maxlength="240" value="' + esc(d.title) + '" placeholder="e.g. BCG vaccination for tuberculosis prevention…" autocomplete="off"></div>');
+    h.push('<input type="text" id="rmd_proto_title" maxlength="240" value="' + esc(d.title) + '" placeholder="e.g. BCG vaccination for tuberculosis prevention…" autocomplete="off">' + SMD.ai.noteHtml(st.ai, "title") + '</div>');
 
     h.push('<div class="rmd-field"><span class="rmd-section-label">Question Framework</span>');
     h.push('<div class="rmd-filter-tabs" role="group" aria-label="Question framework">');
@@ -307,22 +312,30 @@
     h.push('<button type="button" class="rmd-chip' + (peco ? " rmd-chip-active" : "") + '" data-rmd-framework="PECO">PECO (exposure)</button>');
     h.push('</div></div>');
 
-    h.push('<div class="rmd-field"><label for="rmd_proto_pop">Population <span class="rmd-req">*</span></label>');
-    h.push('<textarea id="rmd_proto_pop" data-rmd-pico="population" rows="2" maxlength="2000" placeholder="e.g. Adults with latent tuberculosis infection…">' + esc(d.population) + '</textarea></div>');
-    h.push('<div class="rmd-field"><label for="rmd_proto_int">' + (peco ? "Exposure" : "Intervention") + ' <span class="rmd-req">*</span></label>');
-    h.push('<textarea id="rmd_proto_int" data-rmd-pico="intervention" rows="2" maxlength="2000" placeholder="' + (peco ? "e.g. Occupational silica dust exposure…" : "e.g. BCG vaccination at birth…") + '">' + esc(d.intervention) + '</textarea></div>');
-    h.push('<div class="rmd-field"><label for="rmd_proto_cmp">' + (peco ? "Comparator (unexposed)" : "Comparison") + '</label>');
-    h.push('<textarea id="rmd_proto_cmp" data-rmd-pico="comparison" rows="2" maxlength="2000" placeholder="e.g. No vaccination or placebo…">' + esc(d.comparison) + '</textarea></div>');
-    h.push('<div class="rmd-field"><label for="rmd_proto_out">Outcome <span class="rmd-req">*</span></label>');
-    h.push('<textarea id="rmd_proto_out" data-rmd-pico="outcome" rows="2" maxlength="2000" placeholder="e.g. Incidence of active tuberculosis…">' + esc(d.outcome) + '</textarea></div>');
+    h.push('<div class="rmd-form-row">');
+    h.push('<div class="rmd-field"><label for="rmd_proto_pop">Population (who was studied) <span class="rmd-req">*</span></label>');
+    h.push('<textarea id="rmd_proto_pop" data-rmd-pico="population" rows="2" maxlength="2000" placeholder="e.g. Adults with latent tuberculosis infection…">' + esc(d.population) + '</textarea>' + SMD.ai.noteHtml(st.ai, "population") + '</div>');
+    h.push('<div class="rmd-field"><label for="rmd_proto_int">' + (peco ? "Exposure (what people were exposed to)" : "Intervention (what was given or done)") + ' <span class="rmd-req">*</span></label>');
+    h.push('<textarea id="rmd_proto_int" data-rmd-pico="intervention" rows="2" maxlength="2000" placeholder="' + (peco ? "e.g. Occupational silica dust exposure…" : "e.g. BCG vaccination at birth…") + '">' + esc(d.intervention) + '</textarea>' + SMD.ai.noteHtml(st.ai, "intervention") + '</div>');
+    h.push('</div>');
+    h.push('<div class="rmd-form-row">');
+    h.push('<div class="rmd-field"><label for="rmd_proto_cmp">' + (peco ? "Comparator (the unexposed group)" : "Comparison (what it was compared with)") + '</label>');
+    h.push('<textarea id="rmd_proto_cmp" data-rmd-pico="comparison" rows="2" maxlength="2000" placeholder="e.g. No vaccination or placebo…">' + esc(d.comparison) + '</textarea>' + SMD.ai.noteHtml(st.ai, "comparison") + '</div>');
+    h.push('<div class="rmd-field"><label for="rmd_proto_out">Outcome (what was measured) <span class="rmd-req">*</span></label>');
+    h.push('<textarea id="rmd_proto_out" data-rmd-pico="outcome" rows="2" maxlength="2000" placeholder="e.g. Incidence of active tuberculosis…">' + esc(d.outcome) + '</textarea>' + SMD.ai.noteHtml(st.ai, "outcome") + '</div>');
+    h.push('</div>');
 
-    h.push(fieldListHtml("Eligibility Criteria *", "eligibility", d.eligibility, "e.g. Randomized or quasi-randomized trials…", 500));
+    h.push(fieldListHtml("Eligibility Criteria (who can be included) *", "eligibility", d.eligibility, "e.g. Randomized or quasi-randomized trials…", 500));
+    h.push(SMD.ai.noteHtml(st.ai, "eligibility"));
 
-    h.push('<div class="rmd-field"><label for="rmd_proto_primary">Primary Outcome <span class="rmd-req">*</span></label>');
-    h.push('<input type="text" id="rmd_proto_primary" data-rmd-out="primary" maxlength="500" value="' + esc(d.primary) + '" placeholder="e.g. Confirmed tuberculosis at any follow-up…" autocomplete="off"></div>');
-    h.push(fieldListHtml("Secondary Outcomes", "secondary", d.secondary, "e.g. All-cause mortality…", 500));
-    h.push(fieldListHtml("Time Points", "timePoints", d.timePoints, "e.g. 12 months…", 200));
-    h.push(fieldListHtml("Planned Subgroups", "subgroups", d.subgroups, "e.g. Age under 5 years…", 500));
+    h.push('<div class="rmd-field"><label for="rmd_proto_primary">Primary Outcome (the main result measured) <span class="rmd-req">*</span></label>');
+    h.push('<input type="text" id="rmd_proto_primary" data-rmd-out="primary" maxlength="500" value="' + esc(d.primary) + '" placeholder="e.g. Confirmed tuberculosis at any follow-up…" autocomplete="off">' + SMD.ai.noteHtml(st.ai, "primary") + '</div>');
+    h.push(fieldListHtml("Secondary Outcomes (other results measured)", "secondary", d.secondary, "e.g. All-cause mortality…", 500));
+    h.push(SMD.ai.noteHtml(st.ai, "secondary"));
+    h.push(fieldListHtml("Time Points (when outcomes were measured)", "timePoints", d.timePoints, "e.g. 12 months…", 200));
+    h.push(SMD.ai.noteHtml(st.ai, "timePoints"));
+    h.push(fieldListHtml("Planned Subgroups (groups analysed separately)", "subgroups", d.subgroups, "e.g. Age under 5 years…", 500));
+    h.push(SMD.ai.noteHtml(st.ai, "subgroups"));
 
     h.push('<div class="rmd-modal-footer">');
     h.push('<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="proto-cancel">Cancel</button>');
@@ -458,7 +471,11 @@
     for (var i = 0; i < elig.length; i++) lines.push("  " + (i + 1) + ". " + elig[i]);
     lines.push("Planned subgroups: " + ((c.subgroups || []).join("; ") || "None"));
     var text = lines.join("\n") + "\n";
-    p2().downloadText("prospero-" + proto.projectId + "-v" + (proto.version || 1) + ".txt", text, "text/plain");
+    p2().downloadText("prospero-" + proto.projectId + "-v" + (proto.version || 1) + ".txt", text, "text/plain").then(function () {
+      p2().flashNotice(G.document.getElementById("rmdScreenBody"), "Your file is ready to save or share.", "info");
+    }, function (err) {
+      p2().flashNotice(G.document.getElementById("rmdScreenBody"), p2().friendlyError(err).message, "error");
+    });
     return text;
   }
 
@@ -544,6 +561,7 @@
       st.draft = emptyDraft();
       st.editing = true;
       st.startingNew = true;
+      st.ai = SMD.ai.state();
       st.announce = "";
       st.viewedVersion = null;
       st.viewedProtocol = null;
@@ -553,6 +571,7 @@
       st.draft = draftFromContent(st.protocol.content && st.protocol.content.title, st.protocol.content);
       st.editing = true;
       st.startingNew = false;
+      st.ai = SMD.ai.state();
       st.announce = "";
       render(container);
     });
@@ -560,6 +579,7 @@
       st.editing = false;
       st.startingNew = false;
       st.draft = null;
+      st.ai = null;
       st.error = null;
       render(container);
     });
@@ -623,20 +643,56 @@
         return false;
       };
       var titleInput = form.querySelector("#rmd_proto_title");
-      if (titleInput) titleInput.oninput = function () { st.draft.title = this.value; };
+      if (titleInput) titleInput.oninput = function () { st.draft.title = this.value; SMD.ai.clearNote(st.ai, "title"); };
       var picoFields = form.querySelectorAll("[data-rmd-pico]");
       for (var p = 0; p < picoFields.length; p++) {
-        picoFields[p].oninput = function () { st.draft[this.getAttribute("data-rmd-pico")] = this.value; };
+        picoFields[p].oninput = function () {
+          var k = this.getAttribute("data-rmd-pico");
+          st.draft[k] = this.value;
+          SMD.ai.clearNote(st.ai, k);
+        };
       }
       var primary = form.querySelector("[data-rmd-out='primary']");
-      if (primary) primary.oninput = function () { st.draft.primary = this.value; };
+      if (primary) primary.oninput = function () { st.draft.primary = this.value; SMD.ai.clearNote(st.ai, "primary"); };
       var listInputs = form.querySelectorAll("[data-rmd-list]");
       for (var l = 0; l < listInputs.length; l++) {
         listInputs[l].oninput = function () {
           var key = this.getAttribute("data-rmd-list");
           var idx = parseInt(this.getAttribute("data-rmd-idx"), 10);
           st.draft[key][idx] = this.value;
+          SMD.ai.clearNote(st.ai, key);
         };
+      }
+      if (st.ai) {
+        SMD.ai.bind(container, st.ai, {
+          pid: project.id,
+          task: "protocol",
+          label: "protocol",
+          cost: 2,
+          input: function () { return { title: st.draft.title, framework: st.framework, researchQuestion: project.researchQuestion || "" }; },
+          apply: function (draft) {
+            var d = draft || {};
+            /* server shape (contracts/phase-5/ai-draft.md): pico{} or peco{}, outcomes{ primary, secondary } */
+            var pico = d.pico || d.peco || {};
+            var outs = d.outcomes || {};
+            d = { title: d.title, population: d.population || pico.population, intervention: d.intervention || pico.intervention || pico.exposure,
+              comparison: d.comparison || pico.comparison, outcome: d.outcome || pico.outcome, primary: d.primary || outs.primary,
+              eligibility: d.eligibility, secondary: d.secondary || outs.secondary, timePoints: d.timePoints, subgroups: d.subgroups };
+            var keys = [];
+            var fields = ["title", "population", "intervention", "comparison", "outcome", "primary"];
+            for (var i = 0; i < fields.length; i++) {
+              var k = fields[i];
+              if (typeof d[k] === "string" && d[k]) { st.draft[k] = d[k]; keys.push(k); }
+            }
+            var lists = ["eligibility", "secondary", "timePoints", "subgroups"];
+            for (var j = 0; j < lists.length; j++) {
+              var lk = lists[j];
+              if (d[lk] && d[lk].length) { st.draft[lk] = d[lk].slice(); keys.push(lk); }
+            }
+            return keys;
+          },
+          render: function () { render(container); }
+        });
       }
     }
 
