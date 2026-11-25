@@ -37,6 +37,314 @@
     { id: "discussion", heading: "Discussion" }
   ];
 
+  /* ---------- on-device DOCX & PDF extraction ---------- */
+
+  var _pdfLibPromise = null;
+  var PDFJS_LOCAL = "/vendor/pdfjs/pdf.min.js";
+  var PDFJS_LOCAL_W = "/vendor/pdfjs/pdf.worker.min.js";
+  var PDFJS_CDN = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+  var PDFJS_CDN_W = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+  function decodeUtf8(u8) {
+    if (G && G.TextDecoder) {
+      try { return new G.TextDecoder("utf-8", { fatal: false }).decode(u8); } catch (e) {}
+    }
+    var out = "";
+    for (var i = 0; i < u8.length; i += 8192) {
+      out += String.fromCharCode.apply(null, u8.subarray(i, Math.min(i + 8192, u8.length)));
+    }
+    try { return decodeURIComponent(escape(out)); } catch (e) { return out; }
+  }
+
+  function decodeXmlEntities(s) {
+    return String(s || "")
+      .replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&#39;/g, "'")
+      .replace(/&#(\d+);/g, function (_, n) { return String.fromCharCode(parseInt(n, 10)); })
+      .replace(/&amp;/g, "&");
+  }
+
+  function readZipEntries(buf) {
+    var u8 = new Uint8Array(buf);
+    if (u8.length >= 4 && u8[0] === 0xD0 && u8[1] === 0xCF && u8[2] === 0x11 && u8[3] === 0xE0) {
+      return Promise.reject(new Error("This file is an older binary Word (.doc) file or password-protected. Save an unprotected copy as .docx or PDF and upload again."));
+    }
+    var dv = new DataView(buf);
+    var eocd = -1;
+    var minAt = Math.max(0, u8.length - 22 - 65536);
+    for (var i = u8.length - 22; i >= minAt; i--) {
+      if (u8[i] === 0x50 && u8[i + 1] === 0x4b && u8[i + 2] === 0x05 && u8[i + 3] === 0x06) { eocd = i; break; }
+    }
+    if (eocd < 0) {
+      return Promise.reject(new Error("This file does not look like a valid Word (.docx) document."));
+    }
+    var count = dv.getUint16(eocd + 10, true);
+    var cd = dv.getUint32(eocd + 16, true);
+    var entries = {};
+    var p = cd;
+    for (var e = 0; e < count; e++) {
+      if (p + 46 > u8.length || dv.getUint32(p, true) !== 0x02014b50) break;
+      var method = dv.getUint16(p + 10, true);
+      var compSize = dv.getUint32(p + 20, true);
+      var nameLen = dv.getUint16(p + 28, true);
+      var extraLen = dv.getUint16(p + 30, true);
+      var commentLen = dv.getUint16(p + 32, true);
+      var lho = dv.getUint32(p + 42, true);
+      var name = decodeUtf8(u8.subarray(p + 46, p + 46 + nameLen));
+      entries[name] = { method: method, offset: lho, size: compSize };
+      p += 46 + nameLen + extraLen + commentLen;
+    }
+    function readEntry(name) {
+      var en = entries[name];
+      if (!en) return Promise.resolve(null);
+      var nl = dv.getUint16(en.offset + 26, true);
+      var el = dv.getUint16(en.offset + 28, true);
+      var start = en.offset + 30 + nl + el;
+      var data = u8.subarray(start, start + en.size);
+      if (en.method === 0) return Promise.resolve(data);
+      if (en.method !== 8 || !G.DecompressionStream) {
+        return Promise.reject(new Error("This Word (.docx) compression format cannot be opened on this device. Export it as PDF and upload."));
+      }
+      var stream = new Blob([data]).stream().pipeThrough(new G.DecompressionStream("deflate-raw"));
+      return new Response(stream).arrayBuffer().then(function (b) { return new Uint8Array(b); });
+    }
+    return Promise.resolve({ entries: entries, readEntry: readEntry });
+  }
+
+  function localNameOf(node) {
+    if (!node) return "";
+    return node.localName || String(node.nodeName || "").split(":").pop();
+  }
+
+  function extractDocxParaDom(paraNode) {
+    var parts = [];
+    var hasPageBreak = false;
+    function walk(node) {
+      if (!node || node.nodeType !== 1) return;
+      var ln = localNameOf(node);
+      if (ln === "del" || ln === "instrText" || ln === "fldSimple" || ln === "moveFrom") return;
+      if (ln === "lastRenderedPageBreak") { hasPageBreak = true; return; }
+      if (ln === "br") {
+        var btype = node.getAttribute("w:type") || node.getAttribute("type") || "";
+        if (btype === "page") { hasPageBreak = true; return; }
+        parts.push("\n");
+        return;
+      }
+      if (ln === "cr") { parts.push("\n"); return; }
+      if (ln === "tab") { parts.push(" "); return; }
+      if (ln === "t" || ln === "delText") { parts.push(node.textContent || ""); return; }
+      for (var c = node.firstChild; c; c = c.nextSibling) walk(c);
+    }
+    walk(paraNode);
+    return { text: parts.join("").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, ""), pageBreak: hasPageBreak };
+  }
+
+  function extractDocxXmlBlocks(xmlText) {
+    var blocks = [];
+    if (G && G.DOMParser) {
+      try {
+        var doc = new G.DOMParser().parseFromString(xmlText, "application/xml");
+        if (doc && !doc.getElementsByTagName("parsererror").length) {
+          var body = null;
+          var root = doc.documentElement;
+          for (var c = root && root.firstChild; c; c = c.nextSibling) {
+            if (localNameOf(c) === "body") { body = c; break; }
+          }
+          var top = body || root;
+          function walkContainer(container) {
+            for (var n = container && container.firstChild; n; n = n.nextSibling) {
+              if (n.nodeType !== 1) continue;
+              var ln = localNameOf(n);
+              if (ln === "p") {
+                var p = extractDocxParaDom(n);
+                if (p.pageBreak) blocks.push({ pageBreak: true });
+                if (p.text) blocks.push({ text: p.text });
+              } else if (ln === "tbl") {
+                for (var r = n.firstChild; r; r = r.nextSibling) {
+                  if (localNameOf(r) !== "tr") continue;
+                  var cells = [];
+                  for (var cell = r.firstChild; cell; cell = cell.nextSibling) {
+                    if (localNameOf(cell) !== "tc") continue;
+                    var cellParts = [];
+                    for (var cp = cell.firstChild; cp; cp = cp.nextSibling) {
+                      if (localNameOf(cp) === "p") {
+                        var pr = extractDocxParaDom(cp);
+                        if (pr.text) cellParts.push(pr.text);
+                      }
+                    }
+                    var ct = cellParts.join(" ").replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
+                    if (ct) cells.push(ct);
+                  }
+                  if (cells.length) blocks.push({ text: cells.join("  ") });
+                }
+              } else if (ln === "sdt" || ln === "sdtContent" || ln === "footnote" || ln === "endnote") {
+                walkContainer(n);
+              }
+            }
+          }
+          walkContainer(top);
+          return blocks;
+        }
+      } catch (e) {}
+    }
+    // Pure-JS XML fallback (works cleanly in Node unit tests without DOMParser)
+    var cleaned = String(xmlText || "")
+      .replace(/<w:del\b[\s\S]*?<\/w:del>/gi, "")
+      .replace(/<w:instrText\b[\s\S]*?<\/w:instrText>/gi, "");
+    var pRe = /<w:p\b[^>]*>([\s\S]*?)<\/w:p>/gi, pm;
+    while ((pm = pRe.exec(cleaned)) !== null) {
+      var inner = pm[1];
+      if (/<w:br\b[^>]*type=["']page["']|<w:lastRenderedPageBreak\b/i.test(inner)) {
+        blocks.push({ pageBreak: true });
+      }
+      var stripped = inner
+        .replace(/<w:tab\b[^>]*\/?>/gi, " ")
+        .replace(/<w:(?:br|cr)\b[^>]*\/?>/gi, "\n")
+        .replace(/<[^>]+>/g, "");
+      var txt = decodeXmlEntities(stripped).replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, "");
+      if (txt) blocks.push({ text: txt });
+    }
+    return blocks;
+  }
+
+  function paginateBlocks(blocks, wordsPerPage) {
+    var hasBreaks = false, i;
+    for (i = 0; i < blocks.length; i++) {
+      if (blocks[i].pageBreak) { hasBreaks = true; break; }
+    }
+    var pages = [], cur = [], curWords = 0, limit = wordsPerPage || 350;
+    function flush() {
+      var joined = cur.join("\n");
+      if (joined.replace(/\s+/g, "").length > 0) {
+        pages.push({ n: pages.length + 1, text: joined });
+      }
+      cur = [];
+      curWords = 0;
+    }
+    for (i = 0; i < blocks.length; i++) {
+      var b = blocks[i];
+      if (b.pageBreak) {
+        if (cur.length) flush();
+        continue;
+      }
+      var w = countWords(b.text);
+      if (!hasBreaks && cur.length > 0 && curWords + w > limit) flush();
+      cur.push(b.text);
+      curWords += w;
+    }
+    flush();
+    return pages;
+  }
+
+  function parseDocx(buf) {
+    return readZipEntries(buf).then(function (zip) {
+      return Promise.all([
+        zip.readEntry("word/document.xml"),
+        zip.readEntry("word/footnotes.xml"),
+        zip.readEntry("word/endnotes.xml")
+      ]).then(function (xmls) {
+        if (!xmls[0]) {
+          throw new Error("Could not find document text inside this .docx file.");
+        }
+        var blocks = extractDocxXmlBlocks(decodeUtf8(xmls[0]));
+        if (xmls[1]) blocks = blocks.concat(extractDocxXmlBlocks(decodeUtf8(xmls[1])));
+        if (xmls[2]) blocks = blocks.concat(extractDocxXmlBlocks(decodeUtf8(xmls[2])));
+        var pages = paginateBlocks(blocks, 350);
+        if (!pages.length) {
+          throw new Error("No readable text was found inside this Word document (it may contain only images). Export a selectable-text PDF or copy the text.");
+        }
+        return pages;
+      });
+    });
+  }
+
+  function loadPdfJs() {
+    if (_pdfLibPromise) return _pdfLibPromise;
+    if (G && G.pdfjsLib) {
+      try { G.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_LOCAL_W; } catch (e) {}
+      _pdfLibPromise = Promise.resolve(G.pdfjsLib);
+      return _pdfLibPromise;
+    }
+    if (!D) return Promise.reject(new Error("pdf_unavailable"));
+    _pdfLibPromise = new Promise(function (resolve, reject) {
+      function tryLoad(src, worker, fallback) {
+        var s = D.createElement("script");
+        s.src = src;
+        s.onload = function () {
+          var lib = G && G.pdfjsLib;
+          if (!lib) { if (fallback) fallback(); else { _pdfLibPromise = null; reject(new Error("pdf_load")); } return; }
+          try { lib.GlobalWorkerOptions.workerSrc = worker; } catch (e) {}
+          resolve(lib);
+        };
+        s.onerror = function () {
+          if (fallback) fallback();
+          else { _pdfLibPromise = null; reject(new Error("pdf_load")); }
+        };
+        D.head.appendChild(s);
+      }
+      tryLoad(PDFJS_LOCAL, PDFJS_LOCAL_W, function () { tryLoad(PDFJS_CDN, PDFJS_CDN_W, null); });
+    });
+    return _pdfLibPromise;
+  }
+
+  function joinPdfTextItems(items) {
+    var lines = [], curLine = [], lastY = null;
+    for (var i = 0; i < (items || []).length; i++) {
+      var it = items[i] || {};
+      var str = String(it.str || "");
+      var y = (it.transform && it.transform.length >= 6) ? it.transform[5] : null;
+      if (lastY !== null && y !== null && Math.abs(y - lastY) > 3) {
+        if (curLine.length) {
+          lines.push(curLine.join(" ").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, ""));
+          curLine = [];
+        }
+      }
+      if (str.replace(/\s+/g, "")) curLine.push(str);
+      if (it.hasEOL && curLine.length) {
+        lines.push(curLine.join(" ").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, ""));
+        curLine = [];
+        lastY = null;
+      } else if (y !== null) {
+        lastY = y;
+      }
+    }
+    if (curLine.length) lines.push(curLine.join(" ").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, ""));
+    return lines.filter(Boolean).join("\n");
+  }
+
+  function readPdfLocal(file, onProgress) {
+    if (!file || typeof file.arrayBuffer !== "function") return Promise.resolve(null);
+    return Promise.all([loadPdfJs(), file.arrayBuffer()]).then(function (pair) {
+      var pdfjs = pair[0], u8 = new Uint8Array(pair[1]);
+      return pdfjs.getDocument({ data: u8 }).promise.catch(function () {
+        return pdfjs.getDocument({ data: u8, disableWorker: true }).promise;
+      }).then(function (pdf) {
+        var total = pdf.numPages || 0;
+        if (!total) return null;
+        var pages = [], chars = 0, idx = 1;
+        function nextPage() {
+          if (idx > total) {
+            if (chars < 20) return { pages: [], emptyText: true };
+            return { pages: pages, emptyText: false };
+          }
+          if (onProgress && (idx === 1 || idx % 10 === 0 || idx === total)) {
+            onProgress(idx, total);
+          }
+          var pNo = idx++;
+          return pdf.getPage(pNo).then(function (pg) {
+            return pg.getTextContent();
+          }).then(function (tc) {
+            var txt = joinPdfTextItems((tc && tc.items) || []);
+            chars += txt.replace(/\s+/g, "").length;
+            pages.push({ n: pNo, text: txt });
+            return nextPage();
+          });
+        }
+        return nextPage();
+      });
+    });
+  }
+
   /* ---------- pure helpers (unit tested) ---------- */
 
   function splitSentences(text) {
@@ -341,10 +649,10 @@
     } else {
       h.push('<div class="rmd-card">');
       h.push('<h2>Upload your thesis</h2>');
-      h.push('<p class="rmd-screen-subtitle">PDF or DOCX, up to 40 MB. We read a PDF on our server. For DOCX, export it as a PDF first.</p>');
+      h.push('<p class="rmd-screen-subtitle">PDF or Word (.docx), up to 40 MB. Text and tables are read directly on your device; scanned PDFs use our OCR server.</p>');
       h.push('<div class="rmd-field"><label for="rmdThesisFile">Thesis file</label>');
-      h.push('<input type="file" id="rmdThesisFile" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></div>');
-      h.push('<p class="rmd-thesis-meta">Tip: in Word, use File, then Export, then Create PDF, and upload the PDF.</p>');
+      h.push('<input type="file" id="rmdThesisFile" accept=".pdf,.docx,.doc,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword"></div>');
+      h.push('<p class="rmd-thesis-meta">Supports PDF and Word (.docx) thesis files directly, including results tables.</p>');
       h.push('<div id="rmdThesisMsg"></div>');
       h.push('</div>');
     }
@@ -366,14 +674,14 @@
     if (box) box.innerHTML = html;
   }
 
-  function handleFile(file, container) {
-    var name = (file.name || "").toLowerCase();
-    if (/\.docx?$/.test(name) || name.indexOf("wordprocessingml") >= 0) {
-      setMsg(container, '<div class="rmd-banner rmd-banner-warn">DOCX cannot be read here yet. In Word, use File, then Export, then Create PDF, and upload the PDF.</div>');
+  function uploadPdfServer(file, container) {
+    var proj = activeProject();
+    if (!proj || !proj.serverId) {
+      setMsg(container, '<div class="rmd-banner rmd-banner-warn">This PDF has no selectable text (scanned pages) and requires a synced account project for server OCR. Save this project to your account first, or upload a selectable-text PDF or Word (.docx) file.</div>');
       return;
     }
-    if (file.size > MAX_BYTES) {
-      setMsg(container, '<div class="rmd-banner rmd-banner-warn">This file is larger than 40 MB. Split it or export a smaller PDF.</div>');
+    if (file.size > 26214400) {
+      setMsg(container, '<div class="rmd-banner rmd-banner-warn">This scanned PDF has no selectable text and exceeds the 25 MB server OCR limit. Export a selectable-text PDF, upload a .docx file, or split this PDF under 25 MB.</div>');
       return;
     }
     setMsg(container, SMD.p2.loadingHtml("Uploading your thesis"));
@@ -386,11 +694,66 @@
       pollJob(art.jobId, 0, container);
     }).catch(function (err) {
       var msg;
-      if (err && err.code === "ceiling_bytes") msg = "The server reads PDFs up to 25 MB. Export a smaller PDF and upload it again.";
-      else if (err && err.code === "file_type") msg = "That file is not a PDF. Export your thesis as a PDF and upload it.";
-      else msg = SMD.p2.friendlyError(err).message;
+      if (err && (err.code === "ceiling_bytes" || err.status === 413)) {
+        msg = "The server reads scanned PDFs up to 25 MB. Export a selectable-text PDF, upload a .docx file, or upload a smaller PDF.";
+      } else if (err && err.code === "file_type") {
+        msg = "That file is not a valid PDF. Export your thesis as a PDF or upload a Word (.docx) file.";
+      } else if (err && (err.code === "storage_unavailable" || err.code === "queue_unavailable")) {
+        msg = "Server OCR is unavailable right now. Upload a selectable-text PDF or Word (.docx) file, which is read right on your device.";
+      } else if (err && err.code === "project_not_found") {
+        msg = "Save this project to your account first for scanned-PDF upload, or upload a selectable-text PDF or .docx.";
+      } else {
+        msg = SMD.p2.friendlyError(err).message;
+      }
       setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc(msg) + '</div>');
     });
+  }
+
+  function handleFile(file, container) {
+    var name = (file.name || "").toLowerCase();
+    var mime = (file.type || "").toLowerCase();
+    if (file.size > MAX_BYTES) {
+      setMsg(container, '<div class="rmd-banner rmd-banner-warn">This file is larger than 40 MB. Split it or export a smaller file.</div>');
+      return;
+    }
+    var isDocxFile = /\.docx$/i.test(name) || mime.indexOf("wordprocessingml") >= 0;
+    var isLegacyDoc = /\.doc$/i.test(name) && !isDocxFile;
+    if (isLegacyDoc) {
+      setMsg(container, '<div class="rmd-banner rmd-banner-warn">Older Word (.doc) files are binary format. In Word, use File, then Save As Word Document (.docx) or PDF, and upload again.</div>');
+      return;
+    }
+    if (isDocxFile) {
+      setMsg(container, SMD.p2.loadingHtml("Reading your Word (.docx) thesis"));
+      file.arrayBuffer().then(parseDocx).then(function (pages) {
+        saveThesis(tpid, { pages: pages, filename: file.name, phi: null, artifactId: null, jobId: null });
+        ts = loadThesis(tpid);
+        renderUpload(container);
+      }).catch(function (err) {
+        var msg = (err && err.message) ? err.message : "Could not read this Word (.docx) document. Export it as PDF and upload again.";
+        setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc(msg) + '</div>');
+      });
+      return;
+    }
+    // Try on-device PDF extraction first for real PDFs (works up to 40 MB and >60 pages, 0 tokens).
+    // Tiny fixtures (< 100 bytes) or scanned image-only PDFs automatically fall back to server OCR.
+    if (file.size >= 100 && typeof file.arrayBuffer === "function") {
+      setMsg(container, SMD.p2.loadingHtml("Reading your thesis"));
+      readPdfLocal(file, function (cur, tot) {
+        setMsg(container, SMD.p2.loadingHtml("Reading page " + cur + " of " + tot));
+      }).then(function (res) {
+        if (res && res.pages && res.pages.length) {
+          saveThesis(tpid, { pages: res.pages, filename: file.name, phi: null, artifactId: null, jobId: null });
+          ts = loadThesis(tpid);
+          renderUpload(container);
+          return;
+        }
+        uploadPdfServer(file, container);
+      }).catch(function () {
+        uploadPdfServer(file, container);
+      });
+      return;
+    }
+    uploadPdfServer(file, container);
   }
 
   function pollJob(jobId, tries, container) {
@@ -589,8 +952,19 @@
       SMD.ai.bind(container, st2, {
         pid: tpid,
         task: "thesis_to_paper",
-        input: function () {
-          return { pages: ts.pages || [], filename: ts.filename || "", paperType: labelFor(ts.paperType || "obs"), checklist: ts.checklist || "strobe", journalId: journalOf().id || "", wordLimit: journalOf().wordLimit };
+        request: function () {
+          var body = {
+            task: "thesis_to_paper",
+            input: { pages: ts.pages || [], filename: ts.filename || "", paperType: labelFor(ts.paperType || "obs"), checklist: ts.checklist || "strobe", journalId: journalOf().id || "", wordLimit: journalOf().wordLimit }
+          };
+          return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(tpid) + "/ai-draft", body).catch(function (err) {
+            if (err && err.code === "phi_blocked") {
+              var pPages = (err.body && err.body.pages) || [];
+              saveThesis(tpid, { phi: { blocked: true, pages: pPages }, pages: null });
+              ts = loadThesis(tpid);
+            }
+            throw err;
+          });
         },
         apply: function (draft) { return applyDraft(draft); },
         render: function () { renderDraft(container); }
@@ -871,6 +1245,7 @@
     canRunAi: canRunAi,
     aiGate: aiGate,
     countWords: countWords,
+    parseDocx: parseDocx,
     PAPER_TYPES: PAPER_TYPES,
     DEFAULT_JOURNAL: DEFAULT_JOURNAL
   };

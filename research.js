@@ -183,6 +183,27 @@
     if (code === "token_mismatch" || code === "token_missing") {
       return { message: e.message || "Token preservation failure (values changed or missing)", action: "retry", actionLabel: "Try again" };
     }
+    if (code === "no_project") {
+      return { message: e.message || "Save or create a synced project first to use MaiK summaries.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "phi_blocked") {
+      return { message: e.message || "Patient identifiers were detected. Remove names, hospital numbers, phone numbers, addresses or emails and try again.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "ceiling_bytes" || status === 413) {
+      return { message: "This file is too large for server upload (limit 25 MB). Upload a smaller file or a Word (.docx) document.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "ceiling_input_tokens") {
+      return { message: "This text is too large for a single AI call. Try trimming appendices or drafting section by section.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "docx_needs_pdf") {
+      return { message: e.message || "Please upload a valid .docx or PDF file.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "storage_unavailable" || code === "queue_unavailable") {
+      return { message: "Server document OCR is unavailable right now. Export as selectable-text PDF or .docx and upload again.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "invalid_multipart" || code === "missing_file" || code === "file_type") {
+      return { message: e.message || "The uploaded file could not be processed. Try a selectable-text PDF or Word (.docx) file.", action: "retry", actionLabel: "Try again" };
+    }
     if (code === "network" || status === 0 || status >= 500) {
       return { message: "No connection right now. Your work is saved; try again in a moment.", action: "retry", actionLabel: "Try again" };
     }
@@ -1228,8 +1249,8 @@
     },
     thesis: {
       name: "Upload your thesis",
-      do: "Upload your MD/MS/DNB thesis as a PDF. We read it on our server and check for patient identifiers before any AI step.",
-      eg: "Export your thesis from Word as a PDF, then upload it here.",
+      do: "Upload your MD/MS/DNB thesis as a PDF or Word (.docx) file. Text is read directly on your device and checked for patient identifiers before any AI step.",
+      eg: "Upload your thesis PDF or .docx directly.",
       gloss: "New words: patient identifiers (names, dates of birth, hospital numbers or contact details that could reveal who a patient is).",
       action: { label: "Next: pick the paper type", fallback: "thesis-type" }
     },
@@ -1497,7 +1518,7 @@
     manuscript: "draft and approve the paper.",
     checklist: "point items to your paper.",
     ready: "check what is left to submit.",
-    thesis: "upload your thesis PDF.",
+    thesis: "upload your thesis PDF or Word (.docx).",
     "thesis-type": "pick the paper type.",
     "thesis-journal": "pick the target journal.",
     "thesis-draft": "shape the draft, checking every number.",

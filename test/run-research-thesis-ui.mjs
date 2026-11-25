@@ -226,16 +226,76 @@ async function shot(name) {
   await writeFile(`${OUT}/${name}.png`, Buffer.from(r.result.data, 'base64'));
 }
 
-const uploadPdf = () => ev(`(()=>{
-  const inp=document.querySelector('#rmdThesisFile');
-  if(!inp)return false;
-  const f=new File([new Uint8Array([37,80,68,70,45,49,46,52])],'thesis.pdf',{type:'application/pdf'});
-  const dt=new DataTransfer();
-  dt.items.add(f);
-  inp.files=dt.files;
-  inp.dispatchEvent(new Event('change',{bubbles:true}));
-  return true;
-})()`);
+  const uploadPdf = () => ev(`(()=>{
+    const inp=document.querySelector('#rmdThesisFile');
+    if(!inp)return false;
+    const f=new File([new Uint8Array([37,80,68,70,45,49,46,52])],'thesis.pdf',{type:'application/pdf'});
+    const dt=new DataTransfer();
+    dt.items.add(f);
+    inp.files=dt.files;
+    inp.dispatchEvent(new Event('change',{bubbles:true}));
+    return true;
+  })()`);
+
+  const uploadRealPdf = () => ev(`(()=>{
+    const inp=document.querySelector('#rmdThesisFile');
+    if(!inp)return false;
+    const objs=[
+      '1 0 obj\\n<< /Type /Catalog /Pages 2 0 R >>\\nendobj\\n',
+      '2 0 obj\\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\\nendobj\\n',
+      '3 0 obj\\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>\\nendobj\\n',
+      '4 0 obj\\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\\nendobj\\n'
+    ];
+    const stream='BT /F1 12 Tf 72 720 Td (Table 7 reports the pooled risk ratio 0.49 across 120 patients in 13 trials.) Tj ET';
+    objs.push('5 0 obj\\n<< /Length '+stream.length+' >>\\nstream\\n'+stream+'\\nendstream\\nendobj\\n');
+    let pdf='%PDF-1.4\\n';
+    const offs=[0];
+    for(const o of objs){ offs.push(pdf.length); pdf+=o; }
+    const xref=pdf.length;
+    pdf+='xref\\n0 '+(objs.length+1)+'\\n0000000000 65535 f \\n';
+    for(let i=1;i<=objs.length;i++) pdf+=String(offs[i]).padStart(10,'0')+' 00000 n \\n';
+    pdf+='trailer\\n<< /Size '+(objs.length+1)+' /Root 1 0 R >>\\nstartxref\\n'+xref+'\\n%%EOF';
+    const f=new File([new TextEncoder().encode(pdf)],'FinalThesisReal.pdf',{type:'application/pdf'});
+    const dt=new DataTransfer();
+    dt.items.add(f);
+    inp.files=dt.files;
+    inp.dispatchEvent(new Event('change',{bubbles:true}));
+    return true;
+  })()`);
+
+  const uploadDocx = () => ev(`(()=>{
+    const inp=document.querySelector('#rmdThesisFile');
+    if(!inp)return false;
+    const enc=new TextEncoder();
+    const xml='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+      +'<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'
+      +'<w:p><w:r><w:t>Observational thesis cohort of BCG vaccination outcomes.</w:t></w:r></w:p>'
+      +'<w:p><w:r><w:br w:type="page"/></w:r></w:p>'
+      +'<w:tbl><w:tr><w:tc><w:p><w:r><w:t>Table 7</w:t></w:r></w:p></w:tc><w:tc><w:p><w:r><w:t>Pooled risk ratio 0.49 (95% CI 0.34 to 0.70) across 120 patients.</w:t></w:r></w:p></w:tc></w:tr></w:tbl>'
+      +'</w:body></w:document>';
+    const name=enc.encode('word/document.xml');
+    const body=enc.encode(xml);
+    const lh=new Uint8Array(30+name.length);
+    const dvL=new DataView(lh.buffer);
+    dvL.setUint32(0,0x04034b50,true); dvL.setUint16(4,20,true); dvL.setUint16(8,0,true);
+    dvL.setUint32(18,body.length,true); dvL.setUint32(22,body.length,true); dvL.setUint16(26,name.length,true);
+    lh.set(name,30);
+    const ch=new Uint8Array(46+name.length);
+    const dvC=new DataView(ch.buffer);
+    dvC.setUint32(0,0x02014b50,true); dvC.setUint16(4,20,true); dvC.setUint16(6,20,true); dvC.setUint16(10,0,true);
+    dvC.setUint32(20,body.length,true); dvC.setUint32(24,body.length,true); dvC.setUint16(28,name.length,true);
+    dvC.setUint32(42,0,true); ch.set(name,46);
+    const eocd=new Uint8Array(22);
+    const dvE=new DataView(eocd.buffer);
+    dvE.setUint32(0,0x06054b50,true); dvE.setUint16(8,1,true); dvE.setUint16(10,1,true);
+    dvE.setUint32(12,ch.length,true); dvE.setUint32(16,lh.length+body.length,true);
+    const out=new Uint8Array(lh.length+body.length+ch.length+eocd.length);
+    out.set(lh,0); out.set(body,lh.length); out.set(ch,lh.length+body.length); out.set(eocd,lh.length+body.length+ch.length);
+    const f=new File([out],'FinalThesis1.docx',{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    const dt=new DataTransfer(); dt.items.add(f); inp.files=dt.files;
+    inp.dispatchEvent(new Event('change',{bubbles:true}));
+    return true;
+  })()`);
 
 const resetToSeed = () => ev(`(()=>{
   localStorage.removeItem('smd_research_state_v1');
@@ -319,6 +379,29 @@ try {
   ok(await until(`/Thesis read/.test(document.querySelector('#rmdScreenBody').innerText)`, 8000), 'clean thesis read and page count shown');
   ok(await ev(`!document.querySelector('#rmdThesisPhi')`), 'PHI warning cleared after the clean upload');
   await shot('phone-375-read');
+
+  // 4b. Real selectable-text PDF read directly on-device via pdf.js (0 extra server upload calls).
+  const beforeRealPdfUploads = uploadN;
+  await click('#rmdThesisReupload');
+  ok(await until(`!!document.querySelector('#rmdThesisFile')`, 5000), 'file input back for real PDF check');
+  ok(await uploadRealPdf(), 'real multi-object PDF selected');
+  ok(await until(`/FinalThesisReal\\.pdf was read: 1 page\\(s\\)/.test(document.querySelector('#rmdScreenBody').innerText)`, 10000), 'real PDF read directly on-device with page count');
+  ok(uploadN === beforeRealPdfUploads, 'selectable-text PDF required zero server upload calls');
+
+  // 4c. Real Word (.docx) thesis read natively on-device (0 extra server upload calls).
+  await click('#rmdThesisReupload');
+  ok(await until(`!!document.querySelector('#rmdThesisFile')`, 5000), 'file input back for Word DOCX check');
+  ok(await uploadDocx(), 'real Word (.docx) thesis selected');
+  ok(await until(`/FinalThesis1\\.docx was read: 2 page\\(s\\)/.test(document.querySelector('#rmdScreenBody').innerText)`, 8000), 'DOCX read natively on-device with exact 2 page count');
+  ok(uploadN === beforeRealPdfUploads, 'DOCX read required zero server upload calls');
+  ok(await ev(`(()=>{const t=JSON.parse(localStorage.getItem('smd_rmd_thesis_v1')||'{}')['prj_thesis_1']||{};return t.pages&&t.pages.length===2&&/Table 7/.test(t.pages[1].text);})()`), 'DOCX extracted table text cleanly onto page 2');
+
+  // Restore clean server result pages (page 54, Table 7) for Step 5-12 assertions or verify end-to-end
+  await click('#rmdThesisReupload');
+  ok(await until(`!!document.querySelector('#rmdThesisFile')`, 5000), 'file input back before continuing');
+  jobMode = 'clean';
+  ok(await uploadPdf(), 'mock clean PDF restores page 54 fixture');
+  ok(await until(`/Thesis read/.test(document.querySelector('#rmdScreenBody').innerText)`, 8000), 'page 54 fixture loaded');
 
   // 5. Paper type step.
   await click('[data-rmd-thesis-next="thesis-type"]');
