@@ -212,6 +212,7 @@ DEVICE_LOCK_ON = "0"
 # code ever issued read as TAMPERED. Rotate only in response to an actual key compromise, and expect
 # to re-issue certificates.
 PGLOG_VERIFY_BASE = "https://stewardmd.in"
+RESEARCH_CONTACT_EMAIL = "support@stewardmd.in"
 # AI_COST_CAP_ON intentionally UNSET → the rupee cost cap + founding pool stay INERT until go-live.
 
 [env.production]
@@ -261,6 +262,7 @@ FOUNDING_DAILY_CAP_INR = "0.01"      # ~0 free daily → founding AI draws the a
 # FOUNDING_SEATS dropped (code defaults to 500) to stay under the Pages 128 text-binding cap.
 # ResearchMD server routes on (owner: "flag on", 2026-11-24). Unset or any other value answers 404.
 RESEARCH_MODE = "pilot"
+RESEARCH_CONTACT_EMAIL = "support@stewardmd.in"
 # NMC PG Logbook verification domain (public). Named envs do NOT inherit top-level [vars], so it is
 # repeated here. The SIGNING KEY is a Pages secret, never a var — see the note in [vars] above.
 # PGLOG_VERIFY_BASE, MAIK_CACHE_VERSION and DEVICE_LOCK_ON removed from production 2026-09-13: each equalled the code default (see functions/_pglog_verify.js, _maik_cache.js, _devices.js), and Cloudflare caps a Pages Function at 128 text bindings (vars + secrets). Removing them changes nothing at runtime.

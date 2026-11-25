@@ -146,6 +146,37 @@
         action: "back", actionLabel: "Back to projects"
       };
     }
+    if (code === "invalid_search") {
+      var msg = String(e.message || "");
+      if (/semantic scholar/i.test(msg)) {
+        return { message: "Semantic Scholar is not available yet. Please search PubMed, Europe PMC, or Crossref instead.", action: "retry", actionLabel: "Try again" };
+      }
+      if (/filter/i.test(msg)) {
+        return { message: "One of the search filters is not supported for this database. Clear extra filters and try again.", action: "retry", actionLabel: "Try again" };
+      }
+      if (/date/i.test(msg)) {
+        return { message: "Please enter a valid date upper bound (YYYY-MM-DD) and try again.", action: "retry", actionLabel: "Try again" };
+      }
+      if (/query/i.test(msg)) {
+        return { message: "Search query must be between 1 and 4,000 characters.", action: "retry", actionLabel: "Try again" };
+      }
+      if (/contact_email|not configured/i.test(msg)) {
+        return { message: "Literature search needs server contact setup before connecting. Please try again later.", action: "retry", actionLabel: "Try again" };
+      }
+      return { message: "Check your search query, filters, or database selection and try again.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "search_rate_limited" || status === 429) {
+      if (/100 requests|off-peak/i.test(String(e.message || ""))) {
+        return { message: "This search matched too many articles for daytime PubMed limits. Narrow your query (e.g. add trial or a date range) or use Europe PMC.", action: "retry", actionLabel: "Try again" };
+      }
+      return { message: "Database rate limit reached. Wait a moment and try again, or try Europe PMC.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "search_unconfigured") {
+      return { message: "Literature search is temporarily unavailable on the server. Please try again later.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "search_failed") {
+      return { message: "The database search could not finish. Narrow your query or try another database.", action: "retry", actionLabel: "Try again" };
+    }
     if (code === "insufficient_credits" || status === 402) {
       return { message: "You need more MaiK tokens for this step.", action: "credits", actionLabel: "Add tokens" };
     }

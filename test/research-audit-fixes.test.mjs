@@ -50,6 +50,8 @@ test("clipboard copy in pubconsent and ctri has execCommand fallback", () => {
   }
 });
 
+import * as europepmc from "../functions/api/research/_connectors/europepmc.js";
+
 test("studies screen mobile CSS wraps topbar actions and prevents shell horizontal overflow", () => {
   const shell = read("research.js");
   const pc = read("research-screen-papercard.js");
@@ -57,4 +59,51 @@ test("studies screen mobile CSS wraps topbar actions and prevents shell horizont
   assert.match(shell, /#researchMD \.rmd-topbar-actions\s*\{[^}]*flex-wrap:\s*wrap/);
   assert.match(pc, /\.rmd-paste-input-row\s*\{[^}]*flex-wrap:\s*wrap/);
   assert.match(pc, /\.rmd-paste-input\s*\{[^}]*min-width:\s*0/);
+});
+
+test("wrangler.toml configures RESEARCH_CONTACT_EMAIL for live connectors", () => {
+  const toml = read("wrangler.toml");
+  assert.match(toml, /\[env\.production\.vars\][\s\S]*RESEARCH_CONTACT_EMAIL\s*=\s*"[^"]+@[^"]+"/);
+});
+
+test("search screen maps language and studyType filters to valid connector schemas", () => {
+  const src = read("research-screen-search.js");
+  assert.doesNotMatch(src, /filters\.language\s*=/);
+  assert.doesNotMatch(src, /filters\.studyType\s*=/);
+  assert.match(src, /filters\.languages\s*=/);
+  assert.match(src, /filters\.publicationTypes\s*=/);
+});
+
+test("europepmc connector uses ebi.ac.uk and reads object resultList.result payloads", async () => {
+  const src = read("functions/api/research/_connectors/europepmc.js");
+  assert.match(src, /https:\/\/www\.ebi\.ac\.uk\/europepmc\/webservices\/rest\/search/);
+  const calls = [];
+  const fetchMock = async (url) => {
+    calls.push(String(url));
+    const u = new URL(url);
+    if (u.searchParams.get("resultType") === "core") {
+      return new Response(JSON.stringify({
+        resultList: { result: [{ id: "101", source: "MED", pmid: "101", title: "Trial A", pubYear: "2024", authorString: "Patel R" }] }
+      }), { status: 200, headers: { "content-type": "application/json" } });
+    }
+    return new Response(JSON.stringify({
+      hitCount: 1,
+      nextCursorMark: "c2",
+      resultList: { result: [{ id: "101", source: "MED" }] }
+    }), { status: 200, headers: { "content-type": "application/json" } });
+  };
+  const out = await europepmc.search("BCG", { languages: ["eng"] }, "2026-11-25", {
+    contactEmail: "support@stewardmd.in",
+    fetch: fetchMock,
+    bucket: { acquire: async () => {} }
+  });
+  assert.deepEqual(out.ids, ["MED:101"]);
+  assert.equal(out.totalCount, 1);
+  const recs = await europepmc.fetchRecords(out.ids, {
+    contactEmail: "support@stewardmd.in",
+    fetch: fetchMock,
+    bucket: { acquire: async () => {} }
+  });
+  assert.equal(recs.length, 1);
+  assert.equal(recs[0].title, "Trial A");
 });
