@@ -8430,16 +8430,6 @@
     return c.inputs.map(function(f,fi,fa){
       var fid="mc_"+c.id+"_"+f.id;
       var lbl=cleanLabel(f.label, f.unit);
-      // IPSS-R only: show every criterion and its published point value as a selectable scoring row.
-      // Keep the native select as the source of truth for scoring, auto-fill, reset and accessibility.
-      if(c.id==="ipss_r" && f.type==="select"){
-        var scoreRows=(f.opts||[]).map(function(o){
-          var points=Number(o.v), score=points===0?"0":"+"+String(points);
-          return '<button type="button" class="mc-ipssr-option" data-seg="'+fid+'" data-v="'+esc(o.v)+'" aria-pressed="false"><span class="mc-ipssr-criterion">'+esc(o.t)+'</span><strong class="mc-ipssr-points">'+score+'</strong></button>';
-        }).join("");
-        var hiddenOpts='<option value="">Select</option>'+(f.opts||[]).map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
-        return '<section class="mc-ipssr-field"><div class="mc-ipssr-label">'+esc(lbl)+'</div><div class="mc-ipssr-options" role="group" aria-label="'+esc(lbl)+'">'+scoreRows+'</div><select class="mc-input mc-seg-select" id="'+fid+'" aria-label="'+esc(lbl)+'">'+hiddenOpts+'</select><span class="mc-src" data-src-for="'+fid+'"></span></section>';
-      }
       if(f.type==="check"){
         return '<div class="mc-frow mc-frow-switch"><label class="mc-flbl" for="'+fid+'">'+esc(lbl)+'</label><button type="button" class="mc-switch" data-switch="'+fid+'" role="switch" aria-checked="false" aria-label="'+esc(lbl)+'"><span></span></button><input type="checkbox" id="'+fid+'" class="mc-check-hidden" tabindex="-1"></div>';
       }
@@ -8447,7 +8437,7 @@
         var opts=f.opts||[];
         var hasEmpty=opts.length&&String(opts[0].v)==="";
         var allOpts=(!hasEmpty && f.def==null)?[{v:"",t:"Select"}].concat(opts):opts;
-        if(isShortOpts(opts)){
+        if(c.id!=="ipss_r" && isShortOpts(opts)){
           var seg=allOpts.map(function(o){
             if(String(o.v)==="") return "";
             return '<button type="button" class="mc-seg-btn" data-seg="'+fid+'" data-v="'+esc(o.v)+'" aria-label="'+esc(o.t)+'">'+esc(String(o.t).replace(/\s*\([+-]?\d+(\.\d+)?( ?pts?)?\)\s*$/i,"")||o.t)+'</button>';
@@ -8455,8 +8445,17 @@
           var selOpts=allOpts.map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
           return '<div class="mc-frow mc-frow-seg"><span class="mc-flbl" id="'+fid+'_lbl">'+esc(lbl)+'</span><span class="mc-seg" role="group" aria-labelledby="'+fid+'_lbl">'+seg+'</span><select class="mc-input mc-seg-select" id="'+fid+'" aria-label="'+esc(lbl)+'">'+selOpts+'</select><span class="mc-src" data-src-for="'+fid+'"></span></div>';
         }
-        var opts2=allOpts.map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
-        return '<div class="mc-frow"><label class="mc-flbl" for="'+fid+'">'+esc(lbl)+'</label><span class="mc-fval"><select class="mc-input mc-select" id="'+fid+'">'+opts2+'</select></span><span class="mc-src" data-src-for="'+fid+'"></span></div>';
+        var scoreRows=allOpts.map(function(o){
+          if(String(o.v)==="") return "";
+          var ptHtml="";
+          if(c.id==="ipss_r"){
+            var points=Number(o.v), score=points===0?"0":"+"+String(points);
+            ptHtml='<strong class="mc-ipssr-points">'+score+'</strong>';
+          }
+          return '<button type="button" class="mc-ipssr-option" data-seg="'+fid+'" data-v="'+esc(o.v)+'" aria-pressed="false"><span class="mc-ipssr-criterion">'+esc(o.t)+'</span>'+ptHtml+'</button>';
+        }).join("");
+        var selOpts2=allOpts.map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
+        return '<section class="mc-ipssr-field"><div class="mc-ipssr-label">'+esc(lbl)+'</div><div class="mc-ipssr-options" role="group" aria-label="'+esc(lbl)+'">'+scoreRows+'</div><select class="mc-input mc-seg-select" id="'+fid+'" aria-label="'+esc(lbl)+'">'+selOpts2+'</select><span class="mc-src" data-src-for="'+fid+'"></span></section>';
       }
       var typ=f.type==="date"?"date":"number";
       var step=f.step?' step="'+esc(f.step)+'"':(typ==="number"?' step="any"':"");
@@ -9297,14 +9296,15 @@
       Q+" #mcCalcView [id^=mcAFnote_]:not(:empty){padding:8px 16px 0}",
       Q+" .mc-form{margin:12px 16px 0;background:var(--panel,#fff);border:1px solid var(--line,#e3eaee);border-radius:12px;overflow:hidden}",
       Q+" .mc-frow{display:flex;align-items:center;gap:10px;min-height:48px;padding:6px 12px;border-bottom:1px solid var(--line,#e3eaee);flex-wrap:wrap}",
-      Q+" .mc-ipssr-field{padding:12px 0;border-bottom:1px solid var(--line,#e3eaee)}",
+      Q+" .mc-ipssr-field{padding:12px 14px;border-bottom:1px solid var(--a-line,var(--line,#e3eaee))}",
+      Q+" .mc-frow+.mc-ipssr-field{border-top:1px solid var(--a-line,var(--line,#e3eaee))}",
       Q+" .mc-ipssr-field:last-child{border-bottom:none}",
-      Q+" .mc-ipssr-label{font:600 14px var(--sans,system-ui);color:var(--ink,#14202b);margin:0 0 10px}",
-      Q+" .mc-ipssr-options{display:grid;grid-template-columns:minmax(0,1fr);border:1px solid var(--line,#d8dfdc);border-radius:11px;overflow:hidden;background:var(--panel,#fff)}",
-      Q+" .mc-ipssr-option{display:flex;align-items:flex-start;gap:12px;width:100%;padding:12px 14px;border:0;border-bottom:1px solid var(--line,#d8dfdc);background:transparent;color:var(--ink,#27333a);text-align:left;cursor:pointer;font:600 13.5px/1.45 var(--sans,system-ui);min-height:48px}",
+      Q+" .mc-ipssr-label{font:600 15px/1.3 var(--a-font,var(--sans,system-ui));color:var(--a-ink,var(--ink,#14202b));margin:0 0 10px}",
+      Q+" .mc-ipssr-options{display:grid;grid-template-columns:minmax(0,1fr);border:1px solid var(--a-line,var(--line,#d8dfdc));border-radius:11px;overflow:hidden;background:var(--a-card,var(--panel,#fff))}",
+      Q+" .mc-ipssr-option{display:flex;align-items:flex-start;gap:12px;width:100%;padding:11px 14px;border:0;border-bottom:1px solid var(--a-line,var(--line,#d8dfdc));background:transparent;color:var(--a-ink,var(--ink,#27333a));text-align:left;cursor:pointer;font:500 13.5px/1.45 var(--a-font,var(--sans,system-ui));min-height:44px}",
       Q+" .mc-ipssr-option:last-child{border-bottom:0}",
-      Q+" .mc-ipssr-option:active{background:var(--teal-soft,#e5f2ee)}",
-      Q+" .mc-ipssr-option.on{background:#087f68;color:#fff}",
+      Q+" .mc-ipssr-option:active{background:var(--a-soft,var(--teal-soft,#e5f2ee))}",
+      Q+" .mc-ipssr-option.on{background:#0F766E;color:#fff}",
       Q+" .mc-ipssr-criterion{flex:1;min-width:0}",
       Q+" .mc-ipssr-points{flex:0 0 34px;text-align:right;white-space:nowrap;color:var(--slate-soft,#78817f);font:800 15px var(--sans,system-ui);font-variant-numeric:tabular-nums}",
       Q+" .mc-ipssr-option.on .mc-ipssr-points{color:rgba(255,255,255,.78)}",
