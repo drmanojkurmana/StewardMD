@@ -463,12 +463,12 @@ try {
   // 7. Responsive checks: 390x844 (iPhone) and 1024x1366 (iPad Pro)
   await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await sleep(150);
-  ok(await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`), '390x844 no horizontal scroll');
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), '390x844 no horizontal scroll');
   await shot('phone-390-plan-screen');
 
   await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 1366, deviceScaleFactor: 2, mobile: false });
   await sleep(150);
-  ok(await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`), '1024x1366 iPad no horizontal scroll');
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), '1024x1366 iPad no horizontal scroll');
   await shot('ipad-1024-plan-screen');
 
   // 8. No em/en dashes anywhere in ResearchMD text

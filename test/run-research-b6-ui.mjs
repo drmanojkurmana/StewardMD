@@ -319,7 +319,7 @@ const waitCond = async (fn, ms = 8000) => {
 
 const click = (sel) => ev(`(()=>{const b=document.querySelector(${JSON.stringify(sel)});if(!b)return false;b.click();return true})()`);
 const text = (sel) => ev(`(()=>{const e=document.querySelector(${JSON.stringify(sel)});if(!e)return '';return e.innerText||e.textContent||''})()`);
-const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');return b.scrollWidth<=b.clientWidth+2})()`);
+const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');const d=document.documentElement;return b.scrollWidth<=b.clientWidth+2 && d.scrollWidth<=d.clientWidth})()`);
 const noDash = async () => !/[\u2014\u2013]/.test(await text('#researchMD'));
 
 try {
@@ -491,6 +491,18 @@ try {
   const currentHeading = await text('.rmd-editor-title');
   ok(currentHeading.includes('Abstract'), 'Fix button jumped directly to Abstract section editor');
 
+  // A cohort study is not a review, so the Ready gate must not demand PRISMA flow counts
+  await ev(`(()=>{ const p = SMD_RESEARCH.store.getActiveProject(); p.studyType = "cohort"; SMD_RESEARCH.store.adoptServerProject(p); SMD_RESEARCH.open({ screen: "ready" }); return true; })()`);
+  ok(await until(`!!document.querySelector('.rmd-ready-screen')`, 8000), 'ready screen renders for a cohort study');
+  const cohortReady = await text('.rmd-ready-list');
+  ok(!/study flow counts/i.test(cohortReady), 'cohort Ready gate does not ask for study flow counts');
+  ok(!/prisma/i.test(cohortReady), 'cohort Ready gate does not mention PRISMA');
+  await ev(`(()=>{ const p = SMD_RESEARCH.store.getActiveProject(); p.studyType = "systematic_review"; SMD_RESEARCH.store.adoptServerProject(p); SMD_RESEARCH.open({ screen: "ready" }); return true; })()`);
+  ok(await until(`!!document.querySelector('.rmd-ready-screen')`, 8000), 'ready screen restored for the systematic review');
+  ok(/study flow counts/i.test(await text('.rmd-ready-list')), 'systematic review Ready gate still asks for study flow counts');
+  await ev(`SMD_RESEARCH.open({ screen: "manuscript" }); 1`);
+  ok(await until(`!!document.querySelector('.rmd-manuscript-screen')`, 8000), 'back on the manuscript screen');
+
 
   /* ========================================================================
    * FEATURE C: Reference file import in Search screen
@@ -566,7 +578,7 @@ try {
    * ======================================================================== */
   console.log('\n--- Test D: Responsive, typography, and polish ---');
 
-  for (const [width, height, mobile] of [[375, 812, true], [768, 1024, true]]) {
+  for (const [width, height, mobile] of [[375, 812, true], [390, 844, true], [768, 1024, true], [1024, 768, false], [1024, 1366, false]]) {
     await call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 2, mobile });
 
     // Manuscript screen at this viewport

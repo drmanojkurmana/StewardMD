@@ -207,11 +207,11 @@ try {
   // 5. iPad layout, then privacy + responsive + dash + page-error sweeps.
   await viewport(1024, 1366, false);
   await sleep(200);
-  ok(await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`), 'no horizontal overflow at 1024px');
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), 'no horizontal overflow at 1024px');
   await shot('caseseries-ipad-1024-describe');
   await viewport(390, 844, true);
   await sleep(200);
-  ok(await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`), 'no horizontal overflow at 390px');
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), 'no horizontal overflow at 390px');
   const dashes = await ev(`(()=>{const t=document.querySelector('#researchMD').innerText||'';return (t.match(/[\\u2013\\u2014]/g)||[]).length})()`);
   ok(dashes === 0, 'no em or en dashes in ResearchMD visible text');
   const leaky = allBodies.filter((r) => /Troponin/.test(r.body) || /Zinc phosphide/.test(r.body) || /\b98\d{8}\b/.test(r.body));

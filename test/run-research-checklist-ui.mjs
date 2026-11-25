@@ -24,6 +24,10 @@ const PORT = 9107;
 const CDP = 9507;
 const miniPrisma = JSON.parse(readFileSync(join(fixtureDir, 'mini-prisma.json'), 'utf8'));
 const miniOther = JSON.parse(readFileSync(join(fixtureDir, 'mini-other.json'), 'utf8'));
+miniPrisma.source = 'PRISMA 2020 statement (Page MJ et al., BMJ 2021;372:n71)';
+miniPrisma.licence = 'CC BY 4.0';
+miniOther.source = 'STROBE statement (von Elm E et al., Lancet 2007;370:1453-57)';
+miniOther.licence = 'CC BY 4.0';
 const partial = JSON.parse(readFileSync(join(fixtureDir, 'snapshot-partial.json'), 'utf8'));
 const manuals = { prisma2020: {}, 'strobe-fixture': {} };
 
@@ -204,7 +208,7 @@ const until = async (expr, ms = 10000) => {
 const click = (sel) => ev('(()=>{const b=document.querySelector(' + JSON.stringify(sel) + ');if(!b)return false;b.click();return true})()');
 const text = (sel) => ev('(()=>{const e=document.querySelector(' + JSON.stringify(sel) + ');if(!e)return "";return e.innerText||e.textContent||""})()');
 const setVal = (sel, value) => ev('(()=>{const e=document.querySelector(' + JSON.stringify(sel) + ');if(!e)return false;e.value=' + JSON.stringify(value) + ';e.dispatchEvent(new Event("input",{bubbles:true}));e.dispatchEvent(new Event("change",{bubbles:true}));return true})()');
-const noOverflow = () => ev('(()=>{const b=document.getElementById("researchMD");return !!b && b.scrollWidth<=b.clientWidth+2})()');
+const noOverflow = () => ev('(()=>{const b=document.getElementById("researchMD");const d=document.documentElement;return !!b && b.scrollWidth<=b.clientWidth+2 && d.scrollWidth<=d.clientWidth})()');
 const noEmDash = async () => !/\u2014/.test(await text('#researchMD'));
 
 try {
@@ -251,6 +255,11 @@ try {
   ok(await click('[data-rmd-export="csv"]'), 'csv export clicked');
   ok(await until('(()=>{const e=document.getElementById("rmdChecklistCsv");if(!e)return false;const t=e.textContent||"";return t.indexOf("section,number,topic,status")===0 && t.indexOf(' + JSON.stringify(manualText) + ')!==-1 && t.indexOf("manual")!==-1})()', 4000), 'csv export contains the header, the manual text, and a status');
 
+  const creditText = await text('#rmdChecklistCredit');
+  ok(/Source/.test(creditText) && /Licence/.test(creditText), 'checklist footer names the source and the licence');
+  ok(/PRISMA/.test(creditText), 'footer source names the reporting guideline');
+  ok(await until('(()=>{const t=(document.getElementById("rmdChecklistCsv")||{}).textContent||"";const rows=t.trim().split("\\n");return rows[0].indexOf("section,number,topic,status")===0 && /,source,licence$/.test(rows[0]) && rows.length>1 && rows.slice(1).every(function(r){return /,CC BY 4\\.0$/.test(r)})})()', 4000), 'csv export repeats the source and licence on every row');
+
   ok(await ev('(()=>{const l=document.querySelector(".rmd-checklist-items");const r=document.querySelector(".rmd-checklist-manuscript");if(!l||!r)return false;const a=l.getBoundingClientRect();const b=r.getBoundingClientRect();return a.width>40 && b.width>40 && a.left<b.left})()'), 'two panes at 1024');
 
   ok(await setVal('#rmdChecklistGuide', 'strobe-fixture'), 'guideline picker changed');
@@ -258,11 +267,11 @@ try {
   ok(await setVal('#rmdChecklistGuide', 'prisma2020'), 'guideline picker returned to PRISMA');
   ok(await until('!!document.querySelector(\'[data-rmd-item="1"]\') && !!document.querySelector(\'[data-rmd-manual="M1"]\')', 5000), 'PRISMA checklist restored with the saved entry');
 
-  for (const [width, height] of [[375, 812], [768, 1024], [1024, 768]]) {
+  for (const [width, height] of [[375, 812], [390, 844], [768, 1024], [1024, 768], [1024, 1366]]) {
     await call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: width < 1024 });
     await ev('window.dispatchEvent(new Event("resize"))');
     ok(await until('!!document.querySelector(".rmd-checklist-screen") && !!document.querySelector(\'[data-rmd-item="M1"]\')', 5000), 'screen renders at ' + width);
-    if (width === 375) {
+    if (width <= 390) {
       ok(await until('!document.querySelector("#researchMD textarea")', 4000), 'phone has no manual textarea');
       ok((await text('[data-rmd-item="M1"]')).indexOf(manualText) !== -1, 'saved manual text stays visible on a phone');
       ok(!!await ev('!!document.querySelector("[data-rmd-approve]")'), 'approve control is on the phone');

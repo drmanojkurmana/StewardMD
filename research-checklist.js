@@ -57,7 +57,7 @@
   };
   var STOP = {
     the: 1, and: 1, for: 1, with: 1, that: 1, this: 1, from: 1, into: 1,
-    were: 1, was: 1, are: 1, not: 1, have: 1, has: 1, been: 1, were: 1,
+    were: 1, was: 1, are: 1, not: 1, have: 1, has: 1, been: 1,
     study: 1, studies: 1, review: 1, using: 1, used: 1, each: 1, than: 1,
     when: 1, what: 1, which: 1, their: 1, there: 1, about: 1, after: 1
   };
@@ -1172,6 +1172,8 @@
       checklistId: checklist.id || "",
       checklistName: checklist.name || "",
       version: checklist.version || "",
+      source: checklist.source || "",
+      licence: checklist.licence || "",
       items: items,
       counts: counts
     };
@@ -1185,7 +1187,7 @@
 
   function toCsv(filled) {
     var items = (filled && filled.items) || [];
-    var lines = ["section,number,topic,status,item,filled,evidence,manuscript_section,paragraph"];
+    var lines = ["section,number,topic,status,item,filled,evidence,manuscript_section,paragraph,source,licence"];
     var i, it, ev, paragraph;
     for (i = 0; i < items.length; i++) {
       it = items[i];
@@ -1200,7 +1202,9 @@
         csvCell(it.filled),
         csvCell(ev),
         csvCell(it.pointer ? it.pointer.section : ""),
-        csvCell(paragraph)
+        csvCell(paragraph),
+        csvCell(filled.source),
+        csvCell(filled.licence)
       ].join(","));
     }
     return lines.join("\n");

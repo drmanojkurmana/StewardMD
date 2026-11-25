@@ -1792,7 +1792,7 @@
       }
       var checklistDone = counts ? (counts.missing === 0 && counts.partial === 0) : !!snap;
       var typeKey = studyKey(proj);
-      var isReview = t.indexOf("thesis") >= 0 ? gid === "prisma2020" : (typeKey !== "case-report" && typeKey !== "case-series" && typeKey !== "case-control" && typeKey !== "rct");
+      var isReview = t.indexOf("thesis") >= 0 ? gid === "prisma2020" : (typeKey !== "case-report" && typeKey !== "case-series" && typeKey !== "case-control" && typeKey !== "rct" && typeKey !== "cohort");
       var flowDone = !isReview || !!(snap && snap.prisma && snap.prisma.studiesIncluded > 0);
       var items = [
         { done: approved, yes: "The manuscript is approved by a clinician.", no: "The manuscript still needs clinician approval.", screen: "manuscript" },

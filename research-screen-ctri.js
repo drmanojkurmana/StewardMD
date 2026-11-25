@@ -186,7 +186,7 @@
         var date = dateInput ? dateInput.value : "";
 
         var val = validateCtri(rawNum);
-        if (!val.ok) {
+        if (status === "registered" && !val.ok) {
           if (msgEl) {
             msgEl.innerHTML = '<span style="color:#ff6b6b; font-weight:600;">' + esc(val.message) + '</span>';
           }

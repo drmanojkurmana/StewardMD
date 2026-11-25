@@ -261,7 +261,7 @@ try {
   await viewport(1024, 1366, false);
   await sleep(200);
   ok(await ev(`getComputedStyle(document.querySelector('.rmd-mc-grid')).gridTemplateColumns.split(' ').length === 2`), 'column grid is two columns on iPad');
-  ok(await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`), 'no horizontal overflow at 1024px (columns)');
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), 'no horizontal overflow at 1024px (columns)');
   await shot('ipad-1024-columns');
   await viewport(390, 844, true);
   await sleep(200);
@@ -365,13 +365,13 @@ try {
   await click('[data-section-id="results"]');
   ok(await until(`/Table 1\\. Baseline characteristics/.test(document.querySelector('.rmd-manuscript-screen').innerText)`, 5000), 'appended Table 1 text visible in the manuscript');
   ok(await until(`/HbA1c/.test(document.querySelector('.rmd-manuscript-screen').innerText)`, 3000), 'earlier compare results still in the manuscript');
-  ok(await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`), 'no horizontal overflow at 1024px (manuscript)');
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), 'no horizontal overflow at 1024px (manuscript)');
   await shot('ipad-1024-manuscript');
 
   // 12. Privacy + responsive + dash + page-error sweeps.
   await viewport(390, 844, true);
   await sleep(200);
-  ok(await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`), 'no horizontal overflow at 390px');
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), 'no horizontal overflow at 390px');
   const dashes = await ev(`(()=>{const t=document.querySelector('#researchMD').innerText||'';return (t.match(/[\\u2013\\u2014]/g)||[]).length})()`);
   ok(dashes === 0, 'no em or en dashes in ResearchMD visible text');
   const leaky = allBodies.filter((r) => /Patient 0/.test(r.body));

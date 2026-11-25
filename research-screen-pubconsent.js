@@ -147,6 +147,8 @@
         h.push('<h4>' + esc(saved.languageName) + ' Version</h4>');
         h.push('<pre class="rmd-consent-preview-local" style="background:#071318; border:1px solid #1f363d; padding:12px; border-radius:6px; white-space:pre-wrap; font-family:inherit; font-size:13px; max-height:280px; overflow-y:auto;">' + esc(saved.local) + '</pre>');
         h.push('</div>');
+      } else if (saved.languageName && saved.languageName !== "English") {
+        h.push('<p class="rmd-consent-local-missing" role="status" style="margin:0 0 16px; padding:10px; background:rgba(255,107,107,0.1); border:1px solid #ff6b6b; border-radius:6px; font-size:13px; color:#ff8787;">Local language version not filled in. Add the ' + esc(saved.languageName) + ' text before the patient signs.</p>');
       }
       h.push('</div>');
     } else {
@@ -278,7 +280,7 @@
             var draft = resp.data.draft;
             var record = {
               english: draft.english,
-              local: draft.local || draft.english,
+              local: draft.local || "",
               languageName: draft.languageName || lang,
               includesImages: hasImages,
               journalName: journal
@@ -310,7 +312,7 @@
 
         var record = {
           english: engText,
-          local: locText || engText,
+          local: locText,
           languageName: langName,
           includesImages: true
         };

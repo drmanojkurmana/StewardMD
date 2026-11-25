@@ -939,7 +939,7 @@
       }
     }
     if (r.lr && r.lr.ok && r.lr.p != null) lines.push("Log-rank p = " + pStr(r.lr.p));
-    if (r.cox && r.cox.coefficients) {
+    if (r.cox && r.cox.ok && r.cox.coefficients) {
       for (var k = 0; k < r.cox.coefficients.length; k++) {
         var co = r.cox.coefficients[k];
         if (co.estimable === false) { lines.push(co.term + ": hazard ratio could not be estimated (separation)."); continue; }
@@ -1479,7 +1479,7 @@
       var pg = pGloss(r.lr.p);
       if (pg) h += '<p class="rmd-mc-gloss">' + esc(pg) + "</p>";
     }
-    if (r.cox && r.cox.coefficients && r.cox.coefficients.length) {
+    if (r.cox && r.cox.ok && r.cox.coefficients && r.cox.coefficients.length) {
       h += '<div class="rmd-mc-tablewrap"><table class="rmd-mc-table"><thead><tr><th>Factor</th><th>HR (95% CI)</th><th>p</th></tr></thead><tbody>';
       for (var k = 0; k < r.cox.coefficients.length; k++) {
         var co = r.cox.coefficients[k];
