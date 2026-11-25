@@ -6460,11 +6460,18 @@
   function redactPHI(text) {
     var t = String(text == null ? "" : text);
     t = t.replace(/\b[\w.+-]+@[\w.-]+\.\w{2,}\b/g, "[redacted]");                                  // email
-    t = t.replace(/\b(MRN|UHID|UID|IP\s?N?o|OP\s?N?o|Reg\.?\s?No|Hosp\.?\s?No|ABHA|Aadhaar)\b\s*[:#.]?\s*\S+/gi, "$1: [redacted]");
+    t = t.replace(/\b(?:\d{4}[ -]\d{4}[ -]\d{4}|[Xx*]{4}[ -]?[Xx*]{4}[ -]?\d{4}|\d{12})\b/g, "[redacted]"); // Aadhaar 4-4-4 / 12-digit / masked
+    t = t.replace(/\b(Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp\.?\s?No|MRN|UHID|UID|IPD\s?N?o|IPD|IP\s?N?o|OPD\s?N?o|OP\s?N?o|CR\s?N?o|Reg\.?\s?No|ABHA|Aadhaar|Aadhar)\b\s*[:#.]?\s*(?:\d{4}[\s-]\d{4}[\s-]\d{4}|\d{12}|\S+)/gi, "$1: [redacted]");
     t = t.replace(/\b(Name|Patient|Pt\.?\s?Name|Father|Mother|Guardian|Husband|Wife)\b\s*[:]\s*.+/gi, "$1: [redacted]");
     t = t.replace(/\b(DOB|D\.?O\.?B|Date of Birth|Age\/Sex)\b\s*[:]?\s*\S+/gi, "$1: [redacted]");
+    t = t.replace(/(?:\(0\d{2,4}\)\s*|(?:\b0\d{2,4}[-.\s]))\d{3,4}[-.\s]?\d{3,4}\b|\b0\d{2,4}-\d{6,8}\b/g, "[redacted]"); // (STD) landlines
+    t = t.replace(/\b(?:(?:\+91|0)[-.\s]?)?[6-9]\d{4}\.\d{5}\b/g, "[redacted]");                   // dotted mobiles
     t = t.replace(/(\+?\d[\d\s-]{8,}\d)/g, "[redacted]");                                          // phone / 10+ digit id runs
-    t = t.replace(/\b\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}\b/g, "[date]");                            // dd/mm/yyyy
+    t = t.replace(/\b\d{4}[\\/-]\d{1,2}[\\/-]\d{1,2}\b/g, "[date]");                                // yyyy-mm-dd / yyyy/mm/dd
+    t = t.replace(/\b\d{1,2}[\\/.\\-]\d{1,2}[\\/.\\-]\d{2,4}\b/g, "[date]");                       // dd/mm/yyyy, dd.mm.yyyy
+    t = t.replace(/\b\d{1,2}(?:st|nd|rd|th)?[\s.\\-]+(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)(?:[\s.\\-]+\d{2,4})?\b/gi, "[date]"); // dd-Mon-yyyy, ordinal
+    t = t.replace(/\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{1,2}(?:st|nd|rd|th)?(?:,?\s+\d{2,4})?\b/gi, "[date]"); // Month dd
+    t = t.replace(/\b(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{4}\b/gi, "[date]"); // Month yyyy
     // Indian identifiers (ABHA Address, UPI, PAN, Indic-script digits, labelled IDs): phi-india.js,
     // additive only. Flag smd_phi_india, default ON; "0" restores the output above exactly.
     try { var PI = window.SMD_PHI_INDIA; if (PI && PI.enabled()) t = PI.apply(t); } catch (e) {}

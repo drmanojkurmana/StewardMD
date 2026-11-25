@@ -223,6 +223,31 @@ async function epmcLimited(query, limit, config) {
   return out;
 }
 
+function hasPhiInQuery(q) {
+  if (!q) return false;
+  if (/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/.test(q)) return true;
+  if (/(?:\b\d{4}[ -]\d{4}[ -]\d{4}\b|\b\d{12}\b|\b[Xx*]{4}[ -]?[Xx*]{4}[ -]?\d{4}\b)/.test(q)) return true;
+  const phoneRe = /(?:\(0\d{2,4}\)[\s.\-]?\d{3,4}[\s.\-]?\d{3,4}|\b0\d{2,4}[\s.\-]\d{3,4}[\s.\-]?\d{3,4}\b|\b0\d{2,4}[\-]\d{6,8}\b|(?:(?:\+91|0)[\s.\-]?)?[6-9]\d{2,4}[\s.\-]?\d{2,4}[\s.\-]?\d{2,4}\b)/g;
+  let m;
+  while ((m = phoneRe.exec(q)) !== null) {
+    const raw = m[0].replace(/\D/g, "");
+    if (/^\(0\d{2,4}\)/.test(m[0]) || /^0\d{2,4}[-.\s]/.test(m[0]) || /^0\d{2,4}-\d{6,8}/.test(m[0])) {
+      if (raw.length >= 10 && raw.length <= 12) return true;
+    } else if (
+      (m[0].indexOf("+91") === 0 && raw.length === 12 && /^[6-9]/.test(raw.slice(2))) ||
+      (m[0].indexOf("0") === 0 && raw.length === 11 && /^[6-9]/.test(raw.slice(1))) ||
+      (raw.length === 10 && /^[6-9]/.test(raw))
+    ) {
+      return true;
+    }
+  }
+  const dateRe = /\b(?:\d{4}[\/-]\d{1,2}[\/-]\d{1,2}|\d{1,2}[\/.\\-]\d{1,2}[\/.\\-]\d{2,4}|\d{1,2}(?:st|nd|rd|th)?[\s.\\-]+(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)(?:[\s.\\-]+\d{2,4})?|(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{1,2}(?:st|nd|rd|th)?(?:,?\s+\d{2,4})?|(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{4})\b/i;
+  if (dateRe.test(q)) return true;
+  const idLabelRe = /\b(?:Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp(?:\s*No\.?|\s*Number)?|Reg(?:\s*No\.?|\s*Number)?|OPD(?:\s*No\.?|\s*Number)?|OP(?:\s*No\.?|\s*Number)?|IPD(?:\s*No\.?|\s*Number)?|IP(?:\s*No\.?|\s*Number)?|CR(?:\s*No\.?|\s*Number)?|UHID|MRN)\b/i;
+  if (idLabelRe.test(q)) return true;
+  return false;
+}
+
 export async function findStudies(ctx, projectId, body) {
   const { env, db, uid, requestId, api } = ctx;
   const { json, err, projectGate, gateErr } = api;
@@ -233,6 +258,8 @@ export async function findStudies(ctx, projectId, body) {
   let limit = body && body.limit === undefined ? 20 : body.limit;
   if (!Number.isInteger(limit) || limit < 1 || limit > 50)
     return err(400, "invalid_body", "limit must be an integer from 1 to 50", requestId);
+  if (hasPhiInQuery(q))
+    return err(400, "phi_in_query", "Query contains personal details. Remove personal identifiers before searching.", requestId);
   if (!env.RESEARCH_CONTACT_EMAIL)
     return err(503, "search_unconfigured", "Research database contact is not configured", requestId);
   const config = configOf(env);

@@ -163,7 +163,23 @@
     if (st.searching) {
       h.push('<div class="rmd-card">' + (SMD.p2 ? SMD.p2.loadingHtml("Searching PubMed and Europe PMC") : "Searching") + '</div>');
     } else if (st.error) {
-      h.push('<div class="rmd-card">' + (SMD.p2 ? SMD.p2.errHtml(st.error, "nv-retry") : '<div class="rmd-banner rmd-banner-error" role="alert">' + esc(st.error.message) + '</div>') + '</div>');
+      if (st.error.isPhi && st.error.findings) {
+        h.push('<div class="rmd-card">' +
+          '<div class="rmd-banner rmd-banner-warn" role="alert">' +
+          '<strong>De-identification findings (must fix before sending):</strong>' +
+          '<ul style="margin:6px 0 0 16px; padding:0; font-size:12px;">' +
+          st.error.findings.map(function (f) {
+            var fix = f.indexOf("phone") >= 0 ? "Remove phone number." :
+                      f.indexOf("date") >= 0 ? "Convert dates to Day N." :
+                      f.indexOf("email") >= 0 ? "Remove email address." :
+                      f.indexOf("aadhaar") >= 0 ? "Remove Aadhaar number." :
+                      f.indexOf("uhid") >= 0 ? "Remove hospital identification number." : "Remove personal identifier.";
+            return '<li><span class="rmd-finding-match">' + esc(f) + '</span>: ' + esc(fix) + '</li>';
+          }).join("") +
+          '</ul></div></div>');
+      } else {
+        h.push('<div class="rmd-card">' + (SMD.p2 ? SMD.p2.errHtml(st.error, "nv-retry") : '<div class="rmd-banner rmd-banner-error" role="alert">' + esc(st.error.message) + '</div>') + '</div>');
+      }
     } else if (st.searched && st.results) {
       h.push('<div class="rmd-card">');
       h.push('<h3 role="status">We found ' + st.results.length + ' similar published cases</h3>');
@@ -194,8 +210,41 @@
 
   function doSearch() {
     if (!st || st.searching) return;
+    var inputEl = st.container ? st.container.querySelector("#rmdNvQuery") : null;
+    if (inputEl && inputEl.value != null) st.query = inputEl.value;
     var q = trim(st.query);
     if (!q) return;
+
+    var phiHits = (G.RMDPhi && G.RMDPhi.scan) ? G.RMDPhi.scan(q) : [];
+    var redactFn = (G && G.SMD_redactPHI) ? G.SMD_redactPHI : (typeof window !== "undefined" && window.SMD_redactPHI ? window.SMD_redactPHI : null);
+    var redactChanged = false;
+    if (redactFn) {
+      try {
+        var rq = redactFn(q);
+        if (rq !== q) redactChanged = true;
+      } catch (e) {}
+    }
+
+    if (phiHits.length > 0 || redactChanged) {
+      var findings = [];
+      for (var f = 0; f < phiHits.length; f++) {
+        var item = phiHits[f];
+        findings.push(item.kind + ": " + item.match);
+      }
+      if (redactChanged && !phiHits.length) {
+        findings.push("personal identifier flagged");
+      }
+      st.searching = false;
+      st.results = null;
+      st.error = {
+        isPhi: true,
+        findings: findings,
+        message: "De-identification findings (must fix before sending): " + findings.join("; ")
+      };
+      draw();
+      return;
+    }
+
     st.searching = true;
     st.error = null;
     draw();
@@ -251,7 +300,13 @@
   function bind() {
     var c = st.container;
     var q = c.querySelector("#rmdNvQuery");
-    if (q) q.oninput = function () { st.query = this.value; };
+    var sbtn = c.querySelector('[data-rmd-nv="search"]');
+    if (q) {
+      q.oninput = function () {
+        st.query = this.value;
+        if (sbtn) sbtn.disabled = st.searching || !trim(st.query);
+      };
+    }
     c.onclick = function (ev) {
       var el = ev.target, attr;
       while (el && el !== c) {

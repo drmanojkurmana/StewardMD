@@ -57,7 +57,8 @@
     t = t.replace(new RegExp("\\b[A-Za-z0-9._-]{2,}@(?:" + UPI_PSP + ")\\b(?!\\.)", "gi"), R); // UPI ID
     t = t.replace(/\b[A-Z]{5}\d{4}[A-Z]\b/g, R);                                             // PAN
     t = t.replace(/\b[Xx*]{4}[\s-]?[Xx*]{4}[\s-]?\d{4}\b/g, R);                               // masked Aadhaar
-    t = t.replace(/\b(Aadhar|Aadhaar\s?No|ABHA\s?(?:No|Number|Address)|Ration\s?Card(?:\s?No)?|Voter\s?ID|EPIC(?:\s?No)?|PMJAY(?:\s?ID)?|Policy\s?No|Claim\s?No|Card\s?No)\b\s*[:#.]?\s*\S+/gi, "$1: " + R);
+    t = t.replace(/\b(Aadhar|Aadhaar(?:\s?No)?)\b\s*[:#.]?\s*(?:\d{4}[\s-]\d{4}[\s-]\d{4}|\d{12}|\S+)/gi, "$1: " + R);
+    t = t.replace(/\b(ABHA\s?(?:No|Number|Address)|Ration\s?Card(?:\s?No)?|Voter\s?ID|EPIC(?:\s?No)?|PMJAY(?:\s?ID)?|Policy\s?No|Claim\s?No|Card\s?No)\b\s*[:#.]?\s*\S+/gi, "$1: " + R);
     t = t.replace(/\b(Pin\s?code|PIN)\b\s*[:#.]?\s*\d{6}\b/g, "$1: " + R);
     t = t.replace(/(नाम|पूरा नाम|పేరు|రోగి పేరు)\s*[:ः]\s*.+/g, "$1: " + R);                 // Hindi / Telugu "name:"
     return t;

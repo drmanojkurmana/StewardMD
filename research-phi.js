@@ -10,19 +10,28 @@
     january: 1, february: 2, march: 3, april: 4, june: 6, july: 7, august: 8, september: 9, october: 10, november: 11, december: 12
   };
 
+  var MON_STR = "Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?";
+  var DATE_PATTERN = "\\b(?:" +
+    "\\d{4}[\\/-]\\d{1,2}[\\/-]\\d{1,2}|" +
+    "\\d{1,2}[\\/.\\-]\\d{1,2}[\\/.\\-]\\d{2,4}|" +
+    "\\d{1,2}(?:st|nd|rd|th)?[\\s.\\-]+(?:" + MON_STR + ")(?:[\\s.\\-]+\\d{2,4})?|" +
+    "(?:" + MON_STR + ")[\\s.\\-]+\\d{1,2}(?:st|nd|rd|th)?(?:,\\s*\\d{4}|\\s+\\d{4})?|" +
+    "(?:" + MON_STR + ")[\\s.\\-]+\\d{4}" +
+  ")\\b";
+
   function parseDateStr(s) {
     if (!s) return null;
     var str = String(s).trim();
     var m;
-    if ((m = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(str))) {
+    if ((m = /^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/.exec(str))) {
       return new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10));
     }
-    if ((m = /^(\d{1,2})[\/-](\d{1,2})[\/-](\d{2,4})$/.exec(str))) {
+    if ((m = /^(\d{1,2})[\/.\\-](\d{1,2})[\/.\\-](\d{2,4})$/.exec(str))) {
       var y = parseInt(m[3], 10);
       if (y < 100) y += 2000;
       return new Date(y, parseInt(m[2], 10) - 1, parseInt(m[1], 10));
     }
-    if ((m = /^(\d{1,2})\s+([A-Za-z]+)(?:\s+(\d{2,4}))?$/.exec(str))) {
+    if ((m = /^(\d{1,2})(?:st|nd|rd|th)?[\s.\\-]+([A-Za-z]+)(?:[\s.\\-]+(\d{2,4}))?$/.exec(str))) {
       var mon = MONTHS[m[2].toLowerCase()];
       if (mon) {
         var yr = m[3] ? parseInt(m[3], 10) : 2026;
@@ -30,12 +39,19 @@
         return new Date(yr, mon - 1, parseInt(m[1], 10));
       }
     }
-    if ((m = /^([A-Za-z]+)\s+(\d{1,2})(?:,?\s+(\d{2,4}))?$/.exec(str))) {
+    if ((m = /^([A-Za-z]+)[\s.\\-]+(\d{1,2})(?:st|nd|rd|th)?(?:,?\s+(\d{2,4}))?$/.exec(str))) {
       var mon2 = MONTHS[m[1].toLowerCase()];
       if (mon2) {
         var yr2 = m[3] ? parseInt(m[3], 10) : 2026;
         if (yr2 < 100) yr2 += 2000;
         return new Date(yr2, mon2 - 1, parseInt(m[2], 10));
+      }
+    }
+    if ((m = /^([A-Za-z]+)[\s.\\-]+(\d{4})$/.exec(str))) {
+      var mon3 = MONTHS[m[1].toLowerCase()];
+      if (mon3) {
+        var yr3 = parseInt(m[2], 10);
+        return new Date(yr3, mon3 - 1, 1);
       }
     }
     return null;
@@ -56,15 +72,15 @@
       add("email", em[0]);
     }
 
-    // 2. Hospital-number patterns (UHID, MRN, IP No, CR No followed by digits)
-    var uhidRe = /\b(?:UHID|MRN|IP(?:\s*No\.?|\s*Number)?|CR(?:\s*No\.?|\s*Number)?|Hospital\s*No\.?)[ \t:#.-]*\d+\b/gi;
+    // 2. Hospital-number patterns (UHID, MRN, IP No, IPD, OP No, OPD No, CR No, Reg No, Registration number, Hospital number, Hosp No)
+    var uhidRe = /\b(?:Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp(?:\s*No\.?|\s*Number)?|Reg(?:\s*No\.?|\s*Number)?|OPD(?:\s*No\.?|\s*Number)?|OP(?:\s*No\.?|\s*Number)?|IPD(?:\s*No\.?|\s*Number)?|IP(?:\s*No\.?|\s*Number)?|CR(?:\s*No\.?|\s*Number)?|UHID|MRN)[ \t:#.-]*[A-Za-z0-9\/-]{3,20}\b/gi;
     var uh;
     while ((uh = uhidRe.exec(s)) !== null) {
       add("uhid", uh[0]);
     }
 
-    // 3. 12-digit Aadhaar-shaped numbers (4-4-4 or run of 12)
-    var aadhaarRe = /\b(?:\d{4}[ -]\d{4}[ -]\d{4}|\d{12})\b/g;
+    // 3. Aadhaar-shaped numbers (4-4-4, run of 12, or masked XXXX XXXX 1234)
+    var aadhaarRe = /\b(?:\d{4}[ -]\d{4}[ -]\d{4}|[Xx*]{4}[ -]?[Xx*]{4}[ -]?\d{4}|\d{12})\b/g;
     var ah;
     while ((ah = aadhaarRe.exec(s)) !== null) {
       add("aadhaar", ah[0]);
@@ -77,20 +93,26 @@
       add("pin", pi[0]);
     }
 
-    // 5. 10-digit phones starting 6 to 9 (with +91 or 0 prefix, spaces or hyphens)
-    var phoneRe = /(?:(?:\+91|0)[ -]?)?[6-9]\d{2,4}[ -]?\d{2,4}[ -]?\d{2,4}\b/g;
+    // 5. Phones: 10-digit mobiles (6 to 9 with +91, 0, spaces, dots or hyphens) and landlines with STD code
+    var phoneRe = /(?:\(0\d{2,4}\)[\s.\-]?\d{3,4}[\s.\-]?\d{3,4}|\b0\d{2,4}[\s.\-]\d{3,4}[\s.\-]?\d{3,4}\b|\b0\d{2,4}[\-]\d{6,8}\b|(?:(?:\+91|0)[\s.\-]?)?[6-9]\d{2,4}[\s.\-]?\d{2,4}[\s.\-]?\d{2,4}\b)/g;
     var ph;
     while ((ph = phoneRe.exec(s)) !== null) {
       var rawDigits = ph[0].replace(/\D/g, "");
-      if ((ph[0].indexOf("+91") === 0 && rawDigits.length === 12 && /^[6-9]/.test(rawDigits.slice(2))) ||
-          (ph[0].indexOf("0") === 0 && rawDigits.length === 11 && /^[6-9]/.test(rawDigits.slice(1))) ||
-          (rawDigits.length === 10 && /^[6-9]/.test(rawDigits))) {
+      if (/^\(0\d{2,4}\)/.test(ph[0]) || /^0\d{2,4}[-.\s]/.test(ph[0]) || /^0\d{2,4}-\d{6,8}/.test(ph[0])) {
+        if (rawDigits.length >= 10 && rawDigits.length <= 12) {
+          add("phone", ph[0]);
+        }
+      } else if (
+        (ph[0].indexOf("+91") === 0 && rawDigits.length === 12 && /^[6-9]/.test(rawDigits.slice(2))) ||
+        (ph[0].indexOf("0") === 0 && rawDigits.length === 11 && /^[6-9]/.test(rawDigits.slice(1))) ||
+        (rawDigits.length === 10 && /^[6-9]/.test(rawDigits))
+      ) {
         add("phone", ph[0]);
       }
     }
 
-    // 6. Dates (dd/mm/yyyy, dd-mm-yy, yyyy-mm-dd, "12 March 2026", "March 12")
-    var dateRe = /\b(?:\d{4}-\d{1,2}-\d{1,2}|\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4}|\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*(?:\s+\d{2,4})?|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:,?\s+\d{2,4})?)\b/gi;
+    // 6. Dates (shared DATE_PATTERN)
+    var dateRe = new RegExp(DATE_PATTERN, "gi");
     var da;
     while ((da = dateRe.exec(s)) !== null) {
       add("date", da[0]);
@@ -100,8 +122,20 @@
   }
 
   function replaceDatesWithDayN(text, baseDate) {
+    if (!text) return text;
+    if (!baseDate) {
+      var hits = scan(text);
+      for (var i = 0; i < hits.length; i++) {
+        if (hits[i].kind === "date") {
+          var dt = parseDateStr(hits[i].match);
+          if (dt && (!baseDate || dt.getTime() < baseDate.getTime())) {
+            baseDate = dt;
+          }
+        }
+      }
+    }
     if (!baseDate) return text;
-    var re = /\b(?:\d{4}-\d{1,2}-\d{1,2}|\d{1,2}[\/-]\d{1,2}[\/-]\d{2,4}|\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*(?:\s+\d{2,4})?|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:,?\s+\d{2,4})?)\b/gi;
+    var re = new RegExp(DATE_PATTERN, "gi");
     return text.replace(re, function (match) {
       var d = parseDateStr(match);
       if (!d) return match;
@@ -191,10 +225,19 @@
       for (var j = 0; j < scanRes.length; j++) {
         findingsArr.push(scanRes[j].kind + ": " + scanRes[j].match);
       }
+      var redactFn = (G && G.SMD_redactPHI) ? G.SMD_redactPHI : (typeof window !== "undefined" && window.SMD_redactPHI ? window.SMD_redactPHI : null);
+      if (redactFn) {
+        try {
+          var redactedStr = redactFn(processed);
+          if (redactedStr !== processed) {
+            findingsArr.push("phi: personal identifier flagged by privacy filter");
+          }
+        } catch (e1) {}
+      }
       return {
         text: processed,
         removed: [],
-        blocked: scanRes.length > 0,
+        blocked: scanRes.length > 0 || findingsArr.length > 0,
         findings: findingsArr
       };
     }
@@ -319,11 +362,20 @@
     for (var f = 0; f < finalHits.length; f++) {
       finalFindings.push(finalHits[f].kind + ": " + finalHits[f].match);
     }
+    var redactFnObj = (G && G.SMD_redactPHI) ? G.SMD_redactPHI : (typeof window !== "undefined" && window.SMD_redactPHI ? window.SMD_redactPHI : null);
+    if (redactFnObj) {
+      try {
+        var redactedObj = redactFnObj(assembled);
+        if (redactedObj !== assembled) {
+          finalFindings.push("phi: personal identifier flagged by privacy filter");
+        }
+      } catch (e2) {}
+    }
 
     return {
       text: assembled,
       removed: removed,
-      blocked: finalHits.length > 0,
+      blocked: finalHits.length > 0 || finalFindings.length > 0,
       findings: finalFindings
     };
   }
@@ -370,7 +422,8 @@
   var API = {
     prepareCaseText: prepareCaseText,
     scan: scan,
-    numbersNotIn: numbersNotIn
+    numbersNotIn: numbersNotIn,
+    replaceDatesWithDayN: replaceDatesWithDayN
   };
 
   if (typeof module !== "undefined" && module.exports) {
