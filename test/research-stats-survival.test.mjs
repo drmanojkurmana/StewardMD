@@ -399,6 +399,79 @@ test("Cox Efron and Breslow on lung and veteran", function () {
   });
 });
 
+/* Synthetic tied survival data, 90 rows, generated in R 4.6.2 (survival 3.8.12) with
+ * set.seed(20261125); t sampled from 1,2,3,4,5,6,8,10,12,15 so ties are heavy.
+ * Reference: coxph(Surv(t,e) ~ x1 + x2, ties=...). At the optimum the recomputed
+ * log-likelihood lands a few ULP below the current one, so a strict >= trial test
+ * halved the step 11 times and reported failure on a model R settles in 4 iterations.
+ */
+const TIED_ROWS = [
+    [8, 1, 51.99, "high"], [5, 0, 50.03, "low"], [10, 0, 37.38, "high"], [4, 1, 30.56, "mid"],
+    [10, 1, 63.43, "mid"], [4, 1, 28.37, "high"], [2, 1, 40.84, "mid"], [10, 1, 48.34, "high"],
+    [8, 1, 53.04, "mid"], [10, 1, 44.05, "low"], [6, 1, 33.36, "low"], [15, 1, 32.59, "low"],
+    [15, 0, 47.39, "mid"], [3, 1, 49.79, "low"], [8, 1, 61.6, "mid"], [3, 1, 30.23, "high"],
+    [2, 1, 57.8, "mid"], [10, 0, 71.42, "mid"], [2, 1, 41.14, "mid"], [2, 0, 41.75, "low"],
+    [2, 1, 54.05, "high"], [2, 1, 32.26, "high"], [6, 1, 54.76, "high"], [2, 0, 51.58, "high"],
+    [6, 0, 77.71, "low"], [15, 1, 37.55, "high"], [1, 1, 62.81, "high"], [10, 1, 48.85, "low"],
+    [15, 1, 37.48, "high"], [10, 1, 54.19, "low"], [1, 0, 53.97, "low"], [1, 1, 78.04, "high"],
+    [8, 1, 58.47, "low"], [5, 1, 45.07, "mid"], [1, 1, 33.9, "mid"], [15, 1, 53.87, "mid"],
+    [1, 1, 54.33, "high"], [2, 1, 67.84, "high"], [6, 0, 32.52, "low"], [8, 1, 48.77, "low"],
+    [6, 1, 37.82, "high"], [1, 0, 42.58, "low"], [15, 1, 58.88, "low"], [1, 1, 55.67, "low"],
+    [15, 1, 66.9, "mid"], [8, 1, 69.29, "mid"], [4, 1, 57.5, "low"], [1, 0, 63.56, "low"],
+    [12, 1, 25.76, "high"], [10, 0, 41.88, "mid"], [1, 1, 47.16, "high"], [5, 1, 47.64, "low"],
+    [10, 0, 47.17, "low"], [2, 1, 67.71, "low"], [12, 0, 54.49, "mid"], [5, 1, 55.77, "high"],
+    [2, 0, 53.8, "high"], [6, 1, 62.46, "low"], [4, 0, 51.85, "low"], [12, 0, 46.55, "mid"],
+    [1, 1, 57.83, "high"], [10, 1, 49.83, "mid"], [12, 1, 38.55, "low"], [12, 1, 41.82, "mid"],
+    [12, 1, 64.85, "high"], [3, 0, 50.45, "low"], [4, 0, 51.98, "high"], [3, 0, 43.05, "mid"],
+    [2, 0, 54.63, "low"], [1, 1, 56.48, "mid"], [8, 0, 36.74, "low"], [2, 1, 43.3, "low"],
+    [5, 0, 54.26, "low"], [8, 0, 48.45, "high"], [1, 1, 32.34, "low"], [2, 1, 58.14, "low"],
+    [5, 1, 51.28, "high"], [4, 1, 38.34, "mid"], [6, 1, 39.85, "high"], [1, 1, 47.95, "high"],
+    [8, 1, 53.87, "mid"], [4, 1, 38.74, "low"], [10, 1, 53.18, "low"], [8, 1, 57.79, "mid"],
+    [8, 1, 58.39, "low"], [6, 1, 60.71, "high"], [2, 1, 33.73, "high"], [12, 1, 34.2, "low"],
+    [8, 1, 44.09, "high"], [1, 1, 70.54, "low"]
+];
+
+test("Cox converges on heavily tied data where the last step is a rounding-level tie", function () {
+  const rows = TIED_ROWS.map(function (r) { return { t: r[0], e: r[1], x1: r[2], x2: r[3] }; });
+  const preds = [{ name: "x1", type: "numeric" }, { name: "x2", type: "categorical" }];
+
+  const breslow = STATS.cox(rows, { time: "t", event: "e", predictors: preds, ties: "breslow" });
+  assertFit(breslow, {
+    n: 90, events: 66, iter: 4, logLik: -241.47963875265216,
+    lrChi: 3.9228395182267946, lrDf: 3, lrP: 0.26991751548328019
+  });
+  assertCoef(breslow, "x1", null, {
+    beta: 0.011594792747871164, se: 0.011296792109876483, hr: 1.01166227291127986,
+    lo: 0.98950890654066004, hi: 1.0343116142431223, z: 1.0263792265181322, p: 0.304712865950949707
+  });
+  assertCoef(breslow, "x2", "low", {
+    beta: -0.358757361820389087, se: 0.291434458106047845, hr: 0.69854382419233185,
+    lo: 0.39457012274182307, hi: 1.2366964607620174, z: -1.2310052975610852, p: 0.218320882946440253
+  });
+  assertCoef(breslow, "x2", "mid", {
+    beta: -0.622740428551992520, se: 0.328233026981720688, hr: 0.53647225742212679,
+    lo: 0.28193877544324875, hi: 1.0207978045273316, z: -1.8972509691618356, p: 0.057794822767704687
+  });
+
+  const efron = STATS.cox(rows, { time: "t", event: "e", predictors: preds, ties: "efron" });
+  assertFit(efron, {
+    n: 90, events: 66, iter: 4, logLik: -232.73247168158332,
+    lrChi: 5.151936050579252, lrDf: 3, lrP: 0.1610037731226745
+  });
+  assertCoef(efron, "x1", null, {
+    beta: 0.014195674489022878, se: 0.01137198735397903, hr: 1.01429691155168755,
+    lo: 0.99193964909140153, hi: 1.03715808287898592, z: 1.2483019939391549, p: 0.211920484282058730
+  });
+  assertCoef(efron, "x2", "low", {
+    beta: -0.383365459062791514, se: 0.29169839142643633, hr: 0.68156377010884894,
+    lo: 0.38477989841287452, hi: 1.20725946090494896, z: -1.3142529075600775, p: 0.188761109208161443
+  });
+  assertCoef(efron, "x2", "mid", {
+    beta: -0.719996597661352156, se: 0.33066681250522817, hr: 0.48675391205880131,
+    lo: 0.25459234984438156, hi: 0.93062250711527406, z: -2.1774081051752612, p: 0.029450131478883357
+  });
+});
+
 test("chooseTest offers Kaplan-Meier with log-rank test for survival", function () {
   const pick = STATS.chooseTest({ outcomeType: "survival" });
   assert.equal(pick.test, "log_rank");

@@ -223,6 +223,51 @@ async function epmcLimited(query, limit, config) {
   return out;
 }
 
+function hasPhiInQuery(q) {
+  if (!q) return false;
+  if (/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/.test(q)) return true;
+  if (/\b(?:Aadhar|Aadhaar)(?:\s*(?:Number|No\.?))?\b\s*[:#.]?\s*(?:\d{4}[ -]\d{4}[ -]\d{4}|\d{12}|[Xx*]{4}[ -]?[Xx*]{4}[ -]?\d{4})\b/i.test(q)) return true;
+  if (/\b\d{12}\b/.test(q)) return true;
+  if (/\b[Xx*]{4}[ -]?[Xx*]{4}[ -]?\d{4}\b/.test(q)) return true;
+  const aadhaar444 = /\b\d{4}[ -]\d{4}[ -]\d{4}\b/g;
+  let ah;
+  while ((ah = aadhaar444.exec(q)) !== null) {
+    const parts = ah[0].split(/[ -]/);
+    if (parts.length === 3) {
+      const y1 = parseInt(parts[0], 10), y2 = parseInt(parts[1], 10), y3 = parseInt(parts[2], 10);
+      if (y1 >= 1900 && y1 <= 2099 && y2 >= 1900 && y2 <= 2099 && y3 >= 1900 && y3 <= 2099) {
+        continue;
+      }
+    }
+    return true;
+  }
+  const phoneRe = /(?:\(0\d{2,4}\)[\s.\-]?\d{3,4}[\s.\-]?\d{3,4}|\b0\d{2,4}[\s.\-]\d{3,4}[\s.\-]?\d{3,4}\b|\b0\d{2,4}[\-]\d{6,8}\b|(?:\+91[\s.\-]?)?\b(?:0[\s.\-]?)?[6-9]\d{2,4}[\s.\-]?\d{2,4}[\s.\-]?\d{2,4}\b)/g;
+  let m;
+  while ((m = phoneRe.exec(q)) !== null) {
+    const raw = m[0].replace(/\D/g, "");
+    if (/^\(0\d{2,4}\)/.test(m[0]) || /^0\d{2,4}[-.\s]/.test(m[0]) || /^0\d{2,4}-\d{6,8}/.test(m[0])) {
+      if (raw.length >= 10 && raw.length <= 12) return true;
+    } else if (
+      (m[0].indexOf("+91") === 0 && raw.length === 12 && /^[6-9]/.test(raw.slice(2))) ||
+      (m[0].indexOf("0") === 0 && raw.length === 11 && /^[6-9]/.test(raw.slice(1))) ||
+      (raw.length === 10 && /^[6-9]/.test(raw))
+    ) {
+      return true;
+    }
+  }
+  if (/(?:^|[^0-9.])\b(?:19|20)\d{2}([\/-])(?:0?[1-9]|1[0-2])\1(?:0?[1-9]|[12]\d|3[01])\b(?![0-9.])/.test(q)) return true;
+  if (/(?:^|[^0-9.])\b(?:0?[1-9]|[12]\d|3[01])([\/.\\-])(?:0?[1-9]|1[0-2])\1(?:19|20)\d{2}\b(?![0-9.])/.test(q)) return true;
+  if (/(?:^|[^0-9.])\b(?:0?[1-9]|[12]\d|3[01])([/.])(?:0?[1-9]|1[0-2])\1\d{2}\b(?![0-9.])/.test(q)) return true;
+  const MON = "Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?";
+  if (new RegExp("\\b(?:0?[1-9]|[12]\\d|3[01])(?:st|nd|rd|th)?[ -]+(?:" + MON + ")[ -]+(?:(?:19|20)\\d{2}|\\d{2})\\b", "i").test(q)) return true;
+  if (new RegExp("\\b(?:" + MON + ")[ -]+(?:0?[1-9]|[12]\\d|3[01])(?:st|nd|rd|th)?(?:,\\s*|[ -]+)(?:(?:19|20)\\d{2}|\\d{2})\\b", "i").test(q)) return true;
+  if (new RegExp("\\b(?:" + MON + ")[ -]+(?:19|20)\\d{2}\\b", "i").test(q)) return true;
+
+  const idRe = /\b(?:Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp\s*(?:Number|No\.?)|MRN(?:\s*(?:Number|No\.?))?|UHID(?:\s*(?:Number|No\.?))?|UID|IPD\s*(?:Number|No\.?)|IP\s*(?:Number|No\.?)|OPD\s*(?:Number|No\.?)|OP\s*(?:Number|No\.?)|CR\s*(?:Number|No\.?)|Reg\s*(?:Number|No\.?))\b[ \t:#.-]*(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b/i;
+  if (idRe.test(q)) return true;
+  return false;
+}
+
 export async function findStudies(ctx, projectId, body) {
   const { env, db, uid, requestId, api } = ctx;
   const { json, err, projectGate, gateErr } = api;
@@ -233,6 +278,8 @@ export async function findStudies(ctx, projectId, body) {
   let limit = body && body.limit === undefined ? 20 : body.limit;
   if (!Number.isInteger(limit) || limit < 1 || limit > 50)
     return err(400, "invalid_body", "limit must be an integer from 1 to 50", requestId);
+  if (hasPhiInQuery(q))
+    return err(400, "phi_in_query", "Query contains personal details. Remove personal identifiers before searching.", requestId);
   if (!env.RESEARCH_CONTACT_EMAIL)
     return err(503, "search_unconfigured", "Research database contact is not configured", requestId);
   const config = configOf(env);

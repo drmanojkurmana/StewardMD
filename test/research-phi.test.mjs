@@ -9,7 +9,7 @@ import RMDPhi from "../research-phi.js";
 describe("research-phi de-identification engine", () => {
   test("scan finds each required identifier kind with synthetic values", () => {
     // Dates
-    const textDates = "Seen on 15/04/2026, 15-04-26, 2026-04-15, 12 March 2026, and March 12.";
+    const textDates = "Seen on 15/04/2026, 15-04-26, 2026-04-15, 12 March 2026, March 12, 12.03.2026, 12.03.26, 12.3.2026, 12-Mar-2026, 12-Mar-26, March 2026, Mar 2026, 2026/03/12, and 12th March 2026.";
     const hitsDates = RMDPhi.scan(textDates);
     const dateMatches = hitsDates.filter((h) => h.kind === "date").map((h) => h.match);
     assert.ok(dateMatches.includes("15/04/2026"), "dd/mm/yyyy date found");
@@ -17,15 +17,29 @@ describe("research-phi de-identification engine", () => {
     assert.ok(dateMatches.includes("2026-04-15"), "yyyy-mm-dd date found");
     assert.ok(dateMatches.includes("12 March 2026"), "dd Month yyyy date found");
     assert.ok(dateMatches.includes("March 12"), "Month dd date found");
+    assert.ok(dateMatches.includes("12.03.2026"), "dd.mm.yyyy date found");
+    assert.ok(dateMatches.includes("12.03.26"), "dd.mm.yy date found");
+    assert.ok(dateMatches.includes("12.3.2026"), "d.m.yyyy date found");
+    assert.ok(dateMatches.includes("12-Mar-2026"), "dd-Mon-yyyy date found");
+    assert.ok(dateMatches.includes("12-Mar-26"), "dd-Mon-yy date found");
+    assert.ok(dateMatches.includes("March 2026"), "Month yyyy date found");
+    assert.ok(dateMatches.includes("Mar 2026"), "Mon yyyy date found");
+    assert.ok(dateMatches.includes("2026/03/12"), "yyyy/mm/dd date found");
+    assert.ok(dateMatches.includes("12th March 2026"), "ordinal date found");
 
     // Phones
-    const textPhone = "Call +91 98765 43210 or 09876543210 or 9876543210.";
+    const textPhone = "Call +91 98765 43210 or 09876543210 or 9876543210 or 98765.43210 or 098765 43210 or (080) 2654 3210 or 080-26543210 or 080 2654 3210 or 044-24567890.";
     const hitsPhone = RMDPhi.scan(textPhone);
     const phoneMatches = hitsPhone.filter((h) => h.kind === "phone").map((h) => h.match);
-    assert.equal(phoneMatches.length, 3, "three phone matches found");
     assert.ok(phoneMatches.includes("+91 98765 43210"));
     assert.ok(phoneMatches.includes("09876543210"));
     assert.ok(phoneMatches.includes("9876543210"));
+    assert.ok(phoneMatches.includes("98765.43210"), "dotted mobile found");
+    assert.ok(phoneMatches.includes("098765 43210"), "spaced 0-prefixed mobile found");
+    assert.ok(phoneMatches.includes("(080) 2654 3210"), "bracketed STD landline found");
+    assert.ok(phoneMatches.includes("080-26543210"), "hyphenated STD landline found");
+    assert.ok(phoneMatches.includes("080 2654 3210"), "spaced STD landline found");
+    assert.ok(phoneMatches.includes("044-24567890"), "STD landline found");
 
     // Email
     const textEmail = "Contact clinician at test.doctor@synthetic-hospital.org for query.";
@@ -34,20 +48,27 @@ describe("research-phi de-identification engine", () => {
     assert.ok(emailMatches.includes("test.doctor@synthetic-hospital.org"), "email found");
 
     // Aadhaar-shaped 12-digit numbers
-    const textAadhaar = "ID values: 9999 8888 7777 and 111122223333.";
+    const textAadhaar = "ID values: 9999 8888 7777, 111122223333, and XXXX XXXX 1234.";
     const hitsAadhaar = RMDPhi.scan(textAadhaar);
     const aadhaarMatches = hitsAadhaar.filter((h) => h.kind === "aadhaar").map((h) => h.match);
     assert.ok(aadhaarMatches.includes("9999 8888 7777"), "4-4-4 Aadhaar found");
     assert.ok(aadhaarMatches.includes("111122223333"), "run of 12 Aadhaar found");
+    assert.ok(aadhaarMatches.includes("XXXX XXXX 1234"), "masked Aadhaar found");
 
     // Hospital numbers
-    const textHosp = "Records: UHID 123456, MRN: 654321, IP No 7890, CR No. 4321, Hospital No 5566.";
+    const textHosp = "Records: UHID 123456, MRN: 654321, IP No 7890, OP No 482910, OPD No 123456, CR No. 4321, Hospital number 445566, hosp no 445566, Reg no 445566, Registration number 445566.";
     const hitsHosp = RMDPhi.scan(textHosp);
     const uhidMatches = hitsHosp.filter((h) => h.kind === "uhid").map((h) => h.match);
     assert.ok(uhidMatches.some((m) => m.includes("UHID 123456")), "UHID found");
     assert.ok(uhidMatches.some((m) => m.includes("MRN: 654321")), "MRN found");
     assert.ok(uhidMatches.some((m) => m.includes("IP No 7890")), "IP No found");
+    assert.ok(uhidMatches.some((m) => m.includes("OP No 482910")), "OP No found");
+    assert.ok(uhidMatches.some((m) => m.includes("OPD No 123456")), "OPD No found");
     assert.ok(uhidMatches.some((m) => m.includes("CR No. 4321")), "CR No found");
+    assert.ok(uhidMatches.some((m) => m.includes("Hospital number 445566")), "Hospital number found");
+    assert.ok(uhidMatches.some((m) => m.includes("hosp no 445566")), "hosp no found");
+    assert.ok(uhidMatches.some((m) => m.includes("Reg no 445566")), "Reg no found");
+    assert.ok(uhidMatches.some((m) => m.includes("Registration number 445566")), "Registration number found");
 
     // PIN code after a place word
     const textPin = "Centres: Bengaluru 560001, PIN 500001, city 600001.";

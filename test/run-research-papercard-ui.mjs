@@ -472,14 +472,16 @@ try {
   await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await sleep(150);
   const scrollW390 = await ev(`document.documentElement.scrollWidth`);
-  ok(scrollW390 <= 391, 'no horizontal scroll at 390px');
+  const clientW390 = await ev(`document.documentElement.clientWidth`);
+  ok(scrollW390 <= 391 && scrollW390 <= clientW390, 'no horizontal scroll at 390x844');
   await shot('phone-390-papercard');
 
   // Check iPad 1024x1366
   await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 1366, deviceScaleFactor: 2, mobile: false });
   await sleep(150);
   const scrollW1024 = await ev(`document.documentElement.scrollWidth`);
-  ok(scrollW1024 <= 1025, 'no horizontal scroll at 1024px');
+  const clientW1024 = await ev(`document.documentElement.clientWidth`);
+  ok(scrollW1024 <= 1025 && scrollW1024 <= clientW1024, 'no horizontal scroll at 1024x1366');
   // Check iPad max-width 880px
   const cardWidth = await ev(`document.querySelector('.rmd-papercard').offsetWidth`);
   ok(cardWidth <= 880, 'card obeys max-width 880px on iPad');

@@ -2880,7 +2880,7 @@
           trial = [];
           for (j = 0; j < p; j++) trial.push(beta[j] + scale * step[j]);
           trialFit = coxPartial(subjects, trial, ties, false);
-          if (trialFit && isFinite(trialFit.ll) && trialFit.ll >= ll) break;
+          if (trialFit && isFinite(trialFit.ll) && trialFit.ll >= ll - eps * Math.max(1, Math.abs(ll))) break;
           trialFit = null;
           scale *= 0.5;
         }

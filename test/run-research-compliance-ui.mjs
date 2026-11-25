@@ -113,7 +113,7 @@ var MEASURE = "(function(){" +
   "if(type==='checkbox'||type==='radio')continue;if(type==='file'&&(w<=2||h<=2))continue;if(w===0&&h===0)continue;" +
   "var lab='';if(e.id){var l=root.querySelector('label[for=\"'+e.id+'\"]');if(l)lab=l.innerText.trim().slice(0,28);}" +
   "out.push({tag:e.tagName.toLowerCase(),type:type,cls:(e.className||'').toString().slice(0,40),w:w,h:h,txt:(lab||e.innerText||e.value||e.getAttribute('aria-label')||'').trim().slice(0,28)});}return out;};" +
-  "window.__rmdOverflow=function(){return document.documentElement.scrollWidth-window.innerWidth;};" +
+  "window.__rmdOverflow=function(){var d=document.documentElement;return d.scrollWidth-d.clientWidth;};" +
   "})()";
 
 function smallTargets(list) {
@@ -276,6 +276,16 @@ try {
   await measureScreen("masterchart-survival-result", ".rmd-mc-screen", "dark");
   await shot("masterchart-survival-dark");
   await ev("document.body.classList.remove('dark')");
+
+  /* tablet: the same screens must fit 1024x1366 with no document-level overflow. */
+  await viewport(1024, 1366, false);
+  ok("masterchart-survival-result [tablet 1024x1366] no horizontal overflow", (await ev("window.__rmdOverflow()")) <= 0);
+  await ev("SMD_RESEARCH.navigate('plan',{projectId:'prj_cmp_1'})");
+  ok("plan opens on tablet", await until("!!document.querySelector('.rmd-plan-screen')", 8000));
+  ok("plan [tablet 1024x1366] no horizontal overflow", (await ev("window.__rmdOverflow()")) <= 0);
+  await shot("plan-tablet-1024");
+  await viewport(390, 844, false);
+  ok("plan [phone 390x844] no horizontal overflow", (await ev("window.__rmdOverflow()")) <= 0);
 
   /* reduced motion: the app must not force animation when the user asks not to.
    * Emulate prefers-reduced-motion and confirm no infinite animation runs. */

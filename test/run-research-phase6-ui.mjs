@@ -500,7 +500,7 @@ const text = (sel) => ev(`(()=>{const e=document.querySelector(${JSON.stringify(
 const setVal = (sel, value) => ev(`(()=>{const e=document.querySelector(${JSON.stringify(sel)});if(!e)return false;e.value=${JSON.stringify(value)};e.dispatchEvent(new Event('input',{bubbles:true}));e.dispatchEvent(new Event('change',{bubbles:true}));return true})()`);
 const nav = (screen) => ev(`SMD_RESEARCH.navigate(${JSON.stringify(screen)});1`);
 
-const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');return b.scrollWidth<=b.clientWidth+2})()`);
+const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');const d=document.documentElement;return b.scrollWidth<=b.clientWidth+2 && d.scrollWidth<=d.clientWidth})()`);
 const noEmDash = async () => !/—/.test(await text('#researchMD'));
 
 try {
@@ -620,7 +620,7 @@ try {
 
   /* ---------------- 6. Responsive: 375 / 768 / 1024, no overflow, no em-dash, two-pane ---------------- */
   const screens = ['ipd', 'credits', 'institution', 'templates', 'journals'];
-  for (const [width, height, mobile] of [[375, 812, true], [768, 1024, true], [1024, 768, false]]) {
+  for (const [width, height, mobile] of [[375, 812, true], [390, 844, true], [768, 1024, true], [1024, 768, false], [1024, 1366, false]]) {
     await call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 2, mobile });
     for (const name of screens) {
       await nav(name);

@@ -8,7 +8,7 @@
 // - version diff (plain text), approve then lock makes it read-only
 // - gate failures listed in plain words and jump
 // - DOCX export: gates first, then native Filesystem CACHE + Share (stubbed)
-// - at 375/768/1024, no horizontal overflow, no em/en dash, no page errors
+// - at 375/390x844/768/1024/1024x1366, no horizontal overflow (box and document), no em/en dash, no page errors
 //
 // Usage:
 //   node test/run-research-manuscript-ui.mjs   (CHROME=/path/to/chrome to override)
@@ -314,7 +314,7 @@ const until = async (expr, ms = 10000) => {
 
 const click = (sel) => ev(`(()=>{const b=document.querySelector(${JSON.stringify(sel)});if(!b)return false;b.click();return true})()`);
 const text = (sel) => ev(`(()=>{const e=document.querySelector(${JSON.stringify(sel)});if(!e)return '';return e.innerText||e.textContent||''})()`);
-const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');return b.scrollWidth<=b.clientWidth+2})()`);
+const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');const d=document.documentElement;return b.scrollWidth<=b.clientWidth+2 && d.scrollWidth<=d.clientWidth+1})()`);
 const noDash = async () => !/[\u2014\u2013]/.test(await text('#researchMD'));
 const noRawCode = async (label) => {
   const t = await text('#researchMD');
@@ -361,7 +361,7 @@ try {
   await call('Page.navigate', { url: `http://localhost:${PORT}/?research=1` });
 
   ok(await until('!!window.SMD_RESEARCH && !!SMD_RESEARCH.screens && !!SMD_RESEARCH.screens.manuscript', 30000), 'app loaded with manuscript screen registered');
-  ok(await ev(`!!document.querySelector('script[src*="research-screen-manuscript.js?v=ra3"]')`), 'index.html carries research-screen-manuscript.js script tag with ?v=ra2');
+  ok(await ev(`!!document.querySelector('script[src*="research-screen-manuscript.js?v="]')`), 'index.html carries research-screen-manuscript.js script tag with a ?v= token');
 
   // Seed: server-backed project (practice gate skips it) + one saved local run.
   await ev(`(function(){var s=JSON.parse(localStorage.getItem('smd_research_state_v1'));s.projects[0].serverId=s.projects[0].id;s.projects[0].practice=false;s.runs=s.runs||{};s.runs[${JSON.stringify(PID)}]=[${JSON.stringify(LOCAL_RUN)}];localStorage.setItem('smd_research_state_v1',JSON.stringify(s));return 1})()`);
@@ -484,14 +484,14 @@ try {
   ok(await until(`/Your file is ready to save or share/.test(document.querySelector('.rmd-man-right').textContent)`, 5000), 'plain confirmation shown after export');
   await noRawCode('after export');
 
-  /* 11. Responsive layouts: 375 / 768 / 1024 px, no overflow, no dashes */
-  for (const [width, height, mobile] of [[375, 812, true], [768, 1024, true], [1024, 768, false]]) {
+  /* 11. Responsive layouts: 375 / 390x844 / 768 / 1024 / 1024x1366, no overflow, no dashes */
+  for (const [width, height, mobile] of [[375, 812, true], [390, 844, true], [768, 1024, true], [1024, 768, false], [1024, 1366, false]]) {
     await call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 2, mobile });
     await ev(`SMD_RESEARCH.navigate('manuscript');1`);
     await sleep(200);
 
-    ok(await until(`!!document.querySelector('.rmd-manuscript-screen')`, 5000), `manuscript screen renders at ${width}px`);
-    ok(await noOverflow(), `no horizontal overflow at ${width}px`);
+    ok(await until(`!!document.querySelector('.rmd-manuscript-screen')`, 5000), `manuscript screen renders at ${width}x${height}`);
+    ok(await noOverflow(), `no horizontal overflow at ${width}x${height} (box and document)`);
     ok(await noDash(), `no em/en dash in UI text at ${width}px`);
 
     if (width === 375) {

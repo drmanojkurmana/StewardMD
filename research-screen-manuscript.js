@@ -487,7 +487,7 @@
 
       showDraftPreviewModal(container, pid, prep.text, prep.findings, prep.blocked);
     }).catch(function () {
-      showDraftPreviewModal(container, pid, "Error loading case file.", [], false);
+      showDraftPreviewModal(container, pid, "Error loading case file.", ["Error loading case file."], true);
     });
   }
 
@@ -497,7 +497,7 @@
 
     var currentText = initialText || "";
     var currentFindings = initialFindings || [];
-    var currentBlocked = !!initialBlocked;
+    var currentBlocked = true;
 
     modal = D.createElement("div");
     modal.id = "rmdCaseReportDraftModal";
@@ -514,8 +514,8 @@
         currentFindings = res.findings || [];
         currentBlocked = res.blocked || currentFindings.length > 0;
       } else {
-        currentBlocked = false;
-        currentFindings = [];
+        currentBlocked = true;
+        currentFindings = ["The privacy check did not load. Close and reopen the app, then try again."];
       }
 
       var findingsHtml = "";

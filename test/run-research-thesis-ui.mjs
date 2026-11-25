@@ -405,8 +405,17 @@ try {
   // 14. No em/en dashes; no horizontal overflow at 375.
   const dashes = await ev(`(()=>{const t=document.querySelector('#researchMD').innerText||'';return (t.match(/[\\u2013\\u2014]/g)||[]).length})()`);
   ok(dashes === 0, 'no em or en dashes in ResearchMD visible text');
-  const overflow = await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`);
+  const overflow = await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`);
   ok(overflow, 'no horizontal overflow at 375px');
+  await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await sleep(200);
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), '390x844 no horizontal scroll');
+  await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 1366, deviceScaleFactor: 2, mobile: false });
+  await sleep(200);
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), '1024x1366 no horizontal scroll');
+  await shot('tablet-1024-thesis');
+  await call('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
+  await sleep(200);
 
   console.log(failures === 0 ? '\nALL THESIS UI CHECKS PASSED' : `\n${failures} THESIS UI CHECK(S) FAILED`);
   process.exitCode = failures === 0 ? 0 : 1;

@@ -55,12 +55,52 @@
             hex += h;
           }
           return hex;
-        });
+        }).catch(function () { return null; });
       } catch (e) {
-        return Promise.resolve("fingerprint-" + Date.now());
+        return Promise.resolve(null);
       }
     }
-    return Promise.resolve("fingerprint-" + Date.now());
+    return Promise.resolve(null);
+  }
+
+  function plannedSampleSize(proj, pid) {
+    var plan = (proj && proj.plan) || null;
+    if (!plan && G.localStorage) {
+      try {
+        var raw = G.localStorage.getItem("smd_research_plan_" + pid);
+        if (raw) plan = JSON.parse(raw);
+      } catch (e) { plan = null; }
+    }
+    if (!plan) return 50;
+    var ss = G.SMD_RESEARCH_SAMPLESIZE;
+    var inp = plan.ssInputs || {};
+    var aim = plan.aim;
+    var res = null;
+    if (ss && aim) {
+      try {
+        if (aim === "two_proportions") {
+          res = ss.twoProportions({ p1: Number(inp.p1), p2: Number(inp.p2), alpha: Number(inp.alpha) || 0.05, power: Number(inp.power) || 0.80, ratio: Number(inp.ratio) || 1, dropout: Number(inp.dropout) || 0 });
+        } else if (aim === "two_means") {
+          res = ss.twoMeans({ diff: Number(inp.diff), sd: Number(inp.sd), alpha: Number(inp.alpha) || 0.05, power: Number(inp.power) || 0.80, ratio: Number(inp.ratio) || 1, dropout: Number(inp.dropout) || 0 });
+        } else if (aim === "single_proportion") {
+          var opts = { p: Number(inp.p), precision: Number(inp.precision), alpha: Number(inp.alpha) || 0.05, dropout: Number(inp.dropout) || 0 };
+          if (inp.population && Number(inp.population) > 0) opts.population = Number(inp.population);
+          res = ss.singleProportion(opts);
+        } else if (aim === "single_mean") {
+          res = ss.singleMean({ sd: Number(inp.sd), precision: Number(inp.precision), alpha: Number(inp.alpha) || 0.05, dropout: Number(inp.dropout) || 0 });
+        } else if (aim === "correlation") {
+          res = ss.correlation({ r: Number(inp.r), alpha: Number(inp.alpha) || 0.05, power: Number(inp.power) || 0.80, dropout: Number(inp.dropout) || 0 });
+        } else if (aim === "case_control") {
+          res = ss.caseControl({ p0: Number(inp.p0), or: Number(inp.or), ratio: Number(inp.ratio) || 1, alpha: Number(inp.alpha) || 0.05, power: Number(inp.power) || 0.80, dropout: Number(inp.dropout) || 0 });
+        } else if (aim === "time_to_event") {
+          res = ss.logRankEvents({ hr: Number(inp.hr), alpha: Number(inp.alpha) || 0.05, power: Number(inp.power) || 0.80, allocation: Number(inp.allocation) || 0.5, probEvent: Number(inp.probEvent), dropout: Number(inp.dropout) || 0 });
+        }
+      } catch (e) { res = null; }
+    }
+    var total = 0;
+    if (res && res.ok !== false) total = Number(res.totalWithDropout || res.total) || 0;
+    if (!(total > 0)) total = parseInt(plan.ctriData && plan.ctriData.targetSampleSize, 10);
+    return total > 0 ? total : 50;
   }
 
   function generateBlindingParagraph(data) {
@@ -120,6 +160,7 @@
 
   function renderContent(container, proj, pid, stepNo, stepCount, nextLabel, isCtriReg, savedFp, savedBlinding) {
     var h = [];
+    var plannedN = plannedSampleSize(proj, pid);
     h.push('<div class="rmd-p2-screen rmd-' + KEY + '-screen">');
     h.push('<div class="rmd-card">');
 
@@ -162,8 +203,8 @@
     h.push('<span>I recruit, treat, or assess trial patients</span>');
     h.push('</label>');
     h.push('</div>');
-    h.push('<div id="rmd-keeper-warning" style="display:none; margin-top:12px; padding:10px; background:rgba(255,107,107,0.1); border:1px solid #ff6b6b; border-radius:4px; font-size:13px; color:#ff8787;">');
-    h.push('Ask your guide or statistician to make the list on their phone.');
+    h.push('<div id="rmd-keeper-warning" role="alert" style="display:none; margin-top:12px; padding:10px; background:rgba(255,107,107,0.1); border:1px solid #ff6b6b; border-radius:4px; font-size:13px; color:#ff8787;">');
+    h.push('Recruiters cannot view or make the allocation list. Ask your guide or statistician (the list keeper) to make it.');
     h.push('</div>');
     h.push('</div>');
 
@@ -179,7 +220,7 @@
     h.push('<input type="text" id="rmd-rand-ratio" class="rmd-input" value="1:1" style="width:100%; max-width:180px; padding:6px; background:#071318; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
 
     h.push('<div><label style="display:block; font-size:13px; margin-bottom:4px;">Sample size per stratum:</label>');
-    h.push('<input type="number" id="rmd-rand-n" class="rmd-input" value="50" min="4" style="width:100%; max-width:180px; padding:6px; background:#071318; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
+    h.push('<input type="number" id="rmd-rand-n" class="rmd-input" value="' + plannedN + '" min="4" style="width:100%; max-width:180px; padding:6px; background:#071318; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
 
     h.push('<div><label style="display:block; font-size:13px; margin-bottom:4px;">Block sizes (comma-separated, multiples of ratio sum):</label>');
     h.push('<input type="text" id="rmd-rand-blocks" class="rmd-input" value="4, 6" style="width:100%; max-width:240px; padding:6px; background:#071318; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
@@ -288,17 +329,22 @@
     var keeperWarn = container.querySelector("#rmd-keeper-warning");
     var randPanel = container.querySelector("#rmd-randomise-panel");
 
+    function isRecruiter() {
+      return !!(keeperNo && keeperNo.checked);
+    }
+
     function updateKeeper() {
-      if (keeperNo && keeperNo.checked) {
+      if (isRecruiter()) {
         if (keeperWarn) keeperWarn.style.display = "block";
-        if (randPanel) randPanel.style.opacity = "0.5";
+        if (randPanel) randPanel.style.display = "none";
       } else {
         if (keeperWarn) keeperWarn.style.display = "none";
-        if (randPanel) randPanel.style.opacity = "1";
+        if (randPanel) randPanel.style.display = "block";
       }
     }
     if (keeperYes) keeperYes.addEventListener("change", updateKeeper);
     if (keeperNo) keeperNo.addEventListener("change", updateKeeper);
+    updateKeeper();
 
     // Blinding checkbox toggle
     var noneCheck = container.querySelector("#rmd-blinding-none");
@@ -375,6 +421,13 @@
         var fpBox = container.querySelector("#rmd-fingerprint-box");
         var removeCheck = container.querySelector("#rmd-rand-remove-phone");
 
+        if (isRecruiter()) {
+          lastGenerated = null;
+          if (resultsEl) resultsEl.style.display = "none";
+          if (statusEl) statusEl.innerHTML = '<span style="color:#ff8787;">Recruiters cannot view or make the allocation list. Ask your guide or statistician (the list keeper) to make it.</span>';
+          return;
+        }
+
         var armsInput = (container.querySelector("#rmd-rand-arms") || {}).value || "Intervention, Control";
         var ratioInput = (container.querySelector("#rmd-rand-ratio") || {}).value || "1:1";
         var nInput = parseInt((container.querySelector("#rmd-rand-n") || {}).value, 10) || 50;
@@ -401,47 +454,27 @@
         }
 
         if (!res || !res.ok) {
-          // Fallback simple block generation if stub or warning
-          var warnMsg = (res && res.warnings && res.warnings.join(", ")) || "Block list engine not ready";
-          if (statusEl) {
-            statusEl.innerHTML = '<span style="color:#f59f00;">Notice: ' + esc(warnMsg) + '. Using standard on-phone balanced allocation.</span>';
-          }
-          // Build local balanced sequence for UI export/demonstration
-          var localRows = [];
-          var totalArms = arms.length || 2;
-          for (var i = 1; i <= nInput; i++) {
-            var arm = arms[(i - 1) % totalArms];
-            var envNum = "1-" + (i < 10 ? "00" + i : (i < 100 ? "0" + i : i));
-            localRows.push({
-              seq: i,
-              stratum: "1",
-              envelope: envNum,
-              block: Math.floor((i - 1) / 4) + 1,
-              blockSize: 4,
-              arm: arm
-            });
-          }
-          var csvHeader = "seq,stratum,envelope,block,block_size,arm\n";
-          var csvLines = localRows.map(function (r) {
-            return [r.seq, r.stratum, r.envelope, r.block, r.blockSize, r.arm].join(",");
-          });
-          res = {
-            ok: true,
-            seed: seedInput,
-            rows: localRows,
-            csv: csvHeader + csvLines.join("\n")
-          };
-        } else {
-          if (statusEl) statusEl.innerHTML = '<span style="color:#42CDB5;">Randomisation list generated successfully.</span>';
+          var warnMsg = (res && res.warnings && res.warnings.length) ? res.warnings.join(" ") : "The randomisation engine is not ready on this phone. No list was made.";
+          lastGenerated = null;
+          if (resultsEl) resultsEl.style.display = "none";
+          if (statusEl) statusEl.innerHTML = '<span style="color:#ff8787;">' + esc(warnMsg) + '</span>';
+          return;
         }
+        if (statusEl) statusEl.innerHTML = '<span style="color:#42CDB5;">Randomisation list generated successfully.</span>';
 
         lastGenerated = res;
         sha256Fingerprint(res.csv).then(function (fp) {
+          if (!fp) {
+            lastGenerated = null;
+            if (resultsEl) resultsEl.style.display = "none";
+            if (statusEl) statusEl.innerHTML = '<span style="color:#ff8787;">Fingerprint unavailable on this phone. Nothing was stored. Ask your list keeper to make the list on a phone that can compute SHA-256.</span>';
+            return;
+          }
           lastGenerated.fingerprint = fp;
           if (resultsEl) resultsEl.style.display = "block";
           if (fpBox) {
             fpBox.innerHTML = '<strong>SHA-256 Fingerprint:</strong><br/>' + esc(fp) +
-              '<br/><span style="color:#8ea3a6; font-size:11px;">Envelopes: ' + res.rows.length + ' | Seed: ' + esc(res.seed) + '</span>';
+              '<br/><span style="color:#8ea3a6; font-size:11px;">Envelopes: ' + res.rows.length + '</span>';
           }
 
           var fpRec = {

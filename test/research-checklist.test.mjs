@@ -256,7 +256,7 @@ test("manual text is copied and CSV quotes commas, quotes, and paragraph 0", fun
   assert.equal(manual.filled, 'Age, site, and "school" cohort');
   const csv = CHECK.toCsv(filled);
   const lines = csv.split("\n");
-  assert.equal(lines[0], "section,number,topic,status,item,filled,evidence,manuscript_section,paragraph");
+  assert.equal(lines[0], "section,number,topic,status,item,filled,evidence,manuscript_section,paragraph,source,licence");
   assert.ok(csv.indexOf('"Age, site, and ""school"" cohort"') !== -1, csv);
   const title = lines.filter(function (line) { return line.indexOf(",1,Title,") !== -1; })[0];
   assert.ok(title && title.indexOf(",Title,0") !== -1, title);
@@ -264,6 +264,24 @@ test("manual text is copied and CSV quotes commas, quotes, and paragraph 0", fun
   const missingTitle = blank.split("\n").filter(function (line) { return line.indexOf(",1,Title,") !== -1; })[0];
   assert.ok(/,,$/.test(missingTitle), missingTitle);
   assert.equal(blank.indexOf("\u2014"), -1);
+});
+
+test("fill carries the checklist source and licence, and the CSV repeats them on every row", function () {
+  const credited = clone(miniPrisma);
+  credited.source = 'Example S, Example T. A reporting statement. J Test. 2026;1(1):e1. https://example.org/statement';
+  credited.licence = "CC BY 4.0 (J Test)";
+  const filled = CHECK.fill(credited, reported);
+  assert.equal(filled.source, credited.source);
+  assert.equal(filled.licence, credited.licence);
+  const rows = CHECK.toCsv(filled).split("\n").slice(1);
+  assert.ok(rows.length > 0);
+  rows.forEach(function (row) {
+    assert.ok(/,CC BY 4\.0 \(J Test\)$/.test(row), row);
+    assert.ok(row.indexOf("A reporting statement") !== -1, row);
+  });
+  const bare = CHECK.fill(miniPrisma, emptySnap);
+  assert.equal(bare.source, "");
+  assert.equal(bare.licence, "");
 });
 
 test("item.number is accepted and a non-PRISMA item does not invent flow counts", function () {
@@ -296,4 +314,12 @@ test("fill rejects a checklist without sections and a non-object snapshot", func
   const filled = CHECK.fill(miniPrisma, null);
   assert.equal(filled.counts.total, 6);
   assert.equal(byNum(filled, "M1").status, "manual");
+});
+
+test("the stop-word table declares each key once", function () {
+  const src = readFileSync(new URL("../research-checklist.js", import.meta.url), "utf8");
+  const block = src.slice(src.indexOf("var STOP = {"), src.indexOf("};", src.indexOf("var STOP = {")));
+  const keys = block.match(/[A-Za-z]+(?=: 1)/g) || [];
+  assert.ok(keys.length > 20);
+  assert.equal(new Set(keys).size, keys.length, "duplicate stop-word keys: " + keys.filter(function (k, i) { return keys.indexOf(k) !== i; }).join(", "));
 });

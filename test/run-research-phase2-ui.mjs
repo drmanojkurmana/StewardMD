@@ -403,7 +403,7 @@ async function shot(name) {
   const r = await call('Page.captureScreenshot', { format: 'png' });
   await writeFile(`${OUT}/${name}.png`, Buffer.from(r.result.data, 'base64'));
 }
-const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');return b.scrollWidth<=b.clientWidth+2})()`);
+const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');const d=document.documentElement;return b.scrollWidth<=b.clientWidth+2 && d.scrollWidth<=d.clientWidth})()`);
 const noEmDash = async () => !/—/.test(await text('#researchMD'));
 
 try {
@@ -588,7 +588,7 @@ try {
     ['conflicts', `!!document.querySelector('.rmd-split-layout')`],
     ['prisma', `!!document.querySelector('svg.rmd-prisma-svg')`]
   ];
-  for (const [width, height, mobile] of [[375, 812, true], [768, 1024, true], [1024, 768, false]]) {
+  for (const [width, height, mobile] of [[375, 812, true], [390, 844, true], [768, 1024, true], [1024, 768, false], [1024, 1366, false]]) {
     await call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 2, mobile });
     for (const [name, marker] of screens) {
       await nav(name);

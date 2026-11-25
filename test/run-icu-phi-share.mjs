@@ -64,15 +64,16 @@ try {
   // ---- PRINT ----
   const p1 = await J(`
     window.__opened=false; try { window.open = function(){ window.__opened=true; return null; }; } catch(e){}
+    window.__ifr0=document.querySelectorAll('iframe').length; // icu.js prints through a hidden iframe on WKWebView (9142fd76e)
     var root=document.getElementById('icuRoot'); var b=document.createElement('button'); b.setAttribute('data-icu-act','printsummary'); root.appendChild(b); b.click(); b.remove();
     var m=document.getElementById('icuModal');
-    return JSON.stringify({ consent: /Patient-identifiable data/.test(m.textContent||"") && /Print anyway/.test(m.textContent||""), openedYet: window.__opened });
+    return JSON.stringify({ consent: /Patient-identifiable data/.test(m.textContent||"") && /Print anyway/.test(m.textContent||""), openedYet: window.__opened || document.querySelectorAll('iframe').length > window.__ifr0 });
   `);
   ok(p1.consent, "Print → shows the PHI consent sheet ('Print anyway')");
   ok(p1.openedYet === false, "Print → no print window opens before confirm");
   const p2 = await J(`
     var m=document.getElementById('icuModal'); m.querySelector('[data-icu-act="phiexportgo"]').click();
-    return JSON.stringify({ openedNow: window.__opened });
+    return JSON.stringify({ openedNow: window.__opened || document.querySelectorAll('iframe').length > window.__ifr0 });
   `);
   ok(p2.openedNow, "Print → after confirm, the print/PDF window is opened");
 

@@ -195,7 +195,7 @@ const setViewport = async (width, height, mobile) => {
   try { await ev(`document.documentElement.style.zoom='1';1`); } catch { /* page not ready */ }
 };
 
-const noOverflow = () => ev(`(()=>{const b=document.querySelector('#researchMD');if(!b)return false;return b.scrollWidth<=b.clientWidth+2 && document.documentElement.scrollWidth<=window.innerWidth+1})()`);
+const noOverflow = () => ev(`(()=>{const b=document.querySelector('#researchMD');if(!b)return false;return b.scrollWidth<=b.clientWidth+2 && document.documentElement.scrollWidth<=document.documentElement.clientWidth})()`);
 const widthOf = (sel) => ev(`(()=>{const e=document.querySelector(${JSON.stringify(sel)});if(!e)return 0;return e.offsetWidth})()`);
 const colCount = (sel) => ev(`(()=>{const e=document.querySelector(${JSON.stringify(sel)});if(!e)return 0;const g=getComputedStyle(e).gridTemplateColumns;return g.split(/\\s+/).filter(Boolean).length})()`);
 const hasAiBar = (sel) => ev(`(()=>{const r=document.querySelector(${JSON.stringify(sel)});if(!r)return false;const a=r.querySelector('[data-rmd-ai="ask"]');const m=r.querySelector('[data-rmd-ai="manual"]');return !!(a&&m)&&/Ask MaiK to draft it/.test(a.innerText)&&/Do it myself/.test(m.innerText)})()`);

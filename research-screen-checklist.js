@@ -310,6 +310,9 @@
       "#researchMD .rmd-checklist-empty { padding: 28px 8px; }",
       "#researchMD .rmd-checklist-empty h2 { margin: 0 0 8px; font: 600 18px/1.3 var(--rmd-f, system-ui, sans-serif); }",
       "#researchMD .rmd-checklist-empty p { margin: 0 0 14px; color: var(--rmd-mut, #93a4a8); }",
+      "#researchMD .rmd-checklist-credit { margin: 16px 0 0; padding: 12px 0 0; border-top: 1px solid var(--rmd-line, #e5ddce); color: var(--rmd-mut, #93a4a8); font-size: 12.5px; line-height: 1.5; overflow-wrap: anywhere; }",
+      "#researchMD .rmd-checklist-credit-line { margin: 0 0 6px; }",
+      "#researchMD .rmd-checklist-credit-key { font-weight: 600; }",
       "#researchMD .rmd-checklist-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }",
       "@media (max-width: 767px) {",
       "  #researchMD .rmd-checklist-wrap { padding: 12px 14px 32px; }",
@@ -469,6 +472,12 @@
       h.push('</div>');
       h.push(manuscriptHtml());
       h.push('</div>');
+    }
+    if (st.filled && (st.filled.source || st.filled.licence)) {
+      h.push('<footer class="rmd-checklist-credit" id="rmdChecklistCredit">');
+      if (st.filled.source) h.push('<p class="rmd-checklist-credit-line"><span class="rmd-checklist-credit-key">Source</span> ' + esc(st.filled.source) + '</p>');
+      if (st.filled.licence) h.push('<p class="rmd-checklist-credit-line"><span class="rmd-checklist-credit-key">Licence</span> ' + esc(st.filled.licence) + '</p>');
+      h.push('</footer>');
     }
     h.push('<pre id="rmdChecklistCsv" class="rmd-checklist-sr"></pre>');
     h.push('</div></div>');

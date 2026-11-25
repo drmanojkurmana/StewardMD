@@ -6460,11 +6460,38 @@
   function redactPHI(text) {
     var t = String(text == null ? "" : text);
     t = t.replace(/\b[\w.+-]+@[\w.-]+\.\w{2,}\b/g, "[redacted]");                                  // email
-    t = t.replace(/\b(MRN|UHID|UID|IP\s?N?o|OP\s?N?o|Reg\.?\s?No|Hosp\.?\s?No|ABHA|Aadhaar)\b\s*[:#.]?\s*\S+/gi, "$1: [redacted]");
+    t = t.replace(/\b(Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp\s*(?:Number|No\.?)|Reg\s*(?:Number|No\.?)|OPD\s*(?:Number|No\.?)|OP\s*(?:Number|No\.?)|IPD\s*(?:Number|No\.?)|IP\s*(?:Number|No\.?)|CR\s*(?:Number|No\.?)|UHID(?:\s*(?:Number|No\.?))?|MRN(?:\s*(?:Number|No\.?))?|UID)\b\s*[:#.]?\s*(?:(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b|[\u0966-\u0D6F\/-]{3,25})/gi, "$1: [redacted]");
+    t = t.replace(/\b(Aadhar|Aadhaar(?:\s*(?:Number|No\.?))?)\b\s*[:#.]?\s*(?:\d{4}[\s-]\d{4}[\s-]\d{4}|\d{12}|[Xx*]{4}[\s-]?[Xx*]{4}[\s-]?\d{4}|(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b|[\u0966-\u0D6F\/-]{3,25})/gi, "$1: [redacted]");
+    t = t.replace(/\b(ABHA(?:\s*(?:Number|No\.?))?)\b\s*[:#.]?\s*(?:\d{2}[\s-]\d{4}[\s-]\d{4}[\s-]\d{4}|\d{14}|(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b|[\u0966-\u0D6F\/-]{3,25})/gi, "$1: [redacted]");
+    t = t.replace(/\b(?:\d{4}[ -]\d{4}[ -]\d{4}|[Xx*]{4}[ -]?[Xx*]{4}[ -]?\d{4}|\d{12})\b/g, function (m) {
+      var parts = m.split(/[ -]/);
+      if (parts.length === 3 && parts[0].length === 4 && parts[1].length === 4 && parts[2].length === 4) {
+        var y1 = parseInt(parts[0], 10), y2 = parseInt(parts[1], 10), y3 = parseInt(parts[2], 10);
+        if (y1 >= 1900 && y1 <= 2099 && y2 >= 1900 && y2 <= 2099 && y3 >= 1900 && y3 <= 2099) return m;
+      }
+      return "[redacted]";
+    }); // Aadhaar 4-4-4 / 12-digit / masked
     t = t.replace(/\b(Name|Patient|Pt\.?\s?Name|Father|Mother|Guardian|Husband|Wife)\b\s*[:]\s*.+/gi, "$1: [redacted]");
     t = t.replace(/\b(DOB|D\.?O\.?B|Date of Birth|Age\/Sex)\b\s*[:]?\s*\S+/gi, "$1: [redacted]");
-    t = t.replace(/(\+?\d[\d\s-]{8,}\d)/g, "[redacted]");                                          // phone / 10+ digit id runs
-    t = t.replace(/\b\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}\b/g, "[date]");                            // dd/mm/yyyy
+    t = t.replace(/(?:\(0\d{2,4}\)\s*|(?:\b0\d{2,4}[-.\s]))\d{3,4}[-.\s]?\d{3,4}\b|\b0\d{2,4}-\d{6,8}\b/g, "[redacted]"); // (STD) landlines
+    t = t.replace(/\b(?:(?:\+91|0)[-.\s]?)?[6-9]\d{4}\.\d{5}\b/g, "[redacted]");                   // dotted mobiles
+    t = t.replace(/(\+?\d[\d\s-]{8,}\d)/g, function (m) {
+      var rawDigits = m.replace(/\D/g, "");
+      if (rawDigits.length < 10) return m;
+      var parts = m.split(/[ -]/);
+      if (parts.length === 3 && parts[0].length === 4 && parts[1].length === 4 && parts[2].length === 4) {
+        var y1 = parseInt(parts[0], 10), y2 = parseInt(parts[1], 10), y3 = parseInt(parts[2], 10);
+        if (y1 >= 1900 && y1 <= 2099 && y2 >= 1900 && y2 <= 2099 && y3 >= 1900 && y3 <= 2099) return m;
+      }
+      return "[redacted]";
+    }); // phone / 10+ digit id runs
+    t = t.replace(/(^|[^0-9.])\b(?:19|20)\d{2}([\/-])(?:0?[1-9]|1[0-2])\2(?:0?[1-9]|[12]\d|3[01])\b(?![0-9.])/g, "$1[date]");                                // yyyy-mm-dd / yyyy/mm/dd
+    t = t.replace(/(^|[^0-9.])\b(?:0?[1-9]|[12]\d|3[01])([\/.\\-])(?:0?[1-9]|1[0-2])\2(?:19|20)\d{2}\b(?![0-9.])/g, "$1[date]");                       // dd/mm/yyyy, dd.mm.yyyy, dd-mm-yyyy
+    t = t.replace(/(^|[^0-9.])\b(?:0?[1-9]|[12]\d|3[01])([/.])(?:0?[1-9]|1[0-2])\2\d{2}\b(?![0-9.])/g, "$1[date]");                                   // dd/mm/yy, dd.mm.yy (2-digit year ONLY with / or .)
+    var MON = "Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?";
+    t = t.replace(new RegExp("\\b(?:0?[1-9]|[12]\\d|3[01])(?:st|nd|rd|th)?[ -]+(?:" + MON + ")[ -]+(?:(?:19|20)\\d{2}|\\d{2})\\b", "gi"), "[date]"); // dd-Mon-yyyy, ordinal
+    t = t.replace(new RegExp("\\b(?:" + MON + ")[ -]+(?:0?[1-9]|[12]\\d|3[01])(?:st|nd|rd|th)?(?:,\\s*|[ -]+)(?:(?:19|20)\\d{2}|\\d{2})\\b", "gi"), "[date]"); // Month dd, yyyy
+    t = t.replace(new RegExp("\\b(?:" + MON + ")[ -]+(?:19|20)\\d{2}\\b", "gi"), "[date]"); // Month yyyy (19xx or 20xx only)
     // Indian identifiers (ABHA Address, UPI, PAN, Indic-script digits, labelled IDs): phi-india.js,
     // additive only. Flag smd_phi_india, default ON; "0" restores the output above exactly.
     try { var PI = window.SMD_PHI_INDIA; if (PI && PI.enabled()) t = PI.apply(t); } catch (e) {}

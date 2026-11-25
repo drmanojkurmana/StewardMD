@@ -211,6 +211,17 @@ export async function runResearchWalk(cfg) {
     return false;
   };
 
+  const setViewport = async (width, height, mobile) => {
+    await call("Emulation.setDeviceMetricsOverride", {
+      width: width,
+      height: height,
+      deviceScaleFactor: 2,
+      mobile: mobile
+    });
+    await sleep(150);
+  };
+  const docFits = () => ev("document.documentElement.scrollWidth <= document.documentElement.clientWidth");
+
   const click = (sel) => ev("(()=>{const b=document.querySelector(" + JSON.stringify(sel) + ");if(!b)return false;b.click();return true})()");
   const text = (sel) => ev("(()=>{const e=document.querySelector(" + JSON.stringify(sel) + ");if(!e)return '';return e.innerText||e.textContent||''})()");
 
@@ -265,7 +276,10 @@ export async function runResearchWalk(cfg) {
     ok(await until("!!document.querySelector('.rmd-start-screen')", 8000), cfg.name + " start screen rendered");
     const ask = await text(".rmd-start-screen");
     ok(ask.indexOf("What do you want to publish?") >= 0, cfg.name + " asks what to publish");
-    ok(await ev("document.documentElement.scrollWidth <= window.innerWidth + 1"), cfg.name + " 390x844 no horizontal scroll on the question");
+    ok(await docFits(), cfg.name + " 390x844 no horizontal scroll on the question");
+    await setViewport(1024, 1366, false);
+    ok(await docFits(), cfg.name + " 1024x1366 no horizontal scroll on the question");
+    await setViewport(390, 844, true);
     await shot("01-question");
 
     ok(await click('[data-rmd-start-choice="' + cfg.choice + '"]'), cfg.name + " choice " + cfg.choice + " clicked");
@@ -289,8 +303,10 @@ export async function runResearchWalk(cfg) {
       if (!seen) console.log("BANNER " + (await text("#rmdStepBanner")).slice(0, 240));
       const banner = await text("#rmdStepBanner");
       ok(banner.indexOf("Next:") >= 0, cfg.name + " step " + n + " shows Next");
-      const wide = await ev("document.documentElement.scrollWidth <= window.innerWidth + 1");
-      ok(wide, cfg.name + " step " + n + " 390x844 no horizontal scroll");
+      ok(await docFits(), cfg.name + " step " + n + " 390x844 no horizontal scroll");
+      await setViewport(1024, 1366, false);
+      ok(await docFits(), cfg.name + " step " + n + " 1024x1366 no horizontal scroll");
+      await setViewport(390, 844, true);
       if (i < steps.length - 1) {
         const advanced = await click('#rmdHelpWrap [data-rmd-action="help-next"]');
         ok(advanced, cfg.name + " Next advances from " + label);
@@ -307,6 +323,11 @@ export async function runResearchWalk(cfg) {
     const exported = recorded.some((r) => r.method === "POST" && /\/manuscript\/export$/.test(r.path) && r.body && r.body.format === "docx");
     ok(exported, cfg.name + " export request asked for docx");
     await shot("03-docx");
+    ok(await docFits(), cfg.name + " 390x844 no horizontal scroll after the export");
+    await setViewport(1024, 1366, false);
+    ok(await docFits(), cfg.name + " 1024x1366 no horizontal scroll after the export");
+    await shot("04-tablet");
+    await setViewport(390, 844, true);
 
     const shell = await ev("(()=>{var e=document.querySelector('#researchMD'); return e ? (e.innerText||'') : '';})()");
     ok(shell.indexOf("\u2014") < 0 && shell.indexOf("\u2013") < 0, cfg.name + " no em or en dash in the shell");
