@@ -137,6 +137,8 @@ const db = {
 let polishMode = 'success'; // 'success' | '402' | 'corrupt_tokens'
 const draftCalls = [];
 const importCalls = [];
+const findCalls = [];
+const recordCalls = [];
 
 /* ---------------- API Handler ---------------- */
 async function handleApi(req, res, path, query) {
@@ -205,6 +207,51 @@ async function handleApi(req, res, path, query) {
     const sec = db.manuscript.sections.find((s) => s.id === sid);
     if (sec && body.text !== undefined) sec.text = body.text;
     return send(200, { section: sec, version: db.manuscript.version, tokens: db.manuscript.tokens });
+  }
+
+  // POST /v1/projects/:projectId/find-studies
+  if (path.match(/^\/v1\/projects\/[^/]+\/find-studies$/) && req.method === 'POST') {
+    findCalls.push(body);
+    return send(200, {
+      results: [
+        {
+          pmid: '8309034',
+          doi: '10.1001/jama.1994.03510370074034',
+          title: 'Efficacy of BCG vaccine in the prevention of tuberculosis',
+          authors: ['Colditz GA', 'Brewer TF'],
+          year: 1994,
+          journal: 'JAMA',
+          abstract: 'Meta-analysis of clinical trials and case-control studies evaluating BCG protection.',
+          freeFullText: true,
+          source: 'pubmed',
+          sources: ['pubmed', 'europe_pmc', 'crossref']
+        },
+        {
+          pmid: '',
+          doi: '10.5000/cr.1234',
+          title: 'Crossref Neonatal BCG Trial Follow-up',
+          authors: ['Kumar M'],
+          year: 2024,
+          journal: 'NEJM',
+          abstract: 'Longitudinal outcomes of neonatal vaccination.',
+          freeFullText: false,
+          source: 'crossref',
+          sources: ['crossref']
+        }
+      ]
+    });
+  }
+
+  // GET /v1/projects/:projectId/records & POST /v1/projects/:projectId/records
+  if (path.match(/^\/v1\/projects\/[^/]+\/records$/)) {
+    if (req.method === 'POST') {
+      recordCalls.push(body);
+      return send(201, {
+        record: { id: 'rec_' + recordCalls.length, title: body.title, source: body.source || 'pubmed' },
+        duplicate: false
+      });
+    }
+    return send(200, { records: [] });
   }
 
   // GET /v1/projects/:projectId/searches
@@ -513,11 +560,9 @@ try {
   await ev(`SMD_RESEARCH.navigate('search'); 1;`);
   ok(await until(`!!document.querySelector('#rmd_import_file')`, 8000), 'Search screen renders with Import References panel');
 
-  // File picker accepts .ris, .bib, .json, .xml, .nbib, .csv
-  const acceptAttr = await ev(`(()=>{const i=document.querySelector('#rmd_import_file');return i?i.getAttribute('accept'):'';})()`);
-  ok(acceptAttr.includes('.ris') && acceptAttr.includes('.bib') && acceptAttr.includes('.json') &&
-     acceptAttr.includes('.xml') && acceptAttr.includes('.nbib') && acceptAttr.includes('.csv'),
-     'file picker accepts .ris, .bib, .json, .xml, .nbib, .csv');
+  // File picker does not set a restrictive accept attr so iOS UIDocumentPicker allows .nbib and .txt
+  const acceptAttr = await ev(`(()=>{const i=document.querySelector('#rmd_import_file');return i?i.getAttribute('accept'):'MISSING';})()`);
+  ok(acceptAttr === null || acceptAttr === '', 'file picker omits restrictive accept attribute for iOS .nbib/.txt compatibility');
 
   // Verify export tips for Zotero, Mendeley, and EndNote
   const searchFullText = await text('#researchMD');
@@ -549,6 +594,33 @@ try {
     return s && typeof s.countEntries === 'function' ? s.countEntries('nbib', ${JSON.stringify(nbibSample)}) : -1;
   })()`);
   ok(nbibCount === 2, `countEntries correctly counts 2 items in PubMed NBIB (${nbibCount})`);
+
+  // Simulate PubMed .txt NBIB selection and verify auto-detection to nbib
+  const pubmedTxtSample = 'PMID- 8309034\nTI  - Efficacy of BCG vaccine.\nDP  - 1994\n\n';
+  await ev(`(function(){
+    var dt = new DataTransfer();
+    var file = new File([${JSON.stringify(pubmedTxtSample)}], 'pubmed-BCG-set.txt', { type: 'text/plain' });
+    dt.items.add(file);
+    var fi = document.querySelector('#rmd_import_file');
+    fi.files = dt.files;
+    fi.dispatchEvent(new Event('change', { bubbles: true }));
+  })()`);
+  ok(await until(`document.querySelector('#rmd_import_format') && document.querySelector('#rmd_import_format').value === 'nbib' && /1 entries detected/.test(document.body.innerText)`, 4000),
+     'PubMed .txt file auto-detects nbib format and counts 1 entry');
+
+  // Test unified Quick Search across all online sources + direct add to Screening
+  await ev(`(function(){
+    var q = document.querySelector('#rmd_topic_q');
+    q.value = 'BCG vaccine tuberculosis';
+    q.dispatchEvent(new Event('input', { bubbles: true }));
+  })()`);
+  await click('[data-rmd="topic-search"]');
+  ok(await waitCond(() => findCalls.length === 1), 'Quick Search queries /find-studies with plain topic');
+  ok(await until(`/Found 2 papers/.test(document.body.innerText) && /Crossref Neonatal BCG Trial/.test(document.body.innerText)`, 4000),
+     'Quick Search renders merged PubMed, Europe PMC, and Crossref results');
+  await click('[data-rmd-topic-add="0"]');
+  ok(await waitCond(() => recordCalls.length === 1), 'Direct add sends paper to /records');
+  ok(await until(`/Added to Screening/.test(document.body.innerText)`, 4000), 'Paper marks as Added to Screening immediately');
 
   // Simulate file upload and import execution
   console.log('\n--- Test C2: Import execution & result summary ---');

@@ -45,6 +45,7 @@ const net = {
   calls: [],
   searchPmids: ["111", "222"],
   epmcSearch: [],
+  crossrefSearch: [],
   byPmid: new Map(),
   xml: new Map(),
 };
@@ -120,6 +121,9 @@ globalThis.fetch = async (url) => {
       return jsonRes({ resultList: { result: [epmcRaw(rec)] } });
     }
     return jsonRes({ resultList: { result: net.epmcSearch } });
+  }
+  if (u.includes("api.crossref.org/works")) {
+    return jsonRes({ message: { items: net.crossrefSearch } });
   }
   return jsonRes({});
 };
@@ -227,7 +231,7 @@ describe("research auto studies", { concurrency: false, skip: SKIP }, () => {
     assert.equal(mirror.prepare("SELECT COUNT(*) AS n FROM sqlite_master WHERE type='table' AND name='research_paper_numbers'").get().n, 1);
   });
 
-  test("find-studies merges PubMed and Europe PMC and de-duplicates by DOI", async () => {
+  test("find-studies merges PubMed, Europe PMC, and Crossref and de-duplicates by DOI", async () => {
     resetLlm();
     net.calls.length = 0;
     net.searchPmids = ["111", "222"];
@@ -237,6 +241,10 @@ describe("research auto studies", { concurrency: false, skip: SKIP }, () => {
       { source: "MED", id: "111", pmid: "111", doi: "10.1000/same.1", title: "BCG and hospital admission", authorString: "Smith A", pubYear: "2020", journalTitle: "Lancet", abstractText: "EPMC abstract text", isOpenAccess: "Y" },
       { source: "MED", id: "444", pmid: "444", doi: "10.3000/only.444", title: "Another trial", authorString: "Patel R", pubYear: "2021", journalTitle: "BMJ", abstractText: "Unique abstract", isOpenAccess: "N" },
     ];
+    net.crossrefSearch = [
+      { DOI: "10.1000/same.1", title: ["BCG and hospital admission"], author: [{ family: "Smith", given: "A" }], published: { "date-parts": [[2020]] }, "container-title": ["Lancet"] },
+      { DOI: "10.5000/cr.555", title: ["Crossref Unique Trial"], author: [{ family: "Kumar", given: "M" }], published: { "date-parts": [[2023]] }, "container-title": ["NEJM"], abstract: "<jats:p>Crossref abstract text.</jats:p>" },
+    ];
     const env = freshEnv();
     fundWallet(env, "alice@example.com", 100);
     const project = await makeProject(env);
@@ -245,9 +253,10 @@ describe("research auto studies", { concurrency: false, skip: SKIP }, () => {
     assert.equal(r.requestId, undefined);
     assert.ok(r.requestHeader);
     assert.equal(llm.calls.length, 0);
-    assert.equal(r.results.length, 3);
+    assert.equal(r.results.length, 4);
     const merged = r.results.find((row) => row.pmid === "111");
     assert.equal(merged.source, "pubmed");
+    assert.ok(merged.sources.includes("pubmed") && merged.sources.includes("europe_pmc") && merged.sources.includes("crossref"));
     assert.equal(merged.doi, "10.1000/same.1");
     assert.equal(merged.freeFullText, true);
     assert.equal(merged.year, 2020);
@@ -257,6 +266,78 @@ describe("research auto studies", { concurrency: false, skip: SKIP }, () => {
     assert.equal(r.results.filter((row) => row.doi === "10.1000/same.1").length, 1);
     assert.ok(r.results.some((row) => row.pmid === "444" && row.source === "europe_pmc"));
     assert.ok(r.results.some((row) => row.pmid === "222" && row.source === "pubmed"));
+    const crOnly = r.results.find((row) => row.doi === "10.5000/cr.555");
+    assert.ok(crOnly);
+    assert.equal(crOnly.source, "crossref");
+    assert.equal(crOnly.journal, "NEJM");
+    assert.equal(crOnly.abstract, "Crossref abstract text.");
+    net.crossrefSearch = [];
+  });
+
+  test("direct add record endpoint inserts into Screening and deduplicates repeats", async () => {
+    const env = freshEnv();
+    const project = await makeProject(env);
+    const pid = project.id;
+    const missingTitle = await call(env, "POST", "v1/projects/" + pid + "/records", "tok-alice", { pmid: "999" });
+    assert.equal(missingTitle.http, 400);
+    const outsider = await call(env, "POST", "v1/projects/" + pid + "/records", "tok-eve", { title: "Blocked" });
+    assert.equal(outsider.http, 404);
+    const created = await call(env, "POST", "v1/projects/" + pid + "/records", "tok-alice", {
+      source: "crossref",
+      doi: "10.5000/cr.555",
+      title: "Crossref Unique Trial",
+      authors: ["Kumar M"],
+      year: 2023,
+      journal: "NEJM",
+      abstract: "Study abstract",
+    });
+    assert.equal(created.http, 201, JSON.stringify(created));
+    assert.equal(created.duplicate, false);
+    assert.equal(created.record.doi, "10.5000/cr.555");
+    const repeat = await call(env, "POST", "v1/projects/" + pid + "/records", "tok-alice", {
+      source: "pubmed",
+      pmid: "88888",
+      doi: "https://doi.org/10.5000/cr.555",
+      title: "Crossref Unique Trial",
+    });
+    assert.equal(repeat.http, 200, JSON.stringify(repeat));
+    assert.equal(repeat.duplicate, true);
+    assert.equal(repeat.record.id, created.record.id);
+    const list = await call(env, "GET", "v1/projects/" + pid + "/records", "tok-alice");
+    assert.equal(list.http, 200);
+    assert.equal(list.records.length, 1);
+  });
+
+  test("PubMed .txt export is accepted by /import-uploads and parsed by /imports", async () => {
+    const env = freshEnv();
+    const r2 = new Map();
+    env.RESEARCH_R2 = {
+      async put(k, v) { r2.set(k, v); },
+      async get(k) {
+        const b = r2.get(k);
+        if (!b) return null;
+        return { async text() { return new TextDecoder().decode(b); } };
+      },
+    };
+    const project = await makeProject(env);
+    const nbibTxt = "PMID- 8309034\nTI  - Efficacy of BCG vaccine in the prevention of tuberculosis.\nFAU - Colditz, G A\nDP  - 1994 Mar 2\nJT  - JAMA\nAID - 10.1001/jama.1994.03510370074034 [doi]\n\n";
+    const fd = new FormData();
+    fd.append("file", new File([nbibTxt], "pubmed-BCG-set.txt", { type: "text/plain" }));
+    const upReq = new Request("https://stewardmd.in/api/research/v1/projects/" + project.id + "/import-uploads", {
+      method: "POST",
+      headers: { Authorization: "Bearer tok-alice" },
+      body: fd,
+    });
+    const upRes = await onRequest({ request: upReq, env, params: { path: ["v1", "projects", project.id, "import-uploads"] } });
+    assert.equal(upRes.status, 201);
+    const upJson = await upRes.json();
+    assert.ok(upJson.storageKey.endsWith(".txt"));
+    const imp = await call(env, "POST", "v1/projects/" + project.id + "/imports", "tok-alice", {
+      format: "nbib",
+      storageKey: upJson.storageKey,
+    });
+    assert.equal(imp.http, 201, JSON.stringify(imp));
+    assert.equal(imp.import.recordsAdded, 1);
   });
 
   test("find-studies read role, validation, and outsider 404", async () => {

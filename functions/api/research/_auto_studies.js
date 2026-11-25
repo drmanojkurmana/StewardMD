@@ -36,6 +36,7 @@
  */
 import * as pubmed from "./_connectors/pubmed.js";
 import * as europepmc from "./_connectors/europepmc.js";
+import * as crossref from "./_connectors/crossref.js";
 import { efetchAbstracts } from "./_connectors/pubmed_efetch.js";
 import { fetchWithRetry, readJson, politeUserAgent, requireContactEmail, createBucket, ConnectorError } from "./_connectors/_http.js";
 import { dedupRecords, normaliseDoi, firstAuthorKey } from "./_dedup.js";
@@ -52,6 +53,8 @@ const TOKENS_MESSAGE = "You need more MaiK tokens";
 const ESEARCH = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi";
 const EPMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search";
 const EPMC_XML = "https://www.ebi.ac.uk/europepmc/webservices/rest/";
+const CROSSREF_WORKS = "https://api.crossref.org/works";
+const CROSSREF_SELECT = "DOI,title,author,published,abstract,URL,container-title";
 const TOOL = "StewardMD_ResearchMD";
 const BUCKET = createBucket(8);
 
@@ -70,6 +73,7 @@ function configOf(env) {
   return {
     contactEmail: env.RESEARCH_CONTACT_EMAIL,
     apiKey: env.RESEARCH_NCBI_API_KEY,
+    plusToken: env.RESEARCH_CROSSREF_TOKEN,
     deadline: Date.now() + 60000,
     bucket: BUCKET,
   };
@@ -141,6 +145,22 @@ function epmcResult(rec, raw) {
     createdTs: 1,
   };
 }
+function crossrefResult(rec, raw) {
+  const container = raw && Array.isArray(raw["container-title"]) ? raw["container-title"][0] : "";
+  return {
+    id: "cr_" + rec.externalId,
+    source: "crossref",
+    pmid: "",
+    doi: normaliseDoi(rec.doi) || String(rec.doi || ""),
+    title: rec.title || "",
+    authors: rec.authors || [],
+    year: rec.year,
+    journal: String(container || ""),
+    abstract: capAbstract(stripTags(raw && raw.abstract)),
+    freeFullText: false,
+    createdTs: 2,
+  };
+}
 function publicResult(r) {
   return {
     pmid: r.pmid || "",
@@ -152,13 +172,15 @@ function publicResult(r) {
     abstract: r.abstract || "",
     freeFullText: !!r.freeFullText,
     source: r.source,
+    sources: Array.isArray(r.sources) && r.sources.length ? r.sources : [r.source],
   };
 }
 function mergeDedup(records) {
   const byId = new Map(records.map((r) => [r.id, r]));
   const { groups } = dedupRecords(records.map((r) => ({
-    id: r.id, source: r.source === "europe_pmc" ? "europe_pmc" : "pubmed",
-    externalId: r.pmid || r.id, title: r.title, authors: r.authors, year: r.year,
+    id: r.id,
+    source: r.source === "europe_pmc" ? "europe_pmc" : (r.source === "crossref" ? "crossref" : "pubmed"),
+    externalId: r.pmid || r.doi || r.id, title: r.title, authors: r.authors, year: r.year,
     doi: r.doi, pmid: r.pmid, createdTs: r.createdTs,
   })));
   const grouped = new Set();
@@ -166,10 +188,11 @@ function mergeDedup(records) {
   for (const g of groups) {
     for (const id of g.memberIds) grouped.add(id);
     const canon = byId.get(g.canonicalRecordId);
-    const merged = Object.assign({}, canon);
+    const merged = Object.assign({}, canon, { sources: canon && canon.source ? [canon.source] : [] });
     for (const id of g.memberIds) {
       const m = byId.get(id);
       if (!m) continue;
+      if (m.source && merged.sources.indexOf(m.source) < 0) merged.sources.push(m.source);
       if (!merged.abstract && m.abstract) merged.abstract = m.abstract;
       if (!merged.freeFullText && m.freeFullText) merged.freeFullText = true;
       if (!merged.doi && m.doi) merged.doi = m.doi;
@@ -179,7 +202,25 @@ function mergeDedup(records) {
     }
     out.push(merged);
   }
-  for (const r of records) if (!grouped.has(r.id)) out.push(r);
+  const tailBySource = { pubmed: [], europe_pmc: [], crossref: [] };
+  for (const r of records) {
+    if (grouped.has(r.id)) continue;
+    const key = tailBySource[r.source] ? r.source : "pubmed";
+    tailBySource[key].push(Object.assign({}, r, { sources: [r.source] }));
+  }
+  const buckets = [tailBySource.pubmed, tailBySource.europe_pmc, tailBySource.crossref];
+  let idx = 0;
+  for (;;) {
+    let added = false;
+    for (const b of buckets) {
+      if (idx < b.length) {
+        out.push(b[idx]);
+        added = true;
+      }
+    }
+    if (!added) break;
+    idx++;
+  }
   return out;
 }
 
@@ -219,6 +260,23 @@ async function epmcLimited(query, limit, config) {
   const out = [];
   for (const raw of resultListOf(body).slice(0, limit)) {
     try { out.push(epmcResult(europepmc.normalise(raw), raw)); } catch (e) { /* skip */ }
+  }
+  return out;
+}
+async function crossrefLimited(query, limit, config) {
+  const email = requireContactEmail(config);
+  const p = new URLSearchParams();
+  p.set("query", query);
+  p.set("rows", String(Math.min(limit, 50)));
+  p.set("select", CROSSREF_SELECT);
+  p.set("mailto", email);
+  const headers = { "User-Agent": politeUserAgent(email), "Accept": "application/json" };
+  if (config.plusToken) headers["crossref-api-key"] = "Bearer " + String(config.plusToken).trim();
+  const body = await readJson(await fetchWithRetry(CROSSREF_WORKS + "?" + p.toString(), transport(config, headers)));
+  const items = (body && body.message && Array.isArray(body.message.items)) ? body.message.items : [];
+  const out = [];
+  for (const raw of items.slice(0, limit)) {
+    try { out.push(crossrefResult(crossref.normalise(raw), raw)); } catch (e) { /* skip */ }
   }
   return out;
 }
@@ -286,6 +344,7 @@ export async function findStudies(ctx, projectId, body) {
   const settled = await Promise.allSettled([
     pubmedLimited(q, limit, config),
     epmcLimited(q, limit, config),
+    crossrefLimited(q, limit, config),
   ]);
   const records = [];
   let failures = 0;
