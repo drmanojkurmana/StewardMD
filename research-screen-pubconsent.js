@@ -313,10 +313,14 @@
     return text.trim();
   }
 
-  function render(container) {
+  function render(container, params) {
+    if (!container && typeof document !== "undefined") {
+      container = document.querySelector("#rmdScreenBody") || (document.querySelector(".rmd-pubconsent-screen") ? document.querySelector(".rmd-pubconsent-screen").parentNode : null) || document.body;
+    }
     if (!container) return;
     var proj = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
-    var pid = (proj && proj.id) || "default";
+    var pid = (params && params.projectId) || (proj && (proj.serverId || proj.id)) || "default";
+    var altPid = (proj && proj.serverId && proj.id && proj.id !== proj.serverId) ? (pid === proj.serverId ? proj.id : proj.serverId) : null;
     var journey = SMD.journeyFor ? SMD.journeyFor(proj) : [];
     var idx = -1;
     for (var i = 0; i < journey.length; i++) if (journey[i] === KEY) idx = i;
@@ -326,18 +330,23 @@
     var nextLabel = nextName ? labelFor(nextName) : "Images";
 
     // Initial synchronous render for fast paint and synchronous test harnesses
-    renderContent(container, proj, pid, stepNo, stepCount, nextLabel, null);
+    renderContent(container, proj, pid, stepNo, stepCount, nextLabel, null, altPid);
 
     // Load saved consent record if available
     var storePromise = (G.RMDStore && G.RMDStore.get) ? G.RMDStore.get(pid, "pubconsent", "consent") : Promise.resolve(null);
     storePromise.then(function (saved) {
+      if (!saved && altPid && G.RMDStore && G.RMDStore.get) {
+        return G.RMDStore.get(altPid, "pubconsent", "consent");
+      }
+      return saved;
+    }).then(function (saved) {
       if (saved) {
-        renderContent(container, proj, pid, stepNo, stepCount, nextLabel, saved);
+        renderContent(container, proj, pid, stepNo, stepCount, nextLabel, saved, altPid);
       }
     }).catch(function () {});
   }
 
-  function renderContent(container, proj, pid, stepNo, stepCount, nextLabel, saved) {
+  function renderContent(container, proj, pid, stepNo, stepCount, nextLabel, saved, altPid) {
     var h = [];
     h.push('<div class="rmd-p2-screen rmd-' + KEY + '-screen">');
     h.push('<div class="rmd-card">');
@@ -375,16 +384,16 @@
       h.push('<div id="rmd-pubconsent-status" style="margin-bottom:8px; font-size:13px;"></div>');
 
       if (isNonEnglish) {
-        // Selected language version FIRST and IN FULL
-        h.push('<div class="rmd-consent-selected-block" id="rmd-pubconsent-selected-block" lang="' + esc(sCode) + '"' + (isRtl ? ' dir="rtl"' : ' dir="ltr"') + ' style="margin-bottom:16px; font-family:' + fontStack + ';' + (isRtl ? 'text-align:right;' : '') + '">');
-        h.push('<h4 style="margin:0 0 6px 0;">' + esc(sLangName) + ' Version</h4>');
-        h.push('<p class="rmd-translation-check" style="margin:4px 0 8px; font-size:12px; color:#8ea3a6;' + (isRtl ? 'text-align:left; direction:ltr;' : '') + '">Translation check: have a native speaker or your ethics committee check this translation before use.</p>');
         if (saved.local && saved.local.trim()) {
+          // Selected language version FIRST and IN FULL
+          h.push('<div class="rmd-consent-selected-block" id="rmd-pubconsent-selected-block" lang="' + esc(sCode) + '"' + (isRtl ? ' dir="rtl"' : ' dir="ltr"') + ' style="margin-bottom:16px; font-family:' + fontStack + ';' + (isRtl ? 'text-align:right;' : '') + '">');
+          h.push('<h4 style="margin:0 0 6px 0;">' + esc(sLangName) + ' Version</h4>');
+          h.push('<p class="rmd-translation-check" style="margin:4px 0 8px; font-size:12px; color:#8ea3a6;' + (isRtl ? 'text-align:left; direction:ltr;' : '') + '">Translation check: have a native speaker or your ethics committee check this translation before use.</p>');
           h.push('<pre class="rmd-consent-preview-local" id="rmd_pubconsent_local_preview" lang="' + esc(sCode) + '"' + (isRtl ? ' dir="rtl"' : ' dir="ltr"') + ' style="background:#071318; border:1px solid #1f363d; padding:12px; border-radius:6px; white-space:pre-wrap; font-family:' + fontStack + '; font-size:13px; max-height:280px; overflow-y:auto;' + (isRtl ? 'text-align:right; direction:rtl;' : '') + '">' + esc(saved.local) + '</pre>');
+          h.push('</div>');
         } else {
           h.push('<p class="rmd-consent-local-missing" role="status" style="margin:0 0 16px; padding:10px; background:rgba(255,107,107,0.1); border:1px solid #ff6b6b; border-radius:6px; font-size:13px; color:#ff8787;">Local language version not filled in. Add the ' + esc(sLangName) + ' text before the patient signs.</p>');
         }
-        h.push('</div>');
 
         // English version follows as separate English copy (for the ethics committee)
         h.push('<div class="rmd-consent-english-copy" id="rmd-pubconsent-english-copy" lang="en" dir="ltr" style="margin-bottom:16px;">');
@@ -466,17 +475,17 @@
 
     h.push('</div></div>');
     container.innerHTML = h.join("");
-    wireEvents(container, proj, pid, saved);
+    wireEvents(container, proj, pid, saved, altPid);
   }
 
-  function wireEvents(container, proj, pid, saved) {
+  function wireEvents(container, proj, pid, saved, altPid) {
     if (!container || !container.querySelector) return;
     var maikPanel = container.querySelector("#rmd-maik-consent-panel");
     var manualPanel = container.querySelector("#rmd-manual-consent-panel");
     var tabMaik = container.querySelector('[data-rmd="tab-maik"]');
     var tabManual = container.querySelector('[data-rmd="tab-manual"]');
 
-    function updateManualLanguage(code) {
+    function updateManualLanguage(rawLang) {
       var localContainer = container.querySelector("#rmd-manual-local-container");
       var localLabel = container.querySelector("#rmd-manual-local-label");
       var localText = container.querySelector("#rmd-manual-local");
@@ -484,7 +493,8 @@
 
       if (!localContainer || !localText) return;
 
-      var name = langNameFor(code);
+      var code = langCodeFor(rawLang);
+      var name = langNameFor(rawLang);
       var isNonEng = (code !== "en" && name !== "English");
       var isRtl = isRtlLang(code);
       var fontStack = fontStackFor(code);
@@ -530,6 +540,37 @@
       }
     }
 
+    function enhanceSelect(selEl) {
+      if (!selEl) return;
+      try {
+        var protoDesc = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value");
+        if (!protoDesc || !protoDesc.set || !protoDesc.get) return;
+        Object.defineProperty(selEl, "value", {
+          configurable: true,
+          get: function () {
+            return protoDesc.get.call(this);
+          },
+          set: function (v) {
+            var targetCode = langCodeFor(v);
+            var targetName = langNameFor(v);
+            for (var i = 0; i < this.options.length; i++) {
+              var optVal = this.options[i].value;
+              var optText = this.options[i].text;
+              if (optVal === v || optVal === targetCode || optVal === targetName || optText === targetName || optText === v) {
+                this.selectedIndex = i;
+                protoDesc.set.call(this, optVal);
+                if (this.id === "rmd-manual-lang") {
+                  updateManualLanguage(optVal);
+                }
+                return;
+              }
+            }
+            protoDesc.set.call(this, v);
+          }
+        });
+      } catch (e) {}
+    }
+
     if (tabMaik && tabManual) {
       tabMaik.addEventListener("click", function () {
         if (maikPanel) maikPanel.style.display = "block";
@@ -549,9 +590,15 @@
 
     var manualLangSel = container.querySelector("#rmd-manual-lang");
     if (manualLangSel) {
+      enhanceSelect(manualLangSel);
       manualLangSel.addEventListener("change", function () {
         updateManualLanguage(this.value);
       });
+    }
+
+    var maikLangSel = container.querySelector("#rmd-maik-lang");
+    if (maikLangSel) {
+      enhanceSelect(maikLangSel);
     }
 
     var genBtn = container.querySelector('[data-rmd="generate-maik-consent"]');
@@ -603,10 +650,13 @@
             };
             if (G.RMDStore && G.RMDStore.put) {
               G.RMDStore.put(pid, "pubconsent", "consent", record).then(function () {
+                if (altPid) {
+                  G.RMDStore.put(altPid, "pubconsent", "consent", record).catch(function () {});
+                }
                 render(container);
               });
             } else {
-              renderContent(container, proj, pid, 1, 1, "Images", record);
+              renderContent(container, proj, pid, 1, 1, "Images", record, altPid);
             }
           } else {
             var msg = (resp.data && resp.data.error && resp.data.error.message) || "Failed to generate consent.";
@@ -637,10 +687,13 @@
 
         if (G.RMDStore && G.RMDStore.put) {
           G.RMDStore.put(pid, "pubconsent", "consent", record).then(function () {
+            if (altPid) {
+              G.RMDStore.put(altPid, "pubconsent", "consent", record).catch(function () {});
+            }
             render(container);
           });
         } else {
-          renderContent(container, proj, pid, 1, 1, "Images", record);
+          renderContent(container, proj, pid, 1, 1, "Images", record, altPid);
         }
       });
     }
@@ -648,7 +701,7 @@
     var editBtn = container.querySelector('[data-rmd="pubconsent-edit"]');
     if (editBtn) {
       editBtn.addEventListener("click", function () {
-        renderContent(container, proj, pid, 1, 1, "Images", null);
+        renderContent(container, proj, pid, 1, 1, "Images", null, altPid);
       });
     }
 
