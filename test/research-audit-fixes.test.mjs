@@ -49,3 +49,12 @@ test("clipboard copy in pubconsent and ctri has execCommand fallback", () => {
     assert.match(read(f), /execCommand\(["']copy["']\)/, f);
   }
 });
+
+test("studies screen mobile CSS wraps topbar actions and prevents shell horizontal overflow", () => {
+  const shell = read("research.js");
+  const pc = read("research-screen-papercard.js");
+  assert.match(shell, /#researchMD \.rmd-shell-body\s*\{[^}]*overflow-x:\s*hidden/);
+  assert.match(shell, /#researchMD \.rmd-topbar-actions\s*\{[^}]*flex-wrap:\s*wrap/);
+  assert.match(pc, /\.rmd-paste-input-row\s*\{[^}]*flex-wrap:\s*wrap/);
+  assert.match(pc, /\.rmd-paste-input\s*\{[^}]*min-width:\s*0/);
+});

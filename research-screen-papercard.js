@@ -38,11 +38,11 @@
     s.id = "rmdPaperCardCss";
     s.textContent = [
       "/* ResearchMD Study Card & Paste Box */",
-      ".rmd-paste-card-box { margin-bottom: 16px; padding: 14px; background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 12px; font-family: var(--rmd-f); }",
-      ".rmd-paste-row { display: flex; flex-direction: column; gap: 6px; }",
+      ".rmd-paste-card-box { margin-bottom: 12px; padding: 14px; background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 12px; font-family: var(--rmd-f); width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; }",
+      ".rmd-paste-row { display: flex; flex-direction: column; gap: 6px; min-width: 0; }",
       ".rmd-paste-title-lbl { font: 600 13px var(--rmd-f); color: var(--rmd-ink); margin: 0; }",
-      ".rmd-paste-input-row { display: flex; gap: 8px; align-items: center; }",
-      ".rmd-paste-input { flex: 1; min-height: 44px; box-sizing: border-box; padding: 10px 14px; font: 14.5px var(--rmd-f); border: 1px solid var(--rmd-line); border-radius: 10px; background: var(--rmd-bg); color: var(--rmd-ink); }",
+      ".rmd-paste-input-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }",
+      ".rmd-paste-input { flex: 1 1 180px; min-width: 0; max-width: 100%; min-height: 44px; box-sizing: border-box; padding: 10px 14px; font: 14.5px var(--rmd-f); border: 1px solid var(--rmd-line); border-radius: 10px; background: var(--rmd-bg); color: var(--rmd-ink); }",
       ".rmd-paste-input:focus { outline: none; border-color: var(--rmd-acc); box-shadow: 0 0 0 2px var(--rmd-acc-soft); }",
       ".rmd-btn-read { flex-shrink: 0; min-height: 44px; padding: 0 16px; font-weight: 600; cursor: pointer; }",
       ".rmd-paste-hint { font-size: 12px; color: var(--rmd-mut); line-height: 1.4; margin-top: 2px; }",
