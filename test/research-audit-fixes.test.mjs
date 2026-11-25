@@ -119,3 +119,17 @@ test("search screen provides iOS-safe file picker, .txt NBIB detection, and unif
   assert.match(api, /IMPORT_EXTENSIONS[\s\S]*txt:\s*1/);
   assert.match(api, /createDirectRecord/);
 });
+
+test("research-tutorial covers all 9 study designs, defaults ON, and celebrates publication", () => {
+  const tut = read("research-tutorial.js");
+  assert.doesNotMatch(tut, /[\u2013\u2014]/);
+  for (const key of ["case", "case-series", "case-control", "cohort", "trial", "sr", "masterchart", "obs", "thesis"]) {
+    assert.match(tut, new RegExp('key:\\s*"' + key + '"'), "tutorial example present for " + key);
+  }
+  assert.match(tut, /isTutorialDefault/);
+  assert.match(tut, /showCelebration/);
+  const shell = read("research.js");
+  assert.match(shell, /rmdTutWrap/);
+  assert.match(shell, /submission-tracker/);
+  assert.match(shell, /showCelebration/);
+});

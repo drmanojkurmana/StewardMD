@@ -955,7 +955,35 @@
       "#researchMD .rmd-feedback-note { font: 400 13px var(--rmd-f); color: var(--rmd-mut); margin: 8px 0; }",
       "#researchMD .rmd-feedback-text { width: 100%; box-sizing: border-box; font: 400 14px var(--rmd-f); color: var(--rmd-ink); background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 10px; padding: 10px; resize: vertical; }",
       "#researchMD .rmd-feedback-status { font: 400 13px var(--rmd-f); color: var(--rmd-mut); margin: 8px 0; min-height: 18px; }",
-      "#researchMD .rmd-feedback-actions { display: flex; gap: 8px; margin-top: 4px; }"
+      "#researchMD .rmd-feedback-actions { display: flex; gap: 8px; margin-top: 4px; }",
+      "#researchMD .rmd-tut-bar { margin: 8px 16px 0; padding: 12px 14px; border: 1.5px solid var(--rmd-acc); border-radius: 12px; background: var(--rmd-panel); box-sizing: border-box; }",
+      "#researchMD .rmd-tut-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px; }",
+      "#researchMD .rmd-tut-prog { font: 600 12px var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-tut-ask { margin: 4px 0; font: 600 13.5px var(--rmd-f); color: var(--rmd-ink); line-height: 1.45; }",
+      "#researchMD .rmd-tut-why { margin: 0 0 8px; font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); line-height: 1.4; }",
+      "#researchMD .rmd-tut-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }",
+      "#researchMD .rmd-tut-def { display: inline-flex; align-items: center; gap: 6px; font: 400 12px var(--rmd-f); color: var(--rmd-mut); margin-left: auto; cursor: pointer; }",
+      "#researchMD .rmd-tut-spot { outline: 3px solid var(--rmd-acc) !important; outline-offset: 2px; box-shadow: 0 0 0 5px rgba(21,128,61,0.22); transition: box-shadow 0.2s ease; }",
+      "#researchMD .rmd-tut-hub { margin-bottom: 18px; padding: 14px; border: 1px solid var(--rmd-line); border-radius: 12px; background: var(--rmd-panel); }",
+      "#researchMD .rmd-tut-hub-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px; }",
+      "#researchMD .rmd-tut-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }",
+      "#researchMD .rmd-tut-card { display: flex; flex-direction: column; justify-content: space-between; gap: 8px; padding: 12px; border: 1px solid var(--rmd-line); border-radius: 10px; background: var(--rmd-bg); }",
+      "#researchMD .rmd-tut-card-title { margin: 0; font: 700 14px var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-tut-card-eg { margin: 0; font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); line-height: 1.4; }",
+      "#researchMD .rmd-start-tut-box { padding: 12px 14px; border: 1.5px solid var(--rmd-acc); border-radius: 10px; background: var(--rmd-fill); margin-bottom: 12px; display: flex; flex-direction: column; gap: 8px; }",
+      "#researchMD .rmd-pub-card { margin-top: 14px; }",
+      "#researchMD .rmd-cele-backdrop { overflow: hidden; }",
+      "#researchMD .rmd-cele-confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }",
+      "#researchMD .rmd-confetti-bit { position: absolute; top: -12px; width: 9px; height: 14px; border-radius: 2px; opacity: 0.9; animation: rmdConfettiFall 2.8s linear infinite; }",
+      "@keyframes rmdConfettiFall { 0% { transform: translateY(-10px) rotate(0deg); opacity: 1; } 100% { transform: translateY(105vh) rotate(540deg); opacity: 0.2; } }",
+      "#researchMD .rmd-cele-card { position: relative; max-width: 480px; width: calc(100% - 24px); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 22px 18px; z-index: 2; }",
+      "#researchMD .rmd-cele-medal { width: 68px; height: 68px; border-radius: 999px; background: var(--rmd-acc-soft); color: var(--rmd-acc-dark); display: flex; align-items: center; justify-content: center; margin-bottom: 4px; }",
+      "#researchMD .rmd-cele-heading { margin: 0; font: 700 21px var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-cele-sub { margin: 0; font: 400 13.5px var(--rmd-f); color: var(--rmd-mut); line-height: 1.45; }",
+      "#researchMD .rmd-cele-cite { width: 100%; text-align: left; border: 1px solid var(--rmd-line); border-radius: 10px; padding: 10px 12px; background: var(--rmd-fill); box-sizing: border-box; }",
+      "#researchMD .rmd-cele-meta { font: 600 12px var(--rmd-f); color: var(--rmd-acc-dark); margin-bottom: 4px; }",
+      "#researchMD .rmd-cele-citestr { font: 400 12.5px var(--rmd-f); color: var(--rmd-ink); line-height: 1.4; overflow-wrap: anywhere; }",
+      "#researchMD .rmd-cele-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 8px; }"
     ].join("\n");
     D.head.appendChild(s);
   }
@@ -1042,6 +1070,7 @@
     }
 
     h.push('<div id="rmdHelpWrap"></div>');
+    h.push('<div id="rmdTutWrap"></div>');
     h.push('<div class="rmd-shell-body" id="rmdScreenBody"></div>');
     h.push('<div class="rmd-shell-footer"><button type="button" class="rmd-footer-feedback" data-rmd-action="feedback">Tell us what went wrong</button></div>');
 
@@ -1966,11 +1995,94 @@
         h += '</div>';
       }
 
+      /* Submission & Publication milestone card (real projects & tutorials) */
+      var pubRec = (SMD.tutorial && SMD.tutorial.getPubStatus) ? SMD.tutorial.getPubStatus(proj.id) : null;
+      var pubStage = (pubRec && pubRec.status) || "draft";
+      var selJournal = (pubRec && pubRec.journal) || journalTitle(targetJournal);
+      h += '<div class="rmd-card rmd-pub-card" data-rmd="submission-tracker">';
+      h += '  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">';
+      h += '    <h3 style="margin:0;">Submission &amp; Publication</h3>';
+      h += '    <span class="rmd-badge ' + (pubStage === "published" ? "rmd-badge-soft" : "rmd-badge-pill") + '">' + (pubStage === "published" ? "Published" : (pubStage === "submitted" ? "Submitted · Under Review" : "Ready to Submit")) + '</span>';
+      h += '  </div>';
+      if (pubStage === "published") {
+        h += '  <div class="rmd-banner rmd-banner-info" style="margin-top:10px;" role="status"><strong>Published in ' + esc(selJournal) + '!</strong> DOI: ' + esc(pubRec.doi || "10.1000/rmd.2026") + '</div>';
+        h += '  <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">';
+        h += '    <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="celebrate-again">View Publication Celebration</button>';
+        h += '    <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="to-start-own">Start my own real paper</button>';
+        h += '  </div>';
+      } else if (pubStage === "submitted") {
+        h += '  <p class="rmd-muted" style="margin-top:8px;">Submitted to <strong>' + esc(selJournal) + '</strong> (Ref: ' + esc(pubRec.subId || "MS-2026-RMD") + '). Waiting for peer review decision.</p>';
+        h += '  <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">';
+        h += '    <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="publish-paper">' + (proj.tutorial ? "Simulate Peer Review Acceptance &amp; Publish" : "Record Acceptance &amp; Celebrate Publication") + '</button>';
+        h += '  </div>';
+      } else {
+        h += '  <p class="rmd-muted" style="margin-top:6px;">Confirm your target journal and submit your verified manuscript pack.</p>';
+        h += '  <div class="rmd-field" style="margin-top:8px;">';
+        h += '    <label for="rmd_sub_journal">Target Journal</label>';
+        h += '    <select id="rmd_sub_journal">';
+        var jOpts = ["JAMA", "The Lancet", "BMJ", "NEJM", "PLOS ONE", "Indian Journal of Medical Research"];
+        for (var ji = 0; ji < jOpts.length; ji++) {
+          h += '<option value="' + esc(jOpts[ji]) + '"' + (selJournal === jOpts[ji] ? ' selected' : '') + '>' + esc(jOpts[ji]) + '</option>';
+        }
+        h += '    </select>';
+        h += '  </div>';
+        h += '  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">';
+        h += '    <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="submit-paper"' + (!allDone ? ' disabled' : '') + '>Confirm &amp; Submit Paper</button>';
+        if (!allDone) h += '<span class="rmd-field-hint" style="margin:0;">Complete approval and checklist items above to unlock submit.</span>';
+        h += '  </div>';
+      }
+      h += '</div>';
+
       h += '</div>';
       container.innerHTML = h;
       var btn = container.querySelector("[data-rmd-ready]");
       if (btn) {
         btn.onclick = function () { navigate(this.getAttribute("data-rmd-ready"), {}); };
+      }
+      var subBtn = container.querySelector('[data-rmd="submit-paper"]');
+      if (subBtn) {
+        subBtn.onclick = function () {
+          var jEl = container.querySelector("#rmd_sub_journal");
+          var jName = (jEl && jEl.value) || selJournal || "JAMA";
+          var rec = {
+            status: "submitted",
+            journal: jName,
+            subId: "MS-2026-" + String(Date.now()).slice(-5),
+            submittedAt: Date.now()
+          };
+          if (SMD.tutorial && SMD.tutorial.setPubStatus) SMD.tutorial.setPubStatus(proj.id, rec);
+          renderReady(container);
+        };
+      }
+      var pubBtn = container.querySelector('[data-rmd="publish-paper"]');
+      if (pubBtn) {
+        pubBtn.onclick = function () {
+          var curRec = (SMD.tutorial && SMD.tutorial.getPubStatus && SMD.tutorial.getPubStatus(proj.id)) || {};
+          var keySlug = proj.tutorialKey || studyKey(proj) || "study";
+          var nextRec = {
+            status: "published",
+            journal: curRec.journal || selJournal || "JAMA",
+            subId: curRec.subId || ("MS-2026-" + String(Date.now()).slice(-5)),
+            submittedAt: curRec.submittedAt || Date.now(),
+            publishedAt: Date.now(),
+            doi: "10.1000/rmd." + keySlug + ".2026"
+          };
+          if (SMD.tutorial && SMD.tutorial.setPubStatus) SMD.tutorial.setPubStatus(proj.id, nextRec);
+          renderReady(container);
+          if (SMD.tutorial && SMD.tutorial.showCelebration) SMD.tutorial.showCelebration(proj, nextRec);
+        };
+      }
+      var celeBtn = container.querySelector('[data-rmd="celebrate-again"]');
+      if (celeBtn) {
+        celeBtn.onclick = function () {
+          if (SMD.tutorial && SMD.tutorial.showCelebration) SMD.tutorial.showCelebration(proj, pubRec);
+        };
+      }
+      var ownBtn = container.querySelector('[data-rmd="to-start-own"]');
+      if (ownBtn) {
+        ownBtn.onclick = function () {
+          navigate("start", { studyKey: proj.tutorialKey || "" });
+        };
       }
       var fixBtns = container.querySelectorAll("[data-rmd-format-fix]");
       for (var fb = 0; fb < fixBtns.length; fb++) {
@@ -2028,6 +2140,9 @@
       screen.render(body, params);
     } else if (SMD.screens && SMD.screens.projects) {
       SMD.screens.projects.render(body, params);
+    }
+    if (SMD.tutorial && SMD.tutorial.renderBar) {
+      SMD.tutorial.renderBar(root, screenName, proj);
     }
   }
 
@@ -2103,6 +2218,7 @@
     open: open,
     close: close,
     navigate: navigate,
+    refreshScreen: function () { navigate(currentScreen, {}, true); },
     esc: esc
   };
 
