@@ -15,7 +15,7 @@
  * record the sha256 and byte size of model_int8.onnx, tokenizer.json and id2label.json below, set
  * licence.verified, then turn the flag on. Until then every call resolves to [] and nothing downloads.
  *
- * Flags (localStorage, DEFAULT OFF): smd_openmed_pharma, smd_openmed_disease ("1" = on).
+ * Flags (localStorage, DEFAULT ON since 2026-11-25): smd_openmed_pharma, smd_openmed_disease ("0" = off).
  *
  * Advisory only. Output feeds two places that already tolerate an empty answer: extra drug names for
  * claim grounding (kb/ai/maik-grounding.js, stricter checking only) and splitting a diagnosis into
@@ -44,21 +44,25 @@
       flag: "smd_openmed_pharma",
       types: { CHEM: 1, CHEMICAL: 1, DRUG: 1, MEDICATION: 1 },
       minScore: 0.65,             // OpenMed's recommended threshold for the Pharmaceutical family
-      files: { model: file("model_int8.onnx"), tokenizer: file("tokenizer.json"), labels: file("id2label.json") },
-      licence: { declared: "apache-2.0 (OpenMed models.jsonl @ 4213739)", verified: false }
+      files: { model: { name: "model_int8.onnx", sha256: "e93495efb6785e4458c3199f9aa3e8cf3af01aad9b3a211acbdfcfab319e0984", bytes: 133609334 },
+               tokenizer: { name: "tokenizer.json", sha256: "ca505be6b19b59c080886f9c41db8971878f4876cb59cdf87aa30b34fee28d67", bytes: 669188 },
+               labels: { name: "id2label.json", sha256: "c7200b2d6f1b15d4f3600f57e65a44f9973f327ae88bfc4a7da3fc51d8af28e6", bytes: 48 } },
+      licence: { declared: "apache-2.0 (Hugging Face model card, confirmed by owner 2026-11-25)", verified: true }
     },
     disease: {
       repo: "OpenMed/OpenMed-NER-DiseaseDetect-TinyMed-65M-v1-onnx-android",
       flag: "smd_openmed_disease",
       types: { CONDITION: 1, DISEASE: 1, PATHOLOGY: 1 },
       minScore: 0.60,             // OpenMed's recommended threshold for the Disease family
-      files: { model: file("model_int8.onnx"), tokenizer: file("tokenizer.json"), labels: file("id2label.json") },
-      licence: { declared: "apache-2.0 (OpenMed models.jsonl @ 4213739)", verified: false }
+      files: { model: { name: "model_int8.onnx", sha256: "3a3605b957c7d1e3d68557b6cc25e6838cce86c7733b9581c37f4b6aa3220a98", bytes: 133609334 },
+               tokenizer: { name: "tokenizer.json", sha256: "ca505be6b19b59c080886f9c41db8971878f4876cb59cdf87aa30b34fee28d67", bytes: 669188 },
+               labels: { name: "id2label.json", sha256: "78ae52aff228715e1e8aa6ca2f8da7a63709486222d404a251340b0d9d756ecc", bytes: 54 } },
+      licence: { declared: "apache-2.0 (Hugging Face model card, confirmed by owner 2026-11-25)", verified: true }
     }
   };
 
   function lget(k) { try { return W && W.localStorage ? W.localStorage.getItem(k) : null; } catch (e) { return null; } }
-  function enabled(kind) { var p = PACKS[kind]; return !!p && lget(p.flag) === "1"; }
+  function enabled(kind) { var p = PACKS[kind]; return !!p && lget(p.flag) !== "0"; }  // default ON (owner 2026-11-25); "0" turns a pack off
   function isHex64(s) { return typeof s === "string" && /^[0-9a-f]{64}$/.test(s); }
   function verified(pack) {
     if (!pack || !pack.licence || pack.licence.verified !== true) return false;

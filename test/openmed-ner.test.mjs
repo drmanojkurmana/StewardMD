@@ -47,21 +47,19 @@ const DISEASE_TAGS = { community: "B-DISEASE", acquired: "I-DISEASE", pneumonia:
   "3": "I-DISEASE", hypertension: "B-DISEASE" };
 const opts = (kind, tags) => ({ pack: fixturePack(kind), loadBytes: loadBytes(kind), ort: fakeOrt(kind, tags) });
 
-test("both packs point at the exact OpenMed checkpoints and FAIL CLOSED (no licence, no sha256)", () => {
+test("both packs point at the exact OpenMed checkpoints, licence verified (apache-2.0), every file pinned, ON by default", () => {
   assert.equal(N.PACKS.pharma.repo, "OpenMed/OpenMed-NER-PharmaDetect-TinyMed-65M-v1-onnx-android");
   assert.equal(N.PACKS.disease.repo, "OpenMed/OpenMed-NER-DiseaseDetect-TinyMed-65M-v1-onnx-android");
   for (const k of ["pharma", "disease"]) {
-    assert.equal(N.PACKS[k].licence.verified, false, "flip only after the HF licence page is checked");
-    assert.equal(N.verified(N.PACKS[k]), false);
-    assert.deepEqual(N.status(k), { ok: false, reason: "flag-off" });
+    assert.equal(N.PACKS[k].licence.verified, true);
+    for (const f of Object.values(N.PACKS[k].files)) { assert.match(f.sha256, /^[0-9a-f]{64}$/); assert.ok(f.bytes > 0); }
+    assert.equal(N.verified(N.PACKS[k]), true);
+    assert.deepEqual(N.status(k), { ok: true, reason: "ready" });
   }
 });
 
 test("unverified pack never downloads: extract resolves [] without touching loadBytes", async () => {
   let called = 0;
-  const r = await N.extract("pharma", "Start warfarin 5 mg", { loadBytes: () => { called++; return Promise.reject(new Error("x")); } });
-  assert.deepEqual(r, []);
-  assert.equal(called, 0);
   const unverifiedPack = { ...fixturePack("pharma"), licence: { verified: false } };
   assert.deepEqual(await N.extract("pharma", "Start warfarin", { pack: unverifiedPack, loadBytes: () => { called++; } }), []);
   assert.equal(called, 0);
