@@ -22,10 +22,112 @@
 
   // Current analysis settings
   var runSettings = {
+    projectId: null,
+    measure: null,
     model: "random_dl", // "random_dl", "fixed", "random_reml"
     test: "wald",       // "wald", "knha"
     level: 0.95
   };
+
+  function hasCountInputs(inp) {
+    return !!(inp && inp.events1 !== undefined && inp.events1 !== null && inp.n1 !== undefined && inp.n1 !== null &&
+      inp.events2 !== undefined && inp.events2 !== null && inp.n2 !== undefined && inp.n2 !== null);
+  }
+
+  function hasMeanInputs(inp) {
+    return !!(inp && inp.mean1 !== undefined && inp.mean1 !== null && inp.sd1 !== undefined && inp.sd1 !== null &&
+      inp.n1 !== undefined && inp.n1 !== null && inp.mean2 !== undefined && inp.mean2 !== null &&
+      inp.sd2 !== undefined && inp.sd2 !== null && inp.n2 !== undefined && inp.n2 !== null);
+  }
+
+  function hasCiOrGenericInputs(inp) {
+    if (!inp) return false;
+    var hasCi = inp.effect !== undefined && inp.effect !== null && inp.ciLower !== undefined && inp.ciUpper !== undefined;
+    var hasGen = inp.yi !== undefined && inp.yi !== null && (inp.se != null || inp.sei != null || inp.vi != null);
+    return !!(hasCi || hasGen);
+  }
+
+  function compatibleMeasuresFor(studies) {
+    var list = studies || [];
+    if (!list.length) return ["RR", "OR", "RD"];
+    var allCounts = true, allMeans = true, allDirect = true;
+    for (var i = 0; i < list.length; i++) {
+      var inp = (list[i] && list[i].inputs) || {};
+      if (!hasCountInputs(inp)) allCounts = false;
+      if (!hasMeanInputs(inp)) allMeans = false;
+      if (!hasCiOrGenericInputs(inp)) allDirect = false;
+    }
+    if (allDirect) return ["RR", "OR", "HR", "RD", "MD", "SMD"];
+    if (allCounts && !allMeans) return ["RR", "OR", "RD"];
+    if (allMeans && !allCounts) return ["MD", "SMD"];
+    if (allCounts && allMeans) return ["RR", "OR", "RD", "MD", "SMD"];
+    return [];
+  }
+
+  function checkMeasureCompatibility(measure, studies) {
+    var list = studies || [];
+    if (!list.length) return { ok: true };
+    var needsContinuous = (measure === "MD" || measure === "SMD");
+    var needsCounts = (measure === "RR" || measure === "OR" || measure === "RD");
+    var needsDirect = (measure === "HR");
+    for (var i = 0; i < list.length; i++) {
+      var s = list[i] || {};
+      var inp = s.inputs || {};
+      var label = s.label || ("Study " + (i + 1));
+      if (hasCiOrGenericInputs(inp)) continue;
+      if (needsContinuous && !hasMeanInputs(inp)) {
+        if (hasCountInputs(inp)) {
+          return {
+            ok: false,
+            suggested: "RR",
+            message: label + " (and studies with event counts like " + inp.events1 + "/" + inp.n1 + ") do not have Mean and SD values needed for " + (MEASURE_LABELS[measure] || measure) + ". Switch Effect Measure to Risk ratio (RR), Odds ratio (OR), or Risk difference (RD)."
+          };
+        }
+        return {
+          ok: false,
+          suggested: "MD",
+          message: label + " is missing Mean, SD, or sample size (N) needed for " + (MEASURE_LABELS[measure] || measure) + "."
+        };
+      }
+      if (needsCounts && !hasCountInputs(inp)) {
+        if (hasMeanInputs(inp)) {
+          return {
+            ok: false,
+            suggested: "MD",
+            message: label + " reports Mean and SD rather than event counts. Switch Effect Measure to Mean difference (MD) or Standardised mean difference (SMD)."
+          };
+        }
+        return {
+          ok: false,
+          suggested: "RR",
+          message: label + " is missing 2x2 event counts needed for " + (MEASURE_LABELS[measure] || measure) + "."
+        };
+      }
+      if (needsDirect) {
+        return {
+          ok: false,
+          suggested: hasMeanInputs(inp) ? "MD" : "RR",
+          message: "Hazard ratio (HR) requires reported Hazard Ratio and 95% CI values on each study. Switch to " + (hasMeanInputs(inp) ? "Mean difference (MD)." : "Risk ratio (RR), Odds ratio (OR), or Risk difference (RD).")
+        };
+      }
+    }
+    return { ok: true };
+  }
+
+  function friendlyCalcError(err, measure, verifiedStudies) {
+    var raw = String((err && err.message) || err || "Could not run meta-analysis.");
+    var compat = checkMeasureCompatibility(measure, verifiedStudies);
+    if (!compat.ok) return compat;
+    var byId = {};
+    for (var i = 0; i < (verifiedStudies || []).length; i++) {
+      var st = verifiedStudies[i];
+      if (st && st.id) byId[st.id] = st.label || st.id;
+    }
+    var msg = raw.replace(/^research:\s*/i, "").replace(/study\s+(\S+)/gi, function (m, sid) {
+      return byId[sid] ? ('study "' + byId[sid] + '"') : m;
+    });
+    return { ok: false, suggested: null, message: msg };
+  }
 
   function fmtNum(n, digits) {
     if (n == null || !isFinite(n)) return "N/A";
@@ -114,18 +216,26 @@
     var verifiedStudies = allStudies.filter(function (s) { return !!s.verified; });
     var unverifiedCount = allStudies.length - verifiedStudies.length;
 
-    // Detect primary measure from studies or project
-    var measure = "RR";
-    if (verifiedStudies.length > 0 && verifiedStudies[0].measure) {
-      measure = verifiedStudies[0].measure;
+    // Detect primary measure from studies or preserve valid user selection
+    if (runSettings.projectId !== project.id) {
+      runSettings.projectId = project.id;
+      runSettings.measure = null;
     }
-
+    var compatList = compatibleMeasuresFor(verifiedStudies);
+    var defaultMeasure = "RR";
+    if (verifiedStudies.length > 0 && verifiedStudies[0].measure) {
+      defaultMeasure = verifiedStudies[0].measure;
+    } else if (compatList.length) {
+      defaultMeasure = compatList[0];
+    }
+    var measure = runSettings.measure || defaultMeasure;
     var activeResult = store.getActiveRunResult();
+    var displayMeasure = (activeResult && activeResult.manifest && activeResult.manifest.measure) || measure;
 
     var h = [];
     h.push('<div class="rmd-run-screen">');
 
-    // Header & Actions
+    // Header (exports live below the Forest Plot, not at the top)
     h.push('  <div class="rmd-studies-topbar">');
     h.push('    <div class="rmd-topbar-left">');
     h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="to-studies">');
@@ -137,19 +247,6 @@
     h.push('        <span class="rmd-badge rmd-badge-pill">' + esc(project.title) + '</span>');
     h.push('      </div>');
     h.push('    </div>');
-
-    if (activeResult) {
-      h.push('    <div class="rmd-topbar-actions">');
-      h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="export-csv">');
-      h.push('        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>');
-      h.push('        <span>Download CSV</span>');
-      h.push('      </button>');
-      h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="export-manifest">');
-      h.push('        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>');
-      h.push('        <span>Download details (JSON)</span>');
-      h.push('      </button>');
-      h.push('    </div>');
-    }
     h.push('  </div>');
 
     // Two-pane or top/bottom layout: Left/Top is Settings, Right/Bottom is Plot & Stats
@@ -259,7 +356,7 @@
       h.push('        <p>Select your model and click "Calculate Meta-Analysis" to pool studies and generate the forest plot.</p>');
       h.push('      </div>');
     } else {
-      h.push(renderRunResultsHtml(activeResult, measure, verifiedStudies));
+      h.push(renderRunResultsHtml(activeResult, displayMeasure, verifiedStudies));
     }
     h.push('    </div>'); // .rmd-run-results-panel
 
@@ -361,6 +458,26 @@
     }
 
     h.push('  </div>'); // .rmd-forest-card
+
+    // Export Downloads Card (placed below the Forest Plot)
+    h.push('  <div class="rmd-card rmd-run-export-bar">');
+    h.push('    <p class="rmd-run-export-title">Export results &amp; plot</p>');
+    h.push('    <div class="rmd-run-export-actions">');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="export-png">');
+    h.push('        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>');
+    h.push('        <span>Download Forest Plot (PNG)</span>');
+    h.push('      </button>');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="export-csv">');
+    h.push('        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>');
+    h.push('        <span>Download CSV</span>');
+    h.push('      </button>');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="export-manifest">');
+    h.push('        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>');
+    h.push('        <span>Download details (JSON)</span>');
+    h.push('      </button>');
+    h.push('    </div>');
+    h.push('  </div>');
+
     h.push('</div>'); // .rmd-results-wrap
 
     return h.join("\n");
@@ -667,8 +784,95 @@
 
   function deliverExport(text, mime, filename) {
     var container = document.querySelector(".rmd-run-screen") || document.getElementById("rmdScreenBody");
-    return SMD.p2.downloadText(filename, text, mime).then(function () {
+    return SMD.p2.downloadText(filename, text, mime).then(function (res) {
+      if (res && res.cancelled) return res;
       SMD.p2.flashNotice(container, "Your file is ready to save or share.", "info");
+      return res;
+    }, function (err) {
+      SMD.p2.flashNotice(container, SMD.p2.friendlyError(err).message, "error");
+    });
+  }
+
+  function svgToPngBytes(svgHtml) {
+    return new Promise(function (resolve, reject) {
+      if (!svgHtml || !G.document) {
+        reject(new Error("Forest plot SVG is unavailable."));
+        return;
+      }
+      var cleanSvg = String(svgHtml)
+        .replace(/var\(--rmd-mut[^)]*\)/g, "#5b607a")
+        .replace(/var\(--rmd-line[^)]*\)/g, "#e5ddce")
+        .replace(/var\(--rmd-acc-dark[^)]*\)/g, "#142f8c")
+        .replace(/var\(--rmd-acc[^)]*\)/g, "#1b41bf")
+        .replace(/var\(--rmd-ink[^)]*\)/g, "#111c44")
+        .replace(/fill:\s*currentColor/g, "fill: #111c44")
+        .replace(/&larr;/g, "&#8592;")
+        .replace(/&rarr;/g, "&#8594;");
+      if (cleanSvg.indexOf("xmlns=") < 0) {
+        cleanSvg = cleanSvg.replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg"');
+      }
+      var vb = cleanSvg.match(/viewBox="0 0 (\d+) (\d+)"/);
+      var w = vb ? parseInt(vb[1], 10) : 840;
+      var h = vb ? parseInt(vb[2], 10) : 480;
+      cleanSvg = cleanSvg.replace(/width="100%"/, 'width="' + w + '"');
+      var scale = 2;
+      var canvas = G.document.createElement("canvas");
+      canvas.width = w * scale;
+      canvas.height = h * scale;
+      var ctx = canvas.getContext("2d");
+      if (!ctx) {
+        reject(new Error("Canvas rendering is not supported."));
+        return;
+      }
+      var img = new G.Image();
+      var url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(cleanSvg);
+      img.onload = function () {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.scale(scale, scale);
+        ctx.drawImage(img, 0, 0, w, h);
+        if (canvas.toBlob) {
+          canvas.toBlob(function (blob) {
+            if (!blob) { reject(new Error("Could not encode PNG image.")); return; }
+            if (blob.arrayBuffer) {
+              blob.arrayBuffer().then(function (ab) { resolve(new G.Uint8Array(ab)); }, reject);
+            } else {
+              var fr = new G.FileReader();
+              fr.onload = function () { resolve(new G.Uint8Array(fr.result)); };
+              fr.onerror = function () { reject(fr.error || new Error("PNG read failed")); };
+              fr.readAsArrayBuffer(blob);
+            }
+          }, "image/png");
+        } else {
+          try {
+            var b64 = String(canvas.toDataURL("image/png")).split(",")[1] || "";
+            var bin = G.atob(b64), arr = new G.Uint8Array(bin.length);
+            for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+            resolve(arr);
+          } catch (e) { reject(e); }
+        }
+      };
+      img.onerror = function () {
+        reject(new Error("Could not rasterize forest plot SVG."));
+      };
+      img.src = url;
+    });
+  }
+
+  function exportForestPng(activeResult, project, verifiedStudies) {
+    var container = document.querySelector(".rmd-run-screen") || document.getElementById("rmdScreenBody");
+    if (!activeResult || !activeResult.result || !activeResult.manifest) return Promise.resolve();
+    var svgEl = container ? container.querySelector("svg.rmd-forest-svg") : null;
+    var svgHtml = svgEl && G.XMLSerializer
+      ? new G.XMLSerializer().serializeToString(svgEl)
+      : generateForestPlotSvg(activeResult.result, activeResult.manifest, verifiedStudies || []);
+    var filename = SMD.p2.fileSlug(project && project.title, "meta-analysis") + "-forest-plot.png";
+    return svgToPngBytes(svgHtml).then(function (bytes) {
+      return SMD.p2.downloadBytes(filename, bytes, "image/png", "Forest Plot");
+    }).then(function (res) {
+      if (res && res.cancelled) return res;
+      SMD.p2.flashNotice(container, "Your file is ready to save or share.", "info");
+      return res;
     }, function (err) {
       SMD.p2.flashNotice(container, SMD.p2.friendlyError(err).message, "error");
     });
@@ -706,7 +910,15 @@
       };
     }
 
-    // Export buttons
+    // Export buttons (located below the Forest Plot)
+    var expPngBtn = container.querySelector('[data-rmd="export-png"]');
+    if (expPngBtn) {
+      expPngBtn.onclick = function () {
+        var activeRes = store.getActiveRunResult();
+        if (activeRes) exportForestPng(activeRes, project, verifiedStudies);
+      };
+    }
+
     var expCsvBtn = container.querySelector('[data-rmd="export-csv"]');
     if (expCsvBtn) {
       expCsvBtn.onclick = function () {
@@ -730,6 +942,38 @@
     var modelWhy = container.querySelector("#rmdPlainModelWhy");
     var explain = G.SMD_RESEARCH_EXPLAIN;
 
+    function showCalcWarning(compat) {
+      var errBox = container.querySelector(".rmd-run-results-panel");
+      if (!errBox || !compat) return;
+      var sug = compat.suggested;
+      var sugLabel = sug ? (MEASURE_LABELS[sug] || sug) : "";
+      var html = '<div class="rmd-card"><div class="rmd-banner rmd-banner-warn" role="alert">';
+      html += '<strong>Incompatible effect measure</strong>';
+      html += '<span>' + esc(compat.message) + '</span>';
+      if (sug) {
+        html += '<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-switch-measure="' + esc(sug) + '">Switch to ' + esc(sugLabel) + '</button>';
+      }
+      html += '</div></div>';
+      errBox.innerHTML = html;
+      var swBtn = errBox.querySelector('[data-rmd-switch-measure]');
+      if (swBtn) {
+        swBtn.onclick = function () {
+          var targetM = this.getAttribute("data-rmd-switch-measure");
+          if (measSel0) measSel0.value = targetM;
+          runSettings.measure = targetM;
+          doCalculate();
+        };
+      }
+    }
+
+    if (measSel0) {
+      measSel0.onchange = function () {
+        runSettings.measure = measSel0.value;
+        var compat = checkMeasureCompatibility(measSel0.value, verifiedStudies);
+        if (!compat.ok) showCalcWarning(compat);
+      };
+    }
+
     function markPressed(attr, key) {
       var btns = container.querySelectorAll("[" + attr + "]");
       for (var i = 0; i < btns.length; i++) {
@@ -745,9 +989,14 @@
           if (key === "counts") measSel0.value = "RR";
           else if (key === "average") measSel0.value = "MD";
           else if (!RATIO_MEASURES[measSel0.value]) measSel0.value = "RR";
+          runSettings.measure = measSel0.value;
         }
         markPressed("data-rmd-plain-report", key);
         if (reportWhy) reportWhy.textContent = REPORT_WHY[key] || "";
+        if (measSel0) {
+          var compat = checkMeasureCompatibility(measSel0.value, verifiedStudies);
+          if (!compat.ok) showCalcWarning(compat);
+        }
       };
     }
 
@@ -786,9 +1035,16 @@
       var test = testSel ? testSel.value : "wald";
       var level = lvlSel ? parseFloat(lvlSel.value) : 0.95;
 
+      runSettings.measure = measure;
       runSettings.model = model;
       runSettings.test = test;
       runSettings.level = level;
+
+      var preCompat = checkMeasureCompatibility(measure, verifiedStudies);
+      if (!preCompat.ok) {
+        showCalcWarning(preCompat);
+        return false;
+      }
 
       // Build project spec for engine.run() per engine-api.md contract
       var engineStudies = [];
@@ -820,10 +1076,7 @@
         store.saveRunResult(res, res.manifest);
         renderRunScreen(container);
       } catch (err) {
-        var errBox = container.querySelector(".rmd-run-results-panel");
-        if (errBox) {
-          errBox.innerHTML = '<div class="rmd-card rmd-notices-box"><p>Calculation error: ' + esc(err.message || String(err)) + '</p></div>';
-        }
+        showCalcWarning(friendlyCalcError(err, measure, verifiedStudies));
       }
 
       return false;
@@ -836,7 +1089,8 @@
   SMD.screens.run = {
     render: renderRunScreen,
     exportCsv: exportCsv,
-    exportManifest: exportManifest
+    exportManifest: exportManifest,
+    exportForestPng: exportForestPng
   };
 
 })(typeof window !== "undefined" ? window : globalThis);

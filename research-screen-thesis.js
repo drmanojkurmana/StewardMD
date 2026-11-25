@@ -312,11 +312,20 @@
     return lines.filter(Boolean).join("\n");
   }
 
+  function isNativeShell() {
+    var C = G && G.Capacitor;
+    if (!C) return false;
+    if (typeof C.isNativePlatform === "function") return !!C.isNativePlatform();
+    return !!(C.platform && C.platform !== "web");
+  }
+
   function readPdfLocal(file, onProgress) {
     if (!file || typeof file.arrayBuffer !== "function") return Promise.resolve(null);
     return Promise.all([loadPdfJs(), file.arrayBuffer()]).then(function (pair) {
       var pdfjs = pair[0], u8 = new Uint8Array(pair[1]);
-      return pdfjs.getDocument({ data: u8 }).promise.catch(function () {
+      var openOpts = isNativeShell() ? { data: u8, disableWorker: true } : { data: u8 };
+      return pdfjs.getDocument(openOpts).promise.catch(function (err) {
+        if (err && err.name === "PasswordException") throw err;
         return pdfjs.getDocument({ data: u8, disableWorker: true }).promise;
       }).then(function (pdf) {
         var total = pdf.numPages || 0;
@@ -748,7 +757,11 @@
           return;
         }
         uploadPdfServer(file, container);
-      }).catch(function () {
+      }).catch(function (err) {
+        if (err && err.name === "PasswordException") {
+          setMsg(container, '<div class="rmd-banner rmd-banner-warn">This PDF is password-protected. Save an unlocked copy (or export as Word .docx) and upload again.</div>');
+          return;
+        }
         uploadPdfServer(file, container);
       });
       return;
