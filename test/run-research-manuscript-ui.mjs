@@ -322,7 +322,7 @@ const until = async (expr, ms = 10000) => {
 
 const click = (sel) => ev(`(()=>{const b=document.querySelector(${JSON.stringify(sel)});if(!b)return false;b.click();return true})()`);
 const text = (sel) => ev(`(()=>{const e=document.querySelector(${JSON.stringify(sel)});if(!e)return '';return e.innerText||e.textContent||''})()`);
-const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');return b.scrollWidth<=b.clientWidth+2})()`);
+const noOverflow = () => ev(`(()=>{const b=document.getElementById('researchMD');const d=document.documentElement;return (!b||b.scrollWidth<=b.clientWidth+2) && (!d||d.scrollWidth<=d.clientWidth);})()`);
 const noDash = async () => !/[\u2014\u2013]/.test(await text('#researchMD'));
 const noRawCode = async (label) => {
   const t = await text('#researchMD');
@@ -492,8 +492,8 @@ try {
   ok(await until(`/Your file is ready to save or share/.test(document.querySelector('.rmd-man-right').textContent)`, 5000), 'plain confirmation shown after export');
   await noRawCode('after export');
 
-  /* 11. Responsive layouts: 375 / 768 / 1024 px, no overflow, no dashes */
-  for (const [width, height, mobile] of [[375, 812, true], [768, 1024, true], [1024, 768, false]]) {
+  /* 11. Responsive layouts: 375 / 390 / 768 / 1024 px, no overflow, no dashes */
+  for (const [width, height, mobile] of [[375, 812, true], [390, 844, true], [768, 1024, true], [1024, 768, false]]) {
     await call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 2, mobile });
     await ev(`SMD_RESEARCH.navigate('manuscript');1`);
     await sleep(200);

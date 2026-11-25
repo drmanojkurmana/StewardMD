@@ -12,43 +12,54 @@
 
   var MON_STR = "Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?";
   var DATE_PATTERN = "\\b(?:" +
-    "\\d{4}[\\/-]\\d{1,2}[\\/-]\\d{1,2}|" +
-    "\\d{1,2}[\\/.\\-]\\d{1,2}[\\/.\\-]\\d{2,4}|" +
-    "\\d{1,2}(?:st|nd|rd|th)?[ -]+(?:" + MON_STR + ")(?:[ -]+\\d{2,4})?|" +
-    "(?:" + MON_STR + ")[ -]+\\d{1,2}(?:st|nd|rd|th)?(?:,?\\s*\\d{4}|[ -]+\\d{4})?|" +
-    "(?:" + MON_STR + ")[ -]+\\d{4}" +
+    "(?:(?:19|20)\\d{2}([\\/-])(?:0?[1-9]|1[0-2])\\1(?:0?[1-9]|[12]\\d|3[01]))|" +
+    "(?:(?:0?[1-9]|[12]\\d|3[01])([\\/.\\-])(?:0?[1-9]|1[0-2])\\2(?:19|20)\\d{2})|" +
+    "(?:(?:0?[1-9]|[12]\\d|3[01])([/.])(?:0?[1-9]|1[0-2])\\3\\d{2})|" +
+    "(?:(?:0?[1-9]|[12]\\d|3[01])(?:st|nd|rd|th)?[ -]+(?:" + MON_STR + ")[ -]+(?:(?:19|20)\\d{2}|\\d{2}))|" +
+    "(?:(?:" + MON_STR + ")[ -]+(?:0?[1-9]|[12]\\d|3[01])(?:st|nd|rd|th)?(?:,\\s*|[ -]+)(?:(?:19|20)\\d{2}|\\d{2}))|" +
+    "(?:(?:" + MON_STR + ")[ -]+(?:19|20)\\d{2})" +
   ")\\b";
 
   function parseDateStr(s) {
     if (!s) return null;
     var str = String(s).trim();
     var m;
-    if ((m = /^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/.exec(str))) {
-      return new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10));
+    if ((m = /^(19\d{2}|20\d{2})([\/-])(0?[1-9]|1[0-2])\2(0?[1-9]|[12]\d|3[01])$/.exec(str))) {
+      var y = parseInt(m[1], 10), mo = parseInt(m[3], 10), d = parseInt(m[4], 10);
+      var dt = new Date(y, mo - 1, d);
+      if (dt.getFullYear() === y && dt.getMonth() === mo - 1 && dt.getDate() === d) return dt;
     }
-    if ((m = /^(\d{1,2})[\/.\\-](\d{1,2})[\/.\\-](\d{2,4})$/.exec(str))) {
-      var y = parseInt(m[3], 10);
-      if (y < 100) y += 2000;
-      return new Date(y, parseInt(m[2], 10) - 1, parseInt(m[1], 10));
+    if ((m = /^(0?[1-9]|[12]\d|3[01])([\/.\\-])(0?[1-9]|1[0-2])\2(19\d{2}|20\d{2})$/.exec(str))) {
+      var y2 = parseInt(m[4], 10), mo2 = parseInt(m[3], 10), d2 = parseInt(m[1], 10);
+      var dt2 = new Date(y2, mo2 - 1, d2);
+      if (dt2.getFullYear() === y2 && dt2.getMonth() === mo2 - 1 && dt2.getDate() === d2) return dt2;
     }
-    if ((m = /^(\d{1,2})(?:st|nd|rd|th)?[ -]+([A-Za-z]+)(?:[ -]+(\d{2,4}))?$/.exec(str))) {
+    if ((m = /^(0?[1-9]|[12]\d|3[01])([/.])(0?[1-9]|1[0-2])\2(\d{2})$/.exec(str))) {
+      var y3 = 2000 + parseInt(m[4], 10), mo3 = parseInt(m[3], 10), d3 = parseInt(m[1], 10);
+      var dt3 = new Date(y3, mo3 - 1, d3);
+      if (dt3.getFullYear() === y3 && dt3.getMonth() === mo3 - 1 && dt3.getDate() === d3) return dt3;
+    }
+    if ((m = /^(0?[1-9]|[12]\d|3[01])(?:st|nd|rd|th)?[ -]+([A-Za-z]+)[ -]+((?:19|20)\d{2}|\d{2})$/.exec(str))) {
       var mon = MONTHS[m[2].toLowerCase()];
       if (mon) {
-        var yr = m[3] ? parseInt(m[3], 10) : 2026;
+        var yr = parseInt(m[3], 10);
         if (yr < 100) yr += 2000;
-        return new Date(yr, mon - 1, parseInt(m[1], 10));
+        var d4 = parseInt(m[1], 10);
+        var dt4 = new Date(yr, mon - 1, d4);
+        if (dt4.getFullYear() === yr && dt4.getMonth() === mon - 1 && dt4.getDate() === d4) return dt4;
       }
     }
-    if ((m = /^([A-Za-z]+)[ -]+(\d{1,2})(?:st|nd|rd|th)?(?:,?\s*(\d{2,4})|[ -]+(\d{2,4}))?$/.exec(str))) {
+    if ((m = /^([A-Za-z]+)[ -]+(0?[1-9]|[12]\d|3[01])(?:st|nd|rd|th)?(?:,\s*|[ -]+)((?:19|20)\d{2}|\d{2})$/.exec(str))) {
       var mon2 = MONTHS[m[1].toLowerCase()];
       if (mon2) {
-        var yrVal = m[3] || m[4];
-        var yr2 = yrVal ? parseInt(yrVal, 10) : 2026;
+        var yr2 = parseInt(m[3], 10);
         if (yr2 < 100) yr2 += 2000;
-        return new Date(yr2, mon2 - 1, parseInt(m[2], 10));
+        var d5 = parseInt(m[2], 10);
+        var dt5 = new Date(yr2, mon2 - 1, d5);
+        if (dt5.getFullYear() === yr2 && dt5.getMonth() === mon2 - 1 && dt5.getDate() === d5) return dt5;
       }
     }
-    if ((m = /^([A-Za-z]+)[ -]+(\d{4})$/.exec(str))) {
+    if ((m = /^([A-Za-z]+)[ -]+(19\d{2}|20\d{2})$/.exec(str))) {
       var mon3 = MONTHS[m[1].toLowerCase()];
       if (mon3) {
         var yr3 = parseInt(m[2], 10);
@@ -73,8 +84,8 @@
       add("email", em[0]);
     }
 
-    // 2. Hospital-number patterns (UHID, MRN, IP No, IPD, OP No, OPD No, CR No, Reg No, Registration number, Hospital number, Hosp No)
-    var uhidRe = /\b(?:Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp\s*(?:Number|No\.?)|Reg\s*(?:Number|No\.?)|OPD(?:\s*(?:Number|No\.?))?|OP\s*(?:Number|No\.?)|IPD(?:\s*(?:Number|No\.?))?|IP(?:\s*(?:Number|No\.?))?|CR\s*(?:Number|No\.?)|UHID|MRN)\b[ \t:#.-]*(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b/gi;
+    // 2. Hospital-number patterns (UHID, MRN, IP No, IPD No, OP No, OPD No, CR No, Reg No, Registration number, Hospital number, Hosp No)
+    var uhidRe = /\b(?:Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp\s*(?:Number|No\.?)|Reg\s*(?:Number|No\.?)|OPD\s*(?:Number|No\.?)|OP\s*(?:Number|No\.?)|IPD\s*(?:Number|No\.?)|IP\s*(?:Number|No\.?)|CR\s*(?:Number|No\.?)|UHID(?:\s*(?:Number|No\.?))?|MRN(?:\s*(?:Number|No\.?))?)\b[ \t:#.-]*(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b/gi;
     var uh;
     while ((uh = uhidRe.exec(s)) !== null) {
       add("uhid", uh[0]);
@@ -84,6 +95,11 @@
     var aadhaarRe = /\b(?:\d{4}[ -]\d{4}[ -]\d{4}|[Xx*]{4}[ -]?[Xx*]{4}[ -]?\d{4}|\d{12})\b/g;
     var ah;
     while ((ah = aadhaarRe.exec(s)) !== null) {
+      var parts = ah[0].split(/[ -]/);
+      if (parts.length === 3 && parts[0].length === 4 && parts[1].length === 4 && parts[2].length === 4) {
+        var y1 = parseInt(parts[0], 10), y2 = parseInt(parts[1], 10), y3 = parseInt(parts[2], 10);
+        if (y1 >= 1900 && y1 <= 2099 && y2 >= 1900 && y2 <= 2099 && y3 >= 1900 && y3 <= 2099) continue;
+      }
       add("aadhaar", ah[0]);
     }
 
@@ -116,6 +132,9 @@
     var dateRe = new RegExp(DATE_PATTERN, "gi");
     var da;
     while ((da = dateRe.exec(s)) !== null) {
+      if (da.index > 0 && /[0-9.]/.test(s.charAt(da.index - 1))) continue;
+      if (da.index + da[0].length < s.length && /[0-9.]/.test(s.charAt(da.index + da[0].length))) continue;
+      if (!parseDateStr(da[0])) continue;
       add("date", da[0]);
     }
 
@@ -125,7 +144,12 @@
   function replaceDatesWithDayN(text, baseDate) {
     if (!text || !baseDate) return text;
     var re = new RegExp(DATE_PATTERN, "gi");
-    return text.replace(re, function (match) {
+    return text.replace(re, function () {
+      var match = arguments[0];
+      var offset = arguments[arguments.length - 2];
+      var fullStr = arguments[arguments.length - 1];
+      if (offset > 0 && /[0-9.]/.test(fullStr.charAt(offset - 1))) return match;
+      if (offset + match.length < fullStr.length && /[0-9.]/.test(fullStr.charAt(offset + match.length))) return match;
       var d = parseDateStr(match);
       if (!d) return match;
       var diffMs = d.getTime() - baseDate.getTime();

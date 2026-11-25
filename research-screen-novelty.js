@@ -215,7 +215,19 @@
     var q = trim(st.query);
     if (!q) return;
 
-    var phiHits = (G.RMDPhi && G.RMDPhi.scan) ? G.RMDPhi.scan(q) : [];
+    if (!G.RMDPhi || !G.RMDPhi.scan) {
+      st.searching = false;
+      st.results = null;
+      st.error = {
+        isPhi: true,
+        findings: ["The privacy check did not load. Close and reopen the app, then try again."],
+        message: "The privacy check did not load. Close and reopen the app, then try again."
+      };
+      draw();
+      return;
+    }
+
+    var phiHits = G.RMDPhi.scan(q);
     var redactFn = (G && G.SMD_redactPHI) ? G.SMD_redactPHI : (typeof window !== "undefined" && window.SMD_redactPHI ? window.SMD_redactPHI : null);
     var redactChanged = false;
     if (redactFn) {

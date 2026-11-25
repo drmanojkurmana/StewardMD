@@ -96,6 +96,64 @@ describe("False-positive prevention across all PHI layers", () => {
     "PMID 12345678",
     "case series 2015 to 2024",
 
+    // Grok Proof R1 (dose ranges, CI bounds, decimals, units)
+    "prednisolone 2.5-10 mg daily",
+    "levothyroxine 12.5-25 mcg",
+    "HR 1.86 (95% CI 1.12-3.09)",
+    "OR 2.45, 95% CI 1.02-5.88, p 0.04",
+    "a loading dose may 1000 mg",
+    "prednisolone 5-10 mg",
+    "warfarin 6.25-12.5 mg",
+    "0.5-1.0",
+    "95% CI 1.2-3.4",
+
+    // Grok Proof R2 ("may", "march" as normal words)
+    "of whom 10 may recover with fluids",
+    "aspirin may 5 mg in the evening",
+    "may 5 days",
+    "could march 2 km",
+    "may 1000 patients",
+    "patients march 2 km",
+    "aspirin may reduce mortality in secondary prevention",
+
+    // Grok Proof R3 (IPD/OPD in normal clinical context without number)
+    "Start IPD antibiotics after cultures",
+    "admitted to IPD yesterday",
+    "Review in OPD in 3 days",
+
+    // Grok Proof R4 (Aadhaar in normal context without number)
+    "Aadhaar is not required for this scheme",
+    "Aadhar card not needed",
+
+    // Grok Proof R5 (clean literature queries)
+    "zinc phosphide myocardial injury",
+    "SGLT2 inhibitors heart failure",
+    "aspirin may reduce mortality",
+    "metformin 1000 mg type 2 diabetes",
+    "COVID-19 vaccine efficacy",
+    "interleukin-6 sepsis",
+    "Ramesh Kumar osteosarcoma",
+    "rare osteosarcoma Dr Deshmukh",
+    "of whom 10 may recover",
+    "aspirin may 5 mg",
+    "bisoprolol 2.5-10 mg heart failure",
+    "levothyroxine 12.5-25 mcg hypothyroidism",
+    "organophosphate OP poisoning",
+    "intraperitoneal IP chemotherapy ovarian",
+    "complete response CR rate AML",
+    "MRN complex DNA repair",
+    "outcomes 2019 2020 2021 meta-analysis",
+
+    // Grok phone negatives
+    "SGLT2 inhibitors in heart failure",
+    "WBC 6000-11000",
+    "650 mg 8 hourly",
+    "6-minute walk",
+    "pH 7.40 pCO2 40",
+    "SpO2 98 on 6 litres",
+    "NCT04567891",
+    "population 650000000 India",
+
     // Additional ordinary clinical sentences to exceed 60
     "Patient presented with acute onset shortness of breath.",
     "Bilateral breath sounds equal with vesicular character.",
@@ -153,7 +211,7 @@ describe("False-positive prevention across all PHI layers", () => {
   });
 
   const POSITIVE_CORPUS = [
-    // 10 identifier examples from review
+    // Identifier examples from review & Grok
     "OP No 482910",
     "OPD No: 12345",
     "IP No 2026/1234",
@@ -164,17 +222,41 @@ describe("False-positive prevention across all PHI layers", () => {
     "Hospital number 8899",
     "Hosp No 1234",
     "Registration number 2026-55",
+    "phosphide poisoning hospital number 445566",
+    "phosphide poisoning OP No 482910",
 
-    // Dates, phones, Aadhaar, email
+    // Dates
     "14.08.2025",
     "12th March 2026",
     "12-Mar-2026",
+    "12-Mar-26",
+    "12.03.2026",
+    "12.03.26",
+    "12.3.2026",
+    "March 2026",
+    "Mar 2026",
+    "2026/03/12",
+    "12.03.2026 admission",
+    "Seen on 12-Mar-2026 in clinic",
+    "12th March 2026 noted",
+    "March 2026 clinic",
+    "phosphide poisoning 12/03/2026",
+
+    // Phones
     "044-24567890",
     "(080) 2654 3210",
+    "080-26543210",
+    "080 2654 3210",
+    "080-23456789",
     "98765.43210",
     "+91 98765 43210",
+    "phosphide poisoning phone 98765.43210",
+
+    // Aadhaar & email
     "1234 5678 9012",
     "XXXX XXXX 1234",
+    "Aadhaar 1234 5678 9012 on file",
+    "phosphide poisoning Aadhaar 1234 5678 9012",
     "name@example.com"
   ];
 

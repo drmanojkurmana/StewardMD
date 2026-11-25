@@ -50,14 +50,16 @@
       INDIC_DIGIT.lastIndex = 0;
       t = foldDigits(t);
       t = t.replace(/(\+?\d[\d\s-]{8,}\d)/g, R);                                          // same rule as the base
-      t = t.replace(/\b\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}\b/g, "[date]");
+      t = t.replace(/(^|[^0-9.])\b(?:19|20)\d{2}([\/-])(?:0?[1-9]|1[0-2])\2(?:0?[1-9]|[12]\d|3[01])\b(?![0-9.])/g, "$1[date]");
+      t = t.replace(/(^|[^0-9.])\b(?:0?[1-9]|[12]\d|3[01])([\/.\\-])(?:0?[1-9]|1[0-2])\2(?:19|20)\d{2}\b(?![0-9.])/g, "$1[date]");
+      t = t.replace(/(^|[^0-9.])\b(?:0?[1-9]|[12]\d|3[01])([/.])(?:0?[1-9]|1[0-2])\2\d{2}\b(?![0-9.])/g, "$1[date]");
     }
     INDIC_DIGIT.lastIndex = 0;
     t = t.replace(/\b[A-Za-z0-9._-]{2,}@(?:abdm|sbx)\b/gi, R);                             // ABHA Address
     t = t.replace(new RegExp("\\b[A-Za-z0-9._-]{2,}@(?:" + UPI_PSP + ")\\b(?!\\.)", "gi"), R); // UPI ID
     t = t.replace(/\b[A-Z]{5}\d{4}[A-Z]\b/g, R);                                             // PAN
     t = t.replace(/\b[Xx*]{4}[\s-]?[Xx*]{4}[\s-]?\d{4}\b/g, R);                               // masked Aadhaar
-    t = t.replace(/\b(Aadhar|Aadhaar(?:\s?No)?)\b\s*[:#.]?\s*(?:\d{4}[\s-]\d{4}[\s-]\d{4}|\d{12}|(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b)/gi, "$1: " + R);
+    t = t.replace(/\b(Aadhar|Aadhaar(?:\s*(?:Number|No\.?))?)\b\s*[:#.]?\s*(?:\d{4}[\s-]\d{4}[\s-]\d{4}|\d{12}|[Xx*]{4}[\s-]?[Xx*]{4}[\s-]?\d{4})\b/gi, "$1: " + R);
     t = t.replace(/\b(ABHA\s?(?:No|Number|Address)|Ration\s?Card(?:\s?No)?|Voter\s?ID|EPIC(?:\s?No)?|PMJAY(?:\s?ID)?|Policy\s?No|Claim\s?No|Card\s?No)\b\s*[:#.]?\s*(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b/gi, "$1: " + R);
     t = t.replace(/\b(Pin\s?code|PIN)\b\s*[:#.]?\s*\d{6}\b/g, "$1: " + R);
     t = t.replace(/(नाम|पूरा नाम|పేరు|రోగి పేరు)\s*[:ः]\s*.+/g, "$1: " + R);                 // Hindi / Telugu "name:"

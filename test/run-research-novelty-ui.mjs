@@ -212,7 +212,17 @@ try {
   await call("Page.navigate", { url: "http://localhost:" + PORT + "/?research=1" });
 
   ok("modules load", await until("!!(window.SMD_RESEARCH && SMD_RESEARCH.screens && SMD_RESEARCH.screens.novelty && window.RMDPhi)", 20000));
-  ok("script tags have v tokens", await ev("!!document.querySelector('script[src*=\"research-screen-novelty.js?v=ra3\"]') && !!document.querySelector('script[src*=\"research-phi.js?v=ra3\"]')"));
+  ok("script tags have v tokens", await ev("!!document.querySelector('script[src*=\"research-screen-novelty.js?v=\"]') && !!document.querySelector('script[src*=\"research-phi.js?v=\"]')"));
+
+  // Viewport and overflow check at 390px
+  ok("no horizontal overflow at 390px", await ev("document.documentElement.scrollWidth <= document.documentElement.clientWidth"));
+
+  // Check 1024x1366 iPad viewport
+  await call("Emulation.setDeviceMetricsOverride", { width: 1024, height: 1366, deviceScaleFactor: 2, mobile: false });
+  ok("no horizontal overflow at 1024px", await ev("document.documentElement.scrollWidth <= document.documentElement.clientWidth"));
+
+  // Restore 390x844
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
 
   // Open novelty directly with seeded project
   await ev("(function(){" +
@@ -262,11 +272,20 @@ try {
   ok("results rendered for clean query", await until("document.querySelectorAll('.rmd-nv-result').length === 1", 5000));
   ok("warning banner cleared on successful search", !(await ev("!!document.querySelector('.rmd-novelty-screen .rmd-banner-warn')")));
 
-  // Test 5: Verify no em or en dash in novelty screen
+  // Test 5: Fail-open prevention: missing RMDPhi.scan refuses search
+  await ev("(function(){ window._savedRMDPhi = window.RMDPhi; delete window.RMDPhi; return 1; })()");
+  await setVal("#rmdNvQuery", "zinc phosphide myocardial injury");
+  findStudiesCalls = [];
+  await click('[data-rmd-nv="search"]');
+  ok("refuses to search when RMDPhi is missing", await until("/privacy check did not load/i.test((document.querySelector('.rmd-novelty-screen')||{}).innerText||'')", 5000));
+  ok("findStudies never called when RMDPhi is missing", findStudiesCalls.length === 0);
+  await ev("(function(){ if (window._savedRMDPhi) { window.RMDPhi = window._savedRMDPhi; delete window._savedRMDPhi; } return 1; })()");
+
+  // Test 6: Verify no em or en dash in novelty screen
   var screenText = await text(".rmd-novelty-screen");
   ok("no em or en dash in novelty screen", !/[\u2013\u2014]/.test(screenText));
 
-  // Test 6: Verify zero page errors
+  // Test 7: Verify zero page errors
   ok("zero page errors (" + pageErrors.length + ")", pageErrors.length === 0, pageErrors.join("; "));
 
 } catch (e) {
