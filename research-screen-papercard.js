@@ -409,16 +409,15 @@
       h.push('  </div>');
     }
 
-    // Inline outcome prompt (hidden until needed)
-    h.push('  <div class="rmd-papercard-outcome-prompt" style="display:none;" id="rmdCardOutcomePrompt">');
-    h.push('    <label class="rmd-paste-title-lbl" for="rmd_card_outcome_field">What result are you combining?</label>');
-    h.push('    <input type="text" id="rmd_card_outcome_field" class="rmd-paste-input" placeholder="e.g. confirmed tuberculosis at any follow-up" />');
-    h.push('    <div class="rmd-paste-hint">The outcome you want to pool across studies. We use it to find the right numbers.</div>');
-    h.push('    <div style="display:flex;gap:8px;margin-top:6px;">');
-    h.push('      <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="confirm-outcome-add">Confirm and add</button>');
-    h.push('      <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="cancel-outcome-add">Cancel</button>');
-    h.push('    </div>');
-    h.push('  </div>');
+    h.push('      <div class="rmd-papercard-outcome-prompt" style="display:none;" id="rmdCardOutcomePrompt">');
+    h.push('        <label class="rmd-paste-title-lbl" for="rmd_card_outcome_field">What result are you combining?</label>');
+    h.push('        <input type="text" id="rmd_card_outcome_field" class="rmd-paste-input" placeholder="e.g. confirmed tuberculosis at any follow-up" />');
+    h.push('        <div class="rmd-paste-hint">The outcome you want to pool across studies. We use it to find the right numbers.</div>');
+    h.push('        <div style="display:flex;gap:8px;margin-top:6px;">');
+    h.push('          <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="confirm-outcome-add">Confirm and add</button>');
+    h.push('          <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="cancel-outcome-add">Cancel</button>');
+    h.push('        </div>');
+    h.push('      </div>');
 
     // Buttons
     h.push('  <div class="rmd-papercard-actions">');
@@ -514,7 +513,8 @@
         if (card.pmid) body.pmid = card.pmid;
         if (card.doi) body.doi = card.doi;
 
-        SMD.api.request("POST", "/v1/projects/" + pid + "/paper-card/explain", body)
+        var explainUrl = pid ? ("/v1/projects/" + encodeURIComponent(pid) + "/paper-card/explain") : "/v1/paper-card/explain";
+        SMD.api.request("POST", explainUrl, body)
           .then(function (data) {
             var ai = (data && data.card && data.card.ai) || (data && data.ai);
             card.ai = ai;
@@ -540,8 +540,30 @@
     var confirmAddBtn = cardEl.querySelector('[data-rmd="confirm-outcome-add"]');
     var cancelAddBtn = cardEl.querySelector('[data-rmd="cancel-outcome-add"]');
 
+    function markAdded(res) {
+      card._added = true;
+      addBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>Added to studies</span>';
+      addBtn.setAttribute("disabled", "disabled");
+      if (outcomePrompt) outcomePrompt.style.display = "none";
+      if (opts.onAdded) opts.onAdded(res);
+    }
+
     function performAutoAdd(outcomeVal) {
       if (!addBtn) return;
+      if (!pid && project && project.id) {
+        var localAdded = addLocalStudyFromCard(project, card, outcomeVal);
+        if (localAdded) {
+          markAdded({ status: "filled", study: localAdded });
+          return;
+        }
+      }
+      if (!pid) {
+        if (outcomePrompt) {
+          outcomePrompt.style.display = "block";
+          outcomePrompt.innerHTML = '<div class="rmd-banner rmd-banner-info" role="status"><span>Open or create a project first to add this study to your project list.</span><button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-action="projects">Open Projects</button></div>';
+        }
+        return;
+      }
       addBtn.setAttribute("disabled", "disabled");
       addBtn.innerHTML = '<svg class="rmd-calm-spinner" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg> <span>Adding...</span>';
 
@@ -550,17 +572,13 @@
       if (card.doi) item.doi = card.doi;
 
       var reqBody = { items: [item], outcome: outcomeVal };
-      SMD.api.request("POST", "/v1/projects/" + pid + "/studies/auto-add", reqBody)
+      SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/studies/auto-add", reqBody)
         .then(function (data) {
           var res = (data && data.results && data.results[0]) || {};
-          card._added = true;
           if (res.study && SMD.store && SMD.store.adoptServerStudy) {
             SMD.store.adoptServerStudy(pid, res.study);
           }
-          addBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>Added to studies</span>';
-          addBtn.setAttribute("disabled", "disabled");
-          if (outcomePrompt) outcomePrompt.style.display = "none";
-          if (opts.onAdded) opts.onAdded(res);
+          markAdded(res);
         })
         .catch(function (err) {
           addBtn.removeAttribute("disabled");
@@ -611,6 +629,64 @@
     }
   }
 
+  /* Strip invisible characters, duplicated side-by-side pasted URLs, and spaces after "10." in DOIs. */
+  function cleanInputLink(raw) {
+    var s = String(raw || "").replace(/[\u200B-\u200D\uFEFF]/g, "").trim();
+    if (!s) return "";
+    var firstProto = s.search(/https?:\/\//i);
+    if (firstProto >= 0) {
+      var rest = s.slice(firstProto + 8);
+      var secondProto = rest.search(/https?:\/\//i);
+      if (secondProto >= 0) {
+        var prefix = rest.slice(0, secondProto);
+        if (prefix.indexOf("?") < 0) s = s.slice(firstProto, firstProto + 8 + secondProto).trim();
+      }
+    }
+    s = s.replace(/\b10\.\s+(\d{4,9})\s*\/\s*(\S+)/gi, "10.$1/$2");
+    s = s.replace(/\b10\.(\d{4,9})\s*\/\s+(\S+)/gi, "10.$1/$2");
+    return s;
+  }
+
+  function addLocalStudyFromCard(project, card, outcomeVal) {
+    if (!SMD.store || !SMD.store.addStudy || !project) return null;
+    var authors = Array.isArray(card.authors) ? card.authors : [];
+    var firstAuthor = authors[0] ? String(authors[0]).split(/\s+/)[0] : (card.title || "Study").slice(0, 18);
+    var label = firstAuthor + (card.year ? " " + card.year : "");
+    var findings = Array.isArray(card.findings) ? card.findings : [];
+    var f0 = findings[0] || {};
+    var measure = f0.measure || "RR";
+    var inputs;
+    if (f0.format === "counts" && f0.events1 != null && f0.total1 != null) {
+      inputs = { events1: f0.events1, n1: f0.total1, events2: f0.events2 || 0, n2: f0.total2 || 0 };
+    } else if (f0.format === "estimate" && f0.estimate != null) {
+      inputs = { effect: f0.estimate, ciLower: f0.ciLower, ciUpper: f0.ciUpper };
+    } else {
+      inputs = { effect: 1, ciLower: 0.5, ciUpper: 2 };
+    }
+    var citation = formatCitationLine(card);
+    return SMD.store.addStudy(project.id, {
+      label: label,
+      measure: measure,
+      inputs: inputs,
+      locator: {
+        kind: "manual",
+        citation: citation,
+        section: "Abstract",
+        quote: f0.quote || card.conclusion || (card.title || ""),
+        doi: card.doi || "",
+        pmid: card.pmid || "",
+        outcome: outcomeVal || ""
+      },
+      verified: false
+    });
+  }
+
+  function resolveServerPid(opts, project) {
+    if (project && project.serverId) return project.serverId;
+    if (!project && opts && opts.pid) return opts.pid;
+    return "";
+  }
+
   /* Mounts the Paste a study link box into container */
   function mountPasteBox(container, opts) {
     if (!container) return;
@@ -620,12 +696,12 @@
     var h = [];
     h.push('<div class="rmd-paste-card-box">');
     h.push('  <div class="rmd-paste-row">');
-    h.push('    <label class="rmd-paste-title-lbl" for="rmd_paste_link_input">Paste a study link</label>');
+    h.push('    <label class="rmd-paste-title-lbl" for="rmd_paste_link_input">Paste a study link or DOI</label>');
     h.push('    <div class="rmd-paste-input-row">');
-    h.push('      <input type="text" id="rmd_paste_link_input" class="rmd-paste-input" data-rmd="paste-link-input" placeholder="Paste a PubMed, DOI, PMC or journal link" autocomplete="off" />');
+    h.push('      <input type="text" id="rmd_paste_link_input" class="rmd-paste-input" data-rmd="paste-link-input" placeholder="Paste a PubMed link, doi.org, bare DOI (10.xxxx), PMC or journal link" autocomplete="off" />');
     h.push('      <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-read" data-rmd="read-study">Read study</button>');
     h.push('    </div>');
-    h.push('    <div class="rmd-paste-hint">Works with PubMed, doi.org, PMC, Europe PMC and most journal pages. Free: no MaiK tokens.</div>');
+    h.push('    <div class="rmd-paste-hint">Works with or without https://, PubMed, doi.org, bare DOIs (10.xxxx/...), PMID, PMC and Europe PMC. Free: no MaiK tokens.</div>');
     h.push('  </div>');
     h.push('  <div class="rmd-papercard-status-target"></div>');
     h.push('  <div class="rmd-papercard-render-target"></div>');
@@ -637,22 +713,39 @@
     var btn = container.querySelector('[data-rmd="read-study"]');
     var statusTarget = container.querySelector(".rmd-papercard-status-target");
     var renderTarget = container.querySelector(".rmd-papercard-render-target");
+    var reqSeq = 0;
 
-    if (currentCard) {
+    if (opts.initialLink && input) {
+      input.value = cleanInputLink(opts.initialLink);
+    }
+    if (currentCard && !opts.autoRead) {
       renderCard(renderTarget, currentCard, opts);
     }
 
+    function requestCard(pid, link) {
+      var endpoint = pid ? ("/v1/projects/" + encodeURIComponent(pid) + "/paper-card") : "/v1/paper-card";
+      return SMD.api.request("POST", endpoint, { link: link }).catch(function (err) {
+        if (pid && err && (err.code === "project_not_found" || err.status === 404) && err.code !== "paper_not_found") {
+          return SMD.api.request("POST", "/v1/paper-card", { link: link });
+        }
+        throw err;
+      });
+    }
+
     function doRead(rawLink) {
-      var link = String(rawLink || "").trim();
+      var link = cleanInputLink(rawLink);
       if (!link) return;
+      if (input && input.value !== link) input.value = link;
+      var mySeq = ++reqSeq;
       statusTarget.innerHTML = '<div class="rmd-papercard-calm-loading" role="status"><svg class="rmd-calm-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg> <span>Reading the study</span></div>';
       renderTarget.innerHTML = "";
 
       var project = opts.project || (SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null);
-      var pid = opts.pid || (project ? (project.serverId || project.id) : "");
+      var pid = resolveServerPid(opts, project);
 
-      SMD.api.request("POST", "/v1/projects/" + pid + "/paper-card", { link: link })
+      requestCard(pid, link)
         .then(function (data) {
+          if (mySeq !== reqSeq) return;
           statusTarget.innerHTML = "";
           var card = (data && data.card) || data;
           renderCard(renderTarget, card, {
@@ -669,6 +762,7 @@
           if (opts.onCardRendered) opts.onCardRendered(card);
         })
         .catch(function (err) {
+          if (mySeq !== reqSeq) return;
           statusTarget.innerHTML = "";
           var e = err || {};
           var code = e.code || "";
@@ -676,7 +770,11 @@
           if (code === "link_unrecognised" || status === 400) {
             var msg = e.message || (e.body && e.body.error && e.body.error.message) || "We could not recognise this study link. Check the link and try again.";
             statusTarget.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><span>' + esc(msg) + '</span></div>';
-          } else if (code === "paper_not_found" || status === 404) {
+          } else if (code === "paper_not_found") {
+            statusTarget.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><span>We could not find this study. Check the link or try pasting just the DOI (10.xxxx/...) or PMID.</span></div>';
+          } else if (status === 401 || code === "unauthorized") {
+            statusTarget.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><span>Please sign in to look up online studies.</span></div>';
+          } else if (status === 404) {
             statusTarget.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><span>We could not find this study. Check the link.</span></div>';
           } else {
             var f = (SMD.p2 && SMD.p2.friendlyError) ? SMD.p2.friendlyError(err) : { message: e.message || "Something went wrong on our side." };
@@ -691,16 +789,20 @@
         if (ev && ev.clipboardData && ev.clipboardData.getData) {
           try { pastedText = ev.clipboardData.getData("text"); } catch (e) {}
         }
-        var val = (pastedText || input.value || "").trim();
-        if (val) {
-          input.value = val;
-          doRead(val);
-        } else {
-          setTimeout(function () {
-            var laterVal = (input.value || "").trim();
-            if (laterVal) doRead(laterVal);
-          }, 50);
+        if (pastedText) {
+          if (ev.preventDefault) ev.preventDefault();
+          var cleaned = cleanInputLink(pastedText);
+          input.value = cleaned;
+          if (cleaned) doRead(cleaned);
+          return;
         }
+        setTimeout(function () {
+          var laterVal = cleanInputLink(input.value || "");
+          if (laterVal) {
+            input.value = laterVal;
+            doRead(laterVal);
+          }
+        }, 0);
       });
 
       input.addEventListener("keydown", function (ev) {
@@ -716,12 +818,51 @@
         if (input) doRead(input.value);
       };
     }
+
+    if (opts.autoRead && opts.initialLink) {
+      doRead(opts.initialLink);
+    }
+
+    return { read: doRead };
   }
+
+  function renderReadStudyScreen(container, params) {
+    if (!container) return;
+    injectCSS();
+    var p = params || {};
+    var project = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
+    var h = [];
+    h.push('<div class="rmd-p2-screen" id="rmdReadStudyScreen">');
+    h.push('  <div class="rmd-screen-header">');
+    h.push('    <div>');
+    h.push('      <h2 class="rmd-screen-title">Read a study</h2>');
+    h.push('      <p class="rmd-screen-subtitle">Paste any PubMed URL, doi.org link, bare DOI (10.xxxx/...), PMID, PMC ID, or journal page link to get a structured clinical summary for free.</p>');
+    h.push('    </div>');
+    h.push('  </div>');
+    h.push('  <div class="rmd-readstudy-paste-wrap" id="rmdReadStudyWrap"></div>');
+    h.push('</div>');
+    container.innerHTML = h.join("\n");
+
+    var wrap = container.querySelector("#rmdReadStudyWrap");
+    if (wrap) {
+      mountPasteBox(wrap, {
+        project: project,
+        pid: project && project.serverId ? project.serverId : "",
+        initialLink: p.link || "",
+        autoRead: !!p.link
+      });
+    }
+  }
+
+  SMD.screens = SMD.screens || {};
+  SMD.screens["read-study"] = { render: renderReadStudyScreen };
 
   SMD.paperCard = {
     render: renderCard,
     mountPasteBox: mountPasteBox,
-    injectCSS: injectCSS
+    injectCSS: injectCSS,
+    normalizeLink: cleanInputLink,
+    addLocalStudyFromCard: addLocalStudyFromCard
   };
 
 })(typeof window !== "undefined" ? window : globalThis);

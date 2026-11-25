@@ -2301,6 +2301,16 @@ export async function onRequest({ request, env, params }) {
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid draft payload", requestId); }
     return aiDraft(p3Ctx, aiDraftRoute[1], body);
   }
+  const paperExplainStandalone = path === "/v1/paper-card/explain";
+  if (paperExplainStandalone && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid study card payload", requestId); }
+    return explainPaperCard(p3Ctx, null, body);
+  }
+  const paperCardStandalone = path === "/v1/paper-card";
+  if (paperCardStandalone && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid study card payload", requestId); }
+    return paperCard(p3Ctx, null, body);
+  }
   const paperExplainRoute = path.match(/^\/v1\/projects\/([^/]+)\/paper-card\/explain$/);
   if (paperExplainRoute && request.method === "POST") {
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid study card payload", requestId); }

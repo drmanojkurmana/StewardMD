@@ -183,6 +183,27 @@
     if (code === "token_mismatch" || code === "token_missing") {
       return { message: e.message || "Token preservation failure (values changed or missing)", action: "retry", actionLabel: "Try again" };
     }
+    if (code === "no_project") {
+      return { message: e.message || "Save or create a synced project first to use MaiK summaries.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "phi_blocked") {
+      return { message: e.message || "Patient identifiers were detected. Remove names, hospital numbers, phone numbers, addresses or emails and try again.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "ceiling_bytes" || status === 413) {
+      return { message: "This file is too large for server upload (limit 25 MB). Upload a smaller file or a Word (.docx) document.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "ceiling_input_tokens") {
+      return { message: "This text is too large for a single AI call. Try trimming appendices or drafting section by section.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "docx_needs_pdf") {
+      return { message: e.message || "Please upload a valid .docx or PDF file.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "storage_unavailable" || code === "queue_unavailable") {
+      return { message: "Server document OCR is unavailable right now. Export as selectable-text PDF or .docx and upload again.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "invalid_multipart" || code === "missing_file" || code === "file_type") {
+      return { message: e.message || "The uploaded file could not be processed. Try a selectable-text PDF or Word (.docx) file.", action: "retry", actionLabel: "Try again" };
+    }
     if (code === "network" || status === 0 || status >= 500) {
       return { message: "No connection right now. Your work is saved; try again in a moment.", action: "retry", actionLabel: "Try again" };
     }
@@ -515,8 +536,22 @@
       "#researchMD .rmd-logo-b { fill: var(--rmd-logo-b); }",
       "#researchMD .rmd-shell-brand strong b { font-weight: 800; color: var(--rmd-acc); }",
       "#researchMD .rmd-shell-brand span { font: 500 15.5px var(--rmd-f); color: var(--rmd-mut); padding-left: 2px; }",
-      "@media (max-width: 400px) { #researchMD .rmd-shell-brand span { display: none; } }",
-      "#researchMD .rmd-shell-right { display: flex; align-items: center; gap: 10px; justify-content: flex-end; }",
+      "@media (max-width: 960px) { #researchMD .rmd-shell-brand span { display: none; } }",
+      "#researchMD .rmd-shell-center { display: flex; align-items: center; justify-content: center; min-width: 0; }",
+      "#researchMD .rmd-head-read-bar { display: flex; align-items: center; gap: 6px; width: 100%; max-width: 440px; min-width: 0; }",
+      "#researchMD .rmd-head-read-bar .rmd-head-read-input { flex: 1 1 0; width: auto; min-width: 0; height: 36px; min-height: 36px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--rmd-line); background: var(--rmd-panel); font: 400 13px var(--rmd-f); color: var(--rmd-ink); box-sizing: border-box; }",
+      "#researchMD .rmd-head-read-bar .rmd-head-read-btn { min-height: 36px; height: 36px; padding: 0 12px; border-radius: 999px; font-size: 12.5px; white-space: nowrap; flex: 0 0 auto; }",
+      "#researchMD .rmd-shell-right { display: flex; align-items: center; gap: 8px; justify-content: flex-end; flex: 0 0 auto; }",
+      "#researchMD .rmd-shell-right .rmd-head-rstu-btn { display: none; min-height: 34px; height: 34px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap; flex: 0 0 auto; }",
+      "@media (max-width: 767px) {",
+      "  #researchMD .rmd-shell-top { grid-template-columns: minmax(0, 1fr) auto; gap: 6px; padding-left: 10px; padding-right: 10px; }",
+      "  #researchMD .rmd-shell-brand { gap: 6px; }",
+      "  #researchMD .rmd-shell-right { gap: 5px; }",
+      "  #researchMD .rmd-sync-pill { padding: 3px 7px; font-size: 10.5px; }",
+      "  #researchMD .rmd-shell-close { width: 34px; height: 34px; }",
+      "  #researchMD .rmd-shell-center { display: none; }",
+      "  #researchMD .rmd-shell-right .rmd-head-rstu-btn { display: inline-flex; height: 32px; min-height: 32px; padding: 0 9px; font-size: 11.5px; }",
+      "}",
       "#researchMD .rmd-sync-pill {",
       "  font: 600 11.5px var(--rmd-f); border-radius: 999px; padding: 3px 9px;",
       "  display: inline-flex; align-items: center; gap: 5px; text-transform: uppercase; letter-spacing: 0.04em;",
@@ -1012,7 +1047,7 @@
     var store = SMD.store;
     var syncState = store ? store.getState().syncState : "synced";
     var queueCount = store ? store.getQueue().length : 0;
-    var showBack = currentScreen !== "projects" && navStack.length > 0;
+    var showBack = currentScreen !== "projects" && (navStack.length > 0 || currentScreen === "read-study");
 
     var h = [];
     h.push('<div class="rmd-shell-top">');
@@ -1035,15 +1070,21 @@
     }
     h.push('  </div>');
 
-    h.push('  <div class="rmd-shell-center"></div>');
+    h.push('  <div class="rmd-shell-center">');
+    h.push('    <form class="rmd-head-read-bar" data-rmd="header-read-form">');
+    h.push('      <input type="text" class="rmd-head-read-input" data-rmd="header-paste-link" placeholder="Paste study link or DOI (10.xxxx)" aria-label="Paste study link or DOI" autocomplete="off" />');
+    h.push('      <button type="submit" class="rmd-btn rmd-btn-primary rmd-btn-sm rmd-head-read-btn" data-rmd="header-read-study">Read study</button>');
+    h.push('    </form>');
+    h.push('  </div>');
 
     h.push('  <div class="rmd-shell-right">');
+    h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm rmd-head-rstu-btn" data-rmd="open-read-study" aria-label="Open Read Study page">RStudy</button>');
     h.push(getSyncBadgeHtml(syncState, queueCount));
     h.push('    <button type="button" class="rmd-shell-close" data-rmd="close" aria-label="Close ResearchMD"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>');
     h.push('  </div>');
     h.push('</div>');
 
-    if (currentScreen !== "projects" && currentScreen !== "start") {
+    if (currentScreen !== "projects" && currentScreen !== "start" && currentScreen !== "read-study") {
       var proj = store ? store.getActiveProject() : null;
       var journey = journeyFor(proj);
       var curIdx = -1;
@@ -1107,6 +1148,55 @@
         if (name && name !== currentScreen) navigate(name, {});
       };
     }
+
+    var rstuBtn = root.querySelector('[data-rmd="open-read-study"]');
+    if (rstuBtn) {
+      rstuBtn.onclick = function () {
+        if (currentScreen === "read-study") {
+          var pageInp = root.querySelector('#rmdReadStudyWrap [data-rmd="paste-link-input"]');
+          if (pageInp && pageInp.focus) pageInp.focus();
+          return;
+        }
+        navigate("read-study", {});
+      };
+    }
+
+    var headForm = root.querySelector('[data-rmd="header-read-form"]');
+    var headInput = root.querySelector('[data-rmd="header-paste-link"]');
+    function cleanHeadVal(v) {
+      if (SMD.paperCard && SMD.paperCard.normalizeLink) return SMD.paperCard.normalizeLink(v);
+      return String(v || "").trim();
+    }
+    if (headForm) {
+      headForm.onsubmit = function (ev) {
+        if (ev && ev.preventDefault) ev.preventDefault();
+        var val = cleanHeadVal(headInput ? headInput.value : "");
+        if (headInput && val) headInput.value = val;
+        navigate("read-study", val ? { link: val } : {});
+      };
+    }
+    if (headInput) {
+      headInput.addEventListener("paste", function (ev) {
+        var pastedText = "";
+        if (ev && ev.clipboardData && ev.clipboardData.getData) {
+          try { pastedText = ev.clipboardData.getData("text"); } catch (e) {}
+        }
+        if (pastedText) {
+          if (ev.preventDefault) ev.preventDefault();
+          var cleaned = cleanHeadVal(pastedText);
+          headInput.value = cleaned;
+          if (cleaned) navigate("read-study", { link: cleaned });
+          return;
+        }
+        setTimeout(function () {
+          var val = cleanHeadVal(headInput.value || "");
+          if (val) {
+            headInput.value = val;
+            navigate("read-study", { link: val });
+          }
+        }, 0);
+      });
+    }
   }
 
   var ADVANCED_SCREENS = { ipd: 1, institution: 1, credits: 1, templates: 1, journals: 1 };
@@ -1121,7 +1211,7 @@
 
   var TAB_LABELS = {
     plan: "Plan",
-    studies: "Studies", protocol: "Protocol", search: "Search", screening: "Screening",
+    studies: "Studies", "read-study": "Read study", protocol: "Protocol", search: "Search", screening: "Screening",
     conflicts: "Conflicts", prisma: "PRISMA", pdf: "PDF", extract: "Extract",
     rob: "Risk of Bias", data: "Data", run: "Run", grade: "GRADE",
     manuscript: "Manuscript", checklist: "Checklist", ready: "Submit",
@@ -1159,8 +1249,8 @@
     },
     thesis: {
       name: "Upload your thesis",
-      do: "Upload your MD/MS/DNB thesis as a PDF. We read it on our server and check for patient identifiers before any AI step.",
-      eg: "Export your thesis from Word as a PDF, then upload it here.",
+      do: "Upload your MD/MS/DNB thesis as a PDF or Word (.docx) file. Text is read directly on your device and checked for patient identifiers before any AI step.",
+      eg: "Upload your thesis PDF or .docx directly.",
       gloss: "New words: patient identifiers (names, dates of birth, hospital numbers or contact details that could reveal who a patient is).",
       action: { label: "Next: pick the paper type", fallback: "thesis-type" }
     },
@@ -1198,6 +1288,13 @@
       eg: "Add a DOI (digital object identifier) so the journal can locate the paper.",
       gloss: "New words: DOI (digital object identifier, a permanent link to a paper) and PMID (PubMed identifier, the number PubMed gives a paper).",
       action: { label: "Next: tick the checklist", fallback: "checklist" }
+    },
+    "read-study": {
+      name: "Read a study",
+      do: "Paste a PubMed URL, doi.org link, bare DOI (10.xxxx/...), PMID or PMC ID to read a structured study summary for free.",
+      eg: "pubmed.ncbi.nlm.nih.gov/40959673 or 10.1056/NEJMoa1911303",
+      gloss: "",
+      action: { label: "Back to studies", fallback: "studies" }
     },
     studies: {
       name: "Add your studies",
@@ -1421,7 +1518,7 @@
     manuscript: "draft and approve the paper.",
     checklist: "point items to your paper.",
     ready: "check what is left to submit.",
-    thesis: "upload your thesis PDF.",
+    thesis: "upload your thesis PDF or Word (.docx).",
     "thesis-type": "pick the paper type.",
     "thesis-journal": "pick the target journal.",
     "thesis-draft": "shape the draft, checking every number.",

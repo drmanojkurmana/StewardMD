@@ -34,6 +34,30 @@ const NOT_NEEDED = "This study is already summarised for free.";
 const AI_KEYS = ["population", "intervention", "comparison", "outcome", "design", "mainResult", "conclusion"];
 const DOI_RE = /10\.\d{4,9}\/[^\s?#"<>]+/i;
 
+/* Strip invisible chars, trailing duplicated paste, and spaces inside "10. 1056/ xxx". */
+function cleanRawInput(text) {
+  let raw = String(text || "").replace(/[\u200B-\u200D\uFEFF]/g, "").trim();
+  if (!raw) return "";
+  // If user pasted the same URL twice side by side without space (e.g. https://pubmed.../40959673/https://pubmed.../40959673/),
+  // keep the first URL when the second http(s):// is not inside a query string.
+  const firstProto = raw.search(/https?:\/\//i);
+  if (firstProto >= 0) {
+    const rest = raw.slice(firstProto + 8);
+    const secondProto = rest.search(/https?:\/\//i);
+    if (secondProto >= 0) {
+      const prefix = rest.slice(0, secondProto);
+      if (prefix.indexOf("?") < 0) raw = raw.slice(firstProto, firstProto + 8 + secondProto).trim();
+    }
+  }
+  raw = raw.replace(/\b10\.\s+(\d{4,9})\s*\/\s*(\S+)/gi, "10.$1/$2");
+  raw = raw.replace(/\b10\.(\d{4,9})\s*\/\s+(\S+)/gi, "10.$1/$2");
+  return raw;
+}
+
+function decodeDoiEscapes(text) {
+  return String(text || "").replace(/%2F/gi, "/").replace(/%3A/gi, ":").replace(/%28/gi, "(").replace(/%29/gi, ")");
+}
+
 const DESIGNS = [
   { key: "rct", pt: ["randomized controlled trial"], label: "Randomized controlled trial (RCT) (people were assigned to groups by chance)" },
   { key: "meta_analysis", pt: ["meta-analysis"], label: "Meta-analysis (results from several studies combined into one estimate)" },
@@ -59,14 +83,15 @@ function transport(config) {
   return { deadline: config.deadline, bucket: config.bucket };
 }
 
-/* Strip trailing punctuation and /full, /abstract, /pdf, /epdf. A closing
+/* Strip trailing punctuation, slashes, and /full, /abstract, /pdf, /epdf. A closing
  * parenthesis stays when it balances one inside the DOI. */
 function cleanDoi(raw) {
-  let d = String(raw || "");
+  let d = decodeDoiEscapes(String(raw || ""));
   let prev = "";
   while (d && d !== prev) {
     prev = d;
-    d = d.replace(/\/(?:full|abstract|pdf|epdf)\/?$/i, "");
+    d = d.replace(/\/(?:full|abstract|pdf|epdf|pdfdirect|ref|figures|suppl_file)\/?$/i, "");
+    d = d.replace(/\/+$/, "");
     d = d.replace(/[.,;:]+$/, "");
     const open = (d.match(/\(/g) || []).length;
     const close = (d.match(/\)/g) || []).length;
@@ -77,24 +102,41 @@ function cleanDoi(raw) {
 }
 
 function doiOf(text) {
-  const m = String(text || "").match(DOI_RE);
+  const pre = cleanRawInput(decodeDoiEscapes(text));
+  const m = pre.match(DOI_RE);
   if (!m) return "";
   const cleaned = cleanDoi(m[0]);
   return /^10\.\d{4,9}\/\S+$/i.test(cleaned) ? cleaned.toLowerCase() : "";
 }
 
+function parseUrlLoose(raw) {
+  let u = null;
+  try { u = new URL(raw); } catch (e) { u = null; }
+  if (u && u.hostname) return u;
+  // Accept URLs copied without scheme (e.g. pubmed.ncbi.nlm.nih.gov/40959673/ or doi.org/10.xxxx/yyy)
+  if (!/^[a-z][a-z0-9+.-]*:/i.test(raw) && !/^10\.\d{4,9}\//i.test(raw) && /^[a-z0-9-]+(?:\.[a-z0-9-]+)+(?:[/?#:]|$)/i.test(raw)) {
+    const candidate = raw.split(/\s+/)[0];
+    try {
+      const withHttps = new URL("https://" + candidate);
+      if (withHttps.hostname && !hostBlocked(withHttps.hostname)) return withHttps;
+    } catch (e) {}
+  }
+  return null;
+}
+
 /* resolveLink(text) -> { pmid?, pmcid?, doi? } or null. No network. */
 export function resolveLink(text) {
-  const raw = String(text || "").trim();
+  const raw = cleanRawInput(text);
   if (!raw || raw.length > 4000) return null;
-  let url = null;
-  try { url = new URL(raw); } catch (e) { url = null; }
+  const url = parseUrlLoose(raw);
   if (url && url.hostname) {
     const host = url.hostname.toLowerCase().replace(/\.$/, "");
     const path = url.pathname || "";
-    if (host === "pubmed.ncbi.nlm.nih.gov" || host === "www.pubmed.ncbi.nlm.nih.gov") {
+    if (host === "pubmed.ncbi.nlm.nih.gov" || host === "www.pubmed.ncbi.nlm.nih.gov" || host === "m.pubmed.ncbi.nlm.nih.gov") {
       const m = path.match(/^\/(\d{1,9})(?:\/|$)/);
       if (m) return { pmid: m[1] };
+      const qTerm = url.searchParams && url.searchParams.get("term");
+      if (qTerm && /^\d{1,9}$/.test(qTerm.trim())) return { pmid: qTerm.trim() };
     }
     if (host === "ncbi.nlm.nih.gov" || host === "www.ncbi.nlm.nih.gov") {
       const pm = path.match(/^\/pubmed\/(\d{1,9})(?:\/|$)/i);
@@ -109,12 +151,18 @@ export function resolveLink(text) {
     if (host === "europepmc.org" || host === "www.europepmc.org") {
       const med = path.match(/^\/(?:article|abstract)\/MED\/(\d{1,9})(?:\/|$)/i);
       if (med) return { pmid: med[1] };
-      const pmc = path.match(/^\/article\/PMC\/(PMC\d+)(?:\/|$)/i);
+      const pmc = path.match(/^\/(?:article|articles|abstract)\/PMC\/(PMC\d+)(?:\/|$)/i);
       if (pmc) return { pmcid: pmc[1].toUpperCase() };
+    }
+    if (host === "doi.org" || host === "dx.doi.org" || host === "www.doi.org") {
+      const fromPath = doiOf(decodeDoiEscapes(path.replace(/^\/+/, "")));
+      if (fromPath) return { doi: fromPath };
     }
   }
   const doi = doiOf(raw);
   if (doi) return { doi };
+  const pmcLabel = raw.match(/\b(?:PMCID\s*:?\s*)?(PMC\d{4,10})\b/i);
+  if (pmcLabel) return { pmcid: pmcLabel[1].toUpperCase() };
   const labelled = raw.match(/\bPMID\s*:?\s*(\d{1,9})\b/i);
   if (labelled) return { pmid: labelled[1] };
   if (/^\d{1,9}$/.test(raw)) return { pmid: raw };
@@ -132,8 +180,13 @@ function hostBlocked(hostname) {
 
 /* https only, no IP literal, no localhost, no private range. null means do not fetch. */
 function publicPageUrl(urlStr) {
+  let candidate = cleanRawInput(urlStr);
+  if (!candidate) return null;
+  if (!/^[a-z][a-z0-9+.-]*:/i.test(candidate) && /^[a-z0-9-]+(?:\.[a-z0-9-]+)+(?:[/?#]|$)/i.test(candidate)) {
+    candidate = "https://" + candidate;
+  }
   let u;
-  try { u = new URL(String(urlStr)); } catch (e) { return null; }
+  try { u = new URL(candidate); } catch (e) { return null; }
   if (u.protocol !== "https:") return null;
   if (hostBlocked(u.hostname)) return null;
   try { assertPublicHttpsUrl(u.toString()); } catch (e) { return null; }
@@ -392,15 +445,31 @@ function buildCard(rec) {
   };
 }
 
+async function crossrefDirectWork(doi, config) {
+  try {
+    const headers = { "User-Agent": TOOL + "/1.0 (mailto:" + config.contactEmail + ")", "Accept": "application/json" };
+    const u = "https://api.crossref.org/works/" + encodeURIComponent(doi) + "?mailto=" + encodeURIComponent(config.contactEmail);
+    const res = await fetchWithRetry(u, { headers, deadline: config.deadline, bucket: config.bucket, maxRetries: 2 });
+    const body = await readJson(res);
+    return (body && body.message && body.message.DOI) ? body.message : null;
+  } catch (e) {
+    return null;
+  }
+}
+
 async function fromCrossref(doi, config) {
   let rows = [];
+  let fetchErr = null;
   try { rows = await fetchRecords([doi], config); }
   catch (e) {
-    if (e instanceof ConnectorError && e.code === "invalid_search") return null;
-    throw e;
+    if (!(e instanceof ConnectorError && e.code === "invalid_search")) fetchErr = e;
   }
-  const raw = rows && rows[0];
-  if (!raw) return null;
+  let raw = rows && rows[0];
+  if (!raw) raw = await crossrefDirectWork(doi, config);
+  if (!raw) {
+    if (fetchErr) throw fetchErr;
+    return null;
+  }
   let rec;
   try { rec = normalise(raw); } catch (e) { return null; }
   const abstract = stripTags(raw.abstract || "");
@@ -413,6 +482,53 @@ async function fromCrossref(doi, config) {
     sections: abstract ? [{ label: "", text: abstract }] : [],
     publicationTypes: [], mesh: [], keywords: [],
   };
+}
+
+async function fromEuropePmc(ids, config) {
+  const parts = [];
+  if (ids.doi) parts.push('DOI:"' + String(ids.doi).replace(/"/g, "") + '"');
+  else if (ids.pmid) parts.push("EXT_ID:" + ids.pmid + " AND SRC:MED");
+  else if (ids.pmcid) parts.push("PMCID:" + ids.pmcid);
+  if (!parts.length) return null;
+  try {
+    const p = new URLSearchParams();
+    p.set("query", parts[0]);
+    p.set("resultType", "core");
+    p.set("format", "json");
+    p.set("pageSize", "1");
+    const headers = { "User-Agent": TOOL + "/1.0 (mailto:" + config.contactEmail + ")", "Accept": "application/json" };
+    const res = await fetchWithRetry("https://www.ebi.ac.uk/europepmc/webservices/rest/search?" + p.toString(), {
+      headers, deadline: config.deadline, bucket: config.bucket, maxRetries: 1,
+    });
+    const body = await readJson(res);
+    const list = (body && body.resultList && body.resultList.result) || [];
+    const r = list[0];
+    if (!r || (!r.title && !r.abstractText)) return null;
+    const pmid = /^\d+$/.test(String(r.pmid || "")) ? String(r.pmid) : "";
+    const pmcidRaw = String(r.pmcid || "").replace(/\s+/g, "").toUpperCase();
+    const pmcid = /^PMC\d+$/.test(pmcidRaw) ? pmcidRaw : (ids.pmcid || "");
+    const doi = normaliseDoi(r.doi || "") || ids.doi || "";
+    const absText = stripTags(r.abstractText || "");
+    const authorList = (r.authorList && Array.isArray(r.authorList.author)) ? r.authorList.author : [];
+    const authors = authorList.map((a) => {
+      const fam = String((a && a.lastName) || "").trim();
+      const ini = String((a && a.initials) || "").trim();
+      return fam ? (fam + " " + ini).trim() : String((a && a.fullName) || "").trim();
+    }).filter(Boolean);
+    const pubTypes = (r.pubTypeList && Array.isArray(r.pubTypeList.pubType)) ? r.pubTypeList.pubType.map((x) => String(x || "")) : [];
+    const yr = Number.parseInt(r.pubYear, 10);
+    return {
+      pmid, pmcid, doi,
+      title: stripTags(r.title || ""),
+      journal: String(r.journalTitle || (r.journalInfo && r.journalInfo.journal && r.journalInfo.journal.title) || ""),
+      year: Number.isFinite(yr) ? yr : null,
+      authors,
+      sections: absText ? [{ label: "", text: absText }] : [],
+      publicationTypes: pubTypes, mesh: [], keywords: [],
+    };
+  } catch (e) {
+    return null;
+  }
 }
 
 async function fromPubmed(pmid, doi, pmcid, config) {
@@ -438,32 +554,53 @@ async function loadRecord(ids, config) {
   let pmid = /^\d+$/.test(String(ids.pmid || "")) ? String(ids.pmid) : "";
   let pmcid = /^PMC\d+$/i.test(String(ids.pmcid || "")) ? String(ids.pmcid).toUpperCase() : "";
   let doi = normaliseDoi(ids.doi) || "";
+  let transientErr = null;
+  let reachedPrimary = false;
   if (!pmid && pmcid) {
-    const conv = await idconv(pmcid, config);
-    pmid = conv.pmid || pmid;
-    doi = doi || conv.doi || "";
-    pmcid = conv.pmcid || pmcid;
+    try {
+      const conv = await idconv(pmcid, config);
+      pmid = conv.pmid || pmid;
+      doi = doi || conv.doi || "";
+      pmcid = conv.pmcid || pmcid;
+    } catch (e) { transientErr = e; }
   }
   if (!pmid && doi) {
-    const conv = await idconv(doi, config);
-    pmid = conv.pmid || pmid;
-    pmcid = pmcid || conv.pmcid || "";
-    doi = conv.doi || doi;
+    try {
+      const conv = await idconv(doi, config);
+      pmid = conv.pmid || pmid;
+      pmcid = pmcid || conv.pmcid || "";
+      doi = conv.doi || doi;
+    } catch (e) { transientErr = e; }
   }
-  if (!pmid && doi) pmid = await esearchDoi(doi, config);
+  if (!pmid && doi) {
+    try { pmid = await esearchDoi(doi, config); }
+    catch (e) { transientErr = transientErr || e; }
+  }
   if (pmid) {
-    const art = await fromPubmed(pmid, doi, pmcid, config);
-    if (art) return art;
+    try {
+      const art = await fromPubmed(pmid, doi, pmcid, config);
+      reachedPrimary = true;
+      if (art) return art;
+    } catch (e) { transientErr = e; }
   }
   if (doi) {
-    const cr = await fromCrossref(doi, config);
-    if (cr && pmcid) cr.pmcid = pmcid;
-    return cr;
+    try {
+      const cr = await fromCrossref(doi, config);
+      reachedPrimary = true;
+      if (cr) {
+        if (pmcid) cr.pmcid = pmcid;
+        return cr;
+      }
+    } catch (e) { transientErr = e; }
   }
+  const epmc = await fromEuropePmc({ pmid, pmcid, doi }, config);
+  if (epmc) return epmc;
+  if (!reachedPrimary && transientErr) throw transientErr;
   return null;
 }
 
 async function viewed(api, db, projectId, uid, card) {
+  if (!projectId) return;
   await api.audit(db, projectId, uid, "paper_card.viewed", card.pmid || card.doi || "", {
     pmid: card.pmid || "", doi: card.doi || "", pmcid: card.pmcid || "",
   });
@@ -472,9 +609,11 @@ async function viewed(api, db, projectId, uid, card) {
 export async function paperCard(ctx, projectId, body) {
   const { env, db, uid, requestId, api } = ctx;
   const { json, err, projectGate, gateErr } = api;
-  const gate = await projectGate(db, projectId, uid, READ_ROLES);
-  if (gate.status) return gateErr(gate, gate.status === 404 ? "Project not found" : "Opening a study card needs a project role", requestId);
-  const link = body && typeof body.link === "string" ? body.link.trim() : "";
+  if (projectId) {
+    const gate = await projectGate(db, projectId, uid, READ_ROLES);
+    if (gate.status) return gateErr(gate, gate.status === 404 ? "Project not found" : "Opening a study card needs a project role", requestId);
+  }
+  const link = body && typeof body.link === "string" ? cleanRawInput(body.link) : "";
   if (!link || link.length > 4000) return err(400, "invalid_body", "link is required", requestId);
 
   let ids = resolveLink(link);
@@ -526,8 +665,19 @@ function aiFields(parsed, abstract) {
 export async function explainPaperCard(ctx, projectId, body) {
   const { env, db, uid, requestId, api } = ctx;
   const { json, err, projectGate, gateErr } = api;
-  const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
-  if (gate.status) return gateErr(gate, gate.status === 404 ? "Project not found" : "A plain-language summary needs an owner, editor or analyst role", requestId);
+  let targetProjectId = projectId;
+  if (targetProjectId) {
+    const gate = await projectGate(db, targetProjectId, uid, WRITE_ROLES);
+    if (gate.status) return gateErr(gate, gate.status === 404 ? "Project not found" : "A plain-language summary needs an owner, editor or analyst role", requestId);
+  } else {
+    const owned = await db.prepare(
+      "SELECT p.id FROM research_projects p JOIN research_members m ON m.project_id=p.id WHERE m.uid=? AND m.role IN ('owner','editor','analyst') AND p.status!='deleted' ORDER BY p.updated_ts DESC LIMIT 1"
+    ).bind(uid).first();
+    if (!owned || !owned.id) {
+      return err(400, "no_project", "Save or create a synced project first to use MaiK summaries (reading study cards is always free).", requestId);
+    }
+    targetProjectId = owned.id;
+  }
   const pmid = body && typeof body.pmid === "string" && /^\d{1,9}$/.test(body.pmid.trim()) ? body.pmid.trim() : "";
   const doi = body ? (normaliseDoi(body.doi) || "") : "";
   if (!pmid && !doi) return err(400, "invalid_body", "pmid or doi is required", requestId);
@@ -544,7 +694,7 @@ export async function explainPaperCard(ctx, projectId, body) {
   const system = "You summarise one study for a clinician. Return ONLY JSON with keys population, intervention, comparison, outcome, design, mainResult, conclusion. " +
     "Each value is a short string. mainResult may contain only numbers copied from the abstract. Do not invent a number.";
   const prompt = ("Title: " + title + "\nAbstract: " + abstract).slice(0, 3000);
-  const out = await runUserAi(ctx, projectId, "paper_card_explain", system, prompt, api.uuid("pce_"), {
+  const out = await runUserAi(ctx, targetProjectId, "paper_card_explain", system, prompt, api.uuid("pce_"), {
     temperature: 0, maxOutputTokens: 350, insufficientMessage: TOKENS_MESSAGE,
   });
   if (out.error) return out.error;

@@ -3,6 +3,8 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { deflateRawSync } from "node:zlib";
+import { createRequire } from "node:module";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (f) => readFileSync(join(ROOT, f), "utf8");
@@ -129,7 +131,74 @@ test("research-tutorial covers all 9 study designs, defaults ON, and celebrates 
   assert.match(tut, /isTutorialDefault/);
   assert.match(tut, /showCelebration/);
   const shell = read("research.js");
+  assert.match(shell, /#researchMD \.rmd-shell-center\s*\{/);
+  assert.match(shell, /header-paste-link/);
+  assert.match(shell, /open-read-study/);
+  assert.match(shell, /data-rmd="open-read-study"[^>]*>RStudy</);
+  assert.doesNotMatch(read("research-screen-studies.js"), /rmdStudiesPasteWrap/);
   assert.match(shell, /rmdTutWrap/);
   assert.match(shell, /submission-tracker/);
   assert.match(shell, /showCelebration/);
+});
+
+function buildZip(entries) {
+  const localParts = [];
+  const cdParts = [];
+  let offset = 0;
+  for (const { name, data, compress } of entries) {
+    const nameBytes = Buffer.from(name, "utf8");
+    const raw = Buffer.from(data, "utf8");
+    const body = compress ? deflateRawSync(raw) : raw;
+    const method = compress ? 8 : 0;
+    const lh = Buffer.alloc(30);
+    lh.writeUInt32LE(0x04034b50, 0);
+    lh.writeUInt16LE(20, 4);
+    lh.writeUInt16LE(method, 8);
+    lh.writeUInt32LE(body.length, 18);
+    lh.writeUInt32LE(raw.length, 22);
+    lh.writeUInt16LE(nameBytes.length, 26);
+    localParts.push(lh, nameBytes, body);
+
+    const ch = Buffer.alloc(46);
+    ch.writeUInt32LE(0x02014b50, 0);
+    ch.writeUInt16LE(20, 4);
+    ch.writeUInt16LE(20, 6);
+    ch.writeUInt16LE(method, 10);
+    ch.writeUInt32LE(body.length, 20);
+    ch.writeUInt32LE(raw.length, 24);
+    ch.writeUInt16LE(nameBytes.length, 28);
+    ch.writeUInt32LE(offset, 42);
+    cdParts.push(ch, nameBytes);
+    offset += lh.length + nameBytes.length + body.length;
+  }
+  const cd = Buffer.concat(cdParts);
+  const eocd = Buffer.alloc(22);
+  eocd.writeUInt32LE(0x06054b50, 0);
+  eocd.writeUInt16LE(entries.length, 8);
+  eocd.writeUInt16LE(entries.length, 10);
+  eocd.writeUInt32LE(cd.length, 12);
+  eocd.writeUInt32LE(offset, 16);
+  return Buffer.concat([...localParts, cd, eocd]);
+}
+
+test("parseDocx extracts paginated paragraphs and tables while ignoring deleted track changes", async () => {
+  const req = createRequire(import.meta.url);
+  const thesis = req("../research-screen-thesis.js");
+  assert.equal(typeof thesis.parseDocx, "function");
+  const xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>' +
+    '<w:p><w:r><w:t>Background: BCG trial thesis</w:t></w:r><w:del><w:r><w:delText> 999</w:delText></w:r></w:del></w:p>' +
+    '<w:p><w:r><w:br w:type="page"/></w:r></w:p>' +
+    '<w:p><w:r><w:t>Table 7. Pooled risk ratio was 0.49 across 120 patients.</w:t></w:r></w:p>' +
+    '</w:body></w:document>';
+  const zip = buildZip([{ name: "word/document.xml", data: xml, compress: true }]);
+  const ab = zip.buffer.slice(zip.byteOffset, zip.byteOffset + zip.byteLength);
+  const pages = await thesis.parseDocx(ab);
+  assert.equal(pages.length, 2);
+  assert.match(pages[0].text, /Background: BCG trial thesis/);
+  assert.doesNotMatch(pages[0].text, /999/);
+  assert.match(pages[1].text, /Table 7/);
+  const ver = thesis.verifyNumbers("The pooled risk ratio was 0.49 across 120 patients.", pages);
+  assert.equal(ver.flags.length, 0);
+  assert.deepEqual(ver.locators.find((l) => l.number === "0.49"), { number: "0.49", page: 2, table: 7 });
 });
