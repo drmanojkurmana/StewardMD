@@ -212,7 +212,7 @@ try {
   await call("Page.navigate", { url: "http://localhost:" + PORT + "/?research=1" });
 
   ok("modules load", await until("!!(window.SMD_RESEARCH && SMD_RESEARCH.screens && SMD_RESEARCH.screens.novelty && window.RMDPhi)", 20000));
-  ok("script tags have v tokens", await ev("!!document.querySelector('script[src*=\"research-screen-novelty.js?v=\"]') && !!document.querySelector('script[src*=\"research-phi.js?v=\"]')"));
+  ok("script tags have v tokens", await ev("(function(){var names=['research-screen-novelty.js','research-phi.js'];return names.every(function(n){var s=document.querySelector('script[src*=\"'+n+'\"]');var src=s&&s.getAttribute('src');return !!src&&/[?&]v=[^&]+/.test(src);});})()"));
 
   // Viewport and overflow check at 390px
   ok("no horizontal overflow at 390px", await ev("document.documentElement.scrollWidth <= document.documentElement.clientWidth"));
