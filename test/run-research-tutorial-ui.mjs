@@ -153,49 +153,100 @@ try {
   ok(await noOverflow(), 'Tutorial hub fits 390px phone with zero horizontal overflow');
   ok(await noDash(), 'Tutorial hub has zero em/en dashes');
 
-  // Verify default ON & skip toggle works on Start screen
+  // Verify default ON & skip toggle works on Start screen, AND manual typing triggers student self-progress detection
   await click('[data-rmd="start-guided"]');
   ok(await until(`!!document.querySelector('[data-rmd-start-choice="case"]')`, 4000), 'Start screen renders');
   await click('[data-rmd-start-choice="case"]');
   ok(await until(`!!document.querySelector('[data-rmd="start-tut-launch"]')`, 4000), 'Case Report start form promotes Example Tutorial by default');
   ok(await ev(`document.querySelector('[data-rmd="start-tut-def"]').checked === true`), 'Save tutorial as default checkbox is ON by default');
 
-  // Launch Case Report tutorial scratch-to-published walkthrough
+  // Launch Case Report tutorial scratch-to-published walkthrough + test every button
   await click('[data-rmd="start-tut-launch"]');
   ok(await until(`!!document.querySelector('#rmdTutBar') && !!document.querySelector('#rmdCfAge')`, 5000), 'Case Report tutorial opens at Step 1 (Case file) from scratch with Tutorial Coach');
   ok(await ev(`document.querySelector('#rmdCfAge').value === ''`), 'Tutorial truly starts from scratch with empty patient fields');
+  await click('[data-rmd-tut="spot"]');
+  ok(await ev(`!!document.querySelector('.rmd-tut-spot')`), 'Show me where spotlights the exact target input');
+  // Student types Age manually first and coach acknowledges manual progress
+  await ev(`(function(){var el=document.querySelector('#rmdCfAge');el.value='42';el.dispatchEvent(new Event('change',{bubbles:true}));})()`);
+  ok(await until(`/Great start!/.test(document.querySelector('#rmdTutBar').innerText)`, 3000), 'Coach detects when student enters details manually');
   ok(await click('[data-rmd-tut="auto"]'), 'Enter & Show Me fills patient case fields and saves');
   ok(await until(`/Saved realistic patient case details/.test(document.body.innerText)`, 4000), 'Coach confirms case details saved');
 
-  // Advance step-by-step across remaining stages through Ready -> Submit -> Published Celebration
-  for (const screen of ['manuscript', 'checklist', 'ready']) {
-    await ev(`SMD_RESEARCH.navigate(${JSON.stringify(screen)}, {}); 1;`);
-    ok(await until(`!!document.querySelector('#rmdTutBar')`, 4000), `Tutorial coach renders on ${screen}`);
-    if (screen === 'manuscript' || screen === 'checklist') {
+  // Walk ALL Case Report steps via Next Step -> Ready -> Submit -> Published Celebration
+  for (const screen of ['novelty', 'iec', 'pubconsent', 'images', 'manuscript', 'checklist', 'ready']) {
+    await click('[data-rmd-tut="next"]');
+    ok(await until(`!!document.querySelector('#rmdTutBar')`, 4000), `Tutorial coach advances smoothly to ${screen}`);
+    if (screen !== 'ready') {
       await click('[data-rmd-tut="auto"]');
-      await sleep(150);
+      await sleep(180);
     }
   }
-  ok(await until(`!!document.querySelector('[data-rmd="submit-paper"]') && !document.querySelector('[data-rmd="submit-paper"]').disabled`, 5000), 'Confirm & Submit Paper button unlocks after manuscript approval + checklist completion');
+  ok(await until(`!!document.querySelector('[data-rmd="submit-paper"]') && !document.querySelector('[data-rmd="submit-paper"]').disabled`, 5000), 'Confirm & Submit Paper button unlocks after full scratch-to-finish walkthrough');
   await click('[data-rmd="submit-paper"]');
   ok(await until(`!!document.querySelector('[data-rmd="publish-paper"]')`, 4000), 'Submitting advances paper to Submitted -> Under Review state');
   await click('[data-rmd="publish-paper"]');
   ok(await until(`!!document.querySelector('#rmdCelebrationModal') && /Congratulations, Author!/.test(document.body.innerText)`, 4000), 'Accept & Publish launches Manuscript Submitted & Published Celebration modal with confetti');
   ok(await ev(`document.querySelectorAll('#rmdCelebrationModal .rmd-confetti-bit').length === 24`), 'Celebration confetti elements render');
+  ok(await click('[data-rmd-cele="copy"]'), 'Copy Citation button works inside celebration modal');
   ok(await noOverflow(), 'Celebration modal fits 390px phone cleanly');
   ok(await noDash(), 'Celebration modal has zero em/en dashes');
 
-  // Close celebration and test Meta-Analysis & RCT tutorial launches
+  // Close celebration and verify Published badge + replay & skip persistence
   await click('[data-rmd-cele="hub"]');
   ok(await until(`/Published/.test(document.querySelector('[data-rmd="tut-hub"]').innerText)`, 4000), 'Completed tutorial displays Published badge on Tutorial Hub');
 
-  for (const key of ['sr', 'trial', 'case-series', 'case-control']) {
+  // Rigorous full-journey walkthrough of Meta-Analysis, RCT, Master Chart, Thesis, Case Series, Case-Control, Cohort, and Observational
+  for (const key of ['sr', 'trial', 'case-series', 'case-control', 'cohort', 'masterchart', 'obs', 'thesis']) {
     await ev(`SMD_RESEARCH.tutorial.startTutorial(${JSON.stringify(key)}, { reset: true }); 1;`);
-    ok(await until(`!!document.querySelector('#rmdTutBar')`, 4000), `${key} tutorial launches cleanly with interactive coach`);
+    ok(await until(`!!document.querySelector('#rmdTutBar')`, 4000), `${key} tutorial launches cleanly from scratch`);
     await click('[data-rmd-tut="auto"]');
-    await sleep(150);
+    await sleep(320);
+    // For RCT verify randomisation/plan/masterchart stats; for SR verify real pooled Risk Ratio run!
+    if (key === 'sr') {
+      await ev(`SMD_RESEARCH.navigate('run', {}); 1;`);
+      ok(await until(`!!document.querySelector('[data-rmd="calculate"]')`, 4000), 'Meta-analysis run screen ready');
+      await click('[data-rmd-tut="auto"]');
+      ok(await until(`/Risk ratio/.test(document.querySelector('#rmdScreenBody').innerText)`, 5000), 'Meta-analysis Enter & Show Me computes real pooled Risk Ratio');
+      await ev(`SMD_RESEARCH.navigate('extract', {}); 1;`);
+      ok(await until(`!!document.querySelector('#rmdTutBar')`, 4000), 'Extraction screen loads cleanly in tutorial');
+    }
+    if (key === 'masterchart' || key === 'case-control') {
+      await ev(`SMD_RESEARCH.navigate('masterchart', {}); 1;`);
+      ok(await until(`!!document.querySelector('[data-rmd-mc="sample"]')`, 4000), `${key} master chart upload renders`);
+      await click('[data-rmd-tut="auto"]');
+      ok(await until(`/Results paragraph|Table 1|risk factors|odds ratio/i.test(document.querySelector('#rmdScreenBody').innerText)`, 6000), `${key} master chart completes full on-device biostatistics automatically`);
+    }
+    if (key === 'thesis') {
+      await click('[data-rmd-tut="auto"]');
+      ok(await until(`/Thesis read/.test(document.querySelector('#rmdScreenBody').innerText)`, 4000), 'Thesis sample loads into Thesis reader');
+      await click('[data-rmd-tut="next"]');
+      ok(await until(`!!document.querySelector('[data-rmd-type]')`, 4000), 'Thesis Paper Type screen loads cleanly');
+    }
+    // Verify ready -> submit -> publish celebration works for every study type too
+    await ev(`SMD_RESEARCH.navigate('ready', {}); 1;`);
+    await until(`!!document.querySelector('#rmdTutBar')`, 4000);
+    await click('[data-rmd-tut="auto"]');
+    ok(await until(`!!document.querySelector('[data-rmd="submit-paper"]') && !document.querySelector('[data-rmd="submit-paper"]').disabled`, 4000), `${key} unlocks Confirm & Submit Paper`);
+    await click('[data-rmd="submit-paper"]');
+    await until(`!!document.querySelector('[data-rmd="publish-paper"]')`, 4000);
+    await click('[data-rmd="publish-paper"]');
+    ok(await until(`!!document.querySelector('#rmdCelebrationModal')`, 4000), `${key} completes with Submitted & Published Celebration`);
+    await click('[data-rmd-cele="close"]');
     ok(await noOverflow(), `${key} tutorial has zero horizontal overflow at 390px`);
+    ok(await noDash(), `${key} tutorial has zero em/en dashes`);
   }
+
+  // Test iPad 1024px layout & Skip tutorial default toggle persistence
+  await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 1366, deviceScaleFactor: 2, mobile: false });
+  await ev(`SMD_RESEARCH.navigate('projects', {}); 1;`);
+  ok(await until(`document.querySelectorAll('[data-rmd-tut-launch]').length === 9`, 4000), 'All 9 tutorials render on 1024px tablet');
+  ok(await noOverflow(), 'Tutorial hub fits 1024px tablet cleanly');
+  await ev(`SMD_RESEARCH.tutorial.setTutorialDefault('case', false); 1;`);
+  await click('[data-rmd="start-guided"]');
+  await until(`!!document.querySelector('[data-rmd-start-choice="case"]')`, 4000);
+  await click('[data-rmd-start-choice="case"]');
+  ok(await until(`document.querySelector('[data-rmd="start-tut-def"]').checked === false`, 4000), 'Skip preference persists accurately across views');
+  await ev(`SMD_RESEARCH.tutorial.setTutorialDefault('case', true); 1;`);
 
   ok(pageErrors.length === 0, `zero uncaught page errors (${pageErrors.length})`);
 } catch (e) {

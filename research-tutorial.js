@@ -638,16 +638,86 @@
       var mProto = clean.match(/^\/v1\/protocols\/(proto_tut_[^/]+)$/);
       var mChk = clean.match(/^\/v1\/checklists(?:\/([^/]+))?$/);
       var mRec = clean.match(/^\/v1\/records\/(tut_rec_[^/]+)\/decisions$/);
+      var mArt = clean.match(/^\/v1\/artifacts\/(art_tut_[^/]+)\/result$/);
+      var mExtAction = clean.match(/^\/v1\/extractions\/(ext_tut_[^/]+)\/(verify|promote)$/);
 
-      /* Handle /v1/checklists when active project is a tutorial */
+      /* Handle shared read endpoints when active project is a tutorial */
       var act = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
-      if (mChk && act && act.tutorial) {
-        if (!mChk[1]) {
+      if (act && act.tutorial) {
+        if (mChk) {
+          if (!mChk[1]) {
+            return Promise.resolve({
+              checklists: [checklistDef("care"), checklistDef("strobe"), checklistDef("consort"), checklistDef("prisma2020")]
+            });
+          }
+          return Promise.resolve({ checklist: checklistDef(mChk[1]) });
+        }
+        if (clean === "/v1/extraction-templates") {
           return Promise.resolve({
-            checklists: [checklistDef("care"), checklistDef("strobe"), checklistDef("consort"), checklistDef("prisma2020")]
+            templates: [
+              { id: "rct_binary", label: "RCT binary outcome", measures: ["RR", "OR", "RD"], fields: [
+                { key: "events1", label: "Events (intervention)", type: "integer", required: true },
+                { key: "n1", label: "N (intervention)", type: "integer", required: true },
+                { key: "events2", label: "Events (control)", type: "integer", required: true },
+                { key: "n2", label: "N (control)", type: "integer", required: true }
+              ] },
+              { id: "rct_continuous", label: "RCT continuous outcome", measures: ["MD", "SMD"], fields: [
+                { key: "mean1", label: "Mean (intervention)", type: "number", required: true },
+                { key: "sd1", label: "SD (intervention)", type: "number", required: true },
+                { key: "n1", label: "N (intervention)", type: "integer", required: true },
+                { key: "mean2", label: "Mean (control)", type: "number", required: true },
+                { key: "sd2", label: "SD (control)", type: "number", required: true },
+                { key: "n2", label: "N (control)", type: "integer", required: true }
+              ] }
+            ]
           });
         }
-        return Promise.resolve({ checklist: checklistDef(mChk[1]) });
+        if (clean === "/v1/rob-tools") {
+          return Promise.resolve({
+            tools: [{
+              id: "rob2",
+              name: "RoB 2",
+              scale: "low / some_concerns / high",
+              answers: ["Y", "PY", "PN", "N", "NI"],
+              domains: [
+                { key: "d1", label: "Bias arising from the randomization process", judgments: ["low", "some_concerns", "high"], signallingQuestions: [{ key: "1.1", text: "Was the allocation sequence random?" }] },
+                { key: "d2", label: "Bias due to deviations from intended interventions", judgments: ["low", "some_concerns", "high"], signallingQuestions: [{ key: "2.1", text: "Were participants aware of assigned intervention?" }] },
+                { key: "d3", label: "Bias due to missing outcome data", judgments: ["low", "some_concerns", "high"], signallingQuestions: [{ key: "3.1", text: "Were data for nearly all randomized participants available?" }] },
+                { key: "d4", label: "Bias in measurement of the outcome", judgments: ["low", "some_concerns", "high"], signallingQuestions: [{ key: "4.1", text: "Was outcome measurement appropriate?" }] },
+                { key: "d5", label: "Bias in selection of the reported result", judgments: ["low", "some_concerns", "high"], signallingQuestions: [{ key: "5.1", text: "Was analysis performed according to pre-specified plan?" }] }
+              ]
+            }]
+          });
+        }
+        if (clean === "/v1/journals/match" && meth === "POST") {
+          return Promise.resolve({
+            matches: [
+              { journal: { id: "ijmr", name: "Indian Journal of Medical Research", referenceStyle: "vancouver", wordLimits: { main: 3500, abstract: 250 } } },
+              { journal: { id: "plos_one", name: "PLOS ONE", referenceStyle: "vancouver", wordLimits: { main: 5000, abstract: 300 } } },
+              { journal: { id: "jama", name: "JAMA", referenceStyle: "vancouver", wordLimits: { main: 3500, abstract: 350 } } }
+            ]
+          });
+        }
+      }
+
+      if (mArt) {
+        return Promise.resolve({
+          artifactId: mArt[1],
+          filename: "Colditz_1994_BCG_Trial.pdf",
+          pages: [
+            { n: 1, words: [
+              { t: "Results:", x: 40, y: 80, w: 60, h: 14 },
+              { t: "Of 123 vaccinated individuals, 4 developed tuberculosis compared with 11 of 139 controls (Table 2).", x: 110, y: 80, w: 420, h: 14 }
+            ] },
+            { n: 2, words: [
+              { t: "Randomization:", x: 40, y: 120, w: 90, h: 14 },
+              { t: "Allocation was concealed using sequentially numbered envelopes (p = 0.04).", x: 140, y: 120, w: 400, h: 14 }
+            ] }
+          ]
+        });
+      }
+      if (mExtAction) {
+        return Promise.resolve({ extraction: { id: mExtAction[1], template: "rct_binary", version: 2, status: "verified", fields: {} } });
       }
 
       if (mProto) {
@@ -779,7 +849,57 @@
       if (sub === "/exclusion-reasons") {
         return Promise.resolve({ reasons: [{ code: "wrong_population", label: "Wrong population" }, { code: "wrong_design", label: "Wrong study design" }] });
       }
+      if (sub === "/reports" || sub === "/dedup-groups") {
+        return Promise.resolve({ reports: [], groups: [], nextCursor: null });
+      }
+      if (sub === "/dedup:run" && meth === "POST") {
+        return Promise.resolve({ dedupRun: { groupsCreated: 1, duplicatesRemoved: 1, groupIds: ["ddg_1"] } });
+      }
       if (sub === "/conflicts") return Promise.resolve({ conflicts: [] });
+      if (sub === "/studies") {
+        var tutStudies = (SMD.store && SMD.store.getStudies) ? SMD.store.getStudies(pid) : [];
+        return Promise.resolve({ studies: tutStudies });
+      }
+      if (sub.indexOf("/extraction") >= 0) {
+        var extObj = {
+          id: "ext_tut_" + sb.key,
+          projectId: pid,
+          template: "rct_binary",
+          version: sb.stepsDone.extract ? 1 : 0,
+          artifactId: "art_tut_" + sb.key,
+          fields: {
+            events1: { value: 4, status: sb.stepsDone.extract ? "verified" : "unverified", locator: { page: 1, quote: "4 developed tuberculosis" }, quote: "4 developed tuberculosis" },
+            n1: { value: 123, status: sb.stepsDone.extract ? "verified" : "unverified", locator: { page: 1, quote: "123 vaccinated individuals" }, quote: "123 vaccinated individuals" },
+            events2: { value: 11, status: sb.stepsDone.extract ? "verified" : "unverified", locator: { page: 1, quote: "11 of 139 controls" }, quote: "11 of 139 controls" },
+            n2: { value: 139, status: sb.stepsDone.extract ? "verified" : "unverified", locator: { page: 1, quote: "139 controls" }, quote: "139 controls" }
+          }
+        };
+        if (meth === "PUT") {
+          sb.stepsDone.extract = true;
+          saveSandbox(pid, sb);
+        }
+        return Promise.resolve({ extraction: extObj });
+      }
+      if (sub.indexOf("/rob") >= 0) {
+        if (meth === "POST") {
+          sb.stepsDone.rob = true;
+          saveSandbox(pid, sb);
+        }
+        return Promise.resolve({
+          assessments: [],
+          assessment: {
+            tool: "rob2",
+            self: sb.stepsDone.rob ? { submitted: true, overall: "low", domains: [{ key: "d1", judgment: "low", quote: "Concealed allocation", locator: { page: 2 } }] } : null,
+            peer: { hidden: true }
+          }
+        });
+      }
+      if (sub === "/artifacts") {
+        return Promise.resolve({ artifacts: [{ id: "art_tut_" + sb.key, filename: "Colditz_1994_BCG_Trial.pdf", status: "succeeded", pageCount: 2, createdTs: Date.now() }] });
+      }
+      if (sub === "/data-dictionary") {
+        return Promise.resolve({ dictionary: { fields: [{ name: "events1", type: "integer" }, { name: "total1", type: "integer" }, { name: "events2", type: "integer" }, { name: "total2", type: "integer" }] } });
+      }
       if (sub === "/prisma") {
         var recsCount = Math.max(sb.records.length, 24);
         var incCount = (SMD.store && SMD.store.getStudies) ? Math.max((SMD.store.getStudies(pid) || []).length, 4) : 4;
@@ -801,8 +921,8 @@
           }
         });
       }
-      if (sub === "/pdfs" || sub === "/extractions" || sub === "/rob" || sub === "/data-imports" || sub === "/grade") {
-        return Promise.resolve({ items: [], pdfs: [], extractions: [], assessments: [], imports: [], grades: [] });
+      if (sub === "/pdfs" || sub === "/data-imports" || sub === "/grade") {
+        return Promise.resolve({ items: [], pdfs: [], imports: [], grades: [] });
       }
       if (sub === "/ai-draft" && meth === "POST") {
         return Promise.resolve({ draft: {}, model: "tutorial-demo", costInr: 0 });
@@ -902,6 +1022,11 @@
       try {
         G.localStorage.removeItem("smd_rmd_casefile_" + pid);
         G.localStorage.removeItem("smd_rmd_mc_tutorial_" + pid);
+        G.localStorage.removeItem("smd_rmd_masterchart_v1");
+        G.localStorage.removeItem("smd_research_plan_" + pid);
+        var thAll = readJson("smd_rmd_thesis_v1", {});
+        delete thAll[pid];
+        writeJson("smd_rmd_thesis_v1", thAll);
       } catch (e) {}
     }
 
@@ -1035,13 +1160,25 @@
         }
       },
       plan: {
-        ask: "Pick a study aim, review the calculated sample size, and save your plan, OR click Enter & Show Me.",
-        why: "Adequate sample size avoids underpowered inconclusive trials.",
-        sel: '[data-rmd="plan-save"], [data-rmd-aim]',
+        ask: "Pick the study aim matching " + ex.label + ", review the sample size calculation, and click Save plan, OR click Enter & Show Me.",
+        why: "A statistically powered sample size prevents underpowered inconclusive findings.",
+        sel: '#rmd_ss_aim, [data-rmd="plan-save"]',
         autoDo: function (body) {
-          var saveBtn = body.querySelector('[data-rmd="plan-save"]');
-          if (saveBtn) saveBtn.click();
-          return "Sample size and ethics study plan calculated and saved.";
+          var targetAim = key === "case-control" ? "case_control"
+            : (key === "cohort" ? "time_to_event"
+            : (key === "trial" ? "two_proportions"
+            : (key === "masterchart" ? "two_means" : "single_proportion")));
+          var aimSel = body.querySelector("#rmd_ss_aim");
+          if (aimSel) {
+            aimSel.value = targetAim;
+            try { aimSel.dispatchEvent(new Event("change", { bubbles: true })); } catch (e) {}
+          }
+          setTimeout(function () {
+            var b2 = D.querySelector("#rmdScreenBody");
+            var saveBtn = b2 ? b2.querySelector('[data-rmd="plan-save"]') : null;
+            if (saveBtn) saveBtn.click();
+          }, 80);
+          return "Calculated sample size for " + ex.label + " and saved the study plan.";
         }
       },
       protocol: {
@@ -1105,20 +1242,65 @@
         }
       },
       masterchart: {
-        ask: "Load the built-in sample dataset, advance to variables, and click Run analysis on your device, OR click Enter & Show Me.",
+        ask: "Load the built-in sample dataset, verify identifiers & column types, pick an analysis, and click Run on your device, OR click Enter & Show Me to run the full stats walkthrough.",
         why: "All statistical tests run locally inside your device so patient rows never leave your phone.",
-        sel: '[data-rmd-mc="sample"], [data-rmd-mc="continue-columns"], [data-rmd-mc="continue-identifiers"], [data-rmd-mc="run"]',
+        sel: '[data-rmd-mc="sample"], [data-rmd-mc="continue-identifiers"], [data-rmd-mc="continue-columns"], [data-rmd-mc-choice], [data-rmd-mc="run"]',
         autoDo: function (body) {
-          var stepBtns = ['[data-rmd-mc="sample"]', '[data-rmd-mc="continue-columns"]', '[data-rmd-mc="continue-identifiers"]', '[data-rmd-mc="run"]'];
+          function pickMcChoiceAndRun() {
+            var bNow = D.querySelector("#rmdScreenBody");
+            if (!bNow) return;
+            var wantChoice = key === "case-series" ? "describe"
+              : (key === "case-control" ? "logistic"
+              : (key === "cohort" ? "table1"
+              : (key === "trial" ? "compare" : "table1")));
+            var cBtn = bNow.querySelector('[data-rmd-mc-choice="' + wantChoice + '"]') || bNow.querySelector('[data-rmd-mc-choice="table1"]');
+            if (cBtn) {
+              cBtn.click();
+              setTimeout(function () {
+                var bForm = D.querySelector("#rmdScreenBody");
+                if (!bForm) return;
+                var chks = bForm.querySelectorAll(".rmd-mc-check-input");
+                var checkedCount = 0;
+                for (var ci = 0; ci < chks.length && checkedCount < 3; ci++) {
+                  if (!chks[ci].checked) {
+                    chks[ci].checked = true;
+                    try { chks[ci].dispatchEvent(new Event("change", { bubbles: true })); } catch (e) {}
+                    checkedCount++;
+                  }
+                }
+                var runBtn = bForm.querySelector('[data-rmd-mc="run"]');
+                if (runBtn) runBtn.click();
+              }, 80);
+            }
+          }
+          if (body.querySelector('[data-rmd-mc="run"]')) {
+            var rChks = body.querySelectorAll(".rmd-mc-check-input");
+            for (var ri = 0; ri < rChks.length && ri < 3; ri++) {
+              if (!rChks[ri].checked) { rChks[ri].checked = true; try { rChks[ri].dispatchEvent(new Event("change", { bubbles: true })); } catch (e) {} }
+            }
+            body.querySelector('[data-rmd-mc="run"]').click();
+            return "Ran on-device biostatistics on your master chart.";
+          }
+          if (body.querySelector('[data-rmd-mc="sample"]')) {
+            body.querySelector('[data-rmd-mc="sample"]').click();
+            setTimeout(function () {
+              var bId = D.querySelector('#rmdScreenBody [data-rmd-mc="continue-identifiers"]');
+              if (bId) bId.click();
+              setTimeout(function () {
+                var bCol = D.querySelector('#rmdScreenBody [data-rmd-mc="continue-columns"]');
+                if (bCol) bCol.click();
+                setTimeout(pickMcChoiceAndRun, 80);
+              }, 80);
+            }, 80);
+            return "Loaded 200-patient synthetic master chart, quarantined Name/Mobile PHI, and ran statistical analysis on-device.";
+          }
+          var stepBtns = ['[data-rmd-mc="continue-identifiers"]', '[data-rmd-mc="continue-columns"]'];
           for (var i = 0; i < stepBtns.length; i++) {
             var b = body.querySelector(stepBtns[i]);
-            if (b) { b.click(); break; }
+            if (b) { b.click(); setTimeout(pickMcChoiceAndRun, 80); return "Confirmed column checks and prepared analysis."; }
           }
-          if (!body.querySelector('[data-rmd-mc="sample"]') && !body.querySelector('[data-rmd-mc="run"]')) {
-            var choice = body.querySelector('[data-rmd-mc-choice="table1"]');
-            if (choice) choice.click();
-          }
-          return "Advanced Master Chart analysis cleanly on-device (tap again if multiple stages remain).";
+          pickMcChoiceAndRun();
+          return "Selected statistical test and computed results on-device.";
         }
       },
       studies: {
@@ -1152,23 +1334,77 @@
         }
       },
       screening: {
-        ask: "Vote Include or Exclude on titles/abstracts, OR click Enter & Show Me.",
+        ask: "Vote Include or Exclude on titles/abstracts, or click Enter & Show Me.",
         why: "Documented screening generates an auditable PRISMA flow diagram.",
         sel: '[data-rmd-vote="include"], [data-rmd="to-search"]',
         autoDo: function (body) {
           var v = body.querySelector('[data-rmd-vote="include"]');
-          if (v) v.click();
-          return "Recorded inclusion decision in Screening.";
+          if (v) { v.click(); return "Recorded inclusion decision in Screening."; }
+          var sb2 = getSandbox(proj.id);
+          if (!sb2.records.length) {
+            sb2.records.push({
+              id: "tut_rec_" + sb2.key + "_1", projectId: proj.id, source: "pubmed", externalId: "8309034",
+              title: ex.fullTitle, authors: ["Colditz GA"], year: 1994, doi: "10.1001/jama.1994.03510370074034",
+              metadata: { journal: "JAMA", abstract: "Controlled BCG vaccine trial showing significant protection against tuberculosis." }, createdTs: Date.now()
+            });
+            saveSandbox(proj.id, sb2);
+            if (SMD.refreshScreen) SMD.refreshScreen();
+          }
+          return "Loaded study record into Screening queue (tap again to cast vote).";
+        }
+      },
+      extract: {
+        ask: "Verify the extracted event counts (4/123 vs 11/139) with their source quote, or click Enter & Show Me.",
+        why: "Attesting every extracted number with a verbatim PDF quote prevents data-entry errors in meta-analysis.",
+        sel: '[data-rmd="extract-verify-all"], [data-rmd="extract-save"]',
+        autoDo: function () {
+          var sb2 = getSandbox(proj.id);
+          sb2.stepsDone.extract = true;
+          saveSandbox(proj.id, sb2);
+          if (SMD.refreshScreen) SMD.refreshScreen();
+          return "Verified extracted 2x2 trial counts with source quotes.";
+        }
+      },
+      rob: {
+        ask: "Rate each RoB 2 bias domain (Randomization, Deviations, Missing Data, Measurement, Selection), or click Enter & Show Me.",
+        why: "Study quality ratings feed directly into sensitivity analyses and GRADE certainty ratings.",
+        sel: '[data-rmd="rob-submit"]',
+        autoDo: function () {
+          var sb2 = getSandbox(proj.id);
+          sb2.stepsDone.rob = true;
+          saveSandbox(proj.id, sb2);
+          if (SMD.refreshScreen) SMD.refreshScreen();
+          return "Recorded low risk of bias judgment across RoB 2 domains.";
         }
       },
       run: {
-        ask: "Verify your effect measure (Risk Ratio) and click Run Meta-Analysis, OR click Enter & Show Me.",
+        ask: "Inspect your verified studies and click Run Meta-Analysis to compute the pooled Risk Ratio & forest plot, or click Enter & Show Me.",
         why: "Statistical pooling computes the weighted overall effect, confidence interval, and heterogeneity I2.",
         sel: '[data-rmd="calculate"]',
         autoDo: function (body) {
+          var list = ex.studiesSeed || EXAMPLES[5].studiesSeed;
+          if (SMD.store && SMD.store.createStudy && SMD.store.getStudies(proj.id).length === 0) {
+            for (var i = 0; i < list.length; i++) SMD.store.createStudy(proj.id, list[i]);
+            if (SMD.refreshScreen) SMD.refreshScreen();
+            setTimeout(function () {
+              var c2 = D.querySelector('#rmdScreenBody [data-rmd="calculate"]');
+              if (c2) c2.click();
+            }, 80);
+            return "Loaded verified studies and calculated pooled meta-analysis + forest plot.";
+          }
           var calc = body.querySelector('[data-rmd="calculate"]');
           if (calc) calc.click();
           return "Pooled studies mathematically and generated forest plot.";
+        }
+      },
+      grade: {
+        ask: "Review certainty of evidence domains and open Summary of Findings, or click Enter & Show Me.",
+        why: "GRADE rates how confident readers can be in each pooled effect estimate.",
+        sel: '[data-rmd-grade-view="sof"]',
+        autoDo: function (body) {
+          var sof = body.querySelector('[data-rmd-grade-view="sof"]');
+          if (sof) sof.click();
+          return "Opened GRADE Summary of Findings evidence profile.";
         }
       },
       thesis: {
@@ -1176,8 +1412,48 @@
         why: "ResearchMD keeps thesis figures anchored to exact page numbers so zero hallucinations enter your paper.",
         sel: '#rmdThesisFile',
         autoDo: function () {
-          if (SMD.navigate) SMD.navigate("manuscript", {});
-          return "Loaded structured thesis data and jumped cleanly into your draft manuscript.";
+          var thAll = readJson("smd_rmd_thesis_v1", {});
+          thAll[proj.id] = {
+            filename: "MD_Ophthalmology_Thesis_Diabetic_Retinopathy.pdf",
+            paperType: "obs",
+            journal: { id: "ijmr", name: "Indian Journal of Medical Research", wordLimit: 3500, abstractFormat: "Structured abstract", referenceStyle: "vancouver" },
+            pages: [
+              { n: 1, text: "Chapter 1 Introduction. Prevalence of diabetic retinopathy was assessed across 120 adults with type 2 diabetes. Mean age was 54.2 years.", words: [{ t: "Prevalence", x: 20, y: 20 }, { t: "120", x: 80, y: 20 }, { t: "54.2", x: 120, y: 20 }] },
+              { n: 2, text: "Table 7. Logistic regression predictors: retinopathy prevalence 31.7% (38/120), mean HbA1c 8.4%, diabetes duration OR 1.42.", words: [{ t: "Table 7", x: 20, y: 20 }, { t: "31.7%", x: 80, y: 20 }, { t: "8.4%", x: 120, y: 20 }] }
+            ],
+            tables: [
+              { id: "t7", title: "Table 7: Predictors of Diabetic Retinopathy (n = 120)", page: 2, selected: true }
+            ],
+            references: [
+              { citation: "Colditz GA et al. Efficacy of BCG / Observational Methods. JAMA 1994.", doi: "10.1001/jama.1994.03510370074034", pmid: "8309034" }
+            ],
+            draft: { sections: ex.manuscriptSections }
+          };
+          writeJson("smd_rmd_thesis_v1", thAll);
+          if (SMD.refreshScreen) SMD.refreshScreen();
+          return "Loaded structured sample MD thesis (2 pages, Table 7, verified citations) onto your device.";
+        }
+      },
+      "thesis-type": {
+        ask: "Select the matching journal paper type (e.g. Observational study -> STROBE), or click Enter & Show Me.",
+        why: "Matching paper type ensures the correct reporting checklist (STROBE/CONSORT/CARE) is applied.",
+        sel: '[data-rmd-type="obs"], [data-rmd-thesis-next="thesis-journal"]',
+        autoDo: function (body) {
+          var b = body.querySelector('[data-rmd-type="obs"]');
+          if (b) b.click();
+          var nx = body.querySelector('[data-rmd-thesis-next]');
+          if (nx) setTimeout(function () { nx.click(); }, 60);
+          return "Selected Observational Article (STROBE) paper structure.";
+        }
+      },
+      "thesis-journal": {
+        ask: "Pick a target journal below to apply its word limits and Vancouver/APA citation format, or click Enter & Show Me.",
+        why: "Sizing your draft to journal limits upfront prevents desk rejections.",
+        sel: '[data-rmd-journal], [data-rmd-thesis-next="thesis-draft"]',
+        autoDo: function (body) {
+          var b = body.querySelector('[data-rmd-journal="default"]');
+          if (b) b.click();
+          return "Applied journal word limit (3,000 words) and structured abstract rules.";
         }
       },
       manuscript: {
@@ -1365,6 +1641,33 @@
     var defChk = wrap.querySelector('[data-rmd-tut="default"]');
     if (defChk) {
       defChk.onchange = function () { setTutorialDefault(key, !!this.checked); };
+    }
+
+    /* Real-time student self-action listener: celebrates when student interacts manually */
+    var bodyEl = rootEl.querySelector("#rmdScreenBody");
+    if (bodyEl && !bodyEl._rmdTutBound) {
+      bodyEl._rmdTutBound = true;
+      var notifyManual = function () {
+        var curP = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
+        if (!curP || !curP.tutorial || coachMsg) return;
+        coachMsg = "Great start! Keep entering details or click Next step when ready.";
+        var barMsg = rootEl.querySelector("#rmdTutBar .rmd-tut-why");
+        if (barMsg && !rootEl.querySelector("#rmdTutBar .rmd-banner-info")) {
+          var note = D.createElement("div");
+          note.className = "rmd-banner rmd-banner-info";
+          note.style.margin = "6px 0";
+          note.setAttribute("role", "status");
+          note.textContent = coachMsg;
+          barMsg.parentNode.insertBefore(note, barMsg.nextSibling);
+        }
+      };
+      bodyEl.addEventListener("change", notifyManual);
+      bodyEl.addEventListener("click", function (ev) {
+        var t = ev.target;
+        if (t && t.closest && t.closest("button[data-rmd], button[data-rmd-cf], button[data-rmd-nv], button[data-rmd-mc], button[data-rmd-vote]")) {
+          notifyManual();
+        }
+      });
     }
   }
 
