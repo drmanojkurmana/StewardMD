@@ -16,7 +16,14 @@ import {
   requireContactEmail, politeUserAgent,
 } from "./_http.js";
 
-const SEARCH_URL = "https://www.europepmc.org/webservices/rest/search";
+const SEARCH_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest/search";
+
+function resultListOf(body) {
+  const rl = body && body.resultList;
+  if (Array.isArray(rl)) return rl;
+  if (rl && Array.isArray(rl.result)) return rl.result;
+  return [];
+}
 const PAGE_SIZE = 1000;
 const FETCH_BATCH = 50;
 const BUCKET = createBucket(10);
@@ -97,7 +104,7 @@ export async function search(query, filters = {}, dateTo = null, opts = {}) {
       totalCount = parseInt(body.hitCount, 10) || 0;
       queryEcho = String(body.query || "");
     }
-    const list = body.resultList || [];
+    const list = resultListOf(body);
     for (const r of list) ids.push(String(r.source) + ":" + String(r.id));
     const next = body.nextCursorMark;
     if (ids.length >= totalCount) break;
@@ -126,7 +133,7 @@ export async function fetchRecords(ids, opts = {}) {
     p.set("format", "json");
     p.set("pageSize", String(PAGE_SIZE));
     const body = await readJson(await fetchWithRetry(SEARCH_URL + "?" + p.toString(), transport(o)));
-    for (const r of body.resultList || []) out.push(r);
+    for (const r of resultListOf(body)) out.push(r);
   }
   return out;
 }

@@ -74,11 +74,17 @@
 
   function p2() { return SMD.p2 || {}; }
 
+  function apiPidFor(project) {
+    return (project && project.serverId) || (project && project.id) || st.projectId;
+  }
+
   function load(container, cursor) {
     var mySeq = ++seq;
     st.loading = true;
     st.error = null;
-    var path = "/v1/projects/" + encodeURIComponent(st.projectId) + "/searches?limit=20";
+    var store = SMD.store;
+    var proj = (store && store.getActiveProject) ? store.getActiveProject() : null;
+    var path = "/v1/projects/" + encodeURIComponent(apiPidFor(proj)) + "/searches?limit=20";
     if (cursor) path += "&cursor=" + encodeURIComponent(cursor);
     SMD.api.request("GET", path).then(function (data) {
       if (mySeq !== seq) return;
@@ -235,8 +241,13 @@
     h.push('</div>');
     h.push('<div class="rmd-field"><label for="rmd_search_type">Study Type Filter (optional)</label>');
     h.push('<input type="text" id="rmd_search_type" maxlength="120" value="' + esc(st.studyType) + '" placeholder="e.g. randomized controlled trial…" autocomplete="off"></div>');
+    if (st.database === "semantic_scholar") {
+      h.push('<div class="rmd-banner rmd-banner-warn" role="status"><strong>Semantic Scholar is not available yet.</strong><span class="rmd-banner-sub">Select PubMed, Europe PMC, or Crossref above to run a live search.</span></div>');
+    }
     if (canRun) {
-      h.push('<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-block" data-rmd="search-run"' + (st.busy ? " disabled" : "") + '>' + (st.busy ? "Searching " + esc(db.label) + "…" : "Search " + esc(db.label)) + '</button>');
+      var sDisabled = st.busy || st.database === "semantic_scholar";
+      h.push('<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-block" data-rmd="search-run"' + (sDisabled ? " disabled" : "") + '>' + (st.busy ? "Searching " + esc(db.label) + "…" : "Search " + esc(db.label)) + '</button>');
+      h.push('<span class="rmd-field-hint">Tip: Narrow broad queries (e.g. add trial or a date range) if PubMed exceeds daytime limits, or search Europe PMC.</span>');
       if (st.busy) h.push('<p class="rmd-muted" aria-live="polite">The connector pages through every result. Large searches can take several minutes.</p>');
     } else {
       h.push('<p class="rmd-muted">Only owner, editor or analyst can run searches.</p>');
@@ -339,16 +350,29 @@
       return;
     }
     var filters = {};
-    if (st.language) filters.language = st.language;
-    if (st.studyType.trim()) filters.studyType = st.studyType.trim();
-    var body = { database: st.database, query: query, filters: filters };
+    var effectiveQuery = query;
+    if (st.language === "en") {
+      if (st.database === "pubmed") filters.languages = ["english"];
+      else if (st.database === "europe_pmc") filters.languages = ["eng"];
+    }
+    var cleanType = st.studyType.replace(/[\[\]]+/g, " ").trim();
+    if (cleanType) {
+      if (st.database === "pubmed") {
+        filters.publicationTypes = [cleanType];
+      } else if (st.database === "crossref" && /^[a-z0-9-]+$/.test(cleanType)) {
+        filters.type = cleanType;
+      } else {
+        effectiveQuery = "(" + query + ") AND (" + cleanType + ")";
+      }
+    }
+    var body = { database: st.database, query: effectiveQuery, filters: filters };
     if (st.dateTo) body.dateTo = st.dateTo;
     st.busy = true;
     st.runError = null;
     st.announce = "";
     render(container);
     var mySeq = ++seq;
-    SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(project.id) + "/searches", body).then(function (data) {
+    SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPidFor(project)) + "/searches", body).then(function (data) {
       if (mySeq !== seq) return;
       st.busy = false;
       var run = data.searchRun;
@@ -372,11 +396,12 @@
     var mySeq = ++seq;
     var form = new FormData();
     form.append("file", importFile, st.importFileName || "references." + st.importFormat);
-    SMD.api.upload("/v1/projects/" + encodeURIComponent(project.id) + "/import-uploads", form).then(function (up) {
+    var apiId = apiPidFor(project);
+    SMD.api.upload("/v1/projects/" + encodeURIComponent(apiId) + "/import-uploads", form).then(function (up) {
       if (mySeq !== seq) return;
       var key = up && (up.storageKey || up.key);
       if (!key) throw { message: "Upload did not return a storage key.", code: "upload_failed" };
-      return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(project.id) + "/imports", {
+      return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiId) + "/imports", {
         format: st.importFormat,
         storageKey: key
       });
@@ -403,7 +428,7 @@
     st.dedupResult = null;
     render(container);
     var mySeq = ++seq;
-    SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(project.id) + "/dedup:run", { algorithm: "deterministic-v1" }).then(function (data) {
+    SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPidFor(project)) + "/dedup:run", { algorithm: "deterministic-v1" }).then(function (data) {
       if (mySeq !== seq) return;
       st.dedupBusy = false;
       st.dedupResult = data.dedupRun;
@@ -449,7 +474,7 @@
 
     if (st.ai) {
       SMD.ai.bind(container, st.ai, {
-        pid: project.id, task: "search_query", label: "search query", cost: 2,
+        pid: apiPidFor(project), task: "search_query", label: "search query", cost: 2,
         input: function () {
           return {
             researchQuestion: project.researchQuestion || "",

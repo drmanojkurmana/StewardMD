@@ -1156,8 +1156,10 @@ export async function aiDraft(ctx, projectId, body) {
     const pico = bits.protocol.pico || {};
     system = "You write a PubMed search and a Europe PMC variant. Return ONLY JSON {pubmed, europePmc}. " +
       "The PubMed query must have balanced round and square brackets and only PubMed field tags such as [tiab], [mh], [mesh], [au], [pt], [ti], [tw]. " +
-      "Use MeSH (medical subject headings) and keywords.";
-    prompt = "Population (who was studied): " + (pico.population || project.research_question || project.title || "") +
+      "Use MeSH (medical subject headings) and keywords. Keep the query focused with study-design terms when the study type is known (for example trials or cohorts) so it avoids returning tens of thousands of unrelated hits.";
+    prompt = "Title: " + (project.title || "") +
+      "\nStudy design: " + (project.study_type || "") +
+      "\nPopulation (who was studied): " + (pico.population || project.research_question || project.title || "") +
       "\nIntervention: " + (pico.intervention || "") +
       "\nComparison: " + (pico.comparison || "") +
       "\nOutcome: " + ((bits.protocol.outcomes && bits.protocol.outcomes.primary) || pico.outcome || "");

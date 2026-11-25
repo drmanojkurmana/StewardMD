@@ -111,7 +111,7 @@ globalThis.fetch = async (url) => {
     const id = (u.match(/PMC\d+/) || [""])[0];
     return textRes(net.xml.get(id) || "<article></article>");
   }
-  if (u.includes("europepmc.org/webservices/rest/search")) {
+  if (u.includes("ebi.ac.uk/europepmc/webservices/rest/search")) {
     const q = parsed.searchParams.get("query") || "";
     if (q.includes("EXT_ID:") || q.includes("DOI:")) {
       const m = q.match(/EXT_ID:(\d+)/);
