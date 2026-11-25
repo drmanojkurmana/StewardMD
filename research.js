@@ -957,10 +957,14 @@
       h.push('      <span>Back</span>');
       h.push('    </button>');
     } else {
+      var brandProj = store ? store.getActiveProject() : null;
+      var brandTag = (currentScreen !== "projects" && currentScreen !== "start" && brandProj && brandProj.studyType)
+        ? brandProj.studyType
+        : "Research Workspace";
       h.push('    <div class="rmd-shell-brand">');
       h.push('      <svg class="rmd-logo" viewBox="0 0 470 589" aria-hidden="true" focusable="false"><path class="rmd-logo-a" d="M0 0h110v589H0z"/><path class="rmd-logo-b" d="M135 0h122a175 175 0 0 1 0 350H135v-85h122a90 90 0 0 0 0-180H135z"/><path class="rmd-logo-a" d="M135 372h60l140 217h-60z"/><path class="rmd-logo-b" d="M250 372h80l140 217h-80z"/></svg>');
       h.push('      <strong>Research<b>MD</b></strong>');
-      h.push('      <span>Meta-Analysis</span>');
+      h.push('      <span>' + esc(brandTag) + '</span>');
       h.push('    </div>');
     }
     h.push('  </div>');
@@ -1309,6 +1313,27 @@
       eg: "Blocks of 4 or 6, two arms, one list per centre.",
       gloss: "New words: randomise (assign each patient to a treatment by chance, not by choice).",
       action: { label: "Next: master chart", fallback: "masterchart" }
+    },
+    consort: {
+      name: "CONSORT flow diagram",
+      do: "Record how many participants were assessed, randomised, followed up and analysed in your trial.",
+      eg: "120 assessed, 100 randomised (50 intervention, 50 control).",
+      gloss: "New words: CONSORT (the standard reporting flow diagram for randomised controlled trials).",
+      action: { label: "Next: master chart", fallback: "masterchart" }
+    },
+    backup: {
+      name: "Back up your data",
+      do: "Export an encrypted backup file or restore an earlier backup so your study records stay safe.",
+      eg: "Download a backup JSON file after entering participant records.",
+      gloss: "",
+      action: { label: "Back to projects", fallback: "projects" }
+    },
+    ready: {
+      name: "Submit to a journal",
+      do: "Check that your reporting checklist, journal format rules and Word manuscript pass every check before submission.",
+      eg: "Checklist 100% done, abstract under the journal word limit, clean DOCX exported.",
+      gloss: "",
+      action: { label: "Back to projects", fallback: "projects" }
     }
   };
 
@@ -1700,7 +1725,8 @@
       return copyNext(0).then(function () {
         store.migrateLocalProject(p.id, sp, copied);
         if (failed > 0) accountSaveNotice = "Saved your project. " + failed + " studies could not be copied; add them again from the Studies screen.";
-        navigate("studies", {});
+        var migrated = store.getActiveProject ? store.getActiveProject() : p;
+        navigate(journeyFor(migrated)[0] || "studies", {});
       });
     }).catch(function (err) {
       if (body) body.innerHTML = '<div class="rmd-p2-screen">' + errHtml(err) + '</div>';
@@ -1915,8 +1941,18 @@
           var chk = this.getAttribute("data-rmd-check");
           if (sec === "checklist" || chk === "checklist_completion") {
             navigate("checklist", {});
-          } else if (sec === "prisma" || chk === "tables_figures") {
+          } else if (sec === "prisma") {
             navigate("prisma", {});
+          } else if (chk === "tables_figures") {
+            var activeP = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
+            var sKey = studyKey(activeP);
+            if (sKey === "rct") {
+              navigate("consort", {});
+            } else if (!sKey && ((activeP && activeP.studyType) || "").toLowerCase().indexOf("master") < 0 && ((activeP && activeP.studyType) || "").toLowerCase().indexOf("thesis") < 0) {
+              navigate("prisma", {});
+            } else {
+              navigate("manuscript", {});
+            }
           } else {
             var targetSec = sec || (chk === "abstract_word_count" || chk === "abstract_structure" ? "abstract" : (chk === "run_tokens" ? "results" : "introduction"));
             navigate("manuscript", { sectionId: targetSec });
@@ -1963,6 +1999,8 @@
     }
   }
 
+  var storeUnsub = null;
+
   function open(opts) {
     injectCSS();
     if (SMD.store) SMD.store.init();
@@ -1972,11 +2010,13 @@
 
     if (opts && opts.projectId && SMD.store) {
       SMD.store.setActiveProject(opts.projectId);
-      currentScreen = "studies";
+      var actProj = SMD.store.getActiveProject ? SMD.store.getActiveProject() : SMD.store.getProject(opts.projectId);
+      currentScreen = journeyFor(actProj)[0] || "studies";
     } else if (opts && opts.screen) {
       currentScreen = opts.screen;
     } else {
-      currentScreen = (SMD.store && SMD.store.getActiveProject()) ? "studies" : "projects";
+      var curProj = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
+      currentScreen = curProj ? (journeyFor(curProj)[0] || "studies") : "projects";
     }
     navStack = [];
 
@@ -1992,8 +2032,9 @@
     if (D) D.addEventListener("keydown", onKeyDown);
 
     // Subscribe to store updates to keep sync badge and screen updated
-    if (SMD.store) {
-      SMD.store.subscribe(function (state) {
+    if (SMD.store && SMD.store.subscribe) {
+      if (typeof storeUnsub === "function") storeUnsub();
+      storeUnsub = SMD.store.subscribe(function (state) {
         var badge = root ? root.querySelector("#rmdSyncBadge") : null;
         if (badge && badge.parentNode) {
           badge.outerHTML = getSyncBadgeHtml(state.syncState, (state.offlineQueue || []).length);

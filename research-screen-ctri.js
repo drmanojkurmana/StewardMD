@@ -210,29 +210,45 @@
       });
     }
 
+    function copyElText(btn, sel) {
+      var textEl = container.querySelector(sel);
+      var txt = textEl ? (textEl.textContent || "") : "";
+      if (!txt) return;
+      var markCopied = function () {
+        btn.textContent = "Copied!";
+        setTimeout(function () { btn.textContent = "Copy"; }, 2000);
+      };
+      var fallbackCopy = function () {
+        try {
+          var ta = container.ownerDocument.createElement("textarea");
+          ta.value = txt;
+          ta.setAttribute("readonly", "");
+          ta.style.cssText = "position:fixed;left:-9999px;top:0;";
+          container.ownerDocument.body.appendChild(ta);
+          ta.select();
+          container.ownerDocument.execCommand("copy");
+          container.ownerDocument.body.removeChild(ta);
+          markCopied();
+        } catch (e) {}
+      };
+      if (G.navigator && G.navigator.clipboard && G.navigator.clipboard.writeText) {
+        G.navigator.clipboard.writeText(txt).then(markCopied, fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
+    }
+
     var copyRegBtn = container.querySelector('[data-rmd="copy-reg-sentence"]');
     if (copyRegBtn) {
       copyRegBtn.addEventListener("click", function () {
-        var textEl = container.querySelector("#rmd-ctri-reg-text");
-        if (textEl && G.navigator && G.navigator.clipboard && G.navigator.clipboard.writeText) {
-          G.navigator.clipboard.writeText(textEl.textContent).then(function () {
-            copyRegBtn.textContent = "Copied!";
-            setTimeout(function () { copyRegBtn.textContent = "Copy"; }, 2000);
-          });
-        }
+        copyElText(copyRegBtn, "#rmd-ctri-reg-text");
       });
     }
 
     var copyDsBtn = container.querySelector('[data-rmd="copy-ds-sentence"]');
     if (copyDsBtn) {
       copyDsBtn.addEventListener("click", function () {
-        var textEl = container.querySelector("#rmd-ctri-ds-text");
-        if (textEl && G.navigator && G.navigator.clipboard && G.navigator.clipboard.writeText) {
-          G.navigator.clipboard.writeText(textEl.textContent).then(function () {
-            copyDsBtn.textContent = "Copied!";
-            setTimeout(function () { copyDsBtn.textContent = "Copy"; }, 2000);
-          });
-        }
+        copyElText(copyDsBtn, "#rmd-ctri-ds-text");
       });
     }
   }

@@ -424,9 +424,10 @@ try {
   })()`);
   await click('#rmdCardConsent [data-rmd-ai="ask"]');
   ok(await until(`(()=>{
+    const form = document.querySelector('#rmdCardConsent .rmd-consent-form');
     const eng = document.getElementById('rmd_eng_title');
     const trans = document.getElementById('rmd_trans_title');
-    return !!eng && !!trans;
+    return !!form && form.style.display !== 'none' && !!eng && !!trans;
   })()`, 5000), 'bilingual consent rendered for Telugu');
   ok(/Information for participants/.test(await text('#rmd_eng_title')), 'English version title rendered');
   ok(/పాల్గొనేవారి సమాచార పత్రం/.test(await ev(`document.getElementById('rmd_trans_title').value`)), 'Telugu version title rendered');

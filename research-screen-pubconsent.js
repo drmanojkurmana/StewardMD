@@ -98,20 +98,30 @@
       if (cb) cb(consentTemplatesCache);
       return;
     }
+    var finish = function (data) {
+      if (data && typeof data === "object") consentTemplatesCache = data;
+      if (cb) cb(consentTemplatesCache);
+    };
+    if (G.SMD_CONTENT && typeof G.SMD_CONTENT.fetchJSON === "function") {
+      G.SMD_CONTENT.fetchJSON("data/research-consent-templates.json")
+        .then(finish)
+        .catch(function () {
+          if (typeof fetch !== "function") { if (cb) cb(null); return; }
+          fetch("/data/research-consent-templates.json")
+            .then(function (res) { return res.json(); })
+            .then(finish)
+            .catch(function () { if (cb) cb(null); });
+        });
+      return;
+    }
     if (typeof fetch === "function") {
       fetch("/data/research-consent-templates.json")
         .then(function (res) { return res.json(); })
-        .then(function (data) {
-          consentTemplatesCache = data;
-          if (cb) cb(consentTemplatesCache);
-        })
+        .then(finish)
         .catch(function () {
           fetch("data/research-consent-templates.json")
             .then(function (r2) { return r2.json(); })
-            .then(function (d2) {
-              consentTemplatesCache = d2;
-              if (cb) cb(consentTemplatesCache);
-            })
+            .then(finish)
             .catch(function () {
               if (cb) cb(null);
             });
@@ -617,26 +627,29 @@
         if (statusEl) statusEl.innerHTML = '<span style="color:#42CDB5;">Drafting consent with MaiK...</span>';
         genBtn.disabled = true;
 
-        var token = (SMD.auth && SMD.auth.getToken) ? SMD.auth.getToken() : null;
-        var headers = { "Content-Type": "application/json" };
-        if (token) headers.Authorization = "Bearer " + token;
-
-        fetch("/api/research/v1/projects/" + encodeURIComponent(pid) + "/ai-draft", {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify({
-            task: "publication_consent",
-            input: {
-              language: langName,
-              includesImages: hasImages,
-              journalName: journal
-            }
-          })
-        }).then(function (res) {
-          return res.json().then(function (data) {
-            return { status: res.status, data: data };
+        var body = {
+          task: "publication_consent",
+          input: {
+            language: langName,
+            includesImages: hasImages,
+            journalName: journal
+          }
+        };
+        var apiPid = (proj && proj.serverId) || pid;
+        var reqPromise;
+        if (SMD.api && typeof SMD.api.request === "function") {
+          reqPromise = SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPid) + "/ai-draft", body)
+            .then(function (data) { return { status: 200, data: data }; });
+        } else {
+          reqPromise = fetch("/api/research/v1/projects/" + encodeURIComponent(apiPid) + "/ai-draft", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+          }).then(function (res) {
+            return res.json().then(function (data) { return { status: res.status, data: data }; });
           });
-        }).then(function (resp) {
+        }
+        reqPromise.then(function (resp) {
           genBtn.disabled = false;
           if (resp.status >= 200 && resp.status < 300 && resp.data && resp.data.draft) {
             var draft = resp.data.draft;
@@ -712,14 +725,27 @@
         var sName = saved.languageName || (saved.language ? langNameFor(saved.language) : "English");
         var sCode = langCodeFor(sName);
         var textToCopy = (sCode !== "en" && sName !== "English" && saved.local) ? saved.local : (saved.english || "");
+        var markCopied = function () {
+          copyBtn.textContent = "Copied!";
+          setTimeout(function () { copyBtn.textContent = "Copy"; }, 2000);
+        };
+        var fallbackCopy = function () {
+          try {
+            var ta = D.createElement("textarea");
+            ta.value = textToCopy;
+            ta.setAttribute("readonly", "");
+            ta.style.cssText = "position:fixed;left:-9999px;top:0;";
+            D.body.appendChild(ta);
+            ta.select();
+            D.execCommand("copy");
+            D.body.removeChild(ta);
+            markCopied();
+          } catch (e) {}
+        };
         if (G.navigator && G.navigator.clipboard && G.navigator.clipboard.writeText) {
-          G.navigator.clipboard.writeText(textToCopy).then(function () {
-            copyBtn.textContent = "Copied!";
-            setTimeout(function () { copyBtn.textContent = "Copy"; }, 2000);
-          }).catch(function () {
-            copyBtn.textContent = "Copied!";
-            setTimeout(function () { copyBtn.textContent = "Copy"; }, 2000);
-          });
+          G.navigator.clipboard.writeText(textToCopy).then(markCopied, fallbackCopy);
+        } else {
+          fallbackCopy();
         }
       });
     }
