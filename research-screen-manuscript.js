@@ -483,7 +483,7 @@
 
       var prep = (G.RMDPhi && G.RMDPhi.prepareCaseText)
         ? G.RMDPhi.prepareCaseText(casefile, {})
-        : { text: JSON.stringify(casefile), blocked: false, findings: [] };
+        : { text: "", blocked: true, findings: ["The privacy check did not load. Close and reopen the app, then try again."] }; // never send an unchecked case file
 
       showDraftPreviewModal(container, pid, prep.text, prep.findings, prep.blocked);
     }).catch(function () {
