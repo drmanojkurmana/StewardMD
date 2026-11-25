@@ -361,7 +361,7 @@ try {
   await call('Page.navigate', { url: `http://localhost:${PORT}/?research=1` });
 
   ok(await until('!!window.SMD_RESEARCH && !!SMD_RESEARCH.screens && !!SMD_RESEARCH.screens.manuscript', 30000), 'app loaded with manuscript screen registered');
-  ok(await ev(`!!document.querySelector('script[src*="research-screen-manuscript.js?v=rmd8"]')`), 'index.html carries research-screen-manuscript.js script tag with ?v=rmd8');
+  ok(await ev(`!!document.querySelector('script[src*="research-screen-manuscript.js?v=ra2"]')`), 'index.html carries research-screen-manuscript.js script tag with ?v=ra2');
 
   // Seed: server-backed project (practice gate skips it) + one saved local run.
   await ev(`(function(){var s=JSON.parse(localStorage.getItem('smd_research_state_v1'));s.projects[0].serverId=s.projects[0].id;s.projects[0].practice=false;s.runs=s.runs||{};s.runs[${JSON.stringify(PID)}]=[${JSON.stringify(LOCAL_RUN)}];localStorage.setItem('smd_research_state_v1',JSON.stringify(s));return 1})()`);

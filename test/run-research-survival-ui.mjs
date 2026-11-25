@@ -1,11 +1,12 @@
 // Real-browser headless test: ResearchMD "Time to event (survival analysis)" card
-// on the master chart, for a cohort project. The survival engine (kaplanMeier,
-// logRank, cox) is a stub until it merges, so this runner mocks a fixed engine
-// result to check the screen wiring, then restores the stub to check the calm
-// "not available yet" path. Asserts the KM SVG with a number-at-risk table,
-// median survival (and "not reached"), the log-rank line, the Cox table with a
-// separation row, the proportional-hazards reminder, the results paragraph, and
-// the privacy guarantee that no request body carries a patient row.
+// on the master chart, for a cohort project. Sections 3 and 4 mock a fixed engine
+// result to check the screen wiring (median, "not reached", log-rank, Cox).
+// Section 5 restores the real engine and checks that the sample chart draws a
+// curve. Frozen R numbers stay in the statistics unit tests, not on this chart.
+// Asserts the KM SVG with a number-at-risk table, median survival (and
+// "not reached"), the log-rank line, the Cox table with a separation row, the
+// proportional-hazards reminder, the results paragraph, and the privacy
+// guarantee that no request body carries a patient row.
 // Viewports 390x844 and 1024x1366.
 //   node test/run-research-survival-ui.mjs   (CHROME=/path/to/chrome to override)
 import { spawn } from 'node:child_process';
@@ -274,17 +275,19 @@ try {
   ok(/No one in group Drug B had the event, so median survival is not reached\./.test(await text('.rmd-mc-screen')), 'engine warning shown in the calm banner');
   await shot('survival-phone-390-not-reached');
 
-  // 5. Stub engine (ok:false): calm message, no numbers, no curve.
+  // 5. Real engine restored on the sample chart. Do not pin its numbers.
   await ev(`(()=>{const S=window.SMD_RESEARCH_STATS;S.kaplanMeier=window.__svOrig.km;S.logRank=window.__svOrig.lr;S.cox=window.__svOrig.cox;return 1})()`);
   await click('[data-rmd-mc="ask-another"]');
   await until(`!!document.querySelector('[data-rmd-mc-choice="survival"]')`, 3000);
   await click('[data-rmd-mc-choice="survival"]');
   await until(`!!document.querySelector('#rmdMcTime')`, 3000);
   await click('[data-rmd-mc="run"]');
-  ok(await until(`/This analysis is not available yet\\. No numbers are shown\\./.test(document.querySelector('.rmd-mc-result').innerText)`, 8000), 'stub engine shows the calm not-available message');
-  ok(await ev(`!document.querySelector('.rmd-mc-km') && !document.querySelector('.rmd-mc-atrisk')`), 'no curve or number-at-risk table when the engine is not built');
-  ok(await ev(`!document.querySelector('.rmd-mc-sentence')`), 'no results paragraph when the engine is not built');
-  await shot('survival-phone-390-stub');
+  ok(await until(`!!document.querySelector('.rmd-mc-km')`, 8000), 'real engine draws a Kaplan-Meier curve on the sample chart');
+  const realText = await text('.rmd-mc-result');
+  ok(!/This analysis is not available yet\. No numbers are shown\./.test(realText), 'real engine does not show the not-available banner');
+  ok(await ev(`!!document.querySelector('.rmd-mc-km') && !!document.querySelector('.rmd-mc-atrisk')`), 'curve and number-at-risk table present');
+  ok(await ev(`!!document.querySelector('.rmd-mc-sentence') || !!document.querySelector('.rmd-banner-warn') || /Log-rank test/.test((document.querySelector('.rmd-mc-result')||{}).innerText||'')`), 'a results sentence, a log-rank line, or an engine warning is present');
+  await shot('survival-phone-390-real');
 
   // 6. iPad layout, then privacy + responsive + dash + page-error sweeps.
   await viewport(1024, 1366, false);

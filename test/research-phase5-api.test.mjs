@@ -262,7 +262,7 @@ test("checklists: list, alias, 404, snapshot from real rows, manual round trip",
   const list = await call(env, "GET", "v1/checklists", "tok-alice");
   assert.equal(list.http, 200, JSON.stringify(list));
   const ids = list.checklists.map((c) => c.id).sort();
-  assert.deepEqual(ids, ["care", "consort2010", "prisma2020", "spirit", "stard2015", "strobe", "tripod"]);
+  assert.deepEqual(ids, ["care", "consort2010", "consort2025", "prisma2020", "spirit", "stard2015", "strobe", "tripod"]);
   for (const row of list.checklists) {
     assert.equal(typeof row.name, "string");
     assert.ok(row.version);
@@ -272,7 +272,7 @@ test("checklists: list, alias, 404, snapshot from real rows, manual round trip",
 
   const alias = await call(env, "GET", "v1/checklists/consort", "tok-eve");
   assert.equal(alias.http, 200);
-  assert.equal(alias.checklist.id, "consort2010");
+  assert.equal(alias.checklist.id, "consort2025");
   assert.ok(Array.isArray(alias.checklist.sections) || Array.isArray(alias.checklist.items) || alias.checklist.name);
   const full = await call(env, "GET", "v1/checklists/consort2010", "tok-alice");
   assert.equal(full.checklist.id, "consort2010");
@@ -345,7 +345,7 @@ test("checklists: list, alias, 404, snapshot from real rows, manual round trip",
     { num: "1a", text: "Reported in the title." });
   assert.equal(put.http, 200, JSON.stringify(put));
   assert.deepEqual(put.entries, { "1a": "Reported in the title." });
-  const viaFile = await call(env, "GET", "v1/projects/" + pid + "/checklist-manual/consort2010", "tok-alice");
+  const viaFile = await call(env, "GET", "v1/projects/" + pid + "/checklist-manual/consort2025", "tok-alice");
   assert.deepEqual(viaFile.entries, { "1a": "Reported in the title." });
   const viaAlias = await call(env, "GET", "v1/projects/" + pid + "/checklist-manual/consort", "tok-bob");
   assert.deepEqual(viaAlias.entries, put.entries);
