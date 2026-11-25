@@ -54,10 +54,23 @@
    * so in the sheet header so the answer is never labelled with sources it did not read.
    */
   var KEY_RAG_LINK = "smd_maik_rag_linked";
+  // Offline book extras (2026-11-21). Read once by kb/ai/maik-lite-kb-store.js and
+  // kb/ai/maik-book-vec.js when the app starts, so a change applies on the next app start.
+  var KEY_KB_ONCO = "smd_maik_kb_onco";      // "1" = book with the cancer notes (45 MB download)
+  var KEY_BOOK_VEC = "smd_maik_book_vec";    // "1" = meaning search when the router names no disease
 
   function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function lrem(k) { try { localStorage.removeItem(k); } catch (e) {} }
+
+  // ── Offline book extras (see KEY_KB_ONCO / KEY_BOOK_VEC); absent key = off ──
+  function oncoBookOn() { return lget(KEY_KB_ONCO) === "1"; }
+  function setOncoBook(on) { if (on) lset(KEY_KB_ONCO, "1"); else lrem(KEY_KB_ONCO); return oncoBookOn(); }
+  function bookVecOn() { return lget(KEY_BOOK_VEC) === "1"; }
+  function setBookVec(on) { if (on) lset(KEY_BOOK_VEC, "1"); else lrem(KEY_BOOK_VEC); return bookVecOn(); }
+  function searchPackReady() {
+    try { var E = window.SMD_EMBED_LOCAL; return !!(E && E.packReady && E.packReady()); } catch (e) { return false; }
+  }
 
   // ── RAG link (see KEY_RAG_LINK) ──
   /** Is the Knowledge Base connected to the on-device model? Absent key = connected. */
@@ -145,12 +158,8 @@
   // router (edge-router.js) that runs in it. With Edge off (smd_edge "0") the old name comes back.
   function edgeOn() { return lget("smd_edge") !== "0"; }
   function ragLabel() { return edgeOn() ? "MaiK Edge" : "KB only"; }
-  var EDGE_ENGINE_LABEL = { needle: "Needle", functiongemma: "FunctionGemma", rules: "Rules only" };
-  function edgeEngineLabel() {
-    var v = null;
-    try { var E = window.SMD_EDGE; v = (E && E.engineChoice) ? E.engineChoice() : lget("smd_edge_engine"); } catch (e) {}
-    return EDGE_ENGINE_LABEL[v] || "Needle";
-  }
+  // Edge has no model engine since 2026-11-22 (Needle and FunctionGemma removed): rules only.
+  function edgeEngineLabel() { return ""; }
   var RAG_SUB_EDGE = "On-device. Opens the right tool, calculator, drug or page instantly, and answers from the StewardMD Knowledge Base. Free, works offline. No AI writing.";
   var RAG_SUB_KB = "StewardMD knowledge base, cited. No tokens, works offline.";
 
@@ -844,39 +853,8 @@
       opt("local", "MaiK on this phone", pill("Free", "#dcfce7", "#166534") + " " + pill("Beta", "#e0e7ff", "#3730a3"),
           localDesc, false, localDisabled) +
       '</div>' +
-      edgeEngineHTML(opt) +
       (rt ? capsHTML() + modelRowHTML() : "") +
       '</div>';
-  }
-
-  /* EDGE ENGINE (owner, 2026-10-04): which on-device model StewardMD Edge uses to pick a tool
-   * (edge-router.js, setting smd_edge_engine). Same row style as "Who answers"; data-me-edge rows. */
-  function edgeEngineHTML(opt) {
-    var E = window.SMD_EDGE, M = window.SMD_MAIK_MODELS;
-    if (!E || !E.engineChoice || !E.enabled || !E.enabled()) return "";
-    var cur = E.engineChoice(), C = window.Capacitor, P = C && C.Plugins;
-    var native = !!(C && C.isNativePlatform && C.isNativePlatform());
-    var fid = (M && M.EDGE_FG_ID) || "edge-functiongemma";
-    var fgHave = !!(M && M.installedCached && M.installedCached(fid));
-    var st = (M && M.state) ? M.state(fid) : { frac: 0 };
-    var on = pill("On this phone", "#dcfce7", "#166534"), off = pill("Not on this phone", "#e2e8f0", "#334155");
-    var fgPill = fgHave ? on : st.downloading ? pill("Downloading " + (st.frac * 100).toFixed(0) + "%", "#fef3c7", "#92400e") : off;
-    function row(v, label, badge, desc, first) { return opt(v, label, badge, desc, first, false, cur === v, "data-me-edge"); }
-    var size = (M && M.sizeLabel) ? M.sizeLabel(fid) : "290 MB";
-    var dl = (!fgHave && native && P && P.Llama && M && M.ensure)
-      ? '<div class="me-edgedl" style="display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:0 2px">' +
-          '<span style="flex:1;min-width:0;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' +
-            '<span data-me-status="' + fid + '" aria-live="polite">' + (st.downloading ? (st.frac * 100).toFixed(1) + "% of " + size : "FunctionGemma is not on this phone · " + size) + '</span>' +
-            '<span data-me-bar="' + fid + '" style="display:block"></span></span>' +
-          '<button class="smd-nav-btn" data-me-edgedl="' + (st.downloading ? "pause" : "download") + '" style="margin:0;min-height:44px">' + (st.downloading ? "Pause" : "Download") + '</button>' +
-        '</div>'
-      : "";
-    return '<div class="smd-nav-lbl" style="margin:14px 0 6px">Edge engine</div>' +
-      '<div role="radiogroup" aria-label="Edge engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-bottom:8px">' +
-        row("needle", "Needle", (native && P && P.Needle) ? on : off, "Small and fast. Declines when unsure.", true) +
-        row("functiongemma", "FunctionGemma", fgPill, "Picks more often, but can pick the wrong tool until trained. Unloads MaiK Lite while it runs.", false) +
-        row("rules", "Rules only", pill("Built in", "#dcfce7", "#166534"), "Exact names only. No model.", false) +
-      '</div>' + dl;
   }
 
   function levelPill(level) {
@@ -934,6 +912,7 @@
           '<div data-me-device style="font:500 11.5px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px">' + esc(devLine) + '</div>' +
         '</div>' +
         ragLinkHTML() +
+        bookExtrasHTML() +
       '</div>';
   }
 
@@ -1292,6 +1271,62 @@
   }
 
   /**
+   * Two more switches for the offline book, the same .smd-nav-row / .smd-nav-sw control as the
+   * Knowledge Base switch above (owner 2026-11-21: "give on button just like knowledge base has").
+   * 1. Cancer notes: the bigger book (13,209 oncology notes). 2. Meaning search: needs switch 1 and
+   * the On-phone search pack, so it is disabled, with the reason, until both are there.
+   * Both are read when the app starts, so each sub-label says the change applies after a restart.
+   */
+  function bookExtrasHTML() {
+    var onc = oncoBookOn(), pack = searchPackReady(), vec = bookVecOn(), canVec = onc && pack;
+    function row(key, on, label, sub, disabled) {
+      return '<div class="smd-nav-row">' +
+          '<div class="smd-nav-rl">' +
+            '<div class="smd-nav-lbl">' + label + '</div>' +
+            '<div class="smd-nav-sub">' + sub + '</div>' +
+          '</div>' +
+          '<button class="smd-nav-sw' + (on ? " on" : "") + '" data-me-book="' + key + '" role="switch" aria-checked="' + on + '"' +
+            (disabled ? ' disabled aria-disabled="true" style="opacity:.45"' : "") +
+            ' aria-label="' + label + '"><span></span></button>' +
+        '</div>';
+    }
+    var vecSub = !onc ? "Turn on cancer knowledge first."
+      : !pack ? "Needs the On-phone search pack (210 MB) from the model list above."
+      : vec ? "When MaiK cannot tell which disease you mean, it also finds passages that mean the same thing. One 43 MB download. Applies after you restart the app."
+      : "Off: MaiK finds passages by their words only. On: one 43 MB download, applies after you restart the app.";
+    /* Download lines (owner 2026-11-22: "give buttons for both cancer book and search data downloads").
+     * The book store and the vector module read their switch when the app starts, so until a restart
+     * the line says so instead of offering a download of the wrong file. */
+    function dlLine(kind, label, mb, have, st, needRestart) {
+      var txt = needRestart ? "Restart the app to finish turning this on."
+        : have ? label + " downloaded (" + mb + " MB)."
+        : st && st.downloading ? "Downloading " + label.toLowerCase() + ", " + Math.round((st.frac || 0) * 100) + "%"
+        : st && st.err ? "Download stopped. Tap Download to try again."
+        : label + " is not on this phone, " + mb + " MB.";
+      var btn = (!needRestart && !have && !(st && st.downloading))
+        ? '<button class="smd-nav-btn" data-me-bookdl="' + kind + '" style="margin:0;min-height:44px;flex:0 0 auto">Download</button>' : "";
+      return '<div class="me-bookdl" style="display:flex;align-items:center;gap:12px;margin:0 0 12px;padding:0 16px">' +
+          '<span data-me-bookst="' + kind + '" aria-live="polite" style="flex:1;min-width:0;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' + txt + '</span>' +
+          btn + '</div>';
+    }
+    var KB = window.SMD_MAIK_KB_STORE, BV = window.SMD_MAIK_BOOK_VEC;
+    var bookLine = !onc ? "" : dlLine("book", "Cancer book", 45,
+      !!(KB && KB.installedCached && KB.installedCached()), KB && KB.state ? KB.state() : null,
+      !(KB && KB.NAME === "maik-lite-kb-onco1.jsonl"));
+    var vecLine = !(vec && canVec) ? "" : dlLine("vec", "Search data", 43,
+      !!(BV && BV.downloaded && BV.downloaded()), BV && BV.state ? BV.state() : null,
+      !(KB && KB.NAME === "maik-lite-kb-onco1.jsonl"));
+    return '<div class="me-kb" style="border-top:1px solid var(--line,#e2e8f0);padding:2px 14px">' +
+        row(KEY_KB_ONCO, onc, "Cancer knowledge in the offline book",
+          onc ? "The book includes 13,209 cancer notes: diagnosis, staging, treatment and trials. Applies after you restart the app."
+              : "Off: the standard book. On: adds 13,209 cancer notes, one 45 MB download, applies after you restart the app.", false) +
+        bookLine +
+        row(KEY_BOOK_VEC, vec && canVec, "Search by meaning", vecSub, !canVec) +
+        vecLine +
+      '</div>';
+  }
+
+  /**
    * The optional image-reading add-on for one pack.
    *
    * Shown only when (a) the model can see at all - Apex is text-only and never gets this row - and
@@ -1405,25 +1440,6 @@
         rerender(b, root);
       });
     });
-    root.querySelectorAll("[data-me-edge]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        var E = window.SMD_EDGE;
-        if (E && E.setEngineChoice) E.setEngineChoice(b.getAttribute("data-me-edge"));
-        rerender(b, root);
-      });
-    });
-    root.querySelectorAll("[data-me-edgedl]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        var M = window.SMD_MAIK_MODELS, id = M && M.EDGE_FG_ID;
-        if (!id) return;
-        if (b.getAttribute("data-me-edgedl") === "pause") { if (M.cancel) M.cancel(id); return; }
-        var p = M.ensure(id, null);
-        rerender(b, root);             // flip to Pause at once
-        p.then(function () { toast("FunctionGemma is on this phone."); }, function (e) {
-          if (String((e && e.message) || e) !== "cancelled") toast("Download stopped. Tap Download to resume.");
-        });
-      });
-    });
     root.querySelectorAll("[data-me-pack]").forEach(function (b) {
       b.addEventListener("click", function () {
         var M = window.SMD_MAIK_MODELS;
@@ -1433,6 +1449,39 @@
     });
     // Knowledge Base link. rerender() redraws the row so the label flips Connected/Disconnected and
     // the sub-label swaps with it; setRagLinked() already re-syncs the sheet header disclaimer.
+    // Offline book extras: flip the key, redraw the card (the meaning-search row's state depends on
+    // the cancer-notes row). Turning cancer knowledge off also turns meaning search off: its
+    // vectors belong to that book.
+    // Download buttons for the cancer book and its search data. Progress patches the status text in
+    // place (no full redraw per percent); the card is redrawn once when the download ends.
+    root.querySelectorAll("[data-me-bookdl]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var kind = b.getAttribute("data-me-bookdl"), KB = window.SMD_MAIK_KB_STORE, BV = window.SMD_MAIK_BOOK_VEC;
+        var src = kind === "book" ? KB : BV;
+        if (!src) return;
+        var label = kind === "book" ? "cancer book" : "search data";
+        var stop = src.subscribe ? src.subscribe(function (st) {
+          var el = document.querySelector('[data-me-bookst="' + kind + '"]');
+          if (el && st && st.downloading) el.textContent = "Downloading " + label + ", " + Math.round((st.frac || 0) * 100) + "%";
+        }) : null;
+        b.disabled = true;
+        var run = kind === "book" ? KB.ensure() : BV.load();
+        Promise.resolve(run).then(function () {
+          toast(kind === "book" ? "Cancer book is on this phone." : "Search data is on this phone.");
+        }, function () {
+          toast("Download stopped. Tap Download to try again.");
+        }).then(function () { if (stop) stop(); rerender(b, root); });
+      });
+    });
+    root.querySelectorAll("[data-me-book]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        if (b.disabled) return;
+        var k = b.getAttribute("data-me-book");
+        if (k === KEY_KB_ONCO) { if (!setOncoBook(!oncoBookOn())) setBookVec(false); }
+        else if (k === KEY_BOOK_VEC) setBookVec(!bookVecOn());
+        rerender(b, root);
+      });
+    });
     root.querySelectorAll("[data-me-rag]").forEach(function (b) {
       b.addEventListener("click", function () {
         setRagLinked(!ragLinked());
@@ -1954,6 +2003,8 @@
     discLabel: discLabel, syncDisc: syncDisc, knowSub: knowSub,
     // RAG link: maik-local.js reads ragLinked() in ragEligible() to decide whether to retrieve.
     KEY_RAG_LINK: KEY_RAG_LINK, ragLinked: ragLinked, setRagLinked: setRagLinked, ragLinkHTML: ragLinkHTML,
+    KEY_KB_ONCO: KEY_KB_ONCO, KEY_BOOK_VEC: KEY_BOOK_VEC, oncoBookOn: oncoBookOn, setOncoBook: setOncoBook,
+    bookVecOn: bookVecOn, setBookVec: setBookVec, bookExtrasHTML: bookExtrasHTML,
     warmIfLocal: warmIfLocal,
     // Scheme package lookup and the disease-word spelling fix, shared with the Edge cards in home.js.
     schemeLookup: schemeLookup, schemePrice: schemePrice, fixTerm: fixTerm,

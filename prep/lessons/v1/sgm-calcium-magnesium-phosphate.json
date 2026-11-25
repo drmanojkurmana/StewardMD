@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-calcium-magnesium-phosphate",
+ "subject": "ss-general-medicine",
+ "title": "Calcium, Magnesium and Phosphate Disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Hypercalcaemia** (calcium above 2.6 mmol per litre) causes **stones, bones, groans and psychiatric overtones** from renal, skeletal, gastrointestinal and neuropsychiatric effects. **Hypocalcaemia** (below 2.2 mmol per litre) causes **tetany** (muscle spasm) and **Chvostek sign** (facial tapping twitch). **Hyperphosphataemia** (above 1.5 mmol per litre) follows kidney failure and tumour lysis. **Hypophosphataemia** (below 0.8 mmol per litre) causes rickets and respiratory failure. Magnesium controls parathyroid hormone secretion.",
+   "say": "Hypercalcaemia above two point six causes stones and bones and groans and psychiatric symptoms. Hypocalcaemia below two point two causes muscle spasm and facial twitch on tapping. High phosphate follows kidney failure and tumour breakdown. Low phosphate causes rickets and breathing failure and magnesium controls parathyroid hormone secretion.",
+   "vis": null
+  },
+  {
+   "tx": "**Primary hyperparathyroidism** (parathyroid adenoma) is the commonest hypercalcaemia cause in outpatients. **Malignancy** (parathyroid hormone related protein, osteolysis) dominates in hospitals. **Multiple myeloma** (plasma cell cancer) causes hypercalcaemia with bone pain. **Hypoparathyroidism** (post thyroidectomy complication) causes hypocalcaemia with seizures. **Vitamin D excess** (sarcoid granulomas) and **thiazide diuretics** also raise calcium.",
+   "say": "Parathyroid adenoma is the commonest outpatient cause. Malignancy dominates in hospitals. Plasma cell cancer causes hypercalcaemia with bone pain and post thyroidectomy complication causes low calcium with seizures and granuloma vitamin D and thiazides also raise calcium.",
+   "vis": null
+  },
+  {
+   "tx": "Parathyroid hormone raises **bone resorption** (calcium release), **gut absorption** (via calcitriol) and **renal reabsorption** (tubule retention). **Vitamin D** (calcitriol) increases gut calcium and phosphate. **Magnesium deficiency** (low magnesium) impairs parathyroid secretion and causes refractory hypocalcaemia. **Phosphate depletion** (low phosphate) impairs ATP production in muscle. **Calcium sensing receptor** (mutation) causes familial hypocalciuric hypercalcaemia.",
+   "say": "Parathyroid hormone raises bone resorption and gut absorption and renal retention. Calcitriol increases gut calcium and phosphate. Low magnesium impairs secretion and causes refractory low calcium and low phosphate impairs muscle energy production and sensing receptor mutation causes familial disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "PTH signal"
+     },
+     {
+      "id": "b",
+      "label": "Bone resorption"
+     },
+     {
+      "id": "c",
+      "label": "Gut absorption"
+     },
+     {
+      "id": "d",
+      "label": "Renal retention"
+     },
+     {
+      "id": "e",
+      "label": "Hypercalcaemia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypercalcaemia** presents with polyuria, constipation, depression and bone pain. **Hypocalcaemia** presents with perioral tingling, carpopedal spasm and prolonged QT. **Hyperphosphataemia** presents with itching, calciphylaxis and secondary hyperparathyroidism. **Hypophosphataemia** presents with bone pain, weakness and rickets in children. **Hypomagnesaemia** presents with tremor, seizures and arrhythmia. Elderly patients present subtly with confusion.",
+   "say": "High calcium presents with large urine volumes and constipation and depression and bone pain. Low calcium presents with tingling and hand spasm and prolonged QT. High phosphate presents with itching and skin calcification. Low phosphate presents with bone pain and weakness and low magnesium presents with tremor and seizures.",
+   "vis": null
+  },
+  {
+   "tx": "**Corrected calcium** (albumin adjusted value) corrects for low albumin. **Parathyroid hormone** (intact PTH level) classifies hypercalcaemia as dependent or independent. **Serum protein electrophoresis** (myeloma screen) excludes plasma cell disease. **Chvostek and Trousseau signs** (tetany tests) support hypocalcaemia clinically. **ECG QT interval** (prolonged QT) confirms hypocalcaemia effect. **PTHrP level** (malignancy peptide) confirms humoral hypercalcaemia.",
+   "say": "Albumin adjusted calcium corrects for low albumin. Intact parathyroid level classifies disease. Protein pattern excludes plasma cell disease and tetany tests support low calcium clinically and prolonged QT confirms the effect and malignancy peptide confirms humoral disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Corrected calcium",
+      "Diagnosis",
+      "Albumin adjusted"
+     ],
+     [
+      "Intact PTH",
+      "Classification",
+      "Dependent or independent"
+     ],
+     [
+      "Electrophoresis",
+      "Myeloma screen",
+      "Plasma cell disease"
+     ],
+     [
+      "ECG QT",
+      "Effect test",
+      "Prolonged in hypocalcaemia"
+     ],
+     [
+      "PTHrP level",
+      "Malignancy confirm",
+      "Humoral hypercalcaemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intravenous fluids** (normal saline) are first line for hypercalcaemia with diuresis and mobilisation. **Loop diuretics** (frusemide) enhance excretion after volume repletion. **Bisphosphonates** (zoledronate) suppress osteoclasts for malignancy driven disease. **Calcitonin** (acute bone suppressor) acts within hours for severe disease. **Cinacalcet** (calcium sensing agonist) treats hyperparathyroidism with persistent disease. **Hydrocortisone** (steroid) treats vitamin D intoxication.",
+   "say": "Normal saline fluids are first line with diuresis and mobilisation. Loop diuretics enhance excretion after volume repletion and this is examined in viva examinations for revision. Zoledronate suppresses osteoclasts for malignancy disease and calcitonin acts within hours for severe disease and cinacalcet treats persistent parathyroid disease and steroids treat vitamin D intoxication and this is examined in viva examinations for revision.",
+   "vis": null
+  },
+  {
+   "tx": "**Intravenous calcium gluconate** (1 ampoule) treats symptomatic hypocalcaemia with tetany. **Oral calcium carbonate** (with meals) with **calcitriol** (active vitamin D) treats chronic hypoparathyroidism. **Magnesium sulfate** (repletion) corrects refractory hypocalcaemia. **Phosphate binders** (sevelamer) treat hyperphosphataemia from kidney failure. **Phosphate supplementation** (oral phosphates) treats nutritional rickets and tumour lysis hypophosphataemia.",
+   "say": "Intravenous calcium gluconate treats symptomatic spasm and this is examined in viva examinations for revision. Oral carbonate with calcitriol treats chronic parathyroid failure and this is examined in viva examinations for revision. Magnesium repletion corrects refractory disease and binders treat high phosphate from kidney failure and oral phosphates treat rickets and nutritional deficiency.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypercalcaemia care",
+     "points": [
+      "Saline fluids first",
+      "Furosemide after repletion",
+      "Zoledronate for malignancy",
+      "Calcitonin for severe"
+     ]
+    },
+    "right": {
+     "title": "Hypocalcaemia care",
+     "points": [
+      "Calcium gluconate for tetany",
+      "Calcitriol with carbonate",
+      "Magnesium repletion",
+      "Monitor QT interval"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hypercalcaemic crisis** (calcium above 3.5 mmol per litre) presents with coma and dehydration needing intensive care. **Bisphosphonate induced osteonecrosis** (jaw necrosis) complicates chronic therapy. **Calciphylaxis** (skin calcification) with hyperphosphataemia is rapidly fatal. **Rickets cranio** (rickety skull) with low phosphate needs orthopaedic care. **Parathyroid crisis** (severe hyperparathyroidism) needs urgent parathyroidectomy.",
+   "say": "Calcium crisis above three point five presents with coma and dehydration needing intensive care. Jaw necrosis complicates chronic therapy. Skin calcification with high phosphate is rapidly fatal and rickety skull needs orthopaedic care and parathyroid crisis needs urgent surgery.",
+   "vis": null
+  },
+  {
+   "tx": "**Primary hyperparathyroidism** mortality is driven by cardiovascular disease and stones over decades. Malignancy hypercalcaemia survival depends on cancer control. Hypoparathyroidism survival is good with calcium and calcitriol replacement. Calciphylaxis mortality exceeds 50 percent. Rickets disability resolves with phosphate and vitamin D. Magnesium deficiency worsens all electrolyte mortality.",
+   "say": "Parathyroid disease mortality is driven by heart disease and stones over decades. Malignancy survival depends on cancer control and this is examined in viva examinations for revision. Parathyroid failure survival is good with replacement and skin calcification mortality exceeds fifty percent and rickets disability resolves with replacement and low magnesium worsens electrolyte mortality.",
+   "vis": null
+  },
+  {
+   "tx": "Endocrine Society 2022 hyperparathyroidism guidance stresses surgery for symptomatic disease and cinacalcet for inoperable cases. **Surgery indications** (calcium 1 mg above normal, stones, osteoporosis, eGFR below 60) guide parathyroidectomy. Examination traps include missing malignancy hypercalcaemia, forgetting magnesium in refractory hypocalcaemia, and correcting calcium without albumin adjustment. **Chvostek sign** (facial twitch) is a favourite viva sign.",
+   "say": "Current guidance stresses surgery for symptomatic disease and cinacalcet for inoperable cases and this is examined in viva examinations for revision. Surgery indications guide parathyroidectomy. Traps include missing malignancy disease and forgetting magnesium and omitting albumin adjustment and facial twitch is a favourite viva sign.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers calcium cutoffs, PTH patterns and crisis actions. Stones bones groans overtones and tetany signs are the most asked points in theory and viva examinations. Focused study of prognosis markers aids viva responses. Magnesium below 2.2 mmol per litre worsens tetany.",
+   "say": "This table gathers calcium cutoffs and PTH patterns and crisis actions for revision and this is examined in viva examinations for revision. Stones, bones, groans and overtones and tetany signs are the most asked points. Albumin adjustment is a favourite calculation vignette theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Hypercalcaemia cutoff",
+      "Above 2.6 mmol per litre"
+     ],
+     [
+      "Hypocalcaemia cutoff",
+      "Below 2.2 mmol per litre"
+     ],
+     [
+      "Tetany sign",
+      "Chvostek facial twitch"
+     ],
+     [
+      "Malignancy peptide",
+      "PTHrP humoral"
+     ],
+     [
+      "Crisis fluid",
+      "Normal saline first"
+     ],
+     [
+      "Acute suppressor",
+      "Calcitonin within hours"
+     ],
+     [
+      "Long term",
+      "Zoledronate"
+     ],
+     [
+      "Refractory guide",
+      "Magnesium repletion"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

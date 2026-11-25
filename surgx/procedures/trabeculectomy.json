@@ -1,0 +1,280 @@
+{
+  "id": "trabeculectomy",
+  "title": "Trabeculectomy with mitomycin C",
+  "subtitle": "Guarded filtration surgery with a scleral flap and adjustable sutures",
+  "system": "ophthalmic",
+  "aliases": [
+    "trab",
+    "trabeculectomy with MMC",
+    "glaucoma filtration surgery",
+    "guarded filtration procedure"
+  ],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "nice-ng81",
+      "org": "NICE",
+      "title": "Glaucoma: diagnosis and management (NG81)",
+      "year": 2022,
+      "url": "https://www.nice.org.uk/guidance/ng81",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "egs-2020",
+      "org": "European Glaucoma Society",
+      "title": "Terminology and Guidelines for Glaucoma, 5th edition",
+      "year": 2020,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=European+Glaucoma+Society+Terminology+and+Guidelines+for+Glaucoma+5th+edition",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "khaw-2012",
+      "org": "Khaw PT et al. Dev Ophthalmol 50:1",
+      "title": "Enhanced trabeculectomy: the Moorfields Safer Surgery System",
+      "year": 2012,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Enhanced+trabeculectomy%3A+the+Moorfields+Safer+Surgery+System",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Glaucoma progressing, or predicted to progress, despite maximum tolerated medical and laser treatment.",
+      "Advanced glaucoma at presentation where a low target pressure is needed.",
+      "Intolerance of, or non-adherence to, medical treatment."
+    ],
+    "contraindications": [
+      "Neovascular or uveitic glaucoma with active inflammation (other operations are usually preferred).",
+      "Extensive conjunctival scarring that will not allow a bleb (consider a tube).",
+      "A patient who cannot attend the intensive post-operative follow-up."
+    ],
+    "preparation": [
+      "Record the pressure, visual fields and optic disc; set the target pressure.",
+      "Stop or switch drops that inflame the conjunctiva where possible; treat lid disease.",
+      "Consent: failure, hypotony and maculopathy, choroidal effusion or haemorrhage, cataract, blebitis and late endophthalmitis, the need for needling or more surgery, and the commitment to frequent visits."
+    ],
+    "positioning": [
+      "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    ],
+    "equipment": [
+      "Fine forceps, Vannas scissors, crescent and 15 degree blades, Kelly punch or blade for the sclerostomy, mitomycin C with sponges and a wash, 10-0 nylon for flap and releasable sutures, 8-0 or 10-0 for conjunctiva, corneal traction suture."
+    ],
+    "anatomy": [
+      "The superior limbus, conjunctiva and Tenon's, sclera, the scleral spur, trabecular meshwork and Schlemm's canal, the iris root and the ciliary body behind it.",
+      "Aqueous flows from the anterior chamber, through the sclerostomy, under the scleral flap, into the subconjunctival bleb."
+    ],
+    "criticalSafety": [
+      "Keep mitomycin C away from the conjunctival edge and the cornea, and wash it off thoroughly.",
+      "Titrate flow through the flap before closing: the commonest early problem is a pressure that is too low.",
+      "A watertight conjunctival closure, tested with fluorescein."
+    ],
+    "structuresAtRisk": [
+      "Conjunctiva",
+      "Ciliary body",
+      "Lens",
+      "Choroid (effusion, haemorrhage)"
+    ],
+    "commonErrors": [
+      "Mitomycin C on the conjunctival edge, causing a leaking thin bleb.",
+      "A loosely sutured flap with overdrainage.",
+      "A buttonhole in the conjunctiva."
+    ],
+    "complications": [
+      "Hypotony, shallow chamber, choroidal effusion or suprachoroidal haemorrhage.",
+      "Bleb leak, blebitis and endophthalmitis (early or years later).",
+      "Bleb failure from scarring.",
+      "Cataract."
+    ],
+    "postop": [
+      "Steroid drops frequently and antibiotic drops; stop glaucoma drops in the operated eye.",
+      "Close review in the first weeks: suture removal or release to titrate pressure; needling or antimetabolite injection if the bleb scars.",
+      "Lifelong warning about red, sticky, painful eye (blebitis)."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.trab-step-01", "med.surgx.trab-clip-01"],
+      "emphasis": "Mark the eye; the patient must understand that the frequent early visits are part of the operation."
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.trab-step-02", "med.surgx.trab-clip-02"],
+      "emphasis": "Confirm the eye, the antimetabolite and its concentration, and the time it will be applied."
+    },
+    {
+      "ref": "step.eye.anaesthesia", "media": ["med.surgx.trab-step-03", "med.surgx.trab-clip-03"],
+      "emphasis": "Sub-Tenon or peribulbar is usual; general anaesthesia for those who cannot lie still."
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.trab-step-04", "med.surgx.trab-clip-04"],
+      "emphasis": "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    },
+    {
+      "ref": "step.eye.povidone-iodine", "media": ["med.surgx.trab-step-05", "med.surgx.trab-clip-05"]
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.trab-step-06", "med.surgx.trab-clip-06"]
+    },
+    {
+      "ref": "step.eye.lid-speculum", "media": ["med.surgx.trab-step-07", "med.surgx.trab-clip-07"]
+    },
+    {
+      "ref": "step.trab.traction", "media": ["med.surgx.trab-step-08", "med.surgx.trab-clip-08"]
+    },
+    {
+      "ref": "step.eye.conj-peritomy", "media": ["med.surgx.trab-step-09", "med.surgx.trab-clip-09"],
+      "emphasis": "Fornix-based peritomy at the superior limbus, with a wide posterior Tenon's pocket so the bleb is diffuse."
+    },
+    {
+      "ref": "step.trab.mmc", "media": ["med.surgx.trab-step-10", "med.surgx.trab-clip-10"]
+    },
+    {
+      "ref": "step.trab.flap", "media": ["med.surgx.trab-step-11", "med.surgx.trab-clip-11"]
+    },
+    {
+      "ref": "step.trab.sclerostomy", "media": ["med.surgx.trab-step-12", "med.surgx.trab-clip-12"]
+    },
+    {
+      "ref": "step.trab.titrate", "media": ["med.surgx.trab-step-13", "med.surgx.trab-clip-13"]
+    },
+    {
+      "ref": "step.eye.conj-closure", "media": ["med.surgx.trab-step-14", "med.surgx.trab-clip-14"],
+      "emphasis": "Anchor the conjunctiva to the limbus watertight and check with fluorescein: any leak over a bleb is significant."
+    },
+    {
+      "ref": "step.eye.suprachoroidal-haemorrhage", "media": ["med.surgx.trab-step-15", "med.surgx.trab-clip-15"]
+    },
+    {
+      "ref": "step.eye.wound-check", "media": ["med.surgx.trab-step-16", "med.surgx.trab-clip-16"],
+      "emphasis": "Reform the chamber through the paracentesis; check the bleb forms and the chamber stays deep."
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.trab-step-17", "med.surgx.trab-clip-17"]
+    },
+    {
+      "ref": "step.eye.shield-postop", "media": ["med.surgx.trab-step-18", "med.surgx.trab-clip-18"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.trab-step-19", "med.surgx.trab-clip-19"]
+    }
+  ],
+  "steps_local": {
+    "step.trab.traction": {
+      "id": "step.trab.traction",
+      "kind": "prep",
+      "title": "Corneal traction suture",
+      "why": "Rotating the eye down exposes the superior limbus where the bleb will lie, under the upper lid. A corneal suture does this without the risk of a superior rectus bridle haematoma.",
+      "how": [
+        "Place a 7-0 or 8-0 partial-thickness suture in the superior peripheral cornea.",
+        "Clip it to the drape so the eye looks down and the superior conjunctiva is exposed."
+      ],
+      "structuresAtRisk": [
+        "Cornea (full-thickness pass)"
+      ],
+      "pitfalls": [
+        "A full-thickness corneal pass that leaks.",
+        "Excess traction distorting the anatomy."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.trab.mmc": {
+      "id": "step.trab.mmc",
+      "kind": "prep",
+      "critical": true,
+      "title": "Applying mitomycin C",
+      "why": "The antimetabolite stops the bleb scarring shut, which is the main reason trabeculectomies fail. It also thins the tissue, so where and how long it touches decides whether the bleb is healthy or leaks.",
+      "how": [
+        "Soak small sponges in mitomycin C at the agreed concentration (for example 0.2 to 0.4 mg/mL).",
+        "Place them under Tenon's well back over a wide area, keeping them away from the cut conjunctival edge.",
+        "Time the application aloud, then remove every sponge and count them out.",
+        "Irrigate the area thoroughly with balanced salt."
+      ],
+      "structuresAtRisk": [
+        "Conjunctival edge",
+        "Cornea",
+        "Sclera (thinning)"
+      ],
+      "pitfalls": [
+        "Mitomycin C on the conjunctival edge.",
+        "Losing count of the sponges."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.trab.flap": {
+      "id": "step.trab.flap",
+      "kind": "dissection",
+      "title": "Partial-thickness scleral flap",
+      "why": "The scleral flap is the guard over the drainage hole: its thickness and the tightness of its sutures control how much aqueous leaves the eye.",
+      "how": [
+        "Mark a rectangular or trapezoidal flap about 4 by 3 mm at the limbus.",
+        "Dissect it at about half scleral thickness forwards into clear cornea.",
+        "Make a paracentesis now, so the chamber can be reformed throughout."
+      ],
+      "structuresAtRisk": [
+        "Sclera",
+        "Ciliary body (a deep flap)"
+      ],
+      "pitfalls": [
+        "A thin flap that tears or a deep one that exposes the ciliary body.",
+        "Forgetting the paracentesis until the eye is soft."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.trab.sclerostomy": {
+      "id": "step.trab.sclerostomy",
+      "kind": "resection",
+      "title": "Sclerostomy and peripheral iridectomy",
+      "why": "The sclerostomy is the opening that lets aqueous out. It must be anterior, in front of the scleral spur, so it does not open the ciliary body; an iridectomy stops the iris blocking it.",
+      "how": [
+        "Enter the chamber under the flap just behind the clear cornea.",
+        "Remove a block of corneoscleral tissue with a punch.",
+        "Perform a small peripheral iridectomy through it, avoiding the ciliary processes."
+      ],
+      "structuresAtRisk": [
+        "Ciliary body",
+        "Iris root vessels",
+        "Lens"
+      ],
+      "pitfalls": [
+        "A posterior sclerostomy into the ciliary body.",
+        "Bleeding from the ciliary processes."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.trab.titrate": {
+      "id": "step.trab.titrate",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Flap sutures and titration of flow",
+      "why": "Early overdrainage causes the commonest complications. Tight, adjustable or releasable sutures that can be loosened later make the operation predictable.",
+      "how": [
+        "Close the flap corners with 10-0 nylon, including releasable or adjustable sutures as planned.",
+        "Inflate the chamber through the paracentesis and watch the flow at the flap edges: slow percolation, not a gush.",
+        "Add or tighten sutures until the chamber stays formed at a normal pressure."
+      ],
+      "structuresAtRisk": [
+        "Anterior chamber (shallowing)",
+        "Choroid (effusion from hypotony)"
+      ],
+      "pitfalls": [
+        "Leaving the flap loose.",
+        "Releasable suture ends left exposed on the cornea without a plan."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

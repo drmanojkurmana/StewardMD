@@ -569,7 +569,7 @@
     if (!s || !s.shape) return false;
     ctx.save(); ctx.scale(dpr, dpr);
     ctx.lineCap = "round"; ctx.lineJoin = "round";
-    ctx.strokeStyle = isSel ? "#42cdb5" : (s.color || "#111111");
+    ctx.strokeStyle = isSel ? "#c9a227" : (s.color || "#111111");
     ctx.lineWidth = Math.max(1, (s.w || 0.0032) * W * 1.4);
     shapePath(ctx, s.shape, W, H);
     if (s.fill === "25") {
@@ -609,13 +609,13 @@
     var items = selItems({ getV: function () { return V; } }), bb = selBBox(items);
     if (!bb) return;
     ctx.save(); ctx.scale(dpr, dpr);
-    ctx.strokeStyle = "#42cdb5"; ctx.lineWidth = 2; ctx.setLineDash([6, 5]);
+    ctx.strokeStyle = "#c9a227"; ctx.lineWidth = 2; ctx.setLineDash([6, 5]);
     ctx.strokeRect(bb.x0 * W, bb.y0 * H, (bb.x1 - bb.x0) * W, (bb.y1 - bb.y0) * H);
     ctx.setLineDash([]);
     handlesOf(bb).forEach(function (h) {
       var hx = h.x * W, hy = h.y * H, r = Math.max(9, Math.min(W, H) * 0.012);
       ctx.beginPath(); ctx.arc(hx, hy, r, 0, Math.PI * 2);
-      ctx.fillStyle = "#ffffff"; ctx.fill(); ctx.strokeStyle = "#0d6e5f"; ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = "#ffffff"; ctx.fill(); ctx.strokeStyle = "#c9a227"; ctx.lineWidth = 2; ctx.stroke();
     });
     ctx.restore();
   }
@@ -842,6 +842,11 @@
     });
   }
   function showMorePanel(api) {
+    var r = api && api.root && api.root();
+    if (r && r.querySelector("#stSelMore")) {
+      removePanel(api);
+      return;
+    }
     removePanel(api);
     var html = '<div class="st-sel-panel-head"><b>More</b><button type="button" class="pn-btn sm" data-sel-close="1">Close</button></div>' +
       '<button type="button" class="pn-btn sm st-sel-menubtn" data-act="st-lasso-resize">' + ICONS.resize + " Resize</button>" +

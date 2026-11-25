@@ -22,15 +22,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Locally advanced cT2-4 or N+ resectable tumour"},
-          {"id": "b", "label": "Weekly carboplatin plus paclitaxel"},
-          {"id": "c", "label": "Concurrent 41.4 Gy radiotherapy"},
-          {"id": "d", "label": "Transthoracic or transhiatal oesophagectomy"}
+          {
+            "id": "a",
+            "label": "Locally advanced cT2-4 or N+ resectable tumour"
+          },
+          {
+            "id": "b",
+            "label": "Weekly carboplatin plus paclitaxel"
+          },
+          {
+            "id": "c",
+            "label": "Concurrent 41.4 Gy radiotherapy"
+          },
+          {
+            "id": "d",
+            "label": "Transthoracic or transhiatal oesophagectomy"
+          }
         ],
         "edges": [
-          ["a", "b", "CROSS regimen"],
-          ["b", "c", "combined with"],
-          ["c", "d", "followed by"]
+          [
+            "a",
+            "b",
+            "CROSS regimen"
+          ],
+          [
+            "b",
+            "c",
+            "combined with"
+          ],
+          [
+            "c",
+            "d",
+            "followed by"
+          ]
         ]
       }
     },
@@ -39,12 +63,32 @@
       "say": "The CheckMate 577 trial established adjuvant nivolumab as standard therapy for patients who have residual pathological disease following neoadjuvant chemoradiation and surgery. Administering the anti-PD-1 antibody nivolumab for up to one year doubled median disease-free survival compared with placebo, benefiting both adenocarcinoma and squamous cell carcinoma.",
       "vis": {
         "kind": "table",
-        "cols": ["CheckMate 577 Parameter", "Control / Placebo", "Adjuvant Nivolumab"],
+        "cols": [
+          "CheckMate 577 Parameter",
+          "Control / Placebo",
+          "Adjuvant Nivolumab"
+        ],
         "rows": [
-          ["Inclusion criterion", "Resected residual tumour (non-pCR)", "Resected residual tumour (non-pCR)"],
-          ["Target mechanism", "Observation", "Anti-PD-1 checkpoint inhibition"],
-          ["Median disease-free survival", "11.0 months", "22.4 months (doubled)"],
-          ["Duration of therapy", "None", "Up to 1 year"]
+          [
+            "Inclusion criterion",
+            "Resected residual tumour (non-pCR)",
+            "Resected residual tumour (non-pCR)"
+          ],
+          [
+            "Target mechanism",
+            "Observation",
+            "Anti-PD-1 checkpoint inhibition"
+          ],
+          [
+            "Median disease-free survival",
+            "11.0 months",
+            "22.4 months (doubled)"
+          ],
+          [
+            "Duration of therapy",
+            "None",
+            "Up to 1 year"
+          ]
         ]
       }
     },
@@ -64,12 +108,32 @@
       "say": "Endoscopic ultrasound is the premier diagnostic modality for local staging of oesophageal tumours. It achieves ninety percent accuracy for T-staging by resolving the five distinct sonographic layers of the gut wall. Linear echoendoscopes also allow real-time fine-needle aspiration of suspicious mediastinal and celiac lymph nodes to confirm regional metastasis.",
       "vis": {
         "kind": "table",
-        "cols": ["EUS Layer", "Histological Correlate", "T-Stage Relevance"],
+        "cols": [
+          "EUS Layer",
+          "Histological Correlate",
+          "T-Stage Relevance"
+        ],
         "rows": [
-          ["Layer 1 & 2", "Mucosa & muscularis mucosae", "T1a (Mucosal, ESD candidate)"],
-          ["Layer 3", "Submucosa", "T1b (Submucosal invasion)"],
-          ["Layer 4", "Muscularis propria", "T2 (Invasion into muscle)"],
-          ["Layer 5", "Adventitia", "T3 (Adventitial penetration)"]
+          [
+            "Layer 1 & 2",
+            "Mucosa & muscularis mucosae",
+            "T1a (Mucosal, ESD candidate)"
+          ],
+          [
+            "Layer 3",
+            "Submucosa",
+            "T1b (Submucosal invasion)"
+          ],
+          [
+            "Layer 4",
+            "Muscularis propria",
+            "T2 (Invasion into muscle)"
+          ],
+          [
+            "Layer 5",
+            "Adventitia",
+            "T3 (Adventitial penetration)"
+          ]
         ]
       }
     },
@@ -104,15 +168,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "RHBDF2 mutation (17q25, AD)"},
-          {"id": "b", "label": "Focal palmoplantar keratoderma"},
-          {"id": "c", "label": "Altered EGFR signaling and mucosal hyperproliferation"},
-          {"id": "d", "label": "Esophageal SCC risk up to 95%"}
+          {
+            "id": "a",
+            "label": "RHBDF2 mutation (17q25, AD)"
+          },
+          {
+            "id": "b",
+            "label": "Focal palmoplantar keratoderma"
+          },
+          {
+            "id": "c",
+            "label": "Altered EGFR signaling and mucosal hyperproliferation"
+          },
+          {
+            "id": "d",
+            "label": "Esophageal SCC risk up to 95%"
+          }
         ],
         "edges": [
-          ["a", "b", "manifests as"],
-          ["a", "c", "causes"],
-          ["c", "d", "results in"]
+          [
+            "a",
+            "b",
+            "manifests as"
+          ],
+          [
+            "a",
+            "c",
+            "causes"
+          ],
+          [
+            "c",
+            "d",
+            "results in"
+          ]
         ]
       }
     },
@@ -121,11 +209,72 @@
       "say": "Plummer-Vinson syndrome, also termed Paterson-Kelly syndrome, features the classic triad of iron deficiency anaemia, postcricoid dysphagia from cervical oesophageal webs, and spoon-shaped nails termed koilonychia. It carries a recognized premalignant risk, with up to ten percent of affected individuals developing squamous cell carcinoma of the upper oesophagus or hypopharynx.",
       "vis": {
         "kind": "table",
-        "cols": ["Triad Feature", "Clinical Manifestation", "Pathophysiological Mechanism"],
+        "cols": [
+          "Triad Feature",
+          "Clinical Manifestation",
+          "Pathophysiological Mechanism"
+        ],
         "rows": [
-          ["Anaemia", "Microcytic hypochromic, koilonychia", "Chronic iron deficiency"],
-          ["Dysphagia", "Painless postcricoid food sticking", "Cervical anterior esophageal webs"],
-          ["Premalignancy", "Upper oesophageal & hypopharyngeal SCC", "Mucosal atrophy and oxidative stress"]
+          [
+            "Anaemia",
+            "Microcytic hypochromic, koilonychia",
+            "Chronic iron deficiency"
+          ],
+          [
+            "Dysphagia",
+            "Painless postcricoid food sticking",
+            "Cervical anterior esophageal webs"
+          ],
+          [
+            "Premalignancy",
+            "Upper oesophageal & hypopharyngeal SCC",
+            "Mucosal atrophy and oxidative stress"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Squamous cancer favours the upper and middle oesophagus with tobacco and alcohol, adenocarcinoma the distal segment after Barrett metaplasia. CROSS chemoradiation before surgery sets the locally advanced standard, and residual disease after resection earns a year of nivolumab. Endoscopic ultrasound stages wall depth most accurately, near ninety percent.",
+      "say": "High-yield for the exam: Squamous cancer favours the upper and middle oesophagus with tobacco and alcohol, adenocarcinoma the distal segment after Barrett metaplasia. CROSS chemoradiation before surgery sets the locally advanced standard, and residual disease after resection earns a year of nivolumab. Endoscopic ultrasound stages wall depth most accurately, near ninety percent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Squamous site pattern",
+            "Proximal and middle third"
+          ],
+          [
+            "Adenocarcinoma precursor",
+            "Barrett metaplasia dysplasia sequence"
+          ],
+          [
+            "CROSS regimen",
+            "Carboplatin paclitaxel plus 41.4 Gy"
+          ],
+          [
+            "CheckMate 577 drug",
+            "Adjuvant nivolumab one year"
+          ],
+          [
+            "Nivolumab disease free gain",
+            "22.4 versus 11.0 months"
+          ],
+          [
+            "EUS T staging accuracy",
+            "Approaching 90 percent"
+          ],
+          [
+            "Tylosis cancer risk",
+            "Approaching 95 percent lifetime"
+          ],
+          [
+            "Plummer Vinson triad",
+            "Anaemia, webs, koilonychia"
+          ]
         ]
       }
     }

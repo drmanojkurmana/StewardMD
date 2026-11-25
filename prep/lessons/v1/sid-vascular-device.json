@@ -1,0 +1,324 @@
+{
+ "v": 1,
+ "module": "sid-vascular-device",
+ "title": "Vascular and device infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Device infection** means **skin flora colonizing foreign hardware** protected by **biofilm** against drugs. **Cardiac devices** lodge in **pocket and leads**, sometimes **endothelium at contact points**. **CIED endocarditis** presents in **thirds**: third within **3 months**, third by **12 months**, third **beyond 1 year**. **Lead vegetation beyond 2 cm** risks **pulmonary embolism**. **Mycotic aneurysm** means **infected arterial wall**, **bacterial not fungal**, prone to **rupture**. **Time to positivity difference** flags **catheter source**.",
+   "say": "Device infection was defined as skin flora colonizing foreign hardware protected by biofilm against treatment in many patients. Cardiac devices were reported to lodge in pocket and leads, sometimes involving endothelium at contact points over time. CIED endocarditis was reported to present in thirds, with one third within three months, one third by twelve months, and one third beyond one year. Lead vegetation beyond two centimetres was reported to risk pulmonary embolism in sick patients. Mycotic aneurysm was reported as infected arterial wall, bacterial rather than fungal, prone to rupture. Difference in time to positivity was reported to flag catheter source across paired cultures in wards.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Device site",
+     "Typical form",
+     "Hallmark"
+    ],
+    "rows": [
+     [
+      "CIED pocket plus leads",
+      "Endocarditis spectrum",
+      "Thirds over time"
+     ],
+     [
+      "Central catheter",
+      "Bloodstream infection",
+      "Biofilm shedding"
+     ],
+     [
+      "Arterial wall",
+      "Mycotic aneurysm",
+      "Rupture prone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dominant organisms** are **coagulase-negative staphylococci and Staphylococcus aureus** from **skin flora** forming **biofilm**. **Enterococcus** joins device flora, while **Candida** emerges with **prolonged dwell, TPN and broad exposure**. **Gram-negative bacilli** favor **femoral lines or gut source**. **Mycotic aneurysms** favor **Salmonella and Staphylococcus aureus** on **diseased intima**. **Defibrillators and resync devices** carry **higher risk** than **pacemakers**. **Bacteremia relapse** after therapy points to **retained device**.",
+   "say": "Dominant organisms were reported as coagulase negative staphylococci and Staphylococcus aureus from skin flora forming biofilm on hardware. Enterococcus was reported to join device flora, while Candida emerged with prolonged dwell, TPN and broad exposure in intensive care. Gram negative bacilli were reported to favor femoral lines or gut source in sick patients. Mycotic aneurysms were reported to favor Salmonella and Staphylococcus aureus on diseased intima in many cases. Defibrillators and resync devices were reported to carry higher risk than pacemakers after implant. Bacteremia relapse after therapy was reported to point to retained device in follow up care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism group",
+     "When seen",
+     "Device clue"
+    ],
+    "rows": [
+     [
+      "Staphylococci",
+      "Most device disease",
+      "Skin portal biofilm"
+     ],
+     [
+      "Candida",
+      "Long dwell plus TPN",
+      "Mandate echo search"
+     ],
+     [
+      "Salmonella",
+      "Aortic disease",
+      "Mycotic aneurysm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cardiac hardware** offers **avascular foreign surface** where **staphylococci persist** despite drugs. **Catheter infection** travels by **skin migration, hub handling, distant seeding or infusate**. **Biofilm matrix shields organisms** from **host defenses and antibiotics**, forcing **removal for cure**. **Mycotic aneurysm** starts by **vasa seeding, septic embolus, nearby spread or direct inoculation**. **Suppuration digests wall** into **expanding saccular aneurysm** at **high rupture risk**. **Secondary infection with different serotype** is dengue, not device disease.",
+   "say": "Cardiac hardware was reported to offer an avascular foreign surface where staphylococci persisted despite antibiotics in many patients. Catheter infection was reported to travel by skin migration, hub handling, distant seeding or infusate across wards. Biofilm matrix was reported to shield organisms from host defenses and antibiotics, forcing removal for cure in device disease. Mycotic aneurysm was reported to start by vasa seeding, septic embolus, nearby spread or direct inoculation in arterial disease. Suppuration was reported to digest wall into an expanding saccular aneurysm at high rupture risk over days. Secondary infection with different serotype was reported as dengue, not device disease, and it was excluded by guidelines.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Colonization"
+     },
+     {
+      "id": "b",
+      "label": "Biofilm forms"
+     },
+     {
+      "id": "c",
+      "label": "Persistent shedding"
+     },
+     {
+      "id": "d",
+      "label": "Remove device"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Catheter infection** shows **fever with redness or pus** at the **exit site**, sometimes **without visible inflammation**. **Pocket infection** or **pyogenic collection** after **manipulation** signals **cardiac device disease**. **Unexplained Staphylococcus aureus bacteremia** in a **device carrier** means **device endocarditis** until proven otherwise. **Mycotic aneurysm** shows **fever with tender rapidly enlarging pulsatile mass**. **Imaging** reveals **saccular growth with periaortic gas, fluid or soft tissue**. **Positive blood cultures** with **new expanding aneurysm** confirm infective cause.",
+   "say": "Catheter infection was reported with fever and redness or pus at the exit site, sometimes without visible inflammation in sick patients. Pocket infection or pyogenic collection after manipulation was reported to signal cardiac device disease in recent procedures. Unexplained Staphylococcus aureus bacteremia in a device carrier was reported to mean device endocarditis until proven otherwise by echo. Mycotic aneurysm was reported with fever and a tender rapidly enlarging pulsatile mass in many cases. Imaging was reported to reveal saccular growth with periaortic gas, fluid or soft tissue around aorta. Positive blood cultures with new expanding aneurysm were reported to confirm infective cause in surgical referrals.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Bedside sign",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Catheter infection",
+      "Fever plus exit pus",
+      "Line source likely"
+     ],
+     [
+      "CIED pocket disease",
+      "Collection at pocket",
+      "Pocket involvement"
+     ],
+     [
+      "Mycotic aneurysm",
+      "Tender pulsatile mass",
+      "Surgical emergency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Paired cultures** from **peripheral vein plus each lumen** with **differential time to positivity** prove **catheter source**. **Catheter tip culture** confirms source when **matching blood cultures**. **Three or more sets** from **different venipunctures** precede therapy, with **extra sets at 48 to 72 hours** if negative. **Transesophageal echo** detects **vegetations in over 90%**, and **repeat in 7 to 10 days** if first is negative. **CT angiography** maps **aneurysm with gas or fluid**. **PET imaging** maps **pocket and distant spread**.",
+   "say": "Paired cultures from peripheral vein plus each lumen were ordered with differential time to positivity to prove catheter source in wards. Catheter tip culture was reported to confirm source when matching blood cultures grew the same organism in labs. Three or more sets from different venipunctures were ordered before therapy, with extra sets at forty eight to seventy two hours if cultures stayed negative. Transesophageal echo was reported to detect vegetations in over ninety percent, and repeat study in seven to ten days if the first study stayed negative. CT angiography was reported to map aneurysm with gas or fluid around aorta in surgical cases. PET imaging was reported to map pocket disease and distant spread in uncertain cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Test",
+     "Decision"
+    ],
+    "rows": [
+     [
+      "First",
+      "Paired cultures plus tip",
+      "Prove line source"
+     ],
+     [
+      "Gold cardiac",
+      "TEE echo study",
+      "Repeat if negative"
+     ],
+     [
+      "Gold arterial",
+      "CT angiography",
+      "Map rupture risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Source control with removal or exchange** matters as much as **drugs**, since **biofilm defeats antibiotics alone**. **Empirical Vancomycin 15 to 20 mg/kg IV every 8 to 12 hours**, **trough guided**, covers **MRSA staphylococci**. **Daptomycin 6 to 8 mg/kg IV once daily** suits **vancomycin failure or intolerance**. **Mycotic disease** needs **urgent repair plus prolonged therapy**, with **Ceftriaxone** covering **Salmonella cover** after cultures. **Never delay repair** for a **febrile tender pulsatile mass**. **Multidisciplinary care** with **vascular and infection teams** is essential.",
+   "say": "Source control with removal or exchange was reported as important as drugs, since biofilm defeated antibiotics alone in device disease. Empirical Vancomycin fifteen to twenty milligrams per kilo every eight to twelve hours was ordered as trough guided therapy in wards. Daptomycin six to eight milligrams per kilo once daily was reported to suit vancomycin failure or intolerance in persistent bacteremia. Mycotic disease was reported to need urgent repair plus prolonged therapy, while Ceftriaxone covered Salmonella after cultures were taken in surgical cases. Repair was reported as never delayed for a febrile tender pulsatile mass in emergency care. Multidisciplinary care with vascular and infection teams was reported as essential for cure in complex cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dose",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Vancomycin",
+      "15 to 20 every 8 to 12",
+      "MRSA cover first"
+     ],
+     [
+      "Daptomycin",
+      "6 to 8 once daily",
+      "Failure substitute"
+     ],
+     [
+      "Ceftriaxone",
+      "After cultures",
+      "Salmonella cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Uncomplicated catheter disease with removal** needs **2 weeks** of targeted therapy by organism. **Prosthetic valve and cardiac device disease** need **longer courses** by **species and echo findings**. **Repeat cultures after removal** document **clearance**, and **persistent positivity** triggers **endocarditis hunt**. **Salvage with suppression** usually fails and suits **only irremovable hardware**. **Lock therapy** suits **selected long term lines** with **less virulent organisms**. **Mycotic relapse** needs **serial imaging with prolonged therapy** and **graft watch**.",
+   "say": "Uncomplicated catheter disease with removal was reported to need two weeks of targeted therapy by organism in many patients. Prosthetic valve and cardiac device disease were reported to need longer courses by species and echo findings across cases. Repeat cultures after removal were ordered to document clearance, while persistent positivity triggered endocarditis hunt in follow up. Salvage with suppression was reported to usually fail and suit only irremovable hardware in specialist care. Lock therapy was reported to suit selected long term lines with less virulent organisms in some patients. Mycotic relapse was reported to need serial imaging with prolonged therapy and graft watch over years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Removal strategy",
+     "points": [
+      "Higher early survival",
+      "Clears biofilm nidus",
+      "Standard for S aureus"
+     ]
+    },
+    "right": {
+     "title": "Salvage strategy",
+     "points": [
+      "Usually fails alone",
+      "Suppression if irremovable",
+      "Needs specialist input"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Endocarditis** extends from **leads or valves** and was **most common lethal extension**. **Remote seeding** reaches **spine, lung and distant vessels** with **metastatic abscesses**. **Vegetation beyond 2 cm** carries **embolic and pulmonary risk**. **Mycotic rupture** brings **collapse with hemorrhage**, the **dominant fatal event**. **Prompt repair plus prolonged therapy** markedly **improves survival** even with **high baseline mortality**. **Graft complications with relapse** demand **long follow-up imaging** after discharge.",
+   "say": "Endocarditis was reported to extend from leads or valves and was the most common lethal extension in device cohorts. Remote seeding was reported to reach spine, lung and distant vessels with metastatic abscesses in sick patients. Vegetation beyond two centimetres was reported to carry embolic and pulmonary risk in risky cases. Mycotic rupture was reported to bring collapse with hemorrhage, the dominant fatal event in vascular surgery. Prompt repair plus prolonged therapy was reported to markedly improve survival even with high baseline mortality in centres. Graft complications with relapse were reported to demand long follow up imaging after discharge in surgical follow up.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Mechanism",
+     "Severity"
+    ],
+    "rows": [
+     [
+      "Endocarditis",
+      "Lead or valve spread",
+      "Most lethal"
+     ],
+     [
+      "Mycotic rupture",
+      "Wall digestion",
+      "Surgical emergency"
+     ],
+     [
+      "Remote seeding",
+      "Bacteremic spread",
+      "Spine and lung"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** **antibiotics alone** with **retained hardware** usually **fail**; remove as **default**. **Negative echo** does **not exclude device endocarditis**; **repeat in 7 to 10 days**. **Cultures on antibiotics** miss **device disease** through **sterilized blood**. **Gram negative or enterococcal bacteremia** from **outside source** is **not always device**, yet **relapse** raises suspicion. **Antibiotics before cultures** in **mycotic disease** waste **diagnosis**. **Oversight of tender pulsatile mass** delays **life saving repair**.",
+   "say": "For the exam, these traps were listed as core lessons. Antibiotics alone with retained hardware were reported to usually fail, so removal stayed the default plan in guidelines. Negative echo was reported as never excluding device endocarditis, so repeat study in seven to ten days stayed advised in practice. Cultures during antibiotics were reported to miss device disease through sterilized blood in many patients. Gram negative or enterococcal bacteremia from outside source was reported as not always device related, yet relapse raised suspicion strongly. Antibiotics before cultures in mycotic disease were reported to waste diagnosis in surgical referrals. Oversight of a tender pulsatile mass was reported to delay life saving repair in emergency care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Drugs alone",
+      "Biofilm persists",
+      "Remove device"
+     ],
+     [
+      "TEE negative",
+      "May miss disease",
+      "Repeat 7 to 10 days"
+     ],
+     [
+      "Cultures on drugs",
+      "Blood sterilized",
+      "Culture first"
+     ],
+     [
+      "Mass dismissed",
+      "Mycotic emergency",
+      "Refer urgently"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **biofilm means removal beats drugs alone**. **Staphylococci dominate** device disease, while **Salmonella dominates** mycotic disease. **S aureus bacteremia plus cardiac device** means **device endocarditis** until disproven. **Paired cultures with tip match** prove **line source**. **Echo beyond 90%** sensitivity, **repeat at 7 to 10 days** if negative. **Vancomycin 15 to 20 every 8 to 12** starts empiric cover. **Tender rapidly enlarging mass** is **mycotic until proven otherwise**.",
+   "say": "For the exam, these high yield facts were tabulated as requested. Biofilm was reported to mean removal beats drugs alone in device infection across practice. Staphylococci were reported to dominate device disease, while Salmonella dominated mycotic disease in vascular cohorts. S aureus bacteremia plus cardiac device was reported to mean device endocarditis until disproven by echo and cultures. Paired cultures with tip match were reported to prove line source in catheter infection. Echo study beyond ninety percent sensitivity was reported with repeat at seven to ten days if negative. Vancomycin fifteen to twenty every eight to twelve was reported to start empiric cover in wards. A tender rapidly enlarging mass was reported as mycotic until proven otherwise by imaging.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why asked"
+    ],
+    "rows": [
+     [
+      "Biofilm rules",
+      "Remove beats drugs",
+      "Source control"
+     ],
+     [
+      "Staphylococci dominate",
+      "Salmonella mycotic",
+      "Organism clue"
+     ],
+     [
+      "S aureus plus device",
+      "Means endocarditis",
+      "Echo mandate"
+     ],
+     [
+      "Paired cultures",
+      "Tip match proves",
+      "Line proof"
+     ],
+     [
+      "Vancomycin cover",
+      "15 to 20 dosing",
+      "Empiric dose"
+     ],
+     [
+      "Tender mass",
+      "Mycotic emergency",
+      "Surgery urgent"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

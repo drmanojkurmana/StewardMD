@@ -40,7 +40,40 @@
       return matches(e, f.q);
     });
   }
-  var PURE = { enabled: enabled, imgUrl: imgUrl, matches: matches, filterItems: filterItems };
+  /* Topics (owner 2026-11-23): the same key rule as tools/build-image-library.mjs topicWords/topicKey, so a screen title
+     finds the pictures tagged with the topics it names. topicKeys keeps only the longest matches ("septic shock", not
+     also "shock"), so a lesson on liver abscess does not pull every liver picture. */
+  function topicWords(s) {
+    return String(s || "").toLowerCase().replace(/[\u2019']/g, "").split(/[^a-z0-9]+/).filter(Boolean)
+      .map(function (w) { return w.length > 4 && /[^s]s$/.test(w) ? w.slice(0, -1) : w; });
+  }
+  function topicKeys(phrases, has, all) {
+    var found = [];
+    (phrases || []).forEach(function (p) {
+      var w = topicWords(String(p || "").replace(/\([^)]*\)/g, " "));   // "(non-severe)" qualifies, it names no topic
+      for (var i = 0; i < w.length; i++) for (var n = Math.min(6, w.length - i); n >= 1; n--) {
+        var k = w.slice(i, i + n).join(" ");
+        if (has(k) && found.indexOf(k) < 0) found.push(k);
+      }
+    });
+    var longest = found.filter(function (k) {
+      return !found.some(function (o) { return o !== k && (" " + o + " ").indexOf(" " + k + " ") >= 0; });
+    });
+    // all: the shorter topics inside them follow, as a top-up ("community acquired pneumonia" then "pneumonia").
+    return all ? longest.concat(found.filter(function (k) { return longest.indexOf(k) < 0; })) : longest;
+  }
+  /* A teaching animation ships as a still poster (media/anim/NAME.webp) plus NAME.av1.mp4 and NAME.mp4 (HEVC).
+     animBase(e) -> "…/media/anim/NAME" or null; animSrc picks AV1 when the phone can play it, else HEVC. */
+  function animBase(e) {
+    var m = e && e.k === "Animation" && /^(.*media\/anim\/[\w-]+)\.webp$/.exec(String(e.s || ""));
+    return m ? m[1] : null;
+  }
+  function animSrc(base, canPlay) {
+    var av1 = false;
+    try { av1 = !!(canPlay && canPlay('video/mp4; codecs="av01.0.05M.08"')); } catch (x) {}
+    return base + (av1 ? ".av1.mp4" : ".mp4");
+  }
+  var PURE = { enabled: enabled, imgUrl: imgUrl, matches: matches, filterItems: filterItems, topicWords: topicWords, topicKeys: topicKeys, animBase: animBase, animSrc: animSrc };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
   if (!enabled()) { G.SMD_IMGLIB = { enabled: enabled, open: function () { return false; }, close: function () {}, back: function () { return false; }, _pure: PURE }; return; }
 
@@ -242,11 +275,26 @@
       '<button type="button" class="igl-vnav" data-igl="vprev" aria-label="Previous image">‹ Prev</button>' +
       '<button type="button" class="igl-vnav" data-igl="vnext" aria-label="Next image">Next ›</button>' +
       (G.SMD_IMGZOOM ? '<button type="button" class="igl-vnav" data-igl="vreport" aria-label="Report this image">Report</button>' : "") + '</div>' +
-      '<div class="igl-vstage"><img class="igl-vimg" src="' + esc(imgUrl(e.s)) + '" alt="' + esc(e.a || e.t) + '" draggable="false"></div>' +
+      '<div class="igl-vstage">' + (animBase(e)
+        ? '<video class="igl-vimg" autoplay loop muted playsinline disablepictureinpicture aria-label="' + esc(e.a || e.t) + '"></video>'
+        : '<img class="igl-vimg" src="' + esc(imgUrl(e.s)) + '" alt="' + esc(e.a || e.t) + '" draggable="false">') + '</div>' +
       '<div class="igl-vmeta"><h2>' + esc(e.t) + '</h2><p class="igl-vcap">' + esc(e.c) + "</p>" +
       '<p class="igl-vfrom">From ' + esc(e.f) + (e.rn && e.rn !== e.t ? ": " + esc(e.lk === "kb" && e.kn ? e.kn : e.rn) : "") + " · " + esc(e.k) + "</p>" +
       (credit ? '<p class="igl-vcredit">' + esc(credit) + "</p>" : "") + viewerLinks(e) + "</div>";
+    if (animBase(e)) playAnim(v.querySelector("video.igl-vimg"), e);
     bindViewerTouch(v);
+  }
+  /* Bundled build: plain paths. SMD_REMOTE_MEDIA build: the poster and the video come from R2 as blob URLs. */
+  function playAnim(vid, e) {
+    var base = animBase(e), RM = G.SMD_REMOTE_MEDIA, remote = G.SMD_REMOTE_MEDIA_ON === 1;
+    function put(path, attr) {
+      var p = RM && RM.key(path, { remoteBundle: remote });
+      if (!p) { vid[attr] = imgUrl(path); return; }
+      RM.load(p).then(function (u) { if (vid.isConnected) vid[attr] = u; }, function () {});
+    }
+    put(e.s, "poster");
+    put(animSrc(base, function (t) { return vid.canPlayType(t); }), "src");
+    try { var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (x) {}
   }
   function bindViewerTouch(v) {
     var stage = v.querySelector(".igl-vstage"), img = v.querySelector(".igl-vimg");
@@ -296,7 +344,7 @@
     if (a === "chip") { S[b.getAttribute("data-k")] = b.getAttribute("data-v") || ""; S.shown = 60; paintGrid(); return; }
     if (a === "more") { S.shown += 60; paintGrid(); return; }
     if (a === "open") { S.vi = +b.getAttribute("data-i"); paintViewer(); return; }
-    if (a === "vclose") { root().querySelector(".igl-viewer").hidden = true; return; }
+    if (a === "vclose") { if (S && S.view === "strip") { close(); return; } root().querySelector(".igl-viewer").hidden = true; return; }
     if (a === "vprev") { stepViewer(-1); return; }
     if (a === "vnext") { stepViewer(1); return; }
     if (a === "vlink") { openRef(S.list[S.vi]); return; }
@@ -314,6 +362,7 @@
     S = { view: "systems", slug: "", name: "", items: [], shown: 60, list: [], q: "", from: opts.from || "",
       kind: opts.kind || "", origin: "", vi: 0, scale: 1 };
     root().hidden = false;
+    root().classList.remove("igl-top");
     G.document.body.classList.add("igl-open");
     var q = root().querySelector(".igl-q"); if (q) q.value = "";
     loadIndex().then(function () {
@@ -338,11 +387,76 @@
   }
   function back() {
     var v = root() && root().querySelector(".igl-viewer");
+    if (S && S.view === "strip") { close(); return true; }
     if (v && !v.hidden) { v.hidden = true; return true; }
     if (S && S.view === "grid") { S.view = "systems"; paintSystems(); return true; }
     close(); return true;
   }
   function isOpen() { var r = root(); return !!(r && !r.hidden); }
 
-  G.SMD_IMGLIB = { enabled: enabled, open: open, close: close, back: back, isOpen: isOpen, _pure: PURE };
+  /* ---------- Shared pictures on every module's screen ---------- */
+  var topicsP = null;
+  function loadTopics() {
+    if (!topicsP) topicsP = fetchJSON(BASE + "topics.json").catch(function (e) { topicsP = null; throw e; });
+    return topicsP;
+  }
+  /* related(phrases) -> Promise<[entry]>: pictures for the topics these phrases name, longest topics first, no repeats. */
+  function related(phrases, max) {
+    max = max || 12;
+    return loadTopics().then(function (T) {
+      var has = function (k) { return Object.prototype.hasOwnProperty.call(T.t, k); };
+      var main = topicKeys(phrases, has), extra = topicKeys(phrases, has, true).slice(main.length);
+      var refs = [], seen = {};
+      function take(keys, cap) {
+        for (var r = 0; r < 16 && refs.length < cap; r++) keys.forEach(function (k) {
+          var x = T.t[k][r]; if (!x || refs.length >= cap) return;
+          var id = x[0] + ":" + x[1]; if (seen[id]) return; seen[id] = 1; refs.push(x);
+        });
+      }
+      take(main, max);
+      if (refs.length < Math.ceil(max / 2)) take(extra, Math.ceil(max / 2));   // a thin specific topic tops up from its parent
+      var slugs = []; refs.forEach(function (x) { var s = T.sys[x[0]]; if (slugs.indexOf(s) < 0) slugs.push(s); });
+      return Promise.all(slugs.map(loadSystem)).then(function () {
+        return refs.map(function (x) { return (cache[T.sys[x[0]]] || [])[x[1]]; }).filter(Boolean);
+      });
+    });
+  }
+  /* strip(host, phrases, opts): a "Pictures and animations" row appended to host; tap opens the full-screen viewer over
+     just these pictures. opts.skip(src) leaves out pictures the screen already shows. Nothing is drawn when none match. */
+  function strip(host, phrases, opts) {
+    opts = opts || {};
+    if (!host || !enabled()) return Promise.resolve(0);
+    return related(phrases, opts.max).then(function (list) {
+      if (opts.skip) list = list.filter(function (e) { return !opts.skip(e.s); });
+      var old = host.querySelector(":scope > .igl-strip"); if (old) old.parentNode.removeChild(old);
+      if (!list.length || !host.isConnected) return 0;
+      var box = G.document.createElement("section");
+      box.className = "igl-strip";
+      box.setAttribute("aria-label", "Pictures and animations");
+      box.innerHTML = '<h3 class="igl-strip-h">Pictures and animations</h3><div class="igl-strip-row">' +
+        list.map(function (e, i) {
+          return '<button type="button" class="igl-strip-it" data-i="' + i + '" aria-label="' + esc(e.t) + '">' +
+            '<img src="' + esc(imgUrl(e.s)) + '" alt="' + esc(e.a || e.t) + '" loading="lazy" decoding="async">' +
+            (e.k === "Animation" ? '<span class="igl-strip-play" aria-hidden="true">&#9654;</span>' : "") +
+            '<span class="igl-strip-t">' + esc(e.t) + "</span></button>";
+        }).join("") + "</div>";
+      box.addEventListener("click", function (ev) {
+        var b = ev.target.closest ? ev.target.closest(".igl-strip-it") : null;
+        if (b) openList(list, +b.getAttribute("data-i"));
+      });
+      if (opts.before && opts.before.parentNode === host) host.insertBefore(box, opts.before); else host.appendChild(box);
+      return list.length;
+    }, function () { return 0; });
+  }
+  function openList(list, i) {
+    ensureRoot();
+    S = { view: "strip", slug: "", name: "", items: list, shown: list.length, list: list, q: "", from: "", kind: "", origin: "", vi: i || 0, scale: 1 };
+    root().hidden = false;
+    root().classList.add("igl-top");
+    G.document.body.classList.add("igl-open");
+    G.document.addEventListener("keydown", onKey);
+    paintViewer();
+  }
+
+  G.SMD_IMGLIB = { enabled: enabled, open: open, close: close, back: back, isOpen: isOpen, related: related, strip: strip, openList: openList, _pure: PURE };
 })(typeof window !== "undefined" ? window : this);

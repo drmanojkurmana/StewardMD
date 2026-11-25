@@ -1,0 +1,335 @@
+{
+ "v": 1,
+ "module": "sid-cryptococcus-endemic",
+ "title": "Cryptococcosis and endemic mycoses",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Cryptococcus** yeasts cause meningitis in **HIV with CD4 below 100**, the commonest adult meningitis where HIV is prevalent. **Endemic mycoses** (histoplasma, coccidioides, blastomyces, paracoccidioides, talaromyces) stay restricted to regions and infect even healthy hosts. **Capsule with yeast forms** separates crypto; **dimorphic mould-to-yeast** marks the endemics. **Geography with exposure** names the suspect first.",
+   "say": "Cryptococcus yeasts were reported as the commonest cause of adult meningitis where H I V is prevalent, striking when C D four falls below one hundred. The endemic mycoses, histoplasma, coccidioides, blastomyces, paracoccidioides and talaromyces, were defined by restricted geography and infection of even healthy hosts. Capsule with yeast forms marked crypto, while change from mould to yeast marked the endemics. Geography with exposure named the suspect first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Host",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Cryptococcus",
+      "HIV low CD4",
+      "Capsule yeast"
+     ],
+     [
+      "Histoplasma",
+      "Ohio valley",
+      "Calcified nodes"
+     ],
+     [
+      "Coccidioides",
+      "Southwest USA",
+      "Desert exposure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pigeon droppings** carry neoformans; **eucalyptus with tropical trees** carry gattii, which strikes immunocompetent hosts. **HIV, transplant and steroids** open the brain to crypto. **Bird with bat caves** seed histoplasma; **dust storms with construction** seed coccidioides. **Wood with soil** seed blasto and paracocci; **bamboo rats with soil** seed talaromyces in Southeast Asia.",
+   "say": "Pigeon droppings were shown to carry neoformans, while eucalyptus and tropical trees carried gattii, which attacked even immunocompetent hosts. H I V, transplant and steroids opened the brain to crypto. Bird and bat caves seeded histoplasma, while dust storms with construction seeded coccidioides. Wood with soil seeded blasto and paracocci, and bamboo rats with soil seeded talaromyces in Southeast Asia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fungus",
+     "Source",
+     "Victim"
+    ],
+    "rows": [
+     [
+      "Neoformans",
+      "Pigeon droppings",
+      "HIV low CD4"
+     ],
+     [
+      "Gattii",
+      "Trees",
+      "Healthy hosts"
+     ],
+     [
+      "Histoplasma",
+      "Caves",
+      "Travellers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Inhaled spores** settle in lung, enter blood and cross to brain where **capsule blocks** eating by immune cells. **Raised pressure** comes from blocked CSF resorption, not inflammation, so cells stay few. **Gattii builds cryptococcomas** in healthy lungs and brain. **Endemics convert** from mould outdoors to yeast at body heat, then spread from lung. **Granulomas calcify** and mark healed histoplasma for life.",
+   "say": "Inhaled spores were shown to settle in the lung, enter blood and cross to the brain, where capsule blocked eating by immune cells. Raised pressure was caused by blocked C S F resorption, not inflammation, so cells stayed few. Gattii was reported to build cryptococcomas in healthy lungs and brain. Endemics were observed to convert from mould outdoors to yeast at body heat, then spread from the lung. Healed histoplasma granulomas calcified and marked old infection for life.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Inhaled spores"
+     },
+     {
+      "id": "b",
+      "label": "Blood to brain"
+     },
+     {
+      "id": "c",
+      "label": "Blocked resorption"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Subacute headache with fever** over days to weeks with **vomiting with confusion** marks crypto meningitis. **Neck stiffness is often absent**, unlike bacterial meningitis. **Sixth nerve palsy with visual loss** signals raised pressure, present in 80% with opening pressure at or above 25 cmH2O. **Serum CrAg positive** with headache is treated as meningitis till lumbar puncture proves otherwise.",
+   "say": "Subacute headache with fever over days to weeks, with vomiting and confusion, was reported as crypto meningitis. Neck stiffness was often absent, unlike bacterial meningitis. Sixth nerve palsy with visual loss indicated raised pressure, recorded in eighty percent with opening pressure at or above twenty five. Serum C r A g positive with headache was treated as meningitis till lumbar puncture proved otherwise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Means",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Headache, fever",
+      "Subacute onset",
+      "Days to weeks"
+     ],
+     [
+      "No stiffness",
+      "Crypto hint",
+      "Unlike bacteria"
+     ],
+     [
+      "VI palsy",
+      "Raised pressure",
+      "Drain urgently"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Histoplasma flu** with **calcified nodes with spleen** marks healed infection; disseminated disease wastes with pancytopenia in AIDS. **Valley fever** gives **erythema nodosum** with joint pains that resolve alone. **Blastomyces** warts skin with bone and prostate spread. **Umbilicated papules** like molluscum mark talaromyces in HIV. **Chronic meningitis** follows coccidioides and histoplasma rarely.",
+   "say": "Histoplasma flu with calcified nodes and spleen was defined as healed infection, while disseminated disease wasted with pancytopenia in A I D S. Valley fever was associated with red nodules and joint pains that resolved alone. Blastomyces was reported to wart the skin with spread to bone and prostate. Umbilicated papules like molluscum indicated talaromyces in H I V. Chronic meningitis was reported to follow coccidioides and histoplasma rarely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Classic sign",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Histo disseminated",
+      "Wasting, low counts",
+      "Treat urgently"
+     ],
+     [
+      "Valley fever",
+      "Red nodules",
+      "Resolves alone"
+     ],
+     [
+      "Talaromyces",
+      "Umbilicated papules",
+      "HIV marker"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CSF with serum CrAg lateral flow** is the first test; **culture** stays gold standard but grows slowly. **Opening pressure** is measured at every tap; raised pressure never bans the needle. **India ink** is fast but insensitive, so negative never excludes. **TB molecular test with HIV with CD4** runs alongside, as TB meningitis mimics exactly. **CT first only** with focal signs, seizures or clotting defects.",
+   "say": "C S F with serum C r A g lateral flow was ordered as the first test, while culture remained the gold standard but grew slowly. Opening pressure was recorded at every tap, and raised pressure never banned the needle. India ink was fast but insensitive, so a negative result never excluded crypto. T B molecular test with H I V and C D four was ordered alongside, as T B meningitis mimicked exactly. C T first was reserved for focal signs, seizures or clotting defects.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Shows",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "CrAg lateral flow",
+      "Crypto antigen",
+      "First test"
+     ],
+     [
+      "Opening pressure",
+      "Raised ICP",
+      "Record always"
+     ],
+     [
+      "Culture",
+      "Gold proof",
+      "Grows slowly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Urine Histoplasma antigen** with **BAL cytopathology** diagnoses acute pulmonary histoplasmosis; **serology** confirms later. **Coccidioides serology with spherules** with endospores proves valley fever. **Broad-based budding** marks blastomyces; **pilot wheel** marks paracocci. **Bone marrow with blood culture** catches disseminated histo with talaromyces. **Biopsy with culture** still decides doubtful cases.",
+   "say": "Urine histoplasma antigen with B A L cytopathology was ordered to diagnose acute pulmonary histoplasmosis, while serology confirmed later. Coccidioides serology with spherules carrying endospores proved valley fever. Broad-based budding indicated blastomyces, and pilot wheel forms indicated paracocci. Bone marrow with blood culture was reported to catch disseminated histo with talaromyces. Biopsy with culture still decided doubtful cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finds",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Urine antigen",
+      "Histoplasma",
+      "Acute lungs"
+     ],
+     [
+      "Spherules",
+      "Coccidioides",
+      "Endospores inside"
+     ],
+     [
+      "Broad budding",
+      "Blastomyces",
+      "Skin, prostate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Single dose liposomal amphotericin B 10 mg/kg** with **flucytosine for 14 days** with **fluconazole 1200 mg daily** induces crypto meningitis. **Therapeutic tap** drains to below 20 cmH2O, usually 20 to 30 mL, repeated daily till settled. **Steroids with mannitol with acetazolamide** are banned for pressure; drainage alone lowers it. **No amphotericin** means oral fluconazole with flucytosine for 14 days.",
+   "say": "Single-dose liposomal amphotericin B at ten milligrams per kilo with flucytosine for fourteen days and fluconazole at twelve hundred milligrams daily was recommended to induce crypto meningitis. Therapeutic tap was advised to drain below twenty, usually twenty to thirty millilitres, repeated daily till settled. Steroids with mannitol and acetazolamide were banned for pressure, while drainage alone lowered it. Without amphotericin, oral fluconazole with flucytosine for fourteen days was recommended.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Induction that works",
+     "points": [
+      "LAmB single dose",
+      "Flucytosine 14 days",
+      "Fluconazole 1200 mg"
+     ]
+    },
+    "right": {
+     "title": "Never for pressure",
+     "points": [
+      "Steroids banned",
+      "Mannitol banned",
+      "Tap drains instead"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Fluconazole 800 mg daily for 8 weeks** consolidates, then **200 mg daily** maintains till **CD4 above 200** with suppressed virus. **ART starts 4 to 6 weeks** after antifungals; earlier kills. **Histoplasma** takes **itraconazole 200 mg twice daily for 6 to 12 weeks**, severe disease opening with **lipid amphotericin B 3 to 5 mg/kg**. **Coccidioidal meningitis** needs lifelong fluconazole. **Relapse** restarts induction with adherence review.",
+   "say": "Fluconazole at eight hundred milligrams daily for eight weeks was ordered to consolidate, then two hundred milligrams daily maintained till C D four stayed above two hundred with suppressed virus. A R T was started four to six weeks after antifungals, as earlier killed. Histoplasma was treated with itraconazole at two hundred milligrams twice daily for six to twelve weeks, while severe disease opened with lipid amphotericin B at three to five milligrams per kilo. Coccidioidal meningitis needed lifelong fluconazole. Relapse restarted induction with adherence review.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Drug",
+     "Span"
+    ],
+    "rows": [
+     [
+      "Induction",
+      "LAmB plus 5-FC",
+      "14 days"
+     ],
+     [
+      "Consolidation",
+      "Fluconazole 800",
+      "8 weeks"
+     ],
+     [
+      "Maintenance",
+      "Fluconazole 200",
+      "Till CD4 up"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Blindness with deafness** follows unrelieved pressure; **daily taps** prevent it. **IRIS in 3 to 12 weeks** after ART mimics relapse; treatment continues through it. **Starting ART at diagnosis** kills; the 4 to 6 week wait saves. **Excluding crypto on India ink alone** misses cases; CrAg decides. **Stopping maintenance before CD4 recovery** relapses fatally. **Pregnancy** bans fluconazole with flucytosine; amphotericin stays usable.",
+   "say": "Blindness with deafness followed unrelieved pressure, so daily taps prevented it. I R I S in three to twelve weeks after A R T was reported to mimic relapse, while treatment continued through it. Starting A R T at diagnosis killed, while the four to six week wait saved lives. Excluding crypto on India ink alone missed cases, while C r A g decided. Stopping maintenance before C D four recovery relapsed fatally. Pregnancy banned fluconazole with flucytosine, while amphotericin stayed usable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Early ART",
+      "Kills",
+      "Wait 4 to 6 weeks"
+     ],
+     [
+      "India ink negative",
+      "Still crypto",
+      "CrAg decides"
+     ],
+     [
+      "Stop maintenance",
+      "Relapses",
+      "Till CD4 up"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** no stiffness with **VI palsy** marks crypto; **CrAg** diagnoses. **Single dose amphotericin 10 mg/kg** induces; **drain below 20** saves sight. **ART at 4 to 6 weeks**, never at once. **Urine antigen** marks histo; **200 mg twice daily** treats it. **Spherules** mark cocci; **broad budding** marks blasto. **Umbilicated papules** mark talaromyces in HIV.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. No stiffness with sixth nerve palsy marked crypto, while C r A g diagnosed it. Single-dose amphotericin at ten milligrams per kilo induced, while draining below twenty saved sight. A R T at four to six weeks was advised, never at once. Urine antigen marked histo, while two hundred milligrams twice daily treated it. Spherules marked cocci, and broad budding marked blasto. Umbilicated papules marked talaromyces in H I V.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "No stiffness, VI palsy",
+      "Crypto meningitis",
+      "Classic picture"
+     ],
+     [
+      "CrAg positive",
+      "First test",
+      "Headache plus HIV"
+     ],
+     [
+      "LAmB 10 mg/kg",
+      "Induction dose",
+      "Asked"
+     ],
+     [
+      "ART 4 to 6 weeks",
+      "Never early",
+      "Kills otherwise"
+     ],
+     [
+      "Urine antigen",
+      "Histo lungs",
+      "Rapid test"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

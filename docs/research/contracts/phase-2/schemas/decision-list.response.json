@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/decision-list.response.json",
+  "title": "GET decisions for one record or report response",
+  "description": "Blinded vote list (see blinding.md). The caller's own votes are shown in full; the peer vote reads decision hidden with no reason or timestamp until both reviewers have decided, then it is shown in full. Viewers see no votes, only the outcome.",
+  "type": "object",
+  "required": ["votes", "outcome"],
+  "additionalProperties": false,
+  "properties": {
+    "votes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["reviewer", "decision", "visible"],
+        "additionalProperties": false,
+        "properties": {
+          "reviewer": { "type": "string", "enum": ["self", "peer"] },
+          "decision": { "type": "string", "enum": ["include", "exclude", "uncertain", "hidden"] },
+          "reasonCode": { "type": "string" },
+          "createdTs": { "type": "integer", "minimum": 0 },
+          "visible": { "type": "boolean" }
+        }
+      }
+    },
+    "outcome": { "type": "string", "enum": ["pending", "include", "exclude", "conflict"] }
+  }
+}

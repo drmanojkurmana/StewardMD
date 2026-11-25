@@ -10,11 +10,27 @@
    "say": "Fasting unfolds in acts governed by the insulin to glucagon ratio. Glycogenolysis covers the first twelve to eighteen hours, then glucose production and fat burning rise, and ketones climb over days. Illness compresses the timetable in children.",
    "vis": {
     "kind": "table",
-    "cols": ["Fasting window", "Dominant process", "Glucose defended by"],
+    "cols": [
+     "Fasting window",
+     "Dominant process",
+     "Glucose defended by"
+    ],
     "rows": [
-     ["0 to 18 hours", "Glycogenolysis", "Liver glycogen"],
-     ["1 to 3 days", "Gluconeogenesis peak", "Alanine, lactate, glycerol"],
-     ["Beyond 3 days", "Ketone adaptation", "Fat, brain spares glucose"]
+     [
+      "0 to 18 hours",
+      "Glycogenolysis",
+      "Liver glycogen"
+     ],
+     [
+      "1 to 3 days",
+      "Gluconeogenesis peak",
+      "Alanine, lactate, glycerol"
+     ],
+     [
+      "Beyond 3 days",
+      "Ketone adaptation",
+      "Fat, brain spares glucose"
+     ]
     ]
    }
   },
@@ -23,8 +39,21 @@
    "say": "In prolonged starvation the brain draws roughly two thirds of its energy from ketones, cutting glucose need sharply. Muscle breakdown slows and survival becomes a function of fat stores. This protein sparing adaptation is central to starvation physiology.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Early fasting brain", "points": ["Glucose about 120 g daily", "Muscle alanine flows freely", "Nitrogen loss high"]},
-    "right": {"title": "Adapted starvation brain", "points": ["Ketones supply two thirds", "Glucose need about 40 g daily", "Protein spared, nitrogen loss low"]
+    "left": {
+     "title": "Early fasting brain",
+     "points": [
+      "Glucose about 120 g daily",
+      "Muscle alanine flows freely",
+      "Nitrogen loss high"
+     ]
+    },
+    "right": {
+     "title": "Adapted starvation brain",
+     "points": [
+      "Ketones supply two thirds",
+      "Glucose need about 40 g daily",
+      "Protein spared, nitrogen loss low"
+     ]
     }
    }
   },
@@ -35,12 +64,37 @@
     "kind": "flow",
     "title": "Counter-regulation order",
     "nodes": [
-     {"id": "i", "label": "Insulin falls"},
-     {"id": "g", "label": "Glucagon rises"},
-     {"id": "a", "label": "Adrenaline rises"},
-     {"id": "c", "label": "Cortisol and GH sustain"}
+     {
+      "id": "i",
+      "label": "Insulin falls"
+     },
+     {
+      "id": "g",
+      "label": "Glucagon rises"
+     },
+     {
+      "id": "a",
+      "label": "Adrenaline rises"
+     },
+     {
+      "id": "c",
+      "label": "Cortisol and GH sustain"
+     }
     ],
-    "edges": [["i", "g"], ["g", "a"], ["a", "c"]]
+    "edges": [
+     [
+      "i",
+      "g"
+     ],
+     [
+      "g",
+      "a"
+     ],
+     [
+      "a",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -53,11 +107,27 @@
    "say": "Refeeding drives phosphate, potassium and magnesium into cells, plasma phosphate crashes, and heart and respiratory muscles fail. Thiamine must precede carbohydrate, electrolytes are replaced early, and calories climb slowly over days.",
    "vis": {
     "kind": "table",
-    "cols": ["Refeeding risk", "Mechanism", "Prevention"],
+    "cols": [
+     "Refeeding risk",
+     "Mechanism",
+     "Prevention"
+    ],
     "rows": [
-     ["Hypophosphataemia", "Insulin drives phosphate into cells", "Replace before and during feeds"],
-     ["Wernicke precipitation", "Glucose consumes thiamine at PDH", "Thiamine first"],
-     ["Fluid and heart failure", "Sodium retention, weak myocardium", "Slow calories, monitor"]
+     [
+      "Hypophosphataemia",
+      "Insulin drives phosphate into cells",
+      "Replace before and during feeds"
+     ],
+     [
+      "Wernicke precipitation",
+      "Glucose consumes thiamine at PDH",
+      "Thiamine first"
+     ],
+     [
+      "Fluid and heart failure",
+      "Sodium retention, weak myocardium",
+      "Slow calories, monitor"
+     ]
     ]
    }
   },
@@ -66,9 +136,67 @@
    "say": "Kidney cortex contributes up to a fifth of glucose in prolonged fasting and couples glutamine use to ammonia excretion. Kidney disease predisposes to hypoglycaemia. Liver and kidney divide fasting labour more equally the longer food is absent.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Liver in fasting", "points": ["Glycogen first, then GNG", "Ketones exported", "Urea disposes nitrogen"]},
-    "right": {"title": "Kidney cortex in fasting", "points": ["GNG share grows with duration", "Glutamine to glucose plus ammonia", "Acid excreted as ammonium"]
+    "left": {
+     "title": "Liver in fasting",
+     "points": [
+      "Glycogen first, then GNG",
+      "Ketones exported",
+      "Urea disposes nitrogen"
+     ]
+    },
+    "right": {
+     "title": "Kidney cortex in fasting",
+     "points": [
+      "GNG share grows with duration",
+      "Glutamine to glucose plus ammonia",
+      "Acid excreted as ammonium"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Hepatic glycogenolysis maintains plasma glucose during the initial 12 to 18 hours of fasting, after which hepatic gluconeogenesis becomes the primary endogenous source. In prolonged starvation beyond three days, ketone bodies (beta-hydroxybutyrate and acetoacetate) provide up to two-thirds of brain metabolic fuel, minimizing muscle protein proteolysis. Refeeding syndrome precipitates severe hypophosphatemia, hypokalemia, and cardiac arrhythmias driven by an acute insulin surge.",
+   "say": "High-yield for the exam: Hepatic glycogenolysis maintains plasma glucose during the initial 12 to 18 hours of fasting, after which hepatic gluconeogenesis becomes the primary endogenous source. In prolonged starvation beyond three days, ketone bodies beta-hydroxybutyrate and acetoacetate provide up to two-thirds of brain metabolic fuel, minimizing muscle protein proteolysis. Refeeding syndrome precipitates severe hypophosphatemia, hypokalemia, and cardiac arrhythmias driven by an acute insulin surge.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Early fasting (0-4 hours)",
+      "Exogenous dietary glucose serves as primary fuel source with insulin dominance"
+     ],
+     [
+      "Intermediate fasting (4-16 h)",
+      "Hepatic glycogenolysis provides major glucose supply as insulin-to-glucagon ratio falls"
+     ],
+     [
+      "Late fasting (>16-24 h)",
+      "Hepatic gluconeogenesis becomes the predominant source of circulating plasma glucose"
+     ],
+     [
+      "Prolonged starvation fuel",
+      "Ketone bodies become main fuel for brain, reducing requirement for gluconeogenesis"
+     ],
+     [
+      "Obligate glucose consumers",
+      "Red blood cells lack mitochondria and perpetually rely on anaerobic glycolysis"
+     ],
+     [
+      "Renal gluconeogenesis role",
+      "Kidney cortex produces substantial endogenous glucose during prolonged starvation"
+     ],
+     [
+      "Refeeding electrolyte shift",
+      "Insulin drives phosphate and potassium intracellularly, causing hypophosphatemic complications"
+     ],
+     [
+      "DKA metabolic trigger",
+      "Absolute insulin deficiency unleashes uninhibited lipolysis, generating massive ketone body accumulation"
+     ]
+    ]
    }
   }
  ],

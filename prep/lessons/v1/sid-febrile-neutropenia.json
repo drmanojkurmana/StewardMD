@@ -1,0 +1,334 @@
+{
+ "v": 1,
+ "module": "sid-febrile-neutropenia",
+ "title": "Infections in neutropenia and haematological malignancy",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Febrile neutropenia is fever with neutropenia** that is a medical emergency, defined by single oral 38.3 or 38.0 for 1 hour with ANC below 500 or expected to fall below 500 within 48 hours. **Empirical anti-pseudomonal therapy within 1 hour** plus MASCC scoring decides inpatient versus oral outpatient care, where 21 or more marks low risk.",
+   "say": "Febrile neutropenia was reported as fever with neutropenia and a medical emergency, defined by single oral thirty eight point three or thirty eight point nought for one hour with ANC below five hundred or expected to fall below five hundred within forty eight hours. Empirical anti-pseudomonal therapy within one hour plus MASCC scoring was reported to decide inpatient versus oral outpatient care, where twenty one or more marks low risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Threshold",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Fever",
+      "38.3 single or 38.0 for 1 hour",
+      "Cultures plus antibiotics"
+     ],
+     [
+      "Neutropenia",
+      "ANC below 500",
+      "Or falling within 48 hours"
+     ],
+     [
+      "Risk",
+      "MASCC 21 or more",
+      "Low risk, selected outpatient"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Depth and duration drive risk**, with acute chemotherapy neutropenia far more dangerous than chronic neutropenia of months to years. **Nadir at 6 to 14 days** after chemotherapy brings gut translocation of own flora, **Pseudomonas bacteremia** with occult source, Gram-positive line infection with mucositis, and fungi only after **fever persists on antibacterials**. Prior resistant colonisation changes therapy.",
+   "say": "Depth and duration were reported to drive risk, with acute chemotherapy neutropenia far more dangerous than chronic neutropenia of months to years. The nadir at six to fourteen days after chemotherapy was reported to bring gut translocation of own flora, Pseudomonas bacteremia with occult source, Gram-positive line infection with mucositis, and fungi only after fever persists on antibacterials. Prior resistant colonisation was reported to change therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute chemotherapy neutropenia",
+     "points": [
+      "Nadir 6 to 14 days",
+      "High infection risk",
+      "Mucosal barrier injury"
+     ]
+    },
+    "right": {
+     "title": "Chronic neutropenia",
+     "points": [
+      "Months to years duration",
+      "Often better tolerated",
+      "Lower acute risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Most **cytotoxic agents suppress marrow**, and neutrophils with **short half-life of 6 to 8 hours** deplete fastest. Below ANC 500 control of mouth and gut flora fails, and below 200 the local inflammatory response is essentially absent. **Profound neutropenia with mucosal injury** therefore allows **translocation and dissemination** without typical pus or localising signs. Suspicion must stay high.",
+   "say": "Most cytotoxic agents were reported to suppress marrow, and neutrophils with short half-life of six to eight hours deplete fastest. Below ANC five hundred control of mouth and gut flora was reported to fail, and below two hundred the local inflammatory response was reported to be essentially absent. Profound neutropenia with mucosal injury was therefore reported to allow translocation and dissemination without typical pus or localising signs, so suspicion was reported to stay high.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chemotherapy marrow suppression"
+     },
+     {
+      "id": "b",
+      "label": "ANC below 500"
+     },
+     {
+      "id": "c",
+      "label": "Gut translocation"
+     },
+     {
+      "id": "d",
+      "label": "Febrile neutropenia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fever without localising signs is typical**, because classic findings are blunted below ANC 200. **Ecthyma gangrenosum** marks Pseudomonas bacteremia in about a quarter of cases, **typhlitis with abdominal pain** warns of perforation, **hypotension with instability** marks sepsis, and **pneumonia with minimal symptoms** is common. Screen lungs, skin, abdomen and catheters always.",
+   "say": "Fever without localising signs was reported as typical, because classic findings are blunted below ANC two hundred. Ecthyma gangrenosum was reported to mark Pseudomonas bacteremia in about a quarter of cases, typhlitis with abdominal pain was reported to warn of perforation, hypotension with instability was reported to mark sepsis, and pneumonia with minimal symptoms was reported to be common. Lungs, skin, abdomen and catheters were reported to need screening always.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Points to",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Ecthyma gangrenosum",
+      "Pseudomonas bacteremia",
+      "Emphasise antipseudomonal cover"
+     ],
+     [
+      "Abdominal pain with fever",
+      "Typhlitis",
+      "Imaging, perforation watch"
+     ],
+     [
+      "Hypotension",
+      "Sepsis",
+      "Resuscitation, urgent antibiotics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First test is immediate blood cultures before antibiotics**, plus serial ANC with bands plus mature neutrophils to track depth and duration. **Gold workup adds targeted cultures**, skin examination for ecthyma, chest imaging for pulmonary source, and **cross-sectional abdominal imaging** when typhlitis is suspected with serial examination. **Do not wait for results** to give therapy.",
+   "say": "First test was reported to be immediate blood cultures before antibiotics, plus serial ANC with bands plus mature neutrophils to track depth and duration. Gold workup was reported to add targeted cultures, skin examination for ecthyma, chest imaging for pulmonary source, and cross-sectional abdominal imaging when typhlitis is suspected with serial examination. Waiting for results was reported to be never advised before therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever with ANC below 500"
+     },
+     {
+      "id": "b",
+      "label": "Cultures plus ANC"
+     },
+     {
+      "id": "c",
+      "label": "MASCC stratification"
+     },
+     {
+      "id": "d",
+      "label": "Antipseudomonal within 1 hour"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High risk inpatient care uses monotherapy with an antipseudomonal beta-lactam, choosing Meropenem 1 g IV q8h, Cefepime 2 g IV q8h, or Piperacillin-tazobactam 4.5 g IV q6h.** **Vancomycin only for** instability, pneumonia, Gram-positive cocci, catheter or skin infection, known MRSA, or severe mucositis on fluoroquinolone prophylaxis. **Add metronidazole to Cefepime** for abdominal pain or enterocolitis.",
+   "say": "High risk inpatient monotherapy was reported to be an antipseudomonal beta-lactam, with cefepime two grams intravenously every eight hours, or piperacillin-tazobactam four point five grams intravenously every six hours, or meropenem one gram intravenously every eight hours. Vancomycin was reported to be reserved only for instability, pneumonia, Gram-positive cocci, catheter or skin infection, known MRSA, or severe mucositis on fluoroquinolone prophylaxis. Metronidazole was reported to be added to cefepime for abdominal pain or enterocolitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dose",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Cefepime IV",
+      "2 g IV q8h",
+      "Monotherapy"
+     ],
+     [
+      "Piperacillin-tazobactam IV",
+      "4.5 g IV q6h",
+      "Also covers anaerobes"
+     ],
+     [
+      "Meropenem IV",
+      "1 g IV q8h",
+      "Carbapenem option"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ASCO and IDSA 2018 rule is antibiotics within 1 hour of triage**, without waiting for counts or cultures in the febrile post-chemotherapy patient. **Continue antibiotics until afebrile 2 days** and ANC above 500 per ICMR 2022, and **documented infection gets standard site duration**. **Persistent fever after 4 to 7 days** with neutropenia beyond 7 days triggers CT chest plus galactomannan and antifungal therapy. **Low risk MASCC 21 or more** gets oral outpatient therapy if stable and able to swallow.",
+   "say": "ASCO and IDSA twenty eighteen rule was reported to be antibiotics within one hour of triage, without waiting for counts or cultures in the febrile post-chemotherapy patient. Antibiotics were reported to continue until afebrile two days and ANC above five hundred per ICMR twenty twenty two, and documented infection was reported to get standard site duration. Persistent fever after four to seven days with neutropenia beyond seven days was reported to trigger CT chest plus galactomannan and antifungal therapy, while low risk MASCC twenty one or more was reported to get oral outpatient therapy if stable and able to swallow.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Milestone",
+     "Rule",
+     "Note"
+    ],
+    "rows": [
+     [
+      "First dose",
+      "Within 1 hour",
+      "Do not wait"
+     ],
+     [
+      "Stop if unexplained",
+      "Afebrile 2 days plus ANC above 500",
+      "ICMR 2022"
+     ],
+     [
+      "Persistent fever",
+      "After 4 to 7 days",
+      "CT plus antifungal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Untreated Pseudomonas can kill rapidly** with documented bacteraemia and septic shock, and **prolonged neutropenia invites invasive fungi** with pneumonia and dissemination. **Typhlitis risks bowel perforation**, and **central lines seed Gram-positive sepsis**. **Profound neutropenia below 200** blunts all inflammation, so hypotension may be the first sign. **Rapid protocolised response** beats clinical intuition alone in outcomes.",
+   "say": "Untreated Pseudomonas was reported to kill rapidly with documented bacteraemia and septic shock, and prolonged neutropenia was reported to invite invasive fungi with pneumonia and dissemination. Typhlitis was reported to risk bowel perforation, and central lines were reported to seed Gram-positive sepsis. Profound neutropenia below two hundred was reported to blunt all inflammation, so hypotension was reported to be the first sign, and rapid protocolised response was reported to beat clinical intuition alone in outcomes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Mechanism",
+     "Guard"
+    ],
+    "rows": [
+     [
+      "Septic shock",
+      "Pseudomonas progression",
+      "Antibiotics within 1 hour"
+     ],
+     [
+      "Invasive fungal disease",
+      "Prolonged neutropenia",
+      "Antifungal after 4 to 7 days"
+     ],
+     [
+      "Perforation",
+      "Typhlitis",
+      "Serial examination, imaging"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** min **routinely adding Vancomycin** to every fever; **continuing it beyond 48 to 72 hours** without Gram-positive infection; **waiting for cultures** before the first dose; **oral outpatient therapy for high risk** or for patients on **fluoroquinolone prophylaxis**; **missing typhlitis** or perianal abscess; and **routine G-CSF** for established fever. Each error delays the mandatory antipseudomonal beta-lactam.",
+   "say": "For the exam, routine vancomycin was reported as wrong, and continuing it beyond forty eight to seventy two hours without Gram-positive infection was reported as wrong. Waiting for cultures before the first dose was reported as wrong, and oral outpatient therapy for high risk or for patients on fluoroquinolone prophylaxis was reported as wrong. Missing typhlitis or perianal abscess was reported as wrong, and routine G-CSF for established fever was reported as wrong, while each error was reported to delay the mandatory antipseudomonal beta-lactam.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Vancomycin for all",
+      "Only for listed indications",
+      "Stop at 2 to 3 days if negative"
+     ],
+     [
+      "Wait for cultures",
+      "Kills",
+      "Antibiotics within 1 hour"
+     ],
+     [
+      "Outpatient if on prophylaxis",
+      "Not eligible",
+      "Inpatient IV therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **38.3 single or 38.0 for 1 hour plus ANC below 500** defines disease; **antibiotics within 1 hour**; **MASCC 21 or more is low risk**, below 21 high risk with ANC 100 or less beyond 7 days. **Cefepime 2 g every 8 hours**, **Piperacillin-tazobactam 4.5 g every 6 hours**, **Meropenem 1 g every 8 hours**. **Antifungal after 4 to 7 days**: **Caspofungin 70 mg then 50 mg**, **liposomal Amphotericin B 3 mg per kg**. **Stop when afebrile 2 days and ANC above 500**.",
+   "say": "For the exam, thirty eight point three single or thirty eight point nought for one hour plus ANC below five hundred was reported to define disease, and antibiotics within one hour was reported to be required. MASCC twenty one or more was reported to be low risk, and below twenty one was reported to be high risk. Cefepime two grams every eight hours, piperacillin-tazobactam four point five grams every six hours, and meropenem one gram every eight hours were reported. Antifungal after four to seven days with caspofungin seventy milligrams then fifty milligrams and liposomal amphotericin B three milligrams per kilo was reported, and stopping when afebrile two days and ANC above five hundred was reported.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Value",
+     "Why asked"
+    ],
+    "rows": [
+     [
+      "Fever",
+      "38.3 single or 38.0 for 1 hour",
+      "Definition"
+     ],
+     [
+      "Neutropenia",
+      "ANC below 500",
+      "Definition"
+     ],
+     [
+      "MASCC",
+      "21 or more low risk",
+      "Outpatient rule"
+     ],
+     [
+      "Betalactams",
+      "2 g, 4.5 g, 1 g options",
+      "Doses asked"
+     ],
+     [
+      "Antifungal",
+      "After 4 to 7 days",
+      "Timing"
+     ],
+     [
+      "Stop rule",
+      "Afebrile 2 days, ANC above 500",
+      "Duration"
+     ],
+     [
+      "1 hour",
+      "First dose within 1 hour",
+      "Emergency rule"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

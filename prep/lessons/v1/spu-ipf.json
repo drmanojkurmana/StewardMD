@@ -1,0 +1,393 @@
+{
+ "gen": "hand",
+ "minutes": 8,
+ "module": "spu-ipf",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e interstitial lung disease chapters",
+  "ATS ERS JRS ALAT IPF guideline"
+ ],
+ "steps": [
+  {
+   "say": "IPF is a chronic fibrosing interstitial lung disease of unknown cause with a usual interstitial pneumonia pattern on imaging or pathology. Age, male sex and smoking cluster strongly.",
+   "tx": "**IPF** (idiopathic pulmonary fibrosis) is a chronic fibrosing interstitial lung disease without known cause, showing a **usual interstitial pneumonia** (UIP) pattern on imaging or **pathology** (tissue study). **Age** over 60, male sex, smoking and **gastro oesophageal reflux** cluster strongly, and **bibasal velcro crackles** (harsh fine crackles) with clubbing mark the clinical picture.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "IPF clue",
+     "Test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Age and sex",
+      "Older men",
+      "History"
+     ],
+     [
+      "Crackles",
+      "Bibasal velcro",
+      "Examination"
+     ],
+     [
+      "Imaging",
+      "Subpleural basal honeycomb",
+      "HRCT chest"
+     ],
+     [
+      "Exposure",
+      "Smoking, reflux",
+      "History"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "UIP shows patchy subpleural dense fibrosis with honeycombing and temporal heterogeneity. Surgical lung biopsy is reserved for indeterminate patterns, and MDD conference decides most cases now.",
+   "tx": "**UIP** pattern (patchy subpleural dense fibrosis) shows **honeycombing** (clustered cysts), traction **bronchiectasis** (stretched airways) and temporal heterogeneity (mixed old and new disease) on **HRCT** (high resolution scanning). **Surgical lung biopsy** (tissue from surgery) is reserved for indeterminate patterns, and **multidisciplinary discussion** (expert team review) decides most cases without biopsy.",
+   "vis": {
+    "edges": [
+     [
+      "suspect",
+      "hrct"
+     ],
+     [
+      "hrct",
+      "definite"
+     ],
+     [
+      "hrct",
+      "indeterminate"
+     ],
+     [
+      "indeterminate",
+      "biopsy"
+     ],
+     [
+      "biopsy",
+      "mdd"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "suspect",
+      "label": "Suspected fibrosis"
+     },
+     {
+      "id": "hrct",
+      "label": "HRCT UIP pattern"
+     },
+     {
+      "id": "definite",
+      "label": "Definite UIP: IPF"
+     },
+     {
+      "id": "indeterminate",
+      "label": "Indeterminate pattern"
+     },
+     {
+      "id": "biopsy",
+      "label": "Cryobiopsy or surgery"
+     },
+     {
+      "id": "mdd",
+      "label": "MDD conference decides"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Fibroblast proliferation, epithelial injury and aberrant wound healing drive the disease. Oxidative stress, telomere shortening and MUC5B genetics raise susceptibility, while infections accelerate decline.",
+   "tx": "**Fibroblast proliferation** (scar forming cell growth), epithelial injury and aberrant wound healing drive IPF, with oxidative stress, **telomere shortening** (chromosome end loss) and **MUC5B promoter** (mucus gene variant) raising susceptibility. **Infections** accelerate decline, and mucus metaplasia (abnormal surface cells) in honeycomb cysts reflects chronic reparative failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Honeycomb cysts",
+      "Traction bronchiectasis",
+      "Subpleural basal predominance"
+     ],
+     "title": "Definite UIP"
+    },
+    "right": {
+     "points": [
+      "Ground glass patchy",
+      "Mid upper predominance",
+      "Alternative diagnosis hunt"
+     ],
+     "title": "Not UIP"
+    }
+   }
+  },
+  {
+   "say": "Clinical features are insidious dry cough, exertional dyspnoea, weight loss and clubbing. Physiology shows restriction with DLCO disproportionately low, and desaturation on walking is common.",
+   "tx": "Clinical features are insidious dry cough, exertional **dyspnoea** (breathlessness), weight loss and **clubbing** (nail broadening), with physiology showing **restriction** (small volumes) and **DLCO** (diffusing capacity) disproportionately low. **Six minute walk** (timed walking test) desaturation below **88** percent defines exertional hypoxaemia needing ambulatory oxygen, and chest imaging confirms reticular disease.",
+   "vis": {
+    "cols": [
+     "Test",
+     "IPF pattern",
+     "Use"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Spirometry",
+      "Reduced volumes",
+      "Restriction proof"
+     ],
+     [
+      "DLCO",
+      "Very low",
+      "Membrane loss"
+     ],
+     [
+      "Walk test",
+      "Desaturation",
+      "Oxygen need"
+     ],
+     [
+      "HRCT",
+      "Honeycombing basal",
+      "UIP diagnosis"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Nintedanib and pirfenidone slow FVC decline but do not reverse fibrosis. Both cause gastrointestinal upset, and nintedanib adds bleeding and liver risks that need active monitoring.",
+   "tx": "**Nintedanib** (tyrosine kinase inhibitor) and **pirfenidone** (antifibrotic) slow **FVC** (forced vital capacity) decline but do not reverse fibrosis, and both cause gastrointestinal upset. Nintedanib adds **bleeding risk** and liver enzyme rise while pirfenidone adds **photosensitivity** (sun sensitivity) and nausea, so counsel diet, sunscreen and liver tests at initiation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Diarrhoea common",
+      "Bleeding and liver risk",
+      "FVC decline halved"
+     ],
+     "title": "Nintedanib"
+    },
+    "right": {
+     "points": [
+      "Nausea and rash",
+      "Photosensitivity warning",
+      "FVC decline halved"
+     ],
+     "title": "Pirfenidone"
+    }
+   }
+  },
+  {
+   "say": "Acute exacerbation is the killer complication, usually triggered by infection, aspiration or surgery. Steroids and broad antibiotics are the rescue, while immunosuppression based regimens worsened outcomes in PANTHER.",
+   "tx": "**Acute exacerbation** (sudden fibrotic worsening) is the killer complication, usually triggered by infection, aspiration or surgery, and presents with worsening dyspnoea, hypoxaemia and new **ground glass** (hazy opacities). **Steroids** and broad antibiotics are the rescue, while immunosuppression based regimens worsened outcomes in the **PANTHER** trial and must be avoided.",
+   "vis": {
+    "cols": [
+     "Trigger",
+     "Presentation",
+     "Rescue"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Infection",
+      "Fever, infiltrates",
+      "Antibiotics urgent"
+     ],
+     [
+      "Aspiration",
+      "Dependent opacities",
+      "Steroids, antibiotics"
+     ],
+     [
+      "Post surgery",
+      "Hours to days decline",
+      "Intensive care"
+     ],
+     [
+      "Idiopathic",
+      "No cause found",
+      "Steroids, exclude infection"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Immunosuppression harmed UIP in PANTHER, and steroids suit only acute exacerbations or alternative diagnoses. That single trial overturned decades of practice and still anchors exam questions.",
+   "tx": "**Immunosuppression** (steroids, azathioprine, cyclophosphamide) harmed UIP patients in **PANTHER** trial, raising mortality and hospitalisation, and steroids suit only acute exacerbations or alternative diagnoses. That single trial overturned decades of practice and still anchors exam questions, since antifibrotics, not immune suppression, now anchor stable IPF therapy.",
+   "vis": {
+    "edges": [
+     [
+      "stable",
+      "antifibrotic"
+     ],
+     [
+      "exacerbation",
+      "steroid"
+     ],
+     [
+      "steroid",
+      "antibiotic"
+     ],
+     [
+      "antibiotic",
+      "icu"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stable",
+      "label": "Stable IPF"
+     },
+     {
+      "id": "antifibrotic",
+      "label": "Antifibrotic continue"
+     },
+     {
+      "id": "exacerbation",
+      "label": "Acute exacerbation"
+     },
+     {
+      "id": "steroid",
+      "label": "Steroids high dose"
+     },
+     {
+      "id": "antibiotic",
+      "label": "Broad antibiotics"
+     },
+     {
+      "id": "icu",
+      "label": "Intensive care, avoid NIV reliance"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Prognosis turns on FVC, DLCO, desaturation and pulmonary hypertension. Referral for transplant is due when FVC crosses seventy percent or desaturation appears, not at the end stage.",
+   "tx": "**Prognosis** (expected course) turns on FVC percentage, DLCO, exertional desaturation and **pulmonary hypertension** (high lung pressure), with median survival of **3** to **5** years from diagnosis. **Transplant** referral (lung replacement opinion) is due when FVC crosses **70** percent or desaturation appears, not at end stage, since waiting list mortality is high.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "FVC above 80 percent",
+      "DLCO preserved",
+      "Antifibrotic, surveillance"
+     ],
+     "title": "Early IPF"
+    },
+    "right": {
+     "points": [
+      "FVC under 70 percent",
+      "Desaturation, PAH",
+      "Transplant workup"
+     ],
+     "title": "Advanced IPF"
+    }
+   }
+  },
+  {
+   "say": "Anticoagulation, oxygen, rehab and reflux control each support IPF care. Ambulatory oxygen for walk desaturation, pulmonary rehab for deconditioning and vaccination for infection prevention complete the package.",
+   "tx": "**Ambulatory oxygen** (oxygen for walking) suits exertional desaturation, **pulmonary rehabilitation** (exercise programme) reverses deconditioning, and **gastro oesophageal reflux** control with acid suppression may slow progression. **Influenza** and pneumococcal vaccination prevent exacerbation triggers, and **anticoagulation** (blood thinning) has no proven IPF role outside trial settings.",
+   "vis": {
+    "cols": [
+     "Supportive care",
+     "Indication",
+     "Benefit"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Ambulatory oxygen",
+      "Walk desaturation",
+      "Exercise capacity"
+     ],
+     [
+      "Pulmonary rehab",
+      "Deconditioning",
+      "Dyspnoea control"
+     ],
+     [
+      "Acid suppression",
+      "Reflux present",
+      "Progression slowdown"
+     ],
+     [
+      "Vaccination",
+      "Every patient",
+      "Exacerbation prevention"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Comorbidities converge in IPF with lung cancer, emphysema overlap, sleep apnoea and pulmonary hypertension. Each worsens dyspnoea disproportionately and needs its own screen at every visit.",
+   "tx": "**Comorbidities** (coexisting diseases) converge in IPF with **lung cancer** (smoking overlap), **emphysema** overlap (combined fibrosis and emphysema), sleep apnoea and **pulmonary hypertension**. Each worsens dyspnoea disproportionately and needs its own screen through **CT**, echo and **sleep study** (overnight recording) at every visit, since treatment of one without the other leaves symptoms unchanged.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "FVC fall 10 percent yearly",
+      "DLCO fall 15 percent yearly",
+      "Survival planning review"
+     ],
+     "title": "Declining patient"
+    },
+    "right": {
+     "points": [
+      "Stable FVC and DLCO",
+      "Antifibrotic continued",
+      "Routine surveillance"
+     ],
+     "title": "Stable patient"
+    }
+   }
+  },
+  {
+   "say": "The IPF high yield points are UIP honeycombing, velcro crackles, antifibrotics slowing decline, PANTHER harm from immunosuppression, exacerbation rescue and transplant referral thresholds.",
+   "tx": "Recall **UIP** honeycombing pattern, **velcro crackles**, **nintedanib** and **pirfenidone** slowing decline without reversal, **PANTHER** harm from immunosuppression, acute **exacerbation** rescue with steroids and antibiotics, and **transplant** referral at FVC about **70** percent. Exertional desaturation below **88** percent defines oxygen need.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Value",
+     "Angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "UIP sign",
+      "Basal honeycombing",
+      "Diagnosis"
+     ],
+     [
+      "Antifibrotic effect",
+      "Halves FVC decline",
+      "Drug action"
+     ],
+     [
+      "PANTHER lesson",
+      "Immunosuppression harmed",
+      "Trial recall"
+     ],
+     [
+      "Walk desaturation",
+      "Below 88 percent",
+      "Oxygen need"
+     ],
+     [
+      "Transplant referral",
+      "FVC near 70 percent",
+      "Timing"
+     ],
+     [
+      "Survival",
+      "3 to 5 years median",
+      "Prognosis"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-pulmonology",
+ "title": "Idiopathic pulmonary fibrosis core",
+ "v": 1
+}

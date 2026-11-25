@@ -1,0 +1,247 @@
+{
+  "id": "subxiphoid-pericardial-window",
+  "title": "Subxiphoid pericardial window",
+  "subtitle": "Drainage and biopsy of the pericardium through an upper midline incision",
+  "system": "cardiac",
+  "aliases": [
+    "pericardial window",
+    "subxiphoid pericardiostomy",
+    "pericardial drainage"
+  ],
+  "estMinutes": 45,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "esc-2015-peri",
+      "org": "ESC. Eur Heart J 36:2921",
+      "title": "2015 ESC Guidelines for the diagnosis and management of pericardial diseases",
+      "year": 2015,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=2015+ESC+Guidelines+for+the+diagnosis+and+management+of+pericardial+diseases",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Symptomatic or recurrent pericardial effusion, especially malignant or purulent, or where tissue is needed for diagnosis.",
+      "Tamponade where needle pericardiocentesis is not possible or has failed (loculated, clotted or posterior effusion)."
+    ],
+    "contraindications": [
+      "Traumatic haemopericardium with ongoing bleeding (needs sternotomy or thoracotomy to control the source).",
+      "Aortic dissection with haemopericardium."
+    ],
+    "preparation": [
+      "Echocardiography: size, location and loculation; signs of tamponade.",
+      "Plan the anaesthetic: induction can cause cardiovascular collapse in tamponade, so the patient is prepared and draped awake and the surgeon is scrubbed before induction.",
+      "Consent: bleeding, cardiac or coronary injury, recurrence, infection, and the possibility of sternotomy."
+    ],
+    "positioning": [
+      "Supine with the head up about 30 degrees during induction; the chest and upper abdomen prepared before induction."
+    ],
+    "equipment": [
+      "Basic laparotomy and sternotomy instruments available, a long scalpel, Allis forceps, suction, a large-bore drain, specimen pots and culture bottles, a sternal saw in the room."
+    ],
+    "anatomy": [
+      "The xiphoid process and the linea alba, the diaphragm, the retrosternal fat, the inferior surface of the pericardium resting on the diaphragm, the right ventricle immediately behind it."
+    ],
+    "criticalSafety": [
+      "Prep, drape and be ready to cut before induction in tamponade.",
+      "Open the pericardium under direct vision, grasping it so the heart falls away.",
+      "Know the plan and the person to call if the heart or a coronary vessel is injured."
+    ],
+    "structuresAtRisk": [
+      "Right ventricle",
+      "Coronary arteries",
+      "Peritoneum and liver",
+      "Internal thoracic vessels"
+    ],
+    "commonErrors": [
+      "Inducing anaesthesia before the surgeon is ready.",
+      "A blind stab into the pericardium.",
+      "Not sending fluid and tissue for diagnosis."
+    ],
+    "complications": [
+      "Cardiovascular collapse at induction.",
+      "Cardiac injury and haemorrhage.",
+      "Recurrence, infection, incisional hernia."
+    ],
+    "postop": [
+      "Drain output charted; drain removed when it falls below the agreed threshold.",
+      "Echo before discharge or if symptoms return.",
+      "Follow up the cytology, microbiology and histology."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.pw-step-01", "med.surgx.pw-clip-01"],
+      "emphasis": "Includes the possibility of sternotomy."
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.pw-step-02", "med.surgx.pw-clip-02"],
+      "emphasis": "Anaesthetic plan for tamponade discussed; the surgeon scrubbed and ready before induction."
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.pw-step-03", "med.surgx.pw-clip-03"]
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.pw-step-04", "med.surgx.pw-clip-04"],
+      "emphasis": "Supine, head up 30 degrees during induction."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.pw-step-05", "med.surgx.pw-clip-05"],
+      "emphasis": "Prep and drape the chest and upper abdomen before induction."
+    },
+    {
+      "ref": "step.pw.induction", "media": ["med.surgx.pw-step-06", "med.surgx.pw-clip-06"]
+    },
+    {
+      "ref": "step.pw.incision", "media": ["med.surgx.pw-step-07", "med.surgx.pw-clip-07"]
+    },
+    {
+      "ref": "step.pw.pericardium", "media": ["med.surgx.pw-step-08", "med.surgx.pw-clip-08"]
+    },
+    {
+      "ref": "step.pw.window", "media": ["med.surgx.pw-step-09", "med.surgx.pw-clip-09"]
+    },
+    {
+      "ref": "step.core.specimen", "media": ["med.surgx.pw-step-10", "med.surgx.pw-clip-10"],
+      "emphasis": "Pericardial fluid for cytology, microscopy and culture (including tuberculosis), and the excised pericardium for histology."
+    },
+    {
+      "ref": "step.thor.chest-drains", "media": ["med.surgx.pw-step-11", "med.surgx.pw-clip-11"],
+      "emphasis": "A single large drain into the pericardial space through a separate stab incision."
+    },
+    {
+      "ref": "step.pw.bailout", "media": ["med.surgx.pw-step-12", "med.surgx.pw-clip-12"]
+    },
+    {
+      "ref": "step.core.haemostasis", "media": ["med.surgx.pw-step-13", "med.surgx.pw-clip-13"]
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.pw-step-14", "med.surgx.pw-clip-14"]
+    },
+    {
+      "ref": "step.core.skin-closure", "media": ["med.surgx.pw-step-15", "med.surgx.pw-clip-15"],
+      "emphasis": "Close the linea alba carefully to limit incisional hernia."
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.pw-step-16", "med.surgx.pw-clip-16"]
+    }
+  ],
+  "steps_local": {
+    "step.pw.induction": {
+      "id": "step.pw.induction",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Induction in tamponade with the surgeon ready",
+      "why": "General anaesthesia and positive pressure ventilation reduce venous return; in tamponade this can stop the circulation. Being ready to decompress immediately is the safety net.",
+      "how": [
+        "Monitor invasively before induction where possible.",
+        "Have the patient prepped and draped, and the surgeon scrubbed with the knife ready, before the anaesthetist induces.",
+        "Induce with drugs that preserve sympathetic tone; if the pressure falls, decompress at once."
+      ],
+      "structuresAtRisk": [
+        "Circulation (collapse at induction)"
+      ],
+      "pitfalls": [
+        "Inducing an unprepared patient."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pw.incision": {
+      "id": "step.pw.incision",
+      "kind": "access",
+      "title": "Upper midline incision and excision of the xiphoid",
+      "why": "The subxiphoid route reaches the inferior pericardium without opening the sternum or the pleura.",
+      "how": [
+        "Make an upper midline incision over the xiphoid down to the linea alba, staying out of the peritoneum.",
+        "Excise or retract the xiphoid process.",
+        "Develop the plane behind the sternum bluntly with a finger, staying above the diaphragm."
+      ],
+      "structuresAtRisk": [
+        "Peritoneum",
+        "Internal thoracic vessels",
+        "Diaphragm"
+      ],
+      "pitfalls": [
+        "Entering the peritoneum.",
+        "Bleeding from the xiphoid vessels."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pw.pericardium": {
+      "id": "step.pw.pericardium",
+      "kind": "access",
+      "critical": true,
+      "title": "Identifying and opening the pericardium",
+      "why": "The pericardium is opened under direct vision so the fluid escapes and the heart falls away from the knife.",
+      "how": [
+        "Identify the pericardium as a tense, smooth membrane; feel the heart beating behind it.",
+        "Grasp it with two Allis forceps and lift; open it between them with a knife or scissors.",
+        "Aspirate fluid and send samples; watch the blood pressure rise as tamponade is relieved."
+      ],
+      "structuresAtRisk": [
+        "Right ventricle",
+        "Coronary arteries"
+      ],
+      "pitfalls": [
+        "Stabbing blindly.",
+        "Draining too fast in a patient with longstanding effusion (decompression syndrome)."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pw.window": {
+      "id": "step.pw.window",
+      "kind": "resection",
+      "title": "Creating the window and exploring",
+      "why": "Excising a piece of pericardium both prevents early closure and provides tissue for diagnosis.",
+      "how": [
+        "Excise a piece of pericardium about 3 to 4 cm across.",
+        "Break down loculations gently with a finger; inspect the visible pericardium for tumour or exudate.",
+        "Send the tissue for histology."
+      ],
+      "structuresAtRisk": [
+        "Heart surface",
+        "Coronary vessels"
+      ],
+      "pitfalls": [
+        "Too small a window.",
+        "Aggressive finger dissection over the right ventricle."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pw.bailout": {
+      "id": "step.pw.bailout",
+      "kind": "bailout",
+      "title": "Bailout: cardiac or coronary injury",
+      "why": "A tear in the right ventricle or a coronary vessel bleeds massively; the window does not give enough access to repair it.",
+      "how": [
+        "Press a finger on the bleeding point; tell the anaesthetist and call for a cardiac surgeon and blood.",
+        "Extend to a sternotomy if trained and equipped, or keep pressure until help arrives.",
+        "Do not place blind sutures through the right ventricle near a coronary artery."
+      ],
+      "structuresAtRisk": [
+        "Right ventricle",
+        "Coronary arteries"
+      ],
+      "pitfalls": [
+        "Blind suturing through a small window."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

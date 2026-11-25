@@ -1,0 +1,290 @@
+{
+  "id": "manual-sics",
+  "title": "Manual small-incision cataract surgery (SICS)",
+  "subtitle": "Sutureless scleral tunnel, nucleus delivery and rigid or foldable implant",
+  "system": "ophthalmic",
+  "aliases": [
+    "SICS",
+    "MSICS",
+    "small incision cataract surgery",
+    "manual SICS"
+  ],
+  "estMinutes": 25,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "gogate-2005",
+      "org": "Gogate P et al. Ophthalmology 112:869",
+      "title": "Safety and efficacy of phacoemulsification compared with manual small-incision cataract surgery by a randomized controlled clinical trial",
+      "year": 2005,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Safety+and+efficacy+of+phacoemulsification+compared+with+manual+small-incision+cataract+surgery+by+a+randomized+controlled+clinical+trial",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "ruit-2007",
+      "org": "Ruit S et al. Am J Ophthalmol 143:32",
+      "title": "A prospective randomized clinical trial of phacoemulsification vs manual sutureless small-incision extracapsular cataract surgery in Nepal",
+      "year": 2007,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=A+prospective+randomized+clinical+trial+of+phacoemulsification+vs+manual+sutureless+small-incision+extracapsular+cataract+surgery+in+Nepal",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "rcophth-cataract",
+      "org": "Royal College of Ophthalmologists",
+      "title": "Cataract Surgery Guidelines",
+      "year": 2010,
+      "url": "https://www.rcophth.ac.uk/resources-listing/cataract-surgery-guidelines/",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "escrs-endo",
+      "org": "ESCRS",
+      "title": "Guidelines for prevention and treatment of endophthalmitis following cataract surgery",
+      "year": 2013,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=ESCRS+guidelines+prevention+endophthalmitis+cataract+surgery",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Visually significant cataract, including dense brunescent, white and mature cataracts where phaco is harder.",
+      "High-volume settings: outcomes comparable to phaco in randomised trials, with lower cost and no phaco machine."
+    ],
+    "contraindications": [
+      "Active ocular surface or adnexal infection until treated.",
+      "A patient who cannot lie flat and still, unless general anaesthesia is arranged."
+    ],
+    "preparation": [
+      "Biometry and the implant plan, as for phaco; a back-up implant for the sulcus or anterior chamber.",
+      "Check anticoagulants and alpha-blockers; dilate well.",
+      "Consent: endophthalmitis, posterior capsule rupture, corneal oedema, astigmatism from the incision, retinal complications, and the need for glasses."
+    ],
+    "positioning": [
+      "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    ],
+    "equipment": [
+      "Crescent blade, keratome (3.2 mm) and side-port blade, viscoelastic, cystotome, irrigating vectis or Simcoe cannula, rigid PMMA or foldable implant, wet-field cautery, anterior vitrectomy on standby."
+    ],
+    "anatomy": [
+      "Superior or temporal bulbar conjunctiva and Tenon's, the sclera 1.5 to 2 mm behind the limbus, the corneal endothelium, the capsule and zonules.",
+      "The tunnel runs from sclera into clear cornea, so the internal opening is in cornea and the wound self-seals."
+    ],
+    "criticalSafety": [
+      "Right patient, right eye, right implant: read the biometry and the implant aloud.",
+      "A tunnel of the right length and depth: too superficial buttonholes, too deep enters the chamber early and leaks.",
+      "Protect the endothelium with viscoelastic when the nucleus comes out."
+    ],
+    "structuresAtRisk": [
+      "Corneal endothelium",
+      "Posterior capsule",
+      "Iris",
+      "Sclera (premature entry, buttonhole)"
+    ],
+    "commonErrors": [
+      "A tunnel too small for the nucleus, which then tears the endothelium on the way out.",
+      "Premature entry into the chamber.",
+      "Forcing the nucleus out without viscoelastic cover."
+    ],
+    "complications": [
+      "Endophthalmitis.",
+      "Posterior capsule rupture and vitreous loss.",
+      "Corneal oedema from endothelial trauma.",
+      "Iris prolapse, hyphaema.",
+      "Surgically induced astigmatism."
+    ],
+    "postop": [
+      "Antibiotic and steroid drops; shield at night.",
+      "Same-day return for pain, redness or falling vision.",
+      "Refraction at about four to six weeks."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.sics-step-01", "med.surgx.sics-clip-01"],
+      "emphasis": "Mark the operative eye; confirm the eye with the patient in their own language."
+    },
+    {
+      "ref": "step.eye.biometry-iol-check", "media": ["med.surgx.sics-step-02", "med.surgx.sics-clip-02"]
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.sics-step-03", "med.surgx.sics-clip-03"],
+      "emphasis": "Read the implant model and power aloud; confirm the back-up implant is in the room."
+    },
+    {
+      "ref": "step.eye.anaesthesia", "media": ["med.surgx.sics-step-04", "med.surgx.sics-clip-04"],
+      "emphasis": "Peribulbar or sub-Tenon block is usual for SICS."
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.sics-step-05", "med.surgx.sics-clip-05"],
+      "emphasis": "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    },
+    {
+      "ref": "step.eye.povidone-iodine", "media": ["med.surgx.sics-step-06", "med.surgx.sics-clip-06"]
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.sics-step-07", "med.surgx.sics-clip-07"]
+    },
+    {
+      "ref": "step.eye.lid-speculum", "media": ["med.surgx.sics-step-08", "med.surgx.sics-clip-08"]
+    },
+    {
+      "ref": "step.sics.tunnel", "media": ["med.surgx.sics-step-09", "med.surgx.sics-clip-09"]
+    },
+    {
+      "ref": "step.sics.capsulotomy", "media": ["med.surgx.sics-step-10", "med.surgx.sics-clip-10"]
+    },
+    {
+      "ref": "step.sics.prolapse", "media": ["med.surgx.sics-step-11", "med.surgx.sics-clip-11"]
+    },
+    {
+      "ref": "step.sics.delivery", "media": ["med.surgx.sics-step-12", "med.surgx.sics-clip-12"]
+    },
+    {
+      "ref": "step.sics.cortex-iol", "media": ["med.surgx.sics-step-13", "med.surgx.sics-clip-13"]
+    },
+    {
+      "ref": "step.eye.posterior-capsule-rupture", "media": ["med.surgx.sics-step-14", "med.surgx.sics-clip-14"]
+    },
+    {
+      "ref": "step.eye.suprachoroidal-haemorrhage", "media": ["med.surgx.sics-step-15", "med.surgx.sics-clip-15"]
+    },
+    {
+      "ref": "step.eye.intracameral-antibiotic", "media": ["med.surgx.sics-step-16", "med.surgx.sics-clip-16"]
+    },
+    {
+      "ref": "step.eye.wound-check", "media": ["med.surgx.sics-step-17", "med.surgx.sics-clip-17"],
+      "emphasis": "Check the tunnel self-seals; reposit the conjunctival flap over it and cauterise lightly."
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.sics-step-18", "med.surgx.sics-clip-18"]
+    },
+    {
+      "ref": "step.eye.shield-postop", "media": ["med.surgx.sics-step-19", "med.surgx.sics-clip-19"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.sics-step-20", "med.surgx.sics-clip-20"]
+    }
+  ],
+  "steps_local": {
+    "step.sics.tunnel": {
+      "id": "step.sics.tunnel",
+      "kind": "access",
+      "critical": true,
+      "title": "Fornix-based conjunctival flap and sclerocorneal tunnel",
+      "why": "The tunnel is the whole idea of SICS: a self-sealing, sutureless wound big enough to deliver the nucleus. Its width must match the nucleus and its depth must stay even.",
+      "how": [
+        "Make a small fornix-based conjunctival flap and apply light wet-field cautery to the sclera.",
+        "Make a partial-thickness frown or straight external incision about 6 to 7 mm long, 1.5 to 2 mm behind the limbus.",
+        "Dissect the tunnel forwards with a crescent blade at even depth, about one third to one half scleral thickness, 1 to 1.5 mm into clear cornea, widening the internal end like a funnel.",
+        "Make a side port, fill the chamber with viscoelastic and enter the chamber with a keratome at the end of the tunnel."
+      ],
+      "structuresAtRisk": [
+        "Sclera (buttonhole)",
+        "Ciliary body (posterior entry)",
+        "Corneal endothelium"
+      ],
+      "pitfalls": [
+        "A superficial tunnel that buttonholes.",
+        "Entering the chamber before the end of the tunnel, so the wound leaks.",
+        "A tunnel too narrow for a hard nucleus."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.sics.capsulotomy": {
+      "id": "step.sics.capsulotomy",
+      "kind": "access",
+      "title": "Anterior capsulotomy",
+      "why": "The nucleus has to come out of the bag, so the opening must be large enough to let it prolapse without tearing round to the posterior capsule.",
+      "how": [
+        "Under viscoelastic, perform a large continuous curvilinear capsulorhexis (about 6 to 7 mm) with relaxing cuts if needed, or a can-opener capsulotomy in a white cataract.",
+        "Stain the capsule with trypan blue when the red reflex is poor."
+      ],
+      "structuresAtRisk": [
+        "Anterior capsule",
+        "Zonules"
+      ],
+      "pitfalls": [
+        "A small rhexis that traps the nucleus.",
+        "Radial tears that extend posteriorly."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.sics.prolapse": {
+      "id": "step.sics.prolapse",
+      "kind": "dissection",
+      "title": "Hydrodissection and prolapsing the nucleus into the chamber",
+      "why": "Bringing the nucleus out of the bag into the anterior chamber, rather than levering it out from the bag, keeps the posterior capsule and zonules safe.",
+      "how": [
+        "Hydrodissect until the nucleus is free; with a large rhexis, one pole can be prolapsed with the fluid wave.",
+        "Rotate or dial the nucleus out of the bag into the anterior chamber.",
+        "Inject viscoelastic above and below it to protect the endothelium and push the posterior capsule back."
+      ],
+      "structuresAtRisk": [
+        "Posterior capsule",
+        "Zonules",
+        "Corneal endothelium"
+      ],
+      "pitfalls": [
+        "Forcing a nucleus through a small rhexis.",
+        "Working with no viscoelastic cushion over the endothelium."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.sics.delivery": {
+      "id": "step.sics.delivery",
+      "kind": "resection",
+      "critical": true,
+      "title": "Delivering the nucleus through the tunnel",
+      "why": "Delivery is the step that can damage the endothelium or tear the iris if the tunnel is too small or the nucleus is pushed rather than guided.",
+      "how": [
+        "Slide an irrigating vectis under the nucleus, or use viscoexpression or the fish-hook technique per training.",
+        "Apply gentle pressure on the posterior lip of the tunnel so the nucleus glides out with the fluid.",
+        "Enlarge the tunnel rather than force a nucleus that will not pass."
+      ],
+      "structuresAtRisk": [
+        "Corneal endothelium",
+        "Iris",
+        "Posterior capsule"
+      ],
+      "pitfalls": [
+        "Forcing a large nucleus through a small tunnel.",
+        "Pressing on the globe with an open tunnel."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.sics.cortex-iol": {
+      "id": "step.sics.cortex-iol",
+      "kind": "reconstruction",
+      "title": "Cortex aspiration and implant insertion",
+      "why": "Clean cortex removal and an implant centred in the bag decide the final vision and the long-term stability.",
+      "how": [
+        "Aspirate cortex with a Simcoe cannula or an irrigation-aspiration system, port facing up.",
+        "Fill the bag with viscoelastic and place the implant in the bag; dial it centred.",
+        "Wash out the viscoelastic and form the chamber with balanced salt."
+      ],
+      "structuresAtRisk": [
+        "Posterior capsule"
+      ],
+      "pitfalls": [
+        "Aspirating the posterior capsule.",
+        "An implant left half in the sulcus."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

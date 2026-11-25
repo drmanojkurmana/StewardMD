@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/invitation-accept.request.json",
+  "title": "POST /v1/invitations/accept request",
+  "description": "Accepts an invitation with the one-time token. The caller must be signed in; the API writes the research_members row and marks the invitation accepted. Unknown tokens answer 404 invitation_not_found; used tokens answer 409 already_decided; past expires_ts answers 410 invitation_expired.",
+  "type": "object",
+  "required": ["token"],
+  "additionalProperties": false,
+  "properties": {
+    "token": { "type": "string", "minLength": 32 }
+  }
+}

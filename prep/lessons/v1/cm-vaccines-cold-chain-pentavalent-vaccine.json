@@ -13,13 +13,31 @@
    "say": "Five protections share one needle. Diphtheria, pertussis, tetanus, hepatitis B and Hib together at six, ten and fourteen weeks. Separate products for the last two antigens became unnecessary at those visits.",
    "vis": {
     "kind": "table",
-    "cols": ["Component", "Disease prevented"],
+    "cols": [
+     "Component",
+     "Disease prevented"
+    ],
     "rows": [
-     ["Diphtheria toxoid", "Diphtheria"],
-     ["Whole-cell pertussis", "Whooping cough"],
-     ["Tetanus toxoid", "Tetanus"],
-     ["Hepatitis B surface antigen", "Hepatitis B"],
-     ["Hib conjugate", "Hib meningitis and pneumonia"]
+     [
+      "Diphtheria toxoid",
+      "Diphtheria"
+     ],
+     [
+      "Whole-cell pertussis",
+      "Whooping cough"
+     ],
+     [
+      "Tetanus toxoid",
+      "Tetanus"
+     ],
+     [
+      "Hepatitis B surface antigen",
+      "Hepatitis B"
+     ],
+     [
+      "Hib conjugate",
+      "Hib meningitis and pneumonia"
+     ]
     ]
    }
   },
@@ -42,11 +60,19 @@
     "kind": "compare",
     "left": {
      "title": "Separate antigens",
-     "points": ["Many visits and injections", "Dropouts at every extra visit", "Large cold chain volume"]
+     "points": [
+      "Many visits and injections",
+      "Dropouts at every extra visit",
+      "Large cold chain volume"
+     ]
     },
     "right": {
      "title": "Pentavalent combination",
-     "points": ["Three visits cover five diseases", "One record line per visit", "Caregivers more likely to return"]
+     "points": [
+      "Three visits cover five diseases",
+      "One record line per visit",
+      "Caregivers more likely to return"
+     ]
     }
    }
   },
@@ -56,11 +82,23 @@
    "say": "Combinations concentrate risk too. One frozen night destroys five adsorbed components together. Shake tests and conditioned packs matter more as combinations spread. Fever and local soreness are managed expectantly, not premedicated routinely.",
    "vis": {
     "kind": "table",
-    "cols": ["Property", "Consequence"],
+    "cols": [
+     "Property",
+     "Consequence"
+    ],
     "rows": [
-     ["Aluminium adsorbed", "Freeze damage destroys potency"],
-     ["Whole-cell pertussis inside", "Fever and local reactions commoner"],
-     ["Liquid multidose vial", "Open vial policy applies, 28 days"]
+     [
+      "Aluminium adsorbed",
+      "Freeze damage destroys potency"
+     ],
+     [
+      "Whole-cell pertussis inside",
+      "Fever and local reactions commoner"
+     ],
+     [
+      "Liquid multidose vial",
+      "Open vial policy applies, 28 days"
+     ]
     ]
    }
   },
@@ -83,11 +121,19 @@
     "kind": "compare",
     "left": {
      "title": "Common and minor",
-     "points": ["Pain, swelling, redness at site", "Fever for a day or two", "Irritability and poor feeding briefly"]
+     "points": [
+      "Pain, swelling, redness at site",
+      "Fever for a day or two",
+      "Irritability and poor feeding briefly"
+     ]
     },
     "right": {
      "title": "Rare, evaluate",
-     "points": ["Hypotonic-hyporesponsive episode", "Persistent inconsolable crying", "Anaphylaxis, adrenaline ready"]
+     "points": [
+      "Hypotonic-hyporesponsive episode",
+      "Persistent inconsolable crying",
+      "Anaphylaxis, adrenaline ready"
+     ]
     }
    }
   },
@@ -97,12 +143,27 @@
    "say": "Refusals stay narrow. Prior anaphylaxis and unexplained encephalopathy after a dose stop the pertussis component. Prior fever, family seizures, prematurity and stable neurology do not. Over-wide refusal manufactures unprotected cohorts.",
    "vis": {
     "kind": "table",
-    "cols": ["Situation", "Action"],
+    "cols": [
+     "Situation",
+     "Action"
+    ],
     "rows": [
-     ["Anaphylaxis to previous dose", "Do not repeat that vaccine"],
-     ["Fever after previous dose", "Vaccinate, warn and treat fever"],
-     ["Preterm infant", "Vaccinate by chronological age"],
-     ["Stable cerebral palsy", "Vaccinate normally"]
+     [
+      "Anaphylaxis to previous dose",
+      "Do not repeat that vaccine"
+     ],
+     [
+      "Fever after previous dose",
+      "Vaccinate, warn and treat fever"
+     ],
+     [
+      "Preterm infant",
+      "Vaccinate by chronological age"
+     ],
+     [
+      "Stable cerebral palsy",
+      "Vaccinate normally"
+     ]
     ]
    }
   },
@@ -113,12 +174,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Child presents for any care"},
-     {"id": "b", "label": "Immunisation card checked"},
-     {"id": "c", "label": "Due doses given same visit"},
-     {"id": "d", "label": "Next date written and told"}
+     {
+      "id": "a",
+      "label": "Child presents for any care"
+     },
+     {
+      "id": "b",
+      "label": "Immunisation card checked"
+     },
+     {
+      "id": "c",
+      "label": "Due doses given same visit"
+     },
+     {
+      "id": "d",
+      "label": "Next date written and told"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -127,11 +213,23 @@
    "say": "Two additions earned their place. Hib conjugate stops meningitis antibiotics reached too late, its sugar coat needing protein help in infants. Infant hepatitis B prevents chronic carriage, the delayed invoice being cirrhosis and liver cancer.",
    "vis": {
     "kind": "table",
-    "cols": ["Added antigen", "Burden it removes"],
+    "cols": [
+     "Added antigen",
+     "Burden it removes"
+    ],
     "rows": [
-     ["Hib conjugate", "Infant meningitis and pneumonia deaths"],
-     ["Hepatitis B", "Chronic carriage, cirrhosis, liver cancer"],
-     ["Both inside pentavalent", "No extra visit or injection"]
+     [
+      "Hib conjugate",
+      "Infant meningitis and pneumonia deaths"
+     ],
+     [
+      "Hepatitis B",
+      "Chronic carriage, cirrhosis, liver cancer"
+     ],
+     [
+      "Both inside pentavalent",
+      "No extra visit or injection"
+     ]
     ]
    }
   },
@@ -143,11 +241,19 @@
     "kind": "compare",
     "left": {
      "title": "Pentavalent moment",
-     "points": ["6, 10 and 14 week visits", "Five diseases, one injection", "Freeze-sensitive liquid vial"]
+     "points": [
+      "6, 10 and 14 week visits",
+      "Five diseases, one injection",
+      "Freeze-sensitive liquid vial"
+     ]
     },
     "right": {
      "title": "Not pentavalent",
-     "points": ["Hepatitis B birth dose alone", "DPT boosters in second year", "MR vaccine at 9 months"]
+     "points": [
+      "Hepatitis B birth dose alone",
+      "DPT boosters in second year",
+      "MR vaccine at 9 months"
+     ]
     }
    }
   },
@@ -158,12 +264,78 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Single antigen era"},
-     {"id": "b", "label": "DPT triple combination"},
-     {"id": "c", "label": "Pentavalent five in one"},
-     {"id": "d", "label": "Hexavalent adds IPV"}
+     {
+      "id": "a",
+      "label": "Single antigen era"
+     },
+     {
+      "id": "b",
+      "label": "DPT triple combination"
+     },
+     {
+      "id": "c",
+      "label": "Pentavalent five in one"
+     },
+     {
+      "id": "d",
+      "label": "Hexavalent adds IPV"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Pentavalent vaccine combines DPT with Hepatitis B and Hib in 0.5 ml intramuscularly at 6, 10 and 14 weeks. It is freeze sensitive, so suspect freezing needs the shake test. True contraindications are anaphylaxis and encephalopathy within seven days. Catch up is allowed up to one year, three doses four weeks apart. Hepatitis B birth dose stays separate within 24 hours.",
+   "say": "Pentavalent vaccine combines DPT with Hepatitis B and Hib in 0.5 ml intramuscularly at 6, 10 and 14 weeks. It is freeze sensitive, so suspect freezing needs the shake test. True contraindications are anaphylaxis and encephalopathy within seven days. Catch up is allowed up to one year, three doses four weeks apart. Hepatitis B birth dose stays separate within 24 hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Pentavalent components list",
+      "Diphtheria, pertussis, tetanus, Hepatitis B and Hib"
+     ],
+     [
+      "Pentavalent dose and route",
+      "0.5 ml intramuscular injection at each visit"
+     ],
+     [
+      "Pentavalent schedule ages",
+      "Six, ten and fourteen weeks in infancy"
+     ],
+     [
+      "Freeze damage trap",
+      "One freezing destroys all five components together"
+     ],
+     [
+      "True contraindications only",
+      "Prior anaphylaxis or encephalopathy within seven days"
+     ],
+     [
+      "Catch up age limit",
+      "Up to one year, three doses monthly apart"
+     ],
+     [
+      "Booster at 16 to 24 months",
+      "Plain DPT booster, not pentavalent vaccine"
+     ]
+    ]
    }
   }
  ],

@@ -1,0 +1,23 @@
+name = "stewardmd-research-orchestrator"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+workers_dev = false
+
+# Create queues before deploying:
+#   npx wrangler queues create stewardmd-research-jobs
+#   npx wrangler queues create stewardmd-research-dlq
+# Then configure Pages producer binding RESEARCH_QUEUE -> stewardmd-research-jobs.
+[[queues.consumers]]
+queue = "stewardmd-research-jobs"
+max_batch_size = 5
+max_batch_timeout = 5
+max_retries = 3
+dead_letter_queue = "stewardmd-research-dlq"
+
+[vars]
+# Set these as environment-specific variables after the Python Research API is deployed.
+RESEARCH_API_URL = ""
+RESEARCH_CALLBACK_URL = "https://stewardmd.in"
+# Secrets (never commit):
+# npx wrangler secret put RESEARCH_WORKER_TOKEN
+# npx wrangler secret put RESEARCH_CALLBACK_TOKEN

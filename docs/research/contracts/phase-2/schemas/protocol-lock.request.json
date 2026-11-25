@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/protocol-lock.request.json",
+  "title": "POST /v1/protocols/{protocolId}/lock request",
+  "description": "Locks the latest draft version before screening starts (integrity rule 7). The lock is one-way: the API hashes the canonical content_json bytes into lock_hash with locked_at, and any later write to a locked version answers 409 protocol_locked. Empty body.",
+  "type": "object",
+  "maxProperties": 0
+}

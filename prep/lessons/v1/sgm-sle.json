@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgm-sle",
+ "subject": "ss-general-medicine",
+ "title": "Systemic lupus erythematosus",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Systemic lupus erythematosus** strikes young women with multisystem autoimmunity in these patients. **Malar rash** with photosensitivity is the cutaneous hallmark in these patients. **Discoid lesions** scar and cause alopecia in these patients in many histories. **ANA positivity** is the screening test in these patients in many protocols globally.",
+   "say": "Systemic lupus erythematosus is multisystem autoimmunity in young women in these patients. Malar rash with photosensitivity is the cutaneous hallmark in these patients. Discoid lesions scar and cause alopecia in these patients in many histories. ANA positivity is the screening test in these patients in many protocols globally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "Feature",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Skin",
+      "Malar rash",
+      "Photosensitivity present"
+     ],
+     [
+      "Joint",
+      "Symmetric arthritis",
+      "Non erosive pattern"
+     ],
+     [
+      "Kidney",
+      "Proteinuria",
+      "Biopsy guides therapy"
+     ],
+     [
+      "Blood",
+      "Cytopenias",
+      "Anti dsDNA rising"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anti dsDNA** antibodies correlate with renal flares in these patients in many cohorts. **Anti Sm** antibodies are highly specific for lupus in these patients in many studies. **Hydroxychloroquine** is backbone therapy for all lupus in these patients in many guidelines. **Belimumab** blocks BAFF for active systemic disease in these patients in many protocols.",
+   "say": "Anti dsDNA antibodies correlate with renal flares in these patients in many cohorts. Anti Sm antibodies are highly specific for lupus in these patients in many studies. Hydroxychloroquine is backbone therapy for all lupus in these patients in many guidelines. Belimumab blocks BAFF for active systemic disease in these patients in many protocols.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Backbone therapy",
+     "points": [
+      "Hydroxychloroquine for all",
+      "Reduces flares and damage",
+      "Retinal screening needed",
+      "Skin and joint benefit"
+     ]
+    },
+    "right": {
+     "title": "Biologic add on",
+     "points": [
+      "Belimumab blocks BAFF",
+      "Anifrolumab blocks IFN receptor",
+      "Steroid sparing effect",
+      "Active disease indication"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Anifrolumab** blocks type 1 interferon for active lupus in these patients. **Cyclophosphamide** with **mycophenolate** treat lupus nephritis in these patients. **Tacrolimus** with voclosporin are calcineurin options for nephritis in these patients. **Rituximab** helps refractory lupus in these patients in many case series globally.",
+   "say": "Anifrolumab blocks type one interferon for active lupus in these patients. Cyclophosphamide with mycophenolate are the treatment of lupus nephritis in these patients. Tacrolimus with voclosporin are calcineurin options for nephritis in these patients. Rituximab helps refractory lupus in these patients in many case series globally.",
+   "vis": null
+  },
+  {
+   "tx": "**Lupus nephritis** needs kidney biopsy for class based therapy in these patients. **Class IV** diffuse proliferative disease needs potent immunosuppression in these patients. **Proteinuria** quantification tracks renal response in these patients in many protocols. **Blood pressure** control is part of nephritis care in these patients in many guidelines.",
+   "say": "Lupus nephritis needs kidney biopsy for class based therapy in these patients. Class four diffuse proliferative disease needs potent immunosuppression in these patients. Proteinuria quantification tracks renal response in these patients in many protocols. Blood pressure control is part of nephritis care in these patients in many guidelines.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Proteinuria detected"
+     },
+     {
+      "id": "b",
+      "label": "Kidney biopsy performed"
+     },
+     {
+      "id": "c",
+      "label": "Class based therapy"
+     },
+     {
+      "id": "d",
+      "label": "Response monitoring serial"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neuropsychiatric lupus** presents with psychosis and seizures in these patients. **Antiphospholipid** antibodies complicate lupus with thrombosis in these patients. **Aspirin** prophylaxis suits antiphospholipid positive lupus in these patients. **Atorvastatin** supports cardiovascular protection in these patients in many protocols. Steroid sparing is the goal in these patients.",
+   "say": "Neuropsychiatric lupus presents with psychosis and seizures in these patients. Antiphospholipid antibodies are associated with thrombosis in lupus in these patients. Aspirin prophylaxis is the option for antiphospholipid positive lupus in these patients. Atorvastatin supports cardiovascular protection in these patients in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**Subacute cutaneous lupus** causes annular plaques in these patients with this presentation. **Minocycline** is an option for refractory cutaneous disease in these patients in many case reports. **Azathioprine** suits maintenance after nephritis induction in these patients. Sun protection is mandatory for cutaneous disease control in these patients today.",
+   "say": "Subacute cutaneous lupus causes annular plaques in these patients with this presentation. Minocycline is an option for refractory cutaneous disease in these patients in many case reports. Azathioprine is maintenance after nephritis induction in these patients. Sun protection is mandatory for cutaneous disease control in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Manifestation",
+     "Feature",
+     "Therapy"
+    ],
+    "rows": [
+     [
+      "Malar rash",
+      "Photosensitive erythema",
+      "Hydroxychloroquine backbone"
+     ],
+     [
+      "Nephritis",
+      "Proteinuria and casts",
+      "Mycophenolate based therapy"
+     ],
+     [
+      "Neuropsychiatric",
+      "Psychosis, seizures",
+      "Steroids and immunosuppression"
+     ],
+     [
+      "Haematologic",
+      "Cytopenias",
+      "Hydroxychloroquine and steroids"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hydralazine** induced lupus mimics idiopathic disease in these patients. **Procainamide** induced lupus appears months after drug exposure in these patients. **Isoniazid** induced lupus is another drug mimic in these patients. Drug withdrawal resolves disease in these patients in many case reports.",
+   "say": "Hydralazine induced lupus mimics idiopathic disease in these patients. Procainamide induced lupus appears months after drug exposure in these patients. Isoniazid induced lupus is another drug mimic in these patients. Drug withdrawal is the resolution of disease in these patients in many case reports.",
+   "vis": null
+  },
+  {
+   "tx": "**Pregnancy** in lupus needs quiescent disease before conception in these patients. **Hydroxychloroquine** continues in pregnancy in these patients in many guidelines. **Anti Ro** antibodies cause neonatal lupus in these patients. Fetal heart monitoring screens for heart block in these patients.",
+   "say": "Pregnancy in lupus needs quiescent disease before conception in these patients. Hydroxychloroquine is continued in pregnancy in these patients in many guidelines. Anti Ro antibodies cause neonatal lupus in these patients. Fetal heart monitoring screens for heart block in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Quiescent disease check"
+     },
+     {
+      "id": "b",
+      "label": "Hydroxychloroquine continue"
+     },
+     {
+      "id": "c",
+      "label": "Anti Ro testing"
+     },
+     {
+      "id": "d",
+      "label": "Fetal heart monitoring"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cutaneous lupus** needs sun protection with high SPF in these patients. **Allopurinol** has no routine lupus role despite its presence in listings confusion. **Febuxostat** is a gout drug without lupus indication in these patients. **Tamoxifen** is a breast cancer drug without lupus role in these patients.",
+   "say": "Cutaneous lupus needs sun protection with high SPF in these patients. Allopurinol has no routine lupus role despite its presence in listings confusion. Febuxostat is a gout drug without lupus indication in these patients. Tamoxifen is a breast cancer drug without lupus role in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Cardiovascular risk** is tenfold higher in lupus in these patients in many studies. **Statin** therapy reduces vascular risk in these patients in many protocols globally. **Smoking cessation** is mandatory in these patients in many clinics today. **Vaccination** before immunosuppression is advised in these patients in many guidelines.",
+   "say": "Cardiovascular risk is tenfold higher in lupus in these patients in many studies. Statin therapy reduces vascular risk in these patients in many protocols globally. Smoking cessation is mandatory in these patients in many clinics today. Vaccination before immunosuppression is advised in these patients in many guidelines.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** heads this lupus summary section on purpose. Remember malar rash with photosensitivity, anti Sm specificity and anti dsDNA renal correlation in these patients. Hydroxychloroquine is backbone therapy while belimumab and anifrolumab are biologics. Hydralazine, procainamide and isoniazid mimic lupus in these histories.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Malar rash with photosensitivity is the cutaneous hallmark in these patients. Anti Sm antibody is the specific marker of lupus disease. Hydroxychloroquine is backbone therapy for all lupus patients. Belimumab and anifrolumab are biologics for active disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Cutaneous hallmark",
+      "Malar rash with photosensitivity"
+     ],
+     [
+      "Specific marker",
+      "Anti Sm antibodies highly specific"
+     ],
+     [
+      "Renal correlation",
+      "Anti dsDNA tracks renal flares"
+     ],
+     [
+      "Backbone therapy",
+      "Hydroxychloroquine for all patients"
+     ],
+     [
+      "Biologics",
+      "Belimumab and anifrolumab options"
+     ],
+     [
+      "Drug mimics",
+      "Hydralazine, procainamide, isoniazid"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

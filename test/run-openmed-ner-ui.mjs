@@ -1,7 +1,7 @@
 /* openmed-ner.js on the REAL runtime: the app page, the vendored onnxruntime-web (WASM, the same
  * loader ThoreX uses), and the lookup-table fixture ONNX from test/fixtures/openmed-ner (same I/O
  * contract as OpenMed's -onnx-android export). Also proves the shipped defaults: both flags off,
- * nothing downloaded, and no request to huggingface.co even with a flag on (licence unverified).
+ * packs ON by default and verified; flag "0" switches one off and nothing is downloaded.
  * USAGE: node test/run-openmed-ner-ui.mjs      (needs Playwright; serves the repo on :8991 itself)
  */
 import { spawn, execSync } from "node:child_process";
@@ -29,14 +29,16 @@ try {
 
   const d = await page.evaluate(async () => {
     const N = window.SMD_OPENMED_NER;
-    localStorage.setItem("smd_openmed_pharma", "1");            // flag ON, pack still unverified
+    const pharma = N.status("pharma"), disease = N.status("disease");   // default: ON, verified
+    localStorage.setItem("smd_openmed_pharma", "0");            // owner switch-off
     const gated = await N.extract("pharma", "Start warfarin 5 mg");
+    const off = N.status("pharma");
     localStorage.removeItem("smd_openmed_pharma");
-    return { loaded: !!N, pharma: N.status("pharma"), disease: N.status("disease"), gated };
+    return { loaded: !!N, pharma, disease, off, gated };
   });
   ok(d.loaded, "openmed-ner.js loaded in the app page");
-  ok(d.pharma.reason === "flag-off" && d.disease.reason === "flag-off", "both flags OFF by default");
-  ok(d.gated.length === 0, "flag on but licence unverified: extract returns []");
+  ok(d.pharma.reason === "ready" && d.disease.reason === "ready", "both packs ON and verified by default");
+  ok(d.off.reason === "flag-off" && d.gated.length === 0, "flag \"0\" switches a pack off: extract returns [] and downloads nothing");
 
   const r = await page.evaluate(async () => {
     const N = window.SMD_OPENMED_NER;
@@ -66,7 +68,7 @@ try {
   ok(r.icd.length === 3, "ICD suggestions: one per condition");
   ok(JSON.stringify(r.names) === JSON.stringify(["aspirin", "paracetamol"]) && r.grounded.unsupported === 1 && r.grounded.supported === 0,
      "grounding with tagger names removes the swapped drug");
-  ok(hf.length === 0, "no request to huggingface.co (" + hf.length + ")");
+  ok(hf.length === 0, "no request to huggingface.co while switched off or with injected test bytes (" + hf.length + ")");
 } finally {
   await browser.close(); if (serve) serve.kill();
 }

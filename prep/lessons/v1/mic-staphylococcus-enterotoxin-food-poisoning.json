@@ -149,12 +149,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "cases", "label": "Cases listed with foods and onset times" },
-          { "id": "attack", "label": "Dish specific attack rates calculated" },
-          { "id": "food", "label": "Leftover food enterotoxin and culture" },
-          { "id": "handler", "label": "Handler carriage and hygiene review" }
+          {
+            "id": "cases",
+            "label": "Cases listed with foods and onset times"
+          },
+          {
+            "id": "attack",
+            "label": "Dish specific attack rates calculated"
+          },
+          {
+            "id": "food",
+            "label": "Leftover food enterotoxin and culture"
+          },
+          {
+            "id": "handler",
+            "label": "Handler carriage and hygiene review"
+          }
         ],
-        "edges": [["cases", "attack"], ["attack", "food"], ["food", "handler"]]
+        "edges": [
+          [
+            "cases",
+            "attack"
+          ],
+          [
+            "attack",
+            "food"
+          ],
+          [
+            "food",
+            "handler"
+          ]
+        ]
       }
     },
     {
@@ -205,6 +230,47 @@
             "Environmental cleaning supports, not substitutes"
           ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Staphylococcal enterotoxin is heat stable and preformed in food, so vomiting starts within one to six hours despite reheating. Exfoliative toxins A and B split desmoglein 1 in scalded skin syndrome. The split is superficial, Nikolsky sign is positive and mucosa is spared. MRSA screening and mupirocin decolonisation target high risk patients.",
+      "say": "Staphylococcal enterotoxin is heat stable and preformed in food, so vomiting starts within one to six hours despite reheating. Exfoliative toxins A and B split desmoglein 1 in scalded skin syndrome. The split is superficial, Nikolsky sign is positive and mucosa is spared. MRSA screening and mupirocin decolonisation target high risk patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Food poisoning onset",
+            "Vomiting within one to six hours"
+          ],
+          [
+            "Enterotoxin key property",
+            "Heat stable preformed superantigen in food"
+          ],
+          [
+            "Scalded skin toxins",
+            "Exfoliative toxins A and B split desmoglein 1"
+          ],
+          [
+            "Scalded skin signs",
+            "Nikolsky positive, superficial split, mucosa spared"
+          ],
+          [
+            "Bullous impetigo cause",
+            "Exfoliative toxin from Staphylococcus aureus"
+          ],
+          [
+            "Perfringens differential",
+            "Eight to sixteen hours, diarrhoea dominant"
+          ],
+          [
+            "Decolonisation drug",
+            "Mupirocin, resistance via plasmid mupA gene"
+          ]
+        ]
       }
     }
   ]

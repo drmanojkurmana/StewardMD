@@ -2089,6 +2089,11 @@
   // page 1 and an ABG on page 2, is fully captured (gold249).
   function importMethod(method) { importFileInput("all", method); }
   function wardSyncFetch() {
+    // Owner 2026-11-22: importing THIS patient opens Ward Sync with Select on every patient; Select loads them here.
+    if (window.GHIS && GHIS.pickPatient && GHIS.loadIntoICU) {
+      try { GHIS.pickPatient(function (sel) { if (sel && sel.patientId) GHIS.loadIntoICU(sel.patientId); }); } catch (e) {}
+      return;
+    }
     if (typeof window.openGHIS === "function") { try { openGHIS(); } catch (e) {} }
     else if (window.SMD_setGhis) { try { SMD_setGhis(true); setTimeout(function () { try { window.openGHIS && openGHIS(); } catch (e) {} }, 400); } catch (e) {} }
     else if (window.toast) toast("Ward Sync is loading — try again in a moment.");
@@ -8912,6 +8917,7 @@
       '<div style="max-height:50vh;overflow:auto;margin-bottom:10px">' + items + "</div>" +
       ((window.SMD_REFERRALS && SMD_REFERRALS.flagOn && SMD_REFERRALS.flagOn()) ? '<button class="icu-btn ghost" id="refInboxBtn" data-icu-act="refinbox">↪ Referrals' + (window.SMD_REFERRALS.unreadCount && SMD_REFERRALS.unreadCount() ? " (" + SMD_REFERRALS.unreadCount() + ")" : "") + "</button>" : "") +
       ((window.SMD_CONNECT && SMD_CONNECT.listDoctors) ? '<button class="icu-btn ghost" data-icu-act="emrdocs">🩺 EMR Doctors</button>' : "") +
+      ((window.GHIS && GHIS.openForAdd) ? '<button class="icu-btn ghost" data-icu-act="wardadd">' + ico("hospital", "🏥") + ' Add patients from Ward Sync</button>' : "") +
       '<button class="icu-btn" data-icu-act="newpt">＋ New patient</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
@@ -9336,6 +9342,8 @@
       case "voice": if (modalEl) modalEl.classList.remove("on"); if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "icu" }); else alert("Voice intake is loading — try again in a moment."); break;
       case "import": startImport(arg); break;
       case "wardfetch": wardSyncFetch(); break;
+      // Many patients into a unit: Ward Sync opens in Select mode (tick patients or a whole group, then Add).
+      case "wardadd": try { if (modalEl) modalEl.classList.remove("on"); } catch (x) {} try { if (window.GHIS && GHIS.openForAdd) GHIS.openForAdd(); } catch (x) {} break;
       case "impmethod": importMethod(arg); break;
       case "conflict": { var parts = arg.split("|"); ICU.resolveConflict(parts[0], parts[1]); paint(); break; }
       case "dismissupdate": ICU.clearNewUpdate(); paint(); break;

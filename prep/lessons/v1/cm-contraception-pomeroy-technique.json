@@ -15,11 +15,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "p1", "label": "Loop of tube lifted at mid segment" },
-          { "id": "p2", "label": "Base tied with absorbable catgut" },
-          { "id": "p3", "label": "Knuckle excised, ends retract apart" }
+          {
+            "id": "p1",
+            "label": "Loop of tube lifted at mid segment"
+          },
+          {
+            "id": "p2",
+            "label": "Base tied with absorbable catgut"
+          },
+          {
+            "id": "p3",
+            "label": "Knuckle excised, ends retract apart"
+          }
         ],
-        "edges": [["p1", "p2"], ["p2", "p3"]]
+        "edges": [
+          [
+            "p1",
+            "p2"
+          ],
+          [
+            "p2",
+            "p3"
+          ]
+        ]
       }
     },
     {
@@ -39,12 +57,27 @@
       "say": "Clips and rings preserve tube for reversal; cautery destroys it. Pomeroy sits in the middle on both failure and reversal.",
       "vis": {
         "kind": "table",
-        "cols": ["Method", "Failure and reversal profile"],
+        "cols": [
+          "Method",
+          "Failure and reversal profile"
+        ],
         "rows": [
-          ["Pomeroy (modified)", "Failure ~0.4 percent, moderate reversal"],
-          ["Falope ring / Filshie clip", "Low failure, best reversal prospects"],
-          ["Parkland segment excision", "Low failure, poorer reversal"],
-          ["Electrocoagulation", "Low failure, worst reversal"]
+          [
+            "Pomeroy (modified)",
+            "Failure ~0.4 percent, moderate reversal"
+          ],
+          [
+            "Falope ring / Filshie clip",
+            "Low failure, best reversal prospects"
+          ],
+          [
+            "Parkland segment excision",
+            "Low failure, poorer reversal"
+          ],
+          [
+            "Electrocoagulation",
+            "Low failure, worst reversal"
+          ]
         ]
       }
     },
@@ -55,11 +88,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "l1", "label": "Baby under six months old" },
-          { "id": "l2", "label": "Exclusive breastfeeding, amenorrhoea present" },
-          { "id": "l3", "label": "Any criterion lost: start modern method" }
+          {
+            "id": "l1",
+            "label": "Baby under six months old"
+          },
+          {
+            "id": "l2",
+            "label": "Exclusive breastfeeding, amenorrhoea present"
+          },
+          {
+            "id": "l3",
+            "label": "Any criterion lost: start modern method"
+          }
         ],
-        "edges": [["l1", "l2"], ["l2", "l3"]]
+        "edges": [
+          [
+            "l1",
+            "l2"
+          ],
+          [
+            "l2",
+            "l3"
+          ]
+        ]
       }
     },
     {
@@ -70,11 +121,19 @@
         "kind": "compare",
         "left": {
           "title": "Awareness based tools",
-          "points": ["Cycle beads for 26 to 32 day cycles", "Mucus and temperature charting", "No hormones, no devices"]
+          "points": [
+            "Cycle beads for 26 to 32 day cycles",
+            "Mucus and temperature charting",
+            "No hormones, no devices"
+          ]
         },
         "right": {
           "title": "Practical limits",
-          "points": ["Needs regular cycles and training", "Illness and travel disturb signs", "No protection against infections"]
+          "points": [
+            "Needs regular cycles and training",
+            "Illness and travel disturb signs",
+            "No protection against infections"
+          ]
         }
       }
     },
@@ -84,12 +143,27 @@
       "say": "Stabilise anaemia, infection, and uncontrolled disease before elective sterilisation. Always exclude pregnancy before interval tubectomy.",
       "vis": {
         "kind": "table",
-        "cols": ["Defer sterilisation when", "Reason"],
+        "cols": [
+          "Defer sterilisation when",
+          "Reason"
+        ],
         "rows": [
-          ["Severe anaemia (haemoglobin under 7)", "Anaesthetic and bleeding risk"],
-          ["Active pelvic infection", "Post operative sepsis risk"],
-          ["Uncontrolled hypertension or diabetes", "Perioperative instability"],
-          ["Suspected pregnancy (interval case)", "Procedure failure and harm"]
+          [
+            "Severe anaemia (haemoglobin under 7)",
+            "Anaesthetic and bleeding risk"
+          ],
+          [
+            "Active pelvic infection",
+            "Post operative sepsis risk"
+          ],
+          [
+            "Uncontrolled hypertension or diabetes",
+            "Perioperative instability"
+          ],
+          [
+            "Suspected pregnancy (interval case)",
+            "Procedure failure and harm"
+          ]
         ]
       }
     },
@@ -100,11 +174,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "ga1", "label": "Greet, ask needs and medical history" },
-          { "id": "ga2", "label": "Tell all methods, help couple choose" },
-          { "id": "ga3", "label": "Explain use, consent, return date" }
+          {
+            "id": "ga1",
+            "label": "Greet, ask needs and medical history"
+          },
+          {
+            "id": "ga2",
+            "label": "Tell all methods, help couple choose"
+          },
+          {
+            "id": "ga3",
+            "label": "Explain use, consent, return date"
+          }
         ],
-        "edges": [["ga1", "ga2"], ["ga2", "ga3"]]
+        "edges": [
+          [
+            "ga1",
+            "ga2"
+          ],
+          [
+            "ga2",
+            "ga3"
+          ]
+        ]
       }
     },
     {
@@ -113,12 +205,27 @@
       "say": "Category one use freely, four never use. The eligibility wheel lets a peripheral worker decide safely without memorising every rule.",
       "vis": {
         "kind": "table",
-        "cols": ["Category", "Programme meaning"],
+        "cols": [
+          "Category",
+          "Programme meaning"
+        ],
         "rows": [
-          ["1", "Use in any circumstance"],
-          ["2", "Generally use, benefits exceed risks"],
-          ["3", "Usually avoid unless expert judgement supports"],
-          ["4", "Unacceptable risk, do not use"]
+          [
+            "1",
+            "Use in any circumstance"
+          ],
+          [
+            "2",
+            "Generally use, benefits exceed risks"
+          ],
+          [
+            "3",
+            "Usually avoid unless expert judgement supports"
+          ],
+          [
+            "4",
+            "Unacceptable risk, do not use"
+          ]
         ]
       }
     },
@@ -130,11 +237,19 @@
         "kind": "compare",
         "left": {
           "title": "Spacing conversation",
-          "points": ["Postpartum IUCD and implants first", "Three year interval goal", "Reversible, fertility preserving"]
+          "points": [
+            "Postpartum IUCD and implants first",
+            "Three year interval goal",
+            "Reversible, fertility preserving"
+          ]
         },
         "right": {
           "title": "Limiting conversation",
-          "points": ["Permanence stated plainly", "Vasectomy offered before tubectomy", "Regret risks discussed openly"]
+          "points": [
+            "Permanence stated plainly",
+            "Vasectomy offered before tubectomy",
+            "Regret risks discussed openly"
+          ]
         }
       }
     },
@@ -145,11 +260,70 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "rv1", "label": "State permanence and failure rates" },
-          { "id": "rv2", "label": "Discuss reversal limits and IVF option" },
-          { "id": "rv3", "label": "Document free, informed, unhurried consent" }
+          {
+            "id": "rv1",
+            "label": "State permanence and failure rates"
+          },
+          {
+            "id": "rv2",
+            "label": "Discuss reversal limits and IVF option"
+          },
+          {
+            "id": "rv3",
+            "label": "Document free, informed, unhurried consent"
+          }
         ],
-        "edges": [["rv1", "rv2"], ["rv2", "rv3"]]
+        "edges": [
+          [
+            "rv1",
+            "rv2"
+          ],
+          [
+            "rv2",
+            "rv3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Female surgical sterilisation via the Pomeroy technique loops, ligates with absorbable suture, and resects a segment of the ampullary-isthmic Fallopian tube. Non-absorbable suture is contraindicated because it promotes tuboperitoneal fistula formation. Laparoscopic sterilisation applies silastic Falope rings. Failure rates average 0.5 per hundred woman-years. Postoperative non-scalpel vasectomy requires semen confirmation of azoospermia after three months or thirty ejaculations, during which barrier contraception is mandatory.",
+      "say": "Female surgical sterilisation via the Pomeroy technique loops, ligates with absorbable suture, and resects a segment of the ampullary-isthmic Fallopian tube. Non-absorbable suture is contraindicated because it promotes tuboperitoneal fistula formation. Laparoscopic sterilisation applies silastic Falope rings. Failure rates average 0.5 per hundred woman-years. Postoperative non-scalpel vasectomy requires semen confirmation of azoospermia after three months or thirty ejaculations, during which barrier contraception is mandatory.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Pomeroy technique suture",
+            "Absorbable plain or chromic catgut suture loops mid-isthmic tube"
+          ],
+          [
+            "Non-absorbable suture hazard",
+            "Causes tuboperitoneal fistula and high failure rates"
+          ],
+          [
+            "Falope ring application",
+            "Silastic band applied across tubal loop via laparoscope"
+          ],
+          [
+            "Sterilisation failure rate",
+            "Approximate failure rate of 0.5 per 100 woman-years"
+          ],
+          [
+            "Post-vasectomy azoospermia wait",
+            "Three months or thirty ejaculations before declaring sterility"
+          ],
+          [
+            "Non-scalpel vasectomy feature",
+            "Puncture technique produces minimal bleeding, haematoma, or infection"
+          ],
+          [
+            "Recanalisation success rate",
+            "Reversal microsurgery yields higher pregnancy rates after vasectomy"
+          ]
+        ]
       }
     }
   ]

@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-dengue-arbovirus",
+ "subject": "ss-general-medicine",
+ "title": "Dengue and arboviral fevers",
+ "minutes": 11,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Dengue fever** is an Aedes borne viral infection with **4 serotypes** numbered 1 to 4 in total. **Four hundred million infections** occur yearly worldwide in endemic regions. **Five hundred thousand hospitalisations** happen due to severe dengue annually in hospitals. **Aedes aegypti** bites during **daytime hours** unlike Anopheles mosquitoes at night.",
+   "say": "Dengue fever is a viral infection spread by Aedes mosquitoes during the day. There are four serotypes numbered one to four. Hundreds of millions of infections occur yearly worldwide, with hundreds of thousands of hospitalisations due to severe dengue each year.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dengue",
+     "points": [
+      "Aedes mosquito spreads dengue",
+      "Biphasic fever with saddle pattern",
+      "Thrombocytopenia with plasma leak",
+      "Antibody enhancement worsens second infection"
+     ]
+    },
+    "right": {
+     "title": "Chikungunya",
+     "points": [
+      "Aedes mosquito spreads chikungunya",
+      "Debilitating joint pain dominates course",
+      "Fever with rash lasts days only",
+      "Chronic arthritis follows in older adults"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Aedes aegypti** breeds in **clean stored water** in homes and coolers. **Monsoon season** from **June to October** brings dengue peaks yearly. **Previous dengue infection** raises risk of severe disease due to **antibody enhancement**. **Travel to endemic areas** exposes nonimmune adults to infection.",
+   "say": "Aedes aegypti breeds in clean stored water inside and around homes. The monsoon months from late spring to early autumn bring dengue peaks. A previous dengue infection increases the risk of severe disease because of antibody enhancement. Travel to endemic areas can expose nonimmune adults.",
+   "vis": null
+  },
+  {
+   "tx": "**Antibody dependent enhancement** occurs when prior antibodies bind virus and worsen uptake. **NS1 protein** triggers **endothelial leak** in blood vessels after 2 days. **Plasma leakage** peaks at **defervescence on day 4** of illness. **Viral load** above **10 to power 6** predicts severe disease in cohorts.",
+   "say": "Antibody dependent enhancement occurs when antibodies from an earlier infection worsen viral uptake into immune cells. The N S one protein can trigger leakiness in blood vessels after a couple of days. Plasma leakage peaks when fever falls around the fourth day of illness. Very high viral loads can predict severe disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m",
+      "label": "Mosquito bite",
+      "sub": "inoculates virus"
+     },
+     {
+      "id": "v",
+      "label": "Viraemia",
+      "sub": "days one to three"
+     },
+     {
+      "id": "l",
+      "label": "Endothelial leak",
+      "sub": "defervescence phase"
+     },
+     {
+      "id": "s",
+      "label": "Shock phase",
+      "sub": "narrow pulse pressure"
+     }
+    ],
+    "edges": [
+     [
+      "m",
+      "v"
+     ],
+     [
+      "v",
+      "l"
+     ],
+     [
+      "l",
+      "s"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Saddleback fever** shows fever falling then rising again in **biphasic pattern**. **Retro orbital pain** with **myalgia** is the classic dengue feature asked yearly. **Tournament sign** of **petechiae on arm** indicates capillary fragility. **Positive tourniquet test** predicts **plasma leak** in endemic settings.",
+   "say": "Saddleback fever shows fever falling and then rising again in two phases. Retro orbital pain with muscle aches is the classic dengue feature. Petechiae on the arm after a tourniquet test indicate capillary fragility. A positive tourniquet test predicts plasma leakage in endemic settings.",
+   "vis": null
+  },
+  {
+   "tx": "**NS1 antigen test** detects dengue virus within **5 days** of illness onset. **ELISA antibodies** confirm diagnosis after **day 5** of disease course. **Haematocrit rise by 20%** suggests **plasma leakage** in dengue clearly. **Platelet count below one hundred thousand** per microlitre signals **thrombocytopenia** needing monitoring closely.",
+   "say": "An N S one antigen test detects dengue virus within five days of illness. Antibody tests confirm diagnosis after the fifth day. A rise in haematocrit by one fifth suggests plasma leakage. A platelet count below one lakh per microlitre signals thrombocytopenia that needs close monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Window",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "NS1 antigen",
+      "Days 1 to 5",
+      "Active viral infection"
+     ],
+     [
+      "IgM antibody",
+      "Day 5 onward",
+      "Recent dengue infection"
+     ],
+     [
+      "IgG antibody",
+      "After day 10",
+      "Past infection or secondary"
+     ],
+     [
+      "Platelet count",
+      "Serial daily",
+      "Leak severity marker"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Paracetamol 15 mg per kg** every 6 hours is first line for dengue fever. **Oral fluids 2 to 3 litres** daily are needed for **stable outpatient** care. **Intravenous isotonic crystalloids** start for **warning signs** with plasma leak. **Avoid NSAIDs** as they worsen **bleeding risk** during thrombocytopenia.",
+   "say": "Paracetamol dosed by body weight every six hours is first line for dengue fever. Generous oral fluids are needed for stable outpatient care. Intravenous isotonic fluids are started when warning signs of plasma leak appear. Non steroidal anti inflammatory drugs must be avoided because they worsen bleeding risk.",
+   "vis": null
+  },
+  {
+   "tx": "**Source reduction** with weekly emptying of coolers prevents **Aedes breeding** in **7 days**. **Repellents with DEET 20%** protect against **daytime bites** in endemic zones. **Window screens** and **full sleeve clothing** cut exposure by **50%** in trials. **Larvicides** control breeding in underground tanks routinely.",
+   "say": "Source reduction with weekly emptying of water storage prevents Aedes breeding within a week. Repellents can protect against daytime bites in endemic zones. Window screens and full sleeve clothing cut exposure substantially in trials. Larvicides control breeding in underground tanks on a routine basis.",
+   "vis": null
+  },
+  {
+   "tx": "**Dengue shock syndrome** needs **20 ml per kg** fluid boluses rapidly. **Platelet transfusion at 10000 per microlitre** is given only for **active bleeding**. **Dengue haemorrhagic fever** grade 3 needs **intensive care** with **inotropes**. **Chikungunya arthritis** persists for **12 months** in many adults after infection.",
+   "say": "Dengue shock syndrome needs rapid fluid boluses given by body weight. Platelet transfusion is reserved for active bleeding at very low counts. Severe haemorrhagic dengue needs intensive care with supportive measures. Chikungunya arthritis can persist for about a year in many adults.",
+   "vis": null
+  },
+  {
+   "tx": "**Yellow fever vaccine** is a **single dose** with **10 year** protection used before travel. **Japanese encephalitis vaccine** needs **2 primary doses** spaced by **4 weeks** for protection. **Japanese encephalitis** affects **pig farmers** near **paddy fields** in endemic states. **West Nile fever** presents as **aseptic meningitis** in monsoon season.",
+   "say": "Yellow fever vaccine is a single dose with long lasting protection used before travel to endemic zones. Japanese encephalitis vaccine needs two primary doses spaced by several weeks. Japanese encephalitis affects pig farmers near paddy fields in endemic states. West Nile fever presents as aseptic meningitis in monsoon season.",
+   "vis": null
+  },
+  {
+   "tx": "**Warning signs** appear at **defervescence after day 3** in severe dengue. **Tourniquet test** is positive in **most dengue** cases. **Haematocrit rise** with **falling platelets** marks **plasma leak** phase onset. **Resting pulse pressure** under **20 mmHg** indicates **impending shock** in wards.",
+   "say": "Warning signs appear when fever falls after the third day in severe dengue. The tourniquet test is positive in most dengue cases. A rising haematocrit with falling platelets marks the onset of plasma leak. A narrow pulse pressure indicates impending shock and needs urgent fluids.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** contrasts dengue and chikungunya. **Dengue** leaks plasma and **shock** kills. **Chikungunya** pains joints for **months**. **NS1** is positive in **5 days**. **Tourniquet test** predicts **capillary leak**. **Avoid NSAIDs** in **dengue fever** due to **bleeding**. **Paracetamol** is first line.",
+   "say": "This is the high yield summary for dengue and chikungunya together. Dengue can leak plasma into the tissues and shock kills patients. Chikungunya can cause joint pains for many months after infection. N S one antigen is positive within five days of illness onset. The tourniquet test can predict capillary leak in dengue. Avoid non steroidal anti inflammatory drugs in dengue because of bleeding risk. Paracetamol is the first line drug for dengue fever.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Dengue",
+     "Chikungunya"
+    ],
+    "rows": [
+     [
+      "Vector",
+      "Aedes aegypti",
+      "Aedes albopictus"
+     ],
+     [
+      "Classic pain",
+      "Retro orbital pain",
+      "Joint pain"
+     ],
+     [
+      "Key test",
+      "NS1 in 5 days",
+      "IgM after week one"
+     ],
+     [
+      "Danger phase",
+      "Defervescence day 4",
+      "No shock phase"
+     ],
+     [
+      "Chronic feature",
+      "None",
+      "Arthritis 12 months"
+     ],
+     [
+      "First drug",
+      "Paracetamol",
+      "Paracetamol"
+     ],
+     [
+      "Killer step",
+      "Fluid bolus 20 ml per kg",
+      "Supportive care"
+     ]
+    ]
+   }
+  }
+ ]
+}

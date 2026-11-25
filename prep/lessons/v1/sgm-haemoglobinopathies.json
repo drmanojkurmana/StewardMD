@@ -1,0 +1,297 @@
+{
+ "v": 1,
+ "module": "sgm-haemoglobinopathies",
+ "subject": "ss-general-medicine",
+ "title": "Thalassaemia and sickle cell disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Thalassaemia** is a haemoglobin synthesis defect from reduced globin production. **Sickle cell disease** is a haemoglobin variant producing sickled red cells under low oxygen. Both cause haemolysis with compensatory erythroid hyperplasia. **Microcytosis** with normal iron points toward thalassaemia rather than iron deficiency in many patients.",
+   "say": "Thalassaemia is a haemoglobin synthesis defect from reduced globin production. Sickle cell disease is a haemoglobin variant that produces sickled red cells under low oxygen. Both conditions cause haemolysis with compensatory erythroid hyperplasia. Microcytosis with normal iron points toward thalassaemia in many patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thalassaemia",
+     "points": [
+      "Reduced globin chain production",
+      "Microcytic haemolytic anaemia",
+      "Transfusion dependent forms",
+      "Iron overload from repeated transfusion"
+     ]
+    },
+    "right": {
+     "title": "Sickle cell disease",
+     "points": [
+      "Sickle haemoglobin polymerises when deoxygenated",
+      "Vaso-occlusive painful episodes",
+      "Functional asplenia and infection risk",
+      "Chronic haemolysis and organ damage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Alpha thalassaemia** removes 1 or more alpha genes, while **beta thalassaemia** impairs the beta locus. Deletional variants predominate across populations in many regions. Screening catches heterozygotes who are usually asymptomatic yet transmit disease to children. **Antenatal** testing is therefore critical for affected families in endemic areas.",
+   "say": "Alpha thalassaemia removes one or more alpha genes, while beta thalassaemia impairs the beta locus. Deletional variants are common across populations in many regions. Screening catches heterozygotes who are usually asymptomatic yet transmit disease to children. Antenatal testing is therefore critical for affected families.",
+   "vis": null
+  },
+  {
+   "tx": "Chronic haemolysis drives **hepatosplenomegaly**, skeletal changes and pigment gallstones over years. Repeated transfusion in beta thalassaemia major causes **iron overload**, damaging heart, liver and endocrine glands. Cardiac failure and diabetes often dominate adult morbidity in this group. **Chelation** with deferasirox or deferiprone is therefore lifesaving therapy for these patients.",
+   "say": "Chronic haemolysis causes hepatosplenomegaly, skeletal changes and pigment gallstones over years. Repeated transfusion causes iron overload, damaging the heart, liver and endocrine glands. Cardiac failure and diabetes are the leading causes of adult morbidity here. Chelation with deferasirox is therefore lifesaving therapy for these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Haemolysis and transfusion burden"
+     },
+     {
+      "id": "b",
+      "label": "Iron load accumulates"
+     },
+     {
+      "id": "c",
+      "label": "Heart, liver and endocrine injury"
+     },
+     {
+      "id": "d",
+      "label": "Chelation and cardiac monitoring"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vaso-occlusive crisis** brings severe bone pain most often in the back, limbs and chest. **Acute chest syndrome** causes fever, hypoxia and infiltrates and can be fatal without intensive care. **Stroke** in children presents with focal deficits and needs urgent exchange transfusion. Early recognition of these events is the key to survival in sickle disease.",
+   "say": "Vaso-occlusive crisis causes severe bone pain most often in the back, limbs and chest. Acute chest syndrome causes fever, hypoxia and infiltrates and can be fatal without intensive care. Stroke in children presents with focal deficits and needs urgent exchange transfusion. Early recognition of these events is the key to survival.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Event",
+     "Typical site",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Vaso-occlusive pain",
+      "Back, limbs, chest",
+      "Hydration, analgesia, rest"
+     ],
+     [
+      "Acute chest syndrome",
+      "Lung bases",
+      "Oxygen, antibiotics, exchange transfusion"
+     ],
+     [
+      "Stroke",
+      "Brain",
+      "Urgent exchange transfusion"
+     ],
+     [
+      "Splenic sequestration",
+      "Spleen",
+      "Transfusion and surgical review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pain control combines **morphine** for severe episodes with non-opioid analgesics and hydration. **Hydroxyurea** raises fetal haemoglobin and reduces vaso-occlusive frequency in eligible patients. Antibiotics and oxygen are mainstay measures for acute chest syndrome. **Paracetamol** based regimens suit milder pain while opioids cover severe crisis.",
+   "say": "Pain control combines morphine for severe episodes with non-opioid analgesics and hydration. Hydroxyurea raises fetal haemoglobin and reduces vaso-occlusive frequency in eligible patients. Antibiotics and oxygen are mainstay measures for acute chest syndrome. Paracetamol regimens are useful for milder pain in many patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pain onset"
+     },
+     {
+      "id": "b",
+      "label": "Analgesia plus hydration"
+     },
+     {
+      "id": "c",
+      "label": "Reassess in 24 hours"
+     },
+     {
+      "id": "d",
+      "label": "Exchange if worsening"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Haemoglobin electrophoresis** is the defining test for sickle variants and unusual proportions. **HbA2 and HbF quantification** supports beta thalassaemia diagnosis in most laboratories. A blood film shows target cells in thalassaemia and sickled forms in sickle disease. **Genetic testing** clarifies compound heterozygotes when counselling families about recurrence risks.",
+   "say": "Haemoglobin electrophoresis is the defining test for sickle variants and unusual proportions. HbA2 and HbF quantification supports beta thalassaemia diagnosis in most laboratories. A blood film shows target cells in thalassaemia and sickled forms in sickle disease. Genetic testing clarifies compound heterozygotes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Electrophoresis",
+      "HbS band present",
+      "Confirms sickle disease"
+     ],
+     [
+      "HbA2 quantification",
+      "Raised in beta thalassaemia",
+      "Supports diagnosis"
+     ],
+     [
+      "Blood film",
+      "Target cells seen",
+      "Clue to thalassaemia"
+     ],
+     [
+      "Genetic testing",
+      "Globin mutation found",
+      "Counselling and prenatal choice"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Folic acid** supplementation meets increased red cell turnover in chronic haemolysis. **Immunisation** against encapsulated organisms is vital because functional asplenia develops early. Stroke screening with transcranial Doppler guides chronic transfusion decisions in children. **Luspatercept** reduces transfusion burden in selected thalassaemia patients under specialist care.",
+   "say": "Folic acid supplementation meets increased red cell turnover in chronic haemolysis. Immunisation against encapsulated organisms is vital because functional asplenia develops early. Stroke screening with transcranial Doppler guides chronic transfusion decisions in children. Luspatercept reduces transfusion burden in selected patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Chest infection** after a painful episode signals impending acute chest syndrome in many cases. **Hydration** should be adequate yet cautious because overload worsens lung injury. **Apheresis** or exchange transfusion lowers sickle haemoglobin rapidly during severe events. Long term care needs haematology follow-up, pain plans and psychosocial support for families.",
+   "say": "Chest infection after a painful episode signals impending acute chest syndrome in many cases. Hydration should be adequate yet cautious because overload worsens lung injury. Apheresis or exchange transfusion lowers sickle haemoglobin rapidly during severe events. Long term care needs haematology follow-up and pain plans.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Watch for",
+     "Response"
+    ],
+    "rows": [
+     [
+      "Acute chest syndrome",
+      "Fever, cough, hypoxia",
+      "Oxygen and exchange transfusion"
+     ],
+     [
+      "Stroke recurrence",
+      "New focal weakness",
+      "Chronic transfusion programme"
+     ],
+     [
+      "Pulmonary hypertension",
+      "Exertional dyspnoea",
+      "Echocardiography and referral"
+     ],
+     [
+      "Osteomyelitis",
+      "Fever with local pain",
+      "Imaging and antibiotics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Beta thalassaemia major** needs lifelong transfusion plus chelation and usually presents in childhood. **Thalassaemia intermedia** transfuses only during stress or severe anaemia in most patients. **Sickle cell anaemia** is the severest sickle genotype with early organ injury. Genetic modifiers such as fetal haemoglobin levels substantially alter clinical severity across cohorts.",
+   "say": "Beta thalassaemia major needs lifelong transfusion plus chelation and usually presents in childhood. Thalassaemia intermedia transfuses only during stress or severe anaemia in most patients. Sickle cell anaemia is the severest sickle genotype with early organ injury. Genetic modifiers are strong determinants of severity in many cohorts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transfusion dependent",
+     "points": [
+      "Beta thalassaemia major",
+      "Regular scheduled transfusion",
+      "Mandatory chelation therapy",
+      "Cardiac MRI iron surveillance"
+     ]
+    },
+    "right": {
+     "title": "Intermittent transfusion",
+     "points": [
+      "Thalassaemia intermedia",
+      "Transfusion during acute stress",
+      "Iron monitoring still advised",
+      "Splenectomy in select cases"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pregnancy** amplifies sickle complications including preeclampsia, fetal loss and maternal crisis. **Premarital** screening prevents affected births where the programme is organised well. Counselling must mention recurrence risk without directive language toward families. **Screening** of relatives often uncovers silent carriers who benefit from knowing their status before conception.",
+   "say": "Pregnancy amplifies sickle complications including preeclampsia, fetal loss and maternal crisis. Premarital screening prevents affected births where the programme is organised well. Counselling must mention recurrence risk without directive language toward families. Screening of relatives often uncovers silent carriers.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on haemoglobin disorders. Remember electrophoresis for variants, HbA2 elevation in beta thalassaemia and hydroxyurea for sickle disease. Chelation prevents cardiac death from iron overload in transfused thalassaemia. Exchange transfusion remains the emergency treatment for stroke and severe acute chest syndrome.",
+   "say": "High-yield facts are the points the examination asks most often. Electrophoresis identifies the sickle variant, while raised HbA2 supports beta thalassaemia. Hydroxyurea reduces vaso-occlusive frequency in sickle disease. Chelation prevents cardiac death from iron overload. Exchange transfusion is the treatment for stroke and severe acute chest syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Definition",
+      "Sickle disease produces sickled red cells under low oxygen"
+     ],
+     [
+      "Gold standard",
+      "Haemoglobin electrophoresis confirms the variant"
+     ],
+     [
+      "First line modify",
+      "Hydroxyurea raises fetal haemoglobin"
+     ],
+     [
+      "Emergency",
+      "Exchange transfusion for stroke and acute chest"
+     ],
+     [
+      "Thalassaemia clue",
+      "HbA2 elevation supports beta thalassaemia"
+     ],
+     [
+      "Lifesaving therapy",
+      "Chelation with deferasirox in iron overload"
+     ],
+     [
+      "Counselling",
+      "Premarital and antenatal screening prevent affected births"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

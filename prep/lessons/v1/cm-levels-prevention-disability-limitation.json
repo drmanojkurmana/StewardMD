@@ -14,24 +14,49 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Disease or disorder"},
-     {"id": "b", "label": "Impairment"},
-     {"id": "c", "label": "Disability"},
-     {"id": "d", "label": "Handicap"}
+     {
+      "id": "a",
+      "label": "Disease or disorder"
+     },
+     {
+      "id": "b",
+      "label": "Impairment"
+     },
+     {
+      "id": "c",
+      "label": "Disability"
+     },
+     {
+      "id": "d",
+      "label": "Handicap"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
-    "tx": "An accident lays out **disease to handicap** in four ordered boxes. The injury is the disorder that starts the sequence. Loss of the foot is the impairment, meaning the anatomical deficit left behind. Being unable to walk is the disability, the function that has gone. Unemployment that then follows is the handicap, a social disadvantage. Each box invites a different action, and later steps keep those actions apart.",
-    "say": "An accident lays out disease to handicap in four ordered boxes. The injury is the disorder that starts the sequence. Loss of the foot is the impairment, meaning the anatomical deficit left behind. Being unable to walk is the disability, the function that has gone. Unemployment that then follows is the handicap, a social disadvantage. Each box invites a different action, and later steps keep those actions apart.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n138-cm-levels-prevention-disability-limitation.webp",
-      "alt": "Four linked boxes from disease to impairment, disability and handicap, using loss of a foot after an accident",
-      "caption": "An accident is followed from the injury to a lost foot, inability to walk and then unemployment. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "An accident lays out **disease to handicap** in four ordered boxes. The injury is the disorder that starts the sequence. Loss of the foot is the impairment, meaning the anatomical deficit left behind. Being unable to walk is the disability, the function that has gone. Unemployment that then follows is the handicap, a social disadvantage. Each box invites a different action, and later steps keep those actions apart.",
+   "say": "An accident lays out disease to handicap in four ordered boxes. The injury is the disorder that starts the sequence. Loss of the foot is the impairment, meaning the anatomical deficit left behind. Being unable to walk is the disability, the function that has gone. Unemployment that then follows is the handicap, a social disadvantage. Each box invites a different action, and later steps keep those actions apart.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n138-cm-levels-prevention-disability-limitation.webp",
+    "alt": "Four linked boxes from disease to impairment, disability and handicap, using loss of a foot after an accident",
+    "caption": "An accident is followed from the injury to a lost foot, inability to walk and then unemployment. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Impairment: loss of structure or function",
@@ -39,12 +64,27 @@
    "say": "First link means loss of structure or function. A lost foot, defective vision or intellectual disability all qualify. Impairments can hide or show, pass or persist, even breed secondary ones, as leprosy nerve damage leads to plantar ulcers.",
    "vis": {
     "kind": "table",
-    "cols": ["Property", "Possibilities"],
+    "cols": [
+     "Property",
+     "Possibilities"
+    ],
     "rows": [
-     ["Visibility", "Visible, like limb loss, or invisible, like pain pathways"],
-     ["Duration", "Temporary or permanent"],
-     ["Course", "Progressive or regressive"],
-     ["Sequence", "Primary, then secondary impairments"]
+     [
+      "Visibility",
+      "Visible, like limb loss, or invisible, like pain pathways"
+     ],
+     [
+      "Duration",
+      "Temporary or permanent"
+     ],
+     [
+      "Course",
+      "Progressive or regressive"
+     ],
+     [
+      "Sequence",
+      "Primary, then secondary impairments"
+     ]
     ]
    }
   },
@@ -54,12 +94,27 @@
    "say": "Second link concerns activity. The person cannot perform an activity in the normal manner or range: seeing, hearing, walking, writing or speaking. Modern usage widens the word into an umbrella over impairment, activity limits and participation limits.",
    "vis": {
     "kind": "table",
-    "cols": ["Activity lost", "Impairment behind it"],
+    "cols": [
+     "Activity lost",
+     "Impairment behind it"
+    ],
     "rows": [
-     ["Seeing", "Defective vision or eye loss"],
-     ["Hearing", "Conductive or nerve deafness"],
-     ["Walking", "Limb loss or paralysis"],
-     ["Writing or speaking", "Hand or speech pathway injury"]
+     [
+      "Seeing",
+      "Defective vision or eye loss"
+     ],
+     [
+      "Hearing",
+      "Conductive or nerve deafness"
+     ],
+     [
+      "Walking",
+      "Limb loss or paralysis"
+     ],
+     [
+      "Writing or speaking",
+      "Hand or speech pathway injury"
+     ]
     ]
    }
   },
@@ -71,11 +126,19 @@
     "kind": "compare",
     "left": {
      "title": "Disability stays individual",
-     "points": ["Cannot walk the normal distance", "Measured against normal human range", "Belongs to body and activity"]
+     "points": [
+      "Cannot walk the normal distance",
+      "Measured against normal human range",
+      "Belongs to body and activity"
+     ]
     },
     "right": {
      "title": "Handicap adds society",
-     "points": ["Cannot keep the expected job", "Measured against age and social role", "Belongs to participation in life"]
+     "points": [
+      "Cannot keep the expected job",
+      "Measured against age and social role",
+      "Belongs to participation in life"
+     ]
     }
    }
   },
@@ -85,12 +148,27 @@
    "say": "Late presentation still leaves room to act. Adequate treatment here halts the slide from impairment toward handicap. Cataract surgery restores sight, glaucoma care saves remaining vision, leprosy therapy prevents deformity. Late narrows the winnings; it does not erase them.",
    "vis": {
     "kind": "table",
-    "cols": ["Late presentation", "Limitation achieved"],
+    "cols": [
+     "Late presentation",
+     "Limitation achieved"
+    ],
     "rows": [
-     ["Cataract with poor vision", "Surgery restores sight"],
-     ["Glaucoma with field loss", "Treatment saves remaining vision"],
-     ["Leprosy with nerve damage", "Therapy prevents deformity"],
-     ["Diabetes with foot ulcer", "Care prevents amputation"]
+     [
+      "Cataract with poor vision",
+      "Surgery restores sight"
+     ],
+     [
+      "Glaucoma with field loss",
+      "Treatment saves remaining vision"
+     ],
+     [
+      "Leprosy with nerve damage",
+      "Therapy prevents deformity"
+     ],
+     [
+      "Diabetes with foot ulcer",
+      "Care prevents amputation"
+     ]
     ]
    }
   },
@@ -101,11 +179,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Immunisation stops impairment"},
-     {"id": "b", "label": "Treatment limits disability"},
-     {"id": "c", "label": "Rehabilitation blocks handicap"}
+     {
+      "id": "a",
+      "label": "Immunisation stops impairment"
+     },
+     {
+      "id": "b",
+      "label": "Treatment limits disability"
+     },
+     {
+      "id": "c",
+      "label": "Rehabilitation blocks handicap"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -115,24 +211,49 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Stabilised defect or disability"},
-     {"id": "b", "label": "Coordinated retraining measures"},
-     {"id": "c", "label": "Highest reachable function"},
-     {"id": "d", "label": "Social integration"}
+     {
+      "id": "a",
+      "label": "Stabilised defect or disability"
+     },
+     {
+      "id": "b",
+      "label": "Coordinated retraining measures"
+     },
+     {
+      "id": "c",
+      "label": "Highest reachable function"
+     },
+     {
+      "id": "d",
+      "label": "Social integration"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
-    "tx": "Four professions share **community rehabilitation**, medical care, vocational retraining, social support and psychological help, arranged so the person reaches the highest functional level still open. The wheel puts those efforts around one patient who is returning to ordinary community life. Success is active participation, not a healed wound: living and working to the limit of remaining capacity once fever has settled and sutures are out.",
-    "say": "Four professions share community rehabilitation, medical care, vocational retraining, social support and psychological help, arranged so the person reaches the highest functional level still open. The wheel puts those efforts around one patient who is returning to ordinary community life. Success is active participation, not a healed wound: living and working to the limit of remaining capacity once fever has settled and sutures are out.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n139-cm-levels-prevention-disability-limitation.webp",
-      "alt": "Wheel of medical, vocational, social and psychological rehabilitation around a patient returning to community life",
-      "caption": "Medical, vocational, social and psychological efforts surround a patient moving back into community life. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Four professions share **community rehabilitation**, medical care, vocational retraining, social support and psychological help, arranged so the person reaches the highest functional level still open. The wheel puts those efforts around one patient who is returning to ordinary community life. Success is active participation, not a healed wound: living and working to the limit of remaining capacity once fever has settled and sutures are out.",
+   "say": "Four professions share community rehabilitation, medical care, vocational retraining, social support and psychological help, arranged so the person reaches the highest functional level still open. The wheel puts those efforts around one patient who is returning to ordinary community life. Success is active participation, not a healed wound: living and working to the limit of remaining capacity once fever has settled and sutures are out.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n139-cm-levels-prevention-disability-limitation.webp",
+    "alt": "Wheel of medical, vocational, social and psychological rehabilitation around a patient returning to community life",
+    "caption": "Medical, vocational, social and psychological efforts surround a patient moving back into community life. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Four areas of rehabilitation",
@@ -140,12 +261,27 @@
    "say": "Four areas organise the work. Medical care restores function, vocational training restores earning, social work restores relationships, psychological support restores dignity and confidence. Therapists, educators and vocational counsellors join the physician around the patient.",
    "vis": {
     "kind": "table",
-    "cols": ["Area", "Restores"],
+    "cols": [
+     "Area",
+     "Restores"
+    ],
     "rows": [
-     ["Medical", "Bodily function"],
-     ["Vocational", "Capacity to earn a livelihood"],
-     ["Social", "Family and social relationships"],
-     ["Psychological", "Personal dignity and confidence"]
+     [
+      "Medical",
+      "Bodily function"
+     ],
+     [
+      "Vocational",
+      "Capacity to earn a livelihood"
+     ],
+     [
+      "Social",
+      "Family and social relationships"
+     ],
+     [
+      "Psychological",
+      "Personal dignity and confidence"
+     ]
     ]
    }
   },
@@ -155,12 +291,68 @@
    "say": "Anchor the definition with examples. Schools for the blind, aids after limb loss, reconstructive surgery in leprosy, graded exercises after nerve injury, and a changed profession all pair lasting disability with a route back into ordinary life.",
    "vis": {
     "kind": "table",
-    "cols": ["Stabilised disability", "Route back"],
+    "cols": [
+     "Stabilised disability",
+     "Route back"
+    ],
     "rows": [
-     ["Blindness", "Schools for the blind and mobility training"],
-     ["Limb loss", "Prosthetic aids and gait training"],
-     ["Leprosy deformity", "Reconstructive surgery"],
-     ["Neurological weakness", "Muscle re-education and graded exercises"]
+     [
+      "Blindness",
+      "Schools for the blind and mobility training"
+     ],
+     [
+      "Limb loss",
+      "Prosthetic aids and gait training"
+     ],
+     [
+      "Leprosy deformity",
+      "Reconstructive surgery"
+     ],
+     [
+      "Neurological weakness",
+      "Muscle re-education and graded exercises"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The chain runs disease to impairment to disability to handicap. Disability limitation means adequate treatment after late presentation, such as cataract surgery restoring sight. Rehabilitation combines medical, social, educational and vocational measures to reach the highest functional ability. Its four areas restore function, earning capacity, social relationships, and dignity and confidence respectively.",
+   "say": "The chain runs disease to impairment to disability to handicap. Disability limitation means adequate treatment after late presentation, such as cataract surgery restoring sight. Rehabilitation combines medical, social, educational and vocational measures to reach the highest functional ability. Its four areas restore function, earning capacity, social relationships, and dignity and confidence respectively.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Sequence after disease",
+      "Impairment, then disability, then handicap in order"
+     ],
+     [
+      "Impairment example",
+      "Loss of foot is anatomical or functional loss"
+     ],
+     [
+      "Disability example",
+      "Inability to walk is restricted activity performance"
+     ],
+     [
+      "Handicap example",
+      "Unemployment after disability is social disadvantage"
+     ],
+     [
+      "Disability limitation",
+      "Cataract surgery restores sight after late presentation"
+     ],
+     [
+      "Rehabilitation test",
+      "Social integration and active community participation"
+     ],
+     [
+      "Four rehabilitation areas",
+      "Medical, vocational, social and psychological restoration"
+     ]
     ]
    }
   }

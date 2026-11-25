@@ -1,0 +1,335 @@
+{
+ "v": 1,
+ "module": "sid-hbv",
+ "title": "Hepatitis B and D",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Hepatitis B is a DNA virus** spreading by blood, sex and birth; **chronic means HBsAg beyond 6 months**. **Hepatitis D is defective** and infects only HBsAg carriers, accelerating cirrhosis. **India carries intermediate to high burden** with perinatal spread dominant. **Most chronic carriers feel nothing** till cirrhosis or cancer declares. **Vaccination prevents both** B and D together. **Test every HBsAg positive** for HIV, C and D at once.",
+   "say": "Hepatitis B was defined as a D N A virus spreading by blood, sex and birth, while chronic was defined as H B s A g beyond six months. Hepatitis D was defined as defective and infected only H B s A g carriers, accelerating cirrhosis. India was reported to carry intermediate to high burden with perinatal spread dominant. Most chronic carriers were reported to feel nothing till cirrhosis or cancer declared. Vaccination was reported to prevent both B and D together. Every H B s A g positive person was tested for H I V, C and D at once.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virus",
+     "Needs",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Hep B",
+      "Blood, sex, birth",
+      "Chronic past 6 months"
+     ],
+     [
+      "Hep D",
+      "HBsAg carrier",
+      "Test all positives"
+     ],
+     [
+      "Vaccine",
+      "Prevents B plus D",
+      "Birth dose fast"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Blood with needles with sex** transmit B; **birth to an e-antigen positive mother** infects 90% without cover. **Barbers with tattoos with nosocomial reuse** still seed India. **HDV rides the same routes** but only into HBsAg carriers. **Family clustering** follows household birth spread. **Health workers with dialysis with thalassaemia** need documented immunity. **Screen blood with organs** universally; test dialysis cohorts regularly.",
+   "say": "Blood with needles and sex were reported to transmit B, while birth to an e-antigen positive mother was reported to infect ninety percent without cover. Barbers with tattoos and nosocomial reuse were reported to still seed India. H D V was reported to ride the same routes but only into H B s A g carriers. Family clustering was reported to follow household birth spread. Health workers with dialysis and thalassaemia were reported to need documented immunity. Blood with organs was screened universally, while dialysis cohorts were tested regularly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Route",
+     "Risk",
+     "Block"
+    ],
+    "rows": [
+     [
+      "Perinatal",
+      "90 percent if eAg",
+      "Birth vaccine"
+     ],
+     [
+      "Blood, needles",
+      "Health care",
+      "Screen donors"
+     ],
+     [
+      "Sex, household",
+      "Close contact",
+      "Vaccinate contacts"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Immune tolerant** (eAg positive, high DNA, normal ALT, young) needs watch, not drugs. **Immune active** (raised ALT with DNA) earns treatment. **Inactive carrier** (anti-HBe, low DNA, normal ALT) is monitored yearly. **Reactivation** flares with chemo or withdrawal. **HBeAg loss with anti-HBe** marks partial control, not cure. **HBsAg loss with anti-HBs** is the rare functional cure to chase.",
+   "say": "Immune tolerant disease with e-antigen positive, high D N A and normal A L T in the young was watched, not treated. Immune active disease with raised A L T and D N A was reported to earn treatment. Inactive carriage with anti-H B e, low D N A and normal A L T was monitored yearly. Reactivation was reported to flare with chemo or withdrawal. H B e A g loss with anti-H B e was reported to mark partial control, not cure. H B s A g loss with anti-H B s was defined as the rare functional cure to chase.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HBsAg plus DNA plus ALT"
+     },
+     {
+      "id": "b",
+      "label": "Active treats, tolerant waits"
+     },
+     {
+      "id": "c",
+      "label": "Inactive watches yearly"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Silent for decades** is the rule; fatigue alone misleads. **Acute icteric hepatitis** with prodrome mimics A and E. **Extrahepatic GN with vasculitis** (polyarteritis-like) reveals chronic B. **Flares with jaundice** follow stopping drugs or immune shifts. **Cirrhosis with HCC** announces late disease; **family history of cancer** raises personal risk. **HDV superinfection** crashes compensated livers fast.",
+   "say": "Silence for decades was defined as the rule, while fatigue alone misled. Acute icteric hepatitis with prodrome was reported to mimic A and E. Extrahepatic G N with vasculitis was reported to reveal chronic B. Flares with jaundice were reported to follow stopping drugs or immune shifts. Cirrhosis with H C C was reported to announce late disease, while family history of cancer raised personal risk. H D V superinfection was reported to crash compensated livers fast.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Face",
+     "Clue",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Silent decades",
+      "Found on screening",
+      "Check DNA, ALT"
+     ],
+     [
+      "Acute yellow",
+      "Prodrome first",
+      "Like A and E"
+     ],
+     [
+      "Vasculitis, GN",
+      "Extrahepatic",
+      "Think B"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HBsAg with anti-HBs with anti-HBc** stages exposure; **IgM anti-HBc marks acute or flare**. **HBeAg with anti-HBe with DNA levels** stage phase and infectivity. **ALT with APRI or elastography** stages fibrosis without biopsy. **Low DNA with high ALT** raises HDV suspicion; **test anti-HDV then HDV RNA**. **Ultrasound with AFP every 6 months** screens cirrhosis with high-risk carriers for cancer.",
+   "say": "H B s A g with anti-H B s and anti-H B c was ordered to stage exposure, while I g M anti-H B c marked acute infection or flare. H B e A g with anti-H B e and D N A levels were ordered to stage phase and infectivity. A L T with A P R I or elastography was ordered to stage fibrosis without biopsy. Low D N A with high A L T was reported to raise H D V suspicion, so anti-H D V then H D V R N A was tested. Ultrasound with A F P every six months was ordered to screen cirrhosis with high-risk carriers for cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Means",
+     "Use"
+    ],
+    "rows": [
+     [
+      "HBsAg",
+      "Current infection",
+      "Screen all"
+     ],
+     [
+      "Anti-HBs",
+      "Immune",
+      "Post vaccine"
+     ],
+     [
+      "DNA plus ALT",
+      "Phase",
+      "Treat or watch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Significant fibrosis treats** regardless of DNA; **DNA above 2000 IU/mL with raised ALT** treats. **Coinfection (HIV, HDV, HCV), cancer family, immunosuppression, diabetes or MASLD** treat regardless of numbers. **Tenofovir disoproxil or entecavir** leads long term; **TAF spares kidneys** where available. **Never lamivudine alone**; resistance follows fast. **HIV coinfection needs tenofovir backbone** with full ART.",
+   "say": "Significant fibrosis was reported to treat regardless of D N A, while D N A above two thousand I U per m L with raised A L T treated. Coinfection with H I V, H D V or H C V, cancer family, immunosuppression, diabetes or M A S L D was reported to treat regardless of numbers. Tenofovir disoproxil or entecavir was reported to lead long term, while T A F spared kidneys where available. Lamivudine alone was never advised, as resistance followed fast. H I V coinfection was reported to need a tenofovir backbone with full A R T.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Treat now",
+     "points": [
+      "Fibrosis any DNA",
+      "DNA over 2000 plus ALT",
+      "Coinfection any numbers"
+     ]
+    },
+    "right": {
+     "title": "Watch yearly",
+     "points": [
+      "No fibrosis low DNA",
+      "Normal ALT stable",
+      "Reassess always"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Monitor ALT with DNA yearly**, every 3 to 6 months in year one, cirrhosis or poor adherence. **Creatinine with eGFR on TDF**, bone with age; **swap to TAF or entecavir** when kidneys suffer. **HCC ultrasound with AFP every 6 months** for cirrhosis, cancer family, or over 40 with DNA above 20,000. **Adherence every visit** decides outcomes; resistance is rare on tenofovir. **Stopping flares fatally**; never stop without a plan.",
+   "say": "Monitoring A L T with D N A yearly was ordered, with every three to six months in year one, cirrhosis or poor adherence. Creatinine with e G F R on T D F was checked with bone and age, while swapping to T A F or entecavir was advised when kidneys suffered. H C C ultrasound with A F P every six months was ordered for cirrhosis, cancer family, or over forty with D N A above twenty thousand. Adherence every visit was reported to decide outcomes, while resistance stayed rare on tenofovir. Stopping was reported to flare fatally, so stopping without a plan was never advised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Check",
+     "When",
+     "Acts on"
+    ],
+    "rows": [
+     [
+      "ALT, DNA",
+      "Yearly stable",
+      "3 monthly if rough"
+     ],
+     [
+      "Kidney on TDF",
+      "Annual eGFR",
+      "Swap TAF"
+     ],
+     [
+      "HCC screen",
+      "6 monthly",
+      "Cirrhosis, family"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tenofovir from 28 weeks** till delivery when **DNA at or above 200,000**; all positives get it where testing is absent. **Birth dose vaccine within 24 hours** with **immunoglobulin within 12 hours** shields the newborn. **Postpartum flares** follow stopping; reassess the mother after delivery. **Breastfeeding is allowed** on treatment. **Assess the mother** for lifelong therapy, but never delay prophylaxis.",
+   "say": "Tenofovir from twenty eight weeks till delivery was ordered when D N A stayed at or above two hundred thousand, while all positives got it where testing stayed absent. Birth-dose vaccine within twenty four hours with immunoglobulin within twelve hours was reported to shield the newborn. Postpartum flares were reported to follow stopping, so the mother was reassessed after delivery. Breastfeeding was allowed on treatment. Assessing the mother for lifelong therapy was advised, but delaying prophylaxis was never advised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Detail",
+     "Clock"
+    ],
+    "rows": [
+     [
+      "Mother TDF",
+      "From 28 weeks",
+      "DNA over 200k"
+     ],
+     [
+      "Baby vaccine",
+      "Birth dose",
+      "Within 24 hours"
+     ],
+     [
+      "HBIG",
+      "Where available",
+      "Within 12 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HDV needs HBsAg**; test **anti-HDV then HDV RNA** in every positive. **Superinfection of carriers** races to cirrhosis; **coinfection with acute B** often resolves. **Low DNA with active hepatitis** unmasks delta. **Peg-interferon suppresses** some; **bulevirtide access stays limited** in India. **Vaccinating Hep B** prevents delta entirely. **Treat the B backbone**; delta has no easy pill.",
+   "say": "H D V was reported to need H B s A g, so anti-H D V then H D V R N A was tested in every positive. Superinfection of carriers was reported to race to cirrhosis, while coinfection with acute B often resolved. Low D N A with active hepatitis was reported to unmask delta. Peg-interferon was reported to suppress some, while bulevirtide access stayed limited in India. Vaccinating Hep B was reported to prevent delta entirely. Treating the B backbone was advised, as delta had no easy pill.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Course",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Superinfection",
+      "Races to cirrhosis",
+      "Test every B"
+     ],
+     [
+      "Coinfection",
+      "Often resolves",
+      "Watch"
+     ],
+     [
+      "Delta active",
+      "No easy pill",
+      "B backbone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** normal ALT never equals inactive without DNA. **Isolated anti-HBc** hides occult B before chemo; prophylax all positives. **Stopping tenofovir** flares liver and kills grafts. **Entecavir in pregnancy** is avoided; TDF leads. **HDV missed** when low DNA is blamed on quiet B. **HCC without cirrhosis** strikes high-DNA carriers; screen by DNA, not just fibrosis.",
+   "say": "For the exam, these traps were tabulated as requested. Normal A L T was reported to never equal inactive without D N A. Isolated anti-H B c was reported to hide occult B before chemo, so all positives were prophylaxed. Stopping tenofovir was reported to flare liver and kill grafts. Entecavir in pregnancy was avoided, while T D F led. H D V was reported to be missed when low D N A was blamed on quiet B. H C C without cirrhosis was reported to strike high-D N A carriers, so screening ran by D N A, not just fibrosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Normal ALT",
+      "Still active?",
+      "Check DNA"
+     ],
+     [
+      "Stop TDF",
+      "Flares",
+      "Never alone"
+     ],
+     [
+      "No cirrhosis",
+      "Still HCC",
+      "Screen by DNA"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **2000 IU/mL with ALT** treats; **fibrosis treats any DNA**. **TDF or entecavir** leads; **never lamivudine alone**. **28 weeks TDF** with **DNA 200,000** shields birth; **vaccine in 24 hours**. **Anti-HDV then RNA** in every B; **superinfection races**. **6 monthly ultrasound** for cirrhosis; **stop flares** fatally.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. Two thousand I U per m L with A L T was reported to treat, while fibrosis treated any D N A. T D F or entecavir was reported to lead, while lamivudine alone was never advised. Twenty eight weeks T D F with D N A two hundred thousand was reported to shield birth, with vaccine in twenty four hours. Anti-H D V then R N A in every B was tested, while superinfection raced. Six monthly ultrasound was ordered for cirrhosis, while stopping was reported to flare fatally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "2000 plus ALT",
+      "Treat mark",
+      "Threshold"
+     ],
+     [
+      "TDF, entecavir",
+      "Long term",
+      "First line"
+     ],
+     [
+      "28 weeks TDF",
+      "DNA 200k",
+      "PMTCT dose"
+     ],
+     [
+      "Anti-HDV, RNA",
+      "Every B",
+      "Delta test"
+     ],
+     [
+      "Stop flares",
+      "Fatal",
+      "Trap"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

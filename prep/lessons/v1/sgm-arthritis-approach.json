@@ -1,0 +1,268 @@
+{
+ "v": 1,
+ "module": "sgm-arthritis-approach",
+ "subject": "ss-general-medicine",
+ "title": "Approach to arthritis and synovial fluid analysis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Arthritis** is joint inflammation with pain, swelling and warmth in many patients. **Monoarthritis** affects 1 joint while polyarthritis affects many joints in these patients. **Symmetric small joint** polyarthritis favours hands and feet in rheumatoid disease. Duration, pattern and associated features narrow the diagnosis in every case.",
+   "say": "Arthritis is joint inflammation with pain, swelling and warmth in many patients. Monoarthritis affects one joint while polyarthritis affects many joints in these patients. Symmetric small joint polyarthritis is a pattern of hands and feet in rheumatoid disease. Duration and pattern are the narrowing factors for the diagnosis in every case.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Joints",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Monoarthritis",
+      "Single joint",
+      "Septic or crystal disease"
+     ],
+     [
+      "Oligoarthritis",
+      "Few joints",
+      "Spondyloarthritis pattern"
+     ],
+     [
+      "Symmetric polyarthritis",
+      "Many small joints",
+      "Rheumatoid disease"
+     ],
+     [
+      "Axial disease",
+      "Spine and sacroiliac",
+      "Ankylosing spondylitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Synovial fluid** analysis is mandatory in acute monoarthritis in these patients. Cell counts separate inflammatory from non inflammatory effusions in many cases. **Neutrophil predominance** above 50,000 points toward septic arthritis in many cases. **Gram stain** and culture are the urgent tests in septic joint disease in these patients.",
+   "say": "Synovial fluid analysis is mandatory in acute monoarthritis in these patients. Cell counts separate inflammatory from non inflammatory effusions in many cases. Neutrophil predominance is a pointer toward septic arthritis in many cases. Gram stain and culture are the urgent tests in septic joint disease in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Needle shaped crystals** confirm gout on polarised microscopy in these patients. **Rhombohedral crystals** confirm pseudogout in older patients with this presentation. **Morning stiffness** beyond 1 hour favours inflammatory disease in these patients. **X ray** erosions need months to appear in rheumatoid disease in these patients.",
+   "say": "Needle shaped crystals confirm gout on polarised microscopy in these patients. Rhombohedral crystals confirm pseudogout in older patients with this presentation. Morning stiffness beyond one hour favours inflammatory disease in these patients. X ray erosions need months to appear in rheumatoid disease in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Suggests",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Needle crystals",
+      "Gout disease",
+      "Anti gout therapy"
+     ],
+     [
+      "Rhombohedral crystals",
+      "Pseudogout disease",
+      "Supportive care"
+     ],
+     [
+      "High neutrophils",
+      "Septic arthritis",
+      "Antibiotics and drainage"
+     ],
+     [
+      "Low cell count",
+      "Osteoarthritis",
+      "Conservative management"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anti CCP** antibodies are highly specific for rheumatoid arthritis in these patients. **Anti nuclear antibodies** screen connective tissue diseases in these patients in many protocols. **Reactive arthritis** follows dysentery with conjunctivitis and keratoderma in many histories. **Psoriatic arthritis** shows nail pits with dactylitis in these patients.",
+   "say": "Anti CCP antibodies are highly specific for rheumatoid arthritis in these patients. Anti nuclear antibodies are the screen for connective tissue diseases in these patients in many protocols. Reactive arthritis follows dysentery with conjunctivitis and keratoderma in many histories. Psoriatic arthritis is nail pits with dactylitis in these patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inflammatory arthritis",
+     "points": [
+      "Morning stiffness over an hour",
+      "Improves with movement",
+      "Positive inflammatory markers",
+      "Synovial neutrophils high"
+     ]
+    },
+    "right": {
+     "title": "Non inflammatory arthritis",
+     "points": [
+      "Stiffness under thirty minutes",
+      "Worsens with activity",
+      "Normal inflammatory markers",
+      "Synovial cells are low"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Septic arthritis** needs same day joint aspiration and empiric antibiotics in these patients. **Diclofenac** relieves pain and swelling in inflammatory flares in many patients. **Methotrexate** is the anchor drug for rheumatoid arthritis in most patients today. **Prednisone** bridges inflammation while methotrexate takes effect in these patients.",
+   "say": "Septic arthritis needs same day joint aspiration and empiric antibiotics in these patients. Diclofenac relieves pain and swelling in inflammatory flares in many patients. Methotrexate is the anchor drug for rheumatoid arthritis in most patients today. Prednisone bridges inflammation while methotrexate takes effect in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acute monoarthritis"
+     },
+     {
+      "id": "b",
+      "label": "Aspirate joint fluid"
+     },
+     {
+      "id": "c",
+      "label": "Gram stain and culture"
+     },
+     {
+      "id": "d",
+      "label": "Antibiotics and drainage"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ANCA** antibodies flag small vessel vasculitis with pulmonary renal disease in these patients. **Heberden nodes** are osteoarthritic finger changes in these patients with hand OA. **Raynaud phenomenon** accompanies connective tissue disease in these patients in many histories. **Dactylitis** is sausage digit swelling in psoriatic disease in these patients.",
+   "say": "ANCA antibodies are a flag of small vessel vasculitis with pulmonary renal disease in these patients. Heberden nodes are osteoarthritic finger changes in these patients with hand OA. Raynaud phenomenon is associated with connective tissue disease in these patients in many histories. Dactylitis is sausage digit swelling in psoriatic disease in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Ultrasound** detects synovitis and effusion with high sensitivity in these patients. **MRI** shows early erosions before X ray changes in these patients. **Sacroiliac imaging** diagnoses early spondyloarthritis in these patients in many protocols. **Dual energy CT** identifies gout deposits in these patients in many centres today.",
+   "say": "Ultrasound is the test for synovitis and effusion with high sensitivity in these patients. MRI is the test for early erosions before X ray changes in these patients. Sacroiliac imaging diagnoses early spondyloarthritis in these patients in many protocols. Dual energy CT identifies gout deposits in these patients in many centres today.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Shows",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Synovial fluid",
+      "Cell count, crystals",
+      "Immediate classification"
+     ],
+     [
+      "X ray",
+      "Erosions and joint space",
+      "Damage assessment"
+     ],
+     [
+      "MRI",
+      "Early erosion and oedema",
+      "Early diagnosis"
+     ],
+     [
+      "Ultrasound",
+      "Synovitis and effusion",
+      "Procedure guidance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cervical** involvement in rheumatoid disease threatens the cord in these patients. **Interstitial lung disease** complicates rheumatoid arthritis in many patients during follow-up. **Felty syndrome** combines splenomegaly with neutropenia in these patients with long standing disease. **Glaucoma** risk rises with chronic steroid use in these patients in many cohorts.",
+   "say": "Cervical involvement in rheumatoid disease is a threat to the cord in these patients. Interstitial lung disease complicates rheumatoid arthritis in many patients during follow-up. Felty syndrome combines splenomegaly with neutropenia in these patients with long standing disease. Glaucoma risk rises with chronic steroid use in these patients in many cohorts.",
+   "vis": null
+  },
+  {
+   "tx": "**Palindromic rheumatism** shows brief attacks with normal joints between episodes in these patients. **Infectious** arthritis follows bacteraemia with hematogenous joint seeding in these patients. **Gonococcal arthritis** presents with pustules and migratory pain in these patients. Joint aspiration remains mandatory in every monoarthritis case in these patients.",
+   "say": "Palindromic rheumatism is brief attacks with normal joints between episodes in these patients. Bacteraemia with hematogenous joint seeding presents as infectious arthritis in these patients. Gonococcal arthritis presents with pustules and migratory pain in these patients. Joint aspiration is mandatory in every monoarthritis case in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Fluid clue",
+     "Frequency"
+    ],
+    "rows": [
+     [
+      "Septic arthritis",
+      "Very high neutrophils",
+      "Urgent drainage needed"
+     ],
+     [
+      "Gout",
+      "Needle crystals",
+      "Common monoarthritis"
+     ],
+     [
+      "Pseudogout",
+      "Rhombohedral crystals",
+      "Older adults common"
+     ],
+     [
+      "Osteoarthritis",
+      "Low cell count",
+      "Non inflammatory course"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Treatment** targets disease activity with methotrexate in most inflammatory arthritis cases. **Surgery** replaces destroyed joints with good outcomes in these patients. **Physiotherapy** preserves function in osteoarthritis and inflammatory disease in these patients. **Weight loss** reduces knee load in osteoarthritis in these patients in many studies.",
+   "say": "Treatment targets disease activity with methotrexate in most inflammatory arthritis cases. Surgery replaces destroyed joints with good outcomes in these patients. Physiotherapy is the function preserving measure in osteoarthritis and inflammatory disease in these patients. Weight loss reduces knee load in osteoarthritis in these patients in many studies.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** heads the joint disease summary for this lesson. Remember synovial aspiration as mandatory in monoarthritis, anti CCP specificity for rheumatoid disease and methotrexate as the anchor drug. Needle crystals confirm gout while high neutrophils flag septic arthritis. Morning stiffness beyond 1 hour favours inflammatory disease clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Synovial aspiration is mandatory in monoarthritis cases clearly. Anti CCP specificity is the marker of rheumatoid disease. Methotrexate is the anchor drug for rheumatoid arthritis. Needle crystals confirm gout on microscopy testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Monoarthritis test",
+      "Synovial aspiration is mandatory"
+     ],
+     [
+      "Rheumatoid marker",
+      "Anti CCP is highly specific marker"
+     ],
+     [
+      "Anchor drug",
+      "Methotrexate for rheumatoid disease"
+     ],
+     [
+      "Gout crystal",
+      "Needle shaped crystals confirm gout"
+     ],
+     [
+      "Septic fluid",
+      "High neutrophils flag septic arthritis"
+     ],
+     [
+      "Stiffness clue",
+      "Beyond one hour favours inflammatory disease"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

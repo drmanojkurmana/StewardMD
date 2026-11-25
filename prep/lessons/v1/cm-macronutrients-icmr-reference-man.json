@@ -13,13 +13,37 @@
    "say": "The ICMR reference man is between nineteen and thirty-nine years old, weighs sixty-five kilograms, stands one hundred and seventy-seven centimetres tall, and works an eight-hour shift daily.",
    "vis": {
     "kind": "table",
-    "cols": ["Physical characteristic", "ICMR Reference Man standard", "ICMR Reference Woman standard"],
+    "cols": [
+     "Physical characteristic",
+     "ICMR Reference Man standard",
+     "ICMR Reference Woman standard"
+    ],
     "rows": [
-     ["Age range", "19 to 39 years", "19 to 39 years"],
-     ["Reference body weight", "65.0 kilograms (updated from 60 kg)", "55.0 kilograms (updated from 50 kg)"],
-     ["Reference standing height", "1.77 metres (177 centimetres)", "1.62 metres (162 centimetres)"],
-     ["Body Mass Index (BMI)", "20.7 kg/m2 (normal healthy range)", "21.0 kg/m2 (normal healthy range)"],
-     ["Daily physical activity", "8 hours work + 8 hours sleep + leisure", "8 hours work + 8 hours sleep + leisure"]
+     [
+      "Age range",
+      "19 to 39 years",
+      "19 to 39 years"
+     ],
+     [
+      "Reference body weight",
+      "65.0 kilograms (updated from 60 kg)",
+      "55.0 kilograms (updated from 50 kg)"
+     ],
+     [
+      "Reference standing height",
+      "1.77 metres (177 centimetres)",
+      "1.62 metres (162 centimetres)"
+     ],
+     [
+      "Body Mass Index (BMI)",
+      "20.7 kg/m2 (normal healthy range)",
+      "21.0 kg/m2 (normal healthy range)"
+     ],
+     [
+      "Daily physical activity",
+      "8 hours work + 8 hours sleep + leisure",
+      "8 hours work + 8 hours sleep + leisure"
+     ]
     ]
    }
   },
@@ -29,13 +53,37 @@
    "say": "The ICMR reference woman weighs fifty-five kilograms and stands one hundred and sixty-two centimetres tall. Pregnancy requires an extra three hundred and fifty calories every day.",
    "vis": {
     "kind": "table",
-    "cols": ["Physiological state", "Additional daily energy need", "Additional daily protein need"],
+    "cols": [
+     "Physiological state",
+     "Additional daily energy need",
+     "Additional daily protein need"
+    ],
     "rows": [
-     ["Non-pregnant reference woman", "Baseline by activity level", "46.0 grams total daily protein"],
-     ["Second trimester pregnancy", "+ 350 kilocalories daily", "+ 9.5 grams protein daily"],
-     ["Third trimester pregnancy", "+ 350 kilocalories daily", "+ 22.0 grams protein daily"],
-     ["Lactation (0 to 6 months)", "+ 600 kilocalories daily", "+ 17.0 grams protein daily"],
-     ["Lactation (7 to 12 months)", "+ 520 kilocalories daily", "+ 13.0 grams protein daily"]
+     [
+      "Non-pregnant reference woman",
+      "Baseline by activity level",
+      "46.0 grams total daily protein"
+     ],
+     [
+      "Second trimester pregnancy",
+      "+ 350 kilocalories daily",
+      "+ 9.5 grams protein daily"
+     ],
+     [
+      "Third trimester pregnancy",
+      "+ 350 kilocalories daily",
+      "+ 22.0 grams protein daily"
+     ],
+     [
+      "Lactation (0 to 6 months)",
+      "+ 600 kilocalories daily",
+      "+ 17.0 grams protein daily"
+     ],
+     [
+      "Lactation (7 to 12 months)",
+      "+ 520 kilocalories daily",
+      "+ 13.0 grams protein daily"
+     ]
     ]
    }
   },
@@ -45,11 +93,27 @@
    "say": "Daily calorie needs depend on occupational exertion. A sedentary man requires about two thousand one hundred calories, moderate work needs two thousand seven hundred, and heavy manual labor needs three thousand five hundred.",
    "vis": {
     "kind": "table",
-    "cols": ["Physical activity tier", "Adult male daily energy (kcal)", "Adult female daily energy (kcal)"],
+    "cols": [
+     "Physical activity tier",
+     "Adult male daily energy (kcal)",
+     "Adult female daily energy (kcal)"
+    ],
     "rows": [
-     ["Sedentary lifestyle (desk work)", "2,110 kcal / day", "1,660 kcal / day"],
-     ["Moderate activity (farming, light trade)", "2,710 kcal / day", "2,130 kcal / day"],
-     ["Heavy physical labour (construction)", "3,470 kcal / day", "2,720 kcal / day"]
+     [
+      "Sedentary lifestyle (desk work)",
+      "2,110 kcal / day",
+      "1,660 kcal / day"
+     ],
+     [
+      "Moderate activity (farming, light trade)",
+      "2,710 kcal / day",
+      "2,130 kcal / day"
+     ],
+     [
+      "Heavy physical labour (construction)",
+      "3,470 kcal / day",
+      "2,720 kcal / day"
+     ]
     ]
    }
   },
@@ -60,12 +124,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Basal metabolic rate: 60-70% total energy"},
-     {"id": "b", "label": "Thermic effect of food (digestion): 10%"},
-     {"id": "c", "label": "Physical activity expenditure: 20-30%"},
-     {"id": "d", "label": "Total Daily Energy Expenditure (TDEE)"}
+     {
+      "id": "a",
+      "label": "Basal metabolic rate: 60-70% total energy"
+     },
+     {
+      "id": "b",
+      "label": "Thermic effect of food (digestion): 10%"
+     },
+     {
+      "id": "c",
+      "label": "Physical activity expenditure: 20-30%"
+     },
+     {
+      "id": "d",
+      "label": "Total Daily Energy Expenditure (TDEE)"
+     }
     ],
-    "edges": [["a", "d"], ["b", "d"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "d"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -74,13 +163,37 @@
    "say": "A balanced diet provides all nutrients in the right proportions to maintain health, repair tissues, and provide a safety reserve during illness, drawn across all food groups.",
    "vis": {
     "kind": "table",
-    "cols": ["Essential food group", "Nutritional contribution", "Daily portion goal"],
+    "cols": [
+     "Essential food group",
+     "Nutritional contribution",
+     "Daily portion goal"
+    ],
     "rows": [
-     ["Cereals, millets and grains", "Complex carbohydrates, B vitamins, energy", "250 to 300 grams daily"],
-     ["Pulses, legumes and beans", "Plant protein, iron, folate, soluble fibre", "75 to 100 grams daily"],
-     ["Milk and dairy products", "Calcium, riboflavin, high-quality protein", "300 to 400 millilitres daily"],
-     ["Vegetables and green leaves", "Carotenes, vitamin C, minerals, roughage", "350 to 400 grams daily"],
-     ["Fresh fruits", "Antioxidants, potassium, flavonoids", "100 to 150 grams daily"]
+     [
+      "Cereals, millets and grains",
+      "Complex carbohydrates, B vitamins, energy",
+      "250 to 300 grams daily"
+     ],
+     [
+      "Pulses, legumes and beans",
+      "Plant protein, iron, folate, soluble fibre",
+      "75 to 100 grams daily"
+     ],
+     [
+      "Milk and dairy products",
+      "Calcium, riboflavin, high-quality protein",
+      "300 to 400 millilitres daily"
+     ],
+     [
+      "Vegetables and green leaves",
+      "Carotenes, vitamin C, minerals, roughage",
+      "350 to 400 grams daily"
+     ],
+     [
+      "Fresh fruits",
+      "Antioxidants, potassium, flavonoids",
+      "100 to 150 grams daily"
+     ]
     ]
    }
   },
@@ -103,11 +216,19 @@
     "kind": "compare",
     "left": {
      "title": "Traditional cereal-heavy plate",
-     "points": ["70 to 80% white polished rice or maida", "Minimal vegetables and low pulse intake", "Drives high glycaemic spikes and visceral fat"]
+     "points": [
+      "70 to 80% white polished rice or maida",
+      "Minimal vegetables and low pulse intake",
+      "Drives high glycaemic spikes and visceral fat"
+     ]
     },
     "right": {
      "title": "My Plate for the Day model",
-     "points": ["50% vegetables, greens and fresh fruits", "25% whole grains, brown rice, millets", "25% lentils, pulses, curd or paneer"]
+     "points": [
+      "50% vegetables, greens and fresh fruits",
+      "25% whole grains, brown rice, millets",
+      "25% lentils, pulses, curd or paneer"
+     ]
     }
    }
   },
@@ -117,12 +238,32 @@
    "say": "Healthy adults need zero point eight three grams of protein per kilogram body weight daily, totaling about fifty-four grams for men and forty-six grams for women.",
    "vis": {
     "kind": "table",
-    "cols": ["Demographic category", "Protein standard (g/kg/day)", "Total daily protein goal (g/day)"],
+    "cols": [
+     "Demographic category",
+     "Protein standard (g/kg/day)",
+     "Total daily protein goal (g/day)"
+    ],
     "rows": [
-     ["Adult Reference Man (65 kg)", "0.83 g / kg body weight", "54.0 grams daily"],
-     ["Adult Reference Woman (55 kg)", "0.83 g / kg body weight", "46.0 grams daily"],
-     ["Third trimester pregnant woman", "Additional +22.0 g daily", "68.0 grams daily"],
-     ["Growing infants (6 to 12 months)", "1.12 g / kg body weight", "10.0 to 11.0 grams daily"]
+     [
+      "Adult Reference Man (65 kg)",
+      "0.83 g / kg body weight",
+      "54.0 grams daily"
+     ],
+     [
+      "Adult Reference Woman (55 kg)",
+      "0.83 g / kg body weight",
+      "46.0 grams daily"
+     ],
+     [
+      "Third trimester pregnant woman",
+      "Additional +22.0 g daily",
+      "68.0 grams daily"
+     ],
+     [
+      "Growing infants (6 to 12 months)",
+      "1.12 g / kg body weight",
+      "10.0 to 11.0 grams daily"
+     ]
     ]
    }
   },
@@ -144,12 +285,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "24-hour household dietary recall"},
-     {"id": "b", "label": "Classification into 10 standardized food groups"},
-     {"id": "c", "label": "Minimum Dietary Diversity score >= 5"},
-     {"id": "d", "label": "Guaranteed micronutrient sufficiency achieved"}
+     {
+      "id": "a",
+      "label": "24-hour household dietary recall"
+     },
+     {
+      "id": "b",
+      "label": "Classification into 10 standardized food groups"
+     },
+     {
+      "id": "c",
+      "label": "Minimum Dietary Diversity score >= 5"
+     },
+     {
+      "id": "d",
+      "label": "Guaranteed micronutrient sufficiency achieved"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -160,12 +326,65 @@
     "kind": "compare",
     "left": {
      "title": "Undernutrition burden",
-     "points": ["Child stunting, wasting and underweight", "Maternal iron deficiency anaemia", "Persistent rural and tribal pockets"]
+     "points": [
+      "Child stunting, wasting and underweight",
+      "Maternal iron deficiency anaemia",
+      "Persistent rural and tribal pockets"
+     ]
     },
     "right": {
      "title": "Overnutrition burden",
-     "points": ["Adult abdominal obesity and hypertension", "Type 2 diabetes striking young adults", "Driven by ultra-processed foods and sedentariness"]
+     "points": [
+      "Adult abdominal obesity and hypertension",
+      "Type 2 diabetes striking young adults",
+      "Driven by ultra-processed foods and sedentariness"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The ICMR reference man is 19 to 39 years, 65 kilograms and 177 centimetres, with body mass index 20.7. The reference woman is 55 kilograms and 162 centimetres. Sedentary men need 2110 kilocalories daily, moderate work needs 2710, and heavy work needs 3470. Pregnancy adds 350 kilocalories daily.",
+   "say": "High-yield for the exam: The ICMR reference man is 19 to 39 years, 65 kilograms and 177 centimetres, with body mass index 20.7. The reference woman is 55 kilograms and 162 centimetres. Sedentary men need 2110 kilocalories daily, moderate work needs 2710, and heavy work needs 3470. Pregnancy adds 350 kilocalories daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Reference man age",
+      "19 to 39 years, disease free"
+     ],
+     [
+      "Reference man weight height",
+      "65 kilograms, 177 centimetres"
+     ],
+     [
+      "Reference woman weight height",
+      "55 kilograms, 162 centimetres"
+     ],
+     [
+      "Sedentary man energy",
+      "2110 kilocalories daily"
+     ],
+     [
+      "Moderate man energy",
+      "2710 kilocalories daily"
+     ],
+     [
+      "Heavy man energy",
+      "3470 kilocalories daily"
+     ],
+     [
+      "Pregnancy extra energy",
+      "Plus 350 kilocalories daily"
+     ],
+     [
+      "Adult protein standard",
+      "0.83 grams per kilogram daily"
+     ]
+    ]
    }
   }
  ],

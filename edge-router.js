@@ -17,7 +17,8 @@
  *      from the shared parser (SMD_CPARAMS) and calc-prefill, with evidence records.
  *   5. Every non-answer (no candidates, skipped, timeout, stale, 0, invalid) returns null, and the
  *      caller continues on its normal path (rule S4: never a dead end).
- * The engine is pluggable: Needle (capacitor-needle), a grammar-capable llama pack, or a test mock.
+ * Since 2026-11-22 there is no model engine in the app (Needle and FunctionGemma removed): rules only.
+ * The runtime hook stays pluggable for tests (a mock engine).
  * window.SMD_EDGE + module.exports. ES5. No network calls.
  */
 (function (root) {
@@ -396,8 +397,7 @@
   var device = { lowMemory: false, availMB: null, thermal: 0, rendererGone: false };
   var firstRead = null;   // the first device reading (route() waits for it once)
   function refreshDevice() {
-    var p = null;
-    try { p = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.Needle; } catch (e) {}
+    var p = null;   // the device numbers came from the Needle plugin, removed 2026-11-22
     if (!p || !p.available) return Promise.resolve(device);
     return Promise.resolve().then(function () { return p.available(); }).then(function (a) {
       if (a) {
@@ -430,45 +430,8 @@
     if (runtime && runtime.release) runtime.release();
     engine = eng || null; runtime = makeRuntime();
     if (opts && typeof opts.minConfidence === "number") minConfidence = opts.minConfidence;
-    scheduleWarm();
   }
 
-  /* Background warm-up (FunctionGemma only). Its first load on an iPhone 15 Pro takes 17.2 s (Metal
-   * compiles its shaders on first use), past the 8 s cold budget, so the first request fell back to
-   * rules. When the choice is functiongemma, the file is installed (engine is the llama adapter) and the
-   * app is idle, load it and run one throwaway pick outside any request's budget.
-   * Triggers: engine set (choice set, app start, download done), app back in the foreground, MaiK
-   * releasing the plugin (maik-local.js release()). Rules: never while MaiK generates or holds the
-   * plugin (holder must be null; the runtime's othersBusy/memory back-off applies too); never evicts
-   * MaiK; at most once per trigger, and only when FunctionGemma is not already resident. */
-  var WARM_DELAY_MS = 4000, warmTimer = null, warming = null, warmLog = [];
-  function logWarm(x) { warmLog.push(x); if (warmLog.length > 20) warmLog.shift(); }
-  function scheduleWarm(delayMs) {
-    if (warmTimer) { clearTimeout(warmTimer); warmTimer = null; }
-    if (!engine || engine.name !== "llama") return;
-    warmTimer = setTimeout(function () { warmTimer = null; warmNow(); }, delayMs == null ? WARM_DELAY_MS : delayMs);
-    if (warmTimer && warmTimer.unref) warmTimer.unref();
-  }
-  function warmNow() {
-    function skip(why) { logWarm({ at: Date.now(), skipped: why }); return Promise.resolve(false); }
-    if (warming) return warming;
-    if (!flagOn() || engineChoice() !== "functiongemma") return skip("choice");
-    if (!engine || engine.name !== "llama" || !runtime || !runtime.warm) return skip("no engine");
-    // "edge" with nothing resident (idle/background release) is safe; "maik" (or anyone else) is not.
-    if (G.SMD_LLAMA_HOLDER != null && G.SMD_LLAMA_HOLDER !== "edge") return skip("holder " + G.SMD_LLAMA_HOLDER);
-    if (engine.resident && engine.resident()) return skip("resident");
-    var t0 = Date.now(), cands = [{ kind: "tool", title: "Antibiogram" }, { kind: "calculator", title: "CURB-65" }];
-    warming = runtime.warm({ prompt: promptFor("open antibiogram", cands), tools: TOOL_SCHEMA, system: SYSTEM, maxTokens: 48, nOptions: cands.length }, 60000)
-      .then(function (ok) { logWarm({ at: t0, ok: ok, ms: Date.now() - t0 }); try { console.log("[edge] warm " + (ok ? "ok" : "skipped") + " " + (Date.now() - t0) + " ms"); } catch (e) {} return ok; },
-        function () { return false; })
-      .then(function (ok) { warming = null; return ok; });
-    return warming;
-  }
-  try {
-    if (G.document && G.document.addEventListener) G.document.addEventListener("visibilitychange", function () {
-      if (G.document.visibilityState === "visible") scheduleWarm();
-    });
-  } catch (e) {}
   function available() { return !!(flagOn() && engine && engine.available && engine.available()); }
 
   function resultFor(c, text, source, conf, ms) {
@@ -537,190 +500,19 @@
     }).then(null, function () { stats.passed++; return null; });
   }
 
-  // ---- engine adapters -----------------------------------------------------------------------
-  /* Needle through the native capacitor-needle plugin (local-plugins/capacitor-needle). The tool
-   * list is fixed, so init happens once per load. Expected plugin API (see the plugin's README):
-   *   load({ path? }) · configure({ system, tools }) · complete({ text, maxTokens }) -> { json } · reset() · kill()? · release()
-   * ("configure", not "init": a Swift plugin cannot expose a method named init.) */
-  // opts.weightsPath: a tuned .cact on the device (else the plugin's bundled weights).
-  // opts.calibrated === false (a local LoRA build: its confidence head was not trained) drops the
-  // confidence, as Needle's own Python binding does, so the floor is not judged on noise.
-  // Every complete() runs needle_init first (2-10 ms on a Pixel 9). The engine keeps state across
-  // needle_complete calls that needle_reset does not clear: on 2026-10-04 a loaded Pixel 9 engine never
-  // returned from its ~49th-57th call (2 cores spinning for 10+ min; 80/80 fine with init before each).
-  function needleAdapter(plugin, opts) {
-    var o = opts || {};
-    var loadArgs = o.weightsPath ? { path: o.weightsPath } : {};
-    // Capacitor's plugin proxy answers ANY method name, so "plugin.kill exists" proves nothing. Only
-    // Android runs Needle in its own process (":edge"), which is what makes a stuck call killable.
-    var killable = o.killable != null ? !!o.killable : (function () {
-      try { var C = G.Capacitor; return !!(C && C.getPlatform && C.getPlatform() === "android"); } catch (e) { return false; }
-    })();
-    return {
-      name: "needle",
-      agree: !!o.agree,   // opts.agree: act only when a second call with rotated options agrees (route())
-      available: function () { return !!plugin; },
-      load: function () { return Promise.resolve(plugin.load(loadArgs)).then(function () { return plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) }); }); },
-      complete: function (task) {
-        return Promise.resolve(plugin.configure({ system: SYSTEM, tools: JSON.stringify(TOOL_SCHEMA) })).then(function () {
-          return plugin.complete({ text: task.prompt, maxTokens: task.maxTokens || 48 });
-        }).then(function (r) {
-          var out = r && typeof r.json === "string" ? JSON.parse(r.json) : r;
-          if (out && o.calibrated === false) out.confidence = null;
-          return out;
-        }, function (e) {
-          // A :edge process that died outside the runtime (low-memory killer) restarts with no weights,
-          // and configure fails "needle_init: no model loaded". Tag it so edge-runtime.js reloads.
-          if (/no model loaded/i.test(String((e && e.message) || e))) {
-            if (!e || typeof e !== "object") e = new Error(String(e));
-            e.notLoaded = true;
-          }
-          throw e;
-        });
-      },
-      reset: function () { return plugin.reset ? plugin.reset() : null; },
-      kill: killable ? function () { return plugin.kill(); } : undefined,
-      release: function () { return plugin.release ? plugin.release() : null; }
-    };
-  }
-  /* A grammar-capable llama.cpp pack (capacitor-llama with the `grammar` option, gate A0.3), e.g. a
-   * FunctionGemma. The llama plugin holds ONE model per process, so load() evicts MaiK's pack. Who holds
-   * it is G.SMD_LLAMA_HOLDER ("edge" here, "maik" in maik-local.js): MaiK reloads its pack when it sees
-   * another holder, and this adapter never picks with a model it did not load. autoEngine() builds it
-   * when smd_edge_engine is "functiongemma"; the bake-off harness builds it too.
-   * The grammar admits exactly {"option":n} for n in 0..number of options offered. */
-  function grammarFor(n) {
-    var k = Math.max(0, Math.min(MAX_OPTIONS, n | 0));
-    return 'root ::= "{\\"option\\":" [0-' + k + '] "}"';
-  }
-  /* FunctionGemma load args (memory, 2026-10-04). A pick prompt is <= ~300 tokens + 4 output, so a
-   * 512-token context is enough, and 64-token batches shrink the compute buffers, which hold logits
-   * over the 262k-token vocabulary for every token of a ubatch (512 x 262k x f32 = 512 MB reserved).
-   * q8_0 KV (the plugin default, explicit here). Prefill is chunked to nBatch on both platforms. */
-  function fgLoadArgs(path, o) {
-    return { path: path, nCtx: o.nCtx || 512, nBatch: o.nBatch || 64, nUbatch: o.nUbatch || 64,
-             nThreadsBatch: o.nThreadsBatch || 4, kvQ8: true };
-  }
-  function llamaAdapter(plugin, opts) {
-    var o = opts || {}, loaded = false;
-    function mine() { return G.SMD_LLAMA_HOLDER === "edge"; }
-    // The plugin drops its model on idle/background; load again on the next call.
-    try { if (plugin && typeof plugin.addListener === "function") plugin.addListener("llamaReleased", function () { loaded = false; }); } catch (e) {}
-    return {
-      name: "llama",
-      available: function () { return !!(plugin && o.modelPath); },
-      load: function () {
-        loaded = false;
-        G.SMD_LLAMA_HOLDER = "edge";
-        // modelPath: a path, or a function returning one (a downloaded pack's path is only known async).
-        return Promise.resolve(typeof o.modelPath === "function" ? o.modelPath() : o.modelPath).then(function (path) {
-          if (!path) throw new Error("no model file");
-          // Prompt threads = the plugin's own decode threads (4 on an 8-core phone). Its default prefills on
-          // EVERY core, the efficiency cores too: 3.6-4.1 s per call on a Pixel 9 vs 1.1-1.4 s with 4
-          // (Edge-Runbook A0.3 Android, 2026-10-02). iOS ignores the key (Metal).
-          return plugin.load(fgLoadArgs(path, o));
-        }).then(function () { loaded = true; });
-      },
-      complete: function (task) {
-        var n = Math.max(0, Math.min(MAX_OPTIONS, (task.nOptions == null ? MAX_OPTIONS : task.nOptions) | 0)), choices = [];
-        for (var d = 0; d <= n; d++) choices.push(String(d));
-        return Promise.resolve(loaded && mine() ? null : this.load()).then(function () {
-          // MaiK loaded its pack while ours was loading: never pick with MaiK's model.
-          if (!mine()) { loaded = false; throw new Error("llama plugin taken by MaiK"); }
-          // `pick`: forced prefix {"option": + ONE prefill + the most likely digit (no decode loop, no grammar
-          // over the whole vocabulary). A plugin without it ignores the key and runs the grammar instead.
-          return plugin.generate({ system: task.system || SYSTEM, prompt: task.prompt, nPredict: 8, temperature: 0, stream: false,
-            pick: { prefix: '{"option":', choices: choices, suffix: "}" }, grammar: grammarFor(n) });
-        }).then(function (r) {
-          var t = r && r.text, o = typeof t === "string" ? JSON.parse(t) : r;
-          if (o && typeof r.p === "number") o.confidence = r.p;
-          return o;
-        });
-      },
-      // FunctionGemma is loaded and still ours (not evicted by MaiK, not dropped on idle/background).
-      resident: function () { return loaded && mine(); },
-      reset: function () { return null; },
-      kill: plugin.cancel ? function () { return mine() ? plugin.cancel() : null; } : undefined,
-      // Never unload MaiK's pack: release only what this adapter loaded.
-      release: function () {
-        var had = loaded && mine(); loaded = false;
-        if (!had) return null;
-        G.SMD_LLAMA_HOLDER = null;
-        return plugin.release ? plugin.release() : null;
-      }
-    };
-  }
-
-  /* Device bake-off (Edge-Master-Plan 7, Day 5): run the exported test prompts through an engine
-   * under the SAME runtime contract as production (deadline, cold load), one at a time, and return
-   * the {id, option, confidence, ms, status} lines scripts/edge/score.mjs --pred reads. A timeout or
-   * error is recorded as no option, which the scorer counts as a pass to the safe path. */
-  function bakeoff(rows, eng, opts) {
-    var o = opts || {}, RT = G.SMD_EDGE_RUNTIME || (typeof require !== "undefined" ? tryReq("./edge-runtime.js") : null);
-    if (!RT || !eng) return Promise.reject(new Error("no runtime or engine"));
-    var rt = RT.create({ engine: eng, deadlineMs: o.deadlineMs || 1200, coldMs: o.coldMs || 8000, env: o.env || {} });
-    var out = [], i = 0, list = rows || [];
-    function next() {
-      if (i >= list.length) return Promise.resolve(rt.release()).then(function () { return out; }, function () { return out; });
-      var row = list[i++], t0 = Date.now();
-      return rt.run({ prompt: row.prompt, tools: row.tools || TOOL_SCHEMA, system: row.system || SYSTEM, maxTokens: 48, nOptions: row.n_options }).then(function (r) {
-        var line = { id: row.id, option: null, confidence: null, ms: Date.now() - t0, status: r && r.status };
-        if (r && r.status === "ok") {
-          var op = optionFrom(r.result);
-          if (op.ok) { line.option = op.option; line.confidence = op.confidence; } else line.status = "invalid:" + op.reason;
-        }
-        out.push(line);
-        if (o.onProgress) { try { o.onProgress(i, list.length, line); } catch (e) {} }
-        // A timed-out call may still hold a non-killable engine; wait it out so one slow row does not
-        // turn the rows after it into "busy" (production would simply pass those to the safe path).
-        return settle(Date.now()).then(next);
-      });
-    }
-    function settle(t0) {
-      var st = rt.status();
-      if (!(st.stuck || st.running) || Date.now() - t0 > (o.coldMs || 8000)) return Promise.resolve();
-      return new Promise(function (r) { setTimeout(r, 25); }).then(function () { return settle(t0); });
-    }
-    return next();
-  }
-
-  /* Engine choice (owner, 2026-10-04): smd_edge_engine = "needle" (default), "functiongemma" or "rules"
-   * (no model; Layer 0 still answers). smd_edge "0" still turns Edge off entirely. */
-  var ENGINE_CHOICES = ["needle", "functiongemma", "rules"];
-  var FG_PACK = "edge-functiongemma";   // maik-models.js EDGE_FG_ID
-  function engineChoice() {
-    var v = null; try { v = G.localStorage && G.localStorage.getItem("smd_edge_engine"); } catch (e) {}
-    return ENGINE_CHOICES.indexOf(v) >= 0 ? v : "needle";
-  }
-  // Switches at once, no restart: the old engine is released, the new one loads on its first call.
-  function setEngineChoice(v) {
-    if (ENGINE_CHOICES.indexOf(v) < 0) v = "needle";
-    try { G.localStorage.setItem("smd_edge_engine", v); } catch (e) {}
-    setEngine(flagOn() ? autoEngine() : null);
-    return v;
-  }
-  function autoEngine() {
-    try {
-      var C = G.Capacitor, P = C && C.Plugins, choice = engineChoice();
-      if (choice === "rules" || !P || !(C.isNativePlatform && C.isNativePlatform())) return null;
-      if (choice === "functiongemma") {
-        // No file on the phone: no engine, so the rules answer (silently).
-        var M = G.SMD_MAIK_MODELS;
-        if (!P.Llama || !M || !M.installedCached || !M.installedCached(FG_PACK)) return null;
-        return llamaAdapter(P.Llama, { modelPath: function () { return M.pathFor(FG_PACK); } });
-      }
-      if (P.Needle) return needleAdapter(P.Needle);
-    } catch (e) {}
-    return null;
-  }
+  /* Models removed (owner, 2026-11-22: "remove Needle ... edge completely"): the Needle and
+   * FunctionGemma pickers are gone. Edge answers by rules only (Layer 0 exact names, ICD, drugs,
+   * calculators); anything else passes to MaiK as before. */
+  function engineChoice() { return "rules"; }
+  function setEngineChoice() { return "rules"; }
+  function autoEngine() { return null; }
 
   var API = {
     route: route, rules: rules, candidates: candidates, schemeAsk: schemeAsk, mcqParse: mcqParse, mcqAsk: mcqAsk, startMcq: startMcq, spell: spell, openVerb: function (t) { return OPEN_RE.test(String(t || "")); }, layer0: layer0, negated: guarded, ordered: function (t) { return ordered(String(t || "")); }, enabled: flagOn, available: available, setEngine: setEngine,
-    needleAdapter: needleAdapter, llamaAdapter: llamaAdapter, grammarFor: grammarFor, bakeoff: bakeoff, autoEngine: autoEngine,
+    autoEngine: autoEngine,
     engineChoice: engineChoice, setEngineChoice: setEngineChoice, engineName: function () { return engine ? engine.name : null; }, promptFor: promptFor, SYSTEM: SYSTEM, optionFrom: optionFrom,
     TOOL_SCHEMA: TOOL_SCHEMA, stats: function () { return JSON.parse(JSON.stringify(stats)); },
     session: function (id) { if (runtime) runtime.setSession(id); }, refreshDevice: refreshDevice,
-    warmSoon: scheduleWarm, warmNow: warmNow, warmLog: function () { return warmLog.slice(-10); },
     hot: function () { return device.thermal >= 3; },
     backoff: function () { return { memoryOk: DEFAULT_ENV.memoryOk(), thermalOk: DEFAULT_ENV.thermalOk(), othersBusy: DEFAULT_ENV.othersBusy(), device: JSON.parse(JSON.stringify(device)) }; },
     _version: "1.0"
@@ -728,13 +520,6 @@
   if (root) {
     root.SMD_EDGE = API;
     try { if (flagOn()) { var a = autoEngine(); if (a) setEngine(a); } } catch (e) {}
-    // FunctionGemma downloaded (or deleted) while chosen: pick it up without a restart.
-    try {
-      var MM = root.SMD_MAIK_MODELS;
-      if (MM && MM.subscribe) MM.subscribe(function (id, st) {
-        if (id === FG_PACK && st && !st.downloading && engineChoice() === "functiongemma" && flagOn()) setEngine(autoEngine());
-      });
-    } catch (e) {}
   }
   if (typeof module !== "undefined" && module.exports) module.exports = API;
 })(typeof window !== "undefined" ? window : null);

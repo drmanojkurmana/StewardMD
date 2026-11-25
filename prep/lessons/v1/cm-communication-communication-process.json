@@ -15,11 +15,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "cp1", "label": "Communicator encodes the message" },
-          { "id": "cp2", "label": "Channel carries it to the audience" },
-          { "id": "cp3", "label": "Audience decodes and feeds back" }
+          {
+            "id": "cp1",
+            "label": "Communicator encodes the message"
+          },
+          {
+            "id": "cp2",
+            "label": "Channel carries it to the audience"
+          },
+          {
+            "id": "cp3",
+            "label": "Audience decodes and feeds back"
+          }
         ],
-        "edges": [["cp1", "cp2"], ["cp2", "cp3"]]
+        "edges": [
+          [
+            "cp1",
+            "cp2"
+          ],
+          [
+            "cp2",
+            "cp3"
+          ]
+        ]
       }
     },
     {
@@ -28,12 +46,27 @@
       "say": "Barriers hide in the sender, message, channel, and receiver. Diagnose which one before prescribing louder repetition.",
       "vis": {
         "kind": "table",
-        "cols": ["Barrier type", "Field example and remedy"],
+        "cols": [
+          "Barrier type",
+          "Field example and remedy"
+        ],
         "rows": [
-          ["Semantic", "Jargon to villagers; use local terms and pictures"],
-          ["Psychological", "Fear of cancer word; stage information gently"],
-          ["Environmental", "Noisy clinic; move counselling to quiet corner"],
-          ["Cultural", "Contraception taboo; involve trusted elders"]
+          [
+            "Semantic",
+            "Jargon to villagers; use local terms and pictures"
+          ],
+          [
+            "Psychological",
+            "Fear of cancer word; stage information gently"
+          ],
+          [
+            "Environmental",
+            "Noisy clinic; move counselling to quiet corner"
+          ],
+          [
+            "Cultural",
+            "Contraception taboo; involve trusted elders"
+          ]
         ]
       }
     },
@@ -45,11 +78,19 @@
         "kind": "compare",
         "left": {
           "title": "Regulatory and service approaches",
-          "points": ["Laws, fines, mandates", "Facilities provided, uptake awaited", "Fast but brittle compliance"]
+          "points": [
+            "Laws, fines, mandates",
+            "Facilities provided, uptake awaited",
+            "Fast but brittle compliance"
+          ]
         },
         "right": {
           "title": "Educational approach",
-          "points": ["Information plus motivation", "Voluntary informed choice", "Slow but durable behaviour change"]
+          "points": [
+            "Information plus motivation",
+            "Voluntary informed choice",
+            "Slow but durable behaviour change"
+          ]
         }
       }
     },
@@ -60,11 +101,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "pe1", "label": "Anchor in felt need and known facts" },
-          { "id": "pe2", "label": "Participate, demonstrate, practise" },
-          { "id": "pe3", "label": "Reinforce with feedback and repetition" }
+          {
+            "id": "pe1",
+            "label": "Anchor in felt need and known facts"
+          },
+          {
+            "id": "pe2",
+            "label": "Participate, demonstrate, practise"
+          },
+          {
+            "id": "pe3",
+            "label": "Reinforce with feedback and repetition"
+          }
         ],
-        "edges": [["pe1", "pe2"], ["pe2", "pe3"]]
+        "edges": [
+          [
+            "pe1",
+            "pe2"
+          ],
+          [
+            "pe2",
+            "pe3"
+          ]
+        ]
       }
     },
     {
@@ -73,12 +132,27 @@
       "say": "Doing beats seeing beats hearing. Let mothers mix the solution themselves instead of only watching your demonstration.",
       "vis": {
         "kind": "table",
-        "cols": ["Aid class", "Best use"],
+        "cols": [
+          "Aid class",
+          "Best use"
+        ],
         "rows": [
-          ["Flip charts and flashcards", "Small group dialogue, sequential story"],
-          ["Posters", "Single message reminder at point of action"],
-          ["Models and demonstrations", "Skills: ORS mixing, hand washing, breastfeeding"],
-          ["Mass media spots", "Awareness, norms, campaign dates"]
+          [
+            "Flip charts and flashcards",
+            "Small group dialogue, sequential story"
+          ],
+          [
+            "Posters",
+            "Single message reminder at point of action"
+          ],
+          [
+            "Models and demonstrations",
+            "Skills: ORS mixing, hand washing, breastfeeding"
+          ],
+          [
+            "Mass media spots",
+            "Awareness, norms, campaign dates"
+          ]
         ]
       }
     },
@@ -101,11 +175,19 @@
         "kind": "compare",
         "left": {
           "title": "Focus group strengths",
-          "points": ["Surfaces beliefs and vocabulary", "Explains survey surprises", "Pretests messages cheaply"]
+          "points": [
+            "Surfaces beliefs and vocabulary",
+            "Explains survey surprises",
+            "Pretests messages cheaply"
+          ]
         },
         "right": {
           "title": "Focus group limits",
-          "points": ["No population percentages", "Dominant voices can hijack", "Needs trained moderation"]
+          "points": [
+            "No population percentages",
+            "Dominant voices can hijack",
+            "Needs trained moderation"
+          ]
         }
       }
     },
@@ -116,11 +198,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "rp1", "label": "Enact the real life scene" },
-          { "id": "rp2", "label": "Debrief feelings and choices" },
-          { "id": "rp3", "label": "Replay with better strategy" }
+          {
+            "id": "rp1",
+            "label": "Enact the real life scene"
+          },
+          {
+            "id": "rp2",
+            "label": "Debrief feelings and choices"
+          },
+          {
+            "id": "rp3",
+            "label": "Replay with better strategy"
+          }
         ],
-        "edges": [["rp1", "rp2"], ["rp2", "rp3"]]
+        "edges": [
+          [
+            "rp1",
+            "rp2"
+          ],
+          [
+            "rp2",
+            "rp3"
+          ]
+        ]
       }
     },
     {
@@ -129,12 +229,27 @@
       "say": "Education speaks to groups; counselling sits with one person's decision. Listening and confidentiality define the second.",
       "vis": {
         "kind": "table",
-        "cols": ["Feature", "Education versus counselling"],
+        "cols": [
+          "Feature",
+          "Education versus counselling"
+        ],
         "rows": [
-          ["Audience", "Group or public versus one client or couple"],
-          ["Goal", "General behaviour versus personal decision"],
-          ["Setting", "Community sessions versus private room"],
-          ["Core skill", "Clear messaging versus listening and empathy"]
+          [
+            "Audience",
+            "Group or public versus one client or couple"
+          ],
+          [
+            "Goal",
+            "General behaviour versus personal decision"
+          ],
+          [
+            "Setting",
+            "Community sessions versus private room"
+          ],
+          [
+            "Core skill",
+            "Clear messaging versus listening and empathy"
+          ]
         ]
       }
     },
@@ -146,12 +261,61 @@
         "kind": "compare",
         "left": {
           "title": "IEC (older focus)",
-          "points": ["Posters, pamphlets, broadcasts", "Knowledge as the endpoint", "One message for all audiences"]
+          "points": [
+            "Posters, pamphlets, broadcasts",
+            "Knowledge as the endpoint",
+            "One message for all audiences"
+          ]
         },
         "right": {
           "title": "BCC (behaviour focus)",
-          "points": ["Audience segmentation and research", "Barriers and facilitators addressed", "Behaviour indicators measured"]
+          "points": [
+            "Audience segmentation and research",
+            "Barriers and facilitators addressed",
+            "Behaviour indicators measured"
+          ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Communication involves five essential components: sender, message, channel, receiver, and feedback. Effective feedback confirms message decoding and closes the loop. Barriers include physiological deafness, psychological prejudice, and environmental noise. Didactic lecturing is passive one-way communication, whereas Socratic dialogue and role-playing stimulate active behavioural change. Group discussions function best with six to twelve participants led by a democratic facilitator who guides consensus.",
+      "say": "Communication involves five essential components: sender, message, channel, receiver, and feedback. Effective feedback confirms message decoding and closes the loop. Barriers include physiological deafness, psychological prejudice, and environmental noise. Didactic lecturing is passive one-way communication, whereas Socratic dialogue and role-playing stimulate active behavioural change. Group discussions function best with six to twelve participants led by a democratic facilitator who guides consensus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Key communication elements",
+            "Sender, encoder, message, channel, receiver, decoder, and feedback"
+          ],
+          [
+            "Feedback significance",
+            "Confirms accurate message comprehension and enables reciprocal adjustment"
+          ],
+          [
+            "Optimum group discussion size",
+            "Six to twelve participants facilitates interactive dialogue and consensus"
+          ],
+          [
+            "Role playing method",
+            "Enacts socio-cultural scenarios followed by critical group discussion"
+          ],
+          [
+            "Didactic teaching flaw",
+            "One-way passive communication with minimal listener interaction"
+          ],
+          [
+            "Symposium structure",
+            "Series of short speeches by experts on facets of one topic"
+          ],
+          [
+            "Panel discussion format",
+            "Four to eight experts discuss a topic before an audience"
+          ]
+        ]
       }
     }
   ]

@@ -45,7 +45,7 @@
     "id": "meld3",
     "title": "MELD 3.0",
     "desc": "90-day mortality in chronic liver disease & transplant priority (2021; replaces MELD-Na).",
-    "ref": "",
+    "ref": "Kim WR et al. Gastroenterology 2021;161(6):1887-1895. Adopted by OPTN for liver allocation (2023).",
     "inputs": [
      "Bilirubin (mg/dL)",
      "Creatinine (mg/dL)",
@@ -88,7 +88,7 @@
     "id": "phq9",
     "title": "PHQ-9 (depression)",
     "desc": "Depression severity. Over the last 2 weeks, how often bothered by each problem?",
-    "ref": "",
+    "ref": "Kroenke K et al. J Gen Intern Med 2001;16(9):606-613.",
     "inputs": [
      "Little interest or pleasure in doing things",
      "Feeling down, depressed or hopeless",
@@ -135,7 +135,7 @@
     "id": "gad7",
     "title": "GAD-7 (anxiety)",
     "desc": "Generalised anxiety severity. Over the last 2 weeks, how often bothered by each problem?",
-    "ref": "",
+    "ref": "Spitzer RL et al. Arch Intern Med 2006;166(10):1092-1097.",
     "inputs": [
      "Feeling nervous, anxious or on edge",
      "Not being able to stop or control worrying",
@@ -167,7 +167,7 @@
     "id": "auditc",
     "title": "AUDIT-C (alcohol)",
     "desc": "Brief alcohol-use screen (3 items).",
-    "ref": "",
+    "ref": "Bush K et al. Arch Intern Med 1998;158(16):1789-1795.",
     "inputs": [
      "How often do you drink?",
      "Drinks on a typical drinking day",
@@ -334,7 +334,7 @@
     "id": "r_ipi",
     "title": "R-IPI (Revised IPI, DLBCL)",
     "desc": "Revised IPI in rituximab-treated diffuse large B-cell lymphoma.",
-    "ref": "",
+    "ref": "Sehn LH et al. Blood 2007;109(5):1857-1861.",
     "inputs": [
      "Age > 60 years",
      "LDH > upper limit normal",
@@ -514,7 +514,7 @@
     "id": "crb65",
     "title": "CRB-65 (CAP, no labs)",
     "desc": "Community-acquired pneumonia severity without urea — primary-care friendly.",
-    "ref": "",
+    "ref": "Lim WS et al. Thorax 2003;58(5):377-382. Adopted in BTS CAP guideline.",
     "inputs": [
      "New confusion",
      "Respiratory rate (/min)",
@@ -586,7 +586,7 @@
     "id": "fisher",
     "title": "Fisher Grade (SAH on CT)",
     "desc": "Amount/pattern of subarachnoid blood on CT; relates to vasospasm risk.",
-    "ref": "",
+    "ref": "Fisher CM, Kistler JP, Davis JM. Neurosurgery 1980;6(1):1-9.",
     "inputs": [
      "CT appearance"
     ],
@@ -619,7 +619,7 @@
     "id": "gos",
     "title": "Glasgow Outcome Scale (GOS)",
     "desc": "Global outcome after brain injury.",
-    "ref": "",
+    "ref": "Jennett B, Bond M. Lancet 1975;1(7903):480-484.",
     "inputs": [
      "Outcome"
     ],
@@ -736,7 +736,7 @@
     "id": "homa_ir",
     "title": "HOMA-IR (insulin resistance)",
     "desc": "Homeostatic model assessment of insulin resistance.",
-    "ref": "",
+    "ref": "Matthews DR et al. Diabetologia 1985;28(7):412-419.",
     "inputs": [
      "Fasting glucose (mg/dL)",
      "Fasting insulin (µU/mL)"
@@ -800,7 +800,7 @@
     "id": "egfr_cysc",
     "title": "eGFR (cystatin C, CKD-EPI)",
     "desc": "Race-free estimated GFR from serum cystatin C (CKD-EPI cystatin C) — useful when creatinine is confounded.",
-    "ref": "",
+    "ref": "Inker LA et al. N Engl J Med 2012;367(1):20-29 (CKD-EPI cystatin C). KDIGO 2024 CKD guideline.",
     "inputs": [
      "Cystatin C (mg/L)",
      "Age (yrs)",
@@ -924,7 +924,7 @@
     "id": "timistemi",
     "title": "TIMI risk (STEMI)",
     "desc": "30-day mortality risk in ST-elevation MI.",
-    "ref": "",
+    "ref": "Morrow DA et al. Circulation 2000;102(17):2031-2037.",
     "inputs": [
      "Age (yrs)",
      "DM or HTN or angina history (+1)",
@@ -1018,7 +1018,7 @@
     "id": "nexus_cspine",
     "title": "NEXUS C-Spine Criteria",
     "desc": "Whether cervical-spine imaging can be safely avoided after blunt trauma.",
-    "ref": "",
+    "ref": "Hoffman JR et al. N Engl J Med 2000;343(2):94-99.",
     "inputs": [
      "Posterior midline cervical tenderness",
      "Focal neurological deficit",
@@ -1152,7 +1152,7 @@
     "id": "framingham_hf",
     "title": "Framingham Criteria (Heart Failure)",
     "desc": "Two major, or one major and two minor, make the clinical diagnosis.",
-    "ref": "",
+    "ref": "McKee PA, Castelli WP, McNamara PM, Kannel WB. N Engl J Med 1971;285(26):1441-1446.",
     "inputs": [
      "MAJOR criteria present",
      "MINOR criteria present"

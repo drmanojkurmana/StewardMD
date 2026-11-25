@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/search-run-list.response.json",
+  "title": "GET /v1/projects/{projectId}/searches response",
+  "description": "Search runs, newest first, with the Phase 1 pagination convention.",
+  "type": "object",
+  "required": ["searchRuns"],
+  "additionalProperties": false,
+  "properties": {
+    "searchRuns": {
+      "type": "array",
+      "items": { "$ref": "search-run-get.response.json#/properties/searchRun" }
+    },
+    "nextCursor": { "type": "string" }
+  }
+}

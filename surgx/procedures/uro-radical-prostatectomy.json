@@ -1,0 +1,330 @@
+{
+  "id": "uro-radical-prostatectomy",
+  "title": "Robotic radical prostatectomy",
+  "subtitle": "Bladder neck, seminal vesicles, nerves, apex, then a watertight anastomosis",
+  "system": "urology",
+  "aliases": [
+    "RARP",
+    "robotic prostatectomy",
+    "radical prostatectomy",
+    "nerve-sparing prostatectomy",
+    "prostate cancer surgery"
+  ],
+  "estMinutes": 210,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "eau-2025-pca",
+      "org": "EAU-EANM-ESTRO-ESUR-ISUP-SIOG",
+      "title": "EAU Guidelines on Prostate Cancer",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/prostate-cancer",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "nice-ng131",
+      "org": "NICE",
+      "title": "NG131 Prostate cancer: diagnosis and management",
+      "year": 2021,
+      "url": "https://www.nice.org.uk/guidance/ng131",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "baus-cons",
+      "org": "British Association of Urological Surgeons",
+      "title": "BAUS procedure-specific patient information and consent guidance",
+      "year": 2024,
+      "url": "https://www.baus.org.uk/patients/information_leaflets/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Localised (or selected locally advanced) prostate cancer with a life expectancy that makes cure worthwhile, chosen after MDT and discussion of radiotherapy and surveillance."
+    ],
+    "contraindications": [
+      "Metastatic disease.",
+      "Unfit for steep Trendelenburg and pneumoperitoneum.",
+      "Short life expectancy."
+    ],
+    "preparation": [
+      "MRI, PSMA PET or bone scan per risk; MDT decision and nerve-sparing plan per side.",
+      "Consent: incontinence, erectile dysfunction, positive margin and further treatment, rectal injury, lymphocele."
+    ],
+    "positioning": [
+      "Lithotomy with steep Trendelenburg (about 25 to 30 degrees), arms tucked and padded, the patient secured against sliding, eyes protected."
+    ],
+    "equipment": [
+      "Robot, bipolar and monopolar instruments, clips, barbed suture for the anastomosis, catheter, retrieval bag."
+    ],
+    "anatomy": [
+      "Bladder neck, seminal vesicles and vasa, Denonvilliers' fascia, neurovascular bundles, dorsal venous complex, urethra and sphincter, rectum."
+    ],
+    "criticalSafety": [
+      "Preserve the neurovascular bundles where cancer allows.",
+      "Avoid the rectum behind Denonvilliers' fascia; test if in doubt."
+    ],
+    "structuresAtRisk": [
+      "Rectum",
+      "Neurovascular bundles",
+      "External sphincter",
+      "Ureteric orifices",
+      "Obturator nerve (node dissection)"
+    ],
+    "commonErrors": [
+      "Cutting into the prostate at the apex (positive margin).",
+      "Thermal energy near the nerves."
+    ],
+    "complications": [
+      "Incontinence, erectile dysfunction.",
+      "Anastomotic leak, stricture.",
+      "Rectal injury, lymphocele, DVT."
+    ],
+    "postop": [
+      "Catheter for about 7 to 10 days; pelvic floor exercises.",
+      "PSA at 6 to 8 weeks.",
+      "Erectile rehabilitation."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.rp-step-01", "med.surgx.rp-clip-01"],
+      "emphasis": "Continence, erections, margins and further treatment discussed."
+    },
+    {
+      "ref": "step.onco.mdt-check", "media": ["med.surgx.rp-step-02", "med.surgx.rp-clip-02"],
+      "emphasis": "Staging, nerve-sparing plan per side and node dissection decision confirmed."
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.rp-step-03", "med.surgx.rp-clip-03"]
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.rp-step-04", "med.surgx.rp-clip-04"]
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.rp-step-05", "med.surgx.rp-clip-05"],
+      "emphasis": "Lithotomy with steep Trendelenburg, arms tucked and padded, secured against sliding, eyes protected."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.rp-step-06", "med.surgx.rp-clip-06"]
+    },
+    {
+      "ref": "step.lap.access", "media": ["med.surgx.rp-step-07", "med.surgx.rp-clip-07"]
+    },
+    {
+      "ref": "step.uro.robot-dock", "media": ["med.surgx.rp-step-08", "med.surgx.rp-clip-08"]
+    },
+    {
+      "ref": "step.lap.survey", "media": ["med.surgx.rp-step-09", "med.surgx.rp-clip-09"]
+    },
+    {
+      "ref": "step.rp.bladder-drop", "media": ["med.surgx.rp-step-10", "med.surgx.rp-clip-10"]
+    },
+    {
+      "ref": "step.rp.bladder-neck", "media": ["med.surgx.rp-step-11", "med.surgx.rp-clip-11"]
+    },
+    {
+      "ref": "step.rp.seminal-vesicles", "media": ["med.surgx.rp-step-12", "med.surgx.rp-clip-12"]
+    },
+    {
+      "ref": "step.rp.nerves", "media": ["med.surgx.rp-step-13", "med.surgx.rp-clip-13"]
+    },
+    {
+      "ref": "step.rp.apex", "media": ["med.surgx.rp-step-14", "med.surgx.rp-clip-14"]
+    },
+    {
+      "ref": "step.rp.rectal-injury", "media": ["med.surgx.rp-step-15", "med.surgx.rp-clip-15"]
+    },
+    {
+      "ref": "step.onco.nodal-clearance", "media": ["med.surgx.rp-step-16", "med.surgx.rp-clip-16"],
+      "emphasis": "Extended pelvic node dissection when indicated: external iliac, obturator and internal iliac, protecting the obturator nerve."
+    },
+    {
+      "ref": "step.rp.anastomosis", "media": ["med.surgx.rp-step-17", "med.surgx.rp-clip-17"]
+    },
+    {
+      "ref": "step.uro.bladder-leak-test", "media": ["med.surgx.rp-step-18", "med.surgx.rp-clip-18"],
+      "emphasis": "Fill with about 150 ml and check the anastomosis."
+    },
+    {
+      "ref": "step.lap.specimen-retrieval", "media": ["med.surgx.rp-step-19", "med.surgx.rp-clip-19"],
+      "emphasis": "Prostate in a bag, out intact."
+    },
+    {
+      "ref": "step.onco.specimen-orientation", "media": ["med.surgx.rp-step-20", "med.surgx.rp-clip-20"]
+    },
+    {
+      "ref": "step.abd.drain", "media": ["med.surgx.rp-step-21", "med.surgx.rp-clip-21"]
+    },
+    {
+      "ref": "step.uro.catheter-plan", "media": ["med.surgx.rp-step-22", "med.surgx.rp-clip-22"],
+      "emphasis": "Catheter for about 7 to 10 days; it must not be removed early."
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.rp-step-23", "med.surgx.rp-clip-23"]
+    },
+    {
+      "ref": "step.lap.closure", "media": ["med.surgx.rp-step-24", "med.surgx.rp-clip-24"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.rp-step-25", "med.surgx.rp-clip-25"]
+    }
+  ],
+  "steps_local": {
+    "step.rp.bladder-drop": {
+      "id": "step.rp.bladder-drop",
+      "kind": "access",
+      "title": "Drop the bladder into the space of Retzius",
+      "why": "Opening the space in front of the bladder exposes the front of the prostate and the endopelvic fascia.",
+      "how": [
+        "Incise the peritoneum lateral to the medial umbilical ligaments and across above the bladder.",
+        "Develop the avascular space of Retzius down to the pubic bone.",
+        "Clear fat off the front of the prostate."
+      ],
+      "structuresAtRisk": [
+        "Bladder",
+        "External iliac vessels"
+      ],
+      "pitfalls": [
+        "Cutting into the bladder dome."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.rp.bladder-neck": {
+      "id": "step.rp.bladder-neck",
+      "kind": "dissection",
+      "title": "Bladder neck dissection",
+      "why": "Finding the junction of bladder and prostate right preserves the bladder neck and keeps away from the ureteric orifices.",
+      "how": [
+        "Find the junction by moving the catheter balloon and the change in fat.",
+        "Open the anterior bladder neck, lift the catheter, then divide the posterior bladder neck.",
+        "Check the ureteric orifices are well away from the cut edge."
+      ],
+      "structuresAtRisk": [
+        "Ureteric orifices",
+        "Bladder neck"
+      ],
+      "pitfalls": [
+        "Cutting into the prostate (positive margin) or too far into the bladder."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.rp.seminal-vesicles": {
+      "id": "step.rp.seminal-vesicles",
+      "kind": "dissection",
+      "title": "Seminal vesicles and posterior plane",
+      "why": "The vasa and seminal vesicles lead to the plane behind the prostate, in front of the rectum.",
+      "how": [
+        "Divide the vasa and dissect the seminal vesicles, clipping their arteries rather than burning near the nerves.",
+        "Lift the seminal vesicles and incise Denonvilliers' fascia.",
+        "Develop the plane between the prostate and the rectum towards the apex."
+      ],
+      "structuresAtRisk": [
+        "Rectum",
+        "Pelvic plexus"
+      ],
+      "pitfalls": [
+        "Thermal energy at the tip of the seminal vesicles near the nerves."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.rp.nerves": {
+      "id": "step.rp.nerves",
+      "kind": "dissection",
+      "title": "Pedicles and nerve sparing",
+      "why": "The neurovascular bundles run beside the prostate. Releasing them without heat gives the best chance of erections.",
+      "how": [
+        "Control the prostatic pedicles with clips close to the prostate, without diathermy.",
+        "Release the neurovascular bundle off the prostate in the planned plane (intrafascial or interfascial) on each side.",
+        "Do not spare a nerve on a side with high-risk cancer."
+      ],
+      "structuresAtRisk": [
+        "Neurovascular bundles",
+        "Rectum"
+      ],
+      "pitfalls": [
+        "Diathermy on the bundles.",
+        "Sparing a nerve over cancer."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.rp.apex": {
+      "id": "step.rp.apex",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Dorsal venous complex and apex",
+      "why": "The apex is where positive margins and incontinence are decided. A long urethral stump with clean margins is the goal.",
+      "how": [
+        "Control the dorsal venous complex with a suture.",
+        "Divide it and develop the apex, then cut the urethra sharply with cold scissors, keeping its length.",
+        "Check the apex of the specimen for capsule."
+      ],
+      "structuresAtRisk": [
+        "External sphincter",
+        "Rectum (rectourethralis)"
+      ],
+      "pitfalls": [
+        "Cutting into the apex.",
+        "A short urethral stump."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.rp.rectal-injury": {
+      "id": "step.rp.rectal-injury",
+      "kind": "bailout",
+      "title": "Bailout: rectal injury",
+      "why": "A rectal injury recognised now and repaired heals; one missed becomes a rectourethral fistula.",
+      "how": [
+        "If suspected, fill the pelvis with saline and insufflate air via the rectum; look for bubbles.",
+        "Repair in two layers, interpose tissue where possible, and wash out.",
+        "Call a colorectal surgeon if needed; consider a defunctioning stoma for a large or contaminated injury; record it."
+      ],
+      "structuresAtRisk": [
+        "Rectum"
+      ],
+      "pitfalls": [
+        "Not testing after a difficult posterior dissection."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.rp.anastomosis": {
+      "id": "step.rp.anastomosis",
+      "kind": "reconstruction",
+      "title": "Vesicourethral anastomosis",
+      "why": "A watertight, tension-free join of the bladder neck to the urethra lets the catheter come out on time and lowers stricture risk.",
+      "how": [
+        "Optionally reconstruct the posterior layer (Rocco) to reduce tension.",
+        "Join bladder neck to urethra with a running barbed or double-armed suture, mucosa to mucosa.",
+        "Pass a new catheter under vision before completing the front."
+      ],
+      "structuresAtRisk": [
+        "External sphincter",
+        "Ureteric orifices"
+      ],
+      "pitfalls": [
+        "Catching the catheter in the stitch.",
+        "Bites that take the ureteric orifice."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

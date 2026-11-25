@@ -21,11 +21,27 @@
       "say": "Genetic mutations cause higher pancreatitis risk. Gain-of-function mutations in PRSS1 encoding cationic trypsinogen prevent autolytic enzyme inactivation, causing hereditary pancreatitis. Modifier defects involve SPINK1 mutations in the trypsin inhibitor gene and CFTR variants that disrupt ductal bicarbonate hydration.",
       "vis": {
         "kind": "table",
-        "cols": ["Gene", "Encoded Protein", "Functional Pathomechanism"],
+        "cols": [
+          "Gene",
+          "Encoded Protein",
+          "Functional Pathomechanism"
+        ],
         "rows": [
-          ["PRSS1", "Cationic trypsinogen", "Gain-of-function: premature trypsinogen activation & resistance to autolysis"],
-          ["SPINK1", "Pancreatic secretory trypsin inhibitor", "Loss-of-function: inadequate inhibition of prematurely active trypsin"],
-          ["CFTR", "Cystic fibrosis conductance regulator", "Impaired ductal chloride/bicarbonate secretion, yielding thick viscous secretions"]
+          [
+            "PRSS1",
+            "Cationic trypsinogen",
+            "Gain-of-function: premature trypsinogen activation & resistance to autolysis"
+          ],
+          [
+            "SPINK1",
+            "Pancreatic secretory trypsin inhibitor",
+            "Loss-of-function: inadequate inhibition of prematurely active trypsin"
+          ],
+          [
+            "CFTR",
+            "Cystic fibrosis conductance regulator",
+            "Impaired ductal chloride/bicarbonate secretion, yielding thick viscous secretions"
+          ]
         ]
       }
     },
@@ -34,11 +50,27 @@
       "say": "Fecal elastase-1 measurement is the primary non-invasive test for assessing pancreatic exocrine insufficiency. Because elastase-1 traverses the gut without degradation, a fecal concentration below two hundred micrograms per gram confirms exocrine deficiency, and values under one hundred indicate severe deficiency.",
       "vis": {
         "kind": "table",
-        "cols": ["Fecal Elastase-1 Concentration", "Diagnostic Interpretation", "Clinical Management"],
+        "cols": [
+          "Fecal Elastase-1 Concentration",
+          "Diagnostic Interpretation",
+          "Clinical Management"
+        ],
         "rows": [
-          ["> 200 ug/g", "Normal exocrine pancreatic function", "Exocrine insufficiency unlikely"],
-          ["100 to 200 ug/g", "Mild-to-moderate exocrine insufficiency", "Consider trial of enzyme replacement therapy"],
-          ["< 100 ug/g", "Severe pancreatic exocrine insufficiency", "Mandatory high-dose enzyme replacement and fat-soluble vitamins"]
+          [
+            "> 200 ug/g",
+            "Normal exocrine pancreatic function",
+            "Exocrine insufficiency unlikely"
+          ],
+          [
+            "100 to 200 ug/g",
+            "Mild-to-moderate exocrine insufficiency",
+            "Consider trial of enzyme replacement therapy"
+          ],
+          [
+            "< 100 ug/g",
+            "Severe pancreatic exocrine insufficiency",
+            "Mandatory high-dose enzyme replacement and fat-soluble vitamins"
+          ]
         ]
       }
     },
@@ -47,12 +79,32 @@
       "say": "Pancreatic enzyme replacement therapy is initiated when functional exocrine output falls below ten percent of normal. Administered as enteric-coated mini-microspheres, dosing delivers forty thousand to fifty thousand units of lipase per meal taken with food. Adequate substitution eliminates steatorrhoea and restores fat-soluble vitamin uptake.",
       "vis": {
         "kind": "table",
-        "cols": ["PERT Parameter", "Clinical Recommendation", "Therapeutic Objective"],
+        "cols": [
+          "PERT Parameter",
+          "Clinical Recommendation",
+          "Therapeutic Objective"
+        ],
         "rows": [
-          ["Lipase dose per main meal", "40,000 to 50,000 USP units", "Abolishes steatorrhoea and hydrolyzes fat"],
-          ["Lipase dose per snack", "20,000 to 25,000 USP units (half-dose)", "Maintains continuous intraluminal digestion"],
-          ["Formulation timing", "Swallowed intact during meal (not before)", "Ensures synchronous transit with food chyme"],
-          ["Adjunctive agent", "PPI or H2RA if incomplete response", "Neutralizes gastric acid to preserve lipase stability"]
+          [
+            "Lipase dose per main meal",
+            "40,000 to 50,000 USP units",
+            "Abolishes steatorrhoea and hydrolyzes fat"
+          ],
+          [
+            "Lipase dose per snack",
+            "20,000 to 25,000 USP units (half-dose)",
+            "Maintains continuous intraluminal digestion"
+          ],
+          [
+            "Formulation timing",
+            "Swallowed intact during meal (not before)",
+            "Ensures synchronous transit with food chyme"
+          ],
+          [
+            "Adjunctive agent",
+            "PPI or H2RA if incomplete response",
+            "Neutralizes gastric acid to preserve lipase stability"
+          ]
         ]
       }
     },
@@ -87,15 +139,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Main pancreatic duct stone > 5 mm with upstream dilatation"},
-          {"id": "b", "label": "Extracorporeal shock wave lithotripsy (ESWL)"},
-          {"id": "c", "label": "Fragmentation of stones into debris < 3 mm"},
-          {"id": "d", "label": "ERCP with balloon/basket extraction and ductal stenting"}
+          {
+            "id": "a",
+            "label": "Main pancreatic duct stone > 5 mm with upstream dilatation"
+          },
+          {
+            "id": "b",
+            "label": "Extracorporeal shock wave lithotripsy (ESWL)"
+          },
+          {
+            "id": "c",
+            "label": "Fragmentation of stones into debris < 3 mm"
+          },
+          {
+            "id": "d",
+            "label": "ERCP with balloon/basket extraction and ductal stenting"
+          }
         ],
         "edges": [
-          ["a", "b", "indicated for"],
-          ["b", "c", "pulverizes"],
-          ["c", "d", "followed by"]
+          [
+            "a",
+            "b",
+            "indicated for"
+          ],
+          [
+            "b",
+            "c",
+            "pulverizes"
+          ],
+          [
+            "c",
+            "d",
+            "followed by"
+          ]
         ]
       }
     },
@@ -133,6 +209,51 @@
         "alt": "Cross-section of the upper abdomen. The pancreas is outlined and labelled diffuse swelling, sausage shape, a hypoattenuating rim, and loss of contour.",
         "caption": "Type 1 autoimmune pancreatitis is this diffusely swollen, sausage-shaped gland with a capsule-like hypoattenuating rim. Illustration: StewardMD.",
         "ar": 1.8349
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Faecal elastase below two hundred micrograms per gram confirms exocrine insufficiency and below one hundred means severe disease. Enzyme replacement delivers forty to fifty thousand lipase units per meal once secretion falls under ten percent. PRSS1 gain of function causes hereditary pancreatitis, and sausage shaped IgG4 disease melts with steroids.",
+      "say": "High-yield for the exam: Faecal elastase below two hundred micrograms per gram confirms exocrine insufficiency and below one hundred means severe disease. Enzyme replacement delivers forty to fifty thousand lipase units per meal once secretion falls under ten percent. PRSS1 gain of function causes hereditary pancreatitis, and sausage shaped IgG4 disease melts with steroids.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Faecal elastase insufficiency",
+            "Below 200 ug/g"
+          ],
+          [
+            "Faecal elastase severe",
+            "Below 100 ug/g"
+          ],
+          [
+            "PERT start threshold",
+            "Secretion below 10 percent normal"
+          ],
+          [
+            "Lipase dose per meal",
+            "40000 to 50000 USP units"
+          ],
+          [
+            "Hereditary gene",
+            "PRSS1 cationic trypsinogen"
+          ],
+          [
+            "ESWL stone size",
+            "Radiopaque stones above 5 mm"
+          ],
+          [
+            "Frey procedure combines",
+            "Head coring plus longitudinal drainage"
+          ],
+          [
+            "Autoimmune imaging sign",
+            "Sausage enlargement, IgG4 raised"
+          ]
+        ]
       }
     }
   ],

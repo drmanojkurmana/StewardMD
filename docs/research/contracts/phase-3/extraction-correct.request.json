@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-3/extraction-correct.request.json",
+  "title": "POST /v1/extractions/{extractionId}/correct request",
+  "type": "object",
+  "required": ["fieldKey", "value", "reason", "version"],
+  "additionalProperties": false,
+  "properties": {
+    "fieldKey": { "type": "string" },
+    "value": { "type": ["string", "number"] },
+    "locator": { "oneOf": [{ "$ref": "../phase-1/locator.schema.json" }, { "type": "null" }] },
+    "quote": { "type": "string", "maxLength": 2000 },
+    "reason": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "version": { "type": "integer", "minimum": 0 }
+  }
+}

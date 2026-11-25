@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-3/data-import-dictionary.schema.json",
+  "title": "ResearchMD study-level data dictionary",
+  "type": "object",
+  "required": ["version", "columns"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "columns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["column", "type", "required"],
+        "additionalProperties": false,
+        "properties": {
+          "column": { "type": "string", "minLength": 1 },
+          "label": { "type": "string" },
+          "type": { "type": "string", "enum": ["string", "integer", "number", "date", "category"] },
+          "unit": { "type": "string" },
+          "required": { "type": "boolean" },
+          "range": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": { "min": { "type": "number" }, "max": { "type": "number" } }
+          },
+          "allowed": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

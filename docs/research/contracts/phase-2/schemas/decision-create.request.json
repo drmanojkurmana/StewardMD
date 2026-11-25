@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/decision-create.request.json",
+  "title": "POST /v1/records/{recordId}/decisions and POST /v1/reports/{reportId}/decisions request",
+  "description": "Records one blinded screening vote (see blinding.md). The record endpoint votes the title_abstract stage; the report endpoint votes the full_text stage. reasonCode is required with exclude and must be a global or project code; it is forbidden with include. Re-voting before unblinding supersedes the reviewer's earlier vote (the API keeps the latest; earlier rows stay for audit). Voting on an item with an open conflict answers 409 conflict_open.",
+  "type": "object",
+  "required": ["decision"],
+  "additionalProperties": false,
+  "properties": {
+    "decision": { "type": "string", "enum": ["include", "exclude", "uncertain"] },
+    "reasonCode": { "type": "string", "maxLength": 80 }
+  }
+}

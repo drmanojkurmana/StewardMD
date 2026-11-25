@@ -1,0 +1,348 @@
+{
+ "v": 1,
+ "module": "sid-tropical-fever",
+ "title": "Acute undifferentiated febrile illness and tropical fevers",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Acute undifferentiated febrile illness** means fever **5 days or more without a local source** in endemic areas. **About 75%** get a specific cause, so **malaria is excluded first** in every febrile traveller. **Illness within 21 days of exposure** triggers **viral haemorrhagic fever isolation** before testing. **Repeat malaria smears every 12 to 24 hours, 3 tests total**, if first is negative yet fever persists. **Leucopenia with thrombocytopenia** points toward dengue, malaria or rickettsial disease.",
+   "say": "Acute undifferentiated febrile illness was defined as fever for five days or more without a local source in endemic areas. About three quarters were reported to receive a specific cause, so malaria was excluded first in every febrile traveller. Illness within twenty one days of exposure was reported to trigger viral haemorrhagic fever isolation before testing. Smears were ordered every twelve to twenty four hours for three tests total, if the first test stayed negative while fever persisted. Leucopenia with thrombocytopenia was reported to point toward dengue, malaria or rickettsial disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Onset after exposure",
+     "Think first",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Under 14 days",
+      "Dengue, lepto, enteric",
+      "Isolate if VHF risk"
+     ],
+     [
+      "2 weeks to 6 weeks",
+      "Malaria, hepatitis",
+      "Repeat malaria test"
+     ],
+     [
+      "Beyond 6 weeks",
+      "Vivax, visceral spread",
+      "Ask specialist early"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dengue** follows **Aedes bite** with monsoon peaks and **secondary infection** risking severe leak. **Scrub typhus** follows **fields, bushes and rodents**, peaking **monsoon and post monsoon**. **Enteric fever** follows **contaminated water or food** and is **common in South Asia**. **Leptospirosis** follows **water or soil exposure**, healing to jaundice and bleeding. **Rickettsial fevers** follow **tick, mite or flea contact**, often with **eschar or faint rash**. **Co infection** among malaria, dengue and scrub is common.",
+   "say": "Dengue was reported to follow Aedes bite with monsoon peaks, while secondary infection raised leak risk. Scrub typhus was reported to follow fields, bushes and rodents, peaking in monsoon and post monsoon seasons. Enteric fever was reported to follow contaminated water or food, and it stayed common in South Asia. Leptospirosis was reported to follow water or soil exposure, often with jaundice and bleeding. Across rickettsial fevers, bite contact was reported to precede illness, often with eschar or faint rash. Co infection among malaria, dengue and scrub was reported as common, so parallel testing was advised.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dengue pattern",
+     "points": [
+      "Aedes daytime bite",
+      "Severe leak at defervescence",
+      "Thrombocytopenia climbs late"
+     ]
+    },
+    "right": {
+     "title": "Scrub pattern",
+     "points": [
+      "Field and rodent exposure",
+      "Painless black eschar",
+      "Responds within forty eight hours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dengue leak** comes from **intense immune response** raising **vascular permeability**, so **haemoconcentration with effusions** appears. **Prior antibodies** can **enhance viral uptake**, called **antibody dependent enhancement**, raising **secondary infection severity**. **Rickettsial disease** infects **vascular endothelium**, causing **permeability with water loss**, not **occlusive clots**. **Enteric organisms** **penetrate intact mucosa**, multiply in **Peyer patches**, then spread widely. **Lepto organisms** injure **liver, kidney, lung and brain** through **small vessel inflammation**.",
+   "say": "Dengue leak was reported to arise from an intense immune response raising vascular permeability, so haemoconcentration with effusions appeared. Prior antibodies were reported to enhance viral uptake, a process called antibody dependent enhancement, raising secondary infection severity. Rickettsial disease was reported to infect vascular endothelium, causing permeability with water loss rather than occlusive clots. Enteric organisms were reported to penetrate intact mucosa, multiply in Peyer patches, then spread widely. Leptospirosis was reported to injure liver, kidney, lung and brain through small vessel inflammation across many organs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bite or exposure"
+     },
+     {
+      "id": "b",
+      "label": "Endothelium injury"
+     },
+     {
+      "id": "c",
+      "label": "Permeability rises"
+     },
+     {
+      "id": "d",
+      "label": "Leak with shock"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Scrub eschar** is a **painless black crust about 1 cm** at **axilla, groin, genitals, waist, breast folds or behind ears**. **Tender regional nodes** mark a **hidden eschar**, so examine **covered skin fully**. **Dengue warning signs** are **severe belly pain, repeated vomiting, mucosal bleeding, lethargy, liver enlargement and fluid buildup**. **Enteric fever** shows **stepwise fever, headache, belly pain, spleen enlargement and slow pulse**. **Lepto clues** are **jaundice with bleeding, dark urine and kidney injury**.",
+   "say": "Scrub eschar was reported as a painless black crust about one centimetre at the axilla, groin, genitals, waist, breast folds or behind the ears. Tender regional nodes were reported to mark a hidden eschar, so covered skin was examined fully in every fever case. Dengue warning signs were reported as severe belly pain, repeated vomiting, mucosal bleeding, lethargy, liver enlargement and fluid buildup. Enteric fever was reported with stepwise fever, headline pain, belly pain, spleen enlargement and slow pulse across days. Lepto clues were reported as jaundice with bleeding, dark urine and kidney injury in early disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Distinguishing clue",
+     "Classic sign"
+    ],
+    "rows": [
+     [
+      "Scrub typhus",
+      "Eschar plus nodes",
+      "Black crust 1 cm"
+     ],
+     [
+      "Dengue",
+      "Warning signs plus leak",
+      "Defervescence fall"
+     ],
+     [
+      "Enteric fever",
+      "Stepwise fever",
+      "Spleen plus slow pulse"
+     ],
+     [
+      "Leptospirosis",
+      "Jaundice plus bleeding",
+      "Kidney injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Malaria test comes first** with **rapid antigen or thick and thin films** same day. **Dengue NS1 antigen early**, later **IgM with PCR**, plus **serial counts** for **haematocrit rise with platelet fall**. **Scrub IgM ELISA above 0.5** is preferred, **Weil-Felix 1:80 or more** suggests disease but **negative never excludes**. **Blood cultures x 2 before antibiotics** find enteric fever and sepsis. **PCR from eschar** confirms scrub early. **Store acute serum** for **paired serology** later.",
+   "say": "Malaria testing was ordered first with rapid antigen or thick and thin films on the same day in every case. Dengue was reported to need an early early early antigen test, later IgM with PCR, plus serial counts tracking haematocrit rise and platelet fall over time. Scrub IgM ELISA above zero point five was reported as preferred, while Weil-Felix one to eighty or more suggested disease but never excluded it when negative. Blood cultures twice before antibiotics were ordered to find enteric fever and sepsis in sick patients. Eschar PCR was reported to confirm scrub early, while acute serum was stored for paired serology later.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Use",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Malaria antigen or films",
+      "Exclude malaria first",
+      "Same day, repeat"
+     ],
+     [
+      "Dengue antigen plus IgM",
+      "Early then late dengue",
+      "NS1 early, IgM later"
+     ],
+     [
+      "Scrub IgM ELISA",
+      "Scrub confirmation",
+      "After first week"
+     ],
+     [
+      "Eschar PCR",
+      "Early scrub proof",
+      "First week best"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Empirical doxycycline 100 mg twice daily** treats **scrub, rickettsial disease and lepto** without waiting for serology. **Dengue care** is **paracetamol with fluids**, never **NSAIDs or aspirin**. **Enteric fever** after cultures gets **ceftriaxone 2 g IV daily** or **azithromycin 1 g orally daily**. **Pakistan XDR typhoid** uses **azithromycin** when mild and **meropenem 1 g IV 8-hourly** when severe. **Seriously ill without diagnosis** gets **ceftriaxone plus doxycycline** after malaria testing.",
+   "say": "Empirical Doxycycline one hundred milligrams twice daily was ordered for scrub, rickettsial disease and leptospirosis without waiting for serology results. Dengue care was reported with Paracetamol and fluids, while NSAIDs and Aspirin were avoided in every patient. Enteric fever after cultures was reported to need Ceftriaxone two grams once daily, or Azithromycin one gram once daily by mouth. Pakistan XDR typhoid was reported to need Azithromycin when mild, and Meropenem one gram eight hourly when severe disease appeared. Seriously ill patients without diagnosis were reported to receive Ceftriaxone plus Doxycycline after malaria testing finished.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Illness",
+     "First drug",
+     "Course idea"
+    ],
+    "rows": [
+     [
+      "Scrub or lepto",
+      "Doxycycline twice daily",
+      "Treat without serology"
+     ],
+     [
+      "Enteric mild XDR",
+      "Azithromycin once daily",
+      "Mild bowel illness"
+     ],
+     [
+      "Enteric severe",
+      "Meropenem 8-hourly",
+      "Complicated XDR disease"
+     ],
+     [
+      "Dengue",
+      "Paracetamol plus fluids",
+      "No NSAIDs ever"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**INTREST 2023 with 794 patients** showed **combination beat single drugs**: **33% versus 47% with doxycycline and 48% with azithromycin alone**. **Uncomplicated scrub** lasts **7 days** of **doxycycline 100 mg twice daily**, children **2.2 mg/kg twice daily**. **Pregnancy** uses **azithromycin 500 mg once daily for 5 days**, avoiding doxycycline. **Severe disease** uses **IV doxycycline plus IV azithromycin for 7 days**. **Defervescence within 48 hours** supports scrub, while **persistent fever** demands review for co infection.",
+   "say": "The INTREST study in twenty twenty three with seven hundred ninety four patients was reported to show combination therapy beat single drugs clearly. The combined group reached thirty three percent versus forty seven percent with Doxycycline and forty eight percent with Azithromycin alone in the study. Uncomplicated scrub was reported to last seven days of Doxycycline one hundred milligrams twice daily, while children received two point two milligrams per kilo twice daily. Pregnancy was reported to need Azithromycin five hundred milligrams once daily for five days, while Doxycycline was avoided in pregnancy by guidelines. Defervescence within forty eight hours was reported to support scrub disease, while persistent fever demanded review for co infection instead.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Single drug course",
+     "points": [
+      "Higher composite events",
+      "Longer fever persistence",
+      "More complications linger"
+     ]
+    },
+    "right": {
+     "title": "Combination course",
+     "points": [
+      "Lowest composite events",
+      "Shorter fever course",
+      "Use in severe disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dengue crisis** peaks **around defervescence**, when **plasma leak and shock** strike despite **settling fever**. **Scrub severe disease** brings **ARDS, encephalitis, kidney injury, myocarditis, shock and hepatitis**. **Malaria co infection worsens outcome**, so **treat all three until ruled out**. **Early fluids with careful monitoring** save **most dengue patients**, while **delayed scrub therapy** drives **multi organ failure**. **Ehrlichiosis** adds **low white count, low platelets and raised liver enzymes** with **morulae** in leukocytes.",
+   "say": "Dengue crisis was reported to peak around defervescence, when plasma leak and shock struck despite settling fever across many cases. Severe scrub disease was reported with ARDS, encephalitis, kidney injury, myocarditis, shock and hepatitis in sick patients over time. Malaria co infection was reported to worsen outcome, so all three diseases were treated until ruled out fully. Early fluids with careful monitoring were reported to save most dengue patients, while delayed scrub therapy drove multi organ failure in neglected cases. Ehrlichiosis was reported with low white count, low platelets and raised liver enzymes, while morulae appeared inside leukocytes on smear.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Defervescence"
+     },
+     {
+      "id": "b",
+      "label": "Leak intensifies"
+     },
+     {
+      "id": "c",
+      "label": "Shock emerges"
+     },
+     {
+      "id": "d",
+      "label": "ICU support"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** one negative malaria smear **never excludes malaria**; repeat when suspicion persists. **Ciprofloxacin fails in South Asia**, so **ceftriaxone or azithromycin** is first for enteric fever. **NSAIDs before dengue exclusion** worsen bleeding, while **aspirin harms platelets**. **Ceftriaxone alone never covers scrub**; always ask about **doxycycline cover**. **Negative Weil-Felix** does not rule out scrub, and **waiting for IgM** loses 48 hours. **Hidden eschar** is missed without **full skin examination**.",
+   "say": "For the exam, these traps were listed as core lessons. One negative malaria smear was reported as never excluding malaria, so repeat testing stayed advised when suspicion persisted across cases. Ciprofloxacin failure in South Asia was reported as common, so Ceftriaxone or Azithromycin stayed first for enteric fever in guidelines. NSAIDs before dengue exclusion were reported to worsen bleeding, while Aspirin harmed platelet function in sick patients. Ceftriaxone alone was reported as never covering scrub disease, so Doxycycline cover was always asked in endemic fever. A negative Weil-Felix was reported as never ruling out scrub, while waiting for IgM lost forty eight hours in practice. Hidden eschar was reported as missed without full skin examination in ward rounds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Single malaria negative",
+      "Malaria possible",
+      "Repeat testing"
+     ],
+     [
+      "Ciprofloxacin for typhoid",
+      "Resistant in South Asia",
+      "Use ceftriaxone"
+     ],
+     [
+      "Ceftriaxone for scrub",
+      "No scrub cover",
+      "Add doxycycline"
+     ],
+     [
+      "Fever settles in dengue",
+      "Leak may peak",
+      "Watch closely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **eschar 1 cm hidden in folds** means scrub until proven otherwise. **Warning signs with rising haematocrit and falling platelets** flag severe dengue. **NS1 early, IgM late** tracks dengue phases. **Doxycycline 100 mg twice daily for 7 days** covers scrub, rickettsial disease and lepto. **INTREST combination** wins in severe scrub over single drugs. **Ceftriaxone 2 g daily or azithromycin 1 g daily** starts enteric fever after cultures. **Meropenem 1 g 8-hourly** covers severe XDR disease.",
+   "say": "For the exam, these high yield facts were tabulated as requested. Eschar one centimetre hidden in folds was reported to mean scrub until proven otherwise in endemic areas. Warning signs with rising haematocrit and falling platelets were reported to flag severe dengue disease in ward practice. Early early antigen tests and later IgM were reported to track dengue phases across illness in patients. Doxycycline one hundred milligrams twice daily for seven days was reported to cover scrub, rickettsial disease and leptospirosis in endemic zones. Ceftriaxone two grams daily or Azithromycin one gram daily was reported to start enteric fever after blood cultures were taken. Meropenem one gram eight hourly was reported to cover severe XDR disease in sick patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why asked"
+    ],
+    "rows": [
+     [
+      "Eschar 1 cm",
+      "Hidden skin folds",
+      "Scrub clue"
+     ],
+     [
+      "Warning signs",
+      "Rising haematocrit",
+      "Severe dengue"
+     ],
+     [
+      "Doxycycline course",
+      "Twice daily seven days",
+      "Scrub and lepto"
+     ],
+     [
+      "INTREST combination",
+      "Both drugs beat single",
+      "Severe scrub"
+     ],
+     [
+      "Ceftriaxone daily",
+      "Enteric after cultures",
+      "Typhoid start"
+     ],
+     [
+      "Meropenem 8-hourly",
+      "Severe XDR disease",
+      "Pakistan risk"
+     ],
+     [
+      "No NSAIDs",
+      "Paracetamol plus fluids",
+      "Dengue rule"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

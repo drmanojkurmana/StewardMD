@@ -1,0 +1,342 @@
+{
+  "steps": [
+    {
+      "say": "Autoimmune hepatitis is a T cell driven liver inflammation with antinuclear or anti smooth muscle antibodies and raised immunoglobulin G. Young women are dominating the numbers. Untreated disease progresses to cirrhosis in half of patients within five years.",
+      "tx": "**Autoimmune hepatitis** is a T cell driven liver inflammation with **antinuclear** or **anti smooth muscle antibodies** and raised **immunoglobulin G**, striking young women most often. Untreated disease progresses to cirrhosis in about **50** percent within **5** years, so early treatment prevents the slide. A third of patients carry other autoimmune diseases such as thyroiditis or ulcerative colitis. Diagnosis needs scoring systems once viral and drug causes are excluded. Fibrosis stage at presentation predicts long term outcome best.",
+      "vis": {
+        "cols": [
+          "Feature",
+          "Finding",
+          "Why"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Autoantibodies",
+            "Antinuclear or anti smooth muscle",
+            "Type 1 disease marker"
+          ],
+          [
+            "Immunoglobulin G",
+            "Raised in most",
+            "Score component"
+          ],
+          [
+            "Sex ratio",
+            "Women dominate",
+            "Hormonal modulation"
+          ],
+          [
+            "Untreated cirrhosis",
+            "About 50 percent",
+            "Five year horizon"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Type one carries antinuclear and anti smooth muscle antibodies, while type two carries anti liver kidney one and strikes children. Interface hepatitis with plasma cells on biopsy is uniting both types. The simplified score above six is diagnostic, and above seven is definite.",
+      "tx": "**Type 1** carries antinuclear and anti smooth muscle antibodies, while **type 2** carries **anti liver kidney 1** and strikes children with more fulminant courses. **Interface hepatitis** with plasma cells on biopsy unites both types. The simplified diagnostic score above **6** is diagnostic, and above **7** is definite, using antibodies, immunoglobulin G and histology. **Anti soluble liver antigen** is the most specific marker when available. Seronegative disease needs biopsy scoring to catch it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Type 1: antinuclear, anti smooth muscle",
+            "Young women, indolent course",
+            "Common worldwide"
+          ],
+          "title": "Type 1 pattern"
+        },
+        "right": {
+          "points": [
+            "Type 2: anti liver kidney 1",
+            "Children, severe course",
+            "Rarer, often fulminant"
+          ],
+          "title": "Type 2 pattern"
+        }
+      }
+    },
+    {
+      "say": "Prednisolone with azathioprine remains the backbone, with budesonide as an alternative in non cirrhotic patients. Azathioprine spares steroid dose after two weeks, while mycophenolate rescues steroid failure. Relapse occurs in half of patients who stop therapy early.",
+      "tx": "**Prednisolone** with **azathioprine** remains the backbone, with **budesonide** as an alternative in non cirrhotic patients. Azathioprine starts late to protect the liver from its own injury, while **mycophenolate** rescues steroid failure and intolerance. Dose targets sit at prednisolone **20** milligrams daily with azathioprine **100** milligrams daily. Relapse occurs in about **50** percent who stop therapy early. Withdrawal needs two years of normal enzymes and immunoglobulin first.",
+      "vis": {
+        "edges": [
+          [
+            "start",
+            "steroid"
+          ],
+          [
+            "steroid",
+            "azath"
+          ],
+          [
+            "azath",
+            "maintain"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Confirm diagnosis score"
+          },
+          {
+            "id": "steroid",
+            "label": "Prednisolone taper start"
+          },
+          {
+            "id": "azath",
+            "label": "Azathioprine added week 2"
+          },
+          {
+            "id": "maintain",
+            "label": "Maintenance years, relapse watch"
+          }
+        ]
+      }
+    },
+    {
+      "say": "Steroid induced diabetes, osteoporosis and hypertension govern long term monitoring. Thiopurine methyltransferase testing prevents azathioprine pancytopenia. Baselines are including bone density, glucose, pressure and cholesterol before the first tablet.",
+      "tx": "**Steroid** induced diabetes, osteoporosis and hypertension govern long term monitoring, while **thiopurine methyltransferase** testing prevents azathioprine pancytopenia in slow metabolisers. Baselines include bone density, glucose, pressure and cholesterol before the first tablet. **Calcium** with **vitamin D** and yearly bone density follow start day. Azathioprine hepatotoxicity mimics disease relapse, so dose reduction versus escalation confuses the unwary. Blood counts monthly for the first quarter keep marrow safe.",
+      "vis": {
+        "cols": [
+          "Drug",
+          "Baseline",
+          "Watch"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Prednisolone",
+            "Glucose, pressure, bone density",
+            "Diabetes, osteoporosis"
+          ],
+          [
+            "Azathioprine",
+            "Thiopurine methyltransferase",
+            "Marrow, liver injury"
+          ],
+          [
+            "Budesonide",
+            "Portal hypertension screen",
+            "Avoid in cirrhosis"
+          ],
+          [
+            "Mycophenolate",
+            "Blood counts, teratogenicity",
+            "Failure rescue drug"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Overlap syndromes pair autoimmune hepatitis with primary biliary cholangitis or primary sclerosing cholangitis. Paris criteria define the overlap, and therapy must chase both arms of the disease. Biopsy with both interface and duct injury confirms the overlap.",
+      "tx": "**Overlap syndromes** pair autoimmune hepatitis with primary biliary cholangitis or primary sclerosing cholangitis, and therapy must chase both arms of the disease. **Paris criteria** define the overlap, and biopsy with both interface and duct injury confirms it. Alkali and immunosuppression regimens combine in overlap disease, with ursodeoxycholic acid dosed by weight. Steroids alone never settle the biliary arm. Missing overlap underlies many treatment failures.",
+      "vis": {
+        "cols": [
+          "Overlap",
+          "Dominant test",
+          "Add on"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Hepatitis plus cholangitis",
+            "Alkaline phosphatase, antimitochondrial",
+            "Ursodeoxycholic acid"
+          ],
+          [
+            "Hepatitis plus sclerosing",
+            "Magnetic resonance cholangiography",
+            "Steroid plus azathioprine"
+          ],
+          [
+            "Hepatitis alone",
+            "Immunoglobulin G, biopsy",
+            "Prednisolone backbone"
+          ],
+          [
+            "Unclear overlap",
+            "Paris criteria score",
+            "Biopsy arbitration"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Acute presentation is mimicking viral hepatitis with jaundice and high transaminases, while chronic disease smoulders for years with fatigue alone. Autoimmune hepatitis relapses are hiding behind minor enzyme bumps. Post relapse enzymes must never be blamed on drugs without checking antibodies.",
+      "tx": "**Acute presentation** mimics viral hepatitis with jaundice and high transaminases, while **chronic disease** smoulders for years with fatigue alone. Relapses hide behind minor enzyme bumps, and every bump needs viral serology plus antibody recheck. **Autoantibodies** rise again in most relapses before enzymes peak. Steroid dose hike follows the relapse, not blind patience. Normal enzymes on two visits never by themselves justify stopping therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Jaundice, high transaminases",
+            "Mimics viral hepatitis",
+            "Score decides quickly"
+          ],
+          "title": "Acute face"
+        },
+        "right": {
+          "points": [
+            "Fatigue, mild enzyme rise",
+            "Smoulders for years",
+            "Relapse hides in bumps"
+          ],
+          "title": "Chronic face"
+        }
+      }
+    },
+    {
+      "say": "Children with type two disease often present fulminant and need high dose steroids immediately. Growth suppression from steroids remains a real cost, so azathioprine sparing matters early. Paediatric hepatology referral precedes the first steroid dose whenever possible.",
+      "tx": "**Children** with type 2 disease often present fulminant and need high dose steroids immediately, with **azathioprine** sparing dose only after remission settles. Growth suppression from steroids remains a real cost, so bone protection runs from day one. **Ciclosporin** and tacrolimus rescue steroid refractory paediatric cases. Vaccination against hepatitis A and B precedes immunosuppression. Paediatric hepatology referral precedes the first steroid dose whenever possible.",
+      "vis": {
+        "cols": [
+          "Setting",
+          "Course",
+          "Move"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Child type 2",
+            "Often fulminant",
+            "Steroids urgent, refer early"
+          ],
+          [
+            "Adult type 1",
+            "Indolent or acute",
+            "Score then steroid backbone"
+          ],
+          [
+            "Seronegative",
+            "Antibodies absent",
+            "Biopsy scoring catches it"
+          ],
+          [
+            "Overlap",
+            "Dual injury pattern",
+            "Paris criteria guide"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Infections, non adherence and premature withdrawal are triggering most relapses. Immunoglobulin G rises one to three months before transaminases peak in relapses. Two years of normal enzymes and immunoglobulin must precede any withdrawal discussion with the patient.",
+      "tx": "**Infections**, non adherence and premature withdrawal trigger most relapses, and **immunoglobulin G** rises one to three months before transaminases peak in relapses. Two years of normal enzymes and immunoglobulin must precede any withdrawal discussion with the patient. Withdrawal under supervision still relapses in about **50** percent, with steroid reintroduction at the first bump. Biopsy before withdrawal predicts relapse better than blood tests alone. Lifelong low dose cover suits many relapsers.",
+      "vis": {
+        "edges": [
+          [
+            "remission",
+            "withdraw"
+          ],
+          [
+            "withdraw",
+            "watch"
+          ],
+          [
+            "watch",
+            "relapse"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "remission",
+            "label": "Two years normal enzymes"
+          },
+          {
+            "id": "withdraw",
+            "label": "Supervised withdrawal"
+          },
+          {
+            "id": "watch",
+            "label": "Monthly enzyme checks"
+          },
+          {
+            "id": "relapse",
+            "label": "Steroid hike at first bump"
+          }
+        ]
+      }
+    },
+    {
+      "say": "Thiopurine methyltransferase deficiency plus azathioprine is meaning pancytopenia within weeks. Budesonide avoids cirrhosis because portosystemic shunting ruins its first pass effect. Mycophenolate is rescuing steroid failure but forbids pregnancy.",
+      "tx": "**Thiopurine methyltransferase** deficiency plus azathioprine means pancytopenia within weeks, so testing precedes the first dose in every patient. **Budesonide** avoids cirrhosis because portosystemic shunting ruins its first pass effect. **Mycophenolate** rescues steroid failure but forbids pregnancy, a hard contraception counselling point. Azathioprine hepatotoxicity mimics relapse, so enzyme bumps need dose review plus histology when in doubt. Three traps cover most stem distractors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Test thiopurine enzyme first",
+            "Monthly counts for 3 months",
+            "Hepatotoxicity mimics relapse"
+          ],
+          "title": "Azathioprine traps"
+        },
+        "right": {
+          "points": [
+            "Avoid budesonide in cirrhosis",
+            "Mycophenolate forbids pregnancy",
+            "Steroid stops with sepsis"
+          ],
+          "title": "Steroid and substitute traps"
+        }
+      }
+    },
+    {
+      "say": "The exam load is type one antibodies, type two anti liver kidney one, score above six diagnostic, and prednisolone plus azathioprine backbone. Two years of normality gate withdrawal, while fifty percent relapse follows early stopping. One numbers table is locking the topic.",
+      "tx": "The exam load is **type 1** antibodies, **type 2** anti liver kidney 1, score above **6** diagnostic, and **prednisolone** plus **azathioprine** backbone. **Two** years of normality gate withdrawal, while **50** percent relapse follows early stopping. Untreated cirrhosis reaches **50** percent at five years. **Mycophenolate** rescues steroid failure. Thiopurine testing prevents pancytopenia in every starter.",
+      "vis": {
+        "cols": [
+          "Fact",
+          "Number",
+          "Exam point"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Simplified score diagnostic",
+            "Above 6",
+            "Above 7 definite"
+          ],
+          [
+            "Untreated cirrhosis",
+            "50 percent at 5 years",
+            "Start therapy early"
+          ],
+          [
+            "Prednisolone node",
+            "20 milligrams daily",
+            "Taper with azathioprine"
+          ],
+          [
+            "Withdrawal gate",
+            "2 years normal",
+            "Relapse near 50 percent"
+          ],
+          [
+            "Type 2 marker",
+            "Anti liver kidney 1",
+            "Children, fulminant course"
+          ],
+          [
+            "Rescue drug",
+            "Mycophenolate",
+            "Steroid failure cover"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "hand",
+  "minutes": 8,
+  "module": "shp-autoimmune-hepatitis",
+  "quiz": [],
+  "refs": [
+    "Harrison 2025 22nd Edition, autoimmune hepatitis chapters",
+    "EASL Clinical Practice Guidelines on autoimmune hepatitis"
+  ],
+  "subject": "ss-hepatology",
+  "title": "Autoimmune hepatitis: antibody types, scoring and steroid backbone",
+  "v": 1
+}

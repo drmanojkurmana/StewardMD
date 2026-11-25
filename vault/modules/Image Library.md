@@ -70,3 +70,24 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   `kb/tools/kb-placement.mjs`). The viewer shows "Open the lesson" (Pro; paywall without) and "Read the article"
   (opens `SMD_KB.open(ka)` and scrolls to the figure); entries with neither keep the old single link.
   Test: `test/run-imglib-links-ui.mjs`. Larger entries leave a little less of each system's Commons budget.
+- **Teaching animations (owner 2026-11-23):** one GIF per mechanism, shared by every module (KB, PrepNucleus, CliniX,
+  Drugs, SurgX). Each is three files in `media/anim/` (owner 2026-11-24, "both"): `NAME.webp` a still poster (middle frame; the grid, strip and thumbnails stay `<img>`), `NAME.av1.mp4` (SVT-AV1 crf 32) and `NAME.mp4` (HEVC crf 24, `hvc1` tag), encoded from the Gemini GIFs at the same timing. The viewer (`playAnim` in `image-library.js`) plays a muted looping `<video>`, AV1 when `canPlayType` says so, else HEVC. About 4 to 5 times smaller than the GIFs; animated WebP was dropped because it saved only 28% and was bigger than the GIF for 45 of 311. Owner 2026-11-23: kept in Cloudflare storage. `scripts/build-www.sh` copies them, and with `SMD_REMOTE_MEDIA=1` leaves them out: `remote-media.js` then loads `/media/anim/*` from R2 `app/media/anim/` (signed-in, cached on the phone), uploaded by `tools/upload-app-media.mjs`, listed with title, caption and system in
+  `kb/imglib/gifs.json`; the builder adds them as kind "Animation", from "Animations", credit "AI-generated with Google
+  Gemini", licence "StewardMD original". The 3 SurgX GIFs stay in `surgx/media/` and are listed in place. Made by
+  Gemini (Nano Banana keyframes, Python only to join them and write the labels) from prompts GIF1 to GIF4, topics
+  ranked by how many modules mention them. GIF2, GIF3 and GIF4 are in (158 GIFs with GIF1, about 150 MB). Left out for errors: gif077 P2Y12 (platelets drawn as red cells), gif114 urinary catheter (balloon labelled in the urethra). Not yet shown inline
+  inside KB articles, lessons or drug pages; that needs a topic-to-GIF lookup per module.
+- **One picture bank reused by every module (owner 2026-11-23):** the builder tags every picture with the topics its
+  title and caption name (KB disease and reference names and aliases, drug generics from `drugs.js` and
+  `prep/figures/figures.json`, drug classes via the figure `terms` so a class picture reaches every drug in the class,
+  SurgX operation titles and aliases, short picture titles, animation titles) and writes `kb/dist/imglib/topics.json`
+  (about 11,700 topics, 700 KB, up to 16 pictures each; title hits before caption hits, then animation, own, Commons).
+  Qualifier words ("severe", "early", "management"...) and organ words are never topics (`TOPIC_GENERIC`).
+  Client: `SMD_IMGLIB.strip(host, phrases, {before, skip})` finds the longest topics named in the screen's title
+  (`topicKeys`, same key rule as the builder; brackets dropped; a thin topic tops up from the shorter topic inside it)
+  and draws a "Pictures and animations" row; tap opens the viewer over the module (`.igl-top`), Back closes only the
+  viewer. Shown on: Drugs monograph (`api.js renderDetail`: generic + class), Knowledge Library article
+  (`reasoning.js openDiseaseRef`, minus pictures the article already has), PrepNucleus lesson finished screen
+  (`prep-lessons.js draw`, minus the lesson's own), CliniX topic (`clinix-screens.js renderDisease`), SurgX operation
+  first section (`surgx-screens.js relatedPictures`). Test: `test/run-imglib-strip-ui.mjs`; topic unit tests in
+  `test/image-library.test.mjs`.

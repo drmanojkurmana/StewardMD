@@ -78,6 +78,7 @@ backend/kardiox-image/image_model.pt
 # python build artifacts
 __pycache__/
 *.pyc
+backend/research/.venv/
 
 # ThoreX on-device model binaries served to the local browser harness — a
 # copy of backend/thorex/models/thorex_clinical.onnx, regenerate with
@@ -208,8 +209,10 @@ data/dose-rules-report.json
 /prep/explain/
 /prep/lessons/work-all/
 
-# Appllama research downloads (third-party app screenshots, never commit)
-research/
+# Appllama research downloads (third-party app screenshots, never commit). Root only: docs/research and backend/research are tracked.
+/research/
 
 # Browser-test screenshots (test/run-opd-*-ui.mjs); CI uploads them as an artifact
 test-output/
+test/fixtures/research/parity.json
+test/fixtures/research/parity-5d.json

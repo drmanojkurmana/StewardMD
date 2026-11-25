@@ -1,0 +1,334 @@
+{
+ "v": 1,
+ "module": "sid-travel",
+ "title": "Travel medicine and the returning traveller",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Define imported fever as malaria until it is excluded** in any febrile patient returning from an endemic area over recent months. **Run VHF stratification for illness starting within 21 days** alongside, never ahead of, **urgent malaria assessment** with same-day microscopy or rapid testing. **When the first assessment is negative yet doubt remains**, repeat sampling at **12 hour and 24 hour intervals for three rounds in total**, and keep a **low threshold for admission**.",
+   "say": "Imported fever was reported to be malaria until excluded in any febrile patient returning from an endemic area over recent months. VHF stratification for illness starting within twenty one days was reported to run alongside, never ahead of, urgent malaria assessment with same-day microscopy or rapid testing. When the first assessment is negative yet doubt remains, repeat sampling at twelve hour and twenty four hour intervals for three rounds in total was reported, and a low threshold for admission was reported to be kept.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever after travel"
+     },
+     {
+      "id": "b",
+      "label": "VHF risk within 21 days"
+     },
+     {
+      "id": "c",
+      "label": "Malaria test same day"
+     },
+     {
+      "id": "d",
+      "label": "Repeat 12 to 24 hours"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Itinerary at sub-national level with dates** plus freshwater, animal, bite, sex and healthcare exposures targets causes. **Onset under 14 days** suggests dengue 4 to 8 days, leptospirosis 7 to 12 days, enteric fever 7 to 18 days and falciparum 6 to 30 days. **VFR travellers carry highest malaria risk**, prior residence gives no protection, and **over 90 percent missed chemoprophylaxis** in the United States series. **Pregnancy and asplenia** lower admission thresholds.",
+   "say": "Itinerary at sub-national level with dates plus freshwater, animal, bite, sex and healthcare exposures was reported to target causes. Onset under fourteen days was reported to suggest dengue four to eight days, leptospirosis seven to twelve days, enteric fever seven to eighteen days and falciparum six to thirty days. VFR travellers were reported to carry highest malaria risk, prior residence was reported to give no protection, and over ninety percent were reported to have missed chemoprophylaxis in the United States series, while pregnancy and asplenia were reported to lower admission thresholds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Onset",
+     "Suggests",
+     "Next"
+    ],
+    "rows": [
+     [
+      "Under 14 days",
+      "Dengue 4 to 8 days",
+      "NS1 test, support"
+     ],
+     [
+      "Under 14 days",
+      "Enteric fever 7 to 18 days",
+      "Cultures, ceftriaxone"
+     ],
+     [
+      "14 days to 6 weeks",
+      "Falciparum, schistosomiasis",
+      "Malaria films, exposure history"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Imported fever follows exposure biology**: mosquito inoculation drives **falciparum and dengue**, freshwater contact drives **schistosomiasis**, and faecal oral spread drives **enteric fever**. **Yellow fever virus spreads via Aedes and forest mosquitoes** to liver with hepatotropism, while **India has no endemic yellow fever** but competent vector risk mandates proof of vaccination. **Over 90 percent non-adherence** explains most imported malaria. **Eosinophilia points to helminths**.",
+   "say": "Imported fever was reported to follow exposure biology, with mosquito inoculation driving falciparum and dengue, freshwater contact driving schistosomiasis, and faecal oral spread driving enteric fever. Yellow fever virus was reported to spread via Aedes and forest mosquitoes to liver with hepatotropism, while India was reported to have no endemic yellow fever but competent vector risk was reported to mandate proof of vaccination. Over ninety percent non-adherence was reported to explain most imported malaria, and eosinophilia was reported to point to helminths.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Exposure",
+     "Disease example",
+     "Preventive step"
+    ],
+    "rows": [
+     [
+      "Mosquito bite",
+      "Falciparum, dengue",
+      "Net, chemoprophylaxis"
+     ],
+     [
+      "Freshwater",
+      "Schistosomiasis",
+      "Avoid wading"
+     ],
+     [
+      "Faecal oral",
+      "Enteric fever",
+      "Food and water hygiene"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Classic clues redirect care fast**: **eschar suggests African tick bite fever or scrub typhus**, **petechial or purpuric rash suggests meningococcus, rickettsia or VHF**, **jaundice suggests malaria, leptospirosis or hepatitis**, **bleeding suggests VHF or leptospirosis**, and **eosinophilia suggests helminths**. **Yellow fever is often biphasic** with initial fever then toxic jaundice and haemorrhage plus **relative bradycardia as Faget sign**. **Enteric fever causes step-ladder fever to 39 to 40 with constipation or diarrhoea**.",
+   "say": "Classic clues were reported to redirect care fast, with eschar suggesting African tick bite fever or scrub typhus, petechial or purpuric rash suggesting meningococcus, rickettsia or VHF, jaundice suggesting malaria, leptospirosis or hepatitis, bleeding suggesting VHF or leptospirosis, and eosinophilia suggesting helminths. Yellow fever was reported to be often biphasic with initial fever then toxic jaundice and haemorrhage plus relative bradycardia as Faget sign, while enteric fever was reported to cause step-ladder fever to thirty nine to forty degrees with constipation or diarrhoea.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Suggests",
+     "Do"
+    ],
+    "rows": [
+     [
+      "Eschar",
+      "Tick bite fever, scrub typhus",
+      "Doxycycline"
+     ],
+     [
+      "Jaundice plus bleeding",
+      "Malaria, VHF, leptospirosis",
+      "Severe pathway"
+     ],
+     [
+      "Eosinophilia",
+      "Helminths",
+      "Stool, serology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First test is urgent malaria films or rapid antigen test** with same-day result, done in parallel with VHF assessment. **Blood cultures x 2 before antibiotics** cover enteric fever and sepsis, plus **CBC, renal, liver, glucose, coagulation, CRP and urinalysis**. **Dengue NS1 or RT-PCR with IgM**, **stored acute serum for paired serology**, **HIV test**, **chest X-ray and stool culture** complete the panel. **Only 75 percent get a specific cause** without specialist input.",
+   "say": "First test was reported to be urgent malaria films or rapid antigen test with same-day result, done in parallel with VHF assessment. Blood cultures times two before antibiotics was reported to cover enteric fever and sepsis, plus CBC, renal, liver, glucose, coagulation, CRP and urinalysis was reported. Dengue NS1 or RT-PCR with IgM was reported, stored acute serum for paired serology was reported, HIV test was reported, chest X-ray and stool culture were reported to complete the panel, and only seventy five percent were reported to get a specific cause without specialist input.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Malaria test first"
+     },
+     {
+      "id": "b",
+      "label": "Cultures before antibiotics"
+     },
+     {
+      "id": "c",
+      "label": "Panel plus serum stored"
+     },
+     {
+      "id": "d",
+      "label": "Specialist if unclear"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Severe malaria management begins with Artesunate 2.4 mg per kilogram IV at 0, 12 and 24 hours** followed by oral therapy at 1 percent. **Uncomplicated falciparum treatment is Artemether-lumefantrine 4 tablets twice daily alongside fatty food** or **Atovaquone-proguanil 4 tablets daily for 3 days**. **Vivax or ovale treatment is Chloroquine 600 then 300 mg** followed by **Primaquine 30 mg daily for 14 days**. **Enteric treatment is Ceftriaxone 2 g or Azithromycin 1 g daily**, with **Meropenem 1 g 8-hourly** if XDR complicated. **Eschar treatment is Doxycycline 100 mg twice daily**.",
+   "say": "Severe malaria management was reported to begin with artesunate two point four milligrams per kilogram intravenously at zero, twelve and twenty four hours and to continue with oral therapy at one percent. Uncomplicated falciparum treatment was reported to be artemether-lumefantrine four tablets twice daily alongside fatty food, or atovaquone-proguanil four tablets daily for three days. Vivax or ovale treatment was reported to be chloroquine six hundred then three hundred milligrams followed by primaquine thirty milligrams daily for fourteen days. Enteric treatment was reported to be ceftriaxone two grams or azithromycin one gram daily, with meropenem one gram eight-hourly if XDR complicated. Eschar treatment was reported to be doxycycline one hundred milligrams twice daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Use",
+     "Dose",
+     "Route"
+    ],
+    "rows": [
+     [
+      "Severe malaria",
+      "Artesunate 2.4 at 0, 12, 24h",
+      "IV"
+     ],
+     [
+      "Uncomplicated falciparum",
+      "AL 4 tablets, then twice daily",
+      "Oral with fat"
+     ],
+     [
+      "Enteric fever",
+      "Ceftriaxone 2 g daily",
+      "IV"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CDC in August 2026 extended artemether-lumefantrine to 5 days with 10 doses** for falciparum, while other guidelines still use **3 days with 6 doses**, so follow local guidance. **Yellow fever single-dose live vaccine** gives durable lifelong immunity and satisfies international requirements, with **India requiring proof of vaccination** from endemic areas. **Single negative film never excludes malaria**: repeat **3 tests every 12 to 24 hours** when suspicion persists. **Yellow fever has no antiviral**: care is supportive with **mosquito precautions during viraemia**.",
+   "say": "CDC in August twenty twenty six was reported to have extended artemether-lumefantrine to five days with ten doses for falciparum, while other guidelines were reported to still use three days with six doses, so local guidance was reported to be followed. Single-dose live yellow fever vaccine was reported to give durable lifelong immunity and to satisfy international requirements, with India reported to require proof of vaccination from endemic areas. Single negative film was reported to never exclude malaria, so three tests every twelve to twenty four hours were reported to be repeated when suspicion persists. Yellow fever was reported to have no antiviral, and care was reported to be supportive with mosquito precautions during viraemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "3-day course",
+     "points": [
+      "6 doses total",
+      "Still used widely",
+      "Check local guidance"
+     ]
+    },
+    "right": {
+     "title": "5-day CDC course",
+     "points": [
+      "10 doses total",
+      "August 2026 falciparum",
+      "Follow local guidance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Falciparum malaria is an emergency** with impaired consciousness, prostration, seizures, haemoglobin below 7, kidney injury, oedema, shock, acidosis, jaundice, bleeding, hypoglycaemia or **parasitaemia 5 percent or more**. **Enteric complications affect 10 to 15 percent**, usually **after 2 to 3 weeks** with bleeding, perforation and encephalopathy, with **mortality under 1 percent treated and above 10 percent untreated**. **Yellow fever toxic phase kills** through liver and kidney failure, bleeding and shock. **Admit falciparum, severe disease, bleeding, jaundice, kidney injury or dengue warning signs**.",
+   "say": "Falciparum malaria was reported to be an emergency with impaired consciousness, prostration, seizures, haemoglobin below seven, kidney injury, oedema, shock, acidosis, jaundice, bleeding, hypoglycaemia or parasitaemia five percent or more. Enteric complications were reported to affect ten to fifteen percent, usually after two to three weeks with bleeding, perforation and encephalopathy, with mortality under one percent treated and above ten percent untreated. Toxic phase yellow fever was reported to kill through liver and kidney failure, bleeding and shock, and admission was reported to be required for falciparum, severe disease, bleeding, jaundice, kidney injury or dengue warning signs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Danger sign",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Falciparum",
+      "Parasitaemia 5 percent or more",
+      "HDU or ICU, artesunate"
+     ],
+     [
+      "Enteric fever",
+      "Bleeding or perforation",
+      "Admit, ceftriaxone"
+     ],
+     [
+      "Yellow fever",
+      "Toxic jaundice",
+      "Supportive HDU care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** **excluding malaria on a single negative film** or because prophylaxis was taken; **labelling fever flu or urinary infection without a malaria test**; **delaying malaria testing for VHF assessment** or **forgetting VHF assessment**; **treating South Asian enteric fever with Ciprofloxacin**; **giving NSAIDs or Aspirin before dengue is excluded**; and **omitting HIV testing** with rash, pharyngitis or lymphadenopathy. **Primaquine and related drugs are contraindicated in pregnancy**.",
+   "say": "For the exam, excluding malaria on a single negative film or because prophylaxis was taken was reported as wrong. Labelling fever flu or urinary infection without a malaria test was reported as wrong. Delaying malaria testing for VHF assessment or forgetting VHF assessment was reported as wrong. Treating South Asian enteric fever with ciprofloxacin was reported as wrong. Giving NSAIDs or aspirin before dengue is excluded was reported as wrong, and omitting HIV testing with rash, pharyngitis or lymphadenopathy was reported as wrong, while primaquine and related drugs were reported to be contraindicated in pregnancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Single film negative",
+      "Malaria possible",
+      "Repeat 3 tests"
+     ],
+     [
+      "Ciprofloxacin for enteric",
+      "Resistance usual",
+      "Ceftriaxone or azithromycin"
+     ],
+     [
+      "NSAIDs in dengue",
+      "Bleeding risk",
+      "Paracetamol only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **exclude malaria first within the past year**; **VHF risk within 21 days**; **artesunate 2.4 at 0, 12, 24 hours** for severe disease; **AL 4 tablets twice daily** with fatty food; **chloroquine 600 then 300 mg** plus **primaquine 30 mg for 14 days** after G6PD; **ceftriaxone 2 g** or **azithromycin 1 g** for enteric fever, **meropenem 1 g 8-hourly** for XDR; **doxycycline 100 mg twice daily** for eschar; **single-dose yellow fever vaccine**; **repeat malaria 3 times**.",
+   "say": "For the exam, excluding malaria first within the past year was reported to be mandatory, and VHF risk within twenty one days was reported to run in parallel with artesunate two point four at nought, twelve and twenty four hours for severe disease. AL four tablets twice daily with fatty food was reported, chloroquine six hundred then three hundred milligrams plus primaquine thirty milligrams for fourteen days after G6PD was reported, and ceftriaxone two grams or azithromycin one gram for enteric fever with meropenem one gram eight-hourly for XDR was reported. Doxycycline one hundred milligrams twice daily for eschar was reported, single-dose yellow fever vaccine was reported, and malaria testing three times was reported to be repeated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Value",
+     "Why asked"
+    ],
+    "rows": [
+     [
+      "Malaria first",
+      "Past year, 3 repeats",
+      "Most asked"
+     ],
+     [
+      "VHF window",
+      "Within 21 days",
+      "Isolation rule"
+     ],
+     [
+      "Artesunate",
+      "2.4 at 0, 12, 24 hours",
+      "Dose asked"
+     ],
+     [
+      "Enteric",
+      "Ceftriaxone 2 g, azithromycin 1 g",
+      "Regimen"
+     ],
+     [
+      "Eschar",
+      "Doxycycline 100 mg twice daily",
+      "Exposure rule"
+     ],
+     [
+      "Vaccine",
+      "Single dose yellow fever",
+      "Prevention"
+     ],
+     [
+      "Primaquine",
+      "30 mg for 14 days",
+      "G6PD rule"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

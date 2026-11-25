@@ -36,6 +36,9 @@ jobs:
       - name: Install wrangler
         run: npm install -g wrangler@4.107.0   # pinned to match .github/workflows/deploy-worker.yml
       - name: Build www/
+        # Pictures, animations and clips load from R2 (remote-media.js); every file was checked 200 on 2026-11-24.
+        env:
+          SMD_REMOTE_MEDIA: "1"
         run: npm run build:www
       - name: Stage to R2 (candidate only — does not go live)
         env:

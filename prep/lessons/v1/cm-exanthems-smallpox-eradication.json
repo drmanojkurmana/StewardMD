@@ -13,12 +13,27 @@
    "say": "Last natural case Somalia 1977, declaration 1980, India free by 1977. Polio and every later campaign still borrow this campaign's yardstick.",
    "vis": {
     "kind": "table",
-    "cols": ["Milestone", "Year"],
+    "cols": [
+     "Milestone",
+     "Year"
+    ],
     "rows": [
-     ["India last case", "1975"],
-     ["World last natural case", "1977, Somalia"],
-     ["Global declaration", "1980"],
-     ["Disease", "Variola major and minor"]
+     [
+      "India last case",
+      "1975"
+     ],
+     [
+      "World last natural case",
+      "1977, Somalia"
+     ],
+     [
+      "Global declaration",
+      "1980"
+     ],
+     [
+      "Disease",
+      "Variola major and minor"
+     ]
     ]
    }
   },
@@ -28,12 +43,27 @@
    "say": "Only humans carried it, every case showed a rash, one vaccine fitted all, and scars audited coverage. Miss one feature and eradication stalls, as later campaigns learned.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Eradication value"],
+    "cols": [
+     "Feature",
+     "Eradication value"
+    ],
     "rows": [
-     ["Human only reservoir", "No animal refuge"],
-     ["No subclinical spread", "Cases findable by rash"],
-     ["Single serotype", "One vaccine globally"],
-     ["Visible vaccination scar", "Coverage auditable"]
+     [
+      "Human only reservoir",
+      "No animal refuge"
+     ],
+     [
+      "No subclinical spread",
+      "Cases findable by rash"
+     ],
+     [
+      "Single serotype",
+      "One vaccine globally"
+     ],
+     [
+      "Visible vaccination scar",
+      "Coverage auditable"
+     ]
     ]
    }
   },
@@ -44,12 +74,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Case found by search or rumour"},
-     {"id": "b", "label": "Patient isolated"},
-     {"id": "c", "label": "Contacts and locality ring vaccinated"},
-     {"id": "d", "label": "Search repeated till chain ends"}
+     {
+      "id": "a",
+      "label": "Case found by search or rumour"
+     },
+     {
+      "id": "b",
+      "label": "Patient isolated"
+     },
+     {
+      "id": "c",
+      "label": "Contacts and locality ring vaccinated"
+     },
+     {
+      "id": "d",
+      "label": "Search repeated till chain ends"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -69,12 +124,27 @@
    "say": "A two pronged needle quartered the dose and simplified training, while freeze dried vaccine tolerated tropical heat. Tools removed the excuses that stalled earlier rounds.",
    "vis": {
     "kind": "table",
-    "cols": ["Tool", "Advantage"],
+    "cols": [
+     "Tool",
+     "Advantage"
+    ],
     "rows": [
-     ["Bifurcated needle", "Quarter dose, simple technique"],
-     ["Freeze dried vaccine", "Heat stable in field"],
-     ["Scar check", "Take verified by inspection"],
-     ["Jet injector earlier", "Fast but maintenance heavy"]
+     [
+      "Bifurcated needle",
+      "Quarter dose, simple technique"
+     ],
+     [
+      "Freeze dried vaccine",
+      "Heat stable in field"
+     ],
+     [
+      "Scar check",
+      "Take verified by inspection"
+     ],
+     [
+      "Jet injector earlier",
+      "Fast but maintenance heavy"
+     ]
     ]
    }
   },
@@ -86,11 +156,21 @@
     "kind": "compare",
     "left": {
      "title": "Smallpox",
-     "points": ["Centrifugal distribution", "Lesions same stage", "Deep, slow evolution", "Severe prodrome, toxic"]
+     "points": [
+      "Centrifugal distribution",
+      "Lesions same stage",
+      "Deep, slow evolution",
+      "Severe prodrome, toxic"
+     ]
     },
     "right": {
      "title": "Chickenpox",
-     "points": ["Centripetal distribution", "Lesions mixed stages", "Superficial dew drop vesicles", "Mild illness overall"]
+     "points": [
+      "Centripetal distribution",
+      "Lesions mixed stages",
+      "Superficial dew drop vesicles",
+      "Mild illness overall"
+     ]
     }
    }
   },
@@ -111,12 +191,27 @@
    "say": "Every rumour logged, investigated and closed in writing, with rewards for true reports. Silence was audited as failure. Zero reports never meant zero disease.",
    "vis": {
     "kind": "table",
-    "cols": ["Device", "Purpose"],
+    "cols": [
+     "Device",
+     "Purpose"
+    ],
     "rows": [
-     ["Rumour register", "Capture community reports"],
-     ["Cash reward", "Incentivise true reporting"],
-     ["House searches", "Find unreported cases"],
-     ["Nil report audit", "Detect silent facilities"]
+     [
+      "Rumour register",
+      "Capture community reports"
+     ],
+     [
+      "Cash reward",
+      "Incentivise true reporting"
+     ],
+     [
+      "House searches",
+      "Find unreported cases"
+     ],
+     [
+      "Nil report audit",
+      "Detect silent facilities"
+     ]
     ]
    }
   },
@@ -127,12 +222,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Last indigenous case"},
-     {"id": "b", "label": "Intensive surveillance years"},
-     {"id": "c", "label": "Independent commission audit"},
-     {"id": "d", "label": "Certification of freedom"}
+     {
+      "id": "a",
+      "label": "Last indigenous case"
+     },
+     {
+      "id": "b",
+      "label": "Intensive surveillance years"
+     },
+     {
+      "id": "c",
+      "label": "Independent commission audit"
+     },
+     {
+      "id": "d",
+      "label": "Certification of freedom"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -141,12 +261,27 @@
    "say": "Official virus survives in two inspected laboratories only. Routine vaccination stopped, immunity wanes, and stockpiles plus response plans carry the remaining risk.",
    "vis": {
     "kind": "table",
-    "cols": ["Remnant", "Safeguard"],
+    "cols": [
+     "Remnant",
+     "Safeguard"
+    ],
     "rows": [
-     ["Two official virus stocks", "International inspection"],
-     ["Vaccine stockpiles", "Emergency ring response"],
-     ["Waning population immunity", "Preparedness planning"],
-     ["Synthetic biology risk", "Screening and governance"]
+     [
+      "Two official virus stocks",
+      "International inspection"
+     ],
+     [
+      "Vaccine stockpiles",
+      "Emergency ring response"
+     ],
+     [
+      "Waning population immunity",
+      "Preparedness planning"
+     ],
+     [
+      "Synthetic biology risk",
+      "Screening and governance"
+     ]
     ]
    }
   },
@@ -156,12 +291,72 @@
    "say": "Polio inherited the searches, the rings and the certification audits. Smallpox never faced hidden spread or animal reservoirs. Know which lessons transfer and which luck does not.",
    "vis": {
     "kind": "table",
-    "cols": ["Smallpox device", "Later echo"],
+    "cols": [
+     "Smallpox device",
+     "Later echo"
+    ],
     "rows": [
-     ["Rash surveillance", "AFP surveillance in polio"],
-     ["Ring vaccination", "Outbreak response immunisation"],
-     ["Rumour register", "Community event reporting"],
-     ["Certification commission", "Polio certification process"]
+     [
+      "Rash surveillance",
+      "AFP surveillance in polio"
+     ],
+     [
+      "Ring vaccination",
+      "Outbreak response immunisation"
+     ],
+     [
+      "Rumour register",
+      "Community event reporting"
+     ],
+     [
+      "Certification commission",
+      "Polio certification process"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Smallpox last occurred naturally in Somalia in 1977, India reported its last case in 1975, and global eradication was declared in 1980. Eradication worked because humans were the only reservoir with no carriers and one serotype. Surveillance and containment with ring vaccination replaced mass vaccination. Smallpox lesions are centrifugal, same stage, deep and slow, unlike centripetal chickenpox.",
+   "say": "High-yield for the exam: Smallpox last occurred naturally in Somalia in 1977, India reported its last case in 1975, and global eradication was declared in 1980. Eradication worked because humans were the only reservoir with no carriers and one serotype. Surveillance and containment with ring vaccination replaced mass vaccination. Smallpox lesions are centrifugal, same stage, deep and slow, unlike centripetal chickenpox.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Last natural case",
+      "Somalia 1977, global declaration in 1980"
+     ],
+     [
+      "India last case",
+      "1975, declared free in 1977"
+     ],
+     [
+      "Eradication feasibility",
+      "Human only reservoir, no carriers, single serotype"
+     ],
+     [
+      "Winning strategy",
+      "Surveillance containment, isolate case, ring vaccinate contacts"
+     ],
+     [
+      "Bifurcated needle advantage",
+      "Quarter vaccine dose, simple multiple puncture technique"
+     ],
+     [
+      "Smallpox lesions",
+      "Centrifugal, same stage, deep, slow, toxic patient"
+     ],
+     [
+      "Chickenpox lesions",
+      "Centripetal, mixed stages, superficial, mild illness"
+     ],
+     [
+      "Rumour register purpose",
+      "Logs suspected cases, zero reporting signals failure"
+     ]
     ]
    }
   }

@@ -750,7 +750,7 @@
 
   /* ================= browser ================= */
   var D = G.document, C = G.SPECIALTY_CORE;
-  var STATIC = G.SMD_PREP_BASE || "/prep/", API = G.SMD_PREP_BANK_API || "/api/prep/bank/", FLAG_API = G.SMD_PREP_FLAG_API || "/api/prep/flag", VER = G.SMD_PREP_BANK_VER || "v5", PYQ_VER = G.SMD_PREP_PYQ_VER || "v5";
+  var STATIC = G.SMD_PREP_BASE || "/prep/", API = G.SMD_PREP_BANK_API || "/api/prep/bank/", FLAG_API = G.SMD_PREP_FLAG_API || "/api/prep/flag", AX_API = G.SMD_PREP_AX_API || "/api/prep/explain", VER = G.SMD_PREP_BANK_VER || "v5", PYQ_VER = G.SMD_PREP_PYQ_VER || "v5";
   var HID_TTL = 6 * 3600e3;
   var KEY = "smd_prep_v1", SESSION = 20;
   var st = { open: false, stack: [], tax: null, ix: {}, mem: {}, store: null, run: null, timer: 0, prevOverflow: "", prevFocus: null, sub: null, filter: "all" };
@@ -1495,6 +1495,8 @@
     try { if (G.PREP_TIDE) G.PREP_TIDE.sync(root); } catch (e) {}
     try { if (G.PREP_NAV) G.PREP_NAV.sync(root); } catch (e) {}   // the floating tab bar (prep-nav.js)
     try { tableFit(root); } catch (e) {}
+    // MaiK buddy (prep-buddy.js): stands in the corner of a practice set only, gone on every other screen.
+    try { if (G.PREP_BUDDY) G.PREP_BUDDY.sync(top === renderRun ? st.run : null, HOST); } catch (e) {}
   }
   /* Tables (lesson steps, explanations): one that nearly fits is tightened until it does; one that is really wider
      scrolls sideways, fades the edge that has more, and nudges once when first on screen so nobody has to guess. */
@@ -1571,6 +1573,7 @@
   function rerender() { var v = st.stack[st.stack.length - 1]; if (v) v(); }
   function back() {
     if (!st.open) return false;
+    if (G.PREP_STARTUP && G.PREP_STARTUP._active && G.PREP_STARTUP._active()) { G.PREP_STARTUP.skip(); return true; }
     if (closeCreditSheet()) return true;   // an image credit sheet closes first
     if (G.PREP_TOOLS && G.PREP_TOOLS.back()) return true;   // a note or reset sheet (prep-tools.js) closes first
     if (G.PREP_PLAY && G.PREP_PLAY.back()) return true;   // a play sheet or the feed's own state (prep-play.js) first
@@ -1611,6 +1614,7 @@
     // A shared ID (deep link stewardmd://prep/<ID>) while PrepNucleus is already open: open it over the current screen.
     // Still loading (the taxonomy): kept for the first screen, which opens it.
     if (st.open) { if (opts && opts.id && G.PREP_IDS) { if (st.tax && st.stack.length) G.PREP_IDS.open(String(opts.id), HOST); else st.pendId = String(opts.id); } return true; }
+    try { if (G.PREP_STARTUP && G.PREP_STARTUP.willPlay && G.PREP_STARTUP.willPlay(opts) && !G.PREP_STARTUP._active()) G.PREP_STARTUP.play({ opts: opts }); } catch (e) {}
     load();
     st.prevFocus = D.activeElement; st.prevOverflow = D.body.style.overflow;
     root = D.createElement("div"); root.id = "smdPrep"; root.className = "pn-root";
@@ -1689,9 +1693,11 @@
     });
   }
   function close() {
+    try { if (G.PREP_STARTUP && G.PREP_STARTUP.abort) G.PREP_STARTUP.abort(); } catch (e) {}
     stopTimer();
     try { if (G.PREP_TOOLS) G.PREP_TOOLS.flush(); } catch (e) {}
     try { if (G.PREP_PLAY) G.PREP_PLAY.leave(); } catch (e) {}
+    try { if (G.PREP_BUDDY) G.PREP_BUDDY.leave(); } catch (e) {}
     try { if (G.PREP_SOUND) G.PREP_SOUND.leave(); } catch (e) {}
     try { if (G.PREP_MEDIGRAM) G.PREP_MEDIGRAM.leave(); } catch (e) {}
     try { if (G.PREP_ARENA && G.PREP_ARENA.leave) G.PREP_ARENA.leave(); } catch (e) {}
@@ -2036,49 +2042,57 @@
     var tabs = plan ? "" : '<div class="pn-tabs" role="tablist" aria-label="Exam">' + EXAMS.map(function (e) {
       return '<button type="button" role="tab" class="pn-tab' + (e.id === ex.id ? " on" : "") + '" aria-selected="' + (e.id === ex.id) + '" data-act="exam" data-v="' + e.id + '">' + esc(e.label) + "</button>";
     }).join("") + "</div>";
-    var nb = Object.keys(s.bm).length;
+    var nb = Object.keys(s.bm).length, cut = !scope && !st.subsAll && subs.length > 7;
     // Back on home with every index already read: the subject rows and Solve next draw complete in the first paint, so
     // nothing above the kept scroll position grows after it is restored (no anchoring jump).
     var known = subs.every(function (sb) { return !!st.ix[sb.id]; }), nx0 = known ? solveNext(subs, st.ix, s, today(), s.exam) : null;
-    var you = (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
+    /* Compact home (owner 2026-11-17: "overwhelming, more options, more scrolling"). With the tab bar (prep-nav.js) the rows
+       it already holds (You: stats, friends, accuracy, settings, notebook; Tests: mock exam) leave
+       home; without it they stay, so nothing is ever out of reach. */
+    var tabbed = !!G.PREP_NAV;
+    var you = (G.PREP_PLAY && G.PREP_PLAY.freezeRow ? G.PREP_PLAY.freezeRow(HOST) : "") + (tabbed ? "" : (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
       (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") +
-      (plan ? row("p-settings", ico("gear"), "Settings", "Exam: " + esc(exLabel) + " · plan and reminder") : "");
+      (plan ? row("p-settings", ico("gear"), "Settings", "Exam: " + esc(exLabel) + " · plan and reminder") : ""));
     /* Quiet home (2026-10-10, owner brief): the brand is the mark and the name in the bar (no banner, no painted sky).
        Top down: readiness and days to the exam, today's next task and the rest of the plan, practice, subjects, then
        the secondary figures (streak, today, level) and Compete. */
+    var qotdSec = (st.qotd && st.qotdDay === today() && st.qotdEx === s.exam ? '<section class="pn-qotd" id="pnQotd">' + qotdHtml(st.qotd) + "</section>" : '<section class="pn-qotd pn-qotd-wait" id="pnQotd" aria-hidden="true"></section>');
     paint(bar("PrepNucleus", esc(exLabel), "close", '<button type="button" class="pn-ib" data-act="find" aria-label="Search questions, lessons, pearls and IDs">' + ico("search") + '</button><button type="button" class="pn-ib" data-act="menu" aria-label="Menu">' + ico("menu") + "</button>") +
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
-      // Readiness and Today's plan (prep-plan.js); the older Today card without it.
-      (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
-      // IQoach (My coaching): due today, groups, pairs and Ask MaiK. Nothing without the coach file.
-      coachSecHtml("home") +
+      // Readiness, then Question of the day (owner 2026-11-17: under the score, above Today's plan), then Today's plan
+      // (prep-plan.js); the older Today card without it. IQoach sits after Practise.
       // Question of the day (prep50): one bank question a day, the same for the whole day; drawn once the subject indexes
       // are read (below). Hidden offline when its module is not on this phone.
-      (st.qotd && st.qotdDay === today() && st.qotdEx === s.exam ? '<section class="pn-qotd" id="pnQotd">' + qotdHtml(st.qotd) + "</section>" : '<section class="pn-qotd" id="pnQotd" hidden></section>') +
+      (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST, qotdSec) : qotdSec + '<h2 class="pn-h">Today</h2>' + planCard(s)) +
       '<h2 class="pn-h">Practise</h2>' +
       '<button type="button" class="pn-next" data-act="solvenext" id="pnNext"' + (nx0 ? ' data-s="' + esc(nx0.subject) + '" data-m="' + esc(nx0.module) + '"' : " hidden") + '><span class="pn-ri" aria-hidden="true">' + ico("target") + '</span><span class="pn-rb"><small>Solve next</small><b id="pnNextT">' + (nx0 ? esc(nextLabel(nx0)) : "") + "</b></span>" + ico("chev") + "</button>" +
-      '<div class="pn-group">' +
+      // PrepReels (prep-medigram.js): the one swipe feed (Play's Swipe feed opens it too).
+      (G.PREP_MEDIGRAM ? G.PREP_MEDIGRAM.homeHtml(HOST) : "") +
+      // With the tab bar the Practise rows are a grid of icon tiles (prep.css .pn-grid4), the same rows and actions.
+      '<div class="pn-group' + (tabbed ? " pn-grid4" : "") + '">' +
       // Nucleus360 (prep-nucleus360.js): learn a topic A to Z. Was only a button inside a module; it leads the Practise group now.
       (G.PREP_NUCLEUS360 && G.PREP_NUCLEUS360.on() ? row("n360-hub", ico("grid"), "Nucleus360", "Learn a topic A to Z through MCQs") : "") +
       (G.PREP_TT ? G.PREP_TT.homeRow(HOST) : "") +
-      row("bookmarks", ico("bm"), "Bookmarks", fmt(nb) + " saved") +
-      (G.PREP_TOOLS ? G.PREP_TOOLS.notebookRow(HOST) : "") +
       row("custom", ico("plus"), "Custom module", "Your own mix and count") +
       row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") +
-      row("mocks", ico("clock"), "Mock exam", "Full pattern, marked") +
       (G.PREP_PLAN ? row("weak", ico("target"), "Weak areas", "Mistakes and modules under 60%") : "") +
+      row("bookmarks", ico("bm"), "Bookmarks", fmt(nb) + " saved") +
       // Previous year papers (prep-pyq.js): NEET-PG recall papers only, so the row shows on that tab.
       (G.PREP_PYQ && s.exam === "neet-pg" ? G.PREP_PYQ.homeRow(HOST) : "") +
+      (tabbed ? "" : (G.PREP_TOOLS ? G.PREP_TOOLS.notebookRow(HOST) : "") + row("mocks", ico("clock"), "Mock exam", "Full pattern, marked")) +
       // Cards due (prep-flash.js): shows once the student has studied any module card.
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       (G.STUDY ? G.STUDY.homeRow(HOST) : "") +
       "</div>" +
+      // IQoach (My coaching): due today, groups, pairs and Ask MaiK. Nothing without the coach file.
+      coachSecHtml("home") +
       (G.PREP_PLAY ? G.PREP_PLAY.homeHtml(HOST) : "") +
-      (G.PREP_MEDIGRAM ? G.PREP_MEDIGRAM.homeHtml(HOST) : "") +
       psHomeHtml(s) +
       (scope ? ssHomeSubjects(scope, subs, known) :
-      '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>") +
+      // The first 6 subjects, then "Show all" opens the rest in place (prep.css .pn-cut); every subject is also in Tests, QBank.
+      '<h2 class="pn-h">Subjects</h2><div class="pn-subs' + (cut ? " pn-cut" : "") + '" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>" +
+      (cut ? '<button type="button" class="pn-btn pn-subs-all" data-act="subs-all">Show all ' + subs.length + " subjects</button>" : "")) +
       // Secondary: streak, today and level (prep-plan.js), then the student's own pages and settings.
       (G.PREP_PLAN && G.PREP_PLAN.progressHtml ? G.PREP_PLAN.progressHtml(HOST) : '<h2 class="pn-h">You</h2>') +
       (you ? '<div class="pn-group pn-you">' + you + "</div>" : "") +
@@ -2095,7 +2109,7 @@
       if (G.PREP_PLAN) G.PREP_PLAN.homeMounted(HOST);
       if (nx && el) { el.hidden = false; el.setAttribute("data-s", nx.subject); el.setAttribute("data-m", nx.module); root.querySelector("#pnNextT").textContent = nextLabel(nx); }
       qotdMount(subs, s);
-    });
+    }, function () { var q = root && root.querySelector("#pnQotd.pn-qotd-wait"); if (q) q.hidden = true; });
   }
   /* ---------- question of the day (prep50) ----------
      One real bank question a day: the day picks a module of the exam's subjects already on this phone, the day
@@ -2147,9 +2161,12 @@
   function qotdMount(subs, s) {
     var box = root && root.querySelector("#pnQotd");
     if (!box) return;
-    qotdPick(subs, s).then(function (it) {
+    qotdPick(subs, s).then(null, function () { return null; }).then(function (it) {
       box = root && root.querySelector("#pnQotd");
-      if (!box || !it || !st.open) return;
+      if (!box || !st.open) return;
+      // At the top of home its space is kept while it loads (no jump); no question today (offline, empty) drops it.
+      box.classList.remove("pn-qotd-wait"); box.removeAttribute("aria-hidden");
+      if (!it) { box.hidden = true; return; }
       st.qotd = it; st.qotdDay = today(); st.qotdEx = s.exam;
       patchHtml(box, qotdHtml(it)); box.hidden = false;
     });
@@ -2709,13 +2726,84 @@
   }
   /* The explanation under the answer: the key line and topic notes when the item has x, else its stored text (old "*"
      bullets made into a list), else a plain "not written yet" line. */
-  function whyHtml(it, xo, why, L) {
+  function whyHtml(it, xo, why, L, chosen) {
     // images placed in the explanation (imgPlace "exp") follow the notes, with the same tap to enlarge
     var fig = G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST, "exp") : "";
-    if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig;
+    if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig + (it._ax || it.ax ? '<p class="pn-mut pn-small pn-axby">Explanation written by MaiK AI. Report it if something looks wrong.</p>' : "");
     if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + (lfExp(why) || xfExp(why, it) || mdLite(legacyExp(why))) + "</div>" + fig;
     if (fig) return "<h3>Explanation</h3>" + fig;
-    return '<p class="pn-mut">No explanation is stored for this question yet.</p>';
+    // Nothing stored: MaiK writes one (autoExplain, /api/prep/explain), and the block fills in when it arrives.
+    if (!it || it._gone || !it.o) return '<p class="pn-mut">No explanation for this question.</p>';
+    if (autoExplain(it) && explainOf(it).x) return whyHtml(it, explainOf(it), "", L, chosen);
+    return '<div class="pn-ax" data-ax="' + axKey(it) + '" data-ch="' + (chosen >= 0 ? chosen : -1) + '" role="status" aria-live="polite"><h3>Explanation</h3><p class="pn-mut">' + (axState[axKey(it)] === "fail" ? 'The explanation could not be loaded. <button type="button" class="pn-link" data-act="axretry" data-v="' + axKey(it) + '">Try again</button>' : "MaiK is writing the explanation for this question...") + "</p></div>";
+  }
+  /* Auto explanations (owner 2026-11-20: "I shouldnt see a single mcq without explanation"). An item with no exp, x, r
+     or figure gets one written once by claude-haiku-5-5 on the server and kept there for every phone; this phone keeps
+     its own copy (localStorage smd_prep_ax, newest 400). The result is set on the item as x, so the answer screen, Ask
+     MaiK and the offline teacher all read it the same way as a bank explanation. */
+  var AX_LS = "smd_prep_ax", AX_MAX = 400, axState = {}, axMem = null, axItems = {};
+  function axKey(it) {
+    var str = JSON.stringify([String(it.q || ""), (it.o || []).map(String), it.a]), h = 5381, h2 = 52711;
+    for (var i = 0; i < str.length; i++) { var c = str.charCodeAt(i); h = ((h << 5) + h + c) | 0; h2 = ((h2 << 5) + h2 + c * 31) | 0; }
+    return "ax" + (h >>> 0).toString(36) + (h2 >>> 0).toString(36);
+  }
+  function axStore() {
+    if (axMem) return axMem;
+    try { axMem = JSON.parse(G.localStorage.getItem(AX_LS) || "{}") || {}; } catch (e) { axMem = {}; }
+    return axMem;
+  }
+  function axSave(k, x) {
+    var m = axStore(); m[k] = { x: x, t: Date.now() };
+    var ks = Object.keys(m);
+    if (ks.length > AX_MAX) ks.sort(function (p, q) { return m[p].t - m[q].t; }).slice(0, ks.length - AX_MAX).forEach(function (d) { delete m[d]; });
+    try { G.localStorage.setItem(AX_LS, JSON.stringify(m)); } catch (e) {}
+  }
+  function hasExplain(it) {
+    if (!it || it._gone || !it.o || !(it.a >= 0)) return true;
+    if (String(it.exp || "").trim()) return true;
+    var xo = explainOf(it);
+    if (xo.x || (xo.r && String(xo.r[it.a] || "").trim())) return true;
+    return !!(G.PREP_PYQ && it.img && it.imgPlace === "exp");
+  }
+  function axApply(it, x) {
+    if (!x || typeof x.key !== "string") return false;
+    it.x = { key: x.key, notes: x.notes || "", others: x.others || {}, pearl: x.pearl || "" };
+    it._ax = 1;
+    return true;
+  }
+  /* autoExplain(it) -> true when the item has (or now has, from this phone's copy) an explanation; otherwise starts
+     the request once and returns false. On the reply every open placeholder for the item is filled in place. */
+  function autoExplain(it) {
+    if (hasExplain(it)) return true;
+    var k = axKey(it), m = axStore();
+    if (m[k] && axApply(it, m[k].x)) return true;
+    axItems[k] = it;
+    if (axState[k] === "busy" || axState[k] === "fail") return false;
+    axState[k] = "busy";
+    var u = G.SMD_AUTH && G.SMD_AUTH.currentUser;
+    (u && u.getIdToken ? u.getIdToken().then(null, function () { return null; }) : Promise.resolve(null)).then(function (tok) {
+      var h = { "Content-Type": "application/json" }; if (tok) h.Authorization = "Bearer " + tok;
+      return G.fetch(AX_API, { method: "POST", headers: h, body: JSON.stringify({ q: it.q, o: it.o, a: it.a }) });
+    }).then(function (res) { return res && res.ok ? res.json() : null; }).then(function (j) {
+      if (!j || !axApply(it, j.x)) throw new Error("ax");
+      axSave(k, it.x); axState[k] = "ok"; axFill(it, k);
+    }).then(null, function () { axState[k] = "fail"; axFill(it, k); });
+    return false;
+  }
+  // Fill (or mark failed) every placeholder for this question on screen, without repainting the page.
+  function axFill(it, k) {
+    var D = G.document; if (!D || !D.querySelectorAll) return;
+    var nodes = D.querySelectorAll('.pn-ax[data-ax="' + k + '"]'), L = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i], ch = parseInt(n.getAttribute("data-ch"), 10);
+      if (axState[k] !== "ok") { n.outerHTML = whyHtml(it, explainOf(it), "", L, ch); continue; }
+      var xo = explainOf(it), rs = xo.r;
+      var others = rs ? it.o.map(function (o, j) { return j; }).filter(function (j) { return j !== it.a && rs[j] && String(rs[j]).trim(); }) : [];
+      others.sort(function (x, y) { return (y === ch) - (x === ch) || x - y; });
+      n.outerHTML = '<div class="pn-axdone">' + whyHtml(it, xo, "", L, ch) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (j) {
+        return "<li" + (j === ch ? ' class="mine"' : "") + '><span class="pn-l">' + L[j] + "</span><p><small>" + (j === ch ? "Your pick: " : "") + lfOpt(it.o[j]) + "</small><span>" + xfInline(rs[j], it) + "</span></p></li>";
+      }).join("") + "</ul>" : "") + pearlHtml(it, xo) + "</div>";
+    }
   }
   /* One figure, every place it helps (fig-viewer.js registry): after the explanation, a "How it works" button when the question
      names a drug or class that has an interactive figure. A link only; the answer flow is unchanged. */
@@ -2723,7 +2811,12 @@
     var F = G.SMD_FIG;
     if (!F || !F.matchText || !it || it._gone) return "";
     var txt = [it.q, (it.o || []).join(" "), stripWmMarks(it.exp), it.kp].join(" "), m = F.matchText(txt, 1)[0];
-    return m ? '<div class="pn-figrow">' + F.chipHtml(m, "pn-chip pn-figchip", "fig-open") + "</div>" : "";
+    // The kind line under the title, so the row reads like its Learn more neighbours.
+    return m ? '<div class="pn-figrow">' + F.chipHtml(m, "pn-chip pn-figchip", "fig-open").replace(/<\/b><\/button>$/, "</b><small>Interactive figure</small></button>") + "</div>" : "";
+  }
+  // The Learn more group: one titled section holding the rows; nothing at all when there is nothing in it.
+  function lmGroup(inner) {
+    return inner ? '<section class="pn-lm" aria-label="Learn more"><h3 class="pn-lm-h">Learn more</h3><div class="pn-lm-list">' + inner + "</div></section>" : "";
   }
   function pearlHtml(it, xo) {
     var p = xo.x && xo.x.pearl ? xo.x.pearl : it.kp;
@@ -2790,6 +2883,8 @@
     if (r.t2) persistRun(r);
     syncClock(r);
     var locked = !!(r.qc && r.qc.out[r.i]);
+    // An item with no explanation starts MaiK writing one now, so it is usually ready by the time the answer shows.
+    if (r.items[r.i]) autoExplain(r.items[r.i]);
     // Learning Mode: an answer, or the time running out, shows the answer and the explanation.
     var it = r.items[r.i], chosen = r.ans[r.i], shown = r.mode === "study" && (chosen >= 0 || locked), s = load(), bm = !!s.bm[it.id], own = it._s === "deck";
     // PYQ items (prep-pyq.js) are not in a bank module file, so a bookmark could not reload them: no ribbon.
@@ -2840,19 +2935,21 @@
       fb += '<p class="pn-verdict' + (tup ? " pn-vtu" : "") + '"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : tup ? "clock" : "x") + "</span><span><b>" + (ok ? "Correct" : tup ? "Time up" : "Incorrect") + "</b>" + (ok ? "" : "<small>" + (tup ? "Not answered in time" : "You chose " + L[chosen]) + "</small>") + "</span></p>" +
         '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + lfOpt(it.o[it.a]) + "</span></p>" +
         (TOOLS ? TOOLS.peerHtml(it, chosen) + TOOLS.noteHtml(it) : "") + (G.PREP_PLAY && !r.norec ? G.PREP_PLAY.mnHtml(it) : "") +
-        (RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: chosen, md: mdLite, inl: inlineMd }) :
-        whyHtml(it, xo, why, L) +
+        (RX ? RX.body(it, { why: whyHtml(it, xo, why, L, chosen), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: chosen, md: mdLite, inl: inlineMd }) :
+        whyHtml(it, xo, why, L, chosen) +
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
           return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
-        pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) +
-        figRowHtml(it) +
-        whyRowHtml(it, chosen, r.i) +
-        (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") + outdatedHtml(it) +
+        pearlHtml(it, xo)) +
+        // Learn more (owner 2026-11-17: "a distinct section rather than a collection of floating buttons"): Know more
+        // targets, the interactive figure and Ask MaiK as one grouped list, every row the same height, icon and chevron.
         // Ask MaiK (prep-ask.js): on every answer, right or wrong, on this phone or online. Without prep-ask.js the
         // older offline-only button, shown only when MaiK runs on this phone.
+        lmGroup((RX ? "" : (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) + figRowHtml(it) +
         (G.PREP_ASK ? askBtn("ask", "Ask MaiK") :
-          !ok && !tup && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "") +
+          !ok && !tup && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "")) +
+        whyRowHtml(it, chosen, r.i) +
+        (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") + outdatedHtml(it) +
         (!ok && !own ? '<div class="pn-mtag" role="group" aria-label="Why did you miss it?"><span class="pn-mut pn-small">Why did you miss it?</span><div class="pn-wrap">' + MISTAKE_TAGS.map(function (t) {
           var on = (s.mt[it.id] || [])[2] === t[0];
           return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="mtag" data-v="' + t[0] + '">' + t[1] + "</button>";
@@ -3176,6 +3273,7 @@
     if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; r.kyHide = true; if (!r.norec) record(r.items[r.i], k, { conf: r.conf && r.conf[r.i], pair: r.confPair && r.confPair[r.i], ms: Date.now() - (r.qt0 || r.t0) }); }
     else r.ans[r.i] = k;
     streakCele(r);
+    if (r.mode === "study" && G.PREP_BUDDY) { try { G.PREP_BUDDY.answered(r); } catch (e) {} }
     // A run's own rule after each answer (prep-play.js boss lives); it may finish the run.
     if (r.onAnswer) { try { r.onAnswer(r, k); } catch (e) {} if (r.done) return; }
     renderRun();
@@ -3212,6 +3310,7 @@
     if (!st.kb) nav(1);   // the result arrives like a pushed screen (a key finish stays still)
     renderResult();
     perfectCele(r);
+    if (G.PREP_BUDDY) { try { G.PREP_BUDDY.finished(r); } catch (e) {} }
     if (G.PREP_NATIVE) G.PREP_NATIVE.finished();
   }
   /* Owner 2026-11-11: every question right in a set of 5 or more (any module, practice or test) plays the
@@ -3309,11 +3408,11 @@
       var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
       var others = rs ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(rs[k] || "").trim(); }) : [];
       others.sort(function (x, y) { return (y === a) - (x === a) || x - y; });
-      var ex = RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: a, md: mdLite, inl: inlineMd }) :
-        whyHtml(it, xo, why, L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
+      var ex = RX ? RX.body(it, { why: whyHtml(it, xo, why, L, a), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: a, md: mdLite, inl: inlineMd }) :
+        whyHtml(it, xo, why, L, a) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
           return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
-        }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
-      ex += figRowHtml(it);
+        }).join("") + "</ul>" : "") + pearlHtml(it, xo);
+      ex += lmGroup((RX ? "" : (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) + figRowHtml(it));
       var rid = G.PREP_IDS && it._s !== "deck" && !it._gone ? G.PREP_IDS.ofItem(it) : null;
       // My-coaching capture: a timed exam shows no chips during the run; flagged questions are tagged here instead.
       var tagRow = r.mark[i] && !it._gone ? '<div class="pn-mtag" role="group" aria-label="How sure were you?"><span class="pn-mut pn-small">Marked for review: how sure were you? (optional)</span><div class="pn-wrap">' + [["guessing", "Guessing"], ["confident", "Confident"], ["confused", "Confused"]].map(function (t) {
@@ -3458,17 +3557,16 @@
     var pager = multi ? '<div class="ky-pager" role="group" aria-label="Review position"><button type="button" class="pn-btn sm" data-act="rvprev"' + (P.pos ? "" : " disabled") + ">" + ico("back") + ' Previous</button><span class="ky-pos" aria-live="polite">' + (P.pos + 1) + " of " + n + '</span><button type="button" class="pn-btn sm" data-act="rvnext"' + (P.pos < n - 1 ? "" : " disabled") + '>Next <span class="ky-flip">' + ico("back") + "</span></button></div>" : "";
     var xo = explainOf(it), others = xo.r ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(xo.r[k] || "").trim(); }) : [];
     var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
-    var ex = RX ? RX.body(it, { why: whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: xo.r, chosen: r.ans[i], md: mdLite, inl: inlineMd }) :
-      whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
+    var ex = RX ? RX.body(it, { why: whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L, r.ans[i]), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: xo.r, chosen: r.ans[i], md: mdLite, inl: inlineMd }) :
+      whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L, r.ans[i]) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
         return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(xo.r[k], it) + "</span></p></li>";
-      }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
-    ex += figRowHtml(it);
+      }).join("") + "</ul>" : "") + pearlHtml(it, xo);
+    var rvLm = (RX ? "" : (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) + figRowHtml(it) + (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "");
     var sRv = load(), rvBm = it._s !== "deck" && !it._py && !!(sRv.bm && sRv.bm[it.id]);
     var rvActs = (it._s === "deck" || it._py ? "" : '<button type="button" class="pn-ib' + (rvBm ? " on" : "") + '" data-act="rvbookmark" aria-pressed="' + rvBm + '" aria-label="' + (rvBm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", rvBm) + "</button>") + (rid ? G.PREP_IDS.shareBtn(rid) : "");
     paint(bar("Review", esc(r.title), "back", rvActs) + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
       return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
-    }).join("") + '</ol><section class="pn-fb">' + ex + outdatedHtml(it) +
-      (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") + provHtml(it) + (G.PREP_PYQ ? G.PREP_PYQ.creditFoot(it, HOST) : "") + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
+    }).join("") + '</ol><section class="pn-fb">' + ex + lmGroup(rvLm) + outdatedHtml(it) + provHtml(it) + (G.PREP_PYQ ? G.PREP_PYQ.creditFoot(it, HOST) : "") + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
     if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
     if (G.PREP_RAD) G.PREP_RAD.mount(root);
     bindRvSwipe();
@@ -3695,7 +3793,28 @@
    * Home's search button. One box: a shared ID (Q-, L-) or a pearl ID (PN-) opens it; words search the lessons and
    * pearls (title, key, module), the modules (title), and the questions of every subject in the chosen scope (the
    * subject search indexes, read one subject at a time and shown as they arrive). Scope: my plan, or every subject. */
-  var fnd = { q: "", scope: "plan", timer: 0, seq: 0 };
+  var fnd = { q: "", scope: "plan", kind: "all", timer: 0, seq: 0 };
+  // Owner 2026-11-24: a type bar under the box (All, Questions, Lessons, Modules), like a QBank search. Lessons carry
+  // the pearl IDs (the lesson index has no pearl flag, so pearls are not a tab of their own).
+  var FIND_KINDS = [["all", "All"], ["q", "Questions"], ["les", "Lessons"], ["mod", "Modules"]];
+  function findKindHtml() {
+    var fi = 0; FIND_KINDS.forEach(function (k, i) { if (fnd.kind === k[0]) fi = i; });
+    return '<div class="pn-filters pn-seg pn-fkind" role="group" aria-label="Show" style="--n:' + FIND_KINDS.length + ";--i:" + fi + '"><span class="pn-seg-th" aria-hidden="true"></span>' + FIND_KINDS.map(function (k) {
+      return '<button type="button" class="pn-chip' + (fnd.kind === k[0] ? " on" : "") + '" aria-pressed="' + (fnd.kind === k[0]) + '" data-act="find-kind" data-v="' + k[0] + '">' + k[1] + "</button>";
+    }).join("") + "</div>";
+  }
+  // In place, so the thumb slides and the box keeps its text and focus.
+  function setFindKind(v) {
+    var ok = false; FIND_KINDS.forEach(function (k) { if (k[0] === v) ok = true; });
+    fnd.kind = ok ? v : "all";
+    var seg = root && root.querySelector(".pn-fkind");
+    if (seg) {
+      var i = 0; FIND_KINDS.forEach(function (k, j) { if (k[0] === fnd.kind) i = j; });
+      seg.style.setProperty("--i", String(i));
+      Array.prototype.forEach.call(seg.querySelectorAll(".pn-chip"), function (c) { var on = c.getAttribute("data-v") === fnd.kind; c.classList.toggle("on", on); c.setAttribute("aria-pressed", String(on)); });
+    }
+    runFind();
+  }
   function findWords(q) { return String(q).toLowerCase().split(/[^a-z0-9]+/).filter(function (x) { return x.length >= 2; }); }
   function findAll(text, words) { var t = String(text).toLowerCase(); for (var i = 0; i < words.length; i++) if (t.indexOf(words[i]) < 0) return false; return !!words.length; }
   function findSubjects() { var s = load(); return fnd.scope === "all" ? subjectsOf(s.exam) : (ssScope() ? planSubjects() : subjectsOf(s.exam)); }
@@ -3703,7 +3822,7 @@
   function renderFind() {
     paint(bar("Search", "Questions, lessons, pearls and IDs", "back") + '<div class="pn-body"><label class="pn-sl" for="pnFind"><span class="pn-mut pn-small">A word, or an ID such as Q-XXX-XXX-XXX, L-XXXX-XXXX-X or PN-XXXX</span>' +
       '<span class="pn-srch">' + ico("search") + '<input id="pnFind" class="pn-in" type="search" autocomplete="off" enterkeyhint="search" value="' + esc(fnd.q) + '"></span></label>' +
-      (G.PREP_IDS ? G.PREP_IDS.searchExtra() : "") +
+      findKindHtml() + (G.PREP_IDS ? G.PREP_IDS.searchExtra() : "") +
       '<div class="pn-seg4 pn-fscope" role="group" aria-label="Where to search">' + [["plan", "My plan"], ["all", "All subjects"]].map(function (c) {
         return '<button type="button" class="pn-chip' + (fnd.scope === c[0] ? " on" : "") + '" aria-pressed="' + (fnd.scope === c[0]) + '" data-act="find-scope" data-v="' + c[0] + '">' + c[1] + "</button>";
       }).join("") + "</div>" +
@@ -3713,7 +3832,9 @@
   function runFind() {
     var box = root && root.querySelector("#pnFound"), q = fnd.q.trim(), seq = ++fnd.seq;
     if (!box) return;
-    if (!q) { box.innerHTML = '<p class="pn-empty pn-art-sc pn-hint">Search every question, lesson and pearl by a word, or open one by its ID.</p>'; return; }
+    var K = fnd.kind, wantL = K === "all" || K === "les", wantM = K === "all" || K === "mod", wantQ = K === "all" || K === "q";
+    var capL = K === "les" ? 60 : 15, capM = K === "mod" ? 60 : 8;
+    if (!q) { box.innerHTML = '<p class="pn-empty pn-art-sc pn-hint">' + (K === "q" ? "Search every question by a word from its stem or options." : K === "les" ? "Search every lesson and pearl by a word, or open a pearl by its PN- ID." : K === "mod" ? "Search every module by a word from its title." : "Search every question, lesson and pearl by a word, or open one by its ID.") + "</p>"; return; }
     // IDs: a shared question or lesson ID, or a pearl ID (PN-XXXX = the first four characters of its lesson's ID).
     var idh = G.PREP_IDS ? G.PREP_IDS.searchHtml(q) : null;
     if (idh) { box.innerHTML = idh; return; }
@@ -3732,18 +3853,20 @@
         var hit = pm ? pid && pid.toUpperCase() === ("PN-" + pm[1]).toUpperCase() : findAll(e.title + " " + key + " " + mod.replace(/-/g, " ") + " " + pid, words);
         if (hit) { var sid = subjectOfModule(mod); if (sid) les.push({ key: key, e: e, mod: mod, sid: sid, pid: pid }); }
       });
-      if (les.length) out += '<h2 class="pn-sec">Lessons and pearls</h2><ul class="pn-mods">' + les.slice(0, 15).map(function (x) {
+      if (!wantL) les = [];
+      if (les.length) out += '<h2 class="pn-sec">Lessons and pearls</h2><ul class="pn-mods">' + les.slice(0, capL).map(function (x) {
         return '<li><button type="button" class="pn-mod" data-act="l-open" data-s="' + esc(x.sid) + '" data-m="' + esc(x.mod) + '" data-l="' + esc(x.key) + '"><span class="pn-ic sm" style="--h:' + subjHue(x.sid) + '" aria-hidden="true">' + ico("book") + '</span><span class="pn-mb"><b>' + hl(esc(x.e.title || x.key), q) + "</b><small>" + (x.pid ? esc(x.pid) + " · " : "") + (x.e.minutes ? x.e.minutes + " min" : "Lesson") + "</small></span>" + ico("chev") + "</button></li>";
-      }).join("") + "</ul>" + (les.length > 15 ? '<p class="pn-mut pn-small">' + (les.length - 15) + " more lessons. Add a word to narrow.</p>" : "");
+      }).join("") + "</ul>" + (les.length > capL ? '<p class="pn-mut pn-small">' + (les.length - capL) + " more lessons. " + (K === "all" ? "Tap Lessons to see more, or add a word." : "Add a word to narrow.") + "</p>" : "");
       // modules
       var mods = [];
-      if (!pm) subs.forEach(function (sb) { var x = st.ix[sb.id]; if (x) (x.topics || []).forEach(function (t) { if (t.group !== "mixed" && t.group !== "xlist" && findAll(tx(t.title) + " " + t.id.replace(/-/g, " "), words)) mods.push({ sb: sb, t: t }); }); });
-      if (mods.length) out += '<h2 class="pn-sec">Modules</h2><ul class="pn-mods">' + mods.slice(0, 8).map(function (x) {
+      if (!pm && wantM) subs.forEach(function (sb) { var x = st.ix[sb.id]; if (x) (x.topics || []).forEach(function (t) { if (t.group !== "mixed" && t.group !== "xlist" && findAll(tx(t.title) + " " + t.id.replace(/-/g, " "), words)) mods.push({ sb: sb, t: t }); }); });
+      if (mods.length) out += '<h2 class="pn-sec">Modules</h2><ul class="pn-mods">' + mods.slice(0, capM).map(function (x) {
         var n = countFor(x.t, load().exam);
         return '<li><button type="button" class="pn-mod" data-act="module" data-s="' + esc(x.sb.id) + '" data-m="' + esc(x.t.id) + '"><span class="pn-ic sm" style="--h:' + subjHue(x.sb.id) + '" aria-hidden="true">' + ico("grid") + '</span><span class="pn-mb"><b>' + hl(esc(tx(x.t.title)), q) + "</b><small>" + esc(tx(x.sb.name)) + (n ? " · " + n + " MCQs" : "") + "</small></span>" + ico("chev") + "</button></li>";
-      }).join("") + "</ul>";
+      }).join("") + "</ul>" + (mods.length > capM ? '<p class="pn-mut pn-small">' + (mods.length - capM) + " more modules. " + (K === "all" ? "Tap Modules to see more, or add a word." : "Add a word to narrow.") + "</p>" : "");
       box.innerHTML = out + '<div id="pnFoundQ"></div>';
-      if (!out) box.querySelector("#pnFoundQ").innerHTML = pm ? '<p class="pn-empty pn-art-sc">No pearl has that ID.</p>' : "";
+      if (!out) box.querySelector("#pnFoundQ").innerHTML = pm ? (wantL ? '<p class="pn-empty pn-art-sc">No pearl has that ID.</p>' : '<p class="pn-mut pn-small">A PN- ID is a pearl. Tap Lessons or All to open it.</p>') : "";
+      if (!wantQ) { if (!out && !pm) box.querySelector("#pnFoundQ").innerHTML = '<p class="pn-empty pn-art-sc">No ' + (K === "les" ? "lesson" : "module") + " matches. Try fewer or other words.</p>"; return; }
       if (pm || words.join("").length < 3) { if (!pm && !out) box.querySelector("#pnFoundQ").innerHTML = '<p class="pn-mut pn-small">Type at least 3 letters to search the questions.</p>'; return; }
       if (!BANK) { box.querySelector("#pnFoundQ").innerHTML = '<p class="pn-err">Question search did not load. Close and open PrepNucleus again.</p>'; return; }
       // questions: one subject at a time (three in flight), shown as they arrive
@@ -4480,7 +4603,8 @@
     if (a === "filter") { st.filter = v; nav(0); return rerender(); }
     if (a === "search") { srch.sid = b.getAttribute("data-s"); srch.q = ""; return loadIndex(srch.sid).then(function () { push(renderSearch); }); }
     if (a === "hit") return openHit(b.getAttribute("data-m"), b.getAttribute("data-i"));
-    if (a === "find") { fnd.q = ""; return push(renderFind); }
+    if (a === "find") { fnd.q = ""; fnd.kind = "all"; return push(renderFind); }
+    if (a === "find-kind") return setFindKind(v);
     if (a === "find-scope") { fnd.scope = b.getAttribute("data-v") === "all" ? "all" : "plan"; return rerender(); }
     if (a === "find-hit") { srch.sid = b.getAttribute("data-s"); return openHit(b.getAttribute("data-m"), b.getAttribute("data-i")); }
     if (a === "find-retry") return runFind();
@@ -4547,6 +4671,7 @@
     if (a === "bookmark") return toggleBookmark();
     if (a === "report") return openReport();
     if (a === "sendreport") return sendReport(v);
+    if (a === "axretry") { var axIt = axItems[v]; if (axIt) { delete axState[v]; var axBtn = G.document && G.document.querySelector('.pn-ax[data-ax="' + v + '"] .pn-mut'); if (axBtn) axBtn.textContent = "MaiK is writing the explanation for this question..."; autoExplain(axIt); } return; }
     if (a === "reviewq") return reviewQuestion(Number(b.getAttribute("data-i")));
     if (a === "kyfixq") { var rk = st.run, lk = b.getAttribute("data-l") === "rem" ? "rem" : "fix"; return reviewQuestion(Number(b.getAttribute("data-i")), rk && rk.ky ? rk.ky[lk] : null); }
     if (a === "rvnext") return void rvGo(1);
@@ -4631,6 +4756,7 @@
     if (a === "mpractice") return setupOn() ? setupMistakes() : practiceMistakes();
     if (a === "mtag") { var rt = st.run, itm = rt && rt.items[rt.i]; if (itm && s.mt[itm.id]) { s.mt[itm.id][2] = s.mt[itm.id][2] === v ? null : v; save(); } return renderRun(); }
     if (a === "mocks") { ttSet("tests"); return push(renderMocks); }
+    if (a === "subs-all") { st.subsAll = true; var gr = root.querySelector("#pnGrid"); if (gr) gr.classList.remove("pn-cut"); if (b.parentNode) b.parentNode.removeChild(b); var t7 = gr && gr.children[6]; if (t7) t7.focus(); return; }
     if (a === "tt") { ttSet(v); nav(0); return rerender(); }
     if (a === "ask") { var rt4 = st.run, it4 = rt4 && rt4.items[rt4.i]; if (it4 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it4, chosen: rt4.ans[rt4.i], n: rt4.i + 1, side: true, topic: rt4.title }, HOST); return; }
     if (a === "ask-rv") { var rt5 = st.run, i5 = Number(b.getAttribute("data-i")), it5 = rt5 && rt5.items[i5]; if (it5 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it5, chosen: rt5.ans[i5], n: i5 + 1, side: true, topic: rt5.title }, HOST); return; }
@@ -4751,7 +4877,57 @@
      overlay, back stack, runner and store. Deck items carry _s "deck" and _m "deck-<id>": their FSRS cards live in
      the same store under deck key "p:deck-<id>". */
   var HOST = { bankVer: function () { return VER; }, pyqVer: function () { return PYQ_VER; }, push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, hband: hband, ico: ico, esc: esc, toast: toast, fmt: fmt,
-    run: runQuestions, fixes: fixesFor, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
+    run: runQuestions, fixes: fixesFor,
+    // MaiK buddy (prep-buddy.js): the topic's name, revise it (its module screen; back returns to the set), ask MaiK.
+    // The topic's own name ("Gametogenesis"), not the coach's "Subject · Topic" breadcrumb.
+    buddyTopic: function (it) { var n = kyItemName(it), k = n.lastIndexOf(" \u00b7 "); return k >= 0 ? n.slice(k + 3) : n; },
+    // Only a topic whose subject index is loaded: renderModule draws nothing for an unknown one (a blank pushed screen).
+    buddyCanRevise: function (it) { return !!(it && it._s && it._s !== "deck" && !it._py && (it._m || it.t) && topicOf(it._s, it._m || it.t)); },
+    buddyRevise: function (it) { if (HOST.buddyCanRevise(it)) openModule(it._s, it._m || it.t); },
+    // The clock on screen for the buddy's tension: { left, total } in seconds, perQ for a clock per question; null when no
+    // clock is running for this question (no timer, sections, or a practice question already answered).
+    buddyClock: function (r) {
+      if (!r || r.done) return null;
+      if (r.qc) { if (r.qc.out[r.i]) return { left: 0, total: r.qsec, perQ: true }; if (!qOpen(r, r.i)) return null; return { left: qcLeft(r.qc, r.i, pnow()) / 1000, total: r.qsec, perQ: true }; }
+      if (r.limit && !r.sc) return { left: r.limit - (Date.now() - r.t0) / 1000, total: r.limit, perQ: false };
+      return null;
+    },
+    /* End of a set: what the buddy offers when tapped (owner 2026-11-20: the question chips made no sense there).
+       buddyEnd(r) -> [[id, label]]; buddyEndDo(r, id) runs it, through the result screen's own buttons where one exists. */
+    buddyEnd: function (r) {
+      if (!r || !r.done || r.custom) return [];
+      var miss = [], acts = [], mods = {}, top = null, best = 0;
+      r.items.forEach(function (it, i) { if (r.ans[i] !== it.a && !it._gone) { miss.push(it); var k = HOST.buddyCanRevise(it) ? it._s + "|" + (it._m || it.t) : ""; if (k) { mods[k] = (mods[k] || 0) + 1; if (mods[k] > best) { best = mods[k]; top = it; } } } });
+      if (miss.length && root && root.querySelector("[data-act=retrymissed]")) acts.push(["missed", miss.length === r.items.length ? "Practise the set again" : "Practise the " + miss.length + " I missed"]);
+      if (miss.length && G.PREP_ASK) acts.push(["why", "Ask MaiK what I keep missing"]);
+      if (top) acts.push(["revise", "Revise " + HOST.buddyTopic(top)]);
+      if (miss.length && root && root.querySelector('[data-act=rfilter][data-v="wrong"]')) acts.push(["review", "Show my mistakes"]);
+      if (!miss.length && root && root.querySelector("[data-act=retryall]")) acts.push(["again", "Practise all again"]);
+      return acts.slice(0, 4);
+    },
+    buddyEndDo: function (r, id) {
+      if (!r || !r.done || !root) return;
+      var click = function (sel) { var b = root.querySelector(sel); if (b) b.click(); return !!b; };
+      if (id === "missed") return click("[data-act=retrymissed]");
+      if (id === "again") return click("[data-act=retryall]");
+      if (id === "review") {
+        click('[data-act=rfilter][data-v="wrong"]');
+        var h = root.querySelector("#pnRvH"); if (h) try { h.scrollIntoView({ behavior: reducedMo() ? "auto" : "smooth", block: "start" }); } catch (e) {}
+        return;
+      }
+      var miss = r.items.filter(function (it, i) { return r.ans[i] !== it.a && !it._gone; });
+      if (id === "revise") {
+        var mods = {}, top = null, best = 0;
+        miss.forEach(function (it) { if (!HOST.buddyCanRevise(it)) return; var k = it._s + "|" + (it._m || it.t); mods[k] = (mods[k] || 0) + 1; if (mods[k] > best) { best = mods[k]; top = it; } });
+        return top && HOST.buddyRevise(top);
+      }
+      if (id === "why" && G.PREP_ASK) {
+        var L = ["A", "B", "C", "D", "E", "F", "G", "H"];
+        var bk = miss.slice(0, 12).map(function (it, k) { var ch = r.ans[r.items.indexOf(it)]; return (k + 1) + ". " + String(it.q || "").slice(0, 220) + "\nI chose: " + (ch >= 0 ? L[ch] + ". " + it.o[ch] : "not answered") + "\nAnswer: " + L[it.a] + ". " + it.o[it.a]; }).join("\n\n");
+        G.PREP_ASK.open({ kind: "card", fr: "The questions I missed in " + String(r.title || "this set").replace(/<[^>]*>/g, ""), bk: bk, title: "What I keep missing", ask: "What do these misses have in common, and what should I revise first?" }, HOST);
+      }
+    },
+    buddyAsk: function (r, q) { var it = r && r.items[r.i]; if (it && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it, chosen: r.ans[r.i], n: r.i + 1, side: true, topic: r.title, prefill: q }, HOST); }, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
     exam: function () { return examOf(load().exam); },
     // setExam(id): what the Settings exam row does to the exam tab (tests use it to switch exams without the sheet).
     setExam: function (id) { var s = load(); s.exam = examOf(id).id; save(); nav(0); rerender(); },

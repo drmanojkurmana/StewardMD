@@ -26,12 +26,22 @@
     return lesson.steps.some(function (s) { var v = s && s.vis; return !!v && (v.kind === "table" || v.kind === "image" || v.kind === "flow" || v.kind === "compare" || v.kind === "figure"); });
   }
   function humanise(id) { return String(id || "").replace(/-/g, " ").replace(/\b\w/g, function (c) { return c.toUpperCase(); }); }
-  function breadcrumb(lesson, shareId) {
-    var topic = humanise(lesson.module || lesson.title || "");
-    var subj = humanise(lesson.subject || "");
+  /* names (optional): { subject, section } as the taxonomy spells them ("Medical Oncology", "Head and neck, CNS, skin
+     and sarcoma"). Owner 2026-11-19: the crumb read "Ss Medical Oncology · Son Neuro Onc Brain Mets Sega", ids turned
+     into words. With names the crumb is subject · section (the title below already names the module). Without them
+     (taxonomy not loaded) the subject id is humanised without its "ss-" branch prefix; a module id is shown only when
+     it carries no subject-code prefix (an "son-..." id is a code, not a name). */
+  function breadcrumb(lesson, shareId, names) {
+    var subj, topic;
+    if (names && names.subject) { subj = String(names.subject); topic = names.section ? String(names.section) : ""; }
+    else {
+      subj = humanise(String(lesson.subject || "").replace(/^ss-/, ""));
+      var mid = String(lesson.module || ""), coded = /^ss-/.test(String(lesson.subject || "")) && /^[a-z]{2,4}-/.test(mid);
+      topic = coded ? "" : humanise(mid || lesson.title || "");
+    }
     // One code per lesson (owner 2026-11-14): with a lesson ID the reader shows that ID in the foot, so the crumb carries
     // no second number; the PN- Pearl ID appears only when there is no lesson ID.
-    return "Pearl" + (shareId ? "" : " #" + pearlId(lesson.module, shareId)) + " · " + subj + (topic && topic !== subj ? " · " + topic : "");
+    return "Pearl" + (shareId ? "" : " #" + pearlId(lesson.module, shareId)) + (subj ? " · " + subj : "") + (topic && topic !== subj ? " · " + topic : "");
   }
   function creditOf(vis) {
     if (!vis) return "StewardMD illustration";
@@ -51,8 +61,8 @@
       '<div class="pn-pearl-sheet-b"><button type="button" class="pn-btn" data-act="img-credits">All image credits</button>' +
       '<button type="button" class="pn-btn pri" data-pearl-close>Close</button></div></div></div>';
   }
-  function headerHtml(lesson, shareId) {
-    return '<header class="pn-pearl-head"><p class="pn-pearl-crumb">' + esc(breadcrumb(lesson, shareId)) + '</p><h2 class="pn-pearl-title">' + esc(lesson.title || "") + "</h2></header>";
+  function headerHtml(lesson, shareId, names) {
+    return '<header class="pn-pearl-head"><p class="pn-pearl-crumb">' + esc(breadcrumb(lesson, shareId, names)) + '</p><h2 class="pn-pearl-title">' + esc(lesson.title || "") + "</h2></header>";
   }
   function footerHtml(lesson, shareId, bookmarked) {
     var id = pearlId(lesson.module, shareId);

@@ -186,7 +186,12 @@
   function undo(st) { var op = st.u.pop(); if (!op) return null; st.r.push(op); return { op: op, gone: goneAfter(op, true), undoing: true }; }
   function redo(st) { var op = st.r.pop(); if (!op) return null; st.u.push(op); return { op: op, gone: goneAfter(op, false), undoing: false }; }
   // Pressure: pens report 0..1; 0 or missing (mouse, finger, unsupported) is 0.5.
-  function pressure(e) { return e && e.pointerType === "pen" && e.pressure > 0 ? e.pressure : 0.5; }
+  /* Stylus pressure as stored. An Apple Pencil reports force / max force, so ordinary handwriting is about 0.07 to 0.36
+     while 0.5 (mouse, finger, the width the user picked) is a firm press: strokes came out as hairlines (owner's
+     recording 2026-11-18 02:31). A curve maps everyday writing to the chosen width: 0.2 -> 0.5, 0.07 -> 0.32, 1 -> 1. */
+  var PEN_GAMMA = 0.43;
+  function penPressure(raw) { return raw > 0 ? Math.min(1, Math.pow(raw, PEN_GAMMA)) : 0.5; }
+  function pressure(e) { return e && e.pointerType === "pen" && e.pressure > 0 ? penPressure(e.pressure) : 0.5; }
   function r4(n) { return Math.round(n * 10000) / 10000; }
 
   // Page order: move item i by dir (-1 up, +1 down); at an end the order is returned unchanged.
@@ -237,7 +242,8 @@
       });
     }, Promise.resolve(null)).then(function (err) {
       if (err) return bad(err);
-      var recs = [], folders, c = { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0, items: 0 }, i, r, k;
+      var recs = [], folders, audio = [], c = { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0, items: 0, audio: 0 }, i, r, k;
+      /* Phase 5b: audio.json + audio/<id>.bin (optional; old backups have none) */
       try {
         folders = dec("folders.json"); c.folders = folders.length;
         names.forEach(function (n) {
@@ -247,14 +253,21 @@
             if (!/^[a-z0-9]+$/.test(r.doc.id) || n !== "docs/" + r.doc.id + ".json") throw new Error("id");
           }
           else if (/^files\//.test(n)) c.files++;
+          else if (/^audio\/.+\.bin$/.test(n)) c.audio++;
         });
+        if (ent["audio.json"]) { audio = dec("audio.json"); if (!Array.isArray(audio)) throw new Error("audio"); }
+        if (audio.length !== c.audio) return bad("The backup's record counts do not match what is inside it.");
+        for (i = 0; i < audio.length; i++) {
+          r = audio[i];
+          if (!r || !/^[a-z0-9]+$/i.test(String(r.id)) || !listed["audio/" + r.id + ".bin"]) return bad("The backup could not be read.");
+        }
       } catch (e) { return bad("The backup could not be read."); }
-      for (k in c) if (k in man.counts && man.counts[k] !== c[k]) return bad("The backup's record counts do not match what is inside it.");
+      for (k in c) { if ((k === "audio" || k === "items") && man.counts[k] == null) continue; if (man.counts[k] !== c[k]) return bad("The backup's record counts do not match what is inside it."); }
       for (i = 0; i < recs.length; i++) {
         r = recs[i].doc;
         if (r.kind !== "nb" && !(listed["files/" + r.id + ".pdf"] && listed["files/" + r.id + ".pdf"].sha256 === r.sha256)) return bad("A document in the backup does not match its file.");
       }
-      return { ok: true, man: man, folders: folders, recs: recs };
+      return { ok: true, man: man, folders: folders, recs: recs, audio: audio };
     });
   }
   // Restore never overwrites: a document is skipped when its id or its sha256 is already in the library.
@@ -266,12 +279,21 @@
   }
 
   function ixLabel(done, total) { return done >= total ? "" : "Indexing, " + done + " of " + total + " pages"; }
+  // Apple Pencil hardware -> which STUDY method to call (ios/App/App/PencilPlugin.swift).
+  // Returns the STUDY method name, or null for "ignore".
+  function pencilActionFor(action) {
+    if (action === "switchEraser" || action === "squeeze") return "pencilDoubleTap";
+    if (action === "switchPrevious") return "pencilSwitchPrevious";
+    if (action === "showColorPalette" || action === "showInkAttributes") return "openPenSettings";
+    return null;
+  }
 
   var PURE = {
     BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem,
     bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs,
-    hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure,
-    r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble, coveredBy: coveredBy
+    hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure, penPressure: penPressure,
+    r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble, coveredBy: coveredBy,
+    pencilActionFor: pencilActionFor
   };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
@@ -332,9 +354,16 @@
         mk("undo", "doc");
         s = mk("ptext", "id"); if (s && !s.indexNames.contains("doc")) s.createIndex("doc", "doc");
         mk("index", "doc");
+        s = mk("audio", "id"); if (s && !s.indexNames.contains("doc")) s.createIndex("doc", "doc"); /* Phase 5b */
         s = mk("items", "id"); if (s && !s.indexNames.contains("doc")) s.createIndex("doc", "doc");
       };
-      r.onsuccess = function () { res(r.result); };
+      r.onsuccess = function () {
+        var conn = r.result;
+        /* Phase 5a hang fix: respond to versionchange (e.g. deleteDatabase in tests) so the
+           pending request can complete and later opens are not blocked forever. */
+        conn.onversionchange = function () { dbP = null; try { conn.close(); } catch (e) {} };
+        res(conn);
+      };
       r.onerror = function () { dbP = null; rej(r.error); };
     });
     return dbP;
@@ -709,6 +738,7 @@
   }
 
   function fillLib() {
+    if (G.STUDY_LIB && G.STUDY_LIB.renderBody) return G.STUDY_LIB.renderBody();
     closeDocMenu();
     Promise.all([all("docs"), all("folders"), all("index")]).then(function (r) {
       var ixd = {}; r[2].forEach(function (x) { ixd[x.doc] = x.done; });
@@ -716,7 +746,8 @@
       var docs = r[0].sort(function (a, b) { return (b.lastOpened || b.created) - (a.lastOpened || a.created); }), folders = r[1], esc = host.esc, f = lib.filter;
       if (f !== "all" && f !== "fav" && !folders.some(function (x) { return x.id === f; })) f = lib.filter = "all";
       var chip = function (v, label) { return '<button type="button" class="st-chip' + (f === v ? " on" : "") + '" data-act="st-filter" data-v="' + esc(v) + '">' + esc(label) + "</button>"; };
-      root.querySelector("#stChips").innerHTML = chip("all", "Recent") + chip("fav", "Favourites") + folders.map(function (x) { return chip(x.id, x.name); }).join("") +
+      var ch = root.querySelector("#stChips");
+      if (ch) ch.innerHTML = chip("all", "Recent") + chip("fav", "Favourites") + folders.map(function (x) { return chip(x.id, x.name); }).join("") +
         '<button type="button" class="st-chip" data-act="st-newfolder">' + ICO.plus + ' Folder</button>' + (f !== "all" && f !== "fav" ? '<button type="button" class="st-chip" data-act="st-delfolder" data-v="' + esc(f) + '">Delete folder</button>' : "");
       var shown = docs.filter(function (d) { return f === "all" || (f === "fav" ? d.favourite : d.folderId === f); });
       if (!shown.length) {
@@ -763,14 +794,16 @@
       return itemsOf(id).then(function (its) {
         return Promise.all(its.map(function (it) { return del("items", it.id); }));
       });
-    }).then(function () { return Promise.all([del("undo", id), del("files", id), del("docs", id)]); }).then(function () { return purge(id); });
+    }).then(function () { return Promise.all([del("undo", id), del("files", id), del("docs", id)]); }).then(function () { return purge(id); }).then(function () { /* Phase 5b: audio */ try { return q("audio", "readonly", function (o) { try { return o.index("doc").getAll(G.IDBKeyRange.only(id)); } catch (e) { return o.getAll(); } }).then(function (aa) { return Promise.all((aa || []).filter(function (a) { return a.doc === id; }).map(function (a) { return del("audio", a.id); })); }).then(null, function () {}); } catch (e) { return null; } });
   }
 
   /* ---- notebooks (A4) ---- */
   function drawBg(ctx, style, ratio, W) {
     var dark = /-dark$/.test(style || ""), base = String(style || "").replace(/-dark$/, "");
     ctx.fillStyle = dark ? "#0D1D23" : "#fff"; ctx.fillRect(0, 0, W, W * ratio);
-    ctx.strokeStyle = dark ? "rgba(66,205,181,0.28)" : "#b8c4d6"; ctx.lineWidth = Math.max(1, W / 400); ctx.beginPath();
+    // Paper lines are fine and light, like a printed notebook, so ink reads first (owner's recording 2026-11-18: the
+    // ruling was as heavy as the writing). Spacing is unchanged: existing handwriting stays on its lines.
+    ctx.strokeStyle = dark ? "rgba(66,205,181,0.28)" : base === "grid" ? "#cfd8e6" : "#b9c5d8"; ctx.lineWidth = Math.max(1, W / 900); ctx.beginPath();
     bgLines(base, ratio).forEach(function (l) { ctx.moveTo(l[0] * W, l[1] * W); ctx.lineTo(l[2] * W, l[3] * W); });
     /* dotgrid dots need filled points */
     if (base === "dotgrid" || base === "dots") { ctx.fillStyle = dark ? "rgba(66,205,181,0.5)" : "#7a8aa0"; ctx.stroke(); for (var i = 0; i < 0; i++) {} ctx.beginPath(); var dg = 0.06; for (var yy = dg * 1.5; yy < ratio; yy += dg) for (var xx = dg; xx < 1; xx += dg) { ctx.fillRect(xx * W, yy * W, Math.max(1, W / 400), Math.max(1, W / 400)); } return; }
@@ -851,7 +884,7 @@
     var root = host && host.root(), res = root && root.querySelector("#stRes"), qs = String(raw || "").trim(), tok = ++searchTok;
     if (!res) return;
     var show = qs.length < 2;
-    res.hidden = show; root.querySelector("#stList").hidden = !show; root.querySelector("#stChips").hidden = !show;
+    res.hidden = show; var lst = root.querySelector("#stList"); if (lst) lst.hidden = !show; var ch = root.querySelector("#stChips"); if (ch) ch.hidden = !show;
     if (show) return;
     Promise.all([all("docs"), all("ptext"), all("index")]).then(function (r) {
       if (tok !== searchTok || !host.root() || !host.root().querySelector("#stRes")) return;
@@ -929,6 +962,140 @@
       '</div>' +
       '<div class="st-lasso-chips">' + lassoChipsHtml() + '</div>';
     host.root().appendChild(div);
+  }
+
+  /* ---- Zoom window (GoodNotes style) ----
+     A framed box on the page (V.zw: page n, x/w in page widths, y/h in page heights) is shown magnified in a strip at
+     the bottom. Writing in the strip is replayed onto the page overlay as pointer events at the matching spot, so the
+     normal ink path (pen, highlighter, eraser, undo, autosave, palm rules) does everything. Lifting the pen in the
+     shaded right margin moves the box on; at the page edge it wraps to the next line. Was a static picture before
+     (2026-11-18). */
+  var ZW_MARGIN = 0.18, ZW_LEFT = 0.06, ZW_RIGHT = 0.96;
+  function zwEl() { var r = host && host.root && host.root(); return r ? r.querySelector("#stP3ZoomWindow") : null; }
+  function zwOpen() { var z = zwEl(); return !!(z && !z.hidden && V && V.zw); }
+  // Pure: the box after the pen lifts at strip fraction fx (0..1) of its width. Unchanged unless fx is in the margin.
+  function zwAdvance(b, fx) {
+    if (fx < 1 - ZW_MARGIN) return b;
+    var nx = b.x + b.w * 0.6;
+    if (nx + b.w <= ZW_RIGHT + 0.001) return { n: b.n, x: nx, y: b.y, w: b.w, h: b.h };
+    return zwNewLine(b);
+  }
+  function zwNewLine(b) { return { n: b.n, x: ZW_LEFT, y: Math.min(1 - b.h, b.y + b.h), w: b.w, h: b.h }; }
+  function zwStripSize() { var cv = zwEl() && zwEl().querySelector("#stP3ZoomCv"); return cv ? { cv: cv, w: cv.clientWidth || 600, h: cv.clientHeight || 160 } : null; }
+  function zwFit(b) {
+    var p = V.pg[b.n], s = zwStripSize(); if (!p || !s) return b;
+    var W = p.el.clientWidth || 1, H = p.el.clientHeight || 1, w = Math.max(0.12, Math.min(0.9, b.w));
+    var h = Math.min(0.5, (w * W * s.h / s.w) / H);
+    var x = Math.max(0, Math.min(1 - w, b.x)), y = Math.max(0, Math.min(1 - h, b.y));
+    return { n: b.n, x: x, y: y, w: w, h: h };
+  }
+  function zwBox() {
+    if (!V || !V.zw) return;
+    var b = V.zw, p = V.pg[b.n]; if (!p) return;
+    var el = V.zwBoxEl;
+    if (!el) { el = V.zwBoxEl = D.createElement("div"); el.className = "st-zw-box"; el.innerHTML = '<span class="st-zw-box-m"></span>'; }
+    if (el.parentNode !== p.el) p.el.appendChild(el);
+    el.style.left = b.x * 100 + "%"; el.style.top = b.y * 100 + "%"; el.style.width = b.w * 100 + "%"; el.style.height = b.h * 100 + "%";
+    el.querySelector(".st-zw-box-m").style.width = ZW_MARGIN * 100 + "%";
+  }
+  // Keep the box on screen: scroll so it sits in the upper part of the view when it is out of sight.
+  function zwReveal() {
+    var b = V.zw, p = V.pg[b.n]; if (!p || !V.sc) return;
+    var kz = zoomOf(V.sc), r = p.el.getBoundingClientRect(), sr = V.sc.getBoundingClientRect(), strip = zwStripSize();
+    var top = r.top + b.y * r.height, bot = top + b.h * r.height, left = r.left + b.x * r.width, right = left + b.w * r.width;
+    var visBot = Math.min(sr.bottom, strip && strip.cv.getBoundingClientRect().top - 12 || sr.bottom);
+    if (top < sr.top + 8 || bot > visBot) V.sc.scrollTop += (top - (sr.top + (visBot - sr.top) * 0.25)) / kz;
+    if (left < sr.left || right > sr.right) V.sc.scrollLeft += (left - sr.left - 24) / kz;
+  }
+  function zwSet(b) { V.zw = zwFit(b); zwBox(); zwReveal(); zwRender(); }
+  function zwRender() {
+    if (!zwOpen()) return;
+    var b = V.zw, p = V.pg[b.n], s = zwStripSize(); if (!s) return;
+    var dpr = Math.min((G.devicePixelRatio || 1) * zoomOf(s.cv), 3), pw = Math.round(s.w * dpr), ph = Math.round(s.h * dpr), cv = s.cv;
+    if (cv.width !== pw || cv.height !== ph) { cv.width = pw; cv.height = ph; }
+    var ctx = cv.getContext("2d"); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, pw, ph);
+    if (!p || !p.on || !p.cv) return;
+    var W = p.el.clientWidth || 1, H = p.el.clientHeight || 1, bx = b.x * W, by = b.y * H, bw = b.w * W, bh = b.h * H, k = pw / bw;
+    if (V.nb) { var pid0 = V.nb.ord[b.n - 1]; ctx.save(); ctx.setTransform(k, 0, 0, k, -bx * k, -by * k); drawBg(ctx, pid0 != null ? tplForPid(pid0) : V.nb.style, V.ratio, W); ctx.restore(); }
+    else { var ck = p.cv.width / W; try { ctx.drawImage(p.cv, bx * ck, by * ck, bw * ck, bh * ck, 0, 0, pw, ph); } catch (e) {} }
+    ctx.save(); ctx.translate(-bx * k, -by * k); inkInto(ctx, b.n, W, H, k, bx, by); ctx.restore();
+    if (p.live) { var lk = p.live.width / W; try { ctx.drawImage(p.live, bx * lk, by * lk, bw * lk, bh * lk, 0, 0, pw, ph); } catch (e) {} }
+    // auto-advance margin: lifting the pen here moves the box on
+    ctx.fillStyle = "rgba(201,162,39,0.07)"; ctx.fillRect(pw * (1 - ZW_MARGIN), 0, pw * ZW_MARGIN, ph);
+    ctx.strokeStyle = "rgba(201,162,39,0.55)"; ctx.lineWidth = Math.max(1, dpr); ctx.setLineDash([6 * dpr, 5 * dpr]);
+    ctx.beginPath(); ctx.moveTo(pw * (1 - ZW_MARGIN), 0); ctx.lineTo(pw * (1 - ZW_MARGIN), ph); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function zwSchedule() { if (!V || V.zwRaf) return; V.zwRaf = G.requestAnimationFrame(function () { if (V) { V.zwRaf = 0; zwRender(); } }); }
+  // Strip input -> the same pointer event on the page overlay, at the matching page point.
+  function zwBindStrip(cv) {
+    if (cv._zwBound) return; cv._zwBound = true;
+    var down = null;
+    var fwd = function (type, e, list) {
+      if (!V || !V.zw) return;
+      var b = V.zw, p = V.pg[b.n]; if (!p || !p.ov) return;
+      var r = cv.getBoundingClientRect(), o = p.ov.getBoundingClientRect();
+      (list && list.length ? list : [e]).forEach(function (ev) {
+        var fx = (ev.clientX - r.left) / (r.width || 1), fy = (ev.clientY - r.top) / (r.height || 1);
+        var x = o.left + (b.x + fx * b.w) * o.width, y = o.top + (b.y + fy * b.h) * o.height;
+        p.ov.dispatchEvent(new G.PointerEvent(type, { pointerId: 900000 + (e.pointerId || 0), pointerType: e.pointerType || "pen", isPrimary: true, pressure: ev.pressure, tiltX: ev.tiltX || 0, tiltY: ev.tiltY || 0, clientX: x, clientY: y, button: e.button || 0, buttons: type === "pointerup" ? 0 : (e.buttons || 1), bubbles: true, cancelable: true }));
+      });
+    };
+    cv.addEventListener("pointerdown", function (e) {
+      if (!V || !V.zw) return;
+      if (!V.tool || ["pen", "hl", "er"].indexOf(V.tool) === -1) { setTool("pen"); }
+      try { cv.setPointerCapture(e.pointerId); } catch (x) {}
+      down = { id: e.pointerId, n: V.zw.n }; e.preventDefault(); fwd("pointerdown", e); zwSchedule();
+    });
+    cv.addEventListener("pointermove", function (e) {
+      if (!down || e.pointerId !== down.id) { if (e.pointerType === "pen" || e.pointerType === "mouse") fwd("pointermove", e); return; }
+      e.preventDefault(); fwd("pointermove", e, e.getCoalescedEvents && e.getCoalescedEvents()); zwSchedule();
+    });
+    var up = function (e) {
+      if (!down || e.pointerId !== down.id) return;
+      down = null; fwd(e.type === "pointercancel" ? "pointercancel" : "pointerup", e);
+      var r = cv.getBoundingClientRect(), fx = (e.clientX - r.left) / (r.width || 1);
+      var nb = (V.tool === "pen" || V.tool === "hl") ? zwAdvance(V.zw, fx) : V.zw;
+      if (nb !== V.zw) zwSet(nb); else zwSchedule();
+    };
+    cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+    cv.style.touchAction = "none";
+  }
+  function setTool(t) { if (!V) return; if (V.tool !== t) V.prevTool = V.tool; V.tool = t; if (V.lasso) { V.lasso = null; removeLassoBar(); } syncTb(); }
+  function zwClose() {
+    var z = zwEl(); if (z) z.hidden = true;
+    var btn = host && host.root && host.root() && host.root().querySelector('#stTb [data-act="st-zoom-window"]'); if (btn) btn.classList.remove("on");
+    if (V && V.zwBoxEl && V.zwBoxEl.parentNode) V.zwBoxEl.parentNode.removeChild(V.zwBoxEl);
+  }
+  function toggleZoomWindow() {
+    var root = host && host.root && host.root();
+    if (!root) return;
+    var zw = root.querySelector("#stP3ZoomWindow");
+    if (!zw) return;
+    if (!zw.hidden) return zwClose();
+    zw.hidden = false;
+    var btn = root.querySelector('#stTb [data-act="st-zoom-window"]'); if (btn) btn.classList.add("on");
+    // Done, Escape and Back (study-pages.js) hide the window directly: drop the box on the page with it.
+    if (!zw._zwObs && G.MutationObserver) { zw._zwObs = new G.MutationObserver(function () { if (zw.hidden && V && V.zwBoxEl && V.zwBoxEl.parentNode) V.zwBoxEl.parentNode.removeChild(V.zwBoxEl); }); zw._zwObs.observe(zw, { attributes: true, attributeFilter: ["hidden"] }); }
+    var cv = zw.querySelector("#stP3ZoomCv"); if (cv) zwBindStrip(cv);
+    if (!V.tool || ["pen", "hl", "er"].indexOf(V.tool) === -1) setTool("pen");
+    curPage();
+    var n = V.cur || 1, keep = V.zw && V.zw.n === n;
+    if (!keep) {
+      // start at the left margin of the first line in view
+      var p = V.pg[n], r = p.el.getBoundingClientRect(), sr = V.sc.getBoundingClientRect(), fy = Math.max(0.04, (sr.top - r.top) / (r.height || 1) + 0.04);
+      V.zw = { n: n, x: ZW_LEFT, y: fy, w: 0.34, h: 0.05 };
+    }
+    G.requestAnimationFrame(function () { if (V && V.zw) zwSet(V.zw); });
+  }
+  function zwAct(a) {
+    if (!V || !V.zw) return false;
+    var b = V.zw;
+    if (a === "st-zw-left") { zwSet({ n: b.n, x: b.x - b.w * 0.6, y: b.y, w: b.w, h: b.h }); return true; }
+    if (a === "st-zw-right") { zwSet(zwAdvance(b, 1)); return true; }
+    if (a === "st-zw-nl") { zwSet(zwNewLine(b)); return true; }
+    if (a === "st-zw-up") { zwSet({ n: b.n, x: b.x, y: b.y - b.h, w: b.w, h: b.h }); return true; }
+    if (a === "st-zw-zin" || a === "st-zw-zout") { var w = b.w * (a === "st-zw-zin" ? 0.8 : 1.25); zwSet({ n: b.n, x: b.x, y: b.y, w: w, h: b.h }); return true; }
+    return false;
   }
 
   function showPageSheet() {
@@ -1163,7 +1330,8 @@
     return '<div class="st-tb" id="stTb" role="toolbar" aria-label="Pen tools">' +
       '<div class="st-tb-group">' +
         '<div class="st-tb-tools">' +
-          b("st-page-sheet", inkIco.zoom || ICO.grid, null, ' title="Zoom window and pages" aria-label="Zoom window and pages"') +
+          b("st-zoom-window", inkIco.zoom || ICO.grid, null, ' title="Zoom window" aria-label="Zoom window"') +
+          b("st-page-sheet", ICO.grid, null, ' title="Pages overview" aria-label="Pages overview"') +
           b("st-tool", ICO.pen, "pen", ' title="Pen" aria-label="Pen"') +
           b("st-tool", ICO.er, "er", ' title="Eraser" aria-label="Eraser"') +
           b("st-tool", ICO.hl, "hl", ' title="Highlighter" aria-label="Highlighter"') +
@@ -1178,17 +1346,23 @@
         '</div>' +
       '</div>' +
       '<input id="stTbPage" type="hidden" value="' + cp + '">' +
-    '</div>' +
-    colorStripHtml() +
-    '<div id="stInsertOptions"></div>';
+      colorStripHtml() +
+      '<div id="stInsertOptions"></div>' +
+    '</div>';
   }
 
   function colorStripHtml() {
     if (G.STUDY_INK) return '<div id="stInkCtx" class="st-ink-ctx"></div>';
     var isHl = V && V.tool === "hl", pal = isHl ? HCOLORS : COLORS;
     var cIdx = V ? V.ci : 0;
-    var custCol = (V && V.customColor) ? V.customColor : (isHl ? "#ffe14d" : "#42cdb5");
+    var custCol = (V && V.customColor) ? V.customColor : (isHl ? "#ffe14d" : "#111111");
     return '<div class="st-opt-strip" id="stToolOptions" ' + (V && (V.tool === "pen" || V.tool === "hl") ? "" : 'hidden') + '>' +
+      '<div class="st-widths-row">' +
+        [0, 1, 2].map(function (i) {
+          return '<button type="button" class="st-b st-w' + (V && V.wi === i ? ' on' : '') + '" data-act="st-width" data-v="' + i + '" aria-label="Width ' + (i + 1) + '"><i style="height:' + ((i + 1) * 2 + 1) + 'px"></i></button>';
+        }).join("") +
+      '</div>' +
+      '<span class="st-sep"></span>' +
       '<div class="st-colors-row">' +
         pal.map(function (c, i) {
           return '<button type="button" class="st-b st-c' + (cIdx === i ? ' on' : '') + '" data-act="st-color" data-v="' + i + '" aria-label="Colour ' + (i + 1) + '" style="--c:' + c + '"></button>';
@@ -1196,12 +1370,6 @@
         '<label class="st-c st-c-custom' + (cIdx === -1 ? ' on' : '') + '" title="Custom colour" aria-label="Custom colour" style="--c:' + custCol + '">' +
           '<input type="color" id="stColorPicker" value="' + custCol + '" aria-label="Choose colour">' +
         '</label>' +
-      '</div>' +
-      '<span class="st-sep"></span>' +
-      '<div class="st-widths-row">' +
-        [0, 1, 2].map(function (i) {
-          return '<button type="button" class="st-b st-w' + (V && V.wi === i ? ' on' : '') + '" data-act="st-width" data-v="' + i + '" aria-label="Width ' + (i + 1) + '"><i style="height:' + ((i + 1) * 2 + 1) + 'px"></i></button>';
-        }).join("") +
       '</div>' +
     '</div>';
   }
@@ -1214,9 +1382,10 @@
     // smd_study_scribble is ignored so old ONs are reset; only smd_study_scribble2 === "1" turns it on.
     var scrPref = false;
     try { scrPref = G.localStorage.getItem("smd_study_scribble2") === "1"; } catch (e) {}
-    V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, items: items || [], stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto, scribble: scrPref, lasso: null, prevTool: null, ink: null };
+    V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, items: items || [], stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 26), /* .st-pages padding 12 + 12, page border 1 + 1: fit width shows the whole page, no sideways scroll */ goto: goto, scribble: scrPref, lasso: null, prevTool: null, ink: null };
     V.onSel = onSel; D.addEventListener("selectionchange", onSel);
     if (carry) { V.tool = carry.tool; V.ci = carry.ci; V.wi = carry.wi; carry = null; }
+    bindPencil();
     if (pdf) pdf.getPage(1).then(function (p) { var v = p.getViewport({ scale: 1 }); V.ratio = v.height / v.width; build(); }); else build();
     syncTb();
   }
@@ -1236,11 +1405,13 @@
       es.forEach(function (e) { var n = +e.target.getAttribute("data-n"); if (e.isIntersecting) renderPage(n); else freePage(n); });
     }, { root: V.sc, rootMargin: "150% 0px 150% 0px" });
     for (i = 1; i <= V.n; i++) V.io.observe(V.pg[i].el);
-    V.sc.addEventListener("scroll", function () { if (V.raf) return; V.raf = G.requestAnimationFrame(function () { V.raf = 0; curPage(); }); });
+    V.sc.addEventListener("scroll", function () { scheduleSharp(); if (V.raf) return; V.raf = G.requestAnimationFrame(function () { V.raf = 0; curPage(); }); });
     bindPinch();
     if (V.goto > 1 && V.pg[V.goto]) { V.sc.scrollTop = V.pg[V.goto].el.offsetTop; curPage(); }
     V.sc.addEventListener("pointermove", function (e) { if (e.pointerType === "pen") penSeen = true; }, true);
     V.sc.addEventListener("pointerdown", function (e) { if (e.pointerType === "pen") penSeen = true; }, true);
+    V.sc.addEventListener("pointerup", function (e) { if (e.pointerType === "pen" && V) V._isPenDown = false; }, true);
+    V.sc.addEventListener("pointercancel", function (e) { if (e.pointerType === "pen" && V) V._isPenDown = false; }, true);
   }
 
   function curPage() {
@@ -1253,27 +1424,38 @@
     var curP = host.root() && host.root().querySelector("#stCurP"); if (curP) curP.textContent = n;
   }
 
+  var CANVAS_MAX_PX = 8e6;
+  function canvasScale(cw, ch, dpr) { return Math.max(0.25, Math.min(dpr, 4096 / cw, Math.sqrt(CANVAS_MAX_PX / Math.max(1, cw * ch)))); }
   function renderPage(n) {
     var p = V && V.pg[n]; if (!p || p.on) return;
     p.on = true; var gen = ++p.gen, pdf = V.pdf;
     (pdf ? pdf.getPage(n) : Promise.resolve(null)).then(function (page) {
       if (!V || V.pdf !== pdf || V.pg[n] !== p || p.gen !== gen) return;
       var v1 = page ? page.getViewport({ scale: 1 }) : { width: 1, height: V.ratio }, cw = V.baseW * V.z, ch = cw * v1.height / v1.width, dpr = Math.min(G.devicePixelRatio || 1, 2);
-      var qf = Math.min(dpr, 4096 / cw);
+      /* iPad Safari blanks any canvas over ~16.7 M pixels (and total canvas memory is limited): when zoomed,
+         a full-dpr page overlay was 30 M+ px, so ink vanished and the pen stopped drawing. Cap every page canvas
+         at ~8 M px; at fit width this is still full retina. */
+      var qf = canvasScale(cw, ch, dpr);
       p.ratio = v1.height / v1.width; p.el.style.height = ch + "px";
       var cv = D.createElement("canvas"), ov = D.createElement("canvas"), vp = page ? page.getViewport({ scale: (cw / v1.width) * qf }) : { width: cw * qf, height: ch * qf };
       cv.width = Math.floor(vp.width); cv.height = Math.floor(vp.height); cv.className = "st-cv";
-      ov.width = Math.floor(cw * dpr); ov.height = Math.floor(ch * dpr); ov.className = "st-ov"; ov.setAttribute("data-n", n);
+      cv.style.zIndex = "1"; cv.style.pointerEvents = "none";
+      ov.width = Math.floor(cw * qf); ov.height = Math.floor(ch * qf); ov.className = "st-ov"; ov.setAttribute("data-n", n);
+      ov.style.touchAction = "none";
+      ov.style.zIndex = "10";
       var itemLayer = D.createElement("div"); itemLayer.className = "st-items-layer"; itemLayer.setAttribute("data-n", n);
       p.cv = cv; p.ov = ov; p.itemLayer = itemLayer;
       p.el.appendChild(cv); p.el.appendChild(itemLayer); p.el.appendChild(ov);
       // Phase 1 live layer: predicted points + eraser cursor only; committed ink stays on ov.
-      if (G.STUDY_INK) { var lv = D.createElement("canvas"); lv.width = ov.width; lv.height = ov.height; lv.className = "st-live"; p.live = lv; p.el.appendChild(lv); }
+      if (G.STUDY_INK) { var lv = D.createElement("canvas"); lv.width = ov.width; lv.height = ov.height; lv.className = "st-live"; lv.style.zIndex = "11"; lv.style.pointerEvents = "none"; p.live = lv; p.el.appendChild(lv); }
       bindInk(ov, n); redraw(n);
       if (G.STUDY_INSERT && G.STUDY_INSERT.renderPageItems) G.STUDY_INSERT.renderPageItems(n, p);
-      if (!page) { var _pid = V.nb ? V.nb.ord[n - 1] : null; return drawBg(cv.getContext("2d"), _pid != null ? tplForPid(_pid) : V.nb.style, V.ratio, cv.width); }
+      if (!page) { var _pid = V.nb ? V.nb.ord[n - 1] : null; drawBg(cv.getContext("2d"), _pid != null ? tplForPid(_pid) : V.nb.style, V.ratio, cv.width); scheduleSharp(); return; }
+      cv.style.visibility = "hidden"; // no blank flash: the old canvas (or the white page) shows until this one is drawn
       p.task = page.render({ canvasContext: cv.getContext("2d"), viewport: vp });
       p.task.promise.then(function () {
+        cv.style.visibility = "";
+        scheduleSharp();
         return !V || V.pg[n] !== p || p.gen !== gen ? null : textLayer(page, p, cw / v1.width);
       }).then(function () { page.cleanup(); }, function () {});
     });
@@ -1284,8 +1466,8 @@
     p.on = false; p.gen++;
     try { if (p.task) p.task.cancel(); } catch (e) {}
     p.task = null;
-    [p.cv, p.tl, p.ov, p.itemLayer, p.live].forEach(function (c) { if (c) { if (c.width !== undefined) c.width = 0; if (c.height !== undefined) c.height = 0; if (c.parentNode) c.parentNode.removeChild(c); } });
-    p.cv = p.tl = p.ov = p.itemLayer = p.live = null;
+    [p.cv, p.tl, p.ov, p.itemLayer, p.live, p.tpdf, p.tink].forEach(function (c) { if (c) { if (c.width !== undefined) c.width = 0; if (c.height !== undefined) c.height = 0; if (c.parentNode) c.parentNode.removeChild(c); } });
+    p.cv = p.tl = p.ov = p.itemLayer = p.live = p.tpdf = p.tink = null; p.trc = null; p.tbg = null;
     if (G.STUDY_INSERT && G.STUDY_INSERT.onPageFree) G.STUDY_INSERT.onPageFree(n);
   }
 
@@ -1296,6 +1478,10 @@
       if (!p.cv || !p.ov) return;
       var tl = D.createElement("div");
       tl.className = "st-tl smd-books-keep smd-emo-keep"; tl.style.setProperty("--scale-factor", String(k));
+      tl.style.zIndex = "2";
+      if (V && (V.tool === "pen" || V.tool === "hl" || V.tool === "er" || V.tool === "lasso" || V.tool === "shapes" || V.tool === "laser")) {
+        tl.style.pointerEvents = "none";
+      }
       p.el.insertBefore(tl, p.ov); p.tl = tl;
       return L.renderTextLayer({ textContentSource: tc, container: tl, viewport: page.getViewport({ scale: k }), textDivs: [] }).promise;
     }).then(null, function () {});
@@ -1309,21 +1495,167 @@
     if (pg) V.sel = { page: +pg.getAttribute("data-n"), text: t };
   }
 
-  function setZoom(z) {
-    z = Math.max(0.5, Math.min(4, z)); if (!V || z === V.z) return;
-    var k = z / V.z, i, cw = V.baseW * z;
-    V.sc.scrollTop *= k; V.sc.scrollLeft *= k; V.z = z;
+  // Re-render a page at the new zoom WITHOUT a blank flash: the old (CSS-stretched) canvases stay until the new render lands.
+  function rerenderPage(n) {
+    var p = V && V.pg[n]; if (!p || !p.on) return;
+    var old = [p.cv, p.tl, p.ov, p.itemLayer, p.live].filter(Boolean);
+    old.forEach(function (c) { c.style.pointerEvents = "none"; });
+    try { if (p.task) p.task.cancel(); } catch (e) {}
+    p.on = false; p.gen++; p.task = null; p.cv = p.tl = p.ov = p.itemLayer = p.live = null;
+    if (G.STUDY_INSERT && G.STUDY_INSERT.onPageFree) G.STUDY_INSERT.onPageFree(n);
+    renderPage(n);
+    var done = function () { old.forEach(function (c) { if (c.width !== undefined) { c.width = 0; c.height = 0; } if (c.parentNode) c.parentNode.removeChild(c); }); };
+    var tries = 0, wait = function () { if (p.task && p.task.promise) { p.task.promise.then(done, done); return; } if (p.cv || ++tries > 40) { G.setTimeout(done, 30); return; } G.setTimeout(wait, 25); };
+    G.setTimeout(wait, 0);
+  }
+  function layoutZoom(z) {
+    var i, cw = V.baseW * z; V.z = z;
+    Object.keys(V.pg).forEach(function (k) { hideTiles(V.pg[k]); });
     for (i = 1; i <= V.n; i++) { var p = V.pg[i]; p.el.style.width = cw + "px"; p.el.style.height = cw * p.ratio + "px"; }
     G.clearTimeout(V.zt);
-    V.zt = G.setTimeout(function () { if (!V) return; Object.keys(V.pg).forEach(function (n) { if (V.pg[n].on) { freePage(+n); renderPage(+n); } }); }, 250);
+    V.zt = G.setTimeout(function () { if (!V) return; Object.keys(V.pg).forEach(function (n) { if (V.pg[n].on) rerenderPage(+n); }); }, 120);
+    var zl = host.root() && host.root().querySelector("#stZoomLabel"); if (zl) zl.textContent = Math.round(z * 100) + "%";
+  }
+  /* ---- Sharp viewport tiles (GoodNotes-crisp zoom) ----
+     Page canvases are pixel-capped (iPad blanks canvases over ~16.7 M px), so when zoomed they are soft. For the
+     on-screen part of each page two viewport-sized canvases are drawn at full screen resolution:
+       tpdf (just above the page canvas): the PDF / notebook paper;  tink (just above the ink overlay): the ink.
+     The soft ink overlay is clipped out under tink, so ink is never missing while scrolling. Pen input still goes to
+     the ink overlay. Re-drawn after zoom / scroll settles and whenever ink changes (redraw). */
+  function sharpDpr() { return Math.min(G.devicePixelRatio || 1, 2); }
+  function hideTiles(p) {
+    if (!p) return;
+    if (p.tpdf) p.tpdf.style.display = "none";
+    if (p.tink) p.tink.style.display = "none";
+    if (p.ov) setMaskHole(p.ov, null);
+    p.trc = null; p.tgen = (p.tgen || 0) + 1;
+    try { if (p.ttask) p.ttask.cancel(); } catch (e) {}
+  }
+  function setMaskHole(el, rc) {
+    var st = el.style;
+    if (!rc) { ["maskImage", "webkitMaskImage", "maskSize", "webkitMaskSize", "maskPosition", "webkitMaskPosition", "maskRepeat", "webkitMaskRepeat", "maskComposite", "webkitMaskComposite"].forEach(function (k) { st[k] = ""; }); return; }
+    var img = "linear-gradient(#000, #000), linear-gradient(#000, #000)", size = rc.w + "px " + rc.h + "px, 100% 100%", pos = rc.x + "px " + rc.y + "px, 0 0";
+    st.webkitMaskImage = img; st.maskImage = img; st.webkitMaskSize = size; st.maskSize = size; st.webkitMaskPosition = pos; st.maskPosition = pos;
+    st.webkitMaskRepeat = "no-repeat"; st.maskRepeat = "no-repeat"; st.webkitMaskComposite = "xor"; st.maskComposite = "exclude";
+  }
+  function scheduleSharp(ms) { if (!V) return; G.clearTimeout(V.sharpT); V.sharpT = G.setTimeout(sharpenVisible, ms == null ? 110 : ms); }
+  /* Screen px per CSS px of an element. The Display setting zooms <html> (home.js zoomNowD, above 1 on an iPad), so
+     getBoundingClientRect is in screen px while style left/top/width and clientWidth are CSS px. Every rect is
+     divided by this before it is used as a CSS length (owner's recording 2026-11-18 02:32: strokes jumped and grew). */
+  function zoomOf(el) { var w = el && el.offsetWidth, r = w ? el.getBoundingClientRect().width : 0; return w > 0 && r > 0 ? r / w : 1; }
+  function sharpenVisible() {
+    if (!V || V._pinching || !V.sc) return;
+    var scr = V.sc.getBoundingClientRect();
+    Object.keys(V.pg).forEach(function (k) {
+      var n = +k, p = V.pg[n]; if (!p || !p.on || !p.ov || !p.cv) return;
+      var r = p.el.getBoundingClientRect(), W = p.el.clientWidth, H = p.el.clientHeight; if (!r.width || !W) return;
+      var kz = r.width / (p.el.offsetWidth || W), dpr = Math.min(sharpDpr() * kz, 3); // backing px per CSS px that look sharp
+      if (p.ov.width / W >= dpr * 0.98) { hideTiles(p); return; } // page canvases are already full resolution
+      var x0 = Math.max(0, (scr.left - r.left) / kz), y0 = Math.max(0, (scr.top - r.top) / kz), x1 = Math.min(W, (scr.right - r.left) / kz), y1 = Math.min(H, (scr.bottom - r.top) / kz);
+      if (x1 - x0 < 2 || y1 - y0 < 2) { hideTiles(p); return; }
+      x0 = Math.max(0, Math.floor(x0 - 64)); y0 = Math.max(0, Math.floor(y0 - 128)); x1 = Math.min(W, Math.ceil(x1 + 64)); y1 = Math.min(H, Math.ceil(y1 + 128));
+      if (p.trc && p.trc.W === W && p.tdpr === dpr && p.trc.x <= x0 && p.trc.y <= y0 && p.trc.x + p.trc.w >= x1 && p.trc.y + p.trc.h >= y1) return; // still covered
+      paintTiles(n, p, { x: x0, y: y0, w: x1 - x0, h: y1 - y0, W: W, H: H }, dpr);
+    });
+  }
+  function tileEl(p, key, z) {
+    if (!p[key]) { var t = D.createElement("canvas"); t.className = "st-tile " + (key === "tink" ? "st-tile-ink" : "st-tile-pdf"); t.style.cssText = "position:absolute;left:0;top:0;pointer-events:none;display:none;z-index:" + z + ";max-width:none"; p[key] = t; }
+    return p[key];
+  }
+  function paintTiles(n, p, rc, dpr) {
+    var gen = (p.tgen = (p.tgen || 0) + 1), pw = Math.round(rc.w * dpr), ph = Math.round(rc.h * dpr);
+    var bg = D.createElement("canvas"); bg.width = pw; bg.height = ph; var b = bg.getContext("2d");
+    var finish = function () {
+      if (!V || p.tgen !== gen || !p.cv || !p.ov) return;
+      var tp = tileEl(p, "tpdf", 1), ti = tileEl(p, "tink", 10);
+      if (tp.parentNode !== p.el || tp.previousSibling !== p.cv) p.el.insertBefore(tp, p.cv.nextSibling);
+      if (ti.parentNode !== p.el || ti.previousSibling !== p.ov) p.el.insertBefore(ti, p.ov.nextSibling);
+      if (tp.width !== pw || tp.height !== ph) { tp.width = pw; tp.height = ph; }
+      tp.getContext("2d").drawImage(bg, 0, 0); bg.width = 0;
+      [tp, ti].forEach(function (t) { t.style.left = rc.x + "px"; t.style.top = rc.y + "px"; t.style.width = rc.w + "px"; t.style.height = rc.h + "px"; t.style.display = ""; });
+      p.trc = rc; p.tdpr = dpr;
+      paintInkTile(n, p);
+    };
+    if (V.pdf) {
+      try { if (p.ttask) p.ttask.cancel(); } catch (e) {}
+      V.pdf.getPage(n).then(function (page) {
+        if (!V || p.tgen !== gen) return;
+        var v1 = page.getViewport({ scale: 1 }), sc = (rc.W / v1.width) * dpr;
+        b.fillStyle = "#fff"; b.fillRect(0, 0, pw, ph);
+        p.ttask = page.render({ canvasContext: b, viewport: page.getViewport({ scale: sc, offsetX: -rc.x * dpr, offsetY: -rc.y * dpr }) });
+        return p.ttask.promise.then(finish);
+      }).then(null, function () {});
+    } else {
+      var pid0 = V.nb ? V.nb.ord[n - 1] : null;
+      b.save(); b.translate(-rc.x * dpr, -rc.y * dpr); drawBg(b, pid0 != null ? tplForPid(pid0) : V.nb.style, V.ratio, rc.W * dpr); b.restore();
+      finish();
+    }
+  }
+  function paintInkTile(n, p) {
+    var t = p.tink, rc = p.trc, dpr = p.tdpr; if (!t || !rc || !p.ov) return;
+    var pw = Math.round(rc.w * dpr), ph = Math.round(rc.h * dpr);
+    if (t.width !== pw || t.height !== ph) { t.width = pw; t.height = ph; }
+    var ctx = t.getContext("2d"); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, pw, ph);
+    ctx.save(); ctx.translate(-rc.x * dpr, -rc.y * dpr);
+    inkInto(ctx, n, rc.W, rc.H, dpr, rc.x, rc.y);
+    ctx.restore();
+    // hide the soft overlay ink where the sharp tile covers it (pointer input still reaches the overlay)
+    // (a mask, not clip-path: clip-path would also stop the pen from hitting the overlay there)
+    setMaskHole(p.ov, rc);
+  }
+  function setZoom(z) {
+    z = Math.max(1, Math.min(4, z)); if (!V || z === V.z) return;
+    var k = z / V.z, cx = V.sc.scrollLeft + V.sc.clientWidth / 2, cy = V.sc.scrollTop + V.sc.clientHeight / 2;
+    layoutZoom(z);
+    V.sc.scrollLeft = cx * k - V.sc.clientWidth / 2; V.sc.scrollTop = cy * k - V.sc.clientHeight / 2;
   }
 
+  /* Native-feeling pinch: while fingers move only a GPU transform (scale around the pinch point + pan) is applied;
+     on release the pages are laid out once at the new zoom and the point under the fingers stays put.
+     Zoom range: fit width (1) to 400%; pinching below fit springs back to fit, like GoodNotes. */
   function bindPinch() {
-    var d0 = 0, z0 = 1;
+    var g = null;
     var span = function (t) { var dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY; return Math.sqrt(dx * dx + dy * dy); };
-    V.sc.addEventListener("touchstart", function (e) { if (e.touches.length === 2) { d0 = span(e.touches); z0 = V.z; } }, { passive: true });
-    V.sc.addEventListener("touchmove", function (e) { if (e.touches.length === 2 && d0) { if (e.cancelable) e.preventDefault(); setZoom(z0 * span(e.touches) / d0); } }, { passive: false });
-    V.sc.addEventListener("touchend", function (e) { if (e.touches.length < 2) d0 = 0; }, { passive: true });
+    var mid = function (t) { return [(t[0].clientX + t[1].clientX) / 2, (t[0].clientY + t[1].clientY) / 2]; };
+    var box = V.box;
+    function commit() {
+      if (!g) return;
+      var gg = g; g = null; V._pinching = false;
+      var z = Math.max(1, Math.min(4, gg.z0 * gg.s)), k = z / gg.z0;
+      box.style.transition = ""; box.style.transform = ""; box.style.willChange = "";
+      layoutZoom(z);
+      // the spot on the page that was under the fingers at the start lands under the fingers' final midpoint
+      // two passes: the second absorbs any layout offset that moves with the scroll position
+      for (var pass = 0; gg.pe && pass < 2; pass++) {
+        var r = gg.pe.getBoundingClientRect(), kz = zoomOf(V.sc); // screen px -> the scroller's CSS px (Display zoom)
+        V.sc.scrollLeft += (r.left + gg.fx * r.width - gg.m[0]) / kz;
+        V.sc.scrollTop += (r.top + gg.fy * r.height - gg.m[1]) / kz;
+      }
+    }
+    V.sc.addEventListener("touchstart", function (e) {
+      if (V && V._isPenDown) return;
+      if (e.touches.length === 2) {
+        var m = mid(e.touches), br = box.getBoundingClientRect(), hit = D.elementFromPoint(m[0], m[1]), pe = hit && hit.closest ? hit.closest(".st-pg") : null;
+        if (!pe && V.pg[V.cur || 1]) pe = V.pg[V.cur || 1].el;
+        var pr = pe ? pe.getBoundingClientRect() : null;
+        V._pinching = true;
+        var kz = zoomOf(box); // transform-origin and translate are CSS px of the box; touches are screen px
+        g = { kz: kz, d0: span(e.touches) || 1, z0: V.z, m0: m, m: m, ox: (m[0] - br.left) / kz, oy: (m[1] - br.top) / kz, s: 1, pe: pe, fx: pr ? (m[0] - pr.left) / (pr.width || 1) : 0, fy: pr ? (m[1] - pr.top) / (pr.height || 1) : 0 };
+        box.style.transformOrigin = g.ox + "px " + g.oy + "px"; box.style.willChange = "transform";
+      }
+    }, { passive: true });
+    V.sc.addEventListener("touchmove", function (e) {
+      if (!g || (V && V._isPenDown)) return;
+      if (e.touches.length !== 2) return;
+      if (e.cancelable) e.preventDefault();
+      var m = mid(e.touches), z = g.z0 * span(e.touches) / g.d0;
+      z = z < 1 ? 1 - (1 - z) * 0.35 : z > 4 ? 4 + (z - 4) * 0.2 : z; // rubber-band past the limits
+      g.s = z / g.z0; g.m = m;
+      box.style.transform = "translate(" + (m[0] - g.m0[0]) / g.kz + "px," + (m[1] - g.m0[1]) / g.kz + "px) scale(" + g.s + ")";
+    }, { passive: false });
+    var end = function (e) { if (g && (!e.touches || e.touches.length < 2)) commit(); };
+    V.sc.addEventListener("touchend", end, { passive: true });
+    V.sc.addEventListener("touchcancel", end, { passive: true });
   }
 
   /* ---- ink ---- */
@@ -1336,8 +1668,8 @@
     if (G.STUDY_INK && G.STUDY_INK.drawStroke(ctx, s, W, H, dpr, isSel)) return;
     var p = s.pts, i;
     ctx.save(); ctx.scale(dpr, dpr); ctx.lineCap = "round"; ctx.lineJoin = "round";
-    ctx.strokeStyle = isSel ? "#42cdb5" : s.color;
-    if (isSel) { ctx.shadowColor = "#42cdb5"; ctx.shadowBlur = 4; }
+    ctx.strokeStyle = isSel ? "#c9a227" : s.color;
+    if (isSel) { ctx.shadowColor = "#c9a227"; ctx.shadowBlur = 4; }
     if (s.tool === "hl") {
       ctx.globalAlpha = 0.35; ctx.lineWidth = penW(s, W, 0.5); ctx.beginPath();
       for (i = 0; i < p.length; i++) { if (i) ctx.lineTo(p[i][0] * W, p[i][1] * H); else ctx.moveTo(p[i][0] * W, p[i][1] * H); }
@@ -1352,16 +1684,31 @@
     ctx.restore();
   }
 
+  function inkInto(ctx, n, W, H, dpr, ox, oy) {
+    var ordered = V.strokes.filter(function (s) { return s.page === pid(n) && !s.gone; });
+    ordered.sort(function (a, b) { return (a.tool === "hl" ? 0 : 1) - (b.tool === "hl" ? 0 : 1); });
+    var isSelS = function (s) { return V.lasso && V.lasso.page === pid(n) && V.lasso.ids.indexOf(s.id) !== -1; };
+    var hlLayer = G.STUDY_INK && G.STUDY_INK.drawHlLayer ? ordered.filter(function (s) { return s.tool === "hl" && s.style && !s.shape && !isSelS(s); }) : [];
+    if (hlLayer.length) G.STUDY_INK.drawHlLayer(ctx, hlLayer, W, H, dpr, ox, oy);
+    ordered.forEach(function (s) { if (hlLayer.indexOf(s) === -1) drawStroke(ctx, s, W, H, dpr, isSelS(s)); });
+    if (G.STUDY_SELECT && G.STUDY_SELECT.drawSel) { try { G.STUDY_SELECT.drawSel(ctx, V, W, H, dpr, n); } catch (e) {} }
+  }
   function redraw(n, live, lassoLoop) {
     var p = V && V.pg[n]; if (!p || !p.ov) return;
+    if (p.trc && p.tink) paintInkTile(n, p);
+    if (V.zw && V.zw.n === n) zwSchedule();
     var ctx = p.ov.getContext("2d"), dpr = p.ov.width / (p.el.clientWidth || 1), W = p.el.clientWidth, H = p.el.clientHeight;
     ctx.clearRect(0, 0, p.ov.width, p.ov.height);
     // Highlighter renders under pen ink and text-layer content visually (multiply on the overlay).
     var ordered = V.strokes.filter(function (s) { return s.page === pid(n) && !s.gone; });
     ordered.sort(function (a, b) { return (a.tool === "hl" ? 0 : 1) - (b.tool === "hl" ? 0 : 1); });
+    var isSelS = function (s) { return V.lasso && V.lasso.page === pid(n) && V.lasso.ids.indexOf(s.id) !== -1; };
+    // All styled highlighter strokes go down as ONE even layer (no darkened overlaps); everything else as before.
+    var hlLayer = G.STUDY_INK && G.STUDY_INK.drawHlLayer ? ordered.filter(function (s) { return s.tool === "hl" && s.style && !s.shape && !isSelS(s); }) : [];
+    if (hlLayer.length) G.STUDY_INK.drawHlLayer(ctx, hlLayer, W, H, dpr);
     ordered.forEach(function (s) {
-      var isSel = V.lasso && V.lasso.page === pid(n) && V.lasso.ids.indexOf(s.id) !== -1;
-      drawStroke(ctx, s, W, H, dpr, isSel);
+      if (hlLayer.indexOf(s) !== -1) return;
+      drawStroke(ctx, s, W, H, dpr, isSelS(s));
     });
     if (live) drawStroke(ctx, live, W, H, dpr);
     // Phase 2 hook: dashed selection box with resize handles.
@@ -1369,7 +1716,7 @@
     if (lassoLoop && lassoLoop.length > 1) {
       ctx.save();
       ctx.scale(dpr, dpr);
-      ctx.strokeStyle = "#42cdb5";
+      ctx.strokeStyle = "#c9a227";
       ctx.lineWidth = 2;
       ctx.setLineDash([5, 5]);
       ctx.beginPath();
@@ -1391,6 +1738,7 @@
 
   function syncTb() {
     var root = host && host.root(); if (!root || !V) return;
+    var tbEl = root.querySelector("#stTb"); if (tbEl) tbEl.style.setProperty("--st-pen", activeColor());
     Array.prototype.forEach.call(root.querySelectorAll("#stTb [data-act], #stMoreSheet [data-act], #stToolOptions [data-act]"), function (b) {
       var a = b.getAttribute("data-act"), v = b.getAttribute("data-v");
       var onb = (a === "st-tool" && v === V.tool) || (a === "st-color" && +v === V.ci) || (a === "st-width" && +v === V.wi);
@@ -1435,9 +1783,18 @@
     if (inp && D.activeElement !== inp) inp.value = V.cur || 1;
     var zm = root.querySelector("#stZoomLabel");
     if (zm) zm.textContent = Math.round((V.z || 1) * 100) + "%";
-    var isInk = V.tool === "pen" || V.tool === "hl";
+    var isInk = V.tool === "pen" || V.tool === "hl" || V.tool === "shapes";
     var isLaser = V.tool === "laser";
-    V.box.classList.toggle("st-ink", isInk || V.tool === "er" || V.tool === "lasso" || isLaser);
+    var hasInkTool = isInk || V.tool === "er" || V.tool === "lasso" || isLaser;
+    V.box.classList.toggle("st-ink", hasInkTool);
+    // Text tool: the item layer takes the tap that places a text box (it is pointer-events none otherwise, and on a
+    // PDF the text layer sat on top), so a real tap never reached it before 2026-11-18.
+    V.box.classList.toggle("st-text", V.tool === "text");
+    for (var pgi in V.pg) {
+      if (V.pg[pgi] && V.pg[pgi].tl) {
+        V.pg[pgi].tl.style.pointerEvents = hasInkTool || V.tool === "text" ? "none" : "auto";
+      }
+    }
     if (G.STUDY_INSERT && G.STUDY_INSERT.syncTb) G.STUDY_INSERT.syncTb(V, root);
     // Phase 1 hook: refresh the ink context strip for the active tool.
     if (G.STUDY_INK) { try { G.STUDY_INK.syncStrip(inkApi(V.cur || 1, null)); } catch (e) {} }
@@ -1471,9 +1828,28 @@
       clearPage: clearPageInk
     };
   }
-  // Pencil double-tap (1.18): no web hook exists for Apple Pencil double-tap; a native
-  // PencilInteraction bridge would call STUDY._inkDblTap() to switch pen and eraser. TODO: native build.
-  G.STUDY_INK_DBLTAP_TODO = "native PencilInteraction bridge needed";
+  // Apple Pencil hardware (study-pencil): no web hook exists for Apple Pencil double-tap; the native
+  // UIPencilInteraction bridge (ios/App/App/PencilPlugin.swift) forwards hardware gestures as
+  // "pencilTap" { action }. iPad-only: this stays a no-op on web and Android.
+  function pencilSwitchPrevious() { if (!V) return; var cur = V.tool, prev = V.prevTool || "pen"; V.tool = prev; if (cur && cur !== prev) V.prevTool = cur; syncTb(); }
+  function openPenSettings() { if (!V || !G.STUDY_INK || typeof G.STUDY_INK.popover !== "function") return; var t = (V.tool === "pen" || V.tool === "hl" || V.tool === "er") ? V.tool : "pen"; try { G.STUDY_INK.popover(inkApi(V.cur || 1, null), t); } catch (e) {} }
+  var pencilBound = false;
+  function handlePencilTap(d) {
+    var m = pencilActionFor(d && d.action);
+    if (!m) return;
+    if (m === "pencilDoubleTap") { if (G.STUDY && typeof G.STUDY.pencilDoubleTap === "function") G.STUDY.pencilDoubleTap(); return; }
+    if (m === "pencilSwitchPrevious") { if (G.STUDY && typeof G.STUDY.pencilSwitchPrevious === "function") G.STUDY.pencilSwitchPrevious(); else if (G.STUDY && typeof G.STUDY.pencilDoubleTap === "function") G.STUDY.pencilDoubleTap(); return; }
+    if (m === "openPenSettings") { if (G.STUDY && typeof G.STUDY.openPenSettings === "function") G.STUDY.openPenSettings(); else openPenSettings(); }
+  }
+  function bindPencil() {
+    if (pencilBound) return;
+    try {
+      var P = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.Pencil;
+      if (!P || typeof P.addListener !== "function") return;
+      P.addListener("pencilTap", function (d) { handlePencilTap(d); });
+      pencilBound = true;
+    } catch (e) {}
+  }
   function bindInk(ov, n) {
     // Phase 2 hook: selection and shape gestures bind first (capture); ink binds after.
     if (G.STUDY_SELECT && G.STUDY_SELECT.bindSel) { try { G.STUDY_SELECT.bindSel(inkApi(n, ov), ov, n); } catch (e) {} }
@@ -1534,6 +1910,7 @@
       }
       var pt = sample(e);
       cur = { id: uid(), doc: V.id, page: pid(n), tool: V.tool, color: activeColor(), w: WIDTHS[V.wi], pts: [pt], gone: false, t: Date.now(), t0: Date.now(), t1: Date.now() };
+      try { if (G.STUDY_MEDIA && G.STUDY_MEDIA.stampStroke) { var __a = G.STUDY_MEDIA.stampStroke(); if (__a != null) cur.a = __a; } } catch (x) {} /* Phase 5b: audio offset */
       redraw(n, cur);
       e.preventDefault();
     });
@@ -1805,7 +2182,7 @@
   }
   function backup() {
     var F = G.fflate, name = "StewardMD Study backup " + stamp().slice(0, 10) + ".zip", nat = shareReady(), fs = nat && fsPlugin(), parts = [], n = 0, chain = Promise.resolve(), err = null, uri = null;
-    var man = { format: BK, v: 1, created: Date.now(), counts: { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0 }, files: [] };
+    var man = { format: BK, v: 1, created: Date.now(), counts: { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0, audio: 0 }, files: [] };
     if (!(F && F.Zip && F.ZipPassThrough)) return bk("Backup is not available in this build.");
     var z = new F.Zip(function (e, chunk) {
       if (e) { err = e; return; }
@@ -1836,6 +2213,19 @@
           });
         }, Promise.resolve());
       });
+    }).then(function () { /* Phase 5b: audio blobs + metadata */
+      return all("audio").then(function (aa) { aa = aa || []; man.counts.audio = aa.length;
+        var meta = aa.map(function (a) { return { id: a.id, doc: a.doc, mime: a.mime || "audio/webm", size: a.size || 0, started: a.started || 0, dur: a.dur || 0, bytes: a.size || 0 }; });
+        return add("audio.json", json(meta), true).then(function () {
+          return aa.reduce(function (p, a) {
+            return p.then(function () {
+              var blob = a.blob;
+              var toBytes = blob && blob.arrayBuffer ? blob.arrayBuffer() : Promise.resolve(blob && blob.__bytes ? blob.__bytes : new ArrayBuffer(0));
+              return toBytes.then(function (ab) { return add("audio/" + a.id + ".bin", new Uint8Array(ab), true); }, function () { return add("audio/" + a.id + ".bin", new Uint8Array(0), true); });
+            });
+          }, Promise.resolve());
+        });
+      }).then(null, function () { /* no audio store (old db): backup without audio */ });
     }).then(function () {
       return add("manifest.json", json(man), false);
     }).then(function () {
@@ -1875,6 +2265,18 @@
                 .then(function () { strokes += r.strokes.length; return put("docs", d); });
             });
           }, Promise.resolve());
+        }).then(function () { /* Phase 5b: audio blobs (never overwrite) */
+          var audio = (v.audio || []), inAdd = {}; plan.add.forEach(function (r) { inAdd[r.doc.id] = 1; });
+          return all("audio").then(function (existing) { existing = existing || []; var has = {}; existing.forEach(function (a) { has[a.id] = 1; });
+            var todo = audio.filter(function (a) { return !has[a.id] && inAdd[a.doc]; });
+            return todo.reduce(function (p, a) {
+              return p.then(function () {
+                var bin = ent["audio/" + a.id + ".bin"] || new Uint8Array(0);
+                var blob = new Blob([bin], { type: a.mime || "audio/webm" });
+                return put("audio", { id: a.id, doc: a.doc, mime: a.mime || "audio/webm", size: bin.length, started: a.started || 0, dur: a.dur || 0, blob: blob });
+              });
+            }, Promise.resolve());
+          }).then(null, function () {});
         }).then(function () {
           bk("Restored " + plan.add.length + (plan.add.length === 1 ? " document" : " documents") + " with " + strokes + " strokes. Skipped " + plan.skip.length + " already in the library. Nothing existing was changed.");
           if (onTop("#stLib")) fillLib();
@@ -1893,6 +2295,7 @@
     e.id = "stSheet"; e.className = "st-sheet"; e.setAttribute("role", "dialog"); e.setAttribute("aria-modal", "true");
     e.innerHTML = '<div class="st-sh smd-books-keep smd-emo-keep">' + html + '<div class="st-acts">' + (ok ? '<button type="button" class="pn-btn pri" data-act="st-sok" id="stSheetOk">' + label + "</button>" : "") +
       '<button type="button" class="pn-btn" data-act="st-scancel">' + (ok ? "Cancel" : "Close") + "</button></div></div>";
+    e.addEventListener("click", function (ev) { if (ev.target === e) closeSheet(); });
     host.root().appendChild(e); sheetOk = ok || null;
   }
   function signedIn() { var a = G.SMD_AUTH; return !!(a && a.currentUser); }
@@ -2015,6 +2418,8 @@
     if (a === "st-orig") return shareOriginal();
     if (a === "st-flat") return flatten();
     if (a === "st-explain") return explain();
+    if (a === "st-zoom-window") return toggleZoomWindow();
+    if (a.indexOf("st-zw-") === 0) { zwAct(a); return; }
     if (a === "st-page-sheet") return showPageSheet();
     if (a === "st-close-pagesheet") return closePageSheet();
     if (a === "st-jump-page") {
@@ -2153,9 +2558,33 @@
   function leave() { closeViewer(); }
   function homeRow(h) { host = h; return ""; }
 
-  function inkDblTap() { if (!V) return; V.tool = V.tool === "er" ? (V.prevTool || "pen") : "er"; syncTb(); }
+  /* Phase 5a hook: the GoodNotes library (study-library.js) reuses the indexer so PDF text search keeps working. */
+  /* Phase 5a hang fix: the library reuses STUDY.db (this connection) instead of opening its own
+     IndexedDB connection, so the library never holds a second connection that can wedge opens. */
+  function pencilDoubleTap() {
+    if (!V) return;
+    if (V.tool === "er") {
+      V.tool = V.prevTool || "pen";
+    } else {
+      V.prevTool = V.tool || "pen";
+      V.tool = "er";
+    }
+    syncTb();
+  }
+  function inkDblTap() { pencilDoubleTap(); }
+
+  D.addEventListener("keydown", function (e) {
+    if (!V) return;
+    var tag = e.target && e.target.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA" || (e.target && e.target.isContentEditable)) return;
+    if (e.key === "d" || e.key === "D" || e.key === "e" || e.key === "E") {
+      pencilDoubleTap();
+    }
+  });
+
   G.STUDY = {
     on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText,
+    kick: kick, db: db,
     _pure: PURE, _state: function () { return V; },
     put: put, del: del, get: get, all: all, q: q, itemsOf: itemsOf,
     pushUndo: function (op) { push(V.stack, op); syncTb(); saveStack(); },
@@ -2163,12 +2592,15 @@
     askAi: askAi, makeDeck: makeDeck, sheet: sheet, closeSheet: closeSheet,
     scanner: scanner, normPhoto: normPhoto, shotsToDoc: shotsToDoc,
     pid: pid, posOf: posOf, redraw: redraw,
+    pencilDoubleTap: pencilDoubleTap, toggleZoomWindow: toggleZoomWindow, showPageSheet: showPageSheet,
     host: function () { return host; },
     buildPdf: buildPdf,
     _v: function () { return V; }, _redraw: redraw, _pushUndo: function (op) { if (V) { push(V.stack, op); saveStack(); syncTb(); } },
     _saveStack: saveStack, _put: put, _get: get, _all: all, _strokesOf: strokesOf, _uid: uid, _drawBg: drawBg, _drawStroke: drawStroke, _del: del,
     _reloadNb: reloadNb, _host: function () { return host; }, _syncTb: syncTb, _setZoom: setZoom, _openPdf: openPdf, _pdfjs: pdfjs, _loadOriginal: loadOriginal,
     _doScan: doScan, _pickPhotos: pickPhotos, _pickPdf: pickPdf, _importPhotos: importPhotos,
-    _inkDblTap: inkDblTap, _inkApi: function () { return V ? inkApi(V.cur || 1, null) : null; }
+    _inkDblTap: inkDblTap, _pencilDoubleTap: pencilDoubleTap, _showPageSheet: showPageSheet, _toggleZoomWindow: toggleZoomWindow, _zwAdvance: zwAdvance,
+    _inkApi: function () { return V ? inkApi(V.cur || 1, null) : null; },
+    pencilDoubleTap: pencilDoubleTap, pencilSwitchPrevious: pencilSwitchPrevious, openPenSettings: openPenSettings
   };
 })(typeof window !== "undefined" ? window : this);

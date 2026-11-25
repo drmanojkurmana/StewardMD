@@ -5,7 +5,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
-import { buildAll, canonicalSystem, captionOf, commonsSrc, commonsTitle, kindOf, tidyCommonsCaption, writeIndex } from "../tools/build-image-library.mjs";
+import { buildAll, buildTopics, topicKey, canonicalSystem, captionOf, commonsSrc, commonsTitle, kindOf, tidyCommonsCaption, writeIndex } from "../tools/build-image-library.mjs";
 
 const require = createRequire(import.meta.url);
 const PURE = require("../image-library.js");
@@ -27,6 +27,33 @@ test("builder: every entry has src and caption, no duplicates", () => {
     }
   }
   assert.equal(seen.size, d.total);
+});
+
+test("builder: teaching animations are listed and every GIF file ships", () => {
+  const anims = Object.values(data().bySystem).flat().filter((e) => e.f === "Animations");
+  assert.ok(anims.length >= 629, "animations in the bank, got " + anims.length);
+  for (const e of anims) {
+    assert.equal(e.k, "Animation");
+    assert.ok(fs.existsSync(path.join(import.meta.dirname, "..", e.s)), "file exists: " + e.s);
+    const base = PURE.animBase(e);
+    if (/^media\/anim\//.test(e.s)) {
+      assert.ok(base, "media/anim entries play as video: " + e.s);
+      for (const x of [".av1.mp4", ".mp4"]) assert.ok(fs.existsSync(path.join(import.meta.dirname, "..", base + x)), "video ships: " + base + x);
+    }
+  }
+  const sh = fs.readFileSync(path.join(import.meta.dirname, "..", "scripts/build-www.sh"), "utf8");
+  assert.ok(sh.includes("media/anim"), "build-www copies media/anim (left out with SMD_REMOTE_MEDIA=1)");
+  assert.ok(/media\/anim\/\*\.mp4/.test(sh), "build-www copies the animation videos");
+});
+
+test("animations: poster plus AV1 when the phone can play it, HEVC otherwise", () => {
+  const e = { s: "media/anim/gif011_immune-response.webp", k: "Animation" };
+  assert.equal(PURE.animBase(e), "media/anim/gif011_immune-response");
+  assert.equal(PURE.animBase({ s: e.s, k: "Photo" }), null, "only animations");
+  assert.equal(PURE.animBase({ s: "surgx/media/x.gif", k: "Animation" }), null, "SurgX GIFs stay images");
+  assert.equal(PURE.animSrc("media/anim/a", (t) => (/av01/.test(t) ? "probably" : "")), "media/anim/a.av1.mp4");
+  assert.equal(PURE.animSrc("media/anim/a", () => ""), "media/anim/a.mp4");
+  assert.equal(PURE.animSrc("media/anim/a", () => { throw new Error("x"); }), "media/anim/a.mp4");
 });
 
 test("builder: ECGs sit under Cardiology with ECG kind, eye images under Eye", () => {
@@ -131,7 +158,7 @@ test("commons import: helpers keep the uploader's text and drop empty captions",
 
 test("commons import: every merged image is openly licensed, attributed and linked to its Commons page", () => {
   const d = data();
-  const all = Object.values(d.bySystem).flat().filter((e) => e.lk === "commons");
+  const all = Object.values(d.bySystem).flat().filter((e) => e.lk === "commons" && e.f !== "Qbank");
   assert.ok(all.length > 300, "pathology and histology images merged, got " + all.length);
   for (const e of all) {
     assert.match(e.s, /^https:\/\/(upload|thumb)\.wikimedia\.org\/[^?]+$/);
@@ -143,4 +170,62 @@ test("commons import: every merged image is openly licensed, attributed and link
   }
   const sys = new Set(Object.keys(d.bySystem).filter((s) => d.bySystem[s].some((e) => e.lk === "commons")));
   for (const s of ["gastroenterology", "dermatology", "oncology", "anatomy"]) assert.ok(sys.has(s), "commons images in " + s);
+});
+
+import { bankKey, captionFor, entryFor, firstSentence, titleOf } from "../tools/snapshot-qbank-images.mjs";
+
+test("qbank snapshot: overlay bare names resolve the way the app serves them", () => {
+  assert.equal(bankKey("i-01b1aec04712.webp", ["overlay", "maikimg1", "surgery", "sur-periop.json"]), "img/maikimg/i-01b1aec04712.webp");
+  assert.equal(bankKey("v16/ss-radiology/img/i-a.webp", ["v16", "ss-radiology"]), "v16/ss-radiology/img/i-a.webp");
+  assert.equal(bankKey("i-a.webp", ["v16", "ss-radiology"]), "", "a bare name outside an overlay is not guessed");
+  assert.equal(bankKey("../x.webp", ["overlay", "maikimg1"]), "");
+});
+
+test("qbank snapshot: caption is the question's own key point, title never names the wrong option", () => {
+  const it = { id: "q1", q: "Which is the most likely diagnosis?", o: ["Galeazzi fracture", "Monteggia", "Colles", "Smith"], a: 0,
+    kp: "Galeazzi fracture is a distal radius shaft fracture with distal radioulnar joint dislocation. More text here.", exp: "x" };
+  assert.equal(captionFor(it), "Galeazzi fracture is a distal radius shaft fracture with distal radioulnar joint dislocation.");
+  assert.equal(titleOf(it), "Galeazzi fracture");
+  assert.equal(titleOf({ ...it, q: "All of the following are true EXCEPT" }), "", "an EXCEPT key is not what the image shows");
+  assert.equal(titleOf({ ...it, meta: { topic: "Forearm fractures" } }), "Forearm fractures");
+  assert.equal(firstSentence("short"), "short");
+  assert.equal(entryFor({ ...it, kp: "", exp: "" }, "v90/img/fx-a.webp", "orthopaedics", "m", null), null, "no caption, no entry");
+  const credit = { author: "Jane Doe", licence: "CC BY-SA 4.0", sourceUrl: "https://commons.wikimedia.org/wiki/File:X.jpg" };
+  const e = entryFor(it, "v90/img/fx-a.webp", "orthopaedics", "m", credit);
+  assert.equal(e.licence, "CC BY-SA 4.0");
+  assert.equal(e.page, credit.sourceUrl);
+  assert.equal(entryFor(it, "v90/img/fx-a.webp", "orthopaedics", "m", { author: "A", licence: "x", sourceUrl: "https://example.com" }).page, undefined);
+});
+
+test("builder: Qbank images join the bank, Commons ones attributed and linked", () => {
+  const d = data();
+  const qb = Object.values(d.bySystem).flat().filter((e) => e.f === "Qbank");
+  assert.ok(qb.length > 500, "Qbank images present, got " + qb.length);
+  for (const e of qb) {
+    assert.match(e.s, /^\/api\/prep\/bank\/(v\d+|img)\/[\w./-]+\.(webp|png|jpe?g)$/i, "bank URL: " + e.s);
+    assert.ok(e.c.length >= 20 && e.t, "caption and title: " + e.s);
+    if (e.o === "commons") {
+      assert.ok(e.cr && e.li && /^https:\/\/commons\.wikimedia\.org\//.test(e.u), "attributed: " + e.s);
+      assert.equal(e.lk, "commons");
+    } else assert.equal(e.lk, "prep");
+  }
+});
+
+test("topics: one bank reused by every module (drug, class, disease, operation)", () => {
+  const d = data(), T = buildTopics(d);
+  const titles = (q) => (T.t[topicKey(q)] || []).map((r) => d.bySystem[T.sys[r[0]]][r[1]].t);
+  assert.ok(titles("tamsulosin").some((t) => /alpha-adrenergic blocker/i.test(t)), "Tamsulosin reaches the alpha-blocker mechanism picture");
+  assert.ok(titles("tamsulosin").includes("Tamsulosin"), "and its animation");
+  assert.ok(titles("sepsis").length >= 5, "sepsis has pictures");
+  assert.ok(titles("inguinal hernia").length >= 3, "inguinal hernia has pictures");
+  for (const refs of Object.values(T.t)) assert.ok(refs.length <= 16);
+});
+
+test("client topicKeys: same key rule as the builder, longest topics only", () => {
+  assert.equal(PURE.topicWords("Septic Shocks").join(" "), topicKey("Septic Shocks"));
+  const has = (k) => ["septic shock", "shock", "sepsi", "liver abscess", "liver"].includes(k);
+  assert.deepEqual(PURE.topicKeys(["Septic shock management"], has), ["septic shock"]);
+  assert.deepEqual(PURE.topicKeys(["Sepsis and septic shock"], has), ["sepsi", "septic shock"]);
+  assert.deepEqual(PURE.topicKeys(["Liver abscess"], has), ["liver abscess"]);
+  assert.deepEqual(PURE.topicKeys(["Septic shock (severe)"], has, true), ["septic shock", "shock"]);
 });

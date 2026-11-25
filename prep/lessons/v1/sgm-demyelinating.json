@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "module": "sgm-demyelinating",
+ "subject": "ss-general-medicine",
+ "title": "Multiple sclerosis and CNS demyelinating disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Multiple sclerosis** is inflammatory demyelination of the central nervous system. **Optic neuritis** with painful eye movements is a common presentation. **NMOSD** is AQP4 positive demyelination with optic and cord disease. Demyelination spares headache pattern in these patients during evaluation here.",
+   "say": "Multiple sclerosis is inflammatory demyelination of the central nervous system for CNS disease. Optic neuritis with painful eye movements is a common presentation for optic involvement. NMOSD is AQP4 positive demyelination with optic and cord disease for differential pattern. Demyelination is spared headache pattern in these patients for clinical distinction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Multiple sclerosis",
+     "points": [
+      "Brain lesions common",
+      "Optic neuritis common",
+      "Middle aged women",
+      "Course is relapsing"
+     ]
+    },
+    "right": {
+     "title": "NMOSD",
+     "points": [
+      "Optic and cord together",
+      "Area postrema syndrome",
+      "AQP4 positive antibody",
+      "More severe attacks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**McDonald criteria** require dissemination in space and time. **MRI** shows periventricular lesions in these patients. **Dawson fingers** are periventricular lesions in many patients. Spinal cord lesions are short in multiple sclerosis during imaging review. Imaging review is advised in these patients during evaluation for diagnosis.",
+   "say": "McDonald criteria require dissemination in space and time for diagnostic standard. MRI shows periventricular lesions in these patients for imaging evidence. Dawson fingers are periventricular lesions in many patients for classic pattern. Spinal cord lesions are short in multiple sclerosis for lesion distinction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Multiple sclerosis",
+     "NMOSD"
+    ],
+    "rows": [
+     [
+      "Brain MRI",
+      "Periventricular Dawson fingers",
+      "Fewer brain lesions"
+     ],
+     [
+      "Optic neuritis",
+      "Painful eye movements",
+      "Severe vision loss"
+     ],
+     [
+      "Cord lesion",
+      "Short segment lesion",
+      "Longitudinally extensive"
+     ],
+     [
+      "Antibody",
+      "Oligoclonal bands",
+      "AQP4 positive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Relapses** are new deficits lasting twenty four hours. **Remission** follows relapses with recovery. **Sensory symptoms** are common in these patients. Motor weakness complicates relapses during course with evaluation here today. Sensory symptoms are common in these patients during evaluation for relapse pattern.",
+   "say": "Relapses are new deficits lasting twenty four hours for relapse definition. Remission follows relapses with recovery for remitting course. Sensory symptoms are common in these patients for sensory involvement. Motor weakness complicates relapses during course for motor involvement.",
+   "vis": null
+  },
+  {
+   "tx": "**Methylprednisolone** is the first line relapse therapy. **Plasma exchange** helps steroid refractory relapses in many patients. **Steroid** tapering follows pulse therapy in these patients. Relapse therapy shortens attacks without changing long term course in these patients. Recovery assessment is advised in these patients during evaluation after therapy.",
+   "say": "Methylprednisolone is the first line relapse therapy for acute relapse. Plasma exchange helps steroid refractory relapses in many patients for refractory course. Steroid tapering follows pulse therapy in these patients for treatment completion. Relapse therapy shortens attacks without changing long term course for outcome understanding.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Relapse presentation"
+     },
+     {
+      "id": "b",
+      "label": "Methylprednisolone pulse"
+     },
+     {
+      "id": "c",
+      "label": "Recovery assessment"
+     },
+     {
+      "id": "d",
+      "label": "Disease modifying therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fingolimod** with **natalizumab** reduce relapse frequency significantly. **Rituximab** with **inebilizumab** help NMOSD attacks. **Eculizumab** helps AQP4 positive NMOSD in many patients. Mycophenolate is an option for NMOSD in many patients with maintenance control. Maintenance control is advised in these patients during follow-up for benefit.",
+   "say": "Fingolimod with natalizumab reduce relapse frequency significantly for disease modification. Rituximab with inebilizumab help NMOSD attacks for NMOSD control. Eculizumab helps AQP4 positive NMOSD in many patients for complement blockade. Mycophenolate is an option for NMOSD in many patients for maintenance control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Disease",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Fingolimod",
+      "Multiple sclerosis",
+      "Relapse reduction"
+     ],
+     [
+      "Natalizumab",
+      "Multiple sclerosis",
+      "High efficacy option"
+     ],
+     [
+      "Rituximab",
+      "NMOSD",
+      "B cell depletion"
+     ],
+     [
+      "Eculizumab",
+      "NMOSD",
+      "Complement blockade"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fatigue** affects most multiple sclerosis patients. **Spasticity** complicates progressive multiple sclerosis during course. **Bladder dysfunction** affects many patients during course. Cognitive impairment affects many patients during course for cognitive burden today. Bladder dysfunction affects many patients during course for autonomic involvement today.",
+   "say": "Fatigue affects most multiple sclerosis patients for symptom burden. Spasticity complicates progressive multiple sclerosis during course for motor complication. Bladder dysfunction affects many patients during course for autonomic involvement. Cognitive impairment affects many patients during course for cognitive burden.",
+   "vis": null
+  },
+  {
+   "tx": "**Relapsing remitting** disease is the commonest course. **Primary progressive** disease progresses without remissions. **Secondary progressive** disease follows relapsing course. Benign multiple sclerosis has mild course in these patients with mild pattern. Secondary progressive disease follows relapsing course for transition pattern today.",
+   "say": "Relapsing remitting disease is the commonest course for typical pattern. Primary progressive disease is progressive without remissions for progressive pattern. Secondary progressive disease follows relapsing course for transition pattern. Benign multiple sclerosis has mild course in these patients for benign variant.",
+   "vis": null
+  },
+  {
+   "tx": "**Heat sensitivity** worsens symptoms during fever. **Uhthoff phenomenon** is transient worsening in heat. **Physiotherapy** improves gait in these patients. Exercise improves fatigue in these patients with symptomatic benefit today clearly. Exercise improves fatigue in these patients with symptomatic benefit today clearly.",
+   "say": "Heat sensitivity worsens symptoms during fever for Uhthoff pattern. Uhthoff phenomenon is transient worsening in heat for transient course. Physiotherapy improves gait in these patients for rehabilitation benefit. Exercise improves fatigue in these patients for symptomatic benefit.",
+   "vis": null
+  },
+  {
+   "tx": "**Pregnancy** does not increase relapse risk significantly. **Vitamin D** supplementation is advised in many patients. **Smoking cessation** is advised in these patients for benefit. Infection screening is advised before therapy in these patients for immunosuppression safety. Smoking cessation is advised in these patients for benefit for disease control.",
+   "say": "Pregnancy does not increase relapse risk significantly for pregnancy counseling. Vitamin D supplementation is advised in many patients for bone health. Smoking cessation is advised in these patients for benefit for disease control. Infection screening is advised before therapy in these patients for immunosuppression safety.",
+   "vis": null
+  },
+  {
+   "tx": "**Area postrema syndrome** causes intractable hiccups. **Longitudinal cord lesion** defines NMOSD in these patients. **Brainstem syndrome** with vomiting defines NMOSD. AQP4 testing confirms NMOSD in these patients for antibody confirmation today. Brainstem syndrome with vomiting defines NMOSD for brainstem pattern today.",
+   "say": "Area postrema syndrome causes intractable hiccups for NMOSD pattern. Longitudinal cord lesion is the hallmark of NMOSD in these patients for cord involvement. Brainstem syndrome with vomiting is the hallmark of NMOSD for brainstem pattern. AQP4 testing confirms NMOSD in these patients for antibody confirmation.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on demyelinating disease. Remember McDonald criteria, fingolimod for multiple sclerosis and rituximab for NMOSD. Methylprednisolone is the relapse therapy with plasma exchange as the comparator. AQP4 positivity with area postrema defines NMOSD clearly today.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. McDonald criteria are the diagnostic standard for multiple sclerosis. Fingolimod is the disease modifying therapy for multiple sclerosis. Rituximab is the NMOSD therapy for B cell depletion. AQP4 positivity with area postrema is the hallmark of NMOSD.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Diagnostic criteria",
+      "McDonald criteria for MS"
+     ],
+     [
+      "MS therapy",
+      "Fingolimod reduces relapses"
+     ],
+     [
+      "NMOSD therapy",
+      "Rituximab depletes B cells"
+     ],
+     [
+      "Relapse therapy",
+      "Methylprednisolone pulse first line"
+     ],
+     [
+      "NMOSD clue",
+      "AQP4 with area postrema"
+     ],
+     [
+      "Cord lesion",
+      "Longitudinal lesion defines NMOSD"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

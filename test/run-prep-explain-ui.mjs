@@ -73,7 +73,7 @@ try {
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.enable", {});
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; window.SMD_PREP_AX_API="/__ax"; window.__axCalls=0; (function(){ var f0=window.fetch; window.fetch=function(u,o){ if(String(u)==="/__ax"){ window.__axCalls++; var b=JSON.parse(o.body), others={}; ["A","B","C","D"].forEach(function(L,k){ if(k!==b.a) others[L]="Option "+L+" does not fit this stem."; }); return new Promise(function(res){ setTimeout(function(){ res(new Response(JSON.stringify({ x:{ key:"Stub key line for the right answer.", notes:"- **Point** one\\n- Point two", others:others, pearl:"Stub pearl" }, cached:false }), { status:200, headers:{ "Content-Type":"application/json" } })); }, 300); }); } return f0.apply(this, arguments); }; })();` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
@@ -102,7 +102,12 @@ try {
         const hasX = !!(it.x && it.x.key);
         if (hasX) ok(s.key && s.notes && !/No explanation is stored/.test(s.txt) && s.why === it.o.length - 1 && s.mine && s.pearl === "Remember", tag + ": key line, notes, " + s.why + " reasons (your pick marked), Remember box, no 'not stored' line");
         else if (String(it.exp || "").trim()) ok(!s.star && !/No explanation is stored/.test(s.txt), tag + ": the stored explanation shows without stray asterisks" + (s.legacyLi ? " (" + s.legacyLi + " bullets)" : ""));
-        else ok(/No explanation is stored|Explanation coming soon/.test(s.txt), tag + ": an item with nothing says so");
+        else {
+          // Nothing stored: MaiK writes one (stubbed /__ax here) and the card fills in place.
+          ok(!/No explanation is stored/.test(s.txt), tag + ": no 'not stored' line");
+          ok(await until(`var f=document.querySelector("#smdPrep .pn-fb"); return !!(f && f.querySelector(".pn-xkey") && f.querySelectorAll(".pn-why li").length === 3 && f.querySelector(".pn-why li.mine") && f.querySelector(".pn-axby") && !f.querySelector(".pn-ax"));`, 5000), tag + ": MaiK's explanation fills in: key line, 3 reasons (your pick marked), the AI line");
+          ok(await ev(`return window.__axCalls;`) <= 1, tag + ": written once (then from this phone's copy)");
+        }
         ok(!s.raw, tag + ": no raw Markdown or HTML leaks into the text");
         ok(!s.pageX && !s.wide.length && s.tblFit, tag + ": nothing scrolls the page sideways" + (s.wide.length ? " " + s.wide.join(",") : ""));
         if (SYNTH && i === 0) ok(s.heads === 3 && s.tables === 1, tag + ": three headings and the comparison table render");

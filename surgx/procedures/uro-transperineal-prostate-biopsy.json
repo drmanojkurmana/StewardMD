@@ -1,0 +1,256 @@
+{
+  "id": "uro-transperineal-prostate-biopsy",
+  "title": "Transperineal prostate biopsy",
+  "subtitle": "MRI targets first, then a systematic template, through the perineum",
+  "system": "urology",
+  "aliases": [
+    "TP biopsy",
+    "transperineal biopsy",
+    "LATP",
+    "MRI targeted prostate biopsy",
+    "prostate biopsy"
+  ],
+  "estMinutes": 30,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "eau-2025-pca",
+      "org": "EAU-EANM-ESTRO-ESUR-ISUP-SIOG",
+      "title": "EAU Guidelines on Prostate Cancer",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/prostate-cancer",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "nice-ng131",
+      "org": "NICE",
+      "title": "NG131 Prostate cancer: diagnosis and management",
+      "year": 2021,
+      "url": "https://www.nice.org.uk/guidance/ng131",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "eau-2025-infect",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Urological Infections",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/urological-infections",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "A raised PSA or abnormal examination with an MRI that shows a suspicious lesion, or a clinical decision to biopsy after MRI."
+    ],
+    "contraindications": [
+      "Untreated urinary infection.",
+      "Uncorrected bleeding disorder.",
+      "A patient who would not want or benefit from treatment of a found cancer."
+    ],
+    "preparation": [
+      "Review the MRI and mark the target(s) and their zones.",
+      "Check anticoagulants and stop or bridge per plan.",
+      "Consent: bleeding in urine, semen or from the perineum, urinary retention, infection (lower than transrectal), and the chance of missing cancer."
+    ],
+    "positioning": [
+      "Lithotomy, the scrotum lifted and taped away, the perineum exposed and flat."
+    ],
+    "equipment": [
+      "Transrectal ultrasound with a biplanar probe, stepper or freehand access device, biopsy gun with 18G needles, local anaesthetic with a long spinal needle, labelled pots for each core."
+    ],
+    "anatomy": [
+      "Prostate zones (peripheral, transition, anterior), apex and base, urethra, rectum, seminal vesicles."
+    ],
+    "criticalSafety": [
+      "Take the MRI targets before systematic cores, so blood does not hide the target.",
+      "Each core is labelled by site."
+    ],
+    "structuresAtRisk": [
+      "Urethra",
+      "Rectum",
+      "Bladder"
+    ],
+    "commonErrors": [
+      "Missing the target by sampling only systematically.",
+      "Mixing up cores between pots."
+    ],
+    "complications": [
+      "Haematuria, haematospermia, perineal bruising.",
+      "Urinary retention.",
+      "Infection or sepsis (rare transperineally)."
+    ],
+    "postop": [
+      "Pass urine before going home.",
+      "Return for fever, retention or heavy bleeding.",
+      "Results at the MDT and a clinic visit booked."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.tpb-step-01", "med.surgx.tpb-clip-01"]
+    },
+    {
+      "ref": "step.onco.mdt-check", "media": ["med.surgx.tpb-step-02", "med.surgx.tpb-clip-02"],
+      "emphasis": "The MRI has been reviewed and the targets with their zones are marked on the plan."
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.tpb-step-03", "med.surgx.tpb-clip-03"]
+    },
+    {
+      "ref": "step.uro.urine-check", "media": ["med.surgx.tpb-step-04", "med.surgx.tpb-clip-04"]
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.tpb-step-05", "med.surgx.tpb-clip-05"],
+      "emphasis": "Antibiotic per local policy; the transperineal route carries far less sepsis risk than transrectal."
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.tpb-step-06", "med.surgx.tpb-clip-06"],
+      "emphasis": "Lithotomy with the scrotum lifted and taped away from the perineum."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.tpb-step-07", "med.surgx.tpb-clip-07"],
+      "emphasis": "Clean the perineum widely; drape with the perineum exposed."
+    },
+    {
+      "ref": "step.tpb.block", "media": ["med.surgx.tpb-step-08", "med.surgx.tpb-clip-08"]
+    },
+    {
+      "ref": "step.tpb.probe", "media": ["med.surgx.tpb-step-09", "med.surgx.tpb-clip-09"]
+    },
+    {
+      "ref": "step.tpb.targeted", "media": ["med.surgx.tpb-step-10", "med.surgx.tpb-clip-10"]
+    },
+    {
+      "ref": "step.tpb.systematic", "media": ["med.surgx.tpb-step-11", "med.surgx.tpb-clip-11"]
+    },
+    {
+      "ref": "step.core.haemostasis", "media": ["med.surgx.tpb-step-12", "med.surgx.tpb-clip-12"],
+      "emphasis": "Firm pressure on the perineal puncture sites."
+    },
+    {
+      "ref": "step.core.specimen", "media": ["med.surgx.tpb-step-13", "med.surgx.tpb-clip-13"],
+      "emphasis": "Every core in its own labelled pot or cassette by site, read back."
+    },
+    {
+      "ref": "step.tpb.retention", "media": ["med.surgx.tpb-step-14", "med.surgx.tpb-clip-14"]
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.tpb-step-15", "med.surgx.tpb-clip-15"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.tpb-step-16", "med.surgx.tpb-clip-16"],
+      "emphasis": "Record the number of cores per site, the targets sampled and the follow-up date."
+    }
+  ],
+  "steps_local": {
+    "step.tpb.block": {
+      "id": "step.tpb.block",
+      "kind": "prep",
+      "title": "Perineal and periprostatic local anaesthetic",
+      "why": "A good block lets the biopsy be done awake in clinic; the periprostatic part numbs the capsule where the needle passes.",
+      "how": [
+        "Raise a skin weal at the planned entry points either side of the midline above the anus.",
+        "Under ultrasound, advance a long spinal needle and infiltrate along the track to the prostatic apex on each side.",
+        "Aspirate before each injection; wait a few minutes for the block to work."
+      ],
+      "structuresAtRisk": [
+        "Urethra",
+        "Rectum"
+      ],
+      "pitfalls": [
+        "Injecting into the urethra or the rectum.",
+        "Starting before the block works."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tpb.probe": {
+      "id": "step.tpb.probe",
+      "kind": "access",
+      "title": "Ultrasound probe and access device",
+      "why": "The transrectal probe only images; the needle goes through the perineal skin. The access device keeps each pass on a planned track.",
+      "how": [
+        "Insert the lubricated probe into the rectum and image the prostate in the transverse and sagittal planes.",
+        "Mount the stepper or the freehand access device so the needle path shows on the sagittal view.",
+        "Measure the prostate and note the urethra on the image."
+      ],
+      "structuresAtRisk": [
+        "Rectum"
+      ],
+      "pitfalls": [
+        "Losing the urethra on the image and passing through it."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tpb.targeted": {
+      "id": "step.tpb.targeted",
+      "kind": "resection",
+      "title": "Targeted cores from the MRI lesion",
+      "why": "The MRI lesion is the most likely site of significant cancer. Sampling it first, before bleeding blurs the view, gives the highest yield.",
+      "how": [
+        "Find the MRI lesion on ultrasound (cognitive or fusion registration).",
+        "Take 3 to 5 cores through the lesion, watching the needle enter the target on the sagittal view.",
+        "Put each target's cores in a pot labelled with that target."
+      ],
+      "structuresAtRisk": [
+        "Urethra",
+        "Bladder neck"
+      ],
+      "pitfalls": [
+        "Taking the systematic cores first and then not seeing the target."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tpb.systematic": {
+      "id": "step.tpb.systematic",
+      "kind": "resection",
+      "title": "Systematic template cores",
+      "why": "Cancers outside the MRI lesion are found by systematic sampling of each zone, from apex to base.",
+      "how": [
+        "Take systematic cores from each side per the local template (for example 12 to 24 cores by zone), including the anterior zones.",
+        "Avoid the urethra by keeping the needle lateral to it on the image.",
+        "Label each pot by zone."
+      ],
+      "structuresAtRisk": [
+        "Urethra",
+        "Seminal vesicles"
+      ],
+      "pitfalls": [
+        "Skipping the anterior zones, where transrectal biopsy often misses cancer."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tpb.retention": {
+      "id": "step.tpb.retention",
+      "kind": "bailout",
+      "title": "Retention or heavy bleeding after biopsy",
+      "why": "Swelling after many cores can block a big prostate. A patient who cannot pass urine should not go home without a catheter.",
+      "how": [
+        "Check the patient passes urine before discharge; scan the bladder if unsure.",
+        "If in retention, pass a urethral catheter and plan a trial without catheter.",
+        "Heavy haematuria with clots needs a three-way catheter and irrigation."
+      ],
+      "structuresAtRisk": [
+        "Bladder"
+      ],
+      "pitfalls": [
+        "Discharging a patient who has not voided."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

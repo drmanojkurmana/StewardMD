@@ -1,0 +1,173 @@
+{
+ "v": 1,
+ "module": "sgm-lung-cancer",
+ "subject": "ss-general-medicine",
+ "title": "Lung cancer and pulmonary nodules",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Lung cancer is the commonest cause of cancer death worldwide and smoking accounts for about 85% of cases. **Adenocarcinoma** (glandular cancer) is now the commonest histology, ahead of **squamous cell carcinoma** (SCC, a smoking linked type). **Small cell lung cancer** (SCLC, a fast growing neuroendocrine type) is 13 to 15%. 5-year survival stays under 25% overall but exceeds 60% in stage 1.",
+   "say": "Lung cancer is the commonest cause of cancer death worldwide, and smoking accounts for about eighty five percent of cases. Adenocarcinoma is now the commonest histology, and squamous cell carcinoma is the classic smoking linked type. Small cell lung cancer is thirteen to fifteen percent of cases, and it is a fast growing type. Five year survival is under twenty five percent overall, and it exceeds sixty percent in stage one disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Smoking** is the dominant cause, with risk rising with pack years (cigarettes per day times years smoked). Occupational exposure to asbestos, silica, arsenic and polycyclic hydrocarbons raises risk, and **radon gas** in poorly ventilated homes adds to it. Previous lung disease, family history and long term air pollution are minor risks. Quitting smoking reduces risk within years, although former smokers stay at higher risk than never smokers.",
+   "say": "Smoking is the dominant cause, and risk rises with pack years of cigarettes smoked. Occupational exposure to asbestos, silica, arsenic and polycyclic hydrocarbons also increases risk. Radon gas in poorly ventilated homes is an additional risk. Previous lung disease and family history are minor risks, and quitting smoking reduces risk within years.",
+   "vis": null
+  },
+  {
+   "tx": "**Adenocarcinoma** (glandular cancer) is commonest overall and in never smokers, and it often carries targetable mutations. **Squamous cell carcinoma** (SCC, a smoking linked type) arises centrally and can cavitate. **Small cell lung cancer** (SCLC, a fast growing neuroendocrine type) doubles quickly and metastasises early. **Large cell carcinoma** is a diagnosis of exclusion with large pleomorphic cells and a poor prognosis.",
+   "say": "Adenocarcinoma is the commonest type overall and in never smokers, and it often carries targetable mutations. Squamous cell carcinoma arises centrally, and cavitation is common in advanced lesions. Small cell lung cancer has early metastasis and a rapidly doubling course. Large cell carcinoma is a diagnosis of exclusion, and prognosis is poor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Histology",
+     "Pattern",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Adenocarcinoma",
+      "Commonest, never smokers",
+      "EGFR and ALK mutations"
+     ],
+     [
+      "Squamous cell",
+      "Central, cavitation",
+      "Less targetable"
+     ],
+     [
+      "Small cell",
+      "Fast doubling",
+      "Early metastasis"
+     ],
+     [
+      "Large cell",
+      "Diagnosis of exclusion",
+      "Poor prognosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **AJCC TNM system** (American Joint Committee on Cancer TNM, the eighth edition) stages non small cell lung cancer by tumour size, nodal spread and metastasis. Tumour staging uses greatest dimension, nodal staging uses ipsilateral, contralateral and distant nodes, and metastasis staging uses metastatic sites. Small cell lung cancer uses limited (one lung) versus extensive disease instead. **Positron emission tomography** (PET, metabolic imaging) precedes staging.",
+   "say": "The American Joint Committee TNM system is the staging system for non small cell lung cancer, and it uses tumour size, nodal spread and metastasis. Tumour staging is by greatest dimension, and nodal staging is by ipsilateral, contralateral and distant nodes. Small cell lung cancer is staged as limited versus extensive disease instead of TNM staging. Positron emission imaging is required before staging, and multidisciplinary input is required for the final decision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CT chest"
+     },
+     {
+      "id": "b",
+      "label": "PET scan"
+     },
+     {
+      "id": "c",
+      "label": "EBUS node sampling"
+     },
+     {
+      "id": "d",
+      "label": "TNM stage assigned"
+     },
+     {
+      "id": "e",
+      "label": "Multidisciplinary decision"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Paraneoplastic syndromes** (effects from tumour hormones) point to histology. Small cell cancer secretes antidiuretic hormone (ADH) causing **SIADH** (inappropriate hormone release with low sodium) and adrenocorticotrophic hormone (ACTH) causing Cushing syndrome. Squamous cell cancer secretes **parathyroid hormone related peptide** (PTHrP, a hormone raising calcium) causing hypercalcaemia. Clubbing (nail bed thickening) and hypertrophic osteoarthropathy (joint pain with periosteal reaction) occur mainly with non small cell cancers.",
+   "say": "Paraneoplastic syndromes are effects from tumour hormones, and they point to histology. Small cell cancer causes low sodium through antidiuretic hormone, and it causes Cushing syndrome through adrenocorticotrophic hormone. Squamous cell cancer causes high calcium through parathyroid hormone related peptide. Clubbing and hypertrophic osteoarthropathy occur mainly with non small cell cancers.",
+   "vis": null
+  },
+  {
+   "tx": "Central tumours cause cough, haemoptysis and post obstructive pneumonia (infection behind a blocked bronchus). Apical tumours cause **Pancoast tumour** (shoulder pain with Horner syndrome, a drooping eyelid and small pupil). Mediastinal spread causes **superior vena cava** (SVC, a large vein) obstruction with facial swelling. Cachexia (wasting) and clubbing are systemic clues, and hoarse voice suggests recurrent laryngeal nerve involvement.",
+   "say": "Central tumours cause cough, haemoptysis and post obstructive pneumonia. Apical tumours cause shoulder pain with Horner syndrome. Mediastinal spread causes superior vena cava obstruction with facial swelling. Cachexia and clubbing are systemic clues, and hoarse voice suggests recurrent laryngeal nerve involvement.",
+   "vis": null
+  },
+  {
+   "tx": "First tests are chest radiograph and contrast **computed tomography** (CT, cross sectional imaging) of chest and upper abdomen. **Sputum cytology** (examined sputum cells) can yield diagnosis in central tumours. **Endobronchial ultrasound** (EBUS, a scope sampling mediastinal nodes) with needle aspiration is the gold standard for nodal staging. Bronchoscopy remains first line for central lesions, and tumour markers guide follow up only.",
+   "say": "The first tests are chest radiograph and contrast imaging of the chest and upper abdomen. Sputum cytology can yield a diagnosis in central tumours. Endobronchial ultrasound with needle aspiration is the gold standard test for nodal staging. Bronchoscopy remains first line for central lesions, and tumour markers guide follow up only.",
+   "vis": null
+  },
+  {
+   "tx": "Resectable non small cell cancer needs **lobectomy** (removal of one lung lobe) with nodal assessment. Adjuvant chemotherapy (additional drugs after surgery) and **targeted drugs** (EGFR, ALK, ROS1 inhibitors) improve survival in mutation positive tumours. **Immunotherapy** (checkpoint blockers) is first line when PD L1 expression is high, as NCCN advises. Palliative radiotherapy or chemotherapy is used in metastatic disease.",
+   "say": "Resectable non small cell cancer needs lobectomy with nodal assessment. Adjuvant chemotherapy and targeted drugs improve survival in mutation positive tumours. Immunotherapy is first line when PD L one expression is high, as the National Comprehensive Cancer Network advises. Palliative radiotherapy or chemotherapy is used in metastatic disease.",
+   "vis": null
+  },
+  {
+   "tx": "Small cell lung cancer is treated with chemotherapy plus radiotherapy in limited disease and chemotherapy alone in extensive disease. **Prophylactic cranial irradiation** (brain radiation preventing metastases) improved survival in past trials but is now used selectively. 5-year survival is under 5% in extensive disease. Second line options are limited, and recurrence is common within months of response.",
+   "say": "Small cell lung cancer is treated with chemotherapy plus radiotherapy in limited disease. Chemotherapy alone is used in extensive disease, and brain radiation is now used selectively. Five year survival is under five percent in extensive disease. Second line options are limited, and recurrence is common within months of response.",
+   "vis": null
+  },
+  {
+   "tx": "Complications are cachexia (wasting), SVC obstruction, pleural effusion and bone metastases causing pain. **EGFR mutation testing** (a gene test guiding targeted drugs) is mandatory before chemotherapy in non smokers. Exam trap: small cell histology rarely is resected, and a **solitary pulmonary nodule** under 8 mm in a low risk patient can be followed by imaging. Never smokers still develop adenocarcinoma, so smoking history never excludes lung cancer.",
+   "say": "Complications are cachexia, vena cava obstruction, effusion and bone metastases. Mutation testing is mandatory before chemotherapy in non smokers. Small cell histology is rarely resected, and a small solitary nodule can be followed by imaging in low risk patients. Smoking history never excludes lung cancer, and never smokers still develop adenocarcinoma.",
+   "vis": null
+  },
+  {
+   "tx": "High yield numbers: smoking causes about 85% of cases. Solitary nodules under 8 mm in low risk patients need imaging follow up. **EBUS sampling** is the gold standard for nodal staging. SIADH and ACTH link to small cell cancer, PTHrP links to squamous cancer. **Lobectomy** treats resectable non small cell cancer, and PD L1 status selects immunotherapy.",
+   "say": "Smoking causes about eighty five percent of cases, and never smokers still develop adenocarcinoma. Solitary nodules under eight millimetres can be followed by imaging in low risk patients. Endobronchial ultrasound sampling is the gold standard test for nodal staging. Lobectomy is the treatment for resectable non small cell cancer, and PD L one status selects immunotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "High yield point",
+     "Value or rule"
+    ],
+    "rows": [
+     [
+      "Smoking attribution",
+      "About 85 percent"
+     ],
+     [
+      "Nodule follow up threshold",
+      "8 millimetres"
+     ],
+     [
+      "Nodal gold standard",
+      "EBUS sampling"
+     ],
+     [
+      "SIADH and ACTH histology",
+      "Small cell"
+     ],
+     [
+      "PTHrP histology",
+      "Squamous cell"
+     ],
+     [
+      "Resectable surgery",
+      "Lobectomy"
+     ],
+     [
+      "Immunotherapy selection",
+      "PD L1 status"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

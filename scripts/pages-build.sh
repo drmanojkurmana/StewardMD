@@ -19,10 +19,15 @@
 # only in the Pages build copy. test/pages-output.test.mjs parses the list
 # below and fails CI before the cap is crossed again.
 #
+# atlas/ is REMOVED (owner 2026-11-17): RadioAnatome files live on the public media bucket
+# (media.stewardmd.in, tools/atlas-media-sync.mjs); Pages no longer serves them, which frees
+# ~5,200 files under the 20,000-file cap. atlas.js / atlas3d.js load them from the media host
+# with a fallback to the old relative path, and the native bundle is unaffected (build-www.sh
+# copies the JSON it needs from the repo, never from Pages).
+#
 # KEPT on purpose (runtime-fetched from Pages, do not add here):
 #   functions/ + connect-agent/ (functions/api/connect imports
-#   connect-agent/manifest/*.mjs), atlas/ (.webp slices + 3d .bin.gz are
-#   served from Pages), kb/dist + runtime kb/ dirs, prep/lessons,
+#   connect-agent/manifest/*.mjs), kb/dist + runtime kb/ dirs, prep/lessons,
 #   prep/overlays, prep/bank, prep/art (logos fetched by prep.js), data/
 #   (functions/ also imports data/interaction-rules.json at bundle time),
 #   assets/, vendor/, tokos/ + tokos-models/ (tokos-loader.js loads
@@ -37,9 +42,11 @@ cd "$(dirname "$0")/.."
 
 # data/history (Today in Medical History: 12 month files + 338 banner pictures) is read only from the app's own
 # www/ bundle (build-www.sh) and reaches phones by OTA from R2 (ota-stage.mjs), never from Pages.
+# media/anim, clinix/media and prep/lessons/media: the app bundles them or fetches them from R2 via
+# /api/prep/bank/app/; nothing loads them from Pages, and with them the deploy crossed 20,000 files (2026-11-24).
 
 rm -rf \
-  test docs vault android ios \
+  test docs vault android ios atlas \
   worker prep-arena-worker voice-worker \
   kb/reference kb/validation kb/diseases kb/tools \
   prep/fill prep/screen prep/build \
@@ -47,7 +54,12 @@ rm -rf \
   local-plugins Packages atlas-pipeline scrollcraft \
   store-assets voice-service voice-benchmark \
   prompts infra qa-report archive .fleet-reports .github .planning .claude \
-  data/history
+  data/history \
+  media/anim clinix/media prep/lessons/media \
+  surgx/media \
+  kardia/media/clips kardia/learn/diagrams \
+  tokos/media tokos/learn \
+  ophthalmos/learn/media ophthalmos/learn/diagrams
 
 # Pages rejects an output directory with broken symlinks ("build output directory contains links to files that
 # can't be accessed", build log 2026-10-14 20:16Z). npm clean-install links file: dependencies such as

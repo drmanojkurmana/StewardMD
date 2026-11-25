@@ -1,9 +1,10 @@
 {
-  "_comment": "Shared urology steps (endoscopic bladder access, resection platform, chip evacuation, perforation check, three-way catheter). Used by TURP, TURBT and suprapubic catheter insertion. Procedure-only steps live in each procedure's steps_local.",
+  "_comment": "Shared urology steps (endoscopic bladder access, resection platform, chip evacuation, perforation check, three-way catheter). Also urine check, robot docking, leak test and catheter plan. Used by TURP, TURBT and suprapubic catheter insertion. Procedure-only steps live in each procedure's steps_local.",
   "schemaVersion": 1,
   "steps": {
     "step.uro.cystoscopy": {
-      "id": "step.uro.cystoscopy", "kind": "access",
+      "id": "step.uro.cystoscopy",
+      "kind": "access",
       "title": "Urethrocystoscopy and systematic bladder inspection",
       "why": "Every endoscopic bladder operation starts with a complete map. A tumour, stone, diverticulum or ureteric orifice that is not seen at the start is the one that gets resected, missed or perforated later.",
       "how": [
@@ -12,15 +13,22 @@
         "Inspect the entire bladder systematically with the 30 and 70 degree lenses: dome, walls, trigone, both ureteric orifices and the bladder neck, with the bladder moderately filled.",
         "Record the findings as a diagram before any resection begins."
       ],
-      "structuresAtRisk": ["Urethra (false passage)", "Ureteric orifices"],
+      "structuresAtRisk": [
+        "Urethra (false passage)",
+        "Ureteric orifices"
+      ],
       "pitfalls": [
         "Missing the dome and the anterior wall because the bladder was overfilled or the lens never rotated upwards.",
         "Forcing the instrument through a stricture or a high bladder neck and creating a false passage."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.resectoscope": {
-      "id": "step.uro.resectoscope", "kind": "access", "critical": true,
+      "id": "step.uro.resectoscope",
+      "kind": "access",
+      "critical": true,
       "title": "Resectoscope set-up, irrigation fluid and urethral calibration",
       "why": "The choice of energy and irrigation fluid decides whether a patient can develop TUR syndrome, and an under-calibrated urethra is where post-operative strictures come from.",
       "how": [
@@ -29,15 +37,21 @@
         "Lubricate generously and calibrate the urethra gently with sounds or an Otis urethrotome if the sheath does not pass easily; do not force the sheath.",
         "Introduce the sheath with the obturator, then the working element under vision, and check the loop, the return of fluid and the diathermy settings before the first cut."
       ],
-      "structuresAtRisk": ["Urethra and meatus", "Bladder neck"],
+      "structuresAtRisk": [
+        "Urethra and meatus",
+        "Bladder neck"
+      ],
       "pitfalls": [
         "Using saline with a monopolar loop. It does not cut, and the team turns the power up instead of checking the fluid.",
         "A sheath forced through a tight meatus, leaving a meatal or bulbar stricture."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.chip-evacuation": {
-      "id": "step.uro.chip-evacuation", "kind": "resection",
+      "id": "step.uro.chip-evacuation",
+      "kind": "resection",
       "title": "Chip evacuation and specimen collection",
       "why": "Retained chips block the catheter and cause clot retention in recovery, and every chip is tissue the pathologist needs for staging or for an incidental cancer.",
       "how": [
@@ -45,15 +59,21 @@
         "Re-inspect the bladder for remaining chips, especially in the dome and behind the bladder neck.",
         "Collect all fragments for histology; label separately any specimen that needs its own report."
       ],
-      "structuresAtRisk": ["Bladder wall (vigorous evacuation through a perforation)"],
+      "structuresAtRisk": [
+        "Bladder wall (vigorous evacuation through a perforation)"
+      ],
       "pitfalls": [
         "Aggressive Ellik pressure when a perforation is suspected, pushing fluid and chips outside the bladder.",
         "Declaring the bladder empty without looking."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.perforation-check": {
-      "id": "step.uro.perforation-check", "kind": "checkpoint", "critical": true,
+      "id": "step.uro.perforation-check",
+      "kind": "checkpoint",
+      "critical": true,
       "title": "Final inspection: perforation, orifices and landmarks",
       "why": "A perforation recognised in theatre changes the plan and is usually manageable; one recognised in recovery presents as abdominal distension, pain and fluid overload, and costs time the patient may not have.",
       "how": [
@@ -62,15 +82,23 @@
         "Feel the abdomen under the drapes: new distension or firmness suggests extravasation.",
         "State the findings to the anaesthetist: extent of resection, any perforation, and the time on irrigation."
       ],
-      "structuresAtRisk": ["Prostatic capsule", "Bladder wall and peritoneum", "Ureteric orifices", "External urethral sphincter"],
+      "structuresAtRisk": [
+        "Prostatic capsule",
+        "Bladder wall and peritoneum",
+        "Ureteric orifices",
+        "External urethral sphincter"
+      ],
       "pitfalls": [
         "Finishing the case because it is nearly finished when a perforation is seen.",
         "Not telling the anaesthetist, who is the person most likely to see the first sign of absorption."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.three-way-catheter": {
-      "id": "step.uro.three-way-catheter", "kind": "closure",
+      "id": "step.uro.three-way-catheter",
+      "kind": "closure",
       "title": "Three-way catheter and continuous irrigation",
       "why": "After a resection the bladder must stay empty and free of clot while the raw surface stops oozing. A blocked catheter in recovery means clot retention, pain and secondary bleeding.",
       "how": [
@@ -79,15 +107,20 @@
         "Start continuous irrigation with normal saline and confirm a light pink return before leaving theatre.",
         "Hand over the irrigation plan and the input-output chart explicitly to the recovery and ward nurses."
       ],
-      "structuresAtRisk": ["Prostatic fossa or resection bed (catheter tip passing under the trigone)"],
+      "structuresAtRisk": [
+        "Prostatic fossa or resection bed (catheter tip passing under the trigone)"
+      ],
       "pitfalls": [
         "The catheter tip passing into a false passage under the bladder neck after a TURP; the balloon is then inflated in the prostatic fossa.",
         "Irrigation started without anyone recording input and output, so retained fluid goes unnoticed."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.fluoro-setup": {
-      "id": "step.uro.fluoro-setup", "kind": "prep",
+      "id": "step.uro.fluoro-setup",
+      "kind": "prep",
       "title": "Fluoroscopy, contrast and radiation safety set-up",
       "why": "Upper tract endourology is done by watching wires and stents you cannot see directly. A C-arm that cannot reach the kidney, or a team without lead, turns a routine case into blind instrumentation or needless radiation.",
       "how": [
@@ -96,15 +129,21 @@
         "Everyone in the room wears lead and a thyroid shield; use pulsed, low-dose fluoroscopy, collimate, and keep hands out of the beam.",
         "Have dilute contrast drawn up and labelled, and save images of every key moment for the record."
       ],
-      "structuresAtRisk": ["Patient and staff (radiation exposure)", "Fetus in an unrecognised pregnancy"],
+      "structuresAtRisk": [
+        "Patient and staff (radiation exposure)",
+        "Fetus in an unrecognised pregnancy"
+      ],
       "pitfalls": [
         "Discovering after draping that the table bar or the leg holder sits over the kidney.",
         "Continuous fluoroscopy while the surgeon looks at the endoscopy screen."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.retrograde-pyelogram": {
-      "id": "step.uro.retrograde-pyelogram", "kind": "checkpoint",
+      "id": "step.uro.retrograde-pyelogram",
+      "kind": "checkpoint",
       "title": "Retrograde pyelogram: map the ureter and collecting system",
       "why": "The pyelogram shows where the obstruction is, how the ureter runs and how the calyces are arranged. Every later decision, from wire passage to stent length to puncture site, is made on this map.",
       "how": [
@@ -113,15 +152,22 @@
         "Note the level of obstruction, kinks, strictures, duplex systems and the calyceal anatomy, and save the images.",
         "If pus or cloudy urine drains from the catheter, stop the injection and treat it as an infected obstructed system."
       ],
-      "structuresAtRisk": ["Ureteric orifice and intramural ureter (submucosal injection)", "Collecting system (pyelovenous backflow and sepsis)"],
+      "structuresAtRisk": [
+        "Ureteric orifice and intramural ureter (submucosal injection)",
+        "Collecting system (pyelovenous backflow and sepsis)"
+      ],
       "pitfalls": [
         "Forceful injection into an obstructed, infected kidney, followed by septic shock in recovery.",
         "Injecting through a catheter that has tracked submucosally, producing a contrast blush instead of a ureterogram."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.safety-guidewire": {
-      "id": "step.uro.safety-guidewire", "kind": "access", "critical": true,
+      "id": "step.uro.safety-guidewire",
+      "kind": "access",
+      "critical": true,
       "title": "Safety guidewire into the renal pelvis",
       "why": "The safety wire is the road home. If the ureter is perforated, avulsed or bleeding, a wire across it lets you stent and finish safely; without one, the next step may be a nephrostomy or open repair.",
       "how": [
@@ -130,15 +176,22 @@
         "Once across, keep the wire fixed at the urethra, clipped to the drapes, and tell the scrub practitioner that it must not be removed.",
         "Confirm the wire position on fluoroscopy at intervals, particularly after each instrument exchange."
       ],
-      "structuresAtRisk": ["Ureter (perforation, submucosal tunnel)", "Renal parenchyma (wire through a calyx)"],
+      "structuresAtRisk": [
+        "Ureter (perforation, submucosal tunnel)",
+        "Renal parenchyma (wire through a calyx)"
+      ],
       "pitfalls": [
         "Pushing a stiff wire against an impacted stone and passing it outside the ureter.",
         "Losing the wire with the scope during an exchange, and only noticing when it is needed."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.infected-system-bailout": {
-      "id": "step.uro.infected-system-bailout", "kind": "bailout", "critical": true,
+      "id": "step.uro.infected-system-bailout",
+      "kind": "bailout",
+      "critical": true,
       "title": "Pus in an obstructed system: drain and stop",
       "why": "An infected, obstructed kidney is a urological emergency. Instrumenting the stone at this point pushes bacteria into the blood under pressure and can kill; drainage alone treats the sepsis, and the stone can wait.",
       "how": [
@@ -147,15 +200,21 @@
         "Decompress with a ureteric stent, or a percutaneous nephrostomy if retrograde access fails or is unsafe, at the lowest irrigation pressure possible.",
         "Tell the anaesthetist, continue antibiotics against the culture and local policy, and plan definitive treatment after the infection has resolved."
       ],
-      "structuresAtRisk": ["Patient (urosepsis and septic shock)"],
+      "structuresAtRisk": [
+        "Patient (urosepsis and septic shock)"
+      ],
       "pitfalls": [
         "Treating the stone 'because we are already there'.",
         "Running high-pressure irrigation in an infected system to get a better view."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.lithotripsy": {
-      "id": "step.uro.lithotripsy", "kind": "resection", "critical": true,
+      "id": "step.uro.lithotripsy",
+      "kind": "resection",
+      "critical": true,
       "title": "Intracorporeal lithotripsy",
       "why": "Breaking the stone is the point of the operation, but the energy that breaks stone also cuts urothelium, guidewires and scopes. Control of the energy source and a clear view decide whether the ureter or kidney is injured.",
       "how": [
@@ -164,15 +223,22 @@
         "Choose fragmentation for removal or dusting for spontaneous passage to suit the stone and the access, and work at the lowest irrigation pressure that gives a view.",
         "Pause when the view is lost to blood or dust; firing blind is how the ureter is perforated."
       ],
-      "structuresAtRisk": ["Ureteric wall and urothelium", "Renal pelvis and papillae", "Endoscope working channel (fibre fired inside the scope)"],
+      "structuresAtRisk": [
+        "Ureteric wall and urothelium",
+        "Renal pelvis and papillae",
+        "Endoscope working channel (fibre fired inside the scope)"
+      ],
       "pitfalls": [
         "Firing the laser with the fibre tip inside the working channel, destroying the scope.",
         "Chasing a fragment up into the kidney with continuous high-flow irrigation and raised intrarenal pressure."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.fragment-clearance": {
-      "id": "step.uro.fragment-clearance", "kind": "checkpoint",
+      "id": "step.uro.fragment-clearance",
+      "kind": "checkpoint",
       "title": "Fragment retrieval and stone-free assessment",
       "why": "Residual fragments grow, cause colic and bring the patient back. The end of a stone operation is a deliberate decision about what has been cleared and what remains, recorded and planned for.",
       "how": [
@@ -181,15 +247,22 @@
         "Keep a fragment for stone analysis; it guides metabolic work-up and prevention.",
         "Record the stone-free status honestly: stone-free, small residual fragments, or significant residual stone, with the plan for each."
       ],
-      "structuresAtRisk": ["Ureter (avulsion or intussusception with a trapped basket)", "Infundibula (forced extraction)"],
+      "structuresAtRisk": [
+        "Ureter (avulsion or intussusception with a trapped basket)",
+        "Infundibula (forced extraction)"
+      ],
       "pitfalls": [
         "Pulling an entrapped basket and stone against resistance. Release the stone or fragment it in the basket instead.",
         "Declaring the patient stone-free on fluoroscopy alone when the stone is radiolucent."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.dj-stent": {
-      "id": "step.uro.dj-stent", "kind": "reconstruction", "critical": true,
+      "id": "step.uro.dj-stent",
+      "kind": "reconstruction",
+      "critical": true,
       "title": "Double-J stent placement and position check",
       "why": "A stent drains an obstructed or injured ureter, but a stent in the wrong place either drains nothing or causes pain, haematuria and migration. Its position is confirmed in theatre, not discovered on the ward.",
       "how": [
@@ -198,15 +271,22 @@
         "Withdraw the wire until the proximal coil forms in the pelvis or upper calyx, then release the distal coil in the bladder, short of crossing the midline.",
         "Confirm both coils on a saved image and drainage of urine from the distal end before removing the scope; leave a string only if removal by the patient or ward is planned and documented."
       ],
-      "structuresAtRisk": ["Renal parenchyma and pelvis (proximal end pushed through)", "Ureteric orifice and bladder neck (distal coil irritating the trigone)"],
+      "structuresAtRisk": [
+        "Renal parenchyma and pelvis (proximal end pushed through)",
+        "Ureteric orifice and bladder neck (distal coil irritating the trigone)"
+      ],
       "pitfalls": [
         "Pulling the wire out before the proximal coil is seen in the pelvis, leaving the stent in the mid-ureter.",
         "A distal coil left in the ureter, which is hard to retrieve with a flexible cystoscope."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.stent-register": {
-      "id": "step.uro.stent-register", "kind": "checkpoint", "critical": true,
+      "id": "step.uro.stent-register",
+      "kind": "checkpoint",
+      "critical": true,
       "title": "Stent register and removal plan",
       "why": "A forgotten stent encrusts, obstructs and can cost the kidney. The only reliable defence is to record every stent, with a named date for its removal or change, before the patient leaves theatre.",
       "how": [
@@ -215,15 +295,21 @@
         "Tell the patient, in plain language and in writing, that they have a stent, why, and when it must come out.",
         "Note stent symptoms the patient should expect and the warning signs that need review."
       ],
-      "structuresAtRisk": ["Kidney (encrusted, obstructed forgotten stent)"],
+      "structuresAtRisk": [
+        "Kidney (encrusted, obstructed forgotten stent)"
+      ],
       "pitfalls": [
         "Relying on the discharge letter to generate the removal appointment.",
         "A patient who leaves the hospital unaware that a stent is in place."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.scrotal-imaging-check": {
-      "id": "step.uro.scrotal-imaging-check", "kind": "checkpoint", "critical": true,
+      "id": "step.uro.scrotal-imaging-check",
+      "kind": "checkpoint",
+      "critical": true,
       "title": "Scrotal ultrasound and examination reviewed before incision",
       "why": "A hydrocele, a varicocele or a 'benign' swelling can hide a testicular tumour, and the operation planned for a benign lesion is the wrong one for a cancer. The images are reviewed before the patient is asleep.",
       "how": [
@@ -232,15 +318,21 @@
         "For an intratesticular mass, confirm tumour markers have been drawn before surgery and that the approach is inguinal.",
         "If the testis cannot be assessed clinically or on imaging, stop and get the ultrasound before proceeding."
       ],
-      "structuresAtRisk": ["Testis (unrecognised tumour)", "Scrotal skin (tumour seeding through a scrotal incision)"],
+      "structuresAtRisk": [
+        "Testis (unrecognised tumour)",
+        "Scrotal skin (tumour seeding through a scrotal incision)"
+      ],
       "pitfalls": [
         "Operating on an adult hydrocele through the scrotum without an ultrasound of the testis behind it.",
         "Accepting a report that describes only the side of interest."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
     "step.uro.cord-delivery": {
-      "id": "step.uro.cord-delivery", "kind": "dissection",
+      "id": "step.uro.cord-delivery",
+      "kind": "dissection",
       "title": "Delivering and isolating the spermatic cord",
       "why": "Every inguinal or subinguinal cord operation depends on lifting the whole cord cleanly into the wound. Taking only part of it leaves veins or tumour behind, and rough handling injures the ilioinguinal or genital nerves, the vas and the testicular artery.",
       "how": [
@@ -249,12 +341,108 @@
         "Identify and protect the ilioinguinal nerve on the cord surface and the genital branch of the genitofemoral nerve; retract them out of the way rather than including them.",
         "Keep the vas deferens in view throughout; palpate it as the firm cord within the cord."
       ],
-      "structuresAtRisk": ["Ilioinguinal nerve", "Genital branch of the genitofemoral nerve", "Vas deferens", "Testicular artery", "Floor of the inguinal canal"],
+      "structuresAtRisk": [
+        "Ilioinguinal nerve",
+        "Genital branch of the genitofemoral nerve",
+        "Vas deferens",
+        "Testicular artery",
+        "Floor of the inguinal canal"
+      ],
       "pitfalls": [
         "Leaving a strand of cord or cremaster outside the sling, with veins or tumour in it.",
         "Catching the ilioinguinal nerve in the sling and causing chronic groin pain."
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.uro.urine-check": {
+      "id": "step.uro.urine-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Sterile urine before instrumentation",
+      "why": "Instrumenting infected urine can cause urosepsis within hours. A positive culture is treated first; an infected obstructed system is drained, not operated on.",
+      "how": [
+        "Check the most recent urine culture and that any infection has been treated with a sensitive antibiotic.",
+        "Ask about fever, rigors or new symptoms today; a febrile patient with an obstructed system is drained (stent or nephrostomy) and the definitive operation waits.",
+        "Record the culture result and the antibiotic plan on the checklist."
+      ],
+      "structuresAtRisk": [
+        "Patient (urosepsis)"
+      ],
+      "pitfalls": [
+        "Proceeding on an old or missing culture.",
+        "Treating a febrile obstructed kidney as an elective case."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.uro.robot-dock": {
+      "id": "step.uro.robot-dock",
+      "kind": "access",
+      "title": "Robot docking and instrument check",
+      "why": "The patient cannot be moved once the robot is docked, and steep positions load the face, shoulders and legs. Docking is a team step with an undocking plan for emergencies.",
+      "how": [
+        "Confirm the final table position before docking; check the face, eyes, arms and legs are padded and nothing rests on the patient.",
+        "Dock the arms to the ports with the remote centre at the abdominal wall, and insert every instrument under direct camera vision.",
+        "Rehearse the emergency undock: who undocks, in what order, and where the open set is."
+      ],
+      "structuresAtRisk": [
+        "Bowel and vessels (blind instrument insertion)",
+        "Face, eyes and limbs (pressure, steep position)"
+      ],
+      "pitfalls": [
+        "Moving the table after docking.",
+        "Inserting an instrument without seeing its tip."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.uro.bladder-leak-test": {
+      "id": "step.uro.bladder-leak-test",
+      "kind": "checkpoint",
+      "title": "Bladder or anastomosis leak test",
+      "why": "A leak found on the table is fixed with one stitch; a leak found on day three is a urinoma, ileus and a longer catheter.",
+      "how": [
+        "Fill the bladder through the catheter with about 150 to 200 ml of saline.",
+        "Watch the suture line under the camera or directly for leaking fluid.",
+        "Place an extra suture at any leak and test again; record the result."
+      ],
+      "structuresAtRisk": [
+        "Anastomosis",
+        "Bladder closure"
+      ],
+      "pitfalls": [
+        "Overfilling the bladder and disrupting a fresh anastomosis.",
+        "Not recording a leak that was repaired."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.uro.catheter-plan": {
+      "id": "step.uro.catheter-plan",
+      "kind": "closure",
+      "title": "Catheter secured and plan recorded",
+      "why": "After urethral or bladder surgery the catheter splints the repair. An early or accidental removal can undo the operation.",
+      "how": [
+        "Secure the catheter to the thigh without tension; note the size, balloon volume and type.",
+        "Write how long it stays and how it comes out (trial without catheter, or a contrast study first).",
+        "Tell the ward that the catheter must not be removed or changed without the urology team."
+      ],
+      "structuresAtRisk": [
+        "Urethra",
+        "Repair or anastomosis"
+      ],
+      "pitfalls": [
+        "An unsecured catheter pulled out in recovery.",
+        "No written removal plan."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

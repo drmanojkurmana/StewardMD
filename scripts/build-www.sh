@@ -135,6 +135,8 @@ if [ -d data/fda-labels ]; then mkdir -p "$WWW/data/fda-labels"; cp data/fda-lab
 # India access on Clinical Bulletins cards (bulletins.js): NLEM 2022 (scripts/india/build_nlem.py) and, when the
 # owner has run scripts/india/fetch-janaushadhi.mjs, the Jan Aushadhi price list. Read offline from the bundle.
 if ls data/india/*.json >/dev/null 2>&1; then mkdir -p "$WWW/data/india"; cp data/india/*.json "$WWW/data/india/"; fi
+# ResearchMD consent templates (research-screen-start.js & research-screen-pubconsent.js).
+[ -f data/research-consent-templates.json ] && mkdir -p "$WWW/data" && cp data/research-consent-templates.json "$WWW/data/"
 
 # ── 4c. WardSynQ clinical surface ─────────────────────────────────────────────
 # The EMR surface and the modules it imports. Copied WHOLE rather than cherry-picked:
@@ -175,6 +177,9 @@ done
 [ -d kb/dist/v2 ] && mkdir -p "$WWW/kb/dist/v2" && cp kb/dist/v2/*.json "$WWW/kb/dist/v2/"
 # Image Library index (tools/build-image-library.mjs): one small JSON per system, lazy loaded by image-library.js.
 [ -d kb/dist/imglib ] && mkdir -p "$WWW/kb/dist/imglib" && cp kb/dist/imglib/*.json "$WWW/kb/dist/imglib/"
+# Teaching animations (still WebP poster + AV1 and HEVC MP4) shared by every module; kb/imglib/gifs.json lists them for the Image Library.
+# With SMD_REMOTE_MEDIA=1 they are left out below and load from R2 (app/media/anim/).
+[ -d media/anim ] && mkdir -p "$WWW/media/anim" && cp media/anim/*.webp media/anim/*.mp4 "$WWW/media/anim/"
 # Patient handouts: 64 on-demand buckets (kb/tools/build-handouts.mjs), plain JSON.
 [ -d kb/dist/handouts ] && mkdir -p "$WWW/kb/dist/handouts" && cp kb/dist/handouts/*.json "$WWW/kb/dist/handouts/"
 [ -d kb/treatments ] && cp -R kb/treatments/. "$WWW/kb/treatments/"
@@ -318,6 +323,8 @@ if [ -f prep/taxonomy.json ]; then
   [ -d prep/nucleus360 ] && mkdir -p "$WWW/prep/nucleus360" && cp prep/nucleus360/*.json "$WWW/prep/nucleus360/"
   # Illustrations (home sky, brand banner, logo icon, onboarding, finish screens, Arena lobby, empty states).
   [ -d prep/art ] && mkdir -p "$WWW/prep/art" && for a in prep/art/*.webp; do case "$a" in *-4k.webp) ;; *) cp "$a" "$WWW/prep/art/";; esac; done  # 4K masters and PNGs stay out of the app bundle
+  # Startup logo reveal clips (vertical + horizontal MP4s and start/end stills, prep-startup.js).
+  [ -d prep/startup ] && mkdir -p "$WWW/prep/startup" && cp prep/startup/* "$WWW/prep/startup/" 2>/dev/null || true
   BV=$(sed -n 's/.*VER = G.SMD_PREP_BANK_VER || "\(v[0-9]*\)".*/\1/p' prep.js); for ix in prep/bank/${BV:-v1}/*/index.json; do [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
   # The bank manifest (a few KB): prep.js stamps cached module files with each subject's bytes from it, so a module file
   # republished in place (explanations added) is fetched again instead of served from IndexedDB forever.
@@ -375,10 +382,20 @@ fi
 if [ "${SMD_REMOTE_MEDIA:-}" = "1" ]; then
   find "$WWW/prep/lessons/v1" -name '*.json' ! -name 'index.json' -delete 2>/dev/null || true
   find "$WWW/prep/lessons/media" -type f \( -name '*.svg' -o -name '*.webp' \) -delete 2>/dev/null || true
-  rm -rf "$WWW/clinix/media/practicals" "$WWW/clinix/media/skills"
+  rm -rf "$WWW/clinix/media/practicals" "$WWW/clinix/media/skills" "$WWW/media/anim"
+  # Pictures and clips only. Every .json stays (manifests and credits). SurgX GIFs stay (three files).
+  # ProbeLab stays: its iframe loads hashed scripts that fetch same-origin files and never see this loader.
+  # Tokos explorer mechanism frames stay: they are not under tokos/media or tokos/learn.
+  find "$WWW/surgx/media" -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \) -delete 2>/dev/null || true
+  find "$WWW/kardia/media/clips" -type f -name '*.mp4' -delete 2>/dev/null || true
+  find "$WWW/kardia/learn/diagrams" -type f -name '*.svg' -delete 2>/dev/null || true
+  find "$WWW/tokos/media" -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.svg' \) -delete 2>/dev/null || true
+  find "$WWW/tokos/learn" -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.svg' \) -delete 2>/dev/null || true
+  find "$WWW/ophthalmos/learn/media" -type f \( -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' -o -name '*.svg' \) -delete 2>/dev/null || true
+  find "$WWW/ophthalmos/learn/diagrams" -type f \( -name '*.svg' -o -name '*.webp' -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \) -delete 2>/dev/null || true
   grep -q "window.SMD_REMOTE_MEDIA_ON=0;" "$WWW/index.html" || { echo "  remote media: index.html has no SMD_REMOTE_MEDIA_ON flag"; exit 1; }
   sed -i.bak 's/window\.SMD_REMOTE_MEDIA_ON=0;/window.SMD_REMOTE_MEDIA_ON=1;/' "$WWW/index.html" && rm -f "$WWW/index.html.bak"
-  echo "  remote media: lessons, lesson diagrams and CliniX photos load from R2 (SMD_REMOTE_MEDIA_ON=1)"
+  echo "  remote media: lessons, diagrams, CliniX photos, SurgX, Kardia clips, Tokos and Ophthalmos pictures load from R2 (SMD_REMOTE_MEDIA_ON=1)"
 fi
 
 # ── 5a. No textbook citations or page numbers in the shipped bundle (copyright, owner 2026-09-24) ─────

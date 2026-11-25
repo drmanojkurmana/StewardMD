@@ -363,3 +363,402 @@ as CliniX `.cx-hero-close`), the monogram inline with the live-text wordmark (`.
 heading and one grouped card (`.sgx-secs`) of rows with icon tiles (`SECTIONS[].icon`). The educational-content
 note moved to the footer disclaimer. Inner screens still use `head()` and its sticky bar. CSS block at the end
 of `surgx.css`.
+
+## YouTube videos in Procedures (2026-11-20, owner experiment)
+Owner asked for YouTube surgery videos in the Steps tab while per-step 3D images (Gemini) are being made.
+Appendicectomy first: three `kind:"embed"` entries in `surgx/media/manifest.json` (`med.surgx.appendix-video-*`,
+ids `fpTqrJVSxpI`, `H7LyCwzaZEo`; `D1NmYz66D9w` removed 2026-11-20 as an audio podcast with no footage), listed in the procedure's `media.steps`.
+- `surgx-screens.js` `mediaBlock()` plays an embed through the CliniX shim `https://stewardmd.in/_site/yt?v=`
+  (YouTube rejects the `capacitor://` origin). Each id must be in `_site/yt.html` `ALLOW`, or the shim refuses it.
+- Licence gate: a cleared embed must pass `isEmbeddable()` AND be in the shim allow-list
+  (`test/surgx-content.test.mjs`). Embedding was confirmed allowed by the uploader via YouTube oEmbed (200, not 401).
+  The Nucleus Medical Media animations refuse embedding (401), so they are not used.
+- **Not clinically vetted.** The videos were chosen by title and channel; nobody has watched them for accuracy.
+  Videos are whole-operation, not per step: chapter timestamps could not be read from here.
+- Revert: delete the three media entries and their ids from `media.steps`.
+- The shim change is live only once `main` deploys; the app change needs build-www + native rebuild.
+
+## Step pictures (2026-11-20, owner experiment)
+Appendicectomy: one AI-generated 3D teaching picture per step (19), made in Gemini from the prompt in this session,
+reviewed only by eye. `surgx/media/appendicectomy/*.webp` (1200x900, 852 KB total), registry ids
+`med.surgx.app-step-01..19`. Credit line reads "StewardMD original" (owner 2026-11-20); the AI origin is kept in
+the entry's `generator` field, not shown. `mediaBlock()` prints the licence only when it differs from the attribution.
+- Pictures attach to the PROCEDURE's step reference (`{ "ref": ..., "media": [id] }`), not the shared step, because a
+  shared step serves many procedures. `compileProcedure()` concatenates `ref.media` onto the step's own `media`.
+- `renderStep()` renders step media when `smd_surgx_step_images` is on (def true, `?surgxstepimg=0` hides).
+- Tests: `test/surgx-content.test.mjs` (cleared image must be StewardMD-produced and the file must exist; step-ref
+  media ids must exist), `test/run-surgx-ui.mjs` (19 distinct pictures, every file loads).
+- Round 2 (owner, same day): 04, 14, 15, 16 regenerated and shipped as `*-v2.webp` (new names so no cached copy is
+  shown). Clinician review of all 19 is still owed. 04 still has the arms out.
+- **The prompt template and every lesson are in [[SURGX-image-prompt]]. Build the next procedure's prompt from it.**
+
+## Timed step clips (2026-11-20)
+Gemini watched V1/V2 and gave per-step timestamps. Steps 4, 7, 9, 10 carry a clip of V2 (`med.surgx.app-clip-NN`,
+`start`/`end` seconds) after the step picture. `_site/yt.html` now honours `end=` (YouTube `end` player var).
+Not used: V1 at step 8 (low confidence, 5 s), and step 13 from V1/V2 (both pull the appendix out WITHOUT a retrieval
+bag, contradicting the step). Gemini's concerns: V2 advises razor shaving nipples to pubis and no retrieval bag;
+V1 omits base ligation and the bag. The two whole videos still render after the steps pending the owner's call.
+
+## A video on every step (2026-11-20, owner)
+Owner: "videos cannot be the same as the book or guidelines; use video steps where available, search for more where not,
+else ignore." So the step 8 (V1 1:07-1:12) and step 13 (V2 3:31-3:50, no retrieval bag, said in the caption) clips are in,
+and a focused short video (`med.surgx.app-vid-NN`, found by YouTube search, embeddable per oEmbed, allow-listed in the
+shim) covers steps 1, 2, 3, 5, 6, 11, 12, 15, 16, 17, 18, 19. Step 14 (haemostasis) found nothing and has none.
+Picked by title and channel only; none watched.
+
+## Batch 2 prompts (2026-11-20)
+Lap cholecystectomy, Lichtenstein hernia repair, LSCS and total thyroidectomy (70 steps): [[SURGX-batch2-image-prompt]] and [[SURGX-batch2-video-prompt]].
+
+## Batch 3 prompts (2026-11-20)
+Haemorrhoidectomy, tonsillectomy, total knee replacement, laparoscopic right hemicolectomy and TURP (94 steps): [[SURGX-batch3-image-prompt]] and [[SURGX-batch3-video-prompt]].
+
+## Batch 2 video clips (2026-11-20)
+Gemini returned 12 videos; all embeddable (oEmbed 200). The best clip per step is wired as `med.surgx.{chole,hern,cs,thyr}-clip-NN` (59 clips); 11 ids added to the `_site/yt.html` ALLOW list (hM-WA6WOw1Y unused). Gaps with no clip: chole 4 and 14, hernia 10, LSCS 4, 11, 12 and 17, thyroid 2, 5, 14 and 15. The safety-step clips come from a WHO checklist video on another operation, and the hernia clips from a bench model; both caveats are in the captions. Thyroid step 11 uses the Columbia animation so it does not duplicate the step 13 clip.
+
+## Batch 3 video clips (2026-11-20)
+73 clips as `med.surgx.{hmd,tons,tkr,rhc,turp}-clip-NN`; 13 ids added to the shim ALLOW list. TVASurg 0twYSCkEnYk refuses embedding (oEmbed 401), so right hemicolectomy step 7 uses the Colorectal Disease Journal trocar clip. Changed from Gemini picks: TKR step 4 uses the body-exhaust-suit clip, not hand rub; right hemicolectomy step 14 uses the ZJU-SAH exteriorisation clip so it does not sit inside the step 18 clip. Gaps: haemorrhoidectomy 8, 9, 10, 13, 14; tonsillectomy 11; TKR 10, 11, 12, 14, 16, 18, 19; right hemicolectomy 6, 17, 21, 22; TURP 4, 5, 11, 14.
+
+## Batch 2 step pictures (2026-11-20)
+All 70 wired as `med.surgx.{chole,hern,cs,thyr}-step-NN`, WebP 1200x900 q78 in `surgx/media/<procedure>/`. Lap chole 04 and thyroid 05 (positioning) came first as a generic flat table; redrawn as side views from the Round 2 prompt in [[SURGX-batch2-image-prompt]] and wired 2026-11-20 (captions written by hand). Gemini also used near-identical scenes for the shared safety steps (time-out, counts, labelling) across operations; acceptable for generic steps.
+
+## Batch 3 step pictures (2026-11-20)
+All 94 wired as `med.surgx.{hmd,tons,tkr,rhc,turp}-step-NN` (WebP 1200x900 q78), picture first then clip on each step. Captions are the prompt's Teach lines; "Common" steps take the COMMON SAFETY STEPS Teach line, positioning steps a sentence from PRECISE FACTS. TURP 09 (lateral lobes) left out: Gemini drew the adenoma yellow and fatty, which reads as perforation fat; Tonsillectomy 04 (the hand on the arm board sits beside the feet; the needle goes into the skin, not the cannula port) and 09 (tube running over the uvula, no capsular plane, swab on the tonsil, left side instead of right) were wired, then pulled after the owner caught them: the first review was done on thumbnails only. Review every image at full size. Tonsil 04 redrawn and wired 2026-11-20. Tonsil 09 and TURP 09 redrawn from a fresh standalone prompt (2026-11-21) and checked at full size; tonsil 09 shipped as 09_capsular-dissection-v2.webp so no cached copy shows. The redo prompts are at the end of [[SURGX-batch3-image-prompt]].
+
+## Gap clips (2026-11-20)
+Steps Gemini left without a clip, searched again on YouTube (headless browser search; watch pages ask for a bot check, so no transcripts). 9 new short single-topic videos embedded whole (no start or end), each oEmbed 200 and on the shim ALLOW list: lap chole 4 and TURP 4 (table maker's positioning demos), thyroid 5, LSCS 17 (anti-D), haemorrhoid 8 (sphincter anatomy), TKR 10 (gap balancing), TKR 19 (NV check), TURP 5 (lithotomy draping), TURP 11 (TUR syndrome). 4 reused existing clips: right hemicolectomy 6 (abdominal prep), 21 (port closure), 22 and TKR 18 (subcuticular closure). Not watched; picked by title, channel and thumbnail. Still empty: generic haemostasis steps, LSCS 4 and 11, thyroid 2 and 14, haemorrhoid 9, 10 and 14, tonsil 11, TKR 11, 12 and 14, right hemicolectomy 17, TURP 14.
+
+## Age-restricted videos (2026-11-21)
+YouTube oEmbed returns 200 for AGE-RESTRICTED videos, but the embedded player refuses them ("only available on YouTube"). The owner saw this on the phone on appendicectomy step 6 (m5u1kHwGDk8); replaced with Molnlycke's Hasson trocar demo (vBj5vn41Ixs). Check every new video in the real embedded player, not just oEmbed: load https://www.youtube.com/embed/ID in headless Chromium WITH a referer (Playwright goto option referer 'https://stewardmd.in/'; without one every video shows Error 153) and look for 'age-restricted' or 'Playback on other websites has been disabled'. Run over all 47 ids on 2026-11-21: only m5u1kHwGDk8 failed.
+
+## Bold high-yield points in step text (2026-11-21)
+Owner asked for Knowledge Library-style bolding on every surgery step. `renderStep` runs `why` and each `how` line through
+`rich()` (surgx-screens.js): first reasoning.js `window.SMD_MEDFORMAT` (the library's medFormat; it escapes; plain
+`esc()` fallback), then `SGX_BOLD`, a SURGX-only surgical rule set applied to text outside existing spans: measurements
+(mm, cm, mmHg, degrees, hours, minutes, mL), "within the hour", "under (direct) vision", "before incision/induction/
+closure/...", "aloud", "never event", "stops the closure", "any discrepancy", "two-person", convert/call for help,
+"critical view of safety", and a capital NOT. Library rules unchanged. CSS: `.sgx-step [class^="md-"]:not(.md-hi)` bold
+ink, never colour (`md-hi` is the last opened article's terms, which would leak in). Pitfall, risk and emphasis lines keep
+their own styling. Coverage estimate: 26% of 2,097 steps with library rules alone, about 70% with both; appendicectomy 17/19.
+
+## Batch 4 prompts (2026-11-21)
+[[SURGX-batch4-image-prompt]] (93 images) and [[SURGX-batch4-video-prompt]] for laparotomy (19), modified radical
+mastectomy (18), total hip replacement (22), total abdominal hysterectomy (22) and chest drain insertion (12). The
+image prompt carries every batch 2 and 3 lesson: a NEW side view per positioning step with the angle drawn, bodies whole
+and connected, fat yellow only where real fat is, laterality per operation, a full-size quality check. The video prompt
+forbids age-restricted videos and whole-video clips and asks for the first and last spoken line of every clip.
+
+## Whole videos cut to segments (2026-11-21)
+Owner: a 11-minute video played in full instead of the step. Gemini timed all 21 whole-video clips (prompt in chat, its
+JSON quotes the first and last spoken line of each); every clip now has `start` and `end`. Two replaced because no part
+showed the step: appendicectomy 6 -> Bhm7cCcr1Qc (TAMC OBGYN Simulation, Hasson entry), port closure (app-vid-17, also
+right hemicolectomy 21) -> h5D8sU8btyI (CooperSurgical). Both pass the real embedded-player check; the old ids left the
+ALLOW list. Timestamps are Gemini's; not re-verified here (transcript reading from YouTube's player is blocked in this
+environment). Thyroid 5 caption now says the narration is Hindi and Urdu.
+
+## Batch 4 wired (2026-11-21)
+Clips: 91 of 93 steps (`med.surgx.{lapa,mrm,thr,tah,cd}-clip-NN`), every video checked in the real embedded player with a
+referrer; TVASurg GthlK0Bv0aI refuses embedding, so mastectomy 10 and 11 use the PreOp animation and Prof Chintamani's
+operative clip. Left empty: mastectomy 9 (Gemini found nothing) and chest drain 7 (the only Seldinger clip is done
+bare-handed with the LA needle left in as a guide). Pictures: 88 of 93 (`med.surgx.<ab>-step-NN`), every image reviewed at
+half resolution and doubtful ones at full size. Held back: mastectomy 5 (arm not at 90 degrees), hip 12 (a bare pelvis
+in the wound), hip 16 (patient supine, crack barely visible), hysterectomy 5 (only the leg section raised, not a
+head-down tilt), chest drain 9 (drain on the left). Redo prompt at the end of [[SURGX-batch4-image-prompt]]. The Gemini
+zips had no folders inside: extract each into its own folder or same-named files overwrite each other.
+
+## Batch 5 prompts (2026-11-21)
+[[SURGX-batch5-image-prompt]] (92 images) and [[SURGX-batch5-video-prompt]] for the neurosurgery set: burr-hole CSDH (16),
+trauma craniotomy for EDH (20), EVD at Kocher point (17), VP shunt (22) and lumbar discectomy for CES (17). All cranial
+cases are RIGHT-sided; the prompt fixes the field orientation per operation, states CT/MRI in radiological convention
+(a right-sided clot on the LEFT of the scan), and asks for a folder inside each zip. Same block format as batch 4, so
+`img4.py` parses it; D05 (head fixation) has no Teach line and needs a hand-written caption like the positioning steps.
+
+## Batch 5 clips wired (2026-11-21)
+79 timed clips across the neurosurgery set (`med.surgx.{csdh,edh,evd,vps,ces}-clip-NN`): CSDH 14 of 16, EDH 17 of 20,
+EVD 15 of 17, VP shunt 19 of 22, CES 14 of 17. All 19 videos pass the real embedded-player check with a referrer; 17 new
+ALLOW ids. Dropped from Gemini's answer: EDH 14 (same tack-up clip as 15, not a duraplasty), EVD 15 (same one-line clip
+as 12), VP shunt 11 (low-confidence patient diagram), CES 15 (low confidence, closure only mentioned); EDH 4 and VP 4 moved
+to the standard checklist prophylaxis clip. Gemini found nothing for CSDH 11 (drain), EDH 8 (scalp flap), EVD 5
+(positioning), VP 18 (bailout), VP 20 (closure), CES 6 (prep) and CES 13 (haemostasis), or the skin closures. Much of the
+set is lectures, skull models and animation: few embeddable live cranial videos exist that are not age-restricted.
+
+## Batch 5 pictures wired (2026-11-21)
+86 of 92 (`med.surgx.{csdh,edh,evd,vps,ces}-step-NN`), every image reviewed four to a sheet at half size and the doubtful
+ones at full size. Held back: CSDH 05, EDH 05 and VP 05 (head straight up, not turned), EDH 09 (a dry skull with the orbit
+and facial bones inside the wound), EVD 10 (catheter tip bent into a hook), VP 13 (a different patient). Redo prompt at
+the end of [[SURGX-batch5-image-prompt]]. The zips again had no folders inside; extracted per operation.
+
+## Batch 4 complete (2026-11-21)
+Round 3 redraws wired: hip 12 cropped to the wound (trial head in the cup, femur running on under the muscle; the wide
+view lifted the leg straight up, which reads as abduction, not 90 degrees of flexion with internal rotation) and
+hysterectomy 5 (whole table tilted head down, legs flat on the table; the tilt is only about 5 degrees, milder than the
+10 to 15 asked). All 93 batch 4 steps now have a picture.
+
+## Batch 5 complete (2026-11-21)
+Round 2 redraws all passed full-size review and are wired: CSDH 05, EDH 05 and VP 05 (viewed from the foot, face turned
+to the left, roll under the right shoulder), EDH 09 (flat skull bone only), EVD 10 (straight catheter to the frontal
+horn), VP 13 (same patient). All 92 batch 5 steps now have a picture.
+
+## Round 3: eye operations and the remaining gaps (2026-11-21)
+Owner: "What about ophthalmology surgeries like cataract, PRK" then "build rest, ignore MDS" (oral and maxillofacial
+left out on purpose). 20 new procedures, so **128 procedures**, all `ai_drafted`:
+- **Ophthalmology (13):** phacoemulsification, manual SICS, trabeculectomy with MMC, PRK, LASIK, pterygium with
+  conjunctival autograft, intravitreal anti-VEGF, external DCR, chalazion I and C, corneal and subtarsal foreign body,
+  evisceration, strabismus recession and resection, pars plana vitrectomy (awareness level).
+- **Transplant (2, under urology):** kidney transplant recipient, laparoscopic living donor nephrectomy (THOTA 1994
+  authorisation in the donor check; transfixing stapler on the donor artery, never non-transfixing clips).
+- **Cardiac (2):** surgical AVR (outline level, like CABG), subxiphoid pericardial window (induce only with the surgeon
+  scrubbed in tamponade).
+- **Plastics (3):** escharotomy, rhomboid (Limberg) flap, unilateral cleft lip repair.
+- New shared pack `steps/eye.json` (14 steps: anaesthesia, povidone-iodine 5%, speculum, biometry/IOL check,
+  intracameral antibiotic, wound check, PCR and suprachoroidal haemorrhage bailouts, peritomy and closure, refractive
+  check, excimer ablation, laser interruption, shield and warning signs). Reuse: new 20 at 70%, overall 77%.
+- Specialty `ophthalmology` retitled "Ophthalmology" (was "Eye emergencies") and added to `MUST_HAVE_PROCEDURES`.
+- 20 operative note templates (eye side, implant sticker, MMC time, ABO and crossmatch, ischaemia times, prosthesis).
+- UI test: the Ophthalmology chip lists 13 operations and phaco opens with its 20 steps.
+- No pictures or clips yet; these are candidates for the next Gemini batches. Need ophthalmologist, transplant,
+  cardiac and plastics sign-off.
+
+## Batches 6 and 7 prompts (2026-11-21)
+[[SURGX-batch6-image-prompt]] (105 images: phaco, SICS, trabeculectomy, PRK, LASIK, pterygium) and
+[[SURGX-batch7-image-prompt]] (102 images: intravitreal injection, DCR, chalazion, foreign body, evisceration,
+strabismus, vitrectomy), each with a video prompt. Scene lines are generated from the step's own `how`, `why` and
+`pitfalls` by scratchpad `gen/prompts.py`; orientation, positioning and precise facts are hand-written. Convention: the
+RIGHT eye, microscope views with the forehead at the top and the nose on the viewer's RIGHT. Operations use letters A to
+G, so the wiring regex needs `[A-G]` (batch 4 script used `[A-E]`). Still without prompts: kidney transplant, donor
+nephrectomy, AVR, pericardial window, escharotomy, rhomboid flap, cleft lip (128 steps).
+
+## Batch 7 clips wired (2026-11-21)
+83 timed clips (`med.surgx.{ivi,dcr,chal,fb,evis,strab,ppv}-clip-NN`): intravitreal 11 of 11, DCR 12 of 16, chalazion
+10 of 11, foreign body 10 of 10, evisceration 13 of 19, strabismus 14 of 19, vitrectomy 13 of 16. All 24 videos pass the
+real-player check; 21 new ALLOW ids. Not used: the chalazion consent and aftercare talking-head clip (a TikTok
+re-upload), the evisceration speculum clip (same animation segment as the keratectomy). Captions flag the left-eye
+footage (lid eversion, vitrectomy, DCR local), the model eye and 20G needle (foreign body), and the patient animations.
+Empty: positioning, speculum and povidone in most of them, DCR bailout and haemostasis, squint lost-muscle bailout,
+vitrectomy wound check.
+
+## Batch 6 clips wired (2026-11-21)
+104 timed clips (`med.surgx.{phaco,sics,trab,prk,lasik,ptg}-clip-NN`): phaco 20 of 20, SICS 20 of 20, trabeculectomy 19
+of 19, PRK 14 of 14, LASIK 15 of 15, pterygium 16 of 17. Gemini's JSON was saved as a file (`in6/b6v.json` in the
+scratchpad) and wired by `wire6v.py` straight from each step's best clip, with overrides. The Ochsner checklist video
+(7E1ivPB_zn0) failed the real-player check, so its timeout, count and debrief clips use the Gloucestershire one; the
+trabeculectomy suprachoroidal clip (choroidal drainage, later management) was replaced by the stop-and-close chalk-talk.
+Captions flag the left-eye pterygium footage, the LASIK flap relift, the Hindi MMC preparation, and lectures that quote
+3% or 4% povidone-iodine. A channel name from oEmbed carried an em-dash; replaced with a comma.
+
+## Batch 6 pictures, part A (2026-11-21)
+56 of 59 wired (phaco 20, SICS 17, trabeculectomy 19; `med.surgx.{phaco,sics,trab}-step-NN`) via scratchpad
+`img6.py` (letters A to G, eye-specific prep-drape caption). Held back SICS 10, 14, 15; redo prompt at the end of
+[[SURGX-batch6-image-prompt]]. PRK, LASIK and pterygium images not yet received.
+Part B (same day): PRK 14 of 14, LASIK 13 of 15, pterygium 16 of 17 wired via `img6b.py`; batch 6 now 99 of 105.
+Held back LASIK 09, LASIK 12, pterygium 12 (second redo prompt in [[SURGX-batch6-image-prompt]]).
+Fix (same day): the six held-back images came back in `surgx-batch6-fix.zip`, passed full-size review and were wired; batch 6 is 105 of 105.
+
+## Batch 7 pictures wired (2026-11-21)
+101 of 102 (`med.surgx.{ivi,dcr,chal,fb,evis,strab,ppv}-step-NN`), every image reviewed four to a sheet. Held back
+evisceration 16 (cornea still on in a post-evisceration step); redo prompt at the end of [[SURGX-batch7-image-prompt]].
+Evisceration 16 redraw wired the same day; batch 7 now 102 of 102.
+
+### Batch 8 prompts (2026-11-21)
+[[SURGX-batch8-image-prompt]] (128 images) and [[SURGX-batch8-video-prompt]] for the 7 non-eye operations: kidney
+transplant, laparoscopic donor nephrectomy, aortic valve replacement, subxiphoid pericardial window, escharotomy,
+rhomboid flap, unilateral cleft lip repair. Made by `make8.py` (the batch 6 and 7 generator with the eye wording swapped out).
+
+### Urology completed (2026-11-21)
+Owner: "Now give urology complete it". 12 operations added (urology now 26), all `ai_drafted` with note templates:
+flexible cystoscopy, transperineal prostate biopsy, optical urethrotomy, cystolitholapaxy, HoLEP, no-scalpel vasectomy,
+buccal graft urethroplasty, pyeloplasty, robotic partial nephrectomy, robotic radical prostatectomy, radical cystectomy
+with ileal conduit, nephroureterectomy. Four new shared steps in `steps/urology.json`: `step.uro.urine-check`,
+`step.uro.robot-dock`, `step.uro.bladder-leak-test`, `step.uro.catheter-plan`. Template field keys must not reuse base
+operative keys (`indication`, `side`, `incision`, `anaesthesia` ...): the specialties test fails on a collision.
+Prompts: [[SURGX-batch9a-image-prompt]] (104) + [[SURGX-batch9a-video-prompt]], [[SURGX-batch9b-image-prompt]] (115)
++ [[SURGX-batch9b-video-prompt]], made by `make9.py`.
+
+### Batch 8 clips wired (2026-11-21)
+100 clips over the 7 non-eye operations (`med.surgx.{tx,ldn,avr,pw,esc,rhomb,cleft}-clip-NN`, `wire8.py`), every video
+checked in the embedded player with a referrer; 19 new ALLOW ids. Dropped as wrong or weak: Ochsner checklist (fails embed),
+the intercostal chest tube for AVR drains, the TXA/adrenaline packing demo for escharotomy, the generic "separate the
+kidney" schematic for donor artery and vein division, the verbal-only cleft positioning.
+Batch 8 images (same day): 106 of 128 wired via `img8.py`, every image reviewed four to a sheet. Held back 22: KT 16
+(native-kidney stent), LDN 12, 13, 15 (open retractors in a laparoscopic view), LDN 17 (two panels stitched), AVR 06, 18
+(whole rib cage bare), PW 07, 08, 09, 11 (patient swapped to a man; sternotomy-sized opening), escharotomy 07 (volar
+midline cut) and 12 (different patient), rhomboid 01 to 05 and 17 (older man; the operative series is a young woman),
+cleft 15, 18, 19 (lip still cleft after repair).
+
+### Prompts for every remaining operation (2026-11-21)
+Owner: "Give left over all surgeries prompts". `make10.py` builds batches 10 to 26 for every operation with no
+pictures yet (positioning and precise facts taken from each procedure's own chapters), about 100 images each:
+- [[SURGX-batch10-image-prompt]] (98) + [[SURGX-batch10-video-prompt]]: Abscess incision and drainage, Hartmann's procedure, Loop ileostomy: formation and closure, Laparoscopic repair of perforated duodenal ulcer, Small bowel resection with anastomosis
+- [[SURGX-batch11-image-prompt]] (98) + [[SURGX-batch11-video-prompt]]: Laparoscopic inguinal hernia repair, Open umbilical and incisional hernia repair with mesh, Lateral internal sphincterotomy, Fistula-in-ano: fistulotomy and seton, Pilonidal sinus excision
+- [[SURGX-batch12-image-prompt]] (109) + [[SURGX-batch12-video-prompt]]: Laparoscopic Nissen fundoplication, Laparoscopic sleeve gastrectomy, Left hemicolectomy and sigmoid colectomy, Open and subtotal cholecystectomy, Laparoscopic common bile duct exploration
+- [[SURGX-batch13-image-prompt]] (108) + [[SURGX-batch13-video-prompt]]: Splenectomy: trauma and elective, Laparoscopic anterior resection with total mesorectal excision, Pancreaticoduodenectomy (Whipple), Right hepatectomy, Modified radical neck dissection
+- [[SURGX-batch14-image-prompt]] (112) + [[SURGX-batch14-video-prompt]]: D2 gastrectomy for gastric cancer, Oesophagectomy (Ivor Lewis principles), Transurethral resection of bladder tumour (TURBT), Scrotal exploration with bilateral orchidopexy, Suprapubic catheter insertion, Ureteroscopy with laser lithotripsy
+- [[SURGX-batch15-image-prompt]] (96) + [[SURGX-batch15-video-prompt]]: Retrograde double-J ureteric stent insertion, Percutaneous nephrolithotomy (PCNL), Radical nephrectomy (open and laparoscopic principles), Hydrocele repair (Jaboulay or Lord), Adult circumcision
+- [[SURGX-batch16-image-prompt]] (112) + [[SURGX-batch16-video-prompt]]: Subinguinal microsurgical varicocelectomy, Radical inguinal orchidectomy for testicular tumour, Pyloromyotomy (Ramstedt), Paediatric inguinal herniotomy, Inguinal orchidopexy for undescended testis, Paediatric circumcision
+- [[SURGX-batch17-image-prompt]] (101) + [[SURGX-batch17-video-prompt]]: Operative reduction of intussusception, Laparotomy for malrotation (Ladd procedure), Laparoscopic salpingectomy for ectopic pregnancy, Laparoscopic ovarian cystectomy, Surgical management of miscarriage: manual or electric vacuum aspiration
+- [[SURGX-batch18-image-prompt]] (110) + [[SURGX-batch18-video-prompt]]: Transvaginal cervical cerclage (McDonald), Open (abdominal) myomectomy, Wide local excision with sentinel node biopsy, Axillary lymph node dissection, Excision of a benign breast lump (fibroadenoma), Open repair of ruptured abdominal aortic aneurysm
+- [[SURGX-batch19-image-prompt]] (100) + [[SURGX-batch19-video-prompt]]: Femoral embolectomy, Below-knee amputation, Carotid endarterectomy, Femoro-popliteal bypass (above knee, vein graft), Radiocephalic arteriovenous fistula
+- [[SURGX-batch20-image-prompt]] (100) + [[SURGX-batch20-video-prompt]]: Great saphenous vein surgery, Above-knee amputation, Open surgical tracheostomy, Functional endoscopic sinus surgery (FESS), Myringotomy and grommet insertion, Septoplasty
+- [[SURGX-batch21-image-prompt]] (102) + [[SURGX-batch21-video-prompt]]: Adenoidectomy, Cortical and modified radical mastoidectomy, Tympanoplasty type 1 (underlay), Superficial parotidectomy with facial nerve identification, Direct laryngoscopy and microlaryngoscopy with biopsy
+- [[SURGX-batch22-image-prompt]] (91) + [[SURGX-batch22-video-prompt]]: Peritonsillar abscess (quinsy) drainage under local anaesthetic, Dynamic hip screw, Intramedullary nailing of the tibia, Debridement of an open fracture with external fixation, Fasciotomy of the leg
+- [[SURGX-batch23-image-prompt]] (103) + [[SURGX-batch23-video-prompt]]: Hemiarthroplasty of the hip, Open reduction and internal fixation of the ankle, Distal radius fracture fixation, Arthroscopic ACL reconstruction (hamstring graft), Split-thickness skin graft
+- [[SURGX-batch24-image-prompt]] (103) + [[SURGX-batch24-video-prompt]]: Open carpal tunnel release, Trigger finger release, Flexor tendon repair (zone II), Craniotomy for supratentorial tumour, Decompressive craniectomy (planned)
+- [[SURGX-batch25-image-prompt]] (100) + [[SURGX-batch25-video-prompt]]: Anterior cervical discectomy and fusion, Lumbar laminectomy for canal stenosis, Posterior lumbar instrumented fusion (TLIF), VATS bullectomy with pleurodesis, Median sternotomy and closure
+- [[SURGX-batch26-image-prompt]] (86) + [[SURGX-batch26-video-prompt]]: Coronary artery bypass grafting, Hemithyroidectomy (thyroid lobectomy), Parathyroidectomy, Laparoscopic adrenalectomy
+
+### Batch 9b clips wired (2026-11-21)
+82 clips over pyeloplasty, partial nephrectomy, radical prostatectomy, cystectomy with ileal conduit and
+nephroureterectomy (`wire9b.py`, ids `med.surgx.{pyelo,pn,rp,rc,nu}-clip-NN`), all embed-checked; 17 new ALLOW ids.
+Not used: the two operative nephroureterectomy videos for the hilum (vein divided before artery there; the animation
+shows artery first), the nurse explainer's debrief (says the catheter comes out in theatre), the high-extended node
+dissection above the aortic bifurcation (debated; the standard pelvic dissection clip is used).
+
+### Batch 8 fix, batch 9a clips, batch 9b images (2026-11-21)
+- Batch 8 fix: 19 of 22 redraws wired (`img8fix.py`); batch 8 now 125 of 128. Still held: escharotomy 07 (cut
+  still runs down the front of the forearm, not mid-lateral), LDN 12 (open ring-handled scissors in the laparoscopic
+  view), AVR 18 (sternal wires look like a skin closure).
+- Batch 9a clips: 90 over the 7 smaller urology operations (`wire9a.py`), all embed-checked; 20 new ALLOW ids.
+- Batch 9b images: 98 of 115 (`img9b.py`). Held: pyeloplasty 12, partial nephrectomy 11, 12, 13, 15, 17, prostatectomy
+  18, 19, 24, cystectomy 08, 13, nephroureterectomy 06, 10, 11, 12, 15, 18 (open retractors or ring scissors in a
+  robotic or laparoscopic view, bare pelvic bones, a laparotomy wound after robotic surgery, wrong position).
+- Batch 9a images: 98 of 104 (`img9a.py`). Held: flexible cystoscopy 05 (two panels stitched), vasectomy 08 (wide open
+  wound, not a puncture) and 09 (two cuts with vas ends through the skin), urethroplasty 09, 13, 14 (perineum drawn as
+  female anatomy).
+- Fix round 2 (`surgx-fix-b8-b9b.zip`): 17 of 20 wired (`img8fix2.py`, `img9bfix.py`). Still held: escharotomy 07
+  (different bald patient, cut still on the palm side), AVR 18 (ribs drawn inside the sternal wound), NU 06 (patient
+  supine, not on her side). Batch 8 now 126 of 128; batch 9b 114 of 115.
+
+### Step typography: atlas style (2026-11-21)
+Owner: "better font, better visibility, bold formatting of steps; classic premium professional, not AI slop". Step titles
+in Newsreader serif (bundled `assets/fonts/newsreader-latin.woff2`, declared in surgx.css as "SGX Serif"), the "why" in
+serif italic, how-lines in Inter 15px as a numbered list, the lead clause (or opening imperative verb) of each how-line
+bold via `howLine()` in surgx-screens.js, ringed serif step numerals, and labelled AT RISK / PITFALL lines. No side
+stripes (test/no-side-stripes.test.mjs forbids them).
+
+### Batch 21 images (2026-11-22, contentVersion 0.4.5)
+78 of 84 wired for mastoidectomy (mx), tympanoplasty-underlay (tux), superficial-parotidectomy (spx), microlaryngoscopy-biopsy (mbx). Adenoidectomy (A) not delivered yet.
+Held back: mastoidectomy 12 (tegmen and sigmoid fully exposed) and 13 (cochlea opened); tympanoplasty 06 (head not turned), 10 and 18 (wound in front of the ear); microlaryngoscopy 12 (ring-handled open instruments).
+Gemini shares from batch 10 on carry inline images, not zips: scratchpad g4.cjs pulls them with their filename captions; imgB.py wires any batch from its prompt file. Known drift: the patient's face and the drawing style change within some operations.
+
+### Batch 22 images (2026-11-22, contentVersion 0.4.6)
+74 of 76 wired (plus quinsy-drainage qdx 14 of 15, 14 held: neck dressing on a transoral drainage): dynamic-hip-screw (dhsx), tibial-im-nail (tinx), open-fracture-debridement (ofdx), leg-fasciotomy (lfx).
+Held back: tibial nail 07 (AP fluoro shows the awl entering sideways), fasciotomy 07 (both incisions drawn on one face of the leg).
+
+### Batch 10 videos (2026-11-22, contentVersion 0.4.8)
+49 clips across abscess-drainage (adx), hartmanns-procedure (hpx), loop-ileostomy (lix), lap-perforated-duodenal-ulcer (lpdux), small-bowel-resection (sbrx). Gemini Chat-mode JSON wired directly by scratchpad wireJ.py (best watched clip per step, max 150 s, captions from "shows"). Dropped: 4 age-restricted embeds (D8YRoYRtI3Q, U00zOHu2fqo, daisKWjxK2w, ekddeHIYIJs) and the unwatched Hartmann's operation video, so Hartmann's, loop ileostomy and perforated ulcer have safety-step clips only.
+
+### Batches 11, 12, 20, 21 videos (2026-11-22, contentVersion 0.4.9)
+71 + 42 + 89 + 83 clips via wireJ.py. Batch 11 and 12 dropped 8 embeds (7 age-restricted, 1 embedding disabled), which leaves Nissen and sleeve thin. Batch 20 and 21 arrived as slim JSON without "shows", so the caption is the step title plus the source kind; their clips are as Gemini timed them and have not been checked by eye.
+
+### Batch 18 images, cerclage only (2026-11-22, contentVersion 0.4.10)
+mcdonald-cerclage (mcx) 15 of 15. The rest of batch 18 (open myomectomy, WLE and sentinel node, ALND, fibroadenoma, open rAAA) has not been delivered.
+
+### Batches 13 and 15 videos (2026-11-22, contentVersion 0.4.11)
+105 + 80 clips. Arrived as slim JSON with "shows" cut at 60 characters, so captions are step titles plus source kind; low-confidence picks were left out. Ab fallback for a new procedure whose initials collide is the compacted id (splenectomy). Not checked by eye.
+
+### IMG15 pictures (2026-11-22, contentVersion 0.4.39)
+98 recovered, 88 wired: AVR 18, CABG, hemithyroidectomy, median sternotomy, parathyroidectomy 01 to 08, TLIF 12 to 22, VATS. Rejected: CABG 05 and sternotomy 05 (face and whole body painted); hemithyroidectomy 10, 19 (male face on the female patient); TLIF 14, 16 (whole dural tube exposed); VATS 05 (prone, not lateral), 06 (supine abdominal prep), 07 and 14 (cut-away chest wall on the skin).
+
+### IMG14 pictures (2026-11-22, contentVersion 0.4.38)
+96 recovered (ACDF zip damaged), 86 wired: ACDF, craniotomy, decompressive craniectomy, escharotomy 07, flexor tendon 19 to 21, laminectomy, TLIF 01 to 11. Rejected: craniotomy 09, 10 (incision and bone flap over the face), 14 (awake patient with open brain); decompressive 08, 09, 11 (face and orbit cut away), 14, 19, 20 (open brain in closure or background); laminectomy 12 (cross-section on the back).
+
+### IMG13 pictures (2026-11-22, contentVersion 0.4.37)
+98 recovered, 96 wired: ACL, carpal tunnel, distal radius 16 to 22, flexor tendon, split skin graft, trigger finger. Rejected flexor tendon 11 (drape inside the wound) and 14 (tendon drawn on the skin).
+
+### IMG12 pictures (2026-11-22, contentVersion 0.4.36)
+89 recovered (hip hemiarthroplasty zip truncated), 11 rejected: septoplasty 09 to 15 (nose drawn as an external cut-away instead of an endonasal view), distal radius 11 (radius and ulna both exposed), 15 (open wound for percutaneous K-wires), leg fasciotomy 07 (bones through the skin), tympanoplasty 06 (head still not turned, third time).
+
+### IMG11 pictures (2026-11-22, contentVersion 0.4.35)
+92 recovered (FESS zip truncated), wired the rest less 14 rejects: AKA 07 (femur drawn through skin), 11 (head above a thigh wound); AV fistula 14 (artery lying on the skin); fem-pop 10, 11, 22 (different patient from 01 to 06), 18, 20 (wound looks genital); GSV 09, 10 (open wound for percutaneous steps); tracheostomy 07 to 10 (whole larynx and trachea laid open, wrong scale).
+
+### IMG10 pictures (2026-11-22, contentVersion 0.4.34)
+82 recovered (below-knee amputation zip truncated), 74 wired: fibroadenoma, carotid endarterectomy, fem-pop 01 to 06, femoral embolectomy, ruptured AAA. Rejected: carotid 07, 08 (clavicle and cut-away neck), 15 (midline neck incision), 16 (abdominal wound); embolectomy 12 (male face on a female patient), 13 (abdominal wound); RAAA 08 (aneurysm under an open chest), 20 (staples on the back).
+
+### IMG7 and IMG8 pictures (2026-11-22, contentVersion 0.4.33)
+IMG7: Gemini delivered 28 of 100; 15 wired, 13 rejected (adult circumcision and urethroplasty fields drawn with female-looking anatomy, hydrocele 16, vasectomy 09). IMG8 (re-shared): 88 recovered, 74 wired; rejected salpingectomy 05 (male face), 07, 09, 10 (bones or odd glow in laparoscopic view); intussusception 09 (vertical incision), 15 to 17 and Ladd 12, 14 to 17, 20 (adult head on an infant).
+
+### IMG6 pictures (2026-11-22, contentVersion 0.4.32)
+80 of 84 recovered wired (16 PCNL pictures lost in a truncated Gemini zip; `salvage.py` recovers intact PNGs, `imgM.py` now skips missing files). Rejected (wound or prep window drawn like genitalia): DJ stent 06, ureteroscopy 06, hydrocele 12, suprapubic catheter 13.
+
+### VID8 gap-fill videos (2026-11-22, contentVersion 0.4.31)
+93 clips: DHS 18, tibial nail 18, open fracture debridement 21, quinsy 13 (from none) plus ENT and fasciotomy gaps. VID8 used videoId as key and a clip object as "best"; normalised. One id typo fixed (step.oex.temp-cover); leg fasciotomy steps came misnumbered and were matched to positions by step id. All 23 new ids embeddable.
+
+### VID11 gap-fill videos (2026-11-22, contentVersion 0.4.30)
+Endocrine and eye gaps: parathyroidectomy, adrenalectomy, hemithyroidectomy, DCR, evisceration, strabismus, vitrectomy, chalazion. Adrenalectomy 08 (prone retroperitoneoscopic ports) and 14 (Bengali cholecystectomy lecture) dropped. All 16 new ids embeddable. VID8 and VID10 not received yet.
+
+### VID7 and VID9 gap-fill videos (2026-11-22, contentVersion 0.4.29)
+VID7 (zip): 83 clips across vascular operations (carotid endarterectomy 22, fem-pop bypass 18, AV fistula 19, below-knee amputation 11, from none) plus ENT and embolectomy gaps. VID9: 98 clips across orthopaedics (hip hemiarthroplasty, ankle ORIF, distal radius, ACL, from none) plus fasciotomy, TKR and skin graft gaps. All 55 new ids embeddable. VID8 not received yet.
+
+### VID6 gap-fill videos (2026-11-22, contentVersion 0.4.28)
+97 clips across 7 operations, returned as vid6.json inside a zip: ruptured AAA 20, axillary clearance 19, WLE sentinel node 18, fibroadenoma 14, femoral embolectomy 14 (all from none), myomectomy 11, mastectomy 1. GthlK0Bv0aI blocks embedding.
+
+### VID4 gap-fill videos (2026-11-22, contentVersion 0.4.27)
+VID4 came back in a different shape (top-level `videos` dict plus `operations` lists keyed by videoId); converted to the usual shape before wiring. 84 clips across 8 operations: orchidopexy 20, herniotomy 15, intussusception 15, pyloromyotomy 14, circumcision 13 (paediatric ones from none), plus 7 urology gaps. Blocked embeds: Jql4Xoy-VTs, StBecaGEqWs, bnZ_lOCvBYo (so the pyloromyotomy core steps have no clip). Pyloromyotomy 10 clip dropped (adult flank port animation).
+
+### IMG9 pictures (2026-11-22, contentVersion 0.4.26)
+92 of 100 wired: axillary clearance, evacuation of RPOC (complete), ovarian cystectomy, salpingectomy 17 to 20, open myomectomy, WLE with sentinel node. Rejected: axillary 09 and 19 (patient drawn as a man), ovarian cystectomy 08 (large open wound for Hasson entry), salpingectomy 17 (spine in the laparoscopic view), myomectomy 13 (repair looks like a vulva) and 16 (pelvic bones in the open field), WLE 07 (cut-away anatomy on the skin) and 10 (tumour exposed through a round skin hole).
+
+### IMG16 pictures (2026-11-22, contentVersion 0.4.25)
+34 of 35 wired: laparoscopic adrenalectomy 21 (complete), parathyroidectomy 09 to 22 except 12 (chaotic, unreadable field). IMG6 to IMG15 not received yet.
+
+### IMG5 pictures (2026-11-22, contentVersion 0.4.24)
+89 of 100 wired: gastrectomy, oesophagectomy, neck dissection 10 to 22, TURBT, scrotal exploration, suprapubic catheter 01 to 09. Rejected: gastrectomy 06 (stripe down the sternum), 13 (stomach floating above the drapes); oesophagectomy 12 (jejunum lying on the skin), 15, 16, 17, 19 (front-on chest views, not a right thoracotomy); neck dissection 10 (midline, not the posterior triangle); scrotal 11 and 12 (wound looks like a vulva); TURBT 07 (cross-section drawn on the body).
+
+### VID5 gap-fill videos (2026-11-22, contentVersion 0.4.23)
+92 clips across 8 paediatric and gynaecology operations: Ladd 21, ovarian cystectomy 20, salpingectomy 18, evacuation of RPOC 16 (all from none), open myomectomy 8, intussusception 5, cerclage 3, LSCS 1. 16 new ALLOW ids, all embeddable. VID4 not received yet.
+
+### VID3 gap-fill videos (2026-11-22, contentVersion 0.4.22)
+100 clips across 17 urology and transplant operations; varicocelectomy and inguinal orchidectomy go from no clips to complete. 38 new ALLOW ids, all embeddable.
+
+### IMG4 pictures (2026-11-22, contentVersion 0.4.21)
+93 of 100 wired: CBD exploration 18 to 22, splenectomy, anterior resection TME, Whipple, right hepatectomy, neck dissection 01 to 09. Rejected: TME 12, 14, 16 (bony pelvis drawn in the laparoscopic view), 18 (end colostomy on the right); right hepatectomy 07 (sternum split open), 21 (costal margin and liver drawn above the closed fascia); splenectomy 05 (whole body and legs painted, face under a towel).
+
+### IMG3 pictures (2026-11-22, contentVersion 0.4.20)
+86 of 100 wired: CBD exploration 17 (steps 1 to 17; the rest are in IMG4), Nissen 15, sleeve 16, left hemicolectomy 19, open subtotal cholecystectomy 19. Rejected: Nissen 05 and 21 (a man; the Nissen patient is a woman); sleeve 06 (trocar into the stomach), 11 (hole in the oesophagus), 12 (aorta in front of the hiatus), 13 (stomach cut open to show the bougie), 18 and 21 (whole stomach as the specimen); left hemicolectomy 12, 15, 16 (bony pelvis drawn in the laparoscopic view); open subtotal 07 (a man), 12 (vessels spraying out of the field), 13 (liver and porta drawn under the umbilicus).
+
+### IMG2 pictures (2026-11-22, contentVersion 0.4.19)
+90 of 100 wired: lap inguinal hernia 18, open ventral hernia 19, sphincterotomy 15, fistula-in-ano 16, pilonidal 18, Nissen 4. Rejected, mostly for cross-section anatomy drawn straight onto the patient instead of in an inset: fistula 09, 10, 13; sphincterotomy 08, 11, 12; also sphincterotomy 10 (incision far too large), lap inguinal 07 (whole abdominal wall cut away) and 20 (open groin wound for a port closure), open ventral 13 (mesh laid over the skin).
+
+### IMG1 pictures (2026-11-22, contentVersion 0.4.18)
+First of the 100-per-prompt picture prompts (generator `gen/make100.py`, only steps without a picture; Gemini returned zips, fetched from the share page by `zipdl.cjs`, wired by `imgM.py`). 92 of 100 wired: abscess drainage 11, Hartmann 20, loop ileostomy 19, perforated ulcer 17, small bowel resection 23, lap inguinal hernia 2. Rejected: Hartmann 05 (not in Lloyd-Davies stirrups), 06 (stoma site left unprepped), 11 (open bowel lumen before division), 12 (bare spine and sacrum drawn in the field); perforated ulcer 07 (trocar through the epigastric vessels), 09 (tube coming out of the perforation), 15 (resection staple lines on a patch repair); loop ileostomy 15 (long midline closed instead of the stoma-site fascia).
+
+### VID2 gap-fill videos (2026-11-22, contentVersion 0.4.17)
+84 clips across 17 operations (sleeve, left hemicolectomy, open subtotal cholecystectomy, CBD exploration, gastrectomy, oesophagectomy, urology). 38 new ALLOW ids; IOAhfgHnsAY blocked again, so CBD exploration got 7 of 11.
+
+### VID1 gap-fill videos (2026-11-22, contentVersion 0.4.16)
+First of the 100-steps-per-prompt video prompts (generator `gen/make100v.py`, only steps with no embed). 66 clips across 15 general and colorectal operations, 25 new ALLOW ids, all embeddable. LIS step 9 clip dropped (surgeon arguing against operating, not the step). Hernia repair 10, haemorrhoidectomy 9, 10, 13, 14 and fistula-in-ano 14, 15 still have no clip.
+
+### Batch 25 videos (2026-11-22, contentVersion 0.4.15)
+acdf 22, lumbar-laminectomy-stenosis 16, posterior-lumbar-fusion-tlif 20, vats-bullectomy-pleurodesis 17, median-sternotomy 16 clips (91). 9CAu68c6YFg blocks embedding: laminectomy 10 and 11 use the animation instead, 12 has no clip. Video batches 16, 17 and 19 failed in Gemini.
+
+### Batch 24 videos (2026-11-22, contentVersion 0.4.14)
+carpal-tunnel-release 16, trigger-finger-release 18, flexor-tendon-repair 20, craniotomy-supratentorial-tumour 22, decompressive-craniectomy 19 clips (95). 40 new ALLOW ids, all embeddable. Captions use the full "shows" text the peer sent separately (its JSON cut them at 150 characters).
+
+### Batch 14 videos (2026-11-22, contentVersion 0.4.13)
+d2-gastrectomy 12, ivor-lewis-oesophagectomy 15, uro-turbt 11, uro-scrotal-exploration 9, uro-suprapubic-catheter 11, uro-ureteroscopy-laser 15 clips (73). 9 new ALLOW ids, all embeddable. Steps with no clip in the peer JSON left empty.
+
+### Batch 21 adenoidectomy and redos, batch 18 cerclage videos (2026-11-22, contentVersion 0.4.12)
+Adenoidectomy (ax) 17 of 18; 06 held back (pharynx drawn as a cutaway on the outside of the face). Redos wired: mastoidectomy 12 and 13, tympanoplasty 10 and 18, microlaryngoscopy 12. Tympanoplasty 06 held back again (head still not turned). mcdonald-cerclage 12 clips; open myomectomy video JSON arrived truncated.
+
+## Full screen and Android back (2026-11-22)
+Capacitor's `BridgeWebChromeClient.onShowCustomView` cancels the custom view at once, so YouTube's own fullscreen
+button does nothing on Android. SURGX owns full screen instead: every clip (`.sgx-embed`) and picture (`.sgx-pic`)
+has a semi-transparent `.sgx-fs` button over the player's bottom-right corner. `fsOpen()` pins the box to the
+screen with CSS (rotated 90 degrees while the phone is upright; size from `fsSize()` because `<html>` is zoomed 0.95).
+Turning a phone sideways on a procedure auto-opens the clip most in view; upright again closes it.
+The exit button is labelled "Back to steps", so Android back / swipe-back presses it first.
+`swipe-back.js topBackControl()` now prefers controls that are actually visible at their centre (elementFromPoint),
+so a covered "Back to home" on a layer underneath can no longer win; SURGX is in `moduleOpen()`.
+Pre-existing, unrelated: `run-swipe-back-ui.mjs` has 5 failing checks on main with or without this change.
+- 2026-11-22 VID10: 82 clips wired (plastics, hand, neurosurgery, cardiothoracic, thyroid), 18 new ALLOW ids, all embeddable.
+  Dropped the suture-pad subcuticular clip for neurosurgical scalp closures (burr hole, EDH, EVD, VP shunt). contentVersion 0.4.40.
+- 2026-11-22 REDO1-5 pictures: 175 of 201 wired, 26 rejected (cut-away bone, wounds that read as genitalia, wrong incision site,
+  adult head on a child, wrong patient sex). contentVersion 0.4.41.
+- 2026-11-22 FIMG1/2/3/5/6 pictures (only steps still missing): 66 wired, 30 rejected. contentVersion 0.4.42.
+- 2026-11-23 FVID2: 8 clips (fasciotomy, TKR, adrenalectomy, pterygium, evisceration, vitrectomy). contentVersion 0.4.43.
+- 2026-11-23 FIMG4: 15 pictures (salpingectomy, intussusception, Ladd, 1 circumcision), 6 circumcision rejected. contentVersion 0.4.44.
+- 2026-11-23 GVID2: 18 clips (hand, escharotomy, cleft lip, neurosurgery, pericardial window, hemithyroidectomy), 14 new ALLOW ids. contentVersion 0.4.45.
+- 2026-11-23 GVID1: 65 clips across 39 operations, 32 new ALLOW ids; dropped a neonatal Mogen-shield clip for paediatric circumcision excision. contentVersion 0.4.46.
+- 2026-11-23 23 clips filled by reusing the clip already shown for the same shared step in another operation. contentVersion 0.4.47.
+- 2026-11-23 HVID1: 5 clips (haemorrhoidectomy plan, TURBT bimanual, failed DJ access, paeds circumcision excision, fibroadenoma not found). 7 steps have no suitable video. contentVersion 0.4.48.
+- 2026-11-23 First teaching GIFs (Gemini, labelled, <1 MB): lap chole access (pneumoperitoneum) and critical view, intussusception reduction. Shown as kind image after the step picture, id med.surgx.<ab>-anim-NN. contentVersion 0.4.49.
+- 2026-11-23 PIMG1 refused by Gemini (genital/surgical content). 4 gaps filled by reusing a matching picture from a sibling operation (fem-emb 13, DC 8, hemithyroid 19, CABG 5). The other 30 steps stay text-only (mostly genital surgery Gemini will not draw). contentVersion 0.4.50.

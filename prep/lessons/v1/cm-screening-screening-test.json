@@ -15,11 +15,19 @@
     "kind": "compare",
     "left": {
      "title": "Screening test",
-     "points": ["Done on apparently healthy people", "Applied to groups, one cut-off", "Not a basis for treatment"]
+     "points": [
+      "Done on apparently healthy people",
+      "Applied to groups, one cut-off",
+      "Not a basis for treatment"
+     ]
     },
     "right": {
      "title": "Diagnostic test",
-     "points": ["Done on the sick or indicated", "Applied to single patients", "Basis for treatment decisions"]
+     "points": [
+      "Done on the sick or indicated",
+      "Applied to single patients",
+      "Basis for treatment decisions"
+     ]
     }
    }
   },
@@ -29,23 +37,35 @@
    "say": "Four cells carry every formula. Diseased and positive, healthy but positive, diseased but negative, healthy and negative. Letters a, b, c and d in that reading order. Fix them first; every index that follows is a ratio of these counts.",
    "vis": {
     "kind": "table",
-    "cols": ["Test result", "Diseased", "Not diseased"],
+    "cols": [
+     "Test result",
+     "Diseased",
+     "Not diseased"
+    ],
     "rows": [
-     ["Positive", "a: true positive", "b: false positive"],
-     ["Negative", "c: false negative", "d: true negative"]
+     [
+      "Positive",
+      "a: true positive",
+      "b: false positive"
+     ],
+     [
+      "Negative",
+      "c: false negative",
+      "d: true negative"
+     ]
     ]
    }
   },
   {
-    "tx": "Four coloured cells hold every screening result before any ratio is calculated. Diseased people who test positive fill cell a, the **true positives**. Healthy people who test positive fill cell b. Diseased people who test negative fill cell c, and healthy people who test negative fill cell d. Sensitivity, specificity and the other indices in this lesson are all ratios built from these four counts, so the letters have to stay fixed first.",
-    "say": "Four coloured cells hold every screening result before any ratio is calculated. Diseased people who test positive fill cell a, the true positives. Healthy people who test positive fill cell b. Diseased people who test negative fill cell c, and healthy people who test negative fill cell d. Sensitivity, specificity and the other indices in this lesson are all ratios built from these four counts, so the letters have to stay fixed first.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n246-cm-screening-screening-test.webp",
-      "alt": "Colour coded two by two table of true positive, false positive, false negative and true negative cells",
-      "caption": "Four colour coded cells record true positives, false positives, false negatives and true negatives before any screening ratio is calculated. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Four coloured cells hold every screening result before any ratio is calculated. Diseased people who test positive fill cell a, the **true positives**. Healthy people who test positive fill cell b. Diseased people who test negative fill cell c, and healthy people who test negative fill cell d. Sensitivity, specificity and the other indices in this lesson are all ratios built from these four counts, so the letters have to stay fixed first.",
+   "say": "Four coloured cells hold every screening result before any ratio is calculated. Diseased people who test positive fill cell a, the true positives. Healthy people who test positive fill cell b. Diseased people who test negative fill cell c, and healthy people who test negative fill cell d. Sensitivity, specificity and the other indices in this lesson are all ratios built from these four counts, so the letters have to stay fixed first.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n246-cm-screening-screening-test.webp",
+    "alt": "Colour coded two by two table of true positive, false positive, false negative and true negative cells",
+    "caption": "Four colour coded cells record true positives, false positives, false negatives and true negatives before any screening ratio is calculated. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Sensitivity: catching the diseased",
@@ -53,11 +73,23 @@
    "say": "Sensitivity grades the diseased column. True positives over all diseased, times one hundred. The worked example catches only forty of one hundred forty, twenty eight point six percent. Dangerous diseases demand better, because misses become false reassurance.",
    "vis": {
     "kind": "table",
-    "cols": ["Quantity", "Worked value"],
+    "cols": [
+     "Quantity",
+     "Worked value"
+    ],
     "rows": [
-     ["Diseased total (a plus c)", "140 people"],
-     ["Caught (a)", "40 people"],
-     ["Sensitivity", "28.57 percent"]
+     [
+      "Diseased total (a plus c)",
+      "140 people"
+     ],
+     [
+      "Caught (a)",
+      "40 people"
+     ],
+     [
+      "Sensitivity",
+      "28.57 percent"
+     ]
     ]
    }
   },
@@ -67,11 +99,23 @@
    "say": "Specificity grades the healthy column. True negatives over all healthy, times one hundred: ninety nine point eight percent in the worked table, with twenty false alarms. Costly or stigmatising follow-up demands this quality most.",
    "vis": {
     "kind": "table",
-    "cols": ["Quantity", "Worked value"],
+    "cols": [
+     "Quantity",
+     "Worked value"
+    ],
     "rows": [
-     ["Healthy total (b plus d)", "9860 people"],
-     ["Cleared (d)", "9840 people"],
-     ["Specificity", "99.79 percent"]
+     [
+      "Healthy total (b plus d)",
+      "9860 people"
+     ],
+     [
+      "Cleared (d)",
+      "9840 people"
+     ],
+     [
+      "Specificity",
+      "99.79 percent"
+     ]
     ]
    }
   },
@@ -81,24 +125,40 @@
    "say": "One dial trades the pair. Lower the glucose cut-off and sensitivity climbs while specificity collapses; raise it and the reverse happens. Overlapping curves forbid perfection, so programmes choose which error they prefer to make.",
    "vis": {
     "kind": "table",
-    "cols": ["Glucose cut-off mg/100 ml", "Sensitivity", "Specificity"],
+    "cols": [
+     "Glucose cut-off mg/100 ml",
+     "Sensitivity",
+     "Specificity"
+    ],
     "rows": [
-     ["80", "100.0 percent", "1.2 percent"],
-     ["120", "88.6 percent", "68.2 percent"],
-     ["180", "50.0 percent", "99.8 percent"]
+     [
+      "80",
+      "100.0 percent",
+      "1.2 percent"
+     ],
+     [
+      "120",
+      "88.6 percent",
+      "68.2 percent"
+     ],
+     [
+      "180",
+      "50.0 percent",
+      "99.8 percent"
+     ]
     ]
    }
   },
   {
-    "tx": "Glucose curves in diabetes and in health overlap across a wide middle, so no single threshold is perfect. A 2 hour value of 80 mg per 100 ml catches every diabetic, sensitivity 100 percent, yet specificity falls to 1.2 percent. At 180 mg per 100 ml specificity reaches 99.8 percent and sensitivity is only 50 percent. Lines drawn at 120 and at 180 mg per 100 ml display the **cut off point**, and programmes choose which mistake to keep.",
-    "say": "Glucose curves in diabetes and in health overlap across a wide middle, so no single threshold is perfect. A 2 hour value of 80 mg per 100 ml catches every diabetic, sensitivity 100 percent, yet specificity falls to 1.2 percent. At 180 mg per 100 ml specificity reaches 99.8 percent and sensitivity is only 50 percent. Lines drawn at 120 and at 180 mg per 100 ml display the cut off point, and programmes choose which mistake to keep.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n247-cm-screening-screening-test.webp",
-      "alt": "Overlapping glucose bell curves in diabetics and non diabetics with cut offs at 120 and 180 mg per 100 ml",
-      "caption": "Overlapping bell curves of blood glucose in diabetics and non diabetics carry cut offs at 120 and 180 mg per 100 ml. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Glucose curves in diabetes and in health overlap across a wide middle, so no single threshold is perfect. A 2 hour value of 80 mg per 100 ml catches every diabetic, sensitivity 100 percent, yet specificity falls to 1.2 percent. At 180 mg per 100 ml specificity reaches 99.8 percent and sensitivity is only 50 percent. Lines drawn at 120 and at 180 mg per 100 ml display the **cut off point**, and programmes choose which mistake to keep.",
+   "say": "Glucose curves in diabetes and in health overlap across a wide middle, so no single threshold is perfect. A 2 hour value of 80 mg per 100 ml catches every diabetic, sensitivity 100 percent, yet specificity falls to 1.2 percent. At 180 mg per 100 ml specificity reaches 99.8 percent and sensitivity is only 50 percent. Lines drawn at 120 and at 180 mg per 100 ml display the cut off point, and programmes choose which mistake to keep.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n247-cm-screening-screening-test.webp",
+    "alt": "Overlapping glucose bell curves in diabetics and non diabetics with cut offs at 120 and 180 mg per 100 ml",
+    "caption": "Overlapping bell curves of blood glucose in diabetics and non diabetics carry cut offs at 120 and 180 mg per 100 ml. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "EEG versus CAT: comparing two tests",
@@ -108,11 +168,19 @@
     "kind": "compare",
     "left": {
      "title": "EEG for brain tumour",
-     "points": ["Sensitivity 90 percent", "Specificity 85 percent", "Cheaper, weaker on both axes"]
+     "points": [
+      "Sensitivity 90 percent",
+      "Specificity 85 percent",
+      "Cheaper, weaker on both axes"
+     ]
     },
     "right": {
      "title": "CAT scan for brain tumour",
-     "points": ["Sensitivity 97.5 percent", "Specificity 95 percent", "Stronger, costlier on both axes"]
+     "points": [
+      "Sensitivity 97.5 percent",
+      "Specificity 95 percent",
+      "Stronger, costlier on both axes"
+     ]
     }
    }
   },
@@ -122,12 +190,27 @@
    "say": "Consistency precedes accuracy. One observer repeating a reading, two observers disagreeing, the subject's own biology fluctuating, and faulty instruments all erode it. Standardised procedure, training, duplicate reading and averaged replicates form the defence.",
    "vis": {
     "kind": "table",
-    "cols": ["Variation source", "Example"],
+    "cols": [
+     "Variation source",
+     "Example"
+    ],
     "rows": [
-     ["Intra-observer", "Same reader, different blood pressure twice"],
-     ["Inter-observer", "One sees parasites, another calls slide normal"],
-     ["Biological", "Blood pressure varies through the day"],
-     ["Technical", "Defective instrument or faulty reagent"]
+     [
+      "Intra-observer",
+      "Same reader, different blood pressure twice"
+     ],
+     [
+      "Inter-observer",
+      "One sees parasites, another calls slide normal"
+     ],
+     [
+      "Biological",
+      "Blood pressure varies through the day"
+     ],
+     [
+      "Technical",
+      "Defective instrument or faulty reagent"
+     ]
     ]
    }
   },
@@ -138,12 +221,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Sensitive first test for all"},
-     {"id": "b", "label": "Positives go to specific test"},
-     {"id": "c", "label": "Positive twice: labelled diseased"},
-     {"id": "d", "label": "Net specificity rises"}
+     {
+      "id": "a",
+      "label": "Sensitive first test for all"
+     },
+     {
+      "id": "b",
+      "label": "Positives go to specific test"
+     },
+     {
+      "id": "c",
+      "label": "Positive twice: labelled diseased"
+     },
+     {
+      "id": "d",
+      "label": "Net specificity rises"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -152,11 +260,64 @@
    "say": "Yield rewards targeting. Prevalence, accuracy and participation multiply into cases found, so screening older adults finds more diabetes. Painful tests kill participation and yield together. No test is perfect on every axis; programmes compromise openly.",
    "vis": {
     "kind": "table",
-    "cols": ["Yield rises with", "Programme lever"],
+    "cols": [
+     "Yield rises with",
+     "Programme lever"
+    ],
     "rows": [
-     ["Higher prevalence", "Screen high-risk and older groups"],
-     ["Better sensitivity", "Choose the catching test first"],
-     ["Higher participation", "Keep the test acceptable and painless"]
+     [
+      "Higher prevalence",
+      "Screen high-risk and older groups"
+     ],
+     [
+      "Better sensitivity",
+      "Choose the catching test first"
+     ],
+     [
+      "Higher participation",
+      "Keep the test acceptable and painless"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Sensitivity is a divided by a plus c, and specificity is d divided by b plus d. Raising the cut off lowers sensitivity and raises specificity. Series testing raises net specificity, while parallel testing raises net sensitivity. Yield rises with prevalence and participation. Repeatability falls with observer and biological variation.",
+   "say": "Sensitivity is a divided by a plus c, and specificity is d divided by b plus d. Raising the cut off lowers sensitivity and raises specificity. Series testing raises net specificity, while parallel testing raises net sensitivity. Yield rises with prevalence and participation. Repeatability falls with observer and biological variation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Two by two cells",
+      "a true positive, b false positive, c false negative"
+     ],
+     [
+      "Sensitivity formula",
+      "a divided by a plus c times one hundred"
+     ],
+     [
+      "Specificity formula",
+      "d divided by b plus d times one hundred"
+     ],
+     [
+      "Higher cut off point",
+      "Sensitivity falls while specificity rises steadily"
+     ],
+     [
+      "Series testing example",
+      "RPR then FTA ABS confirmation raises specificity"
+     ],
+     [
+      "Parallel testing effect",
+      "Any positive counts and sensitivity rises"
+     ],
+     [
+      "Yield determinants",
+      "Prevalence, test accuracy and participation rates"
+     ]
     ]
    }
   }

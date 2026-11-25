@@ -67,6 +67,73 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
 - Share IDs: `prep-ids.js` + `prep-ids.css` (optional), `tools/prep-ids.mjs` (fetch, build, verify, publish the
   `v1/ids/` index). See "Share IDs".
 
+## Search type bar (2026-11-24, `?v=prep197`)
+Owner screenshot of a QBank search with All / QBank / Videos / Tests / Pearls tabs: "need this type of division filter".
+- `renderFind` (Home's search) has a `.pn-seg.pn-fkind` bar under the box: All, Questions, Lessons, Modules (`fnd.kind`,
+  reset to All on each open). `setFindKind` patches the bar in place (thumb slides, box keeps text and focus) and reruns
+  `runFind`, which skips the sections not chosen; a single type lifts its cap (lessons 15 -> 60, modules 8 -> 60).
+- No Pearls tab: the lessons index has no pearl flag (`PREP_PEARL.isPearl` needs the full lesson), and every lesson has
+  a PN- ID, so pearls live under Lessons.
+- CSS `.pn-fkind` drops the side inset of `.pn-seg` (it sits inside `.pn-body`). Test: `test/run-prep-subject-ui.mjs`.
+
+## MaiK buddy (2026-11-20, `prep-buddy.js`, `?v=prep189`)
+Owner: "mascot to celebrate user if gets correct mcq or three in a row correct, motivate user, feel sad if wrong mcqs,
+more wrongs asking to prepare topic again"; tap = "mini quick-ask bubble".
+- **What:** the MaiK companion (`maik-companion.js`, style from `smd_maik_doc_style`, "classic" maps to attending) stands
+  bottom-right in a **practice** set only (`mode === "study"`; never in a timed test or mock, it would give answers away).
+  Reacts per answer through the new `cue("quiz", { kind, n })`: right (thumbs, speaks about 1 in 3), streak 3/5/10/every
+  10 (hop + hearts; the existing confetti still fires), back (right after 2+ misses), wrong (shrug + frown, mood forced to
+  -0.3), slump (3 wrong in a row or 3 wrong in one module this set, once per module: "Revise topic" / "Keep going"),
+  end of set (5+ answered; perfect = bow, quiet under "You are the boss"). One late-hours line (23:00-04:00) per open.
+- **Words** live in `prep-buddy.js` (`L`), drawn in its own bubble on `document.body` (z 887; `#smdPrep` is 885), not
+  the companion's `say()`, so it can carry buttons. The companion is body language only.
+- **Revise topic** calls `HOST.buddyRevise` -> `openModule` (back returns to the set). Only when `buddyCanRevise`: the
+  subject index must be loaded, because `renderModule` paints nothing for an unknown topic (a blank pushed screen).
+  Otherwise the line says "worth revising after this set" with no button.
+- **Tap him:** quick-ask bubble (2-3 chips + a 16 px box) -> `HOST.buddyAsk` -> `PREP_ASK.open({ kind: "mcq", prefill })`;
+  the Ask sheet does the asking (device/online/tokens). No answer is generated inside the bubble.
+- **Placement:** stands on the sticky Next bar when it is on the bottom edge (`--pnb-lift`, `place()` on paint, scroll,
+  resize), else the bottom edge. Hidden while `#pnAsk` or `.pn-zoom` is open (CSS `:has`).
+- **Flags:** `smd_prep_buddy` default ON, "0" off. Swipe left hides him, kept in `smd_prep_buddy_off` (new companion
+  `opts.hideKey`, so it does not hide the MaiK sheet's buddy). Companion also got `opts.onTap`.
+- **Hooks in prep.js:** `paint()` end -> `PREP_BUDDY.sync(top === renderRun ? st.run : null, HOST)`; `answer()` ->
+  `answered(r)`; `finish()` -> `finished(r)`; `close()` -> `leave()`.
+- **Tests:** `test/prep-buddy.test.mjs` (decide/doneLine), `test/run-prep-buddy-ui.mjs` (headless, SHOTS=<dir>).
+  Not seen on a phone yet.
+
+- **After the set (2026-11-20, `?v=prep195`, owner screenshot: the question chips showed on "Set finished"):** a tap on
+  the result screen opens a what-next bubble from `HOST.buddyEnd(r)` (practise the missed, ask MaiK what I keep missing
+  via `PREP_ASK.open({kind:"card"})` with the missed stems, revise the topic most misses came from, show my mistakes /
+  practise all again); `buddyEndDo` clicks the result screen's own buttons where one exists. The result body now keeps
+  room for him (`> .pn-body` padding, not only `.pn-run`). After a low score a fist pump ("pep"), then a beckon wave.
+  Livelier: idle every 2-4.4 s, he wanders up to 64 px along the bottom edge and back (`walkTo`, `--pnm-x`), bounces,
+  tilts; `hold(true)` keeps him still while a bubble's tail points at him.
+- **Lively + clock tension (2026-11-20, `?v=prep191`, owner: "very lively ... get tensed turn red when time is almost
+  up"):** Nucleo has an idle life (`idle()` every 3-6 s: glance, read the question, peek, stretch, sway, tassel flick,
+  hop, wave, a dance when mood is high), eyes follow taps and scrolling (`.pnm-look`), drowsy at 45 s and asleep at 60 s
+  without input (z's; a tap startles him awake). Clock: `prep-buddy.js` reads `HOST.buddyClock(r)` twice a second
+  (per-question clock via `qcLeft`, whole-test via `r.limit`; sections not covered) and `tension()` maps it to 0/1/2:
+  per question tense at 30% (5-15 s), panic at 12% (3-5 s); whole test tense in the last 10% (30 s-5 min), panic in the
+  last 3% (10 s-1 min). Tense = flushed body (`--pnm-*` registered with `@property` so the colour fades), sweat, gritted
+  teeth, tremble, glances at the clock; panic = red, steam, scream, flailing arms; 0 left = mind blown (cap shoots off),
+  then sad; back to calm = relief (brow wipe). **He now also appears in timed tests**, clock only: no answer reactions
+  (they would leak answers) and no quick ask (no help in a test). Untimed tests: still no buddy. The per-question clock
+  ignores jumps over `QC_GAP` (3 s), so the UI test steps `SMD_PREP_NOW` in 2.5 s steps.
+- **Bubble look (2026-11-20, owner: "premium non ai slop"):** the bubble copies PrepNucleus tokens from `#smdPrep`
+  (`tokens()`, re-read when body's class changes) so it is the screen's own card in light and dark; slump = one tonal
+  primary (`--pn-pri-soft` / `--pn-pri-ink`) + a text "Keep going"; topic named alone and bold (`buddyTopic` drops the
+  "Subject · " prefix); tail aimed at the mascot from layout sizes (`aim()`; rects are scaled mid-entrance); quick ask =
+  title, one hairline list with chevrons, one field with an inline send (disabled until typed). Entrance 280 ms
+  `--pn-ease` from the tail, 140 ms exit. Impeccable detector clean.
+- **Nucleo, PrepNucleus's own mascot (2026-11-20, `prep-mascot.js`, `?v=prep190`, owner: "create new mascot to suit
+  prepnucleus"):** default character of the buddy. A cell nucleus in hematoxylin blue-violet (membrane with pores,
+  nucleolus, chromatin curl) in a graduation cap with a PrepNucleus-amber tassel. One inline SVG; faces (`data-face`:
+  normal, proud, happy, sad, cry, think, wow) and arm poses (`data-pose`: rest, thumbs, cheer, wave, droop, hug) are CSS
+  states, motion is CSS keyframes (bob, jump, nod, sink, squish, cap toss on 80%+ and perfect). No rAF loop. Reduced
+  motion: faces only. `window.PREP_MASCOT.mount(host, opts)` has the companion's shape (`cue("quiz")`, `state()`,
+  `destroy()`), so `prep-buddy.js` drives either. `smd_prep_mascot = "maik"` brings back the MaiK companion.
+  Face sheet: `SHOTS=<dir> node test/run-prep-buddy-ui.mjs` writes `nucleo-faces.png` / `-dark.png`.
+
 ## Arena server (2026-10-06, merged into `feat/prepnucleus`, not deployed)
 Plan: [[plans/PrepNucleus-Arena]] (deviations listed there). Flags `smd_prep` + `smd_prep_arena` stay OFF.
 - **Pages:** `functions/api/prep/arena/[[path]].js` (consent, events, start, submit, event board, rating board,
@@ -179,7 +246,24 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   **Loads as PrepNucleus / Learn opens (owner 2026-11-14):** `PREP_LESSONS.warmVoice()` runs in `PREP.open`, the Learn tab
   (`prep-nav.js learnView`) and `openSubject`: a voice saved on the phone starts loading then, not when a lesson opens.
   The first 65 MB download still waits for the first Play (never started unasked). Unused, it is released after 10 minutes
-  (`idle(600000, true)`: soft, never cuts speech playing in voice mode); a lesson's `init()` or any `say()` disarms it. After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
+  (`idle(600000, true)`: soft, never cuts speech playing in voice mode); a lesson's `init()` or any `say()` disarms it.
+  **Next page without the wait (owner 2026-11-19, "5 secs to start on next page"):** `speak()` calls `say(part)` BEFORE
+  `prefetch(next)`. The old order let the prefetch cancel the current sentence while it was still rendering (prefetch drops
+  an unclaimed older render), so a page's first sentence started over. On a page's last sentence the NEXT page's first
+  piece (`firstOf(L.i + 1)`) is rendered ahead, so auto-advance and Next speak at once. A Next tapped mid-page still
+  renders on demand (the worker renders one sentence at a time).
+- **Lesson quiz errors say the cause (owner 2026-11-19):** "The questions need a connection the first time" showed on the
+  finish screen with the network on: `startQuiz` mapped only 401/429/flagged and sent every other refusal (403 origin,
+  404 file, 503, clock/signature codes, script errors) to that text. `quizErr(e)` now names the cause and the fix, and
+  an unknown one shows its status and code ("code 403 ...") so a screenshot identifies it; the error is also logged to
+  the console. Root cause of the owner's failure on `ss-general-medicine/sgm-genomic-testing` (v5 index lists 15
+  items) is NOT known yet: the bank needs the app's device binding, so it could not be fetched from the sandbox.
+- **Ask MaiK is medical study only (owner 2026-11-19, it answered "Who is indias pm"):** three layers, the same predicate
+  as the MaiK assistant (`kb/ai/maik-scope.js isRefusable`): `prep-ask.js send()` refuses a positively non-medical message
+  in the app (both modes; no request, no model run, no token, no chat count); `functions/api/ai/_prep-teach.js` refuses
+  it on the server before quota, tokens or the model (`outOfScope`, 200 `{ text, outOfScope: true }`); `CHAT_SYSTEM` (and
+  its word-for-word copy in `prep-teacher.js`) carries a SCOPE block for what the classifier cannot place, which also
+  forbids refusing short medical follow-ups. Tests: `test/prep-teach-scope.test.mjs`, `test/run-prep-ask-scope-ui.mjs`. After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
   real time and `usable()` is false, so the lesson uses the system voice rather than stall between sentences; the system voice is otherwise only the fallback when Phonon cannot load. Each
   sentence (`sayChunks`) is rendered, the next one rendered ahead, and played through one `<audio>` element unlocked in
   the Play tap (WebAudio is muted by the iOS silent switch); the lesson's speed is its `playbackRate`.
@@ -1882,8 +1966,10 @@ Owner: "features that make PrepNucleus unique, Gen Z oriented, build all". Decis
   optional in `prep-loader.js`). Server `functions/api/prep/play/[[path]].js` + `functions/_prep-play.js`, D1 tables in
   `prep-arena-worker/migrations/0007_prep_play.sql` (apply before focus, spot board and mnemonics work). Squads live in
   `functions/api/prep/social` + `prep-social.js`; revenge in `prep-arena.js`.
-- **Home Play section:** Swipe feed, Spot diagnosis of the day, Boss battles, Quick fire, Voice mode, Focus room, Wrapped,
-  Season (Arena on), Streak freezes.
+- **Home Play section:** a sideways strip (`.pn-strip`): Spot diagnosis of the day, Boss battles, Quick fire, Voice mode,
+  Focus room, Wrapped, Season (Arena on). Streak freezes moved to Your progress (`PREP_PLAY.freezeRow`, 2026-11-17).
+  Swipe feed IS PrepReels since 2026-11-17: `v-feed` and `PREP.open({ play: "feed" })` go through `feed()` -> `PREP_MEDIGRAM.open`;
+  the old feed (`openFeed`, `#pvFeed`) runs only when PrepReels is off (`?medigram=0`), and only then shows its row.
 - **Swipe feed:** vertical scroll-snap cards from 4 random plan modules; a pearl after every 3rd question (only from a
   question already passed), an image card (eye/PSM atlas) after every 5th. Answers record through `HOST.record`.
 - **Spot diagnosis:** pool = `prep/imglearn/eye.json` + `psm.json` (now copied by build-www; the Eye and PSM atlases were
@@ -1961,6 +2047,8 @@ Owner: "features that make PrepNucleus unique, Gen Z oriented, build all". Decis
 
 ## MediGram (proposed, 2026-10-31)
 
+**2026-11-17 rebuild:** PrepReels now runs on the real bank (random modules across every subject of the exam), mixes questions, pearls, lessons, images and the cleared CliniX videos (played through the `stewardmd.in/_site/yt` shim, since YouTube rejects capacitor://). Files: `prep-medigram.js` (feed), `prep-medigram-media.js` (shim player), `prep-medigram-data.js` (`mixFeed`, flags, break timer). UI test: `test/run-prep-medigram-ui.mjs`. See Decisions 2026-11-17.
+
 Optional short-form adaptive learning feed inside PrepNucleus: MCQs, explanations, first-party micro-lessons, curated clinical discovery and spaced recall. Reuses the existing bank, lessons, My Mistakes, bookmarks and FSRS-6; it does not create a parallel learning engine. Proposed flag: smd_prep_medigram (default OFF). YouTube is an optional compliant public-video source only; personalised Shorts feeds are not imported or cloned. Smart Break is time-bounded and deferred until the Study Feed is validated. Full product, architecture, rollout, policy, privacy, measurement and test plan: [[plans/PrepNucleus-MediGram]].
 
 
@@ -2032,3 +2120,55 @@ Every PrepNucleus subject screen shows an "Image Library" button next to the atl
   `PREP_MOTION.confetti`. Off under reduced motion; kill switch `smd_confetti = "0"`. Test: run-prep-play-ui.
 - "You are the boss" clip (owner 2026-11-11): a boss win and 100% on 5+ questions play boss-cele.js (male/female
   doctor by profile gender) instead of the card. See Decisions 2026-11-11.
+
+## Learn more group (2026-11-17)
+Owner: "consistent spacing, alignment, touch targets and typography"; "Learn more becomes a distinct section rather than
+a collection of floating buttons". Under every answered MCQ (practice, review, test solutions) `prep.js lmGroup()` wraps
+the Know more slot, the interactive-figure row and Ask MaiK in `<section class="pn-lm">` titled "Learn more". CSS
+(`prep.css`, before the Why chips block) flattens the Know more rows (`display: contents`) into one inset list: 60px
+rows, 32px icon tile per kind (book, lesson, drug, protocol, cards, Nucleus360, figure, more), title over kind, chevron,
+hairlines. Fallback rows keep a neutral tile. Then (owner: "3D effect and differentiation between buttons") each row became its own raised key: top-lit gradient, hairline edge, soft drop, 1px press; block now sits before "Reasoning explanations" (that block bans shadows) with an `html body` specificity bump. The ID chip is a quiet left-aligned line. Inner label markup unchanged
+(tests pin it); icons are masked pseudo-elements. Items with the reasoning body (RX) keep Know more inside `.pn-rx`; the
+group then holds the figure and Ask MaiK. Known: `run-prep-relabel-ui` q4 and `run-beta-figure-ui` paracetamol fail on
+main before this change.
+
+## Compact home (2026-11-17, prep180; order prep183)
+Owner: "Homepage is overwhelming, more options more scrolling" and "Swipe feed and PrepReels are same, unite them". Phone home
+went from 6.7 screens to 3.7. Same rows and actions, laid out tighter (CSS block "Compact home" near the top of prep.css,
+ahead of the scoped "Reasoning explanations" / "Why option chips" blocks whose tests read everything after their marker):
+- Order (owner, same day, then moved by the owner's markup): readiness score, Question of the day, Today's plan (`#pnPlanTop` and `#pnPlanList` are separate boxes so `homeMounted` never wipes it), Practise, IQoach, Play, Subjects,
+  Your progress, Compete. `#pnQotd` keeps 300 px (`.pn-qotd-wait`) until the question loads, so the plan does not jump;
+  no question (offline, empty, failed index load) hides it.
+- PrepReels: one `.pn-next`-style card under Solve next (`.pn-mgh`), Saved beside it once anything is saved.
+- Practise: `.pn-group.pn-grid4` icon tiles (auto-fit, min 78 px: 4 a row on a phone, 3 under 360 px, one row on iPad),
+  subtitles hidden. Nucleus360, ReWise, Custom, Mistakes, Weak areas, Bookmarks, Previous year papers (NEET-PG), Cards due, decks.
+- With the tab bar (`G.PREP_NAV`) these leave home: My stats, Friends, Accuracy, Settings, Notebook (You tab) and Mock exam
+  (Tests tab). Without prep-nav.js they stay. Settings stays one tap away as "Change plan" in Today's plan once a plan exists.
+- Subjects: first 6, then "Show all N subjects" (`subs-all`, `st.subsAll`, CSS `.pn-cut`); the DOM keeps every tile.
+  NEET-SS scoped homes are not cut. Tests > QBank lists every subject too.
+- Harness note: overflow checks must skip `.pn-strip` (its off-screen cards are scroll content, not page overflow).
+
+
+## Auto explanations (2026-11-20, `?v=prep195`)
+Owner (Revenge screenshot, "No explanation is stored for this question yet"): "I shouldnt see a single mcq without explanation. Fix all. Use haiku 5.5".
+- **Cause of the screenshot:** Arena battle questions reached the phone as stem + options only, so Revenge items had no `exp`/`x`.
+  Now `functions/_prep-arena.js expOf` keeps the bank's stored explanation (`exp`, `x`, `r`, `kp`, capped) on each drawn item,
+  `prep-arena-worker` keeps it in the room and sends it only in the round result `r` (`e`), never with the question; `prep-arena.js`
+  puts it on the Revenge items. The worker needs `wrangler deploy` (prep-arena-worker) for this half.
+- **Every other gap:** `functions/api/prep/explain.js` (POST `{ q, o, a }`): `claude-haiku-5-5` (env `PREP_AX_MODEL`), effort medium,
+  json_schema `{ key, notes, others: {letter}, pearl }`, told the key, never asked to judge it. One copy per question in R2
+  `PREP_BANK_R2` `prep-explain/v1/<sha256>.json` (outside `prep-bank/`), served to every later caller with no call. Limits (code
+  defaults): 300 a day signed in, 40 by IP for guests, $4 a day all callers (KV `prep:ax:*`); `PREP_AX_ON` "0" turns it off. Uses
+  the existing `ANTHROPIC_API_KEY` (`key::workspace`); no new binding.
+- **Client** (`prep.js`): `whyHtml` no longer says "No explanation is stored"; `autoExplain(it)` starts on question render (ready by
+  answer time), fills `.pn-ax` in place (`axFill`, no repaint), sets `it.x` + `it._ax` so Ask MaiK and the offline teacher read it,
+  shows "Explanation written by MaiK AI. Report it if something looks wrong." Phone copy: localStorage `smd_prep_ax` (newest 400).
+  Offline/failure: "could not be loaded" + Try again (`axretry`).
+- **Not done:** a bank-wide Batch backfill (no R2/Anthropic creds in the cloud session). The route fills each question on first view
+  and shares it, so the gap closes as questions are seen.
+- Tests: `test/prep-autoexplain.test.mjs`; `test/run-prep-explain-ui.mjs` (stubbed `/__ax`). Its "nothing scrolls sideways" check
+  fails on main too (measures during the reveal slide).
+- **Bank fill (2026-11-20):** `tools/prep-fill-missing.mjs` (owner-run, needs `~/.stewardmd-secrets/r2-s3.env` and the Anthropic key):
+  `scan` reads every served file from R2 (live bank version per subject, listed overlay sets, PYQ), `run --max-usd n` writes the
+  missing explanations with claude-haiku-5-5 Message Batches (resumable, one retry), `apply --yes` uploads the changed files and then
+  the touched manifests. Items get `x`, `r` (when none) and `ax: 1`. Work dir `~/prep-data/fill-missing`. Test: `test/prep-fill-missing.test.mjs`.

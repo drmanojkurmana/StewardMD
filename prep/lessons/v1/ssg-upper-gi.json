@@ -1,0 +1,429 @@
+{
+ "v": 1,
+ "module": "ssg-upper-gi",
+ "subject": "ss-surgical-gastroenterology",
+ "title": "Upper gastrointestinal surgery: oesophagus stomach duodenum achalasia GIST and perforation",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22nd edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Achalasia is a primary motor disorder** in which the lower oesophageal sphincter fails to relax in 1 in 100000 adults. Progressive dysphagia to solids and liquids together characterises the presentation. Weight loss is modest in 70 percent at diagnosis. Barium swallow shows a dilated oesophagus with smooth tapering to a bird beak narrowing.",
+   "say": "Begin with achalasia as a swallowing disorder where the lower sphincter stays shut and the gullet loses its squeeze. Solid and liquid swallows struggle together from the start, and patients often tolerate a narrow diet for years. The barium study remains the classic first clue, showing a wide gullet that narrows smoothly like a beak.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Finding",
+     "Frequency"
+    ],
+    "rows": [
+     [
+      "Dysphagia solids plus liquids",
+      "Both together",
+      "Nearly all"
+     ],
+     [
+      "Incidence",
+      "1 in 100000 adults",
+      "Rare"
+     ],
+     [
+      "Weight loss",
+      "Modest loss",
+      "Near 70 percent"
+     ],
+     [
+      "Barium pattern",
+      "Bird beak narrowing",
+      "Classic"
+     ],
+     [
+      "Chest pain",
+      "Spasm episodes",
+      "Near 40 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Loss of myenteric neurons remains the **core cause in 90 percent** of achalasia cases. Autoimmune ganglionitis and Chagas disease mimic the pattern in 10 percent. No single gene dominates, though HLA linkage appears in 5 percent of families. Infection and environmental triggers are proposed but unproven in more than 80 percent of series.",
+   "say": "Imagine the nerve network in the gullet wall as the culprit, with ganglion cells disappearing over time. In a tiny fraction, a parasite or autoimmune process produces the same picture, so a history of travel or systemic illness matters. Most families see no pattern at all, which reassures patients about inheritance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary achalasia",
+     "points": [
+      "90 percent of cases",
+      "Myenteric neuron loss",
+      "No parasite cause",
+      "Sporadic pattern"
+     ]
+    },
+    "right": {
+     "title": "Secondary mimics",
+     "points": [
+      "Chagas disease",
+      "Autoimmune ganglionitis",
+      "About 10 percent",
+      "Needs parasite test"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Failed relaxation leads to **aperyctic bolus transit in 75 percent** of swallows on manometry. Integrated relaxation pressure above 15 mmHg defines impaired relaxation on high resolution manometry. Chicago classification version 4 separates types 1 to 3 by pressurisation. Type 2 with 50 percent pressurisation responds best to myotomy at 90 percent relief rates.",
+   "say": "See how the physiology explains every symptom. The sphincter pressure stays high while peristalsis vanishes, so food stagnates above the block. Pressure tracing then sorts patients into patterns that predict response to cutting the muscle. Pressurised whole gullet swallows predict durable relief after myotomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "neuron",
+      "label": "Neuron loss"
+     },
+     {
+      "id": "sphincter",
+      "label": "Sphincter stays shut"
+     },
+     {
+      "id": "stasis",
+      "label": "Bolus stasis above"
+     },
+     {
+      "id": "chest",
+      "label": "Chest pain plus reflux"
+     },
+     {
+      "id": "myotomy",
+      "label": "Cut muscle 6 cm"
+     }
+    ],
+    "edges": [
+     [
+      "neuron",
+      "sphincter"
+     ],
+     [
+      "sphincter",
+      "stasis"
+     ],
+     [
+      "stasis",
+      "chest"
+     ],
+     [
+      "chest",
+      "myotomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Regurgitation of bland undigested food occurs in **60 percent of patients** and often wakes them at night. Halitosis and nocturnal aspiration appear in 25 percent due to retained food. Squamous carcinoma risk rises 10 fold after 10 years of stasis. Mega oesophagus beyond 6 cm diameter marks decompensation in 5 percent of late presenters.",
+   "say": "Examine the history for regurgitation that arrives soon after meals and carries no acid taste. Patients describe coughing at night and foul breath from food sitting in the gullet. Waiting years lets the gullet stretch and twist, and that long stasis slowly raises cancer risk separate from the motility problem.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Symptom",
+     "Pattern",
+     "Rate"
+    ],
+    "rows": [
+     [
+      "Bland regurgitation",
+      "Undigested food",
+      "Near 60 percent"
+     ],
+     [
+      "Nocturnal aspiration",
+      "Retained bolus",
+      "Near 25 percent"
+     ],
+     [
+      "Mega oesophagus",
+      "Over 6 cm wide",
+      "Near 5 percent"
+     ],
+     [
+      "Squamous cancer",
+      "10 fold rise",
+      "After 10 years"
+     ],
+     [
+      "Chest pain",
+      "Spasm episodes",
+      "Near 40 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High resolution manometry is diagnostic in 95 percent** of suspected cases and is required before myotomy. Timed barium swallow shows 5 cm column height for objective emptying. Endoscopy excludes pseudoachalasia from cardia tumours in 5 percent. Sphincter pressure above 35 mmHg supports the diagnosis when relaxation is impaired on 3 consecutive swallows.",
+   "say": "Check the workup in a strict order before offering any definitive therapy. Manometry confirms the pattern, timed barium gives a measurable emptying baseline, and endoscopy with biopsy rules out a hidden cardia growth. Operating without this trio risks cutting muscle for a cancer that merely looks like achalasia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Confirms achalasia",
+     "points": [
+      "Manometry pattern",
+      "Timed barium column",
+      "Basal sphincter pressure",
+      "3 swallows test"
+     ]
+    },
+    "right": {
+     "title": "Excludes cancer",
+     "points": [
+      "Endoscopy biopsy",
+      "Cardia wall check",
+      "5 percent pseudoachalasia",
+      "CT when suspicious"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Heller myotomy divides 6 cm length** with Dor fundoplication in 100 percent of laparoscopic cases. Dysphagia relief reaches 90 percent at 5 years in most series. POEM matches myotomy but reflux reaches 40 percent long term. Botulinum toxin gives only 3 to 6 months relief and is limited to unfit patients in 10 percent.",
+   "say": "Compare the surgical options by durability and follow up burden. Long muscle division gives lasting emptying, while the endoscopic tunnel suits spastic patterns but trades for reflux. Botulinum works only briefly and scars the plane, so reserve it for frail patients who cannot endure any operation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "Manometry type 2"
+     },
+     {
+      "id": "heller",
+      "label": "Heller 6 cm plus wrap"
+     },
+     {
+      "id": "poem",
+      "label": "POEM tunnel option"
+     },
+     {
+      "id": "botox",
+      "label": "Botox 3 months only"
+     },
+     {
+      "id": "follow",
+      "label": "Acid control follow up"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "heller"
+     ],
+     [
+      "diag",
+      "poem"
+     ],
+     [
+      "heller",
+      "follow"
+     ],
+     [
+      "poem",
+      "follow"
+     ],
+     [
+      "botox",
+      "follow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gastrointestinal stromal tumours arise from KIT signalling** in interstitial cells of Cajal, with 60 percent stomach primaries. KIT mutations occur in 75 percent of tumours. Size and mitotic rate stratify risk by the Fletcher index. Tumours under 2 cm without mitoses carry low risk in more than 95 percent of cases.",
+   "say": "Discuss stomach stromal tumours as the commonest mesenchymal tumours of the gut wall. Most start in the stomach and carry growth switch changes in kit signalling. Small lesions without active division behave quietly, while larger dividing lesions can seed the liver and peritoneum even when the capsule looks intact.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Share",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Stomach primary",
+      "Near 60 percent",
+      "Commonest"
+     ],
+     [
+      "Small bowel",
+      "Near 30 percent",
+      "Next"
+     ],
+     [
+      "KIT mutation",
+      "Near 75 percent",
+      "Diagnostic"
+     ],
+     [
+      "Tiny under 2 cm",
+      "Low risk",
+      "Over 95 percent safe"
+     ],
+     [
+      "Liver seeding",
+      "Common relapse",
+      "Needs imaging"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bleeding or perforation heralds presentation in **30 percent of GIST cases**. Endoscopic ultrasound with biopsy achieves 90 percent diagnosis for submucosal lesions. Mutational testing for KIT exon 11 guides imatinib dosing at 400 mg daily. Neoadjuvant imatinib for 6 months shrinks large tumours from 8 cm to under 5 cm and permits organ saving surgery.",
+   "say": "Review how stromal tumours announce themselves through bleed or pain rather than swallowing trouble. Endoscopic ultrasound pinpoints the mural layer and yields tissue for mutation testing. Imatinib tailored by mutation shrinks large gastric lesions enough to convert a total gastrectomy into a wedge resection in many patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "GIST workup",
+     "points": [
+      "Endoscopic ultrasound",
+      "Biopsy mutation test",
+      "CT staging chest",
+      "400 mg imatinib dose"
+     ]
+    },
+    "right": {
+     "title": "Ulcer perforation",
+     "points": [
+      "Omental patch",
+      "Washout fluid",
+      "5 cm ulcer size",
+      "30 percent mortality"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Peptic ulcer perforation kills 30 percent** when presentation exceeds 24 hours after onset. Anterior duodenal ulcers in 80 percent perforate into free peritoneum. Graham patch closes 80 percent of defects under 1 cm. H. pylori eradication with clarithromycin narrows recurrence to under 5 percent. NSAID use accounts for 25 percent of perforations in older adults.",
+   "say": "Examine the perforated ulcer story with its sudden thunderclap pain and rigid abdomen. Anterior duodenal ulcers spill freely, while posterior ulcers bleed instead. Fast resuscitation and early patching cut mortality sharply, and testing for helicobacter prevents the next perforation better than any suture.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pain",
+      "label": "Sudden pain under 24 h"
+     },
+     {
+      "id": "xr",
+      "label": "Free air under diaphragm"
+     },
+     {
+      "id": "patch",
+      "label": "Omental patch under 1 cm"
+     },
+     {
+      "id": "test",
+      "label": "H pylori eradication"
+     },
+     {
+      "id": "rec",
+      "label": "5 percent recurrence"
+     }
+    ],
+    "edges": [
+     [
+      "pain",
+      "xr"
+     ],
+     [
+      "xr",
+      "patch"
+     ],
+     [
+      "patch",
+      "test"
+     ],
+     [
+      "test",
+      "rec"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Postoperative complications include **leak in 5 percent after duodenoplasty** and intraperitoneal collection in 10 percent. Dumping syndrome affects 20 percent after pyloroplasty. Marginal ulceration recurs in 10 percent without acid suppression. Resection margin under 1 cm is acceptable in GIST when organ preservation matters. Stress ulceration in 5 percent of ICU patients needs prophylaxis.",
+   "say": "Consider the leak and ulcer risks that follow upper gut surgery. Patch sites can leak early, and pyloroplasty patients may flush after meals for months. Lifelong acid suppression and helicobacter clearance protect margins, while stress ulcer drugs protect critically ill patients during ventilation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Rate",
+     "Prevention"
+    ],
+    "rows": [
+     [
+      "Patch leak",
+      "Near 5 percent",
+      "Omental cover"
+     ],
+     [
+      "Collection",
+      "Near 10 percent",
+      "Drain plus wash"
+     ],
+     [
+      "Dumping syndrome",
+      "Near 20 percent",
+      "Diet advice"
+     ],
+     [
+      "Marginal ulcer",
+      "Near 10 percent",
+      "Acid suppression"
+     ],
+     [
+      "Stress ulcer",
+      "Near 5 percent ICU",
+      "Prophylaxis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Barium bird beak favours achalasia over cancer** in patients under 55 years with progressive dysphagia. Myotomy relieves 90 percent at 5 years while imatinib shrinks GIST from 8 cm to 5 cm. Perforation mortality reaches 30 percent after 24 hours. Patch under 1 cm succeeds in 80 percent without gastrectomy.",
+   "say": "High-yield for the exam, link manometry type two to the best myotomy response and kit mutation to imatinib dosing. Remember the perforation clock of one day for mortality, and the patch size of one centimetre for success. Endoscopy before any myotomy separates true achalasia from cardia cancer in viva answers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Decision",
+     "Threshold",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Achalasia relief",
+      "90 percent at 5 years",
+      "Heller myotomy"
+     ],
+     [
+      "GIST shrink",
+      "8 cm to 5 cm",
+      "Six months imatinib"
+     ],
+     [
+      "Perforation clock",
+      "30 percent after 24 h",
+      "Operate early"
+     ],
+     [
+      "Patch limit",
+      "Under 1 cm",
+      "Omental patch"
+     ],
+     [
+      "Pseudoachalasia age",
+      "Over 55 years",
+      "Endoscopy first"
+     ]
+    ]
+   }
+  }
+ ]
+}

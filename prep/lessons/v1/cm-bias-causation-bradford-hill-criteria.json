@@ -13,11 +13,23 @@
    "say": "Ghosts come first. An association can be pure artefact: altitude links to goitre only through iodine in the soil, and sampling variation fakes the rest. Exclude artefact and chance by design before debating causation at all.",
    "vis": {
     "kind": "table",
-    "cols": ["Association type", "Reality behind it"],
+    "cols": [
+     "Association type",
+     "Reality behind it"
+    ],
     "rows": [
-     ["Spurious", "Artefact of sampling or a third factor"],
-     ["Indirect", "Exposure linked through a confounder"],
-     ["Direct or causal", "Exposure itself produces the disease"]
+     [
+      "Spurious",
+      "Artefact of sampling or a third factor"
+     ],
+     [
+      "Indirect",
+      "Exposure linked through a confounder"
+     ],
+     [
+      "Direct or causal",
+      "Exposure itself produces the disease"
+     ]
     ]
    }
   },
@@ -29,11 +41,19 @@
     "kind": "compare",
     "left": {
      "title": "Temporality secure",
-     "points": ["Exposure recorded before disease", "Cohort design guarantees order", "Reverse causation excluded"]
+     "points": [
+      "Exposure recorded before disease",
+      "Cohort design guarantees order",
+      "Reverse causation excluded"
+     ]
     },
     "right": {
      "title": "Temporality doubtful",
-     "points": ["Exposure recalled after diagnosis", "Early disease may change habits", "Order asserted, not observed"]
+     "points": [
+      "Exposure recalled after diagnosis",
+      "Early disease may change habits",
+      "Order asserted, not observed"
+     ]
     }
    }
   },
@@ -43,11 +63,23 @@
    "say": "Bigger and graded associations persuade. Large relative risk plus incidence climbing with dose and duration built the smoking verdict. No gradient argues against causation, though a flat gradient alone cannot acquit an exposure either.",
    "vis": {
     "kind": "table",
-    "cols": ["Dose pattern", "Causal reading"],
+    "cols": [
+     "Dose pattern",
+     "Causal reading"
+    ],
     "rows": [
-     ["Risk rises steadily with dose", "Supports causation, biological gradient"],
-     ["Risk flat at every dose", "Argues against causation"],
-     ["Risk falls as dose rises", "Suggests protection or artefact"]
+     [
+      "Risk rises steadily with dose",
+      "Supports causation, biological gradient"
+     ],
+     [
+      "Risk flat at every dose",
+      "Argues against causation"
+     ],
+     [
+      "Risk falls as dose rises",
+      "Suggests protection or artefact"
+     ]
     ]
    }
   },
@@ -70,11 +102,19 @@
     "kind": "compare",
     "left": {
      "title": "Specificity present",
-     "points": ["Vinyl chloride and angiosarcoma", "Strong supportive evidence", "Rare in chronic disease"]
+     "points": [
+      "Vinyl chloride and angiosarcoma",
+      "Strong supportive evidence",
+      "Rare in chronic disease"
+     ]
     },
     "right": {
      "title": "Specificity absent",
-     "points": ["Smoking, many diseases", "Lung cancer, several causes", "Causation still possible"]
+     "points": [
+      "Smoking, many diseases",
+      "Lung cancer, several causes",
+      "Causation still possible"
+     ]
     }
    }
   },
@@ -85,12 +125,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "First study finds association"},
-     {"id": "b", "label": "Other populations repeat it"},
-     {"id": "c", "label": "Other designs repeat it"},
-     {"id": "d", "label": "Causal confidence grows"}
+     {
+      "id": "a",
+      "label": "First study finds association"
+     },
+     {
+      "id": "b",
+      "label": "Other populations repeat it"
+     },
+     {
+      "id": "c",
+      "label": "Other designs repeat it"
+     },
+     {
+      "id": "d",
+      "label": "Causal confidence grows"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -99,11 +164,23 @@
    "say": "Two knowledge tests follow. Mechanisms must be able to carry the effect, and the claim must cohere with natural history and laboratory facts. Both depend on what is known today, so implausibility expires as science moves.",
    "vis": {
     "kind": "table",
-    "cols": ["Criterion", "Question asked"],
+    "cols": [
+     "Criterion",
+     "Question asked"
+    ],
     "rows": [
-     ["Plausibility", "Can known biology carry this effect?"],
-     ["Coherence", "Does it fit distribution and laboratory facts?"],
-     ["Experiment (added evidence)", "Does removing exposure cut disease?"]
+     [
+      "Plausibility",
+      "Can known biology carry this effect?"
+     ],
+     [
+      "Coherence",
+      "Does it fit distribution and laboratory facts?"
+     ],
+     [
+      "Experiment (added evidence)",
+      "Does removing exposure cut disease?"
+     ]
     ]
    }
   },
@@ -113,11 +190,23 @@
    "say": "Name the third factor precisely. It travels with the exposure, risks the disease alone, and sits unequally across groups: smoking inside alcohol studies. Matching and stratification handle known ones; only randomisation scatters the unknown.",
    "vis": {
     "kind": "table",
-    "cols": ["Confounder test", "Smoking in alcohol studies"],
+    "cols": [
+     "Confounder test",
+     "Smoking in alcohol studies"
+    ],
     "rows": [
-     ["Associated with exposure", "Drinkers smoke more"],
-     ["Independent risk factor", "Smoking alone causes the cancer"],
-     ["Unequal across groups", "Cases smoke more than controls"]
+     [
+      "Associated with exposure",
+      "Drinkers smoke more"
+     ],
+     [
+      "Independent risk factor",
+      "Smoking alone causes the cancer"
+     ],
+     [
+      "Unequal across groups",
+      "Cases smoke more than controls"
+     ]
     ]
    }
   },
@@ -140,11 +229,19 @@
     "kind": "compare",
     "left": {
      "title": "Selection problems",
-     "points": ["Unrepresentative cases or controls", "Berkesonian hospital distortion", "Neyman prevalent case bias"]
+     "points": [
+      "Unrepresentative cases or controls",
+      "Berkesonian hospital distortion",
+      "Neyman prevalent case bias"
+     ]
     },
     "right": {
      "title": "Measurement problems",
-     "points": ["Recall differences by outcome", "Observer expectation effects", "Hawthorne behaviour change"]
+     "points": [
+      "Recall differences by outcome",
+      "Observer expectation effects",
+      "Hawthorne behaviour change"
+     ]
     }
    }
   },
@@ -155,12 +252,78 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Lipids, pressure, smoking"},
-     {"id": "b", "label": "Diabetes, stress, heredity"},
-     {"id": "c", "label": "Strands interact over years"},
-     {"id": "d", "label": "Myocardial infarction"}
+     {
+      "id": "a",
+      "label": "Lipids, pressure, smoking"
+     },
+     {
+      "id": "b",
+      "label": "Diabetes, stress, heredity"
+     },
+     {
+      "id": "c",
+      "label": "Strands interact over years"
+     },
+     {
+      "id": "d",
+      "label": "Myocardial infarction"
+     }
     ],
-    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Temporality is the only mandatory Bradford Hill criterion for establishing disease causation: the presumed cause must precede the effect. Strength of association is quantified by relative risk or odds ratio. Confounding is addressed in the study design stage via matching, restriction, or randomisation, and in the analysis stage through stratification or multivariable regression. Selection bias distorts findings when study groups differ systematically from the target population.",
+   "say": "Temporality is the only mandatory Bradford Hill criterion for establishing disease causation: the presumed cause must precede the effect. Strength of association is quantified by relative risk or odds ratio. Confounding is addressed in the study design stage via matching, restriction, or randomisation, and in the analysis stage through stratification or multivariable regression. Selection bias distorts findings when study groups differ systematically from the target population.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Indispensable Hill criterion",
+      "Temporality requiring exposure to precede occurrence of disease"
+     ],
+     [
+      "Strength of association",
+      "Large relative risk or odds ratio makes confounding less likely"
+     ],
+     [
+      "Biological gradient",
+      "Dose-response curve where increasing exposure increases disease risk"
+     ],
+     [
+      "Confounder definition",
+      "Extraneous factor associated with exposure and independent cause of disease"
+     ],
+     [
+      "Controlling confounding in design",
+      "Randomisation, restriction of eligibility, and individual matching"
+     ],
+     [
+      "Controlling confounding in analysis",
+      "Stratified analysis and multivariable regression modelling techniques"
+     ],
+     [
+      "Berkson bias",
+      "Selection bias occurring in hospital-based case-control studies"
+     ]
+    ]
    }
   }
  ],

@@ -13,11 +13,23 @@
    "say": "Names evolved; machinery persisted. Control programme, DOTS era, then elimination programme from 2020. Quality diagnosis, standardised treatment, unbroken drug supply and outcome recording carry across every rebranding.",
    "vis": {
     "kind": "table",
-    "cols": ["Era", "Defining shift"],
+    "cols": [
+     "Era",
+     "Defining shift"
+    ],
     "rows": [
-     ["NTCP (1962 onward)", "District programme, long regimens"],
-     ["RNTCP and DOTS", "Observed standardised short course"],
-     ["NTEP (2020 onward)", "Elimination target, daily FDC, molecular first"]
+     [
+      "NTCP (1962 onward)",
+      "District programme, long regimens"
+     ],
+     [
+      "RNTCP and DOTS",
+      "Observed standardised short course"
+     ],
+     [
+      "NTEP (2020 onward)",
+      "Elimination target, daily FDC, molecular first"
+     ]
     ]
    }
   },
@@ -40,12 +52,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Presumptive TB identified"},
-     {"id": "b", "label": "Molecular test (CBNAAT or Truenat)"},
-     {"id": "c", "label": "Rifampicin result same day"},
-     {"id": "d", "label": "Regimen assigned, notification done"}
+     {
+      "id": "a",
+      "label": "Presumptive TB identified"
+     },
+     {
+      "id": "b",
+      "label": "Molecular test (CBNAAT or Truenat)"
+     },
+     {
+      "id": "c",
+      "label": "Rifampicin result same day"
+     },
+     {
+      "id": "d",
+      "label": "Regimen assigned, notification done"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -54,24 +91,40 @@
    "say": "Daily combinations replaced intermittent dots-watching. Two months of four drugs, four months of three, by weight band. Adherence support follows patient choice now, digital tools beside human observation.",
    "vis": {
     "kind": "table",
-    "cols": ["Phase", "Drugs", "Duration"],
+    "cols": [
+     "Phase",
+     "Drugs",
+     "Duration"
+    ],
     "rows": [
-     ["Intensive", "H, R, Z, E daily FDC", "2 months"],
-     ["Continuation", "H, R, E daily FDC", "4 months"],
-     ["Dosing basis", "Weight bands", "Whole course"]
+     [
+      "Intensive",
+      "H, R, Z, E daily FDC",
+      "2 months"
+     ],
+     [
+      "Continuation",
+      "H, R, E daily FDC",
+      "4 months"
+     ],
+     [
+      "Dosing basis",
+      "Weight bands",
+      "Whole course"
+     ]
     ]
    }
   },
   {
-    "tx": "Blister packs for drug sensitive tuberculosis are marked by weight band and split into two labelled phases. **Daily FDC treatment** gives two months of isoniazid, rifampicin, pyrazinamide and ethambutol, written HRZE, then four months of isoniazid, rifampicin and ethambutol, written HRE. Each tablet combines those drugs so the dose matches the band. Thrice weekly intermittent DOTS is no longer the schedule. Support may be observed, digital, or shared with family, by the patient's choice.",
-    "say": "Blister packs for drug sensitive tuberculosis are marked by weight band and split into two labelled phases. Daily FDC treatment gives two months of isoniazid, rifampicin, pyrazinamide and ethambutol, written HRZE, then four months of isoniazid, rifampicin and ethambutol, written HRE. Each tablet combines those drugs so the dose matches the band. Thrice weekly intermittent DOTS is no longer the schedule. Support may be observed, digital, or shared with family, by the patient's choice.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n421-cm-tb-dots.webp",
-      "alt": "Weight band blister of daily tuberculosis tablets with intensive and continuation phases marked",
-      "caption": "A weight band blister marks two months of HRZE and four months of HRE as daily fixed dose treatment. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Blister packs for drug sensitive tuberculosis are marked by weight band and split into two labelled phases. **Daily FDC treatment** gives two months of isoniazid, rifampicin, pyrazinamide and ethambutol, written HRZE, then four months of isoniazid, rifampicin and ethambutol, written HRE. Each tablet combines those drugs so the dose matches the band. Thrice weekly intermittent DOTS is no longer the schedule. Support may be observed, digital, or shared with family, by the patient's choice.",
+   "say": "Blister packs for drug sensitive tuberculosis are marked by weight band and split into two labelled phases. Daily FDC treatment gives two months of isoniazid, rifampicin, pyrazinamide and ethambutol, written HRZE, then four months of isoniazid, rifampicin and ethambutol, written HRE. Each tablet combines those drugs so the dose matches the band. Thrice weekly intermittent DOTS is no longer the schedule. Support may be observed, digital, or shared with family, by the patient's choice.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n421-cm-tb-dots.webp",
+    "alt": "Weight band blister of daily tuberculosis tablets with intensive and continuation phases marked",
+    "caption": "A weight band blister marks two months of HRZE and four months of HRE as daily fixed dose treatment. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Drug-resistant TB pathways",
@@ -81,11 +134,19 @@
     "kind": "compare",
     "left": {
      "title": "Drug-sensitive pathway",
-     "points": ["2 HRZE plus 4 HRE daily", "Decentralised treatment", "Outcomes in standard cohorts"]
+     "points": [
+      "2 HRZE plus 4 HRE daily",
+      "Decentralised treatment",
+      "Outcomes in standard cohorts"
+     ]
     },
     "right": {
      "title": "Drug-resistant pathway",
-     "points": ["Bedaquiline-containing oral regimens", "DR-TB centre supervision", "Longer follow-up, resistance testing"]
+     "points": [
+      "Bedaquiline-containing oral regimens",
+      "DR-TB centre supervision",
+      "Longer follow-up, resistance testing"
+     ]
     }
    }
   },
@@ -95,12 +156,27 @@
    "say": "Strategy widened past clinics. Active finding in vulnerable groups, mandatory notification including private practice, nutritional support, universal testing. Detect, treat, prevent, build: quote the pillars verbatim.",
    "vis": {
     "kind": "table",
-    "cols": ["Pillar", "Programme action"],
+    "cols": [
+     "Pillar",
+     "Programme action"
+    ],
     "rows": [
-     ["Detect", "Active case finding, molecular network"],
-     ["Treat", "Free daily FDC, adherence support"],
-     ["Prevent", "Contact evaluation, preventive therapy"],
-     ["Build", "Private engagement, surveillance systems"]
+     [
+      "Detect",
+      "Active case finding, molecular network"
+     ],
+     [
+      "Treat",
+      "Free daily FDC, adherence support"
+     ],
+     [
+      "Prevent",
+      "Contact evaluation, preventive therapy"
+     ],
+     [
+      "Build",
+      "Private engagement, surveillance systems"
+     ]
     ]
    }
   },
@@ -111,12 +187,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Patient notified in Nikshay"},
-     {"id": "b", "label": "Treatment and follow-up recorded"},
-     {"id": "c", "label": "Outcome assigned at course end"},
-     {"id": "d", "label": "Cohort analysed by district"}
+     {
+      "id": "a",
+      "label": "Patient notified in Nikshay"
+     },
+     {
+      "id": "b",
+      "label": "Treatment and follow-up recorded"
+     },
+     {
+      "id": "c",
+      "label": "Outcome assigned at course end"
+     },
+     {
+      "id": "d",
+      "label": "Cohort analysed by district"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -125,11 +226,23 @@
    "say": "Treat latency to prevent transmitters. Contacts, young children and HIV-positive persons first, active disease excluded beforehand. Facilities add airborne discipline: fast-tracked coughers, ventilation, respirators, separation.",
    "vis": {
     "kind": "table",
-    "cols": ["Setting", "Prevention action"],
+    "cols": [
+     "Setting",
+     "Prevention action"
+    ],
     "rows": [
-     ["Household contacts", "Evaluate, preventive therapy if eligible"],
-     ["Under-five contacts", "Highest priority after exclusion"],
-     ["Health facilities", "Cough triage, ventilation, respirators"]
+     [
+      "Household contacts",
+      "Evaluate, preventive therapy if eligible"
+     ],
+     [
+      "Under-five contacts",
+      "Highest priority after exclusion"
+     ],
+     [
+      "Health facilities",
+      "Cough triage, ventilation, respirators"
+     ]
     ]
    }
   },
@@ -141,12 +254,65 @@
     "kind": "compare",
     "left": {
      "title": "Infection indices",
-     "points": ["Prevalence of infection", "Annual risk of infection", "Tuberculin survey based"]
+     "points": [
+      "Prevalence of infection",
+      "Annual risk of infection",
+      "Tuberculin survey based"
+     ]
     },
     "right": {
      "title": "Disease indices",
-     "points": ["Prevalence and incidence of disease", "Mortality rate", "Notification and cohort rates"]
+     "points": [
+      "Prevalence and incidence of disease",
+      "Mortality rate",
+      "Notification and cohort rates"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The programme became the National Tuberculosis Elimination Programme in 2020, replacing thrice weekly DOTS with daily fixed dose treatment. Drug sensitive disease takes two months of HRZE followed by four months of HRE by weight bands. Presumptive tuberculosis starts with cough for two weeks or more, tested upfront by CBNAAT or Truenat, notified on Nikshay, and tracked under Detect, Treat, Prevent, Build.",
+   "say": "High-yield for the exam: The programme became the National Tuberculosis Elimination Programme in 2020, replacing thrice weekly DOTS with daily fixed dose treatment. Drug sensitive disease takes two months of HRZE followed by four months of HRE by weight bands. Presumptive tuberculosis starts with cough for two weeks or more, tested upfront by CBNAAT or Truenat, notified on Nikshay, and tracked under Detect, Treat, Prevent, Build.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Programme rename year",
+      "NTEP replaced RNTCP in 2020"
+     ],
+     [
+      "Presumptive tuberculosis trigger",
+      "Cough two weeks or more"
+     ],
+     [
+      "Upfront diagnostic tests",
+      "CBNAAT or Truenat molecular testing"
+     ],
+     [
+      "Intensive phase regimen",
+      "Two months HRZE daily fixed dose"
+     ],
+     [
+      "Continuation phase regimen",
+      "Four months HRE daily fixed dose"
+     ],
+     [
+      "Dosing basis",
+      "Weight bands for whole course"
+     ],
+     [
+      "Digital case record",
+      "Nikshay follows patient to outcome"
+     ],
+     [
+      "National strategic pillars",
+      "Detect, Treat, Prevent, Build"
+     ]
+    ]
    }
   }
  ],

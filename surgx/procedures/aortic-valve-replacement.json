@@ -1,0 +1,313 @@
+{
+  "id": "aortic-valve-replacement",
+  "title": "Aortic valve replacement (surgical)",
+  "subtitle": "Outline level: sternotomy, bypass, cardioplegia, excision, sizing, implantation, de-airing and weaning",
+  "system": "cardiac",
+  "aliases": [
+    "AVR",
+    "SAVR",
+    "surgical aortic valve replacement",
+    "valve replacement"
+  ],
+  "estMinutes": 240,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "esc-2021-vhd",
+      "org": "ESC/EACTS. Eur Heart J 43:561",
+      "title": "2021 ESC/EACTS Guidelines for the management of valvular heart disease",
+      "year": 2021,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=2021+ESC%2FEACTS+Guidelines+for+the+management+of+valvular+heart+disease",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "acc-2020-vhd",
+      "org": "ACC/AHA. Circulation 143:e72",
+      "title": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+      "year": 2020,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=2020+ACC%2FAHA+Guideline+for+the+Management+of+Patients+With+Valvular+Heart+Disease",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Severe symptomatic aortic stenosis or regurgitation where the heart team recommends surgery (age, risk, anatomy and patient choice weighed against transcatheter replacement).",
+      "Severe aortic valve disease at the time of other cardiac surgery; infective endocarditis meeting surgical criteria."
+    ],
+    "contraindications": [
+      "Prohibitive surgical risk where transcatheter or medical therapy is chosen by the heart team.",
+      "Active infection elsewhere that would seed the prosthesis (except endocarditis surgery)."
+    ],
+    "preparation": [
+      "Heart team decision; echocardiography, coronary angiography, dental review.",
+      "Choose the prosthesis with the patient: mechanical (lifelong anticoagulation) or biological (durability).",
+      "Consent: death, stroke, bleeding and re-operation, heart block needing a pacemaker, infection, paravalvular leak, and prosthesis-related long-term risks."
+    ],
+    "positioning": [
+      "Supine, arms tucked, a roll between the shoulder blades, chest, abdomen and legs prepared for conduit or femoral access."
+    ],
+    "equipment": [
+      "Cardiac surgery set, sternal saw, cardiopulmonary bypass circuit, cannulae, cross-clamp, cardioplegia delivery, valve sizers and the chosen prosthesis, pledgeted sutures, transoesophageal echocardiography."
+    ],
+    "anatomy": [
+      "The aortic root: the three leaflets and sinuses, the coronary ostia (left and right), the annulus with the conduction tissue (bundle of His) below the commissure between the right and non-coronary cusps, the anterior mitral leaflet beneath."
+    ],
+    "criticalSafety": [
+      "Full heparinisation with a confirmed ACT before cannulation.",
+      "Remove all calcium debris and keep it out of the ventricle and coronaries.",
+      "Check the coronary ostia are clear after seating the valve; de-air before the clamp comes off."
+    ],
+    "structuresAtRisk": [
+      "Coronary ostia",
+      "Conduction tissue",
+      "Anterior mitral leaflet",
+      "Aortic wall (dissection at cannulation or clamp)"
+    ],
+    "commonErrors": [
+      "Calcium embolising into the ventricle or coronaries.",
+      "Deep sutures near the conduction tissue.",
+      "A prosthesis too small (patient-prosthesis mismatch)."
+    ],
+    "complications": [
+      "Stroke, bleeding, tamponade.",
+      "Complete heart block.",
+      "Paravalvular leak, prosthetic endocarditis, valve thrombosis.",
+      "Atrial fibrillation, kidney injury."
+    ],
+    "postop": [
+      "Intensive care; drains monitored for bleeding and tamponade.",
+      "Pacing wires kept until rhythm is stable; anticoagulation per prosthesis.",
+      "Echocardiogram before discharge; endocarditis prevention and dental care advice."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.avr-step-01", "med.surgx.avr-clip-01"],
+      "emphasis": "Record the prosthesis choice and the reasons."
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.avr-step-02", "med.surgx.avr-clip-02"],
+      "emphasis": "Confirm the prosthesis type and size range available, blood products, perfusion and echo ready."
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.avr-step-03", "med.surgx.avr-clip-03"]
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.avr-step-04", "med.surgx.avr-clip-04"],
+      "emphasis": "Supine, arms tucked, roll between the shoulder blades."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.avr-step-05", "med.surgx.avr-clip-05"]
+    },
+    {
+      "ref": "step.thor.sternotomy-open", "media": ["med.surgx.avr-step-06", "med.surgx.avr-clip-06"]
+    },
+    {
+      "ref": "step.thor.pericardium-open", "media": ["med.surgx.avr-step-07", "med.surgx.avr-clip-07"]
+    },
+    {
+      "ref": "step.avr.cpb", "media": ["med.surgx.avr-step-08", "med.surgx.avr-clip-08"]
+    },
+    {
+      "ref": "step.avr.cardioplegia", "media": ["med.surgx.avr-step-09", "med.surgx.avr-clip-09"]
+    },
+    {
+      "ref": "step.avr.excise", "media": ["med.surgx.avr-step-10", "med.surgx.avr-clip-10"]
+    },
+    {
+      "ref": "step.avr.sutures", "media": ["med.surgx.avr-step-11", "med.surgx.avr-clip-11"]
+    },
+    {
+      "ref": "step.avr.seat", "media": ["med.surgx.avr-step-12", "med.surgx.avr-clip-12"]
+    },
+    {
+      "ref": "step.avr.deair", "media": ["med.surgx.avr-step-13", "med.surgx.avr-clip-13"]
+    },
+    {
+      "ref": "step.avr.wean", "media": ["med.surgx.avr-step-14", "med.surgx.avr-clip-14"]
+    },
+    {
+      "ref": "step.vasc.heparin-reversal", "media": ["med.surgx.avr-step-15", "med.surgx.avr-clip-15"],
+      "emphasis": "Protamine after decannulation, watching for reaction."
+    },
+    {
+      "ref": "step.thor.pacing-wires", "media": ["med.surgx.avr-step-16", "med.surgx.avr-clip-16"]
+    },
+    {
+      "ref": "step.thor.chest-drains", "media": ["med.surgx.avr-step-17", "med.surgx.avr-clip-17"]
+    },
+    {
+      "ref": "step.thor.sternal-closure", "media": ["med.surgx.avr-step-18", "med.surgx.avr-clip-18"]
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.avr-step-19", "med.surgx.avr-clip-19"],
+      "emphasis": "Count every swab, needle and pledget before closing the pericardium and sternum."
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.avr-step-20", "med.surgx.avr-clip-20"],
+      "emphasis": "Hand over the prosthesis, bypass and cross-clamp times, rhythm, pacing settings and the anticoagulation plan."
+    }
+  ],
+  "steps_local": {
+    "step.avr.cpb": {
+      "id": "step.avr.cpb",
+      "kind": "prep",
+      "critical": true,
+      "title": "Heparinisation, cannulation and starting bypass",
+      "why": "Bypass lets the heart be stopped and opened. Cannulating an unheparinised patient, or a diseased aorta, risks clotting the circuit or dissecting the aorta.",
+      "how": [
+        "Give heparin and confirm an adequate activated clotting time before cannulation.",
+        "Place purse strings and cannulate the ascending aorta (checked by epiaortic scan if calcified) and the right atrium.",
+        "Start bypass with the perfusionist, confirming flows and pressures."
+      ],
+      "structuresAtRisk": [
+        "Ascending aorta (dissection)",
+        "Right atrium"
+      ],
+      "pitfalls": [
+        "Cannulating before the ACT is confirmed.",
+        "Cannulating a calcified aorta without assessment."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.avr.cardioplegia": {
+      "id": "step.avr.cardioplegia",
+      "kind": "prep",
+      "title": "Cross-clamp and cardioplegia",
+      "why": "Cardioplegia arrests and protects the heart. In aortic regurgitation antegrade root cardioplegia leaks into the ventricle, so it is given directly into the coronary ostia or retrogradely.",
+      "how": [
+        "Apply the cross-clamp to the ascending aorta.",
+        "Give cardioplegia antegrade (root), via the coronary ostia, or retrograde via the coronary sinus as appropriate; repeat at intervals.",
+        "Vent the left ventricle to keep it decompressed."
+      ],
+      "structuresAtRisk": [
+        "Myocardium",
+        "Coronary ostia (cannula injury)"
+      ],
+      "pitfalls": [
+        "Root cardioplegia in significant regurgitation.",
+        "Letting the ventricle distend."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.avr.excise": {
+      "id": "step.avr.excise",
+      "kind": "resection",
+      "critical": true,
+      "title": "Aortotomy, leaflet excision and decalcification",
+      "why": "Calcium must be removed to seat the prosthesis, but fragments that fall into the ventricle or coronaries cause stroke or infarction.",
+      "how": [
+        "Make an oblique or transverse aortotomy above the sinotubular junction.",
+        "Excise the leaflets and debride calcium from the annulus, with a sponge in the ventricle to catch debris.",
+        "Irrigate and suction thoroughly; avoid creating a hole in the annulus or the anterior mitral leaflet."
+      ],
+      "structuresAtRisk": [
+        "Coronary ostia",
+        "Annulus",
+        "Anterior mitral leaflet",
+        "Conduction tissue"
+      ],
+      "pitfalls": [
+        "Leaving loose calcium.",
+        "Over-aggressive debridement perforating the annulus."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.avr.sutures": {
+      "id": "step.avr.sutures",
+      "kind": "reconstruction",
+      "title": "Sizing and placing the annular sutures",
+      "why": "Correct sizing avoids patient-prosthesis mismatch; suture depth near the conduction tissue decides whether the patient needs a pacemaker.",
+      "how": [
+        "Size the annulus with the manufacturer's sizers.",
+        "Place pledgeted horizontal mattress sutures around the annulus, keeping them superficial below the right-non-coronary commissure.",
+        "Pass them through the prosthesis sewing ring in order."
+      ],
+      "structuresAtRisk": [
+        "Conduction tissue",
+        "Coronary ostia"
+      ],
+      "pitfalls": [
+        "Undersizing.",
+        "Deep bites at the commissure over the conduction tissue."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.avr.seat": {
+      "id": "step.avr.seat",
+      "kind": "reconstruction",
+      "title": "Seating the valve and checking the coronaries",
+      "why": "A properly seated valve does not leak around its edge or block a coronary ostium; mechanical leaflets must move freely.",
+      "how": [
+        "Lower the prosthesis into the annulus and tie the sutures evenly.",
+        "Check the coronary ostia are not obstructed by the sewing ring or struts.",
+        "For a mechanical valve, test leaflet movement; for a biological valve, check the struts clear the ostia."
+      ],
+      "structuresAtRisk": [
+        "Coronary ostia"
+      ],
+      "pitfalls": [
+        "Obstructing a coronary ostium.",
+        "Uneven ties leaving a gap."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.avr.deair": {
+      "id": "step.avr.deair",
+      "kind": "closure",
+      "critical": true,
+      "title": "Closing the aorta and de-airing",
+      "why": "Air left in the left heart embolises to the brain or the right coronary artery when the heart starts to eject.",
+      "how": [
+        "Close the aortotomy in two layers.",
+        "De-air the left heart through the root vent and the ventricular vent while the anaesthetist inflates the lungs; check with transoesophageal echo.",
+        "Remove the cross-clamp with the root vent running."
+      ],
+      "structuresAtRisk": [
+        "Brain and right coronary artery (air embolism)"
+      ],
+      "pitfalls": [
+        "Releasing the clamp before de-airing."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.avr.wean": {
+      "id": "step.avr.wean",
+      "kind": "checkpoint",
+      "title": "Weaning from bypass and checking the valve",
+      "why": "Transoesophageal echo confirms the valve works before decannulation, when it can still be fixed.",
+      "how": [
+        "Rewarm, establish rhythm (pacing if heart block), and wean from bypass with the anaesthetist and perfusionist.",
+        "Echo: gradient across the valve, any paravalvular leak, ventricular function, aortic root.",
+        "A significant leak or failure to wean means going back on bypass; discuss as a team."
+      ],
+      "structuresAtRisk": [
+        "Prosthesis",
+        "Ventricular function"
+      ],
+      "pitfalls": [
+        "Accepting a significant paravalvular leak."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

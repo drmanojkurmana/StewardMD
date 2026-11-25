@@ -304,6 +304,7 @@
       inline: m.inline === true,
       diagramId: m.diagramId || "",
       videoId: m.videoId || "",
+      start: m.start > 0 ? Math.floor(m.start) : 0, end: m.end > m.start ? Math.floor(m.end) : 0,
       src: ok && m.src ? sgxMedia(m.src) : null,
       embeddable: M ? M.isEmbeddable(m) : false,
       sourceUrl: m.sourceUrl || "",

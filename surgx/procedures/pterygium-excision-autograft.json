@@ -1,0 +1,248 @@
+{
+  "id": "pterygium-excision-autograft",
+  "title": "Pterygium excision with conjunctival autograft",
+  "subtitle": "Excision, bare sclera bed and a limbal-oriented conjunctival graft",
+  "system": "ophthalmic",
+  "aliases": [
+    "pterygium surgery",
+    "pterygium excision",
+    "conjunctival autograft",
+    "CAG"
+  ],
+  "estMinutes": 40,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "clearfield-2016",
+      "org": "Clearfield E et al. Cochrane Database Syst Rev (CD011349)",
+      "title": "Conjunctival autograft for pterygium",
+      "year": 2016,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Conjunctival+autograft+for+pterygium",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Pterygium encroaching on the visual axis or progressing towards it.",
+      "Astigmatism induced by the pterygium, restriction of eye movement, persistent irritation, or cosmetic concern after discussion.",
+      "Doubt about the diagnosis (ocular surface squamous neoplasia can mimic pterygium): excision for histology."
+    ],
+    "contraindications": [
+      "Small, stable, asymptomatic pterygium.",
+      "Active ocular surface inflammation until controlled."
+    ],
+    "preparation": [
+      "Measure the extent onto the cornea and the induced astigmatism; photograph.",
+      "Consent: recurrence (much lower with a graft than bare sclera), graft retraction or loss, scarring, double vision from muscle restriction, dellen, and need for further surgery."
+    ],
+    "positioning": [
+      "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    ],
+    "equipment": [
+      "Blade or crescent blade, Westcott or Vannas scissors, non-toothed forceps, diamond burr or blade for corneal polishing, wet-field cautery, fibrin glue or 8-0 absorbable and 10-0 nylon sutures, calipers."
+    ],
+    "anatomy": [
+      "The pterygium head on the cornea, its body on the nasal (usually) bulbar conjunctiva, the underlying Tenon's and the medial rectus a few millimetres behind the limbus.",
+      "The superior bulbar conjunctiva is the donor site: thin, with its own limbal border."
+    ],
+    "criticalSafety": [
+      "Do not damage the medial rectus when removing Tenon's.",
+      "Orient the graft limbus to limbus.",
+      "Send the tissue for histology when the appearance is atypical."
+    ],
+    "structuresAtRisk": [
+      "Medial rectus",
+      "Sclera (thinning)",
+      "Cornea (deep keratectomy)"
+    ],
+    "commonErrors": [
+      "Leaving Tenon's under the graft.",
+      "A thick graft with Tenon's on it.",
+      "Graft inverted or misoriented."
+    ],
+    "complications": [
+      "Recurrence.",
+      "Graft retraction, oedema or loss.",
+      "Dellen, scleral thinning.",
+      "Diplopia from muscle injury or scarring."
+    ],
+    "postop": [
+      "Steroid and antibiotic drops on a taper; pad overnight.",
+      "Review at one day and one week to check the graft; recurrence check over the following year.",
+      "Sun protection."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.ptg-step-01", "med.surgx.ptg-clip-01"],
+      "emphasis": "Mark the eye and the side of the pterygium (nasal or temporal)."
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.ptg-step-02", "med.surgx.ptg-clip-02"]
+    },
+    {
+      "ref": "step.eye.anaesthesia", "media": ["med.surgx.ptg-step-03", "med.surgx.ptg-clip-03"],
+      "emphasis": "Topical drops with subconjunctival local anaesthetic under the pterygium is usual."
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.ptg-step-04", "med.surgx.ptg-clip-04"],
+      "emphasis": "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    },
+    {
+      "ref": "step.eye.povidone-iodine", "media": ["med.surgx.ptg-step-05", "med.surgx.ptg-clip-05"]
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.ptg-step-06", "med.surgx.ptg-clip-06"]
+    },
+    {
+      "ref": "step.eye.lid-speculum", "media": ["med.surgx.ptg-step-07", "med.surgx.ptg-clip-07"]
+    },
+    {
+      "ref": "step.ptg.excise", "media": ["med.surgx.ptg-step-08", "med.surgx.ptg-clip-08"]
+    },
+    {
+      "ref": "step.ptg.cornea", "media": ["med.surgx.ptg-step-09", "med.surgx.ptg-clip-09"]
+    },
+    {
+      "ref": "step.ptg.graft-harvest", "media": ["med.surgx.ptg-step-10", "med.surgx.ptg-clip-10"]
+    },
+    {
+      "ref": "step.ptg.graft-secure", "media": ["med.surgx.ptg-step-11", "med.surgx.ptg-clip-11"]
+    },
+    {
+      "ref": "step.ptg.bailout", "media": ["med.surgx.ptg-step-12", "med.surgx.ptg-clip-12"]
+    },
+    {
+      "ref": "step.core.haemostasis", "media": ["med.surgx.ptg-step-13", "med.surgx.ptg-clip-13"],
+      "emphasis": "Light wet-field cautery only to the bleeding points; heavy cautery thins sclera."
+    },
+    {
+      "ref": "step.core.specimen", "media": ["med.surgx.ptg-step-14", "med.surgx.ptg-clip-14"],
+      "emphasis": "Send the pterygium for histology; label atypical features."
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.ptg-step-15", "med.surgx.ptg-clip-15"]
+    },
+    {
+      "ref": "step.eye.shield-postop", "media": ["med.surgx.ptg-step-16", "med.surgx.ptg-clip-16"],
+      "emphasis": "Pad overnight; drops explained."
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.ptg-step-17", "med.surgx.ptg-clip-17"]
+    }
+  ],
+  "steps_local": {
+    "step.ptg.excise": {
+      "id": "step.ptg.excise",
+      "kind": "resection",
+      "title": "Excising the pterygium head and body",
+      "why": "The head comes off the cornea and the body with its fibrovascular Tenon's is removed. Leaving the abnormal Tenon's drives recurrence; cutting too deep injures the medial rectus.",
+      "how": [
+        "Separate the head from the cornea by blunt avulsion or careful dissection in the plane above Bowman's layer.",
+        "Excise the conjunctival body and dissect the abnormal subconjunctival Tenon's off the sclera, staying anterior to the muscle insertion.",
+        "Leave a bare scleral bed of known size; measure it with calipers."
+      ],
+      "structuresAtRisk": [
+        "Medial rectus",
+        "Sclera",
+        "Cornea"
+      ],
+      "pitfalls": [
+        "Dissecting into the muscle.",
+        "Leaving thick Tenon's on the bed."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ptg.cornea": {
+      "id": "step.ptg.cornea",
+      "kind": "reconstruction",
+      "title": "Smoothing the cornea",
+      "why": "Residual tissue on the cornea gives an irregular surface and invites recurrence.",
+      "how": [
+        "Remove residual fibrovascular tissue from the cornea with a blade or diamond burr.",
+        "Keep the keratectomy superficial and smooth."
+      ],
+      "structuresAtRisk": [
+        "Cornea (excess depth)"
+      ],
+      "pitfalls": [
+        "A deep, irregular keratectomy."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ptg.graft-harvest": {
+      "id": "step.ptg.graft-harvest",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Harvesting the conjunctival autograft",
+      "why": "A thin, Tenon-free graft with its limbal edge marked is what lowers the recurrence rate. A thick graft retracts and a misoriented one fails.",
+      "how": [
+        "Measure the bed and mark a graft about 0.5 to 1 mm larger at the superior bulbar conjunctiva.",
+        "Balloon the conjunctiva with saline or local anaesthetic, and dissect a thin graft free of Tenon's up to the limbus.",
+        "Mark the limbal edge so it is not inverted or rotated."
+      ],
+      "structuresAtRisk": [
+        "Donor conjunctiva (buttonhole)",
+        "Superior rectus (deep dissection)"
+      ],
+      "pitfalls": [
+        "Including Tenon's in the graft.",
+        "Losing track of the limbal edge."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ptg.graft-secure": {
+      "id": "step.ptg.graft-secure",
+      "kind": "reconstruction",
+      "title": "Securing the graft limbus to limbus",
+      "why": "The limbal edge of the graft carries stem cells that act as a barrier; facing the cornea, it reduces recurrence.",
+      "how": [
+        "Slide the graft onto the bed with its limbal edge at the limbus, epithelial side up.",
+        "Secure with fibrin glue or interrupted absorbable sutures, smoothing out folds and expressing any blood under it.",
+        "Close or leave the donor site per technique."
+      ],
+      "structuresAtRisk": [
+        "Graft (displacement)"
+      ],
+      "pitfalls": [
+        "An inverted graft (epithelium down).",
+        "Blood or folds under the graft."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ptg.bailout": {
+      "id": "step.ptg.bailout",
+      "kind": "bailout",
+      "title": "Bailout: scleral thinning, muscle exposure or an atypical lesion",
+      "why": "Unexpected findings change the operation: thin sclera may need a patch, a damaged muscle needs repair, and a lesion that looks like neoplasia needs a different, no-touch excision with margins.",
+      "how": [
+        "If the medial rectus is exposed or cut, identify the ends and repair with absorbable suture, or call a strabismus surgeon.",
+        "If the sclera is very thin, avoid further cautery and cover it (graft or patch).",
+        "If the lesion looks like ocular surface squamous neoplasia (gelatinous, leukoplakic, unusual vessels), excise with margins and cryotherapy per protocol, or stop after biopsy and refer."
+      ],
+      "structuresAtRisk": [
+        "Medial rectus",
+        "Sclera"
+      ],
+      "pitfalls": [
+        "Treating a neoplastic lesion as a simple pterygium."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

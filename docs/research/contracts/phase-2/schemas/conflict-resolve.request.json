@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/conflict-resolve.request.json",
+  "title": "POST /v1/conflicts/{conflictId}/resolve request",
+  "description": "Resolves an open conflict (see blinding.md). Owner or editor only, and preferably not a voter on the item. resolution wins; reasonCode is required with exclude. The resolved conflict keeps both votes for audit and unblinds them to the team.",
+  "type": "object",
+  "required": ["resolution"],
+  "additionalProperties": false,
+  "properties": {
+    "resolution": { "type": "string", "enum": ["include", "exclude"] },
+    "reasonCode": { "type": "string", "maxLength": 80 },
+    "note": { "type": "string", "maxLength": 2000 }
+  }
+}

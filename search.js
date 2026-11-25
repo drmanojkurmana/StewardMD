@@ -394,8 +394,10 @@
         CATS.map(function (c) { return '<button class="us-browse" type="button" data-cat="' + c.key + '">' + ico(c.icon) + '<span>' + esc(c.label) + '</span></button>'; }).join("") + '</div></div>';
       body.innerHTML = html; return;
     }
+    var chipX = chips.scrollLeft;                                // the bar scrolls sideways; a repaint must not jump it back
     chips.innerHTML = '<button class="us-chip" type="button" data-cat="all" aria-pressed="' + (ST.cat === "all") + '">All' + (hasQ ? ' <b>' + total + '</b>' : "") + '</button>' +
       (hasQ ? shownCats : CATS.map(function (c) { return { c: c, n: 0 }; })).map(function (x) { return '<button class="us-chip" type="button" data-cat="' + x.c.key + '" aria-pressed="' + (ST.cat === x.c.key) + '">' + esc(x.c.label) + (x.n ? ' <b>' + x.n + '</b>' : "") + '</button>'; }).join("");
+    chips.scrollLeft = chipX;
     CATS.forEach(function (c) {
       if (!visibleCat(c)) return;
       var items = byCat[c.key] || [], pend = !!(ST.async[c.key] && ST.async[c.key].pending), shown = items.slice(0, cap);

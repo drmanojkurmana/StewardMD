@@ -149,7 +149,9 @@ export function bankFrom(r2, defaultVer = "v5") {
   };
   return { index: (s) => read(s, "index.json"), module: (s, file) => (/^mcq\/[a-z0-9-]{2,80}\.json$/.test(file) ? read(s, file) : Promise.resolve(null)), pool };
 }
-const usable = (it) => !!it && !(it.flags && it.flags.length) && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && it.a >= 0 && it.a < 4 && typeof it.id === "string";
+// needsImage: a stem pointing at a picture the item does not carry can never be answered (owner 2026-11-19); the app
+// flags these img-missing on load, but bank and pool items reach the server unflagged.
+const usable = (it) => !!it && !(it.flags && it.flags.length) && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && it.a >= 0 && it.a < 4 && typeof it.id === "string" && !ASSESS.needsImage(it);
 // prep.js poolFor: flagged items out; for USMLE, vignettes when a module has at least 5.
 function poolFor(items, exam) {
   const ok = (items || []).filter(usable);
@@ -208,6 +210,26 @@ function diverseOrder(items, rnd) {
   return out;
 }
 
+/* expOf(it) -> the item's stored explanation, trimmed for a battle room ({ exp, x, r, kp }, only the fields it has), or
+ * undefined. Sent only in the round's "r" message (after the round closes), so Revenge shows it under the answer
+ * instead of "No explanation is stored". Capped so a room's storage stays small (7 items). */
+const cut = (v, n) => String(v == null ? "" : v).slice(0, n);
+export function expOf(it) {
+  if (!it) return undefined;
+  const e = {};
+  if (it.exp && String(it.exp).trim()) e.exp = cut(it.exp, 4000);
+  if (it.x && typeof it.x === "object" && typeof it.x.key === "string" && it.x.key.trim()) {
+    const x = { key: cut(it.x.key, 1500) };
+    if (it.x.notes) x.notes = cut(it.x.notes, 4000);
+    if (it.x.pearl) x.pearl = cut(it.x.pearl, 600);
+    if (it.x.others && typeof it.x.others === "object") { x.others = {}; for (const k of Object.keys(it.x.others).slice(0, 6)) x.others[k] = cut(it.x.others[k], 800); }
+    e.x = x;
+  }
+  if (Array.isArray(it.r) && it.r.length === (it.o || []).length) e.r = it.r.map((v) => cut(v, 800));
+  if (it.kp && String(it.kp).trim()) e.kp = cut(it.kp, 600);
+  return Object.keys(e).length ? e : undefined;
+}
+
 /* drawItems(bank, exam, n, seed) -> [{id, q, o, a, s, m}], at most n, deterministic for a seed and bank version.
  * Spread like MOCKS: every subject with questions gets one (subjects in seeded order, so a short draw does not always
  * favour the same subjects), the rest in proportion to question counts; inside a subject, up to half as many modules
@@ -241,7 +263,7 @@ export async function drawItems(bank, exam, n, seed) {
       dry = 0;
       if (seen.has(it.id)) continue;
       seen.add(it.id); got++;
-      out.push({ id: it.id, q: String(it.q || ""), o: it.o.map(String), a: it.a, s: x.s, m: pl.m });
+      out.push({ id: it.id, q: String(it.q || ""), o: it.o.map(String), a: it.a, s: x.s, m: pl.m, e: expOf(it) });
     }
   }
   return diverseOrder(out, rnd);
@@ -251,7 +273,7 @@ export async function drawItems(bank, exam, n, seed) {
  * seeded order; [] when there is no pool or it holds fewer than n usable questions. Items are { id, q, o, a, s, m }. */
 export async function drawFromPool(bank, exam, n, seed) {
   const pool = bank && bank.pool ? await bank.pool(exam) : null;
-  const items = pool && Array.isArray(pool.items) ? pool.items.filter((it) => it && it.q && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && it.a >= 0 && it.a < 4) : [];
+  const items = pool && Array.isArray(pool.items) ? pool.items.filter((it) => it && it.q && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && it.a >= 0 && it.a < 4 && !ASSESS.needsImage(it)) : [];
   if (items.length < n) return [];
   const rnd = mulberry32(seedFrom("pool:" + String(seed)));
   const bySubject = new Map();
@@ -261,7 +283,7 @@ export async function drawFromPool(bank, exam, n, seed) {
   const out = [], seen = new Set();
   for (let round = 0; out.length < n && round < n * 4; round++) {
     const k = subjects[round % subjects.length], q = bySubject.get(k);
-    while (q.length) { const it = q.shift(); if (!seen.has(it.id)) { seen.add(it.id); out.push({ id: it.id, q: String(it.q), o: it.o.map(String), a: it.a, s: it.s, m: it.m }); break; } }
+    while (q.length) { const it = q.shift(); if (!seen.has(it.id)) { seen.add(it.id); out.push({ id: it.id, q: String(it.q), o: it.o.map(String), a: it.a, s: it.s, m: it.m, e: expOf(it) }); break; } }
     if (subjects.every((x) => !bySubject.get(x).length)) break;
   }
   return out.length >= n ? out.slice(0, n) : [];

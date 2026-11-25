@@ -10,30 +10,91 @@
    "say": "Breast cancer is the commonest non-skin cancer in women. The main drivers are female sex, rising age and long exposure to estrogen. About 70 percent of cases are found at 55 or older. A first-degree relative with breast cancer doubles the risk, but only 20 percent of patients have any family history at all. Inherited BRCA1 and BRCA2 mutations explain a small share of cases.",
    "vis": {
     "kind": "table",
-    "cols": ["Risk factor", "What it does"],
+    "cols": [
+     "Risk factor",
+     "What it does"
+    ],
     "rows": [
-     ["Age", "Risk climbs with age; median age at diagnosis 63"],
-     ["First-degree relative", "Doubles the risk"],
-     ["BRCA1 or BRCA2 carrier", "Lifetime risk 50-80% by age 80"],
-     ["Atypical hyperplasia", "Risk up about four- to fivefold"],
-     ["Lobular carcinoma in situ", "Risk up 7- to 12-fold"]
+     [
+      "Age",
+      "Risk climbs with age; median age at diagnosis 63"
+     ],
+     [
+      "First-degree relative",
+      "Doubles the risk"
+     ],
+     [
+      "BRCA1 or BRCA2 carrier",
+      "Lifetime risk 50-80% by age 80"
+     ],
+     [
+      "Atypical hyperplasia",
+      "Risk up about four- to fivefold"
+     ],
+     [
+      "Lobular carcinoma in situ",
+      "Risk up 7- to 12-fold"
+     ]
     ]
    }
   },
   {
-   "tx": "A suspicious lump goes through **triple assessment**: clinical examination, breast imaging and tissue diagnosis. Imaging is **mammography**, with ultrasound and sometimes MRI, and both breasts are imaged because up to 3% have hidden disease on the other side. The diagnosis rests on an **image-guided core biopsy**, which also gives the grade and the receptor status. A normal mammogram never clears a palpable lump.",
+   "tx": "A suspicious lump goes through **triple assessment**: clinical examination, breast imaging and tissue diagnosis. Imaging is **mammography**, with ultrasound and sometimes MRI, and both breasts are imaged because up to 3% have hidden disease on the other side. The diagnosis rests on an **image-guided core biopsy**, which also gives the grade and the receptor status. A normal mammogram does not rule out a palpable lump.",
    "say": "A suspicious lump goes through triple assessment: clinical examination, breast imaging, and tissue diagnosis. Imaging means mammography, with ultrasound and sometimes MRI. Both breasts are imaged, because up to 3 percent of women have hidden disease on the other side. The diagnosis rests on an image-guided core biopsy, which also gives the grade and the receptor status. Remember: a normal mammogram never clears a lump you can feel.",
    "vis": {
     "kind": "flow",
     "nodes": [
-     { "id": "lump", "label": "Lump or abnormal mammogram" },
-     { "id": "exam", "label": "Clinical examination" },
-     { "id": "img", "label": "Imaging", "sub": "Mammography of both breasts, ultrasound, MRI if needed" },
-     { "id": "bx", "label": "Image-guided core biopsy" },
-     { "id": "ax", "label": "Suspicious axillary node", "sub": "Image-guided biopsy" },
-     { "id": "rx", "label": "Grade, ER, PR, HER2" }
+     {
+      "id": "lump",
+      "label": "Lump or abnormal mammogram"
+     },
+     {
+      "id": "exam",
+      "label": "Clinical examination"
+     },
+     {
+      "id": "img",
+      "label": "Imaging",
+      "sub": "Mammography of both breasts, ultrasound, MRI if needed"
+     },
+     {
+      "id": "bx",
+      "label": "Image-guided core biopsy"
+     },
+     {
+      "id": "ax",
+      "label": "Suspicious axillary node",
+      "sub": "Image-guided biopsy"
+     },
+     {
+      "id": "rx",
+      "label": "Grade, ER, PR, HER2"
+     }
     ],
-    "edges": [["lump", "exam"], ["exam", "img"], ["img", "bx", "breast"], ["img", "ax", "axilla"], ["bx", "rx"]]
+    "edges": [
+     [
+      "lump",
+      "exam"
+     ],
+     [
+      "exam",
+      "img"
+     ],
+     [
+      "img",
+      "bx",
+      "breast"
+     ],
+     [
+      "img",
+      "ax",
+      "axilla"
+     ],
+     [
+      "bx",
+      "rx"
+     ]
+    ]
    }
   },
   {
@@ -41,8 +102,23 @@
    "say": "Most invasive breast cancers are ductal. About 10 to 15 percent are lobular. Lobular cancers are usually ER positive and HER2 negative, and they are recognised by loss of E-cadherin. They like unusual sites such as the pleura, peritoneum, meninges, ovaries and gut, so a recurrence can look atypical. Ductal carcinoma in situ, or DCIS, is malignancy still confined within the basement membrane. It is non-invasive, but it is treated.",
    "vis": {
     "kind": "compare",
-    "left": { "title": "Invasive ductal", "points": ["Most invasive breast cancers", "Any receptor subtype", "Usual metastatic sites: soft tissue, lung, bone, liver, brain"] },
-    "right": { "title": "Invasive lobular", "points": ["About 10-15% of invasive cancers", "Usually ER positive, HER2 negative", "E-cadherin absent", "Serosa, ovaries and gut: atypical recurrence"] }
+    "left": {
+     "title": "Invasive ductal",
+     "points": [
+      "Most invasive breast cancers",
+      "Any receptor subtype",
+      "Usual metastatic sites: soft tissue, lung, bone, liver, brain"
+     ]
+    },
+    "right": {
+     "title": "Invasive lobular",
+     "points": [
+      "About 10-15% of invasive cancers",
+      "Usually ER positive, HER2 negative",
+      "E-cadherin absent",
+      "Serosa, ovaries and gut: atypical recurrence"
+     ]
+    }
    }
   },
   {
@@ -50,12 +126,32 @@
    "say": "Receptor testing sorts invasive breast cancers into four molecular subtypes. Luminal A and luminal B are both ER positive. Luminal B has lower PR or a higher Ki67, and a worse outcome. HER2-enriched tumours over-express HER2, and they benefit from HER2-targeted drugs. Triple-negative cancer lacks ER, PR and HER2, and it carries a poorer prognosis.",
    "vis": {
     "kind": "table",
-    "cols": ["Subtype", "Receptors", "Main systemic lever"],
+    "cols": [
+     "Subtype",
+     "Receptors",
+     "Main systemic lever"
+    ],
     "rows": [
-     ["Luminal A", "ER positive", "Endocrine therapy"],
-     ["Luminal B", "ER positive, lower PR or higher Ki67", "Endocrine therapy; chemotherapy if high risk"],
-     ["HER2-enriched", "High HER2", "HER2-directed drugs with chemotherapy"],
-     ["Triple-negative", "No ER, PR or HER2", "Chemotherapy, with immunotherapy"]
+     [
+      "Luminal A",
+      "ER positive",
+      "Endocrine therapy"
+     ],
+     [
+      "Luminal B",
+      "ER positive, lower PR or higher Ki67",
+      "Endocrine therapy; chemotherapy if high risk"
+     ],
+     [
+      "HER2-enriched",
+      "High HER2",
+      "HER2-directed drugs with chemotherapy"
+     ],
+     [
+      "Triple-negative",
+      "No ER, PR or HER2",
+      "Chemotherapy, with immunotherapy"
+     ]
     ]
    }
   },
@@ -75,13 +171,45 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     { "id": "op", "label": "Operable breast cancer" },
-     { "id": "neg", "label": "Nodes clinically negative" },
-     { "id": "pos", "label": "Nodes proven involved" },
-     { "id": "slnb", "label": "Sentinel lymph node biopsy" },
-     { "id": "alnd", "label": "Axillary clearance" }
+     {
+      "id": "op",
+      "label": "Operable breast cancer"
+     },
+     {
+      "id": "neg",
+      "label": "Nodes clinically negative"
+     },
+     {
+      "id": "pos",
+      "label": "Nodes proven involved"
+     },
+     {
+      "id": "slnb",
+      "label": "Sentinel lymph node biopsy"
+     },
+     {
+      "id": "alnd",
+      "label": "Axillary clearance"
+     }
     ],
-    "edges": [["op", "neg"], ["op", "pos"], ["neg", "slnb"], ["pos", "alnd"]]
+    "edges": [
+     [
+      "op",
+      "neg"
+     ],
+     [
+      "op",
+      "pos"
+     ],
+     [
+      "neg",
+      "slnb"
+     ],
+     [
+      "pos",
+      "alnd"
+     ]
+    ]
    }
   },
   {
@@ -89,12 +217,27 @@
    "say": "Systemic therapy follows the receptors. ER-positive disease gets endocrine therapy: tamoxifen or an aromatase inhibitor, with ovarian suppression added for selected premenopausal women. HER2-positive disease gets trastuzumab, often with pertuzumab, combined with chemotherapy, and the heart's ejection fraction is monitored. Triple-negative disease relies on chemotherapy, with immunotherapy added. Bone metastases are treated with a bisphosphonate.",
    "vis": {
     "kind": "table",
-    "cols": ["Tumour", "Main systemic option"],
+    "cols": [
+     "Tumour",
+     "Main systemic option"
+    ],
     "rows": [
-     ["ER positive", "Tamoxifen or an aromatase inhibitor"],
-     ["HER2 positive", "Trastuzumab and pertuzumab with chemotherapy"],
-     ["Triple negative", "Chemotherapy with immunotherapy"],
-     ["Bone metastases", "Bisphosphonate"]
+     [
+      "ER positive",
+      "Tamoxifen or an aromatase inhibitor"
+     ],
+     [
+      "HER2 positive",
+      "Trastuzumab and pertuzumab with chemotherapy"
+     ],
+     [
+      "Triple negative",
+      "Chemotherapy with immunotherapy"
+     ],
+     [
+      "Bone metastases",
+      "Bisphosphonate"
+     ]
     ]
    }
   },
@@ -103,13 +246,88 @@
    "say": "Two presentations are easily mistaken for benign disease. Paget disease of the nipple looks like eczema of the nipple and areola, but it sits over DCIS or an invasive cancer. Inflammatory breast cancer causes rapid redness, swelling and peau d'orange, and it is staged T4d. So a mastitis that does not settle on antibiotics needs a breast or skin biopsy.",
    "vis": {
     "kind": "compare",
-    "left": { "title": "Paget disease of the nipple", "points": ["Eczema-like change of nipple and areola", "DCIS or invasive cancer underneath", "Not a simple dermatitis"] },
-    "right": { "title": "Inflammatory breast cancer", "points": ["Rapid erythema, oedema, peau d'orange", "Staged T4d: locally advanced", "Up to one-third have metastases at diagnosis", "Biopsy if 'mastitis' persists"] }
+    "left": {
+     "title": "Paget disease of the nipple",
+     "points": [
+      "Eczema-like change of nipple and areola",
+      "DCIS or invasive cancer underneath",
+      "Not a simple dermatitis"
+     ]
+    },
+    "right": {
+     "title": "Inflammatory breast cancer",
+     "points": [
+      "Rapid erythema, oedema, peau d'orange",
+      "Staged T4d: locally advanced",
+      "Up to one-third have metastases at diagnosis",
+      "Biopsy if 'mastitis' persists"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Breast cancer is the commonest non-skin cancer. About 70 percent present at 55 or older. Only 20 percent have any family history. Triple assessment uses exam, imaging and core biopsy. A normal mammogram does not rule out a palpable lump. Lobular tumours, about 10 to 15 percent, lose E-cadherin. Over 2 cm is T2 and over 5 cm is T3. Chest wall or skin spread is T4, including inflammatory T4d. Stage I five year survival exceeds 99 percent, while stage IV is about 29 percent.",
+   "say": "High-yield for the exam: Breast cancer is the commonest non-skin cancer. About 70 percent present at 55 or older. Only 20 percent have any family history. Triple assessment uses exam, imaging and core biopsy. A normal mammogram does not rule out a palpable lump. Lobular tumours, about 10 to 15 percent, lose E-cadherin. Over 2 cm is T2 and over 5 cm is T3. Chest wall or skin spread is T4, including inflammatory T4d. Stage I five year survival exceeds 99 percent, while stage IV is about 29 percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Age 55",
+      "About 70 percent of cases"
+     ],
+     [
+      "Family history",
+      "Only 20 percent"
+     ],
+     [
+      "Triple test",
+      "Exam, image, core biopsy"
+     ],
+     [
+      "Felt lump",
+      "Mammogram cannot clear it"
+     ],
+     [
+      "Lobular",
+      "10 to 15 percent, no E-cadherin"
+     ],
+     [
+      "T sizes",
+      "T2 over 2 cm, T3 over 5"
+     ],
+     [
+      "T4",
+      "Skin, chest wall, or T4d"
+     ],
+     [
+      "Survival",
+      "99 percent stage I, 29 stage IV"
+     ]
+    ]
    }
   }
  ],
- "quiz": ["24ecaf97-2196-4894-999a-a808506eb383", "1894027f-e5db-44e1-ae23-78b7b6b4b8ed", "14aebfa4-f65c-460e-90a0-9884725698aa"],
- "src": ["kb-reference-breast-cancer", "kb-oncotree-breast", "kb-reference-hereditary-breast-ovarian"],
+ "quiz": [
+  "24ecaf97-2196-4894-999a-a808506eb383",
+  "1894027f-e5db-44e1-ae23-78b7b6b4b8ed",
+  "14aebfa4-f65c-460e-90a0-9884725698aa"
+ ],
+ "src": [
+  "kb-reference-breast-cancer",
+  "kb-oncotree-breast",
+  "kb-reference-hereditary-breast-ovarian"
+ ],
  "gen": "hand",
- "checks": { "shape": true, "numbers": true, "drugs": true, "verbatim": true, "selfCheck": "hand", "by": "tools/prep-lessons.mjs --check" }
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": "hand",
+  "by": "tools/prep-lessons.mjs --check"
+ }
 }

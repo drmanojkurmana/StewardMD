@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-headache",
+ "subject": "ss-general-medicine",
+ "title": "Headache disorders and facial pain",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Migraine** presents with unilateral throbbing pain in these patients. **Photophobia** with nausea is the accompaniment in these patients. **Aura** precedes pain in these patients. **Triptans** with **sumatriptan** with **frovatriptan** with **zolmitriptan** treat attacks in these patients. Diary tracking helps in these patients.",
+   "say": "Migraine presents with unilateral throbbing pain in these patients. Photophobia with nausea is the accompaniment in these patients. Aura is the visual precursor of pain in these patients with neurological accompaniment. Triptans with sumatriptan with frovatriptan with zolmitriptan are the treatments for attacks in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Pain pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Migraine",
+      "Unilateral throbbing",
+      "Photophobia, nausea"
+     ],
+     [
+      "Tension headache",
+      "Bilateral band like",
+      "Stress related"
+     ],
+     [
+      "Cluster headache",
+      "Severe unilateral",
+      "Autonomic features"
+     ],
+     [
+      "Hemicrania continua",
+      "Continuous unilateral",
+      "Indomethacin responsive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rimegepant** with **ubrogepant** are gepants for migraine in these patients. **Erenumab** with **fremanezumab** with **galcanezumab** block CGRP in these patients. **Atogepant** with **eptinezumab** are CGRP options in these patients. **Onabotulinumtoxina** treats chronic migraine in these patients. Dosing is preventive in these patients.",
+   "say": "Rimegepant with ubrogepant are gepants for migraine in these patients. Erenumab with fremanezumab with galcanezumab block CGRP in these patients. Atogepant with eptinezumab are CGRP options in these patients. Onabotulinumtoxina is the treatment for chronic migraine in these patients with preventive benefit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Migraine therapy",
+     "points": [
+      "Triptans for attacks",
+      "Gepants for acute therapy",
+      "CGRP antibodies preventive",
+      "Onabotulinumtoxina chronic"
+     ]
+    },
+    "right": {
+     "title": "Cluster therapy",
+     "points": [
+      "Oxygen first line",
+      "Sumatriptan injection",
+      "Verapamil preventive",
+      "Lithium alternative"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Propranolol** with **metoprolol** with **candesartan** prevent migraine in these patients. **Amitriptyline** with **topiramate** with **valproate** are prophylactic in these patients. **Flunarizine** prevents migraine in these patients. **Gabapentin** is an option in these patients. **CGRP** antibodies with monthly injections prevent episodic migraine in these patients.",
+   "say": "Propranolol with metoprolol with candesartan prevent migraine in these patients. Amitriptyline with topiramate with valproate are prophylactic in these patients. Flunarizine prevents migraine in these patients. Gabapentin is an option in these patients. CGRP antibodies with monthly injections prevent episodic migraine in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Role",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Propranolol",
+      "Migraine prevention",
+      "First line option"
+     ],
+     [
+      "Amitriptyline",
+      "Migraine prevention",
+      "Co morbid depression"
+     ],
+     [
+      "Topiramate",
+      "Migraine prevention",
+      "Weight loss benefit"
+     ],
+     [
+      "Flunarizine",
+      "Migraine prevention",
+      "Vertigo benefit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cluster headache** presents with restlessness and autonomic features in these patients. **Indomethacin** treats hemicrania continua in these patients. **Verapamil** prevents cluster attacks in these patients. **Lithium** is an alternative in these patients. **Oxygen** 12 to 15 L per minute is used to abort cluster attacks within 15 minutes in these patients.",
+   "say": "Cluster headache presents with restlessness and autonomic features in these patients. Indomethacin is the treatment for hemicrania continua in these patients with absolute response. Verapamil prevents cluster attacks in these patients. Lithium is an alternative in these patients. Oxygen twelve to fifteen litres per minute is used to abort cluster attacks within fifteen minutes in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Severe unilateral pain"
+     },
+     {
+      "id": "b",
+      "label": "Autonomic features seen"
+     },
+     {
+      "id": "c",
+      "label": "Oxygen for attacks"
+     },
+     {
+      "id": "d",
+      "label": "Verapamil prevention"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Codeine** is not first line for migraine in these patients. **Prednisone** treats cluster attacks in these patients. **Dopamine** antagonists treat nausea in these patients. **Trigeminal neuralgia** presents with electric shock pain in these patients. **MRI** excludes compressing vessels or tumours in trigeminal neuralgia in these patients.",
+   "say": "Codeine is not first line for migraine in these patients. Prednisone is the treatment for cluster attacks in these patients with bridge therapy. Dopamine antagonists are the treatments for nausea in these patients with symptomatic relief. Trigeminal neuralgia presents with electric shock pain in these patients. MRI excludes compressing vessels or tumours in trigeminal neuralgia in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Medication overuse** headache follows triptan overuse in these patients. **Withdrawal** resolves headache in these patients. **Diary** tracking helps in these patients during follow-up. **Prophylaxis** is needed in these patients after withdrawal for prevention. **Triptans** on 10 or more days per month cause overuse headache in these patients.",
+   "say": "Medication overuse headache follows triptan overuse in these patients with daily intake pattern. Withdrawal is the resolution for headache in these patients with gradual improvement course. Diary tracking helps in these patients during follow-up with pattern documentation. Prophylaxis is needed in these patients after withdrawal for prevention. Triptans on ten or more days per month cause overuse headache in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Frequent headache"
+     },
+     {
+      "id": "b",
+      "label": "Overuse identified"
+     },
+     {
+      "id": "c",
+      "label": "Withdrawal advised"
+     },
+     {
+      "id": "d",
+      "label": "Prophylaxis started"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Red flags** include thunderclap and fever in these patients. **Imaging** with contrast is needed in these patients when indicated. **Papilloedema** needs urgent imaging in these patients. **Sinusitis** mimics headache in these patients. **Thunderclap** headache peaking within 1 minute suggests subarachnoid bleeding in these patients.",
+   "say": "Red flags are thunderclap and fever in these patients with emergency evaluation. Imaging is needed in these patients with contrast studies when indicated. Papilloedema needs urgent imaging in these patients with same day assessment. Sinusitis is a mimic of headache in these patients with facial pain pattern. Thunderclap headache peaking within one minute suggests subarachnoid bleeding in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Glaucoma** headache is periorbital pain in these patients. **Eye** examination is needed in these patients. **Dental** pain mimics headache in these patients. **Cervicogenic** headache is neck related in these patients. **Acute angle closure** raises eye pressure above 40 mmHg with a fixed mid-dilated pupil in these patients.",
+   "say": "Glaucoma headache is periorbital pain in these patients with eye pressure elevation. Eye examination is needed in these patients with pressure measurement assessment. Dental pain mimics headache in these patients with referred pain pattern. Cervicogenic headache is neck related in these patients with movement provocation. Acute angle closure raises eye pressure above forty millimetres of mercury with a fixed mid-dilated pupil in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Lifestyle** measures help migraine in these patients during daily practice. **Sleep** regularity helps these patients with fixed schedule adherence. **Trigger** avoidance helps these patients with diary identified triggers. **Hydration** helps these patients with regular fluid intake. **Regular** meals with caffeine limits help these patients with trigger control. **Stress** management with relaxation training helps these patients with attack reduction.",
+   "say": "Lifestyle measures help migraine in these patients during daily practice with habit formation. Sleep regularity helps these patients with fixed schedule adherence and adequate duration. Trigger avoidance helps these patients with diary identified triggers and avoidance planning. Hydration helps these patients with regular fluid intake and dehydration prevention. Regular meals with caffeine limits help these patients with trigger control. Stress management with relaxation training helps these patients with attack reduction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Action",
+     "Benefit"
+    ],
+    "rows": [
+     [
+      "Sleep regularity",
+      "Fixed schedule",
+      "Attack reduction"
+     ],
+     [
+      "Trigger avoidance",
+      "Diary identified",
+      "Fewer attacks"
+     ],
+     [
+      "Hydration",
+      "Regular fluids",
+      "Fewer attacks"
+     ],
+     [
+      "Exercise",
+      "Regular activity",
+      "Prevention benefit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Follow up** needs headache diary in these patients during follow-up. **Review** of prophylaxis is needed in these patients during follow-up. **Comorbidity** screening is needed in these patients during follow-up. **Depression** with anxiety screening guides prophylaxis choice in these patients. **Pregnancy** planning changes drug choice in these patients.",
+   "say": "Follow up needs headache diary in these patients during follow-up with diary documentation. Review of prophylaxis is needed in these patients during follow-up with efficacy assessment. Comorbidity screening is needed in these patients during follow-up with mood assessment. Depression with anxiety screening guides prophylaxis choice in these patients. Pregnancy planning changes drug choice in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** introduces this closing summary for the lesson specifically. Remember sumatriptan for migraine attacks, propranolol for prevention and CGRP antibodies for refractory migraine. Indomethacin treats hemicrania continua while verapamil prevents cluster headache. Medication overuse headache resolves with withdrawal clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Sumatriptan is the triptan for migraine attacks clearly. Propranolol is the prevention for migraine cases. CGRP antibodies are the prevention for refractory migraine cases. Indomethacin is the treatment for hemicrania continua in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Acute migraine",
+      "Sumatriptan triptan for attacks"
+     ],
+     [
+      "Migraine prevention",
+      "Propranolol for prevention"
+     ],
+     [
+      "Refractory prevention",
+      "CGRP antibodies for refractory disease"
+     ],
+     [
+      "Hemicrania therapy",
+      "Indomethacin treats hemicrania continua"
+     ],
+     [
+      "Cluster prevention",
+      "Verapamil prevents cluster attacks"
+     ],
+     [
+      "Overuse resolution",
+      "Withdrawal resolves overuse headache"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

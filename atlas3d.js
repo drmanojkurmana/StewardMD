@@ -36,7 +36,24 @@
   var MANIFEST_URL = "/atlas/3d/manifest.json", INDEX_URL = "/atlas/3d/index.json";
   var STATE_W = 64;                       // 64x64 state texture = 4096 part slots
   var R2_BASE = "https://models.stewardmd.in/atlas3d";
-  var PAGES_BASE = "https://stewardmd.in/atlas/3d";
+  // Atlas files (incl. atlas/3d) live on the public media bucket, synced by
+  // tools/atlas-media-sync.mjs; atlas/ is excluded from the Pages deploy. One constant,
+  // same default as atlas.js; window.SMD_ATLAS_MEDIA overrides it, "" disables it.
+  var ATLAS_MEDIA_DEFAULT = "https://media.stewardmd.in/atlas";
+  function mediaBase() {
+    try {
+      var b = G.SMD_ATLAS_MEDIA;
+      if (b === "" || b === false) return "";
+      if (typeof b === "string" && b) return b.replace(/\/+$/, "");
+    } catch (e) {}
+    return ATLAS_MEDIA_DEFAULT;
+  }
+  function mediaUrl(u) {
+    var base = mediaBase(), s = String(u || "");
+    if (!base || s.indexOf("/atlas/") !== 0) return u;
+    return base + s.slice("/atlas".length);
+  }
+  function media3dBase() { var b = mediaBase(); return b ? b + "/3d" : ""; }
   var CACHE_NAME = "atlas3d-v1";
   var VIEWS = [{ id: "3q", yaw: 0.45, pitch: 0.12 }, { id: "front", yaw: 0, pitch: 0.02 }, { id: "side", yaw: Math.PI / 2, pitch: 0.02 }, { id: "back", yaw: Math.PI, pitch: 0.02 }, { id: "top", yaw: 0, pitch: 1.35 }];
   var DEFAULT_OFF = { muscular: 1, integumentary: 1 };   // heavy / occluding: opt-in layers
@@ -372,21 +389,19 @@
     } catch (e) { return ""; }
   }
   // Geometry hosts, tried in order per chunk. Natively the bundle has no .bin.gz, so the live
-  // origin comes first (mirrors atlas.js imgUrl()). The Pages PREVIEW host is a fallback so a
-  // device build can be tested BEFORE the branch is merged: an unmerged branch makes
-  // stewardmd.in answer /atlas/3d/* with its index.html (HTTP 200, text/html), which WebKit
-  // then reports as "Failed to Decode Data." - the check in loadChunk() catches that and moves
-  // on. localStorage smd_atlas3d_base (e.g. a models.stewardmd.in path) wins over both.
+  // hosts come first (mirrors atlas.js imgUrl()): the models R2 bucket, then the media bucket
+  // that now carries atlas/3d (and everything else under atlas/). The old relative path stays
+  // so a dev checkout that ran the pipeline still serves its own chunks; loadChunk's
+  // looksLikeChunk() check rejects a host that answers with an index.html instead of a chunk.
+  // localStorage smd_atlas3d_base (e.g. a models.stewardmd.in path) wins over both.
   function dataBases() {
     var out = [];
     try { var o = G.localStorage && G.localStorage.getItem("smd_atlas3d_base"); if (o) out.push(String(o).replace(/\/$/, "")); } catch (e) {}
     var native = false; try { native = !!G.SMD_IS_NATIVE; } catch (e2) {}
     if (!native) out.push("");          // a dev checkout that ran the pipeline serves its own chunks
     out.push(R2_BASE);
-    // Last resort, natively: the chunks are also committed and Pages serves them from the API
-    // host, so geometry that has not been uploaded to R2 yet (a new body) still loads. A host
-    // that answers with its index.html instead is rejected by loadChunk's looksLikeChunk().
-    if (native) out.push(PAGES_BASE);
+    var media = media3dBase();
+    if (media) out.push(media);
     return out;
   }
   // Chunk URLs are "/atlas/3d/<file>"; R2 keys are "atlas3d/<file>", so a non-empty base
@@ -395,7 +410,7 @@
   // under a new URL and never overwrites the R2 object an installed app's manifest points at.
   function dataUrl(u, base) { return base ? base + u.replace(/^\/atlas\/3d/, "") : u; }
   function imgUrl(u) {
-    try { if (G.SMD_IS_NATIVE && u.indexOf("/atlas/") === 0) return "https://stewardmd.in" + u; } catch (e) {}
+    try { if (u && u.indexOf("/atlas/") === 0) return mediaUrl(u); } catch (e) {}
     return u;
   }
   function isTouch() { try { return !!G.SMD_IS_NATIVE || (G.navigator && G.navigator.maxTouchPoints > 0); } catch (e) { return false; } }
@@ -419,11 +434,19 @@
 
   /* ---------- data ---------- */
   var _manifestP = null, _indexP = null;
+  // Atlas JSON from the media host first (Pages no longer ships it), then the old relative
+  // path, which is also where the native bundle keeps manifest/index.
+  function fetchAtlasJson(url) {
+    function ok(r) { return r && r.ok ? r.json() : Promise.reject(new Error("http " + (r && r.status))); }
+    var alt = mediaUrl(url);
+    if (alt === url) return G.fetch(url).then(ok);
+    return G.fetch(alt).then(ok).catch(function () { return G.fetch(url).then(ok); });
+  }
   function loadIndex() {
     if (st.index) return Promise.resolve(st.index);
     if (_indexP) return _indexP;
     if (!G.fetch) return Promise.resolve({});
-    _indexP = G.fetch(INDEX_URL).then(function (r) { return r && r.ok ? r.json() : {}; })
+    _indexP = fetchAtlasJson(INDEX_URL)
       .then(function (j) { st.index = j || {}; return st.index; })
       .catch(function () { st.index = {}; return st.index; });
     return _indexP;
@@ -432,10 +455,7 @@
     if (st.data) return Promise.resolve(st.data);
     if (_manifestP) return _manifestP;
     if (!G.fetch) return Promise.reject(new Error("no fetch"));
-    _manifestP = G.fetch(MANIFEST_URL).then(function (r) {
-      if (!r || !r.ok) throw new Error("manifest " + (r && r.status));
-      return r.json();
-    }).then(function (m) {
+    _manifestP = fetchAtlasJson(MANIFEST_URL).then(function (m) {
       st.data = parseManifest(m);
       st.data.systems.forEach(function (s) { st.visible[s.id] = !DEFAULT_OFF[s.id]; });
       return st.data;
@@ -2256,6 +2276,7 @@
     fitDistance: fitDistance, encodePick: encodePick, decodePick: decodePick, canonOfPart: canonOfPart,
     linksFor: linksFor, regionParts: regionParts, perspective: perspective, lookAt: lookAt, mul: mul, eyeFrom: eyeFrom,
     looksLikeChunk: looksLikeChunk, dataBases: dataBases, dataUrl: dataUrl,
+    mediaBase: mediaBase, mediaUrl: mediaUrl, imgUrl: imgUrl,
     ghostAlpha: ghostAlpha, freeClip: freeClip, layerSnap: layerSnap, pushHist: pushHist, progressLabel: progressLabel,
     serializeView: serializeView, restoreView: restoreView, quizPool: quizPool, fileSlug: fileSlug, creditLine: creditLine, wrapLines: wrapLines,
     immRegionSlices: immRegionSlices, immShownX: immShownX, immNearestPin: immNearestPin, immNearestSlice: immNearestSlice, immPlaceLabels: immPlaceLabels, immWindowUrl: immWindowUrl

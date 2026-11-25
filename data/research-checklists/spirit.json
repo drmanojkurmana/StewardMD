@@ -1,0 +1,399 @@
+{
+  "id": "spirit",
+  "name": "Clinical Trial Protocol Checklist (SPIRIT 2025)",
+  "version": "2025",
+  "source": "Owner-supplied checklist with SPIRIT 2025 coverage (StewardMD, 2026-11), provided in place of the CC BY-NC-ND official text following the SPIRIT 2025 statement (Chan AW et al., BMJ / PLOS Med 2025).",
+  "licence": "Owner-supplied text for StewardMD ResearchMD use",
+  "instructions": "Mark each requirement when it has been addressed in the protocol. Where an item does not apply, record \"Not applicable\" and briefly explain why. Keep the item numbers for cross-checking against protocol sections.",
+  "finalCheck": "Confirm that the protocol describes what is planned with enough clarity for the trial to be understood, reviewed and reproduced. Check consistency between the objectives, outcomes, sample-size assumptions, randomisation, intervention schedule, safety monitoring and statistical analysis plan. Follow applicable ethics, registry and journal requirements.",
+  "participantSchedule": {
+    "columns": [
+      "Before enrolment",
+      "Enrolment / baseline",
+      "After allocation (Visit 1)",
+      "Visit 2",
+      "Visit 3",
+      "Further visits",
+      "Close-out"
+    ],
+    "rows": [
+      "Eligibility screening",
+      "Informed consent / assent",
+      "Demographic and baseline details",
+      "Random allocation",
+      "Intervention / comparator",
+      "Concomitant care review",
+      "Primary outcome assessment",
+      "Secondary outcome assessment",
+      "Harms / adverse-event assessment",
+      "Adherence assessment",
+      "Follow-up / retention contact",
+      "Final study assessment"
+    ]
+  },
+  "sections": [
+    {
+      "title": "Administrative information",
+      "items": [
+        {
+          "number": "1a",
+          "topic": "Trial title",
+          "text": "Write a descriptive title that identifies the trial design, the population being studied and the interventions being compared. Make clear that the document is a trial protocol.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "1b",
+          "topic": "Structured summary",
+          "text": "Provide a structured overview of the trial design and methods. Include the relevant information required by the World Health Organization Trial Registration Data Set.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "2",
+          "topic": "Protocol version",
+          "text": "State the protocol version number or other unique identifier and the date of that version.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "3a",
+          "topic": "Protocol contributors",
+          "text": "List the names and institutional affiliations of the people who contributed to the protocol, together with their respective roles.",
+          "projectField": "manual"
+        },
+        {
+          "number": "3b",
+          "topic": "Trial sponsor contact",
+          "text": "Identify the trial sponsor and provide contact details through which the sponsor can be reached.",
+          "projectField": "manual"
+        },
+        {
+          "number": "3c",
+          "topic": "Sponsor and funder responsibilities",
+          "text": "Explain the roles of the sponsor and funders in designing, conducting, analysing and reporting the trial. State whether they have authority over any of these activities.",
+          "projectField": "manual"
+        },
+        {
+          "number": "3d",
+          "topic": "Trial oversight and committees",
+          "text": "Describe the membership, functions and responsibilities of the coordinating centre or site, steering committee, outcome or end-point adjudication committee, data-management team and any other groups or individuals responsible for trial oversight, where applicable.",
+          "projectField": "manual"
+        }
+      ]
+    },
+    {
+      "title": "Open science and transparency",
+      "items": [
+        {
+          "number": "4",
+          "topic": "Trial registration",
+          "text": "Give the name of the trial registry, registration identification number and direct URL, together with the registration date. If registration has not yet occurred, identify the registry in which the trial is intended to be registered.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "5",
+          "topic": "Protocol and statistical analysis plan access",
+          "text": "State where readers can obtain or access the full trial protocol and the statistical analysis plan.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "6",
+          "topic": "Data and material sharing",
+          "text": "Explain whether, where and how de-identified individual participant-level data, the accompanying data dictionary, statistical code and other relevant study materials will be made available.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "7a",
+          "topic": "Funding and other support",
+          "text": "Identify all sources of financial support and other contributions, including non-financial support such as provision of study medicines or equipment.",
+          "projectField": "manuscript"
+        },
+        {
+          "number": "7b",
+          "topic": "Conflicts of interest",
+          "text": "Disclose relevant financial and non-financial competing interests of the principal investigators and members of the steering committee.",
+          "projectField": "manual"
+        },
+        {
+          "number": "8",
+          "topic": "Dissemination of findings",
+          "text": "Describe how trial findings will be communicated to participants, healthcare professionals, the public and other relevant audiences. Include planned routes such as registry results, accessible or plain-language summaries and scientific publications.",
+          "projectField": "protocol"
+        }
+      ]
+    },
+    {
+      "title": "Introduction",
+      "items": [
+        {
+          "number": "9a",
+          "topic": "Scientific background and rationale",
+          "text": "Explain the scientific context and justification for the trial. Summarise relevant published and unpublished evidence about the potential benefits and harms of each intervention.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "9b",
+          "topic": "Reason for selecting the comparator",
+          "text": "Explain why the chosen control or comparator intervention is appropriate for answering the trial question.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "10",
+          "topic": "Objectives",
+          "text": "State the specific trial objectives, addressing the expected benefits and potential harms of the interventions.",
+          "projectField": "protocol"
+        }
+      ]
+    },
+    {
+      "title": "Patient and public involvement and trial design",
+      "items": [
+        {
+          "number": "11",
+          "topic": "Patient and public involvement",
+          "text": "Describe how patients or members of the public contributed, or are planned to contribute, to the design, conduct and reporting of the trial. If there is no such involvement, make this clear.",
+          "projectField": "manual"
+        },
+        {
+          "number": "12",
+          "topic": "Overall trial design",
+          "text": "Describe the trial design, including its type (for example, parallel-group or crossover), the planned allocation ratio and the underlying framework (for example, superiority, equivalence, non-inferiority or exploratory). E. PARTICIPANTS, INTERVENTIONS AND OUTCOMES",
+          "projectField": "protocol"
+        }
+      ]
+    },
+    {
+      "title": "Participants, interventions and outcomes",
+      "items": [
+        {
+          "number": "13",
+          "topic": "Trial setting and locations",
+          "text": "Specify the settings in which the trial will take place, such as hospitals or community settings, and identify the countries, institutions and study sites involved.",
+          "projectField": "manual"
+        },
+        {
+          "number": "14a",
+          "topic": "Participant eligibility",
+          "text": "List the inclusion and exclusion criteria that determine which individuals may participate.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "14b",
+          "topic": "Site and intervention-provider eligibility",
+          "text": "Where relevant, state the eligibility requirements for participating sites and for the professionals who will deliver the interventions, such as surgeons or physiotherapists.",
+          "projectField": "manual"
+        },
+        {
+          "number": "15a",
+          "topic": "Intervention and comparator details",
+          "text": "Describe both the experimental intervention and comparator in enough detail for another team to reproduce them. Explain how, when and by whom each will be delivered. Refer to manuals or other supporting materials and state where they can be accessed, if applicable.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "15b",
+          "topic": "Stopping or changing allocated treatment",
+          "text": "Specify the circumstances in which a participant's assigned intervention or comparator may be stopped or modified, including changes prompted by harms, participant preference or improvement or deterioration in the clinical condition.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "15c",
+          "topic": "Adherence support and assessment",
+          "text": "Describe any measures intended to improve adherence to the assigned intervention or comparator and explain how adherence will be monitored, where applicable (for example, returned medication or attendance at treatment sessions).",
+          "projectField": "protocol"
+        },
+        {
+          "number": "15d",
+          "topic": "Other permitted or prohibited care",
+          "text": "State which additional treatments or concomitant care participants may receive and which treatments or care are not allowed during the trial.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "16",
+          "topic": "Outcomes",
+          "text": "Define every primary and secondary outcome. For each outcome, specify the variable being measured, the analysis metric (such as change from baseline, final value or time to event), how results will be summarised (such as median or proportion) and the time point at which it will be assessed.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "17",
+          "topic": "Assessment of harms",
+          "text": "Define what will count as a harm or adverse event and explain how such events will be identified and assessed, including whether assessment will be systematic or non-systematic.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "18",
+          "topic": "Participant timeline",
+          "text": "Provide the schedule for screening and enrolment, interventions (including run-in and washout periods, if any), assessments and study visits. A diagram or table showing the sequence and timing of these activities is strongly recommended.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "19",
+          "topic": "Sample size",
+          "text": "Explain how the required sample size was calculated and report all assumptions and inputs used in that calculation.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "20",
+          "topic": "Recruitment strategy",
+          "text": "Describe the methods that will be used to recruit enough eligible participants to achieve the planned sample size.",
+          "projectField": "protocol"
+        }
+      ]
+    },
+    {
+      "title": "Assignment of interventions",
+      "items": [
+        {
+          "number": "21a",
+          "topic": "Who generates the allocation sequence",
+          "text": "Identify the person or group responsible for generating the random allocation sequence and describe the method that will be used.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "21b",
+          "topic": "Randomisation method",
+          "text": "Specify whether randomisation will be simple or restricted. Describe any stratification factors. To prevent prediction of upcoming assignments, keep further restriction details (such as block sizes or blocking arrangements) in a separate document that is not accessible to staff enrolling participants or assigning interventions.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "22",
+          "topic": "Allocation concealment",
+          "text": "Describe how the random sequence will be implemented and concealed until the intervention is assigned. Examples include central computer or telephone allocation and sequentially numbered, opaque, sealed containers. Explain the safeguards used to prevent advance knowledge of assignments.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "23",
+          "topic": "Implementation of randomisation",
+          "text": "State whether the people enrolling participants and the people assigning interventions will be able to access the random allocation sequence.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "24a",
+          "topic": "Who is blinded",
+          "text": "Identify everyone who will remain unaware of treatment allocation after assignment, such as participants, treating personnel, outcome assessors and data analysts.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "24b",
+          "topic": "How blinding is maintained",
+          "text": "If blinding is planned, explain the procedures used to maintain it and describe how the intervention and comparator will be made sufficiently similar.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "24c",
+          "topic": "When and how unblinding can occur",
+          "text": "If blinding is planned, define the situations in which it may be broken and describe the process for revealing an individual participant's assigned intervention during the trial. G. DATA COLLECTION, MANAGEMENT AND ANALYSIS",
+          "projectField": "protocol"
+        }
+      ]
+    },
+    {
+      "title": "Data collection, management and analysis",
+      "items": [
+        {
+          "number": "25a",
+          "topic": "Data collection and measurement",
+          "text": "Describe how trial data and outcome assessments will be collected, including procedures to maintain data quality (such as duplicate measurements or assessor training). Identify the instruments used, including questionnaires and laboratory tests, and report their reliability and validity if known. If data collection forms are not included in the protocol, state where they can be accessed.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "25b",
+          "topic": "Participant retention and follow-up",
+          "text": "Describe measures to support participant retention and complete follow-up. Specify which outcome information will still be collected from participants who stop the assigned intervention or do not follow the intervention protocol.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "26",
+          "topic": "Data management",
+          "text": "Explain how data will be entered, coded, secured and stored. Include quality-control procedures such as double data entry or range checks. If detailed data-management procedures are documented elsewhere, state where they can be accessed.",
+          "projectField": "protocol"
+        },
+        {
+          "number": "27a",
+          "topic": "Comparative statistical methods",
+          "text": "Describe the statistical methods that will be used to compare trial groups for the primary and secondary outcomes, including harms.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "27b",
+          "topic": "Participants included in analyses",
+          "text": "Define the population included in each analysis (for example, all randomised participants) and specify the group to which participants will be assigned for the analysis.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "27c",
+          "topic": "Missing data",
+          "text": "Explain how missing observations or outcome data will be addressed in the statistical analyses.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "27d",
+          "topic": "Additional analyses",
+          "text": "Describe any planned analyses beyond the main comparisons, including subgroup analyses and sensitivity analyses.",
+          "projectField": "analysis"
+        }
+      ]
+    },
+    {
+      "title": "Monitoring",
+      "items": [
+        {
+          "number": "28a",
+          "topic": "Data monitoring committee",
+          "text": "Describe the data monitoring committee's membership, responsibilities and reporting arrangements. State whether it is independent of the sponsor and funder, disclose relevant conflicts of interest, and indicate where its charter or terms of reference can be found if they are not included in the protocol. If no such committee is planned, explain why it is unnecessary.",
+          "projectField": "manual"
+        },
+        {
+          "number": "28b",
+          "topic": "Interim analyses and stopping rules",
+          "text": "Explain whether interim analyses will be conducted and describe the rules or criteria for stopping the trial early. Identify who will receive or have access to interim results and who will make the final decision about trial termination.",
+          "projectField": "analysis"
+        },
+        {
+          "number": "29",
+          "topic": "Trial conduct monitoring",
+          "text": "Describe how often the trial will be monitored and the procedures that will be used to check trial conduct. If no monitoring is planned, provide the reason.",
+          "projectField": "manual"
+        }
+      ]
+    },
+    {
+      "title": "Ethics",
+      "items": [
+        {
+          "number": "30",
+          "topic": "Research ethics approval",
+          "text": "Describe the plan for obtaining approval from the relevant research ethics committee or institutional review board.",
+          "projectField": "manual"
+        },
+        {
+          "number": "31",
+          "topic": "Protocol amendments",
+          "text": "Explain how important changes to the protocol will be documented and communicated to all relevant parties.",
+          "projectField": "manual"
+        },
+        {
+          "number": "32a",
+          "topic": "Participant consent or assent",
+          "text": "Identify who will obtain informed consent or assent from potential participants, or from legally authorised representatives where appropriate, and explain how this process will be carried out.",
+          "projectField": "manual"
+        },
+        {
+          "number": "32b",
+          "topic": "Additional consent for further use",
+          "text": "Where applicable, describe any additional consent procedures required for collecting or using participant data or biological samples in related or ancillary studies.",
+          "projectField": "manual"
+        },
+        {
+          "number": "33",
+          "topic": "Confidentiality and privacy",
+          "text": "Explain how personal information about individuals considered for the trial and those enrolled will be collected, accessed, shared and stored securely to protect confidentiality before, during and after the trial.",
+          "projectField": "manual"
+        },
+        {
+          "number": "34",
+          "topic": "Additional and post-trial care; compensation",
+          "text": "Describe any arrangements for care beyond the trial intervention and for care after the trial ends. State what provisions, if any, are available to compensate participants who experience harm as a result of taking part.",
+          "projectField": "manual"
+        }
+      ]
+    }
+  ]
+}

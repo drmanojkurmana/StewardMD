@@ -765,8 +765,8 @@
         .then(null, function () { return null; })
         .then(function () { return ensureLoaded(packId, loadOpts); });
     }
-    // SHARED PLUGIN: StewardMD Edge's FunctionGemma (edge-router.js llamaAdapter) loads into this same
-    // llama plugin and evicts our pack, while available().loaded still says true (ITS model is loaded).
+    // SHARED PLUGIN: another holder (SMD_LLAMA_HOLDER) may have evicted our pack while available().loaded
+    // still says true. (The Edge FunctionGemma holder was removed 2026-11-22; the check stays as a guard.)
     if (_loadedPack && _engine !== "mlx" && llamaHeldByOther()) { _loadedPack = null; _warmed = null; }
     if (_loadedPack === packId) {
       // The plugin drops the model on app pause, so confirm it is still resident before answering.
@@ -1218,7 +1218,16 @@
     var KB = (typeof window !== "undefined") && window.SMD_MAIK_KB_STORE;
     if (!RAG || !KB) return Promise.resolve(null);
     var rt = routerToks(topic);
+    /* Meaning search (kb/ai/maik-book-vec.js, flag smd_maik_book_vec, default off) joins ONLY when
+     * the router named no disease: measured, it lifts router-miss key points 49.0% -> 54.5% and
+     * does nothing useful when the router matched. Any missing piece yields null = keyword only. */
+    var BV = (typeof window !== "undefined") && window.SMD_MAIK_BOOK_VEC;
+    var useVec = !rt.length && !!(BV && BV.available());
     return KB.loadBook(RAG).then(function (bk) {
+      if (!useVec) return [bk, null];
+      return BV.topRows(question, BV.POOL, bk.rows).then(function (d) { return [bk, d]; }, function () { return [bk, null]; });
+    }).then(function (pair) {
+      var bk = pair[0], dense = pair[1];
       var A = anchorsFor(bk, RAG, question);
       if (!A || !A.topic) A = { topic: A || [], drugs: [], mods: [] };
       // Router anchors first: the disease the router named is the strongest evidence of topic.
@@ -1241,7 +1250,8 @@
       if (expansion.length) q += " " + expansion.slice(0, 4).join(" ");
       // Search wider than we keep: the relevant passages are often ranks 2-8 behind a glossary
       // chapter that matches every word. The rerank below is what picks from this pool.
-      var hits = bk.search(q, RAG.TOPK * 4);
+      var hits = dense ? BV.fuse(bk.search(q, BV.POOL), dense, RAG.TOPK * 4, RAG.MIN_SCORE)
+                       : bk.search(q, RAG.TOPK * 4);
       if (!hits.length || hits[0][0] < RAG.MIN_SCORE) return null;
       // A value question also searches its own words: the expansion ("valve") pushed the passage with
       // "target INR of 2.5-3.5" out of the pool. Value questions only, so other answers are unchanged.
@@ -2089,13 +2099,8 @@
     var L = llama();
     _loadedPack = null;
     _warmed = null;
-    // Whoever held the plugin (Edge too) has nothing loaded after this; Edge reloads on its next call.
-    var wasMaik = false;
-    try { wasMaik = window.SMD_LLAMA_HOLDER === "maik"; window.SMD_LLAMA_HOLDER = null; } catch (e) {}
-    // MaiK is idle and has let go: Edge may warm FunctionGemma back up (it checks its own rules).
-    var edgeWarm = function () { try { if (wasMaik && window.SMD_EDGE && SMD_EDGE.warmSoon) SMD_EDGE.warmSoon(); } catch (e) {} };
-    if (L && L.release) { try { return Promise.resolve(L.release()).then(function (r) { edgeWarm(); return r; }); } catch (e) {} }
-    edgeWarm();
+    try { window.SMD_LLAMA_HOLDER = null; } catch (e) {}
+    if (L && L.release) { try { return Promise.resolve(L.release()); } catch (e) {} }
   }
 
   /* IDLE UNLOAD (owner, 2026-09-04): a 1 to 4 GB model must not sit resident, warming the phone and

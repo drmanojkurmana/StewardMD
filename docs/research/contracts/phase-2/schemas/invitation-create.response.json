@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/invitation-create.response.json",
+  "title": "POST /v1/projects/{projectId}/invitations response",
+  "description": "The pending invitation. token is shown exactly once: the screen delivers it out of band and never stores it.",
+  "type": "object",
+  "required": ["invitation", "token"],
+  "additionalProperties": false,
+  "properties": {
+    "invitation": { "$ref": "invitation-list.response.json#/properties/invitations/items" },
+    "token": { "type": "string", "minLength": 32 }
+  }
+}

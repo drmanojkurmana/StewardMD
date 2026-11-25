@@ -256,7 +256,7 @@ export function scanTextForCors(text) {
  * (functions/api/queue/[[path]].js), resolveClinicalActor/resolveIdentity the
  * WardSynQ clinical actor (functions/_wardsynq/actor.js), authorizeOrg the org
  * capability gate (functions/_opd_org.js), verifyStaffSession the staff
- * session (functions/_opd_auth.js), verifyFirebaseToken Firebase
+ * session (functions/_opd_auth.js), verifyFirebaseToken / verifyFirebaseClaims Firebase
  * (functions/_fbauth.js), identify( the server-derived identity
  * (functions/_usage.js, functions/_fbauth.js), ownerOK the owner gate
  * (functions/_adminauth.js), resolveBearer/smartEnabled the SMART bearer door
@@ -269,7 +269,7 @@ export function scanTextForCors(text) {
  * _rx_public the opaque-handle prescription verification. */
 export const AUTH_MARKERS = [
   "resolveActor", "resolveClinicalActor", "resolveIdentity", "authorizeOrg",
-  "verifyStaffSession", "verifyFirebaseToken", "verifiedClaimsFor", "identify(", "ownerOK",
+  "verifyStaffSession", "verifyFirebaseToken", "verifyFirebaseClaims", "verifiedClaimsFor", "identify(", "ownerOK",
   "resolveBearer", "callerUid", "verifyDisplayToken", "redeemCode",
   "portalRead", "sessionPatient", "smartEnabled", "authorise", "hmacHex",
   "makeSecrets", "_rx_public", "verifySecret", "verifyMfaChallenge",

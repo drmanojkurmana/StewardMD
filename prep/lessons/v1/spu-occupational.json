@@ -1,0 +1,324 @@
+{
+ "v": 1,
+ "module": "spu-occupational",
+ "subject": "ss-pulmonology",
+ "title": "Occupational and environmental lung disease: dusts, asbestos and sensitisers",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025, 22nd Edition"
+ ],
+ "steps": [
+  {
+   "tx": "A detailed **occupational history** is the single most important diagnostic step and must cover hobbies, home exposures, secondhand smoke and nearby industry. Include short and long term exposures from the distant past, school years and military service, since **latency** can stretch over decades before symptoms appear.",
+   "say": "The exposure history carries the greatest diagnostic weight in lung disease clinics. Hobbies and home exposures are also important in clinic practice today. Distant exposures are still relevant because latency stretches over decades for patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Full exposure history"
+     },
+     {
+      "id": "b",
+      "label": "Lung pattern on tests"
+     },
+     {
+      "id": "c",
+      "label": "Target exposure disease"
+     },
+     {
+      "id": "d",
+      "label": "Remove the cause"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inorganic dusts typically cause **interstitial fibrosis** with a restrictive pattern and reduced diffusing capacity on function tests. Dusts and chemicals that provoke **occupational asthma** or COPD instead cause airway obstruction, and a fall in **FEV1** across a work shift detects an acute bronchoconstrictive response to the workplace.",
+   "say": "Fibrosing dusts cause restriction with reduced diffusing capacity on tests performed. Sensitising exposures cause obstruction instead of restriction in workers daily. A fall in FEV1 across one shift suggests occupational asthma clearly in workers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Restrictive pattern",
+     "points": [
+      "Fibrosing dusts",
+      "Low lung volumes",
+      "Reduced diffusing capacity",
+      "Interstitial fibrosis"
+     ]
+    },
+    "right": {
+     "title": "Obstructive pattern",
+     "points": [
+      "Sensitisers and fumes",
+      "Airway narrowing",
+      "Occupational asthma",
+      "Chronic obstructive disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Silicosis** shows small rounded opacities on chest radiograph, while **asbestosis** favours small linear and irregular opacities, graded with the **ILO classification** for pneumoconiosis screening. CT and high resolution CT detect subtle opacities, pleural thickening and interstitial change more sensitively than plain films.",
+   "say": "Rounded opacities suggest silicosis while linear opacities suggest asbestosis in workers. The ILO scale grades screening films for pneumoconiosis in surveys conducted. CT detects change earlier than plain radiographs do in practice for patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Film pattern",
+     "Disease",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Small rounded opacities",
+      "Silicosis or coal worker disease",
+      "Simple pneumoconiosis"
+     ],
+     [
+      "Small linear irregular opacities",
+      "Asbestosis",
+      "Fibrosis prone"
+     ],
+     [
+      "Eggshell nodal calcification",
+      "Silicosis",
+      "Seen in about 20 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Silica impairs **alveolar macrophage** function, so silicosis raises risk of mycobacterial, atypical mycobacterial and fungal infection including tuberculosis. Complicated disease means nodules reaching **1 cm** or more, coalescing into **progressive massive fibrosis** with severe restrictive and obstructive impairment and premature mortality.",
+   "say": "Silica impairs macrophage killing of mycobacteria inside alveoli daily in workers. Nodules of one centimetre or more define complicated silicosis cases in practice. Progressive massive fibrosis causes severe impairment and early death in workers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Size or clue",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Simple silicosis",
+      "Small rounded opacities",
+      "Often no impairment"
+     ],
+     [
+      "Complicated disease",
+      "Nodules 1 cm or more",
+      "Function begins to fall"
+     ],
+     [
+      "Progressive massive fibrosis",
+      "Conglomerate masses",
+      "Severe deficits, early death"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Asbestos** causes a spectrum from benign effusions and pleural plaques to asbestosis, bronchogenic lung cancer and **mesothelioma** of pleura or peritoneum. More than **80 percent** of mesotheliomas relate to asbestos, with latency up to **40 years**, while lung cancer latency spans about **15 to 19 years** after first exposure.",
+   "say": "Asbestos causes plaques, fibrosis, lung cancer and mesothelioma in workers daily. Over eighty percent of mesotheliomas follow asbestos exposure in series reported. Latency can reach forty years for mesothelioma cases diagnosed late in life.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Number",
+     "Exam caution"
+    ],
+    "rows": [
+     [
+      "Pleural plaques",
+      "Exposure marker",
+      "Alone they imply no impairment"
+     ],
+     [
+      "Mesothelioma link",
+      "Over 80 percent",
+      "Latencies reach 40 years"
+     ],
+     [
+      "Lung cancer latency",
+      "15 to 19 years",
+      "Short exposures still cause it"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Smoking and asbestos interact more than additively, and lung cancer risk exceeds the sum of either exposure alone. **Mesothelioma** risk, however, shows no association with smoking, and **pleural plaques** by themselves imply only past exposure without pulmonary impairment even when films look dramatic in an individual worker.",
+   "say": "Smoking plus asbestos multiplies lung cancer risk substantially in cohorts studied. Mesothelioma risk owes nothing to smoking history in patients with exposure. Plaques alone signal exposure rather than impairment in most workers screened.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Smoking plus asbestos",
+     "points": [
+      "Greater than additive risk",
+      "Bronchogenic lung cancer",
+      "Latency 15 to 19 years",
+      "Screen smokers closely"
+     ]
+    },
+    "right": {
+     "title": "Mesothelioma axis",
+     "points": [
+      "No link with smoking",
+      "Over 80 percent asbestos related",
+      "Latency up to 40 years",
+      "May follow short exposure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Chronic beryllium disease** mimics sarcoidosis with noncaseating granulomas, and the distinguishing test is the **beryllium lymphocyte proliferation test** showing a specific cell mediated response to beryllium. **Farmer lung** hypersensitivity pneumonitis presents **4 to 8 hours** after heavy exposure with fever, chills and malaise that mimic influenza or pneumonia.",
+   "say": "Beryllium disease imitates sarcoidosis clinically and radiologically in exams for students. The lymphocyte proliferation test separates the two conditions well in practice. Farmer lung fevers occur four to eight hours after exposure in workers daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Disease",
+     "Test"
+    ],
+    "rows": [
+     [
+      "Sarcoid like granulomas",
+      "Chronic beryllium disease",
+      "Lymphocyte proliferation test"
+     ],
+     [
+      "Fever after hay exposure",
+      "Farmer lung pneumonitis",
+      "Specific IgG precipitins"
+     ],
+     [
+      "Dust with rheumatoid arthritis",
+      "Caplan syndrome",
+      "Pneumoconiotic nodules"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Caplan syndrome** combines pneumoconiotic nodules with seropositive rheumatoid arthritis and was first described in coal miners. **Acute silicosis** follows very heavy short exposure such as sandblasting or artificial stone fabrication, resembles alveolar proteinosis with crazy paving, and can progress severely even after exposure stops.",
+   "say": "Caplan syndrome pairs pneumoconiotic nodules with rheumatoid arthritis in miners evaluated. Acute silicosis follows heavy short exposure in workshops quickly in patients. Disease can worsen even after exposure stops completely in patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Caplan syndrome",
+     "points": [
+      "Coal miners classic",
+      "Nodules plus arthritis",
+      "Seropositive rheumatoid disease",
+      "Screen joint symptoms"
+     ]
+    },
+    "right": {
+     "title": "Acute silicosis",
+     "points": [
+      "Sandblasting or stone work",
+      "Crazy paving mimics proteinosis",
+      "Very heavy short exposure",
+      "Progresses after stopping"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "No specific drug therapy reverses **asbestosis**, and care remains supportive as for any diffuse interstitial fibrosis with exposure removal and smoking cessation. **Latent tuberculosis** merits longer treatment in silicosis, and documented mesothelioma after asbestos exposure may be **compensable** for affected workers and families seeking justice.",
+   "say": "Asbestosis has no specific drug and care stays supportive always in practice. Silicosis patients need longer latent tuberculosis therapy for control in clinics. Mesothelioma after asbestos may be compensable under law for families affected.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Exposure confirmed"
+     },
+     {
+      "id": "b",
+      "label": "Remove from exposure"
+     },
+     {
+      "id": "c",
+      "label": "Supportive lung care"
+     },
+     {
+      "id": "d",
+      "label": "TB and compensation check"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High yield anchors: exposure history is the top diagnostic step, eggshell nodes occur in about **20 percent** of silicosis, asbestos lung cancer latency is **15 to 19 years**, mesothelioma latency reaches **40 years**, over **80 percent** of mesotheliomas follow asbestos, farmer lung arrives **4 to 8 hours** after exposure, **beryllium lymphocyte proliferation test** separates beryllium disease from sarcoidosis, and plaques alone mean exposure only.",
+   "say": "Exposure history is the single most important diagnostic step in practice for students. Eggshell nodes appear in about one fifth of silicosis cases recorded. Asbestos latencies extend for decades after exposure to asbestos fibres daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anchor",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Top first step",
+      "Occupational history"
+     ],
+     [
+      "Silicosis nodes",
+      "Eggshell in about 20 percent"
+     ],
+     [
+      "Asbestos cancer",
+      "Latency 15 to 19 years"
+     ],
+     [
+      "Mesothelioma",
+      "Over 80 percent asbestos related, latency to 40 years"
+     ],
+     [
+      "Farmer lung",
+      "Fever 4 to 8 hours after exposure"
+     ],
+     [
+      "Beryllium test",
+      "Lymphocyte proliferation test"
+     ],
+     [
+      "Plaques alone",
+      "Exposure only, no impairment"
+     ]
+    ]
+   }
+  }
+ ]
+}

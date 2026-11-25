@@ -1010,6 +1010,7 @@
       if (e.touches.length !== 1) return;
       var x = e.touches[0].clientX, top = pushedTop();
       if (!top || x > EDGE) return;
+      try { if (localStorage.getItem("smd_swipe_back") === "0") return; } catch (x2) {}   // switched off in Preferences
       g = { top: top, x0: x, y0: e.touches[0].clientY, lx: x, lt: Date.now(), vx: 0, on: false };
       e.stopPropagation();
     }, { capture: true, passive: true });
@@ -1083,6 +1084,8 @@
         '<div class="sbr-sec">Preferences</div>' +
         row("notifications", "bell", "Notifications") +
         row("appearance", "sun", "Appearance &amp; Theme") +
+        // owner 2026-11-19: the left-edge swipe (back everywhere, the menu on home) can be switched off
+        '<div class="sbr-card">' + toggle({ id: "swipeback", key: "smd_swipe_back", def: true, title: "Swipe from the left edge", sub: "Goes back one screen. On the home screen it opens the menu. Off: use the Back buttons." }) + "</div>" +
         watchRow() +
         otaSectionHTML() +
         '<div class="sbr-sec">Advanced</div>' +

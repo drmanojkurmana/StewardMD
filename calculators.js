@@ -3396,6 +3396,21 @@
       return { v:r0(s), u:"", i:b+" (threshold 87). Ref: Hasford, Blood 2011 (EUTOS)." };
     } },
 
+  { id:"elts", cat:"Haematology", onc:1, icon:"", title:"ELTS Score (EUTOS Long-Term Survival, CML)",
+    desc:"Risk of dying of chronic myeloid leukaemia on tyrosine kinase inhibitor (TKI) therapy, scored at diagnosis in chronic phase. Preferred over Sokal for choosing the first-line TKI.",
+    inputs:[
+      { id:"age", label:"Age", type:"number", unit:"years", step:"1" },
+      { id:"spleen", label:"Spleen size below costal margin", type:"number", unit:"cm", step:"0.5" },
+      { id:"blasts", label:"Peripheral blood blasts", type:"number", unit:"%", step:"0.1" },
+      { id:"plt", label:"Platelet count", type:"number", unit:"×10⁹/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||!ok(v.spleen)||!ok(v.blasts)||!ok(v.plt)||v.age<0||v.spleen<0||v.blasts<0||v.plt<=0) return ERR;
+      var s=0.0025*Math.pow(v.age/10,3)+0.0615*v.spleen+0.1052*v.blasts+0.4104*Math.pow(v.plt/1000,-0.5);
+      var b=s<=1.5680?"Low risk":s<=2.2185?"Intermediate risk":"High risk";
+      return { v:Math.round(s*10000)/10000, u:"", i:b+" (low 1.5680 or less, intermediate above 1.5680 to 2.2185, high above 2.2185). Use values from diagnosis, before any treatment. High risk predicts more CML-related deaths and slower deep molecular response on imatinib, favouring a second-generation TKI." };
+    } },
+
   { id:"chads2", cat:"Cardiovascular", icon:"", title:"CHADS₂ Score",
     desc:"Stroke risk in non-valvular atrial fibrillation (predecessor of CHA₂DS₂-VASc).",
     inputs:[
@@ -3927,13 +3942,14 @@
     } },
 
   { id:"ipss_r", cat:"Haematology", onc:1, icon:"", title:"IPSS-R (Myelodysplastic Syndrome)",
-    desc:"Revised International Prognostic Scoring System for MDS.",
+    desc:"Revised International Prognostic Scoring System for MDS. Select one category in each domain; the points are shown beside every criterion.",
+    ref:"Greenberg PL, et al. Revised International Prognostic Scoring System (IPSS-R) for myelodysplastic syndromes. Blood. 2012;120(12):2454-2465.",
     inputs:[
-      { id:"cyto", label:"Cytogenetic risk group", type:"select", opts:[{v:"0",t:"Very good: del(11q) or -Y"},{v:"1",t:"Good: normal karyotype, del(20q), del(5q), del(12p), or double including del(5q)"},{v:"2",t:"Intermediate: +8, del(7q), i(17q), +19, or any other single/double independent clone"},{v:"3",t:"Poor: -7, inv(3)/t(3q)/del(3q), double including -7/del(7q), or complex (3 abnormalities)"},{v:"4",t:"Very poor: complex (>3 abnormalities)"}] },
+      { id:"cyto", label:"Cytogenetic group", type:"select", opts:[{v:"0",t:"Very good: −Y, del(11q)"},{v:"1",t:"Good: normal karyotype, del(5q), del(12p), del(20q), double abnormalities including del(5q)"},{v:"2",t:"Intermediate: del(7q), +8, +19, i(17q), any other single or double independent abnormalities"},{v:"3",t:"Poor: −7, inv(3)/t(3q)/del(3q), double abnormalities including −7/del(7q), complex (3 abnormalities)"},{v:"4",t:"Very poor: complex >3 abnormalities"}] },
       { id:"blasts", label:"Bone marrow blasts", type:"select", opts:[{v:"0",t:"≤ 2%"},{v:"1",t:"> 2% to < 5%"},{v:"2",t:"5–10%"},{v:"3",t:"> 10%"}] },
       { id:"hb", label:"Haemoglobin", type:"select", opts:[{v:"0",t:"≥ 10 g/dL"},{v:"1",t:"8 to < 10 g/dL"},{v:"1.5",t:"< 8 g/dL"}] },
       { id:"plt", label:"Platelets", type:"select", opts:[{v:"0",t:"≥ 100 ×10⁹/L"},{v:"0.5",t:"50 to < 100 ×10⁹/L"},{v:"1",t:"< 50 ×10⁹/L"}] },
-      { id:"anc", label:"Absolute neutrophil count", type:"select", opts:[{v:"0",t:"≥ 0.8 ×10⁹/L"},{v:"0.5",t:"< 0.8 ×10⁹/L"}] }
+      { id:"anc", label:"Absolute neutrophil count (ANC)", type:"select", opts:[{v:"0",t:"≥ 0.8 ×10⁹/L"},{v:"0.5",t:"< 0.8 ×10⁹/L"}] }
     ],
     compute:function(v){
       var s=Number(v.cyto)+Number(v.blasts)+Number(v.hb)+Number(v.plt)+Number(v.anc);
@@ -7429,6 +7445,7 @@
     hat:["hat score","haemorrhage after thrombolysis","hemorrhage after thrombolysis","sich risk tpa"],
     feua:["fractional excretion of uric acid","feua","urate excretion","siadh urate"],
     mdq:["mood disorder questionnaire","mdq","bipolar screen","bipolar screening"],
+    elts:["elts","elts score","eutos long term survival","cml prognosis","chronic myeloid leukaemia risk","chronic myeloid leukemia score"],
     eutos:["eutos score","cml prognosis","chronic myeloid leukaemia risk","chronic myeloid leukemia score"],
     chads2:["chads2","cha ds2","af stroke risk","atrial fibrillation stroke"],
     ca_phos_product:["calcium phosphate product","ca x po4","calcium phosphorus product","ckd mbd"],
@@ -7779,6 +7796,7 @@
     hat:"Lou M, et al. Neurology 2008;71(18):1417–23 (HAT).",
     feua:"Standard nephrology reference (fractional excretion of urate).",
     mdq:"Hirschfeld RMA, et al. Am J Psychiatry 2000;157(11):1873–5 (MDQ).",
+    elts:"Pfirrmann M, et al. Leukemia 2016;30(1):48-56 (ELTS score); Hochhaus A, et al. European LeukemiaNet 2020 CML recommendations, Leukemia 2020;34:966.",
     eutos:"Hasford J, et al. Blood 2011;118(3):686–92 (EUTOS).",
     chads2:"Gage BF, et al. JAMA 2001;285(22):2864–70.",
     ca_phos_product:"KDIGO CKD-MBD Work Group. Kidney Int Suppl 2009/2017.",
@@ -8010,17 +8028,118 @@
     pps:"Victoria Hospice Society. Palliative Performance Scale version 2 (PPSv2), 2001.",
     cbac:"MoHFW, National Health Mission. Revised Community Based Assessment Checklist (CBAC), 9 Oct 2020 (NHSRC).",
     ctg:"Ayres-de-Campos D, Spong CY, Chandraharan E. Int J Gynaecol Obstet 2015;131(1):13 (FIGO CTG consensus).",
-    act_asthma:"Nathan RA, et al. J Allergy Clin Immunol 2004;113(1):59 (Asthma Control Test)."
+    act_asthma:"Nathan RA, et al. J Allergy Clin Immunol 2004;113(1):59 (Asthma Control Test).",
+    meld3:"Kim WR et al. Gastroenterology 2021;161(6):1887-1895. Adopted by OPTN for liver allocation (2023).",
+    egfr_cysc:"Inker LA et al. N Engl J Med 2012;367(1):20-29 (CKD-EPI cystatin C). KDIGO 2024 CKD guideline.",
+    burch:"Burch HB, Wartofsky L. Endocrinol Metab Clin North Am 1993;22(2):263-277.",
+    rumack:"Rumack BH, Matthew H. Pediatrics 1975;55(6):871-876.",
+    scorten:"Bastuji-Garin S et al. J Invest Dermatol 2000;115(2):149-153.",
+    kings:"O'Grady JG et al. Gastroenterology 1989;97(2):439-445.",
+    psi:"Fine MJ et al. N Engl J Med 1997;336(4):243-250.",
+    hacor:"Duan J et al. Intensive Care Med 2017;43(2):192-199.",
+    sirs:"Bone RC et al. Chest 1992;101(6):1644-1655. Replaced for sepsis by Sepsis-3 (Singer M et al. JAMA 2016).",
+    mascc:"Klastersky J et al. J Clin Oncol 2000;18(16):3038-3051.",
+    drip:"Webb BJ et al. Antimicrob Agents Chemother 2016.",
+    news2:"Royal College of Physicians. National Early Warning Score 2. 2017.",
+    padua:"Barbar S et al. J Thromb Haemost 2010;8(11):2450-2457.",
+    heart:"Six AJ, Backus BE, Kelder JC. Neth Heart J 2008;16(6):191-196; Backus BE et al. Int J Cardiol 2013;168(3):2153-2158.",
+    fourts:"Lo GK et al. J Thromb Haemost 2006;4(4):759-765.",
+    lights:"Light RW et al. Ann Intern Med 1972;77(4):507-513.",
+    alvarado:"Alvarado A. Ann Emerg Med 1986;15(8):557-559.",
+    pitt:"Chow JW et al. Ann Intern Med 1991;115(8):585-590; Paterson DL et al. Ann Intern Med 2004;140(1):26-32.",
+    rockall:"Rockall TA et al. Gut 1996;38(3):316-321.",
+    ciwa:"Sullivan JT et al. Br J Addict 1989;84(11):1353-1357.",
+    crb65:"Lim WS et al. Thorax 2003;58(5):377-382. Adopted in BTS CAP guideline.",
+    bisap:"Wu BU et al. Gut 2008;57(12):1698-1703.",
+    spesi:"Jimenez D et al. Arch Intern Med 2010;170(15):1383-1389.",
+    killip:"Killip T, Kimball JT. Am J Cardiol 1967;20(4):457-464.",
+    decaf:"Steer J et al. Thorax 2012;67(11):970-976.",
+    phq9:"Kroenke K et al. J Gen Intern Med 2001;16(9):606-613.",
+    gad7:"Spitzer RL et al. Arch Intern Med 2006;166(10):1092-1097.",
+    auditc:"Bush K et al. Arch Intern Med 1998;158(16):1789-1795.",
+    rox:"Roca O et al. Am J Respir Crit Care Med 2019;199(11):1368-1376.",
+    uag:"Goldstein MB et al. Am J Med Sci 1986;292(4):198-202.",
+    timistemi:"Morrow DA et al. Circulation 2000;102(17):2031-2037.",
+    geneva:"Le Gal G et al. Ann Intern Med 2006;144(3):165-171.",
+    rcri:"Lee TH et al. Circulation 1999;100(10):1043-1049.",
+    ottawa_ankle:"Stiell IG et al. Ann Emerg Med 1992;21(4):384-390; JAMA 1993;269(9):1127-1132.",
+    ottawa_knee:"Stiell IG et al. Ann Emerg Med 1995;26(4):405-413.",
+    nexus_cspine:"Hoffman JR et al. N Engl J Med 2000;343(2):94-99.",
+    canadian_ct_head:"Stiell IG et al. Lancet 2001;357(9266):1281-1286.",
+    bishop:"Bishop EH. Obstet Gynecol 1964;24:266-268.",
+    apgar:"Apgar V. Curr Res Anesth Analg 1953;32(4):260-267.",
+    westley_croup:"Westley CR, Cotton EK, Brooks JG. Am J Dis Child 1978;132(5):484-487.",
+    mrs:"van Swieten JC et al. Stroke 1988;19(5):604-607; Rankin J. Scott Med J 1957;2(5):200-215.",
+    hunt_hess:"Hunt WE, Hess RM. J Neurosurg 1968;28(1):14-20.",
+    cage:"Ewing JA. JAMA 1984;252(14):1905-1907.",
+    feverpain:"Little P et al. BMJ 2013;347:f5806. Adopted in NICE NG84 (sore throat, 2018).",
+    sgarbossa:"Sgarbossa EB et al. N Engl J Med 1996;334(9):561-566.",
+    fisher:"Fisher CM, Kistler JP, Davis JM. Neurosurgery 1980;6(1):1-9.",
+    steroid_conv:"Standard glucocorticoid equivalence table (hydrocortisone 20 mg to prednisolone 5 mg to dexamethasone 0.75 mg).",
+    mme:"CDC Guideline for Prescribing Opioids for Chronic Pain. CDC 2016, updated 2022. MME conversion table.",
+    saag:"Runyon BA et al. Ann Intern Med 1992;117(3):215-220.",
+    ttkg:"Standard physiology definition of transtubular potassium gradient; no single defining paper exists.",
+    ebv:"Standard per-kilogram blood volume estimates (adult male 75, adult female 65, child 70, infant 80, term neonate 85, preterm 95 mL/kg), as used in anaesthesia texts.",
+    cows:"Wesson DR, Ling W. J Psychoactive Drugs 2003;35(2):253-259.",
+    gahs:"Forrest EH et al. Gut 2005;54(8):1174-1179.",
+    das28:"Prevoo ML et al. Arthritis Rheum 1995;38(1):92-99.",
+    stopbang:"Chung F et al. Anesthesiology 2008;108(5):812-821.",
+    smartcop:"Charles PG et al. Clin Infect Dis 2008;47(4):e38-e46.",
+    homa_ir:"Matthews DR et al. Diabetologia 1985;28(7):412-419.",
+    nafld_fibrosis:"Angulo P et al. Hepatology 2007;45(4):846-854.",
+    glasgow_imrie:"Blamey SL et al. Gut 1984;25(12):1340-1346.",
+    "4at":"Bellelli G et al. Age Ageing 2014;43(4):496-502. 4AT (the4at.com).",
+    sf_syncope:"Quinn JV et al. Ann Emerg Med 2004;43(2):224-232.",
+    bode:"Celli BR et al. N Engl J Med 2004;350(10):1005-1012.",
+    ottawa_sah:"Perry JJ et al. JAMA 2013;310(12):1248-1255.",
+    wfns:"Drake CG et al. Report of World Federation of Neurological Surgeons Committee on a universal subarachnoid hemorrhage grading scale. J Neurosurg 1988;68(6):985-986.",
+    harvey_bradshaw:"Harvey RF, Bradshaw JM. Lancet 1980;1(8167):514.",
+    truelove_witts:"Truelove SC, Witts LJ. Br Med J 1955;2(4947):1041-1048.",
+    aims65:"Saltzman JR et al. Gastrointest Endosc 2011;73(2):221-228.",
+    air_score:"Andersson M, Andersson RE. World J Surg 2008;32(8):1843-1849.",
+    kocher:"Kocher MS et al. J Bone Joint Surg Am 1999;81(12):1662-1670.",
+    orbit_bleed:"OBrien EC et al. Eur Heart J 2015;36(46):3258-3264.",
+    urr:"NKF-KDOQI Clinical Practice Guideline for Hemodialysis Adequacy: Update 2015.",
+    cdai_ra:"Aletaha D et al. Arthritis Res Ther 2005;7(4):R796-R806.",
+    gos:"Jennett B, Bond M. Lancet 1975;1(7903):480-484.",
+    anc:"Standard hematology formula: ANC equals WBC times segmented plus band neutrophils divided by 100.",
+    improve_vte:"Spyropoulos AC et al. Chest 2011;140(3):706-714.",
+    nccn_ipi:"Zhou Z et al. Blood 2014;123(6):837-842.",
+    r_ipi:"Sehn LH et al. Blood 2007;109(5):1857-1861.",
+    npi_breast:"Galea MH et al. Breast Cancer Res Treat 1992;22(3):207-219.",
+    mgps:"McMillan DC. Cancer Treat Rev 2013;39(5):534-540.",
+    psadt:"Pound CR et al. JAMA 1999;281(17):1591-1597.",
+    bed_eqd2:"Fowler JF. Br J Radiol 1989;62(740):679-694.",
+    cll_ipi:"International CLL-IPI Working Group. Lancet Oncol 2016;17(7):969-980.",
+    cns_ipi:"Schmitz N et al. J Clin Oncol 2016;34(26):3150-3156.",
+    imdc_rcc:"Heng DY et al. J Clin Oncol 2009;27(34):5794-5799.",
+    mskcc_rcc:"Motzer RJ et al. J Clin Oncol 1999;17(8):2530-2540.",
+    fong_crc:"Fong Y et al. Ann Surg 1999;230(3):309-321.",
+    igcccg:"International Germ Cell Cancer Collaborative Group. J Clin Oncol 1997;15(2):593-604.",
+    mgus_mayo:"Rajkumar SV et al. Blood 2005;106(3):812-817.",
+    manchester_sclc:"Cerny T et al. Br J Cancer 1987.",
+    sins:"Fisher CG et al. Spine 2010;35(22):E1221-E1229.",
+    camicu:"Ely EW et al. JAMA 2001;286(21):2703-2710. Adopted in SCCM PADIS 2018.",
+    ccs_angina:"Campeau L. Circulation 1976;54(3):522-523.",
+    mrc_power:"Medical Research Council. Aids to the Examination of the Peripheral Nervous System. 1943, updated 1981.",
+    ninds_reflex:"NINDS Manual of Neurological Therapeutic Protocols. Hallett M. Neurology 1993.",
+    levine_murmur:"Freeman AR, Levine SA. Ann Intern Med 1933;6:1371-1385.",
+    diastolic_murmur:"Standard four point diastolic murmur grading scale (1 to 4, thrill at grade 4).",
+    pulse_grade:"Standard 0 to 4 plus peripheral pulse grading (Bates 0 to 4 plus scale).",
+    ehra_af:"European Heart Rhythm Association symptom scale. Adopted in EHRA and ESC atrial fibrillation guidelines.",
+    framingham_hf:"McKee PA, Castelli WP, McNamara PM, Kannel WB. N Engl J Med 1971;285(26):1441-1446.",
+    alcohol_units:"UK Chief Medical Officers. Alcohol Guidelines Review 2016 (1 UK unit equals 10 mL pure alcohol, 8 g).",
+    smoking_index:"Indian textbook smoking index convention (cigarettes per day times years). USPSTF 2021 for pack-years screening."
   };
   CALCS.forEach(function(c){ c.ref=REF[c.id]||""; });
 
   /* ====================================================================== *
    * RENDERING — full-screen browser overlay + per-calculator panel
    * ====================================================================== */
-  var CAT_ORDER = ["Cardiovascular","Critical care","Infectious disease","Renal","Hepatology","Neurology","Respiratory","Endocrine","Gastroenterology","Haematology","Oncology","Rheumatology","Musculoskeletal","Dermatology","Psychiatry","Paediatrics","Obstetrics","Ophthalmology","Toxicology","General"];
+  var CAT_ORDER = ["Cardiovascular","Critical care","Infectious disease","Renal","Hepatology","Neurology","Respiratory","Endocrine","Gastroenterology","Haematology","Oncology","Rheumatology","Musculoskeletal","Dermatology","Psychiatry","Paediatrics","Neonatology","Obstetrics","Anaesthesia","Surgery","Radiology","Ophthalmology","ENT","Toxicology","Community medicine","Forensic medicine","General"];
   // Category → shared line-icon NAME (window.ICONS catalog). Each calculator inherits its
   // category's icon (no per-calc emoji). Replaces the old emoji map for a consistent, pro look.
-  var CAT_ICON = { "Cardiovascular":"heart","Critical care":"siren","Infectious disease":"microbe","Renal":"kidney","Hepatology":"liver","Neurology":"brain","General":"scales","Respiratory":"lungs","Endocrine":"endocrine","Gastroenterology":"stomach","Haematology":"droplet","Oncology":"ribbon","Rheumatology":"joint","Musculoskeletal":"bone","Dermatology":"skin","Psychiatry":"psych","Paediatrics":"baby","Obstetrics":"pregnant","Ophthalmology":"eye","Toxicology":"skull" };
+  var CAT_ICON = { "Cardiovascular":"heart","Critical care":"siren","Infectious disease":"microbe","Renal":"kidney","Hepatology":"liver","Neurology":"brain","General":"scales","Respiratory":"lungs","Endocrine":"endocrine","Gastroenterology":"stomach","Haematology":"droplet","Oncology":"ribbon","Rheumatology":"joint","Musculoskeletal":"bone","Dermatology":"skin","Psychiatry":"psych","Paediatrics":"baby","Obstetrics":"pregnant","Ophthalmology":"eye","Toxicology":"skull","Anaesthesia":"narke","Surgery":"surgx","Radiology":"xray","Community medicine":"globe","Neonatology":"neo","Forensic medicine":"fingerprint","ENT":"steth" };
   // Icon accessor — guarded for load order; falls back to empty string (never a crash / emoji).
   function mcIco(name, cls){ return (window.ICONS && ICONS.get) ? ICONS.get(name, cls || "mc-ico") : ""; }
   function mcCatIco(cat, cls){ return mcIco(CAT_ICON[cat] || "calc", cls); }
@@ -8033,35 +8152,112 @@
 
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function byId(id){ for(var i=0;i<CALCS.length;i++) if(CALCS[i].id===id) return CALCS[i]; return null; }
+  function calcV2On(){ try{ return localStorage.getItem("smd_calc_v2")!=="0"; }catch(e){ return true; } }
+  function calcRecent(){ try{ var a=JSON.parse(localStorage.getItem("smd_calc_recent")||"[]"); return Array.isArray(a)?a:[]; }catch(e){ return []; } }
+  function pushRecent(id){ try{ var a=calcRecent().filter(function(x){return x!==id;}); a.unshift(id); localStorage.setItem("smd_calc_recent", JSON.stringify(a.slice(0,8))); }catch(e){} }
+  function cleanLabel(label, unit){
+    var s=String(label||"");
+    if(unit){
+      var u=String(unit).toLowerCase();
+      // The unit is shown as the field suffix, so drop a trailing bracket that only restates units or a conversion.
+      s=s.replace(/\s*\([^)]*\)\s*$/, function(m){ var t=m.toLowerCase(); return (t.indexOf(u)>=0||/\/|\bper\b|=/.test(t)) ? "" : m; });
+      s=s.replace(new RegExp("\\s+in\\s+"+u.replace(/[.*+?^${}()|[\]\\\/]/g,"\\$&")+"$","i"), "");
+    }
+    return s;
+  }
+  // Display title for the v2 list and header: a trailing bracket longer than 14 characters is an expansion the description repeats.
+  function shortTitle(t){ t=String(t||""); var m=t.match(/^(.{3,}?)\s*\(([^()]*)\)\s*$/); return (m && m[2].length>14) ? m[1] : t; }
+  // Ask MaiK exactly as PrepNucleus draws it (prep.js askBtn): the MaiK tile mark, then the label in the MaiK wordmark lettering.
+  function maikAskInner(){
+    var M=window.SMD_MAIK_MARK, tile=M?M.html("tile",{size:32}):"";
+    return '<span class="mc-maik-av" aria-hidden="true">'+(tile||'<img src="/assets/maik-mark-white.webp" width="22" height="22" alt="" draggable="false">')+'</span><span class="mc-maik-lbl">'+(M?M.label("Ask MaiK"):"Ask MaiK")+'</span>';
+  }
+  // Row monogram (owner 2026-11-21): the calculator's own short code instead of a repeated category icon.
+  // A short bracketed abbreviation (QTc), else a leading capital run (CHA, TIMI), else word initials (MAP), else three letters (Oak).
+  var MONO_SKIP={the:1,of:1,for:1,and:1,in:1,a:1,to:1,with:1,score:1,calculator:1,on:1,by:1};
+  function calcMono(c){
+    var full=String(c.title||""), t=shortTitle(full), m;
+    if((m=/\(([A-Za-z][A-Za-z0-9]{1,4})\)\s*$/.exec(full))) return m[1];
+    if((m=/^([A-Z][A-Z0-9]{1,4})(?![a-z])/.exec(t))) return m[1];
+    var w=t.replace(/\s*\([^()]*\)\s*$/,"").split(/[^A-Za-z0-9]+/).filter(function(x){ return x && !MONO_SKIP[x.toLowerCase()]; });
+    if(!w.length) return t.slice(0,3);
+    if(w.length===1) return w[0].charAt(0).toUpperCase()+w[0].slice(1,3).toLowerCase();
+    var out="";
+    for(var i=0;i<w.length&&out.length<4;i++) out+=(/^[A-Z0-9]{2,}$/.test(w[i])&&i>0)?w[i]:w[i].charAt(0).toUpperCase();
+    return out.slice(0,4);
+  }
+  function subFix(html){ return String(html).replace(/([\u2080-\u2089]+)/g, '<span class="mc-sub">$1</span>'); }
+  function hlText(text){
+    var t=String(text||""); if(!q) return esc(t);
+    var i=t.toLowerCase().indexOf(q); if(i<0) return esc(t);
+    return esc(t.slice(0,i))+"<mark>"+esc(t.slice(i,i+q.length))+"</mark>"+esc(t.slice(i+q.length));
+  }
+  function missingCount(c){
+    var v=readValuesSafe(c), n=0;
+    c.inputs.forEach(function(f){
+      if(f.type==="check") return;
+      if(f.type==="select"){ if(v[f.id]===""||v[f.id]==null) n++; return; }
+      if(f.type==="date"){ if(!v[f.id]) n++; return; }
+      if(typeof v[f.id]!=="number"||isNaN(v[f.id])) n++;
+    });
+    return n;
+  }
+  function readValuesSafe(c){
+    var v={};
+    c.inputs.forEach(function(f){
+      var el=document.getElementById("mc_"+c.id+"_"+f.id);
+      if(!el){ if(f.type==="check") v[f.id]=false; else if(f.type==="select") v[f.id]=""; else v[f.id]=NaN; return; }
+      if(f.type==="check") v[f.id]=!!el.checked;
+      else if(f.type==="select") v[f.id]=el.value;
+      else if(f.type==="date") v[f.id]=el.value;
+      else v[f.id]=el.value===""?NaN:parseFloat(el.value);
+    });
+    return v;
+  }
 
   function ensureRoot(){
     if(root) return root;
     injectCSS();
     root=document.createElement("div");
-    root.id="mcOverlay"; root.className="mc-overlay";
+    root.id="mcOverlay"; root.className="mc-overlay"+(calcV2On()?" mc-v2":"");
+    var v2h=calcV2On();
     root.innerHTML=
-      '<div class="mc-top">'+
-        '<button class="mc-back" id="mcClose" aria-label="Close calculators">‹ Close</button>'+
-        '<div class="mc-title">Clinical Calculators <span class="mc-count">'+CALCS.length+'</span></div>'+
-        '<span style="width:64px"></span>'+
-      '</div>'+
+      (v2h
+        ? '<div class="mc-top mc-top2"><button class="mc-back" id="mcClose" aria-label="Close calculators"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Home</button>'+
+          '<div class="mc-title">Calculators <span class="mc-count">'+CALCS.length+'</span></div></div>'
+        : '<div class="mc-top">'+
+          '<button class="mc-back" id="mcClose" aria-label="Close calculators">‹ Close</button>'+
+          '<div class="mc-title">Calculators <span class="mc-count">'+CALCS.length+'</span></div>'+
+          '<span style="width:64px"></span>'+
+          '</div>')+
       // Search and the category rail sit in their own strip under the header, outside the scrolling
       // list, so both stay in reach however far down the 456 calculators the doctor has scrolled.
       '<div class="mc-pin">'+
-        '<input id="mcSearch" class="mc-search" type="text" placeholder="Search, e.g. MELD, sepsis, sodium" aria-label="Search calculators" autocomplete="off">'+
+        (v2h
+          ? '<label class="mc-sbox"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg><input id="mcSearch" class="mc-search" type="text" placeholder="MELD, sepsis, sodium" aria-label="Search calculators" autocomplete="off"></label>'
+          : '<input id="mcSearch" class="mc-search" type="text" placeholder="Search, e.g. MELD, sepsis, sodium" aria-label="Search calculators" autocomplete="off">')+
         '<div id="mcCats" class="mc-cats"></div>'+
       '</div>'+
-      '<div class="mc-body">'+
+      '<div class="mc-body" id="mcBody">'+
         '<div id="mcList" class="mc-list"></div>'+
         '<button id="mcInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">'+mcIco("interact")+' Check Drug Interactions</button>'+
         '<div class="mc-disc">'+mcIco("warn")+' For licensed healthcare professionals. These calculators are faithful implementations of established, peer-reviewed clinical tools, each attributed to its original author and publication; the scientific validity and all intellectual-property rights in those instruments belong to their respective authors and publishers. StewardMD computes and presents the score for decision support only; the clinician verifies every input, formula and result against the individual patient and local protocol before acting. Copyright-restricted instruments (e.g. DLQI, MNA-SF, Clinical Frailty Scale, BASDAI/BASFI) must be administered using the official questionnaire from the rights-holder.</div>'+
-      '</div>';
+      '</div>'+
+      '<div class="mc-calcview" id="mcCalcView" hidden></div>';
     document.body.appendChild(root);
     root.querySelector("#mcClose").addEventListener("click", close);
     root.querySelector("#mcInteractionsBtn").addEventListener("click", openInteractions);
     var si=root.querySelector("#mcSearch");
     si.addEventListener("input", function(){ q=si.value.trim().toLowerCase(); renderList(); });
     si.addEventListener("keydown", function(e){ e.stopPropagation(); });
+    var bodyEl=root.querySelector("#mcBody"), lastY=0;
+    bodyEl.addEventListener("scroll", function(){
+      if(!calcV2On()) return;
+      var y=bodyEl.scrollTop;
+      var pin=root.querySelector(".mc-pin");
+      if(pin){ if(y>40 && y>lastY+4) pin.classList.add("mc-pin-hide"); else if(y<lastY-4||y<=40) pin.classList.remove("mc-pin-hide"); }
+      lastY=y;
+    }, { passive:true });
     return root;
   }
 
@@ -8076,6 +8272,8 @@
       var n=CALCS.filter(function(x){return x.cat===c;}).length;
       chips.push('<button class="mc-cat'+((!favOnly&&activeCat===c)?" on":"")+'" data-cat="'+esc(c)+'">'+mcCatIco(c)+" "+esc(c)+' <span>'+n+'</span></button>');
     });
+    // v2 (variant A): Starred is its own section on top, so the rail is All plus plain category names.
+    if(calcV2On()){ favOnly=false; chips=['<button class="mc-cat'+(activeCat===""?" on":"")+'" data-cat="">All</button>'].concat(CAT_ORDER.filter(function(c){ return CALCS.some(function(x){return x.cat===c;}); }).map(function(c){ return '<button class="mc-cat'+(activeCat===c?" on":"")+'" data-cat="'+esc(c)+'">'+esc(c)+'</button>'; })); }
     el.innerHTML=chips.join("");
     var favBtn=el.querySelector("[data-favchip]");
     if(favBtn) favBtn.addEventListener("click", function(){ favOnly=!favOnly; openId=null; renderCats(); renderList(); });
@@ -8124,6 +8322,14 @@
   // Card markup, shared between the browse (grouped-by-category) and search (flat) layouts below.
   function calcCardHTML(c){
     var favOn=isWatchFav(c.id), W=window.SMD_HAS_WATCH?" Apple Watch":"";
+    if(calcV2On()){
+      var tail=favOn
+        ? '<button class="mc-star on" data-fav="'+c.id+'" aria-pressed="true" aria-label="Remove from'+(W||" starred")+'">'+mcIco("star","mc-fav on")+'</button>'
+        : '<span class="mc-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>';
+      return '<div class="mc-card mc-row" data-id="'+c.id+'">'+
+        '<button class="mc-card-head mc-row-main" data-open="'+c.id+'"><span class="mc-ic mc-mono'+(calcMono(c).length>3?" mc-mono4":"")+'" aria-hidden="true">'+esc(calcMono(c))+'</span><span class="mc-card-main"><span class="mc-card-t" title="'+esc(c.title)+'">'+subFix(hlText(shortTitle(c.title)))+'</span><span class="mc-card-d">'+hlText(c.desc)+'</span></span></button>'+tail+
+      '</div>';
+    }
     return '<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'">'+
       '<button class="mc-star'+(favOn?" on":"")+'" data-fav="'+c.id+'" aria-pressed="'+(favOn?"true":"false")+'" aria-label="'+(favOn?"Remove from":"Add to")+(W||" starred")+'" title="'+(W?"Show on Apple Watch":"Star this calculator")+'">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button>'+
       '<button class="mc-card-head" data-open="'+c.id+'" aria-expanded="'+(openId===c.id?"true":"false")+'"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span></button>'+
@@ -8140,11 +8346,30 @@
     // exactly the reference screenshot's layout. Browsing (no query) is completely unchanged.
     var catsEl=root.querySelector("#mcCats"); if(catsEl) catsEl.style.display=q?"none":"";
     var list=CALCS.filter(matches);
-    if(!list.length){ el.innerHTML='<div class="mc-empty">'+(favOnly&&!q&&!watchFavs().length?'No starred calculators yet — tap the '+mcIco("star")+' on any calculator to pin it here'+(window.SMD_HAS_WATCH?' (and to your Apple Watch).':'.'):'No calculators match “'+esc(q)+'”.')+'</div>'; return; }
+    if(!list.length){
+      if(calcV2On() && q) el.innerHTML='<div class="mc-empty"><div class="mc-empty-t">No calculator matches '+esc(q)+'</div><div>Check the spelling, or try an abbreviation like MELD or a condition like sepsis.</div></div>';
+      else el.innerHTML='<div class="mc-empty">'+(favOnly&&!q&&!watchFavs().length?'No starred calculators yet. Tap the '+mcIco("star")+' on any calculator to pin it here'+(window.SMD_HAS_WATCH?' (and to your Apple Watch).':'.'):'No calculators match "'+esc(q)+'".')+'</div>';
+      return;
+    }
     if(q){
       el.innerHTML='<div class="mc-grp-h">Results <span>'+list.length+'</span></div><div class="mc-grid">'+list.map(calcCardHTML).join("")+'</div>';
       wireListEvents(el);
-      if(openId) renderPanel(openId);
+      if(openId && !calcV2On()) renderPanel(openId);
+      return;
+    }
+    if(calcV2On() && !favOnly && !activeCat){
+      var html2="", favs=watchFavs(), rec=calcRecent();
+      var favCalcs=favs.map(byId).filter(function(c){ return c && matches(c); });
+      if(favCalcs.length) html2+='<div class="mc-grp-h">Starred</div><div class="mc-grid mc-group">'+favCalcs.map(calcCardHTML).join("")+'</div>';
+      var recCalcs=rec.map(byId).filter(function(c){ return c && matches(c) && favs.indexOf(c.id)<0; });
+      if(recCalcs.length) html2+='<div class="mc-grp-h">Recent</div><div class="mc-grid mc-group">'+recCalcs.map(calcCardHTML).join("")+'</div>';
+      CAT_ORDER.forEach(function(cat){
+        var inCat2=list.filter(function(c){ return c.cat===cat; });
+        if(!inCat2.length) return;
+        html2+='<div class="mc-grp-h">'+esc(cat)+' <span>'+inCat2.length+'</span></div><div class="mc-grid mc-group">'+inCat2.map(calcCardHTML).join("")+'</div>';
+      });
+      el.innerHTML=html2;
+      wireListEvents(el);
       return;
     }
     // group by category preserving order
@@ -8165,7 +8390,11 @@
   }
   function wireListEvents(el){
     el.querySelectorAll("[data-open]").forEach(function(b){
-      b.addEventListener("click", function(){ var id=b.getAttribute("data-open"); openId=(openId===id?null:id); renderList(); });
+      b.addEventListener("click", function(){
+        var id=b.getAttribute("data-open");
+        if(calcV2On()){ openCalcView(id); return; }
+        openId=(openId===id?null:id); renderList();
+      });
     });
     el.querySelectorAll("[data-fav]").forEach(function(b){
       b.addEventListener("click", function(ev){ ev.stopPropagation(); toggleWatchFav(b.getAttribute("data-fav")); renderList(); });
@@ -8173,6 +8402,7 @@
   }
 
   function inputHTML(c){
+    if(calcV2On()) return inputHTMLV2(c);
     return c.inputs.map(function(f,fi,fa){
       var fid="mc_"+c.id+"_"+f.id;
       var unit=f.unit?'<span class="mc-unit">'+esc(f.unit)+'</span>':"";
@@ -8180,9 +8410,6 @@
         return '<label class="mc-check"><input type="checkbox" id="'+fid+'"><span>'+esc(f.label)+'</span></label>';
       }
       if(f.type==="select"){
-        // First listed option is the default (browser-native). Author responsibility: order each
-        // select so the FIRST option is the clinically-sensible default (normal band for additive
-        // severity scores; best/alert for inverted coma/functional scales).
         var opts=(f.opts||[]).map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
         return '<div class="mc-field"><label class="mc-lbl" for="'+fid+'">'+esc(f.label)+'</label><select class="mc-input" id="'+fid+'">'+opts+'</select></div>';
       }
@@ -8192,6 +8419,52 @@
       var min=f.min!=null?' min="'+esc(f.min)+'"':"";
       var hint=typ==="number"?' inputmode="decimal" enterkeyhint="'+(fi===fa.length-1?"done":"next")+'"':"";
       return '<div class="mc-field"><label class="mc-lbl" for="'+fid+'">'+esc(f.label)+unit+'</label><input class="mc-input" id="'+fid+'" type="'+typ+'"'+step+min+hint+def+' placeholder=""></div>';
+    }).join("");
+  }
+  function isShortOpts(opts){
+    if(!opts||opts.length<2||opts.length>4) return false;
+    for(var i=0;i<opts.length;i++){ if(String(opts[i].t||"").length>22) return false; }
+    return true;
+  }
+  function inputHTMLV2(c){
+    return c.inputs.map(function(f,fi,fa){
+      var fid="mc_"+c.id+"_"+f.id;
+      var lbl=cleanLabel(f.label, f.unit);
+      // IPSS-R only: show every criterion and its published point value as a selectable scoring row.
+      // Keep the native select as the source of truth for scoring, auto-fill, reset and accessibility.
+      if(c.id==="ipss_r" && f.type==="select"){
+        var scoreRows=(f.opts||[]).map(function(o){
+          var points=Number(o.v), score=points===0?"0":"+"+String(points);
+          return '<button type="button" class="mc-ipssr-option" data-seg="'+fid+'" data-v="'+esc(o.v)+'" aria-pressed="false"><span class="mc-ipssr-criterion">'+esc(o.t)+'</span><strong class="mc-ipssr-points">'+score+'</strong></button>';
+        }).join("");
+        var hiddenOpts='<option value="">Select</option>'+(f.opts||[]).map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
+        return '<section class="mc-ipssr-field"><div class="mc-ipssr-label">'+esc(lbl)+'</div><div class="mc-ipssr-options" role="group" aria-label="'+esc(lbl)+'">'+scoreRows+'</div><select class="mc-input mc-seg-select" id="'+fid+'" aria-label="'+esc(lbl)+'">'+hiddenOpts+'</select><span class="mc-src" data-src-for="'+fid+'"></span></section>';
+      }
+      if(f.type==="check"){
+        return '<div class="mc-frow mc-frow-switch"><label class="mc-flbl" for="'+fid+'">'+esc(lbl)+'</label><button type="button" class="mc-switch" data-switch="'+fid+'" role="switch" aria-checked="false" aria-label="'+esc(lbl)+'"><span></span></button><input type="checkbox" id="'+fid+'" class="mc-check-hidden" tabindex="-1"></div>';
+      }
+      if(f.type==="select"){
+        var opts=f.opts||[];
+        var hasEmpty=opts.length&&String(opts[0].v)==="";
+        var allOpts=(!hasEmpty && f.def==null)?[{v:"",t:"Select"}].concat(opts):opts;
+        if(isShortOpts(opts)){
+          var seg=allOpts.map(function(o){
+            if(String(o.v)==="") return "";
+            return '<button type="button" class="mc-seg-btn" data-seg="'+fid+'" data-v="'+esc(o.v)+'" aria-label="'+esc(o.t)+'">'+esc(String(o.t).replace(/\s*\([+-]?\d+(\.\d+)?( ?pts?)?\)\s*$/i,"")||o.t)+'</button>';
+          }).join("");
+          var selOpts=allOpts.map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
+          return '<div class="mc-frow mc-frow-seg"><span class="mc-flbl" id="'+fid+'_lbl">'+esc(lbl)+'</span><span class="mc-seg" role="group" aria-labelledby="'+fid+'_lbl">'+seg+'</span><select class="mc-input mc-seg-select" id="'+fid+'" aria-label="'+esc(lbl)+'">'+selOpts+'</select><span class="mc-src" data-src-for="'+fid+'"></span></div>';
+        }
+        var opts2=allOpts.map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
+        return '<div class="mc-frow"><label class="mc-flbl" for="'+fid+'">'+esc(lbl)+'</label><span class="mc-fval"><select class="mc-input mc-select" id="'+fid+'">'+opts2+'</select></span><span class="mc-src" data-src-for="'+fid+'"></span></div>';
+      }
+      var typ=f.type==="date"?"date":"number";
+      var step=f.step?' step="'+esc(f.step)+'"':(typ==="number"?' step="any"':"");
+      var def=f.def!=null?' value="'+esc(f.def)+'"':"";
+      var min=f.min!=null?' min="'+esc(f.min)+'"':"";
+      var hint=typ==="number"?' inputmode="decimal" enterkeyhint="'+(fi===fa.length-1?"done":"next")+'"':"";
+      var unitHtml=f.unit?'<span class="mc-suffix">'+esc(f.unit)+'</span>':"";
+      return '<div class="mc-frow"><label class="mc-flbl" for="'+fid+'">'+esc(lbl)+'</label><span class="mc-fval mc-numwrap"><input class="mc-input mc-num" id="'+fid+'" type="'+typ+'"'+step+min+hint+def+' placeholder="">'+unitHtml+'</span><span class="mc-src" data-src-for="'+fid+'"></span></div>';
     }).join("");
   }
 
@@ -8208,6 +8481,161 @@
     return v;
   }
 
+  function fmtTime(ts){
+    if(!ts) return "";
+    try{ var d=new Date(ts); var h=d.getHours(), m=d.getMinutes(); return (h<10?"0":"")+h+":"+(m<10?"0":"")+m; }catch(e){ return ""; }
+  }
+  function patientSnapshot(){
+    var snap={ has:false, src:"", ts:null, age:null, sex:"", vitals:{}, labs:{}, srcMap:{} };
+    try{
+      var S=window.ICU_STATE;
+      if(S && S.patient && (S.patient.name||S.patient.age!=null)){
+        snap.has=true; snap.src="ICU"; snap.age=S.patient.age; snap.sex=S.patient.sex||"";
+        snap.vitals.weight=S.patient.weightKg; snap.vitals.height=S.patient.heightCm;
+        var vit=S.vitals||[];
+        var merged={};
+        var rows=vit.slice().sort(function(a,b){ return ((a&&a.ts)||0)-((b&&b.ts)||0); });
+        rows.forEach(function(r){ if(!r) return; for(var k in r){ if(k!=="ts"&&r[k]!=null&&r[k]!=="") merged[k]=r[k]; } });
+        for(var vk in merged) snap.vitals[vk]=merged[vk];
+        if(rows.length) snap.ts=rows[rows.length-1].ts;
+        var rec=(S.labs&&S.labs.recent)||{};
+        for(var lk in rec){ if(rec[lk]!=null&&rec[lk]!=="") snap.labs[lk]=rec[lk]; }
+        snap.srcMap=S.src||{};
+        if(S.wardSync && S.wardSync.patientId) snap.src="Ward Sync";
+        return snap;
+      }
+    }catch(e){}
+    try{
+      if(window.OPDEMR && OPDEMR._state){
+        var st=OPDEMR._state();
+        var p=st && (st.patient||st.profile||st);
+        if(p && (p.age!=null||p.Age!=null||p.name||p.Name)){
+          snap.has=true; snap.src="OPD";
+          snap.age=(p.age!=null?p.age:p.Age); snap.sex=p.sex||p.Sex||p.gender||"";
+          return snap;
+        }
+      }
+    }catch(e){}
+    try{
+      if(window.GHIS && GHIS.getSelectedPatient){
+        var g=GHIS.getSelectedPatient();
+        if(g){ snap.has=true; snap.src="Ward Sync"; return snap; }
+      }
+    }catch(e){}
+    return snap;
+  }
+  var VITAL_MAP={ age:"age", sex:"sex", hr:"hr", heart:"hr", sbp:"sbp", systolic:"sbp", dbp:"dbp", diastolic:"dbp", map:"map", rr:"rr", resp:"rr", temp:"temp", temperature:"temp", spo2:"spo2", gcs:"gcs", weight:"weight", wt:"weight", height:"height", ht:"height" };
+  function vitalKeyFor(f){
+    var id=String(f.id||"").toLowerCase(), lbl=String(f.label||"").toLowerCase();
+    if(f.demo==="age") return "age";
+    if(f.demo==="sex") return "sex";
+    if(VITAL_MAP[id]) return VITAL_MAP[id];
+    if(/heart rate|pulse/.test(lbl)) return "hr";
+    if(/systolic/.test(lbl)) return "sbp";
+    if(/diastolic/.test(lbl)) return "dbp";
+    if(/mean arterial|\bmap\b/.test(lbl)) return "map";
+    if(/respiratory rate/.test(lbl)) return "rr";
+    if(/temperature/.test(lbl)) return "temp";
+    if(/spo2|oxygen saturation/.test(lbl)) return "spo2";
+    if(/glasgow|gcs/.test(lbl)) return "gcs";
+    if(/\bage\b/.test(lbl)) return "age";
+    if(/\bsex\b|gender/.test(lbl)) return "sex";
+    if(/weight/.test(lbl)) return "weight";
+    if(/height/.test(lbl)) return "height";
+    return null;
+  }
+  function stripTags(s){ return String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim(); }
+  function scaleFor(c, out){
+    if(!out||out.v==null) return null;
+    var u=String(out.u||"");
+    var m=u.match(/^\/\s*(\d+(?:\.\d+)?)/);
+    if(!m) return null;
+    var max=parseFloat(m[1]), val=parseFloat(out.v);
+    if(isNaN(max)||isNaN(val)||max<=0) return null;
+    var txt=stripTags(out.i||"");
+    var cut=null;
+    var mm=txt.match(/score\s+(\d+(?:\.\d+)?)\s+or less/i)||txt.match(/above\s+(\d+(?:\.\d+)?)/i)||txt.match(/cut.?off[^0-9]*(\d+(?:\.\d+)?)/i);
+    if(mm) cut=parseFloat(mm[1]);
+    if(cut==null||isNaN(cut)||cut<=0||cut>=max) return { min:0, max:max, val:val, cuts:[] };
+    return { min:0, max:max, val:val, cuts:[cut] };
+  }
+  function pointsFor(f, v){
+    if(f.type==="select"){
+      var val=v[f.id];
+      var opts=f.opts||[];
+      for(var i=0;i<opts.length;i++){
+        if(String(opts[i].v)===String(val)){
+          var mm=String(opts[i].t||"").match(/\(\+?(\d+(?:\.\d+)?)\)/);
+          return mm?parseFloat(mm[1]):null;
+        }
+      }
+      return null;
+    }
+    return null;
+  }
+  function buildMaikQuestion(c){
+    var v=readValuesSafe(c);
+    var parts=[];
+    c.inputs.forEach(function(f){
+      var val=v[f.id];
+      if(f.type==="check"){ if(val) parts.push(cleanLabel(f.label,f.unit)+": yes"); return; }
+      if(f.type==="select"){
+        if(val===""||val==null) return;
+        var t=val; var opts=f.opts||[];
+        for(var i=0;i<opts.length;i++) if(String(opts[i].v)===String(val)) t=opts[i].t;
+        parts.push(cleanLabel(f.label,f.unit)+": "+t);
+        return;
+      }
+      if(typeof val==="number"&&!isNaN(val)) parts.push(cleanLabel(f.label,f.unit)+": "+val+(f.unit?" "+f.unit:""));
+    });
+    var miss=missingCount(c);
+    var out=null;
+    try{ out=c.compute(v); }catch(e){}
+    var title=c.title.replace(/\s*\([^)]*\)\s*/," ").trim()||c.title;
+    if(miss>0||!out||out.err){
+      return c.title+" for a patient with "+(parts.length?parts.join(", "):"no inputs entered yet")+". How should I use this score, what inputs matter most, and what should I check before acting?";
+    }
+    var verdict=stripTags(out.i||"").split(".")[0];
+    return c.title+" "+out.v+(out.u?" "+out.u:"")+(verdict?" ("+verdict+")":"")+" for "+parts.join(", ")+". What does this mean for this patient and what should I do next?";
+  }
+  function openCalcView(id){
+    var c=byId(id); if(!c) return;
+    pushRecent(id); openId=id;
+    var view=root.querySelector("#mcCalcView");
+    view.hidden=false;
+    layoutSplit();
+    view.classList.remove("mc-push"); void view.offsetWidth; view.classList.add("mc-push");
+    renderPanel(id);
+    markSel(id);
+  }
+  /* iPad landscape (owner 2026-11-21: "iPad looks ugly stretched"): at 1000px and wider the list stays on the left
+     and the open calculator fills the right, instead of a full-width form. Narrower screens keep the pushed view. */
+  var SPLIT_MQ=null; try{ SPLIT_MQ=window.matchMedia("(min-width: 1000px)"); }catch(e){}
+  function isSplit(){ return !!(SPLIT_MQ&&SPLIT_MQ.matches&&calcV2On()); }
+  function layoutSplit(){
+    if(!root) return;
+    var view=root.querySelector("#mcCalcView"); if(!view) return;
+    var open=!view.hidden, split=isSplit(), showList=!open||split;
+    root.classList.toggle("mc-split", open&&split);
+    var bodyEl=root.querySelector("#mcBody"), pin=root.querySelector(".mc-pin"), top=root.querySelector(".mc-top");
+    if(bodyEl) bodyEl.style.display=showList?"":"none";
+    if(pin) pin.style.display=(showList&&(!q||split))?"":"none";
+    if(top) top.style.display=showList?"":"none";
+  }
+  function markSel(id){
+    if(!root) return;
+    var rows=root.querySelectorAll("#mcList .mc-row");
+    for(var i=0;i<rows.length;i++) rows[i].classList.toggle("mc-sel", rows[i].getAttribute("data-id")===id);
+  }
+  if(SPLIT_MQ){ var onSplit=function(){ layoutSplit(); }; if(SPLIT_MQ.addEventListener) SPLIT_MQ.addEventListener("change", onSplit); else if(SPLIT_MQ.addListener) SPLIT_MQ.addListener(onSplit); }
+  function closeCalcView(){
+    var view=root.querySelector("#mcCalcView");
+    view.hidden=true; view.innerHTML="";
+    layoutSplit();
+    openId=null;
+    renderList();
+  }
+
   /* ---- Ward Sync / imported-report auto-fill (gold136) --------------------
    * A calculator input can opt in with a `lab:"<analyte>"` hint. The auto-fill
    * bar then pulls that value from the selected patient's Ward Sync (GHIS) labs,
@@ -8219,7 +8647,7 @@
     bili:  { kw:/bilirubin/i, ex:/direct|indirect|conjugat|neonat/i },   // total only
     pt:    { kw:/prothrombin|(^|[^a-z])pt([^a-z]|$|\/)/i, ex:/aptt|partial|activated|control/i, unit:/sec/i },
     ptctrl:{ kw:/\bcontrol\b/i, ex:/internal|quality|\bqc\b|glyc/i, unit:/sec/i },   // explicit "CONTROL." row in the PT/INR panel (seconds)
-    inr:   { kw:/\binr\b/i, ex:null },
+    inr:   { kw:/\binr\b|i\.n\.r|international normali[sz]ed/i, ex:null },
     creat: { kw:/creatinine/i, ex:/urin|clearance|ratio/i },
     na:    { kw:/\bsodium\b|serum na\b/i, ex:/urin|spot|fractional|excretion/i },
     k:     { kw:/\bpotassium\b|serum k\b/i, ex:/urin/i },
@@ -8295,8 +8723,30 @@
       out.ptctrl={ value:Math.round(((ptLo+ptHi)/2)*10)/10, units:ptUnit, order:"ref-range midpoint "+(ptRange||(ptLo+"–"+ptHi)), derived:true };
     return out;
   }
-  function calcLabKeys(c){ var s={}; c.inputs.forEach(function(f){ if(f.lab && f.type==="number") s[f.lab]=1; }); return Object.keys(s); }
-  function calcHasLab(c){ return c.inputs.some(function(f){ return (f.lab && f.type==="number") || f.demo; }); }
+  // Most calculators have no `lab:` tag (53 of 885 fields had one, so MELD-Na filled 0 of 5, owner 2026-11-23).
+  // Untagged number fields map by label, only for a blood value in the unit Indian labs (GHIS) report.
+  // shortcut: assumes the ward lab reports conventional units below; add conversions if a hospital sends SI units.
+  var LAB_UNIT_OK = {
+    bili:/^mg\/dl$/, creat:/^mg\/dl$/, bun:/^mg\/dl$/, glu:/^mg\/dl$/, ca:/^mg\/dl$/,
+    na:/^(meq|mmol)\/l$/, k:/^(meq|mmol)\/l$/, cl:/^(meq|mmol)\/l$/, hco3:/^(meq|mmol)\/l$/,
+    alb:/^g\/dl$/, hb:/^g\/dl$/, plt:/^×10⁹\/l$/, wbc:/^×10⁹\/l$/, inr:/^$/
+  };
+  var LAB_LABEL_EX = /urin|stool|ascit|fluid|csf|target|desired|goal|\bpre[- ]|\bpost[- ]|baseline|previous|prior|change|delta|transfus|nucleated|per 100|same units|unit below|uncorrected|corrected|24 ?h|\/day|optional|ratio|predicted|normal/i;
+  function labOf(f){
+    if(!f || f.type!=="number") return null;
+    if(f.lab) return f.lab;
+    if(f._lab!==undefined) return f._lab;
+    var lbl=String(f.label||""), u=String(f.unit||"").toLowerCase().replace(/\s+/g,""), hit=null;
+    if(!LAB_LABEL_EX.test(lbl)) Object.keys(LAB_UNIT_OK).some(function(k){
+      var m=LAB_RX[k];
+      if(m.kw.test(lbl) && !(m.ex && m.ex.test(lbl)) && LAB_UNIT_OK[k].test(u)){ hit=k; return true; }
+      return false;
+    });
+    f._lab=hit;
+    return hit;
+  }
+  function calcLabKeys(c){ var s={}; c.inputs.forEach(function(f){ var k=labOf(f); if(k) s[k]=1; }); return Object.keys(s); }
+  function calcHasLab(c){ return c.inputs.some(function(f){ return labOf(f) || f.demo; }); }
   // Write values into the calculator's inputs. Lab analytes: Ward Sync wins, then a
   // photo/PDF imported value (ICU dashboard) when Ward has none. Demographics
   // (demo:"age"|"sex") come from the selected patient / ICU patient. Everything is
@@ -8315,20 +8765,20 @@
       if(f.demo==="sex" && f.type==="select"){
         var ch=String(demo.sex||"").trim().toLowerCase().charAt(0);   // 'm' / 'f'
         var opt=ch && Array.prototype.slice.call(inp.options).filter(function(o){ return o.value.toLowerCase()===ch; })[0];
-        if(opt){ inp.value=opt.value; filled.push({ label:f.label, val:opt.textContent, units:"", src:demo.src||"Patient" }); }
+        if(opt){ inp.value=opt.value; try{ syncSeg(inp.id); }catch(e){} filled.push({ label:f.label, val:opt.textContent, units:"", src:demo.src||"Patient" }); }
         else missing.push(f.label);
         return;
       }
-      if(!f.lab || f.type!=="number") return;
-      var got=analytes && analytes[f.lab];
+      var lk=labOf(f); if(!lk) return;
+      var got=analytes && analytes[lk];
       if(got && got.value!=null){
         inp.value=got.value;
         var src=got.derived?"Ward · "+(got.order||"ref-range"):"Ward Sync"+(got.order?" · "+got.order:"");
         if(got.note) src+=" · "+got.note;
         filled.push({ label:f.label, val:got.value, units:got.units, src:src });
-      } else if(photoRec && photoRec[f.lab]!=null && !isNaN(parseFloat(photoRec[f.lab]))){
-        inp.value=parseFloat(photoRec[f.lab]);
-        filled.push({ label:f.label, val:parseFloat(photoRec[f.lab]), units:"", src:"Imported report" });
+      } else if(photoRec && photoRec[lk]!=null && !isNaN(parseFloat(photoRec[lk]))){
+        inp.value=parseFloat(photoRec[lk]);
+        filled.push({ label:f.label, val:parseFloat(photoRec[lk]), units:"", src:"Imported report" });
       } else { missing.push(f.label); }
     });
     return { filled:filled, missing:missing };
@@ -8393,8 +8843,228 @@
     btn.addEventListener("click", function(){ open=!open; btn.classList.toggle("on", open); if(!open){ body.innerHTML=""; } else renderPicker(); });
   }
 
+  function syncSeg(fid){
+    var sel=document.getElementById(fid); if(!sel) return;
+    var btns=document.querySelectorAll('[data-seg="'+fid+'"]');
+    btns.forEach(function(b){ var on=b.getAttribute("data-v")===sel.value; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on?"true":"false"); });
+  }
+  function syncSwitch(fid){
+    var inp=document.getElementById(fid); if(!inp) return;
+    var btn=document.querySelector('[data-switch="'+fid+'"]');
+    if(btn){ btn.classList.toggle("on", !!inp.checked); btn.setAttribute("aria-checked", inp.checked?"true":"false"); }
+  }
+  function breakdownHTML(c, v, out){
+    var rows=c.inputs.map(function(f){
+      var val=v[f.id], disp="";
+      if(f.type==="check") disp=val?"Yes":"No";
+      else if(f.type==="select"){
+        if(val===""||val==null) disp="Not answered";
+        else { disp=String(val); var opts=f.opts||[]; for(var i=0;i<opts.length;i++) if(String(opts[i].v)===String(val)) disp=opts[i].t; }
+      }
+      else if(typeof val==="number"&&!isNaN(val)) disp=String(val)+(f.unit?" "+f.unit:"");
+      else disp="Not answered";
+      var pts=pointsFor(f, v);
+      return '<div class="mc-bd-row"><span>'+esc(cleanLabel(f.label,f.unit))+'</span><span class="mc-bd-val">'+esc(disp)+'</span><span class="mc-bd-pt">'+(pts==null?"":("+"+pts))+'</span></div>';
+    }).join("");
+    return '<div class="mc-bd">'+rows+'</div>';
+  }
+  function updateScoreCard(c, out){
+    var card=document.getElementById("mcScore_"+c.id); if(!card) return;
+    var miss=missingCount(c);
+    var main=card.querySelector(".mc-score-main");
+    var det=card.querySelector(".mc-score-detail");
+    if(miss>0){
+      main.innerHTML='<span class="mc-score-todo">Answer '+miss+' more</span>';
+      det.innerHTML="";
+      card.classList.remove("mc-score-done");
+      return;
+    }
+    if(!out||out.err){ main.innerHTML='<span class="mc-score-todo">Answer '+Math.max(miss,1)+' more</span>'; det.innerHTML=""; return; }
+    if(out.html){ main.innerHTML='<div class="mc-score-html">'+out.html+'</div>'; det.innerHTML=""; card.classList.add("mc-score-done"); return; }
+    try { if (window.SMD_KU) SMD_KU.emit("calc", c.id); } catch(e){}
+    var sc=scaleFor(c, out);
+    var verdict=stripTags(out.i||"");
+    // The band word is the calculator's own bold lead (<b>Admit</b>); otherwise the first sentence.
+    var bm=/^\s*<b>([^<]{1,60})<\/b>/.exec(String(out.i||""));
+    var first=bm?bm[1]:(verdict.split(".")[0]||"");
+    var rest=bm?stripTags(String(out.i).slice(bm[0].length)):verdict.slice(first.length).replace(/^\.\s*/,"");
+    // Colour only where the calculator's own cut-off says which side the value is on; never guessed.
+    var band=(sc&&sc.cuts.length)?(sc.val>sc.cuts[0]?"mc-band-hi":"mc-band-lo"):"";
+    card.classList.remove("mc-band-hi","mc-band-lo"); if(band) card.classList.add(band);
+    var h='<div class="mc-score-top"><span class="mc-score-lbl">Total</span><span class="mc-score-num"><b>'+esc(out.v)+'</b>'+(sc?'<small>/ '+esc(sc.max)+'</small>':(out.u?'<small>'+esc(out.u)+'</small>':""))+'</span></div>';
+    if(sc && sc.cuts.length){
+      var pct=Math.max(0,Math.min(100,((sc.val-sc.min)/(sc.max-sc.min))*100));
+      var cutPct=((sc.cuts[0]-sc.min)/(sc.max-sc.min))*100;
+      h+='<div class="mc-scale" aria-hidden="true"><span class="mc-scale-lo" style="width:'+cutPct+'%"></span><span class="mc-scale-hi" style="left:'+cutPct+'%;width:'+(100-cutPct)+'%"></span><span class="mc-scale-mark" style="left:'+pct+'%"></span></div>';
+      h+='<div class="mc-scale-lab"><span>'+esc(sc.min)+'</span><span>'+esc(sc.cuts[0])+' cut-off</span><span>'+esc(sc.max)+'</span></div>';
+    }
+    rest=rest.replace(/^[\s.:]+/,"");
+    var fw=first.replace(/[.\s]+$/,"");
+    h+='<div class="mc-score-verdict">'+(/^\(/.test(rest)?'<b>'+esc(fw)+'</b> '+esc(rest):'<b>'+esc(fw)+'.</b>'+(rest?' '+esc(rest):""))+'</div>';
+    main.innerHTML=h;
+    var v=readValuesSafe(c);
+    det.innerHTML=breakdownHTML(c, v, out)+   // the verdict line above already carries the full interpretation
+      '<div class="mc-score-actions"><button type="button" class="mc-copy-btn" id="mcCopy_'+c.id+'"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></svg><span>Copy result</span></button>'+(c.ref?'<div class="mc-score-src">Source: '+esc(c.ref)+'</div>':"")+'</div>';
+    card.classList.add("mc-score-done");
+    var cp=document.getElementById("mcCopy_"+c.id);
+    if(cp) cp.addEventListener("click", function(){
+      var txt=c.title+": "+out.v+(out.u?" "+out.u:"")+". "+stripTags(out.i||"");
+      try{ if(navigator.clipboard) navigator.clipboard.writeText(txt); }catch(e){}
+      var cpl=cp.querySelector("span"); if(cpl){ cpl.textContent="Copied"; setTimeout(function(){ cpl.textContent="Copy result"; }, 1200); }
+    });
+  }
+  function fillFromSnapshot(c, run, given){
+    var snap=given||patientSnapshot();
+    var noteEl=document.getElementById("mcAFnote_"+c.id);
+    if(!snap.has){
+      if(noteEl) noteEl.innerHTML='<div class="mc-af-msg">Open a patient first. Open Ward, ICU or an OPD patient, then return here.</div>';
+      var body=document.getElementById("mcAFbody_"+c.id);
+      if(body && calcHasLab(c)){ body.innerHTML=""; }
+      return { filled:0, total:c.inputs.length };
+    }
+    var filled=0, total=c.inputs.length;
+    var timeStr=fmtTime(snap.ts);
+    var srcLabel=snap.src+(timeStr?" "+timeStr:"");
+    c.inputs.forEach(function(f){
+      var inp=document.getElementById("mc_"+c.id+"_"+f.id); if(!inp) return;
+      var val=null, isSex=false;
+      var lk=labOf(f);
+      if(lk && snap.labs[lk]!=null) val=snap.labs[lk];
+      // Haemoglobin fields without a lab hint (many added calculators): fill only a g/dL field with a plausible g/dL value, never a g/L one.
+      else if(/haemoglobin|hemoglobin/i.test(f.label||"") && /g\/dl/i.test(f.unit||"") && snap.labs.hb!=null && +snap.labs.hb>=2 && +snap.labs.hb<=25) val=snap.labs.hb;
+      else {
+        var vk=vitalKeyFor(f);
+        if(vk==="age" && snap.age!=null) val=snap.age;
+        else if(vk==="sex" && snap.sex){ val=snap.sex; isSex=true; }
+        else if(vk && snap.vitals[vk]!=null) val=snap.vitals[vk];
+        else if(vk==="map" && snap.vitals.sbp!=null && snap.vitals.dbp!=null) val=Math.round((+snap.vitals.sbp+2*+snap.vitals.dbp)/3);
+      }
+      if(val==null||val==="") return;
+      if(f.type==="check"){ inp.checked=!!val; syncSwitch(inp.id); }
+      else if(f.type==="select"){
+        var want=String(val).toLowerCase();
+        var opts=inp.options, done=false;
+        for(var i=0;i<opts.length;i++){ if(String(opts[i].value).toLowerCase()===want||String(opts[i].value).toLowerCase().charAt(0)===want.charAt(0)){ inp.value=opts[i].value; done=true; break; } }
+        if(!done) return;
+        syncSeg(inp.id);
+      }
+      else inp.value=val;
+      filled++;
+      var srcEl=document.querySelector('[data-src-for="'+inp.id+'"]');
+      if(srcEl) srcEl.textContent=srcLabel;
+    });
+    if(noteEl) noteEl.innerHTML='<div class="mc-af-note"><div class="mc-af-note-h">Auto-filled: verify each value</div><div>Filled '+filled+' of '+total+'. Source: '+esc(srcLabel)+'.</div></div>';
+    if(run) run(false);
+    return { filled:filled, total:total };
+  }
+  function renderPanelV2(id){
+    var c=byId(id); if(!c) return;
+    var view=root.querySelector("#mcCalcView"); if(!view) return;
+    var favOn=isWatchFav(id);
+    view.innerHTML=
+      '<div class="mc-cv-head"><button type="button" class="mc-cv-back" id="mcCvBack"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Calculators</button><button type="button" class="mc-cv-star'+(favOn?" on":"")+'" id="mcCvStar" aria-pressed="'+(favOn?"true":"false")+'" aria-label="'+(favOn?"Remove from":"Add to")+(window.SMD_HAS_WATCH?" Apple Watch":" starred")+'">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button></div>'+
+      '<div class="mc-cv-title"><h2 title="'+esc(c.title)+'">'+subFix(esc(shortTitle(c.title)))+'</h2><p>'+esc(c.desc)+'</p></div>'+
+      '<div class="mc-action-row"><button type="button" class="mc-fill-link" id="mcAuto_'+id+'"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>Fill from patient</button><button type="button" class="mc-maik-btn" id="mcAsk_'+id+'">'+maikAskInner()+'</button></div>'+
+      '<div id="mcAFnote_'+id+'"></div>'+
+      '<div class="mc-panel" id="mcPanel_'+id+'">'+
+        '<div class="mc-form">'+inputHTML(c)+'</div>'+
+        '<button class="mc-calc-btn'+(_resultCb&&id===_resultCbId?" mc-use":"")+'" id="mcCalc_'+id+'">'+(_resultCb&&id===_resultCbId?"Use this result":"Calculate")+'</button>'+
+        '<button type="button" class="mc-reset-btn" id="mcReset_'+id+'">Reset</button>'+
+        '<div class="mc-result" id="mcRes_'+id+'"></div>'+
+        (c.draft?'<div class="mc-draft">Draft: AI-drafted from the cited source, not yet clinician-approved.</div>':"")+
+        (c.ref?'<div class="mc-ref">'+mcIco("book")+' <b>Reference:</b> '+esc(c.ref)+'</div>':"")+
+        (c.srcHtml||"")+
+      '</div>'+
+      '<div class="mc-score" id="mcScore_'+id+'" aria-live="polite"><button type="button" class="mc-score-bar" id="mcScoreBar_'+id+'" aria-expanded="false"><span class="mc-score-main"></span></button><div class="mc-score-detail" hidden></div></div>';
+    function run(fromBtn){
+      var vals=readValuesSafe(c);
+      var out; try { out=c.compute(vals); } catch(e){ out={err:"Could not compute. Check the inputs."}; }
+      var res=document.getElementById("mcRes_"+id);
+      if(calcV2On()){
+        if(res){
+          if(!out) res.innerHTML="";
+          else if(out.err) res.innerHTML='<div class="mc-res-err">'+esc(out.err)+'</div>';
+          else if(out.html) res.innerHTML=out.html;
+          else res.innerHTML="";
+        }
+        updateScoreCard(c, out);
+        if(fromBtn && !_suppressCb && _resultCb && id===_resultCbId && out && !out.err){ try { _resultCb(id, out); } catch(e){} }
+        return out;
+      }
+      return out;
+    }
+    view.querySelector("#mcCvBack").addEventListener("click", closeCalcView);
+    view.querySelector("#mcCvStar").addEventListener("click", function(){
+      toggleWatchFav(id);
+      var on=isWatchFav(id), b=view.querySelector("#mcCvStar");
+      b.classList.toggle("on", on); b.setAttribute("aria-pressed", on?"true":"false");
+      renderList();
+    });
+    // Owner 2026-11-21: Fill from patient opens Ward Sync with a Select button on every patient; the chosen patient's
+    // age, sex and Ward Sync labs fill the calculator. Without Ward Sync it falls back to the open ICU/OPD patient.
+    view.querySelector("#mcAuto_"+id).addEventListener("click", function(){
+      if(!(window.GHIS && GHIS.pickPatient)){ fillFromSnapshot(c, run); return; }
+      GHIS.pickPatient(function(sel){
+        // The picker returns {episodeId, patientId, name}; age and sex come from the same ward roster.
+        var p=sel||{}, ros=(GHIS.getPatients&&GHIS.getPatients())||[];
+        for(var ri=0;ri<ros.length;ri++){ if(String(ros[ri].patientId)===String(sel&&sel.patientId)){ p=ros[ri]; break; } }
+        var note=document.getElementById("mcAFnote_"+id), who=p.patientFirstName||(sel&&sel.name)||p.patientId||"patient";
+        if(note) note.innerHTML='<div class="mc-af-msg">Fetching '+esc(who)+'\u2019s labs from Ward Sync\u2026</div>';
+        var ageP=parseInt(p.dob,10);
+        var snap={ has:true, src:"Ward Sync \u00b7 "+who, ts:Date.now(), age:(ageP>0&&ageP<130)?ageP:null, sex:p.gender||"", vitals:{}, labs:{}, srcMap:{} };
+        (GHIS.fetchLabTests ? GHIS.fetchLabTests(p.patientId) : Promise.resolve([])).then(function(rows){
+          var a=extractAnalytes(rows||[]);
+          for(var k in a){ if(a[k] && a[k].value!=null) snap.labs[k]=a[k].value; }
+        }).catch(function(){}).then(function(){ fillFromSnapshot(c, run, snap); });
+      });
+    });
+    view.querySelector("#mcAsk_"+id).addEventListener("click", function(){
+      var qq=buildMaikQuestion(c);
+      try{ if(window.SMD_askMaik) SMD_askMaik(qq); else if(window.SMD_askMaikHandoff) SMD_askMaikHandoff({ prefill:qq }); }catch(e){}
+    });
+    var calcBtn=document.getElementById("mcCalc_"+id);
+    if(calcBtn) calcBtn.addEventListener("click", function(){ run(true); });
+    var rst=document.getElementById("mcReset_"+id);
+    if(rst) rst.addEventListener("click", function(){
+      c.inputs.forEach(function(f){
+        var el=document.getElementById("mc_"+c.id+"_"+f.id); if(!el) return;
+        if(f.type==="check"){ el.checked=false; syncSwitch(el.id); }
+        else { el.value=(f.def!=null?String(f.def):""); if(f.type==="select") syncSeg(el.id); }
+        var s=document.querySelector('[data-src-for="'+el.id+'"]'); if(s) s.textContent="";
+      });
+      var n=document.getElementById("mcAFnote_"+id); if(n) n.innerHTML="";
+      run(false);
+    });
+    var bar=document.getElementById("mcScoreBar_"+id), det=view.querySelector(".mc-score-detail");
+    bar.addEventListener("click", function(){
+      var open=det.hidden;
+      det.hidden=!open; bar.setAttribute("aria-expanded", open?"true":"false");
+      view.querySelector(".mc-score").classList.toggle("mc-score-open", open);
+    });
+    view.querySelectorAll("[data-seg]").forEach(function(b){
+      b.addEventListener("click", function(){
+        var fid=b.getAttribute("data-seg"), sel=document.getElementById(fid);
+        if(sel){ sel.value=b.getAttribute("data-v"); syncSeg(fid); run(false); }
+      });
+    });
+    view.querySelectorAll("[data-switch]").forEach(function(b){
+      b.addEventListener("click", function(){
+        var fid=b.getAttribute("data-switch"), inp=document.getElementById(fid);
+        if(inp){ inp.checked=!inp.checked; syncSwitch(fid); run(false); }
+      });
+    });
+    view.querySelectorAll(".mc-input").forEach(function(inp){
+      inp.addEventListener("keydown", function(e){ e.stopPropagation(); if(e.key==="Enter") run(true); });
+      inp.addEventListener("input", function(){ run(false); });
+      inp.addEventListener("change", function(){ if(inp.classList.contains("mc-seg-select")) syncSeg(inp.id); run(false); });
+    });
+    if(calcHasLab(c)) wireAutofill(c, function(){ run(false); });
+    c.inputs.forEach(function(f){ if(f.type==="select") syncSeg("mc_"+c.id+"_"+f.id); });
+    run(false);
+  }
   function renderPanel(id){
     var c=byId(id); if(!c) return;
+    if(calcV2On()){ renderPanelV2(id); return; }
     var el=document.getElementById("mcPanel_"+id); if(!el) return;
     var hasLab=calcHasLab(c);
     el.innerHTML=
@@ -8431,8 +9101,12 @@
   /* ---- open/close + public API ---- */
   function openList(cat){
     ensureRoot();
+    root.classList.toggle("mc-v2", calcV2On());
     activeCat = (cat && CAT_ORDER.indexOf(cat)>=0) ? cat : "";
     q=""; openId=null;
+    var view=root.querySelector("#mcCalcView"); if(view){ view.hidden=true; view.innerHTML=""; }
+    var bodyEl=root.querySelector("#mcBody"), pin=root.querySelector(".mc-pin"), top=root.querySelector(".mc-top");
+    if(bodyEl) bodyEl.style.display=""; if(pin) pin.style.display=""; if(top) top.style.display="";
     var si=root.querySelector("#mcSearch"); if(si) si.value="";
     renderCats(); renderList();
     root.classList.add("on"); document.body.classList.add("mc-lock");
@@ -8449,11 +9123,12 @@
       if(val==null || (typeof val==="number" && isNaN(val))) return;
       var el=document.getElementById("mc_"+c.id+"_"+f.id);
       if(!el) return;
-      if(f.type==="check") el.checked=!!val;
-      else el.value=String(val);
+      if(f.type==="check"){ el.checked=!!val; syncSwitch(el.id); }
+      else { el.value=String(val); if(f.type==="select") syncSeg(el.id); }
     });
     var btn=document.getElementById("mcCalc_"+id);
-    if(btn){ _suppressCb=true; try { btn.click(); } finally { _suppressCb=false; } }   // render the prefilled result WITHOUT reporting it back — only an explicit user Calculate writes to the opener
+    if(btn){ _suppressCb=true; try { btn.click(); } finally { _suppressCb=false; } }
+    else { c.inputs.forEach(function(f){ var e2=document.getElementById("mc_"+c.id+"_"+f.id); if(e2){ e2.dispatchEvent(new Event("change",{bubbles:true})); } }); }
   }
   // open(id, prefill, onResult): onResult(scoreId, out) is called when the user hits Calculate, so
   // an opener (e.g. the ICU dashboard) can store the computed result back on the patient.
@@ -8461,11 +9136,17 @@
     _resultCb = (typeof onResult === "function") ? onResult : null; _resultCbId = _resultCb ? id : null;
     openList();
     var c=byId(id); if(!c) return;
+    if(calcV2On()){
+      activeCat=""; renderCats();
+      openCalcView(id);
+      if(prefill) applyPrefill(id, prefill);
+      return;
+    }
     activeCat=""; openId=id; renderCats(); renderList();
     if(prefill) applyPrefill(id, prefill);
     setTimeout(function(){ var el=document.getElementById("mcPanel_"+id); if(el) el.scrollIntoView({behavior:"smooth",block:"center"}); }, 80);
   }
-  function close(){ _resultCb=null; _resultCbId=null; if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); } }
+  function close(){ _resultCb=null; _resultCbId=null; if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); var v=root.querySelector("#mcCalcView"); if(v){ v.hidden=true; v.innerHTML=""; } } }
 
   /* ---- Drug Interactions entry point (Tools) — delegates to drugs.js's
      window.MEDDRUGS.openInteractions, the single shared MEDLIST overlay (Task 5/6). ---- */
@@ -8571,8 +9252,304 @@
       ".mc-af-ok span{color:var(--slate-soft,#888);font-size:10.5px}",
       ".mc-af-miss{color:#b45309;margin-top:6px}",
       ".mc-af-verify{margin-top:7px;font-size:10.5px;color:var(--slate-soft,#888)}"
-    ].join("") + polishCSS();
+    ].join("") + polishCSS() + v2CSS();
     var st=document.createElement("style"); st.id="mc-styles"; st.textContent=css; document.head.appendChild(st);
+  }
+  function v2CSS(){
+    var Q="html body #mcOverlay#mcOverlay#mcOverlay.mc-v2";
+    return [
+      Q+" .mc-top{background:var(--paper,#f6f7f5);border-bottom:none;padding-bottom:2px}",
+      Q+" .mc-title{font-size:28px;font-weight:800;text-align:left;letter-spacing:-.02em}",
+      Q+" .mc-title .mc-count{font-size:13px;background:none;color:var(--slate-soft,#5a7184);padding:0;font-weight:600}",
+      Q+" .mc-back{border:none;color:var(--teal,#0e6e63);font-size:15px;height:44px}",
+      Q+" .mc-pin{transition:transform .2s ease,opacity .2s ease}",
+      Q+" .mc-pin.mc-pin-hide{transform:translateY(-8px);opacity:0;pointer-events:none;height:0;overflow:hidden;padding:0;border:none}",
+      Q+" .mc-search{background:var(--line,#e5ebee);border:none;border-radius:10px;height:38px}",
+      Q+" .mc-cats .mc-cat{border-radius:14px;min-height:28px;padding:4px 11px;font-size:12.5px;box-shadow:none!important}",
+      Q+" .mc-grp-h{text-transform:uppercase;letter-spacing:.05em;font-size:12px;color:var(--slate-soft,#5a7184);margin:16px 4px 6px}",
+      Q+" .mc-grid.mc-group{background:var(--panel,#fff);border:1px solid var(--line,#e3eaee);border-radius:12px;overflow:hidden;display:block}",
+      Q+" .mc-row{display:flex;align-items:center;min-height:56px;border:none;border-bottom:1px solid var(--line,#e3eaee);border-radius:0;box-shadow:none!important;background:var(--panel,#fff);content-visibility:auto}",
+      Q+" .mc-row:last-child{border-bottom:none}",
+      Q+" .mc-row-main{flex:1;display:flex;align-items:center;gap:11px;padding:8px 4px 8px 12px;text-align:left;background:none;border:none;min-height:56px;cursor:pointer}",
+      Q+" .mc-row-main:active{background:var(--paper,#f6f7f5)}",
+      Q+" .mc-ic{width:26px;height:26px;border-radius:7px;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);display:grid;place-items:center;flex:0 0 auto}",
+      Q+" .mc-ic svg{width:15px;height:15px}",
+      Q+" .mc-card-t{font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      Q+" .mc-card-d{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}",
+      Q+" .mc-card-d mark,"+Q+" .mc-card-t mark{background:var(--teal-soft,#e3f1ee);color:inherit;padding:0 1px;border-radius:2px}",
+      Q+" .mc-row .mc-star{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:none;color:#d69e2e;cursor:pointer;flex:0 0 auto}",
+      Q+" .mc-row .mc-chev{position:static;width:22px;height:44px;display:flex;align-items:center;justify-content:center;color:#b8c3ca;margin:0}",
+      Q+" .mc-empty-t{font-size:15px;font-weight:700;color:var(--ink,#14202b);margin-bottom:4px}",
+      Q+" .mc-calcview{position:absolute;inset:0;background:var(--paper,#f6f7f5);overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:120px;z-index:4}",
+      Q+" .mc-calcview.mc-push{animation:mcPush .22s ease}",
+      "@keyframes mcPush{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}",
+      "@media(prefers-reduced-motion:reduce){"+Q+" .mc-calcview.mc-push{animation:none}"+Q+" .mc-pin{transition:none}}",
+      Q+" .mc-cv-head{display:flex;align-items:center;justify-content:space-between;padding:calc(8px + env(safe-area-inset-top)) 8px 0}",
+      Q+" .mc-cv-back{background:none;border:none;color:var(--teal,#0e6e63);font:600 15px var(--sans,system-ui);min-height:44px;cursor:pointer}",
+      Q+" .mc-cv-star{width:44px;height:44px;background:none;border:none;color:#b6bcc4;cursor:pointer;display:flex;align-items:center;justify-content:center}",
+      Q+" .mc-cv-star.on{color:#d69e2e}",
+      Q+" .mc-cv-title{padding:2px 16px 0}",
+      Q+" .mc-cv-title h2{margin:0;font:800 21px var(--sans,system-ui);letter-spacing:-.01em;color:var(--ink,#14202b)}",
+      Q+" .mc-cv-title p{margin:4px 0 0;font:500 13px var(--sans,system-ui);color:var(--slate-soft,#5a7184);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      Q+" .mc-action-row{display:flex;gap:8px;padding:12px 16px 0}",
+      Q+" .mc-act-btn{flex:1;min-height:44px;border:1px solid var(--line,#e3eaee);background:var(--panel,#fff);border-radius:10px;font:700 13px var(--sans,system-ui);color:var(--teal,#0e6e63);cursor:pointer}",
+      Q+" .mc-act-btn:active{background:var(--teal-soft,#e3f1ee)}",
+      Q+" #mcCalcView [id^=mcAFnote_]:not(:empty){padding:8px 16px 0}",
+      Q+" .mc-form{margin:12px 16px 0;background:var(--panel,#fff);border:1px solid var(--line,#e3eaee);border-radius:12px;overflow:hidden}",
+      Q+" .mc-frow{display:flex;align-items:center;gap:10px;min-height:48px;padding:6px 12px;border-bottom:1px solid var(--line,#e3eaee);flex-wrap:wrap}",
+      Q+" .mc-ipssr-field{padding:12px 0;border-bottom:1px solid var(--line,#e3eaee)}",
+      Q+" .mc-ipssr-field:last-child{border-bottom:none}",
+      Q+" .mc-ipssr-label{font:600 14px var(--sans,system-ui);color:var(--ink,#14202b);margin:0 0 10px}",
+      Q+" .mc-ipssr-options{display:grid;grid-template-columns:minmax(0,1fr);border:1px solid var(--line,#d8dfdc);border-radius:11px;overflow:hidden;background:var(--panel,#fff)}",
+      Q+" .mc-ipssr-option{display:flex;align-items:flex-start;gap:12px;width:100%;padding:12px 14px;border:0;border-bottom:1px solid var(--line,#d8dfdc);background:transparent;color:var(--ink,#27333a);text-align:left;cursor:pointer;font:600 13.5px/1.45 var(--sans,system-ui);min-height:48px}",
+      Q+" .mc-ipssr-option:last-child{border-bottom:0}",
+      Q+" .mc-ipssr-option:active{background:var(--teal-soft,#e5f2ee)}",
+      Q+" .mc-ipssr-option.on{background:#087f68;color:#fff}",
+      Q+" .mc-ipssr-criterion{flex:1;min-width:0}",
+      Q+" .mc-ipssr-points{flex:0 0 34px;text-align:right;white-space:nowrap;color:var(--slate-soft,#78817f);font:800 15px var(--sans,system-ui);font-variant-numeric:tabular-nums}",
+      Q+" .mc-ipssr-option.on .mc-ipssr-points{color:rgba(255,255,255,.78)}",
+      Q+" .mc-ipssr-field .mc-seg-select{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}",
+      Q+" .mc-frow:last-child{border-bottom:none}",
+      Q+" .mc-flbl{flex:1;min-width:120px;font:600 14px var(--sans,system-ui);color:var(--ink,#14202b)}",
+      Q+" .mc-fval{display:flex;align-items:center;gap:6px}",
+      Q+" .mc-numwrap{background:var(--paper,#f6f7f5);border:1px solid var(--line,#e3eaee);border-radius:8px;padding:0 8px}",
+      Q+" .mc-num{border:none;background:none;text-align:right;font:700 15px var(--sans,system-ui);font-variant-numeric:tabular-nums;width:84px;padding:8px 0;color:var(--ink,#14202b)}",
+      Q+" .mc-num:focus{outline:none}",
+      Q+" .mc-numwrap:focus-within{border-color:var(--teal,#0e6e63);outline:2px solid var(--teal,#0e6e63);outline-offset:1px}",
+      Q+" .mc-suffix{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#5a7184)}",
+      Q+" .mc-select{border:1px solid var(--line,#e3eaee);border-radius:8px;padding:8px;font:600 14px var(--sans,system-ui);background:var(--paper,#f6f7f5);color:var(--ink,#14202b);max-width:190px}",
+      Q+" .mc-seg{display:flex;background:var(--line,#e8edf0);border-radius:8px;padding:2px}",
+      Q+" .mc-seg-btn{border:none;background:none;padding:7px 12px;border-radius:6px;font:600 12.5px var(--sans,system-ui);color:var(--slate,#2d4356);cursor:pointer;min-height:32px}",
+      Q+" .mc-seg-btn.on{background:var(--panel,#fff);color:var(--ink,#14202b);box-shadow:0 1px 2px rgba(0,0,0,.12)}",
+      Q+" .mc-seg-select{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}",
+      Q+" .mc-switch{width:46px;height:28px;border-radius:14px;background:#dce3e7;border:none;position:relative;cursor:pointer;flex:0 0 auto;padding:0}",
+      Q+" .mc-switch span{position:absolute;width:24px;height:24px;border-radius:50%;background:#fff;top:2px;left:2px;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:left .18s ease}",
+      Q+" .mc-switch.on{background:var(--teal,#0e6e63)}",
+      Q+" .mc-switch.on span{left:20px}",
+      Q+" .mc-check-hidden{position:absolute;width:1px;height:1px;opacity:0}",
+      Q+" .mc-src{font:500 11px var(--sans,system-ui);color:var(--slate-soft,#5a7184);width:100%}",
+      Q+" .mc-src:empty{display:none}",
+      Q+" .mc-panel{border-top:none;padding:0 0 8px}",
+      Q+" .mc-panel .mc-af{margin:12px 16px 0}",
+      Q+" .mc-calc-btn{margin:12px 16px 0;width:calc(100% - 32px)}",
+      Q+" .mc-reset-btn{display:block;margin:10px auto 0;background:none;border:none;color:var(--slate-soft,#5a7184);font:600 13px var(--sans,system-ui);min-height:44px;cursor:pointer;text-decoration:underline}",
+      Q+" .mc-score{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));background:var(--panel,#fff);border:1px solid var(--line,#e3eaee);border-radius:16px;z-index:5;max-height:70vh;overflow:hidden}",
+      "body.dark "+Q+" .mc-score,body.v3-dark "+Q+" .mc-score{background:#0d1d23;border-color:#17303a}",
+      Q+" .mc-score-bar{width:100%;background:none;border:none;text-align:left;padding:10px 14px;cursor:pointer;color:var(--ink,#14202b);font:inherit}",
+      Q+" .mc-score-grab{display:block;width:34px;height:4px;border-radius:2px;background:var(--line,#d5dde2);margin:0 auto 8px}",
+      Q+" .mc-score-todo{font:700 15px var(--sans,system-ui);color:var(--slate,#2d4356)}",
+      Q+" .mc-score-top{display:flex;align-items:baseline;justify-content:space-between}",
+      Q+" .mc-score-lbl{font:700 11px var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--slate-soft,#5a7184)}",
+      Q+" .mc-score-num{font:800 30px var(--sans,system-ui);font-variant-numeric:tabular-nums;letter-spacing:-.02em}",
+      Q+" .mc-score-num small{font-size:13px;color:var(--slate-soft,#5a7184);font-weight:600}",
+      Q+" .mc-scale{position:relative;height:8px;border-radius:4px;margin:10px 0 4px;background:var(--line,#e3eaee);overflow:hidden}",
+      Q+" .mc-scale-lo{position:absolute;left:0;top:0;bottom:0;background:var(--teal,#0e6e63)}",
+      Q+" .mc-scale-hi{position:absolute;top:0;bottom:0;background:var(--red,#ab1c2c)}",
+      Q+" .mc-scale-mark{position:absolute;top:-2px;width:3px;height:12px;background:var(--ink,#14202b);border-radius:2px;transform:translateX(-1px)}",
+      Q+" .mc-scale-lab{display:flex;justify-content:space-between;font:600 11px var(--mono,monospace);color:var(--slate-soft,#5a7184)}",
+      Q+" .mc-score-verdict{font:500 12.5px var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:6px;line-height:1.45}",
+      Q+" .mc-score-detail{padding:0 14px 14px;max-height:46vh;overflow-y:auto}",
+      Q+" .mc-score-interp{font:500 13px var(--sans,system-ui);line-height:1.55;color:var(--ink,#14202b)}",
+      Q+" .mc-bd{margin-top:10px;border-top:1px solid var(--line,#e3eaee)}",
+      Q+" .mc-bd-row{display:grid;grid-template-columns:1fr auto 44px;gap:10px;padding:7px 0;border-bottom:1px solid var(--line,#e3eaee);font:500 13px var(--sans,system-ui)}",
+      Q+" .mc-bd-val{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}",
+      Q+" .mc-bd-pt{font-weight:700;text-align:right;color:var(--slate-soft,#5a7184)}",
+      Q+" .mc-copy-btn{margin-top:10px;min-height:44px;padding:0 16px;border:1px solid var(--line,#e3eaee);background:var(--paper,#f6f7f5);border-radius:10px;font:700 13px var(--sans,system-ui);color:var(--teal,#0e6e63);cursor:pointer}",
+      Q+" .mc-score-src{font:500 11px var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px;line-height:1.5}",
+      Q+" :focus-visible{outline:2px solid var(--teal,#0e6e63);outline-offset:2px}",
+      "@media(max-width:360px){"+Q+" .mc-num{width:64px}"+Q+" .mc-select{max-width:150px}}",
+      /* Review fixes: appearance.css glass and the .mc-card rules use !important, so the plain variant A look must too. */
+      Q+" .mc-top,"+Q+" .mc-pin{background:var(--paper,#f6f7f5)!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-bottom:none!important}",
+      Q+" .mc-back{background:none!important;box-shadow:none!important;border:none!important;padding:0 4px!important}",
+      Q+" .mc-search{box-shadow:none!important;border:none!important;outline:none;background:var(--line,#e5ebee)!important}",
+      Q+" .mc-search:focus{outline:2px solid var(--teal,#0e6e63)!important;outline-offset:1px}",
+      Q+" .mc-cats .mc-cat{background:var(--panel,#fff)!important;border:1px solid var(--line,#e3eaee)!important;backdrop-filter:none!important}",
+      Q+" .mc-cats .mc-cat.on{background:#0F766E!important;border-color:#0F766E!important;color:#fff!important}",
+      Q+" .mc-grid.mc-group,"+Q+" .mc-grid{display:block!important;gap:0!important;background:var(--panel,#fff)!important;border:1px solid var(--line,#e3eaee)!important;border-radius:12px!important;overflow:hidden!important;box-shadow:none!important}",
+      Q+" .mc-card.mc-row{margin:0!important;border:none!important;border-bottom:1px solid var(--line,#e3eaee)!important;border-radius:0!important;box-shadow:none!important;background:var(--panel,#fff)!important;backdrop-filter:none!important}",
+      Q+" .mc-card.mc-row:last-child{border-bottom:none!important}",
+      Q+" .mc-row-main,"+Q+" .mc-card-main{min-width:0!important;flex:1 1 auto}",
+      Q+" .mc-card-main{display:flex;flex-direction:column}",
+      Q+" #mcCalcView .mc-result,"+Q+" #mcCalcView .mc-ref{display:none!important}",
+      Q+" #mcCalcView .mc-calc-btn:not(.mc-use){display:none!important}",
+      Q+","+Q+" .mc-body,"+Q+" #mcList{background:var(--paper,#f6f7f5)!important;background-image:none!important}",
+      /* Fidelity pass: variant A mockup values exactly (owner 2026-11-21: "100% similar, other than the score card as type C"). */
+      Q+"{--a-bg:var(--paper,#F2F5F7);--a-card:var(--panel,#FFFFFF);--a-ink:var(--ink,#13262B);--a-mut:var(--slate-soft,#64788A);--a-line:var(--line,#E3EAEE);--a-acc:var(--teal,#0F766E);--a-soft:color-mix(in srgb,var(--a-acc) 13%,var(--a-card));--a-field:color-mix(in srgb,var(--a-ink) 8%,var(--a-card));--a-seg:color-mix(in srgb,var(--a-ink) 7%,var(--a-card));--a-font:'Manrope','Atkinson Hyperlegible Next',-apple-system,'Segoe UI',Roboto,sans-serif;font-family:var(--a-font)!important;color:var(--a-ink)}",
+      "body.dark "+Q+",body.v3-dark "+Q+"{--a-bg:#071318;--a-card:#0D1D23;--a-ink:#E3F0EC;--a-mut:#8CA7A0;--a-line:#17303A;--a-acc:#42CDB5;--a-soft:#12302F;--a-field:#13262D;--a-seg:#13262D}",
+      Q+" *{font-family:inherit}",
+      Q+","+Q+" .mc-body,"+Q+" #mcList,"+Q+" .mc-top,"+Q+" .mc-pin,"+Q+" .mc-calcview{background:var(--a-bg)!important;background-image:none!important}",
+      Q+" .mc-top.mc-top2{display:block!important;padding:calc(6px + env(safe-area-inset-top)) 16px 8px!important;border:none!important;box-shadow:none!important}",
+      Q+" .mc-top2 .mc-back{display:inline-flex!important;align-items:center;gap:2px;height:32px;padding:0!important;margin:0!important;background:none!important;border:none!important;box-shadow:none!important;color:var(--a-acc)!important;font:600 15px/1 var(--a-font)!important}",
+      Q+" .mc-top2 .mc-back svg,"+Q+" .mc-cv-back svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}",
+      Q+" .mc-top2 .mc-title{display:flex!important;align-items:baseline;gap:8px;margin:4px 0 0!important;font:800 30px/1.15 var(--a-font)!important;letter-spacing:-.02em;color:var(--a-ink)!important;text-align:left!important}",
+      Q+" .mc-top2 .mc-title .mc-count{font:600 14px var(--a-font)!important;color:var(--a-mut)!important;background:none!important;padding:0!important;border:none!important}",
+      Q+" .mc-pin{padding:2px 16px 0!important;border:none!important}",
+      Q+" .mc-sbox{display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:10px;background:var(--a-field);color:var(--a-mut);margin:6px 0 10px;cursor:text}",
+      Q+" .mc-sbox svg{width:17px;height:17px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}",
+      Q+" .mc-sbox .mc-search{flex:1;min-width:0;height:38px!important;margin:0!important;padding:0!important;border:none!important;outline:none!important;box-shadow:none!important;background:transparent!important;font:500 16px var(--a-font)!important;color:var(--a-ink)!important}",
+      Q+" .mc-sbox .mc-search::placeholder{color:var(--a-mut);opacity:1}",
+      Q+" .mc-sbox:focus-within{background:color-mix(in srgb,var(--a-ink) 12%,var(--a-card))}",
+      Q+" .mc-sub{font-family:-apple-system,system-ui,'Segoe UI',Roboto,sans-serif!important}",
+      Q+" .mc-pin .mc-cats{margin:0 -16px!important;padding:0 16px 8px!important;gap:8px!important}",
+      Q+" .mc-cats .mc-cat{height:32px!important;min-height:32px!important;padding:0 14px!important;border-radius:16px!important;background:var(--a-card)!important;border:1px solid var(--a-line)!important;color:var(--a-ink)!important;font:600 13.5px var(--a-font)!important;box-shadow:none!important}",
+      Q+" .mc-cats .mc-cat.on{background:#0F766E!important;border-color:#0F766E!important;color:#fff!important}",
+      Q+" .mc-body{padding:0!important}",
+      Q+" .mc-list{padding:0 16px 24px!important;margin:0!important}",
+      Q+" #mcInteractionsBtn,"+Q+" .mc-disc{margin-left:16px!important;margin-right:16px!important;width:calc(100% - 32px)!important}",
+      Q+" .mc-grp-h{display:block!important;margin:0!important;padding:16px 14px 7px!important;font:700 12.5px var(--a-font)!important;letter-spacing:.06em!important;text-transform:uppercase!important;color:var(--a-mut)!important;background:none!important}",
+      Q+" .mc-grp-h svg{display:none}",
+      Q+" .mc-grp-h span{color:inherit!important;background:none!important;padding:0!important;font:inherit!important}",
+      Q+" .mc-grp-h span:before{content:'· '}",
+      Q+" .mc-grid.mc-group,"+Q+" .mc-grid{background:var(--a-card)!important;border:none!important;border-radius:12px!important;margin:0!important}",
+      Q+" .mc-card.mc-row{position:relative;background:var(--a-card)!important;border:none!important;min-height:60px}",
+      Q+" .mc-card.mc-row+.mc-card.mc-row:before{content:'';position:absolute;left:58px;right:0;top:0;border-top:1px solid var(--a-line)}",
+      Q+" .mc-row-main{gap:12px!important;padding:10px 6px 10px 14px!important}",
+      Q+" .mc-ic{width:30px!important;height:30px!important;border-radius:8px!important;background:var(--a-soft)!important;color:var(--a-acc)!important}",
+      Q+" .mc-ic svg{width:16px!important;height:16px!important}",
+      Q+" .mc-card-t{font:700 15.5px/1.25 var(--a-font)!important;color:var(--a-ink)!important}",
+      Q+" .mc-card-d{font:500 13.5px/1.3 var(--a-font)!important;color:var(--a-mut)!important;margin-top:2px}",
+      Q+" .mc-row .mc-chev{color:#B8C3CA!important;width:30px!important}",
+      Q+" .mc-row .mc-star{color:#D69E2E!important}",
+      Q+" .mc-row .mc-star svg{fill:#D69E2E}",
+      Q+" .mc-cv-head{padding:calc(6px + env(safe-area-inset-top)) 10px 0 16px!important}",
+      Q+" .mc-cv-back{display:inline-flex;align-items:center;gap:2px;padding:0!important;color:var(--a-acc)!important;font:600 15px var(--a-font)!important}",
+      Q+" .mc-cv-star{color:#B6BCC4!important}",
+      Q+" .mc-cv-star.on{color:#D69E2E!important}",
+      Q+" .mc-cv-title{padding:4px 16px 0!important}",
+      Q+" .mc-cv-title h2{font:800 23px/1.2 var(--a-font)!important;color:var(--a-ink)!important;letter-spacing:-.01em}",
+      Q+" .mc-cv-title p{font:500 14px/1.4 var(--a-font)!important;color:var(--a-mut)!important;white-space:normal!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:6px!important}",
+      Q+" .mc-action-row{display:grid!important;grid-template-columns:1fr 1fr!important;align-items:stretch!important;padding:14px 16px 0!important;gap:8px!important}",
+      Q+" .mc-fill-link{display:flex;align-items:center;justify-content:flex-start;gap:10px;min-height:50px;padding:0 12px;border:1px solid var(--a-line);border-radius:12px;background:var(--a-card);color:var(--a-ink);font:600 15px var(--a-font);letter-spacing:-.005em;text-align:left;cursor:pointer;min-width:0}",
+      Q+" .mc-fill-link svg,"+Q+" .mc-copy-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}",
+      Q+" .mc-fill-link:active,"+Q+" .mc-copy-btn:active{opacity:.6}",
+      Q+" .mc-maik-btn{display:flex;align-items:center;justify-content:flex-start;gap:12px;width:100%;min-height:50px;padding:0 18px 0 10px;border:1px solid var(--a-line);border-radius:12px;background:var(--a-card);color:var(--a-ink);font:600 15px var(--a-font);letter-spacing:-.005em;text-align:left;cursor:pointer;transition:transform .12s ease,background-color .12s ease}",
+      Q+" .mc-maik-av{width:32px;height:32px;border-radius:50%;overflow:hidden;flex:0 0 auto;display:block;background:none}",
+      Q+" .mc-maik-av svg,"+Q+" .mc-maik-av img{width:100%!important;height:100%!important;display:block}",
+      Q+" .mc-maik-btn:active{transform:translateY(1px);background:color-mix(in srgb,var(--a-ink) 4%,var(--a-card))}",
+      Q+" .mc-maik-btn:focus-visible{outline:2px solid var(--a-acc);outline-offset:2px}",
+      Q+" .mc-fill-link svg{width:32px!important;height:32px!important;padding:7px;border-radius:10px;background:var(--a-soft);color:var(--a-acc);box-sizing:border-box}",
+      Q+" .mc-maik-btn{gap:10px!important;padding:0 12px 0 9px!important;min-width:0}",
+      "@media(prefers-reduced-motion:reduce){"+Q+" .mc-maik-btn{transition:none}}",
+      Q+" .mc-score-actions{display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin-top:6px}",
+      Q+" .mc-copy-btn{display:inline-flex!important;align-items:center;gap:6px;min-height:44px!important;margin:0!important;padding:0!important;border:none!important;background:none!important;color:var(--a-acc)!important;font:600 14.5px var(--a-font)!important}",
+      Q+" .mc-score-src{margin-top:0!important}",
+      Q+" .mc-form{margin:12px 16px 0!important;background:var(--a-card)!important;border:none!important;border-radius:12px!important}",
+      Q+" .mc-frow{position:relative;min-height:52px!important;padding:6px 14px!important;border:none!important;gap:10px!important}",
+      Q+" .mc-frow+.mc-frow:before{content:'';position:absolute;left:14px;right:0;top:0;border-top:1px solid var(--a-line)}",
+      Q+" .mc-flbl{font:500 15.5px/1.3 var(--a-font)!important;color:var(--a-ink)!important}",
+      Q+" .mc-numwrap{background:none!important;border:none!important;padding:0!important;border-radius:6px;display:flex;align-items:baseline;gap:5px}",
+      Q+" .mc-numwrap:focus-within{outline:2px solid var(--a-acc)!important;outline-offset:4px}",
+      Q+" .mc-num{width:70px!important;padding:6px 0!important;font:700 17px var(--a-font)!important;color:var(--a-ink)!important;background:none!important;border:none!important;text-align:right!important;box-shadow:none!important}",
+      Q+" .mc-num::placeholder{color:#B8C3CA;font-weight:600}",
+      Q+" .mc-suffix{font:500 14px var(--a-font)!important;color:var(--a-mut)!important}",
+      Q+" .mc-seg{background:var(--a-seg)!important;border-radius:9px!important;padding:2px!important}",
+      Q+" .mc-seg-btn{min-height:34px!important;padding:0 14px!important;border-radius:7px!important;font:600 14px var(--a-font)!important;color:var(--a-mut)!important}",
+      Q+" .mc-seg-btn.on{background:var(--a-card)!important;color:var(--a-ink)!important;box-shadow:0 1px 3px rgba(0,0,0,.12)!important}",
+      Q+" .mc-switch{width:46px!important;height:28px!important;background:#DCE3E7!important}",
+      Q+" .mc-switch.on{background:#0F766E!important}",
+      Q+" .mc-select{background:var(--a-seg)!important;border:none!important;color:var(--a-ink)!important;font:600 14px var(--a-font)!important}",
+      Q+" .mc-score{background:var(--a-card)!important;border:1px solid var(--a-line)!important;border-radius:18px!important;box-shadow:0 6px 20px rgba(19,38,43,.10)!important}",
+      Q+" .mc-reset-btn{color:var(--a-mut)!important;font:600 14px var(--a-font)!important}",
+      Q+" .mc-score-todo,"+Q+" .mc-score-bar,"+Q+" .mc-score-num,"+Q+" .mc-score-verdict,"+Q+" .mc-bd-row{color:var(--a-ink)!important}",
+      Q+" .mc-score-grab{background:var(--a-line)!important}",
+      /* Score card: variant C exactly (owner 2026-11-21). Flat full-width panel, mono figures, band-coloured total and verdict word. */
+      Q+" .mc-score{left:0!important;right:0!important;bottom:0!important;border-radius:0!important;border:none!important;border-top:1px solid var(--a-line)!important;box-shadow:none!important;background:var(--a-card)!important;--a-hi:#B4231C;--a-lo:#0F766E}",
+      Q.replace("html body ","html body.dark ")+" .mc-score,"+Q.replace("html body ","html body.v3-dark ")+" .mc-score{--a-hi:#F08A7E;--a-lo:#6FD1BC}",
+      Q+" .mc-score-bar{padding:18px 20px calc(16px + env(safe-area-inset-bottom))!important}",
+      Q+" .mc-score-grab{display:none!important}",
+      Q+" .mc-score-top{display:flex!important;align-items:baseline!important;justify-content:space-between!important}",
+      Q+" .mc-score-lbl{font:700 13px var(--a-font)!important;letter-spacing:.1em!important;text-transform:uppercase;color:var(--a-mut)!important}",
+      Q+" .mc-score-num{display:flex;align-items:baseline;gap:14px;font-family:ui-monospace,'SF Mono','JetBrains Mono',Menlo,monospace!important;color:var(--a-ink)!important}",
+      Q+" .mc-score-num b{font-size:38px;font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--a-ink)}",
+      Q+" .mc-score-num small{font-size:16px!important;font-weight:700!important;color:var(--a-mut)!important}",
+      Q+".mc-band-hi .mc-score-num b,"+Q+" .mc-band-hi .mc-score-num b,"+Q+" .mc-band-hi .mc-score-verdict b{color:var(--a-hi)!important}",
+      Q+" .mc-band-lo .mc-score-num b,"+Q+" .mc-band-lo .mc-score-verdict b{color:var(--a-lo)!important}",
+      Q+" .mc-scale{height:10px!important;border-radius:5px!important;margin:16px 0 6px!important;overflow:visible!important;background:var(--a-hi)!important}",
+      Q+" .mc-scale-lo{background:var(--a-lo)!important;border-radius:5px 0 0 5px}",
+      Q+" .mc-scale-hi{background:var(--a-hi)!important;opacity:.85;border-radius:0 5px 5px 0}",
+      Q+" .mc-scale-mark{top:-5px!important;width:4px!important;height:20px!important;border-radius:2px!important;background:var(--a-card)!important;box-shadow:0 0 0 1px var(--a-mut)!important;transform:translateX(-2px)!important}",
+      Q+" .mc-scale-lab{font:600 13px ui-monospace,'SF Mono',Menlo,monospace!important;color:var(--a-mut)!important}",
+      Q+" .mc-score-verdict{margin-top:12px!important;font:500 15.5px/1.45 var(--a-font)!important;color:var(--a-ink)!important}",
+      Q+" .mc-score-verdict b{font-weight:800}",
+      Q+" .mc-score-todo{font:700 16px var(--a-font)!important}",
+      Q+" .mc-score-detail{padding:0 20px 16px!important}",
+      "body.dark "+Q+",body.dark "+Q+" .mc-body,body.dark "+Q+" #mcList,body.v3-dark "+Q+",body.v3-dark "+Q+" .mc-body,body.v3-dark "+Q+" #mcList,"+"body.dark "+Q+" .mc-top,body.dark "+Q+" .mc-pin,body.v3-dark "+Q+" .mc-top,body.v3-dark "+Q+" .mc-pin{background:#071318!important}"
+,
+      /* Ivory and forest (owner 2026-11-21): Newsreader for headings and score figures (licensed stand-in for Tiempos Text,
+         OFL, assets/fonts/newsreader-OFL.txt), Atkinson Hyperlegible Next for all clinical data, warm ivory, forest green,
+         subtle borders, restrained shadows, raised (3D) buttons that press down. */
+      "@font-face{font-family:'Newsreader';src:url(/assets/fonts/newsreader-latin.woff2) format('woff2');font-weight:200 800;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}",
+      "@font-face{font-family:'Newsreader';src:url(/assets/fonts/newsreader-latin-ext.woff2) format('woff2');font-weight:200 800;font-style:normal;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}",
+      Q+"{--a-font:'Atkinson Hyperlegible Next','Atkinson Hyperlegible',-apple-system,'Segoe UI',Roboto,sans-serif;--a-serif:'Newsreader',Georgia,'Times New Roman',serif;--a-bg:#F6F1E6;--a-card:#FFFCF5;--a-ink:#1E2A22;--a-mut:#686D61;--a-line:#E4DBC8;--a-edge:#D6CBB3;--a-hl:rgba(255,255,255,.85);--a-acc:#1F5C3F;--a-acc-edge:#143D2A;--a-soft:#E3ECE2;--a-field:#EEE7D8;--a-seg:#ECE4D4;--a-sh:rgba(70,52,20,.10)}",
+      Q.replace("html body ","html body.dark ")+","+Q.replace("html body ","html body.v3-dark ")+"{--a-bg:#0E1410;--a-card:#172019;--a-ink:#EDE7D8;--a-mut:#A3A898;--a-line:#28332A;--a-edge:#060906;--a-hl:rgba(255,255,255,.05);--a-acc:#7DC59A;--a-acc-edge:#3F7A57;--a-soft:#1E2D23;--a-field:#1C251E;--a-seg:#1E2820;--a-sh:rgba(0,0,0,.35)}",
+      Q+" .mc-score{--a-hi:#A8321F;--a-lo:#1F5C3F}",
+      Q.replace("html body ","html body.dark ")+" .mc-score,"+Q.replace("html body ","html body.v3-dark ")+" .mc-score{--a-hi:#E88E79;--a-lo:#7DC59A}",
+      Q+" .mc-top2 .mc-title{font-family:var(--a-serif)!important;font-weight:600!important;font-size:32px!important;letter-spacing:-.015em!important}",
+      Q+" .mc-top2 .mc-title .mc-count{font-family:var(--a-font)!important}",
+      Q+" .mc-cv-title h2{font-family:var(--a-serif)!important;font-weight:600!important;font-size:26px!important;letter-spacing:-.01em!important}",
+      Q+" .mc-score-num,"+Q+" .mc-score-num b,"+Q+" .mc-score-num small{font-family:var(--a-serif)!important;font-variant-numeric:lining-nums tabular-nums}",
+      Q+" .mc-score-num b{font-size:44px!important;font-weight:600!important}",
+      Q+" .mc-score-num small{font-size:18px!important;font-weight:500!important}",
+      Q+" .mc-scale-lab{font-family:var(--a-font)!important;font-variant-numeric:tabular-nums;font-size:13px!important}",
+      Q+" .mc-card-t{font-weight:700!important}",
+      Q+" .mc-num{font-variant-numeric:tabular-nums}",
+      /* subtle borders, restrained shadows */
+      Q+" .mc-grid.mc-group,"+Q+" .mc-grid,"+Q+" .mc-form{border:1px solid var(--a-line)!important;box-shadow:0 1px 2px var(--a-sh)!important}",
+      Q+" .mc-score{border-top:1px solid var(--a-line)!important;box-shadow:0 -6px 18px var(--a-sh)!important}",
+      /* raised buttons: a hairline border, a darker bottom edge and a top highlight; pressing sinks them by the edge height */
+      Q+" .mc-fill-link,"+Q+" .mc-maik-btn,"+Q+" .mc-copy-btn,"+Q+" .mc-reset-btn,"+Q+" .mc-cats .mc-cat{background:var(--a-card)!important;border:1px solid var(--a-line)!important;box-shadow:0 2px 0 var(--a-edge),0 3px 8px var(--a-sh),inset 0 1px 0 var(--a-hl)!important;transition:transform .1s ease,box-shadow .1s ease!important}",
+      Q+" .mc-fill-link:active,"+Q+" .mc-maik-btn:active,"+Q+" .mc-copy-btn:active,"+Q+" .mc-reset-btn:active,"+Q+" .mc-cats .mc-cat:active{transform:translateY(2px)!important;box-shadow:0 0 0 var(--a-edge),0 1px 2px var(--a-sh),inset 0 1px 0 var(--a-hl)!important}",
+      Q+" .mc-cats .mc-cat.on{background:var(--a-acc)!important;border-color:var(--a-acc)!important;color:#fff!important;box-shadow:0 2px 0 var(--a-acc-edge),0 3px 8px var(--a-sh),inset 0 1px 0 rgba(255,255,255,.18)!important}",
+      Q.replace("html body ","html body.dark ")+" .mc-cats .mc-cat.on,"+Q.replace("html body ","html body.v3-dark ")+" .mc-cats .mc-cat.on{color:#0E1410!important}",
+      Q+" .mc-pin .mc-cats{padding-bottom:12px!important}",
+      Q+" .mc-copy-btn{min-height:40px!important;padding:0 14px!important;border-radius:10px!important;font:700 14px var(--a-font)!important;color:var(--a-acc)!important}",
+      Q+" .mc-reset-btn{display:flex!important;align-items:center;justify-content:center;min-height:40px!important;margin:16px auto 0!important;padding:0 20px!important;border-radius:10px!important;text-decoration:none!important;font:700 14px var(--a-font)!important;color:var(--a-ink)!important}",
+      Q+" .mc-score-actions{gap:12px!important;margin-top:12px!important}",
+      Q+" .mc-switch.on{background:var(--a-acc)!important}",
+      Q+" .mc-switch:not(.on){background:var(--a-seg)!important;box-shadow:inset 0 0 0 1px var(--a-line)}",
+      Q+" .mc-score-src,"+Q+" .mc-bd-pt{color:var(--a-mut)!important}",
+      Q+" .mc-seg-btn.on{box-shadow:0 1px 0 var(--a-edge),0 1px 3px var(--a-sh)!important}",
+      /* monogram tile: white, hairline, soft top-lit gradient and a 1px raised edge; forest serif letters */
+      Q+" .mc-ic.mc-mono{width:44px!important;height:40px!important;overflow:hidden;border-radius:10px!important;background:linear-gradient(180deg,#FFFFFF,#F7F2E7)!important;border:1px solid var(--a-line)!important;box-shadow:0 1px 0 var(--a-edge),0 2px 5px var(--a-sh)!important;color:var(--a-acc)!important;font:600 14px/1 var(--a-serif)!important;letter-spacing:-.01em;display:flex!important;align-items:center!important;justify-content:center!important;font-variant-numeric:lining-nums;flex:0 0 auto}",
+      Q+" .mc-ic.mc-mono.mc-mono4{font-size:11px!important;letter-spacing:-.03em}",
+      Q.replace("html body ","html body.dark ")+" .mc-ic.mc-mono,"+Q.replace("html body ","html body.v3-dark ")+" .mc-ic.mc-mono{background:linear-gradient(180deg,#223026,#18221B)!important}",
+      Q+" .mc-card.mc-row+.mc-card.mc-row:before{left:72px!important}",
+      /* White glass (owner 2026-11-21): soft white page with a faint forest wash; frosted white panels and buttons. */
+      Q+"{--a-bg:#F7F9F7;--a-card:rgba(255,255,255,.72);--a-glass-edge:rgba(255,255,255,.95);--a-line:rgba(30,42,34,.09);--a-edge:rgba(30,42,34,.12);--a-sh:rgba(30,42,34,.08);--a-field:rgba(30,42,34,.05);--a-seg:rgba(30,42,34,.06)}",
+      Q.replace("html body ","html body.dark ")+","+Q.replace("html body ","html body.v3-dark ")+"{--a-bg:#0C120E;--a-card:rgba(30,42,33,.62);--a-glass-edge:rgba(255,255,255,.07);--a-line:rgba(255,255,255,.08);--a-edge:rgba(0,0,0,.55);--a-sh:rgba(0,0,0,.4);--a-field:rgba(255,255,255,.06);--a-seg:rgba(255,255,255,.07)}",
+      Q+","+Q+" .mc-body,"+Q+" #mcList,"+Q+" .mc-top,"+Q+" .mc-pin,"+Q+" .mc-calcview{background:var(--a-bg) radial-gradient(120% 60% at 85% -10%,rgba(31,92,63,.07),transparent 60%) fixed!important}",
+      Q.replace("html body ","html body.dark ")+","+Q.replace("html body ","html body.v3-dark ")+","+Q.replace("html body ","html body.dark ")+" .mc-body,"+Q.replace("html body ","html body.dark ")+" #mcList,"+Q.replace("html body ","html body.dark ")+" .mc-top,"+Q.replace("html body ","html body.dark ")+" .mc-pin,"+Q.replace("html body ","html body.dark ")+" .mc-calcview{background:var(--a-bg) radial-gradient(120% 60% at 85% -10%,rgba(125,197,154,.10),transparent 60%) fixed!important}",
+      Q+" .mc-grid.mc-group,"+Q+" .mc-grid,"+Q+" .mc-form,"+Q+" .mc-score,"+Q+" .mc-fill-link,"+Q+" .mc-maik-btn,"+Q+" .mc-copy-btn,"+Q+" .mc-reset-btn,"+Q+" .mc-cats .mc-cat:not(.on){background:var(--a-card)!important;-webkit-backdrop-filter:blur(16px) saturate(1.4)!important;backdrop-filter:blur(16px) saturate(1.4)!important}",
+      Q+" .mc-grid.mc-group,"+Q+" .mc-grid,"+Q+" .mc-form{border:1px solid var(--a-glass-edge)!important;box-shadow:0 0 0 1px var(--a-line),0 6px 20px var(--a-sh)!important}",
+      Q+" .mc-card.mc-row{background:transparent!important}",
+      Q+" .mc-score{border-top:1px solid var(--a-glass-edge)!important;box-shadow:0 -1px 0 var(--a-line),0 -8px 24px var(--a-sh)!important}",
+      Q+" .mc-fill-link,"+Q+" .mc-maik-btn,"+Q+" .mc-copy-btn,"+Q+" .mc-reset-btn,"+Q+" .mc-cats .mc-cat:not(.on){border:1px solid var(--a-glass-edge)!important;box-shadow:0 0 0 1px var(--a-line),0 2px 0 var(--a-edge),0 4px 12px var(--a-sh),inset 0 1px 0 var(--a-glass-edge)!important}",
+      Q+" .mc-ic.mc-mono{background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.7))!important;border:1px solid var(--a-glass-edge)!important;box-shadow:0 0 0 1px var(--a-line),0 2px 6px var(--a-sh)!important}",
+      Q.replace("html body ","html body.dark ")+" .mc-ic.mc-mono,"+Q.replace("html body ","html body.v3-dark ")+" .mc-ic.mc-mono{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04))!important}",
+      Q+" .mc-sbox{background:var(--a-field)!important}",
+      /* Dark mode: true black with iOS dark grey panels (owner 2026-11-21), green kept only as the accent. */
+      Q.replace("html body ","html body.dark ")+","+Q.replace("html body ","html body.v3-dark ")+"{--a-bg:#000000;--a-card:rgba(28,28,30,.92);--a-glass-edge:rgba(255,255,255,.06);--a-line:rgba(255,255,255,.10);--a-edge:rgba(0,0,0,.7);--a-sh:rgba(0,0,0,.5);--a-ink:#F2F2F7;--a-mut:#98989F;--a-acc:#7DC59A;--a-acc-edge:#3F7A57;--a-soft:rgba(125,197,154,.14);--a-field:rgba(255,255,255,.08);--a-seg:rgba(255,255,255,.08)}",
+      Q.replace("html body ","html body.dark ")+","+Q.replace("html body ","html body.v3-dark ")+","+Q.replace("html body ","html body.dark ")+" .mc-body,"+Q.replace("html body ","html body.dark ")+" #mcList,"+Q.replace("html body ","html body.dark ")+" .mc-top,"+Q.replace("html body ","html body.dark ")+" .mc-pin,"+Q.replace("html body ","html body.dark ")+" .mc-calcview,"+Q.replace("html body ","html body.v3-dark ")+" .mc-body,"+Q.replace("html body ","html body.v3-dark ")+" #mcList,"+Q.replace("html body ","html body.v3-dark ")+" .mc-top,"+Q.replace("html body ","html body.v3-dark ")+" .mc-pin,"+Q.replace("html body ","html body.v3-dark ")+" .mc-calcview{background:#000000!important;background-image:none!important}",
+      Q.replace("html body ","html body.dark ")+" .mc-ic.mc-mono,"+Q.replace("html body ","html body.v3-dark ")+" .mc-ic.mc-mono{background:linear-gradient(180deg,#2C2C2E,#1C1C1E)!important}",
+      /* iPad and wider: one centred 720px column instead of full-width stretched rows and forms */
+      "@media(min-width:700px){"+
+        Q+" .mc-top.mc-top2,"+Q+" .mc-pin,"+Q+" #mcList{padding-left:max(16px,calc((100vw - 720px)/2))!important;padding-right:max(16px,calc((100vw - 720px)/2))!important}"+
+        Q+" .mc-pin .mc-cats{margin:0!important;padding-left:0!important;padding-right:0!important}"+
+        Q+" .mc-calcview{padding-left:max(0px,calc((100vw - 720px)/2))!important;padding-right:max(0px,calc((100vw - 720px)/2))!important}"+
+        Q+" .mc-score{left:max(0px,calc((100vw - 720px)/2))!important;right:max(0px,calc((100vw - 720px)/2))!important;border-radius:18px 18px 0 0!important;border-left:1px solid var(--a-line)!important;border-right:1px solid var(--a-line)!important}"+
+      "}",
+      /* iPad landscape: list on the left (400px), the open calculator on the right */
+      "@media(min-width:1000px){"+
+        Q+".mc-split .mc-top2,"+Q+".mc-split .mc-pin,"+Q+".mc-split .mc-body{width:400px!important;max-width:400px!important;box-sizing:border-box}"+
+        Q+".mc-split .mc-top.mc-top2,"+Q+".mc-split .mc-pin,"+Q+".mc-split #mcList{padding-left:16px!important;padding-right:16px!important}"+
+        Q+".mc-split .mc-body{border-right:1px solid var(--a-line)}"+
+        Q+".mc-split .mc-calcview{left:400px!important;border-left:1px solid var(--a-line);padding-left:max(0px,calc((100vw - 400px - 720px)/2))!important;padding-right:max(0px,calc((100vw - 400px - 720px)/2))!important}"+
+        Q+".mc-split .mc-score{left:calc(400px + max(0px,calc((100vw - 400px - 720px)/2)))!important;right:max(0px,calc((100vw - 400px - 720px)/2))!important}"+
+        Q+" .mc-row.mc-sel{background:var(--a-soft)!important}"+
+        Q+" .mc-row.mc-sel .mc-card-t{color:var(--a-acc)!important}"+
+      "}",
+      "@media(prefers-reduced-motion:reduce){"+Q+" .mc-fill-link,"+Q+" .mc-maik-btn,"+Q+" .mc-copy-btn,"+Q+" .mc-reset-btn,"+Q+" .mc-cats .mc-cat{transition:none!important}}"
+    ].join("");
   }
 
   /* Polish pass (owner 2026-11-11: "just polish this rather than changing whole UI"). Same screen, same
@@ -8730,5 +9707,5 @@
     if (c.cat && !CAT_ICON[c.cat]) CAT_ICON[c.cat] = "baby";
     return true;
   }
-  window.MEDCALC = { openList: openList, open: open, close: close, openInteractions: openInteractions, _calcs: CALCS, get: calcById, run: calcRun, list: calcList, find: calcFind, register: register };
+  window.MEDCALC = { openList: openList, open: open, close: close, openInteractions: openInteractions, _calcs: CALCS, get: calcById, run: calcRun, list: calcList, find: calcFind, register: register, _v2: { on: calcV2On, recent: calcRecent, snapshot: patientSnapshot, maikQuestion: buildMaikQuestion, scaleFor: scaleFor, missingCount: missingCount, fillFromSnapshot: fillFromSnapshot, openCalcView: openCalcView, closeCalcView: closeCalcView } };
 })();

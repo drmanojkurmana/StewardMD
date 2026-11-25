@@ -31,8 +31,9 @@
     var m = String(search || "").match(new RegExp("[?&]" + key + "=([^&]+)"));
     return m ? decodeURIComponent(m[1]) : null;
   }
-  /* resolveFlags({ prepEnabled, get(key)->string|null, search }) -> mode switches. Parent default OFF and
-     requires smd_prep; Study defaults ON when the parent is on, the other modes and YouTube default OFF. */
+  /* resolveFlags({ prepEnabled, get(key)->string|null, search }) -> mode switches. Parent default ON since
+     2026-11-17 (still requires smd_prep); Study defaults ON when the parent is on, YouTube defaults ON,
+     the other modes default OFF. */
   function resolveFlags(env) {
     env = env || {};
     var get = env.get || function () { return null; };
@@ -42,14 +43,14 @@
       var s = flagVal(get(skey)); if (s != null) return s;
       return dflt;
     }
-    var parent = !!env.prepEnabled && pick("medigram", "smd_prep_medigram", false);
+    var parent = !!env.prepEnabled && pick("medigram", "smd_prep_medigram", true);
     if (!parent) return { parent: false, study: false, discovery: false, breakMode: false, youtube: false };
     return {
       parent: true,
       study: pick("medigram_study", "smd_prep_medigram_study", true),
       discovery: pick("medigram_discovery", "smd_prep_medigram_discovery", false),
       breakMode: pick("medigram_break", "smd_prep_medigram_break", false),
-      youtube: pick("medigram_youtube", "smd_prep_medigram_youtube", false)
+      youtube: pick("medigram_youtube", "smd_prep_medigram_youtube", true)   // owner 2026-11-17: the cleared CliniX video set plays by default
     };
   }
   function resolveCadence(arm) {
@@ -200,6 +201,50 @@
     return out.slice(0, size);
   }
 
+  /* The reel: bank questions in order; after every n questions one other card, alternating a pearl (the key point of a
+     question already passed, never one still to come) with the next extra (video, lesson or image, in the caller's order). */
+  function mixFeed(items, extras, n) {
+    n = cadenceN(n); extras = extras || [];
+    var out = [], pearls = [], ei = 0, slot = 0;
+    (items || []).forEach(function (it, i) {
+      out.push({ kind: "q", it: it });
+      if (it.kp) pearls.push(it);
+      if ((i + 1) % n) return;
+      var pearlTurn = slot++ % 3 === 0;   // one pearl in three slots: the rest are videos, lessons and images
+      if ((pearlTurn || ei >= extras.length) && pearls.length) { var p = pearls.shift(); out.push({ kind: "pearl", text: p.kp, s: p._s }); }
+      else if (ei < extras.length) out.push(extras[ei++]);
+    });
+    return out;
+  }
+
+  /* Image Library systems (kb/dist/imglib/<slug>.json) for an exam. NEET-SS shows only the systems of the learner's
+     super-specialty subjects (ss-cardiology -> cardiology ...); every other exam takes any system (returns null). */
+  var SS_SYS = [
+    [/cardiac-anaesth|neuroanaesth|paediatric-anaesth|anaesth/, ["anaesthesia"]],
+    [/ctvs|cardio/, ["cardiology"]], [/neurosurg/, ["neurology", "surgery"]], [/neuro/, ["neurology"]],
+    [/nephro|urolog/, ["renal-and-urology"]], [/gastro|hepat/, ["gastroenterology"]], [/endocrin/, ["endocrine-and-metabolic"]],
+    [/haemat/, ["haematology"]], [/onco-path/, ["pathology-and-immunology", "oncology"]], [/oncolog/, ["oncology"]],
+    [/pulmon/, ["respiratory"]], [/infectious/, ["infectious-diseases"]], [/rheumat/, ["orthopaedics-and-rheumatology"]],
+    [/critical-care/, ["emergency-and-critical-care"]], [/psychiat|mental/, ["psychiatry"]], [/neonat|paediatric/, ["paediatrics"]],
+    [/obg|gynae|reproductive/, ["obstetrics-and-gynaecology"]], [/radiolog/, ["radiology"]], [/head-neck/, ["ent-and-head-and-neck", "surgery"]],
+    [/orthop/, ["orthopaedics-and-rheumatology"]], [/plastic|hand-surg|surg/, ["surgery"]], [/clinical-pharm/, ["pharmacology"]],
+    [/medicine/, ["medicine"]]
+  ];
+  var SS_MED = ["medicine", "cardiology", "neurology", "gastroenterology", "renal-and-urology", "endocrine-and-metabolic", "haematology", "respiratory", "infectious-diseases", "oncology"];
+  function imgSystemsFor(examId, subjectIds) {
+    if (examId !== "neet-ss") return null;
+    var out = [], seen = {};
+    function add(x) { if (!seen[x]) { seen[x] = 1; out.push(x); } }
+    (subjectIds || []).forEach(function (id) {
+      id = String(id || "");
+      if (/paediatric|neonat/.test(id)) add("paediatrics");   // a paediatric subspecialty also gets its organ system
+      if (/surg|ctvs/.test(id)) add("surgery");                // so does a surgical one
+      for (var i = 0; i < SS_SYS.length; i++) if (SS_SYS[i][0].test(id)) { SS_SYS[i][1].forEach(add); break; }
+    });
+    if (!out.length) return SS_MED.slice();   // no recognised specialty: the medical systems
+    return out;
+  }
+
   function missionById(id) { for (var i = 0; i < MISSIONS.length; i++) if (MISSIONS[i].id === id) return MISSIONS[i]; return MISSIONS[0]; }
   /* A mission completes on learning actions only: video watch time alone never completes it. */
   function missionProgress(mission, actions) {
@@ -256,7 +301,7 @@
     resolveCadence: resolveCadence,
     validateCandidate: validateCandidate, isEligible: isEligible, eligible: eligible, dedupe: dedupe,
     scoreCandidate: scoreCandidate, rankCandidates: rankCandidates, reasonFor: reasonFor, isQuestion: isQuestion, isLesson: isLesson,
-    buildFeed: buildFeed, missionById: missionById, missionProgress: missionProgress, isMissionComplete: isMissionComplete,
+    buildFeed: buildFeed, mixFeed: mixFeed, imgSystemsFor: imgSystemsFor, missionById: missionById, missionProgress: missionProgress, isMissionComplete: isMissionComplete,
     createBreak: createBreak, breakState: breakState, extendBreak: extendBreak,
     shouldScheduleFsrs: shouldScheduleFsrs, explainRequest: explainRequest, buildEvent: buildEvent };
   if (NODE) { module.exports = PURE; return; }

@@ -1,0 +1,203 @@
+{
+  "id": "prk",
+  "title": "Photorefractive keratectomy (PRK)",
+  "subtitle": "Epithelial removal, excimer surface ablation and bandage contact lens",
+  "system": "ophthalmic",
+  "aliases": [
+    "PRK",
+    "surface ablation",
+    "LASEK",
+    "trans-PRK",
+    "TransPRK"
+  ],
+  "estMinutes": 15,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "aao-refractive",
+      "org": "American Academy of Ophthalmology",
+      "title": "Refractive Errors Preferred Practice Pattern",
+      "year": 2022,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Refractive+Errors+Preferred+Practice+Pattern+American+Academy+of+Ophthalmology",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "rcophth-refractive",
+      "org": "Royal College of Ophthalmologists",
+      "title": "Professional Standards for Refractive Surgery",
+      "year": 2017,
+      "url": "https://www.rcophth.ac.uk/resources-listing/professional-standards-for-refractive-surgery/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Stable myopia, hypermetropia or astigmatism within the laser's treatment range, in an adult who wants less dependence on glasses or contact lenses.",
+      "Preferred over LASIK for thin corneas, contact sports or occupations with risk of eye trauma, and anterior basement membrane disease."
+    ],
+    "contraindications": [
+      "Keratoconus or suspicious topography, unstable refraction, active ocular surface or autoimmune disease affecting healing.",
+      "Pregnancy and breastfeeding; unrealistic expectations; severe dry eye."
+    ],
+    "preparation": [
+      "Stable refraction, cycloplegic refraction, topography and tomography, pachymetry, pupil size, dry eye assessment.",
+      "Contact lenses out for the agreed period before measurements.",
+      "Consent: pain for two to four days, slower visual recovery than LASIK, haze, regression, glare and halos, dry eye, infection, and that reading glasses will still be needed with age."
+    ],
+    "positioning": [
+      "Supine under the laser, head level with the chin and forehead in one plane; the fellow eye covered."
+    ],
+    "equipment": [
+      "Excimer laser with eye tracker, lid speculum, 20% alcohol and well or an epithelial brush (or a transepithelial laser profile), Weck sponges, mitomycin C 0.02% per protocol, chilled balanced salt, bandage contact lens."
+    ],
+    "anatomy": [
+      "The corneal epithelium, Bowman's layer and the anterior stroma; the pupil centre and the visual axis.",
+      "Surface ablation leaves the whole residual stroma untouched by a flap, so the cornea stays stronger than after LASIK."
+    ],
+    "criticalSafety": [
+      "Treat the right eye with the right programme: confirm patient, eye and refraction at the laser.",
+      "Centre on the pupil or visual axis with the tracker engaged.",
+      "Keep mitomycin C to the agreed time and wash it off."
+    ],
+    "structuresAtRisk": [
+      "Cornea",
+      "Limbal stem cells (alcohol spill)"
+    ],
+    "commonErrors": [
+      "A wrong programme or eye.",
+      "Decentration.",
+      "Alcohol spilling onto the limbus.",
+      "An uneven epithelial removal giving an irregular ablation."
+    ],
+    "complications": [
+      "Pain and delayed epithelial healing.",
+      "Corneal haze and regression.",
+      "Infective keratitis under the bandage lens.",
+      "Over- or under-correction, glare and halos, dry eye."
+    ],
+    "postop": [
+      "Bandage lens until the epithelium has healed (usually four to five days); antibiotic and steroid drops on a taper; analgesia.",
+      "Same-day return for increasing pain, discharge or falling vision (infective keratitis).",
+      "Protect from ultraviolet light; review refraction over three months."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.prk-step-01", "med.surgx.prk-clip-01"],
+      "emphasis": "Elective surgery on healthy eyes: written consent at a separate visit, with a cooling-off period per standards."
+    },
+    {
+      "ref": "step.eye.refractive-check", "media": ["med.surgx.prk-step-02", "med.surgx.prk-clip-02"]
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.prk-step-03", "med.surgx.prk-clip-03"],
+      "emphasis": "At the laser: patient name, eye, refraction and treatment profile read aloud from the plan."
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.prk-step-04", "med.surgx.prk-clip-04"],
+      "emphasis": "Supine under the laser, head level, chin and forehead in one plane; fellow eye covered."
+    },
+    {
+      "ref": "step.eye.anaesthesia", "media": ["med.surgx.prk-step-05", "med.surgx.prk-clip-05"],
+      "emphasis": "Topical anaesthetic drops only."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.prk-step-06", "med.surgx.prk-clip-06"],
+      "emphasis": "Clean the lids and tape or drape the lashes away from the field."
+    },
+    {
+      "ref": "step.eye.lid-speculum", "media": ["med.surgx.prk-step-07", "med.surgx.prk-clip-07"]
+    },
+    {
+      "ref": "step.prk.epithelium", "media": ["med.surgx.prk-step-08", "med.surgx.prk-clip-08"]
+    },
+    {
+      "ref": "step.eye.excimer-ablation", "media": ["med.surgx.prk-step-09", "med.surgx.prk-clip-09"]
+    },
+    {
+      "ref": "step.eye.laser-interruption", "media": ["med.surgx.prk-step-10", "med.surgx.prk-clip-10"]
+    },
+    {
+      "ref": "step.prk.mmc", "media": ["med.surgx.prk-step-11", "med.surgx.prk-clip-11"]
+    },
+    {
+      "ref": "step.prk.bandage", "media": ["med.surgx.prk-step-12", "med.surgx.prk-clip-12"]
+    },
+    {
+      "ref": "step.eye.shield-postop", "media": ["med.surgx.prk-step-13", "med.surgx.prk-clip-13"],
+      "emphasis": "Bandage lens in, drops explained, and the warning that increasing pain or discharge after day two is infection until proven otherwise."
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.prk-step-14", "med.surgx.prk-clip-14"]
+    }
+  ],
+  "steps_local": {
+    "step.prk.epithelium": {
+      "id": "step.prk.epithelium",
+      "kind": "access",
+      "title": "Removing the epithelium",
+      "why": "The laser must treat bare, evenly exposed stroma. An irregular epithelial removal or one that lets alcohol reach the limbus gives an irregular result and slow healing.",
+      "how": [
+        "Remove the epithelium over the planned zone: 20% alcohol in a well for about 20 to 30 seconds then a sponge sweep, a rotating brush, or a transepithelial laser profile.",
+        "Dry the alcohol up and irrigate so none spills onto the limbus.",
+        "Work quickly so the stroma does not dry out before the ablation."
+      ],
+      "structuresAtRisk": [
+        "Limbal stem cells",
+        "Stroma (dehydration)"
+      ],
+      "pitfalls": [
+        "Alcohol spilling outside the well.",
+        "Leaving islands of epithelium."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.prk.mmc": {
+      "id": "step.prk.mmc",
+      "kind": "prep",
+      "title": "Mitomycin C to reduce haze (when indicated)",
+      "why": "After deeper ablations, haze can blur vision for months. A brief application of dilute mitomycin C reduces it, but too long harms the corneal cells.",
+      "how": [
+        "Apply a sponge soaked in mitomycin C 0.02% to the ablated area for the time in the protocol (often 12 to 30 seconds).",
+        "Irrigate thoroughly with chilled balanced salt."
+      ],
+      "structuresAtRisk": [
+        "Corneal endothelium and keratocytes (overexposure)"
+      ],
+      "pitfalls": [
+        "Exceeding the protocol time.",
+        "Not washing it out."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.prk.bandage": {
+      "id": "step.prk.bandage",
+      "kind": "closure",
+      "title": "Bandage contact lens",
+      "why": "The bandage lens reduces pain and protects the new epithelium. It is also a place for bacteria to grow, so it needs drops and a removal date.",
+      "how": [
+        "Place a soft bandage contact lens and check it centres and moves slightly.",
+        "Start antibiotic and steroid drops; give the removal date in writing."
+      ],
+      "structuresAtRisk": [
+        "Cornea (infection under the lens)"
+      ],
+      "pitfalls": [
+        "A tight lens that does not move.",
+        "No written plan for removal."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

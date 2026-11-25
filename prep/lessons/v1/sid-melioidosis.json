@@ -1,0 +1,349 @@
+{
+ "v": 1,
+ "module": "sid-melioidosis",
+ "title": "Melioidosis",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Melioidosis** is Burkholderia pseudomallei from **wet soil**; rice farmers with diabetics in monsoon are struck. **Pneumonia, sepsis and abscesses anywhere** make it the great mimicker. **Culture is gold** but the laboratory is warned as staff are endangered. **Diabetes, alcohol and kidney disease** invite severe disease.",
+   "say": "Melioidosis is Burkholderia pseudomallei from wet soil, and it strikes rice farmers with diabetics in the monsoon. Pneumonia with sepsis with abscesses anywhere is the classic spread, which is why it is called the great mimicker. Culture is the gold standard, but the laboratory must be warned because the bug endangers staff. Diabetes with alcohol with kidney disease is facing the worst disease.",
+   "vis": {
+    "cols": [
+     "Host",
+     "Exposure",
+     "Disease"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Rice farmer",
+      "Mud, monsoon",
+      "Pneumonia, sepsis"
+     ],
+     [
+      "Diabetic",
+      "Soil, water",
+      "Abscesses, chronic"
+     ],
+     [
+      "Alcoholic",
+      "Cuts, inhalation",
+      "Severe, recurrent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute melioidosis** mimics tuberculosis: fever, cough and **upper lobe shadows**. **Septicaemia with abscesses** follows in diabetics; **parotid swelling** marks children. **Blood, sputum and pus** cultured before cover. **Bipolar safety pin rods** hint first; the laboratory works inside **safety cabinets** on every plate.",
+   "say": "Acute melioidosis presents as pneumonia that mimics tuberculosis, with fever with cough with upper lobe shadows. Septicaemia with multiple abscesses follows in diabetics, and parotid swelling marks children in endemic zones. Blood with sputum with pus cultures are drawn before cover, and the laboratory handles plates inside safety cabinets. Gram negative bipolar rods with safety pin look give the first hint.",
+   "vis": {
+    "cols": [
+     "Presentation",
+     "Mimics",
+     "First hint"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Pneumonia",
+      "Tuberculosis",
+      "Upper lobes, acute"
+     ],
+     [
+      "Sepsis, abscesses",
+      "Staph, typhoid",
+      "Diabetic, monsoon"
+     ],
+     [
+      "Parotid",
+      "Mumps",
+      "Child, endemic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic melioidosis** smoulders for months like TB with wasting and sweats. **Reactivation decades** after exposure wakes with steroids or diabetes; old travel always asked. **Biopsy with culture** separates it from malignancy. **Treatment runs months**, not weeks, once chronic; stopping early relapses.",
+   "say": "Chronic melioidosis smoulders for months like tuberculosis with weight loss with night sweats, and it reactivates decades after exposure. Latent infection wakes with steroids with diabetes with new illness, so old travel is asked in every case. Biopsy with culture separates it from malignancy, because imaging alone cannot. Treatment runs months, not weeks, once chronicity is proven.",
+   "vis": {
+    "cols": [
+     "Course",
+     "Trigger",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Acute",
+      "Monsoon exposure",
+      "Intensive then months"
+     ],
+     [
+      "Chronic",
+      "Smoulders months",
+      "Months of eradication"
+     ],
+     [
+      "Latent",
+      "Steroids, diabetes",
+      "Old travel asked"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intensive phase** is **ceftazidime or meropenem** for at least **10 days**; deep, bone and brain disease runs longer. **Meropenem leads** intensive care hypotension; **ceftazidime suits** stable disease. **Drain reachable pus**; drugs fail closed collections alone. **Cultures repeated** till clearance documented.",
+   "say": "Intensive therapy runs ceftazidime or meropenem for at least ten days, longer for deep abscesses with bone with brain disease. Meropenem leads intensive care cases with hypotension, while ceftazidime suits stable disease. Pus is drained wherever reachable, because drugs alone fail closed collections. Blood cultures are repeated till clearance is documented.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Stable disease, cheaper, longer experience"
+     ],
+     "title": "Ceftazidime"
+    },
+    "right": {
+     "points": [
+      "ICU, hypotension, brain, broader cover"
+     ],
+     "title": "Meropenem"
+    }
+   }
+  },
+  {
+   "tx": "**Eradication** is **cotrimoxazole for 3 to 6 months**; stopping early guarantees relapse. **Doxycycline added** where tolerated. Marrow watched with blood counts on long courses. **Adherence checked** every visit as months defeat many. **Relapse within a year** means resistance or missed foci; workup repeats fully.",
+   "say": "Eradication follows with cotrimoxazole for three to six months, and stopping early guarantees relapse. Doxycycline is added where tolerance allows, while marrow is watched with blood counts. Adherence is checked at every visit because months of tablets defeat most patients. Relapse within a year of stopping means resistance or missed foci, and the whole workup repeats.",
+   "vis": {
+    "cols": [
+     "Phase",
+     "Drugs",
+     "Duration"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Intensive",
+      "Ceftazidime, meropenem",
+      "At least 10 days"
+     ],
+     [
+      "Eradication",
+      "Cotrimoxazole",
+      "3 to 6 months"
+     ],
+     [
+      "Relapse",
+      "Re-image, re-culture",
+      "Longer, broader"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Head to toe abscess hunt** decides duration: chest, abdomen and **prostate imaged**; joints and parotids examined. **Prostatic abscesses** need urology drainage. **Brain lesions** need prolonged intensive cover. **Diabetes, kidneys and liver** optimised alongside. **Undrained pus** explains every failure of therapy.",
+   "say": "Every suspected case is worked up for abscesses from head to toe, because hidden pus decides duration. Contrast imaging of chest with abdomen with prostate finds collections, while joints with parotids are examined clinically. Prostatic abscesses need urology drainage, and brain lesions need prolonged intensive cover. Diabetes with kidney function with liver is optimised alongside antimicrobials.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Culture before cover"
+     },
+     {
+      "id": "b",
+      "label": "Image head to toe"
+     },
+     {
+      "id": "c",
+      "label": "Drain, intensive drugs"
+     },
+     {
+      "id": "d",
+      "label": "Eradicate for months"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Laboratory safety** is treatment: **plates never opened** on benches; reference laboratory confirms identity. **Prolonged incubation** where systems allow. **Serology supports** but never proves. **Request slips warn** laboratories explicitly. **Staff infections** following past exposures are reported and treated fully with cover.",
+   "say": "Laboratory safety is part of treatment, because plate sniffing has infected workers. Suspected plates are never opened on open benches, and the reference laboratory confirms identity with sensitivity. Blood cultures are incubated longer where systems allow, and serology supports but never proves. Clinicians are warning laboratories on the request slip itself.",
+   "vis": {
+    "cols": [
+     "Lab rule",
+     "Why",
+     "How"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Warn on slip",
+      "Staff endangered",
+      "Write suspected bug"
+     ],
+     [
+      "Safety cabinet",
+      "Aerosol risk",
+      "Never sniff plates"
+     ],
+     [
+      "Reference confirm",
+      "Identity, sensitivity",
+      "Send early"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prevention** is boots, wound cover and clean water for mud workers. **Diabetics control sugar** before monsoon. **No vaccine exists**; exposure reduction with early treatment is strategy. **Survivors followed a year** as relapse clusters early after stopping. **Counselling** covers adherence with warning signs.",
+   "say": "Prevention protects farmers who cannot avoid mud, and boots with wound cover with clean water cut inoculation. Diabetics control sugar before monsoon, because high sugar invites sepsis. No vaccine exists yet, so exposure reduction with early treatment is the whole strategy. Survivors are followed for a year, as relapse clusters in the first months after stopping.",
+   "vis": {
+    "cols": [
+     "Shield",
+     "Who",
+     "When"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Boots, covers",
+      "Farmers",
+      "Every monsoon"
+     ],
+     [
+      "Sugar control",
+      "Diabetics",
+      "Before rains"
+     ],
+     [
+      "Early treatment",
+      "All febrile",
+      "Culture first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** stopping at discharge relapses; eradication runs months. **Prostatic abscesses** missed in men explain failure. **Plates never sniffed**; staff infected before. **TB treatment** without cultures misses melioidosis for months. **Serology alone** never proves; cultures decide every time without exception.",
+   "say": "The traps that fail examinations are stopping eradication at discharge, missing prostatic abscesses in men, and sniffing plates in the laboratory. Tuberculosis treatment without cultures is missing melioidosis for months. Diabetes uncontrolled through monsoon invites relapse, and serology alone never proves disease. Every survivor is followed for a year with adherence checked.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Stop at discharge",
+      "Relapse guaranteed",
+      "Months of tablets"
+     ],
+     [
+      "Sniff plates",
+      "Staff infected",
+      "Cabinets only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prognosis** follows speed, drainage and adherence; **bacteraemic diabetics** still die despite perfect cover. **Shock with pneumonia** carries worst odds; localised skin cures fully. **Relapse clusters** in year one; follow up runs 12 months. **Families learn** wound care with fever rules.",
+   "say": "Prognosis follows speed with drainage with adherence, and bacteraemic diabetics still die despite perfect cover. Septic shock with pneumonia carries the worst odds, while localised skin disease cures fully. Relapse clusters in the first year, so follow up continues till twelve months. Families of survivors are learning wound care with fever rules for the next monsoon.",
+   "vis": {
+    "cols": [
+     "Outcome",
+     "Group",
+     "Follow up"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Worst",
+      "Shock, pneumonia",
+      "ICU, long cover"
+     ],
+     [
+      "Best",
+      "Localised skin",
+      "Short, full cure"
+     ],
+     [
+      "Watch",
+      "All survivors",
+      "Twelve months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** wet soil with **diabetics in monsoon** marks risk. **Abscesses anywhere** mark the mimicker. **Safety pin rods** with warned labs diagnose. **Ceftazidime or meropenem** runs at least **10 days**. **Cotrimoxazole 3 to 6 months** eradicates. **Early stopping** relapses.",
+   "say": "For the exam, the facts to lock in are wet soil with diabetics in monsoon, great mimicker with abscesses anywhere, safety pin rods with warned laboratories, ceftazidime or meropenem for at least ten days, and cotrimoxazole for three to six months. Stopping early relapses, prostatic abscesses need drainage, and parotid swelling marks endemic children. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Source",
+      "Wet soil, monsoon",
+      "Farmer, diabetic"
+     ],
+     [
+      "Mimicker",
+      "Abscesses anywhere",
+      "Versus TB, staph"
+     ],
+     [
+      "Lab hint",
+      "Safety pin rods",
+      "Bipolar staining"
+     ],
+     [
+      "Lab rule",
+      "Warn laboratory",
+      "Staff safety"
+     ],
+     [
+      "Intensive",
+      "Ceftazidime, meropenem",
+      "At least 10 days"
+     ],
+     [
+      "Eradication",
+      "Cotrimoxazole months",
+      "3 to 6 months"
+     ],
+     [
+      "Relapse cause",
+      "Early stop",
+      "Adherence"
+     ],
+     [
+      "Child clue",
+      "Parotid swelling",
+      "Endemic zone"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

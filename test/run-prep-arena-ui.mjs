@@ -161,12 +161,13 @@ try {
   ok(await until(`return !!document.querySelector("#pnQotd") && !document.querySelector("#pnQotd").hidden && /Question of the day/.test(document.querySelector("#pnQotd").textContent);`, 8000), "Question of the day shows on a fresh phone (no module cached)");
   ok(await ev(`return PREP_ARENA.enabled();`) === false, "smd_prep_arena=0 turns the Arena off");
   ok(await ev(`return !document.getElementById("pnCompete") && !Array.from(document.querySelectorAll("#smdPrep .pn-h")).some(function(h){return /Compete/.test(h.textContent);});`) === true, "arena off: no Compete section");
-  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === (window_play = await ev(`return !!window.PREP_PLAY;`)) ? "Today's plan|IQoach|Practise|Play|Subjects|Your progress" : "Today's plan|IQoach|Practise|Subjects|Your progress", "home sections (quiet home, 2026-10-10; Play 2026-10-30): Today's plan, My coaching, Practise, Play, Subjects, Your progress");
+  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === (window_play = await ev(`return !!window.PREP_PLAY;`)) ? "Today's plan|Practise|IQoach|Play|Subjects|Your progress" : "Today's plan|Practise|IQoach|Subjects|Your progress", "home sections (quiet home, 2026-10-10; Play 2026-10-30): Today's plan, My coaching, Practise, Play, Subjects, Your progress");
   ok(await ev(`return !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic svg") && !/[A-Z]{3}/.test(document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic").textContent);`) === true, "subject cards carry an SVG icon, not a text monogram");
   await shot("home-off");
   // some local practice so My stats has something to show
   await ev(`var s=PREP._st.store, td=PREP._host.today(); s.mod["ana-gametogenesis"]={t:12,ok:9,last:td}; s.mod["ana-brachial-plexus"]={t:6,ok:2,last:td}; s.days[td]=14; s.days[td-1]=22; s.days[td-3]=9; s.days[td-9]=31; s.mh=[{ts:Date.now()-86400e3,label:"NEET-PG pattern (mini)",marks:96,max:200,n:50}]; PREP._host.save(); return 1;`);
-  await click("#smdPrep [data-act=a-stats]");
+  // My stats lives in the You tab (compact home 2026-11-17).
+  await click("#smdPrep nav .pnv-tab[data-tab=you]"); await until(`return !!document.querySelector("#smdPrep .pn-menu [data-act=a-stats]");`, 4000); await click("#smdPrep [data-act=a-stats]");
   ok(await until(`return /My stats/.test(document.querySelector("#smdPrep .pn-t h1").textContent) && document.querySelectorAll("#smdPrep .pn-days i").length===30;`, 5000), "My stats works with the arena off: 30 day bars");
   ok(await ev(`var t=document.querySelector("#smdPrep .pn-acc").textContent; return /Anatomy/.test(t) && /61%/.test(t);`) === true, "accuracy by subject sums the subject's modules (11 of 18 = 61%)");
   ok(await ev(`var g=document.querySelectorAll("#smdPrep .pn-heat-g i"), lit=document.querySelectorAll("#smdPrep .pn-heat-g i.l1,#smdPrep .pn-heat-g i.l2,#smdPrep .pn-heat-g i.l3,#smdPrep .pn-heat-g i.l4"); return g.length===84 && lit.length===4 && !!document.querySelector("#smdPrep .pn-heat-g i.l2.t") && /4 active days/.test(document.querySelector("#smdPrep .pn-heat").getAttribute("aria-label"));`) === true, "the study calendar: 12 weeks of days, the 4 study days lit, today ringed");
@@ -195,7 +196,7 @@ try {
   ok(await until(`var c=document.getElementById("pnCompete"); return !!c && /Live now, ends in 1\\d:\\d\\d/.test(c.textContent) && /Starts in 2 d/.test(c.textContent);`, 8000), "Compete: live daily sprint with its countdown, weekly test coming: " + await ev(`return (document.getElementById("pnCompete")||{}).textContent;`));
   const cd1 = await ev(`return document.querySelector("#pnCompete [data-cd]").textContent;`); await sleep(1300);
   ok(await ev(`return document.querySelector("#pnCompete [data-cd]").textContent;`) !== cd1, "the countdown ticks");
-  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === (window_play ? "Today's plan|IQoach|Practise|Play|Subjects|Your progress|Compete" : "Today's plan|IQoach|Practise|Subjects|Your progress|Compete"), "home sections (quiet home, 2026-10-10): Today's plan, My coaching, Practise, Subjects, Your progress, then Compete");
+  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === (window_play ? "Today's plan|Practise|IQoach|Play|Subjects|Your progress|Compete" : "Today's plan|Practise|IQoach|Subjects|Your progress|Compete"), "home sections (owner 2026-11-17: Question of the day on top, IQoach after Practise): Today's plan, Practise, My coaching, Play, Subjects, Your progress, then Compete");
   await shot("home");
 
   // ---- consent
@@ -327,14 +328,15 @@ try {
   ok(await until(`return !!document.getElementById("pnCompete");`, 3000), "back from the battle to home");
 
   // ---- stats with the Arena, then leave
-  await click("#smdPrep [data-act=a-stats]");
+  // My stats lives in the You tab (compact home 2026-11-17).
+  await click("#smdPrep nav .pnv-tab[data-tab=you]"); await until(`return !!document.querySelector("#smdPrep .pn-menu [data-act=a-stats]");`, 4000); await click("#smdPrep [data-act=a-stats]");
   ok(await until(`var a=document.getElementById("pnArenaStats"); return !!a && /1255/.test(a.textContent) && /Won/.test(a.textContent);`, 5000), "My stats adds the Arena record");
   ok(await ev(`var r=Array.from(document.querySelectorAll("#pnArenaStats .pn-rec b")).map(function(b){return b.textContent;}).join(","); return r;`) === "1255,3,2,1", "rating 1255, won 3, lost 2, drawn 1 (from player and the battle list)");
   ok(await ev(`return /vs Rohan Mehta/.test(document.getElementById("pnArenaStats").textContent) && /2 right, 1 wrong/.test(document.getElementById("pnArenaStats").textContent);`) === true, "recent battles and event history listed");
   await shot("stats");
   await click("#smdPrep #pnArenaStats [data-act=a-leave]");
   ok(await (async () => { for (let i = 0; i < 30; i++) { if (S.calls.includes("DELETE consent")) return true; await sleep(100); } return false; })() && !S.joined, "Leave the Arena sends DELETE consent");
-  ok(await until(`return !!document.getElementById("pnCompete");`, 3000), "leaving returns home");
+  ok(await until(`return !!document.querySelector("#smdPrep .pn-menu");`, 3000), "leaving returns to You, where My stats was opened");
   await ev(`PREP.close(); return 1;`);
 
   ok(!errors.length, "no uncaught PrepNucleus error" + (errors.length ? ": " + errors.join(" | ") : ""));

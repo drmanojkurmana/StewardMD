@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "shp-acute-liver-failure",
+ "subject": "ss-hepatology",
+ "title": "Acute liver failure: fast necrosis, brain swelling and early transplant call",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e (Acute liver failure)",
+  "AASLD Guidance on Acute Liver Failure 2023",
+  "Sleisenger and Fordtran 11e (Liver failure)"
+ ],
+ "steps": [
+  {
+   "tx": "**Acute liver failure (ALF)** describes catastrophic acute liver damage where clotting collapses, shown by an **international normalized ratio (INR)** generally above **1.5**, and the brain slows with **encephalopathy**. It strikes a liver that was previously healthy, unfolding within about **26** weeks. Injury without brain involvement stays short of failure and follows a different path.",
+   "say": "Acute liver failure always pairs failing clotting with a failing brain, in a previously healthy liver. The international normalized ratio above one point five seals the coagulopathy half. Speed decides much, because fast onset changes both odds and dangers.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Rule", "Why"],
+    "rows": [
+     ["INR above 1.5", "Coagulopathy", "Synthetic failure"],
+     ["Any encephalopathy", "Brain involvement", "Failure, not injury"],
+     ["Within 26 weeks", "No chronic disease", "Defines acute"],
+     ["No prior cirrhosis", "Fresh liver", "Regeneration possible"]
+    ]
+   }
+  },
+  {
+   "tx": "Speed sorts the story: **hyperacute** disease, with encephalopathy within roughly a week or two of jaundice, usually follows **acetaminophen** toxicity or viral hepatitis. Despite dramatic **cerebral edema** risk, these patients often recover spontaneously better than slower subacute forms. Subacute disease, often idiosyncratic drug injury, carries less swelling yet worse transplant free survival. Ask the jaundice to coma interval first.",
+   "say": "The interval between jaundice and coma predicts destiny more than almost any blood test. Fast presentations swell the brain yet heal better, while slower ones quietly fare worse. Measuring that interval shapes every decision that follows.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Hyperacute", "points": ["Coma within days", "Paracetamol or hepatitis", "High edema risk", "Better spontaneous recovery"]},
+    "right": {"title": "Subacute", "points": ["Coma after weeks", "Idiosyncratic drugs", "Less edema", "Worse transplant free survival"]}
+   }
+  },
+  {
+   "tx": "Cause depends on geography: **acetaminophen** overdose and drug injury lead in resource rich settings, while viral **hepatitis B and E** dominate elsewhere. Treatable mimics must be hunted actively: autoimmune hepatitis, **Wilson disease**, mushroom poisoning, vascular outflow block and **HELLP syndrome (haemolysis, elevated liver enzymes, low platelets)** with acute fatty liver of pregnancy. Finding the cause unlocks specific therapy that can save life.",
+   "say": "Geography rewrites the cause list, and several diagnoses respond to treatments beyond supportive care. Autoimmune disease, Wilson disease and pregnancy related failure all carry specific therapies. A rushed aetiology hunt costs lives that treatment could rescue.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cause", "Clue", "Specific therapy"],
+    "rows": [
+     ["Acetaminophen", "Overdose history", "N-acetylcysteine"],
+     ["Autoimmune", "ANA positive", "Steroids, transplant"],
+     ["Wilson disease", "Young, haemolysis", "Transplant early"],
+     ["HELLP, fatty liver", "Pregnancy", "Deliver, support"]
+    ]
+   }
+  },
+  {
+   "tx": "Massive necrosis overwhelms regeneration, so synthetic failure, ammonia accumulation and metabolic collapse arrive together. Ammonia and inflammatory mediators swell astrocytes until **cerebral edema** raises intracranial pressure, the most feared early killer. Systemic inflammation and poor pathogen clearance add circulatory collapse, renal failure and secondary infection, producing full **multiorgan failure**.",
+   "say": "When necrosis outruns regeneration, every liver job fails in the same week. Ammonia makes brain cells swell until intracranial pressure starts to rise. Infection, kidney failure and collapse come to surround the brain injury.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "necrosis", "label": "Massive necrosis"},
+     {"id": "ammonia", "label": "Ammonia rises"},
+     {"id": "edema", "label": "Cerebral edema"},
+     {"id": "organ", "label": "Multiorgan failure"}
+    ],
+    "edges": [["necrosis", "ammonia"], ["ammonia", "edema"], ["edema", "organ"]]
+   }
+  },
+  {
+   "tx": "Bedside warning signs demand action fast. **Hypertension with bradycardia**, pupillary change or posturing signals raised intracranial pressure and needs emergency treatment. **Arterial ammonia** above **200** micromol per litre predicts intracranial hypertension, while below **75** it stays rare. Hypoglycaemia, rising lactate and worsening encephalopathy each escalate the patient toward intensive care and transplant assessment.",
+   "say": "Hypertension with a slow pulse warns of rising brain pressure and never waits for morning rounds. Ammonia above two hundred micromol per litre predicts intracranial hypertension. Glucose and lactate need equal vigilance.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sign", "Threshold", "Action"],
+    "rows": [
+     ["Ammonia high", "Above 200", "Start CRRT early"],
+     ["Ammonia low", "Below 75", "Edema rare"],
+     ["Pressure signs", "Bradycardia", "Emergency bolus"],
+     ["Glucose low", "Any fall", "Correct at once"]
+    ]
+   }
+  },
+  {
+   "tx": "**Prothrombin time** and **INR** anchor diagnosis and prognosis, with a timed **acetaminophen** level and a full toxin history exposing the commonest treatable cause. Viral serologies cover hepatitis A, B, C, D and E, with herpes simplex testing where relevant. Arterial lactate, glucose and **ammonia** guide the brain risk, while platelets and renal function complete the severity picture.",
+   "say": "Clotting tests, the timed paracetamol level and ammonia carry the diagnostic core. Viral serology spans five hepatitis viruses, with herpes testing where suspicion runs high. Lactate and glucose also serve the brain risk assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "inr", "label": "INR plus encephalopathy"},
+     {"id": "toxin", "label": "Paracetamol level"},
+     {"id": "viral", "label": "Viral serologies"},
+     {"id": "cause", "label": "Treatable cause found?"}
+    ],
+    "edges": [["inr", "toxin"], ["toxin", "viral"], ["viral", "cause"]]
+   }
+  },
+  {
+   "tx": "Management is intensive support plus cause specific therapy and early transplant referral. **N-acetylcysteine (NAC)** helps paracetamol poisoning and early grade non-paracetamol failure, continuing until **INR** falls below **1.5** with clinical improvement. Neuroprotection uses head up positioning, avoidance of hyponatraemia and **mannitol** or hypertonic saline for pressure spikes, while **continuous renal replacement therapy (CRRT)** clears ammonia in grade **2** or worse encephalopathy.",
+   "say": "Supportive care holds the line while specific therapy and transplant decisions proceed. N-acetylcysteine continues until clotting recovers and the patient improves. Brain protection, ammonia clearance and glucose control run in parallel.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Therapy", "Target", "Dose cue"],
+    "rows": [
+     ["NAC", "Paracetamol injury", "Until INR below 1.5"],
+     ["Mannitol, saline", "Pressure spike", "Bolus, expert centre"],
+     ["CRRT", "Hyperammonaemia", "Grade 2 or worse"],
+     ["Early transfer", "Deterioration", "Before coma deepens"]
+    ]
+   }
+  },
+  {
+   "tx": "Coagulopathy in ALF is rebalanced, not purely a bleeding tendency, so **INR** guides prognosis rather than routine plasma transfusion. Prophylactic plasma correction hides synthetic recovery and invites volume overload without reducing bleeding safely. Reserve blood products for active bleeding or invasive procedures, judged case by case with the transplant team. Watch glucose, sodium, phosphate and magnesium on a tight schedule.",
+   "say": "The clotting system balances on a knife edge, so the INR alone never justifies routine plasma. Products serve active bleeding or planned procedures rather than numbers. Frequent electrolytes and glucose checks catch the silent collapses.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Do not chase INR", "points": ["Rebalanced clotting", "Hides recovery", "Volume overload risk", "No bleed reduction"]},
+    "right": {"title": "Give products", "points": ["Active bleeding", "Before procedures", "Case by case", "With transplant team"]}
+   }
+  },
+  {
+   "tx": "Infection arrives often and silently, so surveillance beats waiting for obvious sepsis. **Cerebral edema** and raised intracranial pressure dominate early deaths, especially in hyperacute disease. **King college criteria** name transplant candidates, though they miss about a third of deaths; **Model for End Stage Liver Disease (MELD)** predicts better in non-paracetamol failure. Criteria should trigger referral, never delay it.",
+   "say": "Infection arrives without fanfare in this population, so active surveillance prevents disasters. Brain swelling kills early while infection kills later. Prognostic scores have one job only, opening the referral.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "monitor", "label": "Watch brain, infection"},
+     {"id": "king", "label": "King college or MELD"},
+     {"id": "list", "label": "List for graft"},
+     {"id": "support", "label": "ICU organ support"}
+    ],
+    "edges": [["monitor", "king"], ["king", "list"], ["list", "support"]]
+   }
+  },
+  {
+   "tx": "Traps catch even experienced teams. Chasing **INR** with plasma obscures recovery, missing the aetiology misses the cure, and late transfer lets deterioration outrun the ambulance. Hypoglycaemia masquerades as deepening coma, and hyponatraemia feeds brain swelling. Mushroom poisoning and vascular causes hide behind a generic label, so the poisons centre and Doppler studies belong in the early bundle.",
+   "say": "Plasma chasing, late transfer and missed causes form the classic trio of errors. Sugar crashes and low sodium worsen coma in ways that mimic progression. Asking about mushrooms, pregnancy and vessels prevents those misses.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trap", "Effect", "Fix"],
+    "rows": [
+     ["Plasma for INR", "Hides recovery", "Treat bleeding only"],
+     ["Missed cause", "Lost cure", "Hunt actively"],
+     ["Late transfer", "Outrun by decline", "Call early"],
+     ["Low sugar", "Deeper coma", "Check hourly"]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: **INR** above **1.5** plus encephalopathy within **26** weeks without chronic disease defines failure. Ammonia above **200** predicts intracranial hypertension and **CRRT** helps from grade **2**. **NAC** runs until **INR** below **1.5**, and **King college criteria** trigger rather than delay transplant referral.",
+   "say": "The definition, the ammonia cutoffs and the N-acetylcysteine endpoint form the exam core. King college criteria start the referral and never conclude it. Early transfer remains the safest single decision.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Answer"],
+    "rows": [
+     ["INR cutoff", "Above 1.5"],
+     ["Time window", "Within 26 weeks"],
+     ["Ammonia risk", "Above 200"],
+     ["Ammonia safe", "Below 75"],
+     ["NAC endpoint", "INR below 1.5"],
+     ["CRRT grade", "Grade 2 or worse"],
+     ["Top cause rich", "Acetaminophen"],
+     ["Top killer", "Cerebral edema"]
+    ]
+   }
+  }
+ ]
+}

@@ -435,7 +435,9 @@
     function loadRealAnatomy(onProgress) {
       if (!geom || !geom.ingestManifest || !G.fetch) { loadNote = "Offline. Showing the model heart."; return Promise.resolve(false); }
       var native = !!(G.Capacitor && G.Capacitor.isNativePlatform && G.Capacitor.isNativePlatform());
-      var bases = native ? ["https://models.stewardmd.in/atlas3d"] : ["", "https://models.stewardmd.in/atlas3d"];
+      // atlas/3d (manifest + chunks) is on the public media bucket now (tools/atlas-media-sync.mjs);
+      // Pages no longer ships it, so the relative path is only a dev-checkout fallback here.
+      var bases = native ? ["https://media.stewardmd.in", "https://models.stewardmd.in/atlas3d"] : ["https://media.stewardmd.in", "", "https://models.stewardmd.in/atlas3d"];
       function inflate(buf, rawBytes) {
         if (buf.byteLength === rawBytes) return Promise.resolve(buf);
         var stream = new G.Blob([buf]).stream().pipeThrough(new G.DecompressionStream("gzip"));

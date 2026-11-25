@@ -1,0 +1,394 @@
+{
+ "gen": "hand",
+ "minutes": 8,
+ "module": "spu-upper-airway",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e upper airway and bronchiolitis chapters",
+  "International Consensus Statement on Allergy Rhinosinusitis Rhinoscopy"
+ ],
+ "steps": [
+  {
+   "say": "The extrathoracic airway stridulates while intrathoracic disease wheezes. Inspiratory predominance, voice change and rapid onset collapse point outside the chest.",
+   "tx": "**Upper airway obstruction** (blockage above the chest) produces **stridor** (harsh inspiratory noise) while intrathoracic disease wheezes, with voice change and rapid inspiratory collapse pointing outside the chest. **Laryngoscopy** (direct throat view) and **flow volume loops** (breathing curves) localise the lesion, and **computed tomography** (cross sectional scanning) maps extrinsic compression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Inspiratory harsh noise",
+      "Voice and cough changed",
+      "Larynx or trachea lesion"
+     ],
+     "title": "Extrathoracic obstruction"
+    },
+    "right": {
+     "points": [
+      "Expiratory squeaky wheeze",
+      "Asthma like history",
+      "Duration under 2 weeks"
+     ],
+     "title": "Intrathoracic disease"
+    }
+   }
+  },
+  {
+   "say": "Epiglottitis, bacterial tracheitis and subglottic stenosis each present differently at the bedside. Drooling, brassy cough and post intubation history sort the acute from the chronic pattern.",
+   "tx": "**Epiglottitis** (swollen epiglottis) presents with drooling and tripod sitting, **bacterial tracheitis** (infected windpipe) with brassy cough after viral illness, and **subglottic stenosis** (narrowing below cords) with post intubation biphasic stridor. Never instrument a suspected epiglottitis throat outside the operating theatre, since agitation can convert partial block to complete obstruction.",
+   "vis": {
+    "cols": [
+     "Disease",
+     "Bedside clue",
+     "Immediate step"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Epiglottitis",
+      "Drooling, tripod",
+      "Operating theatre airway"
+     ],
+     [
+      "Bacterial tracheitis",
+      "Brassy cough, toxic",
+      "Broad antibiotics, airway"
+     ],
+     [
+      "Subglottic stenosis",
+      "Post intubation stridor",
+      "Laryngoscopy, surgery"
+     ],
+     [
+      "Laryngeal tumour",
+      "Hoarseness over 3 weeks",
+      "Biopsy, imaging"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The variable extrathoracic pattern flattens the inspiratory limb, while fixed obstruction flattens both limbs and intrathoracic disease truncates the expiratory limb. That reading alone wins exam marks.",
+   "tx": "The **flow volume loop** (breathing curve) shows a flattened inspiratory limb in **variable extrathoracic obstruction** (mobile cords, tracheomalacia), flattened inspiratory and expiratory limbs in **fixed obstruction** (stenosis, tumour), and truncated expiratory flow in intrathoracic disease. **Bronchoscopy** (camera airway inspection) confirms dynamics, and that loop reading alone wins examiner marks.",
+   "vis": {
+    "edges": [
+     [
+      "stridor",
+      "loop"
+     ],
+     [
+      "loop",
+      "level"
+     ],
+     [
+      "level",
+      "scope"
+     ],
+     [
+      "scope",
+      "plan"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stridor",
+      "label": "Stridor present"
+     },
+     {
+      "id": "loop",
+      "label": "Flow volume loop"
+     },
+     {
+      "id": "level",
+      "label": "Localise level"
+     },
+     {
+      "id": "scope",
+      "label": "Bronchoscopy dynamics"
+     },
+     {
+      "id": "plan",
+      "label": "Medical or surgical plan"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Small airway diseases hit bronchioles on CT with tree in bud and mosaic attenuation. Asthma bronchiolitis, diffuse panbronchiolitis and obliterative disease separate by exposure and reversibility.",
+   "tx": "**Small airway disease** (bronchiolar inflammation) shows **tree in bud** (branching opacities) and mosaic attenuation on **CT** (chest imaging), with asthma bronchiolitis, **diffuse panbronchiolitis** (chronic sinobronchial disease) and **obliterative bronchiolitis** (scarred airways) separating by exposure and reversibility. Macrolides help panbronchiolitis while inhaled steroids help asthma bronchiolitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Sinusitis plus bronchiectasis",
+      "Macrolide responsive",
+      "Japanese and Korean cases"
+     ],
+     "title": "Diffuse panbronchiolitis"
+    },
+    "right": {
+     "points": [
+      "Post transplant or smoke",
+      "Fixed obstruction, no reversibility",
+      "Immunosuppression mainstay"
+     ],
+     "title": "Obliterative bronchiolitis"
+    }
+   }
+  },
+  {
+   "say": "Upper airway cough syndrome drives much chronic cough through post nasal drip, with reflux cough and asthma cough completing the chronic cough triad in most patients.",
+   "tx": "**Upper airway cough syndrome** (post nasal drip cough) drives much chronic cough, with **reflux cough** (acid triggered) and **asthma cough** (eosinophilic) completing the chronic cough triad in most patients. **ACE inhibitors** (blood pressure medicines) cause dry cough in **5** to **10** percent of users, and steatorrhoea of reflux disease overlaps with allergic rhinitis in a substantial minority.",
+   "vis": {
+    "cols": [
+     "Cause",
+     "Clue",
+     "Trial therapy"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Post nasal drip",
+      "Throat clearing, rhinitis",
+      "Nasal steroids"
+     ],
+     [
+      "Reflux cough",
+      "Post prandial, heartburn",
+      "Acid suppression"
+     ],
+     [
+      "ACE inhibitor",
+      "Dry cough, widow throat",
+      "Switch drug class"
+     ],
+     [
+      "Asthma cough",
+      "Night cough, wheeze",
+      "Inhaled steroid"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Chronic rhinosinusitis with polyps mimics asthma control failure and needs intranasal steroids, saline and surgical referral when medical therapy fails. Allergy testing changes management, not just labelling.",
+   "tx": "**Chronic rhinosinusitis with polyps** (long term swollen sinus tissue) mimics asthma control failure and needs intranasal steroids, saline irrigation and surgical referral when medical therapy fails. **Allergy testing** (skin or blood tests) changes management through avoidance and **immunotherapy** (gradual desensitisation), not merely labelling, and **laryngeal palpation** (voice box examination) finds reflux changes.",
+   "vis": {
+    "edges": [
+     [
+      "cough",
+      "rhinitis"
+     ],
+     [
+      "rhinitis",
+      "nasal"
+     ],
+     [
+      "nasal",
+      "allergy"
+     ],
+     [
+      "allergy",
+      "immunotherapy"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cough",
+      "label": "Chronic cough"
+     },
+     {
+      "id": "rhinitis",
+      "label": "Rhinitis assessed"
+     },
+     {
+      "id": "nasal",
+      "label": "Nasal steroids, saline"
+     },
+     {
+      "id": "allergy",
+      "label": "Allergy testing"
+     },
+     {
+      "id": "immunotherapy",
+      "label": "Consider immunotherapy"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Vocal cord dysfunction causes episodic breathlessness with inspiratory difficulty and normal oxygen, often mislabelled as asthma. Spirometry during an episode, laryngoscopy and speech therapy are the keys.",
+   "tx": "**Vocal cord dysfunction** (paradoxical cord closure) causes episodic breathlessness with inspiratory difficulty and normal oxygen, often mislabelled as asthma with poor steroid response. **Spirometry during an episode** (flattened inspiratory limb), laryngoscopy and **speech therapy** (breathing retraining) are the keys, since continuous oxygen and steroids miss the functional lesion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Inspiratory difficulty",
+      "Normal oxygen, throat tight",
+      "Speech therapy helps"
+     ],
+     "title": "Vocal cord dysfunction"
+    },
+    "right": {
+     "points": [
+      "Expiratory wheeze",
+      "Hypoxaemia possible",
+      "Steroid responsive"
+     ],
+     "title": "Asthma attack"
+    }
+   }
+  },
+  {
+   "say": "Tracheobronchopathia osteoplastica, relapsing polychondritis and amyloidosis narrow the airway from within and outside. Polychondritis loves ears and nose, amyloid loves the heart, and both need biopsy proof.",
+   "tx": "**Tracheobronchopathia osteoplastica** (calcium nodules in airway), **relapsing polychondritis** (cartilage inflammation of ears, nose and airway) and **amyloid** (protein deposition) narrow the airway from within and outside. Polychondritis loves ears and nose while amyloid loves the heart, and **biopsy** (tissue sampling) with **Congo red stain** (protein stain) settles both diagnoses.",
+   "vis": {
+    "cols": [
+     "Disease",
+     "System clue",
+     "Test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Relapsing polychondritis",
+      "Ear, nose, airway flares",
+      "Cartilage biopsy"
+     ],
+     [
+      "Amyloidosis",
+      "Macroglossia, heart disease",
+      "Congo red stain"
+     ],
+     [
+      "Osteoplastica",
+      "Cobblestone airway",
+      "CT calcification"
+     ],
+     [
+      "Granulomatosis",
+      "Sinus, kidney disease",
+      "ANCA and biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Subglottic stenosis suits dilation and laser for short segments and laryngotracheal resection for long disease. Inhaled steroids, treprostinil and roflumilast each have narrow small airway niches.",
+   "tx": "**Laryngotracheal resection** (segment removal with reconstruction) suits **subglottic stenosis** over **2** centimetres while dilation and laser suit short segments, and **treprostinil** (prostacyclin inhalation) helps pulmonary hypertension groups. **Roflumilast** (phosphodiesterase inhibitor) suits chronic bronchitis exacerbators, and inhaled steroids suit asthma bronchiolitis rather than obliterative scarring.",
+   "vis": {
+    "edges": [
+     [
+      "narrow",
+      "scope"
+     ],
+     [
+      "scope",
+      "length"
+     ],
+     [
+      "length",
+      "dilation"
+     ],
+     [
+      "length",
+      "resection"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "narrow",
+      "label": "Stridor, narrow airway"
+     },
+     {
+      "id": "scope",
+      "label": "Scope and CT"
+     },
+     {
+      "id": "length",
+      "label": "Short or long segment"
+     },
+     {
+      "id": "dilation",
+      "label": "Dilation, laser"
+     },
+     {
+      "id": "resection",
+      "label": "Resection if long"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Sleep apnoea links upper airway collapse, obesity and nocturnal hypoxaemia. Apnoea hypopnoea index grades severity, and CPAP reverses day time sleepiness while cardiovascular risk persists.",
+   "tx": "**Sleep apnoea** (upper airway collapse in sleep) links obesity, **nocturnal hypoxaemia** (sleep oxygen drop) and day sleepiness, graded by **apnoea hypopnoea index** (Ahi count) with above **15** events per hour being significant. **CPAP** (continuous positive airway pressure) reverses sleepiness and **bilevel support** suits hypoventilation, but cardiovascular risk persists and needs its own management.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Ahi above 15",
+      "Snoring, witnessed apnoea",
+      "CPAP first line"
+     ],
+     "title": "Obstructive sleep apnoea"
+    },
+    "right": {
+     "points": [
+      "CO2 retention at night",
+      "Bilevel pressure needed",
+      "Weight loss adjunct"
+     ],
+     "title": "Hypoventilation syndrome"
+    }
+   }
+  },
+  {
+   "say": "The upper and small airway high yield items are stridor localisation, flow loop patterns, drooling epiglottitis, ACE cough rate, tree in bud meaning and the Ahi cutoff.",
+   "tx": "Recall **stridor** localisation, **flow volume loop** patterns, drooling **epiglottitis** management in the theatre, **ACE cough** in **5** to **10** percent, tree in bud meaning for small airway disease, **panbronchiolitis** macrolide response, and **apnoea hypopnoea index** above **15**. Dysfunctional cord closure mimics asthma but resists steroids and answers speech therapy.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Value",
+     "Angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Variable extrathoracic loop",
+      "Inspiratory limb flat",
+      "Localisation"
+     ],
+     [
+      "Fixed obstruction",
+      "Both limbs flat",
+      "Stenosis pattern"
+     ],
+     [
+      "ACE cough",
+      "5 to 10 percent",
+      "Cough cause"
+     ],
+     [
+      "Ahi cutoff",
+      "Above 15 events",
+      "Sleep apnoea"
+     ],
+     [
+      "Vocal cord dysfunction",
+      "Speech therapy",
+      "Asthma mimic"
+     ],
+     [
+      "Stenosis surgery",
+      "Resection if over 2 cm",
+      "Length rule"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-pulmonology",
+ "title": "Upper airway and small airway disorders",
+ "v": 1
+}

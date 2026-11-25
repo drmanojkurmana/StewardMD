@@ -666,6 +666,11 @@
     }
 
     host.innerHTML = html;
+    // Shared pictures and animations for this topic from the one Image Library bank (owner 2026-11-23).
+    try {
+      var rail = host.querySelector(".cx-rail");
+      if (window.SMD_IMGLIB && SMD_IMGLIB.strip && rail && rail.parentNode === host) SMD_IMGLIB.strip(host, [d.name], { before: rail });
+    } catch (e) {}
   }
 
   /* ── screen: chapter ─────────────────────────────────────────────────────── */
@@ -4815,22 +4820,19 @@
         haptic("tap"); return;
       }
       case "cx-script-read": {
+        // The app's standard voice (smd-speak.js: Phonon 31M, the system voice until it is ready).
         try {
-          if (window.speechSynthesis) {
-            if (window.speechSynthesis.speaking) {
-              window.speechSynthesis.cancel();
-              toast("Audio paused");
-            } else {
-              var fullTxt = "";
-              var sdat = state.scriptData;
-              if (sdat && sdat.sections) {
-                for (var sdi = 0; sdi < sdat.sections.length; sdi++) fullTxt += sdat.sections[sdi].heading + ". " + sdat.sections[sdi].text + " ";
-              }
-              var utter = new SpeechSynthesisUtterance(fullTxt.substring(0, 1500));
-              utter.rate = 0.95;
-              window.speechSynthesis.speak(utter);
-              toast("Narrating presentation script...");
+          var SP = window.SMD_SPEAK;
+          if (SP && SP.speaking()) { SP.stop(); toast("Audio paused"); }
+          else if (SP) {
+            var fullTxt = "";
+            var sdat = state.scriptData;
+            if (sdat && sdat.sections) {
+              for (var sdi = 0; sdi < sdat.sections.length; sdi++) fullTxt += sdat.sections[sdi].heading + ". " + sdat.sections[sdi].text + " ";
             }
+            SP.unlock();
+            SP.say(fullTxt.substring(0, 1500), { rate: 0.95 }).catch(function () { toast("Speech is not available on this device"); });
+            toast("Narrating presentation script...");
           } else {
             toast("Speech synthesis not supported on this device");
           }

@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-1/schemas/study-list.response.json",
+  "title": "GET /v1/projects/{projectId}/studies response (200)",
+  "description": "Same pagination query as project list (?limit 1-100 default 20, ?cursor). Items use the study-get study shape.",
+  "type": "object",
+  "required": ["studies", "requestId"],
+  "additionalProperties": false,
+  "properties": {
+    "studies": {
+      "type": "array",
+      "items": { "$ref": "study-get.response.json#/properties/study" }
+    },
+    "nextCursor": { "type": "string" },
+    "requestId": { "type": "string" }
+  }
+}

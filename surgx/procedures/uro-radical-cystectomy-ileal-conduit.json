@@ -1,0 +1,262 @@
+{
+  "id": "uro-radical-cystectomy-ileal-conduit",
+  "title": "Radical cystectomy with ileal conduit",
+  "subtitle": "Remove the bladder and nodes, isolate ileum, join the ureters over stents",
+  "system": "urology",
+  "aliases": [
+    "radical cystectomy",
+    "cystoprostatectomy",
+    "anterior exenteration",
+    "ileal conduit",
+    "Bricker conduit",
+    "urinary diversion"
+  ],
+  "estMinutes": 300,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "eau-2025-mibc",
+      "org": "European Association of Urology",
+      "title": "EAU Guidelines on Muscle-invasive and Metastatic Bladder Cancer",
+      "year": 2025,
+      "url": "https://uroweb.org/guidelines/muscle-invasive-and-metastatic-bladder-cancer",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "baus-cons",
+      "org": "British Association of Urological Surgeons",
+      "title": "BAUS procedure-specific patient information and consent guidance",
+      "year": 2024,
+      "url": "https://www.baus.org.uk/patients/information_leaflets/",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Muscle-invasive bladder cancer (after neoadjuvant chemotherapy where suitable), or high-risk non-muscle-invasive disease failing BCG."
+    ],
+    "contraindications": [
+      "Metastatic disease.",
+      "Unfit for major surgery.",
+      "Short bowel or inflammatory bowel disease (choose another segment or diversion)."
+    ],
+    "preparation": [
+      "CT chest, abdomen and pelvis; MDT decision; neoadjuvant chemotherapy considered.",
+      "Stoma siting and counselling by the stoma nurse.",
+      "Consent: high complication rate, bleeding, leak, bowel obstruction, stoma, sexual function, kidney function."
+    ],
+    "positioning": [
+      "Supine with slight Trendelenburg and the table broken, or low lithotomy for women; arms out and padded."
+    ],
+    "equipment": [
+      "Major laparotomy set, vascular clamps, staplers, ureteric single-J stents, fine absorbable sutures, stoma appliance, drains."
+    ],
+    "anatomy": [
+      "Ureters (blood supply runs alongside), bladder pedicles, iliac vessels and nodes, rectum, the urethra; in women the uterus and anterior vaginal wall; terminal ileum and its mesentery."
+    ],
+    "criticalSafety": [
+      "Keep the ureteric blood supply and send ureteric margins if needed.",
+      "Spare the last 15 to 20 cm of terminal ileum."
+    ],
+    "structuresAtRisk": [
+      "Rectum",
+      "Ureteric blood supply",
+      "Iliac vessels",
+      "Obturator nerve",
+      "Terminal ileum"
+    ],
+    "commonErrors": [
+      "Ureters cut too long and ischaemic, or under tension.",
+      "Using the terminal ileum."
+    ],
+    "complications": [
+      "Ileus, bowel leak, urine leak.",
+      "Infection, bleeding, thromboembolism.",
+      "Uretero-ileal stricture, stomal problems."
+    ],
+    "postop": [
+      "Enhanced recovery; stents out at about 10 to 14 days; stoma training.",
+      "Renal function and B12 monitoring long term."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.rc-step-01", "med.surgx.rc-clip-01"],
+      "emphasis": "Stoma, complications and long-term kidney and bowel effects discussed."
+    },
+    {
+      "ref": "step.onco.mdt-check", "media": ["med.surgx.rc-step-02", "med.surgx.rc-clip-02"],
+      "emphasis": "Staging, neoadjuvant chemotherapy and diversion choice confirmed."
+    },
+    {
+      "ref": "step.bowel.stoma-siting", "media": ["med.surgx.rc-step-03", "med.surgx.rc-clip-03"],
+      "emphasis": "The conduit stoma sited in the right iliac fossa by the stoma nurse."
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.rc-step-04", "med.surgx.rc-clip-04"]
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.rc-step-05", "med.surgx.rc-clip-05"]
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.rc-step-06", "med.surgx.rc-clip-06"],
+      "emphasis": "Supine with the table broken and slight Trendelenburg (low lithotomy for women)."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.rc-step-07", "med.surgx.rc-clip-07"]
+    },
+    {
+      "ref": "step.abd.midline", "media": ["med.surgx.rc-step-08", "med.surgx.rc-clip-08"]
+    },
+    {
+      "ref": "step.abd.exploration", "media": ["med.surgx.rc-step-09", "med.surgx.rc-clip-09"]
+    },
+    {
+      "ref": "step.rc.ureters", "media": ["med.surgx.rc-step-10", "med.surgx.rc-clip-10"]
+    },
+    {
+      "ref": "step.onco.nodal-clearance", "media": ["med.surgx.rc-step-11", "med.surgx.rc-clip-11"],
+      "emphasis": "Pelvic lymph node dissection: external iliac, obturator and internal iliac, at least to the common iliac bifurcation."
+    },
+    {
+      "ref": "step.rc.pedicles", "media": ["med.surgx.rc-step-12", "med.surgx.rc-clip-12"]
+    },
+    {
+      "ref": "step.onco.major-vein-injury", "media": ["med.surgx.rc-step-13", "med.surgx.rc-clip-13"],
+      "emphasis": "Bleeding from the dorsal venous complex or iliac veins: press, tell, call."
+    },
+    {
+      "ref": "step.onco.specimen-orientation", "media": ["med.surgx.rc-step-14", "med.surgx.rc-clip-14"],
+      "emphasis": "Bladder (with prostate or uterus) intact, ureteric margins labelled."
+    },
+    {
+      "ref": "step.rc.ileal-segment", "media": ["med.surgx.rc-step-15", "med.surgx.rc-clip-15"]
+    },
+    {
+      "ref": "step.bowel.anastomosis-stapled", "media": ["med.surgx.rc-step-16", "med.surgx.rc-clip-16"],
+      "emphasis": "Restore ileal continuity above the conduit; close the mesenteric window."
+    },
+    {
+      "ref": "step.rc.uretero-ileal", "media": ["med.surgx.rc-step-17", "med.surgx.rc-clip-17"]
+    },
+    {
+      "ref": "step.bowel.stoma-mature", "media": ["med.surgx.rc-step-18", "med.surgx.rc-clip-18"],
+      "emphasis": "Mature the conduit as a spouted stoma at the marked site."
+    },
+    {
+      "ref": "step.uro.stent-register", "media": ["med.surgx.rc-step-19", "med.surgx.rc-clip-19"],
+      "emphasis": "Record both ureteric stents and their removal date."
+    },
+    {
+      "ref": "step.abd.drain", "media": ["med.surgx.rc-step-20", "med.surgx.rc-clip-20"]
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.rc-step-21", "med.surgx.rc-clip-21"]
+    },
+    {
+      "ref": "step.abd.mass-closure", "media": ["med.surgx.rc-step-22", "med.surgx.rc-clip-22"]
+    },
+    {
+      "ref": "step.core.skin-closure", "media": ["med.surgx.rc-step-23", "med.surgx.rc-clip-23"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.rc-step-24", "med.surgx.rc-clip-24"]
+    }
+  ],
+  "steps_local": {
+    "step.rc.ureters": {
+      "id": "step.rc.ureters",
+      "kind": "dissection",
+      "title": "Find and divide the ureters",
+      "why": "Long, healthy ureters with their blood supply are the basis of a good diversion; a cancerous margin must be found now.",
+      "how": [
+        "Find each ureter at the iliac bifurcation and follow it down to the bladder, keeping its adventitia.",
+        "Clip and divide it close to the bladder; send the distal margin for frozen section if indicated.",
+        "Bring the left ureter under the sigmoid mesentery to the right side."
+      ],
+      "structuresAtRisk": [
+        "Ureteric blood supply",
+        "Iliac vessels"
+      ],
+      "pitfalls": [
+        "Stripping the ureter.",
+        "Kinking the left ureter under the mesentery."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.rc.pedicles": {
+      "id": "step.rc.pedicles",
+      "kind": "resection",
+      "critical": true,
+      "title": "Bladder pedicles and removal of the specimen",
+      "why": "Controlling the lateral and posterior pedicles lets the bladder come out with the prostate (men) or the uterus and anterior vaginal wall (women).",
+      "how": [
+        "Divide the lateral pedicles with staplers, sealing device or ties, keeping away from the rectum.",
+        "Develop the plane in front of the rectum, then control the dorsal venous complex and divide the urethra.",
+        "Remove the specimen intact."
+      ],
+      "structuresAtRisk": [
+        "Rectum",
+        "Dorsal venous complex",
+        "Pelvic plexus"
+      ],
+      "pitfalls": [
+        "Entering the rectum.",
+        "Bleeding from the dorsal venous complex."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.rc.ileal-segment": {
+      "id": "step.rc.ileal-segment",
+      "kind": "reconstruction",
+      "title": "Isolate the ileal segment",
+      "why": "A 15 to 20 cm segment with good mesentery, taken away from the terminal ileum, makes a conduit that drains well.",
+      "how": [
+        "Measure about 15 to 20 cm of ileum, starting at least 15 to 20 cm from the ileocaecal valve.",
+        "Transilluminate the mesentery and divide it keeping the arcades to the segment.",
+        "Divide the bowel and place the segment below the restored ileum."
+      ],
+      "structuresAtRisk": [
+        "Terminal ileum",
+        "Mesenteric vessels"
+      ],
+      "pitfalls": [
+        "Using the terminal ileum.",
+        "Devascularising the segment."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.rc.uretero-ileal": {
+      "id": "step.rc.uretero-ileal",
+      "kind": "reconstruction",
+      "title": "Uretero-ileal anastomoses over stents",
+      "why": "Tension-free, well-vascularised joins over stents give the fewest leaks and strictures.",
+      "how": [
+        "Spatulate each ureter and join it to the conduit end-to-side (Bricker) or to each other and the conduit end (Wallace).",
+        "Pass a stent up each ureter into the kidney and out through the conduit.",
+        "Use fine absorbable sutures, mucosa to mucosa; check no tension or twist."
+      ],
+      "structuresAtRisk": [
+        "Ureteric blood supply"
+      ],
+      "pitfalls": [
+        "Tension on the anastomosis.",
+        "Too much ureter left and ischaemic."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

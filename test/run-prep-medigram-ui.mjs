@@ -1,8 +1,8 @@
 /* PrepReels (MediGram) in the REAL app (headless Chrome over CDP), flag smd_prep_medigram ON.
  * What must hold: prep-loader fetches the PrepReels files only with the flag; home shows PrepReels;
- * the feed answers an MCQ (FSRS row written), save/skip/report and the lesson card work, Finish
- * session always shows and returns home; Smart Break (sub-flag) runs a 3-minute timer that only
- * offers a return; no YouTube iframe while the policy flag is off; nothing wider than 390 px.
+ * the reel mixes bank questions, pearls and videos; an answer scores in place and writes FSRS; a video in view
+ * autoplays in the app through the https shim (stubbed here) and never hands off to YouTube; Keep going
+ * and Finish work; Smart Break (sub-flag) runs a timer that only offers a return; nothing wider than 390 px.
  * USAGE: node test/run-prep-medigram-ui.mjs   (CHROME=<path>) */
 import { spawn } from "node:child_process";
 import { freePort } from "./free-port.mjs";
@@ -23,6 +23,18 @@ async function ensureServer() {
 await ensureServer();
 const chrome = spawn(CHROME, ["--headless=new", "--no-sandbox", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`, "--no-first-run", "--no-default-browser-check", "--disable-dev-shm-usage", "--disable-gpu"], { stdio: ["ignore", "ignore", "pipe"] });
 let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
+let shimSilent = false;
+// The shim (stewardmd.in/_site/yt) is stubbed: it posts the same hello the real one does, or stays silent.
+// The live stub also answers the app's commands like the real shim: { smdCmd } in, { smdYt, state, muted } out.
+const shimPage = (silent) => "<!doctype html><body style=background:#000><script>" + (silent ? "" : "var v=(location.search.match(/v=([^&]+)/)||[])[1],st=1,mu=false,t=0;function rep(){parent.postMessage({smdYt:true,v:v,state:st,muted:mu,t:t},'*');}parent.postMessage({clinixYt:true,v:v,shim:'loaded'},'*');rep();addEventListener('message',function(e){var c=e.data&&e.data.smdCmd;if(c==='pause')st=2;if(c==='play')st=1;if(c==='mute')mu=true;if(c==='unmute')mu=false;if(c==='seek')t=Math.max(0,t+(+e.data.by||0));if(e.data&&e.data.smdSim==='pause')st=2;rep();});") + "</script>";
+// Every bank module the reel draws gets a 30-question fixture (the fixture bank only has two real modules); imglearn gets two images.
+const fixtureFor = (u) => {
+  if (/imglearn/.test(u)) return { set: "eye", items: [{ img: "fx.webp", dx: "Fixture diagnosis", finding: "Fixture finding.", deck: "Eye" }, { img: "fx2.webp", dx: "Second diagnosis", deck: "Eye" }] };
+  const mid = (u.match(/\/mcq\/([^/?]+)\.json/) || [, "fx"])[1], items = [];
+  for (let i = 0; i < 30; i++) items.push({ id: mid + "-" + i, q: "Fixture question " + i + " on " + mid + "?", o: ["One", "Two", "Three", "Four"], a: 0, exp: "Fixture explanation " + i + ". More.", kp: i % 2 ? "Pearl " + i + " of " + mid : undefined, t: mid, d: 3, prov: "LIC" });
+  items.push({ id: mid + "-fig", q: "Identify the lesion shown in the image.", o: ["One", "Two", "Three", "Four"], a: 0, exp: "Needs its figure.", t: mid, d: 3, prov: "LIC" });
+  return { topic: mid, items };
+};
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = []; const reqs = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
@@ -34,12 +46,13 @@ try {
   let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
   if (!ver) throw new Error("Chrome did not start: " + chromeErr.slice(-500));
   ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
-  ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } if (m.method === "Network.requestWillBeSent") reqs.push(m.params.request.url); if (m.method === "Runtime.exceptionThrown") { const d = m.params.exceptionDetails; if (/prep|PREP|medigram/i.test(JSON.stringify(d))) errors.push((d.exception && d.exception.description) || d.text); } };
+  ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } if (m.method === "Network.requestWillBeSent") reqs.push(m.params.request.url); if (m.method === "Fetch.requestPaused") { const u = m.params.request.url, isShim = /_site\/yt/.test(u); call("Fetch.fulfillRequest", { requestId: m.params.requestId, responseCode: 200, responseHeaders: [{ name: "Content-Type", value: isShim ? "text/html" : "application/json" }], body: Buffer.from(isShim ? shimPage(shimSilent) : JSON.stringify(fixtureFor(u))).toString("base64") }); } if (m.method === "Runtime.exceptionThrown") { const d = m.params.exceptionDetails; if (/prep|PREP|medigram/i.test(JSON.stringify(d))) errors.push((d.exception && d.exception.description) || d.text); } };
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
+  await call("Fetch.enable", { patterns: ["*stewardmd.in/_site/yt*", "*/mcq/*.json*", "*imglearn/*"].map((u) => ({ urlPattern: u, requestStage: "Request" })) });
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_API="/test/fixtures/prep/api/"; window.SMD_PREP_FLAG_API="/test/fixtures/prep/hidden.json"; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; try{localStorage.setItem("smd_prep_medigram","1");}catch(e){}` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_API="/test/fixtures/prep/api/"; window.SMD_PREP_FLAG_API="/test/fixtures/prep/hidden.json"; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; window.SMD_PREP_VOICE=false; try{localStorage.setItem("smd_prep_medigram","1");}catch(e){}` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
   await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.setItem("smd_prep_medigram","1"); localStorage.removeItem("smd_prep_v1");}catch(e){} return 1;`);
@@ -52,26 +65,125 @@ try {
   ok(await until(`return !!(window.PREP_MEDIGRAM && window.PREP_MG_DATA);`, 20000), "PREP_MEDIGRAM and PREP_MG_DATA loaded");
   ok(reqs.some((u) => /prep-medigram\.js/.test(u)), "prep-loader fetched prep-medigram.js with the flag on");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 20000), "home shows the PrepReels row");
+  // Friends API stubbed (no Firebase user here): one friend, one card a friend sent, sends recorded.
+  await ev(`window.__sent=[]; window.__seen=[]; if (!window.PrepSocial) window.PrepSocial = {}; window.PrepSocial.api = function(m, p, b){ if (p === "friends") return Promise.resolve({ friends: [{ smdId: "SMD-BBBBBB", name: "Bilal K" }] }); if (p === "shares") return Promise.resolve({ shares: [{ id: 7, from: { name: "Asha Rao" }, ref: { k: "q", s: "anatomy", m: "ana-bones-ossification", id: "ana-bones-ossification-3" } }] }); if (p === "shares/seen") { window.__seen.push(b); return Promise.resolve({ ok: true }); } if (p === "share") { window.__sent.push(b); return Promise.resolve({ ok: true }); } return Promise.reject({ status: 404 }); }; return 1;`);
   await click("#smdPrep [data-act=mg-open]");
-  ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-card');`, 8000), "PrepReels feed opens on a card");
-  ok(await ev(`return !!document.querySelector('#smdPrep [data-act=mg-finish]');`) === true, "Finish session is present from the first item");
-  ok(await ev(`return document.querySelectorAll('#smdPrep iframe').length;`) === 0, "no YouTube iframe while the policy flag is off");
-  ok(await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1) o.push(1);}); return o.length;`) === 0, "nothing wider than the 390 px screen");
-  // answer the first MCQ correctly (option A is correct in every fixture MCQ)
-  ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-answer]');`, 8000), "first feed item is an MCQ with options");
-  await click("#smdPrep [data-act=mg-answer][data-k='0']");
-  ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-exp');`, 8000), "answering shows the explanation at once");
-  ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")||"{}"); return Object.keys(s.cards||{}).some(function(k){return k.indexOf("q-")>=0;});`) === true, "the valid answer wrote an FSRS card row");
-  await click("#smdPrep [data-act=mg-save]"); await click("#smdPrep [data-act=mg-report]");
-  await click("#smdPrep [data-act=mg-next]");
-  ok(await until(`return /Item 2 of/.test(document.querySelector("#smdPrep .pn-t p").textContent);`, 8000), "Next moves to item 2");
-  await click("#smdPrep [data-act=mg-skip]");
-  ok(await until(`return /Item 3 of/.test(document.querySelector("#smdPrep .pn-t p").textContent);`, 8000), "Skip moves to item 3 without answering");
-  // finish from mid-feed: always available, summary, Done returns home
-  await click("#smdPrep [data-act=mg-finish]");
-  ok(await until(`return /Session finished|Mission complete/.test(document.querySelector("#smdPrep .pn-mg-h").textContent);`, 8000), "Finish session shows the summary");
+  ok(await until(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length > 5;`, 20000), "PrepReels opens on a reel built from the bank");
+  const kinds = await ev(`var k={}; document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').forEach(function(e){ k[e.classList.contains('vf-q')?'q':e.classList.contains('vf-pearl')?'pearl':e.classList.contains('pn-mg-vid')?'video':e.classList.contains('vf-img')?'img':e.classList.contains('pn-mg-lib')?'lib':e.classList.contains('vf-end')?'end':'lesson']=1; }); return Object.keys(k).sort().join(",");`);
+  ok(/q/.test(kinds) && /video/.test(kinds) && /pearl/.test(kinds) && /end/.test(kinds), "the reel mixes formats (questions, pearls, videos, end card): " + kinds);
+  ok(await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-c').classList.contains('vf-q');`) === true, "the first card is a question");
+  ok(await ev(`var f=document.querySelector('#smdPrep #pnMgFeed .vf-c .pn-mg-from'); return !!f && /Sent by Asha Rao/.test(f.textContent) && /ana-bones-ossification/.test(document.querySelector('#smdPrep #pnMgFeed .vf-c .vf-stem').textContent);`) === true, "a card a friend sent comes first, marked with who sent it");
+  ok(await until(`return window.__seen.length === 1 && window.__seen[0].ids[0] === 7;`, 3000), "and leaves the inbox once shown");
+  ok(await ev(`return [].every.call(document.querySelectorAll('#smdPrep #pnMgFeed .vf-c:not(.vf-end)'), function(c){ return !!c.querySelector('[data-act=mg-like]') && !!c.querySelector('[data-act=mg-share]'); });`) === true, "every card has Like and Share");
+  ok(await ev(`var c=document.querySelectorAll('#smdPrep .pn-mg-lib'); return c.length >= 2 && [].every.call(c, function(x){ return !!x.querySelector('img') && x.querySelector('.vf-stem').textContent.length > 2; });`) === true, "Image Library pictures show in the reel with their title");
+  ok(await ev(`return [].some.call(document.querySelectorAll('#smdPrep .pn-mg-lib'), function(x){ return !!x.querySelector('.pn-mg-cap') || !!x.querySelector('[data-act=mg-lib-art],[data-act=mg-lib-les]'); });`) === true, "they come explained: caption, article or lesson");
+  ok(await ev(`var b=document.querySelector('#pnMgFeed').getBoundingClientRect(); return b.bottom <= innerHeight + 8 && b.height > 300;`) === true, "the reel ends at the bottom of the screen (no card cut off; under 8 px of padding may tuck under)");
+  ok(await ev(`return !/shown in the image/.test(document.querySelector('#pnMgFeed').textContent);`) === true, "questions that need a figure are left out");
+  ok(await ev(`return !document.querySelector('#smdPrep .pn-mg-chip, #smdPrep [data-act=mg-next], #smdPrep [data-act=mg-skip]');`) === true, "no chip rows, Skip or Next before an answer: one card per swipe");
+  const wide = await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1) o.push(e.tagName+"."+String(e.className).slice(0,30)+":"+Math.round(r.right));}); return o.slice(0,4).join(" ");`);
+  ok(wide === "", "nothing wider than the 390 px screen" + (wide ? ": " + wide : ""));
+  const subj = await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-q .pn-eb').textContent;`);
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-answer][data-k='0']");
+  ok(await until(`return !!document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] .vf-why");`, 8000), "answering shows the explanation in place");
+  const top0 = await ev(`return document.querySelector('#pnMgFeed').scrollTop;`);
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-next]");
+  ok(await until(`return document.querySelector('#pnMgFeed').scrollTop > ${top0} + 100;`, 4000), "Next after an answer moves to the next card");
+  await ev(`document.querySelector('#pnMgFeed').scrollTop=0; return 1;`);
+  const n0c = await ev(`return PREP_MEDIGRAM._s().cards.length;`);
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-like]");
+  ok(await until(`var s=PREP_MEDIGRAM._s(); return s.cards.length === ${n0c} + 2 && s.cards[1].more === 1 && s.cards[2].more === 1 && s.cards[1].it._m === s.cards[0].it._m;`, 5000), "Like brings 2 more questions on the same topic right after it");
+  ok(await ev(`var s=PREP._host.store(); return (s.mgtop||[]).some(function(t){ return t.m === PREP_MEDIGRAM._s().cards[0].it._m; }) && /Liked/.test(document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-like]").textContent);`) === true, "the liked topic is remembered for the next batches");
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-save]");
+  ok(await ev(`var s=PREP._host.store(), id=PREP_MEDIGRAM._s().cards[0].it.id; return !!s.bm[id] && Object.keys(s.mgsv||{}).length === 1;`) === true, "Save puts the question in PrepNucleus Bookmarks and the Saved reel");
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-share]");
+  ok(await until(`var p=document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] .pn-mg-share"); return !!p && !!p.querySelector('[data-act=mg-sh-wa]') && !!p.querySelector('[data-act=mg-sh-more]') && !!p.querySelector('[data-act=mg-sh-fr][data-v="SMD-BBBBBB"]') && !!p.querySelector('[data-act=mg-sh-add]');`, 4000), "Share offers WhatsApp, other apps, StewardMD friends and Add a friend");
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-sh-fr]");
+  ok(await until(`var b=window.__sent[0]; return !!b && b.smdId === "SMD-BBBBBB" && b.ref.k === "q" && !!b.ref.id && Object.keys(b).length === 2 && !b.ref.q;`, 3000), "sending to a friend sends a reference only, never the content");
+  ok(await ev(`var v=document.querySelector('#smdPrep .pn-mg-vid'); if(!v) return true; return !!v.querySelector('[data-act=mg-like]');`) === true, "video cards have the actions too");
+  ok(await ev(`return /of 1 right/.test(document.querySelector("#smdPrep .pn-t p").textContent);`) === true, "the bar keeps score");
+  ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")||"{}"); return Object.keys(s.cards||{}).length > 0;`) === true, "the answer wrote an FSRS card row (" + subj + ")");
+  // Video: scrolling a video card into view mounts the https shim (never a direct YouTube embed from the app origin).
+  await ev(`var v=document.querySelector('#smdPrep .pn-mg-vid'), b=document.querySelector('#pnMgFeed'); b.scrollTop=v.offsetTop-b.offsetTop; return 1;`);
+  ok(await until(`var f=document.querySelector('#smdPrep .pn-mg-vid iframe'); return !!f && /^https:\\/\\/stewardmd\\.in\\/_site\\/yt\\?v=[\\w-]{11}&autoplay=1$/.test(f.src);`, 8000), "a video card in view autoplays in the app through the stewardmd.in shim");
+  ok(await ev(`var f=document.querySelector('#smdPrep .pn-mg-vid iframe'), h=f.parentNode, a=f.getBoundingClientRect(), b=h.getBoundingClientRect(); var z=f.currentCSSZoom||1; return Math.abs(a.width-b.width)<2 && Math.abs(a.height-b.height)<2 && Math.abs(z-1)<0.01;`) === true, "the player fills its frame exactly and is not zoomed (iPad layout zoom undone)");
+  const played = await ev(`return document.querySelector('#smdPrep .pn-mg-vid iframe').closest('.pn-mg-vid').getAttribute('data-vid');`);
+  await sleep(6500);
+  ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe') && !document.querySelector('#smdPrep [data-act=mg-yt]');`) === true, "a shim that reports in keeps playing (no fallback)");
+  // Our own controls: pause/play, seek, sound, full screen (YouTube's overlay hides itself on touch screens).
+  const cardSel = "#smdPrep .pn-mg-vid.pn-mg-c:has(iframe)";
+  const ctlOn = `var c=document.querySelector(${JSON.stringify(cardSel)}); return !!c && c.classList.contains('ctlon') && getComputedStyle(c.querySelector('.pn-mg-vctl button')).pointerEvents === 'auto';`;
+  ok(await until(`var c=document.querySelector(${JSON.stringify(cardSel)}); return !!c && !c.classList.contains('ctlon');`, 5000), "the glass controls fade out on their own (3 s)");
+  ok(await ev(`var v=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-vctl")}); var c=getComputedStyle(v); var f=v.parentNode.querySelector('.pn-mg-frame').getBoundingClientRect(); return !v.closest('.pn-mg-frame') && v.getBoundingClientRect().top >= f.bottom - 1 && /blur/.test(c.backdropFilter || c.webkitBackdropFilter || '');`) === true, "the controls are blurred glass under the video, never on it");
+  await ev(`document.querySelector(${JSON.stringify(cardSel + " .pn-mg-vctl")}).click(); return 1;`);
+  ok(await until(ctlOn, 2000), "a tap on the hidden bar's area brings it back");
+  ok(await ev(`var f=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}).getBoundingClientRect(); var e=document.elementFromPoint(f.left+f.width/2, f.top+f.height/2); return !!e && e.tagName === 'IFRAME';`) === true, "nothing covers the player: a tap reaches YouTube's own controls");
+  // A pause made with YouTube's own controls (simulated in the stub) brings our bar up and keeps it while paused.
+  await ev(`document.querySelector(${JSON.stringify(cardSel + " iframe")}).contentWindow.postMessage({ smdSim: 'pause' }, '*'); return 1;`);
+  ok(await until(ctlOn.replace("pointerEvents === 'auto'", "opacity === '1'"), 3000), "a pause from YouTube's controls brings our bar up");
+  await sleep(3500);
+  ok(await ev(`return document.querySelector(${JSON.stringify(cardSel)}).classList.contains('ctlon') && document.querySelector(${JSON.stringify(cardSel + " [data-v=toggle]")}).getAttribute('aria-label') === 'Play';`) === true, "our bar stays while paused and shows Play");
+  await click(cardSel + " [data-act=mg-v][data-v=toggle]");
+  ok(await ev(`var c=document.querySelector(${JSON.stringify(cardSel)}); return !!c && ["back","toggle","fwd","sound"].every(function(v){return !!c.querySelector('[data-act=mg-v][data-v='+v+']');}) && !!c.querySelector('[data-act=mg-fs]');`) === true, "the playing video has back, play/pause, forward, sound and full screen controls");
+  await click(cardSel + " [data-act=mg-v][data-v=toggle]");
+  ok(await until(`return document.querySelector(${JSON.stringify(cardSel + " [data-v=toggle]")}).getAttribute('aria-label') === 'Play';`, 4000), "Pause pauses (the button turns to Play)");
+  await click(cardSel + " [data-act=mg-v][data-v=toggle]");
+  ok(await until(`return document.querySelector(${JSON.stringify(cardSel + " [data-v=toggle]")}).getAttribute('aria-label') === 'Pause';`, 4000), "Play resumes");
+  await click(cardSel + " [data-act=mg-v][data-v=sound]");
+  ok(await until(`return document.querySelector(${JSON.stringify(cardSel + " [data-v=sound]")}).getAttribute('aria-label') === 'Unmute';`, 4000), "Sound mutes and unmutes");
+  await click(cardSel + " [data-act=mg-fs]");
+  ok(await until(`var c=document.querySelector('#smdPrep .pn-mg-fs'); if(!c) return false; var r=c.getBoundingClientRect(); return r.top<=1 && r.left<=1 && r.width>=innerWidth-1 && r.height>=innerHeight-1 && !!c.querySelector('iframe');`, 4000), "Full screen covers the whole screen and keeps the same player");
+  ok(await ev(`var f=document.querySelector('#smdPrep .pn-mg-fs .pn-mg-frame').getBoundingClientRect(); return f.width<=innerWidth+1 && f.bottom<=innerHeight+1 && f.height>100;`) === true, "the full-screen video fits the screen");
+  await sleep(150);
+  ok(await ev(`var f=document.querySelector('#smdPrep .pn-mg-vid iframe'), h=f.parentNode, a=f.getBoundingClientRect(), b=h.getBoundingClientRect(); var z=f.currentCSSZoom||1; return Math.abs(a.width-b.width)<2 && Math.abs(a.height-b.height)<2 && Math.abs(z-1)<0.01;`.replace("'#smdPrep .pn-mg-vid iframe'", "'#smdPrep .pn-mg-fs iframe'")) === true, "in full screen the player fills the screen area exactly (nothing cut)");
+  ok(await ev(`var f=document.querySelector('#smdPrep .pn-mg-fs .pn-mg-frame').getBoundingClientRect(), v=document.querySelector('#smdPrep .pn-mg-fs .pn-mg-vctl').getBoundingClientRect(); return v.top >= f.bottom - 1 && v.bottom <= innerHeight + 1;`) === true, "in full screen our bar sits at the bottom, below the video");
+  ok(await ev(`var e=document.elementFromPoint(innerWidth/2, 30); return !!(e && e.closest('.pn-mg-fs'));`) === true, "nothing (header, tabs) shows over the full-screen video");
+  await evA(`window.PREP.back ? window.PREP.back() : history.back()`);
+  ok(await until(`return !document.querySelector('#smdPrep .pn-mg-fs') && !!document.querySelector('#smdPrep #pnMgFeed') && !!document.querySelector('#smdPrep .pn-mg-vid iframe');`, 4000), "Back leaves full screen first, the video keeps playing in its card");
+  await ev(`var b=document.querySelector('#pnMgFeed'); b.scrollTop=0; return 1;`);
+  ok(await until(`return !document.querySelector('#smdPrep .pn-mg-vid iframe');`, 8000), "swiping away releases the player");
+  ok(await ev(`return !document.querySelector('#smdPrep .pn-mg-vid img');`) === true, "the video poster is a background, so a tap can never open the image zoom viewer");
+  await click("#smdPrep .pn-mg-vid [data-act=mg-play]");
+  ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe');`, 4000), "tapping a video poster plays it in the card");
+  await ev(`var b=document.querySelector("#pnMgFeed"); b.scrollTop=b.scrollHeight; return 1;`);
+  ok(await until(`return !document.querySelector('#smdPrep .pn-mg-vid iframe');`, 4000), "and it stops once the reel settles on another card");
+  // Lesson: plays inline as a story when its card is on screen; tap right = next step, middle = pause.
+  if (await ev(`return !!document.querySelector('#smdPrep .pn-mg-les');`)) {
+    await ev(`var v=document.querySelector('#smdPrep .pn-mg-les'), b=document.querySelector('#pnMgFeed'); b.scrollTop=v.offsetTop-b.offsetTop; return 1;`);
+    ok(await until(`var t=document.querySelector('#smdPrep .pn-mg-les .pn-mg-stx'); return !!t && /Step 1 of/.test(document.querySelector('#smdPrep .pn-mg-les .pn-mg-sn') ? document.querySelector('#smdPrep .pn-mg-les .pn-mg-sn').textContent : '') && t.textContent.length > 40;`, 10000), "a lesson card plays the lesson inline (step 1 text shows)");
+    ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-les .pn-mg-seg.run');`) === true, "its progress bar runs on its own (passive)");
+    await ev(`var s=document.querySelector('#smdPrep .pn-mg-les .pn-mg-story'), r=s.getBoundingClientRect(); s.dispatchEvent(new MouseEvent('click',{bubbles:true,clientX:r.right-10,clientY:r.top+20})); return 1;`);
+    ok(await until(`return /Step 2 of/.test(document.querySelector('#smdPrep .pn-mg-les .pn-mg-sn').textContent);`, 3000), "a tap on the right moves to the next step");
+    await ev(`var s=document.querySelector('#smdPrep .pn-mg-les .pn-mg-story'), r=s.getBoundingClientRect(); s.dispatchEvent(new MouseEvent('click',{bubbles:true,clientX:r.left+r.width/2,clientY:r.top+20})); return 1;`);
+    ok(await until(`return /paused/.test(document.querySelector('#smdPrep .pn-mg-les .pn-mg-sn').textContent);`, 3000), "a tap in the middle pauses it");
+    ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-les [data-act=mg-lesson]') && !!document.querySelector('#smdPrep .pn-mg-les [data-act=mg-les][data-v=listen]');`) === true, "Listen and the full lesson with its quiz are one tap away");
+    await ev(`window.__spoke=[]; var o=window.SMD_SPEAK.say; window.SMD_SPEAK.say=function(t,x){ window.__spoke.push(t); return o.call(this,t,x); }; return 1;`);
+    await click("#smdPrep .pn-mg-les [data-act=mg-les][data-v=listen]");
+    ok(await until(`return window.__spoke.length > 0 && window.__spoke[0].length > 20;`, 4000), "Listen reads the step through the app's standard voice (SMD_SPEAK)");
+    await click("#smdPrep .pn-mg-les [data-act=mg-les][data-v=listen]");
+    ok(await until(`return !window.SMD_SPEAK.speaking();`, 3000), "Stop listening stops the voice");
+    await ev(`var b=document.querySelector('#pnMgFeed'); b.scrollTop=0; return 1;`);
+  } else ok(false, "the reel has a lesson card to play");
+  // End card: Keep going appends a batch, Finish returns home.
+  const n0 = await ev(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length;`);
+  await click("#smdPrep [data-act=mg-more]");
+  ok(await until(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length > ${n0};`, 15000), "Keep going adds more cards");
+  ok(await ev(`return !!document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] .vf-why");`) === true, "earlier answers survive the new batch");
+  ok(await ev(`var k={}, d=0; PREP_MEDIGRAM._s().cards.forEach(function(c){ var x=c.kind+":"+(c.it?c.it.id||c.it.img:c.e?c.e.s:c.videoId||c.mid||c.text); if(k[x]) d++; k[x]=1; }); return d;`) === 0, "nothing repeats across batches");
+  // A silent shim (offline, slow) never hands off to YouTube: the player stays in the card over the poster.
+  shimSilent = true;
+  await ev(`var v=[].filter.call(document.querySelectorAll('#smdPrep .pn-mg-vid'), function(e){ return e.getAttribute('data-vid') !== ${JSON.stringify(played)}; })[0]; var b=document.querySelector('#pnMgFeed'); b.scrollTop=v.offsetTop-b.offsetTop; return 1;`);
+  ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe');`, 8000), "a second video mounts in the app");
+  await sleep(7000);
+  ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe') && !/Play on YouTube/.test(document.querySelector('#pnMgFeed').textContent);`) === true, "a silent shim keeps the in-app player, no YouTube hand-off");
+  shimSilent = false;
   await click("#smdPrep [data-act=mg-done]");
-  ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 8000), "Done returns to the PrepNucleus home");
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 8000), "Finish returns to the PrepNucleus home");
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-saved]');`, 4000), "home shows Saved from PrepReels");
+  await click("#smdPrep [data-act=mg-saved]");
+  ok(await until(`var s=PREP_MEDIGRAM._s(); return !!s && s.mode === "saved" && s.cards.length === 1 && s.cards[0].kind === "q";`, 6000), "the Saved reel shows exactly what was saved");
+  ok(await ev(`return !document.querySelector('#smdPrep [data-act=mg-more]');`) === true, "the Saved reel has no Keep going");
+  await click("#smdPrep [data-act=mg-done]");
+  await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 6000);
   // Smart Break: sub-flag on, 3-minute timer, return offers study (never locks)
   await click("#smdPrep [data-act=mg-open]");
   await until(`return !!document.querySelector('#smdPrep [data-act=mg-mode][data-v=break]');`, 8000);
@@ -80,9 +192,9 @@ try {
   await click("#smdPrep [data-act=mg-break-start][data-v='3']");
   ok(await until(`return /left|Break/.test(document.querySelector("#smdPrep .pn-mg-h").textContent);`, 8000), "break timer is running");
   await click("#smdPrep [data-act=mg-break-return]");
-  ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-card');`, 8000), "Return to study goes back to the feed");
+  ok(await until(`return !!document.querySelector('#smdPrep #pnMgFeed .vf-c');`, 15000), "Return to study goes back to the reel");
   ok(!errors.length, "no uncaught PrepReels error" + (errors.length ? ": " + errors[0] : ""));
-  ok(!reqs.some((u) => /youtube\.com|youtube-nocookie\.com|googleapis\.com\/youtube/.test(u)), "no YouTube or paid API request was made");
+  ok(!reqs.some((u) => /youtube-nocookie\.com|googleapis\.com\/youtube/.test(u)), "no direct YouTube embed or YouTube API request from the app");
   // Sound flag on: the first-party Sound path loads (PREP_SOUND defined) after open.
   reqs.length = 0;   // only this page's requests count for the spotify=0 check
   await call("Page.navigate", { url: BASE + "?prep=1&sound=1&spotify=0" });
@@ -106,7 +218,7 @@ try {
   ok(await ev(`return !!(window.PREP_SOUND && window.PREP_SOUND.isPlaying());`) === true, "Play starts the first-party ambience (playing state)");
   ok(await ev(`return !!(window.PREP_SOUND_WEB && window.PREP_SOUND_WEB.supported() && window.PREP_SOUND_WEB.current());`) === true, "a live WebAudio track backs the playing state");
   await sleep(1500);
-  ok(await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1) o.push(1);}); return o.length;`) === 0, "after a 1500ms settle nothing in #smdPrep is wider than the 390 px screen");
+  ok(await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1 && !e.closest(".pn-strip")) o.push(1);}); return o.length;`) === 0, "after a 1500ms settle nothing in #smdPrep is wider than the 390 px screen");
   // Now Playing card (rs-player-ui): the same card renders ambience in the Sound
   // sheet — play shows pause, progress (elapsed) and the volume control present.
   ok(await ev(`return !!document.querySelector('.pn-sound-sheet .pn-player');`) === true, "Sound sheet shows the shared Now Playing card for ambience");

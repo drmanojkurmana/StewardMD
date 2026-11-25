@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "module": "sgm-autoimmune-encephalitis",
+ "subject": "ss-general-medicine",
+ "title": "Autoimmune encephalitis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Autoimmune encephalitis** is antibody mediated brain inflammation. **Limbic encephalitis** is the commonest pattern in these patients. **Anti NMDA receptor** encephalitis affects young women often. **Anti LGI1 encephalitis** affects older men often. Tumour screening is advised in these patients for paraneoplastic workup during evaluation.",
+   "say": "Autoimmune encephalitis is antibody mediated brain inflammation for immune pattern. Limbic encephalitis is the commonest pattern in these patients for limbic involvement. Anti NMDA receptor encephalitis affects young women often for demographic pattern. Anti LGI1 encephalitis affects older men often for demographic pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Limbic encephalitis",
+     "points": [
+      "Memory loss dominant",
+      "Seizures common",
+      "Hyponatraemia seen",
+      "Tumour association common"
+     ]
+    },
+    "right": {
+     "title": "NMDA encephalitis",
+     "points": [
+      "Psychosis early",
+      "Movement disorder seen",
+      "Ovarian teratoma link",
+      "Young women affected"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hippocampal MRI** shows limbic hyperintensity in these patients. **CSF** shows lymphocytic pleocytosis in these patients. **Antibody testing** confirms diagnosis in these patients. **Tumour screening** is advised in these patients. Tumour screening is advised in these patients for paraneoplastic workup during evaluation today.",
+   "say": "Hippocampal MRI shows limbic hyperintensity in these patients for imaging pattern. CSF is lymphocytic with pleocytosis in these patients for CSF pattern. Antibody testing confirms diagnosis in these patients for antibody confirmation. Tumour screening is advised in these patients for tumour detection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Hippocampal MRI",
+      "Limbic hyperintensity",
+      "Imaging support"
+     ],
+     [
+      "CSF analysis",
+      "Lymphocytic pleocytosis",
+      "Inflammatory pattern"
+     ],
+     [
+      "Antibody testing",
+      "Neuronal antibody positive",
+      "Diagnostic confirmation"
+     ],
+     [
+      "Tumour screening",
+      "Teratoma or lung tumour",
+      "Paraneoplastic workup"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Memory loss** is the early symptom in many patients. **Seizures** affect most limbic encephalitis patients. **Faciobrachial dystonic seizures** mark LGI1 disease. **Hyponatraemia** marks LGI1 disease in many patients. Hyponatraemia marks LGI1 disease in many patients during evaluation period today clearly.",
+   "say": "Memory loss is the early symptom in many patients for presenting pattern. Seizures affect most limbic encephalitis patients for seizure involvement. Faciobrachial dystonic seizures are the mark of LGI1 disease for LGI1 pattern. Hyponatraemia is the mark of LGI1 disease in many patients for metabolic association.",
+   "vis": null
+  },
+  {
+   "tx": "**Steroid pulse** is the first line immunotherapy. **IVIG** is an alternative in these patients. **Plasma exchange** helps severe cases in many patients. **Rituximab** is second line in these patients. Rituximab is second line in these patients during follow-up for refractory control.",
+   "say": "Steroid pulse is the first line immunotherapy for immune suppression. IVIG is an alternative in these patients for alternative therapy. Plasma exchange helps severe cases in many patients for severe disease. Rituximab is second line in these patients for refractory course.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Antibody positive"
+     },
+     {
+      "id": "b",
+      "label": "Steroid pulse first"
+     },
+     {
+      "id": "c",
+      "label": "IVIG as alternative"
+     },
+     {
+      "id": "d",
+      "label": "Rituximab if refractory"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cyclophosphamide** is an option for refractory disease. **Tumour removal** treats paraneoplastic disease effectively. **Ovarian teratoma** should be sought in NMDA cases. **Small cell lung cancer** is linked with Hu disease. Small cell lung cancer is linked with Hu disease during evaluation period today clearly.",
+   "say": "Cyclophosphamide is an option for refractory disease for second line therapy. Tumour removal treats paraneoplastic disease effectively for tumour control. Ovarian teratoma should be sought in NMDA cases for teratoma detection. Small cell lung cancer is linked with Hu disease for Hu association.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antibody",
+     "Tumour",
+     "Pattern"
+    ],
+    "rows": [
+     [
+      "Anti NMDA",
+      "Ovarian teratoma",
+      "Psychosis with movement disorder"
+     ],
+     [
+      "Anti Hu",
+      "Small cell lung cancer",
+      "Sensory neuronopathy"
+     ],
+     [
+      "Anti LGI1",
+      "Thymoma in some",
+      "Faciobrachial seizures"
+     ],
+     [
+      "Anti Ma2",
+      "Testicular tumour",
+      "Limbic encephalitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Psychosis** opens NMDA encephalitis in many patients. **Catatonia** complicates NMDA encephalitis during course. **Dysautonomia** complicates NMDA encephalitis during course. **Hypoventilation** complicates NMDA encephalitis during course. Hypoventilation complicates NMDA encephalitis during course with ventilatory support today. Hypoventilation complicates NMDA encephalitis during course with ventilatory support today clearly.",
+   "say": "Psychosis opens NMDA encephalitis in many patients for opening pattern. Catatonia complicates NMDA encephalitis during course for catatonic pattern. Dysautonomia complicates NMDA encephalitis during course for autonomic pattern. Hypoventilation complicates NMDA encephalitis during course for ventilatory complication.",
+   "vis": null
+  },
+  {
+   "tx": "**CSF** oligoclonal bands are uncommon in these patients. **EEG** shows slowing in these patients. **MRI** is normal in many NMDA cases. **Antibody** testing is the diagnostic standard in these patients. Antibody testing is the diagnostic standard in these patients for diagnostic confirmation today.",
+   "say": "CSF oligoclonal bands are uncommon in these patients for CSF distinction. EEG shows slowing in these patients for EEG pattern. MRI is normal in many NMDA cases for imaging distinction. Antibody testing is the diagnostic standard in these patients for diagnostic confirmation.",
+   "vis": null
+  },
+  {
+   "tx": "**Age** predicts outcomes in these patients. **Early immunotherapy** improves outcomes in these patients. **ICU care** is advised in autonomic instability. **Relapse** occurs in some patients during follow-up. Relapse occurs in some patients during follow-up for relapse monitoring today clearly. Relapse occurs in some patients during follow-up for relapse monitoring today clearly always.",
+   "say": "Age is predictive of outcomes in these patients for outcome determination. Early immunotherapy improves outcomes in these patients for treatment timing. ICU care is advised in autonomic instability for supportive care. Relapse occurs in some patients during follow-up for relapse monitoring.",
+   "vis": null
+  },
+  {
+   "tx": "**Viral encephalitis** is excluded by PCR testing. **Infectious workup** precedes immunotherapy in these patients. **Steroids** worsen infection without exclusion in these patients. **Early testing** prevents harmful immunotherapy in these patients. Early testing prevents harmful immunotherapy in these patients for treatment safety today.",
+   "say": "Viral encephalitis is excluded by PCR testing for viral exclusion. Infectious workup is required before immunotherapy in these patients for safety exclusion. Steroids worsen infection without exclusion in these patients for steroid caution. Early testing prevents harmful immunotherapy in these patients for treatment safety.",
+   "vis": null
+  },
+  {
+   "tx": "**Memory** recovery is slow in these patients. **Seizure control** is advised in these patients. **Rehabilitation** is advised in these patients for recovery. **Follow up** is advised in these patients for monitoring. Follow up is advised in these patients for relapse monitoring during care today.",
+   "say": "Memory recovery is slow in these patients for recovery course. Seizure control is advised in these patients for seizure management. Rehabilitation is advised in these patients for recovery support. Follow up is advised in these patients for relapse monitoring.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on autoimmune encephalitis. Remember LGI1 with faciobrachial seizures, NMDA with teratoma and Hu with small cell cancer. Steroid pulse is the first line with rituximab as the comparator. Limbic MRI hyperintensity with lymphocytic CSF supports the diagnosis.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. LGI1 is the faciobrachial seizures antibody for LGI1 pattern. NMDA is the teratoma antibody for teratoma association. Hu is the small cell cancer antibody for Hu association. Steroid pulse is the first line therapy for immunotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "LGI1 clue",
+      "Faciobrachial seizures with hyponatraemia"
+     ],
+     [
+      "NMDA clue",
+      "Teratoma with psychosis"
+     ],
+     [
+      "Hu clue",
+      "Small cell lung cancer"
+     ],
+     [
+      "First line therapy",
+      "Steroid pulse therapy"
+     ],
+     [
+      "Second line therapy",
+      "Rituximab for refractory disease"
+     ],
+     [
+      "Imaging clue",
+      "Limbic hyperintensity on MRI"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

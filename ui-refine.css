@@ -1,0 +1,83 @@
+/* ui-refine.css: ten small craft details, app-wide (owner 2026-11-18: "apply to whole app", from the store UI hacks list).
+ *
+ * Global and additive, loaded after native-feel.css. It never sets colours, layout or a module's own transform, so no
+ * screen is restyled; it only refines how numbers, headlines, presses and scroll rows behave. Where a hack cannot be
+ * applied safely across 100+ modules by CSS alone, it is a token here for modules to adopt, and said so below.
+ *   1 tabular numbers ......... numeric contexts (tables, inputs, counts, doses, scores, timers, badges)
+ *   2 optical centering ....... play glyphs inside buttons
+ *   3 concentric radius ....... token (--smd-r-in), adopt per module: inner radius cannot be inferred globally
+ *   4 alpha borders ........... <hr> and the --smd-hair token; module borders keep their own tokens
+ *   5 layered shadows ......... tokens --smd-elev-1/2/3 (stacked faint layers)
+ *   6 balanced headlines ...... every heading balances, paragraphs avoid a lone last word
+ *   7 origin-aware popovers ... already app-wide: menu-origin.js + dialog-motion.js (from the tapped button)
+ *   8 strong ease-out ......... already app-wide: smd-motion.js springs; --smd-ease-out token for CSS transitions
+ *   9 masked scroll edges ..... scroll-fade.js marks horizontal scrollers [data-sfade]; the mask fades only the side
+ *                               that has more to scroll
+ *  10 tactile buttons ......... every button sinks a little when pressed (individual `scale`, so a button's own
+ *                               transform, press effect or centring translate is never replaced)
+ * Kill switch: html.no-ui-refine (localStorage smd_ui_refine = "0", inline script in index.html).
+ * Reduced motion: no press scale. Forced colours: no masks. */
+
+:root {
+  /* 4 alpha hairline: darkens whatever is behind it by the same amount, on any surface */
+  --smd-hair: rgb(0 0 0 / 0.12);
+  /* 5 layered elevation: contact + mid + ambient */
+  --smd-elev-1: 0 1px 1px rgb(0 0 0 / 0.04), 0 2px 4px rgb(0 0 0 / 0.04);
+  --smd-elev-2: 0 1px 1px rgb(0 0 0 / 0.05), 0 4px 8px rgb(0 0 0 / 0.05), 0 16px 32px rgb(0 0 0 / 0.06);
+  --smd-elev-3: 0 1px 1px rgb(0 0 0 / 0.05), 0 4px 8px rgb(0 0 0 / 0.05), 0 16px 32px rgb(0 0 0 / 0.07), 0 32px 64px rgb(0 0 0 / 0.08);
+  /* 8 strong ease-out for CSS transitions */
+  --smd-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  /* 3 concentric radius: set --smd-r-out and --smd-pad on the outer box, use --smd-r-in on the inner one */
+  --smd-r-in: max(2px, calc(var(--smd-r-out, 16px) - var(--smd-pad, 0px)));
+}
+body.dark { --smd-hair: rgb(255 255 255 / 0.12); }
+
+/* 1. Tabular numbers: digits share one width, so doses, values, timers and counts line up and never jitter. */
+html:not(.no-ui-refine) :is(table, td, th, input, output, time, progress, meter,
+  [class*="num"], [class*="count"], [class*="stat"], [class*="dose"], [class*="score"], [class*="timer"],
+  [class*="clock"], [class*="badge"], [class*="price"], [class*="qty"], [class*="vital"], [class*="kpi"]) {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 2. Optical centering: a play triangle's mass sits left of its box centre; nudge it right inside its button. */
+html:not(.no-ui-refine) :is(button, [role="button"]):is([aria-label^="Play" i], [aria-label^="Resume" i], [title^="Play" i]) > svg:only-child {
+  translate: 8% 0;
+}
+
+/* 4. Alpha hairline for plain rules. */
+html:not(.no-ui-refine) hr {
+  border: 0;
+  border-top: 1px solid var(--smd-hair);
+}
+
+/* 6. Balanced headlines, and no single orphaned word at the end of a paragraph. */
+html:not(.no-ui-refine) :is(h1, h2, h3, h4, [role="heading"]) {
+  text-wrap: balance;
+}
+html:not(.no-ui-refine) p {
+  text-wrap: pretty;
+}
+
+/* 9. Masked scroll edges: only the side with more content fades (scroll-fade.js keeps data-sfade current). */
+html:not(.no-ui-refine) [data-sfade] {
+  --sfade: 24px;
+  -webkit-mask-image: linear-gradient(to right, var(--sfade-s, #000) 0, #000 var(--sfade), #000 calc(100% - var(--sfade)), var(--sfade-e, #000) 100%);
+          mask-image: linear-gradient(to right, var(--sfade-s, #000) 0, #000 var(--sfade), #000 calc(100% - var(--sfade)), var(--sfade-e, #000) 100%);
+}
+html:not(.no-ui-refine) [data-sfade~="s"] { --sfade-s: transparent; }
+html:not(.no-ui-refine) [data-sfade~="e"] { --sfade-e: transparent; }
+html:not(.no-ui-refine) [data-sfade]:focus-visible { -webkit-mask-image: none; mask-image: none; }
+
+/* 10. Tactile press: the individual `scale` property composes with any transform a button already has, and no
+   transition is set (a button's own transitions stay exactly as they were), so the press is immediate. Only real
+   controls: a class-name match would also catch rows of buttons, which :active would scale as a whole. */
+html:not(.no-ui-refine) :is(button, [role="button"], a.btn):not(:disabled, [aria-disabled="true"], [data-no-press]):active {
+  scale: 0.97;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not(.no-ui-refine) :is(button, [role="button"], a.btn):active { scale: none; }
+}
+@media (forced-colors: active) {
+  html:not(.no-ui-refine) [data-sfade] { -webkit-mask-image: none; mask-image: none; }
+}

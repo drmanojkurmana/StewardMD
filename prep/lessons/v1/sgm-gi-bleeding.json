@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "module": "sgm-gi-bleeding",
+ "subject": "ss-general-medicine",
+ "title": "Gastrointestinal bleeding",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Upper gastrointestinal bleeding** (bleeding proximal to the ligament of Treitz) is usually from peptic ulcers, oesophageal varices, Mallory Weiss tears and erosive gastropathy. About 70% of bleeds are upper in origin, with haematemesis (vomiting of blood) and melaena (black tarry stool) as hallmarks. Lower bleeding from diverticulosis, angioectasia, tumours and piles gives haematochezia (fresh blood per rectum) or melaena if transit is slow. Annual admission for upper bleeding is about 100 per 100000 population. Mortality is 5 to 10% in major bleeds.",
+   "say": "Upper bleeding is bleeding proximal to the ligament of Treitz in the gut. About seventy percent of bleeds are upper in origin, with vomiting of blood and black stool. Lower bleeding gives fresh blood per rectum, or black stool if transit is slow. Annual admission for upper bleeding is about one hundred per hundred thousand people. Mortality is five to ten percent in major bleeds requiring transfusion and intensive care.",
+   "vis": null
+  },
+  {
+   "tx": "Risk factors are **non steroid anti inflammatory drugs** (acid and vessel altering agents), anticoagulants, antiplatelet agents, alcohol, portal hypertension and chronic kidney disease. **Variceal bleeding** (bleeding from dilated oesophageal veins) occurs in cirrhosis with portal pressure above the threshold of 12 mm Hg. Cough, vomiting and straining raise intra abdominal pressure and can trigger mucosal tears. Helicobacter infection increases ulcer bleeding risk. Age above 60 years, coagulopathy and comorbid heart failure worsen outcomes after any major bleed.",
+   "say": "Risk factors are anti inflammatory drugs, anticoagulants, antiplatelet agents and alcohol excess. Variceal bleeding occurs in cirrhosis when portal pressure is above twelve millimetres of mercury. Vomiting and straining raise abdominal pressure and can trigger mucosal tears. Helicobacter infection increases ulcer bleeding risk in many patients. Age above sixty years and coagulopathy worsen outcomes after any major bleed episode.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper bleed clues",
+     "points": [
+      "Vomiting of blood or coffee grounds",
+      "Black tarry stool",
+      "Gastroscope identifies source",
+      "Urea high from blood protein"
+     ]
+    },
+    "right": {
+     "title": "Lower bleed clues",
+     "points": [
+      "Fresh blood per rectum",
+      "Dark red or maroon stool",
+      "Colonoscopy identifies source",
+      "Urea usually normal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bleeding occurs when mucosal barrier failure or vessel rupture overwhelms repair. Acid and pepsin digest an ulcer base until a vessel erodes, causing sudden bleeds. Portal hypertension dilates submucosal veins, which rupture when wall tension exceeds strength. **Mesenteric ischaemia** (poor arterial supply) necroses mucosa and bleeds. Coagulopathy and thrombocytopenia prevent clot stabilisation. Shock follows volume loss greater than 30% of blood volume, then lactate rises and urine output falls. This explains why major bleeds present with cold clammy skin and orthostatic symptoms.",
+   "say": "Bleeding occurs when barrier failure or vessel rupture overwhelms repair of mucosa. Acid and pepsin cause digestion of an ulcer base until a vessel erodes fully. Portal hypertension dilates veins, and rupture occurs when wall tension exceeds strength. Poor arterial supply necroses mucosa and it results in bleeding in those patients. Shock follows major volume loss, and lactate rises while urine output falls over time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ulcer or varix present"
+     },
+     {
+      "id": "b",
+      "label": "Vessel erodes or ruptures"
+     },
+     {
+      "id": "c",
+      "label": "Volume loss over 30 percent"
+     },
+     {
+      "id": "d",
+      "label": "Shock with lactate rise"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classic sign of major bleeding is **postural hypotension** (fall in blood pressure on standing), with tachycardia, pallor and cold peripheries in severe cases. Haematemesis of fresh blood or coffee ground vomitus localises above the stomach outlet. Melaena indicates digested blood for at least 8 hours. Haematochezia with brisk transit can still be upper in origin. **Glasgow Blatchford score** (pre endoscopy risk score) and **Rockall score** (post endoscopy mortality score) stratify risk. Urea rises disproportionately from digested blood protein in upper bleeds.",
+   "say": "The classic sign of major bleeding is postural hypotension with tachycardia and pallor. Vomiting of fresh blood or coffee grounds localises above the stomach outlet. Black tarry stool indicates digested blood for at least eight hours. Fresh blood per rectum can still be upper in origin when transit is brisk. Urea rises from digested blood protein in upper bleeds and helps localisation in practice.",
+   "vis": null
+  },
+  {
+   "tx": "First test is **full blood count** (haemoglobin and platelets) with urea, creatinine and coagulation profile, plus group and cross match. Abdominal examination with rectal examination and nasogastric aspirate helps localisation, though a normal aspirate does not exclude duodenal bleeding. **Upper gastrointestinal endoscopy** (flexible scope examination) is the gold standard for upper bleeding and is both diagnostic and therapeutic. For lower bleeding, colonoscopy is first line when stable. **CT angiography** (contrast vessel imaging) shows brisk arterial bleeding above 0.3 ml per minute. Barium studies have no role in acute bleeding.",
+   "say": "Full blood count with urea and coagulation profile is the first test in bleeding. Group and cross match are needed for transfusion in major bleeds. Nasogastric aspirate helps localisation, though a normal aspirate does not exclude duodenal bleeding. Upper endoscopy is the gold standard and it is both diagnostic and therapeutic. CT angiography shows brisk arterial bleeding, and colonoscopy is first line when stable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Full blood count and urea",
+      "First test and localisation help"
+     ],
+     [
+      "Upper endoscopy",
+      "Gold standard for upper bleed"
+     ],
+     [
+      "Colonoscopy",
+      "First line for stable lower bleed"
+     ],
+     [
+      "CT angiography",
+      "Brisk arterial bleeding over 0.3 ml per minute"
+     ],
+     [
+      "Nasogastric aspirate",
+      "Supportive localisation aid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Resuscitation precedes diagnosis: two large bore cannulae, crystalloids, and transfusion to a haemoglobin target of **7 g/dL** (restrictive strategy). High dose intravenous **pantoprazole** (acid suppressing drug) is given for suspected ulcer bleeding, 80 mg bolus followed by 8 mg per hour infusion for 3 days. Suspected variceal bleeding needs **octreotide** (vasoactive drug) or terlipressin before endoscopy, plus prophylactic antibiotics. Endoscopic therapy uses clips, thermal coagulation or band ligation. Endoscopic adrenaline alone is not recommended for haemostasis in ulcer bleeding.",
+   "say": "Resuscitation is required before diagnosis, with two large bore cannulae and crystalloids. Transfusion target is seven grams per decilitre by a restrictive strategy. High dose intravenous pantoprazole is given for suspected ulcer bleeding. Suspected variceal bleeding needs octreotide or terlipressin before endoscopy. Endoscopic therapy uses clips and thermal coagulation, and adrenaline alone is not recommended alone.",
+   "vis": null
+  },
+  {
+   "tx": "Recent guidelines are clear on thresholds. The **ACG 2021 upper bleeding guideline** (American gastroenterology consensus) recommends restrictive transfusion at 7 g/dL, pre endoscopy proton pump inhibitor, and endoscopy within 24 hours for inpatients. The **ESGE 2021 guideline** (European endoscopy society) endorses a transfusion threshold of 7 g/dL with high dose acid suppression after haemostasis. For varices, nonselective beta blockers plus band ligation prevent recurrence. Platelet transfusion is not routine. Second look endoscopy is reserved for high risk stigmata cases only.",
+   "say": "Recent guidelines are clear on thresholds for transfusion and timing of endoscopy. The American guideline of twenty twenty one says that transfusion is restrictive at seven grams per decilitre. Endoscopy is done within twenty four hours for inpatients with bleeding. The European guideline says that the threshold is similar with acid suppression after haemostasis. For varices, beta blockers plus band ligation prevent recurrence over time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bleeding with instability"
+     },
+     {
+      "id": "b",
+      "label": "Resuscitate, transfuse at 7"
+     },
+     {
+      "id": "c",
+      "label": "High dose IV PPI"
+     },
+     {
+      "id": "d",
+      "label": "Endoscopy within 24 hours"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications of upper bleeding are rebleeding in 10 to 20%, aspiration, acute kidney injury and death in 5 to 10% of major cases. **Rockall score** (mortality prediction score) above 5 predicts mortality over 40%. Variceal rebleeding without prophylaxis exceeds 60% within a year. Dieulafoy lesion (a large submucosal artery) rebleeds frequently and needs angiography. Aortoesophageal fistula is rare but almost always fatal. Prognosis improves with early endoscopy, eradication of Helicobacter, and withdrawal of ulcer causing drugs.",
+   "say": "Complications are rebleeding in ten to twenty percent, aspiration and kidney injury. Mortality is five to ten percent in major cases over admission. Variceal rebleeding without prophylaxis exceeds sixty percent within a year. A large submucosal artery rebleeds frequently and it needs angiography for control. Early endoscopy and drug withdrawal improve prognosis in treated patients over time.",
+   "vis": null
+  },
+  {
+   "tx": "Traps test localisation and thresholds. Fresh blood per rectum with haematemesis is upper in origin, while coffee ground vomitus with fresh rectal blood is also upper. **Nasogastric aspirate** (stomach tube wash) that is normal does not exclude a duodenal source. Endoscopic adrenaline injection alone is insufficient for ulcer haemostasis. Transfusion target is 7 g/dL, not 9 or 10 g/dL, in most upper bleeds. Variceal bleeding needs vasoactive drugs before endoscopy. A urea rise out of proportion to creatinine suggests an upper source in active bleeding.",
+   "say": "Fresh blood per rectum with vomiting of blood is upper in origin. A normal nasogastric aspirate does not exclude a duodenal source in bleeding. Adrenaline injection alone is insufficient for ulcer haemostasis in practice. Transfusion target is seven grams per decilitre, not nine or ten grams. Variceal bleeding needs vasoactive drugs before endoscopy, and urea rise suggests upper source.",
+   "vis": null
+  },
+  {
+   "tx": "Collect the **numbers and scores** asked most often in vivas. Upper bleeds are about 70% of cases, major bleed mortality is 5 to 10%, rebleeding is 10 to 20%, transfusion threshold is 7 g/dL, endoscopy timing is within 24 hours, and CT angiography detects flow above 0.3 ml per minute. Hold the two scores apart: Glasgow Blatchford is pre endoscopy and Rockall is post endoscopy. Eradicate Helicobacter and stop ulcer causing drugs after the acute bleed is controlled.",
+   "say": "Keep the numbers and scores together for viva preparation. Upper bleeds are about seventy percent of cases, and major mortality is five to ten percent. Rebleeding is ten to twenty percent, and transfusion threshold is seven grams per decilitre. Endoscopy is within twenty four hours, and CT detects flow above point three millilitres. Glasgow Blatchford is pre endoscopy, while Rockall is post endoscopy scoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield detail"
+    ],
+    "rows": [
+     [
+      "Share of upper bleeds",
+      "About 70 percent of GI bleeds"
+     ],
+     [
+      "Mortality in major bleed",
+      "5 to 10 percent"
+     ],
+     [
+      "Rebleeding rate",
+      "10 to 20 percent"
+     ],
+     [
+      "Transfusion threshold",
+      "7 g per dl restrictive strategy"
+     ],
+     [
+      "Endoscopy timing",
+      "Within 24 hours for inpatients"
+     ],
+     [
+      "CT angiography detection",
+      "Above 0.3 ml per minute flow"
+     ],
+     [
+      "Pre endoscopy score",
+      "Glasgow Blatchford score"
+     ],
+     [
+      "Post endoscopy score",
+      "Rockall mortality score"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

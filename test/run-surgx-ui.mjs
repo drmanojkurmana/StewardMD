@@ -195,19 +195,313 @@ try {
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   ok(await waitFor("#surgxRoot .sgx-row"), "the procedure index loads");
   await clickText("#surgxRoot .sgx-row", "Appendicectomy");
-  ok(await waitFor("#surgxRoot .sgx-tab"), "the procedure opens with its chapter tabs");
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-tab').length >= 10")) === true,
+  ok(await waitFor("#surgxRoot .sgx-secbtn"), "the procedure opens with its numbered section buttons");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-secbtn').length >= 10")) === true,
     "the fixed chapter set renders");
   ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('Educational reference')")) === true,
     "the educational framing is present and not dismissible");
-  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
   ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step').length >= 10")) === true,
     "the step runner renders the shared + local steps in order");
-  ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('At risk:')")) === true,
+  ok((await ev("!!document.querySelector('#surgxRoot .sgx-step .risk .lb') && /At risk/.test(document.querySelector('#surgxRoot .sgx-step .risk .lb').textContent)")) === true,
     "structures at risk are surfaced on the steps that carry them");
+  ok((await ev("(function () { var st = [].filter.call(document.querySelectorAll('#surgxRoot .sgx-step'), function (x) { return /Peritoneal toilet/.test(x.querySelector('.t').textContent); })[0]; var b = st && [].filter.call(st.querySelectorAll('.w [class^=\"md-\"], li [class^=\"md-\"]'), function (s) { return /^do not$/i.test(s.textContent) && +getComputedStyle(s).fontWeight >= 700; }); return !!(b && b.length); })()")) === true,
+    "BOLD: step text gets the Knowledge Library high-yield bolding ('Do not' is bold in peritoneal toilet)");
+  ok((await ev("(function () { var b = [].map.call(document.querySelectorAll('#surgxRoot .sgx-step li [class^=\"md-\"]'), function (s) { return s.textContent; }); var t = document.querySelector('#surgxRoot .sgx-wrap').textContent; return b.indexOf('90 degrees') >= 0 && b.indexOf('under direct vision') >= 0 && b.indexOf('aloud') >= 0 && t.indexOf('Abduct the arm no more than 90 degrees; pad the ulnar groove') >= 0 && !/&lt;|&amp;|<span/.test(t); })()")) === true,
+    "BOLD: surgical points (90 degrees, under direct vision, aloud) are bold and the step text reads unchanged");
+  ok((await ev("(function () { var t = document.querySelector('#surgxRoot .sgx-step .t'); var l = document.querySelector('#surgxRoot .sgx-step ol.how li b.lead'); return !!t && /SGX Serif|Newsreader/.test(getComputedStyle(t).fontFamily) && !!l && +getComputedStyle(l).fontWeight >= 700; })()")) === true,
+    "ATLAS: step titles are set in the serif and the lead action of a how-line is bold");
+  console.log("   bold coverage:", await ev("(function () { var st = document.querySelectorAll('#surgxRoot .sgx-step'); return [].filter.call(st, function (x) { return x.querySelector('.w [class^=\"md-\"], li [class^=\"md-\"]'); }).length + ' of ' + st.length + ' appendicectomy steps have a bold point'; })()"));
+  ok((await ev("[].slice.call(document.querySelectorAll('#surgxRoot .sgx-embed iframe')).map(function (f) { return (f.closest('.sgx-step') ? 'step' + f.closest('.sgx-step').querySelector('.n').textContent + ':' : '') + f.src.split('v=')[1]; }).join(',')")) ===
+    "step1:IX0DNOBEItE&start=22&end=119,step2:_jE5NgLkTo4&start=92&end=166,step3:pqCD1bVDXvI&start=375&end=463,step4:H7LyCwzaZEo&start=62&end=77,step5:uny6rK8Mbs0&start=238&end=342,step6:Bhm7cCcr1Qc&start=14&end=83,step7:H7LyCwzaZEo&start=94&end=111,step8:fpTqrJVSxpI&start=67&end=72,step9:H7LyCwzaZEo&start=134&end=153,step10:H7LyCwzaZEo&start=154&end=171,step11:zIcHlU-L1-E&end=36,step12:hxnSwIdtagA&start=224&end=293,step13:H7LyCwzaZEo&start=211&end=230,step14:BVeIjWho8kI&start=98&end=111,step15:eUr-Mj2qCgI&end=63,step16:LzfLvDLCD7Y&start=585&end=670,step17:h5D8sU8btyI&start=29&end=51,step18:6OERElPC3EI&start=85&end=185,step19:3HhXz5QhDzw&start=78&end=153,fpTqrJVSxpI,H7LyCwzaZEo",
+    "VIDEO: every step carries a timed clip, the two whole videos follow the steps, all through the stewardmd.in YouTube shim");
+  ok(await waitFor("#surgxRoot .sgx-step .sgx-media img"), "IMAGES: step pictures render");
+  ok((await ev("(function () { var st = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step')); var src = st.map(function (x) { var i = x.querySelector('.sgx-media img'); return i ? i.src : ''; }); if (st.length !== 19 || src.indexOf('') >= 0 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES: each of the 19 appendicectomy steps shows its own picture, and every file loads");
+  // Android's WebView cancels YouTube's own fullscreen, so the app owns it (owner 2026-11-22).
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-embed .sgx-fs').length === document.querySelectorAll('#surgxRoot .sgx-embed').length && document.querySelectorAll('#surgxRoot .sgx-pic .sgx-fs').length === document.querySelectorAll('#surgxRoot .sgx-pic').length")) === true,
+    "FULL SCREEN: every clip and every picture carries a full screen button");
+  await ev("(function () { var b = document.querySelector('#surgxRoot .sgx-embed .sgx-fs'); b.scrollIntoView(); b.click(); return true; })()");
+  await sleep(200);
+  ok((await ev("(function () { var e = document.querySelector('#surgxRoot .sgx-fs-on'); if (!e) return false; var r = e.getBoundingClientRect(); return Math.abs(r.width - innerWidth) < 2 && Math.abs(r.height - innerHeight) < 2 && e.querySelector('.sgx-fs').getAttribute('aria-label') === 'Back to steps'; })()")) === true,
+    "FULL SCREEN: the clip fills the whole phone screen");
+  await ev("window.SMD_SWIPE_BACK.hardwareBack()");
+  await sleep(500);
+  ok((await ev("!document.querySelector('#surgxRoot .sgx-fs-on') && window.SURGX.isOpen() && !!document.querySelector('#surgxRoot .sgx-step')")) === true,
+    "FULL SCREEN: Android back leaves full screen and stays on the steps");
+  await ev("window.SMD_SWIPE_BACK.hardwareBack()");
+  await sleep(500);
+  ok((await ev("window.SURGX.isOpen() && !!document.querySelector('#surgxRoot .sgx-row')")) === true,
+    "BACK: Android back from the steps returns to the procedure list, not the app home");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Laparoscopic cholecystectomy");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 19,
+    "VIDEO batch 2: lap cholecystectomy shows its 19 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img:not([src$=\".gif\"])')).map(function (i) { return i.src; }); if (src.length !== 19 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 2: lap cholecystectomy shows 19 distinct step pictures and every file loads");
+  ok((await ev("(function () { var g = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-pic img[src$=\".gif\"]')).map(function (i) { return i.src; }); if (g.length !== 2) return false; return Promise.all(g.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "GIF: lap cholecystectomy shows its 2 teaching animations (access, critical view) with a full screen button");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Right hemicolectomy");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 23,
+    "VIDEO batch 3: right hemicolectomy shows its 23 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 23 || new Set(src).size !== 23) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 3: right hemicolectomy shows 23 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Total hip replacement");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 22,
+    "VIDEO batch 4: total hip replacement shows its 22 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 22 || new Set(src).size !== 22) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 4: total hip replacement shows all 22 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Ventriculoperitoneal shunt insertion");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 22,
+    "VIDEO batch 5: VP shunt shows its 22 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 22 || new Set(src).size !== 22) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 5: VP shunt shows all 22 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Intravitreal anti-VEGF injection");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 11,
+    "VIDEO batch 7: intravitreal injection shows its 11 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 11 || new Set(src).size !== 11) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 7: intravitreal injection shows all 11 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Kidney transplant");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 21,
+    "VIDEO batch 8: kidney transplant shows its 21 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 21 || new Set(src).size !== 21) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 8: kidney transplant shows its 21 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Robotic radical prostatectomy");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 25,
+    "VIDEO batch 9b: radical prostatectomy shows its 25 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 25 || new Set(src).size !== 25) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 9b: radical prostatectomy shows its 25 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Holmium laser enucleation");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 18,
+    "VIDEO batch 9a: HoLEP shows its 18 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 18 || new Set(src).size !== 18) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 9a: HoLEP shows all 18 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Superficial parotidectomy");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 21 || new Set(src).size !== 21) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 21: superficial parotidectomy shows all 21 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Dynamic hip screw");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 18 || new Set(src).size !== 18) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 22: dynamic hip screw shows all 18 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Small bowel resection with anastomosis");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 22,
+    "VIDEO batch 10: small bowel resection shows its 22 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Laparoscopic inguinal hernia repair");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 22,
+    "VIDEO batch 11: Laparoscopic inguinal hernia repair shows its 22 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Above-knee amputation");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 19,
+    "VIDEO batch 20: Above-knee amputation shows its 19 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Superficial parotidectomy with facial nerve identification");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 21,
+    "VIDEO batch 21: Superficial parotidectomy with facial nerve identification shows its 21 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Modified radical neck dissection");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 22,
+    "VIDEO batch 13: Modified radical neck dissection shows its 22 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Percutaneous nephrolithotomy (PCNL)");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 21,
+    "VIDEO batch 15: Percutaneous nephrolithotomy (PCNL) shows its 21 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Adenoidectomy");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 18 || new Set(src).size !== 18) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 21: adenoidectomy shows all 18 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Transvaginal cervical cerclage (McDonald)");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 15,
+    "VIDEO batch 18: McDonald cerclage shows its 15 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Oesophagectomy (Ivor Lewis principles)");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 22,
+    "VIDEO batch 14: Ivor Lewis oesophagectomy shows its 22 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Open carpal tunnel release");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 19,
+    "VIDEO batch 24: carpal tunnel release shows its 19 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Anterior cervical discectomy and fusion");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 22,
+    "VIDEO batch 25: ACDF shows its 22 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Laparoscopic Nissen fundoplication");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 21,
+    "VIDEO VID1 gap-fill: Nissen fundoplication shows 21 step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Small bowel resection with anastomosis");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 23 || new Set(src).size !== 23) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES IMG1: small bowel resection shows its 23 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Pilonidal sinus excision");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 18 || new Set(src).size !== 18) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES IMG2: pilonidal sinus excision shows its 18 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Laparoscopic common bile duct exploration");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 22 || new Set(src).size !== 22) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES IMG3+4: CBD exploration shows all 22 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Pancreaticoduodenectomy (Whipple)");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 22 || new Set(src).size !== 22) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES IMG4: Whipple shows its 22 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Suprapubic catheter insertion");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 14 || new Set(src).size !== 14) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES IMG5+6: suprapubic catheter shows its 14 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Laparoscopic adrenalectomy");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 21 || new Set(src).size !== 21) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES IMG16: laparoscopic adrenalectomy shows its 21 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Surgical management of miscarriage: manual or electric vacuum aspiration");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 16 || new Set(src).size !== 16) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES IMG9: evacuation of RPOC shows its 16 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Phacoemulsification");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\\\"_site/yt?v=\\\"]').length")) === 20,
+    "VIDEO batch 6: phaco shows its 20 step clips through the shim");
+  ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 20 || new Set(src).size !== 20) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
+    "IMAGES batch 6: phaco shows all 20 distinct step pictures and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Appendicectomy");
+  await waitFor("#surgxRoot .sgx-secbtn");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
+  await sleep(300);
 
-  await clickText("#surgxRoot .sgx-tab", "Anatomy");
+  await clickText("#surgxRoot .sgx-secbtn", "Anatomy");
   await sleep(300);
   ok((await ev("!!document.querySelector('#surgxRoot .sgx-media svg')")) === true,
     "LICENCE GATE: a self-authored inline diagram renders");
@@ -215,7 +509,7 @@ try {
     "and it is attributed");
 
   /* ── 5. THE LICENCE GATE, the other way ────────────────────────────────── */
-  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await clickText("#surgxRoot .sgx-secbtn", "Steps");
   await sleep(300);
   ok((await ev("!document.querySelector('#surgxRoot .sgx-media.pending')")) === true,
     "ALL ON: smd_surgx_uncleared_media defaults ON (owner 2026-09-28), so no 'visual pending' placeholder is shown");
@@ -290,8 +584,43 @@ try {
     const procs = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
     ok(procs.some((t) => /Tonsillectomy/i.test(t)), "SPEC: the ENT filter is shared with Procedures and shows tonsillectomy");
     await clickText("#surgxRoot .sgx-row", "Tonsillectomy");
-    ok(await waitFor("#surgxRoot .sgx-tab"), "SPEC: a new-specialty procedure opens with its chapters");
+    ok(await waitFor("#surgxRoot .sgx-secbtn"), "SPEC: a new-specialty procedure opens with its chapters");
     await clickText("#surgxRoot .sgx-spec .sgx-chip", "All");
+  }
+  // Eye operations (2026-11-21): the Ophthalmology chip lists the 13 operations and one opens with the shared eye steps.
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await sleep(500);
+  {
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "Ophthalmology");
+    await sleep(300);
+    const eye = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
+    ok(eye.length === 13 && eye.some((t) => /Phacoemulsification/.test(t)) && eye.some((t) => /small-incision/i.test(t)),
+      `EYE: the Ophthalmology filter lists the 13 eye operations (${eye.length})`);
+    await clickText("#surgxRoot .sgx-row", "Phacoemulsification");
+    await waitFor("#surgxRoot .sgx-secbtn");
+    await clickText("#surgxRoot .sgx-secbtn", "Steps");
+    await sleep(300);
+    const st = await ev("[...document.querySelectorAll('#surgxRoot .sgx-step')].map(e => e.textContent)");
+    ok(st.length === 20 && st.some((t) => /Povidone-iodine 5%/.test(t)) && st.some((t) => /posterior capsule rupture/i.test(t)),
+      `EYE: phaco opens with its 20 steps, the shared eye steps included (${st.length})`);
+  }
+  // Urology completed (2026-11-21): 26 operations; HoLEP opens with its 18 steps including the shared urine check.
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await sleep(500);
+  {
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "Urology");
+    await sleep(300);
+    const uro = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
+    ok(uro.length === 26 && uro.some((t) => /HoLEP/.test(t)) && uro.some((t) => /Vasectomy/i.test(t)),
+      `URO: the Urology filter lists the 26 operations (${uro.length})`);
+    await clickText("#surgxRoot .sgx-row", "Holmium laser enucleation");
+    await waitFor("#surgxRoot .sgx-secbtn");
+    await clickText("#surgxRoot .sgx-secbtn", "Steps");
+    await sleep(300);
+    const st = await ev("[...document.querySelectorAll('#surgxRoot .sgx-step')].map(e => e.textContent)");
+    ok(st.length === 18 && st.some((t) => /Sterile urine before instrumentation/.test(t)) && st.some((t) => /full bladder/i.test(t)),
+      `URO: HoLEP opens with its 18 steps (${st.length})`);
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "All").catch(() => {});
   }
   await ev("(() => { const S = window.SMD_SURGX_SCREENS._state(); S.spec = ''; S.find = ''; return true; })()");
 

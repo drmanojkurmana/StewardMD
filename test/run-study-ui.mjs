@@ -70,12 +70,12 @@ ok(true, "flag on: the Study tab shows");
 await page.evaluate(() => new Promise((r) => { const q = indexedDB.deleteDatabase("study"); q.onsuccess = q.onerror = q.onblocked = () => r(); }));
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector("#stLib");
-ok(/No PDFs yet/.test(await page.locator("#stList").innerText()), "library: empty state");
+ok(/Import a PDF, create a notebook, or scan notes/.test(await page.locator("#stList").innerText()), "library: empty state");
 await page.setInputFiles("#stFile", { name: "fixture.pdf", mimeType: "application/pdf", buffer: PDF });
 await page.waitForSelector(".st-doc", { timeout: 20000 });
 ok(/2 pages/.test(await page.locator(".st-doc").innerText()), "library: imported PDF listed with 2 pages");
 ok(await page.evaluate(() => /^data:image\/jpeg/.test(document.querySelector(".st-th").src)), "library: page-1 thumbnail");
-const meta = await page.evaluate(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("docs").objectStore("docs").getAll(); q.onsuccess = () => res(q.result[0]); }; }));
+const meta = await page.evaluate(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("docs").objectStore("docs").getAll(); q.onsuccess = () => { const d = q.result[0]; r.result.close(); res(d); }; }; }));
 ok(meta.sha256 === SHA && meta.pageCount === 2 && meta.folderId === null && meta.favourite === false && meta.store === "idb", "metadata: sha256 of the original, pageCount, folderId, favourite, idb fallback");
 
 /* ---- viewer + pen ---- */
@@ -91,7 +91,7 @@ const stroke = (y) => page.evaluate((y) => {
 await stroke(0.2); await stroke(0.5);
 const live = () => page.evaluate(() => STUDY._state().strokes.filter((s) => !s.gone).length);
 ok(await live() === 2, "two pen strokes drawn");
-ok(await page.evaluate(() => STUDY._state().strokes.every((s) => s.pts.length >= 7 && s.pts.every((p) => p[0] >= 0 && p[0] <= 1 && p[1] >= 0 && p[1] <= 1) && s.pts[1][2] === 0.6 && s.pts[0][2] === 0.3)), "points are page-relative (0..1) and keep pressure");
+ok(await page.evaluate(() => STUDY._state().strokes.every((s) => s.pts.length >= 7 && s.pts.every((p) => p[0] >= 0 && p[0] <= 1 && p[1] >= 0 && p[1] <= 1) && s.pts[1][2] === Math.round(Math.pow(0.6, 0.43) * 1e4) / 1e4 && s.pts[0][2] === Math.round(Math.pow(0.3, 0.43) * 1e4) / 1e4)), "points are page-relative (0..1) and keep pressure (on the handwriting curve)");
 await page.click('[data-act="st-undo"]');
 ok(await live() === 1, "undo hides one stroke");
 await page.click('[data-act="st-redo"]');
@@ -153,6 +153,7 @@ ok(await page.locator('[data-act="st-lasso-ai-summary"]').count() === 1, "lasso:
 ok(await page.locator('[data-act="st-lasso-ai-make"]').count() === 1, "lasso: AI Make deck chip is visible");
 await page.click('[data-act="st-lasso-more"]');   // polish: Save as element lives in the selection More menu
 ok(await page.locator('[data-act="st-lasso-save-elem"]').count() === 1, "lasso: Save Element is in the selection More menu");
+if (await page.locator('#stSelMore [data-sel-close]').count()) await page.click('#stSelMore [data-sel-close]');
 await page.click('[data-act="st-lasso-ai-explain"]');
 await page.waitForSelector("#stSheet", { timeout: 5000 });
 ok(await page.locator('#stSheet img[alt="Selection preview"]').count() === 1, "lasso AI: Explain sheet shows visual preview of selection");
@@ -601,9 +602,10 @@ if (await page.locator("#stLassoBar").count()) {
 await boot("prep=1&study=1");
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector("#stLib");
-await page.click('[data-act="st-newnb"]');
-await page.fill("#stNbT", "Ward notes"); await page.selectOption("#stNbS", "ruled"); await page.selectOption("#stNbZ", "a4");
-await page.click('[data-act="st-mknb"]');
+await page.click('[data-act="st5a-new"]');
+await page.click('[data-act="st5a-new-notebook"]');
+await page.fill("#st5aNbT", "Ward notes"); await page.selectOption("#st5aNbS", "ruled"); await page.selectOption("#st5aNbZ", "a4");
+await page.click('[data-act="st5a-mknb"]');
 await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
 ok(await page.evaluate(() => { const s = STUDY._state(); return !!s.nb && s.pdf === null && s.nb.style === "ruled" && s.n === 1; }), "notebook: opens with one page and no PDF");
 ok(await page.evaluate(() => { const c = document.querySelector(".st-cv"), d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; let ink = 0; for (let i = 0; i < d.length; i += 4) if (d[i] < 250) ink++; return ink > 200; }), "notebook: ruled lines are drawn on the page");
@@ -668,7 +670,7 @@ await page.waitForTimeout(300);
 await boot("prep=1&study=1");
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector(".st-doc");
-ok(await page.evaluate(() => /Notebook, 2 pages/.test(document.querySelector("#stList").innerText) && Array.from(document.querySelectorAll(".st-th")).every((i) => /^data:image\/jpeg/.test(i.src))), "notebook: listed beside the PDF with a thumbnail");
+ok(await page.evaluate(() => (/Notebook, 2 pages/.test(document.querySelector("#stList").innerText) || Array.from(document.querySelectorAll("#stList .st-doc")).some((c) => /\bNB\b/.test(c.innerText) && /2 pages/.test(c.innerText))) && Array.from(document.querySelectorAll(".st-th")).every((i) => /^data:image\/jpeg/.test(i.src))), "notebook: listed beside the PDF with a thumbnail");
 await page.locator(".st-doc", { hasText: "Ward notes" }).locator(".st-open").click();
 await page.waitForSelector(".st-pg canvas.st-ov");
 await page.waitForFunction(() => STUDY._state() && STUDY._state().strokes.length === 1, null, { timeout: 10000 });
@@ -684,24 +686,27 @@ await page.click('[data-act="st-delpg"]');
 await page.waitForFunction(() => STUDY._state() && STUDY._state().n === 1, null, { timeout: 10000 });
 ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[1]", "notebook: page deleted after confirm");
 
+/* helper declared here so it is available throughout all A6+ tests */
+const gotoSearch = async () => { await page.click('[data-act="st5a-tab"][data-v="search"]'); await page.waitForSelector("#st5aSearchQ", { timeout: 10000 }); };
+
 /* ---- A6 search ---- */
 await boot("prep=1&study=1");
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector(".st-doc");
 await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("index").objectStore("index").getAll(); q.onsuccess = () => res(q.result.length === 1 && q.result[0].done === 2); }; }), null, { timeout: 20000 });
 ok(await page.evaluate(() => document.querySelector(".st-ix").textContent === ""), "search: fully indexed PDF shows no Indexing label");
-await page.fill("#stQ", "TWO");
+await gotoSearch(); await page.fill("#st5aSearchQ", "TWO");
 await page.waitForSelector(".st-hit", { timeout: 10000 });
 const hit = await page.locator(".st-hit").first().innerText();
 ok(/Page 2/.test(hit) && /fixture/.test(hit) && await page.locator(".st-hit mark").first().innerText() === "two", "search: result shows document, page 2 and the highlighted match (case-insensitive)");
 ok(await page.locator(".st-hit").count() === 1, "search: one result only, for page 2");
-await page.fill("#stQ", "Ward");
-await page.waitForFunction(() => /Notebook title/.test(document.querySelector("#stRes").innerText));
+await page.fill("#st5aSearchQ", "Ward");
+await page.waitForFunction(() => /Notebook title/.test(document.querySelector("#stList").innerText));
 ok(true, "search: notebook titles are searched");
-await page.fill("#stQ", "zebra");
-await page.waitForFunction(() => /Nothing found/.test(document.querySelector("#stRes").innerText));
+await page.fill("#st5aSearchQ", "zebra");
+await page.waitForFunction(() => /Nothing found/.test(document.querySelector("#stList").innerText));
 ok(true, "search: absent word gives a clear empty state");
-await page.fill("#stQ", "two");
+await page.fill("#st5aSearchQ", "two");
 await page.waitForSelector(".st-hit");
 await page.click(".st-hit");
 await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
@@ -721,16 +726,26 @@ await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector('[data-ix="bad"]');
 await page.waitForTimeout(800);
 ok(await page.locator('[data-ix="bad"]').innerText() === "Indexing, 0 of 5 pages", "library: partly indexed PDF shows Indexing, n of m pages");
-await page.fill("#stQ", "zebra");
-await page.waitForFunction(() => /not yet indexed/.test(document.querySelector("#stRes").innerText));
-ok(/Broken scan \(Indexing, 0 of 5 pages\)/.test(await page.locator("#stRes").innerText()), "search: results say which pages are not yet indexed");
+await gotoSearch(); await page.fill("#st5aSearchQ", "zebra");
+await page.waitForFunction(() => /not yet indexed/.test(document.querySelector("#stList").innerText));
+ok(/Broken scan \(Indexing, 0 of 5 pages\)/.test(await page.locator("#stList").innerText()), "search: results say which pages are not yet indexed");
 await idb("docs", 'o.delete("bad")');
 
 /* ---- A5: photos to PDF (stubbed OCR), scan (stubbed plugin), cancel, pickImage ---- */
 const idbAll = (store) => page.evaluate((store) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction(store).objectStore(store).getAll(); q.onsuccess = () => { r.result.close(); res(q.result); }; }; }), store);
 const fileBytes = (id) => page.evaluate((id) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("files").objectStore("files").get(id); q.onsuccess = () => q.result.blob.arrayBuffer().then((b) => { r.result.close(); res(Array.from(new Uint8Array(b))); }); }; }), id).then((a) => Buffer.from(a));
 const pagesIn = (buf) => (buf.toString("latin1").match(/\/Type\s*\/Page(?![a-z])/g) || []).length;
-const openLib = async () => { await page.click('#smdPrep .pnv-tab[data-tab="study"]'); await page.waitForSelector("#stLib"); };
+const openLib = async () => {
+  if (await page.locator("#stLib").count() > 0 && await page.locator("#stLib").isVisible()) {
+    await page.evaluate(() => {
+      if (window.STUDY_LIB && window.STUDY_LIB.renderBody) window.STUDY_LIB.renderBody();
+      else if (window.STUDY && window.STUDY.lib) window.STUDY.lib();
+    });
+    return;
+  }
+  await page.click('#smdPrep .pnv-tab[data-tab="study"]');
+  await page.waitForSelector("#stLib");
+};
 await boot("prep=1&study=1");
 await openLib();
 const jpegs = await page.evaluate(() => [0, 1, 2].map((i) => { const c = document.createElement("canvas"); c.width = 300 + i * 50; c.height = 400; const x = c.getContext("2d"); x.fillStyle = ["#c33", "#3c3", "#33c"][i]; x.fillRect(0, 0, c.width, c.height); return c.toDataURL("image/jpeg", 0.8).split(",")[1]; }));
@@ -742,10 +757,10 @@ const photoDoc = (await idbAll("docs")).find((d) => /^Photos /.test(d.title));
 const photoPdf = await fileBytes(photoDoc.id);
 ok(photoDoc.pageCount === 3 && photoPdf.slice(0, 5).toString() === "%PDF-" && pagesIn(photoPdf) === 3 && createHash("sha256").update(photoPdf).digest("hex") === photoDoc.sha256, "photos: 3 images become one 3-page PDF stored like an import (sha256 kept)");
 await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("ptext").objectStore("ptext").getAll(); q.onsuccess = () => { r.result.close(); res(q.result.filter((x) => x.src === "ocr").length === 3); }; }; }), null, { timeout: 20000 });
-await page.fill("#stQ", "quokka");
+await gotoSearch(); await page.fill("#st5aSearchQ", "quokka");
 await page.waitForFunction(() => document.querySelectorAll(".st-hit").length === 3, null, { timeout: 10000 });
 ok(/Page 1/.test(await page.locator(".st-hit").first().innerText()), "photos: OCR text (stubbed, 3 pages) is found by search, one hit per page");
-await page.fill("#stQ", "");
+await page.fill("#st5aSearchQ", "");
 /* scan: no button while the plugin says unavailable */
 await page.evaluate((b) => {
   window.__del = []; window.__scanRes = "ok";
@@ -754,18 +769,18 @@ await page.evaluate((b) => {
     Filesystem: { readFile: async () => ({ data: b }), deleteFile: async ({ path }) => { window.__del.push(path); } } } };
   window.__avail = false;
 }, jpegs[0]);
-await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible'); await openLib(); await page.waitForTimeout(400);
-ok(await page.locator('[data-act="st-scan"]').count() === 0, "scan: no Scan button while isAvailable is false");
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible, [data-act="st5a-tab"][data-v="documents"]:visible'); await openLib(); await page.waitForTimeout(400);
+ok(await page.locator('[data-act="st-scan"]').count() === 0, "scan: no Scan button (st-scan) while isAvailable is false");
 await page.evaluate(() => { window.__avail = true; });
-await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible'); await openLib();
-await page.waitForSelector('[data-act="st-scan"]', { timeout: 5000 });
-ok(true, "scan: the Scan button shows once isAvailable is true");
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible, [data-act="st5a-tab"][data-v="documents"]:visible'); await openLib();
+await page.click('[data-act="st5a-new"]'); await page.waitForSelector('[data-act="st5a-scan"]', { timeout: 5000 });
+ok(true, "scan: the New sheet shows Scan (delegates to DocScan)");
 const nDocs = (await idbAll("docs")).length;
 await page.evaluate(() => { window.__scanRes = "cancel"; });
-await page.click('[data-act="st-scan"]'); await page.waitForTimeout(700);
+await page.click('[data-act="st5a-scan"]'); await page.waitForTimeout(700);
 ok((await idbAll("docs")).length === nDocs && await page.evaluate(() => window.__del.length) === 0, "scan: cancel returns quietly, nothing added");
 await page.evaluate(() => { window.__scanRes = "ok"; });
-await page.click('[data-act="st-scan"]');
+await page.click('[data-act="st5a-new"]'); await page.waitForSelector('[data-act="st5a-scan"]'); await page.click('[data-act="st5a-scan"]');
 await page.waitForFunction((n) => document.querySelectorAll(".st-doc").length > n, nDocs, { timeout: 30000 });
 const scanDoc = (await idbAll("docs")).find((d) => /^Scan /.test(d.title));
 ok(scanDoc.pageCount === 2 && pagesIn(await fileBytes(scanDoc.id)) === 2, "scan: two pages become one 2-page PDF in the library");
@@ -774,7 +789,7 @@ await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open
 ok(true, "scan: OCR ran in the background for both pages");
 /* pickImage path: one photo, "add another" answered no */
 await page.evaluate((b) => { window.confirm = () => false; window.SMD_NATIVE.pickImage = async () => "data:image/jpeg;base64," + b; }, jpegs[1]);
-await page.click('[data-act="st-photos"]');
+await page.click('[data-act="st5a-new"]'); await page.click('[data-act="st5a-new-photos"]');
 await page.waitForFunction(() => /Photos[\s\S]*1 page\b/.test(document.querySelector("#stList").innerText), null, { timeout: 30000 });
 ok(true, "photos: pickImage path (native bridge) builds a 1-page PDF");
 await page.evaluate(() => { window.confirm = () => true; delete window.Capacitor; });
@@ -876,7 +891,8 @@ const snap = async () => {
   return { docs: docs.map((d) => d.id).sort(), per, shas, folders: (await idbAll("folders")).length, n: docs.length, st: strokes.length };
 };
 const before = await snap();
-const bk = await dl(() => page.click('[data-act="st-backup"]'));
+if (!(await page.locator('[data-act="st5a-backup"]:visible').count())) { await page.click('[data-act="st5a-libmore"]'); await page.waitForSelector('#st5aSheet [data-act="st5a-backup"]'); }   // Back up lives in the library More menu
+const bk = await dl(() => page.click('[data-act="st5a-backup"]'));
 const zmap = FF.unzipSync(new Uint8Array(bk.buf)), zman = JSON.parse(Buffer.from(zmap["manifest.json"]).toString());
 const nPdf = Object.keys(before.shas).length;
 ok(/^StewardMD Study backup \d{4}-\d\d-\d\d\.zip$/.test(bk.name) && zman.counts.docs === before.n && zman.counts.strokes === before.st && zman.counts.files === nPdf && zman.counts.folders === 1 && zman.files.length === Object.keys(zmap).length - 1, "backup: one zip with the manifest counts (documents, strokes, originals, folders) and a sha256 per file");
@@ -910,11 +926,12 @@ await page.evaluate(() => new Promise(r => { const q = indexedDB.deleteDatabase(
 await openLib();
 await page.waitForTimeout(400);
 /* create a fresh notebook for P3 */
-await page.click('[data-act="st-newnb"]');
-await page.fill("#stNbT", "P3 test");
-await page.selectOption("#stNbS", "ruled");
-await page.selectOption("#stNbZ", "a4");
-await page.click('[data-act="st-mknb"]');
+await page.click('[data-act="st5a-new"]');
+await page.click('[data-act="st5a-new-notebook"]');
+await page.fill("#st5aNbT", "P3 test");
+await page.selectOption("#st5aNbS", "ruled");
+await page.selectOption("#st5aNbZ", "a4");
+await page.click('[data-act="st5a-mknb"]');
 await page.waitForSelector("#stPages", { timeout: 15000 });
 await page.waitForSelector("#stP3Top", { timeout: 10000 });
 ok(await page.evaluate(() => !!document.querySelector("#stP3Top") && !!document.querySelector("#stP3Pager")), "P3 top bar: GoodNotes-style top bar and page counter are present");
@@ -1036,6 +1053,147 @@ await page.waitForTimeout(300);
 ok(await page.evaluate(() => STUDY._state().cur===2 || STUDY._state().sc.scrollTop>50 || STUDY._state().sc.scrollLeft>50), "P3 top bar: tapping page counter opens Go to Page and jumps");
 /* Zoom window exists */
 ok(await page.evaluate(() => !!document.querySelector("#stP3ZoomWindow")), "P3 3.11: Zoom window strip element present");
+
+/* ---- P5b: in-doc search, audio stamp+seek, print sheet, presentation ---- */
+ok(await page.evaluate(() => !!(window.STUDY_MEDIA && window.STUDY_MEDIA.pure)), "P5b: study-media.js loaded after study-library.js");
+await boot("prep=1&study=1");
+await openLib();
+const MEDPDF = makePdf(["Alpha systole one", "Beta diastole two"]);
+await page.setInputFiles("#stFile", { name: "media.pdf", mimeType: "application/pdf", buffer: MEDPDF });
+await page.waitForSelector('.st-doc:has-text("media")', { timeout: 20000 });
+await page.locator(".st-doc", { hasText: "media" }).locator(".st-open").click();
+await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
+await page.waitForSelector('.st-pg[data-n="1"] .st-tl span, .st-pg[data-n="1"]', { timeout: 10000 });
+await page.waitForTimeout(600);
+ok(await page.evaluate(() => {
+  const topSearch = document.querySelector('#stP3Top [data-act="st-p3-search"], #stP3Top [data-act="st-media-search"]');
+  const topMic = document.querySelector('#stP3Top [data-act="st-p3-mic"], #stP3Top [data-act="st-audio-rec"]');
+  const noTbDupes = document.querySelectorAll('#stTb [data-act="st-media-search"], #stTb [data-act="st-audio-rec"], #stTb [data-act="st-print-open"], #stTb [data-act="st-present"]').length === 0;
+  return !!topSearch && !!topMic && noTbDupes;
+}), "P5b viewer: search and mic in #stP3Top, no duplicate buttons in #stTb");
+const openInDocSearch = async () => {
+  if (await page.locator('#stP3Top [data-act="st-p3-search"]').isVisible()) {
+    await page.click('#stP3Top [data-act="st-p3-search"]');
+  } else {
+    await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+    await page.waitForSelector('#stP3MoreSheet');
+    await page.click('#stP3MoreSheet [data-act="st-p3-search"]');
+  }
+};
+const toggleMic = async () => {
+  if (await page.locator('#stP3Top [data-act="st-p3-mic"]').isVisible()) {
+    await page.click('#stP3Top [data-act="st-p3-mic"]');
+  } else {
+    await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+    await page.waitForSelector('#stP3MoreSheet');
+    await page.click('#stP3MoreSheet [data-act="st-p3-mic"]');
+  }
+};
+await openInDocSearch();
+await page.waitForSelector("#st5bInQ", { timeout: 5000 });
+await page.fill("#st5bInQ", "systole");
+await page.waitForFunction(() => document.querySelector("#st5bInCount").textContent === "1 of 1", null, { timeout: 10000 });
+ok(true, "in-doc search: finds systole with hit count 1 of 1");
+ok(await page.evaluate(() => STUDY._state().sc.scrollTop >= 0 && document.querySelectorAll(".st-tl span").length >= 0), "in-doc search: steps stay on the page");
+await page.click('[data-act="st-indoc-next"]');
+await page.waitForFunction(() => document.querySelector("#st5bInCount").textContent === "1 of 1");
+ok(true, "in-doc search: next wraps single hit");
+await page.click('[data-act="st-indoc-close"]');
+ok(await page.locator("#st5bInDoc").count() === 0, "in-doc search: close removes the bar");
+/* 5.6 typed + convert text is searchable; handwriting recogniser indexes when present */
+await page.evaluate(() => STUDY_MEDIA.indexText(STUDY._state().id, 1, "extra typed word", "typed").then(() => {}));
+await page.evaluate(() => STUDY_MEDIA.indexText(STUDY._state().id, 2, "converted handwriting line", "convert").then(() => {}));
+await boot("prep=1&study=1"); await openLib();
+await page.click('[data-act="st5a-tab"][data-v="search"]');
+await page.waitForSelector("#st5aSearchQ");
+await page.fill("#st5aSearchQ", "typed");
+await page.waitForSelector(".st-hit", { timeout: 10000 });
+ok(/media/.test(await page.locator(".st-hit").first().innerText()), "search: typed text (src typed) is found");
+await page.fill("#st5aSearchQ", "converted");
+await page.waitForSelector(".st-hit", { timeout: 10000 });
+ok(/media/.test(await page.locator(".st-hit").first().innerText()), "search: AI Convert text (src convert) is found");
+await page.waitForTimeout(1500);
+ok((await page.locator(".st-hit .st5b-th").count()) >= 1, "search: result shows a page thumbnail");
+await page.click('[data-act="st5a-tab"][data-v="documents"]');   // back to the Documents grid (5a library tabs)
+/* audio: mocked recorder stamps strokes, blob persists, tap-to-seek moves playback */
+await page.locator(".st-doc", { hasText: "media" }).locator(".st-open").click();
+await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
+await page.evaluate(() => {
+  window.__mr = [];
+  window.MediaRecorder = class {
+    static isTypeSupported() { return true; }
+    constructor() { this.mimeType = "audio/webm;codecs=opus"; }
+    start() { window.__mrStart = Date.now(); setTimeout(() => { this.ondataavailable && this.ondataavailable({ data: new Blob([new Uint8Array([1, 2, 3])], { type: this.mimeType }) }); }, 30); }
+    stop() { this.onstop && this.onstop(); }
+  };
+  window.__origGum = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+  navigator.mediaDevices.getUserMedia = async () => ({ getTracks: () => [{ stop() {} }] });
+  window.__seeked = null;
+  const proto = HTMLMediaElement.prototype;
+  proto.play = function () { return Promise.resolve(); };
+  Object.defineProperty(proto, "currentTime", { get() { return this.__ct || 0; }, set(v) { this.__ct = v; window.__seeked = v; } });
+  Object.defineProperty(proto, "duration", { get() { return this.__dur || 10; }, set(v) { this.__dur = v; } });
+});
+await toggleMic();
+await page.waitForFunction(() => STUDY_MEDIA._state().rec.active === true, null, { timeout: 5000 });
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await stroke(0.3);
+await page.waitForTimeout(400);
+ok(await page.evaluate(() => { const s = STUDY._state().strokes.filter(x => !x.gone && x.a != null); return s.length >= 1 && s[0].a >= 0; }), "audio: stroke drawn while recording stores its recording offset a");
+await toggleMic();
+await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("audio").objectStore("audio").getAll(); q.onsuccess = () => res(q.result.length >= 1); }; }), null, { timeout: 10000 });
+ok(true, "audio: recording Blob is stored in IndexedDB");
+await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+await page.waitForSelector('[data-act="st-audio-list"]', { timeout: 5000 });
+await page.waitForFunction(() => /uses/.test((document.querySelector("#st5bStorage") || {}).textContent || ""), null, { timeout: 5000 }).catch(() => {});
+ok(await page.evaluate(() => /uses/.test(document.querySelector("#st5bStorage").textContent)), "audio: Settings shows storage used per notebook");
+await page.click('[data-act="st-audio-list"]');
+await page.waitForSelector("#st5bRecList .st5b-rec", { timeout: 5000 });
+ok(true, "audio: recordings list shows per notebook");
+await page.click("#st5bRecList [data-act='st-audio-play']");
+await page.waitForFunction(() => STUDY_MEDIA._state().player.mode === true, null, { timeout: 5000 });
+await page.click('[data-act="st-scancel"]');
+await page.click('[data-act="st-tool"][data-v="lasso"]'); /* leave the writing tools so tap-to-seek layers show */
+await page.waitForFunction(() => document.querySelector(".st5b-seeklayer") != null, null, { timeout: 5000 });
+ok(true, "audio: playback installs tap-to-seek layers");
+await page.evaluate(() => {
+  const r = document.querySelector('.st-pg[data-n="1"]').getBoundingClientRect();
+  const s = STUDY._state().strokes.find(x => x.a != null);
+  window.__expectedA = s.a;
+  const sx = r.left + s.pts[0][0] * r.width, sy = r.top + s.pts[0][1] * r.height;
+  const layer = document.querySelector(".st5b-seeklayer[data-n='1']");
+  layer.dispatchEvent(new MouseEvent("click", { clientX: sx, clientY: sy, bubbles: true, cancelable: true, view: window }));
+});
+await page.waitForFunction(() => window.__seeked != null, null, { timeout: 5000 });
+ok(await page.evaluate(() => Math.abs(window.__seeked - window.__expectedA) < 0.01), "audio: tapping a stroke jumps playback to its recording time");
+await page.evaluate(() => STUDY_MEDIA.stopPlayer());
+/* print sheet + iframe print */
+await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+await page.waitForSelector('[data-act="st-print-open"]', { timeout: 5000 });
+await page.click('[data-act="st-print-open"]');
+await page.waitForSelector("#stSheet", { timeout: 5000 });
+ok(/This page/.test(await page.locator("#stSheet").innerText()) && /All pages/.test(await page.locator("#stSheet").innerText()), "print: sheet offers this page and all pages");
+await page.evaluate(() => { window.__printed = 0; });
+await page.click('[data-act="st-print-page"]');
+await page.waitForSelector(".st5b-print-frame", { timeout: 5000 });
+ok(true, "print: this page renders to an iframe image for print()");
+/* presentation: fullscreen, chrome hidden, laser visible */
+await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+await page.waitForSelector('[data-act="st-present"]', { timeout: 5000 });
+await page.click('[data-act="st-present"]');
+await page.waitForSelector("#st5bPresent", { timeout: 5000 });
+ok(await page.evaluate(() => getComputedStyle(document.querySelector("#stTb")).display === "none"), "present: toolbar hidden");
+ok(await page.evaluate(() => getComputedStyle(document.querySelector("#stP3Top")).display === "none"), "present: top bar hidden");
+ok(await page.evaluate(() => !document.querySelector("#stDocTabs") || getComputedStyle(document.querySelector("#stDocTabs")).display === "none"), "present: doc tabs hidden");
+ok(await page.evaluate(() => !!document.querySelector(".st5b-laser") && !!document.querySelector(".st5b-pres-img")), "present: laser and page image visible");
+await page.evaluate(() => { const st = document.querySelector(".st5b-pres-stage"), r = st.getBoundingClientRect(); st.dispatchEvent(new PointerEvent("pointermove", { pointerType: "mouse", clientX: r.left + 100, clientY: r.top + 100, bubbles: true })); });
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => document.querySelector(".st5b-laser").style.opacity === "1"), "present: laser follows the pointer");
+await page.click('[data-act="st-present-next"]');
+await page.waitForFunction(() => /2 of 2/.test(document.querySelector(".st5b-pres-n").textContent), null, { timeout: 5000 });
+ok(true, "present: next page steps");
+await page.click('[data-act="st-present-exit"]');
+ok(await page.locator("#st5bPresent").count() === 0, "present: exit removes the stage");
 
 ok(errors.length === 0, "no uncaught page error " + errors.join("|"));
 

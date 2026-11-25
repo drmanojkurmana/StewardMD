@@ -18,11 +18,13 @@ const NOW = Date.parse("2026-10-31T00:00:00Z");
 const base = (o = {}) => Object.assign({ id: "c1", kind: "mcq", exam: ["neet-pg"], subject: "medicine", module: "m1", topicIds: ["t1"], language: "en", title: "T", questionId: "q1", rightsStatus: "owned", clinicalReview: { status: "approved", reviewedAt: "2026-10-01", reviewerRole: "medicine" }, captions: { en: true }, sourceRefs: [], tags: [], updatedAt: "2026-10-01" }, o);
 const lesson = (o = {}) => base({ id: "l1", kind: "micro_lesson", questionId: undefined, lessonId: "les1", media: { provider: "first_party", assetId: "a1" }, ...o });
 
-test("flags: parent OFF by default, requires smd_prep; study only-on default", () => {
+test("flags: parent ON by default (owner 2026-11-17), requires smd_prep; study and youtube on by default", () => {
   const get = (m) => (k) => m[k] ?? null;
-  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({}), search: "" }), { parent: false, study: false, discovery: false, breakMode: false, youtube: false });
+  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({}), search: "" }), { parent: true, study: true, discovery: false, breakMode: false, youtube: true });
   assert.deepEqual(D.resolveFlags({ prepEnabled: false, get: get({ smd_prep_medigram: "1" }), search: "" }).parent, false);
-  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1" }), search: "" }), { parent: true, study: true, discovery: false, breakMode: false, youtube: false });
+  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1" }), search: "" }), { parent: true, study: true, discovery: false, breakMode: false, youtube: true });
+  assert.equal(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1", smd_prep_medigram_youtube: "0" }), search: "" }).youtube, false);
+  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "0" }), search: "" }).parent, false, "0 turns it off");
   const all = D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1", smd_prep_medigram_discovery: "1", smd_prep_medigram_break: "1", smd_prep_medigram_youtube: "1" }), search: "" });
   assert.deepEqual(all, { parent: true, study: true, discovery: true, breakMode: true, youtube: true });
   assert.equal(D.resolveFlags({ prepEnabled: true, get: get({}), search: "?medigram=1&medigram_study=0" }).study, false);
@@ -115,15 +117,73 @@ test("modes: study hides break items, clinical keeps lessons, break keeps only b
   assert.equal(D.isEligible(base(), { ...ctx, mode: "clinical" }), false);
 });
 
-test("media: YouTube behind policy flag, offline and bad metadata degrade", () => {
-  const yt = { kind: "video", title: "V", media: { provider: "youtube", videoId: "dQw4w9WgXcQ" } };
-  assert.equal(M.describe(yt, { youtubeEnabled: false }).kind, "disabled");
-  assert.equal(M.describe(yt, { youtubeEnabled: true, offline: true }).kind, "unavailable");
-  assert.equal(M.describe(yt, { youtubeEnabled: true }).kind, "youtube");
-  assert.match(M.describe(yt, { youtubeEnabled: true }).url, /youtube-nocookie\.com\/embed\/dQw4w9WgXcQ/);
-  assert.equal(M.describe({ kind: "video", media: { provider: "youtube", videoId: "bad id" } }, { youtubeEnabled: true }).kind, "unavailable");
-  assert.equal(M.describe(null, {}).kind, "none");
-  assert.equal(M.embedUrl("bad id"), null);
+test("media: videos come from cleared CliniX manifest entries and play through the https shim", () => {
+  assert.equal(M.shimUrl("gRWSyqatWQQ"), "https://stewardmd.in/_site/yt?v=gRWSyqatWQQ&autoplay=1");
+  assert.equal(M.shimUrl("bad id"), null);
+  const shimHtml = read("_site/yt.html"), media = read("prep-medigram-media.js"), feed = read("prep-medigram.js");
+  assert.match(shimHtml, /auto \? "&autoplay=1"/, "the shim forwards autoplay to the official player");
+  assert.match(shimHtml, /onAutoplayBlocked: muteAndPlay/, "a blocked autoplay retries muted instead of sitting paused");
+  assert.match(media, /"autoplay; /, "the app frame delegates autoplay");
+  assert.match(shimHtml, /e\.source !== window\.parent/, "the shim takes commands only from the app frame that embeds it");
+  for (const c of ["play", "pause", "seek", "mute", "unmute"]) assert.match(shimHtml, new RegExp('d\\.smdCmd === "' + c + '"'), "shim handles " + c);
+  assert.match(media, /postMessage\(\{ smdCmd: cmd, by: by \|\| 0 \}, "https:\/\/stewardmd\.in"\)/, "commands are posted to the shim origin only");
+  assert.doesNotMatch(media, /youtube\.com\/watch|Browser\.open|Play on YouTube/, "the player never hands a video off to the YouTube app or site");
+  assert.doesNotMatch(feed, /youtube\.com\/watch|Play on YouTube/, "the reel never hands a video off either (Browser.open there is for sharing to WhatsApp only)");
+  const vids = M.videosFrom({ media: {
+    a: { kind: "embed", embeddable: true, cleared: true, videoId: "gRWSyqatWQQ", title: "Resp exam", attribution: "Geeky Medics" },
+    b: { kind: "embed", embeddable: false, cleared: true, videoId: "XU_xeUMJ3Zc" },
+    c: { kind: "embed", embeddable: true, cleared: false, videoId: "XU_xeUMJ3Zc" },
+    d: { kind: "embed", embeddable: true, cleared: true, videoId: "bad" },
+    e: { kind: "embed", embeddable: true, cleared: true, videoId: "gRWSyqatWQQ" },
+    f: { kind: "image", embeddable: true, cleared: true, videoId: "XU_xeUMJ3Zc" } } });
+  assert.deepEqual(vids.map((v) => v.videoId), ["gRWSyqatWQQ"]);
+  assert.equal(vids[0].by, "Geeky Medics");
+  assert.deepEqual(M.videosFrom(null), []);
+  // Every video PrepReels can show must be on the shim's allow-list, or the shim refuses it.
+  const real = M.videosFrom(JSON.parse(read("clinix/media/manifest.json")));
+  const shim = read("_site/yt.html");
+  assert.ok(real.length >= 20, "the cleared video set is there");
+  for (const v of real) assert.match(shim, new RegExp('"' + v.videoId.replace(/[-]/g, "\\-") + '": 1'), v.videoId + " on the shim allow-list");
+});
+
+test("official-channel videos: 100+, unique 11-char ids, all on the shim allow-list; placeholder gone", () => {
+  const V = require("../prep-medigram-videos.js"), shim = read("_site/yt.html");
+  assert.ok(V.length >= 100, "at least 100 videos, got " + V.length);
+  const ids = new Set();
+  for (const [id, title, by, subject] of V) {
+    assert.match(id, /^[A-Za-z0-9_-]{11}$/);
+    assert.ok(!ids.has(id), "unique " + id); ids.add(id);
+    assert.ok(title && by && subject, "title, channel and subject for " + id);
+    assert.ok(shim.includes('"' + id + '": 1'), id + " on the shim allow-list");
+  }
+  assert.doesNotMatch(read("prep-medigram.js") + read("prep-medigram-videos.js"), /dQw4w9WgXcQ/, "placeholder gone");
+});
+
+test("image systems: NEET-SS gets its specialty systems, every other exam any system", () => {
+  assert.equal(D.imgSystemsFor("neet-pg", ["anatomy"]), null);
+  assert.equal(D.imgSystemsFor("mrcp-part1", []), null);
+  assert.equal(D.imgSystemsFor("usmle", []), null);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-cardiology"]), ["cardiology"]);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-paediatric-nephrology"]), ["paediatrics", "renal-and-urology"]);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-surgical-gastroenterology"]), ["surgery", "gastroenterology"]);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-ctvs", "ss-neurosurgery"]), ["surgery", "cardiology", "neurology"]);
+  assert.ok(D.imgSystemsFor("neet-ss", ["ss-mixed"]).includes("medicine"), "unrecognised specialty falls back to the medical systems");
+  const slugs = JSON.parse(read("kb/dist/imglib/index.json")).systems.map((x) => x.slug);
+  const all = new Set();
+  for (const id of ["ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-pulmonology", "ss-infectious-diseases", "ss-rheumatology-immunology", "ss-critical-care", "ss-neonatology", "ss-obg", "ss-radiology", "ss-head-neck-surgery", "ss-plastic-surgery", "ss-urology", "ss-onco-pathology", "ss-cardiac-anaesthesia", "ss-geriatric-mental-health", "ss-clinical-pharmacology", "ss-general-medicine"]) D.imgSystemsFor("neet-ss", [id]).forEach((x) => all.add(x));
+  for (const x of all) assert.ok(slugs.includes(x), x + " is a real Image Library system");
+});
+
+test("mixFeed: every n questions one other card, pearls and extras alternate, pearls never come early", () => {
+  const q = (id, kp) => ({ id, q: "Q" + id, o: ["a", "b"], a: 0, kp, _s: "s" });
+  const items = [q(1, "P1"), q(2), q(3, "P3"), q(4), q(5), q(6)];
+  const ex = [{ kind: "video", videoId: "v" }, { kind: "lesson", mid: "m" }];
+  const out = D.mixFeed(items, ex, 3);
+  assert.deepEqual(out.map((c) => c.kind), ["q", "q", "q", "pearl", "q", "q", "q", "video"]);
+  assert.equal(out[3].text, "P1");
+  assert.deepEqual(D.mixFeed(items, ex, 2).map((c) => c.kind), ["q", "q", "pearl", "q", "q", "video", "q", "q", "lesson"], "one pearl in three slots");
+  assert.deepEqual(D.mixFeed([], ex, 3), []);
+  assert.deepEqual(D.mixFeed(items, [], "5").map((c) => c.kind), ["q", "q", "q", "q", "q", "pearl", "q"]);
 });
 
 test("events: consent-aware, learning outcomes only, sensitive keys dropped", () => {
@@ -135,90 +195,53 @@ test("events: consent-aware, learning outcomes only, sensitive keys dropped", ()
 
 test("wiring: loader fetches PrepReels only when on; prep.js hooks stay guarded; CSS contract", () => {
   const loader = read("prep-loader.js"), prep = read("prep.js"), css = read("prep-medigram.css");
-  assert.match(loader, /MG_JS = \["prep-medigram-data\.js", "prep-medigram-media\.js", "prep-medigram\.js"\]/);
+  assert.match(loader, /MG_JS = \["prep-medigram-data\.js", "prep-medigram-media\.js", "prep-medigram-videos\.js", "prep-medigram\.js"\]/);
   assert.match(loader, /if \(mgOn\(\)\)/);
   assert.match(prep, /a\.indexOf\("mg-"\) === 0 && G\.PREP_MEDIGRAM/);
   assert.match(prep, /G\.PREP_MEDIGRAM \? G\.PREP_MEDIGRAM\.homeHtml\(HOST\)/);
-  assert.match(css, /\.pn-mg-opt \{[^}]*min-height: 52px/);
+  assert.match(css, /\.pn-mg-btn \{[^}]*min-height: 52px/);
   assert.match(css, /prefers-reduced-motion: reduce/);
   assert.match(css, /#42cdb5/i);
-  assert.doesNotMatch(css, /linear-gradient|radial-gradient|backdrop-filter/);
+  assert.doesNotMatch(css, /linear-gradient|radial-gradient/);
+  assert.equal((css.match(/(^|[^-])backdrop-filter:/g) || []).length, 1, "the only blur is the glass video controls");
   const ui = read("prep-medigram.js");
-  assert.match(ui, /Finish session/);
-  assert.match(ui, /I don't understand|I don\\'t understand/);
+  assert.match(ui, /data-act="mg-done">Finish/);
   assert.doesNotMatch(ui, /data-act="mg-cadence"/);
-  assert.doesNotMatch(ui, /aria-label="Cadence"/);
-  assert.match(ui, /host\.row\("mg-open", icon, "PrepReels", "Short study feed · finish anytime"\)/);
+  assert.match(ui, /host\.row\("mg-open", icon, "PrepReels", "Questions, videos and pearls, one swipe each"\)/);
   assert.match(ui, /class="pn-ri"/);
   assert.match(ui, /class="pn-rb"/);
   assert.match(ui, /ico\("play"\)/);
-  assert.doesNotMatch(ui, /api\.youtube\.com|googleapis|fetch\(/, "no paid or YouTube API call in the feed");
+  assert.doesNotMatch(ui, /api\.youtube\.com|googleapis|youtube-nocookie/, "no YouTube API call and no direct embed from the app origin");
+  assert.match(ui, /G\.fetch\("\/clinix\/media\/manifest\.json"\)/, "the only fetch is the bundled CliniX manifest");
 });
 
-test("home row: matches sibling rows with leading icon tile and trailing chevron", () => {
-  const mockG = {
-    PREP_MG_DATA: D,
-    PREP_MG_MEDIA: M,
-    localStorage: { getItem: () => null, setItem: () => {} },
-    location: { search: "?medigram=1" }
-  };
+test("home card: one PrepReels card in the Solve next style, Saved beside it once anything is saved", () => {
   const code = read("prep-medigram.js");
-  new Function("window", code)(mockG);
-  const mg = mockG.PREP_MEDIGRAM;
+  const boot = () => { const g = { PREP_MG_DATA: D, PREP_MG_MEDIA: M, localStorage: { getItem: () => null, setItem: () => {} }, location: { search: "?medigram=1" } }; new Function("window", code)(g); return g.PREP_MEDIGRAM; };
+  const mg = boot();
   assert.ok(mg, "PREP_MEDIGRAM registered");
-
-  const mockHost = {
-    row: (act, icon, title, sub, attrs) => `<button type="button" class="pn-row" data-act="${act}"${attrs || ""}><span class="pn-ri" aria-hidden="true">${icon}</span><span class="pn-rb"><b>${title}</b><small>${sub}</small></span><chev/></button>`,
-    ico: (n) => `<ico-${n}/>`,
-    esc: (s) => s
-  };
-
-  const html = mg.homeHtml(mockHost);
-  assert.match(html, /class="pn-row"/);
-  assert.match(html, /data-act="mg-open"/);
-  assert.match(html, /class="pn-ri"[^>]*><ico-play\/>/);
-  assert.match(html, /class="pn-rb"[^>]*><b>PrepReels<\/b><small>Short study feed · finish anytime<\/small><\/span>/);
-  assert.match(html, /<chev\/>/);
-
-  // Standalone fallback without host also provides pn-ri, pn-rb, play icon and chevron
-  const fallbackHtml = mg.homeHtml({});
-  assert.match(fallbackHtml, /class="pn-row"/);
-  assert.match(fallbackHtml, /data-act="mg-open"/);
-  assert.match(fallbackHtml, /class="pn-ri"/);
-  assert.match(fallbackHtml, /d="M7 5l12 7-12 7z"/, "play icon path");
-  assert.match(fallbackHtml, /d="M9 6l6 6-6 6"/, "chevron icon path");
+  const host = (mgsv) => ({ ico: (n) => `<ico-${n}/>`, store: () => ({ mgsv }) });
+  const html = mg.homeHtml(host({}));
+  assert.match(html, /^<div class="pn-mgh"><button type="button" class="pn-next" data-act="mg-open"><span class="pn-ri" aria-hidden="true"><ico-play\/><\/span><span class="pn-rb"><small>PrepReels<\/small><b>[^<]+<\/b><\/span><ico-chev\/><\/button><\/div>$/);
+  assert.doesNotMatch(html, /mg-saved/, "no Saved button with nothing saved");
+  const two = mg.homeHtml(host({ a: {}, b: {} }));
+  assert.match(two, /data-act="mg-saved" aria-label="Saved from PrepReels, 2 cards"/);
+  assert.match(two, /<small>Saved<\/small><b>2<\/b>/);
 });
 
-test("cadence arm: set internally via localStorage or setCadence, no learner chip in UI", () => {
-  let stored = {};
-  const mockG = {
-    PREP_MG_DATA: D,
-    PREP_MG_MEDIA: M,
-    localStorage: {
-      getItem: (k) => stored[k] ?? null,
-      setItem: (k, v) => { stored[k] = String(v); }
-    },
-    location: { search: "?medigram=1" }
-  };
-  const code = read("prep-medigram.js");
-  new Function("window", code)(mockG);
-  const mg = mockG.PREP_MEDIGRAM;
-
-  // Default cadence is 3:1
-  assert.equal(D.resolveCadence(null), "3:1");
-
-  // Arm set to "2" via localStorage
-  stored["smd_prep_medigram_cadence"] = "2";
-  assert.equal(D.resolveCadence(mockG.localStorage.getItem("smd_prep_medigram_cadence")), "2:1");
-  assert.equal(D.cadenceN(mockG.localStorage.getItem("smd_prep_medigram_cadence")), 2);
-
-  // Arm set to "5" via localStorage
-  stored["smd_prep_medigram_cadence"] = "5";
-  assert.equal(D.resolveCadence(mockG.localStorage.getItem("smd_prep_medigram_cadence")), "5:1");
-  assert.equal(D.cadenceN(mockG.localStorage.getItem("smd_prep_medigram_cadence")), 5);
-
-  // Arm set via setCadence API
-  assert.equal(mg.setCadence("2"), "2:1");
-  assert.equal(stored["smd_prep_medigram_cadence"], "2");
-  assert.equal(D.cadenceN(stored["smd_prep_medigram_cadence"]), 2);
+test("one feed and a compact home (owner 2026-11-17): Swipe feed is PrepReels; moved rows stay reachable", () => {
+  const play = read("prep-play.js"), prep = read("prep.js"), css = read("prep.css");
+  assert.match(play, /if \(a === "v-feed"\) return feed\(\);/, "the Swipe feed act goes through feed()");
+  assert.match(play, /if \(kind === "feed"\) return feed\(\);/, "the widget, watch and notification link too");
+  assert.match(play, /function feed\(\) \{ var M = reels\(\); return M \? M\.open\(H, "study"\) : openFeed\(\); \}/, "PrepReels when on, the old feed only as its fallback");
+  assert.match(play, /\(reels\(\) \? "" : H\.row\("v-feed"/, "no Swipe feed row while PrepReels is on");
+  assert.match(play, /class="pn-group pn-strip"/);
+  assert.doesNotMatch(play.slice(play.indexOf("function homeHtml("), play.indexOf("function freezeTick(")), /v-freeze/, "Streak freezes left the Play strip");
+  // Rows that leave home with the tab bar are in the You menu (renderMenu) or the Tests tab (renderMocks).
+  const menu = prep.slice(prep.indexOf("function renderMenu("), prep.indexOf("/* ---------- image credit sheet"));
+  for (const a of ["a-stats", "soc-open", "soc-acc", "p-settings", "bookmarks"]) assert.ok(menu.includes('"' + a + '"'), "You menu has " + a);
+  assert.match(prep, /var tabbed = !!G\.PREP_NAV;/, "without the tab bar the rows stay on home");
+  assert.match(prep, /cut = !scope && !st\.subsAll && subs\.length > 7/);
+  assert.match(prep, /if \(a === "subs-all"\)/);
+  assert.match(css, /\.pn-subs\.pn-cut > \.pn-tile:nth-child\(n\+7\) \{ display: none; \}/);
 });

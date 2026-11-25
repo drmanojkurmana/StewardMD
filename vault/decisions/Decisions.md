@@ -5,6 +5,50 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-21 · Calculators: modern classic list and full-screen calculator (owner picked variant A plus variant C score card)
+
+**Decision.** Calculators v2 behind `smd_calc_v2`, default ON (`"0"` restores the old accordion). List is variant A grouped rows with Starred and Recent. A calculator is a full-screen pushed view with Auto-fill from patient and Ask MaiK on every screen, a grouped form with no silent select defaults, live compute, and variant C's pinned score card. The scale bar draws only when max and cut-off come from the calculator's own result.
+**Why.** The accordion kept the list chrome on screen while filling a form, results sat below the fold, units repeated, and selects scored inputs nobody chose.
+**Trade-off.** Two list and panel paths to keep until the owner approves on device. Starring from the list now happens in the calculator header for unstarred rows.
+**Status.** Branch calc-ui-v2. Tests in `test/calc-v2.test.mjs` and the `run-calc-*` harnesses. Needs build-www, cap sync and native rebuild or OTA. See [[modules/Calculators]].
+
+## 2026-11-20 · Edge swipe presses the Back control it found at the start (owner recording: "still not fixed ... scroll got locked as sidebar is opened from behind")
+
+**Decision.** `swipe-back.js` remembers the top screen's Back control when an edge drag starts (`_heldCtrl`) and
+`goBack()` presses that one when the live search finds none; a drag that moved a screen (`edgeSwipeAction(true)`)
+can only go back, never fall through to "open the menu".
+**Why.** On release the gesture first slides the screen fully off (depth mode), then looks for its Back control, which
+is off-screen by then. From Settings (opened from the sidebar) it found nothing, took the "nothing behind, at home"
+branch, opened the menu, and Settings slid back over the open menu with the menu's scroll lock. Every dragged screen
+was exposed to this, not only Settings.
+**Trade-off.** None found: the held control is used only when the live search comes back empty.
+**Status.** Test `test/run-swipe-guard-ui.mjs` (Settings, AI Usage, Help & support from the menu; fails without the fix).
+`run-swipe-back-ui` keeps its 5 failures that exist on main without this change. Needs OTA.
+
+## 2026-11-20 · Nucleo: PrepNucleus gets its own mascot (owner: "Create new mascot to suit prepnucleus")
+
+**Decision.** A new character, Nucleo (`prep-mascot.js`), replaces the MaiK companion as the PrepNucleus buddy by
+default: a cell nucleus stained hematoxylin blue-violet, in a graduation cap with an amber tassel. Pure SVG + CSS states
+and keyframes, same mount API as the companion. `smd_prep_mascot = "maik"` restores the MaiK companion.
+**Why.** PrepNucleus has its own identity (amber and navy, exam prep); a nucleus is the module's name made literal and a
+histology image every medical student knows; the cap says exam. CSS states are cheaper than the companion's spring/IK rig
+and need no animation loop.
+**Trade-off.** Two characters to keep; Nucleo does not walk around (he stays in his corner and reacts in place).
+**Status.** Default on with the buddy (`smd_prep_buddy`). Needs build-www + cap sync + native rebuild/OTA.
+
+## 2026-11-20 · PrepNucleus MaiK buddy reacts to MCQ answers (owner: "celebrate ... feel sad if wrong ... asking to prepare topic again")
+
+**Decision.** Reuse the existing MaiK companion (`maik-companion.js`) rather than a new mascot: new `cue("quiz")` body
+language plus `opts.onTap` / `opts.hideKey`; all words and buttons live in `prep-buddy.js`'s own bubble. Practice sets
+only. Tap opens a quick-ask bubble that hands off to the existing Ask MaiK sheet (`prep-ask.js`) instead of answering
+inside the bubble.
+**Why.** One character across MaiK and PrepNucleus; the companion already has moods, shrug/frown, hop, hearts and
+reduced motion. Answering inside the bubble would duplicate prep-ask's device check, online/on-phone choice and token
+limits. Mocks hide answers, so a reacting buddy there would leak them.
+**Trade-off.** The owner asked for the answer to show in the bubble; it opens the Ask sheet with the words filled in.
+He does not speak on every answer (about 1 in 3 for right ones), to avoid noise.
+**Status.** Flag `smd_prep_buddy` default on ("0" off). Needs build-www + cap sync + native rebuild/OTA. See [[modules/PrepNucleus]].
+
 ## 2026-11-04 · iPad shell: native iPad layout and hardware keyboard (owner: "work like native iPad app")
 
 **Decision.** A shell layer for large touch screens, `ipad-native.css` + `ipad-native.js`, scoped to `html.smd-tablet`
@@ -12431,3 +12475,122 @@ FundX/embeddings/PrepNucleus still Google-only. See [[AI Control Center]].
 - **Backup layout:** `manifest.json` `{ format: "stewardmd-study-backup", v: 1, created, counts: { docs, folders, strokes, ptext, files }, files: [{ name, sha256, bytes }] }` (lists every other file), `folders.json`, `docs/<id>.json` `{ doc, strokes, undo, ptext, index }`, `files/<id>.pdf` (original bytes). Written file by file through Filesystem (CACHE) where native, then the share sheet.
 - **Restore:** read the whole file, check every sha256, size and count, and that each PDF record matches its file, BEFORE the first write; one failure aborts with no writes. A document is skipped when its id or sha256 is already present; nothing existing is overwritten or deleted. The document record is written last. Shortcut: the whole backup is read into memory.
 - **Print:** no separate Print button; the share sheet is the print path (the phone decides whether it offers Print).
+
+## 2026-11-17 PrepReels rebuilt on the real bank; videos through the CliniX shim
+Owner: "not working as intended, should work in all formats, random medical knowledge, videos show a configuration problem, UX 0/100".
+- **Root cause:** the feed ran on 8 hard-coded fixture cards (one YouTube id was a placeholder) filtered by exam and language, so it was often empty; the video iframed youtube-nocookie directly from capacitor://localhost, which YouTube rejects (Error 153).
+- **Content:** questions from 5 random modules across every subject of the learner's exam (same draw as the Play feed, `host.record` for FSRS); pearls from `kp`; lessons for the drawn modules (`PREP_LESSONS.index/open`); imglearn image cards with tap to reveal; the 37 cleared CliniX videos (`clinix/media/manifest.json`). Mix rule `PREP_MG_DATA.mixFeed`: after every n questions (cadence arm, default 3) one other card, alternating pearl and video/lesson/image.
+- **Video:** iframes `https://stewardmd.in/_site/yt?v=` (the CliniX shim, allow-listed); mounted only while the card is on screen, released on swipe/background; silent shim after 6 s falls back to Play on YouTube (Capacitor Browser). `smd_prep_medigram_youtube` now defaults ON (owner asked for videos; same cleared set CliniX already ships).
+- **UX:** one full-screen card per swipe (Play's `.vf` snap feed). Removed mission chips, language chips, Save/Skip/Report row, Prev/Next. Batch ends on a score card with Keep going / Finish. Hindi/Telugu dropped from the UI (no reviewed content exists).
+- **Gotcha:** never put "Loading…" text in a feed card: skeletons.js turns a lone "Loading…" block into the full-screen SMD_LOADER cover. `.pn-eb` is `display:none` in prep.css, so feed labels use `.pn-mg-tag`.
+
+## 2026-11-17 PrepReels videos autoplay in the app; both video sets merged
+Owner: "it should play in app directly, autoplay, not redirect to YouTube like CliniX".
+- `_site/yt.html` takes `autoplay=1` (PrepReels only; CliniX URLs unchanged): starts the official player at once; if sound autoplay is blocked (`onAutoplayBlocked`, or still unstarted/cued after 3 s) it mutes and plays, so YouTube's own unmute button shows instead of a paused frame. Both iframes carry `allow="autoplay"`.
+- The "Play on YouTube" hand-off card is removed; the poster sits under the player while it loads.
+- A parallel session's 184 verified official-channel videos (previously fixture candidates in prep-medigram.js) now live in `prep-medigram-videos.js` and are added to the shim allow-list; the feed mixes them with the CliniX exam videos. Adding a video = add it to that file AND the shim ALLOW list (a unit test enforces it).
+- Shim changes go live on push to main (Cloudflare Pages); the app JS needs the OTA.
+- **2026-11-17 iPad recording:** the video card showed only its poster and a tap opened the image zoom viewer; the player never mounted (IntersectionObserver with the reel box as root did not fire in the iPad WebView). Now: the playing card is measured with getBoundingClientRect after scrolling settles (150 ms), a tap on the poster plays it, and the poster is a CSS background so prep-viewer never grabs it.
+- **2026-11-17 video controls:** YouTube's in-frame controls hide on touch screens, so each video card has its own row: back 10 s, play/pause, forward 10 s, sound, full screen. The app posts `{ smdCmd }` to the shim (origin stewardmd.in only); the shim accepts commands only from `window.parent` and reports `{ smdYt, state, muted }`. Full screen is our own fixed layer (WKWebView leaves element full screen off): the reel box drops its leftover animation transform and `.pn-body` is lifted above the bar while it is open; Back leaves full screen first.
+- **2026-11-17 glass controls (owner):** the control row moved onto the video as translucent blurred glass that fades out 3 s after the last touch (stays while paused); a tap on the video brings it back. A transparent layer over the iframe takes taps so the app sees them, which means YouTube's own overlay (its logo, title link, settings) is no longer reachable. That is a YouTube embedded-player policy risk (controls/branding must stay usable) the owner accepted by asking for it; revisit before any wider release.
+- **2026-11-17 YouTube controls restored (owner chose "YouTube controls, connect ours"):** the tap layer over the iframe is gone, so a tap reaches YouTube's own controls, logo and title (embed policy satisfied again). Our glass bar sits above YouTube's bottom bar (56 px up), only its buttons take taps, and it comes up when the shim reports YouTube's player paused or playing (so a pause in YouTube's UI shows ours, and it stays while paused). Supersedes the "tap layer" risk above.
+- **2026-11-17 owner screenshots:** (1) our glass bar covered the video in full screen: it now sits under the video in the card and at the bottom of the screen in full screen, never on the video (YouTube's controls stay fully visible); a tap on the bar's area brings it back. (2) Lesson cards only said "Open lesson": the lesson now plays inline as a story (step text, small tables, progress segments, auto-advance by reading time; tap right/left/middle = next/back/pause; Listen reads each step with the device voice and advances on its end; stops at the end, never scrolls the reel). (3) More topics: each batch draws 10 modules, at most 2 questions each. Gotcha found on the way: the iPad layout zooms the page 1.15 (smd-refined), and dvh ignores zoom, so Play's `.vf` height ran the reel ~180 px below the screen; PrepReels now sizes the reel from the body (flex) and the full-screen video from the fixed layer.
+- **2026-11-17 Image Library in the reel (owner):** PrepReels shows Image Library pictures (`kb/dist/imglib`, the same 10k captioned bank: KB figures, lesson images, ECGs, Tokos, Ophthalmos, Narke, CliniX, Commons pathology) as cards: picture, kind and system, title, caption, and "Read the article" (`SMD_KB.open(ka)`) / "Open the lesson" (`PREP_LESSONS.open(lsj, lm, host, ls)`) when the entry has them; a tap opens the zoom viewer. NEET-PG/INI-CET/USMLE/MRCP/others: 3 random systems per batch (bounded download). NEET-SS: only the systems of the learner's specialty subjects (`PREP_MG_DATA.imgSystemsFor`, paediatric and surgical subspecialties also get paediatrics / surgery; unknown falls back to the medical systems). Pearls now take one slot in three (was one in two) so more images, videos and lessons show.
+
+## 2026-11-17 Phonon 31M is the app's standard voice (owner)
+Owner: "use Phonon 31M to listen here and everywhere in the app as standard TTS". New `smd-speak.js` (`window.SMD_SPEAK`, loaded by index.html): `unlock()` in the tap, `say(text, { rate })`, `stop()`, `speaking()`, `engine()`. It speaks with Phonon (`PREP_VOICE`, loading `prep-voice.js` itself outside PrepNucleus) when the model is ready; until then (first use starts a one-time background download, about 64 MB, or loads the saved copy) it speaks at once with the native TextToSpeech plugin, else speechSynthesis, and any sentence Phonon fails on falls back the same way. `prep-voice.js` now returns early if `PREP_VOICE` already exists (one model, one state). Now on it: PrepReels Listen, CliniX script reading, FundX voice cues. Lessons and Play already used Phonon directly. **Code Blue stays on its instant system voice on purpose**: a resuscitation cue must never wait for a model. Tests: `test/smd-speak.test.mjs`, PrepReels harness Listen checks, `test/run-prep-voice-ui.mjs`.
+- **2026-11-17 video cut off on iPad (owner screenshots):** the right ~13% of every PrepReels video was missing in the card and in full screen. Cause: the iPad layout zooms the page (html zoom 1.15, smd-refined); WebKit lays the player's page out at the zoomed width but draws it in the unzoomed box. Fix in `prep-medigram-media.js` `fit()`: the iframe undoes the zoom (`zoom: 1/z`) and is sized in px (box size times z), re-run on resize, orientation change and full-screen toggles. Harness checks the player box matches its frame with effective zoom 1 at 390 and 1366 widths. CliniX embeds the same shim under the same zoom and likely has the same crop on iPad (not changed here).
+- **2026-11-17 Like, Save, Share in PrepReels (owner):** every card has Like / Save / Share. Like is remembered (`s.mglk`); a liked question, lesson or Image Library picture with a module puts 2 unseen questions from that module right after it, and the topic (`s.mgtop`, last 20) leads the next batches' draw. Save: questions also go to PrepNucleus Bookmarks (`s.bm`, prep.js bmToggle format); every card goes to the Saved reel (`s.mgsv`, a reference), opened from "Saved from PrepReels" on home. Share: WhatsApp (wa.me), the phone's share sheet, or a StewardMD friend: new social routes `POST share {smdId, ref}`, `GET shares`, `POST shares/seen` (functions/api/prep/social), accepted friends only, 40 a day, 14-day inbox. **A share is a reference, never content** (`validShareRef`: question by subject/module/id, video id, Image Library system+src, lesson subject/module); the friend's app rebuilds the card from its own bank, so no user text crosses between users. Received cards lead the next reel, marked "Sent by <name>", then leave the inbox. Table `social_shares` (migration 0008, also created on first use; Leave Arena's batch creates it before deleting so it never fails). Rows only with a Firebase sign-in and the Arena join, as all social.
+
+## 2026-11-17 Compact PrepNucleus home; Swipe feed united into PrepReels (owner)
+Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepReels are same, unite them"; plan approved ("Ok do it").
+- One feed: PrepReels. Play's Swipe feed row is gone while PrepReels is on; its act and deep link open PrepReels. The old feed
+  code stays as the fallback when PrepReels is off (reversible, no deletion).
+- Home keeps every feature but lists each once: rows already in the You and Tests tabs leave home while the tab bar is loaded.
+  Practise is an icon grid, Play a sideways strip, Subjects show 6 with Show all. Previous year papers stayed on home (one tile,
+  top NEET-PG feature) although the first plan moved it to Tests.
+- Rejected: deleting the old Swipe feed now (wait for the owner to confirm PrepReels on device); hiding Subjects entirely
+  (Tests > QBank has them, but subjects are the core browse on home).
+
+
+## Left-edge swipe: back everywhere, the menu on home only, and an off switch (owner, 2026-11-19)
+- Owner: the swipe brought the sidebar up behind PrepNucleus and locked its scrolling; it must open the sidebar on the home
+  screen only, go back one screen everywhere else, be switchable off in Preferences, and ignore accidental swipes.
+- `swipe-back.js`: `moduleOpen()` (PREP, ATLAS, OPHTHALMOS, TOKOS, NARKE, KARDIA, FUNDX, CLINIX, `html.pn-open`,
+  `body.maik-open`, `#smdPrep`) blocks the menu; the menu never opens within 900 ms of a back step (one swipe can't close
+  a module and open the menu); on home nothing is dragged under the finger (a stray back-style control's layer used to
+  slide the home screen itself, so the menu check then failed). Android back never exits from inside a module.
+- Accidental swipes: start within 30 px of the edge, not on a text box, slider or `[data-no-swipe]`; at least twice as
+  far across as down (a drag that becomes a scroll is dropped); a flick must travel 56 px (was 24); vertical drift at
+  release at most max(48 px, half the distance).
+- Off switch: Settings > Preferences "Swipe from the left edge" (`smd_swipe_back`, on by default). Off = no back-swipe and
+  no menu-swipe, also on the Settings pages; Back buttons and Android's system back keep working.
+- Guard: `test/run-swipe-guard-ui.mjs`. `test/run-swipe-back-ui.mjs` has 5 checks failing on main before this change
+  (it cannot open KardiQ, the later home checks follow from it).
+
+## 2026-11-21 - SURGX operates on the eye; ophthalmology is no longer emergencies-only
+- **Context**: on 2026-11-04 ophthalmology was scoped as on-call eye emergencies (protocols only); operations were left
+  to the Ophthalmós module, which is imaging and clinic teaching and has none. Owner asked for cataract, PRK and the rest,
+  and for the remaining gaps except oral and maxillofacial surgery.
+- **Decision**: 13 eye operations, 2 transplant (filed under urology, no new specialty), 2 cardiac and 3 plastics
+  procedures, a shared `eye` step pack; the specialty title becomes "Ophthalmology"; the coverage test now requires eye
+  procedures. Oral and maxillofacial surgery stays out by owner choice.
+- **Reversible**: content only (JSON, note templates, a test list); revert the commit to remove.
+
+## 2026-11-21 - MaiK offline book: oncology notes behind a switch (smd_maik_kb_onco)
+- **Owner**: "1,2 yes and upload" (add the cancer notes to the on-device book; check embeddings).
+- **Decision**: a second published book, `maik-lite-kb-onco1.jsonl` on `models.stewardmd.in/maik/`
+  (55,385 rows = the original 42,176 + 13,209 oncology study notes rewritten in original wording from
+  a cancer textbook; 44,952,641 bytes; sha256 9de2045d...). `kb/ai/maik-lite-kb-store.js` picks it only
+  when `smd_maik_kb_onco` is "1"; anything else is the original book, byte for byte. OFF by default.
+- **Why**: on 390 held-out cancer questions the key facts found in the top 3 passages rose from 26.6%
+  to 42.7% (keyword search). The 54-case general bench is unchanged (real router 85.4% either book).
+- **Embeddings measured, not shipped**: BGE-small hybrid added ~1 point on the general bench (85.4 ->
+  86.0) and ~5 on cancer (42.7 -> 49.8); BGE-base and MedEmbed-small did no better. Next step is only a
+  check that the app's llama.cpp build can run BGE-small embeddings on the phone.
+- **Copyright**: notes are rewritten facts, not copied text; the owner made the call.
+
+## 2026-11-21 - MaiK Lite: meaning search over the book only when the router misses (smd_maik_book_vec)
+- **Owner**: "Ok" to building the targeted hybrid and uploading its vectors.
+- **Decision**: `kb/ai/maik-book-vec.js` + one hook in `maik-local.js` retrieveGrounding. When the router
+  named NO disease, the keyword pool is fused (RRF, k=60) with the 30 nearest book rows by EmbeddingGemma 2
+  (the existing On-phone search pack). When the router named a disease, nothing changes.
+  Vectors: `maik-lite-kb-onco1.vec-q8.{i8,json}` on models.stewardmd.in (55,385 x 768 int8, 42.5 MB,
+  built with the phone's exact prefixes; tied to the onco1 book sha). Default OFF; needs flag "1" +
+  `smd_maik_kb_onco` book + search pack + native embed; any missing piece = keyword only.
+- **Why**: real maik-local + hosted vectors on the 54-case bench, router-miss path: 47.0% -> 54.8%
+  (fully covered 11 -> 14). Cancer questions 42.7% -> 50.6%. Router-matched path measured flat (85.4 ->
+  84.8), so it is excluded. BGE-small/base and MedEmbed were measured and lost to EmbeddingGemma 2.
+- **Device risk**: 42.5 MB extra download and ~42 MB of int8 in memory while MaiK Lite answers; not yet
+  measured on a phone.
+
+## 2026-11-22 - StewardMD Edge: Needle and FunctionGemma removed, rules only
+- **Owner**: "Remove Needle ... edge completely from app ... keep embedding gemma 2 only"; chose "Models only"
+  (keep the rule-based instant lookups and KB navigation).
+- **Decision**: delete the Needle plugin (npm, iOS SPM, Android gradle, MainActivity hook, preflight step,
+  device and native-host harnesses) and the FunctionGemma Edge pack; edge-router.js is rules only
+  (engineChoice() = "rules", no adapters, no warm-up); the Edge engine picker leaves Settings. Phones that had
+  FunctionGemma delete the 291 MB file once (maik-models.js purgeRetired, key smd_maik_retired_v1).
+- **Kept**: Layer 0 rules under `smd_edge`; EmbeddingGemma 2 search pack; scripts/edge dataset tooling (dev only).
+- **Side effect**: the "phone is hot" hint in MaiK read thermal state through Needle; it no longer shows.
+- **Native**: the Needle removal reaches phones only with the next store build; OTA carries the JS side.
+
+## 2026-11-23 - ResearchMD Phase 2 integration: two contract additions, chain-handle protocol list
+- **Context**: screens and API were built in parallel; the protocol screen calls GET /v1/projects/{id}/protocols
+  and the search screen posts multipart to /v1/projects/{id}/import-uploads. Neither was frozen in 2.0.
+- **Decision**: add the two small API routes instead of changing screens (documented in
+  `docs/research/contracts/phase-2/contract-additions.md` + schemas). import-uploads stores bytes in R2 at
+  `projects/{id}/imports/{sha256}.{ext}` (5 MiB, .ris/.bib/.bibtex/.csv, owner/editor/analyst) and returns
+  `{storageKey, sha256, bytes}` for POST /imports. The protocol list returns protocol objects whose `id` is the
+  chain handle (first version's id), because the screen groups versions by id and every /v1/protocols/{id} route
+  already resolves any chain id to the project; per-version identity is (id, version).
+- **GRADE wiring**: research-grade.js + research-screen-grade.js load with `?v=rmd2` before research.js; GRADE tab
+  after Run. Assessments stay device-local until the 4.3 API contract lands.
+- **Gate**: test/research-phase2-e2e.test.mjs drives the exact screen sequence in-process (SQLite D1 mock, R2 stub,
+  connector fetch mocked) and asserts GET /prisma equals counts derived independently from stored decision rows;
+  an outsider gets 404 on every route in the sequence.
+
+## 2026-11-24 ResearchMD: no BYOK, flag default ON
+- D-6: no BYOK. Research AI is paid with platform credits through MaiK Wallet only; no user API keys stored. Package 6.2 closed.
+- `smd_research` flips to DEFAULT ON at merge of PR #2730; `"0"` / `?research=0` is the per-device kill switch.
+- CARE and SPIRIT checklists: owner will supply the Case Report and clinical trial protocol checklist PDFs to use in place of the CC BY-NC-ND text.

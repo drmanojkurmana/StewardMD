@@ -552,13 +552,13 @@
     receipt_long: '<path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/>',
     bill: '<rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/>',
     // ── Home reference-look icons (owner 2026-11-08): hand-drawn line icons, one per tile, no two alike.
-    hrfStart: '<rect x="5" y="4.5" width="14" height="17" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="M9 2.8h6"/><path d="M12 10v6M9 13h6"/>',
-    hrfDx: '<circle cx="10" cy="8" r="3.2"/><path d="M4.5 19.5a5.5 5.5 0 0 1 9-4.2"/><circle cx="17" cy="16.5" r="3"/><path d="m19.3 18.8 2 2"/>',
+    hrfStart: '<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/><path d="M6.2 17.6c2.4-4.6 6.6-7.4 12-7.9-1 4.8-5.3 8-12 7.9z" fill="#4F9A55" stroke="none"/>',
+    hrfDx: '<path d="M5 3.5h2M14 3.5h2"/><path d="M6 3.5v5a4.5 4.5 0 0 0 9 0v-5"/><path d="M10.5 13v3a3 3 0 0 0 3 3h.4l1.3-3.6 1.6 5.2 1.1-2.6h.4"/><circle cx="20.4" cy="18" r="1.8"/>',
     hrfCapsule: '<rect x="3.5" y="8" width="17" height="8" rx="4" transform="rotate(-45 12 12)"/><path d="m8.5 8.5 7 7"/>',
-    hrfCalc: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7h7"/><circle cx="8.5" cy="11" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="11" r=".9" fill="currentColor" stroke="none"/><circle cx="8.5" cy="14.5" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14.5" r=".9" fill="currentColor" stroke="none"/><circle cx="8.5" cy="18" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="18" r=".9" fill="currentColor" stroke="none"/>',
+    hrfCalc: '<rect x="3" y="3" width="12" height="18" rx="2.5"/><rect x="5.5" y="5.5" width="7" height="3.6" rx="1"/><rect x="5.6" y="11.6" width="2.6" height="2.6" rx=".7" fill="currentColor" stroke="none"/><rect x="9.8" y="11.6" width="2.6" height="2.6" rx=".7" fill="currentColor" stroke="none"/><rect x="5.6" y="15.8" width="2.6" height="2.6" rx=".7" fill="currentColor" stroke="none"/><rect x="9.8" y="15.8" width="2.6" height="2.6" rx=".7" fill="currentColor" stroke="none"/><path d="M15 15h1.4l1.2-3.6 1.6 6.4 1.2-2.8H22"/>',
     hrfVirus: '<circle cx="12" cy="12" r="4.5"/><path d="M12 7.5V4M12 20v-3.5M7.5 12H4M20 12h-3.5M8.8 8.8 6.3 6.3M17.7 17.7l-2.5-2.5M15.2 8.8l2.5-2.5M6.3 17.7l2.5-2.5"/><circle cx="10.2" cy="10.8" r="1" fill="currentColor" stroke="none"/><circle cx="13.8" cy="13.2" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none"/>',
-    hrfFlask: '<path d="M10 3h4"/><path d="M10.5 3v5L5 18a1.8 1.8 0 0 0 1.6 2.7h10.8A1.8 1.8 0 0 0 19 18L13.5 8V3"/><path d="M7.5 14.5h9"/>',
-    hrfIvBag: '<path d="M9 3.5h6"/><rect x="6.5" y="5" width="11" height="13" rx="2.5"/><path d="M9.5 9.5h5M12 8v5M9.5 11h5" stroke-width="1.4"/><path d="M12 18v1.5a2 2 0 0 0 2 2"/>',
+    hrfFlask: '<ellipse cx="12" cy="10" rx="9" ry="4.5"/><path d="M3 10v3.5C3 16 7 18 12 18s9-2 9-4.5V10"/><circle cx="8.8" cy="10" r="1.3" fill="currentColor" stroke="none"/><circle cx="14.3" cy="8.9" r=".9" fill="currentColor" stroke="none"/><circle cx="12.6" cy="11.6" r=".75" fill="currentColor" stroke="none"/>',
+    hrfIvBag: '<rect x="8" y="2.5" width="8" height="3" rx="1"/><path d="M9 5.5V7M15 5.5V7"/><rect x="6.5" y="7" width="11" height="14.5" rx="2.6"/><path d="M12 11.5v5.5M9.25 14.25h5.5"/>',
     hrfHospital: '<path d="M5 21V8.5A1.5 1.5 0 0 1 6.5 7h6A1.5 1.5 0 0 1 14 8.5V21"/><path d="M14 11h3.5A1.5 1.5 0 0 1 19 12.5V21"/><path d="M3.5 21h17"/><path d="M9.5 9.5v4M7.5 11.5h4"/>',
     hrfHome: '<path d="M12 3.8 3.8 11.2h2.4v8.6h11.6v-8.6h2.4Z" fill="currentColor" stroke="none"/><path d="M10.2 19.8v-4.6h3.6v4.6" fill="none" stroke="#fff" stroke-width="1.6"/>',
     hrfFolder: '<path d="M3.5 6.5A1.5 1.5 0 0 1 5 5h4l2 2.5h8A1.5 1.5 0 0 1 20.5 9v8.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5Z"/>',
@@ -1071,6 +1071,7 @@
     speckit: function () { if (window.SMD_KITS && SMD_KITS.open) SMD_KITS.open(); else toast("Specialty kits loading…"); },
     icdsearch: function () { if (window.SMD_ICD) SMD_ICD.open(); },
     dosecalc: function () { if (window.SMD_DOSECALC) SMD_DOSECALC.open({ source: "Drugs" }); else toast("Dose calculator loading…"); },
+    research: function () { if (window.SMD_RESEARCH && SMD_RESEARCH.open) SMD_RESEARCH.open(); else toast("ResearchMD loading…"); },
     // Neonatal hub (neo-hub.js), flag smd_neo DEFAULT ON (Beta, owner 2026-10-01).
     neo: function () { if (window.SMD_NEO_HUB) SMD_NEO_HUB.open(); else toast("Neonatal tools loading…"); },
     // Adult normal values (adult-ref.js): sourced adult lab reference ranges, review pending.
@@ -1132,7 +1133,7 @@
       if (!t || !homeToolEligible(t)) return;
       opts = opts && typeof opts === "object" ? opts : undefined;
       if (opts && window.PREP && PREP.isOpen && PREP.isOpen() && PREP.close) PREP.close();
-      modHold("PREP");
+      if (!(window.PREP_STARTUP && PREP_STARTUP.willPlay && PREP_STARTUP.willPlay(opts))) modHold("PREP");
       if (window.PREP && PREP.open) PREP.open(opts); else toast("PrepNucleus loading…");
     },
     // Narkē (Anaesthesia), the same kill-switch rule as Tokós.
@@ -2176,6 +2177,10 @@
     if (window.SMD_DOSECALC && SMD_DOSECALC.on) return SMD_DOSECALC.on();
     try { var q = (location.search.match(/[?&]dosecalc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_dose_calc") !== "0"; } catch (e) { return true; }
   }
+  // ResearchMD (research.js): flag smd_research, DEFAULT ON (owner 2026-11-24); "0" turns it off. Read directly: home.js loads first.
+  function researchOn() {
+    try { var q = (location.search.match(/[?&]research=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_research") !== "0"; } catch (e) { return true; }
+  }
   // Neonatal layer (neo-flags.js), master flag smd_neo DEFAULT ON under a Beta label (owner 2026-10-01);
   // "0" turns it off. Read directly: home.js loads first.
   function neoOn() {
@@ -2284,6 +2289,9 @@
     // Read directly: home.js loads before dose-calc.js.
     { act: "dosecalc", ic: "medication", tt: "Dose calculator", sub: "Dose for one patient", defOn: false,
       eligible: function () { return doseCalcOn(); } },
+    // ResearchMD meta-analysis workspace (research.js). Flag smd_research, DEFAULT ON.
+    { act: "research", ic: "science", tt: "ResearchMD", sub: "Meta-analysis with sources", defOn: true, beta: true,
+      eligible: function () { return researchOn(); } },
     // Neonatal hub: dosing, preparation, infusions, fluids, growth, bilirubin, scores, reference values,
     // procedures, drug levels. Shown on Home by default once the flag is on.
     { act: "neo", ic: "child_care", tt: "Neonatal", sub: "Newborn and NICU care", defOn: true, beta: true,
@@ -6065,7 +6073,7 @@
           // Detailed. Applies to every engine, cloud and on-device alike (see maikApplyLen).
           '<button class="maik-chip maik-len" id="maikLen" type="button" title="Answer length" aria-label="Answer length">' + maikLenLabel() + '</button>' +
           '<textarea class="maik-ta" id="maikQ" rows="1" aria-label="Ask a clinical question" placeholder="Ask MaiK…"></textarea>' +
-          '<button class="maik-extract" id="maikExtract" type="button" title="Extract findings for Clinical Reasoning" aria-label="Extract findings for Clinical Reasoning">' + svg("brain", "smd-ico") + '</button>' +
+          '<button class="maik-extract" id="maikExtract" type="button" title="Extract findings for Clinical Reasoning" aria-label="Extract findings for Clinical Reasoning">' + svg("brain", "smd-ico") + '<span class="mx-l">Findings</span></button>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
       // Disclaimer follows the ENGINE. Saying "Grounded" while the on-device model answers from its
@@ -10333,7 +10341,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var micBtn = sheet.querySelector("#maikMic"), extractBtn = sheet.querySelector("#maikExtract");
     function reasoningReady() { return !!(window.SMD_AI && SMD_AI.extract && window.DX && DX.addFindings && DX.findingCatalog); }
     function autosizeQ() { qEl.style.removeProperty("height"); }
-    function refreshExtract() { if (extractBtn) extractBtn.classList.toggle("show", !!((qEl.value || "").trim() && reasoningReady())); }
+    /* The Findings pill shows only when the text reads like a clinical case: 5 words or more that the MaiK classifier
+       calls medical (owner 2026-11-19: an unlabelled brain circle appeared for "Who"). */
+    function caseLike(t) {
+      t = String(t || "").trim();
+      if (t.split(/\s+/).length < 5) return false;
+      try { var M = window.MaiKScope; if (M && M.classify) return M.classify(t).medical === true; } catch (e) {}
+      return true;
+    }
+    function refreshExtract() { if (extractBtn && !extractBtn.classList.contains("busy")) extractBtn.classList.toggle("show", !!(caseLike(qEl.value) && reasoningReady())); }
     // MaiK Scribe mic → the shared voice dialog (the same one that works in Clinical
     // Reasoning), in text mode: dictate into the chat box, then send to MaiK or tap
     // "Extract findings →". (Inline capture in the composer was unreliable while the
@@ -10424,9 +10440,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (!q) { extractBtn.classList.remove("show"); return; }
       if (!reasoningReady()) { toast("Clinical Reasoning isn’t ready yet."); return; }
       var catalog = []; try { catalog = DX.findingCatalog() || []; } catch (e) {}
-      extractBtn.disabled = true; extractBtn.textContent = "Extracting findings…";
+      // The Findings pill (owner 2026-11-19): busy reads "Extracting…" with a spinning icon, idle reads "Findings";
+      // the long sentence that used to be written into a 44px circle spilled out over the send button.
+      var exIdle = function () { extractBtn.disabled = false; extractBtn.classList.remove("busy"); extractBtn.setAttribute("aria-label", "Extract findings for Clinical Reasoning"); extractBtn.innerHTML = svg("brain", "smd-ico") + '<span class="mx-l">Findings</span>'; };
+      extractBtn.disabled = true; extractBtn.classList.add("busy"); extractBtn.setAttribute("aria-label", "Extracting findings");
+      extractBtn.innerHTML = svg("brain", "smd-ico") + '<span class="mx-l">Extracting…</span>';
       SMD_AI.extract(q, "reasoning", catalog).then(function (r) {
-        extractBtn.disabled = false; extractBtn.innerHTML = svg("brain", "smd-ico") + " Extract findings for Clinical Reasoning →";
+        exIdle();
         var raw = (r && r.findings) || [];
         var keys = raw.map(function (f) { return typeof f === "string" ? f : (f && f.key); }).filter(Boolean);
         // A toast, not a bubble: this is a tool result, not something MaiK said. As a bubble it landed in
@@ -10439,7 +10459,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var ob = document.createElement("button"); ob.className = "maik-chip"; ob.style.marginTop = "8px"; ob.textContent = "Open Clinical Reasoning →";
         ob.addEventListener("click", function () { close(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else if (window.DX && DX.open) DX.open({ workspace: true }); } catch (e) {} });
         d.appendChild(ob); scroll(); extractBtn.classList.remove("show");
-      }).catch(function () { extractBtn.disabled = false; extractBtn.innerHTML = svg("brain", "smd-ico") + " Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now — please try again."); });
+      }).catch(function () { exIdle(); toast("Couldn’t extract findings right now — please try again."); });
     });
     qEl.addEventListener("input", function () { autosizeQ(); refreshExtract(); maikBuddyCue("typing"); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });

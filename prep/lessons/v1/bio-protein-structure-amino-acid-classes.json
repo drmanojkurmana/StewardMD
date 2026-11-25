@@ -10,13 +10,37 @@
    "say": "Ten amino acids are essential, with histidine and arginine semi-essential. Tyrosine spares phenylalanine and cysteine spares methionine, so requirements quote combined aromatic and sulfur totals.",
    "vis": {
     "kind": "table",
-    "cols": ["Class by side chain", "Members", "Charge or character at pH 7"],
+    "cols": [
+     "Class by side chain",
+     "Members",
+     "Charge or character at pH 7"
+    ],
     "rows": [
-     ["Nonpolar aliphatic", "Gly, Ala, Val, Leu, Ile, Met, Pro", "Hydrophobic core; Pro is imino kink"],
-     ["Aromatic", "Phe, Tyr, Trp", "UV absorbing; Tyr polar hydroxyl"],
-     ["Polar uncharged", "Ser, Thr, Cys, Asn, Gln", "H-bonding; Cys disulfide capable"],
-     ["Acidic", "Asp, Glu (plus amides Asn, Gln)", "Negative, metal and salt bridges"],
-     ["Basic", "Lys, Arg, His", "Positive; His near neutral pKa buffers"]
+     [
+      "Nonpolar aliphatic",
+      "Gly, Ala, Val, Leu, Ile, Met, Pro",
+      "Hydrophobic core; Pro is imino kink"
+     ],
+     [
+      "Aromatic",
+      "Phe, Tyr, Trp",
+      "UV absorbing; Tyr polar hydroxyl"
+     ],
+     [
+      "Polar uncharged",
+      "Ser, Thr, Cys, Asn, Gln",
+      "H-bonding; Cys disulfide capable"
+     ],
+     [
+      "Acidic",
+      "Asp, Glu (plus amides Asn, Gln)",
+      "Negative, metal and salt bridges"
+     ],
+     [
+      "Basic",
+      "Lys, Arg, His",
+      "Positive; His near neutral pKa buffers"
+     ]
     ]
    }
   },
@@ -25,8 +49,21 @@
    "say": "Branched chain amino acids target muscle, with leucine signalling protein synthesis. Tryptophan dominates ultraviolet absorbance at 280 nanometres, the basis of rapid protein estimation in laboratories.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Glucogenic (to glucose)", "points": ["Most amino acids via pyruvate or TCA", "Alanine flagship to liver", "Fasting muscle export form"]},
-    "right": {"title": "Ketogenic (to acetyl-CoA)", "points": ["Leucine and lysine ONLY purely ketogenic", "Phe, Ile, Thr, Trp, Tyr both routes", "Never net glucose from leucine/lysine"]
+    "left": {
+     "title": "Glucogenic (to glucose)",
+     "points": [
+      "Most amino acids via pyruvate or TCA",
+      "Alanine flagship to liver",
+      "Fasting muscle export form"
+     ]
+    },
+    "right": {
+     "title": "Ketogenic (to acetyl-CoA)",
+     "points": [
+      "Leucine and lysine ONLY purely ketogenic",
+      "Phe, Ile, Thr, Trp, Tyr both routes",
+      "Never net glucose from leucine/lysine"
+     ]
     }
    }
   },
@@ -40,14 +77,42 @@
    "say": "Glycine, proline, cysteine, methionine, arginine and histidine each map to a flagship disease or drug later. Singletons earn disproportionate questions relative to their abundance in proteins.",
    "vis": {
     "kind": "table",
-    "cols": ["Singleton", "Superpower", "Later flagship"],
+    "cols": [
+     "Singleton",
+     "Superpower",
+     "Later flagship"
+    ],
     "rows": [
-     ["Glycine", "Smallest, flexible, donor", "Collagen, heme, glycine encephalopathy"],
-     ["Proline", "Imino kink maker", "Collagen hydroxylation, scurvy"],
-     ["Cysteine", "Disulfide and thiol redox", "Glutathione, cystinuria stones"],
-     ["Methionine", "Start plus SAM methyls", "Homocystinuria, methylation"],
-     ["Arginine", "Most basic, guanidinium", "Urea cycle, nitric oxide"],
-     ["Histidine", "Buffer at body pH", "Bohr effect, carnosine, HAL disease histidinaemia benign"]
+     [
+      "Glycine",
+      "Smallest, flexible, donor",
+      "Collagen, heme, glycine encephalopathy"
+     ],
+     [
+      "Proline",
+      "Imino kink maker",
+      "Collagen hydroxylation, scurvy"
+     ],
+     [
+      "Cysteine",
+      "Disulfide and thiol redox",
+      "Glutathione, cystinuria stones"
+     ],
+     [
+      "Methionine",
+      "Start plus SAM methyls",
+      "Homocystinuria, methylation"
+     ],
+     [
+      "Arginine",
+      "Most basic, guanidinium",
+      "Urea cycle, nitric oxide"
+     ],
+     [
+      "Histidine",
+      "Buffer at body pH",
+      "Bohr effect, carnosine, HAL disease histidinaemia benign"
+     ]
     ]
    }
   },
@@ -56,8 +121,21 @@
    "say": "Selenocysteine is the twenty first coded amino acid, while hydroxyproline and carboxyglutamate are made after translation. Coded versus made later separates translation questions from metabolism questions cleanly.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Coded (in genetic code)", "points": ["20 standard plus selenocysteine (UGA)", "Inserted during translation", "Citrulline and ornithine excluded"]},
-    "right": {"title": "Made after translation", "points": ["Hydroxyproline, hydroxylysine (collagen)", "Gamma-carboxyglutamate (clotting)", "Phosphorylation, glycosylation signals"]
+    "left": {
+     "title": "Coded (in genetic code)",
+     "points": [
+      "20 standard plus selenocysteine (UGA)",
+      "Inserted during translation",
+      "Citrulline and ornithine excluded"
+     ]
+    },
+    "right": {
+     "title": "Made after translation",
+     "points": [
+      "Hydroxyproline, hydroxylysine (collagen)",
+      "Gamma-carboxyglutamate (clotting)",
+      "Phosphorylation, glycosylation signals"
+     ]
     }
    }
   },
@@ -68,12 +146,82 @@
     "kind": "flow",
     "title": "From class to behaviour",
     "nodes": [
-     {"id": "side", "label": "Side chain class known"},
-     {"id": "charge", "label": "Charge at pH 7 predicted"},
-     {"id": "fate", "label": "Glucogenic or ketogenic fate"},
-     {"id": "flag", "label": "Flagship disease or drug"}
+     {
+      "id": "side",
+      "label": "Side chain class known"
+     },
+     {
+      "id": "charge",
+      "label": "Charge at pH 7 predicted"
+     },
+     {
+      "id": "fate",
+      "label": "Glucogenic or ketogenic fate"
+     },
+     {
+      "id": "flag",
+      "label": "Flagship disease or drug"
+     }
     ],
-    "edges": [["side", "charge"], ["side", "fate"], ["fate", "flag"]]
+    "edges": [
+     [
+      "side",
+      "charge"
+     ],
+     [
+      "side",
+      "fate"
+     ],
+     [
+      "fate",
+      "flag"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Leucine and lysine are the only purely ketogenic amino acids. Isoleucine, phenylalanine, threonine, tryptophan and tyrosine are both glucogenic and ketogenic. Tryptophan dominates protein absorbance at 280 nanometres, and histidine buffers near physiological pH. This pairing is repeatedly tested in nutrition, metabolism and laboratory spectroscopy question stems.",
+   "say": "High-yield for the exam. Leucine and lysine are the only purely ketogenic amino acids. Isoleucine, phenylalanine, threonine, tryptophan and tyrosine are both glucogenic and ketogenic. Tryptophan dominates protein absorbance at two hundred eighty nanometres, and histidine buffers near physiological pH. This pairing is repeatedly tested in nutrition, metabolism and laboratory spectroscopy question stems.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Purely ketogenic",
+      "Leucine and lysine only"
+     ],
+     [
+      "Both glucogenic and ketogenic",
+      "Isoleucine, phenylalanine, threonine, tryptophan, tyrosine"
+     ],
+     [
+      "Essential amino acids",
+      "PVT TIM HALL mnemonic"
+     ],
+     [
+      "Protein absorbance",
+      "Tryptophan strongest at 280 nanometres"
+     ],
+     [
+      "Smallest amino acid",
+      "Glycine, achiral, every third collagen residue"
+     ],
+     [
+      "Helix breaker",
+      "Proline, secondary amine imino acid"
+     ],
+     [
+      "Buffer at body pH",
+      "Histidine side chain"
+     ],
+     [
+      "Twenty first amino acid",
+      "Selenocysteine from UGA codon"
+     ]
+    ]
    }
   }
  ],

@@ -721,6 +721,13 @@
       '<div id="dbMono" class="db-mono"><div class="db-soon">Loading prescribing details…</div></div>';
     wireFigButtons(b);
     figCardLate(d);
+    // Shared pictures and animations for this drug and its class, from the one Image Library bank (owner 2026-11-23).
+    if (window.SMD_IMGLIB && SMD_IMGLIB.strip) {
+      var monoHost = b.querySelector("#dbMono"), nm = d.composition;
+      SMD_IMGLIB.strip(b, [d.composition, cls, d["class"]], { before: monoHost }).then(function () {
+        if (!st.info || st.info.composition !== nm) { var s0 = b.querySelector(":scope > .igl-strip"); if (s0) s0.remove(); }
+      });
+    }
     // brands (all filters + sorts preserved) -> right-side slide-in drawer
     var dw = root.querySelector("#dbDwBody");
     dw.innerHTML =

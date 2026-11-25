@@ -264,9 +264,10 @@ try {
   await ev(`PREP.back(); PREP.back(); return 1;`);
   // Legacy pattern mocks below; the default Tests 2 hub (data-act=t2-pre) has its own suite
   // (test/run-prep-tests2-ui.mjs), so pin the flag off for this section only.
-  await ev(`try{localStorage.setItem("smd_prep_tests2","0");}catch(e){} return 1;`);
-  await until(`return !!document.querySelector("#smdPrep [data-act=mocks]");`, 3000);
-  await click("#smdPrep [data-act=mocks]");
+  // Mock exam is in the Tests tab (compact home 2026-11-17); its Tests section, not QBank.
+  await ev(`try{localStorage.setItem("smd_prep_tests2","0"); localStorage.setItem("smd_prep_tt","tests");}catch(e){} return 1;`);
+  await until(`return !!document.querySelector("#smdPrep nav .pnv-tab[data-tab=tests]");`, 3000);
+  await click("#smdPrep nav .pnv-tab[data-tab=tests]");
   ok(await until(`return document.querySelectorAll("#smdPrep [data-act=mock]").length === 4;`, 3000), "NEET-PG and INI-CET patterns, full and mini");
   await shot("mocks");
   await click('#smdPrep [data-act=mock][data-v=neet-pg][data-k=mini]');

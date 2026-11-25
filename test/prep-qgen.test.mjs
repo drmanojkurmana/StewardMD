@@ -6,6 +6,11 @@
 import { test, mock } from "node:test";
 import assert from "node:assert/strict";
 
+// The per-user rate limit compares Date.now() values. The tests set MAIK_RATE_LIMIT_SECONDS=0.001 (0 would mean "use the
+// 3 s default"), so two back-to-back fake requests inside one millisecond tripped it: a 429 about 1 run in 5. A clock that
+// never repeats a value removes that.
+{ const realNow = Date.now.bind(Date); let lastNow = 0; Date.now = () => (lastNow = Math.max(realNow(), lastNow + 1)); }
+
 const OWNER = "drmanojkurmana@gmail.com";
 const CLAIMS = { "tok-a": { sub: "u-a", email: "a@example.com", email_verified: true }, "tok-b": { sub: "u-b", email: "b@example.com", email_verified: true }, "tok-o": { sub: "u-o", email: OWNER, email_verified: true } };
 const realAuth = await import("../functions/_fbauth.js");

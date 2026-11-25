@@ -87,9 +87,23 @@ const TESTS_RE = /^v\d{1,3}\/tests\/(?:index\.json|[a-z0-9-]{2,60}\/[a-z0-9_-]{2
 // Attribution credits for freely licensed images: image-credits.json
 const CREDITS_RE = /^image-credits\.json$/;
 /* Content that used to ship inside the app and now loads from R2 on first open (owner 2026-11-12), at the SAME path it
- * had in the bundle under app/: the bundled PrepNucleus lessons and their diagrams, and the CliniX photos. Gated like the
- * question bank (signed-in user; pictures through short-lived signed URLs). tools/upload-app-media.mjs puts them there. */
-const APP_RE = /^app\/(?:prep\/lessons\/v1\/[a-z0-9-]{2,80}\.json|prep\/lessons\/media\/[a-z0-9_-]{2,80}\.(?:svg|webp)|clinix\/media\/(?:practicals|skills)\/[a-z0-9_-]{2,120}\.webp)$/;
+ * had in the bundle under app/: PrepNucleus lessons and diagrams, CliniX photos, teaching animations, and the SurgX,
+ * Kardia, Tokos and Ophthalmos pictures and clips. JSON manifests stay in the app. Gated like the question bank
+ * (signed-in user; pictures and clips through short-lived signed URLs). tools/upload-app-media.mjs puts them there.
+ * ProbeLab is not here: its iframe does not use this route. */
+const APP_RE = new RegExp("^app/(?:" + [
+  "prep\\/lessons\\/v1\\/[a-z0-9-]{2,80}\\.json",
+  "prep\\/lessons\\/media\\/[a-z0-9_-]{2,80}\\.(?:svg|webp)",
+  "clinix\\/media\\/(?:practicals|skills)\\/[a-z0-9_-]{2,120}\\.webp",
+  "media\\/anim\\/[a-z0-9_-]{2,80}\\.(?:webp|av1\\.mp4|mp4)",
+  "surgx\\/media\\/[a-z0-9_-]{2,80}\\/[a-z0-9_-]{2,80}\\.(?:webp|png|jpe?g)",
+  "kardia\\/media\\/clips\\/[a-z0-9_-]{2,80}\\.mp4",
+  "kardia\\/learn\\/diagrams\\/[a-z0-9_-]{2,80}\\.svg",
+  "tokos\\/media\\/[a-z0-9_-]{2,40}\\/[a-z0-9_-]{2,80}\\.(?:webp|svg|png|jpe?g)",
+  "tokos\\/learn\\/(?:[a-z0-9_-]{1,40}\\/){1,2}[a-z0-9_-]{2,80}\\.(?:webp|svg|png|jpe?g)",
+  "ophthalmos\\/learn\\/media\\/[a-z0-9_-]{2,40}\\/[a-z0-9_-]{2,80}\\.(?:webp|svg|png|jpe?g)",
+  "ophthalmos\\/learn\\/diagrams\\/[a-z0-9_-]{2,80}\\.svg",
+].join("|") + ")$");
 // On-phone search vectors (kb/ai/embed-local.js): the EmbeddingGemma disease vectors,
 // v<n>/kb/kb-vectors-q5.json (the id list plus dims/scale) and v<n>/kb/kb-vectors-q5.i8
 // (the raw int8 rows). Immutable like every other versioned bank file: a rebuild goes to
@@ -150,6 +164,9 @@ function contentTypeFor(p, obj) {
       : "image/webp";
   }
   if (/\.svg$/.test(p)) return "image/svg+xml";
+  if (/\.png$/.test(p)) return "image/png";
+  if (/\.jpe?g$/.test(p)) return "image/jpeg";
+  if (/\.mp4$/.test(p)) return "video/mp4";
   if (/\.i8$/.test(p)) return "application/octet-stream";
   return "application/json; charset=utf-8";
 }
@@ -198,6 +215,7 @@ async function serveR2Object(env, p, request, cacheControl) {
   const got = await getBankObject(env, p);
   if (got.error) return got.error;
   const { obj } = got;
+  // obj.body is the R2 stream. Do not read it here: clips are large and must not be buffered into one string.
   return withCors(request, new Response(obj.body, { status: 200, headers: bankResponseHeaders(p, obj, cacheControl) }));
 }
 

@@ -50,7 +50,8 @@ const swipeCommit = new Function(m[1] + "; return swipeCommit;")();
 
 test("edge swipe commit: velocity and distance, legacy rule when depth is off", () => {
   const w = 400;
-  assert.equal(swipeCommit(30, 120, 0.5, w, true), true);    // quick flick, short
+  assert.equal(swipeCommit(30, 120, 0.5, w, true), false);   // a 30px brush is not a swipe, even quick (owner 2026-11-19)
+  assert.equal(swipeCommit(60, 120, 0.5, w, true), true);    // quick flick that travels
   assert.equal(swipeCommit(30, 900, 0.05, w, true), false);  // slow short drag
   assert.equal(swipeCommit(200, 900, 0.1, w, true), true);   // past 40% width
   assert.equal(swipeCommit(300, 500, -0.6, w, true), false); // flicked back toward the edge

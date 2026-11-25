@@ -1,0 +1,306 @@
+{
+  "id": "kidney-transplant",
+  "title": "Kidney transplant (recipient operation)",
+  "subtitle": "Extraperitoneal iliac fossa implantation, vascular anastomoses and ureteroneocystostomy",
+  "system": "genitourinary",
+  "aliases": [
+    "renal transplant",
+    "kidney transplantation",
+    "deceased donor kidney transplant",
+    "living donor kidney transplant recipient"
+  ],
+  "estMinutes": 180,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "kdigo-2020-tx",
+      "org": "KDIGO. Transplantation 104(4S1)",
+      "title": "KDIGO Clinical Practice Guideline on the Evaluation and Management of Candidates for Kidney Transplantation",
+      "year": 2020,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=KDIGO+Clinical+Practice+Guideline+on+the+Evaluation+and+Management+of+Candidates+for+Kidney+Transplantation",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "bts-ld-2018",
+      "org": "British Transplantation Society",
+      "title": "Guidelines for Living Donor Kidney Transplantation, 4th edition",
+      "year": 2018,
+      "url": "https://bts.org.uk/guidelines-standards/",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "thota-1994",
+      "org": "Government of India",
+      "title": "Transplantation of Human Organs and Tissues Act, 1994 (amended 2011) and Rules 2014",
+      "year": 2014,
+      "url": "https://www.indiacode.nic.in/handle/123456789/1919",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "End-stage kidney disease in a patient assessed and listed as suitable for transplantation (pre-emptive where possible)."
+    ],
+    "contraindications": [
+      "Active infection or malignancy, a positive crossmatch not overcome by a desensitisation protocol, prohibitive cardiovascular risk, or uncontrolled disease that would compromise the graft."
+    ],
+    "preparation": [
+      "Confirm ABO compatibility, a negative crossmatch, the HLA and donor information, and the organ's cold ischaemia time.",
+      "Dialysis status, potassium and fluid balance; immunosuppression induction plan agreed with nephrology.",
+      "Consent: graft failure and rejection, bleeding, thrombosis, urine leak, lymphocele, infection, and the risks carried from the donor."
+    ],
+    "positioning": [
+      "Supine, a urinary catheter with a three-way connection to fill the bladder, arms out, the fistula arm protected and labelled."
+    ],
+    "equipment": [
+      "Vascular set, bulldog and vascular clamps, 5-0 and 6-0 non-absorbable vascular sutures, an ice bowl for the kidney, ureteric stent, urine catheter set-up for bladder filling, Doppler probe."
+    ],
+    "anatomy": [
+      "The right iliac fossa (often preferred): external iliac artery and vein, the lymphatics over them, the bladder, the inferior epigastric vessels, the spermatic cord or round ligament.",
+      "The graft: renal artery (often on a Carrel patch of donor aorta), renal vein, ureter with its blood supply in the periureteric tissue."
+    ],
+    "criticalSafety": [
+      "Check ABO, crossmatch and the donor organ details aloud before the kidney is opened from its packaging.",
+      "Keep the kidney cold until reperfusion, and record warm and cold ischaemia times.",
+      "Avoid kinking or twisting the vessels when placing the kidney."
+    ],
+    "structuresAtRisk": [
+      "External iliac artery and vein",
+      "Femoral nerve and lateral cutaneous nerve of thigh (retractor injury)",
+      "Graft ureter blood supply",
+      "Bladder"
+    ],
+    "commonErrors": [
+      "Twisted or kinked graft vessels.",
+      "Stripping the periureteric tissue (ureteric necrosis).",
+      "Lymphatics left open (lymphocele)."
+    ],
+    "complications": [
+      "Graft thrombosis (arterial or venous).",
+      "Bleeding, lymphocele, urine leak or ureteric stenosis.",
+      "Delayed graft function, rejection.",
+      "Wound infection, incisional hernia."
+    ],
+    "postop": [
+      "Fluid and blood pressure targets agreed for graft perfusion; hourly urine output.",
+      "Doppler ultrasound of the graft early (often day 0 or 1) and urgently for any fall in urine output.",
+      "Immunosuppression and prophylaxis per protocol; stent removal date recorded."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.tx-step-01", "med.surgx.tx-clip-01"],
+      "emphasis": "Includes the donor-derived risks and the immunosuppression commitment."
+    },
+    {
+      "ref": "step.tx.organ-check", "media": ["med.surgx.tx-step-02", "med.surgx.tx-clip-02"]
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.tx-step-03", "med.surgx.tx-clip-03"],
+      "emphasis": "Read recipient and donor ABO, the crossmatch result, organ side and cold ischaemia time aloud."
+    },
+    {
+      "ref": "step.core.prophylaxis", "media": ["med.surgx.tx-step-04", "med.surgx.tx-clip-04"],
+      "emphasis": "Antibiotic prophylaxis and the induction immunosuppression timed per the transplant protocol."
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.tx-step-05", "med.surgx.tx-clip-05"],
+      "emphasis": "Supine, catheter connected for bladder filling, fistula arm protected and labelled."
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.tx-step-06", "med.surgx.tx-clip-06"]
+    },
+    {
+      "ref": "step.tx.bench", "media": ["med.surgx.tx-step-07", "med.surgx.tx-clip-07"]
+    },
+    {
+      "ref": "step.tx.exposure", "media": ["med.surgx.tx-step-08", "med.surgx.tx-clip-08"]
+    },
+    {
+      "ref": "step.vasc.vessel-control", "media": ["med.surgx.tx-step-09", "med.surgx.tx-clip-09"],
+      "emphasis": "Clamp the external iliac vein and artery only when the kidney is ready on ice."
+    },
+    {
+      "ref": "step.tx.venous", "media": ["med.surgx.tx-step-10", "med.surgx.tx-clip-10"]
+    },
+    {
+      "ref": "step.vasc.end-to-side-anastomosis", "media": ["med.surgx.tx-step-11", "med.surgx.tx-clip-11"],
+      "emphasis": "Renal artery (Carrel patch) to the external iliac artery, end to side."
+    },
+    {
+      "ref": "step.vasc.restore-flow", "media": ["med.surgx.tx-step-12", "med.surgx.tx-clip-12"],
+      "emphasis": "Warn the anaesthetist; the blood pressure target is high enough to perfuse the graft. Record the time of reperfusion."
+    },
+    {
+      "ref": "step.vasc.perfusion-check", "media": ["med.surgx.tx-step-13", "med.surgx.tx-clip-13"],
+      "emphasis": "The kidney turns pink and firm uniformly; watch for urine from the ureter."
+    },
+    {
+      "ref": "step.tx.poor-perfusion", "media": ["med.surgx.tx-step-14", "med.surgx.tx-clip-14"]
+    },
+    {
+      "ref": "step.tx.ureter", "media": ["med.surgx.tx-step-15", "med.surgx.tx-clip-15"]
+    },
+    {
+      "ref": "step.uro.dj-stent", "media": ["med.surgx.tx-step-16", "med.surgx.tx-clip-16"],
+      "emphasis": "A double-J stent across the ureteroneocystostomy; record it for removal."
+    },
+    {
+      "ref": "step.core.haemostasis", "media": ["med.surgx.tx-step-17", "med.surgx.tx-clip-17"],
+      "emphasis": "Check the hilum and the anastomoses; immunosuppressed patients bleed late."
+    },
+    {
+      "ref": "step.abd.drain", "media": ["med.surgx.tx-step-18", "med.surgx.tx-clip-18"],
+      "emphasis": "A drain near the graft, away from the anastomoses."
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.tx-step-19", "med.surgx.tx-clip-19"]
+    },
+    {
+      "ref": "step.core.skin-closure", "media": ["med.surgx.tx-step-20", "med.surgx.tx-clip-20"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.tx-step-21", "med.surgx.tx-clip-21"],
+      "emphasis": "Hand over ischaemia times, the anastomoses, the stent, the fluid and blood pressure plan, and when to scan the graft."
+    }
+  ],
+  "steps_local": {
+    "step.tx.organ-check": {
+      "id": "step.tx.organ-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Donor organ and compatibility check",
+      "why": "Transplanting into the wrong recipient, or across an incompatible blood group, can cause hyperacute rejection. The checks happen before the kidney leaves its packaging.",
+      "how": [
+        "Confirm recipient identity, ABO compatibility of donor and recipient, a negative crossmatch and the donor information.",
+        "Confirm the organ (side, anatomy, number of arteries) against the offer paperwork; note the cold ischaemia time.",
+        "In India, confirm the authorisation documentation required under the Transplantation of Human Organs and Tissues Act for living donor cases."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Relying on one person's check.",
+        "Opening the organ before the checks."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tx.bench": {
+      "id": "step.tx.bench",
+      "kind": "prep",
+      "title": "Bench preparation of the kidney",
+      "why": "Preparing the kidney on ice prevents warm injury and shows the vessels and ureter so the anastomoses are planned before the clamps go on.",
+      "how": [
+        "Keep the kidney in a bowl of ice slush throughout.",
+        "Trim excess perirenal fat, tie lymphatics and small vessels at the hilum, and identify the artery (with its Carrel patch), the vein and the ureter.",
+        "Preserve the tissue between the lower pole and the ureter (the golden triangle) which carries the ureteric blood supply.",
+        "Repair or reconstruct multiple arteries or short veins as needed."
+      ],
+      "structuresAtRisk": [
+        "Ureteric blood supply",
+        "Polar arteries"
+      ],
+      "pitfalls": [
+        "Stripping the ureter.",
+        "Missing a small polar artery."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tx.exposure": {
+      "id": "step.tx.exposure",
+      "kind": "access",
+      "title": "Extraperitoneal exposure of the iliac vessels",
+      "why": "The iliac fossa gives a retroperitoneal bed close to the bladder. Lymphatics over the vessels are tied rather than cut to prevent a lymphocele.",
+      "how": [
+        "Make a curvilinear (Rutherford Morison) incision in the iliac fossa; divide the muscles and push the peritoneum medially.",
+        "Divide or preserve the inferior epigastric vessels and the round ligament or protect the spermatic cord.",
+        "Expose the external iliac artery and vein, tying the overlying lymphatics."
+      ],
+      "structuresAtRisk": [
+        "Peritoneum",
+        "Femoral and lateral cutaneous nerves (retractor blades)",
+        "Spermatic cord"
+      ],
+      "pitfalls": [
+        "Cutting lymphatics without ligation.",
+        "A self-retaining retractor blade on the psoas compressing the femoral nerve."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tx.venous": {
+      "id": "step.tx.venous",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Renal vein to external iliac vein anastomosis",
+      "why": "The venous anastomosis is usually done first. A narrowed or twisted vein causes graft thrombosis within hours.",
+      "how": [
+        "Clamp the external iliac vein, make a venotomy matched to the renal vein, and sew end to side with a fine non-absorbable continuous suture.",
+        "Orient the kidney before suturing so the vein does not twist when the graft is placed."
+      ],
+      "structuresAtRisk": [
+        "External iliac vein",
+        "Renal vein"
+      ],
+      "pitfalls": [
+        "A twisted anastomosis.",
+        "Purse-stringing the suture line."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tx.poor-perfusion": {
+      "id": "step.tx.poor-perfusion",
+      "kind": "bailout",
+      "title": "Bailout: a graft that does not perfuse",
+      "why": "Patchy, soft or dusky perfusion after reperfusion means a technical problem until proven otherwise, and it is reversible only while the patient is still on the table.",
+      "how": [
+        "Check the blood pressure with the anaesthetist and the position of the kidney for kinks or twists.",
+        "Feel and Doppler the artery and vein; look for a dissection flap or thrombosis.",
+        "Redo the anastomosis if needed, flushing the kidney cold again; involve a senior transplant surgeon early.",
+        "Record the findings; a non-perfusing kidney may have to be removed."
+      ],
+      "structuresAtRisk": [
+        "Graft",
+        "External iliac artery (intimal dissection)"
+      ],
+      "pitfalls": [
+        "Closing over a poorly perfused graft and hoping."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tx.ureter": {
+      "id": "step.tx.ureter",
+      "kind": "reconstruction",
+      "title": "Ureteroneocystostomy",
+      "why": "A short, well-vascularised ureter joined to the bladder with an anti-reflux tunnel (Lich-Gregoir) gives the fewest leaks and stenoses.",
+      "how": [
+        "Fill the bladder through the catheter and expose its dome or side.",
+        "Shorten the ureter to a length that lies without tension, keeping its blood supply.",
+        "Open the detrusor down to mucosa, anastomose ureteric mucosa to bladder mucosa over a stent, and close the detrusor over it as a tunnel."
+      ],
+      "structuresAtRisk": [
+        "Graft ureter",
+        "Bladder"
+      ],
+      "pitfalls": [
+        "A long, ischaemic ureter.",
+        "Tension on the anastomosis."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

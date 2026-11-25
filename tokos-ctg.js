@@ -237,7 +237,10 @@
   // no <style>, no scripts.
   function mountTrace(c) {
     var slot = $("tokTraceSlot"); if (!slot) return;
-    var p = st.svg[c.svg] ? Promise.resolve(st.svg[c.svg]) : G.fetch(I.BASE + "media/" + c.svg).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
+    var raw = I.BASE + "media/" + c.svg;
+    var RM = G.SMD_REMOTE_MEDIA;
+    var loc = RM && RM.resolve ? RM.resolve(raw) : Promise.resolve(raw);
+    var p = st.svg[c.svg] ? Promise.resolve(st.svg[c.svg]) : loc.then(function (u) { return G.fetch(u); }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
     p.then(function (txt) {
       var stage = $("tokStage"); if (!stage || current() !== c || st.view !== "clinic") return;
       var svg = safeSvg(txt);

@@ -16,11 +16,19 @@
         "kind": "compare",
         "left": {
           "title": "Right (positive) skew",
-          "points": ["Long tail to high values", "Mean above median above mode", "Income, hospital stay, incubation tails"]
+          "points": [
+            "Long tail to high values",
+            "Mean above median above mode",
+            "Income, hospital stay, incubation tails"
+          ]
         },
         "right": {
           "title": "Left (negative) skew",
-          "points": ["Long tail to low values", "Mode above median above mean", "Age at death in developed nations"]
+          "points": [
+            "Long tail to low values",
+            "Mode above median above mean",
+            "Age at death in developed nations"
+          ]
         }
       }
     },
@@ -30,11 +38,23 @@
       "say": "Kurtosis grades the peak: lepto is sharp and heavy tailed, platy is flat, meso is normal.",
       "vis": {
         "kind": "table",
-        "cols": ["Kurtosis type", "Shape"],
+        "cols": [
+          "Kurtosis type",
+          "Shape"
+        ],
         "rows": [
-          ["Leptokurtic", "Sharp peak, heavy tails, many extremes"],
-          ["Mesokurtic", "Normal bell peakedness"],
-          ["Platykurtic", "Flat top, light tails, few extremes"]
+          [
+            "Leptokurtic",
+            "Sharp peak, heavy tails, many extremes"
+          ],
+          [
+            "Mesokurtic",
+            "Normal bell peakedness"
+          ],
+          [
+            "Platykurtic",
+            "Flat top, light tails, few extremes"
+          ]
         ]
       }
     },
@@ -45,11 +65,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "n1", "label": "Symmetric bell, single central peak" },
-          { "id": "n2", "label": "Mean equals median equals mode" },
-          { "id": "n3", "label": "Tails endless, total area equals one" }
+          {
+            "id": "n1",
+            "label": "Symmetric bell, single central peak"
+          },
+          {
+            "id": "n2",
+            "label": "Mean equals median equals mode"
+          },
+          {
+            "id": "n3",
+            "label": "Tails endless, total area equals one"
+          }
         ],
-        "edges": [["n1", "n2"], ["n2", "n3"]]
+        "edges": [
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
       }
     },
     {
@@ -57,7 +95,7 @@
       "say": "Three curves set a right skewed shape, a symmetric bell, and a left skewed shape next to one another. Only the middle curve is a normal (Gaussian) distribution, fixed once the mean and the standard deviation are known. There the mean, median, and mode share one centre, and the tails approach the axis without touching it. Heights and many measurement errors come close to this form, and the central limit theorem pulls sampling distributions toward it.",
       "vis": {
         "kind": "image",
-        "src": "v1/lessons/media/need-n704-cm-central-tendency-skewness.webp",
+        "src": "v1/lessons/media/rr-need-n704-cm-central-tendency-skewness.webp",
         "alt": "Three curves comparing right skew, a normal bell, and left skew",
         "caption": "Three curves set a right skewed shape beside a normal bell and a left skewed shape. Illustration: StewardMD original.",
         "ar": 1.3393
@@ -69,12 +107,27 @@
       "say": "Sixty eight, ninety five, ninety nine point seven: the shares within one, two, and three standard deviations.",
       "vis": {
         "kind": "table",
-        "cols": ["Interval", "Share of values"],
+        "cols": [
+          "Interval",
+          "Share of values"
+        ],
         "rows": [
-          ["Mean plus minus 1 SD", "68.3 percent"],
-          ["Mean plus minus 1.96 SD", "95 percent"],
-          ["Mean plus minus 2 SD", "About 95.4 percent"],
-          ["Mean plus minus 3 SD", "99.7 percent"]
+          [
+            "Mean plus minus 1 SD",
+            "68.3 percent"
+          ],
+          [
+            "Mean plus minus 1.96 SD",
+            "95 percent"
+          ],
+          [
+            "Mean plus minus 2 SD",
+            "About 95.4 percent"
+          ],
+          [
+            "Mean plus minus 3 SD",
+            "99.7 percent"
+          ]
         ]
       }
     },
@@ -86,11 +139,19 @@
         "kind": "compare",
         "left": {
           "title": "Symmetric analyte",
-          "points": ["Mean plus minus 1.96 SD range", "Haemoglobin style reporting", "2.5 percent flagged each tail"]
+          "points": [
+            "Mean plus minus 1.96 SD range",
+            "Haemoglobin style reporting",
+            "2.5 percent flagged each tail"
+          ]
         },
         "right": {
           "title": "Skewed analyte",
-          "points": ["Percentile 2.5 to 97.5 range", "Triglyceride style reporting", "Log transform may normalise"]
+          "points": [
+            "Percentile 2.5 to 97.5 range",
+            "Triglyceride style reporting",
+            "Log transform may normalise"
+          ]
         }
       }
     },
@@ -101,11 +162,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "lt1", "label": "Right skewed raw values" },
-          { "id": "lt2", "label": "Take logarithms of every value" },
-          { "id": "lt3", "label": "Symmetric logs, parametric tests apply" }
+          {
+            "id": "lt1",
+            "label": "Right skewed raw values"
+          },
+          {
+            "id": "lt2",
+            "label": "Take logarithms of every value"
+          },
+          {
+            "id": "lt3",
+            "label": "Symmetric logs, parametric tests apply"
+          }
         ],
-        "edges": [["lt1", "lt2"], ["lt2", "lt3"]]
+        "edges": [
+          [
+            "lt1",
+            "lt2"
+          ],
+          [
+            "lt2",
+            "lt3"
+          ]
+        ]
       }
     },
     {
@@ -114,12 +193,27 @@
       "say": "Sample means turn normal as samples grow, even from skewed parents. That theorem powers most medical statistics.",
       "vis": {
         "kind": "table",
-        "cols": ["Parent data", "Sample means (large n)"],
+        "cols": [
+          "Parent data",
+          "Sample means (large n)"
+        ],
         "rows": [
-          ["Skewed incomes", "Near normal distribution of means"],
-          ["Binary outcomes", "Proportions near normal (large n)"],
-          ["Uniform measurements", "Means rapidly near normal"],
-          ["Any shape, tiny n", "Means may still mirror parent shape"]
+          [
+            "Skewed incomes",
+            "Near normal distribution of means"
+          ],
+          [
+            "Binary outcomes",
+            "Proportions near normal (large n)"
+          ],
+          [
+            "Uniform measurements",
+            "Means rapidly near normal"
+          ],
+          [
+            "Any shape, tiny n",
+            "Means may still mirror parent shape"
+          ]
         ]
       }
     },
@@ -131,11 +225,19 @@
         "kind": "compare",
         "left": {
           "title": "Proceed parametric",
-          "points": ["Histogram near symmetric", "Mean close to median", "Large sample by central limit theorem"]
+          "points": [
+            "Histogram near symmetric",
+            "Mean close to median",
+            "Large sample by central limit theorem"
+          ]
         },
         "right": {
           "title": "Transform or go non parametric",
-          "points": ["Long right tail, small n", "Mean far above median", "Titre or count data heavily skewed"]
+          "points": [
+            "Long right tail, small n",
+            "Mean far above median",
+            "Titre or count data heavily skewed"
+          ]
         }
       }
     },
@@ -146,11 +248,70 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "sk1", "label": "Spot tail direction from mean versus median" },
-          { "id": "sk2", "label": "Name skew: mean side equals tail side" },
-          { "id": "sk3", "label": "Report median with IQR for skewed data" }
+          {
+            "id": "sk1",
+            "label": "Spot tail direction from mean versus median"
+          },
+          {
+            "id": "sk2",
+            "label": "Name skew: mean side equals tail side"
+          },
+          {
+            "id": "sk3",
+            "label": "Report median with IQR for skewed data"
+          }
         ],
-        "edges": [["sk1", "sk2"], ["sk2", "sk3"]]
+        "edges": [
+          [
+            "sk1",
+            "sk2"
+          ],
+          [
+            "sk2",
+            "sk3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: In positively skewed distributions, the tail extends to the right, and the arithmetic mean exceeds the median, which exceeds the mode. In negatively skewed distributions, the tail extends to the left, and the mode exceeds the median, which exceeds the mean. For skewed medical variables such as incubation periods and antibody titres, the median and interquartile range serve as preferred summaries of central tendency and dispersion.",
+      "say": "In positively skewed distributions, the tail extends to the right, and the arithmetic mean exceeds the median, which exceeds the mode. In negatively skewed distributions, the tail extends to the left, and the mode exceeds the median, which exceeds the mean. For skewed medical variables such as incubation periods and antibody titres, the median and interquartile range serve as preferred summaries of central tendency and dispersion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Positive skew order",
+            "Mean is greater than median, which is greater than mode"
+          ],
+          [
+            "Positive skew tail",
+            "Elongated tail stretches towards higher values on the right"
+          ],
+          [
+            "Negative skew order",
+            "Mode is greater than median, which is greater than mean"
+          ],
+          [
+            "Negative skew tail",
+            "Elongated tail stretches towards lower values on the left"
+          ],
+          [
+            "Symmetrical distribution",
+            "Mean, median, and mode all coincide at the center"
+          ],
+          [
+            "Incubation period pattern",
+            "Positively skewed log-normal curve seen in epidemic curves"
+          ],
+          [
+            "Preferred metric for skew",
+            "Median for central tendency and interquartile range for dispersion"
+          ]
+        ]
       }
     }
   ]

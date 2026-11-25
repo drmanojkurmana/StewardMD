@@ -13,11 +13,23 @@
    "say": "Verify before mobilising. Confirm the diagnosis is real, then confirm cases exceed usual expectancy for that place and season. Rumour, better reporting and new diagnostic fashion fake epidemics regularly; two cheap steps expose them.",
    "vis": {
     "kind": "table",
-    "cols": ["Step", "Question settled"],
+    "cols": [
+     "Step",
+     "Question settled"
+    ],
     "rows": [
-     ["1. Verification of diagnosis", "Is this disease really present?"],
-     ["2. Confirmation of epidemic", "Do cases exceed normal expectancy?"],
-     ["3. Defining population at risk", "Who could have been exposed?"]
+     [
+      "1. Verification of diagnosis",
+      "Is this disease really present?"
+     ],
+     [
+      "2. Confirmation of epidemic",
+      "Do cases exceed normal expectancy?"
+     ],
+     [
+      "3. Defining population at risk",
+      "Who could have been exposed?"
+     ]
     ]
    }
   },
@@ -40,12 +52,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Case definition fixed"},
-     {"id": "b", "label": "House and hospital search"},
-     {"id": "c", "label": "Line list completed"},
-     {"id": "d", "label": "Analysis by time, place, person"}
+     {
+      "id": "a",
+      "label": "Case definition fixed"
+     },
+     {
+      "id": "b",
+      "label": "House and hospital search"
+     },
+     {
+      "id": "c",
+      "label": "Line list completed"
+     },
+     {
+      "id": "d",
+      "label": "Analysis by time, place, person"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -54,11 +91,23 @@
    "say": "Counts become a claim. Curve, map and exposure-specific attack rates suggest source, vehicle and spread mode. Testing compares exposed with unexposed rates. Ecological review asks what changed in the environment to permit the event.",
    "vis": {
     "kind": "table",
-    "cols": ["Analysis product", "Hypothesis it feeds"],
+    "cols": [
+     "Analysis product",
+     "Hypothesis it feeds"
+    ],
     "rows": [
-     ["Epidemic curve", "Point source or propagated spread"],
-     ["Spot map", "Where exposure happened"],
-     ["Attack rates by food or water source", "Which vehicle carried it"]
+     [
+      "Epidemic curve",
+      "Point source or propagated spread"
+     ],
+     [
+      "Spot map",
+      "Where exposure happened"
+     ],
+     [
+      "Attack rates by food or water source",
+      "Which vehicle carried it"
+     ]
     ]
    }
   },
@@ -70,11 +119,19 @@
     "kind": "compare",
     "left": {
      "title": "During investigation",
-     "points": ["Control on suspicion immediately", "Hypothesis testing continues", "Further population study if needed"]
+     "points": [
+      "Control on suspicion immediately",
+      "Hypothesis testing continues",
+      "Further population study if needed"
+     ]
     },
     "right": {
      "title": "At closure",
-     "points": ["Written report completed", "Preventive measures recommended", "Surveillance tightened afterwards"]
+     "points": [
+      "Written report completed",
+      "Preventive measures recommended",
+      "Surveillance tightened afterwards"
+     ]
     }
    }
   },
@@ -85,12 +142,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Continuous data collection"},
-     {"id": "b", "label": "Analysis and interpretation"},
-     {"id": "c", "label": "Dissemination to actors"},
-     {"id": "d", "label": "Action and feedback"}
+     {
+      "id": "a",
+      "label": "Continuous data collection"
+     },
+     {
+      "id": "b",
+      "label": "Analysis and interpretation"
+     },
+     {
+      "id": "c",
+      "label": "Dissemination to actors"
+     },
+     {
+      "id": "d",
+      "label": "Action and feedback"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -99,11 +181,23 @@
    "say": "Three intensities, three prices. Sentinel sites signal trends cheaply without exact rates. Active searching finds cases completely at cost. Passive reporting waits cheaply and misses much. Epidemic alerts justify paying for active search.",
    "vis": {
     "kind": "table",
-    "cols": ["Type", "Trade-off"],
+    "cols": [
+     "Type",
+     "Trade-off"
+    ],
     "rows": [
-     ["Passive", "Cheap, incomplete, routine reports"],
-     ["Active", "Complete, expensive, workers search"],
-     ["Sentinel", "Cheap trend signal, no exact rates"]
+     [
+      "Passive",
+      "Cheap, incomplete, routine reports"
+     ],
+     [
+      "Active",
+      "Complete, expensive, workers search"
+     ],
+     [
+      "Sentinel",
+      "Cheap trend signal, no exact rates"
+     ]
     ]
    }
   },
@@ -113,25 +207,40 @@
    "say": "Isolation holds the infectious. Durations follow communicability: chickenpox until lesions crust, measles through the third rash day, tuberculosis for weeks on effective therapy in the classic table. Hospital beats home where feasible.",
    "vis": {
     "kind": "table",
-    "cols": ["Disease", "Isolation guide"],
+    "cols": [
+     "Disease",
+     "Isolation guide"
+    ],
     "rows": [
-     ["Chickenpox", "Until all lesions crusted, about 6 days"],
-     ["Measles", "Catarrhal stage through 3rd day of rash"],
-     ["Mumps", "Until swelling subsides"],
-     ["Pertussis", "4 weeks or until paroxysms cease"]
+     [
+      "Chickenpox",
+      "Until all lesions crusted, about 6 days"
+     ],
+     [
+      "Measles",
+      "Catarrhal stage through 3rd day of rash"
+     ],
+     [
+      "Mumps",
+      "Until swelling subsides"
+     ],
+     [
+      "Pertussis",
+      "4 weeks or until paroxysms cease"
+     ]
     ]
    }
   },
   {
-    "tx": "Isolation keeps an infectious person away from susceptibles only through the **period of communicability**. Chickenpox precautions run until every lesion has crusted, roughly 6 days from the start of the rash. Measles precautions stop once the third day after rash onset has passed. Mumps precautions continue until salivary swelling settles. Open tuberculosis treated with effective drugs needs 3 weeks of isolation on the classic chart. Where a ward can manage it, hospital isolation is preferred to care at home.",
-    "say": "Isolation keeps an infectious person away from susceptibles only through the period of communicability. Chickenpox precautions run until every lesion has crusted, roughly 6 days from the start of the rash. Measles precautions stop once the third day after rash onset has passed. Mumps precautions continue until salivary swelling settles. Open tuberculosis treated with effective drugs needs 3 weeks of isolation on the classic chart. Where a ward can manage it, hospital isolation is preferred to care at home.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n253-cm-outbreak-surveillance-investigation-of-an-epidemic.webp",
-      "alt": "Isolation period chart for chickenpox, measles and mumps",
-      "caption": "Isolation periods are listed for chickenpox until lesions crust, measles through day three of the rash, and mumps until swelling subsides. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Isolation keeps an infectious person away from susceptibles only through the **period of communicability**. Chickenpox precautions run until every lesion has crusted, roughly 6 days from the start of the rash. Measles precautions stop once the third day after rash onset has passed. Mumps precautions continue until salivary swelling settles. Open tuberculosis treated with effective drugs needs 3 weeks of isolation on the classic chart. Where a ward can manage it, hospital isolation is preferred to care at home.",
+   "say": "Isolation keeps an infectious person away from susceptibles only through the period of communicability. Chickenpox precautions run until every lesion has crusted, roughly 6 days from the start of the rash. Measles precautions stop once the third day after rash onset has passed. Mumps precautions continue until salivary swelling settles. Open tuberculosis treated with effective drugs needs 3 weeks of isolation on the classic chart. Where a ward can manage it, hospital isolation is preferred to care at home.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rr-need-n253-cm-outbreak-surveillance-investigation-of-an-epidemic.webp",
+    "alt": "Isolation period chart for chickenpox, measles and mumps",
+    "caption": "Isolation periods are listed for chickenpox until lesions crust, measles through day three of the rash, and mumps until swelling subsides. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Quarantine restricts the exposed healthy",
@@ -141,12 +250,65 @@
     "kind": "compare",
     "left": {
      "title": "Isolation",
-     "points": ["Applies to infected persons", "Lasts the communicable period", "Hospital preferred where possible"]
+     "points": [
+      "Applies to infected persons",
+      "Lasts the communicable period",
+      "Hospital preferred where possible"
+     ]
     },
     "right": {
      "title": "Quarantine",
-     "points": ["Applies to well exposed contacts", "Caps at longest incubation period", "Largely replaced by surveillance"]
+     "points": [
+      "Applies to well exposed contacts",
+      "Caps at longest incubation period",
+      "Largely replaced by surveillance"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Outbreak investigation starts by verifying the diagnosis, then confirming cases exceed usual expectancy. Analysis by time, place and person creates the epidemic curve, spot map and attack rates. Isolation separates infected people during communicability, while quarantine restricts well exposed contacts for the longest incubation period. Control begins on suspicion, not after proof.",
+   "say": "Outbreak investigation starts by verifying the diagnosis, then confirming cases exceed usual expectancy. Analysis by time, place and person creates the epidemic curve, spot map and attack rates. Isolation separates infected people during communicability, while quarantine restricts well exposed contacts for the longest incubation period. Control begins on suspicion, not after proof.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "First investigation step",
+      "Verify diagnosis clinically and in laboratory"
+     ],
+     [
+      "Confirm epidemic step",
+      "Compare observed cases with usual expectancy"
+     ],
+     [
+      "Analysis dimensions",
+      "Time, place and person analysis required"
+     ],
+     [
+      "Epidemic curve shows",
+      "Point source or propagated spread pattern"
+     ],
+     [
+      "Isolation applies to",
+      "Infected persons during communicability period"
+     ],
+     [
+      "Quarantine applies to",
+      "Well exposed contacts, longest incubation limit"
+     ],
+     [
+      "Chickenpox isolation",
+      "Until all lesions crusted, about 6 days"
+     ],
+     [
+      "Sentinel surveillance limit",
+      "Trend signal only, no exact rates"
+     ]
+    ]
    }
   }
  ],

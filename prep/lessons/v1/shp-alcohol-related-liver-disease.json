@@ -1,0 +1,337 @@
+{
+  "steps": [
+    {
+      "say": "Alcohol related liver disease spans steatosis through hepatitis to cirrhosis, and the trigger sits above sixty grams of alcohol daily for men over years. Women's threshold is lower. Abstinence remains the single intervention that changes survival, dwarfing every drug on the shelf.",
+      "tx": "**Alcohol related liver disease** spans steatosis through hepatitis to cirrhosis, and the trigger sits above **60** grams of alcohol daily for men over years, with a lower threshold in women. **Abstinence** remains the single intervention that changes survival, dwarfing every drug on the shelf. Steatosis alone reverses within **6** weeks of abstinence, while cirrhosis improves slowly for years. Family drinking patterns and binge episodes sharpen the risk estimate.",
+      "vis": {
+        "cols": [
+          "Stage",
+          "Reversibility",
+          "Driver"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Steatosis",
+            "Reverses in weeks",
+            "Abstinence"
+          ],
+          [
+            "Hepatitis",
+            "Partial, risky",
+            "Abstinence plus sepsis care"
+          ],
+          [
+            "Fibrosis",
+            "Slow regression",
+            "Abstinence plus weight care"
+          ],
+          [
+            "Cirrhosis",
+            "Stabilises, rarely reverses",
+            "Abstinence plus transplant add on"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Steatosis shows as a bright liver on ultrasound with raised gamma transferase. Hepatitis adds fever, tender hepatomegaly and white cell rise to the aspartate to alanine ratio above two. Cirrhosis is bringing the stigmata of portal hypertension instead.",
+      "tx": "**Steatosis** shows as a bright liver on ultrasound with raised gamma transferase and normal bilirubin, while **alcoholic hepatitis** adds fever, tender hepatomegaly and white cell rise to the aspartate to alanine ratio above **2**. **Cirrhosis** brings spider naevi, palmar erythema, Dupuytren contracture and portal hypertension instead. Binge history with early morning drinking nails the exposure better than any score. Central obesity and diabetes worsen each stage.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Bright liver, normal bilirubin",
+            "Gamma transferase raised",
+            "Reverses with abstinence"
+          ],
+          "title": "Steatosis picture"
+        },
+        "right": {
+          "points": [
+            "Fever, tender hepatomegaly",
+            "White cell rise, ratio above 2",
+            "Leukocytosis predicts death"
+          ],
+          "title": "Hepatitis picture"
+        }
+      }
+    },
+    {
+      "say": "Severe alcoholic hepatitis is killing a third of its sufferers within a month. The Maddrey discriminant function above thirty two is flagging the severe group for steroids. Infection, kidney injury and bleeding crowd the death certificate instead of liver failure alone.",
+      "tx": "**Severe alcoholic hepatitis** kills about **30** percent within one month, and the **Maddrey discriminant function** above **32** flags the group for steroids. **Lille score** at day **7** separates steroid responders from failures, with nil response predicting death in most. Infection, kidney injury and bleeding crowd the death certificate instead of liver failure alone. Thiamine before glucose prevents Wernicke in every malnourished drinker.",
+      "vis": {
+        "cols": [
+          "Score",
+          "Cut off",
+          "Meaning"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Maddrey discriminant function",
+            "Above 32",
+            "Severe disease, give steroids"
+          ],
+          [
+            "Lille score day 7",
+            "Below 0.56",
+            "Responder, continue steroids"
+          ],
+          [
+            "Glasgow alcohol hepatitis score",
+            "Above 8",
+            "Poor prognosis with reassessment"
+          ],
+          [
+            "Model for end stage disease",
+            "Above 21",
+            "Transplant discussion"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Prednisolone at forty milligrams daily remains the only drug with a survival edge in severe hepatitis. Pentoxifylline and N acetyl cysteine added nothing once tested properly. Antibiotics treat the precipitating sepsis, not the liver inflammation itself.",
+      "tx": "**Prednisolone** at **40** milligrams daily remains the only drug with a survival edge in severe hepatitis, given for **28** days with Lille reassessment. **Pentoxifylline** and **N acetyl cysteine** added nothing once tested properly. Antibiotics treat precipitating sepsis, not the liver inflammation itself. Blood cultures and ascitic taps precede steroids, since steroids on untreated sepsis kill faster. Steroids stop early when infection declares itself.",
+      "vis": {
+        "edges": [
+          [
+            "severe",
+            "infection"
+          ],
+          [
+            "infection",
+            "steroid"
+          ],
+          [
+            "steroid",
+            "lille"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "severe",
+            "label": "Maddrey above 32"
+          },
+          {
+            "id": "infection",
+            "label": "Rule out sepsis first"
+          },
+          {
+            "id": "steroid",
+            "label": "Prednisolone 40 milligrams"
+          },
+          {
+            "id": "lille",
+            "label": "Lille check at day 7"
+          }
+        ]
+      }
+    },
+    {
+      "say": "Untreated abstinence still halves mortality compared with continued drinking. Baclofen and acamprosate help maintain sobriety once hepatitis settles. Disulfiram suits selected patients, while naltrexone needs caution in advanced liver failure.",
+      "tx": "**Abstinence** still halves mortality compared with continued drinking, and relapse prevention drugs help maintain sobriety once hepatitis settles. **Baclofen** at **30** milligrams daily and **acamprosate** carry the best liver safety data. **Naltrexone** needs caution in advanced liver failure, while **disulfiram** suits selected patients with strong motivation. Referral to structured alcohol services beats brief advice in severe dependence. Smoking cessation pays added survival dividends.",
+      "vis": {
+        "cols": [
+          "Agent",
+          "Dose idea",
+          "Caution"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Baclofen",
+            "Up to 30 milligrams daily",
+            "Sedation, taper slowly"
+          ],
+          [
+            "Acamprosate",
+            "666 milligrams thrice daily",
+            "Kidney dysfunction"
+          ],
+          [
+            "Naltrexone",
+            "50 milligrams daily",
+            "Advanced liver failure"
+          ],
+          [
+            "Disulfiram",
+            "250 milligrams daily",
+            "Psychosis, cardiac disease"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Zinc and lactulose and rifaximin manage the encephalopathy that follows severe hepatitis. Albumin is expanding volume in hepatorenal physiology and reining in post paracentesis shock. Nutrition at thirty five calories per kilogram feeds recovery better than starvation does.",
+      "tx": "Supportive care decides most outcomes in severe disease. **Lactulose** with **rifaximin** manages encephalopathy, while **albumin** expands volume in hepatorenal physiology and reins in post paracentesis shock. Nutrition near **35** kilocalories per kilogram with protein to **1.5** grams per kilogram feeds recovery better than starvation does. Thiamine, zinc and fat soluble vitamins correct the deficiencies that drive infection risk. Dialysis and transplant bridge the gap when organs fail.",
+      "vis": {
+        "cols": [
+          "Support",
+          "Target",
+          "Why"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Nutrition",
+            "35 kilocalories per kilogram",
+            "Reverses catabolism"
+          ],
+          [
+            "Protein",
+            "1.5 grams per kilogram",
+            "Prevents sarcopenia"
+          ],
+          [
+            "Albumin",
+            "Per paracentesis 6 to 8 grams per litre removed",
+            "Stops circulatory dysfunction"
+          ],
+          [
+            "Lactulose",
+            "Two to three soft stools daily",
+            "Clears ammonia and gut blood"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Early transplant in severe hepatitis rescues carefully chosen patients with six months of sobriety waived. Addiction team approval is guarding against relapse. Five year survival near seventy percent matches other transplant indications once selected properly.",
+      "tx": "**Early transplant** in severe hepatitis rescues carefully chosen patients with the **6** month sobriety rule waived, under addiction team approval. Five year survival near **70** percent matches other transplant indications once selected properly. Relapse remains the constant threat, so post transplant supervision runs for years. Abstinence before listing predicts better graft outcomes than the hepatitis severity itself. Most centres need documented psychosocial support, not just sobriety time.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Addiction team approval",
+            "Psychosocial support proven",
+            "Abstinence contract signed"
+          ],
+          "title": "Selection gate"
+        },
+        "right": {
+          "points": [
+            "Five year survival near 70 percent",
+            "Relapse threatens graft",
+            "Long supervision needed"
+          ],
+          "title": "After transplant"
+        }
+      }
+    },
+    {
+      "say": "Binge drinking precipitates alcoholic hepatitis on top of cirrhosis, so history must separate the last binge from lifetime intake. Underreporting by patients runs near fifty percent. Collateral history from family doubles the accuracy of the exposure estimate.",
+      "tx": "**Binge drinking** precipitates alcoholic hepatitis on top of cirrhosis, so history must separate the last binge from lifetime intake. Underreporting by patients runs near **50** percent, and collateral history from family doubles the exposure accuracy. Discrepancy between gamma transferase and reported intake often exposes hidden drinking. Biomarkers such as carbohydrate deficient transferrin add objectivity in listed patients. Never anchor prognosis on the stated intake alone.",
+      "vis": {
+        "cols": [
+          "Clue",
+          "Signal",
+          "Use"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Binge in prior month",
+            "Hepatitis precipitant",
+            "Ask directly and repeatedly"
+          ],
+          [
+            "Gamma transferase very high",
+            "Hidden intake likely",
+            "Seek collateral history"
+          ],
+          [
+            "Macrocytosis, low platelets",
+            "Marrow alcohol effect",
+            "Supports exposure"
+          ],
+          [
+            "Relapse after discharge",
+            "Prognosis halves",
+            "Arrange follow up support"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Women develop liver disease at lower intakes because of smaller gastric alcohol dehydrogenase reserve. Obesity and hepatitis C multiply the same dose of alcohol into faster disease. Genetic variation in alcohol enzymes explains much of the race and family clustering.",
+      "tx": "**Women** develop liver disease at lower intakes because of smaller gastric alcohol dehydrogenase reserve, and obesity with hepatitis C multiply the same dose into faster disease. Genetic variation in alcohol enzymes explains much of the family clustering of susceptibility. Safe limits now sit at **14** standard drinks weekly for both sexes under current guidance. No safe threshold exists once cirrhosis is established. Counselling must give these numbers plainly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Women: lower threshold",
+            "Obesity multiplies risk",
+            "Hepatitis C synergy"
+          ],
+          "title": "Who gets hurt faster"
+        },
+        "right": {
+          "points": [
+            "14 drinks weekly current limit",
+            "Zero threshold in cirrhosis",
+            "Family clustering common"
+          ],
+          "title": "Limits and genes"
+        }
+      }
+    },
+    {
+      "say": "The exam load is Maddrey above thirty two, prednisolone forty milligrams for twenty eight days, Lille at day seven, and Baclofen for sobriety. Thirty percent mortality frames the severity, while seventy percent five year graft survival frames the transplant offer. One numbers table is closing the topic.",
+      "tx": "The exam load is **Maddrey** above **32**, prednisolone **40** milligrams for **28** days, **Lille** at day **7**, and **Baclofen** for sobriety maintenance. **30** percent monthly mortality frames severity, while **70** percent five year graft survival frames the transplant offer. Alcohol thresholds sit at **60** grams daily in men with a lower cut in women. Abstinence halves mortality, and thiamine precedes every glucose bolus.",
+      "vis": {
+        "cols": [
+          "Fact",
+          "Number",
+          "Exam point"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Severe hepatitis mortality",
+            "About 30 percent monthly",
+            "Maddrey above 32"
+          ],
+          [
+            "Prednisolone dose",
+            "40 milligrams for 28 days",
+            "Lille recheck day 7"
+          ],
+          [
+            "Male risk threshold",
+            "Above 60 grams daily",
+            "Lower in women"
+          ],
+          [
+            "Sobriety drug dose",
+            "Baclofen 30 milligrams daily",
+            "Best liver safety data"
+          ],
+          [
+            "Transplant survival",
+            "Near 70 percent at 5 years",
+            "Early transplant selected"
+          ],
+          [
+            "Weekly alcohol limit",
+            "14 drinks both sexes",
+            "Zero in cirrhosis"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "hand",
+  "minutes": 8,
+  "module": "shp-alcohol-related-liver-disease",
+  "quiz": [],
+  "refs": [
+    "Harrison 2025 22nd Edition, alcohol related liver disease chapters",
+    "EASL Clinical Practice Guidelines on alcohol related liver disease"
+  ],
+  "subject": "ss-hepatology",
+  "title": "Alcohol related liver disease: hepatitis scores and sobriety drugs",
+  "v": 1
+}

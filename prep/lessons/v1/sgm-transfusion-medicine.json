@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-transfusion-medicine",
+ "subject": "ss-general-medicine",
+ "title": "Transfusion medicine",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Blood group** determination precedes every transfusion episode in safe practice. **ABO incompatibility** causes acute haemolysis that can be fatal within minutes. **Rh D** typing guides red cell selection for girls and women of childbearing age. Group and save precedes crossmatch in stable patients without active bleeding.",
+   "say": "Blood group determination is required before every transfusion episode in safe practice. ABO incompatibility causes acute haemolysis that can be fatal within minutes. Rh D typing guides red cell selection for girls and women of childbearing age. Group and save precedes crossmatch in stable patients without active bleeding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Purpose",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Group determination",
+      "ABO and Rh typing",
+      "Select compatible units"
+     ],
+     [
+      "Antibody screen",
+      "Alloantibody detection",
+      "Antigen matched blood"
+     ],
+     [
+      "Crossmatch",
+      "Compatibility verification",
+      "Bedside check mandatory"
+     ],
+     [
+      "Bedside verification",
+      "Identity confirmation",
+      "Two person bedside check"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute haemolytic reaction** is the commonest fatal transfusion complication in practice. **Febrile non haemolytic** reaction presents with fever and rigors without haemolysis evidence. **Allergic reaction** ranges from urticaria to anaphylaxis in about 1% of units. **Transfusion associated circulatory overload** floods lungs in elderly and cardiac patients rapidly.",
+   "say": "Acute haemolytic reaction is the commonest fatal transfusion complication in practice. Febrile non haemolytic reaction presents with fever and rigors without haemolysis evidence. Allergic reaction ranges from urticaria to anaphylaxis in about one percent of units. Transfusion associated circulatory overload floods lungs in elderly and cardiac patients rapidly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Haemolytic reaction",
+     "points": [
+      "Back pain and flank tenderness",
+      "Fever with hypotension",
+      "DIC and renal failure",
+      "Stop transfusion immediately"
+     ]
+    },
+    "right": {
+     "title": "Febrile reaction",
+     "points": [
+      "Fever and rigors present",
+      "No haemolysis evidence",
+      "Slow transfusion rate",
+      "Paracetamol for symptoms"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**TRALI** is transfusion related acute lung injury with non cardiogenic pulmonary oedema. **Onset** within 6 hours of plasma containing products is the hallmark timing. **Chest imaging** shows bilateral infiltrates with normal cardiac filling pressures. Supportive ventilation is the mainstay of therapy for this complication in most cases.",
+   "say": "TRALI is transfusion related acute lung injury with non cardiogenic pulmonary oedema. Onset within six hours of plasma containing products is the hallmark timing. Chest imaging shows bilateral infiltrates with normal cardiac filling pressures. Supportive ventilation is the mainstay of therapy for this complication in most cases.",
+   "vis": null
+  },
+  {
+   "tx": "**TACO** presents with dyspnoea and hypertension unlike TRALI in fluid overload. **Furosemide** relieves circulatory overload when volume is the mechanism clearly. **Slow infusion** rates prevent overload in elderly cardiac patients in many protocols. **Paracetamol** pretreatment does not prevent overload despite common practice patterns.",
+   "say": "TACO presents with dyspnoea and hypertension unlike TRALI in fluid overload. Furosemide relieves circulatory overload when volume is the mechanism clearly. Slow infusion rates prevent overload in elderly cardiac patients in many protocols. Paracetamol pretreatment does not prevent overload despite common practice patterns.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "TRALI",
+     "TACO"
+    ],
+    "rows": [
+     [
+      "Onset",
+      "Within 6 hours",
+      "During or after transfusion"
+     ],
+     [
+      "Blood pressure",
+      "Hypotension common",
+      "Hypertension common"
+     ],
+     [
+      "Filling pressures",
+      "Normal",
+      "Raised"
+     ],
+     [
+      "Response",
+      "Ventilation support",
+      "Furosemide diuresis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Washed red cells** prevent allergic reactions in recurrent transfusion allergy patients. **Leucoreduction** lowers febrile reactions and viral transmission risks with stored blood. **Irradiation** prevents graft versus host disease in immunocompromised recipients in many centres. **Paracetamol** with **chlorphenamine** treats mild reactions without stopping therapy in stable patients.",
+   "say": "Washed red cells prevent allergic reactions in recurrent transfusion allergy patients. Leucoreduction lowers febrile reactions and viral transmission risks with stored blood. Irradiation prevents graft versus host disease in immunocompromised recipients in many centres. Paracetamol with chlorphenamine treats mild reactions without stopping therapy in stable patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Adrenaline** with chlorphenamine is first line for anaphylactic transfusion reactions. **Epinephrine** is the synonymous drug name for adrenaline in many formularies globally. **Warfarin** reversal during transfusion bleeding needs vitamin K with plasma products in many settings. **Haemostasis** after massive transfusion needs balanced blood product ratios in massive bleeding.",
+   "say": "Adrenaline with chlorphenamine is first line for anaphylactic transfusion reactions. Epinephrine is the synonymous drug name for adrenaline in many formularies globally. Warfarin reversal during transfusion bleeding needs vitamin K with plasma products in many settings. Haemostasis after massive transfusion needs balanced blood product ratios in massive bleeding.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Reaction suspected"
+     },
+     {
+      "id": "b",
+      "label": "Stop transfusion"
+     },
+     {
+      "id": "c",
+      "label": "Adrenaline if anaphylaxis"
+     },
+     {
+      "id": "d",
+      "label": "Sample and report"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Massive transfusion** balances red cells, plasma and platelets in trauma bleeding. **Calcium** monitoring is vital because citrate chelation lowers ionised calcium levels. **Infectious** screening has made viral transmission rare with modern blood banking practices. **Hepatitis** and HIV screening paradigms remain mandatory for every donated unit globally.",
+   "say": "Massive transfusion balances red cells, plasma and platelets in trauma bleeding. Calcium monitoring is vital because citrate chelation lowers ionised calcium levels. Infectious screening has made viral transmission rare with modern blood banking practices. Hepatitis and HIV screening paradigms remain mandatory for every donated unit globally.",
+   "vis": null
+  },
+  {
+   "tx": "**Platelet refractory** patients develop HLA alloimmunisation after repeated transfusions in many cases. **Leucoreduced** products reduce alloimmunisation risk in chronic transfusion dependent patients. **Donor** selection and screening are the cornerstones of safe blood supply worldwide today. Voluntary non remunerated donation is the safest donor model in practice.",
+   "say": "Platelet refractory patients develop HLA alloimmunisation after repeated transfusions in many cases. Leucoreduced products reduce alloimmunisation risk in chronic transfusion dependent patients. Donor selection and screening are the cornerstones of safe blood supply worldwide today. Voluntary non remunerated donation is the safest donor model in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Product",
+     "Modification",
+     "Indication"
+    ],
+    "rows": [
+     [
+      "Red cells",
+      "Leucoreduction",
+      "Chronic transfusion need"
+     ],
+     [
+      "Red cells",
+      "Irradiation",
+      "Immunocompromised recipients"
+     ],
+     [
+      "Red cells",
+      "Washing",
+      "Recurrent allergic reactions"
+     ],
+     [
+      "Platelets",
+      "HLA matching",
+      "Refractory patients"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Graft versus host disease** follows fresh blood in immunodeficient neonates classically. **Irradiated** blood prevents this fatal complication in neonatal and chromosomal defect cases. **Sickle cell** disease needs phenotype matched red cells to prevent alloimmunisation in many patients. Antigen negative blood is essential once alloantibodies are detected in these patients.",
+   "say": "Graft versus host disease follows fresh blood in immunodeficient neonates classically. Irradiated blood prevents this fatal complication in neonatal and chromosomal defect cases. Sickle cell disease needs phenotype matched red cells to prevent alloimmunisation in many patients. Antigen negative blood is essential once alloantibodies are detected in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Storage lesion** alters red cell quality during prolonged blood bank storage time. **Potassium** leak and acid load rise with storage duration in many units. Fresh blood suits neonatal cardiac surgery with reduced potassium load requirements. **Patient** identification bands must match units at bedside verification in every case.",
+   "say": "Storage lesion alters red cell quality during prolonged blood bank storage time. Potassium leak and acid load rise with storage duration in many units. Fresh blood suits neonatal cardiac surgery with reduced potassium load requirements. Patient identification bands must match units at bedside verification in every case.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** caps the transfusion lesson below. Remember ABO incompatibility as fatal acute haemolysis, TRALI within 6 hours with normal filling pressures and TACO with hypertension and raised pressures. Furosemide treats overload while adrenaline treats anaphylactic reactions. Irradiated blood prevents graft versus host disease in immunocompromised recipients.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. ABO incompatibility is the fatal cause of acute haemolysis clearly. TRALI is non cardiogenic oedema within six hours of transfusion. TACO is circulatory overload with raised filling pressures. Furosemide is the treatment for overload cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Fatal complication",
+      "ABO incompatibility acute haemolysis"
+     ],
+     [
+      "TRALI timing",
+      "Within 6 hours, normal filling pressures"
+     ],
+     [
+      "TACO picture",
+      "Hypertension with raised filling pressures"
+     ],
+     [
+      "Overload therapy",
+      "Furosemide relieves circulatory overload"
+     ],
+     [
+      "Anaphylaxis therapy",
+      "Adrenaline with chlorphenamine first line"
+     ],
+     [
+      "GVHD prevention",
+      "Irradiated blood for immunocompromised recipients"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

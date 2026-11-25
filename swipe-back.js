@@ -75,6 +75,11 @@
   function topBackControl() {
     var els = [].slice.call(document.querySelectorAll(BACK_SEL)).filter(function (el) { return el.id !== "smdTopBack" && onScreen(el) && interactive(el); });
     if (!els.length) return null;
+    // A control the user can actually see wins over one buried under another screen. onScreen() passes a covered
+    // control (owner 2026-11-22: Android back in SURGX steps went home, i.e. a "Back to home" control left on a layer
+    // underneath was pressed instead of the SURGX Back on top). Falls back to all candidates if none is hit.
+    var seen = els.filter(visibleAtCentre);
+    if (seen.length) els = seen;
     els.sort(function (a, b) {
       var za = zOf(a), zb = zOf(b);
       if (za !== zb) return za - zb;
@@ -84,6 +89,14 @@
     var top = els.filter(function (el) { return zOf(el) === topZ; });
     var backs = top.filter(isBack);
     return backs.length ? backs[backs.length - 1] : top[top.length - 1];
+  }
+  function visibleAtCentre(el) {
+    try {
+      var r = el.getBoundingClientRect();
+      var x = Math.min(Math.max(r.left + r.width / 2, 1), window.innerWidth - 1), y = Math.min(Math.max(r.top + r.height / 2, 1), window.innerHeight - 1);
+      var hit = document.elementFromPoint(x, y);
+      return !!hit && (hit === el || el.contains(hit));
+    } catch (e) { return false; }
   }
   // Home is the true foreground screen (nothing covering it) — the same check refreshFab() in
   // home.js uses for the FAB's own visibility. If home owns the screen center there is nowhere
@@ -117,24 +130,46 @@
       if (cs.pointerEvents === "none") continue;                   // click-through -> not a real layer
       var z = parseInt(cs.zIndex, 10); if (isNaN(z) || z <= hz) continue;
       var r = n.getBoundingClientRect();
+      // Only a layer that covers at least half the screen is a screen above home. Bars, chips, the bottom nav, a floating
+      // buddy or a parked strip are not (owner 2026-11-20 recording: one of them made home "not in front", so the edge
+      // swipe dragged the home screen off over a blank white page and the menu never opened).
       if (r.width < 120 || r.height < 80) continue;                // toasts/badges are not screens
+      if (visArea(r) < 0.5) continue;
       if (r.right <= 0 || r.left >= window.innerWidth) continue;   // parked off-screen (closed drawer)
       if (r.bottom <= 0 || r.top >= window.innerHeight) continue;  // parked below (closed sheet)
       return true;
     }
     return false;
   }
+  function visArea(r) {
+    var W = window.innerWidth || 1, H = window.innerHeight || 1;
+    var w = Math.max(0, Math.min(r.right, W) - Math.max(r.left, 0)), h = Math.max(0, Math.min(r.bottom, H) - Math.max(r.top, 0));
+    return (w * h) / (W * H);
+  }
+  // The positioned layer that holds el and covers at least half the screen (a real screen), else null.
+  function screenLayerOf(el) {
+    var n = el;
+    while (n && n.nodeType === 1 && n !== document.body) {
+      var cs = window.getComputedStyle(n);
+      if ((cs.position === "fixed" || cs.position === "absolute") && visArea(n.getBoundingClientRect()) >= 0.5) return n;
+      n = n.parentElement;
+    }
+    return null;
+  }
   function homeIsForeground() {
     var h = document.getElementById("homeV2");
     if (!h || !h.classList.contains("on")) return false;
     var cs = window.getComputedStyle(h);
     if (cs.display === "none" || cs.visibility === "hidden") return false;
+    try { var hs = document.getElementById("hvSheet"); if (hs && hs.classList.contains("on")) return false; } catch (e) {}   // a home sheet is up
     if (overlayAboveHome()) return false;          // a sheet/dialog is up -> home is NOT the root screen
     try {
       // Kept as a second, independent condition: it still catches an overlay rendered INSIDE #homeV2,
       // which the body-level scan above cannot see. Both must agree that home owns the screen.
       var el = document.elementFromPoint(Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2));
-      return !!(el && h.contains(el));
+      // what sits at the centre is home, or something small floating over it (not a screen layer)
+      if (!el || h.contains(el)) return true;
+      return !screenLayerOf(el);
     } catch (e) { return false; }
   }
   // True when there is somewhere to go back to (drives the universal edge back-handle's visibility).
@@ -151,7 +186,10 @@
     return !!(engineActive() && typeof window._SMD_goBack === "function");
   }
 
-  var _last = 0;
+  var _last = 0, _heldCtrl = null;
+  /* Settings > Preferences > "Swipe from the left edge" (owner 2026-11-19). localStorage smd_swipe_back "0" turns the
+     gesture off everywhere: no back-swipe, no menu-swipe. Back buttons and Android's system back keep working. */
+  function swipeOn() { try { return window.localStorage.getItem("smd_swipe_back") !== "0"; } catch (e) { return true; } }
   function goBack() {
     var now = Date.now();
     if (now - _last < 400) return true;                        // debounce: one back per gesture
@@ -178,7 +216,10 @@
       if (_sheet && _scrim && _sheet.classList.contains("on")) { _last = now; _scrim.click(); return true; }
     } catch (e) {}
     // 1) top-most open overlay → its BACK control (never Close, so we step back, not jump home)
-    var ctrl = topBackControl();
+    // A completed drag slides the screen fully off before this runs, so its Back control is no longer "on screen":
+    // the control found when the drag started is the one to press (owner recording 2026-11-20: from Settings the swipe
+    // found nothing, fell through to "open the menu", and Settings slid back over an open menu with its scroll lock).
+    var ctrl = topBackControl() || (_heldCtrl && _heldCtrl.isConnected ? _heldCtrl : null);
     if (ctrl) { _last = now; try { ctrl.click(); } catch (e) {} return true; }
     // 2) clinical engine (incl. the Clinical Decision output, which has no visible Back button)
     if (engineActive() && typeof window._SMD_goBack === "function") {
@@ -195,8 +236,28 @@
   // opens the main menu instead of doing nothing — the drawer slides in on release (its own CSS
   // transition). Gesture-only: the Android hardware back must still exit at root, so this is NOT
   // inside goBack(). No-op when the drawer is already open or home isn't the foreground screen.
-  function openMenuAtHome() {
-    if (!homeIsForeground()) return false;
+  /* A full-screen module (PrepNucleus, MaiK, Atlas, Ophthalmos, Tokos, Narke, Kardia, FundX, CliniX) is open: then
+     home is NOT the screen, whatever the layer test says. Owner 2026-11-19: the menu opened BEHIND PrepNucleus and
+     its scroll lock froze PrepNucleus. Belt and braces with homeIsForeground(). */
+  function moduleOpen() {
+    var W = window, mods = ["PREP", "ATLAS", "OPHTHALMOS", "TOKOS", "NARKE", "KARDIA", "FUNDX", "CLINIX", "SURGX"];
+    for (var i = 0; i < mods.length; i++) { try { var m = W[mods[i]]; if (m && m.isOpen && m.isOpen()) return true; } catch (e) {} }
+    try {
+      var de = document.documentElement, b = document.body;
+      if (de.classList.contains("pn-open") || b.classList.contains("maik-open")) return true;
+      if (document.getElementById("smdPrep")) return true;
+    } catch (e) {}
+    return false;
+  }
+  // The menu never opens in the same breath as a back step: one swipe that closes a screen must not also open the menu.
+  var MENU_AFTER_BACK_MS = 900;
+  function openMenuAtHome(nothingBehind) {
+    if (!swipeOn()) return false;                 // Settings > Preferences: the edge swipe is off
+    if (Date.now() - _last < MENU_AFTER_BACK_MS) return false;
+    if (moduleOpen()) return false;
+    // nothingBehind: the swipe found no screen to go back to and no module is open, so home is what the user sees even if
+    // the layer test was unsure (owner 2026-11-20: the swipe then did nothing at all on home).
+    if (!homeIsForeground() && !(nothingBehind && homeOn())) return false;
     try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return false; } catch (e) {}
     try { if (window.SB && typeof SB.open === "function") { SB.open(); return true; } } catch (e) {}
     return false;
@@ -208,11 +269,17 @@
    * opened the menu on a screen the user expected to step back from, and — when SB was missing —
    * could fall through to goBack() ON HOME and click whatever stray "-close" element BACK_SEL
    * matched there. Home (and only home) opens the menu; every other screen goes back. */
-  function edgeSwipeAction() {
+  // fromScreen: the swipe dragged a screen (it is not home), so the only possible outcome is back, never the menu.
+  function edgeSwipeAction(fromScreen) {
+    if (!swipeOn()) return false;
     if (document.getElementById("wsq-alert")) return true;   // the alert screen owns the edge gesture too
     try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return true; } catch (e) {}
-    if (homeIsForeground()) return openMenuAtHome();
-    return goBack();
+    if (!fromScreen && !moduleOpen() && homeIsForeground()) return openMenuAtHome();
+    if (goBack()) return true;
+    return fromScreen ? false : openMenuAtHome(true);
+  }
+  function homeOn() {
+    try { var h = document.getElementById("homeV2"), hs = document.getElementById("hvSheet"); return !!(h && h.classList.contains("on") && !(hs && hs.classList.contains("on"))); } catch (e) { return false; }
   }
 
   // The screen to slide during an interactive edge-drag = the largest positioned (fixed/absolute) ancestor
@@ -223,7 +290,7 @@
       var cs = window.getComputedStyle(n);
       if (cs.position === "fixed" || cs.position === "absolute") {
         var r = n.getBoundingClientRect();
-        if (r.width >= window.innerWidth * 0.55 && r.height >= window.innerHeight * 0.45) best = n;
+        if (r.width >= window.innerWidth * 0.55 && r.height >= window.innerHeight * 0.45 && n.id !== "homeV2" && !(n.querySelector && n.querySelector("#homeV2"))) best = n;   // never the home screen
       }
       n = n.parentElement;
     }
@@ -324,7 +391,10 @@
       var b = ensureBackBtn();
       // Measure BEFORE deciding: the button must be laid out for wouldOverlap() to read its rect,
       // which is why hiding is visibility-based rather than display:none.
-      var show = canGoBack() && !hasTopLeftControl() && !topExposesHome() && !wouldOverlap(b);
+      // Home pulled down (home-pull.js): the hero slides away from this corner, which made wouldOverlap() false and put
+      // a Back button over Home itself (owner screenshot 2026-11-20). Home never shows it.
+      var homePulled = false; try { homePulled = document.body.classList.contains("hv-pulling") || !!(window.SMD_HOME_PULL && SMD_HOME_PULL.open()); } catch (e) {}
+      var show = !homePulled && canGoBack() && !hasTopLeftControl() && !topExposesHome() && !wouldOverlap(b);
       b.style.visibility = show ? "visible" : "hidden";
       b.style.opacity = show ? "1" : "0";
       b.style.pointerEvents = show ? "auto" : "none";
@@ -346,7 +416,8 @@
     function swipeCommit(dx, dt, vx, w, depth) {
       if (!depth) return dx >= w * 0.32 || (dx >= 70 && dt <= 800);
       if (vx < -0.3) return false;
-      return dx >= w * 0.4 || (vx > 0.35 && dx >= 24) || (dx >= 70 && dt <= 800 && vx >= 0);
+      // a flick must still travel 56 px (24 px let a stray thumb brush at the edge count; owner 2026-11-19)
+      return dx >= w * 0.4 || (vx > 0.35 && dx >= 56) || (dx >= 70 && dt <= 800 && vx >= 0);
     }
     // Settle ms seeded with release velocity (px/ms): distance/speed, clamped 110-300; slow release keeps 260.
     function settleMs(dist, vPxMs) {
@@ -374,10 +445,10 @@
           // Finish the slide off-screen on the drawer curve, THEN go back, so the screen is not yanked.
           var ms = settleMs(vw() - curDx, vx);
           finishing = true; setX(el, vw(), true, ms);
-          setTimeout(function () { finishing = false; edgeSwipeAction(); clearEl(el); setTimeout(syncHandle, 80); }, Math.max(120, ms - 60));
+          setTimeout(function () { finishing = false; edgeSwipeAction(true); _heldCtrl = null; clearEl(el); setTimeout(syncHandle, 80); }, Math.max(120, ms - 60));
           return;
         }
-        edgeSwipeAction(); if (el) clearEl(el); setTimeout(syncHandle, 80);
+        edgeSwipeAction(!!el); _heldCtrl = null; if (el) clearEl(el); setTimeout(syncHandle, 80);
       }
       else if (el) { setX(el, 0, true, settleMs(curDx, vx)); setTimeout(function () { try { if (dragEl !== el && el.style.transition !== "none") el.style.transition = ""; } catch (e) {} }, 320); }
     }
@@ -386,19 +457,28 @@
       dragging = false; dragEl = null; curDx = 0; tracking = false; vx = 0;
       if (e.touches.length !== 1) return;
       var t = e.touches[0]; sx = t.clientX; sy = t.clientY; t0 = Date.now(); lx = sx; lt = t0;
+      if (!swipeOn()) return;                                  // switched off in Settings
       if (sx > EDGE || inHScroll(e.target)) return;           // only a left-edge start can be a back-swipe
+      // typing or dragging a control at the edge (text box, slider, map, anything marked data-no-swipe) is not a swipe
+      try { if (e.target && e.target.closest && e.target.closest('input,textarea,select,[contenteditable="true"],[data-no-swipe]')) return; } catch (x) {}
       tracking = true;
-      var ctrl = topBackControl(); dragEl = ctrl ? overlayRootOf(ctrl) : null;
+      // On home nothing slides under the finger: the swipe opens the menu. Dragging a stray back-style control's layer
+      // there moved the home screen itself off, so the menu check no longer saw home in front and did nothing.
+      var atHome = !moduleOpen() && homeIsForeground();
+      var ctrl = atHome ? null : topBackControl(); dragEl = ctrl ? overlayRootOf(ctrl) : null;
+      _heldCtrl = dragEl ? ctrl : null;   // pressed on release even after the screen has slid off (goBack)
     }, { passive: true });
     document.addEventListener("touchmove", function (e) {
       if (!tracking) return;
       var t = e.touches && e.touches[0]; if (!t) return;
       var dx = t.clientX - sx, dy = t.clientY - sy;
       if (!dragging) {
-        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
-        if (dx <= 0 || Math.abs(dy) > Math.abs(dx)) { tracking = false; return; }   // not a rightward-horizontal drag
+        if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
+        // clearly sideways only: at least twice as far across as down (a scroll that drifts right is not a back-swipe)
+        if (dx <= 0 || Math.abs(dy) * 2 > dx) { tracking = false; return; }
         dragging = true;
       }
+      if (Math.abs(dy) > 60 && Math.abs(dy) > dx * 0.6) { tracking = false; if (dragging) endDrag(false); return; }   // turned into a scroll
       curDx = Math.max(0, dx);
       var nt = Date.now();
       if (nt > lt) { vx = vx * 0.6 + ((t.clientX - lx) / (nt - lt)) * 0.4; lx = t.clientX; lt = nt; }
@@ -415,8 +495,8 @@
     document.addEventListener("touchend", function (e) {
       if (!tracking) return; tracking = false;
       var t = e.changedTouches && e.changedTouches[0], dt = Date.now() - t0;
-      var dx = t ? (t.clientX - sx) : curDx;
-      var far = swipeCommit(dx, dt, vx, vw(), depthOn());
+      var dx = t ? (t.clientX - sx) : curDx, dyEnd = t ? Math.abs(t.clientY - sy) : 0;
+      var far = swipeCommit(dx, dt, vx, vw(), depthOn()) && dyEnd <= Math.max(48, dx * 0.5);
       if (dragging) endDrag(far);
       else if (far) edgeSwipeAction();                          // valid edge flick with no draggable overlay (at home: opens the menu)
     }, { passive: true });
@@ -452,7 +532,9 @@
   function hardwareBack() {
     var wasOpen = drawerIsOpen();
     if (goBack()) { if (wasOpen) _menuClosedAt = Date.now(); return true; }   // incl. closing the menu via .sb-x
+    if (moduleOpen()) return true;                                            // inside a module back never exits the app
     if (Date.now() - _menuClosedAt < EXIT_MS) return false;                   // menu was just closed by back → exit
+    if (Date.now() - _last < MENU_AFTER_BACK_MS) return true;                 // a back just landed on home: stay, no menu, no exit
     return openMenuAtHome();                                                  // at home: the same action as the edge drag
   }
   try {
@@ -464,7 +546,7 @@
     }
   } catch (e) {}
 
-  window.SMD_SWIPE_BACK = { goBack: goBack, hardwareBack: hardwareBack, drawerIsOpen: drawerIsOpen, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
+  window.SMD_SWIPE_BACK = { lastBackAt: function () { return _last; }, swipeOn: swipeOn, moduleOpen: moduleOpen, goBack: goBack, hardwareBack: hardwareBack, drawerIsOpen: drawerIsOpen, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
 })();
 
 /* SMD-15 (QA sheet 2026-09-27): the grey "<" / ">" tab parked on the screen edge in the reports is

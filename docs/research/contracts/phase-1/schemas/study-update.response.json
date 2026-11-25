@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-1/schemas/study-update.response.json",
+  "title": "PUT /v1/projects/{projectId}/studies/{studyId} response (200)",
+  "description": "Identical envelope to study get: {study, requestId}. A stale version answers 409 with the error envelope plus the current study (see errors.md).",
+  "$ref": "study-get.response.json"
+}

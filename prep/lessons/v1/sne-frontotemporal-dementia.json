@@ -1,0 +1,328 @@
+{
+ "v": 1,
+ "module": "sne-frontotemporal-dementia",
+ "title": "Frontotemporal lobar degeneration",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Frontotemporal lobar degeneration** has three clinical syndromes: behavioural variant frontotemporal dementia, semantic variant primary progressive aphasia, and nonfluent **agrammatic aphasia**. It causes 10 to 20 percent of degenerative dementias, with onset usually in middle adulthood. Behavioural change with preserved navigation and day to day memory is the hallmark that separates it from early Alzheimer disease.",
+   "say": "Frontotemporal lobar degeneration has three clinical syndromes: behavioural variant frontotemporal dementia, semantic variant primary progressive aphasia, and nonfluent agrammatic aphasia. It causes ten to twenty percent of degenerative dementias, with onset usually in middle adulthood. Behavioural change with preserved navigation and day to day memory is the hallmark that separates it from early Alzheimer disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Core deficit"
+    ],
+    "rows": [
+     [
+      "Behavioural variant",
+      "Conduct, empathy, and judgment"
+     ],
+     [
+      "Semantic variant",
+      "Word meaning and object knowledge"
+     ],
+     [
+      "Nonfluent variant",
+      "Grammar and speech fluency"
+     ],
+     [
+      "Share of dementias",
+      "10 to 20 percent degenerative"
+     ],
+     [
+      "Typical onset",
+      "Middle adulthood, no single decade"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autosomal dominant inheritance occurs in 10 to 20 percent, and mutations in **MAPT**, progranulin, and **C9orf72** explain most inherited cases. **MAPT** mutations build tau inclusions, while progranulin and C9orf72 expansions build TDP-43 inclusions, and rare FUS mutations give a third protein pattern. Coexistent motor neuron disease points toward C9orf72 or TDP-43 pathology and shortens expected survival.",
+   "say": "Autosomal dominant inheritance occurs in ten to twenty percent, and mutations in MAPT, progranulin, and C9orf72 explain most inherited cases. MAPT mutations build tau inclusions, while progranulin and C9orf72 expansions build TDP-43 inclusions, and rare FUS mutations give a third protein pattern. Coexistent motor neuron disease points toward C9orf72 or TDP-43 pathology and shortens expected survival.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tau pathway",
+     "points": [
+      "MAPT gene mutation",
+      "Pick bodies and ballooned cells",
+      "Behavioural and parkinsonian signs",
+      "Tau positive inclusions"
+     ]
+    },
+    "right": {
+     "title": "TDP-43 pathway",
+     "points": [
+      "Progranulin and C9orf72 mutations",
+      "TDP-43 neuronal inclusions",
+      "Language variants and MND overlap",
+      "Strong family history in many"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Selective frontal and anterior temporal **atrophy** with spongiosis and gliosis destroys social, language, and planning networks first. Tau positive Pick bodies and ballooned Pick cells mark one subgroup, while TDP-43 or **FUS inclusions** mark the others. Tau or TDP-43 explains roughly 90 percent of cases, and posterior cortex stays intact early, so navigation, drawing, and day to day memory look normal at presentation.",
+   "say": "Selective frontal and anterior temporal atrophy with spongiosis and gliosis destroys social, language, and planning networks first. Tau positive Pick bodies and ballooned Pick cells mark one subgroup, while TDP-43 or FUS inclusions mark the others. Tau or TDP-43 explains roughly ninety percent of cases, and posterior cortex stays intact early, so navigation, drawing, and day to day memory look normal at presentation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Protein inclusions gather"
+     },
+     {
+      "id": "b",
+      "label": "Frontal networks decline"
+     },
+     {
+      "id": "c",
+      "label": "Temporal networks decline"
+     },
+     {
+      "id": "d",
+      "label": "Conduct and language fail"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Behavioural variant disease opens with disinhibition, apathy, loss of empathy, and compulsive sweet eating with **hyperorality**. The classic bedside sign is **utilisation behaviour**, where the patient automatically grasps and uses every object in reach. Families report tactless jokes, shoplifting, financial recklessness, and neglect of washing while memory for dates and places stays preserved.",
+   "say": "Behavioural variant disease opens with disinhibition, apathy, loss of empathy, and compulsive sweet eating with hyperorality. The classic bedside sign is utilisation behaviour, where the patient automatically grasps and uses every object in reach. Families report tactless jokes, shoplifting, financial recklessness, and neglect of washing while memory for dates and places stays preserved.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Behaviour",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Disinhibition",
+      "Tactless jokes and shoplifting"
+     ],
+     [
+      "Apathy",
+      "Neglect of washing and dressing"
+     ],
+     [
+      "Lost empathy",
+      "Cold response to family distress"
+     ],
+     [
+      "Compulsion",
+      "Sweet eating with hyperorality"
+     ],
+     [
+      "Classic sign",
+      "Utilisation behaviour with objects"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Semantic variant disease produces fluent but empty speech with lost word meaning, so patients cannot name objects or recognise familiar **faces**. Nonfluent variant disease produces slow effortful speech with broken **grammar** and preserved single word understanding. Early amnesia with getting lost favours Alzheimer disease, while visual hallucinations with parkinsonism favours dementia with Lewy bodies.",
+   "say": "Semantic variant disease produces fluent but empty speech with lost word meaning, so patients cannot name objects or recognise familiar faces. Nonfluent variant disease produces slow effortful speech with broken grammar and preserved single word understanding. Early amnesia with getting lost favours Alzheimer disease, while visual hallucinations with parkinsonism favours dementia with Lewy bodies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Semantic variant",
+     "points": [
+      "Fluent but empty speech",
+      "Lost word and object meaning",
+      "Prosopagnosia for familiar faces",
+      "Temporal lobe atrophy dominates"
+     ]
+    },
+    "right": {
+     "title": "Nonfluent variant",
+     "points": [
+      "Slow effortful halting speech",
+      "Broken grammar, kept word sense",
+      "Frustration with full awareness",
+      "Frontal opercular atrophy dominates"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Brain MRI showing asymmetric frontal or anterior temporal **atrophy** with a sharp knife edge pattern is the first structural test, and FDG PET shows matching frontal hypometabolism. Formal language and executive testing maps the syndrome, while EEG stays normal early and spinal fluid lacks a diagnostic marker. The 2011 international criteria plus gene results or post mortem protein pathology give the gold standard classification using 3 of 6 behavioural features.",
+   "say": "Brain MRI showing asymmetric frontal or anterior temporal atrophy with a sharp knife edge pattern is the first structural test, and FDG PET shows matching frontal hypometabolism. Formal language and executive testing maps the syndrome, while EEG stays normal early and spinal fluid lacks a diagnostic marker. The two thousand eleven international criteria plus gene results or post mortem protein pathology give the gold standard classification using three of six behavioural features.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role"
+    ],
+    "rows": [
+     [
+      "First structural test",
+      "MRI frontal and temporal atrophy"
+     ],
+     [
+      "Metabolic imaging",
+      "FDG PET frontal hypometabolism"
+     ],
+     [
+      "Bedside mapping",
+      "Language and executive testing"
+     ],
+     [
+      "Gold standard",
+      "2011 criteria with 3 of 6 features"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Structured routines with caregiver coaching and safety planning are the first line, because reasoning with the patient rarely changes behaviour. **SSRIs** such as selective serotonin reuptake inhibitors reduce disinhibition, anxiety, and repetitive eating. These agents do not restore lost empathy, and **antipsychotics** are reserved for dangerous aggression in small cautious doses with close monitoring.",
+   "say": "Structured routines with caregiver coaching and safety planning are the first line, because reasoning with the patient rarely changes behaviour. SSRIs such as selective serotonin reuptake inhibitors reduce disinhibition, anxiety, and repetitive eating. These agents do not restore lost empathy, and antipsychotics are reserved for dangerous aggression in small cautious doses with close monitoring.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Structured routine and safety plan"
+     },
+     {
+      "id": "b",
+      "label": "Coach caregivers, redirect calmly"
+     },
+     {
+      "id": "c",
+      "label": "Add SSRIs for distressing behaviour"
+     },
+     {
+      "id": "d",
+      "label": "Reserve antipsychotics for severe danger"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recent practice separates frontotemporal dementia from Alzheimer disease with **amyloid PET** and spinal fluid amyloid testing, since frontotemporal cases are amyloid negative. Trials now target tau aggregation, progranulin replacement, and C9orf72 repeat expansions, though none is an approved therapy. Centres add speech therapy for aphasic variants, motor neuron screening with EMG, and legal planning for finances and driving.",
+   "say": "Recent practice separates frontotemporal dementia from Alzheimer disease with amyloid PET and spinal fluid amyloid testing, since frontotemporal cases are amyloid negative. Trials now target tau aggregation, progranulin replacement, and C9orf72 repeat expansions, though none is an approved therapy. Centres add speech therapy for aphasic variants, motor neuron screening with EMG, and legal planning for finances and driving.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "New separation tools",
+     "points": [
+      "Amyloid PET negative result",
+      "Spinal fluid amyloid testing",
+      "FDG PET frontal pattern",
+      "EMG screens for MND overlap"
+     ]
+    },
+    "right": {
+     "title": "Emerging treatments",
+     "points": [
+      "Anti tau aggregation trials",
+      "Progranulin replacement studies",
+      "C9orf72 targeted research",
+      "Speech and legal planning"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Relentless apathy ends in **mutism**, incontinence, and complete dependence for dressing and feeding. **Aspiration pneumonia**, falls, and pressure injuries are the usual terminal events. Typical course lasts years rather than months, and emergence of swallowing failure or motor neuron signs shortens survival and increases care needs.",
+   "say": "Relentless apathy ends in mutism, incontinence, and complete dependence for dressing and feeding. Aspiration pneumonia, falls, and pressure injuries are the usual terminal events. Typical course lasts years rather than months, and emergence of swallowing failure or motor neuron signs shortens survival and increases care needs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Outcome",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Late stage",
+      "Mutism with full dependence"
+     ],
+     [
+      "Terminal events",
+      "Aspiration, falls, skin injury"
+     ],
+     [
+      "Typical course",
+      "Lasts years, not months"
+     ],
+     [
+      "Shortened course",
+      "MND signs shorten survival"
+     ],
+     [
+      "Care need",
+      "Full nursing supervision"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** early personality change with preserved memory means behavioural variant **frontotemporal dementia**. **Hyperorality** with sweet craving and utilisation behaviour are signature signs. Fluent empty speech with lost word meaning marks semantic variant disease. **C9orf72** links frontotemporal dementia with motor neuron disease, and selective serotonin reuptake inhibitors help behaviour while antipsychotics need caution.",
+   "say": "High yield for the exam: early personality change with preserved memory means behavioural variant frontotemporal dementia. Hyperorality with sweet craving and utilisation behaviour are signature signs. Fluent empty speech with lost word meaning marks semantic variant disease. C9orf72 links frontotemporal dementia with motor neuron disease, and selective serotonin reuptake inhibitors help behaviour while antipsychotics need caution.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Earliest clue",
+      "Personality change, memory spared"
+     ],
+     [
+      "Signature signs",
+      "Hyperorality and utilisation behaviour"
+     ],
+     [
+      "Semantic variant",
+      "Fluent empty speech, lost meaning"
+     ],
+     [
+      "Gene bridge",
+      "C9orf72 with motor neuron disease"
+     ],
+     [
+      "Drug approach",
+      "SSRIs help; antipsychotics need caution"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

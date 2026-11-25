@@ -25,12 +25,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Tick bite transmission in forest"},
-     {"id": "b", "label": "Phase 1: High fever, chills, myalgia"},
-     {"id": "c", "label": "Afebrile window of 1 to 2 weeks"},
-     {"id": "d", "label": "Phase 2: Encephalitic tremors and confusion"}
+     {
+      "id": "a",
+      "label": "Tick bite transmission in forest"
+     },
+     {
+      "id": "b",
+      "label": "Phase 1: High fever, chills, myalgia"
+     },
+     {
+      "id": "c",
+      "label": "Afebrile window of 1 to 2 weeks"
+     },
+     {
+      "id": "d",
+      "label": "Phase 2: Encephalitic tremors and confusion"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -39,12 +64,32 @@
    "say": "Forest workers in endemic areas receive the inactivated tissue culture vaccine with annual boosters, and apply repellent oils to bare limbs before entering the jungle.",
    "vis": {
     "kind": "table",
-    "cols": ["Preventive intervention", "Target group or schedule", "Protective mechanism"],
+    "cols": [
+     "Preventive intervention",
+     "Target group or schedule",
+     "Protective mechanism"
+    ],
     "rows": [
-     ["KFD vaccine primary series", "Two doses 1 month apart in endemic belts", "Induces neutralizing antiviral IgG"],
-     ["Annual booster vaccine", "Administered before peak dry season", "Maintains protective antibody titres"],
-     ["DEET / DMP repellents", "Applied to limbs before forest entry", "Prevents Haemaphysalis tick attachment"],
-     ["Pyrethroid dust application", "Around cattle sheds and forest trails", "Controls questing tick nymphs"]
+     [
+      "KFD vaccine primary series",
+      "Two doses 1 month apart in endemic belts",
+      "Induces neutralizing antiviral IgG"
+     ],
+     [
+      "Annual booster vaccine",
+      "Administered before peak dry season",
+      "Maintains protective antibody titres"
+     ],
+     [
+      "DEET / DMP repellents",
+      "Applied to limbs before forest entry",
+      "Prevents Haemaphysalis tick attachment"
+     ],
+     [
+      "Pyrethroid dust application",
+      "Around cattle sheds and forest trails",
+      "Controls questing tick nymphs"
+     ]
     ]
    }
   },
@@ -65,12 +110,32 @@
    "say": "The 17D yellow fever vaccine provides lifelong protection ten days after injection. Arriving without this certificate leads to mandatory six-day quarantine in a mosquito-screened room.",
    "vis": {
     "kind": "table",
-    "cols": ["Travel parameter", "International Health Regulation rule", "Underlying clinical purpose"],
+    "cols": [
+     "Travel parameter",
+     "International Health Regulation rule",
+     "Underlying clinical purpose"
+    ],
     "rows": [
-     ["Vaccine platform", "Live attenuated 17D strain", "High immunogenicity with single shot"],
-     ["Certificate validity onset", "10 days post-vaccination", "Allows protective neutralizing antibodies to form"],
-     ["Certificate duration", "Valid for life of the traveller", "Lifelong immunological memory confirmed"],
-     ["Quarantine detention", "Up to 6 days from departure", "Matches maximum human incubation period"]
+     [
+      "Vaccine platform",
+      "Live attenuated 17D strain",
+      "High immunogenicity with single shot"
+     ],
+     [
+      "Certificate validity onset",
+      "10 days post-vaccination",
+      "Allows protective neutralizing antibodies to form"
+     ],
+     [
+      "Certificate duration",
+      "Valid for life of the traveller",
+      "Lifelong immunological memory confirmed"
+     ],
+     [
+      "Quarantine detention",
+      "Up to 6 days from departure",
+      "Matches maximum human incubation period"
+     ]
     ]
    }
   },
@@ -81,12 +146,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Daytime Aedes mosquito bite"},
-     {"id": "b", "label": "Viraemic human bloodstream"},
-     {"id": "c", "label": "Sexual transmission via seminal fluid"},
-     {"id": "d", "label": "Transplacental fetal infection"}
+     {
+      "id": "a",
+      "label": "Daytime Aedes mosquito bite"
+     },
+     {
+      "id": "b",
+      "label": "Viraemic human bloodstream"
+     },
+     {
+      "id": "c",
+      "label": "Sexual transmission via seminal fluid"
+     },
+     {
+      "id": "d",
+      "label": "Transplacental fetal infection"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["b", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -97,11 +187,19 @@
     "kind": "compare",
     "left": {
      "title": "Adult clinical illness",
-     "points": ["Low-grade fever and arthralgia", "Maculopapular rash and conjunctivitis", "Self-limiting within 7 days"]
+     "points": [
+      "Low-grade fever and arthralgia",
+      "Maculopapular rash and conjunctivitis",
+      "Self-limiting within 7 days"
+     ]
     },
     "right": {
      "title": "Congenital Zika syndrome",
-     "points": ["Disproportionate severe microcephaly", "Intracranial calcifications and brain loss", "Arthrogryposis and retinal scarring"]
+     "points": [
+      "Disproportionate severe microcephaly",
+      "Intracranial calcifications and brain loss",
+      "Arthrogryposis and retinal scarring"
+     ]
     }
    }
   },
@@ -111,12 +209,32 @@
    "say": "Chandipura virus is carried by sandflies and strikes children under fifteen years old. It causes rapidly progressive brain swelling, convulsions and a fatality rate exceeding fifty percent.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Chandipura epidemiology", "Clinical significance"],
+    "cols": [
+     "Feature",
+     "Chandipura epidemiology",
+     "Clinical significance"
+    ],
     "rows": [
-     ["Viral classification", "Rhabdoviridae family, Vesiculovirus genus", "RNA virus with neurotropic virulence"],
-     ["Insect vector", "Phlebotomus sandfly species", "Breeds in mud walls and cattle stalls"],
-     ["Target demographic", "Children under fifteen years old", "High vulnerability to rapid brain oedema"],
-     ["Case fatality", "Between 50 and 70 percent", "Requires immediate airway and anti-oedema care"]
+     [
+      "Viral classification",
+      "Rhabdoviridae family, Vesiculovirus genus",
+      "RNA virus with neurotropic virulence"
+     ],
+     [
+      "Insect vector",
+      "Phlebotomus sandfly species",
+      "Breeds in mud walls and cattle stalls"
+     ],
+     [
+      "Target demographic",
+      "Children under fifteen years old",
+      "High vulnerability to rapid brain oedema"
+     ],
+     [
+      "Case fatality",
+      "Between 50 and 70 percent",
+      "Requires immediate airway and anti-oedema care"
+     ]
     ]
    }
   },
@@ -127,11 +245,70 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Cluster identification via IHIP"},
-     {"id": "b", "label": "CSF and blood molecular RT-PCR"},
-     {"id": "c", "label": "Immediate vector knockdown and larval control"}
+     {
+      "id": "a",
+      "label": "Cluster identification via IHIP"
+     },
+     {
+      "id": "b",
+      "label": "CSF and blood molecular RT-PCR"
+     },
+     {
+      "id": "c",
+      "label": "Immediate vector knockdown and larval control"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Kyasanur Forest disease is transmitted by the hard tick Haemaphysalis spinigera, with monkeys acting as amplifying sentinels. A formalin-inactivated tissue culture vaccine protects exposed forest workers. Yellow fever is transmitted by Aedes aegypti, prevented by the live attenuated 17D vaccine conferring lifelong immunity beginning ten days post-vaccination. Zika virus causes congenital microcephaly and Guillain-Barre syndrome, transmitted primarily by Aedes mosquitoes and sexual intercourse.",
+   "say": "Kyasanur Forest disease is transmitted by the hard tick Haemaphysalis spinigera, with monkeys acting as amplifying sentinels. A formalin-inactivated tissue culture vaccine protects exposed forest workers. Yellow fever is transmitted by Aedes aegypti, prevented by the live attenuated 17D vaccine conferring lifelong immunity beginning ten days post-vaccination. Zika virus causes congenital microcephaly and Guillain-Barre syndrome, transmitted primarily by Aedes mosquitoes and sexual intercourse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Kyasanur forest vector",
+      "Hard tick Haemaphysalis spinigera biting forest workers"
+     ],
+     [
+      "KFD sentinel hosts",
+      "Black-faced langurs and bonnet macaques show sudden mortality"
+     ],
+     [
+      "KFD vaccine schedule",
+      "Formalin-inactivated vaccine at zero, one, and six months"
+     ],
+     [
+      "Yellow fever vector",
+      "Aedes aegypti mosquito in urban and sylvatic cycles"
+     ],
+     [
+      "Yellow fever vaccine",
+      "Live attenuated 17D strain valid after ten days for life"
+     ],
+     [
+      "Zika congenital hallmark",
+      "Fetal microcephaly, cerebral calcifications, and macular scarring"
+     ],
+     [
+      "Chandipura virus vector",
+      "Phlebotomus sandfly causing rapid fatal encephalitis in children"
+     ]
+    ]
    }
   }
  ],

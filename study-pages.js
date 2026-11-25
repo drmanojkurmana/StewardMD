@@ -84,7 +84,27 @@
   function put(s,v){ return G.STUDY._put(s,v); }
   function get(s,k){ return G.STUDY._get(s,k); }
   function del(s,k){ return G.STUDY._del(s,k); }
-  function toast(m){ var h=host(); if(h&&h.toast) h.toast(m); else if(G.toast) G.toast(m); }
+  function toast(m){
+    try {
+      if (G.SMD_dynNotify && G.SMD_dynNotify.dismiss) G.SMD_dynNotify.dismiss();
+      var r = (host() && host().root ? host().root() : null) || document.getElementById("smdPrep") || document.body;
+      if (r) {
+        var t = r.querySelector("#stStudyToast");
+        if (!t) {
+          t = document.createElement("div");
+          t.id = "stStudyToast";
+          t.className = "st-study-toast";
+          r.appendChild(t);
+        }
+        t.textContent = m;
+        t.style.display = "block";
+        clearTimeout(t._tm);
+        t._tm = setTimeout(function(){ if (t && t.parentNode) t.parentNode.removeChild(t); }, 2200);
+        return;
+      }
+    } catch(e){}
+    var h=host(); if(h&&h.toast) h.toast(m); else if(G.toast) G.toast(m);
+  }
 
   var ICO = {
     back: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>',
@@ -109,7 +129,10 @@
     gear: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="17" r="2"/></svg>',
     rotate: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>',
     bookmark: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
-    tpl: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>'
+    tpl: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>',
+    print: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>',
+    present: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    micOff: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12"/><path d="M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/><line x1="12" y1="19" x2="12" y2="23"/></svg>'
   };
 
   function ensureDocMeta(doc){
@@ -139,10 +162,10 @@
     var H = W*ratio;
     var dark = tplIsDark(tpl), base = tplBase(tpl);
     var bg = dark ? "#0D1D23" : "#ffffff";
-    var line = dark ? "rgba(66,205,181,0.28)" : "#b8c4d6";
+    var line = dark ? "rgba(66,205,181,0.28)" : base === "grid" ? "#cfd8e6" : "#b9c5d8";
     var dot = dark ? "rgba(66,205,181,0.5)" : "#7a8aa0";
     ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
-    ctx.strokeStyle = line; ctx.lineWidth = Math.max(1, W/500);
+    ctx.strokeStyle = line; ctx.lineWidth = Math.max(1, W/900);
     ctx.beginPath();
     var i, s;
     if(base==="ruled"){
@@ -237,6 +260,8 @@
     enhancedFor=vId;
     /* remove old if re-injected */
     var oldTop=root.querySelector("#stP3Top"); if(oldTop) oldTop.parentNode.removeChild(oldTop);
+    var oldPnBar=root.querySelector(".pn-bar"); if(oldPnBar&&oldPnBar.parentNode) oldPnBar.parentNode.removeChild(oldPnBar);
+    if(G.SMD_dynNotify&&G.SMD_dynNotify.dismiss){ try { G.SMD_dynNotify.dismiss(); } catch(e){} }
     var body=root.querySelector(".pn-body.st-body") || root.querySelector("#stSc");
     var top=D.createElement("div");
     top.id="stP3Top";
@@ -261,10 +286,18 @@
           '<button type="button" class="st-p3-btn" data-act="st-p3-more" aria-label="More options">'+ICO.more+'</button>' +
         '</div>' +
       '</div>';
-    /* insert before .st-tb if exists else at top of body */
-    var insertBefore = tb || root.querySelector(".st-sc");
+    /* insert before #stDocTabs if exists, else before .st-tb if exists else at top of body */
+    var allDt = root.querySelectorAll("#stDocTabs");
+    for (var di = 1; di < allDt.length; di++) {
+      if (allDt[di].parentNode) allDt[di].parentNode.removeChild(allDt[di]);
+    }
+    var dt = allDt && allDt[0];
+    var insertBefore = dt || tb || root.querySelector(".st-sc");
     if(insertBefore && insertBefore.parentNode) insertBefore.parentNode.insertBefore(top, insertBefore);
     else if(root) root.insertBefore(top, root.firstChild);
+    if(dt && dt.parentNode === top.parentNode && top.nextSibling !== dt) {
+      top.parentNode.insertBefore(dt, top.nextSibling);
+    }
     /* bottom pager */
     var pager=D.createElement("button"); pager.type="button"; pager.id="stP3Pager"; pager.className="st-p3-pager";
     pager.setAttribute("data-act","st-p3-goto"); pager.innerHTML='<span id="stP3Cur">1</span><span class="st-p3-slash"> of </span><span id="stP3Tot">1</span>';
@@ -272,7 +305,7 @@
     root.appendChild(pager);
     /* zoom window */
     var zw=D.createElement("div"); zw.id="stP3ZoomWindow"; zw.className="st-p3-zoomwin"; zw.hidden=true;
-    zw.innerHTML='<canvas id="stP3ZoomCv" width="640" height="120"></canvas><span class="st-p3-zoom-tag">Zoom</span>';
+    zw.innerHTML='<div class="st-p3-zoomwin-bar"><span class="st-p3-zoom-tag">Zoom</span><div class="st-zw-ctl" role="group" aria-label="Zoom window"><button type="button" class="st-zw-b" data-act="st-zw-zout" aria-label="Zoom out" title="Zoom out"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></button><button type="button" class="st-zw-b" data-act="st-zw-zin" aria-label="Zoom in" title="Zoom in"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button><span class="st-zw-sep"></span><button type="button" class="st-zw-b" data-act="st-zw-up" aria-label="Line up" title="Line up"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button><button type="button" class="st-zw-b" data-act="st-zw-left" aria-label="Move left" title="Move left"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="st-zw-b" data-act="st-zw-right" aria-label="Move right" title="Move right"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button><button type="button" class="st-zw-b st-zw-nl" data-act="st-zw-nl" aria-label="New line" title="New line"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5v6a3 3 0 0 1-3 3H5M9 10l-4 4 4 4"/></svg><span>New line</span></button></div><button type="button" class="pn-btn sm st-p3-zoom-close" data-act="st-zoom-close" aria-label="Close zoom window">Done</button></div><canvas id="stP3ZoomCv" width="640" height="160"></canvas>';
     root.appendChild(zw);
     refreshTopBar();
     applySettings();
@@ -331,17 +364,13 @@
     if(!sc) return;
     /* double-tap to fit width (double click fallback) */
     sc.addEventListener("dblclick", function(e){
-      var vv=V(); if(!vv) return;
+      var vv=V(); if(!vv || vv.tool) return;
       /* fit to width => zoom 1 */
       if(G.STUDY && G.STUDY._setZoom) G.STUDY._setZoom(1);
       refreshTopBar();
     });
     /* pinch already in study.js; we just ensure clamp */
-    /* zoom window on pen touch: show magnified strip at touch Y */
-    var zoomWin = host().root() ? host().root().querySelector("#stP3ZoomWindow") : null;
-    if(zoomWin && !zoomWin._bound){
-      zoomWin._bound=true;
-    }
+    /* zoom window: stays hidden until user taps zoom-window tool */
   }
 
   /* ---- page ops (one undo step each) ---- */
@@ -641,18 +670,23 @@
         '<button type="button" class="st-p3-menu-item" data-act="st-p3-change-tpl">'+ICO.tpl+'<div class="st-p3-menu-txt"><strong>Change Template</strong><small>This page or all pages</small></div></button>' +
         '<button type="button" class="st-p3-menu-item" data-act="st-p3-go">'+ICO.gotoIco+'<div class="st-p3-menu-txt"><strong>Go to Page</strong><small>1–'+n+'</small></div></button>' +
         '<button type="button" class="st-p3-menu-item" data-act="st-p3-settings">'+ICO.gear+'<div class="st-p3-menu-txt"><strong>Settings</strong><small>Scroll, palm rejection, lock</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-print-open">'+ICO.print+'<div class="st-p3-menu-txt"><strong>Print</strong><small>This page or all pages</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-present">'+ICO.present+'<div class="st-p3-menu-txt"><strong>Present</strong><small>Fullscreen, laser follows pointer</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-audio-list">'+ICO.mic+'<div class="st-p3-menu-txt"><strong>Recordings</strong><small>Play and tap a stroke to jump</small></div></button>' +
         '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-search">'+ICO.search+'<div class="st-p3-menu-txt"><strong>Search</strong><small>Find in this notebook</small></div></button>' +
         '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-share">'+ICO.share+'<div class="st-p3-menu-txt"><strong>Share</strong><small>Share this notebook</small></div></button>' +
         '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-mic">'+ICO.mic+'<div class="st-p3-menu-txt"><strong>Voice note</strong><small>Microphone</small></div></button>' +
         '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-fav">'+ICO.star+'<div class="st-p3-menu-txt"><strong>Star page</strong><small>Bookmark this page</small></div></button>' +
         '<button type="button" class="st-p3-menu-item" data-act="st-more">'+ICO.gear+'<div class="st-p3-menu-txt"><strong>Notebook options</strong><small>Study AI, share, zoom and settings</small></div></button>' +
         '<button type="button" class="st-p3-menu-item bad" data-act="st-p3-clear">'+ICO.trash+'<div class="st-p3-menu-txt"><strong>Clear Page</strong><small>Removes ink on this page</small></div></button>' +
-      '</div>';
+      '</div>' +
+      '<p class="pn-note" id="st5bStorage" role="status" style="margin-top:10px">Calculating storage…</p>';
     var el=sheetEl("stP3MoreSheet", html);
     if(!el) return;
     /* thumb */
     var cv=el.querySelector("#stP3MoreThumb");
     if(cv) renderThumbInto(cv, cur);
+    if(G.STUDY_MEDIA && G.STUDY_MEDIA.refreshSettingsStorage) G.STUDY_MEDIA.refreshSettingsStorage();
   }
   function openSettingsSheet(){
     var v=V(); if(!v||!v.doc) return;
@@ -661,9 +695,11 @@
     var html = '<div class="st-p3-sh-head"><h3>Settings</h3><button type="button" class="pn-btn sm" data-act="st-p3-close-sheet">Done</button></div>' +
       '<div class="st-p3-setting"><div><strong>Scrolling direction</strong><small>Vertical for reading, horizontal for boards</small></div><div class="st-p3-seg"><button type="button" class="st-p3-seg-btn'+(s.scrollDir!=="horizontal"?" on":"")+'" data-act="st-p3-scroll" data-v="vertical">Vertical</button><button type="button" class="st-p3-seg-btn'+(s.scrollDir==="horizontal"?" on":"")+'" data-act="st-p3-scroll" data-v="horizontal">Horizontal</button></div></div>' +
       '<div class="st-p3-setting"><div><strong>Stylus &amp; palm rejection</strong><small>Phase 1 owns behaviour</small></div><button type="button" class="pn-btn sm" data-act="st-p3-palm" aria-pressed="'+!!s.palm+'">'+(s.palm?"ON":"OFF")+'</button></div>' +
-      '<div class="st-p3-setting"><div><strong>Document editing lock</strong><small>Read-only</small></div><button type="button" class="pn-btn sm" data-act="st-p3-lock" aria-pressed="'+!!s.lock+'">'+(s.lock?"LOCKED":"EDIT")+'</button></div>';
+      '<div class="st-p3-setting"><div><strong>Document editing lock</strong><small>Read-only</small></div><button type="button" class="pn-btn sm" data-act="st-p3-lock" aria-pressed="'+!!s.lock+'">'+(s.lock?"LOCKED":"EDIT")+'</button></div>' +
+      '<div class="st-p3-setting"><div><strong>Storage used</strong><small id="st5bStorage">Calculating…</small></div></div>';
     var el=sheetEl("stP3SettingsSheet", html);
     if(!el) return;
+    if(G.STUDY_MEDIA && G.STUDY_MEDIA.refreshSettingsStorage) G.STUDY_MEDIA.refreshSettingsStorage();
     el.querySelectorAll("[data-act='st-p3-scroll']").forEach(function(b){
       b.addEventListener("click", function(){
         v.doc.settings.scrollDir=b.getAttribute("data-v");
@@ -1070,29 +1106,71 @@
   }
 
   /* ---- top-level dispatch ---- */
-  var PHASE3_ACTS = ["st-p3-back","st-p3-grid","st-p3-search","st-p3-share","st-p3-mic","st-p3-title","st-p3-fav","st-p3-add","st-p3-close","st-p3-more","st-p3-goto","st-p3-close-sheet","st-p3-place","st-p3-more-tpls","st-p3-confirm-add","st-p3-add-image","st-p3-add-scan","st-p3-add-photo","st-p3-add-pdf","st-p3-tab","st-p3-select-toggle","st-p3-nav-add","st-p3-change-tpl","st-p3-tpl-scope","st-p3-copy","st-p3-rotate","st-p3-outline","st-p3-clear","st-p3-settings","st-p3-scroll","st-p3-palm","st-p3-lock","st-p3-do-goto","st-p3-rename"];
+  var PHASE3_ACTS = ["st-p3-back","st-p3-grid","st-p3-search","st-p3-share","st-p3-mic","st-p3-title","st-p3-fav","st-p3-add","st-p3-close","st-p3-more","st-p3-goto","st-p3-close-sheet","st-p3-place","st-p3-more-tpls","st-p3-confirm-add","st-p3-add-image","st-p3-add-scan","st-p3-add-photo","st-p3-add-pdf","st-p3-tab","st-p3-select-toggle","st-p3-nav-add","st-p3-change-tpl","st-p3-tpl-scope","st-p3-copy","st-p3-rotate","st-p3-outline","st-p3-clear","st-p3-settings","st-p3-scroll","st-p3-palm","st-p3-lock","st-p3-do-goto","st-p3-rename","st-print-open","st-present","st-audio-list","st-p3-print","st-p3-present","st-zoom-close"];
   function isPhase3(a){ return PHASE3_ACTS.indexOf(a)!==-1; }
 
   function handlePhase3(a, el, h){
     var v=V();
+    if(a==="st-zoom-close"){
+      var h0=host(); var root0=h0&&h0.root?h0.root():null;
+      if(root0){
+        var zw0=root0.querySelector("#stP3ZoomWindow"); if(zw0) zw0.hidden=true;
+        var btn0=root0.querySelector('#stTb [data-act="st-zoom-window"]'); if(btn0) btn0.classList.remove("on");
+      }
+      return;
+    }
     if(a==="st-p3-back"||a==="st-p3-close"){
       /* back to library */
+      ["stP3AddSheet","stP3TplSheet","stP3MoreSheet","stP3SettingsSheet","stP3GoSheet","stP3NavSheet","stP3SoonSheet","stP3TitleSheet"].forEach(removeSheet);
+      var rootB=(host()&&host().root)?host().root():null;
+      if(rootB){
+        var popB=rootB.querySelector("#stInkPop"); if(popB&&popB.parentNode) popB.parentNode.removeChild(popB);
+        var zwB=rootB.querySelector("#stP3ZoomWindow"); if(zwB) zwB.hidden=true;
+        var shB=rootB.querySelectorAll(".st-sheet"); if(shB) Array.prototype.forEach.call(shB, function(s){ if(s.parentNode) s.parentNode.removeChild(s); });
+      }
       try{ if(G.STUDY&&G.STUDY.leave) G.STUDY.leave(); }catch(e){}
       var host2=h||host();
-      if(host2&&host2.root){
-        /* navigate back to library via host's pop? fallback to STUDY lib render */
-        if(G.STUDY&&G.STUDY.lib) G.STUDY.lib(host2);
-        else if(h&&h.back) h.back();
-      } else if(G.STUDY&&G.STUDY.lib&&host()) G.STUDY.lib(host());
+      if(G.STUDY&&G.STUDY.lib) G.STUDY.lib(host2);
+      else if(host2&&host2.root&&host2.back) host2.back();
       return;
     }
     if(a==="st-p3-grid"){
       openNavigator("thumbs");
       return;
     }
-    if(a==="st-p3-search"){ openComingSoon("Search","Search is coming soon in Phase 5."); return; }
-    if(a==="st-p3-share"){ openComingSoon("Share","Share is coming soon in Phase 5."); return; }
-    if(a==="st-p3-mic"){ openComingSoon("Microphone","Voice notes are coming soon in Phase 5."); return; }
+    if(a==="st-p3-search"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_MEDIA && G.STUDY_MEDIA.toggleInDoc) G.STUDY_MEDIA.toggleInDoc(true);
+      else openComingSoon("Search","Search is coming soon in Phase 5.");
+      return;
+    }
+    if(a==="st-p3-share"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_LIB && G.STUDY_LIB.exportAll && v && v.id) G.STUDY_LIB.exportAll(v.id, null);
+      else openComingSoon("Share","Share is coming soon in Phase 5.");
+      return;
+    }
+    if(a==="st-p3-mic"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_MEDIA && G.STUDY_MEDIA.startRec) G.STUDY_MEDIA.startRec();
+      else openComingSoon("Microphone","Voice notes are coming soon in Phase 5.");
+      return;
+    }
+    if(a==="st-print-open"||a==="st-p3-print"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_MEDIA && G.STUDY_MEDIA.openPrintSheet) G.STUDY_MEDIA.openPrintSheet();
+      return;
+    }
+    if(a==="st-present"||a==="st-p3-present"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_MEDIA && G.STUDY_MEDIA.enterPresent) G.STUDY_MEDIA.enterPresent();
+      return;
+    }
+    if(a==="st-audio-list"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_MEDIA && G.STUDY_MEDIA.showAudioSheet) G.STUDY_MEDIA.showAudioSheet();
+      return;
+    }
     if(a==="st-p3-title"){
       /* notebook title menu: rename, duplicate, export */
       var html='<div class="st-p3-sh-head"><h3>'+esc(v?v.doc.title:"")+'</h3><button type="button" class="pn-btn sm" data-act="st-p3-close-sheet">Done</button></div>' +
@@ -1186,6 +1264,42 @@
   }
   wrap();
 
+  /* ---- Escape key closes any active sheet, popover, or zoom window ---- */
+  if (D && D.addEventListener) {
+    D.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        var h = host(); var root = h && h.root ? h.root() : null;
+        if (!root) return;
+        var sheets = root.querySelectorAll(".st-sheet, .st-p3-sheet, [id^='stP3'][id$='Sheet'], #stPageSheet");
+        if (sheets && sheets.length) {
+          Array.prototype.forEach.call(sheets, function (s) { if (s.parentNode) s.parentNode.removeChild(s); });
+          e.preventDefault();
+          if (e.stopPropagation) e.stopPropagation();
+          if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+          return;
+        }
+        var pop = root.querySelector("#stInkPop");
+        if (pop && pop.parentNode) {
+          pop.parentNode.removeChild(pop);
+          e.preventDefault();
+          if (e.stopPropagation) e.stopPropagation();
+          if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+          return;
+        }
+        var zw = root.querySelector("#stP3ZoomWindow");
+        if (zw && !zw.hidden) {
+          zw.hidden = true;
+          var btn = root.querySelector('#stTb [data-act="st-zoom-window"]');
+          if (btn) btn.classList.remove("on");
+          e.preventDefault();
+          if (e.stopPropagation) e.stopPropagation();
+          if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+          return;
+        }
+      }
+    }, true);
+  }
+
   /* ---- observer to inject top bar & refresh ---- */
   function observe(){
     var h=host(); var root=h&&h.root? h.root(): null;
@@ -1217,47 +1331,35 @@
   }
   setInterval(observe, 300);
 
-  /* zoom window interaction: magnified writing strip at bottom that auto-advances with pen Y */
-  function bindZoomWindow(){
+  /* zoom window: magnified writing strip at bottom that opens ONLY when zoom-window tool is tapped */
+  function renderZoom(e){
     var h=host(); if(!h||!h.root) return;
-    var sc=h.root().querySelector("#stSc");
-    if(!sc||sc._p3zw) return; sc._p3zw=true;
-    function drawZoom(e){
-      var v=V(); if(!v||!v.tool) return;
-      var zw=h.root().querySelector("#stP3ZoomWindow");
-      if(!zw) return;
-      zw.hidden=false;
-      var ovWrap = e.target && e.target.closest && e.target.closest(".st-pg");
-      var cv = zw.querySelector("#stP3ZoomCv");
-      if(!cv) return;
-      var ctx=cv.getContext("2d");
-      ctx.fillStyle="#fff"; ctx.fillRect(0,0,cv.width,cv.height);
-      ctx.strokeStyle="#071318"; ctx.strokeRect(0,0,cv.width,cv.height);
-      try {
-        var pageCv = null;
-        var pgEl = ovWrap;
-        if(pgEl){ var baseCv=pgEl.querySelector("canvas.st-cv"); if(baseCv) pageCv=baseCv; }
-        if(pageCv && e.offsetX!=null){
-          var fracX = e.offsetX / pageCv.width, fracY = e.offsetY / pageCv.height;
-          if(!(fracX>=0 && fracX<=1)) { var r=pageCv.getBoundingClientRect(); fracX=(e.clientX-r.left)/r.width; fracY=(e.clientY-r.top)/r.height; }
-          var sw=pageCv.width*0.35, sh=60;
-          var sx=Math.max(0, pageCv.width*fracX - sw/2), sy=Math.max(0, pageCv.height*fracY - sh/2);
-          ctx.drawImage(pageCv, sx, sy, sw, sh, 0,0, cv.width, cv.height);
+    var zw=h.root().querySelector("#stP3ZoomWindow");
+    if(!zw || zw.hidden) return;
+    var cv = zw.querySelector("#stP3ZoomCv");
+    if(!cv) return;
+    var ctx=cv.getContext("2d");
+    ctx.fillStyle="#fff"; ctx.fillRect(0,0,cv.width,cv.height);
+    ctx.strokeStyle="#071318"; ctx.strokeRect(0,0,cv.width,cv.height);
+    try {
+      var ovWrap = (e && e.target && e.target.closest && e.target.closest(".st-pg")) || h.root().querySelector(".st-pg");
+      var baseCv = ovWrap ? ovWrap.querySelector("canvas.st-cv") : null;
+      if(baseCv){
+        var fracX = (e && e.offsetX!=null) ? e.offsetX / baseCv.width : 0.5;
+        var fracY = (e && e.offsetY!=null) ? e.offsetY / baseCv.height : 0.5;
+        if(!(fracX>=0 && fracX<=1)) {
+          var r=baseCv.getBoundingClientRect();
+          fracX=(e && e.clientX ? (e.clientX-r.left)/r.width : 0.5);
+          fracY=(e && e.clientY ? (e.clientY-r.top)/r.height : 0.5);
         }
-      }catch(e2){}
-    }
-    sc.addEventListener("pointerdown", drawZoom);
-    sc.addEventListener("pointermove", function(e){ if(e.pointerType==="pen"||e.pointerType==="touch") drawZoom(e); });
-    sc.addEventListener("pointerup", function(){
-      var zw=h.root().querySelector("#stP3ZoomWindow"); if(zw) zw.hidden=true;
-    });
-    sc.addEventListener("pointercancel", function(){
-      var zw=h.root().querySelector("#stP3ZoomWindow"); if(zw) zw.hidden=true;
-    });
+        var sw=baseCv.width*0.35, sh=60;
+        var sx=Math.max(0, baseCv.width*fracX - sw/2), sy=Math.max(0, baseCv.height*fracY - sh/2);
+        ctx.drawImage(baseCv, sx, sy, sw, sh, 0,0, cv.width, cv.height);
+      }
+    }catch(e2){}
   }
-  setInterval(bindZoomWindow, 600);
 
   /* expose for tests */
-  G.STUDY_PAGES = { _pure: PURE, _openNavigator: openNavigator, _openAdd: openAddPageSheet, _refresh: refreshTopBar, _addPage: addPage, _rotate: rotatePage, _clear: clearPage, _copy: copyPage, _changeTplSheet: openChangeTemplate };
+  G.STUDY_PAGES = { _pure: PURE, _openNavigator: openNavigator, _openAdd: openAddPageSheet, _refresh: refreshTopBar, _addPage: addPage, _rotate: rotatePage, _clear: clearPage, _copy: copyPage, _changeTplSheet: openChangeTemplate, _renderZoom: renderZoom };
 
 })(typeof window!=="undefined"?window:this);

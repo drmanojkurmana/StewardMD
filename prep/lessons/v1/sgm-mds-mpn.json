@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-mds-mpn",
+ "subject": "ss-general-medicine",
+ "title": "Myelodysplastic and myeloproliferative neoplasms",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Myelodysplastic syndromes** are clonal stem cell disorders with ineffective production. **Myeloproliferative neoplasms** are clonal overproduction of mature blood cells. Both arise from somatic mutations that alter growth signalling in progenitors. They share morphology overlaps yet follow distinct clinical courses in adults.",
+   "say": "Myelodysplastic syndromes are clonal stem cell disorders with ineffective production. Myeloproliferative neoplasms are clonal overproduction of mature blood cells. Both arise from somatic mutations that alter growth signalling in progenitors. They share morphology overlaps yet follow distinct clinical courses in adults.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Myelodysplastic pattern",
+     "points": [
+      "Cytopenias dominate presentation",
+      "Dysplasia in 1 lineage",
+      "Risk of leukaemic transformation",
+      "Increased blasts signal danger"
+     ]
+    },
+    "right": {
+     "title": "Myeloproliferative pattern",
+     "points": [
+      "High counts dominate presentation",
+      "Splenomegaly is common",
+      "Thrombosis risk is high",
+      "Progression to fibrosis occurs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Polycythaemia vera** presents with plethoric face and aquagenic pruritus in many adults. **Essential thrombocythaemia** presents with isolated platelet elevation most often in women. **Primary myelofibrosis** presents with splenomegaly, night sweats and leukoerythroblastic film. Each entity is defined by mutation and morphology rather than counts alone.",
+   "say": "Polycythaemia vera presents with plethoric face and aquagenic pruritus in many adults. Essential thrombocythaemia presents with isolated platelet elevation most often in women. Primary myelofibrosis presents with splenomegaly, night sweats and leukoerythroblastic film. Each entity is defined by mutation and morphology rather than counts alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Driver clue",
+     "Classic feature"
+    ],
+    "rows": [
+     [
+      "Polycythaemia vera",
+      "JAK2 V617F",
+      "Plethoric face, pruritus"
+     ],
+     [
+      "Essential thrombocythaemia",
+      "CALR or MPL or JAK2",
+      "Isolated thrombocytosis"
+     ],
+     [
+      "Primary myelofibrosis",
+      "JAK2 or CALR or MPL",
+      "Splenomegaly, teardrop cells"
+     ],
+     [
+      "Chronic myeloid leukaemia",
+      "BCR ABL1",
+      "Basophilia, Philadelphia chromosome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**JAK2 V617F** activates cytokine signalling and drives erythrocytosis in polycythaemia vera. **BCR ABL1** is pathognomonic for chronic myeloid leukaemia and targeted successfully. **TP53** mutations worsen prognosis in myelodysplastic syndromes considerably. Driver testing is therefore mandatory at diagnosis in every patient.",
+   "say": "JAK2 V617F activates cytokine signalling and drives erythrocytosis in polycythaemia vera. BCR ABL1 is pathognomonic for chronic myeloid leukaemia and is targeted successfully. TP53 mutations worsen prognosis in myelodysplastic syndromes considerably. Driver testing is therefore mandatory at diagnosis in every patient.",
+   "vis": null
+  },
+  {
+   "tx": "**Thrombosis** in arterial or venous territory is the leading cause of morbidity in polycythaemia vera. **Splenic vein** thrombosis is unusual in myeloproliferative disease and deserves splanchnic imaging. Bleeding occurs when platelet counts exceed 1 × 10⁶ per microlitre in thrombocythaemia. **Aspirin** in low dose prevents arterial events in most polycythaemia vera patients.",
+   "say": "Thrombosis in arterial or venous territory is the leading cause of morbidity in polycythaemia vera. Splenic vein thrombosis is unusual in myeloproliferative disease and deserves splanchnic imaging. Bleeding occurs when platelet counts rise extremely high in thrombocythaemia. Aspirin in low dose prevents arterial events in most polycythaemia vera patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Bleeding or clotting",
+     "First prevention"
+    ],
+    "rows": [
+     [
+      "Polycythaemia vera",
+      "Arterial thrombosis",
+      "Aspirin plus phlebotomy"
+     ],
+     [
+      "Essential thrombocythaemia",
+      "Thrombosis or bleeding",
+      "Aspirin in standard risk"
+     ],
+     [
+      "Myelofibrosis",
+      "Thrombosis and bleeding",
+      "Risk adapted therapy"
+     ],
+     [
+      "Myelodysplasia",
+      "Bleeding from low platelets",
+      "Transfusion support"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic myeloid leukaemia** is diagnosed by **BCR ABL1** testing on blood or marrow. Marrow examination stages chronic phase against accelerated and blast phases. **Imatinib** was the first tyrosine kinase inhibitor and transformed survival. **Dasatinib** and **nilotinib** are second generation options with deeper responses in many patients.",
+   "say": "Chronic myeloid leukaemia is diagnosed by BCR ABL1 testing on blood or marrow. Marrow examination stages chronic phase against accelerated and blast phases. Imatinib was the first tyrosine kinase inhibitor and transformed survival. Dasatinib and nilotinib are second generation options with deeper responses in many patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect on basophilia"
+     },
+     {
+      "id": "b",
+      "label": "BCR ABL1 positive"
+     },
+     {
+      "id": "c",
+      "label": "TKI started promptly"
+     },
+     {
+      "id": "d",
+      "label": "Molecular monitoring serial"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ruxolitinib** relieves splenomegaly and constitutional symptoms in myelofibrosis daily care. **Anagrelide** lowers platelet production in high risk thrombocythaemia clearly. **Bosutinib** and **ponatinib** address resistant chronic myeloid leukaemia cases in specialist care. **Asciminib** targets myristoyl pocket where other inhibitors fail in selected patients.",
+   "say": "Ruxolitinib is effective for splenomegaly and constitutional symptoms in myelofibrosis daily care. Anagrelide is effective for lowering platelet production in high risk thrombocythaemia clearly. Bosutinib and ponatinib are options for resistant chronic myeloid leukaemia cases in specialist care. Asciminib is a newer option where other inhibitors fail.",
+   "vis": null
+  },
+  {
+   "tx": "**Myelodysplasia** grading uses blast percentage and cytogenetic risk in current systems. **Lenalidomide** benefits del(5q) disease with red cell transfusion dependence. **Luspatercept** reduces transfusion needs in ring sideroblast disease in many adults. **Danazol** is reserved for low risk disease with isolated cytopenias in selected patients.",
+   "say": "Myelodysplasia grading is based on blast percentage and cytogenetic risk in current systems. Lenalidomide is effective for del five q disease with red cell transfusion dependence. Luspatercept reduces transfusion needs in ring sideroblast disease in many adults. Danazol is reserved for low risk disease with isolated cytopenias in selected patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subgroup",
+     "Feature",
+     "Drug benefit"
+    ],
+    "rows": [
+     [
+      "del(5q) disease",
+      "Transfusion dependence",
+      "Lenalidomide effective"
+     ],
+     [
+      "Ring sideroblasts",
+      "Ringed sideroblasts present",
+      "Luspatercept reduces transfusion"
+     ],
+     [
+      "Low risk disease",
+      "Isolated cytopenias",
+      "Danazol may help"
+     ],
+     [
+      "High risk disease",
+      "Excess blasts present",
+      "Combination therapy explored"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prognostic** scores combine age, blasts, cytopenias and cytogenetics for survival prediction. **International** systems guide transplant referral decisions in high risk disease today. **Transformation** to acute leukaemia is the terminal event in a minority of patients. Matched transplantation remains the only curative option for high risk myelodysplasia.",
+   "say": "Prognostic scores are based on age, blasts, cytopenias and cytogenetics for survival prediction. International systems guide transplant referral decisions in high risk disease today. Transformation to acute leukaemia is the terminal event in a minority of patients. Matched transplantation remains the only curative option for high risk myelodysplasia.",
+   "vis": null
+  },
+  {
+   "tx": "**Phlebotomy** of 500 mL per venesection keeps haematocrit in target range in polycythaemia vera management. **Venesection** also improves hyperviscosity symptoms such as headache and visual blurring. **Cytoreduction** is first line therapy for high risk polycythaemia in most practice settings. **Ruxolitinib** suits treatment resistant disease with splenomegaly in specialist care.",
+   "say": "Phlebotomy of 500 millilitres per venesection keeps haematocrit in target range in polycythaemia vera management. Venesection also improves hyperviscosity symptoms such as headache and visual blurring. Cytoreduction is first line therapy for high risk polycythaemia in most practice settings. Ruxolitinib is an option for resistant disease with splenomegaly in specialist care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Raised haematocrit"
+     },
+     {
+      "id": "b",
+      "label": "Phlebotomy to target"
+     },
+     {
+      "id": "c",
+      "label": "Aspirin added"
+     },
+     {
+      "id": "d",
+      "label": "Cytoreduction if high risk"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Blast phase** in chronic myeloid leukaemia needs acute leukaemia therapy and transplant referral. **Mutation** testing detects TKI resistance when transcripts rise again on treatment. **Major molecular response** is a standard landmark defining deep disease control. Hematologic follow-up must be lifelong because late resistance is described.",
+   "say": "Blast phase in chronic myeloid leukaemia needs acute leukaemia therapy and transplant referral. Mutation testing detects TKI resistance when transcripts rise again on treatment. Major molecular response is a standard landmark defining deep disease control. Hematologic follow-up must be lifelong because late resistance is described.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** completes the myeloid neoplasm story here. Remember JAK2 V617F for polycythaemia vera, BCR ABL1 for chronic myeloid leukaemia and aspirin for thrombosis prevention. Ruxolitinib relieves myelofibrosis splenomegaly while imatinib transformed chronic myeloid leukaemia survival. Blast percentage and cytogenetics drive myelodysplasia risk grouping.",
+   "say": "High-yield facts are the points the examination asks most often in these disorders. JAK2 V617F is the marker of polycythaemia vera, while BCR ABL1 is the marker of chronic myeloid leukaemia clearly. Aspirin prevents arterial thrombosis in polycythaemia vera reliably. Ruxolitinib is effective for myelofibrosis splenomegaly and symptoms effectively. Imatinib transformed chronic myeloid leukaemia survival over decades.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Polycythaemia vera",
+      "JAK2 V617F with plethoric face and pruritus"
+     ],
+     [
+      "Chronic myeloid leukaemia",
+      "BCR ABL1 defines the disease"
+     ],
+     [
+      "Thromboprophylaxis",
+      "Low dose aspirin prevents arterial events"
+     ],
+     [
+      "Myelofibrosis therapy",
+      "Ruxolitinib relieves splenomegaly and symptoms"
+     ],
+     [
+      "Myelodysplasia clue",
+      "Blast percentage and cytogenetics stratify risk"
+     ],
+     [
+      "CML milestone",
+      "Major molecular response marks deep control"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

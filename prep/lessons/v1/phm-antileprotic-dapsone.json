@@ -74,12 +74,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "mdt", "label": "MDT blister pack issued monthly" },
-          { "id": "rif", "label": "Rifampicin 600 mg supervised monthly dose" },
-          { "id": "daily", "label": "Dapsone (and clofazimine) daily self administered" },
-          { "id": "count", "label": "Packs counted at each monthly collection" }
+          {
+            "id": "mdt",
+            "label": "MDT blister pack issued monthly"
+          },
+          {
+            "id": "rif",
+            "label": "Rifampicin 600 mg supervised monthly dose"
+          },
+          {
+            "id": "daily",
+            "label": "Dapsone (and clofazimine) daily self administered"
+          },
+          {
+            "id": "count",
+            "label": "Packs counted at each monthly collection"
+          }
         ],
-        "edges": [["mdt", "rif"], ["rif", "daily"], ["daily", "count"]]
+        "edges": [
+          [
+            "mdt",
+            "rif"
+          ],
+          [
+            "rif",
+            "daily"
+          ],
+          [
+            "daily",
+            "count"
+          ]
+        ]
       }
     },
     {
@@ -138,12 +163,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "inflame", "label": "Lesions inflame, nerves tender and weakening" },
-          { "id": "continue", "label": "MDT continued without interruption" },
-          { "id": "steroid", "label": "Prednisolone started and tapered over months" },
-          { "id": "chart", "label": "Nerve function charted serially for recovery" }
+          {
+            "id": "inflame",
+            "label": "Lesions inflame, nerves tender and weakening"
+          },
+          {
+            "id": "continue",
+            "label": "MDT continued without interruption"
+          },
+          {
+            "id": "steroid",
+            "label": "Prednisolone started and tapered over months"
+          },
+          {
+            "id": "chart",
+            "label": "Nerve function charted serially for recovery"
+          }
         ],
-        "edges": [["inflame", "continue"], ["continue", "steroid"], ["steroid", "chart"]]
+        "edges": [
+          [
+            "inflame",
+            "continue"
+          ],
+          [
+            "continue",
+            "steroid"
+          ],
+          [
+            "steroid",
+            "chart"
+          ]
+        ]
       }
     },
     {
@@ -188,12 +238,82 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "test", "label": "G6PD status assessed before dapsone" },
-          { "id": "count", "label": "Haemoglobin reviewed after initiation" },
-          { "id": "syndrome", "label": "Fever, rash and hepatitis at weeks 4 to 6: stop dapsone" },
-          { "id": "rebuild", "label": "Steroids for syndrome, regimen rebuilt without dapsone" }
+          {
+            "id": "test",
+            "label": "G6PD status assessed before dapsone"
+          },
+          {
+            "id": "count",
+            "label": "Haemoglobin reviewed after initiation"
+          },
+          {
+            "id": "syndrome",
+            "label": "Fever, rash and hepatitis at weeks 4 to 6: stop dapsone"
+          },
+          {
+            "id": "rebuild",
+            "label": "Steroids for syndrome, regimen rebuilt without dapsone"
+          }
         ],
-        "edges": [["test", "count"], ["count", "syndrome"], ["syndrome", "rebuild"]]
+        "edges": [
+          [
+            "test",
+            "count"
+          ],
+          [
+            "count",
+            "syndrome"
+          ],
+          [
+            "syndrome",
+            "rebuild"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Dapsone blocks folate synthesis in leprosy multidrug therapy. G6PD deficiency risks fatal haemolysis, and sulfone syndrome arrives at four to six weeks. Rifampicin for leprosy is a supervised 600 mg monthly dose, not the daily tuberculosis schedule. Paucibacillary therapy lasts six months. Multibacillary therapy adds clofazimine for twelve months. Type 1 reversal reactions need prednisolone while multidrug therapy continues. Thalidomide treats severe erythema nodosum leprosum and is banned in pregnancy.",
+      "say": "High-yield for the exam: Dapsone blocks folate synthesis in leprosy multidrug therapy. G6PD deficiency risks fatal haemolysis, and sulfone syndrome arrives at four to six weeks. Rifampicin for leprosy is a supervised 600 mg monthly dose, not the daily tuberculosis schedule. Paucibacillary therapy lasts six months. Multibacillary therapy adds clofazimine for twelve months. Type 1 reversal reactions need prednisolone while multidrug therapy continues. Thalidomide treats severe erythema nodosum leprosum and is banned in pregnancy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Dapsone target",
+            "Folate synthesis, like sulfonamides"
+          ],
+          [
+            "G6PD danger",
+            "Dose related haemolysis"
+          ],
+          [
+            "Sulfone syndrome",
+            "Rash and hepatitis, weeks 4 to 6"
+          ],
+          [
+            "Leprosy rifampicin",
+            "600 mg once monthly, supervised"
+          ],
+          [
+            "Paucibacillary pack",
+            "Rifampicin plus dapsone, six months"
+          ],
+          [
+            "Multibacillary add",
+            "Clofazimine for twelve months"
+          ],
+          [
+            "Type 1 reaction",
+            "Continue MDT, add prednisolone"
+          ],
+          [
+            "ENL drug",
+            "Thalidomide, never in pregnancy"
+          ]
+        ]
       }
     }
   ]

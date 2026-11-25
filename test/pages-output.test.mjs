@@ -54,7 +54,20 @@ test("no pages output file exceeds 24 MiB", () => {
 
 test("pages build keeps functions and runtime dirs", () => {
   const excluded = pagesExclusions();
-  for (const kept of ["functions", "connect-agent", "atlas", "kb/dist", "prep/lessons", "data", "assets", "tokos-models", "narke-models", "wardsynq", "scripts"]) {
+  for (const kept of ["functions", "connect-agent", "kb/dist", "prep/lessons", "data", "assets", "tokos-models", "narke-models", "wardsynq", "scripts"]) {
     assert.ok(!excluded.includes(kept), `scripts/pages-build.sh must not exclude runtime path ${kept}`);
   }
+});
+
+test("atlas ships on the media host, not Pages", () => {
+  // Owner 2026-11-17: atlas/ (~5,200 files) moved to the stewardmd-public-media bucket
+  // behind media.stewardmd.in (tools/atlas-media-sync.mjs); Pages must not ship it.
+  const excluded = pagesExclusions();
+  assert.ok(excluded.includes("atlas"), "scripts/pages-build.sh must exclude atlas (it moved to the media host)");
+});
+
+test("app media ships from R2, not Pages (20,000-file cap)", () => {
+  const excluded = pagesExclusions();
+  for (const d of ["media/anim", "clinix/media", "prep/lessons/media"])
+    assert.ok(excluded.includes(d), `scripts/pages-build.sh must exclude ${d}`);
 });

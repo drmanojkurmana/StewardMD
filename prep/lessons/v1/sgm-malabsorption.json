@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "module": "sgm-malabsorption",
+ "subject": "ss-general-medicine",
+ "title": "Malabsorption and coeliac disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Malabsorption** (failure of nutrient uptake from the small bowel) presents with chronic diarrhoea, weight loss, steatorrhoea (greasy floating stools) and nutritional deficiencies. Global prevalence of **coeliac disease** (gluten sensitive enteropathy) is about 1 in 100 to 200 people, with rising recognition in India. Tropical sprue, pancreatic insufficiency, Whipple disease, small bowel bacterial overgrowth and giardiasis form the other major causes. Coeliac disease has a 2 to 3 fold rise in first degree relatives. Disease appears after gluten introduction and improves on withdrawal.",
+   "say": "Malabsorption is failure of nutrient uptake from the small bowel in chronic disease. Global prevalence of coeliac disease is about one in a hundred people. Tropical sprue, pancreatic insufficiency and giardiasis are the other major causes. Coeliac disease has a higher risk in first degree relatives of patients. Findings appear after gluten introduction, and symptoms improve on withdrawal of gluten from diet.",
+   "vis": null
+  },
+  {
+   "tx": "Coeliac disease is strongly linked to **human leukocyte antigen** (immune recognition genes) DQ2 and DQ8, which together account for near 99% of cases. Risk rises with type 1 diabetes, autoimmune thyroid disease, Down syndrome, Turner syndrome and autoimmune hepatitis. Female sex and iron deficiency in young women are classic clues. **Tropical sprue** (post infectious malabsorption) follows acute bowel infection in endemic areas. Chronic pancreatitis lowers lipase output and causes fat malabsorption. Whipple disease shows PAS positive macrophages (periodic acid Schiff staining cells) in lamina propria.",
+   "say": "Coeliac disease is strongly linked to immune genes DQ two and DQ eight. Type one diabetes and autoimmune thyroid disease raise risk in affected patients. Female sex and iron deficiency in young women are classic clues. Tropical sprue follows acute bowel infection in endemic areas. Chronic pancreatitis lowers lipase output, and Whipple disease is also a cause.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Coeliac disease clues",
+     "points": [
+      "Age under fifty, female worse",
+      "Iron, folate, vitamin D low",
+      "Dermatitis herpetiformis itchy rash",
+      "Autoimmune disease association"
+     ]
+    },
+    "right": {
+     "title": "Tropical sprue clues",
+     "points": [
+      "Residence in tropics",
+      "Meglocytic anaemia with folate low",
+      "Post infection onset",
+      "Recovery with antibiotics"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In coeliac disease, gluten peptides deamidate by tissue transglutaminase, load onto DQ2 or DQ8, and trigger interleukin 15 with intraepithelial lymphocytosis. This immune cascade causes **villous atrophy** (loss of absorptive villi) with crypt hyperplasia and shortened villi. Shortened villi cut absorptive surface area, so iron and folate fall first in proximal disease. **Dermatitis herpetiformis** (granular IgA in dermal papillae) is the cutaneous marker of the disease. Malabsorption of fat lowers vitamins A, D, E and K, causing night blindness, osteomalacia and bleeding tendency.",
+   "say": "Gluten peptides cause a lymphocyte cascade after they are loaded onto immune genes in disease. Villous atrophy cuts absorptive surface area, so iron and folate fall first. Dermatitis herpetiformis is the skin marker with granular deposits in papillae. Fat malabsorption lowers vitamins A and D, causing night blindness and bone disease. This pathway explains why anaemia and bone disease dominate in adult cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gluten in gut"
+     },
+     {
+      "id": "b",
+      "label": "DQ2 or DQ8 presentation"
+     },
+     {
+      "id": "c",
+      "label": "Villous atrophy"
+     },
+     {
+      "id": "d",
+      "label": "Iron and folate fall"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classic presentation is diarrhoea with weight loss, abdominal distension and failure to thrive in children. **Dermatitis herpetiformis** (intensely itchy vesicles on elbows and knees) appears in about 20% of patients. Silent coeliac disease is found on serology screening of high risk groups. Iron deficiency refractory to oral iron, raised transaminases, osteopenia and infertility are atypical presentations. Aphthous ulcers and ataxia occur in some patients. Tropical sprue has megaloblastic anaemia with folate and B12 deficiency and prominent neurological features.",
+   "say": "Classic presentation is diarrhoea with weight loss and abdominal distension. Dermatitis herpetiformis appears as intensely itchy vesicles on elbows and knees. Silent disease is found on serology screening of high risk groups. Iron deficiency refractory to oral iron is an atypical presentation. Aphthous ulcers and ataxia occur in some patients with long disease duration.",
+   "vis": null
+  },
+  {
+   "tx": "First test is **tissue transglutaminase IgA** (anti enzyme antibody test) with total IgA measured together, while eating a gluten containing diet. **Anti endomysial antibody** (smooth muscle antibody test) is confirmatory and highly specific. **Duodenal biopsy** (duodenal tissue histology with graded atrophy) is the gold standard, showing total villous atrophy with crypt hyperplasia. Selective IgA deficiency uses tissue transglutaminase IgG instead. HLA testing has high negative predictive value. Stool fat and faecal elastase help pancreatic causes. Biopsy needs at least four samples from bulb and duodenum.",
+   "say": "Tissue transglutaminase IgA with total IgA is the first test on a gluten diet. Anti endomysial antibody is confirmatory and highly specific in practice. Duodenal biopsy is the gold standard, with atrophy and crypt hyperplasia after testing. Selective IgA deficiency uses IgG testing instead of IgA. At least four samples are needed from bulb and duodenum for biopsy accuracy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role"
+    ],
+    "rows": [
+     [
+      "tTG IgA with total IgA",
+      "First test on gluten diet"
+     ],
+     [
+      "Anti endomysial antibody",
+      "Confirmatory and highly specific"
+     ],
+     [
+      "Duodenal biopsy",
+      "Gold standard with villous atrophy"
+     ],
+     [
+      "HLA DQ2 or DQ8",
+      "High negative predictive value"
+     ],
+     [
+      "Faecal elastase",
+      "Pancreatic insufficiency workup"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment is lifelong **gluten free diet** (strict exclusion of wheat, barley, rye and oats) with dietitian support. Oats are safe only if certified gluten free. Iron, folate, calcium and vitamin D are replaced. **Dermatitis herpetiformis** (itchy blistering rash) needs dapsone for itch control while diet heals skin slowly. Refractory disease is managed with corticosteroids and surveillance for complications. Pancreatic insufficiency needs pancreatic enzyme replacement with meals. Tropical sprue is treated with tetracycline and folate supplementation for months.",
+   "say": "Treatment is lifelong exclusion of wheat, barley, rye and oats from diet. Oats are safe only if certified as gluten free in practice. Iron, folate and vitamin D are replaced in deficient patients. Itchy rash needs dapsone for control while diet heals skin. Pancreatic insufficiency needs enzyme replacement with meals, and sprue needs tetracycline with folate support.",
+   "vis": null
+  },
+  {
+   "tx": "Recent guidance emphasises serology guided diagnosis. The **ACG 2023 coeliac guideline** (American gastroenterology consensus) recommends duodenal biopsy confirmation in adults before lifelong diet, with non biopsy diagnosis only in high certainty cases. Repeat serology at 6 to 12 months tracks adherence. DEXA scanning, bone health assessment and dietitian follow up are advised. Seronegative villous atrophy needs exclusion of other causes such as olmesartan enteropathy and Whipple disease. Screening of first degree relatives is recommended in current practice.",
+   "say": "Recent guidance emphasises biopsy confirmation before lifelong diet. The American guideline of twenty twenty three says that biopsy is needed in adults with disease. Repeat serology at six to twelve months tracks adherence to diet. Bone scanning and dietitian follow up are advised in all cases. Seronegative atrophy needs exclusion of other causes like Whipple disease carefully.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected coeliac disease"
+     },
+     {
+      "id": "b",
+      "label": "tTG IgA plus total IgA"
+     },
+     {
+      "id": "c",
+      "label": "Duodenal biopsy"
+     },
+     {
+      "id": "d",
+      "label": "Lifelong gluten free diet"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications include refractory coeliac disease, enteropathy associated T cell lymphoma and small bowel adenocarcinoma. **Osteoporosis** (low bone density) with fragility fractures is common at presentation in older patients. Refractory vomiting and diarrhoea despite strict diet point to refractory disease. Folic acid deficiency causes macrocytic anaemia, while iron deficiency causes microcytic anaemia with koilonychia. Infertility, miscarriages and transient transaminase rise improve on diet. With strict diet, lymphoma risk falls to near baseline within 5 years of control.",
+   "say": "Complications are refractory disease, lymphoma and small bowel cancer after time. Osteoporosis with fragility fractures is common at presentation in older patients. Refractory vomiting and diarrhoea point to refractory disease after diet. Folic acid deficiency causes macrocytic anaemia in affected patients. With strict diet, lymphoma risk falls to near baseline within five years of control.",
+   "vis": null
+  },
+  {
+   "tx": "Traps lie in testing conditions. Serology on a **gluten free diet** (diet without gluten) is falsely negative, so testing must be on gluten. Total IgA must accompany tTG IgA because IgA deficiency gives false negative results. Biopsy can be patchy, so multiple samples are needed. Villous atrophy is classic for coeliac disease, not duodenitis alone. Dermatitis herpetiformis is granular IgA in dermal papillae, not simple eczema. Megaloblastic anaemia with tropical residence points to tropical sprue rather than coeliac disease in many cases.",
+   "say": "Serology on a gluten free diet is falsely negative in non adherent testing. Total IgA must accompany tTG IgA because deficiency gives false negative results. Biopsy can be patchy, so multiple samples are needed for accurate diagnosis. Villous atrophy is classic for coeliac disease, not duodenitis alone. Megaloblastic anaemia with tropical residence points to tropical sprue instead.",
+   "vis": null
+  },
+  {
+   "tx": "Gather the **figures and tests** most asked in vivas. Coeliac prevalence is about 1 in 100 to 200, DQ2 or DQ8 account for near 99%, dermatitis herpetiformis occurs in about 20%, biopsy needs at least 4 samples, repeat serology is at 6 to 12 months, and lymphoma risk falls within 5 years of strict diet. Hold the pair apart: coeliac disease is gluten driven and biopsy proven, while tropical sprue is post infectious and folate driven.",
+   "say": "Keep the figures and tests together for viva preparation. Prevalence is about one in a hundred people, and DQ genes account for nearly all cases. Skin involvement occurs in about twenty percent of patients. Biopsy needs at least four samples, and serology is repeated at six to twelve months. Lymphoma risk falls within five years, while diet is lifelong after diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield detail"
+    ],
+    "rows": [
+     [
+      "Coeliac prevalence",
+      "About 1 in 100 to 200"
+     ],
+     [
+      "HLA genes involved",
+      "DQ2 or DQ8 in near 99 percent"
+     ],
+     [
+      "Skin involvement",
+      "Dermatitis herpetiformis in about 20 percent"
+     ],
+     [
+      "First serology test",
+      "tTG IgA with total IgA"
+     ],
+     [
+      "Gold standard",
+      "Duodenal biopsy with villous atrophy"
+     ],
+     [
+      "Biopsy samples needed",
+      "At least 4 from bulb and duodenum"
+     ],
+     [
+      "Repeat serology",
+      "At 6 to 12 months"
+     ],
+     [
+      "Treatment",
+      "Lifelong gluten free diet"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

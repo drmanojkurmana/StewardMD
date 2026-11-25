@@ -18,7 +18,9 @@ import { createHash } from "node:crypto";
 import { readdirSync, statSync, readFileSync, mkdtempSync, writeFileSync, rmSync, existsSync } from "node:fs";
 import { join, relative, extname, dirname } from "node:path";
 import { tmpdir } from "node:os";
-import { execFileSync } from "node:child_process";
+import { execFileSync, execFile } from "node:child_process";
+import { promisify } from "node:util";
+const execFileP = promisify(execFile);
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -34,7 +36,7 @@ const MIME = {
   ".js": "application/javascript", ".css": "text/css", ".html": "text/html; charset=utf-8",
   ".json": "application/json", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
   ".webp": "image/webp", ".svg": "image/svg+xml", ".ico": "image/x-icon", ".gif": "image/gif",
-  ".woff2": "font/woff2", ".woff": "font/woff", ".wasm": "application/wasm",
+  ".woff2": "font/woff2", ".woff": "font/woff", ".wasm": "application/wasm", ".mp4": "video/mp4",
   ".manifest": "text/cache-manifest", ".webmanifest": "application/manifest+json",
 };
 function mimeFor(path) { return MIME[extname(path).toLowerCase()] || "application/octet-stream"; }
@@ -69,18 +71,59 @@ function r2PutJSON(key, obj) {
   if (DRY) { console.log(`  [dry-run] would write ${key} (${JSON.stringify(obj).length}B)`); return; }
   wrangler(["r2", "object", "put", `${BUCKET}/${key}`, "--file", tmp, "--content-type", "application/json", "--remote"], { quiet: true });
 }
-function r2PutFile(key, path, contentType) {
+/* Asynchronous on purpose (2026-11-20): this used execFileSync, which blocks the event loop, so pool(…, 24) below ran
+   ONE upload at a time and a large change (about 2,000 new files after the calculators and lessons merges) took most of
+   the 120-minute job, cancelled again by every newer push to main. Awaiting a child process lets 24 run at once. */
+// `wrangler r2 object put` refuses files over 300 MiB (the app zip passed that on 2026-11-22: 304.5 MiB).
+// Bigger files go through R2's S3-compatible API with the AWS CLI (preinstalled on ubuntu-latest), which
+// does multipart uploads on its own. Credentials come from the SAME CLOUDFLARE_API_TOKEN wrangler uses
+// (Cloudflare's documented mapping: access key id = the token's id, secret = sha256 hex of the token
+// value), so no extra secret is needed. R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY override it if set.
+const WRANGLER_MAX = 300 * 1024 * 1024;
+let _s3Creds = null;
+async function s3Creds() {
+  if (_s3Creds) return _s3Creds;
+  if (process.env.R2_ACCESS_KEY_ID && process.env.R2_SECRET_ACCESS_KEY) {
+    return (_s3Creds = { id: process.env.R2_ACCESS_KEY_ID, secret: process.env.R2_SECRET_ACCESS_KEY });
+  }
+  const tok = process.env.CLOUDFLARE_API_TOKEN, acct = process.env.CLOUDFLARE_ACCOUNT_ID;
+  if (!tok) throw new Error("no CLOUDFLARE_API_TOKEN for the large-file upload");
+  const urls = ["https://api.cloudflare.com/client/v4/user/tokens/verify",
+                acct && `https://api.cloudflare.com/client/v4/accounts/${acct}/tokens/verify`].filter(Boolean);
+  for (const u of urls) {
+    try {
+      const r = await fetch(u, { headers: { Authorization: `Bearer ${tok}` } });
+      const j = await r.json();
+      if (j && j.success && j.result && j.result.id) {
+        return (_s3Creds = { id: j.result.id, secret: createHash("sha256").update(tok).digest("hex") });
+      }
+    } catch (e) { /* try the next form */ }
+  }
+  throw new Error("could not read the API token id for R2 S3 credentials");
+}
+function s3Args(key, path, contentType) {
+  const acct = process.env.CLOUDFLARE_ACCOUNT_ID;
+  if (!acct) throw new Error("CLOUDFLARE_ACCOUNT_ID is not set");
+  return ["s3", "cp", path, `s3://${BUCKET}/${key}`, "--content-type", contentType,
+          "--endpoint-url", `https://${acct}.r2.cloudflarestorage.com`, "--region", "auto", "--only-show-errors"];
+}
+const s3Env = (c) => ({ ...process.env, AWS_ACCESS_KEY_ID: c.id, AWS_SECRET_ACCESS_KEY: c.secret,
+  AWS_REQUEST_CHECKSUM_CALCULATION: "WHEN_REQUIRED", AWS_RESPONSE_CHECKSUM_VALIDATION: "WHEN_REQUIRED" });
+
+async function r2PutFile(key, path, contentType) {
   if (DRY) { console.log(`  [dry-run] would upload ${key}`); return; }
+  const big = statSync(path).size > WRANGLER_MAX;
   let lastErr = null;
   for (let attempt = 1; attempt <= 3; attempt++) {
     try {
-      wrangler(["r2", "object", "put", `${BUCKET}/${key}`, "--file", path, "--content-type", contentType, "--remote"], { quiet: true });
+      if (big) await execFileP("aws", s3Args(key, path, contentType), { encoding: "utf8", maxBuffer: 16 * 1024 * 1024, env: s3Env(await s3Creds()) });
+      else await execFileP("wrangler", ["r2", "object", "put", `${BUCKET}/${key}`, "--file", path, "--content-type", contentType, "--remote"], { encoding: "utf8", maxBuffer: 16 * 1024 * 1024 });
       return;
     } catch (e) {
       lastErr = e;
       if (attempt < 3) {
         console.warn(`  ⚠️ Retry ${attempt}/3 for ${key}: ${e.message}`);
-        execFileSync("sleep", ["2"]);
+        await new Promise((r) => setTimeout(r, 2000));
       }
     }
   }
@@ -128,7 +171,7 @@ async function main() {
   // upload what the first one didn't finish, converging instead of repeating.
   try {
     await pool(toUpload, 24, async (e) => {
-      r2PutFile(`ota/files/${e.hash}`, e.abs, mimeFor(e.rel));
+      await r2PutFile(`ota/files/${e.hash}`, e.abs, mimeFor(e.rel));
       known.add(e.hash);
       uploaded++;
       if (uploaded % 50 === 0) console.log(`  … ${uploaded}/${toUpload.length} uploaded`);
@@ -152,7 +195,7 @@ async function main() {
   if (existsSync(zipPath)) {
     const zipBuf = readFileSync(zipPath);
     zipHash = sha256(zipBuf); zipSize = zipBuf.length;
-    if (!known.has(zipHash)) { r2PutFile(`ota/files/${zipHash}`, zipPath, "application/zip"); known.add(zipHash); }
+    if (!known.has(zipHash)) { await r2PutFile(`ota/files/${zipHash}`, zipPath, "application/zip"); known.add(zipHash); }
     console.log(`  zip: ${(zipSize / 1e6).toFixed(1)} MB, sha256 ${zipHash.slice(0, 12)}…`);
   }
 

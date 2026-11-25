@@ -25,12 +25,27 @@
    "say": "Drift is slow point mutation. Last year's antibody partly fails, epidemics return yearly, and vaccine strains need annual review. Small change, yearly consequence.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Antigenic drift"],
+    "cols": [
+     "Feature",
+     "Antigenic drift"
+    ],
     "rows": [
-     ["Mechanism", "Point mutations in H and N genes"],
-     ["Speed", "Gradual, season by season"],
-     ["Result", "Annual epidemics"],
-     ["Programme response", "Yearly vaccine strain update"]
+     [
+      "Mechanism",
+      "Point mutations in H and N genes"
+     ],
+     [
+      "Speed",
+      "Gradual, season by season"
+     ],
+     [
+      "Result",
+      "Annual epidemics"
+     ],
+     [
+      "Programme response",
+      "Yearly vaccine strain update"
+     ]
     ]
    }
   },
@@ -42,11 +57,21 @@
     "kind": "compare",
     "left": {
      "title": "Drift",
-     "points": ["Point mutations only", "Same subtype continues", "Annual epidemics", "Vaccine updated yearly"]
+     "points": [
+      "Point mutations only",
+      "Same subtype continues",
+      "Annual epidemics",
+      "Vaccine updated yearly"
+     ]
     },
     "right": {
      "title": "Shift",
-     "points": ["Segment reassortment", "New subtype appears", "Pandemics at long intervals", "Population largely non-immune"]
+     "points": [
+      "Segment reassortment",
+      "New subtype appears",
+      "Pandemics at long intervals",
+      "Population largely non-immune"
+     ]
     }
    }
   },
@@ -67,12 +92,27 @@
    "say": "One to three days of incubation, shedding starts before symptoms. Abrupt fever with myalgia separates flu from a cold, and most cases need no antibiotic.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Influenza pattern"],
+    "cols": [
+     "Feature",
+     "Influenza pattern"
+    ],
     "rows": [
-     ["Incubation", "18 to 72 hours"],
-     ["Onset", "Abrupt fever and myalgia"],
-     ["Shedding", "Day before to 5 days after onset"],
-     ["Course", "About one week, self limited"]
+     [
+      "Incubation",
+      "18 to 72 hours"
+     ],
+     [
+      "Onset",
+      "Abrupt fever and myalgia"
+     ],
+     [
+      "Shedding",
+      "Day before to 5 days after onset"
+     ],
+     [
+      "Course",
+      "About one week, self limited"
+     ]
     ]
    }
   },
@@ -82,12 +122,27 @@
    "say": "Deaths cluster in the old, the pregnant, the obese and the chronically ill. Pneumonia, viral or secondary bacterial, kills most often, so those groups vaccinate first.",
    "vis": {
     "kind": "table",
-    "cols": ["Group", "Main risk"],
+    "cols": [
+     "Group",
+     "Main risk"
+    ],
     "rows": [
-     ["Age over 65, under 5", "Pneumonia and death"],
-     ["Pregnancy", "Severe respiratory failure"],
-     ["Chronic heart or lung disease", "Decompensation and superinfection"],
-     ["Immunosuppression", "Prolonged viral replication"]
+     [
+      "Age over 65, under 5",
+      "Pneumonia and death"
+     ],
+     [
+      "Pregnancy",
+      "Severe respiratory failure"
+     ],
+     [
+      "Chronic heart or lung disease",
+      "Decompensation and superinfection"
+     ],
+     [
+      "Immunosuppression",
+      "Prolonged viral replication"
+     ]
     ]
    }
   },
@@ -99,11 +154,21 @@
     "kind": "compare",
     "left": {
      "title": "Seasonal H1N1",
-     "points": ["In routine vaccine", "Spreads readily in people", "Oseltamivir early if severe", "Low case fatality overall"]
+     "points": [
+      "In routine vaccine",
+      "Spreads readily in people",
+      "Oseltamivir early if severe",
+      "Low case fatality overall"
+     ]
     },
     "right": {
      "title": "Avian H5N1 / H7N9",
-     "points": ["Poultry exposure history", "Poor human to human spread", "High case fatality", "Notify and isolate promptly"]
+     "points": [
+      "Poultry exposure history",
+      "Poor human to human spread",
+      "High case fatality",
+      "Notify and isolate promptly"
+     ]
     }
    }
   },
@@ -113,12 +178,27 @@
    "say": "Killed vaccine yearly by injection is safe in pregnancy. Live spray suits healthy children where used. Health workers and risk groups stand first in the queue.",
    "vis": {
     "kind": "table",
-    "cols": ["Vaccine", "Key fact"],
+    "cols": [
+     "Vaccine",
+     "Key fact"
+    ],
     "rows": [
-     ["Inactivated", "Intramuscular, yearly, safe in pregnancy"],
-     ["Live attenuated", "Intranasal, healthy young people only"],
-     ["Timing", "Before the seasonal peak"],
-     ["Priority", "Health workers, risk groups, pregnancy"]
+     [
+      "Inactivated",
+      "Intramuscular, yearly, safe in pregnancy"
+     ],
+     [
+      "Live attenuated",
+      "Intranasal, healthy young people only"
+     ],
+     [
+      "Timing",
+      "Before the seasonal peak"
+     ],
+     [
+      "Priority",
+      "Health workers, risk groups, pregnancy"
+     ]
     ]
    }
   },
@@ -129,12 +209,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Case identified in closed setting"},
-     {"id": "b", "label": "Isolate case, list contacts"},
-     {"id": "c", "label": "Risk assess contacts"},
-     {"id": "d", "label": "Prophylaxis and vaccination offered"}
+     {
+      "id": "a",
+      "label": "Case identified in closed setting"
+     },
+     {
+      "id": "b",
+      "label": "Isolate case, list contacts"
+     },
+     {
+      "id": "c",
+      "label": "Risk assess contacts"
+     },
+     {
+      "id": "d",
+      "label": "Prophylaxis and vaccination offered"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -143,12 +248,72 @@
    "say": "Sentinel surveillance plus laboratory confirmation picks next season's vaccine strains. Watch severe admissions and clusters closely; they announce the wave before routine counts do.",
    "vis": {
     "kind": "table",
-    "cols": ["Signal", "Response"],
+    "cols": [
+     "Signal",
+     "Response"
+    ],
     "rows": [
-     ["Rising influenza like illness", "Alert clinicians, test samples"],
-     ["Severe respiratory clusters", "Outbreak investigation"],
-     ["New subtype isolated", "Pandemic preparedness review"],
-     ["Strain mismatch reported", "Vaccine composition review"]
+     [
+      "Rising influenza like illness",
+      "Alert clinicians, test samples"
+     ],
+     [
+      "Severe respiratory clusters",
+      "Outbreak investigation"
+     ],
+     [
+      "New subtype isolated",
+      "Pandemic preparedness review"
+     ],
+     [
+      "Strain mismatch reported",
+      "Vaccine composition review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Antigenic drift means gradual point mutations causing annual epidemics and yearly vaccine updates. Antigenic shift means segment reassortment creating a new subtype and pandemics, as in 1918, 1957, 1968 and 2009. Incubation is 18 to 72 hours. Inactivated vaccine is safe in pregnancy, and oseltamivir prophylaxis lasts at least seven days.",
+   "say": "Antigenic drift means gradual point mutations causing annual epidemics and yearly vaccine updates. Antigenic shift means segment reassortment creating a new subtype and pandemics, as in 1918, 1957, 1968 and 2009. Incubation is 18 to 72 hours. Inactivated vaccine is safe in pregnancy, and oseltamivir prophylaxis lasts at least seven days.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Virus genome type",
+      "Eight segments single stranded RNA virus"
+     ],
+     [
+      "Antigenic drift mechanism",
+      "Gradual point mutations in H N genes"
+     ],
+     [
+      "Antigenic shift mechanism",
+      "Segment reassortment in co infected host"
+     ],
+     [
+      "Pandemic years",
+      "1918, 1957, 1968 and 2009 pandemics"
+     ],
+     [
+      "Influenza incubation period",
+      "Usually 18 to 72 hours only"
+     ],
+     [
+      "Shedding period",
+      "Day before symptoms to 5 days after"
+     ],
+     [
+      "Inactivated vaccine safety",
+      "Intramuscular yearly, safe in pregnancy"
+     ],
+     [
+      "Oseltamivir prophylaxis duration",
+      "Once daily at least seven days"
+     ]
     ]
    }
   }

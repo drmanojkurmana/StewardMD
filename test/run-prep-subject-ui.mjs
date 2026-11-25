@@ -127,7 +127,8 @@ try {
     await ev(`PREP.open(); return 1;`);
     ok(await until(`return !!document.querySelector("#smdPrep #pnHome");`, 20000), "home opens" + at);
     ok(await ev(`return !document.querySelector("#smdPrep .pn-tabs, #smdPrep [data-act=exam]");`) === true, "home has no exam switcher" + at);
-    ok(/Exam: NEET-PG/.test(await ev(`var r=document.querySelector("#smdPrep [data-act=p-settings].pn-row"); return r ? r.textContent : "";`) || ""), "home lists Settings with the exam" + at);
+    // Settings (exam and plan) is in the You tab since the compact home (2026-11-17); home names the exam in its bar.
+    ok(/NEET-PG/.test(await ev(`return document.querySelector("#smdPrep .pn-t p").textContent;`) || "") && await ev(`return !!document.querySelector("#smdPrep #pnHome [data-act=p-settings]") || !!document.querySelector("#smdPrep nav .pnv-tab[data-tab=you]");`) === true, "home names the exam; Settings is one tap away (You tab)" + at);
     await shot(tag, "home");
     await ev(`PREP._host.setExam("neet-ss"); return 1;`);
     ok(await until(`return !!document.querySelector('#smdPrep [data-act=subject][data-s="ss-radiology"]');`, 8000), "NEET-SS lists Radiology" + at);
@@ -205,7 +206,7 @@ try {
   await ev(`PREP.close(); return 1;`); await boot("&ob=1"); await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep #pnHome");`, 15000) && await ev(`return !document.querySelector("#smdPrep [data-act=p-f-exam]");`) === true, "a reopen goes straight home, the exam is not asked again");
   ok(/NEET-SS/.test(await ev(`return document.querySelector("#smdPrep .pn-t p").textContent;`)), "the bar names the exam");
-  await click("#smdPrep .pn-row[data-act=p-settings]");
+  await click("#smdPrep [data-act=p-settings]");
   ok(await until(`return document.querySelectorAll("#pnPlanSheet [data-act=p-f-exam]").length === 6;`, 4000), "Settings has the Exam row with six exams");
   const segOver = await ev(`var o=[]; document.querySelectorAll("#pnPlanSheet .pl-g-exam .pl-segb").forEach(function(b){ if(b.scrollWidth>b.clientWidth+1) o.push(b.textContent); }); return o.join(",");`);
   ok(segOver === "", "no exam label is clipped in Settings " + segOver);
@@ -254,6 +255,18 @@ try {
   ok(await until(`var t=document.querySelector("#smdPrep #pnFound").textContent; return /No question matches|found|need a connection|Lessons and pearls|Modules/.test(t);`, 12000), "a word search settles on results or a clear message");
   await click(`#smdPrep [data-act=find-scope][data-v=all]`);
   ok(await until(`return document.querySelector('#smdPrep [data-act=find-scope][data-v=all]').getAttribute("aria-pressed")==="true" && !!document.querySelector("#smdPrep #pnFind").value;`, 5000), "All subjects scope is chosen and the typed word is kept");
+  // Owner 2026-11-24: a type bar under the box (All, Questions, Lessons, Modules); a tap filters in place.
+  ok(await ev(`var k=[].map.call(document.querySelectorAll("#smdPrep .pn-fkind [data-act=find-kind]"),function(b){return b.textContent;}).join(","); return k;`) === "All,Questions,Lessons,Modules", "the type bar reads All, Questions, Lessons, Modules");
+  ok(await ev(`var f=document.querySelector("#smdPrep .pn-fkind").getBoundingClientRect(), s=document.querySelector("#smdPrep .pn-srch").getBoundingClientRect(); return Math.abs(f.left-s.left)<=1 && Math.abs(f.right-s.right)<=1;`) === true, "the type bar lines up with the search box");
+  await ev(`var i=document.querySelector("#smdPrep #pnFind"); i.value="liver"; i.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);
+  ok(await until(`return /Lessons and pearls/.test(document.querySelector("#smdPrep #pnFound").textContent);`, 12000), "All: a lesson word shows the lessons");
+  await click(`#smdPrep [data-act=find-kind][data-v=q]`);
+  ok(await until(`var t=document.querySelector("#smdPrep #pnFound").textContent; return !/Lessons and pearls|Modules/.test(t) && /Questions|letters/.test(t) && document.querySelector('#smdPrep [data-act=find-kind][data-v=q]').getAttribute("aria-pressed")==="true" && document.querySelector("#smdPrep .pn-fkind").style.getPropertyValue("--i")==="1";`, 12000), "Questions: only questions, thumb on the second segment");
+  await click(`#smdPrep [data-act=find-kind][data-v=mod]`);
+  ok(await until(`var t=document.querySelector("#smdPrep #pnFound").textContent; return !/Lessons and pearls/.test(t) && !document.querySelector("#smdPrep #pnFoundQl") && /Modules|No module matches/.test(t);`, 12000), "Modules: only modules");
+  await click(`#smdPrep [data-act=find-kind][data-v=les]`);
+  ok(await until(`var t=document.querySelector("#smdPrep #pnFound").textContent; return /Lessons and pearls/.test(t) && !document.querySelector("#smdPrep #pnFoundQl") && document.querySelector("#smdPrep #pnFind").value==="liver";`, 12000), "Lessons: only lessons, the typed word is kept");
+  await click(`#smdPrep [data-act=find-kind][data-v=all]`);
   await ev(`var i=document.querySelector("#smdPrep #pnFind"); i.value="PN-0000"; i.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);
   ok(await until(`return /No pearl has that ID|Lessons and pearls/.test(document.querySelector("#smdPrep #pnFound").textContent);`, 8000), "a pearl ID answers: opens it or says none has it");
   await ev(`PREP.close(); return 1;`);

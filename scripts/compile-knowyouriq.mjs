@@ -83,8 +83,9 @@ function emit(d) {
 const data = compile();
 if (process.argv.includes("--check")) {
   const cur = fs.existsSync(OUT) ? fs.readFileSync(OUT, "utf8") : "";
-  const same = cur.replace(/^\/\* KnowYourIQ exam-importance data\. GENERATED.*?\n/, "GEN\n") ===
-    emit(data).replace(/^\/\* KnowYourIQ exam-importance data\. GENERATED.*?\n/, "GEN\n");
+  // The generation date appears twice (header comment and "gen" in the data); it must not make the file look stale.
+  const norm = (s) => s.replace(/^\/\* KnowYourIQ exam-importance data\. GENERATED.*?\n/, "GEN\n").replace(/"gen":"[0-9-]+"/, '"gen":"GEN"');
+  const same = norm(cur) === norm(emit(data));
   if (!same) { console.error("prep-knowyouriq-data.js is stale: run node scripts/compile-knowyouriq.mjs"); process.exit(1); }
   console.log("knowyouriq-data fresh (" + data.chapters + " chapters, unmapped: " + (data.unmapped.join(",") || "none") + ")");
 } else {

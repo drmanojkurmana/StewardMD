@@ -1,0 +1,405 @@
+{
+ "gen": "hand",
+ "minutes": 8,
+ "module": "spu-asthma",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e asthma chapter",
+  "GINA 2025 Global Strategy for Asthma Management"
+ ],
+ "steps": [
+  {
+   "say": "Asthma is variable expiratory airflow limitation on a background of airway inflammation and hyperresponsiveness. Diagnosis rests on documented variability, not symptoms alone.",
+   "tx": "**Asthma** (a chronic airway disease with variable airflow obstruction) combines **airway inflammation** and **bronchial hyperresponsiveness** (an exaggerated narrowing response). Diagnosis needs documented **variable expiratory airflow limitation** with either spirometry, peak flow variability or challenge testing, because symptoms alone mislabel cardiac and dysfunctional breathing causes.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Asthma clue",
+     "Confirm with"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Wheeze, cough",
+      "Night and triggers",
+      "Spirometry variability"
+     ],
+     [
+      "Hyperresponsiveness",
+      "Methacholine positive",
+      "PC20 under 8 mg per mL"
+     ],
+     [
+      "Reversibility",
+      "FEV1 improves",
+      "12 percent and 200 mL"
+     ],
+     [
+      "Atopy",
+      "Eczema, rhinitis",
+      "IgE and eosinophils"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Type two inflammation drives most childhood and allergic adult asthma. Interleukin 4, 5 and 13 recruit eosinophils, IgE and mucus, and that pathway is the target of the new biologics.",
+   "tx": "**Type 2 inflammation** (helper driven airway inflammation) uses **interleukin 4**, **5** and **13** to recruit **eosinophils**, raise **IgE** and drive mucus, and it underlies allergic and childhood asthma. Non type 2 adult disease with **neutrophils** and obesity responds less to steroids, so biomarker phenotyping with blood eosinophils and **FeNO** (fractional exhaled nitric oxide) now guides therapy.",
+   "vis": {
+    "edges": [
+     [
+      "trigger",
+      "epithelium"
+     ],
+     [
+      "epithelium",
+      "il"
+     ],
+     [
+      "il",
+      "inflammation"
+     ],
+     [
+      "inflammation",
+      "narrowing"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "trigger",
+      "label": "Allergen or virus"
+     },
+     {
+      "id": "epithelium",
+      "label": "Epithelial alarmins"
+     },
+     {
+      "id": "il",
+      "label": "IL 4, 5, 13 rise"
+     },
+     {
+      "id": "inflammation",
+      "label": "Eosinophils, IgE, mucus"
+     },
+     {
+      "id": "narrowing",
+      "label": "Hyperresponsiveness"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Atopic children carry the strongest genetic signal. Parental asthma, eczema and allergic rhinitis predict persistent disease, and early wheeze plus sensitisation marks the high risk group.",
+   "tx": "**Atopy** (genetic tendency to allergic disease) clusters with asthma through **parental asthma**, **eczema** and **allergic rhinitis**, and children with early wheeze plus multiple sensitisations carry the highest risk of persistent disease. Airway **remodelling** (structural wall changes) develops over years of inflammation, so early control, not symptom suppression alone, decides long term lung function.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Parental asthma or eczema",
+      "Early wheeze with sensitisation",
+      "Eosinophils and IgE raised"
+     ],
+     "title": "High risk child"
+    },
+    "right": {
+     "points": [
+      "Late onset without atopy",
+      "Neutrophilic adult disease",
+      "Steroid response poor"
+     ],
+     "title": "Low risk child"
+    }
+   }
+  },
+  {
+   "say": "Exacerbations are diagnosed clinically by wheeze, accessory muscle use and a falling peak flow against personal best. Sputum eosinophils, FeNO and spirometry are the follow up tools.",
+   "tx": "**Exacerbation** (acute worsening of asthma) is recognised by wheeze, accessory muscle use and a fall in **peak expiratory flow** (the fastest blow rate) below personal best, while **FeNO** and blood **eosinophils** flag steroid responsive inflammation. Document severity by symptoms, inhaler use and lung function, and **spirometry** after bronchodilator confirms variable obstruction between attacks.",
+   "vis": {
+    "cols": [
+     "Test",
+     "Asthma signal",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Blood eosinophils",
+      "150 or more cells per microlitre",
+      "Type 2 pathway active"
+     ],
+     [
+      "FeNO",
+      "Above 50 ppb in adults",
+      "Steroid responsive"
+     ],
+     [
+      "Peak flow diary",
+      "Variability above 20 percent",
+      "Supports diagnosis"
+     ],
+     [
+      "IgE",
+      "Raised in allergy",
+      "Omalizumab selection"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The cornerstone of control is inhaled corticosteroid, and recent strategy prefers anti inflammatory reliever therapy that pairs a fast bronchodilator with inhaled steroid.",
+   "tx": "**Inhaled corticosteroid** (steroid given by inhaler) is the cornerstone controller that cuts exacerbations and mortality, and current **GINA** (Global Initiative for Asthma) strategy pairs budesonide with **formoterol** (a rapid bronchodilator) as reliever in one inhaler. Fixed combination inhalers improve adherence over separate reliever and controller devices, and inhaler technique with adherence must be checked before step up.",
+   "vis": {
+    "edges": [
+     [
+      "confirm",
+      "ics"
+     ],
+     [
+      "ics",
+      "assess"
+     ],
+     [
+      "assess",
+      "step"
+     ],
+     [
+      "step",
+      "biologic"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "confirm",
+      "label": "Confirm diagnosis"
+     },
+     {
+      "id": "ics",
+      "label": "Start ICS based control"
+     },
+     {
+      "id": "assess",
+      "label": "Review technique, triggers"
+     },
+     {
+      "id": "step",
+      "label": "Step up therapy"
+     },
+     {
+      "id": "biologic",
+      "label": "Biologic if severe"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Add on controllers include long acting beta agonists, long acting muscarinic antagonists and macrolides. Leukotriene antagonists stay useful for allergic rhinitis and exercise induced symptoms.",
+   "tx": "**Add on therapy** (controllers beyond inhaled steroid) includes **long acting beta agonist** (sustained airway relaxant), **tiotropium** (a long acting muscarinic antagonist) and **azithromycin** (a macrolide with anti inflammatory action). **Montelukast** (a leukotriene blocker) suits allergic rhinitis and exercise induced symptoms but demands **neuropsychiatric warning**, so counsel every patient before starting.",
+   "vis": {
+    "cols": [
+     "Add on",
+     "Best for",
+     "Caution"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Long acting beta agonist",
+      "Uncontrolled on steroid",
+      "Never without steroid"
+     ],
+     [
+      "Tiotropium",
+      "Exacerbation prone",
+      "Dry mouth, urinary retention"
+     ],
+     [
+      "Montelukast",
+      "Rhinitis, exercise",
+      "Behaviour changes"
+     ],
+     [
+      "Azithromycin",
+      "Severe, frequent attacks",
+      "QT prolongation"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Severe asthma phenotyping unlocks biologics. Anti IgE, anti IL 5 and anti IL 4 receptor agents each cut exacerbations in biomarker chosen patients, and response is judged after four to six months.",
+   "tx": "**Biologics** (targeted antibody drugs) match the dominant pathway: **omalizumab** (anti IgE) for allergic disease, **mepolizumab** and **reslizumab** (anti interleukin 5) for eosinophilic disease, and **dupilumab** (anti interleukin 4 receptor) for mixed type 2 disease. Choose by **IgE**, **eosinophils** and allergy status, judge response after **4** to **6** months, and watch injection reactions with every agent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "IgE high with allergy",
+      "Eosinophils variable",
+      "Omalizumab chosen"
+     ],
+     "title": "Allergic severe asthma"
+    },
+    "right": {
+     "points": [
+      "Eosinophils above 150 to 300",
+      "Oral steroid dependent",
+      "Anti interleukin 5 or dupilumab"
+     ],
+     "title": "Eosinophilic severe asthma"
+    }
+   }
+  },
+  {
+   "say": "Life threatening asthma is remembered by the silent chest. A peak flow under fifty litres per minute, drowsiness and carbon dioxide retention mark the need for intensive care and continuous nebs.",
+   "tx": "**Life threatening asthma** (severe attack with respiratory failure) presents with **silent chest** (absent wheeze from no airflow), **peak flow** under **50** litres per minute, drowsiness and rising carbon dioxide. Give high flow oxygen, repeated **nebulised salbutamol** (short acting beta agonist by nebuliser), **ipratropium** (anticholinergic) and systemic steroids, and start **magnesium sulphate** when airflow remains critical despite therapy.",
+   "vis": {
+    "cols": [
+     "Severity",
+     "Peak flow",
+     "Management"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Moderate",
+      "50 to 75 percent best",
+      "Nebs plus steroids"
+     ],
+     [
+      "Severe",
+      "Under 50 percent best",
+      "Add ipratropium, magnesium"
+     ],
+     [
+      "Life threatening",
+      "Under 33 percent or silent",
+      "Intensive care, ventilation"
+     ],
+     [
+      "Near fatal",
+      "Acidosis, arrest",
+      "Emergency anaesthesia"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Escalation triggers are frequent systemic steroid courses, intensive care admissions and a falling lung function trajectory. Occupational asthma and vocal cord dysfunction are the mimics to unmask.",
+   "tx": "**Escalation triggers** (reasons to refer and step up) include two or more systemic steroid courses yearly, intensive care admission or a declining **FEV1** trajectory despite control therapy. Mimics to unmask include **occupational asthma** (workplace sensitiser disease) with serial peak flow charts and **vocal cord dysfunction** (paradoxical cord closure) with inspiratory stridor and flat flow loops.",
+   "vis": {
+    "edges": [
+     [
+      "attack",
+      "triage"
+     ],
+     [
+      "triage",
+      "nebs"
+     ],
+     [
+      "nebs",
+      "steroids"
+     ],
+     [
+      "steroids",
+      "monitor"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "attack",
+      "label": "Acute attack"
+     },
+     {
+      "id": "triage",
+      "label": "Severity triage"
+     },
+     {
+      "id": "nebs",
+      "label": "Nebs plus oxygen"
+     },
+     {
+      "id": "steroids",
+      "label": "Steroids early"
+     },
+     {
+      "id": "monitor",
+      "label": "Peak flow watch"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Prevention is inhaler technique, trigger control, vaccinations and written action plans. Smoking and allergen avoidance are excused less often than the data deserve, since both predict steroid failure.",
+   "tx": "**Action plan** (a written personal response chart) plus inhaler technique checks, smoking cessation, influenza and COVID vaccination and trigger avoidance prevent most severe attacks. **Smoking** (tobacco inhalation) blunts steroid response and accelerates decline, while **obesity** (excess weight) worsens control through mechanics and inflammation, so both demand explicit counselling at every review.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Regular inhaler, spacer",
+      "Written action plan",
+      "Vaccines up to date"
+     ],
+     "title": "Prevented attack"
+    },
+    "right": {
+     "points": [
+      "Reliever overuse rising",
+      "Smoker or obese",
+      "Poor adherence, no plan"
+     ],
+     "title": "Precipitant pattern"
+    }
+   }
+  },
+  {
+   "say": "The high yield set is airway inflammation, variable airflow, inhaled steroid as the base, formoterol reliever combinations, biologics by biomarker and the silent chest emergency.",
+   "tx": "Recall **airway inflammation**, variable airflow, **inhaled steroid** as base, **formoterol** reliever combinations, biomarker chosen **biologics**, **tiotropium** and **azithromycin** add ons, and the **silent chest** life threatening presentation. **FeNO**, blood eosinophils and IgE thresholds select therapy, and montelukast always carries the neuropsychiatric warning.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Value",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Reversibility",
+      "12 percent and 200 mL",
+      "Diagnostic criterion"
+     ],
+     [
+      "Peak flow life threatening",
+      "Under 50 litres per minute",
+      "Severity grading"
+     ],
+     [
+      "FeNO steroid responsive",
+      "Above 50 ppb",
+      "Type 2 marker"
+     ],
+     [
+      "Eosinophil biologic line",
+      "150 to 300 cells per microlitre",
+      "Biologic selection"
+     ],
+     [
+      "GINA 2025 reliever",
+      "Steroid plus formoterol",
+      "Recent change"
+     ],
+     [
+      "Montelukast warning",
+      "Neuropsychiatric changes",
+      "Safety trap"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-pulmonology",
+ "title": "Asthma phenotype, control and severe disease",
+ "v": 1
+}

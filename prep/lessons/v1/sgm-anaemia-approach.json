@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-anaemia-approach",
+ "subject": "ss-general-medicine",
+ "title": "Approach to Anaemia and Red Cell Indices",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Anaemia** (haemoglobin below normal) is defined by **haemoglobin below 13 g per decilitre in men** and **below 12 in women**. **Mean corpuscular volume** (MCV, red cell size) classifies microcytic, normocytic and macrocytic disease. **Red cell distribution width** (RDW, size variation) distinguishes iron deficiency from thalassaemia. **Reticulocyte count** (young red cells) assesses marrow response. **Anaemia of chronic disease** (inflammation related) is normocytic.",
+   "say": "Anaemia is characterised by haemoglobin below normal, and it is defined by below thirteen in men and below twelve in women that requires evaluation. Mean corpuscular volume is characterised by red cell size measurement, and it classifies microcytic and normocytic and macrocytic disease that guides workup. Red cell distribution width is characterised by size variation, and it distinguishes iron deficiency from thalassaemia trait.",
+   "vis": null
+  },
+  {
+   "tx": "**Microcytic anaemia** (MCV below 80) is iron deficiency, thalassaemia or sideroblastic disease. **Normocytic anaemia** (MCV 80 to 100) is acute loss, chronic disease or marrow failure. **Macrocytic anaemia** (MCV above 100) is B12, folate or alcohol related. **Mixed anaemia** (dual deficiency) shows normal MCV. **Panzytopenia** (all lines low) suggests marrow failure. **Dimorphic blood picture** (dual population) suggests dual deficiency.",
+   "say": "Microcytic anaemia is characterised by MCV below eighty, and it is iron deficiency and thalassaemia and sideroblastic disease. Normocytic anaemia is characterised by MCV eighty to one hundred, and it is acute loss and chronic disease and marrow failure. Macrocytic anaemia is characterised by MCV above one hundred, and it is B twelve and folate and alcohol related.",
+   "vis": null
+  },
+  {
+   "tx": "Red cell production needs **iron** (haem synthesis), **B12** (DNA synthesis) and **folate** (methylation). Iron deficiency impairs **haem synthesis** (protoporphyrin accumulation). B12 deficiency impairs **methionine synthesis** (methylation failure) causing hypersegmentation. Folate deficiency impairs **thymidylate synthesis** (DNA replication) causing megaloblasts. **Marrow replacement** (fibrosis, infiltration) causes panzytopenia. **Blood loss** (acute haemorrhage) causes reticulocytosis.",
+   "say": "Red cell production is characterised by needing iron and B twelve and folate, and it requires adequate substrates that sustain erythropoiesis. Iron deficiency is characterised by impairing haem synthesis, and it causes protoporphyrin accumulation that produces hypochromia. B12 deficiency is characterised by impairing methionine synthesis, and it causes hypersegmentation that produces megaloblasts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Nutrient deficiency"
+     },
+     {
+      "id": "b",
+      "label": "Synthesis failure"
+     },
+     {
+      "id": "c",
+      "label": "Abnormal red cells"
+     },
+     {
+      "id": "d",
+      "label": "Anaemia"
+     },
+     {
+      "id": "e",
+      "label": "Symptoms"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fatigue** (tiredness) with **pallor** (pale conjunctiva) is universal. **Dyspnoea** (breathlessness) with **tachycardia** (fast heart) marks severe disease. **Koilonychia** (spoon nails) with **glossitis** (smooth tongue) marks iron deficiency. **Cheilosis** (mouth cracking) with **dysphagia** (Paterson Kelly syndrome) marks iron deficiency. **Neuropathy** (tingling) marks B12 deficiency. **Jaundice** (yellow skin) marks haemolysis.",
+   "say": "Fatigue is characterised by tiredness, and it is accompanied by pallor that marks anaemia universally. Dyspnoea is characterised by breathlessness, and it is accompanied by tachycardia that marks severe disease requiring transfusion. Koilonychia is characterised by spoon nails, and it is accompanied by glossitis that marks iron deficiency with epithelial changes.",
+   "vis": null
+  },
+  {
+   "tx": "**Complete blood count** (cell counts) with **indices** (MCV, MCH) is the first test. **Reticulocyte count** (marrow response) guides chronicity. **Peripheral smear** (blood film) shows hypersegmentation and blasts. **Serum ferritin** (iron stores) below 15 confirms iron deficiency. **Serum B12** (cobalamin level) below 200 confirms deficiency. **Serum folate** (folate level) confirms folate deficiency. **Bone marrow** (marrow biopsy) is the gold standard for failure.",
+   "say": "Complete blood count is characterised by cell counts with indices, and it is the first test that guides further evaluation. Reticulocyte count is characterised by marrow response assessment, and it guides chronicity that distinguishes loss from failure. Peripheral smear is characterised by blood film examination, and it shows hypersegmentation and blasts that confirm diagnoses.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Complete blood count",
+      "First test",
+      "MCV indices"
+     ],
+     [
+      "Reticulocyte count",
+      "Marrow response",
+      "High loss low failure"
+     ],
+     [
+      "Peripheral smear",
+      "Morphology",
+      "Hypersegmentation blasts"
+     ],
+     [
+      "Ferritin",
+      "Iron stores",
+      "Below 15 deficiency"
+     ],
+     [
+      "B12 folate",
+      "Megaloblastic",
+      "Below 200 B12"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oral iron** (ferrous sulphate 200 mg daily) is first line for iron deficiency. **Intravenous iron** (ferric carboxymaltose) suits malabsorption and heart failure. **B12 injection** (1000 mcg) replaces intrinsic factor loss lifelong. **Folate supplementation** (5 mg daily) treats deficiency and pregnancy. **Transfusion** (packed cells) is indicated below 7 g per decilitre with symptoms. **Erythropoietin** (hormone therapy) treats chronic kidney anaemia.",
+   "say": "Oral iron is characterised by ferrous sulphate two hundred milligrams daily, and it is the first line for iron deficiency that requires compliance. Intravenous iron is characterised by ferric carboxymaltose, and it suits malabsorption and heart failure that require infusion therapy. B12 injection is characterised by one thousand micrograms, and it treats pernicious anaemia that requires lifelong replacement.",
+   "vis": null
+  },
+  {
+   "tx": "**Iron deficiency** needs gastrointestinal evaluation for blood loss. **B12 deficiency** needs anti intrinsic factor antibody testing. **Folate deficiency** needs dietary history and alcohol review. **Marrow failure** needs flow cytometry and cytogenetics. **Anaemia of chronic disease** needs underlying disease control. **Thalassaemia trait** (inherited microcytosis) needs family screening.",
+   "say": "Iron deficiency is characterised by needing gastrointestinal evaluation, and it requires blood loss exclusion that misses malignancy. B12 deficiency is characterised by needing anti intrinsic factor antibody testing, and it confirms pernicious anaemia that requires injection therapy. Folate deficiency is characterised by needing dietary history, and it requires alcohol review that identifies causes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Microcytic anaemia",
+     "points": [
+      "Low MCV below eighty",
+      "Ferritin low iron deficiency",
+      "RDW high iron low thalassaemia",
+      "Oral iron first"
+     ]
+    },
+    "right": {
+     "title": "Macrocytic anaemia",
+     "points": [
+      "High MCV above one hundred",
+      "Hypersegmentation smear",
+      "B12 folate low",
+      "B12 injection folate oral"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hypersegmented neutrophils** (over segmented cells) are pathognomonic of B12 folate deficiency. **Sideroblastic anaemia** (ring sideroblasts) needs pyridoxine therapy. **Myelodysplastic syndrome** (dysplastic marrow) needs decitabine therapy. **Marrow aplasia** (empty marrow) needs transplantation. **Haemolysis** (shortened survival) needs haemolysis workup. Each needs specific marrow pathways, not uniform iron.",
+   "say": "Hypersegmented neutrophils are characterised by over segmented cells, and they are pathognomonic of B twelve folate deficiency that requires vitamin replacement. Sideroblastic anaemia is characterised by ring sideroblasts, and it needs pyridoxine therapy that improves haem synthesis. Myelodysplastic syndrome is characterised by dysplastic marrow, and it needs decitabine therapy that improves counts.",
+   "vis": null
+  },
+  {
+   "tx": "**Iron deficiency** anaemia recovers fully with iron and source control. B12 deficiency neuropathy is irreversible if delayed. Folate deficiency anaemia recovers with supplementation. Marrow failure survival depends on transplantation timing. Sideroblastic anaemia survival depends on leukaemia transformation. Chronic disease anaemia survival depends on underlying control.",
+   "say": "Iron deficiency anaemia is characterised by recovering fully with iron, and it is achieved with source control that stops blood loss. B12 deficiency neuropathy is characterised by irreversibility if delayed, and it requires early injection therapy that prevents damage. Folate deficiency anaemia is characterised by recovering with supplementation, and it is achieved with dietary correction.",
+   "vis": null
+  },
+  {
+   "tx": "Indian guidelines stress ferritin diagnosis, gastrointestinal evaluation and B12 before folate testing. **Hypersegmentation** (over segmented neutrophils) is a favourite examination sign. **Koilonychia** (spoon nails) is a favourite viva sign. Traps include giving folate before B12, missing gastrointestinal blood loss, and calling thalassaemia trait iron deficiency. **RDW elevation** (size variation) favours iron deficiency over thalassaemia.",
+   "say": "Current guidelines are characterised by ferritin diagnosis and gastrointestinal evaluation and B twelve before folate testing, and they are stressed for anaemia care in India. Hypersegmentation is characterised by over segmented neutrophils, and it is a favourite examination sign that confirms megaloblastic disease. Koilonychia is characterised by spoon nails, and it is a favourite viva sign that indicates iron deficiency.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers MCV cutoffs, ferritin thresholds and hypersegmentation signs. Below eighty and above one hundred are the most asked points in theory and viva examinations. Focused rehearsal of index cutoffs aids viva answers. Ward practice on smear interpretation strengthens viva performance reliably.",
+   "say": "This table is characterised by MCV cutoffs and ferritin thresholds and hypersegmentation signs, and it gathers the high yield points for revision in theory. Below eighty and above one hundred are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Microcytic cutoff",
+      "MCV below 80"
+     ],
+     [
+      "Macrocytic cutoff",
+      "MCV above 100"
+     ],
+     [
+      "Ferritin deficiency",
+      "Below 15"
+     ],
+     [
+      "B12 deficiency",
+      "Below 200"
+     ],
+     [
+      "Smear sign",
+      "Hypersegmentation"
+     ],
+     [
+      "Iron nail sign",
+      "Koilonychia spoon nails"
+     ],
+     [
+      "RDW favours",
+      "Iron deficiency"
+     ],
+     [
+      "Order rule",
+      "B12 before folate"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

@@ -110,12 +110,13 @@ for (const dev of DEVICES) {
     await page.setInputFiles("#stFile", { name: "Cardiology-Notes.pdf", mimeType: "application/pdf", buffer: PDF });
     await page.waitForSelector(".st-doc", { timeout: 20000 });
     // also create a notebook
-    if (await page.locator('[data-act="st-newnb"]').count()) {
-      await page.click('[data-act="st-newnb"]');
-      if (await page.locator("#stNbT").count()) {
-        await page.fill("#stNbT", "ICU Ward Rounds");
-        if (await page.locator('[data-act="st-mknb"]').count()) {
-          await page.click('[data-act="st-mknb"]');
+    if (await page.locator('[data-act="st5a-new"]').count()) {
+      await page.click('[data-act="st5a-new"]');
+      await page.click('[data-act="st5a-new-notebook"]');
+      if (await page.locator("#st5aNbT").count()) {
+        await page.fill("#st5aNbT", "ICU Ward Rounds");
+        if (await page.locator('[data-act="st5a-mknb"]').count()) {
+          await page.click('[data-act="st5a-mknb"]');
           await page.waitForSelector("#stPages", { timeout: 10000 });
           // draw a couple strokes
           await page.click('[data-act="st-tool"][data-v="pen"]');
@@ -137,16 +138,22 @@ for (const dev of DEVICES) {
     console.log(`Saved ${tag}-study-home-items.png`);
 
     // 3. Search results
-    await page.fill("#stQ", "Cardiology");
+    await page.click('[data-act="st5a-tab"][data-v="search"]');
+    await page.waitForSelector("#st5aSearchQ");
+    await page.fill("#st5aSearchQ", "Cardiology");
     await page.waitForTimeout(350);
     await setupTheme();
     await page.screenshot({ path: join(OUT_DIR, `${tag}-search-results.png`) });
     console.log(`Saved ${tag}-search-results.png`);
-    await page.fill("#stQ", "");
+    await page.fill("#st5aSearchQ", "");
     await page.waitForTimeout(200);
+    if (await page.locator('[data-act="st5a-tab"][data-v="documents"]').count()) {
+      await page.click('[data-act="st5a-tab"][data-v="documents"]');
+      await page.waitForSelector(".st-doc, .st5a-card", { timeout: 10000 });
+    }
 
     // 4. Backup status / screen
-    if (await page.locator('[data-act="st-backup"]').count()) {
+    if (await page.locator('[data-act="st5a-backup"]').count()) {
       await setupTheme();
       await page.screenshot({ path: join(OUT_DIR, `${tag}-backup.png`) });
       console.log(`Saved ${tag}-backup.png`);

@@ -13,12 +13,27 @@
    "say": "Multidrug resistance means isoniazid plus rifampicin lost together. Add a fluoroquinolone for pre-XDR, then bedaquiline or linezolid for XDR. Definitions decide regimen eligibility.",
    "vis": {
     "kind": "table",
-    "cols": ["Category", "Resistance pattern"],
+    "cols": [
+     "Category",
+     "Resistance pattern"
+    ],
     "rows": [
-     ["Rifampicin resistant", "Rifampicin, with or without others"],
-     ["Multidrug resistant", "Isoniazid plus rifampicin"],
-     ["Pre extensively resistant", "Above plus any fluoroquinolone"],
-     ["Extensively resistant", "Above plus bedaquiline or linezolid group"]
+     [
+      "Rifampicin resistant",
+      "Rifampicin, with or without others"
+     ],
+     [
+      "Multidrug resistant",
+      "Isoniazid plus rifampicin"
+     ],
+     [
+      "Pre extensively resistant",
+      "Above plus any fluoroquinolone"
+     ],
+     [
+      "Extensively resistant",
+      "Above plus bedaquiline or linezolid group"
+     ]
     ]
    }
   },
@@ -29,12 +44,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Inadequate drug pressure"},
-     {"id": "b", "label": "Resistant mutants selected"},
-     {"id": "c", "label": "Treatment failure continues"},
-     {"id": "d", "label": "Resistant strain transmitted"}
+     {
+      "id": "a",
+      "label": "Inadequate drug pressure"
+     },
+     {
+      "id": "b",
+      "label": "Resistant mutants selected"
+     },
+     {
+      "id": "c",
+      "label": "Treatment failure continues"
+     },
+     {
+      "id": "d",
+      "label": "Resistant strain transmitted"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -57,11 +97,21 @@
     "kind": "compare",
     "left": {
      "title": "Injectable era",
-     "points": ["18 to 24 months duration", "Daily painful injections", "Hearing and renal toxicity", "Cure near one in two"]
+     "points": [
+      "18 to 24 months duration",
+      "Daily painful injections",
+      "Hearing and renal toxicity",
+      "Cure near one in two"
+     ]
     },
     "right": {
      "title": "All oral era",
-     "points": ["Six to nine month options", "No injectable agent", "Better adherence support", "Higher success reported"]
+     "points": [
+      "Six to nine month options",
+      "No injectable agent",
+      "Better adherence support",
+      "Higher success reported"
+     ]
     }
    }
   },
@@ -71,12 +121,27 @@
    "say": "Bedaquiline, pretomanid, linezolid and moxifloxacin for six months, moxifloxacin dropped if fluoroquinolone resistance shows. Success near ninety percent rewrites the counselling conversation.",
    "vis": {
     "kind": "table",
-    "cols": ["Drug", "Letter"],
+    "cols": [
+     "Drug",
+     "Letter"
+    ],
     "rows": [
-     ["Bedaquiline", "B"],
-     ["Pretomanid", "Pa"],
-     ["Linezolid", "L"],
-     ["Moxifloxacin", "M, dropped if resistant"]
+     [
+      "Bedaquiline",
+      "B"
+     ],
+     [
+      "Pretomanid",
+      "Pa"
+     ],
+     [
+      "Linezolid",
+      "L"
+     ],
+     [
+      "Moxifloxacin",
+      "M, dropped if resistant"
+     ]
     ]
    }
   },
@@ -97,12 +162,27 @@
    "say": "Watch the QT interval on bedaquiline and blood counts on linezolid. Correct potassium and magnesium, review neuropathy symptoms monthly. Safety monitoring belongs inside the regimen.",
    "vis": {
     "kind": "table",
-    "cols": ["Drug", "Monitor"],
+    "cols": [
+     "Drug",
+     "Monitor"
+    ],
     "rows": [
-     ["Bedaquiline", "ECG, potassium, magnesium"],
-     ["Linezolid", "Blood counts, neuropathy review"],
-     ["Pretomanid", "Liver function tests"],
-     ["Moxifloxacin", "ECG, glucose, tendon symptoms"]
+     [
+      "Bedaquiline",
+      "ECG, potassium, magnesium"
+     ],
+     [
+      "Linezolid",
+      "Blood counts, neuropathy review"
+     ],
+     [
+      "Pretomanid",
+      "Liver function tests"
+     ],
+     [
+      "Moxifloxacin",
+      "ECG, glucose, tendon symptoms"
+     ]
     ]
    }
   },
@@ -112,12 +192,27 @@
    "say": "Monthly nutrition money reaches notified patients directly because hunger defaults treatment. Supporters, weight checks and sputum reviews run beside the drugs at every visit.",
    "vis": {
     "kind": "table",
-    "cols": ["Support", "Purpose"],
+    "cols": [
+     "Support",
+     "Purpose"
+    ],
     "rows": [
-     ["Nutrition cash transfer", "Fight food insecurity default"],
-     ["Treatment supporter", "Daily adherence witness"],
-     ["Weight and sputum review", "Track response early"],
-     ["Adverse effect review", "Catch toxicity before dropout"]
+     [
+      "Nutrition cash transfer",
+      "Fight food insecurity default"
+     ],
+     [
+      "Treatment supporter",
+      "Daily adherence witness"
+     ],
+     [
+      "Weight and sputum review",
+      "Track response early"
+     ],
+     [
+      "Adverse effect review",
+      "Catch toxicity before dropout"
+     ]
     ]
    }
   },
@@ -128,12 +223,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Index MDR case notified"},
-     {"id": "b", "label": "Household contacts listed"},
-     {"id": "c", "label": "Symptoms, radiograph, tests"},
-     {"id": "d", "label": "Treatment or preventive therapy"}
+     {
+      "id": "a",
+      "label": "Index MDR case notified"
+     },
+     {
+      "id": "b",
+      "label": "Household contacts listed"
+     },
+     {
+      "id": "c",
+      "label": "Symptoms, radiograph, tests"
+     },
+     {
+      "id": "d",
+      "label": "Treatment or preventive therapy"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -142,12 +262,68 @@
    "say": "Outcome words stay disciplined: cured, completed, failure, died, lost. Oral regimens succeed best when resistance is found early, before ineffective months destroy lung and spread strain.",
    "vis": {
     "kind": "table",
-    "cols": ["Outcome", "Meaning"],
+    "cols": [
+     "Outcome",
+     "Meaning"
+    ],
     "rows": [
-     ["Cured", "Bacteriological proof of response"],
-     ["Failure", "Regimen stopped for non response"],
-     ["Loss to follow up", "Interrupted beyond definition"],
-     ["Not evaluated", "Outcome unknown to programme"]
+     [
+      "Cured",
+      "Bacteriological proof of response"
+     ],
+     [
+      "Failure",
+      "Regimen stopped for non response"
+     ],
+     [
+      "Loss to follow up",
+      "Interrupted beyond definition"
+     ],
+     [
+      "Not evaluated",
+      "Outcome unknown to programme"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Multidrug resistant TB means resistance to isoniazid and rifampicin together, and rifampicin resistance is its practical proxy. Pre XDR adds fluoroquinolone resistance, and XDR adds bedaquiline or linezolid resistance. BPaLM treats eligible cases in about six months, dropping moxifloxacin if fluoroquinolone resistance exists. Bedaquiline prolongs QT, and linezolid causes cytopenias and neuropathy.",
+   "say": "Multidrug resistant TB means resistance to isoniazid and rifampicin together, and rifampicin resistance is its practical proxy. Pre XDR adds fluoroquinolone resistance, and XDR adds bedaquiline or linezolid resistance. BPaLM treats eligible cases in about six months, dropping moxifloxacin if fluoroquinolone resistance exists. Bedaquiline prolongs QT, and linezolid causes cytopenias and neuropathy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "MDR TB definition",
+      "Resistance to isoniazid plus rifampicin together"
+     ],
+     [
+      "Pre XDR definition",
+      "MDR plus fluoroquinolone resistance added on"
+     ],
+     [
+      "XDR definition",
+      "Pre XDR plus bedaquiline or linezolid resistance"
+     ],
+     [
+      "BPaLM regimen drugs",
+      "Bedaquiline, pretomanid, linezolid and moxifloxacin together"
+     ],
+     [
+      "BPaLM duration",
+      "About six months all oral treatment course"
+     ],
+     [
+      "Bedaquiline toxicity watch",
+      "QT prolongation needs ECG and electrolytes checked"
+     ],
+     [
+      "Linezolid toxicity watch",
+      "Anaemia, thrombocytopenia and peripheral optic neuropathy"
+     ]
     ]
    }
   }

@@ -40,6 +40,25 @@
     });
   }
   function attr(s) { return esc(s).replace(/\s/g, " "); }
+  // Step text gets the Knowledge Library's high-yield bolding (reasoning.js medFormat, which escapes; plain esc() if it is
+  // not loaded), then the surgical points its medical rules miss: measurements, safety gates, a capital NOT.
+  var SGX_BOLD = new RegExp([
+    "\\b\\d+(?:[.,]\\d+)?(?:\\s*(?:to|-|\\u2013)\\s*\\d+(?:[.,]\\d+)?)?\\s*(?:mm|cm|mmHg|cmH2O|degrees?|\\u00b0|hours?|minutes?|mins?|mL|ml)\\b",
+    "\\bwithin the (?:first )?hour\\b", "\\bunder (?:direct )?vision\\b",
+    "\\bbefore (?:the )?(?:incision|induction|knife|draping|diathermy|closure|entry|tilting|every tilt|touching the target|applying anything|dividing anything|clipping|cutting|the patient (?:is asleep|leaves theatre))\\b",
+    "\\baloud\\b", "\\bnever events?\\b", "\\b(?:stops?|halts?) the (?:closure|operation)\\b", "\\bany discrepancy\\b", "\\btwo[- ]person\\b",
+    "\\b(?:convert(?:ing)? to (?:open|laparotomy)|call(?:ing)? for (?:senior )?help|senior help|stop and)\\b", "\\bcritical view of safety\\b"
+  ].join("|"), "gi");
+  function rich(s) {
+    var f = window.SMD_MEDFORMAT, h;
+    try { h = typeof f === "function" ? f(s) : esc(s); } catch (e) { h = esc(s); }
+    var depth = 0;   // only text outside an existing highlight span, never inside a tag
+    return h.split(/(<[^>]+>)/).map(function (part) {
+      if (part.charAt(0) === "<") { if (/^<span\b/.test(part)) depth++; else if (/^<\/span>/.test(part) && depth) depth--; return part; }
+      if (depth) return part;
+      return part.replace(SGX_BOLD, '<span class="md-key">$&</span>').replace(/\bNOT\b/g, '<span class="md-key">NOT</span>');
+    }).join("");
+  }
   // Privacy mode (privacy-mode.js): wrap a patient identifier so it can be masked on screen; plain esc() without it.
   function phi(kind, v, html) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
   function phiIn(kind, text, v) { var P = window.SMD_PRIVACY_MODE; return P && v ? P.wrapIn(kind, text, v) : esc(text); }
@@ -76,7 +95,9 @@
     // "Urology" once sees urology in every section
     catalog: null, spec: "", find: "",
     // notes
-    noteIndex: null, note: null, noteSchema: null, noteType: "", noteTemplate: ""
+    noteIndex: null, note: null, noteSchema: null, noteType: "", noteTemplate: "",
+    // full-screen clip or picture (fsOpen), and whether turning the phone sideways opened it
+    fs: null, fsAuto: false
   };
 
   function route() { return state.stack[state.stack.length - 1] || "home"; }
@@ -169,6 +190,59 @@
 
   /* ── media (licence gate applied by surgx-content.js) ────────────────────── */
 
+  /* Full screen is the app's own: Capacitor's Android WebView cancels the YouTube player's fullscreen request
+   * (BridgeWebChromeClient.onShowCustomView hides the custom view at once), so its button does nothing there.
+   * Our button sits over the player's own bottom-right fullscreen button and pins the clip or picture to the
+   * whole screen with CSS, turned sideways while the phone is upright. The exit button is labelled "Back..."
+   * so swipe-back.js's hardware/gesture back presses it first and the steps stay where they were. */
+  var FS_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  var FSX_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
+  var FS_BTN = '<button type="button" class="sgx-fs" data-sgx="fs" aria-label="Full screen">' + FS_SVG + "</button>";
+
+  function fsStatusBar(hide) {
+    try { var SB = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.StatusBar; if (SB) { if (hide) SB.hide(); else SB.show(); } } catch (e) {}
+  }
+  function fsSize() {
+    var box = state.fs; if (!box) return;
+    var z = 1; try { z = parseFloat(getComputedStyle(document.documentElement).zoom) || 1; } catch (e) {}
+    box.style.setProperty("--sgx-fs-w", (window.innerHeight / z) + "px");
+    box.style.setProperty("--sgx-fs-h", (window.innerWidth / z) + "px");
+  }
+  function fsOpen(box, auto) {
+    if (!box || state.fs) return;
+    state.fs = box; state.fsAuto = !!auto;
+    box.classList.add("sgx-fs-on"); fsSize();
+    var b = box.querySelector(".sgx-fs");
+    if (b) { b.setAttribute("data-sgx", "fsx"); b.setAttribute("aria-label", "Back to steps"); b.innerHTML = FSX_SVG; }
+    fsStatusBar(true);
+  }
+  function fsClose() {
+    var box = state.fs; state.fs = null; state.fsAuto = false;
+    if (!box) return false;
+    box.classList.remove("sgx-fs-on");
+    var b = box.querySelector(".sgx-fs");
+    if (b) { b.setAttribute("data-sgx", "fs"); b.setAttribute("aria-label", "Full screen"); b.innerHTML = FS_SVG; }
+    fsStatusBar(false);
+    return true;
+  }
+  // Auto full screen: turning a phone sideways on a procedure fills the screen with the clip most in view;
+  // turning it back upright returns to the steps. Phones only (a landscape tablet is a normal reading position).
+  function fsOrient() {
+    try {
+      if (!state.root || !window.SURGX || !SURGX.isOpen()) return;
+      var land = window.innerWidth > window.innerHeight && window.innerHeight < 520;
+      fsSize();
+      if (!land) { if (state.fsAuto) fsClose(); return; }
+      if (state.fs || routeHead() !== "procedure") return;
+      var best = null, bestA = 0, H = window.innerHeight;
+      [].forEach.call(state.root.querySelectorAll(".sgx-embed"), function (el) {
+        var r = el.getBoundingClientRect(), a = Math.max(0, Math.min(r.bottom, H) - Math.max(r.top, 0));
+        if (a > bestA) { bestA = a; best = el; }
+      });
+      if (best) fsOpen(best, true);
+    } catch (e) {}
+  }
+
   function mediaBlock(registry, id) {
     var cc = C(); if (!cc) return "";
     var m = cc.media(registry, id);
@@ -180,11 +254,17 @@
     }
     var body = "";
     if (m.inline && DIA()) body = DIA().get(m.diagramId) || "";
-    else if (m.src) body = '<img src="' + attr(m.src) + '" alt="' + attr(m.caption) + '" loading="lazy">';
+    else if (m.src) body = '<div class="sgx-pic"><img src="' + attr(m.src) + '" alt="' + attr(m.caption) + '" loading="lazy">' + FS_BTN + "</div>";
+    // YouTube rejects capacitor://localhost as an origin, so play through the https shim CliniX uses (ids allow-listed there).
+    else if (m.kind === "embed" && m.embeddable) {
+      body = '<div class="sgx-embed"><iframe src="https://stewardmd.in/_site/yt?v=' + attr(m.videoId) + (m.start ? "&start=" + m.start : "") + (m.end ? "&end=" + m.end : "") + '" title="' + attr(m.title) +
+        '" loading="lazy" allowfullscreen allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>' + FS_BTN + "</div>" +
+        '<div class="cap"><b>' + esc(m.title) + "</b></div>";
+    }
     if (!body) return "";
     return '<div class="sgx-media">' + body +
       '<div class="cap">' + esc(m.caption) + "</div>" +
-      '<div class="attr">' + esc(m.attribution) + (m.licence ? " · " + esc(m.licence) : "") + "</div></div>";
+      '<div class="attr">' + esc(m.attribution) + (m.licence && m.licence !== m.attribution ? " · " + esc(m.licence) : "") + "</div></div>";
   }
 
   /* ── citations ───────────────────────────────────────────────────────────── */
@@ -629,17 +709,32 @@
     tabs.forEach(function (c) { if (c.id === state.procTab) active = c; });
     if (!active) { active = tabs[0]; state.procTab = active.id; }
 
-    var tabBar = '<div class="sgx-tabs">' + tabs.map(function (c) {
-      return '<button class="sgx-tab' + (c.id === active.id ? " on" : "") + '" data-sgx="tab" data-id="' + attr(c.id) + '">' +
-        esc(c.title) + "</button>";
-    }).join("") + "</div>";
+    /* Owner 2026-11-21: "no one understands these buttons and leaves without using steps or the other tabs".
+     * The sections are now numbered, bordered buttons that wrap (none hidden off-screen), Steps is
+     * highlighted with its count, and every section ends with a Next button that walks to the following one. */
+    var stepsCh = null, ai = 0;
+    tabs.forEach(function (c, i) { if (c.id === "steps") stepsCh = c; if (c.id === active.id) ai = i; });
+    var tabBar = '<nav class="sgx-secnav" aria-label="Sections of this procedure">' + tabs.map(function (c, i) {
+      var isSteps = c.id === "steps";
+      return '<button class="sgx-secbtn' + (c.id === active.id ? " on" : "") + (isSteps ? " steps" : "") + '" data-sgx="tab" data-id="' + attr(c.id) + '"' +
+        (c.id === active.id ? ' aria-current="true"' : "") + '><span class="n">' + (i + 1) + "</span>" + esc(c.title) +
+        (isSteps && c.steps.length ? '<span class="ct">' + c.steps.length + "</span>" : "") + "</button>";
+    }).join("") + "</nav>";
+    var next = tabs[ai + 1] || null;
+    var nextBtn = next
+      ? '<button class="sgx-nextsec" data-sgx="tab" data-id="' + attr(next.id) + '"><span>Next: ' + esc(next.title) +
+        (next.id === "steps" && next.steps.length ? " (" + next.steps.length + ")" : "") + '</span>' + ic("arrow_forward") + "</button>"
+      : "";
+    var toSteps = (stepsCh && active.id !== "steps" && ai === 0)
+      ? '<button class="sgx-tosteps" data-sgx="tab" data-id="steps">' + ic("format_list_numbered") + " Go to the " + stepsCh.steps.length + " operative steps</button>"
+      : "";
 
     var body = "";
     body += metaStrip(p, '<span class="sgx-pill">' + ic("school") + " Educational reference</span>");
 
     if (active.id === "steps") {
       body += '<div class="sgx-card">' + (active.steps.length
-        ? active.steps.map(renderStep).join("")
+        ? active.steps.map(function (s) { return renderStep(s, p.__built && p.__built.media); }).join("")
         : '<div class="sgx-empty">No steps are listed for this procedure.</div>') + "</div>";
     } else {
       body += '<div class="sgx-card"><h4>' + esc(active.title) + "</h4>" +
@@ -653,6 +748,9 @@
     active.media.forEach(function (mid) {
       body += mediaBlock(p.__built ? p.__built.media : null, mid);
     });
+    body += nextBtn + toSteps;
+    // Shared pictures and animations for this operation (filled after paint from SMD_IMGLIB, first section only).
+    if (ai === 0) body += '<div class="sgx-related" id="sgxRelated"></div>';
 
     body += calcChips(p.calcs);
     body += sourcesCard(p.sources);
@@ -661,14 +759,26 @@
     return head(p.title, "03 · " + (p.system || "Procedure")) + tabBar + wrap(body);
   }
 
-  function renderStep(s) {
+  /* The action that opens a "how" line reads in bold, the way an operative atlas sets it: the lead
+   * clause up to the first comma, colon or semicolon, only when it is short and something follows. */
+  var HOW_NOT_VERB = /^(at|in|on|if|for|with|the|a|an|once|when|after|before|under|through|from|to|as|by|while|where|only|each|every|both|no|do|this|that|it|its|one|two|three|first|then|now|and|or|but|all|any|always|never)$/i;
+  function howLine(l) {
+    l = String(l || "");
+    var m = /^([^,;:.]{3,48})([,;:][\s\S]+)$/.exec(l);
+    if (m) return '<b class="lead">' + rich(m[1]) + "</b>" + rich(m[2]);
+    var v = /^([A-Z][a-z]+)\s+([\s\S]+)$/.exec(l);   // otherwise the opening imperative verb, as an atlas sets it
+    return v && !HOW_NOT_VERB.test(v[1]) ? '<b class="lead">' + esc(v[1]) + "</b> " + rich(v[2]) : rich(l);
+  }
+
+  function renderStep(s, registry) {
     var h = '<div class="sgx-step' + (s.critical ? " crit" : "") + '"><div class="n">' + s.n + "</div><div class=\"b\">" +
       '<div class="t">' + esc(s.title) + (s.critical ? " " + ic("priority_high") : "") + "</div>" +
-      '<div class="w">' + esc(s.why) + "</div>";
-    if (s.how.length) h += "<ul>" + s.how.map(function (l) { return "<li>" + esc(l) + "</li>"; }).join("") + "</ul>";
-    if (s.emphasis) h += '<div class="w" style="margin-top:7px;font-weight:600">' + esc(s.emphasis) + "</div>";
-    if (s.structuresAtRisk.length) h += '<div class="risk">' + ic("warning") + " At risk: " + esc(s.structuresAtRisk.join(" · ")) + "</div>";
-    if (s.pitfalls.length) h += '<div class="pit">' + ic("error") + " " + esc(s.pitfalls.join(" · ")) + "</div>";
+      '<div class="w">' + rich(s.why) + "</div>";
+    if (s.how.length) h += '<ol class="how">' + s.how.map(function (l) { return "<li>" + howLine(l) + "</li>"; }).join("") + "</ol>";
+    if (s.emphasis) h += '<div class="emph">' + esc(s.emphasis) + "</div>";
+    if (s.structuresAtRisk.length) h += '<div class="risk"><span class="lb">' + ic("warning") + " At risk</span>" + esc(s.structuresAtRisk.join(" · ")) + "</div>";
+    if (s.pitfalls.length) h += '<div class="pit"><span class="lb">' + ic("error") + " Pitfall</span>" + esc(s.pitfalls.join(" · ")) + "</div>";
+    if (flag("smd_surgx_step_images")) s.media.forEach(function (mid) { h += mediaBlock(registry, mid); });
     return h + "</div></div>";
   }
 
@@ -1619,7 +1729,14 @@
      render + events
      ═══════════════════════════════════════════════════════════════════════ */
 
+  /* One shared picture bank (owner 2026-11-23): the Image Library's pictures and animations for this operation's topic. */
+  function relatedPictures(r) {
+    var box = r === "procedure" && document.getElementById("sgxRelated"), p = state.proc;
+    if (!box || !p || !p.title || !window.SMD_IMGLIB || !window.SMD_IMGLIB.strip) return;
+    window.SMD_IMGLIB.strip(box, [p.title].concat(p.aliases || []));
+  }
   function render() {
+    fsClose();
     var r = routeHead();
     var html;
     switch (r) {
@@ -1638,6 +1755,7 @@
     }
     if (html && r === "note" && tabletSplit()) html = noteSplit(html, routeArg());
     if (html) paint(html);
+    relatedPictures(r);
     try { if (ST()) ST().setLastSection(r); } catch (e) {}
   }
 
@@ -1709,6 +1827,8 @@
 
       if (act === "close") { haptic("light"); if (window.SURGX) window.SURGX.close(); return; }
       if (act === "back") { haptic("light"); back(); return; }
+      if (act === "fs") { haptic("light"); fsOpen(t.parentNode); return; }
+      if (act === "fsx") { haptic("light"); fsClose(); return; }
       if (act === "go") { haptic("light"); go(t.getAttribute("data-r")); return; }
       // iPad split: picking another note from the side list swaps the detail in place (no deeper stack).
       if (act === "noteswap") {
@@ -1855,7 +1975,7 @@
       }
 
       // procedures
-      if (act === "tab") { state.procTab = t.getAttribute("data-id"); render(); try { state.host.scrollTop = 0; } catch (er) {} return; }
+      if (act === "tab") { state.procTab = t.getAttribute("data-id"); render(); try { state.host.scrollTop = 0; } catch (er) {} try { var sOn = state.host.querySelector(".sgx-secbtn.on"); if (sOn && sOn.parentNode) sOn.parentNode.scrollLeft = Math.max(0, sOn.offsetLeft - 16); } catch (er2) {} return; }
 
       // cases
       if (act === "spec") { state.spec = t.getAttribute("data-id") || ""; haptic("light"); render(); return; }
@@ -2250,13 +2370,16 @@
       rootEl.innerHTML = '<div class="sgx-scroll" id="surgxScroll"></div>';
       state.host = rootEl.querySelector("#surgxScroll");
     }
-    if (!_wired) { wire(rootEl); _wired = true; }
+    if (!_wired) {
+      wire(rootEl); _wired = true;
+      try { window.addEventListener("resize", fsOrient); window.addEventListener("orientationchange", function () { setTimeout(fsOrient, 300); }); } catch (e) {}
+    }
     state.stack = ["home"];
     if (deepRoute && /^[a-z]+(\/[A-Za-z0-9_.-]+)?$/.test(deepRoute)) state.stack.push(deepRoute);
     render();
   }
 
-  function onClose() { /* state is intentionally retained so reopening returns you to context */ }
+  function onClose() { fsClose(); /* other state is intentionally retained so reopening returns you to context */ }
 
   // _mdLite is exposed for the same reason _state is: the evidence-review renderer is a small parser
   // and needs a runnable check (test/run-surgx-md-ui.mjs). It is pure and reads no state.

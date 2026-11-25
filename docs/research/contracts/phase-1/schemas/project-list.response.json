@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-1/schemas/project-list.response.json",
+  "title": "GET /v1/projects response (200)",
+  "description": "Request takes no body. Pagination uses ?limit (1-100, default 20) and ?cursor (opaque). The response nextCursor is absent on the last page.",
+  "type": "object",
+  "required": ["projects", "requestId"],
+  "additionalProperties": false,
+  "properties": {
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "discipline", "role", "updatedAt"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "discipline": { "type": "string" },
+          "specialty": { "type": "string" },
+          "studyType": { "type": "string" },
+          "role": { "type": "string", "enum": ["owner", "editor", "analyst", "reviewer", "viewer"] },
+          "updatedAt": { "type": "integer" }
+        }
+      }
+    },
+    "nextCursor": { "type": "string" },
+    "requestId": { "type": "string" }
+  }
+}

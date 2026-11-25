@@ -1,0 +1,314 @@
+{
+  "id": "phacoemulsification",
+  "title": "Phacoemulsification with foldable lens implant",
+  "subtitle": "Clear corneal incision, capsulorhexis, phaco and in-the-bag implant",
+  "system": "ophthalmic",
+  "aliases": [
+    "phaco",
+    "cataract surgery",
+    "phaco with IOL",
+    "small incision cataract surgery with phaco"
+  ],
+  "estMinutes": 25,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "nice-ng77",
+      "org": "NICE",
+      "title": "Cataracts in adults: management (NG77)",
+      "year": 2017,
+      "url": "https://www.nice.org.uk/guidance/ng77",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "rcophth-cataract",
+      "org": "Royal College of Ophthalmologists",
+      "title": "Cataract Surgery Guidelines",
+      "year": 2010,
+      "url": "https://www.rcophth.ac.uk/resources-listing/cataract-surgery-guidelines/",
+      "accessed": "2026-11-21"
+    },
+    {
+      "id": "escrs-endo",
+      "org": "ESCRS",
+      "title": "Guidelines for prevention and treatment of endophthalmitis following cataract surgery",
+      "year": 2013,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=ESCRS+guidelines+prevention+endophthalmitis+cataract+surgery",
+      "accessed": "2026-11-21"
+    }
+  ],
+  "chapters": {
+    "indications": [
+      "Cataract causing visual impairment that affects the patient's daily life, after discussing benefits and risks (NICE NG77 does not set an acuity threshold).",
+      "Lens-induced glaucoma or uveitis; cataract preventing view or treatment of the fundus.",
+      "Clear lens extraction or combined surgery in selected patients (for example angle closure)."
+    ],
+    "contraindications": [
+      "A patient who cannot lie flat and still for the duration, unless general anaesthesia is planned.",
+      "Active ocular surface or adnexal infection (blepharitis, conjunctivitis, dacryocystitis) until treated."
+    ],
+    "preparation": [
+      "Biometry (axial length, keratometry) with the chosen formula and target refraction; dilated examination; endothelial and pupil assessment.",
+      "Check anticoagulants, alpha-blockers (tamsulosin: floppy iris), diabetes and ability to lie flat.",
+      "Consent: endophthalmitis, posterior capsule rupture with vitreous loss, refractive surprise, cystoid macular oedema, retinal detachment, posterior capsule opacification, and that glasses may still be needed."
+    ],
+    "positioning": [
+      "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    ],
+    "equipment": [
+      "Phaco machine with irrigation and aspiration, keratome and side-port blades, cohesive and dispersive viscoelastic, cystotome or capsulorhexis forceps, hydrodissection cannula, chopper, foldable implant and injector, anterior vitrectomy cutter on standby.",
+      "Intracameral antibiotic and mydriatic per protocol, iris hooks or a pupil expansion ring for small pupils, trypan blue for a poor red reflex."
+    ],
+    "anatomy": [
+      "The cornea with its endothelium, the anterior chamber, iris, lens capsule (anterior and posterior), zonules and the vitreous face behind the posterior capsule.",
+      "The posterior capsule is about 4 microns thick: it is the barrier between the anterior segment and the vitreous."
+    ],
+    "criticalSafety": [
+      "Right patient, right eye, right implant: read the biometry and the implant aloud before opening the lens.",
+      "Povidone-iodine 5% in the conjunctival sac before starting.",
+      "Recognise a posterior capsule tear early and stop before vitreous and nucleus fragments are lost."
+    ],
+    "structuresAtRisk": [
+      "Corneal endothelium",
+      "Posterior capsule",
+      "Zonules",
+      "Iris (floppy iris)",
+      "Retina (dropped nucleus, traction)"
+    ],
+    "commonErrors": [
+      "Wrong implant from the wrong biometry or eye.",
+      "A capsulorhexis that runs out to the periphery.",
+      "Phaco energy close to the endothelium or the posterior capsule.",
+      "Missing early signs of a capsule tear."
+    ],
+    "complications": [
+      "Endophthalmitis.",
+      "Posterior capsule rupture, vitreous loss, dropped nucleus.",
+      "Corneal oedema, raised pressure.",
+      "Cystoid macular oedema, retinal detachment.",
+      "Refractive surprise, posterior capsule opacification."
+    ],
+    "postop": [
+      "Antibiotic and steroid drops per protocol; shield at night.",
+      "Same-day return for pain, redness or falling vision.",
+      "Review per local pathway; refraction and glasses at around four to six weeks."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check", "media": ["med.surgx.phaco-step-01", "med.surgx.phaco-clip-01"],
+      "emphasis": "Mark the operative eye above the brow; ask the patient which eye and why. Second-eye surgery is a common wrong-site setting."
+    },
+    {
+      "ref": "step.eye.biometry-iol-check", "media": ["med.surgx.phaco-step-02", "med.surgx.phaco-clip-02"]
+    },
+    {
+      "ref": "step.core.timeout", "media": ["med.surgx.phaco-step-03", "med.surgx.phaco-clip-03"],
+      "emphasis": "Read the implant model and power aloud against the biometry printout for this eye."
+    },
+    {
+      "ref": "step.eye.anaesthesia", "media": ["med.surgx.phaco-step-04", "med.surgx.phaco-clip-04"],
+      "emphasis": "Topical with intracameral local suits most cooperative adults; sub-Tenon for longer or complex cases."
+    },
+    {
+      "ref": "step.core.positioning", "media": ["med.surgx.phaco-step-05", "med.surgx.phaco-clip-05"],
+      "emphasis": "Supine with the head flat and level, chin and forehead in one horizontal plane, a head ring or gel pillow; the head of the patient at the end of the table so the surgeon can sit."
+    },
+    {
+      "ref": "step.eye.povidone-iodine", "media": ["med.surgx.phaco-step-06", "med.surgx.phaco-clip-06"]
+    },
+    {
+      "ref": "step.core.prep-drape", "media": ["med.surgx.phaco-step-07", "med.surgx.phaco-clip-07"],
+      "emphasis": "Clean the lids and periocular skin; the drape must tuck the lashes away."
+    },
+    {
+      "ref": "step.eye.lid-speculum", "media": ["med.surgx.phaco-step-08", "med.surgx.phaco-clip-08"]
+    },
+    {
+      "ref": "step.phaco.incisions", "media": ["med.surgx.phaco-step-09", "med.surgx.phaco-clip-09"]
+    },
+    {
+      "ref": "step.phaco.capsulorhexis", "media": ["med.surgx.phaco-step-10", "med.surgx.phaco-clip-10"]
+    },
+    {
+      "ref": "step.phaco.hydrodissection", "media": ["med.surgx.phaco-step-11", "med.surgx.phaco-clip-11"]
+    },
+    {
+      "ref": "step.phaco.nucleus", "media": ["med.surgx.phaco-step-12", "med.surgx.phaco-clip-12"]
+    },
+    {
+      "ref": "step.phaco.cortex", "media": ["med.surgx.phaco-step-13", "med.surgx.phaco-clip-13"]
+    },
+    {
+      "ref": "step.phaco.iol", "media": ["med.surgx.phaco-step-14", "med.surgx.phaco-clip-14"]
+    },
+    {
+      "ref": "step.eye.posterior-capsule-rupture", "media": ["med.surgx.phaco-step-15", "med.surgx.phaco-clip-15"]
+    },
+    {
+      "ref": "step.eye.intracameral-antibiotic", "media": ["med.surgx.phaco-step-16", "med.surgx.phaco-clip-16"]
+    },
+    {
+      "ref": "step.eye.wound-check", "media": ["med.surgx.phaco-step-17", "med.surgx.phaco-clip-17"]
+    },
+    {
+      "ref": "step.core.counts", "media": ["med.surgx.phaco-step-18", "med.surgx.phaco-clip-18"],
+      "emphasis": "Blades and needles accounted for; the used implant packaging kept for the record."
+    },
+    {
+      "ref": "step.eye.shield-postop", "media": ["med.surgx.phaco-step-19", "med.surgx.phaco-clip-19"]
+    },
+    {
+      "ref": "step.core.debrief", "media": ["med.surgx.phaco-step-20", "med.surgx.phaco-clip-20"]
+    }
+  ],
+  "steps_local": {
+    "step.phaco.incisions": {
+      "id": "step.phaco.incisions",
+      "kind": "access",
+      "title": "Main and side-port corneal incisions",
+      "why": "A well-built tunnel incision self-seals at the end and keeps the chamber stable. A short or leaky tunnel lets fluid escape during the operation and bacteria enter afterwards.",
+      "how": [
+        "Fixate the eye and make the side port with a 15 degree blade.",
+        "Fill the chamber with viscoelastic through the side port.",
+        "Make the main clear corneal incision with a keratome (about 2.2 to 2.8 mm), in two or three planes so it forms a square tunnel that self-seals."
+      ],
+      "structuresAtRisk": [
+        "Corneal endothelium",
+        "Descemet's membrane",
+        "Iris (prolapse through a posterior incision)"
+      ],
+      "pitfalls": [
+        "An incision too far back that lets the iris prolapse.",
+        "A short tunnel that leaks."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.phaco.capsulorhexis": {
+      "id": "step.phaco.capsulorhexis",
+      "kind": "access",
+      "critical": true,
+      "title": "Continuous curvilinear capsulorhexis",
+      "why": "A round, central, continuous tear of the anterior capsule about 5 to 5.5 mm wide resists tearing out during phaco and holds the implant centred. A rhexis that runs out to the periphery can extend round to the posterior capsule.",
+      "how": [
+        "Fill the chamber with cohesive viscoelastic so the lens is flat and the capsule is under no tension.",
+        "Start a flap with a cystotome or forceps and tear in a continuous circle, regrasping often and pulling towards the centre.",
+        "Use trypan blue if the red reflex is poor (white or brunescent cataract).",
+        "If it starts to run out, stop, refill viscoelastic, and pull the flap back towards the centre (the Little technique)."
+      ],
+      "structuresAtRisk": [
+        "Anterior capsule",
+        "Zonules",
+        "Posterior capsule (via an extension)"
+      ],
+      "pitfalls": [
+        "A shallow chamber that lets the tear run out.",
+        "A small rhexis that later contracts."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.phaco.hydrodissection": {
+      "id": "step.phaco.hydrodissection",
+      "kind": "dissection",
+      "title": "Hydrodissection and rotation of the nucleus",
+      "why": "Freeing the lens from its capsule lets the nucleus rotate, so it can be removed with less stress on the zonules and the posterior capsule.",
+      "how": [
+        "Pass a cannula just under the anterior capsule edge and inject balanced salt slowly until a fluid wave crosses the red reflex.",
+        "Press gently on the centre of the lens to release trapped fluid, so it does not blow out the posterior capsule.",
+        "Rotate the nucleus to prove it is free."
+      ],
+      "structuresAtRisk": [
+        "Posterior capsule (capsular block)",
+        "Zonules"
+      ],
+      "pitfalls": [
+        "Forceful injection with a sealed rhexis (capsular block syndrome).",
+        "Trying to rotate a nucleus that is not free."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.phaco.nucleus": {
+      "id": "step.phaco.nucleus",
+      "kind": "resection",
+      "critical": true,
+      "title": "Nucleus removal with phaco (divide and conquer or chop)",
+      "why": "This is where ultrasound energy is used inside the eye. Keeping the phaco tip central, away from the endothelium and the posterior capsule, and using only the energy needed protects both.",
+      "how": [
+        "Set the bottle height and fluidics for the technique; confirm a stable chamber.",
+        "Sculpt a groove (divide and conquer) or chop the nucleus, crack it into segments, and emulsify each segment in the centre of the bag.",
+        "Keep the tip bevel visible and away from the cornea; watch for chamber depth changes, a sudden deepening or a pupil snap that signal a capsule tear.",
+        "Protect the endothelium with dispersive viscoelastic in dense cataracts."
+      ],
+      "structuresAtRisk": [
+        "Corneal endothelium",
+        "Posterior capsule",
+        "Iris",
+        "Zonules"
+      ],
+      "pitfalls": [
+        "Phaco near the endothelium.",
+        "Sculpting too deep through the posterior plate.",
+        "Ignoring a sudden change in chamber depth."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.phaco.cortex": {
+      "id": "step.phaco.cortex",
+      "kind": "resection",
+      "title": "Cortex removal with irrigation and aspiration",
+      "why": "Retained cortex causes inflammation and raised pressure; aspirating carelessly catches the posterior capsule. Cortex is stripped to the centre with the port facing up.",
+      "how": [
+        "Engage cortex under the capsule edge with the aspiration port facing up, then strip it towards the centre.",
+        "Use a bimanual system for subincisional cortex.",
+        "Polish the posterior capsule only if it is clear that it is safe."
+      ],
+      "structuresAtRisk": [
+        "Posterior capsule"
+      ],
+      "pitfalls": [
+        "Aspirating with the port facing the posterior capsule.",
+        "Leaving subincisional cortex."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.phaco.iol": {
+      "id": "step.phaco.iol",
+      "kind": "reconstruction",
+      "title": "Implant insertion into the capsular bag",
+      "why": "A lens centred in the bag gives the planned refraction and is stable for life. A lens in the wrong place or upside down gives a refractive error and may need another operation.",
+      "how": [
+        "Fill the bag with cohesive viscoelastic.",
+        "Load the foldable implant in the injector the right way up, and inject it into the bag through the main incision, guiding the leading haptic in.",
+        "Dial the trailing haptic into the bag and centre the optic.",
+        "Remove all the viscoelastic from in front of and behind the implant to avoid a pressure spike."
+      ],
+      "structuresAtRisk": [
+        "Posterior capsule",
+        "Zonules",
+        "Corneal endothelium"
+      ],
+      "pitfalls": [
+        "Inserting the implant upside down.",
+        "Leaving viscoelastic behind, which spikes the pressure."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

@@ -1,81 +1,87 @@
-/* PrepReels media: first-party descriptor + official YouTube nocookie embed adapter.
-   window.PREP_MG_MEDIA. ES5. Plan: vault/plans/PrepNucleus-MediGram.md section 7.
-   The adapter is behind smd_prep_medigram_youtube (default OFF, see prep-medigram-data.js).
-   When disabled, unavailable or offline it returns a fallback descriptor and creates no iframe.
-   No scraping, no download, no rehost, no control hiding. Pause and release on navigation/background. */
+/* PrepReels media: the cleared CliniX teaching videos, played inline by YouTube's own player. window.PREP_MG_MEDIA. ES5.
+   The app runs on capacitor://localhost, an origin YouTube's player rejects ("Error 153: Video player configuration
+   error"). So, exactly like CliniX (clinix-screens.js YT_SHIM), the card iframes our https shim _site/yt.html, which
+   embeds the official player and only plays its allow-list; autoplay=1 makes the shim start it at once. The video
+   list is clinix/media/manifest.json (embeddable, cleared, oEmbed-verified). No scraping, no download, no rehost. One live player; released on scroll-away/background. */
 (function (G) {
   "use strict";
   var NODE = typeof module !== "undefined" && module.exports && !(G && G.document);
+  var SHIM = "https://stewardmd.in/_site/yt";
 
-  var VIDEO_ID_RE = /^[A-Za-z0-9_-]{6,20}$/;
-  function validVideoId(id) { return typeof id === "string" && VIDEO_ID_RE.test(id); }
-  /* Official embedded player on the nocookie host. rel=0 keeps related videos on the same video where
-     YouTube allows it; branding and controls are never hidden (modestbranding is not set to hide). */
-  function embedUrl(videoId, opts) {
-    if (!validVideoId(videoId)) return null;
-    opts = opts || {};
-    var q = "rel=0&playsinline=1";
-    if (opts.start) q += "&start=" + Math.max(0, Math.floor(+opts.start || 0));
-    return "https://www.youtube-nocookie.com/embed/" + videoId + "?" + q;
-  }
-  function sourceLabel(media) {
-    if (!media) return "";
-    if (media.provider === "youtube") return "YouTube";
-    if (media.provider === "first_party") return "PrepReels";
-    return "";
-  }
-  /* What the feed should draw for a candidate's media. Never throws on malformed third-party metadata. */
-  function describe(candidate, env) {
-    env = env || {};
-    var media = candidate && candidate.media;
-    if (!candidate || candidate.kind !== "video" || !media) return { kind: "none" };
-    if (media.provider === "first_party") {
-      if (!media.assetId || typeof media.assetId !== "string") return { kind: "unavailable", provider: "first_party", label: "PrepReels", reason: "missing-asset" };
-      return { kind: "first_party", provider: "first_party", label: "PrepReels", assetId: media.assetId };
-    }
-    if (media.provider === "youtube") {
-      if (!env.youtubeEnabled) return { kind: "disabled", provider: "youtube", label: "YouTube", reason: "policy-off" };
-      if (!validVideoId(media.videoId)) return { kind: "unavailable", provider: "youtube", label: "YouTube", reason: "bad-id" };
-      if (env.offline) return { kind: "unavailable", provider: "youtube", label: "YouTube", reason: "offline" };
-      return { kind: "youtube", provider: "youtube", label: "YouTube", videoId: media.videoId, url: embedUrl(media.videoId, env) };
-    }
-    return { kind: "unavailable", provider: String(media.provider || ""), label: "", reason: "unknown-provider" };
+  function validVideoId(id) { return typeof id === "string" && /^[A-Za-z0-9_-]{11}$/.test(id); }
+  function shimUrl(videoId) { return validVideoId(videoId) ? SHIM + "?v=" + videoId + "&autoplay=1" : null; }
+  // Cards from the CliniX media manifest: only cleared, embeddable videos with a valid id, one per id.
+  function videosFrom(manifest) {
+    var m = (manifest && manifest.media) || {}, seen = {}, out = [];
+    Object.keys(m).forEach(function (k) {
+      var x = m[k];
+      if (!x || x.kind !== "embed" || x.embeddable !== true || x.cleared !== true || !validVideoId(x.videoId) || seen[x.videoId]) return;
+      seen[x.videoId] = 1;
+      out.push({ kind: "video", videoId: x.videoId, title: String(x.title || x.caption || "Teaching video"), caption: String(x.caption || ""), by: String(x.attribution || "") });
+    });
+    return out;
   }
 
-  var PURE = { validVideoId: validVideoId, embedUrl: embedUrl, sourceLabel: sourceLabel, describe: describe };
+  var PURE = { validVideoId: validVideoId, shimUrl: shimUrl, videosFrom: videosFrom, SHIM: SHIM };
   if (NODE) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
-  /* One live player at a time. mount() creates the nocookie iframe; release() pauses via the official
-     postMessage pause command where the player listens, then removes the node so nothing keeps playing. */
-  var live = null; // { holder, iframe, videoId }
+  /* One live player, inside the app (never a hand-off to the YouTube app or site). It autoplays when its card arrives
+     and is removed when the card leaves, so nothing plays off screen. */
+  var live = null, onState = null;   // live = { holder, iframe, videoId, state, muted }
+  // The shim reports { smdYt, v, state, muted } (YouTube states: 1 playing, 2 paused, 3 buffering, 0 ended).
+  try { G.addEventListener("message", function (e) {
+    var d = e && e.data;
+    if (!live || !d || d.smdYt !== true || d.v !== live.videoId || e.source !== live.iframe.contentWindow) return;
+    live.state = d.state; live.muted = !!d.muted;
+    if (onState) try { onState(live); } catch (x) {}
+  }); } catch (e) {}
+  function command(cmd, by) {
+    if (!live || !live.iframe.contentWindow) return false;
+    try { live.iframe.contentWindow.postMessage({ smdCmd: cmd, by: by || 0 }, "https://stewardmd.in"); return true; } catch (e) { return false; }
+  }
   function release() {
     if (!live) return;
-    try { if (live.iframe && live.iframe.contentWindow) live.iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":[]}', "https://www.youtube-nocookie.com"); } catch (e) {}
-    try { if (live.iframe && live.iframe.parentNode) live.iframe.parentNode.removeChild(live.iframe); } catch (e) {}
+    try { if (live.iframe.parentNode) live.iframe.parentNode.removeChild(live.iframe); } catch (e) {}
+    try { live.holder.classList.remove("on"); } catch (e) {}
     live = null;
   }
-  function mount(holder, candidate, env) {
-    release();
-    var d = describe(candidate, env || {});
-    if (!holder) return d;
-    if (d.kind !== "youtube") return d;
-    var f = G.document.createElement("iframe");
-    f.src = d.url;
-    f.title = candidate.title ? String(candidate.title) : "YouTube video";
-    f.setAttribute("loading", "lazy");
-    f.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
-    f.setAttribute("allow", "accelerometer; encrypted-media; picture-in-picture");
-    f.setAttribute("allowfullscreen", "");
-    f.className = "pn-mg-frame";
-    holder.appendChild(f);
-    live = { holder: holder, iframe: f, videoId: d.videoId };
-    return d;
+  /* The iPad layout zooms the page (html zoom 1.15, smd-refined). WebKit then lays the player's page out wider than the
+     box it is drawn in, so the right of every video was cut off (owner screenshots 2026-11-17). The frame undoes the
+     zoom (zoom 1/z) and is sized in px, so inside and outside agree on every device. fit() re-runs on resize. */
+  function effZoom(el) {
+    try { if (el.currentCSSZoom) return el.currentCSSZoom; } catch (e) {}
+    var z = 1;
+    for (var n = el; n && n.nodeType === 1; n = n.parentElement) { var v = parseFloat(G.getComputedStyle(n).zoom); if (v > 0) z *= v; }
+    return z;
   }
-  function onVisibility() { if (G.document && G.document.visibilityState === "hidden") release(); }
+  function fit() {
+    if (!live) return;
+    var h = live.holder, f = live.iframe, z = effZoom(h);
+    if (Math.abs(z - 1) < 0.01) { f.style.zoom = ""; f.style.width = ""; f.style.height = ""; return; }
+    f.style.zoom = String(1 / z);
+    f.style.width = h.clientWidth * z + "px";
+    f.style.height = h.clientHeight * z + "px";
+  }
+  try { G.addEventListener("resize", function () { fit(); }); G.addEventListener("orientationchange", function () { G.setTimeout(fit, 300); }); } catch (e) {}
+  function mount(holder, videoId, title) {
+    if (live && live.holder === holder) return;
+    release();
+    var url = shimUrl(videoId);
+    if (!holder || !url) return;
+    var f = G.document.createElement("iframe");
+    f.src = url;
+    f.title = title || "Teaching video";
+    f.setAttribute("allow", "autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen");
+    f.setAttribute("allowfullscreen", "");
+    holder.appendChild(f);
+    holder.classList.add("on");
+    live = { holder: holder, iframe: f, videoId: videoId, state: -1, muted: false };
+    fit();
+  }
   try {
-    if (G.document && G.document.addEventListener) G.document.addEventListener("visibilitychange", onVisibility);
-    if (G.addEventListener) { G.addEventListener("pagehide", release); }
+    G.document.addEventListener("visibilitychange", function () { if (G.document.visibilityState === "hidden") release(); });
+    G.addEventListener("pagehide", release);
   } catch (e) {}
-  G.PREP_MG_MEDIA = { describe: describe, embedUrl: embedUrl, validVideoId: validVideoId, sourceLabel: sourceLabel, mount: mount, release: release, _pure: PURE };
+  G.PREP_MG_MEDIA = { validVideoId: validVideoId, shimUrl: shimUrl, videosFrom: videosFrom, mount: mount, release: release, command: command, fit: fit, current: function () { return live; }, onState: function (fn) { onState = fn; }, _pure: PURE };
 })(typeof window !== "undefined" ? window : this);

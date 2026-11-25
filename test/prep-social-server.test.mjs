@@ -210,3 +210,32 @@ test("Leave Arena deletes every social row of the leaver and keeps others' group
   assert.notEqual(solo, code);
   assert.deepEqual((await call(env, "GET", "friends", "b")).body, { friends: [], incoming: [], outgoing: [] });
 });
+
+test("PrepReels shares: references only, accepted friends only, inbox newest first, seen removes, Leave Arena deletes", async () => {
+  const env = await envWith("a", "b", "c");
+  await friends(env, "a", "b");
+  const ref = { k: "q", s: "anatomy", m: "ana-brachial-plexus", id: "bp-1" };
+  assert.ok(["not_friends", "not_found"].includes((await call(env, "POST", "share", "a", { smdId: SMD.c, ref })).body.error), "a stranger is refused");
+  await call(env, "POST", "friends/add", "c", { smdId: SMD.a });   // c now has an id but is not an accepted friend
+  assert.equal((await call(env, "POST", "share", "a", { smdId: SMD.c, ref })).body.error, "not_friends", "a pending request is not a friend");
+  assert.equal((await call(env, "POST", "share", "a", { smdId: SMD.b, ref: { k: "q", s: "x", m: "y", id: "<script>" } })).status, 400, "a bad ref is refused");
+  assert.equal((await call(env, "POST", "share", "a", { smdId: SMD.b, ref: { k: "t", text: "hello" } })).status, 400, "free text is never accepted");
+  assert.equal((await call(env, "POST", "share", "a", { smdId: SMD.b, ref })).status, 200);
+  await call(env, "POST", "share", "a", { smdId: SMD.b, ref: { k: "v", v: "gRWSyqatWQQ", extra: "dropped" } }, T0 + 1000);
+  const inbox = (await call(env, "GET", "shares", "b", null, T0 + 2000)).body.shares;
+  assert.equal(inbox.length, 2);
+  assert.deepEqual(inbox[0].ref, { k: "v", v: "gRWSyqatWQQ" }, "newest first, extra fields dropped");
+  assert.equal(inbox[0].from.name, "Asha Rao");
+  assert.equal((await call(env, "GET", "shares", "a", null, T0 + 2000)).body.shares.length, 0, "the sender's inbox is empty");
+  assert.equal((await call(env, "GET", "shares", "b", null, T0 + 15 * 86400000)).body.shares.length, 0, "older than 14 days drops out");
+  await call(env, "POST", "shares/seen", "b", { ids: [inbox[0].id] }, T0 + 3000);
+  assert.equal((await call(env, "GET", "shares", "b", null, T0 + 4000)).body.shares.length, 1, "seen removes it");
+  await env.PREP_ARENA_DB.batch(S.socialDeleteStmts(env.PREP_ARENA_DB, uh("a")));
+  assert.equal((await call(env, "GET", "shares", "b", null, T0 + 5000)).body.shares.length, 0, "Leave Arena deletes what the leaver sent");
+});
+
+test("Leave Arena works on a database that never had the shares table", async () => {
+  const env = await envWith("a");
+  env.PREP_ARENA_DB.db.exec("DROP TABLE IF EXISTS social_shares");
+  await env.PREP_ARENA_DB.batch(S.socialDeleteStmts(env.PREP_ARENA_DB, uh("a")));
+});

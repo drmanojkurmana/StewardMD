@@ -19,7 +19,7 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
   `maik-apex`, `bonsai-27b`, `bonsai2-27b`
   (`medmo-4b` / MAiK Cortex removed 2026-09-23). Tenth pack 2026-09-25: `mimo-cortex-9b`, a new
   "MAiK Cortex" (MiMo V2.6 Distill Qwen 9B, Q4_1, 5.94 GB, qwen35, Labs, 12 GB phones, unmeasured). EVERY text pack reads the on-device book
-  (`kb/ai/maik-lite-rag.js` BM25 retrieval, `kb/ai/maik-lite-kb-store.js` 38 MB asset): `ragEligible`
+  (`kb/ai/maik-lite-rag.js` BM25 retrieval, `kb/ai/maik-lite-kb-store.js` 38 MB asset; flag `smd_maik_kb_onco`="1" swaps in the 45 MB `maik-lite-kb-onco1.jsonl` with 13,209 oncology notes, default off, see Decisions 2026-11-21; with flag `smd_maik_book_vec`="1" and the On-phone search pack, `kb/ai/maik-book-vec.js` adds EmbeddingGemma 2 meaning search to the book search when the router names no disease): `ragEligible`
   in `maik-local.js` is capability-based and reads `CAPS[pack].kb` (changed 2026-09-18 from
   Lite-only). The whole-answer wording gate was replaced for these packs by claim-level grounding
   (`kb/ai/maik-grounding.js`): each factual claim is verified against the retrieved passages and an

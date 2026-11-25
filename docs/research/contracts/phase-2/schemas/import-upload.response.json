@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/contracts/phase-2/schemas/import-upload.response.json",
+  "title": "POST /v1/projects/{projectId}/import-uploads response",
+  "description": "Contract addition 2026-11-23 (integration, see ../contract-additions.md): multipart upload of one reference file (form field file, filename extension .ris, .bib, .bibtex or .csv), 1 byte to 5 MiB. Owner, editor or analyst only (same gate as POST /imports). The API stores the bytes in private R2 at projects/{projectId}/imports/{sha256}.{ext} and returns the storageKey; the screen then calls POST /v1/projects/{projectId}/imports with {format, storageKey}. Content parsing happens in the import step, not here. Re-uploading identical bytes reuses the same key. Audit event: import_uploaded. Errors: 400 invalid_multipart / missing_file, 413 file_size, 415 file_type, 403 not_member (role too weak), 404 project_not_found (unknown project or non-member), 503 storage_unavailable (no R2 binding).",
+  "type": "object",
+  "required": ["storageKey", "sha256", "bytes"],
+  "additionalProperties": false,
+  "properties": {
+    "storageKey": {
+      "type": "string",
+      "pattern": "^projects/[^/]+/imports/[0-9a-f]{64}\\.(ris|bib|bibtex|csv)$"
+    },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "bytes": { "type": "integer", "minimum": 1, "maximum": 5242880 }
+  }
+}

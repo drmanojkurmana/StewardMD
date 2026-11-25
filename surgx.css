@@ -409,21 +409,58 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 
 /* ── procedure steps ──────────────────────────────────────────────────────── */
 
-#surgxRoot .sgx-step { display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid var(--sgx-line); }
-#surgxRoot .sgx-step:first-child { border-top: none; }
-#surgxRoot .sgx-step .n {
-  flex: 0 0 auto; width: 25px; height: 25px; border-radius: 50%;
-  background: var(--sgx-steel-soft); color: var(--sgx-steel);
-  font: 700 12px/25px var(--sgx-mono); text-align: center;
+/* Set like an operative atlas: a serif step title over a clean sans body, a ringed serif numeral,
+   the opening action of each instruction in bold, and labelled hazard lines. Newsreader and Inter
+   are both bundled in assets/fonts, so nothing loads from the network. */
+@font-face {
+  font-family: "SGX Serif"; font-style: normal; font-weight: 200 800; font-display: swap;
+  src: url("assets/fonts/newsreader-latin.woff2") format("woff2");
 }
-#surgxRoot .sgx-step.crit .n { background: var(--sgx-bad-bg); color: var(--sgx-bad); }
+#surgxRoot {
+  --sgx-serif: "SGX Serif", "Newsreader", Georgia, "Times New Roman", serif;
+  --sgx-text: "Inter Variable", var(--sgx-sans);
+  --sgx-body: #2B3A44;
+}
+#surgxRoot .sgx-step { display: flex; gap: 14px; padding: 18px 0 16px; border-top: 1px solid var(--sgx-line); }
+#surgxRoot .sgx-step:first-child { border-top: none; padding-top: 8px; }
+#surgxRoot .sgx-step .n {
+  flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%; box-sizing: border-box;
+  border: 1.5px solid var(--sgx-steel); background: var(--sgx-surface); color: var(--sgx-steel);
+  font: 600 15px/29px var(--sgx-serif); text-align: center; font-variant-numeric: lining-nums tabular-nums;
+}
+#surgxRoot .sgx-step.crit .n { border-color: var(--sgx-bad); color: var(--sgx-bad); background: var(--sgx-bad-bg); }
 #surgxRoot .sgx-step .b { flex: 1 1 auto; min-width: 0; }
-#surgxRoot .sgx-step .t { font: 650 14px/1.35 var(--sgx-sans); }
-#surgxRoot .sgx-step .w { margin-top: 4px; font: 500 12.5px/1.55 var(--sgx-sans); color: var(--sgx-muted); }
-#surgxRoot .sgx-step ul { margin: 7px 0 0; padding-left: 17px; }
-#surgxRoot .sgx-step li { font: 500 13px/1.55 var(--sgx-sans); margin: 3px 0; }
-#surgxRoot .sgx-step .risk { margin-top: 7px; font: 600 12px/1.5 var(--sgx-sans); color: var(--sgx-bad); }
-#surgxRoot .sgx-step .pit { margin-top: 6px; font: 500 12px/1.5 var(--sgx-sans); color: var(--sgx-warn); }
+#surgxRoot .sgx-step .t {
+  font: 650 18px/1.3 var(--sgx-serif); letter-spacing: -.005em; color: var(--sgx-ink);
+  display: flex; align-items: baseline; gap: 6px; text-wrap: balance;
+}
+#surgxRoot .sgx-step .t .material-symbols-rounded { font-size: 18px; color: var(--sgx-bad); align-self: center; }
+#surgxRoot .sgx-step .w { margin-top: 6px; font: italic 400 15.5px/1.55 var(--sgx-serif); color: var(--sgx-body); }
+#surgxRoot .sgx-step ol.how { list-style: none; margin: 10px 0 0; padding: 0; counter-reset: sgxhow; }
+#surgxRoot .sgx-step ol.how li {
+  position: relative; padding-left: 22px; margin: 7px 0; counter-increment: sgxhow;
+  font: 450 15px/1.6 var(--sgx-text); color: var(--sgx-ink);
+}
+#surgxRoot .sgx-step ol.how li::before {
+  content: counter(sgxhow); position: absolute; left: 0; top: .2em; width: 15px;
+  font: 700 11px/1.6 var(--sgx-text); color: var(--sgx-steel); text-align: right; font-variant-numeric: tabular-nums;
+}
+#surgxRoot .sgx-step ol.how li b.lead { font-weight: 700; color: var(--sgx-ink); }
+#surgxRoot .sgx-step .emph {
+  margin-top: 10px; padding: 9px 12px; background: var(--sgx-steel-soft); border-radius: 8px;
+  font: 600 14px/1.55 var(--sgx-text); color: var(--sgx-ink);
+}
+/* high-yield bolding from reasoning.js medFormat (same rule as the Knowledge Library: bold ink, never colour) */
+#surgxRoot .sgx-step [class^="md-"]:not(.md-hi) { font-weight: 700; color: inherit; }  /* md-hi = another open article's terms, not ours */
+#surgxRoot .sgx-step .risk, #surgxRoot .sgx-step .pit { margin-top: 9px; font: 500 13.5px/1.55 var(--sgx-text); }
+#surgxRoot .sgx-step .risk { color: var(--sgx-bad); }
+#surgxRoot .sgx-step .pit { color: var(--sgx-warn); }
+#surgxRoot .sgx-step .risk .lb, #surgxRoot .sgx-step .pit .lb {
+  display: inline-flex; align-items: center; gap: 3px; margin-right: 7px;
+  font: 750 11px/1 var(--sgx-text); letter-spacing: .08em; text-transform: uppercase; vertical-align: 1px;
+}
+#surgxRoot .sgx-step .lb .material-symbols-rounded { font-size: 15px; }
+body.dark #surgxRoot, body.v3-dark #surgxRoot { --sgx-body: #C9D4DA; }
 
 #surgxRoot .sgx-tabs {
   display: flex; gap: 18px; overflow-x: auto; padding: 0 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none;
@@ -440,6 +477,29 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 
 #surgxRoot .sgx-media { margin: 10px 0; }
 #surgxRoot .sgx-media img, #surgxRoot .sgx-media svg { width: 100%; height: auto; display: block; border-radius: var(--sgx-r-ctl); }
+#surgxRoot .sgx-embed { aspect-ratio: 16 / 9; border-radius: var(--sgx-r-ctl); overflow: hidden; background: #000; }
+#surgxRoot .sgx-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
+/* App-owned full screen (surgx-screens.js fsOpen). The button sits over the player's own fullscreen
+   button, which Android's WebView ignores. Semi-transparent so the frame under it still reads. */
+#surgxRoot .sgx-embed, #surgxRoot .sgx-pic { position: relative; }
+#surgxRoot .sgx-fs {
+  position: absolute; right: 4px; bottom: 4px; z-index: 2; width: 44px; height: 44px; padding: 0;
+  display: grid; place-items: center; border: 0; border-radius: 12px; cursor: pointer;
+  background: rgba(0, 0, 0, .28); color: #fff; -webkit-tap-highlight-color: transparent;
+}
+#surgxRoot .sgx-fs:active { background: rgba(0, 0, 0, .5); }
+#surgxRoot .sgx-fs-on {
+  position: fixed; inset: 0; z-index: 2147483000; margin: 0; border-radius: 0; aspect-ratio: auto;
+  background: #000; display: flex; align-items: center; justify-content: center;
+}
+#surgxRoot .sgx-fs-on img { width: 100%; height: 100%; object-fit: contain; border-radius: 0; }
+#surgxRoot .sgx-fs-on .sgx-fs { right: max(10px, env(safe-area-inset-right)); bottom: max(10px, env(safe-area-inset-bottom)); }
+/* Phone upright: turn the clip sideways so it fills the screen without needing auto-rotate. The size comes
+   from fsSize() because the app zooms <html> (0.95) and 100vh under that zoom falls short of the screen. */
+@media (orientation: portrait) {
+  #surgxRoot .sgx-fs-on { inset: auto; top: 50%; left: 50%; width: var(--sgx-fs-w, 100vh); height: var(--sgx-fs-h, 100vw); transform: translate(-50%, -50%) rotate(90deg); }
+  #surgxRoot .sgx-fs-on .sgx-fs { right: 10px; bottom: 10px; }
+}
 #surgxRoot .sgx-media .cap { margin-top: 6px; font: 500 11.5px/1.5 var(--sgx-sans); color: var(--sgx-muted); }
 #surgxRoot .sgx-media .attr { margin-top: 3px; font: 500 10.5px/1.4 var(--sgx-sans); color: var(--sgx-faint); }
 #surgxRoot .sgx-media.pending {
@@ -644,3 +704,41 @@ body.dark #surgxRoot .sgx-hero-logo, body.v3-dark #surgxRoot .sgx-hero-logo { fi
 body.dark #surgxRoot .sgx-secs, body.v3-dark #surgxRoot .sgx-secs { box-shadow: 0 0 0 1px var(--sgx-line); }
 @media (min-width: 720px) { #surgxRoot .sgx-hero { padding: calc(env(safe-area-inset-top, 0px) + 70px) 24px 6px; } #surgxRoot .sgx-hero-mark { font-size: 34px; } }
 @media (prefers-reduced-motion: reduce) { #surgxRoot .sgx-hero-close { transition: none; } #surgxRoot .sgx-hero-close:active { transform: none; } }
+
+/* iPad (owner 2026-11-21: "SurgX is not iPad optimised", it read stretched at 960px): one 700px reading column (renders wider under the app's iPad text scale),
+   and the top bar, section tabs, sticky bar and home hero line up with that same column instead of the screen edges. */
+@media (min-width: 700px) {
+  #surgxRoot .sgx-wrap { max-width: 700px; padding-left: 0; padding-right: 0; }
+  #surgxRoot .sgx-head,
+  #surgxRoot .sgx-tabs,
+  #surgxRoot .sgx-sticky { padding-left: max(16px, calc((100% - 700px) / 2)); padding-right: max(16px, calc((100% - 700px) / 2)); }
+  #surgxRoot .sgx-hero { max-width: 700px; padding-left: 0; padding-right: 0; }
+  #surgxRoot .sgx-hero-close { right: max(16px, calc((100% - 700px) / 2)); }
+}
+
+/* Procedure sections as clear buttons (owner 2026-11-21: users did not see the text tab row as buttons and never reached
+   Steps). Numbered, bordered, wrapping so nothing hides off-screen; Steps highlighted with its count; a Next button
+   ends each section. */
+#surgxRoot .sgx-secnav { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 16px; background: var(--sgx-room-top); border-bottom: 1px solid var(--sgx-line); }
+#surgxRoot .sgx-secbtn { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0 14px 0 6px; border-radius: 20px; border: 1px solid var(--sgx-line); background: var(--sgx-surface); color: var(--sgx-ink); font: 600 14px/1 var(--sgx-sans); cursor: pointer; box-shadow: 0 1px 0 rgba(15,94,85,.10), 0 2px 6px rgba(16,48,59,.06); transition: transform .1s var(--sgx-ease, ease); }
+#surgxRoot .sgx-secbtn .n { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--sgx-steel-soft); color: var(--sgx-primary); font: 700 12.5px/1 var(--sgx-sans); }
+#surgxRoot .sgx-secbtn .ct { margin-left: 2px; padding: 3px 7px; border-radius: 10px; background: var(--sgx-primary); color: #fff; font: 700 11.5px/1 var(--sgx-sans); }
+#surgxRoot .sgx-secbtn:active { transform: translateY(1px); }
+#surgxRoot .sgx-secbtn.on { background: var(--sgx-primary); border-color: var(--sgx-primary); color: #fff; box-shadow: none; }
+#surgxRoot .sgx-secbtn.on .n { background: rgba(255,255,255,.22); color: #fff; }
+#surgxRoot .sgx-secbtn.on .ct { background: #fff; color: var(--sgx-primary); }
+#surgxRoot .sgx-secbtn.steps:not(.on) { border-color: var(--sgx-primary); color: var(--sgx-primary); }
+#surgxRoot .sgx-secbtn:focus-visible, #surgxRoot .sgx-nextsec:focus-visible, #surgxRoot .sgx-tosteps:focus-visible { outline: 2px solid var(--sgx-primary); outline-offset: 2px; }
+#surgxRoot .sgx-nextsec { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-height: 54px; margin: 14px 0 4px; padding: 0 18px; border: none; border-radius: var(--sgx-r, 14px); background: var(--sgx-primary); color: #fff; font: 700 16px/1.2 var(--sgx-sans); text-align: left; cursor: pointer; box-shadow: 0 2px 0 rgba(0,0,0,.18), 0 6px 14px rgba(16,48,59,.16); }
+#surgxRoot .sgx-nextsec:active { transform: translateY(1px); }
+#surgxRoot .sgx-tosteps { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 46px; margin: 4px 0 8px; border: 1px solid var(--sgx-primary); border-radius: var(--sgx-r, 14px); background: transparent; color: var(--sgx-primary); font: 700 14.5px/1 var(--sgx-sans); cursor: pointer; }
+body.dark #surgxRoot .sgx-secbtn.on .ct, body.v3-dark #surgxRoot .sgx-secbtn.on .ct { color: #0b1a1d; }
+@media (min-width: 700px) { #surgxRoot .sgx-secnav { padding-left: max(16px, calc((100% - 700px) / 2)); padding-right: max(16px, calc((100% - 700px) / 2)); } }
+@media (prefers-reduced-motion: reduce) { #surgxRoot .sgx-secbtn, #surgxRoot .sgx-nextsec { transition: none; } }
+
+/* Owner 2026-11-21: sections as ONE horizontal sliding row, not wrapped lines. Snap scrolling, a soft fade at the right
+   edge says there is more, and the active button is scrolled into view after every change (surgx-screens.js). */
+#surgxRoot .sgx-secnav { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x proximity; scroll-padding-left: 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent); }
+#surgxRoot .sgx-secnav::-webkit-scrollbar { display: none; }
+#surgxRoot .sgx-secbtn { flex: 0 0 auto; scroll-snap-align: start; white-space: nowrap; }
+@media (min-width: 700px) { #surgxRoot .sgx-secnav { scroll-padding-left: max(16px, calc((100% - 700px) / 2)); } }

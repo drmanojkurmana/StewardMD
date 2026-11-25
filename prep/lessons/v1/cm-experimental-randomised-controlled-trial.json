@@ -14,13 +14,45 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Protocol drawn up"},
-     {"id": "b", "label": "Populations selected"},
-     {"id": "c", "label": "Randomisation"},
-     {"id": "d", "label": "Intervention applied"},
-     {"id": "e", "label": "Follow-up and assessment"}
+     {
+      "id": "a",
+      "label": "Protocol drawn up"
+     },
+     {
+      "id": "b",
+      "label": "Populations selected"
+     },
+     {
+      "id": "c",
+      "label": "Randomisation"
+     },
+     {
+      "id": "d",
+      "label": "Intervention applied"
+     },
+     {
+      "id": "e",
+      "label": "Follow-up and assessment"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
    }
   },
   {
@@ -29,12 +61,27 @@
    "say": "Paper before patients. The protocol fixes aims, eligibility, sample size, allocation, treatments and responsibilities in advance, and pilot runs expose flaws early. Multi-centre trials collapse without one. Once agreed, deviation itself becomes a source of bias.",
    "vis": {
     "kind": "table",
-    "cols": ["Protocol fixes", "Before enrolment"],
+    "cols": [
+     "Protocol fixes",
+     "Before enrolment"
+    ],
     "rows": [
-     ["Aims and questions", "What the trial must answer"],
-     ["Eligibility and sample size", "Who enters, how many"],
-     ["Allocation and treatments", "How groups form and differ"],
-     ["Schedules and responsibilities", "Who does what, when"]
+     [
+      "Aims and questions",
+      "What the trial must answer"
+     ],
+     [
+      "Eligibility and sample size",
+      "Who enters, how many"
+     ],
+     [
+      "Allocation and treatments",
+      "How groups form and differ"
+     ],
+     [
+      "Schedules and responsibilities",
+      "Who does what, when"
+     ]
     ]
    }
   },
@@ -46,11 +93,19 @@
     "kind": "compare",
     "left": {
      "title": "Reference population",
-     "points": ["Results should apply here", "May be a whole city or one group", "Defined by the research question"]
+     "points": [
+      "Results should apply here",
+      "May be a whole city or one group",
+      "Defined by the research question"
+     ]
     },
     "right": {
      "title": "Study population",
-     "points": ["Actually enrolled and randomised", "Consenting and eligible volunteers", "Should mirror the reference group"]
+     "points": [
+      "Actually enrolled and randomised",
+      "Consenting and eligible volunteers",
+      "Should mirror the reference group"
+     ]
     }
    }
   },
@@ -60,24 +115,36 @@
    "say": "Chance allocates here, after consent and eligibility. Randomisation kills selection bias and scatters known and unknown confounders alike, something matching can never promise for unmeasured factors. Stratify first when age or sex must balance exactly.",
    "vis": {
     "kind": "table",
-    "cols": ["Property", "Effect"],
+    "cols": [
+     "Property",
+     "Effect"
+    ],
     "rows": [
-     ["Equal chance of either group", "Selection bias eliminated"],
-     ["Unknown factors scattered evenly", "Comparability beyond matching"],
-     ["Done after consent", "No post-randomisation exclusions by design"]
+     [
+      "Equal chance of either group",
+      "Selection bias eliminated"
+     ],
+     [
+      "Unknown factors scattered evenly",
+      "Comparability beyond matching"
+     ],
+     [
+      "Done after consent",
+      "No post-randomisation exclusions by design"
+     ]
     ]
    }
   },
   {
-    "tx": "Eligible people who have already consented are separated into study and control groups by **random number allocation**, usually taken from a printed table. That step removes selection bias and spreads known confounders together with unknown ones, something matching cannot guarantee. Where age or sex must stay balanced, stratification creates those subgroups first, and the draw happens inside each stratum only after that.",
-    "say": "Eligible people who have already consented are separated into study and control groups by random number allocation, usually taken from a printed table. That step removes selection bias and spreads known confounders together with unknown ones, something matching cannot guarantee. Where age or sex must stay balanced, stratification creates those subgroups first, and the draw happens inside each stratum only after that.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n194-cm-experimental-randomised-controlled-trial.webp",
-      "alt": "Eligible consenting participants divided by random numbers into a study group and a control group",
-      "caption": "After eligibility and consent, random numbers allocate participants to the study group or the control group. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Eligible people who have already consented are separated into study and control groups by **random number allocation**, usually taken from a printed table. That step removes selection bias and spreads known confounders together with unknown ones, something matching cannot guarantee. Where age or sex must stay balanced, stratification creates those subgroups first, and the draw happens inside each stratum only after that.",
+   "say": "Eligible people who have already consented are separated into study and control groups by random number allocation, usually taken from a printed table. That step removes selection bias and spreads known confounders together with unknown ones, something matching cannot guarantee. Where age or sex must stay balanced, stratification creates those subgroups first, and the draw happens inside each stratum only after that.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n194-cm-experimental-randomised-controlled-trial.webp",
+    "alt": "Eligible consenting participants divided by random numbers into a study group and a control group",
+    "caption": "After eligibility and consent, random numbers allocate participants to the study group or the control group. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Manipulation, follow-up and attrition",
@@ -86,12 +153,41 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Study group receives intervention"},
-     {"id": "b", "label": "Control group receives comparator"},
-     {"id": "c", "label": "Equal intensity follow-up"},
-     {"id": "d", "label": "Outcomes assessed in both"}
+     {
+      "id": "a",
+      "label": "Study group receives intervention"
+     },
+     {
+      "id": "b",
+      "label": "Control group receives comparator"
+     },
+     {
+      "id": "c",
+      "label": "Equal intensity follow-up"
+     },
+     {
+      "id": "d",
+      "label": "Outcomes assessed in both"
+     }
     ],
-    "edges": [["a", "b"], ["a", "c"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -100,11 +196,23 @@
    "say": "Knowledge itself biases results three ways: patients report, observers measure, analysts judge. Hide allocation from participants for single blind, add doctors for double, add the analyst for triple. Double blinding dominates practice; death needs it least.",
    "vis": {
     "kind": "table",
-    "cols": ["Design", "Who is blinded"],
+    "cols": [
+     "Design",
+     "Who is blinded"
+    ],
     "rows": [
-     ["Single blind", "Participant only"],
-     ["Double blind", "Participant and doctor"],
-     ["Triple blind", "Participant, doctor and analyst"]
+     [
+      "Single blind",
+      "Participant only"
+     ],
+     [
+      "Double blind",
+      "Participant and doctor"
+     ],
+     [
+      "Triple blind",
+      "Participant, doctor and analyst"
+     ]
     ]
    }
   },
@@ -127,11 +235,19 @@
     "kind": "compare",
     "left": {
      "title": "Placebo control fits when",
-     "points": ["No proven therapy exists", "Outcomes are subjective", "Expectation effects are strong"]
+     "points": [
+      "No proven therapy exists",
+      "Outcomes are subjective",
+      "Expectation effects are strong"
+     ]
     },
     "right": {
      "title": "Active control fits when",
-     "points": ["Proven therapy already exists", "Withholding treatment would harm", "New drug must beat the standard"]
+     "points": [
+      "Proven therapy already exists",
+      "Withholding treatment would harm",
+      "New drug must beat the standard"
+     ]
     }
    }
   },
@@ -141,11 +257,27 @@
    "say": "Two chassis carry trials. Parallel designs keep patients in one arm throughout. Crossover designs switch each patient after washout, halving numbers, but collapse when treatment cures, timing matters, or the disease itself shifts mid-study.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Parallel", "Crossover"],
+    "cols": [
+     "Feature",
+     "Parallel",
+     "Crossover"
+    ],
     "rows": [
-     ["Patient role", "One group throughout", "Own control after switch"],
-     ["Sample needed", "Larger", "Smaller"],
-     ["Fails when", "Groups drift apart", "Cure or stage specific effect"]
+     [
+      "Patient role",
+      "One group throughout",
+      "Own control after switch"
+     ],
+     [
+      "Sample needed",
+      "Larger",
+      "Smaller"
+     ],
+     [
+      "Fails when",
+      "Groups drift apart",
+      "Cure or stage specific effect"
+     ]
     ]
    }
   },
@@ -157,12 +289,65 @@
     "kind": "compare",
     "left": {
      "title": "Allocation concealment",
-     "points": ["Acts before enrolment", "Hides the next assignment", "Blocks recruiter steering"]
+     "points": [
+      "Acts before enrolment",
+      "Hides the next assignment",
+      "Blocks recruiter steering"
+     ]
     },
     "right": {
      "title": "Blinding",
-     "points": ["Acts after enrolment", "Hides the given assignment", "Blocks expectation and observer bias"]
+     "points": [
+      "Acts after enrolment",
+      "Hides the given assignment",
+      "Blocks expectation and observer bias"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Randomisation after eligibility and consent removes selection bias and balances known and unknown confounders. Double blinding, hiding allocation from participants and doctors, is the commonest blinding. Allocation concealment hides the upcoming assignment before enrolment and differs from blinding. Crossover trials need washout and fail if treatment cures. A placebo equalises expectation effects between trial arms.",
+   "say": "High-yield for the exam: Randomisation after eligibility and consent removes selection bias and balances known and unknown confounders. Double blinding, hiding allocation from participants and doctors, is the commonest blinding. Allocation concealment hides the upcoming assignment before enrolment and differs from blinding. Crossover trials need washout and fail if treatment cures. A placebo equalises expectation effects between trial arms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "RCT sequence",
+      "Protocol, population, randomise, intervene, follow up, assess"
+     ],
+     [
+      "Randomisation benefit",
+      "Balances known and unknown confounders by chance"
+     ],
+     [
+      "Stratified randomisation",
+      "Balances age sex within subgroups before allocation"
+     ],
+     [
+      "Double blinding",
+      "Participants and doctors unaware of allocation"
+     ],
+     [
+      "Triple blinding",
+      "Participants, doctors and data analyst unaware"
+     ],
+     [
+      "Allocation concealment",
+      "Sealed opaque envelopes hide upcoming assignment"
+     ],
+     [
+      "Placebo purpose",
+      "Inert look alike equalises expectation effects"
+     ],
+     [
+      "Crossover limitation",
+      "Fails if drug cures or disease changes radically"
+     ]
+    ]
    }
   }
  ],
