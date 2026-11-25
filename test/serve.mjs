@@ -54,7 +54,28 @@ http.createServer((req, res) => {
     // under an api/ folder are served like the bank route serves them (immutable, one year), so offline tests see the
     // HTTP cache the app relies on.
     const immutable = /\/test\/fixtures\/[a-z0-9-]+\/api\/v\d+\/lessons\/media\//.test(fp.split("\\").join("/"));
-    res.writeHead(200, { "content-type": TYPES[extname(fp)] || "application/octet-stream", "cache-control": immutable ? "public, max-age=31536000, immutable" : "no-store, must-revalidate" });
+    const ctype = TYPES[extname(fp)] || "application/octet-stream";
+    const cc = immutable ? "public, max-age=31536000, immutable" : "no-store, must-revalidate";
+    const range = req.headers.range;
+    if (range) {
+      const m = /^bytes=(\d*)-(\d*)$/.exec(range);
+      if (m) {
+        const start = m[1] ? parseInt(m[1], 10) : 0;
+        const end = m[2] ? Math.min(data.length - 1, parseInt(m[2], 10)) : data.length - 1;
+        if (start <= end && start < data.length) {
+          res.writeHead(206, {
+            "content-type": ctype,
+            "cache-control": cc,
+            "accept-ranges": "bytes",
+            "content-range": `bytes ${start}-${end}/${data.length}`,
+            "content-length": end - start + 1
+          });
+          res.end(data.subarray(start, end + 1));
+          return;
+        }
+      }
+    }
+    res.writeHead(200, { "content-type": ctype, "cache-control": cc, "accept-ranges": "bytes" });
     res.end(data);
   });
 }).listen(port, () => console.log(`[serve] ${root} on http://localhost:${port}`));
