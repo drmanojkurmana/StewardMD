@@ -8,6 +8,8 @@
  *  - singleProportion: Normal approximation with optional finite population correction
  *  - singleMean: Normal approximation for a single group mean
  *  - correlation: Fisher z transformation for correlation coefficient
+ *  - caseControl: Fleiss with continuity correction (plan v2), never throws
+ *  - logRankEvents: Schoenfeld events for a time-to-event outcome (plan v2), never throws
  *
  * COPY RULE: Scientific term first, plain meaning in brackets, e.g.:
  *   "Power (chance of detecting a real difference) 80%"
@@ -357,6 +359,65 @@
     };
   }
 
+  /* Plan v2 item 6. These two return { ok, warnings, ... } and never throw.
+   * caseControl: Fleiss with continuity correction (Fleiss 1981, formulas 3.18
+   * and 3.19, as OpenEpi). p0 = proportion of controls exposed, r controls per case.
+   * p0 0.40, OR 2, r 1 gives 133 uncorrected and 144 cases, 144 controls (OpenEpi). */
+  function numOr(v, dflt) { return v === undefined || v === null || v === "" ? dflt : v; }
+
+  function caseControl(opts) {
+    var o = opts || {}, warnings = [];
+    var p0 = o.p0, orv = o.or, r = numOr(o.r, 1), alpha = numOr(o.alpha, 0.05), power = numOr(o.power, 0.8), dropout = numOr(o.dropout, 0);
+    if (!isFin(p0) || p0 <= 0 || p0 >= 1 || !isFin(orv) || orv <= 0 || Math.abs(orv - 1) < 1e-12) {
+      return { ok: false, warnings: ["The odds ratio must differ from 1 and exposure must be between 0% and 100%."] };
+    }
+    if (!isFin(r) || r <= 0 || !isFin(alpha) || alpha <= 0 || alpha >= 1 || !isFin(power) || power <= 0 || power >= 1 ||
+      !isFin(dropout) || dropout < 0 || dropout >= 1) {
+      return { ok: false, warnings: ["Controls per case must be above 0; significance, power and dropout must be between 0% and 100%."] };
+    }
+    var p1 = p0 * orv / (1 + p0 * (orv - 1));
+    var pbar = (p1 + r * p0) / (r + 1);
+    var za = probit(1 - alpha / 2), zb = probit(power);
+    var diff = Math.abs(p1 - p0);
+    var n = Math.pow(za * Math.sqrt((r + 1) * pbar * (1 - pbar)) + zb * Math.sqrt(r * p1 * (1 - p1) + p0 * (1 - p0)), 2) / (r * diff * diff);
+    var nc = n / 4 * Math.pow(1 + Math.sqrt(1 + 2 * (r + 1) / (n * r * diff)), 2);
+    var cases = Math.ceil(nc / (1 - dropout) - 1e-9);
+    var controls = Math.ceil(r * cases - 1e-9);
+    if (r > 4) warnings.push("More than 4 controls per case adds little power.");
+    return {
+      ok: true, warnings: warnings, p1: p1, method: "Fleiss with continuity correction",
+      casesUncorrected: Math.ceil(n - 1e-9), cases: cases, controls: controls, total: cases + controls,
+      paragraph: "Assuming " + pctStr(p0) + " of controls are exposed and an expected odds ratio of " + numStr(orv) +
+        " (" + pctStr(p1) + " of cases exposed), with " + pctStr(alpha) + " significance (alpha), " + pctStr(power) +
+        " power (chance of detecting a real difference) and " + numStr(r) + " control" + (r === 1 ? "" : "s") + " per case, " +
+        cases + " cases and " + controls + " controls are needed (Fleiss method with continuity correction" +
+        (dropout > 0 ? ", allowing for " + pctStr(dropout) + " incomplete records" : "") + ")."
+    };
+  }
+
+  /* logRankEvents: Schoenfeld (1983). events = (z(1 - alpha/2) + z(power))^2 / (a (1 - a) (ln HR)^2),
+   * a = proportion allocated to one arm. Patients = events / probEvent / (1 - dropout) when probEvent is given. */
+  function logRankEvents(opts) {
+    var o = opts || {};
+    var hr = o.hr, alpha = numOr(o.alpha, 0.05), power = numOr(o.power, 0.8), a = numOr(o.allocation, 0.5), dropout = numOr(o.dropout, 0), pe = o.probEvent;
+    if (!isFin(hr) || hr <= 0) return { ok: false, warnings: ["Enter the hazard ratio you expect, for example 0.7."] };
+    if (Math.abs(hr - 1) < 1e-12) return { ok: false, warnings: ["A hazard ratio of 1 means no difference; choose the smallest difference that matters."] };
+    if (!isFin(alpha) || alpha <= 0 || alpha >= 1 || !isFin(power) || power <= 0 || power >= 1 || !isFin(a) || a <= 0 || a >= 1 ||
+      !isFin(dropout) || dropout < 0 || dropout >= 1 || (pe != null && pe !== "" && (!isFin(pe) || pe <= 0 || pe > 1))) {
+      return { ok: false, warnings: ["Significance, power, allocation, dropout and the event proportion must be between 0% and 100%."] };
+    }
+    var za = probit(1 - alpha / 2), zb = probit(power), lhr = Math.log(hr);
+    var events = Math.ceil((za + zb) * (za + zb) / (a * (1 - a) * lhr * lhr) - 1e-9);
+    var total = isFin(pe) ? Math.ceil(events / pe / (1 - dropout) - 1e-9) : null;
+    return {
+      ok: true, warnings: total === null ? ["Add the expected proportion with the event by the end of follow-up to get the number of patients."] : [],
+      method: "Schoenfeld", events: events, total: total,
+      paragraph: "To detect a hazard ratio of " + numStr(hr) + " with " + pctStr(alpha) + " significance (alpha) and " + pctStr(power) +
+        " power (chance of detecting a real difference), " + events + " events are needed (Schoenfeld method)" +
+        (total !== null ? "; with " + pctStr(pe) + " of patients expected to have the event" + (dropout > 0 ? " and " + pctStr(dropout) + " lost to follow-up" : "") + ", " + total + " patients will be enrolled." : ".")
+    };
+  }
+
   var SAMPLESIZE = {
     name: NAME,
     version: VERSION,
@@ -365,6 +426,8 @@
     singleProportion: singleProportion,
     singleMean: singleMean,
     correlation: correlation,
+    caseControl: caseControl,
+    logRankEvents: logRankEvents,
     probit: probit
   };
 

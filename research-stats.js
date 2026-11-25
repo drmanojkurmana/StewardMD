@@ -1197,7 +1197,8 @@
     wilcoxon: ["Wilcoxon signed-rank test", "(the paired differences were not normally distributed, so we compared the ranks of the differences)"],
     mcnemar: ["McNemar test", "(the outcome was paired and binary, so we compared discordant pairs)"],
     pearson: ["Pearson correlation", "(both variables were normally distributed, so we used a linear correlation)"],
-    spearman: ["Spearman rank correlation", "(a variable was not normally distributed, so we used a rank correlation)"]
+    spearman: ["Spearman rank correlation", "(a variable was not normally distributed, so we used a rank correlation)"],
+    km_logrank: ["Kaplan-Meier with log-rank test (compares time to the event between groups)", "(the outcome was the time until an event, with some patients not yet having it, so we compared survival curves)"]
   };
 
   function allNormal(normal) {
@@ -1215,8 +1216,9 @@
     var outcomeType, groups, paired, normal, smallExpected, key;
     if (!opts || typeof opts !== "object") bad("chooseTest needs an options object");
     outcomeType = opts.outcomeType;
+    if (outcomeType === "survival") return { test: "km_logrank", label: TEST_TEXT.km_logrank[0], why: TEST_TEXT.km_logrank[1] };
     if (outcomeType !== "numeric" && outcomeType !== "binary" && outcomeType !== "categorical") {
-      bad("chooseTest needs an outcome type of numeric, binary, or categorical");
+      bad("chooseTest needs an outcome type of numeric, binary, categorical, or survival");
     }
     groups = opts.groups;
     if (groups === null || groups === undefined || groups === "") groups = 0;
@@ -2171,6 +2173,444 @@
     return "";
   }
 
+  /* ---------- Survival and matched analysis (plan v2 items 4 and 6) ----------
+   * Every function here returns { ok, warnings, ... } and never throws on bad data.
+   * Kaplan-Meier and the log-rank test follow R survival::survfit and survdiff
+   * (rho = 0); Cox follows coxph (Efron ties by default, Newton-Raphson with
+   * step-halving, 20 iterations, convergence on the relative log-likelihood
+   * change below 1e-9). Reference values: docs/research/stats-reference.R. */
+
+  var EVENT_YES = { "1": 1, "yes": 1, "y": 1, "true": 1, "dead": 1, "died": 1, "event": 1 };
+  var EVENT_NO = { "0": 1, "no": 1, "n": 1, "false": 1, "alive": 1, "censored": 1 };
+  var PH_REMINDER = "Hazard ratios assume the effect stays the same over time. If the survival curves cross, ask your statistician before reporting.";
+
+  function coerceEvent(v) {
+    var u;
+    if (v === true) return 1;
+    if (v === false) return 0;
+    if (v === null || v === undefined) return null;
+    u = String(v).replace(/^\s+|\s+$/g, "").toLowerCase();
+    if (EVENT_YES[u]) return 1;
+    if (EVENT_NO[u]) return 0;
+    return null;
+  }
+
+  function coerceTime(v) {
+    var n = typeof v === "number" ? (isFinite(v) ? v : null) : parseNumber(v);
+    if (n === null || n < 0) return null;
+    return n;
+  }
+
+  function excludedMsg(n) {
+    return n + " rows were left out because the time or event value was missing or invalid.";
+  }
+
+  /* Clean survival rows: [{ t, e, g }] plus the excluded count. */
+  function survRows(times, events, groups) {
+    var rows = [], nEx = 0, i, t, e, g;
+    if (!isArray(times) || !isArray(events) || times.length !== events.length) return null;
+    if (groups != null && (!isArray(groups) || groups.length !== times.length)) return null;
+    for (i = 0; i < times.length; i++) {
+      t = coerceTime(times[i]);
+      e = coerceEvent(events[i]);
+      g = groups == null ? "All" : (isMissingToken(groups[i]) ? null : trim(groups[i]));
+      if (t === null || e === null || g === null) { nEx++; continue; }
+      rows.push({ t: t, e: e, g: g });
+    }
+    return { rows: rows, nExcluded: nEx };
+  }
+
+  function groupNames(rows) {
+    var seen = {}, out = [], i;
+    for (i = 0; i < rows.length; i++) {
+      if (!seen.hasOwnProperty(rows[i].g)) { seen[rows[i].g] = 1; out.push(rows[i].g); }
+    }
+    return sortLevels(out);
+  }
+
+  function kmCurve(rows, z, confType) {
+    var sorted = rows.slice().sort(function (a, b) { return a.t - b.t; });
+    var steps = [], n = sorted.length, s = 1, v = 0, i = 0, t, d, c, atRisk, se, lo, hi, xx, k;
+    while (i < sorted.length) {
+      t = sorted[i].t; d = 0; c = 0; atRisk = n;
+      while (i < sorted.length && sorted[i].t === t) {
+        if (sorted[i].e === 1) d++; else c++;
+        i++;
+      }
+      if (d > 0) {
+        s = s * (1 - d / atRisk);
+        v = atRisk > d ? v + d / (atRisk * (atRisk - d)) : Infinity;
+      }
+      se = isFin(v) ? Math.sqrt(v) : null;
+      lo = null; hi = null;
+      if (se !== null && s > 0) {
+        if (confType === "log-log") {
+          if (s < 1) {
+            k = Math.log(s);
+            xx = [Math.pow(s, Math.exp(z * se / k)), Math.pow(s, Math.exp(-z * se / k))];
+            lo = Math.min(xx[0], xx[1]); hi = Math.max(xx[0], xx[1]);
+          }
+        } else if (confType === "plain") {
+          lo = Math.max(0, s - z * se * s); hi = Math.min(1, s + z * se * s);
+        } else {
+          lo = s * Math.exp(-z * se); hi = Math.min(1, s * Math.exp(z * se));
+        }
+      }
+      steps.push({ t: t, atRisk: atRisk, events: d, censored: c, survival: s, seLogS: se, ciLower: lo, ciUpper: hi });
+      n -= d + c;
+    }
+    return steps;
+  }
+
+  /* R quantile.survfit rule: first time the curve is at or below 0.5; when it
+   * equals 0.5 (within tolerance) the midpoint to the next drop. */
+  function curveMedian(steps, field) {
+    var tol = 1.490116e-8, i, j, val;
+    for (i = 0; i < steps.length; i++) {
+      val = steps[i][field];
+      if (val === null || val === undefined) continue;
+      if (Math.abs(val - 0.5) < tol) {
+        for (j = i + 1; j < steps.length; j++) {
+          if (steps[j][field] !== null && steps[j][field] < val - tol) return (steps[i].t + steps[j].t) / 2;
+        }
+        return steps[i].t;
+      }
+      if (val < 0.5) return steps[i].t;
+    }
+    return null;
+  }
+
+  function kaplanMeier(times, events, groups, opts) {
+    var o = opts || {}, warnings = [], prep, names, out = [], gi, rows, steps, i, nEv, conf, confType, z;
+    prep = survRows(times, events, groups);
+    if (!prep) return { ok: false, warnings: ["Times, events and groups must be lists of the same length."] };
+    confType = o.confType === "log-log" || o.confType === "plain" ? o.confType : "log";
+    conf = isFin(o.confLevel) && o.confLevel > 0 && o.confLevel < 1 ? o.confLevel : 0.95;
+    z = normalQuantile(1 - (1 - conf) / 2);
+    if (prep.nExcluded) warnings.push(excludedMsg(prep.nExcluded));
+    if (!prep.rows.length) return { ok: false, warnings: warnings.concat(["No usable rows."]), nExcluded: prep.nExcluded };
+    names = groupNames(prep.rows);
+    for (gi = 0; gi < names.length; gi++) {
+      rows = [];
+      for (i = 0; i < prep.rows.length; i++) if (prep.rows[i].g === names[gi]) rows.push(prep.rows[i]);
+      steps = kmCurve(rows, z, confType);
+      nEv = 0;
+      for (i = 0; i < rows.length; i++) nEv += rows[i].e;
+      if (rows.length < 5) warnings.push("Group " + names[gi] + " has only " + rows.length + " patients; treat these numbers as unreliable.");
+      if (!nEv) warnings.push("No one in group " + names[gi] + " had the event, so median survival is not reached.");
+      out.push({
+        name: names[gi], n: rows.length, nEvents: nEv, steps: steps,
+        median: { value: curveMedian(steps, "survival"), lower: curveMedian(steps, "ciLower"), upper: curveMedian(steps, "ciUpper") }
+      });
+    }
+    return { ok: true, warnings: warnings, nExcluded: prep.nExcluded, confType: confType, groups: out };
+  }
+
+  /* Solve A x = b (Gauss-Jordan with partial pivoting). Null when singular. */
+  function solveLinear(A, b) {
+    var n = A.length, M = [], i, j, k, p, tmp, f;
+    for (i = 0; i < n; i++) M.push(A[i].slice().concat([b[i]]));
+    for (i = 0; i < n; i++) {
+      p = i;
+      for (k = i + 1; k < n; k++) if (Math.abs(M[k][i]) > Math.abs(M[p][i])) p = k;
+      if (!(Math.abs(M[p][i]) > 1e-12)) return null;
+      tmp = M[i]; M[i] = M[p]; M[p] = tmp;
+      for (k = 0; k < n; k++) {
+        if (k === i) continue;
+        f = M[k][i] / M[i][i];
+        for (j = i; j <= n; j++) M[k][j] -= f * M[i][j];
+      }
+    }
+    var x = [];
+    for (i = 0; i < n; i++) x.push(M[i][n] / M[i][i]);
+    return x;
+  }
+
+  function invertMatrix(A) {
+    var n = A.length, inv = [], i, j, e, col;
+    for (i = 0; i < n; i++) inv.push([]);
+    for (j = 0; j < n; j++) {
+      e = [];
+      for (i = 0; i < n; i++) e.push(i === j ? 1 : 0);
+      col = solveLinear(A, e);
+      if (!col) return null;
+      for (i = 0; i < n; i++) inv[i][j] = col[i];
+    }
+    return inv;
+  }
+
+  function logRank(times, events, groups) {
+    var prep = survRows(times, events, groups), warnings = [], names, G, obs = [], exp = [], V = [], ns = [],
+      tlist = [], seen = {}, i, j, k, t, nt, dt, ng, dg, totalEv = 0, diff, chi2, df, sol;
+    if (!prep) return { ok: false, warnings: ["Times, events and groups must be lists of the same length."] };
+    if (prep.nExcluded) warnings.push(excludedMsg(prep.nExcluded));
+    names = groupNames(prep.rows);
+    G = names.length;
+    if (G < 2) return { ok: false, warnings: warnings.concat(["The log-rank test needs at least two groups."]) };
+    for (i = 0; i < G; i++) { obs.push(0); exp.push(0); ns.push(0); V.push([]); for (j = 0; j < G; j++) V[i].push(0); }
+    for (i = 0; i < prep.rows.length; i++) {
+      ns[names.indexOf(prep.rows[i].g)]++;
+      if (prep.rows[i].e) { totalEv++; if (!seen[prep.rows[i].t]) { seen[prep.rows[i].t] = 1; tlist.push(prep.rows[i].t); } }
+    }
+    if (!totalEv) return { ok: false, warnings: warnings.concat(["No events yet, so the groups cannot be compared."]) };
+    tlist.sort(function (a, b) { return a - b; });
+    for (k = 0; k < tlist.length; k++) {
+      t = tlist[k]; nt = 0; dt = 0; ng = []; dg = [];
+      for (j = 0; j < G; j++) { ng.push(0); dg.push(0); }
+      for (i = 0; i < prep.rows.length; i++) {
+        if (prep.rows[i].t >= t) {
+          j = names.indexOf(prep.rows[i].g);
+          ng[j]++; nt++;
+          if (prep.rows[i].t === t && prep.rows[i].e) { dg[j]++; dt++; }
+        }
+      }
+      for (j = 0; j < G; j++) {
+        obs[j] += dg[j];
+        exp[j] += ng[j] * dt / nt;
+        if (nt > 1) {
+          for (i = 0; i < G; i++) {
+            V[j][i] += dt * (nt - dt) / (nt - 1) * (ng[j] / nt) * ((i === j ? 1 : 0) - ng[i] / nt);
+          }
+        }
+      }
+    }
+    df = G - 1;
+    diff = []; var Vs = [];
+    for (i = 0; i < df; i++) { diff.push(obs[i] - exp[i]); Vs.push(V[i].slice(0, df)); }
+    sol = solveLinear(Vs, diff);
+    if (!sol) return { ok: false, warnings: warnings.concat(["The groups cannot be compared with these data."]) };
+    chi2 = 0;
+    for (i = 0; i < df; i++) chi2 += diff[i] * sol[i];
+    var table = [];
+    for (j = 0; j < G; j++) {
+      table.push({ group: names[j], n: ns[j], observed: obs[j], expected: exp[j] });
+      if (ns[j] < 5) warnings.push("Group " + names[j] + " has only " + ns[j] + " patients; treat these numbers as unreliable.");
+    }
+    return { ok: true, warnings: warnings, chi2: chi2, df: df, p: chiSqUpper(Math.max(0, chi2), df), table: table };
+  }
+
+  /* Cox partial log-likelihood, score and information at beta. */
+  function coxEval(X, time, ev, beta, efron) {
+    var n = X.length, p = beta.length, eta = [], r = [], i, j, k, l, a, b, loglik = 0,
+      U = [], I = [], order = [], idx, t, risk0, risk1, risk2, d0, d1, d2, dset, nd, frac, den, av;
+    for (j = 0; j < p; j++) { U.push(0); I.push([]); for (k = 0; k < p; k++) I[j].push(0); }
+    for (i = 0; i < n; i++) {
+      a = 0;
+      for (j = 0; j < p; j++) a += X[i][j] * beta[j];
+      eta.push(a); r.push(Math.exp(a)); order.push(i);
+    }
+    order.sort(function (x, y) { return time[x] - time[y]; });
+    /* walk distinct event times; risk set = time >= t */
+    idx = 0;
+    while (idx < n) {
+      t = time[order[idx]];
+      dset = [];
+      for (k = idx; k < n && time[order[k]] === t; k++) if (ev[order[k]]) dset.push(order[k]);
+      var nextIdx = k;
+      if (dset.length) {
+        risk0 = 0; risk1 = []; risk2 = [];
+        d0 = 0; d1 = []; d2 = [];
+        for (j = 0; j < p; j++) { risk1.push(0); d1.push(0); risk2.push([]); d2.push([]); for (k = 0; k < p; k++) { risk2[j].push(0); d2[j].push(0); } }
+        for (k = idx; k < n; k++) {
+          i = order[k];
+          risk0 += r[i];
+          for (j = 0; j < p; j++) {
+            risk1[j] += r[i] * X[i][j];
+            for (l = 0; l < p; l++) risk2[j][l] += r[i] * X[i][j] * X[i][l];
+          }
+        }
+        for (b = 0; b < dset.length; b++) {
+          i = dset[b];
+          loglik += eta[i];
+          d0 += r[i];
+          for (j = 0; j < p; j++) {
+            U[j] += X[i][j];
+            d1[j] += r[i] * X[i][j];
+            for (l = 0; l < p; l++) d2[j][l] += r[i] * X[i][j] * X[i][l];
+          }
+        }
+        nd = dset.length;
+        for (b = 0; b < nd; b++) {
+          frac = efron ? b / nd : 0;
+          den = risk0 - frac * d0;
+          loglik -= Math.log(den);
+          av = [];
+          for (j = 0; j < p; j++) { av.push((risk1[j] - frac * d1[j]) / den); U[j] -= av[j]; }
+          for (j = 0; j < p; j++) {
+            for (l = 0; l < p; l++) I[j][l] += (risk2[j][l] - frac * d2[j][l]) / den - av[j] * av[l];
+          }
+        }
+      }
+      idx = nextIdx;
+    }
+    return { loglik: loglik, U: U, I: I };
+  }
+
+  function cox(rows, opts) {
+    var o = opts || {}, warnings = [], preds, ties, maxIter, eps, conf, z, i, j, k, row, t, e, ok, cols = [],
+      terms = [], X = [], T = [], E = [], nEx = 0, levelsFor = {}, means = [], p, beta, fit, fit0, newBeta,
+      step, it, converged = false, halves, nEv = 0, history = [], inv, coefs = [], lr, tmpVals;
+    if (!isArray(rows) || !o.time || !o.event || !isArray(o.predictors) || !o.predictors.length) {
+      return { ok: false, warnings: ["Pick a time column, an event column and at least one factor."] };
+    }
+    preds = o.predictors;
+    ties = o.ties === "breslow" ? "breslow" : "efron";
+    maxIter = isFin(o.maxIter) && o.maxIter > 0 ? Math.floor(o.maxIter) : 20;
+    eps = isFin(o.eps) && o.eps > 0 ? o.eps : 1e-9;
+    conf = isFin(o.confLevel) && o.confLevel > 0 && o.confLevel < 1 ? o.confLevel : 0.95;
+    z = normalQuantile(1 - (1 - conf) / 2);
+    /* complete cases */
+    var clean = [];
+    for (i = 0; i < rows.length; i++) {
+      row = rows[i] || {};
+      t = coerceTime(row[o.time]);
+      e = coerceEvent(row[o.event]);
+      ok = t !== null && e !== null;
+      var vals = [];
+      for (j = 0; ok && j < preds.length; j++) {
+        if (preds[j].type === "categorical") {
+          if (isMissingToken(row[preds[j].name])) ok = false; else vals.push(trim(row[preds[j].name]));
+        } else {
+          tmpVals = typeof row[preds[j].name] === "number" ? row[preds[j].name] : parseNumber(row[preds[j].name]);
+          if (tmpVals === null || !isFin(tmpVals)) ok = false; else vals.push(tmpVals);
+        }
+      }
+      if (!ok) { nEx++; continue; }
+      clean.push({ t: t, e: e, v: vals });
+    }
+    if (nEx) warnings.push(excludedMsg(nEx));
+    if (!clean.length) return { ok: false, warnings: warnings.concat(["No complete rows to analyse."]), nExcluded: nEx };
+    /* design columns */
+    for (j = 0; j < preds.length; j++) {
+      if (preds[j].type === "categorical") {
+        var lv = [], seenL = {};
+        for (i = 0; i < clean.length; i++) if (!seenL[clean[i].v[j]]) { seenL[clean[i].v[j]] = 1; lv.push(clean[i].v[j]); }
+        lv.sort();
+        var ref = preds[j].reference != null && seenL[String(preds[j].reference)] ? String(preds[j].reference) : lv[0];
+        levelsFor[preds[j].name] = { levels: lv, reference: ref };
+        for (k = 0; k < lv.length; k++) {
+          if (lv[k] === ref) continue;
+          cols.push({ pred: j, level: lv[k] });
+          terms.push({ term: preds[j].name + lv[k], predictor: preds[j].name, level: lv[k] });
+        }
+      } else {
+        cols.push({ pred: j, level: null });
+        terms.push({ term: preds[j].name, predictor: preds[j].name, level: null });
+      }
+    }
+    p = cols.length;
+    if (!p) return { ok: false, warnings: warnings.concat(["Each factor needs at least two different values."]) };
+    for (i = 0; i < clean.length; i++) {
+      var xr = [];
+      for (k = 0; k < p; k++) xr.push(cols[k].level === null ? clean[i].v[cols[k].pred] : (clean[i].v[cols[k].pred] === cols[k].level ? 1 : 0));
+      X.push(xr); T.push(clean[i].t); E.push(clean[i].e); nEv += clean[i].e;
+    }
+    if (!nEv) return { ok: false, warnings: warnings.concat(["No events yet, so the groups cannot be compared."]), n: clean.length, nEvents: 0, nExcluded: nEx };
+    for (k = 0; k < p; k++) {
+      var m = 0;
+      for (i = 0; i < X.length; i++) m += X[i][k];
+      m /= X.length;
+      means.push(m);
+      for (i = 0; i < X.length; i++) X[i][k] -= m;
+    }
+    if (nEv / p < 10) warnings.push("Too few events for this many factors; use fewer factors.");
+    beta = [];
+    for (k = 0; k < p; k++) beta.push(0);
+    fit0 = coxEval(X, T, E, beta, ties === "efron");
+    fit = fit0;
+    history.push(beta.slice());
+    for (it = 1; it <= maxIter; it++) {
+      step = solveLinear(fit.I, fit.U);
+      if (!step) break;
+      newBeta = [];
+      for (k = 0; k < p; k++) newBeta.push(beta[k] + step[k]);
+      var nf = coxEval(X, T, E, newBeta, ties === "efron");
+      halves = 0;
+      while ((!isFin(nf.loglik) || nf.loglik < fit.loglik) && halves < 10) {
+        for (k = 0; k < p; k++) { step[k] /= 2; newBeta[k] = beta[k] + step[k]; }
+        nf = coxEval(X, T, E, newBeta, ties === "efron");
+        halves++;
+      }
+      if (!isFin(nf.loglik)) break;
+      var rel = Math.abs(1 - fit.loglik / nf.loglik);
+      beta = newBeta; var prevLik = fit.loglik; fit = nf;
+      history.push(beta.slice());
+      if (rel < eps) { converged = true; break; }
+      if (Math.abs(fit.loglik - prevLik) < 1e-12) { converged = true; break; }
+    }
+    var iterations = Math.min(it, maxIter);
+    if (!converged) {
+      return { ok: false, warnings: warnings.concat(["The model did not settle on an answer. Do not report a hazard ratio; ask your statistician."]),
+        n: clean.length, nEvents: nEv, nExcluded: nEx, converged: false, iterations: iterations };
+    }
+    inv = invertMatrix(fit.I);
+    var anySep = false;
+    for (k = 0; k < p; k++) {
+      var grew = history.length >= 4;
+      for (j = history.length - 3; grew && j < history.length; j++) {
+        if (!(Math.abs(history[j][k]) > Math.abs(history[j - 1][k]))) grew = false;
+      }
+      var sep = Math.abs(beta[k]) > 15 || (grew && Math.abs(fit.loglik - prevLik) < 1e-6 && Math.abs(beta[k]) > 5);
+      var se = inv && inv[k][k] > 0 ? Math.sqrt(inv[k][k]) : null;
+      if (se === null) sep = true;
+      if (sep) anySep = true;
+      var zz = se ? beta[k] / se : null;
+      coefs.push({
+        term: terms[k].term, predictor: terms[k].predictor, level: terms[k].level,
+        beta: beta[k], se: se, hr: sep ? null : Math.exp(beta[k]),
+        ciLower: sep ? null : Math.exp(beta[k] - z * se), ciUpper: sep ? null : Math.exp(beta[k] + z * se),
+        z: sep ? null : zz, p: sep ? null : 2 * normalUpper(Math.abs(zz)), estimable: !sep
+      });
+    }
+    if (anySep) warnings.push("One group had no events (or only events), so its hazard ratio cannot be estimated.");
+    lr = 2 * (fit.loglik - fit0.loglik);
+    warnings.push(PH_REMINDER);
+    return {
+      ok: true, warnings: warnings, n: clean.length, nEvents: nEv, nExcluded: nEx, converged: true,
+      iterations: iterations, ties: ties, logLik: fit.loglik, logLikNull: fit0.loglik,
+      lrTest: { chi2: lr, df: p, p: chiSqUpper(Math.max(0, lr), p) },
+      levels: levelsFor, coefficients: coefs
+    };
+  }
+
+  function binomLowerTail(k, n) {
+    var s = 0, i;
+    for (i = 0; i <= k; i++) s += Math.exp(logChoose(n, i) - n * Math.LN2);
+    return s;
+  }
+
+  function matchedOr(input, opts) {
+    var b = 0, c = 0, i, ce, co, warnings = [], conf, alpha, pL, pU, orv, lo, hi, p, nEx = 0;
+    conf = opts && isFin(opts.confLevel) && opts.confLevel > 0 && opts.confLevel < 1 ? opts.confLevel : 0.95;
+    alpha = 1 - conf;
+    if (isArray(input)) {
+      for (i = 0; i < input.length; i++) {
+        ce = coerceEvent(input[i] && input[i].caseExposed);
+        co = coerceEvent(input[i] && input[i].controlExposed);
+        if (ce === null || co === null) { nEx++; continue; }
+        if (ce === 1 && co === 0) b++;
+        else if (ce === 0 && co === 1) c++;
+      }
+      if (nEx) warnings.push(nEx + " pairs were left out because an exposure value was missing or invalid.");
+    } else if (input && isFin(input.b) && isFin(input.c) && input.b >= 0 && input.c >= 0 &&
+      Math.floor(input.b) === input.b && Math.floor(input.c) === input.c) {
+      b = input.b; c = input.c;
+    } else {
+      return { ok: false, warnings: ["Give the pairs, or the two discordant counts b and c."] };
+    }
+    if (b + c === 0) return { ok: false, warnings: warnings.concat(["No pairs differ in exposure, so the matched odds ratio cannot be calculated."]), b: b, c: c };
+    if (b + c < 10) warnings.push("Very few pairs differ; the interval is wide.");
+    pL = b === 0 ? 0 : invBetai(b, c + 1, alpha / 2);
+    pU = c === 0 ? 1 : invBetai(b + 1, c, 1 - alpha / 2);
+    orv = c === 0 ? Infinity : b / c;
+    lo = pL / (1 - pL);
+    hi = pU >= 1 ? Infinity : pU / (1 - pU);
+    if (c === 0) warnings.push("The odds ratio is very large; report only the lower limit.");
+    p = Math.min(1, 2 * binomLowerTail(Math.min(b, c), b + c));
+    return { ok: true, warnings: warnings, b: b, c: c, or: orv, ciLower: lo, ciUpper: hi, p: p, method: "exact conditional" };
+  }
+
+
   var STATS = {
     parseCsv: parseCsv,
     inferColumn: inferColumn,
@@ -2182,6 +2622,10 @@
     logistic: logistic,
     formatP: formatP,
     resultsSentence: resultsSentence,
+    kaplanMeier: kaplanMeier,
+    logRank: logRank,
+    cox: cox,
+    matchedOr: matchedOr,
     _rank: { mannWhitney: mannWhitney, wilcoxonSigned: wilcoxonSigned } /* exposed for the R parity tests */
   };
 
