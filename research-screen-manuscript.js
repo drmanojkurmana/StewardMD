@@ -66,6 +66,66 @@
     { id: "discussion", label: "Discussion", hint: "What the findings mean, their strengths and limits." }
   ];
 
+  var EXTRA_SECTION_META = {
+    title: { label: "Title Page", hint: "Concise title with study design or 'a case report'." },
+    casePresentation: { label: "Case Presentation", hint: "De-identified patient story, examination, labs, imaging, and course." },
+    timeline: { label: "Timeline", hint: "Chronological events from presentation to follow-up." },
+    conclusion: { label: "Conclusion", hint: "Main clinical takeaway." },
+    patientPerspective: { label: "Patient Perspective", hint: "Patient's own view on treatment and recovery." },
+    learningPoints: { label: "Learning Points", hint: "3-5 clear clinical lessons for readers." }
+  };
+
+  function isPrimaryStudyType(proj) {
+    var t = String((proj && (proj.studyType || proj.study_type)) || "").toLowerCase();
+    if (!t) return false;
+    return t.indexOf("case-report") >= 0 || t.indexOf("case report") >= 0 ||
+      t.indexOf("case-series") >= 0 || t.indexOf("case series") >= 0 ||
+      t.indexOf("case-control") >= 0 || t.indexOf("case control") >= 0 ||
+      t.indexOf("cohort") >= 0 && t.indexOf("synthesis") < 0 ||
+      t.indexOf("rct") >= 0 || t.indexOf("randomized controlled") >= 0 || t.indexOf("randomised controlled") >= 0 ||
+      t.indexOf("trial") >= 0 && t.indexOf("trials") < 0 ||
+      t.indexOf("master") >= 0 || t.indexOf("observational") >= 0 ||
+      t.indexOf("cross-sectional") >= 0 || t.indexOf("cross sectional") >= 0 ||
+      t.indexOf("thesis") >= 0;
+  }
+
+  function isCaseProject(proj) {
+    var t = String((proj && (proj.studyType || proj.study_type)) || "").toLowerCase();
+    return t.indexOf("case-report") >= 0 || t.indexOf("case report") >= 0 ||
+      t.indexOf("case-series") >= 0 || t.indexOf("case series") >= 0;
+  }
+
+  function sectionSidebarItems(man, proj) {
+    var items = [];
+    var seen = {};
+    var secs = (man && man.sections) || [];
+    var useOnlyMan = isCaseProject(proj);
+    var i;
+    if (!useOnlyMan) {
+      for (i = 0; i < IMRAD_SECTIONS.length; i++) {
+        seen[IMRAD_SECTIONS[i].id] = true;
+        items.push(IMRAD_SECTIONS[i]);
+      }
+    }
+    for (i = 0; i < secs.length; i++) {
+      var s = secs[i];
+      if (!s || !s.id || seen[s.id]) continue;
+      seen[s.id] = true;
+      var meta = EXTRA_SECTION_META[s.id];
+      if (!meta) {
+        for (var j = 0; j < IMRAD_SECTIONS.length; j++) {
+          if (IMRAD_SECTIONS[j].id === s.id) { meta = IMRAD_SECTIONS[j]; break; }
+        }
+      }
+      items.push({
+        id: s.id,
+        label: (meta && meta.label) || s.heading || s.id,
+        hint: (meta && meta.hint) || "Manuscript section."
+      });
+    }
+    return items.length ? items : IMRAD_SECTIONS;
+  }
+
   var RULE_TABLE = {
     estimate: formatEffect,
     effect: formatEffect,
@@ -246,8 +306,61 @@
     return (ap && ap.id) || st.projectId || "prj_bcg_1994";
   }
 
+  function apiProjectId() {
+    var store = SMD.store;
+    var ap = store ? store.getActiveProject() : null;
+    return (ap && (ap.serverId || ap.id)) || st.projectId || "prj_bcg_1994";
+  }
+
   /* Default seed manuscript when API initializes fresh draft */
   function defaultManuscript(pid) {
+    var store = SMD.store;
+    var proj = (store && store.getProject) ? (store.getProject(pid) || store.getActiveProject()) : null;
+    if (isCaseProject(proj)) {
+      return {
+        id: "man_v1",
+        projectId: pid,
+        version: 1,
+        title: (proj && proj.title) || "Clinical Case Report",
+        authors: [],
+        affiliations: "",
+        status: "draft",
+        sections: [
+          { id: "abstract", heading: "Abstract", level: 1, text: "" },
+          { id: "introduction", heading: "Introduction", level: 1, text: "" },
+          { id: "casePresentation", heading: "Case Presentation", level: 1, text: "" },
+          { id: "timeline", heading: "Timeline", level: 1, text: "" },
+          { id: "discussion", heading: "Discussion", level: 1, text: "" },
+          { id: "conclusion", heading: "Conclusion", level: 1, text: "" }
+        ],
+        tokens: {},
+        references: [],
+        approval: null,
+        lock: null
+      };
+    }
+    if (isPrimaryStudyType(proj)) {
+      return {
+        id: "man_v1",
+        projectId: pid,
+        version: 1,
+        title: (proj && proj.title) || "Clinical Research Manuscript",
+        authors: [],
+        affiliations: "",
+        status: "draft",
+        sections: [
+          { id: "abstract", heading: "Abstract", level: 1, text: "" },
+          { id: "introduction", heading: "Introduction", level: 1, text: "" },
+          { id: "methods", heading: "Methods", level: 1, text: "" },
+          { id: "results", heading: "Results", level: 1, text: "" },
+          { id: "discussion", heading: "Discussion", level: 1, text: "" }
+        ],
+        tokens: {},
+        references: [],
+        approval: null,
+        lock: null
+      };
+    }
     return {
       id: "man_v2",
       projectId: pid,
@@ -354,7 +467,7 @@
     st.error = null;
     st.saveNotice = null;
 
-    var base = "/v1/projects/" + encodeURIComponent(st.projectId);
+    var base = "/v1/projects/" + encodeURIComponent(apiProjectId());
     var pMan = SMD.api ? SMD.api.request("GET", base + "/manuscript") : Promise.resolve(null);
     var pVers = SMD.api ? SMD.api.request("GET", base + "/manuscript/versions") : Promise.resolve(null);
 
@@ -363,6 +476,14 @@
       st.loading = false;
       st.manuscript = (res[0] && res[0].manuscript) || localManuscript(st.projectId) || defaultManuscript(st.projectId);
       st.versions = (res[1] && res[1].versions) || defaultVersions();
+      if (!params || !params.sectionId) {
+        var foundSel = false;
+        var mSecs = (st.manuscript && st.manuscript.sections) || [];
+        for (var si = 0; si < mSecs.length; si++) {
+          if (mSecs[si].id === st.selectedSectionId) { foundSel = true; break; }
+        }
+        if (!foundSel && mSecs.length) st.selectedSectionId = mSecs[0].id;
+      }
       render(container);
     }).catch(function (err) {
       if (mySeq !== seq) return;
@@ -370,6 +491,14 @@
       /* Fallback to local default if API unmocked or offline */
       st.manuscript = localManuscript(st.projectId) || defaultManuscript(st.projectId);
       st.versions = defaultVersions();
+      if (!params || !params.sectionId) {
+        var foundSelC = false;
+        var mSecsC = (st.manuscript && st.manuscript.sections) || [];
+        for (var sj = 0; sj < mSecsC.length; sj++) {
+          if (mSecsC[sj].id === st.selectedSectionId) { foundSelC = true; break; }
+        }
+        if (!foundSelC && mSecsC.length) st.selectedSectionId = mSecsC[0].id;
+      }
       render(container);
     });
   }
@@ -380,7 +509,7 @@
     if (!curSec) return;
     var store = SMD.store;
     var proj = store ? store.getActiveProject() : null;
-    var pid = encodeURIComponent(st.projectId);
+    var pid = encodeURIComponent(apiProjectId());
     var targetJournal = (proj && (proj.targetJournal || proj.journal)) || undefined;
     var inputPayload = {
       sectionId: curSec.id,
@@ -458,10 +587,40 @@
     var store = SMD.store;
     var proj = store ? store.getActiveProject() : null;
     var pid = (proj && proj.id) || activeProjectId();
+    var apiPid = (proj && (proj.serverId || proj.id)) || pid;
 
-    var getPromise = (G.RMDStore && G.RMDStore.get)
-      ? G.RMDStore.get(pid, "casefile", "main")
-      : Promise.resolve(null);
+    function loadCasePromise(id) {
+      if (!G.RMDStore) return Promise.resolve(null);
+      if (typeof G.RMDStore.list === "function") {
+        return G.RMDStore.list(id, "casefile").then(function (items) {
+          if (items && items.length) {
+            for (var i = 0; i < items.length; i++) {
+              if (items[i] && (items[i].id === "case" || items[i].id === "1" || items[i].id === "main")) {
+                return items[i].data || items[i];
+              }
+            }
+            return (items[0] && (items[0].data || items[0])) || null;
+          }
+          if (typeof G.RMDStore.get === "function") {
+            return G.RMDStore.get(id, "casefile", "case").then(function (r) {
+              return r || G.RMDStore.get(id, "casefile", "main");
+            });
+          }
+          return null;
+        });
+      }
+      if (typeof G.RMDStore.get === "function") {
+        return G.RMDStore.get(id, "casefile", "case").then(function (r) {
+          return r || G.RMDStore.get(id, "casefile", "main");
+        });
+      }
+      return Promise.resolve(null);
+    }
+
+    var getPromise = loadCasePromise(pid).then(function (cf) {
+      if (cf || apiPid === pid) return cf;
+      return loadCasePromise(apiPid);
+    });
 
     getPromise.then(function (casefile) {
       if (!casefile) {
@@ -479,19 +638,34 @@
           outcome: "Patient improved and was discharged in stable condition.",
           unusual: "Unusual clinical features and therapeutic response."
         };
+      } else {
+        casefile = {
+          age: casefile.age,
+          sex: casefile.sex,
+          presentingComplaint: casefile.presentingComplaint || casefile.presenting || "",
+          history: casefile.history || "",
+          examination: casefile.examination || casefile.exam || "",
+          investigations: casefile.investigations || casefile.labs || [],
+          diagnosis: casefile.diagnosis || "",
+          treatment: casefile.treatment || "",
+          outcome: casefile.outcome || "",
+          unusual: casefile.unusual || casefile.uniquePoint || "",
+          patientPerspective: casefile.patientPerspective || "",
+          learningPoints: casefile.learningPoints || ""
+        };
       }
 
       var prep = (G.RMDPhi && G.RMDPhi.prepareCaseText)
         ? G.RMDPhi.prepareCaseText(casefile, {})
         : { text: "", blocked: true, findings: ["The privacy check did not load. Close and reopen the app, then try again."] }; // never send an unchecked case file
 
-      showDraftPreviewModal(container, pid, prep.text, prep.findings, prep.blocked);
+      showDraftPreviewModal(container, apiPid, prep.text, prep.findings, prep.blocked, pid);
     }).catch(function () {
-      showDraftPreviewModal(container, pid, "Error loading case file.", ["Error loading case file."], true);
+      showDraftPreviewModal(container, apiPid, "Error loading case file.", ["Error loading case file."], true, pid);
     });
   }
 
-  function showDraftPreviewModal(container, pid, initialText, initialFindings, initialBlocked) {
+  function showDraftPreviewModal(container, pid, initialText, initialFindings, initialBlocked, localPid) {
     var modal = D.getElementById("rmdCaseReportDraftModal");
     if (modal && modal.parentNode) modal.parentNode.removeChild(modal);
 
@@ -613,19 +787,22 @@
         input: { caseText: currentText }
       };
 
-      var token = (SMD.auth && SMD.auth.getToken) ? SMD.auth.getToken() : null;
-      var headers = { "Content-Type": "application/json" };
-      if (token) headers.Authorization = "Bearer " + token;
-
-      fetch("/api/research/v1/projects/" + encodeURIComponent(pid) + "/ai-draft", {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify(body)
-      }).then(function (res) {
-        return res.json().then(function (data) {
-          return { status: res.status, data: data };
+      var draftPromise;
+      if (SMD.api && typeof SMD.api.request === "function") {
+        draftPromise = SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/ai-draft", body)
+          .then(function (data) { return { status: 200, data: data }; });
+      } else {
+        draftPromise = fetch("/api/research/v1/projects/" + encodeURIComponent(pid) + "/ai-draft", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        }).then(function (res) {
+          return res.json().then(function (data) {
+            return { status: res.status, data: data };
+          });
         });
-      }).then(function (resp) {
+      }
+      draftPromise.then(function (resp) {
         if (resp.status >= 200 && resp.status < 300 && resp.data && resp.data.draft && resp.data.draft.sections) {
           var secMap = resp.data.draft.sections;
           var fullDraftText = "";
@@ -669,6 +846,9 @@
             st.caseReportMissingNumbers = [];
           }
 
+          saveLocalManuscript(localPid || st.projectId || pid, st.manuscript);
+          if (getSection("casePresentation")) st.selectedSectionId = "casePresentation";
+          st.saveNotice = "Drafted by MaiK. Review and verify every clinical detail before approving.";
           closeModal();
           render(container);
         } else {
@@ -697,7 +877,7 @@
   }
 
   function startManuscriptDraft() {
-    var pid = st.projectId;
+    var pid = apiProjectId();
     var key = "man-" + pid + "-" + Date.now();
     return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/jobs",
       { kind: "manuscript_draft", idempotencyKey: key }).then(function (res) {
@@ -1303,7 +1483,7 @@
     st.saveNotice = "Saving...";
     render(container);
 
-    var pid = encodeURIComponent(st.projectId);
+    var pid = encodeURIComponent(apiProjectId());
     var sid = encodeURIComponent(sec.id);
     var payload = {
       version: st.manuscript.version,
@@ -1311,6 +1491,7 @@
       text: newText
     };
 
+    saveLocalManuscript(st.projectId, st.manuscript);
     if (SMD.api) {
       SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + sid, payload)
         .then(function (res) {
@@ -1330,7 +1511,7 @@
 
   function approveManuscript(container) {
     if (!st.manuscript || st.manuscript.status === "locked") return;
-    var pid = encodeURIComponent(st.projectId);
+    var pid = encodeURIComponent(apiProjectId());
     var payload = { version: st.manuscript.version, decision: "approved" };
 
     function done() {
@@ -1350,7 +1531,7 @@
 
   function lockManuscript(container) {
     if (!st.manuscript || st.manuscript.status === "locked") return;
-    var pid = encodeURIComponent(st.projectId);
+    var pid = encodeURIComponent(apiProjectId());
     var payload = { version: st.manuscript.version };
 
     function done(res) {
@@ -1515,7 +1696,7 @@
     st.gateFailures = [];
     render(container);
 
-    var pid = encodeURIComponent(st.projectId);
+    var pid = encodeURIComponent(apiProjectId());
     var payload = { version: st.manuscript ? st.manuscript.version : 2, format: "docx" };
 
     function showGates(failures) {
@@ -1717,7 +1898,7 @@
       h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="manuscript-lock">Lock this version</button>');
     }
     var proj = (SMD.store && SMD.store.getActiveProject) ? SMD.store.getActiveProject() : null;
-    var isCaseReport = proj && (proj.studyType === "case-report" || proj.study_type === "case-report");
+    var isCaseReport = proj && isCaseProject(proj);
     if (isCaseReport && !isLocked) {
       h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="ask-maik-case-report">Ask MaiK to draft it</button>');
     }
@@ -1756,11 +1937,18 @@
     h.push('  </div>');
     h.push('  <div class="rmd-section-list">');
 
-    for (var i = 0; i < IMRAD_SECTIONS.length; i++) {
-      var item = IMRAD_SECTIONS[i];
-      var secObj = getSection(item.id);
+    var navSections = sectionSidebarItems(man, proj);
+    var activeCurSec = getSection(st.selectedSectionId);
+    for (var i = 0; i < navSections.length; i++) {
+      var item = navSections[i];
+      var secObj = null;
+      if (man && man.sections) {
+        for (var si = 0; si < man.sections.length; si++) {
+          if (man.sections[si].id === item.id) { secObj = man.sections[si]; break; }
+        }
+      }
       var words = wordCount(secObj ? secObj.text : "");
-      var isActive = st.selectedSectionId === item.id;
+      var isActive = activeCurSec ? (activeCurSec.id === item.id) : (st.selectedSectionId === item.id);
 
       h.push('    <button type="button" class="rmd-section-item' + (isActive ? ' rmd-section-item-active' : '') + '" data-section-id="' + esc(item.id) + '">');
       h.push('      <div class="rmd-section-item-head">');
@@ -2137,6 +2325,14 @@
         if (!curSec) return;
         if (st.polishDraft.polished) {
           curSec.text = st.polishDraft.polished;
+          saveLocalManuscript(st.projectId, st.manuscript);
+          if (SMD.api) {
+            SMD.api.request("PUT", "/v1/projects/" + encodeURIComponent(apiProjectId()) + "/manuscript/sections/" + encodeURIComponent(curSec.id), {
+              version: st.manuscript.version,
+              heading: curSec.heading,
+              text: curSec.text
+            }).catch(function () {});
+          }
           st.saveNotice = "Polished wording accepted.";
           st.polishDraft = null;
           render(container);
@@ -2165,6 +2361,14 @@
             curSec.text = curSec.text.replace(ch.before, ch.after);
           }
           ch.status = "accepted";
+          saveLocalManuscript(st.projectId, st.manuscript);
+          if (SMD.api) {
+            SMD.api.request("PUT", "/v1/projects/" + encodeURIComponent(apiProjectId()) + "/manuscript/sections/" + encodeURIComponent(curSec.id), {
+              version: st.manuscript.version,
+              heading: curSec.heading,
+              text: curSec.text
+            }).catch(function () {});
+          }
           st.saveNotice = "Change accepted.";
           render(container);
         }
@@ -2296,12 +2500,43 @@
     } catch (e) { return {}; }
   }
 
+  function saveLocalManuscript(pid, man) {
+    if (!pid || !man || !man.sections) return;
+    var all = readLocalDrafts();
+    var sectionsMap = {};
+    var headingsMap = {};
+    var order = [];
+    for (var i = 0; i < man.sections.length; i++) {
+      var s = man.sections[i];
+      if (!s || !s.id) continue;
+      sectionsMap[s.id] = s.text || "";
+      headingsMap[s.id] = s.heading || s.id;
+      order.push(s.id);
+    }
+    all[pid] = { sections: sectionsMap, headings: headingsMap, order: order };
+    try {
+      localStorage.setItem(LOCAL_DRAFT_KEY, JSON.stringify(all));
+    } catch (e) {}
+  }
+
   function localManuscript(pid) {
     var d = readLocalDrafts()[pid];
     if (!d || !d.sections) return null;
     var man = defaultManuscript(pid);
+    var seen = {};
     for (var i = 0; i < man.sections.length; i++) {
-      if (d.sections[man.sections[i].id] != null) man.sections[i].text = d.sections[man.sections[i].id];
+      var sid = man.sections[i].id;
+      seen[sid] = true;
+      if (d.sections[sid] != null) man.sections[i].text = d.sections[sid];
+    }
+    var keys = (d.order && d.order.length) ? d.order : Object.keys(d.sections);
+    for (var k = 0; k < keys.length; k++) {
+      var eid = keys[k];
+      if (seen[eid] || d.sections[eid] == null) continue;
+      seen[eid] = true;
+      var meta = EXTRA_SECTION_META[eid];
+      var heading = (d.headings && d.headings[eid]) || (meta && meta.label) || eid;
+      man.sections.push({ id: eid, heading: heading, level: 1, text: d.sections[eid] });
     }
     return man;
   }

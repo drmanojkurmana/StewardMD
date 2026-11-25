@@ -260,7 +260,9 @@
     st.searching = true;
     st.error = null;
     draw();
-    SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(st.pid) + "/find-studies", { q: q, limit: 20 })
+    var apiProj = (SMD.store && SMD.store.getProject) ? SMD.store.getProject(st.pid) : null;
+    var apiPid = (apiProj && apiProj.serverId) || st.pid;
+    SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPid) + "/find-studies", { q: q, limit: 20 })
       .then(function (data) {
         st.searching = false;
         st.searched = true;
@@ -349,14 +351,22 @@
       draw();
       return;
     }
-    store.list(st.pid, "casefile").then(function (recs) {
-      var list = recs || [], i, rec = null;
-      for (i = 0; i < list.length; i++) if (list[i].id === "case") rec = list[i];
-      if (!rec && list.length) rec = list[0];
-      st.cf = rec ? rec.value : {};
-      if (rec && rec.id !== "case") st.patientNote = "Using patient " + rec.id + "\u2019s case file for the search.";
-      st.query = buildNoveltyQuery(st.cf);
-      draw();
+      var myPid = st.pid;
+      store.list(myPid, "casefile").then(function (recs) {
+        if (!st || st.pid !== myPid) return;
+        var list = recs || [], i, rec = null;
+        for (i = 0; i < list.length; i++) if (list[i].id === "case") rec = list[i];
+        if (!rec && list.length) rec = list[0];
+        st.cf = rec ? rec.value : {};
+        if (rec && rec.id !== "case") st.patientNote = "Using patient " + rec.id + "\u2019s case file for the search.";
+        var inputEl = st.container ? st.container.querySelector("#rmdNvQuery") : null;
+        if (inputEl && trim(inputEl.value)) st.query = inputEl.value;
+        if (trim(st.query) || st.error || st.searched) {
+          draw();
+          return;
+        }
+        st.query = buildNoveltyQuery(st.cf);
+        draw();
       if (!st.query) {
         var card = st.container.querySelector(".rmd-card");
         if (card) {

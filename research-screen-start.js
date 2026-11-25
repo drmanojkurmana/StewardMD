@@ -83,20 +83,30 @@
       if (cb) cb(consentTemplatesCache);
       return;
     }
+    var finish = function (data) {
+      if (data && typeof data === "object") consentTemplatesCache = data;
+      if (cb) cb(consentTemplatesCache);
+    };
+    if (G.SMD_CONTENT && typeof G.SMD_CONTENT.fetchJSON === "function") {
+      G.SMD_CONTENT.fetchJSON("data/research-consent-templates.json")
+        .then(finish)
+        .catch(function () {
+          if (typeof fetch !== "function") { if (cb) cb(null); return; }
+          fetch("/data/research-consent-templates.json")
+            .then(function (res) { return res.json(); })
+            .then(finish)
+            .catch(function () { if (cb) cb(null); });
+        });
+      return;
+    }
     if (typeof fetch === "function") {
       fetch("/data/research-consent-templates.json")
         .then(function (res) { return res.json(); })
-        .then(function (data) {
-          consentTemplatesCache = data;
-          if (cb) cb(consentTemplatesCache);
-        })
+        .then(finish)
         .catch(function () {
           fetch("data/research-consent-templates.json")
             .then(function (r2) { return r2.json(); })
-            .then(function (d2) {
-              consentTemplatesCache = d2;
-              if (cb) cb(consentTemplatesCache);
-            })
+            .then(finish)
             .catch(function () {
               if (cb) cb(null);
             });
@@ -1179,7 +1189,7 @@
               sampleSize: st.ssResult ? { n: st.ssResult.nPerGroup || st.ssResult.n, total: (st.ssResult.withDropout ? st.ssResult.withDropout.total : st.ssResult.total), paragraph: st.ssResult.paragraph } : null
             }
           };
-          SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(proj.id) + "/ai-draft", body)
+          SMD.api.request("POST", "/v1/projects/" + encodeURIComponent((proj && proj.serverId) || proj.id) + "/ai-draft", body)
             .then(function (res) {
               st.iecAi.busy = false;
               st.iecOpen = true;
@@ -1300,9 +1310,12 @@
       })(transInputs[n]);
     }
 
+    var consentTplSeq = 0;
+
     function applyConsentTemplate(code, force) {
+      var mySeq = ++consentTplSeq;
       getConsentTemplates(function (tpls) {
-        if (!tpls) return;
+        if (mySeq !== consentTplSeq || !tpls) return;
         var langTpl = tpls[code] || (tpls.languages && tpls.languages[code]);
         if (!langTpl) return;
         if (code === "en") {
@@ -1320,7 +1333,7 @@
           }
           if (force || !st.consentData.title) {
             if (!st.consentData.title) st.consentData.title = (proj && proj.title) || "Information for participants";
-            if (!st.consentData.purpose) st.consentData.purpose = (proj && proj.research_question) || "";
+            if (!st.consentData.purpose) st.consentData.purpose = (proj && (proj.researchQuestion || proj.research_question)) || "";
           }
         }
         render(container);
@@ -1345,6 +1358,7 @@
       if (askBtnC) {
         askBtnC.onclick = function () {
           if (st.consentAi.busy) return;
+          consentTplSeq++;
           st.consentAi.busy = true;
           st.consentAi.error = null;
           render(container);
@@ -1352,7 +1366,7 @@
             task: "consent_form",
             input: { language: st.consentLang }
           };
-          SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(proj.id) + "/ai-draft", body)
+          SMD.api.request("POST", "/v1/projects/" + encodeURIComponent((proj && proj.serverId) || proj.id) + "/ai-draft", body)
             .then(function (res) {
               st.consentAi.busy = false;
               st.consentOpen = true;
@@ -1583,7 +1597,7 @@
               sampleSize: st.ssResult ? { n: st.ssResult.nPerGroup || st.ssResult.n, total: (st.ssResult.withDropout ? st.ssResult.withDropout.total : st.ssResult.total) } : null
             }
           };
-          SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(proj.id) + "/ai-draft", body)
+          SMD.api.request("POST", "/v1/projects/" + encodeURIComponent((proj && proj.serverId) || proj.id) + "/ai-draft", body)
             .then(function (res) {
               st.ctriAi.busy = false;
               st.ctriOpen = true;

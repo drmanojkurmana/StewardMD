@@ -144,7 +144,7 @@
     h.push('  <div class="rmd-screen-header">');
     h.push('    <div class="rmd-header-titles">');
     h.push('      <h2 class="rmd-screen-title">Research Projects</h2>');
-    h.push('      <p class="rmd-screen-subtitle">Systematic reviews, meta-analyses, and evidence syntheses</p>');
+    h.push('      <p class="rmd-screen-subtitle">Case reports, clinical trials, cohorts, master charts, theses, and systematic reviews</p>');
     h.push('    </div>');
     h.push('    <div class="rmd-header-actions">');
     h.push('      <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="start-guided">New here? Start guided</button>');
@@ -254,10 +254,17 @@
       h.push('        <div class="rmd-field">');
       h.push('          <label for="rmd_proj_type">Study Design</label>');
       h.push('          <select id="rmd_proj_type" name="studyType">');
-      h.push('            <option value="Systematic Review & Meta-Analysis" selected>Systematic Review &amp; Meta-Analysis</option>');
-      h.push('            <option value="Randomized Controlled Trials">Randomized Controlled Trials</option>');
+      h.push('            <option value="Systematic Review & Meta-Analysis" selected>Systematic Review &amp; Meta-Analysis (PRISMA)</option>');
+      h.push('            <option value="Case Report">Case Report (CARE)</option>');
+      h.push('            <option value="Case Series">Case Series (CARE)</option>');
+      h.push('            <option value="Cohort study">Cohort Study (STROBE)</option>');
+      h.push('            <option value="Case-Control study">Case-Control Study (STROBE)</option>');
+      h.push('            <option value="Randomized Controlled Trial">Randomized Controlled Trial (CONSORT)</option>');
+      h.push('            <option value="Cross-Sectional / Master Chart Study">Original Study / Master Chart (STROBE)</option>');
+      h.push('            <option value="Thesis to Journal Article">Thesis to Journal Article</option>');
+      h.push('            <option value="Randomized Controlled Trials">Randomized Controlled Trials Review</option>');
       h.push('            <option value="Observational Cohort Synthesis">Observational Cohort Synthesis</option>');
-      h.push('            <option value="Diagnostic Accuracy Review">Diagnostic Accuracy Review</option>');
+      h.push('            <option value="Diagnostic Accuracy Review">Diagnostic Accuracy Review (STARD)</option>');
       h.push('          </select>');
       h.push('        </div>');
       h.push('        <div class="rmd-field">');
@@ -334,8 +341,9 @@
         }, function (proj) {
           createBusy = false;
           showCreateModal = false;
+          var first = (SMD.journeyFor ? SMD.journeyFor(proj)[0] : "studies") || "studies";
           if (SMD.navigate) {
-            SMD.navigate("studies", { projectId: proj.id });
+            SMD.navigate(first, { projectId: proj.id });
           } else {
             renderProjects(container);
           }
@@ -363,7 +371,9 @@
         var pid = this.getAttribute("data-rmd-open-project");
         if (pid) {
           store.setActiveProject(pid);
-          if (SMD.navigate) SMD.navigate("studies", { projectId: pid });
+          var openProj = store.getProject ? store.getProject(pid) : null;
+          var firstScreen = (SMD.journeyFor ? SMD.journeyFor(openProj)[0] : "studies") || "studies";
+          if (SMD.navigate) SMD.navigate(firstScreen, { projectId: pid });
         }
       };
     }

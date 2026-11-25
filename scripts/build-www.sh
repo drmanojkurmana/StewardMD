@@ -135,6 +135,8 @@ if [ -d data/fda-labels ]; then mkdir -p "$WWW/data/fda-labels"; cp data/fda-lab
 # India access on Clinical Bulletins cards (bulletins.js): NLEM 2022 (scripts/india/build_nlem.py) and, when the
 # owner has run scripts/india/fetch-janaushadhi.mjs, the Jan Aushadhi price list. Read offline from the bundle.
 if ls data/india/*.json >/dev/null 2>&1; then mkdir -p "$WWW/data/india"; cp data/india/*.json "$WWW/data/india/"; fi
+# ResearchMD consent templates (research-screen-start.js & research-screen-pubconsent.js).
+[ -f data/research-consent-templates.json ] && mkdir -p "$WWW/data" && cp data/research-consent-templates.json "$WWW/data/"
 
 # ── 4c. WardSynQ clinical surface ─────────────────────────────────────────────
 # The EMR surface and the modules it imports. Copied WHOLE rather than cherry-picked:

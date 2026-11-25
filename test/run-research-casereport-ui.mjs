@@ -149,7 +149,7 @@ try {
 
   /* novelty */
   await ev("SMD_RESEARCH.navigate('novelty',{projectId:'" + PID + "'})");
-  ok("novelty opens", await until("!!document.querySelector('#rmdNvQuery')", 10000));
+  ok("novelty opens", await until("!!((document.querySelector('#rmdNvQuery')||{}).value||'').trim()", 10000));
   ok("0 MaiK tokens chip", /0 MaiK tokens/.test(await text(".rmd-novelty-screen")));
   var query = await ev("(document.querySelector('#rmdNvQuery')||{}).value||''");
   ok("query built from diagnosis and unusual feature", /zinc phosphide/i.test(query) && /myocardial infarction/i.test(query), query);
