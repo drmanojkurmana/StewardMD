@@ -107,3 +107,15 @@ test("europepmc connector uses ebi.ac.uk and reads object resultList.result payl
   assert.equal(recs.length, 1);
   assert.equal(recs[0].title, "Trial A");
 });
+
+test("search screen provides iOS-safe file picker, .txt NBIB detection, and unified search UI", () => {
+  const srch = read("research-screen-search.js");
+  assert.doesNotMatch(srch, /<input type="file" id="rmd_import_file"[^>]*accept=/);
+  assert.match(srch, /PMID-/);
+  assert.match(srch, /rmd_topic_q/);
+  assert.match(srch, /\/find-studies/);
+  assert.match(srch, /\/records/);
+  const api = read("functions/api/research/[[path]].js");
+  assert.match(api, /IMPORT_EXTENSIONS[\s\S]*txt:\s*1/);
+  assert.match(api, /createDirectRecord/);
+});

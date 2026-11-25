@@ -537,9 +537,11 @@ test("import-uploads: 5 MiB limit, extension whitelist, role gate, R2 required, 
   const exact = await callForm(env, base, "tok-alice", risForm("x".repeat(5 * 1024 * 1024), "exact.csv"));
   assert.equal(exact.http, 201, "exactly 5 MiB is allowed");
 
-  const wrongExt = await callForm(env, base, "tok-alice", risForm(RIS_TEXT, "refs.txt"));
+  const wrongExt = await callForm(env, base, "tok-alice", risForm(RIS_TEXT, "refs.pdf"));
   assert.equal(wrongExt.http, 415);
   assert.equal(wrongExt.error.code, "file_type");
+  const pubmedTxt = await callForm(env, base, "tok-alice", risForm(RIS_TEXT, "pubmed-refs.txt"));
+  assert.equal(pubmedTxt.http, 201);
   const noExt = await callForm(env, base, "tok-alice", risForm(RIS_TEXT, "refs"));
   assert.equal(noExt.http, 415);
 

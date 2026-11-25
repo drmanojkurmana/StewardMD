@@ -58,6 +58,16 @@
     busy: false,
     runError: null,
     ai: null,
+    topicQuery: "",
+    topicBusy: false,
+    topicSearched: false,
+    topicError: null,
+    topicResults: [],
+    topicExpanded: {},
+    topicAdding: {},
+    topicAdded: {},
+    topicAddingAll: false,
+    topicStudyAdded: {},
     importFormat: "ris",
     importFileName: "",
     importPreview: null,
@@ -153,7 +163,7 @@
     return n;
   }
 
-  function detectFormat(name) {
+  function detectFormat(name, text) {
     var lower = String(name || "").toLowerCase();
     if (/\.ris$/.test(lower)) return "ris";
     if (/\.bib$/.test(lower) || /\.bibtex$/.test(lower)) return "bibtex";
@@ -161,7 +171,52 @@
     if (/\.xml$/.test(lower)) return "endnote_xml";
     if (/\.nbib$/.test(lower)) return "nbib";
     if (/\.csv$/.test(lower)) return "csv";
+    if (text) {
+      var s = String(text).slice(0, 8000);
+      if (/^PMID-\s/m.test(s) || /^TI\s+-\s/m.test(s)) return "nbib";
+      if (/^TY\s+-\s/m.test(s)) return "ris";
+      if (/^@[a-zA-Z]+\s*[{(]/m.test(s)) return "bibtex";
+      if (/<record\b/i.test(s)) return "endnote_xml";
+      if (/^\s*[\[{]/.test(s)) return "csl_json";
+    }
+    if (/\.txt$/.test(lower)) return "nbib";
     return null;
+  }
+
+  function topicItemKey(item) {
+    if (!item) return "";
+    if (item.pmid) return "pmid:" + item.pmid;
+    if (item.doi) return "doi:" + String(item.doi).toLowerCase();
+    return "t:" + String(item.title || "").toLowerCase().slice(0, 80) + ":" + String(item.year || "");
+  }
+
+  function formatSourceBadge(item) {
+    var srcs = (item && item.sources && item.sources.length) ? item.sources : (item && item.source ? [item.source] : []);
+    var names = [];
+    for (var i = 0; i < srcs.length; i++) {
+      var lbl = srcs[i] === "pubmed" ? "PubMed" : (srcs[i] === "europe_pmc" ? "Europe PMC" : (srcs[i] === "crossref" ? "Crossref" : srcs[i]));
+      if (names.indexOf(lbl) < 0) names.push(lbl);
+    }
+    return names.join(" + ") || "Online";
+  }
+
+  function formatAuthorsShort(authors) {
+    if (!authors || !authors.length) return "";
+    if (authors.length <= 3) return authors.join(", ");
+    return authors.slice(0, 3).join(", ") + " et al.";
+  }
+
+  function checkQueryPhi(text) {
+    var q = String(text || "").trim();
+    if (!q) return false;
+    if (G.RMDPhi && typeof G.RMDPhi.scan === "function") {
+      var hits = G.RMDPhi.scan(q);
+      if (hits && hits.length) return true;
+    }
+    if (typeof G.SMD_redactPHI === "function") {
+      if (G.SMD_redactPHI(q) !== q) return true;
+    }
+    return false;
   }
 
   function render(container) {
@@ -182,6 +237,16 @@
       st.nextCursor = null;
       st.runError = null;
       st.ai = null;
+      st.topicQuery = "";
+      st.topicBusy = false;
+      st.topicSearched = false;
+      st.topicError = null;
+      st.topicResults = [];
+      st.topicExpanded = {};
+      st.topicAdding = {};
+      st.topicAdded = {};
+      st.topicAddingAll = false;
+      st.topicStudyAdded = {};
       st.importResult = null;
       st.importError = null;
       st.importPreview = null;
@@ -212,6 +277,85 @@
 
     if (st.announce) h.push('<div class="rmd-banner rmd-banner-info" aria-live="polite">' + esc(st.announce) + '</div>');
     if (st.error) h.push(p2().errHtml(st.error, "search-retry"));
+
+    // Unified simple topic search across all trusted online sources
+    var addedTotal = 0;
+    for (var ak in st.topicAdded) if (Object.prototype.hasOwnProperty.call(st.topicAdded, ak)) addedTotal++;
+    h.push('<div class="rmd-card" style="margin-bottom:14px;">');
+    h.push('<h3 class="rmd-card-heading">Quick Search (All Online Sources)</h3>');
+    h.push('<p class="rmd-muted" style="margin-top:0;">Type any topic in plain words. Searches PubMed, Europe PMC, and Crossref together (0 MaiK tokens) so you can add papers directly.</p>');
+    h.push('<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:stretch;">');
+    h.push('<input type="search" id="rmd_topic_q" value="' + esc(st.topicQuery) + '" maxlength="500" placeholder="e.g. BCG vaccine tuberculosis randomised trial" aria-label="Search topic across PubMed, Europe PMC, and Crossref" style="flex:1 1 220px;min-width:0;">');
+    h.push('<button type="button" class="rmd-btn rmd-btn-primary" data-rmd="topic-search"' + (st.topicBusy ? " disabled" : "") + '>' + (st.topicBusy ? "Searching…" : "Search All Sources") + '</button>');
+    h.push('</div>');
+    if (st.topicError) h.push('<div style="margin-top:10px;">' + p2().errHtml(st.topicError, "topic-search") + '</div>');
+    if (st.topicSearched && !st.topicBusy && !st.topicResults.length && !st.topicError) {
+      h.push('<p class="rmd-muted" style="margin-top:10px;">No matching papers found. Try shorter or broader topic keywords.</p>');
+    }
+    if (st.topicResults.length) {
+      h.push('<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--rmd-line);">');
+      h.push('<span class="rmd-muted" style="font-size:13px;font-weight:600;">Found ' + st.topicResults.length + ' papers across PubMed, Europe PMC &amp; Crossref</span>');
+      h.push('<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">');
+      if (canRun) {
+        h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="topic-add-all"' + (st.topicAddingAll ? " disabled" : "") + '>' + (st.topicAddingAll ? "Adding…" : "Add all to Screening") + '</button>');
+      }
+      if (addedTotal > 0) {
+        h.push('<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="to-screening">Open Screening (' + addedTotal + ' added)</button>');
+      }
+      h.push('</div></div>');
+      if (!canRun) {
+        h.push('<p class="rmd-muted" style="margin-top:6px;">Read-only role: owner, editor, or analyst can add papers to this project.</p>');
+      }
+      h.push('<div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">');
+      for (var ti = 0; ti < st.topicResults.length; ti++) {
+        var it = st.topicResults[ti];
+        var tk = topicItemKey(it);
+        var exp = !!st.topicExpanded[tk];
+        var metaParts = [];
+        var authTxt = formatAuthorsShort(it.authors);
+        if (authTxt) metaParts.push(authTxt);
+        if (it.year) metaParts.push(String(it.year));
+        if (it.journal) metaParts.push(it.journal);
+        var addedState = st.topicAdded[tk];
+        var addingRec = !!st.topicAdding[tk];
+        var studyDone = !!st.topicStudyAdded[tk];
+        h.push('<div style="border:1px solid var(--rmd-line);border-radius:10px;padding:12px;background:var(--rmd-bg);">');
+        h.push('<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:5px;">');
+        h.push('<span class="rmd-badge rmd-badge-pill">' + esc(formatSourceBadge(it)) + '</span>');
+        if (it.freeFullText) h.push('<span class="rmd-badge rmd-badge-pill" style="background:var(--rmd-acc-soft);color:var(--rmd-acc-dark);">Free full text</span>');
+        if (it.pmid) h.push('<a class="rmd-field-hint" href="https://pubmed.ncbi.nlm.nih.gov/' + encodeURIComponent(it.pmid) + '/" target="_blank" rel="noopener" style="margin:0;">PMID ' + esc(it.pmid) + '</a>');
+        else if (it.doi) h.push('<a class="rmd-field-hint" href="https://doi.org/' + encodeURIComponent(it.doi) + '" target="_blank" rel="noopener" style="margin:0;word-break:break-all;">DOI ' + esc(it.doi) + '</a>');
+        h.push('</div>');
+        h.push('<div style="font-weight:600;font-size:14px;line-height:1.35;overflow-wrap:anywhere;">' + esc(it.title || "Untitled paper") + '</div>');
+        if (metaParts.length) h.push('<div class="rmd-row-meta" style="margin-top:3px;">' + esc(metaParts.join(" · ")) + '</div>');
+        if (it.abstract) {
+          var absText = String(it.abstract);
+          var showToggle = absText.length > 180;
+          var snippet = (!exp && showToggle) ? absText.slice(0, 180).trim() + "…" : absText;
+          h.push('<div class="rmd-muted" style="font-size:12.5px;line-height:1.45;margin-top:6px;">' + esc(snippet) + '</div>');
+          if (showToggle) {
+            h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" style="margin-top:4px;padding:2px 8px;font-size:12px;" data-rmd-topic-exp="' + ti + '">' + (exp ? "Less" : "More") + '</button>');
+          }
+        }
+        if (canRun) {
+          h.push('<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center;">');
+          if (addedState) {
+            h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" disabled>' + (addedState === "duplicate" ? "Already in Screening" : "Added to Screening") + '</button>');
+          } else {
+            h.push('<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-topic-add="' + ti + '"' + (addingRec ? " disabled" : "") + '>' + (addingRec ? "Adding…" : "Add to Screening") + '</button>');
+          }
+          if (studyDone) {
+            h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" disabled>Added to Studies</button>');
+          } else {
+            h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-topic-study="' + ti + '">+ Add to Studies</button>');
+          }
+          h.push('</div>');
+        }
+        h.push('</div>');
+      }
+      h.push('</div>');
+    }
+    h.push('</div>');
 
     h.push('<div class="rmd-p2-cols">');
 
@@ -290,7 +434,7 @@
     h.push('  <li><strong style="color:var(--rmd-ink);">Zotero:</strong> Right-click your collection, choose Export Collection, and select Better CSL JSON or CSL JSON (.json) or RIS (.ris).</li>');
     h.push('  <li><strong style="color:var(--rmd-ink);">Mendeley:</strong> Select reference entries, choose File &gt; Export, and select CSL-JSON (.json) or RIS (.ris).</li>');
     h.push('  <li><strong style="color:var(--rmd-ink);">EndNote:</strong> Select File &gt; Export, choose XML format (.xml) or RIS (.ris) with Output Style set to EndNote Export.</li>');
-    h.push('  <li><strong style="color:var(--rmd-ink);">PubMed (NBIB):</strong> On PubMed, click Save &gt; Selection or All results &gt; Format: PubMed / Summary (.nbib).</li>');
+    h.push('  <li><strong style="color:var(--rmd-ink);">PubMed (NBIB or TXT):</strong> On PubMed, tap <em>Send to &gt; Citation manager &gt; Create File</em> (.nbib) or <em>Save &gt; Format: PubMed</em> (.txt). Both work here.</li>');
     h.push('  <li><strong style="color:var(--rmd-ink);">BibTeX / CSV:</strong> From Google Scholar, Scopus, or spreadsheets, export as BibTeX (.bib) or CSV (.csv).</li>');
     h.push('</ul>');
     h.push('</div>');
@@ -302,14 +446,15 @@
       h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="to-screening">Open Screening</button></div>');
     }
     h.push('<div class="rmd-field"><label for="rmd_import_file">Reference File</label>');
-    h.push('<input type="file" id="rmd_import_file" accept=".ris,.bib,.json,.xml,.nbib,.csv"></div>');
+    h.push('<input type="file" id="rmd_import_file">');
+    h.push('<span class="rmd-field-hint">Accepts .nbib, .txt (PubMed), .ris, .bib, .json, .xml, or .csv.</span></div>');
     h.push('<div class="rmd-field"><label for="rmd_import_format">Format</label>');
     h.push('<select id="rmd_import_format">');
     h.push('<option value="ris"' + (st.importFormat === "ris" ? " selected" : "") + '>RIS (.ris)</option>');
     h.push('<option value="bibtex"' + (st.importFormat === "bibtex" ? " selected" : "") + '>BibTeX (.bib)</option>');
     h.push('<option value="csl_json"' + ((st.importFormat === "csl_json" || st.importFormat === "json") ? " selected" : "") + '>CSL-JSON (.json) - Zotero / Mendeley</option>');
     h.push('<option value="endnote_xml"' + ((st.importFormat === "endnote_xml" || st.importFormat === "xml") ? " selected" : "") + '>EndNote XML (.xml)</option>');
-    h.push('<option value="nbib"' + (st.importFormat === "nbib" ? " selected" : "") + '>NBIB (.nbib) - PubMed</option>');
+    h.push('<option value="nbib"' + (st.importFormat === "nbib" ? " selected" : "") + '>NBIB / PubMed Text (.nbib, .txt) - PubMed</option>');
     h.push('<option value="csv"' + (st.importFormat === "csv" ? " selected" : "") + '>CSV (.csv)</option>');
     h.push('</select></div>');
     if (st.importPreview != null) {
@@ -340,6 +485,127 @@
     h.push('</div>');
     container.innerHTML = h.join("\n");
     bindEvents(container, project);
+  }
+
+  function runTopicSearch(container, project) {
+    var q = String(st.topicQuery || "").trim();
+    if (!q) {
+      st.topicError = { message: "Enter a topic or keywords to search.", code: "invalid_search" };
+      render(container);
+      return;
+    }
+    if (checkQueryPhi(q)) {
+      st.topicError = { message: "Query looks like it contains personal details. Remove patient identifiers before searching.", code: "phi_in_query" };
+      render(container);
+      return;
+    }
+    if (!project.serverId && String(project.id || "").indexOf("loc_") === 0) {
+      st.topicError = { message: "Sign in and save this project to your account to search online databases.", code: "unauthorized" };
+      render(container);
+      return;
+    }
+    st.topicBusy = true;
+    st.topicSearched = true;
+    st.topicError = null;
+    render(container);
+    var mySeq = ++seq;
+    SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPidFor(project)) + "/find-studies", { q: q, limit: 30 }).then(function (data) {
+      if (mySeq !== seq) return;
+      st.topicBusy = false;
+      st.topicResults = (data && data.results) || [];
+      render(container);
+    }).catch(function (err) {
+      if (mySeq !== seq) return;
+      st.topicBusy = false;
+      st.topicError = err;
+      render(container);
+    });
+  }
+
+  function addTopicRecord(container, project, idx) {
+    var item = st.topicResults[idx];
+    if (!item) return Promise.resolve();
+    var tk = topicItemKey(item);
+    if (st.topicAdded[tk] || st.topicAdding[tk]) return Promise.resolve();
+    st.topicAdding[tk] = true;
+    render(container);
+    var mySeq = seq;
+    return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPidFor(project)) + "/records", {
+      source: item.source || "",
+      pmid: item.pmid || "",
+      doi: item.doi || "",
+      title: item.title || "Untitled paper",
+      authors: item.authors || [],
+      year: item.year,
+      journal: item.journal || "",
+      abstract: item.abstract || ""
+    }).then(function (data) {
+      delete st.topicAdding[tk];
+      if (mySeq !== seq) return;
+      st.topicAdded[tk] = (data && data.duplicate) ? "duplicate" : "added";
+      render(container);
+    }).catch(function (err) {
+      delete st.topicAdding[tk];
+      if (mySeq !== seq) return;
+      st.topicError = err;
+      render(container);
+    });
+  }
+
+  function addAllTopicRecords(container, project) {
+    if (!st.topicResults.length || st.topicAddingAll) return;
+    st.topicAddingAll = true;
+    render(container);
+    var i = 0;
+    function next() {
+      while (i < st.topicResults.length && st.topicAdded[topicItemKey(st.topicResults[i])]) i++;
+      if (i >= st.topicResults.length) {
+        st.topicAddingAll = false;
+        render(container);
+        return;
+      }
+      var idx = i++;
+      addTopicRecord(container, project, idx).then(next);
+    }
+    next();
+  }
+
+  function addTopicStudy(container, project, idx) {
+    var item = st.topicResults[idx];
+    if (!item) return;
+    var tk = topicItemKey(item);
+    if (st.topicStudyAdded[tk]) return;
+    if (!SMD.store || !SMD.store.createStudy) {
+      st.topicError = { message: "Study store is not available yet.", code: "store_unavailable" };
+      render(container);
+      return;
+    }
+    var parts = [];
+    var authTxt = formatAuthorsShort(item.authors);
+    if (authTxt) parts.push(authTxt);
+    if (item.title) parts.push(item.title);
+    if (item.journal) parts.push(item.journal);
+    if (item.year) parts.push(String(item.year));
+    if (item.pmid) parts.push("PMID: " + item.pmid);
+    if (item.doi) parts.push("DOI: " + item.doi);
+    try {
+      SMD.store.createStudy(project.id, {
+        label: String(item.title || "Study").trim().slice(0, 120) || "Study",
+        measure: "RR",
+        inputs: {},
+        locator: {
+          kind: "manual",
+          citation: parts.join(". "),
+          quote: String(item.abstract || "").trim().slice(0, 400)
+        },
+        verified: false
+      });
+      st.topicStudyAdded[tk] = true;
+      render(container);
+    } catch (err) {
+      st.topicError = { message: "Could not add this study to your Studies list.", code: "study_add_failed" };
+      render(container);
+    }
   }
 
   function runSearch(container, project) {
@@ -448,12 +714,50 @@
     }
     on('[data-rmd="to-projects"]', function () { SMD.navigate("projects"); });
     on('[data-rmd="to-screening"]', function () { SMD.navigate("screening", {}); });
+    on('[data-rmd="topic-search"]', function () { runTopicSearch(container, project); });
+    on('[data-rmd="topic-add-all"]', function () { addAllTopicRecords(container, project); });
     on('[data-rmd="search-retry"]', function () { st.loaded = false; render(container); });
     on('[data-rmd="search-run-retry"]', function () { runSearch(container, project); });
     on('[data-rmd="search-run"]', function () { runSearch(container, project); });
     on('[data-rmd="search-more"]', function () { load(container, st.nextCursor); });
     on('[data-rmd="import-run"]', function () { runImport(container, project); });
     on('[data-rmd="dedup-run"]', function () { runDedup(container, project); });
+
+    var tq = container.querySelector("#rmd_topic_q");
+    if (tq) {
+      tq.oninput = function () { st.topicQuery = this.value; };
+      tq.onkeydown = function (ev) {
+        if ((ev.key === "Enter" || ev.keyCode === 13)) {
+          ev.preventDefault();
+          runTopicSearch(container, project);
+        }
+      };
+    }
+    var expBtns = container.querySelectorAll("[data-rmd-topic-exp]");
+    for (var ei = 0; ei < expBtns.length; ei++) {
+      expBtns[ei].onclick = function () {
+        var idx = parseInt(this.getAttribute("data-rmd-topic-exp"), 10);
+        var it = st.topicResults[idx];
+        if (!it) return;
+        var tk = topicItemKey(it);
+        st.topicExpanded[tk] = !st.topicExpanded[tk];
+        render(container);
+      };
+    }
+    var addBtns = container.querySelectorAll("[data-rmd-topic-add]");
+    for (var ai = 0; ai < addBtns.length; ai++) {
+      addBtns[ai].onclick = function () {
+        var idx = parseInt(this.getAttribute("data-rmd-topic-add"), 10);
+        addTopicRecord(container, project, idx);
+      };
+    }
+    var studyBtns = container.querySelectorAll("[data-rmd-topic-study]");
+    for (var si = 0; si < studyBtns.length; si++) {
+      studyBtns[si].onclick = function () {
+        var idx = parseInt(this.getAttribute("data-rmd-topic-study"), 10);
+        addTopicStudy(container, project, idx);
+      };
+    }
 
     var dbBtns = container.querySelectorAll("[data-rmd-db]");
     for (var d = 0; d < dbBtns.length; d++) {
@@ -502,9 +806,13 @@
 
     function previewFile() {
       if (!importFile) return;
+      var fileName = st.importFileName || (importFile && importFile.name) || "";
       var reader = new FileReader();
       reader.onload = function () {
-        st.importPreview = countEntries(st.importFormat, String(reader.result || ""));
+        var content = String(reader.result || "");
+        var detected = detectFormat(fileName, content);
+        if (detected) st.importFormat = detected;
+        st.importPreview = countEntries(st.importFormat, content);
         render(container);
       };
       reader.onerror = function () {
@@ -521,8 +829,18 @@
       st.importResult = null;
       st.importError = null;
       if (f) {
+        var ext = String(f.name || "").split(".").pop().toLowerCase();
+        var allowed = { ris: 1, bib: 1, bibtex: 1, json: 1, xml: 1, nbib: 1, csv: 1, txt: 1 };
+        if (f.name && f.name.indexOf(".") >= 0 && !allowed[ext]) {
+          importFile = null;
+          st.importPreview = null;
+          st.importFileName = "";
+          st.importError = { message: "Select a .nbib, .txt (PubMed), .ris, .bib, .json, .xml, or .csv reference file.", code: "file_type" };
+          render(container);
+          return;
+        }
         st.importFileName = f.name;
-        var detected = detectFormat(f.name);
+        var detected = detectFormat(f.name, "");
         if (detected) st.importFormat = detected;
         previewFile();
       } else {

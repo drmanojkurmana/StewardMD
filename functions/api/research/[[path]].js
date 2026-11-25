@@ -27,7 +27,7 @@ import * as europepmcConnector from "./_connectors/europepmc.js";
 import * as crossrefConnector from "./_connectors/crossref.js";
 import * as s2Connector from "./_connectors/semanticscholar.js";
 import { parseImport, matchesExistingRecord } from "./_connectors/import.js";
-import { dedupRecords } from "./_dedup.js";
+import { dedupRecords, normaliseDoi } from "./_dedup.js";
 /* Phase 3 server side (docs/research/contracts/phase-3): jobs v2 + PDFs
  * (_jobs.js), HMAC worker callback (_callback.js), ceilings and daily caps
  * (_caps.js), credit lifecycle on the MaiK wallet + institution ledger
@@ -1385,6 +1385,53 @@ async function getRecord(db, uid, recordId, requestId) {
   if (resolved.status) return err(resolved.status, resolved.code, "Record not found", requestId);
   return json({ record: recordOf(resolved.row) }, 200, { "x-request-id": requestId });
 }
+async function createDirectRecord(db, uid, projectId, body, requestId) {
+  const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
+  if (gate.status) return gateErr(gate, "Adding records needs an owner, editor or analyst role", requestId);
+  const title = typeof body.title === "string" ? body.title.trim().slice(0, 2000) : "";
+  if (!title) return err(400, "invalid_body", "title is required", requestId);
+  const pmid = typeof body.pmid === "string" ? body.pmid.replace(/\D/g, "").slice(0, 32) : "";
+  const doi = typeof body.doi === "string" ? normaliseDoi(body.doi).slice(0, 200) : "";
+  const rawSource = typeof body.source === "string" ? body.source.trim().toLowerCase() : "";
+  const source = ["pubmed", "europe_pmc", "crossref", "manual"].indexOf(rawSource) >= 0
+    ? rawSource
+    : (pmid ? "pubmed" : (doi ? "crossref" : "manual"));
+  const rawExt = typeof body.externalId === "string" ? body.externalId.trim().slice(0, 200) : "";
+  const externalId = pmid || doi || rawExt || await sha256Hex(source + ":" + title.toLowerCase() + ":" + (body.year || ""));
+  const authors = Array.isArray(body.authors)
+    ? body.authors.map((a) => String(a || "").trim()).filter(Boolean).slice(0, 50)
+    : [];
+  const yearNum = body.year != null && body.year !== "" ? parseInt(body.year, 10) : null;
+  const year = yearNum && Number.isFinite(yearNum) && yearNum >= 1800 && yearNum <= 2100 ? yearNum : null;
+  const meta = {};
+  if (pmid) meta.pmid = pmid;
+  if (doi) meta.doi = doi;
+  if (typeof body.journal === "string" && body.journal.trim()) {
+    const j = body.journal.trim().slice(0, 300);
+    meta.journal = j;
+    meta.venue = j;
+  }
+  if (typeof body.abstract === "string" && body.abstract.trim()) meta.abstract = body.abstract.trim().slice(0, 4000);
+  if (typeof body.url === "string" && /^https?:\/\//i.test(body.url.trim())) meta.url = body.url.trim().slice(0, 500);
+
+  const exact = await db.prepare("SELECT * FROM research_records WHERE project_id=? AND source=? AND external_id=?")
+    .bind(projectId, source, externalId).first();
+  if (exact) return json({ record: recordOf(exact), duplicate: true }, 200, { "x-request-id": requestId });
+
+  const priorRows = recordRowsToDedup((await db.prepare("SELECT * FROM research_records WHERE project_id=?").bind(projectId).all()).results || []);
+  const dupId = matchesExistingRecord(priorRows, { source, externalId, title, authors, year, doi, pmid, extra: meta });
+  if (dupId) {
+    const existingRow = await db.prepare("SELECT * FROM research_records WHERE id=? AND project_id=?").bind(dupId, projectId).first();
+    if (existingRow) return json({ record: recordOf(existingRow), duplicate: true }, 200, { "x-request-id": requestId });
+  }
+
+  const id = uuid("rec_"), now = Date.now();
+  await db.prepare("INSERT INTO research_records (id,project_id,search_run_id,source,external_id,title,authors_json,year,doi,metadata_json,created_ts) VALUES (?,?,NULL,?,?,?,?,?,?,?,?)")
+    .bind(id, projectId, source, externalId, title, JSON.stringify(authors), year, doi, JSON.stringify(meta), now).run();
+  await audit(db, projectId, uid, "record_added_direct", id, { source, externalId });
+  const row = await db.prepare("SELECT * FROM research_records WHERE id=?").bind(id).first();
+  return json({ record: recordOf(row), duplicate: false }, 201, { "x-request-id": requestId });
+}
 async function createReport(db, uid, projectId, body, requestId) {
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "Reports need an owner, editor or analyst role", requestId);
@@ -1575,7 +1622,7 @@ async function listSearchRuns(db, uid, projectId, url, requestId) {
  * returns the storageKey the screen passes to POST /imports. Same auth and
  * role gate as createImport; content parsing stays in the import step. */
 const MAX_IMPORT_UPLOAD = 5 * 1024 * 1024;
-const IMPORT_EXTENSIONS = { ris: 1, bib: 1, bibtex: 1, csv: 1, json: 1, xml: 1, nbib: 1 };
+const IMPORT_EXTENSIONS = { ris: 1, bib: 1, bibtex: 1, csv: 1, json: 1, xml: 1, nbib: 1, txt: 1 };
 async function uploadImportFile(request, env, db, uid, projectId, requestId) {
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "Import uploads need an owner, editor or analyst role", requestId);
@@ -1590,7 +1637,7 @@ async function uploadImportFile(request, env, db, uid, projectId, requestId) {
   const dot = name.lastIndexOf(".");
   const ext = dot >= 0 ? name.slice(dot + 1).toLowerCase() : "";
   if (!IMPORT_EXTENSIONS[ext])
-    return err(415, "file_type", "Reference file must be .ris, .bib, .bibtex, .csv, .json, .xml or .nbib", requestId);
+    return err(415, "file_type", "Reference file must be .ris, .bib, .bibtex, .csv, .json, .xml, .nbib or .txt", requestId);
   const bytes = await file.arrayBuffer();
   const digest = await crypto.subtle.digest("SHA-256", bytes);
   const sha256 = [...new Uint8Array(digest)].map((x) => x.toString(16).padStart(2, "0")).join("");
@@ -2396,6 +2443,10 @@ export async function onRequest({ request, env, params }) {
 
   const recCol = path.match(/^\/v1\/projects\/([^/]+)\/records$/);
   if (recCol && request.method === "GET") return listRecords(db, uid, recCol[1], url, requestId);
+  if (recCol && request.method === "POST") {
+    const body = await readBody(); if (!body) return err(400, "invalid_body", "Invalid record payload", requestId);
+    return createDirectRecord(db, uid, recCol[1], body, requestId);
+  }
   const recDec = path.match(/^\/v1\/records\/([^/]+)\/decisions$/);
   if (recDec && request.method === "POST") {
     const body = await readBody(); if (!body) return err(400, "invalid_body", "Invalid decision payload", requestId);
