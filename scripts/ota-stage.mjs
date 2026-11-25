@@ -36,7 +36,7 @@ const MIME = {
   ".js": "application/javascript", ".css": "text/css", ".html": "text/html; charset=utf-8",
   ".json": "application/json", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
   ".webp": "image/webp", ".svg": "image/svg+xml", ".ico": "image/x-icon", ".gif": "image/gif",
-  ".woff2": "font/woff2", ".woff": "font/woff", ".wasm": "application/wasm",
+  ".woff2": "font/woff2", ".woff": "font/woff", ".wasm": "application/wasm", ".mp4": "video/mp4",
   ".manifest": "text/cache-manifest", ".webmanifest": "application/manifest+json",
 };
 function mimeFor(path) { return MIME[extname(path).toLowerCase()] || "application/octet-stream"; }

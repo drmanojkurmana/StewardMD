@@ -1133,7 +1133,7 @@
       if (!t || !homeToolEligible(t)) return;
       opts = opts && typeof opts === "object" ? opts : undefined;
       if (opts && window.PREP && PREP.isOpen && PREP.isOpen() && PREP.close) PREP.close();
-      modHold("PREP");
+      if (!(window.PREP_STARTUP && PREP_STARTUP.willPlay && PREP_STARTUP.willPlay(opts))) modHold("PREP");
       if (window.PREP && PREP.open) PREP.open(opts); else toast("PrepNucleus loading…");
     },
     // Narkē (Anaesthesia), the same kill-switch rule as Tokós.
