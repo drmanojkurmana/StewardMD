@@ -14,9 +14,9 @@
   var DATE_PATTERN = "\\b(?:" +
     "\\d{4}[\\/-]\\d{1,2}[\\/-]\\d{1,2}|" +
     "\\d{1,2}[\\/.\\-]\\d{1,2}[\\/.\\-]\\d{2,4}|" +
-    "\\d{1,2}(?:st|nd|rd|th)?[\\s.\\-]+(?:" + MON_STR + ")(?:[\\s.\\-]+\\d{2,4})?|" +
-    "(?:" + MON_STR + ")[\\s.\\-]+\\d{1,2}(?:st|nd|rd|th)?(?:,\\s*\\d{4}|\\s+\\d{4})?|" +
-    "(?:" + MON_STR + ")[\\s.\\-]+\\d{4}" +
+    "\\d{1,2}(?:st|nd|rd|th)?[ -]+(?:" + MON_STR + ")(?:[ -]+\\d{2,4})?|" +
+    "(?:" + MON_STR + ")[ -]+\\d{1,2}(?:st|nd|rd|th)?(?:,?\\s*\\d{4}|[ -]+\\d{4})?|" +
+    "(?:" + MON_STR + ")[ -]+\\d{4}" +
   ")\\b";
 
   function parseDateStr(s) {
@@ -31,7 +31,7 @@
       if (y < 100) y += 2000;
       return new Date(y, parseInt(m[2], 10) - 1, parseInt(m[1], 10));
     }
-    if ((m = /^(\d{1,2})(?:st|nd|rd|th)?[\s.\\-]+([A-Za-z]+)(?:[\s.\\-]+(\d{2,4}))?$/.exec(str))) {
+    if ((m = /^(\d{1,2})(?:st|nd|rd|th)?[ -]+([A-Za-z]+)(?:[ -]+(\d{2,4}))?$/.exec(str))) {
       var mon = MONTHS[m[2].toLowerCase()];
       if (mon) {
         var yr = m[3] ? parseInt(m[3], 10) : 2026;
@@ -39,15 +39,16 @@
         return new Date(yr, mon - 1, parseInt(m[1], 10));
       }
     }
-    if ((m = /^([A-Za-z]+)[\s.\\-]+(\d{1,2})(?:st|nd|rd|th)?(?:,?\s+(\d{2,4}))?$/.exec(str))) {
+    if ((m = /^([A-Za-z]+)[ -]+(\d{1,2})(?:st|nd|rd|th)?(?:,?\s*(\d{2,4})|[ -]+(\d{2,4}))?$/.exec(str))) {
       var mon2 = MONTHS[m[1].toLowerCase()];
       if (mon2) {
-        var yr2 = m[3] ? parseInt(m[3], 10) : 2026;
+        var yrVal = m[3] || m[4];
+        var yr2 = yrVal ? parseInt(yrVal, 10) : 2026;
         if (yr2 < 100) yr2 += 2000;
         return new Date(yr2, mon2 - 1, parseInt(m[2], 10));
       }
     }
-    if ((m = /^([A-Za-z]+)[\s.\\-]+(\d{4})$/.exec(str))) {
+    if ((m = /^([A-Za-z]+)[ -]+(\d{4})$/.exec(str))) {
       var mon3 = MONTHS[m[1].toLowerCase()];
       if (mon3) {
         var yr3 = parseInt(m[2], 10);
@@ -73,7 +74,7 @@
     }
 
     // 2. Hospital-number patterns (UHID, MRN, IP No, IPD, OP No, OPD No, CR No, Reg No, Registration number, Hospital number, Hosp No)
-    var uhidRe = /\b(?:Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp(?:\s*No\.?|\s*Number)?|Reg(?:\s*No\.?|\s*Number)?|OPD(?:\s*No\.?|\s*Number)?|OP(?:\s*No\.?|\s*Number)?|IPD(?:\s*No\.?|\s*Number)?|IP(?:\s*No\.?|\s*Number)?|CR(?:\s*No\.?|\s*Number)?|UHID|MRN)[ \t:#.-]*[A-Za-z0-9\/-]{3,20}\b/gi;
+    var uhidRe = /\b(?:Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp\s*(?:Number|No\.?)|Reg\s*(?:Number|No\.?)|OPD(?:\s*(?:Number|No\.?))?|OP\s*(?:Number|No\.?)|IPD(?:\s*(?:Number|No\.?))?|IP(?:\s*(?:Number|No\.?))?|CR\s*(?:Number|No\.?)|UHID|MRN)\b[ \t:#.-]*(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b/gi;
     var uh;
     while ((uh = uhidRe.exec(s)) !== null) {
       add("uhid", uh[0]);
@@ -94,7 +95,7 @@
     }
 
     // 5. Phones: 10-digit mobiles (6 to 9 with +91, 0, spaces, dots or hyphens) and landlines with STD code
-    var phoneRe = /(?:\(0\d{2,4}\)[\s.\-]?\d{3,4}[\s.\-]?\d{3,4}|\b0\d{2,4}[\s.\-]\d{3,4}[\s.\-]?\d{3,4}\b|\b0\d{2,4}[\-]\d{6,8}\b|(?:(?:\+91|0)[\s.\-]?)?[6-9]\d{2,4}[\s.\-]?\d{2,4}[\s.\-]?\d{2,4}\b)/g;
+    var phoneRe = /(?:\(0\d{2,4}\)[\s.\-]?\d{3,4}[\s.\-]?\d{3,4}|\b0\d{2,4}[\s.\-]\d{3,4}[\s.\-]?\d{3,4}\b|\b0\d{2,4}[\-]\d{6,8}\b|(?:\+91[\s.\-]?)?\b(?:0[\s.\-]?)?[6-9]\d{2,4}[\s.\-]?\d{2,4}[\s.\-]?\d{2,4}\b)/g;
     var ph;
     while ((ph = phoneRe.exec(s)) !== null) {
       var rawDigits = ph[0].replace(/\D/g, "");
@@ -122,19 +123,7 @@
   }
 
   function replaceDatesWithDayN(text, baseDate) {
-    if (!text) return text;
-    if (!baseDate) {
-      var hits = scan(text);
-      for (var i = 0; i < hits.length; i++) {
-        if (hits[i].kind === "date") {
-          var dt = parseDateStr(hits[i].match);
-          if (dt && (!baseDate || dt.getTime() < baseDate.getTime())) {
-            baseDate = dt;
-          }
-        }
-      }
-    }
-    if (!baseDate) return text;
+    if (!text || !baseDate) return text;
     var re = new RegExp(DATE_PATTERN, "gi");
     return text.replace(re, function (match) {
       var d = parseDateStr(match);
@@ -207,18 +196,8 @@
 
     if (typeof casefile === "string") {
       var rawText = casefile;
-      var hitsInit = scan(rawText);
-      var earliestDate = null;
-      for (var i = 0; i < hitsInit.length; i++) {
-        if (hitsInit[i].kind === "date") {
-          var dt = parseDateStr(hitsInit[i].match);
-          if (dt && (!earliestDate || dt.getTime() < earliestDate.getTime())) {
-            earliestDate = dt;
-          }
-        }
-      }
-      var base = opts.presentationDate ? parseDateStr(opts.presentationDate) : earliestDate;
-      var processed = replaceDatesWithDayN(rawText, base);
+      var base = opts.presentationDate ? parseDateStr(opts.presentationDate) : null;
+      var processed = base ? replaceDatesWithDayN(rawText, base) : rawText;
       processed = deidentifyAgeText(processed);
       var scanRes = scan(processed);
       var findingsArr = [];

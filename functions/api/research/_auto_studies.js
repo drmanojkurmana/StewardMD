@@ -227,7 +227,7 @@ function hasPhiInQuery(q) {
   if (!q) return false;
   if (/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/.test(q)) return true;
   if (/(?:\b\d{4}[ -]\d{4}[ -]\d{4}\b|\b\d{12}\b|\b[Xx*]{4}[ -]?[Xx*]{4}[ -]?\d{4}\b)/.test(q)) return true;
-  const phoneRe = /(?:\(0\d{2,4}\)[\s.\-]?\d{3,4}[\s.\-]?\d{3,4}|\b0\d{2,4}[\s.\-]\d{3,4}[\s.\-]?\d{3,4}\b|\b0\d{2,4}[\-]\d{6,8}\b|(?:(?:\+91|0)[\s.\-]?)?[6-9]\d{2,4}[\s.\-]?\d{2,4}[\s.\-]?\d{2,4}\b)/g;
+  const phoneRe = /(?:\(0\d{2,4}\)[\s.\-]?\d{3,4}[\s.\-]?\d{3,4}|\b0\d{2,4}[\s.\-]\d{3,4}[\s.\-]?\d{3,4}\b|\b0\d{2,4}[\-]\d{6,8}\b|(?:\+91[\s.\-]?)?\b(?:0[\s.\-]?)?[6-9]\d{2,4}[\s.\-]?\d{2,4}[\s.\-]?\d{2,4}\b)/g;
   let m;
   while ((m = phoneRe.exec(q)) !== null) {
     const raw = m[0].replace(/\D/g, "");
@@ -241,10 +241,10 @@ function hasPhiInQuery(q) {
       return true;
     }
   }
-  const dateRe = /\b(?:\d{4}[\/-]\d{1,2}[\/-]\d{1,2}|\d{1,2}[\/.\\-]\d{1,2}[\/.\\-]\d{2,4}|\d{1,2}(?:st|nd|rd|th)?[\s.\\-]+(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)(?:[\s.\\-]+\d{2,4})?|(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{1,2}(?:st|nd|rd|th)?(?:,?\s+\d{2,4})?|(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\s+\d{4})\b/i;
+  const dateRe = /\b(?:\d{4}[\/-]\d{1,2}[\/-]\d{1,2}|\d{1,2}[\/.\\-]\d{1,2}[\/.\\-]\d{2,4}|\d{1,2}(?:st|nd|rd|th)?[ -]+(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)(?:[ -]+\d{2,4})?|(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)[ -]+\d{1,2}(?:st|nd|rd|th)?(?:,?\s*\d{4}|[ -]+\d{4})?|(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)[ -]+\d{4})\b/i;
   if (dateRe.test(q)) return true;
-  const idLabelRe = /\b(?:Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp(?:\s*No\.?|\s*Number)?|Reg(?:\s*No\.?|\s*Number)?|OPD(?:\s*No\.?|\s*Number)?|OP(?:\s*No\.?|\s*Number)?|IPD(?:\s*No\.?|\s*Number)?|IP(?:\s*No\.?|\s*Number)?|CR(?:\s*No\.?|\s*Number)?|UHID|MRN)\b/i;
-  if (idLabelRe.test(q)) return true;
+  const idRe = /\b(?:Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp\s*(?:Number|No\.?)|MRN|UHID|UID|IPD(?:\s*(?:Number|No\.?))?|IP(?:\s*(?:Number|No\.?))?|OPD(?:\s*(?:Number|No\.?))?|OP\s*(?:Number|No\.?)|CR\s*(?:Number|No\.?)|Reg\s*(?:Number|No\.?))\b[ \t:#.-]*(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b/i;
+  if (idRe.test(q)) return true;
   return false;
 }
 
