@@ -64,7 +64,9 @@
     projectId: null,
     view: "assess",
     selectedRunId: null,
-    data: {}
+    data: {},
+    ai: null,
+    serverSugs: {}
   };
   var lastContainer = null;
   var mqlBound = false;
@@ -192,6 +194,10 @@
   }
 
   function suggestionsFor(run, a) {
+    var server = st.serverSugs && st.serverSugs[run.id];
+    if (server) {
+      return { imprecision: server.imprecision || null, inconsistency: server.inconsistency || null };
+    }
     var mid = parseFloat(a.mid);
     try {
       return {
@@ -300,10 +306,25 @@
     var detail = "Started at " + g.startedAt;
     if (g.downgrades.length) detail += ", down " + g.downgrades.length + " domain" + (g.downgrades.length === 1 ? "" : "s");
     if (g.upgrades.length) detail += ", up " + g.upgrades.length;
+    var certText = g.certainty + " certainty";
+    var explain = G.SMD_RESEARCH_EXPLAIN;
+    if (explain) { try { certText = explain.grade(g.certainty); } catch (e) {} }
     return '<div class="rmd-grade-badge rmd-grade-cert-' + cls + '" id="rmdGradeBadge" aria-live="polite">' +
       '<span class="rmd-grade-symbols" aria-hidden="true">' + esc(g.symbols) + '</span>' +
-      '<strong>' + esc(g.certainty) + ' certainty</strong>' +
+      '<strong>' + esc(certText) + '</strong>' +
       '<span class="rmd-muted">' + esc(detail) + '</span></div>';
+  }
+
+  /* NNT (or NNH) from the pooled RR and the entered baseline risk per 1000. */
+  function nntLine(a, run) {
+    var explain = G.SMD_RESEARCH_EXPLAIN;
+    if (!explain || !run || run.measure !== "RR") return "";
+    var br = parseFloat(a.baselineRisk);
+    if (!isFinite(br) || br <= 0) return "";
+    var pooled = run.result && run.result.pooled;
+    if (!pooled || pooled.effect == null) return "";
+    var rr = Math.exp(pooled.effect);
+    try { return explain.nnt(rr, br) || ""; } catch (e) { return ""; }
   }
 
   function suggestionHtml(key, sug) {
@@ -320,6 +341,7 @@
       h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-grade-accept="' + key + '">Accept</button>');
     }
     h.push('  </div>');
+    if (st.ai) h.push(SMD.ai.noteHtml(st.ai, key));
     if (sug.suggested === "no") {
       h.push('  <p class="rmd-grade-sug-none">No downgrade suggested. ' + esc(sug.why) + '</p>');
     } else {
@@ -374,6 +396,8 @@
 
     /* Right: GRADE form for the selected outcome. */
     h.push('  <div class="rmd-grade-form">');
+    if (!st.ai) st.ai = SMD.ai.state();
+    h.push(SMD.ai.barHtml(st.ai, { task: "grade", label: "GRADE suggestions", cost: 0 }));
     h.push('    <div class="rmd-card">');
     h.push('      <h3 class="rmd-card-heading">Outcome</h3>');
     h.push('      <div class="rmd-grade-row2">');
@@ -457,6 +481,8 @@
     h.push('      <div class="rmd-field"><label for="rmdGradeBaseline">Assumed control risk per 1000 (optional)</label>');
     h.push('        <input type="number" step="any" min="0" max="1000" id="rmdGradeBaseline" autocomplete="off" value="' + esc(a.baselineRisk) + '" placeholder="e.g. 100">');
     h.push('        <span class="rmd-field-hint">For binary outcomes (RR, OR). The pooled relative effect is converted to absolute effects per 1000 with this baseline. RD needs no baseline.</span></div>');
+    var nntText = nntLine(a, sel);
+    h.push('      <div id="rmdGradeNnt">' + (nntText ? '<p class="rmd-what-mean">' + esc(nntText) + '</p>' : '') + '</div>');
     h.push('      <p class="rmd-grade-note">Assessments are saved on this device. Server sync ships with the Phase 4.3 API.</p>');
     h.push('    </div>');
 
@@ -472,6 +498,11 @@
     var a = getAssessment(st.projectId, run);
     var badge = container.querySelector("#rmdGradeBadge");
     if (badge) badge.outerHTML = badgeHtml(a, run);
+    var nntBox = container.querySelector("#rmdGradeNnt");
+    if (nntBox) {
+      var nl = nntLine(a, run);
+      nntBox.innerHTML = nl ? '<p class="rmd-what-mean">' + esc(nl) + '</p>' : "";
+    }
     var sugs = suggestionsFor(run, a);
     var i, key, sugBox, sug, missing, errEl, reqEl, ta;
     var sugKeys = ["imprecision", "inconsistency"];
@@ -562,6 +593,7 @@
       var taEl = container.querySelector("#rmdGradeReason_" + key);
       if (selEl) selEl.value = sug.suggested;
       if (taEl) taEl.value = sug.why;
+      SMD.ai.clearNote(st.ai, key);
       refreshDynamic(container, run);
     };
   }
@@ -581,6 +613,7 @@
     for (var b = 0; b < runBtns.length; b++) {
       runBtns[b].onclick = function () {
         st.selectedRunId = this.getAttribute("data-rmd-grade-run");
+        st.ai = null;
         render(container);
       };
     }
@@ -602,7 +635,7 @@
     if (midEl) midEl.oninput = function () { a().mid = this.value; saveAll(); refreshDynamic(container, run); };
 
     var baseEl = container.querySelector("#rmdGradeBaseline");
-    if (baseEl) baseEl.oninput = function () { a().baselineRisk = this.value; saveAll(); };
+    if (baseEl) baseEl.oninput = function () { a().baselineRisk = this.value; saveAll(); refreshDynamic(container, run); };
 
     var levelSels = container.querySelectorAll("[data-rmd-grade-level]");
     for (var l = 0; l < levelSels.length; l++) {
@@ -610,6 +643,7 @@
         var key = this.getAttribute("data-rmd-grade-level");
         a().domains[key].level = this.value;
         saveAll();
+        SMD.ai.clearNote(st.ai, key);
         refreshDynamic(container, run);
       };
     }
@@ -619,6 +653,7 @@
         var key = this.getAttribute("data-rmd-grade-reason");
         a().domains[key].reason = this.value;
         saveAll();
+        SMD.ai.clearNote(st.ai, key);
         refreshDynamic(container, run);
       };
     }
@@ -642,6 +677,24 @@
     }
     bindAccept(container, run, "imprecision");
     bindAccept(container, run, "inconsistency");
+
+    if (st.ai) {
+      SMD.ai.bind(container, st.ai, {
+        pid: pid, task: "grade", label: "GRADE suggestions", cost: 0,
+        request: function () {
+          var mid = parseFloat(a().mid);
+          var q = "/v1/projects/" + encodeURIComponent(pid) + "/grade-suggestions?runId=" + encodeURIComponent(run.id);
+          if (isFinite(mid)) q += "&mid=" + encodeURIComponent(mid);
+          return SMD.api.request("GET", q);
+        },
+        apply: function (draft) {
+          var d = draft || {};
+          st.serverSugs[run.id] = { imprecision: d.imprecision || null, inconsistency: d.inconsistency || null };
+          return ["imprecision", "inconsistency"];
+        },
+        render: function () { render(container); }
+      });
+    }
   }
 
   /* ---- Summary of Findings view ------------------------------------------ */
@@ -731,7 +784,17 @@
       h.push('      </tbody>');
       h.push('    </table>');
       h.push('  </div>');
-      h.push('  <p class="rmd-grade-note">Certainty: ⊕⊕⊕⊕ High, ⊕⊕⊕◯ Moderate, ⊕⊕◯◯ Low, ⊕◯◯◯ Very low. CI bounds use the run confidence level (default 95%). Absolute effects assume the entered control risk; OR is converted to risks per the GRADE handbook.</p>');
+      var sofNnt = [];
+      for (var ni = 0; ni < built.gradedRuns.length; ni++) {
+        var nrun = built.gradedRuns[ni];
+        var na = getAssessment(project.id, nrun);
+        var nl = nntLine(na, nrun);
+        if (nl) sofNnt.push('<p class="rmd-what-mean">' + esc((na.outcome || "Outcome") + ": " + nl) + '</p>');
+      }
+      if (sofNnt.length) {
+        h.push('  <div class="rmd-what-mean-box"><p class="rmd-what-mean-title">What this means</p>' + sofNnt.join("") + '</div>');
+      }
+      h.push('  <p class="rmd-grade-note">Certainty: ⊕⊕⊕⊕ High (we are very sure), ⊕⊕⊕◯ Moderate (probably close to the truth), ⊕⊕◯◯ Low (the real effect could be quite different), ⊕◯◯◯ Very low (we are very unsure). CI bounds use the run confidence level (default 95%). Absolute effects assume the entered control risk; Odds ratio (OR) is converted to risks per the GRADE handbook.</p>');
     }
     h.push('</div>');
     h.push('</div>');
@@ -797,6 +860,8 @@
       st.selectedRunId = null;
       st.view = "assess";
       st.data = loadAll();
+      st.ai = null;
+      st.serverSugs = {};
     }
     if (!grade()) {
       container.innerHTML = '<div class="rmd-p2-screen"><div class="rmd-banner rmd-banner-error" role="alert"><strong>The GRADE module did not load.</strong><span>Update the app and reopen ResearchMD.</span></div></div>';

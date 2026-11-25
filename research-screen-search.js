@@ -57,6 +57,7 @@
     studyType: "",
     busy: false,
     runError: null,
+    ai: null,
     importFormat: "ris",
     importFileName: "",
     importPreview: null,
@@ -99,16 +100,43 @@
   function countEntries(format, text) {
     var n = 0;
     var m;
-    if (format === "ris") {
+    var fmt = String(format || "").toLowerCase();
+    if (fmt === "ris") {
       m = text.match(/^TY\s+-\s/gm);
       n = m ? m.length : 0;
       if (!n) {
         m = text.match(/^ER\s+-/gm);
         n = m ? m.length : 0;
       }
-    } else if (format === "bibtex") {
+    } else if (fmt === "bibtex") {
       m = text.match(/^@[a-zA-Z]+\s*[{(]/gm);
       n = m ? m.length : 0;
+    } else if (fmt === "csl_json" || fmt === "json") {
+      try {
+        var parsed = JSON.parse(text);
+        if (Object.prototype.toString.call(parsed) === "[object Array]") return parsed.length;
+        if (parsed && parsed.items && Object.prototype.toString.call(parsed.items) === "[object Array]") return parsed.items.length;
+      } catch (e) {}
+      m = text.match(/"id"\s*:/g);
+      n = m ? m.length : 0;
+      if (!n) {
+        m = text.match(/"title"\s*:/g);
+        n = m ? m.length : 0;
+      }
+    } else if (fmt === "endnote_xml" || fmt === "xml") {
+      m = text.match(/<record\b/gi);
+      n = m ? m.length : 0;
+      if (!n) {
+        m = text.match(/<style\b/gi);
+        n = m ? m.length : 0;
+      }
+    } else if (fmt === "nbib") {
+      m = text.match(/^PMID-\s+/gm);
+      n = m ? m.length : 0;
+      if (!n) {
+        m = text.match(/^TI\s+-\s+/gm);
+        n = m ? m.length : 0;
+      }
     } else {
       var lines = text.split(/\r?\n/);
       for (var i = 0; i < lines.length; i++) {
@@ -123,6 +151,9 @@
     var lower = String(name || "").toLowerCase();
     if (/\.ris$/.test(lower)) return "ris";
     if (/\.bib$/.test(lower) || /\.bibtex$/.test(lower)) return "bibtex";
+    if (/\.json$/.test(lower)) return "csl_json";
+    if (/\.xml$/.test(lower)) return "endnote_xml";
+    if (/\.nbib$/.test(lower)) return "nbib";
     if (/\.csv$/.test(lower)) return "csv";
     return null;
   }
@@ -144,6 +175,7 @@
       st.runs = [];
       st.nextCursor = null;
       st.runError = null;
+      st.ai = null;
       st.importResult = null;
       st.importError = null;
       st.importPreview = null;
@@ -180,6 +212,8 @@
     // Run card
     h.push('<div class="rmd-card">');
     h.push('<h3 class="rmd-card-heading">Run a Search</h3>');
+    if (canRun && !st.ai) st.ai = SMD.ai.state();
+    if (canRun && st.ai) h.push(SMD.ai.barHtml(st.ai, { task: "search_query", label: "search query", cost: 2 }));
     if (st.runError) h.push(p2().errHtml(st.runError, "search-run-retry"));
     h.push('<div class="rmd-field"><span class="rmd-section-label" id="rmdDbLabel">Database</span>');
     h.push('<div class="rmd-filter-tabs" role="group" aria-labelledby="rmdDbLabel">');
@@ -189,7 +223,9 @@
     h.push('</div></div>');
     h.push('<div class="rmd-field"><label for="rmd_search_query">Query for ' + esc(db.label) + ' <span class="rmd-req">*</span></label>');
     h.push('<textarea id="rmd_search_query" rows="4" maxlength="4000" placeholder="' + esc(db.hint) + '" spellcheck="false">' + esc(st.queries[st.database]) + '</textarea>');
-    h.push('<span class="rmd-field-hint">Stored verbatim on the run so the search can be replayed exactly.</span></div>');
+    h.push('<span class="rmd-field-hint">Stored verbatim on the run so the search can be replayed exactly.</span>');
+    if (st.ai) h.push(SMD.ai.noteHtml(st.ai, st.database));
+    h.push('</div>');
     h.push('<div class="rmd-form-row">');
     h.push('<div class="rmd-field"><label for="rmd_search_dateto">Date Upper Bound</label>');
     h.push('<input type="date" id="rmd_search_dateto" value="' + esc(st.dateTo) + '">');
@@ -236,19 +272,34 @@
     // Import card
     h.push('<div class="rmd-card">');
     h.push('<h3 class="rmd-card-heading">Import References</h3>');
-    h.push('<p class="rmd-muted">RIS, BibTeX or CSV from another database or reference manager. Entries are normalised and deduplicated deterministically; nothing is silently dropped.</p>');
+    h.push('<p class="rmd-muted">RIS, BibTeX, CSL-JSON, EndNote XML, NBIB, or CSV from your reference manager or database. Entries are normalised and deduplicated deterministically; nothing is silently dropped.</p>');
+    h.push('<div class="rmd-field">');
+    h.push('<span class="rmd-section-label">Supported formats and export guides</span>');
+    h.push('<ul class="rmd-tips-list" style="list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--rmd-mut);">');
+    h.push('  <li><strong style="color:var(--rmd-ink);">Zotero:</strong> Right-click your collection, choose Export Collection, and select Better CSL JSON or CSL JSON (.json) or RIS (.ris).</li>');
+    h.push('  <li><strong style="color:var(--rmd-ink);">Mendeley:</strong> Select reference entries, choose File &gt; Export, and select CSL-JSON (.json) or RIS (.ris).</li>');
+    h.push('  <li><strong style="color:var(--rmd-ink);">EndNote:</strong> Select File &gt; Export, choose XML format (.xml) or RIS (.ris) with Output Style set to EndNote Export.</li>');
+    h.push('  <li><strong style="color:var(--rmd-ink);">PubMed (NBIB):</strong> On PubMed, click Save &gt; Selection or All results &gt; Format: PubMed / Summary (.nbib).</li>');
+    h.push('  <li><strong style="color:var(--rmd-ink);">BibTeX / CSV:</strong> From Google Scholar, Scopus, or spreadsheets, export as BibTeX (.bib) or CSV (.csv).</li>');
+    h.push('</ul>');
+    h.push('</div>');
     if (st.importError) h.push(p2().errHtml(st.importError, null));
     if (st.importResult) {
-      h.push('<div class="rmd-banner rmd-banner-info" aria-live="polite"><strong>Import complete: ' + st.importResult.recordsAdded + ' records added, ' + st.importResult.duplicatesFlagged + ' duplicates flagged.</strong>');
+      var added = st.importResult.added != null ? st.importResult.added : (st.importResult.recordsAdded != null ? st.importResult.recordsAdded : 0);
+      var dups = st.importResult.duplicates != null ? st.importResult.duplicates : (st.importResult.duplicatesFlagged != null ? st.importResult.duplicatesFlagged : 0);
+      h.push('<div class="rmd-banner rmd-banner-info" aria-live="polite"><strong>Import complete: ' + added + ' added, ' + dups + ' duplicates flagged (already in the project or repeated in this file).</strong>');
       h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="to-screening">Open Screening</button></div>');
     }
     h.push('<div class="rmd-field"><label for="rmd_import_file">Reference File</label>');
-    h.push('<input type="file" id="rmd_import_file" accept=".ris,.bib,.bibtex,.csv"></div>');
+    h.push('<input type="file" id="rmd_import_file" accept=".ris,.bib,.json,.xml,.nbib,.csv"></div>');
     h.push('<div class="rmd-field"><label for="rmd_import_format">Format</label>');
     h.push('<select id="rmd_import_format">');
-    h.push('<option value="ris"' + (st.importFormat === "ris" ? " selected" : "") + '>RIS</option>');
-    h.push('<option value="bibtex"' + (st.importFormat === "bibtex" ? " selected" : "") + '>BibTeX</option>');
-    h.push('<option value="csv"' + (st.importFormat === "csv" ? " selected" : "") + '>CSV</option>');
+    h.push('<option value="ris"' + (st.importFormat === "ris" ? " selected" : "") + '>RIS (.ris)</option>');
+    h.push('<option value="bibtex"' + (st.importFormat === "bibtex" ? " selected" : "") + '>BibTeX (.bib)</option>');
+    h.push('<option value="csl_json"' + ((st.importFormat === "csl_json" || st.importFormat === "json") ? " selected" : "") + '>CSL-JSON (.json) - Zotero / Mendeley</option>');
+    h.push('<option value="endnote_xml"' + ((st.importFormat === "endnote_xml" || st.importFormat === "xml") ? " selected" : "") + '>EndNote XML (.xml)</option>');
+    h.push('<option value="nbib"' + (st.importFormat === "nbib" ? " selected" : "") + '>NBIB (.nbib) - PubMed</option>');
+    h.push('<option value="csv"' + (st.importFormat === "csv" ? " selected" : "") + '>CSV (.csv)</option>');
     h.push('</select></div>');
     if (st.importPreview != null) {
       h.push('<p class="rmd-muted" aria-live="polite">' + esc(st.importFileName) + ': ' + st.importPreview + ' entries detected.</p>');
@@ -332,7 +383,7 @@
     }).then(function (data) {
       if (mySeq !== seq) return;
       st.importBusy = false;
-      st.importResult = data.import;
+      st.importResult = (data && data.import) || data || {};
       st.importPreview = null;
       st.importFileName = "";
       importFile = null;
@@ -388,13 +439,34 @@
     }
 
     var q = container.querySelector("#rmd_search_query");
-    if (q) q.oninput = function () { st.queries[st.database] = this.value; };
+    if (q) q.oninput = function () { st.queries[st.database] = this.value; SMD.ai.clearNote(st.ai, st.database); };
     var dt = container.querySelector("#rmd_search_dateto");
     if (dt) dt.onchange = function () { st.dateTo = this.value; };
     var lang = container.querySelector("#rmd_search_lang");
     if (lang) lang.onchange = function () { st.language = this.value; };
     var type = container.querySelector("#rmd_search_type");
     if (type) type.oninput = function () { st.studyType = this.value; };
+
+    if (st.ai) {
+      SMD.ai.bind(container, st.ai, {
+        pid: project.id, task: "search_query", label: "search query", cost: 2,
+        input: function () {
+          return {
+            researchQuestion: project.researchQuestion || "",
+            title: project.title || "",
+            studyType: st.studyType || project.studyType || ""
+          };
+        },
+        apply: function (draft) {
+          var d = draft || {};
+          var keys = [];
+          if (typeof d.pubmed === "string" && d.pubmed) { st.queries.pubmed = d.pubmed; keys.push("pubmed"); }
+          if (typeof d.europePmc === "string" && d.europePmc) { st.queries.europe_pmc = d.europePmc; keys.push("europe_pmc"); }
+          return keys;
+        },
+        render: function () { render(container); }
+      });
+    }
 
     var fmt = container.querySelector("#rmd_import_format");
     if (fmt) fmt.onchange = function () {

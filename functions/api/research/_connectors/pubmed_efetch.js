@@ -26,21 +26,37 @@ function decodeEntities(s) {
 function stripTags(s) {
   return decodeEntities(String(s).replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
 }
+function tagList(block, re) {
+  const out = [];
+  const g = new RegExp(re.source, re.flags.indexOf("g") >= 0 ? re.flags : re.flags + "g");
+  let m;
+  while ((m = g.exec(block)) !== null) {
+    const text = stripTags(m[1]);
+    if (text) out.push(text);
+  }
+  return out;
+}
 const MONTHS = { Jan: "01", Feb: "02", Mar: "03", Apr: "04", May: "05", Jun: "06",
   Jul: "07", Aug: "08", Sep: "09", Oct: "10", Nov: "11", Dec: "12" };
 function pad(n) { return String(n).padStart(2, "0"); }
 
-/* One <PubmedArticle> block -> { pmid, abstract, publicationDate, venue }. */
+/* One <PubmedArticle> block. abstract / publicationDate / venue stay as they
+ * were. The extra fields feed the paper card: labelled sections, authors,
+ * publication types, MeSH, keywords, PMCID, DOI. */
 export function parseArticle(block) {
   const pmidMatch = block.match(/<PMID[^>]*>(\d+)<\/PMID>/);
   const pmid = pmidMatch ? pmidMatch[1] : "";
   const parts = [];
+  const sections = [];
   const absRe = /<AbstractText([^>]*)>([\s\S]*?)<\/AbstractText>/g;
   let m;
   while ((m = absRe.exec(block)) !== null) {
     const label = (m[1].match(/Label="([^"]*)"/) || [])[1];
     const text = stripTags(m[2]);
-    if (text) parts.push(label ? label + ": " + text : text);
+    if (!text) continue;
+    parts.push(label ? label + ": " + text : text);
+    const pretty = label ? label.charAt(0).toUpperCase() + label.slice(1).toLowerCase() : "";
+    sections.push({ label: pretty, text });
   }
   let publicationDate = "";
   const ad = block.match(/<ArticleDate[^>]*>\s*<Year>(\d{4})<\/Year>\s*<Month>(\d{1,2})<\/Month>\s*<Day>(\d{1,2})<\/Day>/);
@@ -53,7 +69,35 @@ export function parseArticle(block) {
     }
   }
   const journal = block.match(/<Journal>[\s\S]*?<Title>([\s\S]*?)<\/Title>/);
-  return { pmid, abstract: parts.join(" "), publicationDate, venue: journal ? stripTags(journal[1]) : "" };
+  const venue = journal ? stripTags(journal[1]) : "";
+  const titleMatch = block.match(/<ArticleTitle>([\s\S]*?)<\/ArticleTitle>/);
+  const authors = [];
+  const authorRe = /<Author\b[^>]*>[\s\S]*?<\/Author>/g;
+  while ((m = authorRe.exec(block)) !== null && authors.length < 30) {
+    const open = (m[0].match(/^<Author\b[^>]*>/) || [""])[0];
+    if (/ValidYN="N"/i.test(open)) continue;
+    const chunk = m[0];
+    const last = stripTags((chunk.match(/<LastName>([\s\S]*?)<\/LastName>/) || [])[1] || "");
+    const initials = stripTags((chunk.match(/<Initials>([\s\S]*?)<\/Initials>/) || [])[1] || "");
+    const collective = stripTags((chunk.match(/<CollectiveName>([\s\S]*?)<\/CollectiveName>/) || [])[1] || "");
+    const name = last ? (initials ? last + " " + initials : last) : collective;
+    if (name) authors.push(name);
+  }
+  const pmcMatch = block.match(/<ArticleId\b[^>]*\bIdType=["']pmc["'][^>]*>([^<]+)<\/ArticleId>/i);
+  const doiMatch = block.match(/<ArticleId\b[^>]*\bIdType=["']doi["'][^>]*>([^<]+)<\/ArticleId>/i)
+    || block.match(/<ELocationID\b[^>]*\bEIdType=["']doi["'][^>]*>([^<]+)<\/ELocationID>/i);
+  const pmcid = pmcMatch ? String(pmcMatch[1]).replace(/\s+/g, "").toUpperCase() : "";
+  const yearMatch = publicationDate.match(/^(\d{4})/);
+  return {
+    pmid, abstract: parts.join(" "), publicationDate, venue,
+    title: titleMatch ? stripTags(titleMatch[1]) : "",
+    authors, year: yearMatch ? Number(yearMatch[1]) : null, journal: venue, sections,
+    publicationTypes: tagList(block, /<PublicationType\b[^>]*>([\s\S]*?)<\/PublicationType>/gi),
+    mesh: tagList(block, /<DescriptorName\b[^>]*>([\s\S]*?)<\/DescriptorName>/gi),
+    keywords: tagList(block, /<Keyword\b[^>]*>([\s\S]*?)<\/Keyword>/gi),
+    pmcid: /^PMC\d+$/.test(pmcid) ? pmcid : "",
+    doi: doiMatch ? String(doiMatch[1]).trim() : "",
+  };
 }
 
 /* efetchAbstracts(ids, opts) -> Map pmid -> {abstract, publicationDate, venue}.

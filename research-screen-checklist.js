@@ -40,6 +40,7 @@
     projectId: null,
     loading: false,
     error: "",
+    errObj: null,
     guidelines: [],
     guidelineId: "",
     checklist: null,
@@ -49,6 +50,7 @@
     approved: false,
     jump: null,
     csv: "",
+    ai: null,
     seq: 0
   };
   var lastContainer = null;
@@ -130,6 +132,7 @@
   function failLoad(e) {
     st.loading = false;
     st.error = (e && e.message) ? String(e.message) : "Could not load the checklist.";
+    st.errObj = e || null;
     if (lastContainer) paint(lastContainer);
   }
 
@@ -138,10 +141,12 @@
     st.guidelineId = gid;
     st.loading = true;
     st.error = "";
+    st.errObj = null;
     st.approved = false;
     st.csv = "";
     st.jump = null;
     st.filled = null;
+    st.ai = null;
     if (lastContainer) paint(lastContainer);
     base = "/v1/projects/" + encodeURIComponent(pid);
     return Promise.all([
@@ -159,6 +164,7 @@
       } catch (err) {
         st.filled = null;
         st.error = (err && err.message) ? String(err.message) : "Could not fill the checklist.";
+        st.errObj = err || null;
       }
       if (lastContainer) paint(lastContainer);
       bindBreakpoint();
@@ -173,6 +179,7 @@
     st.projectId = pid;
     st.loading = true;
     st.error = "";
+    st.errObj = null;
     st.checklist = null;
     st.filled = null;
     st.approved = false;
@@ -185,8 +192,16 @@
       rows = (list && list.checklists) || [];
       st.guidelines = rows;
       id = "";
-      for (i = 0; i < rows.length; i++) {
-        if (rows[i] && rows[i].id === "prisma2020") id = "prisma2020";
+      var pref = SMD.preferredChecklist ? SMD.preferredChecklist(pid) : "";
+      if (pref) {
+        for (i = 0; i < rows.length; i++) {
+          if (rows[i] && rows[i].id === pref) id = pref;
+        }
+      }
+      if (!id) {
+        for (i = 0; i < rows.length; i++) {
+          if (rows[i] && rows[i].id === "prisma2020") id = "prisma2020";
+        }
       }
       if (!id && rows.length && rows[0] && rows[0].id) id = String(rows[0].id);
       if (!id) {
@@ -215,15 +230,18 @@
     api("PUT", "/v1/projects/" + encodeURIComponent(pid) + "/checklist-manual/" + encodeURIComponent(gid), { num: num, text: text }).then(function (data) {
       st.manual = (data && data.entries) ? data.entries : st.manual;
       st.error = "";
+      st.errObj = null;
       st.csv = "";
       try {
         compute();
       } catch (err) {
         st.error = (err && err.message) ? String(err.message) : "Could not fill the checklist.";
+        st.errObj = err || null;
       }
       if (lastContainer) paint(lastContainer);
     }).catch(function (e) {
       st.error = (e && e.message) ? String(e.message) : "Could not save the entry.";
+      st.errObj = e || null;
       if (lastContainer) paint(lastContainer);
     });
   }
@@ -232,6 +250,13 @@
     if (!st.filled || !engine() || typeof engine().toCsv !== "function") return;
     st.csv = engine().toCsv(st.filled);
     if (lastContainer) paint(lastContainer);
+    var proj = activeProject();
+    var name = SMD.p2.fileSlug(proj && proj.title, "reporting-checklist") + "-checklist.csv";
+    SMD.p2.downloadText(name, st.csv, "text/csv").then(function () {
+      SMD.p2.flashNotice(lastContainer, "Your file is ready to save or share.", "info");
+    }, function (err) {
+      SMD.p2.flashNotice(lastContainer, SMD.p2.friendlyError(err).message, "error");
+    });
   }
 
   function injectCss() {
@@ -323,6 +348,7 @@
     h.push('<h4>' + esc(it.topic || "Item") + '</h4>');
     h.push('<span class="rmd-checklist-badge rmd-checklist-badge-' + esc(it.status) + '" data-rmd-status="' + esc(it.status) + '">' + esc(label) + '</span>');
     h.push('</div>');
+    if (st.ai) h.push(SMD.ai.noteHtml(st.ai, it.num));
     h.push('<p class="rmd-checklist-req">' + esc(it.text) + '</p>');
     h.push('<p class="rmd-checklist-filled">' + esc(it.filled ? it.filled : "Not recorded in the project.") + '</p>');
     lines = it.evidence || [];
@@ -404,17 +430,23 @@
       h.push('</select></div>');
     }
     h.push('<div class="rmd-checklist-actions">');
-    h.push('<button type="button" class="rmd-checklist-btn" data-rmd-export="csv">Export CSV</button>');
+    h.push('<button type="button" class="rmd-checklist-btn" data-rmd-export="csv">Download CSV</button>');
     if (st.approved) {
       h.push('<button type="button" class="rmd-checklist-btn" data-rmd-approve disabled>Approved</button>');
     } else {
       h.push('<button type="button" class="rmd-checklist-btn rmd-checklist-btn-primary" data-rmd-approve>Approve</button>');
     }
     h.push('</div></div>');
+    if (st.filled && !st.ai) st.ai = SMD.ai.state();
+    if (st.filled && st.ai) h.push(SMD.ai.barHtml(st.ai, { task: "checklist", label: "reporting checklist", cost: 2 }));
     if (phone) h.push('<p class="rmd-checklist-note">On a phone this checklist is view and approve only. Enter manual items on a tablet.</p>');
     if (st.approved) h.push('<p id="rmdChecklistApproved" class="rmd-checklist-approved">Approved on this device. You still upload the pack yourself.</p>');
     if (st.error) {
-      h.push('<div class="rmd-checklist-banner" role="alert"><strong>' + esc(st.error) + '</strong><button type="button" class="rmd-checklist-btn" data-rmd="retry">Retry</button></div>');
+      if (SMD.p2 && SMD.p2.errHtml) {
+        h.push(SMD.p2.errHtml(st.errObj || { message: st.error }, "retry"));
+      } else {
+        h.push('<div class="rmd-checklist-banner" role="alert"><strong>' + esc(st.error) + '</strong><button type="button" class="rmd-checklist-btn" data-rmd="retry">Retry</button></div>');
+      }
     }
     if (st.loading && !st.filled) {
       h.push('<p class="rmd-checklist-note">Loading the checklist.</p>');
@@ -439,7 +471,6 @@
       h.push('</div>');
     }
     h.push('<pre id="rmdChecklistCsv" class="rmd-checklist-sr"></pre>');
-    h.push('<a class="rmd-checklist-sr" data-rmd-csv-download>Download CSV</a>');
     h.push('</div></div>');
     container.innerHTML = h.join("");
     var pre = container.querySelector("#rmdChecklistCsv");
@@ -454,7 +485,6 @@
     var retry = container.querySelector('[data-rmd="retry"]');
     var jumps = container.querySelectorAll("[data-rmd-pointer]");
     var forms = container.querySelectorAll("[data-rmd-manual-form]");
-    var link = container.querySelector("[data-rmd-csv-download]");
     var i;
     if (guide) {
       guide.onchange = function () {
@@ -499,9 +529,47 @@
         return false;
       };
     }
-    if (link && st.csv) {
-      link.setAttribute("href", "data:text/csv;charset=utf-8," + encodeURIComponent(st.csv));
-      link.setAttribute("download", "checklist.csv");
+    var manuals = container.querySelectorAll("[data-rmd-manual]");
+    for (i = 0; i < manuals.length; i++) {
+      manuals[i].oninput = function () { SMD.ai.clearNote(st.ai, this.getAttribute("data-rmd-manual")); };
+    }
+    if (st.ai) {
+      SMD.ai.bind(container, st.ai, {
+        pid: st.projectId, task: "checklist", label: "reporting checklist", cost: 2,
+        input: function () {
+          var items = (st.filled && st.filled.items) || [];
+          var slim = [];
+          for (var k = 0; k < items.length; k++) {
+            slim.push({ num: items[k].num, topic: items[k].topic, text: items[k].text, projectField: items[k].projectField, status: items[k].status });
+          }
+          return { guideline: st.guidelineId, items: slim, snapshot: st.snapshot || {} };
+        },
+        apply: function (draft) {
+          var d = draft || {};
+          var items = d.items || [];
+          var filledItems = (st.filled && st.filled.items) || [];
+          var byNum = {};
+          var k, it, target, text;
+          for (k = 0; k < filledItems.length; k++) byNum[filledItems[k].num] = filledItems[k];
+          var keys = [];
+          for (k = 0; k < items.length; k++) {
+            it = items[k];
+            var num = it && (it.num || it.itemNum);
+            if (!num) continue;
+            target = byNum[num];
+            if (!target || target.projectField !== "manual") continue;
+            text = typeof it.text === "string" ? it.text : (it.status === "covered" && it.section ? "Reported in the " + it.section + " section." : "");
+            if (!text) continue;
+            st.manual[num] = text;
+            keys.push(num);
+          }
+          if (keys.length) {
+            try { compute(); } catch (e) {}
+          }
+          return keys;
+        },
+        render: function () { paint(lastContainer); }
+      });
     }
   }
 

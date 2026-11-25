@@ -5,6 +5,7 @@
  * are omitted. PRISMA counts come from prismaCounts (the same helper the
  * PRISMA route uses). Manual entries are the researcher's own text.
  */
+import consort2025 from "../../../data/research-checklists/consort2025.json";
 import consort2010 from "../../../data/research-checklists/consort2010.json";
 import spirit from "../../../data/research-checklists/spirit.json";
 import strobe from "../../../data/research-checklists/strobe.json";
@@ -17,12 +18,12 @@ import { ingestProjectDrafts } from "./_manuscript.js";
 const READ_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 
-const FILES = [consort2010, spirit, strobe, stard2015, tripod, prisma2020, care];
+const FILES = [consort2025, consort2010, spirit, strobe, stard2015, tripod, prisma2020, care];
 const BY_ID = Object.fromEntries(FILES.map((c) => [c.id, c]));
 /* Aliases are the reportingChecklistId / protocolChecklistId values in
  * _templates.js. File ids stay the canonical stored key. */
 const ALIASES = {
-  consort: "consort2010",
+  consort: "consort2025",
   spirit: "spirit",
   strobe: "strobe",
   stard: "stard2015",
@@ -35,6 +36,24 @@ export function resolveChecklistId(id) {
   if (BY_ID[id]) return id;
   const alias = ALIASES[id];
   return alias && BY_ID[alias] ? alias : null;
+}
+
+/* Flat item list for Ask MaiK checklist drafts. Null when the id is unknown. */
+export function checklistItems(id) {
+  const canonical = resolveChecklistId(id);
+  if (!canonical) return null;
+  const c = BY_ID[canonical];
+  const items = [];
+  for (const sec of c.sections || []) {
+    for (const item of sec.items || []) {
+      items.push({
+        itemNum: String(item.number),
+        topic: String(item.topic || ""),
+        sectionTitle: String(sec.title || ""),
+      });
+    }
+  }
+  return { id: canonical, name: c.name, items };
 }
 
 function summaryOf(c) {

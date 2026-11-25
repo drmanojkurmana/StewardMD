@@ -531,8 +531,10 @@ try {
   await call('Page.navigate', { url: `http://localhost:${PORT}/?research=1` });
 
   ok(await until('!!window.SMD_RESEARCH && !!SMD_RESEARCH.screens && !!SMD_RESEARCH.screens.ipd && !!SMD_RESEARCH.screens.credits && !!SMD_RESEARCH.screens.institution && !!SMD_RESEARCH.screens.templates && !!SMD_RESEARCH.screens.journals', 30000), 'app loaded with all five Phase 6 screens');
-  ok(await ev(`!!document.querySelector('script[src*="research-screen-ipd.js?v=rmd3"]') && !!document.querySelector('script[src*="research-screen-credits.js?v=rmd3"]') && !!document.querySelector('script[src*="research-screen-institution.js?v=rmd3"]') && !!document.querySelector('script[src*="research-screen-templates.js?v=rmd3"]') && !!document.querySelector('script[src*="research-screen-journals.js?v=rmd3"]')`), 'index.html carries the five new script tags with ?v=rmd3');
+  ok(await ev(`!!document.querySelector('script[src*="research-screen-ipd.js?v=rmd3"]') && !!document.querySelector('script[src*="research-screen-credits.js?v=rmd5"]') && !!document.querySelector('script[src*="research-screen-institution.js?v=rmd3"]') && !!document.querySelector('script[src*="research-screen-templates.js?v=rmd3"]') && !!document.querySelector('script[src*="research-screen-journals.js?v=rmd3"]')`), 'index.html carries the five new script tags with ?v=rmd3');
 
+  // Mark the seed project as server-backed so server screens mount (practice gate skips it).
+  await ev(`(function(){var s=JSON.parse(localStorage.getItem('smd_research_state_v1'));s.projects[0].serverId=s.projects[0].id;s.projects[0].practice=false;localStorage.setItem('smd_research_state_v1',JSON.stringify(s));return 1})()`);
   await ev(`SMD_RESEARCH.open({screen:'ipd'});1`);
 
   /* ---------------- 1. IPD: blocked then allowed, residency, access log ---------------- */

@@ -1,7 +1,8 @@
 /* ResearchMD Phase 2.4 reference-file import parsers (ES module).
  * Contract: docs/research/contracts/phase-2/schemas/import-create.request.json.
- * RIS, BibTeX and CSV -> the connector normalise record shape, with source
- * "import:ris" | "import:bibtex" | "import:csv" (the 0002 records table).
+ * RIS, BibTeX, CSV, CSL-JSON, EndNote XML and NBIB -> the connector record
+ * shape, with source "import:ris" | "import:bibtex" | "import:csv" |
+ * "import:csl-json" | "import:endnote-xml" | "import:nbib".
  * Deterministic T0 code, no LLM. Parsers never touch D1 or R2; the API reads
  * the uploaded file from private R2 and persists the entries.
  *
@@ -11,7 +12,7 @@
  * duplicating rows.
  */
 import { ConnectorError } from "./_http.js";
-import { normaliseDoi, normaliseTitle, firstAuthorKey } from "../_dedup.js";
+import { normaliseDoi, normaliseTitle, firstAuthorKey, recordKeys } from "../_dedup.js";
 
 function fnv1a(str) {
   let h = 0x811c9dc5;
@@ -225,9 +226,237 @@ export function parseCSV(text) {
   return entries;
 }
 
+/* ---- CSL-JSON (Zotero "Better CSL JSON", Mendeley CSL export) ----------- */
+function cslText(value) {
+  if (Array.isArray(value)) return value.map(cslText).filter(Boolean).join(" ");
+  if (value && typeof value === "object") return "";
+  return value == null ? "" : String(value);
+}
+function cslAuthor(raw) {
+  if (typeof raw === "string") return raw;
+  if (!raw || typeof raw !== "object") return "";
+  if (raw.literal) return String(raw.literal);
+  const family = String(raw.family || "").trim();
+  const given = String(raw.given || "").trim();
+  if (family && given) return family + ", " + given;
+  return family || given;
+}
+function cslYear(item) {
+  const issued = item && item.issued;
+  const parts = issued && issued["date-parts"];
+  if (Array.isArray(parts) && Array.isArray(parts[0]) && parts[0][0] != null) return parts[0][0];
+  if (issued && typeof issued.raw === "string") return issued.raw;
+  return item && (item.year || item.issued) ? (item.year || "") : "";
+}
+function cslItems(value) {
+  if (Array.isArray(value)) return value;
+  if (value && typeof value === "object" && Array.isArray(value.items)) return value.items;
+  if (value && typeof value === "object") return [value];
+  return [];
+}
+export function parseCSL(text) {
+  let value;
+  try { value = JSON.parse(String(text || "")); }
+  catch (e) { throw new ConnectorError("invalid_search", "CSL-JSON is not valid JSON"); }
+  const items = cslItems(value).filter((item) => item && typeof item === "object" && !Array.isArray(item));
+  const entries = [];
+  for (const item of items) {
+    const authors = Array.isArray(item.author)
+      ? item.author
+      : (typeof item.author === "string" ? item.author.split(/\s+and\s+/i) : []);
+    const pmid = String(item.PMID || item.pmid || "").replace(/\D/g, "");
+    const doi = cslText(item.DOI || item.doi);
+    entries.push(finish("import:csl-json", {
+      title: cslText(item.title),
+      authors: authors.map(cslAuthor),
+      year: cslYear(item),
+      doi,
+      pmid,
+    }, {
+      type: cslText(item.type),
+      key: cslText(item.id),
+      pmid,
+      containerTitle: cslText(item["container-title"]),
+      volume: cslText(item.volume),
+      issue: cslText(item.issue || item.number),
+      page: cslText(item.page),
+      abstract: cslText(item.abstract),
+      url: cslText(item.URL || item.url),
+    }));
+  }
+  if (!entries.length) throw new ConnectorError("invalid_search", "No CSL-JSON entries found");
+  return entries;
+}
+
+/* ---- EndNote XML ---------------------------------------------------------- */
+function decodeXml(value) {
+  return String(value || "")
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, "\"")
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, "&");
+}
+function xmlBlock(xml, tag) {
+  const m = String(xml || "").match(new RegExp("<" + tag + "\\b[^>]*>([\\s\\S]*?)</" + tag + ">", "i"));
+  return m ? m[1] : "";
+}
+function xmlPlain(xml, tag) {
+  const inner = xmlBlock(xml, tag);
+  if (!inner) return "";
+  return decodeXml(inner.replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+}
+function xmlAll(xml, tag) {
+  const re = new RegExp("<" + tag + "\\b[^>]*>([\\s\\S]*?)</" + tag + ">", "gi");
+  const out = [];
+  let m;
+  const src = String(xml || "");
+  while ((m = re.exec(src))) {
+    const text = decodeXml(m[1].replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+    if (text) out.push(text);
+  }
+  return out;
+}
+function doiLike(value) {
+  const s = String(value || "").trim();
+  return /^10\.\d{4,}\/\S+$/.test(s) ? s : "";
+}
+export function parseEndNoteXML(text) {
+  const src = String(text || "");
+  const records = [];
+  const re = /<record\b[^>]*>([\s\S]*?)<\/record>/gi;
+  let m;
+  while ((m = re.exec(src))) records.push(m[1]);
+  if (!records.length) throw new ConnectorError("invalid_search", "No EndNote XML records found (expected a record element)");
+  const entries = [];
+  for (const rec of records) {
+    const titles = xmlBlock(rec, "titles");
+    const title = xmlPlain(titles || rec, "title");
+    const authorsBlock = xmlBlock(rec, "authors");
+    const authors = xmlAll(authorsBlock || rec, "author");
+    const dates = xmlBlock(rec, "dates");
+    const year = xmlPlain(dates || rec, "year");
+    const electronic = xmlPlain(rec, "electronic-resource-num");
+    const isbn = xmlPlain(rec, "isbn");
+    const accession = xmlPlain(rec, "accession-num");
+    const doi = doiLike(electronic) || doiLike(isbn) || doiLike(accession);
+    const pmid = /^\d+$/.test(accession) && !doiLike(accession) ? accession : "";
+    const journal = xmlPlain(rec, "secondary-title") || xmlPlain(rec, "full-title");
+    entries.push(finish("import:endnote-xml", {
+      title, authors, year, doi, pmid,
+    }, {
+      journal,
+      volume: xmlPlain(rec, "volume"),
+      issue: xmlPlain(rec, "number"),
+      pages: xmlPlain(rec, "pages"),
+      abstract: xmlPlain(rec, "abstract"),
+      pmid,
+      recNumber: xmlPlain(rec, "rec-number"),
+    }));
+  }
+  if (!entries.length) throw new ConnectorError("invalid_search", "No EndNote XML records found (expected a record element)");
+  return entries;
+}
+
+/* ---- NBIB (PubMed MEDLINE) ------------------------------------------------ */
+export function parseNBIB(text) {
+  const lines = String(text || "").replace(/^\uFEFF/, "").split(/\r\n|\r|\n/);
+  const records = [];
+  let cur = null;
+  let last = "";
+  const push = () => {
+    if (!cur) return;
+    records.push(cur);
+    cur = null;
+    last = "";
+  };
+  for (const line of lines) {
+    const tagLine = line.match(/^([A-Z][A-Z0-9]{1,3})\s*-\s?(.*)$/);
+    if (tagLine) {
+      const tag = tagLine[1];
+      const value = tagLine[2].trim();
+      if (tag === "PMID" && cur) push();
+      if (!cur) cur = { tags: {} };
+      if (!cur.tags[tag]) cur.tags[tag] = [];
+      cur.tags[tag].push(value);
+      last = tag;
+    } else if (cur && last && /^\s{3,}\S/.test(line)) {
+      const arr = cur.tags[last];
+      arr[arr.length - 1] += " " + line.trim();
+    }
+  }
+  push();
+  const entries = [];
+  for (const rec of records) {
+    const tags = rec.tags;
+    const lid = [].concat(tags.LID || [], tags.AID || []).join(" ");
+    const doiMatch = lid.match(/10\.\d{4,}\/\S+/);
+    const doi = doiMatch ? doiMatch[0].replace(/[.,;]+$/, "").replace(/\s*\[doi\]$/i, "") : "";
+    const pmid = ((tags.PMID || [])[0] || "").replace(/\D/g, "");
+    const authors = (tags.FAU && tags.FAU.length ? tags.FAU : (tags.AU || []));
+    entries.push(finish("import:nbib", {
+      title: (tags.TI || [])[0] || "",
+      authors,
+      year: (tags.DP || tags.DEP || [])[0] || "",
+      doi,
+      pmid,
+    }, {
+      pmid,
+      journal: (tags.JT || tags.TA || [])[0] || "",
+      volume: (tags.VI || [])[0] || "",
+      issue: (tags.IP || [])[0] || "",
+      pages: (tags.PG || [])[0] || "",
+      abstract: (tags.AB || []).join(" "),
+    }));
+  }
+  if (!entries.length) throw new ConnectorError("invalid_search", "No NBIB records found (expected PMID lines)");
+  return entries;
+}
+
+/* True when entry matches an existing project record on DOI, PMID, or
+ * normalised title + year + first author (the _dedup.js keys). Returns the
+ * existing id, or "" when there is no match. Within one new file, callers
+ * pass only records that were already stored before this import. */
+export function matchesExistingRecord(existing, entry) {
+  const extra = entry && entry.extra && typeof entry.extra === "object" ? entry.extra : {};
+  const keys = recordKeys({
+    source: entry && entry.source,
+    externalId: entry && entry.externalId,
+    title: entry && entry.title,
+    authors: entry && entry.authors,
+    year: entry && entry.year,
+    doi: entry && entry.doi,
+    pmid: (entry && entry.pmid) || extra.pmid || "",
+    extra,
+  });
+  if (!keys.doi && !keys.pmid && !keys.title) return "";
+  for (const rec of existing || []) {
+    const rk = recordKeys(rec);
+    if (keys.doi && rk.doi && keys.doi === rk.doi) return rec.id || "match";
+    if (keys.pmid && rk.pmid && keys.pmid === rk.pmid) return rec.id || "match";
+    if (keys.title && rk.title && keys.title === rk.title) return rec.id || "match";
+  }
+  return "";
+}
+
+const IMPORT_PARSERS = {
+  ris: parseRIS,
+  bibtex: parseBibTeX,
+  csv: parseCSV,
+  "csl-json": parseCSL,
+  csl: parseCSL,
+  json: parseCSL,
+  "endnote-xml": parseEndNoteXML,
+  endnote: parseEndNoteXML,
+  xml: parseEndNoteXML,
+  nbib: parseNBIB,
+  medline: parseNBIB,
+};
+
 export function parseImport(format, text) {
-  if (format === "ris") return parseRIS(text);
-  if (format === "bibtex") return parseBibTeX(text);
-  if (format === "csv") return parseCSV(text);
-  throw new ConnectorError("invalid_search", "format must be ris, bibtex or csv");
+  const parser = IMPORT_PARSERS[format];
+  if (!parser) throw new ConnectorError("invalid_search", "format must be ris, bibtex, csv, csl-json, endnote-xml or nbib");
+  return parser(text);
 }

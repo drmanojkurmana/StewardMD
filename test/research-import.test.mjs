@@ -6,7 +6,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { parseRIS, parseBibTeX, parseCSV, parseImport } from "../functions/api/research/_connectors/import.js";
+import { parseRIS, parseBibTeX, parseCSV, parseCSL, parseEndNoteXML, parseNBIB, parseImport, matchesExistingRecord } from "../functions/api/research/_connectors/import.js";
 
 const RIS = [
   "TY  - JOUR",
@@ -132,6 +132,136 @@ test("parsers: contract guarantees and clear refusals", () => {
   assert.equal(parseImport("ris", RIS).length, 2);
   assert.equal(parseImport("bibtex", BIBTEX).length, 2);
   assert.equal(parseImport("csv", CSV).length, 2);
+});
+
+const CSL = JSON.stringify([
+  {
+    id: "smith2020",
+    type: "article-journal",
+    title: "Synthetic aspirin cohort",
+    author: [{ family: "Smith", given: "John" }, { family: "Doe", given: "Jane" }],
+    issued: { "date-parts": [[2020]] },
+    DOI: "https://doi.org/10.1000/csl.1",
+    PMID: "33445566",
+    "container-title": "Test Journal",
+    volume: "4",
+    page: "10-18",
+    abstract: "A synthetic abstract about a made up cohort.",
+  },
+]);
+
+const ENDNOTE = [
+  "<xml><records>",
+  "<record>",
+  "<rec-number>1</rec-number>",
+  "<titles><title>Synthetic endnote trial</title></titles>",
+  "<authors><author>Smith, John</author><author>Doe, Jane</author></authors>",
+  "<dates><year>2020</year></dates>",
+  "<electronic-resource-num>10.1000/en.1</electronic-resource-num>",
+  "<secondary-title>Test Journal</secondary-title>",
+  "<volume>4</volume><number>2</number><pages>10-18</pages>",
+  "<abstract>A synthetic abstract.</abstract>",
+  "</record>",
+  "</records></xml>",
+].join("");
+
+const NBIB = [
+  "PMID- 99887766",
+  "TI  - Synthetic nbib cohort",
+  "FAU - Doe, Jane Q",
+  "FAU - Lee, Ken",
+  "AU  - Doe JQ",
+  "DP  - 2019 Mar",
+  "JT  - Test Journal",
+  "VI  - 3",
+  "IP  - 1",
+  "PG  - 10-18",
+  "LID - 10.1000/nbib.1 [doi]",
+  "AB  - A synthetic abstract about a made up cohort.",
+  "",
+].join("\n");
+
+test("CSL-JSON: Zotero array, Mendeley items wrapper, DOI and PMID", () => {
+  const entries = parseCSL(CSL);
+  assert.equal(entries.length, 1);
+  const a = entries[0];
+  assert.equal(a.source, "import:csl-json");
+  assert.equal(a.title, "Synthetic aspirin cohort");
+  assert.deepEqual(a.authors, ["Smith John", "Doe Jane"]);
+  assert.equal(a.year, 2020);
+  assert.equal(a.doi, "10.1000/csl.1");
+  assert.equal(a.externalId, "10.1000/csl.1");
+  assert.equal(a.extra.pmid, "33445566");
+  assert.equal(a.extra.containerTitle, "Test Journal");
+  assert.equal(a.extra.key, "smith2020");
+  const wrapped = JSON.stringify({ items: JSON.parse(CSL) });
+  assert.deepEqual(parseCSL(wrapped), entries);
+  assert.deepEqual(parseCSL(JSON.stringify(JSON.parse(CSL)[0])), entries);
+  assert.equal(parseImport("csl-json", CSL).length, 1);
+  assert.equal(parseImport("json", CSL)[0].source, "import:csl-json");
+  assert.equal(parseImport("csl", CSL)[0].externalId, "10.1000/csl.1");
+  assert.throws(() => parseCSL("not json"), (e) => e.code === "invalid_search");
+  assert.throws(() => parseCSL("[]"), (e) => e.code === "invalid_search");
+});
+
+test("EndNote XML: record, authors, DOI, year", () => {
+  const entries = parseEndNoteXML(ENDNOTE);
+  assert.equal(entries.length, 1);
+  const a = entries[0];
+  assert.equal(a.source, "import:endnote-xml");
+  assert.equal(a.title, "Synthetic endnote trial");
+  assert.deepEqual(a.authors, ["Smith John", "Doe Jane"]);
+  assert.equal(a.year, 2020);
+  assert.equal(a.doi, "10.1000/en.1");
+  assert.equal(a.externalId, "10.1000/en.1");
+  assert.equal(a.extra.journal, "Test Journal");
+  assert.equal(a.extra.volume, "4");
+  assert.equal(parseImport("endnote-xml", ENDNOTE).length, 1);
+  assert.equal(parseImport("xml", ENDNOTE)[0].source, "import:endnote-xml");
+  assert.equal(parseImport("endnote", ENDNOTE)[0].title, "Synthetic endnote trial");
+  assert.throws(() => parseEndNoteXML("<xml></xml>"), (e) => e.code === "invalid_search");
+});
+
+test("NBIB: PMID, FAU authors, DOI in LID, continuation lines", () => {
+  const continued = NBIB.replace("A synthetic abstract about a made up cohort.", "A synthetic abstract\n      about a made up cohort.");
+  const entries = parseNBIB(continued);
+  assert.equal(entries.length, 1);
+  const a = entries[0];
+  assert.equal(a.source, "import:nbib");
+  assert.equal(a.title, "Synthetic nbib cohort");
+  assert.deepEqual(a.authors, ["Doe Jane Q", "Lee Ken"]);
+  assert.equal(a.year, 2019);
+  assert.equal(a.doi, "10.1000/nbib.1");
+  assert.equal(a.externalId, "10.1000/nbib.1");
+  assert.equal(a.extra.pmid, "99887766");
+  assert.ok(a.extra.abstract.includes("made up cohort"));
+  assert.equal(parseImport("nbib", NBIB).length, 1);
+  assert.equal(parseImport("medline", NBIB)[0].source, "import:nbib");
+  assert.throws(() => parseNBIB("not a medline file"), (e) => e.code === "invalid_search");
+});
+
+test("matchesExistingRecord: DOI, PMID and title against records already in the project", () => {
+  const csl = parseCSL(CSL)[0];
+  const byDoi = matchesExistingRecord([
+    { id: "rec_old", source: "crossref", externalId: "10.1000/csl.1", title: "Other title", authors: ["Other A"], year: 1999, doi: "HTTPS://doi.org/10.1000/CSL.1" },
+  ], csl);
+  assert.equal(byDoi, "rec_old");
+
+  const pmidOnly = parseNBIB("PMID- 99887766\nTI  - Synthetic pmid paper\nFAU - Patel, R\nDP  - 2018\n")[0];
+  assert.equal(pmidOnly.externalId, "99887766");
+  assert.equal(pmidOnly.doi, "");
+  const byPmid = matchesExistingRecord([
+    { id: "rec_pm", source: "pubmed", externalId: "99887766", title: "Different title", authors: ["Other A"], year: 2001, doi: "" },
+  ], pmidOnly);
+  assert.equal(byPmid, "rec_pm");
+
+  const byTitle = matchesExistingRecord([
+    { id: "rec_title", source: "import:ris", externalId: "t00000000", title: "Synthetic endnote trial", authors: ["Smith John"], year: 2020, doi: "" },
+  ], parseEndNoteXML(ENDNOTE.replace("10.1000/en.1", ""))[0]);
+  assert.equal(byTitle, "rec_title");
+  assert.equal(matchesExistingRecord([
+    { id: "rec_other", source: "pubmed", externalId: "1", title: "Unrelated", authors: ["Zed Q"], year: 2011, doi: "10.1000/nope" },
+  ], csl), "");
 });
 
 test("identifier-less keys are stable across parses and distinct across entries", () => {

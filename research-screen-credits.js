@@ -108,14 +108,14 @@
       st.busy = false;
       var csvText = typeof res === "string" ? res : (res && res.csv ? res.csv : generateFallbackCsv());
       p2().downloadText("cost-report-" + st.projectId + ".csv", csvText, "text/csv");
-      st.announce = "Cost report CSV downloaded.";
+      st.announce = "Your cost report CSV is ready to save or share.";
       render(container);
     }).catch(function () {
       if (mySeq !== seq) return;
       st.busy = false;
       var csvText = generateFallbackCsv();
       p2().downloadText("cost-report-" + st.projectId + ".csv", csvText, "text/csv");
-      st.announce = "Cost report CSV exported.";
+      st.announce = "Your cost report CSV is ready to save or share.";
       render(container);
     });
   }
@@ -293,9 +293,9 @@
     }
 
     var h = [];
-    h.push('<div class="rmd-studies-screen">');
+    h.push('<div class="rmd-studies-screen rmd-credits-screen">');
     h.push('<div class="rmd-studies-topbar"><div class="rmd-topbar-left"><div class="rmd-topbar-proj-info">');
-    h.push('<h2 class="rmd-topbar-proj-title">Credits and Cost Report</h2><span class="rmd-badge rmd-badge-soft">' + esc(project.title) + '</span>');
+    h.push('<h2 class="rmd-topbar-proj-title">MaiK tokens</h2><span class="rmd-badge rmd-badge-soft">' + esc(project.title) + '</span>');
     h.push('</div></div></div>');
 
     if (st.actionError) h.push('<div style="padding:10px 16px">' + p2().errHtml(st.actionError, null) + '</div>');

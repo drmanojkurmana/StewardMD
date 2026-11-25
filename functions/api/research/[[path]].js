@@ -26,7 +26,7 @@ import * as pubmedConnector from "./_connectors/pubmed.js";
 import * as europepmcConnector from "./_connectors/europepmc.js";
 import * as crossrefConnector from "./_connectors/crossref.js";
 import * as s2Connector from "./_connectors/semanticscholar.js";
-import { parseImport } from "./_connectors/import.js";
+import { parseImport, matchesExistingRecord } from "./_connectors/import.js";
 import { dedupRecords } from "./_dedup.js";
 /* Phase 3 server side (docs/research/contracts/phase-3): jobs v2 + PDFs
  * (_jobs.js), HMAC worker callback (_callback.js), ceilings and daily caps
@@ -81,6 +81,10 @@ import { createComment, listComments, createResponse, listResponses,
 import { listVersions, getManuscript, putSection, requestApproval, approveManuscript,
   lockManuscript, manuscriptGates, exportManuscript } from "./_manuscript.js";
 import { listChecklists, getChecklist, checklistSnapshot, getManual, putManual } from "./_checklists.js";
+import { findStudies, autoAddStudies } from "./_auto_studies.js";
+import { aiDraft } from "./_ai_draft.js";
+import { paperCard, explainPaperCard } from "./_paper_card.js";
+import { formatCheck } from "./_format_check.js";
 
 const MAX_JSON = 1024 * 1024;
 const MAX_PDF = 25 * 1024 * 1024;
@@ -1571,7 +1575,7 @@ async function listSearchRuns(db, uid, projectId, url, requestId) {
  * returns the storageKey the screen passes to POST /imports. Same auth and
  * role gate as createImport; content parsing stays in the import step. */
 const MAX_IMPORT_UPLOAD = 5 * 1024 * 1024;
-const IMPORT_EXTENSIONS = { ris: 1, bib: 1, bibtex: 1, csv: 1 };
+const IMPORT_EXTENSIONS = { ris: 1, bib: 1, bibtex: 1, csv: 1, json: 1, xml: 1, nbib: 1 };
 async function uploadImportFile(request, env, db, uid, projectId, requestId) {
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "Import uploads need an owner, editor or analyst role", requestId);
@@ -1586,7 +1590,7 @@ async function uploadImportFile(request, env, db, uid, projectId, requestId) {
   const dot = name.lastIndexOf(".");
   const ext = dot >= 0 ? name.slice(dot + 1).toLowerCase() : "";
   if (!IMPORT_EXTENSIONS[ext])
-    return err(415, "file_type", "Reference file must be .ris, .bib, .bibtex or .csv", requestId);
+    return err(415, "file_type", "Reference file must be .ris, .bib, .bibtex, .csv, .json, .xml or .nbib", requestId);
   const bytes = await file.arrayBuffer();
   const digest = await crypto.subtle.digest("SHA-256", bytes);
   const sha256 = [...new Uint8Array(digest)].map((x) => x.toString(16).padStart(2, "0")).join("");
@@ -1601,8 +1605,8 @@ async function createImport(env, db, uid, projectId, body, requestId) {
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "Imports need an owner, editor or analyst role", requestId);
   const format = body.format;
-  if (["ris", "bibtex", "csv"].indexOf(format) < 0)
-    return err(400, "invalid_search", "format must be ris, bibtex or csv", requestId);
+  if (["ris", "bibtex", "csv", "csl-json", "csl", "json", "endnote-xml", "endnote", "xml", "nbib", "medline"].indexOf(format) < 0)
+    return err(400, "invalid_search", "format must be ris, bibtex, csv, csl-json, endnote-xml or nbib", requestId);
   const storageKey = typeof body.storageKey === "string" ? body.storageKey : "";
   if (!storageKey || storageKey.length > 500)
     return err(400, "invalid_search", "storageKey must be 1-500 characters", requestId);
@@ -1615,7 +1619,7 @@ async function createImport(env, db, uid, projectId, body, requestId) {
   let entries;
   try { entries = parseImport(format, text); }
   catch (e) { return err(400, "invalid_search", String((e && e.message) || e).slice(0, 300), requestId); }
-  const now = Date.now(), runId = uuid("srch_"), source = "import:" + format;
+  const now = Date.now(), runId = uuid("srch_");
   const archive = { database: "import", query: storageKey, filters: { format }, dateTo: null,
     apiVersion: "import-v1", executedAt: new Date(now).toISOString(), queryEcho: "",
     totalCount: entries.length, ids: entries.map((e) => e.externalId) };
@@ -1623,12 +1627,19 @@ async function createImport(env, db, uid, projectId, body, requestId) {
     .bind(runId, projectId, storageKey, canonicalJson({ format }), "import-v1", entries.length, "", uid, now).run();
   const r2Key = await storeSearchArchive(env, db, projectId, runId, archive, now);
   if (r2Key) await db.prepare("UPDATE research_search_runs SET r2_key=? WHERE id=?").bind(r2Key, runId).run();
+  const priorRows = recordRowsToDedup((await db.prepare("SELECT * FROM research_records WHERE project_id=?").bind(projectId).all()).results || []);
   let recordsAdded = 0, skipped = 0;
   const addedIds = [], entryIds = [];
   for (const entry of entries) {
+    const source = entry.source || ("import:" + format);
     const existing = await db.prepare("SELECT id FROM research_records WHERE project_id=? AND source=? AND external_id=?")
       .bind(projectId, source, entry.externalId).first();
     if (existing) { skipped++; entryIds.push(existing.id); continue; }
+    /* A paper already in the project (any source) is not inserted again.
+     * Within this file, duplicates are still stored and flagged below, so
+     * PRISMA can count them. */
+    const dupId = matchesExistingRecord(priorRows, entry);
+    if (dupId) { skipped++; entryIds.push(dupId); continue; }
     const id = uuid("rec_");
     await db.prepare("INSERT INTO research_records (id,project_id,search_run_id,source,external_id,title,authors_json,year,doi,metadata_json,created_ts) VALUES (?,?,?,?,?,?,?,?,?,?,?)")
       .bind(id, projectId, runId, source, entry.externalId, entry.title, JSON.stringify(entry.authors),
@@ -2076,6 +2087,8 @@ export async function onRequest({ request, env, params }) {
   }
   const manGates = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/gates$/);
   if (manGates && request.method === "GET") return manuscriptGates(p3Ctx, manGates[1], url);
+  const formatRoute = path.match(/^\/v1\/projects\/([^/]+)\/format-check$/);
+  if (formatRoute && request.method === "GET") return formatCheck(p3Ctx, formatRoute[1], url);
   const manGet = path.match(/^\/v1\/projects\/([^/]+)\/manuscript$/);
   if (manGet && request.method === "GET") return getManuscript(p3Ctx, manGet[1], url);
 
@@ -2224,6 +2237,32 @@ export async function onRequest({ request, env, params }) {
   if (mem && request.method === "POST") {
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid member payload", requestId); }
     return addMember(db, uid, mem[1], body, requestId);
+  }
+
+  const findStudiesRoute = path.match(/^\/v1\/projects\/([^/]+)\/find-studies$/);
+  if (findStudiesRoute && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid search payload", requestId); }
+    return findStudies(p3Ctx, findStudiesRoute[1], body);
+  }
+  const autoAddRoute = path.match(/^\/v1\/projects\/([^/]+)\/studies\/auto-add$/);
+  if (autoAddRoute && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid study payload", requestId); }
+    return autoAddStudies(p3Ctx, autoAddRoute[1], body);
+  }
+  const aiDraftRoute = path.match(/^\/v1\/projects\/([^/]+)\/ai-draft$/);
+  if (aiDraftRoute && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid draft payload", requestId); }
+    return aiDraft(p3Ctx, aiDraftRoute[1], body);
+  }
+  const paperExplainRoute = path.match(/^\/v1\/projects\/([^/]+)\/paper-card\/explain$/);
+  if (paperExplainRoute && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid study card payload", requestId); }
+    return explainPaperCard(p3Ctx, paperExplainRoute[1], body);
+  }
+  const paperCardRoute = path.match(/^\/v1\/projects\/([^/]+)\/paper-card$/);
+  if (paperCardRoute && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid study card payload", requestId); }
+    return paperCard(p3Ctx, paperCardRoute[1], body);
   }
 
   const stCol = path.match(/^\/v1\/projects\/([^/]+)\/studies$/);

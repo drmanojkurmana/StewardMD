@@ -51,6 +51,7 @@ const HARNESS = `<!DOCTYPE html>
 </head>
 <body class="dark v3-dark">
 <div id="researchMD"><div id="rmdScreenBody"></div></div>
+<script src="/research.js"></script>
 <script>
 window.SMD_RESEARCH = window.SMD_RESEARCH || {};
 var SMD = window.SMD_RESEARCH;
@@ -115,6 +116,7 @@ function readBody(req) {
 }
 
 const FILES = {
+  '/research.js': join(repo, 'research.js'),
   '/research-checklist.js': join(repo, 'research-checklist.js'),
   '/research-submission.js': join(repo, 'research-submission.js'),
   '/research-screen-checklist.js': join(repo, 'research-screen-checklist.js')

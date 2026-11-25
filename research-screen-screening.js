@@ -41,7 +41,9 @@
     reasonFor: null,
     busy: false,
     voteError: null,
-    announce: ""
+    announce: "",
+    ai: null,
+    suggestion: null
   };
   var seq = 0;
 
@@ -166,6 +168,7 @@
     st.currentId = id;
     st.reasonFor = null;
     st.voteError = null;
+    st.suggestion = null;
     st.phoneView = "current";
     st.votes = null;
     st.votesLoading = true;
@@ -276,6 +279,20 @@
     return h.join("\n");
   }
 
+  function suggestionHtml() {
+    var sug = st.suggestion;
+    if (!sug) return "";
+    var h = [];
+    h.push('<div class="rmd-section-block rmd-ai-suggestion">');
+    h.push('<h4 class="rmd-section-label">MaiK suggestion</h4>');
+    h.push(SMD.ai.noteHtml(st.ai, "suggestion"));
+    h.push('<p class="rmd-muted">Suggested decision: <strong>' + esc(sug.decision || "") + '</strong>' + (sug.reasonCode ? ' &middot; ' + esc(p2().reasonLabel(sug.reasonCode, st.reasons)) : '') + '</p>');
+    if (sug.rationale) h.push('<p class="rmd-muted">' + esc(sug.rationale) + '</p>');
+    h.push('<p class="rmd-muted">This is a draft. Record your own vote below.</p>');
+    h.push('</div>');
+    return h.join("\n");
+  }
+
   function renderItemDetail(item, role) {
     var rec = item.record || {};
     var rep = item.report;
@@ -332,6 +349,9 @@
         h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="vote-cancel-reason">Cancel</button>');
         h.push('</div>');
       } else {
+        if (!st.ai) st.ai = SMD.ai.state();
+        h.push(SMD.ai.barHtml(st.ai, { task: "screening", label: "screening suggestion", cost: 2 }));
+        if (st.suggestion) h.push(suggestionHtml());
         h.push('<div class="rmd-vote-bar">');
         h.push('<button type="button" class="rmd-vote-btn rmd-vote-include" data-rmd-vote="include"' + (st.busy ? " disabled" : "") + '>Include</button>');
         h.push('<button type="button" class="rmd-vote-btn rmd-vote-uncertain" data-rmd-vote="uncertain"' + (st.busy ? " disabled" : "") + '>Uncertain</button>');
@@ -481,6 +501,7 @@
         st.votes = null;
         st.reasonFor = null;
         st.voteError = null;
+        st.suggestion = null;
         st.announce = "";
         var items = queueItems();
         st.currentId = items.length ? items[0].id : null;
@@ -532,6 +553,23 @@
       reasonBtns[r].onclick = function () {
         submitVote(container, "exclude", this.getAttribute("data-rmd-reason"));
       };
+    }
+
+    if (st.ai) {
+      SMD.ai.bind(container, st.ai, {
+        pid: project.id, task: "screening", label: "screening suggestion", cost: 2,
+        request: function () {
+          var it = currentItem();
+          var rid = (it && it.record && it.record.id) || (it && it.id) || "";
+          return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(project.id) + "/records/" + encodeURIComponent(rid) + "/screening-suggestions", {});
+        },
+        apply: function (draft) {
+          var sug = (draft && draft.suggestion) || draft;
+          if (sug && sug.decision) { st.suggestion = sug; return ["suggestion"]; }
+          return [];
+        },
+        render: function () { render(container); }
+      });
     }
   }
 
