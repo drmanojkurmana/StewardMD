@@ -1058,10 +1058,61 @@
     templates: "Templates", journals: "Journals",
     thesis: "Thesis", "thesis-type": "Paper type", "thesis-journal": "Journal",
     "thesis-draft": "Draft", "thesis-tables": "Tables", "thesis-refs": "References",
-    masterchart: "Master chart"
+    masterchart: "Master chart",
+    casefile: "Case file", novelty: "Novelty", iec: "Ethics", pubconsent: "Consent",
+    images: "Images", ctri: "CTRI", randomise: "Randomise"
   };
 
   var HELP = {
+    casefile: {
+      name: "Case file",
+      do: "Fill in the case in CARE order. Leave out the name, hospital number and address. Dates stay on this phone.",
+      eg: "A 34-year-old man with chest pain 6 hours after zinc phosphide ingestion.",
+      gloss: "New words: CARE (the reporting guideline for case reports).",
+      action: { label: "Next: check novelty", fallback: "novelty" }
+    },
+    novelty: {
+      name: "Has this been published?",
+      do: "Search for similar published cases using the diagnosis and what was unusual.",
+      eg: "Zinc phosphide myocarditis: 4 similar cases found.",
+      gloss: "",
+      action: { label: "Next: ethics", fallback: "iec" }
+    },
+    iec: {
+      name: "Ethics committee",
+      do: "Record your ethics committee approval, waiver or permission letter.",
+      eg: "Approved, reference IEC/2026/114, 3 March 2026.",
+      gloss: "New words: IEC (Institutional Ethics Committee).",
+      action: { label: "Next step", fallback: "" }
+    },
+    pubconsent: {
+      name: "Consent for publication",
+      do: "Make the consent form in English and one Indian language, and get it signed before you submit.",
+      eg: "",
+      gloss: "",
+      action: { label: "Next: images", fallback: "images" }
+    },
+    images: {
+      name: "Hide details on images",
+      do: "Draw black boxes over names, hospital numbers, dates and faces. The new image stays on this phone.",
+      eg: "",
+      gloss: "",
+      action: { label: "Next step", fallback: "" }
+    },
+    ctri: {
+      name: "Register on CTRI",
+      do: "Register the trial on the Clinical Trials Registry - India before the first patient is enrolled.",
+      eg: "CTRI/2026/03/012345",
+      gloss: "New words: CTRI (Clinical Trials Registry - India); prospective registration (before the first patient).",
+      action: { label: "Next: randomise", fallback: "randomise" }
+    },
+    randomise: {
+      name: "Make the allocation list",
+      do: "The list keeper (not the recruiting doctor) makes the allocation list and seals the envelopes.",
+      eg: "Blocks of 4 and 6, 1:1, 60 patients.",
+      gloss: "New words: allocation concealment (keeping the next assignment hidden).",
+      action: { label: "Next: master chart", fallback: "masterchart" }
+    },
     plan: {
       name: "Plan your study",
       do: "Calculate sample size, draft ethics committee application, consent form, and CTRI registration.",
@@ -1283,10 +1334,37 @@
     "thesis-draft": "shape the draft, checking every number.",
     "thesis-tables": "keep up to 3 tables.",
     "thesis-refs": "check the references.",
-    masterchart: "upload your chart and pick the tests."
+    masterchart: "upload your chart and pick the tests.",
+    casefile: "fill in the case file (no name or hospital number).",
+    novelty: "check whether this case has been published before.",
+    iec: "record your ethics committee approval or waiver.",
+    pubconsent: "get consent for publication signed.",
+    images: "hide names, dates and faces on your images.",
+    ctri: "register the trial on CTRI before the first patient.",
+    randomise: "make the allocation list (list keeper only)."
   };
 
+  var NEW_STEPS = { casefile: 1, novelty: 1, iec: 1, pubconsent: 1, images: 1, ctri: 1, randomise: 1 };
+
+  /* Plan v2 journeys come from research-contracts.js. A new step shows only
+   * once its screen is loaded, so a missing script never leaves a dead tab. */
+  function contractJourney(project) {
+    var C = G.SMD_RESEARCH_CONTRACTS;
+    if (!C || !C.typeKey) return null;
+    var key = C.typeKey((project && project.studyType) || "");
+    if (!key) return null;
+    var j = C.journey(key) || [];
+    var out = [];
+    for (var i = 0; i < j.length; i++) {
+      if (NEW_STEPS[j[i]] && !(SMD.screens && SMD.screens[j[i]])) continue;
+      out.push(j[i]);
+    }
+    return out.length ? out : null;
+  }
+
   function journeyFor(project) {
+    var cj = contractJourney(project);
+    if (cj) return cj;
     var t = ((project && project.studyType) || "").toLowerCase();
     if (t.indexOf("master chart") >= 0 || t.indexOf("masterchart") >= 0 ||
         t.indexOf("case-control") >= 0 || t.indexOf("case control") >= 0 ||
@@ -1657,6 +1735,7 @@
     var t = (proj.studyType || "").toLowerCase();
     var gid;
     if (t.indexOf("thesis") >= 0) gid = preferredChecklist(proj.serverId || proj.id) || "strobe";
+    else if (G.SMD_RESEARCH_CONTRACTS && G.SMD_RESEARCH_CONTRACTS.typeKey(proj.studyType)) gid = G.SMD_RESEARCH_CONTRACTS.checklistFor(G.SMD_RESEARCH_CONTRACTS.typeKey(proj.studyType), "publication");
     else gid = t.indexOf("case") >= 0 ? "care" : (t.indexOf("trial") >= 0 || t.indexOf("randomized") >= 0 ? "spirit" : (t.indexOf("observational") >= 0 || t.indexOf("cohort") >= 0 || t.indexOf("survey") >= 0 || t.indexOf("diagnostic") >= 0 ? "strobe" : "prisma2020"));
     function softFail(err) {
       var f = friendlyError(err);
@@ -1680,7 +1759,7 @@
         try { counts = G.SMD_RESEARCH_CHECKLIST.fill(checklist, snap).counts; } catch (e) { counts = null; }
       }
       var checklistDone = counts ? (counts.missing === 0 && counts.partial === 0) : !!snap;
-      var isReview = t.indexOf("thesis") >= 0 ? gid === "prisma2020" : (t.indexOf("case") < 0 && t.indexOf("trial") < 0 && t.indexOf("randomized") < 0);
+      var isReview = t.indexOf("thesis") >= 0 ? gid === "prisma2020" : journeyFor(proj).indexOf("prisma") >= 0;
       var flowDone = !isReview || !!(snap && snap.prisma && snap.prisma.studiesIncluded > 0);
       var items = [
         { done: approved, yes: "The manuscript is approved by a clinician.", no: "The manuscript still needs clinician approval.", screen: "manuscript" },
@@ -1854,6 +1933,7 @@
   function open(opts) {
     injectCSS();
     if (SMD.store) SMD.store.init();
+    if (G.RMDStore && G.RMDStore.migrateLegacy) { try { G.RMDStore.migrateLegacy(); } catch (e) {} }
 
     if (opts && opts.projectId && SMD.store) {
       SMD.store.setActiveProject(opts.projectId);
@@ -1909,7 +1989,8 @@
     open: open,
     close: close,
     navigate: navigate,
-    esc: esc
+    esc: esc,
+    journeyFor: journeyFor
   };
 
   for (var k in SHELL) {
