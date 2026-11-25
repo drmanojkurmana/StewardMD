@@ -155,6 +155,39 @@
     h.push('    </div>');
     h.push('  </div>');
 
+    // Interactive Tutorials Hub across every study design
+    var tut = SMD.tutorial;
+    if (tut && tut.EXAMPLES && tut.EXAMPLES.length) {
+      h.push('  <div class="rmd-tut-hub" data-rmd="tut-hub">');
+      h.push('    <div class="rmd-tut-hub-head">');
+      h.push('      <div>');
+      h.push('        <h3 style="margin:0;font:700 16px var(--rmd-f);color:var(--rmd-ink);">Interactive Tutorials: Learn Any Study Scratch to Published</h3>');
+      h.push('        <p class="rmd-muted" style="margin:3px 0 0;font-size:13px;">Try a real worked example first (0 MaiK tokens). Practice by clicking and entering yourself or tap Enter &amp; Show Me.</p>');
+      h.push('      </div>');
+      var globalDef = tut.isTutorialDefault ? tut.isTutorialDefault("") : true;
+      h.push('      <label class="rmd-tut-def"><input type="checkbox" data-rmd-tut-global-def="1"' + (globalDef ? ' checked' : '') + '> Recommend tutorials by default</label>');
+      h.push('    </div>');
+      h.push('    <div class="rmd-tut-grid">');
+      for (var ti = 0; ti < tut.EXAMPLES.length; ti++) {
+        var ex = tut.EXAMPLES[ti];
+        var done = tut.isCompleted && tut.isCompleted(ex.key);
+        h.push('      <div class="rmd-tut-card">');
+        h.push('        <div>');
+        h.push('          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:5px;">');
+        h.push('            <span class="rmd-badge rmd-badge-soft">' + esc(ex.checklistLabel) + '</span>');
+        if (done) h.push('            <span class="rmd-badge rmd-badge-pill" style="background:var(--rmd-acc);color:#fff;">Published</span>');
+        else if (tut.isTutorialDefault && tut.isTutorialDefault(ex.key)) h.push('            <span class="rmd-badge rmd-badge-pill">Default Tutorial</span>');
+        h.push('          </div>');
+        h.push('          <h4 class="rmd-tut-card-title">' + esc(ex.label) + '</h4>');
+        h.push('          <p class="rmd-tut-card-eg">' + esc(ex.exampleBlurb) + '</p>');
+        h.push('        </div>');
+        h.push('        <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-tut-launch="' + esc(ex.key) + '">' + (done ? 'Replay Example' : 'Try Example Tutorial') + '</button>');
+        h.push('      </div>');
+      }
+      h.push('    </div>');
+      h.push('  </div>');
+    }
+
     // Project Cards Grid
     if (!projects.length) {
       h.push('  <div class="rmd-empty-state">');
@@ -188,6 +221,8 @@
         }
         if (p.practice) {
           h.push('          <span class="rmd-badge rmd-badge-pill">Practice project (on this phone only)</span>');
+        } else if (p.tutorial) {
+          h.push('          <span class="rmd-badge rmd-badge-pill" style="background:var(--rmd-acc);color:#fff;">Interactive Tutorial · 0 tokens</span>');
         } else if (!p.serverId) {
           h.push('          <span class="rmd-badge rmd-badge-pill">On this phone only</span>');
         }
@@ -364,6 +399,23 @@
       };
     }
 
+    var tutLaunchBtns = container.querySelectorAll("[data-rmd-tut-launch]");
+    for (var tl = 0; tl < tutLaunchBtns.length; tl++) {
+      tutLaunchBtns[tl].onclick = function () {
+        var key = this.getAttribute("data-rmd-tut-launch");
+        if (key && SMD.tutorial && SMD.tutorial.startTutorial) {
+          SMD.tutorial.startTutorial(key, { reset: true });
+        }
+      };
+    }
+    var tutGlobalChk = container.querySelector('[data-rmd-tut-global-def]');
+    if (tutGlobalChk && SMD.tutorial && SMD.tutorial.setTutorialDefault) {
+      tutGlobalChk.onchange = function () {
+        SMD.tutorial.setTutorialDefault("", !!this.checked);
+        renderProjects(container);
+      };
+    }
+
     // Open project
     var openBtns = container.querySelectorAll("[data-rmd-open-project]");
     for (var k = 0; k < openBtns.length; k++) {
@@ -396,23 +448,47 @@
     }
   }
 
-  function renderStart(container) {
+  function renderStart(container, params) {
+    if (params && params.studyKey) {
+      for (var sk = 0; sk < START_CHOICES.length; sk++) {
+        if (START_CHOICES[sk].key === params.studyKey) { startChoice = START_CHOICES[sk]; break; }
+      }
+    }
+    var tut = SMD.tutorial;
     var h = [];
     h.push('<div class="rmd-start-screen">');
     if (!startChoice) {
       h.push('<h2>What do you want to publish?</h2>');
-      h.push('<p class="rmd-screen-subtitle">Pick one. We will set up the project and walk you through it.</p>');
+      h.push('<p class="rmd-screen-subtitle">Pick one. Every design includes an interactive scratch-to-published example tutorial by default, or you can skip straight to a blank project.</p>');
       for (var i = 0; i < START_CHOICES.length; i++) {
         var c = START_CHOICES[i];
-        h.push('<button type="button" class="rmd-start-choice" data-rmd-start-choice="' + esc(c.key) + '">' + esc(c.title) + '<span>' + esc(c.eg) + '</span></button>');
+        var defOn = tut && tut.isTutorialDefault ? tut.isTutorialDefault(c.key) : true;
+        h.push('<button type="button" class="rmd-start-choice" data-rmd-start-choice="' + esc(c.key) + '">' + esc(c.title) + '<span>' + esc(c.eg) + (defOn ? ' (Example tutorial included)' : '') + '</span></button>');
       }
       h.push('<button type="button" class="rmd-btn rmd-btn-quiet rmd-btn-sm" data-rmd="start-back">Back to projects</button>');
     } else {
       h.push('<h2>Name your project</h2>');
       h.push('<p class="rmd-screen-subtitle">' + esc(startChoice.title) + '</p>');
+      if (tut && tut.exampleByKey) {
+        var ex = tut.exampleByKey(startChoice.key);
+        var isDef = tut.isTutorialDefault ? tut.isTutorialDefault(startChoice.key) : true;
+        if (ex) {
+          h.push('<div class="rmd-start-tut-box" data-rmd="start-tut-box">');
+          h.push('  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">');
+          h.push('    <strong style="font-size:14px;color:var(--rmd-ink);">Try Worked Example Tutorial First' + (isDef ? ' (Default)' : '') + '</strong>');
+          h.push('    <span class="rmd-badge rmd-badge-soft">0 MaiK tokens · Scratch to Published</span>');
+          h.push('  </div>');
+          h.push('  <p class="rmd-muted" style="margin:0;font-size:12.5px;">Practice with our real example (' + esc(ex.shortTitle) + ') where we ask you to click, enter, or tap Enter &amp; Show Me all the way to Published.</p>');
+          h.push('  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">');
+          h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="start-tut-launch">Try Example Tutorial</button>');
+          h.push('    <label class="rmd-tut-def"><input type="checkbox" data-rmd="start-tut-def"' + (isDef ? ' checked' : '') + '> Default for ' + esc(ex.label) + '</label>');
+          h.push('  </div>');
+          h.push('</div>');
+        }
+      }
       h.push('<form id="rmdStartForm" class="rmd-form">');
       h.push('  <div class="rmd-field">');
-      h.push('    <label for="rmd_start_title">Project title</label>');
+      h.push('    <label for="rmd_start_title">Or skip tutorial and name your own project</label>');
       h.push('    <input type="text" id="rmd_start_title" maxlength="180" required autocomplete="off" value="' + esc(startChoice.defaultTitle) + '">');
       h.push('  </div>');
       h.push('  <div id="rmdStartErr"></div>');
@@ -447,6 +523,22 @@
         } else if (SMD.navigate) {
           SMD.navigate("projects", {});
         }
+      };
+    }
+    var tutLaunch = container.querySelector('[data-rmd="start-tut-launch"]');
+    if (tutLaunch && startChoice) {
+      tutLaunch.onclick = function () {
+        var key = startChoice.key;
+        startChoice = null;
+        if (SMD.tutorial && SMD.tutorial.startTutorial) {
+          SMD.tutorial.startTutorial(key, { reset: true });
+        }
+      };
+    }
+    var tutDefChk = container.querySelector('[data-rmd="start-tut-def"]');
+    if (tutDefChk && startChoice && SMD.tutorial && SMD.tutorial.setTutorialDefault) {
+      tutDefChk.onchange = function () {
+        SMD.tutorial.setTutorialDefault(startChoice.key, !!this.checked);
       };
     }
     var form = container.querySelector("#rmdStartForm");
