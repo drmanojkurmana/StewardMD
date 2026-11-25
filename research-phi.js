@@ -14,11 +14,25 @@
   var DATE_PATTERN = "\\b(?:" +
     "(?:(?:19|20)\\d{2}([\\/-])(?:0?[1-9]|1[0-2])\\1(?:0?[1-9]|[12]\\d|3[01]))|" +
     "(?:(?:0?[1-9]|[12]\\d|3[01])([\\/.\\-])(?:0?[1-9]|1[0-2])\\2(?:19|20)\\d{2})|" +
-    "(?:(?:0?[1-9]|[12]\\d|3[01])([/.])(?:0?[1-9]|1[0-2])\\3\\d{2})|" +
+    "(?:(?:0?[1-9]|[12]\\d|3[01])([/.\\-])(?:0?[1-9]|1[0-2])\\3\\d{2})|" +
     "(?:(?:0?[1-9]|[12]\\d|3[01])(?:st|nd|rd|th)?[ -]+(?:" + MON_STR + ")[ -]+(?:(?:19|20)\\d{2}|\\d{2}))|" +
-    "(?:(?:" + MON_STR + ")[ -]+(?:0?[1-9]|[12]\\d|3[01])(?:st|nd|rd|th)?(?:,\\s*|[ -]+)(?:(?:19|20)\\d{2}|\\d{2}))|" +
+    "(?:(?:" + MON_STR + ")[ -]+(?:0?[1-9]|[12]\\d|3[01])(?:st|nd|rd|th)?(?:(?:,\\s*|[ -]+)(?:(?:19|20)\\d{2}|\\d{2}(?![./-]\\d)))?)|" +
     "(?:(?:" + MON_STR + ")[ -]+(?:19|20)\\d{2})" +
   ")\\b";
+
+  var UNIT_AFTER_RE = /^\s*(?:mg|mcg|ug|g|kg|ml|dl|l|km|m|cm|mm|days?|hours?|hrs?|hr|weeks?|wks?|months?|mos?|years?|yrs?|patients?|pts?|%|fold|times|iu|units?|meq|mmol)\b/i;
+
+  function isDecimalBoundary(str, start, end) {
+    if (start > 0) {
+      var prev = str.charAt(start - 1);
+      if (/[0-9]/.test(prev) || (prev === "." && start > 1 && /[0-9]/.test(str.charAt(start - 2)))) return true;
+    }
+    if (end < str.length) {
+      var next = str.charAt(end);
+      if (/[0-9]/.test(next) || (next === "." && end + 1 < str.length && /[0-9]/.test(str.charAt(end + 1)))) return true;
+    }
+    return false;
+  }
 
   function parseDateStr(s) {
     if (!s) return null;
@@ -34,7 +48,7 @@
       var dt2 = new Date(y2, mo2 - 1, d2);
       if (dt2.getFullYear() === y2 && dt2.getMonth() === mo2 - 1 && dt2.getDate() === d2) return dt2;
     }
-    if ((m = /^(0?[1-9]|[12]\d|3[01])([/.])(0?[1-9]|1[0-2])\2(\d{2})$/.exec(str))) {
+    if ((m = /^(0?[1-9]|[12]\d|3[01])([/.\-])(0?[1-9]|1[0-2])\2(\d{2})$/.exec(str))) {
       var y3 = 2000 + parseInt(m[4], 10), mo3 = parseInt(m[3], 10), d3 = parseInt(m[1], 10);
       var dt3 = new Date(y3, mo3 - 1, d3);
       if (dt3.getFullYear() === y3 && dt3.getMonth() === mo3 - 1 && dt3.getDate() === d3) return dt3;
@@ -49,10 +63,11 @@
         if (dt4.getFullYear() === yr && dt4.getMonth() === mon - 1 && dt4.getDate() === d4) return dt4;
       }
     }
-    if ((m = /^([A-Za-z]+)[ -]+(0?[1-9]|[12]\d|3[01])(?:st|nd|rd|th)?(?:,\s*|[ -]+)((?:19|20)\d{2}|\d{2})$/.exec(str))) {
+    if ((m = /^([A-Za-z]+)[ -]+(0?[1-9]|[12]\d|3[01])(?:st|nd|rd|th)?(?:(?:,\s*|[ -]+)((?:19|20)\d{2}|\d{2}))?$/.exec(str))) {
       var mon2 = MONTHS[m[1].toLowerCase()];
       if (mon2) {
-        var yr2 = parseInt(m[3], 10);
+        if (!m[3] && (m[1] === "may" || m[1] === "march")) return null;
+        var yr2 = m[3] ? parseInt(m[3], 10) : 2026;
         if (yr2 < 100) yr2 += 2000;
         var d5 = parseInt(m[2], 10);
         var dt5 = new Date(yr2, mon2 - 1, d5);
@@ -85,7 +100,7 @@
     }
 
     // 2. Hospital-number patterns (UHID, MRN, IP No, IPD No, OP No, OPD No, CR No, Reg No, Registration number, Hospital number, Hosp No)
-    var uhidRe = /\b(?:Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp\s*(?:Number|No\.?)|Reg\s*(?:Number|No\.?)|OPD\s*(?:Number|No\.?)|OP\s*(?:Number|No\.?)|IPD\s*(?:Number|No\.?)|IP\s*(?:Number|No\.?)|CR\s*(?:Number|No\.?)|UHID(?:\s*(?:Number|No\.?))?|MRN(?:\s*(?:Number|No\.?))?)\b[ \t:#.-]*(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b/gi;
+    var uhidRe = /\b(?:Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp\s*(?:Number|No\.?)|Reg\s*(?:Number|No\.?)|OPD(?:\s*(?:Number|No\.?))?|OP\s*(?:Number|No\.?)|IPD(?:\s*(?:Number|No\.?))?|IP\s*(?:Number|No\.?)|CR\s*(?:Number|No\.?)|UHID(?:\s*(?:Number|No\.?))?|MRN(?:\s*(?:Number|No\.?))?)\b[ \t:#.-]*(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b/gi;
     var uh;
     while ((uh = uhidRe.exec(s)) !== null) {
       add("uhid", uh[0]);
@@ -132,8 +147,8 @@
     var dateRe = new RegExp(DATE_PATTERN, "gi");
     var da;
     while ((da = dateRe.exec(s)) !== null) {
-      if (da.index > 0 && /[0-9.]/.test(s.charAt(da.index - 1))) continue;
-      if (da.index + da[0].length < s.length && /[0-9.]/.test(s.charAt(da.index + da[0].length))) continue;
+      if (isDecimalBoundary(s, da.index, da.index + da[0].length)) continue;
+      if (/^[A-Za-z]+[ -]+\d{1,2}(?:st|nd|rd|th)?$/i.test(da[0]) && UNIT_AFTER_RE.test(s.slice(da.index + da[0].length))) continue;
       if (!parseDateStr(da[0])) continue;
       add("date", da[0]);
     }
@@ -148,8 +163,8 @@
       var match = arguments[0];
       var offset = arguments[arguments.length - 2];
       var fullStr = arguments[arguments.length - 1];
-      if (offset > 0 && /[0-9.]/.test(fullStr.charAt(offset - 1))) return match;
-      if (offset + match.length < fullStr.length && /[0-9.]/.test(fullStr.charAt(offset + match.length))) return match;
+      if (isDecimalBoundary(fullStr, offset, offset + match.length)) return match;
+      if (/^[A-Za-z]+[ -]+\d{1,2}(?:st|nd|rd|th)?$/i.test(match) && UNIT_AFTER_RE.test(fullStr.slice(offset + match.length))) return match;
       var d = parseDateStr(match);
       if (!d) return match;
       var diffMs = d.getTime() - baseDate.getTime();

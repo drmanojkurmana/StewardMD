@@ -6461,8 +6461,8 @@
     var t = String(text == null ? "" : text);
     t = t.replace(/\b[\w.+-]+@[\w.-]+\.\w{2,}\b/g, "[redacted]");                                  // email
     t = t.replace(/\b(Registration\s*(?:Number|No\.?)|Hospital\s*(?:Number|No\.?)|Hosp\s*(?:Number|No\.?)|Reg\s*(?:Number|No\.?)|OPD\s*(?:Number|No\.?)|OP\s*(?:Number|No\.?)|IPD\s*(?:Number|No\.?)|IP\s*(?:Number|No\.?)|CR\s*(?:Number|No\.?)|UHID(?:\s*(?:Number|No\.?))?|MRN(?:\s*(?:Number|No\.?))?|UID)\b\s*[:#.]?\s*(?:(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b|[\u0966-\u0D6F\/-]{3,25})/gi, "$1: [redacted]");
-    t = t.replace(/\b(Aadhar|Aadhaar(?:\s*(?:Number|No\.?))?)\b\s*[:#.]?\s*(?:\d{4}[\s-]\d{4}[\s-]\d{4}|\d{12}|[Xx*]{4}[\s-]?[Xx*]{4}[\s-]?\d{4})\b/gi, "$1: [redacted]");
-    t = t.replace(/\b(ABHA(?:\s*(?:Number|No\.?))?)\b\s*[:#.]?\s*(?:\d{2}[\s-]\d{4}[\s-]\d{4}[\s-]\d{4}|\d{14}|(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b)/gi, "$1: [redacted]");
+    t = t.replace(/\b(Aadhar|Aadhaar(?:\s*(?:Number|No\.?))?)\b\s*[:#.]?\s*(?:\d{4}[\s-]\d{4}[\s-]\d{4}|\d{12}|[Xx*]{4}[\s-]?[Xx*]{4}[\s-]?\d{4}|(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b|[\u0966-\u0D6F\/-]{3,25})/gi, "$1: [redacted]");
+    t = t.replace(/\b(ABHA(?:\s*(?:Number|No\.?))?)\b\s*[:#.]?\s*(?:\d{2}[\s-]\d{4}[\s-]\d{4}[\s-]\d{4}|\d{14}|(?=[A-Za-z0-9\/-]*\d)[A-Za-z0-9\/-]{3,20}\b|[\u0966-\u0D6F\/-]{3,25})/gi, "$1: [redacted]");
     t = t.replace(/\b(?:\d{4}[ -]\d{4}[ -]\d{4}|[Xx*]{4}[ -]?[Xx*]{4}[ -]?\d{4}|\d{12})\b/g, function (m) {
       var parts = m.split(/[ -]/);
       if (parts.length === 3 && parts[0].length === 4 && parts[1].length === 4 && parts[2].length === 4) {
