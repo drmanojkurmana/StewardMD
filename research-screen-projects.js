@@ -54,7 +54,15 @@
       eg: "A case report. Example: a rare reaction to a common drug.",
       studyType: "Case Report",
       defaultTitle: "My case report",
-      firstScreen: "manuscript"
+      firstScreen: "casefile"
+    },
+    {
+      key: "series",
+      title: "Case series (a few patients with the same condition)",
+      eg: "Example: four patients with the same rare reaction to one drug.",
+      studyType: "Case Series",
+      defaultTitle: "My case series",
+      firstScreen: "casefile"
     },
     {
       key: "trial",
@@ -130,6 +138,13 @@
     h.push('      </button>');
     h.push('    </div>');
     h.push('  </div>');
+
+    // Plan v2: weekly backup prompt and the backup screen
+    var bk = SMD.screens && SMD.screens.backup;
+    if (bk) {
+      h.push(bk.bannerHtml());
+      h.push('  <p class="rmd-mut"><button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-bk-open="1">Backup and restore</button></p>');
+    }
 
     // Project Cards Grid
     if (!projects.length) {
@@ -254,6 +269,10 @@
 
     container.innerHTML = h.join("\n");
     bindEvents(container);
+    var bkOpen = container.querySelectorAll("[data-rmd-bk-open]");
+    for (var b = 0; b < bkOpen.length; b++) {
+      bkOpen[b].onclick = function () { if (SMD.navigate) SMD.navigate("backup", {}); };
+    }
   }
 
   function bindEvents(container) {

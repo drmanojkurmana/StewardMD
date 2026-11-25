@@ -1043,7 +1043,7 @@
   var SERVER_SCREENS = {
     protocol: 1, search: 1, screening: 1, conflicts: 1, prisma: 1, pdf: 1,
     extract: 1, rob: 1, data: 1, grade: 1, manuscript: 1, checklist: 1, ipd: 1, ready: 1,
-    thesis: 1, "thesis-type": 1, "thesis-journal": 1, "thesis-draft": 1, "thesis-tables": 1, "thesis-refs": 1
+    thesis: 1, "thesis-type": 1, "thesis-journal": 1, "thesis-draft": 1, "thesis-tables": 1, "thesis-refs": 1, novelty: 1
   };
   var moreOpen = false;
   var accountSaveNotice = "";

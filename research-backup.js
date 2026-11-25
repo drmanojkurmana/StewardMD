@@ -129,6 +129,9 @@
     var S = store();
     if (!S) return;
     S.lsSet("lastBackupAt", nowIso || new Date().toISOString());
+    /* Only drop the old copy when IndexedDB holds the data; on the in-memory
+     * fallback the old localStorage copy is the only one that survives a restart. */
+    if (S.available && !S.available()) return;
     try {
       var keys = S.legacyKeys ? S.legacyKeys() : [];
       for (var i = 0; i < keys.length; i++) G.localStorage.removeItem(keys[i]);
@@ -173,24 +176,21 @@
     return change > last && now - last >= WEEK_MS;
   }
 
-  /* Hand the file to the share sheet where it takes files, else download it. */
+  /* Hand the file to the shared native-safe helper (Filesystem CACHE plus the
+   * Share sheet on the phone), else to the share sheet where it takes files. */
   function deliver(name, text) {
-    var blob, file, a, url;
-    try { blob = new G.Blob([text], { type: "application/octet-stream" }); } catch (e) { return fail("This phone cannot save the file."); }
+    var p2 = G.SMD_RESEARCH && G.SMD_RESEARCH.p2, blob, file;
+    if (p2 && p2.downloadText) {
+      return p2.downloadText(name, text, "application/octet-stream").then(function () { return "shared"; });
+    }
     try {
+      blob = new G.Blob([text], { type: "application/octet-stream" });
       file = new G.File([blob], name, { type: "application/octet-stream" });
       if (G.navigator && G.navigator.canShare && G.navigator.canShare({ files: [file] })) {
         return G.navigator.share({ files: [file], title: name }).then(function () { return "shared"; });
       }
     } catch (e) {}
-    try {
-      url = G.URL.createObjectURL(blob);
-      a = G.document.createElement("a");
-      a.href = url; a.download = name;
-      G.document.body.appendChild(a); a.click(); G.document.body.removeChild(a);
-      G.setTimeout(function () { G.URL.revokeObjectURL(url); }, 4000);
-      return P().resolve("downloaded");
-    } catch (e2) { return fail("This phone cannot save the file."); }
+    return fail("This phone cannot save the file.");
   }
 
   var RMDBackup = {

@@ -88,3 +88,10 @@ test("weekly prompt only after a change and a week without a backup", () => {
   S.lsSet("lastBackupAt", "2026-11-21T00:00:00.000Z");
   assert.equal(B.needsPrompt(Date.parse("2026-12-30T00:00:00Z")), false, "no change since the backup");
 });
+
+test("the old localStorage chart is kept when IndexedDB is not available", () => {
+  S._setBackend(S._memoryBackend(), false);
+  globalThis.localStorage.setItem("smd_rmd_masterchart_v1", "{\"p1\":{}}");
+  B.markBackedUp("2026-11-25T00:00:00.000Z");
+  assert.equal(globalThis.localStorage.getItem("smd_rmd_masterchart_v1"), "{\"p1\":{}}");
+});

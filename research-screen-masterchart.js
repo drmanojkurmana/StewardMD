@@ -110,13 +110,36 @@
     } catch (e) { return null; }
   }
 
+  /* Plan v2: the chart lives in RMDStore (IndexedDB, kind masterchart, id main).
+   * localStorage is used only when IndexedDB is not available on this phone. */
+  function rmdStore() {
+    var S = G.RMDStore;
+    return S && S.available && S.available() ? S : null;
+  }
+
   function saveLocal() {
+    var rec = {
+      fileName: mc.fileName, sample: mc.sample,
+      columns: mc.columns, rows: mc.rows, types: mc.types
+    };
+    var S = rmdStore(), pid = mc.pid;
+    if (S) {
+      S.put(pid, "masterchart", "main", rec).then(function () {
+        try {
+          var all = JSON.parse(localStorage.getItem(MC_KEY) || "{}") || {};
+          if (all[pid]) { delete all[pid]; localStorage.setItem(MC_KEY, JSON.stringify(all)); }
+        } catch (e) {}
+        mc.notice = "Saved on this phone. Nothing was uploaded.";
+        draw();
+      }, function () {
+        mc.notice = "Could not save on this phone (storage is full). Your chart is still open here.";
+        draw();
+      });
+      return;
+    }
     try {
       var all = JSON.parse(localStorage.getItem(MC_KEY) || "{}") || {};
-      all[mc.pid] = {
-        fileName: mc.fileName, sample: mc.sample,
-        columns: mc.columns, rows: mc.rows, types: mc.types
-      };
+      all[pid] = rec;
       localStorage.setItem(MC_KEY, JSON.stringify(all));
       mc.notice = "Saved on this phone. Nothing was uploaded.";
     } catch (e) {
@@ -1125,25 +1148,37 @@
     var store = SMD.store;
     var active = store && store.getActiveProject ? store.getActiveProject() : null;
     var pid = (params && params.projectId) || (active && active.id) || "local";
-    if (pid !== mc.pid) {
+    var reload = params && params.reload;
+    if (pid !== mc.pid || reload) {
       mc = freshState(pid);
       var saved = loadLocal(pid);
-      if (saved && saved.columns && saved.columns.length && saved.rows && saved.rows.length) {
-        mc.fileName = saved.fileName || "Saved chart";
-        mc.sample = !!saved.sample;
-        mc.columns = saved.columns.slice();
-        mc.rows = saved.rows;
-        mc.types = saved.types || {};
-        if (stats()) {
-          inferAll();
-          mc.stage = "identifiers";
-          mc.notice = "Using the chart saved on this phone.";
-        }
+      if (applySaved(saved) || !G.RMDStore || !G.RMDStore.get) {
+        /* nothing more to load */
+      } else {
+        G.RMDStore.get(pid, "masterchart", "main").then(function (rec) {
+          if (mc.pid !== pid || mc.columns.length) return;
+          if (applySaved(rec)) draw();
+        }, function () {});
       }
     }
     injectCss();
     container.onclick = onScreenClick;
     draw();
+  }
+
+  function applySaved(saved) {
+    if (!(saved && saved.columns && saved.columns.length && saved.rows && saved.rows.length)) return false;
+    mc.fileName = saved.fileName || "Saved chart";
+    mc.sample = !!saved.sample;
+    mc.columns = saved.columns.slice();
+    mc.rows = saved.rows;
+    mc.types = saved.types || {};
+    if (stats()) {
+      inferAll();
+      mc.stage = "identifiers";
+      mc.notice = "Using the chart saved on this phone.";
+    }
+    return true;
   }
 
   SMD.screens.masterchart = { render: render };
