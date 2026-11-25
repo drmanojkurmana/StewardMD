@@ -3942,13 +3942,14 @@
     } },
 
   { id:"ipss_r", cat:"Haematology", onc:1, icon:"", title:"IPSS-R (Myelodysplastic Syndrome)",
-    desc:"Revised International Prognostic Scoring System for MDS.",
+    desc:"Revised International Prognostic Scoring System for MDS. Select one category in each domain; the points are shown beside every criterion.",
+    ref:"Greenberg PL, et al. Revised International Prognostic Scoring System (IPSS-R) for myelodysplastic syndromes. Blood. 2012;120(12):2454-2465.",
     inputs:[
-      { id:"cyto", label:"Cytogenetic risk group", type:"select", opts:[{v:"0",t:"Very good"},{v:"1",t:"Good"},{v:"2",t:"Intermediate"},{v:"3",t:"Poor"},{v:"4",t:"Very poor"}] },
+      { id:"cyto", label:"Cytogenetic group", type:"select", opts:[{v:"0",t:"Very good: −Y, del(11q)"},{v:"1",t:"Good: normal karyotype, del(5q), del(12p), del(20q), double abnormalities including del(5q)"},{v:"2",t:"Intermediate: del(7q), +8, +19, i(17q), any other single or double independent abnormalities"},{v:"3",t:"Poor: −7, inv(3)/t(3q)/del(3q), double abnormalities including −7/del(7q), complex (3 abnormalities)"},{v:"4",t:"Very poor: complex >3 abnormalities"}] },
       { id:"blasts", label:"Bone marrow blasts", type:"select", opts:[{v:"0",t:"≤ 2%"},{v:"1",t:"> 2% to < 5%"},{v:"2",t:"5–10%"},{v:"3",t:"> 10%"}] },
       { id:"hb", label:"Haemoglobin", type:"select", opts:[{v:"0",t:"≥ 10 g/dL"},{v:"1",t:"8 to < 10 g/dL"},{v:"1.5",t:"< 8 g/dL"}] },
       { id:"plt", label:"Platelets", type:"select", opts:[{v:"0",t:"≥ 100 ×10⁹/L"},{v:"0.5",t:"50 to < 100 ×10⁹/L"},{v:"1",t:"< 50 ×10⁹/L"}] },
-      { id:"anc", label:"Absolute neutrophil count", type:"select", opts:[{v:"0",t:"≥ 0.8 ×10⁹/L"},{v:"0.5",t:"< 0.8 ×10⁹/L"}] }
+      { id:"anc", label:"Absolute neutrophil count (ANC)", type:"select", opts:[{v:"0",t:"≥ 0.8 ×10⁹/L"},{v:"0.5",t:"< 0.8 ×10⁹/L"}] }
     ],
     compute:function(v){
       var s=Number(v.cyto)+Number(v.blasts)+Number(v.hb)+Number(v.plt)+Number(v.anc);
@@ -8429,6 +8430,16 @@
     return c.inputs.map(function(f,fi,fa){
       var fid="mc_"+c.id+"_"+f.id;
       var lbl=cleanLabel(f.label, f.unit);
+      // IPSS-R only: show every criterion and its published point value as a selectable scoring row.
+      // Keep the native select as the source of truth for scoring, auto-fill, reset and accessibility.
+      if(c.id==="ipss_r" && f.type==="select"){
+        var scoreRows=(f.opts||[]).map(function(o){
+          var points=Number(o.v), score=points===0?"0":"+"+String(points);
+          return '<button type="button" class="mc-ipssr-option" data-seg="'+fid+'" data-v="'+esc(o.v)+'" aria-pressed="false"><span class="mc-ipssr-criterion">'+esc(o.t)+'</span><strong class="mc-ipssr-points">'+score+'</strong></button>';
+        }).join("");
+        var hiddenOpts='<option value="">Select</option>'+(f.opts||[]).map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
+        return '<section class="mc-ipssr-field"><div class="mc-ipssr-label">'+esc(lbl)+'</div><div class="mc-ipssr-options" role="group" aria-label="'+esc(lbl)+'">'+scoreRows+'</div><select class="mc-input mc-seg-select" id="'+fid+'" aria-label="'+esc(lbl)+'">'+hiddenOpts+'</select><span class="mc-src" data-src-for="'+fid+'"></span></section>';
+      }
       if(f.type==="check"){
         return '<div class="mc-frow mc-frow-switch"><label class="mc-flbl" for="'+fid+'">'+esc(lbl)+'</label><button type="button" class="mc-switch" data-switch="'+fid+'" role="switch" aria-checked="false" aria-label="'+esc(lbl)+'"><span></span></button><input type="checkbox" id="'+fid+'" class="mc-check-hidden" tabindex="-1"></div>';
       }
@@ -9286,6 +9297,18 @@
       Q+" #mcCalcView [id^=mcAFnote_]:not(:empty){padding:8px 16px 0}",
       Q+" .mc-form{margin:12px 16px 0;background:var(--panel,#fff);border:1px solid var(--line,#e3eaee);border-radius:12px;overflow:hidden}",
       Q+" .mc-frow{display:flex;align-items:center;gap:10px;min-height:48px;padding:6px 12px;border-bottom:1px solid var(--line,#e3eaee);flex-wrap:wrap}",
+      Q+" .mc-ipssr-field{padding:12px 0;border-bottom:1px solid var(--line,#e3eaee)}",
+      Q+" .mc-ipssr-field:last-child{border-bottom:none}",
+      Q+" .mc-ipssr-label{font:600 14px var(--sans,system-ui);color:var(--ink,#14202b);margin:0 0 10px}",
+      Q+" .mc-ipssr-options{display:grid;grid-template-columns:minmax(0,1fr);border:1px solid var(--line,#d8dfdc);border-radius:11px;overflow:hidden;background:var(--panel,#fff)}",
+      Q+" .mc-ipssr-option{display:flex;align-items:flex-start;gap:12px;width:100%;padding:12px 14px;border:0;border-bottom:1px solid var(--line,#d8dfdc);background:transparent;color:var(--ink,#27333a);text-align:left;cursor:pointer;font:600 13.5px/1.45 var(--sans,system-ui);min-height:48px}",
+      Q+" .mc-ipssr-option:last-child{border-bottom:0}",
+      Q+" .mc-ipssr-option:active{background:var(--teal-soft,#e5f2ee)}",
+      Q+" .mc-ipssr-option.on{background:#087f68;color:#fff}",
+      Q+" .mc-ipssr-criterion{flex:1;min-width:0}",
+      Q+" .mc-ipssr-points{flex:0 0 34px;text-align:right;white-space:nowrap;color:var(--slate-soft,#78817f);font:800 15px var(--sans,system-ui);font-variant-numeric:tabular-nums}",
+      Q+" .mc-ipssr-option.on .mc-ipssr-points{color:rgba(255,255,255,.78)}",
+      Q+" .mc-ipssr-field .mc-seg-select{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}",
       Q+" .mc-frow:last-child{border-bottom:none}",
       Q+" .mc-flbl{flex:1;min-width:120px;font:600 14px var(--sans,system-ui);color:var(--ink,#14202b)}",
       Q+" .mc-fval{display:flex;align-items:center;gap:6px}",
