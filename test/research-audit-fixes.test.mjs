@@ -129,6 +129,11 @@ test("research-tutorial covers all 9 study designs, defaults ON, and celebrates 
   assert.match(tut, /isTutorialDefault/);
   assert.match(tut, /showCelebration/);
   const shell = read("research.js");
+  assert.match(shell, /#researchMD \.rmd-shell-center\s*\{/);
+  assert.match(shell, /header-paste-link/);
+  assert.match(shell, /open-read-study/);
+  assert.match(shell, /data-rmd="open-read-study"[^>]*>RStudy</);
+  assert.doesNotMatch(read("research-screen-studies.js"), /rmdStudiesPasteWrap/);
   assert.match(shell, /rmdTutWrap/);
   assert.match(shell, /submission-tracker/);
   assert.match(shell, /showCelebration/);

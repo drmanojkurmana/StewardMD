@@ -141,6 +141,22 @@ const server = http.createServer((req, res) => {
         });
       }
 
+      if (p === '/api/research/v1/paper-card' && req.method === 'POST') {
+        paperCardCalls.push(b);
+        if (b.link && b.link.indexOf('bad_link') >= 0) {
+          return send(400, {
+            error: {
+              code: 'link_unrecognised',
+              message: 'We could not recognise this study link. Check the address and try again.'
+            }
+          });
+        }
+        if (b.link && b.link.indexOf('not_found') >= 0) {
+          return send(404, { error: { code: 'paper_not_found', message: 'Study not found' } });
+        }
+        return setTimeout(() => send(200, { card: STRUCTURED_CARD, requestId: 'req_standalone' }), 80);
+      }
+
       const projMatch = p.match(/^\/api\/research\/v1\/projects\/([^/]+)(\/.*)?$/);
       if (projMatch) {
         const pid = projMatch[1];
@@ -328,13 +344,35 @@ try {
   ok(await until(`SMD_RESEARCH.store.getActiveProject() && SMD_RESEARCH.store.getActiveProject().serverId === 'prj_paper_1'`, 5000), 'project created on the server');
   ok(await until(`!!document.querySelector('.rmd-studies-screen')`, 5000), 'lands on the studies workspace');
 
-  // Verify paste box exists at top above "Find and add studies"
-  ok(await ev(`!!document.querySelector('.rmd-studies-paste-wrap [data-rmd="paste-link-input"]')`), 'paste input box present at top of studies tab');
-  ok(await ev(`!!document.querySelector('.rmd-studies-paste-wrap [data-rmd="read-study"]')`), 'Read study button present in paste box');
-  ok(/Paste a PubMed, DOI, PMC or journal link/.test(await ev(`document.querySelector('[data-rmd="paste-link-input"]').placeholder`)), 'input has correct placeholder');
-  ok(/Works with PubMed, doi.org, PMC, Europe PMC and most journal pages. Free: no MaiK tokens./.test(await text('.rmd-studies-paste-wrap .rmd-paste-hint')), 'hint text explains supported links and 0 MaiK tokens');
+  // Check phone home/studies screen: NO space-eating paste box inside studies workspace,
+  // and mobile top header shows compact RStudy button (header input bar hidden at 390px)
+  ok(await ev(`!document.querySelector('.rmd-studies-paste-wrap')`), 'studies screen no longer wastes space with inline paste box');
+  ok(await ev(`(()=>{const b=document.querySelector('[data-rmd="open-read-study"]');return !!b && b.innerText.trim()==='RStudy' && getComputedStyle(b).display!=='none';})()`), 'mobile header shows RStudy button at 390px');
+  ok(await ev(`getComputedStyle(document.querySelector('.rmd-shell-center')).display === 'none'`), 'wide header Read study bar is hidden on mobile 390px');
+
+  // Verify local/demo project works via standalone /v1/paper-card on Read Study page
+  await ev(`SMD_RESEARCH.store.setActiveProject('prj_bcg_1994');1`);
+  await click('[data-rmd="open-read-study"]');
+  ok(await until(`!!document.querySelector('#rmdReadStudyWrap [data-rmd="paste-link-input"]')`, 5000), 'clicking RStudy navigates to dedicated Read Study page');
+  ok(/Paste a PubMed link, doi.org, bare DOI/.test(await ev(`document.querySelector('[data-rmd="paste-link-input"]').placeholder`)), 'input has correct placeholder');
+  ok(/Works with or without https:\/\/, PubMed, doi.org, bare DOIs/.test(await text('#rmdReadStudyWrap .rmd-paste-hint')), 'hint text explains supported links and DOIs');
+
+  // Paste into input and ensure local project calls standalone /v1/paper-card cleanly
+  await ev(`(()=>{
+    const inp = document.querySelector('[data-rmd="paste-link-input"]');
+    inp.value = '10.1056/NEJMoa123456';
+    inp.dispatchEvent(new Event('paste', { bubbles: true }));
+    return true;
+  })()`);
+  ok(await until(`!!document.querySelector('.rmd-papercard')`, 5000), 'local/demo project renders paper card for bare DOI via /v1/paper-card');
+  ok(paperCardCalls.length === 1 && paperCardCalls[0].link === '10.1056/NEJMoa123456', 'bare DOI sent cleanly on Read Study page');
+
+  // Switch back to server project prj_paper_1 for project-scoped auto-add / explain assertions
+  await ev(`SMD_RESEARCH.store.setActiveProject(SMD_RESEARCH.store.getState().projects.find(p => p.serverId === 'prj_paper_1').id); SMD_RESEARCH.navigate('read-study', {}); 1`);
+  ok(await until(`!!document.querySelector('#rmdReadStudyWrap [data-rmd="paste-link-input"]')`, 5000), 'Read Study page ready for server project');
 
   // 1. Paste of a PubMed link calls /paper-card with { link }
+  paperCardCalls.length = 0;
   await ev(`(()=>{
     const inp = document.querySelector('[data-rmd="paste-link-input"]');
     inp.value = 'https://pubmed.ncbi.nlm.nih.gov/12345678/';
@@ -346,6 +384,7 @@ try {
   // (Notice: setTimeout in server sends response after 100ms)
   ok(await until(`!!document.querySelector('.rmd-papercard')`, 5000), 'paper card renders on link paste');
   ok(paperCardCalls.length === 1 && paperCardCalls[0].link === 'https://pubmed.ncbi.nlm.nih.gov/12345678/', 'paste called /paper-card with { link }');
+  ok(await ev(`document.querySelector('[data-rmd="paste-link-input"]').value === 'https://pubmed.ncbi.nlm.nih.gov/12345678/'`), 'pasted URL is not doubled in input field');
 
   // 2. Card shows title, design label, n, key result line built by SMD_RESEARCH_EXPLAIN, highlighted quote, conclusion, "0 MaiK tokens"
   const cardTitle = await text('.rmd-papercard-title');
@@ -476,9 +515,18 @@ try {
   ok(scrollW390 <= 391 && scrollW390 <= clientW390, 'no horizontal scroll at 390x844');
   await shot('phone-390-papercard');
 
-  // Check iPad 1024x1366
+  // Check iPad 1024x1366: header bar input visible, RStudy button hidden, and submitting from header bar works
   await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 1366, deviceScaleFactor: 2, mobile: false });
   await sleep(150);
+  ok(await ev(`getComputedStyle(document.querySelector('.rmd-head-read-bar')).display !== 'none'`), 'iPad 1024px header displays compact Read study bar');
+  ok(await ev(`getComputedStyle(document.querySelector('[data-rmd="open-read-study"]')).display === 'none'`), 'mobile RStudy button hidden on iPad 1024px');
+  await ev(`(()=>{
+    const inp = document.querySelector('[data-rmd="header-paste-link"]');
+    inp.value = 'pubmed.ncbi.nlm.nih.gov/12345678/';
+    document.querySelector('[data-rmd="header-read-study"]').click();
+    return true;
+  })()`);
+  ok(await until(`!!document.querySelector('.rmd-papercard') && /BCG vaccination/.test(document.querySelector('.rmd-papercard-title').innerText)`, 5000), 'submitting schemeless URL in header bar opens Read Study page and renders card');
   const scrollW1024 = await ev(`document.documentElement.scrollWidth`);
   const clientW1024 = await ev(`document.documentElement.clientWidth`);
   ok(scrollW1024 <= 1025 && scrollW1024 <= clientW1024, 'no horizontal scroll at 1024x1366');

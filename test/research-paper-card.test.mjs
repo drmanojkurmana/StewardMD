@@ -222,6 +222,19 @@ describe("resolveLink", () => {
     assert.deepEqual(resolveLink("https://doi.org/10.1002/art.12345/full"), { doi: "10.1002/art.12345" });
     assert.deepEqual(resolveLink("https://www.nejm.org/doi/full/10.1056/NEJMoa1911303"), { doi: "10.1056/nejmoa1911303" });
     assert.deepEqual(resolveLink("https://onlinelibrary.wiley.com/doi/10.1002/art.12345"), { doi: "10.1002/art.12345" });
+    // Schemeless URLs, bare DOIs, spaced DOIs, trailing slash, PMCID, and duplicated paste
+    assert.deepEqual(resolveLink("pubmed.ncbi.nlm.nih.gov/31535829"), { pmid: "31535829" });
+    assert.deepEqual(resolveLink("pubmed.ncbi.nlm.nih.gov/31535829/"), { pmid: "31535829" });
+    assert.deepEqual(resolveLink("www.ncbi.nlm.nih.gov/pubmed/31535829"), { pmid: "31535829" });
+    assert.deepEqual(resolveLink("pmc.ncbi.nlm.nih.gov/articles/PMC6814877"), { pmcid: "PMC6814877" });
+    assert.deepEqual(resolveLink("europepmc.org/article/MED/31535829"), { pmid: "31535829" });
+    assert.deepEqual(resolveLink("PMC6814877"), { pmcid: "PMC6814877" });
+    assert.deepEqual(resolveLink("doi.org/10.1056/NEJMoa1911303"), { doi: "10.1056/nejmoa1911303" });
+    assert.deepEqual(resolveLink("https://doi.org/10.1056/NEJMoa1911303/"), { doi: "10.1056/nejmoa1911303" });
+    assert.deepEqual(resolveLink("10.1056/NEJMoa1911303"), { doi: "10.1056/nejmoa1911303" });
+    assert.deepEqual(resolveLink("10. 1056/NEJMoa1911303"), { doi: "10.1056/nejmoa1911303" });
+    assert.deepEqual(resolveLink("https://pubmed.ncbi.nlm.nih.gov/40959673/https://pubmed.ncbi.nlm.nih.gov/40959673/"), { pmid: "40959673" });
+    assert.deepEqual(resolveLink("https://doi.org/10.1056/NEJMoa1911303https://doi.org/10.1056/NEJMoa1911303"), { doi: "10.1056/nejmoa1911303" });
     assert.equal(resolveLink("https://journal.example/view/1"), null);
     assert.equal(resolveLink("not a study link"), null);
     assert.equal(resolveLink("1234567890"), null);
@@ -527,5 +540,32 @@ describe("research paper card", { concurrency: false, skip: SKIP }, () => {
     assert.equal(llm.calls.length, 0);
     assert.equal(second.costInr, 0);
     assert.equal(second.card.ai.population, "Adults");
+  });
+
+  test("standalone /v1/paper-card reads PubMed, bare DOI, and schemeless links without a synced project", async () => {
+    resetLlm();
+    net.calls.length = 0;
+    seedTrial();
+    net.crossref.set("10.1000/bare.doi", {
+      DOI: "10.1000/bare.doi",
+      title: ["Bare DOI standalone study"],
+      author: [{ family: "Rao", given: "K" }],
+      published: { "date-parts": [[2025]] },
+      "container-title": ["BMJ Open"],
+      abstract: "We evaluated 240 patients. The odds ratio was 0.62 (95% CI 0.45 to 0.85).",
+    });
+    const env = freshEnv();
+
+    const rPub = await call(env, "POST", "v1/paper-card", "tok-alice", { link: "pubmed.ncbi.nlm.nih.gov/31535829/" });
+    assert.equal(rPub.http, 200, JSON.stringify(rPub));
+    assert.equal(rPub.card.pmid, "31535829");
+
+    const rDoi = await call(env, "POST", "v1/paper-card", "tok-alice", { link: "10. 1000/bare.doi" });
+    assert.equal(rDoi.http, 200, JSON.stringify(rDoi));
+    assert.equal(rDoi.card.doi, "10.1000/bare.doi");
+    assert.equal(rDoi.card.title, "Bare DOI standalone study");
+
+    const unauth = await call(env, "POST", "v1/paper-card", "", { link: "10.1000/bare.doi" });
+    assert.equal(unauth.http, 401);
   });
 });

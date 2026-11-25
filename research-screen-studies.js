@@ -96,9 +96,6 @@
       h.push(renderConflictModal(conflict));
     }
 
-    // Paste a study link box at the top, above "Find and add studies"
-    h.push('  <div class="rmd-studies-paste-wrap" id="rmdStudiesPasteWrap"></div>');
-
     // Top Navigation & Action Bar
     h.push('  <div class="rmd-studies-topbar">');
     h.push('    <div class="rmd-topbar-left">');
@@ -512,18 +509,6 @@
     if (!store) return;
     var project = store.getActiveProject();
     if (!project) return;
-
-    // Mount Paste Study Link box
-    var pasteWrap = container.querySelector("#rmdStudiesPasteWrap");
-    if (pasteWrap && SMD.paperCard && SMD.paperCard.mountPasteBox) {
-      SMD.paperCard.mountPasteBox(pasteWrap, {
-        project: project,
-        pid: project ? (project.serverId || project.id) : "",
-        onAdded: function () {
-          // Study was adopted into store
-        }
-      });
-    }
 
     // Navigation to Projects
     var toProj = container.querySelectorAll('[data-rmd="to-projects"]');
