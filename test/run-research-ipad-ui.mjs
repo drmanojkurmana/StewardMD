@@ -21,7 +21,7 @@ const CHROME = process.env.CHROME || [
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 ].find((p) => existsSync(p));
 
-const PORT = 9110, CDP = 9510, OUT = '/tmp/stewardmd-research-ipad';
+const PORT = 9114, CDP = 9514, OUT = '/tmp/stewardmd-research-ipad';
 const TYPES = {
   '.html': 'text/html',
   '.js': 'application/javascript',
@@ -241,8 +241,10 @@ try {
   ok(await until('!!window.SMD_RESEARCH && !!SMD_RESEARCH.screens && !!SMD_RESEARCH.screens.protocol && !!SMD_RESEARCH.screens.search && !!SMD_RESEARCH.screens.rob && !!SMD_RESEARCH.screens.checklist && !!SMD_RESEARCH.screens.studies', 30000), 'app loaded with Protocol, Search, RoB, Checklist and Studies screens');
 
   // Mark the seed project server-backed so the server screens mount (practice gate skips it).
+  // Clear first. This harness used to share port 9110 with the master-chart runner, so a
+  // leftover profile can hold "My thesis analysis" as projects[0] and hide the seeded studies.
   // Re-init the store so the in-memory state picks up the change (getActiveProject reads memory).
-  await ev(`(function(){var s=JSON.parse(localStorage.getItem('smd_research_state_v1'));s.projects[0].serverId=s.projects[0].id;s.projects[0].practice=false;localStorage.setItem('smd_research_state_v1',JSON.stringify(s));SMD_RESEARCH.store.init();return 1})()`);
+  await ev(`(function(){try{localStorage.removeItem('smd_research_state_v1');}catch(e){}SMD_RESEARCH.store.init();var s=JSON.parse(localStorage.getItem('smd_research_state_v1'));s.projects[0].serverId=s.projects[0].id;s.projects[0].practice=false;localStorage.setItem('smd_research_state_v1',JSON.stringify(s));SMD_RESEARCH.store.init();return 1})()`);
   // Pin the Display setting to default density with autoFit off so home.js does not
   // re-zoom <html> on resize during the viewport sweep (layout assertions use 1:1 pixels).
   await ev(`(function(){try{var d=JSON.parse(localStorage.getItem('smd_display_v1')||'{}');d.autoFit=false;d.density='default';d.fontScale=1;localStorage.setItem('smd_display_v1',JSON.stringify(d));}catch(e){}document.documentElement.style.zoom='1';return 1})()`);
