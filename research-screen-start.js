@@ -32,10 +32,80 @@
     { id: "time_to_event", label: "Time to event (from a hazard ratio)" }
   ];
 
-  var CONSENT_LANGS = [
-    "English", "Hindi", "Telugu", "Tamil", "Kannada",
-    "Malayalam", "Marathi", "Bengali", "Gujarati"
+  var CONSENT_LANGUAGES = [
+    { code: "en", name: "English", script: "Latin", dir: "ltr" },
+    { code: "te", name: "Telugu", script: "Telugu", dir: "ltr" },
+    { code: "hi", name: "Hindi", script: "Devanagari", dir: "ltr" },
+    { code: "kn", name: "Kannada", script: "Kannada", dir: "ltr" },
+    { code: "ta", name: "Tamil", script: "Tamil", dir: "ltr" },
+    { code: "ml", name: "Malayalam", script: "Malayalam", dir: "ltr" },
+    { code: "gu", name: "Gujarati", script: "Gujarati", dir: "ltr" },
+    { code: "bn", name: "Bengali", script: "Bengali", dir: "ltr" },
+    { code: "ur", name: "Urdu", script: "Perso-Arabic Nastaliq", dir: "rtl" },
+    { code: "mr", name: "Marathi", script: "Devanagari", dir: "ltr" }
   ];
+
+  var CONSENT_LANGS = [
+    "English", "Telugu", "Hindi", "Kannada", "Tamil",
+    "Malayalam", "Gujarati", "Bengali", "Urdu", "Marathi"
+  ];
+
+  function langCodeFor(lang) {
+    var l = String(lang || "").toLowerCase();
+    for (var i = 0; i < CONSENT_LANGUAGES.length; i++) {
+      if (CONSENT_LANGUAGES[i].code === l || CONSENT_LANGUAGES[i].name.toLowerCase() === l) {
+        return CONSENT_LANGUAGES[i].code;
+      }
+    }
+    return "en";
+  }
+
+  function fontStackFor(lang) {
+    var code = langCodeFor(lang);
+    if (code === "ur") return "'Noto Nastaliq Urdu', 'Noto Sans Arabic', system-ui, sans-serif";
+    if (code === "te") return "'Noto Sans Telugu', system-ui, sans-serif";
+    if (code === "hi" || code === "mr") return "'Noto Sans Devanagari', system-ui, sans-serif";
+    if (code === "kn") return "'Noto Sans Kannada', system-ui, sans-serif";
+    if (code === "ta") return "'Noto Sans Tamil', system-ui, sans-serif";
+    if (code === "ml") return "'Noto Sans Malayalam', system-ui, sans-serif";
+    if (code === "gu") return "'Noto Sans Gujarati', system-ui, sans-serif";
+    if (code === "bn") return "'Noto Sans Bengali', system-ui, sans-serif";
+    return "inherit";
+  }
+
+  function isRtlLang(lang) {
+    return langCodeFor(lang) === "ur";
+  }
+
+  var consentTemplatesCache = null;
+  function getConsentTemplates(cb) {
+    if (consentTemplatesCache) {
+      if (cb) cb(consentTemplatesCache);
+      return;
+    }
+    if (typeof fetch === "function") {
+      fetch("/data/research-consent-templates.json")
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          consentTemplatesCache = data;
+          if (cb) cb(consentTemplatesCache);
+        })
+        .catch(function () {
+          fetch("data/research-consent-templates.json")
+            .then(function (r2) { return r2.json(); })
+            .then(function (d2) {
+              consentTemplatesCache = d2;
+              if (cb) cb(consentTemplatesCache);
+            })
+            .catch(function () {
+              if (cb) cb(null);
+            });
+        });
+    } else if (cb) {
+      cb(null);
+    }
+  }
+  getConsentTemplates();
 
   /* Minimal ZIP and DOCX generator for on-device export */
   function xmlEsc(s) {
@@ -114,28 +184,42 @@
     return new Uint8Array(out);
   }
 
-  function docxParagraph(text, bold, size) {
-    if (!text) return "<w:p/>";
-    var rpr = "";
-    if (bold || size) {
-      rpr = "<w:rPr>" + (bold ? "<w:b/>" : "") +
-        (size ? '<w:sz w:val="' + size + '"/><w:szCs w:val="' + size + '"/>' : "") + "</w:rPr>";
+  function docxParagraph(text, bold, size, isRtl) {
+    if (!text && text !== "") return "<w:p/>";
+    var pPr = "";
+    if (isRtl) {
+      pPr = '<w:pPr><w:jc w:val="right"/><w:bidi/></w:pPr>';
     }
-    return "<w:p><w:r>" + rpr + '<w:t xml:space="preserve">' + xmlEsc(text) + "</w:t></w:r></w:p>";
+    var rpr = "";
+    if (bold || size || isRtl) {
+      rpr = "<w:rPr>" + (bold ? "<w:b/>" : "") +
+        (size ? '<w:sz w:val="' + size + '"/><w:szCs w:val="' + size + '"/>' : "") +
+        (isRtl ? '<w:rtl/>' : "") + "</w:rPr>";
+    }
+    return "<w:p>" + pPr + "<w:r>" + rpr + '<w:t xml:space="preserve">' + xmlEsc(text) + "</w:t></w:r></w:p>";
+  }
+
+  function docxPageBreak() {
+    return '<w:p><w:r><w:br w:type="page"/></w:r></w:p>';
   }
 
   function createDocx(title, sections) {
     var parts = [];
-    parts.push(docxParagraph(title, true, 32));
+    if (title) parts.push(docxParagraph(title, true, 32));
     parts.push(docxParagraph("", false, 0));
     for (var i = 0; i < sections.length; i++) {
       var s = sections[i];
-      if (s.heading) parts.push(docxParagraph(s.heading, true, 26));
+      if (s.pageBreak) {
+        parts.push(docxPageBreak());
+        continue;
+      }
+      var isRtl = !!s.isRtl;
+      if (s.heading) parts.push(docxParagraph(s.heading, true, s.size || 26, isRtl));
       var lines = String(s.text || "").split("\n");
       for (var j = 0; j < lines.length; j++) {
-        parts.push(docxParagraph(lines[j], false, 0));
+        parts.push(docxParagraph(lines[j], false, 0, isRtl));
       }
-      parts.push(docxParagraph("", false, 0));
+      parts.push(docxParagraph("", false, 0, isRtl));
     }
     var doc = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
       '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>' +
@@ -778,84 +862,93 @@
     h.push('    <div class="rmd-consent-form rmd-form"' + (st.consentOpen ? '' : ' style="display:none;"') + '>');
     var cd = st.consentData;
 
-    // If non-English with both versions available
-    if (st.consentLang !== "English" && st.consentTransData) {
-      h.push('      <div class="rmd-sub-card">');
-      h.push('        <h4 style="margin:0;font-size:14px;color:var(--rmd-acc);">English version</h4>');
-      h.push('        <div class="rmd-field"><label>Title:</label><div class="rmd-consent-preview" id="rmd_eng_title">' + esc(cd.title) + '</div></div>');
-      h.push('        <div class="rmd-field"><label>Purpose:</label><div class="rmd-consent-preview" id="rmd_eng_purpose">' + esc(cd.purpose) + '</div></div>');
-      h.push('        <div class="rmd-field"><label>Procedures:</label><div class="rmd-consent-preview">' + esc(cd.procedures) + '</div></div>');
+    // If non-English: selected language is THE consent document, shown FIRST and IN FULL
+    if (st.consentLang !== "English") {
+      var code = langCodeFor(st.consentLang);
+      var isRtl = isRtlLang(code);
+      var fontStack = fontStackFor(code);
+      var td = st.consentTransData || {};
+
+      h.push('      <div class="rmd-sub-card rmd-consent-selected-block" id="rmd_consent_selected_block" lang="' + esc(code) + '"' + (isRtl ? ' dir="rtl"' : ' dir="ltr"') + ' style="font-family:' + fontStack + ';' + (isRtl ? 'text-align:right;' : '') + '">');
+      h.push('        <h4 style="margin:0;font-size:14px;color:var(--rmd-acc);">' + esc(st.consentLang) + ' version</h4>');
+      h.push('        <p class="rmd-translation-check" style="margin:6px 0 10px;font-size:12px;color:var(--rmd-mut,#8ea3a6);' + (isRtl ? 'text-align:left;direction:ltr;' : '') + '">Translation check: have a native speaker or your ethics committee check this translation before use.</p>');
+      h.push('        <div class="rmd-field"><label>Title:</label><input type="text" id="rmd_trans_title" data-consent-trans="title" lang="' + esc(code) + '"' + (isRtl ? ' dir="rtl"' : '') + ' value="' + esc(td.title || "") + '">' + noteBadge(st.consentDrafted, "trans_title", td.title) + '</div>');
+      h.push('        <div class="rmd-field"><label>Purpose:</label><textarea id="rmd_trans_purpose" data-consent-trans="purpose" lang="' + esc(code) + '"' + (isRtl ? ' dir="rtl"' : '') + ' rows="2">' + esc(td.purpose || "") + '</textarea>' + noteBadge(st.consentDrafted, "trans_purpose", td.purpose) + '</div>');
+      h.push('        <div class="rmd-field"><label>Procedures:</label><textarea id="rmd_trans_proc" data-consent-trans="procedures" lang="' + esc(code) + '"' + (isRtl ? ' dir="rtl"' : '') + ' rows="2">' + esc(td.procedures || "") + '</textarea>' + noteBadge(st.consentDrafted, "trans_procedures", td.procedures) + '</div>');
+      h.push('        <div class="rmd-field"><label>Risks:</label><textarea data-consent-trans="risks" lang="' + esc(code) + '"' + (isRtl ? ' dir="rtl"' : '') + ' rows="2">' + esc(td.risks || "") + '</textarea></div>');
+      h.push('        <div class="rmd-field"><label>Benefits:</label><textarea data-consent-trans="benefits" lang="' + esc(code) + '"' + (isRtl ? ' dir="rtl"' : '') + ' rows="2">' + esc(td.benefits || "") + '</textarea></div>');
+      h.push('        <div class="rmd-field"><label>Voluntary participation:</label><textarea data-consent-trans="voluntary" lang="' + esc(code) + '"' + (isRtl ? ' dir="rtl"' : '') + ' rows="2">' + esc(td.voluntary || "") + '</textarea></div>');
+      h.push('        <div class="rmd-field"><label>Contact details:</label><input type="text" data-consent-trans="contact" lang="' + esc(code) + '"' + (isRtl ? ' dir="rtl"' : '') + ' value="' + esc(td.contact || "") + '">' + noteBadge(st.consentDrafted, "contact", td.contact) + '</div>');
+      h.push('        <div class="rmd-field"><label>Statements:</label><textarea id="rmd_trans_stmts" data-consent-trans="statements" lang="' + esc(code) + '"' + (isRtl ? ' dir="rtl"' : '') + ' rows="3">' + esc(td.statements || "") + '</textarea></div>');
+      h.push('        <div class="rmd-field"><label>Signature block:</label><textarea id="rmd_trans_sig" data-consent-trans="signatureBlock" lang="' + esc(code) + '"' + (isRtl ? ' dir="rtl"' : '') + ' rows="3">' + esc(td.signatureBlock || "") + '</textarea></div>');
       h.push('      </div>');
 
-      var td = st.consentTransData;
-      h.push('      <div class="rmd-sub-card" style="margin-top:10px;">');
-      h.push('        <h4 style="margin:0;font-size:14px;color:var(--rmd-acc);">' + esc(st.consentLang) + ' version</h4>');
-      h.push('        <div class="rmd-field"><label>Title:</label><input type="text" id="rmd_trans_title" data-consent-trans="title" value="' + esc(td.title) + '">' + noteBadge(st.consentDrafted, "trans_title", td.title) + '</div>');
-      h.push('        <div class="rmd-field"><label>Purpose:</label><textarea id="rmd_trans_purpose" data-consent-trans="purpose" rows="2">' + esc(td.purpose) + '</textarea>' + noteBadge(st.consentDrafted, "trans_purpose", td.purpose) + '</div>');
-      h.push('        <div class="rmd-field"><label>Procedures:</label><textarea id="rmd_trans_proc" data-consent-trans="procedures" rows="2">' + esc(td.procedures) + '</textarea>' + noteBadge(st.consentDrafted, "trans_procedures", td.procedures) + '</div>');
-      h.push('        <div class="rmd-field"><label>Risks:</label><textarea data-consent-trans="risks" rows="2">' + esc(td.risks) + '</textarea></div>');
-      h.push('        <div class="rmd-field"><label>Benefits:</label><textarea data-consent-trans="benefits" rows="2">' + esc(td.benefits) + '</textarea></div>');
-      h.push('        <div class="rmd-field"><label>Voluntary participation:</label><textarea data-consent-trans="voluntary" rows="2">' + esc(td.voluntary) + '</textarea></div>');
-      h.push('        <div class="rmd-field"><label>Contact details:</label><input type="text" data-consent-trans="contact" value="' + esc(td.contact) + '">' + noteBadge(st.consentDrafted, "contact", td.contact) + '</div>');
-      h.push('        <div class="rmd-field"><label>Statements:</label><textarea data-consent-trans="statements" rows="3">' + esc(td.statements) + '</textarea></div>');
-      h.push('        <div class="rmd-field"><label>Signature block:</label><input type="text" data-consent-trans="signatureBlock" value="' + esc(td.signatureBlock) + '"></div>');
+      // English copy follows
+      h.push('      <div class="rmd-sub-card rmd-consent-english-copy" id="rmd_consent_english_copy" style="margin-top:10px;" lang="en" dir="ltr">');
+      h.push('        <h4 style="margin:0;font-size:14px;color:var(--rmd-acc);">English copy (for the ethics committee)</h4>');
+      h.push('        <div class="rmd-field"><label>Title:</label><div class="rmd-consent-preview" id="rmd_eng_title">' + esc(cd.title || "") + '</div></div>');
+      h.push('        <div class="rmd-field"><label>Purpose:</label><div class="rmd-consent-preview" id="rmd_eng_purpose">' + esc(cd.purpose || "") + '</div></div>');
+      h.push('        <div class="rmd-field"><label>Procedures:</label><div class="rmd-consent-preview">' + esc(cd.procedures || "") + '</div></div>');
       h.push('      </div>');
     } else {
-      h.push('      <div class="rmd-field">');
-      h.push('        <label for="rmd_consent_title">Information sheet title <span class="rmd-req">*</span></label>');
-      h.push('        <input type="text" id="rmd_consent_title" data-consent="title" value="' + esc(cd.title) + '">' + noteBadge(st.consentDrafted, "title", cd.title));
-      h.push('      </div>');
-      h.push('      <div class="rmd-field">');
-      h.push('        <label for="rmd_consent_purpose">Purpose of study</label>');
-      h.push('        <textarea id="rmd_consent_purpose" data-consent="purpose" rows="2">' + esc(cd.purpose) + '</textarea>' + noteBadge(st.consentDrafted, "purpose", cd.purpose));
-      h.push('      </div>');
-      h.push('      <div class="rmd-field">');
-      h.push('        <label for="rmd_consent_proc">Study procedures</label>');
-      h.push('        <textarea id="rmd_consent_proc" data-consent="procedures" rows="2">' + esc(cd.procedures) + '</textarea>' + noteBadge(st.consentDrafted, "procedures", cd.procedures));
-      h.push('      </div>');
-      h.push('      <div class="rmd-form-row">');
+      h.push('      <div class="rmd-consent-selected-block" id="rmd_consent_selected_block" lang="en" dir="ltr">');
       h.push('        <div class="rmd-field">');
-      h.push('          <label for="rmd_consent_dur">Duration of participation</label>');
-      h.push('          <input type="text" id="rmd_consent_dur" data-consent="duration" value="' + esc(cd.duration) + '">' + noteBadge(st.consentDrafted, "duration", cd.duration));
+      h.push('          <label for="rmd_consent_title">Information sheet title <span class="rmd-req">*</span></label>');
+      h.push('          <input type="text" id="rmd_consent_title" data-consent="title" lang="en" value="' + esc(cd.title) + '">' + noteBadge(st.consentDrafted, "title", cd.title));
       h.push('        </div>');
       h.push('        <div class="rmd-field">');
-      h.push('          <label for="rmd_consent_contact">Contact for queries</label>');
-      h.push('          <input type="text" id="rmd_consent_contact" data-consent="contact" value="' + esc(cd.contact) + '">' + noteBadge(st.consentDrafted, "contact", cd.contact));
-      h.push('        </div>');
-      h.push('      </div>');
-      h.push('      <div class="rmd-form-row">');
-      h.push('        <div class="rmd-field">');
-      h.push('          <label for="rmd_consent_risks">Potential risks / discomforts</label>');
-      h.push('          <textarea id="rmd_consent_risks" data-consent="risks" rows="2">' + esc(cd.risks) + '</textarea>' + noteBadge(st.consentDrafted, "risks", cd.risks));
+      h.push('          <label for="rmd_consent_purpose">Purpose of study</label>');
+      h.push('          <textarea id="rmd_consent_purpose" data-consent="purpose" lang="en" rows="2">' + esc(cd.purpose) + '</textarea>' + noteBadge(st.consentDrafted, "purpose", cd.purpose));
       h.push('        </div>');
       h.push('        <div class="rmd-field">');
-      h.push('          <label for="rmd_consent_ben">Potential benefits</label>');
-      h.push('          <textarea id="rmd_consent_ben" data-consent="benefits" rows="2">' + esc(cd.benefits) + '</textarea>' + noteBadge(st.consentDrafted, "benefits", cd.benefits));
+      h.push('          <label for="rmd_consent_proc">Study procedures</label>');
+      h.push('          <textarea id="rmd_consent_proc" data-consent="procedures" lang="en" rows="2">' + esc(cd.procedures) + '</textarea>' + noteBadge(st.consentDrafted, "procedures", cd.procedures));
       h.push('        </div>');
-      h.push('      </div>');
-      h.push('      <div class="rmd-form-row">');
+      h.push('        <div class="rmd-form-row">');
+      h.push('          <div class="rmd-field">');
+      h.push('            <label for="rmd_consent_dur">Duration of participation</label>');
+      h.push('            <input type="text" id="rmd_consent_dur" data-consent="duration" lang="en" value="' + esc(cd.duration) + '">' + noteBadge(st.consentDrafted, "duration", cd.duration));
+      h.push('          </div>');
+      h.push('          <div class="rmd-field">');
+      h.push('            <label for="rmd_consent_contact">Contact for queries</label>');
+      h.push('            <input type="text" id="rmd_consent_contact" data-consent="contact" lang="en" value="' + esc(cd.contact) + '">' + noteBadge(st.consentDrafted, "contact", cd.contact));
+      h.push('          </div>');
+      h.push('        </div>');
+      h.push('        <div class="rmd-form-row">');
+      h.push('          <div class="rmd-field">');
+      h.push('            <label for="rmd_consent_risks">Potential risks / discomforts</label>');
+      h.push('            <textarea id="rmd_consent_risks" data-consent="risks" lang="en" rows="2">' + esc(cd.risks) + '</textarea>' + noteBadge(st.consentDrafted, "risks", cd.risks));
+      h.push('          </div>');
+      h.push('          <div class="rmd-field">');
+      h.push('            <label for="rmd_consent_ben">Potential benefits</label>');
+      h.push('            <textarea id="rmd_consent_ben" data-consent="benefits" lang="en" rows="2">' + esc(cd.benefits) + '</textarea>' + noteBadge(st.consentDrafted, "benefits", cd.benefits));
+      h.push('          </div>');
+      h.push('        </div>');
+      h.push('        <div class="rmd-form-row">');
+      h.push('          <div class="rmd-field">');
+      h.push('            <label for="rmd_consent_alt">Alternative treatments</label>');
+      h.push('            <input type="text" id="rmd_consent_alt" data-consent="alternatives" lang="en" value="' + esc(cd.alternatives) + '">' + noteBadge(st.consentDrafted, "alternatives", cd.alternatives));
+      h.push('          </div>');
+      h.push('          <div class="rmd-field">');
+      h.push('            <label for="rmd_consent_conf">Confidentiality assurance</label>');
+      h.push('            <input type="text" id="rmd_consent_conf" data-consent="confidentiality" lang="en" value="' + esc(cd.confidentiality) + '">' + noteBadge(st.consentDrafted, "confidentiality", cd.confidentiality));
+      h.push('          </div>');
+      h.push('        </div>');
       h.push('        <div class="rmd-field">');
-      h.push('          <label for="rmd_consent_alt">Alternative treatments</label>');
-      h.push('          <input type="text" id="rmd_consent_alt" data-consent="alternatives" value="' + esc(cd.alternatives) + '">' + noteBadge(st.consentDrafted, "alternatives", cd.alternatives));
+      h.push('          <label for="rmd_consent_vol">Voluntary participation statement</label>');
+      h.push('          <textarea id="rmd_consent_vol" data-consent="voluntary" lang="en" rows="2">' + esc(cd.voluntary) + '</textarea>' + noteBadge(st.consentDrafted, "voluntary", cd.voluntary));
       h.push('        </div>');
       h.push('        <div class="rmd-field">');
-      h.push('          <label for="rmd_consent_conf">Confidentiality assurance</label>');
-      h.push('          <input type="text" id="rmd_consent_conf" data-consent="confidentiality" value="' + esc(cd.confidentiality) + '">' + noteBadge(st.consentDrafted, "confidentiality", cd.confidentiality));
+      h.push('          <label for="rmd_consent_stmts">Consent statements (one per line)</label>');
+      h.push('          <textarea id="rmd_consent_stmts" data-consent="statements" lang="en" rows="3">' + esc(cd.statements) + '</textarea>' + noteBadge(st.consentDrafted, "statements", cd.statements));
       h.push('        </div>');
-      h.push('      </div>');
-      h.push('      <div class="rmd-field">');
-      h.push('        <label for="rmd_consent_vol">Voluntary participation statement</label>');
-      h.push('        <textarea id="rmd_consent_vol" data-consent="voluntary" rows="2">' + esc(cd.voluntary) + '</textarea>' + noteBadge(st.consentDrafted, "voluntary", cd.voluntary));
-      h.push('      </div>');
-      h.push('      <div class="rmd-field">');
-      h.push('        <label for="rmd_consent_stmts">Consent statements (one per line)</label>');
-      h.push('        <textarea id="rmd_consent_stmts" data-consent="statements" rows="3">' + esc(cd.statements) + '</textarea>' + noteBadge(st.consentDrafted, "statements", cd.statements));
-      h.push('      </div>');
-      h.push('      <div class="rmd-field">');
-      h.push('        <label for="rmd_consent_sig">Signature block</label>');
-      h.push('        <input type="text" id="rmd_consent_sig" data-consent="signatureBlock" value="' + esc(cd.signatureBlock) + '">' + noteBadge(st.consentDrafted, "signatureBlock", cd.signatureBlock));
+      h.push('        <div class="rmd-field">');
+      h.push('          <label for="rmd_consent_sig">Signature block</label>');
+      h.push('          <textarea id="rmd_consent_sig" data-consent="signatureBlock" lang="en" rows="3">' + esc(cd.signatureBlock) + '</textarea>' + noteBadge(st.consentDrafted, "signatureBlock", cd.signatureBlock));
+      h.push('        </div>');
       h.push('      </div>');
     }
+    h.push('      <div id="rmd_consent_status" style="margin-top:8px;font-size:13px;"></div>');
     h.push('      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px;flex-wrap:wrap;">');
     h.push('        <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="consent-copy">Copy</button>');
     h.push('        <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="consent-docx">Download (DOCX)</button>');
@@ -1171,7 +1264,12 @@
     var langSel = container.querySelector("#rmd_consent_lang");
     if (langSel) {
       langSel.onchange = function () {
+        var oldLang = st.consentLang;
         st.consentLang = this.value;
+        var code = langCodeFor(st.consentLang);
+        if (code !== "en") {
+          applyConsentTemplate(code, oldLang !== st.consentLang);
+        }
         render(container);
       };
     }
@@ -1202,6 +1300,33 @@
       })(transInputs[n]);
     }
 
+    function applyConsentTemplate(code, force) {
+      getConsentTemplates(function (tpls) {
+        if (!tpls) return;
+        var langTpl = tpls[code] || (tpls.languages && tpls.languages[code]);
+        if (!langTpl) return;
+        if (code === "en") {
+          if (force || !st.consentData.statements) {
+            if (!st.consentData.title) st.consentData.title = (proj && proj.title) || (langTpl.headings && langTpl.headings.participantInformationSheet) || "Participant Information Sheet";
+            if (!st.consentData.statements && langTpl.statements) st.consentData.statements = langTpl.statements.join("\n");
+            if (!st.consentData.signatureBlock) st.consentData.signatureBlock = langTpl.signature + "\n" + langTpl.thumbImpression + "\n" + langTpl.witness + "\n" + langTpl.representative + "\n" + langTpl.date;
+          }
+        } else {
+          if (!st.consentTransData) st.consentTransData = {};
+          if (force || !st.consentTransData.statements) {
+            st.consentTransData.title = (langTpl.headings && (langTpl.headings.informedConsentForm || langTpl.headings.participantInformationSheet)) || "";
+            st.consentTransData.statements = langTpl.statements ? langTpl.statements.join("\n") : "";
+            st.consentTransData.signatureBlock = langTpl.signature + "\n" + langTpl.thumbImpression + "\n" + langTpl.witness + "\n" + langTpl.representative + "\n" + langTpl.date;
+          }
+          if (force || !st.consentData.title) {
+            if (!st.consentData.title) st.consentData.title = (proj && proj.title) || "Information for participants";
+            if (!st.consentData.purpose) st.consentData.purpose = (proj && proj.research_question) || "";
+          }
+        }
+        render(container);
+      });
+    }
+
     // Consent AI Bind
     var cardConsent = container.querySelector("#rmdCardConsent");
     if (cardConsent && SMD.ai) {
@@ -1209,8 +1334,10 @@
       if (manualBtnC) {
         manualBtnC.onclick = function () {
           st.consentOpen = true;
+          var code = langCodeFor(st.consentLang);
+          applyConsentTemplate(code, true);
           render(container);
-          var firstInp = container.querySelector("#rmd_consent_title");
+          var firstInp = container.querySelector(code !== "en" ? "#rmd_trans_title" : "#rmd_consent_title");
           if (firstInp && firstInp.focus) firstInp.focus();
         };
       }
@@ -1274,6 +1401,26 @@
                   st.consentDrafted.trans_title = true;
                   st.consentDrafted.trans_purpose = true;
                   st.consentDrafted.trans_procedures = true;
+                } else if (d.participantInformationSheet && d.language && d.language !== "English") {
+                  var lpis = d.participantInformationSheet || {};
+                  var lcf = d.consentForm || {};
+                  st.consentTransData = {
+                    title: lpis.title || "",
+                    purpose: lpis.purpose || "",
+                    procedures: lpis.procedures || "",
+                    duration: lpis.duration || "",
+                    risks: lpis.risks || "",
+                    benefits: lpis.benefits || "",
+                    alternatives: lpis.alternatives || "",
+                    confidentiality: lpis.confidentiality || "",
+                    voluntary: lpis.voluntary || "",
+                    contact: lpis.contact || "",
+                    statements: Array.isArray(lcf.statements) ? lcf.statements.join("\n") : (lcf.statements || ""),
+                    signatureBlock: lcf.signatureBlock || ""
+                  };
+                  st.consentDrafted.trans_title = true;
+                  st.consentDrafted.trans_purpose = true;
+                  st.consentDrafted.trans_procedures = true;
                 } else {
                   st.consentTransData = null;
                 }
@@ -1291,60 +1438,107 @@
 
     // Consent DOCX
     on('[data-rmd="consent-docx"]', function () {
+      var errEl = container.querySelector("#rmd_consent_status");
       var cd = st.consentData;
-      var sections = [
-        { heading: "Participant Information Sheet", text: cd.title + "\n\nPurpose: " + cd.purpose + "\nProcedures: " + cd.procedures + "\nDuration: " + cd.duration + "\nRisks: " + cd.risks + "\nBenefits: " + cd.benefits + "\nAlternatives: " + cd.alternatives + "\nConfidentiality: " + cd.confidentiality + "\nVoluntary Participation: " + cd.voluntary + "\nContact: " + cd.contact },
-        { heading: "Informed Consent Form", text: "Statements of consent:\n" + cd.statements + "\n\n" + cd.signatureBlock }
-      ];
-      if (st.consentLang !== "English" && st.consentTransData) {
+      if (st.consentLang !== "English") {
         var td = st.consentTransData;
+        var hasTrans = td && (
+          (td.title && td.title.trim()) ||
+          (td.purpose && td.purpose.trim()) ||
+          (td.procedures && td.procedures.trim()) ||
+          (td.statements && td.statements.trim())
+        );
+        if (!hasTrans) {
+          var blockedMsg = "Fill in the " + st.consentLang + " version first.";
+          if (p2().flashNotice) p2().flashNotice(container, blockedMsg, "warn");
+          if (errEl) errEl.innerHTML = '<span style="color:#ff6b6b;" role="alert">' + esc(blockedMsg) + '</span>';
+          return;
+        }
+      }
+      if (errEl) errEl.innerHTML = "";
+
+      var sections = [];
+      var isUrdu = st.consentLang === "Urdu";
+      if (st.consentLang !== "English") {
+        var tdVal = st.consentTransData || {};
         sections.push({
-          heading: "Participant Information Sheet (" + st.consentLang + ")",
-          text: td.title + "\n\n" + td.purpose + "\n" + td.procedures + "\n" + td.risks + "\n" + td.benefits + "\n" + td.voluntary + "\n" + td.contact
+          heading: tdVal.title || ("Consent Form (" + st.consentLang + ")"),
+          text: (tdVal.purpose ? "Purpose: " + tdVal.purpose + "\n" : "") +
+            (tdVal.procedures ? "Procedures: " + tdVal.procedures + "\n" : "") +
+            (tdVal.duration ? "Duration: " + tdVal.duration + "\n" : "") +
+            (tdVal.risks ? "Risks: " + tdVal.risks + "\n" : "") +
+            (tdVal.benefits ? "Benefits: " + tdVal.benefits + "\n" : "") +
+            (tdVal.voluntary ? "Voluntary: " + tdVal.voluntary + "\n" : "") +
+            (tdVal.contact ? "Contact: " + tdVal.contact + "\n" : "") +
+            (tdVal.statements ? "\nStatements:\n" + tdVal.statements + "\n" : "") +
+            (tdVal.signatureBlock ? "\n" + tdVal.signatureBlock : ""),
+          isRtl: isUrdu,
+          size: 30
+        });
+        sections.push({ pageBreak: true });
+        sections.push({
+          heading: "English copy (for the ethics committee)",
+          text: (cd.title ? cd.title + "\n\n" : "") +
+            "Purpose: " + cd.purpose + "\nProcedures: " + cd.procedures + "\nDuration: " + cd.duration +
+            "\nRisks: " + cd.risks + "\nBenefits: " + cd.benefits + "\nAlternatives: " + cd.alternatives +
+            "\nConfidentiality: " + cd.confidentiality + "\nVoluntary Participation: " + cd.voluntary + "\nContact: " + cd.contact +
+            "\n\nStatements:\n" + cd.statements + "\n\n" + cd.signatureBlock,
+          isRtl: false,
+          size: 26
+        });
+      } else {
+        sections.push({
+          heading: "Participant Information Sheet",
+          text: cd.title + "\n\nPurpose: " + cd.purpose + "\nProcedures: " + cd.procedures + "\nDuration: " + cd.duration + "\nRisks: " + cd.risks + "\nBenefits: " + cd.benefits + "\nAlternatives: " + cd.alternatives + "\nConfidentiality: " + cd.confidentiality + "\nVoluntary Participation: " + cd.voluntary + "\nContact: " + cd.contact
         });
         sections.push({
-          heading: "Informed Consent Form (" + st.consentLang + ")",
-          text: td.statements + "\n\n" + td.signatureBlock
+          heading: "Informed Consent Form",
+          text: "Statements of consent:\n" + cd.statements + "\n\n" + cd.signatureBlock
         });
       }
-      var bytes = createDocx(cd.title || "Participant Information Sheet and Informed Consent Form", sections);
-      var name = (p2().fileSlug ? p2().fileSlug(cd.title, "consent-form") : "consent-form") + ".docx";
-      p2().downloadBytes(name, bytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", cd.title);
+      var mainTitle = (st.consentLang !== "English" && st.consentTransData && st.consentTransData.title) ? st.consentTransData.title : (cd.title || "Informed Consent Form");
+      var bytes = createDocx(mainTitle, sections);
+      var name = (p2().fileSlug ? p2().fileSlug(mainTitle, "consent-form") : "consent-form") + ".docx";
+      p2().downloadBytes(name, bytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", mainTitle);
     });
 
     // Consent Copy
     on('[data-rmd="consent-copy"]', function () {
-      var cd = st.consentData;
-      var lines = [
-        "PARTICIPANT INFORMATION SHEET",
-        "Title: " + cd.title,
-        "Purpose: " + cd.purpose,
-        "Procedures: " + cd.procedures,
-        "Duration: " + cd.duration,
-        "Risks: " + cd.risks,
-        "Benefits: " + cd.benefits,
-        "Alternatives: " + cd.alternatives,
-        "Confidentiality: " + cd.confidentiality,
-        "Voluntary: " + cd.voluntary,
-        "Contact: " + cd.contact,
-        "\nINFORMED CONSENT FORM",
-        "Statements:\n" + cd.statements,
-        "Signature: " + cd.signatureBlock
-      ];
-      if (st.consentLang !== "English" && st.consentTransData) {
-        var td = st.consentTransData;
-        lines.push("\n\n--- " + st.consentLang.toUpperCase() + " VERSION ---");
-        lines.push("Title: " + td.title);
-        lines.push("Purpose: " + td.purpose);
-        lines.push("Procedures: " + td.procedures);
-        lines.push("Risks: " + td.risks);
-        lines.push("Benefits: " + td.benefits);
-        lines.push("Voluntary: " + td.voluntary);
-        lines.push("Contact: " + td.contact);
-        lines.push("Statements:\n" + td.statements);
-        lines.push("Signature: " + td.signatureBlock);
+      if (st.consentLang !== "English") {
+        var tdCopy = st.consentTransData || {};
+        var transLines = [
+          tdCopy.title || (st.consentLang + " Consent Form"),
+          tdCopy.purpose ? "Purpose: " + tdCopy.purpose : "",
+          tdCopy.procedures ? "Procedures: " + tdCopy.procedures : "",
+          tdCopy.duration ? "Duration: " + tdCopy.duration : "",
+          tdCopy.risks ? "Risks: " + tdCopy.risks : "",
+          tdCopy.benefits ? "Benefits: " + tdCopy.benefits : "",
+          tdCopy.voluntary ? "Voluntary: " + tdCopy.voluntary : "",
+          tdCopy.contact ? "Contact: " + tdCopy.contact : "",
+          tdCopy.statements ? "\nStatements:\n" + tdCopy.statements : "",
+          tdCopy.signatureBlock ? "\n" + tdCopy.signatureBlock : ""
+        ].filter(Boolean);
+        copyToClipboard(transLines.join("\n"), container, st.consentLang + " consent copied.");
+      } else {
+        var cd = st.consentData;
+        var lines = [
+          "PARTICIPANT INFORMATION SHEET",
+          "Title: " + cd.title,
+          "Purpose: " + cd.purpose,
+          "Procedures: " + cd.procedures,
+          "Duration: " + cd.duration,
+          "Risks: " + cd.risks,
+          "Benefits: " + cd.benefits,
+          "Alternatives: " + cd.alternatives,
+          "Confidentiality: " + cd.confidentiality,
+          "Voluntary: " + cd.voluntary,
+          "Contact: " + cd.contact,
+          "\nINFORMED CONSENT FORM",
+          "Statements:\n" + cd.statements,
+          "Signature: " + cd.signatureBlock
+        ];
+        copyToClipboard(lines.join("\n"), container, "Consent document copied.");
       }
-      copyToClipboard(lines.join("\n"), container, "Consent document copied.");
     });
     on('[data-rmd="consent-save"]', function () { saveCurrent(proj.id, container); });
 

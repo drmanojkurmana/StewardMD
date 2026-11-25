@@ -315,9 +315,89 @@ function titleDraft(parsed) {
   return { title, abstract };
 }
 
-const CONSENT_LANGUAGES = new Set([
-  "English", "Hindi", "Telugu", "Tamil", "Kannada", "Malayalam", "Marathi", "Bengali", "Gujarati",
+export const CONSENT_LANGUAGES_LIST = [
+  { code: "en", name: "English", script: "Latin", dir: "ltr" },
+  { code: "te", name: "Telugu", script: "Telugu", dir: "ltr" },
+  { code: "hi", name: "Hindi", script: "Devanagari", dir: "ltr" },
+  { code: "kn", name: "Kannada", script: "Kannada", dir: "ltr" },
+  { code: "ta", name: "Tamil", script: "Tamil", dir: "ltr" },
+  { code: "ml", name: "Malayalam", script: "Malayalam", dir: "ltr" },
+  { code: "gu", name: "Gujarati", script: "Gujarati", dir: "ltr" },
+  { code: "bn", name: "Bengali", script: "Bengali", dir: "ltr" },
+  { code: "ur", name: "Urdu", script: "Perso-Arabic Nastaliq", dir: "rtl" },
+  { code: "mr", name: "Marathi", script: "Devanagari", dir: "ltr" },
+];
+
+export const CONSENT_LANGUAGES = new Set([
+  "English", "Hindi", "Telugu", "Tamil", "Kannada", "Malayalam", "Marathi", "Bengali", "Gujarati", "Urdu",
+  "en", "hi", "te", "ta", "kn", "ml", "mr", "bn", "gu", "ur",
 ]);
+
+export const SCRIPT_RANGES = {
+  te: [[0x0C00, 0x0C7F]],
+  hi: [[0x0900, 0x097F]],
+  mr: [[0x0900, 0x097F]],
+  kn: [[0x0C80, 0x0CFF]],
+  ta: [[0x0B80, 0x0BFF]],
+  ml: [[0x0D00, 0x0D7F]],
+  gu: [[0x0A80, 0x0AFF]],
+  bn: [[0x0980, 0x09FF]],
+  ur: [[0x0600, 0x06FF], [0x0750, 0x077F]],
+};
+
+export const LANG_MAP = {
+  en: "English", english: "English",
+  te: "Telugu", telugu: "Telugu",
+  hi: "Hindi", hindi: "Hindi",
+  kn: "Kannada", kannada: "Kannada",
+  ta: "Tamil", tamil: "Tamil",
+  ml: "Malayalam", malayalam: "Malayalam",
+  mr: "Marathi", marathi: "Marathi",
+  bn: "Bengali", bengali: "Bengali",
+  gu: "Gujarati", gujarati: "Gujarati",
+  ur: "Urdu", urdu: "Urdu",
+};
+
+export const CODE_BY_NAME = {
+  english: "en", en: "en",
+  telugu: "te", te: "te",
+  hindi: "hi", hi: "hi",
+  kannada: "kn", kn: "kn",
+  tamil: "ta", ta: "ta",
+  malayalam: "ml", ml: "ml",
+  marathi: "mr", mr: "mr",
+  bengali: "bn", bn: "bn",
+  gujarati: "gu", gu: "gu",
+  urdu: "ur", ur: "ur",
+};
+
+export function checkScriptRatio(text, lang) {
+  const norm = String(lang || "").trim().toLowerCase();
+  const code = CODE_BY_NAME[norm] || norm;
+  if (code === "en") return { ok: true, ratio: 1, targetLetters: 0, totalLetters: 0 };
+  const ranges = SCRIPT_RANGES[code];
+  if (!ranges) return { ok: false, ratio: 0, reason: "unknown_language" };
+  const str = String(text || "");
+  let targetLetters = 0;
+  let totalLetters = 0;
+  for (const ch of str) {
+    if (/\p{L}|\p{M}/u.test(ch)) {
+      totalLetters++;
+      const cp = ch.codePointAt(0);
+      let inScript = false;
+      for (let i = 0; i < ranges.length; i++) {
+        if (cp >= ranges[i][0] && cp <= ranges[i][1]) {
+          inScript = true;
+          break;
+        }
+      }
+      if (inScript) targetLetters++;
+    }
+  }
+  if (totalLetters === 0) return { ok: false, ratio: 0, targetLetters: 0, totalLetters: 0 };
+  const ratio = targetLetters / totalLetters;
+  return { ok: ratio >= 0.6, ratio, targetLetters, totalLetters };
+}
 
 function stripContactInfo(text) {
   if (!text || typeof text !== "string") return "";
@@ -411,9 +491,11 @@ function consentVersionDraft(src, lang) {
 
 function consentDraft(parsed, requestedLang) {
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
-  const lang = CONSENT_LANGUAGES.has(requestedLang) ? requestedLang : "English";
+  const reqLower = String(requestedLang || "").trim().toLowerCase();
+  const langName = LANG_MAP[reqLower] || requestedLang || "English";
+  const langCode = CODE_BY_NAME[reqLower] || CODE_BY_NAME[langName.toLowerCase()] || "en";
 
-  if (lang === "English") {
+  if (langCode === "en") {
     const v = consentVersionDraft(parsed.englishVersion || parsed, "English");
     if (!v) return null;
     return v;
@@ -421,12 +503,26 @@ function consentDraft(parsed, requestedLang) {
 
   // When language is not English, return BOTH englishVersion and translatedVersion objects of the same shape.
   const eng = consentVersionDraft(parsed.englishVersion, "English");
-  const trans = consentVersionDraft(parsed.translatedVersion || parsed, lang);
+  const trans = consentVersionDraft(parsed.translatedVersion || (parsed.translatedVersion === undefined ? parsed : null), langName);
   if (!eng || !trans) return null;
+
+  const transText = [
+    trans.participantInformationSheet.title,
+    trans.participantInformationSheet.purpose,
+    trans.participantInformationSheet.procedures,
+    trans.participantInformationSheet.risks,
+    trans.participantInformationSheet.benefits,
+    trans.participantInformationSheet.voluntary,
+    trans.consentForm.statements.join(" ")
+  ].join(" ");
+
+  const scriptRes = checkScriptRatio(transText, langCode);
+  if (!scriptRes.ok) return null;
+
   return {
     participantInformationSheet: trans.participantInformationSheet,
     consentForm: trans.consentForm,
-    language: lang,
+    language: langName,
     englishVersion: eng,
     translatedVersion: trans,
   };
@@ -494,27 +590,22 @@ function ctriDraft(parsed) {
   };
 }
 
-const LANG_MAP = {
-  en: "English", english: "English",
-  te: "Telugu", telugu: "Telugu",
-  hi: "Hindi", hindi: "Hindi",
-  ta: "Tamil", tamil: "Tamil",
-  kn: "Kannada", kannada: "Kannada",
-  ml: "Malayalam", malayalam: "Malayalam",
-  mr: "Marathi", marathi: "Marathi",
-  bn: "Bengali", bengali: "Bengali",
-  gu: "Gujarati", gujarati: "Gujarati",
-};
-
 function publicationConsentDraft(parsed, requestedLang) {
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
   const english = stripContactInfo(asText(parsed.english, 10000));
   const local = stripContactInfo(asText(parsed.local, 10000));
-  const reqLower = String(requestedLang || "").toLowerCase();
+  const reqLower = String(requestedLang || "").trim().toLowerCase();
   const languageName = asText(parsed.languageName, 80) || LANG_MAP[reqLower] || requestedLang || "English";
+  const langCode = CODE_BY_NAME[reqLower] || CODE_BY_NAME[languageName.toLowerCase()] || "en";
   if (!english) return null;
-  const finalLocal = local || (languageName === "English" ? english : "");
+  const finalLocal = local || (langCode === "en" ? english : "");
   if (!finalLocal) return null;
+
+  if (langCode !== "en") {
+    const scriptRes = checkScriptRatio(finalLocal, langCode);
+    if (!scriptRes.ok) return null;
+  }
+
   return {
     english,
     local: finalLocal,
@@ -1124,17 +1215,23 @@ export async function aiDraft(ctx, projectId, body) {
       (notes ? "\nNotes: " + notes : "");
   } else if (task === "consent_form") {
     const proto = bits.protocol || {};
-    const lang = CONSENT_LANGUAGES.has(input.language) ? input.language : "English";
+    const reqLower = String(input.language || "").trim().toLowerCase();
+    const lang = LANG_MAP[reqLower] || input.language || "English";
+    const code = CODE_BY_NAME[reqLower] || CODE_BY_NAME[lang.toLowerCase()] || "en";
     const notes = asText(input.notes || input.note, 2000);
+    const langObj = CONSENT_LANGUAGES_LIST.find((item) => item.code === code) || { name: lang, script: "local script" };
     system = "You draft an informed consent document including a Participant Information Sheet (PIS) and Informed Consent Form (ICF) according to ICMR ethical guidelines. " +
-      "Reading level: simple sentences for participants. " +
+      "Reading level: simple short sentences for participants. Use numbers in Western digits (0-9). For medical terms, write the medical term followed by the plain local word in brackets. " +
       "Return ONLY JSON {participantInformationSheet:{title, purpose, procedures, duration, risks, benefits, alternatives, confidentiality, voluntary, contact}, consentForm:{statements:[string], signatureBlock:string}, language:string}. " +
       "Do not invent contact phone numbers or emails. Leave contact empty or 'Fill this in'. " +
-      (lang !== "English" ? "Since the language is " + lang + ", return BOTH englishVersion and translatedVersion objects in the JSON, each of the same {participantInformationSheet, consentForm, language} shape." : "");
+      (code !== "en"
+        ? "Since the language is " + lang + ", return BOTH englishVersion and translatedVersion objects in the JSON, each of the same {participantInformationSheet, consentForm, language} shape. " +
+          "translatedVersion must be written in " + lang + " using " + langObj.script + " script (at least 60% of letters from the target script's Unicode block), simple short sentences, numbers in Western digits."
+        : "");
     prompt = "Title: " + (project.title || "") +
       "\nStudy type: " + (project.study_type || "") +
       "\nQuestion: " + (project.research_question || "") +
-      "\nLanguage: " + lang +
+      "\nLanguage: " + lang + " (" + code + ")" +
       (notes ? "\nNotes: " + notes : "") +
       "\nProtocol: " + JSON.stringify(proto).slice(0, 3000);
   } else if (task === "ctri_fields") {
@@ -1152,14 +1249,16 @@ export async function aiDraft(ctx, projectId, body) {
       (ss ? "\nSample size: " + ss : "") +
       (notes ? "\nNotes: " + notes : "");
   } else if (task === "publication_consent") {
-    const reqLower = String(input.language || "").toLowerCase();
+    const reqLower = String(input.language || "").trim().toLowerCase();
     const lang = LANG_MAP[reqLower] || input.language || "English";
+    const code = CODE_BY_NAME[reqLower] || CODE_BY_NAME[lang.toLowerCase()] || "en";
     const includesImages = !!input.includesImages;
     const journalName = asText(input.journalName, 200);
+    const langObj = CONSENT_LANGUAGES_LIST.find((item) => item.code === code) || { name: lang, script: "local script" };
     system = "You draft a formal patient consent for publication document for a medical case report according to international guidelines (COPE and ICMJE). " +
-      "Reading level: clear and respectful for patients or their representatives. " +
+      "Reading level: clear and respectful for patients or their representatives. Simple short sentences. Numbers in Western digits (0-9). Medical terms followed by the plain local word in brackets. " +
       "Return ONLY JSON {english: string, local: string, languageName: string}. " +
-      "The document must cover all required elements in both English and " + lang + ": " +
+      "The document must cover all required elements in both English and " + lang + " (written in " + langObj.script + " script): " +
       "1) What will be published (text, clinical details, and " + (includesImages ? "clinical images" : "images if any") + "); " +
       "2) May be read worldwide including online access; " +
       "3) Name will not be used, but someone may still recognise the case; " +
@@ -1170,10 +1269,11 @@ export async function aiDraft(ctx, projectId, body) {
       "8) Next of kin or legally acceptable representative option (if patient is unable to sign); " +
       "9) List of images included. " +
       "Also include the note: 'Get the patient or next of kin to sign this before you submit. Some journals insist on their own form; check the journal\\'s instructions.' " +
-      "Do not invent contact phone numbers or emails. Leave contact lines empty or as blank lines.";
+      "Do not invent contact phone numbers or emails. Leave contact lines empty or as blank lines. " +
+      (code !== "en" ? "The local field must be written in " + lang + " script (at least 60% of letters from the target script's Unicode block), with simple short sentences, numbers in Western digits, medical terms followed by the plain local word." : "");
     prompt = "Title: " + (project.title || "") +
       "\nStudy type: " + (project.study_type || "case-report") +
-      "\nLanguage: " + lang +
+      "\nLanguage: " + lang + " (" + code + ")" +
       (journalName ? "\nJournal: " + journalName : "") +
       "\nIncludes images: " + includesImages;
   } else if (task === "case_report_draft") {
