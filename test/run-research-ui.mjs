@@ -222,6 +222,16 @@ try {
   await click('.rmd-study-row [data-rmd-verify]');
   ok(await until(`/Verified/.test(document.querySelector('.rmd-study-row [data-rmd-verify]').innerText)`, 3000), 'toggle verification re-verifies study');
 
+  // Mobile tap check: editing Study 1 then returning to list and tapping Study 2 must open Study 2 details (not stick on Study 1)
+  await click('[data-rmd-edit="bcg_1"]');
+  ok(await until(`!!document.querySelector('#rmdStudyForm')`, 3000), 'opened edit form for Aronson 1948');
+  await click('[data-rmd-phone-view="list"]');
+  ok(await until(`!document.querySelector('.rmd-pane-left').classList.contains('rmd-phone-hidden')`, 3000), 'returned to Studies list on phone');
+  await click('.rmd-study-row[data-rmd-study-id="bcg_2"] .rmd-study-row-main');
+  ok(await until(`!document.querySelector('.rmd-pane-right').classList.contains('rmd-phone-hidden') && /Ferguson & Simes 1949/.test((document.querySelector('.rmd-detail-title')||{}).innerText||'')`, 3000), 'clicking Ferguson & Simes 1949 on phone opens its Study Details instead of sticking on Aronson 1948');
+  await click('[data-rmd="mobile-back"], .rmd-mobile-back-studies');
+  ok(await until(`!document.querySelector('.rmd-pane-left').classList.contains('rmd-phone-hidden')`, 3000), 'back to studies button returns to list on phone');
+
   // 6. Add a Study with Provenance Locator & Quote
   await click('[data-rmd="add-study"]');
   ok(await until(`!!document.querySelector('#rmdStudyForm')`, 3000), 'add study form opened');
@@ -286,8 +296,15 @@ try {
   // 8. Run Meta-Analysis Screen & Forest Plot
   await click('[data-rmd="to-run"]');
   ok(await until(`!!document.querySelector('.rmd-run-screen')`, 5000), 'navigated to run meta-analysis screen');
+
+  // Guard: selecting MD on 2x2 count dataset shows friendly warning (not raw internal study ID) + 1-click switch button
+  await click('[data-rmd-plain-report="average"]');
   await click('[data-rmd="calculate"]');
-  ok(await until(`!!document.querySelector('.rmd-forest-card')`, 5000), 'calculation completed and results displayed');
+  ok(await until(`/Incompatible effect measure/.test((document.querySelector('.rmd-run-results-panel')||{}).innerText||'')`, 3000), 'incompatible MD measure shows friendly warning instead of raw study ID error');
+  ok(!/needs a finite mean1/.test(await text('.rmd-run-results-panel')), 'no raw internal research engine message shown');
+  ok(await ev(`!!document.querySelector('[data-rmd-switch-measure="RR"]')`), '1-click Switch to Risk ratio (RR) button shown');
+  await click('[data-rmd-switch-measure="RR"]');
+  ok(await until(`!!document.querySelector('.rmd-forest-card')`, 5000), '1-click switch + calculation completed and results displayed');
 
   // Check stats accuracy against metafor dat.bcg benchmark
   const resultsText = await text('.rmd-kpi-grid');
@@ -303,9 +320,48 @@ try {
   ok(await ev(`!!document.querySelector('svg.rmd-forest-svg polygon.rf-diamond')`), 'pooled summary diamond polygon drawn in SVG');
   ok(await ev(`!!document.querySelector('svg.rmd-forest-svg line.rf-null-line')`), 'dashed line of no effect drawn at null value');
   ok(/Favors Intervention/.test(await text('svg.rmd-forest-svg')), 'directional labels drawn on forest plot');
+
+  // Exports live BELOW Forest Plot and include PNG download
+  const exportPlacement = await ev(`(()=>{
+    const fc = document.querySelector('.rmd-forest-card');
+    const bar = document.querySelector('.rmd-run-export-bar');
+    if (!fc || !bar) return false;
+    const topCsv = document.querySelector('.rmd-studies-topbar [data-rmd="export-csv"]');
+    const belowPng = bar.querySelector('[data-rmd="export-png"]');
+    const belowCsv = bar.querySelector('[data-rmd="export-csv"]');
+    const belowMan = bar.querySelector('[data-rmd="export-manifest"]');
+    return !topCsv && !!belowPng && !!belowCsv && !!belowMan && !!(fc.compareDocumentPosition(bar) & Node.DOCUMENT_POSITION_FOLLOWING);
+  })()`);
+  ok(exportPlacement, 'PNG, CSV, and JSON export buttons sit below Forest Plot card');
   await shot('phone-375-forestplot');
 
-  // 9. Export Functions Test (CSV and Manifest)
+  // 9. Export Functions Test (PNG, CSV and Manifest)
+  const pngCheck = await ev(`(async()=>{
+    const store = SMD_RESEARCH.store;
+    const runRes = store.getActiveRunResult();
+    let pngBlob = null;
+    const origCreate = URL.createObjectURL;
+    URL.createObjectURL = (b) => { if (b && b.type === 'image/png') pngBlob = b; return 'blob:mock'; };
+    await SMD_RESEARCH.screens.run.exportForestPng(runRes, store.getActiveProject(), store.getStudies());
+    URL.createObjectURL = origCreate;
+    return !!pngBlob && pngBlob.size > 1000 && pngBlob.type === 'image/png';
+  })()`);
+  ok(pngCheck, 'Forest Plot PNG export produces valid image/png blob');
+
+  const shareCancelQuiet = await ev(`(async()=>{
+    window.Capacitor = {
+      isNativePlatform: function () { return true; },
+      Plugins: {
+        Filesystem: { writeFile: function (o) { return Promise.resolve({ uri: 'file:///cache/' + o.path }); } },
+        Share: { share: function () { return Promise.reject(new Error('Share canceled')); } }
+      }
+    };
+    const store = SMD_RESEARCH.store;
+    await SMD_RESEARCH.screens.run.exportCsv(store.getActiveRunResult(), store.getActiveProject(), store.getStudies());
+    delete window.Capacitor;
+    return !/Share canceled/.test(document.body.innerText || '');
+  })()`);
+  ok(shareCancelQuiet, 'dismissing native share sheet does not flash Share canceled error');
   const csvCheck = await ev(`(()=>{
     const store = SMD_RESEARCH.store;
     const runRes = store.getActiveRunResult();

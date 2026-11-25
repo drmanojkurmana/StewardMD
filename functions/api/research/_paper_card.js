@@ -589,6 +589,24 @@ async function loadRecord(ids, config) {
       reachedPrimary = true;
       if (cr) {
         if (pmcid) cr.pmcid = pmcid;
+        if (!cr.sections || !cr.sections.length) {
+          const epmc = await fromEuropePmc({ pmid, pmcid: cr.pmcid || pmcid, doi }, config);
+          if (epmc && epmc.sections && epmc.sections.length) {
+            return {
+              pmid: epmc.pmid || cr.pmid || "",
+              pmcid: epmc.pmcid || cr.pmcid || "",
+              doi: epmc.doi || cr.doi || doi,
+              title: epmc.title || cr.title || "",
+              journal: epmc.journal || cr.journal || "",
+              year: epmc.year || cr.year,
+              authors: (epmc.authors && epmc.authors.length) ? epmc.authors : cr.authors,
+              sections: epmc.sections,
+              publicationTypes: (epmc.publicationTypes && epmc.publicationTypes.length) ? epmc.publicationTypes : cr.publicationTypes,
+              mesh: cr.mesh || [],
+              keywords: cr.keywords || [],
+            };
+          }
+        }
         return cr;
       }
     } catch (e) { transientErr = e; }

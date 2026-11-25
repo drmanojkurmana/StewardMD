@@ -202,3 +202,27 @@ test("parseDocx extracts paginated paragraphs and tables while ignoring deleted 
   assert.equal(ver.flags.length, 0);
   assert.deepEqual(ver.locators.find((l) => l.number === "0.49"), { number: "0.49", page: 2, table: 7 });
 });
+
+test("wrangler.toml stays below Cloudflare Pages 128 text-binding cap", () => {
+  const toml = read("wrangler.toml");
+  const sec = toml.split("[env.production.vars]")[1].split(/\n\[/)[0];
+  const varLines = sec.split("\n").filter((l) => /^[A-Z0-9_]+\s*=/.test(l));
+  assert.ok(varLines.length <= 32, `too many [env.production.vars]: ${varLines.length}`);
+});
+
+test("research-screen-studies clears edit pin and opens Study Details on mobile tap", () => {
+  const st = read("research-screen-studies.js");
+  assert.match(st, /isPhoneViewport/);
+  assert.match(st, /viewMode = isPhoneViewport\(container\) \? "detail" : "list"/);
+  assert.match(st, /rmd-mobile-back-studies/);
+});
+
+test("research-screen-run places exports below forest plot, supports PNG download, and guards share cancellation", () => {
+  const run = read("research-screen-run.js");
+  assert.match(run, /data-rmd="export-png"/);
+  assert.match(run, /exportForestPng/);
+  assert.match(run, /checkMeasureCompatibility/);
+  assert.doesNotMatch(run, /rmd-topbar-actions[\s\S]*data-rmd="export-csv"/);
+  const shell = read("research.js");
+  assert.match(shell, /isShareCancel/);
+});

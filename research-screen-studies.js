@@ -213,9 +213,20 @@
     bindEvents(container);
   }
 
+  function isPhoneViewport(container) {
+    if (container && G.getComputedStyle) {
+      var seg = container.querySelector(".rmd-phone-seg");
+      if (seg) {
+        try { return G.getComputedStyle(seg).display !== "none"; } catch (e) {}
+      }
+    }
+    return !!(G.innerWidth && G.innerWidth < 768);
+  }
+
   function renderStudyDetail(s) {
     var h = [];
     h.push('<div class="rmd-detail-card">');
+    h.push('  <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm rmd-mobile-back-studies" data-rmd-phone-view="list">&larr; Studies list</button>');
     h.push('  <div class="rmd-detail-header">');
     h.push('    <div>');
     h.push('      <span class="rmd-version-tag">Version ' + (s.version || 1) + '</span>');
@@ -531,6 +542,10 @@
     for (var c = 0; c < segBtns.length; c++) {
       segBtns[c].onclick = function () {
         var v = this.getAttribute("data-rmd-phone-view");
+        if (v === "list" || v === "detail") {
+          editingStudyId = null;
+          formError = null;
+        }
         viewMode = v;
         renderStudies(container);
       };
@@ -574,17 +589,28 @@
       };
     }
 
-    // Study selection row
+    // Study selection row: switch to Study Details on phone and clear stale edit pin
     var rows = container.querySelectorAll('.rmd-study-row');
+    function selectStudyRow(rowEl) {
+      var sid = rowEl ? rowEl.getAttribute("data-rmd-study-id") : "";
+      if (!sid) return;
+      editingStudyId = null;
+      formError = null;
+      viewMode = isPhoneViewport(container) ? "detail" : "list";
+      store.setActiveStudy(sid);
+      renderStudies(container);
+    }
     for (var g = 0; g < rows.length; g++) {
+      rows[g].setAttribute("tabindex", "0");
       rows[g].onclick = function (ev) {
         if (ev && ev.target && ev.target.closest('button')) return;
-        var sid = this.getAttribute("data-rmd-study-id");
-        if (sid) {
-          store.setActiveStudy(sid);
-          if (viewMode !== "edit") viewMode = "list";
-          renderStudies(container);
-        }
+        selectStudyRow(this);
+      };
+      rows[g].onkeydown = function (ev) {
+        if (!ev || (ev.key !== "Enter" && ev.key !== " " && ev.keyCode !== 13 && ev.keyCode !== 32)) return;
+        if (ev.target && ev.target.closest('button')) return;
+        if (ev.preventDefault) ev.preventDefault();
+        selectStudyRow(this);
       };
     }
 

@@ -271,6 +271,12 @@
     });
   }
 
+  function isShareCancel(err) {
+    if (!err) return false;
+    if (err.name === "AbortError") return true;
+    return /cancel/i.test(String(err.message || err));
+  }
+
   function saveFile(filename, blob, title) {
     return new Promise(function (resolve, reject) {
       if (isNativeApp() && window.Capacitor.Plugins &&
@@ -285,7 +291,15 @@
             url: w.uri,
             dialogTitle: "Save or send your file"
           });
-        }).then(resolve, reject);
+        }).then(function (res) {
+          resolve(res || {});
+        }, function (err) {
+          if (isShareCancel(err)) {
+            resolve({ cancelled: true });
+            return;
+          }
+          reject(err);
+        });
         return;
       }
       var url = URL.createObjectURL(blob);
@@ -296,7 +310,7 @@
       a.click();
       D.body.removeChild(a);
       setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
-      resolve();
+      resolve({});
     });
   }
 
@@ -735,6 +749,10 @@
       "#researchMD .rmd-what-mean { margin: 0 0 6px; font: 400 13px/1.5 var(--rmd-f); color: var(--rmd-ink); overflow-wrap: anywhere; }",
       "#researchMD .rmd-what-mean:last-child { margin-bottom: 0; }",
       "#researchMD .rmd-forest-caption { margin: 10px 0 0; }",
+      "#researchMD .rmd-run-export-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 16px; }",
+      "#researchMD .rmd-run-export-title { margin: 0; font: 600 13.5px var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-run-export-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }",
+      "#researchMD .rmd-mobile-back-studies { display: none; margin-bottom: 10px; }",
       "/* Modals */",
       "#researchMD .rmd-modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 10060; display: flex; align-items: center; justify-content: center; padding: 16px; }",
       "#researchMD .rmd-modal-card { background: var(--rmd-panel); border-radius: 14px; width: 100%; max-width: 500px; padding: 22px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); max-height: 90vh; overflow-y: auto; }",
@@ -771,6 +789,9 @@
       "  #researchMD .rmd-pane-right { flex: 1; padding: 14px; min-width: 0; width: 100%; }",
       "  #researchMD .rmd-phone-seg { display: flex; }",
       "  #researchMD .rmd-phone-hidden { display: none !important; }",
+      "  #researchMD .rmd-mobile-back-studies { display: inline-flex; }",
+      "  #researchMD .rmd-run-export-actions { width: 100%; }",
+      "  #researchMD .rmd-run-export-actions .rmd-btn { flex: 1 1 auto; min-height: 44px; justify-content: center; }",
       "  #researchMD .rmd-run-layout { grid-template-columns: 1fr; padding: 12px 14px; }",
       "  #researchMD .rmd-conflict-grid { grid-template-columns: 1fr; }",
       "}",

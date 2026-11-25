@@ -249,17 +249,11 @@ PHYSICIAN_PRICE_MONTHLY = "149900"   # Physician ₹1,499/mo
 PHYSICIAN_PRICE_ANNUAL = "1499900"   # Physician ₹14,999/yr
 PHYSICIANPRO_PRICE_MONTHLY = "249900"  # Physician Pro ₹2,499/mo
 PHYSICIANPRO_PRICE_ANNUAL = "2499900"  # Physician Pro ₹24,999/yr
-PHYSICIAN_REGULAR = "349900"         # Clinician struck-through ₹3,499 (owner 2026-09-26)
-PHYSICIANPRO_REGULAR = "499900"      # Clinician Pro struck-through ₹4,999 (owner 2026-09-26)
-ONCO_ADDON_MONTHLY = "8900"          # Physician Onco +₹89/mo
-CLINIC_ADDON_MONTHLY = "13900"       # extra personal clinic ₹139/mo each
-FOUNDING_PRICE_YEAR = "39900"        # Founding-Doctor ₹399/year (first 500)
 AI_DAILY_COST_CAP_INR = "0.5"        # Free default (₹/day)
-CREDIT_CONVERSION = "0.5"            # ₹50 → ₹25 of AI
-FOUNDING_AI_GRANT_INR = "120"        # founding annual pool: ₹120 + one ₹120 refill = ₹240/yr ceiling
-FOUNDING_AI_REFILL_INR = "120"
-FOUNDING_DAILY_CAP_INR = "0.01"      # ~0 free daily → founding AI draws the annual pool
-# FOUNDING_SEATS dropped (code defaults to 500) to stay under the Pages 128 text-binding cap.
+# PHYSICIAN_REGULAR, PHYSICIANPRO_REGULAR, ONCO_ADDON_MONTHLY, CLINIC_ADDON_MONTHLY, FOUNDING_PRICE_YEAR,
+# CREDIT_CONVERSION, FOUNDING_AI_GRANT_INR, FOUNDING_AI_REFILL_INR, FOUNDING_DAILY_CAP_INR and FOUNDING_SEATS
+# removed from [env.production.vars]: each equals its code default in functions/_credits.js and
+# functions/api/billing/[[path]].js, keeping total text bindings well under Cloudflare Pages' 128 cap (129 failed deploy).
 # ResearchMD server routes on (owner: "flag on", 2026-11-24). Unset or any other value answers 404.
 RESEARCH_MODE = "pilot"
 RESEARCH_CONTACT_EMAIL = "support@stewardmd.in"
