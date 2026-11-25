@@ -36,7 +36,7 @@
       pid: pid, stage: "upload", fileName: "", sample: false,
       columns: [], rows: [], types: {}, infer: {}, phiCols: [],
       analysis: "",
-      form: { group: "", outcomes: [], variables: [], outcome: "", predictors: [], a: "", b: "" },
+      form: { group: "", outcomes: [], variables: [], outcome: "", predictors: [], a: "", b: "", time: "", event: "" },
       results: null, error: "", notice: ""
     };
   }
@@ -112,6 +112,10 @@
 
   /* Plan v2: the chart lives in RMDStore (IndexedDB, kind masterchart, id main).
    * localStorage is used only when IndexedDB is not available on this phone. */
+  /* Charts read from RMDStore this session, so "Use the chart saved on this phone" still works after Back. */
+  var savedCache = {};
+  function savedChart(pid) { return loadLocal(pid) || savedCache[pid] || null; }
+
   function rmdStore() {
     var S = G.RMDStore;
     return S && S.available && S.available() ? S : null;
@@ -123,6 +127,7 @@
       columns: mc.columns, rows: mc.rows, types: mc.types
     };
     var S = rmdStore(), pid = mc.pid;
+    savedCache[pid] = rec;
     if (S) {
       S.put(pid, "masterchart", "main", rec).then(function () {
         try {
@@ -393,6 +398,133 @@
     return (inf && inf.levels) || [];
   }
 
+  /* ---------- Time to event (plan v2 item 4) ---------- */
+
+  function rowObjects() {
+    var out = [], i, j;
+    for (i = 0; i < mc.rows.length; i++) {
+      var o = {};
+      for (j = 0; j < mc.columns.length; j++) o[mc.columns[j]] = mc.rows[i][j];
+      out.push(o);
+    }
+    return out;
+  }
+
+  function medianCell(m) {
+    if (!m || m.value == null) return "not reached";
+    var lo = m.lower == null ? "not reached" : fmt(m.lower, 1);
+    var hi = m.upper == null ? "not reached" : fmt(m.upper, 1);
+    return fmt(m.value, 1) + " (95% CI " + lo + " to " + hi + ")";
+  }
+
+  /* Pure: results paragraph from the computed numbers only. */
+  function survivalSentence(km, lr, timeCol) {
+    if (!km || !km.ok || !km.groups.length) return "";
+    var parts = [], i, g;
+    for (i = 0; i < km.groups.length; i++) {
+      g = km.groups[i];
+      parts.push((km.groups.length > 1 ? g.name + " (n = " + g.n + ", " + g.nEvents + " events): " : "n = " + g.n + ", " + g.nEvents + " events: ") +
+        (g.median.value == null ? "median not reached" : "median " + medianCell(g.median)));
+    }
+    var s = "Kaplan-Meier analysis of " + timeCol + ". " + parts.join("; ") + ".";
+    if (lr && lr.ok) s += " Log-rank test: chi-square " + fmt(lr.chi2, 2) + ", df " + lr.df + ", " + pStr(lr.p) + ".";
+    return s;
+  }
+
+  var KM_COLORS = ["#2563eb", "#dc2626", "#16a34a", "#9333ea", "#ea580c", "#0891b2"];
+
+  /* Pure: inline SVG Kaplan-Meier curve (step lines, censor ticks). */
+  function kmSvg(km, timeLabel) {
+    if (!km || !km.ok || !km.groups.length) return "";
+    var W = 340, H = 220, L = 40, R = 10, T = 10, B = 34, gi, i, maxT = 0, g, st;
+    for (gi = 0; gi < km.groups.length; gi++) {
+      st = km.groups[gi].steps;
+      for (i = 0; i < st.length; i++) if (st[i].t > maxT) maxT = st[i].t;
+    }
+    if (!(maxT > 0)) maxT = 1;
+    function x(t) { return (L + (t / maxT) * (W - L - R)).toFixed(1); }
+    function y(sv) { return (T + (1 - sv) * (H - T - B)).toFixed(1); }
+    var h = '<svg class="rmd-mc-km" viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Kaplan-Meier survival curve">';
+    h += '<line x1="' + L + '" y1="' + (H - B) + '" x2="' + (W - R) + '" y2="' + (H - B) + '" stroke="#888"/>';
+    h += '<line x1="' + L + '" y1="' + T + '" x2="' + L + '" y2="' + (H - B) + '" stroke="#888"/>';
+    var ticks = [0, 0.25, 0.5, 0.75, 1];
+    for (i = 0; i < ticks.length; i++) {
+      h += '<text x="' + (L - 4) + '" y="' + (+y(ticks[i]) + 4) + '" font-size="10" text-anchor="end" fill="currentColor">' + ticks[i] + '</text>';
+    }
+    h += '<text x="' + L + '" y="' + (H - B + 14) + '" font-size="10" fill="currentColor">0</text>';
+    h += '<text x="' + (W - R) + '" y="' + (H - B + 14) + '" font-size="10" text-anchor="end" fill="currentColor">' + esc(fmt(maxT, 0)) + '</text>';
+    h += '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 4) + '" font-size="11" text-anchor="middle" fill="currentColor">' + esc(timeLabel) + '</text>';
+    for (gi = 0; gi < km.groups.length; gi++) {
+      g = km.groups[gi]; st = g.steps;
+      var col = KM_COLORS[gi % KM_COLORS.length], prev = 1, d = "M" + x(0) + " " + y(1), cens = "";
+      for (i = 0; i < st.length; i++) {
+        d += " H" + x(st[i].t);
+        if (st[i].events > 0) { d += " V" + y(st[i].survival); prev = st[i].survival; }
+        if (st[i].censored > 0) cens += '<line x1="' + x(st[i].t) + '" y1="' + (+y(prev) - 3) + '" x2="' + x(st[i].t) + '" y2="' + (+y(prev) + 3) + '" stroke="' + col + '"/>';
+      }
+      h += '<path d="' + d + '" fill="none" stroke="' + col + '" stroke-width="2"/>' + cens;
+      if (km.groups.length > 1) {
+        h += '<rect x="' + (W - R - 110) + '" y="' + (T + 4 + gi * 14) + '" width="10" height="3" fill="' + col + '"/>';
+        h += '<text x="' + (W - R - 96) + '" y="' + (T + 9 + gi * 14) + '" font-size="10" fill="currentColor">' + esc(g.name) + '</text>';
+      }
+    }
+    return h + '</svg>';
+  }
+
+  function runSurvival(S, f) {
+    if (!f.time || !f.event || f.time === f.event) {
+      mc.error = "Pick a time column and a different event column.";
+      return false;
+    }
+    if (f.predictors.length > 6) { mc.error = "Tick at most 6 factors."; return false; }
+    var groups = f.group ? colValues(f.group) : null;
+    var km = S.kaplanMeier(colValues(f.time), colValues(f.event), groups);
+    if (!km.ok) { mc.error = calm(km.warnings && km.warnings[km.warnings.length - 1]); return false; }
+    var lr = groups ? S.logRank(colValues(f.time), colValues(f.event), groups) : null;
+    var cx = null, warns = km.warnings.slice(), i;
+    if (lr && !lr.ok) warns = warns.concat(lr.warnings);
+    if (f.predictors.length) {
+      var preds = [];
+      for (i = 0; i < f.predictors.length; i++) {
+        preds.push({ name: f.predictors[i], type: mc.types[f.predictors[i]] === "numeric" ? "numeric" : "categorical" });
+      }
+      cx = S.cox(rowObjects(), { time: f.time, event: f.event, predictors: preds });
+      warns = warns.concat(cx.warnings || []);
+    }
+    var seen = {}, uniq = [];
+    for (i = 0; i < warns.length; i++) if (!seen[warns[i]]) { seen[warns[i]] = 1; uniq.push(warns[i]); }
+    mc.results = {
+      kind: "survival", time: f.time, event: f.event, group: f.group, km: km, lr: lr, cox: cx,
+      warnings: uniq, paragraph: survivalSentence(km, lr, f.time)
+    };
+    return true;
+  }
+
+  function coxCell(co) {
+    if (!co.estimable || co.hr == null) return "could not be estimated";
+    return fmt(co.hr) + " (" + fmt(co.ciLower) + " to " + fmt(co.ciUpper) + ")";
+  }
+
+  function coxLabel(co) { return co.level != null ? co.predictor + ": " + co.level : co.predictor; }
+
+  function survivalText(r) {
+    var lines = [], i, g;
+    lines.push("Group | n | Events | Median " + r.time + " (95% CI)");
+    for (i = 0; i < r.km.groups.length; i++) {
+      g = r.km.groups[i];
+      lines.push(g.name + " | " + g.n + " | " + g.nEvents + " | " + medianCell(g.median));
+    }
+    if (r.cox && r.cox.ok) {
+      lines.push("");
+      lines.push("Factor | HR (95% CI) | p");
+      for (i = 0; i < r.cox.coefficients.length; i++) {
+        var co = r.cox.coefficients[i];
+        lines.push(coxLabel(co) + " | " + coxCell(co) + " | " + pStr(co.p));
+      }
+    }
+    return lines.join("\n");
+  }
+
   function runAnalysis() {
     var S = stats();
     var f = mc.form;
@@ -463,6 +595,8 @@
           kind: "logistic", outcome: f.outcome, log: lg, warnings: lw,
           paragraph: sentenceFor(lg, f.outcome, [])
         };
+      } else if (mc.analysis === "survival") {
+        if (!runSurvival(S, f)) { draw(); return; }
       } else {
         mc.stage = "question";
         draw();
@@ -491,6 +625,13 @@
     }
     if (key === "logistic") {
       f.outcome = binaryOptions()[0] || "";
+      f.predictors = [];
+    }
+    if (key === "survival") {
+      var nn = numericOptions(), bb = binaryOptions();
+      if (!f.time || nn.indexOf(f.time) < 0) f.time = nn[0] || "";
+      if (!f.event || bb.indexOf(f.event) < 0) f.event = bb[0] || "";
+      f.group = "";
       f.predictors = [];
     }
     if (key === "related") {
@@ -625,6 +766,7 @@
     if (r.paragraph) parts.push(r.paragraph);
     if (r.kind === "table1") parts.push(table1Text(r.table, r.group));
     else if (r.kind === "logistic") parts.push(logisticText(r));
+    else if (r.kind === "survival") parts.push(survivalText(r));
     else parts.push(compareText(r));
     return parts.join("\n\n");
   }
@@ -678,6 +820,21 @@
         var co = r.log.coefficients[i];
         if (co.name === "Intercept") continue;
         lines.push([co.name, fmt(co.or), fmt(co.ciLower), fmt(co.ciUpper), pStr(co.p)]);
+      }
+    } else if (r.kind === "survival") {
+      lines.push(["Group", "n", "Events", "Median", "CI lower", "CI upper"]);
+      for (i = 0; i < r.km.groups.length; i++) {
+        var kg = r.km.groups[i], md = kg.median;
+        lines.push([kg.name, kg.n, kg.nEvents, md.value == null ? "not reached" : fmt(md.value, 1),
+          md.lower == null ? "" : fmt(md.lower, 1), md.upper == null ? "" : fmt(md.upper, 1)]);
+      }
+      if (r.lr && r.lr.ok) lines.push(["Log-rank", "chi-square " + fmt(r.lr.chi2, 2), "df " + r.lr.df, pStr(r.lr.p), "", ""]);
+      if (r.cox && r.cox.ok) {
+        lines.push(["Factor", "HR", "CI lower", "CI upper", "p", ""]);
+        for (i = 0; i < r.cox.coefficients.length; i++) {
+          var cc = r.cox.coefficients[i];
+          lines.push([coxLabel(cc), cc.hr == null ? "" : fmt(cc.hr), cc.ciLower == null ? "" : fmt(cc.ciLower), cc.ciUpper == null ? "" : fmt(cc.ciUpper), pStr(cc.p), ""]);
+        }
       }
     }
     var csv = lines.map(function (row) { return row.map(csvCell).join(","); }).join("\r\n");
@@ -798,7 +955,7 @@
     h += '  <label class="rmd-btn rmd-btn-primary rmd-mc-filelabel" for="rmdMcFile">Upload master chart (.csv or .xlsx)</label>';
     h += '  <input type="file" id="rmdMcFile" class="rmd-mc-fileinput" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">';
     h += '  <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-mc="sample">Try with a sample thesis</button>';
-    if (loadLocal(mc.pid)) {
+    if (savedChart(mc.pid)) {
       h += '  <button type="button" class="rmd-btn rmd-btn-quiet" data-rmd-mc="use-saved">Use the chart saved on this phone</button>';
     }
     h += '  <p class="rmd-muted">CSV works everywhere. Excel (.xlsx) is read on this phone when supported.</p>';
@@ -857,6 +1014,7 @@
     h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="table1">Table 1 (baseline characteristics)<span>Age, sex and BMI by group, with p values. The first table of most papers.</span></button>';
     h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="logistic">Risk factors (logistic regression)<span>Which factors raise the odds of a yes-no outcome, like a complication? Up to 6 factors.</span></button>';
     h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="related">Is it related?<span>Is BMI related to HbA1c? Correlation between two number columns.</span></button>';
+    h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="survival">Time to event (survival analysis)<span>How long until death or relapse, by group? Kaplan-Meier curve, median survival, log-rank test and hazard ratios.</span></button>';
     h += '</div>';
     return h;
   }
@@ -885,6 +1043,14 @@
       h += '<div class="rmd-form">';
       h += '  <div class="rmd-field"><label for="rmdMcOutcome">Outcome (yes-no)</label>' + selectHtml("rmdMcOutcome", bins, f.outcome) + '</div>';
       h += '  <div class="rmd-field"><label>Risk factors (up to 6)</label>' + checkListHtml("predictors", elig.filter(function (c) { return c !== f.outcome && mc.types[c] !== "text" && mc.types[c] !== "date"; }), f.predictors, 6) + '</div>';
+      h += '</div>';
+    } else if (mc.analysis === "survival") {
+      h += headHtml("Time to event (survival analysis)", "Pick the follow-up time column and the yes-no event column. A group column and factors are optional.");
+      h += '<div class="rmd-form">';
+      h += '  <div class="rmd-field"><label for="rmdMcTime">Time column (for example, days to death or last follow-up)</label>' + selectHtml("rmdMcTime", nums, f.time) + '</div>';
+      h += '  <div class="rmd-field"><label for="rmdMcEvent">Event column (yes = died or relapsed, no = still event free)</label>' + selectHtml("rmdMcEvent", bins, f.event) + '</div>';
+      h += '  <div class="rmd-field"><label for="rmdMcGroup">Group column (optional)</label>' + selectHtml("rmdMcGroup", [""].concat(groups), f.group).replace(/(<option value=""(?: selected)?>)<\/option>/, "$1No groups (one curve)</option>") + '</div>';
+      h += '  <div class="rmd-field"><label>Factors for hazard ratios (optional, up to 6)</label>' + checkListHtml("predictors", elig.filter(function (c) { return c !== f.time && c !== f.event && mc.types[c] !== "text" && mc.types[c] !== "date"; }), f.predictors, 6) + '</div>';
       h += '</div>';
     } else if (mc.analysis === "related") {
       h += headHtml("Is it related?", "Pick two number columns. We compute the correlation.");
@@ -946,6 +1112,7 @@
     else if (r.kind === "related") sub = r.a + " vs " + r.b + ".";
     else if (r.kind === "table1") sub = "Baseline characteristics by " + r.group + ".";
     else if (r.kind === "logistic") sub = "Risk factors for " + r.outcome + ".";
+    else if (r.kind === "survival") sub = "Time to " + r.event + (r.group ? " by " + r.group : "") + ".";
     var h = headHtml("Results", sub);
     if (r.warnings && r.warnings.length) {
       h += '<div class="rmd-banner rmd-banner-warn" role="alert"><strong>Check before you report:</strong><ul>';
@@ -992,6 +1159,30 @@
         /* a risk factor is not a treatment, so the plain line says "linked to", never "people who got" */
         var dir = co2.ciLower > 1 ? "linked to higher odds of the outcome" : (co2.ciUpper < 1 ? "linked to lower odds of the outcome" : "no clear link with the outcome (the 95% CI includes 1)");
         h += '<p class="rmd-mc-gloss"><strong>' + esc(co2.name) + ':</strong> adjusted odds ratio (aOR) ' + esc(fmt(co2.or)) + ', 95% CI ' + esc(fmt(co2.ciLower)) + ' to ' + esc(fmt(co2.ciUpper)) + ' (' + esc(dir) + ', after allowing for the other factors). ' + esc(pGloss(co2.p)) + '</p>';
+      }
+    }
+    if (r.kind === "survival") {
+      h += '<div class="rmd-card rmd-mc-result"><h3>Kaplan-Meier curve</h3>' + kmSvg(r.km, r.time) + '</div>';
+      h += '<div class="rmd-mc-tablewrap"><table class="rmd-mc-table"><thead><tr><th>Group</th><th>n</th><th>Events</th><th>Median ' + esc(r.time) + ' (95% CI)</th></tr></thead><tbody>';
+      for (i = 0; i < r.km.groups.length; i++) {
+        var kg = r.km.groups[i];
+        h += '<tr><td>' + esc(kg.name) + '</td><td>' + kg.n + '</td><td>' + kg.nEvents + '</td><td>' + esc(medianCell(kg.median)) + '</td></tr>';
+      }
+      h += '</tbody></table></div>';
+      if (r.lr && r.lr.ok) {
+        h += '<p class="rmd-mc-stat">Log-rank chi-square = ' + fmt(r.lr.chi2, 2) + ', df = ' + r.lr.df + ', ' + esc(pStr(r.lr.p)) + '</p>';
+        var lg2 = pGloss(r.lr.p);
+        if (lg2) h += '<p class="rmd-mc-gloss">' + esc(lg2) + '</p>';
+      }
+      if (r.cox && r.cox.ok) {
+        h += '<p class="rmd-mc-stat">Cox regression: n = ' + r.cox.n + ', events = ' + r.cox.nEvents + '</p>';
+        h += '<div class="rmd-mc-tablewrap"><table class="rmd-mc-table"><thead><tr><th>Factor</th><th>HR (95% CI)</th><th>p</th></tr></thead><tbody>';
+        for (i = 0; i < r.cox.coefficients.length; i++) {
+          var cco = r.cox.coefficients[i];
+          h += '<tr><td>' + esc(coxLabel(cco)) + '</td><td>' + esc(coxCell(cco)) + '</td><td>' + esc(pStr(cco.p)) + '</td></tr>';
+        }
+        h += '</tbody></table></div>';
+        h += '<p class="rmd-mc-gloss">A hazard ratio above 1 means the event comes sooner with that factor; below 1, later.</p>';
       }
     }
     if (r.paragraph) {
@@ -1042,6 +1233,10 @@
         }
       };
     }
+    var selT = view.querySelector("#rmdMcTime");
+    if (selT) selT.onchange = function () { mc.form.time = selT.value; };
+    var selE = view.querySelector("#rmdMcEvent");
+    if (selE) selE.onchange = function () { mc.form.event = selE.value; };
     var outcome = view.querySelector("#rmdMcOutcome");
     if (outcome) outcome.onchange = function () { mc.form.outcome = outcome.value; };
     var selA = view.querySelector("#rmdMcA");
@@ -1079,7 +1274,7 @@
     if (act === "sample") {
       adoptTable(sampleChart(), "Sample thesis master chart", true);
     } else if (act === "use-saved") {
-      var saved = loadLocal(mc.pid);
+      var saved = savedChart(mc.pid);
       if (saved && saved.columns && saved.columns.length) {
         mc.fileName = saved.fileName || "Saved chart";
         mc.sample = !!saved.sample;
@@ -1168,6 +1363,7 @@
 
   function applySaved(saved) {
     if (!(saved && saved.columns && saved.columns.length && saved.rows && saved.rows.length)) return false;
+    savedCache[mc.pid] = saved;
     mc.fileName = saved.fileName || "Saved chart";
     mc.sample = !!saved.sample;
     mc.columns = saved.columns.slice();
@@ -1181,6 +1377,6 @@
     return true;
   }
 
-  SMD.screens.masterchart = { render: render };
+  SMD.screens.masterchart = { render: render, kmSvg: kmSvg, survivalSentence: survivalSentence, medianCell: medianCell };
 
 })(typeof window !== "undefined" ? window : globalThis);

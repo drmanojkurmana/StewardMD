@@ -10,7 +10,8 @@ w.addEventListener("error", (e) => errors.push(String(e.message)));
 Object.defineProperty(w, "crypto", { value: globalThis.crypto, configurable: true }); w.TextEncoder = TextEncoder; w.TextDecoder = TextDecoder;
 const files = ["research-contracts.js", "research-idb.js", "research-stats.js", "research-samplesize.js", "research-randomise.js", "research-phi.js", "research-backup.js",
   "research.js", "research-screen-kit.js", "research-screen-casefile.js", "research-screen-novelty.js", "research-screen-iec.js", "research-screen-pubconsent.js",
-  "research-screen-images.js", "research-screen-ctri.js", "research-screen-randomise.js", "research-screen-consort.js", "research-screen-backup.js"];
+  "research-screen-images.js", "research-screen-ctri.js", "research-screen-randomise.js", "research-screen-consort.js", "research-screen-backup.js",
+  "research-screen-masterchart.js"];
 for (const f of files) w.eval(readFileSync(repo + "/" + f, "utf8"));
 w.RMDStore._setBackend(w.RMDStore._memoryBackend(), true);
 let proj = { id: "p1", serverId: "p1", studyType: "Case Report", title: "T" };
@@ -77,5 +78,26 @@ click('[data-rmd-cf="back"]'); await tick(); click('[data-rmd-cf-open="2"]'); aw
 click('[data-rmd-cf="back"]'); await tick(); click('[data-rmd-cf="chart"]'); await tick();
 const mc = await w.RMDStore.get("p3", "masterchart", "main");
 if (!mc || mc.rows.length !== 2) throw new Error("series chart");
+// Master chart survival card on survival::lung (R: median 310, 95% CI 285 to 363; log-rank by sex chi2 10.3)
+const lung = JSON.parse(readFileSync(repo + "/test/fixtures/research/survival/lung.json", "utf8"));
+proj = { id: "p4", serverId: "p4", studyType: "Cohort", title: "Lung" };
+await w.RMDStore.put("p4", "masterchart", "main", { fileName: "lung.csv", columns: ["time", "status", "sex", "age"],
+  rows: lung.time.map((t, i) => [t, lung.status[i] ? "Yes" : "No", lung.sex[i] === 1 ? "Male" : "Female", lung.age[i]]),
+  types: { time: "numeric", status: "binary", sex: "binary", age: "numeric" } });
+S.masterchart.render(c, { reload: true }); await tick(); await tick();
+click('[data-rmd-mc="continue-identifiers"]'); await tick(); click('[data-rmd-mc="continue-columns"]'); await tick();
+click('[data-rmd-mc-choice="survival"]'); await tick();
+const g = c.querySelector("#rmdMcGroup"); if (!/No groups \(one curve\)/.test(g.innerHTML)) throw new Error("no-group option");
+c.querySelector("#rmdMcTime").value = "time"; c.querySelector("#rmdMcTime").dispatchEvent(new w.Event("change"));
+c.querySelector("#rmdMcEvent").value = "status"; c.querySelector("#rmdMcEvent").dispatchEvent(new w.Event("change"));
+click('[data-rmd-mc="run"]'); await tick();
+if (!/310\.0 \(95% CI 285\.0 to 363\.0\)/.test(c.textContent)) throw new Error("km median: " + c.textContent.slice(0, 400));
+if (!c.querySelector("svg.rmd-mc-km path")) throw new Error("km svg");
+click('[data-rmd-mc="ask-another"]'); await tick(); click('[data-rmd-mc-choice="survival"]'); await tick();
+const g2 = c.querySelector("#rmdMcGroup"); g2.value = "sex"; g2.dispatchEvent(new w.Event("change"));
+set('.rmd-mc-check-input[value="age"]', true); click('[data-rmd-mc="run"]'); await tick();
+if (!/Log-rank chi-square = 10\.33, df = 1/.test(c.textContent)) throw new Error("log-rank: " + c.textContent.slice(0, 600));
+if (!/HR \(95% CI\)/.test(c.textContent) || c.querySelectorAll("svg.rmd-mc-km path").length !== 2) throw new Error("cox or curves");
+check("masterchart survival");
 if (errors.length) throw new Error("page errors: " + errors.join("; "));
 console.log("DOM smoke OK", calls.filter((x) => /POST/.test(x)).length, "API calls;", calls.filter((x) => /nav:/.test(x)).join(","));

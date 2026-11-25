@@ -122,3 +122,25 @@ test("novelty query uses the diagnosis and unusual feature only, without numbers
     "Acute myocardial injury zinc phosphide poisoning ST elevation leads normal coronaries");
   assert.match(S.novelty.countLine(3), /^We found 3 similar published cases\.$/);
 });
+
+test("master chart survival card: median, sentence and curve from survival::lung", () => {
+  globalThis.SMD_RESEARCH_STATS = require("../research-stats.js");
+  require("../research-screen-masterchart.js");
+  const M = globalThis.SMD_RESEARCH.screens.masterchart;
+  const L = JSON.parse(readFileSync(new URL("./fixtures/research/survival/lung.json", import.meta.url), "utf8"));
+  const St = globalThis.SMD_RESEARCH_STATS;
+  const km = St.kaplanMeier(L.time, L.status, null);
+  assert.equal(M.medianCell(km.groups[0].median), "310.0 (95% CI 285.0 to 363.0)");
+  assert.equal(M.medianCell({ value: null }), "not reached");
+  const sex = L.sex.map((x) => (x === 1 ? "Male" : "Female"));
+  const km2 = St.kaplanMeier(L.time, L.status, sex), lr = St.logRank(L.time, L.status, sex);
+  const s = M.survivalSentence(km2, lr, "time");
+  assert.match(s, /^Kaplan-Meier analysis of time\. Female/);
+  assert.match(s, /Log-rank test: chi-square 10\.33, df 1, p/);
+  assert.ok(!/[–—]/.test(s));
+  const svg = M.kmSvg(km2, "Days");
+  assert.equal((svg.match(/<path /g) || []).length, 2);
+  assert.match(svg, />Male</);
+  const src = readFileSync(new URL("../research-screen-masterchart.js", import.meta.url), "utf8");
+  assert.ok(!/=>|`/.test(src) && !/\b(let|const|class|async|await)\s/.test(src) && !/[–—]/.test(src), "master chart stays ES5 with no dashes");
+});
