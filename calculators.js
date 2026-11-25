@@ -721,7 +721,7 @@
       { id:"alb", label:"Albumin", type:"select", opts:[{v:"1",t:">3.5 g/dL (1)"},{v:"2",t:"2.8–3.5 g/dL (2)"},{v:"3",t:"<2.8 g/dL (3)"}] },
       { id:"inr", label:"INR", type:"select", opts:[{v:"1",t:"<1.7 (1)"},{v:"2",t:"1.7–2.3 (2)"},{v:"3",t:">2.3 (3)"}] },
       { id:"ascites", label:"Ascites", type:"select", opts:[{v:"1",t:"None (1)"},{v:"2",t:"Mild/controlled (2)"},{v:"3",t:"Moderate–severe (3)"}] },
-      { id:"enceph", label:"Encephalopathy", type:"select", opts:[{v:"1",t:"None (1)"},{v:"2",t:"Grade I–II (2)"},{v:"3",t:"Grade III–IV (3)"}] }
+      { id:"enceph", label:"Encephalopathy", type:"select", opts:[{v:"1",t:"None (1)"},{v:"2",t:"Grade I–II: mild confusion, altered sleep, asterixis (2)"},{v:"3",t:"Grade III–IV: somnolence/stupor, gross disorientation, or coma (3)"}] }
     ],
     compute:function(v){
       var s=Number(v.bili)+Number(v.alb)+Number(v.inr)+Number(v.ascites)+Number(v.enceph);
@@ -1929,7 +1929,7 @@
     inputs:[
       { id:"bmi", label:"BMI", type:"select", opts:[{v:"0",t:">21 kg/m²"},{v:"1",t:"≤21 kg/m²"}] },
       { id:"fev1", label:"FEV₁ (% predicted)", type:"select", opts:[{v:"0",t:"≥65%"},{v:"1",t:"50–64%"},{v:"2",t:"36–49%"},{v:"3",t:"≤35%"}] },
-      { id:"mmrc", label:"mMRC dyspnoea grade", type:"select", opts:[{v:"0",t:"0–1"},{v:"1",t:"2"},{v:"2",t:"3"},{v:"3",t:"4"}] },
+      { id:"mmrc", label:"mMRC dyspnoea grade", type:"select", opts:[{v:"0",t:"0–1: breathless only with strenuous exercise or hurrying"},{v:"1",t:"2: walks slower than peers on the level due to breathlessness"},{v:"2",t:"3: stops for breath after ~100 m or a few minutes on level ground"},{v:"3",t:"4: too breathless to leave home, or breathless when dressing"}] },
       { id:"walk", label:"6-minute walk distance", type:"select", opts:[{v:"0",t:"≥350 m"},{v:"1",t:"250–349 m"},{v:"2",t:"150–249 m"},{v:"3",t:"≤149 m"}] }
     ],
     compute:function(v){
@@ -2167,7 +2167,7 @@
     desc:"Diagnoses overt disseminated intravascular coagulation (requires a compatible underlying disorder).",
     inputs:[
       { id:"plt", label:"Platelet count", type:"number", unit:"×10⁹/L", step:"1" },
-      { id:"marker", label:"Fibrin-related marker (D-dimer/FDP)", type:"select", opts:[{v:"0",t:"No increase"},{v:"2",t:"Moderate increase"},{v:"3",t:"Strong increase"}] },
+      { id:"marker", label:"Fibrin-related marker (D-dimer/FDP)", type:"select", opts:[{v:"0",t:"No increase (within normal limits)"},{v:"2",t:"Moderate increase (elevated, e.g. D-dimer > ULN but < 5x ULN)"},{v:"3",t:"Strong increase (markedly elevated, e.g. D-dimer >= 5x ULN)"}] },
       { id:"ptp", label:"PT prolongation", type:"number", unit:"sec", step:"0.1" },
       { id:"fib", label:"Fibrinogen", type:"number", unit:"g/L", step:"0.1" }
     ],
@@ -2201,12 +2201,12 @@
   { id:"braden", cat:"General", icon:"", title:"Braden Scale (Pressure Ulcer Risk)",
     desc:"Risk of pressure ulcer development in immobile or at-risk patients.",
     inputs:[
-      { id:"sens", label:"Sensory perception", type:"select", opts:[{v:"4",t:"No impairment"},{v:"3",t:"Slightly limited"},{v:"2",t:"Very limited"},{v:"1",t:"Completely limited"}] },
-      { id:"moist", label:"Moisture", type:"select", opts:[{v:"4",t:"Rarely moist"},{v:"3",t:"Occasionally moist"},{v:"2",t:"Very moist"},{v:"1",t:"Constantly moist"}] },
-      { id:"act", label:"Activity", type:"select", opts:[{v:"4",t:"Walks frequently"},{v:"3",t:"Walks occasionally"},{v:"2",t:"Chairfast"},{v:"1",t:"Bedfast"}] },
-      { id:"mob", label:"Mobility", type:"select", opts:[{v:"4",t:"No limitation"},{v:"3",t:"Slightly limited"},{v:"2",t:"Very limited"},{v:"1",t:"Completely immobile"}] },
-      { id:"nut", label:"Nutrition", type:"select", opts:[{v:"4",t:"Excellent"},{v:"3",t:"Adequate"},{v:"2",t:"Probably inadequate"},{v:"1",t:"Very poor"}] },
-      { id:"fric", label:"Friction and shear", type:"select", opts:[{v:"3",t:"No apparent problem"},{v:"2",t:"Potential problem"},{v:"1",t:"Problem"}] }
+      { id:"sens", label:"Sensory perception", type:"select", opts:[{v:"4",t:"No impairment: responds to verbal commands, no sensory deficit"},{v:"3",t:"Slightly limited: responds to commands but cannot always communicate discomfort, or sensory loss in 1-2 limbs"},{v:"2",t:"Very limited: responds only to painful stimuli, or sensory loss over half of body"},{v:"1",t:"Completely limited: unresponsive to painful stimuli (sedation/LOC), or no sensation over most of body"}] },
+      { id:"moist", label:"Moisture", type:"select", opts:[{v:"4",t:"Rarely moist: skin usually dry, linen changed routinely"},{v:"3",t:"Occasionally moist: extra linen change ~once/day"},{v:"2",t:"Very moist: linen change at least once per shift"},{v:"1",t:"Constantly moist: dampness detected every time moved/turned"}] },
+      { id:"act", label:"Activity", type:"select", opts:[{v:"4",t:"Walks frequently: outside room >=2x/day, inside room q2h"},{v:"3",t:"Walks occasionally: short distances; majority of shift in bed/chair"},{v:"2",t:"Chairfast: cannot bear own weight, needs help into chair"},{v:"1",t:"Bedfast: confined to bed"}] },
+      { id:"mob", label:"Mobility", type:"select", opts:[{v:"4",t:"No limitation: makes major/frequent position changes without help"},{v:"3",t:"Slightly limited: frequent slight position changes independently"},{v:"2",t:"Very limited: occasional slight changes, cannot turn independently"},{v:"1",t:"Completely immobile: no changes without assistance"}] },
+      { id:"nut", label:"Nutrition", type:"select", opts:[{v:"4",t:"Excellent: eats most of every meal; >=4 protein servings/day"},{v:"3",t:"Adequate: eats >1/2 of most meals; 4 protein servings/day, or tube/TPN meeting needs"},{v:"2",t:"Probably inadequate: rarely eats a complete meal; ~3 protein servings/day"},{v:"1",t:"Very poor: rarely >1/3 of food; <=2 protein servings/day, or NPO/IVs >5 days"}] },
+      { id:"fric", label:"Friction and shear", type:"select", opts:[{v:"3",t:"No apparent problem: moves independently, lifts completely during repositioning"},{v:"2",t:"Potential problem: moves feebly, skin slides somewhat; occasionally slides down"},{v:"1",t:"Problem: needs moderate-maximum help; frequent sliding, or spasticity/contractures causing friction"}] }
     ],
     compute:function(v){
       var s = Number(v.sens)+Number(v.moist)+Number(v.act)+Number(v.mob)+Number(v.nut)+Number(v.fric);
@@ -2221,7 +2221,7 @@
       { id:"dx", label:"Secondary diagnosis (≥2 medical diagnoses)", type:"check" },
       { id:"aid", label:"Ambulatory aid", type:"select", opts:[{v:"0",t:"None / bed rest / nurse assist"},{v:"15",t:"Crutches / cane / walker"},{v:"30",t:"Furniture"}] },
       { id:"iv", label:"IV therapy / heparin lock", type:"check" },
-      { id:"gait", label:"Gait", type:"select", opts:[{v:"0",t:"Normal / bed rest / immobile"},{v:"10",t:"Weak"},{v:"20",t:"Impaired"}] },
+      { id:"gait", label:"Gait", type:"select", opts:[{v:"0",t:"Normal / bed rest / immobile: walks with head erect, arms swing freely"},{v:"10",t:"Weak: stooped but able to lift head; short/shuffling steps"},{v:"20",t:"Impaired: difficulty rising, head down, poor balance; cannot walk without help"}] },
       { id:"mental", label:"Mental status", type:"select", opts:[{v:"0",t:"Oriented to own ability"},{v:"15",t:"Overestimates / forgets limitations"}] }
     ],
     compute:function(v){
@@ -2443,7 +2443,7 @@
     desc:"Prognosis after primary operable breast cancer.",
     inputs:[
       { id:"size", label:"Invasive tumour size", type:"number", unit:"cm", step:"0.1" },
-      { id:"grade", label:"Histological grade", type:"select", opts:[{v:"1",t:"Grade 1"},{v:"2",t:"Grade 2"},{v:"3",t:"Grade 3"}] },
+      { id:"grade", label:"Histological grade (Elston-Ellis)", type:"select", opts:[{v:"1",t:"Grade 1: well differentiated (score 3-5)"},{v:"2",t:"Grade 2: moderately differentiated (score 6-7)"},{v:"3",t:"Grade 3: poorly differentiated (score 8-9)"}] },
       { id:"nodes", label:"Lymph node stage", type:"select", opts:[{v:"1",t:"No nodes involved"},{v:"2",t:"1-3 nodes"},{v:"3",t:"≥ 4 nodes"}] }
     ],
     compute:function(v){
@@ -3088,7 +3088,7 @@
       { id:"immuno", label:"Known underlying immunosuppression", type:"select", opts:[{v:"0",t:"No"},{v:"18",t:"Yes"}] },
       { id:"temp", label:"Temperature", type:"select", opts:[{v:"0",t:"< 38.4°C"},{v:"33",t:"38.4–39.4°C"},{v:"49",t:"> 39.4°C"}] },
       { id:"organ", label:"Organomegaly", type:"select", opts:[{v:"0",t:"None"},{v:"23",t:"Hepatomegaly or splenomegaly"},{v:"38",t:"Both"}] },
-      { id:"cyto", label:"Cytopenias (lineages affected)", type:"select", opts:[{v:"0",t:"1 lineage"},{v:"24",t:"2 lineages"},{v:"34",t:"3 lineages"}] },
+      { id:"cyto", label:"Cytopenias (lineages affected)", type:"select", opts:[{v:"0",t:"0-1 lineage (Hb <= 9.2 g/dL, WBC <= 5.0, Plt <= 110)"},{v:"24",t:"2 lineages below HScore cutoffs"},{v:"34",t:"3 lineages (all three below cutoffs)"}] },
       { id:"ferr", label:"Ferritin", type:"select", opts:[{v:"0",t:"< 2000 ng/mL"},{v:"35",t:"2000–6000 ng/mL"},{v:"50",t:"> 6000 ng/mL"}] },
       { id:"trig", label:"Triglycerides", type:"select", opts:[{v:"0",t:"< 1.5 mmol/L"},{v:"44",t:"1.5–4 mmol/L"},{v:"64",t:"> 4 mmol/L"}] },
       { id:"fib", label:"Fibrinogen", type:"select", opts:[{v:"0",t:"> 2.5 g/L"},{v:"30",t:"≤ 2.5 g/L"}] },
@@ -3305,7 +3305,7 @@
       { id:"renal", label:"Moderate–severe renal disease (+2)", type:"check" },
       { id:"aids", label:"AIDS (+6)", type:"check" },
       { id:"dm", label:"Diabetes", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Uncomplicated"},{v:"2",t:"With end-organ damage"}] },
-      { id:"liver", label:"Liver disease", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild"},{v:"3",t:"Moderate–severe"}] },
+      { id:"liver", label:"Liver disease", type:"select", opts:[{v:"0",t:"None"},{v:"1",t:"Mild: chronic hepatitis or cirrhosis without portal hypertension"},{v:"3",t:"Moderate–severe: cirrhosis with portal hypertension (varices, ascites, bleeding)"}] },
       { id:"malig", label:"Malignancy", type:"select", opts:[{v:"0",t:"None"},{v:"2",t:"Localised solid tumour, leukaemia or lymphoma"},{v:"6",t:"Metastatic solid tumour"}] },
       { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"< 50"},{v:"1",t:"50–59"},{v:"2",t:"60–69"},{v:"3",t:"70–79"},{v:"4",t:"≥ 80"}] }
     ],
@@ -3735,8 +3735,8 @@
       { id:"g", label:"Loudness", type:"select", opts:[
         {v:"1",t:"1 - So faint it is heard only with special effort, after some seconds"},
         {v:"2",t:"2 - Faint, but immediately audible"},
-        {v:"3",t:"3 - Moderately loud"},
-        {v:"4",t:"4 - Very loud"},
+        {v:"3",t:"3 - Moderately loud, no palpable thrill"},
+        {v:"4",t:"4 - Very loud, with a palpable thrill (stethoscope fully on chest)"},
         {v:"5",t:"5 - Very loud, with a thrill; audible with the chestpiece PARTLY off the chest"},
         {v:"6",t:"6 - Audible with the chestpiece ENTIRELY off the chest wall"} ] }
     ],
@@ -3751,10 +3751,10 @@
     desc:"Four point grading of a diastolic murmur.",
     inputs:[
       { id:"g", label:"Loudness", type:"select", opts:[
-        {v:"1",t:"1 - Very soft"},
-        {v:"2",t:"2 - Soft"},
-        {v:"3",t:"3 - Loud"},
-        {v:"4",t:"4 - Very loud"} ] }
+        {v:"1",t:"1 - Very soft (barely audible, heard only with special effort)"},
+        {v:"2",t:"2 - Soft (faint, but immediately audible)"},
+        {v:"3",t:"3 - Loud (easily audible, no thrill)"},
+        {v:"4",t:"4 - Very loud, with a palpable thrill"} ] }
     ],
     compute:function(v){
       if(v.g===undefined||v.g==="") return ERR;
@@ -3929,7 +3929,7 @@
   { id:"ipss_r", cat:"Haematology", onc:1, icon:"", title:"IPSS-R (Myelodysplastic Syndrome)",
     desc:"Revised International Prognostic Scoring System for MDS.",
     inputs:[
-      { id:"cyto", label:"Cytogenetic risk group", type:"select", opts:[{v:"0",t:"Very good"},{v:"1",t:"Good"},{v:"2",t:"Intermediate"},{v:"3",t:"Poor"},{v:"4",t:"Very poor"}] },
+      { id:"cyto", label:"Cytogenetic risk group", type:"select", opts:[{v:"0",t:"Very good: del(11q) or -Y"},{v:"1",t:"Good: normal karyotype, del(20q), del(5q), del(12p), or double including del(5q)"},{v:"2",t:"Intermediate: +8, del(7q), i(17q), +19, or any other single/double independent clone"},{v:"3",t:"Poor: -7, inv(3)/t(3q)/del(3q), double including -7/del(7q), or complex (3 abnormalities)"},{v:"4",t:"Very poor: complex (>3 abnormalities)"}] },
       { id:"blasts", label:"Bone marrow blasts", type:"select", opts:[{v:"0",t:"≤ 2%"},{v:"1",t:"> 2% to < 5%"},{v:"2",t:"5–10%"},{v:"3",t:"> 10%"}] },
       { id:"hb", label:"Haemoglobin", type:"select", opts:[{v:"0",t:"≥ 10 g/dL"},{v:"1",t:"8 to < 10 g/dL"},{v:"1.5",t:"< 8 g/dL"}] },
       { id:"plt", label:"Platelets", type:"select", opts:[{v:"0",t:"≥ 100 ×10⁹/L"},{v:"0.5",t:"50 to < 100 ×10⁹/L"},{v:"1",t:"< 50 ×10⁹/L"}] },
@@ -4583,15 +4583,15 @@
   { id:"ferriman_gallwey", cat:"Endocrine", icon:"", title:"Ferriman-Gallwey Hirsutism Score",
     desc:"Grades terminal hair in 9 androgen-sensitive areas (each 0–4).",
     inputs:[
-      { id:"lip", label:"Upper lip", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"chin", label:"Chin", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"chest", label:"Chest", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"upper_abdo", label:"Upper abdomen", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"lower_abdo", label:"Lower abdomen", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"arm", label:"Upper arm", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"thigh", label:"Thigh", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"upper_back", label:"Upper back", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"lower_back", label:"Lower back", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] }
+      { id:"lip", label:"Upper lip", type:"select", opts:[{v:"0",t:"0: No terminal hair"},{v:"1",t:"1: A few hairs at outer margin"},{v:"2",t:"2: Small moustache at outer margin"},{v:"3",t:"3: Moustache extending halfway from outer margin"},{v:"4",t:"4: Moustache extending to midline"}] },
+      { id:"chin", label:"Chin", type:"select", opts:[{v:"0",t:"0: No terminal hair"},{v:"1",t:"1: A few scattered hairs"},{v:"2",t:"2: Scattered hairs with small concentrations"},{v:"3",t:"3: Complete cover, light"},{v:"4",t:"4: Complete cover, heavy"}] },
+      { id:"chest", label:"Chest", type:"select", opts:[{v:"0",t:"0: No terminal hair"},{v:"1",t:"1: Circumareolar hairs"},{v:"2",t:"2: Circumareolar + midline hair"},{v:"3",t:"3: Fusion of areas, 3/4 cover"},{v:"4",t:"4: Complete cover"}] },
+      { id:"upper_abdo", label:"Upper abdomen", type:"select", opts:[{v:"0",t:"0: No terminal hair"},{v:"1",t:"1: A few midline hairs"},{v:"2",t:"2: Rather more, still midline"},{v:"3",t:"3: Half cover"},{v:"4",t:"4: Full cover"}] },
+      { id:"lower_abdo", label:"Lower abdomen", type:"select", opts:[{v:"0",t:"0: No terminal hair"},{v:"1",t:"1: A few midline hairs"},{v:"2",t:"2: Midline streak of hair"},{v:"3",t:"3: Midline band of hair"},{v:"4",t:"4: Inverted V-shaped growth"}] },
+      { id:"arm", label:"Upper arm", type:"select", opts:[{v:"0",t:"0: No terminal hair"},{v:"1",t:"1: Sparse growth, <= 1/4 of limb"},{v:"2",t:"2: More extensive, cover incomplete"},{v:"3",t:"3: Complete cover, light"},{v:"4",t:"4: Complete cover, heavy"}] },
+      { id:"thigh", label:"Thigh", type:"select", opts:[{v:"0",t:"0: No terminal hair"},{v:"1",t:"1: Sparse growth, <= 1/4 of limb"},{v:"2",t:"2: More extensive, cover incomplete"},{v:"3",t:"3: Complete cover, light"},{v:"4",t:"4: Complete cover, heavy"}] },
+      { id:"upper_back", label:"Upper back", type:"select", opts:[{v:"0",t:"0: No terminal hair"},{v:"1",t:"1: A few scattered hairs"},{v:"2",t:"2: Rather more, still scattered"},{v:"3",t:"3: Complete cover, light"},{v:"4",t:"4: Complete cover, heavy"}] },
+      { id:"lower_back", label:"Lower back", type:"select", opts:[{v:"0",t:"0: No terminal hair"},{v:"1",t:"1: Sacral tuft of hair"},{v:"2",t:"2: Sacral tuft with lateral extension"},{v:"3",t:"3: 3/4 cover"},{v:"4",t:"4: Complete cover"}] }
     ],
     compute:function(v){
       var keys=["lip","chin","chest","upper_abdo","lower_abdo","arm","thigh","upper_back","lower_back"];
@@ -4769,18 +4769,18 @@
   { id:"ballard", cat:"Paediatrics", icon:"", title:"New Ballard Score (Gestational Age)",
     desc:"Estimates gestational age from neuromuscular and physical maturity (scores per the Ballard figure).",
     inputs:[
-      { id:"posture", label:"Posture", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"square_window", label:"Square window (wrist)", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"arm_recoil", label:"Arm recoil", type:"select", opts:[{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"popliteal_angle", label:"Popliteal angle", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
-      { id:"scarf_sign", label:"Scarf sign", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"heel_to_ear", label:"Heel to ear", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"skin", label:"Skin", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"},{v:"5",t:"5"}] },
-      { id:"lanugo", label:"Lanugo", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"plantar", label:"Plantar surface", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"breast", label:"Breast", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"eye_ear", label:"Eye / ear", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] },
-      { id:"genitals", label:"Genitals", type:"select", opts:[{v:"-1",t:"-1"},{v:"0",t:"0"},{v:"1",t:"1"},{v:"2",t:"2"},{v:"3",t:"3"},{v:"4",t:"4"}] }
+      { id:"posture", label:"Posture", type:"select", opts:[{v:"0",t:"0: arms and legs extended"},{v:"1",t:"1: slight flexion of hips/knees"},{v:"2",t:"2: moderate flexion of hips/knees, arms extended"},{v:"3",t:"3: legs flexed/abducted, arms slightly flexed"},{v:"4",t:"4: full flexion of arms and legs"}] },
+      { id:"square_window", label:"Square window (wrist)", type:"select", opts:[{v:"-1",t:"-1: > 90 deg"},{v:"0",t:"0: 90 deg"},{v:"1",t:"1: 60 deg"},{v:"2",t:"2: 45 deg"},{v:"3",t:"3: 30 deg"},{v:"4",t:"4: 0 deg"}] },
+      { id:"arm_recoil", label:"Arm recoil", type:"select", opts:[{v:"0",t:"0: 180 deg (remains extended)"},{v:"1",t:"1: 140-180 deg"},{v:"2",t:"2: 110-140 deg"},{v:"3",t:"3: 90-110 deg"},{v:"4",t:"4: < 90 deg (brisk recoil)"}] },
+      { id:"popliteal_angle", label:"Popliteal angle", type:"select", opts:[{v:"-1",t:"-1: 180 deg"},{v:"0",t:"0: 160 deg"},{v:"1",t:"1: 140 deg"},{v:"2",t:"2: 120 deg"},{v:"3",t:"3: 100 deg"},{v:"4",t:"4: 90 deg"},{v:"5",t:"5: < 90 deg"}] },
+      { id:"scarf_sign", label:"Scarf sign", type:"select", opts:[{v:"-1",t:"-1: elbow past opposite axillary line"},{v:"0",t:"0: past midline"},{v:"1",t:"1: just past midline"},{v:"2",t:"2: at midline"},{v:"3",t:"3: short of midline"},{v:"4",t:"4: does not cross ipsilateral chest line"}] },
+      { id:"heel_to_ear", label:"Heel to ear", type:"select", opts:[{v:"-1",t:"-1: heel to ear, no resistance"},{v:"0",t:"0: near ear, minimal resistance"},{v:"1",t:"1: mild resistance at ~140 deg"},{v:"2",t:"2: resistance at ~120 deg"},{v:"3",t:"3: resistance at ~100 deg"},{v:"4",t:"4: cannot flex past ~90 deg"}] },
+      { id:"skin", label:"Skin", type:"select", opts:[{v:"-1",t:"-1: sticky, friable, transparent"},{v:"0",t:"0: gelatinous, red, translucent"},{v:"1",t:"1: smooth pink, visible veins"},{v:"2",t:"2: superficial peeling/rash, few veins"},{v:"3",t:"3: cracking, pale areas, rare veins"},{v:"4",t:"4: parchment, deep cracking, no vessels"},{v:"5",t:"5: leathery, cracked, wrinkled"}] },
+      { id:"lanugo", label:"Lanugo", type:"select", opts:[{v:"-1",t:"-1: none"},{v:"0",t:"0: sparse"},{v:"1",t:"1: abundant"},{v:"2",t:"2: thinning"},{v:"3",t:"3: bald areas"},{v:"4",t:"4: mostly bald"}] },
+      { id:"plantar", label:"Plantar surface", type:"select", opts:[{v:"-1",t:"-1: heel-toe 40-50 mm, no creases"},{v:"0",t:"0: > 50 mm, no creases"},{v:"1",t:"1: faint red marks"},{v:"2",t:"2: anterior transverse crease only"},{v:"3",t:"3: creases over anterior 2/3"},{v:"4",t:"4: creases over entire sole"}] },
+      { id:"breast", label:"Breast", type:"select", opts:[{v:"-1",t:"-1: imperceptible"},{v:"0",t:"0: barely perceptible"},{v:"1",t:"1: flat areola, no bud"},{v:"2",t:"2: stippled areola, 1-2 mm bud"},{v:"3",t:"3: raised areola, 3-4 mm bud"},{v:"4",t:"4: full areola, 5-10 mm bud"}] },
+      { id:"eye_ear", label:"Eye / ear", type:"select", opts:[{v:"-1",t:"-1: lids fused loosely"},{v:"0",t:"0: lids open, pinna flat, stays folded"},{v:"1",t:"1: slightly curved pinna, slow recoil"},{v:"2",t:"2: well-curved pinna, ready recoil"},{v:"3",t:"3: formed and firm, instant recoil"},{v:"4",t:"4: thick cartilage, ear stiff"}] },
+      { id:"genitals", label:"Genitals", type:"select", opts:[{v:"-1",t:"-1: M: flat smooth scrotum / F: prominent clitoris, flat labia"},{v:"0",t:"0: M: empty scrotum, faint rugae / F: prominent clitoris, small minora"},{v:"1",t:"1: M: testes in upper canal / F: clitoris prominent, enlarging minora"},{v:"2",t:"2: M: testes descending, few rugae / F: majora and minora equally prominent"},{v:"3",t:"3: M: testes down, good rugae / F: majora large, minora small"},{v:"4",t:"4: M: pendulous testes, deep rugae / F: majora cover clitoris and minora"}] }
     ],
     compute:function(v){
       var keys=["posture","square_window","arm_recoil","popliteal_angle","scarf_sign","heel_to_ear","skin","lanugo","plantar","breast","eye_ear","genitals"];
@@ -4974,7 +4974,7 @@
   { id:"rutherford", cat:"Cardiovascular", icon:"", title:"Rutherford Classification (Peripheral Arterial Disease)",
     desc:"Category of chronic limb ischaemia.",
     inputs:[
-      { id:"cat", label:"Category", type:"select", opts:[{v:"0",t:"0 — Asymptomatic"},{v:"1",t:"1 — Mild claudication"},{v:"2",t:"2 — Moderate claudication"},{v:"3",t:"3 — Severe claudication"},{v:"4",t:"4 — Ischaemic rest pain"},{v:"5",t:"5 — Minor tissue loss"},{v:"6",t:"6 — Major tissue loss"}] }
+      { id:"cat", label:"Category", type:"select", opts:[{v:"0",t:"0 — Asymptomatic (no haemodynamically significant disease)"},{v:"1",t:"1 — Mild claudication (completes treadmill; AP > 50 mmHg post-exercise)"},{v:"2",t:"2 — Moderate claudication (between 1 and 3)"},{v:"3",t:"3 — Severe claudication (cannot complete treadmill; AP < 50 mmHg post-exercise)"},{v:"4",t:"4 — Ischaemic rest pain"},{v:"5",t:"5 — Minor tissue loss (non-healing ulcer, focal gangrene)"},{v:"6",t:"6 — Major tissue loss (above transmetatarsal, foot not salvageable)"}] }
     ],
     compute:function(v){
       var n=Number(v.cat);
@@ -5040,7 +5040,7 @@
     desc:"Classification of RA (requires ≥1 joint with definite clinical synovitis not better explained by another disease).",
     inputs:[
       { id:"joints", label:"Joint involvement", type:"select", opts:[{v:"0",t:"1 large joint"},{v:"1",t:"2–10 large joints"},{v:"2",t:"1–3 small joints"},{v:"3",t:"4–10 small joints"},{v:"5",t:">10 joints (≥1 small)"}] },
-      { id:"serology", label:"Serology (RF and anti-CCP)", type:"select", opts:[{v:"0",t:"Both negative"},{v:"2",t:"Low-positive RF or anti-CCP"},{v:"3",t:"High-positive RF or anti-CCP"}] },
+      { id:"serology", label:"Serology (RF and anti-CCP)", type:"select", opts:[{v:"0",t:"Both negative (<= ULN)"},{v:"2",t:"Low-positive RF or anti-CCP (> ULN to <= 3x ULN)"},{v:"3",t:"High-positive RF or anti-CCP (> 3x ULN)"}] },
       { id:"acute", label:"Acute-phase reactants", type:"select", opts:[{v:"0",t:"Normal CRP and ESR"},{v:"1",t:"Abnormal CRP or ESR"}] },
       { id:"duration", label:"Duration of symptoms", type:"select", opts:[{v:"0",t:"< 6 weeks"},{v:"1",t:"≥ 6 weeks"}] }
     ],
@@ -5092,7 +5092,7 @@
   { id:"gose", cat:"Neurology", icon:"", title:"Glasgow Outcome Scale — Extended (GOS-E)",
     desc:"Functional outcome after traumatic brain injury.",
     inputs:[
-      { id:"grade", label:"Outcome category", type:"select", opts:[{v:"8",t:"8 — Upper good recovery"},{v:"7",t:"7 — Lower good recovery"},{v:"6",t:"6 — Upper moderate disability"},{v:"5",t:"5 — Lower moderate disability"},{v:"4",t:"4 — Upper severe disability"},{v:"3",t:"3 — Lower severe disability"},{v:"2",t:"2 — Vegetative state"},{v:"1",t:"1 — Dead"}] }
+      { id:"grade", label:"Outcome category", type:"select", opts:[{v:"8",t:"8 — Upper good recovery: no current problems"},{v:"7",t:"7 — Lower good recovery: minor problems affecting daily life"},{v:"6",t:"6 — Upper moderate disability: independent, some reduction in work/social capacity"},{v:"5",t:"5 — Lower moderate disability: independent, unable to resume prior work/social life"},{v:"4",t:"4 — Upper severe disability: dependent, some independence at home"},{v:"3",t:"3 — Lower severe disability: totally dependent"},{v:"2",t:"2 — Vegetative state: unresponsive"},{v:"1",t:"1 — Dead"}] }
     ],
     compute:function(v){
       var m={"1":"Dead","2":"Vegetative state — unresponsive","3":"Lower severe disability — dependent for daily support","4":"Upper severe disability — dependent but some independence at home","5":"Lower moderate disability — independent but cannot resume prior work/social life","6":"Upper moderate disability — some reduction in work/social capacity","7":"Lower good recovery — minor deficits affecting daily life","8":"Upper good recovery — full recovery or minor residual symptoms"};
@@ -5528,7 +5528,7 @@
   { id:"r_iss", cat:"Haematology", onc:1, icon:"", title:"R-ISS (Revised ISS, Myeloma)",
     desc:"Revised International Staging System for multiple myeloma.",
     inputs:[
-      { id:"iss", label:"ISS stage", type:"select", opts:[{v:"1",t:"Stage I (β2M <3.5 mg/L & albumin ≥35 g/L)"},{v:"2",t:"Stage II"},{v:"3",t:"Stage III (β2M >5.5 mg/L)"}] },
+      { id:"iss", label:"ISS stage", type:"select", opts:[{v:"1",t:"Stage I (β2M <3.5 mg/L & albumin ≥35 g/L)"},{v:"2",t:"Stage II (neither I nor III)"},{v:"3",t:"Stage III (β2M >5.5 mg/L)"}] },
       { id:"ldh", label:"Serum LDH", type:"select", opts:[{v:"0",t:"Normal (< upper limit)"},{v:"1",t:"Elevated (≥ upper limit)"}] },
       { id:"cyto", label:"High-risk cytogenetics — del(17p), t(4;14) or t(14;16)", type:"select", opts:[{v:"0",t:"Absent (standard risk)"},{v:"1",t:"Present (high risk)"}] }
     ],
@@ -5546,7 +5546,7 @@
     desc:"Estimated right-ventricular systolic pressure from tricuspid regurgitation velocity.",
     inputs:[
       { id:"trv", label:"Peak TR velocity", type:"number", unit:"m/s", step:"0.1" },
-      { id:"rap", label:"Estimated right atrial pressure", type:"select", opts:[{v:"3",t:"3 mmHg (IVC small, collapses)"},{v:"8",t:"8 mmHg (intermediate)"},{v:"15",t:"15 mmHg (IVC dilated, fixed)"}] }
+      { id:"rap", label:"Estimated right atrial pressure", type:"select", opts:[{v:"3",t:"3 mmHg (IVC <= 2.1 cm, collapses > 50% with sniff)"},{v:"8",t:"8 mmHg (IVC <= 2.1 cm with < 50% collapse, or > 2.1 cm with > 50% collapse)"},{v:"15",t:"15 mmHg (IVC > 2.1 cm, collapses < 50% with sniff)"}] }
     ],
     compute:function(v){
       if(!ok(v.trv)||v.trv<=0) return ERR;
@@ -5846,7 +5846,7 @@
     desc:"Simplified Mantle Cell Lymphoma International Prognostic Index.",
     inputs:[
       { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"<50"},{v:"1",t:"50–59"},{v:"2",t:"60–69"},{v:"3",t:"≥70"}] },
-      { id:"ecog", label:"ECOG performance status", type:"select", opts:[{v:"0",t:"0–1"},{v:"2",t:"2–4"}] },
+      { id:"ecog", label:"ECOG performance status", type:"select", opts:[{v:"0",t:"0–1: fully active or restricted only in strenuous activity"},{v:"2",t:"2–4: unable to work, up < 50% of waking hours, or bedbound"}] },
       { id:"ldh", label:"LDH / upper limit of normal", type:"select", opts:[{v:"0",t:"<0.67"},{v:"1",t:"0.67–0.99"},{v:"2",t:"1.00–1.49"},{v:"3",t:"≥1.50"}] },
       { id:"wbc", label:"WBC (×10⁹/L)", type:"select", opts:[{v:"0",t:"<6.7"},{v:"1",t:"6.7–9.99"},{v:"2",t:"10–14.99"},{v:"3",t:"≥15"}] }
     ],
@@ -6300,10 +6300,10 @@
     desc:"Cleveland Clinic score for severity of faecal incontinence.",
     inputs:[
       { id:"solid", label:"Incontinence to solid stool", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely, <1/month (1)"},{v:"2",t:"Sometimes, <1/week (2)"},{v:"3",t:"Usually, <1/day (3)"},{v:"4",t:"Always, ≥1/day (4)"}] },
-      { id:"liquid", label:"Incontinence to liquid stool", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely (1)"},{v:"2",t:"Sometimes (2)"},{v:"3",t:"Usually (3)"},{v:"4",t:"Always (4)"}] },
-      { id:"gas", label:"Incontinence to gas", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely (1)"},{v:"2",t:"Sometimes (2)"},{v:"3",t:"Usually (3)"},{v:"4",t:"Always (4)"}] },
-      { id:"pad", label:"Wears a pad", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely (1)"},{v:"2",t:"Sometimes (2)"},{v:"3",t:"Usually (3)"},{v:"4",t:"Always (4)"}] },
-      { id:"lifestyle", label:"Lifestyle alteration", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely (1)"},{v:"2",t:"Sometimes (2)"},{v:"3",t:"Usually (3)"},{v:"4",t:"Always (4)"}] }
+      { id:"liquid", label:"Incontinence to liquid stool", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely, < 1/month (1)"},{v:"2",t:"Sometimes, >= 1/month to < 1/week (2)"},{v:"3",t:"Usually, >= 1/week to < 1/day (3)"},{v:"4",t:"Always, >= 1/day (4)"}] },
+      { id:"gas", label:"Incontinence to gas", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely, < 1/month (1)"},{v:"2",t:"Sometimes, >= 1/month to < 1/week (2)"},{v:"3",t:"Usually, >= 1/week to < 1/day (3)"},{v:"4",t:"Always, >= 1/day (4)"}] },
+      { id:"pad", label:"Wears a pad", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely, < 1/month (1)"},{v:"2",t:"Sometimes, >= 1/month to < 1/week (2)"},{v:"3",t:"Usually, >= 1/week to < 1/day (3)"},{v:"4",t:"Always, >= 1/day (4)"}] },
+      { id:"lifestyle", label:"Lifestyle alteration", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"Rarely, < 1/month (1)"},{v:"2",t:"Sometimes, >= 1/month to < 1/week (2)"},{v:"3",t:"Usually, >= 1/week to < 1/day (3)"},{v:"4",t:"Always, >= 1/day (4)"}] }
     ],
     compute:function(v){
       var s=(Number(v.solid)||0)+(Number(v.liquid)||0)+(Number(v.gas)||0)+(Number(v.pad)||0)+(Number(v.lifestyle)||0);
@@ -6446,13 +6446,13 @@
   { id:"braden_q", cat:"Paediatrics", icon:"", title:"Braden Q Scale (Paediatric Pressure Injury)",
     desc:"Pressure-injury risk in paediatric patients (lower total = higher risk).",
     inputs:[
-      { id:"mobility", label:"Mobility", type:"select", opts:[{v:"4",t:"No limitation (4)"},{v:"3",t:"Slightly limited (3)"},{v:"2",t:"Very limited (2)"},{v:"1",t:"Completely immobile (1)"}] },
-      { id:"activity", label:"Activity", type:"select", opts:[{v:"4",t:"Walks frequently (4)"},{v:"3",t:"Walks occasionally (3)"},{v:"2",t:"Chairfast (2)"},{v:"1",t:"Bedfast (1)"}] },
-      { id:"sensory", label:"Sensory perception", type:"select", opts:[{v:"4",t:"No impairment (4)"},{v:"3",t:"Slightly limited (3)"},{v:"2",t:"Very limited (2)"},{v:"1",t:"Completely limited (1)"}] },
-      { id:"moisture", label:"Moisture", type:"select", opts:[{v:"4",t:"Rarely moist (4)"},{v:"3",t:"Occasionally moist (3)"},{v:"2",t:"Often moist (2)"},{v:"1",t:"Constantly moist (1)"}] },
-      { id:"friction", label:"Friction & shear", type:"select", opts:[{v:"4",t:"No apparent problem (4)"},{v:"3",t:"Potential problem (3)"},{v:"2",t:"Problem (2)"},{v:"1",t:"Significant problem (1)"}] },
-      { id:"nutrition", label:"Nutrition", type:"select", opts:[{v:"4",t:"Excellent (4)"},{v:"3",t:"Adequate (3)"},{v:"2",t:"Inadequate (2)"},{v:"1",t:"Very poor (1)"}] },
-      { id:"perfusion", label:"Tissue perfusion & oxygenation", type:"select", opts:[{v:"4",t:"Excellent (4)"},{v:"3",t:"Adequate (3)"},{v:"2",t:"Compromised (2)"},{v:"1",t:"Extremely compromised (1)"}] }
+      { id:"mobility", label:"Mobility", type:"select", opts:[{v:"4",t:"No limitation: major/frequent position changes independently (4)"},{v:"3",t:"Slightly limited: frequent slight changes independently (3)"},{v:"2",t:"Very limited: occasional slight changes, cannot turn self (2)"},{v:"1",t:"Completely immobile: no changes without assistance (1)"}] },
+      { id:"activity", label:"Activity", type:"select", opts:[{v:"4",t:"Walks frequently or too young to ambulate (4)"},{v:"3",t:"Walks occasionally, mostly in bed/chair (3)"},{v:"2",t:"Chairfast: needs help into chair (2)"},{v:"1",t:"Bedfast: confined to bed (1)"}] },
+      { id:"sensory", label:"Sensory perception", type:"select", opts:[{v:"4",t:"No impairment: responds to verbal commands, no sensory deficit (4)"},{v:"3",t:"Slightly limited: responds to commands but cannot always communicate discomfort (3)"},{v:"2",t:"Very limited: responds only to painful stimuli, or sensory loss > 50% of body (2)"},{v:"1",t:"Completely limited: unresponsive to painful stimuli (sedation/LOC) (1)"}] },
+      { id:"moisture", label:"Moisture", type:"select", opts:[{v:"4",t:"Rarely moist: skin usually dry, routine changes (4)"},{v:"3",t:"Occasionally moist: linen change q12h (3)"},{v:"2",t:"Often moist: linen change at least q8h (2)"},{v:"1",t:"Constantly moist: dampness every time turned (1)"}] },
+      { id:"friction", label:"Friction & shear", type:"select", opts:[{v:"4",t:"No apparent problem: lifts completely during moves (4)"},{v:"3",t:"Potential problem: moves feebly, skin slides slightly (3)"},{v:"2",t:"Problem: needs moderate-maximum help, frequent sliding (2)"},{v:"1",t:"Significant problem: spasticity/contracture causing constant friction (1)"}] },
+      { id:"nutrition", label:"Nutrition", type:"select", opts:[{v:"4",t:"Excellent: normal diet, adequate calories for age (4)"},{v:"3",t:"Adequate: tube/TPN meeting needs, or eats > 50% of meals (3)"},{v:"2",t:"Inadequate: suboptimal tube/TPN, albumin < 3.0, or eats ~50% (2)"},{v:"1",t:"Very poor: NPO/IVs > 5 days, albumin < 2.5, or eats <= 1/3 (1)"}] },
+      { id:"perfusion", label:"Tissue perfusion & oxygenation", type:"select", opts:[{v:"4",t:"Excellent: normotensive, SpO2 > 95%, normal Hb, CRT < 2 s (4)"},{v:"3",t:"Adequate: normotensive, SpO2 < 95% or Hb < 10 or CRT > 2 s, pH normal (3)"},{v:"2",t:"Compromised: normotensive but SpO2/Hb/CRT abnormal AND pH < 7.40 (2)"},{v:"1",t:"Extremely compromised: hypotensive or does not tolerate position changes (1)"}] }
     ],
     compute:function(v){
       var s=(Number(v.mobility)||1)+(Number(v.activity)||1)+(Number(v.sensory)||1)+(Number(v.moisture)||1)+(Number(v.friction)||1)+(Number(v.nutrition)||1)+(Number(v.perfusion)||1);
@@ -6463,7 +6463,7 @@
   { id:"norton", cat:"General", icon:"", title:"Norton Pressure Sore Risk Scale",
     desc:"Pressure-ulcer risk, mainly in elderly inpatients (lower total = higher risk).",
     inputs:[
-      { id:"physical", label:"Physical condition", type:"select", opts:[{v:"4",t:"Good (4)"},{v:"3",t:"Fair (3)"},{v:"2",t:"Poor (2)"},{v:"1",t:"Very bad (1)"}] },
+      { id:"physical", label:"Physical condition", type:"select", opts:[{v:"4",t:"Good: stable, normal nutrition, no acute illness (4)"},{v:"3",t:"Fair: mild/controlled illness, slightly impaired nutrition (3)"},{v:"2",t:"Poor: significant illness, poor nutrition/hydration (2)"},{v:"1",t:"Very bad: critically ill, moribund, severe cachexia (1)"}] },
       { id:"mental", label:"Mental condition", type:"select", opts:[{v:"4",t:"Alert (4)"},{v:"3",t:"Apathetic (3)"},{v:"2",t:"Confused (2)"},{v:"1",t:"Stuporous (1)"}] },
       { id:"activity", label:"Activity", type:"select", opts:[{v:"4",t:"Ambulant (4)"},{v:"3",t:"Walks with help (3)"},{v:"2",t:"Chairbound (2)"},{v:"1",t:"Bed (1)"}] },
       { id:"mobility", label:"Mobility", type:"select", opts:[{v:"4",t:"Full (4)"},{v:"3",t:"Slightly limited (3)"},{v:"2",t:"Very limited (2)"},{v:"1",t:"Immobile (1)"}] },
@@ -6867,7 +6867,7 @@
   { id:"cdr", cat:"Neurology", icon:"", title:"Clinical Dementia Rating (global)",
     desc:"Interprets a Clinical Dementia Rating global score.",
     inputs:[
-      { id:"score", label:"CDR global score", type:"select", opts:[{v:"0",t:"0 — none"},{v:"0.5",t:"0.5 — very mild / questionable"},{v:"1",t:"1 — mild"},{v:"2",t:"2 — moderate"},{v:"3",t:"3 — severe"}] }
+      { id:"score", label:"CDR global score", type:"select", opts:[{v:"0",t:"0 — none: no memory loss, fully independent"},{v:"0.5",t:"0.5 — questionable: mild consistent forgetfulness, fully capable"},{v:"1",t:"1 — mild: moderate memory loss affecting function; cannot function independently in community"},{v:"2",t:"2 — moderate: severe memory loss; disoriented; no independent function outside home"},{v:"3",t:"3 — severe: only fragments of memory remain; needs much help with personal care"}] }
     ],
     compute:function(v){
       var s=v.score||"0"; var map={"0":"No dementia","0.5":"Questionable / very mild impairment (often MCI)","1":"Mild dementia","2":"Moderate dementia","3":"Severe dementia"};
@@ -6925,7 +6925,7 @@
       { id:"hr", label:"Heart rate", type:"number", unit:"bpm" },
       { id:"rr", label:"Respiratory rate", type:"number", unit:"/min" },
       { id:"spo2", label:"SpO₂", type:"number", unit:"%" },
-      { id:"pain", label:"Pain score (0 to 3)", type:"select", opts:[{v:"0",t:"0: no pain"},{v:"1",t:"1: slight pain on movement"},{v:"2",t:"2: intermittent pain at rest or moderate pain on movement"},{v:"3",t:"3"}] },
+      { id:"pain", label:"Pain score (0 to 3)", type:"select", opts:[{v:"0",t:"0: no pain"},{v:"1",t:"1: slight pain on movement"},{v:"2",t:"2: intermittent pain at rest or moderate pain on movement"},{v:"3",t:"3: continuous pain at rest or severe pain on movement"}] },
       { id:"avpu", label:"Neurological response (AVPU)", type:"select", opts:[{v:"a",t:"Alert"},{v:"v",t:"Responds to voice"},{v:"p",t:"Responds to pain"},{v:"u",t:"Unresponsive"}] }
     ],
     compute:function(v){
@@ -7194,11 +7194,11 @@
   { id:"act_asthma", cat:"Respiratory", icon:"", title:"Asthma Control Test (ACT)",
     desc:"Adds the five ACT items (each 1 to 5, past 4 weeks; for age 12 and over). Administer the official ACT questionnaire (© QualityMetric; reproduction requires a licence) and enter each item's points.",
     inputs:[
-      { id:"q1", label:"Item 1: activity limitation at work, school or home", type:"select", opts:actItemOpts() },
-      { id:"q2", label:"Item 2: shortness of breath", type:"select", opts:actItemOpts() },
-      { id:"q3", label:"Item 3: night-time or early-morning waking from symptoms", type:"select", opts:actItemOpts() },
-      { id:"q4", label:"Item 4: rescue inhaler or nebuliser use", type:"select", opts:actItemOpts() },
-      { id:"q5", label:"Item 5: self-rated asthma control", type:"select", opts:actItemOpts() }
+      { id:"q1", label:"Item 1: activity limitation at work, school or home", type:"select", opts:[{v:"5",t:"5: none of the time"},{v:"4",t:"4: a little of the time"},{v:"3",t:"3: some of the time"},{v:"2",t:"2: most of the time"},{v:"1",t:"1: all of the time"}] },
+      { id:"q2", label:"Item 2: shortness of breath", type:"select", opts:[{v:"5",t:"5: not at all"},{v:"4",t:"4: once or twice"},{v:"3",t:"3: 3 to 6 times"},{v:"2",t:"2: once a day"},{v:"1",t:"1: more than once a day"}] },
+      { id:"q3", label:"Item 3: night-time or early-morning waking from symptoms", type:"select", opts:[{v:"5",t:"5: not at all"},{v:"4",t:"4: once or twice"},{v:"3",t:"3: once a week"},{v:"2",t:"2: 2-3 nights/week"},{v:"1",t:"1: 4+ nights/week"}] },
+      { id:"q4", label:"Item 4: rescue inhaler or nebuliser use", type:"select", opts:[{v:"5",t:"5: not at all"},{v:"4",t:"4: once a week or less"},{v:"3",t:"3: 2-3 times/week"},{v:"2",t:"2: 1-2 times/day"},{v:"1",t:"1: 3+ times/day"}] },
+      { id:"q5", label:"Item 5: self-rated asthma control", type:"select", opts:[{v:"5",t:"5: completely controlled"},{v:"4",t:"4: well controlled"},{v:"3",t:"3: somewhat controlled"},{v:"2",t:"2: poorly controlled"},{v:"1",t:"1: not controlled at all"}] }
     ],
     compute:function(v){
       var s=0;
@@ -7233,7 +7233,7 @@
       { id:"na", label:"Sodium", type:"number", unit:"mmol/L", lab:"na" },
       { id:"k", label:"Potassium", type:"number", unit:"mmol/L", step:"0.1", lab:"k" },
       { id:"ecg", label:"ECG", type:"select", opts:[{v:"1",t:"Normal (1)"},{v:"4",t:"Atrial fibrillation, rate 60 to 90 (4)"},{v:"8",t:"Any other abnormal rhythm, 5 or more ectopics/min, Q waves or ST/T wave changes (8)"}] },
-      { id:"sev", label:"Operative severity", type:"select", opts:[{v:"1",t:"Minor (1)"},{v:"2",t:"Moderate (2)"},{v:"4",t:"Major (4)"},{v:"8",t:"Major+ (8)"}] },
+      { id:"sev", label:"Operative severity", type:"select", opts:[{v:"1",t:"Minor (1): e.g. hernia, varicose veins, minor skin/abscess"},{v:"2",t:"Moderate (2): e.g. appendicectomy, cholecystectomy, mastectomy"},{v:"4",t:"Major (4): e.g. laparotomy, bowel resection, major amputation"},{v:"8",t:"Major+ (8): e.g. aortic, pancreatic, oesophageal, liver resection"}] },
       { id:"multi", label:"Number of procedures", type:"select", opts:[{v:"1",t:"1 (1)"},{v:"4",t:"2 (4)"},{v:"8",t:"More than 2 (8)"}] },
       { id:"ebl", label:"Total blood loss", type:"number", unit:"mL" },
       { id:"soil", label:"Peritoneal soiling", type:"select", opts:[{v:"1",t:"None (1)"},{v:"2",t:"Minor, serous fluid (2)"},{v:"4",t:"Local pus (4)"},{v:"8",t:"Free bowel content, pus or blood (8)"}] },
