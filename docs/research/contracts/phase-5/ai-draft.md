@@ -403,3 +403,11 @@ Reading level: simple sentences for participants. Phone numbers and emails are s
 Invented phone numbers and emails are stripped.
 `briefSummary` is capped at 300 words.
 
+
+### publication_consent (max 2000 tokens, plan v2 item 2)
+
+Input `{ language, images, notes }`. Output `{ language, englishVersion, translatedVersion? }`; each version has `title, whatWillBePublished, readWorldwide, mayBeRecognised, canWithdraw, careNotAffected, images, statements[], signatureBlock`, all required (422 `invalid_draft` if one is empty). A language other than English returns both versions. Phone numbers and emails are stripped.
+
+### case_report_draft (max 2500 tokens, plan v2 item 2)
+
+Input `{ caseText }`: the text `RMDPhi.prepareCaseText` built on the phone (dates as Day N, no name or hospital number); 400 without it. The server PHI gate still runs on it. Output `{ sections: [{ id, heading, text }], checklist: "care" }`, CARE order (title, abstract, introduction, patient_information, clinical_findings, timeline, diagnostic_assessment, therapeutic_intervention, follow_up, discussion, conclusion), empty sections dropped, 422 if fewer than 3. The phone appends the sections to the manuscript marked "Drafted by MaiK, check it" and runs `RMDPhi.numbersNotIn` on them.

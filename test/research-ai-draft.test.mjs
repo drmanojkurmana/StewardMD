@@ -648,6 +648,66 @@ describe("research ai draft", { concurrency: false, skip: SKIP }, () => {
     assert.equal(viewer.http, 403);
   });
 
+  test("publication_consent returns every required element, both versions for a local language, 422 when one is missing", async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 100);
+    const pid = (await makeProject(env)).id;
+    const eng = {
+      title: "Consent for publication of a case report",
+      whatWillBePublished: "A description of your illness and treatment, and the images listed below.",
+      readWorldwide: "The journal may be read anywhere in the world, including online.",
+      mayBeRecognised: "Your name will not be used, but someone may still recognise your case.",
+      canWithdraw: "You can withdraw this consent at any time before publication. Call 9876543210.",
+      careNotAffected: "Saying no will not change your care in any way.",
+      images: "Chest X-ray, ECG",
+      statements: ["I have read this form.", "I agree to the publication described above."],
+      signatureBlock: "Signature or thumb impression of patient, or next of kin or legally acceptable representative (relationship). Witness signature. Date.",
+    };
+    resetLlm(async () => JSON.stringify({ englishVersion: eng }));
+    const r = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", { task: "publication_consent", input: { language: "English", images: "Chest X-ray, ECG" } });
+    assert.equal(r.http, 200, JSON.stringify(r));
+    assert.equal(r.draft.task, "publication_consent");
+    assert.equal(r.draft.englishVersion.images, "Chest X-ray, ECG");
+    assert.equal(r.draft.englishVersion.canWithdraw.includes("9876543210"), false);
+    assert.equal(llm.calls[0].maxTokens, 2000);
+
+    resetLlm(async () => JSON.stringify({ englishVersion: eng, translatedVersion: { ...eng, title: "Telugu title" } }));
+    const tel = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", { task: "publication_consent", input: { language: "Telugu" } });
+    assert.equal(tel.http, 200, JSON.stringify(tel));
+    assert.equal(tel.draft.translatedVersion.language, "Telugu");
+    assert.equal(tel.draft.englishVersion.language, "English");
+
+    const { mayBeRecognised, ...missing } = eng;
+    resetLlm(async () => JSON.stringify({ englishVersion: missing }));
+    const bad = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", { task: "publication_consent", input: {} });
+    assert.equal(bad.http, 422);
+    assert.equal(bad.error.code, "invalid_draft");
+  });
+
+  test("case_report_draft returns CARE sections from the case text only and needs case text", async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 100);
+    const pid = (await makeProject(env)).id;
+    const none = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", { task: "case_report_draft", input: {} });
+    assert.equal(none.http, 400);
+    resetLlm(async () => JSON.stringify({ sections: {
+      title: "Toxic myocarditis after zinc phosphide ingestion",
+      introduction: "Zinc phosphide is a rodenticide.",
+      patient_information: "A 40 year old man presented with chest pain.",
+      timeline: "Day 0: troponin I 2.4 ng/mL. Day 2: ejection fraction 35 %.",
+      discussion: "",
+      unknown_part: "ignored",
+    } }));
+    const r = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", { task: "case_report_draft", input: { caseText: "Age and sex: 40 years, Male\nTimeline:\nDay 0: Troponin I 2.4 ng/mL" } });
+    assert.equal(r.http, 200, JSON.stringify(r));
+    assert.deepEqual(r.draft.sections.map((x) => x.id), ["title", "introduction", "patient_information", "timeline"]);
+    assert.equal(r.draft.checklist, "care");
+    assert.match(String(llm.calls[0].parts && JSON.stringify(llm.calls[0].parts)), /Troponin I 2\.4/);
+    resetLlm(async () => JSON.stringify({ sections: { title: "Only a title" } }));
+    const thin = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", { task: "case_report_draft", input: { caseText: "Age and sex: 40 years" } });
+    assert.equal(thin.http, 422);
+  });
+
   test("ctri_fields drafts registry fields, leaves ethics/clearance empty, trims summary to 300 words, strips phone/email", async () => {
     const env = freshEnv();
     fundWallet(env, "alice@example.com", 100);

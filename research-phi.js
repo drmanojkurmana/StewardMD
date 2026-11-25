@@ -132,7 +132,7 @@
     var who = [];
     if (clean(cf.age)) who.push(ageText(cf.age) + (ageText(cf.age) === "90 or older" ? "" : " years"));
     if (clean(cf.sex)) who.push(clean(cf.sex));
-    if (who.length) lines.push("Patient: " + who.join(", "));
+    if (who.length) lines.push("Age and sex: " + who.join(", "));
     if (parseFloat(str(cf.age)) >= 90) removed.push({ field: "age", reason: "age 90 or more is shown as 90 or older" });
     for (i = 0; i < SECTIONS.length; i++) {
       if (clean(cf[SECTIONS[i][0]])) lines.push(SECTIONS[i][1] + ": " + clean(cf[SECTIONS[i][0]]));
