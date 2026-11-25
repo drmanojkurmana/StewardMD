@@ -162,7 +162,7 @@ try {
   ok(/If you forget this passphrase, nobody can open the backup, including us\./.test(await ev("document.getElementById('rmdBackupWarn').textContent")), "passphrase warning is visible");
   ok(await ev("document.getElementById('rmdBackupMsg').hasAttribute('hidden')"), "no error on first paint");
   ok(await ev("document.getElementById('rmdBackupImages').checked === false"), "images are off until ticked");
-  ok(await ev("document.documentElement.scrollWidth <= window.innerWidth + 1"), "no horizontal overflow at 390px");
+  ok(await ev("document.documentElement.scrollWidth <= document.documentElement.clientWidth"), "no horizontal overflow at 390px");
   ok(await ev("getComputedStyle(document.querySelector('.rmd-backup-grid')).gridTemplateColumns.split(' ').filter(Boolean).length === 1"), "one column on a phone");
   const btnBox = await ev("(function(){var b=document.getElementById('rmdBackupExport');var s=getComputedStyle(b);return s.minHeight+'|'+s.height+'|'+s.fontSize;})()");
   ok(parseFloat(String(btnBox).split("|")[0]) >= 44, "save button CSS min-height is 44px (" + btnBox + ")");
@@ -175,7 +175,7 @@ try {
   await viewport(1024, 1366, false);
   await sleep(200);
   ok(await ev("getComputedStyle(document.querySelector('.rmd-backup-grid')).gridTemplateColumns.split(' ').filter(Boolean).length === 2"), "two columns on iPad");
-  ok(await ev("document.documentElement.scrollWidth <= window.innerWidth + 1"), "no horizontal overflow at 1024px");
+  ok(await ev("document.documentElement.scrollWidth <= document.documentElement.clientWidth"), "no horizontal overflow at 1024px");
   await viewport(390, 844, true);
 
   const seeded = await ev("(async function(){" +
@@ -207,7 +207,7 @@ try {
 
   const dashes = await ev("(function(){var t=(document.getElementById('researchMD')||document.body).innerText||'';return (t.match(/[\u2013\u2014]/g)||[]).length;})()");
   ok(dashes === 0, "no em or en dashes on the backup screen");
-  ok(await ev("document.documentElement.scrollWidth <= window.innerWidth + 1"), "no horizontal overflow at 390px after restore");
+  ok(await ev("document.documentElement.scrollWidth <= document.documentElement.clientWidth"), "no horizontal overflow at 390px after restore");
   const leaked = net.filter(function (row) { return row.indexOf(TOKEN) >= 0 || row.indexOf(PHRASE) >= 0; });
   const leakedBodies = bodies.filter(function (row) { return row.body.indexOf(TOKEN) >= 0 || row.body.indexOf(PHRASE) >= 0; });
   ok(leaked.length === 0 && leakedBodies.length === 0, "no network request carries the backup (" + net.length + " requests)");

@@ -359,7 +359,16 @@ try {
   // 12. No em/en dashes and no horizontal overflow with the sheet open.
   const dashes = await ev(`(()=>{const t=document.querySelector('#researchMD').innerText||'';return (t.match(/[\\u2013\\u2014]/g)||[]).length})()`);
   ok(dashes === 0, 'no em or en dashes in ResearchMD visible text');
-  ok(await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`), 'no horizontal overflow at 375px');
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), 'no horizontal overflow at 375px');
+  await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await sleep(200);
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), '390x844 no horizontal scroll');
+  await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 1366, deviceScaleFactor: 2, mobile: false });
+  await sleep(200);
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), '1024x1366 no horizontal scroll');
+  await shot('tablet-1024-auto-studies');
+  await call('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
+  await sleep(200);
 
   // 13. Fix opens the prefilled manual form and closes the sheet.
   await click('[data-find-fix="1"]');

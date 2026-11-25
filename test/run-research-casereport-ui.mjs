@@ -227,9 +227,9 @@ try {
 
   /* ===== sweeps ===== */
   await viewport(1024, 1366, false);
-  ok("no horizontal overflow at 1024px", await ev("document.documentElement.scrollWidth<=window.innerWidth+1"));
+  ok("no horizontal overflow at 1024px", await ev("document.documentElement.scrollWidth<=document.documentElement.clientWidth"));
   await viewport(390, 844, true);
-  ok("no horizontal overflow at 390px", await ev("document.documentElement.scrollWidth<=window.innerWidth+1"));
+  ok("no horizontal overflow at 390px", await ev("document.documentElement.scrollWidth<=document.documentElement.clientWidth"));
   var dashes = await ev("(function(){var t=(document.querySelector('#researchMD')||{}).innerText||'';var m=t.match(/[\\u2013\\u2014]/g);return m?m.length:0;})()");
   ok("no em or en dashes in ResearchMD visible text", dashes === 0, String(dashes));
   var leak = allBodies.filter(function (b) { return /JOHN DOE|MRN 123456|\b34\b|\bmale\b|2026-03-02|Troponin/i.test(b.body); });

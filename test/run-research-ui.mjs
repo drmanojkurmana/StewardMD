@@ -374,12 +374,23 @@ try {
   await click('[data-rmd="to-run"]');
   ok(await until(`!!document.querySelector('.rmd-run-layout')`, 5000), 'meta-analysis screen on 1024px landscape');
 
-  const noOverflow1024 = await ev(`(()=>{
+  const docFits = () => ev(`(()=>{
     const b = document.getElementById('researchMD');
-    return b.scrollWidth <= b.clientWidth + 2;
+    const d = document.documentElement;
+    return b.scrollWidth <= b.clientWidth + 2 && d.scrollWidth <= d.clientWidth;
   })()`);
-  ok(noOverflow1024, 'no horizontal layout overflow at 1024px landscape');
+  ok(await docFits(), 'no horizontal layout overflow at 1024px landscape');
   await shot('tablet-1024-landscape-run');
+
+  await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await sleep(200);
+  ok(await docFits(), '390x844 no horizontal scroll');
+  await shot('phone-390-run');
+
+  await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 1366, deviceScaleFactor: 2, mobile: false });
+  await sleep(200);
+  ok(await docFits(), '1024x1366 no horizontal scroll');
+  await shot('tablet-1024x1366-run');
 
   // 12. App-wide Text Audit: No em-dashes
   const allUiText = await text('#researchMD');

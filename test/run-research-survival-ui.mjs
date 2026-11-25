@@ -275,6 +275,26 @@ try {
   ok(/No one in group Drug B had the event, so median survival is not reached\./.test(await text('.rmd-mc-screen')), 'engine warning shown in the calm banner');
   await shot('survival-phone-390-not-reached');
 
+  // 4b. A Cox fit that failed must not print hazard ratios or a separation row.
+  const COX_FAILED = {
+    ok: false, warnings: ['The hazard ratio model did not settle on an answer. Ask your statistician.'],
+    n: 200, nEvents: 100, nExcluded: 0, converged: false, iterations: 40,
+    logLik: null, lrTest: null, coefficients: COX_OK.coefficients
+  };
+  await setMock(KM_OK, LR_OK, COX_FAILED);
+  await click('[data-rmd-mc="ask-another"]');
+  await until(`!!document.querySelector('[data-rmd-mc-choice="survival"]')`, 3000);
+  await click('[data-rmd-mc-choice="survival"]');
+  await until(`!!document.querySelector('#rmdMcTime')`, 3000);
+  await click('[data-rmd-mc="run"]');
+  ok(await until(`!!document.querySelector('.rmd-mc-km')`, 8000), 'KM rendered for the failed Cox case');
+  ok(!(await ev(`!!document.querySelector('.rmd-mc-cox-sep')`)), 'a failed Cox fit prints no separation row');
+  ok(!(await ev(`!!document.querySelector('.rmd-mc-ph')`)), 'a failed Cox fit prints no proportional-hazards table');
+  const failedText = await text('.rmd-mc-result');
+  ok(!/HR 0\.588/.test(failedText), 'a failed Cox fit prints no hazard ratio');
+  ok(!/could not be estimated \(separation\)/.test(failedText), 'a failed Cox fit prints no separation sentence');
+  await shot('survival-phone-390-cox-failed');
+
   // 5. Real engine restored on the sample chart. Do not pin its numbers.
   await ev(`(()=>{const S=window.SMD_RESEARCH_STATS;S.kaplanMeier=window.__svOrig.km;S.logRank=window.__svOrig.lr;S.cox=window.__svOrig.cox;return 1})()`);
   await click('[data-rmd-mc="ask-another"]');
@@ -292,11 +312,11 @@ try {
   // 6. iPad layout, then privacy + responsive + dash + page-error sweeps.
   await viewport(1024, 1366, false);
   await sleep(200);
-  ok(await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`), 'no horizontal overflow at 1024px');
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), 'no horizontal overflow at 1024px');
   await shot('survival-ipad-1024');
   await viewport(390, 844, true);
   await sleep(200);
-  ok(await ev(`document.documentElement.scrollWidth <= window.innerWidth + 1`), 'no horizontal overflow at 390px');
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), 'no horizontal overflow at 390px');
   ok(await ev(`(()=>{const t=document.querySelector('.rmd-mc-screen').innerText||'';return /Next:/.test(t)})()`), 'a plain Next line is shown');
   const dashes = await ev(`(()=>{const t=document.querySelector('#researchMD').innerText||'';return (t.match(/[\\u2013\\u2014]/g)||[]).length})()`);
   ok(dashes === 0, 'no em or en dashes in ResearchMD visible text');
