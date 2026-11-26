@@ -1,20 +1,20 @@
 /* StewardMD - ResearchMD reporting checklist screen
  * (window.SMD_RESEARCH.screens.checklist). ES5 only, buildless. Phase 5B.1.
- * Tablet-first: manual entry is available at >= 768px. On a phone the screen
- * is view and approve only.
+ * Tablet-first. The right pane is the shared manuscript editor
+ * (research-doc-editor.js), prefilled from the saved manuscript, the thesis
+ * draft, or empty checklist headings. Item status follows the document text
+ * on iPad and iPhone; the researcher still approves and uploads the pack.
  *
- * ORCHESTRATOR WIRING (do not edit research.js or index.html from this package):
+ * ORCHESTRATOR WIRING:
  *
- * 1. index.html, with the other ResearchMD script tags, BEFORE research.js
- *    (after the research-screen-grade.js line):
+ * 1. index.html loads research-doc-editor.js before this screen:
  *
  *      <script src="/research-checklist.js?v=rmd4" defer></script>
- *      <script src="/research-submission.js?v=rmd4" defer></script>
- *      <script src="/research-screen-checklist.js?v=rmd4" defer></script>
+ *      <script src="/research-doc-editor.js?v=rmddoc1" defer></script>
+ *      <script src="/research-submission.js?v=rmd3" defer></script>
+ *      <script src="/research-screen-checklist.js?v=rmd11" defer></script>
  *
- * 2. research.js, renderShell() tabs array, add after ["grade", "GRADE"]:
- *
- *      ["checklist", "Checklist"]
+ * 2. research.js, renderShell() tabs array, has ["checklist", "Checklist"].
  *
  * The screen fills a guideline from the project snapshot. It does not send
  * a manuscript to a journal. The researcher uploads the pack.
@@ -48,9 +48,11 @@
     manual: {},
     filled: null,
     approved: false,
-    jump: null,
     csv: "",
-    ai: null,
+    doc: null,
+    docOutline: null,
+    itemSub: null,
+    docEditor: null,
     seq: 0
   };
   var lastContainer = null;
@@ -58,7 +60,12 @@
 
   function engine() { return G.SMD_RESEARCH_CHECKLIST; }
 
-  function isArr(v) { return Object.prototype.toString.call(v) === "[object Array]"; }
+  function closeDocEditor() {
+    if (st.docEditor && st.docEditor.destroy) {
+      try { st.docEditor.destroy(); } catch (e) {}
+    }
+    st.docEditor = null;
+  }
 
   function isPhone() {
     try {
@@ -95,26 +102,6 @@
     return data || {};
   }
 
-  function manuscriptSections() {
-    var ms = st.snapshot && st.snapshot.manuscript;
-    var raw, out, i, sec, paras, heading, p, list, text;
-    if (!ms) return [];
-    raw = isArr(ms) ? ms : (ms.sections || []);
-    out = [];
-    for (i = 0; i < raw.length; i++) {
-      sec = raw[i] || {};
-      heading = sec.heading || sec.title || ("Section " + (i + 1));
-      paras = isArr(sec.paragraphs) ? sec.paragraphs : [];
-      list = [];
-      for (p = 0; p < paras.length; p++) {
-        text = paras[p] == null ? "" : String(paras[p]).replace(/^\s+|\s+$/g, "");
-        if (text) list.push(text);
-      }
-      if (list.length) out.push({ heading: String(heading), paragraphs: list });
-    }
-    return out;
-  }
-
   function compute() {
     var src = st.snapshot || {};
     var snap = {};
@@ -127,6 +114,22 @@
       if (Object.prototype.hasOwnProperty.call(st.manual, key)) snap.manual[key] = st.manual[key];
     }
     st.filled = engine().fill(st.checklist, snap);
+    if (SMD_RESEARCH_DOC && SMD_RESEARCH_DOC.outlineFor) {
+      st.docOutline = SMD_RESEARCH_DOC.outlineFor(st.checklist);
+      st.itemSub = st.docOutline.itemSub;
+    } else {
+      st.docOutline = null;
+      st.itemSub = null;
+    }
+    var items = (st.filled && st.filled.items) || [];
+    var i, it;
+    for (i = 0; i < items.length; i++) {
+      it = items[i];
+      it._baseStatus = it.status;
+      it._baseFilled = it.filled;
+      it._baseEvidence = it.evidence;
+      it._doc = 0;
+    }
   }
 
   function failLoad(e) {
@@ -144,9 +147,11 @@
     st.errObj = null;
     st.approved = false;
     st.csv = "";
-    st.jump = null;
     st.filled = null;
-    st.ai = null;
+    st.doc = null;
+    st.docOutline = null;
+    st.itemSub = null;
+    closeDocEditor();
     if (lastContainer) paint(lastContainer);
     base = "/v1/projects/" + encodeURIComponent(pid);
     return Promise.all([
@@ -184,7 +189,10 @@
     st.filled = null;
     st.approved = false;
     st.csv = "";
-    st.jump = null;
+    st.doc = null;
+    st.docOutline = null;
+    st.itemSub = null;
+    closeDocEditor();
     if (lastContainer) paint(lastContainer);
     api("GET", "/v1/checklists").then(function (list) {
       var rows, id, i;
@@ -214,35 +222,6 @@
     }).catch(function (e) {
       if (seq !== st.seq) return;
       failLoad(e);
-    });
-  }
-
-  function saveManual(num) {
-    var box = null;
-    var nodes, i, text, pid, gid;
-    nodes = D.querySelectorAll("[data-rmd-manual]");
-    for (i = 0; i < nodes.length; i++) {
-      if (nodes[i].getAttribute("data-rmd-manual") === num) box = nodes[i];
-    }
-    text = box ? String(box.value || "") : "";
-    pid = st.projectId;
-    gid = st.guidelineId;
-    api("PUT", "/v1/projects/" + encodeURIComponent(pid) + "/checklist-manual/" + encodeURIComponent(gid), { num: num, text: text }).then(function (data) {
-      st.manual = (data && data.entries) ? data.entries : st.manual;
-      st.error = "";
-      st.errObj = null;
-      st.csv = "";
-      try {
-        compute();
-      } catch (err) {
-        st.error = (err && err.message) ? String(err.message) : "Could not fill the checklist.";
-        st.errObj = err || null;
-      }
-      if (lastContainer) paint(lastContainer);
-    }).catch(function (e) {
-      st.error = (e && e.message) ? String(e.message) : "Could not save the entry.";
-      st.errObj = e || null;
-      if (lastContainer) paint(lastContainer);
     });
   }
 
@@ -286,11 +265,11 @@
       "#researchMD .rmd-checklist-note, #researchMD .rmd-checklist-approved { margin: 0 0 12px; color: var(--rmd-mut, #93a4a8); font-size: 13px; }",
       "#researchMD .rmd-checklist-approved { color: var(--rmd-acc, #1b41bf); }",
       "#researchMD .rmd-checklist-banner { margin: 0 0 12px; padding: 10px 12px; border: 1px solid var(--rmd-bad, #ff7b6e); background: var(--rmd-bad-soft, #3a1714); border-radius: 8px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }",
-      "#researchMD .rmd-checklist-layout { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 16px; width: 100%; min-width: 0; }",
-      "#researchMD .rmd-checklist-items, #researchMD .rmd-checklist-manuscript { min-width: 0; overflow-wrap: anywhere; }",
+      "#researchMD .rmd-checklist-layout { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 16px; width: 100%; min-width: 0; align-items: start; }",
+      "#researchMD .rmd-checklist-items, #researchMD .rmd-checklist-doc { min-width: 0; overflow-wrap: anywhere; }",
       "#researchMD .rmd-checklist-section { margin: 0 0 16px; }",
-      "#researchMD .rmd-checklist-section h3, #researchMD .rmd-checklist-manuscript h3 { margin: 0 0 8px; font: 600 13px/1.3 var(--rmd-f, system-ui, sans-serif); color: var(--rmd-mut, #93a4a8); }",
-      "#researchMD .rmd-checklist-item { border: 1px solid var(--rmd-line, #e5ddce); background: var(--rmd-panel, #fffdf9); border-radius: 10px; padding: 12px; margin: 0 0 10px; min-width: 0; }",
+      "#researchMD .rmd-checklist-section h3 { margin: 0 0 8px; font: 600 13px/1.3 var(--rmd-f, system-ui, sans-serif); color: var(--rmd-mut, #93a4a8); }",
+      "#researchMD .rmd-checklist-item { border: 1px solid var(--rmd-line, #e5ddce); background: var(--rmd-panel, #fffdf9); border-radius: 10px; padding: 12px; margin: 0 0 10px; min-width: 0; cursor: pointer; touch-action: manipulation; }",
       "#researchMD .rmd-checklist-item-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin-bottom: 6px; }",
       "#researchMD .rmd-checklist-num { font: 600 12px/1 var(--rmd-mono, ui-monospace, monospace); color: var(--rmd-mut, #93a4a8); }",
       "#researchMD .rmd-checklist-item h4 { margin: 0; font: 600 15px/1.3 var(--rmd-f, system-ui, sans-serif); flex: 1 1 140px; min-width: 0; }",
@@ -303,10 +282,10 @@
       "#researchMD .rmd-checklist-req { color: var(--rmd-mut, #93a4a8); }",
       "#researchMD .rmd-checklist-evidence { margin: 0 0 8px; padding-left: 18px; color: var(--rmd-mut, #93a4a8); }",
       "#researchMD .rmd-checklist-evidence li { margin: 0 0 4px; overflow-wrap: anywhere; }",
-      "#researchMD .rmd-checklist-manuscript { border: 1px solid var(--rmd-line, #e5ddce); background: var(--rmd-bg, #f8f1e4); border-radius: 10px; padding: 12px; }",
-      "#researchMD .rmd-checklist-ms-section { margin: 0 0 14px; }",
-      "#researchMD .rmd-checklist-ms-p { margin: 0 0 8px; overflow-wrap: anywhere; }",
-      "#researchMD .rmd-checklist-jump { background: var(--rmd-acc-soft, #e4e9f8); border-radius: 6px; padding: 8px 10px; }",
+      "#researchMD .rmd-checklist-jump-btn { margin-top: 2px; min-height: 44px; }",
+      "@media (hover: hover) and (pointer: fine) {",
+      "  #researchMD .rmd-checklist-item:hover { border-color: var(--rmd-acc, #1b41bf); }",
+      "}",
       "#researchMD .rmd-checklist-empty { padding: 28px 8px; }",
       "#researchMD .rmd-checklist-empty h2 { margin: 0 0 8px; font: 600 18px/1.3 var(--rmd-f, system-ui, sans-serif); }",
       "#researchMD .rmd-checklist-empty p { margin: 0 0 14px; color: var(--rmd-mut, #93a4a8); }",
@@ -341,67 +320,43 @@
     return groups;
   }
 
-  function itemHtml(it, phone) {
+  function previewText(text, max) {
+    var t = String(text == null ? "" : text).replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
+    if (t.length > max) t = t.slice(0, max - 1).replace(/\s+\S*$/, "") + ".";
+    return t;
+  }
+
+  function itemHtml(it) {
     var h = [];
     var label = statusLabel(it.status);
-    var lines, i, shown, n;
+    var lines, i, shown, n, shownText;
+    shownText = it.filled ? previewText(it.filled, 280) : "Not recorded in the project.";
     h.push('<article class="rmd-checklist-item" data-rmd-item="' + esc(it.num) + '" data-rmd-field="' + esc(it.projectField) + '">');
     h.push('<div class="rmd-checklist-item-head">');
     h.push('<span class="rmd-checklist-num">' + esc(it.num) + '</span>');
     h.push('<h4>' + esc(it.topic || "Item") + '</h4>');
     h.push('<span class="rmd-checklist-badge rmd-checklist-badge-' + esc(it.status) + '" data-rmd-status="' + esc(it.status) + '">' + esc(label) + '</span>');
     h.push('</div>');
-    if (st.ai) h.push(SMD.ai.noteHtml(st.ai, it.num));
     h.push('<p class="rmd-checklist-req">' + esc(it.text) + '</p>');
-    h.push('<p class="rmd-checklist-filled">' + esc(it.filled ? it.filled : "Not recorded in the project.") + '</p>');
+    h.push('<p class="rmd-checklist-filled" data-rmd-filled>' + esc(shownText) + '</p>');
     lines = it.evidence || [];
     shown = 0;
     for (i = 0; i < lines.length; i++) {
       if (lines[i] && lines[i] !== it.filled) shown++;
     }
     if (shown) {
-      h.push('<ul class="rmd-checklist-evidence">');
+      h.push('<ul class="rmd-checklist-evidence" data-rmd-evidence>');
       for (i = 0; i < lines.length; i++) {
-        if (lines[i] && lines[i] !== it.filled) h.push('<li>' + esc(lines[i]) + '</li>');
+        if (lines[i] && lines[i] !== it.filled) h.push('<li>' + esc(previewText(lines[i], 220)) + '</li>');
       }
       h.push('</ul>');
     }
     if (it.pointer && it.pointer.section) {
       n = (it.pointer.paragraph || 0) + 1;
       h.push('<p class="rmd-checklist-pointer">Reported in ' + esc(it.pointer.section) + ', paragraph ' + n + '.</p>');
-      h.push('<button type="button" class="rmd-checklist-btn" data-rmd-pointer="' + esc(it.num) + '">Show in manuscript</button>');
     }
-    if (!phone && it.projectField === "manual") {
-      h.push('<form class="rmd-checklist-field" data-rmd-manual-form="' + esc(it.num) + '" action="" method="post">');
-      h.push('<label class="rmd-checklist-label" for="rmdManual_' + esc(it.num) + '">Your entry</label>');
-      h.push('<textarea id="rmdManual_' + esc(it.num) + '" name="entry" data-rmd-manual="' + esc(it.num) + '" enterkeyhint="done">' + esc(st.manual[it.num] || "") + '</textarea>');
-      h.push('<button type="submit" class="rmd-checklist-btn rmd-checklist-btn-primary" data-rmd-manual-save="' + esc(it.num) + '">Save entry</button>');
-      h.push('</form>');
-    }
+    h.push('<button type="button" class="rmd-checklist-btn rmd-checklist-jump-btn" data-rmd-jump="' + esc(it.num) + '">Edit in document</button>');
     h.push('</article>');
-    return h.join("");
-  }
-
-  function manuscriptHtml() {
-    var sections = manuscriptSections();
-    var h = [];
-    var i, p, sec, current;
-    h.push('<div class="rmd-checklist-manuscript" id="rmdChecklistManuscript">');
-    h.push('<h3>Manuscript</h3>');
-    if (!sections.length) {
-      h.push('<p class="rmd-checklist-note">No manuscript sections are stored on this project.</p>');
-    }
-    for (i = 0; i < sections.length; i++) {
-      sec = sections[i];
-      h.push('<section class="rmd-checklist-ms-section">');
-      h.push('<h3>' + esc(sec.heading) + '</h3>');
-      for (p = 0; p < sec.paragraphs.length; p++) {
-        current = st.jump && st.jump.section === sec.heading && st.jump.paragraph === p;
-        h.push('<p class="rmd-checklist-ms-p' + (current ? ' rmd-checklist-jump' : '') + '" data-rmd-ms-section="' + esc(sec.heading) + '" data-rmd-ms-p="' + p + '"' + (current ? ' data-rmd-ms-current="1"' : '') + '>' + esc(sec.paragraphs[p]) + '</p>');
-      }
-      h.push('</section>');
-    }
-    h.push('</div>');
     return h.join("");
   }
 
@@ -417,6 +372,9 @@
     var h = [];
     var counts, groups, i, items;
     if (!container) return;
+    if (st.docEditor && st.docEditor.getDoc) {
+      try { st.doc = st.docEditor.getDoc(); } catch (e) {}
+    }
     injectCss();
     h.push('<div class="rmd-checklist-screen">');
     h.push('<div class="rmd-checklist-wrap">');
@@ -440,9 +398,7 @@
       h.push('<button type="button" class="rmd-checklist-btn rmd-checklist-btn-primary" data-rmd-approve>Approve</button>');
     }
     h.push('</div></div>');
-    if (st.filled && !st.ai) st.ai = SMD.ai.state();
-    if (st.filled && st.ai) h.push(SMD.ai.barHtml(st.ai, { task: "checklist", label: "reporting checklist", cost: 2 }));
-    if (phone) h.push('<p class="rmd-checklist-note">On a phone this checklist is view and approve only. Enter manual items on a tablet.</p>');
+    if (phone) h.push('<p class="rmd-checklist-note">Tap an item to jump to that part of the document.</p>');
     if (st.approved) h.push('<p id="rmdChecklistApproved" class="rmd-checklist-approved">Approved on this device. You still upload the pack yourself.</p>');
     if (st.error) {
       if (SMD.p2 && SMD.p2.errHtml) {
@@ -456,7 +412,7 @@
     }
     if (st.filled) {
       counts = st.filled.counts || {};
-      h.push('<p class="rmd-checklist-counts" aria-live="polite">Filled ' + (counts.auto || 0) + '. Partial ' + (counts.partial || 0) + '. Manual ' + (counts.manual || 0) + '. Missing ' + (counts.missing || 0) + '.</p>');
+      h.push('<p class="rmd-checklist-counts" data-rmd-counts aria-live="polite">Filled ' + (counts.auto || 0) + '. Partial ' + (counts.partial || 0) + '. Manual ' + (counts.manual || 0) + '. Missing ' + (counts.missing || 0) + '.</p>');
       h.push('<div class="rmd-checklist-layout">');
       h.push('<div class="rmd-checklist-items">');
       items = st.filled.items || [];
@@ -466,11 +422,11 @@
         var j;
         h.push('<section class="rmd-checklist-section" data-rmd-section="' + esc(g.title) + '">');
         h.push('<h3>' + esc(g.title || "Section") + '</h3>');
-        for (j = 0; j < g.items.length; j++) h.push(itemHtml(g.items[j], phone));
+        for (j = 0; j < g.items.length; j++) h.push(itemHtml(g.items[j]));
         h.push('</section>');
       }
       h.push('</div>');
-      h.push(manuscriptHtml());
+      h.push('<div class="rmd-checklist-doc" id="rmdChecklistDoc"></div>');
       h.push('</div>');
     }
     if (st.filled && (st.filled.source || st.filled.licence)) {
@@ -485,6 +441,41 @@
     var pre = container.querySelector("#rmdChecklistCsv");
     if (pre) pre.textContent = st.csv || "";
     bind(container);
+    if (st.filled) mountDocEditor(container);
+  }
+
+  function isItemControl(el) {
+    var t = el && el.tagName ? el.tagName.toUpperCase() : "";
+    return t === "BUTTON" || t === "A" || t === "INPUT" || t === "TEXTAREA" || t === "SELECT" || t === "LABEL";
+  }
+
+  function jumpToItem(num) {
+    var sid = st.itemSub && st.itemSub[num];
+    if (sid && st.docEditor && st.docEditor.scrollToSub) {
+      st.docEditor.scrollToSub(sid);
+      return true;
+    }
+    return false;
+  }
+
+  function bindItemJumps(container) {
+    var cards = container.querySelectorAll("[data-rmd-item]");
+    var jumps = container.querySelectorAll("[data-rmd-jump]");
+    var i;
+    for (i = 0; i < cards.length; i++) {
+      cards[i].onclick = function (ev) {
+        var t = ev && ev.target;
+        if (isItemControl(t)) return;
+        if (t && t.closest && t.closest("button,a,input,textarea,select,label")) return;
+        jumpToItem(this.getAttribute("data-rmd-item"));
+      };
+    }
+    for (i = 0; i < jumps.length; i++) {
+      jumps[i].onclick = function (ev) {
+        if (ev && ev.stopPropagation) ev.stopPropagation();
+        jumpToItem(this.getAttribute("data-rmd-jump"));
+      };
+    }
   }
 
   function bind(container) {
@@ -492,9 +483,6 @@
     var exp = container.querySelector("[data-rmd-export]");
     var approve = container.querySelector("[data-rmd-approve]");
     var retry = container.querySelector('[data-rmd="retry"]');
-    var jumps = container.querySelectorAll("[data-rmd-pointer]");
-    var forms = container.querySelectorAll("[data-rmd-manual-form]");
-    var i;
     if (guide) {
       guide.onchange = function () {
         var seq = ++st.seq;
@@ -513,73 +501,146 @@
         if (st.projectId) loadAll(st.projectId);
       };
     }
-    for (i = 0; i < jumps.length; i++) {
-      jumps[i].onclick = function () {
-        var num = this.getAttribute("data-rmd-pointer");
-        var items = (st.filled && st.filled.items) || [];
-        var n, el;
-        for (n = 0; n < items.length; n++) {
-          if (items[n].num === num && items[n].pointer) {
-            st.jump = { section: items[n].pointer.section, paragraph: items[n].pointer.paragraph };
-            break;
-          }
+    bindItemJumps(container);
+  }
+
+  function mountDocEditor(container) {
+    var host = container.querySelector("#rmdChecklistDoc");
+    if (!host) return;
+    if (!SMD_RESEARCH_DOC || typeof SMD_RESEARCH_DOC.render !== "function" || !st.docOutline) {
+      host.innerHTML = '<div class="rmd-checklist-banner" role="alert"><strong>The document editor did not load.</strong><span>Update the app and reopen ResearchMD.</span></div>';
+      return;
+    }
+    var proj = activeProject();
+    var apiPid = (proj && (proj.serverId || proj.id)) || st.projectId;
+    if (st.docEditor && st.docEditor.destroy) {
+      try { st.docEditor.destroy(); } catch (e) {}
+    }
+    st.docEditor = SMD_RESEARCH_DOC.render(host, {
+      outline: st.docOutline,
+      saved: st.doc,
+      sources: (st.snapshot && st.snapshot.manuscript) || null,
+      pid: st.projectId,
+      apiPid: apiPid,
+      thesisPid: apiPid,
+      project: proj,
+      projectTitle: proj && proj.title,
+      onChange: function (doc) { syncDocStatuses(doc); }
+    });
+    if (st.docEditor) {
+      st.doc = st.docEditor.getDoc();
+      syncDocStatuses(st.doc);
+    }
+  }
+
+  function updateCountsDom() {
+    var root = lastContainer || D;
+    var items = (st.filled && st.filled.items) || [];
+    var counts = { auto: 0, partial: 0, manual: 0, missing: 0, total: items.length };
+    var i, it, el;
+    for (i = 0; i < items.length; i++) {
+      it = items[i];
+      if (counts[it.status] == null) counts.missing++;
+      else counts[it.status]++;
+    }
+    if (st.filled) st.filled.counts = counts;
+    el = root.querySelector("[data-rmd-counts]");
+    if (el) {
+      el.textContent = "Filled " + counts.auto + ". Partial " + counts.partial + ". Manual " + counts.manual + ". Missing " + counts.missing + ".";
+    }
+  }
+
+  function updateItemsDom(items) {
+    var root = lastContainer || D;
+    var cards = root.querySelectorAll("[data-rmd-item]");
+    var map = {};
+    var i, it, card, badge, filled, num;
+    for (i = 0; i < cards.length; i++) map[cards[i].getAttribute("data-rmd-item")] = cards[i];
+    for (i = 0; i < items.length; i++) {
+      it = items[i];
+      num = String(it.num);
+      card = map[num];
+      if (!card) continue;
+      badge = card.querySelector("[data-rmd-status]");
+      if (badge) {
+        badge.className = "rmd-checklist-badge rmd-checklist-badge-" + it.status;
+        badge.setAttribute("data-rmd-status", it.status);
+        badge.textContent = statusLabel(it.status);
+      }
+      filled = card.querySelector("[data-rmd-filled]");
+      if (filled) {
+        filled.textContent = it.filled ? previewText(it.filled, 280) : "Not recorded in the project.";
+      }
+      var evidence = card.querySelector("[data-rmd-evidence]");
+      var lines = it.evidence || [];
+      var shown = 0;
+      var j;
+      for (j = 0; j < lines.length; j++) {
+        if (lines[j] && lines[j] !== it.filled) shown++;
+      }
+      if (!shown) {
+        if (evidence && evidence.parentNode) evidence.parentNode.removeChild(evidence);
+      } else {
+        if (!evidence) {
+          evidence = D.createElement("ul");
+          evidence.className = "rmd-checklist-evidence";
+          evidence.setAttribute("data-rmd-evidence", "");
+          if (filled && filled.parentNode) filled.parentNode.insertBefore(evidence, filled.nextSibling);
         }
-        paint(lastContainer);
-        el = D.querySelector('[data-rmd-ms-current="1"]');
-        if (el && el.scrollIntoView) {
-          try { el.scrollIntoView({ block: "nearest" }); } catch (e) { el.scrollIntoView(); }
+        while (evidence.firstChild) evidence.removeChild(evidence.firstChild);
+        for (j = 0; j < lines.length; j++) {
+          if (!lines[j] || lines[j] === it.filled) continue;
+          var li = D.createElement("li");
+          li.textContent = previewText(lines[j], 220);
+          evidence.appendChild(li);
         }
-      };
+      }
     }
-    for (i = 0; i < forms.length; i++) {
-      forms[i].onsubmit = function (ev) {
-        if (ev && ev.preventDefault) ev.preventDefault();
-        saveManual(this.getAttribute("data-rmd-manual-form"));
-        return false;
-      };
+  }
+
+  function syncDocStatuses(doc) {
+    if (!st.filled || !SMD_RESEARCH_DOC) return;
+    if (doc) st.doc = doc;
+    var d = st.doc;
+    if (!d || !d.sections) return;
+    var bySub = {};
+    var i, j, sec, sub, text, words, items, it, sid, row, mapped, before;
+    for (i = 0; i < d.sections.length; i++) {
+      sec = d.sections[i];
+      for (j = 0; j < sec.subheadings.length; j++) {
+        sub = sec.subheadings[j];
+        text = SMD_RESEARCH_DOC.htmlToText(sub.html);
+        words = SMD_RESEARCH_DOC.countWords(text);
+        bySub[sub.id] = { text: text, words: words };
+      }
     }
-    var manuals = container.querySelectorAll("[data-rmd-manual]");
-    for (i = 0; i < manuals.length; i++) {
-      manuals[i].oninput = function () { SMD.ai.clearNote(st.ai, this.getAttribute("data-rmd-manual")); };
+    items = st.filled.items || [];
+    for (i = 0; i < items.length; i++) {
+      it = items[i];
+      sid = st.itemSub ? st.itemSub[it.num] : "";
+      if (!sid || !bySub[sid]) continue;
+      row = bySub[sid];
+      if (row.words > 0) {
+        mapped = SMD_RESEARCH_DOC.statusForWords(row.words) === "filled" ? "auto" : "partial";
+        before = it.status;
+        if (it.status !== "auto") {
+          if (mapped === "auto") it.status = "auto";
+          else if (it.status === "missing") it.status = "partial";
+        }
+        it.filled = row.text;
+        it.evidence = [];
+        it._doc = 1;
+        if (before !== it.status) st.csv = "";
+      } else if (it._doc) {
+        it.status = it._baseStatus;
+        it.filled = it._baseFilled;
+        it.evidence = it._baseEvidence;
+        it._doc = 0;
+        st.csv = "";
+      }
     }
-    if (st.ai) {
-      SMD.ai.bind(container, st.ai, {
-        pid: st.projectId, task: "checklist", label: "reporting checklist", cost: 2,
-        input: function () {
-          var items = (st.filled && st.filled.items) || [];
-          var slim = [];
-          for (var k = 0; k < items.length; k++) {
-            slim.push({ num: items[k].num, topic: items[k].topic, text: items[k].text, projectField: items[k].projectField, status: items[k].status });
-          }
-          return { guideline: st.guidelineId, items: slim, snapshot: st.snapshot || {} };
-        },
-        apply: function (draft) {
-          var d = draft || {};
-          var items = d.items || [];
-          var filledItems = (st.filled && st.filled.items) || [];
-          var byNum = {};
-          var k, it, target, text;
-          for (k = 0; k < filledItems.length; k++) byNum[filledItems[k].num] = filledItems[k];
-          var keys = [];
-          for (k = 0; k < items.length; k++) {
-            it = items[k];
-            var num = it && (it.num || it.itemNum);
-            if (!num) continue;
-            target = byNum[num];
-            if (!target || target.projectField !== "manual") continue;
-            text = typeof it.text === "string" ? it.text : (it.status === "covered" && it.section ? "Reported in the " + it.section + " section." : "");
-            if (!text) continue;
-            st.manual[num] = text;
-            keys.push(num);
-          }
-          if (keys.length) {
-            try { compute(); } catch (e) {}
-          }
-          return keys;
-        },
-        render: function () { paint(lastContainer); }
-      });
-    }
+    updateCountsDom();
+    updateItemsDom(items);
   }
 
   function bindBreakpoint() {
