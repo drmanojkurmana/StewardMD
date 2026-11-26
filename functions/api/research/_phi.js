@@ -80,9 +80,16 @@ const NAME_BIGRAM = "\\b[A-Z][a-z]{1,20}\\s+[A-Z][a-z]{1,20}(?:\\s+[A-Z][a-z]{1,
 const BIRTH_LABEL = "\\b(?:DOB|date of birth|born on|birth date)\\b";
 const ADMISSION_LABEL = "\\b(?:admitted on|admission date|discharged on)\\b";
 const STREET = "(?:road|street|nagar|colony|lane|avenue|apt|flat)";
-/* House label followed by a number: "H.No 12-3-45", "Flat 302", "#14". */
-const HOUSE = "(?:\\b(?:H\\.?\\s?No\\.?|House\\s+No\\.?|Flat|Door\\s+No\\.?|D\\.?\\s?No\\.?)" +
-  "[\\s:.#-]*\\d[A-Za-z0-9/-]*|#\\s*\\d[A-Za-z0-9/-]*)";
+/* House label plus number, then a comma and a locality word: "H.No 12-3-45,
+ * Ameerpet", "#14, 2nd Cross". A bare label plus number ("Table #14",
+ * "Flat 5 patients") stays allowed. "Flat" must start with a capital F; the
+ * other labels keep the old case-insensitive forms by spelling both cases.
+ * The locality must start with a capital letter or a digit ordinal. */
+const HOUSE = "(?:\\b(?:" +
+  "[Hh]\\.?\\s?[Nn][Oo]\\.?|[Hh]\\s+[Nn][Oo]\\.?|[Hh][Oo][Uu][Ss][Ee]\\s+[Nn][Oo]\\.?" +
+  "|[Dd][Oo][Oo][Rr]\\s+[Nn][Oo]\\.?|[Dd]\\.?\\s?[Nn][Oo]\\.?|F[Ll][Aa][Tt](?:\\s+[Nn][Oo]\\.?)?" +
+  ")[\\s:.#-]*\\d[A-Za-z0-9/-]*|#\\s*\\d[A-Za-z0-9/-]*)" +
+  ",\\s*(?:[A-Z][A-Za-z]*|\\d+(?:st|nd|rd|th)\\b)";
 
 const WINDOW = 40; /* chars, per phi-gate.md */
 
@@ -146,7 +153,7 @@ const RULES = [
     (m, text) => near(text, m.index, m.index + m[0].length, BIRTH_RE)],
   ["address", "street_number",
     new RegExp("\\b\\d{1,5}[A-Za-z]?\\s+(?:[A-Za-z]+\\s+){0,3}" + STREET + "\\b", "gi"), null],
-  ["address", "house_locality", new RegExp(HOUSE, "gi"), null],
+  ["address", "house_locality", new RegExp(HOUSE, "g"), null],
   ["address", "pin_with_label",
     /\b(?:PIN\s*code|PIN|postal\s+code|zip\s*code)\D{0,10}(\d{6})\b/gi, null],
   ["patient_name", "name_near_patient_label", new RegExp(NAME_BIGRAM, "g"),

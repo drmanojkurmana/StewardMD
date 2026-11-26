@@ -28,7 +28,7 @@ the hit categories (never the matched text) are logged.
 | Email | standard addr-spec regex |
 | Any day-level date | full date in a common format (`12/03/2021`, `2024-03-12`, `12 March 2024`, `March 12, 2024`) anywhere in the text, with or without a label. Month-year (`Jan 2023`) and bare years stay allowed |
 | Exact date of birth | full date (any common format) within 40 chars of `DOB`, `date of birth`, `born on`, `birth date` |
-| Address | street number plus street token (`road`, `street`, `nagar`, `colony`, `lane`, `avenue`, `apt`, `flat`) within one line, a house label plus number (`H.No`, `House No`, `Flat`, `Door No`, `D.No`, `#`), or a 6-digit PIN code with an address label |
+| Address | street number plus street token (`road`, `street`, `nagar`, `colony`, `lane`, `avenue`, `apt`, `flat`) within one line, a house label plus number immediately followed by a comma and a locality (`H.No 12-3-45, Ameerpet`, `#14, 2nd Cross`; a bare `#14` or `Flat 5` stays allowed), or a 6-digit PIN code with an address label |
 | Admission date tied to a person | full date within 40 chars of `admitted on`, `admission date`, `discharged on` AND a patient label in the same sentence |
 
 Checksum validators run first and gate the regex hits: a 12-digit number that

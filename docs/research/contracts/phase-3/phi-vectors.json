@@ -868,6 +868,41 @@
       "expect": "allow",
       "category": "trial_id",
       "note": "trial registration in context"
+    },
+    {
+      "id": "clean-house-001",
+      "text": "Table #14 shows",
+      "expect": "allow",
+      "category": "house_label",
+      "note": "bare hash number, no locality"
+    },
+    {
+      "id": "clean-house-002",
+      "text": "the #1 cause of death",
+      "expect": "allow",
+      "category": "house_label",
+      "note": "bare hash number, no locality"
+    },
+    {
+      "id": "clean-house-003",
+      "text": "a flat 20 mg dose",
+      "expect": "allow",
+      "category": "house_label",
+      "note": "lowercase flat is not a house label"
+    },
+    {
+      "id": "clean-house-004",
+      "text": "flat 10% reduction",
+      "expect": "allow",
+      "category": "house_label",
+      "note": "lowercase flat is not a house label"
+    },
+    {
+      "id": "clean-house-005",
+      "text": "Flat 5 patients",
+      "expect": "allow",
+      "category": "house_label",
+      "note": "capital Flat but no locality"
     }
   ]
 }

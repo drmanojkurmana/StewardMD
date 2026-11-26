@@ -91,11 +91,17 @@ _NAME_BIGRAM = r"\b[A-Z][a-z]{1,20}\s+[A-Z][a-z]{1,20}(?:\s+[A-Z][a-z]{1,20})?\b
 _BIRTH_LABEL = r"\b(?:DOB|date of birth|born on|birth date)\b"
 _ADMISSION_LABEL = r"\b(?:admitted on|admission date|discharged on)\b"
 _STREET = r"(?:road|street|nagar|colony|lane|avenue|apt|flat)"
-# House label followed by a number: "H.No 12-3-45", "Flat 302", "#14".
+# House label plus number, then a comma and a locality word: "H.No 12-3-45,
+# Ameerpet", "#14, 2nd Cross". A bare label plus number ("Table #14",
+# "Flat 5 patients") stays allowed. "Flat" must start with a capital F; the
+# other labels keep the old case-insensitive forms by spelling both cases.
+# The locality must start with a capital letter or a digit ordinal.
 _HOUSE = (
-    r"(?:\b(?:H\.?\s?No\.?|House\s+No\.?|Flat|Door\s+No\.?|D\.?\s?No\.?)"
-    r"[\s:.#-]*\d[A-Za-z0-9/-]*"
-    r"|#\s*\d[A-Za-z0-9/-]*)"
+    r"(?:\b(?:"
+    r"[Hh]\.?\s?[Nn][Oo]\.?|[Hh]\s+[Nn][Oo]\.?|[Hh][Oo][Uu][Ss][Ee]\s+[Nn][Oo]\."
+    r"|[Dd][Oo][Oo][Rr]\s+[Nn][Oo]\.?|[Dd]\.?\s?[Nn][Oo]\.?|F[Ll][Aa][Tt](?:\s+[Nn][Oo]\.?)?"
+    r")[\s:.#-]*\d[A-Za-z0-9/-]*|#\s*\d[A-Za-z0-9/-]*)"
+    r",\s*(?:[A-Z][A-Za-z]*|\d+(?:st|nd|rd|th)\b)"
 )
 
 _RULES = [
@@ -135,7 +141,7 @@ _RULES = [
     ("address", "street_number", re.compile(
         rf"\b\d{{1,5}}[A-Za-z]?\s+(?:[A-Za-z]+\s+){{0,3}}{_STREET}\b",
         re.IGNORECASE), None),
-    ("address", "house_locality", re.compile(_HOUSE, re.IGNORECASE), None),
+    ("address", "house_locality", re.compile(_HOUSE), None),
     ("address", "pin_with_label", re.compile(
         r"\b(?:PIN\s*code|PIN|postal\s+code|zip\s*code)\D{0,10}(\d{6})\b",
         re.IGNORECASE), None),

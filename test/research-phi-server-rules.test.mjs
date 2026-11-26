@@ -199,12 +199,20 @@ describe("scan: new deterministic rules", () => {
     }
   });
 
-  test("house label plus number blocks", () => {
+  test("house label plus number blocks only when a locality follows", () => {
     for (const text of ["H.No 12-3-45, Ameerpet", "House No. 221B, Banjara Hills", "#14, 2nd Cross, Indiranagar",
       "Flat 302, Sai Residency", "Door No 5-9-22, Himayatnagar", "D.No 7-1-88, Ameerpet"]) {
       const r = scan(text);
       assert.equal(r.blocked, true, "must block: " + text);
       assert.ok(r.hits.some((h) => h.category === "address"), "address category: " + text);
+    }
+  });
+
+  test("bare house labels and lowercase flat stay allowed", () => {
+    for (const text of ["Table #14 shows", "the #1 cause of death", "a flat 20 mg dose",
+      "flat 10% reduction", "Flat 5 patients"]) {
+      const r = scan(text);
+      assert.equal(r.blocked, false, "must pass: " + text + " hits " + JSON.stringify(r.hits));
     }
   });
 
