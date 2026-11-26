@@ -387,7 +387,13 @@ try {
   ok(await ev(`return !document.getElementById("smdApplock");`) === true, "just signed in, boot splash still up: the chooser WAITS");
   await ev(`var s=document.getElementById("smdBootSplash"); if (s) s.parentNode.removeChild(s); return 1;`);
   await sleep(900);
-  ok(await ev(`return !!document.querySelector('#smdApplock [data-m="pin"]');`) === true, "screen free: the forced chooser is up");
+  /* Onboarding order 3B (owner 2026-11-27): the chooser waits for the first screen, not just the splash. */
+  ok(await ev(`return !document.getElementById("smdApplock");`) === true, "splash gone but first screen not up yet: the chooser still WAITS");
+  await ev(`["accountGate","introPoster","verifyGate","splash"].forEach(function(id){var g=document.getElementById(id); if(g) g.style.display="none";});
+    var h=document.getElementById("homeV2"); if(!h){h=document.createElement("div");h.id="homeV2";h.style.cssText="position:fixed;inset:0";document.body.appendChild(h);} h.classList.add("on"); h.style.display="block"; return 1;`);
+  let chooserUp = false;
+  for (let i = 0; i < 25 && !chooserUp; i++) { await sleep(200); chooserUp = await ev(`return !!document.querySelector('#smdApplock [data-m="pin"]');`) === true; }
+  ok(chooserUp, "first screen up: the forced chooser is up");
   ok(await ev(`return !!document.getElementById("salKeep");`) === true, "...and it can be skipped (the lock is optional)");
   okv(await ev(`return window.SMD_APPLOCK.isOn();`), false, "...even though the rollout flag is off (forcing is not flag-gated)");
   await ev(`window.SMD_ACCOUNT._emit(); window.SMD_ACCOUNT._emit(); return 1;`);
