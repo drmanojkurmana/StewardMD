@@ -66,11 +66,12 @@ export function nhsMod11Valid(digits) {
 const MONTH = "(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*";
 /* Full day-level dates in common formats. Month-year and bare years are NOT
  * full dates (allowed: enrolment periods, study dates). */
+/* Digit guards keep a date out of longer id runs (CTRI/2020/01/023456). */
 const FULL_DATE =
-  "(?:\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}" +
+  "(?<!\\d)(?:\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}" +
   "|\\d{4}-\\d{1,2}-\\d{1,2}" +
   "|\\d{1,2}\\s+" + MONTH + "\\s+\\d{2,4}" +
-  "|" + MONTH + "\\s+\\d{1,2},?\\s+\\d{4})";
+  "|" + MONTH + "\\s+\\d{1,2},?\\s+\\d{4})(?!\\d)";
 
 const PATIENT_LABEL =
   "\\b(?:patient|patients|Mr\\.|Mrs\\.|Ms\\.|admitted|discharged|diagnosed" +
@@ -79,6 +80,16 @@ const NAME_BIGRAM = "\\b[A-Z][a-z]{1,20}\\s+[A-Z][a-z]{1,20}(?:\\s+[A-Z][a-z]{1,
 const BIRTH_LABEL = "\\b(?:DOB|date of birth|born on|birth date)\\b";
 const ADMISSION_LABEL = "\\b(?:admitted on|admission date|discharged on)\\b";
 const STREET = "(?:road|street|nagar|colony|lane|avenue|apt|flat)";
+/* House label plus number, then a comma and a locality word: "H.No 12-3-45,
+ * Ameerpet", "#14, 2nd Cross". A bare label plus number ("Table #14",
+ * "Flat 5 patients") stays allowed. "Flat" must start with a capital F; the
+ * other labels keep the old case-insensitive forms by spelling both cases.
+ * The locality must start with a capital letter or a digit ordinal. */
+const HOUSE = "(?:\\b(?:" +
+  "[Hh]\\.?\\s?[Nn][Oo]\\.?|[Hh]\\s+[Nn][Oo]\\.?|[Hh][Oo][Uu][Ss][Ee]\\s+[Nn][Oo]\\.?" +
+  "|[Dd][Oo][Oo][Rr]\\s+[Nn][Oo]\\.?|[Dd]\\.?\\s?[Nn][Oo]\\.?|F[Ll][Aa][Tt](?:\\s+[Nn][Oo]\\.?)?" +
+  ")[\\s:.#-]*\\d[A-Za-z0-9/-]*|#\\s*\\d[A-Za-z0-9/-]*)" +
+  ",\\s*(?:[A-Z][A-Za-z]*|\\d+(?:st|nd|rd|th)\\b)";
 
 const WINDOW = 40; /* chars, per phi-gate.md */
 
@@ -114,6 +125,14 @@ const RULES = [
   ["aadhaar", "verhoeff_12",
     /(?<!\d)\d{4}[ -]?\d{4}[ -]?\d{4}(?!\d)/g,
     (m) => verhoeffValid(m[0].replace(/[ -]/g, ""))],
+  /* ABHA address (client rule, phi-india.js) and 2-4-4-4 number forms.
+   * Unbroken 14 digits count only when labelled ABHA. */
+  ["abha", "addr",
+    /\b[A-Za-z0-9._-]{2,}@(?:abdm|sbx)\b/gi, null],
+  ["abha", "number_14",
+    /(?<!\d)\d{2}[ -]\d{4}[ -]\d{4}[ -]\d{4}(?!\d)/g, null],
+  ["abha", "labelled_number",
+    /\bABHA(?:\s*(?:No\.?|Number|ID))?\b[\s:.#-]*(\d{14})(?!\d)/gi, null],
   ["ssn", "area_group_serial",
     /(?<!\d)(?!000|666|9\d\d)\d{3}-(?!00)\d{2}-(?!0000)\d{4}(?!\d)/g, null],
   ["nhs", "mod11_10", /(?<!\d)\d{10}(?!\d)/g, (m) => nhsMod11Valid(m[0])],
@@ -121,12 +140,20 @@ const RULES = [
   /* "/" in the lookbehind keeps DOI suffixes (10.1234/6123456789) out. */
   ["phone", "indian_mobile",
     /(?<![\w./])(?:\+91[ -]?|0)?[6-9]\d{9}(?![\dA-Za-z])/g, null],
+  /* Spaced mobile: "98765 43210". Same guards as indian_mobile. The optional
+   * separator also matches the unspaced form; scan() dedupes identical spans. */
+  ["phone", "indian_mobile_spaced",
+    /(?<![\w./])(?:\+91[ -]?|0)?[6-9]\d{4}[ -]?\d{5}(?![\dA-Za-z])/g, null],
   ["email", "addr_spec",
     /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, null],
+  /* Any day-level date blocks on its own. Month-year and bare years stay
+   * allowed (enrolment periods, study dates). */
+  ["dates", "full_date", new RegExp(FULL_DATE, "gi"), null],
   ["dob", "date_near_birth_label", new RegExp(FULL_DATE, "gi"),
     (m, text) => near(text, m.index, m.index + m[0].length, BIRTH_RE)],
   ["address", "street_number",
     new RegExp("\\b\\d{1,5}[A-Za-z]?\\s+(?:[A-Za-z]+\\s+){0,3}" + STREET + "\\b", "gi"), null],
+  ["address", "house_locality", new RegExp(HOUSE, "g"), null],
   ["address", "pin_with_label",
     /\b(?:PIN\s*code|PIN|postal\s+code|zip\s*code)\D{0,10}(\d{6})\b/gi, null],
   ["patient_name", "name_near_patient_label", new RegExp(NAME_BIGRAM, "g"),
@@ -139,12 +166,17 @@ const RULES = [
 export function scan(text) {
   const s = String(text == null ? "" : text);
   const hits = [];
+  const seen = new Set();
   for (const [category, rule, pattern, validator] of RULES) {
     pattern.lastIndex = 0;
     let m;
     while ((m = pattern.exec(s)) !== null) {
       if (m[0].length === 0) { pattern.lastIndex++; continue; }
       if (validator && !validator(m, s)) continue;
+      /* indian_mobile and indian_mobile_spaced overlap on the unspaced form. */
+      const key = category + ":" + m.index + ":" + (m.index + m[0].length);
+      if (seen.has(key)) continue;
+      seen.add(key);
       hits.push({ category, rule, start: m.index, end: m.index + m[0].length });
     }
   }
