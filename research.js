@@ -26,16 +26,25 @@
   }
   SMD.esc = esc;
 
+  /* Native CapacitorHttp plugin reference when available. */
+  function capHttp() {
+    return (G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.CapacitorHttp) || G.CapacitorHttp || null;
+  }
+
   /* Phase 2 API client: calls stewardmd.in/api/research/v1 per the frozen
    * contracts (docs/research/contracts/phase-2). Firebase ID token from
    * SMD_AUTH when present; errors normalize to {code, status, current}. */
-  function apiRequest(method, path, body) {
+  function apiRequest(method, path, body, options) {
     var headers = { "Accept": "application/json" };
     var opts = { method: method, headers: headers };
     if (body !== undefined && body !== null) {
       headers["Content-Type"] = "application/json";
       opts.body = JSON.stringify(body);
     }
+    var timeoutMs = (options && options.timeout) || (path && path.indexOf("/ai-draft") !== -1 ? 90000 : 30000);
+    opts.timeout = timeoutMs;
+    opts.readTimeout = timeoutMs;
+
     var tokenP;
     try {
       var u = G.SMD_AUTH && G.SMD_AUTH.currentUser;
@@ -43,24 +52,64 @@
     } catch (e) { tokenP = Promise.resolve(null); }
     return Promise.resolve(tokenP).then(function (token) {
       if (token) headers["Authorization"] = "Bearer " + token;
-      return G.fetch("/api/research" + path, opts);
-    }).then(function (res) {
-      return res.text().then(function (txt) {
-        var data = null;
-        try { data = txt ? JSON.parse(txt) : null; } catch (e) {}
-        if (!res.ok) {
-          var env = (data && data.error) || {};
-          var err = new Error(env.message || ("Request failed (HTTP " + res.status + "). Retry, or check the project role."));
-          err.status = res.status;
-          err.code = env.code || ("http_" + res.status);
-          err.current = data && data.current;
-          err.body = data;
-          err.requestId = env.requestId;
-          throw err;
-        }
-        return data || {};
+      var Http = capHttp();
+      if (Http && typeof Http.request === "function") {
+        headers["X-SMD-App"] = "smdapp_ddc578ad04b399a332e53e04706433d96803e91c2d373b7d";
+        var baseOrigin = G.SMD_API_BASE || (G.location && G.location.origin) || "";
+        var reqOpts = {
+          url: baseOrigin + "/api/research" + path,
+          method: (method || "GET").toUpperCase(),
+          headers: headers,
+          data: (body !== undefined && body !== null) ? body : undefined,
+          connectTimeout: 30000,
+          readTimeout: timeoutMs
+        };
+        return Http.request(reqOpts).then(function (res) {
+          var data = res && res.data;
+          if (typeof data === "string") {
+            try { data = JSON.parse(data); } catch (ex) {}
+          }
+          var statusCode = (res && res.status) || 200;
+          if (statusCode >= 400 || statusCode === 0) {
+            var env = (data && data.error) || {};
+            var err = new Error(env.message || ("Request failed (HTTP " + statusCode + "). Retry, or check the project role."));
+            err.status = statusCode;
+            err.code = env.code || ("http_" + statusCode);
+            err.current = data && data.current;
+            err.body = data;
+            err.requestId = env.requestId;
+            throw err;
+          }
+          return data || {};
+        });
+      }
+      return G.fetch("/api/research" + path, opts).then(function (res) {
+        return res.text().then(function (txt) {
+          var data = null;
+          try { data = txt ? JSON.parse(txt) : null; } catch (e) {}
+          if (!res.ok) {
+            var env = (data && data.error) || {};
+            var err = new Error(env.message || ("Request failed (HTTP " + res.status + "). Retry, or check the project role."));
+            err.status = res.status;
+            err.code = env.code || ("http_" + res.status);
+            err.current = data && data.current;
+            err.body = data;
+            err.requestId = env.requestId;
+            throw err;
+          }
+          return data || {};
+        });
       });
     }).catch(function (e) {
+      var msg = String((e && (e.message || e.errorMessage || e.code)) || "");
+      var isTout = (e && (e.code === "timeout" || e.code === "SocketTimeoutException" || e.code === "http_504" || e.code === "http_408" || e.status === 504 || e.status === 408)) ||
+        /SocketTimeoutException|timed?\s*out|ETIMEDOUT/i.test(msg) || (e && (e.name === "TimeoutError" || e.name === "AbortError"));
+      if (isTout) {
+        var tout = new Error("MaiK is taking longer than usual. Try again.");
+        tout.code = "timeout";
+        tout.status = 408;
+        throw tout;
+      }
       if (e && e.code) throw e;
       var net = new Error("Cannot reach the research service. Check the connection and retry.");
       net.code = "network";
@@ -122,6 +171,9 @@
       status = parseInt(String(code).slice(5), 10) || 0;
     }
     if (!code && !status) {
+      if (/SocketTimeoutException|timed?\s*out|ETIMEDOUT/i.test(String(e.message || ""))) {
+        return { message: "MaiK is taking longer than usual. Try again.", action: "retry", actionLabel: "Try again" };
+      }
       return { message: e.message || "Something went wrong on our side.", action: "retry", actionLabel: "Try again" };
     }
     if (code === "link_unrecognised") {
@@ -203,6 +255,12 @@
     }
     if (code === "invalid_multipart" || code === "missing_file" || code === "file_type") {
       return { message: e.message || "The uploaded file could not be processed. Try a selectable-text PDF or Word (.docx) file.", action: "retry", actionLabel: "Try again" };
+    }
+    var isTimeout = code === "timeout" || code === "timed_out" || code === "SocketTimeoutException" ||
+      code === "http_504" || code === "http_408" || status === 504 || status === 408 ||
+      /SocketTimeoutException|timed?\s*out|ETIMEDOUT/i.test(String(code + " " + (e.message || "")));
+    if (isTimeout) {
+      return { message: "MaiK is taking longer than usual. Try again.", action: "retry", actionLabel: "Try again" };
     }
     if (code === "network" || status === 0 || status >= 500) {
       return { message: "No connection right now. Your work is saved; try again in a moment.", action: "retry", actionLabel: "Try again" };
@@ -406,7 +464,7 @@
         } else {
           var body = { task: o.task };
           if (o.input) body.input = o.input();
-          run = SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(o.pid) + "/ai-draft", body);
+          run = SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(o.pid) + "/ai-draft", body, { timeout: 90000 });
         }
         Promise.resolve(run).then(function (res) {
           st.busy = false;
@@ -561,18 +619,36 @@
       "  #researchMD .rmd-shell-top { grid-template-columns: minmax(0, 1fr) auto; gap: 6px; padding-left: 10px; padding-right: 10px; }",
       "  #researchMD .rmd-shell-brand { gap: 6px; }",
       "  #researchMD .rmd-shell-right { gap: 5px; }",
-      "  #researchMD .rmd-sync-pill { padding: 3px 7px; font-size: 10.5px; }",
+      "  #researchMD .rmd-sync-pill { padding: 4px 10px; font-size: 11px; min-height: 48px; min-width: 48px; }",
       "  #researchMD .rmd-shell-close { width: 34px; height: 34px; }",
       "  #researchMD .rmd-shell-center { display: none; }",
       "  #researchMD .rmd-shell-right .rmd-head-rstu-btn { display: inline-flex; height: 32px; min-height: 32px; padding: 0 9px; font-size: 11.5px; }",
       "}",
       "#researchMD .rmd-sync-pill {",
-      "  font: 600 11.5px var(--rmd-f); border-radius: 999px; padding: 3px 9px;",
-      "  display: inline-flex; align-items: center; gap: 5px; text-transform: uppercase; letter-spacing: 0.04em;",
+      "  font: 500 12px/1.3 var(--rmd-f); border-radius: 999px; padding: 6px 12px;",
+      "  min-height: 48px; min-width: 48px; border: 0; cursor: pointer; box-sizing: border-box;",
+      "  display: inline-flex; align-items: center; justify-content: center; gap: 6px;",
+      "  letter-spacing: normal; text-transform: none; touch-action: manipulation;",
       "}",
+      "#researchMD .rmd-sync-pill:focus-visible { outline: 2px solid var(--rmd-acc); outline-offset: 2px; }",
       "#researchMD .rmd-sync-synced { color: var(--rmd-acc); background: var(--rmd-acc-soft); }",
       "#researchMD .rmd-sync-queue { color: var(--rmd-warn); background: var(--rmd-warn-soft); }",
+      "#researchMD .rmd-sync-saving { color: var(--rmd-acc); background: var(--rmd-acc-soft); }",
       "#researchMD .rmd-sync-conflict { color: var(--rmd-bad); background: var(--rmd-bad-soft); }",
+      "#researchMD .rmd-sync-hidden { display: none !important; }",
+      "#researchMD .rmd-sync-sheet-card { max-width: 440px; width: calc(100% - 24px); padding: 20px; gap: 16px; }",
+      "#researchMD .rmd-sync-sheet-inner { display: flex; flex-direction: column; gap: 14px; }",
+      "#researchMD .rmd-sync-explain { margin: 0; font: 400 13.5px/1.5 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-sync-meta-box { background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; }",
+      "#researchMD .rmd-sync-meta-row { display: flex; align-items: center; justify-content: space-between; font: 400 13px var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-sync-meta-value { font-weight: 600; color: var(--rmd-ink); }",
+      "#researchMD .rmd-sync-failed-box { background: var(--rmd-bad-soft); border: 1px solid var(--rmd-bad); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }",
+      "#researchMD .rmd-sync-failed-line { font: 400 13px/1.4 var(--rmd-f); color: var(--rmd-ink); overflow-wrap: anywhere; }",
+      "#researchMD .rmd-sync-confirm-box { border-top: 1px solid var(--rmd-line); padding-top: 8px; display: flex; flex-direction: column; gap: 8px; }",
+      "#researchMD .rmd-sync-confirm-msg { margin: 0; font: 500 12.5px/1.4 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-sync-confirm-actions { display: flex; gap: 8px; }",
+      "#researchMD .rmd-sync-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--rmd-line); padding-top: 14px; margin-top: 4px; }",
+      "#researchMD .rmd-sync-actions button, #researchMD .rmd-sync-confirm-actions button, #researchMD .rmd-sync-discard-wrap button { min-height: 44px; min-width: 44px; }",
       "#researchMD .rmd-shell-close {",
       "  border: 0; width: 40px; height: 40px; border-radius: 999px; padding: 0; cursor: pointer;",
       "  display: inline-flex; align-items: center; justify-content: center; flex: none;",
@@ -1044,14 +1120,335 @@
     D.head.appendChild(s);
   }
 
-  function getSyncBadgeHtml(syncState, queueCount) {
-    if (syncState === "conflict") {
-      return '<span class="rmd-sync-pill rmd-sync-conflict" id="rmdSyncBadge"><svg width="8" height="8" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg> Conflict 409</span>';
+  var lastSendAttempt = null;
+  var failedItemMap = {};
+  var confirmingDiscard = false;
+  var syncSheetKeyHandler = null;
+  var lastFocusedSyncEl = null;
+  var syncTimer = null;
+
+  function scheduleSyncCheck(queue) {
+    if (syncTimer) {
+      clearTimeout(syncTimer);
+      syncTimer = null;
     }
-    if (syncState === "queue" && queueCount > 0) {
-      return '<span class="rmd-sync-pill rmd-sync-queue" id="rmdSyncBadge"><svg width="8" height="8" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg> Queue (' + queueCount + ')</span>';
+    var store = SMD.store;
+    var q = queue || (store && store.getQueue ? store.getQueue() : []);
+    if (!q || !q.length) return;
+    var isOffline = typeof navigator !== "undefined" && navigator.onLine === false;
+    if (isOffline) return;
+    var now = Date.now();
+    var minWait = Infinity;
+    for (var i = 0; i < q.length; i++) {
+      var ts = q[i] && q[i].timestamp;
+      if (ts) {
+        var age = now - ts;
+        if (age < 30000) {
+          var remain = 30000 - age;
+          if (remain < minWait) minWait = remain;
+        }
+      }
     }
-    return '<span class="rmd-sync-pill rmd-sync-synced" id="rmdSyncBadge"><svg width="8" height="8" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg> Synced</span>';
+    if (minWait !== Infinity) {
+      syncTimer = setTimeout(function () {
+        updateSyncBadge();
+      }, Math.max(100, minWait + 200));
+    }
+  }
+
+  function formatLastSend(ts) {
+    if (!ts) return "Not tried yet";
+    var diff = Math.floor((Date.now() - ts) / 1000);
+    if (diff < 5) return "Just now";
+    if (diff < 60) return diff + " seconds ago";
+    var mins = Math.floor(diff / 60);
+    if (mins === 1) return "1 minute ago";
+    if (mins < 60) return mins + " minutes ago";
+    var hrs = Math.floor(mins / 60);
+    if (hrs === 1) return "1 hour ago";
+    return hrs + " hours ago";
+  }
+
+  function getItemName(it) {
+    if (!it) return "Unknown change";
+    if (it.name) return it.name;
+    if (it.label) return it.label;
+    if (it.payload) {
+      if (it.payload.label) return it.payload.label;
+      if (it.payload.title) return it.payload.title;
+      if (it.payload.name) return it.payload.name;
+    }
+    if (it.type) {
+      if (it.type === "project_create") return "Project";
+      if (it.type === "study_create") return "Study";
+      if (it.type === "study_update" || it.type === "study_update_forced") return "Study update";
+      if (it.type === "run_create") return "Analysis run";
+      return it.type.replace(/_/g, " ");
+    }
+    return "Change (" + it.id + ")";
+  }
+
+  function getFailedItems(queue) {
+    var store = SMD.store;
+    var q = queue || (store && store.getQueue ? store.getQueue() : []);
+    var failed = [];
+    for (var i = 0; i < q.length; i++) {
+      var it = q[i];
+      if (it && (it.error || it.lastError || failedItemMap[it.id])) {
+        failed.push(it);
+      }
+    }
+    return failed;
+  }
+
+  function getFailedNames(items) {
+    var list = [];
+    for (var i = 0; i < items.length; i++) {
+      var n = getItemName(items[i]);
+      if (list.indexOf(n) === -1) list.push(n);
+    }
+    return list.join(", ");
+  }
+
+  function getSyncBadgeHtml(syncState, queueCount, queue) {
+    var store = SMD.store;
+    var q = queue || (store && store.getQueue ? store.getQueue() : []);
+    var count = typeof queueCount === "number" ? queueCount : (q ? q.length : 0);
+
+    var isOffline = false;
+    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+      isOffline = true;
+    }
+
+    var now = Date.now();
+    var hasOldItem = false;
+    for (var i = 0; i < q.length; i++) {
+      var ts = q[i] && q[i].timestamp;
+      if (ts && (now - ts) > 30000) {
+        hasOldItem = true;
+        break;
+      }
+    }
+
+    var show = count > 0 && (isOffline || hasOldItem);
+
+    if (!show) {
+      return '<button type="button" class="rmd-sync-pill rmd-sync-hidden" id="rmdSyncBadge" style="display:none;" aria-label="Sync status" data-rmd="sync-badge"></button>';
+    }
+
+    var label;
+    var cls;
+    if (isOffline) {
+      label = "Offline: " + count + " " + (count === 1 ? "change" : "changes") + " waiting";
+      cls = "rmd-sync-pill rmd-sync-queue rmd-sync-offline";
+    } else {
+      label = "Saving " + count + " " + (count === 1 ? "change" : "changes");
+      cls = "rmd-sync-pill rmd-sync-queue rmd-sync-saving";
+    }
+
+    var dotSvg = '<svg width="8" height="8" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><circle cx="5" cy="5" r="5" fill="currentColor"/></svg>';
+    return '<button type="button" class="' + cls + '" id="rmdSyncBadge" data-rmd="sync-badge" aria-label="' + esc(label) + '. Tap to view details.">' + dotSvg + '<span>' + esc(label) + '</span></button>';
+  }
+
+  function syncSheetContentHtml() {
+    var store = SMD.store;
+    var q = store && store.getQueue ? store.getQueue() : [];
+    var count = q.length;
+    var failed = getFailedItems(q);
+    var isOffline = typeof navigator !== "undefined" && navigator.onLine === false;
+    var lastStr = formatLastSend(lastSendAttempt);
+
+    var h = [];
+    h.push('<div class="rmd-sync-sheet-inner">');
+    h.push('  <p class="rmd-sync-explain">These changes are saved on this phone and will be sent to your account automatically when you are back online. Nothing is lost if you close the app.</p>');
+    h.push('  <div class="rmd-sync-meta-box">');
+    h.push('    <div class="rmd-sync-meta-row">');
+    h.push('      <span class="rmd-sync-meta-label">Waiting to send:</span>');
+    h.push('      <span class="rmd-sync-meta-value" id="rmdSyncWaitingCount">' + count + ' ' + (count === 1 ? 'change' : 'changes') + '</span>');
+    h.push('    </div>');
+    h.push('    <div class="rmd-sync-meta-row">');
+    h.push('      <span class="rmd-sync-meta-label">Connection:</span>');
+    h.push('      <span class="rmd-sync-meta-value">' + (isOffline ? 'Offline' : 'Online') + '</span>');
+    h.push('    </div>');
+    h.push('    <div class="rmd-sync-meta-row">');
+    h.push('      <span class="rmd-sync-meta-label">Last time a send was tried:</span>');
+    h.push('      <span class="rmd-sync-meta-value" id="rmdSyncLastSendTime">' + esc(lastStr) + '</span>');
+    h.push('    </div>');
+    h.push('  </div>');
+
+    if (failed.length > 0) {
+      h.push('  <div class="rmd-sync-failed-box">');
+      h.push('    <div class="rmd-sync-failed-line"><strong>Failed:</strong> ' + esc(getFailedNames(failed)) + '</div>');
+      if (confirmingDiscard) {
+        h.push('    <div class="rmd-sync-confirm-box" role="alert">');
+        h.push('      <p class="rmd-sync-confirm-msg">Discard these ' + failed.length + ' failed ' + (failed.length === 1 ? 'change' : 'changes') + ' from this phone? They will not be sent to your account.</p>');
+        h.push('      <div class="rmd-sync-confirm-actions">');
+        h.push('        <button type="button" class="rmd-btn rmd-btn-bad rmd-btn-sm" data-rmd-sync-action="confirm-discard">Yes, discard</button>');
+        h.push('        <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-sync-action="cancel-discard">Cancel</button>');
+        h.push('      </div>');
+        h.push('    </div>');
+      } else {
+        h.push('    <div class="rmd-sync-discard-wrap">');
+        h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm rmd-sync-discard-btn" data-rmd-sync-action="discard" id="rmdSyncDiscardBtn">Discard these</button>');
+        h.push('    </div>');
+      }
+      h.push('  </div>');
+    }
+
+    h.push('  <div class="rmd-sync-actions">');
+    h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-sync-btn-send" data-rmd-sync-action="drain" id="rmdSyncSendNow">Send now</button>');
+    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-sync-action="close">Done</button>');
+    h.push('  </div>');
+    h.push('</div>');
+    return h.join('\n');
+  }
+
+  function refreshSyncSheet() {
+    if (!root) return;
+    var body = root.querySelector("#rmdSyncSheetBody");
+    if (body) {
+      body.innerHTML = syncSheetContentHtml();
+      var modal = root.querySelector("#rmdSyncSheetModal");
+      if (modal) bindSyncSheetActions(modal);
+    }
+  }
+
+  function executeDiscard() {
+    var store = SMD.store;
+    var q = store && store.getQueue ? store.getQueue() : [];
+    var failed = getFailedItems(q);
+    for (var f = 0; f < failed.length; f++) {
+      var fid = failed[f].id;
+      delete failedItemMap[fid];
+      if (store && store.removeQueueItem) {
+        store.removeQueueItem(fid);
+      }
+    }
+    confirmingDiscard = false;
+    refreshSyncSheet();
+    updateSyncBadge();
+  }
+
+  function bindSyncSheetActions(container) {
+    if (!container) return;
+    var sendBtn = container.querySelector("#rmdSyncSendNow");
+    if (sendBtn) {
+      sendBtn.onclick = function () {
+        if (sendBtn.disabled) return;
+        sendBtn.disabled = true;
+        sendBtn.textContent = "Sending...";
+        lastSendAttempt = Date.now();
+        drainQueue().then(function () {
+          updateSyncBadge();
+          refreshSyncSheet();
+        }).catch(function () {
+          updateSyncBadge();
+          refreshSyncSheet();
+        });
+      };
+    }
+
+    var closeBtns = container.querySelectorAll("[data-rmd-sync-action='close']");
+    for (var c = 0; c < closeBtns.length; c++) {
+      closeBtns[c].onclick = closeSyncSheet;
+    }
+
+    var discardBtn = container.querySelector("#rmdSyncDiscardBtn");
+    if (discardBtn) {
+      discardBtn.onclick = function () {
+        confirmingDiscard = true;
+        refreshSyncSheet();
+      };
+    }
+
+    var confirmDiscardBtn = container.querySelector("[data-rmd-sync-action='confirm-discard']");
+    if (confirmDiscardBtn) {
+      confirmDiscardBtn.onclick = executeDiscard;
+    }
+
+    var cancelDiscardBtn = container.querySelector("[data-rmd-sync-action='cancel-discard']");
+    if (cancelDiscardBtn) {
+      cancelDiscardBtn.onclick = function () {
+        confirmingDiscard = false;
+        refreshSyncSheet();
+      };
+    }
+  }
+
+  function closeSyncSheet() {
+    var modal = root ? root.querySelector("#rmdSyncSheetModal") : null;
+    if (modal && modal.parentNode) {
+      modal.parentNode.removeChild(modal);
+    }
+    if (syncSheetKeyHandler) {
+      document.removeEventListener("keydown", syncSheetKeyHandler);
+      syncSheetKeyHandler = null;
+    }
+    confirmingDiscard = false;
+    var chip = root ? root.querySelector("#rmdSyncBadge") : null;
+    if (chip && chip.style.display !== "none" && chip.focus) {
+      try { chip.focus(); } catch (e) {}
+    } else if (lastFocusedSyncEl && lastFocusedSyncEl.focus) {
+      try { lastFocusedSyncEl.focus(); } catch (e) {}
+    }
+  }
+
+  function openSyncSheet() {
+    if (!root) return;
+    closeSyncSheet();
+    lastFocusedSyncEl = document.activeElement;
+
+    var back = document.createElement("div");
+    back.className = "rmd-modal-backdrop";
+    back.id = "rmdSyncSheetModal";
+
+    back.innerHTML = '<div class="rmd-modal-card rmd-sync-sheet-card" role="dialog" aria-modal="true" aria-labelledby="rmdSyncSheetTitle">' +
+      '<div class="rmd-modal-header">' +
+        '<h3 id="rmdSyncSheetTitle">Changes waiting to save</h3>' +
+        '<button type="button" class="rmd-btn-close" data-rmd-sync-close="1" aria-label="Close">&times;</button>' +
+      '</div>' +
+      '<div class="rmd-sync-sheet-body" id="rmdSyncSheetBody">' +
+        syncSheetContentHtml() +
+      '</div>' +
+    '</div>';
+
+    root.appendChild(back);
+    back.addEventListener("click", function (e) {
+      if (e.target === back) closeSyncSheet();
+    });
+    var closeBtn = back.querySelector("[data-rmd-sync-close]");
+    if (closeBtn) closeBtn.onclick = closeSyncSheet;
+
+    bindSyncSheetActions(back);
+
+    syncSheetKeyHandler = function (e) {
+      if (e.key === "Escape") closeSyncSheet();
+    };
+    document.addEventListener("keydown", syncSheetKeyHandler);
+  }
+
+  function bindSyncBadgeEvent() {
+    if (!root) return;
+    var b = root.querySelector("#rmdSyncBadge");
+    if (b) {
+      b.onclick = function (e) {
+        if (e && e.preventDefault) e.preventDefault();
+        openSyncSheet();
+      };
+    }
+  }
+
+  function updateSyncBadge() {
+    if (!root) return;
+    var store = SMD.store;
+    var state = store && store.getState ? store.getState() : { syncState: "synced", offlineQueue: [] };
+    var q = (state && state.offlineQueue) || (store && store.getQueue ? store.getQueue() : []);
+    var badge = root.querySelector("#rmdSyncBadge");
+    if (badge && badge.parentNode) {
+      badge.outerHTML = getSyncBadgeHtml(state.syncState, q.length, q);
+      bindSyncBadgeEvent();
+    }
+    scheduleSyncCheck(q);
   }
 
   function renderShell() {
@@ -1067,7 +1464,8 @@
 
     var store = SMD.store;
     var syncState = store ? store.getState().syncState : "synced";
-    var queueCount = store ? store.getQueue().length : 0;
+    var queue = store ? store.getQueue() : [];
+    var queueCount = queue.length;
     var showBack = currentScreen !== "projects" && (navStack.length > 0 || currentScreen === "read-study");
 
     var h = [];
@@ -1100,7 +1498,7 @@
 
     h.push('  <div class="rmd-shell-right">');
     h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm rmd-head-rstu-btn" data-rmd="open-read-study" aria-label="Open Read Study page">RStudy</button>');
-    h.push(getSyncBadgeHtml(syncState, queueCount));
+    h.push(getSyncBadgeHtml(syncState, queueCount, queue));
     h.push('    <button type="button" class="rmd-shell-close" data-rmd="close" aria-label="Close ResearchMD"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>');
     h.push('  </div>');
     h.push('</div>');
@@ -1142,6 +1540,7 @@
 
   function bindShellEvents() {
     if (!root) return;
+    bindSyncBadgeEvent();
 
     var closeBtn = root.querySelector('[data-rmd="close"]');
     if (closeBtn) {
@@ -1919,6 +2318,11 @@
   }
 
   function onShellAction(ev) {
+    var syncBtn = ev.target && ev.target.closest ? ev.target.closest("#rmdSyncBadge, [data-rmd='sync-badge']") : null;
+    if (syncBtn) {
+      openSyncSheet();
+      return;
+    }
     var el = ev.target;
     while (el && el !== root) {
       if (el.getAttribute && el.getAttribute("data-rmd-action")) break;
@@ -2270,11 +2674,135 @@
     }
   }
 
+  var isDraining = false;
+  function drainQueue() {
+    if (isDraining) return Promise.resolve(0);
+    var store = SMD.store;
+    if (!store) return Promise.resolve(0);
+    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+      return Promise.resolve(0);
+    }
+    var queue = store.cleanQueue ? store.cleanQueue() : store.getQueue();
+    if (!queue || !queue.length) {
+      if (store.setSyncState && store.getState().syncState !== "conflict") {
+        store.setSyncState("synced");
+      }
+      return Promise.resolve(0);
+    }
+    if (!SMD.api || !SMD.api.request) {
+      return Promise.resolve(0);
+    }
+
+    lastSendAttempt = Date.now();
+    isDraining = true;
+    var drainedCount = 0;
+
+    function processNext(index) {
+      if (index >= queue.length) {
+        isDraining = false;
+        var remaining = store.getQueue();
+        if (remaining.length === 0 && store.getState().syncState !== "conflict") {
+          store.setSyncState("synced");
+        }
+        updateSyncBadge();
+        if (root && root.querySelector("#rmdSyncSheetModal")) refreshSyncSheet();
+        return Promise.resolve(drainedCount);
+      }
+
+      var item = queue[index];
+      if (!item || !item.type) {
+        if (item && item.id) store.removeQueueItem(item.id);
+        return processNext(index + 1);
+      }
+
+      var sendPromise;
+      if (item.type === "project_create") {
+        sendPromise = SMD.api.request("POST", "/v1/projects", item.payload);
+      } else if (item.type === "study_create") {
+        var pid = item.payload && (item.payload.projectId || item.payload.pid);
+        if (!pid || pid === "prj_bcg_1994") {
+          store.removeQueueItem(item.id);
+          return processNext(index + 1);
+        }
+        sendPromise = SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/studies", {
+          label: item.payload.label || "",
+          measure: item.payload.measure,
+          inputs: item.payload.inputs,
+          locator: item.payload.locator,
+          quote: item.payload.quote || "",
+          verified: !!item.payload.verified
+        });
+      } else if (item.type === "study_update" || item.type === "study_update_forced") {
+        var spid = item.payload && (item.payload.projectId || item.payload.pid);
+        var sid = item.payload && item.payload.id;
+        if (!spid || !sid || spid === "prj_bcg_1994") {
+          store.removeQueueItem(item.id);
+          return processNext(index + 1);
+        }
+        sendPromise = SMD.api.request("PUT", "/v1/projects/" + encodeURIComponent(spid) + "/studies/" + encodeURIComponent(sid), item.payload);
+      } else if (item.type === "run_create") {
+        var rpid = item.payload && (item.payload.projectId || item.payload.pid);
+        if (!rpid || rpid === "prj_bcg_1994") {
+          store.removeQueueItem(item.id);
+          return processNext(index + 1);
+        }
+        sendPromise = SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(rpid) + "/runs", item.payload);
+      } else {
+        store.removeQueueItem(item.id);
+        return processNext(index + 1);
+      }
+
+      return sendPromise.then(function () {
+        store.removeQueueItem(item.id);
+        delete failedItemMap[item.id];
+        drainedCount++;
+        return processNext(index + 1);
+      }).catch(function (err) {
+        var st = (err && err.status) || 0;
+        if (!st && err && err.code && String(err.code).indexOf("http_") === 0) {
+          st = parseInt(String(err.code).slice(5), 10) || 0;
+        }
+        // Drop items that fail with 4xx client errors (report them once)
+        if (st >= 400 && st < 500) {
+          console.warn("Dropping queued item after 4xx client rejection:", item.type, st);
+          store.removeQueueItem(item.id);
+          delete failedItemMap[item.id];
+          return processNext(index + 1);
+        }
+        // Network or 5xx error: record error on item and stop drain for now
+        var errMsg = (err && (err.message || err.code || (st ? "Server error " + st : ""))) || "Could not send";
+        item.error = errMsg;
+        failedItemMap[item.id] = errMsg;
+        isDraining = false;
+        updateSyncBadge();
+        if (root && root.querySelector("#rmdSyncSheetModal")) refreshSyncSheet();
+        return drainedCount;
+      });
+    }
+
+    return processNext(0).catch(function () {
+      isDraining = false;
+      updateSyncBadge();
+      if (root && root.querySelector("#rmdSyncSheetModal")) refreshSyncSheet();
+      return drainedCount;
+    });
+  }
+
+  SMD.drainQueue = drainQueue;
+  if (SMD.store) SMD.store.drainQueue = drainQueue;
+
+  if (typeof G !== "undefined" && G.addEventListener) {
+    G.addEventListener("online", function () {
+      drainQueue();
+    });
+  }
+
   var storeUnsub = null;
 
   function open(opts) {
     injectCSS();
     if (SMD.store) SMD.store.init();
+    drainQueue();
     if (G.RMDStore && G.RMDStore.available) {
       G.RMDStore.available().then(function () {}, function () {});
     }
@@ -2307,8 +2835,14 @@
       if (typeof storeUnsub === "function") storeUnsub();
       storeUnsub = SMD.store.subscribe(function (state) {
         var badge = root ? root.querySelector("#rmdSyncBadge") : null;
+        var q = state.offlineQueue || [];
         if (badge && badge.parentNode) {
-          badge.outerHTML = getSyncBadgeHtml(state.syncState, (state.offlineQueue || []).length);
+          badge.outerHTML = getSyncBadgeHtml(state.syncState, q.length, q);
+          bindSyncBadgeEvent();
+        }
+        scheduleSyncCheck(q);
+        if (root && root.querySelector("#rmdSyncSheetModal")) {
+          refreshSyncSheet();
         }
         if (currentScreen === "studies" && root) {
           var body = root.querySelector("#rmdScreenBody");
@@ -2337,7 +2871,12 @@
     close: close,
     navigate: navigate,
     refreshScreen: function () { navigate(currentScreen, {}, true); },
-    esc: esc
+    esc: esc,
+    drainQueue: drainQueue,
+    openSyncSheet: openSyncSheet,
+    closeSyncSheet: closeSyncSheet,
+    getSyncBadgeHtml: getSyncBadgeHtml,
+    updateSyncBadge: updateSyncBadge
   };
 
   for (var k in SHELL) {

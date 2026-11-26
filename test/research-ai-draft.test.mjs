@@ -235,6 +235,71 @@ describe("research ai draft", { concurrency: false, skip: SKIP }, () => {
     assert.equal(n(env, "research_ai_drafts", pid), 5);
   });
 
+  test("manuscript_draft drafts IMRaD sections for a review project, keeps run tokens, strips bare numbers in Abstract/Results, and checks 402/403/PHI", async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 100);
+    const project = await makeProject(env);
+    const pid = project.id;
+    const now = Date.now();
+    sql(env).prepare("INSERT INTO research_runs (id,project_id,measure,result_json,created_by,created_ts) VALUES ('r1',?,'RR',?,'u-alice',?)")
+      .run(pid, JSON.stringify({ effect: 0.49, i2: 72.8 }), now);
+
+    resetLlm(async () => JSON.stringify({
+      title: "BCG vaccination in adults",
+      sections: [
+        { id: "abstract", heading: "Abstract", text: "Results showed RR 0.49 {{run:r1.effect}} with heterogeneity {{run:r1.i2}}." },
+        { id: "introduction", heading: "Introduction", text: "Tuberculosis causes substantial global morbidity." },
+        { id: "methods", heading: "Methods", text: "We followed PRISMA 2020 guidance to search randomized trials." },
+        { id: "results", heading: "Results", text: "Pooled effect was 0.49 {{run:r1.effect}} and I2 was {{run:r1.i2}}." },
+        { id: "discussion", heading: "Discussion", text: "Findings support vaccination in high-risk cohorts." }
+      ]
+    }));
+
+    const res = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "manuscript_draft",
+      input: { title: "Ask MaiK", studyType: "systematic_review" }
+    });
+    assert.equal(res.http, 200, JSON.stringify(res));
+    assert.equal(res.draft.status, "unverified");
+    assert.equal(res.draft.task, "manuscript_draft");
+    assert.equal(res.draft.sections.length, 5);
+    const abs = res.draft.sections.find((s) => s.id === "abstract");
+    const rSec = res.draft.sections.find((s) => s.id === "results");
+    assert.ok(abs.text.includes("{{run:r1.effect}}"));
+    assert.equal(abs.text.includes("0.49"), false);
+    assert.ok(rSec.text.includes("{{run:r1.effect}}"));
+    assert.equal(rSec.text.includes("0.49"), false);
+    const sent = llm.calls[0].parts[0].text + "\n" + (llm.calls[0].opts.system || "");
+    assert.equal(sent.includes("0.49"), false);
+    assert.equal(sent.includes("72.8"), false);
+    assert.ok(sent.includes("{{run:r1.effect}}"));
+    assert.equal(llm.calls[0].maxTokens, 2000);
+    assert.equal(n(env, "research_manuscript_sections"), 0);
+
+    resetLlm(async () => JSON.stringify({ title: "Empty", sections: [] }));
+    const bad = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", { task: "manuscript_draft" });
+    assert.equal(bad.http, 422);
+    assert.equal(bad.error.code, "invalid_draft");
+
+    const phi = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "manuscript_draft",
+      input: { researchQuestion: "Contact patient nurse@hospital.org" }
+    });
+    assert.equal(phi.http, 422);
+    assert.equal(phi.error.code, "phi_blocked");
+
+    await setRole(env, pid, "viewer");
+    const viewer = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-bob", { task: "manuscript_draft" });
+    assert.equal(viewer.http, 403);
+
+    const poor = freshEnv();
+    const poorProject = await makeProject(poor);
+    resetLlm();
+    const unpaid = await call(poor, "POST", "v1/projects/" + poorProject.id + "/ai-draft", "tok-alice", { task: "manuscript_draft" });
+    assert.equal(unpaid.http, 402);
+    assert.equal(unpaid.error.code, "insufficient_credits");
+  });
+
   test("invalid search tags and a checklist with no manuscript stay unchecked", async () => {
     const env = freshEnv();
     fundWallet(env, "alice@example.com", 100);

@@ -138,6 +138,8 @@ const db = {
 };
 
 const putLog = [];
+const aiDraftCalls = [];
+const jobsCalls = [];
 let exportGatesPass = false;
 
 /* ---------------- API Handler ---------------- */
@@ -243,6 +245,37 @@ async function handleApi(req, res, path, query) {
         }
       ]
     });
+  }
+
+  // POST /v1/projects/:projectId/ai-draft
+  if (path.match(/^\/v1\/projects\/[^/]+\/ai-draft$/) && req.method === 'POST') {
+    aiDraftCalls.push(body);
+    if (body.task === 'manuscript_draft') {
+      return send(200, {
+        draft: {
+          id: 'draft_man_1',
+          status: 'unverified',
+          task: 'manuscript_draft',
+          title: db.manuscript.title,
+          sections: [
+            { id: 'abstract', heading: 'Abstract', text: 'Objective: Evaluate BCG efficacy against tuberculosis.\nResults: Pooled RR {{run:run_1.estimate}} (95% CI {{run:run_1.ciLower}} to {{run:run_1.ciUpper}}).' },
+            { id: 'introduction', heading: 'Introduction', text: 'Tuberculosis remains a global priority [@who2023].' },
+            { id: 'methods', heading: 'Methods', text: 'Systematic review and meta-analysis following PRISMA 2020.' },
+            { id: 'results', heading: 'Results', text: RESULTS_TEXT },
+            { id: 'discussion', heading: 'Discussion', text: 'BCG vaccination offers protection in high-burden cohorts [@colditz1994].' }
+          ]
+        },
+        model: 'gemini-2.5-flash',
+        costInr: 0.42
+      });
+    }
+    return send(400, { error: { code: 'invalid_task', message: 'Unexpected task: ' + body.task } });
+  }
+
+  // POST /v1/projects/:projectId/jobs (must not be called by Ask MaiK on manuscript screen)
+  if (path.match(/^\/v1\/projects\/[^/]+\/jobs$/) && req.method === 'POST') {
+    jobsCalls.push(body);
+    return send(400, { error: { code: 'invalid_body', message: 'kind must be pdf_extract' } });
   }
 
   // GET /v1/projects/:projectId/studies
@@ -374,6 +407,87 @@ try {
   ok(await ev(`!!document.querySelector('#rmdSectionEditor') && !document.querySelector('#rmdSectionText')`), 'single contenteditable editor replaces the source textarea');
   ok(await ev(`!document.querySelector('.rmd-token-chip') && !document.querySelector('.rmd-preview-box')`), 'token chips and duplicate preview box removed');
 
+  /* 1b. Draft badge layout on 390x844 and 1024x1366 (single line, no overlap) */
+  const checkDraftBadgeLayout = async (label, w, h, mob) => {
+    await call('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 2, mobile: mob });
+    await until(`(()=>{const b=document.querySelector('.rmd-man-topbar-info .rmd-badge');return !!b && b.getBoundingClientRect().height > 0})()`, 3000);
+    await sleep(100);
+    const info = await ev(`(()=>{
+      const b = document.querySelector('.rmd-man-topbar-info .rmd-badge');
+      if (!b) return null;
+      const br = b.getBoundingClientRect();
+      const cs = getComputedStyle(b);
+      const lh = parseFloat(cs.lineHeight) || (parseFloat(cs.fontSize) * 1.4) || 18;
+      const others = Array.from(document.querySelectorAll('.rmd-man-topbar .rmd-btn, .rmd-man-topbar .rmd-man-title, .rmd-man-topbar .rmd-version-tag'));
+      let overlapWith = null;
+      for (const el of others) {
+        const er = el.getBoundingClientRect();
+        if (er.width === 0 || er.height === 0) continue;
+        if (!(br.right <= er.left + 0.5 || br.left >= er.right - 0.5 || br.bottom <= er.top + 0.5 || br.top >= er.bottom - 0.5)) {
+          overlapWith = (el.textContent || el.className || '').trim().slice(0, 40);
+          break;
+        }
+      }
+      const actionHeights = Array.from(document.querySelectorAll('.rmd-man-actions .rmd-btn, .rmd-man-phone-btn'))
+        .map(el => el.offsetHeight)
+        .filter(ht => ht > 0);
+      return {
+        text: (b.textContent || '').trim(),
+        whiteSpace: cs.whiteSpace,
+        height: br.height,
+        lineHeight: lh,
+        minActionH: actionHeights.length ? Math.min.apply(null, actionHeights) : 0,
+        overlapWith
+      };
+    })()`);
+    ok(info && /Draft \(not final yet\)|Locked|Approved/.test(info.text), `status badge present at ${label} (${w}x${h})`);
+    ok(info && info.whiteSpace === 'nowrap', `status badge has white-space: nowrap at ${label} (${w}x${h})`);
+    ok(info && info.height > 8 && info.height <= info.lineHeight * 1.85, `status badge stays on one line at ${label} (${w}x${h}): h=${info && info.height}, lh=${info && info.lineHeight}`);
+    ok(info && !info.overlapWith, `no element overlaps status badge at ${label} (${w}x${h})${info && info.overlapWith ? ' (overlapped ' + info.overlapWith + ')' : ''}`);
+    if (w === 390) {
+      ok(info && info.minActionH >= 44, `phone topbar/tab targets are >= 44px at ${label} (${w}x${h}): min=${info && info.minActionH}`);
+    }
+  };
+
+  await checkDraftBadgeLayout('draft', 390, 844, true);
+  await checkDraftBadgeLayout('draft', 1024, 1366, false);
+  await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 768, deviceScaleFactor: 2, mobile: false });
+  await sleep(150);
+
+  /* 1c. Ask MaiK to draft on a review project sends ai-draft manuscript_draft (never /jobs) */
+  await click('[data-rmd-ai="ask"]');
+  ok(await until(`!!document.querySelector('[data-rmd-ai-note="manuscript"]')`, 5000), 'Ask MaiK draft on review project succeeds and shows drafted note');
+  ok(aiDraftCalls.some((c) => c.task === 'manuscript_draft'), 'Ask MaiK sends ai-draft task manuscript_draft');
+  ok(jobsCalls.length === 0, 'Ask MaiK does not call /jobs endpoint with invalid manuscript_draft kind');
+  ok(!/Something went wrong on our side/.test(await text('.rmd-ai-bar')), 'Ask MaiK bar never shows "Something went wrong on our side" on review project');
+
+  /* 1d. Polish empty or >5000 char section shows plain message, never "on our side" */
+  await ev(`(()=>{
+    const ed = document.getElementById('rmdSectionEditor');
+    ed.textContent = '';
+    ed.dispatchEvent(new Event('input', { bubbles: true }));
+    return 1;
+  })()`);
+  await click('[data-rmd="polish-wording"]');
+  ok(await until(`!!document.querySelector('.rmd-editor-card .rmd-banner-error')`, 3000), 'empty section polish shows inline notice');
+  const emptyPolishText = await text('.rmd-editor-card .rmd-banner-error');
+  ok(/Write a few lines first/i.test(emptyPolishText) && !/Something went wrong on our side/i.test(emptyPolishText), 'empty section polish shows plain "Write a few lines first" message');
+
+  await ev(`(()=>{
+    const ed = document.getElementById('rmdSectionEditor');
+    ed.textContent = 'word '.repeat(1100);
+    ed.dispatchEvent(new Event('input', { bubbles: true }));
+    return 1;
+  })()`);
+  await click('[data-rmd="polish-wording"]');
+  ok(await until(`!!document.querySelector('.rmd-editor-card .rmd-banner-error')`, 3000), 'long section polish shows inline notice');
+  const longPolishText = await text('.rmd-editor-card .rmd-banner-error');
+  ok(/5,000-character limit/i.test(longPolishText) && !/Something went wrong on our side/i.test(longPolishText), 'too-long section polish shows plain character-limit message');
+
+  // Restore original Results section via reload so section tests below run on exact RESULTS_TEXT
+  await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
+  ok(await until(`!!document.querySelector('.rmd-num[data-field="estimate"]')`, 5000), 'manuscript restored with analysis tokens');
+
   /* 2. Number spans: non-editable, resolved values, accessible */
   ok(await until(`!!document.querySelector('.rmd-num')`, 5000), 'number spans rendered for analysis results');
   const spanInfo = await ev(`(()=>{const c=document.querySelector('.rmd-num[data-field="estimate"]');return c?{editable:c.getAttribute('contenteditable'),text:c.textContent,role:c.getAttribute('role'),aria:c.getAttribute('aria-label'),token:c.getAttribute('data-token')}:null})()`);
@@ -493,6 +607,10 @@ try {
     ok(await until(`!!document.querySelector('.rmd-manuscript-screen')`, 5000), `manuscript screen renders at ${width}x${height}`);
     ok(await noOverflow(), `no horizontal overflow at ${width}x${height} (box and document)`);
     ok(await noDash(), `no em/en dash in UI text at ${width}px`);
+
+    if (width === 390 || width === 1024) {
+      await checkDraftBadgeLayout('responsive', width, height, mobile);
+    }
 
     if (width === 375) {
       ok(await ev(`!!document.querySelector('.rmd-phone-notice')`), 'phone view notice visible at 375px');

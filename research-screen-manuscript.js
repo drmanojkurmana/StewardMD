@@ -503,17 +503,59 @@
     });
   }
 
+  function manuscriptAiError(err, fallbackMsg) {
+    if (!err) return { message: fallbackMsg || "MaiK could not complete this request. Try again." };
+    var code = err.code || "";
+    var msg = String(err.message || "");
+    if (code === "invalid_body") {
+      if (/5000|character/i.test(msg)) {
+        return { message: "This section is over the 5,000-character limit for one polish pass. Shorten it and try again." };
+      }
+      if (/section text is required|write a few lines/i.test(msg)) {
+        return { message: "Write a few lines first before asking MaiK to polish the wording." };
+      }
+      if (/thesis text is required/i.test(msg)) {
+        return { message: "Upload or paste your thesis text first before drafting from a thesis." };
+      }
+      return { message: msg || fallbackMsg || "Check the section text and try again." };
+    }
+    if (code === "manuscript_not_found" || code === "section_not_found") {
+      return { message: "Write a few lines first or save this section before asking MaiK." };
+    }
+    if (code === "invalid_draft") {
+      return { message: msg || "MaiK's draft did not pass safety checks. Try again." };
+    }
+    return err;
+  }
+
   function runPolish(container) {
     if (!st.manuscript || st.manuscript.status === "locked") return;
+    var editor = container ? container.querySelector("#rmdSectionEditor") : null;
+    if (editor && editor.getAttribute("contenteditable") === "true") {
+      syncEditorText(editor);
+    }
     var curSec = getSection(st.selectedSectionId);
     if (!curSec) return;
+    var secText = String(curSec.text || "");
+    if (!secText.trim()) {
+      st.polishBusy = false;
+      st.polishError = { message: "Write a few lines first before asking MaiK to polish the wording." };
+      render(container);
+      return;
+    }
+    if (secText.length > 5000) {
+      st.polishBusy = false;
+      st.polishError = { message: "This section is over the 5,000-character limit for one polish pass. Shorten it and try again." };
+      render(container);
+      return;
+    }
     var store = SMD.store;
     var proj = store ? store.getActiveProject() : null;
     var pid = encodeURIComponent(apiProjectId());
     var targetJournal = (proj && (proj.targetJournal || proj.journal)) || undefined;
     var inputPayload = {
       sectionId: curSec.id,
-      text: curSec.text
+      text: secText
     };
     if (targetJournal) inputPayload.journalId = targetJournal;
 
@@ -578,7 +620,7 @@
       render(container);
     }).catch(function (err) {
       st.polishBusy = false;
-      st.polishError = err || { message: "MaiK could not polish the wording." };
+      st.polishError = manuscriptAiError(err, "MaiK could not polish the wording.");
       render(container);
     });
   }
@@ -863,30 +905,75 @@
     };
   }
 
-  /* manuscript_draft is an async server job: POST it, then poll until it
-   * finishes. Cap the wait so a stuck job never spins forever. */
-  function pollManuscriptJob(jid, tries) {
-    return SMD.api.request("GET", "/v1/jobs/" + encodeURIComponent(jid)).then(function (j) {
-      var job = (j && j.job) || j || {};
-      var status = job.status;
-      if (status === "succeeded" || status === "failed" || status === "error" || tries >= 60) return job;
-      return new Promise(function (resolve) {
-        G.setTimeout(function () { resolve(pollManuscriptJob(jid, tries + 1)); }, 2000);
-      });
+  /* Ask MaiK to draft a manuscript for review / primary projects via the
+   * synchronous /ai-draft endpoint so it never triggers an unimplemented /jobs kind. */
+  function startManuscriptDraft() {
+    if (!SMD.api) return Promise.reject({ message: "API not available" });
+    var pid = apiProjectId();
+    var store = SMD.store;
+    var proj = store ? store.getActiveProject() : null;
+    var man = st.manuscript;
+    var input = {
+      title: (man && man.title) || (proj && proj.title) || "",
+      studyType: (proj && (proj.studyType || proj.study_type)) || "",
+      researchQuestion: (proj && proj.researchQuestion) || ""
+    };
+    var targetJournal = proj && (proj.targetJournal || proj.journal);
+    if (targetJournal) input.journalId = targetJournal;
+    return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/ai-draft", {
+      task: "manuscript_draft",
+      input: input
+    }).catch(function (err) {
+      throw manuscriptAiError(err, "MaiK could not draft the manuscript. Try again.");
     });
   }
 
-  function startManuscriptDraft() {
-    var pid = apiProjectId();
-    var key = "man-" + pid + "-" + Date.now();
-    return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/jobs",
-      { kind: "manuscript_draft", idempotencyKey: key }).then(function (res) {
-      var job = (res && res.job) || res || {};
-      var jid = job.id || (res && res.id);
-      if (!jid) return job;
-      if (job.status === "succeeded" || job.status === "failed" || job.status === "error") return job;
-      return pollManuscriptJob(jid, 0);
-    });
+  function applyManuscriptDraft(container, draft) {
+    var d = draft || {};
+    if (d.status === "failed" || d.status === "error") {
+      throw { message: "MaiK could not draft the manuscript. Try again." };
+    }
+    var secs = d.sections;
+    if (!secs || (Array.isArray(secs) && !secs.length)) {
+      load(container);
+      return ["manuscript"];
+    }
+    if (!st.manuscript) st.manuscript = defaultManuscript(st.projectId);
+    if (!st.manuscript.sections) st.manuscript.sections = [];
+    if (typeof d.title === "string" && d.title.trim()) {
+      st.manuscript.title = d.title.trim();
+    }
+    var list = [];
+    if (Array.isArray(secs)) {
+      list = secs;
+    } else if (typeof secs === "object") {
+      var keys = Object.keys(secs);
+      for (var k = 0; k < keys.length; k++) {
+        list.push({ id: keys[k], heading: keys[k].charAt(0).toUpperCase() + keys[k].slice(1), text: secs[keys[k]] });
+      }
+    }
+    for (var i = 0; i < list.length; i++) {
+      var item = list[i];
+      if (!item || !item.id || typeof item.text !== "string") continue;
+      var existing = null;
+      for (var j = 0; j < st.manuscript.sections.length; j++) {
+        if (st.manuscript.sections[j].id === item.id) { existing = st.manuscript.sections[j]; break; }
+      }
+      if (existing) {
+        existing.text = item.text;
+        if (item.heading) existing.heading = item.heading;
+      } else {
+        st.manuscript.sections.push({
+          id: item.id,
+          heading: item.heading || item.id,
+          level: 1,
+          text: item.text
+        });
+      }
+    }
+    saveLocalManuscript(st.projectId, st.manuscript);
+    st.saveNotice = "Drafted by MaiK. Review each section and save when ready.";
+    return ["manuscript"];
   }
 
   function getSection(id) {
@@ -1208,8 +1295,12 @@
       closeNumPopover();
     }, true);
     D.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" || e.keyCode === 27) closeNumPopover();
-    });
+      if (popEl && (e.key === "Escape" || e.keyCode === 27)) {
+        e.stopPropagation();
+        e.preventDefault();
+        closeNumPopover();
+      }
+    }, true);
   }
 
   /* Deterministic "What this means" line for a tapped number, from the
@@ -1764,7 +1855,8 @@
       var editor = container.querySelector("#rmdSectionEditor");
       if (editor) {
         editor.focus();
-        editor.scrollIntoView({ behavior: "smooth", block: "center" });
+        var reduceMotion = G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        editor.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
       }
     }, 50);
   }
@@ -1777,11 +1869,14 @@
     s.textContent = [
       "/* ResearchMD Manuscript Screen Styles */",
       "#researchMD .rmd-manuscript-screen { display: flex; flex-direction: column; flex: 1; height: 100%; min-height: 0; }",
-      "#researchMD .rmd-man-topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 18px; border-bottom: 1px solid var(--rmd-line); background: var(--rmd-panel); }",
-      "#researchMD .rmd-man-topbar-info { display: flex; align-items: baseline; gap: 10px; min-width: 0; }",
-      "#researchMD .rmd-man-title { margin: 0; font: 600 16px var(--rmd-f); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--rmd-ink); }",
-      "#researchMD .rmd-man-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; flex-wrap: wrap; }",
-      "#researchMD .rmd-man-phone-bar { display: none; background: var(--rmd-fill); padding: 4px; border-bottom: 1px solid var(--rmd-line); }",
+      "#researchMD .rmd-man-topbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; flex-shrink: 0; gap: 10px 12px; padding: 12px 18px; border-bottom: 1px solid var(--rmd-line); background: var(--rmd-panel); min-width: 0; }",
+      "#researchMD .rmd-man-topbar-info { display: flex; align-items: center; gap: 8px; flex: 1 1 260px; min-width: 0; }",
+      "#researchMD .rmd-man-title { margin: 0; font: 600 16px/1.3 var(--rmd-f); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--rmd-ink); min-width: 0; }",
+      "#researchMD .rmd-man-topbar-info .rmd-version-tag, #researchMD .rmd-man-topbar-info .rmd-badge { flex: 0 0 auto; white-space: nowrap; line-height: 1.35; }",
+      "#researchMD .rmd-man-actions { display: flex; align-items: center; gap: 8px; flex: 0 1 auto; flex-wrap: wrap; min-width: 0; max-width: 100%; }",
+      "#researchMD .rmd-man-actions .rmd-btn { white-space: nowrap; flex-shrink: 0; }",
+      "#researchMD .rmd-man-ai-wrap { margin: 12px 18px 0; flex-shrink: 0; }",
+      "#researchMD .rmd-man-phone-bar { display: none; flex-shrink: 0; background: var(--rmd-fill); padding: 4px; border-bottom: 1px solid var(--rmd-line); }",
       "#researchMD .rmd-man-phone-btn { flex: 1; border: 0; background: none; font: 500 13px var(--rmd-f); color: var(--rmd-mut); padding: 7px; border-radius: 6px; cursor: pointer; }",
       "#researchMD .rmd-man-phone-btn.rmd-seg-active { background: var(--rmd-panel); color: var(--rmd-ink); font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }",
       "#researchMD .rmd-man-split { display: flex; flex: 1; min-height: 0; overflow: hidden; }",
@@ -1829,7 +1924,7 @@
       "#researchMD .rmd-diff-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px; background: var(--rmd-fill); border-radius: 8px; }",
       "#researchMD .rmd-diff-select { padding: 6px 10px; border-radius: 6px; border: 1px solid var(--rmd-line); background: var(--rmd-panel); color: var(--rmd-ink); font-size: 13px; }",
       "#researchMD .rmd-locked-banner { background: var(--rmd-acc-soft); border: 1px solid var(--rmd-acc); border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--rmd-acc); }",
-      "#researchMD .rmd-phone-notice { background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 8px; padding: 10px 12px; font-size: 12.5px; color: var(--rmd-mut); }",
+      "#researchMD .rmd-phone-notice { flex-shrink: 0; background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 8px; padding: 10px 12px; font-size: 12.5px; color: var(--rmd-mut); }",
       "#researchMD .rmd-polish-card { background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px; }",
       "#researchMD .rmd-polish-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }",
       "#researchMD .rmd-polish-head-actions { display: flex; align-items: center; gap: 8px; }",
@@ -1839,6 +1934,14 @@
       "#researchMD .rmd-polish-change-actions { display: flex; align-items: center; gap: 6px; }",
       "#researchMD .rmd-polish-diff { font-size: 13.5px; line-height: 1.5; color: var(--rmd-ink); }",
       "@media (max-width: 767px) {",
+      "  #researchMD .rmd-man-topbar { flex-direction: column; align-items: stretch; gap: 10px; padding: 10px 14px; }",
+      "  #researchMD .rmd-man-topbar-info { flex: 0 0 auto; width: 100%; gap: 8px; }",
+      "  #researchMD .rmd-man-actions { width: 100%; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 2px 4px; }",
+      "  #researchMD .rmd-man-actions::-webkit-scrollbar { display: none; }",
+      "  #researchMD .rmd-man-actions .rmd-btn { flex: 0 0 auto; white-space: nowrap; min-height: 44px; padding: 8px 12px; }",
+      "  #researchMD .rmd-man-actions .rmd-btn:focus-visible { outline-offset: -2px; }",
+      "  #researchMD .rmd-man-ai-wrap { margin: 10px 14px 0; }",
+      "  #researchMD .rmd-man-phone-btn { min-height: 44px; }",
       "  #researchMD .rmd-man-split { flex-direction: column; }",
       "  #researchMD .rmd-man-left { flex: 1; border-right: 0; min-width: 0; }",
       "  #researchMD .rmd-man-right { flex: 1; padding: 12px; }",
@@ -1906,10 +2009,10 @@
     h.push('  </div>');
     h.push('</div>');
 
-    if (!isLocked) {
+    if (!isLocked && !isCaseReport) {
       if (!st.ai) st.ai = SMD.ai.state();
-      h.push('<div style="margin: 12px 18px 0;">');
-      h.push(SMD.ai.barHtml(st.ai, { task: "manuscript", label: "manuscript draft", cost: 2 }));
+      h.push('<div class="rmd-man-ai-wrap">');
+      h.push(SMD.ai.barHtml(st.ai, { task: "manuscript_draft", label: "manuscript draft", cost: 2 }));
       h.push(SMD.ai.noteHtml(st.ai, "manuscript"));
       h.push('</div>');
     }
@@ -2475,15 +2578,10 @@
 
     if (st.ai) {
       SMD.ai.bind(container, st.ai, {
-        pid: st.projectId, task: "manuscript", label: "manuscript draft", cost: 2,
+        pid: st.projectId, task: "manuscript_draft", label: "manuscript draft", cost: 2,
         request: function () { return startManuscriptDraft(); },
         apply: function (draft) {
-          var job = draft || {};
-          if (job.status === "failed" || job.status === "error") {
-            throw { message: "MaiK could not draft the manuscript. Try again." };
-          }
-          load(container);
-          return ["manuscript"];
+          return applyManuscriptDraft(container, draft);
         },
         render: function () { render(container); }
       });

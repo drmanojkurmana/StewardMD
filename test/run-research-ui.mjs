@@ -186,7 +186,123 @@ try {
   ok(await until(`!!document.querySelector('.rmd-projects-screen')`, 5000), 'projects screen rendered');
   ok(await ev(`document.querySelectorAll('.rmd-project-card').length >= 1`), 'initial seed project present');
   ok(/BCG Vaccine vs Tuberculosis/i.test(await text('.rmd-projects-screen')), 'BCG vaccine trial seed project listed');
-  ok(await ev(`document.getElementById('rmdSyncBadge') && /Synced/i.test(document.getElementById('rmdSyncBadge').innerText)`), 'sync badge shows Synced');
+  // Bug F: Sync queue chip and explanation sheet checks
+  // 1. Chip hidden at 0 items
+  ok(await ev(`(()=>{
+    const b = document.getElementById('rmdSyncBadge');
+    return !b || getComputedStyle(b).display === 'none';
+  })()`), 'chip hidden at 0 items');
+
+  // 2. Chip hidden while online with fresh items (< 30s)
+  await ev(`(()=>{
+    SMD_RESEARCH.store.setQueue([
+      { id: 'q_fresh1', type: 'study_create', timestamp: Date.now() },
+      { id: 'q_fresh2', type: 'study_create', timestamp: Date.now() }
+    ]);
+    SMD_RESEARCH.updateSyncBadge();
+    return true;
+  })()`);
+  ok(await ev(`(()=>{
+    const b = document.getElementById('rmdSyncBadge');
+    return !b || getComputedStyle(b).display === 'none';
+  })()`), 'chip hidden while online with fresh items');
+
+  // 3. Offline with 3 items shows "Offline: 3 changes waiting"
+  await ev(`(()=>{
+    Object.defineProperty(navigator, 'onLine', { value: false, configurable: true, writable: true });
+    SMD_RESEARCH.store.setQueue([
+      { id: 'q_off1', type: 'study_create', payload: { label: 'Study One' }, timestamp: Date.now() },
+      { id: 'q_off2', type: 'study_create', payload: { label: 'Study Two' }, timestamp: Date.now() },
+      { id: 'q_off3', type: 'study_create', payload: { label: 'Study Three' }, timestamp: Date.now() }
+    ]);
+    SMD_RESEARCH.updateSyncBadge();
+    return true;
+  })()`);
+  ok(await ev(`(()=>{
+    const b = document.getElementById('rmdSyncBadge');
+    return b && getComputedStyle(b).display !== 'none' && b.innerText.trim().includes('Offline: 3 changes waiting');
+  })()`), 'offline with 3 items shows Offline: 3 changes waiting');
+
+  // Check 44px tap target size
+  ok(await ev(`(()=>{
+    const b = document.getElementById('rmdSyncBadge');
+    const r = b.getBoundingClientRect();
+    const de = document.documentElement;
+    const z = parseFloat(de.style.zoom || getComputedStyle(de).zoom) || 1;
+    const h = r.height / z;
+    const w = r.width / z;
+    return (r.height >= 44 || h >= 44) && (r.width >= 44 || w >= 44);
+  })()`), 'sync chip has at least 44px tap target');
+
+  // 4. Tapping chip opens the sheet with explanation, count, last send time, and Send now
+  await click('#rmdSyncBadge');
+  ok(await until(`!!document.getElementById('rmdSyncSheetModal')`, 3000), 'tapping chip opens sync explanation sheet');
+  const sheetText = await text('#rmdSyncSheetModal');
+  ok(/These changes are saved on this phone and will be sent to your account automatically when you are back online\. Nothing is lost if you close the app\./.test(sheetText), 'sheet explains offline queue in plain words');
+  ok(/3 changes waiting|Waiting to send:\s*3 changes/.test(sheetText), 'sheet displays count of waiting changes');
+  ok(/Last time a send was tried:/.test(sheetText), 'sheet shows last time a send was tried');
+  ok(await ev(`!!document.getElementById('rmdSyncSendNow')`), 'sheet has Send now button');
+
+  // Focus returns to chip on close
+  await click('[data-rmd-sync-close]');
+  ok(await until(`!document.getElementById('rmdSyncSheetModal')`, 3000), 'sheet closes via close button');
+  ok(await ev(`document.activeElement && document.activeElement.id === 'rmdSyncBadge'`), 'focus returns to the chip on close');
+
+  // 5. Failed items test: only if some items failed with an error, show line naming them and "Discard these" with confirmation
+  await ev(`(()=>{
+    SMD_RESEARCH.store.setQueue([
+      { id: 'q_fail1', type: 'study_create', payload: { label: 'Cardiology Pilot' }, error: 'Server error 500', timestamp: Date.now() },
+      { id: 'q_ok1', type: 'study_create', payload: { label: 'Normal Study' }, timestamp: Date.now() }
+    ]);
+    SMD_RESEARCH.updateSyncBadge();
+    return true;
+  })()`);
+  await click('#rmdSyncBadge');
+  ok(await until(`!!document.getElementById('rmdSyncSheetModal')`, 3000), 'sheet opens for failed items check');
+  ok(await ev(`(()=>{
+    const m = document.getElementById('rmdSyncSheetModal');
+    return m && /Failed:.*Cardiology Pilot/.test(m.innerText);
+  })()`), 'line names failed items');
+  ok(await ev(`!!document.getElementById('rmdSyncDiscardBtn')`), 'Discard these button present for failed items');
+
+  // Click "Discard these" -> shows confirmation
+  await click('#rmdSyncDiscardBtn');
+  ok(await until(`!!document.querySelector('[data-rmd-sync-action="confirm-discard"]')`, 3000), 'Discard these shows confirmation');
+  ok(await ev(`/Discard these 1 failed change/.test(document.getElementById('rmdSyncSheetModal').innerText)`), 'confirmation asks in plain words');
+
+  // Confirm discard -> removes failed item
+  await click('[data-rmd-sync-action="confirm-discard"]');
+  ok(await until(`!document.querySelector('#rmdSyncDiscardBtn')`, 3000), 'confirmed discard removes failed item');
+  ok(await ev(`SMD_RESEARCH.store.getQueue().every(it => it.id !== 'q_fail1')`), 'failed item removed from queue');
+  await click('[data-rmd-sync-close]');
+
+  // 6. Online with item > 30s shows "Saving X changes" and "Send now" drains to 0
+  await ev(`(()=>{
+    Object.defineProperty(navigator, 'onLine', { value: true, configurable: true, writable: true });
+    SMD_RESEARCH.store.setQueue([
+      { id: 'q_wait_old', type: 'study_create', payload: { label: 'Cardio 1948', projectId: 'prj_custom_waiting' }, timestamp: Date.now() - 35000 }
+    ]);
+    SMD_RESEARCH.updateSyncBadge();
+    return true;
+  })()`);
+  ok(await ev(`(()=>{
+    const b = document.getElementById('rmdSyncBadge');
+    return b && getComputedStyle(b).display !== 'none' && b.innerText.trim().includes('Saving 1 change');
+  })()`), 'online with item waiting > 30s shows Saving 1 change');
+
+  // Open sheet and tap "Send now" -> drains to 0 when online
+  await click('#rmdSyncBadge');
+  ok(await until(`!!document.getElementById('rmdSyncSheetModal')`, 3000), 'sheet opens for send now test');
+  await click('#rmdSyncSendNow');
+  ok(await until(`SMD_RESEARCH.store.getQueue().length === 0`, 5000), 'Send now drains to 0 when online');
+  ok(await ev(`(()=>{
+    const b = document.getElementById('rmdSyncBadge');
+    return !b || getComputedStyle(b).display === 'none';
+  })()`), 'chip hides when queue drains to 0');
+  await click('[data-rmd-sync-close]');
+
+  // Clean queue back to 0
+  await ev(`SMD_RESEARCH.store.clearQueue(); SMD_RESEARCH.updateSyncBadge(); 1`);
   await shot('phone-375-projects');
 
   // 4. Create New Project via Modal Form
@@ -443,14 +559,40 @@ try {
   ok(await docFits(), '390x844 no horizontal scroll');
   await shot('phone-390-run');
 
+  // Verify 390x844 with sync chip visible and sheet open
+  await ev(`(()=>{
+    Object.defineProperty(navigator, 'onLine', { value: false, configurable: true, writable: true });
+    SMD_RESEARCH.store.setQueue([
+      { id: 'q_res1', type: 'study_create', timestamp: Date.now() },
+      { id: 'q_res2', type: 'study_create', timestamp: Date.now() },
+      { id: 'q_res3', type: 'study_create', timestamp: Date.now() }
+    ]);
+    SMD_RESEARCH.updateSyncBadge();
+    return true;
+  })()`);
+  await sleep(100);
+  ok(await docFits(), '390x844 with offline sync chip visible has no horizontal scroll');
+  await ev(`SMD_RESEARCH.openSyncSheet(); 1`);
+  await sleep(100);
+  ok(await docFits(), '390x844 with sync sheet open has no horizontal scroll');
+  await ev(`SMD_RESEARCH.closeSyncSheet(); 1`);
+
   await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 1366, deviceScaleFactor: 2, mobile: false });
   await sleep(200);
   ok(await docFits(), '1024x1366 no horizontal scroll');
   await shot('tablet-1024x1366-run');
 
+  // Verify 1024x1366 with sync chip visible and sheet open
+  ok(await docFits(), '1024x1366 with offline sync chip visible has no horizontal scroll');
+  await ev(`SMD_RESEARCH.openSyncSheet(); 1`);
+  await sleep(100);
+  ok(await docFits(), '1024x1366 with sync sheet open has no horizontal scroll');
+  await ev(`SMD_RESEARCH.closeSyncSheet(); SMD_RESEARCH.store.clearQueue(); SMD_RESEARCH.updateSyncBadge(); 1`);
+  await ev(`Object.defineProperty(navigator, 'onLine', { value: true, configurable: true, writable: true }); 1`);
+
   // 12. App-wide Text Audit: No em-dashes
   const allUiText = await text('#researchMD');
-  ok(!/—/.test(allUiText), 'no em-dashes in any ResearchMD UI text');
+  ok(!/[—–]/.test(allUiText), 'no em/en dashes in any ResearchMD UI text');
 
   // 13. Escape key closes overlay
   await ev(`document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 }));1`);

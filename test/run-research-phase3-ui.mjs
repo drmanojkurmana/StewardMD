@@ -487,7 +487,7 @@ try {
   await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 768, deviceScaleFactor: 2, mobile: false });
   await call('Page.navigate', { url: `http://localhost:${PORT}/?research=1` });
   ok(await until('!!window.SMD_RESEARCH && !!SMD_RESEARCH.screens && !!SMD_RESEARCH.screens.pdf && !!SMD_RESEARCH.screens.extract && !!SMD_RESEARCH.screens.rob && !!SMD_RESEARCH.screens.data', 30000), 'app loaded with all four Phase 3 screens');
-  ok(await ev(`!!document.querySelector('script[src*="research-screen-pdf.js?v=rmd3"]') && !!document.querySelector('script[src*="research-screen-extract.js?v=rmd3"]') && !!document.querySelector('script[src*="research-screen-rob.js?v=rmd4"]') && !!document.querySelector('script[src*="research-screen-data.js?v=rmd3"]')`), 'index.html carries the four new script tags with ?v=rmd3');
+  ok(await ev(`!!document.querySelector('script[src*="research-screen-pdf.js?v=rmd3"]') && !!document.querySelector('script[src*="research-screen-extract.js?v=rmd4"]') && !!document.querySelector('script[src*="research-screen-rob.js?v=rmd4"]') && !!document.querySelector('script[src*="research-screen-data.js?v=rmd3"]')`), 'index.html carries the four new script tags with ?v=rmd3/rmd4');
   // Mark the seed project as server-backed so server screens mount (practice gate skips it).
   await ev(`(function(){var s=JSON.parse(localStorage.getItem('smd_research_state_v1'));s.projects[0].serverId=s.projects[0].id;s.projects[0].practice=false;localStorage.setItem('smd_research_state_v1',JSON.stringify(s));return 1})()`);
   await ev(`SMD_RESEARCH.open({screen:'pdf'});1`);

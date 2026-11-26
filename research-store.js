@@ -215,6 +215,41 @@
     }
   }
 
+  function isDeviceOffline(err) {
+    if (typeof navigator !== "undefined" && navigator.onLine === false) return true;
+    if (err) {
+      if (err.code === "network" || err.status === 0) return true;
+      var msg = String(err.message || err.errorMessage || "");
+      if (/network|offline|failed to fetch|cannot reach/i.test(msg)) return true;
+    }
+    return false;
+  }
+
+  function cleanQueue(queue) {
+    if (!queue || !Array.isArray(queue)) return [];
+    var validTypes = {
+      "project_create": 1,
+      "study_create": 1,
+      "study_update": 1,
+      "study_update_forced": 1,
+      "run_create": 1
+    };
+    var cleaned = [];
+    for (var i = 0; i < queue.length; i++) {
+      var item = queue[i];
+      if (!item || typeof item !== "object") continue;
+      if (!item.type || !validTypes[item.type]) continue;
+      if (typeof item.type === "string" && (item.type.indexOf("ai") !== -1 || item.type.indexOf("draft") !== -1 || item.type.indexOf("search") !== -1)) continue;
+      var st = item.status || (item.error && item.error.status) || 0;
+      if (st >= 400 && st < 500) continue;
+      if (!item.payload || typeof item.payload !== "object") continue;
+      var pl = item.payload;
+      if (pl.id === "prj_bcg_1994" || pl.projectId === "prj_bcg_1994") continue;
+      cleaned.push(item);
+    }
+    return cleaned;
+  }
+
   function saveState() {
     try {
       if (typeof localStorage !== "undefined") {
@@ -247,8 +282,11 @@
             state.studies = parsed.studies || {};
             state.activeStudyId = parsed.activeStudyId || null;
             state.runs = parsed.runs || {};
-            state.offlineQueue = parsed.offlineQueue || [];
+            state.offlineQueue = cleanQueue(parsed.offlineQueue || []);
             state.syncState = parsed.syncState || "synced";
+            if (state.offlineQueue.length === 0 && state.syncState === "queue") {
+              state.syncState = "synced";
+            }
             state.conflict = parsed.conflict || null;
             return;
           }
@@ -696,24 +734,77 @@
       notify();
     },
 
-    // Offline queue
-    queueAction: function (type, payload) {
+    // Offline queue: only queue writes that failed because the phone is offline.
+    // Never queue AI draft calls or requests that got a 4xx client error.
+    queueAction: function (type, payload, err) {
+      if (!type || typeof type !== "string") return;
+      if (type.indexOf("ai") !== -1 || type.indexOf("draft") !== -1 || type.indexOf("search") !== -1) return;
+      if (type !== "project_create" && type !== "study_create" && type !== "study_update" && type !== "study_update_forced" && type !== "run_create") {
+        return;
+      }
+      if (err) {
+        var status = err.status || 0;
+        if (!status && err.code && String(err.code).indexOf("http_") === 0) {
+          status = parseInt(String(err.code).slice(5), 10) || 0;
+        }
+        if (status >= 400 && status < 500) {
+          return;
+        }
+      }
+      if (payload && (payload.id === "prj_bcg_1994" || payload.projectId === "prj_bcg_1994")) {
+        return;
+      }
+      if (!isDeviceOffline(err)) {
+        return;
+      }
       var item = {
         id: "q_" + Date.now() + "_" + Math.floor(Math.random() * 1000),
         idempotencyKey: "idem_" + Math.random().toString(36).slice(2) + Date.now(),
         type: type,
         payload: payload,
         timestamp: Date.now(),
-        version: payload.version || 1
+        version: (payload && payload.version) || 1
       };
       state.offlineQueue.push(item);
       if (state.syncState !== "conflict") {
         state.syncState = "queue";
       }
+      saveState();
+      notify();
     },
 
     getQueue: function () {
       return state.offlineQueue.slice();
+    },
+
+    setQueue: function (q) {
+      state.offlineQueue = cleanQueue(q || []);
+      if (state.offlineQueue.length === 0 && state.syncState !== "conflict") {
+        state.syncState = "synced";
+      }
+      saveState();
+      notify();
+    },
+
+    cleanQueue: function () {
+      state.offlineQueue = cleanQueue(state.offlineQueue);
+      if (state.offlineQueue.length === 0 && state.syncState !== "conflict") {
+        state.syncState = "synced";
+      }
+      saveState();
+      notify();
+      return state.offlineQueue.slice();
+    },
+
+    removeQueueItem: function (id) {
+      state.offlineQueue = state.offlineQueue.filter(function (it) {
+        return it.id !== id;
+      });
+      if (state.offlineQueue.length === 0 && state.syncState !== "conflict") {
+        state.syncState = "synced";
+      }
+      saveState();
+      notify();
     },
 
     clearQueue: function () {

@@ -894,7 +894,11 @@
     if (typeof data === "string" && /json/i.test(ct)) { try { data = JSON.parse(data); } catch (e) {} }
     var reqOpts = {
       url: url, method: (init.method || "GET").toUpperCase(),
-      headers: headers, data: data, connectTimeout: 30000, readTimeout: 30000
+      headers: headers, data: data, connectTimeout: 30000,
+      readTimeout: (function () {
+        var rt = (init.readTimeout > 0 ? init.readTimeout : 0) || (init.timeout > 0 ? init.timeout : 0);
+        return rt > 0 ? Math.min(rt, 180000) : 30000;
+      }())
     };
     /* NETWORK RECOVERY AFTER SLEEP.
      *

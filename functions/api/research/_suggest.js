@@ -38,15 +38,21 @@ export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, 
   const { env, db, uid, claims, requestId, api } = ctx;
   const { json, err, audit, uuid } = api;
   const email = claims && claims.email;
-  /* 1. PHI gate FIRST, on the exact text about to leave (system included). */
+  /* 1. PHI gate: skip entirely when the caller certifies that the input is
+   * ONLY published literature (fetched from PubMed/Europe PMC/Crossref, never
+   * user-typed text). Caps, credits, usage log and audit stay. */
   const finalSystem = RESEARCH_FRAMING + (system ? "\n\n" + system : "");
   const assembled = finalSystem + "\n\n" + prompt;
-  const report = scan(assembled);
-  if (report.blocked) {
-    const categories = phiCategories(report.hits);
-    await audit(db, projectId, uid, "ai_phi_blocked", refId, { categories, purpose });
-    return { error: json({ error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
-      categories }, 422, { "x-request-id": requestId }) };
+  if (opts.publicLiterature === true) {
+    await audit(db, projectId, uid, "phi_gate_skipped_public_literature", refId, { purpose });
+  } else {
+    const report = scan(assembled);
+    if (report.blocked) {
+      const categories = phiCategories(report.hits);
+      await audit(db, projectId, uid, "ai_phi_blocked", refId, { categories, purpose });
+      return { error: json({ error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
+        categories }, 422, { "x-request-id": requestId }) };
+    }
   }
   /* 2. Caps: per-call input ceiling, then daily AI spend (quote included). */
   const ceiling = TIER_CEILINGS.T1;
@@ -93,8 +99,8 @@ export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, 
   };
 }
 
-async function runT1(ctx, projectId, purpose, system, prompt, refId) {
-  return runUserAi(ctx, projectId, purpose, system, prompt, refId);
+async function runT1(ctx, projectId, purpose, system, prompt, refId, opts) {
+  return runUserAi(ctx, projectId, purpose, system, prompt, refId, opts);
 }
 
 /* Pull the first JSON value (array or object) out of a model reply, tolerating
@@ -134,13 +140,34 @@ export async function extractionSuggestions(ctx, projectId, studyId, body) {
   }
   /* Document text comes from the worker result.json of the linked artifact. */
   const artifactId = (body && body.artifactId) || row.artifact_id;
-  if (!artifactId) return err(409, "job_not_done", "Attach a PDF and run extraction before requesting suggestions", requestId);
+  if (!artifactId) {
+    return err(409, "pdf_not_attached", "Attach the study PDF on the Page tab first before asking MaiK to draft.", requestId);
+  }
   const artifact = await db.prepare("SELECT * FROM research_extraction_artifacts WHERE id=? AND project_id=?").bind(artifactId, projectId).first();
   if (!artifact) return err(404, "artifact_not_found", "Artifact not found", requestId);
   const job = artifact.job_id ? await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(artifact.job_id).first() : null;
-  if (!job || job.status !== "succeeded") return err(409, "job_not_done", "The extraction job has not finished yet", requestId);
+  if (!job || job.status !== "succeeded") {
+    if (job && (job.status === "failed" || job.status === "cancelled")) {
+      return json({
+        error: { code: "job_failed", message: "Reading that PDF did not finish. Re-attach the study PDF on the Page tab.", requestId },
+        jobId: job.id,
+        jobStatus: job.status
+      }, 409, { "x-request-id": requestId });
+    }
+    return json({
+      error: { code: "job_not_done", message: "MaiK is still reading the paper. Wait a moment and try again.", requestId },
+      jobId: job ? job.id : null,
+      jobStatus: job ? job.status : (artifact.status || "queued")
+    }, 409, { "x-request-id": requestId });
+  }
   const obj = await env.RESEARCH_R2.get("projects/" + projectId + "/jobs/" + job.id + "/result.json");
-  if (!obj) return err(409, "job_not_done", "The extraction result is not available yet", requestId);
+  if (!obj) {
+    return json({
+      error: { code: "job_not_done", message: "MaiK is finishing reading the paper. Wait a moment and try again.", requestId },
+      jobId: job.id,
+      jobStatus: "running"
+    }, 409, { "x-request-id": requestId });
+  }
   const result = await obj.json();
   const pages = Array.isArray(result.pages) ? result.pages : [];
   let doc = pages.map((p) => "[page " + p.n + "]\n" + (p.text || "")).join("\n\n");
@@ -152,7 +179,7 @@ export async function extractionSuggestions(ctx, projectId, studyId, body) {
     "Never invent a value; omit any field you cannot read. These are suggestions a human will verify.";
   const prompt = "Extract the fields from the document below.\n\n" + doc;
   const refId = "sug_" + crypto.randomUUID().replace(/-/g, "");
-  const out = await runT1(ctx, projectId, "extraction_suggestion", system, prompt, refId);
+  const out = await runT1(ctx, projectId, "extraction_suggestion", system, prompt, refId, { publicLiterature: true });
   if (out.error) return out.error;
   const parsed = extractJson(out.text);
   const arr = Array.isArray(parsed) ? parsed : [];
@@ -195,7 +222,7 @@ export async function screeningSuggestion(ctx, projectId, recordId) {
     "rationale is one short sentence. This is a suggestion; a human reviewer makes the actual vote.";
   const prompt = "Title: " + (record.title || "") + "\nYear: " + (record.year || "") + "\nAbstract: " + abstract.slice(0, DOC_CHAR_BUDGET);
   const refId = "sug_" + crypto.randomUUID().replace(/-/g, "");
-  const out = await runT1(ctx, projectId, "screening_suggestion", system, prompt, refId);
+  const out = await runT1(ctx, projectId, "screening_suggestion", system, prompt, refId, { publicLiterature: true });
   if (out.error) return out.error;
   const parsed = extractJson(out.text) || {};
   const decision = ["include", "exclude", "uncertain"].indexOf(parsed.decision) >= 0 ? parsed.decision : "uncertain";
