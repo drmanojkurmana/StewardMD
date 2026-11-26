@@ -73,7 +73,7 @@
   // The element goBack() activates at step 1: the top-most overlay's control, preferring a Back control
   // (step one screen back) over a Close control (dismiss to home). null when no overlay control is on screen.
   function topBackControl() {
-    var els = [].slice.call(document.querySelectorAll(BACK_SEL)).filter(function (el) { return el.id !== "smdTopBack" && onScreen(el) && interactive(el); });
+    var els = [].slice.call(document.querySelectorAll(BACK_SEL)).filter(function (el) { return onScreen(el) && interactive(el); });
     if (!els.length) return null;
     // A control the user can actually see wins over one buried under another screen. onScreen() passes a covered
     // control (owner 2026-11-22: Android back in SURGX steps went home, i.e. a "Back to home" control left on a layer
@@ -122,7 +122,7 @@
     var kids = document.body.children;
     for (var i = 0; i < kids.length; i++) {
       var n = kids[i];
-      if (n === h || n.id === "smdTopBack") continue;
+      if (n === h) continue;
       var cs = window.getComputedStyle(n);
       if (cs.position !== "fixed" && cs.position !== "absolute") continue;
       if (cs.display === "none" || cs.visibility === "hidden") continue;
@@ -316,91 +316,6 @@
     return false;
   }
 
-  // ── Universal top-left back button (WhatsApp-style): shown on any screen that CAN go back but does NOT
-  //    already have its own top-left back/close control — so every module gets a visible back button without
-  //    per-module edits and without duplicating existing ones. Tap = goBack. Hidden at home/root. ──
-  var _btn = null;
-  function ensureBackBtn() {
-    if (_btn) return _btn;
-    var b = document.createElement("button");
-    b.id = "smdTopBack"; b.type = "button"; b.setAttribute("aria-label", "Back");
-    b.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
-    // display stays flex; visibility does the hiding. wouldOverlap() has to know where this button
-    // WOULD land before deciding whether to show it, and a display:none element measures 0x0.
-    // Visible button stays 38px; the ::after hitbox (injected below) makes the touch area 44px.
-    b.style.cssText = "position:fixed;left:9px;top:calc(env(safe-area-inset-top,0px) + 9px);z-index:99000;width:38px;height:38px;"
-      + "display:flex;visibility:hidden;opacity:0;pointer-events:none;align-items:center;justify-content:center;border:none;border-radius:50%;cursor:pointer;"
-      + "background:rgba(15,118,110,.92);color:#fff;box-shadow:0 2px 10px -2px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent";
-    try {
-      var hs = document.createElement("style"); hs.id = "smdTopBackCss";
-      hs.textContent = "#smdTopBack::after{content:\"\";position:absolute;inset:-3px;border-radius:50%}";
-      (document.head || document.documentElement).appendChild(hs);
-    } catch (e) {}
-    b.addEventListener("click", function (ev) { ev.stopPropagation(); goBack(); setTimeout(syncHandle, 80); });
-    (document.body || document.documentElement).appendChild(b);
-    _btn = b; return b;
-  }
-  // Does the top-most screen already show a back/close control in the top-left corner? (Then no need for ours.)
-  function hasTopLeftControl() {
-    var els = [].slice.call(document.querySelectorAll(BACK_SEL)).filter(function (el) { return el.id !== "smdTopBack" && onScreen(el) && interactive(el); });
-    for (var i = 0; i < els.length; i++) {
-      var r = els[i].getBoundingClientRect();
-      if (r.width > 4 && r.height > 4 && r.top < 150 && r.left < 150) return true;
-    }
-    return false;
-  }
-  // hasTopLeftControl() only catches a BACK_SEL match sitting top-left. A bottom sheet like MaiK
-  // (height:86vh) leaves home's OWN top-left header button genuinely visible above it, while MaiK's
-  // Close sits top-RIGHT — so hasTopLeftControl sees no top-left match and would show our button
-  // right on top of home's. Detect that by asking whether the topmost overlay's own root even
-  // reaches the top of the viewport: if it doesn't, home is exposed above it and our button would
-  // double up on home's control regardless of where the overlay's own control sits. A full-screen
-  // overlay (root.top===0) doesn't expose home, so this never falsely suppresses the button on a
-  // dead-end screen that has no back control of its own.
-  function topExposesHome() {
-    var ctrl = topBackControl();
-    var root = ctrl && overlayRootOf(ctrl);
-    return !!(root && root.getBoundingClientRect().top > 8);
-  }
-  /* GEOMETRY, NOT NAMING. hasTopLeftControl() only recognises a control that MATCHES BACK_SEL, so a
-   * header whose own control is simply named something else (the OPD queue's round add-patient /
-   * refresh cluster) or a screen whose TITLE starts at the left edge (the insulin module) was
-   * invisible to it, and this button was painted straight on top - the reported "bad overlapping.
-   * I never asked for overlapping button". Ask the much simpler question instead: is anything
-   * already drawn where this button would sit? elementsFromPoint gives the answer exactly, and only
-   * probes three points rather than walking the DOM. */
-  var OVERLAP_SEL = 'button,a[href],[role="button"],[data-act],[data-ins],[data-oh-act],[data-oe-act],'
-    + 'input,select,textarea,h1,h2,h3,[class*="title"],[class*="-tt"],[class*="head"]';
-  function wouldOverlap(b) {
-    if (!document.elementsFromPoint) return false;
-    var r = b.getBoundingClientRect();
-    if (!(r.width > 0 && r.height > 0)) return false;
-    var pts = [[r.left + r.width / 2, r.top + r.height / 2], [r.left + 4, r.top + 4], [r.right - 4, r.bottom - 4]];
-    for (var p = 0; p < pts.length; p++) {
-      var stack = document.elementsFromPoint(pts[p][0], pts[p][1]) || [];
-      for (var i = 0; i < stack.length; i++) {
-        var e = stack[i];
-        if (e === b || e === document.body || e === document.documentElement) continue;
-        try { if (e.matches && e.matches(OVERLAP_SEL)) return true; } catch (x) {}
-      }
-    }
-    return false;
-  }
-  function syncHandle() {
-    try {
-      var b = ensureBackBtn();
-      // Measure BEFORE deciding: the button must be laid out for wouldOverlap() to read its rect,
-      // which is why hiding is visibility-based rather than display:none.
-      // Home pulled down (home-pull.js): the hero slides away from this corner, which made wouldOverlap() false and put
-      // a Back button over Home itself (owner screenshot 2026-11-20). Home never shows it.
-      var homePulled = false; try { homePulled = document.body.classList.contains("hv-pulling") || !!(window.SMD_HOME_PULL && SMD_HOME_PULL.open()); } catch (e) {}
-      var show = !homePulled && canGoBack() && !hasTopLeftControl() && !topExposesHome() && !wouldOverlap(b);
-      b.style.visibility = show ? "visible" : "hidden";
-      b.style.opacity = show ? "1" : "0";
-      b.style.pointerEvents = show ? "auto" : "none";
-    } catch (e) {}
-  }
-
   var enable = isNative || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
   if (enable) {
     var sx = 0, sy = 0, t0 = 0, tracking = false, dragging = false, dragEl = null, curDx = 0, finishing = false;
@@ -445,10 +360,10 @@
           // Finish the slide off-screen on the drawer curve, THEN go back, so the screen is not yanked.
           var ms = settleMs(vw() - curDx, vx);
           finishing = true; setX(el, vw(), true, ms);
-          setTimeout(function () { finishing = false; edgeSwipeAction(true); _heldCtrl = null; clearEl(el); setTimeout(syncHandle, 80); }, Math.max(120, ms - 60));
+          setTimeout(function () { finishing = false; edgeSwipeAction(true); _heldCtrl = null; clearEl(el); }, Math.max(120, ms - 60));
           return;
         }
-        edgeSwipeAction(!!el); _heldCtrl = null; if (el) clearEl(el); setTimeout(syncHandle, 80);
+        edgeSwipeAction(!!el); _heldCtrl = null; if (el) clearEl(el);
       }
       else if (el) { setX(el, 0, true, settleMs(curDx, vx)); setTimeout(function () { try { if (dragEl !== el && el.style.transition !== "none") el.style.transition = ""; } catch (e) {} }, 320); }
     }
@@ -502,13 +417,6 @@
     }, { passive: true });
   }
 
-  // keep the handle synced as screens open/close (cheap DOM poll; also refreshed after each goBack)
-  // Skip while backgrounded: nothing can touch the DOM while hidden, and syncHandle re-reconciles
-  // on the next tick after resume anyway.
-  setInterval(function () { if (document.hidden) return; syncHandle(); }, 900);
-  if (document.readyState !== "loading") syncHandle();
-  else document.addEventListener("DOMContentLoaded", syncHandle);
-
   /* Android system-gesture / hardware back. THE EDGE DRAG ARRIVES HERE, NOT AS TOUCH EVENTS.
    *
    * With gesture navigation on (the Pixel default — `adb shell settings get secure navigation_mode`
@@ -541,12 +449,11 @@
     if (isNative && C.Plugins && C.Plugins.App && C.Plugins.App.addListener) {
       C.Plugins.App.addListener("backButton", function () {
         if (!hardwareBack()) { try { C.Plugins.App.exitApp(); } catch (e) {} }
-        setTimeout(syncHandle, 80);
       });
     }
   } catch (e) {}
 
-  window.SMD_SWIPE_BACK = { lastBackAt: function () { return _last; }, swipeOn: swipeOn, moduleOpen: moduleOpen, goBack: goBack, hardwareBack: hardwareBack, drawerIsOpen: drawerIsOpen, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
+  window.SMD_SWIPE_BACK = { lastBackAt: function () { return _last; }, swipeOn: swipeOn, moduleOpen: moduleOpen, goBack: goBack, hardwareBack: hardwareBack, drawerIsOpen: drawerIsOpen, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive };
 })();
 
 /* SMD-15 (QA sheet 2026-09-27): the grey "<" / ">" tab parked on the screen edge in the reports is
