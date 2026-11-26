@@ -35,6 +35,8 @@ jobs:
     runs-on: ubuntu-latest
     if: inputs.confirm == 'deploy'
     environment: ${{ inputs.environment }}
+    env:
+      RESEARCH_DEPLOY_HOOK: ${{ secrets.RESEARCH_DEPLOY_HOOK }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -77,11 +79,10 @@ jobs:
       - name: Deploy to container runtime (placeholder)
         if: env.RESEARCH_DEPLOY_HOOK != ''
         env:
-          RESEARCH_DEPLOY_HOOK: ${{ secrets.RESEARCH_DEPLOY_HOOK }}
           OWNER: ${{ github.repository_owner }}
           SHA: ${{ github.sha }}
         run: |
           LOWER_OWNER=$(echo "${OWNER}" | tr '[:upper:]' '[:lower:]')
           IMAGE_URI="ghcr.io/${LOWER_OWNER}/stewardmd-research-worker:${SHA}"
           echo "Deploying ${IMAGE_URI} via runtime deploy hook..."
-          curl -f -s -S -X POST "${RESEARCH_DEPLOY_HOOK}"
+          curl -f -sS -X POST -H 'Content-Type: application/json' --data "{\"image\":\"${IMAGE_URI}\",\"environment\":\"${{ inputs.environment }}\"}" "$RESEARCH_DEPLOY_HOOK"
