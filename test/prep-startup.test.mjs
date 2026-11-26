@@ -60,6 +60,46 @@ test("willPlay enables plain opens, skips deep links and honors kill switches", 
   assert.equal(bootWin({ onboard: false, startup: true }).PREP_STARTUP.willPlay(), true);
 });
 
+test("due() helper throttles repeated opens on same calendar day under 3 hours", () => {
+  const { due } = bootWin().PREP_STARTUP;
+  const now = new Date(2026, 10, 26, 14, 0, 0).getTime();
+
+  // due() for no history
+  assert.equal(due(null, now), true);
+  assert.equal(due(0, now), true);
+  assert.equal(due(undefined, now), true);
+
+  // 10 min ago same day (false)
+  assert.equal(due(now - 10 * 60 * 1000, now), false);
+
+  // 2 h 59 min (false)
+  assert.equal(due(now - (2 * 60 + 59) * 60 * 1000, now), false);
+
+  // 3 h (true)
+  assert.equal(due(now - 3 * 60 * 60 * 1000, now), true);
+
+  // yesterday 23:50 opened at 00:10 (true)
+  const yest = new Date(2026, 10, 25, 23, 50, 0).getTime();
+  const todayEarly = new Date(2026, 10, 26, 0, 10, 0).getTime();
+  assert.equal(due(yest, todayEarly), true);
+});
+
+test("willPlay false right after noteOpen(), and ?prepstartup=1 forces true", () => {
+  const win = bootWin({ w: 390, h: 844 });
+  assert.equal(win.PREP_STARTUP.willPlay(), true);
+  win.PREP_STARTUP.noteOpen();
+  assert.equal(win.PREP_STARTUP.willPlay(), false);
+
+  const winForced = bootWin({ w: 390, h: 844, search: "?prepstartup=1" });
+  winForced.PREP_STARTUP.noteOpen();
+  assert.equal(winForced.PREP_STARTUP.willPlay(), true);
+
+  // Storage failure keeps today's behaviour: play
+  const winThrow = bootWin({ w: 390, h: 844 });
+  winThrow.localStorage.getItem = () => { throw new Error("SecurityError"); };
+  assert.equal(winThrow.PREP_STARTUP.willPlay(), true);
+});
+
 test("blending, motion opt-outs, PiP opt-out, and loader/home/prep hooks are wired", () => {
   assert.match(PS, /data-own-motion/);
   assert.match(PS, /data-no-motion/);

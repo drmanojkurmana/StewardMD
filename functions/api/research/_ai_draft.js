@@ -71,12 +71,13 @@
  *     or docxBase64, without extracted text, returns 422 docx_needs_pdf
  *     and does not call a provider. Upload a PDF through the existing
  *     pdf-uploads route instead.
- *     The PHI gate runs on the extracted thesis text before any provider
- *     call. A hit returns 422 phi_blocked with categories and pages, and
- *     the matched text is not returned.
+ *     The thesis PHI helper masks hard identifiers ([phone], [ID],
+ *     [email], [DOB]) automatically before any provider call. Soft hits
+ *     (patient_name, etc.) return 409 consent_needed with pages and
+ *     masked context previews until consent is confirmed and audited.
  */
 import { runUserAi, extractJson } from "./_suggest.js";
-import { scan, phiCategories } from "./_phi.js";
+import { scan, phiCategories, scanAndMaskThesis } from "./_phi.js";
 import { checklistItems } from "./_checklists.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
@@ -143,13 +144,13 @@ function trimWords(text, max) {
   return words.slice(0, max).join(" ");
 }
 
-async function oneCall(ctx, projectId, task, system, prompt) {
+async function oneCall(ctx, projectId, task, system, prompt, extraOpts) {
   const refId = ctx.api.uuid("adf_");
-  return runUserAi(ctx, projectId, "ai_draft_" + task, system, prompt, refId, {
+  return runUserAi(ctx, projectId, "ai_draft_" + task, system, prompt, refId, Object.assign({
     temperature: 0,
     maxOutputTokens: MAX_OUT[task] || 800,
     insufficientMessage: TOKENS_MESSAGE,
-  });
+  }, extraOpts || {}));
 }
 
 async function storeDraft(ctx, projectId, task, draft, model, costInr) {
@@ -841,21 +842,35 @@ async function thesisTask(ctx, projectId, input) {
   const full = thesisSource(input);
   if (!full.trim())
     return err(400, "invalid_body", "Thesis text is required. Export a DOCX (Word document) as PDF and upload the PDF.", requestId);
-  const report = scan(full);
-  if (report.blocked) {
-    const categories = phiCategories(report.hits);
-    const pages = phiPageList(input, report.hits);
-    await audit(db, projectId, uid, "ai_phi_blocked", "thesis", { categories, purpose: "thesis_to_paper", pages });
+  const thesisScan = scanAndMaskThesis(input);
+  const consentObj = input.phiConsent && typeof input.phiConsent === "object" ? input.phiConsent : null;
+  const hasConsent = input.phiConsent === true || (consentObj && consentObj.confirmed === true);
+  const consentTs = (consentObj && typeof consentObj.timestamp === "string" && consentObj.timestamp) ||
+    (typeof input.consentTs === "string" && input.consentTs) || new Date().toISOString();
+  if (thesisScan.softHits.length > 0 && !hasConsent) {
     return json({
       error: {
-        code: "phi_blocked",
-        message: "Patient identifiers (protected health information, PHI) were found. Remove them before MaiK reads this thesis.",
+        code: "consent_needed",
+        message: "Please confirm there are no patient names left in your thesis before continuing.",
         requestId,
       },
-      categories,
-      pages,
-    }, 422, { "x-request-id": requestId });
+      pages: thesisScan.softPages,
+      maskedCount: thesisScan.maskedCount,
+      findings: thesisScan.softHits.slice(0, 50),
+      categories: thesisScan.softCategories,
+    }, 409, { "x-request-id": requestId });
   }
+  if (hasConsent) {
+    await audit(db, projectId, uid, "thesis_phi_consent", "thesis", {
+      purpose: "thesis_to_paper",
+      pages: thesisScan.softPages,
+      maskedCount: thesisScan.maskedCount,
+      maskedCategories: thesisScan.maskedCategories,
+      consentTs,
+    });
+  }
+  const maskedFull = thesisScan.maskedText;
+  const maskedPages = thesisScan.maskedPages.length ? thesisScan.maskedPages : input.pages;
   let journalLimit = null;
   if (typeof input.journalId === "string" && input.journalId) {
     const journal = await db.prepare("SELECT word_limit_main FROM research_journals WHERE id=?").bind(input.journalId).first();
@@ -872,10 +887,10 @@ async function thesisTask(ctx, projectId, input) {
     if (!found) return err(400, "invalid_body", "section must be abstract, introduction, methods, results or discussion", requestId);
     sections = [found];
   }
-  const suggestion = suggestDesign(full);
+  const suggestion = suggestDesign(maskedFull);
   const paperType = asText(input.paperType, 80) || suggestion.paperType;
   const checklist = asText(input.checklist, 40) || suggestion.checklist;
-  const excerpt = full.slice(0, 20000);
+  const excerpt = maskedFull.slice(0, 20000);
   const budgets = budgetsFor(sections, wordLimit);
   const system = "You turn thesis text into one section of a journal article (IMRaD: Introduction, Methods, Results, Discussion). " +
     "Return ONLY JSON {\"text\":\"...\"}. Copy numbers exactly from the thesis. Do not invent or recompute a number. " +
@@ -888,14 +903,14 @@ async function thesisTask(ctx, projectId, input) {
     const budget = budgets.get(section.id) || wordLimit;
     const prompt = "Section: " + section.heading + "\nWord budget: " + budget +
       "\nPaper type: " + paperType + "\nChecklist: " + checklist + "\n\nThesis text:\n" + excerpt;
-    const out = await oneCall(ctx, projectId, "thesis_to_paper", system, prompt);
+    const out = await oneCall(ctx, projectId, "thesis_to_paper", system, prompt, { thesisCleared: true });
     if (out.error) return out.error;
     model = out.model || model;
     costInr += out.costInr || 0;
     const parsed = extractJson(out.text);
     if (parsed && typeof parsed === "object" && !Array.isArray(parsed) && Array.isArray(parsed.references))
       modelRefs.push(...parsed.references);
-    const scrubbed = scrubNumbers(sectionText(out.text), full);
+    const scrubbed = scrubNumbers(sectionText(out.text), maskedFull);
     const trimmed = trimWords(scrubbed.text, budget);
     const trimmedFlag = wordCount(scrubbed.text) > budget;
     const still = scrubbed.numbers.filter((n) => trimmed.indexOf(n) >= 0);
@@ -905,7 +920,7 @@ async function thesisTask(ctx, projectId, input) {
       text: trimmed,
       flags: scrubbed.flags,
       trimmedToWordLimit: trimmedFlag,
-      numbers: still.map((value) => ({ value, locator: locatorFor(value, input.pages, full) })),
+      numbers: still.map((value) => ({ value, locator: locatorFor(value, maskedPages, maskedFull) })),
     });
   }
   let total = drafted.reduce((n, s) => n + wordCount(s.text), 0);
@@ -930,8 +945,8 @@ async function thesisTask(ctx, projectId, input) {
     sections: drafted.map((s) => ({
       id: s.id, heading: s.heading, text: s.text, flags: s.flags, numbers: s.numbers,
     })),
-    suggestedTables: suggestedTables(full),
-    references: thesisReferences(full, modelRefs),
+    suggestedTables: suggestedTables(maskedFull),
+    references: thesisReferences(maskedFull, modelRefs),
   };
   const stored = await storeDraft(ctx, projectId, "thesis_to_paper", draft, model, roundInr(costInr));
   return respond(ctx, stored, model, costInr);

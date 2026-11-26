@@ -36,10 +36,12 @@ const wordsOf = (s) => s.split(/\s+/).filter(Boolean).map((t) => ({ t, x0: 0, y0
 
 // Mocked server state.
 let projN = 0, uploadN = 0;
-let jobMode = 'phi'; // 'phi' -> job fails phi_blocked; 'clean' -> job succeeds
+let jobMode = 'phi'; // 'phi' -> job prompts consent_needed; 'clean' -> job succeeds
+let requireDraftConsent = false;
 const createdProjects = [];
 const aiDraftCalls = [];
 const savedSections = [];
+const pageErrors = [];
 
 const server = http.createServer((req, res) => {
   const p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
@@ -87,7 +89,14 @@ const server = http.createServer((req, res) => {
       const jobMatch = p.match(/^\/api\/research\/v1\/jobs\/([^/]+)$/);
       if (jobMatch && req.method === 'GET') {
         if (jobMode === 'phi') {
-          return send(200, { id: jobMatch[1], status: 'failed', errorCode: 'phi_blocked', errorPages: [12, 54] });
+          return send(200, {
+            id: jobMatch[1],
+            status: 'failed',
+            errorCode: 'consent_needed',
+            errorPages: [12, 54],
+            maskedCount: 1,
+            findings: [{ page: 12, category: 'patient_name', preview: '...admitted to [name]...' }]
+          });
         }
         return send(200, { id: jobMatch[1], status: 'succeeded' });
       }
@@ -95,7 +104,7 @@ const server = http.createServer((req, res) => {
       if (resMatch && req.method === 'GET') {
         return send(200, {
           pages: [
-            { n: 12, width: 612, height: 792, words: wordsOf('Patient identifiers were removed from this page before upload.'), ocr: false },
+            { n: 12, width: 612, height: 792, words: wordsOf('Observations were collected across participating centres.'), ocr: false },
             { n: 54, width: 612, height: 792, words: wordsOf('Table 7 reports the pooled risk ratio 0.49 with 95% CI 0.34 to 0.70 across 13 trials and 123 people.'), ocr: false }
           ],
           ocr: false
@@ -104,6 +113,14 @@ const server = http.createServer((req, res) => {
       const aiMatch = p.match(/^\/api\/research\/v1\/projects\/([^/]+)\/ai-draft$/);
       if (aiMatch && req.method === 'POST') {
         aiDraftCalls.push(b);
+        if (requireDraftConsent && !(b && b.input && b.input.phiConsent && b.input.phiConsent.confirmed)) {
+          return send(409, {
+            error: { code: 'consent_needed', message: 'Please confirm there are no patient names left on the flagged pages before AI drafting.' },
+            pages: [2],
+            maskedCount: 1,
+            findings: [{ page: 2, category: 'patient_name', preview: '...admitted to the [name]...' }]
+          });
+        }
         return send(200, {
           draft: {
             sections: [
@@ -263,16 +280,16 @@ async function shot(name) {
     return true;
   })()`);
 
-  const uploadDocx = () => ev(`(()=>{
+  const uploadDocx = (opts = {}) => ev(`((opts)=>{
     const inp=document.querySelector('#rmdThesisFile');
     if(!inp)return false;
     const enc=new TextEncoder();
-    const xml='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    const xml=opts.xml || ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
       +'<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'
       +'<w:p><w:r><w:t>Observational thesis cohort of BCG vaccination outcomes.</w:t></w:r></w:p>'
       +'<w:p><w:r><w:br w:type="page"/></w:r></w:p>'
       +'<w:tbl><w:tr><w:tc><w:p><w:r><w:t>Table 7</w:t></w:r></w:p></w:tc><w:tc><w:p><w:r><w:t>Pooled risk ratio 0.49 (95% CI 0.34 to 0.70) across 120 patients.</w:t></w:r></w:p></w:tc></w:tr></w:tbl>'
-      +'</w:body></w:document>';
+      +'</w:body></w:document>');
     const name=enc.encode('word/document.xml');
     const body=enc.encode(xml);
     const lh=new Uint8Array(30+name.length);
@@ -291,11 +308,20 @@ async function shot(name) {
     dvE.setUint32(12,ch.length,true); dvE.setUint32(16,lh.length+body.length,true);
     const out=new Uint8Array(lh.length+body.length+ch.length+eocd.length);
     out.set(lh,0); out.set(body,lh.length); out.set(ch,lh.length+body.length); out.set(eocd,lh.length+body.length+ch.length);
-    const f=new File([out],'FinalThesis1.docx',{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    const f=new File([out], opts.filename || 'FinalThesis1.docx',{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
     const dt=new DataTransfer(); dt.items.add(f); inp.files=dt.files;
     inp.dispatchEvent(new Event('change',{bubbles:true}));
     return true;
-  })()`);
+  })(${JSON.stringify(opts)})`);
+
+  const syntheticThesisXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    + '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'
+    + '<w:p><w:r><w:t>Background: Severe sepsis cohort overview.</w:t></w:r></w:p>'
+    + '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'
+    + '<w:p><w:r><w:t>Patients admitted to the Intensive Care Unit during 2024. Refs: Kumar A, Rao B.</w:t></w:r></w:p>'
+    + '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'
+    + '<w:p><w:r><w:t>Coordinator contact phone 9876543210 for queries.</w:t></w:r></w:p>'
+    + '</w:body></w:document>';
 
 const resetToSeed = () => ev(`(()=>{
   localStorage.removeItem('smd_research_state_v1');
@@ -321,6 +347,9 @@ try {
   await new Promise((r) => { ws.onopen = r; });
   ws.onmessage = (e) => {
     const m = JSON.parse(e.data);
+    if (m.method === 'Runtime.exceptionThrown' && m.params && m.params.exceptionDetails) {
+      pageErrors.push(m.params.exceptionDetails.text || 'Runtime exception');
+    }
     if (pending.has(m.id)) {
       pending.get(m.id)(m);
       pending.delete(m.id);
@@ -329,6 +358,7 @@ try {
 
   const created = await call('Target.createTarget', { url: 'about:blank' });
   sid = (await call('Target.attachToTarget', { targetId: created.result.targetId, flatten: true })).result.sessionId;
+  await call('Runtime.enable');
 
   await call('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
   await call('Page.navigate', { url: `http://localhost:${PORT}/?research=1` });
@@ -354,30 +384,38 @@ try {
   ok(/Step 1 of 8/.test(await text('#rmdStepBanner')), 'banner reads Step 1 of 8 for the thesis journey');
   await shot('phone-375-upload');
 
-  // 3. PHI hit: warning shown, AI blocked.
-  jobMode = 'phi';
-  ok(await uploadPdf(), 'thesis PDF dispatched to the upload route');
-  ok(await until(`!!document.querySelector('#rmdThesisPhi')`, 8000), 'PHI warning shown on a mocked hit');
-  const phiText = await text('#rmdThesisPhi');
-  ok(/Patient identifiers/.test(phiText), 'PHI warning names patient identifiers');
-  ok(/12, 54/.test(phiText), 'PHI warning lists the affected pages');
-  ok(/Nothing was sent to an AI provider/.test(phiText), 'PHI warning confirms no provider call');
-  ok(aiDraftCalls.length === 0, 'no AI call was made after the PHI hit');
-  await ev(`SMD_RESEARCH.navigate('thesis-draft', {});1`);
-  ok(await until(`!!document.querySelector('#rmdThesisPhi')`, 5000), 'draft step still shows the PHI warning');
-  ok(await ev(`!document.querySelector('[data-rmd-ai="ask"]')`), 'Ask MaiK is not offered while PHI is blocked');
-  ok(aiDraftCalls.length === 0, 'still no AI call on the draft step');
+  // 3. Soft hits / phone number open the calm consent sheet instead of a red block.
+  ok(await uploadDocx({ xml: syntheticThesisXml, filename: 'ThesisSoft.docx' }), 'synthetic 3-page DOCX uploaded');
+  ok(await until(`!!document.querySelector('#rmdThesisConsentSheet[open]')`, 8000), 'calm consent sheet opened on soft PHI finding');
+  ok(await ev(`!document.querySelector('#rmdThesisPhi')`), 'no red PHI block rendered');
+  const consentText = await text('#rmdThesisConsentSheet');
+  ok(/Check for patient details/.test(consentText), 'consent sheet title matches spec');
+  ok(/We looked for patient details on these pages: 2\./.test(consentText), 'consent sheet names page 2');
+  ok(/1 phone number or ID number hidden automatically\./.test(consentText), 'consent sheet reports masked count');
+  ok(await ev(`!!document.querySelector('#rmdThesisConsentConfirm') && !!document.querySelector('#rmdThesisConsentReupload')`), 'consent sheet renders both buttons');
+  ok(/I confirm, continue/.test(await text('#rmdThesisConsentConfirm')), 'confirm button label correct');
+  ok(/Upload a different file/.test(await text('#rmdThesisConsentReupload')), 'reupload button label correct');
+  ok(aiDraftCalls.length === 0, 'no AI call made before confirmation');
   await shot('phone-375-phi');
 
-  // 4. Clean re-upload succeeds.
-  await ev(`SMD_RESEARCH.navigate('thesis', {});1`);
-  ok(await until(`!!document.querySelector('#rmdThesisReupload')`, 5000), 're-upload action offered');
+  // Clicking "Upload a different file" resets back to file input.
+  await click('#rmdThesisConsentReupload');
+  ok(await until(`!document.querySelector('#rmdThesisConsentSheet[open]') && !!document.querySelector('#rmdThesisFile')`, 5000), 'Upload a different file closes sheet and returns file input');
+
+  // Re-upload synthetic DOCX and click "I confirm, continue" -> consent recorded with timestamp & phone masked.
+  ok(await uploadDocx({ xml: syntheticThesisXml, filename: 'ThesisSoft.docx' }), 'synthetic 3-page DOCX re-uploaded');
+  ok(await until(`!!document.querySelector('#rmdThesisConsentSheet[open]')`, 8000), 'consent sheet re-opened');
+  await click('#rmdThesisConsentConfirm');
+  ok(await until(`!document.querySelector('#rmdThesisConsentSheet[open]')`, 5000), 'confirm closes consent sheet');
+  ok(await ev(`(()=>{const t=JSON.parse(localStorage.getItem('smd_rmd_thesis_v1')||'{}')['prj_thesis_1']||{};return !!(t.phiConsent&&t.phiConsent.confirmed&&t.phiConsent.timestamp)&&t.pages&&t.pages[2]&&/\\[phone\\]/.test(t.pages[2].text)&&!/9876543210/.test(t.pages[2].text);})()`), 'consent recorded with timestamp and phone masked in thesis state');
+
+  // 4. Clean re-upload succeeds with NO consent sheet shown.
   await click('#rmdThesisReupload');
   ok(await until(`!!document.querySelector('#rmdThesisFile')`, 5000), 'file input back after re-upload');
   jobMode = 'clean';
   ok(await uploadPdf(), 'clean thesis PDF dispatched');
   ok(await until(`/Thesis read/.test(document.querySelector('#rmdScreenBody').innerText)`, 8000), 'clean thesis read and page count shown');
-  ok(await ev(`!document.querySelector('#rmdThesisPhi')`), 'PHI warning cleared after the clean upload');
+  ok(await ev(`!document.querySelector('#rmdThesisConsentSheet')`), 'no consent sheet when nothing is found');
   await shot('phone-375-read');
 
   // 4b. Real selectable-text PDF read directly on-device via pdf.js (0 extra server upload calls).
@@ -420,14 +458,21 @@ try {
   ok(await until(`/Indian Journal of Medical Research/.test(document.querySelector('#rmdScreenBody').innerText)`, 5000), 'matched journals listed');
   await shot('phone-375-journal');
 
-  // 7. Draft step: Ask MaiK, number verification, locators, word limit.
+  // 7. Draft step: 409 consent_needed -> consent sheet -> confirm -> draft rendered with number verification & locators.
   await click('[data-rmd-thesis-next="thesis-draft"]');
   ok(await until(`!!document.querySelector('[data-rmd-ai="ask"]')`, 5000), 'Ask MaiK offered on the draft step');
+  requireDraftConsent = true;
   await click('[data-rmd-ai="ask"]');
-  ok(await until(`!!document.querySelector('.rmd-thesis-section-text')`, 8000), 'draft rendered after the mocked provider call');
-  ok(aiDraftCalls.length === 1, 'exactly one AI call for the draft');
-  ok(aiDraftCalls[0].task === 'thesis_to_paper', 'AI call uses the thesis_to_paper task');
-  ok(!!aiDraftCalls[0].input && Array.isArray(aiDraftCalls[0].input.pages) && aiDraftCalls[0].input.pages.length > 0, 'AI call carries the thesis page text');
+  ok(await until(`!!document.querySelector('#rmdThesisConsentSheet[open]')`, 8000), 'consent sheet opened on 409 consent_needed from ai-draft');
+  const draftConsentTxt = await text('#rmdThesisConsentSheet');
+  ok(/pages: 2\./.test(draftConsentTxt) && !!await ev(`document.querySelector('#rmdThesisConsentConfirm')`) && !!await ev(`document.querySelector('#rmdThesisConsentReupload')`), 'draft consent sheet shows pages and both buttons');
+  await click('#rmdThesisConsentConfirm');
+  ok(await until(`!!document.querySelector('.rmd-thesis-section-text')`, 8000), 'I confirm, continue proceeds automatically to render draft');
+  requireDraftConsent = false;
+  ok(aiDraftCalls.length === 2, '409 preflight followed by 1 consented AI call');
+  ok(aiDraftCalls[1].task === 'thesis_to_paper', 'AI call uses the thesis_to_paper task');
+  ok(!!(aiDraftCalls[1].input && aiDraftCalls[1].input.phiConsent && aiDraftCalls[1].input.phiConsent.confirmed), 'second AI call sends confirmed phiConsent');
+  ok(!!aiDraftCalls[1].input && Array.isArray(aiDraftCalls[1].input.pages) && aiDraftCalls[1].input.pages.length > 0, 'AI call carries the thesis page text');
   const draftText = await text('#rmdDraftBody');
   ok(/\[check this number\]/.test(draftText), 'invented number sentence flagged');
   ok(!/0\.77/.test(draftText), 'invented number removed from the draft');
@@ -467,6 +512,20 @@ try {
   await click('[data-rmd-thesis-next="checklist"]');
   ok(await until(`(()=>{const b=document.querySelector('#rmdStepBanner');return !!b && /Step 7 of 8/.test(b.innerText)})()`, 5000), 'banner reads Step 7 of 8 at the checklist');
 
+  // 11b. "< ResearchMD" header navigation from Draft tab lands on project list; X closes ResearchMD.
+  await ev(`SMD_RESEARCH.navigate('thesis-draft',{});1`);
+  ok(await until(`!!document.querySelector('[data-rmd="back"]') && !!document.querySelector('.rmd-thesis-screen')`, 5000), 'back button rendered on Draft tab');
+  ok(/ResearchMD/.test(await text('[data-rmd="back"]')), 'header back button is labelled ResearchMD');
+  ok(await ev(`document.querySelector('[data-rmd="back"]').offsetHeight >= 44`), 'back button meets 44px touch target (offsetHeight=' + await ev(`document.querySelector('[data-rmd="back"]').offsetHeight`) + ', computedMin=' + await ev(`getComputedStyle(document.querySelector('[data-rmd="back"]')).minHeight`) + ')');
+  await click('[data-rmd="back"]');
+  ok(await until(`!!document.querySelector('.rmd-projects-screen') || !!document.querySelector('[data-rmd-project]')`, 5000), '< ResearchMD from Draft tab lands on the ResearchMD project list');
+  ok(await ev(`!!document.querySelector('[data-rmd="close"]')`), 'X close button present on project list');
+  await click('[data-rmd="close"]');
+  ok(await until(`document.querySelector('#researchMD').hidden === true`, 5000), 'X closes ResearchMD');
+  await ev(`SMD_RESEARCH.open({screen:'projects'});1`);
+  ok(await until(`document.querySelector('#researchMD').hidden === false`, 5000), 're-opened ResearchMD');
+  await ev(`(()=>{const st=SMD_RESEARCH.store.getState();const p=(st.projects||[]).find(x=>x.serverId==='prj_thesis_1'||x.id==='prj_thesis_1');if(p)SMD_RESEARCH.store.setActiveProject(p.id);return true})()`);
+
   // 12. Viewer cannot run AI.
   await ev(`(()=>{const p=SMD_RESEARCH.store.getActiveProject();p.role='viewer';SMD_RESEARCH.navigate('thesis-draft',{});return true})()`);
   ok(await until(`/Only the project owner/.test(document.querySelector('#rmdScreenBody').innerText)`, 5000), 'viewer sees the role explanation');
@@ -485,9 +544,10 @@ try {
   ok(/half the risk/.test(meanText), 'plain BCG meaning follows the statistic');
   await shot('phone-375-run-meaning');
 
-  // 14. No em/en dashes; no horizontal overflow at 375.
+  // 14. No em/en dashes; zero page errors; no horizontal overflow at 375, 390x844 and 1024x1366.
   const dashes = await ev(`(()=>{const t=document.querySelector('#researchMD').innerText||'';return (t.match(/[\\u2013\\u2014]/g)||[]).length})()`);
   ok(dashes === 0, 'no em or en dashes in ResearchMD visible text');
+  ok(pageErrors.length === 0, 'zero page errors: ' + pageErrors.join('; '));
   const overflow = await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`);
   ok(overflow, 'no horizontal overflow at 375px');
   await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });

@@ -242,6 +242,9 @@
     if (code === "phi_blocked") {
       return { message: e.message || "Patient identifiers were detected. Remove names, hospital numbers, phone numbers, addresses or emails and try again.", action: "retry", actionLabel: "Try again" };
     }
+    if (code === "consent_needed") {
+      return { message: e.message || "Please confirm there are no patient names left in your thesis before continuing.", action: "retry", actionLabel: "Try again" };
+    }
     if (code === "ceiling_bytes" || status === 413) {
       return { message: "This file is too large for server upload (limit 25 MB). Upload a smaller file or a Word (.docx) document.", action: "retry", actionLabel: "Try again" };
     }
@@ -475,6 +478,12 @@
           if (o.render) o.render();
         }).catch(function (err) {
           st.busy = false;
+          if (err && err._handledByConsent) {
+            st.error = null;
+            if (o.render) o.render();
+            if (o.onConsentNeeded) o.onConsentNeeded(err);
+            return;
+          }
           st.error = err || { message: "MaiK could not draft this step." };
           if (o.render) o.render();
         });
@@ -599,8 +608,8 @@
       "#researchMD .rmd-shell-nav { display: flex; align-items: center; gap: 8px; }",
       "#researchMD .rmd-nav-back {",
       "  border: 0; background: none; color: var(--rmd-acc); font: 600 15px var(--rmd-f);",
-      "  display: inline-flex; align-items: center; gap: 4px; padding: 6px 4px; cursor: pointer;",
-      "  min-height: 40px;",
+      "  display: inline-flex; align-items: center; gap: 4px; padding: 8px 6px; cursor: pointer;",
+      "  min-height: 44px; min-width: 44px; touch-action: manipulation;",
       "}",
       "#researchMD .rmd-shell-brand { display: flex; align-items: center; gap: 8px; min-width: 0; white-space: nowrap; }",
       "#researchMD .rmd-logo { width: auto; height: 30px; flex: none; display: block; }",
@@ -1467,15 +1476,15 @@
     var syncState = store ? store.getState().syncState : "synced";
     var queue = store ? store.getQueue() : [];
     var queueCount = queue.length;
-    var showBack = currentScreen !== "projects" && (navStack.length > 0 || currentScreen === "read-study");
+    var showBack = currentScreen !== "projects";
 
     var h = [];
     h.push('<div class="rmd-shell-top">');
     h.push('  <div class="rmd-shell-nav">');
     if (showBack) {
       h.push('    <button type="button" class="rmd-nav-back" data-rmd="back">');
-      h.push('      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"></polyline></svg>');
-      h.push('      <span>Back</span>');
+      h.push('      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>');
+      h.push('      <span>ResearchMD</span>');
       h.push('    </button>');
     } else {
       var brandProj = store ? store.getActiveProject() : null;
@@ -1553,12 +1562,9 @@
     var backBtn = root.querySelector('[data-rmd="back"]');
     if (backBtn) {
       backBtn.onclick = function () {
-        if (navStack.length > 0) {
-          var prev = navStack.pop();
-          navigate(prev.screen, prev.params, true);
-        } else {
-          navigate("projects", {}, true);
-        }
+        navStack = [];
+        moreOpen = false;
+        navigate("projects", {}, true);
       };
     }
 
@@ -2641,7 +2647,10 @@
   SMD.screens.ready = { render: renderReady };
 
   function navigate(screenName, params, isBack) {
-    if (!isBack && currentScreen && currentScreen !== screenName) {
+    if (screenName === "projects") {
+      navStack = [];
+      moreOpen = false;
+    } else if (!isBack && currentScreen && currentScreen !== screenName) {
       navStack.push({ screen: currentScreen, params: {} });
     }
     currentScreen = screenName;
@@ -2671,6 +2680,7 @@
 
   function onKeyDown(e) {
     if (e.key === "Escape" || e.keyCode === 27) {
+      if (root && root.querySelector("dialog[open], .rmd-modal-backdrop")) return;
       close();
     }
   }
