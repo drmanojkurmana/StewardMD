@@ -141,6 +141,7 @@ const putLog = [];
 const exportLog = [];
 const aiDraftCalls = [];
 const jobsCalls = [];
+const jobsCancelCalls = [];
 let exportGatesPass = false;
 let firstSaveMode = false;
 let firstSaveCreated = false;
@@ -294,7 +295,21 @@ async function handleApi(req, res, path, query) {
   // POST /v1/projects/:projectId/jobs (must not be called by Ask MaiK on manuscript screen)
   if (path.match(/^\/v1\/projects\/[^/]+\/jobs$/) && req.method === 'POST') {
     jobsCalls.push(body);
+    if (body.kind === 'manuscript_draft') {
+      return send(202, { job: { id: 'job_po_harness', status: 'queued', kind: 'manuscript_draft' } });
+    }
     return send(400, { error: { code: 'invalid_body', message: 'kind must be pdf_extract' } });
+  }
+
+  // GET /v1/jobs/:jobId
+  if (path.match(/^\/v1\/jobs\/[^/]+$/) && req.method === 'GET') {
+    return send(200, { job: { id: 'job_po_harness', status: 'running', kind: 'manuscript_draft' } });
+  }
+
+  // POST /v1/jobs/:jobId/cancel
+  if (path.match(/^\/v1\/jobs\/[^/]+\/cancel$/) && req.method === 'POST') {
+    jobsCancelCalls.push(path);
+    return send(200, { ok: true, status: 'cancelled' });
   }
 
   // GET /v1/projects/:projectId/studies
@@ -480,6 +495,63 @@ try {
   ok(aiDraftCalls.some((c) => c.task === 'manuscript_draft'), 'Ask MaiK sends ai-draft task manuscript_draft');
   ok(jobsCalls.length === 0, 'Ask MaiK does not call /jobs endpoint with invalid manuscript_draft kind');
   ok(!/Something went wrong on our side/.test(await text('.rmd-ai-bar')), 'Ask MaiK bar never shows "Something went wrong on our side" on review project');
+
+  /* 1c-po. PaperOrchestra full draft button: flag off -> no button; flag on -> button -> tap -> POST /jobs -> status row -> cancel */
+  ok(await ev(`!document.querySelector('[data-rmd="full-draft-po"]')`), 'PO flag OFF: no Full draft (PaperOrchestra) button rendered');
+  await ev(`localStorage.setItem('smd_rmd_po', '1')`);
+  await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
+  ok(await until(`!!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO flag ON: Full draft (PaperOrchestra) button rendered');
+  ok((await text('[data-rmd="full-draft-po"]')).trim() === 'Full draft (PaperOrchestra)', 'PO button has exact text "Full draft (PaperOrchestra)"');
+  const countBeforePo = jobsCalls.length;
+  await click('[data-rmd="full-draft-po"]');
+  for (let i = 0; i < 50; i++) {
+    if (jobsCalls.length > countBeforePo) break;
+    await sleep(100);
+  }
+  ok(jobsCalls.length > countBeforePo, 'tapping PO button POSTs to /jobs');
+  const poJobCall = jobsCalls[jobsCalls.length - 1];
+  ok(poJobCall && poJobCall.kind === 'manuscript_draft', 'PO job request kind is manuscript_draft');
+  ok(poJobCall && typeof poJobCall.idempotencyKey === 'string' && poJobCall.idempotencyKey.length > 0, 'PO job request has valid random idempotencyKey');
+  ok(await until(`!!document.querySelector('.rmd-po-status')`, 5000), 'status row rendered with aria-live="polite"');
+  ok((await ev(`document.querySelector('.rmd-po-status').getAttribute('aria-live')`)) === 'polite', 'status row aria-live is polite');
+  ok(await ev(`!document.querySelector('.rmd-po-status').getAttribute('style')`), 'rmd-po-status has no inline style attributes');
+  ok(await ev(`!document.querySelector('.rmd-po-status-text').getAttribute('style')`), 'rmd-po-status-text has no inline style attributes');
+  ok(await until(`!!document.querySelector('[data-rmd="po-cancel"]')`, 5000), 'Cancel button visible while job is active');
+  ok(await ev(`!document.querySelector('[data-rmd="po-cancel"]').getAttribute('style')`), 'Cancel button has no inline style attributes');
+  ok(await ev(`document.querySelector('[data-rmd="full-draft-po"]').disabled === true`), 'PO draft button is disabled while job is active');
+  const countBeforeCancel = jobsCancelCalls.length;
+  await click('[data-rmd="po-cancel"]');
+  for (let i = 0; i < 50; i++) {
+    if (jobsCancelCalls.length > countBeforeCancel) break;
+    await sleep(100);
+  }
+  ok(jobsCancelCalls.length > countBeforeCancel, 'tapping Cancel button POSTs to /jobs/:jobId/cancel');
+  ok(await until(`!document.querySelector('[data-rmd="po-cancel"]')`, 5000), 'Cancel button dismissed after cancel tap');
+  ok(await until(`document.querySelector('.rmd-po-status-text') && document.querySelector('.rmd-po-status-text').textContent.trim() === 'Cancelled'`, 5000), 'Cancelled state text is exact "Cancelled"');
+  ok(await ev(`!/Draft cancelled/.test(document.querySelector('.rmd-po-status-text') ? document.querySelector('.rmd-po-status-text').textContent : '')`), 'Cancelled state does not say "Draft cancelled"');
+  ok(await until(`document.querySelector('[data-rmd="full-draft-po"]').disabled === false`, 5000), 'PO draft button is re-enabled after cancel');
+
+  // Verify non case-report only: case-report project renders NO PO button
+  await ev(`(()=>{
+    window.__prevProj = SMD_RESEARCH.store.getActiveProject();
+    const crProj = Object.assign({}, window.__prevProj, { studyType: 'case-report' });
+    SMD_RESEARCH.store.getActiveProject = () => crProj;
+    SMD_RESEARCH.open({screen:'manuscript'});
+    return 1;
+  })()`);
+  ok(await until(`!!document.querySelector('.rmd-manuscript-screen')`, 5000), 'manuscript opened in case-report mode');
+  ok(await ev(`!document.querySelector('[data-rmd="full-draft-po"]')`), 'PO button not rendered for case-report project');
+  await ev(`(()=>{
+    SMD_RESEARCH.store.getActiveProject = () => window.__prevProj;
+    SMD_RESEARCH.open({screen:'manuscript'});
+    return 1;
+  })()`);
+  ok(await until(`!!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO button restored for systematic review project');
+
+  await ev(`localStorage.removeItem('smd_rmd_po')`);
+  await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
+  ok(await until(`!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO button cleaned up when flag removed');
+  ok(await until(`!!document.getElementById('rmdSectionEditor')`, 5000), 'editor ready after reload');
 
   /* 1d. Polish empty or >5000 char section shows plain message, never "on our side" */
   await ev(`(()=>{

@@ -7,8 +7,23 @@ decides whether text is PHI; an LLM judging PHI would itself receive the PHI.
 Interface (implemented in 3.5, shared by the API and the worker):
 
 ```
-scan(text) -> { blocked: bool, hits: [ { category, rule, start, end } ] }
+scan(text, opts?) -> { blocked: bool, hits: [ { category, rule, start, end } ] }
 ```
+
+Two modes (owner decision A, 2026-11):
+
+- default (literature-safe): every rule except the plain any-full-date rule.
+  Published literature keeps its exemption, so a search result with a
+  `publicationDate` does not block. PaperOrchestra's Python gate always uses
+  this mode.
+- `opts.mode = "user"` (JS) / `scan(text, mode="user")` (Python): adds
+  `dates/full_date`. Used only for text a person typed: the `/ai-draft`
+  handler, and protocol text plus GRADE rationale in a manuscript job.
+  Evidence values, quotes and RoB quotes stay in default mode because they
+  are published text.
+
+Birth and admission dates are context-gated in both modes. Spaced mobile,
+ABHA and house/locality rules apply in both modes.
 
 `scan` runs on the exact text about to leave for the gateway, after assembly
 of the prompt. Any hit blocks the call; the job fails with `phi_blocked` and
@@ -21,12 +36,14 @@ the hit categories (never the matched text) are logged.
 | Patient name with clinical context | capitalized name bigram/trigram within 40 chars of a patient label or clinical verb: `patient`, `Mr.`, `Mrs.`, `Ms.`, `admitted`, `discharged`, `diagnosed`, `ward`, `bed no`, `IP no`, `OP no` |
 | MRN / UHID / hospital number | label (`MRN`, `UHID`, `medical record`, `hospital no`, `IP/OP no`) followed by 4-16 digits or alphanumeric id |
 | Aadhaar | 12 digits (optionally spaced 4-4-4) passing the Verhoeff checksum |
+| ABHA | 14-digit ABHA number as `XX-XXXX-XXXX-XXXX` (hyphen or space separators), or 14 unbroken digits with an `ABHA` label; ABHA address `name@abdm` or `name@sbx` |
 | SSN | `XXX-XX-XXXX` with valid area (not 000/666/9xx), group (not 00), serial (not 0000) |
 | NHS number | 10 digits passing the mod-11 checksum |
-| Phone | Indian mobile (10 digits starting 6-9, optional +91/0 prefix) or E.164 `+` number, with word-boundary checks so DOIs and page ranges do not match |
+| Phone | Indian mobile (10 digits starting 6-9, optional +91/0 prefix), the spaced form `98765 43210` (also shown with a hyphen), or E.164 `+` number, with word-boundary checks so DOIs and page ranges do not match |
 | Email | standard addr-spec regex |
+| Any day-level date (user mode only) | full date in a common format (`12/03/2021`, `2024-03-12`, `12 March 2024`, `March 12, 2024`) anywhere in the text, with or without a label. Month-year (`Jan 2023`) and bare years stay allowed. Default mode omits this rule so published publication dates pass |
 | Exact date of birth | full date (any common format) within 40 chars of `DOB`, `date of birth`, `born on`, `birth date` |
-| Address | street number plus street token (`road`, `street`, `nagar`, `colony`, `lane`, `avenue`, `apt`, `flat`) within one line, or a 6-digit PIN code with an address label |
+| Address | street number plus street token (`road`, `street`, `nagar`, `colony`, `lane`, `avenue`, `apt`, `flat`) within one line, a house label plus number immediately followed by a comma and a locality (`H.No 12-3-45, Ameerpet`, `#14, 2nd Cross`; a bare `#14` or `Flat 5` stays allowed), or a 6-digit PIN code with an address label |
 | Admission date tied to a person | full date within 40 chars of `admitted on`, `admission date`, `discharged on` AND a patient label in the same sentence |
 
 Checksum validators run first and gate the regex hits: a 12-digit number that
@@ -41,15 +58,36 @@ the main false-positive control.
   address.
 - Enrolment periods and study dates (`between January 2018 and March 2020`,
   `enrolled from 2015 to 2019`): month-year or year ranges without a day.
+  In default mode day-level dates from published literature also pass
+  (`published 2023-01-15`, `between 1 January 2015 and 31 December 2019`);
+  in user mode those same strings block.
 - Age brackets and summary ages (`aged 45-64 years`, `mean age 58.2`,
   `median 61 (IQR 52-70)`).
 - Sample sizes, counts, DOIs, PMIDs, page ranges, trial registration numbers
   (NCT/CTRI ids), grant numbers.
 
 Context rules implement the difference: a name is blocked only with a patient
-label or clinical verb nearby; a date is blocked only with a birth/admission
-label nearby or a day-level date attached to a person. Bare years, month-year
-ranges and statistical numbers never match.
+label or clinical verb nearby; a birth or admission date additionally needs its
+label. In user mode a day-level date blocks anywhere, on its own. Bare years,
+month-year ranges and statistical numbers never match.
+
+## Override (/ai-draft only)
+
+A blocked user-typed `/ai-draft` request returns 422 with the usual
+`{ error: { code: "phi_blocked", message, requestId }, categories }` and
+`overridable: true`. The clinician may re-send the request with
+
+```json
+{ "phiOverride": { "accepted": true, "termsVersion": "rmd-phi-override-v0" } }
+```
+
+Anything else (missing, `accepted !== true`, another `termsVersion`) is no
+override. A valid override skips the user-input PHI block for that one request
+and writes an `ai_phi_override` audit event (uid and timestamp already on the
+row) with meta `{ route: "ai-draft", task, categories, rules, termsVersion }`.
+Categories and rule names only; never the matched text. The override is never
+honoured by jobs, manuscript drafting, suggestions, paper cards, stats or
+PaperOrchestra.
 
 ## Test sets and gates
 

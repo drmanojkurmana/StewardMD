@@ -27,6 +27,7 @@ import { TEMPLATES, templateById, extractionOf, rowFor } from "./_extraction.js"
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const VOTE_ROLES = ["owner", "editor", "analyst", "reviewer"];
 const DOC_CHAR_BUDGET = 28000; /* keeps the assembled T1 prompt under 8000 tokens */
+export const PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v0";
 
 /* The ordered gateway pipeline for one user-facing T1 call. Returns either
  * {error: Response} or {text, model, usage, costInr}. refId traces the
@@ -48,12 +49,28 @@ export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, 
   } else if (opts.thesisCleared === true && purpose === "ai_draft_thesis_to_paper") {
     /* Thesis PHI masking and soft-hit consent already ran in thesisTask (_ai_draft.js). */
   } else {
-    const report = scan(assembled);
+    const report = scan(assembled, opts.phiMode === "user" ? { mode: "user" } : undefined);
     if (report.blocked) {
       const categories = phiCategories(report.hits);
-      await audit(db, projectId, uid, "ai_phi_blocked", refId, { categories, purpose });
-      return { error: json({ error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
-        categories }, 422, { "x-request-id": requestId }) };
+      const rules = [...new Set(report.hits.map((h) => h.rule))].sort();
+      /* Override is /ai-draft only, never automated paths. Only _ai_draft.js
+       * sets these opts, after validating body.phiOverride; every other
+       * caller never passes phiOverride. */
+      if (opts.phiOverride === true && opts.phiMode === "user" && opts.phiRoute === "ai-draft") {
+        await audit(db, projectId, uid, "ai_phi_override", refId, {
+          route: "ai-draft",
+          task: opts.phiTask || "",
+          categories,
+          rules,
+          termsVersion: opts.phiTermsVersion || PHI_OVERRIDE_TERMS_VERSION,
+        });
+      } else {
+        await audit(db, projectId, uid, "ai_phi_blocked", refId, { categories, purpose });
+        const payload = { error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
+          categories };
+        if (opts.phiRoute === "ai-draft") payload.overridable = true;
+        return { error: json(payload, 422, { "x-request-id": requestId }) };
+      }
     }
   }
   /* 2. Caps: per-call input ceiling, then daily AI spend (quote included). */

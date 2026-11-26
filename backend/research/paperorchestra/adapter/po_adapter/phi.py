@@ -1,6 +1,10 @@
 """Deterministic PHI/PII gate, per docs/research/contracts/phase-3/phi-gate.md.
 
-scan(text) -> {"blocked": bool, "hits": [{"category", "rule", "start", "end"}]}
+scan(text, mode="default") -> {"blocked": bool, "hits": [{"category", "rule", "start", "end"}]}
+The default mode is literature-safe: every rule EXCEPT the plain any-full-date
+rule, so published search results with publicationDate pass. mode="user" adds
+dates/full_date and is for text a person typed. Birth and admission dates stay
+context-gated in both modes.
 Hits never carry the matched text (callback/log rule: categories only).
 No LLM is involved. Checksum validators gate the id regexes: a 12-digit number
 that fails Verhoeff is not an Aadhaar hit, a 10-digit number that fails mod-11
@@ -75,11 +79,12 @@ def nhs_mod11_valid(digits: str) -> bool:
 _MONTH = r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*"
 # Full day-level dates in common formats. Month-year and bare years are NOT
 # full dates (allowed: enrolment periods, study dates).
+# Digit guards keep a date out of longer id runs (CTRI/2020/01/023456).
 _FULL_DATE = (
-    r"(?:\d{1,2}[/-]\d{1,2}[/-]\d{2,4}"
+    r"(?<!\d)(?:\d{1,2}[/-]\d{1,2}[/-]\d{2,4}"
     r"|\d{4}-\d{1,2}-\d{1,2}"
     rf"|\d{{1,2}}\s+{_MONTH}\s+\d{{2,4}}"
-    rf"|{_MONTH}\s+\d{{1,2}},?\s+\d{{4}})"
+    rf"|{_MONTH}\s+\d{{1,2}},?\s+\d{{4}})(?!\d)"
 )
 
 _PATIENT_LABEL = (
@@ -90,6 +95,18 @@ _NAME_BIGRAM = r"\b[A-Z][a-z]{1,20}\s+[A-Z][a-z]{1,20}(?:\s+[A-Z][a-z]{1,20})?\b
 _BIRTH_LABEL = r"\b(?:DOB|date of birth|born on|birth date)\b"
 _ADMISSION_LABEL = r"\b(?:admitted on|admission date|discharged on)\b"
 _STREET = r"(?:road|street|nagar|colony|lane|avenue|apt|flat)"
+# House label plus number, then a comma and a locality word: "H.No 12-3-45,
+# Ameerpet", "#14, 2nd Cross". A bare label plus number ("Table #14",
+# "Flat 5 patients") stays allowed. "Flat" must start with a capital F; the
+# other labels keep the old case-insensitive forms by spelling both cases.
+# The locality must start with a capital letter or a digit ordinal.
+_HOUSE = (
+    r"(?:\b(?:"
+    r"[Hh]\.?\s?[Nn][Oo]\.?|[Hh]\s+[Nn][Oo]\.?|[Hh][Oo][Uu][Ss][Ee]\s+[Nn][Oo]\."
+    r"|[Dd][Oo][Oo][Rr]\s+[Nn][Oo]\.?|[Dd]\.?\s?[Nn][Oo]\.?|F[Ll][Aa][Tt](?:\s+[Nn][Oo]\.?)?"
+    r")[\s:.#-]*\d[A-Za-z0-9/-]*|#\s*\d[A-Za-z0-9/-]*)"
+    r",\s*(?:[A-Z][A-Za-z]*|\d+(?:st|nd|rd|th)\b)"
+)
 
 _RULES = [
     # (category, rule, compiled regex, validator or None)
@@ -99,6 +116,15 @@ _RULES = [
         re.IGNORECASE), "mrn_id"),
     ("aadhaar", "verhoeff_12", re.compile(
         r"(?<!\d)\d{4}[ -]?\d{4}[ -]?\d{4}(?!\d)"), "verhoeff"),
+    # ABHA address (client rule, phi-india.js) and 2-4-4-4 number forms.
+    # Unbroken 14 digits count only when labelled ABHA.
+    ("abha", "addr", re.compile(
+        r"\b[A-Za-z0-9._-]{2,}@(?:abdm|sbx)\b", re.IGNORECASE), None),
+    ("abha", "number_14", re.compile(
+        r"(?<!\d)\d{2}[ -]\d{4}[ -]\d{4}[ -]\d{4}(?!\d)"), None),
+    ("abha", "labelled_number", re.compile(
+        r"\bABHA(?:\s*(?:No\.?|Number|ID))?\b[\s:.#-]*(\d{14})(?!\d)",
+        re.IGNORECASE), None),
     ("ssn", "area_group_serial", re.compile(
         r"(?<!\d)(?!000|666|9\d\d)\d{3}-(?!00)\d{2}-(?!0000)\d{4}(?!\d)"), None),
     ("nhs", "mod11_10", re.compile(r"(?<!\d)\d{10}(?!\d)"), "mod11"),
@@ -106,12 +132,21 @@ _RULES = [
     # "/" in the lookbehind keeps DOI suffixes (10.1234/6123456789) out.
     ("phone", "indian_mobile", re.compile(
         r"(?<![\w./])(?:\+91[ -]?|0)?[6-9]\d{9}(?![\dA-Za-z])"), None),
+    # Spaced mobile: "98765 43210". Same guards as indian_mobile. The optional
+    # separator also matches the unspaced form; scan() dedupes identical spans.
+    ("phone", "indian_mobile_spaced", re.compile(
+        r"(?<![\w./])(?:\+91[ -]?|0)?[6-9]\d{4}[ -]?\d{5}(?![\dA-Za-z])"), None),
     ("email", "addr_spec", re.compile(
         r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"), None),
+    # Any day-level date blocks on its own in user mode only. Month-year and
+    # bare years stay allowed (enrolment periods, study dates), and published
+    # literature keeps the default exemption.
+    ("dates", "full_date", re.compile(_FULL_DATE, re.IGNORECASE), None),
     ("dob", "date_near_birth_label", re.compile(_FULL_DATE, re.IGNORECASE), "birth_context"),
     ("address", "street_number", re.compile(
         rf"\b\d{{1,5}}[A-Za-z]?\s+(?:[A-Za-z]+\s+){{0,3}}{_STREET}\b",
         re.IGNORECASE), None),
+    ("address", "house_locality", re.compile(_HOUSE), None),
     ("address", "pin_with_label", re.compile(
         r"\b(?:PIN\s*code|PIN|postal\s+code|zip\s*code)\D{0,10}(\d{6})\b",
         re.IGNORECASE), None),
@@ -121,6 +156,7 @@ _RULES = [
 ]
 
 _WINDOW = 40  # chars, per phi-gate.md
+_USER_ONLY_RULES = {("dates", "full_date")}
 
 
 def _near(text: str, start: int, end: int, label_re: re.Pattern) -> bool:
@@ -159,13 +195,26 @@ _VALIDATORS = {
 }
 
 
-def scan(text: str) -> dict:
-    """Scan the exact assembled prompt text. Any hit blocks the call."""
+def scan(text: str, mode: str = "default") -> dict:
+    """Scan the exact assembled prompt text. Any hit blocks the call.
+
+    mode="user" adds the plain any-full-date rule; the default literature-safe
+    mode omits it (owner decision A: published dates are not patient dates).
+    """
+    user_mode = mode == "user"
     hits = []
+    seen = set()
     for category, rule, pattern, validator in _RULES:
+        if not user_mode and (category, rule) in _USER_ONLY_RULES:
+            continue
         for match in pattern.finditer(text):
             if validator is not None and not _VALIDATORS[validator](match):
                 continue
+            # indian_mobile and indian_mobile_spaced overlap on the unspaced form.
+            key = (category, match.start(), match.end())
+            if key in seen:
+                continue
+            seen.add(key)
             hits.append({"category": category, "rule": rule,
                          "start": match.start(), "end": match.end()})
     hits.sort(key=lambda h: (h["start"], h["category"]))

@@ -167,7 +167,7 @@ describe("Bug H scanner: scan() has no publicSpans parameter", () => {
 
   test("default scan is unchanged: every shared phi-vector still holds", () => {
     for (const v of PHI_VECTORS.cases) {
-      const r = scan(v.text);
+      const r = scan(v.text, v.mode === "user" ? { mode: "user" } : undefined);
       assert.equal(r.blocked, v.expect === "block", "vector " + v.id + " (" + v.expect + ")");
     }
   });

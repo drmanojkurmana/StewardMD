@@ -86,6 +86,31 @@ inside the client before any request leaves the worker.
   `phi_blocked`, `gateway_unconfigured`, the loader codes, the ceiling codes,
   `gateway_*`, `manuscript_failed`.
 
+### Enqueue guards and caps (`POST /v1/projects/{id}/jobs`, `kind: "manuscript_draft"`)
+
+Checked in order before queuing:
+0. Feature gate: `env.RESEARCH_PO_ENABLED === "1"` (checked first, before the
+   project/role gate; otherwise `404 not_found`).
+1. Role & study type: `owner`, `editor`, or `analyst` role (`projectGate`); the
+   project's `study_type` must be a systematic review or meta-analysis
+   (`409 not_systematic_review` otherwise).
+2. Frozen baseline: latest `research_protocols` row must have `status = 'locked'`
+   and a non-empty `lock_hash` (`409 protocol_unlocked`), and the project must
+   have at least one saved `research_runs` row (`409 no_saved_run`).
+3. Idempotency & concurrency: replay on `(projectId, idempotencyKey)` returns
+   the existing job (`200`, `idempotentReplay: true`; `409 idempotency_conflict`
+   if that key was used for another job kind); any other `queued` or `running`
+   `manuscript_draft` job for the project fails `409 job_active`.
+4. Daily caps (UTC day): max `3` `manuscript_draft` jobs per project
+   (`429 cap_po_project_daily`) and max `5` per user (`429 cap_po_user_daily`).
+5. Credits & PHI gate: quotes `quoteAiCall(env, "T2") * 64` micro-USD
+   (`402 insufficient_credits`), reserves the quote, builds the v1 manifest
+   snapshot (locked protocol, verified evidence with `locator` and `quote`,
+   verified/agreed RoB with `locator` and `quote`, saved runs, GRADE,
+   references), and runs `scan(JSON.stringify(snapshot))`. A PHI hit releases
+   credits immediately and returns `422 phi_blocked` with `{categories}` only
+   (nothing is written to R2 or queued).
+
 ## Container
 
 `worker/Dockerfile` COPYs `stats/`, `manuscript/` and `paperorchestra/` and sets
