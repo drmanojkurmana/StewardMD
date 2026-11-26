@@ -201,7 +201,7 @@ export async function screeningSuggestion(ctx, projectId, recordId) {
     "rationale is one short sentence. This is a suggestion; a human reviewer makes the actual vote.";
   const prompt = "Title: " + (record.title || "") + "\nYear: " + (record.year || "") + "\nAbstract: " + abstract.slice(0, DOC_CHAR_BUDGET);
   const refId = "sug_" + crypto.randomUUID().replace(/-/g, "");
-  const out = await runT1(ctx, projectId, "screening_suggestion", system, prompt, refId);
+  const out = await runT1(ctx, projectId, "screening_suggestion", system, prompt, refId, { publicLiterature: true });
   if (out.error) return out.error;
   const parsed = extractJson(out.text) || {};
   const decision = ["include", "exclude", "uncertain"].indexOf(parsed.decision) >= 0 ? parsed.decision : "uncertain";

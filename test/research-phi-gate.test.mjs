@@ -277,3 +277,110 @@ describe("Bug H route: case_report_draft user text still runs PHI gate", () => {
     assert.ok(llm.calls.length >= 1, "provider was called for clean case text");
   });
 });
+
+/* ---- route integration: screening suggestions with publicLiterature -------- */
+
+describe("Bug H route: screening suggestion skips PHI gate (publicLiterature)", () => {
+  test("screening suggestion on an abstract full of 'patients admitted to the Intensive Care Unit' succeeds", { skip: SKIP }, async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 10000);
+    const project = await makeProject(env, "tok-alice");
+    const now = Date.now();
+    const recId = "rec_icu_test";
+    env.RESEARCH_DB._db.prepare(
+      "INSERT INTO research_records (id,project_id,source,external_id,title,authors_json,year,doi,metadata_json,created_ts) VALUES (?,?,'pubmed','40123456','ICU Sepsis','[]',2024,'',?,?)"
+    ).run(recId, project.id, JSON.stringify({ abstract: ABSTRACT }), now);
+    llm.calls.length = 0;
+    llm.impl = async (env, parts, maxTokens, opts) => {
+      if (opts && opts.meta) {
+        opts.meta.usage = { promptTokenCount: 120, candidatesTokenCount: 30 };
+        opts.meta.model = opts.model;
+      }
+      return JSON.stringify({ decision: "include", reasonCode: "", rationale: "Relevant ICU prospective study on sepsis." });
+    };
+    const r = await call(env, "POST", "v1/projects/" + project.id + "/records/" + recId + "/screening-suggestions", "tok-alice");
+    assert.equal(r.http, 201, JSON.stringify(r));
+    assert.equal(r.suggestion.decision, "include");
+    assert.equal(r.suggestion.status, "unverified");
+    assert.equal(llm.calls.length, 1, "provider called for published literature");
+    const auditRow = env.RESEARCH_DB._db.prepare(
+      "SELECT * FROM research_audit_events WHERE event_type='phi_gate_skipped_public_literature' AND resource_id LIKE 'sug_%'"
+    ).get();
+    assert.ok(auditRow, "phi_gate_skipped_public_literature audit note present for screening suggestion");
+  });
+});
+
+/* ---- route integration: auto-add studies scans user fields only ------------- */
+
+const netByPmid = new Map();
+globalThis.fetch = async (url) => {
+  const u = String(url);
+  if (u.includes("efetch.fcgi")) {
+    const parsed = new URL(u);
+    const ids = (parsed.searchParams.get("id") || "").split(",").filter(Boolean);
+    const xml = ids.map((pmid) => {
+      const rec = netByPmid.get(pmid) || {};
+      return "<PubmedArticle><PMID>" + pmid + "</PMID><AbstractText>" + (rec.abstract || "") + "</AbstractText></PubmedArticle>";
+    }).join("");
+    return new Response(xml, { status: 200, headers: { "content-type": "application/xml" } });
+  }
+  return new Response(JSON.stringify({}), { status: 200, headers: { "content-type": "application/json" } });
+};
+
+describe("Bug H route: auto-add studies scans user fields only", () => {
+  test("auto-add with such snippets succeeds", { skip: SKIP }, async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 10000);
+    const project = await makeProject(env, "tok-alice");
+    const icuAbstract = "We enrolled 152 patients admitted to the Intensive Care Unit at King George Medical University. " +
+      "Group A had 15 events. Group B had 30 events. Totals were 100 and 100. Sepsis survival was recorded.";
+    netByPmid.set("40123456", { abstract: icuAbstract });
+    llm.calls.length = 0;
+    llm.impl = async (env, parts, maxTokens, opts) => {
+      if (opts && opts.meta) {
+        opts.meta.usage = { promptTokenCount: 150, candidatesTokenCount: 40 };
+        opts.meta.model = opts.model;
+      }
+      return JSON.stringify({
+        measure: "RR", format: "counts", events1: 15, total1: 100, events2: 30, total2: 100,
+        quote: "Group A had 15 events. Group B had 30 events. Totals were 100 and 100.",
+        location: "abstract", confidence: 0.85,
+      });
+    };
+    const r = await call(env, "POST", "v1/projects/" + project.id + "/studies/auto-add", "tok-alice", {
+      outcome: "survival",
+      measure: "RR",
+      items: [{ pmid: "40123456" }],
+    });
+    assert.equal(r.http, 200, JSON.stringify(r));
+    assert.equal(r.results[0].status, "filled");
+    assert.equal(r.results[0].method, "ai");
+    assert.equal(llm.calls.length, 1);
+    const auditRow = env.RESEARCH_DB._db.prepare(
+      "SELECT * FROM research_audit_events WHERE event_type='phi_gate_skipped_public_literature' AND resource_id LIKE 'aut_%'"
+    ).get();
+    assert.ok(auditRow, "phi_gate_skipped_public_literature audit note present for auto-add");
+  });
+
+  test("auto-add with a phone number in outcome is blocked", { skip: SKIP }, async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 10000);
+    const project = await makeProject(env, "tok-alice");
+    netByPmid.set("40123456", { abstract: ABSTRACT });
+    llm.calls.length = 0;
+    const r = await call(env, "POST", "v1/projects/" + project.id + "/studies/auto-add", "tok-alice", {
+      outcome: "Call 9876543210 for survival prediction",
+      measure: "RR",
+      items: [{ pmid: "40123456" }],
+    });
+    assert.equal(r.http, 422, JSON.stringify(r));
+    assert.equal(r.error.code, "phi_blocked");
+    assert.ok(r.categories && r.categories.includes("phone"), "categories include phone");
+    assert.equal(llm.calls.length, 0, "no AI call made");
+    assert.ok(!JSON.stringify(r).includes("9876543210"), "phone number never echoed");
+    const auditRow = env.RESEARCH_DB._db.prepare(
+      "SELECT * FROM research_audit_events WHERE event_type='ai_phi_blocked' AND resource_id LIKE 'aut_%'"
+    ).get();
+    assert.ok(auditRow, "ai_phi_blocked audit note present");
+  });
+});

@@ -41,6 +41,7 @@ import { efetchAbstracts } from "./_connectors/pubmed_efetch.js";
 import { fetchWithRetry, readJson, politeUserAgent, requireContactEmail, createBucket, ConnectorError } from "./_connectors/_http.js";
 import { dedupRecords, normaliseDoi, firstAuthorKey } from "./_dedup.js";
 import { runUserAi, extractJson } from "./_suggest.js";
+import { scan, phiCategories } from "./_phi.js";
 
 const READ_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
 const WRITE_ROLES = ["owner", "editor", "analyst"];
@@ -857,8 +858,16 @@ export async function autoAddStudies(ctx, projectId, body) {
         "confidence is from 0 to 1. Do not invent a number. If the snippets do not contain a complete " + measure + " result, return {\"measure\":\"" + measure + "\",\"format\":\"estimate\",\"quote\":\"\",\"location\":\"\",\"confidence\":0}.";
       const prompt = "Outcome: " + outcome + "\nMeasure: " + measure + "\n\nSnippets:\n" + kept;
       const refId = api.uuid("aut_");
+      const userScan = scan(outcome + "\n" + measure);
+      if (userScan.blocked) {
+        const categories = phiCategories(userScan.hits);
+        await api.audit(db, projectId, uid, "ai_phi_blocked", refId, { categories, purpose: "study_auto_add" });
+        return json({ error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
+          categories }, 422, { "x-request-id": requestId });
+      }
       const out = await runUserAi(ctx, projectId, "study_auto_add", system, prompt, refId, {
         temperature: 0, maxOutputTokens: AI_MAX_OUT, insufficientMessage: TOKENS_MESSAGE,
+        publicLiterature: true,
       });
       if (out.error) {
         const status = out.error.status;
