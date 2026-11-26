@@ -144,13 +144,34 @@ export async function extractionSuggestions(ctx, projectId, studyId, body) {
   }
   /* Document text comes from the worker result.json of the linked artifact. */
   const artifactId = (body && body.artifactId) || row.artifact_id;
-  if (!artifactId) return err(409, "job_not_done", "Attach a PDF and run extraction before requesting suggestions", requestId);
+  if (!artifactId) {
+    return err(409, "pdf_not_attached", "Attach the study PDF on the Page tab first before asking MaiK to draft.", requestId);
+  }
   const artifact = await db.prepare("SELECT * FROM research_extraction_artifacts WHERE id=? AND project_id=?").bind(artifactId, projectId).first();
   if (!artifact) return err(404, "artifact_not_found", "Artifact not found", requestId);
   const job = artifact.job_id ? await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(artifact.job_id).first() : null;
-  if (!job || job.status !== "succeeded") return err(409, "job_not_done", "The extraction job has not finished yet", requestId);
+  if (!job || job.status !== "succeeded") {
+    if (job && (job.status === "failed" || job.status === "cancelled")) {
+      return json({
+        error: { code: "job_failed", message: "Reading that PDF did not finish. Re-attach the study PDF on the Page tab.", requestId },
+        jobId: job.id,
+        jobStatus: job.status
+      }, 409, { "x-request-id": requestId });
+    }
+    return json({
+      error: { code: "job_not_done", message: "MaiK is still reading the paper. Wait a moment and try again.", requestId },
+      jobId: job ? job.id : null,
+      jobStatus: job ? job.status : (artifact.status || "queued")
+    }, 409, { "x-request-id": requestId });
+  }
   const obj = await env.RESEARCH_R2.get("projects/" + projectId + "/jobs/" + job.id + "/result.json");
-  if (!obj) return err(409, "job_not_done", "The extraction result is not available yet", requestId);
+  if (!obj) {
+    return json({
+      error: { code: "job_not_done", message: "MaiK is finishing reading the paper. Wait a moment and try again.", requestId },
+      jobId: job.id,
+      jobStatus: "running"
+    }, 409, { "x-request-id": requestId });
+  }
   const result = await obj.json();
   const pages = Array.isArray(result.pages) ? result.pages : [];
   let doc = pages.map((p) => "[page " + p.n + "]\n" + (p.text || "")).join("\n\n");

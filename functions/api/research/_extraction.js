@@ -409,6 +409,8 @@ export async function promoteExtraction(ctx, extractionId, body) {
     return f && (f.status === "verified" || f.status === "corrected");
   };
   const num = (k) => Number(fields[k].value);
+  const labelByKey = {};
+  for (const tf of tpl.fields) labelByKey[tf.key] = tf.label || tf.key;
   let requiredKeys;
   if (tpl.id === "generic_effect") {
     /* generic shape (yi+se) wins; else reported (effect+CI). Ratio measures
@@ -416,17 +418,46 @@ export async function promoteExtraction(ctx, extractionId, body) {
      * engine logs internally) exactly per the phase-1 study contract. */
     if (attested("yi") && attested("se")) requiredKeys = ["yi", "se"];
     else if (attested("effect") && attested("ciLower") && attested("ciUpper")) requiredKeys = ["effect", "ciLower", "ciUpper"];
-    else return err(422, "extraction_unverified", "A generic effect needs verified yi+se or effect+CI; no AI value reaches analysis unverified", requestId);
+    else {
+      return json({
+        error: {
+          code: "extraction_unverified",
+          message: "Verify log effect (yi) and Standard error (or Reported effect and CI bounds) first: capture their quotes or correct them (fields are unverified).",
+          requestId
+        },
+        fieldKey: "yi",
+        fieldLabel: labelByKey.yi || "log effect (yi)"
+      }, 422, { "x-request-id": requestId });
+    }
   } else {
     requiredKeys = tpl.fields.filter((f) => f.required).map((f) => f.key);
   }
   /* Every required field must be human-attested AND carry locator+quote BEFORE
    * any value is read: no AI value reaches analysis unverified (plan gate 12). */
   for (const k of requiredKeys) {
-    if (!attested(k))
-      return err(422, "extraction_unverified", "Required field " + k + " is unverified; no AI value reaches analysis unverified", requestId);
-    if (!fields[k].locator || !fields[k].quote)
-      return err(422, "locator_required", "Field " + k + " needs a locator and a quote before promote", requestId);
+    const label = labelByKey[k] || k;
+    if (!attested(k)) {
+      return json({
+        error: {
+          code: "extraction_unverified",
+          message: "Verify " + label + " first: capture its quote or correct it (field is unverified).",
+          requestId
+        },
+        fieldKey: k,
+        fieldLabel: label
+      }, 422, { "x-request-id": requestId });
+    }
+    if (!fields[k].locator || !fields[k].quote) {
+      return json({
+        error: {
+          code: "locator_required",
+          message: "Capture a quote for " + label + " on the Page tab before verifying or promoting.",
+          requestId
+        },
+        fieldKey: k,
+        fieldLabel: label
+      }, 422, { "x-request-id": requestId });
+    }
   }
   let inputs;
   if (tpl.id === "generic_effect") {
@@ -440,7 +471,7 @@ export async function promoteExtraction(ctx, extractionId, body) {
     for (const k of requiredKeys) inputs[k] = num(k);
   }
   const badInputs = validateInputs(measure, inputs);
-  if (badInputs) return err(422, "extraction_unverified", badInputs, requestId);
+  if (badInputs) return json({ error: { code: "extraction_unverified", message: badInputs, requestId } }, 422, { "x-request-id": requestId });
   const locKey = body.locatorFieldKey || requiredKeys[0];
   const locField = fields[locKey];
   if (!locField || !locField.locator || !locField.quote)
@@ -542,12 +573,30 @@ export async function artifactResult(ctx, artifactId) {
   if (!row || !(await member(db, row.project_id, uid)))
     return err(404, "artifact_not_found", "Artifact not found", requestId);
   const job = row.job_id ? await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(row.job_id).first() : null;
-  if (!job || job.status !== "succeeded")
-    return err(409, "job_not_done", "The extraction job has not finished yet", requestId);
+  if (!job || job.status !== "succeeded") {
+    if (job && (job.status === "failed" || job.status === "cancelled")) {
+      return json({
+        error: { code: "job_failed", message: "Reading that PDF did not finish. Re-attach the study PDF on the Page tab.", requestId },
+        jobId: job.id,
+        jobStatus: job.status
+      }, 409, { "x-request-id": requestId });
+    }
+    return json({
+      error: { code: "job_not_done", message: "MaiK is still reading the paper.", requestId },
+      jobId: job ? job.id : null,
+      jobStatus: job ? job.status : (row.status || "queued")
+    }, 409, { "x-request-id": requestId });
+  }
   if (!env.RESEARCH_R2) return err(503, "storage_unavailable", "Research file storage is not provisioned", requestId);
   const key = "projects/" + row.project_id + "/jobs/" + job.id + "/result.json";
   const obj = await env.RESEARCH_R2.get(key);
-  if (!obj) return err(409, "job_not_done", "The extraction result is not available yet", requestId);
+  if (!obj) {
+    return json({
+      error: { code: "job_not_done", message: "MaiK is finishing reading the paper.", requestId },
+      jobId: job.id,
+      jobStatus: "running"
+    }, 409, { "x-request-id": requestId });
+  }
   const result = await obj.json();
   return json(result, 200, { "x-request-id": requestId });
 }
