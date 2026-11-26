@@ -45,6 +45,15 @@ ok("bare 403 maps like not_member", F({ status: 403 }).action === "back");
   ok("insufficient_credits: credits action", f.action === "credits" && f.actionLabel === "Add tokens");
 }
 {
+  const f = F({ code: "timeout" });
+  ok("timeout: taking longer message", f.message === "MaiK is taking longer than usual. Try again.");
+  ok("timeout: retry action", f.action === "retry" && f.actionLabel === "Try again");
+}
+ok("SocketTimeoutException code maps to taking longer", F({ code: "SocketTimeoutException" }).message === "MaiK is taking longer than usual. Try again.");
+ok("status 504 maps to taking longer", F({ status: 504 }).message === "MaiK is taking longer than usual. Try again.");
+ok("status 408 maps to taking longer", F({ status: 408 }).message === "MaiK is taking longer than usual. Try again.");
+ok("java.net.SocketTimeoutException message maps to taking longer", F({ message: "java.net.SocketTimeoutException: timeout" }).message === "MaiK is taking longer than usual. Try again.");
+{
   const f = F({ code: "network", status: 0 });
   ok("network: connection message", f.message === "No connection right now. Your work is saved; try again in a moment.");
   ok("network: retry action", f.action === "retry" && f.actionLabel === "Try again");
