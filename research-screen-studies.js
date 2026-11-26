@@ -74,7 +74,7 @@
     if (withCredit) {
       h.push('<span class="rmd-enrich-credit">Retraction data: Crossref / Retraction Watch');
       if (r.noticeDoi) {
-        h.push(' &middot; Notice: <a class="rmd-enrich-link" href="https://doi.org/' + esc(encodeURIComponent(r.noticeDoi)) + '" target="_blank" rel="noopener noreferrer">' + esc(r.noticeDoi) + '</a>');
+        h.push(' &middot; Notice: <a class="rmd-enrich-link" href="https://doi.org/' + esc(encodeURI(r.noticeDoi)) + '" target="_blank" rel="noopener noreferrer">' + esc(r.noticeDoi) + '</a>');
       }
       h.push('</span>');
     }
