@@ -496,6 +496,53 @@ async function buildManuscriptSnapshot(db, project, proto, projectId, jobId) {
   };
 }
 
+function collectStrings(val, out) {
+  if (typeof val === "string") {
+    if (val) out.push(val);
+    return;
+  }
+  if (Array.isArray(val)) {
+    for (const item of val) collectStrings(item, out);
+    return;
+  }
+  if (val && typeof val === "object") {
+    for (const k of Object.keys(val)) collectStrings(val[k], out);
+  }
+}
+
+function snapshotPhiTexts(snapshot) {
+  const texts = [];
+  const p = snapshot && snapshot.protocol;
+  if (p) {
+    for (const k of ["title", "question", "pico", "design", "eligibility", "outcomes"]) {
+      if (p[k] !== undefined) collectStrings(p[k], texts);
+    }
+  }
+  for (const item of (snapshot && snapshot.evidence) || []) {
+    for (const v of (item && item.values) || []) {
+      if (!v) continue;
+      if (v.value !== undefined) collectStrings(v.value, texts);
+      if (typeof v.quote === "string" && v.quote) texts.push(v.quote);
+    }
+  }
+  for (const r of (snapshot && snapshot.rob) || []) {
+    if (r && typeof r.quote === "string" && r.quote) texts.push(r.quote);
+  }
+  for (const g of (snapshot && snapshot.grade) || []) {
+    if (g && typeof g.rationale === "string" && g.rationale) texts.push(g.rationale);
+  }
+  return texts;
+}
+
+function scanSnapshotPhi(snapshot) {
+  const hits = [];
+  for (const text of snapshotPhiTexts(snapshot)) {
+    const res = scan(text);
+    if (res.blocked) hits.push(...res.hits);
+  }
+  return { blocked: hits.length > 0, hits };
+}
+
 export async function createManuscriptJob(ctx, body) {
   const { env, db, uid, claims, projectId, requestId, api } = ctx;
   const { json, err, audit, uuid, projectGate, gateErr } = api;
@@ -554,9 +601,27 @@ export async function createManuscriptJob(ctx, body) {
   const jobId = uuid("job_");
   const reservation = await reserveCredits(db, env, uuid, { uid, email: claims && claims.email, jobId, quote });
 
-  /* 7-8. Build v1 manifest snapshot and run PHI gate before any R2 write. */
-  const snapshot = await buildManuscriptSnapshot(db, gate.project, proto, projectId, jobId);
-  const phi = scan(JSON.stringify(snapshot));
+  /* 7-9. Build v1 manifest snapshot, run PHI gate on free-text fields only, and put snapshot in R2. */
+  const snapshotKey = "projects/" + projectId + "/manuscript/snapshots/" + jobId + ".json";
+  let phi;
+  let r2Written = false;
+  try {
+    const snapshot = await buildManuscriptSnapshot(db, gate.project, proto, projectId, jobId);
+    phi = scanSnapshotPhi(snapshot);
+    if (!phi.blocked) {
+      await env.RESEARCH_R2.put(snapshotKey, JSON.stringify(snapshot), {
+        httpMetadata: { contentType: "application/json" },
+        customMetadata: { projectId, jobId, createdBy: uid },
+      });
+      r2Written = true;
+    }
+  } catch (e) {
+    await releaseCredits(db, uuid, reservation).catch(() => {});
+    if (r2Written && typeof env.RESEARCH_R2.delete === "function") {
+      await env.RESEARCH_R2.delete(snapshotKey).catch(() => {});
+    }
+    throw e;
+  }
   if (phi.blocked) {
     await releaseCredits(db, uuid, reservation);
     return json({
@@ -564,13 +629,6 @@ export async function createManuscriptJob(ctx, body) {
       categories: phiCategories(phi.hits),
     }, 422, { "x-request-id": requestId });
   }
-
-  /* 9. Put snapshot in R2. */
-  const snapshotKey = "projects/" + projectId + "/manuscript/snapshots/" + jobId + ".json";
-  await env.RESEARCH_R2.put(snapshotKey, JSON.stringify(snapshot), {
-    httpMetadata: { contentType: "application/json" },
-    customMetadata: { projectId, jobId, createdBy: uid },
-  });
 
   /* 10. Insert research_job_runs row (same bound-kind shape as pdf_extract). */
   const ceilings = { maxSeconds: PO_MAX_SECONDS, maxCalls: PO_MAX_CALLS, quoteMicroUsd: quote };
@@ -612,6 +670,7 @@ export async function createManuscriptJob(ctx, body) {
     await releaseCredits(db, uuid, reservation);
     await db.prepare("UPDATE research_job_runs SET status='failed',error_code='invalid_message',completed_ts=? WHERE id=?")
       .bind(Date.now(), jobId).run();
+    if (typeof env.RESEARCH_R2.delete === "function") await env.RESEARCH_R2.delete(snapshotKey).catch(() => {});
     return err(500, "invalid_message", "Job message failed the contract schema", requestId);
   }
   try {
@@ -620,6 +679,7 @@ export async function createManuscriptJob(ctx, body) {
     await db.prepare("UPDATE research_job_runs SET status='failed',error_code='queue_unavailable',completed_ts=? WHERE id=?")
       .bind(Date.now(), jobId).run();
     await releaseCredits(db, uuid, reservation);
+    if (typeof env.RESEARCH_R2.delete === "function") await env.RESEARCH_R2.delete(snapshotKey).catch(() => {});
     return err(503, "queue_unavailable", "Could not queue the job; retry with the same idempotency key", requestId);
   }
   await audit(db, projectId, uid, "job_created", jobId, { kind: "manuscript_draft", quoteMicroUsd: quote });

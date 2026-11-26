@@ -444,6 +444,7 @@ test("manuscript_draft: queue failure marks failed and releases credits; validat
   const row = env.RESEARCH_DB._db.prepare("SELECT * FROM research_job_runs WHERE idempotency_key='k-qfail'").get();
   assert.equal(row.status, "failed");
   assert.equal(row.error_code, "queue_unavailable");
+  assert.equal(env.RESEARCH_R2._objects.size, 0, "snapshot deleted on queue-send failure");
   const ledger = ledgerRows(env, row.id);
   assert.deepEqual(ledger.map((x) => x.reason), ["reserve", "release"]);
   assert.equal(ledger[0].delta + ledger[1].delta, 0);
@@ -464,4 +465,99 @@ test("manuscript_draft: queue failure marks failed and releases credits; validat
   assert.equal(validateJobMessage({ ...valid, ceilings: { maxSeconds: 0, maxCalls: 1 } }), false);
   assert.equal(validateJobMessage({ ...valid, ceilings: { maxSeconds: 600, maxCalls: 64, maxPages: 1 } }), false);
   assert.equal(validateJobMessage({ ...valid, extra: 1 }), false);
+});
+
+test("manuscript_draft: lockedAt and references with author names next to 'patients' -> 202 (not blocked)", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "alice@example.com", 500);
+  const p = await makeProject(env, "tok-alice", "systematic_review", "Sepsis review", "Does hydrocortisone reduce mortality?");
+  lockProtocol(env, p.id);
+  addRun(env, p.id, "run_1");
+  const now = Date.now();
+  env.RESEARCH_DB._db.prepare(
+    "INSERT INTO research_records (id,project_id,source,external_id,title,authors_json,year,doi,metadata_json,created_ts) VALUES ('rec_pat',?,'pubmed','22222222','Hydrocortisone in patients with septic shock',?,2023,'10.1000/sepsis',?,?)")
+    .run(p.id, JSON.stringify(["Ramesh Kumar", "Ananya Sharma"]), JSON.stringify({ venue: "Lancet" }), now);
+
+  const res = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice",
+    { kind: "manuscript_draft", idempotencyKey: "k-ref-patients" });
+  assert.equal(res.http, 202, JSON.stringify(res));
+  const snap = JSON.parse(env.RESEARCH_R2._objects.get(res.job.inputR2Key));
+  assert.ok(snap.protocol.lockedAt, "lockedAt included in snapshot");
+  assert.equal(snap.references.length, 1);
+  assert.ok(snap.references[0].title.includes("patients"));
+});
+
+test("manuscript_draft: phone in protocol.question -> 422 phi_blocked", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "alice@example.com", 500);
+  const p = await makeProject(env, "tok-alice", "systematic_review", "BCG review", "Does BCG reduce TB? Contact 9876543210");
+  lockProtocol(env, p.id);
+  addRun(env, p.id, "r1");
+
+  const r = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice",
+    { kind: "manuscript_draft", idempotencyKey: "k-phi-question" });
+  assert.equal(r.http, 422, JSON.stringify(r));
+  assert.equal(r.error.code, "phi_blocked");
+  assert.ok(Array.isArray(r.categories) && r.categories.includes("phone"), JSON.stringify(r));
+  assert.ok(!JSON.stringify(r).includes("9876543210"), "PHI text must never be echoed");
+  assert.equal(env.RESEARCH_R2._objects.size, 0);
+  assert.equal(env.RESEARCH_QUEUE._messages.length, 0);
+  const ledger = env.RESEARCH_DB._db.prepare("SELECT reason, delta FROM research_credit_ledger ORDER BY rowid ASC").all();
+  assert.deepEqual(ledger.map((x) => x.reason), ["reserve", "release"]);
+  assert.equal(ledger[0].delta + ledger[1].delta, 0);
+});
+
+test("manuscript_draft: full date in evidence quote -> 422 phi_blocked", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "alice@example.com", 500);
+  const p = await makeProject(env, "tok-alice", "systematic_review");
+  lockProtocol(env, p.id);
+  addRun(env, p.id, "r1");
+  const now = Date.now();
+  env.RESEARCH_DB._db.prepare(
+    "INSERT INTO research_studies (id,project_id,label,measure,inputs_json,locator_json,quote,verified,created_ts,updated_ts) VALUES ('st_date',?,'Trial 2023','RR',?,?,?,1,?,?)")
+    .run(p.id, JSON.stringify({ events1: 5, n1: 50 }), JSON.stringify({ kind: "manual", citation: "Trial 2023", page: 1 }), "Observed on 14/03/2023 in ward", now, now);
+
+  const r = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice",
+    { kind: "manuscript_draft", idempotencyKey: "k-phi-evquote" });
+  assert.equal(r.http, 422, JSON.stringify(r));
+  assert.equal(r.error.code, "phi_blocked");
+  assert.ok(Array.isArray(r.categories) && r.categories.includes("dates"), JSON.stringify(r));
+  assert.ok(!JSON.stringify(r).includes("14/03/2023"), "PHI date must never be echoed");
+  assert.equal(env.RESEARCH_R2._objects.size, 0);
+  assert.equal(env.RESEARCH_QUEUE._messages.length, 0);
+  const ledger = env.RESEARCH_DB._db.prepare("SELECT reason, delta FROM research_credit_ledger ORDER BY rowid ASC").all();
+  assert.deepEqual(ledger.map((x) => x.reason), ["reserve", "release"]);
+  assert.equal(ledger[0].delta + ledger[1].delta, 0);
+});
+
+test("manuscript_draft: snapshot build throwing releases reserved credits", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "alice@example.com", 500);
+  const p = await makeProject(env, "tok-alice", "systematic_review");
+  lockProtocol(env, p.id);
+  addRun(env, p.id, "r1");
+
+  const origPrepare = env.RESEARCH_DB.prepare.bind(env.RESEARCH_DB);
+  env.RESEARCH_DB.prepare = (sql) => {
+    if (sql.includes("FROM research_studies")) {
+      return {
+        bind: () => ({
+          all: async () => { throw new Error("simulated snapshot failure"); },
+        }),
+      };
+    }
+    return origPrepare(sql);
+  };
+
+  await assert.rejects(
+    () => call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice",
+      { kind: "manuscript_draft", idempotencyKey: "k-snap-err" }),
+    /simulated snapshot failure/
+  );
+  assert.equal(env.RESEARCH_R2._objects.size, 0);
+  assert.equal(env.RESEARCH_QUEUE._messages.length, 0);
+  const ledger = env.RESEARCH_DB._db.prepare("SELECT reason, delta FROM research_credit_ledger ORDER BY rowid ASC").all();
+  assert.deepEqual(ledger.map((x) => x.reason), ["reserve", "release"]);
+  assert.equal(ledger[0].delta + ledger[1].delta, 0);
 });
