@@ -102,15 +102,15 @@ export function evaluatePhiOverride(hits, request, enabled, now) {
   if (request.termsVersion !== PHI_OVERRIDE_TERMS_VERSION) return result;
   if (PHI_OVERRIDE_CONDITIONS.indexOf(request.condition) < 0) return result;
   if (policy.allowedConditions.indexOf(request.condition) < 0) return result;
-  if (request.condition === "consent" && request.consentEvidence) {
+  if (request.condition === "consent") {
+    /* Stricter reading of F-02: the consent condition always needs evidence
+     * (date + reference), whatever the identifier type. */
     const ev = request.consentEvidence;
-    const evidenced = !!ev.reference && ev.reference.length <= CONSENT_REFERENCE_MAX &&
+    const evidenced = !!ev && !!ev.reference && ev.reference.length <= CONSENT_REFERENCE_MAX &&
       consentDateValid(ev.consentDate, now);
-    if (policy.highRisk && !evidenced) return result;
-    if (evidenced) {
-      result.consentEvidenced = true;
-      result.consentDate = ev.consentDate;
-    }
+    if (!evidenced) return result;
+    result.consentEvidenced = true;
+    result.consentDate = ev.consentDate;
   } else if (policy.highRisk) {
     /* High-risk categories allow only "consent", and consent needs evidence. */
     return result;

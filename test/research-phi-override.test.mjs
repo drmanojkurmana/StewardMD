@@ -292,18 +292,22 @@ describe("ai-draft PHI override v1", () => {
     }
   });
 
-  test("low-risk consent does not require evidence (high-risk evidence rule is scoped)", { skip: SKIP }, async () => {
+  test("consent always requires evidence (stricter reading of F-02), even for low-risk categories", { skip: SKIP }, async () => {
     defaultLlm();
     const env = freshEnv();
     fundWallet(env, "alice@example.com", 10000);
     const p = await makeProject(env, "tok-alice");
     const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
       draftBody(DATE_TEXT, override("consent")));
-    assert.equal(r.http, 200, JSON.stringify(r));
+    assert.equal(r.http, 422, "consent without evidence is rejected");
+    const ok = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+      draftBody(DATE_TEXT, override("consent", { consentDate: TODAY, reference: "IEC-2026-014" })));
+    assert.equal(ok.http, 200, JSON.stringify(ok));
     const meta = overrideMeta(env);
     assert.equal(meta.condition, "consent");
-    assert.equal(meta.consentEvidenced, false);
-    assert.equal(Object.prototype.hasOwnProperty.call(meta, "consentDate"), false);
+    assert.equal(meta.consentEvidenced, true);
+    assert.equal(meta.consentDate, TODAY);
+    assert.ok(!JSON.stringify(meta).includes("IEC-2026-014"), "reference never logged");
   });
 
   test("phone, aadhaar and mrn require consent with valid evidence", { skip: SKIP }, async () => {
