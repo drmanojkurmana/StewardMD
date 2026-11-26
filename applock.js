@@ -468,7 +468,18 @@
       var EA = window.SMD_EMAIL_AUTH || {};
       if (EA.gateUp && EA.gateUp()) return true;
       if (EA.flowOpen && EA.flowOpen()) return true;
-      return !!document.getElementById("smdBootSplash");
+      if (document.getElementById("smdBootSplash")) return true;
+      /* Onboarding order (owner 2026-11-27, docs/research/ONBOARDING_ORDER.md option 3B): offer the
+       * lock chooser only after the first screen is up and nothing else (ResearchMD, a sheet, the
+       * tour) is open. Unlocking an existing lock is untouched. smd_onb_legacy="1" restores the old order. */
+      var legacy = false; try { legacy = localStorage.getItem("smd_onb_legacy") === "1"; } catch (e2) {}
+      var O = window.SMD_PROFILE_SETUP && window.SMD_PROFILE_SETUP._onb;
+      if (!legacy && O) {
+        if (!O.firstScreen()) return true;
+        var busy = false; try { busy = O.busy(); } catch (e3) {}
+        if (busy && !document.getElementById("smdApplock")) return true;
+      }
+      return false;
     } catch (e) { return false; }
   }
   function ensureSetup() {
@@ -480,7 +491,7 @@
         if (configured() || document.getElementById("smdApplock")) { _ensuring = false; return; }
         var p = window.SMD_ACCOUNT && window.SMD_ACCOUNT.profile && window.SMD_ACCOUNT.profile();
         if (!p || !p.signedIn || p.isGuest) { _ensuring = false; return; }
-        if (screenBusy()) { if (++tries < 240) setTimeout(tick, 500); else _ensuring = false; return; }
+        if (screenBusy()) { if (++tries < 720) setTimeout(tick, 500); else _ensuring = false; return; }   // up to 6 min, then next app open
       } catch (e) { _ensuring = false; return; }
       _ensuring = false;
       var EA = window.SMD_EMAIL_AUTH, uid = null;

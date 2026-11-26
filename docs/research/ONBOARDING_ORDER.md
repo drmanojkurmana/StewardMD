@@ -58,7 +58,7 @@ Goal: reach the app, and ResearchMD, before optional housekeeping; never weaken 
 | Defer the optional profile sheet until after the first screen | SAFE | Implemented |
 | Show at most one optional onboarding sheet per session | SAFE | Implemented |
 | Defer a recovery-address sheet (does not exist in origin/main) | SAFE (if reintroduced) | Not applicable; the session budget is ready for it |
-| Move the app-lock chooser after the first screen | NEEDS OWNER DECISION | Not implemented |
+| Move the app-lock chooser after the first screen | OWNER APPROVED 2026-11-27 (3B) | Implemented in applock.js (waits for the first screen and any open screen; `smd_onb_legacy="1"` restores) |
 | Move phone verification after the first screen | NEEDS OWNER DECISION | Not implemented |
 | Change registration verification, consent, trial or billing order | NEEDS OWNER DECISION | Not implemented |
 
