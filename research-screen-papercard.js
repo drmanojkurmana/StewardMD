@@ -103,6 +103,22 @@
       ".rmd-papercard-add-status:empty { display: none; margin-top: 0; }",
       ".rmd-papercard-outcome-err { font-size: 12.5px; color: var(--rmd-bad); margin: 2px 0 0; }",
       ".rmd-papercard-muted { font-size: 13px; color: var(--rmd-mut); margin: 0; }",
+      "/* Enrichment: retraction badge and OpenAlex signals */",
+      ".rmd-retraction-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--rmd-bad-soft); color: var(--rmd-bad); border: 1px solid rgba(180, 35, 24, 0.26); font-weight: 700; }",
+      ".rmd-retraction-badge-eoc { background: var(--rmd-warn-soft); color: var(--rmd-warn); border-color: rgba(163, 78, 28, 0.28); }",
+      ".rmd-enrich-credit { display: block; width: 100%; font-size: 11px; line-height: 1.4; color: var(--rmd-mut); margin-top: 2px; }",
+      ".rmd-enrich-link { color: var(--rmd-acc); text-decoration: underline; text-underline-offset: 2px; word-break: break-word; }",
+      ".rmd-enrich-block { margin: 0 0 16px; padding: 12px 14px; background: var(--rmd-bg); border: 1px solid var(--rmd-line); border-radius: 10px; display: flex; flex-direction: column; gap: 6px; }",
+      ".rmd-enrich-title { font: 700 13px var(--rmd-f); text-transform: uppercase; letter-spacing: 0.04em; color: var(--rmd-mut); }",
+      ".rmd-enrich-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline; font-size: 13px; line-height: 1.45; color: var(--rmd-ink); }",
+      ".rmd-enrich-k { font-weight: 700; color: var(--rmd-ink); }",
+      ".rmd-enrich-v { color: var(--rmd-ink); font-variant-numeric: tabular-nums; }",
+      ".rmd-enrich-related-wrap { display: flex; flex-direction: column; gap: 4px; }",
+      ".rmd-enrich-related { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }",
+      ".rmd-enrich-related li { font-size: 12.5px; line-height: 1.45; color: var(--rmd-ink); }",
+      ".rmd-enrich-year { color: var(--rmd-mut); font-variant-numeric: tabular-nums; }",
+      "body.dark #researchMD .rmd-retraction-badge, body.v3-dark #researchMD .rmd-retraction-badge { background: rgba(180, 35, 24, 0.2); color: #ffb4ab; border-color: rgba(255, 180, 171, 0.26); }",
+      "body.dark #researchMD .rmd-retraction-badge-eoc, body.v3-dark #researchMD .rmd-retraction-badge-eoc { background: rgba(163, 78, 28, 0.24); color: #ffc29c; border-color: rgba(255, 194, 156, 0.26); }",
       "@media (prefers-reduced-motion: reduce) {",
       "  .rmd-calm-spinner { animation-duration: 6s; }",
       "  .rmd-papercard-actions button { transition: none; }",
@@ -281,6 +297,126 @@
     return h.join("\n");
   }
 
+  function enrichFlag(key) {
+    try {
+      return typeof G.localStorage !== "undefined" && G.localStorage.getItem(key) === "1";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function fmtEnrichDate(iso) {
+    var m = String(iso || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!m) return "";
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var mi = parseInt(m[2], 10) - 1;
+    if (mi < 0 || mi > 11) return "";
+    return parseInt(m[3], 10) + " " + months[mi] + " " + m[1];
+  }
+
+  function retractionLabel(status) {
+    return status === "expression_of_concern" ? "Expression of concern" : "Retracted";
+  }
+
+  function retractionBadgeHtml(r, withCredit) {
+    if (!r || (r.status !== "retracted" && r.status !== "expression_of_concern")) return "";
+    var eoc = r.status === "expression_of_concern";
+    var date = fmtEnrichDate(r.date);
+    var h = [];
+    h.push('<span class="rmd-badge rmd-badge-pill rmd-retraction-badge' + (eoc ? " rmd-retraction-badge-eoc" : "") + '" title="Retraction data: Crossref / Retraction Watch">');
+    h.push('<svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>');
+    h.push('<span>' + esc(retractionLabel(r.status)) + (date ? " " + esc(date) : "") + '</span>');
+    h.push('</span>');
+    if (withCredit) {
+      h.push('<span class="rmd-enrich-credit">Retraction data: Crossref / Retraction Watch');
+      if (r.noticeDoi) {
+        h.push(' &middot; Notice: <a class="rmd-enrich-link" href="https://doi.org/' + esc(encodeURI(r.noticeDoi)) + '" target="_blank" rel="noopener noreferrer">' + esc(r.noticeDoi) + '</a>');
+      }
+      h.push('</span>');
+    }
+    return h.join("");
+  }
+
+  function oaStatusLabel(status) {
+    var s = String(status || "closed");
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
+  function openAlexBlockHtml(work) {
+    if (!work) return "";
+    var h = [];
+    h.push('<div class="rmd-enrich-block">');
+    h.push('  <div class="rmd-enrich-title">Citation and open access</div>');
+    h.push('  <div class="rmd-enrich-row"><span class="rmd-enrich-k">Cited by</span><span class="rmd-enrich-v">' + esc(Number(work.citedByCount || 0).toLocaleString()) + '</span></div>');
+    h.push('  <div class="rmd-enrich-row"><span class="rmd-enrich-k">Open access</span><span class="rmd-enrich-v">' + esc(oaStatusLabel(work.oaStatus)) +
+      (work.bestOaUrl ? ' &middot; <a class="rmd-enrich-link" href="' + esc(work.bestOaUrl) + '" target="_blank" rel="noopener noreferrer">Read free copy</a>' : '') + '</span></div>');
+    var related = Array.isArray(work.relatedWorks) ? work.relatedWorks.slice(0, 5) : [];
+    if (related.length) {
+      h.push('  <div class="rmd-enrich-related-wrap">');
+      h.push('    <span class="rmd-enrich-k">Related works</span>');
+      h.push('    <ul class="rmd-enrich-related" role="list">');
+      for (var i = 0; i < related.length; i++) {
+        var item = related[i] || {};
+        var href = item.doi ? "https://doi.org/" + encodeURIComponent(item.doi) : (item.id ? "https://openalex.org/" + encodeURIComponent(item.id) : "");
+        h.push('      <li>');
+        if (href) h.push('<a class="rmd-enrich-link" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + esc(item.title || "Untitled work") + '</a>');
+        else h.push('<span>' + esc(item.title || "Untitled work") + '</span>');
+        if (item.year) h.push(' <span class="rmd-enrich-year">(' + esc(item.year) + ')</span>');
+        h.push('      </li>');
+      }
+      h.push('    </ul>');
+      h.push('  </div>');
+    }
+    h.push('  <div class="rmd-enrich-credit">Data: OpenAlex</div>');
+    h.push('</div>');
+    return h.join("\n");
+  }
+
+  function pickWork(works, doi, pmid) {
+    var wantDoi = String(doi || "").toLowerCase();
+    var wantPmid = String(pmid || "");
+    for (var i = 0; i < works.length; i++) {
+      var w = works[i] || {};
+      if (wantDoi && String(w.doi || "").toLowerCase() === wantDoi) return w;
+      if (wantPmid && String(w.pmid || "") === wantPmid) return w;
+    }
+    return works.length === 1 ? works[0] : null;
+  }
+
+  /* Enrichment is opt-in per device. With the flag off nothing is requested;
+   * with it on, a missing key, provider failure or "none" leaves the slots
+   * empty so no error banner or empty box appears. */
+  function hydrateCardEnrichment(cardEl, card) {
+    if (!cardEl || !card || !SMD.api || typeof SMD.api.request !== "function") return;
+    var badgeHost = cardEl.querySelector('[data-rmd-enrich-badge]');
+    var blockHost = cardEl.querySelector('[data-rmd-enrich]');
+    var doi = card.doi ? String(card.doi) : "";
+    var pmid = card.pmid ? String(card.pmid) : "";
+
+    if (enrichFlag("smd_research_retraction") && doi) {
+      SMD.api.request("POST", "/v1/enrich/retraction", { doi: doi })
+        .then(function (data) {
+          if (!data || !data.available || !data.retraction) return;
+          var html = retractionBadgeHtml(data.retraction, true);
+          if (html && badgeHost && badgeHost.parentNode) badgeHost.innerHTML = html;
+        })
+        .catch(function () {});
+    }
+
+    if (enrichFlag("smd_research_openalex") && (doi || pmid)) {
+      var req = {};
+      if (doi) req.doi = doi;
+      if (pmid) req.pmid = pmid;
+      SMD.api.request("POST", "/v1/enrich/openalex", req)
+        .then(function (data) {
+          if (!data || !data.available || !data.works || !data.works.length) return;
+          var work = pickWork(data.works, doi, pmid);
+          if (work && blockHost && blockHost.parentNode) blockHost.innerHTML = openAlexBlockHtml(work);
+        })
+        .catch(function () {});
+    }
+  }
+
   /* Renders the Study Card into target container */
   function renderCard(container, card, opts) {
     if (!container || !card) return;
@@ -340,7 +476,11 @@
     } else {
       h.push('    <span class="rmd-badge rmd-badge-pill rmd-token-chip">0 MaiK tokens</span>');
     }
+    h.push('    <span class="rmd-enrich-retraction-slot" data-rmd-enrich-badge></span>');
     h.push('  </div>');
+
+    // Enrichment block (retraction credit, OpenAlex signals); stays empty when hidden
+    h.push('  <div class="rmd-enrich-slot" data-rmd-enrich></div>');
 
     // iPad 2-col / Phone 1-col container
     h.push('  <div class="rmd-papercard-columns">');
@@ -810,6 +950,8 @@
         if (outcomePrompt) outcomePrompt.style.display = "none";
       };
     }
+
+    hydrateCardEnrichment(cardEl, card);
   }
 
   /* Strip invisible characters, duplicated side-by-side pasted URLs, and spaces after "10." in DOIs. */
@@ -1045,6 +1187,7 @@
     render: renderCard,
     mountPasteBox: mountPasteBox,
     injectCSS: injectCSS,
+    enrich: hydrateCardEnrichment,
     normalizeLink: cleanInputLink,
     addLocalStudyFromCard: addLocalStudyFromCard
   };

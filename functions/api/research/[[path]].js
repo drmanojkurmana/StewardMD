@@ -85,6 +85,7 @@ import { findStudies, autoAddStudies } from "./_auto_studies.js";
 import { aiDraft } from "./_ai_draft.js";
 import { paperCard, explainPaperCard } from "./_paper_card.js";
 import { formatCheck } from "./_format_check.js";
+import { enrichRetractionRoute, enrichOpenAlexRoute } from "./_enrich.js";
 
 const MAX_JSON = 1024 * 1024;
 const MAX_PDF = 25 * 1024 * 1024;
@@ -1980,6 +1981,12 @@ export async function onRequest({ request, env, params }) {
   if (!claims || !claims.sub) return err(401, "unauthorized", "Sign in to use StewardMD Research", requestId);
   const uid = claims.sub;
   const url = new URL(request.url);
+
+  /* ---- Phase 1 enrichment routes: identifiers only, no project text. ---- */
+  if (path === "/v1/enrich/retraction" && request.method === "POST")
+    return enrichRetractionRoute({ request, env, requestId, api: P3 });
+  if (path === "/v1/enrich/openalex" && request.method === "POST")
+    return enrichOpenAlexRoute({ request, env, requestId, api: P3 });
 
   /* ---- Phase 3 user routes (Firebase auth + project role, same as above). */
   const p3Ctx = { request, env, db, uid, claims, requestId, api: P3 };

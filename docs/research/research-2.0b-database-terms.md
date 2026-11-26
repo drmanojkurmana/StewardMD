@@ -7,6 +7,10 @@ This document defines the legal, commercial, and technical requirements for inte
 4. Semantic Scholar Academic Graph API (S2AG)
 5. ClinicalTrials.gov API v2
 
+Phase 1 enrichment adds two further sources, documented in sections 4.9 and 7:
+5. Crossref retraction and expression-of-concern data (includes the Retraction Watch dataset acquired by Crossref in 2023)
+6. OpenAlex (works metadata, citation counts and open-access links)
+
 Each section cites current official documentation pages, specifies terms for commercial use inside a paid mobile app, details rate limits and parameters, sets caching and retention boundaries, and outlines attribution rules. The document concludes with a numbered list of strict implementation rules for the connector builder.
 
 Where a fact cannot be confirmed directly from an official documentation page, it is explicitly marked UNCONFIRMED.
@@ -27,6 +31,19 @@ Where a fact cannot be confirmed directly from an official documentation page, i
 | Abstract storage allowed | Yes, subject to third-party copyright | Yes, subject to publisher copyright | Yes, subject to publisher copyright | No for commercial redistribution under default terms | N/A (registry protocol summary fields only; subject to sponsor third-party copyright where applicable) |
 | Full text retrieval | None (PMID only; PMC OA via separate tools) | Yes (XML/PDF for Open Access subset) | None (metadata and publisher links only) | None (abstracts and citation graphs only) | None (trial protocol/results registry records only) |
 | Blockers for paid app | None (must avoid endorsement claim and credit NLM) | Ingesting CC-BY-NC full text violates license | None for metadata | Default license strictly forbids commercial use | None for registry metadata with attribution (`Data: ClinicalTrials.gov`), freshness caching, and no email harvesting |
+
+### 1.1 Phase 1 enrichment sources
+
+| Dimension | Crossref retractions / Retraction Watch | OpenAlex |
+|---|---|---|
+| Commercial use allowed | Crossref metadata is CC0. Rights in the Retraction Watch assertions beyond the Crossref API are UNCONFIRMED (the public dataset repository carries no licence file). | Yes. Every record is released under CC0 (https://help.openalex.org/access/pricing/). |
+| Formal agreement needed | None for the public Crossref API. | None. |
+| API key status | Optional; the existing Crossref polite-pool contact applies. | Free API key required by us (`OPENALEX_API_KEY`). A missing key makes the feature unavailable. |
+| Rate limit with key | 10 req/sec polite pool (shared with the Crossref connector). | 30 req/sec for a free key; 10 req/sec keyless. We use a conservative 5 req/sec bucket. |
+| Required identification | `mailto` and the polite `User-Agent`. | `api_key` query parameter. |
+| Metadata storage allowed | Yes. Crossref metadata is CC0. Retraction Watch-specific retention terms UNCONFIRMED; we cache for 24 hours. | Yes, CC0. We cache each work for 7 days. |
+| Attribution | "Retraction data: Crossref / Retraction Watch" wherever the badge appears. | "Data: OpenAlex" wherever the fields appear. |
+| Blockers for paid app | None identified for the Crossref API path. Retraction Watch standalone dataset licensing is UNCONFIRMED. | None. |
 
 ---
 
@@ -219,6 +236,18 @@ Where a fact cannot be confirmed directly from an official documentation page, i
 ### 4.8 Paid App Feasibility and Blockers
 - Anything blocking use in a paid app: None. Crossref metadata is CC0 and explicitly intended for open commercial integration.
 - Connector requirements: Always provide a well-formed `User-Agent` containing a valid `mailto:` address to stay within the Polite Pool, observe the 10 req/sec and 3 to 5 concurrency limits, and check the `x-rate-limit-*` headers.
+
+### 4.9 Retraction and expression-of-concern data (Retraction Watch)
+- Official documentation and announcements:
+  - Crossref and Retraction Watch announcement (2023-09-12): https://www.crossref.org/blog/news-crossref-and-retraction-watch/
+  - Public dataset repository (updated every working day): https://gitlab.com/crossref/retraction-watch-data
+  - Crossref REST filters: https://github.com/Crossref/rest-api-doc (filter names: `updates`, `is-update`)
+- Commercial use: Crossref bibliographic metadata is CC0. The Retraction Watch dataset was acquired by Crossref in September 2023 and is distributed alongside Crossref works records. The public dataset repository README does not state a separate licence for the Retraction Watch assertions, so the licence of the standalone dataset is UNCONFIRMED. Inside ResearchMD we read it only through the public Crossref works API, under Crossref's CC0 metadata terms.
+- Ingestion path used: `GET https://api.crossref.org/works?filter=updates:{DOI}`. Each returned notice work carries `update-to` entries with `DOI` (the affected work), `type` (`retraction`, `expression_of_concern`, and also non-retraction values such as `correction`, `erratum`, `corrigendum`, `withdrawal`, `new_version`, `new_edition`), `label`, `source` (`publisher` or `retraction-watch`) and `updated.date-parts`. Verified against a live Crossref response on 2026-11-26.
+- Only `retraction` and `expression_of_concern` are surfaced. Corrections, errata, corrigenda, withdrawals and removals are not retractions. When both exist for one DOI, a retraction outranks an expression of concern; ties use the latest notice date.
+- Rate limit: the same Crossref polite pool (10 req/sec, 3 concurrent list queries). Batched lookups use repeated `updates:` filters joined with commas; 20 DOIs per request keeps URLs short (the documented OR ceiling is 100 for the marker syntax but Crossref publishes no explicit cap for repeated filters, so 20 is a deliberate conservative choice).
+- Storage: cached in the Cloudflare Cache API for 24 hours, keyed by the normalised DOI.
+- Attribution: display "Retraction data: Crossref / Retraction Watch" next to every retraction or expression-of-concern badge, with the notice DOI linked through `https://doi.org/{noticeDoi}`.
 
 ---
 
@@ -433,3 +462,61 @@ The connector builder must implement the literature search and extraction pipeli
     - Map condition to `query.cond`, intervention to `query.intr`, status to `filter.overallStatus`, phase to `filter.advanced` (`AREA[Phase]...`), and validate NCT IDs against `^NCT\d{8}$`.
     - Normalise exclusively to `{nct, title, phase, status, enrollment, arms, primaryOutcome, resultsPosted, source: "ClinicalTrials.gov"}` so no investigator/contact emails or unrequested fields are retained.
     - Cache normalized responses for 24 h (86,400 s) and show `"Data: ClinicalTrials.gov"` wherever data is rendered.
+21. Retractions and expressions of concern (Crossref / Retraction Watch):
+    - Look up notices with the `updates:{DOI}` filter and read `update-to` on each notice work. Surface only `retraction` and `expression_of_concern`; ignore corrections, errata, corrigenda, withdrawals and removals.
+    - Cache each DOI result for 24 hours. Return `{status, date, noticeDoi, source}` with `status` one of `retracted`, `expression_of_concern` or `none`.
+    - When Crossref is unreachable or the contact email is missing, return an unavailable result and render nothing. Display "Retraction data: Crossref / Retraction Watch".
+
+22. OpenAlex identifiers only:
+    - Send only DOIs and PMIDs to OpenAlex, never case text, thesis text or any project document. Read the key from `OPENALEX_API_KEY` and put it in the `api_key` query parameter. A missing key means the feature is unavailable.
+    - Batch with OR (`doi:a|b|c`, `pmid:1|2`); never mix different filters with `|`. Request at most 50 identifiers per call (documented OR limit is 100). Cache each work for 7 days.
+    - Return `citedByCount`, `oaStatus`, `bestOaUrl` and up to five `relatedWorks` (`id`, `title`, `year`, `doi`). Display "Data: OpenAlex".
+
+23. Hide on failure, never error:
+    - Every enrichment route answers HTTP 200 with `{available:false}` when its provider is down, times out, or its key/contact is missing. The app renders no banner, no empty box and no badge in that state.
+
+## 8. OpenAlex API
+
+### 8.1 Official Documentation and Policy URLs
+- OpenAlex documentation: https://help.openalex.org/
+- Authentication and rate limits: https://help.openalex.org/how-to-use-the-api/rate-limits-and-authentication
+- Pricing and CC0 data licence: https://help.openalex.org/access/pricing/
+- Filter syntax and OR limits: https://help.openalex.org/how-to-use-the-api/get-lists-of-entities/filter-entity-lists
+- Work attributes: https://help.openalex.org/data/works/attributes
+- Open access fields: https://help.openalex.org/data/works/open-access
+
+### 8.2 Commercial Use and Agreement Requirements
+- Commercial use allowed: Yes. Official pricing documentation states: "Every record is released under a CC0 public-domain license, with no 'personal use only' carve-out and no permission to ask."
+- Agreement needed: None. OpenAlex sells services (bigger daily budgets, sync), not the data.
+
+### 8.3 API Key Details
+- Status: A free key is not required for light use, but ResearchMD treats it as required: if `OPENALEX_API_KEY` is absent the server returns `{available:false}` and the app hides the feature.
+- How to send: `api_key` query parameter, or `Authorization: Bearer`. This connector uses the documented `api_key` query parameter.
+- Effect: a free key raises the daily budget 10x and is required for cursor paging past the first page. Budgets are measured in dollars per day (free tier: $1/day). Spending a day's budget returns HTTP 429 with reason `daily_budget`.
+
+### 8.4 Rate Limits
+- Published per-second limits: no key 10 req/sec per IP; free key or prepaid 30 req/sec; Member 50 req/sec; Member+ or Partner 50 req/sec. Verified from the authentication page on 2026-11-26.
+- Filters joining more than 10 values with `|` on topic/concept IDs are limited to 1 req/sec; our `doi` and `pmid` filters are not in that list.
+- ResearchMD uses a conservative 5 req/sec token bucket and the shared `fetchWithRetry` backoff.
+
+### 8.5 Required Parameters and Headers
+- Base URL: `https://api.openalex.org/works`
+- `filter`: `doi:` matches a work's own DOI or any location DOI, case-insensitively; up to 100 values can be OR-ed. `doi:10.1/a|10.1/b` and `pmid:123|456` are the batch forms used here. Mixing different filter names with `|` is invalid.
+- `select`: limits fields. This connector requests `id,doi,ids,title,publication_year,cited_by_count,open_access,best_oa_location,related_works`.
+- `per_page`: 1-100 (100 is the supported maximum; 200 is deprecated legacy behaviour).
+- Related-works expansion uses `filter=openalex_id:W1|W2...` with `select=id,title,publication_year,doi`.
+
+### 8.6 Data Storage, Retention, and Redistribution Rules
+- Metadata: CC0. ResearchMD may cache and redistribute it commercially. Each work is cached in the Cloudflare Cache API for 7 days, keyed by the normalised DOI or PMID that was looked up.
+- Related works: `related_works` is a list of up to 10 OpenAlex IDs. ResearchMD resolves at most the first five to `{id,title,year,doi}` and stores them with the work.
+
+### 8.7 Attribution Rules
+- CC0 does not require legal attribution, but OpenAlex's community norm is to credit the source. ResearchMD displays "Data: OpenAlex" wherever citation counts, OA status or related works appear, and links OpenAlex IDs through `https://openalex.org/{id}`.
+
+### 8.8 Paid App Feasibility and Blockers
+- Nothing blocks commercial use: the data is CC0 and the API is intended for third-party products.
+- Operational conditions: keep the key server-side, stay inside the daily budget and per-second limits, and hide the feature when the key is missing or the API fails.
+
+
+---
+
