@@ -553,12 +553,183 @@
     return r === "owner" || r === "editor" || r === "analyst";
   }
 
-  /* The AI gate: a PHI hit blocks every provider call until a clean upload;
-     viewers cannot run AI at all. */
-  function aiGate(project, state) {
-    if (state && state.phi && state.phi.blocked) return { allowed: false, reason: "phi" };
+  /* Viewers cannot run AI; PHI consent is handled via a calm consent sheet
+     rather than hard-blocking the thesis upload. */
+  function aiGate(project) {
     if (!canRunAi(project)) return { allowed: false, reason: "role" };
     return { allowed: true, reason: "" };
+  }
+
+  /* ---------- client-side thesis PHI masking + soft finding scan (ES5) ---------- */
+
+  var V_D = [
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 0, 6, 7, 8, 9, 5],
+    [2, 3, 4, 0, 1, 7, 8, 9, 5, 6], [3, 4, 0, 1, 2, 8, 9, 5, 6, 7],
+    [4, 0, 1, 2, 3, 9, 5, 6, 7, 8], [5, 9, 8, 7, 6, 0, 4, 3, 2, 1],
+    [6, 5, 9, 8, 7, 1, 0, 4, 3, 2], [7, 6, 5, 9, 8, 2, 1, 0, 4, 3],
+    [8, 7, 6, 5, 9, 3, 2, 1, 0, 4], [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+  ];
+  var V_P = [
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 5, 7, 6, 2, 8, 3, 0, 9, 4],
+    [5, 8, 0, 3, 7, 9, 6, 1, 4, 2], [8, 9, 1, 6, 0, 4, 3, 5, 2, 7],
+    [9, 4, 5, 3, 1, 2, 6, 8, 7, 0], [4, 2, 8, 6, 5, 7, 3, 9, 0, 1],
+    [2, 7, 9, 3, 8, 0, 6, 4, 1, 5], [7, 0, 4, 6, 9, 1, 3, 2, 5, 8]
+  ];
+
+  function verhoeffValid(d12) {
+    if (!/^\d{12}$/.test(d12)) return false;
+    var c = 0, i;
+    for (i = 0; i < 12; i++) c = V_D[c][V_P[i % 8][Number(d12.charAt(11 - i))]];
+    return c === 0;
+  }
+
+  function nhsMod11Valid(d10) {
+    if (!/^\d{10}$/.test(d10)) return false;
+    var sum = 0, i, r, chk;
+    for (i = 0; i < 9; i++) sum += Number(d10.charAt(i)) * (10 - i);
+    r = 11 - (sum % 11);
+    chk = r === 11 ? 0 : r;
+    if (chk === 10) return false;
+    return chk === Number(d10.charAt(9));
+  }
+
+  function maskThesisHardIds(text) {
+    var out = String(text || "");
+    var count = 0;
+
+    out = out.replace(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g, function () {
+      count += 1;
+      return "[email]";
+    });
+    out = out.replace(/\b(?:dob|date\s+of\s+birth|d\.?o\.?b\.?)\s*[:=-]?\s*(?:\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}|\d{4}[\/\-.]\d{1,2}[\/\-.]\d{1,2})\b/gi, function () {
+      count += 1;
+      return "[DOB]";
+    });
+    out = out.replace(/\b\d{2}-\d{4}-\d{4}-\d{4}\b/g, function () {
+      count += 1;
+      return "[ID]";
+    });
+    out = out.replace(/(^|[^A-Za-z0-9])((?:uhid|mrn|ip\s*(?:no|num|number|#)?|op\s*(?:no|num|number|#)?|cr\s*(?:no|num|number|#)?|hospital\s*(?:no|num|number|id))\s*[:#=-]?\s*[A-Za-z0-9-]*\d[A-Za-z0-9-]{2,})\b/gi, function (_, pre) {
+      count += 1;
+      return pre + "[ID]";
+    });
+    out = out.replace(/\b\d{3}-\d{2}-\d{4}\b/g, function () {
+      count += 1;
+      return "[ID]";
+    });
+    out = out.replace(/\b[2-9]\d{3}[\s-]?\d{4}[\s-]?\d{4}\b/g, function (m) {
+      if (verhoeffValid(m.replace(/[\s-]/g, ""))) {
+        count += 1;
+        return "[ID]";
+      }
+      return m;
+    });
+    out = out.replace(/(?:\+?91[\s-]?)?[6-9]\d{9}\b|\b(?:\+?\d{1,3}[\s-]?)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\b/g, function () {
+      count += 1;
+      return "[phone]";
+    });
+    out = out.replace(/\b\d{3}[\s-]?\d{3}[\s-]?\d{4}\b/g, function (m) {
+      if (nhsMod11Valid(m.replace(/[\s-]/g, ""))) {
+        count += 1;
+        return "[ID]";
+      }
+      return m;
+    });
+
+    return { text: out, maskedCount: count };
+  }
+
+  function shortMaskedPreview(text, start, end, placeholder) {
+    var raw = String(text || "");
+    var pad = 14;
+    var left = Math.max(0, start - pad);
+    var right = Math.min(raw.length, end + pad);
+    var before = raw.slice(left, start).replace(/\s+/g, " ").replace(/^\s+/, "");
+    var after = raw.slice(end, right).replace(/\s+/g, " ").replace(/\s+$/, "");
+    return (left > 0 ? "..." : "") + before + (placeholder || "[detail]") + after + (right < raw.length ? "..." : "");
+  }
+
+  var THESIS_SOFT_RULES = [
+    {
+      cat: "patient_name",
+      placeholder: "[name]",
+      re: /\bpatient\s*(?:name)?\s*[:=-]\s*([A-Z][a-z]{1,20}(?:\s+[A-Z][a-z]{1,20}){0,2})\b/g,
+      group: 1
+    },
+    {
+      cat: "patient_name",
+      placeholder: "[name]",
+      re: /\b(?:patient|patients|case|admitted|diagnosed|mr\.?|mrs\.?|ms\.?|shri|smt|kumari)\b[^.!?\n]{0,40}\b([A-Z][a-z]{1,18}\s+[A-Z][a-z]{1,18}(?:\s+[A-Z][a-z]{1,18})?)/g,
+      group: 1
+    },
+    {
+      cat: "address",
+      placeholder: "[address]",
+      re: /\b(?:resident\s+of|address\s*[:=-]|r\/o|s\/o|d\/o|w\/o)\s+[^\n.]{3,60}/gi,
+      group: 0
+    },
+    {
+      cat: "admission_date",
+      placeholder: "[date]",
+      re: /\b(?:admitted\s+on|date\s+of\s+admission|discharged\s+on|date\s+of\s+discharge|doa|dod)\s*[:=-]?\s*(?:\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}|\d{4}[\/\-.]\d{1,2}[\/\-.]\d{1,2})\b/gi,
+      group: 0
+    }
+  ];
+
+  function scanThesisPages(pages) {
+    var outPages = [];
+    var maskedCount = 0;
+    var softPages = [];
+    var softSeen = {};
+    var findings = [];
+    var catSeen = {};
+    var categories = [];
+    var i, r, m, pg, num, masked, txt, hitStart, hitLen;
+
+    for (i = 0; i < (pages || []).length; i++) {
+      pg = pages[i] || {};
+      num = Number(pg.n || (i + 1));
+      masked = maskThesisHardIds(pg.text || "");
+      maskedCount += masked.maskedCount;
+      txt = masked.text;
+      outPages.push({ n: num, text: txt });
+
+      for (r = 0; r < THESIS_SOFT_RULES.length; r++) {
+        var rule = THESIS_SOFT_RULES[r];
+        rule.re.lastIndex = 0;
+        while ((m = rule.re.exec(txt)) !== null) {
+          var sub = rule.group ? m[rule.group] : m[0];
+          if (sub) {
+            hitStart = rule.group ? (m.index + m[0].lastIndexOf(sub)) : m.index;
+            hitLen = sub.length;
+            if (!softSeen[num]) {
+              softSeen[num] = true;
+              softPages.push(num);
+            }
+            if (!catSeen[rule.cat]) {
+              catSeen[rule.cat] = true;
+              categories.push(rule.cat);
+            }
+            if (findings.length < 12) {
+              findings.push({
+                page: num,
+                category: rule.cat,
+                preview: shortMaskedPreview(txt, hitStart, hitStart + hitLen, rule.placeholder)
+              });
+            }
+          }
+          if (m[0].length === 0) rule.re.lastIndex += 1;
+        }
+      }
+    }
+    softPages.sort(function (a, b) { return a - b; });
+    return {
+      pages: outPages,
+      maskedCount: maskedCount,
+      softPages: softPages,
+      findings: findings,
+      categories: categories
+    };
   }
 
   /* ---------- state ---------- */
@@ -612,13 +783,95 @@
     return '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd-thesis-next="' + screen + '">' + esc(label || "Next") + '</button>';
   }
 
-  function phiWarningHtml() {
-    var pages = (ts.phi && ts.phi.pages) || [];
-    var pageList = pages.length ? "Pages: " + pages.join(", ") + "." : "";
-    return '<div class="rmd-banner rmd-banner-warn" role="alert" id="rmdThesisPhi">' +
-      '<strong>Patient identifiers found in your thesis.</strong> ' +
-      '<span>' + esc(pageList) + ' Remove names, dates of birth, hospital numbers, phone numbers and addresses from those pages, then upload the thesis again. Nothing was sent to an AI provider.</span>' +
-      '</div>';
+  function closeConsentSheet() {
+    if (!D) return;
+    var existing = D.getElementById("rmdThesisConsentSheet");
+    if (existing) {
+      if (existing.open && typeof existing.close === "function") {
+        try { existing.close(); } catch (e) {}
+      }
+      if (existing.parentNode) existing.parentNode.removeChild(existing);
+    }
+  }
+
+  function openConsentSheet(info, handlers) {
+    if (!D || !D.body) return;
+    info = info || {};
+    handlers = handlers || {};
+    var pages = info.softPages || info.pages || [];
+    var maskedCount = Number(info.maskedCount || 0);
+    var findings = info.findings || [];
+    if (!pages.length) return;
+
+    closeConsentSheet();
+
+    var mount = D.getElementById("researchMD") || D.body;
+    var dlg = D.createElement("dialog");
+    dlg.id = "rmdThesisConsentSheet";
+    dlg.className = "rmd-thesis-consent-dialog";
+    dlg.setAttribute("aria-labelledby", "rmdThesisConsentTitle");
+    dlg.setAttribute("aria-describedby", "rmdThesisConsentDesc");
+
+    var pageList = pages.join(", ");
+    var maskedSummary = maskedCount === 1
+      ? "1 phone number or ID number hidden automatically."
+      : maskedCount + " phone numbers and ID numbers hidden automatically.";
+
+    var h = [];
+    h.push('<div class="rmd-thesis-consent-card">');
+    h.push('<h3 id="rmdThesisConsentTitle">Check for patient details</h3>');
+    h.push('<p id="rmdThesisConsentDesc">We looked for patient details on these pages: ' + esc(pageList) + '. We hid phone numbers and ID numbers automatically. Names in a reference list or an author line are fine. Please confirm there are no patient names left.</p>');
+    h.push('<p class="rmd-thesis-consent-count" id="rmdThesisConsentMasked">' + esc(maskedSummary) + '</p>');
+    if (findings.length) {
+      h.push('<ul class="rmd-thesis-consent-list">');
+      for (var i = 0; i < findings.length && i < 5; i++) {
+        var f = findings[i] || {};
+        h.push('<li><strong>Page ' + esc(f.page) + ':</strong> ' + esc(f.preview || "[detail]") + '</li>');
+      }
+      h.push('</ul>');
+    }
+    h.push('<div class="rmd-thesis-consent-actions">');
+    h.push('<button type="button" class="rmd-btn" id="rmdThesisConsentReupload" autofocus>Upload a different file</button>');
+    h.push('<button type="button" class="rmd-btn rmd-btn-primary" id="rmdThesisConsentConfirm">I confirm, continue</button>');
+    h.push('</div>');
+    h.push('</div>');
+    dlg.innerHTML = h.join("");
+    mount.appendChild(dlg);
+
+    var confirmBtn = dlg.querySelector("#rmdThesisConsentConfirm");
+    var reuploadBtn = dlg.querySelector("#rmdThesisConsentReupload");
+
+    dlg.addEventListener("cancel", function () {
+      closeConsentSheet();
+      if (handlers.onCancel) handlers.onCancel();
+    });
+    if (confirmBtn) confirmBtn.onclick = function () {
+      var consent = {
+        confirmed: true,
+        timestamp: new Date().toISOString(),
+        pages: pages.slice(),
+        maskedCount: maskedCount
+      };
+      saveThesis(tpid, {
+        phiConsent: consent,
+        phi: { softPages: pages.slice(), maskedCount: maskedCount, findings: findings.slice() }
+      });
+      ts = loadThesis(tpid);
+      closeConsentSheet();
+      if (handlers.onConfirm) handlers.onConfirm(consent);
+    };
+    if (reuploadBtn) reuploadBtn.onclick = function () {
+      saveThesis(tpid, { pages: null, phi: null, phiConsent: null, artifactId: null, jobId: null, draft: null });
+      ts = loadThesis(tpid);
+      closeConsentSheet();
+      if (handlers.onReupload) handlers.onReupload();
+    };
+
+    if (typeof dlg.showModal === "function") {
+      try { dlg.showModal(); } catch (e) { dlg.setAttribute("open", ""); }
+    } else {
+      dlg.setAttribute("open", "");
+    }
   }
 
   function needPagesHtml(container) {
@@ -646,14 +899,18 @@
     ts = loadThesis(tpid);
     injectCSS();
     var h = ['<div class="rmd-p2-screen rmd-thesis-screen">'];
-    if (ts.phi && ts.phi.blocked) {
-      h.push(phiWarningHtml());
-      h.push('<div class="rmd-card"><button type="button" class="rmd-btn" id="rmdThesisReupload">Upload a clean version</button></div>');
-    } else if (ts.pages && ts.pages.length) {
+    if (ts.pages && ts.pages.length) {
       h.push('<div class="rmd-card">');
       h.push('<h2>Thesis read</h2>');
       h.push('<p class="rmd-screen-subtitle">' + esc(ts.filename || "Your thesis") + ' was read: ' + ts.pages.length + ' page(s). The text stays on this device and on our server; it is only sent to an AI provider when you ask MaiK to draft.</p>');
-      h.push('<div class="rmd-card-actions"><button type="button" class="rmd-btn" id="rmdThesisReupload">Upload a different file</button>' + nextBtn("thesis-type", "Next: pick the paper type") + '</div>');
+      if (ts.phi && ts.phi.softPages && ts.phi.softPages.length && !(ts.phiConsent && ts.phiConsent.confirmed)) {
+        h.push('<p class="rmd-thesis-meta" id="rmdThesisConsentHint">We flagged pages ' + esc(ts.phi.softPages.join(", ")) + ' for a quick patient-details check before AI drafting.</p>');
+      }
+      h.push('<div class="rmd-card-actions"><button type="button" class="rmd-btn" id="rmdThesisReupload">Upload a different file</button>');
+      if (ts.phi && ts.phi.softPages && ts.phi.softPages.length && !(ts.phiConsent && ts.phiConsent.confirmed)) {
+        h.push('<button type="button" class="rmd-btn" id="rmdThesisOpenConsent">Check for patient details</button>');
+      }
+      h.push(nextBtn("thesis-type", "Next: pick the paper type") + '</div>');
       h.push('</div>');
     } else {
       h.push('<div class="rmd-card">');
@@ -672,9 +929,16 @@
     if (fileEl) fileEl.onchange = function () { if (this.files && this.files[0]) handleFile(this.files[0], container); };
     var re = container.querySelector("#rmdThesisReupload");
     if (re) re.onclick = function () {
-      saveThesis(tpid, { pages: null, phi: null, artifactId: null, jobId: null, draft: null });
+      saveThesis(tpid, { pages: null, phi: null, phiConsent: null, artifactId: null, jobId: null, draft: null });
       ts = loadThesis(tpid);
       renderUpload(container);
+    };
+    var openConsent = container.querySelector("#rmdThesisOpenConsent");
+    if (openConsent) openConsent.onclick = function () {
+      openConsentSheet(ts.phi, {
+        onConfirm: function () { renderUpload(container); },
+        onReupload: function () { renderUpload(container); }
+      });
     };
   }
 
@@ -718,6 +982,32 @@
     });
   }
 
+  function saveExtractedPages(pages, filename, container, extra) {
+    var scanRes = scanThesisPages(pages);
+    var phiInfo = scanRes.softPages.length
+      ? { softPages: scanRes.softPages, maskedCount: scanRes.maskedCount, findings: scanRes.findings }
+      : (scanRes.maskedCount ? { softPages: [], maskedCount: scanRes.maskedCount, findings: [] } : null);
+    var patch = {
+      pages: scanRes.pages,
+      filename: filename,
+      phi: phiInfo,
+      phiConsent: null
+    };
+    if (extra) {
+      if ("artifactId" in extra) patch.artifactId = extra.artifactId;
+      if ("jobId" in extra) patch.jobId = extra.jobId;
+    }
+    saveThesis(tpid, patch);
+    ts = loadThesis(tpid);
+    renderUpload(container);
+    if (scanRes.softPages.length) {
+      openConsentSheet(phiInfo, {
+        onConfirm: function () { renderUpload(container); },
+        onReupload: function () { renderUpload(container); }
+      });
+    }
+  }
+
   function handleFile(file, container) {
     var name = (file.name || "").toLowerCase();
     var mime = (file.type || "").toLowerCase();
@@ -734,9 +1024,7 @@
     if (isDocxFile) {
       setMsg(container, SMD.p2.loadingHtml("Reading your Word (.docx) thesis"));
       file.arrayBuffer().then(parseDocx).then(function (pages) {
-        saveThesis(tpid, { pages: pages, filename: file.name, phi: null, artifactId: null, jobId: null });
-        ts = loadThesis(tpid);
-        renderUpload(container);
+        saveExtractedPages(pages, file.name, container, { artifactId: null, jobId: null });
       }).catch(function (err) {
         var msg = (err && err.message) ? err.message : "Could not read this Word (.docx) document. Export it as PDF and upload again.";
         setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc(msg) + '</div>');
@@ -751,9 +1039,7 @@
         setMsg(container, SMD.p2.loadingHtml("Reading page " + cur + " of " + tot));
       }).then(function (res) {
         if (res && res.pages && res.pages.length) {
-          saveThesis(tpid, { pages: res.pages, filename: file.name, phi: null, artifactId: null, jobId: null });
-          ts = loadThesis(tpid);
-          renderUpload(container);
+          saveExtractedPages(res.pages, file.name, container, { artifactId: null, jobId: null });
           return;
         }
         uploadPdfServer(file, container);
@@ -779,11 +1065,21 @@
       job = job || {};
       if (job.status === "succeeded") { loadResult(container); return; }
       if (job.status === "failed" || job.status === "cancelled") {
-        if (job.errorCode === "phi_blocked") {
+        if (job.errorCode === "phi_blocked" || job.errorCode === "consent_needed") {
           var pages = job.errorPages || job.phiPages || (job.error && job.error.pages) || [];
-          saveThesis(tpid, { phi: { blocked: true, pages: pages }, pages: null });
+          var maskedCount = Number(job.maskedCount || (job.error && job.error.maskedCount) || 0);
+          var findings = job.findings || (job.error && job.error.findings) || [];
+          var phiInfo = { softPages: pages, maskedCount: maskedCount, findings: findings };
+          saveThesis(tpid, { phi: phiInfo, phiConsent: null });
           ts = loadThesis(tpid);
           renderUpload(container);
+          openConsentSheet(phiInfo, {
+            onConfirm: function () {
+              if (ts.artifactId) loadResult(container);
+              else renderUpload(container);
+            },
+            onReupload: function () { renderUpload(container); }
+          });
           return;
         }
         setMsg(container, '<div class="rmd-banner rmd-banner-warn">We could not read this PDF. Try again, or export a fresh PDF.</div>');
@@ -799,9 +1095,7 @@
     if (!ts.artifactId) { renderUpload(container); return; }
     SMD.api.request("GET", "/v1/artifacts/" + ts.artifactId + "/result").then(function (res) {
       var pages = buildPageTexts((res && res.pages) || []);
-      saveThesis(tpid, { pages: pages, phi: null });
-      ts = loadThesis(tpid);
-      renderUpload(container);
+      saveExtractedPages(pages, ts.filename || "Your thesis", container);
     }).catch(function () {
       pollTimer = G.setTimeout(function () { loadResult(container); }, POLL_MS);
     });
@@ -931,13 +1225,7 @@
     tpid = pidOf(proj);
     ts = loadThesis(tpid);
     injectCSS();
-    var gate = aiGate(proj, ts);
-    if (gate.reason === "phi") {
-      container.innerHTML = '<div class="rmd-p2-screen rmd-thesis-screen">' + phiWarningHtml() +
-        '<div class="rmd-card"><button type="button" class="rmd-btn rmd-btn-primary" data-rmd-thesis-next="thesis">Go to upload</button></div></div>';
-      bindNext(container);
-      return;
-    }
+    var gate = aiGate(proj);
     if (!ts.pages || !ts.pages.length) { needPagesHtml(container); return; }
     var jr = journalOf();
     var mayAi = gate.allowed;
@@ -966,17 +1254,43 @@
         pid: tpid,
         task: "thesis_to_paper",
         request: function () {
-          var body = {
-            task: "thesis_to_paper",
-            input: { pages: ts.pages || [], filename: ts.filename || "", paperType: labelFor(ts.paperType || "obs"), checklist: ts.checklist || "strobe", journalId: journalOf().id || "", wordLimit: journalOf().wordLimit }
+          ts = loadThesis(tpid);
+          var inp = {
+            pages: ts.pages || [],
+            filename: ts.filename || "",
+            paperType: labelFor(ts.paperType || "obs"),
+            checklist: ts.checklist || "strobe",
+            journalId: journalOf().id || "",
+            wordLimit: journalOf().wordLimit
           };
+          if (ts.phiConsent && ts.phiConsent.confirmed) inp.phiConsent = ts.phiConsent;
+          var body = { task: "thesis_to_paper", input: inp };
           return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(tpid) + "/ai-draft", body).catch(function (err) {
-            if (err && err.code === "phi_blocked") {
-              var pPages = (err.body && err.body.pages) || [];
-              saveThesis(tpid, { phi: { blocked: true, pages: pPages }, pages: null });
+            if (err && (err.code === "consent_needed" || err.code === "phi_blocked" || err.status === 409)) {
+              var b = err.body || {};
+              var pPages = b.pages || [];
+              if (!pPages.length && ts.phi && ts.phi.softPages) pPages = ts.phi.softPages.slice();
+              var mCount = typeof b.maskedCount === "number" ? b.maskedCount : ((ts.phi && ts.phi.maskedCount) || 0);
+              var fList = b.findings || (ts.phi && ts.phi.findings) || [];
+              var phiInfo = { softPages: pPages, maskedCount: mCount, findings: fList };
+              saveThesis(tpid, { phi: phiInfo, phiConsent: null });
               ts = loadThesis(tpid);
+              err._handledByConsent = true;
+              err._phiConsentInfo = phiInfo;
             }
             throw err;
+          });
+        },
+        onConsentNeeded: function (err) {
+          var phiInfo = (err && err._phiConsentInfo) || (ts && ts.phi) || { softPages: [1], maskedCount: 0, findings: [] };
+          openConsentSheet(phiInfo, {
+            onConfirm: function () {
+              var askBtn = container.querySelector('[data-rmd-ai="ask"]');
+              if (askBtn) askBtn.click();
+            },
+            onReupload: function () {
+              if (SMD.navigate) SMD.navigate("thesis");
+            }
           });
         },
         apply: function (draft) { return applyDraft(draft); },
@@ -1227,7 +1541,20 @@
       "#researchMD .rmd-thesis-check { color: var(--rmd-warn); font-weight: 600; }",
       ".rmd-thesis-pop { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); max-width: 320px; background: var(--rmd-panel, #fffdf9); border: 1px solid var(--rmd-line, #e5ddce); border-radius: 12px; padding: 12px 14px; box-shadow: 0 8px 28px rgba(17,28,68,0.18); font: 400 13px/1.5 var(--rmd-f, system-ui, sans-serif); color: var(--rmd-ink, #111c44); z-index: 9999; }",
       ".rmd-thesis-pop-text { margin-bottom: 8px; }",
-      ".rmd-thesis-pop-close { width: 100%; }"
+      ".rmd-thesis-pop-close { width: 100%; }",
+      "dialog.rmd-thesis-consent-dialog { border: 1px solid var(--rmd-line, #e5ddce); border-radius: 14px; background: var(--rmd-panel, #fffdf9); color: var(--rmd-ink, #111c44); padding: 0; width: min(440px, calc(100vw - 32px)); max-width: calc(100vw - 32px); max-height: calc(100dvh - 48px); margin: auto; box-shadow: 0 18px 42px rgba(7,19,24,0.28); overscroll-behavior: contain; font: 400 14px/1.5 var(--rmd-f, system-ui, sans-serif); }",
+      "dialog.rmd-thesis-consent-dialog[open] { display: flex; flex-direction: column; }",
+      "dialog.rmd-thesis-consent-dialog::backdrop { background: rgba(7,19,24,0.52); overscroll-behavior: contain; }",
+      ".rmd-thesis-consent-card { padding: 20px; overflow-y: auto; }",
+      ".rmd-thesis-consent-card h3 { margin: 0 0 8px; font: 700 18px/1.3 var(--rmd-f, system-ui, sans-serif); color: var(--rmd-ink, #111c44); }",
+      ".rmd-thesis-consent-card p { margin: 0 0 12px; color: var(--rmd-ink, #111c44); }",
+      ".rmd-thesis-consent-count { font-weight: 600; color: var(--rmd-mut, #5c657c); }",
+      ".rmd-thesis-consent-list { margin: 0 0 16px; padding: 10px 12px 10px 26px; background: var(--rmd-bg, #f7f4ec); border: 1px solid var(--rmd-line, #e5ddce); border-radius: 10px; font-size: 13px; color: var(--rmd-mut, #5c657c); }",
+      ".rmd-thesis-consent-list li { margin-bottom: 6px; overflow-wrap: anywhere; }",
+      ".rmd-thesis-consent-list li:last-child { margin-bottom: 0; }",
+      ".rmd-thesis-consent-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; margin-top: 8px; }",
+      ".rmd-thesis-consent-actions .rmd-btn { min-height: 44px; flex: 1 1 160px; touch-action: manipulation; }",
+      "@media (prefers-reduced-motion: reduce) { dialog.rmd-thesis-consent-dialog { transition: none; } }"
     ].join("\n");
     D.head.appendChild(s);
   }
@@ -1257,6 +1584,7 @@
     suggestTables: suggestTables,
     canRunAi: canRunAi,
     aiGate: aiGate,
+    scanThesisPages: scanThesisPages,
     countWords: countWords,
     parseDocx: parseDocx,
     PAPER_TYPES: PAPER_TYPES,

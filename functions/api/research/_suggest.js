@@ -45,6 +45,8 @@ export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, 
   const assembled = finalSystem + "\n\n" + prompt;
   if (opts.publicLiterature === true) {
     await audit(db, projectId, uid, "phi_gate_skipped_public_literature", refId, { purpose });
+  } else if (opts.thesisCleared === true && purpose === "ai_draft_thesis_to_paper") {
+    /* Thesis PHI masking and soft-hit consent already ran in thesisTask (_ai_draft.js). */
   } else {
     const report = scan(assembled);
     if (report.blocked) {

@@ -156,3 +156,175 @@ export function scan(text) {
 export function phiCategories(hits) {
   return [...new Set(hits.map((h) => h.category))].sort();
 }
+
+/* --- Thesis PHI masking and soft-hit consent helpers ----------------------- */
+const THESIS_HARD_RULES = [
+  ["email", "[email]", /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, null],
+  ["abha", "[ID]", /[A-Za-z0-9._%+-]+@(?:abdm|ndhm)\b/gi, null],
+  ["abha", "[ID]", /\bABHA(?:\s*(?:No\.?|Number|ID|Id|Address))?\b[\s:.#-]*([A-Za-z0-9@._-]{4,30})/gi,
+    (m) => /[\d@]/.test(m[1])],
+  ["abha", "[ID]", /(?<!\d)\d{2}-\d{4}-\d{4}-\d{4}(?!\d)/g, null],
+  ["aadhaar", "[ID]", /\bAadhaar(?:\s*(?:No\.?|Number|ID))?\b[\s:.#-]*([0-9Xx*]{4}[ -]?[0-9Xx*]{4}[ -]?\d{4})\b/gi, null],
+  ["aadhaar", "[ID]", /(?<!\d)\d{4}[ -]?\d{4}[ -]?\d{4}(?!\d)/g,
+    (m) => verhoeffValid(m[0].replace(/[ -]/g, ""))],
+  ["mrn", "[ID]",
+    new RegExp("\\b(?:MRN|UHID|medical\\s+record(?:\\s+(?:no\\.?|number|#|id))?|hospital\\s+(?:no\\.?|number|#|id)" +
+      "|hosp\\s+(?:no\\.?|number|#)|IP\\/OP\\s*(?:no\\.?|number|#)?|(?:IPD?|OPD?|CR)\\s*(?:no\\.?|number|#|id)" +
+      "|registration\\s*(?:no\\.?|number|#)|reg\\s*(?:no\\.?|number|#))\\b[\\s:.#-]*([A-Za-z0-9/-]{3,20})", "gi"),
+    (m) => /\d/.test(m[1]) && m[1].length >= 3 && m[1].length <= 20],
+  ["mrn", "[ID]", /\b(?:IPD?|OPD?|CR)\b[\s:#-]+(?=[A-Za-z0-9/-]*\d)\d[A-Za-z0-9/-]{3,19}\b/gi, null],
+  ["ssn", "[ID]", /(?<!\d)(?!000|666|9\d\d)\d{3}-(?!00)\d{2}-(?!0000)\d{4}(?!\d)/g, null],
+  ["phone", "[phone]", /(?<![\w.])\+[1-9]\d{7,14}(?!\d)/g, null],
+  ["phone", "[phone]", /(?<![\w./])(?:\+91[ -]?|0)?[6-9]\d{9}(?![\dA-Za-z])/g, null],
+  ["phone", "[phone]", /(?<![\w./])(?:\+91[\s.-]?|0)?[6-9]\d{4}[\s.-]\d{5}(?![\dA-Za-z])/g, null],
+  ["phone", "[phone]", /(?<![\w./])\+91[\s.-]?\d{3}[\s.-]\d{3}[\s.-]\d{4}(?![\dA-Za-z])/g, null],
+  ["phone", "[phone]", /(?<![\w./])(?:\(0\d{2,4}\)[\s.-]?\d{3,4}[\s.-]?\d{3,4}|\b0\d{2,4}-\d{6,8})\b/g,
+    (m) => { const d = m[0].replace(/\D/g, ""); return d.length >= 10 && d.length <= 12; }],
+  ["nhs", "[ID]", /(?<!\d)\d{10}(?!\d)/g, (m) => nhsMod11Valid(m[0])],
+  ["dob", "[DOB]", new RegExp(FULL_DATE, "gi"),
+    (m, text) => near(text, m.index, m.index + m[0].length, BIRTH_RE)],
+];
+
+const THESIS_SOFT_RULES = [
+  ["patient_name", "[name]", "name_near_patient_label", new RegExp(NAME_BIGRAM, "g"),
+    (m, text) => near(text, m.index, m.index + m[0].length, PATIENT_RE)],
+  ["address", "[address]", "street_number",
+    new RegExp("\\b\\d{1,5}[A-Za-z]?\\s+(?:[A-Za-z]+\\s+){0,3}" + STREET + "\\b", "gi"), null],
+  ["address", "[address]", "pin_with_label",
+    /\b(?:PIN\s*code|PIN|postal\s+code|zip\s*code)\D{0,10}(\d{6})\b/gi, null],
+  ["admission_date", "[date]", "date_near_admission_label", new RegExp(FULL_DATE, "gi"),
+    (m, text) => near(text, m.index, m.index + m[0].length, ADMISSION_RE) &&
+      PATIENT_RE.test(sameSentence(text, m.index, m.index + m[0].length))],
+];
+
+function maskThesisText(rawText) {
+  const s = String(rawText == null ? "" : rawText);
+  const matches = [];
+  for (const [category, token, pattern, validator] of THESIS_HARD_RULES) {
+    pattern.lastIndex = 0;
+    let m;
+    while ((m = pattern.exec(s)) !== null) {
+      if (m[0].length === 0) { pattern.lastIndex++; continue; }
+      if (validator && !validator(m, s)) continue;
+      matches.push({ category, token, start: m.index, end: m.index + m[0].length });
+    }
+  }
+  matches.sort((a, b) => a.start - b.start || (b.end - b.start) - (a.end - a.start));
+  const kept = [];
+  let lastEnd = -1;
+  for (const item of matches) {
+    if (item.start < lastEnd) continue;
+    kept.push(item);
+    lastEnd = item.end;
+  }
+  if (!kept.length) return { text: s, maskedCount: 0, maskedCategories: [] };
+  let out = "";
+  let pos = 0;
+  const cats = new Set();
+  for (const item of kept) {
+    out += s.slice(pos, item.start) + item.token;
+    pos = item.end;
+    cats.add(item.category);
+  }
+  out += s.slice(pos);
+  return { text: out, maskedCount: kept.length, maskedCategories: [...cats].sort() };
+}
+
+function shortMaskedPreview(text, start, end, token) {
+  const win = 18;
+  let lo = Math.max(0, start - win);
+  let before = text.slice(lo, start);
+  const preBreak = Math.max(before.lastIndexOf("."), before.lastIndexOf("!"), before.lastIndexOf("?"), before.lastIndexOf("\n"));
+  if (preBreak >= 0) {
+    lo += preBreak + 1;
+    before = text.slice(lo, start);
+  } else if (lo > 0) {
+    const sp = before.indexOf(" ");
+    if (sp >= 0) { lo += sp + 1; before = text.slice(lo, start); }
+  }
+  let hi = Math.min(text.length, end + win);
+  let after = text.slice(end, hi);
+  const postBreaks = [".", "!", "?", "\n"].map((ch) => after.indexOf(ch)).filter((i) => i >= 0);
+  if (postBreaks.length) {
+    hi = end + Math.min(...postBreaks);
+    after = text.slice(end, hi);
+  } else if (hi < text.length) {
+    const sp = after.lastIndexOf(" ");
+    if (sp >= 0) { hi = end + sp; after = text.slice(end, hi); }
+  }
+  const preEllipsis = lo > 0 ? "..." : "";
+  const postEllipsis = hi < text.length ? "..." : "";
+  return (preEllipsis + before + token + after + postEllipsis).replace(/\s+/g, " ").trim();
+}
+
+function scanSoftHits(maskedText, pageNum) {
+  const s = String(maskedText || "");
+  const hits = [];
+  for (const [category, token, rule, pattern, validator] of THESIS_SOFT_RULES) {
+    pattern.lastIndex = 0;
+    let m;
+    while ((m = pattern.exec(s)) !== null) {
+      if (m[0].length === 0) { pattern.lastIndex++; continue; }
+      if (validator && !validator(m, s)) continue;
+      hits.push({
+        page: pageNum,
+        category,
+        rule,
+        preview: shortMaskedPreview(s, m.index, m.index + m[0].length, token),
+      });
+    }
+  }
+  return hits;
+}
+
+export function scanAndMaskThesis(input) {
+  const hasPages = input && typeof input === "object" && Array.isArray(input.pages) && input.pages.length > 0;
+  let maskedCount = 0;
+  const maskedCats = new Set();
+  const softHits = [];
+  const softPages = new Set();
+  const softCats = new Set();
+
+  if (hasPages) {
+    const maskedPages = [];
+    for (const p of input.pages) {
+      const pageNum = p && p.n != null ? p.n : null;
+      const m = maskThesisText(p && p.text || "");
+      maskedCount += m.maskedCount;
+      for (const c of m.maskedCategories) maskedCats.add(c);
+      maskedPages.push({ n: pageNum, text: m.text });
+      const hits = scanSoftHits(m.text, pageNum);
+      for (const h of hits) {
+        softHits.push(h);
+        if (pageNum != null) softPages.add(pageNum);
+        softCats.add(h.category);
+      }
+    }
+    return {
+      maskedText: maskedPages.map((p) => p.text).join("\n\n"),
+      maskedPages,
+      maskedCount,
+      maskedCategories: [...maskedCats].sort(),
+      softHits,
+      softPages: [...softPages].sort((a, b) => Number(a) - Number(b)),
+      softCategories: [...softCats].sort(),
+    };
+  }
+
+  const raw = typeof input === "string" ? input : (input && typeof input.text === "string" ? input.text : "");
+  const m = maskThesisText(raw);
+  const hits = scanSoftHits(m.text, null);
+  for (const h of hits) {
+    softHits.push(h);
+    softCats.add(h.category);
+  }
+  return {
+    maskedText: m.text,
+    maskedPages: [],
+    maskedCount: m.maskedCount,
+    maskedCategories: m.maskedCategories,
+    softHits,
+    softPages: [],
+    softCategories: [...softCats].sort(),
+  };
+}

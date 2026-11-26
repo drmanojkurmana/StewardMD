@@ -107,7 +107,57 @@ function words(text) {
 }
 
 describe("research thesis to paper", { concurrency: false, skip: SKIP }, () => {
-  test("PHI on the thesis blocks the provider and names the page", async () => {
+  test("synthetic 3-page thesis masks hard IDs, returns 409 consent_needed for soft hits until consented, then runs AI", async () => {
+    const env = freshEnv();
+    fundWallet(env);
+    const project = await makeProject(env);
+    resetLlm();
+    const pages = [
+      { n: 1, text: "Background: We studied severe sepsis outcomes in our tertiary hospital." },
+      { n: 2, text: "Patients admitted to the Intensive Care Unit during 2024 were included. Refs: Kumar A, Rao B." },
+      { n: 3, text: "Study coordinator phone: 9876543210 for queries." },
+    ];
+    const r = await call(env, "POST", "v1/projects/" + project.id + "/ai-draft", "tok-alice", {
+      task: "thesis_to_paper",
+      input: {
+        section: "results",
+        pages,
+      },
+    });
+    assert.equal(r.http, 409, JSON.stringify(r));
+    assert.equal(r.error.code, "consent_needed");
+    assert.deepEqual(r.pages, [2]);
+    assert.equal(r.maskedCount, 1);
+    assert.ok(Array.isArray(r.findings) && r.findings.length > 0);
+    assert.equal(r.findings[0].page, 2);
+    assert.ok(!r.findings[0].preview.includes("During 2024"), "preview should not be full sentence");
+    assert.equal(llm.calls.length, 0);
+    assert.equal(sql(env).prepare("SELECT COUNT(*) AS n FROM research_ai_drafts").get().n, 0);
+
+    const consentTs = "2026-11-26T10:00:00.000Z";
+    const r2 = await call(env, "POST", "v1/projects/" + project.id + "/ai-draft", "tok-alice", {
+      task: "thesis_to_paper",
+      input: {
+        section: "results",
+        pages,
+        phiConsent: { confirmed: true, timestamp: consentTs },
+      },
+    });
+    assert.equal(r2.http, 200, JSON.stringify(r2));
+    assert.equal(llm.calls.length, 1);
+    const promptSent = JSON.stringify(llm.calls[0].parts);
+    assert.ok(promptSent.includes("[phone]"), "phone number must be masked as [phone] in AI prompt");
+    assert.ok(!promptSent.includes("9876543210"), "raw phone number must never reach AI prompt");
+
+    const audit = sql(env).prepare("SELECT event_type, metadata_json FROM research_audit_events WHERE event_type = 'thesis_phi_consent'").get();
+    assert.ok(audit, "thesis_phi_consent audit event must be recorded");
+    const meta = JSON.parse(audit.metadata_json);
+    assert.deepEqual(meta.pages, [2]);
+    assert.equal(meta.maskedCount, 1);
+    assert.equal(meta.consentTs, consentTs);
+  });
+
+  test("hard-only identifiers are auto-masked without consent sheet or phi_blocked", async () => {
     const env = freshEnv();
     fundWallet(env);
     const project = await makeProject(env);
@@ -117,18 +167,22 @@ describe("research thesis to paper", { concurrency: false, skip: SKIP }, () => {
       input: {
         section: "results",
         pages: [
-          { n: 3, text: "Table 1. The mean age was 54 years." },
-          { n: 54, text: "Write to nurse@hospital.org about this ward list." },
+          { n: 1, text: "Contact: 9876543210, nurse@hospital.org, UHID: H-44219, DOB: 12/03/1984." },
+          { n: 2, text: "Results showed n = 42 patients survived with mean age 54 years." },
         ],
       },
     });
-    assert.equal(r.http, 422, JSON.stringify(r));
-    assert.equal(r.error.code, "phi_blocked");
-    assert.equal(r.error.message, "Patient identifiers (protected health information, PHI) were found. Remove them before MaiK reads this thesis.");
-    assert.ok(r.categories.includes("email"));
-    assert.deepEqual(r.pages, [54]);
-    assert.equal(llm.calls.length, 0);
-    assert.equal(sql(env).prepare("SELECT COUNT(*) AS n FROM research_ai_drafts").get().n, 0);
+    assert.equal(r.http, 200, JSON.stringify(r));
+    assert.equal(llm.calls.length, 1);
+    const promptSent = JSON.stringify(llm.calls[0].parts);
+    assert.ok(promptSent.includes("[phone]"));
+    assert.ok(promptSent.includes("[email]"));
+    assert.ok(promptSent.includes("[ID]"));
+    assert.ok(promptSent.includes("[DOB]"));
+    assert.ok(!promptSent.includes("9876543210"));
+    assert.ok(!promptSent.includes("nurse@hospital.org"));
+    assert.ok(!promptSent.includes("H-44219"));
+    assert.ok(!promptSent.includes("12/03/1984"));
   });
 
   test("an invented number is removed and flagged, and locators name the page and table", async () => {
