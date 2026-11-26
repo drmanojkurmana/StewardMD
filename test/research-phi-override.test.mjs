@@ -1,10 +1,15 @@
-/* ResearchMD PHI override contract (server side).
+/* ResearchMD PHI override contract v1 (server side).
  *
  * Only POST /v1/projects/{id}/ai-draft accepts body.phiOverride = {
- * accepted: true, termsVersion: "rmd-phi-override-v0" }. A valid override
- * skips the user-input PHI block for that one request and writes an
- * "ai_phi_override" audit event carrying categories and rule names, never the
- * text. Any other route (jobs, suggestions) ignores the field.
+ * accepted: true, termsVersion: "rmd-phi-override-v1",
+ * condition: "false_positive" | "anonymised" | "consent",
+ * consentEvidence?: { consentDate, reference } }.
+ * High-risk categories (aadhaar, abha, ssn, nhs, mrn, phone) allow only
+ * consent with evidence. A patient_name hit is never overridable. The 422 body
+ * reports overridable and allowedConditions and never echoes the text. The
+ * audit event carries categories, condition and the consent date only, never
+ * the text and never the reference. Any other route (jobs, suggestions)
+ * ignores the field.
  *
  * Synthetic data only. No em or en dashes.
  * node --test --experimental-test-module-mocks --experimental-sqlite test/research-phi-override.test.mjs
@@ -49,8 +54,22 @@ mock.module("../functions/api/ai/[[path]].js", {
 
 const { onRequest } = await import("../functions/api/research/[[path]].js");
 const SCHEMA = readFileSync(new URL("../functions/db/research_schema.sql", import.meta.url), "utf8");
-const TERMS = "rmd-phi-override-v0";
-const OVERRIDE = { accepted: true, termsVersion: TERMS };
+const TERMS = "rmd-phi-override-v1";
+const OLD_TERMS = "rmd-phi-override-v0";
+const ALL_CONDITIONS = ["false_positive", "anonymised", "consent"];
+
+/* The consent date is an IST calendar date on both server and client. */
+function istToday() {
+  return new Date(Date.now() + 19800000).toISOString().slice(0, 10);
+}
+const TODAY = istToday();
+const FUTURE = "2999-01-01";
+const CONSENT_EVIDENCE = { consentDate: TODAY, reference: "IEC-2026-014" };
+function override(condition, evidence) {
+  const o = { accepted: true, termsVersion: TERMS, condition };
+  if (evidence !== undefined) o.consentEvidence = evidence;
+  return o;
+}
 
 function d1() {
   const db = new DatabaseSync(":memory:");
@@ -93,8 +112,8 @@ function kvShim() {
     async delete(key) { m.delete(key); },
   };
 }
-/* Existing tests cover the override with its server switch ON; the F-01 block
- * at the end covers the default (switch absent = hard block). */
+/* The v1 tests cover the override with its server switch ON; the F-01 block
+ * covers the default (switch absent = hard block). */
 function freshEnv(extra = { RESEARCH_PHI_OVERRIDE: "1" }) {
   const D = d1();
   D._db.exec(SCHEMA);
@@ -157,6 +176,11 @@ function auditRows(env, type) {
 function overrideAudit(env) {
   return auditRows(env, "ai_phi_override");
 }
+function overrideMeta(env) {
+  const rows = overrideAudit(env);
+  assert.equal(rows.length, 1, "exactly one ai_phi_override audit");
+  return JSON.parse(rows[0].metadata_json);
+}
 function defaultLlm() {
   llm.calls.length = 0;
   llm.impl = async (env, parts, maxTokens, opts) => {
@@ -175,22 +199,30 @@ function defaultLlm() {
     });
   };
 }
-/* Synthetic user-typed case text with a phone and a day-level date. */
-const CASE_TEXT = "A 45-year-old male presented with chest pain. Contact the patient at 9876543210 on 12/03/2023 for follow-up.";
+/* Synthetic user-typed case text. */
+const PHONE_TEXT = "A 45-year-old male presented with chest pain. Contact the patient at 9876543210 on 12/03/2023 for follow-up.";
+const DATE_TEXT = "The patient was reviewed on 12/03/2023 and improved.";
+const AADHAAR_TEXT = "Aadhaar 1111 2222 3333 was recorded.";
+const MRN_TEXT = "MRN: 123456 was noted.";
+const NAME_TEXT = "Patient Ramesh Kumar was admitted with chest pain.";
 
-describe("ai-draft PHI override", () => {
-  test("blocked without override -> 422 overridable true, AI not called", { skip: SKIP }, async () => {
+function draftBody(text, ovr) {
+  const body = { task: "case_report_draft", input: { caseText: text } };
+  if (ovr !== undefined) body.phiOverride = ovr;
+  return body;
+}
+
+describe("ai-draft PHI override v1", () => {
+  test("blocked without override -> 422 overridable with allowed conditions, AI not called", { skip: SKIP }, async () => {
     defaultLlm();
     const env = freshEnv();
     fundWallet(env, "alice@example.com", 10000);
     const p = await makeProject(env, "tok-alice");
-    const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice", {
-      task: "case_report_draft",
-      input: { caseText: CASE_TEXT },
-    });
+    const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice", draftBody(PHONE_TEXT));
     assert.equal(r.http, 422, JSON.stringify(r));
     assert.equal(r.error.code, "phi_blocked");
-    assert.equal(r.overridable, true, "blocked /ai-draft is overridable");
+    assert.equal(r.overridable, true, "blocked /ai-draft is overridable while the switch is on");
+    assert.deepEqual(r.allowedConditions, ["consent"], "phone and nhs need consent with evidence");
     assert.ok(r.categories.includes("phone") && r.categories.includes("dates"), JSON.stringify(r.categories));
     assert.ok(!JSON.stringify(r).includes("9876543210"), "text never echoed");
     assert.ok(!JSON.stringify(r).includes("12/03/2023"), "date never echoed");
@@ -199,57 +231,171 @@ describe("ai-draft PHI override", () => {
     assert.equal(overrideAudit(env).length, 0);
   });
 
-  test("valid override -> AI called, 200, one ai_phi_override audit with categories and rules, no text", { skip: SKIP }, async () => {
+  test("v0, missing condition and malformed requests are rejected", { skip: SKIP }, async () => {
+    const bad = [
+      { accepted: true, termsVersion: OLD_TERMS, condition: "false_positive" },
+      { accepted: true, termsVersion: TERMS },
+      { accepted: true, termsVersion: TERMS, condition: "unknown" },
+      { accepted: false, termsVersion: TERMS, condition: "false_positive" },
+      { accepted: "true", termsVersion: TERMS, condition: "false_positive" },
+      { termsVersion: TERMS, condition: "false_positive" },
+      "not-an-object",
+    ];
+    for (const ovr of bad) {
+      defaultLlm();
+      const env = freshEnv();
+      fundWallet(env, "alice@example.com", 10000);
+      const p = await makeProject(env, "tok-alice");
+      const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice", draftBody(DATE_TEXT, ovr));
+      assert.equal(r.http, 422, JSON.stringify(ovr) + " -> " + JSON.stringify(r));
+      assert.equal(r.error.code, "phi_blocked");
+      assert.equal(r.overridable, true, "low-risk text remains overridable");
+      assert.deepEqual(r.allowedConditions, ALL_CONDITIONS);
+      assert.equal(llm.calls.length, 0, "no provider call for an invalid override");
+      assert.equal(overrideAudit(env).length, 0);
+    }
+  });
+
+  test("each condition is accepted for low-risk categories, with the exact audit meta", { skip: SKIP }, async () => {
+    const cases = [
+      ["false_positive", undefined, false],
+      ["anonymised", undefined, false],
+      ["consent", CONSENT_EVIDENCE, true],
+    ];
+    for (const [condition, evidence, evidenced] of cases) {
+      defaultLlm();
+      const env = freshEnv();
+      fundWallet(env, "alice@example.com", 10000);
+      const p = await makeProject(env, "tok-alice");
+      const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+        draftBody(DATE_TEXT, override(condition, evidence)));
+      assert.equal(r.http, 200, condition + " -> " + JSON.stringify(r));
+      assert.equal(llm.calls.length, 1, "provider called under a valid override");
+      const meta = overrideMeta(env);
+      assert.deepEqual(meta.categories, ["dates"]);
+      assert.equal(meta.route, "ai-draft");
+      assert.equal(meta.task, "case_report_draft");
+      assert.equal(meta.termsVersion, TERMS);
+      assert.equal(meta.condition, condition);
+      assert.equal(meta.consentEvidenced, evidenced);
+      if (evidenced) {
+        assert.equal(meta.consentDate, TODAY);
+        assert.deepEqual(Object.keys(meta).sort(),
+          ["categories", "condition", "consentDate", "consentEvidenced", "route", "task", "termsVersion"]);
+      } else {
+        assert.equal(Object.prototype.hasOwnProperty.call(meta, "consentDate"), false);
+        assert.deepEqual(Object.keys(meta).sort(),
+          ["categories", "condition", "consentEvidenced", "route", "task", "termsVersion"]);
+      }
+      assert.ok(!JSON.stringify(meta).includes("12/03/2023"), "flagged date never in audit");
+      assert.equal(auditRows(env, "ai_phi_blocked").length, 0, "override path does not log a block");
+    }
+  });
+
+  test("consent always requires evidence (stricter reading of F-02), even for low-risk categories", { skip: SKIP }, async () => {
     defaultLlm();
     const env = freshEnv();
     fundWallet(env, "alice@example.com", 10000);
     const p = await makeProject(env, "tok-alice");
-    const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice", {
-      task: "case_report_draft",
-      input: { caseText: CASE_TEXT },
-      phiOverride: OVERRIDE,
-    });
-    assert.equal(r.http, 200, JSON.stringify(r));
-    assert.ok(r.draft && r.draft.status === "unverified", "draft stored unverified");
-    assert.equal(llm.calls.length, 1, "provider called under a valid override");
-    assert.ok(!JSON.stringify(r).includes("9876543210"), "text never echoed");
-    const rows = overrideAudit(env);
-    assert.equal(rows.length, 1, "exactly one override audit event");
-    const meta = JSON.parse(rows[0].metadata_json);
-    assert.equal(meta.route, "ai-draft");
-    assert.equal(meta.task, "case_report_draft");
-    assert.ok(meta.categories.includes("dates") && meta.categories.includes("phone"), JSON.stringify(meta.categories));
-    assert.ok(meta.rules.includes("full_date"), JSON.stringify(meta.rules));
-    assert.ok(meta.rules.includes("indian_mobile"), JSON.stringify(meta.rules));
-    assert.equal(meta.termsVersion, TERMS);
-    assert.ok(!rows[0].metadata_json.includes("9876543210"), "no phone in audit");
-    assert.ok(!rows[0].metadata_json.includes("12/03/2023"), "no date in audit");
-    assert.equal(auditRows(env, "ai_phi_blocked").length, 0, "override path does not log a block");
+    const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+      draftBody(DATE_TEXT, override("consent")));
+    assert.equal(r.http, 422, "consent without evidence is rejected");
+    const ok = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+      draftBody(DATE_TEXT, override("consent", { consentDate: TODAY, reference: "IEC-2026-014" })));
+    assert.equal(ok.http, 200, JSON.stringify(ok));
+    const meta = overrideMeta(env);
+    assert.equal(meta.condition, "consent");
+    assert.equal(meta.consentEvidenced, true);
+    assert.equal(meta.consentDate, TODAY);
+    assert.ok(!JSON.stringify(meta).includes("IEC-2026-014"), "reference never logged");
   });
 
-  test("invalid overrides -> 422 (accepted false, wrong termsVersion, non-true accepted)", { skip: SKIP }, async () => {
-    defaultLlm();
-    for (const bad of [
-      { accepted: false, termsVersion: TERMS },
-      { accepted: true, termsVersion: "rmd-phi-override-v1" },
-      { accepted: "true", termsVersion: TERMS },
-      { termsVersion: TERMS },
-      { accepted: true },
-    ]) {
+  test("phone, aadhaar and mrn require consent with valid evidence", { skip: SKIP }, async () => {
+    for (const sample of [PHONE_TEXT, AADHAAR_TEXT, MRN_TEXT]) {
+      const rejects = [
+        override("false_positive"),
+        override("anonymised"),
+        override("consent"),
+        override("consent", { consentDate: TODAY, reference: "" }),
+        override("consent", { consentDate: TODAY, reference: "   " }),
+        override("consent", { consentDate: TODAY, reference: "x".repeat(81) }),
+        override("consent", { consentDate: FUTURE, reference: "IEC-2026-014" }),
+        override("consent", { consentDate: "2026-02-31", reference: "IEC-2026-014" }),
+      ];
+      for (const ovr of rejects) {
+        defaultLlm();
+        const env = freshEnv();
+        fundWallet(env, "alice@example.com", 10000);
+        const p = await makeProject(env, "tok-alice");
+        const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+          draftBody(sample, ovr));
+        assert.equal(r.http, 422, JSON.stringify(sample) + " " + JSON.stringify(ovr) + " -> " + JSON.stringify(r));
+        assert.equal(r.error.code, "phi_blocked");
+        assert.equal(r.overridable, true);
+        assert.deepEqual(r.allowedConditions, ["consent"]);
+        assert.ok(!JSON.stringify(r).includes("IEC-2026-014") || ovr.consentEvidence == null,
+          "a valid-looking reference is not echoed");
+        assert.equal(llm.calls.length, 0, "no provider call for a rejected high-risk override");
+        assert.equal(overrideAudit(env).length, 0);
+      }
+
+      defaultLlm();
       const env = freshEnv();
       fundWallet(env, "alice@example.com", 10000);
       const p = await makeProject(env, "tok-alice");
-      const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice", {
-        task: "case_report_draft",
-        input: { caseText: CASE_TEXT },
-        phiOverride: bad,
-      });
-      assert.equal(r.http, 422, JSON.stringify(bad) + " -> " + JSON.stringify(r));
+      const ok = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+        draftBody(sample, override("consent", CONSENT_EVIDENCE)));
+      assert.equal(ok.http, 200, JSON.stringify(sample) + " -> " + JSON.stringify(ok));
+      assert.equal(llm.calls.length, 1);
+      const meta = overrideMeta(env);
+      assert.equal(meta.condition, "consent");
+      assert.equal(meta.consentEvidenced, true);
+      assert.equal(meta.consentDate, TODAY);
+      assert.ok(!JSON.stringify(meta).includes("IEC-2026-014"), "reference never in audit");
+      assert.ok(!JSON.stringify(meta).includes("1111 2222 3333"), "aadhaar never in audit");
+      assert.ok(!JSON.stringify(meta).includes("123456"), "mrn never in audit");
+      assert.ok(!JSON.stringify(meta).includes("9876543210"), "phone never in audit");
+    }
+  });
+
+  test("a patient_name hit is never overridable", { skip: SKIP }, async () => {
+    for (const ovr of [
+      override("consent", CONSENT_EVIDENCE),
+      override("false_positive"),
+      override("anonymised"),
+    ]) {
+      defaultLlm();
+      const env = freshEnv();
+      fundWallet(env, "alice@example.com", 10000);
+      const p = await makeProject(env, "tok-alice");
+      const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+        draftBody(NAME_TEXT, ovr));
+      assert.equal(r.http, 422, JSON.stringify(r));
       assert.equal(r.error.code, "phi_blocked");
-      assert.equal(r.overridable, true);
-      assert.equal(llm.calls.length, 0, "no provider call for invalid override");
+      assert.equal(r.overridable, false, "a name is never overridable");
+      assert.deepEqual(r.allowedConditions, []);
+      assert.ok(r.categories.includes("patient_name"));
+      assert.ok(!JSON.stringify(r).includes("Ramesh Kumar"), "name never echoed");
+      assert.equal(llm.calls.length, 0);
       assert.equal(overrideAudit(env).length, 0);
     }
+  });
+
+  test("the audit never contains the request body or the reference", { skip: SKIP }, async () => {
+    defaultLlm();
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 10000);
+    const p = await makeProject(env, "tok-alice");
+    const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+      draftBody(PHONE_TEXT, override("consent", { consentDate: TODAY, reference: "FORM-77/B" })));
+    assert.equal(r.http, 200, JSON.stringify(r));
+    const row = overrideAudit(env)[0];
+    assert.ok(!row.metadata_json.includes("9876543210"));
+    assert.ok(!row.metadata_json.includes("FORM-77/B"));
+    assert.ok(!row.metadata_json.includes("chest pain"));
+    const meta = JSON.parse(row.metadata_json);
+    assert.equal(meta.consentEvidenced, true);
+    assert.equal(meta.consentDate, TODAY);
   });
 
   test("phiOverride on POST /jobs manuscript_draft is ignored -> 422 phi_blocked", { skip: SKIP }, async () => {
@@ -262,12 +408,13 @@ describe("ai-draft PHI override", () => {
     const r = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice", {
       kind: "manuscript_draft",
       idempotencyKey: "k-override-ignored",
-      phiOverride: OVERRIDE,
+      phiOverride: override("consent", CONSENT_EVIDENCE),
     });
     assert.equal(r.http, 422, JSON.stringify(r));
     assert.equal(r.error.code, "phi_blocked");
     assert.ok(r.categories.includes("phone"), JSON.stringify(r));
     assert.equal(r.overridable, undefined, "override is /ai-draft only, never jobs");
+    assert.equal(r.allowedConditions, undefined, "jobs never report allowed conditions");
     assert.equal(env.RESEARCH_QUEUE._messages.length, 0);
     assert.equal(env.RESEARCH_R2._objects.size, 0);
     assert.equal(overrideAudit(env).length, 0);
@@ -290,7 +437,7 @@ describe("ai-draft PHI override", () => {
       return JSON.stringify({ decision: "include", reasonCode: "", rationale: "Published trial." });
     };
     const r = await call(env, "POST", "v1/projects/" + p.id + "/records/rec_phi_override/screening-suggestions", "tok-alice", {
-      phiOverride: OVERRIDE,
+      phiOverride: override("consent", CONSENT_EVIDENCE),
     });
     assert.equal(r.http, 201, JSON.stringify(r));
     assert.equal(llm.calls.length, 1);
@@ -304,47 +451,45 @@ describe("date mode on ai-draft", () => {
     const env = freshEnv();
     fundWallet(env, "alice@example.com", 10000);
     const p = await makeProject(env, "tok-alice");
-    const caseText = "The patient was reviewed on 12/03/2023 and improved.";
-    const blocked = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice", {
-      task: "case_report_draft",
-      input: { caseText },
-    });
+    const blocked = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+      draftBody(DATE_TEXT));
     assert.equal(blocked.http, 422, JSON.stringify(blocked));
     assert.ok(blocked.categories.includes("dates"), JSON.stringify(blocked));
+    assert.deepEqual(blocked.allowedConditions, ALL_CONDITIONS, "a date is low-risk");
     assert.equal(llm.calls.length, 0);
 
-    const passed = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice", {
-      task: "case_report_draft",
-      input: { caseText },
-      phiOverride: OVERRIDE,
-    });
+    const passed = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+      draftBody(DATE_TEXT, override("false_positive")));
     assert.equal(passed.http, 200, JSON.stringify(passed));
     assert.equal(llm.calls.length, 1);
-    const meta = JSON.parse(overrideAudit(env)[0].metadata_json);
+    const meta = overrideMeta(env);
     assert.deepEqual(meta.categories, ["dates"]);
-    assert.deepEqual(meta.rules, ["full_date"]);
+    assert.equal(meta.condition, "false_positive");
+    assert.equal(meta.consentEvidenced, false);
   });
 });
-describe("legal review F-01: hard block by default (RESEARCH_PHI_OVERRIDE unset)", () => {
-  test("switch off -> 422 not overridable, and a valid-looking override is ignored", { skip: SKIP }, async () => {
-    defaultLlm();
-    const env = freshEnv({});
-    fundWallet(env, "alice@example.com", 10000);
-    const p = await makeProject(env, "tok-alice");
-    const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice", {
-      task: "case_report_draft",
-      input: { caseText: CASE_TEXT },
-    });
-    assert.equal(r.http, 422, JSON.stringify(r));
-    assert.equal(r.error.code, "phi_blocked");
-    assert.equal(r.overridable, false, "no override offered while the switch is off");
-    const o = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice", {
-      task: "case_report_draft",
-      input: { caseText: CASE_TEXT },
-      phiOverride: { accepted: true, termsVersion: "rmd-phi-override-v0" },
-    });
-    assert.equal(o.http, 422, "override ignored: still blocked");
-    assert.equal(llm.calls.length, 0, "no provider call");
-    assert.equal(overrideAudit(env).length, 0, "no override audit");
+
+describe("legal review F-01/F-02: hard block by default (RESEARCH_PHI_OVERRIDE unset)", () => {
+  test("switch off -> 422 not overridable and a valid v1 override is ignored", { skip: SKIP }, async () => {
+    for (const sample of [PHONE_TEXT, DATE_TEXT, NAME_TEXT]) {
+      defaultLlm();
+      const env = freshEnv({});
+      fundWallet(env, "alice@example.com", 10000);
+      const p = await makeProject(env, "tok-alice");
+      const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+        draftBody(sample));
+      assert.equal(r.http, 422, JSON.stringify(r));
+      assert.equal(r.error.code, "phi_blocked");
+      assert.equal(r.overridable, false, "no override offered while the switch is off");
+      assert.deepEqual(r.allowedConditions, []);
+
+      const o = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice",
+        draftBody(sample, override("consent", CONSENT_EVIDENCE)));
+      assert.equal(o.http, 422, "override ignored: still blocked");
+      assert.equal(o.overridable, false);
+      assert.deepEqual(o.allowedConditions, []);
+      assert.equal(llm.calls.length, 0, "no provider call");
+      assert.equal(overrideAudit(env).length, 0, "no override audit");
+    }
   });
 });

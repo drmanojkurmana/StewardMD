@@ -136,14 +136,20 @@ PaperOrchestra enforces multiple safety guards and consumption caps:
 
 ## Patient identifier override (/ai-draft only)
 
-**2026-11-27, legal review F-01:** hard block by default. The override below is OFF unless the Pages env var `RESEARCH_PHI_OVERRIDE="1"` is set (not set in production); a client-side hit never opens the dialog. Do not set the switch until override v1 (F-02 to F-05) ships and counsel confirms.
+**2026-11-27, legal review F-02 to F-05: narrowed override v1.** The switch `RESEARCH_PHI_OVERRIDE` stays unset (off) in production until counsel settles the v1 text. While it is off, every PHI hit on `/ai-draft` is a hard block and the app never opens the dialog. A client-side hit never opens the dialog either.
 
-Interactive drafting via `POST /v1/projects/{id}/ai-draft` includes a single-request patient identifier override for cases where a clinician confirms the text is safe or authorised to send (for example, false positives or properly consented case material):
+When the switch is `"1"` and the app's own client scan has not already blocked the text:
 
-- **What it does**: If the client-side scan (`RMDPhi.scan` in `research.js`) or the server PHI gate detects possible identifiers on `POST /v1/projects/{id}/ai-draft` (HTTP 422 `phi_blocked` with `overridable: true`), the mobile app opens the "Possible patient identifiers" dialog inside `#researchMD`. The dialog shows only plain-word identifier categories (never the flagged text itself). If the user ticks "I accept these terms" and taps "I take responsibility, send anyway", the client resends that single `/ai-draft` request once with `phiOverride: { accepted: true, termsVersion: "rmd-phi-override-v0" }`. For client-side blocks, the resent payload keeps all automated `SMD_redactPHI` and `SMD_PHI_INDIA` redactions applied. A second block after an override rejects without looping.
-- **Where it is never applied**: The override is strictly restricted to interactive `POST /v1/projects/{id}/ai-draft`. It is never applied to PaperOrchestra project snapshots, `manuscript_draft` jobs (`/v1/projects/{id}/jobs`), the PaperOrchestra AI gateway (`functions/api/research/_gateway.js`), suggestion routes (`/extraction/suggestions`, `/screening-suggestions`, `/grade-suggestions`, `/studies/auto-add`), or any automated or background path.
-- **Audit event**: Every accepted override writes an `ai_phi_override` row to the ResearchMD D1 audit table (`research_audit_events`, via `api.audit`) with `uid`, timestamp, and `meta` (`{ route: "ai-draft", task, categories, rules, termsVersion }`). Neither the matched text nor the request body text is ever logged.
-- **Terms document**: `docs/research/PHI_OVERRIDE_TERMS.md` (version `rmd-phi-override-v0`, currently marked `DRAFT - NEEDS LEGAL REVIEW`).
+- **422 body**: `overridable: true|false` plus `allowedConditions: [...]` (empty when not overridable). The app opens the dialog only when `overridable` is `true`. It shows only plain-word identifier categories and never the flagged text.
+- **Terms version**: `rmd-phi-override-v1`. Version `rmd-phi-override-v0`, a missing condition or an unknown condition is rejected and the request stays blocked.
+- **Conditions**: `false_positive`, `anonymised`, `consent`.
+- **High-risk categories** (`aadhaar`, `abha`, `ssn`, `nhs`, `mrn`, `phone`): only `consent` with `consentEvidence: { consentDate: "YYYY-MM-DD", reference: "1 to 80 chars" }`. The consent date must be past or today (IST calendar date) and the reference must be non-empty. The server validates both; the reference is never logged.
+- **Patient name**: `patient_name` is never overridable. `overridable` is `false` and `allowedConditions` is `[]`.
+- **Low-risk categories** (`email`, `dob`, `address`, `dates`, `admission_date`): any of the three conditions.
+- **Audit event**: every accepted override writes one `ai_phi_override` row to `research_audit_events` with `uid`, `created_ts` and metadata exactly `{ route, task, categories, termsVersion, condition, consentEvidenced, consentDate? }`. `consentDate` is present only when consent was evidenced and holds only the date. The flagged text and the consent reference are never logged.
+- **Retention**: no code path purges `research_audit_events` (checked 2026-11-27). Keep `ai_phi_override` rows for at least one year. If a purge or retention job is added, exempt `ai_phi_override` rows until at least one year has passed.
+- **Where it is never applied**: interactive `POST /v1/projects/{id}/ai-draft` only. Never PaperOrchestra project snapshots, `manuscript_draft` jobs (`/v1/projects/{id}/jobs`), the PaperOrchestra AI gateway (`functions/api/research/_gateway.js`), suggestion routes (`/extraction/suggestions`, `/screening-suggestions`, `/grade-suggestions`, `/studies/auto-add`), or any automated or background path.
+- **Terms document**: `docs/research/PHI_OVERRIDE_TERMS.md` (version `rmd-phi-override-v1`, marked `Draft v1 for counsel to settle`).
 
 ## How to Test One Job End to End
 

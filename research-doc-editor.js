@@ -87,7 +87,9 @@
     "follow-up and outcomes": ["follow up", "followup", "outcome", "adherence", "adverse", "tolerability"],
     "clinical timeline": ["timeline", "chronolog", "day", "week", "month"],
     "patient perspective": ["patient perspective", "patient view", "experience"],
+    "patient information": ["patient", "case presentation", "presented", "demographics", "history", "symptom"],
     "title and keywords": ["title", "keyword"],
+    "title": ["title", "title page"],
     "trial design": ["design", "trial", "random", "allocation", "parallel", "crossover"],
     "randomisation": ["random", "allocation", "sequence", "concealment", "implementation"],
     "blinding": ["blind", "mask", "open label"],
@@ -412,8 +414,16 @@
     return score;
   }
 
+  function directAlias(h) {
+    if (h === "title page") return "title";
+    if (h === "case presentation") return "patient information";
+    if (h === "conclusion") return "take home message";
+    return h;
+  }
+
   function findDirectSub(outline, heading) {
     var h = normalizeText(heading);
+    var alias = directAlias(h);
     if (!h) return null;
     var i, j, sec, sub, st;
     for (i = 0; i < outline.sections.length; i++) {
@@ -422,7 +432,7 @@
         sub = sec.subheadings[j];
         if (sub.overview) continue;
         st = normalizeText(sub.title);
-        if (st && st === h) return { section: sec, sub: sub };
+        if (st && (st === h || st === alias)) return { section: sec, sub: sub };
       }
     }
     for (i = 0; i < outline.sections.length; i++) {
@@ -444,10 +454,15 @@
   function mainAliases(heading) {
     var h = normalizeText(heading);
     var out = [h];
-    if (h.indexOf("abstract") !== -1 || h.indexOf("title") !== -1) {
+    if (h.indexOf("title and abstract") !== -1) {
       out.push("title and abstract", "title", "abstract");
+    } else if (h.indexOf("abstract") !== -1) {
+      out.push("title and abstract", "abstract");
+    } else if (h.indexOf("title") !== -1) {
+      out.push("title and abstract", "title");
     }
     if (h.indexOf("introduction") !== -1 || h.indexOf("background") !== -1) out.push("introduction");
+    if (h.indexOf("case presentation") !== -1 || h.indexOf("patient") !== -1) out.push("patient information");
     if (h.indexOf("method") !== -1) out.push("methods");
     if (h.indexOf("result") !== -1 || h.indexOf("finding") !== -1) out.push("results");
     if (h.indexOf("discussion") !== -1 || h.indexOf("conclusion") !== -1) out.push("discussion");
@@ -1001,14 +1016,26 @@
       "#researchMD .rmd-doc-title { margin: 0; font: 700 16px/1.3 var(--rmd-f, system-ui, sans-serif); color: var(--rmd-ink, #111c44); }",
       "#researchMD .rmd-doc-subtitle { margin: 2px 0 0; font: 400 12.5px/1.4 var(--rmd-f, system-ui, sans-serif); color: var(--rmd-mut, #5b607a); overflow-wrap: anywhere; }",
       "#researchMD .rmd-doc-actions { display: flex; flex-wrap: wrap; gap: 8px; }",
-      "#researchMD .rmd-doc-btn { appearance: none; min-height: 44px; min-width: 44px; padding: 8px 12px; border: 1px solid var(--rmd-line, #e5ddce); border-radius: 8px; background: var(--rmd-panel, #fffdf9); color: var(--rmd-ink, #111c44); font: 600 13px/1.2 var(--rmd-f, system-ui, sans-serif); display: inline-flex; align-items: center; justify-content: center; touch-action: manipulation; cursor: pointer; }",
+      "#researchMD .rmd-doc-btn { appearance: none; min-height: 44px; min-width: 44px; padding: 8px 12px; border: 1px solid var(--rmd-line, #e5ddce); border-radius: 8px; background: var(--rmd-panel, #fffdf9); color: var(--rmd-ink, #111c44); font: 600 13px/1.2 var(--rmd-f, system-ui, sans-serif); display: inline-flex; align-items: center; justify-content: center; gap: 4px; touch-action: manipulation; cursor: pointer; transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1), background-color 150ms ease-out; }",
       "#researchMD .rmd-doc-btn:active { transform: scale(0.97); }",
       "#researchMD .rmd-doc-btn[aria-pressed=\"true\"] { background: var(--rmd-acc-soft, #e4e9f8); color: var(--rmd-acc, #1b41bf); border-color: var(--rmd-acc, #1b41bf); }",
       "#researchMD .rmd-doc-btn-primary { background: var(--rmd-acc, #1b41bf); border-color: transparent; color: #fff; }",
       "#researchMD .rmd-doc-btn[disabled] { opacity: 0.45; cursor: default; transform: none; }",
-      "#researchMD .rmd-doc-toolbar { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 0; border-top: 1px solid var(--rmd-line, #e5ddce); border-bottom: 1px solid var(--rmd-line, #e5ddce); background: var(--rmd-panel, #fffdf9); position: sticky; top: 0; z-index: 3; }",
+      "#researchMD .rmd-doc-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 6px 0; border-top: 1px solid var(--rmd-line, #e5ddce); border-bottom: 1px solid var(--rmd-line, #e5ddce); background: var(--rmd-panel, #fffdf9); position: sticky; top: 0; z-index: 5; }",
       "#researchMD .rmd-doc-group { display: flex; flex-wrap: wrap; gap: 6px; padding-right: 6px; border-right: 1px solid var(--rmd-line, #e5ddce); }",
-      "#researchMD .rmd-doc-group:last-child { border-right: 0; padding-right: 0; }",
+      "#researchMD .rmd-doc-group:last-of-type { border-right: 0; padding-right: 0; }",
+      "#researchMD .rmd-doc-lbl-compact { display: none; align-items: center; justify-content: center; }",
+      "#researchMD .rmd-doc-lbl-wide { display: inline-flex; align-items: center; }",
+      "#researchMD .rmd-doc-more-wrap { display: none; position: relative; flex: 1 1 0; }",
+      "#researchMD .rmd-doc-more-btn { width: 100%; }",
+      "#researchMD .rmd-doc-more-menu { position: absolute; top: calc(100% + 4px); right: 0; min-width: 176px; max-width: calc(100vw - 24px); padding: 6px; border: 1px solid var(--rmd-line, #e5ddce); border-radius: 10px; background: var(--rmd-panel, #fffdf9); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18); display: flex; flex-direction: column; gap: 4px; z-index: 20; transform-origin: top right; }",
+      "#researchMD .rmd-doc-more-menu[hidden] { display: none; }",
+      "#researchMD .rmd-doc-menu-item { appearance: none; width: 100%; min-height: 44px; padding: 8px 12px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--rmd-ink, #111c44); font: 600 13.5px/1.2 var(--rmd-f, system-ui, sans-serif); text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 8px; cursor: pointer; touch-action: manipulation; }",
+      "#researchMD .rmd-doc-menu-item:active { transform: scale(0.97); }",
+      "#researchMD .rmd-doc-menu-item:focus-visible { outline: 2px solid var(--rmd-acc, #1b41bf); outline-offset: -2px; }",
+      "@media (hover: hover) and (pointer: fine) {",
+      "  #researchMD .rmd-doc-menu-item:hover { background: var(--rmd-acc-soft, #e4e9f8); color: var(--rmd-acc, #1b41bf); }",
+      "}",
       "#researchMD .rmd-doc-meta { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; font: 500 12.5px/1.4 var(--rmd-f, system-ui, sans-serif); color: var(--rmd-mut, #5b607a); min-width: 0; }",
       "#researchMD .rmd-doc-over { color: var(--rmd-warn, #a34e1c); font-weight: 700; }",
       "#researchMD .rmd-doc-notice { color: var(--rmd-acc, #1b41bf); font-weight: 600; }",
@@ -1035,6 +1062,13 @@
       "  #researchMD .rmd-doc { padding: 10px; border-radius: 10px; }",
       "  #researchMD .rmd-doc-h2 { font-size: 15px; }",
       "  #researchMD .rmd-doc-body { min-height: 84px; }",
+      "  #researchMD .rmd-doc-toolbar { flex-wrap: nowrap; gap: 3px; justify-content: space-between; }",
+      "  #researchMD .rmd-doc-group { display: contents; border-right: 0; padding-right: 0; }",
+      "  #researchMD .rmd-doc-toolbar .rmd-doc-btn { flex: 1 1 0; min-width: 47px; min-height: 47px; padding: 0 4px; }",
+      "  #researchMD .rmd-doc-toolbar [data-doc-tier=\"extra\"] { display: none; }",
+      "  #researchMD .rmd-doc-lbl-wide { display: none; }",
+      "  #researchMD .rmd-doc-lbl-compact { display: inline-flex; }",
+      "  #researchMD .rmd-doc-more-wrap { display: block; flex: 1 1 0; min-width: 47px; }",
       "}",
       "@media (prefers-reduced-motion: reduce) {",
       "  #researchMD .rmd-doc *, #researchMD .rmd-doc *:before, #researchMD .rmd-doc *:after { animation: none !important; transition: none !important; }",
@@ -1069,27 +1103,53 @@
       manuscript: null,
       manuscriptPromise: null,
       totalWords: 0,
+      moreOpen: false,
+      menuBound: false,
       ai: (SMD.ai && SMD.ai.state) ? SMD.ai.state() : { busy: false, error: null, drafted: {} }
     };
 
+    function applyTitleFallback(doc) {
+      var titleText = trim(options.manuscriptTitle || (proj && proj.title ? String(proj.title).replace(/^\[Tutorial\]\s*/i, "") : ""));
+      var direct;
+      if (!titleText || !doc) return;
+      direct = findDirectSub(outline, "Title");
+      if (direct) addToSub(doc, direct.section.id, direct.sub.id, titleText, true);
+    }
+
     function currentDoc() {
       if (state.doc) return state.doc;
-      if (options.saved && options.saved.sections) return syncDoc(options.saved, outline);
-      var local = readLocalDoc(pid, outline.id);
-      if (local) return syncDoc(local, outline);
-      var doc = emptyDoc(outline);
+      var doc = null;
       var sources = sourceSections(options.sources);
+      if (options.saved && options.saved.sections) {
+        doc = syncDoc(options.saved, outline);
+      } else {
+        var local = readLocalDoc(pid, outline.id);
+        if (local) doc = syncDoc(local, outline);
+      }
+      if (doc) {
+        if (sources.length) applySources(doc, outline, sources, true);
+        else {
+          var lms = localManuscriptSources(pid);
+          if (lms.length) applySources(doc, outline, lms, true);
+        }
+        applyTitleFallback(doc);
+        return doc;
+      }
+      doc = emptyDoc(outline);
       if (sources.length) {
         applySources(doc, outline, sources, false);
+        applyTitleFallback(doc);
         return doc;
       }
       sources = localManuscriptSources(pid);
       if (sources.length) {
         applySources(doc, outline, sources, false);
+        applyTitleFallback(doc);
         return doc;
       }
       sources = thesisSources(thesisPid);
       if (sources.length) applySources(doc, outline, sources, false);
+      applyTitleFallback(doc);
       return doc;
     }
 
@@ -1290,42 +1350,79 @@
       afterEdit(body);
     }
 
+    function iconSvg(kind) {
+      if (kind === "bullets") {
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="5" cy="7" r="1.2" fill="currentColor"/><circle cx="5" cy="12" r="1.2" fill="currentColor"/><circle cx="5" cy="17" r="1.2" fill="currentColor"/><line x1="9" y1="7" x2="20" y2="7"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="17" x2="20" y2="17"/></svg>';
+      }
+      if (kind === "numbers") {
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h2v4"/><path d="M4 10h4"/><path d="M4 15h3l-3 4h4"/><line x1="10" y1="7" x2="20" y2="7"/><line x1="10" y1="12" x2="20" y2="12"/><line x1="10" y1="17" x2="20" y2="17"/></svg>';
+      }
+      if (kind === "undo") {
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>';
+      }
+      if (kind === "more") {
+        return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="12" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="18" cy="12" r="1.4" fill="currentColor"/></svg>';
+      }
+      return "";
+    }
+
+    function toolbarBtnContent(b) {
+      var svg = b.icon ? iconSvg(b.icon) : "";
+      if (!svg) return esc(b.label);
+      return '<span class="rmd-doc-lbl-wide">' + esc(b.label) + '</span><span class="rmd-doc-lbl-compact" aria-hidden="true">' + svg + '</span>';
+    }
+
     function toolbarHtml() {
       var groups = [
         [
-          { cmd: "bold", label: "B", aria: "Bold" },
-          { cmd: "italic", label: "I", aria: "Italic" },
-          { cmd: "underline", label: "U", aria: "Underline" }
+          { cmd: "bold", label: "B", aria: "Bold", tier: "main" },
+          { cmd: "italic", label: "I", aria: "Italic", tier: "main" },
+          { cmd: "underline", label: "U", aria: "Underline", tier: "main" }
         ],
         [
-          { cmd: "h2", label: "H2", aria: "Heading 2" },
-          { cmd: "h3", label: "H3", aria: "Heading 3" }
+          { cmd: "h2", label: "H2", aria: "Heading 2", tier: "extra" },
+          { cmd: "h3", label: "H3", aria: "Heading 3", tier: "extra" }
         ],
         [
-          { cmd: "insertUnorderedList", label: "Bullets", aria: "Bulleted list" },
-          { cmd: "insertOrderedList", label: "Numbers", aria: "Numbered list" }
+          { cmd: "insertUnorderedList", label: "Bullets", aria: "Bulleted list", tier: "main", icon: "bullets" },
+          { cmd: "insertOrderedList", label: "Numbers", aria: "Numbered list", tier: "main", icon: "numbers" }
         ],
         [
-          { cmd: "superscript", label: "Sup", aria: "Superscript (small raised text)" },
-          { cmd: "subscript", label: "Sub", aria: "Subscript (small lowered text)" }
+          { cmd: "superscript", label: "Sup", aria: "Superscript (small raised text)", tier: "extra" },
+          { cmd: "subscript", label: "Sub", aria: "Subscript (small lowered text)", tier: "extra" }
         ],
         [
-          { cmd: "undo", label: "Undo", aria: "Undo" },
-          { cmd: "redo", label: "Redo", aria: "Redo" }
+          { cmd: "undo", label: "Undo", aria: "Undo", tier: "main", icon: "undo" },
+          { cmd: "redo", label: "Redo", aria: "Redo", tier: "extra" }
         ]
+      ];
+      var extraItems = [
+        { cmd: "h2", label: "H2", full: "Heading 2" },
+        { cmd: "h3", label: "H3", full: "Heading 3" },
+        { cmd: "superscript", label: "Sup", full: "Superscript" },
+        { cmd: "subscript", label: "Sub", full: "Subscript" },
+        { cmd: "redo", label: "Redo", full: "Redo" }
       ];
       var h = [];
       var i, j, g, b;
+      var menuId = "rmdDocMoreMenu_" + slug(pid);
       h.push('<div class="rmd-doc-toolbar" role="group" aria-label="Document formatting">');
       for (i = 0; i < groups.length; i++) {
         g = groups[i];
         h.push('<div class="rmd-doc-group">');
         for (j = 0; j < g.length; j++) {
           b = g[j];
-          h.push('<button type="button" class="rmd-doc-btn" data-doc-cmd="' + esc(b.cmd) + '" aria-label="' + esc(b.aria) + '" title="' + esc(b.aria) + '">' + esc(b.label) + '</button>');
+          h.push('<button type="button" class="rmd-doc-btn" data-doc-cmd="' + esc(b.cmd) + '" data-doc-tier="' + esc(b.tier) + '" aria-label="' + esc(b.aria) + '" title="' + esc(b.aria) + '">' + toolbarBtnContent(b) + '</button>');
         }
         h.push('</div>');
       }
+      h.push('<div class="rmd-doc-more-wrap">');
+      h.push('<button type="button" class="rmd-doc-btn rmd-doc-more-btn" data-doc-more="1" aria-haspopup="menu" aria-expanded="' + (state.moreOpen ? 'true' : 'false') + '" aria-controls="' + esc(menuId) + '" aria-label="More formatting options" title="More formatting">' + toolbarBtnContent({ label: "More", icon: "more" }) + '</button>');
+      h.push('<div class="rmd-doc-more-menu" id="' + esc(menuId) + '" data-doc-more-menu="1" role="menu" aria-label="More formatting"' + (state.moreOpen ? '' : ' hidden') + '>');
+      for (i = 0; i < extraItems.length; i++) {
+        h.push('<button type="button" class="rmd-doc-menu-item" role="menuitem" data-doc-cmd="' + esc(extraItems[i].cmd) + '" aria-label="' + esc(extraItems[i].full) + '"><span>' + esc(extraItems[i].full) + '</span><span>' + esc(extraItems[i].label) + '</span></button>');
+      }
+      h.push('</div></div>');
       h.push('</div>');
       return h.join("");
     }
@@ -1397,6 +1494,55 @@
       return h.join("");
     }
 
+    function setMoreOpen(open, restoreFocus) {
+      var btn = host.querySelector("[data-doc-more]");
+      var menu = host.querySelector("[data-doc-more-menu]");
+      state.moreOpen = !!open;
+      if (btn) btn.setAttribute("aria-expanded", state.moreOpen ? "true" : "false");
+      if (menu) menu.hidden = !state.moreOpen;
+      if (!state.moreOpen && restoreFocus && btn && btn.focus) {
+        try { btn.focus(); } catch (e) {}
+      }
+    }
+
+    function onDocKeyDown(ev) {
+      if (!state.moreOpen) return;
+      var k = ev.key || "";
+      if (k === "Escape" || ev.keyCode === 27) {
+        if (ev.stopPropagation) ev.stopPropagation();
+        if (ev.preventDefault) ev.preventDefault();
+        setMoreOpen(false, true);
+        return;
+      }
+      var menu = host.querySelector("[data-doc-more-menu]");
+      if (!menu) return;
+      var items = menu.querySelectorAll("[role=\"menuitem\"]");
+      if (!items.length) return;
+      var idx = -1;
+      for (var m = 0; m < items.length; m++) {
+        if (items[m] === D.activeElement) { idx = m; break; }
+      }
+      if (k === "ArrowDown" || k === "ArrowUp" || k === "Home" || k === "End") {
+        if (idx < 0 && D.activeElement !== host.querySelector("[data-doc-more]")) return;
+        if (ev.preventDefault) ev.preventDefault();
+        var next = 0;
+        if (k === "End") next = items.length - 1;
+        else if (k === "ArrowDown") next = idx < 0 ? 0 : (idx + 1) % items.length;
+        else if (k === "ArrowUp") next = idx < 0 ? items.length - 1 : (idx - 1 + items.length) % items.length;
+        if (items[next] && items[next].focus) items[next].focus();
+      } else if (k === "Tab") {
+        setMoreOpen(false, false);
+      }
+    }
+
+    function onDocPointerDown(ev) {
+      if (!state.moreOpen) return;
+      var t = ev && ev.target;
+      var wrap = host.querySelector(".rmd-doc-more-wrap");
+      if (wrap && t && wrap.contains(t)) return;
+      setMoreOpen(false, false);
+    }
+
     function bindEvents() {
       var cmds = host.querySelectorAll("[data-doc-cmd]");
       var i;
@@ -1405,8 +1551,25 @@
           if (e.preventDefault) e.preventDefault();
         };
         cmds[i].onclick = function () {
+          var inMenu = !!(this.closest && this.closest("[data-doc-more-menu]"));
           command(this.getAttribute("data-doc-cmd"));
+          if (inMenu) setMoreOpen(false, false);
         };
+      }
+      var moreBtn = host.querySelector("[data-doc-more]");
+      if (moreBtn) {
+        moreBtn.onmousedown = function (e) {
+          if (e.preventDefault) e.preventDefault();
+        };
+        moreBtn.onclick = function (e) {
+          if (e && e.stopPropagation) e.stopPropagation();
+          setMoreOpen(!state.moreOpen, false);
+        };
+      }
+      if (D.addEventListener && !state.menuBound) {
+        state.menuBound = true;
+        D.addEventListener("keydown", onDocKeyDown, true);
+        D.addEventListener("click", onDocPointerDown, true);
       }
       var saveBtn = host.querySelector("[data-doc-save]");
       if (saveBtn) saveBtn.onclick = function () { saveNow(); };
@@ -1667,7 +1830,14 @@
     function destroy() {
       if (state.autosaveTimer) clearTimeout(state.autosaveTimer);
       if (state.changeTimer) clearTimeout(state.changeTimer);
-      if (D && D.removeEventListener) D.removeEventListener("selectionchange", saveSelection);
+      if (D && D.removeEventListener) {
+        D.removeEventListener("selectionchange", saveSelection);
+        if (state.menuBound) {
+          D.removeEventListener("keydown", onDocKeyDown, true);
+          D.removeEventListener("click", onDocPointerDown, true);
+          state.menuBound = false;
+        }
+      }
     }
 
     renderAll();

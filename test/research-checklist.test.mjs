@@ -323,3 +323,49 @@ test("the stop-word table declares each key once", function () {
   assert.ok(keys.length > 20);
   assert.equal(new Set(keys).size, keys.length, "duplicate stop-word keys: " + keys.filter(function (k, i) { return keys.indexOf(k) !== i; }).join(", "));
 });
+
+test("chooseChecklistId selects guideline by study type, preference, and tutorial", function () {
+  const rows = [
+    { id: "care", name: "CARE" },
+    { id: "strobe", name: "STROBE" },
+    { id: "consort2025", name: "CONSORT 2025" },
+    { id: "prisma2020", name: "PRISMA 2020" }
+  ];
+  assert.equal(CHECK.chooseChecklistId(rows, { studyType: "Case Report" }, "", ""), "care");
+  assert.equal(CHECK.chooseChecklistId(rows, { studyType: "Case series" }, "", ""), "care");
+  assert.equal(CHECK.chooseChecklistId(rows, { studyType: "Randomized Controlled Trial" }, "", ""), "consort2025");
+  assert.equal(CHECK.chooseChecklistId(rows, { studyType: "Observational Study" }, "", ""), "strobe");
+  assert.equal(CHECK.chooseChecklistId(rows, { studyType: "Cohort study" }, "", ""), "strobe");
+  assert.equal(CHECK.chooseChecklistId(rows, { studyType: "Case-control study" }, "", ""), "strobe");
+  assert.equal(CHECK.chooseChecklistId(rows, { studyType: "Original Study (Master Chart)" }, "", ""), "strobe");
+  assert.equal(CHECK.chooseChecklistId(rows, { studyType: "Systematic Review & Meta-Analysis" }, "", ""), "prisma2020");
+  assert.equal(CHECK.chooseChecklistId(rows, { tutorial: true, studyType: "Case Report" }, "", "care"), "care");
+  assert.equal(CHECK.chooseChecklistId([{ id: "care" }, { id: "consort" }, { id: "strobe" }, { id: "prisma2020" }], { studyType: "Randomized Controlled Trial" }, "", ""), "consort");
+  assert.equal(CHECK.chooseChecklistId(rows, { studyType: "Case Report" }, "strobe", "care"), "strobe");
+  assert.equal(CHECK.chooseChecklistId(rows, {}, "", ""), "prisma2020");
+});
+
+test("fill reads manuscript title and section aliases for non-PRISMA checklists", function () {
+  const careMini = checklistFrom("care", "CARE", [
+    ["Title", "1", "Title", "Identify as a case report.", "manuscript"],
+    ["Patient Information", "5", "Patient Information", "Describe demographics.", "manuscript"],
+    ["Discussion", "11", "Discussion", "Discuss strengths.", "manuscript"]
+  ]);
+  const snap = {
+    manuscript: {
+      title: "Isoniazid-Induced Severe Hepatotoxicity Resolving After Drug Withdrawal: A Case Report",
+      sections: [
+        { heading: "Title Page", text: "Isoniazid-Induced Severe Hepatotoxicity Resolving After Drug Withdrawal: A Case Report" },
+        { heading: "Case Presentation", text: "A 42-year-old female presented with jaundice." },
+        { heading: "Discussion", text: "Prompt withdrawal led to recovery." }
+      ]
+    }
+  };
+  const filled = CHECK.fill(careMini, snap);
+  assert.equal(byNum(filled, "1").status, "auto");
+  assert.match(byNum(filled, "1").filled, /Isoniazid-Induced Severe Hepatotoxicity/);
+  assert.equal(byNum(filled, "5").status, "auto");
+  assert.equal(byNum(filled, "11").status, "auto");
+  assert.equal(filled.counts.auto, 3);
+  assert.equal(filled.counts.missing, 0);
+});

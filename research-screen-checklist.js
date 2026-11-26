@@ -49,6 +49,8 @@
     filled: null,
     approved: false,
     csv: "",
+    manuscript: null,
+    manuscriptTitle: "",
     doc: null,
     docOutline: null,
     itemSub: null,
@@ -139,8 +141,23 @@
     if (lastContainer) paint(lastContainer);
   }
 
+  function nonEmptySections(secs) {
+    var out = [], i, s, has;
+    if (!secs || !secs.length) return out;
+    for (i = 0; i < secs.length; i++) {
+      s = secs[i];
+      if (!s) continue;
+      has = (typeof s.text === "string" && String(s.text).replace(/\s+/g, "")) ||
+            (s.paragraphs && s.paragraphs.length);
+      if (has) out.push(s);
+    }
+    return out;
+  }
+
   function loadGuideline(pid, gid, seq) {
     var base;
+    var proj = activeProject();
+    var apiPid = (proj && (proj.serverId || proj.id)) || pid;
     st.guidelineId = gid;
     st.loading = true;
     st.error = "";
@@ -148,6 +165,8 @@
     st.approved = false;
     st.csv = "";
     st.filled = null;
+    st.manuscript = null;
+    st.manuscriptTitle = "";
     st.doc = null;
     st.docOutline = null;
     st.itemSub = null;
@@ -157,12 +176,31 @@
     return Promise.all([
       api("GET", "/v1/checklists/" + encodeURIComponent(gid)),
       api("GET", base + "/checklist-snapshot"),
-      api("GET", base + "/checklist-manual/" + encodeURIComponent(gid))
+      api("GET", base + "/checklist-manual/" + encodeURIComponent(gid)),
+      api("GET", "/v1/projects/" + encodeURIComponent(apiPid) + "/manuscript").catch(function () { return null; })
     ]).then(function (parts) {
+      var manObj, snapSecs, manSecs, chosenSecs, rawTitle;
       if (seq !== st.seq) return;
       st.checklist = unwrapChecklist(parts[0]);
       st.snapshot = unwrapSnapshot(parts[1]);
       st.manual = (parts[2] && parts[2].entries) ? parts[2].entries : {};
+      manObj = (parts[3] && parts[3].manuscript) || null;
+      st.manuscript = manObj;
+      rawTitle = (manObj && manObj.title) ||
+        (st.snapshot && st.snapshot.manuscript && st.snapshot.manuscript.title) ||
+        (st.snapshot && st.snapshot.title) ||
+        (st.snapshot && st.snapshot.projectTitle) ||
+        (proj && proj.title ? String(proj.title).replace(/^\[Tutorial\]\s*/i, "") : "");
+      st.manuscriptTitle = rawTitle ? String(rawTitle).replace(/^\s+|\s+$/g, "") : "";
+      snapSecs = nonEmptySections(st.snapshot && st.snapshot.manuscript && st.snapshot.manuscript.sections);
+      manSecs = nonEmptySections(manObj && manObj.sections);
+      chosenSecs = snapSecs.length ? snapSecs : manSecs;
+      if (chosenSecs.length || st.manuscriptTitle) {
+        st.snapshot.manuscript = {
+          title: st.manuscriptTitle,
+          sections: chosenSecs
+        };
+      }
       st.loading = false;
       try {
         compute();
@@ -179,8 +217,18 @@
     });
   }
 
+  function tutorialChecklistId(proj) {
+    var tut = SMD.tutorial;
+    var key, ex;
+    if (!proj || !proj.tutorial || !tut || !tut.exampleByKey) return "";
+    key = proj.tutorialKey || (tut.keyForStudyType ? tut.keyForStudyType(proj.studyType) : "");
+    ex = tut.exampleByKey(key);
+    return (ex && ex.checklistId) || "";
+  }
+
   function loadAll(pid) {
     var seq = ++st.seq;
+    var proj = activeProject();
     st.projectId = pid;
     st.loading = true;
     st.error = "";
@@ -189,29 +237,25 @@
     st.filled = null;
     st.approved = false;
     st.csv = "";
+    st.manuscript = null;
+    st.manuscriptTitle = "";
     st.doc = null;
     st.docOutline = null;
     st.itemSub = null;
     closeDocEditor();
     if (lastContainer) paint(lastContainer);
     api("GET", "/v1/checklists").then(function (list) {
-      var rows, id, i;
+      var rows, id, pref, tutCid;
       if (seq !== st.seq) return;
       rows = (list && list.checklists) || [];
       st.guidelines = rows;
-      id = "";
-      var pref = SMD.preferredChecklist ? SMD.preferredChecklist(pid) : "";
-      if (pref) {
-        for (i = 0; i < rows.length; i++) {
-          if (rows[i] && rows[i].id === pref) id = pref;
-        }
+      pref = SMD.preferredChecklist ? (SMD.preferredChecklist(pid) || (proj && proj.serverId ? SMD.preferredChecklist(proj.serverId) : "")) : "";
+      tutCid = tutorialChecklistId(proj);
+      if (engine() && typeof engine().chooseChecklistId === "function") {
+        id = engine().chooseChecklistId(rows, proj, pref, tutCid, SMD.checklistFor);
+      } else {
+        id = pref || tutCid || (SMD.checklistFor && proj ? SMD.checklistFor(proj, "publication") : "") || (rows[0] && rows[0].id) || "";
       }
-      if (!id) {
-        for (i = 0; i < rows.length; i++) {
-          if (rows[i] && rows[i].id === "prisma2020") id = "prisma2020";
-        }
-      }
-      if (!id && rows.length && rows[0] && rows[0].id) id = String(rows[0].id);
       if (!id) {
         st.loading = false;
         st.error = "No reporting guidelines are available.";
@@ -360,6 +404,30 @@
     return h.join("");
   }
 
+  function isItemFilled(it) {
+    if (!it) return false;
+    if (it.status === "auto") return true;
+    if (it.status === "manual" && it.filled && String(it.filled).replace(/\s+/g, "")) return true;
+    return false;
+  }
+
+  function remainingRequiredCount() {
+    var items = (st.filled && st.filled.items) || [];
+    var rem = 0, i;
+    if (!items.length) return -1;
+    for (i = 0; i < items.length; i++) {
+      if (!isItemFilled(items[i])) rem++;
+    }
+    return rem;
+  }
+
+  function approveReasonText() {
+    var rem = remainingRequiredCount();
+    if (rem < 0) return "Checklist items are still loading.";
+    if (rem === 0) return "";
+    return "Fill the remaining " + rem + " checklist " + (rem === 1 ? "item" : "items") + " to approve.";
+  }
+
   function paintEmpty(container) {
     container.innerHTML = '<div class="rmd-checklist-screen"><div class="rmd-checklist-wrap"><div class="rmd-checklist-empty"><h2>No project open</h2><p>Open a project to fill a reporting checklist.</p><button type="button" class="rmd-checklist-btn rmd-checklist-btn-primary" data-rmd-to-projects>Open projects</button></div></div></div>';
     var btn = container.querySelector("[data-rmd-to-projects]");
@@ -392,12 +460,17 @@
     }
     h.push('<div class="rmd-checklist-actions">');
     h.push('<button type="button" class="rmd-checklist-btn" data-rmd-export="csv">Download CSV</button>');
+    var remCount = remainingRequiredCount();
+    var canApprove = !st.approved && remCount === 0;
+    var reasonMsg = st.approved ? "" : approveReasonText();
     if (st.approved) {
       h.push('<button type="button" class="rmd-checklist-btn" data-rmd-approve disabled>Approved</button>');
     } else {
-      h.push('<button type="button" class="rmd-checklist-btn rmd-checklist-btn-primary" data-rmd-approve>Approve</button>');
+      h.push('<button type="button" class="rmd-checklist-btn rmd-checklist-btn-primary" data-rmd-approve' + (canApprove ? '' : ' disabled aria-describedby="rmdChecklistApproveReason"') + '>Approve</button>');
     }
     h.push('</div></div>');
+    if (reasonMsg) h.push('<p id="rmdChecklistApproveReason" class="rmd-checklist-note rmd-checklist-approve-reason" data-rmd-approve-reason>' + esc(reasonMsg) + '</p>');
+    else h.push('<p id="rmdChecklistApproveReason" class="rmd-checklist-note rmd-checklist-approve-reason" data-rmd-approve-reason hidden></p>');
     if (phone) h.push('<p class="rmd-checklist-note">Tap an item to jump to that part of the document.</p>');
     if (st.approved) h.push('<p id="rmdChecklistApproved" class="rmd-checklist-approved">Approved on this device. You still upload the pack yourself.</p>');
     if (st.error) {
@@ -492,6 +565,7 @@
     if (exp) exp.onclick = function () { exportCsv(); };
     if (approve && !st.approved) {
       approve.onclick = function () {
+        if (remainingRequiredCount() !== 0) return;
         st.approved = true;
         paint(lastContainer);
       };
@@ -520,11 +594,12 @@
       outline: st.docOutline,
       saved: st.doc,
       sources: (st.snapshot && st.snapshot.manuscript) || null,
+      manuscriptTitle: st.manuscriptTitle || "",
       pid: st.projectId,
       apiPid: apiPid,
       thesisPid: apiPid,
       project: proj,
-      projectTitle: proj && proj.title,
+      projectTitle: st.manuscriptTitle || (proj && proj.title),
       onChange: function (doc) { syncDocStatuses(doc); }
     });
     if (st.docEditor) {
@@ -598,13 +673,30 @@
     }
   }
 
+  function updateApproveDom() {
+    var root = lastContainer || D;
+    var btn = root.querySelector("[data-rmd-approve]");
+    var reason = root.querySelector("[data-rmd-approve-reason]");
+    var rem, msg;
+    if (!btn || st.approved) return;
+    rem = remainingRequiredCount();
+    msg = approveReasonText();
+    btn.disabled = rem !== 0;
+    if (btn.disabled) btn.setAttribute("aria-describedby", "rmdChecklistApproveReason");
+    else btn.removeAttribute("aria-describedby");
+    if (reason) {
+      reason.textContent = msg;
+      reason.hidden = !msg;
+    }
+  }
+
   function syncDocStatuses(doc) {
     if (!st.filled || !SMD_RESEARCH_DOC) return;
     if (doc) st.doc = doc;
     var d = st.doc;
     if (!d || !d.sections) return;
     var bySub = {};
-    var i, j, sec, sub, text, words, items, it, sid, row, mapped, before;
+    var i, j, sec, sub, text, words, items, it, sid, row, before;
     for (i = 0; i < d.sections.length; i++) {
       sec = d.sections[i];
       for (j = 0; j < sec.subheadings.length; j++) {
@@ -621,12 +713,8 @@
       if (!sid || !bySub[sid]) continue;
       row = bySub[sid];
       if (row.words > 0) {
-        mapped = SMD_RESEARCH_DOC.statusForWords(row.words) === "filled" ? "auto" : "partial";
         before = it.status;
-        if (it.status !== "auto") {
-          if (mapped === "auto") it.status = "auto";
-          else if (it.status === "missing") it.status = "partial";
-        }
+        it.status = "auto";
         it.filled = row.text;
         it.evidence = [];
         it._doc = 1;
@@ -641,6 +729,7 @@
     }
     updateCountsDom();
     updateItemsDom(items);
+    updateApproveDom();
   }
 
   function bindBreakpoint() {
@@ -652,7 +741,10 @@
       var now = isPhone();
       if (now === lastPhone) return;
       lastPhone = now;
-      if (lastContainer && D.body && D.body.contains(lastContainer)) render(lastContainer);
+      if (lastContainer && D.body && D.body.contains(lastContainer)) {
+        if (st.filled) paint(lastContainer);
+        else render(lastContainer);
+      }
     };
     try {
       if (G.matchMedia) {
@@ -686,6 +778,10 @@
     }
     if (st.projectId !== proj.id || !st.checklist) {
       loadAll(proj.id);
+      return;
+    }
+    if (st.guidelineId) {
+      loadGuideline(proj.id, st.guidelineId, ++st.seq);
       return;
     }
     paint(container);
