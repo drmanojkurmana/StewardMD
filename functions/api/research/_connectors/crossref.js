@@ -199,7 +199,7 @@ function defaultCache() {
 }
 
 function retractionCacheKey(doi) {
-  return "https://smd-research-cache.internal/crossref/retraction/v1/" + encodeURIComponent(doi);
+  return "https://stewardmd.in/__research_cache/crossref/retraction/v1/" + encodeURIComponent(doi);
 }
 
 async function cacheRead(cache, key) {

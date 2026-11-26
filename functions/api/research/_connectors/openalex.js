@@ -55,7 +55,7 @@ function defaultCache() {
 }
 
 function cacheKey(kind, id) {
-  return "https://smd-research-cache.internal/openalex/work/v1/" + kind + "/" + encodeURIComponent(id);
+  return "https://stewardmd.in/__research_cache/openalex/work/v1/" + kind + "/" + encodeURIComponent(id);
 }
 
 async function cacheRead(cache, key) {
