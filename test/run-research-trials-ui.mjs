@@ -1,6 +1,6 @@
 // Real-browser headless test: ResearchMD ClinicalTrials.gov Trials UI.
 // Verifies:
-//   1. Client flag smd_research_trials OFF (default) -> nothing rendered, 0 /trials calls
+//   1. Client flag smd_research_trials OFF ("0"; default is ON) -> nothing rendered, 0 /trials calls
 //   2. Client flag ON + server unavailable (404 or {available:false}) -> hidden, no error banner/empty box
 //   3. Client flag ON + server available -> "Trials" chip, NCT lookup + search, kept fields + "Data: ClinicalTrials.gov"
 //   4. Mid-session unavailable response -> hidden cleanly
@@ -147,7 +147,7 @@ try {
   ok(await until('!!window.SMD_RESEARCH && !!SMD_RESEARCH.screens && !!SMD_RESEARCH.screens.search', 30000), 'app loaded');
 
   await ev(`(function(){
-    localStorage.removeItem('smd_research_trials');
+    localStorage.setItem('smd_research_trials','0');
     var s = JSON.parse(localStorage.getItem('smd_research_state_v1'));
     s.projects[0].serverId = s.projects[0].id;
     s.projects[0].practice = false;

@@ -257,6 +257,8 @@ AI_DAILY_COST_CAP_INR = "0.5"        # Free default (₹/day)
 # ResearchMD server routes on (owner: "flag on", 2026-11-24). Unset or any other value answers 404.
 RESEARCH_MODE = "pilot"
 RESEARCH_CONTACT_EMAIL = "support@stewardmd.in"
+RESEARCH_TRIALS_ENABLED = "1"   # ClinicalTrials.gov routes on (owner 2026-11-27); "0" hides them
+RESEARCH_PO_ENABLED = "1"   # PaperOrchestra full-paper drafts on (owner 2026-11-27); "0" rejects new draft jobs
 # NMC PG Logbook verification domain (public). Named envs do NOT inherit top-level [vars], so it is
 # repeated here. The SIGNING KEY is a Pages secret, never a var — see the note in [vars] above.
 # PGLOG_VERIFY_BASE, MAIK_CACHE_VERSION and DEVICE_LOCK_ON removed from production 2026-09-13: each equalled the code default (see functions/_pglog_verify.js, _maik_cache.js, _devices.js), and Cloudflare caps a Pages Function at 128 text bindings (vars + secrets). Removing them changes nothing at runtime.

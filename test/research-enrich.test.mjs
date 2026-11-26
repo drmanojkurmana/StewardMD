@@ -318,8 +318,8 @@ function cardStub() {
 const CARD = { doi: "10.1000/retracted", pmid: "111", title: "A study" };
 
 test("client: both flags off means no request and no markup", async () => {
-  delete store.smd_research_retraction;
-  delete store.smd_research_openalex;
+  store.smd_research_retraction = "0";
+  store.smd_research_openalex = "0";
   const calls = [];
   SMD.api = { request: async (method, url, body) => { calls.push(url); return { available: true }; } };
   const el = cardStub();
@@ -400,7 +400,7 @@ test("client: studies list shows a retraction badge on the row and credit in det
 });
 
 test("client: studies list with the flag off stays untouched", async () => {
-  delete store.smd_research_retraction;
+  store.smd_research_retraction = "0";
   let calls = 0;
   SMD.api = { request: async () => { calls++; return { available: true }; } };
   const row = { innerHTML: "", getAttribute: () => "s1" };

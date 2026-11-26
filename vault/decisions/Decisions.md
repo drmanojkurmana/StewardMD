@@ -5,6 +5,12 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-27 · ResearchMD: trials, retractions, OpenAlex and PaperOrchestra ON for all
+**Decision.** Owner turned the four research features on for every phone: app flags default ON (`!== "0"`, so "0" is a per-device off switch) and server switches `RESEARCH_TRIALS_ENABLED="1"`, `RESEARCH_PO_ENABLED="1"` in `wrangler.toml` production. The research worker now forwards `RESEARCH_GATEWAY_URL` and `RESEARCH_API_URL` to the container; without them every manuscript_draft job failed `gateway_unconfigured`.
+**Why.** Owner: ship all, AI drafting on. The app reads these flags only from localStorage, so default ON in code is the only way to reach every phone through OTA.
+**Trade-off.** The PHI override on `/ai-draft` ships with terms still marked DRAFT (legal review sent to counsel 2026-11-27). Server switches are the fleet-wide off switch; the app flag is per device.
+**Status.** Live with OTA. Worker jobs need the R2 S3 keys set on the worker (owner).
+
 ## 2026-11-26 · ResearchMD Phase 1 free APIs: NCBI key fallback and ClinicalTrials.gov v2 connector
 
 **Decision.** Added `resolveNcbiApiKey` (`env.RESEARCH_NCBI_API_KEY`, else `env.NCBI_API_KEY`, else none) and `selectBucket` (10 req/s keyed bucket only when non-empty after trim, else 3 req/s anonymous bucket) across `pubmed.js`, `pubmed_efetch.js`, `_gateway.js`, and `[[path]].js`. Added `clinicaltrials.js` against `https://clinicaltrials.gov/api/v2` with a 50/60 req/s bucket (`<= 50 req/min`), Essie `filter.advanced` phase mapping (`AREA[Phase]...`), `filter.overallStatus`, strict `^NCT\d{8}$` lookup validation, strict 9-field normalisation (`{nct, title, phase, status, enrollment, arms, primaryOutcome, resultsPosted, source: "ClinicalTrials.gov"}` with nothing else), 24 h caching (`caches.default` with in-memory TTL fallback), clean `{available: false}` fallback on 5xx/timeout/429, server switch `env.RESEARCH_TRIALS_ENABLED === "1"` (default off -> 404 `not_found`), and client lookup UI behind `smd_research_trials` (default off, hidden when unavailable).

@@ -26,7 +26,7 @@
 
   function trialsFlagOn() {
     try {
-      return !!(G.localStorage && G.localStorage.getItem(TRIALS_FLAG) === "1");
+      return !!(G.localStorage && G.localStorage.getItem(TRIALS_FLAG) !== "0");
     } catch (e) {
       return false;
     }

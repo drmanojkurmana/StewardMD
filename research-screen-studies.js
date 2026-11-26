@@ -22,7 +22,7 @@
 
   function enrichFlag(key) {
     try {
-      return typeof G.localStorage !== "undefined" && G.localStorage.getItem(key) === "1";
+      return typeof G.localStorage !== "undefined" && G.localStorage.getItem(key) !== "0";
     } catch (e) {
       return false;
     }

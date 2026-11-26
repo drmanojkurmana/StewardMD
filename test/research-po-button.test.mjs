@@ -1,6 +1,6 @@
 /* Test suite for PaperOrchestra manuscript drafting integration (research-screen-manuscript.js).
  * Validates:
- * - smd_rmd_po flag (default off, on when localStorage is "1")
+ * - smd_rmd_po flag (default on; off when localStorage is "0")
  * - PO draft button rendering, real <button>, aria-live="polite" status row
  * - POST /v1/projects/{apiPid}/jobs with kind "manuscript_draft" and random idempotencyKey
  * - Polling handles queued -> running ("Writing the draft") -> succeeded ("Done") and reloads versions
@@ -157,13 +157,14 @@ describe("PaperOrchestra UI integration", () => {
     }
   });
 
-  test("Task 1: smd_rmd_po flag OFF by default; ON only when localStorage is '1'", async () => {
+  test("Task 1: smd_rmd_po flag ON by default; OFF only when localStorage is '0'", async () => {
     const c = makeMockContainer();
 
-    // Default: flag off
+    // Default (unset): flag on since 2026-11-27 (owner turned AI drafting on for all)
+    globalThis.localStorage.removeItem("smd_rmd_po");
     globalThis.SMD_RESEARCH.screens.manuscript.render(c);
     await new Promise((r) => setTimeout(r, 20));
-    assert.equal(c.querySelector('[data-rmd="full-draft-po"]'), null, "No PO button when flag is unset");
+    assert.ok(c.querySelector('[data-rmd="full-draft-po"]'), "PO button shown when flag is unset");
 
     // Explicit 0: flag off
     globalThis.localStorage.setItem("smd_rmd_po", "0");
