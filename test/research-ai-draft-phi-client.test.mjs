@@ -166,6 +166,7 @@ describe("research.js apiRequest client PHI gate for POST /ai-draft", () => {
         assert.ok(err instanceof sbReal.win.Error);
         assert.equal(err.code, "phi_blocked");
         assert.equal(err.status, 0);
+        assert.deepEqual(Array.from(err.categories), ["date"]);
         assert.equal(err.message, EXPECTED_MSG);
         assert.equal(err.message.indexOf(secretDate), -1);
         return true;
@@ -189,6 +190,9 @@ describe("research.js apiRequest client PHI gate for POST /ai-draft", () => {
       (err) => {
         assert.equal(err.code, "phi_blocked");
         assert.equal(err.status, 0);
+        assert.ok(Array.isArray(err.categories));
+        assert.ok(err.categories.includes("phone"));
+        assert.ok(err.categories.includes("aadhaar"));
         assert.equal(err.message, EXPECTED_MSG);
         assert.equal(err.message.indexOf(mobile), -1);
         assert.equal(err.message.indexOf(aadhaar), -1);
@@ -220,6 +224,7 @@ describe("research.js apiRequest client PHI gate for POST /ai-draft", () => {
         (err) => {
           assert.equal(err.code, "phi_blocked", cfg.name);
           assert.equal(err.status, 0, cfg.name);
+          assert.deepEqual(Array.from(err.categories), [], cfg.name);
           assert.equal(err.message, EXPECTED_MSG, cfg.name);
           return true;
         }
