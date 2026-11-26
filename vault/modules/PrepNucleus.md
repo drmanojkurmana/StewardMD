@@ -67,6 +67,17 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
 - Share IDs: `prep-ids.js` + `prep-ids.css` (optional), `tools/prep-ids.mjs` (fetch, build, verify, publish the
   `v1/ids/` index). See "Share IDs".
 
+## Startup clip (2026-11-26, `prep-startup.js?v=pnstart3`, loader `prep199`)
+Owner supplied two silent intro clips (cosmos to cell to logo on cream). `prep/startup/prep-startup-v.mp4` (1512x2688,
+7.8 s) plays in portrait, `-h.mp4` (2688x1512, 6.35 s) in landscape; HEVC (`hvc1`) CRF 22, 60 fps, no audio, VMAF about 96
+against the originals (native resolution: the sources are not 4K, an upscale adds bytes and no detail).
+- Full screen `object-fit: cover`; the logo sits in the middle third so tall phones and 4:3 iPads only lose starfield.
+  No glow, blur or feather layers. The last frame (logo) holds until PrepNucleus is ready, then fades (0.5 s).
+- `prep-loader.js` opens PrepNucleus under the clip (`PREP.opened()` = the taxonomy load and first screen), so the home
+  is painted before the fade. Orientation change swaps clip at the same fraction. Reduced motion: end still for 0.95 s.
+- A WebView that cannot decode HEVC fires `error`: the clip closes at once and the app opens normally.
+- Test: `test/prep-startup.test.mjs`, `test/run-prep-startup-ui.mjs` (7 iPhone/iPad sizes, `SHOTS=<dir>`).
+
 ## Search type bar (2026-11-24, `?v=prep197`)
 Owner screenshot of a QBank search with All / QBank / Videos / Tests / Pearls tabs: "need this type of division filter".
 - `renderFind` (Home's search) has a `.pn-seg.pn-fkind` bar under the box: All, Questions, Lessons, Modules (`fnd.kind`,

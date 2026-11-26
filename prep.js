@@ -1653,7 +1653,7 @@
     if (G.PREP_QGEN) G.PREP_QGEN.refresh(HOST);
     root.innerHTML = '<div class="pn-load" role="status">Loading PrepNucleus…</div>';
     st.pendId = opts && opts.id ? String(opts.id) : null;
-    loadTax().then(function () {
+    st.openP = loadTax().then(function () {
       var pid = st.pendId; st.pendId = null;
       if (pid && G.PREP_IDS) { push(renderHome); G.PREP_IDS.open(pid, HOST); }
       else if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); if (opts.module) push(function () { renderModule(opts.subject, opts.module); }); }
@@ -4956,6 +4956,6 @@
 
   var API_OBJ = { open: open, close: close, back: back, loadItems: function (subject, module) { return loadModule(subject, module); }, fixesFor: fixesFor,
     // After an editor saves or reverts a fix on this phone: forget the cached index and the loaded modules so the next open shows it.
-    refreshFixes: function () { var s = load(); delete s.fxix; save(); Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:") === 0 || k.indexOf("fx:") === 0) delete st.mem[k]; }); }, isOpen: function () { return st.open; }, _pure: PURE, _tableFit: tableFit, _st: st, _host: HOST, openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits };
+    refreshFixes: function () { var s = load(); delete s.fxix; save(); Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:") === 0 || k.indexOf("fx:") === 0) delete st.mem[k]; }); }, isOpen: function () { return st.open; }, opened: function () { return st.openP || Promise.resolve(); }, _pure: PURE, _tableFit: tableFit, _st: st, _host: HOST, openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits };
   G.PREP = API_OBJ;
 })(typeof window !== "undefined" ? window : this);
