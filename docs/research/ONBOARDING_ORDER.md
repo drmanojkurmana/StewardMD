@@ -103,7 +103,7 @@ was not opened or edited).
 - `test/run-onboarding-order-ui.mjs` (new, headless Chrome): in the real bundle, the profile
   sheet does not open before `#homeV2.on`, opens once it is up, refuses a second optional sheet
   in the same session, and opens immediately again with `smd_onb_legacy="1"`.
-- `test/run-profile-setup-ui.mjs` (existing, headless Chrome): all 25 profile-sheet checks pass
+- `test/run-profile-setup-ui.mjs` (existing, headless Chrome): all 24 profile-sheet checks pass
   (picker, keyboard, save paths).
 - Related unit tests pass: `email-auth-flow`, `profile-picker-options`, `institutions-in`,
   `phone-verify-profile`, `onboarding-font-shorthand`.
