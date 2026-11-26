@@ -322,119 +322,20 @@ async function flushMicrotasks() {
 }
 
 describe("ResearchMD /ai-draft PHI override dialog", () => {
-  test("client block opens dialog in #researchMD with categories, disabled send until checkbox, sends redacted copy + phiOverride, never leaks text", async () => {
+  test("legal review F-01: a client-side hit is a hard block (no dialog, no fetch, categories kept)", async () => {
     const sb = createUiSandbox();
-    const secretDate = "March 12";
     const secretPhone = "9876543210";
-    const callerBody = {
+    let rejected = null;
+    await sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
       task: "case_report_draft",
-      input: {
-        caseText: "Admitted on " + secretDate + ", contact " + secretPhone + "."
-      }
-    };
-    const origText = callerBody.input.caseText;
-
-    const reqPromise = sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", callerBody);
+      input: { caseText: "Admitted on March 12, contact " + secretPhone + "." }
+    }).then(function () { rejected = false; }, function (e) { rejected = e; });
     await flushMicrotasks();
-
-    assert.equal(sb.fetchCalls.length, 0, "no fetch before user confirms override");
-    const modal = sb.dom.root.querySelector("#rmdPhiOverrideModal");
-    assert.ok(modal, "modal mounted inside #researchMD");
-    const dialog = modal.querySelector('[role="dialog"]');
-    assert.ok(dialog, "dialog has role=dialog");
-    assert.equal(dialog.getAttribute("aria-modal"), "true");
-    assert.equal(dialog.getAttribute("aria-labelledby"), "rmdPhiOverrideTitle");
-    assert.equal(modal.querySelector("#rmdPhiOverrideTitle").textContent, "Possible patient identifiers");
-
-    // Focus moved into dialog
-    assert.ok(dialog.contains(sb.dom.doc.activeElement), "focus moved inside dialog");
-
-    // Categories shown in plain words; matched text NEVER shown anywhere in modal
-    const modalHtml = modal.innerHTML;
-    assert.match(modalHtml, /<li>Date<\/li>/);
-    assert.equal(modalHtml.indexOf(secretDate), -1, "flagged date must never appear in dialog DOM");
-    assert.equal(modalHtml.indexOf(secretPhone), -1, "redacted phone must never appear in dialog DOM");
-    assert.equal(modalHtml.indexOf("\u2014"), -1, "no em dash in dialog");
-    assert.equal(modalHtml.indexOf("\u2013"), -1, "no en dash in dialog");
-
-    // Checkbox + label
-    const checkbox = modal.querySelector('input');
-    assert.equal(checkbox.getAttribute("type"), "checkbox");
-    const label = modal.querySelector("label");
-    assert.ok(label, "real <label> present");
-    assert.equal(label.getAttribute("for"), checkbox.id);
-    assert.match(label.textContent, /I accept these terms/);
-
-    // Buttons
-    const editBtn = modal.querySelector('[data-rmd-phi-edit="1"]');
-    const sendBtn = modal.querySelector('[data-rmd-phi-send="1"]');
-    assert.equal(editBtn.tagName, "BUTTON");
-    assert.equal(editBtn.textContent, "Edit my text");
-    assert.equal(sendBtn.tagName, "BUTTON");
-    assert.equal(sendBtn.textContent, "I take responsibility, send anyway");
-    assert.equal(sendBtn.disabled, true, "send button disabled until checkbox ticked");
-
-    // Tick checkbox enables send button; unticking disables again
-    checkbox.click();
-    assert.equal(sendBtn.disabled, false);
-    checkbox.click();
-    assert.equal(sendBtn.disabled, true);
-    checkbox.click();
-    assert.equal(sendBtn.disabled, false);
-
-    sendBtn.click();
-    const res = await reqPromise;
-    assert.equal(res.draft.ok, true);
-    assert.equal(sb.dom.root.querySelector("#rmdPhiOverrideModal"), null, "modal closed after send");
-    assert.equal(sb.dom.doc.activeElement, sb.dom.triggerBtn, "focus restored to trigger element");
-
-    assert.equal(sb.fetchCalls.length, 1);
-    const sent = JSON.parse(sb.fetchCalls[0].init.body);
-    assert.deepEqual(sent.phiOverride, { accepted: true, termsVersion: "rmd-phi-override-v0" });
-    assert.equal(sent.input.caseText.indexOf(secretPhone), -1, "sent payload keeps SMD_redactPHI redaction");
-    assert.match(sent.input.caseText, /\[redacted\]/);
-    assert.equal(callerBody.input.caseText, origText, "caller body remains unmutated");
-  });
-
-  test("Edit my text rejects with phi_blocked and sends nothing on client block", async () => {
-    const sb = createUiSandbox();
-    const reqPromise = sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
-      task: "case_report_draft",
-      input: { notes: ["Seen March 12 in clinic"] }
-    });
-    await flushMicrotasks();
-
-    const editBtn = sb.dom.root.querySelector('[data-rmd-phi-edit="1"]');
-    assert.ok(editBtn);
-    editBtn.click();
-
-    await assert.rejects(reqPromise, (err) => {
-      assert.equal(err.code, "phi_blocked");
-      assert.equal(err.status, 0);
-      assert.deepEqual(Array.from(err.categories), ["date"]);
-      return true;
-    });
-    assert.equal(sb.fetchCalls.length, 0);
-    assert.equal(sb.dom.root.querySelector("#rmdPhiOverrideModal"), null);
-  });
-
-  test("Escape key triggers Edit my text and rejects with phi_blocked", async () => {
-    const sb = createUiSandbox();
-    const reqPromise = sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
-      task: "case_report_draft",
-      input: { notes: ["Seen March 12 in clinic"] }
-    });
-    await flushMicrotasks();
-
-    assert.ok(sb.dom.root.querySelector("#rmdPhiOverrideModal"));
-    sb.dom.doc.dispatchEvent({ type: "keydown", key: "Escape", keyCode: 27 });
-
-    await assert.rejects(reqPromise, (err) => {
-      assert.equal(err.code, "phi_blocked");
-      return true;
-    });
-    assert.equal(sb.fetchCalls.length, 0);
-    assert.equal(sb.dom.root.querySelector("#rmdPhiOverrideModal"), null);
+    assert.ok(rejected && rejected.code === "phi_blocked", "rejects with phi_blocked");
+    assert.ok(Array.isArray(rejected.categories) && rejected.categories.length > 0, "categories kept on the error");
+    assert.equal(sb.fetchCalls.length, 0, "nothing sent");
+    assert.equal(sb.dom.root.querySelector("#rmdPhiOverrideModal"), null, "no override dialog");
+    assert.equal(JSON.stringify(rejected.categories).indexOf(secretPhone), -1, "flagged text never in the error");
   });
 
   test("server 422 overridable opens dialog with mapped categories, resends with phiOverride, resolves", async () => {
@@ -646,36 +547,6 @@ describe("ResearchMD /ai-draft PHI override dialog", () => {
       JSON.parse(JSON.stringify(sb.capCalls[1].data.phiOverride)),
       { accepted: true, termsVersion: "rmd-phi-override-v0" }
     );
-  });
-
-  test("client block collects category or type fields from RMDPhi.scan hits", async () => {
-    const sb = createUiSandbox();
-    sb.win.RMDPhi = {
-      scan: () => [
-        { category: "patient_name", match: "HIDDEN_NAME" },
-        { type: "abha", match: "HIDDEN_ABHA" }
-      ]
-    };
-
-    const reqPromise = sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
-      task: "case_report_draft",
-      input: { caseText: "Synthetic note" }
-    });
-    await flushMicrotasks();
-
-    const modal = sb.dom.root.querySelector("#rmdPhiOverrideModal");
-    assert.ok(modal);
-    assert.match(modal.innerHTML, /<li>Name<\/li>/);
-    assert.match(modal.innerHTML, /<li>ABHA health ID or address<\/li>/);
-    assert.equal(modal.innerHTML.indexOf("HIDDEN_NAME"), -1);
-    assert.equal(modal.innerHTML.indexOf("HIDDEN_ABHA"), -1);
-
-    modal.querySelector('[data-rmd-phi-edit="1"]').click();
-    await assert.rejects(reqPromise, (err) => {
-      assert.equal(err.code, "phi_blocked");
-      assert.deepEqual(Array.from(err.categories), ["patient_name", "abha"]);
-      return true;
-    });
   });
 
   test("docs and terms contain required headings, draft marker, and zero em/en dashes", () => {

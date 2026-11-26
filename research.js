@@ -420,10 +420,11 @@
       }
     }
 
+    /* Legal review F-01 (2026-11-27): a client-side hit is a hard block. The
+     * override dialog only opens when the server itself marks a 422 overridable,
+     * which it does only while its RESEARCH_PHI_OVERRIDE switch is on. */
     if (clientBlockedErr) {
-      return openPhiOverrideDialog(clientBlockedErr.categories, clientBlockedErr).then(function () {
-        return dispatchRequest(method, path, withPhiOverride(sendBody), options);
-      });
+      return Promise.reject(clientBlockedErr);
     }
 
     return dispatchRequest(method, path, sendBody, options).catch(function (err) {
