@@ -6,7 +6,9 @@
  * by BOTH test/research-phase3-api.test.mjs and
  * backend/research/tests/test_phi_vectors.py so the two gates cannot drift.
  *
- * scan(text) -> { blocked, hits: [{category, rule, start, end}] }.
+ * scan(text, opts?) -> { blocked, hits: [{category, rule, start, end}] }.
+ * opts.publicSpans marks server-established published bibliographic regions
+ * (see below); with no opts the rules are identical to phi.py.
  * Hits never carry the matched text (categories only in logs/callbacks).
  * No LLM is involved: an LLM judging PHI would itself receive the PHI.
  * Checksum validators gate the id regexes (a 12-digit number failing
@@ -105,6 +107,35 @@ const BIRTH_RE = new RegExp(BIRTH_LABEL, "i");
 const PATIENT_RE = new RegExp(PATIENT_LABEL, "i");
 const ADMISSION_RE = new RegExp(ADMISSION_LABEL, "i");
 
+/* Bibliographic context for server-marked public spans (published paper text).
+ * phi-gate.md Allowed: author names, affiliations, department and hospital
+ * names. A published abstract is full of capitalized institutional/clinical
+ * phrases ("Intensive Care Unit", "Prospective Observational Study") sitting
+ * next to the generic plural "patients" or the methods verb "admitted"; the
+ * loose 40-char window mistakes those for patient names. Inside a public span
+ * a capitalized phrase is a patient name ONLY when it is explicitly ascribed to
+ * a person: a singular patient label or honorific attached to the name, or a
+ * ward/bed/ID label right after it ("Patient Ramesh Kumar", "the patient Priya
+ * Sharma", "Mr. John Smith", "Ramesh Kumar, ward 4 bed no 12"). Hard identifier
+ * rules (mrn/aadhaar/ssn/nhs/phone/email) are never relaxed, in any span. */
+const ASCRIPTION_BEFORE = /(?:\b(?:the\s+)?patient\s*:?\s*|\b(?:Mr\.|Mrs\.|Ms\.)\s*)$/i;
+const ASCRIPTION_LEADING = /^(?:patient|Mr\.|Mrs\.|Ms\.)\b\s*:?\s*/i;
+const ASCRIPTION_AFTER = /^\s*,?\s*(?:ward|bed\s+no|IP\s+no|OP\s+no)\b/i;
+
+function inPublicSpan(start, end, publicSpans) {
+  for (let i = 0; i < publicSpans.length; i++) {
+    const sp = publicSpans[i];
+    if (start >= sp.start && end <= sp.end) return true;
+  }
+  return false;
+}
+function patientAscribed(text, start, end) {
+  const pre = text.slice(Math.max(0, start - 24), start);
+  const post = text.slice(end, end + 24);
+  const body = text.slice(start, end);
+  return ASCRIPTION_BEFORE.test(pre) || ASCRIPTION_LEADING.test(body) || ASCRIPTION_AFTER.test(post);
+}
+
 /* (category, rule, regex, validator) in the same order as phi.py _RULES. */
 const RULES = [
   ["mrn", "labelled_id",
@@ -136,8 +167,15 @@ const RULES = [
       PATIENT_RE.test(sameSentence(text, m.index, m.index + m[0].length))],
 ];
 
-export function scan(text) {
+/* opts.publicSpans: [{start, end}] regions the SERVER has established are
+ * published bibliographic text (e.g. a paper-card prompt assembled from a
+ * public connector cache). Only the context-dependent patient_name rule is
+ * relaxed there, and only for phrases not explicitly ascribed to a patient.
+ * With no publicSpans the behaviour is identical to phi.py and the shared
+ * vectors; callers must never pass client/worker-supplied spans. */
+export function scan(text, opts = {}) {
   const s = String(text == null ? "" : text);
+  const publicSpans = Array.isArray(opts.publicSpans) ? opts.publicSpans : [];
   const hits = [];
   for (const [category, rule, pattern, validator] of RULES) {
     pattern.lastIndex = 0;
@@ -145,7 +183,10 @@ export function scan(text) {
     while ((m = pattern.exec(s)) !== null) {
       if (m[0].length === 0) { pattern.lastIndex++; continue; }
       if (validator && !validator(m, s)) continue;
-      hits.push({ category, rule, start: m.index, end: m.index + m[0].length });
+      const start = m.index, end = m.index + m[0].length;
+      if (category === "patient_name" && publicSpans.length &&
+        inPublicSpan(start, end, publicSpans) && !patientAscribed(s, start, end)) continue;
+      hits.push({ category, rule, start, end });
     }
   }
   hits.sort((a, b) => a.start - b.start || (a.category < b.category ? -1 : a.category > b.category ? 1 : 0));

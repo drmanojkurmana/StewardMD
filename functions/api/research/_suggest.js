@@ -41,7 +41,17 @@ export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, 
   /* 1. PHI gate FIRST, on the exact text about to leave (system included). */
   const finalSystem = RESEARCH_FRAMING + (system ? "\n\n" + system : "");
   const assembled = finalSystem + "\n\n" + prompt;
-  const report = scan(assembled);
+  /* The paper-card explain prompt is assembled server-side from a cached public
+   * connector card (title + abstract); the client sends only a validated
+   * pmid/doi, so this prompt is published bibliographic text, not patient-entered
+   * text. Mark it public so the gate applies the bibliographic patient-name
+   * context rule (phi-gate.md Allowed) rather than flagging capitalized
+   * institutional phrases. Hard identifiers and explicit "Patient: <name>"
+   * ascriptions still block. User-entered prompts (extraction, screening,
+   * drafts) are never marked and are scanned in full. */
+  const publicPrompt = opts.publicPrompt === true || purpose === "paper_card_explain";
+  const publicSpans = publicPrompt ? [{ start: finalSystem.length + 2, end: assembled.length }] : [];
+  const report = scan(assembled, { publicSpans });
   if (report.blocked) {
     const categories = phiCategories(report.hits);
     await audit(db, projectId, uid, "ai_phi_blocked", refId, { categories, purpose });
