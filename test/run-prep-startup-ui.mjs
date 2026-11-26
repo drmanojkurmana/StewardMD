@@ -76,6 +76,26 @@ try {
   await until(`var r=document.getElementById("smdPrep"); return !!(r && r.querySelector(".pn-body"));`, 6000);
   await ev(`PREP.back(); return 1;`);
   ok(await until(`return !document.getElementById("smdPrepStartup") && !!document.querySelector("#smdPrep .pn-body");`, 3000), "back skips the clip onto the home");
+  await ev(`PREP.close && PREP.close(); return 1;`);
+
+  // Throttled intro: open PrepNucleus twice in a row without ?prepstartup=1; second open shows no clip.
+  await call("Page.navigate", { url: BASE + "?prep=1&tour=0" });
+  await until(`return !!(window.PREP && window.PREP_STARTUP && window.PREP_LOADER);`, 30000);
+  await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.removeItem("smd_prep_startup_last");}catch(e){} return 1;`);
+  await ev(`PREP.open(); return 1;`);
+  ok(await until(`return !!document.querySelector("#smdPrepStartup video");`, 3000), "first open of day plays startup clip");
+  await until(`var r=document.getElementById("smdPrep"); return !!(r && r.querySelector(".pn-body"));`, 6000);
+  await ev(`PREP.back(); return 1;`);
+  await until(`return !document.getElementById("smdPrepStartup");`, 3000);
+  await ev(`PREP.close && PREP.close(); return 1;`);
+  await sleep(200);
+  // Second open in a row (under 3 hours, same day): no clip plays.
+  await ev(`PREP.open(); return 1;`);
+  await sleep(300);
+  const secondClip = await ev(`return !!document.getElementById("smdPrepStartup");`);
+  ok(!secondClip, "second open in a row shows no clip");
+  ok(await until(`var r=document.getElementById("smdPrep"); return !!(r && r.querySelector(".pn-body"));`, 4000), "second open shows home directly");
+  await ev(`PREP.close && PREP.close(); return 1;`);
 } finally {
   try { chrome.kill(); } catch {} try { serve.kill(); } catch {}
   console.log(fails ? `${fails} FAILED` : "ALL PASS"); process.exitCode = fails ? 1 : 0;
