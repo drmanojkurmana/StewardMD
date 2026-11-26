@@ -21,13 +21,20 @@
     v: { src: "/prep/startup/prep-startup-v.mp4", start: "/prep/startup/prep-startup-v-start.webp", end: "/prep/startup/prep-startup-v-end.webp", ratio: 9 / 16, dur: 6 },
     h: { src: "/prep/startup/prep-startup-h.mp4", start: "/prep/startup/prep-startup-h-start.webp", end: "/prep/startup/prep-startup-h-end.webp", ratio: 4 / 3, dur: 6 }
   };
-  var V = "4";
+  var V = "5";
+
+  var KEY_LAST = "smd_prep_startup_last";
+  var THREE_HOURS_MS = 3 * 60 * 60 * 1000;
 
   function qParam() {
     try {
       var m = /[?&]prepstartup=([^&]+)/.exec(G.location && G.location.search ? G.location.search : "");
       return m ? m[1] : null;
     } catch (e) { return null; }
+  }
+  function isForced() {
+    var q = qParam();
+    return q === "1" || q === "on" || q === "true";
   }
   function enabled() {
     if (G.SMD_PREP_STARTUP === false) return false;
@@ -42,7 +49,37 @@
     if (!opts || typeof opts !== "object") return false;
     return !!(opts.id || opts.lesson || opts.subject || opts.module || opts.query || opts.mode || opts.play || opts.social);
   }
-  function willPlay(opts) { return enabled() && !isDeepLink(opts); }
+  function due(lastMs, nowMs) {
+    if (!lastMs) return true;
+    var last = typeof lastMs === "number" ? lastMs : Number(lastMs);
+    if (!last || isNaN(last)) return true;
+    var now = typeof nowMs === "number" ? nowMs : Date.now();
+    var dLast = new Date(last);
+    var dNow = new Date(now);
+    if (dLast.toDateString() !== dNow.toDateString()) return true;
+    return (now - last) >= THREE_HOURS_MS;
+  }
+  function getLast() {
+    try {
+      if (!G.localStorage) return 0;
+      var raw = G.localStorage.getItem(KEY_LAST);
+      var n = Number(raw);
+      return isFinite(n) && n > 0 ? n : 0;
+    } catch (e) {
+      return 0;
+    }
+  }
+  function noteOpen(nowMs) {
+    var t = typeof nowMs === "number" ? nowMs : Date.now();
+    try {
+      if (G.localStorage) G.localStorage.setItem(KEY_LAST, String(t));
+    } catch (e) {}
+  }
+  function willPlay(opts) {
+    if (!enabled() || isDeepLink(opts)) return false;
+    if (isForced()) return true;
+    return due(getLast(), Date.now());
+  }
   function reduced() {
     try { return !!(G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) { return false; }
   }
@@ -208,6 +245,8 @@
     enabled: enabled,
     orientKey: orientKey,
     clips: CLIPS,
+    due: due,
+    noteOpen: noteOpen,
     _active: function () { return !!(active && !active.done); }
   };
 })(typeof window !== "undefined" ? window : this);
