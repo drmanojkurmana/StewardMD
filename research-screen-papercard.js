@@ -51,14 +51,15 @@
       ".rmd-calm-spinner { animation: rmdSpin 1s linear infinite; flex-shrink: 0; }",
       "@keyframes rmdSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }",
       ".rmd-papercard { max-width: 880px; margin: 12px auto 0; background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 12px; padding: 18px 20px; box-sizing: border-box; color: var(--rmd-ink); font-family: var(--rmd-f); text-align: left; }",
+      ".rmd-papercard button:focus-visible, .rmd-papercard input:focus-visible { outline: 2px solid var(--rmd-acc); outline-offset: 2px; }",
       ".rmd-papercard-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }",
       ".rmd-papercard-title { margin: 0; font: 700 17px/1.35 var(--rmd-f); color: var(--rmd-ink); word-break: break-word; }",
-      ".rmd-papercard-close { border: none; background: transparent; color: var(--rmd-mut); padding: 6px; cursor: pointer; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; }",
+      ".rmd-papercard-close { border: none; background: transparent; color: var(--rmd-mut); padding: 6px; cursor: pointer; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; }",
       ".rmd-papercard-close:active { background: var(--rmd-bg); }",
       ".rmd-papercard-meta { font-size: 13px; color: var(--rmd-mut); margin-bottom: 12px; line-height: 1.4; }",
       ".rmd-papercard-badges { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 16px; }",
       ".rmd-badge-design { background: var(--rmd-acc-soft); color: var(--rmd-acc-dark); font-weight: 600; font-size: 11.5px; padding: 3px 9px; border-radius: 999px; }",
-      ".rmd-badge-sample { background: var(--rmd-fill, rgba(0,0,0,0.05)); color: var(--rmd-ink); font-size: 11.5px; padding: 3px 9px; border-radius: 999px; }",
+      ".rmd-badge-sample { background: var(--rmd-fill, rgba(0,0,0,0.05)); color: var(--rmd-ink); font-size: 11.5px; padding: 3px 9px; border-radius: 999px; font-variant-numeric: tabular-nums; }",
       ".rmd-badge-free { background: rgba(66, 205, 181, 0.15); color: #086b5c; font-weight: 600; font-size: 11.5px; padding: 3px 9px; border-radius: 999px; }",
       ".rmd-token-chip { font-size: 11.5px; padding: 3px 9px; border-radius: 999px; background: var(--rmd-fill, rgba(0,0,0,0.05)); color: var(--rmd-mut); }",
       ".rmd-token-chip-instant { background: rgba(66, 205, 181, 0.12); color: #086b5c; font-weight: 600; }",
@@ -68,28 +69,45 @@
       "}",
       ".rmd-papercard-col { display: flex; flex-direction: column; gap: 10px; min-width: 0; }",
       ".rmd-papercard-subheading { margin: 0 0 6px 0; font: 700 13px var(--rmd-f); text-transform: uppercase; letter-spacing: 0.04em; color: var(--rmd-mut); }",
-      ".rmd-papercard-finding { padding: 10px 12px; background: var(--rmd-bg); border: 1px solid var(--rmd-line); border-radius: 8px; margin-bottom: 8px; }",
-      ".rmd-finding-stat { font: 600 13.5px var(--rmd-f); color: var(--rmd-ink); line-height: 1.45; word-break: break-word; }",
-      ".rmd-finding-p { font-size: 12.5px; color: var(--rmd-mut); margin-top: 4px; }",
-      ".rmd-finding-quote { font-size: 12px; color: var(--rmd-mut); font-style: italic; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--rmd-line); line-height: 1.45; word-break: break-word; }",
-      ".rmd-find-num { background: var(--rmd-acc-soft, rgba(27,65,191,0.12)); color: var(--rmd-acc-dark, #122a7f); border-radius: 3px; padding: 0 3px; font-style: normal; font-weight: 600; }",
+      ".rmd-papercard-findings-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }",
+      ".rmd-papercard-finding { padding: 10px 12px; background: var(--rmd-bg); border: 1px solid var(--rmd-line); border-radius: 8px; }",
+      ".rmd-finding-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap; }",
+      ".rmd-finding-stat { flex: 1 1 160px; min-width: 0; font: 600 13.5px var(--rmd-f); color: var(--rmd-ink); line-height: 1.45; word-break: break-word; font-variant-numeric: tabular-nums; }",
+      ".rmd-finding-source { flex-shrink: 0; font: 600 11px var(--rmd-f); padding: 2px 8px; border-radius: 999px; background: var(--rmd-fill, rgba(17,28,68,0.06)); color: var(--rmd-mut); }",
+      ".rmd-finding-source-full { background: rgba(66, 205, 181, 0.15); color: #086b5c; }",
+      ".rmd-finding-p { font-size: 12.5px; color: var(--rmd-mut); margin-top: 4px; font-variant-numeric: tabular-nums; }",
+      ".rmd-finding-quote { font-size: 12px; color: var(--rmd-mut); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--rmd-line); line-height: 1.45; word-break: break-word; }",
+      ".rmd-find-num { background: var(--rmd-acc-soft, rgba(27,65,191,0.12)); color: var(--rmd-acc-dark, #122a7f); border-radius: 3px; padding: 0 3px; font-style: normal; font-weight: 600; font-variant-numeric: tabular-nums; }",
+      "body.dark #researchMD .rmd-badge-free, body.v3-dark #researchMD .rmd-badge-free, body.dark #researchMD .rmd-token-chip-instant, body.v3-dark #researchMD .rmd-token-chip-instant, body.dark #researchMD .rmd-finding-source-full, body.v3-dark #researchMD .rmd-finding-source-full { color: #42cdb5; }",
+      "body.dark #researchMD .rmd-badge-design, body.v3-dark #researchMD .rmd-badge-design, body.dark #researchMD .rmd-find-num, body.v3-dark #researchMD .rmd-find-num { color: var(--rmd-acc); }",
       ".rmd-papercard-sections { display: flex; flex-direction: column; gap: 8px; }",
       ".rmd-papercard-section-item { padding: 8px 10px; background: var(--rmd-bg); border-radius: 8px; }",
       ".rmd-section-label { display: block; font: 700 12.5px var(--rmd-f); color: var(--rmd-ink); margin-bottom: 2px; }",
       ".rmd-collapsed-text { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; font-size: 13px; line-height: 1.45; color: var(--rmd-ink); }",
       ".rmd-expanded-text { display: block; font-size: 13px; line-height: 1.45; color: var(--rmd-ink); }",
-      ".rmd-more-btn { background: none; border: none; padding: 4px 0; color: var(--rmd-acc); font: 600 12px var(--rmd-f); cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; }",
+      ".rmd-more-btn { background: none; border: none; padding: 4px 0; color: var(--rmd-acc); font: 600 12px var(--rmd-f); cursor: pointer; min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; }",
       ".rmd-papercard-conclusion { padding: 12px 14px; background: var(--rmd-bg); border: 1px solid var(--rmd-line); border-radius: 8px; margin: 12px 0 16px; }",
       ".rmd-papercard-conclusion-text { margin: 4px 0 0 0; font-size: 13.5px; line-height: 1.5; color: var(--rmd-ink); }",
       ".rmd-papercard-explain-box { margin: 14px 0; padding: 12px 14px; background: var(--rmd-bg); border: 1px dashed var(--rmd-line); border-radius: 8px; }",
+      ".rmd-papercard-explain-box .rmd-btn { min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; gap: 6px; }",
       ".rmd-ai-pico-box { display: flex; flex-direction: column; gap: 6px; }",
       ".rmd-pico-line { font-size: 13px; line-height: 1.45; color: var(--rmd-ink); }",
       ".rmd-pico-line strong { color: var(--rmd-ink); font-weight: 700; }",
       ".rmd-papercard-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding-top: 14px; border-top: 1px solid var(--rmd-line); margin-top: 14px; }",
-      ".rmd-papercard-actions button { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; cursor: pointer; }",
+      ".rmd-papercard-actions button { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-weight: 600; cursor: pointer; transition: transform 150ms cubic-bezier(0.23, 1, 0.32, 1), background-color 150ms ease; }",
       ".rmd-papercard-actions button:active { transform: scale(0.98); }",
+      ".rmd-papercard-actions button:disabled { opacity: 0.72; cursor: default; transform: none; }",
       ".rmd-papercard-outcome-prompt { margin-top: 12px; padding: 12px; background: var(--rmd-bg); border: 1px solid var(--rmd-line); border-radius: 8px; display: flex; flex-direction: column; gap: 6px; }",
-      ".rmd-papercard-muted { font-size: 13px; color: var(--rmd-mut); margin: 0; font-style: italic; }"
+      ".rmd-papercard-outcome-prompt .rmd-btn, .rmd-papercard-add-status .rmd-btn { min-height: 44px; }",
+      ".rmd-papercard-add-status { margin-top: 12px; }",
+      ".rmd-papercard-add-status:empty { display: none; margin-top: 0; }",
+      ".rmd-papercard-outcome-err { font-size: 12.5px; color: var(--rmd-bad); margin: 2px 0 0; }",
+      ".rmd-papercard-muted { font-size: 13px; color: var(--rmd-mut); margin: 0; }",
+      "@media (prefers-reduced-motion: reduce) {",
+      "  .rmd-calm-spinner { animation-duration: 6s; }",
+      "  .rmd-papercard-actions button { transition: none; }",
+      "  .rmd-papercard-actions button:active { transform: none; }",
+      "}"
     ].join("\n");
     D.head.appendChild(s);
   }
@@ -112,6 +130,37 @@
     return parts.join(". ");
   }
 
+  function formatFindingP(pRaw) {
+    if (pRaw == null || pRaw === "") return "";
+    var EX = G.SMD_RESEARCH_EXPLAIN;
+    if (typeof pRaw === "number" && isFinite(pRaw)) {
+      if (EX && EX.pValue) {
+        try { return EX.pValue(pRaw); } catch (e) {}
+      }
+      return "p = " + pRaw;
+    }
+    var s = String(pRaw).trim();
+    var m = s.match(/^([<=>\u2264\u2265]?)\s*(0?\.\d+|\d+(?:\.\d+)?)$/);
+    if (!m) return "p " + s;
+    var op = m[1] || "=";
+    var val = Number(m[2]);
+    if (!isFinite(val)) return "p " + s;
+    if (EX && EX.pValue) {
+      if (op === "<" && val <= 0.001) {
+        try { return EX.pValue(0.0005); } catch (e1) {}
+      }
+      if (op === "=") {
+        try { return EX.pValue(val); } catch (e2) {}
+      }
+    }
+    if (op === "<") {
+      if (val <= 0.01) return "p < " + m[2] + " (unlikely to be chance)";
+      if (val <= 0.05) return "p < " + m[2] + " (probably not chance, but only just)";
+      return "p < " + m[2];
+    }
+    return "p " + op + " " + m[2];
+  }
+
   function buildPlainTextSummary(card) {
     var lines = [];
     var cit = formatCitationLine(card);
@@ -124,6 +173,7 @@
       lines.push("Key results:");
       for (var i = 0; i < card.findings.length; i++) {
         var f = card.findings[i];
+        var srcTag = f.source ? (" [" + f.source + "]") : "";
         if (f.format === "estimate") {
           var stat = "";
           if (G.SMD_RESEARCH_EXPLAIN && G.SMD_RESEARCH_EXPLAIN.effect) {
@@ -138,7 +188,7 @@
             } catch (e) {}
           }
           if (!stat) stat = f.measure + " " + f.estimate + " (95% CI " + f.ciLower + " to " + f.ciUpper + ")";
-          lines.push("- " + stat);
+          lines.push("- " + stat + srcTag);
         } else if (f.format === "counts") {
           var m = f.measure || "RR";
           var mName = (m === "RR") ? "Risk ratio (RR)" : (m === "OR" ? "Odds ratio (OR)" : m);
@@ -162,7 +212,10 @@
               }
             } catch (err) {}
           }
-          lines.push("- " + cLine);
+          lines.push("- " + cLine + srcTag);
+        } else if (f.format === "metric") {
+          var mLine = (f.label ? (f.label + ": ") : "") + (f.value || "");
+          lines.push("- " + mLine + srcTag);
         }
       }
     }
@@ -238,6 +291,7 @@
     var pid = opts.pid || (project ? (project.serverId || project.id) : "");
     var role = opts.role || (project && project.role) || "owner";
     var isViewer = (role === "viewer");
+    var projectTitle = (project && project.title) ? project.title : "";
 
     var authors = Array.isArray(card.authors) ? card.authors : [];
     var authorStr = "";
@@ -253,13 +307,13 @@
     if (card.year) metaItems.push('(' + esc(card.year) + ')');
 
     var h = [];
-    h.push('<div class="rmd-papercard" data-rmd-papercard="true">');
+    h.push('<article class="rmd-papercard" data-rmd-papercard="true">');
 
     // Header: title + close
     h.push('  <div class="rmd-papercard-header">');
     h.push('    <h3 class="rmd-papercard-title">' + esc(card.title || "Untitled paper") + '</h3>');
     h.push('    <button type="button" class="rmd-papercard-close" data-rmd="close-papercard" aria-label="Close study card" title="Close">');
-    h.push('      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>');
+    h.push('      <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>');
     h.push('    </button>');
     h.push('  </div>');
 
@@ -295,10 +349,16 @@
     h.push('    <div class="rmd-papercard-col rmd-papercard-results">');
     h.push('      <h4 class="rmd-papercard-subheading">Key results</h4>');
     var findings = Array.isArray(card.findings) ? card.findings : [];
+    var hasMetaFindings = false;
     if (findings.length > 0) {
+      h.push('      <ul class="rmd-papercard-findings-list" role="list">');
       for (var fIdx = 0; fIdx < findings.length; fIdx++) {
         var finding = findings[fIdx];
-        h.push('      <div class="rmd-papercard-finding">');
+        if (finding.format === "estimate" || finding.format === "counts") hasMetaFindings = true;
+        var srcLabel = finding.source || "Abstract";
+        var srcCls = srcLabel === "Full text" ? "rmd-finding-source rmd-finding-source-full" : "rmd-finding-source";
+        h.push('      <li class="rmd-papercard-finding">');
+        h.push('        <div class="rmd-finding-head">');
         if (finding.format === "estimate") {
           var effText = "";
           if (G.SMD_RESEARCH_EXPLAIN && G.SMD_RESEARCH_EXPLAIN.effect) {
@@ -307,8 +367,7 @@
                 measure: finding.measure,
                 estimate: finding.estimate,
                 ciLower: finding.ciLower,
-                ciUpper: finding.ciUpper,
-                p: finding.p
+                ciUpper: finding.ciUpper
               });
             } catch (e) {
               effText = finding.measure + " " + finding.estimate + " (95% CI " + finding.ciLower + " to " + finding.ciUpper + ")";
@@ -316,13 +375,7 @@
           } else {
             effText = finding.measure + " " + finding.estimate + " (95% CI " + finding.ciLower + " to " + finding.ciUpper + ")";
           }
-          h.push('        <div class="rmd-finding-stat">' + esc(effText) + '</div>');
-          if (finding.p != null && G.SMD_RESEARCH_EXPLAIN && G.SMD_RESEARCH_EXPLAIN.pValue) {
-            try {
-              var pValStr = G.SMD_RESEARCH_EXPLAIN.pValue(finding.p);
-              h.push('        <div class="rmd-finding-p">' + esc(pValStr) + '</div>');
-            } catch (pe) {}
-          }
+          h.push('          <div class="rmd-finding-stat">' + esc(effText) + '</div>');
         } else if (finding.format === "counts") {
           var ms = finding.measure || "RR";
           var mLab = (ms === "RR") ? "Risk ratio (RR)" : (ms === "OR" ? "Odds ratio (OR)" : ms);
@@ -346,19 +399,24 @@
               }
             } catch (err) {}
           }
-          h.push('        <div class="rmd-finding-stat">' + esc(countsText) + (calcEff ? ' &middot; ' + esc(calcEff) : '') + '</div>');
-          if (finding.p != null && G.SMD_RESEARCH_EXPLAIN && G.SMD_RESEARCH_EXPLAIN.pValue) {
-            try {
-              var pValCount = G.SMD_RESEARCH_EXPLAIN.pValue(finding.p);
-              h.push('        <div class="rmd-finding-p">' + esc(pValCount) + '</div>');
-            } catch (pec) {}
-          }
+          h.push('          <div class="rmd-finding-stat">' + esc(countsText) + (calcEff ? ' &middot; ' + esc(calcEff) : '') + '</div>');
+        } else if (finding.format === "metric") {
+          var metricText = (finding.label ? (finding.label + ": ") : "") + (finding.value || "");
+          h.push('          <div class="rmd-finding-stat">' + esc(metricText) + '</div>');
+        }
+        h.push('          <span class="' + srcCls + '">' + esc(srcLabel) + '</span>');
+        h.push('        </div>');
+        if (finding.p != null && finding.p !== "" && finding.kind !== "p_value") {
+          var pValStr = formatFindingP(finding.p);
+          if (pValStr) h.push('        <div class="rmd-finding-p">' + esc(pValStr) + '</div>');
         }
         if (finding.quote) {
-          h.push('        <div class="rmd-finding-quote smd-books-keep">' + highlightNumbers(finding.quote, [finding.estimate, finding.ciLower, finding.ciUpper, finding.events1, finding.total1, finding.events2, finding.total2]) + '</div>');
+          var hlNums = Array.isArray(finding.numbers) ? finding.numbers : [finding.estimate, finding.ciLower, finding.ciUpper, finding.events1, finding.total1, finding.events2, finding.total2];
+          h.push('        <div class="rmd-finding-quote smd-books-keep">' + highlightNumbers(finding.quote, hlNums) + '</div>');
         }
-        h.push('      </div>');
+        h.push('      </li>');
       }
+      h.push('      </ul>');
     } else {
       h.push('      <p class="rmd-papercard-muted">No key quantitative findings extracted directly from abstract.</p>');
     }
@@ -395,54 +453,56 @@
     }
 
     // Explain with MaiK affordance
-    var needsExplain = (!card.structured || !findings.length);
-    if (needsExplain && !isViewer) {
+    var needsExplain = (!card.structured || !hasMetaFindings);
+    if ((needsExplain && !isViewer) || card.ai) {
       h.push('  <div class="rmd-papercard-explain-box" id="rmdPaperCardExplainBox">');
       if (card.ai) {
         h.push(renderPicoHtml(card.ai));
       } else {
         h.push('    <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="explain-study">');
-        h.push('      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>');
+        h.push('      <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>');
         h.push('      <span>Explain with MaiK (about 1 MaiK token)</span>');
         h.push('    </button>');
       }
       h.push('  </div>');
     }
 
-    h.push('      <div class="rmd-papercard-outcome-prompt" style="display:none;" id="rmdCardOutcomePrompt">');
-    h.push('        <label class="rmd-paste-title-lbl" for="rmd_card_outcome_field">What result are you combining?</label>');
-    h.push('        <input type="text" id="rmd_card_outcome_field" class="rmd-paste-input" placeholder="e.g. confirmed tuberculosis at any follow-up" />');
-    h.push('        <div class="rmd-paste-hint">The outcome you want to pool across studies. We use it to find the right numbers.</div>');
-    h.push('        <div style="display:flex;gap:8px;margin-top:6px;">');
-    h.push('          <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="confirm-outcome-add">Confirm and add</button>');
-    h.push('          <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="cancel-outcome-add">Cancel</button>');
-    h.push('        </div>');
-    h.push('      </div>');
+    h.push('  <div class="rmd-papercard-outcome-prompt" style="display:none;" id="rmdCardOutcomePrompt">');
+    h.push('    <label class="rmd-paste-title-lbl" for="rmd_card_outcome_field">What result are you combining?</label>');
+    h.push('    <input type="text" id="rmd_card_outcome_field" class="rmd-paste-input" placeholder="e.g. confirmed tuberculosis at any follow-up" />');
+    h.push('    <div class="rmd-paste-hint">The outcome you want to pool across studies. We use it to find the right numbers.</div>');
+    h.push('    <div class="rmd-papercard-outcome-err" id="rmdCardOutcomeErr" style="display:none;" role="alert"></div>');
+    h.push('    <div style="display:flex;gap:8px;margin-top:6px;">');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="confirm-outcome-add">Confirm and add</button>');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="cancel-outcome-add">Cancel</button>');
+    h.push('    </div>');
+    h.push('  </div>');
+    h.push('  <div class="rmd-papercard-add-status" id="rmdCardAddStatus" aria-live="polite"></div>');
 
     // Buttons
     h.push('  <div class="rmd-papercard-actions">');
     if (card._added) {
       h.push('    <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="card-add-study" disabled="disabled">');
-      h.push('      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>');
+      h.push('      <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>');
       h.push('      <span>Added to studies</span>');
       h.push('    </button>');
     } else {
       h.push('    <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="card-add-study">');
-      h.push('      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>');
+      h.push('      <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>');
       h.push('      <span>Add to my studies</span>');
       h.push('    </button>');
     }
     h.push('    <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="card-open-paper">');
-    h.push('      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
+    h.push('      <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>');
     h.push('      <span>Open paper</span>');
     h.push('    </button>');
     h.push('    <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="card-copy-summary">');
-    h.push('      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>');
+    h.push('      <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>');
     h.push('      <span>Copy summary</span>');
     h.push('    </button>');
     h.push('  </div>');
 
-    h.push('</div>'); // .rmd-papercard
+    h.push('</article>'); // .rmd-papercard
 
     container.innerHTML = h.join("\n");
 
@@ -493,113 +553,230 @@
     if (copyBtn) {
       copyBtn.onclick = function () {
         var summaryText = buildPlainTextSummary(card);
-        copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>Copied</span>';
+        copyBtn.innerHTML = '<svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>Copied</span>';
         copyTextToClipboard(summaryText, function () {});
         setTimeout(function () {
-          copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> <span>Copy summary</span>';
+          copyBtn.innerHTML = '<svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> <span>Copy summary</span>';
         }, 2000);
       };
     }
 
     // Explain with MaiK
-    var explainBtn = cardEl.querySelector('[data-rmd="explain-study"]');
-    if (explainBtn) {
-      explainBtn.onclick = function () {
-        var explainBox = cardEl.querySelector("#rmdPaperCardExplainBox");
-        if (!explainBox) return;
-        explainBox.innerHTML = '<div class="rmd-papercard-calm-loading" role="status"><svg class="rmd-calm-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg> <span>Explaining with MaiK</span></div>';
+    var explainInFlight = false;
+    function runExplain() {
+      var explainBox = cardEl.querySelector("#rmdPaperCardExplainBox");
+      if (!explainBox || explainInFlight) return;
+      explainInFlight = true;
+      explainBox.innerHTML = '<div class="rmd-papercard-calm-loading" role="status"><svg aria-hidden="true" focusable="false" class="rmd-calm-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg> <span>Explaining with MaiK</span></div>';
 
-        var body = {};
-        if (card.pmid) body.pmid = card.pmid;
-        if (card.doi) body.doi = card.doi;
+      var body = {};
+      if (card.pmid) body.pmid = card.pmid;
+      if (card.doi) body.doi = card.doi;
+      var explainUrl = pid ? ("/v1/projects/" + encodeURIComponent(pid) + "/paper-card/explain") : "/v1/paper-card/explain";
 
-        var explainUrl = pid ? ("/v1/projects/" + encodeURIComponent(pid) + "/paper-card/explain") : "/v1/paper-card/explain";
+      var settled = false;
+      var safetyTimer = setTimeout(function () {
+        if (settled) return;
+        settled = true;
+        explainInFlight = false;
+        explainBox.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><span>MaiK is taking longer than usual. Try again.</span><button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="explain-study">Try again</button></div>';
+        bindExplainBtn();
+      }, 95000);
+
+      try {
+        if (!SMD.api || typeof SMD.api.request !== "function") {
+          throw new Error("Research service is not ready. Try again.");
+        }
         SMD.api.request("POST", explainUrl, body)
           .then(function (data) {
+            if (settled) return;
+            settled = true;
+            clearTimeout(safetyTimer);
+            explainInFlight = false;
             var ai = (data && data.card && data.card.ai) || (data && data.ai);
+            if (!ai) {
+              explainBox.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><span>MaiK did not return a summary. Try again.</span><button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="explain-study">Try again</button></div>';
+              bindExplainBtn();
+              return;
+            }
             card.ai = ai;
+            currentCard = card;
             explainBox.innerHTML = renderPicoHtml(ai);
           })
           .catch(function (err) {
+            if (settled) return;
+            settled = true;
+            clearTimeout(safetyTimer);
+            explainInFlight = false;
             if (err && (err.status === 402 || err.code === "insufficient_credits")) {
               explainBox.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><strong>You need more MaiK tokens for this step.</strong><button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-action="credits">Add tokens</button></div>';
             } else if (err && (err.status === 400 || err.code === "not_needed")) {
               explainBox.innerHTML = '<div class="rmd-banner rmd-banner-warn" role="status"><span>' + esc(err.message || "An explanation is not needed for this study.") + '</span></div>';
             } else {
-              var f = (SMD.p2 && SMD.p2.friendlyError) ? SMD.p2.friendlyError(err) : { message: err.message || "Explanation failed." };
-              explainBox.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><span>' + esc(f.message) + '</span></div>';
+              var f = (SMD.p2 && SMD.p2.friendlyError) ? SMD.p2.friendlyError(err) : { message: (err && err.message) || "Explanation failed." };
+              explainBox.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><span>' + esc(f.message) + '</span><button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="explain-study">Try again</button></div>';
+              bindExplainBtn();
             }
           });
-      };
+      } catch (syncErr) {
+        if (!settled) {
+          settled = true;
+          clearTimeout(safetyTimer);
+          explainInFlight = false;
+          explainBox.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><span>' + esc((syncErr && syncErr.message) || "Explanation failed.") + '</span><button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="explain-study">Try again</button></div>';
+          bindExplainBtn();
+        }
+      }
     }
+    function bindExplainBtn() {
+      var btn = cardEl.querySelector('[data-rmd="explain-study"]');
+      if (btn) btn.onclick = runExplain;
+    }
+    bindExplainBtn();
 
     // Add to my studies
     var addBtn = cardEl.querySelector('[data-rmd="card-add-study"]');
     var outcomePrompt = cardEl.querySelector("#rmdCardOutcomePrompt");
     var outcomeField = cardEl.querySelector("#rmd_card_outcome_field");
+    var outcomeErr = cardEl.querySelector("#rmdCardOutcomeErr");
+    var addStatus = cardEl.querySelector("#rmdCardAddStatus");
     var confirmAddBtn = cardEl.querySelector('[data-rmd="confirm-outcome-add"]');
     var cancelAddBtn = cardEl.querySelector('[data-rmd="cancel-outcome-add"]');
+    var addInFlight = false;
+
+    function restoreAddBtn() {
+      if (!addBtn) return;
+      addBtn.removeAttribute("disabled");
+      addBtn.innerHTML = '<svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> <span>Add to my studies</span>';
+    }
+
+    function showAddBanner(html) {
+      if (addStatus) addStatus.innerHTML = html || "";
+    }
 
     function markAdded(res) {
       card._added = true;
-      addBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>Added to studies</span>';
-      addBtn.setAttribute("disabled", "disabled");
+      if (addBtn) {
+        addBtn.innerHTML = '<svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>Added to studies</span>';
+        addBtn.setAttribute("disabled", "disabled");
+      }
       if (outcomePrompt) outcomePrompt.style.display = "none";
-      if (opts.onAdded) opts.onAdded(res);
+      var dest = projectTitle ? ("Added to " + projectTitle) : "Added to studies";
+      showAddBanner('<div class="rmd-banner rmd-banner-info" role="status"><span>' + esc(dest) + '</span></div>');
+      if (opts.onAdded) {
+        try { opts.onAdded(res); } catch (cbErr) {}
+      }
+    }
+
+    function showAddError(err, fallbackMsg) {
+      restoreAddBtn();
+      if (err && (err.status === 402 || err.code === "insufficient_credits")) {
+        showAddBanner('<div class="rmd-banner rmd-banner-error" role="alert"><strong>You need more MaiK tokens for this step.</strong><button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-action="credits">Add tokens</button></div>');
+        return;
+      }
+      var f = (SMD.p2 && SMD.p2.friendlyError && err && (err.code || err.status))
+        ? SMD.p2.friendlyError(err)
+        : { message: (err && err.message) || fallbackMsg || "Could not add study." };
+      showAddBanner('<div class="rmd-banner rmd-banner-error" role="alert"><span>' + esc(f.message) + '</span></div>');
     }
 
     function performAutoAdd(outcomeVal) {
-      if (!addBtn) return;
+      if (!addBtn || addInFlight || card._added) return;
+      showAddBanner("");
+      if (outcomeErr) { outcomeErr.style.display = "none"; outcomeErr.textContent = ""; }
+      if (outcomePrompt) outcomePrompt.style.display = "none";
+
       if (!pid && project && project.id) {
-        var localAdded = addLocalStudyFromCard(project, card, outcomeVal);
-        if (localAdded) {
-          markAdded({ status: "filled", study: localAdded });
+        try {
+          var localAdded = addLocalStudyFromCard(project, card, outcomeVal);
+          if (localAdded) {
+            markAdded({ status: "filled", study: localAdded });
+            return;
+          }
+        } catch (localErr) {
+          showAddError(localErr, "Could not save study locally.");
           return;
         }
       }
       if (!pid) {
-        if (outcomePrompt) {
-          outcomePrompt.style.display = "block";
-          outcomePrompt.innerHTML = '<div class="rmd-banner rmd-banner-info" role="status"><span>Open or create a project first to add this study to your project list.</span><button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-action="projects">Open Projects</button></div>';
-        }
+        showAddBanner('<div class="rmd-banner rmd-banner-info" role="status"><span>Open or create a project first to add this study to your project list.</span><button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-action="projects">Open Projects</button></div>');
         return;
       }
+      if (!card.pmid && !card.doi) {
+        if (project && project.id) {
+          var noIdAdded = addLocalStudyFromCard(project, card, outcomeVal);
+          if (noIdAdded) {
+            markAdded({ status: "filled", study: noIdAdded });
+            return;
+          }
+        }
+        showAddError({ message: "This study has no PubMed ID (PMID) or DOI to add automatically." });
+        return;
+      }
+
+      addInFlight = true;
       addBtn.setAttribute("disabled", "disabled");
-      addBtn.innerHTML = '<svg class="rmd-calm-spinner" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg> <span>Adding...</span>';
+      addBtn.innerHTML = '<svg aria-hidden="true" focusable="false" class="rmd-calm-spinner" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg> <span>Adding...</span>';
 
       var item = {};
       if (card.pmid) item.pmid = card.pmid;
       if (card.doi) item.doi = card.doi;
 
+      var settled = false;
+      var safetyTimer = setTimeout(function () {
+        if (settled) return;
+        settled = true;
+        addInFlight = false;
+        showAddError({ code: "timeout", status: 408, message: "MaiK is taking longer than usual. Try again." });
+      }, 95000);
+
       var reqBody = { items: [item], outcome: outcomeVal };
-      SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/studies/auto-add", reqBody)
-        .then(function (data) {
-          var res = (data && data.results && data.results[0]) || {};
-          if (res.study && SMD.store && SMD.store.adoptServerStudy) {
-            SMD.store.adoptServerStudy(pid, res.study);
-          }
-          markAdded(res);
-        })
-        .catch(function (err) {
-          addBtn.removeAttribute("disabled");
-          addBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> <span>Add to my studies</span>';
-          if (err && (err.status === 402 || err.code === "insufficient_credits")) {
-            if (outcomePrompt) {
-              outcomePrompt.style.display = "block";
-              outcomePrompt.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><strong>You need more MaiK tokens for this step.</strong><button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-action="credits">Add tokens</button></div>';
+      try {
+        if (!SMD.api || typeof SMD.api.request !== "function") {
+          throw new Error("Research service is not ready. Try again.");
+        }
+        SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/studies/auto-add", reqBody)
+          .then(function (data) {
+            if (settled) return;
+            settled = true;
+            clearTimeout(safetyTimer);
+            addInFlight = false;
+            try {
+              var res = (data && data.results && data.results[0]) || null;
+              if (res && res.status === "filled" && res.study) {
+                if (SMD.store && SMD.store.adoptServerStudy) {
+                  SMD.store.adoptServerStudy((project && project.id) || pid, res.study);
+                }
+                markAdded(res);
+              } else {
+                var msg = (res && res.message) || "Could not extract the numbers from this paper automatically. Open Studies in your project to add them manually.";
+                showAddError({ message: msg });
+              }
+            } catch (thenErr) {
+              showAddError(thenErr, "Could not save study to your project.");
             }
-          } else {
-            var f = (SMD.p2 && SMD.p2.friendlyError) ? SMD.p2.friendlyError(err) : { message: err.message || "Could not add study." };
-            if (outcomePrompt) {
-              outcomePrompt.style.display = "block";
-              outcomePrompt.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><span>' + esc(f.message) + '</span></div>';
-            }
-          }
-        });
+          })
+          .catch(function (err) {
+            if (settled) return;
+            settled = true;
+            clearTimeout(safetyTimer);
+            addInFlight = false;
+            showAddError(err);
+          });
+      } catch (syncErr) {
+        if (!settled) {
+          settled = true;
+          clearTimeout(safetyTimer);
+          addInFlight = false;
+          showAddError(syncErr);
+        }
+      }
     }
 
     if (addBtn) {
       addBtn.onclick = function () {
+        if (addInFlight || card._added) return;
+        showAddBanner("");
         var existingOutcome = (project && (project.outcome || project.primaryOutcome || (project.outcomes && project.outcomes.primary))) || "";
         if (existingOutcome) {
           performAutoAdd(existingOutcome);
@@ -614,9 +791,14 @@
       confirmAddBtn.onclick = function () {
         var typed = outcomeField ? outcomeField.value.trim() : "";
         if (!typed) {
+          if (outcomeErr) {
+            outcomeErr.textContent = "Enter the outcome you want to combine first.";
+            outcomeErr.style.display = "block";
+          }
           if (outcomeField) outcomeField.focus();
           return;
         }
+        if (outcomeErr) { outcomeErr.style.display = "none"; outcomeErr.textContent = ""; }
         if (project) project.outcome = typed;
         performAutoAdd(typed);
       };
@@ -624,6 +806,7 @@
 
     if (cancelAddBtn) {
       cancelAddBtn.onclick = function () {
+        if (outcomeErr) { outcomeErr.style.display = "none"; outcomeErr.textContent = ""; }
         if (outcomePrompt) outcomePrompt.style.display = "none";
       };
     }
@@ -648,7 +831,8 @@
   }
 
   function addLocalStudyFromCard(project, card, outcomeVal) {
-    if (!SMD.store || !SMD.store.addStudy || !project) return null;
+    var addFn = SMD.store && (SMD.store.createStudy || SMD.store.addStudy);
+    if (!addFn || !project) return null;
     var authors = Array.isArray(card.authors) ? card.authors : [];
     var firstAuthor = authors[0] ? String(authors[0]).split(/\s+/)[0] : (card.title || "Study").slice(0, 18);
     var label = firstAuthor + (card.year ? " " + card.year : "");
@@ -664,14 +848,14 @@
       inputs = { effect: 1, ciLower: 0.5, ciUpper: 2 };
     }
     var citation = formatCitationLine(card);
-    return SMD.store.addStudy(project.id, {
+    return addFn(project.id, {
       label: label,
       measure: measure,
       inputs: inputs,
       locator: {
         kind: "manual",
         citation: citation,
-        section: "Abstract",
+        section: f0.source || "Abstract",
         quote: f0.quote || card.conclusion || (card.title || ""),
         doi: card.doi || "",
         pmid: card.pmid || "",

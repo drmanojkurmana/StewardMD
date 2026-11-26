@@ -111,6 +111,67 @@ const PICO_DATA = {
   conclusion: 'BCG vaccination is protective.'
 };
 
+const METRIC_FULLTEXT_CARD = {
+  pmid: '40959673',
+  pmcid: 'PMC9999999',
+  doi: '10.7759/cureus.99999',
+  title: 'Prognostic utility of PT-INR, IL-6, and HDL in patients with severe sepsis',
+  journal: 'Cureus',
+  year: 2025,
+  authors: ['Kurmana MK', 'Kumhar M', 'Tiwari RK', 'Meena A'],
+  url: 'https://pubmed.ncbi.nlm.nih.gov/40959673/',
+  freeFullText: true,
+  design: { key: 'observational', label: 'Observational study (researchers recorded what happened, without assigning a treatment)', source: 'publication_type' },
+  sampleSize: { n: 152, quote: '152 adults' },
+  structured: true,
+  sections: [
+    { label: 'Background', text: 'Sepsis remains a major cause of ICU mortality.' },
+    { label: 'Results', text: 'In-hospital mortality was 38.8%. IL-6 was 104.87 +/- 28.45 pg/mL.' }
+  ],
+  findings: [
+    {
+      format: 'metric',
+      kind: 'percent',
+      label: 'Proportion (percentage)',
+      value: '38.8%',
+      numbers: [38.8],
+      quote: 'In-hospital mortality was 38.8%.',
+      source: 'Abstract'
+    },
+    {
+      format: 'metric',
+      kind: 'mean_sd',
+      label: 'Mean +/- standard deviation (SD) (average and spread)',
+      value: '104.87 +/- 28.45 pg/mL',
+      numbers: [104.87, 28.45],
+      quote: 'Non-survivors had higher IL-6 (104.87 +/- 28.45 pg/mL).',
+      source: 'Abstract'
+    },
+    {
+      format: 'metric',
+      kind: 'auc',
+      label: 'Area under the curve (AUC) (diagnostic accuracy)',
+      value: '0.995 (IL-6)',
+      p: '<0.001',
+      numbers: [0.995],
+      quote: 'AUC was 0.995 for IL-6, p < 0.001.',
+      source: 'Full text'
+    },
+    {
+      format: 'metric',
+      kind: 'diagnostic',
+      label: 'Sensitivity and specificity (test accuracy)',
+      value: '100%',
+      numbers: [100],
+      quote: 'IL-6 had 100% sensitivity and specificity at 75 pg/mL.',
+      source: 'Full text'
+    }
+  ],
+  conclusion: 'IL-6 strongly predicted mortality in severe sepsis.',
+  method: 'api',
+  tokensUsed: 0
+};
+
 const server = http.createServer((req, res) => {
   const p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
   const send = (status, obj) => {
@@ -184,6 +245,9 @@ const server = http.createServer((req, res) => {
               }
             });
           }
+          if (b.link && b.link.indexOf('40959673') >= 0) {
+            return setTimeout(() => send(200, { card: METRIC_FULLTEXT_CARD, requestId: 'req_metric' }), 80);
+          }
           if (b.link && b.link.indexOf('unstructured') >= 0) {
             return setTimeout(() => send(200, { card: UNSTRUCTURED_CARD, requestId: 'req_unstructured' }), 100);
           }
@@ -195,13 +259,28 @@ const server = http.createServer((req, res) => {
 
         if (sub === '/paper-card/explain' && req.method === 'POST') {
           explainCalls.push(b);
-          const updatedCard = Object.assign({}, UNSTRUCTURED_CARD, { ai: PICO_DATA });
+          const baseCard = b.pmid === '40959673' ? METRIC_FULLTEXT_CARD : UNSTRUCTURED_CARD;
+          const updatedCard = Object.assign({}, baseCard, { ai: PICO_DATA });
           return setTimeout(() => send(200, { card: updatedCard, model: 'gemini-2.5-flash', costInr: 0.15 }), 100);
         }
 
         if (sub === '/studies/auto-add' && req.method === 'POST') {
           autoCalls.push(b);
           const pmid = (b.items && b.items[0] && b.items[0].pmid) || '12345678';
+          if (pmid === '40959673' && b.outcome && b.outcome.indexOf('fail_once') >= 0) {
+            return setTimeout(() => send(200, {
+              results: [{
+                status: 'needs_pdf',
+                study: null,
+                fields: null,
+                quote: '',
+                location: '',
+                method: '',
+                message: 'The abstract did not contain a complete result. Upload the PDF (the full paper) so the numbers can be read from a table.'
+              }],
+              requestId: 'req_add_fail'
+            }), 80);
+          }
           const newStudy = {
             id: 'st_auto_' + Date.now(),
             projectId: pid,
@@ -443,6 +522,7 @@ try {
   ok(autoCalls[0].items[0].pmid === '22222222', 'calls auto-add with the study pmid');
   ok(autoCalls[0].outcome === 'confirmed active tuberculosis', 'calls auto-add with the specified outcome');
   ok(await until(`/Added to studies/.test(document.querySelector('[data-rmd="card-add-study"]').innerText)`, 5000), 'button confirms Added to studies');
+  ok(/Added to PaperCard Usability Review/.test(await text('#rmdCardAddStatus')), 'status banner confirms Added to <project>');
 
   // 5. "Copy summary" writes text
   await click('[data-rmd="card-copy-summary"]');
@@ -483,6 +563,26 @@ try {
   ok(/Intervention \(what was tested\):/.test(picoText), 'shows Intervention PICO line');
   ok(/Comparison \(what it was compared to\):/.test(picoText), 'shows Comparison PICO line');
   ok(/Outcome \(what was measured\):/.test(picoText), 'shows Outcome PICO line');
+
+  // 6b. Metric + free full text card (40959673): renders key results numbers, Abstract/Full text source labels, Explain with MaiK, and Add button recovers from needs_pdf
+  await ev(`(()=>{
+    const inp = document.querySelector('[data-rmd="paste-link-input"]');
+    inp.value = 'https://pubmed.ncbi.nlm.nih.gov/40959673/';
+    inp.dispatchEvent(new Event('paste', { bubbles: true }));
+    return true;
+  })()`);
+  ok(await until(`/Prognostic utility of PT-INR/.test(document.querySelector('.rmd-papercard-title').innerText)`, 5000), 'metric + full-text card loaded');
+  const metricResultsText = await text('.rmd-papercard-results');
+  ok(/38\.8%/.test(metricResultsText) && /104\.87/.test(metricResultsText) && /0\.995/.test(metricResultsText) && /100%/.test(metricResultsText), 'key results list renders percentages, mean +/- SD, AUC, and sensitivity');
+  ok(/Abstract/.test(metricResultsText) && /Full text/.test(metricResultsText), 'key results labels Abstract and Full text sources');
+  ok(/very unlikely to be chance/.test(metricResultsText), 'string p-value (<0.001) renders plain explanation');
+  ok(await ev(`!!document.querySelector('[data-rmd="explain-study"]')`), 'Explain with MaiK shown for metric-only card');
+
+  // Add button returns to normal state when auto-add returns needs_pdf instead of hanging on Adding...
+  await ev(`(()=>{ const p = SMD_RESEARCH.store.getActiveProject(); p.outcome = 'fail_once mortality'; return true; })()`);
+  await click('[data-rmd="card-add-study"]');
+  ok(await until(`/Add to my studies/.test(document.querySelector('[data-rmd="card-add-study"]').innerText) && !document.querySelector('[data-rmd="card-add-study"]').disabled`, 5000), 'Add button returns to normal state after needs_pdf response');
+  ok(/Upload the PDF/.test(await text('#rmdCardAddStatus')), 'plain guidance shown after needs_pdf response');
 
   // 7. 400 link_unrecognised shows the plain message with no raw code
   await ev(`(()=>{
