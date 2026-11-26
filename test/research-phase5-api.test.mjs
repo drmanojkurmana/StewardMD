@@ -257,6 +257,91 @@ test("manuscript: draft job becomes a version, roles, stale 409, approve, lock, 
   assert.equal((await call(env, "GET", "v1/projects/" + pid + "/manuscript", null)).http, 401);
 });
 
+test("manuscript: first section save creates version 1, upserts sections, exports docx, preserves approve/lock", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  const p = await makeProject(env, "Student first save");
+  const pid = p.id;
+  const now = Date.now();
+  sql(env).prepare("INSERT INTO research_runs (id,project_id,measure,model,result_json,engine,created_by,created_ts) VALUES ('r1',?,'RR','random_dl',?,'research-engine','u-alice',?)")
+    .run(pid, JSON.stringify({ estimate: 0.49, ciLower: 0.31, ciUpper: 0.78, p: 0.002, k: 8, i2: 22.4 }), now);
+
+  assert.equal((await call(env, "GET", "v1/projects/" + pid + "/manuscript", "tok-alice")).http, 404);
+  assert.deepEqual((await call(env, "GET", "v1/projects/" + pid + "/manuscript/versions", "tok-alice")).versions, []);
+
+  // Role and validation checks before creating version 1
+  await setRole(env, pid, "viewer");
+  assert.equal((await call(env, "PUT", "v1/projects/" + pid + "/manuscript/sections/results", "tok-bob",
+    { version: 1, text: "Denied" })).http, 403);
+  assert.equal((await call(env, "PUT", "v1/projects/" + pid + "/manuscript/sections/results", "tok-eve",
+    { version: 1, text: "Outsider" })).http, 404);
+  assert.equal((await call(env, "PUT", "v1/projects/" + pid + "/manuscript/sections/results", "tok-alice",
+    { version: 0, text: "Bad version" })).http, 400);
+  assert.deepEqual((await call(env, "GET", "v1/projects/" + pid + "/manuscript/versions", "tok-alice")).versions, []);
+
+  // First save creates version 1 (no manuscript_draft job required)
+  const first = await call(env, "PUT", "v1/projects/" + pid + "/manuscript/sections/results", "tok-alice",
+    { version: 1, heading: "Results", text: "The pooled risk ratio was " + TOKEN + "." });
+  assert.equal(first.http, 200, JSON.stringify(first));
+  assert.equal(first.version, 1);
+  assert.equal(first.section.id, "results");
+  assert.equal(first.section.heading, "Results");
+  assert.equal(first.tokens["r1.estimate"].formatted, "0.49");
+
+  const fetched = await call(env, "GET", "v1/projects/" + pid + "/manuscript", "tok-alice");
+  assert.equal(fetched.http, 200, JSON.stringify(fetched));
+  assert.equal(fetched.manuscript.version, 1);
+  assert.equal(fetched.manuscript.status, "draft");
+  assert.equal(fetched.manuscript.title, "Student first save");
+  assert.equal(fetched.manuscript.sections.length, 1);
+
+  // Saving another section inserts it into version 1
+  const second = await call(env, "PUT", "v1/projects/" + pid + "/manuscript/sections/methods", "tok-alice",
+    { version: 1, text: "We searched PubMed and screened records in duplicate." });
+  assert.equal(second.http, 200, JSON.stringify(second));
+  assert.equal(second.version, 1);
+  assert.equal(second.section.id, "methods");
+  assert.equal(second.section.heading, "Methods");
+
+  const versions = await call(env, "GET", "v1/projects/" + pid + "/manuscript/versions", "tok-alice");
+  assert.equal(versions.versions.length, 1);
+  assert.equal(versions.versions[0].version, 1);
+  assert.equal(versions.versions[0].sectionCount, 2);
+
+  // Stale version still returns 409 once version 1 exists
+  const stale = await call(env, "PUT", "v1/projects/" + pid + "/manuscript/sections/results", "tok-alice",
+    { version: 2, text: "Stale" });
+  assert.equal(stale.http, 409);
+  assert.equal(stale.error.code, "stale_version");
+
+  // Export works from saved sections
+  const exported = await call(env, "POST", "v1/projects/" + pid + "/manuscript/export", "tok-alice",
+    { version: 1, format: "docx" });
+  assert.equal(exported.http, 202, JSON.stringify(exported));
+  assert.equal(exported.status, "pending");
+  assert.equal(exported.format, "docx");
+  assert.equal(exported.gatesPassed, true);
+  assert.ok(exported.jobId);
+  assert.equal(exportCount(env, pid), 1);
+
+  // Approval and lock rules still enforced
+  assert.equal((await call(env, "POST", "v1/projects/" + pid + "/manuscript/lock", "tok-alice", { version: 1 })).http, 409);
+  assert.equal((await call(env, "POST", "v1/projects/" + pid + "/manuscript/approval/approve", "tok-alice",
+    { version: 1, decision: "approved" })).http, 200);
+  assert.equal((await call(env, "POST", "v1/projects/" + pid + "/manuscript/lock", "tok-alice", { version: 1 })).http, 200);
+  assert.equal((await call(env, "PUT", "v1/projects/" + pid + "/manuscript/sections/results", "tok-alice",
+    { version: 1, text: "After lock" })).http, 403);
+
+  // First save from a fallback client draft with version: 2 still initializes version 1 cleanly
+  const p2 = await makeProject(env, "Fallback v2 first save");
+  const fb = await call(env, "PUT", "v1/projects/" + p2.id + "/manuscript/sections/introduction", "tok-alice",
+    { version: 2, heading: "Introduction", text: "Clinical background." });
+  assert.equal(fb.http, 200, JSON.stringify(fb));
+  assert.equal(fb.version, 1);
+  const fbExport = await call(env, "POST", "v1/projects/" + p2.id + "/manuscript/export", "tok-alice",
+    { version: 1, format: "docx" });
+  assert.equal(fbExport.http, 202, JSON.stringify(fbExport));
+});
+
 test("checklists: list, alias, 404, snapshot from real rows, manual round trip", { skip: SKIP }, async () => {
   const env = freshEnv();
   const list = await call(env, "GET", "v1/checklists", "tok-alice");
