@@ -77,7 +77,7 @@
   function appBusy() {
     if (preHomeGate()) return true;
     try { var EA = window.SMD_EMAIL_AUTH; if (EA && EA.flowOpen && EA.flowOpen()) return true; } catch (e) {}
-    var byId = ["smdApplock", "phvRoot"];
+    var byId = ["smdApplock", "phvRoot", "pfSetupRoot"];
     for (var i = 0; i < byId.length; i++) {
       var el = document.getElementById(byId[i]);
       if (!onScreen(el)) continue;
