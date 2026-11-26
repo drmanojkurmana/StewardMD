@@ -31,10 +31,45 @@
     return (G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.CapacitorHttp) || G.CapacitorHttp || null;
   }
 
-  function phiBlockedError() {
+  var PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v0";
+  /* DRAFT terms, needs legal review */
+  var PHI_OVERRIDE_TERMS_TEXT = "By continuing, you confirm that you have the right to share this text, that it is needed for this draft, and that you accept responsibility under the DPDP Act 2023 and your institution's rules. StewardMD logs this override (user, time, and identifier type, never the text itself). Always check AI output before use.";
+
+  var PHI_CATEGORY_LABELS = {
+    phone: "Phone number",
+    date: "Date",
+    dates: "Date",
+    dob: "Date of birth",
+    admission_date: "Admission or discharge date",
+    uhid: "Hospital or registration ID number",
+    mrn: "Medical record or hospital ID number",
+    aadhaar: "Aadhaar ID number",
+    abha: "ABHA health ID or address",
+    ssn: "National ID number",
+    nhs: "NHS ID number",
+    pin: "PIN or postal code (address)",
+    address: "Address",
+    email: "Email address",
+    patient_name: "Name",
+    name: "Name",
+    id: "ID number"
+  };
+
+  function phiCategoryLabel(cat) {
+    var key = String(cat || "").toLowerCase();
+    if (key && Object.prototype.hasOwnProperty.call(PHI_CATEGORY_LABELS, key)) {
+      return PHI_CATEGORY_LABELS[key];
+    }
+    var cleaned = String(cat || "").replace(/[_-]+/g, " ").replace(/^\s+|\s+$/g, "");
+    if (!cleaned) return "Personal or patient identifier";
+    return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+  }
+
+  function phiBlockedError(categories) {
     var err = new Error("Remove patient identifiers (names, IDs, phone numbers, dates) before drafting.");
     err.code = "phi_blocked";
     err.status = 0;
+    err.categories = Array.isArray(categories) ? categories.slice() : [];
     return err;
   }
 
@@ -49,7 +84,17 @@
       var s = G.SMD_redactPHI(val);
       s = G.SMD_PHI_INDIA.apply(s);
       var hits = G.RMDPhi.scan(s);
-      if (hits && hits.length) state.blocked = true;
+      if (hits && hits.length) {
+        state.blocked = true;
+        for (var hi = 0; hi < hits.length; hi++) {
+          var hit = hits[hi];
+          var cat = hit && (hit.category || hit.type || hit.kind);
+          if (cat && !state.catMap[cat]) {
+            state.catMap[cat] = true;
+            state.categories.push(cat);
+          }
+        }
+      }
       return s;
     }
     if (Array.isArray(val)) {
@@ -78,31 +123,194 @@
       var k = keys[i];
       copy[k] = body[k];
     }
-    var state = { blocked: false };
+    var state = { blocked: false, categories: [], catMap: {} };
     copy.input = scrubPhiInput(body.input, state);
-    if (state.blocked) return null;
-    return copy;
+    return { body: copy, blocked: state.blocked, categories: state.categories };
   }
 
-  /* Phase 2 API client: calls stewardmd.in/api/research/v1 per the frozen
-   * contracts (docs/research/contracts/phase-2). Firebase ID token from
-   * SMD_AUTH when present; errors normalize to {code, status, current}. */
-  function apiRequest(method, path, body, options) {
-    if (String(method || "").toUpperCase() === "POST" && path && /\/ai-draft(\?|$)/.test(path) &&
-        body && body.input !== undefined && body.input !== null) {
-      if (!hasPhiModules()) {
-        return Promise.reject(phiBlockedError());
-      }
-      try {
-        var redactedBody = copyWithRedactedInput(body);
-        if (!redactedBody) {
-          return Promise.reject(phiBlockedError());
-        }
-        body = redactedBody;
-      } catch (phiEx) {
-        return Promise.reject(phiBlockedError());
+  function withPhiOverride(body) {
+    var next = {};
+    if (body && typeof body === "object") {
+      var keys = Object.keys(body);
+      for (var i = 0; i < keys.length; i++) {
+        next[keys[i]] = body[keys[i]];
       }
     }
+    next.phiOverride = {
+      accepted: true,
+      termsVersion: PHI_OVERRIDE_TERMS_VERSION
+    };
+    return next;
+  }
+
+  function phiOverrideHost() {
+    var host = root;
+    if (!host && D && typeof D.querySelector === "function") {
+      host = D.querySelector("#researchMD");
+    }
+    if (host && typeof host.appendChild === "function" && D && typeof D.createElement === "function") {
+      return host;
+    }
+    return null;
+  }
+
+  var activePhiOverrideCancel = null;
+
+  function openPhiOverrideDialog(categories, originalErr) {
+    var host = phiOverrideHost();
+    if (!host) return Promise.reject(originalErr);
+
+    if (typeof activePhiOverrideCancel === "function") {
+      activePhiOverrideCancel();
+    }
+
+    try { injectCSS(); } catch (e) {}
+
+    var back = D.createElement("div");
+    if (!back || typeof back.querySelector !== "function") {
+      return Promise.reject(originalErr);
+    }
+
+    var catList = [];
+    var seenLabel = {};
+    var rawCats = Array.isArray(categories) ? categories : [];
+    for (var i = 0; i < rawCats.length; i++) {
+      var lbl = phiCategoryLabel(rawCats[i]);
+      if (!seenLabel[lbl]) {
+        seenLabel[lbl] = true;
+        catList.push(lbl);
+      }
+    }
+    if (!catList.length) {
+      catList.push("Personal or patient identifier");
+    }
+
+    var itemsHtml = "";
+    for (var j = 0; j < catList.length; j++) {
+      itemsHtml += "<li>" + esc(catList[j]) + "</li>";
+    }
+
+    back.className = "rmd-modal-backdrop";
+    back.id = "rmdPhiOverrideModal";
+    back.innerHTML =
+      '<div class="rmd-modal-card rmd-phi-ovr-card" role="dialog" aria-modal="true" aria-labelledby="rmdPhiOverrideTitle" aria-describedby="rmdPhiOverrideTerms" tabindex="-1">' +
+        '<div class="rmd-modal-header rmd-modal-warn">' +
+          '<h3 id="rmdPhiOverrideTitle">Possible patient identifiers</h3>' +
+        '</div>' +
+        '<p class="rmd-phi-ovr-lead">Before sending this draft, check your text for the following identifier types:</p>' +
+        '<ul class="rmd-phi-ovr-cats">' + itemsHtml + '</ul>' +
+        '<div class="rmd-phi-ovr-terms" id="rmdPhiOverrideTerms">' +
+          '<p>' + esc(PHI_OVERRIDE_TERMS_TEXT) + '</p>' +
+        '</div>' +
+        '<label class="rmd-phi-ovr-check" for="rmdPhiOverrideAccept">' +
+          '<input type="checkbox" id="rmdPhiOverrideAccept" data-rmd-phi-accept="1" />' +
+          '<span>I accept these terms</span>' +
+        '</label>' +
+        '<div class="rmd-modal-footer rmd-phi-ovr-footer">' +
+          '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-phi-edit="1">Edit my text</button>' +
+          '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd-phi-send="1" disabled>I take responsibility, send anyway</button>' +
+        '</div>' +
+      '</div>';
+
+    var card = back.querySelector('[role="dialog"]');
+    var checkbox = back.querySelector('[data-rmd-phi-accept="1"]');
+    var editBtn = back.querySelector('[data-rmd-phi-edit="1"]');
+    var sendBtn = back.querySelector('[data-rmd-phi-send="1"]');
+
+    if (!card || !checkbox || !editBtn || !sendBtn) {
+      return Promise.reject(originalErr);
+    }
+
+    host.appendChild(back);
+
+    var prevFocused = null;
+    try { prevFocused = D.activeElement || null; } catch (fe) { prevFocused = null; }
+
+    return new Promise(function (resolve, reject) {
+      var settled = false;
+      var keyHandler = null;
+
+      function cleanup() {
+        if (back.parentNode) back.parentNode.removeChild(back);
+        if (keyHandler && D && typeof D.removeEventListener === "function") {
+          D.removeEventListener("keydown", keyHandler);
+        }
+        if (activePhiOverrideCancel === cancel) {
+          activePhiOverrideCancel = null;
+        }
+        if (prevFocused && typeof prevFocused.focus === "function") {
+          try { prevFocused.focus(); } catch (re) {}
+        }
+      }
+
+      function cancel() {
+        if (settled) return;
+        settled = true;
+        cleanup();
+        reject(originalErr);
+      }
+
+      function confirm() {
+        if (settled || !checkbox.checked) return;
+        settled = true;
+        cleanup();
+        resolve(true);
+      }
+
+      activePhiOverrideCancel = cancel;
+
+      checkbox.addEventListener("change", function () {
+        sendBtn.disabled = !checkbox.checked;
+      });
+      editBtn.addEventListener("click", cancel);
+      sendBtn.addEventListener("click", confirm);
+      back.addEventListener("click", function (e) {
+        if (e && e.target === back) cancel();
+      });
+
+      keyHandler = function (e) {
+        if (!e) return;
+        if (e.key === "Escape" || e.keyCode === 27) {
+          if (typeof e.preventDefault === "function") e.preventDefault();
+          if (typeof e.stopPropagation === "function") e.stopPropagation();
+          cancel();
+          return;
+        }
+        if (e.key === "Tab") {
+          var focusables = [checkbox, editBtn];
+          if (!sendBtn.disabled) focusables.push(sendBtn);
+          var active = null;
+          try { active = D.activeElement; } catch (ae) {}
+          var idx = focusables.indexOf(active);
+          if (e.shiftKey) {
+            if (idx <= 0) {
+              if (typeof e.preventDefault === "function") e.preventDefault();
+              if (typeof focusables[focusables.length - 1].focus === "function") {
+                focusables[focusables.length - 1].focus();
+              }
+            }
+          } else if (idx === focusables.length - 1 || idx === -1) {
+            if (typeof e.preventDefault === "function") e.preventDefault();
+            if (typeof focusables[0].focus === "function") {
+              focusables[0].focus();
+            }
+          }
+        }
+      };
+
+      if (D && typeof D.addEventListener === "function") {
+        D.addEventListener("keydown", keyHandler);
+      }
+
+      if (typeof editBtn.focus === "function") {
+        try { editBtn.focus(); } catch (f1) {}
+      } else if (typeof card.focus === "function") {
+        try { card.focus(); } catch (f2) {}
+      }
+    });
+  }
+
+  function dispatchRequest(method, path, body, options) {
     var headers = { "Accept": "application/json" };
     var opts = { method: method, headers: headers };
     if (body !== undefined && body !== null) {
@@ -146,6 +354,7 @@
             err.code = env.code || ("http_" + statusCode);
             err.current = data && data.current;
             err.body = data;
+            if (data && Array.isArray(data.categories)) err.categories = data.categories.slice();
             err.requestId = env.requestId;
             throw err;
           }
@@ -163,6 +372,7 @@
             err.code = env.code || ("http_" + res.status);
             err.current = data && data.current;
             err.body = data;
+            if (data && Array.isArray(data.categories)) err.categories = data.categories.slice();
             err.requestId = env.requestId;
             throw err;
           }
@@ -184,6 +394,47 @@
       net.code = "network";
       net.status = 0;
       throw net;
+    });
+  }
+
+  /* Phase 2 API client: calls stewardmd.in/api/research/v1 per the frozen
+   * contracts (docs/research/contracts/phase-2). Firebase ID token from
+   * SMD_AUTH when present; errors normalize to {code, status, current}. */
+  function apiRequest(method, path, body, options) {
+    var isAiDraft = String(method || "").toUpperCase() === "POST" && path && /\/ai-draft(\?|$)/.test(path);
+    var sendBody = body;
+    var clientBlockedErr = null;
+
+    if (isAiDraft && body && body.input !== undefined && body.input !== null) {
+      if (!hasPhiModules()) {
+        return Promise.reject(phiBlockedError([]));
+      }
+      try {
+        var phiRes = copyWithRedactedInput(body);
+        sendBody = phiRes.body;
+        if (phiRes.blocked) {
+          clientBlockedErr = phiBlockedError(phiRes.categories);
+        }
+      } catch (phiEx) {
+        return Promise.reject(phiBlockedError([]));
+      }
+    }
+
+    if (clientBlockedErr) {
+      return openPhiOverrideDialog(clientBlockedErr.categories, clientBlockedErr).then(function () {
+        return dispatchRequest(method, path, withPhiOverride(sendBody), options);
+      });
+    }
+
+    return dispatchRequest(method, path, sendBody, options).catch(function (err) {
+      if (isAiDraft && err && err.status === 422 && err.code === "phi_blocked" &&
+          err.body && err.body.overridable === true) {
+        var cats = err.categories || (Array.isArray(err.body.categories) ? err.body.categories : []);
+        return openPhiOverrideDialog(cats, err).then(function () {
+          return dispatchRequest(method, path, withPhiOverride(sendBody), options);
+        });
+      }
+      throw err;
     });
   }
 
@@ -595,7 +846,7 @@
   }
 
   function injectCSS() {
-    if (!D || D.getElementById("rmdCss")) return;
+    if (!D || !D.head || (D.getElementById && D.getElementById("rmdCss"))) return;
     var s = D.createElement("style");
     s.id = "rmdCss";
     s.textContent = [
@@ -1193,7 +1444,17 @@
       "#researchMD .rmd-cele-cite { width: 100%; text-align: left; border: 1px solid var(--rmd-line); border-radius: 10px; padding: 10px 12px; background: var(--rmd-fill); box-sizing: border-box; }",
       "#researchMD .rmd-cele-meta { font: 600 12px var(--rmd-f); color: var(--rmd-acc-dark); margin-bottom: 4px; }",
       "#researchMD .rmd-cele-citestr { font: 400 12.5px var(--rmd-f); color: var(--rmd-ink); line-height: 1.4; overflow-wrap: anywhere; }",
-      "#researchMD .rmd-cele-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 8px; }"
+      "#researchMD .rmd-cele-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 8px; }",
+      "/* PHI override modal (/ai-draft only) */",
+      "#researchMD .rmd-phi-ovr-card { max-width: 500px; width: calc(100% - 24px); }",
+      "#researchMD .rmd-phi-ovr-lead { margin: 0; font: 400 13.5px/1.5 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-phi-ovr-cats { margin: 0; padding: 10px 12px 10px 28px; background: var(--rmd-warn-soft); border: 1px solid var(--rmd-warn); border-radius: 10px; display: flex; flex-direction: column; gap: 4px; font: 500 13px/1.4 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-phi-ovr-terms { margin: 0; padding: 10px 12px; background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 10px; font: 400 12.5px/1.5 var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-phi-ovr-terms p { margin: 0; }",
+      "#researchMD .rmd-phi-ovr-check { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 4px 0; cursor: pointer; font: 500 13.5px/1.4 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-phi-ovr-check input[type=\"checkbox\"] { width: 20px; height: 20px; flex: 0 0 auto; margin: 0; accent-color: var(--rmd-acc); cursor: pointer; }",
+      "#researchMD .rmd-phi-ovr-footer { flex-wrap: wrap; }",
+      "#researchMD .rmd-phi-ovr-footer .rmd-btn { min-height: 44px; }"
     ].join("\n");
     D.head.appendChild(s);
   }

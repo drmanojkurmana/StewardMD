@@ -134,6 +134,15 @@ PaperOrchestra enforces multiple safety guards and consumption caps:
    Each draft job is reserved for at most 64 LLM calls at tier T2 (Gemini Flash synthesis, 16,000 input
    and 4,000 output token ceilings). Exceeding 64 calls stops the job with `ceiling_calls`.
 
+## Patient identifier override (/ai-draft only)
+
+Interactive drafting via `POST /v1/projects/{id}/ai-draft` includes a single-request patient identifier override for cases where a clinician confirms the text is safe or authorised to send (for example, false positives or properly consented case material):
+
+- **What it does**: If the client-side scan (`RMDPhi.scan` in `research.js`) or the server PHI gate detects possible identifiers on `POST /v1/projects/{id}/ai-draft` (HTTP 422 `phi_blocked` with `overridable: true`), the mobile app opens the "Possible patient identifiers" dialog inside `#researchMD`. The dialog shows only plain-word identifier categories (never the flagged text itself). If the user ticks "I accept these terms" and taps "I take responsibility, send anyway", the client resends that single `/ai-draft` request once with `phiOverride: { accepted: true, termsVersion: "rmd-phi-override-v0" }`. For client-side blocks, the resent payload keeps all automated `SMD_redactPHI` and `SMD_PHI_INDIA` redactions applied. A second block after an override rejects without looping.
+- **Where it is never applied**: The override is strictly restricted to interactive `POST /v1/projects/{id}/ai-draft`. It is never applied to PaperOrchestra project snapshots, `manuscript_draft` jobs (`/v1/projects/{id}/jobs`), the PaperOrchestra AI gateway (`functions/api/research/_gateway.js`), suggestion routes (`/extraction/suggestions`, `/screening-suggestions`, `/grade-suggestions`, `/studies/auto-add`), or any automated or background path.
+- **Audit event**: Every accepted override writes an `ai_phi_override` row to the ResearchMD D1 audit table (`research_audit_events`, via `api.audit`) with `uid`, timestamp, and `meta` (`{ route: "ai-draft", task, categories, rules, termsVersion }`). Neither the matched text nor the request body text is ever logged.
+- **Terms document**: `docs/research/PHI_OVERRIDE_TERMS.md` (version `rmd-phi-override-v0`, currently marked `DRAFT - NEEDS LEGAL REVIEW`).
+
 ## How to Test One Job End to End
 
 1. Prepare a staging test project:
