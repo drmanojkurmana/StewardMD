@@ -260,11 +260,11 @@
     root = document.createElement("section"); root.id = "usPanel"; root.className = "us-panel"; root.setAttribute("role", "dialog"); root.setAttribute("aria-label", "Search StewardMD"); root.hidden = true; root.style.display = "none"; root.style.pointerEvents = "none";
     root.innerHTML =
       '<header class="us-head">' +
+        '<button id="usCancel" class="us-back" type="button" aria-label="Close search">' + ico("chev") + '</button>' +
         '<div class="us-field">' + ico("search") +
-          '<input id="usInput" class="us-input" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search StewardMD" aria-controls="usBody" placeholder="Search tools, drugs, scores, diseases, codes, settings" disabled>' +
+          '<input id="usInput" class="us-input" type="search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search StewardMD" aria-controls="usBody" placeholder="Drugs, scores, diseases, codes" disabled>' +
           '<button id="usClear" class="us-clear" type="button" aria-label="Clear search" hidden>' + ico("x") + '</button>' +
         '</div>' +
-        '<button id="usCancel" class="us-cancel" type="button">Cancel</button>' +
       '</header>' +
       '<div id="usChips" class="us-chips" role="group" aria-label="Filter by category"></div>' +
       '<div id="usBody" class="us-body" role="listbox" aria-label="Results"></div>';
@@ -272,6 +272,8 @@
     input = root.querySelector("#usInput"); body = root.querySelector("#usBody"); chips = root.querySelector("#usChips"); clearBtn = root.querySelector("#usClear");
     input.addEventListener("input", function () { setQuery(input.value); });
     input.addEventListener("keydown", onKey);
+    // Hairline under the bar only once the results scroll under it (iOS bar behaviour).
+    body.addEventListener("scroll", function () { var on = body.scrollTop > 2; if (root.classList.contains("us-scrolled") !== on) root.classList.toggle("us-scrolled", on); }, { passive: true });
     clearBtn.addEventListener("click", function () { setQuery(""); input.focus(); });
     var cancelBtn = root.querySelector("#usCancel");
     cancelBtn.addEventListener("click", close);
@@ -500,6 +502,9 @@
 
   /* ---------- wrap the app.js globals ---------- */
   function wrap() {
+    // The legacy #smdSearchPanel (app.js) is parked above the screen at z 401 with a 24 px shadow that bled over the
+    // top of this panel and of home. It is never shown while this file runs, so hide it (search.css, html.us-on).
+    if (document.documentElement && document.documentElement.classList) document.documentElement.classList.add("us-on");
     G.openSearch = open; G.closeSearch = close;                 // header button onclick, ACT.search, kbOpen all route here
     G.doSearch = function (q) { open(); setQuery(q); };
     G.clearSearch = function () { setQuery(""); };
