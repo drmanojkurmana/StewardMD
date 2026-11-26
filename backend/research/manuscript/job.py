@@ -187,10 +187,11 @@ def run_job(
         gateway_url = os.environ.get("RESEARCH_GATEWAY_URL", "")
         if not gateway_url:
             return fail("gateway_unconfigured")
-        expires_at = int(now()) + 900
+        # Fresh token per gateway call (the gateway rejects tokens older than 900 s);
+        # 840 s leaves room for clock skew between the container and Cloudflare.
         llm_client = GatewayLLMClient(
             gateway_url=gateway_url,
-            job_token=mint_job_token(secret, job_id, expires_at),
+            job_token=lambda: mint_job_token(secret, job_id, int(now()) + 840),
             job_id=job_id, project_id=msg["projectId"],
             user_id=msg.get("userId", ""), tier="T2",
             max_calls=min(msg["ceilings"]["maxCalls"], GLOBAL_MAX_CALLS),

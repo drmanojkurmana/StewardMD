@@ -180,3 +180,22 @@ def test_runaway_upstream_refinement_loop_is_clamped(tmp_path):
     assert client.refinement_rounds == 2
     assert "REFINED_V2" in final_tex
     assert ctx["gate_hits"] == []
+
+
+def test_callable_job_token_is_minted_fresh_per_call():
+    # A full draft can outlive one 15 minute gateway token, so the job passes a
+    # callable and every call carries a newly minted token.
+    seen = []
+
+    def handler(request):
+        seen.append(request.headers["authorization"])
+        return ok_handler(request)
+
+    minted = iter(["job_1.100.aa", "job_1.200.bb"])
+    http = httpx.Client(transport=httpx.MockTransport(handler))
+    client = GatewayLLMClient(gateway_url=GATEWAY_URL, job_token=lambda: next(minted),
+                              http_client=http, sleep=lambda s: None,
+                              now=lambda: 1763900000)
+    client.call_text("hello", "m")
+    client.call_text("again", "m")
+    assert seen == ["Bearer job_1.100.aa", "Bearer job_1.200.bb"]
