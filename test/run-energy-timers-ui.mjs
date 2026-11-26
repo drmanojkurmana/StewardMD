@@ -106,31 +106,26 @@ try {
   ok(wmAttached === true, "workspaces.js: #dxOverlay gets its watermark within 120ms of being appended (MutationObserver, not the old 400ms poll)");
   await after.ev(`var o=document.getElementById("dxOverlay"); if(o) o.remove(); return 1;`);
 
-  // --- B: swipe-back.js — 900ms poll does nothing while hidden, resumes once visible ---
-  // Force canGoBack() true (a fake open "ATLAS" overlay) and neutralise wouldOverlap()'s
-  // elementsFromPoint geometry probe (unrelated to the fix — the real home screen has its own
-  // top-left header controls that legitimately suppress the handle) so the "show" gate is only
-  // driven by the thing we changed: whether the poll runs at all.
-  // homeIsForeground() (checked before ATLAS) needs home to actually NOT be what's on screen — cover
-  // it with a real full-viewport layer so that check agrees, instead of only faking ATLAS.isOpen().
+  // --- B: swipe-back.js — #smdTopBack button is gone (nofab removal) ---
+  // The old 900ms syncHandle interval and the #smdTopBack element are removed.
+  // Confirm the DOM never contains the element regardless of ATLAS state.
   await after.ev(`document.body.appendChild(Object.assign(document.createElement("div"), { id: "__fakeOverlay", style: "position:fixed;inset:0;z-index:999999;background:transparent;" }));
     window.ATLAS = { isOpen: function () { return true; } };
     window.__realElementsFromPoint = document.elementsFromPoint;
     document.elementsFromPoint = function () { return []; }; return 1;`);
   await sleep(1100);
-  const bVis1 = await after.ev(`var b = document.getElementById("smdTopBack"); return b ? b.style.visibility : null;`);
-  ok(bVis1 === "visible", `swipe-back.js: the back handle appears within ~1.1s while visible (canGoBack forced true) [got ${bVis1}]`);
+  const bVis1 = await after.ev(`return document.getElementById("smdTopBack");`);
+  ok(bVis1 === null, `swipe-back.js: #smdTopBack never exists (nofab removal) [got ${JSON.stringify(bVis1)}]`);
 
-  await after.ev(`window.ATLAS.isOpen = function () { return false; }; return 1;`);   // canGoBack now false
   await after.setHidden(true);
   await sleep(1100);
-  const bVis2 = await after.ev(`var b = document.getElementById("smdTopBack"); return b ? b.style.visibility : null;`);
-  ok(bVis2 === "visible", `swipe-back.js: the poll does NOT re-sync while document.hidden — handle stays as it was [got ${bVis2}, expected unchanged "visible"]`);
+  const bVis2 = await after.ev(`return document.getElementById("smdTopBack");`);
+  ok(bVis2 === null, `swipe-back.js: #smdTopBack absent while document.hidden [got ${JSON.stringify(bVis2)}]`);
 
   await after.setHidden(false);
   await sleep(1100);
-  const bVis3 = await after.ev(`var b = document.getElementById("smdTopBack"); return b ? b.style.visibility : null;`);
-  ok(bVis3 === "hidden", `swipe-back.js: the poll resumes once visible again and re-syncs to "hidden" [got ${bVis3}]`);
+  const bVis3 = await after.ev(`return document.getElementById("smdTopBack");`);
+  ok(bVis3 === null, `swipe-back.js: #smdTopBack absent once visible again [got ${JSON.stringify(bVis3)}]`);
 
   // --- C: guest-timer.js — 1s poll freezes the clock while hidden, resumes once visible ---
   await after.ev(`var fo = document.getElementById("__fakeOverlay"); if (fo) fo.remove(); window.ATLAS = null;

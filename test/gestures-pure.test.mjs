@@ -181,8 +181,8 @@ test("hit targets: visuals stay small, touch areas grow invisibly", () => {
   assert.ok(az.includes("width:22px;touch-action:none"), "az strip visible width back to 22px");
   assert.ok(az.includes("#smdAzStrip::before") && az.includes("left:-11px;right:-11px"), "az strip has a 44px invisible hitbox");
   const back = fs.readFileSync(new URL("../swipe-back.js", import.meta.url), "utf8");
-  assert.ok(back.includes("width:38px;height:38px"), "back button visible size back to 38px");
-  assert.ok(back.includes("#smdTopBack::after") && back.includes("inset:-3px"), "back button has a 44px invisible hitbox");
+  assert.ok(!back.includes("#smdTopBack"), "#smdTopBack must be gone from swipe-back.js (nofab removal)");
+  assert.ok(!back.includes("syncHandle"), "syncHandle must be gone from swipe-back.js (nofab removal)");
 });
 
 test("spring simulate settles at target with seeded velocity", () => {

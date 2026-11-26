@@ -24,9 +24,10 @@ test("workspaces.js: #dxOverlay attach uses a body MutationObserver, not a 400ms
   assert.match(s, /bodyObs\.observe\(document\.body, \{ childList: true \}\);/, "observer must be childList-only, no subtree");
 });
 
-test("swipe-back.js: the 900ms handle-sync poll skips while the tab is hidden", () => {
+test("swipe-back.js: #smdTopBack button and syncHandle interval are gone (nofab removal)", () => {
   const s = src("swipe-back.js");
-  assert.match(s, /setInterval\(function \(\) \{ if \(document\.hidden\) return; syncHandle\(\); \}, 900\);/);
+  assert.doesNotMatch(s, /smdTopBack/, "#smdTopBack must not appear anywhere in swipe-back.js");
+  assert.doesNotMatch(s, /syncHandle/, "syncHandle must not appear anywhere in swipe-back.js");
 });
 
 test("onboarding.js: the 700ms ICU-tip poll skips while the tab is hidden", () => {
