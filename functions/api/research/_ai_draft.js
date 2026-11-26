@@ -8,11 +8,16 @@
  *   Unknown task: 400 invalid_task.
  *   Insufficient MaiK tokens: 402 insufficient_credits,
  *   message "You need more MaiK tokens".
- *   A blocked user-input PHI hit: 422 phi_blocked with overridable: true.
- *   phiOverride is { accepted: true, termsVersion: "rmd-phi-override-v0" }
- *   and is accepted on this route only: the user-input PHI block is skipped
- *   for that request and one ai_phi_override audit is written (categories and
- *   rule names only, never the text). Automated paths ignore it.
+ *   A blocked user-input PHI hit: 422 phi_blocked with overridable and
+ *   allowedConditions (empty when not overridable).
+ *   phiOverride is { accepted: true, termsVersion: "rmd-phi-override-v1",
+ *   condition: "false_positive" | "anonymised" | "consent",
+ *   consentEvidence?: { consentDate: "YYYY-MM-DD", reference: string } }
+ *   and is accepted on this route only. ID numbers and phone numbers need the
+ *   consent condition with evidence; a patient name is never overridable. A
+ *   valid override skips the user-input PHI block for that request and writes
+ *   one ai_phi_override audit (categories, condition and consent date only,
+ *   never the text or the reference). Automated paths ignore it.
  *   Every scan of user-typed input here runs in mode "user".
  *
  * draft.status is always "unverified". The row is stored in
@@ -82,8 +87,8 @@
  *     (patient_name, etc.) return 409 consent_needed with pages and
  *     masked context previews until consent is confirmed and audited.
  */
-import { runUserAi, extractJson, PHI_OVERRIDE_TERMS_VERSION } from "./_suggest.js";
-import { scan, phiCategories, scanAndMaskThesis } from "./_phi.js";
+import { runUserAi, extractJson, parsePhiOverrideRequest, evaluatePhiOverride } from "./_suggest.js";
+import { scan, scanAndMaskThesis } from "./_phi.js";
 import { checklistItems } from "./_checklists.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
@@ -163,24 +168,19 @@ async function oneCall(ctx, projectId, task, system, prompt, extraOpts) {
   }, extraOpts || {}));
 }
 
-/* Override is /ai-draft only, never automated paths. Valid only when the
- * caller explicitly accepted the exact terms version. */
-function phiOverrideAccepted(body) {
-  const o = body && body.phiOverride;
-  return !!(o && typeof o === "object" && !Array.isArray(o) &&
-    o.accepted === true && o.termsVersion === PHI_OVERRIDE_TERMS_VERSION);
-}
 /* Legal review F-01 (2026-11-27): the hard block is the default. The override
  * exists only when the server switch RESEARCH_PHI_OVERRIDE is "1"; otherwise a
- * phiOverride body is ignored and 422 responses are not marked overridable. */
+ * phiOverride body is ignored and 422 responses are not marked overridable.
+ * v1 (F-02): the request is parsed here, then validated after the scan because
+ * the allowed conditions depend on the categories found. */
 function overrideEnabled(env) {
   return !!(env && env.RESEARCH_PHI_OVERRIDE === "1");
 }
-function overrideOpts(accepted, enabled) {
-  if (!enabled) return { phiOverridable: false };
-  return accepted
-    ? { phiOverridable: true, phiOverride: true, phiTermsVersion: PHI_OVERRIDE_TERMS_VERSION }
-    : { phiOverridable: true };
+function overrideOpts(enabled, request) {
+  return {
+    phiEnabled: enabled === true,
+    phiOverrideRequest: request || null,
+  };
 }
 
 async function storeDraft(ctx, projectId, task, draft, model, costInr) {
@@ -1220,8 +1220,8 @@ export async function aiDraft(ctx, projectId, body) {
     return err(400, "invalid_task", "Unknown task. Use protocol, search_query, rob, checklist, title_abstract, thesis_to_paper, polish, iec_application, consent_form, ctri_fields, publication_consent, case_report_draft or manuscript_draft.", requestId);
   const input = inputOf(body);
   const canOverride = overrideEnabled(ctx.env);
-  const phiOverride = canOverride && phiOverrideAccepted(body);
-  const overrideArgs = overrideOpts(phiOverride, canOverride);
+  const phiOverrideRequest = parsePhiOverrideRequest(body);
+  const overrideArgs = overrideOpts(canOverride, phiOverrideRequest);
   if (task === "thesis_to_paper") return thesisTask(ctx, projectId, input);
   if (task === "polish") return polishTask(ctx, projectId, input, overrideArgs);
   if (task === "case_report_draft") {
@@ -1230,14 +1230,18 @@ export async function aiDraft(ctx, projectId, body) {
       return err(400, "invalid_body", "Case text is required.", requestId);
     }
     const report = scan(caseText, { mode: "user" });
-    if (report.blocked && !phiOverride) {
-      const categories = phiCategories(report.hits);
-      await api.audit(db, projectId, uid, "ai_phi_blocked", "case_report_draft", { categories, purpose: "case_report_draft" });
-      return ctx.api.json({
-        error: { code: "phi_blocked", message: "Patient identifiers detected in case text.", requestId },
-        categories,
-        overridable: canOverride,
-      }, 422, { "x-request-id": requestId });
+    if (report.blocked) {
+      const decision = evaluatePhiOverride(report.hits, phiOverrideRequest, canOverride, new Date());
+      if (!decision.accepted) {
+        await api.audit(db, projectId, uid, "ai_phi_blocked", "case_report_draft",
+          { categories: decision.categories, purpose: "case_report_draft" });
+        return ctx.api.json({
+          error: { code: "phi_blocked", message: "Patient identifiers detected in case text.", requestId },
+          categories: decision.categories,
+          overridable: decision.overridable,
+          allowedConditions: decision.allowedConditions,
+        }, 422, { "x-request-id": requestId });
+      }
     }
     /* With a valid override the request-level scan in runUserAi writes the
      * single ai_phi_override audit; the call proceeds below. */

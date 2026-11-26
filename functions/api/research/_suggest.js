@@ -27,7 +27,98 @@ import { TEMPLATES, templateById, extractionOf, rowFor } from "./_extraction.js"
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const VOTE_ROLES = ["owner", "editor", "analyst", "reviewer"];
 const DOC_CHAR_BUDGET = 28000; /* keeps the assembled T1 prompt under 8000 tokens */
-export const PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v0";
+export const PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v1";
+export const PHI_OVERRIDE_CONDITIONS = ["false_positive", "anonymised", "consent"];
+/* Legal review F-02: ID numbers and phone numbers need patient consent with
+ * evidence. A patient name can never be overridden. */
+export const PHI_HIGH_RISK_CATEGORIES = ["aadhaar", "abha", "ssn", "nhs", "mrn", "phone"];
+const CONSENT_DATE_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
+const CONSENT_REFERENCE_MAX = 80;
+const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
+
+/* The consent is given in India, so "today" means the IST calendar date. */
+export function istToday(now) {
+  const value = now instanceof Date ? now.getTime() : Date.now();
+  return new Date(value + IST_OFFSET_MS).toISOString().slice(0, 10);
+}
+export function consentDateValid(value, now) {
+  const m = CONSENT_DATE_RE.exec(String(value || ""));
+  if (!m) return false;
+  const y = Number(m[1]);
+  const mo = Number(m[2]);
+  const d = Number(m[3]);
+  if (mo < 1 || mo > 12 || d < 1 || d > 31) return false;
+  const dt = new Date(Date.UTC(y, mo - 1, d));
+  if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== mo - 1 || dt.getUTCDate() !== d) return false;
+  return String(value) <= istToday(now);
+}
+/* Parse body.phiOverride without accepting it. Validation happens after the
+ * PHI scan, because the allowed conditions depend on the categories found. */
+export function parsePhiOverrideRequest(body) {
+  const o = body && body.phiOverride;
+  if (!o || typeof o !== "object" || Array.isArray(o)) return null;
+  const raw = o.consentEvidence;
+  const ev = raw && typeof raw === "object" && !Array.isArray(raw) ? raw : null;
+  return {
+    accepted: o.accepted === true,
+    termsVersion: typeof o.termsVersion === "string" ? o.termsVersion : "",
+    condition: typeof o.condition === "string" ? o.condition.trim() : "",
+    consentEvidence: ev ? {
+      consentDate: typeof ev.consentDate === "string" ? ev.consentDate.trim() : "",
+      reference: typeof ev.reference === "string" ? ev.reference.trim() : "",
+    } : null,
+  };
+}
+export function overridePolicy(hits, enabled) {
+  const categories = phiCategories(hits);
+  const hasPatientName = categories.indexOf("patient_name") >= 0;
+  const highRisk = categories.some((c) => PHI_HIGH_RISK_CATEGORIES.indexOf(c) >= 0);
+  if (enabled !== true || hasPatientName) {
+    return { overridable: false, allowedConditions: [], categories, highRisk, hasPatientName };
+  }
+  return {
+    overridable: true,
+    allowedConditions: highRisk ? ["consent"] : PHI_OVERRIDE_CONDITIONS.slice(),
+    categories,
+    highRisk,
+    hasPatientName,
+  };
+}
+/* Returns the override decision plus the exact audit metadata. Never includes
+ * the flagged text or the consent reference. */
+export function evaluatePhiOverride(hits, request, enabled, now) {
+  const policy = overridePolicy(hits, enabled);
+  const result = {
+    accepted: false,
+    overridable: policy.overridable,
+    allowedConditions: policy.allowedConditions.slice(),
+    categories: policy.categories,
+    condition: "",
+    consentEvidenced: false,
+    consentDate: "",
+  };
+  if (!policy.overridable || !request) return result;
+  if (request.accepted !== true) return result;
+  if (request.termsVersion !== PHI_OVERRIDE_TERMS_VERSION) return result;
+  if (PHI_OVERRIDE_CONDITIONS.indexOf(request.condition) < 0) return result;
+  if (policy.allowedConditions.indexOf(request.condition) < 0) return result;
+  if (request.condition === "consent") {
+    /* Stricter reading of F-02: the consent condition always needs evidence
+     * (date + reference), whatever the identifier type. */
+    const ev = request.consentEvidence;
+    const evidenced = !!ev && !!ev.reference && ev.reference.length <= CONSENT_REFERENCE_MAX &&
+      consentDateValid(ev.consentDate, now);
+    if (!evidenced) return result;
+    result.consentEvidenced = true;
+    result.consentDate = ev.consentDate;
+  } else if (policy.highRisk) {
+    /* High-risk categories allow only "consent", and consent needs evidence. */
+    return result;
+  }
+  result.accepted = true;
+  result.condition = request.condition;
+  return result;
+}
 
 /* The ordered gateway pipeline for one user-facing T1 call. Returns either
  * {error: Response} or {text, model, usage, costInr}. refId traces the
@@ -52,23 +143,32 @@ export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, 
     const report = scan(assembled, opts.phiMode === "user" ? { mode: "user" } : undefined);
     if (report.blocked) {
       const categories = phiCategories(report.hits);
-      const rules = [...new Set(report.hits.map((h) => h.rule))].sort();
       /* Override is /ai-draft only, never automated paths. Only _ai_draft.js
-       * sets these opts, after validating body.phiOverride; every other
-       * caller never passes phiOverride. */
-      if (opts.phiOverride === true && opts.phiMode === "user" && opts.phiRoute === "ai-draft") {
-        await audit(db, projectId, uid, "ai_phi_override", refId, {
+       * sets these opts, after parsing body.phiOverride; every other caller
+       * never passes it. The policy depends on the categories actually found. */
+      const overrideApplies = opts.phiMode === "user" && opts.phiRoute === "ai-draft";
+      const decision = overrideApplies
+        ? evaluatePhiOverride(report.hits, opts.phiOverrideRequest, opts.phiEnabled === true, new Date())
+        : null;
+      if (decision && decision.accepted) {
+        const meta = {
           route: "ai-draft",
           task: opts.phiTask || "",
-          categories,
-          rules,
-          termsVersion: opts.phiTermsVersion || PHI_OVERRIDE_TERMS_VERSION,
-        });
+          categories: decision.categories,
+          termsVersion: PHI_OVERRIDE_TERMS_VERSION,
+          condition: decision.condition,
+          consentEvidenced: decision.consentEvidenced,
+        };
+        if (decision.consentEvidenced) meta.consentDate = decision.consentDate;
+        await audit(db, projectId, uid, "ai_phi_override", refId, meta);
       } else {
         await audit(db, projectId, uid, "ai_phi_blocked", refId, { categories, purpose });
         const payload = { error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
           categories };
-        if (opts.phiRoute === "ai-draft" && opts.phiOverridable === true) payload.overridable = true;
+        if (opts.phiRoute === "ai-draft") {
+          payload.overridable = decision ? decision.overridable : false;
+          payload.allowedConditions = decision ? decision.allowedConditions : [];
+        }
         return { error: json(payload, 422, { "x-request-id": requestId }) };
       }
     }
