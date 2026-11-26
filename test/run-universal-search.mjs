@@ -58,6 +58,11 @@ try {
   chk("selecting a chip filters to one category", filtered.every(r => /^calcs:|^ask:/.test(r)) && filtered.length > 5, String(filtered.length));
   chk("sections other than the chosen one and Ask are gone", await ev(`return document.querySelectorAll("#usBody .us-sec[data-cat]").length`) === 2);
 
+  // Redesign 2026-11-26: back chevron (no clipped "Cancel"), the panel fills the screen under the Display zoom (0.95 on a
+  // small phone: 100dvh fell short and the bottom nav showed through), and the legacy panel's shadow no longer bleeds in.
+  chk("top bar has a back button and no Cancel text", await ev(`var b=document.getElementById("usCancel"); return !!b && b.classList.contains("us-back") && b.getAttribute("aria-label")==="Close search" && !/Cancel/.test(document.querySelector(".us-head").textContent);`) === true);
+  chk("panel fills the screen at page zoom 0.95", await ev(`var de=document.documentElement, z=de.style.zoom; de.style.zoom="0.95"; var r=document.getElementById("usPanel").getBoundingClientRect(), ok=Math.abs(r.bottom-innerHeight)<1 && Math.abs(r.top)<1; de.style.zoom=z; return ok;`) === true);
+  chk("legacy search panel is hidden (no shadow over the bar)", await ev(`var l=document.getElementById("smdSearchPanel"); return !l || getComputedStyle(l).visibility==="hidden";`) === true);
   // Owner 2026-11-24: the chips are one segmented bar: one row, no page overflow, a sideways scroll that a repaint keeps.
   chk("type bar is one row and fits the panel", await ev(`var b=document.getElementById("usChips"), c=b.querySelectorAll(".us-chip"), t=c[0].getBoundingClientRect().top; return [].every.call(c,function(x){return Math.abs(x.getBoundingClientRect().top-t)<1;}) && b.getBoundingClientRect().right<=innerWidth+0.5 && document.documentElement.scrollWidth<=innerWidth;`) === true);
   chk("chosen segment is a raised pill", await ev(`var c=document.querySelector('#usChips .us-chip[aria-pressed="true"]'); return getComputedStyle(c).boxShadow!=="none" && getComputedStyle(c).backgroundColor!=="rgba(0, 0, 0, 0)";`) === true);

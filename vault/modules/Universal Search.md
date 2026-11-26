@@ -41,3 +41,12 @@ settings toggles. Category chips filter; an "Ask MaiK about ..." row is always l
   segmented capsule, one row, scrolls sideways when the categories do not fit; the chosen one is a raised pill.
   `render()` rebuilds the chips, so it saves and restores `chips.scrollLeft` (else a tap on a far-right chip jumps
   the bar back to the start). Checked in `test/run-universal-search.mjs`.
+- Top bar redesign (2026-11-26): back chevron left (`#usCancel.us-back`, aria "Close search"; the "Cancel" text clipped at
+  the right edge), filled pill field (tinted, white with a teal ring on focus), round clear button, shorter placeholder
+  "Drugs, scores, diseases, codes". No glass on the bar: results scroll in `.us-body`, so a hairline appears only once
+  they scroll (`.us-scrolled`).
+- **Display zoom gotcha:** home.js sets `documentElement.style.zoom` (0.95 by default on a small phone). `height:100dvh`
+  on a fixed panel then stops 5% short and the bottom nav shows through. The panel uses `inset:0` with no height.
+- **Legacy panel shadow:** `#smdSearchPanel` (app.js) is parked above the screen at z 401 with a 24 px shadow that bled
+  over the top of this panel and of home. search.js adds `html.us-on`; search.css hides the legacy panel under it
+  (the `?usearch=0` fallback never gets the class).
