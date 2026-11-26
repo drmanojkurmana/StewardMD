@@ -64,12 +64,39 @@
       .replace(/&amp;/g, "&");
   }
 
+  function readFileAsArrayBuffer(file) {
+    if (file && typeof file.arrayBuffer === "function") {
+      return file.arrayBuffer();
+    }
+    return new Promise(function (resolve, reject) {
+      if (!file) { reject(new Error("No file provided.")); return; }
+      if (typeof FileReader === "undefined") {
+        reject(new Error("File reading is not supported on this device."));
+        return;
+      }
+      var fr = new FileReader();
+      fr.onload = function () { resolve(fr.result); };
+      fr.onerror = function () { reject(new Error("Could not read file from device storage.")); };
+      fr.readAsArrayBuffer(file);
+    });
+  }
+
   function readZipEntries(buf) {
-    var u8 = new Uint8Array(buf);
+    var ab;
+    if (buf && buf.buffer instanceof ArrayBuffer) {
+      ab = (buf.byteOffset === 0 && buf.byteLength === buf.buffer.byteLength)
+        ? buf.buffer
+        : buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+    } else if (buf instanceof ArrayBuffer) {
+      ab = buf;
+    } else {
+      ab = new ArrayBuffer(0);
+    }
+    var u8 = new Uint8Array(ab);
     if (u8.length >= 4 && u8[0] === 0xD0 && u8[1] === 0xCF && u8[2] === 0x11 && u8[3] === 0xE0) {
       return Promise.reject(new Error("This file is an older binary Word (.doc) file or password-protected. Save an unprotected copy as .docx or PDF and upload again."));
     }
-    var dv = new DataView(buf);
+    var dv = new DataView(ab);
     var eocd = -1;
     var minAt = Math.max(0, u8.length - 22 - 65536);
     for (var i = u8.length - 22; i >= minAt; i--) {
@@ -91,19 +118,31 @@
       var commentLen = dv.getUint16(p + 32, true);
       var lho = dv.getUint32(p + 42, true);
       var name = decodeUtf8(u8.subarray(p + 46, p + 46 + nameLen));
-      entries[name] = { method: method, offset: lho, size: compSize };
+      var meta = { method: method, offset: lho, size: compSize };
+      entries[name] = meta;
+      var altName = name.replace(/\\/g, "/").replace(/^\.\//, "").replace(/^\//, "");
+      if (altName !== name) entries[altName] = meta;
       p += 46 + nameLen + extraLen + commentLen;
     }
     function readEntry(name) {
       var en = entries[name];
       if (!en) return Promise.resolve(null);
+      if (en.offset < 0 || en.offset + 30 > u8.length) {
+        return Promise.reject(new Error("Corrupted Word (.docx) document structure."));
+      }
       var nl = dv.getUint16(en.offset + 26, true);
       var el = dv.getUint16(en.offset + 28, true);
       var start = en.offset + 30 + nl + el;
+      if (start + en.size > u8.length) {
+        return Promise.reject(new Error("Corrupted Word (.docx) document structure."));
+      }
       var data = u8.subarray(start, start + en.size);
       if (en.method === 0) return Promise.resolve(data);
-      if (en.method !== 8 || !G.DecompressionStream) {
-        return Promise.reject(new Error("This Word (.docx) compression format cannot be opened on this device. Export it as PDF and upload."));
+      if (!G.DecompressionStream) {
+        return Promise.reject(new Error("This device does not support on-device Word decompression (requires iOS 16.4+ or modern Android). Export your thesis as PDF and upload again."));
+      }
+      if (en.method !== 8) {
+        return Promise.reject(new Error("This Word (.docx) file uses an unsupported compression format (" + en.method + "). In Word, save as standard .docx or PDF and upload again."));
       }
       var stream = new Blob([data]).stream().pipeThrough(new G.DecompressionStream("deflate-raw"));
       return new Response(stream).arrayBuffer().then(function (b) { return new Uint8Array(b); });
@@ -917,7 +956,7 @@
       h.push('<h2>Upload your thesis</h2>');
       h.push('<p class="rmd-screen-subtitle">PDF or Word (.docx), up to 40 MB. Text and tables are read directly on your device; scanned PDFs use our OCR server.</p>');
       h.push('<div class="rmd-field"><label for="rmdThesisFile">Thesis file</label>');
-      h.push('<input type="file" id="rmdThesisFile" accept=".pdf,.docx,.doc,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword"></div>');
+      h.push('<input type="file" id="rmdThesisFile" accept=".pdf,.docx,.doc,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-word.document.12,application/docx,application/msword"></div>');
       h.push('<p class="rmd-thesis-meta">Supports PDF and Word (.docx) thesis files directly, including results tables.</p>');
       h.push('<div id="rmdThesisMsg"></div>');
       h.push('</div>');
@@ -1009,21 +1048,26 @@
   }
 
   function handleFile(file, container) {
-    var name = (file.name || "").toLowerCase();
-    var mime = (file.type || "").toLowerCase();
+    if (!file) return;
+    var name = (file.name || "").replace(/^\s+|\s+$/g, "").toLowerCase();
+    var mime = (file.type || "").replace(/^\s+|\s+$/g, "").toLowerCase();
     if (file.size > MAX_BYTES) {
       setMsg(container, '<div class="rmd-banner rmd-banner-warn">This file is larger than 40 MB. Split it or export a smaller file.</div>');
       return;
     }
-    var isDocxFile = /\.docx$/i.test(name) || mime.indexOf("wordprocessingml") >= 0;
-    var isLegacyDoc = /\.doc$/i.test(name) && !isDocxFile;
+    var isDocxFile = /\.docx$/i.test(name) ||
+      mime.indexOf("wordprocessingml") >= 0 ||
+      mime === "application/docx" ||
+      mime === "application/x-docx" ||
+      mime === "application/vnd.ms-word.document.12";
+    var isLegacyDoc = (/\.doc$/i.test(name) || mime === "application/msword") && !isDocxFile;
     if (isLegacyDoc) {
       setMsg(container, '<div class="rmd-banner rmd-banner-warn">Older Word (.doc) files are binary format. In Word, use File, then Save As Word Document (.docx) or PDF, and upload again.</div>');
       return;
     }
     if (isDocxFile) {
-      setMsg(container, SMD.p2.loadingHtml("Reading your Word (.docx) thesis"));
-      file.arrayBuffer().then(parseDocx).then(function (pages) {
+      setMsg(container, (SMD.p2 && SMD.p2.loadingHtml) ? SMD.p2.loadingHtml("Reading your Word (.docx) thesis") : "Reading your Word (.docx) thesis");
+      readFileAsArrayBuffer(file).then(parseDocx).then(function (pages) {
         saveExtractedPages(pages, file.name, container, { artifactId: null, jobId: null });
       }).catch(function (err) {
         var msg = (err && err.message) ? err.message : "Could not read this Word (.docx) document. Export it as PDF and upload again.";
@@ -1033,10 +1077,10 @@
     }
     // Try on-device PDF extraction first for real PDFs (works up to 40 MB and >60 pages, 0 tokens).
     // Tiny fixtures (< 100 bytes) or scanned image-only PDFs automatically fall back to server OCR.
-    if (file.size >= 100 && typeof file.arrayBuffer === "function") {
-      setMsg(container, SMD.p2.loadingHtml("Reading your thesis"));
+    if (file.size >= 100 && (typeof file.arrayBuffer === "function" || typeof FileReader !== "undefined")) {
+      setMsg(container, (SMD.p2 && SMD.p2.loadingHtml) ? SMD.p2.loadingHtml("Reading your thesis") : "Reading your thesis");
       readPdfLocal(file, function (cur, tot) {
-        setMsg(container, SMD.p2.loadingHtml("Reading page " + cur + " of " + tot));
+        setMsg(container, (SMD.p2 && SMD.p2.loadingHtml) ? SMD.p2.loadingHtml("Reading page " + cur + " of " + tot) : "Reading page " + cur + " of " + tot);
       }).then(function (res) {
         if (res && res.pages && res.pages.length) {
           saveExtractedPages(res.pages, file.name, container, { artifactId: null, jobId: null });
@@ -2014,6 +2058,10 @@
     scanThesisPages: scanThesisPages,
     countWords: countWords,
     parseDocx: parseDocx,
+    readZipEntries: readZipEntries,
+    extractDocxXmlBlocks: extractDocxXmlBlocks,
+    paginateBlocks: paginateBlocks,
+    handleFile: handleFile,
     PAPER_TYPES: PAPER_TYPES,
     DEFAULT_JOURNAL: DEFAULT_JOURNAL
   };
