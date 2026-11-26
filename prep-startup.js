@@ -1,8 +1,8 @@
 /* PrepNucleus startup logo reveal (owner 2026-11-25, recut 2026-11-26) -> window.PREP_STARTUP. ES5.
  *
  * Plays the orientation-matched silent startup clip when PrepNucleus opens from Home or via a plain PREP.open():
- * - Portrait (innerWidth <= innerHeight): /prep/startup/prep-startup-v.mp4 (1512x2688 HEVC 60 fps, 7.8 s)
- * - Landscape (innerWidth > innerHeight): /prep/startup/prep-startup-h.mp4 (2688x1512 HEVC 60 fps, 6.35 s)
+ * - Portrait (innerWidth <= innerHeight): /prep/startup/prep-startup-v.mp4 (1080x1920 HEVC 30 fps, 6 s, Wan 3.0 2026-11-26)
+ * - Landscape (innerWidth > innerHeight): /prep/startup/prep-startup-h.mp4 (1662x1246 4:3 HEVC 30 fps, 6 s, Wan 3.0 Prime)
  *
  * Screen fit: the clip fills the whole screen (object-fit: cover), centred, on every iPhone and iPad shape. The logo and
  * wordmark sit in the middle third of both clips, so the crop on tall phones and 4:3 iPads only trims the starfield.
@@ -18,10 +18,10 @@
   var D = G.document;
 
   var CLIPS = {
-    v: { src: "/prep/startup/prep-startup-v.mp4", start: "/prep/startup/prep-startup-v-start.webp", end: "/prep/startup/prep-startup-v-end.webp", ratio: 9 / 16, dur: 7.8 },
-    h: { src: "/prep/startup/prep-startup-h.mp4", start: "/prep/startup/prep-startup-h-start.webp", end: "/prep/startup/prep-startup-h-end.webp", ratio: 16 / 9, dur: 6.35 }
+    v: { src: "/prep/startup/prep-startup-v.mp4", start: "/prep/startup/prep-startup-v-start.webp", end: "/prep/startup/prep-startup-v-end.webp", ratio: 9 / 16, dur: 6 },
+    h: { src: "/prep/startup/prep-startup-h.mp4", start: "/prep/startup/prep-startup-h-start.webp", end: "/prep/startup/prep-startup-h-end.webp", ratio: 4 / 3, dur: 6 }
   };
-  var V = "3";
+  var V = "4";
 
   function qParam() {
     try {
