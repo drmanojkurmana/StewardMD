@@ -74,6 +74,29 @@ describe("Bug D: Network layer, AI draft timeout, and offline queue", () => {
       // Verify friendly error is NOT triggered for successful 20s call
       const friendly = SMD.p2.friendlyError(null);
       assert.notEqual(friendly.message, "No connection right now. Your work is saved; try again in a moment.");
+
+      // Verify all AI and literature routes receive 90s timeout, while regular routes get 30s
+      const seenTimeouts = {};
+      globalThis.fetch = async (url, opts) => {
+        seenTimeouts[url] = opts.timeout;
+        return { ok: true, status: 200, text: async () => "{}" };
+      };
+      const aiPaths = [
+        "/v1/projects/p1/ai-draft",
+        "/v1/paper-card/explain",
+        "/v1/projects/p1/paper-card/explain",
+        "/v1/projects/p1/studies/s1/extraction/suggestions",
+        "/v1/projects/p1/records/r1/screening-suggestions",
+        "/v1/projects/p1/grade-suggestions?runId=r1",
+        "/v1/projects/p1/studies/auto-add",
+        "/v1/projects/p1/find-studies"
+      ];
+      for (const ap of aiPaths) {
+        await SMD.api.request("POST", ap, {});
+        assert.equal(seenTimeouts["/api/research" + ap], 90000, `Expected 90000ms timeout for ${ap}`);
+      }
+      await SMD.api.request("GET", "/v1/projects/p1/studies");
+      assert.equal(seenTimeouts["/api/research/v1/projects/p1/studies"], 30000, "Expected 30000ms timeout for non-AI route");
     } finally {
       globalThis.fetch = origFetch;
       globalThis.Capacitor = origCap;

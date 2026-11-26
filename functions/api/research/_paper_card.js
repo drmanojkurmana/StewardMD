@@ -25,8 +25,13 @@ const TOOL = "StewardMD_ResearchMD";
 const BUCKET = createBucket(8);
 const ESEARCH = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi";
 const IDCONV = "https://www.ncbi.nlm.nih.gov/pmc/utils/idconv/v1.0/";
+const EPMC_REST = "https://www.ebi.ac.uk/europepmc/webservices/rest/";
+const PMC_EFETCH = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi";
 const PAGE_BYTES = 300 * 1024;
 const PAGE_TIMEOUT_MS = 6000;
+const FULLTEXT_TIMEOUT_MS = 8000;
+const FULLTEXT_RESULTS_CAP = 8000;
+const EXTRACTOR_VERSION = 2;
 const MAX_REDIRECTS = 3;
 const UNRECOGNISED = "Paste a PubMed, DOI, PMC or journal article link (a link to one study).";
 const TOKENS_MESSAGE = "You need more MaiK tokens";
@@ -414,16 +419,396 @@ function lastSentence(text) {
   return parts.length ? parts[parts.length - 1] : "";
 }
 
-function buildCard(rec) {
+function splitSentences(text) {
+  const raw = String(text || "").replace(/\s+/g, " ").trim();
+  if (!raw) return [];
+  const PROTECTED = "\u0000";
+  const safe = raw
+    .replace(/\b(vs|et al|Dr|Fig|Figs|No|Ref|approx|e\.g|i\.e)\./gi, "$1" + PROTECTED)
+    .replace(/(\d)\.(\d)/g, "$1" + PROTECTED + "$2");
+  return safe.split(/(?<=[.!?])\s+/)
+    .map((s) => s.replace(/\u0000/g, ".").trim())
+    .filter(Boolean);
+}
+
+function pValueInfo(sentence) {
+  const m = String(sentence || "").match(/\bp\s*(?:-?\s*value\s*(?:of|was|=|:)?\s*)?([<=>\u2264\u2265])\s*(0?\.\d+|\d+(?:\.\d+)?)\b/i);
+  if (!m) return null;
+  const num = Number(m[2]);
+  if (!Number.isFinite(num) || num < 0 || num > 1) return null;
+  const op = m[1] === "\u2264" ? "<=" : (m[1] === "\u2265" ? ">=" : m[1]);
+  return { raw: op + m[2], num, display: "p " + (op === "=" ? "= " : op + " ") + m[2] };
+}
+
+function extractAuc(sentence) {
+  const s = String(sentence || "");
+  if (!/\b(?:AUROCs?|AUCs?|area\s+under\s+(?:the\s+)?(?:ROC\s+)?curve)\b/i.test(s)) return null;
+  const withCi = s.match(/\b(?:AUROCs?|AUCs?|area\s+under\s+(?:the\s+)?(?:ROC\s+)?curve(?:\s*\(AUC\))?)\b[^.!?\d]{0,40}?(0\.\d+|1(?:\.0+)?)(?:\s+(?:for|of)\s+(?:the\s+)?([A-Za-z0-9][A-Za-z0-9\-\/ ]{0,26}?))?\s*[,;(]?\s*(?:95\s*%\s*(?:CI|confidence\s+interval)[:\s]*)(\d+(?:\.\d+)?)\s*(?:to|-|\u2013)\s*(\d+(?:\.\d+)?)\)?/i);
+  if (withCi) {
+    const est = Number(withCi[1]), tag = withCi[2] ? withCi[2].trim().replace(/\s+/g, " ") : "";
+    const lo = Number(withCi[3]), hi = Number(withCi[4]);
+    if (est > 0 && est <= 1 && lo >= 0 && hi <= 1.05 && lo <= est && est <= hi) {
+      return {
+        label: "Area under the curve (AUC) (diagnostic accuracy)",
+        value: withCi[1] + (tag ? (" (" + tag + ")") : "") + " (95% CI " + withCi[3] + " to " + withCi[4] + ")",
+        numbers: [est, lo, hi],
+      };
+    }
+  }
+  const head = s.search(/\b(?:AUROCs?|AUCs?|area\s+under\s+(?:the\s+)?(?:ROC\s+)?curve)\b/i);
+  const tail = s.slice(head)
+    .replace(/\(\s*95\s*%\s*(?:CI|confidence\s+interval)[^)]*\)/gi, " ")
+    .replace(/\b95\s*%\s*(?:CI|confidence\s+interval)[:\s]*\d+(?:\.\d+)?\s*(?:to|-|\u2013)\s*\d+(?:\.\d+)?/gi, " ")
+    .replace(/\bp\s*(?:-?\s*value\s*(?:of|was|=|:)?\s*)?[<=>\u2264\u2265]\s*(?:0?\.\d+|\d+(?:\.\d+)?)/gi, " ");
+  const re = /(?:^|[^0-9.])(0\.\d+|1(?:\.0+)?)(?:\s+(?:for|of)\s+(?:the\s+)?([A-Za-z0-9][A-Za-z0-9\-\/ ]{0,26}?))?(?=[,.;()]|\s+and\b|\s+vs\.?\b|$)/gi;
+  const items = [];
+  const nums = [];
+  let m;
+  while ((m = re.exec(tail)) !== null) {
+    const val = Number(m[1]);
+    if (!(val > 0 && val <= 1)) continue;
+    const prefix = tail.slice(Math.max(0, m.index - 12), m.index + 1);
+    if (/\bp\s*[=<>]\s*$/i.test(prefix)) continue;
+    const tag = m[2] ? m[2].trim().replace(/\s+/g, " ") : "";
+    items.push(tag ? (m[1] + " (" + tag + ")") : m[1]);
+    nums.push(val);
+    if (items.length >= 6) break;
+  }
+  if (!items.length) return null;
+  return {
+    label: "Area under the curve (AUC) (diagnostic accuracy)",
+    value: items.join(", "),
+    numbers: nums,
+  };
+}
+
+function extractDiagnostic(sentence) {
+  const s = String(sentence || "");
+  const bothSame = s.match(/(\d+(?:\.\d+)?)\s*%\s*sensitivity\s+and\s+specificity/i) ||
+    s.match(/sensitivity\s+and\s+specificity\s*(?:of|was|were|=|:)?\s*(\d+(?:\.\d+)?)\s*%/i);
+  if (bothSame) {
+    const v = Number(bothSame[1]);
+    if (v >= 0 && v <= 100) {
+      return {
+        label: "Sensitivity and specificity (test accuracy)",
+        value: bothSame[1] + "%",
+        numbers: [v],
+      };
+    }
+  }
+  const sensM = s.match(/sensitivity\s*(?:of|was|is|=|:)?\s*(\d+(?:\.\d+)?)\s*%/i) ||
+    s.match(/(\d+(?:\.\d+)?)\s*%\s*sensitivity/i);
+  const specM = s.match(/specificity\s*(?:of|was|is|=|:)?\s*(\d+(?:\.\d+)?)\s*%/i) ||
+    s.match(/(\d+(?:\.\d+)?)\s*%\s*specificity/i);
+  if (!sensM && !specM) return null;
+  const parts = [];
+  const nums = [];
+  if (sensM) {
+    const sv = Number(sensM[1]);
+    if (sv >= 0 && sv <= 100) { parts.push("Sensitivity " + sensM[1] + "%"); nums.push(sv); }
+  }
+  if (specM) {
+    const spv = Number(specM[1]);
+    if (spv >= 0 && spv <= 100) { parts.push("Specificity " + specM[1] + "%"); nums.push(spv); }
+  }
+  if (!parts.length) return null;
+  const label = (sensM && specM)
+    ? "Sensitivity and specificity (test accuracy)"
+    : (sensM ? "Sensitivity (true positive rate)" : "Specificity (true negative rate)");
+  return { label, value: parts.join(", "), numbers: nums };
+}
+
+function extractMeanSd(sentence) {
+  const s = String(sentence || "");
+  const re = /(-?\d+(?:\.\d+)?)\s*(?:\u00b1|\+\/-|\+-)\s*(\d+(?:\.\d+)?)(?:\s*(pg\/mL|mg\/dL|mmol\/L|umol\/L|\u00b5mol\/L|g\/dL|g\/L|U\/L|IU\/L|ng\/mL|mcg\/mL|mmHg|bpm|%|kg|cm|mm|mL|L|years?|yrs?|months?|days?|hours?|hrs?))?/gi;
+  const items = [];
+  const nums = [];
+  let m;
+  while ((m = re.exec(s)) !== null) {
+    const mean = Number(m[1]), sd = Number(m[2]);
+    if (!Number.isFinite(mean) || !Number.isFinite(sd) || sd < 0) continue;
+    const unit = m[3] ? (" " + m[3]) : "";
+    items.push(m[1] + " \u00b1 " + m[2] + unit);
+    nums.push(Math.abs(mean), sd);
+    if (items.length >= 4) break;
+  }
+  if (!items.length) return null;
+  return {
+    label: "Mean \u00b1 standard deviation (SD) (average and spread)",
+    value: items.join("; "),
+    numbers: nums,
+  };
+}
+
+function extractPercents(sentence) {
+  const cleaned = String(sentence || "")
+    .replace(/\b\d+(?:\.\d+)?\s*%\s*(?:CI\b|confidence\s+interval\b|credible\s+interval\b)/gi, " ")
+    .replace(/\b\d+(?:\.\d+)?\s*%\s*(?:sensitivity|specificity)\b/gi, " ")
+    .replace(/\b(?:sensitivity|specificity)\s*(?:and\s+specificity\s*)?(?:of|was|were|is|=|:)?\s*\d+(?:\.\d+)?\s*%/gi, " ")
+    .replace(/-?\d+(?:\.\d+)?\s*(?:\u00b1|\+\/-|\+-)\s*\d+(?:\.\d+)?\s*%/g, " ");
+  const re = /(\d+(?:\.\d+)?)\s*%(?:\s*\(\s*(\d+)\s*\/\s*(\d+)\s*\))?/g;
+  const items = [];
+  const nums = [];
+  const seen = new Set();
+  let m;
+  while ((m = re.exec(cleaned)) !== null) {
+    const v = Number(m[1]);
+    if (!Number.isFinite(v) || v < 0 || v > 100) continue;
+    const text = m[2] && m[3] ? (m[1] + "% (" + m[2] + "/" + m[3] + ")") : (m[1] + "%");
+    if (seen.has(text)) continue;
+    seen.add(text);
+    items.push(text);
+    nums.push(v);
+    if (m[2] && m[3]) {
+      nums.push(Number(m[2]), Number(m[3]));
+    }
+    if (items.length >= 4) break;
+  }
+  if (!items.length) return null;
+  return {
+    label: "Proportion (percentage)",
+    value: items.join(", "),
+    numbers: nums,
+  };
+}
+
+function extractSampleN(sentence) {
+  const s = String(sentence || "");
+  const re = /\b[nN]\s*=\s*(\d{1,3}(?:,\d{3})+|\d+)\b/g;
+  const items = [];
+  const nums = [];
+  const seen = new Set();
+  let m;
+  while ((m = re.exec(s)) !== null) {
+    const num = Number(String(m[1]).replace(/,/g, ""));
+    if (!Number.isInteger(num) || num < 1 || num > 10000000) continue;
+    if (seen.has(num)) continue;
+    seen.add(num);
+    items.push("n = " + m[1]);
+    nums.push(num);
+    if (items.length >= 4) break;
+  }
+  if (!items.length) return null;
+  return {
+    label: "Sample size (n) (number studied)",
+    value: items.join(", "),
+    numbers: nums,
+  };
+}
+
+function findingDedupKey(f) {
+  if (!f) return "";
+  if (f.format === "counts") return "c:" + f.events1 + ":" + f.total1 + ":" + f.events2 + ":" + f.total2;
+  if (f.format === "estimate") return "e:" + f.measure + ":" + f.estimate + ":" + f.ciLower + ":" + f.ciUpper;
+  return "m:" + f.kind + ":" + String(f.value || "").toLowerCase();
+}
+
+export function extractPaperFindings(text, sourceLabel = "Abstract", opts = {}) {
+  const maxItems = Number.isInteger(opts.max) ? opts.max : 6;
+  const seen = opts.seen instanceof Set ? opts.seen : new Set();
+  const out = [];
+  const sentences = splitSentences(text);
+
+  function pushItem(row) {
+    const key = findingDedupKey(row);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    out.push(row);
+    return out.length >= maxItems;
+  }
+
+  for (let i = 0; i < sentences.length; i++) {
+    const sentence = sentences[i];
+    const quote = sentence.slice(0, 2000);
+    const pInfo = pValueInfo(sentence);
+    let capturedInSentence = false;
+
+    const baseRows = parseFindings(sentence);
+    for (let j = 0; j < baseRows.length; j++) {
+      const row = Object.assign({}, baseRows[j], { source: sourceLabel });
+      capturedInSentence = true;
+      if (pushItem(row)) return out;
+    }
+
+    const auc = extractAuc(sentence);
+    if (auc) {
+      capturedInSentence = true;
+      const row = {
+        format: "metric", kind: "auc", label: auc.label, value: auc.value,
+        numbers: auc.numbers, quote, source: sourceLabel,
+      };
+      if (pInfo) row.p = pInfo.raw;
+      if (pushItem(row)) return out;
+    }
+
+    const diag = extractDiagnostic(sentence);
+    if (diag) {
+      capturedInSentence = true;
+      const row = {
+        format: "metric", kind: "diagnostic", label: diag.label, value: diag.value,
+        numbers: diag.numbers, quote, source: sourceLabel,
+      };
+      if (pInfo) row.p = pInfo.raw;
+      if (pushItem(row)) return out;
+    }
+
+    const meanSd = extractMeanSd(sentence);
+    if (meanSd) {
+      capturedInSentence = true;
+      const row = {
+        format: "metric", kind: "mean_sd", label: meanSd.label, value: meanSd.value,
+        numbers: meanSd.numbers, quote, source: sourceLabel,
+      };
+      if (pInfo) row.p = pInfo.raw;
+      if (pushItem(row)) return out;
+    }
+
+    const pct = extractPercents(sentence);
+    if (pct) {
+      capturedInSentence = true;
+      const row = {
+        format: "metric", kind: "percent", label: pct.label, value: pct.value,
+        numbers: pct.numbers, quote, source: sourceLabel,
+      };
+      if (pInfo) row.p = pInfo.raw;
+      if (pushItem(row)) return out;
+    }
+
+    const nInfo = extractSampleN(sentence);
+    if (nInfo) {
+      capturedInSentence = true;
+      const row = {
+        format: "metric", kind: "n", label: nInfo.label, value: nInfo.value,
+        numbers: nInfo.numbers, quote, source: sourceLabel,
+      };
+      if (pInfo) row.p = pInfo.raw;
+      if (pushItem(row)) return out;
+    }
+
+    if (!capturedInSentence && pInfo) {
+      const row = {
+        format: "metric", kind: "p_value", label: "p-value (chance probability)",
+        value: pInfo.display, p: pInfo.raw, numbers: [pInfo.num], quote, source: sourceLabel,
+      };
+      if (pushItem(row)) return out;
+    }
+  }
+  return out;
+}
+
+/* Extract the Results section(s) from JATS / PMC full-text XML.
+ * Walks <sec> nesting so subsections stay inside Results. */
+export function extractResultsSectionFromXml(xml) {
+  const src = String(xml || "");
+  if (!src) return { resultsText: "", tableText: "" };
+  const bodyMatch = src.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i);
+  const scope = bodyMatch ? bodyMatch[1] : src.replace(/<abstract\b[\s\S]*?<\/abstract>/gi, " ");
+  const blocks = [];
+  const secOpenRe = /<sec\b([^>]*)>/gi;
+  let m;
+  let cursor = 0;
+  while ((m = secOpenRe.exec(scope)) !== null) {
+    if (m.index < cursor) continue;
+    const attrs = m[1] || "";
+    const afterOpen = m.index + m[0].length;
+    const titleMatch = scope.slice(afterOpen, afterOpen + 400).match(/^\s*<title\b[^>]*>([\s\S]*?)<\/title>/i);
+    const title = titleMatch ? stripTags(titleMatch[1]).toLowerCase() : "";
+    const secType = (attrs.match(/\bsec-type\s*=\s*["']([^"']*)["']/i) || ["", ""])[1].toLowerCase();
+    const isResults = /\bresults?\b/.test(secType) ||
+      /^(?:\d+(?:\.\d+)*\.?\s*)?(?:results?|observations(?:\s+and\s+results?)?|findings)(?:\s+and\s+discussion)?$/i.test(title);
+    if (!isResults) continue;
+
+    // Walk nested <sec> / </sec> to capture the full Results block
+    const tagRe = /<\/?sec\b[^>]*>/gi;
+    tagRe.lastIndex = afterOpen;
+    let depth = 1;
+    let endIdx = scope.length;
+    let tm;
+    while ((tm = tagRe.exec(scope)) !== null) {
+      if (tm[0].charAt(1) === "/") {
+        depth--;
+        if (depth === 0) { endIdx = tm.index; break; }
+      } else {
+        depth++;
+      }
+    }
+    blocks.push(scope.slice(afterOpen, endIdx));
+    cursor = endIdx;
+  }
+
+  const resultsScope = blocks.length ? blocks.join("\n") : "";
+  if (!resultsScope) return { resultsText: "", tableText: "" };
+
+  const paraMatches = resultsScope.match(/<p\b[^>]*>[\s\S]*?<\/p>/gi) || [];
+  const paras = paraMatches.map((p) => stripTags(p)).filter(Boolean);
+  const tableRows = [];
+  const trMatches = resultsScope.match(/<tr\b[^>]*>[\s\S]*?<\/tr>/gi) || [];
+  for (let i = 0; i < trMatches.length; i++) {
+    const rowText = stripTags(trMatches[i]);
+    if (rowText && /\d/.test(rowText)) tableRows.push(rowText.endsWith(".") ? rowText : (rowText + "."));
+  }
+  const resultsText = paras.map((p) => (/[.!?]$/.test(p) ? p : (p + "."))).join(" ").slice(0, FULLTEXT_RESULTS_CAP);
+  return { resultsText, tableText: tableRows.join(" ") };
+}
+
+async function fetchFreeFullTextResults(pmcid, config) {
+  const id = String(pmcid || "").trim().toUpperCase();
+  if (!/^PMC\d+$/.test(id)) return { resultsText: "", tableText: "" };
+  const email = (config && config.contactEmail) || "support@stewardmd.in";
+  const headers = { "User-Agent": TOOL + "/1.0 (mailto:" + email + ")", "Accept": "application/xml, text/xml" };
+  const urls = [EPMC_REST + id + "/fullTextXML"];
+  const pmcParams = new URLSearchParams();
+  pmcParams.set("db", "pmc");
+  pmcParams.set("id", id);
+  pmcParams.set("retmode", "xml");
+  pmcParams.set("tool", TOOL);
+  pmcParams.set("email", email);
+  if (config && config.apiKey) pmcParams.set("api_key", config.apiKey);
+  urls.push(PMC_EFETCH + "?" + pmcParams.toString());
+
+  for (let i = 0; i < urls.length; i++) {
+    try {
+      const res = await fetchWithRetry(urls[i], {
+        headers,
+        deadline: (config && config.deadline) || (Date.now() + FULLTEXT_TIMEOUT_MS),
+        bucket: config && config.bucket,
+        timeoutMs: FULLTEXT_TIMEOUT_MS,
+        maxRetries: 1,
+      });
+      const xml = await res.text();
+      const parsed = extractResultsSectionFromXml(xml);
+      if (parsed.resultsText || parsed.tableText) return parsed;
+    } catch (e) { /* best-effort; try next source */ }
+  }
+  return { resultsText: "", tableText: "" };
+}
+
+function combineFindings(sections, fullTextData) {
+  const all = Array.isArray(sections) ? sections.filter((s) => s && s.text) : [];
+  const whole = abstractOf(all);
+  const results = labelled(all, ["results", "result", "findings", "outcomes", "main results"]);
+  const findingText = results.length ? results.map((s) => s.text).join(" ") : whole;
+  const seen = new Set();
+  const absFindings = extractPaperFindings(findingText, "Abstract", { max: 6, seen });
+  let ftFindings = [];
+  const ftCombined = [fullTextData && fullTextData.resultsText, fullTextData && fullTextData.tableText]
+    .filter(Boolean).join(" ").trim();
+  if (ftCombined) {
+    ftFindings = extractPaperFindings(ftCombined, "Full text", { max: 6, seen });
+  }
+  return absFindings.concat(ftFindings).slice(0, 10);
+}
+
+function buildCard(rec, fullTextData) {
   const sections = Array.isArray(rec.sections) ? rec.sections.filter((s) => s && s.text) : [];
   const whole = abstractOf(sections);
-  const results = labelled(sections, ["results", "result"]);
   const conclusions = labelled(sections, ["conclusions", "conclusion", "interpretation"]);
-  const findingText = results.length ? results.map((s) => s.text).join(" ") : whole;
   const pmid = /^\d+$/.test(String(rec.pmid || "")) ? String(rec.pmid) : "";
   const doi = normaliseDoi(rec.doi) || "";
   const pmcid = /^PMC\d+$/.test(String(rec.pmcid || "")) ? String(rec.pmcid) : "";
   const year = Number.isInteger(rec.year) ? rec.year : null;
+  const ft = fullTextData || { resultsText: "", tableText: "" };
+  const sampleText = [whole, ft.resultsText].filter(Boolean).join(" ");
   return {
     pmid, pmcid, doi,
     title: String(rec.title || ""),
@@ -433,13 +818,15 @@ function buildCard(rec) {
     url: pmid ? "https://pubmed.ncbi.nlm.nih.gov/" + pmid + "/" : (doi ? "https://doi.org/" + doi : ""),
     freeFullText: /^PMC\d+$/.test(pmcid),
     design: designOf(rec.publicationTypes, rec.mesh),
-    sampleSize: sampleSizeOf(whole),
+    sampleSize: sampleSizeOf(sampleText),
     structured: sections.some((s) => String(s.label || "").trim()),
     sections: sections.map((s) => ({ label: String(s.label || ""), text: String(s.text || "") })),
-    findings: parseFindings(findingText),
+    findings: combineFindings(sections, ft),
+    fullTextResults: String(ft.resultsText || ""),
     conclusion: conclusions.length ? String(conclusions[0].text || "") : lastSentence(whole),
     mesh: (Array.isArray(rec.mesh) ? rec.mesh : []).map((s) => String(s || "").trim()).filter(Boolean),
     keywords: (Array.isArray(rec.keywords) ? rec.keywords : []).map((s) => String(s || "").trim()).filter(Boolean),
+    extractorVersion: EXTRACTOR_VERSION,
     method: "api",
     tokensUsed: 0,
   };
@@ -641,20 +1028,41 @@ export async function paperCard(ctx, projectId, body) {
 
   const cached = await readCache(db, ids);
   if (cached) {
-    const card = served(cached, "cache");
+    if (cached.extractorVersion === EXTRACTOR_VERSION) {
+      const card = served(cached, "cache");
+      await viewed(api, db, projectId, uid, card);
+      return json({ card }, 200, { "x-request-id": requestId });
+    }
+    let ftData = { resultsText: String(cached.fullTextResults || ""), tableText: "" };
+    if (!ftData.resultsText && cached.pmcid && env.RESEARCH_CONTACT_EMAIL) {
+      ftData = await fetchFreeFullTextResults(cached.pmcid, configOf(env));
+    }
+    const upgraded = Object.assign({}, cached, {
+      findings: combineFindings(cached.sections, ftData),
+      fullTextResults: ftData.resultsText || String(cached.fullTextResults || ""),
+      extractorVersion: EXTRACTOR_VERSION,
+    });
+    if (!upgraded.sampleSize) {
+      const sampleText = [abstractOf(upgraded.sections), upgraded.fullTextResults].filter(Boolean).join(" ");
+      upgraded.sampleSize = sampleSizeOf(sampleText);
+    }
+    await writeCache(db, upgraded);
+    const card = served(upgraded, "cache");
     await viewed(api, db, projectId, uid, card);
     return json({ card }, 200, { "x-request-id": requestId });
   }
   if (!env.RESEARCH_CONTACT_EMAIL)
     return err(503, "search_unconfigured", "Research database contact is not configured", requestId);
 
+  const cfg = configOf(env);
   let rec;
-  try { rec = await loadRecord(ids, configOf(env)); }
+  try { rec = await loadRecord(ids, cfg); }
   catch (e) {
     return err(502, "search_failed", "The literature databases could not be reached. Try again.", requestId);
   }
   if (!rec) return err(404, "paper_not_found", "This study could not be found from that link.", requestId);
-  const card = buildCard(rec);
+  const fullTextData = rec.pmcid ? await fetchFreeFullTextResults(rec.pmcid, cfg) : { resultsText: "", tableText: "" };
+  const card = buildCard(rec, fullTextData);
   if (!card.title && !card.sections.length)
     return err(404, "paper_not_found", "This study could not be found from that link.", requestId);
   await writeCache(db, card);
@@ -662,8 +1070,10 @@ export async function paperCard(ctx, projectId, body) {
   return json({ card }, 200, { "x-request-id": requestId });
 }
 
-function aiFields(parsed, abstract) {
+function aiFields(parsed, sourceText) {
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+  const hay = String(sourceText || "");
+  const hayPlain = hay.replace(/(\d),(\d{3})\b/g, "$1$2");
   const out = {};
   for (let i = 0; i < AI_KEYS.length; i++) {
     const key = AI_KEYS[i];
@@ -672,12 +1082,15 @@ function aiFields(parsed, abstract) {
     if (!value) continue;
     if (key === "mainResult") {
       const nums = value.match(/\d+(?:\.\d+)?/g) || [];
-      const ok = nums.every((n) => new RegExp("(?<![0-9])" + n.replace(/\./g, "\\.") + "(?![0-9])").test(abstract));
+      const ok = nums.every((n) => {
+        const re = new RegExp("(?<![0-9])" + n.replace(/\./g, "\\.") + "(?![0-9])");
+        return re.test(hay) || re.test(hayPlain);
+      });
       if (!ok) continue;
     }
     out[key] = value;
   }
-  return out;
+  return Object.keys(out).length ? out : null;
 }
 
 export async function explainPaperCard(ctx, projectId, body) {
@@ -702,24 +1115,39 @@ export async function explainPaperCard(ctx, projectId, body) {
   const cached = await readCache(db, { pmid, doi });
   if (!cached) return err(404, "paper_not_found", "Paste the study link first, then ask for a summary.", requestId);
   const findings = Array.isArray(cached.findings) ? cached.findings : [];
-  if (cached.structured === true && findings.length)
+  const hasMetaFindings = findings.some((f) => f && (f.format === "estimate" || f.format === "counts"));
+  if (cached.structured === true && hasMetaFindings)
     return err(400, "not_needed", NOT_NEEDED, requestId);
   if (cached.ai && typeof cached.ai === "object") {
     return json({ card: served(cached, "cache"), model: cached.aiModel || "", costInr: 0 }, 200, { "x-request-id": requestId });
   }
+  let fullResults = String(cached.fullTextResults || "").trim();
+  if (!fullResults && cached.pmcid && env.RESEARCH_CONTACT_EMAIL) {
+    const ft = await fetchFreeFullTextResults(cached.pmcid, configOf(env));
+    fullResults = String(ft.resultsText || "").trim();
+  }
   const abstract = abstractOf(cached.sections);
+  const sourceText = fullResults ? (abstract + "\n\nFull text Results:\n" + fullResults) : abstract;
   const title = String(cached.title || "");
   const system = "You summarise one study for a clinician. Return ONLY JSON with keys population, intervention, comparison, outcome, design, mainResult, conclusion. " +
-    "Each value is a short string. mainResult may contain only numbers copied from the abstract. Do not invent a number.";
-  const prompt = ("Title: " + title + "\nAbstract: " + abstract).slice(0, 3000);
+    "Each value is a short string. mainResult may contain only numbers copied from the abstract" +
+    (fullResults ? " or full text Results" : "") + ". Do not invent a number.";
+  const prompt = fullResults
+    ? ("Title: " + title + "\nAbstract: " + abstract.slice(0, 1800) + "\nFull text Results: " + fullResults).slice(0, 6000)
+    : ("Title: " + title + "\nAbstract: " + abstract).slice(0, 3000);
   const out = await runUserAi(ctx, targetProjectId, "paper_card_explain", system, prompt, api.uuid("pce_"), {
     temperature: 0, maxOutputTokens: 350, insufficientMessage: TOKENS_MESSAGE,
     publicLiterature: true,
   });
   if (out.error) return out.error;
-  const ai = aiFields(extractJson(out.text), abstract);
+  const ai = aiFields(extractJson(out.text), sourceText);
   if (!ai) return err(422, "invalid_draft", "MaiK did not return a summary that could be checked.", requestId);
-  const card = Object.assign({}, cached, { ai, aiModel: out.model || "", tokensUsed: 0 });
+  const card = Object.assign({}, cached, {
+    fullTextResults: fullResults || cached.fullTextResults || "",
+    ai,
+    aiModel: out.model || "",
+    tokensUsed: 0,
+  });
   await writeCache(db, card);
   return json({ card: served(card, "cache"), model: out.model || "", costInr: out.costInr || 0 }, 200, { "x-request-id": requestId });
 }
