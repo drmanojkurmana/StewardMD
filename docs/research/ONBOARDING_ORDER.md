@@ -13,7 +13,7 @@ screen. The fifth, "add your address for sign-in recovery", is not present in or
 - No such copy exists in the current tree (`grep -ri "sign-in recovery|recovery address"`).
 - No commit in `git log --all` adds or removes that string (`git log -S"sign-in recovery"`).
 - The nearest optional address questions are the state / city / hospital fields inside the
-  profile sheet (`profile-setup.js:149-161`). Those are institution fields, not sign-in recovery.
+  profile sheet (`profile-setup.js:232-243`). Those are institution fields, not sign-in recovery.
 
 Recorded as: not reproducible on this worktree, so no change was made for it. If it is
 reintroduced, it should use the same one-optional-sheet budget described below.
@@ -23,7 +23,7 @@ The four that do reproduce:
 | # | Overlay | Trigger | Classification |
 |---|---|---|---|
 | 1 | Registration verification gate (`#verifyGate`) | `verify.js:774` runs `evaluate()` on every auth state change; `verify.js:680-733` calls `showForced()` (`verify.js:355`) for an unverified account. | Safety / legal gate. Registered-doctor check, NMC register, 7-day trial and account-deletion rule. **Needs owner decision** to change. |
-| 2 | "Complete your profile" (`#pfSetupRoot`) | `profile-setup.js:733-737` (`maybeAsk`, scheduled 1200 ms after auth at `profile-setup.js:742`); also `email-auth.js:399-405` opens it immediately after email OTP. | Optional (`Later`, `profile-setup.js:599-602`). **Safe to defer.** |
+| 2 | "Complete your profile" (`#pfSetupRoot`) | `profile-setup.js:739-743` (`maybeAsk`, scheduled 1200 ms after auth at `profile-setup.js:748`); also `email-auth.js:399-405` opens it immediately after email OTP. | Optional (`Later`, `profile-setup.js:599-602`). **Safe to defer.** |
 | 3 | "Lock StewardMD" chooser (`#smdApplock`) | `applock.js:494` calls `ensureSetup()` on every account change; `applock.js:474-492` waits for pre-home gates then calls `promptSetup()` (`applock.js:224`). | Security feature, optional but protects patient data. **Any sequencing change needs owner decision.** |
 | 4 | "Verify your mobile number" (`#phvRoot`) | `phone-verify.js:573` calls `check()` 2 s after sign-in; `phone-verify.js:535-549` waits for the verify gate, tour, or an open profile sheet, then opens. | Identity / contact verification. **Any sequencing change needs owner decision.** |
 | 5 | Welcome / guided tour (not in the report's five, but also on screen) | `onboarding.js:915-934` waits for `homeForeground()` (`onboarding.js:906`), so it already runs after the first screen. | Optional. No change needed. |
@@ -37,7 +37,7 @@ race-dependent rather than designed. In the reported build the profile form open
 1.6 s of sign-in, before home was usable, and the other optional sheets stacked behind it.
 
 `profile-setup.js` did not consult the first screen at all. It opened `form(true)` after
-`needed()` (`old maybeAsk`, now `legacyAsk`, `profile-setup.js:695-701`).
+`needed()` (`old maybeAsk`, now `legacyAsk`, `profile-setup.js:698-704`).
 
 ## Proposed order
 
