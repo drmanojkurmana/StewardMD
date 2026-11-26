@@ -138,9 +138,12 @@ const db = {
 };
 
 const putLog = [];
+const exportLog = [];
 const aiDraftCalls = [];
 const jobsCalls = [];
 let exportGatesPass = false;
+let firstSaveMode = false;
+let firstSaveCreated = false;
 
 /* ---------------- API Handler ---------------- */
 async function handleApi(req, res, path, query) {
@@ -159,11 +162,15 @@ async function handleApi(req, res, path, query) {
 
   // GET /v1/projects/:projectId/manuscript/versions
   if (path.match(/^\/v1\/projects\/[^/]+\/manuscript\/versions$/) && req.method === 'GET') {
+    if (firstSaveMode && !firstSaveCreated) return send(200, { versions: [] });
     return send(200, { versions: db.versions });
   }
 
   // GET /v1/projects/:projectId/manuscript
   if (path.match(/^\/v1\/projects\/[^/]+\/manuscript$/) && req.method === 'GET') {
+    if (firstSaveMode && !firstSaveCreated) {
+      return send(404, { error: { code: 'manuscript_not_found', message: 'Manuscript not found' } });
+    }
     return send(200, { manuscript: db.manuscript });
   }
 
@@ -171,6 +178,11 @@ async function handleApi(req, res, path, query) {
   const secMatch = path.match(/^\/v1\/projects\/[^/]+\/manuscript\/sections\/([^/]+)$/);
   if (secMatch && req.method === 'PUT') {
     const sid = secMatch[1];
+    if (firstSaveMode) {
+      firstSaveCreated = true;
+      putLog.push({ sid, text: body.text, version: body.version });
+      return send(200, { section: { id: sid, heading: body.heading || sid, level: 1, text: body.text }, version: 1, tokens: {} });
+    }
     const sec = db.manuscript.sections.find((s) => s.id === sid);
     if (!sec) {
       return send(404, { error: { code: 'section_not_found', message: 'No such section' } });
@@ -211,6 +223,13 @@ async function handleApi(req, res, path, query) {
 
   // POST /v1/projects/:projectId/manuscript/export
   if (path.match(/^\/v1\/projects\/[^/]+\/manuscript\/export$/) && req.method === 'POST') {
+    exportLog.push({ version: body.version, format: body.format });
+    if (firstSaveMode) {
+      if (body.version !== 1) {
+        return send(409, { error: { code: 'stale_version', message: 'Expected version 1 after first save, got ' + body.version } });
+      }
+      return send(202, { jobId: 'job_docx_first', status: 'pending', format: 'docx', gatesPassed: true });
+    }
     if (exportGatesPass) {
       return send(202, { jobId: 'job_docx_1', status: 'pending', format: 'docx', gatesPassed: true });
     }
@@ -652,6 +671,20 @@ try {
       ok(await ev(`(()=>{const l=document.querySelector('.rmd-man-left');const r=document.querySelector('.rmd-man-right');return l&&r&&getComputedStyle(l).display!=='none'&&getComputedStyle(r).display!=='none'})()`), `two-pane visible at ${width}px`);
     }
   }
+
+  /* 11b. Fresh project (GET /manuscript 404 before first save): Save syncs version 1, then export sends version 1 */
+  firstSaveMode = true;
+  firstSaveCreated = false;
+  await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 768, deviceScaleFactor: 2, mobile: false });
+  await ev(`(function(){localStorage.removeItem('smd_rmd_manuscript_local_v1');window.__exports=[];SMD_RESEARCH.open({screen:'manuscript'});return 1})()`);
+  ok(await until(`!!document.querySelector('[data-rmd="section-save"]')`, 5000), 'fresh project renders manuscript editor on 404 fallback');
+  await click('[data-rmd="section-save"]');
+  ok(await until(`/Saved\\./.test((document.querySelector('.rmd-banner-info')||{}).textContent||'')`, 5000), 'first save on fresh project shows Saved.');
+  await click('[data-rmd="manuscript-export"]');
+  ok(await until(`window.__exports && window.__exports.some(function(x){return x.kind==='share'})`, 5000), 'export after first save succeeds and shares DOCX');
+  const firstExport = exportLog[exportLog.length - 1];
+  ok(firstExport && firstExport.version === 1, 'export after first save sends server version 1');
+  firstSaveMode = false;
 
   /* 12. No page errors, Escape closes */
   if (pageErrors.length) console.log('PAGE ERRORS:\n' + pageErrors.join('\n'));

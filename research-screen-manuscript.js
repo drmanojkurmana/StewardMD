@@ -1588,6 +1588,7 @@
       SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + sid, payload)
         .then(function (res) {
           st.saveNotice = "Saved.";
+          if (res && typeof res.version === "number") st.manuscript.version = res.version;
           if (res && res.tokens) st.manuscript.tokens = res.tokens;
           render(container);
         })
@@ -1789,7 +1790,7 @@
     render(container);
 
     var pid = encodeURIComponent(apiProjectId());
-    var payload = { version: st.manuscript ? st.manuscript.version : 2, format: "docx" };
+    var payload = { version: st.manuscript ? st.manuscript.version : 1, format: "docx" };
 
     function showGates(failures) {
       st.exporting = false;
