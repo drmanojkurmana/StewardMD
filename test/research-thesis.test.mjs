@@ -5,6 +5,11 @@ import "./helpers/json-import-attr.mjs";
 import { test, mock, describe } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { deflateRawSync } from "node:zlib";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+const thesisClient = require("../research-screen-thesis.js");
 
 let DatabaseSync = null;
 try { ({ DatabaseSync } = await import("node:sqlite")); } catch (e) {}
@@ -314,5 +319,186 @@ describe("research thesis to paper", { concurrency: false, skip: SKIP }, () => {
     });
     assert.equal(outsider.http, 404);
     assert.equal(outsider.error.code, "project_not_found");
+  });
+});
+
+describe("on-device DOCX extraction and parsing", () => {
+  function buildZip(entries) {
+    const localParts = [];
+    const cdParts = [];
+    let offset = 0;
+    for (const entry of entries) {
+      const name = entry.name;
+      const data = entry.data;
+      const compress = entry.compress;
+      const customMethod = entry.method;
+      const nameBytes = Buffer.from(name, "utf8");
+      const raw = Buffer.isBuffer(data) ? data : Buffer.from(data, "utf8");
+      const method = customMethod !== undefined ? customMethod : (compress ? 8 : 0);
+      const body = method === 8 ? deflateRawSync(raw) : raw;
+      const lh = Buffer.alloc(30);
+      lh.writeUInt32LE(0x04034b50, 0);
+      lh.writeUInt16LE(20, 4);
+      lh.writeUInt16LE(method, 8);
+      lh.writeUInt32LE(body.length, 18);
+      lh.writeUInt32LE(raw.length, 22);
+      lh.writeUInt16LE(nameBytes.length, 26);
+      localParts.push(lh, nameBytes, body);
+
+      const ch = Buffer.alloc(46);
+      ch.writeUInt32LE(0x02014b50, 0);
+      ch.writeUInt16LE(20, 4);
+      ch.writeUInt16LE(20, 6);
+      ch.writeUInt16LE(method, 10);
+      ch.writeUInt32LE(body.length, 20);
+      ch.writeUInt32LE(raw.length, 24);
+      ch.writeUInt16LE(nameBytes.length, 28);
+      ch.writeUInt32LE(offset, 42);
+      cdParts.push(ch, nameBytes);
+      offset += lh.length + nameBytes.length + body.length;
+    }
+    const cd = Buffer.concat(cdParts);
+    const eocd = Buffer.alloc(22);
+    eocd.writeUInt32LE(0x06054b50, 0);
+    eocd.writeUInt16LE(entries.length, 8);
+    eocd.writeUInt16LE(entries.length, 10);
+    eocd.writeUInt32LE(cd.length, 12);
+    eocd.writeUInt32LE(offset, 16);
+    return Buffer.concat([...localParts, cd, eocd]);
+  }
+
+  test("extracts ~17,700 words and tables from 11.9 MB generated Word (.docx) thesis with images and deflate compression", async () => {
+    const paras = [];
+    paras.push("<w:p><w:r><w:t>A PROSPECTIVE OBSERVATIONAL STUDY OF CLINICAL OUTCOMES IN CRITICALLY ILL ADULTS</w:t></w:r></w:p>");
+    paras.push("<w:p><w:r><w:br w:type=\"page\"/></w:r></w:p>");
+
+    let wordCount = 0;
+    let pIdx = 1;
+    while (wordCount < 17700) {
+      const wordsInP = [];
+      for (let w = 0; w < 50; w++) {
+        wordsInP.push("word" + (wordCount++));
+      }
+      paras.push("<w:p><w:r><w:t>" + wordsInP.join(" ") + "</w:t></w:r></w:p>");
+      if (pIdx % 7 === 0) {
+        paras.push("<w:tbl><w:tr><w:tc><w:p><w:r><w:t>Table 7</w:t></w:r></w:p></w:tc><w:tc><w:p><w:r><w:t>Pooled risk ratio was 0.49 (95% CI 0.34 to 0.70) across 120 patients.</w:t></w:r></w:p></w:tc></w:tr></w:tbl>");
+      }
+      if (pIdx % 10 === 0) {
+        paras.push("<w:p><w:r><w:br w:type=\"page\"/></w:r></w:p>");
+      }
+      pIdx++;
+    }
+
+    const docXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+      "<w:document xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:body>" +
+      paras.join("") +
+      "</w:body></w:document>";
+
+    // Generate ~11.9 MB by adding large image chunks under word/media/
+    const imgChunk = Buffer.alloc(3.8 * 1024 * 1024, 0x42);
+    const entries = [
+      { name: "[Content_Types].xml", data: "<Types xmlns=\"http://schemas.openxmlformats.org/package/2006/content-types\"></Types>", compress: true },
+      { name: "word/document.xml", data: docXml, compress: true },
+      { name: "word/media/image1.png", data: imgChunk, compress: false },
+      { name: "word/media/image2.png", data: imgChunk, compress: false },
+      { name: "word/media/image3.png", data: imgChunk, compress: false }
+    ];
+
+    const zipBuf = buildZip(entries);
+    assert.ok(zipBuf.length >= 11.4 * 1024 * 1024, "generated file must be ~11.9 MB (actual: " + zipBuf.length + " bytes)");
+
+    const ab = zipBuf.buffer.slice(zipBuf.byteOffset, zipBuf.byteOffset + zipBuf.byteLength);
+    const t0 = Date.now();
+    const pages = await thesisClient.parseDocx(ab);
+    const elapsed = Date.now() - t0;
+    assert.ok(elapsed < 3000, "parsing 11.9 MB docx must complete quickly (< 3s, actual: " + elapsed + "ms)");
+    assert.ok(pages.length >= 30, "extracted at least 30 pages (actual: " + pages.length + ")");
+
+    let extractedWords = 0;
+    for (const p of pages) {
+      extractedWords += thesisClient.countWords(p.text);
+    }
+    assert.ok(extractedWords >= 17700, "extracted at least 17,700 words (actual: " + extractedWords + ")");
+
+    const tablePage = pages.find((p) => p.text.includes("Table 7") && p.text.includes("0.49"));
+    assert.ok(tablePage, "table text must be extracted into pages");
+
+    const ver = thesisClient.verifyNumbers("The pooled risk ratio was 0.49 across 120 patients.", pages);
+    assert.equal(ver.flags.length, 0);
+    const loc = ver.locators.find((l) => l.number === "0.49");
+    assert.ok(loc, "verifies number locator");
+    assert.equal(loc.table, 7);
+  });
+
+  test("handles Windows backslash path separators in ZIP entries", async () => {
+    const xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+      "<w:document xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:body>" +
+      "<w:p><w:r><w:t>Windows path thesis text.</w:t></w:r></w:p>" +
+      "</w:body></w:document>";
+    const zipBuf = buildZip([{ name: "word\\document.xml", data: xml, compress: true }]);
+    const pages = await thesisClient.parseDocx(zipBuf);
+    assert.equal(pages.length, 1);
+    assert.match(pages[0].text, /Windows path thesis text/);
+  });
+
+  test("reports clear device requirement message when DecompressionStream is missing", async () => {
+    const origDS = globalThis.DecompressionStream;
+    try {
+      delete globalThis.DecompressionStream;
+      const xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+        "<w:document xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\"><w:body>" +
+        "<w:p><w:r><w:t>Some text.</w:t></w:r></w:p>" +
+        "</w:body></w:document>";
+      const zipBuf = buildZip([{ name: "word/document.xml", data: xml, compress: true }]);
+      await assert.rejects(
+        async () => { await thesisClient.parseDocx(zipBuf); },
+        (err) => {
+          assert.match(err.message, /iOS 16\.4\+ or modern Android/);
+          assert.doesNotMatch(err.message, /[\u2013\u2014]/);
+          return true;
+        }
+      );
+    } finally {
+      globalThis.DecompressionStream = origDS;
+    }
+  });
+
+  test("reports clear error for unsupported ZIP compression methods", async () => {
+    const xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><w:document><w:body><w:p><w:r><w:t>Hi</w:t></w:r></w:p></w:body></w:document>";
+    const zipBuf = buildZip([{ name: "word/document.xml", data: xml, method: 12 }]);
+    await assert.rejects(
+      async () => { await thesisClient.parseDocx(zipBuf); },
+      (err) => {
+        assert.match(err.message, /unsupported compression format/);
+        return true;
+      }
+    );
+  });
+
+  test("handleFile routing recognizes .docx extensions and alternate MIME types, and rejects binary .doc", () => {
+    const messages = [];
+    const container = {
+      querySelector: (sel) => {
+        if (sel === "#rmdThesisMsg") {
+          return {
+            set innerHTML(v) { messages.push(v); }
+          };
+        }
+        return null;
+      }
+    };
+
+    // Legacy binary .doc file
+    thesisClient.handleFile({ name: "my_thesis.doc", type: "application/msword", size: 1000 }, container);
+    assert.ok(messages.some((m) => m.includes("Older Word (.doc) files are binary format")));
+
+    // Large file > 40 MB
+    messages.length = 0;
+    thesisClient.handleFile({ name: "huge.docx", type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document", size: 45 * 1024 * 1024 }, container);
+    assert.ok(messages.some((m) => m.includes("larger than 40 MB")));
+
+    // Non-docx invalid format
+    messages.length = 0;
+    thesisClient.handleFile({ name: "corrupted.docx", type: "application/docx", size: 500, arrayBuffer: async () => new Uint8Array([0, 1, 2, 3]).buffer }, container);
   });
 });

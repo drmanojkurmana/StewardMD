@@ -430,7 +430,11 @@
       try {
         if (hadName && curUid()) saveProfile(curUid(), { name: hadName });
       } catch (e) {}
-      P.open();
+      /* First-run asks are optional and must not become another overlay in the sign-in row:
+       * profile-setup.js request() waits for the first screen and spends the session's one
+       * optional-sheet budget. Explicit re-opens (Account) keep opening immediately. */
+      if (opts.firstRun && P.request) P.request({ force: true });
+      else P.open();
       return;
     }
     /* profile-setup.js absent (it is a normal deferred script, so this is a load failure rather
@@ -515,7 +519,9 @@
   // ---- public API + boot -------------------------------------------------------------------
   window.SMD_EMAIL_AUTH = { openEmail: openEmail, openOtp: openOtp, sendOtp: sendOtp,
     // read-only, for applock.js: is a pre-home gate up / is one of our sheets open / the profile doc
-    gateUp: gateUp, flowOpen: function () { return !!(_el && _el.style.display === "flex"); }, loadProfile: loadProfile };
+    gateUp: gateUp, flowOpen: function () { return !!(_el && _el.style.display === "flex"); }, loadProfile: loadProfile,
+    // Test seam: first-run profile hand-off (test/research-onboarding-order.test.mjs).
+    _openProfile: openProfile };
   /* ONE Profile entry point. home.js ALSO exports window.SMD_openProfile (the full Profile page:
    * ID, hospital, plan). Both scripts are deferred, this one first, so the button's behaviour
    * depended on how far home.js - a very large file - had got: tap early and you got the setup
