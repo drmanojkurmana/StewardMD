@@ -62,6 +62,24 @@ function makeMockContainer() {
           textContent: content.replace(/<[^>]*>/g, "").trim()
         });
       }
+
+      const spanRe = /<span\s+([^>]*?)>([\s\S]*?)<\/span>/gi;
+      while ((m = spanRe.exec(html)) !== null) {
+        const attrStr = m[1];
+        const content = m[2];
+        const attrs = {};
+        const are = /([a-zA-Z0-9_-]+)(?:=["']([^"']*)["'])?/g;
+        let am;
+        while ((am = are.exec(attrStr)) !== null) {
+          attrs[am[1]] = am[2] !== undefined ? am[2] : true;
+        }
+        this._nodes.push({
+          tagName: "SPAN",
+          attrs: attrs,
+          getAttribute(k) { return attrs[k] !== undefined ? String(attrs[k]) : null; },
+          textContent: content.replace(/<[^>]*>/g, "").trim()
+        });
+      }
     },
     querySelector(sel) {
       return this.querySelectorAll(sel)[0] || null;
@@ -76,6 +94,9 @@ function makeMockContainer() {
       }
       if (sel === ".rmd-po-status") {
         return this._nodes.filter((n) => (n.attrs["class"] || "").indexOf("rmd-po-status") >= 0);
+      }
+      if (sel === ".rmd-po-status-text") {
+        return this._nodes.filter((n) => (n.attrs["class"] || "").indexOf("rmd-po-status-text") >= 0);
       }
       return [];
     }
@@ -159,6 +180,31 @@ describe("PaperOrchestra UI integration", () => {
     assert.equal(btn.tagName, "BUTTON", "Rendered as a real <button>");
     assert.equal(btn.textContent, "Full draft (PaperOrchestra)");
     assert.match(c.innerHTML, /aria-live="polite"/, "Status row carries aria-live polite");
+  });
+
+  test("Requirement 1: PO button rendered only for non case-report projects; hidden for case-report projects", async () => {
+    globalThis.localStorage.setItem("smd_rmd_po", "1");
+    const c = makeMockContainer();
+
+    // Systematic review: button visible
+    storeState.activeProject = { id: "prj_sr_1", title: "SR BCG", studyType: "systematic_review" };
+    globalThis.SMD_RESEARCH.screens.manuscript.render(c);
+    await new Promise((r) => setTimeout(r, 20));
+    assert.ok(c.querySelector('[data-rmd="full-draft-po"]'), "PO button rendered for systematic_review");
+    assert.equal(c.querySelectorAll('[data-rmd="full-draft-po"]').length, 1, "Only one PO button location");
+
+    // Case report: button hidden
+    storeState.activeProject = { id: "prj_cr_1", title: "CR Patient", studyType: "case-report" };
+    globalThis.SMD_RESEARCH.screens.manuscript.render(c);
+    await new Promise((r) => setTimeout(r, 20));
+    assert.equal(c.querySelector('[data-rmd="full-draft-po"]'), null, "No PO button rendered for case-report");
+    assert.equal(c.querySelector('.rmd-po-status'), null, "No PO status rendered for case-report");
+
+    // Case series: button hidden
+    storeState.activeProject = { id: "prj_cs_1", title: "CS Cohort", studyType: "case-series" };
+    globalThis.SMD_RESEARCH.screens.manuscript.render(c);
+    await new Promise((r) => setTimeout(r, 20));
+    assert.equal(c.querySelector('[data-rmd="full-draft-po"]'), null, "No PO button rendered for case-series");
   });
 
   test("Task 2: tap POSTs /v1/projects/{apiPid}/jobs with kind manuscript_draft and unique idempotencyKey", async () => {
@@ -258,7 +304,7 @@ describe("PaperOrchestra UI integration", () => {
     assert.ok(versionsReloaded, "Versions endpoint reloaded on success");
   });
 
-  test("Task 2: cancel posts /v1/jobs/{jobId}/cancel and clears timer", async () => {
+  test("Requirement 4: cancel posts /v1/jobs/{jobId}/cancel; on success shows 'Cancelled' (not 'Failed: Draft cancelled.')", async () => {
     globalThis.localStorage.setItem("smd_rmd_po", "1");
     const apiCalls = [];
     globalThis.SMD_RESEARCH.api.request = (method, path, body) => {
@@ -291,9 +337,199 @@ describe("PaperOrchestra UI integration", () => {
     const cancelCall = apiCalls.find((call) => call.method === "POST" && call.path === "/v1/jobs/job_cancel_me/cancel");
     assert.ok(cancelCall, "POST /v1/jobs/job_cancel_me/cancel called");
     assert.equal(c.querySelector('[data-rmd="po-cancel"]'), null, "Cancel button removed after cancel");
-    assert.match(c.innerHTML, /Failed: Draft cancelled\./, "Status reports cancellation");
+    assert.match(c.innerHTML, /Cancelled/, "Status reports Cancelled");
+    assert.doesNotMatch(c.innerHTML, /Failed: Draft cancelled\./, "No 'Failed: Draft cancelled.' text");
     const reEnabledBtn = c.querySelector('[data-rmd="full-draft-po"]');
     assert.equal(reEnabledBtn.disabled, false, "PO draft button re-enabled after cancel");
+  });
+
+  test("Requirement 4: cancel POST failure shows 'Could not cancel. Try again.' and keeps polling", async () => {
+    globalThis.localStorage.setItem("smd_rmd_po", "1");
+    let cancelShouldFail = true;
+    const apiCalls = [];
+    globalThis.SMD_RESEARCH.api.request = (method, path, body) => {
+      apiCalls.push({ method, path, body });
+      if (method === "POST" && path.includes("/jobs") && !path.includes("/cancel")) {
+        return Promise.resolve({
+          job: { id: "job_cancel_fail", kind: "manuscript_draft", status: "running" }
+        });
+      }
+      if (method === "POST" && path.includes("/cancel")) {
+        if (cancelShouldFail) {
+          return Promise.reject(new Error("Network error during cancel"));
+        }
+        return Promise.resolve({ ok: true, status: "cancelled" });
+      }
+      return Promise.resolve({ versions: [], manuscript: { title: "Test", sections: [] } });
+    };
+
+    const c = makeMockContainer();
+    globalThis.SMD_RESEARCH.screens.manuscript.render(c);
+    await new Promise((r) => setTimeout(r, 20));
+
+    const btn = c.querySelector('[data-rmd="full-draft-po"]');
+    btn.onclick();
+    await new Promise((r) => setTimeout(r, 30));
+
+    // First cancel attempt - fails
+    const cancelBtn1 = c.querySelector('[data-rmd="po-cancel"]');
+    assert.ok(cancelBtn1, "Cancel button visible");
+    cancelBtn1.onclick();
+    await new Promise((r) => setTimeout(r, 30));
+
+    // Status shows "Could not cancel. Try again."
+    assert.match(c.innerHTML, /Could not cancel\. Try again\./, "Shows 'Could not cancel. Try again.'");
+    // Cancel button is STILL present so user can retry
+    const cancelBtn2 = c.querySelector('[data-rmd="po-cancel"]');
+    assert.ok(cancelBtn2, "Cancel button still present after failed cancel");
+    // Draft button remains disabled because job is still active
+    const btnStillActive = c.querySelector('[data-rmd="full-draft-po"]');
+    assert.equal(btnStillActive.disabled, true, "PO draft button still disabled");
+    assert.equal(globalThis.SMD_RESEARCH.screens.manuscript._getState().poStatus, "running", "Job status still active");
+
+    // Second cancel attempt - succeeds
+    cancelShouldFail = false;
+    cancelBtn2.onclick();
+    await new Promise((r) => setTimeout(r, 30));
+
+    // Now shows Cancelled, cancel button dismissed, draft button re-enabled
+    assert.match(c.innerHTML, /Cancelled/, "Status shows Cancelled");
+    assert.doesNotMatch(c.innerHTML, /Could not cancel/, "Error message cleared");
+    assert.equal(c.querySelector('[data-rmd="po-cancel"]'), null, "Cancel button dismissed");
+    const reEnabledBtn = c.querySelector('[data-rmd="full-draft-po"]');
+    assert.equal(reEnabledBtn.disabled, false, "PO draft button re-enabled after successful cancel");
+  });
+
+  test("Requirement 3: polling keeps polling on network/5xx errors; stops only after 3 consecutive failures", async () => {
+    globalThis.localStorage.setItem("smd_rmd_po", "1");
+    let getShouldFail = true;
+    let getErrorStatus = 500;
+    globalThis.SMD_RESEARCH.api.request = (method, path) => {
+      if (method === "POST" && path.includes("/jobs")) {
+        return Promise.resolve({ job: { id: "job_poll_retry", status: "running" } });
+      }
+      if (method === "GET" && path.includes("/jobs/job_poll_retry")) {
+        if (getShouldFail) {
+          return Promise.reject({ status: getErrorStatus, message: "Internal Server Error" });
+        }
+        return Promise.resolve({ job: { id: "job_poll_retry", status: "running" } });
+      }
+      return Promise.resolve({ versions: [], manuscript: { title: "Test", sections: [] } });
+    };
+
+    const c = makeMockContainer();
+    globalThis.SMD_RESEARCH.screens.manuscript.render(c);
+    await new Promise((r) => setTimeout(r, 20));
+
+    const btn = c.querySelector('[data-rmd="full-draft-po"]');
+    btn.onclick();
+    await new Promise((r) => setTimeout(r, 30));
+
+    const st = globalThis.SMD_RESEARCH.screens.manuscript._getState();
+    assert.equal(st.poStatus, "running");
+    assert.equal(st.poFailures, 0);
+
+    // Failure 1 (500 error): job view continues, does NOT fail
+    await globalThis.SMD_RESEARCH.screens.manuscript._pollPoJob(c, "job_poll_retry");
+    assert.equal(st.poFailures, 1, "Recorded 1 failure");
+    assert.equal(st.poStatus, "running", "Job view does not end on 1st failed GET");
+    assert.equal(c.querySelector('[data-rmd="full-draft-po"]').disabled, true, "Button still disabled");
+
+    // Failure 2 (500 error): job view continues, does NOT fail
+    await globalThis.SMD_RESEARCH.screens.manuscript._pollPoJob(c, "job_poll_retry");
+    assert.equal(st.poFailures, 2, "Recorded 2 failures");
+    assert.equal(st.poStatus, "running", "Job view does not end on 2nd failed GET");
+
+    // Successful poll resets failure count
+    getShouldFail = false;
+    await globalThis.SMD_RESEARCH.screens.manuscript._pollPoJob(c, "job_poll_retry");
+    assert.equal(st.poFailures, 0, "Failure count reset to 0 after successful GET");
+    assert.equal(st.poStatus, "running", "Job still running");
+
+    // Now fail 3 times in a row
+    getShouldFail = true;
+    await globalThis.SMD_RESEARCH.screens.manuscript._pollPoJob(c, "job_poll_retry");
+    assert.equal(st.poFailures, 1);
+    await globalThis.SMD_RESEARCH.screens.manuscript._pollPoJob(c, "job_poll_retry");
+    assert.equal(st.poFailures, 2);
+    await globalThis.SMD_RESEARCH.screens.manuscript._pollPoJob(c, "job_poll_retry");
+
+    // 3rd failure in a row stops polling and sets failed status
+    assert.equal(st.poFailures, 3);
+    assert.equal(st.poStatus, "failed", "Job stopped and marked failed after 3 consecutive failures");
+    assert.match(c.innerHTML, /Failed:/, "Error message displayed in status row");
+    assert.equal(c.querySelector('[data-rmd="full-draft-po"]').disabled, false, "Draft button re-enabled");
+  });
+
+  test("Requirement 3: polling stops immediately on 404 or 403 error", async () => {
+    globalThis.localStorage.setItem("smd_rmd_po", "1");
+    let errorStatus = 404;
+    globalThis.SMD_RESEARCH.api.request = (method, path) => {
+      if (method === "POST" && path.includes("/jobs")) {
+        return Promise.resolve({ job: { id: "job_404_test", status: "running" } });
+      }
+      if (method === "GET" && path.includes("/jobs/job_404_test")) {
+        return Promise.reject({ status: errorStatus, error: { code: "not_found" } });
+      }
+      return Promise.resolve({ versions: [], manuscript: { title: "Test", sections: [] } });
+    };
+
+    const c = makeMockContainer();
+    globalThis.SMD_RESEARCH.screens.manuscript.render(c);
+    await new Promise((r) => setTimeout(r, 20));
+
+    const btn = c.querySelector('[data-rmd="full-draft-po"]');
+    btn.onclick();
+    await new Promise((r) => setTimeout(r, 30));
+
+    const st = globalThis.SMD_RESEARCH.screens.manuscript._getState();
+
+    // 404 on first poll -> immediate failure
+    await globalThis.SMD_RESEARCH.screens.manuscript._pollPoJob(c, "job_404_test");
+    assert.equal(st.poStatus, "failed", "Immediate failure on 404");
+    assert.equal(st.poError, "Feature not available yet.", "Mapped 404 error");
+    assert.match(c.innerHTML, /Failed: Feature not available yet\./);
+    assert.equal(c.querySelector('[data-rmd="full-draft-po"]').disabled, false, "Button re-enabled");
+
+    // Repeat for 403
+    errorStatus = 403;
+    st.poStatus = "running";
+    st.poError = null;
+    st.poFailures = 0;
+    await globalThis.SMD_RESEARCH.screens.manuscript._pollPoJob(c, "job_404_test");
+    assert.equal(st.poStatus, "failed", "Immediate failure on 403");
+  });
+
+  test("Requirement 2: poStatusHtml uses classes with no inline style attributes and no hex colours", async () => {
+    globalThis.localStorage.setItem("smd_rmd_po", "1");
+    globalThis.SMD_RESEARCH.api.request = () => Promise.resolve({
+      job: { id: "job_style_test", status: "queued" }
+    });
+
+    const c = makeMockContainer();
+    globalThis.SMD_RESEARCH.screens.manuscript.render(c);
+    await new Promise((r) => setTimeout(r, 20));
+
+    const btn = c.querySelector('[data-rmd="full-draft-po"]');
+    btn.onclick();
+    await new Promise((r) => setTimeout(r, 30));
+
+    // Verify .rmd-po-status and .rmd-po-status-text classes are used
+    assert.match(c.innerHTML, /class="rmd-po-status"/);
+    assert.match(c.innerHTML, /class="rmd-po-status-text/);
+
+    // Verify NO style="..." attribute on rmd-po-status or rmd-po-status-text
+    const poStatusDiv = c._nodes.find((n) => (n.attrs["class"] || "").includes("rmd-po-status"));
+    assert.ok(poStatusDiv, "Found rmd-po-status div");
+    assert.equal(poStatusDiv.attrs["style"], undefined, "No inline style on .rmd-po-status");
+
+    const poStatusSpan = c._nodes.find((n) => (n.attrs["class"] || "").includes("rmd-po-status-text"));
+    assert.ok(poStatusSpan, "Found rmd-po-status-text span");
+    assert.equal(poStatusSpan.attrs["style"], undefined, "No inline style on .rmd-po-status-text");
+
+    const cancelBtn = c._nodes.find((n) => n.attrs["data-rmd"] === "po-cancel");
+    assert.ok(cancelBtn, "Found po-cancel button");
+    assert.equal(cancelBtn.attrs["style"], undefined, "No inline style on Cancel button");
   });
 
   test("Task 2: error codes map to plain sentences with no em dashes", () => {

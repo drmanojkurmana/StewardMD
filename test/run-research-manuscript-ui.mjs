@@ -494,7 +494,10 @@ try {
   ok(poJobCall && typeof poJobCall.idempotencyKey === 'string' && poJobCall.idempotencyKey.length > 0, 'PO job request has valid random idempotencyKey');
   ok(await until(`!!document.querySelector('.rmd-po-status')`, 5000), 'status row rendered with aria-live="polite"');
   ok((await ev(`document.querySelector('.rmd-po-status').getAttribute('aria-live')`)) === 'polite', 'status row aria-live is polite');
+  ok(await ev(`!document.querySelector('.rmd-po-status').getAttribute('style')`), 'rmd-po-status has no inline style attributes');
+  ok(await ev(`!document.querySelector('.rmd-po-status-text').getAttribute('style')`), 'rmd-po-status-text has no inline style attributes');
   ok(await until(`!!document.querySelector('[data-rmd="po-cancel"]')`, 5000), 'Cancel button visible while job is active');
+  ok(await ev(`!document.querySelector('[data-rmd="po-cancel"]').getAttribute('style')`), 'Cancel button has no inline style attributes');
   ok(await ev(`document.querySelector('[data-rmd="full-draft-po"]').disabled === true`), 'PO draft button is disabled while job is active');
   const countBeforeCancel = jobsCancelCalls.length;
   await click('[data-rmd="po-cancel"]');
@@ -504,7 +507,27 @@ try {
   }
   ok(jobsCancelCalls.length > countBeforeCancel, 'tapping Cancel button POSTs to /jobs/:jobId/cancel');
   ok(await until(`!document.querySelector('[data-rmd="po-cancel"]')`, 5000), 'Cancel button dismissed after cancel tap');
+  ok(await until(`document.querySelector('.rmd-po-status-text') && document.querySelector('.rmd-po-status-text').textContent.trim() === 'Cancelled'`, 5000), 'Cancelled state text is exact "Cancelled"');
+  ok(await ev(`!/Draft cancelled/.test(document.querySelector('.rmd-po-status-text') ? document.querySelector('.rmd-po-status-text').textContent : '')`), 'Cancelled state does not say "Draft cancelled"');
   ok(await until(`document.querySelector('[data-rmd="full-draft-po"]').disabled === false`, 5000), 'PO draft button is re-enabled after cancel');
+
+  // Verify non case-report only: case-report project renders NO PO button
+  await ev(`(()=>{
+    window.__prevProj = SMD_RESEARCH.store.getActiveProject();
+    const crProj = Object.assign({}, window.__prevProj, { studyType: 'case-report' });
+    SMD_RESEARCH.store.getActiveProject = () => crProj;
+    SMD_RESEARCH.open({screen:'manuscript'});
+    return 1;
+  })()`);
+  ok(await until(`!!document.querySelector('.rmd-manuscript-screen')`, 5000), 'manuscript opened in case-report mode');
+  ok(await ev(`!document.querySelector('[data-rmd="full-draft-po"]')`), 'PO button not rendered for case-report project');
+  await ev(`(()=>{
+    SMD_RESEARCH.store.getActiveProject = () => window.__prevProj;
+    SMD_RESEARCH.open({screen:'manuscript'});
+    return 1;
+  })()`);
+  ok(await until(`!!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO button restored for systematic review project');
+
   await ev(`localStorage.removeItem('smd_rmd_po')`);
   await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
   ok(await until(`!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO button cleaned up when flag removed');
