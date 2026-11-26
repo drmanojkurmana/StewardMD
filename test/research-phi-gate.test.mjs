@@ -1,15 +1,15 @@
-/* Regression test for Bug A: the Read Study paper-card MaiK summary was refused
- * by the server PHI gate ("Patient identifiers detected; the AI call was
- * blocked.") on a PUBLISHED paper. The gate scanned the whole assembled prompt
- * and the patient_name context rule flagged capitalized institutional/clinical
- * phrases ("Intensive Care Unit", "Prospective Observational Study") sitting
- * next to the generic plural "patients" / the methods verb "admitted".
+/* Regression test for Bug H: published papers must skip the PHI gate entirely.
+ * Owner decision: published papers are public. AI calls whose input is ONLY
+ * published literature must never run the PHI gate. The gate stays ONLY where
+ * the doctor types or pastes their own patient text (case report notes,
+ * manuscript sections, thesis text, IEC/consent drafts, master-chart summaries).
  *
- * Fix: the server marks the paper-card explain prompt (assembled from a public
- * connector cache; the client sends only a validated pmid/doi) as published
- * bibliographic text. In a public span the patient_name rule keeps only names
- * explicitly ascribed to a patient; hard identifiers (mrn/aadhaar/ssn/nhs/
- * phone/email) are never relaxed. Default scan() is unchanged (shared vectors).
+ * Fix: runUserAi gains opts.publicLiterature === true which skips the scan
+ * entirely (caps, credits, usage log and audit stay), writing an audit note
+ * "phi_gate_skipped_public_literature". Callers that send only published-paper
+ * content (paper_card_explain, extraction_suggestion) pass the flag.
+ * _phi.js scan() is restored to origin/main behaviour (no publicSpans).
+ * The case_report_draft path scans user-typed text directly and still blocks.
  *
  * Synthetic data only. No em or en dashes.
  * node --test --experimental-test-module-mocks --experimental-sqlite test/research-phi-gate.test.mjs
@@ -55,8 +55,6 @@ const ABSTRACT = "Background: Sepsis remains a leading cause of mortality in the
   "Results: Mean age was 58.2 years; 96 patients were male. Lactate Clearance predicted survival (area under the curve 0.83, 95% CI 0.75-0.89). " +
   "Conclusions: Lactate Clearance is a useful prognostic marker in sepsis.";
 const PMID = "40123456";
-const SYSTEM = "You summarise one study for a clinician. Return ONLY JSON with keys population, intervention, comparison, outcome, design, mainResult, conclusion. " +
-  "Each value is a short string. mainResult may contain only numbers copied from the abstract. Do not invent a number.";
 const SUMMARY = {
   population: "152 patients with sepsis in the Intensive Care Unit",
   intervention: "Lactate Clearance and procalcitonin measurement",
@@ -71,14 +69,6 @@ const SUMMARY = {
 const AADHAAR_BASE = "23456789012";
 const AADHAAR = AADHAAR_BASE + verhoeffCheckDigit(AADHAAR_BASE);
 const AADHAAR_FMT = AADHAAR.slice(0, 4) + " " + AADHAAR.slice(4, 8) + " " + AADHAAR.slice(8);
-
-function promptFor(abstract, title) {
-  return ("Title: " + (title === undefined ? TITLE : title) + "\nAbstract: " + abstract).slice(0, 3000);
-}
-function assembledFor(prompt) {
-  const finalSystem = RESEARCH_FRAMING + "\n\n" + SYSTEM;
-  return { assembled: finalSystem + "\n\n" + prompt, spans: [{ start: finalSystem.length + 2, end: finalSystem.length + 2 + prompt.length }] };
-}
 
 function d1() {
   const db = new DatabaseSync(":memory:");
@@ -132,7 +122,7 @@ async function call(env, method, path, token, body) {
   return { http: res.status, ...(data || {}) };
 }
 async function makeProject(env, token) {
-  const r = await call(env, "POST", "v1/projects", token, { title: "Bug A regression" });
+  const r = await call(env, "POST", "v1/projects", token, { title: "Bug H regression" });
   assert.equal(r.http, 201, JSON.stringify(r));
   return r.project;
 }
@@ -157,56 +147,22 @@ function mockSummary() {
   };
 }
 
-/* ---- scanner unit: public-span marking -------------------------------------- */
+/* ---- scanner unit: _phi.js scan() restored to origin/main ------------------- */
 
-describe("Bug A scanner: public bibliographic spans", () => {
-  test("published abstract prompt passes when marked public, blocks when unmarked", () => {
-    const { assembled, spans } = assembledFor(promptFor(ABSTRACT));
-    assert.equal(scan(assembled).blocked, true, "unmarked prompt reproduces the original false positive");
-    assert.ok(phiCategories(scan(assembled).hits).includes("patient_name"));
-    const marked = scan(assembled, { publicSpans: spans });
-    assert.equal(marked.blocked, false, "marked public abstract must pass: " + JSON.stringify(phiCategories(marked.hits)));
-  });
+describe("Bug H scanner: scan() has no publicSpans parameter", () => {
+  test("scan() does not accept publicSpans (reverted to origin/main)", () => {
+    /* The abstract triggers patient_name in the unmarked scan; publicSpans has
+     * no effect because the code was reverted. The abstract contains capitalised
+     * phrases near 'patients'/'admitted' which fire the patient_name rule. */
+    const system = RESEARCH_FRAMING + "\n\nTest system";
+    const prompt = "Title: " + TITLE + "\nAbstract: " + ABSTRACT;
+    const assembled = system + "\n\n" + prompt;
+    const r1 = scan(assembled);
+    assert.equal(r1.blocked, true, "abstract triggers patient_name in default scan");
 
-  test("hard identifiers and explicit patient ascriptions still block inside a public span", () => {
-    const plants = [
-      ["phone", " Contact 9876543210.", "phone"],
-      ["aadhaar", " Aadhaar " + AADHAAR_FMT + ".", "aadhaar"],
-      ["mrn", " MRN 483920.", "mrn"],
-      ["patient_name", " Patient: Ramesh Kumar was reviewed.", "patient_name"],
-    ];
-    for (const [label, plant, category] of plants) {
-      const { assembled, spans } = assembledFor(promptFor(ABSTRACT + plant));
-      const r = scan(assembled, { publicSpans: spans });
-      assert.equal(r.blocked, true, "planted " + label + " must block");
-      assert.ok(phiCategories(r.hits).includes(category), "planted " + label + " category present");
-    }
-  });
-
-  test("institutional phrases are not patient names; ascribed names are (public span)", () => {
-    const allow = [
-      "We enrolled 152 patients admitted to the Intensive Care Unit.",
-      "A Prospective Observational Study of Lactate Clearance.",
-      "Department of Medicine, Apollo Hospital, Chennai.",
-      "Ramesh Kumar, Priya Sharma and John Doe.",
-    ];
-    for (const t of allow) {
-      const r = scan(t, { publicSpans: [{ start: 0, end: t.length }] });
-      assert.equal(r.blocked, false, "public bibliographic text must pass: " + t);
-    }
-    const block = [
-      "Patient Ramesh Kumar",
-      "Mr.John Smith",
-      "Mrs. Jane Doe was admitted",
-      "Ms. Alice Brown diagnosed with asthma",
-      "Ramesh Kumar, ward 4 bed no 12",
-      "The patient Priya Sharma is stable",
-      "Patient: Ramesh Kumar was reviewed.",
-    ];
-    for (const t of block) {
-      const r = scan(t, { publicSpans: [{ start: 0, end: t.length }] });
-      assert.equal(r.blocked, true, "explicit patient ascription must block even in public text: " + t);
-    }
+    /* Even if someone passes publicSpans, _phi.js ignores them (reverted). */
+    const r2 = scan(assembled, { publicSpans: [{ start: system.length + 2, end: assembled.length }] });
+    assert.equal(r2.blocked, true, "publicSpans has no effect after revert");
   });
 
   test("default scan is unchanged: every shared phi-vector still holds", () => {
@@ -217,10 +173,10 @@ describe("Bug A scanner: public bibliographic spans", () => {
   });
 });
 
-/* ---- route integration: real explain path, D1 mock + mocked provider -------- */
+/* ---- route integration: paper-card explain with publicLiterature ------------ */
 
-describe("Bug A route: paper-card explain PHI gate", () => {
-  test("published paper summary succeeds (200), provider called once", { skip: SKIP }, async () => {
+describe("Bug H route: paper-card explain skips PHI gate (publicLiterature)", () => {
+  test("published paper summary succeeds (200), provider called once, audit note written", { skip: SKIP }, async () => {
     const env = freshEnv();
     fundWallet(env, "alice@example.com", 10000);
     const project = await makeProject(env, "tok-alice");
@@ -230,30 +186,34 @@ describe("Bug A route: paper-card explain PHI gate", () => {
     assert.equal(r.http, 200, JSON.stringify(r));
     assert.equal(llm.calls.length, 1, "exactly one provider call");
     assert.ok(r.card && r.card.ai && r.card.ai.population, "summary returned");
+    /* Verify audit note was written for skipping the PHI gate */
+    const auditRow = env.RESEARCH_DB._db.prepare(
+      "SELECT * FROM research_audit_events WHERE event_type='phi_gate_skipped_public_literature'"
+    ).get();
+    assert.ok(auditRow, "phi_gate_skipped_public_literature audit note present");
   });
 
-  const plants = [
-    ["phone", " Contact 9876543210.", "phone"],
-    ["aadhaar", " Aadhaar " + AADHAAR_FMT + ".", "aadhaar"],
-    ["mrn", " MRN 483920.", "mrn"],
-    ["patient_name", " Patient: Ramesh Kumar was reviewed.", "patient_name"],
-  ];
-  for (const [label, plant, category] of plants) {
-    test("planted " + label + " in the abstract blocks (422 phi_blocked), no provider call", { skip: SKIP }, async () => {
-      const env = freshEnv();
-      fundWallet(env, "alice@example.com", 10000);
-      const project = await makeProject(env, "tok-alice");
-      seedCard(env, PMID, ABSTRACT + plant);
-      mockSummary();
-      const r = await call(env, "POST", "v1/projects/" + project.id + "/paper-card/explain", "tok-alice", { pmid: PMID });
-      assert.equal(r.http, 422, JSON.stringify(r));
-      assert.equal(r.error.code, "phi_blocked");
-      assert.ok(Array.isArray(r.categories) && r.categories.includes(category), "categories include " + category);
-      assert.equal(llm.calls.length, 0, "no PHI may reach the provider");
-      assert.ok(!JSON.stringify(r).includes("9876543210"), "matched text never echoed");
-      assert.ok(!JSON.stringify(r).includes("Ramesh Kumar"), "matched name never echoed");
-    });
-  }
+  test("abstract full of capitalised phrases, patients, admitted, author names, dates succeeds", { skip: SKIP }, async () => {
+    /* This is the scenario from the bug screenshots: a real published abstract
+     * with institutional phrases like "Intensive Care Unit", author names like
+     * "Ramesh Kumar", and clinical words like "patients", "admitted" near
+     * capitalised bigrams. With publicLiterature the gate is skipped entirely. */
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 10000);
+    const project = await makeProject(env, "tok-alice");
+    const richAbstract = "Background: Sepsis remains a leading cause of mortality in the Intensive Care Unit. " +
+      "Ramesh Kumar, Priya Sharma and John Doe conducted this study at Apollo Hospital Chennai. " +
+      "We enrolled 152 patients admitted between January 2023 and December 2024. " +
+      "Dr. Anand Krishnamurthy supervised the Prospective Observational Study. " +
+      "Methods: Lactate Clearance was measured at 0, 24 and 72 hours. " +
+      "Results: Among the 96 patients who survived, mean lactate was 2.1 mmol/L. " +
+      "The mortality rate was 23.7% (36/152) in the Surgical Intensive Care Unit.";
+    seedCard(env, PMID, richAbstract);
+    mockSummary();
+    const r = await call(env, "POST", "v1/projects/" + project.id + "/paper-card/explain", "tok-alice", { pmid: PMID });
+    assert.equal(r.http, 200, JSON.stringify(r));
+    assert.equal(llm.calls.length, 1, "provider called: gate was skipped for published content");
+  });
 
   test("standalone explain route also passes for the published paper", { skip: SKIP }, async () => {
     const env = freshEnv();
@@ -264,5 +224,56 @@ describe("Bug A route: paper-card explain PHI gate", () => {
     const r = await call(env, "POST", "v1/paper-card/explain", "tok-alice", { pmid: PMID });
     assert.equal(r.http, 200, JSON.stringify(r));
     assert.equal(llm.calls.length, 1);
+  });
+});
+
+/* ---- route integration: ai_draft case_report_draft still blocks with PHI ---- */
+
+describe("Bug H route: case_report_draft user text still runs PHI gate", () => {
+  test("case_report_draft with a patient phone in user text is blocked (422 phi_blocked)", { skip: SKIP }, async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 10000);
+    const project = await makeProject(env, "tok-alice");
+    mockSummary();
+    const caseText = "A 45-year-old male presented with chest pain. " +
+      "Contact the patient at 9876543210 for follow-up.";
+    const r = await call(env, "POST", "v1/projects/" + project.id + "/ai-draft", "tok-alice", {
+      task: "case_report_draft",
+      input: { caseText },
+    });
+    assert.equal(r.http, 422, JSON.stringify(r));
+    assert.equal(r.error.code, "phi_blocked", "user-typed case text with phone is blocked");
+    assert.equal(llm.calls.length, 0, "no PHI may reach the provider");
+    /* Matched text is never echoed in the response */
+    assert.ok(!JSON.stringify(r).includes("9876543210"), "phone number never echoed");
+  });
+
+  test("case_report_draft with clean text succeeds", { skip: SKIP }, async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 10000);
+    const project = await makeProject(env, "tok-alice");
+    llm.calls.length = 0;
+    llm.impl = async (env, parts, maxTokens, opts) => {
+      if (opts && opts.meta) {
+        opts.meta.usage = { promptTokenCount: 100, candidatesTokenCount: 60, thoughtsTokenCount: 0 };
+        opts.meta.model = opts.model;
+      }
+      return JSON.stringify({
+        title: "Chest Pain in a Middle-Aged Male",
+        abstract: "A case report of a 45-year-old male presenting with chest pain.",
+        introduction: "Chest pain is a common emergency presentation.",
+        casePresentation: "A 45-year-old male presented with acute substernal chest pain.",
+        discussion: "This case illustrates the importance of rapid triage.",
+        conclusion: "Early aspirin administration improves outcomes.",
+        learningPoints: ["Early aspirin is beneficial"],
+      });
+    };
+    const caseText = "A 45-year-old male presented with chest pain and was treated with aspirin.";
+    const r = await call(env, "POST", "v1/projects/" + project.id + "/ai-draft", "tok-alice", {
+      task: "case_report_draft",
+      input: { caseText },
+    });
+    assert.equal(r.http, 200, JSON.stringify(r));
+    assert.ok(llm.calls.length >= 1, "provider was called for clean case text");
   });
 });

@@ -714,6 +714,7 @@ export async function explainPaperCard(ctx, projectId, body) {
   const prompt = ("Title: " + title + "\nAbstract: " + abstract).slice(0, 3000);
   const out = await runUserAi(ctx, targetProjectId, "paper_card_explain", system, prompt, api.uuid("pce_"), {
     temperature: 0, maxOutputTokens: 350, insufficientMessage: TOKENS_MESSAGE,
+    publicLiterature: true,
   });
   if (out.error) return out.error;
   const ai = aiFields(extractJson(out.text), abstract);

@@ -38,25 +38,21 @@ export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, 
   const { env, db, uid, claims, requestId, api } = ctx;
   const { json, err, audit, uuid } = api;
   const email = claims && claims.email;
-  /* 1. PHI gate FIRST, on the exact text about to leave (system included). */
+  /* 1. PHI gate: skip entirely when the caller certifies that the input is
+   * ONLY published literature (fetched from PubMed/Europe PMC/Crossref, never
+   * user-typed text). Caps, credits, usage log and audit stay. */
   const finalSystem = RESEARCH_FRAMING + (system ? "\n\n" + system : "");
   const assembled = finalSystem + "\n\n" + prompt;
-  /* The paper-card explain prompt is assembled server-side from a cached public
-   * connector card (title + abstract); the client sends only a validated
-   * pmid/doi, so this prompt is published bibliographic text, not patient-entered
-   * text. Mark it public so the gate applies the bibliographic patient-name
-   * context rule (phi-gate.md Allowed) rather than flagging capitalized
-   * institutional phrases. Hard identifiers and explicit "Patient: <name>"
-   * ascriptions still block. User-entered prompts (extraction, screening,
-   * drafts) are never marked and are scanned in full. */
-  const publicPrompt = opts.publicPrompt === true || purpose === "paper_card_explain";
-  const publicSpans = publicPrompt ? [{ start: finalSystem.length + 2, end: assembled.length }] : [];
-  const report = scan(assembled, { publicSpans });
-  if (report.blocked) {
-    const categories = phiCategories(report.hits);
-    await audit(db, projectId, uid, "ai_phi_blocked", refId, { categories, purpose });
-    return { error: json({ error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
-      categories }, 422, { "x-request-id": requestId }) };
+  if (opts.publicLiterature === true) {
+    await audit(db, projectId, uid, "phi_gate_skipped_public_literature", refId, { purpose });
+  } else {
+    const report = scan(assembled);
+    if (report.blocked) {
+      const categories = phiCategories(report.hits);
+      await audit(db, projectId, uid, "ai_phi_blocked", refId, { categories, purpose });
+      return { error: json({ error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
+        categories }, 422, { "x-request-id": requestId }) };
+    }
   }
   /* 2. Caps: per-call input ceiling, then daily AI spend (quote included). */
   const ceiling = TIER_CEILINGS.T1;
@@ -103,8 +99,8 @@ export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, 
   };
 }
 
-async function runT1(ctx, projectId, purpose, system, prompt, refId) {
-  return runUserAi(ctx, projectId, purpose, system, prompt, refId);
+async function runT1(ctx, projectId, purpose, system, prompt, refId, opts) {
+  return runUserAi(ctx, projectId, purpose, system, prompt, refId, opts);
 }
 
 /* Pull the first JSON value (array or object) out of a model reply, tolerating
@@ -162,7 +158,7 @@ export async function extractionSuggestions(ctx, projectId, studyId, body) {
     "Never invent a value; omit any field you cannot read. These are suggestions a human will verify.";
   const prompt = "Extract the fields from the document below.\n\n" + doc;
   const refId = "sug_" + crypto.randomUUID().replace(/-/g, "");
-  const out = await runT1(ctx, projectId, "extraction_suggestion", system, prompt, refId);
+  const out = await runT1(ctx, projectId, "extraction_suggestion", system, prompt, refId, { publicLiterature: true });
   if (out.error) return out.error;
   const parsed = extractJson(out.text);
   const arr = Array.isArray(parsed) ? parsed : [];

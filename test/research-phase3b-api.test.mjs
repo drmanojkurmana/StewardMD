@@ -791,7 +791,10 @@ test("suggest: extraction suggestions stored unverified, never auto-applied; PHI
   assert.equal(usage[0].user_id, "u-alice");
   const ledger = env.RESEARCH_DB._db.prepare("SELECT reason FROM research_credit_ledger ORDER BY rowid ASC").all().map((x) => x.reason);
   assert.deepEqual(ledger, ["reserve", "release", "settle"]);
-  /* PHI in the document blocks BEFORE any provider call. */
+  /* Bug H: extraction suggestions come from published PDFs, so the PHI gate
+   * is skipped (publicLiterature). Content that would have been blocked by
+   * the gate now proceeds to the AI call. The PHI gate stays on user-typed
+   * text (case reports, manuscripts), not on published literature. */
   llm.calls.length = 0;
   const phiEnv = freshEnv();
   fundWallet(phiEnv, "alice@example.com", 100);
@@ -799,10 +802,13 @@ test("suggest: extraction suggestions stored unverified, never auto-applied; PHI
   const stp = await makeStudy(phiEnv, pp.id, "tok-alice", "RR", { events1: 0, n1: 1, events2: 0, n2: 1 });
   const seed = seedArtifact(phiEnv, pp.id, ["Patient Ramesh Kumar, MRN 483920, admitted on 12/03/2024"]);
   const phi = await call(phiEnv, "POST", "v1/projects/" + pp.id + "/studies/" + stp.id + "/extraction/suggestions", "tok-alice", { artifactId: seed.artId });
-  assert.equal(phi.http, 422);
-  assert.equal(phi.error.code, "phi_blocked");
-  assert.ok(phi.categories.includes("mrn"));
-  assert.equal(llm.calls.length, 0, "no provider call on PHI hit");
+  assert.equal(phi.http, 200, "published PDF extraction skips PHI gate (publicLiterature)");
+  assert.equal(llm.calls.length, 1, "provider call made: gate was skipped for published content");
+  /* Audit note for skipping the PHI gate must be present */
+  const auditRow = phiEnv.RESEARCH_DB._db.prepare(
+    "SELECT * FROM research_audit_events WHERE event_type='phi_gate_skipped_public_literature'"
+  ).get();
+  assert.ok(auditRow, "phi_gate_skipped_public_literature audit note present");
   /* No artifact / job not done -> 409. */
   const noArt = await call(env, "POST", "v1/projects/" + p.id + "/studies/" + st.id + "/extraction/suggestions", "tok-alice", {});
   assert.ok(noArt.http === 409 || noArt.http === 200, JSON.stringify(noArt));
