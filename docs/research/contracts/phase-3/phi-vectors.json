@@ -672,6 +672,202 @@
       "expect": "allow",
       "category": "clinical_text",
       "note": "synthetic"
+    },
+    {
+      "id": "phi-phn-007",
+      "text": "Call 98765 43210",
+      "expect": "block",
+      "category": "phone",
+      "note": "spaced mobile"
+    },
+    {
+      "id": "phi-phn-008",
+      "text": "+91 98765 43210",
+      "expect": "block",
+      "category": "phone",
+      "note": "spaced mobile with prefix"
+    },
+    {
+      "id": "phi-phn-009",
+      "text": "Mobile 098765 43210",
+      "expect": "block",
+      "category": "phone",
+      "note": "spaced mobile, 0 prefix"
+    },
+    {
+      "id": "phi-phn-010",
+      "text": "Mobile 98765-43210",
+      "expect": "block",
+      "category": "phone",
+      "note": "hyphen separated mobile"
+    },
+    {
+      "id": "phi-abha-001",
+      "text": "ABHA address: ramesh.kumar@abdm",
+      "expect": "block",
+      "category": "abha",
+      "note": "synthetic ABHA address"
+    },
+    {
+      "id": "phi-abha-002",
+      "text": "name@sbx",
+      "expect": "block",
+      "category": "abha",
+      "note": "synthetic ABHA sandbox address"
+    },
+    {
+      "id": "phi-abha-003",
+      "text": "ABHA 12-3456-7890-1234",
+      "expect": "block",
+      "category": "abha",
+      "note": "synthetic 2-4-4-4 number"
+    },
+    {
+      "id": "phi-abha-004",
+      "text": "14 5678 9012 3456",
+      "expect": "block",
+      "category": "abha",
+      "note": "synthetic spaced 2-4-4-4 number"
+    },
+    {
+      "id": "phi-abha-005",
+      "text": "ABHA No 12345678901234",
+      "expect": "block",
+      "category": "abha",
+      "note": "synthetic unbroken 14 digits with label"
+    },
+    {
+      "id": "phi-date-001",
+      "text": "Reviewed on 12/03/2021",
+      "expect": "block",
+      "category": "dates",
+      "note": "any day-level date blocks on its own"
+    },
+    {
+      "id": "phi-date-002",
+      "text": "Follow-up 2024-03-12",
+      "expect": "block",
+      "category": "dates",
+      "note": "ISO day-level date"
+    },
+    {
+      "id": "phi-date-003",
+      "text": "Surgery on 12 March 2024",
+      "expect": "block",
+      "category": "dates",
+      "note": "day month year"
+    },
+    {
+      "id": "phi-date-004",
+      "text": "Summary March 12, 2024",
+      "expect": "block",
+      "category": "dates",
+      "note": "month day, year"
+    },
+    {
+      "id": "phi-adr-009",
+      "text": "H.No 12-3-45, Ameerpet",
+      "expect": "block",
+      "category": "address",
+      "note": "house number plus locality"
+    },
+    {
+      "id": "phi-adr-010",
+      "text": "House No. 221B, Banjara Hills",
+      "expect": "block",
+      "category": "address",
+      "note": "house number plus locality"
+    },
+    {
+      "id": "phi-adr-011",
+      "text": "#14, 2nd Cross, Indiranagar",
+      "expect": "block",
+      "category": "address",
+      "note": "hash house number"
+    },
+    {
+      "id": "phi-adr-012",
+      "text": "Flat 302, Sai Residency",
+      "expect": "block",
+      "category": "address",
+      "note": "flat number plus locality"
+    },
+    {
+      "id": "phi-adr-013",
+      "text": "Door No 5-9-22, Himayatnagar",
+      "expect": "block",
+      "category": "address",
+      "note": "door number plus locality"
+    },
+    {
+      "id": "phi-adr-014",
+      "text": "D.No 7-1-88, Ameerpet",
+      "expect": "block",
+      "category": "address",
+      "note": "D.No number plus locality"
+    },
+    {
+      "id": "clean-doi-003",
+      "text": "doi:10.1016/j.jhep.2023.01.012",
+      "expect": "allow",
+      "category": "doi",
+      "note": "DOI with date-like segments must not block"
+    },
+    {
+      "id": "clean-pmid-003",
+      "text": "PMID: 31234567",
+      "expect": "allow",
+      "category": "pmid",
+      "note": "8-digit PMID"
+    },
+    {
+      "id": "clean-stat-007",
+      "text": "Na 138 mmol/L",
+      "expect": "allow",
+      "category": "electrolyte",
+      "note": "lab value"
+    },
+    {
+      "id": "clean-stat-008",
+      "text": "n = 1234",
+      "expect": "allow",
+      "category": "sample_size",
+      "note": "sample size"
+    },
+    {
+      "id": "clean-stat-009",
+      "text": "95% CI 1.12-2.34",
+      "expect": "allow",
+      "category": "stats",
+      "note": "confidence interval"
+    },
+    {
+      "id": "clean-date-006",
+      "text": "enrolled Jan 2023 to Mar 2024",
+      "expect": "allow",
+      "category": "enrolment_period",
+      "note": "month-year range, no day"
+    },
+    {
+      "id": "clean-stat-010",
+      "text": "p = 0.0412",
+      "expect": "allow",
+      "category": "stats",
+      "note": "p value"
+    },
+    {
+      "id": "clean-trial-003",
+      "text": "ISRCTN12345678",
+      "expect": "allow",
+      "category": "trial_id",
+      "note": "trial registration"
+    },
+    {
+      "id": "clean-trial-004",
+      "text": "Registered NCT01234567 at baseline",
+      "expect": "allow",
+      "category": "trial_id",
+      "note": "trial registration in context"
     }
   ]
 }
