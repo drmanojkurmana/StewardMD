@@ -5,6 +5,9 @@ port (functions/api/research/_phi.js) and here against phi.py, so the two
 gates cannot drift: every expect=block case must block with the named
 category present, every expect=allow case must pass, and hit positions must
 be identical in both implementations (the JS test asserts the same).
+A vector may carry "mode": "user"; it is scanned with mode="user" in both
+gates (the plain any-full-date rule). Vectors without a mode use the default
+literature-safe scan.
 
 All identifiers in the vector file are synthetic. The full 200-case
 synthetic set and the 25-PDF clean set belong to the 3.9 benchmark; this
@@ -38,7 +41,7 @@ def test_vector_file_exists_and_is_substantial():
 
 @pytest.mark.parametrize("case", _cases(), ids=lambda c: c["id"])
 def test_shared_vector(case):
-    report = phi.scan(case["text"])
+    report = phi.scan(case["text"], mode=case.get("mode", "default"))
     if case["expect"] == "block":
         assert report["blocked"], f"{case['id']} must block: {case['text']}"
         if not case["category"].startswith("near_miss"):

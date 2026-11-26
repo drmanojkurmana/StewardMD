@@ -1,5 +1,5 @@
 {
-  "description": "Shared PHI gate vectors (phi-gate.md). Run by test/research-phase3-api.test.mjs AND backend/research/tests/test_phi_vectors.py. All identifiers synthetic. expect=block cases must block in BOTH gates with the named category present; expect=allow cases must pass BOTH. Hit positions must match exactly.",
+  "description": "Shared PHI gate vectors (phi-gate.md). Run by test/research-phase3-api.test.mjs AND backend/research/tests/test_phi_vectors.py. All identifiers synthetic. expect=block cases must block in BOTH gates with the named category present; expect=allow cases must pass BOTH. Hit positions must match exactly. A case may carry \"mode\": \"user\"; both runners scan it with mode=\"user\" (plain any-full-date rule). Cases without a mode use the default literature-safe scan.",
   "cases": [
     {
       "id": "phi-mrn-001",
@@ -741,28 +741,62 @@
       "text": "Reviewed on 12/03/2021",
       "expect": "block",
       "category": "dates",
-      "note": "any day-level date blocks on its own"
+      "mode": "user",
+      "note": "any day-level date blocks on its own in user mode"
     },
     {
       "id": "phi-date-002",
       "text": "Follow-up 2024-03-12",
       "expect": "block",
       "category": "dates",
-      "note": "ISO day-level date"
+      "mode": "user",
+      "note": "ISO day-level date in user mode"
     },
     {
       "id": "phi-date-003",
       "text": "Surgery on 12 March 2024",
       "expect": "block",
       "category": "dates",
-      "note": "day month year"
+      "mode": "user",
+      "note": "day month year in user mode"
     },
     {
       "id": "phi-date-004",
       "text": "Summary March 12, 2024",
       "expect": "block",
       "category": "dates",
-      "note": "month day, year"
+      "mode": "user",
+      "note": "month day, year in user mode"
+    },
+    {
+      "id": "phi-date-005",
+      "text": "published 2023-01-15",
+      "expect": "allow",
+      "category": "pubdate",
+      "note": "default mode: a publication date is not a patient date"
+    },
+    {
+      "id": "phi-date-006",
+      "text": "between 1 January 2015 and 31 December 2019",
+      "expect": "allow",
+      "category": "enrolment_period",
+      "note": "default mode: day-level study period in published literature"
+    },
+    {
+      "id": "phi-date-007",
+      "text": "published 2023-01-15",
+      "expect": "block",
+      "category": "dates",
+      "mode": "user",
+      "note": "user mode: the same publication date blocks in typed text"
+    },
+    {
+      "id": "phi-date-008",
+      "text": "between 1 January 2015 and 31 December 2019",
+      "expect": "block",
+      "category": "dates",
+      "mode": "user",
+      "note": "user mode: a day-level study period in typed text blocks"
     },
     {
       "id": "phi-adr-009",

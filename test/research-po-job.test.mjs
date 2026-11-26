@@ -507,7 +507,7 @@ test("manuscript_draft: phone in protocol.question -> 422 phi_blocked", { skip: 
   assert.equal(ledger[0].delta + ledger[1].delta, 0);
 });
 
-test("manuscript_draft: full date in evidence quote -> 422 phi_blocked", { skip: SKIP }, async () => {
+test("manuscript_draft: full date in evidence quote passes (published text, default mode)", { skip: SKIP }, async () => {
   const env = freshEnv();
   fundWallet(env, "alice@example.com", 500);
   const p = await makeProject(env, "tok-alice", "systematic_review");
@@ -520,15 +520,52 @@ test("manuscript_draft: full date in evidence quote -> 422 phi_blocked", { skip:
 
   const r = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice",
     { kind: "manuscript_draft", idempotencyKey: "k-phi-evquote" });
+  assert.equal(r.http, 202, JSON.stringify(r));
+  assert.equal(env.RESEARCH_QUEUE._messages.length, 1);
+  const snap = JSON.parse(env.RESEARCH_R2._objects.get(r.job.inputR2Key));
+  assert.ok(JSON.stringify(snap).includes("14/03/2023"), "published quote stays in the snapshot verbatim");
+});
+
+test("manuscript_draft: full date in the protocol question blocks (user-typed text)", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "alice@example.com", 500);
+  const p = await makeProject(env, "tok-alice", "systematic_review", "BCG review", "Was the outcome on 12/03/2023 representative?");
+  lockProtocol(env, p.id);
+  addRun(env, p.id, "r1");
+
+  const r = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice",
+    { kind: "manuscript_draft", idempotencyKey: "k-phi-proto-date" });
   assert.equal(r.http, 422, JSON.stringify(r));
   assert.equal(r.error.code, "phi_blocked");
   assert.ok(Array.isArray(r.categories) && r.categories.includes("dates"), JSON.stringify(r));
-  assert.ok(!JSON.stringify(r).includes("14/03/2023"), "PHI date must never be echoed");
+  assert.equal(r.overridable, undefined, "jobs never offer an override");
+  assert.ok(!JSON.stringify(r).includes("12/03/2023"), "PHI date must never be echoed");
   assert.equal(env.RESEARCH_R2._objects.size, 0);
   assert.equal(env.RESEARCH_QUEUE._messages.length, 0);
   const ledger = env.RESEARCH_DB._db.prepare("SELECT reason, delta FROM research_credit_ledger ORDER BY rowid ASC").all();
   assert.deepEqual(ledger.map((x) => x.reason), ["reserve", "release"]);
   assert.equal(ledger[0].delta + ledger[1].delta, 0);
+});
+
+test("manuscript_draft: full date in a GRADE rationale blocks (user-typed text)", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "alice@example.com", 500);
+  const p = await makeProject(env, "tok-alice", "systematic_review");
+  lockProtocol(env, p.id);
+  addRun(env, p.id, "r1");
+  const now = Date.now();
+  env.RESEARCH_DB._db.prepare(
+    "INSERT INTO research_grade_assessments (id,project_id,run_id,outcome,design,input_json,result_json,created_ts,updated_ts) VALUES ('grd_date',?,'r1','Tuberculosis','rct',?,?,?,?)")
+    .run(p.id, JSON.stringify({}), JSON.stringify({ certainty: "Low", footnotes: ["Downgraded after review on 12/03/2023"] }), now, now);
+
+  const r = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice",
+    { kind: "manuscript_draft", idempotencyKey: "k-phi-grade-date" });
+  assert.equal(r.http, 422, JSON.stringify(r));
+  assert.equal(r.error.code, "phi_blocked");
+  assert.ok(Array.isArray(r.categories) && r.categories.includes("dates"), JSON.stringify(r));
+  assert.ok(!JSON.stringify(r).includes("12/03/2023"), "PHI date must never be echoed");
+  assert.equal(env.RESEARCH_R2._objects.size, 0);
+  assert.equal(env.RESEARCH_QUEUE._messages.length, 0);
 });
 
 test("manuscript_draft: snapshot build throwing releases reserved credits", { skip: SKIP }, async () => {

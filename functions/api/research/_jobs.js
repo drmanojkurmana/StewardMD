@@ -511,32 +511,42 @@ function collectStrings(val, out) {
 }
 
 function snapshotPhiTexts(snapshot) {
-  const texts = [];
+  /* Protocol free text and GRADE rationale are user-typed, so they scan in
+   * user mode (a day-level date there is a patient date). Evidence values,
+   * quotes and RoB quotes come from published papers and keep the default
+   * literature-safe mode. There is no override on this path. */
+  const userTexts = [];
+  const literatureTexts = [];
   const p = snapshot && snapshot.protocol;
   if (p) {
     for (const k of ["title", "question", "pico", "design", "eligibility", "outcomes"]) {
-      if (p[k] !== undefined) collectStrings(p[k], texts);
+      if (p[k] !== undefined) collectStrings(p[k], userTexts);
     }
   }
   for (const item of (snapshot && snapshot.evidence) || []) {
     for (const v of (item && item.values) || []) {
       if (!v) continue;
-      if (v.value !== undefined) collectStrings(v.value, texts);
-      if (typeof v.quote === "string" && v.quote) texts.push(v.quote);
+      if (v.value !== undefined) collectStrings(v.value, literatureTexts);
+      if (typeof v.quote === "string" && v.quote) literatureTexts.push(v.quote);
     }
   }
   for (const r of (snapshot && snapshot.rob) || []) {
-    if (r && typeof r.quote === "string" && r.quote) texts.push(r.quote);
+    if (r && typeof r.quote === "string" && r.quote) literatureTexts.push(r.quote);
   }
   for (const g of (snapshot && snapshot.grade) || []) {
-    if (g && typeof g.rationale === "string" && g.rationale) texts.push(g.rationale);
+    if (g && typeof g.rationale === "string" && g.rationale) userTexts.push(g.rationale);
   }
-  return texts;
+  return { userTexts, literatureTexts };
 }
 
 function scanSnapshotPhi(snapshot) {
   const hits = [];
-  for (const text of snapshotPhiTexts(snapshot)) {
+  const texts = snapshotPhiTexts(snapshot);
+  for (const text of texts.userTexts) {
+    const res = scan(text, { mode: "user" });
+    if (res.blocked) hits.push(...res.hits);
+  }
+  for (const text of texts.literatureTexts) {
     const res = scan(text);
     if (res.blocked) hits.push(...res.hits);
   }
