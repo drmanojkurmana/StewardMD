@@ -26,16 +26,25 @@
   }
   SMD.esc = esc;
 
+  /* Native CapacitorHttp plugin reference when available. */
+  function capHttp() {
+    return (G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.CapacitorHttp) || G.CapacitorHttp || null;
+  }
+
   /* Phase 2 API client: calls stewardmd.in/api/research/v1 per the frozen
    * contracts (docs/research/contracts/phase-2). Firebase ID token from
    * SMD_AUTH when present; errors normalize to {code, status, current}. */
-  function apiRequest(method, path, body) {
+  function apiRequest(method, path, body, options) {
     var headers = { "Accept": "application/json" };
     var opts = { method: method, headers: headers };
     if (body !== undefined && body !== null) {
       headers["Content-Type"] = "application/json";
       opts.body = JSON.stringify(body);
     }
+    var timeoutMs = (options && options.timeout) || (path && path.indexOf("/ai-draft") !== -1 ? 90000 : 30000);
+    opts.timeout = timeoutMs;
+    opts.readTimeout = timeoutMs;
+
     var tokenP;
     try {
       var u = G.SMD_AUTH && G.SMD_AUTH.currentUser;
@@ -43,24 +52,64 @@
     } catch (e) { tokenP = Promise.resolve(null); }
     return Promise.resolve(tokenP).then(function (token) {
       if (token) headers["Authorization"] = "Bearer " + token;
-      return G.fetch("/api/research" + path, opts);
-    }).then(function (res) {
-      return res.text().then(function (txt) {
-        var data = null;
-        try { data = txt ? JSON.parse(txt) : null; } catch (e) {}
-        if (!res.ok) {
-          var env = (data && data.error) || {};
-          var err = new Error(env.message || ("Request failed (HTTP " + res.status + "). Retry, or check the project role."));
-          err.status = res.status;
-          err.code = env.code || ("http_" + res.status);
-          err.current = data && data.current;
-          err.body = data;
-          err.requestId = env.requestId;
-          throw err;
-        }
-        return data || {};
+      var Http = capHttp();
+      if (Http && typeof Http.request === "function") {
+        headers["X-SMD-App"] = "smdapp_ddc578ad04b399a332e53e04706433d96803e91c2d373b7d";
+        var baseOrigin = G.SMD_API_BASE || (G.location && G.location.origin) || "";
+        var reqOpts = {
+          url: baseOrigin + "/api/research" + path,
+          method: (method || "GET").toUpperCase(),
+          headers: headers,
+          data: (body !== undefined && body !== null) ? body : undefined,
+          connectTimeout: 30000,
+          readTimeout: timeoutMs
+        };
+        return Http.request(reqOpts).then(function (res) {
+          var data = res && res.data;
+          if (typeof data === "string") {
+            try { data = JSON.parse(data); } catch (ex) {}
+          }
+          var statusCode = (res && res.status) || 200;
+          if (statusCode >= 400 || statusCode === 0) {
+            var env = (data && data.error) || {};
+            var err = new Error(env.message || ("Request failed (HTTP " + statusCode + "). Retry, or check the project role."));
+            err.status = statusCode;
+            err.code = env.code || ("http_" + statusCode);
+            err.current = data && data.current;
+            err.body = data;
+            err.requestId = env.requestId;
+            throw err;
+          }
+          return data || {};
+        });
+      }
+      return G.fetch("/api/research" + path, opts).then(function (res) {
+        return res.text().then(function (txt) {
+          var data = null;
+          try { data = txt ? JSON.parse(txt) : null; } catch (e) {}
+          if (!res.ok) {
+            var env = (data && data.error) || {};
+            var err = new Error(env.message || ("Request failed (HTTP " + res.status + "). Retry, or check the project role."));
+            err.status = res.status;
+            err.code = env.code || ("http_" + res.status);
+            err.current = data && data.current;
+            err.body = data;
+            err.requestId = env.requestId;
+            throw err;
+          }
+          return data || {};
+        });
       });
     }).catch(function (e) {
+      var msg = String((e && (e.message || e.errorMessage || e.code)) || "");
+      var isTout = (e && (e.code === "timeout" || e.code === "SocketTimeoutException" || e.code === "http_504" || e.code === "http_408" || e.status === 504 || e.status === 408)) ||
+        /SocketTimeoutException|timed?\s*out|ETIMEDOUT/i.test(msg) || (e && (e.name === "TimeoutError" || e.name === "AbortError"));
+      if (isTout) {
+        var tout = new Error("MaiK is taking longer than usual. Try again.");
+        tout.code = "timeout";
+        tout.status = 408;
+        throw tout;
+      }
       if (e && e.code) throw e;
       var net = new Error("Cannot reach the research service. Check the connection and retry.");
       net.code = "network";
@@ -122,6 +171,9 @@
       status = parseInt(String(code).slice(5), 10) || 0;
     }
     if (!code && !status) {
+      if (/SocketTimeoutException|timed?\s*out|ETIMEDOUT/i.test(String(e.message || ""))) {
+        return { message: "MaiK is taking longer than usual. Try again.", action: "retry", actionLabel: "Try again" };
+      }
       return { message: e.message || "Something went wrong on our side.", action: "retry", actionLabel: "Try again" };
     }
     if (code === "link_unrecognised") {
@@ -203,6 +255,12 @@
     }
     if (code === "invalid_multipart" || code === "missing_file" || code === "file_type") {
       return { message: e.message || "The uploaded file could not be processed. Try a selectable-text PDF or Word (.docx) file.", action: "retry", actionLabel: "Try again" };
+    }
+    var isTimeout = code === "timeout" || code === "timed_out" || code === "SocketTimeoutException" ||
+      code === "http_504" || code === "http_408" || status === 504 || status === 408 ||
+      /SocketTimeoutException|timed?\s*out|ETIMEDOUT/i.test(String(code + " " + (e.message || "")));
+    if (isTimeout) {
+      return { message: "MaiK is taking longer than usual. Try again.", action: "retry", actionLabel: "Try again" };
     }
     if (code === "network" || status === 0 || status >= 500) {
       return { message: "No connection right now. Your work is saved; try again in a moment.", action: "retry", actionLabel: "Try again" };
@@ -406,7 +464,7 @@
         } else {
           var body = { task: o.task };
           if (o.input) body.input = o.input();
-          run = SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(o.pid) + "/ai-draft", body);
+          run = SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(o.pid) + "/ai-draft", body, { timeout: 90000 });
         }
         Promise.resolve(run).then(function (res) {
           st.busy = false;
@@ -2270,11 +2328,123 @@
     }
   }
 
+  var isDraining = false;
+  function drainQueue() {
+    if (isDraining) return Promise.resolve(0);
+    var store = SMD.store;
+    if (!store) return Promise.resolve(0);
+    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+      return Promise.resolve(0);
+    }
+    var queue = store.cleanQueue ? store.cleanQueue() : store.getQueue();
+    if (!queue || !queue.length) {
+      if (store.setSyncState && store.getState().syncState !== "conflict") {
+        store.setSyncState("synced");
+      }
+      return Promise.resolve(0);
+    }
+    if (!SMD.api || !SMD.api.request) {
+      return Promise.resolve(0);
+    }
+
+    isDraining = true;
+    var drainedCount = 0;
+
+    function processNext(index) {
+      if (index >= queue.length) {
+        isDraining = false;
+        var remaining = store.getQueue();
+        if (remaining.length === 0 && store.getState().syncState !== "conflict") {
+          store.setSyncState("synced");
+        }
+        return Promise.resolve(drainedCount);
+      }
+
+      var item = queue[index];
+      if (!item || !item.type) {
+        if (item && item.id) store.removeQueueItem(item.id);
+        return processNext(index + 1);
+      }
+
+      var sendPromise;
+      if (item.type === "project_create") {
+        sendPromise = SMD.api.request("POST", "/v1/projects", item.payload);
+      } else if (item.type === "study_create") {
+        var pid = item.payload && (item.payload.projectId || item.payload.pid);
+        if (!pid || pid === "prj_bcg_1994") {
+          store.removeQueueItem(item.id);
+          return processNext(index + 1);
+        }
+        sendPromise = SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/studies", {
+          label: item.payload.label || "",
+          measure: item.payload.measure,
+          inputs: item.payload.inputs,
+          locator: item.payload.locator,
+          quote: item.payload.quote || "",
+          verified: !!item.payload.verified
+        });
+      } else if (item.type === "study_update" || item.type === "study_update_forced") {
+        var spid = item.payload && (item.payload.projectId || item.payload.pid);
+        var sid = item.payload && item.payload.id;
+        if (!spid || !sid || spid === "prj_bcg_1994") {
+          store.removeQueueItem(item.id);
+          return processNext(index + 1);
+        }
+        sendPromise = SMD.api.request("PUT", "/v1/projects/" + encodeURIComponent(spid) + "/studies/" + encodeURIComponent(sid), item.payload);
+      } else if (item.type === "run_create") {
+        var rpid = item.payload && (item.payload.projectId || item.payload.pid);
+        if (!rpid || rpid === "prj_bcg_1994") {
+          store.removeQueueItem(item.id);
+          return processNext(index + 1);
+        }
+        sendPromise = SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(rpid) + "/runs", item.payload);
+      } else {
+        store.removeQueueItem(item.id);
+        return processNext(index + 1);
+      }
+
+      return sendPromise.then(function () {
+        store.removeQueueItem(item.id);
+        drainedCount++;
+        return processNext(index + 1);
+      }).catch(function (err) {
+        var st = (err && err.status) || 0;
+        if (!st && err && err.code && String(err.code).indexOf("http_") === 0) {
+          st = parseInt(String(err.code).slice(5), 10) || 0;
+        }
+        // Drop items that fail with 4xx client errors (report them once)
+        if (st >= 400 && st < 500) {
+          console.warn("Dropping queued item after 4xx client rejection:", item.type, st);
+          store.removeQueueItem(item.id);
+          return processNext(index + 1);
+        }
+        // Network or 5xx error: stop drain for now
+        isDraining = false;
+        return drainedCount;
+      });
+    }
+
+    return processNext(0).catch(function () {
+      isDraining = false;
+      return drainedCount;
+    });
+  }
+
+  SMD.drainQueue = drainQueue;
+  if (SMD.store) SMD.store.drainQueue = drainQueue;
+
+  if (typeof G !== "undefined" && G.addEventListener) {
+    G.addEventListener("online", function () {
+      drainQueue();
+    });
+  }
+
   var storeUnsub = null;
 
   function open(opts) {
     injectCSS();
     if (SMD.store) SMD.store.init();
+    drainQueue();
     if (G.RMDStore && G.RMDStore.available) {
       G.RMDStore.available().then(function () {}, function () {});
     }
@@ -2337,7 +2507,8 @@
     close: close,
     navigate: navigate,
     refreshScreen: function () { navigate(currentScreen, {}, true); },
-    esc: esc
+    esc: esc,
+    drainQueue: drainQueue
   };
 
   for (var k in SHELL) {
