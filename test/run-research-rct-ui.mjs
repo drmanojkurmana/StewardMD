@@ -546,6 +546,19 @@ try {
   // Open draft preview modal
   await click('[data-rmd="ask-maik-case-report"]');
   ok(await until(`!!document.getElementById("rmdCaseReportDraftModal")`, 5000), "case report draft preview modal opened");
+  const crHit = await ev(`(()=>{
+    const shell = document.getElementById("researchMD");
+    const modal = document.getElementById("rmdCaseReportDraftModal");
+    if (!shell || !modal) return null;
+    const shellZ = parseInt(getComputedStyle(shell).zIndex, 10) || 0;
+    const modalZ = parseInt(getComputedStyle(modal).zIndex, 10) || 0;
+    const box = modal.querySelector(".rmd-modal-card");
+    const r = (box || modal).getBoundingClientRect();
+    const topEl = document.elementFromPoint(Math.floor(r.left + r.width / 2), Math.floor(r.top + r.height / 2));
+    return { zOk: modalZ > shellZ, inside: !!(modal && topEl && (modal === topEl || modal.contains(topEl))) };
+  })()`);
+  ok(crHit && crHit.zOk, "case report draft preview modal z-index is above #researchMD");
+  ok(crHit && crHit.inside, "document.elementFromPoint at modal centre is inside popup");
 
   // Plant a phone number into preview text -> verify send blocked
   await ev(`(()=>{

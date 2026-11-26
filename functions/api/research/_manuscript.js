@@ -406,11 +406,46 @@ async function hashPayload(row, sections) {
 function versionNumber(body) {
   return body && typeof body.version === "number" && Number.isInteger(body.version) ? body.version : null;
 }
+const SECTION_HEADINGS = {
+  abstract: "Abstract",
+  introduction: "Introduction",
+  methods: "Methods",
+  results: "Results",
+  discussion: "Discussion",
+  title: "Title Page",
+  casePresentation: "Case Presentation",
+  timeline: "Timeline",
+  conclusion: "Conclusion",
+  patientPerspective: "Patient Perspective",
+  learningPoints: "Learning Points",
+};
+function defaultSectionHeading(sectionId) {
+  if (SECTION_HEADINGS[sectionId]) return SECTION_HEADINGS[sectionId];
+  const s = String(sectionId || "").trim();
+  return s ? s.charAt(0).toUpperCase() + s.slice(1) : "Section";
+}
+async function ensureFirstVersion(ctx, projectId, project, now) {
+  const { db, uid, api } = ctx;
+  const { uuid, audit } = api;
+  const id = uuid("man_");
+  const title = (project && typeof project.title === "string" ? project.title : "").slice(0, 500);
+  try {
+    await db.prepare("INSERT INTO research_manuscript_versions (id,project_id,version,title,authors_json,affiliations,status,references_json,tokens_json,job_id,created_by,created_ts) VALUES (?,?,1,?,'[]','','draft','[]','{}','',?,?)")
+      .bind(id, projectId, title, uid, now).run();
+    await audit(db, projectId, uid, "manuscript_version_created", id, { version: 1, source: "section_save" });
+    return await latestVersion(db, projectId);
+  } catch (e) {
+    const raced = await latestVersion(db, projectId);
+    if (raced) return raced;
+    throw e;
+  }
+}
 async function editable(ctx, projectId, body, roles, denyMessage) {
   const { db, uid, requestId, api } = ctx;
   const { err, json, projectGate, gateErr } = api;
   const gate = await projectGate(db, projectId, uid, roles);
   if (gate.status) return { error: gateErr(gate, denyMessage, requestId) };
+  await ingestProjectDrafts(ctx, projectId);
   const version = versionNumber(body);
   if (version == null) return { error: err(400, "invalid_body", "version must be an integer", requestId) };
   const row = await latestVersion(db, projectId);
@@ -524,24 +559,48 @@ export async function getManuscript(ctx, projectId, url) {
 
 export async function putSection(ctx, projectId, sectionId, body) {
   const { db, uid, requestId, api } = ctx;
-  const { json, err, audit } = api;
-  const opened = await editable(ctx, projectId, body, WRITE_ROLES, "Section edits need an owner, editor or analyst role");
-  if (opened.error) return opened.error;
+  const { json, err, audit, projectGate, gateErr } = api;
+  const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
+  if (gate.status) return gateErr(gate, "Section edits need an owner, editor or analyst role", requestId);
+  const sid = typeof sectionId === "string" ? sectionId.trim().slice(0, 80) : "";
+  if (!sid) return err(400, "invalid_body", "sectionId is required", requestId);
+  const version = versionNumber(body);
+  if (version == null || version < 1) return err(400, "invalid_body", "version must be an integer", requestId);
   if (typeof body.text !== "string" || body.text.length > 200000)
     return err(400, "invalid_body", "text must be a string of at most 200000 characters", requestId);
   if (body.heading !== undefined && (typeof body.heading !== "string" || !body.heading.trim() || body.heading.length > 300))
     return err(400, "invalid_body", "heading must be 1-300 characters", requestId);
-  const row = opened.row;
-  const section = await db.prepare("SELECT * FROM research_manuscript_sections WHERE version_id=? AND section_id=?").bind(row.id, sectionId).first();
-  if (!section) return err(404, "section_not_found", "Section not found", requestId);
-  const heading = body.heading !== undefined ? body.heading.trim() : section.heading;
+  await ingestProjectDrafts(ctx, projectId);
+  let row = await latestVersion(db, projectId);
+  if (row) {
+    if (version !== row.version) {
+      return json({
+        error: { code: "stale_version", message: "Manuscript changed on the server", requestId },
+        current: { manuscript: await manuscriptOf(db, projectId, row) },
+      }, 409, { "x-request-id": requestId });
+    }
+    if (row.status === "locked") return err(403, "manuscript_locked", "This manuscript version is locked", requestId);
+  } else {
+    row = await ensureFirstVersion(ctx, projectId, gate.project, Date.now());
+    if (row.status === "locked") return err(403, "manuscript_locked", "This manuscript version is locked", requestId);
+  }
+  const section = await db.prepare("SELECT * FROM research_manuscript_sections WHERE version_id=? AND section_id=?").bind(row.id, sid).first();
   const now = Date.now();
-  await db.prepare("UPDATE research_manuscript_sections SET heading=?,text=?,updated_by=?,updated_ts=? WHERE version_id=? AND section_id=?")
-    .bind(heading, body.text, uid, now, row.id, sectionId).run();
+  if (section) {
+    const heading = body.heading !== undefined ? body.heading.trim() : section.heading;
+    await db.prepare("UPDATE research_manuscript_sections SET heading=?,text=?,updated_by=?,updated_ts=? WHERE version_id=? AND section_id=?")
+      .bind(heading, body.text, uid, now, row.id, sid).run();
+  } else {
+    const heading = body.heading !== undefined ? body.heading.trim() : defaultSectionHeading(sid);
+    const maxOrder = await db.prepare("SELECT COALESCE(MAX(sort_order), -1) AS m FROM research_manuscript_sections WHERE version_id=?").bind(row.id).first();
+    const sortOrder = (maxOrder && typeof maxOrder.m === "number" ? maxOrder.m : -1) + 1;
+    await db.prepare("INSERT INTO research_manuscript_sections (version_id,section_id,heading,level,text,sort_order,updated_by,updated_ts) VALUES (?,?,?,1,?,?,?,?)")
+      .bind(row.id, sid, heading, body.text, sortOrder, uid, now).run();
+  }
   if (row.status === "review" || row.status === "approved")
     await db.prepare("UPDATE research_manuscript_versions SET status='draft' WHERE id=?").bind(row.id).run();
-  await audit(db, projectId, uid, "manuscript_section_saved", row.id, { sectionId, version: row.version });
-  const fresh = await db.prepare("SELECT * FROM research_manuscript_sections WHERE version_id=? AND section_id=?").bind(row.id, sectionId).first();
+  await audit(db, projectId, uid, "manuscript_section_saved", row.id, { sectionId: sid, version: row.version });
+  const fresh = await db.prepare("SELECT * FROM research_manuscript_sections WHERE version_id=? AND section_id=?").bind(row.id, sid).first();
   const stored = parseJson(row.tokens_json, {});
   const table = await tokenTable(db, projectId, stored);
   return json({ section: sectionOf(fresh), version: row.version, tokens: publicTokens(fresh.text, table) }, 200, { "x-request-id": requestId });

@@ -30,6 +30,89 @@
   var ROOT_ID = "pfSetupRoot";
   var SNOOZE_KEY = "smd_profile_setup_snoozed_at";   // per-app-open postponement only
 
+  /* ONBOARDING ORDER (2026-11-26).
+   * This form is optional ("Later"), but it used to open within ~1.6 s of the first sign-in, on
+   * top of the verification gate, the app-lock chooser and phone verification. New order: the app
+   * reaches its first screen, and at most ONE optional onboarding sheet is shown per session.
+   * Reversible without a rebuild:
+   *   localStorage smd_onb_legacy="1" restores the old immediate profile prompt.
+   * The session budget is shared by any optional sheet that adopts it (see
+   * docs/research/ONBOARDING_ORDER.md). sessionStorage, so it resets on the next app open. */
+  var ONB_LEGACY = "smd_onb_legacy";
+  var ONB_OPTIONAL = "smd_onb_optional_shown";
+  var ONB_POLLS = 120;   // 120 x 500 ms: give up until the next app open, never block the app
+
+  function legacyOrder() { try { return localStorage.getItem(ONB_LEGACY) === "1"; } catch (e) { return false; } }
+  function optionalShown() { try { return sessionStorage.getItem(ONB_OPTIONAL) === "1"; } catch (e) { return false; } }
+  function markOptionalShown() { try { sessionStorage.setItem(ONB_OPTIONAL, "1"); } catch (e) {} }
+
+  /* Pure sequencing decision, also the unit-test seam (SMD_PROFILE_SETUP._onb.decide).
+   * legacy wins so a device can always get the old order back; the per-session budget comes next
+   * so no second optional sheet can stack; then we wait for the first screen; a caller that has
+   * not already decided (force=false) still asks needed(). */
+  function decideOnb(st) {
+    st = st || {};
+    if (st.legacy) return "open-now";
+    if (st.shown) return "skip-session";
+    if (!st.foreground) return "wait";
+    if (!st.force && st.needed === false) return "skip-not-needed";
+    return "open";
+  }
+
+  function onScreen(el) {
+    if (!el) return false;
+    var cs; try { cs = getComputedStyle(el); } catch (e) { return false; }
+    if (cs.display === "none" || cs.visibility === "hidden" || cs.opacity === "0") return false;
+    var r; try { r = el.getBoundingClientRect(); } catch (e) { return false; }
+    return !!(r && r.width > 2 && r.height > 2);
+  }
+  function preHomeGate() {
+    var ids = ["accountGate", "introPoster", "verifyGate", "splash", "smdBootSplash"];
+    for (var i = 0; i < ids.length; i++) { if (onScreen(document.getElementById(ids[i]))) return true; }
+    return false;
+  }
+  /* Anything the doctor is already doing: a security sheet, the sign-in flow, a module overlay or
+   * the guided tour. The profile prompt must never stack on these, and must not land over
+   * ResearchMD while the doctor is working in it. */
+  function appBusy() {
+    if (preHomeGate()) return true;
+    try { var EA = window.SMD_EMAIL_AUTH; if (EA && EA.flowOpen && EA.flowOpen()) return true; } catch (e) {}
+    var byId = ["smdApplock", "phvRoot", "pfSetupRoot"];
+    for (var i = 0; i < byId.length; i++) {
+      var el = document.getElementById(byId[i]);
+      if (!onScreen(el)) continue;
+      if (byId[i] === "phvRoot" && !el.classList.contains("on")) continue;
+      return true;
+    }
+    var bySel = ["#researchMD", "#icuRoot.on", "#hvSheet.on", "#maikSheet.on", "#mcOverlay.on"];
+    for (var j = 0; j < bySel.length; j++) {
+      var node; try { node = document.querySelector(bySel[j]); } catch (e) { node = null; }
+      if (!onScreen(node)) continue;
+      if (bySel[j] === "#researchMD" && node.hasAttribute("hidden")) continue;
+      return true;
+    }
+    var wel; try { wel = document.querySelector(".smdt-wel"); } catch (e) { wel = null; }
+    if (wel && wel.style && wel.style.display === "flex") return true;
+    var card; try { card = document.querySelector(".smdt-card"); } catch (e) { card = null; }
+    if (card && card.style && card.style.display === "block") return true;
+    return false;
+  }
+  function firstScreenReady() {
+    if (typeof document === "undefined") return false;
+    if (preHomeGate()) return false;
+    var h; try { h = document.getElementById("homeV2"); } catch (e) { h = null; }
+    if (!h) return true;   // shell without the home container: gates clear is enough
+    return h.classList.contains("on") && onScreen(h);
+  }
+  function whenFirstScreen(cb) {
+    var n = 0;
+    (function tick() {
+      if (firstScreenReady() && !appBusy()) { cb(true); return; }
+      if (++n > ONB_POLLS) { cb(false); return; }
+      setTimeout(tick, 500);
+    })();
+  }
+
   /* Postgraduate qualifications as they are actually written in India. MBBS is included even though
    * the request listed only the PG degrees: this form is mandatory-ish, and an intern, house officer
    * or medical officer holding only MBBS must be able to complete it truthfully rather than pick a
@@ -575,15 +658,18 @@
     return el;
   }
 
-  /* Open the form, pre-filled with whatever is already stored. */
-  function open() {
+  /* Open the form, pre-filled with whatever is already stored. guard=true is used only by the
+   * deferred first-run path: if the doctor has opened another screen while the profile was loading,
+   * drop this prompt instead of landing on top of it. */
+  function open(guard) {
+    function show() { if (guard && appBusy()) return; form(true); }
     ensureRef(function (ref) {
-      if (!ref) { draft = {}; form(true); return; }
+      if (!ref) { draft = {}; show(); return; }
       ref.get().then(function (snap) {
         draft = (snap && snap.exists && snap.data()) || {};
         draft.role = roleLabel(draft.role);
-        form(true);
-      }).catch(function () { draft = {}; form(true); });
+        show();
+      }).catch(function () { draft = {}; show(); });
     });
   }
 
@@ -606,19 +692,55 @@
   }
 
   /* ── auto-prompt on app start ─────────────────────────────────────────────────────────────────
-   * Waits for auth to resolve rather than guessing a timeout, then asks once. The delay lets the
-   * home screen paint first, so the form appears over a real app rather than a boot splash. */
-  var _asked = false;
-  function maybeAsk() {
-    if (_asked) return;
-    var ref = docRef(); if (!ref) return;      // not signed in yet; the auth listener will call back
-    _asked = true;
+   * Waits for auth to resolve rather than guessing a timeout, then schedules the optional form.
+   * New sequence (unless smd_onb_legacy="1"): the first screen must be up and nothing else may be
+   * on top of it, then at most one optional onboarding sheet is shown this session. */
+  function legacyAsk() {
     needed(function (yes, d) {
       if (!yes) return;
       draft = d || {};
       draft.role = roleLabel(draft.role);
       setTimeout(function () { form(true); }, 400);
     });
+  }
+  function presentOptional(opts) {
+    if (optionalShown()) return;
+    if (opts.force) { markOptionalShown(); open(true); return; }
+    needed(function (yes, d) {
+      var act = decideOnb({ legacy: false, shown: optionalShown(), foreground: true, force: false, needed: yes });
+      if (act !== "open") return;
+      markOptionalShown();
+      draft = d || {};
+      draft.role = roleLabel(draft.role);
+      setTimeout(function () {
+        if (appBusy()) return;   // something opened in the settle window: skip, never stack
+        form(true);
+      }, 400);
+    });
+  }
+  var _autoPending = false, _autoForce = false;
+  function request(opts) {
+    opts = opts || {};
+    if (legacyOrder()) { if (opts.force) open(); else legacyAsk(); return; }
+    if (optionalShown()) return;
+    if (firstScreenReady() && !appBusy()) { presentOptional(opts); return; }
+    if (_autoPending) { if (opts.force) _autoForce = true; return; }
+    _autoPending = true;
+    _autoForce = opts.force === true;
+    whenFirstScreen(function (ok) {
+      var force = _autoForce;
+      _autoPending = false; _autoForce = false;
+      if (!ok) return;
+      if (legacyOrder()) { if (force) open(); else legacyAsk(); return; }
+      presentOptional({ force: force });
+    });
+  }
+  var _asked = false;
+  function maybeAsk() {
+    if (_asked) return;
+    var ref = docRef(); if (!ref) return;      // not signed in yet; the auth listener will call back
+    _asked = true;
+    request({ force: false });
   }
   function start() {
     try {
@@ -639,8 +761,14 @@
   else document.addEventListener("DOMContentLoaded", function () { setTimeout(start, 800); });
 
   window.SMD_PROFILE_SETUP = {
-    open: open, needed: needed, missing: missing, close: close, _fit: fitViewport,
+    open: open, request: request, needed: needed, missing: missing, close: close, _fit: fitViewport,
     DEGREES: DEGREES, SPECIALITIES: SPECIALITIES, FIELDS: FIELDS,
-    ROLE_OPTS: ROLE_OPTS, roleKey: roleKey, roleLabel: roleLabel
+    ROLE_OPTS: ROLE_OPTS, roleKey: roleKey, roleLabel: roleLabel,
+    // Test seam for the onboarding sequence (test/research-onboarding-order.test.mjs).
+    _onb: {
+      FLAG: ONB_LEGACY, OPTIONAL_KEY: ONB_OPTIONAL,
+      decide: decideOnb, legacy: legacyOrder, shown: optionalShown,
+      markShown: markOptionalShown, firstScreen: firstScreenReady, busy: appBusy
+    }
   };
 })();

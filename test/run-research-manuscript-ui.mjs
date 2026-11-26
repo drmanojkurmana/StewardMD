@@ -138,10 +138,13 @@ const db = {
 };
 
 const putLog = [];
+const exportLog = [];
 const aiDraftCalls = [];
 const jobsCalls = [];
 const jobsCancelCalls = [];
 let exportGatesPass = false;
+let firstSaveMode = false;
+let firstSaveCreated = false;
 
 /* ---------------- API Handler ---------------- */
 async function handleApi(req, res, path, query) {
@@ -160,11 +163,15 @@ async function handleApi(req, res, path, query) {
 
   // GET /v1/projects/:projectId/manuscript/versions
   if (path.match(/^\/v1\/projects\/[^/]+\/manuscript\/versions$/) && req.method === 'GET') {
+    if (firstSaveMode && !firstSaveCreated) return send(200, { versions: [] });
     return send(200, { versions: db.versions });
   }
 
   // GET /v1/projects/:projectId/manuscript
   if (path.match(/^\/v1\/projects\/[^/]+\/manuscript$/) && req.method === 'GET') {
+    if (firstSaveMode && !firstSaveCreated) {
+      return send(404, { error: { code: 'manuscript_not_found', message: 'Manuscript not found' } });
+    }
     return send(200, { manuscript: db.manuscript });
   }
 
@@ -172,6 +179,11 @@ async function handleApi(req, res, path, query) {
   const secMatch = path.match(/^\/v1\/projects\/[^/]+\/manuscript\/sections\/([^/]+)$/);
   if (secMatch && req.method === 'PUT') {
     const sid = secMatch[1];
+    if (firstSaveMode) {
+      firstSaveCreated = true;
+      putLog.push({ sid, text: body.text, version: body.version });
+      return send(200, { section: { id: sid, heading: body.heading || sid, level: 1, text: body.text }, version: 1, tokens: {} });
+    }
     const sec = db.manuscript.sections.find((s) => s.id === sid);
     if (!sec) {
       return send(404, { error: { code: 'section_not_found', message: 'No such section' } });
@@ -212,6 +224,13 @@ async function handleApi(req, res, path, query) {
 
   // POST /v1/projects/:projectId/manuscript/export
   if (path.match(/^\/v1\/projects\/[^/]+\/manuscript\/export$/) && req.method === 'POST') {
+    exportLog.push({ version: body.version, format: body.format });
+    if (firstSaveMode) {
+      if (body.version !== 1) {
+        return send(409, { error: { code: 'stale_version', message: 'Expected version 1 after first save, got ' + body.version } });
+      }
+      return send(202, { jobId: 'job_docx_first', status: 'pending', format: 'docx', gatesPassed: true });
+    }
     if (exportGatesPass) {
       return send(202, { jobId: 'job_docx_1', status: 'pending', format: 'docx', gatesPassed: true });
     }
@@ -413,6 +432,7 @@ try {
 
   // Seed: server-backed project (practice gate skips it) + one saved local run.
   await ev(`(function(){var s=JSON.parse(localStorage.getItem('smd_research_state_v1'));s.projects[0].serverId=s.projects[0].id;s.projects[0].practice=false;s.runs=s.runs||{};s.runs[${JSON.stringify(PID)}]=[${JSON.stringify(LOCAL_RUN)}];localStorage.setItem('smd_research_state_v1',JSON.stringify(s));return 1})()`);
+  await ev(`(()=>{const b=document.getElementById('smdBootSplash');if(b)b.style.display='none';return 1})()`);
   await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
   ok(await until(`!!document.querySelector('.rmd-manuscript-screen')`, 8000), 'manuscript screen renders');
   ok(await ev(`!!document.querySelector('[data-rmd-tab="manuscript"]')`), 'research shell nav carries Manuscript tab');
@@ -556,6 +576,35 @@ try {
   const longPolishText = await text('.rmd-editor-card .rmd-banner-error');
   ok(/5,000-character limit/i.test(longPolishText) && !/Something went wrong on our side/i.test(longPolishText), 'too-long section polish shows plain character-limit message');
 
+  /* 1e. Draft preview modal (Item 1): rendered on top of #researchMD shell with elementFromPoint inside popup */
+  await ev(`(()=>{
+    const c = document.querySelector('.rmd-manuscript-screen');
+    if (window.SMD_RESEARCH && SMD_RESEARCH.screens && SMD_RESEARCH.screens.manuscript && SMD_RESEARCH.screens.manuscript.showDraftPreviewModal) {
+      SMD_RESEARCH.screens.manuscript.showDraftPreviewModal(c, 'prj_bcg_1994', 'Patient presented with 39 C fever. Day 1: stable.', [], false, 'prj_bcg_1994');
+    }
+    return 1;
+  })()`);
+  ok(await until('!!document.getElementById("rmdCaseReportDraftModal")', 5000), 'case report draft preview modal opened');
+  const modalHit = await ev(`(()=>{
+    const shell = document.getElementById('researchMD');
+    const modal = document.getElementById('rmdCaseReportDraftModal');
+    if (!shell || !modal) return null;
+    const shellZ = parseInt(getComputedStyle(shell).zIndex, 10) || 0;
+    const modalZ = parseInt(getComputedStyle(modal).zIndex, 10) || 0;
+    const box = modal.querySelector('.rmd-modal-card');
+    const target = box || modal;
+    const r = target.getBoundingClientRect();
+    const cx = Math.floor(r.left + r.width / 2);
+    const cy = Math.floor(r.top + r.height / 2);
+    const topEl = document.elementFromPoint(cx, cy);
+    const inside = !!(modal && topEl && (modal === topEl || modal.contains(topEl)));
+    return { shellZ, modalZ, inside, topElTag: topEl ? topEl.tagName : null };
+  })()`);
+  ok(modalHit && modalHit.modalZ > modalHit.shellZ, `draft preview modal z-index (${modalHit && modalHit.modalZ}) is above #researchMD (${modalHit && modalHit.shellZ})`);
+  ok(modalHit && modalHit.inside, 'document.elementFromPoint at modal centre is inside popup');
+  await click('#rmd-cr-close-modal');
+  ok(await until('!document.getElementById("rmdCaseReportDraftModal")', 3000), 'draft preview modal closed');
+
   // Restore original Results section via reload so section tests below run on exact RESULTS_TEXT
   await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
   ok(await until(`!!document.querySelector('.rmd-num[data-field="estimate"]')`, 5000), 'manuscript restored with analysis tokens');
@@ -694,6 +743,20 @@ try {
       ok(await ev(`(()=>{const l=document.querySelector('.rmd-man-left');const r=document.querySelector('.rmd-man-right');return l&&r&&getComputedStyle(l).display!=='none'&&getComputedStyle(r).display!=='none'})()`), `two-pane visible at ${width}px`);
     }
   }
+
+  /* 11b. Fresh project (GET /manuscript 404 before first save): Save syncs version 1, then export sends version 1 */
+  firstSaveMode = true;
+  firstSaveCreated = false;
+  await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 768, deviceScaleFactor: 2, mobile: false });
+  await ev(`(function(){localStorage.removeItem('smd_rmd_manuscript_local_v1');window.__exports=[];SMD_RESEARCH.open({screen:'manuscript'});return 1})()`);
+  ok(await until(`!!document.querySelector('[data-rmd="section-save"]')`, 5000), 'fresh project renders manuscript editor on 404 fallback');
+  await click('[data-rmd="section-save"]');
+  ok(await until(`/Saved\\./.test((document.querySelector('.rmd-banner-info')||{}).textContent||'')`, 5000), 'first save on fresh project shows Saved.');
+  await click('[data-rmd="manuscript-export"]');
+  ok(await until(`window.__exports && window.__exports.some(function(x){return x.kind==='share'})`, 5000), 'export after first save succeeds and shares DOCX');
+  const firstExport = exportLog[exportLog.length - 1];
+  ok(firstExport && firstExport.version === 1, 'export after first save sends server version 1');
+  firstSaveMode = false;
 
   /* 12. No page errors, Escape closes */
   if (pageErrors.length) console.log('PAGE ERRORS:\n' + pageErrors.join('\n'));

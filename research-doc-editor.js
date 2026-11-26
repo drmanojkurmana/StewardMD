@@ -1334,7 +1334,7 @@
       if (SMD.ai && SMD.ai.barHtml) {
         return SMD.ai.barHtml(state.ai, { task: "manuscript_draft", label: "manuscript", cost: 2 });
       }
-      return '<div class="rmd-ai-bar"><div class="rmd-ai-actions"><button type="button" class="rmd-doc-btn rmd-doc-btn-primary" data-doc-ai="ask">Ask MaiK to draft it</button></div><p class="rmd-ai-cost">About 2 MaiK tokens</p></div>';
+      return '<div class="rmd-ai-bar"><div class="rmd-ai-actions"><button type="button" class="rmd-doc-btn rmd-doc-btn-primary" data-doc-ai="ask">Ask MaiK to draft it</button></div><p class="rmd-ai-cost">Costs about 2 MaiK tokens</p></div>';
     }
 
     function bodyHtml(section, sub) {
