@@ -931,6 +931,39 @@
         return Promise.resolve({ items: [], pdfs: [], imports: [], grades: [] });
       }
       if (sub === "/ai-draft" && meth === "POST") {
+        if (body && body.task === "publication_consent") {
+          var inp = body.input || {};
+          var reqLang = String(inp.language || "English").replace(/^\s+|\s+$/g, "") || "English";
+          var hasImg = inp.includesImages !== false;
+          var journal = String(inp.journalName || "").replace(/^\s+|\s+$/g, "");
+          var consentTitle = ex.fullTitle || ex.shortTitle || "Clinical Case Report";
+          var pcMod = SMD.screens && SMD.screens.pubconsent;
+          var engDraft = (pcMod && typeof pcMod.defaultConsentEnglish === "function")
+            ? pcMod.defaultConsentEnglish(consentTitle, hasImg)
+            : ("PATIENT CONSENT FOR PUBLICATION\n\nTitle of Case Report: " + consentTitle + "\n\n1. What will be published: I consent to the publication of details about my medical case, clinical history, and " + (hasImg ? "clinical photographs/images" : "relevant diagnostic images") + " in a medical journal.");
+          if (journal) {
+            engDraft = engDraft.replace("check the journal's instructions.", "check " + journal + "'s instructions.");
+          }
+          var isEng = (pcMod && typeof pcMod.langCodeFor === "function")
+            ? (pcMod.langCodeFor(reqLang) === "en")
+            : (/^(en|english)$/i.test(reqLang));
+          var langName = (pcMod && typeof pcMod.langNameFor === "function") ? pcMod.langNameFor(reqLang) : reqLang;
+          var langCode = (pcMod && typeof pcMod.langCodeFor === "function") ? pcMod.langCodeFor(reqLang) : (isEng ? "en" : "en");
+          var localDraft = "";
+          if (!isEng) {
+            localDraft = "Demo " + langName + " publication consent for tutorial (" + consentTitle + ").\n\nIn a real project, the translation comes from MaiK in " + langName + ". You can edit or paste your " + langName + " consent text directly in this box.";
+          }
+          return Promise.resolve({
+            draft: {
+              english: engDraft,
+              local: localDraft,
+              language: langCode,
+              languageName: langName
+            },
+            model: "tutorial-demo",
+            costInr: 0
+          });
+        }
         return Promise.resolve({ draft: {}, model: "tutorial-demo", costInr: 0 });
       }
 
