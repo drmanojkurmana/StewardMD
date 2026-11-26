@@ -31,9 +31,40 @@
     return (G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.CapacitorHttp) || G.CapacitorHttp || null;
   }
 
-  var PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v0";
-  /* DRAFT terms, needs legal review */
-  var PHI_OVERRIDE_TERMS_TEXT = "By continuing, you confirm that you have the right to share this text, that it is needed for this draft, and that you accept responsibility under the DPDP Act 2023 and your institution's rules. StewardMD logs this override (user, time, and identifier type, never the text itself). Always check AI output before use.";
+  var PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v1";
+  /* Legal review F-03 text, settled verbatim for v1. This is legal copy, so
+   * the app's no-em-dash rule does not apply to it. The em dashes are part of
+   * the approved wording and must not be "fixed". */
+  var PHI_OVERRIDE_TITLE = "Before you send \u2014 patient information check";
+  var PHI_OVERRIDE_BODY = "This text was flagged because it may contain patient identifiers (for example, a name, phone number, ID number, address or date). StewardMD blocks such text by default. You may send it for this one draft only if one of the following is true. Select which applies:";
+  var PHI_OVERRIDE_OPTIONS = [
+    {
+      value: "false_positive",
+      label: "This is a false positive \u2014 the flagged text does not identify any patient.",
+      disabledReason: "Not available when an ID number or phone number was flagged."
+    },
+    {
+      value: "anonymised",
+      label: "The text has been anonymised \u2014 no patient can be identified from it, directly or in combination with other information.",
+      disabledReason: "Not available when an ID number or phone number was flagged."
+    },
+    {
+      value: "consent",
+      label: "I have the patient's valid consent to share this text for this purpose, with institutional approval where required, and I can evidence it if asked.",
+      disabledReason: "Not available for this text."
+    }
+  ];
+  var PHI_OVERRIDE_CONFIRM_1 = "By continuing, you confirm that the statement you selected is true; that you are the Data Fiduciary for this patient data (or are acting for the Data Fiduciary) and that this sharing is lawful under the Digital Personal Data Protection Act 2023, the IT Act 2000 and your institution's rules; and that only the text needed for this draft will be sent.";
+  var PHI_OVERRIDE_CONFIRM_2 = "The text will be sent to our AI providers \u2014 Runware and Google Vertex AI (Gemini) \u2014 whose servers may be outside India. StewardMD acts only as a Data Processor on your instructions. StewardMD logs this override (your user ID, the time, the type of identifier flagged and these terms version) but never the text itself. Always check AI output before use \u2014 it may be inaccurate, incomplete or biased.";
+  var PHI_OVERRIDE_NOTE = "Note: overrides are not available for Aadhaar/ID numbers or phone numbers unless you have selected the third option (patient consent with institutional approval). If you are unsure, keep the block and remove the identifiers before drafting.";
+
+  function phiOverrideToday() {
+    /* IST calendar date: the consent is given in India. */
+    var d = new Date(Date.now() + 19800000);
+    var m = d.getUTCMonth() + 1;
+    var day = d.getUTCDate();
+    return d.getUTCFullYear() + "-" + (m < 10 ? "0" : "") + m + "-" + (day < 10 ? "0" : "") + day;
+  }
 
   var PHI_CATEGORY_LABELS = {
     phone: "Phone number",
@@ -128,7 +159,7 @@
     return { body: copy, blocked: state.blocked, categories: state.categories };
   }
 
-  function withPhiOverride(body) {
+  function withPhiOverride(body, condition, consentEvidence) {
     var next = {};
     if (body && typeof body === "object") {
       var keys = Object.keys(body);
@@ -138,9 +169,24 @@
     }
     next.phiOverride = {
       accepted: true,
-      termsVersion: PHI_OVERRIDE_TERMS_VERSION
+      termsVersion: PHI_OVERRIDE_TERMS_VERSION,
+      condition: condition
     };
+    if (condition === "consent" && consentEvidence) {
+      next.phiOverride.consentEvidence = {
+        consentDate: consentEvidence.consentDate,
+        reference: consentEvidence.reference
+      };
+    }
     return next;
+  }
+
+  function phiConditionAllowed(allowedConditions, value) {
+    if (!Array.isArray(allowedConditions)) return true;
+    for (var i = 0; i < allowedConditions.length; i++) {
+      if (allowedConditions[i] === value) return true;
+    }
+    return false;
   }
 
   function phiOverrideHost() {
@@ -156,7 +202,7 @@
 
   var activePhiOverrideCancel = null;
 
-  function openPhiOverrideDialog(categories, originalErr) {
+  function openPhiOverrideDialog(categories, allowedConditions, originalErr) {
     var host = phiOverrideHost();
     if (!host) return Promise.reject(originalErr);
 
@@ -190,22 +236,49 @@
       itemsHtml += "<li>" + esc(catList[j]) + "</li>";
     }
 
+    var optionsHtml = "";
+    for (var oi = 0; oi < PHI_OVERRIDE_OPTIONS.length; oi++) {
+      var opt = PHI_OVERRIDE_OPTIONS[oi];
+      var isAllowed = phiConditionAllowed(allowedConditions, opt.value);
+      optionsHtml +=
+        '<label class="rmd-phi-ovr-option' + (isAllowed ? "" : " rmd-phi-ovr-option-off") + '">' +
+          '<input type="radio" name="rmdPhiOverrideCondition" value="' + esc(opt.value) + '" data-rmd-phi-condition="' + esc(opt.value) + '"' + (isAllowed ? "" : " disabled") + ' />' +
+          '<span class="rmd-phi-ovr-option-text">' + opt.label + '</span>' +
+          (isAllowed ? "" : '<span class="rmd-phi-ovr-reason">' + esc(opt.disabledReason) + '</span>') +
+        '</label>';
+    }
+
     back.className = "rmd-modal-backdrop";
     back.id = "rmdPhiOverrideModal";
     back.innerHTML =
-      '<div class="rmd-modal-card rmd-phi-ovr-card" role="dialog" aria-modal="true" aria-labelledby="rmdPhiOverrideTitle" aria-describedby="rmdPhiOverrideTerms" tabindex="-1">' +
+      '<div class="rmd-modal-card rmd-phi-ovr-card" role="dialog" aria-modal="true" aria-labelledby="rmdPhiOverrideTitle" aria-describedby="rmdPhiOverrideLead" tabindex="-1">' +
         '<div class="rmd-modal-header rmd-modal-warn">' +
-          '<h3 id="rmdPhiOverrideTitle">Possible patient identifiers</h3>' +
+          '<h3 id="rmdPhiOverrideTitle">' + PHI_OVERRIDE_TITLE + '</h3>' +
         '</div>' +
-        '<p class="rmd-phi-ovr-lead">Before sending this draft, check your text for the following identifier types:</p>' +
-        '<ul class="rmd-phi-ovr-cats">' + itemsHtml + '</ul>' +
-        '<div class="rmd-phi-ovr-terms" id="rmdPhiOverrideTerms">' +
-          '<p>' + esc(PHI_OVERRIDE_TERMS_TEXT) + '</p>' +
+        '<div class="rmd-phi-ovr-body">' +
+          '<p class="rmd-phi-ovr-lead" id="rmdPhiOverrideLead">' + PHI_OVERRIDE_BODY + '</p>' +
+          '<div class="rmd-phi-ovr-cats-wrap">' +
+            '<p class="rmd-phi-ovr-cats-lead">Flagged identifier types</p>' +
+            '<ul class="rmd-phi-ovr-cats">' + itemsHtml + '</ul>' +
+          '</div>' +
+          '<fieldset class="rmd-phi-ovr-options">' +
+            '<legend class="rmd-phi-ovr-legend">Select which applies</legend>' +
+            optionsHtml +
+          '</fieldset>' +
+          '<p class="rmd-phi-ovr-confirm">' + PHI_OVERRIDE_CONFIRM_1 + '</p>' +
+          '<p class="rmd-phi-ovr-confirm">' + PHI_OVERRIDE_CONFIRM_2 + '</p>' +
+          '<p class="rmd-phi-ovr-note"><em>' + PHI_OVERRIDE_NOTE + '</em></p>' +
+          '<div class="rmd-phi-ovr-evidence" data-rmd-phi-evidence="1" style="display:none;">' +
+            '<label class="rmd-phi-ovr-field" for="rmdPhiConsentDate">' +
+              '<span>Date consent was given</span>' +
+              '<input type="date" id="rmdPhiConsentDate" data-rmd-phi-consent-date="1" max="' + phiOverrideToday() + '" required />' +
+            '</label>' +
+            '<label class="rmd-phi-ovr-field" for="rmdPhiConsentRef">' +
+              '<span>Consent reference (form number or where it is filed)</span>' +
+              '<input type="text" id="rmdPhiConsentRef" data-rmd-phi-consent-ref="1" maxlength="80" autocomplete="off" required />' +
+            '</label>' +
+          '</div>' +
         '</div>' +
-        '<label class="rmd-phi-ovr-check" for="rmdPhiOverrideAccept">' +
-          '<input type="checkbox" id="rmdPhiOverrideAccept" data-rmd-phi-accept="1" />' +
-          '<span>I accept these terms</span>' +
-        '</label>' +
         '<div class="rmd-modal-footer rmd-phi-ovr-footer">' +
           '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-phi-edit="1">Edit my text</button>' +
           '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd-phi-send="1" disabled>I take responsibility, send anyway</button>' +
@@ -213,11 +286,14 @@
       '</div>';
 
     var card = back.querySelector('[role="dialog"]');
-    var checkbox = back.querySelector('[data-rmd-phi-accept="1"]');
+    var radios = back.querySelectorAll('[data-rmd-phi-condition]');
+    var dateInput = back.querySelector('[data-rmd-phi-consent-date="1"]');
+    var refInput = back.querySelector('[data-rmd-phi-consent-ref="1"]');
+    var evidenceWrap = back.querySelector('[data-rmd-phi-evidence="1"]');
     var editBtn = back.querySelector('[data-rmd-phi-edit="1"]');
     var sendBtn = back.querySelector('[data-rmd-phi-send="1"]');
 
-    if (!card || !checkbox || !editBtn || !sendBtn) {
+    if (!card || !radios || !radios.length || !dateInput || !refInput || !evidenceWrap || !editBtn || !sendBtn) {
       return Promise.reject(originalErr);
     }
 
@@ -225,6 +301,49 @@
 
     var prevFocused = null;
     try { prevFocused = D.activeElement || null; } catch (fe) { prevFocused = null; }
+
+    function selectedCondition() {
+      for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          return radios[i].getAttribute("data-rmd-phi-condition") || radios[i].value || "";
+        }
+      }
+      return "";
+    }
+
+    function trimmedValue(el) {
+      return String((el && el.value) || "").replace(/^\s+|\s+$/g, "");
+    }
+
+    function consentEvidenceValid() {
+      var dateVal = trimmedValue(dateInput);
+      var refVal = trimmedValue(refInput);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(dateVal)) return false;
+      if (dateVal > phiOverrideToday()) return false;
+      if (!refVal || refVal.length > 80) return false;
+      return true;
+    }
+
+    function syncDialog() {
+      var condition = selectedCondition();
+      var showEvidence = condition === "consent";
+      evidenceWrap.style.display = showEvidence ? "" : "none";
+      sendBtn.disabled = !condition || (condition === "consent" && !consentEvidenceValid());
+    }
+
+    function focusables() {
+      var list = [];
+      for (var i = 0; i < radios.length; i++) {
+        if (!radios[i].disabled) list.push(radios[i]);
+      }
+      if (selectedCondition() === "consent") {
+        list.push(dateInput);
+        list.push(refInput);
+      }
+      list.push(editBtn);
+      if (!sendBtn.disabled) list.push(sendBtn);
+      return list;
+    }
 
     return new Promise(function (resolve, reject) {
       var settled = false;
@@ -251,22 +370,38 @@
       }
 
       function confirm() {
-        if (settled || !checkbox.checked) return;
+        if (settled) return;
+        var condition = selectedCondition();
+        if (!condition) return;
+        if (condition === "consent" && !consentEvidenceValid()) return;
+        var evidence = null;
+        if (condition === "consent") {
+          evidence = {
+            consentDate: trimmedValue(dateInput),
+            reference: trimmedValue(refInput)
+          };
+        }
         settled = true;
         cleanup();
-        resolve(true);
+        resolve({ condition: condition, consentEvidence: evidence });
       }
 
       activePhiOverrideCancel = cancel;
 
-      checkbox.addEventListener("change", function () {
-        sendBtn.disabled = !checkbox.checked;
-      });
+      for (var ri = 0; ri < radios.length; ri++) {
+        radios[ri].addEventListener("change", syncDialog);
+      }
+      dateInput.addEventListener("change", syncDialog);
+      dateInput.addEventListener("input", syncDialog);
+      refInput.addEventListener("change", syncDialog);
+      refInput.addEventListener("input", syncDialog);
       editBtn.addEventListener("click", cancel);
       sendBtn.addEventListener("click", confirm);
       back.addEventListener("click", function (e) {
         if (e && e.target === back) cancel();
       });
+
+      syncDialog();
 
       keyHandler = function (e) {
         if (!e) return;
@@ -277,22 +412,22 @@
           return;
         }
         if (e.key === "Tab") {
-          var focusables = [checkbox, editBtn];
-          if (!sendBtn.disabled) focusables.push(sendBtn);
+          var list = focusables();
+          if (!list.length) return;
           var active = null;
           try { active = D.activeElement; } catch (ae) {}
-          var idx = focusables.indexOf(active);
+          var idx = list.indexOf(active);
           if (e.shiftKey) {
             if (idx <= 0) {
               if (typeof e.preventDefault === "function") e.preventDefault();
-              if (typeof focusables[focusables.length - 1].focus === "function") {
-                focusables[focusables.length - 1].focus();
+              if (typeof list[list.length - 1].focus === "function") {
+                list[list.length - 1].focus();
               }
             }
-          } else if (idx === focusables.length - 1 || idx === -1) {
+          } else if (idx === list.length - 1 || idx === -1) {
             if (typeof e.preventDefault === "function") e.preventDefault();
-            if (typeof focusables[0].focus === "function") {
-              focusables[0].focus();
+            if (typeof list[0].focus === "function") {
+              list[0].focus();
             }
           }
         }
@@ -302,8 +437,13 @@
         D.addEventListener("keydown", keyHandler);
       }
 
-      if (typeof editBtn.focus === "function") {
-        try { editBtn.focus(); } catch (f1) {}
+      var firstFocus = null;
+      for (var fi = 0; fi < radios.length; fi++) {
+        if (!radios[fi].disabled) { firstFocus = radios[fi]; break; }
+      }
+      if (!firstFocus) firstFocus = editBtn;
+      if (firstFocus && typeof firstFocus.focus === "function") {
+        try { firstFocus.focus(); } catch (f1) {}
       } else if (typeof card.focus === "function") {
         try { card.focus(); } catch (f2) {}
       }
@@ -431,8 +571,11 @@
       if (isAiDraft && err && err.status === 422 && err.code === "phi_blocked" &&
           err.body && err.body.overridable === true) {
         var cats = err.categories || (Array.isArray(err.body.categories) ? err.body.categories : []);
-        return openPhiOverrideDialog(cats, err).then(function () {
-          return dispatchRequest(method, path, withPhiOverride(sendBody), options);
+        var allowed = Array.isArray(err.body.allowedConditions) ? err.body.allowedConditions : null;
+        return openPhiOverrideDialog(cats, allowed, err).then(function (choice) {
+          /* F-05: resend the same redacted input as the first request, nothing
+           * else. withPhiOverride only adds the override object. */
+          return dispatchRequest(method, path, withPhiOverride(sendBody, choice.condition, choice.consentEvidence), options);
         });
       }
       throw err;
@@ -1447,13 +1590,29 @@
       "#researchMD .rmd-cele-citestr { font: 400 12.5px var(--rmd-f); color: var(--rmd-ink); line-height: 1.4; overflow-wrap: anywhere; }",
       "#researchMD .rmd-cele-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 8px; }",
       "/* PHI override modal (/ai-draft only) */",
-      "#researchMD .rmd-phi-ovr-card { max-width: 500px; width: calc(100% - 24px); }",
+      "#researchMD .rmd-phi-ovr-card { max-width: 520px; width: calc(100% - 24px); }",
+      "#researchMD .rmd-phi-ovr-body { display: flex; flex-direction: column; gap: 12px; }",
       "#researchMD .rmd-phi-ovr-lead { margin: 0; font: 400 13.5px/1.5 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-phi-ovr-cats-wrap { display: flex; flex-direction: column; gap: 6px; }",
+      "#researchMD .rmd-phi-ovr-cats-lead { margin: 0; font: 600 11px/1.3 var(--rmd-f); letter-spacing: 0.04em; text-transform: uppercase; color: var(--rmd-mut); }",
       "#researchMD .rmd-phi-ovr-cats { margin: 0; padding: 10px 12px 10px 28px; background: var(--rmd-warn-soft); border: 1px solid var(--rmd-warn); border-radius: 10px; display: flex; flex-direction: column; gap: 4px; font: 500 13px/1.4 var(--rmd-f); color: var(--rmd-ink); }",
-      "#researchMD .rmd-phi-ovr-terms { margin: 0; padding: 10px 12px; background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 10px; font: 400 12.5px/1.5 var(--rmd-f); color: var(--rmd-mut); }",
-      "#researchMD .rmd-phi-ovr-terms p { margin: 0; }",
-      "#researchMD .rmd-phi-ovr-check { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 4px 0; cursor: pointer; font: 500 13.5px/1.4 var(--rmd-f); color: var(--rmd-ink); }",
-      "#researchMD .rmd-phi-ovr-check input[type=\"checkbox\"] { width: 20px; height: 20px; flex: 0 0 auto; margin: 0; accent-color: var(--rmd-acc); cursor: pointer; }",
+      "#researchMD .rmd-phi-ovr-options { margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }",
+      "#researchMD .rmd-phi-ovr-legend { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }",
+      "#researchMD .rmd-phi-ovr-option { display: grid; grid-template-columns: 22px 1fr; column-gap: 10px; align-items: start; min-height: 44px; padding: 10px 12px; background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 10px; cursor: pointer; box-sizing: border-box; }",
+      "#researchMD .rmd-phi-ovr-option input[type=\"radio\"] { width: 20px; height: 20px; margin: 1px 0 0; flex: 0 0 auto; accent-color: var(--rmd-acc); cursor: pointer; }",
+      "#researchMD .rmd-phi-ovr-option-text { font: 500 13px/1.45 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-phi-ovr-reason { grid-column: 2; margin-top: 3px; font: 400 12px/1.4 var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-phi-ovr-option-off { background: transparent; cursor: not-allowed; }",
+      "#researchMD .rmd-phi-ovr-option-off .rmd-phi-ovr-option-text { color: var(--rmd-mut); }",
+      "#researchMD .rmd-phi-ovr-option-off .rmd-phi-ovr-reason { color: var(--rmd-ink); }",
+      "#researchMD .rmd-phi-ovr-option-off input[type=\"radio\"] { cursor: not-allowed; }",
+      "#researchMD .rmd-phi-ovr-option:focus-within { border-color: var(--rmd-acc); }",
+      "#researchMD .rmd-phi-ovr-confirm { margin: 0; font: 400 12.5px/1.5 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-phi-ovr-note { margin: 0; padding: 10px 12px; background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 10px; font: 400 12.5px/1.5 var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-phi-ovr-evidence { display: flex; flex-direction: column; gap: 10px; padding: 12px; background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 10px; }",
+      "#researchMD .rmd-phi-ovr-field { display: flex; flex-direction: column; gap: 6px; font: 500 12.5px/1.4 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-phi-ovr-field input { width: 100%; box-sizing: border-box; min-height: 44px; padding: 10px 12px; font: 400 16px/1.4 var(--rmd-f); color: var(--rmd-ink); background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 10px; }",
+      "#researchMD .rmd-phi-ovr-field input:focus-visible, #researchMD .rmd-phi-ovr-option input:focus-visible, #researchMD .rmd-phi-ovr-footer .rmd-btn:focus-visible { outline: 2px solid var(--rmd-acc); outline-offset: 2px; }",
       "#researchMD .rmd-phi-ovr-footer { flex-wrap: wrap; }",
       "#researchMD .rmd-phi-ovr-footer .rmd-btn { min-height: 44px; }"
     ].join("\n");
