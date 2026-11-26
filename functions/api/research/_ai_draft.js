@@ -84,7 +84,7 @@ const TOKENS_MESSAGE = "You need more MaiK tokens";
 export const TASKS = [
   "protocol", "search_query", "rob", "checklist", "title_abstract", "thesis_to_paper", "polish",
   "iec_application", "consent_form", "ctri_fields",
-  "publication_consent", "case_report_draft",
+  "publication_consent", "case_report_draft", "manuscript_draft",
 ];
 const MAX_OUT = {
   protocol: 1200,
@@ -99,6 +99,7 @@ const MAX_OUT = {
   ctri_fields: 1500,
   publication_consent: 2000,
   case_report_draft: 2500,
+  manuscript_draft: 2000,
 };
 /* One T1 call has to return the whole section. 5000 characters leaves room
  * for the polished text inside the 2000 token output ceiling. */
@@ -289,13 +290,45 @@ function checklistDraft(parsed, guide, headings) {
 
 function stripBareNumbers(text) {
   const tokens = [];
-  const masked = String(text || "").replace(/\{\{run:[A-Za-z0-9_.]+\}\}/g, (m) => {
+  const masked = String(text || "").replace(/\{\{run:[A-Za-z0-9_-]+[:.][A-Za-z0-9_.]+\}\}/g, (m) => {
     tokens.push(m);
     return "\u0000";
   });
   const stripped = masked.replace(/(?<![A-Za-z0-9_.])\d+(?:\.\d+)?%?/g, "");
   let i = 0;
   return stripped.replace(/\u0000/g, () => tokens[i++] || "").replace(/\s{2,}/g, " ").trim();
+}
+function manuscriptDraft(parsed, fallbackTitle) {
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+  const title = stripBareNumbers(asText(parsed.title, 300)) || asText(fallbackTitle, 300);
+  const byId = new Map();
+  if (Array.isArray(parsed.sections)) {
+    for (const s of parsed.sections) {
+      if (!s || typeof s !== "object") continue;
+      const id = String(s.id || s.sectionId || "").trim().toLowerCase();
+      if (id && typeof s.text === "string" && s.text.trim()) byId.set(id, s.text);
+    }
+  } else if (parsed.sections && typeof parsed.sections === "object") {
+    for (const [k, v] of Object.entries(parsed.sections)) {
+      if (typeof v === "string" && v.trim()) byId.set(String(k).trim().toLowerCase(), v);
+    }
+  }
+  for (const s of THESIS_SECTIONS) {
+    if (!byId.has(s.id) && typeof parsed[s.id] === "string" && parsed[s.id].trim()) {
+      byId.set(s.id, parsed[s.id]);
+    }
+  }
+  const sections = [];
+  for (const s of THESIS_SECTIONS) {
+    const raw = byId.get(s.id);
+    if (!raw) continue;
+    const cleaned = (s.id === "abstract" || s.id === "results")
+      ? stripBareNumbers(asText(raw, 6000))
+      : asText(raw, 8000);
+    if (cleaned) sections.push({ id: s.id, heading: s.heading, text: cleaned });
+  }
+  if (!sections.length) return null;
+  return { title, sections };
 }
 function titleDraft(parsed) {
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
@@ -1105,6 +1138,32 @@ function tokenList(run) {
   try { result = JSON.parse(run.result_json || "{}"); } catch (e) { result = {}; }
   return Object.keys(result).filter((k) => /^[A-Za-z0-9_]+$/.test(k)).map((k) => "{{run:" + run.id + "." + k + "}}");
 }
+function manuscriptTokenList(run) {
+  if (!run) return [];
+  let result = {};
+  try { result = JSON.parse(run.result_json || "{}"); } catch (e) { result = {}; }
+  const out = [];
+  const seen = new Set();
+  const add = (field) => {
+    const tok = "{{run:" + run.id + "." + field + "}}";
+    if (!seen.has(tok)) { seen.add(tok); out.push(tok); }
+  };
+  for (const k of Object.keys(result)) {
+    if (/^[A-Za-z0-9_]+$/.test(k) && typeof result[k] !== "object") add(k);
+  }
+  if (result.pooled && typeof result.pooled === "object") {
+    for (const k of ["estimate", "effect", "ciLower", "ciUpper", "p"]) {
+      if (result.pooled[k] != null || (k === "estimate" && result.pooled.effect != null)) add(k);
+    }
+  }
+  if (result.heterogeneity && typeof result.heterogeneity === "object") {
+    for (const k of ["i2", "tau2", "q", "df"]) {
+      if (result.heterogeneity[k] != null) add(k);
+    }
+  }
+  if (Array.isArray(result.weights)) add("k");
+  return out;
+}
 
 export async function aiDraft(ctx, projectId, body) {
   const { db, uid, requestId, api } = ctx;
@@ -1113,7 +1172,7 @@ export async function aiDraft(ctx, projectId, body) {
   if (gate.status) return gateErr(gate, gate.status === 404 ? "Project not found" : "Ask MaiK needs an owner, editor or analyst role", requestId);
   const task = body && typeof body.task === "string" ? body.task : "";
   if (TASKS.indexOf(task) < 0)
-    return err(400, "invalid_task", "Unknown task. Use protocol, search_query, rob, checklist, title_abstract, thesis_to_paper, polish, iec_application, consent_form, ctri_fields, publication_consent or case_report_draft.", requestId);
+    return err(400, "invalid_task", "Unknown task. Use protocol, search_query, rob, checklist, title_abstract, thesis_to_paper, polish, iec_application, consent_form, ctri_fields, publication_consent, case_report_draft or manuscript_draft.", requestId);
   const input = inputOf(body);
   if (task === "thesis_to_paper") return thesisTask(ctx, projectId, input);
   if (task === "polish") return polishTask(ctx, projectId, input);
@@ -1287,6 +1346,28 @@ export async function aiDraft(ctx, projectId, body) {
       "All facts and numbers must come directly from the case text.";
     prompt = "Project title: " + (project.title || "") +
       "\nCase notes:\n" + caseText;
+  } else if (task === "manuscript_draft") {
+    const tokens = manuscriptTokenList(bits.run);
+    const titleText = asText(input.title || project.title, 300);
+    const studyType = asText(input.studyType || project.study_type, 120);
+    const question = asText(input.researchQuestion || project.research_question, 1000);
+    const notes = asText(input.notes || input.note, 2000);
+    const journalId = asText(input.journalId, 80);
+    const studyList = bits.studies.slice(0, 20)
+      .map((s) => (s.label || "Study") + ": " + String(s.quote || "").slice(0, 250))
+      .join("\n");
+    system = "You draft an IMRaD medical research manuscript (Abstract, Introduction, Methods, Results, Discussion). " +
+      "Return ONLY JSON {title, sections:[{id, heading, text}]} where id is one of abstract, introduction, methods, results, discussion. " +
+      "For Abstract and Results, any statistical result must be one of the allowed {{run:...}} tokens. Do not invent or compute numbers. " +
+      "Do not invent citations, patient identifiers, or unverified claims.";
+    prompt = "Title: " + titleText +
+      "\nStudy type: " + studyType +
+      "\nResearch question: " + question +
+      (journalId ? "\nTarget journal: " + journalId : "") +
+      (notes ? "\nNotes: " + notes : "") +
+      "\nProtocol: " + JSON.stringify(bits.protocol).slice(0, 2000) +
+      "\nAllowed result tokens (use these exact strings, do not invent numbers): " + (tokens.join(", ") || "(none saved yet)") +
+      (studyList ? "\nIncluded study notes:\n" + studyList : "");
   }
 
   const out = await oneCall(ctx, projectId, task, system, prompt);
@@ -1301,6 +1382,7 @@ export async function aiDraft(ctx, projectId, body) {
   else if (task === "ctri_fields") draft = ctriDraft(parsed);
   else if (task === "publication_consent") draft = publicationConsentDraft(parsed, input.language);
   else if (task === "case_report_draft") draft = caseReportDraft(parsed);
+  else if (task === "manuscript_draft") draft = manuscriptDraft(parsed, project.title || input.title || "");
   if (!draft) return err(422, "invalid_draft", "MaiK did not return a draft that matched the required fields.", requestId);
   const stored = await storeDraft(ctx, projectId, task, draft, out.model, out.costInr || 0);
   return respond(ctx, stored, out.model, out.costInr || 0);
