@@ -1992,20 +1992,24 @@
   function phiV4(kind, v) { var P = window.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, escV4(v)) : escV4(v); }
   function recTitleV4(r) { var R = window.SMD_RECENT; return R && R.titleHtml ? R.titleHtml(r, "Case") : escV4(r.title || "Case"); }
   function recSubV4(r) { var R = window.SMD_RECENT; return R && R.summaryHtml ? R.summaryHtml(r) : escV4(r.summary); }
-  function greetLineV4() {
-    var f = acctFirstV4(), nm = f ? ", Dr " + escV4(f) : "";
+  // Greeting pair { line, note } from home-greetings.js (rotating pool per day + time window).
+  // Falls back to the original night-owl / good-morning logic if that file did not load.
+  function greetPairV4() {
+    try { if (window.SMD_GREETINGS && SMD_GREETINGS.pick) { var p = SMD_GREETINGS.pick(new Date()); if (p && p.line) return p; } } catch (e) {}
     var d = new Date(), mins = d.getHours() * 60 + d.getMinutes();      // minutes since midnight
-    if (mins <= 270) return "Hi night owl" + nm + ". It\u2019s too early to say good morning";  // 00:00\u201304:30
-    return greetV4() + nm;
+    if (mins <= 270) return { line: "Hi night owl,", note: "It\u2019s too early to say good morning" };  // 00:00-04:30
+    return { line: greetV4() + ",", note: "" };
+  }
+  function greetLineV4() {
+    var f = acctFirstV4(), p = greetPairV4(), base = String(p.line).replace(/,\s*$/, "");
+    return escV4(base) + (f ? ", Dr " + escV4(f) : "") + (p.note ? ". " + escV4(p.note) : "");
   }
   function isProV4() { try { return !!(window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()); } catch (e) { return false; } }
   // Hero greeting for the reference home: line 1 in white, "Dr <first>" in mint below.
   // Same clock/account source as greetLineV4(); guests get the line with no name.
   function greetHeroV4() {
-    var f = acctFirstV4(), nm = f ? "Dr " + escV4(f) : "";
-    var d = new Date(), mins = d.getHours() * 60 + d.getMinutes();
-    if (mins <= 270) return '<span class="hrf-greet-line">Hi night owl,</span>' + (nm ? '<span class="hrf-greet-name">' + nm + '</span>' : '') + '<span class="hrf-greet-note">It\u2019s too early to say good morning</span>';
-    return '<span class="hrf-greet-line">' + greetV4() + ',</span>' + (nm ? '<span class="hrf-greet-name">' + nm + '</span>' : '');
+    var f = acctFirstV4(), nm = f ? "Dr " + escV4(f) : "", p = greetPairV4();
+    return '<span class="hrf-greet-line">' + escV4(p.line) + '</span>' + (nm ? '<span class="hrf-greet-name">' + nm + '</span>' : '') + (p.note ? '<span class="hrf-greet-note">' + escV4(p.note) + '</span>' : '');
   }
   function tileV4(act, icon, tt, sub) {
     return '<button class="v4-tile" data-act="' + act + '" aria-label="' + tt + '"><span class="ic">' + svg(icon) + '</span><span class="tt">' + tt + '</span><span class="sub">' + sub + '</span></button>';
