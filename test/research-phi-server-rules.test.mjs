@@ -3,10 +3,10 @@
  *
  * Covers the rules added to scan() and its phi.py twin:
  *   phone/indian_mobile_spaced, abha (address, 2-4-4-4 number, labelled
- *   unbroken), dates/full_date, address/house_locality.
- * Plus the route proof that a suggestion prompt carrying a phone number is
- * blocked now that extraction and screening suggestions no longer pass
- * publicLiterature to runT1.
+ *   unbroken), dates/full_date (user mode only), address/house_locality.
+ * Plus the route proof that extraction and screening suggestions keep the
+ * published-literature exemption (publicLiterature), so a day-level date in a
+ * paper abstract or PDF passes while user-typed text stays strict.
  *
  * Synthetic data only. No em or en dashes.
  * node --test --experimental-test-module-mocks --experimental-sqlite test/research-phi-server-rules.test.mjs
@@ -188,14 +188,21 @@ describe("scan: new deterministic rules", () => {
     }
   });
 
-  test("any day-level date blocks on its own; month-year and bare years pass", () => {
+  test("user mode: any day-level date blocks; default mode allows published dates", () => {
     for (const text of ["Reviewed on 12/03/2021", "Follow-up 2024-03-12", "Surgery on 12 March 2024", "Summary March 12, 2024"]) {
-      const r = scan(text);
-      assert.equal(r.blocked, true, "must block: " + text);
+      const r = scan(text, { mode: "user" });
+      assert.equal(r.blocked, true, "must block in user mode: " + text);
       assert.ok(r.hits.some((h) => h.category === "dates"), "dates category: " + text);
     }
     for (const text of ["enrolled Jan 2023 to Mar 2024", "between January 2018 and March 2020", "Published 2023"]) {
       assert.equal(scan(text).blocked, false, "must pass: " + text);
+      assert.equal(scan(text, { mode: "user" }).blocked, false, "must still pass in user mode: " + text);
+    }
+    for (const text of ["published 2023-01-15", "between 1 January 2015 and 31 December 2019"]) {
+      assert.equal(scan(text).blocked, false, "published date passes default mode: " + text);
+      const r = scan(text, { mode: "user" });
+      assert.equal(r.blocked, true, "same text blocks in user mode: " + text);
+      assert.ok(r.hits.some((h) => h.category === "dates"), "dates category: " + text);
     }
   });
 
@@ -235,11 +242,17 @@ describe("scan: new deterministic rules", () => {
   });
 });
 
-/* ---- suggestion routes: PHI gate is no longer skipped ---------------------- */
+/* ---- suggestion routes: published literature keeps the exemption ---------- */
 
-describe("suggestions: PHI gate runs on the assembled prompt", () => {
-  test("screening suggestion with a phone in the abstract is blocked before the provider", { skip: SKIP }, async () => {
-    resetLlm();
+describe("suggestions: published literature keeps the default exemption", () => {
+  test("screening suggestion with a phone in the abstract reaches the provider (literature skip)", { skip: SKIP }, async () => {
+    resetLlm(async (env, parts, maxTokens, opts) => {
+      if (opts && opts.meta) {
+        opts.meta.usage = { promptTokenCount: 80, candidatesTokenCount: 40, thoughtsTokenCount: 0 };
+        opts.meta.model = opts.model;
+      }
+      return JSON.stringify({ decision: "include", reasonCode: "", rationale: "Published trial abstract." });
+    });
     const env = freshEnv();
     fundWallet(env, "alice@example.com", 100);
     const project = await makeProject(env, "tok-alice");
@@ -248,15 +261,13 @@ describe("suggestions: PHI gate runs on the assembled prompt", () => {
       "INSERT INTO research_records (id,project_id,source,external_id,title,authors_json,year,doi,metadata_json,created_ts) VALUES (?,?,'pubmed','9001','Asthma trial','[]',2024,'',?,?)"
     ).run("rec_phi", project.id, JSON.stringify({ abstract: "Adults with asthma. Call 98765 43210 for the data." }), now);
     const r = await call(env, "POST", "v1/projects/" + project.id + "/records/rec_phi/screening-suggestions", "tok-alice");
-    assert.equal(r.http, 422, JSON.stringify(r));
-    assert.equal(r.error.code, "phi_blocked");
-    assert.ok(r.categories.includes("phone"), "phone category reported");
-    assert.equal(llm.calls.length, 0, "no provider call on a PHI hit");
-    assert.ok(!JSON.stringify(r).includes("98765"), "matched text never echoed");
+    assert.equal(r.http, 201, JSON.stringify(r));
+    assert.equal(r.suggestion.decision, "include");
+    assert.equal(llm.calls.length, 1, "published abstract reaches the provider once");
     const audit = env.RESEARCH_DB._db.prepare(
-      "SELECT * FROM research_audit_events WHERE event_type='ai_phi_blocked'"
+      "SELECT * FROM research_audit_events WHERE event_type='phi_gate_skipped_public_literature'"
     ).get();
-    assert.ok(audit, "ai_phi_blocked audit event written");
+    assert.ok(audit, "phi_gate_skipped_public_literature audit event written");
   });
 
   test("screening suggestion with a clean abstract still succeeds", { skip: SKIP }, async () => {
@@ -281,19 +292,20 @@ describe("suggestions: PHI gate runs on the assembled prompt", () => {
     assert.equal(llm.calls.length, 1, "clean abstract reaches the provider once");
   });
 
-  test("extraction suggestion with a phone in the PDF text is blocked before the provider", { skip: SKIP }, async () => {
+  test("extraction suggestion with a phone and a date in the PDF text reaches the provider (literature skip)", { skip: SKIP }, async () => {
     resetLlm();
     const env = freshEnv();
     fundWallet(env, "alice@example.com", 100);
     const project = await makeProject(env, "tok-alice");
     const study = await makeStudy(env, project.id, "tok-alice");
-    const seed = seedArtifact(env, project.id, ["Contact 98765 43210 for the trial data."]);
+    const seed = seedArtifact(env, project.id, ["Contact 98765 43210 for the trial data, published 2023-01-15."]);
     const r = await call(env, "POST", "v1/projects/" + project.id + "/studies/" + study.id + "/extraction/suggestions",
       "tok-alice", { artifactId: seed.artId, template: "rct_binary" });
-    assert.equal(r.http, 422, JSON.stringify(r));
-    assert.equal(r.error.code, "phi_blocked");
-    assert.ok(r.categories.includes("phone"), "phone category reported");
-    assert.equal(llm.calls.length, 0, "no provider call on a PHI hit");
-    assert.ok(!JSON.stringify(r).includes("98765"), "matched text never echoed");
+    assert.equal(r.http, 200, JSON.stringify(r));
+    assert.equal(llm.calls.length, 1, "published PDF reaches the provider once");
+    const audit = env.RESEARCH_DB._db.prepare(
+      "SELECT * FROM research_audit_events WHERE event_type='phi_gate_skipped_public_literature'"
+    ).get();
+    assert.ok(audit, "phi_gate_skipped_public_literature audit event written");
   });
 });

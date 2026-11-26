@@ -1,6 +1,10 @@
 """Deterministic PHI/PII gate, per docs/research/contracts/phase-3/phi-gate.md.
 
-scan(text) -> {"blocked": bool, "hits": [{"category", "rule", "start", "end"}]}
+scan(text, mode="default") -> {"blocked": bool, "hits": [{"category", "rule", "start", "end"}]}
+The default mode is literature-safe: every rule EXCEPT the plain any-full-date
+rule, so published search results with publicationDate pass. mode="user" adds
+dates/full_date and is for text a person typed. Birth and admission dates stay
+context-gated in both modes.
 Hits never carry the matched text (callback/log rule: categories only).
 No LLM is involved. Checksum validators gate the id regexes: a 12-digit number
 that fails Verhoeff is not an Aadhaar hit, a 10-digit number that fails mod-11
@@ -134,8 +138,9 @@ _RULES = [
         r"(?<![\w./])(?:\+91[ -]?|0)?[6-9]\d{4}[ -]?\d{5}(?![\dA-Za-z])"), None),
     ("email", "addr_spec", re.compile(
         r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"), None),
-    # Any day-level date blocks on its own. Month-year and bare years stay
-    # allowed (enrolment periods, study dates).
+    # Any day-level date blocks on its own in user mode only. Month-year and
+    # bare years stay allowed (enrolment periods, study dates), and published
+    # literature keeps the default exemption.
     ("dates", "full_date", re.compile(_FULL_DATE, re.IGNORECASE), None),
     ("dob", "date_near_birth_label", re.compile(_FULL_DATE, re.IGNORECASE), "birth_context"),
     ("address", "street_number", re.compile(
@@ -151,6 +156,7 @@ _RULES = [
 ]
 
 _WINDOW = 40  # chars, per phi-gate.md
+_USER_ONLY_RULES = {("dates", "full_date")}
 
 
 def _near(text: str, start: int, end: int, label_re: re.Pattern) -> bool:
@@ -189,11 +195,18 @@ _VALIDATORS = {
 }
 
 
-def scan(text: str) -> dict:
-    """Scan the exact assembled prompt text. Any hit blocks the call."""
+def scan(text: str, mode: str = "default") -> dict:
+    """Scan the exact assembled prompt text. Any hit blocks the call.
+
+    mode="user" adds the plain any-full-date rule; the default literature-safe
+    mode omits it (owner decision A: published dates are not patient dates).
+    """
+    user_mode = mode == "user"
     hits = []
     seen = set()
     for category, rule, pattern, validator in _RULES:
+        if not user_mode and (category, rule) in _USER_ONLY_RULES:
+            continue
         for match in pattern.finditer(text):
             if validator is not None and not _VALIDATORS[validator](match):
                 continue

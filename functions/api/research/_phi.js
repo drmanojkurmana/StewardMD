@@ -6,7 +6,12 @@
  * by BOTH test/research-phase3-api.test.mjs and
  * backend/research/tests/test_phi_vectors.py so the two gates cannot drift.
  *
- * scan(text) -> { blocked, hits: [{category, rule, start, end}] }.
+ * scan(text, opts) -> { blocked, hits: [{category, rule, start, end}] }.
+ * Default mode is literature-safe: every rule EXCEPT the plain any-full-date
+ * rule, so published search results with publicationDate pass. opts.mode
+ * "user" adds dates/full_date and is used only for text a person typed (the
+ * /ai-draft handler, protocol text and grade rationale in a manuscript job).
+ * Birth and admission dates stay context-gated in both modes.
  * Hits never carry the matched text (categories only in logs/callbacks).
  * No LLM is involved: an LLM judging PHI would itself receive the PHI.
  * Checksum validators gate the id regexes (a 12-digit number failing
@@ -146,9 +151,6 @@ const RULES = [
     /(?<![\w./])(?:\+91[ -]?|0)?[6-9]\d{4}[ -]?\d{5}(?![\dA-Za-z])/g, null],
   ["email", "addr_spec",
     /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, null],
-  /* Any day-level date blocks on its own. Month-year and bare years stay
-   * allowed (enrolment periods, study dates). */
-  ["dates", "full_date", new RegExp(FULL_DATE, "gi"), null],
   ["dob", "date_near_birth_label", new RegExp(FULL_DATE, "gi"),
     (m, text) => near(text, m.index, m.index + m[0].length, BIRTH_RE)],
   ["address", "street_number",
@@ -163,11 +165,21 @@ const RULES = [
       PATIENT_RE.test(sameSentence(text, m.index, m.index + m[0].length))],
 ];
 
-export function scan(text) {
+/* User-typed text only: any day-level date blocks on its own. Month-year and
+ * bare years stay allowed (enrolment periods, study dates). Published
+ * literature keeps the default exemption so search results with a
+ * publicationDate pass (owner decision A). */
+const USER_ONLY_RULES = [
+  ["dates", "full_date", new RegExp(FULL_DATE, "gi"), null],
+];
+
+export function scan(text, opts) {
   const s = String(text == null ? "" : text);
+  const userMode = !!(opts && opts.mode === "user");
+  const rules = userMode ? RULES.concat(USER_ONLY_RULES) : RULES;
   const hits = [];
   const seen = new Set();
-  for (const [category, rule, pattern, validator] of RULES) {
+  for (const [category, rule, pattern, validator] of rules) {
     pattern.lastIndex = 0;
     let m;
     while ((m = pattern.exec(s)) !== null) {
