@@ -1,5 +1,7 @@
 DRAFT - NEEDS LEGAL REVIEW
 
+STATUS 2026-11-27: WITHDRAWN. Legal review F-01: this v0 override MUST NOT ship. The hard block is the default; the override only exists while the server switch RESEARCH_PHI_OVERRIDE is "1" (unset in production). Version v1 (legal review F-02 to F-05) replaces this text.
+
 # Patient Identifier Override Terms (`rmd-phi-override-v0`)
 
 Version: `rmd-phi-override-v0`

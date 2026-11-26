@@ -136,6 +136,8 @@ PaperOrchestra enforces multiple safety guards and consumption caps:
 
 ## Patient identifier override (/ai-draft only)
 
+**2026-11-27, legal review F-01:** hard block by default. The override below is OFF unless the Pages env var `RESEARCH_PHI_OVERRIDE="1"` is set (not set in production); a client-side hit never opens the dialog. Do not set the switch until override v1 (F-02 to F-05) ships and counsel confirms.
+
 Interactive drafting via `POST /v1/projects/{id}/ai-draft` includes a single-request patient identifier override for cases where a clinician confirms the text is safe or authorised to send (for example, false positives or properly consented case material):
 
 - **What it does**: If the client-side scan (`RMDPhi.scan` in `research.js`) or the server PHI gate detects possible identifiers on `POST /v1/projects/{id}/ai-draft` (HTTP 422 `phi_blocked` with `overridable: true`), the mobile app opens the "Possible patient identifiers" dialog inside `#researchMD`. The dialog shows only plain-word identifier categories (never the flagged text itself). If the user ticks "I accept these terms" and taps "I take responsibility, send anyway", the client resends that single `/ai-draft` request once with `phiOverride: { accepted: true, termsVersion: "rmd-phi-override-v0" }`. For client-side blocks, the resent payload keeps all automated `SMD_redactPHI` and `SMD_PHI_INDIA` redactions applied. A second block after an override rejects without looping.
