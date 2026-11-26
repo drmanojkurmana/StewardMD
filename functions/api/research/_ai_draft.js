@@ -2,12 +2,18 @@
  * Contract: docs/research/contracts/phase-5/ai-draft.md.
  *
  * POST /v1/projects/{pid}/ai-draft
- *   body { task, input? }
+ *   body { task, input?, phiOverride? }
  *   200 { draft, model, costInr }
  *   Write role: owner, editor, analyst. Viewer and reviewer get 403.
  *   Unknown task: 400 invalid_task.
  *   Insufficient MaiK tokens: 402 insufficient_credits,
  *   message "You need more MaiK tokens".
+ *   A blocked user-input PHI hit: 422 phi_blocked with overridable: true.
+ *   phiOverride is { accepted: true, termsVersion: "rmd-phi-override-v0" }
+ *   and is accepted on this route only: the user-input PHI block is skipped
+ *   for that request and one ai_phi_override audit is written (categories and
+ *   rule names only, never the text). Automated paths ignore it.
+ *   Every scan of user-typed input here runs in mode "user".
  *
  * draft.status is always "unverified". The row is stored in
  * research_ai_drafts and is never copied into the protocol, risk of bias,
@@ -76,7 +82,7 @@
  *     (patient_name, etc.) return 409 consent_needed with pages and
  *     masked context previews until consent is confirmed and audited.
  */
-import { runUserAi, extractJson } from "./_suggest.js";
+import { runUserAi, extractJson, PHI_OVERRIDE_TERMS_VERSION } from "./_suggest.js";
 import { scan, phiCategories, scanAndMaskThesis } from "./_phi.js";
 import { checklistItems } from "./_checklists.js";
 
@@ -150,7 +156,24 @@ async function oneCall(ctx, projectId, task, system, prompt, extraOpts) {
     temperature: 0,
     maxOutputTokens: MAX_OUT[task] || 800,
     insufficientMessage: TOKENS_MESSAGE,
+    /* Every /ai-draft input is user-typed, so the strict user mode applies. */
+    phiMode: "user",
+    phiRoute: "ai-draft",
+    phiTask: task,
   }, extraOpts || {}));
+}
+
+/* Override is /ai-draft only, never automated paths. Valid only when the
+ * caller explicitly accepted the exact terms version. */
+function phiOverrideAccepted(body) {
+  const o = body && body.phiOverride;
+  return !!(o && typeof o === "object" && !Array.isArray(o) &&
+    o.accepted === true && o.termsVersion === PHI_OVERRIDE_TERMS_VERSION);
+}
+function overrideOpts(accepted) {
+  return accepted
+    ? { phiOverride: true, phiTermsVersion: PHI_OVERRIDE_TERMS_VERSION }
+    : {};
 }
 
 async function storeDraft(ctx, projectId, task, draft, model, costInr) {
@@ -716,7 +739,7 @@ function phiPageList(input, hits) {
       if (span && span.n != null) found.add(span.n);
     }
     for (const p of pages) {
-      if (p && p.n != null && scan(String(p.text || "")).blocked) found.add(p.n);
+      if (p && p.n != null && scan(String(p.text || ""), { mode: "user" }).blocked) found.add(p.n);
     }
   }
   return [...found];
@@ -1097,7 +1120,7 @@ function checkPolish(parsed, source, spelling) {
   }
   return { polished, changes };
 }
-async function polishTask(ctx, projectId, input) {
+async function polishTask(ctx, projectId, input, extraOpts) {
   const { db, requestId, api } = ctx;
   const { err } = api;
   const sectionId = asText(input.sectionId, 80);
@@ -1132,7 +1155,7 @@ async function polishTask(ctx, projectId, input) {
   const prompt = "Spelling to follow: " + spelling +
     "\nJournal id: " + (journalId || "(none)") +
     "\n\nThe section text is below. Polish only that section.\n\n" + text;
-  const out = await oneCall(ctx, projectId, "polish", system, prompt);
+  const out = await oneCall(ctx, projectId, "polish", system, prompt, extraOpts);
   if (out.error) return out.error;
   const checked = checkPolish(extractJson(out.text), text, spelling);
   if (checked.error) return err(422, "invalid_draft", checked.error, requestId);
@@ -1189,22 +1212,27 @@ export async function aiDraft(ctx, projectId, body) {
   if (TASKS.indexOf(task) < 0)
     return err(400, "invalid_task", "Unknown task. Use protocol, search_query, rob, checklist, title_abstract, thesis_to_paper, polish, iec_application, consent_form, ctri_fields, publication_consent, case_report_draft or manuscript_draft.", requestId);
   const input = inputOf(body);
+  const phiOverride = phiOverrideAccepted(body);
+  const overrideArgs = overrideOpts(phiOverride);
   if (task === "thesis_to_paper") return thesisTask(ctx, projectId, input);
-  if (task === "polish") return polishTask(ctx, projectId, input);
+  if (task === "polish") return polishTask(ctx, projectId, input, overrideArgs);
   if (task === "case_report_draft") {
     const caseText = typeof input.caseText === "string" ? input.caseText : "";
     if (!caseText.trim()) {
       return err(400, "invalid_body", "Case text is required.", requestId);
     }
-    const report = scan(caseText);
-    if (report.blocked) {
+    const report = scan(caseText, { mode: "user" });
+    if (report.blocked && !phiOverride) {
       const categories = phiCategories(report.hits);
       await api.audit(db, projectId, uid, "ai_phi_blocked", "case_report_draft", { categories, purpose: "case_report_draft" });
       return ctx.api.json({
         error: { code: "phi_blocked", message: "Patient identifiers detected in case text.", requestId },
         categories,
+        overridable: true,
       }, 422, { "x-request-id": requestId });
     }
+    /* With a valid override the request-level scan in runUserAi writes the
+     * single ai_phi_override audit; the call proceeds below. */
   }
 
   const bits = await loadProjectBits(db, projectId);
@@ -1244,7 +1272,7 @@ export async function aiDraft(ctx, projectId, body) {
       "keys are d1, d2, d3, d4, d5. judgement is low, some_concerns or high. " +
       "quote must be copied exactly from that study's snippet. If you cannot support a domain, leave judgement and quote empty.";
     prompt = studies.map((s) => "studyId: " + s.studyId + "\nLabel: " + s.label + "\nSnippet: " + s.snippet).join("\n\n");
-    const out = await oneCall(ctx, projectId, task, system, prompt);
+    const out = await oneCall(ctx, projectId, task, system, prompt, overrideArgs);
     if (out.error) return out.error;
     const draft = robDraft(extractJson(out.text), studies);
     if (!draft) return err(422, "invalid_draft", "MaiK did not return a Risk of Bias 2 (RoB 2) draft that could be checked.", requestId);
@@ -1263,7 +1291,7 @@ export async function aiDraft(ctx, projectId, body) {
     prompt = "Checklist: " + guide.name + "\nItems:\n" + brief +
       "\n\nProtocol: " + JSON.stringify(bits.protocol).slice(0, 2000) +
       "\n\nManuscript:\n" + manuscript;
-    const out = await oneCall(ctx, projectId, task, system, prompt);
+    const out = await oneCall(ctx, projectId, task, system, prompt, overrideArgs);
     if (out.error) return out.error;
     const draft = checklistDraft(extractJson(out.text), guide, headings);
     if (!draft) return err(422, "invalid_draft", "MaiK did not return a checklist draft that could be checked.", requestId);
@@ -1385,7 +1413,7 @@ export async function aiDraft(ctx, projectId, body) {
       (studyList ? "\nIncluded study notes:\n" + studyList : "");
   }
 
-  const out = await oneCall(ctx, projectId, task, system, prompt);
+  const out = await oneCall(ctx, projectId, task, system, prompt, overrideArgs);
   if (out.error) return out.error;
   const parsed = extractJson(out.text);
   let draft = null;
