@@ -17,8 +17,10 @@
  * is 409 idempotency_conflict.
  */
 import { PDF_MAX_BYTES, PDF_MAX_PAGES, PDF_MAX_SECONDS, BATCH_MAX,
-  HARD_STOP_MESSAGES, checkPdfJobCaps, validateJobMessage } from "./_caps.js";
-import { quotePdfJob, availableCredits, reserveCredits, releaseCredits } from "./_credits.js";
+  PO_MAX_SECONDS, PO_MAX_CALLS, HARD_STOP_MESSAGES,
+  checkPdfJobCaps, checkPoJobCaps, validateJobMessage } from "./_caps.js";
+import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCredits } from "./_credits.js";
+import { scan, phiCategories } from "./_phi.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const SETTLED = ["succeeded", "failed", "cancelled"];
@@ -103,12 +105,13 @@ export async function uploadPdf(ctx) {
  * ceilings.md batch_too_large); batch entries derive deterministic keys
  * "<idempotencyKey>:<index>" so a replay returns the same jobs. */
 export async function createJob(ctx, body) {
+  if (body && body.kind === "manuscript_draft") return createManuscriptJob(ctx, body);
   const { env, db, uid, claims, projectId, requestId, api } = ctx;
   const { json, err, audit, uuid, projectGate, gateErr } = api;
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "Jobs need an owner, editor or analyst role", requestId);
   if (body.kind !== "pdf_extract")
-    return err(400, "invalid_body", "kind must be pdf_extract", requestId);
+    return err(400, "invalid_body", "kind must be pdf_extract or manuscript_draft", requestId);
   const idempotencyKey = typeof body.idempotencyKey === "string" ? body.idempotencyKey.trim() : "";
   if (!idempotencyKey || idempotencyKey.length > 120)
     return err(400, "invalid_body", "idempotencyKey must be 1-120 characters", requestId);
@@ -166,8 +169,8 @@ export async function createJob(ctx, body) {
       const reservation = await reserveCredits(db, env, uuid, { uid, email: claims && claims.email, jobId, quote });
       let row;
       try {
-        await db.prepare("INSERT INTO research_job_runs (id,project_id,kind,status,idempotency_key,input_r2_key,ceilings_json,created_by,created_ts) VALUES (?,?, 'pdf_extract','queued',?,?,?,?,?)")
-          .bind(jobId, projectId, e.key, e.pdf.r2_key, JSON.stringify(ceilings), uid, now).run();
+        await db.prepare("INSERT INTO research_job_runs (id,project_id,kind,status,idempotency_key,input_r2_key,ceilings_json,created_by,created_ts) VALUES (?,?,?,'queued',?,?,?,?,?)")
+          .bind(jobId, projectId, "pdf_extract", e.key, e.pdf.r2_key, JSON.stringify(ceilings), uid, now).run();
         row = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(jobId).first();
       } catch (insertErr) {
         await releaseCredits(db, uuid, reservation);
@@ -211,6 +214,416 @@ export async function createJob(ctx, body) {
   }
   return json({ jobs: out.map((o) => o.job), replays: out.filter((o) => o.idempotentReplay).length, requestId },
     202, { "x-request-id": requestId });
+}
+
+const PO_CALL_BUDGET = 64;
+const GRADE_CERTAINTIES = ["high", "moderate", "low", "very low"];
+const GRADE_DOMAIN_KEYS = ["riskOfBias", "inconsistency", "indirectness", "imprecision", "publicationBias"];
+const CUTOFF_DATE_RE = /^\d{4}-(?:0[1-9]|1[0-2])$/;
+
+function parseJson(text, fallback) {
+  try {
+    const v = JSON.parse(text || "");
+    return v == null ? fallback : v;
+  } catch {
+    return fallback;
+  }
+}
+
+function isoUtc(ts) {
+  return new Date(ts).toISOString().replace(/\.\d{3}Z$/, "Z");
+}
+
+function isSystematicReviewStudyType(studyType) {
+  const s = String(studyType || "").trim().toLowerCase();
+  if (!s) return false;
+  if (s === "systematic_review" || s === "meta_analysis") return true;
+  if (/systematic[\s_-]*review|\bmeta[\s_-]*analys/.test(s)) return true;
+  if (s === "observational cohort synthesis" || s === "randomized controlled trials") return true;
+  return false;
+}
+
+function hasProvenance(locator, quote) {
+  if (!locator || typeof locator !== "object" || Array.isArray(locator) || !Object.keys(locator).length) return false;
+  return typeof quote === "string" && quote.trim().length > 0;
+}
+
+function robDomainsAgree(toolId, a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b) || !a.length) return false;
+  const byKey = {};
+  for (const d of b) if (d && d.key) byKey[d.key] = d;
+  for (const d of a) {
+    if (!d || !d.key) return false;
+    const o = byKey[d.key];
+    if (!o || o.judgment !== d.judgment) return false;
+    if (toolId === "nos" && (Number(o.stars) || 0) !== (Number(d.stars) || 0)) return false;
+    if (d.judgment === "no_information" || d.judgment === "unclear") return false;
+  }
+  return true;
+}
+
+function recordPmid(rec, meta) {
+  if (rec && rec.source === "pubmed" && /^\d+$/.test(String(rec.external_id || ""))) return String(rec.external_id);
+  return meta && meta.pmid ? String(meta.pmid) : "";
+}
+
+function sourceFromRecord(rec) {
+  if (!rec) return null;
+  const meta = parseJson(rec.metadata_json, {});
+  const authors = parseJson(rec.authors_json, []);
+  const src = {};
+  if (rec.title) src.title = rec.title;
+  const doi = rec.doi || meta.doi || "";
+  if (doi) src.doi = String(doi);
+  const pmid = recordPmid(rec, meta);
+  if (pmid) src.pmid = pmid;
+  if (Array.isArray(authors) && authors.length) src.authors = authors;
+  if (rec.year != null) src.year = rec.year;
+  return Object.keys(src).length ? src : null;
+}
+
+function buildProtocolBlock(project, proto) {
+  const content = parseJson(proto.content_json, {});
+  const out = {};
+  const title = (content.prospero && typeof content.prospero.title === "string" && content.prospero.title.trim()) ||
+    (typeof content.title === "string" && content.title.trim()) ||
+    (project && project.title) || "";
+  if (title) out.title = title;
+  const question = (typeof content.question === "string" && content.question.trim()) ||
+    (project && project.research_question) || "";
+  if (question) out.question = question;
+  if (content.pico && typeof content.pico === "object" && !Array.isArray(content.pico) && Object.keys(content.pico).length) {
+    out.pico = content.pico;
+  }
+  const design = (typeof content.design === "string" && content.design.trim()) ||
+    (project && project.study_type) || "";
+  if (design) out.design = design;
+  if (Array.isArray(content.eligibility) && content.eligibility.length) {
+    out.eligibility = content.eligibility;
+  } else if (typeof content.eligibility === "string" && content.eligibility.trim()) {
+    out.eligibility = content.eligibility;
+  }
+  if (Array.isArray(content.outcomes) && content.outcomes.length) {
+    out.outcomes = content.outcomes;
+  } else if (content.outcomes && typeof content.outcomes === "object" && !Array.isArray(content.outcomes)) {
+    const list = [];
+    if (typeof content.outcomes.primary === "string" && content.outcomes.primary.trim()) list.push(content.outcomes.primary.trim());
+    if (Array.isArray(content.outcomes.secondary)) {
+      for (const s of content.outcomes.secondary) if (typeof s === "string" && s.trim()) list.push(s.trim());
+    }
+    if (list.length) out.outcomes = list;
+  }
+  out.lockHash = proto.lock_hash;
+  if (proto.locked_at != null) out.lockedAt = isoUtc(proto.locked_at);
+  return out;
+}
+
+async function buildManuscriptSnapshot(db, project, proto, projectId, jobId) {
+  const studies = (await db.prepare("SELECT * FROM research_studies WHERE project_id=? ORDER BY created_ts ASC, id ASC")
+    .bind(projectId).all()).results || [];
+  const extractions = (await db.prepare("SELECT * FROM research_extractions WHERE project_id=? ORDER BY updated_ts ASC, id ASC")
+    .bind(projectId).all()).results || [];
+  const reportRecords = (await db.prepare(
+    "SELECT rep.study_id, rec.* FROM research_reports rep JOIN research_records rec ON rec.id=rep.record_id WHERE rep.project_id=? AND rep.study_id IS NOT NULL")
+    .bind(projectId).all()).results || [];
+
+  const extByStudy = new Map();
+  for (const ex of extractions) extByStudy.set(ex.study_id, ex);
+  const recByStudy = new Map();
+  for (const rr of reportRecords) if (!recByStudy.has(rr.study_id)) recByStudy.set(rr.study_id, rr);
+
+  const evidence = [];
+  for (const st of studies) {
+    const values = [];
+    const seenFields = new Set();
+    const ext = extByStudy.get(st.id);
+    if (ext) {
+      const fields = parseJson(ext.fields_json, {});
+      if (fields && typeof fields === "object" && !Array.isArray(fields)) {
+        for (const fieldKey of Object.keys(fields)) {
+          seenFields.add(fieldKey);
+          const f = fields[fieldKey];
+          if (!f || (f.status !== "verified" && f.status !== "corrected")) continue;
+          if (f.value === undefined || f.value === null || f.value === "") continue;
+          if (!hasProvenance(f.locator, f.quote)) continue;
+          values.push({ field: fieldKey, value: f.value, verified: true, locator: f.locator, quote: f.quote });
+        }
+      }
+    }
+    if (st.verified === 1) {
+      const stLoc = parseJson(st.locator_json, null);
+      if (hasProvenance(stLoc, st.quote)) {
+        const inputs = parseJson(st.inputs_json, {});
+        if (inputs && typeof inputs === "object" && !Array.isArray(inputs)) {
+          for (const fieldKey of Object.keys(inputs)) {
+            if (seenFields.has(fieldKey)) continue;
+            const val = inputs[fieldKey];
+            if (val === undefined || val === null || val === "") continue;
+            values.push({ field: fieldKey, value: val, verified: true, locator: stLoc, quote: st.quote });
+          }
+        }
+      }
+    }
+    if (!values.length) continue;
+    const item = { studyId: st.id };
+    if (st.label) item.label = st.label;
+    const src = sourceFromRecord(recByStudy.get(st.id));
+    if (src) item.source = src;
+    item.values = values;
+    evidence.push(item);
+  }
+
+  const runRows = (await db.prepare("SELECT * FROM research_runs WHERE project_id=? ORDER BY created_ts ASC, id ASC")
+    .bind(projectId).all()).results || [];
+  const runs = runRows.map((r) => {
+    const parsed = parseJson(r.result_json, {});
+    const result = parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+    return {
+      runId: r.id,
+      engine: r.engine || "research-engine",
+      engineVersion: r.engine_version || "rmd1",
+      measure: r.measure,
+      method: r.model || "",
+      result,
+    };
+  });
+
+  const recRows = (await db.prepare("SELECT * FROM research_records WHERE project_id=? ORDER BY created_ts ASC, id ASC")
+    .bind(projectId).all()).results || [];
+  const references = recRows.map((r) => {
+    const meta = parseJson(r.metadata_json, {});
+    const authors = parseJson(r.authors_json, []);
+    const ref = { key: r.id };
+    if (r.title) ref.title = r.title;
+    if (Array.isArray(authors) && authors.length) ref.authors = authors;
+    if (r.year != null) ref.year = r.year;
+    const venue = meta.venue || meta.journal || "";
+    if (venue) ref.venue = String(venue);
+    const doi = r.doi || meta.doi || "";
+    if (doi) ref.doi = String(doi);
+    const pmid = recordPmid(r, meta);
+    if (pmid) ref.pmid = pmid;
+    if (meta.volume) ref.volume = String(meta.volume);
+    if (meta.pages) ref.pages = String(meta.pages);
+    return ref;
+  });
+
+  const robConflicts = (await db.prepare("SELECT * FROM research_rob_conflicts WHERE project_id=? ORDER BY created_ts ASC, id ASC")
+    .bind(projectId).all()).results || [];
+  const conflictByPair = new Map();
+  for (const c of robConflicts) conflictByPair.set(c.study_id + "::" + c.tool, c);
+
+  const robRows = (await db.prepare("SELECT * FROM research_rob_assessments WHERE project_id=? ORDER BY created_ts DESC, rowid DESC")
+    .bind(projectId).all()).results || [];
+  const votesByPair = new Map();
+  for (const r of robRows) {
+    const pair = r.study_id + "::" + r.tool;
+    if (!votesByPair.has(pair)) votesByPair.set(pair, new Map());
+    const byAssessor = votesByPair.get(pair);
+    if (!byAssessor.has(r.assessor_uid)) byAssessor.set(r.assessor_uid, r);
+  }
+
+  const rob = [];
+  const seenPairs = new Set();
+  const pushRobDomains = (studyId, tool, domains) => {
+    if (!Array.isArray(domains)) return;
+    for (const d of domains) {
+      if (!d || !d.key || !d.judgment || d.verified === false) continue;
+      if (!hasProvenance(d.locator, d.quote)) continue;
+      rob.push({
+        studyId,
+        tool,
+        domain: d.key,
+        judgment: d.judgment,
+        verified: true,
+        locator: d.locator,
+        quote: d.quote,
+      });
+    }
+  };
+  for (const c of robConflicts) {
+    const pair = c.study_id + "::" + c.tool;
+    seenPairs.add(pair);
+    if (c.status !== "resolved" || !c.consensus_json) continue;
+    pushRobDomains(c.study_id, c.tool, parseJson(c.consensus_json, []));
+  }
+  for (const [pair, byAssessor] of votesByPair.entries()) {
+    if (seenPairs.has(pair)) continue;
+    const votes = [...byAssessor.values()];
+    if (votes.length < 2) continue;
+    const studyId = votes[0].study_id;
+    const tool = votes[0].tool;
+    const a = parseJson(votes[0].domains_json, []);
+    const b = parseJson(votes[1].domains_json, []);
+    if (!robDomainsAgree(tool, a, b)) continue;
+    pushRobDomains(studyId, tool, a);
+  }
+
+  const gradeRows = (await db.prepare("SELECT * FROM research_grade_assessments WHERE project_id=? ORDER BY created_ts ASC, id ASC")
+    .bind(projectId).all()).results || [];
+  const grade = [];
+  for (const g of gradeRows) {
+    if (!g.outcome) continue;
+    const res = parseJson(g.result_json, {});
+    const cert = typeof res.certainty === "string" ? res.certainty.trim() : "";
+    if (GRADE_CERTAINTIES.indexOf(cert.toLowerCase()) < 0) continue;
+    const item = { outcome: g.outcome, certainty: cert.toLowerCase() };
+    if (Array.isArray(res.footnotes) && res.footnotes.length) {
+      const rat = res.footnotes.filter((f) => typeof f === "string" && f.trim()).join("; ");
+      if (rat) item.rationale = rat;
+    }
+    const inp = parseJson(g.input_json, {});
+    if (inp && typeof inp === "object" && !Array.isArray(inp)) {
+      const domains = {};
+      for (const dk of GRADE_DOMAIN_KEYS) {
+        if (inp[dk] && typeof inp[dk].level === "string" && inp[dk].level) domains[dk] = inp[dk].level;
+      }
+      if (Object.keys(domains).length) item.domains = domains;
+    }
+    grade.push(item);
+  }
+
+  return {
+    v: 1,
+    projectId,
+    jobId,
+    protocol: buildProtocolBlock(project, proto),
+    evidence,
+    runs,
+    references,
+    rob,
+    grade,
+  };
+}
+
+export async function createManuscriptJob(ctx, body) {
+  const { env, db, uid, claims, projectId, requestId, api } = ctx;
+  const { json, err, audit, uuid, projectGate, gateErr } = api;
+
+  /* 0. Feature flag checked first, before auth/project gate. */
+  if (!env || env.RESEARCH_PO_ENABLED !== "1")
+    return err(404, "not_found", "Unknown Research API endpoint", requestId);
+
+  /* 1. Write role + systematic review / meta-analysis project. */
+  const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
+  if (gate.status) return gateErr(gate, "Jobs need an owner, editor or analyst role", requestId);
+  if (!isSystematicReviewStudyType(gate.project && gate.project.study_type))
+    return err(409, "not_systematic_review", "Manuscript drafting jobs are only available for systematic review and meta-analysis projects", requestId);
+
+  /* 2. Latest protocol locked with lock_hash + at least one saved run. */
+  const proto = await db.prepare("SELECT * FROM research_protocols WHERE project_id=? ORDER BY version DESC LIMIT 1")
+    .bind(projectId).first();
+  if (!proto || proto.status !== "locked" || !proto.lock_hash)
+    return err(409, "protocol_unlocked", "Lock the latest protocol before drafting a manuscript", requestId);
+  const hasRun = await db.prepare("SELECT id FROM research_runs WHERE project_id=? LIMIT 1")
+    .bind(projectId).first();
+  if (!hasRun)
+    return err(409, "no_saved_run", "Save at least one analysis run before drafting a manuscript", requestId);
+
+  const idempotencyKey = typeof body.idempotencyKey === "string" ? body.idempotencyKey.trim() : "";
+  if (!idempotencyKey || idempotencyKey.length > 120)
+    return err(400, "invalid_body", "idempotencyKey must be 1-120 characters", requestId);
+  if (!env.RESEARCH_QUEUE) return err(503, "queue_unavailable", "Research job queue is not provisioned", requestId);
+  if (!env.RESEARCH_R2) return err(503, "storage_unavailable", "Research file storage is not provisioned", requestId);
+
+  /* 4. Idempotent replay on (project, idempotencyKey) before active check. */
+  const existing = await db.prepare("SELECT * FROM research_job_runs WHERE project_id=? AND idempotency_key=?")
+    .bind(projectId, idempotencyKey).first();
+  if (existing) {
+    if (existing.kind !== "manuscript_draft")
+      return err(409, "idempotency_conflict", "This idempotencyKey was already used with a different job kind", requestId);
+    return json({ job: jobOf(existing), idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+  }
+
+  /* 3. No other manuscript_draft job queued/running for the project. */
+  const active = await db.prepare("SELECT id FROM research_job_runs WHERE project_id=? AND kind='manuscript_draft' AND status IN ('queued','running') LIMIT 1")
+    .bind(projectId).first();
+  if (active)
+    return err(409, "job_active", "A manuscript draft job is already queued or running for this project", requestId);
+
+  /* 5. Daily UTC caps: 3/project, 5/user. */
+  const now = Date.now();
+  const capBreach = await checkPoJobCaps(db, projectId, uid, now);
+  if (capBreach) return err(429, capBreach.code, capBreach.message, requestId);
+
+  /* 6. Quote 64 calls at T2 and reserve credits. */
+  const quote = quoteAiCall(env, "T2") * PO_CALL_BUDGET;
+  const credits = await availableCredits(db, env, uid, claims && claims.email);
+  if (credits.availableMicroUsd < quote)
+    return err(402, "insufficient_credits", "Not enough research credits for this job. Top up the MaiK wallet or ask your institution admin.", requestId);
+  const jobId = uuid("job_");
+  const reservation = await reserveCredits(db, env, uuid, { uid, email: claims && claims.email, jobId, quote });
+
+  /* 7-8. Build v1 manifest snapshot and run PHI gate before any R2 write. */
+  const snapshot = await buildManuscriptSnapshot(db, gate.project, proto, projectId, jobId);
+  const phi = scan(JSON.stringify(snapshot));
+  if (phi.blocked) {
+    await releaseCredits(db, uuid, reservation);
+    return json({
+      error: { code: "phi_blocked", message: "Patient identifiers detected in project data; manuscript drafting was blocked.", requestId },
+      categories: phiCategories(phi.hits),
+    }, 422, { "x-request-id": requestId });
+  }
+
+  /* 9. Put snapshot in R2. */
+  const snapshotKey = "projects/" + projectId + "/manuscript/snapshots/" + jobId + ".json";
+  await env.RESEARCH_R2.put(snapshotKey, JSON.stringify(snapshot), {
+    httpMetadata: { contentType: "application/json" },
+    customMetadata: { projectId, jobId, createdBy: uid },
+  });
+
+  /* 10. Insert research_job_runs row (same bound-kind shape as pdf_extract). */
+  const ceilings = { maxSeconds: PO_MAX_SECONDS, maxCalls: PO_MAX_CALLS, quoteMicroUsd: quote };
+  let row;
+  try {
+    await db.prepare("INSERT INTO research_job_runs (id,project_id,kind,status,idempotency_key,input_r2_key,ceilings_json,created_by,created_ts) VALUES (?,?,?,'queued',?,?,?,?,?)")
+      .bind(jobId, projectId, "manuscript_draft", idempotencyKey, snapshotKey, JSON.stringify(ceilings), uid, now).run();
+    row = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(jobId).first();
+  } catch (insertErr) {
+    await releaseCredits(db, uuid, reservation);
+    if (typeof env.RESEARCH_R2.delete === "function") await env.RESEARCH_R2.delete(snapshotKey).catch(() => {});
+    const raced = await db.prepare("SELECT * FROM research_job_runs WHERE project_id=? AND idempotency_key=?")
+      .bind(projectId, idempotencyKey).first();
+    if (raced) {
+      if (raced.kind !== "manuscript_draft")
+        return err(409, "idempotency_conflict", "This idempotencyKey was already used with a different job kind", requestId);
+      return json({ job: jobOf(raced), idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+    }
+    throw insertErr;
+  }
+
+  /* 11. Build, validate and enqueue queue message. */
+  const input = { r2Key: snapshotKey };
+  if (typeof body.cutoffDate === "string") {
+    const cd = body.cutoffDate.trim();
+    if (CUTOFF_DATE_RE.test(cd)) input.cutoffDate = cd;
+  }
+  const message = {
+    v: 1,
+    jobId,
+    kind: "manuscript_draft",
+    projectId,
+    idempotencyKey,
+    createdAt: Math.floor(now / 1000),
+    input,
+    ceilings: { maxSeconds: PO_MAX_SECONDS, maxCalls: PO_MAX_CALLS },
+  };
+  if (!validateJobMessage(message)) {
+    await releaseCredits(db, uuid, reservation);
+    await db.prepare("UPDATE research_job_runs SET status='failed',error_code='invalid_message',completed_ts=? WHERE id=?")
+      .bind(Date.now(), jobId).run();
+    return err(500, "invalid_message", "Job message failed the contract schema", requestId);
+  }
+  try {
+    await env.RESEARCH_QUEUE.send(message);
+  } catch (queueErr) {
+    await db.prepare("UPDATE research_job_runs SET status='failed',error_code='queue_unavailable',completed_ts=? WHERE id=?")
+      .bind(Date.now(), jobId).run();
+    await releaseCredits(db, uuid, reservation);
+    return err(503, "queue_unavailable", "Could not queue the job; retry with the same idempotency key", requestId);
+  }
+  await audit(db, projectId, uid, "job_created", jobId, { kind: "manuscript_draft", quoteMicroUsd: quote });
+  return json({ job: jobOf(row), requestId }, 202, { "x-request-id": requestId });
 }
 
 /* GET /v1/jobs/{jobId}. Returns null when the id is not a Phase 3 job so the
