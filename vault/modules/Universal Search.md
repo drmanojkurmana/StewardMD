@@ -45,6 +45,11 @@ settings toggles. Category chips filter; an "Ask MaiK about ..." row is always l
   the right edge), filled pill field (tinted, white with a teal ring on focus), round clear button, shorter placeholder
   "Drugs, scores, diseases, codes". No glass on the bar: results scroll in `.us-body`, so a hairline appears only once
   they scroll (`.us-scrolled`).
+- **Grouped look (owner pick 2026-11-26, of three shown: A Grouped, B Reference, C Material):** iOS Settings style.
+  Grey 38 px field, segmented tabs, results in white inset grouped lists (hairline separators from 56 px, 12 px corners),
+  a coloured icon tile per category (`.us-row[data-cat]`), Browse as one grouped list. Rules sit at the end of
+  `search.css` under `html.us-on` with the iPad column guard `max(16px, calc(50% - 400px))`. Previous look: tag
+  `pre-search-grouped`.
 - **Display zoom gotcha:** home.js sets `documentElement.style.zoom` (0.95 by default on a small phone). `height:100dvh`
   on a fixed panel then stops 5% short and the bottom nav shows through. The panel uses `inset:0` with no height.
 - **Legacy panel shadow:** `#smdSearchPanel` (app.js) is parked above the screen at z 401 with a 24 px shadow that bled
