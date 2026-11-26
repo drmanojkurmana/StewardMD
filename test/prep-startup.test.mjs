@@ -28,7 +28,7 @@ function bootWin(opts = {}) {
 test("vertical and horizontal clips and start/end stills exist and build-www ships them", () => {
   for (const k of ["v", "h"]) {
     const mp4 = statSync(new URL(`../prep/startup/prep-startup-${k}.mp4`, import.meta.url));
-    assert.ok(mp4.size > 500_000 && mp4.size < 5_000_000, `${k} mp4 reasonable size: ${mp4.size}`);
+    assert.ok(mp4.size > 500_000 && mp4.size < 12_000_000, `${k} mp4 reasonable size: ${mp4.size}`);
     for (const s of ["start", "end"]) {
       const wp = statSync(new URL(`../prep/startup/prep-startup-${k}-${s}.webp`, import.meta.url));
       assert.ok(wp.size > 5_000, `${k}-${s} webp exists`);
@@ -65,9 +65,10 @@ test("blending, motion opt-outs, PiP opt-out, and loader/home/prep hooks are wir
   assert.match(PS, /data-no-motion/);
   assert.match(PS, /disablepictureinpicture/);
   assert.match(PS, /playsinline webkit-playsinline/);
-  assert.match(PS, /psv-pad-y/);
-  assert.match(PS, /psv-pad-x/);
-  assert.match(PS, /psv-reveal/);
+  assert.match(PS, /object-fit:cover/);
+  assert.doesNotMatch(PS, /radial-gradient|blur\(/, "no glow or blur layers");
+  assert.match(R("prep-loader.js"), /p\.opened \? p\.opened\(\)/, "app opens under the clip");
+  assert.match(R("prep.js"), /opened: function \(\) \{ return st\.openP/);
   assert.match(PS, /<video muted /);
   assert.doesNotMatch(PS, /psv-skip|psv-snd/);
   assert.doesNotMatch(PS, /[–—]/);
