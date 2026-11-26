@@ -28,12 +28,24 @@ import { readRawBody, verifySignedHeaders, hmacHex } from "./_callback.js";
 import * as pubmed from "./_connectors/pubmed.js";
 import * as europepmc from "./_connectors/europepmc.js";
 import * as crossref from "./_connectors/crossref.js";
+import * as clinicaltrials from "./_connectors/clinicaltrials.js";
+import { ConnectorError } from "./_connectors/_http.js";
 import { efetchAbstracts } from "./_connectors/pubmed_efetch.js";
 
 const MAX_SEARCH_BYTES = 65536;
 const TOKEN_TTL_SECONDS = 900; /* short-lived; matches the queue visibility */
 const SETTLED = ["succeeded", "failed", "cancelled"];
 const SEARCH_DATABASES = { pubmed, europe_pmc: europepmc, crossref };
+const TRIALS_READ_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
+
+export function trialsEnabled(env) {
+  return Boolean(env && env.RESEARCH_TRIALS_ENABLED === "1");
+}
+
+export function searchDatabases(env) {
+  if (!trialsEnabled(env)) return Object.assign({}, SEARCH_DATABASES);
+  return Object.assign({}, SEARCH_DATABASES, { clinicaltrials });
+}
 
 /* System framing prepended to EVERY gateway call (prompt-injection defense,
  * threat-model.md boundary 6). Exported so the injection test set can assert
@@ -260,7 +272,12 @@ export async function literatureSearchRoute(ctx) {
   if (typeof body.query !== "string" || !body.query.trim() || body.query.length > 4000)
     return err(400, "invalid_body", "query must be 1-4000 characters", requestId);
   const databases = body.databases === undefined ? ["pubmed", "europe_pmc", "crossref"] : body.databases;
-  if (!Array.isArray(databases) || !databases.length || databases.some((d) => !SEARCH_DATABASES[d]))
+  if (!Array.isArray(databases) || !databases.length)
+    return err(400, "invalid_body", "databases must be pubmed, europe_pmc or crossref", requestId);
+  if (databases.indexOf("clinicaltrials") >= 0 && !trialsEnabled(env))
+    return err(404, "not_found", "ClinicalTrials.gov is not enabled", requestId);
+  const activeDbs = searchDatabases(env);
+  if (databases.some((d) => !activeDbs[d]))
     return err(400, "invalid_body", "databases must be pubmed, europe_pmc or crossref", requestId);
   const dateTo = body.dateTo === undefined || body.dateTo === null ? null : body.dateTo;
   if (dateTo !== null && !/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(String(dateTo)))
@@ -276,12 +293,35 @@ export async function literatureSearchRoute(ctx) {
     return err(503, "search_unconfigured", "Research database contact is not configured", requestId);
   const config = {
     contactEmail: env.RESEARCH_CONTACT_EMAIL,
-    apiKey: env.RESEARCH_NCBI_API_KEY,
+    apiKey: pubmed.resolveNcbiApiKey(env),
     deadline: Date.now() + 600000,
   };
   const records = [];
   for (const name of databases) {
-    const connector = SEARCH_DATABASES[name];
+    const connector = activeDbs[name];
+    if (name === "clinicaltrials") {
+      let ctRes;
+      try { ctRes = await clinicaltrials.search({ query: body.query, pageSize: limit }, config); }
+      catch (e) { return err(502, "search_failed", "Literature search failed; retry the query.", requestId); }
+      if (!ctRes || ctRes.available === false)
+        return err(502, "search_failed", "Literature search failed; retry the query.", requestId);
+      for (const t of ctRes.studies || []) {
+        records.push({
+          source: "clinicaltrials",
+          externalId: t.nct,
+          title: t.title,
+          authors: [],
+          year: null,
+          doi: "",
+          abstract: "",
+          publicationDate: "",
+          venue: "ClinicalTrials.gov",
+          journal: "ClinicalTrials.gov",
+          extra: t,
+        });
+      }
+      continue;
+    }
     let raws = [], ids = [];
     try {
       const result = await connector.search(body.query, {}, dateTo, config);
@@ -304,4 +344,76 @@ export async function literatureSearchRoute(ctx) {
   await audit(db, job.project_id, "worker", "literature_search", job.id,
     { databases, count: records.length });
   return json({ records }, 200, { "x-request-id": requestId });
+}
+
+/* ---- ClinicalTrials.gov user routes (Phase 1 free research APIs) -------- */
+
+function trialsConfig(env) {
+  return {
+    contactEmail: env && env.RESEARCH_CONTACT_EMAIL ? String(env.RESEARCH_CONTACT_EMAIL).trim() : "",
+    deadline: Date.now() + 30000,
+    /* A person is waiting in the app: give up after ~3 s of retries and hide the feature instead of hanging 30 s. */
+    maxRetries: 2,
+    timeoutMs: 10000,
+  };
+}
+
+export async function trialsStatusRoute(ctx, projectId) {
+  const { env, db, uid, requestId, api } = ctx;
+  const { json, err, projectGate, gateErr } = api;
+  const gate = await projectGate(db, projectId, uid, TRIALS_READ_ROLES);
+  if (gate.status) return gateErr(gate, gate.status === 404 ? "Project not found" : "Trials access needs a project role", requestId);
+  if (!trialsEnabled(env))
+    return err(404, "not_found", "ClinicalTrials.gov is not enabled", requestId);
+  return json({ available: true, source: "ClinicalTrials.gov" }, 200, { "x-request-id": requestId });
+}
+
+export async function trialsSearchRoute(ctx, projectId, body) {
+  const { env, db, uid, requestId, api } = ctx;
+  const { json, err, projectGate, gateErr } = api;
+  const gate = await projectGate(db, projectId, uid, TRIALS_READ_ROLES);
+  if (gate.status) return gateErr(gate, gate.status === 404 ? "Project not found" : "Trials search needs a project role", requestId);
+  if (!trialsEnabled(env))
+    return err(404, "not_found", "ClinicalTrials.gov is not enabled", requestId);
+  const params = body || {};
+  const textToScan = [params.condition, params.intervention, params.query]
+    .filter((v) => typeof v === "string" && v.trim())
+    .join(" ");
+  if (textToScan && scan(textToScan).blocked)
+    return err(400, "phi_in_query", "Query contains personal details. Remove personal identifiers before searching.", requestId);
+  let out;
+  try {
+    out = await clinicaltrials.search(params, trialsConfig(env));
+  } catch (e) {
+    if (e instanceof ConnectorError && e.code === "invalid_search")
+      return err(400, "invalid_search", e.message, requestId);
+    return json({ available: false, studies: [], nextPageToken: null, totalCount: 0, reason: "unavailable", source: "ClinicalTrials.gov" },
+      200, { "x-request-id": requestId });
+  }
+  return json(out, 200, { "x-request-id": requestId });
+}
+
+export async function trialsLookupRoute(ctx, projectId, nctId) {
+  const { env, db, uid, requestId, api } = ctx;
+  const { json, err, projectGate, gateErr } = api;
+  const gate = await projectGate(db, projectId, uid, TRIALS_READ_ROLES);
+  if (gate.status) return gateErr(gate, gate.status === 404 ? "Project not found" : "Trials lookup needs a project role", requestId);
+  if (!trialsEnabled(env))
+    return err(404, "not_found", "ClinicalTrials.gov is not enabled", requestId);
+  let out;
+  try {
+    out = await clinicaltrials.lookup(nctId, trialsConfig(env));
+  } catch (e) {
+    if (e instanceof ConnectorError && e.code === "invalid_search")
+      return err(400, "invalid_search", e.message, requestId);
+    return json({ available: false, trial: null, reason: "unavailable", source: "ClinicalTrials.gov" },
+      200, { "x-request-id": requestId });
+  }
+  if (out.available === false)
+    return json({ available: false, trial: null, reason: "unavailable", source: "ClinicalTrials.gov" },
+      200, { "x-request-id": requestId });
+  if (out.notFound)
+    return err(404, "trial_not_found", "Trial not found on ClinicalTrials.gov", requestId);
+  return json({ available: true, trial: out.trial, source: "ClinicalTrials.gov" },
+    200, { "x-request-id": requestId });
 }

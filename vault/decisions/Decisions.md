@@ -5,6 +5,13 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-26 · ResearchMD Phase 1 free APIs: NCBI key fallback and ClinicalTrials.gov v2 connector
+
+**Decision.** Added `resolveNcbiApiKey` (`env.RESEARCH_NCBI_API_KEY`, else `env.NCBI_API_KEY`, else none) and `selectBucket` (10 req/s keyed bucket only when non-empty after trim, else 3 req/s anonymous bucket) across `pubmed.js`, `pubmed_efetch.js`, `_gateway.js`, and `[[path]].js`. Added `clinicaltrials.js` against `https://clinicaltrials.gov/api/v2` with a 50/60 req/s bucket (`<= 50 req/min`), Essie `filter.advanced` phase mapping (`AREA[Phase]...`), `filter.overallStatus`, strict `^NCT\d{8}$` lookup validation, strict 9-field normalisation (`{nct, title, phase, status, enrollment, arms, primaryOutcome, resultsPosted, source: "ClinicalTrials.gov"}` with nothing else), 24 h caching (`caches.default` with in-memory TTL fallback), clean `{available: false}` fallback on 5xx/timeout/429, server switch `env.RESEARCH_TRIALS_ENABLED === "1"` (default off -> 404 `not_found`), and client lookup UI behind `smd_research_trials` (default off, hidden when unavailable).
+**Why.** Unblocks keyed NCBI throughput when only `NCBI_API_KEY` is bound in the environment, satisfies ClinicalTrials.gov API v2 terms (no email harvesting, fresh 24 h cache, `Data: ClinicalTrials.gov` attribution, <= 50 req/min), and keeps patient data out of outbound requests.
+**Trade-off.** Phase filtering uses `filter.advanced` (`AREA[Phase]...`) because `filter.phase` is not part of the `ctg-oas-v2.yaml` `/studies` query spec; `_auto_studies.js` and `_paper_card.js` use the same fallback. The shared `createBucket` now has a capacity of at least 1 token: a rate under 1/s (ClinicalTrials.gov 50/min) never filled before and waited forever. App-facing trials routes retry twice (about 3 s) then hide the feature.
+**Status.** Branch `w-fa-trials`. Covered by `test/research-trials.test.mjs` and `test/run-research-trials-ui.mjs`; server switch `RESEARCH_TRIALS_ENABLED` and client flag `smd_research_trials` remain default OFF. See [[modules/ResearchMD]].
+
 ## 2026-11-21 · Calculators: modern classic list and full-screen calculator (owner picked variant A plus variant C score card)
 
 **Decision.** Calculators v2 behind `smd_calc_v2`, default ON (`"0"` restores the old accordion). List is variant A grouped rows with Starred and Recent. A calculator is a full-screen pushed view with Auto-fill from patient and Ask MaiK on every screen, a grouped form with no silent select defaults, live compute, and variant C's pinned score card. The scale bar draws only when max and cut-off come from the calculator's own result.

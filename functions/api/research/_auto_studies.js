@@ -73,7 +73,7 @@ const STOP = new Set(["with", "from", "that", "this", "were", "have", "been", "i
 function configOf(env) {
   return {
     contactEmail: env.RESEARCH_CONTACT_EMAIL,
-    apiKey: env.RESEARCH_NCBI_API_KEY,
+    apiKey: pubmed.resolveNcbiApiKey(env),
     plusToken: env.RESEARCH_CROSSREF_TOKEN,
     deadline: Date.now() + 60000,
     bucket: BUCKET,

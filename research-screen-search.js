@@ -22,6 +22,16 @@
       .replace(/'/g, "&#39;");
   };
 
+  var TRIALS_FLAG = "smd_research_trials";
+
+  function trialsFlagOn() {
+    try {
+      return !!(G.localStorage && G.localStorage.getItem(TRIALS_FLAG) === "1");
+    } catch (e) {
+      return false;
+    }
+  }
+
   var DATABASES = [
     { id: "pubmed", label: "PubMed", hint: "PubMed syntax, e.g. (BCG[MeSH] OR vaccine[tiab]) AND tuberculosis[tiab]…" },
     { id: "europe_pmc", label: "Europe PMC", hint: "Europe PMC syntax, e.g. (TITLE:bcg) AND (ABSTRACT:tuberculosis)…" },
@@ -29,7 +39,29 @@
     { id: "semantic_scholar", label: "Semantic Scholar", hint: "Plain terms, e.g. BCG vaccine tuberculosis prevention…" }
   ];
 
+  var TRIAL_PHASES = [
+    { id: "", label: "Any phase" },
+    { id: "EARLY_PHASE1", label: "Early Phase 1" },
+    { id: "PHASE1", label: "Phase 1" },
+    { id: "PHASE2", label: "Phase 2" },
+    { id: "PHASE3", label: "Phase 3" },
+    { id: "PHASE4", label: "Phase 4" },
+    { id: "NA", label: "Not applicable" }
+  ];
+
+  var TRIAL_STATUSES = [
+    { id: "", label: "Any status" },
+    { id: "RECRUITING", label: "Recruiting" },
+    { id: "NOT_YET_RECRUITING", label: "Not yet recruiting" },
+    { id: "ACTIVE_NOT_RECRUITING", label: "Active, not recruiting" },
+    { id: "COMPLETED", label: "Completed" },
+    { id: "TERMINATED", label: "Terminated" },
+    { id: "SUSPENDED", label: "Suspended" },
+    { id: "WITHDRAWN", label: "Withdrawn" }
+  ];
+
   function dbLabel(id) {
+    if (id === "clinicaltrials") return "Trials";
     for (var i = 0; i < DATABASES.length; i++) {
       if (DATABASES[i].id === id) return DATABASES[i].label;
     }
@@ -77,9 +109,25 @@
     dedupBusy: false,
     dedupError: null,
     dedupResult: null,
+    trialsStatusLoaded: false,
+    trialsStatusLoading: false,
+    trialsAvailable: false,
+    trialsNct: "",
+    trialsCondition: "",
+    trialsIntervention: "",
+    trialsPhase: "",
+    trialsStatus: "",
+    trialsBusy: false,
+    trialsSearched: false,
+    trialsError: null,
+    trialsResults: [],
+    trialsNextToken: null,
+    trialsTotalCount: 0,
     announce: ""
   };
   var seq = 0;
+  var trialsSeq = 0;
+  var trialsProbeSeq = 0;
   var importFile = null;
 
   function p2() { return SMD.p2 || {}; }
@@ -253,8 +301,26 @@
       st.importFileName = "";
       st.dedupResult = null;
       st.dedupError = null;
+      st.trialsStatusLoaded = false;
+      st.trialsStatusLoading = false;
+      st.trialsAvailable = false;
+      if (st.database === "clinicaltrials") st.database = "pubmed";
+      st.trialsNct = "";
+      st.trialsCondition = "";
+      st.trialsIntervention = "";
+      st.trialsPhase = "";
+      st.trialsStatus = "";
+      st.trialsBusy = false;
+      st.trialsSearched = false;
+      st.trialsError = null;
+      st.trialsResults = [];
+      st.trialsNextToken = null;
+      st.trialsTotalCount = 0;
       st.announce = "";
       importFile = null;
+    }
+    if (trialsFlagOn() && !st.trialsStatusLoaded && !st.trialsStatusLoading) {
+      loadTrialsAvailability(container, project);
     }
     if (!st.loaded && !st.loading) {
       container.innerHTML = '<div class="rmd-p2-screen">' + p2().loadingHtml("Loading search history") + '</div>';
@@ -264,6 +330,8 @@
 
     var role = project.role || "owner";
     var canRun = role === "owner" || role === "editor" || role === "analyst";
+    var showTrials = trialsFlagOn() && st.trialsAvailable;
+    if (!showTrials && st.database === "clinicaltrials") st.database = "pubmed";
     var db = null;
     for (var i = 0; i < DATABASES.length; i++) {
       if (DATABASES[i].id === st.database) db = DATABASES[i];
@@ -362,39 +430,46 @@
     // Run card
     h.push('<div class="rmd-card">');
     h.push('<h3 class="rmd-card-heading">Run a Search</h3>');
-    if (canRun && !st.ai) st.ai = SMD.ai.state();
-    if (canRun && st.ai) h.push(SMD.ai.barHtml(st.ai, { task: "search_query", label: "search query", cost: 2 }));
-    if (st.runError) h.push(p2().errHtml(st.runError, "search-run-retry"));
+    if (canRun && st.database !== "clinicaltrials" && !st.ai) st.ai = SMD.ai.state();
+    if (canRun && st.database !== "clinicaltrials" && st.ai) h.push(SMD.ai.barHtml(st.ai, { task: "search_query", label: "search query", cost: 2 }));
+    if (st.database !== "clinicaltrials" && st.runError) h.push(p2().errHtml(st.runError, "search-run-retry"));
     h.push('<div class="rmd-field"><span class="rmd-section-label" id="rmdDbLabel">Database</span>');
     h.push('<div class="rmd-filter-tabs" role="group" aria-labelledby="rmdDbLabel">');
     for (var d = 0; d < DATABASES.length; d++) {
       h.push('<button type="button" class="rmd-chip' + (st.database === DATABASES[d].id ? " rmd-chip-active" : "") + '" data-rmd-db="' + DATABASES[d].id + '">' + esc(DATABASES[d].label) + '</button>');
     }
-    h.push('</div></div>');
-    h.push('<div class="rmd-field"><label for="rmd_search_query">Query for ' + esc(db.label) + ' <span class="rmd-req">*</span></label>');
-    h.push('<textarea id="rmd_search_query" rows="4" maxlength="4000" placeholder="' + esc(db.hint) + '" spellcheck="false">' + esc(st.queries[st.database]) + '</textarea>');
-    h.push('<span class="rmd-field-hint">Stored verbatim on the run so the search can be replayed exactly.</span>');
-    if (st.ai) h.push(SMD.ai.noteHtml(st.ai, st.database));
-    h.push('</div>');
-    h.push('<div class="rmd-form-row">');
-    h.push('<div class="rmd-field"><label for="rmd_search_dateto">Date Upper Bound</label>');
-    h.push('<input type="date" id="rmd_search_dateto" value="' + esc(st.dateTo) + '">');
-    h.push('<span class="rmd-field-hint">Results up to this date. Keeps re-runs comparable.</span></div>');
-    h.push('<div class="rmd-field"><label for="rmd_search_lang">Language Filter</label>');
-    h.push('<select id="rmd_search_lang"><option value=""' + (st.language === "" ? " selected" : "") + '>Any language</option><option value="en"' + (st.language === "en" ? " selected" : "") + '>English</option></select></div>');
-    h.push('</div>');
-    h.push('<div class="rmd-field"><label for="rmd_search_type">Study Type Filter (optional)</label>');
-    h.push('<input type="text" id="rmd_search_type" maxlength="120" value="' + esc(st.studyType) + '" placeholder="e.g. randomized controlled trial…" autocomplete="off"></div>');
-    if (st.database === "semantic_scholar") {
-      h.push('<div class="rmd-banner rmd-banner-warn" role="status"><strong>Semantic Scholar is not available yet.</strong><span class="rmd-banner-sub">Select PubMed, Europe PMC, or Crossref above to run a live search.</span></div>');
+    if (showTrials) {
+      h.push('<button type="button" class="rmd-chip' + (st.database === "clinicaltrials" ? " rmd-chip-active" : "") + '" data-rmd-db="clinicaltrials">Trials</button>');
     }
-    if (canRun) {
-      var sDisabled = st.busy || st.database === "semantic_scholar";
-      h.push('<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-block" data-rmd="search-run"' + (sDisabled ? " disabled" : "") + '>' + (st.busy ? "Searching " + esc(db.label) + "…" : "Search " + esc(db.label)) + '</button>');
-      h.push('<span class="rmd-field-hint">Tip: Narrow broad queries (e.g. add trial or a date range) if PubMed exceeds daytime limits, or search Europe PMC.</span>');
-      if (st.busy) h.push('<p class="rmd-muted" aria-live="polite">The connector pages through every result. Large searches can take several minutes.</p>');
+    h.push('</div></div>');
+    if (showTrials && st.database === "clinicaltrials") {
+      h.push(trialsPanelHtml());
     } else {
-      h.push('<p class="rmd-muted">Only owner, editor or analyst can run searches.</p>');
+      h.push('<div class="rmd-field"><label for="rmd_search_query">Query for ' + esc(db.label) + ' <span class="rmd-req">*</span></label>');
+      h.push('<textarea id="rmd_search_query" rows="4" maxlength="4000" placeholder="' + esc(db.hint) + '" spellcheck="false">' + esc(st.queries[st.database]) + '</textarea>');
+      h.push('<span class="rmd-field-hint">Stored verbatim on the run so the search can be replayed exactly.</span>');
+      if (st.ai) h.push(SMD.ai.noteHtml(st.ai, st.database));
+      h.push('</div>');
+      h.push('<div class="rmd-form-row">');
+      h.push('<div class="rmd-field"><label for="rmd_search_dateto">Date Upper Bound</label>');
+      h.push('<input type="date" id="rmd_search_dateto" value="' + esc(st.dateTo) + '">');
+      h.push('<span class="rmd-field-hint">Results up to this date. Keeps re-runs comparable.</span></div>');
+      h.push('<div class="rmd-field"><label for="rmd_search_lang">Language Filter</label>');
+      h.push('<select id="rmd_search_lang"><option value=""' + (st.language === "" ? " selected" : "") + '>Any language</option><option value="en"' + (st.language === "en" ? " selected" : "") + '>English</option></select></div>');
+      h.push('</div>');
+      h.push('<div class="rmd-field"><label for="rmd_search_type">Study Type Filter (optional)</label>');
+      h.push('<input type="text" id="rmd_search_type" maxlength="120" value="' + esc(st.studyType) + '" placeholder="e.g. randomized controlled trial…" autocomplete="off"></div>');
+      if (st.database === "semantic_scholar") {
+        h.push('<div class="rmd-banner rmd-banner-warn" role="status"><strong>Semantic Scholar is not available yet.</strong><span class="rmd-banner-sub">Select PubMed, Europe PMC, or Crossref above to run a live search.</span></div>');
+      }
+      if (canRun) {
+        var sDisabled = st.busy || st.database === "semantic_scholar";
+        h.push('<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-block" data-rmd="search-run"' + (sDisabled ? " disabled" : "") + '>' + (st.busy ? "Searching " + esc(db.label) + "…" : "Search " + esc(db.label)) + '</button>');
+        h.push('<span class="rmd-field-hint">Tip: Narrow broad queries (e.g. add trial or a date range) if PubMed exceeds daytime limits, or search Europe PMC.</span>');
+        if (st.busy) h.push('<p class="rmd-muted" aria-live="polite">The connector pages through every result. Large searches can take several minutes.</p>');
+      } else {
+        h.push('<p class="rmd-muted">Only owner, editor or analyst can run searches.</p>');
+      }
     }
     h.push('</div>');
 
@@ -688,6 +763,263 @@
     });
   }
 
+  function trialsPanelHtml() {
+    var h = [];
+    h.push('<div class="rmd-field" data-rmd="trials-panel">');
+    h.push('<label for="rmd_trials_nct">NCT ID Lookup</label>');
+    h.push('<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:stretch;">');
+    h.push('<input type="text" id="rmd_trials_nct" value="' + esc(st.trialsNct) + '" maxlength="20" placeholder="e.g. NCT04280705" autocapitalize="characters" spellcheck="false" style="flex:1 1 180px;min-width:0;">');
+    h.push('<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="trials-nct-lookup"' + (st.trialsBusy ? " disabled" : "") + '>Lookup NCT</button>');
+    h.push('</div>');
+    h.push('<span class="rmd-field-hint">Format: NCT followed by 8 digits.</span>');
+    h.push('</div>');
+
+    h.push('<div class="rmd-form-row">');
+    h.push('<div class="rmd-field"><label for="rmd_trials_cond">Condition</label>');
+    h.push('<input type="text" id="rmd_trials_cond" maxlength="200" value="' + esc(st.trialsCondition) + '" placeholder="e.g. asthma, diabetes" autocomplete="off"></div>');
+    h.push('<div class="rmd-field"><label for="rmd_trials_intr">Intervention</label>');
+    h.push('<input type="text" id="rmd_trials_intr" maxlength="200" value="' + esc(st.trialsIntervention) + '" placeholder="e.g. pembrolizumab" autocomplete="off"></div>');
+    h.push('</div>');
+
+    h.push('<div class="rmd-form-row">');
+    h.push('<div class="rmd-field"><label for="rmd_trials_phase">Phase</label>');
+    h.push('<select id="rmd_trials_phase">');
+    for (var pi = 0; pi < TRIAL_PHASES.length; pi++) {
+      var ph = TRIAL_PHASES[pi];
+      h.push('<option value="' + esc(ph.id) + '"' + (st.trialsPhase === ph.id ? " selected" : "") + '>' + esc(ph.label) + '</option>');
+    }
+    h.push('</select></div>');
+    h.push('<div class="rmd-field"><label for="rmd_trials_status">Status</label>');
+    h.push('<select id="rmd_trials_status">');
+    for (var si = 0; si < TRIAL_STATUSES.length; si++) {
+      var ts = TRIAL_STATUSES[si];
+      h.push('<option value="' + esc(ts.id) + '"' + (st.trialsStatus === ts.id ? " selected" : "") + '>' + esc(ts.label) + '</option>');
+    }
+    h.push('</select></div>');
+    h.push('</div>');
+
+    h.push('<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-block" data-rmd="trials-search"' + (st.trialsBusy ? " disabled" : "") + '>' + (st.trialsBusy ? "Searching Trials..." : "Search Trials") + '</button>');
+
+    if (st.trialsError) {
+      h.push('<div class="rmd-banner rmd-banner-warn" role="status" data-rmd="trials-error"><strong>' + esc(st.trialsError) + '</strong></div>');
+    }
+
+    if (st.trialsSearched && !st.trialsBusy && !st.trialsResults.length && !st.trialsError) {
+      h.push('<p class="rmd-muted" style="margin-top:6px;">No matching trials found.</p>');
+      h.push('<div class="rmd-row-meta" data-rmd="trials-credit">Data: ClinicalTrials.gov</div>');
+    }
+
+    if (st.trialsResults.length) {
+      h.push('<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:10px;border-top:1px solid var(--rmd-line);">');
+      h.push('<span class="rmd-muted" style="font-size:13px;font-weight:600;">Showing ' + st.trialsResults.length + (st.trialsTotalCount > st.trialsResults.length ? " of " + st.trialsTotalCount : "") + ' trials</span>');
+      h.push('<span class="rmd-row-meta" data-rmd="trials-credit" style="font-weight:600;">Data: ClinicalTrials.gov</span>');
+      h.push('</div>');
+      h.push('<div style="display:flex;flex-direction:column;gap:10px;" data-rmd="trials-results">');
+      for (var ti = 0; ti < st.trialsResults.length; ti++) {
+        h.push(trialCardHtml(st.trialsResults[ti]));
+      }
+      h.push('</div>');
+      if (st.trialsNextToken) {
+        h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="trials-more"' + (st.trialsBusy ? " disabled" : "") + '>Load more trials</button>');
+      }
+    }
+    return h.join("\n");
+  }
+
+  function trialCardHtml(tr) {
+    var h = [];
+    h.push('<div class="rmd-trial-card" style="border:1px solid var(--rmd-line);border-radius:10px;padding:12px;background:var(--rmd-bg);display:flex;flex-direction:column;gap:8px;">');
+    h.push('<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">');
+    if (tr.nct) {
+      h.push('<a class="rmd-badge rmd-badge-pill" href="https://clinicaltrials.gov/study/' + encodeURIComponent(tr.nct) + '" target="_blank" rel="noopener" style="text-decoration:none;">' + esc(tr.nct) + '</a>');
+    }
+    if (tr.status) h.push('<span class="rmd-badge rmd-badge-soft">' + esc(tr.status) + '</span>');
+    if (tr.phase) h.push('<span class="rmd-badge rmd-badge-soft">' + esc(tr.phase) + '</span>');
+    h.push('<span class="rmd-badge ' + (tr.resultsPosted ? "rmd-badge-pill" : "rmd-badge-soft") + '">' + (tr.resultsPosted ? "Results posted" : "No results posted") + '</span>');
+    h.push('</div>');
+    h.push('<div style="font-weight:600;font-size:14px;line-height:1.35;overflow-wrap:anywhere;">' + esc(tr.title || "Untitled trial") + '</div>');
+    if (tr.enrollment !== null && tr.enrollment !== undefined) {
+      h.push('<div class="rmd-row-meta" style="font-variant-numeric:tabular-nums;">Enrollment: ' + esc(String(tr.enrollment)) + '</div>');
+    }
+    if (tr.arms && tr.arms.length) {
+      h.push('<div style="display:flex;flex-direction:column;gap:4px;">');
+      h.push('<span class="rmd-section-label">Arms</span>');
+      for (var ai = 0; ai < tr.arms.length; ai++) {
+        var arm = tr.arms[ai] || {};
+        var armLine = (arm.label || "Arm") + (arm.type ? " (" + arm.type + ")" : "") + (arm.description ? ": " + arm.description : "");
+        h.push('<div class="rmd-muted" style="font-size:12.5px;line-height:1.4;overflow-wrap:anywhere;">' + esc(armLine) + '</div>');
+      }
+      h.push('</div>');
+    }
+    if (tr.primaryOutcome && tr.primaryOutcome.length) {
+      h.push('<div style="display:flex;flex-direction:column;gap:4px;">');
+      h.push('<span class="rmd-section-label">Primary outcomes</span>');
+      for (var oi = 0; oi < tr.primaryOutcome.length; oi++) {
+        var out = tr.primaryOutcome[oi] || {};
+        var outLine = (out.measure || "Outcome") + (out.timeFrame ? " (" + out.timeFrame + ")" : "");
+        h.push('<div class="rmd-muted" style="font-size:12.5px;line-height:1.4;overflow-wrap:anywhere;">' + esc(outLine) + '</div>');
+      }
+      h.push('</div>');
+    }
+    h.push('<div class="rmd-row-meta" data-rmd="trials-credit">Data: ClinicalTrials.gov</div>');
+    h.push('</div>');
+    return h.join("\n");
+  }
+
+  function loadTrialsAvailability(container, project) {
+    if (!trialsFlagOn() || st.trialsStatusLoaded || st.trialsStatusLoading) return;
+    if (!project || (!project.serverId && String(project.id || "").indexOf("loc_") === 0)) {
+      st.trialsStatusLoaded = true;
+      st.trialsAvailable = false;
+      return;
+    }
+    var mySeq = ++trialsProbeSeq;
+    st.trialsStatusLoading = true;
+    SMD.api.request("GET", "/v1/projects/" + encodeURIComponent(apiPidFor(project)) + "/trials").then(function (data) {
+      if (mySeq !== trialsProbeSeq) return;
+      st.trialsStatusLoading = false;
+      st.trialsStatusLoaded = true;
+      st.trialsAvailable = !!(data && data.available !== false);
+      if (!st.trialsAvailable && st.database === "clinicaltrials") st.database = "pubmed";
+      render(container);
+    }).catch(function () {
+      if (mySeq !== trialsProbeSeq) return;
+      st.trialsStatusLoading = false;
+      st.trialsStatusLoaded = true;
+      st.trialsAvailable = false;
+      if (st.database === "clinicaltrials") st.database = "pubmed";
+      render(container);
+    });
+  }
+
+  function handleTrialsUnavailable(container) {
+    st.trialsBusy = false;
+    st.trialsAvailable = false;
+    st.trialsStatusLoaded = true;
+    st.trialsError = null;
+    st.trialsResults = [];
+    st.trialsNextToken = null;
+    st.trialsSearched = false;
+    if (st.database === "clinicaltrials") st.database = "pubmed";
+    render(container);
+  }
+
+  function isUnavailableResponseErr(err) {
+    if (!err) return false;
+    if (err.code === "not_found" || err.code === "search_unconfigured" || err.code === "network") return true;
+    if (err.status === 404 && err.code !== "trial_not_found" && err.code !== "project_not_found") return true;
+    if (err.status >= 500) return true;
+    return false;
+  }
+
+  function runTrialsNctLookup(container, project) {
+    var nct = String(st.trialsNct || "").trim().toUpperCase();
+    st.trialsNct = nct;
+    if (!/^NCT\d{8}$/.test(nct)) {
+      st.trialsError = "Enter a valid NCT ID (NCT followed by 8 digits, e.g. NCT04280705).";
+      render(container);
+      return;
+    }
+    if (!project.serverId && String(project.id || "").indexOf("loc_") === 0) {
+      handleTrialsUnavailable(container);
+      return;
+    }
+    st.trialsBusy = true;
+    st.trialsError = null;
+    st.trialsSearched = true;
+    st.trialsNextToken = null;
+    render(container);
+    var mySeq = ++trialsSeq;
+    SMD.api.request("GET", "/v1/projects/" + encodeURIComponent(apiPidFor(project)) + "/trials/" + encodeURIComponent(nct)).then(function (data) {
+      if (mySeq !== trialsSeq) return;
+      if (!data || data.available === false) {
+        handleTrialsUnavailable(container);
+        return;
+      }
+      st.trialsBusy = false;
+      st.trialsResults = data.trial ? [data.trial] : [];
+      st.trialsTotalCount = st.trialsResults.length;
+      st.trialsNextToken = null;
+      render(container);
+    }).catch(function (err) {
+      if (mySeq !== trialsSeq) return;
+      if (err && err.code === "trial_not_found") {
+        st.trialsBusy = false;
+        st.trialsResults = [];
+        st.trialsTotalCount = 0;
+        st.trialsError = "No trial found for " + nct + ".";
+        render(container);
+        return;
+      }
+      if (isUnavailableResponseErr(err)) {
+        handleTrialsUnavailable(container);
+        return;
+      }
+      st.trialsBusy = false;
+      st.trialsError = (err && err.message) || "Could not look up trial.";
+      render(container);
+    });
+  }
+
+  function runTrialsSearch(container, project, pageToken) {
+    var cond = String(st.trialsCondition || "").trim();
+    var intr = String(st.trialsIntervention || "").trim();
+    var phase = String(st.trialsPhase || "").trim();
+    var status = String(st.trialsStatus || "").trim();
+    if (!cond && !intr && !phase && !status) {
+      st.trialsError = "Enter a condition, intervention, phase, or status to search trials.";
+      render(container);
+      return;
+    }
+    if (checkQueryPhi(cond) || checkQueryPhi(intr)) {
+      st.trialsError = "Query looks like it contains personal details. Remove patient identifiers before searching.";
+      render(container);
+      return;
+    }
+    if (!project.serverId && String(project.id || "").indexOf("loc_") === 0) {
+      handleTrialsUnavailable(container);
+      return;
+    }
+    st.trialsBusy = true;
+    st.trialsError = null;
+    st.trialsSearched = true;
+    if (!pageToken) {
+      st.trialsResults = [];
+      st.trialsNextToken = null;
+      st.trialsTotalCount = 0;
+    }
+    render(container);
+    var payload = { pageSize: 20 };
+    if (cond) payload.condition = cond;
+    if (intr) payload.intervention = intr;
+    if (phase) payload.phase = phase;
+    if (status) payload.status = status;
+    if (pageToken) payload.pageToken = pageToken;
+    var mySeq = ++trialsSeq;
+    SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPidFor(project)) + "/trials/search", payload).then(function (data) {
+      if (mySeq !== trialsSeq) return;
+      if (!data || data.available === false) {
+        handleTrialsUnavailable(container);
+        return;
+      }
+      st.trialsBusy = false;
+      var items = (data && data.studies) || [];
+      st.trialsResults = pageToken ? st.trialsResults.concat(items) : items;
+      st.trialsNextToken = (data && data.nextPageToken) || null;
+      st.trialsTotalCount = (data && typeof data.totalCount === "number") ? data.totalCount : st.trialsResults.length;
+      render(container);
+    }).catch(function (err) {
+      if (mySeq !== trialsSeq) return;
+      if (isUnavailableResponseErr(err)) {
+        handleTrialsUnavailable(container);
+        return;
+      }
+      st.trialsBusy = false;
+      st.trialsError = (err && err.message) || "Could not search ClinicalTrials.gov.";
+      render(container);
+    });
+  }
+
   function runDedup(container, project) {
     st.dedupBusy = true;
     st.dedupError = null;
@@ -722,6 +1054,30 @@
     on('[data-rmd="search-more"]', function () { load(container, st.nextCursor); });
     on('[data-rmd="import-run"]', function () { runImport(container, project); });
     on('[data-rmd="dedup-run"]', function () { runDedup(container, project); });
+    on('[data-rmd="trials-nct-lookup"]', function () { runTrialsNctLookup(container, project); });
+    on('[data-rmd="trials-search"]', function () { runTrialsSearch(container, project, null); });
+    on('[data-rmd="trials-more"]', function () {
+      if (st.trialsNextToken) runTrialsSearch(container, project, st.trialsNextToken);
+    });
+
+    var trNct = container.querySelector("#rmd_trials_nct");
+    if (trNct) {
+      trNct.oninput = function () { st.trialsNct = this.value; };
+      trNct.onkeydown = function (ev) {
+        if (ev.key === "Enter" || ev.keyCode === 13) {
+          ev.preventDefault();
+          runTrialsNctLookup(container, project);
+        }
+      };
+    }
+    var trCond = container.querySelector("#rmd_trials_cond");
+    if (trCond) trCond.oninput = function () { st.trialsCondition = this.value; };
+    var trIntr = container.querySelector("#rmd_trials_intr");
+    if (trIntr) trIntr.oninput = function () { st.trialsIntervention = this.value; };
+    var trPhase = container.querySelector("#rmd_trials_phase");
+    if (trPhase) trPhase.onchange = function () { st.trialsPhase = this.value; };
+    var trStatus = container.querySelector("#rmd_trials_status");
+    if (trStatus) trStatus.onchange = function () { st.trialsStatus = this.value; };
 
     var tq = container.querySelector("#rmd_topic_q");
     if (tq) {

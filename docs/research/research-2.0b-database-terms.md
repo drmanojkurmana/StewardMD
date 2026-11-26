@@ -1,10 +1,11 @@
 # ResearchMD Database Integration Terms and Compliance Guide
 
-This document defines the legal, commercial, and technical requirements for integrating four core scholarly literature databases into ResearchMD, a systematic-review module inside the paid StewardMD mobile medical application:
+This document defines the legal, commercial, and technical requirements for integrating core scholarly literature and clinical trial databases into ResearchMD, a systematic-review module inside the paid StewardMD mobile medical application:
 1. PubMed / NCBI Entrez Programming Utilities (E-utilities)
 2. Europe PMC RESTful Web Service
 3. Crossref REST API
 4. Semantic Scholar Academic Graph API (S2AG)
+5. ClinicalTrials.gov API v2
 
 Each section cites current official documentation pages, specifies terms for commercial use inside a paid mobile app, details rate limits and parameters, sets caching and retention boundaries, and outlines attribution rules. The document concludes with a numbered list of strict implementation rules for the connector builder.
 
@@ -14,18 +15,18 @@ Where a fact cannot be confirmed directly from an official documentation page, i
 
 ## 1. Executive Comparison
 
-| Dimension | PubMed / NCBI E-utilities | Europe PMC REST | Crossref REST | Semantic Scholar (S2AG) |
-|---|---|---|---|---|
-| Commercial use allowed | Yes (no royalties or fees) | Yes (metadata); full text depends on license | Yes (CC0 metadata) | No by default; requires separate commercial agreement |
-| Formal agreement needed | None | None | None (unless paying for Metadata Plus) | Yes (commercial/expanded license agreement with AI2) |
-| API key status | Optional (strongly recommended) | Not applicable (no key system exists) | Optional (polite pool via email; token for Plus) | Practically required (free key for testing; commercial key for prod) |
-| Rate limit without key | 3 req/sec per IP | ~10 req/sec fair use (UNCONFIRMED hard cap) | 5 req/sec (concurrency 1) | Shared global 1,000 req/sec pool (heavy throttling) |
-| Rate limit with key | 10 req/sec | N/A | 10 req/sec (concurrency 5) in Polite Pool; 64+ in Plus | 1 req/sec standard key; higher limits custom/negotiated |
-| Required identification | `tool` and `email` params | Descriptive `User-Agent` | `User-Agent` and/or `mailto` query param | `x-api-key` header |
-| Metadata storage allowed | Yes (must maintain freshness or disclaim) | Yes | Yes (CC0 dedication) | No for commercial redistribution under default terms |
-| Abstract storage allowed | Yes, subject to third-party copyright | Yes, subject to publisher copyright | Yes, subject to publisher copyright | No for commercial redistribution under default terms |
-| Full text retrieval | None (PMID only; PMC OA via separate tools) | Yes (XML/PDF for Open Access subset) | None (metadata and publisher links only) | None (abstracts and citation graphs only) |
-| Blockers for paid app | None (must avoid endorsement claim and credit NLM) | Ingesting CC-BY-NC full text violates license | None for metadata | Default license strictly forbids commercial use |
+| Dimension | PubMed / NCBI E-utilities | Europe PMC REST | Crossref REST | Semantic Scholar (S2AG) | ClinicalTrials.gov API v2 |
+|---|---|---|---|---|---|
+| Commercial use allowed | Yes (no royalties or fees) | Yes (metadata); full text depends on license | Yes (CC0 metadata) | No by default; requires separate commercial agreement | Yes at no charge under U.S. Gov / NLM terms (no proprietary claim; sponsor text subject to third-party rights) |
+| Formal agreement needed | None | None | None (unless paying for Metadata Plus) | Yes (commercial/expanded license agreement with AI2) | None (accepted by querying API) |
+| API key status | Optional (strongly recommended) | Not applicable (no key system exists) | Optional (polite pool via email; token for Plus) | Practically required (free key for testing; commercial key for prod) | Not applicable (open public API, no key required) |
+| Rate limit without key | 3 req/sec per IP | ~10 req/sec fair use (UNCONFIRMED hard cap) | 5 req/sec (concurrency 1) | Shared global 1,000 req/sec pool (heavy throttling) | ~50 req/min per IP guideline (UNCONFIRMED hard numeric ceiling on all endpoints) |
+| Rate limit with key | 10 req/sec | N/A | 10 req/sec (concurrency 5) in Polite Pool; 64+ in Plus | 1 req/sec standard key; higher limits custom/negotiated | N/A |
+| Required identification | `tool` and `email` params | Descriptive `User-Agent` | `User-Agent` and/or `mailto` query param | `x-api-key` header | Descriptive `User-Agent` recommended (no mandatory auth header) |
+| Metadata storage allowed | Yes (must maintain freshness or disclaim) | Yes | Yes (CC0 dedication) | No for commercial redistribution under default terms | Transient/freshness-bounded caching (must keep current + show processing date; 24 h HTTP cache) |
+| Abstract storage allowed | Yes, subject to third-party copyright | Yes, subject to publisher copyright | Yes, subject to publisher copyright | No for commercial redistribution under default terms | N/A (registry protocol summary fields only; subject to sponsor third-party copyright where applicable) |
+| Full text retrieval | None (PMID only; PMC OA via separate tools) | Yes (XML/PDF for Open Access subset) | None (metadata and publisher links only) | None (abstracts and citation graphs only) | None (trial protocol/results registry records only) |
+| Blockers for paid app | None (must avoid endorsement claim and credit NLM) | Ingesting CC-BY-NC full text violates license | None for metadata | Default license strictly forbids commercial use | None for registry metadata with attribution (`Data: ClinicalTrials.gov`), freshness caching, and no email harvesting |
 
 ---
 
@@ -298,7 +299,58 @@ Where a fact cannot be confirmed directly from an official documentation page, i
 
 ---
 
-## 6. Numbered Implementation Rules for the Connector Builder
+## 6. ClinicalTrials.gov API v2
+
+### 6.1 Official Documentation and Policy URLs
+- ClinicalTrials.gov REST API Documentation: https://clinicaltrials.gov/data-api/api
+- ClinicalTrials.gov About the API: https://clinicaltrials.gov/data-api/about-api
+- ClinicalTrials.gov Terms and Conditions: https://clinicaltrials.gov/about-site/terms-conditions
+- OpenAPI 3.0 Specification (`ctg-oas-v2.yaml`): https://clinicaltrials.gov/api/oas/v2
+
+### 6.2 Commercial Use and Agreement Requirements
+- Commercial use allowed: Yes, at no charge. ClinicalTrials.gov is operated by the U.S. National Library of Medicine (NLM) at the National Institutes of Health (NIH). Accessing or querying the API signifies acceptance of the ClinicalTrials.gov Terms and Conditions.
+- Agreement needed: No formal bilateral agreement or registration is required.
+- Proprietary-rights and representation prohibition: Users must not assert any proprietary rights to any portion of the database, nor represent the database or any part of it as anything other than a U.S. Government database.
+- Copyright and third-party caveat: ClinicalTrials.gov data carry international copyright outside the United States and its territories/possessions, and specific submitted study text may be subject to third-party (study sponsor or investigator) copyrights. Blanket commercial bulk-redistribution rights for sponsor-authored narrative descriptions without sponsor permission are UNCONFIRMED; ResearchMD restricts output to normalized structured trial fields (`nct`, `title`, `phase`, `status`, `enrollment`, `arms`, `primaryOutcome`, `resultsPosted`) and displays source attribution.
+- Email harvesting prohibition: ClinicalTrials.gov Terms and Conditions explicitly prohibit using any email addresses extracted from the database for marketing or promotional purposes. ResearchMD strips and never retains contact or investigator email fields.
+
+### 6.3 API Key Details
+- Status: Neither required nor used. ClinicalTrials.gov API v2 is an unauthenticated public REST API.
+
+### 6.4 Rate Limits
+- Operational rate limit: Commonly documented operational limit is approximately 50 requests per minute per IP address (UNCONFIRMED whether a fixed hard quota applies identically across all endpoints and burst windows).
+- Connector throttling: ResearchMD enforces a strict token bucket of `50 / 60` requests per second (~0.83 req/sec) across the server connector, plus exponential backoff on HTTP 429 and 5xx responses respecting `Retry-After` headers.
+
+### 6.5 Required Parameters and Headers
+- Base URL: `https://clinicaltrials.gov/api/v2`
+- Search endpoint: `GET /studies`
+  - `query.cond`: Condition or disease search string.
+  - `query.intr`: Intervention or treatment search string.
+  - `filter.overallStatus`: Comma-separated status enum values (e.g., `RECRUITING`, `NOT_YET_RECRUITING`, `ACTIVE_NOT_RECRUITING`, `COMPLETED`, `TERMINATED`, `WITHDRAWN`, `SUSPENDED`, `UNKNOWN`).
+  - `filter.advanced`: Essie search expression for field-level filtering such as trial phase (e.g., `AREA[Phase]PHASE3` or `AREA[Phase](PHASE2 OR PHASE3)`). Note: `filter.phase` is not part of the `ctg-oas-v2.yaml` `/studies` query parameter list; phase filtering uses `filter.advanced`.
+  - `pageSize`: Results per page (integer 1 to 1000).
+  - `pageToken`: Opaque pagination token from `nextPageToken`.
+- Single-study lookup endpoint: `GET /studies/{nctId}` (where `nctId` matches `^NCT\d{8}$`).
+- Headers: `Accept: application/json` and descriptive `User-Agent` (`StewardMD-ResearchMD/1.0 (https://stewardmd.in; mailto:support@stewardmd.in)` when contact email is configured).
+
+### 6.6 Data Storage, Retention, and Redistribution Rules
+- Freshness and modification notice: Under ClinicalTrials.gov Terms and Conditions, distributed data must be kept current, carry the processing/retrieval date, and describe modifications made to the content.
+- Caching boundary: ResearchMD caches normalized ClinicalTrials.gov responses for at most 24 hours (TTL 86,400 seconds via Cloudflare Cache API / `caches.default`) and does not build a permanent bulk mirror or AACT warehouse copy inside D1.
+
+### 6.7 Attribution Rules
+- Mandatory attribution: Any view displaying ClinicalTrials.gov records must credit `ClinicalTrials.gov` (e.g., `"Data: ClinicalTrials.gov"`), avoid implying U.S. Government / NIH / NLM endorsement, and preserve `NCT` identifiers linking to `https://clinicaltrials.gov/study/{nct}`.
+
+### 6.8 Paid App Feasibility and Blockers
+- Anything blocking use in a paid app: None for on-demand trial search and lookup with normalized summaries, provided:
+  1. No proprietary rights are claimed over the database.
+  2. Contact/investigator email addresses are stripped and never stored or used.
+  3. Responses are cached with a 24 h TTL so records remain current.
+  4. `"Data: ClinicalTrials.gov"` credit is shown wherever trial records are displayed.
+  5. Outbound rate is capped at <= 50 requests/minute (`50 / 60` req/s bucket).
+
+---
+
+## 7. Numbered Implementation Rules for the Connector Builder
 
 The connector builder must implement the literature search and extraction pipeline in compliance with the following rules:
 
@@ -375,3 +427,9 @@ The connector builder must implement the literature search and extraction pipeli
     - In Europe PMC, use `cursorMark` for result sets spanning multiple pages.
     - In Crossref, use `cursor=*` deep pagination rather than numeric `offset` jumps.
     - In NCBI, use `epost` to stage ID lists on the Entrez History server and retrieve records using `WebEnv` and `query_key` in batches of 200 to 500 records.
+
+20. ClinicalTrials.gov API v2 compliance:
+    - Rate-limit all requests to <= 50 req/min (`createBucket(50 / 60)`).
+    - Map condition to `query.cond`, intervention to `query.intr`, status to `filter.overallStatus`, phase to `filter.advanced` (`AREA[Phase]...`), and validate NCT IDs against `^NCT\d{8}$`.
+    - Normalise exclusively to `{nct, title, phase, status, enrollment, arms, primaryOutcome, resultsPosted, source: "ClinicalTrials.gov"}` so no investigator/contact emails or unrequested fields are retained.
+    - Cache normalized responses for 24 h (86,400 s) and show `"Data: ClinicalTrials.gov"` wherever data is rendered.

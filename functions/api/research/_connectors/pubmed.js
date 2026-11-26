@@ -27,17 +27,33 @@ const KEYED_BUCKET = createBucket(10);
 const ANON_BUCKET = createBucket(3);
 const FILTER_KEYS = ["dateFrom", "languages", "publicationTypes"];
 
+export function resolveNcbiApiKey(src) {
+  if (!src || typeof src !== "object") return "";
+  const direct = String(src.apiKey || "").trim();
+  if (direct) return direct;
+  const env = src.env && typeof src.env === "object" ? src.env : src;
+  const primary = String(env.RESEARCH_NCBI_API_KEY || "").trim();
+  if (primary) return primary;
+  return String(env.NCBI_API_KEY || "").trim();
+}
+
+export function selectBucket(opts = {}) {
+  const apiKey = typeof opts === "string" ? String(opts).trim() : resolveNcbiApiKey(opts);
+  return apiKey ? KEYED_BUCKET : ANON_BUCKET;
+}
+
 function optsOf(opts = {}) {
   const email = requireContactEmail(opts);
+  const apiKey = resolveNcbiApiKey(opts);
   return {
     email,
-    apiKey: String(opts.apiKey || "").trim(),
+    apiKey,
     fetchImpl: opts.fetch,
     sleep: opts.sleep,
     random: opts.random,
     now: opts.now || Date.now,
     deadline: opts.deadline === undefined ? Infinity : opts.deadline,
-    bucket: opts.bucket || (String(opts.apiKey || "").trim() ? KEYED_BUCKET : ANON_BUCKET),
+    bucket: opts.bucket || selectBucket(apiKey),
   };
 }
 

@@ -11,12 +11,18 @@
  * within the document (threat-model.md untrusted-input rules).
  */
 import { ConnectorError, createBucket, fetchWithRetry, requireContactEmail } from "./_http.js";
+import { resolveNcbiApiKey } from "./pubmed.js";
 
 const BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/";
 const TOOL = "StewardMD_ResearchMD";
 const BATCH = 200;
 const KEYED_BUCKET = createBucket(10);
 const ANON_BUCKET = createBucket(3);
+
+export function selectBucket(opts = {}) {
+  const apiKey = typeof opts === "string" ? String(opts).trim() : resolveNcbiApiKey(opts);
+  return apiKey ? KEYED_BUCKET : ANON_BUCKET;
+}
 
 function decodeEntities(s) {
   return String(s)
@@ -105,11 +111,11 @@ export function parseArticle(block) {
  * (injectable, same as the other connectors). */
 export async function efetchAbstracts(ids, opts = {}) {
   const email = requireContactEmail(opts);
-  const apiKey = String(opts.apiKey || "").trim();
+  const apiKey = resolveNcbiApiKey(opts);
   const transport = {
     fetchImpl: opts.fetch, sleep: opts.sleep, random: opts.random,
     now: opts.now || Date.now, deadline: opts.deadline === undefined ? Infinity : opts.deadline,
-    bucket: opts.bucket || (apiKey ? KEYED_BUCKET : ANON_BUCKET),
+    bucket: opts.bucket || selectBucket(apiKey),
   };
   const out = new Map();
   const list = (ids || []).map(String).filter((id) => /^\d+$/.test(id));
