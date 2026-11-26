@@ -612,7 +612,7 @@ test("PHI gate: 100% of the synthetic block set blocked, clean set passes (share
   assert.ok(PHI_VECTORS.cases.length >= 90, "vector file is substantial");
   let blocked = 0, allowed = 0;
   for (const c of PHI_VECTORS.cases) {
-    const r = scan(c.text);
+    const r = scan(c.text, c.mode === "user" ? { mode: "user" } : undefined);
     if (c.expect === "block") {
       blocked++;
       assert.equal(r.blocked, true, c.id + " must block: " + c.text);
