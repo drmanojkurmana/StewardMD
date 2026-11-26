@@ -34,7 +34,7 @@ mock.module("../functions/api/ai/[[path]].js", {
 });
 
 const { onRequest } = await import("../functions/api/research/[[path]].js");
-const { resolveLink } = await import("../functions/api/research/_paper_card.js");
+const { resolveLink, extractPaperFindings, extractResultsSectionFromXml } = await import("../functions/api/research/_paper_card.js");
 const { parseFindings } = await import("../functions/api/research/_auto_studies.js");
 const SCHEMA = readFileSync(new URL("../functions/db/research_schema.sql", import.meta.url), "utf8");
 
@@ -67,7 +67,7 @@ function articleXml(opts) {
     "</ArticleIdList></PubmedData></PubmedArticle>";
 }
 
-const net = { calls: [], articles: new Map(), idconv: new Map(), crossref: new Map(), pages: new Map() };
+const net = { calls: [], articles: new Map(), idconv: new Map(), crossref: new Map(), pages: new Map(), fullTextXml: new Map() };
 
 function jsonRes(obj, status = 200) {
   return new Response(JSON.stringify(obj), { status, headers: { "content-type": "application/json" } });
@@ -91,7 +91,15 @@ globalThis.fetch = async (url) => {
     const pmid = rec && rec.pmid ? rec.pmid : "";
     return jsonRes({ esearchresult: { idlist: pmid ? [pmid] : [] } });
   }
+  if (u.includes("/fullTextXML")) {
+    const pmcid = (u.match(/\/(PMC\d+)\/fullTextXML/i) || ["", ""])[1].toUpperCase();
+    return net.fullTextXml.has(pmcid) ? textRes(net.fullTextXml.get(pmcid)) : textRes("no", 404);
+  }
   if (u.includes("efetch.fcgi")) {
+    if (parsed.searchParams.get("db") === "pmc") {
+      const id = String(parsed.searchParams.get("id") || "").toUpperCase();
+      return net.fullTextXml.has(id) ? textRes(net.fullTextXml.get(id)) : textRes("no", 404);
+    }
     const ids = (parsed.searchParams.get("id") || "").split(",").filter(Boolean);
     const xml = ids.map((id) => net.articles.get(id) || "").join("");
     return textRes("<PubmedArticleSet>" + xml + "</PubmedArticleSet>");
@@ -310,8 +318,9 @@ describe("research paper card", { concurrency: false, skip: SKIP }, () => {
     assert.equal(card.findings.length, 2);
     assert.deepEqual(card.findings[0], {
       format: "counts", events1: 386, total1: 2373, events2: 502, total2: 2371,
-      quote: "Death was 386/2373 vs 502/2371.",
+      quote: "Death was 386/2373 vs 502/2371.", source: "Abstract",
     });
+    assert.equal(card.findings[1].source, "Abstract");
     assert.equal(card.findings[1].measure, "HR");
     assert.equal(card.findings[1].format, "estimate");
     assert.equal(card.findings[1].estimate, 0.74);
@@ -567,5 +576,109 @@ describe("research paper card", { concurrency: false, skip: SKIP }, () => {
 
     const unauth = await call(env, "POST", "v1/paper-card", "", { link: "10.1000/bare.doi" });
     assert.equal(unauth.http, 401);
+  });
+
+  test("deterministic extractor pulls percentages, mean +/- SD, AUC, OR/RR/HR with CI, sensitivity/specificity, p values, and n with source quotes", () => {
+    const syntheticAbstract = [
+      "We enrolled 152 adults (n = 152) with severe sepsis.",
+      "In-hospital mortality was 38.8% (59/152).",
+      "Non-survivors had higher IL-6 (104.87 \u00b1 28.45 pg/mL) and PT-INR (1.97 +/- 0.50).",
+      "AUCs were 0.995 for IL-6, 0.606 for PT-INR, and 0.94 for the combined model.",
+      "IL-6 achieved 100% sensitivity and 92.5% specificity.",
+      "Adjusted odds ratio was 3.45 (95% CI 1.80 to 6.61), p = 0.002.",
+      "Admission lactate differed significantly between survivors and non-survivors (p < 0.001)."
+    ].join(" ");
+
+    const rows = extractPaperFindings(syntheticAbstract, "Abstract", { max: 12 });
+    const has = (pred) => rows.some(pred);
+    assert.ok(has((r) => r.kind === "n" && /n = 152/.test(r.value) && r.quote.includes("n = 152") && r.source === "Abstract"), "extracts n with quote");
+    assert.ok(has((r) => r.kind === "percent" && /38\.8%/.test(r.value) && r.quote.includes("38.8%")), "extracts percentage with quote");
+    assert.ok(has((r) => r.kind === "mean_sd" && /104\.87 \u00b1 28\.45 pg\/mL/.test(r.value) && /1\.97 \u00b1 0\.50/.test(r.value) && r.quote.includes("104.87")), "extracts mean +/- SD with quote");
+    assert.ok(has((r) => r.kind === "auc" && /0\.995/.test(r.value) && /0\.94/.test(r.value) && r.quote.includes("0.995")), "extracts AUC with quote");
+    assert.ok(has((r) => r.kind === "diagnostic" && /100%/.test(r.value) && /92\.5%/.test(r.value) && r.quote.includes("sensitivity")), "extracts sensitivity and specificity with quote");
+    assert.ok(has((r) => r.format === "estimate" && r.measure === "OR" && r.estimate === 3.45 && r.p === "=0.002" && r.quote.includes("3.45")), "extracts OR with CI and p value");
+    assert.ok(has((r) => r.kind === "p_value" && r.p === "<0.001" && r.quote.includes("p < 0.001")), "extracts standalone p value with quote");
+
+    const combinedDiag = extractPaperFindings("IL-6 showed 100% sensitivity and specificity at cutoff 75 pg/mL.", "Abstract");
+    assert.ok(combinedDiag.some((r) => r.kind === "diagnostic" && /100%/.test(r.value)));
+
+    const aucCi = extractPaperFindings("The combined model AUC was 0.94 (95% CI 0.89 to 0.99).", "Abstract");
+    assert.ok(aucCi.some((r) => r.kind === "auc" && /0\.94/.test(r.value) && /0\.89 to 0\.99/.test(r.value)));
+  });
+
+  test("free full text XML is fetched, Results numbers labeled Full text, and sent to Explain with MaiK with pmid/doi cache", async () => {
+    resetLlm();
+    net.calls.length = 0;
+    net.articles.set("40959673", articleXml({
+      pmid: "40959673",
+      pmcid: "PMC9999999",
+      doi: "10.7759/cureus.99999",
+      title: "Prognostic utility of biomarkers in severe sepsis",
+      journal: "Cureus",
+      year: 2025,
+      authors: ["Kurmana MK", "Kumhar M"],
+      types: ["Observational Study"],
+      sections: [
+        { label: "BACKGROUND", text: "Sepsis causes high ICU mortality." },
+        { label: "RESULTS", text: "In-hospital mortality was 38.8%. IL-6 was 104.87 \u00b1 28.45 pg/mL." },
+        { label: "CONCLUSIONS", text: "IL-6 predicted mortality." },
+      ],
+    }));
+    net.fullTextXml.set("PMC9999999",
+      "<article><body>" +
+      "<sec sec-type=\"methods\"><title>Methods</title><p>We screened 999 records on 2025-01-15.</p></sec>" +
+      "<sec sec-type=\"results\"><title>Results</title>" +
+      "<p>ROC analysis showed an AUC of 0.995 for IL-6 (95% CI 0.980 to 1.000), p &lt; 0.001.</p>" +
+      "<sec><title>Diagnostic accuracy</title><p>IL-6 had 100% sensitivity and 94.6% specificity at 75 pg/mL.</p></sec>" +
+      "</sec>" +
+      "</body></article>"
+    );
+
+    const parsedXml = extractResultsSectionFromXml(net.fullTextXml.get("PMC9999999"));
+    assert.ok(parsedXml.resultsText.includes("0.995"), "Results extractor captures parent Results sec");
+    assert.ok(parsedXml.resultsText.includes("94.6%"), "Results extractor captures nested subsection");
+    assert.equal(parsedXml.resultsText.includes("999 records"), false, "Methods sec excluded from Results");
+
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 100);
+    const project = await makeProject(env);
+
+    const cardRes = await call(env, "POST", "v1/projects/" + project.id + "/paper-card", "tok-alice", {
+      link: "https://pubmed.ncbi.nlm.nih.gov/40959673/",
+    });
+    assert.equal(cardRes.http, 200, JSON.stringify(cardRes));
+    const card = cardRes.card;
+    assert.equal(card.freeFullText, true);
+    assert.ok(card.findings.some((f) => f.source === "Abstract" && f.kind === "percent" && /38\.8%/.test(f.value)));
+    assert.ok(card.findings.some((f) => f.source === "Abstract" && f.kind === "mean_sd" && /104\.87/.test(f.value)));
+    assert.ok(card.findings.some((f) => f.source === "Full text" && f.kind === "auc" && /0\.995/.test(f.value)));
+    assert.ok(card.findings.some((f) => f.source === "Full text" && f.kind === "diagnostic" && /100%/.test(f.value) && /94\.6%/.test(f.value)));
+    assert.ok(card.fullTextResults.includes("94.6%"));
+
+    // Explain with MaiK receives Full text Results and validates numbers from Full text too
+    resetLlm(async () => JSON.stringify({
+      population: "152 adults with severe sepsis",
+      intervention: "Admission IL-6, PT-INR, and HDL",
+      comparison: "Survivors vs non-survivors",
+      outcome: "In-hospital mortality",
+      design: "Observational study",
+      mainResult: "Mortality was 38.8%; IL-6 AUC was 0.995 with 94.6% specificity.",
+      conclusion: "IL-6 strongly predicts mortality."
+    }));
+    const exp1 = await call(env, "POST", "v1/projects/" + project.id + "/paper-card/explain", "tok-alice", { pmid: "40959673" });
+    assert.equal(exp1.http, 200, JSON.stringify(exp1));
+    assert.equal(llm.calls.length, 1);
+    const sentPrompt = llm.calls[0].parts[0].text;
+    assert.ok(sentPrompt.includes("Full text Results:"), "Full text Results sent to Explain with MaiK");
+    assert.ok(sentPrompt.includes("94.6% specificity"), "Full text Results content included in prompt");
+    assert.equal(exp1.card.ai.mainResult, "Mortality was 38.8%; IL-6 AUC was 0.995 with 94.6% specificity.");
+
+    // Second tap via DOI hits cache immediately with 0 LLM calls and costInr 0
+    const exp2 = await call(env, "POST", "v1/projects/" + project.id + "/paper-card/explain", "tok-alice", { doi: "10.7759/cureus.99999" });
+    assert.equal(exp2.http, 200, JSON.stringify(exp2));
+    assert.equal(llm.calls.length, 1);
+    assert.equal(exp2.costInr, 0);
+    assert.equal(exp2.card.method, "cache");
+    assert.equal(exp2.card.ai.mainResult, "Mortality was 38.8%; IL-6 AUC was 0.995 with 94.6% specificity.");
   });
 });
