@@ -93,10 +93,13 @@ function kvShim() {
     async delete(key) { m.delete(key); },
   };
 }
-function freshEnv() {
+/* Existing tests cover the override with its server switch ON; the F-01 block
+ * at the end covers the default (switch absent = hard block). */
+function freshEnv(extra = { RESEARCH_PHI_OVERRIDE: "1" }) {
   const D = d1();
   D._db.exec(SCHEMA);
   return {
+    ...extra,
     RESEARCH_MODE: "pilot",
     RESEARCH_DB: D,
     RESEARCH_CONTACT_EMAIL: "support@example.com",
@@ -320,5 +323,28 @@ describe("date mode on ai-draft", () => {
     const meta = JSON.parse(overrideAudit(env)[0].metadata_json);
     assert.deepEqual(meta.categories, ["dates"]);
     assert.deepEqual(meta.rules, ["full_date"]);
+  });
+});
+describe("legal review F-01: hard block by default (RESEARCH_PHI_OVERRIDE unset)", () => {
+  test("switch off -> 422 not overridable, and a valid-looking override is ignored", { skip: SKIP }, async () => {
+    defaultLlm();
+    const env = freshEnv({});
+    fundWallet(env, "alice@example.com", 10000);
+    const p = await makeProject(env, "tok-alice");
+    const r = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice", {
+      task: "case_report_draft",
+      input: { caseText: CASE_TEXT },
+    });
+    assert.equal(r.http, 422, JSON.stringify(r));
+    assert.equal(r.error.code, "phi_blocked");
+    assert.equal(r.overridable, false, "no override offered while the switch is off");
+    const o = await call(env, "POST", "v1/projects/" + p.id + "/ai-draft", "tok-alice", {
+      task: "case_report_draft",
+      input: { caseText: CASE_TEXT },
+      phiOverride: { accepted: true, termsVersion: "rmd-phi-override-v0" },
+    });
+    assert.equal(o.http, 422, "override ignored: still blocked");
+    assert.equal(llm.calls.length, 0, "no provider call");
+    assert.equal(overrideAudit(env).length, 0, "no override audit");
   });
 });

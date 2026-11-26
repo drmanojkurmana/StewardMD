@@ -68,7 +68,7 @@ export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, 
         await audit(db, projectId, uid, "ai_phi_blocked", refId, { categories, purpose });
         const payload = { error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
           categories };
-        if (opts.phiRoute === "ai-draft") payload.overridable = true;
+        if (opts.phiRoute === "ai-draft" && opts.phiOverridable === true) payload.overridable = true;
         return { error: json(payload, 422, { "x-request-id": requestId }) };
       }
     }

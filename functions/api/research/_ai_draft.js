@@ -170,10 +170,17 @@ function phiOverrideAccepted(body) {
   return !!(o && typeof o === "object" && !Array.isArray(o) &&
     o.accepted === true && o.termsVersion === PHI_OVERRIDE_TERMS_VERSION);
 }
-function overrideOpts(accepted) {
+/* Legal review F-01 (2026-11-27): the hard block is the default. The override
+ * exists only when the server switch RESEARCH_PHI_OVERRIDE is "1"; otherwise a
+ * phiOverride body is ignored and 422 responses are not marked overridable. */
+function overrideEnabled(env) {
+  return !!(env && env.RESEARCH_PHI_OVERRIDE === "1");
+}
+function overrideOpts(accepted, enabled) {
+  if (!enabled) return { phiOverridable: false };
   return accepted
-    ? { phiOverride: true, phiTermsVersion: PHI_OVERRIDE_TERMS_VERSION }
-    : {};
+    ? { phiOverridable: true, phiOverride: true, phiTermsVersion: PHI_OVERRIDE_TERMS_VERSION }
+    : { phiOverridable: true };
 }
 
 async function storeDraft(ctx, projectId, task, draft, model, costInr) {
@@ -1212,8 +1219,9 @@ export async function aiDraft(ctx, projectId, body) {
   if (TASKS.indexOf(task) < 0)
     return err(400, "invalid_task", "Unknown task. Use protocol, search_query, rob, checklist, title_abstract, thesis_to_paper, polish, iec_application, consent_form, ctri_fields, publication_consent, case_report_draft or manuscript_draft.", requestId);
   const input = inputOf(body);
-  const phiOverride = phiOverrideAccepted(body);
-  const overrideArgs = overrideOpts(phiOverride);
+  const canOverride = overrideEnabled(ctx.env);
+  const phiOverride = canOverride && phiOverrideAccepted(body);
+  const overrideArgs = overrideOpts(phiOverride, canOverride);
   if (task === "thesis_to_paper") return thesisTask(ctx, projectId, input);
   if (task === "polish") return polishTask(ctx, projectId, input, overrideArgs);
   if (task === "case_report_draft") {
@@ -1228,7 +1236,7 @@ export async function aiDraft(ctx, projectId, body) {
       return ctx.api.json({
         error: { code: "phi_blocked", message: "Patient identifiers detected in case text.", requestId },
         categories,
-        overridable: true,
+        overridable: canOverride,
       }, 422, { "x-request-id": requestId });
     }
     /* With a valid override the request-level scan in runUserAi writes the
