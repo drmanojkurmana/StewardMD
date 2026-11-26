@@ -1148,6 +1148,280 @@
 
   /* ---------- screen: journal ---------- */
 
+  var journalSeq = 0;
+  var JOURNAL_CHIPS = [
+    { key: "indian", label: "Indian" },
+    { key: "international", label: "International" },
+    { key: "open", label: "Open access" },
+    { key: "pubmed", label: "PubMed indexed" },
+    { key: "nofee", label: "No fee" }
+  ];
+
+  function checkValue(v) {
+    return v == null || v === "" ? "Check the author guidelines" : String(v);
+  }
+
+  function fmtInt(n) {
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function safeHttpUrl(u) {
+    u = String(u == null ? "" : u);
+    return /^https?:\/\//i.test(u) ? u : "";
+  }
+
+  function copyJournal(j) {
+    var out = {}, k;
+    for (k in j) if (Object.prototype.hasOwnProperty.call(j, k)) out[k] = j[k];
+    return out;
+  }
+
+  function normJournal(j) {
+    j = j || {};
+    var limits = j.wordLimits || {};
+    var wl = j.wordLimit;
+    if (wl == null) wl = limits.main;
+    var af = j.abstractFormat;
+    if ((af == null || af === "") && limits.abstract != null) af = "Structured abstract, up to " + limits.abstract + " words";
+    var numeric = Number(wl);
+    return {
+      id: j.id == null ? "" : String(j.id),
+      name: j.name ? String(j.name) : "Journal",
+      shortName: j.shortName ? String(j.shortName) : "",
+      publisher: j.publisher ? String(j.publisher) : "",
+      specialty: j.specialty ? String(j.specialty) : "",
+      isIndian: typeof j.isIndian === "boolean" ? j.isIndian : null,
+      openAccess: typeof j.openAccess === "boolean" ? j.openAccess : null,
+      indexedPubMed: typeof j.indexedPubMed === "boolean" ? j.indexedPubMed : null,
+      noFee: typeof j.noFee === "boolean" ? j.noFee : null,
+      wordLimit: isFinite(numeric) && numeric > 0 ? numeric : null,
+      abstractFormat: af == null || af === "" ? null : String(af),
+      referenceStyle: j.referenceStyle == null || j.referenceStyle === "" ? null : String(j.referenceStyle),
+      apcNote: j.apcNote == null || j.apcNote === "" ? null : String(j.apcNote),
+      url: safeHttpUrl(j.url || j.authorInstructionsUrl),
+      _best: false,
+      matchScore: null
+    };
+  }
+
+  function journalKey(j) {
+    return j.id ? "id:" + j.id : "name:" + j.name.toLowerCase();
+  }
+
+  function matchKeywords(title, paperLabel) {
+    var out = [], seen = {}, parts = String(title || "").split(/[^A-Za-z0-9]+/), i, w;
+    for (i = 0; i < parts.length; i++) {
+      w = parts[i];
+      if (w.length < 4 || seen[w.toLowerCase()]) continue;
+      seen[w.toLowerCase()] = true;
+      out.push(w.length > 80 ? w.slice(0, 80) : w);
+    }
+    out.push(paperLabel);
+    return out.slice(0, 20);
+  }
+
+  function designForPaperType(t) {
+    if (t === "rct") return "rct";
+    if (t === "sr") return "systematic_review";
+    if (t === "case") return "case_report";
+    return "observational";
+  }
+
+  function journalFromCatalogue(j) {
+    return {
+      id: j.id,
+      name: j.name,
+      shortName: j.shortName,
+      wordLimit: j.wordLimit == null ? DEFAULT_JOURNAL.wordLimit : j.wordLimit,
+      abstractFormat: j.abstractFormat || DEFAULT_JOURNAL.abstractFormat,
+      referenceStyle: j.referenceStyle || "vancouver",
+      publisher: j.publisher,
+      guidelinesUrl: j.url,
+      feeNote: j.apcNote
+    };
+  }
+
+  function selectedJournalKey() {
+    var sel = journalOf();
+    if (sel.custom || sel.id === "custom") return "custom";
+    if (!sel.id && (!sel.name || sel.name === DEFAULT_JOURNAL.name)) return "default";
+    return sel.id;
+  }
+
+  function setSelectedMark(el, on) {
+    var pill;
+    if (!el) return;
+    el.setAttribute("aria-pressed", on ? "true" : "false");
+    pill = el.querySelector(".rmd-journal-selected");
+    if (pill) {
+      if (on) pill.removeAttribute("hidden");
+      else pill.setAttribute("hidden", "");
+    }
+  }
+
+  function updateJournalSelection(container) {
+    var key = selectedJournalKey(), sel = journalOf();
+    var picks = container.querySelectorAll("[data-rmd-journal-id]"), i, on, item, summary;
+    setSelectedMark(container.querySelector('[data-rmd-journal="default"]'), key === "default");
+    setSelectedMark(container.querySelector('[data-rmd-journal="other"]'), key === "custom");
+    for (i = 0; i < picks.length; i++) {
+      on = key === picks[i].getAttribute("data-rmd-journal-id");
+      setSelectedMark(picks[i], on);
+      item = picks[i].parentNode;
+      if (item) item.setAttribute("data-selected", on ? "true" : "false");
+    }
+    summary = container.querySelector("#rmdJournalOtherSummary");
+    if (summary) {
+      if (key === "custom") {
+        summary.textContent = sel.name + ". Word limit: " + fmtInt(sel.wordLimit) + " words. " + styleName(sel.referenceStyle) + ".";
+      } else {
+        summary.textContent = "Type the name, word limit, abstract format and reference style.";
+      }
+    }
+  }
+
+  function setJournalCustomOpen(container, open) {
+    var form = container.querySelector("#rmdJournalCustom");
+    var btn = container.querySelector('[data-rmd-journal="other"]');
+    if (!form) return;
+    if (open) form.removeAttribute("hidden");
+    else form.setAttribute("hidden", "");
+    if (btn) btn.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open) {
+      var name = container.querySelector("#rmdJournalCustomName");
+      if (name) name.focus();
+    }
+  }
+
+  function journalPasses(j, q, chips) {
+    if (q) {
+      var hay = (j.name + " " + j.shortName + " " + j.specialty).toLowerCase();
+      if (hay.indexOf(q) < 0) return false;
+    }
+    if (chips.indian && j.isIndian !== true) return false;
+    if (chips.international && j.isIndian !== false) return false;
+    if (chips.open && j.openAccess !== true) return false;
+    if (chips.pubmed && j.indexedPubMed !== true) return false;
+    if (chips.nofee && j.noFee !== true) return false;
+    return true;
+  }
+
+  function journalView(state) {
+    var items = state.items || [], matches = state.matches || [], byId = {}, used = {}, out = [], i, j, key, cat;
+    for (i = 0; i < items.length; i++) byId[journalKey(items[i])] = items[i];
+    for (i = 0; i < matches.length; i++) {
+      j = matches[i];
+      key = journalKey(j);
+      if (used[key]) continue;
+      cat = byId[key];
+      if (cat) {
+        j = copyJournal(cat);
+        j.matchScore = matches[i].matchScore;
+      } else {
+        j = copyJournal(j);
+      }
+      j._best = true;
+      used[key] = true;
+      out.push(j);
+    }
+    for (i = 0; i < items.length; i++) {
+      key = journalKey(items[i]);
+      if (used[key]) continue;
+      used[key] = true;
+      j = copyJournal(items[i]);
+      j._best = false;
+      out.push(j);
+    }
+    return out;
+  }
+
+  function journalRowHtml(j) {
+    var pressed = selectedJournalKey() === j.id;
+    var meta = [j.publisher || "Check the author guidelines"];
+    var words = j.wordLimit == null ? "Check the author guidelines" : fmtInt(j.wordLimit) + " words";
+    var abs = checkValue(j.abstractFormat);
+    var refs = j.referenceStyle ? styleName(j.referenceStyle) : "Check the author guidelines";
+    var fee = checkValue(j.apcNote);
+    var h = [];
+    if (j.specialty) meta.push(j.specialty);
+    h.push('<li class="rmd-journal-item" data-selected="' + (pressed ? "true" : "false") + '">');
+    h.push('<button type="button" class="rmd-journal-pick" data-rmd-journal-id="' + esc(j.id) + '" aria-pressed="' + (pressed ? "true" : "false") + '">');
+    h.push('<span class="rmd-journal-head"><span class="rmd-journal-name">' + esc(j.name) + '</span><span class="rmd-journal-selected"' + (pressed ? "" : " hidden") + '>Selected</span></span>');
+    h.push('<span class="rmd-journal-meta">' + esc(meta.join(", ")) + '</span>');
+    h.push('<span class="rmd-journal-specs">');
+    h.push('<span><b>Word limit:</b> ' + esc(words) + '</span>');
+    h.push('<span><b>Abstract:</b> ' + esc(abs) + '</span>');
+    h.push('<span><b>References:</b> ' + esc(refs) + '</span>');
+    h.push('</span>');
+    h.push('<span class="rmd-journal-fee"><b>Fee:</b> ' + esc(fee) + '</span>');
+    h.push('</button>');
+    if (j.url) {
+      h.push('<a class="rmd-journal-link" href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">Author guidelines</a>');
+    } else {
+      h.push('<span class="rmd-journal-link rmd-journal-link-missing">Author guidelines: Check the author guidelines</span>');
+    }
+    h.push('</li>');
+    return h.join("");
+  }
+
+  function renderJournalResults(container, state) {
+    var box = container.querySelector("#rmdJournalResults");
+    var filters = container.querySelector("#rmdJournalFilters");
+    if (!box) return;
+    if (state.failed) {
+      if (filters) filters.setAttribute("hidden", "");
+      box.innerHTML = '<div class="rmd-banner rmd-banner-warn" role="status"><p class="rmd-journal-fallback-text">The journal list could not load. Check the connection, or use the general Indian format or Other journal.</p><button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" id="rmdJournalRetry">Try again</button></div>';
+      var retry = box.querySelector("#rmdJournalRetry");
+      if (retry) retry.onclick = function () { renderJournal(container); };
+      return;
+    }
+    if (filters) filters.removeAttribute("hidden");
+    if (state.loading) {
+      box.innerHTML = '<p class="rmd-thesis-meta" role="status">Looking up journals...</p>';
+      return;
+    }
+    var view = journalView(state), best = [], rest = [], i, j, h = [];
+    var q = String(state.q || "").replace(/^\s+|\s+$/g, "").toLowerCase();
+    for (i = 0; i < view.length; i++) {
+      j = view[i];
+      if (!journalPasses(j, q, state.chips)) continue;
+      if (j._best) best.push(j);
+      else rest.push(j);
+    }
+    if (!best.length && !rest.length) {
+      box.innerHTML = '<p class="rmd-journal-empty" role="status">No journal matches that search. Try a shorter word, or clear a filter.</p>';
+      return;
+    }
+    if (best.length) {
+      h.push('<h3 class="rmd-journal-group">Best match for your study</h3>');
+      h.push('<ul class="rmd-journal-list" role="list">');
+      for (i = 0; i < best.length; i++) h.push(journalRowHtml(best[i]));
+      h.push('</ul>');
+    }
+    if (rest.length) {
+      h.push('<h3 class="rmd-journal-group">' + (best.length ? "All journals" : "Journals") + '</h3>');
+      h.push('<ul class="rmd-journal-list" role="list">');
+      for (i = 0; i < rest.length; i++) h.push(journalRowHtml(rest[i]));
+      h.push('</ul>');
+    }
+    box.innerHTML = h.join("");
+    var picks = box.querySelectorAll("[data-rmd-journal-id]");
+    for (i = 0; i < picks.length; i++) {
+      picks[i].onclick = function () {
+        var id = this.getAttribute("data-rmd-journal-id"), list = journalView(state), k;
+        for (k = 0; k < list.length; k++) {
+          if (list[k].id === id) {
+            saveThesis(tpid, { journal: journalFromCatalogue(list[k]) });
+            ts = loadThesis(tpid);
+            setJournalCustomOpen(container, false);
+            updateJournalSelection(container);
+            return;
+          }
+        }
+      };
+    }
+  }
+
   function renderJournal(container) {
     var proj = activeProject();
     if (!proj) { container.innerHTML = SMD.p2.errHtml("Open a project first."); return; }
@@ -1155,66 +1429,179 @@
     ts = loadThesis(tpid);
     injectCSS();
     if (!ts.pages || !ts.pages.length) { needPagesHtml(container); return; }
-    var sel = ts.journal || null;
+    var seq = ++journalSeq;
+    var sel = journalOf();
+    var custom = selectedJournalKey() === "custom";
+    var state = { q: "", chips: {}, items: [], matches: [], loading: true, failed: false };
     var h = ['<div class="rmd-p2-screen rmd-thesis-screen"><div class="rmd-card">'];
     h.push('<h2>Pick the target journal</h2>');
     h.push('<p class="rmd-screen-subtitle">We shape the draft to the journal word limit, abstract format and reference style.</p>');
-    h.push('<button type="button" class="rmd-start-choice" data-rmd-journal="default" aria-pressed="' + (!sel || sel.name === DEFAULT_JOURNAL.name ? "true" : "false") + '">');
-    h.push(esc(DEFAULT_JOURNAL.name));
-    h.push('<span>Word limit: 3,000 words. Abstract: structured (Background, Methods, Results, Conclusion). References: ' + esc(styleName("vancouver")) + '.</span>');
+    h.push('<button type="button" class="rmd-start-choice rmd-journal-option" data-rmd-journal="default" aria-pressed="' + (!custom && selectedJournalKey() === "default" ? "true" : "false") + '">');
+    h.push('<span class="rmd-journal-head"><span class="rmd-journal-name">' + esc(DEFAULT_JOURNAL.name) + '</span><span class="rmd-journal-selected"' + (!custom && selectedJournalKey() === "default" ? "" : " hidden") + '>Selected</span></span>');
+    h.push('<span class="rmd-journal-option-note">Word limit: ' + fmtInt(DEFAULT_JOURNAL.wordLimit) + ' words. Abstract: structured (Background, Methods, Results, Conclusion). References: ' + esc(styleName("vancouver")) + '.</span>');
     h.push('</button>');
-    h.push('<div id="rmdJournalMatches"></div>');
+    h.push('<div class="rmd-journal-picker" id="rmdJournalPicker">');
+    h.push('<search class="rmd-journal-filters" id="rmdJournalFilters">');
+    h.push('<div class="rmd-field"><label for="rmdJournalSearch">Search journals</label>');
+    h.push('<input type="search" id="rmdJournalSearch" placeholder="Name, short name or specialty" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="search"></div>');
+    h.push('<div class="rmd-journal-chips" role="group" aria-label="Filter journals">');
+    var c;
+    for (c = 0; c < JOURNAL_CHIPS.length; c++) {
+      h.push('<button type="button" class="rmd-journal-chip" data-rmd-jchip="' + JOURNAL_CHIPS[c].key + '" aria-pressed="false">' + esc(JOURNAL_CHIPS[c].label) + '</button>');
+    }
+    h.push('</div>');
+    h.push('</search>');
+    h.push('<div id="rmdJournalResults"></div>');
+    h.push('</div>');
+    h.push('<button type="button" class="rmd-start-choice rmd-journal-option" data-rmd-journal="other" aria-pressed="' + (custom ? "true" : "false") + '" aria-expanded="' + (custom ? "true" : "false") + '" aria-controls="rmdJournalCustom">');
+    h.push('<span class="rmd-journal-head"><span class="rmd-journal-name">Other journal</span><span class="rmd-journal-selected"' + (custom ? "" : " hidden") + '>Selected</span></span>');
+    h.push('<span class="rmd-journal-option-note" id="rmdJournalOtherSummary"></span>');
+    h.push('</button>');
+    h.push('<div class="rmd-journal-custom" id="rmdJournalCustom"' + (custom ? "" : " hidden") + '>');
+    h.push('<h3>Other journal details</h3>');
+    h.push('<form id="rmdJournalCustomForm" novalidate>');
+    h.push('<div class="rmd-field"><label for="rmdJournalCustomName">Journal name</label>');
+    h.push('<input type="text" id="rmdJournalCustomName" value="' + esc(custom ? sel.name : "") + '" autocomplete="off" enterkeyhint="next"></div>');
+    h.push('<div class="rmd-field"><label for="rmdJournalCustomWords">Word limit (words)</label>');
+    h.push('<input type="number" id="rmdJournalCustomWords" min="100" max="100000" step="1" inputmode="numeric" value="' + esc(String(custom ? sel.wordLimit : sel.wordLimit || DEFAULT_JOURNAL.wordLimit)) + '" enterkeyhint="next"></div>');
+    h.push('<div class="rmd-field"><label for="rmdJournalCustomAbstract">Abstract format</label>');
+    h.push('<input type="text" id="rmdJournalCustomAbstract" value="' + esc(custom ? sel.abstractFormat : sel.abstractFormat || DEFAULT_JOURNAL.abstractFormat) + '" autocomplete="off" enterkeyhint="next"></div>');
+    h.push('<div class="rmd-field"><label for="rmdJournalCustomRefs">Reference style</label>');
+    h.push('<input type="text" id="rmdJournalCustomRefs" value="' + esc(custom ? (sel.referenceStyle || "") : (sel.referenceStyle || "vancouver")) + '" autocomplete="off" enterkeyhint="next"></div>');
+    h.push('<p class="rmd-journal-error" id="rmdJournalCustomError" role="alert" hidden></p>');
+    h.push('<div class="rmd-card-actions"><button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-journal="cancel">Cancel</button>');
+    h.push('<button type="submit" class="rmd-btn rmd-btn-primary">Save this journal</button></div>');
+    h.push('</form>');
+    h.push('</div>');
     h.push('<div class="rmd-card-actions">' + nextBtn("thesis-draft", "Next: shape the draft") + '</div>');
     h.push('</div></div>');
     container.innerHTML = h.join("");
     bindNext(container);
+
     var def = container.querySelector('[data-rmd-journal="default"]');
     if (def) def.onclick = function () {
-      saveThesis(tpid, { journal: DEFAULT_JOURNAL });
+      saveThesis(tpid, { journal: copyJournal(DEFAULT_JOURNAL) });
       ts = loadThesis(tpid);
-      renderJournal(container);
+      setJournalCustomOpen(container, false);
+      updateJournalSelection(container);
     };
-    renderMatches(container);
-    if (!ts.matches && SMD.api) {
-      SMD.api.request("POST", "/v1/journals/match", { keywords: (proj.title || "") + " " + labelFor(ts.paperType || "obs"), design: ts.paperType || "obs" }).then(function (res) {
-        saveThesis(tpid, { matches: (res && res.matches) || [] });
-        ts = loadThesis(tpid);
-        renderMatches(container);
-      }).catch(function () {});
-    }
-  }
 
-  function renderMatches(container) {
-    var box = container.querySelector("#rmdJournalMatches");
-    if (!box) return;
-    var matches = ts.matches || [], h = [], i, m, j, wl, sel = ts.journal || {};
-    for (i = 0; i < matches.length; i++) {
-      m = matches[i];
-      j = m.journal || {};
-      wl = j.wordLimits || {};
-      h.push('<button type="button" class="rmd-start-choice" data-rmd-journal="' + i + '" aria-pressed="' + (sel.name === j.name ? "true" : "false") + '">');
-      h.push(esc(j.name || "Journal"));
-      h.push('<span>Word limit: ' + (wl.main || 3000) + ' words main text. Abstract: ' + (wl.abstract ? "up to " + wl.abstract + " words" : "structured") + '. References: ' + esc(styleName(j.referenceStyle)) + '.</span>');
-      h.push('</button>');
-    }
-    box.innerHTML = h.join("");
-    var btns = box.querySelectorAll("[data-rmd-journal]");
-    for (i = 0; i < btns.length; i++) {
-      btns[i].onclick = function () {
-        var idx = Number(this.getAttribute("data-rmd-journal"));
-        var mm = (ts.matches || [])[idx], jj = (mm && mm.journal) || {}, wll = jj.wordLimits || {};
-        var picked = {
-          id: jj.id || "",
-          name: jj.name || "Journal",
-          wordLimit: wll.main || 3000,
-          abstractFormat: wll.abstract ? "Structured abstract, up to " + wll.abstract + " words" : DEFAULT_JOURNAL.abstractFormat,
-          referenceStyle: jj.referenceStyle || "vancouver"
-        };
-        saveThesis(tpid, { journal: picked });
-        ts = loadThesis(tpid);
-        renderJournal(container);
+    var other = container.querySelector('[data-rmd-journal="other"]');
+    if (other) other.onclick = function () {
+      var form = container.querySelector("#rmdJournalCustom");
+      setJournalCustomOpen(container, form ? form.hasAttribute("hidden") : true);
+    };
+
+    var cancel = container.querySelector('[data-rmd-journal="cancel"]');
+    if (cancel) cancel.onclick = function () {
+      setJournalCustomOpen(container, false);
+      if (other) other.focus();
+    };
+
+    var search = container.querySelector("#rmdJournalSearch");
+    if (search) search.oninput = function () {
+      state.q = this.value;
+      renderJournalResults(container, state);
+    };
+
+    var chips = container.querySelectorAll("[data-rmd-jchip]");
+    for (c = 0; c < chips.length; c++) {
+      chips[c].onclick = function () {
+        var key = this.getAttribute("data-rmd-jchip");
+        state.chips[key] = !state.chips[key];
+        this.setAttribute("aria-pressed", state.chips[key] ? "true" : "false");
+        renderJournalResults(container, state);
       };
     }
+
+    var form = container.querySelector("#rmdJournalCustomForm");
+    if (form) form.onsubmit = function (ev) {
+      if (ev && ev.preventDefault) ev.preventDefault();
+      var nameEl = container.querySelector("#rmdJournalCustomName");
+      var wordsEl = container.querySelector("#rmdJournalCustomWords");
+      var absEl = container.querySelector("#rmdJournalCustomAbstract");
+      var refsEl = container.querySelector("#rmdJournalCustomRefs");
+      var errEl = container.querySelector("#rmdJournalCustomError");
+      var name = nameEl ? String(nameEl.value || "").replace(/^\s+|\s+$/g, "") : "";
+      var words = wordsEl ? Number(wordsEl.value) : 0;
+      var abs = absEl ? String(absEl.value || "").replace(/^\s+|\s+$/g, "") : "";
+      var refs = refsEl ? String(refsEl.value || "").replace(/^\s+|\s+$/g, "") : "";
+      var bad = null, focusEl = null;
+      if (!name) { bad = "Enter the journal name."; focusEl = nameEl; }
+      else if (!isFinite(words) || words < 100 || words > 100000) { bad = "Enter a word limit between 100 and 100,000."; focusEl = wordsEl; }
+      else if (!abs) { bad = "Enter the abstract format."; focusEl = absEl; }
+      else if (!refs) { bad = "Enter the reference style."; focusEl = refsEl; }
+      if (bad) {
+        if (errEl) { errEl.textContent = bad; errEl.removeAttribute("hidden"); }
+        if (focusEl) {
+          focusEl.setAttribute("aria-invalid", "true");
+          focusEl.setAttribute("aria-describedby", "rmdJournalCustomError");
+          focusEl.focus();
+        }
+        return;
+      }
+      if (errEl) { errEl.textContent = ""; errEl.setAttribute("hidden", ""); }
+      saveThesis(tpid, { journal: { id: "custom", custom: true, name: name, wordLimit: words, abstractFormat: abs, referenceStyle: refs } });
+      ts = loadThesis(tpid);
+      setJournalCustomOpen(container, false);
+      updateJournalSelection(container);
+      if (other) other.focus();
+    };
+
+    if (form) {
+      var fields = form.querySelectorAll("input");
+      for (var f = 0; f < fields.length; f++) {
+        fields[f].oninput = function () {
+          this.removeAttribute("aria-invalid");
+          this.removeAttribute("aria-describedby");
+          var errEl = container.querySelector("#rmdJournalCustomError");
+          if (errEl && !errEl.hasAttribute("hidden")) {
+            errEl.textContent = "";
+            errEl.setAttribute("hidden", "");
+          }
+        };
+      }
+    }
+
+    updateJournalSelection(container);
+    renderJournalResults(container, state);
+
+    if (!SMD.api || !SMD.api.request) {
+      state.loading = false;
+      state.failed = true;
+      renderJournalResults(container, state);
+      return;
+    }
+    SMD.api.request("GET", "/v1/journals?catalogue=1").then(function (res) {
+      if (seq !== journalSeq) return;
+      var list = res && res.journals ? res.journals : (res && res.length ? res : []);
+      var norm = [], i;
+      for (i = 0; i < list.length; i++) norm.push(normJournal(list[i]));
+      state.items = norm;
+      state.loading = false;
+      renderJournalResults(container, state);
+    }).catch(function () {
+      if (seq !== journalSeq) return;
+      state.loading = false;
+      state.failed = true;
+      renderJournalResults(container, state);
+    });
+    SMD.api.request("POST", "/v1/journals/match", {
+      keywords: matchKeywords(proj.title || "", labelFor(ts.paperType || "obs")),
+      design: designForPaperType(ts.paperType || "obs")
+    }).then(function (res) {
+      if (seq !== journalSeq) return;
+      var list = res && res.matches ? res.matches : [];
+      var norm = [], i, m;
+      for (i = 0; i < list.length; i++) {
+        m = list[i] || {};
+        var j = normJournal(m.journal || m);
+        j.matchScore = typeof m.score === "number" ? m.score : null;
+        norm.push(j);
+      }
+      state.matches = norm;
+      renderJournalResults(container, state);
+    }).catch(function () {});
   }
 
   /* ---------- screen: draft ---------- */
@@ -1539,6 +1926,46 @@
       "#researchMD .rmd-thesis-table-row input { margin-top: 3px; }",
       "#researchMD .rmd-thesis-ref { padding: 8px 0; border-bottom: 1px solid var(--rmd-line); font: 400 13px/1.5 var(--rmd-f); color: var(--rmd-ink); }",
       "#researchMD .rmd-thesis-check { color: var(--rmd-warn); font-weight: 600; }",
+      "#researchMD .rmd-journal-option .rmd-journal-head { font: 600 15px var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-journal-option .rmd-journal-name { font: inherit; color: inherit; }",
+      "#researchMD .rmd-journal-option .rmd-journal-option-note { font: 400 13px/1.5 var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-journal-option[aria-pressed=\"true\"] { border-color: var(--rmd-acc); background: var(--rmd-acc-soft); }",
+      "#researchMD .rmd-journal-option:active { background: var(--rmd-fill); }",
+      "#researchMD .rmd-journal-picker[hidden], #researchMD .rmd-journal-custom[hidden], #researchMD .rmd-journal-selected[hidden], #researchMD .rmd-journal-error[hidden] { display: none; }",
+      "#researchMD .rmd-journal-picker { display: flex; flex-direction: column; gap: 10px; }",
+      "#researchMD .rmd-journal-filters { display: flex; flex-direction: column; gap: 10px; }",
+      "#researchMD .rmd-journal-filters[hidden] { display: none; }",
+      "#researchMD #rmdJournalSearch { font-size: 16px; min-height: 44px; }",
+      "#researchMD .rmd-journal-chips { display: flex; flex-wrap: wrap; gap: 8px; }",
+      "#researchMD .rmd-journal-chip { border: 1px solid var(--rmd-line); background: var(--rmd-panel); color: var(--rmd-ink); border-radius: 999px; padding: 0 14px; min-height: 44px; font: 600 13px var(--rmd-f); cursor: pointer; touch-action: manipulation; }",
+      "#researchMD .rmd-journal-chip[aria-pressed=\"true\"] { border-color: var(--rmd-acc); background: var(--rmd-acc-soft); color: var(--rmd-acc); }",
+      "#researchMD .rmd-journal-group { margin: 4px 0 0; font: 600 12.5px var(--rmd-f); color: var(--rmd-mut); letter-spacing: 0; }",
+      "#researchMD .rmd-journal-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }",
+      "#researchMD .rmd-journal-item { display: flex; flex-direction: column; border: 1px solid var(--rmd-line); border-radius: 12px; background: var(--rmd-panel); overflow: hidden; }",
+      "#researchMD .rmd-journal-item[data-selected=\"true\"] { border-color: var(--rmd-acc); }",
+      "#researchMD .rmd-journal-pick { display: flex; flex-direction: column; gap: 4px; width: 100%; box-sizing: border-box; text-align: left; border: 0; background: transparent; padding: 14px 16px; color: var(--rmd-ink); cursor: pointer; touch-action: manipulation; }",
+      "#researchMD .rmd-journal-pick:active { background: var(--rmd-fill); }",
+      "#researchMD .rmd-journal-pick[aria-pressed=\"true\"] { background: var(--rmd-acc-soft); }",
+      "#researchMD .rmd-journal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }",
+      "#researchMD .rmd-journal-name { font: 600 15px var(--rmd-f); color: var(--rmd-ink); overflow-wrap: anywhere; }",
+      "#researchMD .rmd-journal-selected { flex: 0 0 auto; border-radius: 999px; background: var(--rmd-acc-soft); color: var(--rmd-acc); font: 600 11.5px var(--rmd-f); padding: 2px 8px; white-space: nowrap; }",
+      "#researchMD .rmd-journal-meta { font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); overflow-wrap: anywhere; }",
+      "#researchMD .rmd-journal-specs { display: flex; flex-direction: column; gap: 1px; font: 400 12.5px/1.45 var(--rmd-f); color: var(--rmd-mut); overflow-wrap: anywhere; }",
+      "#researchMD .rmd-journal-specs b, #researchMD .rmd-journal-fee b { color: var(--rmd-ink); font-weight: 600; }",
+      "#researchMD .rmd-journal-fee { font: 400 12.5px/1.45 var(--rmd-f); color: var(--rmd-mut); overflow-wrap: anywhere; }",
+      "#researchMD .rmd-journal-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-top: 1px solid var(--rmd-line); font: 600 13px var(--rmd-f); color: var(--rmd-acc); text-decoration: none; touch-action: manipulation; }",
+      "#researchMD .rmd-journal-link:active { background: var(--rmd-fill); }",
+      "#researchMD .rmd-journal-link-missing { color: var(--rmd-mut); font-weight: 400; }",
+      "#researchMD .rmd-journal-custom { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--rmd-line); border-radius: 12px; padding: 14px 16px; background: var(--rmd-fill); }",
+      "#researchMD .rmd-journal-custom h3 { margin: 0; font: 600 14px var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-journal-custom input { font-size: 16px; min-height: 44px; }",
+      "#researchMD .rmd-journal-custom .rmd-btn { min-height: 44px; }",
+      "#researchMD .rmd-journal-error { margin: 0; color: var(--rmd-bad); font: 500 13px var(--rmd-f); }",
+      "#researchMD .rmd-journal-empty { margin: 4px 0; font: 400 13.5px var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-journal-fallback-text { margin: 0 0 8px; }",
+      "#researchMD .rmd-journal-fallback-text:last-child { margin: 0; }",
+      "#researchMD .rmd-journal-pick:focus-visible, #researchMD .rmd-journal-chip:focus-visible, #researchMD .rmd-journal-link:focus-visible { outline: 3px solid var(--rmd-acc); outline-offset: 2px; }",
+      "@media (hover: hover) { #researchMD .rmd-journal-pick:hover, #researchMD .rmd-journal-chip:hover, #researchMD .rmd-journal-link:hover { background: var(--rmd-fill); } }",
       ".rmd-thesis-pop { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); max-width: 320px; background: var(--rmd-panel, #fffdf9); border: 1px solid var(--rmd-line, #e5ddce); border-radius: 12px; padding: 12px 14px; box-shadow: 0 8px 28px rgba(17,28,68,0.18); font: 400 13px/1.5 var(--rmd-f, system-ui, sans-serif); color: var(--rmd-ink, #111c44); z-index: 9999; }",
       ".rmd-thesis-pop-text { margin-bottom: 8px; }",
       ".rmd-thesis-pop-close { width: 100%; }",

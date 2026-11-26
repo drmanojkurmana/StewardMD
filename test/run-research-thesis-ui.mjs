@@ -38,10 +38,51 @@ const wordsOf = (s) => s.split(/\s+/).filter(Boolean).map((t) => ({ t, x0: 0, y0
 let projN = 0, uploadN = 0;
 let jobMode = 'phi'; // 'phi' -> job prompts consent_needed; 'clean' -> job succeeds
 let requireDraftConsent = false;
+let journalsFail = false;
 const createdProjects = [];
 const aiDraftCalls = [];
+const journalMatchCalls = [];
 const savedSections = [];
 const pageErrors = [];
+
+const JOURNALS = [
+  {
+    id: 'ijccm', name: 'Indian Journal of Critical Care Medicine (IJCCM)', shortName: 'IJCCM',
+    publisher: 'Thieme / ISCCM', specialty: 'Critical Care', region: 'indian', isIndian: true,
+    wordLimit: 3000, abstractFormat: 'Structured (Background, Methods, Results, Conclusion), up to 350 words',
+    abstractWordLimit: 350, referenceStyle: 'vancouver', openAccess: true,
+    apcNote: 'No publication fee / APC funded by society', noFee: true, indexedPubMed: true,
+    url: 'https://www.ijccm.org/journal/IJCCM/page/instructions-to-authors'
+  },
+  {
+    id: 'japi', name: 'Journal of The Association of Physicians of India (JAPI)', shortName: 'JAPI',
+    publisher: 'Association of Physicians of India', specialty: 'Internal Medicine', region: 'indian', isIndian: true,
+    wordLimit: 2000, abstractFormat: 'Structured, up to 250 words', abstractWordLimit: 250,
+    referenceStyle: 'vancouver', openAccess: false, apcNote: 'Subscription journal, no publication fee',
+    noFee: true, indexedPubMed: true, url: 'https://www.japi.org/instructions-to-authors'
+  },
+  {
+    id: 'lancet', name: 'The Lancet', shortName: 'Lancet', publisher: 'Elsevier', specialty: 'General Medicine',
+    region: 'international', isIndian: false, wordLimit: 4500,
+    abstractFormat: 'Structured, up to 300 words', abstractWordLimit: 300, referenceStyle: 'vancouver',
+    openAccess: true, apcNote: 'APC applies for open access', noFee: false, indexedPubMed: true,
+    url: 'https://www.thelancet.com/for-authors'
+  },
+  {
+    id: 'bmjopen', name: 'BMJ Open', shortName: 'BMJ Open', publisher: 'BMJ', specialty: 'General Medicine',
+    region: 'international', isIndian: false, wordLimit: 4000,
+    abstractFormat: 'Structured, up to 300 words', abstractWordLimit: 300, referenceStyle: 'vancouver',
+    openAccess: true, apcNote: 'APC applies', noFee: false, indexedPubMed: true,
+    url: 'https://bmjopen.bmj.com/pages/authors'
+  },
+  {
+    id: 'cureus', name: 'Cureus', shortName: 'Cureus', publisher: 'Springer Nature', specialty: 'General Medicine',
+    region: 'international', isIndian: false, wordLimit: null,
+    abstractFormat: 'Structured, up to 3500 characters', abstractWordLimit: null, referenceStyle: 'vancouver',
+    openAccess: true, apcNote: 'Free publishing tier available', noFee: true, indexedPubMed: true,
+    url: 'https://www.cureus.com/author_guide'
+  }
+];
 
 const server = http.createServer((req, res) => {
   const p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
@@ -144,12 +185,26 @@ const server = http.createServer((req, res) => {
           requestId: 'req_draft'
         });
       }
+      if (p === '/api/research/v1/journals' && req.method === 'GET') {
+        if (journalsFail) return send(500, { error: { code: 'server_error', message: 'Journal list unavailable' } });
+        const q = (new URL(req.url, 'http://x').searchParams.get('q') || '').trim().toLowerCase();
+        let list = JOURNALS;
+        if (q) {
+          list = list.filter((j) =>
+            j.name.toLowerCase().includes(q) ||
+            (j.shortName && j.shortName.toLowerCase().includes(q)) ||
+            (j.specialty && j.specialty.toLowerCase().includes(q)));
+        }
+        return send(200, { journals: list });
+      }
       if (p === '/api/research/v1/journals/match' && req.method === 'POST') {
+        journalMatchCalls.push(b);
+        if (journalsFail) return send(500, { error: { code: 'server_error', message: 'Journal match unavailable' } });
         return send(200, {
-          matches: [{
-            score: 0.9,
-            journal: { id: 'ijmr', name: 'Indian Journal of Medical Research', issn: '0971-5916', wordLimits: { abstract: 250, main: 3000 }, referenceStyle: 'vancouver' }
-          }]
+          matches: [
+            { score: 9, journal: JOURNALS[0] },
+            { score: 7, journal: JOURNALS[1] }
+          ]
         });
       }
       const manMatch = p.match(/^\/api\/research\/v1\/projects\/([^/]+)\/manuscript$/);
@@ -450,13 +505,114 @@ try {
   ok(await ev(`(JSON.parse(localStorage.getItem('smd_rmd_checklist_guide_v1')||'{}'))['prj_thesis_1'] === 'strobe'`), 'chosen checklist stored as the project preference');
   await shot('phone-375-type');
 
-  // 6. Journal step.
+  // 6. Journal step: catalogue picker, search, chips, best matches.
   await click('[data-rmd-thesis-next="thesis-journal"]');
   ok(await until(`/Pick the target journal/.test(document.querySelector('#rmdScreenBody').innerText)`, 5000), 'journal step rendered');
   ok(/3,000 words/.test(await text('#rmdScreenBody')), 'default journal shows the 3,000 word limit');
   ok(/structured/i.test(await text('#rmdScreenBody')), 'default journal shows the structured abstract');
-  ok(await until(`/Indian Journal of Medical Research/.test(document.querySelector('#rmdScreenBody').innerText)`, 5000), 'matched journals listed');
+  ok(await until(`document.querySelectorAll('#rmdJournalResults [data-rmd-journal-id]').length === 5`, 5000), 'five catalogue journals listed');
+  ok(await ev(`(()=>{const t=document.querySelector('#rmdJournalResults').innerText;return ['IJCCM','JAPI','The Lancet','BMJ Open','Cureus'].every((n)=>t.includes(n));})()`), 'all five catalogue names render');
+  ok(await until(`/Best match for your study/.test(document.querySelector('#rmdJournalResults').innerText)`, 5000), 'best match section is shown');
+  ok(await ev(`(()=>{const g=document.querySelectorAll('#rmdJournalResults .rmd-journal-group');return g.length>0 && /Best match/.test(g[0].textContent);})()`), 'best match group renders before all journals');
+  ok(await ev(`document.querySelector('#rmdJournalResults [data-rmd-journal-id]').getAttribute('data-rmd-journal-id') === 'ijccm'`), 'IJCCM is the first best match');
+  ok(await ev(`(()=>{const b=document.querySelector('#rmdJournalResults [data-rmd-journal-id="ijccm"]');const a=document.querySelector('#rmdJournalResults a.rmd-journal-link');return b.tagName==='BUTTON'&&!b.contains(a);})()`), 'journal row keeps the pick button and guidelines link separate');
+  ok(/Word limit: Check the author guidelines/.test(await text('#rmdJournalResults')), 'null word limit says Check the author guidelines');
+  ok(await ev(`(()=>{const a=document.querySelector('#rmdJournalResults a.rmd-journal-link');return !!a && a.target==='_blank' && /^https?:/.test(a.href) && /Author guidelines/.test(a.textContent);})()`), 'author guidelines link opens outside the app');
+  ok(Array.isArray(journalMatchCalls[0] && journalMatchCalls[0].keywords), 'journal match request sends a keywords array');
+
+  // Search by short name.
+  await ev(`(()=>{const i=document.getElementById('rmdJournalSearch');i.value='IJCCM';i.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
+  ok(await until(`document.querySelectorAll('#rmdJournalResults [data-rmd-journal-id]').length === 1`, 3000), 'search IJCCM narrows the list to one journal');
+  ok(/Indian Journal of Critical Care Medicine/.test(await text('#rmdJournalResults')), 'search finds IJCCM by its short name');
+  await ev(`(()=>{const i=document.getElementById('rmdJournalSearch');i.value='';i.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
+  ok(await until(`document.querySelectorAll('#rmdJournalResults [data-rmd-journal-id]').length === 5`, 3000), 'clearing the search restores all journals');
+
+  // Filter chips combine with AND semantics.
+  await click('[data-rmd-jchip="indian"]');
+  ok(await until(`document.querySelectorAll('#rmdJournalResults [data-rmd-journal-id]').length === 2`, 3000), 'Indian chip shows two Indian journals');
+  ok(await ev(`(()=>{const t=document.querySelector('#rmdJournalResults').innerText;return t.includes('IJCCM')&&t.includes('JAPI')&&!t.includes('The Lancet');})()`), 'Indian chip excludes international journals');
+  await click('[data-rmd-jchip="open"]');
+  ok(await until(`document.querySelectorAll('#rmdJournalResults [data-rmd-journal-id]').length === 1`, 3000), 'Indian and Open access chips combine');
+  ok(/IJCCM/.test(await text('#rmdJournalResults')), 'combined chips keep IJCCM');
+  await click('[data-rmd-jchip="indian"]');
+  await click('[data-rmd-jchip="open"]');
+  ok(await until(`document.querySelectorAll('#rmdJournalResults [data-rmd-journal-id]').length === 5`, 3000), 'clearing both chips restores all journals');
+  ok(await ev(`document.getElementById('rmdJournalSearch').offsetHeight >= 44`), 'journal search meets the 44px touch target');
+  ok(await ev(`document.querySelector('[data-rmd-jchip="indian"]').offsetHeight >= 44`), 'journal filter chip meets the 44px touch target');
+  ok(await ev(`document.querySelector('#rmdJournalResults [data-rmd-journal-id]').offsetHeight >= 44`), 'journal row meets the 44px touch target');
+  ok(await ev(`document.querySelector('#rmdJournalResults a.rmd-journal-link').offsetHeight >= 44`), 'author guidelines link meets the 44px touch target');
+  const journalContrast = async () => JSON.parse(await ev(`(()=>{
+    function rgb(s){const m=String(s).match(/[\\d.]+/g);return m?m.slice(0,3).map(Number):[0,0,0];}
+    function lum(c){const a=c.map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});return 0.2126*a[0]+0.7152*a[1]+0.0722*a[2];}
+    function ratio(a,b){const L1=lum(a),L2=lum(b);return (Math.max(L1,L2)+0.05)/(Math.min(L1,L2)+0.05);}
+    const item=document.querySelector('#rmdJournalResults .rmd-journal-item');
+    const name=document.querySelector('#rmdJournalResults .rmd-journal-name');
+    const specs=document.querySelector('#rmdJournalResults .rmd-journal-specs');
+    const bg=rgb(getComputedStyle(item).backgroundColor);
+    return JSON.stringify({name:ratio(rgb(getComputedStyle(name).color),bg),muted:ratio(rgb(getComputedStyle(specs).color),bg)});
+  })()`));
+  const lightContrast = await journalContrast();
+  ok(lightContrast.name >= 4.5 && lightContrast.muted >= 4.5, 'journal row text meets 4.5:1 in light mode');
+  await ev(`(()=>{document.body.classList.add('dark');localStorage.setItem('stewardmd_theme','dark');return true})()`);
+  await sleep(200);
+  ok(await ev(`document.body.classList.contains('dark')`), 'journal picker renders in dark mode');
+  const darkContrast = await journalContrast();
+  ok(darkContrast.name >= 4.5 && darkContrast.muted >= 4.5, 'journal row text meets 4.5:1 in dark mode');
+  await shot('phone-375-journal-dark');
+  await ev(`(()=>{document.body.classList.remove('dark');localStorage.setItem('stewardmd_theme','light');return true})()`);
+  await sleep(200);
   await shot('phone-375-journal');
+
+  // Journal picker at phone and tablet widths.
+  await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await sleep(200);
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), '390x844 journal picker no horizontal scroll');
+  await shot('phone-390-journal');
+  await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 1366, deviceScaleFactor: 2, mobile: false });
+  await sleep(200);
+  ok(await ev(`document.documentElement.scrollWidth <= document.documentElement.clientWidth`), '1024x1366 journal picker no horizontal scroll');
+  await shot('tablet-1024-journal');
+  await call('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
+  await sleep(200);
+
+  // Choosing a catalogue journal drives the draft word limit.
+  await ev(`(()=>{const b=document.querySelector('[data-rmd-journal-id="japi"]');if(!b)return false;b.click();return true})()`);
+  ok(await ev(`(()=>{const t=JSON.parse(localStorage.getItem('smd_rmd_thesis_v1')||'{}')['prj_thesis_1']||{};return t.journal&&t.journal.id==='japi'&&t.journal.wordLimit===2000;})()`), 'choosing JAPI stores its 2,000 word limit');
+  ok(await ev(`document.querySelector('[data-rmd-journal-id="japi"]').getAttribute('aria-pressed') === 'true'`), 'chosen journal is marked pressed');
+  await click('[data-rmd-thesis-next="thesis-draft"]');
+  ok(await until(`/Word limit: 2000 words/.test(document.querySelector('#rmdScreenBody').innerText)`, 5000), 'draft uses the chosen journal word limit');
+  await ev(`SMD_RESEARCH.navigate('thesis-journal',{});1`);
+  ok(await until(`document.querySelectorAll('#rmdJournalResults [data-rmd-journal-id]').length === 5`, 5000), 'journal step returns to the catalogue');
+
+  // Other journal stores the values the user typed.
+  await click('[data-rmd-journal="other"]');
+  ok(await until(`!document.querySelector('#rmdJournalCustom').hasAttribute('hidden')`, 3000), 'Other journal opens the custom form');
+  ok(await ev(`document.getElementById('rmdJournalCustomName').offsetHeight >= 44`), 'custom journal name input meets the 44px touch target');
+  ok(await ev(`document.querySelector('#rmdJournalCustom .rmd-btn-primary').offsetHeight >= 44`), 'custom journal save button meets the 44px touch target');
+  await ev(`(()=>{
+    document.getElementById('rmdJournalCustomName').value='Journal of Test Medicine';
+    document.getElementById('rmdJournalCustomWords').value='1800';
+    document.getElementById('rmdJournalCustomAbstract').value='Structured abstract up to 200 words';
+    document.getElementById('rmdJournalCustomRefs').value='apa';
+    document.getElementById('rmdJournalCustomForm').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));
+    return true;
+  })()`);
+  ok(await ev(`(()=>{const t=JSON.parse(localStorage.getItem('smd_rmd_thesis_v1')||'{}')['prj_thesis_1']||{};const j=t.journal||{};return j.custom===true&&j.name==='Journal of Test Medicine'&&j.wordLimit===1800&&j.abstractFormat==='Structured abstract up to 200 words'&&j.referenceStyle==='apa';})()`), 'Other journal saves custom values');
+  ok(await ev(`document.querySelector('[data-rmd-journal="other"]').getAttribute('aria-pressed') === 'true'`), 'custom journal is marked selected');
+
+  // Offline fallback keeps the default and Other journal with a plain note.
+  journalsFail = true;
+  await ev(`SMD_RESEARCH.navigate('thesis-journal',{});1`);
+  ok(await until(`/journal list could not load/.test(document.querySelector('#rmdScreenBody').innerText)`, 5000), 'offline journal lookup shows the plain fallback note');
+  ok(await ev(`!!document.querySelector('[data-rmd-journal="default"]') && !!document.querySelector('[data-rmd-journal="other"]')`), 'offline fallback keeps the default and Other journal');
+  ok(await ev(`document.querySelectorAll('#rmdJournalResults [data-rmd-journal-id]').length === 0`), 'offline fallback hides catalogue rows');
+  journalsFail = false;
+  await ev(`SMD_RESEARCH.navigate('thesis-journal',{});1`);
+  ok(await until(`document.querySelectorAll('#rmdJournalResults [data-rmd-journal-id]').length === 5`, 5000), 'journal list returns after reconnect');
+
+  // Reselect JAPI for the draft flow.
+  await ev(`(()=>{const b=document.querySelector('[data-rmd-journal-id="japi"]');if(!b)return false;b.click();return true})()`);
+  ok(await ev(`(()=>{const t=JSON.parse(localStorage.getItem('smd_rmd_thesis_v1')||'{}')['prj_thesis_1']||{};return t.journal&&t.journal.id==='japi';})()`), 'JAPI reselected for the draft flow');
 
   // 7. Draft step: 409 consent_needed -> consent sheet -> confirm -> draft rendered with number verification & locators.
   await click('[data-rmd-thesis-next="thesis-draft"]');
@@ -477,7 +633,7 @@ try {
   ok(/\[check this number\]/.test(draftText), 'invented number sentence flagged');
   ok(!/0\.77/.test(draftText), 'invented number removed from the draft');
   ok(/0\.49/.test(draftText), 'verbatim number kept');
-  ok(/of 3000 words/.test(draftText), 'word limit line shown');
+  ok(/of 2000 words/.test(draftText), 'word limit line uses the chosen journal');
   ok(await ev(`!!document.querySelector('.rmd-thesis-num[data-page="54"]')`), 'kept number carries a page locator');
   ok(await ev(`(()=>{const e=document.querySelector('.rmd-thesis-section-text .rmd-thesis-num');return !!e && e.textContent==='0.49' && e.getAttribute('data-page')==='54'})()`), 'abstract number wrapped with its thesis locator');
   await click('.rmd-thesis-num[data-page="54"]');
