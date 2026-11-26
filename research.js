@@ -439,7 +439,7 @@
     h += '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd-ai="ask"' + (st.busy ? " disabled" : "") + '><span class="rmd-ai-mark" aria-hidden="true">R</span>Ask MaiK to draft it</button>';
     h += '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-ai="manual">Do it myself</button>';
     h += '</div>';
-    h += '<p class="rmd-ai-cost">' + (cost > 0 ? "About " + cost + " MaiK token" + (cost === 1 ? "" : "s") : "No MaiK tokens needed") + '</p>';
+    h += '<p class="rmd-ai-cost">' + (cost > 0 ? "Costs about " + cost + " MaiK token" + (cost === 1 ? "" : "s") : "No MaiK tokens needed") + '</p>';
     if (st.busy) h += '<p class="rmd-ai-progress" role="status">MaiK is drafting your ' + esc(o.label || "draft") + '&#8230;</p>';
     if (st.error) h += errHtml(st.error);
     h += '</div>';

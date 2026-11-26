@@ -717,11 +717,11 @@
 
     modal = D.createElement("div");
     modal.id = "rmdCaseReportDraftModal";
-    modal.className = "rmd-modal-overlay";
-    modal.style.cssText = "position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:9999; padding:16px;";
+    modal.className = "rmd-modal-backdrop rmd-modal-overlay";
+    modal.style.cssText = "position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:10060; padding:16px;";
 
     var box = D.createElement("div");
-    box.className = "rmd-modal-card";
+    box.className = "rmd-modal-card rmd-modal-wide";
     box.style.cssText = "background:#0D1D23; border:1px solid #1f363d; border-radius:8px; max-width:680px; width:100%; max-height:90vh; overflow-y:auto; padding:20px; color:#fff;";
 
     function updateView() {
@@ -793,7 +793,8 @@
 
     box.innerHTML = h.join("\n");
     modal.appendChild(box);
-    D.body.appendChild(modal);
+    var mount = D.getElementById("researchMD") || D.body;
+    mount.appendChild(modal);
 
     var txtArea = box.querySelector("#rmd-cr-preview-text");
     var tickBox = box.querySelector("#rmd-cr-tick-noid");
@@ -2699,7 +2700,8 @@
   SMD.screens.manuscript = {
     render: function (container, params) {
       load(container, params);
-    }
+    },
+    showDraftPreviewModal: showDraftPreviewModal
   };
 
 })(typeof window !== "undefined" ? window : global);

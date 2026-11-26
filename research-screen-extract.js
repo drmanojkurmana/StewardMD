@@ -818,7 +818,7 @@
     if (noPdf) {
       h += '<p class="rmd-ai-cost">Attach the study PDF on the Page tab first to let MaiK draft from it.</p>';
     } else {
-      h += '<p class="rmd-ai-cost">About 2 MaiK tokens</p>';
+      h += '<p class="rmd-ai-cost">Costs about 2 MaiK tokens</p>';
     }
     if (ai.busy) {
       h += '<progress aria-label="' + esc(ai.statusText || "MaiK is reading the paper") + '" style="width:100%;height:6px"></progress>';

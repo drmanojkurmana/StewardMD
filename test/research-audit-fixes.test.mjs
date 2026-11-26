@@ -226,3 +226,33 @@ test("research-screen-run places exports below forest plot, supports PNG downloa
   const shell = read("research.js");
   assert.match(shell, /isShareCancel/);
 });
+
+test("ResearchMD overlays render above shell and cost copy uses Costs about", () => {
+  const man = read("research-screen-manuscript.js");
+  assert.match(man, /modal\.className\s*=\s*["']rmd-modal-backdrop/);
+  assert.match(man, /box\.className\s*=\s*["']rmd-modal-card rmd-modal-wide["']/);
+  assert.match(man, /z-index:\s*10060/);
+  assert.match(man, /getElementById\(["']researchMD["']\)\s*\|\|\s*D\.body/);
+  assert.doesNotMatch(man, /rmdCaseReportDraftModal[\s\S]*?z-index:\s*9999/);
+
+  const thesis = read("research-screen-thesis.js");
+  assert.match(thesis, /\.rmd-thesis-pop\s*\{[^}]*z-index:\s*10060/);
+  assert.doesNotMatch(thesis, /\.rmd-thesis-pop\s*\{[^}]*z-index:\s*9999/);
+
+  const shell = read("research.js");
+  assert.match(shell, /Costs about\s*["']\s*\+\s*cost/);
+  assert.doesNotMatch(shell, /About\s*["']\s*\+\s*cost/);
+  assert.match(shell, /No MaiK tokens needed/);
+
+  const doc = read("research-doc-editor.js");
+  assert.match(doc, /Costs about 2 MaiK tokens/);
+  assert.doesNotMatch(doc, /About 2 MaiK tokens/);
+
+  const ext = read("research-screen-extract.js");
+  assert.match(ext, /Costs about 2 MaiK tokens/);
+  assert.doesNotMatch(ext, /About 2 MaiK tokens/);
+
+  const pc = read("research-screen-papercard.js");
+  assert.match(pc, /Explain with MaiK \(costs about 1 MaiK token\)/);
+  assert.doesNotMatch(pc, /Explain with MaiK \(about 1 MaiK token\)/);
+});

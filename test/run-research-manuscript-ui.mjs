@@ -398,6 +398,7 @@ try {
 
   // Seed: server-backed project (practice gate skips it) + one saved local run.
   await ev(`(function(){var s=JSON.parse(localStorage.getItem('smd_research_state_v1'));s.projects[0].serverId=s.projects[0].id;s.projects[0].practice=false;s.runs=s.runs||{};s.runs[${JSON.stringify(PID)}]=[${JSON.stringify(LOCAL_RUN)}];localStorage.setItem('smd_research_state_v1',JSON.stringify(s));return 1})()`);
+  await ev(`(()=>{const b=document.getElementById('smdBootSplash');if(b)b.style.display='none';return 1})()`);
   await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
   ok(await until(`!!document.querySelector('.rmd-manuscript-screen')`, 8000), 'manuscript screen renders');
   ok(await ev(`!!document.querySelector('[data-rmd-tab="manuscript"]')`), 'research shell nav carries Manuscript tab');
@@ -483,6 +484,35 @@ try {
   ok(await until(`!!document.querySelector('.rmd-editor-card .rmd-banner-error')`, 3000), 'long section polish shows inline notice');
   const longPolishText = await text('.rmd-editor-card .rmd-banner-error');
   ok(/5,000-character limit/i.test(longPolishText) && !/Something went wrong on our side/i.test(longPolishText), 'too-long section polish shows plain character-limit message');
+
+  /* 1e. Draft preview modal (Item 1): rendered on top of #researchMD shell with elementFromPoint inside popup */
+  await ev(`(()=>{
+    const c = document.querySelector('.rmd-manuscript-screen');
+    if (window.SMD_RESEARCH && SMD_RESEARCH.screens && SMD_RESEARCH.screens.manuscript && SMD_RESEARCH.screens.manuscript.showDraftPreviewModal) {
+      SMD_RESEARCH.screens.manuscript.showDraftPreviewModal(c, 'prj_bcg_1994', 'Patient presented with 39 C fever. Day 1: stable.', [], false, 'prj_bcg_1994');
+    }
+    return 1;
+  })()`);
+  ok(await until('!!document.getElementById("rmdCaseReportDraftModal")', 5000), 'case report draft preview modal opened');
+  const modalHit = await ev(`(()=>{
+    const shell = document.getElementById('researchMD');
+    const modal = document.getElementById('rmdCaseReportDraftModal');
+    if (!shell || !modal) return null;
+    const shellZ = parseInt(getComputedStyle(shell).zIndex, 10) || 0;
+    const modalZ = parseInt(getComputedStyle(modal).zIndex, 10) || 0;
+    const box = modal.querySelector('.rmd-modal-card');
+    const target = box || modal;
+    const r = target.getBoundingClientRect();
+    const cx = Math.floor(r.left + r.width / 2);
+    const cy = Math.floor(r.top + r.height / 2);
+    const topEl = document.elementFromPoint(cx, cy);
+    const inside = !!(modal && topEl && (modal === topEl || modal.contains(topEl)));
+    return { shellZ, modalZ, inside, topElTag: topEl ? topEl.tagName : null };
+  })()`);
+  ok(modalHit && modalHit.modalZ > modalHit.shellZ, `draft preview modal z-index (${modalHit && modalHit.modalZ}) is above #researchMD (${modalHit && modalHit.shellZ})`);
+  ok(modalHit && modalHit.inside, 'document.elementFromPoint at modal centre is inside popup');
+  await click('#rmd-cr-close-modal');
+  ok(await until('!document.getElementById("rmdCaseReportDraftModal")', 3000), 'draft preview modal closed');
 
   // Restore original Results section via reload so section tests below run on exact RESULTS_TEXT
   await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
