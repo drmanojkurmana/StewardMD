@@ -61,8 +61,8 @@ try {
   ok(b.h >= 72 && b.dash < 0.01 && /Let go/.test(b.t) && /armed/.test(b.cls) && b.heart > 0.9, `past the trigger: trace complete, the heart pops, "Let go" (${Math.round(b.h)} px)`);
   ok(b.pulling, 'body.hv-pulling while open');
   ok(await ev(`(()=>{const bb=document.querySelector('#homeV2 > .hv-pull').getBoundingClientRect(),h=document.querySelector('#homeV2 .hrf-hero').getBoundingClientRect();return bb.bottom>=h.top && bb.bottom-h.top<=4})()`), 'no strip of page between the band and the hero (the band tucks under it)');
-  await ev(`window.SMD_SWIPE_BACK && SMD_SWIPE_BACK.syncHandle && SMD_SWIPE_BACK.syncHandle();1`);
-  ok(await ev(`(()=>{const k=document.getElementById('smdTopBack');return !k||getComputedStyle(k).visibility==='hidden'})()`), 'no Back button over Home while it is pulled');
+  await ev(`1`);
+  ok(await ev(`(()=>{const k=document.getElementById('smdTopBack');return !k})()`), 'no Back button (#smdTopBack removed by nofab) over Home while it is pulled');
   await shot('pulled-light');
   // release: the pearl, the band held open
   await touch('touchEnd');
