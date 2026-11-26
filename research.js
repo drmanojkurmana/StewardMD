@@ -1418,12 +1418,38 @@
       "#researchMD .rmd-feedback-status { font: 400 13px var(--rmd-f); color: var(--rmd-mut); margin: 8px 0; min-height: 18px; }",
       "#researchMD .rmd-feedback-actions { display: flex; gap: 8px; margin-top: 4px; }",
       "#researchMD .rmd-tut-bar { margin: 8px 16px 0; padding: 12px 14px; border: 1.5px solid var(--rmd-acc); border-radius: 12px; background: var(--rmd-panel); box-sizing: border-box; }",
+      "#researchMD .rmd-tut-compact { display: flex; align-items: center; gap: 8px; justify-content: space-between; min-width: 0; }",
+      "#researchMD .rmd-tut-compact-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }",
+      "#researchMD .rmd-tut-compact-line { margin: 0; font: 600 13px/1.35 var(--rmd-f); color: var(--rmd-ink); display: flex; align-items: center; gap: 6px; min-width: 0; }",
+      "#researchMD .rmd-tut-step-tag { color: var(--rmd-acc); font-weight: 700; flex: 0 0 auto; white-space: nowrap; }",
+      "#researchMD .rmd-tut-short { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }",
+      "#researchMD .rmd-tut-meta { margin: 0; font: 500 11.5px/1.3 var(--rmd-f); color: var(--rmd-mut); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }",
+      "#researchMD .rmd-tut-compact-btns { display: flex; align-items: center; gap: 6px; flex: 0 0 auto; }",
+      "#researchMD .rmd-tut-compact-btns .rmd-btn { min-height: 44px; min-width: 44px; white-space: nowrap; }",
+      "#researchMD .rmd-tut-toggle { display: inline-flex; align-items: center; gap: 4px; }",
+      "#researchMD .rmd-tut-toggle svg { transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }",
+      "#researchMD .rmd-tut-toggle[aria-expanded=\"true\"] svg { transform: rotate(180deg); }",
+      "#researchMD .rmd-tut-details { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--rmd-line); }",
+      "#researchMD .rmd-tut-details[hidden] { display: none; }",
       "#researchMD .rmd-tut-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px; }",
       "#researchMD .rmd-tut-prog { font: 600 12px var(--rmd-f); color: var(--rmd-mut); }",
       "#researchMD .rmd-tut-ask { margin: 4px 0; font: 600 13.5px var(--rmd-f); color: var(--rmd-ink); line-height: 1.45; }",
       "#researchMD .rmd-tut-why { margin: 0 0 8px; font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); line-height: 1.4; }",
       "#researchMD .rmd-tut-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }",
-      "#researchMD .rmd-tut-def { display: inline-flex; align-items: center; gap: 6px; font: 400 12px var(--rmd-f); color: var(--rmd-mut); margin-left: auto; cursor: pointer; }",
+      "#researchMD .rmd-tut-actions .rmd-btn { min-height: 44px; }",
+      "#researchMD .rmd-tut-def { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font: 400 12px var(--rmd-f); color: var(--rmd-mut); margin-left: auto; cursor: pointer; }",
+      "#researchMD .rmd-tut-how-tip { margin-top: 8px; padding: 8px 10px; border-radius: 8px; background: var(--rmd-fill); border: 1px solid var(--rmd-line); font: 400 12.5px/1.45 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-tut-how-tip[hidden] { display: none; }",
+      "#researchMD .rmd-tut-how-tip p { margin: 3px 0; }",
+      "@media (max-width: 600px) {",
+      "  #researchMD .rmd-tut-bar { margin: 6px 10px 0; padding: 8px 10px; border-radius: 10px; }",
+      "  #researchMD .rmd-tut-compact { gap: 6px; }",
+      "  #researchMD .rmd-tut-compact-btns .rmd-btn { padding: 6px 10px; font-size: 12.5px; }",
+      "  #researchMD .rmd-tut-def { margin-left: 0; }",
+      "}",
+      "@media (prefers-reduced-motion: reduce) {",
+      "  #researchMD .rmd-tut-toggle svg { transition: none; }",
+      "}",
       "#researchMD .rmd-tut-spot { outline: 3px solid var(--rmd-acc) !important; outline-offset: 2px; box-shadow: 0 0 0 5px rgba(21,128,61,0.22); transition: box-shadow 0.2s ease; }",
       "#researchMD .rmd-tut-hub { margin-bottom: 18px; padding: 14px; border: 1px solid var(--rmd-line); border-radius: 12px; background: var(--rmd-panel); }",
       "#researchMD .rmd-tut-hub-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px; }",
@@ -2538,7 +2564,7 @@
     for (var i = 0; i < journey.length; i++) {
       if (journey[i] === screenName) idx = i;
     }
-    if (info && idx >= 0 && helpPrefs()[screenName] !== "closed") {
+    if (info && idx >= 0 && !(proj && proj.tutorial) && helpPrefs()[screenName] !== "closed") {
       var seen = seenPrefs();
       var tip = STEP_TIPS[screenName] || "";
       var label = TAB_LABELS[screenName] || info.name;
@@ -2720,6 +2746,15 @@
     var base = "/v1/projects/" + encodeURIComponent(proj.serverId || proj.id);
     var t = (proj.studyType || "").toLowerCase();
     var gid = checklistFor(proj, "publication");
+    if (G.SMD_RESEARCH_CHECKLIST && typeof G.SMD_RESEARCH_CHECKLIST.chooseChecklistId === "function") {
+      var prefGid = preferredChecklist(proj.serverId || proj.id) || preferredChecklist(proj.id);
+      var tutGid = "";
+      if (proj.tutorial && SMD.tutorial && SMD.tutorial.exampleByKey) {
+        var tutEx = SMD.tutorial.exampleByKey(proj.tutorialKey || (SMD.tutorial.keyForStudyType && SMD.tutorial.keyForStudyType(proj.studyType)));
+        if (tutEx && tutEx.checklistId) tutGid = tutEx.checklistId;
+      }
+      gid = G.SMD_RESEARCH_CHECKLIST.chooseChecklistId(null, proj, prefGid, tutGid, checklistFor) || gid;
+    }
     function softFail(err) {
       var f = friendlyError(err);
       if (f.action === "signin" || f.action === "save-or-back" || f.action === "back" || (err && (err.code === "network" || (err.status || 0) >= 500))) throw err;
@@ -3212,6 +3247,9 @@
     navigate: navigate,
     refreshScreen: function () { navigate(currentScreen, {}, true); },
     esc: esc,
+    HELP: HELP,
+    STEP_TIPS: STEP_TIPS,
+    TAB_LABELS: TAB_LABELS,
     drainQueue: drainQueue,
     openSyncSheet: openSyncSheet,
     closeSyncSheet: closeSyncSheet,

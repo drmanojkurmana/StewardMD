@@ -216,7 +216,7 @@
     amendments = own(content, "amendments") ? content.amendments : (raw && own(raw, "amendments") ? raw.amendments : undefined);
     return {
       present: present,
-      title: firstText(content.title, raw && raw.title, snapshot.title, snapshot.project && snapshot.project.title),
+      title: firstText(content.title, raw && raw.title, snapshot.manuscript && snapshot.manuscript.title, snapshot.title, snapshot.projectTitle, snapshot.project && snapshot.project.title),
       question: firstText(content.question, content.researchQuestion, content.objectives && content.objectives.question),
       objectives: firstText(content.objectives, content.objective, content.aim),
       rationale: firstText(content.rationale, content.background),
@@ -330,6 +330,7 @@
     }
     bag = {
       projectTitle: proto.title,
+      manuscriptTitle: firstText(ms && ms.title, s.title, s.projectTitle, s.project && s.project.title),
       protocolPresent: proto.present,
       question: proto.question,
       objectives: typeof proto.objectives === "string" ? proto.objectives : textOf(proto.objectives),
@@ -551,6 +552,7 @@
   function fillTitle(view) {
     var found = findHeading(view, ["title"]);
     var phrase = "systematic review";
+    var titleText;
     if (found) {
       var hit = findPara(found.section, [phrase]);
       if (hit >= 0) return pack("auto", found.section.paragraphs[hit], ["Title states systematic review."], ptr(found, hit));
@@ -558,8 +560,13 @@
         return pack("partial", found.section.paragraphs[0], ["The title does not say systematic review."], ptr(found, 0));
       }
     }
-    if (view.projectTitle && low(view.projectTitle).indexOf(phrase) !== -1) {
-      return pack("partial", "", ["Project title: " + view.projectTitle + ". The manuscript title was not found."]);
+    titleText = firstText(view.manuscriptTitle, view.projectTitle);
+    if (titleText && low(titleText).indexOf(phrase) !== -1) {
+      if (view.manuscriptTitle) return pack("auto", titleText, ["Title states systematic review."], null);
+      return pack("partial", "", ["Project title: " + titleText + ". The manuscript title was not found."]);
+    }
+    if (view.manuscriptTitle) {
+      return pack("partial", view.manuscriptTitle, ["The title does not say systematic review."], null);
     }
     return pack("missing", "", ["No manuscript title was found."]);
   }
@@ -1081,12 +1088,59 @@
     return pack("partial", "", ["GRADE rows are missing an outcome or a certainty."]);
   }
 
+  function isTitleTopic(item) {
+    var tk = normKey(item && item.topic);
+    return tk === "title" || tk.indexOf("title ") === 0;
+  }
+
+  function headingAliasNeedles(item) {
+    var tk = normKey(item && item.topic);
+    if (!tk) return [];
+    if (tk.indexOf("patient information") !== -1 || tk.indexOf("clinical finding") !== -1 ||
+        tk.indexOf("diagnostic") !== -1 || tk.indexOf("therapeutic") !== -1 ||
+        tk.indexOf("follow up") !== -1) {
+      return ["patient information", "case presentation", "case report", "clinical findings"];
+    }
+    if (tk.indexOf("timeline") !== -1) return ["timeline", "clinical timeline"];
+    if (tk.indexOf("introduction") !== -1 || tk.indexOf("background") !== -1 || tk.indexOf("rationale") !== -1) {
+      return ["introduction", "background", "rationale"];
+    }
+    if (tk.indexOf("abstract") !== -1) return ["abstract"];
+    if (tk.indexOf("discussion") !== -1 || tk.indexOf("take home") !== -1 || tk.indexOf("conclusion") !== -1) {
+      return ["discussion", "conclusion"];
+    }
+    if (tk.indexOf("study design") !== -1 || tk.indexOf("sample size") !== -1 || tk.indexOf("study size") !== -1 || tk.indexOf("statistical") !== -1) {
+      return ["methods"];
+    }
+    if (tk.indexOf("outcome") !== -1 || tk.indexOf("main result") !== -1 || tk.indexOf("synthesis") !== -1) {
+      return ["results", "findings"];
+    }
+    return [];
+  }
+
   function genericManuscript(view, item) {
-    var pointer = scorePointer(view, item, pack("missing", "", []));
-    var text;
+    var pointer, text, found, titleText, needles;
+    if (isTitleTopic(item)) {
+      found = findHeading(view, ["title page", "title and abstract", "title and keywords", "title"]);
+      if (found && found.section.paragraphs.length) {
+        return pack("auto", found.section.paragraphs[0], ["Title is recorded in the manuscript."], ptr(found, 0));
+      }
+      titleText = view.manuscriptTitle || (view.manuscript.length ? view.projectTitle : "");
+      if (titleText) {
+        return pack("auto", titleText, ["Title is recorded on the manuscript."], null);
+      }
+    }
+    pointer = scorePointer(view, item, pack("missing", "", []));
     if (pointer) {
       text = paragraphAt(view, pointer);
       if (text) return pack("auto", text, ["Matched a manuscript paragraph."], pointer);
+    }
+    needles = headingAliasNeedles(item);
+    if (needles.length) {
+      found = findHeading(view, needles);
+      if (found && found.section.paragraphs.length) {
+        return pack("auto", found.section.paragraphs[0], ["Matched a manuscript section."], ptr(found, 0));
+      }
     }
     if (view.manuscript.length) return pack("partial", "", ["The manuscript has sections, but none matched this item."]);
     return pack("missing", "", ["No manuscript is stored."]);
@@ -1210,11 +1264,78 @@
     return lines.join("\n");
   }
 
+  function studyTypeChecklistId(project, studyChecklistFn) {
+    var t = low(project && (project.studyType || project.study_type));
+    var mapped = "";
+    if (t.indexOf("case-control") !== -1 || t.indexOf("case control") !== -1) return "strobe";
+    if (t.indexOf("case-series") !== -1 || t.indexOf("case series") !== -1) return "care";
+    if (t.indexOf("case-report") !== -1 || t.indexOf("case report") !== -1) return "care";
+    if (t.indexOf("rct") !== -1 || t.indexOf("randomized") !== -1 || t.indexOf("randomised") !== -1 || t.indexOf("trial") !== -1) return "consort";
+    if (t.indexOf("cohort") !== -1 && t.indexOf("synthesis") === -1) return "strobe";
+    if (t.indexOf("observational") !== -1 || t.indexOf("survey") !== -1 || t.indexOf("diagnostic") !== -1 || t.indexOf("thesis") !== -1 ||
+        t.indexOf("master chart") !== -1 || t.indexOf("masterchart") !== -1 || t.indexOf("original study") !== -1 ||
+        t.indexOf("cross-sectional") !== -1 || t.indexOf("cross sectional") !== -1) {
+      return "strobe";
+    }
+    if (t.indexOf("systematic") !== -1 || t.indexOf("meta-analysis") !== -1 || t.indexOf("meta analysis") !== -1 || t.indexOf("prisma") !== -1) {
+      return "prisma2020";
+    }
+    if (typeof studyChecklistFn === "function" && project) {
+      mapped = studyChecklistFn(project, "publication") || "";
+      if (mapped && mapped !== "none") return mapped;
+    }
+    return "";
+  }
+
+  function matchChecklistRow(rows, candidate) {
+    var c = low(candidate);
+    var i, aliases, a;
+    if (!c) return "";
+    if (!rows || !rows.length) return trim(candidate);
+    for (i = 0; i < rows.length; i++) {
+      if (rows[i] && rows[i].id && low(rows[i].id) === c) return String(rows[i].id);
+    }
+    aliases = [];
+    if (c === "consort") aliases = ["consort2025", "consort2010"];
+    else if (c === "prisma") aliases = ["prisma2020"];
+    else if (c === "stard") aliases = ["stard2015"];
+    else if (c === "case-report" || c === "case report") aliases = ["care"];
+    for (a = 0; a < aliases.length; a++) {
+      for (i = 0; i < rows.length; i++) {
+        if (rows[i] && rows[i].id && low(rows[i].id) === aliases[a]) return String(rows[i].id);
+      }
+    }
+    return "";
+  }
+
+  function chooseChecklistId(rows, project, preferredId, tutorialChecklistId, studyChecklistFn) {
+    var list = isArr(rows) ? rows : [];
+    var matched, byType;
+    if (preferredId) {
+      matched = matchChecklistRow(list, preferredId);
+      if (matched) return matched;
+    }
+    if (project && project.tutorial && tutorialChecklistId) {
+      matched = matchChecklistRow(list, tutorialChecklistId);
+      if (matched) return matched;
+    }
+    byType = studyTypeChecklistId(project, studyChecklistFn);
+    if (byType) {
+      matched = matchChecklistRow(list, byType);
+      if (matched) return matched;
+    }
+    matched = matchChecklistRow(list, "prisma2020");
+    if (matched) return matched;
+    if (list.length && list[0] && list[0].id) return String(list[0].id);
+    return byType || "prisma2020";
+  }
+
   var API = {
     name: NAME,
     version: VERSION,
     fill: fill,
-    toCsv: toCsv
+    toCsv: toCsv,
+    chooseChecklistId: chooseChecklistId
   };
 
   if (typeof module !== "undefined" && module.exports) { module.exports = API; }

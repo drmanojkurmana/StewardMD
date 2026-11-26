@@ -104,6 +104,7 @@
       manuscriptSections: [
         { id: "title", heading: "Title Page", level: 1, text: "Isoniazid-Induced Severe Hepatotoxicity Resolving After Drug Withdrawal: A Case Report" },
         { id: "abstract", heading: "Abstract", level: 1, text: "Introduction: Isoniazid can trigger acute idiosyncratic liver injury. Case presentation: A 42-year-old female presented with jaundice 21 days into latent tuberculosis prophylaxis (ALT 840 U/L, bilirubin 6.2 mg/dL). Drug cessation led to complete recovery in 3 weeks. Conclusion: Early symptom vigilance prevents progression to acute liver failure." },
+        { id: "introduction", heading: "Introduction", level: 1, text: "Isoniazid remains a standard first-line therapy for latent tuberculosis infection, though idiosyncratic hepatotoxicity occurs in up to 1% of recipients." },
         { id: "casePresentation", heading: "Case Presentation", level: 1, text: "A 42-year-old female presented on 2026-09-01 with anorexia, dark urine, and scleral icterus three weeks after initiating isoniazid 300 mg daily. Viral hepatitis serologies and autoimmune markers were negative. Liver enzymes peaked at ALT 840 U/L and bilirubin 6.2 mg/dL. Prompt drug withdrawal led to ALT 38 U/L by day 21." },
         { id: "timeline", heading: "Timeline", level: 1, text: "Day 1: Started isoniazid 300 mg/day. Day 21: Jaundice, ALT 840 U/L, drug stopped. Day 42: Full resolution (ALT 38 U/L). Month 3: Normal follow-up." },
         { id: "discussion", heading: "Discussion", level: 1, text: "Isoniazid hepatotoxicity occurs in up to 1% of recipients. Baseline testing and educating patients on early warning signs such as nausea or dark urine remain essential." },
@@ -173,7 +174,9 @@
       manuscriptSections: [
         { id: "title", heading: "Title Page", level: 1, text: "Clinical Course and Outcomes in Acute Aluminum Phosphide Poisoning: A Case Series" },
         { id: "abstract", heading: "Abstract", level: 1, text: "Background: Aluminum phosphide poisoning carries high mortality due to toxic myocarditis. Cases: We report consecutive adult admissions managed with protocolized IV magnesium and early vasoactive titration. Conclusion: Structured critical care resuscitation improves survival." },
+        { id: "introduction", heading: "Introduction", level: 1, text: "Acute aluminum phosphide ingestion causes rapid cellular hypoxia and refractory cardiogenic shock with high mortality unless aggressive supportive resuscitation begins immediately." },
         { id: "casePresentation", heading: "Case Presentation", level: 1, text: "Three detailed consecutive patients aged 24 to 31 years presented within 4 hours of ingestion with severe metabolic acidosis and hypotension. All received prompt magnesium sulfate, hemodynamic resuscitation, and survived to 30-day follow-up." },
+        { id: "timeline", heading: "Timeline", level: 1, text: "Hour 0 to 4: Emergency arrival with shock and acidosis. Hour 1: IV magnesium sulfate and vasopressors started. Day 6 to 8: ICU discharge. Day 30: Normal outpatient recovery." },
         { id: "discussion", heading: "Discussion", level: 1, text: "Rapid mitochondrial toxicity causes refractory shock unless perfusion and electrolyte disturbances are corrected within the first golden hour." },
         { id: "conclusion", heading: "Conclusion", level: 1, text: "Protocolized hemodynamic and magnesium therapy should be initiated immediately upon emergency arrival." }
       ]
@@ -558,54 +561,57 @@
 
   function checklistDef(gid) {
     function makeChecklist(id, name, rows) {
-      var mapped = [];
+      var sections = [];
       for (var i = 0; i < rows.length; i++) {
-        mapped.push({
-          num: rows[i].num,
-          topic: rows[i].section,
-          text: rows[i].title,
-          projectField: "manual"
+        sections.push({
+          title: rows[i].section,
+          items: [{
+            num: rows[i].num,
+            topic: rows[i].section,
+            text: rows[i].title,
+            projectField: rows[i].projectField || "manuscript"
+          }]
         });
       }
       return {
         id: id,
         name: name,
         items: rows,
-        sections: [{ title: "Reporting Checklist Items", items: mapped }]
+        sections: sections
       };
     }
     var defs = {
       care: makeChecklist("care", "CARE 2013 Case Report Checklist", [
-        { num: "1", section: "Title", title: "Title identifies diagnosis/intervention followed by case report", projectField: "title" },
-        { num: "4", section: "Introduction", title: "Clinical background explaining why this case is unique", projectField: "introduction" },
-        { num: "5", section: "Patient Information", title: "De-identified demographics, symptoms, and medical history", projectField: "casePresentation" },
-        { num: "7", section: "Timeline", title: "Important milestones organized chronologically", projectField: "timeline" },
-        { num: "11", section: "Discussion", title: "Strengths, limitations, and primary take-away lessons", projectField: "discussion" },
-        { num: "13", section: "Informed Consent", title: "Patient provided informed consent for publication", projectField: "pubconsent" }
+        { num: "1", section: "Title", title: "Title identifies diagnosis/intervention followed by case report", projectField: "manuscript" },
+        { num: "4", section: "Introduction", title: "Clinical background explaining why this case is unique", projectField: "manuscript" },
+        { num: "5", section: "Patient Information", title: "De-identified demographics, symptoms, and medical history", projectField: "manuscript" },
+        { num: "7", section: "Timeline", title: "Important milestones organized chronologically", projectField: "manuscript" },
+        { num: "11", section: "Discussion", title: "Strengths, limitations, and primary take-away lessons", projectField: "manuscript" },
+        { num: "13", section: "Informed Consent", title: "Patient provided informed consent for publication", projectField: "manual" }
       ]),
       consort: makeChecklist("consort", "CONSORT 2010 Trial Checklist", [
-        { num: "1a", section: "Title", title: "Identification as a randomized trial in the title", projectField: "title" },
-        { num: "2a", section: "Background", title: "Scientific background and explanation of rationale", projectField: "introduction" },
-        { num: "7a", section: "Sample Size", title: "How sample size was determined", projectField: "methods" },
-        { num: "8a", section: "Randomisation", title: "Method used to generate the random allocation sequence", projectField: "randomise" },
-        { num: "17a", section: "Outcomes", title: "Primary outcome results, effect size, and precision", projectField: "results" },
-        { num: "23", section: "Registration", title: "Registration number and name of trial registry", projectField: "ctri" }
+        { num: "1a", section: "Title", title: "Identification as a randomized trial in the title", projectField: "manuscript" },
+        { num: "2a", section: "Background", title: "Scientific background and explanation of rationale", projectField: "manuscript" },
+        { num: "7a", section: "Sample Size", title: "How sample size was determined", projectField: "manuscript" },
+        { num: "8a", section: "Randomisation", title: "Method used to generate the random allocation sequence", projectField: "manual" },
+        { num: "17a", section: "Outcomes", title: "Primary outcome results, effect size, and precision", projectField: "manuscript" },
+        { num: "23", section: "Registration", title: "Registration number and name of trial registry", projectField: "manual" }
       ]),
       strobe: makeChecklist("strobe", "STROBE Observational Checklist", [
-        { num: "1a", section: "Title & Abstract", title: "Indicate the study design in title or abstract", projectField: "abstract" },
-        { num: "3", section: "Introduction", title: "State specific objectives and prespecified hypotheses", projectField: "introduction" },
-        { num: "4", section: "Study Design", title: "Present key elements of study design early in the paper", projectField: "methods" },
-        { num: "10", section: "Study Size", title: "Explain how the study size was arrived at", projectField: "methods" },
-        { num: "16", section: "Main Results", title: "Give unadjusted and adjusted estimates with 95% confidence intervals", projectField: "results" },
-        { num: "18", section: "Discussion", title: "Summarise key results with reference to study objectives", projectField: "discussion" }
+        { num: "1a", section: "Title & Abstract", title: "Indicate the study design in title or abstract", projectField: "manuscript" },
+        { num: "3", section: "Introduction", title: "State specific objectives and prespecified hypotheses", projectField: "manuscript" },
+        { num: "4", section: "Study Design", title: "Present key elements of study design early in the paper", projectField: "manuscript" },
+        { num: "10", section: "Study Size", title: "Explain how the study size was arrived at", projectField: "manuscript" },
+        { num: "16", section: "Main Results", title: "Give unadjusted and adjusted estimates with 95% confidence intervals", projectField: "manuscript" },
+        { num: "18", section: "Discussion", title: "Summarise key results with reference to study objectives", projectField: "manuscript" }
       ]),
       prisma2020: makeChecklist("prisma2020", "PRISMA 2020 Review Checklist", [
-        { num: "1", section: "Title", title: "Identify the report as a systematic review", projectField: "title" },
-        { num: "3", section: "Introduction", title: "Describe the rationale for the review", projectField: "introduction" },
-        { num: "6", section: "Information Sources", title: "Specify all databases and dates searched", projectField: "methods" },
+        { num: "1", section: "Title", title: "Identify the report as a systematic review", projectField: "manuscript" },
+        { num: "3", section: "Introduction", title: "Describe the rationale for the review", projectField: "manuscript" },
+        { num: "6", section: "Information Sources", title: "Specify all databases and dates searched", projectField: "search" },
         { num: "16", section: "Study Selection", title: "Describe numbers of studies screened and included", projectField: "prisma" },
-        { num: "20", section: "Synthesis", title: "Present pooled results, confidence intervals, and heterogeneity", projectField: "results" },
-        { num: "24", section: "Discussion", title: "Provide a general interpretation of results and limitations", projectField: "discussion" }
+        { num: "20", section: "Synthesis", title: "Present pooled results, confidence intervals, and heterogeneity", projectField: "manuscript" },
+        { num: "24", section: "Discussion", title: "Provide a general interpretation of results and limitations", projectField: "manuscript" }
       ])
     };
     return defs[gid] || defs.strobe;
@@ -965,13 +971,37 @@
         var chkList = checklistDef(ex.checklistId || "strobe");
         var manualMap = sb.manualChecklist || {};
         var manualCount = Object.keys(manualMap).length;
+        var msTitle = (sb.manuscript && sb.manuscript.title) || ex.fullTitle;
+        var msSecs = [];
+        for (var si = 0; si < (sb.manuscript.sections || []).length; si++) {
+          if (sb.manuscript.sections[si] && sb.manuscript.sections[si].text) {
+            msSecs.push(sb.manuscript.sections[si]);
+          }
+        }
+        var recsCount = Math.max(sb.records.length, 24);
+        var incCount = (SMD.store && SMD.store.getStudies) ? Math.max((SMD.store.getStudies(pid) || []).length, 4) : 4;
         return Promise.resolve({
           snapshot: {
             type: ex.checklistId || "strobe",
-            projectTitle: ex.fullTitle,
+            title: msTitle,
+            projectTitle: msTitle,
             manual: manualMap,
-            manuscript: { sections: sb.manuscript.sections || [] },
-            prisma: { studiesIncluded: Math.max(sb.records.length, 4) },
+            searches: sb.searchRuns || [],
+            manuscript: {
+              title: msTitle,
+              status: sb.manuscript.status,
+              approval: sb.manuscript.approval,
+              sections: msSecs
+            },
+            prisma: {
+              recordsIdentified: recsCount,
+              recordsScreened: recsCount - 4,
+              recordsExcluded: Math.max(0, recsCount - 4 - incCount),
+              reportsSought: incCount,
+              reportsAssessed: incCount,
+              reportsExcluded: 0,
+              studiesIncluded: incCount
+            },
             completeHint: manualCount >= chkList.items.length
           },
           completionPct: Math.min(100, Math.round((manualCount / Math.max(1, chkList.items.length)) * 100))
@@ -1027,7 +1057,17 @@
         var thAll = readJson("smd_rmd_thesis_v1", {});
         delete thAll[pid];
         writeJson("smd_rmd_thesis_v1", thAll);
+        var docAll = readJson("smd_rmd_doc_v1", {});
+        delete docAll[pid];
+        writeJson("smd_rmd_doc_v1", docAll);
+        var manAll = readJson("smd_rmd_manuscript_local_v1", {});
+        delete manAll[pid];
+        writeJson("smd_rmd_manuscript_local_v1", manAll);
       } catch (e) {}
+    }
+
+    if (SMD.setPreferredChecklist && ex.checklistId) {
+      SMD.setPreferredChecklist(pid, ex.checklistId);
     }
 
     var state = store.getState();
@@ -1464,11 +1504,14 @@
           var sb = getSandbox(proj.id);
           for (var i = 0; i < (ex.manuscriptSections || []).length; i++) {
             var srcSec = ex.manuscriptSections[i];
+            var found = false;
             for (var j = 0; j < sb.manuscript.sections.length; j++) {
               if (sb.manuscript.sections[j].id === srcSec.id) {
                 sb.manuscript.sections[j].text = srcSec.text;
+                found = true;
               }
             }
+            if (!found) sb.manuscript.sections.push({ id: srcSec.id, heading: srcSec.heading, level: srcSec.level || 1, text: srcSec.text });
           }
           sb.manuscript.status = "approved";
           sb.manuscript.approval = { status: "approved", approvedAt: Date.now() };
@@ -1478,19 +1521,38 @@
             var appBtn = body.querySelector('[data-rmd="manuscript-approve"]');
             if (appBtn) appBtn.click();
           }
-          return "Drafted all sections from the worked example and approved Manuscript v1.";
+          return (sb.manuscript.status === "approved")
+            ? "Drafted all sections from the worked example and approved Manuscript v1."
+            : "Drafted sections from the worked example.";
         }
       },
       checklist: {
         ask: "Fill in how your paper covers each reporting item, OR click Enter & Show Me to complete the entire " + ex.checklistLabel + " checklist.",
         why: "Peer reviewers check " + ex.checklistLabel + " compliance before sending manuscripts for review.",
-        sel: '[data-rmd-manual], [data-rmd-manual-save]',
+        sel: '[data-rmd-manual], [data-rmd-manual-save], [data-doc-body], [data-rmd-approve]',
         autoDo: function () {
           var sb = getSandbox(proj.id);
           var def = checklistDef(ex.checklistId || "strobe");
+          for (var s = 0; s < (ex.manuscriptSections || []).length; s++) {
+            var srcSec = ex.manuscriptSections[s];
+            var matched = false;
+            for (var j = 0; j < sb.manuscript.sections.length; j++) {
+              if (sb.manuscript.sections[j].id === srcSec.id) {
+                if (!sb.manuscript.sections[j].text) sb.manuscript.sections[j].text = srcSec.text;
+                matched = true;
+              }
+            }
+            if (!matched) sb.manuscript.sections.push({ id: srcSec.id, heading: srcSec.heading, level: srcSec.level || 1, text: srcSec.text });
+          }
+          if ((ex.checklistId || "") === "prisma2020" && (!sb.searchRuns || !sb.searchRuns.length)) {
+            sb.searchRuns = [{ id: "srch_tut_1", database: "PubMed", query: ex.shortTitle, lastSearchDate: nowIsoDate(), resultCount: 24 }];
+          }
           for (var i = 0; i < def.items.length; i++) {
             sb.manualChecklist[def.items[i].num] = "Verified in tutorial " + def.items[i].section + " section.";
           }
+          var docAll = readJson("smd_rmd_doc_v1", {});
+          delete docAll[proj.id];
+          writeJson("smd_rmd_doc_v1", docAll);
           saveSandbox(proj.id, sb);
           if (SMD.refreshScreen) SMD.refreshScreen();
           return "Completed all " + def.items.length + " " + ex.checklistLabel + " checklist items.";
@@ -1509,6 +1571,20 @@
             return "Submitted manuscript pack to " + (ex.journal || "JAMA") + "!";
           }
           var sb = getSandbox(proj.id);
+          for (var s = 0; s < (ex.manuscriptSections || []).length; s++) {
+            var srcSec = ex.manuscriptSections[s];
+            var matched = false;
+            for (var j = 0; j < sb.manuscript.sections.length; j++) {
+              if (sb.manuscript.sections[j].id === srcSec.id) {
+                if (!sb.manuscript.sections[j].text) sb.manuscript.sections[j].text = srcSec.text;
+                matched = true;
+              }
+            }
+            if (!matched) sb.manuscript.sections.push({ id: srcSec.id, heading: srcSec.heading, level: srcSec.level || 1, text: srcSec.text });
+          }
+          if ((ex.checklistId || "") === "prisma2020" && (!sb.searchRuns || !sb.searchRuns.length)) {
+            sb.searchRuns = [{ id: "srch_tut_1", database: "PubMed", query: ex.shortTitle, lastSearchDate: nowIsoDate(), resultCount: 24 }];
+          }
           sb.manuscript.status = "approved";
           sb.manuscript.approval = { status: "approved", approvedAt: Date.now() };
           var def = checklistDef(ex.checklistId || "strobe");
@@ -1536,7 +1612,49 @@
   /* ---- 6. Coach Bar UI & Target Highlighting --------------------------- */
 
   var coachMsg = "";
+  var coachScreen = "";
   var pulseTimer = null;
+  var COLLAPSE_KEY = "smd_rmd_tut_collapsed_v1";
+  var howOpen = false;
+  var resizeBound = false;
+
+  function isCompactPhone() {
+    try {
+      if (G.matchMedia) return G.matchMedia("(max-width: 600px)").matches;
+    } catch (e) {}
+    return (G.innerWidth || 1024) <= 600;
+  }
+
+  function getCollapsedPref() {
+    try {
+      if (G.sessionStorage) {
+        var raw = G.sessionStorage.getItem(COLLAPSE_KEY);
+        if (raw === "1") return true;
+        if (raw === "0") return false;
+      }
+    } catch (e) {}
+    return isCompactPhone();
+  }
+
+  function setCollapsedPref(collapsed) {
+    try {
+      if (G.sessionStorage) G.sessionStorage.setItem(COLLAPSE_KEY, collapsed ? "1" : "0");
+    } catch (e) {}
+  }
+
+  function stepAiCost(screenName) {
+    if (screenName === "thesis-draft") return 3;
+    if (screenName === "plan" || screenName === "protocol" || screenName === "search" ||
+        screenName === "screening" || screenName === "extract" || screenName === "rob" ||
+        screenName === "manuscript" || screenName === "checklist") return 2;
+    return 0;
+  }
+
+  function costLabel(cost) {
+    return cost > 0
+      ? ("Costs about " + cost + " MaiK token" + (cost === 1 ? "" : "s"))
+      : "No MaiK tokens needed";
+  }
 
   function clearSpotlight() {
     if (!D) return;
@@ -1568,8 +1686,17 @@
     if (!wrap) return;
 
     if (!proj || !proj.tutorial || screenName === "projects" || screenName === "start") {
+      coachMsg = "";
+      coachScreen = "";
+      howOpen = false;
       wrap.innerHTML = "";
       return;
+    }
+
+    if (coachScreen !== screenName) {
+      coachMsg = "";
+      coachScreen = screenName;
+      howOpen = false;
     }
 
     var key = proj.tutorialKey || keyForStudyType(proj.studyType);
@@ -1580,38 +1707,90 @@
       if (journey[i] === screenName) idx = i;
     }
     var nextStep = (idx >= 0 && idx + 1 < journey.length) ? journey[idx + 1] : "";
+    var tabLabels = SMD.TAB_LABELS || {};
+    var stepTips = SMD.STEP_TIPS || {};
+    var helpInfo = (SMD.HELP && SMD.HELP[screenName]) || null;
+    var nextLabel = nextStep ? (tabLabels[nextStep] || nextStep) : "";
     var guide = stepGuide(screenName, proj);
-    var sb = getSandbox(proj.id);
     var isDef = isTutorialDefault(key);
+    var collapsed = getCollapsedPref();
+    var costStr = costLabel(stepAiCost(screenName));
+    var stepTag = idx >= 0 ? ("Step " + (idx + 1) + " of " + journey.length) : "Guided Practice";
+    var shortTip = stepTips[screenName] || (tabLabels[screenName] || screenName);
+    var toggleChev = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>';
 
     var h = [];
     h.push('<div class="rmd-tut-bar" id="rmdTutBar" role="region" aria-label="Interactive Tutorial Coach">');
-    h.push('  <div class="rmd-tut-top">');
-    h.push('    <span class="rmd-badge rmd-badge-pill" style="background:var(--rmd-acc);color:#fff;">Tutorial · ' + esc(ex.label) + '</span>');
-    h.push('    <span class="rmd-tut-prog">' + (idx >= 0 ? ('Step ' + (idx + 1) + ' of ' + journey.length) : 'Guided Practice') + ' · ' + esc(ex.journal || 'Journal') + ' · 0 tokens</span>');
-    h.push('    <button type="button" class="rmd-btn rmd-btn-quiet rmd-btn-sm" data-rmd-tut="skip" style="margin-left:auto;">Skip tutorial</button>');
-    h.push('  </div>');
-    h.push('  <p class="rmd-tut-ask">' + esc(guide.ask) + '</p>');
-    h.push('  <p class="rmd-tut-why">Why this matters: ' + esc(guide.why) + '</p>');
-    if (coachMsg) {
-      h.push('  <div class="rmd-banner rmd-banner-info" style="margin:6px 0;" role="status">' + esc(coachMsg) + '</div>');
-    }
-    h.push('  <div class="rmd-tut-actions">');
-    h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-tut="auto">Enter &amp; Show Me</button>');
-    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-tut="spot">Show me where</button>');
+    h.push('  <div class="rmd-tut-compact">');
+    h.push('    <div class="rmd-tut-compact-main">');
+    h.push('      <p class="rmd-tut-compact-line"><span class="rmd-tut-step-tag">' + esc(stepTag) + '</span><span class="rmd-tut-short">' + esc(shortTip) + '</span></p>');
+    h.push('      <p class="rmd-tut-meta">Tutorial · ' + esc(ex.label) + ' · ' + esc(ex.journal || 'Journal') + ' · ' + esc(costStr) + '</p>');
+    h.push('    </div>');
+    h.push('    <div class="rmd-tut-compact-btns">');
     if (nextStep) {
-      h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-tut="next">Next step: ' + esc(nextStep) + '</button>');
+      h.push('      <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-tut="next">Next: ' + esc(nextLabel) + '</button>');
     }
-    h.push('    <label class="rmd-tut-def"><input type="checkbox" data-rmd-tut="default"' + (isDef ? ' checked' : '') + '> Save tutorial as default for ' + esc(ex.label) + '</label>');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm rmd-tut-toggle" data-rmd-tut="toggle" aria-expanded="' + (collapsed ? 'false' : 'true') + '" aria-controls="rmdTutDetails"><span>' + (collapsed ? 'Coach' : 'Hide') + '</span>' + toggleChev + '</button>');
+    h.push('    </div>');
+    h.push('  </div>');
+    if (coachMsg) {
+      h.push('  <div class="rmd-banner rmd-banner-info rmd-tut-status" style="margin:6px 0 0;" role="status">' + esc(coachMsg) + '</div>');
+    }
+    h.push('  <div class="rmd-tut-details" id="rmdTutDetails"' + (collapsed ? ' hidden' : '') + '>');
+    h.push('    <div class="rmd-tut-top">');
+    h.push('      <span class="rmd-badge rmd-badge-pill" style="background:var(--rmd-acc);color:#fff;">Tutorial · ' + esc(ex.label) + '</span>');
+    h.push('      <span class="rmd-tut-prog">' + esc(stepTag) + ' · ' + esc(ex.journal || 'Journal') + ' · ' + esc(costStr) + '</span>');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-quiet rmd-btn-sm" data-rmd-tut="skip" style="margin-left:auto;">Skip tutorial</button>');
+    h.push('    </div>');
+    h.push('    <p class="rmd-tut-ask">' + esc(guide.ask) + '</p>');
+    h.push('    <p class="rmd-tut-why">Why this matters: ' + esc(guide.why) + '</p>');
+    h.push('    <div class="rmd-tut-actions">');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-tut="auto">Enter &amp; Show Me</button>');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-tut="spot">Show me where</button>');
+    h.push('      <button type="button" class="rmd-btn rmd-btn-quiet rmd-btn-sm" data-rmd-tut="how" aria-expanded="' + (howOpen ? 'true' : 'false') + '" aria-controls="rmdTutHowTip">How?</button>');
+    h.push('      <label class="rmd-tut-def"><input type="checkbox" data-rmd-tut="default"' + (isDef ? ' checked' : '') + '> Save tutorial as default for ' + esc(ex.label) + '</label>');
+    h.push('    </div>');
+    h.push('    <div class="rmd-tut-how-tip" id="rmdTutHowTip"' + (howOpen ? '' : ' hidden') + '>');
+    if (helpInfo) {
+      h.push('      <p>' + esc(helpInfo.do) + '</p>');
+      if (helpInfo.eg) h.push('      <p>Example: ' + esc(helpInfo.eg) + '</p>');
+      if (helpInfo.gloss) h.push('      <p>' + esc(helpInfo.gloss) + '</p>');
+    } else {
+      h.push('      <p>' + esc(guide.ask) + '</p>');
+    }
+    h.push('      <p><button type="button" class="rmd-btn rmd-btn-quiet rmd-btn-sm" data-rmd-action="glossary">What does this word mean?</button></p>');
+    h.push('    </div>');
     h.push('  </div>');
     h.push('</div>');
 
     wrap.innerHTML = h.join("\n");
 
+    var toggleBtn = wrap.querySelector('[data-rmd-tut="toggle"]');
+    var detailsEl = wrap.querySelector("#rmdTutDetails");
+    if (toggleBtn && detailsEl) {
+      toggleBtn.onclick = function () {
+        var nowCollapsed = !detailsEl.hidden;
+        detailsEl.hidden = nowCollapsed;
+        setCollapsedPref(nowCollapsed);
+        toggleBtn.setAttribute("aria-expanded", nowCollapsed ? "false" : "true");
+        var lbl = toggleBtn.querySelector("span");
+        if (lbl) lbl.textContent = nowCollapsed ? "Coach" : "Hide";
+      };
+    }
+    var howBtn = wrap.querySelector('[data-rmd-tut="how"]');
+    var howTipEl = wrap.querySelector("#rmdTutHowTip");
+    if (howBtn && howTipEl) {
+      howBtn.onclick = function () {
+        howOpen = !howOpen;
+        howTipEl.hidden = !howOpen;
+        howBtn.setAttribute("aria-expanded", howOpen ? "true" : "false");
+      };
+    }
     var autoBtn = wrap.querySelector('[data-rmd-tut="auto"]');
     if (autoBtn) {
       autoBtn.onclick = function () {
         var body = rootEl.querySelector("#rmdScreenBody");
+        coachScreen = screenName;
         coachMsg = guide.autoDo ? guide.autoDo(body) : "Completed step.";
         var freshSb = getSandbox(proj.id);
         freshSb.stepsDone[screenName] = true;
@@ -1627,6 +1806,8 @@
     if (nextBtn) {
       nextBtn.onclick = function () {
         coachMsg = "";
+        coachScreen = "";
+        howOpen = false;
         if (SMD.navigate && nextStep) SMD.navigate(nextStep, {});
       };
     }
@@ -1634,6 +1815,8 @@
     if (skipBtn) {
       skipBtn.onclick = function () {
         coachMsg = "";
+        coachScreen = "";
+        howOpen = false;
         setTutorialDefault(key, false);
         if (SMD.navigate) SMD.navigate("start", {});
       };
@@ -1643,6 +1826,25 @@
       defChk.onchange = function () { setTutorialDefault(key, !!this.checked); };
     }
 
+    if (!resizeBound && G.addEventListener) {
+      resizeBound = true;
+      var lastPhone = isCompactPhone();
+      G.addEventListener("resize", function () {
+        var nowPhone = isCompactPhone();
+        if (nowPhone === lastPhone) return;
+        lastPhone = nowPhone;
+        var hasStored = false;
+        try {
+          hasStored = !!(G.sessionStorage && G.sessionStorage.getItem(COLLAPSE_KEY) !== null);
+        } catch (e) {}
+        if (!hasStored) {
+          var r = D.getElementById("researchMD");
+          var curProj = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
+          if (r && curProj && curProj.tutorial) renderBar(r, coachScreen || screenName, curProj);
+        }
+      });
+    }
+
     /* Real-time student self-action listener: celebrates when student interacts manually */
     var bodyEl = rootEl.querySelector("#rmdScreenBody");
     if (bodyEl && !bodyEl._rmdTutBound) {
@@ -1650,15 +1852,18 @@
       var notifyManual = function () {
         var curP = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
         if (!curP || !curP.tutorial || coachMsg) return;
+        coachScreen = screenName;
         coachMsg = "Great start! Keep entering details or click Next step when ready.";
-        var barMsg = rootEl.querySelector("#rmdTutBar .rmd-tut-why");
-        if (barMsg && !rootEl.querySelector("#rmdTutBar .rmd-banner-info")) {
+        var tutBar = rootEl.querySelector("#rmdTutBar");
+        var detailsNode = rootEl.querySelector("#rmdTutDetails");
+        if (tutBar && !rootEl.querySelector("#rmdTutBar .rmd-tut-status")) {
           var note = D.createElement("div");
-          note.className = "rmd-banner rmd-banner-info";
-          note.style.margin = "6px 0";
+          note.className = "rmd-banner rmd-banner-info rmd-tut-status";
+          note.style.margin = "6px 0 0";
           note.setAttribute("role", "status");
           note.textContent = coachMsg;
-          barMsg.parentNode.insertBefore(note, barMsg.nextSibling);
+          if (detailsNode && detailsNode.parentNode === tutBar) tutBar.insertBefore(note, detailsNode);
+          else tutBar.appendChild(note);
         }
       };
       bodyEl.addEventListener("change", notifyManual);

@@ -408,7 +408,11 @@ try {
     if (width <= 390) {
       ok(await until('!document.querySelector("#researchMD textarea")', 4000), 'phone has no manual textarea');
       ok(!!await ev('!!document.querySelector("[data-rmd-approve]")'), 'approve control is on the phone');
-      if (await ev('!document.querySelector("[data-rmd-approve]").disabled')) {
+      if (width === 375) {
+        ok(await ev('document.querySelector("[data-rmd-approve]").disabled === true'), 'approve is disabled while checklist items remain missing');
+        ok(await ev('!!document.querySelector("[data-rmd-approve-reason]") && /Fill the remaining/.test(document.querySelector("[data-rmd-approve-reason]").textContent)'), 'approve disabled reason is shown');
+        await ev(`(()=>{document.querySelectorAll("[data-doc-body]").forEach(function(b){if(!(b.textContent||"").trim()){b.textContent="Reported in the manuscript with full study details.";b.dispatchEvent(new Event("input",{bubbles:true}));}});return true})()`);
+        ok(await until('!document.querySelector("[data-rmd-approve]").disabled', 4000), 'approve enables once every checklist item has text');
         ok(await click('[data-rmd-approve]'), 'approve clicked');
       }
       ok(await until('/Approved on this device/.test((document.getElementById("rmdChecklistApproved")||{}).textContent||"")', 3000), 'phone approve note is shown');
