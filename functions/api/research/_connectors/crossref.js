@@ -27,6 +27,11 @@ const SELECT = "DOI,title,author,published,abstract,URL,container-title";
 const BUCKET = createBucket(10);
 const FILTER_KEYS = ["dateFrom", "type"];
 const RATE_HEADERS = ["x-rate-limit-limit", "x-rate-limit-interval", "x-concurrency-limit", "x-api-pool"];
+const UPDATE_SELECT = "DOI,update-to,published,created";
+const RETRACTION_TTL_SECONDS = 24 * 60 * 60;
+const UPDATE_CHUNK = 20;
+const RETRACTION_SOURCE = "Crossref / Retraction Watch";
+const UPDATE_STATUS = { retraction: "retracted", expression_of_concern: "expression_of_concern" };
 
 function optsOf(opts = {}) {
   const email = requireContactEmail(opts);
@@ -161,4 +166,132 @@ export function normalise(raw) {
     doi: externalId,
     extra: raw,
   };
+}
+
+/* ---- Retractions and expressions of concern (Crossref / Retraction Watch) ---
+ * Crossref returns editorial notices through the `updates:{DOI}` filter; each
+ * notice work carries `update-to` entries naming the affected DOI, the notice
+ * type and the date. Retraction Watch records are included in Crossref with
+ * `source: "retraction-watch"`. Only retraction and expression_of_concern are
+ * surfaced; corrections, errata and withdrawals are not retractions.
+ * Results are cached in the Cloudflare Cache API for 24 hours. */
+
+function normDoi(value) {
+  let d = String(value || "").trim().toLowerCase();
+  d = d.replace(/^https?:\/\/(dx\.)?doi\.org\//, "").replace(/^doi:\s*/, "");
+  d = d.replace(/[.,;:\s]+$/, "");
+  return d.indexOf("10.") === 0 ? d : "";
+}
+
+function isoDateOf(obj) {
+  const p = obj && obj["date-parts"] && obj["date-parts"][0];
+  if (!p || !p[0]) return "";
+  const pad = (n) => String(n).padStart(2, "0");
+  return String(p[0]) + "-" + pad(p[1] || 1) + "-" + pad(p[2] || 1);
+}
+
+function defaultCache() {
+  try {
+    return typeof caches !== "undefined" && caches && caches.default ? caches.default : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function retractionCacheKey(doi) {
+  return "https://stewardmd.in/__research_cache/crossref/retraction/v1/" + encodeURIComponent(doi);
+}
+
+async function cacheRead(cache, key) {
+  if (!cache || typeof cache.match !== "function") return null;
+  try {
+    const res = await cache.match(key);
+    if (!res) return null;
+    const body = await res.json();
+    return body && typeof body === "object" ? body : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+async function cacheWrite(cache, key, value, ttlSeconds) {
+  if (!cache || typeof cache.put !== "function") return;
+  try {
+    await cache.put(key, new Response(JSON.stringify(value), {
+      headers: { "content-type": "application/json", "cache-control": "max-age=" + ttlSeconds },
+    }));
+  } catch (e) {
+    /* Cache API is an optimisation; a write failure never fails the lookup. */
+  }
+}
+
+function noneResult() {
+  return { status: "none", date: "", noticeDoi: "", source: RETRACTION_SOURCE };
+}
+
+/* batches: [{doi}] -> { "<doi>": {status,date,noticeDoi,source} }.
+ * `status` is retracted | expression_of_concern | none. A retraction outranks
+ * an expression of concern for the same DOI; ties use the latest notice date. */
+export async function retractionsForDois(dois, opts = {}) {
+  const o = optsOf(opts);
+  const cache = opts.cache === undefined ? defaultCache() : opts.cache;
+  const wanted = [];
+  for (const raw of (Array.isArray(dois) ? dois : [])) {
+    const d = normDoi(raw);
+    if (d && wanted.indexOf(d) < 0) wanted.push(d);
+  }
+  const out = {};
+  const misses = [];
+  for (const d of wanted) {
+    const cached = await cacheRead(cache, retractionCacheKey(d));
+    if (cached && (cached.status === "retracted" || cached.status === "expression_of_concern" || cached.status === "none")) {
+      out[d] = cached;
+    } else {
+      misses.push(d);
+    }
+  }
+  const found = {};
+  for (let i = 0; i < misses.length; i += UPDATE_CHUNK) {
+    const chunk = misses.slice(i, i + UPDATE_CHUNK);
+    const p = new URLSearchParams();
+    p.set("filter", chunk.map((d) => "updates:" + d).join(","));
+    p.set("rows", "1000");
+    p.set("select", UPDATE_SELECT);
+    p.set("mailto", o.email);
+    const body = await readJson(await fetchWithRetry(WORKS_URL + "?" + p.toString(), transport(o)));
+    const items = (body && body.message && body.message.items) || [];
+    for (const item of items) {
+      const noticeDoi = String((item && item.DOI) || "");
+      const updates = Array.isArray(item && item["update-to"]) ? item["update-to"] : [];
+      for (const update of updates) {
+        const target = normDoi(update && update.DOI);
+        if (!target || chunk.indexOf(target) < 0) continue;
+        const status = UPDATE_STATUS[String((update && update.type) || "").toLowerCase()];
+        if (!status) continue;
+        const date = isoDateOf(update.updated) || isoDateOf(item.published) || isoDateOf(item.created);
+        const rank = status === "retracted" ? 2 : 1;
+        const prev = found[target];
+        if (!prev || rank > prev.rank || (rank === prev.rank && date > prev.date)) {
+          found[target] = { status, date, noticeDoi, rank };
+        }
+      }
+    }
+  }
+  for (const d of misses) {
+    const hit = found[d];
+    const result = hit
+      ? { status: hit.status, date: hit.date, noticeDoi: hit.noticeDoi, source: RETRACTION_SOURCE }
+      : noneResult();
+    out[d] = result;
+    await cacheWrite(cache, retractionCacheKey(d), result, RETRACTION_TTL_SECONDS);
+  }
+  return out;
+}
+
+/* retractionForDoi(doi) -> {status,date,noticeDoi,source}. */
+export async function retractionForDoi(doi, opts = {}) {
+  const d = normDoi(doi);
+  if (!d) throw new ConnectorError("invalid_search", "doi must be a valid DOI");
+  const map = await retractionsForDois([d], opts);
+  return map[d];
 }

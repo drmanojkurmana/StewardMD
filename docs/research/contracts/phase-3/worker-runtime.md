@@ -15,7 +15,7 @@ Worker stewardmd-research-worker (cron "* * * * *")
   └─ DO stub RESEARCH_WORKER.getByName("singleton") .drain()
        └─ ctx.container.start({env, enableInternet: true}) if not running
        └─ getTcpPort(8080).fetch POST /drain  (X-Drain-Token)
-            └─ container: pull <= 5 messages (visibility_timeout_ms 900000)
+            └─ container: pull <= 5 messages (visibility_timeout_ms 7200000)
                  per message: idempotency check, extract, write result.json,
                  HMAC callback, then ack; failures retry or fall to the DLQ
 ```
@@ -40,7 +40,7 @@ API, R2 and the Pages callback.
 1. Check `X-Drain-Token` against env `DRAIN_TOKEN` (constant-time). Missing
    server config: 503. Wrong token: 401.
 2. Pull up to 5 messages: `POST /accounts/{CF_ACCOUNT_ID}/queues/{CF_QUEUE_ID}/messages/pull`
-   with `{"visibility_timeout_ms": 900000, "batch_size": 5}` and Bearer
+   with `{"visibility_timeout_ms": 7200000, "batch_size": 5}` and Bearer
    `CF_QUEUES_TOKEN`. Message bodies may arrive base64-encoded (json content
    type); the client decodes per `metadata["CF-Content-Type"]`.
 3. Process messages sequentially. Per message: validate against
@@ -59,8 +59,10 @@ The Queues HTTP pull API has NO lease-extension or heartbeat endpoint
 (verified 2026-11-23). Visibility is set once, at pull time, up to 12 h.
 Therefore:
 
-- Pull visibility is 900 s (D-2), which covers 3 back-to-back maximum-length
-  jobs (3 x 240 s = 720 s).
+- Pull visibility is 7,200 s (raised from 900 s on 2026-11-27): a manuscript_draft job
+  makes up to 64 gateway calls and can outrun 15 min, and /drain fires every minute,
+  so a 900 s lease let a second drain re-run the same paid draft. A crashed job
+  now waits up to 2 h before redelivery. (Was: 900 s covers 3 x 240 s pdf jobs.)
 - Worst case 5 maximum-length jobs = 1200 s: the tail leases expire before
   their turn and those messages redeliver. This is safe by construction:
   the redelivery finds `result.json` (idempotent skip) or re-runs a job whose

@@ -430,6 +430,8 @@ try {
   ok(await until('!!window.SMD_RESEARCH && !!SMD_RESEARCH.screens && !!SMD_RESEARCH.screens.manuscript', 30000), 'app loaded with manuscript screen registered');
   ok(await ev(`!!document.querySelector('script[src*="research-screen-manuscript.js?v="]')`), 'index.html carries research-screen-manuscript.js script tag with a ?v= token');
 
+  // PaperOrchestra defaults ON (owner 2026-11-27); "0" is the per-device off switch the 1c-po block starts from.
+  await ev(`localStorage.setItem('smd_rmd_po', '0')`);
   // Seed: server-backed project (practice gate skips it) + one saved local run.
   await ev(`(function(){var s=JSON.parse(localStorage.getItem('smd_research_state_v1'));s.projects[0].serverId=s.projects[0].id;s.projects[0].practice=false;s.runs=s.runs||{};s.runs[${JSON.stringify(PID)}]=[${JSON.stringify(LOCAL_RUN)}];localStorage.setItem('smd_research_state_v1',JSON.stringify(s));return 1})()`);
   await ev(`(()=>{const b=document.getElementById('smdBootSplash');if(b)b.style.display='none';return 1})()`);
@@ -548,9 +550,12 @@ try {
   })()`);
   ok(await until(`!!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO button restored for systematic review project');
 
+  await ev(`localStorage.setItem('smd_rmd_po', '0')`);
+  await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
+  ok(await until(`!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO button cleaned up when flag set to 0');
   await ev(`localStorage.removeItem('smd_rmd_po')`);
   await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
-  ok(await until(`!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO button cleaned up when flag removed');
+  ok(await until(`!!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO button shown by default when flag is unset');
   ok(await until(`!!document.getElementById('rmdSectionEditor')`, 5000), 'editor ready after reload');
 
   /* 1d. Polish empty or >5000 char section shows plain message, never "on our side" */

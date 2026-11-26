@@ -1,10 +1,15 @@
 # ResearchMD Database Integration Terms and Compliance Guide
 
-This document defines the legal, commercial, and technical requirements for integrating four core scholarly literature databases into ResearchMD, a systematic-review module inside the paid StewardMD mobile medical application:
+This document defines the legal, commercial, and technical requirements for integrating core scholarly literature and clinical trial databases into ResearchMD, a systematic-review module inside the paid StewardMD mobile medical application:
 1. PubMed / NCBI Entrez Programming Utilities (E-utilities)
 2. Europe PMC RESTful Web Service
 3. Crossref REST API
 4. Semantic Scholar Academic Graph API (S2AG)
+5. ClinicalTrials.gov API v2
+
+Phase 1 enrichment adds two further sources, documented in sections 4.9 and 7:
+5. Crossref retraction and expression-of-concern data (includes the Retraction Watch dataset acquired by Crossref in 2023)
+6. OpenAlex (works metadata, citation counts and open-access links)
 
 Each section cites current official documentation pages, specifies terms for commercial use inside a paid mobile app, details rate limits and parameters, sets caching and retention boundaries, and outlines attribution rules. The document concludes with a numbered list of strict implementation rules for the connector builder.
 
@@ -14,18 +19,31 @@ Where a fact cannot be confirmed directly from an official documentation page, i
 
 ## 1. Executive Comparison
 
-| Dimension | PubMed / NCBI E-utilities | Europe PMC REST | Crossref REST | Semantic Scholar (S2AG) |
-|---|---|---|---|---|
-| Commercial use allowed | Yes (no royalties or fees) | Yes (metadata); full text depends on license | Yes (CC0 metadata) | No by default; requires separate commercial agreement |
-| Formal agreement needed | None | None | None (unless paying for Metadata Plus) | Yes (commercial/expanded license agreement with AI2) |
-| API key status | Optional (strongly recommended) | Not applicable (no key system exists) | Optional (polite pool via email; token for Plus) | Practically required (free key for testing; commercial key for prod) |
-| Rate limit without key | 3 req/sec per IP | ~10 req/sec fair use (UNCONFIRMED hard cap) | 5 req/sec (concurrency 1) | Shared global 1,000 req/sec pool (heavy throttling) |
-| Rate limit with key | 10 req/sec | N/A | 10 req/sec (concurrency 5) in Polite Pool; 64+ in Plus | 1 req/sec standard key; higher limits custom/negotiated |
-| Required identification | `tool` and `email` params | Descriptive `User-Agent` | `User-Agent` and/or `mailto` query param | `x-api-key` header |
-| Metadata storage allowed | Yes (must maintain freshness or disclaim) | Yes | Yes (CC0 dedication) | No for commercial redistribution under default terms |
-| Abstract storage allowed | Yes, subject to third-party copyright | Yes, subject to publisher copyright | Yes, subject to publisher copyright | No for commercial redistribution under default terms |
-| Full text retrieval | None (PMID only; PMC OA via separate tools) | Yes (XML/PDF for Open Access subset) | None (metadata and publisher links only) | None (abstracts and citation graphs only) |
-| Blockers for paid app | None (must avoid endorsement claim and credit NLM) | Ingesting CC-BY-NC full text violates license | None for metadata | Default license strictly forbids commercial use |
+| Dimension | PubMed / NCBI E-utilities | Europe PMC REST | Crossref REST | Semantic Scholar (S2AG) | ClinicalTrials.gov API v2 |
+|---|---|---|---|---|---|
+| Commercial use allowed | Yes (no royalties or fees) | Yes (metadata); full text depends on license | Yes (CC0 metadata) | No by default; requires separate commercial agreement | Yes at no charge under U.S. Gov / NLM terms (no proprietary claim; sponsor text subject to third-party rights) |
+| Formal agreement needed | None | None | None (unless paying for Metadata Plus) | Yes (commercial/expanded license agreement with AI2) | None (accepted by querying API) |
+| API key status | Optional (strongly recommended) | Not applicable (no key system exists) | Optional (polite pool via email; token for Plus) | Practically required (free key for testing; commercial key for prod) | Not applicable (open public API, no key required) |
+| Rate limit without key | 3 req/sec per IP | ~10 req/sec fair use (UNCONFIRMED hard cap) | 5 req/sec (concurrency 1) | Shared global 1,000 req/sec pool (heavy throttling) | ~50 req/min per IP guideline (UNCONFIRMED hard numeric ceiling on all endpoints) |
+| Rate limit with key | 10 req/sec | N/A | 10 req/sec (concurrency 5) in Polite Pool; 64+ in Plus | 1 req/sec standard key; higher limits custom/negotiated | N/A |
+| Required identification | `tool` and `email` params | Descriptive `User-Agent` | `User-Agent` and/or `mailto` query param | `x-api-key` header | Descriptive `User-Agent` recommended (no mandatory auth header) |
+| Metadata storage allowed | Yes (must maintain freshness or disclaim) | Yes | Yes (CC0 dedication) | No for commercial redistribution under default terms | Transient/freshness-bounded caching (must keep current + show processing date; 24 h HTTP cache) |
+| Abstract storage allowed | Yes, subject to third-party copyright | Yes, subject to publisher copyright | Yes, subject to publisher copyright | No for commercial redistribution under default terms | N/A (registry protocol summary fields only; subject to sponsor third-party copyright where applicable) |
+| Full text retrieval | None (PMID only; PMC OA via separate tools) | Yes (XML/PDF for Open Access subset) | None (metadata and publisher links only) | None (abstracts and citation graphs only) | None (trial protocol/results registry records only) |
+| Blockers for paid app | None (must avoid endorsement claim and credit NLM) | Ingesting CC-BY-NC full text violates license | None for metadata | Default license strictly forbids commercial use | None for registry metadata with attribution (`Data: ClinicalTrials.gov`), freshness caching, and no email harvesting |
+
+### 1.1 Phase 1 enrichment sources
+
+| Dimension | Crossref retractions / Retraction Watch | OpenAlex |
+|---|---|---|
+| Commercial use allowed | Crossref metadata is CC0. Rights in the Retraction Watch assertions beyond the Crossref API are UNCONFIRMED (the public dataset repository carries no licence file). | Yes. Every record is released under CC0 (https://help.openalex.org/access/pricing/). |
+| Formal agreement needed | None for the public Crossref API. | None. |
+| API key status | Optional; the existing Crossref polite-pool contact applies. | Free API key required by us (`OPENALEX_API_KEY`). A missing key makes the feature unavailable. |
+| Rate limit with key | 10 req/sec polite pool (shared with the Crossref connector). | 30 req/sec for a free key; 10 req/sec keyless. We use a conservative 5 req/sec bucket. |
+| Required identification | `mailto` and the polite `User-Agent`. | `api_key` query parameter. |
+| Metadata storage allowed | Yes. Crossref metadata is CC0. Retraction Watch-specific retention terms UNCONFIRMED; we cache for 24 hours. | Yes, CC0. We cache each work for 7 days. |
+| Attribution | "Retraction data: Crossref / Retraction Watch" wherever the badge appears. | "Data: OpenAlex" wherever the fields appear. |
+| Blockers for paid app | None identified for the Crossref API path. Retraction Watch standalone dataset licensing is UNCONFIRMED. | None. |
 
 ---
 
@@ -219,6 +237,18 @@ Where a fact cannot be confirmed directly from an official documentation page, i
 - Anything blocking use in a paid app: None. Crossref metadata is CC0 and explicitly intended for open commercial integration.
 - Connector requirements: Always provide a well-formed `User-Agent` containing a valid `mailto:` address to stay within the Polite Pool, observe the 10 req/sec and 3 to 5 concurrency limits, and check the `x-rate-limit-*` headers.
 
+### 4.9 Retraction and expression-of-concern data (Retraction Watch)
+- Official documentation and announcements:
+  - Crossref and Retraction Watch announcement (2023-09-12): https://www.crossref.org/blog/news-crossref-and-retraction-watch/
+  - Public dataset repository (updated every working day): https://gitlab.com/crossref/retraction-watch-data
+  - Crossref REST filters: https://github.com/Crossref/rest-api-doc (filter names: `updates`, `is-update`)
+- Commercial use: Crossref bibliographic metadata is CC0. The Retraction Watch dataset was acquired by Crossref in September 2023 and is distributed alongside Crossref works records. The public dataset repository README does not state a separate licence for the Retraction Watch assertions, so the licence of the standalone dataset is UNCONFIRMED. Inside ResearchMD we read it only through the public Crossref works API, under Crossref's CC0 metadata terms.
+- Ingestion path used: `GET https://api.crossref.org/works?filter=updates:{DOI}`. Each returned notice work carries `update-to` entries with `DOI` (the affected work), `type` (`retraction`, `expression_of_concern`, and also non-retraction values such as `correction`, `erratum`, `corrigendum`, `withdrawal`, `new_version`, `new_edition`), `label`, `source` (`publisher` or `retraction-watch`) and `updated.date-parts`. Verified against a live Crossref response on 2026-11-26.
+- Only `retraction` and `expression_of_concern` are surfaced. Corrections, errata, corrigenda, withdrawals and removals are not retractions. When both exist for one DOI, a retraction outranks an expression of concern; ties use the latest notice date.
+- Rate limit: the same Crossref polite pool (10 req/sec, 3 concurrent list queries). Batched lookups use repeated `updates:` filters joined with commas; 20 DOIs per request keeps URLs short (the documented OR ceiling is 100 for the marker syntax but Crossref publishes no explicit cap for repeated filters, so 20 is a deliberate conservative choice).
+- Storage: cached in the Cloudflare Cache API for 24 hours, keyed by the normalised DOI.
+- Attribution: display "Retraction data: Crossref / Retraction Watch" next to every retraction or expression-of-concern badge, with the notice DOI linked through `https://doi.org/{noticeDoi}`.
+
 ---
 
 ## 5. Semantic Scholar Academic Graph API (S2AG)
@@ -298,7 +328,58 @@ Where a fact cannot be confirmed directly from an official documentation page, i
 
 ---
 
-## 6. Numbered Implementation Rules for the Connector Builder
+## 6. ClinicalTrials.gov API v2
+
+### 6.1 Official Documentation and Policy URLs
+- ClinicalTrials.gov REST API Documentation: https://clinicaltrials.gov/data-api/api
+- ClinicalTrials.gov About the API: https://clinicaltrials.gov/data-api/about-api
+- ClinicalTrials.gov Terms and Conditions: https://clinicaltrials.gov/about-site/terms-conditions
+- OpenAPI 3.0 Specification (`ctg-oas-v2.yaml`): https://clinicaltrials.gov/api/oas/v2
+
+### 6.2 Commercial Use and Agreement Requirements
+- Commercial use allowed: Yes, at no charge. ClinicalTrials.gov is operated by the U.S. National Library of Medicine (NLM) at the National Institutes of Health (NIH). Accessing or querying the API signifies acceptance of the ClinicalTrials.gov Terms and Conditions.
+- Agreement needed: No formal bilateral agreement or registration is required.
+- Proprietary-rights and representation prohibition: Users must not assert any proprietary rights to any portion of the database, nor represent the database or any part of it as anything other than a U.S. Government database.
+- Copyright and third-party caveat: ClinicalTrials.gov data carry international copyright outside the United States and its territories/possessions, and specific submitted study text may be subject to third-party (study sponsor or investigator) copyrights. Blanket commercial bulk-redistribution rights for sponsor-authored narrative descriptions without sponsor permission are UNCONFIRMED; ResearchMD restricts output to normalized structured trial fields (`nct`, `title`, `phase`, `status`, `enrollment`, `arms`, `primaryOutcome`, `resultsPosted`) and displays source attribution.
+- Email harvesting prohibition: ClinicalTrials.gov Terms and Conditions explicitly prohibit using any email addresses extracted from the database for marketing or promotional purposes. ResearchMD strips and never retains contact or investigator email fields.
+
+### 6.3 API Key Details
+- Status: Neither required nor used. ClinicalTrials.gov API v2 is an unauthenticated public REST API.
+
+### 6.4 Rate Limits
+- Operational rate limit: Commonly documented operational limit is approximately 50 requests per minute per IP address (UNCONFIRMED whether a fixed hard quota applies identically across all endpoints and burst windows).
+- Connector throttling: ResearchMD enforces a strict token bucket of `50 / 60` requests per second (~0.83 req/sec) across the server connector, plus exponential backoff on HTTP 429 and 5xx responses respecting `Retry-After` headers.
+
+### 6.5 Required Parameters and Headers
+- Base URL: `https://clinicaltrials.gov/api/v2`
+- Search endpoint: `GET /studies`
+  - `query.cond`: Condition or disease search string.
+  - `query.intr`: Intervention or treatment search string.
+  - `filter.overallStatus`: Comma-separated status enum values (e.g., `RECRUITING`, `NOT_YET_RECRUITING`, `ACTIVE_NOT_RECRUITING`, `COMPLETED`, `TERMINATED`, `WITHDRAWN`, `SUSPENDED`, `UNKNOWN`).
+  - `filter.advanced`: Essie search expression for field-level filtering such as trial phase (e.g., `AREA[Phase]PHASE3` or `AREA[Phase](PHASE2 OR PHASE3)`). Note: `filter.phase` is not part of the `ctg-oas-v2.yaml` `/studies` query parameter list; phase filtering uses `filter.advanced`.
+  - `pageSize`: Results per page (integer 1 to 1000).
+  - `pageToken`: Opaque pagination token from `nextPageToken`.
+- Single-study lookup endpoint: `GET /studies/{nctId}` (where `nctId` matches `^NCT\d{8}$`).
+- Headers: `Accept: application/json` and descriptive `User-Agent` (`StewardMD-ResearchMD/1.0 (https://stewardmd.in; mailto:support@stewardmd.in)` when contact email is configured).
+
+### 6.6 Data Storage, Retention, and Redistribution Rules
+- Freshness and modification notice: Under ClinicalTrials.gov Terms and Conditions, distributed data must be kept current, carry the processing/retrieval date, and describe modifications made to the content.
+- Caching boundary: ResearchMD caches normalized ClinicalTrials.gov responses for at most 24 hours (TTL 86,400 seconds via Cloudflare Cache API / `caches.default`) and does not build a permanent bulk mirror or AACT warehouse copy inside D1.
+
+### 6.7 Attribution Rules
+- Mandatory attribution: Any view displaying ClinicalTrials.gov records must credit `ClinicalTrials.gov` (e.g., `"Data: ClinicalTrials.gov"`), avoid implying U.S. Government / NIH / NLM endorsement, and preserve `NCT` identifiers linking to `https://clinicaltrials.gov/study/{nct}`.
+
+### 6.8 Paid App Feasibility and Blockers
+- Anything blocking use in a paid app: None for on-demand trial search and lookup with normalized summaries, provided:
+  1. No proprietary rights are claimed over the database.
+  2. Contact/investigator email addresses are stripped and never stored or used.
+  3. Responses are cached with a 24 h TTL so records remain current.
+  4. `"Data: ClinicalTrials.gov"` credit is shown wherever trial records are displayed.
+  5. Outbound rate is capped at <= 50 requests/minute (`50 / 60` req/s bucket).
+
+---
+
+## 7. Numbered Implementation Rules for the Connector Builder
 
 The connector builder must implement the literature search and extraction pipeline in compliance with the following rules:
 
@@ -375,3 +456,67 @@ The connector builder must implement the literature search and extraction pipeli
     - In Europe PMC, use `cursorMark` for result sets spanning multiple pages.
     - In Crossref, use `cursor=*` deep pagination rather than numeric `offset` jumps.
     - In NCBI, use `epost` to stage ID lists on the Entrez History server and retrieve records using `WebEnv` and `query_key` in batches of 200 to 500 records.
+
+20. ClinicalTrials.gov API v2 compliance:
+    - Rate-limit all requests to <= 50 req/min (`createBucket(50 / 60)`).
+    - Map condition to `query.cond`, intervention to `query.intr`, status to `filter.overallStatus`, phase to `filter.advanced` (`AREA[Phase]...`), and validate NCT IDs against `^NCT\d{8}$`.
+    - Normalise exclusively to `{nct, title, phase, status, enrollment, arms, primaryOutcome, resultsPosted, source: "ClinicalTrials.gov"}` so no investigator/contact emails or unrequested fields are retained.
+    - Cache normalized responses for 24 h (86,400 s) and show `"Data: ClinicalTrials.gov"` wherever data is rendered.
+21. Retractions and expressions of concern (Crossref / Retraction Watch):
+    - Look up notices with the `updates:{DOI}` filter and read `update-to` on each notice work. Surface only `retraction` and `expression_of_concern`; ignore corrections, errata, corrigenda, withdrawals and removals.
+    - Cache each DOI result for 24 hours. Return `{status, date, noticeDoi, source}` with `status` one of `retracted`, `expression_of_concern` or `none`.
+    - When Crossref is unreachable or the contact email is missing, return an unavailable result and render nothing. Display "Retraction data: Crossref / Retraction Watch".
+
+22. OpenAlex identifiers only:
+    - Send only DOIs and PMIDs to OpenAlex, never case text, thesis text or any project document. Read the key from `OPENALEX_API_KEY` and put it in the `api_key` query parameter. A missing key means the feature is unavailable.
+    - Batch with OR (`doi:a|b|c`, `pmid:1|2`); never mix different filters with `|`. Request at most 50 identifiers per call (documented OR limit is 100). Cache each work for 7 days.
+    - Return `citedByCount`, `oaStatus`, `bestOaUrl` and up to five `relatedWorks` (`id`, `title`, `year`, `doi`). Display "Data: OpenAlex".
+
+23. Hide on failure, never error:
+    - Every enrichment route answers HTTP 200 with `{available:false}` when its provider is down, times out, or its key/contact is missing. The app renders no banner, no empty box and no badge in that state.
+
+## 8. OpenAlex API
+
+### 8.1 Official Documentation and Policy URLs
+- OpenAlex documentation: https://help.openalex.org/
+- Authentication and rate limits: https://help.openalex.org/how-to-use-the-api/rate-limits-and-authentication
+- Pricing and CC0 data licence: https://help.openalex.org/access/pricing/
+- Filter syntax and OR limits: https://help.openalex.org/how-to-use-the-api/get-lists-of-entities/filter-entity-lists
+- Work attributes: https://help.openalex.org/data/works/attributes
+- Open access fields: https://help.openalex.org/data/works/open-access
+
+### 8.2 Commercial Use and Agreement Requirements
+- Commercial use allowed: Yes. Official pricing documentation states: "Every record is released under a CC0 public-domain license, with no 'personal use only' carve-out and no permission to ask."
+- Agreement needed: None. OpenAlex sells services (bigger daily budgets, sync), not the data.
+
+### 8.3 API Key Details
+- Status: A free key is not required for light use, but ResearchMD treats it as required: if `OPENALEX_API_KEY` is absent the server returns `{available:false}` and the app hides the feature.
+- How to send: `api_key` query parameter, or `Authorization: Bearer`. This connector uses the documented `api_key` query parameter.
+- Effect: a free key raises the daily budget 10x and is required for cursor paging past the first page. Budgets are measured in dollars per day (free tier: $1/day). Spending a day's budget returns HTTP 429 with reason `daily_budget`.
+
+### 8.4 Rate Limits
+- Published per-second limits: no key 10 req/sec per IP; free key or prepaid 30 req/sec; Member 50 req/sec; Member+ or Partner 50 req/sec. Verified from the authentication page on 2026-11-26.
+- Filters joining more than 10 values with `|` on topic/concept IDs are limited to 1 req/sec; our `doi` and `pmid` filters are not in that list.
+- ResearchMD uses a conservative 5 req/sec token bucket and the shared `fetchWithRetry` backoff.
+
+### 8.5 Required Parameters and Headers
+- Base URL: `https://api.openalex.org/works`
+- `filter`: `doi:` matches a work's own DOI or any location DOI, case-insensitively; up to 100 values can be OR-ed. `doi:10.1/a|10.1/b` and `pmid:123|456` are the batch forms used here. Mixing different filter names with `|` is invalid.
+- `select`: limits fields. This connector requests `id,doi,ids,title,publication_year,cited_by_count,open_access,best_oa_location,related_works`.
+- `per_page`: 1-100 (100 is the supported maximum; 200 is deprecated legacy behaviour).
+- Related-works expansion uses `filter=openalex_id:W1|W2...` with `select=id,title,publication_year,doi`.
+
+### 8.6 Data Storage, Retention, and Redistribution Rules
+- Metadata: CC0. ResearchMD may cache and redistribute it commercially. Each work is cached in the Cloudflare Cache API for 7 days, keyed by the normalised DOI or PMID that was looked up.
+- Related works: `related_works` is a list of up to 10 OpenAlex IDs. ResearchMD resolves at most the first five to `{id,title,year,doi}` and stores them with the work.
+
+### 8.7 Attribution Rules
+- CC0 does not require legal attribution, but OpenAlex's community norm is to credit the source. ResearchMD displays "Data: OpenAlex" wherever citation counts, OA status or related works appear, and links OpenAlex IDs through `https://openalex.org/{id}`.
+
+### 8.8 Paid App Feasibility and Blockers
+- Nothing blocks commercial use: the data is CC0 and the API is intended for third-party products.
+- Operational conditions: keep the key server-side, stay inside the daily budget and per-second limits, and hide the feature when the key is missing or the API fails.
+
+
+---
+

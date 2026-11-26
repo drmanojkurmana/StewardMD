@@ -21,7 +21,9 @@ export const defaultSleep = (ms) => new Promise((resolve) => setTimeout(resolve,
 /* Token bucket, per deployment (module-level in each adapter), shared across
  * projects. ratePerSec comes from the 2.0b terms table for that database. */
 export function createBucket(ratePerSec) {
-  let tokens = ratePerSec;
+  /* Capacity is at least 1 token, so a rate under 1/s (e.g. 50/min) can still fire; a cap below 1 never fills. */
+  const capacity = Math.max(1, ratePerSec);
+  let tokens = capacity;
   let last = null;
   return {
     ratePerSec,
@@ -29,7 +31,7 @@ export function createBucket(ratePerSec) {
       for (;;) {
         const t = now();
         if (last === null) last = t;
-        tokens = Math.min(ratePerSec, tokens + ((t - last) / 1000) * ratePerSec);
+        tokens = Math.min(capacity, tokens + ((t - last) / 1000) * ratePerSec);
         last = t;
         if (tokens >= 1) { tokens -= 1; return; }
         await sleep(Math.ceil(((1 - tokens) / ratePerSec) * 1000));

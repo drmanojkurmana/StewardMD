@@ -230,7 +230,9 @@ def drain_once(
     callback_url: str,
     secret: str,
     batch_size: int = 5,
-    visibility_timeout_ms: int = 900_000,
+    # 2 h lease: a manuscript_draft (up to 64 gateway calls) can outrun 15 min, and /drain runs every
+    # minute, so a shorter lease let a second drain pick up the same job and pay for it twice.
+    visibility_timeout_ms: int = 7_200_000,
     sleep=time.sleep,
 ) -> dict:
     """Pull up to batch_size messages and settle each one.

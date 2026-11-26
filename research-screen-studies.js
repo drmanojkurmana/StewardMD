@@ -18,6 +18,123 @@
       .replace(/'/g, "&#39;");
   };
 
+  var D = G.document;
+
+  function enrichFlag(key) {
+    try {
+      return typeof G.localStorage !== "undefined" && G.localStorage.getItem(key) !== "0";
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function normDoi(value) {
+    var d = String(value || "").trim().toLowerCase();
+    d = d.replace(/^https?:\/\/(dx\.)?doi\.org\//, "").replace(/^doi:\s*/, "");
+    d = d.replace(/[.,;:\s]+$/, "");
+    return d.indexOf("10.") === 0 ? d : "";
+  }
+
+  function injectEnrichCSS() {
+    if (!D || D.getElementById("rmdEnrichCss")) return;
+    var s = D.createElement("style");
+    s.id = "rmdEnrichCss";
+    s.textContent = [
+      "/* ResearchMD study-list enrichment */",
+      "#researchMD .rmd-retraction-badge { display: inline-flex; align-items: center; gap: 4px; background: var(--rmd-bad-soft); color: var(--rmd-bad); border: 1px solid rgba(180, 35, 24, 0.26); font-weight: 700; font-size: 11px; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }",
+      "#researchMD .rmd-retraction-badge-eoc { background: var(--rmd-warn-soft); color: var(--rmd-warn); border-color: rgba(163, 78, 28, 0.28); }",
+      "#researchMD .rmd-enrich-row-slot { display: inline-flex; margin-left: 4px; }",
+      "#researchMD .rmd-enrich-credit { display: block; font-size: 11px; line-height: 1.4; color: var(--rmd-mut); margin-top: 4px; }",
+      "#researchMD .rmd-enrich-link { color: var(--rmd-acc); text-decoration: underline; text-underline-offset: 2px; word-break: break-word; }",
+      "body.dark #researchMD .rmd-retraction-badge, body.v3-dark #researchMD .rmd-retraction-badge { background: rgba(180, 35, 24, 0.2); color: #ffb4ab; border-color: rgba(255, 180, 171, 0.26); }",
+      "body.dark #researchMD .rmd-retraction-badge-eoc, body.v3-dark #researchMD .rmd-retraction-badge-eoc { background: rgba(163, 78, 28, 0.24); color: #ffc29c; border-color: rgba(255, 194, 156, 0.26); }"
+    ].join("\n");
+    D.head.appendChild(s);
+  }
+
+  function fmtEnrichDate(iso) {
+    var m = String(iso || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!m) return "";
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var mi = parseInt(m[2], 10) - 1;
+    if (mi < 0 || mi > 11) return "";
+    return parseInt(m[3], 10) + " " + months[mi] + " " + m[1];
+  }
+
+  function retractionBadge(r, withCredit) {
+    if (!r || (r.status !== "retracted" && r.status !== "expression_of_concern")) return "";
+    var eoc = r.status === "expression_of_concern";
+    var label = eoc ? "Expression of concern" : "Retracted";
+    var date = fmtEnrichDate(r.date);
+    var h = [];
+    h.push('<span class="rmd-retraction-badge' + (eoc ? " rmd-retraction-badge-eoc" : "") + '" title="Retraction data: Crossref / Retraction Watch">');
+    h.push('<svg aria-hidden="true" focusable="false" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>');
+    h.push('<span>' + esc(label) + (date ? " " + esc(date) : "") + '</span>');
+    h.push('</span>');
+    if (withCredit) {
+      h.push('<span class="rmd-enrich-credit">Retraction data: Crossref / Retraction Watch');
+      if (r.noticeDoi) {
+        h.push(' &middot; Notice: <a class="rmd-enrich-link" href="https://doi.org/' + esc(encodeURI(r.noticeDoi)) + '" target="_blank" rel="noopener noreferrer">' + esc(r.noticeDoi) + '</a>');
+      }
+      h.push('</span>');
+    }
+    return h.join("");
+  }
+
+  function studyDoi(study) {
+    return normDoi(study && study.locator && study.locator.doi);
+  }
+
+  /* Adds retraction badges to the study rows and detail pane. Runs only when
+   * smd_research_retraction is "1"; the server answers unavailable before any
+   * lookup, in which case nothing is rendered. */
+  function hydrateStudyRetractions(container, studies) {
+    if (!enrichFlag("smd_research_retraction") || !container || !SMD.api || typeof SMD.api.request !== "function") return;
+    if (!Array.isArray(studies) || !studies.length) return;
+    var dois = [];
+    for (var i = 0; i < studies.length; i++) {
+      var d = studyDoi(studies[i]);
+      if (d && dois.indexOf(d) < 0) dois.push(d);
+    }
+    if (!dois.length) return;
+    var chunkSize = 50;
+    var chunks = [];
+    for (var c = 0; c < dois.length; c += chunkSize) chunks.push(dois.slice(c, c + chunkSize));
+    var chain = Promise.resolve();
+    chunks.forEach(function (chunk) {
+      chain = chain.then(function () {
+        return SMD.api.request("POST", "/v1/enrich/retraction", { dois: chunk })
+          .then(function (data) {
+            if (!data || !data.available || !data.retractions) return;
+            applyStudyRetractions(container, studies, data.retractions);
+          })
+          .catch(function () {});
+      });
+    });
+  }
+
+  function applyStudyRetractions(container, studies, retractions) {
+    if (!container || typeof container.querySelectorAll !== "function") return;
+    var byId = {};
+    for (var i = 0; i < studies.length; i++) byId[studies[i].id] = studies[i];
+    var rows = container.querySelectorAll("[data-rmd-enrich-row]");
+    for (var r = 0; r < rows.length; r++) {
+      var sid = rows[r].getAttribute("data-rmd-enrich-row");
+      var study = byId[sid];
+      var result = study ? retractions[studyDoi(study)] : null;
+      var html = retractionBadge(result, false);
+      if (html) rows[r].innerHTML = html;
+    }
+    var details = container.querySelectorAll("[data-rmd-enrich-detail]");
+    for (var j = 0; j < details.length; j++) {
+      var did = details[j].getAttribute("data-rmd-enrich-detail");
+      var ds = byId[did];
+      var dr = ds ? retractions[studyDoi(ds)] : null;
+      var dhtml = retractionBadge(dr, true);
+      if (dhtml) details[j].innerHTML = dhtml;
+    }
+  }
+
   // Screen UI state
   var viewMode = "list"; // "list", "edit", "new"
   var editingStudyId = null;
@@ -54,6 +171,7 @@
   }
 
   function renderStudies(container) {
+    injectEnrichCSS();
     var store = SMD.store;
     if (!store) return;
     var project = store.getActiveProject();
@@ -168,6 +286,7 @@
         h.push('          <div class="rmd-study-row-main">');
         h.push('            <div class="rmd-study-row-title-bar">');
         h.push('              <strong class="rmd-study-label">' + esc(s.label || "Untitled Study") + '</strong>');
+        h.push('              <span class="rmd-enrich-row-slot" data-rmd-enrich-row="' + esc(s.id) + '"></span>');
         h.push('              <span class="rmd-version-tag">v' + (s.version || 1) + '</span>');
         h.push('            </div>');
         h.push('            <div class="rmd-study-data-str">' + esc(formatStudyData(s.measure, s.inputs)) + '</div>');
@@ -211,6 +330,7 @@
 
     container.innerHTML = h.join("\n");
     bindEvents(container);
+    hydrateStudyRetractions(container, allStudies);
   }
 
   function isPhoneViewport(container) {
@@ -231,6 +351,7 @@
     h.push('    <div>');
     h.push('      <span class="rmd-version-tag">Version ' + (s.version || 1) + '</span>');
     h.push('      <h3 class="rmd-detail-title">' + esc(s.label || "Untitled Study") + '</h3>');
+    h.push('      <div class="rmd-enrich-detail-slot" data-rmd-enrich-detail="' + esc(s.id) + '"></div>');
     h.push('    </div>');
     h.push('    <div class="rmd-detail-header-actions">');
     if (s.verified) {
@@ -832,7 +953,8 @@
 
   SMD.screens.studies = {
     render: renderStudies,
-    editStudy: editStudy
+    editStudy: editStudy,
+    hydrateRetractions: hydrateStudyRetractions
   };
 
 })(typeof window !== "undefined" ? window : globalThis);

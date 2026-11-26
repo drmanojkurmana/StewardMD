@@ -196,7 +196,7 @@ def test_drain_acks_settled_and_retries_unsettled():
     assert counts == {"pulled": 2, "done": 1, "failed": 0, "cancelled": 0, "retried": 1}
     assert queue.acked == ["l1"]
     assert queue.retried == [("l2", 60)]
-    assert queue.pull_args == {"batch_size": 5, "visibility_timeout_ms": 900_000}
+    assert queue.pull_args == {"batch_size": 5, "visibility_timeout_ms": 7_200_000}
 
 
 def test_drain_retries_malformed_and_invalid_messages():

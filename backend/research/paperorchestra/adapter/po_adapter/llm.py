@@ -199,8 +199,11 @@ class GatewayLLMClient:
             "purpose": purpose,
         }
         raw_body = json.dumps(body, separators=(",", ":")).encode("utf-8")
+        # job_token may be a callable that mints a fresh token per call: the gateway
+        # caps a token at 15 minutes and a full draft can run longer than that.
+        token = self.job_token() if callable(self.job_token) else self.job_token
         headers = {"Content-Type": "application/json",
-                   "Authorization": "Bearer " + self.job_token}
+                   "Authorization": "Bearer " + token}
         client = self._http or httpx.Client()
         owns_client = self._http is None
         attempts = 1 + self.ceilings["max_retries"]

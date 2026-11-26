@@ -456,7 +456,7 @@
   function isPoEnabled() {
     try {
       if (typeof localStorage !== "undefined" && localStorage && typeof localStorage.getItem === "function") {
-        return localStorage.getItem("smd_rmd_po") === "1";
+        return localStorage.getItem("smd_rmd_po") !== "0";
       }
     } catch (e) {}
     return false;

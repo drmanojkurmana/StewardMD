@@ -14,6 +14,7 @@
 import { assertPublicHttpsUrl } from "../../_connect/onboard/ssrf.js";
 import { fetchWithRetry, readJson, createBucket, requireContactEmail, ConnectorError } from "./_connectors/_http.js";
 import { efetchAbstracts } from "./_connectors/pubmed_efetch.js";
+import { resolveNcbiApiKey } from "./_connectors/pubmed.js";
 import { fetchRecords, normalise } from "./_connectors/crossref.js";
 import { normaliseDoi } from "./_dedup.js";
 import { parseFindings } from "./_auto_studies.js";
@@ -79,7 +80,7 @@ const DESIGNS = [
 function configOf(env) {
   return {
     contactEmail: requireContactEmail({ contactEmail: env.RESEARCH_CONTACT_EMAIL }),
-    apiKey: String(env.RESEARCH_NCBI_API_KEY || "").trim(),
+    apiKey: resolveNcbiApiKey(env),
     deadline: Date.now() + 60000,
     bucket: BUCKET,
   };

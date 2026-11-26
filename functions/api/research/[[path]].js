@@ -16,7 +16,7 @@
  * screening with auto-conflicts and owner/editor resolution, exclusion reasons,
  * and PRISMA 2020 counts read from the research_prisma_counts view.
  * Connector credentials come from env only: RESEARCH_CONTACT_EMAIL (required),
- * RESEARCH_NCBI_API_KEY (optional), RESEARCH_CROSSREF_TOKEN (optional Plus).
+ * RESEARCH_NCBI_API_KEY or NCBI_API_KEY (optional), RESEARCH_CROSSREF_TOKEN (optional Plus).
  * Integration additions (2026-11-23, contract-additions.md): GET protocol
  * version list and POST import-uploads (multipart -> R2 -> {storageKey}).
  */
@@ -36,7 +36,7 @@ import { dedupRecords, normaliseDoi } from "./_dedup.js";
  * untouched; Phase 3 jobs live in research_job_runs (0003 header decision). */
 import { uploadPdf, createJob, getJob, cancelJob } from "./_jobs.js";
 import { jobCallback } from "./_callback.js";
-import { llmRoute, literatureSearchRoute } from "./_gateway.js";
+import { llmRoute, literatureSearchRoute, trialsStatusRoute, trialsSearchRoute, trialsLookupRoute } from "./_gateway.js";
 import { adminInstitutionRoute, creditsView } from "./_credits.js";
 /* Phase 3.4/3.5/3.6/3.8 + Phase 4.3 (docs/research/contracts/phase-3 and
  * phase-4/grade.md): extraction (_extraction.js), T1 suggestions (_suggest.js),
@@ -85,6 +85,7 @@ import { findStudies, autoAddStudies } from "./_auto_studies.js";
 import { aiDraft } from "./_ai_draft.js";
 import { paperCard, explainPaperCard } from "./_paper_card.js";
 import { formatCheck } from "./_format_check.js";
+import { enrichRetractionRoute, enrichOpenAlexRoute } from "./_enrich.js";
 
 const MAX_JSON = 1024 * 1024;
 const MAX_PDF = 25 * 1024 * 1024;
@@ -1555,7 +1556,7 @@ async function createSearchRun(env, db, uid, projectId, body, requestId) {
   const connector = SEARCH_DATABASES[database];
   const config = {
     contactEmail: env.RESEARCH_CONTACT_EMAIL,
-    apiKey: env.RESEARCH_NCBI_API_KEY,
+    apiKey: pubmedConnector.resolveNcbiApiKey(env),
     plusToken: env.RESEARCH_CROSSREF_TOKEN,
     deadline: Date.now() + 600000,
   };
@@ -1981,6 +1982,12 @@ export async function onRequest({ request, env, params }) {
   const uid = claims.sub;
   const url = new URL(request.url);
 
+  /* ---- Phase 1 enrichment routes: identifiers only, no project text. ---- */
+  if (path === "/v1/enrich/retraction" && request.method === "POST")
+    return enrichRetractionRoute({ request, env, requestId, api: P3 });
+  if (path === "/v1/enrich/openalex" && request.method === "POST")
+    return enrichOpenAlexRoute({ request, env, requestId, api: P3 });
+
   /* ---- Phase 3 user routes (Firebase auth + project role, same as above). */
   const p3Ctx = { request, env, db, uid, claims, requestId, api: P3 };
   const p3Pdfs = path.match(/^\/v1\/projects\/([^/]+)\/pdfs$/);
@@ -2290,6 +2297,37 @@ export async function onRequest({ request, env, params }) {
   if (findStudiesRoute && request.method === "POST") {
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid search payload", requestId); }
     return findStudies(p3Ctx, findStudiesRoute[1], body);
+  }
+  const trialsSearchPath = path.match(/^\/v1\/projects\/([^/]+)\/trials\/search$/);
+  if (trialsSearchPath && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid trials search payload", requestId); }
+    return trialsSearchRoute(p3Ctx, trialsSearchPath[1], body);
+  }
+  const trialsColPath = path.match(/^\/v1\/projects\/([^/]+)\/trials$/);
+  if (trialsColPath && request.method === "GET") {
+    const sp = url.searchParams;
+    const nctParam = sp.get("nct");
+    if (nctParam !== null && nctParam !== "") {
+      return trialsLookupRoute(p3Ctx, trialsColPath[1], nctParam);
+    }
+    const hasSearch = ["condition", "intervention", "phase", "status", "query", "pageSize", "pageToken"]
+      .some((k) => sp.get(k) !== null && sp.get(k) !== "");
+    if (hasSearch) {
+      return trialsSearchRoute(p3Ctx, trialsColPath[1], {
+        condition: sp.get("condition") || undefined,
+        intervention: sp.get("intervention") || undefined,
+        phase: sp.get("phase") || undefined,
+        status: sp.get("status") || undefined,
+        query: sp.get("query") || undefined,
+        pageSize: sp.get("pageSize") || undefined,
+        pageToken: sp.get("pageToken") || undefined,
+      });
+    }
+    return trialsStatusRoute(p3Ctx, trialsColPath[1]);
+  }
+  const trialsOnePath = path.match(/^\/v1\/projects\/([^/]+)\/trials\/([^/]+)$/);
+  if (trialsOnePath && request.method === "GET") {
+    return trialsLookupRoute(p3Ctx, trialsOnePath[1], decodeURIComponent(trialsOnePath[2]));
   }
   const autoAddRoute = path.match(/^\/v1\/projects\/([^/]+)\/studies\/auto-add$/);
   if (autoAddRoute && request.method === "POST") {
