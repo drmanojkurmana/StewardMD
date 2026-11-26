@@ -272,12 +272,17 @@
     ai: null,
     polishBusy: false,
     polishError: null,
-    polishDraft: null
+    polishDraft: null,
+    poJobId: null,
+    poStatus: null,
+    poError: null,
+    poCreating: false
   };
 
   var seq = 0;
   var lastContainer = null;
   var mqlBound = false;
+  var poTimer = null;
 
   function bindBreakpoint() {
     if (mqlBound || !G.matchMedia) return;
@@ -447,6 +452,216 @@
     ];
   }
 
+  /* PaperOrchestra feature flag (Task 1) */
+  function isPoEnabled() {
+    try {
+      if (typeof localStorage !== "undefined" && localStorage && typeof localStorage.getItem === "function") {
+        return localStorage.getItem("smd_rmd_po") === "1";
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  var PO_ERROR_MESSAGES = {
+    not_systematic_review: "Full drafts are only available for systematic review projects.",
+    protocol_unlocked: "Lock the research protocol before drafting the manuscript.",
+    no_saved_run: "Run and save at least one analysis before drafting the manuscript.",
+    job_active: "A draft job is already running for this project.",
+    cap_po_project_daily: "Daily draft limit reached for this project. Try again tomorrow.",
+    cap_po_user_daily: "Daily draft limit reached for your account. Try again tomorrow.",
+    insufficient_credits: "Not enough research credits for this draft. Top up your wallet to continue.",
+    phi_blocked: "Patient identifiers were detected. Remove personal identifiers and try again.",
+    not_found: "Feature not available yet."
+  };
+
+  function mapPoError(err) {
+    if (!err) return "Could not complete draft. Try again.";
+    var code = "";
+    if (typeof err === "string") {
+      code = err;
+    } else if (err.error && typeof err.error === "object") {
+      code = err.error.code || "";
+    } else if (err.error_code) {
+      code = err.error_code;
+    } else if (err.errorCode) {
+      code = err.errorCode;
+    } else if (err.code) {
+      code = err.code;
+    }
+    if (err.status === 404 || code === "not_found") {
+      return PO_ERROR_MESSAGES.not_found;
+    }
+    if (code && PO_ERROR_MESSAGES[code]) {
+      return PO_ERROR_MESSAGES[code];
+    }
+    if (err.status === 402) {
+      return PO_ERROR_MESSAGES.insufficient_credits;
+    }
+    var msg = (err.error && err.error.message) || err.message || "";
+    if (msg) return String(msg).replace(/[\u2014\u2013]/g, "-");
+    return "Could not complete draft. Try again.";
+  }
+
+  function getPoStatusText() {
+    if (st.poStatus === "queued") return "Queued";
+    if (st.poStatus === "running") return "Writing the draft";
+    if (st.poStatus === "succeeded") return "Done";
+    if (st.poStatus === "failed") return "Failed: " + (st.poError || "Draft failed.");
+    if (st.poStatus === "cancelled") return "Failed: Draft cancelled.";
+    return "";
+  }
+
+  function poStatusHtml() {
+    if (!isPoEnabled()) return "";
+    var isJobActive = st.poCreating || st.poStatus === "queued" || st.poStatus === "running";
+    var statusText = getPoStatusText();
+    var inner = "";
+    if (statusText) {
+      var colorStyle = st.poStatus === "failed" ? "color:var(--rmd-warn, #ff6b6b);" :
+                       st.poStatus === "succeeded" ? "color:var(--rmd-acc, #42CDB5);" :
+                       "color:var(--rmd-mut, #8ea3a6);";
+      inner = '<span class="rmd-po-status-text" style="font-size:13px; ' + colorStyle + '">' + esc(statusText) + '</span>';
+      if (isJobActive && st.poJobId) {
+        inner += ' <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="po-cancel" style="margin-left:8px;">Cancel</button>';
+      }
+    }
+    return '<div class="rmd-po-status" aria-live="polite" style="margin-top:6px; display:flex; align-items:center; gap:8px;">' + inner + '</div>';
+  }
+
+  function clearPoPoll() {
+    if (poTimer) {
+      clearInterval(poTimer);
+      poTimer = null;
+    }
+  }
+
+  function reloadVersions(container) {
+    var base = "/v1/projects/" + encodeURIComponent(apiProjectId());
+    var pMan = SMD.api ? SMD.api.request("GET", base + "/manuscript") : Promise.resolve(null);
+    var pVers = SMD.api ? SMD.api.request("GET", base + "/manuscript/versions") : Promise.resolve(null);
+    var target = container || lastContainer;
+    return Promise.all([pMan, pVers]).then(function (res) {
+      if (res[0] && res[0].manuscript) {
+        st.manuscript = res[0].manuscript;
+      }
+      if (res[1] && res[1].versions) {
+        st.versions = res[1].versions;
+      }
+      if (target) render(target);
+    }).catch(function () {
+      if (target) render(target);
+    });
+  }
+
+  function startPoPoll(container, jobId) {
+    clearPoPoll();
+    if (!jobId) return;
+    poTimer = setInterval(function () {
+      var target = container || lastContainer;
+      if (!target || (D.body && !D.body.contains(target))) {
+        clearPoPoll();
+        return;
+      }
+      if (!SMD.api || typeof SMD.api.request !== "function") return;
+      SMD.api.request("GET", "/v1/jobs/" + encodeURIComponent(jobId)).then(function (res) {
+        var job = (res && res.job) || res;
+        var status = job && job.status;
+        if (status === "succeeded" || status === "done") {
+          clearPoPoll();
+          st.poStatus = "succeeded";
+          st.poError = null;
+          reloadVersions(target);
+        } else if (status === "failed") {
+          clearPoPoll();
+          st.poStatus = "failed";
+          st.poError = mapPoError(job);
+          if (target) render(target);
+        } else if (status === "running") {
+          if (st.poStatus !== "running") {
+            st.poStatus = "running";
+            if (target) render(target);
+          }
+        } else if (status === "queued") {
+          if (st.poStatus !== "queued") {
+            st.poStatus = "queued";
+            if (target) render(target);
+          }
+        }
+      }).catch(function (err) {
+        clearPoPoll();
+        st.poStatus = "failed";
+        st.poError = mapPoError(err);
+        if (target) render(target);
+      });
+    }, 10000);
+  }
+
+  function startPoDraft(container) {
+    if (st.poCreating || st.poStatus === "queued" || st.poStatus === "running") return;
+    var target = container || lastContainer;
+    if (!SMD.api || typeof SMD.api.request !== "function") {
+      st.poStatus = "failed";
+      st.poError = "API not available";
+      if (target) render(target);
+      return;
+    }
+    clearPoPoll();
+    st.poCreating = true;
+    st.poStatus = "queued";
+    st.poError = null;
+    st.poJobId = null;
+    if (target) render(target);
+
+    var pid = encodeURIComponent(apiProjectId());
+    var randKey = "po_" + Date.now() + "_" + Math.random().toString(36).slice(2, 10);
+    var body = {
+      kind: "manuscript_draft",
+      idempotencyKey: randKey
+    };
+
+    SMD.api.request("POST", "/v1/projects/" + pid + "/jobs", body).then(function (res) {
+      st.poCreating = false;
+      var job = (res && res.job) || (res && res.jobs && res.jobs[0]) || res;
+      var jid = (job && job.id) || (res && res.jobId) || (res && res.id);
+      var jStatus = (job && job.status) || "queued";
+      st.poJobId = jid;
+      st.poStatus = jStatus;
+
+      if (jStatus === "succeeded" || jStatus === "done") {
+        st.poStatus = "succeeded";
+        reloadVersions(target);
+      } else if (jStatus === "failed") {
+        st.poStatus = "failed";
+        st.poError = mapPoError(job);
+        if (target) render(target);
+      } else {
+        if (target) render(target);
+        if (jid) {
+          startPoPoll(target, jid);
+        }
+      }
+    }).catch(function (err) {
+      st.poCreating = false;
+      st.poStatus = "failed";
+      st.poError = mapPoError(err);
+      clearPoPoll();
+      if (target) render(target);
+    });
+  }
+
+  function cancelPoJob(container) {
+    var jid = st.poJobId;
+    var target = container || lastContainer;
+    clearPoPoll();
+    st.poCreating = false;
+    st.poStatus = "failed";
+    st.poError = "Draft cancelled.";
+    if (target) render(target);
+    if (jid && SMD.api && typeof SMD.api.request === "function") {
+      SMD.api.request("POST", "/v1/jobs/" + encodeURIComponent(jid) + "/cancel").catch(function () {});
+    }
+  }
+
   /* Load manuscript and version data */
   function load(container, params) {
     var mySeq = ++seq;
@@ -456,6 +671,11 @@
       st.polishBusy = false;
       st.polishError = null;
       st.polishDraft = null;
+      clearPoPoll();
+      st.poJobId = null;
+      st.poStatus = null;
+      st.poError = null;
+      st.poCreating = false;
     }
     st.projectId = newPid;
     if (params && params.sectionId) {
@@ -625,39 +845,39 @@
     });
   }
 
+  function loadCasePromise(id) {
+    if (!G.RMDStore) return Promise.resolve(null);
+    if (typeof G.RMDStore.list === "function") {
+      return G.RMDStore.list(id, "casefile").then(function (items) {
+        if (items && items.length) {
+          for (var i = 0; i < items.length; i++) {
+            if (items[i] && (items[i].id === "case" || items[i].id === "1" || items[i].id === "main")) {
+              return items[i].value || items[i];
+            }
+          }
+          return (items[0] && (items[0].value || items[0])) || null;
+        }
+        if (typeof G.RMDStore.get === "function") {
+          return G.RMDStore.get(id, "casefile", "case").then(function (r) {
+            return r || G.RMDStore.get(id, "casefile", "main");
+          });
+        }
+        return null;
+      });
+    }
+    if (typeof G.RMDStore.get === "function") {
+      return G.RMDStore.get(id, "casefile", "case").then(function (r) {
+        return r || G.RMDStore.get(id, "casefile", "main");
+      });
+    }
+    return Promise.resolve(null);
+  }
+
   function openCaseReportDraftModal(container) {
     var store = SMD.store;
     var proj = store ? store.getActiveProject() : null;
     var pid = (proj && proj.id) || activeProjectId();
     var apiPid = (proj && (proj.serverId || proj.id)) || pid;
-
-    function loadCasePromise(id) {
-      if (!G.RMDStore) return Promise.resolve(null);
-      if (typeof G.RMDStore.list === "function") {
-        return G.RMDStore.list(id, "casefile").then(function (items) {
-          if (items && items.length) {
-            for (var i = 0; i < items.length; i++) {
-              if (items[i] && (items[i].id === "case" || items[i].id === "1" || items[i].id === "main")) {
-                return items[i].data || items[i];
-              }
-            }
-            return (items[0] && (items[0].data || items[0])) || null;
-          }
-          if (typeof G.RMDStore.get === "function") {
-            return G.RMDStore.get(id, "casefile", "case").then(function (r) {
-              return r || G.RMDStore.get(id, "casefile", "main");
-            });
-          }
-          return null;
-        });
-      }
-      if (typeof G.RMDStore.get === "function") {
-        return G.RMDStore.get(id, "casefile", "case").then(function (r) {
-          return r || G.RMDStore.get(id, "casefile", "main");
-        });
-      }
-      return Promise.resolve(null);
-    }
 
     var getPromise = loadCasePromise(pid).then(function (cf) {
       if (cf || apiPid === pid) return cf;
@@ -1876,6 +2096,8 @@
       "#researchMD .rmd-man-actions { display: flex; align-items: center; gap: 8px; flex: 0 1 auto; flex-wrap: wrap; min-width: 0; max-width: 100%; }",
       "#researchMD .rmd-man-actions .rmd-btn { white-space: nowrap; flex-shrink: 0; }",
       "#researchMD .rmd-man-ai-wrap { margin: 12px 18px 0; flex-shrink: 0; }",
+      "#researchMD .rmd-po-status { margin-top: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }",
+      "#researchMD .rmd-po-status-text { font: 500 13px var(--rmd-f); color: var(--rmd-mut); }",
       "#researchMD .rmd-man-phone-bar { display: none; flex-shrink: 0; background: var(--rmd-fill); padding: 4px; border-bottom: 1px solid var(--rmd-line); }",
       "#researchMD .rmd-man-phone-btn { flex: 1; border: 0; background: none; font: 500 13px var(--rmd-f); color: var(--rmd-mut); padding: 7px; border-radius: 6px; cursor: pointer; }",
       "#researchMD .rmd-man-phone-btn.rmd-seg-active { background: var(--rmd-panel); color: var(--rmd-ink); font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }",
@@ -2004,17 +2226,38 @@
     var isCaseReport = proj && isCaseProject(proj);
     if (isCaseReport && !isLocked) {
       h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="ask-maik-case-report">Ask MaiK to draft it</button>');
+      if (isPoEnabled()) {
+        var isPoActiveCr = st.poCreating || st.poStatus === "queued" || st.poStatus === "running";
+        h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="full-draft-po"' + (isPoActiveCr ? ' disabled="disabled"' : '') + '>Full draft (PaperOrchestra)</button>');
+      }
     }
     h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="manuscript-export">Download Word file</button>');
     h.push('  </div>');
     h.push('</div>');
 
-    if (!isLocked && !isCaseReport) {
-      if (!st.ai) st.ai = SMD.ai.state();
-      h.push('<div class="rmd-man-ai-wrap">');
-      h.push(SMD.ai.barHtml(st.ai, { task: "manuscript_draft", label: "manuscript draft", cost: 2 }));
-      h.push(SMD.ai.noteHtml(st.ai, "manuscript"));
-      h.push('</div>');
+    if (!isLocked) {
+      if (!isCaseReport) {
+        if (!st.ai) st.ai = SMD.ai.state();
+        h.push('<div class="rmd-man-ai-wrap">');
+        var barHtml = SMD.ai.barHtml(st.ai, { task: "manuscript_draft", label: "manuscript draft", cost: 2 });
+        if (isPoEnabled()) {
+          var isPoActive = st.poCreating || st.poStatus === "queued" || st.poStatus === "running";
+          var poBtn = '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="full-draft-po"' + (isPoActive ? ' disabled="disabled"' : '') + '>Full draft (PaperOrchestra)</button>';
+          if (barHtml.indexOf('data-rmd-ai="ask"') >= 0) {
+            barHtml = barHtml.replace('</button>', '</button>' + poBtn);
+          } else {
+            barHtml = barHtml + poBtn;
+          }
+          barHtml = barHtml + poStatusHtml();
+        }
+        h.push(barHtml);
+        h.push(SMD.ai.noteHtml(st.ai, "manuscript"));
+        h.push('</div>');
+      } else if (isPoEnabled()) {
+        h.push('<div class="rmd-man-ai-wrap">');
+        h.push(poStatusHtml());
+        h.push('</div>');
+      }
     }
 
     /* Phone segmented bar */
@@ -2362,6 +2605,21 @@
       };
     }
 
+    if (isPoEnabled()) {
+      var poBtns = container.querySelectorAll('[data-rmd="full-draft-po"]');
+      for (var pbi = 0; pbi < poBtns.length; pbi++) {
+        poBtns[pbi].onclick = function () {
+          startPoDraft(container);
+        };
+      }
+      var poCancelBtns = container.querySelectorAll('[data-rmd="po-cancel"]');
+      for (var pci = 0; pci < poCancelBtns.length; pci++) {
+        poCancelBtns[pci].onclick = function () {
+          cancelPoJob(container);
+        };
+      }
+    }
+
     var btnSave = container.querySelector('[data-rmd="section-save"]');
     if (btnSave) {
       btnSave.onclick = function () {
@@ -2699,7 +2957,13 @@
   SMD.screens.manuscript = {
     render: function (container, params) {
       load(container, params);
-    }
+    },
+    cleanup: function () {
+      clearPoPoll();
+    },
+    _loadCasePromise: loadCasePromise,
+    _mapPoError: mapPoError,
+    _clearPoPoll: clearPoPoll
   };
 
 })(typeof window !== "undefined" ? window : global);
