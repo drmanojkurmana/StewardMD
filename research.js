@@ -41,7 +41,8 @@
       headers["Content-Type"] = "application/json";
       opts.body = JSON.stringify(body);
     }
-    var timeoutMs = (options && options.timeout) || (path && path.indexOf("/ai-draft") !== -1 ? 90000 : 30000);
+    var isLongAiRoute = path && /\/(?:ai-draft|paper-card\/explain|extraction\/suggestions|screening-suggestions|grade-suggestions|studies\/auto-add|find-studies)(?:[/?#]|$)/.test(path);
+    var timeoutMs = (options && options.timeout) || (isLongAiRoute ? 90000 : 30000);
     opts.timeout = timeoutMs;
     opts.readTimeout = timeoutMs;
 

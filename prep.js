@@ -1614,7 +1614,10 @@
     // A shared ID (deep link stewardmd://prep/<ID>) while PrepNucleus is already open: open it over the current screen.
     // Still loading (the taxonomy): kept for the first screen, which opens it.
     if (st.open) { if (opts && opts.id && G.PREP_IDS) { if (st.tax && st.stack.length) G.PREP_IDS.open(String(opts.id), HOST); else st.pendId = String(opts.id); } return true; }
-    try { if (G.PREP_STARTUP && G.PREP_STARTUP.willPlay && G.PREP_STARTUP.willPlay(opts) && !G.PREP_STARTUP._active()) G.PREP_STARTUP.play({ opts: opts }); } catch (e) {}
+    var play = false;
+    try { play = !!(G.PREP_STARTUP && G.PREP_STARTUP.willPlay && G.PREP_STARTUP.willPlay(opts) && !G.PREP_STARTUP._active()); } catch (e) {}
+    try { if (G.PREP_STARTUP && G.PREP_STARTUP.noteOpen) G.PREP_STARTUP.noteOpen(); } catch (e) {}
+    try { if (play) G.PREP_STARTUP.play({ opts: opts }); } catch (e) {}
     load();
     st.prevFocus = D.activeElement; st.prevOverflow = D.body.style.overflow;
     root = D.createElement("div"); root.id = "smdPrep"; root.className = "pn-root";
