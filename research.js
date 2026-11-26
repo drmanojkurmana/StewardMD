@@ -31,10 +31,78 @@
     return (G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.CapacitorHttp) || G.CapacitorHttp || null;
   }
 
+  function phiBlockedError() {
+    var err = new Error("Remove patient identifiers (names, IDs, phone numbers, dates) before drafting.");
+    err.code = "phi_blocked";
+    err.status = 0;
+    return err;
+  }
+
+  function hasPhiModules() {
+    return typeof G.SMD_redactPHI === "function" &&
+      G.SMD_PHI_INDIA && typeof G.SMD_PHI_INDIA.apply === "function" &&
+      G.RMDPhi && typeof G.RMDPhi.scan === "function";
+  }
+
+  function scrubPhiInput(val, state) {
+    if (typeof val === "string") {
+      var s = G.SMD_redactPHI(val);
+      s = G.SMD_PHI_INDIA.apply(s);
+      var hits = G.RMDPhi.scan(s);
+      if (hits && hits.length) state.blocked = true;
+      return s;
+    }
+    if (Array.isArray(val)) {
+      var arr = new Array(val.length);
+      for (var i = 0; i < val.length; i++) {
+        arr[i] = scrubPhiInput(val[i], state);
+      }
+      return arr;
+    }
+    if (val && typeof val === "object") {
+      var out = {};
+      var keys = Object.keys(val);
+      for (var j = 0; j < keys.length; j++) {
+        var k = keys[j];
+        out[k] = scrubPhiInput(val[k], state);
+      }
+      return out;
+    }
+    return val;
+  }
+
+  function copyWithRedactedInput(body) {
+    var copy = {};
+    var keys = Object.keys(body);
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      copy[k] = body[k];
+    }
+    var state = { blocked: false };
+    copy.input = scrubPhiInput(body.input, state);
+    if (state.blocked) return null;
+    return copy;
+  }
+
   /* Phase 2 API client: calls stewardmd.in/api/research/v1 per the frozen
    * contracts (docs/research/contracts/phase-2). Firebase ID token from
    * SMD_AUTH when present; errors normalize to {code, status, current}. */
   function apiRequest(method, path, body, options) {
+    if (String(method || "").toUpperCase() === "POST" && path && /\/ai-draft(\?|$)/.test(path) &&
+        body && body.input !== undefined && body.input !== null) {
+      if (!hasPhiModules()) {
+        return Promise.reject(phiBlockedError());
+      }
+      try {
+        var redactedBody = copyWithRedactedInput(body);
+        if (!redactedBody) {
+          return Promise.reject(phiBlockedError());
+        }
+        body = redactedBody;
+      } catch (phiEx) {
+        return Promise.reject(phiBlockedError());
+      }
+    }
     var headers = { "Accept": "application/json" };
     var opts = { method: method, headers: headers };
     if (body !== undefined && body !== null) {
