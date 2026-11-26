@@ -505,6 +505,14 @@
     // The legacy #smdSearchPanel (app.js) is parked above the screen at z 401 with a 24 px shadow that bled over the
     // top of this panel and of home. It is never shown while this file runs, so hide it (search.css, html.us-on).
     if (document.documentElement && document.documentElement.classList) document.documentElement.classList.add("us-on");
+    // Look trial (owner 2026-11-26): ?uslook=a|b|c or localStorage smd_us_look picks one of three designs (search.css).
+    try {
+      var lk = (/[?&]uslook=([abc0])/.exec(location.search) || [])[1];
+      if (lk) localStorage.setItem("smd_us_look", lk);
+      lk = localStorage.getItem("smd_us_look");
+      if (document.documentElement && /^[abc]$/.test(lk || "")) document.documentElement.setAttribute("data-us-look", lk);
+      else if (document.documentElement && document.documentElement.removeAttribute) document.documentElement.removeAttribute("data-us-look");
+    } catch (e) {}
     G.openSearch = open; G.closeSearch = close;                 // header button onclick, ACT.search, kbOpen all route here
     G.doSearch = function (q) { open(); setQuery(q); };
     G.clearSearch = function () { setQuery(""); };
