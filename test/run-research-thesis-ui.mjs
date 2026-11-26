@@ -335,7 +335,7 @@ async function shot(name) {
     return true;
   })()`);
 
-  const uploadDocx = (opts = {}) => ev(`((opts)=>{
+  const uploadDocx = (opts = {}) => ev(`(async (opts)=>{
     const inp=document.querySelector('#rmdThesisFile');
     if(!inp)return false;
     const enc=new TextEncoder();
@@ -346,16 +346,24 @@ async function shot(name) {
       +'<w:tbl><w:tr><w:tc><w:p><w:r><w:t>Table 7</w:t></w:r></w:p></w:tc><w:tc><w:p><w:r><w:t>Pooled risk ratio 0.49 (95% CI 0.34 to 0.70) across 120 patients.</w:t></w:r></w:p></w:tc></w:tr></w:tbl>'
       +'</w:body></w:document>');
     const name=enc.encode('word/document.xml');
-    const body=enc.encode(xml);
+    const rawBody=enc.encode(xml);
+    let body = rawBody;
+    let method = 0;
+    if (opts.deflate && window.CompressionStream) {
+      method = 8;
+      const cs = new CompressionStream('deflate-raw');
+      const stream = new Blob([rawBody]).stream().pipeThrough(cs);
+      body = new Uint8Array(await new Response(stream).arrayBuffer());
+    }
     const lh=new Uint8Array(30+name.length);
     const dvL=new DataView(lh.buffer);
-    dvL.setUint32(0,0x04034b50,true); dvL.setUint16(4,20,true); dvL.setUint16(8,0,true);
-    dvL.setUint32(18,body.length,true); dvL.setUint32(22,body.length,true); dvL.setUint16(26,name.length,true);
+    dvL.setUint32(0,0x04034b50,true); dvL.setUint16(4,20,true); dvL.setUint16(8,method,true);
+    dvL.setUint32(18,body.length,true); dvL.setUint32(22,rawBody.length,true); dvL.setUint16(26,name.length,true);
     lh.set(name,30);
     const ch=new Uint8Array(46+name.length);
     const dvC=new DataView(ch.buffer);
-    dvC.setUint32(0,0x02014b50,true); dvC.setUint16(4,20,true); dvC.setUint16(6,20,true); dvC.setUint16(10,0,true);
-    dvC.setUint32(20,body.length,true); dvC.setUint32(24,body.length,true); dvC.setUint16(28,name.length,true);
+    dvC.setUint32(0,0x02014b50,true); dvC.setUint16(4,20,true); dvC.setUint16(6,20,true); dvC.setUint16(10,method,true);
+    dvC.setUint32(20,body.length,true); dvC.setUint32(24,rawBody.length,true); dvC.setUint16(28,name.length,true);
     dvC.setUint32(42,0,true); ch.set(name,46);
     const eocd=new Uint8Array(22);
     const dvE=new DataView(eocd.buffer);
@@ -363,7 +371,7 @@ async function shot(name) {
     dvE.setUint32(12,ch.length,true); dvE.setUint32(16,lh.length+body.length,true);
     const out=new Uint8Array(lh.length+body.length+ch.length+eocd.length);
     out.set(lh,0); out.set(body,lh.length); out.set(ch,lh.length+body.length); out.set(eocd,lh.length+body.length+ch.length);
-    const f=new File([out], opts.filename || 'FinalThesis1.docx',{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    const f=new File([out], opts.filename || 'FinalThesis1.docx',{type: opts.mime || 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
     const dt=new DataTransfer(); dt.items.add(f); inp.files=dt.files;
     inp.dispatchEvent(new Event('change',{bubbles:true}));
     return true;
@@ -481,13 +489,30 @@ try {
   ok(await until(`/FinalThesisReal\\.pdf was read: 1 page\\(s\\)/.test(document.querySelector('#rmdScreenBody').innerText)`, 10000), 'real PDF read directly on-device with page count');
   ok(uploadN === beforeRealPdfUploads, 'selectable-text PDF required zero server upload calls');
 
-  // 4c. Real Word (.docx) thesis read natively on-device (0 extra server upload calls).
+  // 4c. Real Word (.docx) thesis read natively on-device with deflate compression (0 extra server upload calls).
   await click('#rmdThesisReupload');
   ok(await until(`!!document.querySelector('#rmdThesisFile')`, 5000), 'file input back for Word DOCX check');
-  ok(await uploadDocx(), 'real Word (.docx) thesis selected');
+  ok(await uploadDocx({ deflate: true }), 'real Word (.docx) thesis with deflate compression selected');
   ok(await until(`/FinalThesis1\\.docx was read: 2 page\\(s\\)/.test(document.querySelector('#rmdScreenBody').innerText)`, 8000), 'DOCX read natively on-device with exact 2 page count');
   ok(uploadN === beforeRealPdfUploads, 'DOCX read required zero server upload calls');
   ok(await ev(`(()=>{const t=JSON.parse(localStorage.getItem('smd_rmd_thesis_v1')||'{}')['prj_thesis_1']||{};return t.pages&&t.pages.length===2&&/Table 7/.test(t.pages[1].text);})()`), 'DOCX extracted table text cleanly onto page 2');
+
+  // 4d. DOCX with alternate MIME type (application/docx) supported.
+  await click('#rmdThesisReupload');
+  ok(await until(`!!document.querySelector('#rmdThesisFile')`, 5000), 'file input back for alternate DOCX MIME check');
+  ok(await uploadDocx({ deflate: true, filename: 'ThesisAlt.docx', mime: 'application/docx' }), 'alternate MIME DOCX selected');
+  ok(await until(`/ThesisAlt\\.docx was read: 2 page\\(s\\)/.test(document.querySelector('#rmdScreenBody').innerText)`, 8000), 'alternate MIME DOCX read successfully');
+
+  // 4e. Legacy binary .doc triggers informative warning banner.
+  await click('#rmdThesisReupload');
+  ok(await until(`!!document.querySelector('#rmdThesisFile')`, 5000), 'file input back for legacy .doc check');
+  await ev(`(()=>{
+    const inp=document.querySelector('#rmdThesisFile');
+    const f=new File([new Uint8Array([0xD0,0xCF,0x11,0xE0])],'ThesisOld.doc',{type:'application/msword'});
+    const dt=new DataTransfer(); dt.items.add(f); inp.files=dt.files;
+    inp.dispatchEvent(new Event('change',{bubbles:true}));
+  })()`);
+  ok(await until(`/Older Word \\(\\.doc\\) files are binary format/.test(document.querySelector('#rmdThesisMsg').innerText)`, 5000), 'legacy .doc triggers informative warning banner');
 
   // Restore clean server result pages (page 54, Table 7) for Step 5-12 assertions or verify end-to-end
   await click('#rmdThesisReupload');
