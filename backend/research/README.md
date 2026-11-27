@@ -19,7 +19,7 @@ models in Phase 5D.
 - `worker/research_worker/`: the container package.
   - `queue.py`: Queues HTTP pull client (pull, ack, retry).
   - `storage.py`: R2 via the S3 API (boto3).
-  - `extract.py`: pdfplumber text, words, tables, page provenance; Tesseract
+  - `extract.py`: text, words, tables, page provenance via the Rust reader (`rust-pdf/`, same code the app runs as WebAssembly); Tesseract
     OCR for pages with no text layer; rotation handling; ceilings.
   - `jobs.py`: idempotent runs, cancel checks, HMAC callback, drain loop.
   - `app.py`: FastAPI `GET /health` and token-protected `POST /drain`.

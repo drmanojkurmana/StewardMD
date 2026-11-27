@@ -288,8 +288,17 @@
     return null;
   }
 
+  /* Search text for pages a..b from the Rust reader's lines ({ page: [{ tx }] }, PREP_SRC.rustLinesFromBytes): one string
+     per page, spaces squashed, "" for a page with no text (a scan, read later by OCR). null in, null out (use pdf.js). */
+  function rustSearchTexts(rl, a, b) {
+    if (!rl) return null;
+    var out = {}, p;
+    for (p = a; p <= b; p++) out[p] = (rl[p] || []).map(function (l) { return l.tx; }).join(" ").replace(/\s+/g, " ").trim();
+    return out;
+  }
+
   var PURE = {
-    BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem,
+    rustSearchTexts: rustSearchTexts, BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem,
     bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs,
     hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure, penPressure: penPressure,
     r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble, coveredBy: coveredBy,
@@ -854,16 +863,28 @@
       });
     });
   }
+  // Search text for pages a..b: the Rust reader (vendor/rust-pdf, via PREP_SRC) reads a batch in one go; null = use pdf.js.
+  function rustTexts(bytes, a, b) {
+    var SR = G.PREP_SRC, pages = [], p;
+    if (!SR || !SR.rustLinesFromBytes || !bytes) return Promise.resolve(null);
+    for (p = a; p <= b; p++) pages.push(p);
+    return SR.rustLinesFromBytes(bytes, pages).then(function (rl) { return rustSearchTexts(rl, a, b); }, function () { return null; });
+  }
   function indexDoc(d, from) {
-    return loadOriginal(d).then(openPdf).then(function (pdf) {
+    var bytes = null, rustOk = true;
+    return loadOriginal(d).then(function (b) { bytes = b; return openPdf(b); }).then(function (pdf) {
       var n = from, fin = function () { try { pdf.destroy(); } catch (e) {} };
       function batch() {
         return get("docs", d.id).then(function (cur) {
           if (!cur) return purge(d.id);
           if (n >= pdf.numPages) return;
-          var end = Math.min(n + 3, pdf.numPages), t = [], p;
-          for (p = n + 1; p <= end; p++) t.push((function (pg) { return pageText(pdf, pg).then(function (txt) { return put("ptext", { id: d.id + ":" + pg + ":pdf", doc: d.id, page: pg, src: "pdf", text: txt }); }); })(p));
-          return Promise.all(t).then(function () { n = end; return put("index", { doc: d.id, done: n }); }).then(function () {
+          var end = Math.min(n + (rustOk ? 25 : 3), pdf.numPages);
+          return (rustOk ? rustTexts(bytes, n + 1, end) : Promise.resolve(null)).then(function (rt) {
+            if (!rt) { rustOk = false; end = Math.min(n + 3, pdf.numPages); }
+            var t = [], p;
+            for (p = n + 1; p <= end; p++) t.push((function (pg) { return (rt ? Promise.resolve(rt[pg]) : pageText(pdf, pg)).then(function (txt) { return put("ptext", { id: d.id + ":" + pg + ":pdf", doc: d.id, page: pg, src: "pdf", text: txt }); }); })(p));
+            return Promise.all(t);
+          }).then(function () { n = end; return put("index", { doc: d.id, done: n }); }).then(function () {
             setIx(d.id, n, pdf.numPages);
             return new Promise(function (r) { G.setTimeout(r, 30); });
           }).then(batch);
@@ -2341,8 +2362,11 @@
   }
   function signedIn() { var a = G.SMD_AUTH; return !!(a && a.currentUser); }
   function pagesText(pdf, id, pages) {
-    var SR = G.PREP_SRC;
-    return textOf(id).then(function (rows) {
+    var SR = G.PREP_SRC, rl = null;
+    // The Rust reader's lines (same as deck creation); a page it leaves out, or any failure, uses pdf.js below.
+    var rustP = (pdf && SR.rustLinesFromBytes) ? get("docs", id).then(function (d) { return d ? loadOriginal(d) : null; })
+      .then(function (b) { return b ? SR.rustLinesFromBytes(b, pages) : null; }).then(null, function () { return null; }) : Promise.resolve(null);
+    return rustP.then(function (r) { rl = r; return textOf(id); }).then(function (rows) {
       var ocr = {};
       rows.forEach(function (x) { if (x.src === "ocr" && x.text) ocr[x.page] = x.text; });
       return pages.reduce(function (pr, n) {
@@ -2353,6 +2377,7 @@
             if (lines.length) out.push({ p: n, ocr: true, lines: lines });
             return out;
           }
+          if (rl && rl[n] && rl[n].length) { out.push({ p: n, ocr: false, lines: rl[n] }); return out; }
           return pdf.getPage(n).then(function (pg) {
             return pg.getTextContent().then(function (tc) {
               pg.cleanup();
