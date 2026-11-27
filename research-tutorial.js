@@ -1675,20 +1675,6 @@
     } catch (e) {}
   }
 
-  function stepAiCost(screenName) {
-    if (screenName === "thesis-draft") return 3;
-    if (screenName === "plan" || screenName === "protocol" || screenName === "search" ||
-        screenName === "screening" || screenName === "extract" || screenName === "rob" ||
-        screenName === "manuscript" || screenName === "checklist") return 2;
-    return 0;
-  }
-
-  function costLabel(cost) {
-    return cost > 0
-      ? ("Costs about " + cost + " MaiK token" + (cost === 1 ? "" : "s"))
-      : "No MaiK tokens needed";
-  }
-
   function clearSpotlight() {
     if (!D) return;
     var old = D.querySelectorAll(".rmd-tut-spot");
@@ -1747,7 +1733,10 @@
     var guide = stepGuide(screenName, proj);
     var isDef = isTutorialDefault(key);
     var collapsed = getCollapsedPref();
-    var costStr = costLabel(stepAiCost(screenName));
+    /* Live BUG-10: the whole tutorial is free. The coach bar used to quote a
+     * token cost on AI steps, contradicting the free wording on the project
+     * and tutorial cards. One clear label everywhere. */
+    var costStr = "No MaiK tokens needed";
     var stepTag = idx >= 0 ? ("Step " + (idx + 1) + " of " + journey.length) : "Guided Practice";
     var shortTip = stepTips[screenName] || (tabLabels[screenName] || screenName);
     var toggleChev = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>';

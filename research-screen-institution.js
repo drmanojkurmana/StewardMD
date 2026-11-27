@@ -47,19 +47,35 @@
       if (mySeq !== seq) return;
       var insts = (res && res.institutions) || [];
       st.institutions = insts;
+      st.institution = null;
       if (!st.selectedInstId && insts.length) {
         st.selectedInstId = insts[0].id;
-        st.institution = insts[0];
-      } else if (st.selectedInstId) {
+      }
+      if (st.selectedInstId) {
         for (var i = 0; i < insts.length; i++) {
           if (insts[i].id === st.selectedInstId) st.institution = insts[i];
         }
       }
+      if (!st.institution && insts.length) {
+        st.selectedInstId = insts[0].id;
+        st.institution = insts[0];
+      }
 
-      if (!st.selectedInstId) {
-        // Fallback default institution workspace if none returned
-        st.selectedInstId = "inst_default";
-        st.institution = { id: "inst_default", name: "Medical Research Institute", seats: 10 };
+      /* Live BUG-12: no institution on this account is a normal state. The
+       * old fallback invented an "inst_default" workspace, then fired three
+       * 404s for it and rendered mock members and projects. Show the empty
+       * state instead and request nothing. */
+      if (!st.institution) {
+        st.selectedInstId = null;
+        st.members = [];
+        st.projects = [];
+        st.onboarding = [];
+        st.seats = 0;
+        st.usedSeats = 0;
+        st.loading = false;
+        st.loaded = true;
+        render(container);
+        return null;
       }
 
       var id = st.selectedInstId;
@@ -76,22 +92,16 @@
           st.seats = seatsData.seats || 10;
           st.usedSeats = seatsData.used || (seatsData.members ? seatsData.members.length : 0);
           st.members = seatsData.members || [];
-        } else if (!st.members.length) {
-          st.members = [
-            { uid: "u_admin", role: "admin", createdTs: Date.now() - 86400000 },
-            { uid: "u_researcher1", role: "member", createdTs: Date.now() - 43200000 }
-          ];
-          st.seats = 10;
-          st.usedSeats = 2;
+        } else {
+          st.seats = st.seats || 10;
+          st.usedSeats = st.members.length;
         }
 
         var projData = data[1];
-        st.projects = (projData && projData.projects) || [
-          { id: "prj_inst_1", title: "Institutional Review 2026", discipline: "medicine", specialty: "internal_medicine", createdTs: Date.now() - 86400000 }
-        ];
+        st.projects = (projData && projData.projects) || [];
 
         var obData = data[2];
-        st.onboarding = (obData && obData.items) || defaultOnboardingItems();
+        st.onboarding = (obData && obData.items) || [];
       }
       st.loading = false;
       st.loaded = true;
@@ -103,18 +113,6 @@
       st.error = err;
       render(container);
     });
-  }
-
-  function defaultOnboardingItems() {
-    return [
-      { key: "workspace_created", label: "Workspace created", done: true, source: "computed" },
-      { key: "members_added", label: "Team members invited", done: st.members.length > 0, source: "computed" },
-      { key: "credits_granted", label: "Institution credits allocated", done: true, source: "computed" },
-      { key: "first_project", label: "First research project initiated", done: st.projects.length > 0, source: "computed" },
-      { key: "first_review", label: "First study run completed", done: false, source: "computed" },
-      { key: "pilot_agreement_signed", label: "Institutional pilot agreement signed", done: false, source: "manual" },
-      { key: "training_completed", label: "Researcher onboarding and ethics training completed", done: false, source: "manual" }
-    ];
   }
 
   function addMember(container) {
@@ -356,6 +354,36 @@
     if (!st.loaded && !st.loading) {
       container.innerHTML = '<div class="rmd-p2-screen">' + p2().loadingHtml("Loading institution workspace") + '</div>';
       load(container);
+      return;
+    }
+
+    /* A failed load shows its error; it must not look like "no institution". */
+    if (st.error) {
+      var oh = [];
+      oh.push('<div class="rmd-studies-screen">');
+      oh.push('<div class="rmd-studies-topbar"><div class="rmd-topbar-left"><div class="rmd-topbar-proj-info">');
+      oh.push('<h2 class="rmd-topbar-proj-title">Institution Workspace</h2>');
+      oh.push('</div></div></div>');
+      oh.push('<div class="rmd-p2-screen">' + p2().errHtml(st.error, null) + '</div>');
+      oh.push('</div>');
+      container.innerHTML = oh.join("\n");
+      return;
+    }
+
+    /* No institution on this account: a clear empty state, no mock data. */
+    if (!st.institution) {
+      var eh = [];
+      eh.push('<div class="rmd-studies-screen">');
+      eh.push('<div class="rmd-studies-topbar"><div class="rmd-topbar-left"><div class="rmd-topbar-proj-info">');
+      eh.push('<h2 class="rmd-topbar-proj-title">Institution Workspace</h2>');
+      eh.push('</div></div></div>');
+      eh.push('<div class="rmd-empty-state">');
+      eh.push('  <div class="rmd-empty-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 21v-6h6v6"></path></svg></div>');
+      eh.push('  <h3>No institution workspace yet</h3>');
+      eh.push('  <p>Your account is not part of an institution workspace. When your institution joins StewardMD, its members, shared projects and pilot onboarding checklist appear here.</p>');
+      eh.push('</div>');
+      eh.push('</div>');
+      container.innerHTML = eh.join("\n");
       return;
     }
 

@@ -112,6 +112,7 @@
 
   function scrubPhiInput(val, state) {
     if (typeof val === "string") {
+      var raw = val;
       var s = G.SMD_redactPHI(val);
       s = G.SMD_PHI_INDIA.apply(s);
       var hits = G.RMDPhi.scan(s);
@@ -124,6 +125,33 @@
             state.catMap[cat] = true;
             state.categories.push(cat);
           }
+        }
+      }
+      /* Live BUG-05: scan the RAW input as well. The redactor runs before
+       * RMDPhi.scan, so a phone number or date it already replaced was never
+       * reported and the doctor never learned it was removed. Identifiers still
+       * never leave the phone (the redacted copy below is what gets sent); the
+       * removed categories are surfaced so the doctor can fix the source text. */
+      if (s !== raw) {
+        var rawHits = G.RMDPhi.scan(raw);
+        var matchedRemoved = false;
+        for (var ri = 0; ri < (rawHits || []).length; ri++) {
+          var rHit = rawHits[ri];
+          var rMatch = rHit && rHit.match;
+          if (rMatch && s.indexOf(rMatch) < 0) {
+            matchedRemoved = true;
+            var rCat = rHit.category || rHit.type || rHit.kind;
+            if (rCat && !state.removedCatMap[rCat]) {
+              state.removedCatMap[rCat] = true;
+              state.removedCategories.push(rCat);
+            }
+          }
+        }
+        /* The redactor also catches labelled names and addresses that scan()
+         * cannot name; still tell the doctor something was removed. */
+        if (!matchedRemoved && !state.removedCatMap.identifier) {
+          state.removedCatMap.identifier = true;
+          state.removedCategories.push("identifier");
         }
       }
       return s;
@@ -154,9 +182,9 @@
       var k = keys[i];
       copy[k] = body[k];
     }
-    var state = { blocked: false, categories: [], catMap: {} };
+    var state = { blocked: false, categories: [], catMap: {}, removedCategories: [], removedCatMap: {} };
     copy.input = scrubPhiInput(body.input, state);
-    return { body: copy, blocked: state.blocked, categories: state.categories };
+    return { body: copy, blocked: state.blocked, categories: state.categories, removedCategories: state.removedCategories };
   }
 
   function withPhiOverride(body, condition, consentEvidence) {
@@ -544,6 +572,7 @@
     var isAiDraft = String(method || "").toUpperCase() === "POST" && path && /\/ai-draft(\?|$)/.test(path);
     var sendBody = body;
     var clientBlockedErr = null;
+    var phiRemovedCats = [];
 
     if (isAiDraft && body && body.input !== undefined && body.input !== null) {
       if (!hasPhiModules()) {
@@ -555,6 +584,7 @@
         if (phiRes.blocked) {
           clientBlockedErr = phiBlockedError(phiRes.categories);
         }
+        phiRemovedCats = phiRes.removedCategories || [];
       } catch (phiEx) {
         return Promise.reject(phiBlockedError([]));
       }
@@ -567,7 +597,14 @@
       return Promise.reject(clientBlockedErr);
     }
 
-    return dispatchRequest(method, path, sendBody, options).catch(function (err) {
+    return dispatchRequest(method, path, sendBody, options).then(function (data) {
+      /* Live BUG-05: report which identifier types the redactor removed so the
+       * shared AI bar can tell the doctor. Categories only; never the text. */
+      if (isAiDraft && phiRemovedCats.length && data && typeof data === "object") {
+        data._phiRemovedCategories = phiRemovedCats.slice();
+      }
+      return data;
+    }).catch(function (err) {
       if (isAiDraft && err && err.status === 422 && err.code === "phi_blocked" &&
           err.body && err.body.overridable === true) {
         var cats = err.categories || (Array.isArray(err.body.categories) ? err.body.categories : []);
@@ -891,7 +928,24 @@
    * screen's own Save button is the only write. opts: { pid, task, label,
    * cost, input(), apply(draft, res) -> [fieldKeys], render(), request() }. */
   function aiState() {
-    return { busy: false, error: null, drafted: {} };
+    return { busy: false, error: null, drafted: {}, notice: null };
+  }
+
+  /* Live BUG-05: plain notice for identifiers the redactor removed before
+   * sending. Category labels only; the matched text is never shown. */
+  function phiRemovedNoticeHtml(cats) {
+    var labels = [];
+    var seen = {};
+    var list = Array.isArray(cats) ? cats : [];
+    for (var i = 0; i < list.length; i++) {
+      var lbl = phiCategoryLabel(list[i]);
+      if (!seen[lbl]) {
+        seen[lbl] = true;
+        labels.push(lbl);
+      }
+    }
+    if (!labels.length) return "";
+    return '<p class="rmd-ai-phi-note" role="status">Removed before sending to MaiK: ' + esc(labels.join(", ")) + ".</p>";
   }
 
   function aiBarHtml(st, opts) {
@@ -903,6 +957,7 @@
     h += '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-ai="manual">Do it myself</button>';
     h += '</div>';
     h += '<p class="rmd-ai-cost">' + (cost > 0 ? "Costs about " + cost + " MaiK token" + (cost === 1 ? "" : "s") : "No MaiK tokens needed") + '</p>';
+    if (st.notice) h += st.notice;
     if (st.busy) h += '<p class="rmd-ai-progress" role="status">MaiK is drafting your ' + esc(o.label || "draft") + '&#8230;</p>';
     if (st.error) h += errHtml(st.error);
     h += '</div>';
@@ -924,6 +979,7 @@
         if (st.busy) return;
         st.busy = true;
         st.error = null;
+        st.notice = null;
         if (o.render) o.render();
         var run;
         if (o.request) {
@@ -935,6 +991,9 @@
         }
         Promise.resolve(run).then(function (res) {
           st.busy = false;
+          st.notice = (res && Array.isArray(res._phiRemovedCategories) && res._phiRemovedCategories.length)
+            ? phiRemovedNoticeHtml(res._phiRemovedCategories)
+            : null;
           var draft = res && res.draft !== undefined ? res.draft : res;
           var keys = o.apply ? o.apply(draft, res) : [];
           for (var i = 0; i < (keys || []).length; i++) st.drafted[keys[i]] = 1;
@@ -1169,6 +1228,7 @@
       "#researchMD .rmd-ai-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }",
       "#researchMD .rmd-ai-mark { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 5px; background: var(--rmd-acc-grad); color: #fff; font: 700 11px var(--rmd-f); }",
       "#researchMD .rmd-ai-cost { margin: 0; font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-ai-phi-note { margin: 0; font: 500 13px var(--rmd-f); color: var(--rmd-warn); }",
       "#researchMD .rmd-ai-progress { margin: 0; font: 500 13px var(--rmd-f); color: var(--rmd-acc); }",
       "#researchMD .rmd-ai-note { display: inline-block; font: 500 11.5px var(--rmd-f); color: var(--rmd-acc); background: var(--rmd-acc-soft); border-radius: 999px; padding: 2px 8px; margin-top: 4px; }",
       "#researchMD .rmd-fillin-note { display: inline-block; font: 500 11.5px var(--rmd-f); color: var(--rmd-warn); background: var(--rmd-warn-soft); border-radius: 999px; padding: 2px 8px; margin-top: 4px; }",
@@ -2891,6 +2951,33 @@
     }
   }
 
+  /* Live BUG-09: the Submit screen must agree with the checklist approval. The
+   * Checklist screen persists approval as a checklist-manual entry keyed
+   * "checklist_approval" (a JSON record with approved true), which the project
+   * snapshot surfaces under checklistManual. Read exactly that shape so both
+   * screens share one source of truth. */
+  function snapshotChecklistApproval(snap, gid) {
+    var groups = snap && snap.checklistManual;
+    if (!groups || typeof groups !== "object") return null;
+    var order = [];
+    if (gid && Object.prototype.hasOwnProperty.call(groups, gid)) order.push(gid);
+    for (var gk in groups) {
+      if (Object.prototype.hasOwnProperty.call(groups, gk) && order.indexOf(gk) < 0) order.push(gk);
+    }
+    for (var i = 0; i < order.length; i++) {
+      var entries = groups[order[i]];
+      var raw = entries ? entries.checklist_approval : null;
+      if (raw == null) continue;
+      var rec = raw;
+      if (typeof rec === "string") {
+        try { rec = JSON.parse(rec); } catch (e) { rec = null; }
+        if (!rec && raw === "approved") rec = { approved: true };
+      }
+      if (rec && typeof rec === "object" && rec.approved === true) return rec;
+    }
+    return null;
+  }
+
   function renderReady(container) {
     var store = SMD.store;
     var proj = store && store.getActiveProject ? store.getActiveProject() : null;
@@ -2921,22 +3008,31 @@
       return null;
     }
     var targetJournal = proj.targetJournal || proj.journalId || proj.journal || "jama";
-    Promise.all([
-      SMD.api.request("GET", base + "/manuscript").catch(softFail),
-      SMD.api.request("GET", base + "/checklist-snapshot").catch(softFail),
-      SMD.api.request("GET", "/v1/checklists/" + gid).catch(function () { return null; }),
-      SMD.api.request("GET", base + "/format-check?journal=" + encodeURIComponent(targetJournal)).catch(function () { return null; })
-    ]).then(function (res) {
-      var man = res[0] && res[0].manuscript;
-      var snap = res[1] && (res[1].snapshot || res[1]);
-      var checklist = res[2] && (res[2].checklist || res[2]);
-      var formatCheck = res[3];
+    /* Live BUG-09: fetch the manuscript first. format-check only runs when a
+     * manuscript exists; asking before that just logged a 404. */
+    SMD.api.request("GET", base + "/manuscript").catch(softFail).then(function (manRes) {
+      var reqs = [
+        SMD.api.request("GET", base + "/checklist-snapshot").catch(softFail),
+        SMD.api.request("GET", "/v1/checklists/" + gid).catch(function () { return null; })
+      ];
+      if (manRes && manRes.manuscript) {
+        reqs.push(SMD.api.request("GET", base + "/format-check?journal=" + encodeURIComponent(targetJournal)).catch(function () { return null; }));
+      }
+      return Promise.all(reqs).then(function (res) {
+      var man = manRes && manRes.manuscript;
+      var snap = res[0] && (res[0].snapshot || res[0]);
+      var checklist = res[1] && (res[1].checklist || res[1]);
+      var formatCheck = res[2] || null;
       var approved = !!man && (man.status === "approved" || man.status === "locked" || (man.approval && man.approval.status === "approved"));
       var counts = null;
       if (G.SMD_RESEARCH_CHECKLIST && checklist && snap) {
         try { counts = G.SMD_RESEARCH_CHECKLIST.fill(checklist, snap).counts; } catch (e) { counts = null; }
       }
-      var checklistDone = counts ? (counts.missing === 0 && counts.partial === 0) : !!snap;
+      /* One source of truth: the persisted checklist approval wins; otherwise
+       * the snapshot fill counts decide. A snapshot with no computable counts
+       * is NOT a pass (that fallback showed contradictory states). */
+      var checklistApproved = !!snapshotChecklistApproval(snap, gid);
+      var checklistDone = checklistApproved || (counts ? (counts.missing === 0 && counts.partial === 0) : false);
       var typeKey = studyKey(proj);
       var isReview = t.indexOf("thesis") >= 0 ? gid === "prisma2020" : (typeKey !== "case-report" && typeKey !== "case-series" && typeKey !== "case-control" && typeKey !== "rct" && typeKey !== "cohort");
       var flowDone = !isReview || !!(snap && snap.prisma && snap.prisma.studiesIncluded > 0);
@@ -3055,7 +3151,7 @@
       h += '<div class="rmd-card rmd-pub-card" data-rmd="submission-tracker">';
       h += '  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">';
       h += '    <h3 style="margin:0;">Submission &amp; Publication</h3>';
-      h += '    <span class="rmd-badge ' + (pubStage === "published" ? "rmd-badge-soft" : "rmd-badge-pill") + '">' + (pubStage === "published" ? "Published" : (pubStage === "submitted" ? "Submitted · Under Review" : "Ready to Submit")) + '</span>';
+      h += '    <span class="rmd-badge ' + (pubStage === "published" ? "rmd-badge-soft" : "rmd-badge-pill") + '">' + (pubStage === "published" ? "Published" : (pubStage === "submitted" ? "Submitted · Under Review" : (allDone ? "Ready to Submit" : "Draft"))) + '</span>';
       h += '  </div>';
       if (pubStage === "published") {
         h += '  <div class="rmd-banner rmd-banner-info" style="margin-top:10px;" role="status"><strong>Published in ' + esc(selJournal) + '!</strong> DOI: ' + esc(pubRec.doi || "10.1000/rmd.2026") + '</div>';
@@ -3162,6 +3258,7 @@
           }
         };
       }
+      });
     }).catch(function (err) {
       container.innerHTML = '<div class="rmd-p2-screen">' + errHtml(err) + '</div>';
     });

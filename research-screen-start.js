@@ -458,6 +458,28 @@
     return null;
   }
 
+  /* Live BUG-06: the sample size engine returns withDropout as a NUMBER plus
+   * totalWithDropout (per-group aims keep nPerGroup; case-control returns
+   * cases/controls; time-to-event returns events/total). These readers use the
+   * real shape for every aim so no rendered or sent text can read undefined. */
+  function ssHasDropout() {
+    return (Number(st.ssInputs.dropout) || 0) > 0;
+  }
+
+  function ssTargetTotal(r) {
+    if (!r || r.ok === false) return "";
+    if (ssHasDropout() && typeof r.totalWithDropout === "number") return String(r.totalWithDropout);
+    return typeof r.total === "number" ? String(r.total) : "";
+  }
+
+  function ssAiSampleSize(r) {
+    if (!r || r.ok === false) return null;
+    var n = (r.nPerGroup != null) ? r.nPerGroup : (r.n != null ? r.n : (r.cases != null ? r.cases : r.events));
+    var out = { n: n, total: ssTargetTotal(r) };
+    if (r.paragraph) out.paragraph = r.paragraph;
+    return out;
+  }
+
   function loadSaved(pid) {
     if (!pid) return;
     try {
@@ -690,30 +712,33 @@
       h.push('    </div>');
     } else if (st.ssResult) {
       var r = st.ssResult;
+      var hasDrop = ssHasDropout();
+      var dropPct = Math.round((Number(inp.dropout) || 0) * 100);
       h.push('    <div class="rmd-data-box" style="margin-top:8px;">');
       h.push('      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;">');
       if (r.cases != null) {
         h.push('        <div><strong style="font-size:16px;">' + r.cases + ' cases</strong> <span class="rmd-mut">and ' + r.controls + ' controls (' + r.total + ' total)</span></div>');
       } else if (r.events != null) {
         h.push('        <div><strong style="font-size:16px;">' + r.events + ' events</strong> <span class="rmd-mut">(' + r.total + ' patients total)</span></div>');
-      } else if (r.nPerGroup) {
+      } else if (typeof r.nPerGroup === "number") {
         h.push('        <div><strong style="font-size:16px;">' + r.nPerGroup + ' per group</strong> <span class="rmd-mut">(' + r.total + ' total)</span></div>');
-        if (r.withDropout) {
-          h.push('        <div><span class="rmd-mut">With ' + Math.round((Number(inp.dropout) || 0) * 100) + '% loss to follow-up:</span> <strong>' + r.withDropout.nPerGroup + ' per group</strong> <span class="rmd-mut">(' + r.withDropout.total + ' total)</span></div>');
+        if (hasDrop && typeof r.withDropout === "number") {
+          h.push('        <div><span class="rmd-mut">With ' + dropPct + '% loss to follow-up:</span> <strong>' + r.withDropout + ' per group</strong> <span class="rmd-mut">(' + r.totalWithDropout + ' total)</span></div>');
         }
       } else {
         h.push('        <div><strong style="font-size:16px;">' + r.n + ' total</strong></div>');
-        if (r.withDropout) {
-          h.push('        <div><span class="rmd-mut">With ' + Math.round((Number(inp.dropout) || 0) * 100) + '% loss to follow-up:</span> <strong>' + r.withDropout.n + ' total</strong></div>');
+        if (hasDrop && typeof r.withDropout === "number") {
+          h.push('        <div><span class="rmd-mut">With ' + dropPct + '% loss to follow-up:</span> <strong>' + r.withDropout + ' total</strong></div>');
         }
       }
       h.push('      </div>');
       if (r.method) {
         h.push('      <div style="font-size:12.5px;color:var(--rmd-mut);margin-top:4px;">Method: ' + esc(r.method) + '</div>');
       }
-      if (r.continuityCorrected) {
+      if (r.continuityCorrected && typeof r.continuityCorrected.nPerGroup === "number") {
+        var cc = r.continuityCorrected;
         h.push('      <div style="font-size:12.5px;color:var(--rmd-mut);margin-top:4px;">');
-        h.push('        Continuity-corrected: ' + r.continuityCorrected.nPerGroup + ' per group (' + r.continuityCorrected.total + ' total; ' + (r.continuityCorrected.withDropout ? r.continuityCorrected.withDropout.total : '') + ' with dropout)');
+        h.push('        Continuity-corrected: ' + cc.nPerGroup + ' per group (' + cc.total + ' total' + (hasDrop && typeof cc.totalWithDropout === "number" ? '; ' + cc.totalWithDropout + ' with dropout' : '') + ')');
         h.push('      </div>');
       }
       h.push('      <div class="rmd-quote-block" style="margin-top:10px;">');
@@ -1035,7 +1060,7 @@
     h.push('      <div class="rmd-form-row">');
     h.push('        <div class="rmd-field">');
     h.push('          <label for="rmd_ctri_n">Target sample size</label>');
-    h.push('          <input type="text" id="rmd_ctri_n" data-ctri="targetSampleSize" value="' + esc(ctd.targetSampleSize || (st.ssResult ? (st.ssResult.withDropout ? st.ssResult.withDropout.total : st.ssResult.total) : "")) + '">' + noteBadge(st.ctriDrafted, "targetSampleSize", ctd.targetSampleSize));
+    h.push('          <input type="text" id="rmd_ctri_n" data-ctri="targetSampleSize" value="' + esc(ctd.targetSampleSize || (st.ssResult ? ssTargetTotal(st.ssResult) : "")) + '">' + noteBadge(st.ctriDrafted, "targetSampleSize", ctd.targetSampleSize));
     h.push('        </div>');
     h.push('        <div class="rmd-field">');
     h.push('          <label for="rmd_ctri_sites">Study sites</label>');
@@ -1186,7 +1211,7 @@
           var body = {
             task: "iec_application",
             input: {
-              sampleSize: st.ssResult ? { n: st.ssResult.nPerGroup || st.ssResult.n, total: (st.ssResult.withDropout ? st.ssResult.withDropout.total : st.ssResult.total), paragraph: st.ssResult.paragraph } : null
+              sampleSize: st.ssResult ? ssAiSampleSize(st.ssResult) : null
             }
           };
           SMD.api.request("POST", "/v1/projects/" + encodeURIComponent((proj && proj.serverId) || proj.id) + "/ai-draft", body)
@@ -1594,7 +1619,7 @@
           var body = {
             task: "ctri_fields",
             input: {
-              sampleSize: st.ssResult ? { n: st.ssResult.nPerGroup || st.ssResult.n, total: (st.ssResult.withDropout ? st.ssResult.withDropout.total : st.ssResult.total) } : null
+              sampleSize: st.ssResult ? ssAiSampleSize(st.ssResult) : null
             }
           };
           SMD.api.request("POST", "/v1/projects/" + encodeURIComponent((proj && proj.serverId) || proj.id) + "/ai-draft", body)

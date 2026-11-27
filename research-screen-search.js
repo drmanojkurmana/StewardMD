@@ -432,7 +432,6 @@
     h.push('<h3 class="rmd-card-heading">Run a Search</h3>');
     if (canRun && st.database !== "clinicaltrials" && !st.ai) st.ai = SMD.ai.state();
     if (canRun && st.database !== "clinicaltrials" && st.ai) h.push(SMD.ai.barHtml(st.ai, { task: "search_query", label: "search query", cost: 2 }));
-    if (st.database !== "clinicaltrials" && st.runError) h.push(p2().errHtml(st.runError, "search-run-retry"));
     h.push('<div class="rmd-field"><span class="rmd-section-label" id="rmdDbLabel">Database</span>');
     h.push('<div class="rmd-filter-tabs" role="group" aria-labelledby="rmdDbLabel">');
     for (var d = 0; d < DATABASES.length; d++) {
@@ -467,6 +466,10 @@
         h.push('<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-block" data-rmd="search-run"' + (sDisabled ? " disabled" : "") + '>' + (st.busy ? "Searching " + esc(db.label) + "…" : "Search " + esc(db.label)) + '</button>');
         h.push('<span class="rmd-field-hint">Tip: Narrow broad queries (e.g. add trial or a date range) if PubMed exceeds daytime limits, or search Europe PMC.</span>');
         if (st.busy) h.push('<p class="rmd-muted" aria-live="polite">The connector pages through every result. Large searches can take several minutes.</p>');
+        /* Live BUG-12: render the run error directly under the button that
+         * triggered it. At 390px the old position above the query textarea was
+         * off-screen, so the doctor never saw why the search failed. */
+        if (st.runError) h.push('<div data-rmd="search-run-error" style="margin-top:10px;">' + p2().errHtml(st.runError, "search-run-retry") + '</div>');
       } else {
         h.push('<p class="rmd-muted">Only owner, editor or analyst can run searches.</p>');
       }

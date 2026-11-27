@@ -19,6 +19,28 @@
       .replace(/'/g, "&#39;");
   };
 
+  /* Live BUG-12: PubMed and Europe PMC abstracts and titles can arrive with
+   * HTML entities already escaped (BACKGROUND &amp; OBJECTIVES). esc() alone
+   * then double-escapes them and the doctor sees the raw entity. Decode the
+   * source text once, then escape once. Same helper shape as the pubconsent
+   * screen. */
+  function decodeEntities(s) {
+    return String(s == null ? "" : s)
+      .replace(/&nbsp;/gi, " ")
+      .replace(/&lt;/gi, "<")
+      .replace(/&gt;/gi, ">")
+      .replace(/&quot;/gi, "\"")
+      .replace(/&#39;/g, "'")
+      .replace(/&#(\d+);/g, function (m, n) {
+        return String.fromCharCode(parseInt(n, 10));
+      })
+      .replace(/&amp;/gi, "&");
+  }
+
+  function escSrc(s) {
+    return esc(decodeEntities(s));
+  }
+
   var state = {
     open: false,
     project: null,
@@ -73,7 +95,7 @@
   }
 
   function highlightNumbers(quote) {
-    return esc(quote || "").replace(/(\d+(?:\.\d+)?)/g, '<mark class="rmd-find-num">$1</mark>');
+    return escSrc(quote || "").replace(/(\d+(?:\.\d+)?)/g, '<mark class="rmd-find-num">$1</mark>');
   }
 
   function injectCSS() {
@@ -249,11 +271,11 @@
     h.push('<div class="rmd-find-result">');
     h.push('  <input type="checkbox" class="rmd-find-check" data-find-check="' + esc(k) + '"' + checked + ' aria-label="Select this paper" />');
     h.push('  <div class="rmd-find-rbody">');
-    h.push('    <div class="rmd-find-title">' + esc(item.title || "Untitled paper") + '</div>');
-    h.push('    <div class="rmd-find-meta">' + esc(meta.join(" · ")) + '</div>');
+    h.push('    <div class="rmd-find-title">' + escSrc(item.title || "Untitled paper") + '</div>');
+    h.push('    <div class="rmd-find-meta">' + escSrc(meta.join(" · ")) + '</div>');
     if (item.freeFullText) h.push('    <span class="rmd-find-badge">Free full text</span>');
     if (item.abstract) {
-      h.push('    <div class="rmd-find-abstract' + (expanded ? '' : ' clamp') + '">' + esc(item.abstract) + '</div>');
+      h.push('    <div class="rmd-find-abstract' + (expanded ? '' : ' clamp') + '">' + escSrc(item.abstract) + '</div>');
       h.push('    <button type="button" class="rmd-find-expand" data-find-expand="' + esc(k) + '">' + (expanded ? 'Less' : 'More') + '</button>');
     }
     h.push('  </div>');
@@ -300,7 +322,7 @@
     h.push('<div class="rmd-find-progress">');
     h.push('  <span class="rmd-find-dot ' + esc(p.status) + '"></span>');
     h.push('  <div class="rmd-find-ptext">');
-    h.push('    <div class="rmd-find-ptitle">' + esc(p.item.title || "Untitled paper") + '</div>');
+    h.push('    <div class="rmd-find-ptitle">' + escSrc(p.item.title || "Untitled paper") + '</div>');
     h.push('    <div class="rmd-find-pstatus">' + esc(p.text) + '</div>');
     if (done && p.status === "needs_pdf") {
       h.push('    <div class="rmd-find-btnrow">');
@@ -325,7 +347,7 @@
     var verified = study.verified;
     var h = [];
     h.push('<div class="rmd-find-card">');
-    h.push('  <div class="rmd-find-cardlabel">' + esc(study.label || p.item.title || "Study"));
+    h.push('  <div class="rmd-find-cardlabel">' + escSrc(study.label || p.item.title || "Study"));
     if (verified) h.push('<span class="rmd-find-verified">Verified</span>');
     h.push('  </div>');
     h.push('  <div class="rmd-find-numbers">' + esc(numbersLine(study.measure || "RR", inputs)) + '</div>');
