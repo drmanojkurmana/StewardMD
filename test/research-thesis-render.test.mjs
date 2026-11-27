@@ -50,3 +50,11 @@ test("sectionHtml does not touch digits that are part of a decimal", () => {
   assert.match(html, /data-page="3"[^>]*>1\.5<\/span>/);
   assert.equal(html.indexOf('>5</span>'), -1, "the 5 inside 1.5 is not a separate badge");
 });
+test("digits inside a word (HbA1c, T2DM) are not badged as thesis numbers", () => {
+  const locators = [{ number: "1", page: "1", table: "" }, { number: "2", page: "1", table: "" }, { number: "8.4", page: "2", table: "" }];
+  const html = THESIS.sectionHtml("Mean HbA1c was 8.4% in T2DM patients; 1 patient left.", locators);
+  assert.ok(html.indexOf("HbA1c") >= 0, "HbA1c stays plain text");
+  assert.ok(html.indexOf("T2DM") >= 0, "T2DM stays plain text");
+  assert.match(html, />8\.4<\/span>/, "8.4 is still a badge");
+  assert.match(html, /role="button">1<\/span> patient/, "a standalone 1 is still a badge");
+});

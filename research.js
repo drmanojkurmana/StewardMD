@@ -742,6 +742,10 @@
     if (code === "phi_blocked") {
       return { message: e.message || "Patient identifiers were detected. Remove names, hospital numbers, phone numbers, addresses or emails and try again.", action: "retry", actionLabel: "Try again" };
     }
+    if (code === "invalid_draft") {
+      /* The AI's reply missed required fields (seen live on CTRI); nothing was charged as a stored draft. */
+      return { message: e.message || "MaiK did not return a complete draft this time. Try again.", action: "retry", actionLabel: "Try again" };
+    }
     if (code === "consent_needed") {
       return { message: e.message || "Please confirm there are no patient names left in your thesis before continuing.", action: "retry", actionLabel: "Try again" };
     }
