@@ -67,7 +67,7 @@ function articleXml(opts) {
     "</ArticleIdList></PubmedData></PubmedArticle>";
 }
 
-const net = { calls: [], articles: new Map(), idconv: new Map(), crossref: new Map(), pages: new Map(), fullTextXml: new Map() };
+const net = { calls: [], articles: new Map(), idconv: new Map(), crossref: new Map(), pages: new Map(), fullTextXml: new Map(), epmc: new Map() };
 
 function jsonRes(obj, status = 200) {
   return new Response(JSON.stringify(obj), { status, headers: { "content-type": "application/json" } });
@@ -94,6 +94,13 @@ globalThis.fetch = async (url) => {
   if (u.includes("/fullTextXML")) {
     const pmcid = (u.match(/\/(PMC\d+)\/fullTextXML/i) || ["", ""])[1].toUpperCase();
     return net.fullTextXml.has(pmcid) ? textRes(net.fullTextXml.get(pmcid)) : textRes("no", 404);
+  }
+  if (u.includes("ebi.ac.uk/europepmc/webservices/rest/search")) {
+    const query = parsed.searchParams.get("query") || "";
+    const doi = (query.match(/DOI:"([^"]+)"/) || [])[1] || "";
+    const pmid = (query.match(/EXT_ID:(\d+)/) || [])[1] || "";
+    const rec = net.epmc.get(doi) || net.epmc.get(pmid) || null;
+    return jsonRes({ resultList: { result: rec ? [rec] : [] } });
   }
   if (u.includes("efetch.fcgi")) {
     if (parsed.searchParams.get("db") === "pmc") {
@@ -633,6 +640,13 @@ describe("research paper card", { concurrency: false, skip: SKIP }, () => {
       "</sec>" +
       "</body></article>"
     );
+    net.epmc.set("10.7759/cureus.99999", {
+      pmid: "40959673", pmcid: "PMC9999999", doi: "10.7759/cureus.99999",
+      title: "Prognostic utility of biomarkers in severe sepsis",
+      journalTitle: "Cureus", pubYear: "2025",
+      abstractText: "Sepsis causes high ICU mortality. In-hospital mortality was 38.8%.",
+      isOpenAccess: "Y", license: "cc by",
+    });
 
     const parsedXml = extractResultsSectionFromXml(net.fullTextXml.get("PMC9999999"));
     assert.ok(parsedXml.resultsText.includes("0.995"), "Results extractor captures parent Results sec");
