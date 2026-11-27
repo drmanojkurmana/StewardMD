@@ -261,8 +261,9 @@
     if (opts && typeof opts.checkQuota === "function") {
       return Promise.resolve().then(function () { return opts.checkQuota(); });
     }
-    if (root && root.SMD && root.SMD.api && typeof root.SMD.api.request === "function") {
-      return root.SMD.api.request("GET", "/v1/me/research-cloud");
+    var api = root && ((root.SMD_RESEARCH && root.SMD_RESEARCH.api) || (root.SMD && root.SMD.api));
+    if (api && typeof api.request === "function") {
+      return api.request("GET", "/v1/me/research-cloud");
     }
     return Promise.resolve({ plan: "free", allowance: 0, used: 0, remaining: 0 });
   }

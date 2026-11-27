@@ -40,6 +40,9 @@ const autoCalls = [];
 const patchCalls = [];
 const pdfCalls = [];
 const jobCalls = [];
+const deviceExtractCalls = [];
+const pdfUploadCalls = [];
+let cloudQuotaCalls = 0;
 
 const PAPERS = [
   {
@@ -102,6 +105,10 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       let b = {};
       try { b = JSON.parse(body || '{}'); } catch { b = {}; }
+      if (p === '/api/research/v1/me/research-cloud' && req.method === 'GET') {
+        cloudQuotaCalls++;
+        return send(200, { plan: 'pro', allowance: 10, used: 0, remaining: 10 });
+      }
       if (p === '/api/research/v1/projects' && req.method === 'POST') {
         projN++;
         return send(201, {
@@ -128,6 +135,14 @@ const server = http.createServer((req, res) => {
           const pmid = (b.items && b.items[0] && b.items[0].pmid) || '';
           // Small delay so the live progress wording is observable in the DOM.
           return setTimeout(() => send(200, { results: [autoResult(pid, pmid)], requestId: 'req_add' }), 250);
+        }
+        if (sub === '/extractions/device' && req.method === 'POST') {
+          deviceExtractCalls.push(b);
+          return send(201, { artifact: { id: 'art_dev_' + deviceExtractCalls.length, projectId: pid, status: 'succeeded' } });
+        }
+        if (sub === '/pdf-uploads' && req.method === 'POST') {
+          pdfUploadCalls.push({ pid, body });
+          return send(202, { artifact: { id: 'art_cloud_' + pdfUploadCalls.length, projectId: pid, status: 'queued' } });
         }
         if (sub === '/pdfs' && req.method === 'POST') {
           pdfCalls.push(b);
@@ -342,19 +357,36 @@ try {
   ok(await until(`SMD_RESEARCH.store.getStudy('st_auto_1').verified === true`, 3000), 'Numbers match verifies the study');
   ok(await until(`!!document.querySelector('.rmd-find-verified')`, 3000), 'Verified badge appears on the card');
 
-  // 11. Upload PDF sends the file and queues extraction.
+  // 11. Upload PDF reads on the device first (never uploads PDF bytes when device succeeds).
+  ok(/Runs on this device/.test(await text('#rmdFindSheet')), 'Upload PDF shows on-device privacy line');
   const uploaded = await ev(`(()=>{
     const input=document.querySelector('[data-find-file="2"]');
     if(!input) return 'noinput';
-    const f=new File(['%PDF-1.4 fake'], 'paper.pdf', {type:'application/pdf'});
+    const text='Tuberculosis occurred in 8/200 vs 16/200 participants.';
+    const stream='BT /F1 12 Tf 72 720 Td ('+text+') Tj ET';
+    const objs=[
+      '1 0 obj\\n<< /Type /Catalog /Pages 2 0 R >>\\nendobj\\n',
+      '2 0 obj\\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\\nendobj\\n',
+      '3 0 obj\\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>\\nendobj\\n',
+      '4 0 obj\\n<< /Length '+stream.length+' >>\\nstream\\n'+stream+'\\nendstream\\nendobj\\n',
+      '5 0 obj\\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\\nendobj\\n'
+    ];
+    let pdf='%PDF-1.4\\n';
+    const offs=[0];
+    for(const o of objs){offs.push(pdf.length);pdf+=o;}
+    const xref=pdf.length;
+    pdf+='xref\\n0 '+(objs.length+1)+'\\n0000000000 65535 f \\n';
+    for(let i=1;i<offs.length;i++) pdf+=String(offs[i]).padStart(10,'0')+' 00000 n \\n';
+    pdf+='trailer\\n<< /Size '+(objs.length+1)+' /Root 1 0 R >>\\nstartxref\\n'+xref+'\\n%%EOF\\n';
+    const f=new File([pdf], 'paper.pdf', {type:'application/pdf'});
     const dt=new DataTransfer(); dt.items.add(f); input.files=dt.files;
     input.onchange();
     return 'ok';
   })()`);
   ok(uploaded === 'ok', 'PDF file input accepts a selected file');
-  ok(await until(`/PDF sent for reading/.test(document.querySelector('#rmdFindSheet').innerText)`, 5000), 'upload confirms the PDF was sent for reading');
-  ok(pdfCalls.length === 1 && jobCalls.length === 1, 'upload posted the PDF and queued a pdf_extract job');
-  ok(jobCalls[0] && jobCalls[0].kind === 'pdf_extract', 'queued job kind is pdf_extract');
+  ok(await until(`/PDF read on your phone/.test(document.querySelector('#rmdFindSheet').innerText)`, 10000), 'on-device read confirms PDF read on your phone');
+  ok(deviceExtractCalls.length === 1 && deviceExtractCalls[0]?.result?.pages?.length === 1, 'on-device read sends extracted pages to /extractions/device');
+  ok(pdfUploadCalls.length === 0 && pdfCalls.length === 0 && jobCalls.length === 0, 'on-device read does not upload PDF or queue a cloud job');
 
   // 12. No em/en dashes and no horizontal overflow with the sheet open.
   const dashes = await ev(`(()=>{const t=document.querySelector('#researchMD').innerText||'';return (t.match(/[\\u2013\\u2014]/g)||[]).length})()`);
@@ -377,6 +409,32 @@ try {
   ok(await ev(`document.getElementById('rmd_st_id').value === 'st_auto_2'`), 'form is prefilled with the chosen study id');
   ok(await ev(`document.getElementById('rmd_st_label').value === 'Comstock 1974'`), 'form label prefilled from the adopted study');
   await shot('phone-375-find-fix');
+
+  // 13b. Cloud fallback after two failed on-device tries + privacy notice.
+  await ev(`SMD_RESEARCH.find.open();1`);
+  ok(await until(`!!document.getElementById('rmd_find_query')`, 3000), 'find sheet reopens for cloud fallback check');
+  await ev(`(()=>{document.getElementById('rmd_find_query').value='BCG fallback';return true})()`);
+  await click('[data-find="search"]');
+  ok(await until(`document.querySelectorAll('.rmd-find-result').length === 3`, 5000), 'papers render for fallback check');
+  await ev(`(()=>{const i=document.getElementById('rmd_find_outcome');i.value='confirmed tuberculosis';i.oninput();return true})()`);
+  await click('[data-find-check="pmid:333"]');
+  await click('[data-find="add"]');
+  ok(await until(`!!document.querySelector('[data-find-file="0"]')`, 5000), 'Upload PDF offered for needs_pdf paper in fallback check');
+  await ev(`(()=>{
+    const input=document.querySelector('[data-find-file="0"]');
+    const f=new File(['%PDF-1.4 broken'], 'broken.pdf', {type:'application/pdf'});
+    const dt=new DataTransfer(); dt.items.add(f); input.files=dt.files;
+    input.onchange();
+    return 1;
+  })()`);
+  ok(await until(`/Retrying on this device/.test((document.querySelector('#rmdFindSheet')||{}).innerText||'')`, 5000), 'device retries automatically on PDF read failure');
+  ok(await until(`!!document.querySelector('.rmd-cloud-notice-backdrop .rmd-cn-continue')`, 12000), 'privacy notice appears after two device retries fail');
+  ok(/This device couldn't finish reading this PDF/.test(await text('.rmd-cloud-notice-backdrop')), 'privacy notice explains cloud PDF upload');
+  ok(pdfUploadCalls.length === 0, 'PDF is not uploaded before tapping Continue on the notice');
+  await click('.rmd-cloud-notice-backdrop .rmd-cn-continue');
+  ok(await until(`/PDF sent for reading/.test((document.querySelector('#rmdFindSheet')||{}).innerText||'')`, 5000), 'cloud fallback confirms PDF sent for reading after Continue');
+  ok(cloudQuotaCalls >= 1 && pdfUploadCalls.length === 1, 'cloud fallback checked quota and uploaded PDF to /pdf-uploads');
+  ok(/"reasons":\[/.test(pdfUploadCalls[0]?.body || '') && /"try":3/.test(pdfUploadCalls[0]?.body || ''), 'cloud fallback metadata records 3 device attempts');
 
   // 14. Local (practice) project gate: save to account first.
   await resetToSeed();

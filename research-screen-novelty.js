@@ -94,6 +94,7 @@
       "#researchMD .rmd-nv-added { font: 600 12.5px var(--rmd-f); color: var(--rmd-acc); }",
       /* Shared base only forces 44px targets at iPad width; scope phone fixes here. */
       "#researchMD .rmd-novelty-screen .rmd-btn, #researchMD .rmd-novelty-screen label.rmd-btn { min-height: 44px; }",
+      "#researchMD .rmd-novelty-screen .rmd-btn:focus-visible { outline: 2px solid var(--rmd-acc, #1b41bf); outline-offset: 2px; }",
       "#researchMD .rmd-novelty-screen input[type=text], #researchMD .rmd-novelty-screen select, #researchMD .rmd-novelty-screen textarea { min-height: 44px; }"
     ].join("\n");
     D.head.appendChild(s);

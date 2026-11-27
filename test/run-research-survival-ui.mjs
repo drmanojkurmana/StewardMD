@@ -168,7 +168,13 @@ const KM_OK = {
       ] }
   ]
 };
-const LR_OK = { ok: true, warnings: [], chi2: 10.3, df: 1, p: 0.0013, table: [] };
+const LR_OK = {
+  ok: true, warnings: [], chi2: 10.3, df: 1, p: 0.0013,
+  table: [
+    { group: 'Drug A', n: 100, observed: 60, expected: 45 },
+    { group: 'Drug B', n: 100, observed: 40, expected: 55 }
+  ]
+};
 const COX_OK = {
   ok: true, warnings: [], n: 200, nEvents: 100, nExcluded: 0, converged: true, iterations: 5,
   logLik: -300, lrTest: { chi2: 12, df: 2, p: 0.002 },
@@ -237,7 +243,10 @@ try {
   await shot('survival-phone-390-question');
 
   // 3. Install a fixed ok:true engine result and run the survival analysis.
-  await ev(`(()=>{const S=window.SMD_RESEARCH_STATS;window.__svOrig={km:S.kaplanMeier,lr:S.logRank,cox:S.cox};S.kaplanMeier=function(){return window.__svKm};S.logRank=function(){return window.__svLr};S.cox=function(){return window.__svCox};return 1})()`);
+  // With on-device stats v2, SMD_RMD_ONDEVICE_STATS spawns a Web Worker that loads
+  // research-stats.js separately; temporarily disable window.Worker so it calls the
+  // main-thread SMD_RESEARCH_STATS mocks for sections 3-4b, then restore Worker in section 5.
+  await ev(`(()=>{const S=window.SMD_RESEARCH_STATS;window.__svOrig={km:S.kaplanMeier,lr:S.logRank,cox:S.cox,Worker:window.Worker};window.Worker=undefined;S.kaplanMeier=function(){return window.__svKm};S.logRank=function(){return window.__svLr};S.cox=function(){return window.__svCox};return 1})()`);
   await setMock(KM_OK, LR_OK, COX_OK);
   await click('[data-rmd-mc-choice="survival"]');
   ok(await until(`!!document.querySelector('#rmdMcTime')`, 3000), 'survival form shows the time picker');
@@ -295,8 +304,8 @@ try {
   ok(!/could not be estimated \(separation\)/.test(failedText), 'a failed Cox fit prints no separation sentence');
   await shot('survival-phone-390-cox-failed');
 
-  // 5. Real engine restored on the sample chart. Do not pin its numbers.
-  await ev(`(()=>{const S=window.SMD_RESEARCH_STATS;S.kaplanMeier=window.__svOrig.km;S.logRank=window.__svOrig.lr;S.cox=window.__svOrig.cox;return 1})()`);
+  // 5. Real engine restored on the sample chart (including Web Worker). Do not pin its numbers.
+  await ev(`(()=>{const S=window.SMD_RESEARCH_STATS;S.kaplanMeier=window.__svOrig.km;S.logRank=window.__svOrig.lr;S.cox=window.__svOrig.cox;window.Worker=window.__svOrig.Worker;return 1})()`);
   await click('[data-rmd-mc="ask-another"]');
   await until(`!!document.querySelector('[data-rmd-mc-choice="survival"]')`, 3000);
   await click('[data-rmd-mc-choice="survival"]');
@@ -306,6 +315,8 @@ try {
   const realText = await text('.rmd-mc-result');
   ok(!/This analysis is not available yet\. No numbers are shown\./.test(realText), 'real engine does not show the not-available banner');
   ok(await ev(`!!document.querySelector('.rmd-mc-km') && !!document.querySelector('.rmd-mc-atrisk')`), 'curve and number-at-risk table present');
+  ok(await ev(`!!document.querySelector('.rmd-mc-phtest')`), 'real on-device engine renders proportional hazards check table');
+  ok(!/to \)/.test(realText), 'open-ended median survival CI never renders trailing blank bound');
   ok(await ev(`!!document.querySelector('.rmd-mc-sentence') || !!document.querySelector('.rmd-banner-warn') || /Log-rank test/.test((document.querySelector('.rmd-mc-result')||{}).innerText||'')`), 'a results sentence, a log-rank line, or an engine warning is present');
   await shot('survival-phone-390-real');
 
