@@ -51,3 +51,16 @@ test("restarts a running container whose env fingerprint is unknown or changed, 
   assert.equal(calls.destroy, 2, "rotated secret: restart");
   assert.equal(calls.start.length, 2);
 });
+
+const { hasOpenJobs } = await import("data:text/javascript;base64," + Buffer.from(src).toString("base64"));
+const fakeDb = (n, fail) => ({ prepare: (sql) => ({ bind: (since) => ({ first: async () => { if (fail) throw new Error("d1 down"); fakeDb.last = { sql, since }; return { n }; } }) }) });
+
+test("cron wakes the container only when a recent job is queued or running", async () => {
+  assert.equal(await hasOpenJobs({ RESEARCH_DB: fakeDb(0) }, 1e13), false, "nothing waiting: container stays asleep");
+  assert.equal(await hasOpenJobs({ RESEARCH_DB: fakeDb(2) }, 1e13), true);
+  assert.equal(fakeDb.last.since, 1e13 - 3 * 60 * 60 * 1000, "stale rows older than 3 h are ignored");
+  assert.match(fakeDb.last.sql, /research_job_runs/);
+  assert.match(fakeDb.last.sql, /research_stats_jobs/);
+  assert.equal(await hasOpenJobs({ RESEARCH_DB: fakeDb(0, true) }, 1e13), true, "D1 error fails open");
+  assert.equal(await hasOpenJobs({}, 1e13), true, "no binding keeps the old behaviour");
+});
