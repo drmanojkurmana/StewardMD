@@ -242,7 +242,7 @@
     if (tool === "er") {
       var er = s.eraser;
       return '<div class="st-ink-strip" role="group" aria-label="Eraser options">' +
-        ["precision", "standard", "stroke"].map(function (m) { return '<button type="button" class="st-ink-seg' + (er.mode === m ? " on" : "") + '" data-ink="er-mode" data-v="' + m + '" aria-pressed="' + (er.mode === m) + '">' + m.charAt(0).toUpperCase() + m.slice(1) + "</button>"; }).join("") +
+        ["precision", "standard", "stroke"].map(function (m) { return '<button type="button" class="st-ink-seg' + (er.mode === m ? " on" : "") + '" data-ink="er-mode" data-v="' + m + '" aria-pressed="' + (er.mode === m) + '">' + { precision: "Precision", standard: "Partial", stroke: "Whole stroke" }[m] + "</button>"; }).join("") +
         (er.mode === "standard" ? '<span class="st-ink-sizes">' + [0, 1, 2].map(function (i) { return '<button type="button" class="st-ink-size' + (er.size === i ? " on" : "") + '" data-ink="er-size" data-v="' + i + '" aria-label="Eraser size ' + (i + 1) + '" aria-pressed="' + (er.size === i) + '"><i style="width:' + (10 + i * 8) + "px;height:" + (10 + i * 8) + 'px"></i></button>'; }).join("") + "</span>" : "") +
         '<span class="st-ink-hint">Tap the eraser again for more options</span></div>';
     }
@@ -260,9 +260,20 @@
     if (!cv) return;
     var V = api.getV(), s = settingsOf(api), tool = V.tool === "hl" ? "hl" : "pen", ts = toolSettings(s, tool);
     var ctx = cv.getContext("2d"), W = cv.width, H = cv.height; ctx.clearRect(0, 0, W, H);
-    var pts = [], i; for (i = 0; i <= 40; i++) { var x = 0.06 + 0.88 * i / 40; pts.push([x, 0.55 + Math.sin(i / 40 * Math.PI * 2.2) * 0.18, 0.35 + 0.55 * Math.abs(Math.sin(i / 40 * Math.PI))]); }
-    drawStyled(ctx, { tool: tool, color: ts.color, w: tool === "hl" ? ts.widths[ts.wi] : ts.widths[ts.wi], pts: pts, style: ts.style, sens: ts.sens, tip: ts.tip }, W, H, 1);
+    var pts = [], i; for (i = 0; i <= 60; i++) { var x = 0.08 + 0.84 * i / 60; pts.push([x, 0.52 + Math.sin(i / 60 * Math.PI * 2) * 0.2, 0.3 + 0.6 * Math.abs(Math.sin(i / 60 * Math.PI))]); }
+    // Drawn as if the page were 3x the card: at real phone size the chosen width is a hairline in a preview.
+    drawStyled(ctx, { tool: tool, color: ts.color, w: ts.widths[ts.wi] * 3, pts: pts, style: ts.style, sens: ts.sens, tip: ts.tip }, W, H, 1);
   }
+  var NB_ICO = {
+    x: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+    trash: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>',
+    "nib-fountain": '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M24 44 14 26l4-14h12l4 14z" fill="var(--nb-nib-fill)"/><path d="M24 44V30"/><circle cx="24" cy="27" r="2.6" fill="currentColor" stroke="none"/><path d="M19 6h10v6H19z"/></svg>',
+    "nib-ball": '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M17 6h14v20l-4 10h-6l-4-10z" fill="var(--nb-nib-fill)"/><path d="M17 26h14"/><circle cx="24" cy="40" r="3" fill="currentColor" stroke="none"/></svg>',
+    "nib-brush": '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M19 4h10v14H19z"/><path d="M18 18h12l2 6c0 9-4 16-8 20-4-4-8-11-8-20z" fill="var(--nb-nib-fill)"/><path d="M24 26v12"/></svg>',
+    "er-precision": '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 34 30 14l8 8-20 20H10z" fill="var(--nb-nib-fill)"/><circle cx="12" cy="40" r="2" fill="currentColor" stroke="none"/></svg>',
+    "er-standard": '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 32 26 14a3 3 0 0 1 4 0l8 8a3 3 0 0 1 0 4L22 42H14z" fill="var(--nb-nib-fill)"/><path d="M18 22l12 12M22 42h18"/></svg>',
+    "er-stroke": '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 30c6-10 12 6 18-4s12-8 18 0" stroke-dasharray="3 4"/><path d="M14 12l20 20M34 12 14 32" stroke-width="2.4"/></svg>'
+  };
   function closePopover(api) { var r = api.root(); var e = r && r.querySelector("#stInkPop"); if (e) e.parentNode.removeChild(e); }
   function popover(api, tool) {
     var V = api.getV(), s = settingsOf(api), r = api.root(); if (!r) return;
@@ -270,27 +281,34 @@
     if (existing && existing.getAttribute("data-tool") === tool) { closePopover(api); return; }
     closePopover(api);
     var el = D.createElement("div"); el.id = "stInkPop"; el.className = "st-ink-pop"; el.setAttribute("data-tool", tool); el.setAttribute("role", "dialog"); el.setAttribute("aria-label", tool === "er" ? "Eraser settings" : "Pen settings");
+    /* NoteBook settings card (2026-11-27, owner: "premium, new gen"): a header, a live preview on paper, illustrated
+       nib cards, one swatch row and one grouped list (filled sliders with the value on the right, switches). The
+       data-ink hooks are the same, so bindPopover only gained the slider fill and Close. */
+    var head = function (kicker, title) { return '<div class="nb-grab" aria-hidden="true"></div><header class="nb-head"><div><small>' + kicker + "</small><h3>" + title + '</h3></div><button type="button" class="nb-x" data-ink="close" aria-label="Close">' + NB_ICO.x + "</button></header>"; };
+    var slider = function (k, label, val, min, max, step, shown) { var pc = Math.round((val - min) / (max - min) * 100); return '<label class="nb-row nb-slide"><span class="nb-rl">' + label + '</span><b class="nb-rv" data-ink-' + k + '-val>' + shown + '</b><input type="range" min="' + min + '" max="' + max + '" step="' + step + '" value="' + val + '" data-ink="' + k + '" aria-label="' + label + '" style="--p:' + pc + '%"></label>'; };
+    var sw = function (k, label, on, sub) { return '<div class="nb-row nb-sw"><span class="nb-rl">' + label + (sub ? "<small>" + sub + "</small>" : "") + '</span><button type="button" role="switch" class="nb-switch' + (on ? " on" : "") + '" data-ink="' + k + '" aria-checked="' + !!on + '" aria-label="' + label + '"><i></i></button></div>'; };
     if (tool === "er") {
-      var er = s.eraser;
-      el.innerHTML = "<h3>Eraser</h3>" +
-        '<div class="st-ink-styles" role="group" aria-label="Eraser mode">' + ["precision", "standard", "stroke"].map(function (m) { return '<button type="button" class="st-ink-seg' + (er.mode === m ? " on" : "") + '" data-ink="er-mode" data-v="' + m + '" aria-pressed="' + (er.mode === m) + '">' + (m === "stroke" ? "Whole stroke" : m === "precision" ? "Precision" : "Partial") + "</button>"; }).join("") + "</div>" +
-        (er.mode === "standard" ? '<div class="st-ink-styles" role="group" aria-label="Eraser size">' + [0, 1, 2].map(function (i) { return '<button type="button" class="st-ink-seg' + (er.size === i ? " on" : "") + '" data-ink="er-size" data-v="' + i + '" aria-pressed="' + (er.size === i) + '">' + ["Small", "Medium", "Large"][i] + "</button>"; }).join("") + "</div>" : "") +
-        '<label class="st-ink-row"><span>Erase highlighter only</span><button type="button" class="st-ink-toggle' + (er.hlOnly ? " on" : "") + '" data-ink="er-hlonly" aria-pressed="' + er.hlOnly + '">' + (er.hlOnly ? "On" : "Off") + "</button></label>" +
-        '<label class="st-ink-row"><span>Return to previous tool after erasing</span><button type="button" class="st-ink-toggle' + (er.autoDeselect ? " on" : "") + '" data-ink="er-auto" aria-pressed="' + er.autoDeselect + '">' + (er.autoDeselect ? "On" : "Off") + "</button></label>" +
-        '<button type="button" class="st-ink-danger" data-ink="er-clear">Clear page</button>' +
-        '<p class="st-ink-note">Clear page can be undone.</p>';
+      var er = s.eraser, EM = { precision: ["Precision", "Only what it touches"], standard: ["Partial", "A round eraser"], stroke: ["Whole stroke", "Lifts the line"] };
+      el.innerHTML = head("Eraser", EM[er.mode] ? EM[er.mode][0] : "Eraser") +
+        '<div class="nb-nibs" role="radiogroup" aria-label="Eraser mode">' + ["precision", "standard", "stroke"].map(function (m) { return '<button type="button" role="radio" class="nb-nib' + (er.mode === m ? " on" : "") + '" data-ink="er-mode" data-v="' + m + '" aria-checked="' + (er.mode === m) + '"><span class="nb-nib-art">' + NB_ICO["er-" + m] + "</span><b>" + EM[m][0] + "</b><small>" + EM[m][1] + "</small></button>"; }).join("") + "</div>" +
+        (er.mode === "standard" ? '<div class="nb-sizes" role="radiogroup" aria-label="Eraser size">' + [0, 1, 2].map(function (i) { return '<button type="button" role="radio" class="nb-size' + (er.size === i ? " on" : "") + '" data-ink="er-size" data-v="' + i + '" aria-checked="' + (er.size === i) + '" aria-label="' + ["Small", "Medium", "Large"][i] + '"><i style="--d:' + [8, 14, 22][i] + 'px"></i></button>'; }).join("") + "</div>" : "") +
+        '<div class="nb-group">' + sw("er-hlonly", "Erase highlighter only", er.hlOnly) + sw("er-auto", "Back to the last tool after erasing", er.autoDeselect) + "</div>" +
+        '<button type="button" class="nb-danger" data-ink="er-clear">' + NB_ICO.trash + " Clear this page</button>" +
+        '<p class="nb-note">Clearing a page can be undone.</p>';
     } else {
-      var ts = toolSettings(s, tool);
-      el.innerHTML = "<h3>" + (tool === "hl" ? "Highlighter" : "Pen") + "</h3>" +
-        '<canvas class="st-ink-preview" width="520" height="96" aria-label="Stroke preview"></canvas>' +
-        (tool === "pen" ? '<div class="st-ink-styles" role="group" aria-label="Pen style">' + ["fountain", "ball", "brush"].map(function (st) { return '<button type="button" class="st-ink-seg' + (ts.style === st ? " on" : "") + '" data-ink="style" data-v="' + st + '" aria-pressed="' + (ts.style === st) + '">' + st.charAt(0).toUpperCase() + st.slice(1) + "</button>"; }).join("") + "</div>" : "") +
-        '<label class="st-ink-slider"><span>Size <b data-ink-size-val>' + Math.round(ts.widths[ts.wi] * 1500) + '</b></span><input type="range" min="1" max="12" step="0.5" value="' + Math.round(ts.widths[ts.wi] * 1500) + '" data-ink="size" aria-label="Pen size"></label>' +
-        '<div class="st-ink-pop-colors" role="group" aria-label="Colour">' + (tool === "hl" ? HL_COLORS : PEN_COLORS).map(function (c) { return '<button type="button" class="st-ink-c' + (ts.color === c ? " on" : "") + '" data-ink="color" data-v="' + c + '" aria-label="Colour ' + c + '" aria-pressed="' + (ts.color === c) + '" style="--c:' + c + '"></button>'; }).join("") +
-        '<label class="st-ink-custom" title="Custom colour"><input type="color" data-ink-custom value="' + esc(ts.color) + '" aria-label="Custom colour wheel"><input type="text" data-ink-hex value="' + esc(ts.color) + '" aria-label="Custom colour hex" maxlength="7" spellcheck="false"></label></div>' +
-        '<label class="st-ink-slider"><span>Pressure sensitivity <b data-ink-sens-val>' + Math.round(ts.sens * 100) + '%</b></span><input type="range" min="0" max="100" step="1" value="' + Math.round(ts.sens * 100) + '" data-ink="sens" aria-label="Pressure sensitivity"></label>' +
-        (tool === "pen" && ts.style === "fountain" ? '<label class="st-ink-slider"><span>Tip sharpness <b data-ink-tip-val>' + Math.round(ts.tip * 100) + '%</b></span><input type="range" min="0" max="100" step="1" value="' + Math.round(ts.tip * 100) + '" data-ink="tip" aria-label="Tip sharpness"></label>' : "") +
-        '<label class="st-ink-row"><span>Draw with finger</span><button type="button" class="st-ink-toggle' + (s.drawFinger ? " on" : "") + '" data-ink="finger" aria-pressed="' + s.drawFinger + '">' + (s.drawFinger ? "On" : "Off") + "</button></label>" +
-        '<p class="st-ink-note">Finger drawing turns off automatically once a pen is used, unless you turn it back on here.</p>';
+      var ts = toolSettings(s, tool), cols = tool === "hl" ? HL_COLORS : PEN_COLORS, NIB = { fountain: "Fountain", ball: "Ballpoint", brush: "Brush" };
+      var custom = cols.indexOf(ts.color) < 0;
+      el.innerHTML = head(tool === "hl" ? "Highlighter" : "Pen", tool === "hl" ? "Highlighter" : (NIB[ts.style] || "Pen") + " pen") +
+        '<div class="nb-prev"><canvas class="st-ink-preview" width="840" height="220" aria-label="Stroke preview"></canvas></div>' +
+        (tool === "pen" ? '<div class="nb-nibs" role="radiogroup" aria-label="Pen style">' + ["fountain", "ball", "brush"].map(function (st) { return '<button type="button" role="radio" class="nb-nib' + (ts.style === st ? " on" : "") + '" data-ink="style" data-v="' + st + '" aria-checked="' + (ts.style === st) + '"><span class="nb-nib-art">' + NB_ICO["nib-" + st] + "</span><b>" + NIB[st] + "</b></button>"; }).join("") + "</div>" : "") +
+        '<div class="nb-swatches" role="radiogroup" aria-label="Colour">' + cols.map(function (c) { return '<button type="button" role="radio" class="nb-swatch' + (ts.color === c ? " on" : "") + '" data-ink="color" data-v="' + c + '" aria-label="Colour ' + c + '" aria-checked="' + (ts.color === c) + '" style="--c:' + c + '"></button>'; }).join("") +
+          '<label class="nb-swatch nb-wheel' + (custom ? " on" : "") + '" title="Any colour" style="--c:' + esc(ts.color) + '"><input type="color" data-ink-custom value="' + esc(ts.color) + '" aria-label="Pick any colour"></label></div>' +
+        '<div class="nb-group">' +
+          slider("size", "Size", Math.round(ts.widths[ts.wi] * 1500), 1, 12, 0.5, Math.round(ts.widths[ts.wi] * 1500)) +
+          slider("sens", "Pressure", Math.round(ts.sens * 100), 0, 100, 1, Math.round(ts.sens * 100) + "%") +
+          (tool === "pen" && ts.style === "fountain" ? slider("tip", "Tip sharpness", Math.round(ts.tip * 100), 0, 100, 1, Math.round(ts.tip * 100) + "%") : "") +
+          sw("finger", "Draw with finger", s.drawFinger, "Turns off by itself once a pencil is used") +
+        "</div>";
     }
     var tb = r.querySelector("#stTb"); if (tb && tb.parentNode) tb.parentNode.insertBefore(el, tb.nextSibling); else r.appendChild(el);
     preview(api, el.querySelector(".st-ink-preview"));
@@ -309,10 +327,11 @@
   function bindPopover(api, el) {
     el.addEventListener("input", function (e) {
       var t = e.target, k = t.getAttribute("data-ink"), V = api.getV(), s = settingsOf(api), ts = toolSettings(s, V.tool === "hl" ? "hl" : "pen");
+      if (t.type === "range") t.style.setProperty("--p", Math.round((t.value - t.min) / (t.max - t.min) * 100) + "%");
       if (k === "sens") { ts.sens = (+t.value) / 100; var b = el.querySelector("[data-ink-sens-val]"); if (b) b.textContent = t.value + "%"; }
       if (k === "tip") { ts.tip = (+t.value) / 100; var b2 = el.querySelector("[data-ink-tip-val]"); if (b2) b2.textContent = t.value + "%"; }
       if (k === "size") { ts.widths[ts.wi] = (+t.value) / 1500; var b3 = el.querySelector("[data-ink-size-val]"); if (b3) b3.textContent = t.value; }
-      if (t.hasAttribute("data-ink-custom")) { ts.color = t.value; ts.ci = -1; addRecent(s, ts.color); var hx = el.querySelector("[data-ink-hex]"); if (hx) hx.value = ts.color; }
+      if (t.hasAttribute("data-ink-custom")) { ts.color = t.value; ts.ci = -1; addRecent(s, ts.color); var wl = t.parentNode; if (wl && wl.classList) { wl.style.setProperty("--c", ts.color); Array.prototype.forEach.call(el.querySelectorAll(".nb-swatch.on"), function (x) { x.classList.remove("on"); }); wl.classList.add("on"); } }
       if (t.hasAttribute("data-ink-hex")) { var hv = t.value.trim(); if (validHex(hv)) { ts.color = hv; ts.ci = -1; addRecent(s, hv); } }
       persist(api); preview(api, el.querySelector(".st-ink-preview"));
     });
@@ -320,6 +339,7 @@
       var b = e.target; while (b && b !== el && !b.getAttribute("data-ink")) b = b.parentNode;
       if (!b || b === el) return;
       var k = b.getAttribute("data-ink"), V = api.getV(), s = settingsOf(api), tool = V.tool === "hl" ? "hl" : "pen", ts = toolSettings(s, tool);
+      if (k === "close") { closePopover(api); return; }
       if (k === "color") { ts.color = b.getAttribute("data-v"); ts.ci = (tool === "hl" ? HL_COLORS : PEN_COLORS).indexOf(ts.color); persist(api); popoverRefresh(api, tool); }
       if (k === "er-mode") { s.eraser.mode = b.getAttribute("data-v"); persist(api); popoverRefresh(api, "er"); }
       if (k === "er-size") { s.eraser.size = +b.getAttribute("data-v"); persist(api); popoverRefresh(api, "er"); }
