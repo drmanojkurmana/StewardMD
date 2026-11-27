@@ -117,6 +117,21 @@ describe("research-ondevice-pdf native job (phase 05)", () => {
     assert.equal(res.pages.length, 1);
   });
 
+  test("progress also comes from polling when the native listener is silent", async () => {
+    const { pdfjs } = makeFakePdfjs([{ items: [] }, { items: [] }, { items: [] }]);
+    const job = makeFakeJob([
+      { state: "running", donePages: [] },
+      { state: "running", donePages: [1] },
+      { state: "running", donePages: [1, 2] },
+      { state: "done", donePages: [1, 2, 3] }
+    ]);
+    delete job.onProgress;
+    const progress = [];
+    await ondevice.extract(fakeBytes("pollprog"), { pdfjs, nativeJob: job, nativePollMs: 0, onProgress: (c) => progress.push(c) });
+    // The first pass reports each page as it is opened; the native poll then reports pages as they finish.
+    assert.deepEqual(progress, [1, 2, 3, 1, 2, 3]);
+  });
+
   test("a job that keeps stopping fails as ocr-failed (counted by the retry logic)", async () => {
     const { pdfjs } = makeFakePdfjs([{ items: [] }]);
     const job = makeFakeJob([{ state: "paused", donePages: [] }]);

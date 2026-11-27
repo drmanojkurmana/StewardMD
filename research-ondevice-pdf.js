@@ -534,7 +534,7 @@
             var key = "rmd-" + String(sha256Val || "nosha").slice(0, 40) + "-" + Math.round(dpi);
             var want = pending.map(function (p) { return p.n; });
             var doneBefore = total - want.length;
-            var tmpUri = null, listener = null, started = false, restarts = 0, pausedPolls = 0, lastState = null;
+            var tmpUri = null, listener = null, started = false, restarts = 0, pausedPolls = 0, lastState = null, lastDone = -1;
 
             function tidy() {
               if (listener && typeof listener.remove === "function") { try { listener.remove(); } catch (e) {} }
@@ -582,6 +582,13 @@
                 }
                 pausedPolls = 0;
                 report("running", st);
+                // Progress from the poll too, in case the native listener is not delivering (iOS suspended,
+                // or the plugin was reloaded): a caller's per-page clock is reset by each new page.
+                var nowDone = st.donePages ? st.donePages.length : 0;
+                if (nowDone !== lastDone) {
+                  lastDone = nowDone;
+                  if (onProgress) onProgress(Math.min(total, doneBefore + nowDone + 1), total);
+                }
                 return wait().then(poll);
               });
             }

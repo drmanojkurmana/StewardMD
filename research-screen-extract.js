@@ -712,6 +712,10 @@
             sha256: hash,
             resume: resume,
             signal: resumeCtx && resumeCtx.signal,
+            /* A background page job paused by the phone is not the phone being slow. */
+            onNativeState: function (ns) {
+              if (resumeCtx && resumeCtx.holdClock) resumeCtx.holdClock(!!ns && ns.state === "paused");
+            },
             onProgress: function (cur, tot) {
               if (resumeCtx && resumeCtx.touchPage) resumeCtx.touchPage();
               if (isPdfStale(myPdfSeq, targetPid, targetSid)) return;
