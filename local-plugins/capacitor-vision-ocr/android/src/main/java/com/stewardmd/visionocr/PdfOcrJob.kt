@@ -47,14 +47,14 @@ object PdfOcrJobs {
 
     /** Progress listener set by the plugin: (jobKey, done, total). Same process as the worker. */
     @Volatile var listener: ((String, Int, Int) -> Unit)? = null
-    /** Jobs the user cancelled; the worker checks this between pages. */
-    val cancelled: MutableSet<String> = java.util.Collections.synchronizedSet(mutableSetOf())
 
     fun isValidKey(key: String): Boolean = KEY_RE.matches(key) && !key.contains("..") && !key.startsWith(".")
     fun workName(key: String) = WORK_PREFIX + key
     fun jobDir(ctx: Context, key: String): File = File(File(ctx.filesDir, "rmd_od"), key.replace(':', '_'))
     fun pageFile(ctx: Context, key: String, n: Int) = File(jobDir(ctx, key), "page-$n.json")
     fun metaFile(ctx: Context, key: String) = File(jobDir(ctx, key), "meta.json")
+    fun cancelFile(ctx: Context, key: String) = File(jobDir(ctx, key), "cancelled")
+    fun isCancelled(ctx: Context, key: String): Boolean = cancelFile(ctx, key).exists()
 
     fun donePages(ctx: Context, key: String): List<Int> {
         val names = jobDir(ctx, key).list() ?: return emptyList()
@@ -76,7 +76,7 @@ object PdfOcrJobs {
         dir.mkdirs()
         val wanted = pages.filter { it >= 1 }.distinct().sorted()
         metaFile(ctx, key).writeText(JSONObject().put("pages", JSONArray(wanted)).put("dpi", dpi).put("path", path).toString())
-        cancelled.remove(key)
+        cancelFile(ctx, key).delete()
         val input = Data.Builder()
             .putString("jobKey", key)
             .putString("path", path)
@@ -87,7 +87,7 @@ object PdfOcrJobs {
             .setInputData(input)
             .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .build()
-        WorkManager.getInstance(ctx).enqueueUniqueWork(workName(key), ExistingWorkPolicy.KEEP, req)
+        WorkManager.getInstance(ctx).enqueueUniqueWork(workName(key), ExistingWorkPolicy.REPLACE, req)
     }
 
     fun status(ctx: Context, key: String): JSONObject {
@@ -97,13 +97,15 @@ object PdfOcrJobs {
         if (wanted.isEmpty() && done.isEmpty()) return r.put("state", "failed").put("error", "not-found")
         val infos = try { WorkManager.getInstance(ctx).getWorkInfosForUniqueWork(workName(key)).get() } catch (e: Exception) { emptyList() }
         val info = infos.lastOrNull()
+        val cancelled = isCancelled(ctx, key)
         val complete = wanted.isNotEmpty() && done.containsAll(wanted)
         val state = when {
+            cancelled -> "failed"
             complete -> "done"
             info == null -> "paused"
             info.state == WorkInfo.State.RUNNING || info.state == WorkInfo.State.ENQUEUED || info.state == WorkInfo.State.BLOCKED -> "running"
             info.state == WorkInfo.State.FAILED -> "failed"
-            info.state == WorkInfo.State.CANCELLED -> if (cancelled.contains(key)) "failed" else "paused"
+            info.state == WorkInfo.State.CANCELLED -> if (cancelled) "failed" else "paused"
             else -> {
                 val err = info.outputData.getString("error")
                 if (err == "paused") "paused" else if (err != null) "failed" else "paused"
@@ -111,14 +113,16 @@ object PdfOcrJobs {
         }
         r.put("state", state)
         val err = info?.outputData?.getString("error")
-        if (state == "failed") r.put("error", if (cancelled.contains(key)) "cancelled" else (err ?: "ocr-failed"))
+        if (state == "failed") r.put("error", if (cancelled) "cancelled" else (err ?: "ocr-failed"))
         return r
     }
 
     fun readPage(ctx: Context, key: String, n: Int): JSONObject = JSONObject(pageFile(ctx, key, n).readText())
 
     fun cancel(ctx: Context, key: String) {
-        cancelled.add(key)
+        val dir = jobDir(ctx, key)
+        if (!dir.exists()) dir.mkdirs()
+        try { cancelFile(ctx, key).writeText("1") } catch (e: Exception) {}
         WorkManager.getInstance(ctx).cancelUniqueWork(workName(key))
     }
 
@@ -186,7 +190,7 @@ class PdfOcrJobWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(
             }
             report(key, pages.count { done.contains(it) }, total)
             for (n in pages) {
-                if (PdfOcrJobs.cancelled.contains(key)) return Result.failure(fail("cancelled"))
+                if (PdfOcrJobs.isCancelled(applicationContext, key)) return Result.failure(fail("cancelled"))
                 if (isStopped) return Result.success(fail("paused"))
                 if (done.contains(n)) continue
                 if (n < 1 || n > renderer.pageCount) return Result.failure(fail("pdf-open-failed"))
@@ -227,7 +231,7 @@ class PdfOcrJobWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(
                     }
                 }
                 val out = PdfOcrJobs.pageFile(applicationContext, key, n)
-                val tmp = File(out.parentFile, out.name + ".tmp")
+                val tmp = File(out.parentFile, "${out.name}.$id.tmp")
                 tmp.writeText(obj.toString())
                 if (!tmp.renameTo(out)) { out.delete(); tmp.renameTo(out) }
                 done.add(n)
@@ -237,7 +241,11 @@ class PdfOcrJobWorker(ctx: Context, params: WorkerParameters) : CoroutineWorker(
             }
             return Result.success()
         } catch (e: Exception) {
-            return Result.failure(fail(if (isStopped) "paused" else "ocr-failed"))
+            return if (PdfOcrJobs.isCancelled(applicationContext, key)) {
+                Result.failure(fail("cancelled"))
+            } else {
+                if (isStopped) Result.success(fail("paused")) else Result.failure(fail("ocr-failed"))
+            }
         } finally {
             try { renderer?.close() } catch (e: Exception) {}
             try { pfd?.close() } catch (e: Exception) {}

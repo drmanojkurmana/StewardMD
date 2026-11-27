@@ -1123,15 +1123,55 @@
         var OD = G && G.SMD_RMD_ONDEVICE_PDF;
         var CP = G && G.SMD_RMD_CHECKPOINT;
         var JR = G && G.SMD_RMD_JOBS;
-        if (onDeviceOcrOn() && OD && typeof OD.hasNativeOcr === "function" && OD.hasNativeOcr() && typeof OD.extract === "function") {
+        function makeErr(code, msg) {
+          var e = new Error(msg || code);
+          e.code = code;
+          return e;
+        }
+        function mergeCheckpoint(key, patch) {
+          if (JR && typeof JR.updateCheckpoint === "function") {
+            return JR.updateCheckpoint(CP, key, patch);
+          }
+          if (!CP || !key || typeof CP.get !== "function" || typeof CP.put !== "function") {
+            return Promise.resolve();
+          }
+          return Promise.resolve().then(function () { return CP.get(key); }).then(function (cur) {
+            var next = {};
+            if (cur && typeof cur === "object") {
+              for (var k in cur) {
+                if (Object.prototype.hasOwnProperty.call(cur, k)) next[k] = cur[k];
+              }
+            }
+            for (var p in patch) {
+              if (Object.prototype.hasOwnProperty.call(patch, p)) next[p] = patch[p];
+            }
+            return CP.put(key, next);
+          }).catch(function () {});
+        }
+        function handleFallbackError(err) {
+          if (err && (err.name === "PasswordException" || err.code === "password")) {
+            setMsg(container, '<div class="rmd-banner rmd-banner-warn">This PDF is password-protected. Save an unlocked copy (or export as Word .docx) and upload again.</div>');
+            return;
+          }
+          if (err && (err.code === "aborted" || err.code === "cancelled" || err.rmdState === "data_problem" || err.rmdState === "offline")) {
+            setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc((err && err.message) || "Could not read this PDF on device.") + '</div>');
+            return;
+          }
+          setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc((err && err.message) || "Could not read this PDF.") + '</div>');
+        }
+        if (onDeviceOcrOn()) {
           setMsg(container, loadHtml("Reading scanned PDF on your phone"));
           var bytesP = (res && res.bytes)
             ? Promise.resolve(res.bytes)
             : readFileAsArrayBuffer(file).then(function (ab) { return new Uint8Array(ab); });
-          bytesP.then(function (u8) {
-            return (typeof OD.sha256 === "function" ? OD.sha256(u8) : Promise.resolve(null)).then(function (hash) {
+          return bytesP.then(function (u8) {
+            return (OD && typeof OD.sha256 === "function" ? OD.sha256(u8) : Promise.resolve(null)).then(function (hash) {
               var ckKey = hash ? ("pdf:" + tpid + ":" + hash) : ("pdf:" + tpid + ":thesis");
+              var canNativeOcr = !!(OD && typeof OD.hasNativeOcr === "function" && OD.hasNativeOcr() && typeof OD.extract === "function");
               function runOne(resumeCtx) {
+                if (!canNativeOcr) {
+                  return Promise.reject(makeErr("ocr-unavailable", "On-device OCR is unavailable on this device."));
+                }
                 var resume = (resumeCtx && resumeCtx.checkpoint) || null;
                 return OD.extract(u8, {
                   sha256: hash,
@@ -1147,12 +1187,20 @@
                   },
                   onPage: function (partial) {
                     if (CP && partial && (partial.sha256 || ckKey)) {
-                      partial.running = true;
-                      if (resumeCtx && resumeCtx.checkpoint) {
-                        partial.failCount = resumeCtx.checkpoint.failCount;
-                        partial.reasons = resumeCtx.checkpoint.reasons;
-                      }
-                      return CP.put(partial.sha256 ? ("pdf:" + tpid + ":" + partial.sha256) : ckKey, partial).catch(function () {});
+                      var key = partial.sha256 ? ("pdf:" + tpid + ":" + partial.sha256) : ckKey;
+                      var patch = {
+                        pages: partial.pages,
+                        ocr: partial.ocr,
+                        sha256: partial.sha256,
+                        engine: partial.engine,
+                        ocrEngine: partial.ocrEngine,
+                        partial: partial.partial,
+                        nextPage: partial.nextPage,
+                        engineVersion: partial.engineVersion,
+                        running: true,
+                        finished: false
+                      };
+                      return mergeCheckpoint(key, patch);
                     }
                   }
                 });
@@ -1199,26 +1247,45 @@
                 }
               });
             });
-          }).catch(function (err) {
-            if (err && (err.name === "PasswordException" || err.code === "password")) {
-              setMsg(container, '<div class="rmd-banner rmd-banner-warn">This PDF is password-protected. Save an unlocked copy (or export as Word .docx) and upload again.</div>');
-              return;
-            }
-            if (err && (err.code === "aborted" || err.code === "cancelled" || err.rmdState === "data_problem" || err.rmdState === "offline")) {
-              setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc((err && err.message) || "Could not read this PDF on device.") + '</div>');
-              return;
-            }
-            setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc((err && err.message) || "Could not read this PDF.") + '</div>');
-          });
-          return;
+          }).catch(handleFallbackError);
         }
-        uploadPdfServer(file, container);
+        return uploadPdfServer(file, container);
       }).catch(function (err) {
         if (err && (err.name === "PasswordException" || err.code === "password")) {
           setMsg(container, '<div class="rmd-banner rmd-banner-warn">This PDF is password-protected. Save an unlocked copy (or export as Word .docx) and upload again.</div>');
           return;
         }
-        uploadPdfServer(file, container);
+        if (onDeviceOcrOn()) {
+          var JR2 = G && G.SMD_RMD_JOBS;
+          if (JR2 && typeof JR2.runWithFallback === "function") {
+            return JR2.runWithFallback("pdf", function () {
+              var failErr = new Error((err && err.message) || "Failed to open PDF on this device");
+              failErr.code = (err && err.code) || "pdf-open-failed";
+              return Promise.reject(failErr);
+            }, function (cpIgnored, fallbackMeta) {
+              return uploadPdfServer(file, container, fallbackMeta);
+            }, {
+              jobKey: "pdf:" + tpid + ":thesis",
+              projectId: tpid,
+              targetId: "thesis",
+              engine: "ondevice:pdf",
+              onStatus: function (info) {
+                if (info && info.state === "retrying" && info.message) {
+                  setMsg(container, loadHtml(info.message));
+                }
+              }
+            }).then(function (out) {
+              if (out && out.source !== "cloud" && out.message) {
+                setMsg(container, '<div class="rmd-banner">' + esc(out.message) + '</div>');
+              }
+            }).catch(function (fErr) {
+              setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc((fErr && fErr.message) || "Could not read this PDF.") + '</div>');
+            });
+          }
+          setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc((err && err.message) || "Could not read this PDF on device.") + '</div>');
+          return;
+        }
+        return uploadPdfServer(file, container);
       });
       return;
     }

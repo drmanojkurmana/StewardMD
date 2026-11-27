@@ -32,15 +32,16 @@ final class PdfOcrJobManager {
 
     final class Job {
         let key: String
-        let pdfURL: URL
-        let pages: [Int]
-        let dpi: CGFloat
+        var pdfURL: URL
+        var pages: [Int]
+        var dpi: CGFloat
         var state: State = .running
         var error: String?
         var cancelled = false
         var pauseRequested = false
         var done: Set<Int> = []
         var bgTask: AnyObject?   // BGContinuedProcessingTask on iOS 26+
+        var bgTaskPending = false
         init(key: String, pdfURL: URL, pages: [Int], dpi: CGFloat) {
             self.key = key; self.pdfURL = pdfURL; self.pages = pages; self.dpi = dpi
         }
@@ -51,8 +52,12 @@ final class PdfOcrJobManager {
     private let queue = DispatchQueue(label: "in.stewardmd.rmdod.ocr", qos: .userInitiated)
     private var observing = false
     private var registeredIdents: Set<String> = []
+    private var _onProgress: ((String, Int, Int) -> Void)?
     /// Progress events: (jobKey, done, total).
-    var onProgress: ((String, Int, Int) -> Void)?
+    var onProgress: ((String, Int, Int) -> Void)? {
+        get { lock.lock(); defer { lock.unlock() }; return _onProgress }
+        set { lock.lock(); defer { lock.unlock() }; _onProgress = newValue }
+    }
 
     // MARK: paths
 
@@ -101,30 +106,72 @@ final class PdfOcrJobManager {
             throw NSError(domain: "rmdod", code: 2, userInfo: [NSLocalizedDescriptionKey: "pdf-open-failed"])
         }
         let wanted = Array(Set(pages.filter { $0 >= 1 })).sorted()
+        let effectiveDpi: CGFloat = dpi > 0 ? dpi : 200
         try FileManager.default.createDirectory(at: PdfOcrJobManager.jobDir(key), withIntermediateDirectories: true)
-        if let meta = try? JSONSerialization.data(withJSONObject: ["pages": wanted, "dpi": Double(dpi)]) {
+        if let meta = try? JSONSerialization.data(withJSONObject: ["pages": wanted, "dpi": Double(effectiveDpi)]) {
             try? meta.write(to: PdfOcrJobManager.metaURL(key), options: .atomic)
         }
+        let onDisk = Set(PdfOcrJobManager.donePagesOnDisk(key))
+
+        var jobToStart: Job?
+        var bgOnlyJob: Job?
+        var staleToEnd: Job?
+
         lock.lock()
-        if let existing = jobs[key], existing.state == .running, !existing.cancelled {
-            lock.unlock()
-            return   // already running; the caller listens for progress
+        if let existing = jobs[key] {
+            if existing.state == .running && !existing.cancelled {
+                if existing.pdfURL == url && existing.pages == wanted && existing.dpi == effectiveDpi {
+                    existing.pauseRequested = false
+                    if existing.bgTask == nil && !existing.bgTaskPending {
+                        bgOnlyJob = existing
+                    }
+                    lock.unlock()
+                    observeAppState()
+                    if let bgJob = bgOnlyJob { beginBackgroundTask(bgJob) }
+                    return   // already running; the caller listens for progress
+                }
+                existing.cancelled = true
+                staleToEnd = existing
+            } else if existing.state == .paused && !existing.cancelled {
+                // Reuse the paused Job under lock so appDidBecomeActive and start() cannot double-enqueue.
+                existing.pdfURL = url
+                existing.pages = wanted
+                existing.dpi = effectiveDpi
+                existing.state = .running
+                existing.error = nil
+                existing.pauseRequested = false
+                existing.done = onDisk
+                jobToStart = existing
+            }
         }
-        let job = Job(key: key, pdfURL: url, pages: wanted, dpi: dpi > 0 ? dpi : 200)
-        job.done = Set(PdfOcrJobManager.donePagesOnDisk(key))
-        jobs[key] = job
+        if jobToStart == nil {
+            let created = Job(key: key, pdfURL: url, pages: wanted, dpi: effectiveDpi)
+            created.done = onDisk
+            jobs[key] = created
+            jobToStart = created
+        }
         lock.unlock()
-        observeAppState()
-        beginBackgroundTask(job)
-        queue.async { self.run(job) }
+
+        if let stale = staleToEnd {
+            endBackgroundTask(stale, success: false)
+        }
+        if let job = jobToStart {
+            observeAppState()
+            beginBackgroundTask(job)
+            queue.async { self.run(job) }
+        }
     }
 
     func status(key: String) -> [String: Any] {
-        lock.lock(); let job = jobs[key]; lock.unlock()
+        lock.lock()
+        let snapshot: (state: State, total: Int, error: String?)? = jobs[key].map {
+            ($0.state, $0.pages.count, $0.error)
+        }
+        lock.unlock()
         let onDisk = PdfOcrJobManager.donePagesOnDisk(key)
-        if let job = job {
-            var r: [String: Any] = ["state": job.state.rawValue, "donePages": onDisk, "total": job.pages.count]
-            if let e = job.error { r["error"] = e }
+        if let s = snapshot {
+            var r: [String: Any] = ["state": s.state.rawValue, "donePages": onDisk, "total": s.total]
+            if let e = s.error { r["error"] = e }
             return r
         }
         // Not in memory (the app was restarted): read what is on disk.
@@ -147,13 +194,24 @@ final class PdfOcrJobManager {
     }
 
     func cancel(key: String) {
-        lock.lock(); let job = jobs[key]; lock.unlock()
+        lock.lock()
+        let job = jobs[key]
         job?.cancelled = true
+        lock.unlock()
+        if let job = job {
+            endBackgroundTask(job, success: false)
+        }
     }
 
     func clear(key: String) {
-        cancel(key: key)
-        lock.lock(); jobs[key] = nil; lock.unlock()
+        lock.lock()
+        let job = jobs[key]
+        job?.cancelled = true
+        jobs[key] = nil
+        lock.unlock()
+        if let job = job {
+            endBackgroundTask(job, success: false)
+        }
         guard PdfOcrJobManager.isValidKey(key) else { return }
         try? FileManager.default.removeItem(at: PdfOcrJobManager.jobDir(key))
     }
@@ -161,56 +219,151 @@ final class PdfOcrJobManager {
     // MARK: work loop
 
     private func run(_ job: Job) {
-        guard let doc = PDFDocument(url: job.pdfURL) else {
+        lock.lock()
+        let key = job.key
+        let pdfURL = job.pdfURL
+        let pages = job.pages
+        let dpi = job.dpi
+        let earlyCancel = job.cancelled || (jobs[key] !== job)
+        lock.unlock()
+
+        if earlyCancel {
+            finish(job, state: .failed, error: "cancelled")
+            return
+        }
+
+        let diskDone = Set(PdfOcrJobManager.donePagesOnDisk(key))
+        lock.lock()
+        job.done.formUnion(diskDone)
+        lock.unlock()
+
+        guard let doc = PDFDocument(url: pdfURL) else {
             finish(job, state: .failed, error: "pdf-open-failed"); return
         }
         if doc.isLocked { finish(job, state: .failed, error: "password"); return }
-        let total = job.pages.count
+        let total = pages.count
         emit(job, total)
-        for n in job.pages {
-            if job.cancelled { finish(job, state: .failed, error: "cancelled"); return }
-            if job.pauseRequested { pause(job); return }
-            if job.done.contains(n) { continue }
+        for n in pages {
+            lock.lock()
+            let isCancelled = job.cancelled || (jobs[key] !== job)
+            let isPause = job.pauseRequested
+            let alreadyDone = job.done.contains(n)
+            lock.unlock()
+
+            if isCancelled { finish(job, state: .failed, error: "cancelled"); return }
+            if isPause { pause(job); return }
+            if alreadyDone { continue }
             guard n <= doc.pageCount, let page = doc.page(at: n - 1) else {
                 finish(job, state: .failed, error: "pdf-open-failed"); return
             }
             do {
                 let obj = try autoreleasepool { () throws -> [String: Any] in
-                    return try PdfOcrJobManager.ocrPage(page, number: n, dpi: job.dpi)
+                    return try PdfOcrJobManager.ocrPage(page, number: n, dpi: dpi)
                 }
+                lock.lock()
+                let cancelledDuringOcr = job.cancelled || (jobs[key] !== job)
+                lock.unlock()
+                if cancelledDuringOcr { finish(job, state: .failed, error: "cancelled"); return }
+
                 let data = try JSONSerialization.data(withJSONObject: obj)
-                try data.write(to: PdfOcrJobManager.pageURL(job.key, n), options: .atomic)
+                try data.write(to: PdfOcrJobManager.pageURL(key, n), options: .atomic)
+                lock.lock()
                 job.done.insert(n)
+                lock.unlock()
                 emit(job, total)
             } catch {
-                finish(job, state: .failed, error: "ocr-failed"); return
+                lock.lock()
+                let cancelledDuringError = job.cancelled || (jobs[key] !== job)
+                lock.unlock()
+                if cancelledDuringError {
+                    finish(job, state: .failed, error: "cancelled")
+                } else {
+                    finish(job, state: .failed, error: "ocr-failed")
+                }
+                return
             }
         }
-        finish(job, state: .done, error: nil)
+        lock.lock()
+        let finalCancelled = job.cancelled || (jobs[key] !== job)
+        lock.unlock()
+        if finalCancelled {
+            finish(job, state: .failed, error: "cancelled")
+        } else {
+            finish(job, state: .done, error: nil)
+        }
     }
 
     private func emit(_ job: Job, _ total: Int) {
+        lock.lock()
+        let isCurrent = (jobs[job.key] === job)
         let doneCount = job.pages.filter { job.done.contains($0) }.count
+        let cb = isCurrent ? _onProgress : nil
+        let key = job.key
+        lock.unlock()
         updateBackgroundProgress(job, done: doneCount, total: total)
-        onProgress?(job.key, doneCount, total)
+        cb?(key, doneCount, total)
     }
 
     private func pause(_ job: Job) {
-        job.state = .paused
-        job.pauseRequested = false
-        let doneCount = job.pages.filter { job.done.contains($0) }.count
-        endBackgroundTask(job, success: false)
-        if !PdfOcrJobManager.isOnMac() {
-            PdfOcrJobManager.notifyPaused(done: doneCount, total: job.pages.count)
+        lock.lock()
+        let task = job.bgTask
+        job.bgTask = nil
+        job.bgTaskPending = false
+        lock.unlock()
+        completeBackgroundTask(task, success: false)
+
+        var toResume: Job?
+        var cancelledCb: (((String, Int, Int) -> Void)?, String, Int, Int)?
+        var notifyCounts: (Int, Int)?
+
+        lock.lock()
+        let isCurrent = (jobs[job.key] === job)
+        let wasCancelled = job.cancelled || !isCurrent
+        if wasCancelled {
+            job.state = .failed
+            job.error = "cancelled"
+            job.pauseRequested = false
+            let doneCount = job.pages.filter { job.done.contains($0) }.count
+            let total = job.pages.count
+            cancelledCb = (isCurrent ? _onProgress : nil, job.key, doneCount, total)
+        } else if !job.pauseRequested {
+            // Resumed (by start() or appDidBecomeActive()) while completing the background task.
+            job.state = .running
+            toResume = job
+        } else {
+            job.state = .paused
+            job.pauseRequested = false
+            let doneCount = job.pages.filter { job.done.contains($0) }.count
+            notifyCounts = (doneCount, job.pages.count)
+        }
+        lock.unlock()
+
+        if let (cb, key, doneCount, total) = cancelledCb {
+            cb?(key, doneCount, total)
+            return
+        }
+        if let job = toResume {
+            beginBackgroundTask(job)
+            queue.async { self.run(job) }
+            return
+        }
+        if let (doneCount, total) = notifyCounts, !PdfOcrJobManager.isOnMac() {
+            PdfOcrJobManager.notifyPaused(done: doneCount, total: total)
         }
     }
 
     private func finish(_ job: Job, state: State, error: String?) {
+        endBackgroundTask(job, success: state == .done)
+        lock.lock()
+        let isCurrent = (jobs[job.key] === job)
         job.state = state
         job.error = error
-        endBackgroundTask(job, success: state == .done)
         let doneCount = job.pages.filter { job.done.contains($0) }.count
-        onProgress?(job.key, doneCount, job.pages.count)
+        let total = job.pages.count
+        let cb = isCurrent ? _onProgress : nil
+        let key = job.key
+        lock.unlock()
+        cb?(key, doneCount, total)
     }
 
     // MARK: OCR of one page
@@ -326,18 +479,35 @@ final class PdfOcrJobManager {
 
     private func appDidEnterBackground() {
         if PdfOcrJobManager.isOnMac() { return }
-        lock.lock(); let running = jobs.values.filter { $0.state == .running }; lock.unlock()
-        for job in running where job.bgTask == nil {
+        lock.lock()
+        for job in jobs.values where job.state == .running && job.bgTask == nil && !job.bgTaskPending {
             // No continued-processing task (older iOS, or it was denied): finish this page, then pause.
             job.pauseRequested = true
         }
+        lock.unlock()
     }
 
     private func appDidBecomeActive() {
-        lock.lock(); let paused = jobs.values.filter { $0.state == .paused && !$0.cancelled }; lock.unlock()
-        for job in paused {
-            job.state = .running
-            job.pauseRequested = false
+        var toRun: [Job] = []
+        var needBgOnly: [Job] = []
+        lock.lock()
+        for job in jobs.values where !job.cancelled {
+            if job.state == .paused {
+                job.state = .running
+                job.pauseRequested = false
+                toRun.append(job)
+            } else if job.state == .running {
+                job.pauseRequested = false
+                if job.bgTask == nil && !job.bgTaskPending {
+                    needBgOnly.append(job)
+                }
+            }
+        }
+        lock.unlock()
+        for job in needBgOnly {
+            beginBackgroundTask(job)
+        }
+        for job in toRun {
             beginBackgroundTask(job)
             queue.async { self.run(job) }
         }
@@ -347,54 +517,111 @@ final class PdfOcrJobManager {
         #if canImport(BackgroundTasks)
         if #available(iOS 26.0, *) {
             if PdfOcrJobManager.isOnMac() { return }
-            let ident = PdfOcrJobManager.bgTaskPrefix + String(String(PdfOcrJobManager.safeDirName(job.key).filter { $0.isLetter || $0.isNumber }).prefix(40))
+            lock.lock()
+            if job.state != .running || job.cancelled || job.bgTask != nil || job.bgTaskPending || jobs[job.key] !== job {
+                lock.unlock()
+                return
+            }
+            job.bgTaskPending = true
+            let key = job.key
+            let total = job.pages.count
+            let ident = PdfOcrJobManager.bgTaskPrefix + String(String(PdfOcrJobManager.safeDirName(key).filter { $0.isLetter || $0.isNumber }).prefix(40))
             // Registering one identifier twice raises, so each identifier is registered once per launch and
             // its handler looks the job up by key at launch time.
-            lock.lock(); let fresh = !registeredIdents.contains(ident); if fresh { registeredIdents.insert(ident) }; lock.unlock()
+            let fresh = !registeredIdents.contains(ident)
+            if fresh { registeredIdents.insert(ident) }
+            lock.unlock()
             if fresh {
-            let key = job.key
-            let registered = BGTaskScheduler.shared.register(forTaskWithIdentifier: ident, using: nil) { [weak self] task in
-                guard let self = self else { task.setTaskCompleted(success: false); return }
-                self.lock.lock(); let job = self.jobs[key]; self.lock.unlock()
-                guard let job = job, let cpt = task as? BGContinuedProcessingTask else {
-                    task.setTaskCompleted(success: false); return
+                let registered = BGTaskScheduler.shared.register(forTaskWithIdentifier: ident, using: nil) { [weak self] task in
+                    guard let self = self else { task.setTaskCompleted(success: false); return }
+                    guard let cpt = task as? BGContinuedProcessingTask else {
+                        task.setTaskCompleted(success: false); return
+                    }
+                    self.lock.lock()
+                    guard let job = self.jobs[key] else {
+                        self.lock.unlock()
+                        task.setTaskCompleted(success: false)
+                        return
+                    }
+                    if job.state != .running || job.cancelled {
+                        job.bgTaskPending = false
+                        let success = (job.state == .done)
+                        self.lock.unlock()
+                        cpt.setTaskCompleted(success: success)
+                        return
+                    }
+                    let totalCount = Int64(job.pages.count)
+                    let completedCount = Int64(job.pages.filter { job.done.contains($0) }.count)
+                    self.lock.unlock()
+
+                    cpt.progress.totalUnitCount = totalCount
+                    cpt.progress.completedUnitCount = completedCount
+                    cpt.expirationHandler = { [weak self, weak job] in
+                        // Expired or cancelled by the user from the system UI: finish this page, then pause.
+                        guard let self = self, let job = job else { return }
+                        self.lock.lock()
+                        job.pauseRequested = true
+                        self.lock.unlock()
+                    }
+
+                    self.lock.lock()
+                    if job.state == .running && !job.cancelled && self.jobs[key] === job {
+                        job.bgTask = cpt
+                        job.bgTaskPending = false
+                        self.lock.unlock()
+                    } else {
+                        job.bgTaskPending = false
+                        let success = (job.state == .done)
+                        self.lock.unlock()
+                        cpt.setTaskCompleted(success: success)
+                    }
                 }
-                job.bgTask = cpt
-                cpt.progress.totalUnitCount = Int64(job.pages.count)
-                cpt.progress.completedUnitCount = Int64(job.pages.filter { job.done.contains($0) }.count)
-                cpt.expirationHandler = { [weak job] in
-                    // Expired or cancelled by the user from the system UI: finish this page, then pause.
-                    job?.pauseRequested = true
-                }
-                if job.state != .running { self.endBackgroundTask(job, success: job.state == .done) }
-            }
-            _ = registered
+                _ = registered
             }
             let req = BGContinuedProcessingTaskRequest(identifier: ident, title: "Reading scanned pages",
-                                                       subtitle: "Page 0 of \(job.pages.count)")
+                                                       subtitle: "Page 0 of \(total)")
             req.strategy = .fail
-            do { try BGTaskScheduler.shared.submit(req) } catch { /* denied: falls back to pause on background */ }
+            do {
+                try BGTaskScheduler.shared.submit(req)
+            } catch {
+                lock.lock()
+                job.bgTaskPending = false
+                lock.unlock()
+            }
         }
         #endif
     }
 
     private func updateBackgroundProgress(_ job: Job, done: Int, total: Int) {
         #if canImport(BackgroundTasks)
-        if #available(iOS 26.0, *), let cpt = job.bgTask as? BGContinuedProcessingTask {
-            cpt.progress.totalUnitCount = Int64(total)
-            cpt.progress.completedUnitCount = Int64(done)
-            cpt.updateTitle("Reading scanned pages", subtitle: "Page \(done) of \(total)")
+        if #available(iOS 26.0, *) {
+            lock.lock()
+            let cpt = job.bgTask as? BGContinuedProcessingTask
+            lock.unlock()
+            if let cpt = cpt {
+                cpt.progress.totalUnitCount = Int64(total)
+                cpt.progress.completedUnitCount = Int64(done)
+                cpt.updateTitle("Reading scanned pages", subtitle: "Page \(done) of \(total)")
+            }
+        }
+        #endif
+    }
+
+    private func completeBackgroundTask(_ task: AnyObject?, success: Bool) {
+        #if canImport(BackgroundTasks)
+        if #available(iOS 26.0, *), let cpt = task as? BGContinuedProcessingTask {
+            cpt.setTaskCompleted(success: success)
         }
         #endif
     }
 
     private func endBackgroundTask(_ job: Job, success: Bool) {
-        #if canImport(BackgroundTasks)
-        if #available(iOS 26.0, *), let cpt = job.bgTask as? BGContinuedProcessingTask {
-            cpt.setTaskCompleted(success: success)
-        }
-        #endif
+        lock.lock()
+        let task = job.bgTask
         job.bgTask = nil
+        job.bgTaskPending = false
+        lock.unlock()
+        completeBackgroundTask(task, success: success)
     }
 
     static func notifyPaused(done: Int, total: Int) {

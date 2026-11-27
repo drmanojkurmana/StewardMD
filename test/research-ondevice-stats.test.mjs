@@ -252,3 +252,45 @@ test("worker handleMessage and Worker path end-to-end", async function () {
   assert.equal(diagRes.rows, undefined);
   OD.terminateWorker();
 });
+
+test("Worker constructor throw rejects with worker_construct_failed instead of hanging (Item 7)", async function () {
+  OD.terminateWorker();
+  function BrokenWorker() {
+    throw new Error("Worker blocked by CSP");
+  }
+  const rows = [{ y: 2, x: 1 }, { y: 4, x: 2 }, { y: 5, x: 3 }, { y: 4, x: 4 }];
+  await assert.rejects(
+    () => OD.run({ family: "linear", formula: "y ~ x" }, rows, { Worker: BrokenWorker }),
+    (err) => err && err.code === "worker_construct_failed" && /Worker blocked/.test(err.message)
+  );
+  OD.terminateWorker();
+});
+
+test("opts.signal abort terminates worker and rejects immediately (Item 7)", async function () {
+  OD.terminateWorker();
+  let terminated = 0;
+  function NeverReplyWorker() {
+    this.listeners = { message: [], error: [] };
+  }
+  NeverReplyWorker.prototype.addEventListener = function (t, fn) { this.listeners[t].push(fn); };
+  NeverReplyWorker.prototype.removeEventListener = function (t, fn) {
+    this.listeners[t] = this.listeners[t].filter((x) => x !== fn);
+  };
+  NeverReplyWorker.prototype.postMessage = function () {};
+  NeverReplyWorker.prototype.terminate = function () { terminated += 1; };
+
+  const ac = new AbortController();
+  const rows = [{ y: 2, x: 1 }, { y: 4, x: 2 }, { y: 5, x: 3 }, { y: 4, x: 4 }];
+  const p = OD.run({ family: "linear", formula: "y ~ x" }, rows, {
+    Worker: NeverReplyWorker,
+    maxSeconds: 60,
+    signal: ac.signal
+  });
+  setTimeout(() => ac.abort(), 15);
+  await assert.rejects(
+    () => p,
+    (err) => err && err.code === "aborted"
+  );
+  assert.equal(terminated, 1);
+  OD.terminateWorker();
+});

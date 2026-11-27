@@ -370,7 +370,22 @@
     }
   }
 
+  function abortErrorFromSignal(sig, reason) {
+    var r = (reason && typeof reason.code === "string")
+      ? reason
+      : (sig && sig.reason && typeof sig.reason.code === "string" ? sig.reason : null);
+    var code = (r && r.code) || "aborted";
+    var msg = (r && r.message) || "Analysis aborted";
+    var err = makeError(code, msg);
+    if (r && r.rule) err.rule = r.rule;
+    return err;
+  }
+
   function callStatsFn(fn, args, opts, startMs, maxMs) {
+    var sig = (opts && opts.signal) || null;
+    if (sig && sig.aborted) {
+      return Promise.reject(abortErrorFromSignal(sig, sig.reason));
+    }
     var useWorker = !(opts && opts.useWorker === false);
     var WorkerCtor = (opts && opts.Worker) || (G && G.Worker);
     var workerUrl = (opts && opts.workerUrl) || WORKER_URL;
@@ -382,8 +397,7 @@
           w = _worker || new WorkerCtor(workerUrl);
           _worker = w;
         } catch (err) {
-          /* Worker creation failed (e.g. restricted environment); fall back to main thread */
-          runMain();
+          reject(makeError("worker_construct_failed", (err && err.message) || "Worker construction failed"));
           return;
         }
         var id = _nextId++;
@@ -396,8 +410,19 @@
           reject(makeError("ceiling_seconds", "Analysis exceeded time limit"));
         }, remMs);
 
+        function onAbort(reason) {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          terminateWorker();
+          reject(abortErrorFromSignal(sig, reason));
+        }
+
         function cleanup() {
           clearTimeout(timer);
+          if (sig && typeof sig.removeEventListener === "function") {
+            try { sig.removeEventListener("abort", onAbort); } catch (e) {}
+          }
           if (w && w.removeEventListener) {
             w.removeEventListener("message", onMsg);
             w.removeEventListener("error", onErr);
@@ -428,6 +453,13 @@
           cleanup();
           terminateWorker();
           reject(makeError("stats_failed", (ev && ev.message) || "Worker error"));
+        }
+        if (sig && typeof sig.addEventListener === "function") {
+          sig.addEventListener("abort", onAbort);
+        }
+        if (sig && sig.aborted) {
+          onAbort(sig.reason);
+          return;
         }
         if (w.addEventListener) {
           w.addEventListener("message", onMsg);

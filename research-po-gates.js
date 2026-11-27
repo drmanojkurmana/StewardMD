@@ -113,7 +113,7 @@
 
   var PHI_MONTH = "(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*";
   var PHI_FULL_DATE =
-    "(?<!\\d)(?:\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}" +
+    "(?:\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}" +
     "|\\d{4}-\\d{1,2}-\\d{1,2}" +
     "|\\d{1,2}\\s+" + PHI_MONTH + "\\s+\\d{2,4}" +
     "|" + PHI_MONTH + "\\s+\\d{1,2},?\\s+\\d{4})(?!\\d)";
@@ -165,44 +165,44 @@
     ["mrn", "labelled_id",
       new RegExp("\\b(?:MRN|UHID|medical\\s+record(?:\\s+(?:no|number|#))?|hospital\\s+no" +
         "|IP\\s+no|OP\\s+no|IP/OP\\s+no)\\b[\\s:.#-]*([A-Za-z0-9-]{4,16})", "gi"),
-      function (m) { var v = m[1]; return /\d/.test(v) && v.length >= 4 && v.length <= 16; }],
+      function (m) { var v = m[1]; return /\d/.test(v) && v.length >= 4 && v.length <= 16; }, null],
     ["aadhaar", "verhoeff_12",
-      /(?<!\d)\d{4}[ -]?\d{4}[ -]?\d{4}(?!\d)/g,
-      function (m) { return verhoeffValid(m[0].replace(/[ -]/g, "")); }],
+      /\d{4}[ -]?\d{4}[ -]?\d{4}(?!\d)/g,
+      function (m) { return verhoeffValid(m[0].replace(/[ -]/g, "")); }, /\d/],
     ["abha", "addr",
-      /\b[A-Za-z0-9._-]{2,}@(?:abdm|sbx)\b/gi, null],
+      /\b[A-Za-z0-9._-]{2,}@(?:abdm|sbx)\b/gi, null, null],
     ["abha", "number_14",
-      /(?<!\d)\d{2}[ -]\d{4}[ -]\d{4}[ -]\d{4}(?!\d)/g, null],
+      /\d{2}[ -]\d{4}[ -]\d{4}[ -]\d{4}(?!\d)/g, null, /\d/],
     ["abha", "labelled_number",
-      /\bABHA(?:\s*(?:No\.?|Number|ID))?\b[\s:.#-]*(\d{14})(?!\d)/gi, null],
+      /\bABHA(?:\s*(?:No\.?|Number|ID))?\b[\s:.#-]*(\d{14})(?!\d)/gi, null, null],
     ["ssn", "area_group_serial",
-      /(?<!\d)(?!000|666|9\d\d)\d{3}-(?!00)\d{2}-(?!0000)\d{4}(?!\d)/g, null],
-    ["nhs", "mod11_10", /(?<!\d)\d{10}(?!\d)/g, function (m) { return nhsMod11Valid(m[0]); }],
-    ["phone", "e164", /(?<![\w.])\+[1-9]\d{7,14}(?!\d)/g, null],
+      /(?!000|666|9\d\d)\d{3}-(?!00)\d{2}-(?!0000)\d{4}(?!\d)/g, null, /\d/],
+    ["nhs", "mod11_10", /\d{10}(?!\d)/g, function (m) { return nhsMod11Valid(m[0]); }, /\d/],
+    ["phone", "e164", /\+[1-9]\d{7,14}(?!\d)/g, null, /[\w.]/],
     ["phone", "indian_mobile",
-      /(?<![\w./])(?:\+91[ -]?|0)?[6-9]\d{9}(?![\dA-Za-z])/g, null],
+      /(?:\+91[ -]?|0)?[6-9]\d{9}(?![\dA-Za-z])/g, null, /[\w./]/],
     ["phone", "indian_mobile_spaced",
-      /(?<![\w./])(?:\+91[ -]?|0)?[6-9]\d{4}[ -]?\d{5}(?![\dA-Za-z])/g, null],
+      /(?:\+91[ -]?|0)?[6-9]\d{4}[ -]?\d{5}(?![\dA-Za-z])/g, null, /[\w./]/],
     ["email", "addr_spec",
-      /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, null],
+      /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, null, null],
     ["dob", "date_near_birth_label", new RegExp(PHI_FULL_DATE, "gi"),
-      function (m, text) { return phiNear(text, m.index, m.index + m[0].length, PHI_BIRTH_RE); }],
+      function (m, text) { return phiNear(text, m.index, m.index + m[0].length, PHI_BIRTH_RE); }, /\d/],
     ["address", "street_number",
-      new RegExp("\\b\\d{1,5}[A-Za-z]?\\s+(?:[A-Za-z]+\\s+){0,3}" + PHI_STREET + "\\b", "gi"), null],
-    ["address", "house_locality", new RegExp(PHI_HOUSE, "g"), null],
+      new RegExp("\\b\\d{1,5}[A-Za-z]?\\s+(?:[A-Za-z]+\\s+){0,3}" + PHI_STREET + "\\b", "gi"), null, null],
+    ["address", "house_locality", new RegExp(PHI_HOUSE, "g"), null, null],
     ["address", "pin_with_label",
-      /\b(?:PIN\s*code|PIN|postal\s+code|zip\s*code)\D{0,10}(\d{6})\b/gi, null],
+      /\b(?:PIN\s*code|PIN|postal\s+code|zip\s*code)\D{0,10}(\d{6})\b/gi, null, null],
     ["patient_name", "name_near_patient_label", new RegExp(PHI_NAME_BIGRAM, "g"),
-      function (m, text) { return phiNear(text, m.index, m.index + m[0].length, PHI_PATIENT_RE); }],
+      function (m, text) { return phiNear(text, m.index, m.index + m[0].length, PHI_PATIENT_RE); }, null],
     ["admission_date", "date_near_admission_label", new RegExp(PHI_FULL_DATE, "gi"),
       function (m, text) {
         return phiNear(text, m.index, m.index + m[0].length, PHI_ADMISSION_RE) &&
           PHI_PATIENT_RE.test(phiSameSentence(text, m.index, m.index + m[0].length));
-      }]
+      }, /\d/]
   ];
 
   var PHI_USER_ONLY_RULES = [
-    ["dates", "full_date", new RegExp(PHI_FULL_DATE, "gi"), null]
+    ["dates", "full_date", new RegExp(PHI_FULL_DATE, "gi"), null, /\d/]
   ];
 
   function scanPhi(text, opts) {
@@ -218,10 +218,15 @@
       var rule = ruleDef[1];
       var pattern = ruleDef[2];
       var validator = ruleDef[3];
+      var prevDisallow = ruleDef[4];
       pattern.lastIndex = 0;
       var m;
       while ((m = pattern.exec(s)) !== null) {
         if (m[0].length === 0) { pattern.lastIndex++; continue; }
+        if (prevDisallow && m.index > 0 && prevDisallow.test(s.charAt(m.index - 1))) {
+          pattern.lastIndex = m.index + 1;
+          continue;
+        }
         if (validator && !validator(m, s)) continue;
         var key = category + ":" + m.index + ":" + (m.index + m[0].length);
         if (seen[key]) continue;
@@ -625,6 +630,24 @@
     return out.join("");
   }
 
+  function splitOnUnescaped(text, re) {
+    var pat = new RegExp(re.source, "g");
+    var out = [];
+    var pos = 0;
+    var m;
+    while ((m = pat.exec(text)) !== null) {
+      if (m[0].length === 0) { pat.lastIndex++; continue; }
+      if (m.index > 0 && text.charAt(m.index - 1) === "\\") {
+        pat.lastIndex = m.index + 1;
+        continue;
+      }
+      out.push(text.slice(pos, m.index));
+      pos = m.index + m[0].length;
+    }
+    out.push(text.slice(pos));
+    return out;
+  }
+
   function convertTabularEnvs(text) {
     var beginRe = /\\begin\{(tabular\*?)\}/g;
     var out = [];
@@ -668,10 +691,10 @@
       body = body.replace(/\\cline\{[^}]*\}/g, "");
       body = body.replace(/\\cmidrule(?:\([^)]*\))?\{[^}]*\}/g, "");
       body = unwrapMulticolumn(body);
-      var rawRows = body.split(/(?<!\\)\\\\(?:\[[^\]]*\])?\*?|\\tabularnewline(?![A-Za-z@])/);
+      var rawRows = splitOnUnescaped(body, /\\\\(?:\[[^\]]*\])?\*?|\\tabularnewline(?![A-Za-z@])/g);
       var rowLines = [];
       for (var ri = 0; ri < rawRows.length; ri++) {
-        var rawCells = rawRows[ri].split(/(?<!\\)&/);
+        var rawCells = splitOnUnescaped(rawRows[ri], /&/g);
         var cells = [];
         var anyNonEmpty = false;
         for (var ci = 0; ci < rawCells.length; ci++) {
@@ -694,11 +717,15 @@
       var changed = false;
       text = text.replace(listRe, function (_full, kind, body) {
         changed = true;
-        var itemRe = /(?<!\\)\\item(?![A-Za-z@])(?:\[([^\]]*)\])?/g;
+        var itemRe = /\\item(?![A-Za-z@])(?:\[([^\]]*)\])?/g;
         var parts = [];
         var lastPos = 0;
         var im;
         while ((im = itemRe.exec(body)) !== null) {
+          if (im.index > 0 && body.charAt(im.index - 1) === "\\") {
+            itemRe.lastIndex = im.index + 1;
+            continue;
+          }
           parts.push(body.slice(lastPos, im.index));
           parts.push(im[1]);
           lastPos = im.index + im[0].length;
@@ -862,10 +889,86 @@
     s = convertTabularEnvs(s);
     s = convertListEnvs(s);
 
-    s = s.replace(/(?<!\\)\$\$([\s\S]+?)(?<!\\)\$\$/g, "$1");
-    s = s.replace(/(?<!\\)\\\[([\s\S]+?)(?<!\\)\\\]/g, "$1");
-    s = s.replace(/(?<!\\)\\\(([\s\S]+?)(?<!\\)\\\)/g, "$1");
-    s = s.replace(/(?<!\\)\$(?!\$)((?:\\.|[^$\n\\])+?)(?<!\\)\$/g, "$1");
+    function unwrapPairedDelim(text, openRe, closeRe) {
+      var out = [];
+      var pos = 0;
+      var oRe = new RegExp(openRe.source, "g");
+      var cRe = new RegExp(closeRe.source, "g");
+      while (pos < text.length) {
+        oRe.lastIndex = pos;
+        var om = oRe.exec(text);
+        while (om && om.index > 0 && text.charAt(om.index - 1) === "\\") {
+          oRe.lastIndex = om.index + 1;
+          om = oRe.exec(text);
+        }
+        if (!om) {
+          out.push(text.slice(pos));
+          break;
+        }
+        var innerStart = om.index + om[0].length;
+        cRe.lastIndex = innerStart;
+        var cm = cRe.exec(text);
+        while (cm && cm.index > 0 && text.charAt(cm.index - 1) === "\\") {
+          cRe.lastIndex = cm.index + 1;
+          cm = cRe.exec(text);
+        }
+        if (!cm || cm.index === innerStart) {
+          out.push(text.slice(pos, innerStart));
+          pos = innerStart;
+          continue;
+        }
+        out.push(text.slice(pos, om.index));
+        out.push(text.slice(innerStart, cm.index));
+        pos = cm.index + cm[0].length;
+      }
+      return out.join("");
+    }
+
+    function unwrapInlineDollar(text) {
+      var out = [];
+      var pos = 0;
+      var oRe = /\$(?!\$)/g;
+      while (pos < text.length) {
+        oRe.lastIndex = pos;
+        var om = oRe.exec(text);
+        while (om && om.index > 0 && text.charAt(om.index - 1) === "\\") {
+          oRe.lastIndex = om.index + 1;
+          om = oRe.exec(text);
+        }
+        if (!om) {
+          out.push(text.slice(pos));
+          break;
+        }
+        var innerStart = om.index + 1;
+        var scanRe = /\\.|[\$\n]/g;
+        scanRe.lastIndex = innerStart;
+        var sm;
+        var closeIdx = -1;
+        while ((sm = scanRe.exec(text)) !== null) {
+          if (sm[0] === "\n") break;
+          if (sm[0] === "$") {
+            if (sm.index > innerStart && text.charAt(sm.index - 1) !== "\\") {
+              closeIdx = sm.index;
+            }
+            break;
+          }
+        }
+        if (closeIdx < 0) {
+          out.push(text.slice(pos, innerStart));
+          pos = innerStart;
+        } else {
+          out.push(text.slice(pos, om.index));
+          out.push(text.slice(innerStart, closeIdx));
+          pos = closeIdx + 1;
+        }
+      }
+      return out.join("");
+    }
+
+    s = unwrapPairedDelim(s, /\$\$/, /\$\$/);
+    s = unwrapPairedDelim(s, /\\\[/, /\\\]/);
+    s = unwrapPairedDelim(s, /\\\(/, /\\\)/);
+    s = unwrapInlineDollar(s);
 
     s = s.replace(/\\(times|pm|leq|le|geq|ge|approx)(?![A-Za-z@])/g, function (full, name, offset) {
       return evenBackslashes(s, offset) ? MATH_SYMBOLS[name] : full;
@@ -888,7 +991,9 @@
     }
     s = replaceBracedCommands(s, refMap, maskUrl);
 
-    s = s.replace(/(?<!\\)~/g, " ");
+    s = s.replace(/~/g, function (full, offset) {
+      return (offset > 0 && s.charAt(offset - 1) === "\\") ? full : " ";
+    });
 
     s = s.replace(/\\\\(?:\[[^\]]*\])?\*?/g, function (full, offset) {
       return evenBackslashes(s, offset) ? "\n" : full;
@@ -1102,7 +1207,7 @@
 
   var TOKEN_RE = /\{\{run:([A-Za-z0-9_-]+)\.([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*)\}\}/g;
   var LOOSE_TOKEN_RE = /\{\{run:([^}]*)\}\}/g;
-  var NUMBER_RE = /(?<![A-Za-z0-9_])\d+(?:\.\d+)?(?![A-Za-z0-9_])/g;
+  var NUMBER_RE = /\d+(?:\.\d+)?(?![A-Za-z0-9_])/g;
   var YEAR_RE = /^(?:19|20)\d{2}$/;
   var REVIEWER_COUNT_RE = /\b\d+\s+(?:reviewers|assessors|screeners)\b|\b(?:reviewers|assessors|screeners)\s*(?:=|:)\s*\d+/gi;
   var THRESHOLD_RE = /\b(?:threshold|cutoff|alpha|significance level|type I error)\b[^.!?]{0,30}?\d+(?:\.\d+)?\\?%?|\b(?:heterogeneity|I2|I\u00b2)\b[^.!?]{0,30}?\b(?:25|50|75)\s*\\?%|\b(?:90|95|99)\s*\\?%[~\s]*(?:CI|confidence)\b/gi;
@@ -1114,7 +1219,18 @@
   var DIR_UP_RE = /\b(?:increas\w*|higher|elevat\w*|greater)\b/i;
   var SIG_NEG_RE = /\b(?:not|no|without)\s+significan\w*|\bnon-?significan\w*/i;
   var SIG_RE = /\bsignificant(?:ly)?\b/i;
-  var SENTENCE_SPLIT = /(?<=[.!?])\s+/;
+
+  function execNumbers(str, cb) {
+    var re = new RegExp(NUMBER_RE.source, "g");
+    var m;
+    while ((m = re.exec(str)) !== null) {
+      if (m.index > 0 && /[A-Za-z0-9_]/.test(str.charAt(m.index - 1))) {
+        re.lastIndex = m.index + 1;
+        continue;
+      }
+      cb(m);
+    }
+  }
 
   var NUMBER_GATE_SECTIONS = ["abstract", "results"];
   var CLAIM_GATE_SECTIONS = ["abstract", "results", "discussion"];
@@ -1141,11 +1257,9 @@
       pat.lastIndex = 0;
       var m;
       while ((m = pat.exec(text)) !== null) {
-        var inner = new RegExp(NUMBER_RE.source, "g");
-        var n;
-        while ((n = inner.exec(m[0])) !== null) {
+        execNumbers(m[0], function (n) {
           allowed[(m.index + n.index) + ":" + (m.index + n.index + n[0].length)] = true;
-        }
+        });
       }
     }
     return allowed;
@@ -1163,12 +1277,10 @@
       var masked = maskTokens(text);
       var allowed = gated ? allowedNumbers(text) : {};
       if (gated) {
-        var numRe = new RegExp(NUMBER_RE.source, "g");
-        var nm;
-        while ((nm = numRe.exec(masked)) !== null) {
+        execNumbers(masked, function (nm) {
           var raw = nm[0];
           var spanKey = nm.index + ":" + (nm.index + raw.length);
-          if (YEAR_RE.test(raw) || allowed[spanKey]) continue;
+          if (YEAR_RE.test(raw) || allowed[spanKey]) return;
           violations.push({
             gate: "untokenised_number",
             section: sid || heading,
@@ -1176,7 +1288,7 @@
             end: nm.index + raw.length,
             number: raw
           });
-        }
+        });
       }
       var tokRe = new RegExp(TOKEN_RE.source, "g");
       var tm;
@@ -1285,11 +1397,18 @@
   }
 
   function sentencesOf(text) {
-    var parts = String(text || "").split(SENTENCE_SPLIT);
+    var s = String(text || "");
+    var re = /([.!?])\s+/g;
     var out = [];
-    for (var i = 0; i < parts.length; i++) {
-      if (parts[i].trim()) out.push(parts[i]);
+    var pos = 0;
+    var m;
+    while ((m = re.exec(s)) !== null) {
+      var seg = s.slice(pos, m.index + 1);
+      if (seg.trim()) out.push(seg);
+      pos = m.index + m[0].length;
     }
+    var tail = s.slice(pos);
+    if (tail.trim()) out.push(tail);
     return out;
   }
 

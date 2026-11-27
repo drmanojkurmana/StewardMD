@@ -161,6 +161,32 @@ describe("research-ondevice-pdf native job (phase 05)", () => {
     assert.equal(job.log.cancel.length, 1);
   });
 
+  test("abort while sleeping in wait() clears timer via opts.clock, cancels native job, and rejects immediately (Item 10)", async () => {
+    const { pdfjs } = makeFakePdfjs([{ items: [] }]);
+    const ac = new AbortController();
+    const job = makeFakeJob([{ state: "running", donePages: [] }]);
+    let cleared = 0;
+    const fakeClock = {
+      setTimeout: (fn, ms) => setTimeout(fn, ms),
+      clearTimeout: (id) => { cleared += 1; clearTimeout(id); }
+    };
+    const t0 = Date.now();
+    const p = ondevice.extract(fakeBytes("abort-during-wait"), {
+      pdfjs,
+      nativeJob: job,
+      nativePollMs: 30000,
+      clock: fakeClock,
+      signal: ac.signal
+    });
+    setTimeout(() => ac.abort(), 15);
+    await assert.rejects(p, (e) => e && e.code === "aborted");
+    assert.ok(Date.now() - t0 < 1000, "aborted immediately without waiting 30s");
+    assert.equal(cleared >= 1, true, "wait timer cleared");
+    assert.equal(job.log.cancel.length, 1, "native job cancelled");
+    assert.equal(job.log.removed.length, 1, "temp PDF removed");
+    assert.equal(job.log.listenerRemoved, 1, "progress listener removed");
+  });
+
   test("job cannot start (older build): scanned pages are read page by page instead", async () => {
     const { pdfjs } = makeFakePdfjs([{ items: [] }, { items: TEXT_ITEMS }]);
     const job = makeFakeJob([{ state: "done" }], { startError: "not implemented" });

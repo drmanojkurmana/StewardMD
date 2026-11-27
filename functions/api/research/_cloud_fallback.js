@@ -15,6 +15,7 @@
  * (deduped in MAIK_KV when bound), and exposed on the admin ops endpoint.
  */
 import { getEntitlement, effectiveTierFor } from "../../_entitlements.js";
+import { lookupUidByEmail } from "../../_fbadmin.js";
 import { CLOUD_FALLBACKS_PER_MONTH, CLOUD_FALLBACK_MESSAGES } from "./_caps.js";
 
 export const CONTAINER_ALERT_THRESHOLDS_MIN = [
@@ -61,6 +62,7 @@ export async function resolveUserPlan(env, uid, claims, nowMs = Date.now()) {
   } catch {
     rec = null;
   }
+  const hasRecTier = !!(rec && rec.tier != null && String(rec.tier).trim() !== "");
   let tier = "free";
   try {
     /* _entitlements stores Trainee as "trainee"; older records and the billing plan key say "student". */
@@ -72,9 +74,37 @@ export async function resolveUserPlan(env, uid, claims, nowMs = Date.now()) {
   }
   /* Report Trainee under the billing plan key the allowance table and the app use. */
   if (tier === "trainee") tier = "student";
+  /* Co-Resident seat #2 is linked via KV ai:pool:em:<email> -> "em:" + ownerEmail
+   * without writing entitlements/{seat2Uid}.tier. Resolve the pool owner's active
+   * "coresident" entitlement while keeping fallback usage metered per seat uid. */
+  if (tier === "free" && env && claims && typeof claims.email === "string" && claims.email.trim()) {
+    const kv = env.MAIK_KV || env.CASES_KV || env.GHIS_KV || env.UPDATES_KV || null;
+    const seatEmail = claims.email.trim().toLowerCase();
+    let pooled = null;
+    try {
+      if (kv && typeof kv.get === "function") pooled = await kv.get("ai:pool:em:" + seatEmail);
+    } catch {
+      pooled = null;
+    }
+    if (typeof pooled === "string" && pooled.indexOf("em:") === 0) {
+      const ownerEmail = pooled.slice(3).trim().toLowerCase();
+      if (ownerEmail && ownerEmail !== seatEmail) {
+        try {
+          const ownerUser = await lookupUidByEmail(env, ownerEmail);
+          const ownerUid = ownerUser && ownerUser.uid;
+          if (ownerUid) {
+            const ownerRec = await getEntitlement(env, ownerUid);
+            if (effectiveTierFor(ownerRec, nowMs) === "coresident") tier = "coresident";
+          }
+        } catch { /* fail closed to free */ }
+      }
+    }
+  }
   /* Founding coupons and legacy Pro set claims.pro=true on Firebase token;
-   * free trials live on claims.freePro/promo and stay excluded from paid fallback. */
-  if (tier === "free" && claims && claims.pro === true && (!claims.proExp || Number(claims.proExp) > nowMs)) {
+   * 7-day trials (claims.source === "trial") and explicit/expired entitlements/{uid}.tier
+   * are never promoted to "pro" here. */
+  const isTrialClaim = String((claims && claims.source) || "").trim().toLowerCase() === "trial";
+  if (!hasRecTier && tier === "free" && !isTrialClaim && claims && claims.pro === true && (!claims.proExp || Number(claims.proExp) > nowMs)) {
     tier = "pro";
   }
   return Object.prototype.hasOwnProperty.call(CLOUD_FALLBACKS_PER_MONTH, tier) ? tier : "free";
@@ -137,7 +167,6 @@ export function sanitizeFallbackMetadata(fallback) {
           try: Number.isFinite(r.try) ? r.try : undefined,
           rule: String(r.rule || r.code || "").slice(0, 80),
           code: String(r.code || "").slice(0, 80),
-          detail: r.detail ? String(r.detail).slice(0, 120) : undefined,
         };
       })
     : [];
@@ -159,20 +188,27 @@ export function sanitizeFallbackMetadata(fallback) {
   };
 }
 
-export async function recordCloudFallbackUsed(db, { uid, projectId, kind, jobId, fallback, nowMs = Date.now() }) {
+export async function recordCloudFallbackUsed(db, { uid, projectId, kind, jobId, fallback, allowance, nowMs = Date.now() }) {
   if (jobId) {
     const existing = await db.prepare(
       "SELECT id FROM research_cloud_fallbacks WHERE job_id=? AND status='used' LIMIT 1")
       .bind(jobId).first();
-    if (existing) return existing.id;
+    if (existing) return { ok: true, id: existing.id };
   }
   const { month } = utcMonthRange(nowMs);
   const id = randId();
   const reasonJson = JSON.stringify(sanitizeFallbackMetadata(fallback));
-  await db.prepare(
-    "INSERT INTO research_cloud_fallbacks (id,uid,project_id,kind,job_id,month,status,reason_json,created_ts) VALUES (?,?,?,?,?,?,'used',?,?)")
-    .bind(id, uid, projectId || "", kind, jobId || "", month, reasonJson, nowMs).run();
-  return id;
+  const cap = Number.isFinite(allowance) ? Math.max(0, Math.floor(allowance)) : 0;
+  const res = await db.prepare(
+    "INSERT INTO research_cloud_fallbacks (id,uid,project_id,kind,job_id,month,status,reason_json,created_ts) " +
+    "SELECT ?,?,?,?,?,?,'used',?,? " +
+    "WHERE (SELECT COUNT(*) FROM research_cloud_fallbacks WHERE uid=? AND month=? AND status='used') < ?")
+    .bind(id, uid, projectId || "", kind, jobId || "", month, reasonJson, nowMs, uid, month, cap).run();
+  if (!res || !res.meta || !res.meta.changes) {
+    const code = cap === 0 ? "cloud_fallback_free" : "cloud_fallback_limit";
+    return { ok: false, http: 402, code, message: CLOUD_FALLBACK_MESSAGES[code] };
+  }
+  return { ok: true, id };
 }
 
 export function isRefundableFallbackError(errorCode) {

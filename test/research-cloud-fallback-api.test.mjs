@@ -22,6 +22,12 @@ const CLAIMS = {
   "tok-physpro": { sub: "u_physpro", email: "physpro@example.com", name: "Dr PhysPro" },
   "tok-founding": { sub: "u_founding", email: "founding@example.com", pro: true, name: "Dr Founding" },
   "tok-colleague": { sub: "u_colleague", email: "colleague@example.com", name: "Dr Colleague" },
+  "tok-trial": { sub: "u_trial", email: "trial@example.com", pro: true, source: "trial", proExp: Date.now() + 86400000, name: "Dr Trial" },
+  "tok-downgraded": { sub: "u_downgraded", email: "downgraded@example.com", pro: true, proExp: Date.now() + 86400000, name: "Dr Downgraded" },
+  "tok-expired": { sub: "u_expired", email: "expired@example.com", pro: true, proExp: Date.now() + 86400000, name: "Dr Expired" },
+  "tok-seat2": { sub: "u_seat2", email: "seat2@example.com", name: "Dr Seat2" },
+  "tok-cores-exp": { sub: "u_cores_exp", email: "coresexp@example.com", name: "Dr CoResExp" },
+  "tok-seat2-exp": { sub: "u_seat2_exp", email: "seat2exp@example.com", name: "Dr Seat2Exp" },
 };
 
 const ENTITLEMENTS = {
@@ -33,6 +39,12 @@ const ENTITLEMENTS = {
   u_physpro: { tier: "physicianpro" },
   u_founding: null,
   u_colleague: { tier: "pro" },
+  u_trial: null,
+  u_downgraded: { tier: "free", tierExp: null },
+  u_expired: { tier: "student", tierExp: Date.now() - 60000 },
+  u_seat2: null,
+  u_cores_exp: { tier: "coresident", tierExp: Date.now() - 60000 },
+  u_seat2_exp: null,
 };
 
 const realAuth = await import("../functions/_fbauth.js");
@@ -52,8 +64,22 @@ mock.module("../functions/_entitlements.js", {
   },
 });
 
+const realFbAdmin = await import("../functions/_fbadmin.js");
+mock.module("../functions/_fbadmin.js", {
+  namedExports: {
+    ...realFbAdmin,
+    lookupUidByEmail: async (_env, email) => {
+      const e = String(email || "").trim().toLowerCase();
+      for (const c of Object.values(CLAIMS)) {
+        if (String(c.email || "").toLowerCase() === e) return { uid: c.sub, email: e, name: c.name || "" };
+      }
+      return null;
+    },
+  },
+});
+
 mock.module("../functions/api/ai/[[path]].js", {
-  namedExports: { callGemini: async () => ({ text: "ok", inTok: 1, outTok: 1 }) },
+  namedExports: { callGemini: async () => ({ text: "ok", inTok: 120, outTok: 60 }) },
 });
 mock.module("../functions/api/billing/[[path]].js", {
   namedExports: {
@@ -64,9 +90,10 @@ mock.module("../functions/api/billing/[[path]].js", {
 });
 
 const { onRequest } = await import("../functions/api/research/[[path]].js");
-const { utcMonthRange } = await import("../functions/api/research/_cloud_fallback.js");
+const { utcMonthRange, sanitizeFallbackMetadata, recordCloudFallbackUsed } = await import("../functions/api/research/_cloud_fallback.js");
 const { CLOUD_FALLBACKS_PER_MONTH } = await import("../functions/api/research/_caps.js");
-const { expireLostJobs, LOST_JOB_MS } = await import("../functions/api/research/_credits.js");
+const { expireLostJobs, outstandingReserves, institutionBalance, LOST_JOB_MS } = await import("../functions/api/research/_credits.js");
+const { mintJobToken } = await import("../functions/api/research/_gateway.js");
 const SCHEMA = readFileSync(new URL("../functions/db/research_schema.sql", import.meta.url), "utf8");
 const SECRET = "test-cb-secret-p4";
 
@@ -568,4 +595,261 @@ test("0010 migration applies cleanly over 0001..0009, matches schema, and rolls 
 
   db.exec(readFileSync(new URL("../docs/research/contracts/phase-5/0010_rollback.sql", import.meta.url), "utf8"));
   assert.equal(db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='research_cloud_fallbacks'").get(), undefined);
+});
+
+test("item 3: client _fallbackPrechecked ignored and batch pdfIds enforces remaining >= fresh.length", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "free@example.com", 50000);
+  fundWallet(env, "student@example.com", 50000);
+  const fbMeta = { reasons: [{ try: 1, rule: "ocr-failed" }] };
+
+  // Seed a stored PDF on free account (uploaded without fallback)
+  const pf = await makeProject(env, "tok-free", "Free Precheck");
+  const upFree = await callForm(env, "v1/projects/" + pf.id + "/pdfs", "tok-free", pdfForm("pre-free", null));
+  assert.equal(upFree.http, 201);
+
+  // Client spoofing _fallbackPrechecked: true in body MUST NOT bypass 402 check
+  const spoof = await call(env, "POST", "v1/projects/" + pf.id + "/jobs", "tok-free", {
+    kind: "pdf_extract",
+    pdfId: upFree.pdf.id,
+    idempotencyKey: "spoof-precheck",
+    fallback: fbMeta,
+    _fallbackPrechecked: true,
+  });
+  assert.equal(spoof.http, 402);
+  assert.equal(spoof.error.code, "cloud_fallback_free");
+  assert.equal(env.RESEARCH_QUEUE._msgs.length, 0);
+
+  // Student with 13/15 used (remaining = 2): batch of 3 PDFs with fallback MUST 402 without queueing any
+  const ps = await makeProject(env, "tok-student", "Batch Quota");
+  const { month } = utcMonthRange(Date.now());
+  for (let i = 0; i < 13; i++) {
+    env.RESEARCH_DB._db.prepare(
+      "INSERT INTO research_cloud_fallbacks (id,uid,project_id,kind,job_id,month,status,reason_json,created_ts) VALUES (?,'u_student',?,'pdf',?,?,'used','{}',?)")
+      .run("b_" + i, ps.id, "jb_" + i, month, Date.now());
+  }
+  const pdfIds = [];
+  for (let i = 0; i < 3; i++) {
+    const up = await callForm(env, "v1/projects/" + ps.id + "/pdfs", "tok-student", pdfForm("batch-" + i, null));
+    assert.equal(up.http, 201);
+    pdfIds.push(up.pdf.id);
+  }
+  const batch3 = await call(env, "POST", "v1/projects/" + ps.id + "/jobs", "tok-student", {
+    kind: "pdf_extract",
+    pdfIds,
+    idempotencyKey: "batch-3",
+    fallback: fbMeta,
+  });
+  assert.equal(batch3.http, 402, JSON.stringify(batch3));
+  assert.equal(batch3.error.code, "cloud_fallback_limit");
+  assert.equal(env.RESEARCH_QUEUE._msgs.length, 0);
+
+  // Batch of 2 PDFs fits remaining=2 -> 202 and drops remaining to 0
+  const batch2 = await call(env, "POST", "v1/projects/" + ps.id + "/jobs", "tok-student", {
+    kind: "pdf_extract",
+    pdfIds: pdfIds.slice(0, 2),
+    idempotencyKey: "batch-2",
+    fallback: fbMeta,
+  });
+  assert.equal(batch2.http, 202, JSON.stringify(batch2));
+  assert.equal(env.RESEARCH_QUEUE._msgs.length, 2);
+  const q = await call(env, "GET", "v1/me/research-cloud", "tok-student");
+  assert.equal(q.used, 15);
+  assert.equal(q.remaining, 0);
+});
+
+test("item 4: trial, downgraded, expired entitlements stay free; coresident seat #2 resolves pool owner per-seat", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "seat2@example.com", 50000);
+  await env.MAIK_KV.put("ai:pool:em:seat2@example.com", "em:cores@example.com");
+  await env.MAIK_KV.put("ai:pool:em:seat2exp@example.com", "em:coresexp@example.com");
+
+  for (const tok of ["tok-trial", "tok-downgraded", "tok-expired", "tok-seat2-exp"]) {
+    const r = await call(env, "GET", "v1/me/research-cloud", tok);
+    assert.equal(r.http, 200, tok + ": " + JSON.stringify(r));
+    assert.equal(r.plan, "free", tok + " must resolve to free");
+    assert.equal(r.allowance, 0, tok + " allowance must be 0");
+  }
+
+  // Co-Resident seat #2 gets 15/month from active pool owner, metered per seat uid
+  const s2 = await call(env, "GET", "v1/me/research-cloud", "tok-seat2");
+  assert.equal(s2.http, 200);
+  assert.equal(s2.plan, "coresident");
+  assert.equal(s2.allowance, 15);
+  assert.equal(s2.remaining, 15);
+
+  const p2 = await makeProject(env, "tok-seat2", "Seat2 Proj");
+  const up2 = await callForm(env, "v1/projects/" + p2.id + "/pdf-uploads", "tok-seat2",
+    pdfForm("seat2-1", { reasons: [{ try: 1, rule: "ocr-failed" }] }));
+  assert.equal(up2.http, 201, JSON.stringify(up2));
+
+  const s2After = await call(env, "GET", "v1/me/research-cloud", "tok-seat2");
+  const ownerAfter = await call(env, "GET", "v1/me/research-cloud", "tok-cores");
+  assert.equal(s2After.used, 1);
+  assert.equal(s2After.remaining, 14);
+  assert.equal(ownerAfter.used, 0, "usage must be metered per seat uid, not owner uid");
+  assert.equal(ownerAfter.remaining, 15);
+});
+
+test("item 5: no double credit release after gateway settle, no repeated /to-cloud retries, daily cap uses conversion time", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  const db = env.RESEARCH_DB._db;
+  const p = await makeProject(env, "tok-pro", "Credit Safety");
+  seedManuscriptReady(env, p.id, "u_pro");
+
+  // Grant 2,000,000 micro-USD to an institution with u_pro as member
+  const instId = "inst_item5";
+  const initialGrant = 2000000;
+  db.prepare("INSERT INTO research_institutions (id,name,created_by,created_ts) VALUES (?,'Inst 5','admin',?)").run(instId, Date.now());
+  db.prepare("INSERT INTO research_institution_members (institution_id,uid,created_ts) VALUES (?,'u_pro',?)").run(instId, Date.now());
+  db.prepare("INSERT INTO research_credit_ledger (id,owner_type,owner_id,delta,reason,job_id,ts) VALUES ('g1','institution',?,?,'grant','',?)")
+    .run(instId, initialGrant, Date.now());
+
+  const dev = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-pro", {
+    kind: "manuscript_draft", runner: "device", idempotencyKey: "dev-gw-settle",
+  });
+  assert.equal(dev.http, 202, JSON.stringify(dev));
+
+  // Simulate 1 gateway LLM call during device run (writes -actual 'settle' row)
+  const tok = await mintJobToken(SECRET, dev.job.id, Math.floor(Date.now() / 1000) + 600);
+  const gwReq = new Request("https://stewardmd.in/api/research/v1/internal/llm", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: "Bearer " + tok },
+    body: JSON.stringify({
+      jobId: dev.job.id, projectId: p.id, userId: "u_pro",
+      tier: "T2", model: "researchmd-writer", prompt: "Draft outline", purpose: "write", stepId: "outline",
+    }),
+  });
+  const gwRes = await onRequest({ request: gwReq, env, params: { path: ["v1", "internal", "llm"] } });
+  assert.equal(gwRes.status, 200);
+
+  const settleRow = db.prepare("SELECT COALESCE(SUM(delta),0) AS s FROM research_credit_ledger WHERE job_id=? AND reason='settle'").get(dev.job.id);
+  assert.ok(settleRow.s < 0, "gateway call recorded negative settle delta");
+
+  // Device fails -> releases initial quote64 hold; hold_net is now 0 even though net ledger < 0
+  const df = await call(env, "POST", "v1/jobs/" + dev.job.id + "/device-fail", "tok-pro", { code: "device_failed", step: "section:methods" });
+  assert.equal(df.http, 200);
+
+  // Convert to cloud -> MUST re-reserve fresh quote64 (and NOT skip reservation)
+  const conv = await call(env, "POST", "v1/jobs/" + dev.job.id + "/to-cloud", "tok-pro", {
+    fallback: { reasons: [{ try: 1, rule: "device_failed" }] },
+  });
+  assert.equal(conv.http, 202, JSON.stringify(conv));
+  const reservesAfterConv = db.prepare("SELECT COUNT(*) AS n FROM research_credit_ledger WHERE job_id=? AND reason='reserve'").get(dev.job.id).n;
+  // 1 initial + 1 gateway + 1 fresh conversion reserve = 3
+  assert.equal(reservesAfterConv, 3);
+  const outstanding = await outstandingReserves(env.RESEARCH_DB, "institution", instId);
+  const quote64 = JSON.parse(db.prepare("SELECT ceilings_json FROM research_job_runs WHERE id=?").get(dev.job.id).ceilings_json).quoteMicroUsd;
+  assert.equal(outstanding, quote64, "outstandingReserves must equal single active quote64 hold");
+
+  // Calling /to-cloud again while queued MUST be rejected 409 already_converted
+  const retryWhileQueued = await call(env, "POST", "v1/jobs/" + dev.job.id + "/to-cloud", "tok-pro", {});
+  assert.equal(retryWhileQueued.http, 409);
+  assert.equal(retryWhileQueued.error.code, "already_converted");
+
+  // Container fails with gate_failed (non-refundable) -> settles/releases ONLY the single active reserve
+  const cbFail = await sendCallback(env, dev.job.id, {
+    jobId: dev.job.id,
+    idempotencyKey: dev.job.idempotencyKey,
+    status: "failed",
+    error: "gate_failed",
+    usage: { pages: 0, seconds: 10 },
+  });
+  assert.equal(cbFail.http, 200);
+  const balEnd = await institutionBalance(env.RESEARCH_DB, instId);
+  assert.equal(balEnd, initialGrant + settleRow.s, "no double credit release may mint free credits");
+
+  // Calling /to-cloud again on failed container job MUST be rejected 409 already_converted
+  const retryAfterFail = await call(env, "POST", "v1/jobs/" + dev.job.id + "/to-cloud", "tok-pro", {});
+  assert.equal(retryAfterFail.http, 409);
+  assert.equal(retryAfterFail.error.code, "already_converted");
+
+  // Daily cap bypass check: 3 yesterday device jobs converted today fill today's 3/project cap
+  const pCap = await makeProject(env, "tok-pro", "Yesterday Cap");
+  seedManuscriptReady(env, pCap.id, "u_pro");
+  const yesterday = Date.now() - 30 * 3600 * 1000;
+  for (let i = 0; i < 3; i++) {
+    const dJob = await call(env, "POST", "v1/projects/" + pCap.id + "/jobs", "tok-pro", {
+      kind: "manuscript_draft", runner: "device", idempotencyKey: "yest-" + i,
+    });
+    assert.equal(dJob.http, 202);
+    db.prepare("UPDATE research_job_runs SET created_ts=? WHERE id=?").run(yesterday, dJob.job.id);
+    const cRes = await call(env, "POST", "v1/jobs/" + dJob.job.id + "/to-cloud", "tok-pro", {});
+    assert.equal(cRes.http, 202, JSON.stringify(cRes));
+    assert.ok(cRes.job.createdTs > yesterday + 1000, "createdTs updated to conversion time");
+    db.prepare("UPDATE research_job_runs SET status='succeeded', completed_ts=? WHERE id=?").run(Date.now(), dJob.job.id);
+  }
+  const capHit = await call(env, "POST", "v1/projects/" + pCap.id + "/jobs", "tok-pro", {
+    kind: "manuscript_draft", runner: "container", idempotencyKey: "today-4th",
+  });
+  assert.equal(capHit.http, 429);
+  assert.equal(capHit.error.code, "cap_po_project_daily");
+});
+
+test("item 14: atomic conditional insert enforces monthly quota under concurrent fallback calls", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "student@example.com", 50000);
+  const p = await makeProject(env, "tok-student", "Atomic Quota");
+  const { month } = utcMonthRange(Date.now());
+  for (let i = 0; i < 14; i++) {
+    env.RESEARCH_DB._db.prepare(
+      "INSERT INTO research_cloud_fallbacks (id,uid,project_id,kind,job_id,month,status,reason_json,created_ts) VALUES (?,'u_student',?,'pdf',?,?,'used','{}',?)")
+      .run("at_" + i, p.id, "jat_" + i, month, Date.now());
+  }
+  // Concurrent direct calls to recordCloudFallbackUsed when remaining=1 -> strictly 1 succeeds, 1 returns 402
+  const [r1, r2] = await Promise.all([
+    recordCloudFallbackUsed(env.RESEARCH_DB, { uid: "u_student", projectId: p.id, kind: "pdf", jobId: "j_race_1", fallback: {}, allowance: 15 }),
+    recordCloudFallbackUsed(env.RESEARCH_DB, { uid: "u_student", projectId: p.id, kind: "pdf", jobId: "j_race_2", fallback: {}, allowance: 15 }),
+  ]);
+  const oks = [r1, r2].filter((r) => r.ok);
+  const fails = [r1, r2].filter((r) => !r.ok);
+  assert.equal(oks.length, 1);
+  assert.equal(fails.length, 1);
+  assert.equal(fails[0].http, 402);
+  assert.equal(fails[0].code, "cloud_fallback_limit");
+  const totalUsed = env.RESEARCH_DB._db.prepare("SELECT COUNT(*) AS n FROM research_cloud_fallbacks WHERE uid='u_student' AND month=? AND status='used'").get(month).n;
+  assert.equal(totalUsed, 15);
+});
+
+test("item 15: uploadPdf idempotent replay succeeds with fallback metadata even when quota is 0", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  const p = await makeProject(env, "tok-student", "Idem Upload");
+  const fbMeta = { reasons: [{ try: 1, rule: "ocr-failed" }] };
+
+  // First upload succeeds (remaining 15 -> 14 after job, here /pdfs only stores PDF)
+  const first = await callForm(env, "v1/projects/" + p.id + "/pdfs", "tok-student", pdfForm("idem-same", fbMeta));
+  assert.equal(first.http, 201);
+
+  // Exhaust remaining monthly fallback quota to 0
+  const { month } = utcMonthRange(Date.now());
+  for (let i = 0; i < 15; i++) {
+    env.RESEARCH_DB._db.prepare(
+      "INSERT INTO research_cloud_fallbacks (id,uid,project_id,kind,job_id,month,status,reason_json,created_ts) VALUES (?,'u_student',?,'pdf',?,?,'used','{}',?)")
+      .run("exh_" + i, p.id, "jexh_" + i, month, Date.now());
+  }
+
+  // Retry upload of same PDF with fallback metadata -> 200 idempotentReplay: true (not 402!)
+  const replay = await callForm(env, "v1/projects/" + p.id + "/pdfs", "tok-student", pdfForm("idem-same", fbMeta));
+  assert.equal(replay.http, 200, JSON.stringify(replay));
+  assert.equal(replay.idempotentReplay, true);
+  assert.equal(replay.pdf.id, first.pdf.id);
+
+  // New PDF with fallback at limit still returns 402 BEFORE R2 write
+  const r2Before = env.RESEARCH_R2._m.size;
+  const freshUp = await callForm(env, "v1/projects/" + p.id + "/pdfs", "tok-student", pdfForm("idem-new", fbMeta));
+  assert.equal(freshUp.http, 402);
+  assert.equal(freshUp.error.code, "cloud_fallback_limit");
+  assert.equal(env.RESEARCH_R2._m.size, r2Before);
+});
+
+test("item 16: sanitizeFallbackMetadata strips free-form detail field", { skip: SKIP }, () => {
+  const clean = sanitizeFallbackMetadata({
+    reasons: [{ try: 2, rule: "ocr-failed", code: "ocr_err", detail: "Patient Ramesh MRN 9912 col=dob" }],
+    device: { model: "iPhone16,1" },
+  });
+  assert.equal(clean.reasons.length, 1);
+  assert.equal(clean.reasons[0].try, 2);
+  assert.equal(clean.reasons[0].rule, "ocr-failed");
+  assert.equal(clean.reasons[0].code, "ocr_err");
+  assert.equal("detail" in clean.reasons[0], false);
 });

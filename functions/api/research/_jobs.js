@@ -17,9 +17,9 @@
  * is 409 idempotency_conflict.
  */
 import { PDF_MAX_BYTES, PDF_MAX_PAGES, PDF_MAX_SECONDS, BATCH_MAX,
-  PO_MAX_SECONDS, PO_MAX_CALLS, HARD_STOP_MESSAGES,
+  PO_MAX_SECONDS, PO_MAX_CALLS, HARD_STOP_MESSAGES, CLOUD_FALLBACK_MESSAGES,
   checkPdfJobCaps, checkPoJobCaps, validateJobMessage } from "./_caps.js";
-import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCredits, expireLostJobs } from "./_credits.js";
+import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCredits, activeJobReservation, expireLostJobs } from "./_credits.js";
 import { scan, phiCategories } from "./_phi.js";
 import { mintJobToken } from "./_gateway.js";
 import { gateManuscript, ingestManuscriptJob, tokenTable } from "./_manuscript.js";
@@ -78,10 +78,6 @@ export async function uploadPdf(ctx) {
   let form;
   try { form = await request.formData(); } catch { return err(400, "invalid_multipart", "Expected multipart PDF upload", requestId); }
   const fallback = parseFormFallback(form.get("fallback"));
-  if (fallback) {
-    const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims);
-    if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
-  }
   const file = form.get("file");
   if (!file || typeof file === "string") return err(400, "missing_file", "Upload one PDF in the file field", requestId);
   if (file.size < 8) return err(400, "invalid_body", "PDF must be at least 8 bytes", requestId);
@@ -101,6 +97,10 @@ export async function uploadPdf(ctx) {
     await db.prepare("UPDATE research_pdfs SET r2_key=? WHERE id=? AND r2_key=''").bind(fillKey, existing.id).run();
     const filled = await db.prepare("SELECT * FROM research_pdfs WHERE id=?").bind(existing.id).first();
     return json({ pdf: pdfOf(filled), idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+  }
+  if (fallback) {
+    const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims);
+    if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
   }
   let reportId = null;
   const rawReport = form.get("reportId");
@@ -131,7 +131,7 @@ export async function uploadPdf(ctx) {
 /* POST /v1/projects/{id}/jobs. Single pdfId, or a pdfIds batch (at most 20,
  * ceilings.md batch_too_large); batch entries derive deterministic keys
  * "<idempotencyKey>:<index>" so a replay returns the same jobs. */
-export async function createJob(ctx, body) {
+export async function createJob(ctx, body, opts = {}) {
   if (body && body.kind === "manuscript_draft") return createManuscriptJob(ctx, body);
   const { env, db, uid, claims, projectId, requestId, api } = ctx;
   const { json, err, audit, uuid, projectGate, gateErr } = api;
@@ -187,9 +187,19 @@ export async function createJob(ctx, body) {
   if (fresh.length) {
     const now = Date.now();
     const hasFallback = body.fallback != null && typeof body.fallback === "object" && !Array.isArray(body.fallback);
-    if (hasFallback && !body._fallbackPrechecked) {
-      const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims, now);
-      if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
+    const prechecked = !!(opts && opts.fallbackPrechecked);
+    let fallbackAllowance = opts && opts.fallbackStatus ? opts.fallbackStatus.allowance : null;
+    let fallbackRemaining = opts && opts.fallbackStatus ? opts.fallbackStatus.remaining : null;
+    if (hasFallback) {
+      if (!prechecked || fallbackAllowance == null || fallbackRemaining == null) {
+        const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims, now);
+        if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
+        fallbackAllowance = fbCheck.status.allowance;
+        fallbackRemaining = fbCheck.status.remaining;
+      }
+      if (fallbackRemaining < fresh.length) {
+        return err(402, "cloud_fallback_limit", CLOUD_FALLBACK_MESSAGES.cloud_fallback_limit, requestId);
+      }
     }
     const capBreach = await checkPdfJobCaps(db, projectId, uid, fresh.length, now);
     if (capBreach) return err(429, capBreach.code, capBreach.message, requestId);
@@ -200,6 +210,12 @@ export async function createJob(ctx, body) {
     for (const e of fresh) {
       const jobId = uuid("job_");
       const ceilings = { maxPages: PDF_MAX_PAGES, maxSeconds: PDF_MAX_SECONDS, quoteMicroUsd: quote };
+      if (hasFallback) {
+        const fbRec = await recordCloudFallbackUsed(db, {
+          uid, projectId, kind: "pdf", jobId, fallback: body.fallback, allowance: fallbackAllowance, nowMs: now,
+        });
+        if (!fbRec.ok) return err(fbRec.http, fbRec.code, fbRec.message, requestId);
+      }
       const reservation = await reserveCredits(db, env, uuid, { uid, email: claims && claims.email, jobId, quote });
       let row;
       try {
@@ -208,6 +224,7 @@ export async function createJob(ctx, body) {
         row = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(jobId).first();
       } catch (insertErr) {
         await releaseCredits(db, uuid, reservation);
+        if (hasFallback) await db.prepare("DELETE FROM research_cloud_fallbacks WHERE job_id=?").bind(jobId).run().catch(() => {});
         const raced = await db.prepare("SELECT * FROM research_job_runs WHERE project_id=? AND idempotency_key=?")
           .bind(projectId, e.key).first();
         if (raced) {
@@ -217,9 +234,6 @@ export async function createJob(ctx, body) {
           continue;
         }
         throw insertErr;
-      }
-      if (hasFallback) {
-        await recordCloudFallbackUsed(db, { uid, projectId, kind: "pdf", jobId, fallback: body.fallback, nowMs: now });
       }
       const message = {
         v: 1, jobId, kind: "pdf_extract", projectId, idempotencyKey: e.key,
@@ -682,9 +696,11 @@ export async function createManuscriptJob(ctx, body) {
 
   /* 5. Monthly cloud fallback allowance (if fallback payload present), then daily UTC caps: 3/project, 5/user. */
   const now = Date.now();
+  let fallbackAllowance = null;
   if (hasFallback) {
     const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims, now);
     if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
+    fallbackAllowance = fbCheck.status.allowance;
   }
   const capBreach = await checkPoJobCaps(db, projectId, uid, now);
   if (capBreach) return err(429, capBreach.code, capBreach.message, requestId);
@@ -763,7 +779,15 @@ export async function createManuscriptJob(ctx, body) {
     return json({ job: jobOf(row), manifest: snapshot, token, tokenExpiresAt: expiresAt, requestId }, 202, { "x-request-id": requestId });
   }
   if (hasFallback) {
-    await recordCloudFallbackUsed(db, { uid, projectId, kind: "draft", jobId, fallback: body.fallback, nowMs: now });
+    const fbRec = await recordCloudFallbackUsed(db, {
+      uid, projectId, kind: "draft", jobId, fallback: body.fallback, allowance: fallbackAllowance, nowMs: now,
+    });
+    if (!fbRec.ok) {
+      await releaseCredits(db, uuid, reservation);
+      await db.prepare("DELETE FROM research_job_runs WHERE id=?").bind(jobId).run().catch(() => {});
+      if (typeof env.RESEARCH_R2.delete === "function") await env.RESEARCH_R2.delete(snapshotKey).catch(() => {});
+      return err(fbRec.http, fbRec.code, fbRec.message, requestId);
+    }
   }
 
   /* 11. Build, validate and enqueue queue message. */
@@ -852,16 +876,9 @@ export async function cancelJob(ctx, jobId) {
 }
 
 async function releaseJobReserve(db, uuid, jobId) {
-  const reserveRow = await db.prepare(
-    "SELECT * FROM research_credit_ledger WHERE job_id=? AND reason='reserve' ORDER BY ts ASC LIMIT 1")
-    .bind(jobId).first();
-  if (!reserveRow) return;
-  await releaseCredits(db, uuid, {
-    ownerType: reserveRow.owner_type,
-    ownerId: reserveRow.owner_id,
-    quote: -reserveRow.delta,
-    jobId,
-  });
+  const reservation = await activeJobReservation(db, jobId);
+  if (!reservation) return;
+  await releaseCredits(db, uuid, reservation);
 }
 
 function isPlainObject(v) {
@@ -1144,8 +1161,11 @@ export async function convertJobToCloud(ctx, jobId, body) {
     return err(409, "job_settled", "This job is already finished", requestId);
 
   const out = parseJson(row.output_json, {});
-  if ((out.runner === "container" || out.runner === "cloud") && (row.status === "queued" || row.status === "running")) {
-    return json({ job: jobOf(row), idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+  if (out.runner === "container" || out.runner === "cloud") {
+    return err(409, "already_converted", "This job has already been moved to cloud", requestId);
+  }
+  if (out.runner !== "device") {
+    return err(409, "not_device_job", "Only device-run manuscript jobs can move to cloud", requestId);
   }
   if (!env.RESEARCH_QUEUE)
     return err(503, "queue_unavailable", "Research job queue is not provisioned", requestId);
@@ -1159,25 +1179,37 @@ export async function convertJobToCloud(ctx, jobId, body) {
   const capBreach = await checkPoJobCaps(db, row.project_id, uid, now, row.id);
   if (capBreach) return err(429, capBreach.code, capBreach.message, requestId);
 
-  /* Check if a credit hold is still active; failed device jobs released theirs. */
-  const ledgerNet = await db.prepare("SELECT COALESCE(SUM(delta),0) AS net FROM research_credit_ledger WHERE job_id=?")
-    .bind(row.id).first();
-  let newReservation = null;
-  if (!ledgerNet || Number(ledgerNet.net || 0) >= 0) {
+  /* Check if a credit hold is still active; failed device jobs released theirs.
+   * Gate strictly on reserve/release rows (ignoring settled gateway charges). */
+  const activeHold = await activeJobReservation(db, row.id);
+  let reserveQuote = 0;
+  if (!activeHold) {
     const ceilingsJson = parseJson(row.ceilings_json, {});
-    const quote = Number(ceilingsJson.quoteMicroUsd) > 0
+    reserveQuote = Number(ceilingsJson.quoteMicroUsd) > 0
       ? Number(ceilingsJson.quoteMicroUsd)
       : quoteAiCall(env, "T2") * PO_MAX_CALLS;
     const credits = await availableCredits(db, env, uid, claims && claims.email);
-    if (credits.availableMicroUsd < quote)
+    if (credits.availableMicroUsd < reserveQuote)
       return err(402, "insufficient_credits", "Not enough research credits for this job. Top up the MaiK wallet or ask your institution admin.", requestId);
-    newReservation = await reserveCredits(db, env, uuid, { uid, email: claims && claims.email, jobId: row.id, quote });
+  }
+
+  const fallbackMeta = isPlainObject(body) && isPlainObject(body.fallback) ? body.fallback : {};
+  const fbRec = await recordCloudFallbackUsed(db, {
+    uid, projectId: row.project_id, kind: "draft", jobId: row.id, fallback: fallbackMeta,
+    allowance: fbCheck.status.allowance, nowMs: now,
+  });
+  if (!fbRec.ok) return err(fbRec.http, fbRec.code, fbRec.message, requestId);
+
+  let newReservation = null;
+  if (!activeHold) {
+    newReservation = await reserveCredits(db, env, uuid, { uid, email: claims && claims.email, jobId: row.id, quote: reserveQuote });
   }
 
   const prevStatus = row.status;
   const prevError = row.error_code || "";
   const prevCompleted = row.completed_ts || null;
   const prevStarted = row.started_ts || null;
+  const prevCreatedTs = row.created_ts;
   const nextOut = Object.assign({}, out, { runner: "container" });
   delete nextOut.failedStep;
   let cutoffDate = out.cutoffDate || null;
@@ -1186,12 +1218,14 @@ export async function convertJobToCloud(ctx, jobId, body) {
     nextOut.cutoffDate = cutoffDate;
   }
 
-  await db.prepare(
-    "UPDATE research_job_runs SET status='queued', error_code='', started_ts=NULL, completed_ts=NULL, cancel_requested_ts=NULL, output_json=? WHERE id=?")
-    .bind(JSON.stringify(nextOut), row.id).run();
-
-  const fallbackMeta = isPlainObject(body) && isPlainObject(body.fallback) ? body.fallback : {};
-  await recordCloudFallbackUsed(db, { uid, projectId: row.project_id, kind: "draft", jobId: row.id, fallback: fallbackMeta, nowMs: now });
+  const upd = await db.prepare(
+    "UPDATE research_job_runs SET status='queued', error_code='', started_ts=NULL, completed_ts=NULL, cancel_requested_ts=NULL, created_ts=?, output_json=? WHERE id=? AND status IN ('queued','running','failed') AND output_json NOT LIKE '%\"runner\":\"container\"%' AND output_json NOT LIKE '%\"runner\":\"cloud\"%'")
+    .bind(now, JSON.stringify(nextOut), row.id).run();
+  if (!upd.meta || !upd.meta.changes) {
+    if (newReservation) await releaseCredits(db, uuid, newReservation);
+    await db.prepare("DELETE FROM research_cloud_fallbacks WHERE id=?").bind(fbRec.id).run().catch(() => {});
+    return err(409, "already_converted", "This job has already been moved to cloud", requestId);
+  }
 
   const input = { r2Key: row.input_r2_key };
   if (cutoffDate) input.cutoffDate = cutoffDate;
@@ -1208,8 +1242,8 @@ export async function convertJobToCloud(ctx, jobId, body) {
   if (!validateJobMessage(message)) {
     if (newReservation) await releaseCredits(db, uuid, newReservation);
     await db.prepare(
-      "UPDATE research_job_runs SET status=?, error_code=?, started_ts=?, completed_ts=?, output_json=? WHERE id=?")
-      .bind(prevStatus, prevError, prevStarted, prevCompleted, JSON.stringify(out), row.id).run();
+      "UPDATE research_job_runs SET status=?, error_code=?, started_ts=?, completed_ts=?, created_ts=?, output_json=? WHERE id=?")
+      .bind(prevStatus, prevError, prevStarted, prevCompleted, prevCreatedTs, JSON.stringify(out), row.id).run();
     await refundCloudFallbackForJob(db, row.id, "invalid_message").catch(() => {});
     return err(500, "invalid_message", "Job message failed the contract schema", requestId);
   }

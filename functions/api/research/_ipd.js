@@ -677,19 +677,29 @@ export async function createStatsJob(ctx, projectId, body) {
     return json({ job: statsJobOf(existing), idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
   }
   const hasFallback = body.fallback != null && typeof body.fallback === "object" && !Array.isArray(body.fallback);
+  let fallbackAllowance = null;
   if (hasFallback) {
     const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims);
     if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
+    fallbackAllowance = fbCheck.status.allowance;
   }
   if (!env.RESEARCH_QUEUE) return err(503, "queue_unavailable", "Research job queue is not provisioned", requestId);
   const jobId = uuid("job_"), now = Date.now();
+  if (hasFallback) {
+    const fbRec = await recordCloudFallbackUsed(db, {
+      uid, projectId, kind: "stats", jobId, fallback: body.fallback, allowance: fallbackAllowance, nowMs: now,
+    });
+    if (!fbRec.ok) return err(fbRec.http, fbRec.code, fbRec.message, requestId);
+  }
   const compliance = { ipdApproved: true, evidenceId: checked.ethicsEvidenceId };
   const ceilings = { maxSeconds, maxRows };
-  await db.prepare("INSERT INTO research_stats_jobs (id,project_id,kind,status,idempotency_key,dataset_id,input_r2_key,model_json,compliance_json,contains_ipd,evidence_id,ceilings_json,created_by,created_ts) VALUES (?,?, 'stats_model','queued',?,?,?,?,?,1,?,?,?,?)")
-    .bind(jobId, projectId, idempotencyKey, datasetId, dataset.storage_key, JSON.stringify(body.model),
-      JSON.stringify(compliance), checked.ethicsEvidenceId, JSON.stringify(ceilings), uid, now).run();
-  if (hasFallback) {
-    await recordCloudFallbackUsed(db, { uid, projectId, kind: "stats", jobId, fallback: body.fallback, nowMs: now });
+  try {
+    await db.prepare("INSERT INTO research_stats_jobs (id,project_id,kind,status,idempotency_key,dataset_id,input_r2_key,model_json,compliance_json,contains_ipd,evidence_id,ceilings_json,created_by,created_ts) VALUES (?,?, 'stats_model','queued',?,?,?,?,?,1,?,?,?,?)")
+      .bind(jobId, projectId, idempotencyKey, datasetId, dataset.storage_key, JSON.stringify(body.model),
+        JSON.stringify(compliance), checked.ethicsEvidenceId, JSON.stringify(ceilings), uid, now).run();
+  } catch (e) {
+    if (hasFallback) await db.prepare("DELETE FROM research_cloud_fallbacks WHERE job_id=?").bind(jobId).run().catch(() => {});
+    throw e;
   }
   const message = {
     v: 1, kind: "stats_model", jobId, projectId, idempotencyKey,

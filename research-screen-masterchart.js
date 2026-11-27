@@ -550,79 +550,82 @@
     };
   }
 
-  function runAnalysis() {
-    var S = stats();
-    var f = mc.form;
-    mc.error = "";
-    mc.notice = "";
-    if (mc.analysis === "describe") { runDescribe(); return; }
-    if (mc.analysis === "survival") { runSurvival(); return; }
-    if (mc.analysis === "matched") { runMatched(); return; }
-    try {
-      if (mc.analysis === "compare") {
-        if (!f.group || !f.outcomes.length) {
-          mc.error = "Pick a group column and tick at least one outcome.";
-          draw();
-          return;
-        }
-        var items = [];
-        var warnings = [];
-        var sentences = [];
-        for (var i = 0; i < f.outcomes.length; i++) {
-          var name = f.outcomes[i];
-          try {
-            var r = S.compare(colValues(name), colValues(f.group), { outcomeType: mc.types[name], paired: false });
-            var sentence = sentenceFor(r, name, groupLevels(f.group));
-            if (sentence) sentences.push(sentence);
-            if (r.dropped > 0) warnings.push(name + ": " + r.dropped + " rows were left out (missing values).");
-            items.push({ name: name, result: r, sentence: sentence });
-          } catch (e) {
-            items.push({ name: name, error: calm(e && e.message) });
-            warnings.push(name + ": " + calm(e && e.message));
-          }
-        }
-        mc.results = { kind: "compare", group: f.group, items: items, warnings: warnings, paragraph: sentences.join(" ") };
-      } else if (mc.analysis === "related") {
-        if (!f.a || !f.b || f.a === f.b) {
-          mc.error = "Pick two different number columns.";
-          draw();
-          return;
-        }
-        var rr = S.compare(colValues(f.b), colValues(f.a), { outcomeType: "numeric" });
-        var relSentence = sentenceFor(rr, f.b + " vs " + f.a, [f.a]);
-        mc.results = {
-          kind: "related", a: f.a, b: f.b,
-          items: [{ name: f.b + " vs " + f.a, result: rr, sentence: relSentence }],
-          warnings: rr.dropped > 0 ? [rr.dropped + " rows were left out (missing values)."] : [],
-          paragraph: relSentence
-        };
-      } else if (mc.analysis === "table1") {
-        if (!f.group || !f.variables.length) {
-          mc.error = "Pick a group column and tick at least one variable.";
-          draw();
-          return;
-        }
-        var t = S.table1(mc.rows, mc.columns, f.group, f.variables, typesMap());
-        mc.results = { kind: "table1", group: f.group, table: t, warnings: [], paragraph: "" };
-      } else if (mc.analysis === "linear") {
-        if (!onDeviceV2Enabled()) {
-          mc.stage = "question";
-          draw();
-          return;
-        }
-        if (!f.outcome || !f.predictors.length) {
-          mc.error = "Pick a number outcome and tick 1 to 6 factors.";
-          draw();
-          return;
-        }
-        if (f.predictors.length > 6) {
-          mc.error = "Tick at most 6 factors.";
-          draw();
-          return;
-        }
   function jobsRunner() {
     var j = G && G.SMD_RMD_JOBS;
     return (j && typeof j.runWithFallback === "function") ? j : null;
+  }
+
+  var IPD_TIERS = { anonymised_deid: 1, hipaa_lds: 1, coded_pseudonymised: 1 };
+
+  function ipdRequiredGroups(cfg) {
+    var jurisdictions = Array.isArray(cfg.jurisdictions) ? cfg.jurisdictions : [];
+    var tier = cfg.identifiabilityTier;
+    var basis = (cfg.legalBasis && typeof cfg.legalBasis === "object") ? cfg.legalBasis : {};
+    var groups = [["irb_approval", "exemption_waiver"]];
+    if (jurisdictions.indexOf("IN") >= 0 && basis.IN === "consent") {
+      groups.push(["consent_basis"]);
+    }
+    if (jurisdictions.indexOf("EU") >= 0) {
+      groups.push(["dpa"]);
+      if (basis.EU === "9_2_a_explicit_consent") groups.push(["consent_basis"]);
+    }
+    if (jurisdictions.indexOf("US") >= 0) {
+      if (tier === "anonymised_deid") groups.push(["safe_harbor", "expert_determination"]);
+      else {
+        groups.push(["baa"]);
+        if (tier === "hipaa_lds") groups.push(["dua"]);
+        else groups.push(["dua", "exemption_waiver", "authorization"]);
+      }
+    }
+    if (!jurisdictions.length) {
+      groups.push(["safe_harbor", "expert_determination"]);
+    }
+    return groups;
+  }
+
+  function isIpdComplianceSatisfied(cfg, list, now) {
+    if (!cfg || typeof cfg !== "object" || !IPD_TIERS[cfg.identifiabilityTier]) return false;
+    var jurisdictions = Array.isArray(cfg.jurisdictions) ? cfg.jurisdictions : [];
+    var basis = (cfg.legalBasis && typeof cfg.legalBasis === "object") ? cfg.legalBasis : {};
+    var att = (cfg.attestation && typeof cfg.attestation === "object") ? cfg.attestation : {};
+    var agreements = (cfg.agreements && typeof cfg.agreements === "object") ? cfg.agreements : {};
+    if (att.responsibility !== true) return false;
+    if (jurisdictions.indexOf("IN") >= 0) {
+      if (basis.IN === "dpdp_s17_2_b_research" && att.noIndividualDecisions !== true) return false;
+      if (att.pediatric === true && att.guardianConsent !== true) return false;
+    }
+    if (jurisdictions.indexOf("EU") >= 0) {
+      if (agreements.dpa !== true) return false;
+      if (att.dpia !== true) return false;
+      if (basis.EU === "9_2_j_scientific_research" &&
+        !(typeof att.memberStateLaw === "string" && att.memberStateLaw.replace(/^\s+|\s+$/g, ""))) {
+        return false;
+      }
+    }
+    if (jurisdictions.indexOf("US") >= 0 && cfg.identifiabilityTier !== "anonymised_deid" && agreements.baa !== true) {
+      return false;
+    }
+    if ((jurisdictions.indexOf("US") >= 0 && cfg.identifiabilityTier === "anonymised_deid") || !jurisdictions.length) {
+      if (att.noActualKnowledge !== true) return false;
+    }
+    var groups = ipdRequiredGroups(cfg);
+    var evList = Array.isArray(list) ? list : [];
+    var t = typeof now === "number" ? now : Date.now();
+    for (var gi = 0; gi < groups.length; gi++) {
+      var kinds = groups[gi];
+      var satisfied = false;
+      for (var ei = 0; ei < evList.length; ei++) {
+        var ev = evList[ei];
+        if (!ev || ev.status !== "approved") continue;
+        if (kinds.indexOf(ev.kind) < 0) continue;
+        var exp = ev.expiresTs != null ? ev.expiresTs : ev.expires_ts;
+        if (exp != null && !(Number(exp) > t)) continue;
+        satisfied = true;
+        break;
+      }
+      if (!satisfied) return false;
+    }
+    return true;
   }
 
   /* NOTE (MasterChart cloud stats): MasterChart runs over in-memory table rows
@@ -639,27 +642,36 @@
       SMD.api.request("GET", base + "/ipd-config").catch(function () { return null; }),
       SMD.api.request("GET", base + "/ipd-evidence").catch(function () { return null; })
     ]).then(function (pair) {
-      var cfg = pair[0] && (pair[0].config || pair[0]);
-      var list = (pair[1] && (pair[1].evidence || pair[1].items)) || [];
-      if (!cfg) return false;
-      for (var i = 0; i < list.length; i++) {
-        if (list[i] && list[i].status === "approved") return true;
-      }
-      return false;
+      var cfg = pair[0] && pair[0].config;
+      if (!cfg || !pair[1]) return false;
+      var list = pair[1].evidence || pair[1].items || [];
+      return isIpdComplianceSatisfied(cfg, list, Date.now());
     }, function () { return false; });
   }
 
   function runMcCloudFallback(targetPid, spec, fallbackMeta) {
-    if (!mc.ipdDatasetId || !targetPid || !SMD || !SMD.api || typeof SMD.api.request !== "function") {
+    var datasetId = mc.ipdDatasetId || (spec && spec.datasetId);
+    if (!datasetId || !targetPid || !SMD || !SMD.api || typeof SMD.api.request !== "function") {
       return Promise.resolve({
         unavailable: true,
         message: "Cloud analysis isn't available for this dataset yet"
       });
     }
+    var modelSpec = spec;
+    if (spec && (spec.family === "linear" || spec.family === "logistic") && !spec.formula && spec.outcome && spec.predictors) {
+      modelSpec = {
+        family: spec.family,
+        formula: spec.outcome + " ~ " + spec.predictors.join(" + "),
+        outcome: spec.outcome,
+        predictors: spec.predictors.slice(),
+        types: spec.types
+      };
+      if (spec.family === "linear") modelSpec.robust = spec.robust || null;
+    }
     var key = "mc_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
     return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(targetPid) + "/stats-jobs", {
-      datasetId: mc.ipdDatasetId,
-      model: spec,
+      datasetId: datasetId,
+      model: modelSpec,
       idempotencyKey: key,
       fallback: fallbackMeta
     });
@@ -741,6 +753,76 @@
     });
   }
 
+  function runAnalysis() {
+    var S = stats();
+    var f = mc.form;
+    mc.error = "";
+    mc.notice = "";
+    if (mc.analysis === "describe") { runDescribe(); return; }
+    if (mc.analysis === "survival") { runSurvival(); return; }
+    if (mc.analysis === "matched") { runMatched(); return; }
+    try {
+      if (mc.analysis === "compare") {
+        if (!f.group || !f.outcomes.length) {
+          mc.error = "Pick a group column and tick at least one outcome.";
+          draw();
+          return;
+        }
+        var items = [];
+        var warnings = [];
+        var sentences = [];
+        for (var i = 0; i < f.outcomes.length; i++) {
+          var name = f.outcomes[i];
+          try {
+            var r = S.compare(colValues(name), colValues(f.group), { outcomeType: mc.types[name], paired: false });
+            var sentence = sentenceFor(r, name, groupLevels(f.group));
+            if (sentence) sentences.push(sentence);
+            if (r.dropped > 0) warnings.push(name + ": " + r.dropped + " rows were left out (missing values).");
+            items.push({ name: name, result: r, sentence: sentence });
+          } catch (e) {
+            items.push({ name: name, error: calm(e && e.message) });
+            warnings.push(name + ": " + calm(e && e.message));
+          }
+        }
+        mc.results = { kind: "compare", group: f.group, items: items, warnings: warnings, paragraph: sentences.join(" ") };
+      } else if (mc.analysis === "related") {
+        if (!f.a || !f.b || f.a === f.b) {
+          mc.error = "Pick two different number columns.";
+          draw();
+          return;
+        }
+        var rr = S.compare(colValues(f.b), colValues(f.a), { outcomeType: "numeric" });
+        var relSentence = sentenceFor(rr, f.b + " vs " + f.a, [f.a]);
+        mc.results = {
+          kind: "related", a: f.a, b: f.b,
+          items: [{ name: f.b + " vs " + f.a, result: rr, sentence: relSentence }],
+          warnings: rr.dropped > 0 ? [rr.dropped + " rows were left out (missing values)."] : [],
+          paragraph: relSentence
+        };
+      } else if (mc.analysis === "table1") {
+        if (!f.group || !f.variables.length) {
+          mc.error = "Pick a group column and tick at least one variable.";
+          draw();
+          return;
+        }
+        var t = S.table1(mc.rows, mc.columns, f.group, f.variables, typesMap());
+        mc.results = { kind: "table1", group: f.group, table: t, warnings: [], paragraph: "" };
+      } else if (mc.analysis === "linear") {
+        if (!onDeviceV2Enabled()) {
+          mc.stage = "question";
+          draw();
+          return;
+        }
+        if (!f.outcome || !f.predictors.length) {
+          mc.error = "Pick a number outcome and tick 1 to 6 factors.";
+          draw();
+          return;
+        }
+        if (f.predictors.length > 6) {
+          mc.error = "Tick at most 6 factors.";
+          draw();
+          return;
+        }
         var linCols = [f.outcome].concat(f.predictors);
         var linSpec = {
           family: "linear",
@@ -2266,7 +2348,9 @@
     module.exports = {
       render: render, describeRule: describeRule, computeDescribeData: computeDescribeData,
       commonFeaturesFrom: commonFeaturesFrom, describeParagraph: describeParagraph,
-      buildKmPath: buildKmPath, riskAtTime: riskAtTime, buildMatchedPairs: buildMatchedPairs
+      buildKmPath: buildKmPath, riskAtTime: riskAtTime, buildMatchedPairs: buildMatchedPairs,
+      checkMcEthicsApproval: checkMcEthicsApproval, runMcCloudFallback: runMcCloudFallback,
+      isIpdComplianceSatisfied: isIpdComplianceSatisfied
     };
   }
 

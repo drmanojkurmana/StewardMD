@@ -711,7 +711,7 @@
           return decideP.then(function (decision) {
             var action = decision && decision.action;
             if (!action || action === "cancel") {
-              return updateCheckpoint(cp, jobKey, { running: false, finished: false, failCount: priorFailCount, reasons: reasons }).then(function (savedCp) {
+              return updateCheckpoint(cp, jobKey, { running: false, finished: false, failCount: 0, reasons: [] }).then(function (savedCp) {
                 emitStatus(opts, {
                   state: "cancelled_to_device",
                   kind: kind,
@@ -993,6 +993,7 @@
     COUNTED_ERROR_CODES: COUNTED_ERROR_CODES,
     isEnabled: isEnabled,
     classifyError: classifyError,
+    updateCheckpoint: updateCheckpoint,
     getDeviceMeta: getDeviceMeta,
     runWithFallback: runWithFallback,
     _setClock: function (clk) { _customClock = clk || null; }

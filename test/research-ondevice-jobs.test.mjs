@@ -499,3 +499,60 @@ test("holdClock stops the too-slow clock while a background job is paused by the
   assert.equal(out.source, "device");
   assert.equal(out.attempts, 1);
 });
+
+test("cancelled_to_device resets failCount so Try again retries on device and preserves checkpoint progress (Item 13)", async () => {
+  const cp = makeMemoryCp();
+  const clock = makeFakeClock(0);
+  let triesRun1 = 0;
+  const p1 = JOBS.runWithFallback(
+    "pdf",
+    async () => {
+      triesRun1++;
+      await JOBS.updateCheckpoint(cp, "pdf:p1:retry-after-cancel", { pages: [{ n: 1, text: "saved" }], running: true });
+      throw Object.assign(new Error("ocr boom"), { code: "ocr-failed" });
+    },
+    async () => assert.fail("cloud must not run on cancel"),
+    {
+      checkpointStore: cp,
+      jobKey: "pdf:p1:retry-after-cancel",
+      clock,
+      retryDelayMs: 5,
+      onNeedsCloud: async () => ({ action: "cancel" }),
+    }
+  );
+  await flushMicrotasks();
+  await clock.advance(5);
+  await clock.advance(5);
+  const out1 = await p1;
+  assert.equal(out1.state, "cancelled_to_device");
+  assert.equal(triesRun1, 3);
+
+  const savedAfterCancel = await cp.get("pdf:p1:retry-after-cancel");
+  assert.equal(savedAfterCancel.failCount, 0);
+  assert.equal(savedAfterCancel.pages[0].text, "saved");
+
+  let triesRun2 = 0;
+  let seenResume = null;
+  const p2 = JOBS.runWithFallback(
+    "pdf",
+    async (ctx) => {
+      triesRun2++;
+      seenResume = ctx.checkpoint;
+      return { pages: [{ n: 1, text: "saved" }, { n: 2, text: "done" }] };
+    },
+    async () => assert.fail("should retry on device instead of jumping straight to cloud"),
+    {
+      checkpointStore: cp,
+      jobKey: "pdf:p1:retry-after-cancel",
+      clock,
+      retryDelayMs: 5,
+      onNeedsCloud: async () => assert.fail("needs_cloud must not fire before 3 device tries"),
+    }
+  );
+  await flushMicrotasks();
+  const out2 = await p2;
+  assert.equal(triesRun2, 1);
+  assert.equal(out2.ok, true);
+  assert.equal(out2.source, "device");
+  assert.equal(seenResume.pages[0].text, "saved");
+});

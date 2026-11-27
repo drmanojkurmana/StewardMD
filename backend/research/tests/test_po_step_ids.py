@@ -169,3 +169,59 @@ def test_unusable_reply_is_asked_again_under_a_new_step_id():
     )
     assert resp["raw_response"] == "good"
     assert calls == ["refine:0:rev1", "refine:0:rev1:r1"]
+
+
+def test_build_section_order_matches_js_section_title_and_dedup(tmp_path):
+    outline = {
+        "plotting_plan": [],
+        "intro_related_work_plan": OUTLINE_JSON["intro_related_work_plan"],
+        "section_plan": [
+            {"section_title": "Abstract", "key_points": ["Summary"]},
+            {"section_title": "3. Methodology", "key_points": ["Design"]},
+            {"section_title": "Methods", "key_points": ["Stats"]},
+            {"section_title": "Methods", "key_points": ["Subgroup"]},
+            {"section_title": "§§§", "key_points": ["Non-ASCII"]},
+        ],
+    }
+    order = pipeline.build_section_order(outline)
+    assert [s["stepId"] for s in order] == [
+        "section:abstract",
+        "section:3-methodology",
+        "section:methods",
+        "section:methods-2",
+        "section:section-5",
+    ]
+    assert [s["id"] for s in order] == [
+        "abstract",
+        "3-methodology",
+        "methods",
+        "methods-2",
+        "section-5",
+    ]
+
+    sent = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        body = json.loads(request.content.decode("utf-8"))
+        sent.append(body.get("stepId"))
+        return httpx.Response(200, json={
+            "text": "\\section{Sec}\nDraft {{run:r1.estimate}} \\cite{smith2020}",
+            "model": "gemini-2.5-flash",
+            "usage": {"inputTokens": 10, "outputTokens": 5},
+        })
+
+    client = GatewayLLMClient(
+        gateway_url="https://gw.test/v1/internal/llm",
+        job_token="tok",
+        http_client=httpx.Client(transport=httpx.MockTransport(handler)),
+        sleep=lambda _s: None,
+    )
+    manifest = make_manifest()
+    pipeline.run_section_draft(manifest, tmp_path, client, outline, with_literature=False)
+    assert sent == [
+        "section:abstract",
+        "section:3-methodology",
+        "section:methods",
+        "section:methods-2",
+        "section:section-5",
+    ]

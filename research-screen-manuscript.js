@@ -822,6 +822,8 @@
       return G.SMD_RMD_ONDEVICE_DRAFT.run(jobBundle, {
         resume: !!(resume || (resumeCtx && resumeCtx.resume)),
         signal: resumeCtx && resumeCtx.signal,
+        beginAiWait: resumeCtx && resumeCtx.beginAiWait,
+        endAiWait: resumeCtx && resumeCtx.endAiWait,
         apiRequest: wrappedApiRequest,
         onProgress: function (info) {
           if (resumeCtx && resumeCtx.touchStep && info && info.step) {
@@ -853,7 +855,7 @@
         return cloudRes;
       });
     }, {
-      jobKey: "draft:" + (jobId || pid),
+      jobKey: "runner:draft:" + (jobId || pid),
       projectId: pid,
       targetId: jobId || "draft",
       engine: "ondevice:draft",
@@ -880,7 +882,15 @@
         return;
       }
       st.poProgress = null;
-      if (out && out.state === "cancelled_to_device") {
+      var outState = out && out.state;
+      if ((outState === "cancelled_to_device" || outState === "cloud_fallback_free" || outState === "cloud_fallback_limit") &&
+          SMD.api && typeof SMD.api.request === "function" && (deferredFail || jobId)) {
+        var dfUrl = deferredFail ? deferredFail.url : ("/v1/jobs/" + encodeURIComponent(jobId) + "/device-fail");
+        var dfStep = (deferredFail && deferredFail.body && deferredFail.body.step) || "validate";
+        deferredFail = null;
+        SMD.api.request("POST", dfUrl, { code: "device_failed", step: dfStep }).catch(function () {});
+      }
+      if (outState === "cancelled_to_device") {
         st.poStatus = "paused";
         st.poError = null;
         checkResumeCheckpoint(target, pid);
@@ -923,7 +933,7 @@
       for (var i = 0; i < (items || []).length; i++) {
         var rec = items[i] && items[i].value;
         if (!rec || rec.projectId !== pid) continue;
-        if (rec.status === "succeeded" || rec.status === "failed") continue;
+        if (rec.status === "succeeded" || rec.status === "cancelled" || rec.finished === true) continue;
         if (!found || (rec.updatedAt || "") > (found.updatedAt || "")) {
           found = rec;
         }
@@ -958,6 +968,7 @@
         st.poResumeCheckpoint = null;
         if (G.SMD_RMD_CHECKPOINT && typeof G.SMD_RMD_CHECKPOINT.remove === "function") {
           G.SMD_RMD_CHECKPOINT.remove("draft:" + cp.jobId).catch(function () {});
+          G.SMD_RMD_CHECKPOINT.remove("runner:draft:" + cp.jobId).catch(function () {});
         }
         if (job && job.status === "succeeded") {
           st.poStatus = "succeeded";
@@ -1081,6 +1092,7 @@
       st.poResumeCheckpoint = null;
       if (G.SMD_RMD_CHECKPOINT && typeof G.SMD_RMD_CHECKPOINT.remove === "function") {
         G.SMD_RMD_CHECKPOINT.remove("draft:" + jid).catch(function () {});
+        G.SMD_RMD_CHECKPOINT.remove("runner:draft:" + jid).catch(function () {});
       }
       if (target) render(target);
     }).catch(function () {

@@ -526,8 +526,9 @@ export async function uploadPdfArtifact(ctx) {
   let form;
   try { form = await request.formData(); } catch { return err(400, "invalid_multipart", "Expected multipart PDF upload", requestId); }
   const fallback = parseFormFallback(form.get("fallback"));
+  let fbCheck = null;
   if (fallback) {
-    const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims);
+    fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims);
     if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
   }
   const file = form.get("file");
@@ -570,7 +571,11 @@ export async function uploadPdfArtifact(ctx) {
     }
   }
   /* Enqueue through the existing job machinery (caps, credits, queue, idempotency). */
-  const jobRes = await createJob(ctx, { kind: "pdf_extract", pdfId: pdf.id, idempotencyKey: "pdfup:" + sha256, fallback, _fallbackPrechecked: true });
+  const jobRes = await createJob(
+    ctx,
+    { kind: "pdf_extract", pdfId: pdf.id, idempotencyKey: "pdfup:" + sha256, fallback },
+    { fallbackPrechecked: true, fallbackStatus: fbCheck ? fbCheck.status : null }
+  );
   if (jobRes.status >= 400) return jobRes;
   const jobBody = await jobRes.json();
   const job = jobBody.job;

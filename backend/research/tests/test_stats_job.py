@@ -228,3 +228,25 @@ def test_unsettled_callback_keeps_result_for_replay(monkeypatch):
     out = run(make_msg(), storage, [])
     assert out["status"] == "done" and out["settled"] is False
     assert RESULT_KEY in storage.objects  # redelivery skips straight to callback
+
+
+def test_csv_parse_and_validation_value_errors_classify_as_dataset_invalid(callbacks):
+    # Non-numeric string in regression column -> ValueError with space-separated message -> dataset_invalid (not stats_failed)
+    bad_csv = b"y,x\n2,1\nNA,2\n5,3\n4,4\n"
+    msg = make_msg()
+    out = run(msg, FakeStorage({msg["input"]["r2Key"]: bad_csv}), callbacks)
+    assert out["status"] == "failed" and out["error"] == "dataset_invalid"
+
+    # Survival validation ValueError (negative time) -> dataset_invalid (not stats_failed)
+    neg_time_csv = b"time,event\n-1,1\n2,1\n3,0\n"
+    km_msg = make_msg()
+    km_msg["input"]["model"] = {"family": "km", "time": "time", "event": "event"}
+    out_km = run(km_msg, FakeStorage({km_msg["input"]["r2Key"]: neg_time_csv}), callbacks)
+    assert out_km["status"] == "failed" and out_km["error"] == "dataset_invalid"
+
+    # Empty JSON columns -> dataset_invalid (not stats_failed)
+    empty_json = json.dumps({"columns": {}}).encode()
+    j_msg = make_msg()
+    j_msg["input"]["r2Key"] = "projects/p1/data/snapshots/empty.json"
+    out_json = run(j_msg, FakeStorage({j_msg["input"]["r2Key"]: empty_json}), callbacks)
+    assert out_json["status"] == "failed" and out_json["error"] == "dataset_invalid"

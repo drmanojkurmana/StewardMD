@@ -183,24 +183,101 @@
     return Promise.reject(makeError("pdf-open-failed", "Unsupported PDF source"));
   }
 
+  var SHA_K = [
+    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+    0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+    0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+    0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+    0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+    0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+    0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+  ];
+
+  function rotr(x, n) { return (x >>> n) | (x << (32 - n)); }
+
+  function sha256BytesPure(u8) {
+    var len = u8.length;
+    var H = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
+    var W = new Array(64);
+    function compress(buf, off) {
+      var t, a, b, c, d, e, f, g, h, S1, ch, temp1, S0, maj, temp2, s0, s1;
+      for (t = 0; t < 16; t++) {
+        W[t] = ((buf[off + t * 4] << 24) | (buf[off + t * 4 + 1] << 16) |
+          (buf[off + t * 4 + 2] << 8) | buf[off + t * 4 + 3]) >>> 0;
+      }
+      for (t = 16; t < 64; t++) {
+        s0 = rotr(W[t - 15], 7) ^ rotr(W[t - 15], 18) ^ (W[t - 15] >>> 3);
+        s1 = rotr(W[t - 2], 17) ^ rotr(W[t - 2], 19) ^ (W[t - 2] >>> 10);
+        W[t] = (W[t - 16] + s0 + W[t - 7] + s1) >>> 0;
+      }
+      a = H[0]; b = H[1]; c = H[2]; d = H[3]; e = H[4]; f = H[5]; g = H[6]; h = H[7];
+      for (t = 0; t < 64; t++) {
+        S1 = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25);
+        ch = (e & f) ^ ((~e) & g);
+        temp1 = (h + S1 + ch + SHA_K[t] + W[t]) >>> 0;
+        S0 = rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22);
+        maj = (a & b) ^ (a & c) ^ (b & c);
+        temp2 = (S0 + maj) >>> 0;
+        h = g; g = f; f = e; e = (d + temp1) >>> 0;
+        d = c; c = b; b = a; a = (temp1 + temp2) >>> 0;
+      }
+      H[0] = (H[0] + a) >>> 0; H[1] = (H[1] + b) >>> 0;
+      H[2] = (H[2] + c) >>> 0; H[3] = (H[3] + d) >>> 0;
+      H[4] = (H[4] + e) >>> 0; H[5] = (H[5] + f) >>> 0;
+      H[6] = (H[6] + g) >>> 0; H[7] = (H[7] + h) >>> 0;
+    }
+    var fullEnd = len - (len % 64);
+    var i;
+    for (i = 0; i < fullEnd; i += 64) {
+      compress(u8, i);
+    }
+    var rem = len - fullEnd;
+    var tailLen = rem < 56 ? 64 : 128;
+    var tail = new Uint8Array(tailLen);
+    for (i = 0; i < rem; i++) tail[i] = u8[fullEnd + i];
+    tail[rem] = 0x80;
+    var bitLen = len * 8;
+    var hi = Math.floor(bitLen / 0x100000000);
+    var lo = bitLen >>> 0;
+    tail[tailLen - 8] = (hi >>> 24) & 0xff;
+    tail[tailLen - 7] = (hi >>> 16) & 0xff;
+    tail[tailLen - 6] = (hi >>> 8) & 0xff;
+    tail[tailLen - 5] = hi & 0xff;
+    tail[tailLen - 4] = (lo >>> 24) & 0xff;
+    tail[tailLen - 3] = (lo >>> 16) & 0xff;
+    tail[tailLen - 2] = (lo >>> 8) & 0xff;
+    tail[tailLen - 1] = lo & 0xff;
+    for (i = 0; i < tailLen; i += 64) {
+      compress(tail, i);
+    }
+    var hex = "";
+    for (i = 0; i < 8; i++) {
+      var part = H[i].toString(16);
+      while (part.length < 8) part = "0" + part;
+      hex += part;
+    }
+    return hex;
+  }
+
   function sha256Hex(u8) {
     var subtle = G && G.crypto && G.crypto.subtle;
-    if (!subtle || typeof subtle.digest !== "function") return Promise.resolve(null);
-    try {
-      return Promise.resolve(subtle.digest("SHA-256", u8)).then(function (digest) {
-        var bytes = new Uint8Array(digest);
-        var hex = "";
-        for (var i = 0; i < bytes.length; i++) {
-          var h = bytes[i].toString(16);
-          hex += h.length < 2 ? "0" + h : h;
-        }
-        return hex;
-      }, function () {
-        return null;
-      });
-    } catch (e) {
-      return Promise.resolve(null);
+    if (subtle && typeof subtle.digest === "function") {
+      try {
+        return Promise.resolve(subtle.digest("SHA-256", u8)).then(function (digest) {
+          var bytes = new Uint8Array(digest);
+          var hex = "";
+          for (var i = 0; i < bytes.length; i++) {
+            var h = bytes[i].toString(16);
+            hex += h.length < 2 ? "0" + h : h;
+          }
+          return hex;
+        }, function () {
+          return sha256BytesPure(u8);
+        });
+      } catch (e) {}
     }
+    return Promise.resolve(sha256BytesPure(u8));
   }
 
   function sha256(source) {
@@ -566,19 +643,60 @@
           // "too slow" clock can stop while the app is put away.
           function runNative() {
             var J = nativeJob;
-            var key = "rmd-" + String(sha256Val || "nosha").slice(0, 40) + "-" + Math.round(dpi);
+            var shaPart = sha256Val ? String(sha256Val).slice(0, 40) : ("tmp-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8));
+            var key = "rmd-" + shaPart + "-" + Math.round(dpi);
             var want = pending.map(function (p) { return p.n; });
             var doneBefore = total - want.length;
+            var clock = (opts && opts.clock) || {
+              setTimeout: function (fn, ms) { return setTimeout(fn, ms); },
+              clearTimeout: function (id) { return clearTimeout(id); }
+            };
             var tmpUri = null, listener = null, started = false, restarts = 0, pausedPolls = 0, lastState = null, lastDone = -1;
+            var waitTimer = null, waitReject = null, abortListener = null, cancelSent = false;
 
+            function cancelNativeOnce() {
+              if (cancelSent) return;
+              cancelSent = true;
+              try { Promise.resolve(J.cancel(key)).catch(function () {}); } catch (e) {}
+            }
             function tidy() {
+              if (waitTimer != null) { clock.clearTimeout(waitTimer); waitTimer = null; }
+              waitReject = null;
+              if (abortListener && signal && typeof signal.removeEventListener === "function") {
+                try { signal.removeEventListener("abort", abortListener); } catch (e) {}
+              }
+              abortListener = null;
               if (listener && typeof listener.remove === "function") { try { listener.remove(); } catch (e) {} }
               listener = null;
               if (tmpUri && typeof J.removeTempPdf === "function") { try { J.removeTempPdf(tmpUri); } catch (e) {} }
               tmpUri = null;
             }
+            function onAbortSignal() {
+              var rej = waitReject;
+              waitReject = null;
+              cancelNativeOnce();
+              tidy();
+              if (rej) {
+                rej(makeError("aborted", "Extraction aborted"));
+              }
+            }
+            if (signal && typeof signal.addEventListener === "function") {
+              abortListener = onAbortSignal;
+              signal.addEventListener("abort", abortListener);
+            }
             function wait() {
-              return new Promise(function (res) { setTimeout(res, nativePollMs); });
+              if (signal && signal.aborted) {
+                cancelNativeOnce();
+                return Promise.reject(makeError("aborted", "Extraction aborted"));
+              }
+              return new Promise(function (res, rej) {
+                waitReject = rej;
+                waitTimer = clock.setTimeout(function () {
+                  waitTimer = null;
+                  waitReject = null;
+                  res();
+                }, nativePollMs);
+              });
             }
             function report(state, st) {
               if (state !== lastState) {
@@ -593,11 +711,14 @@
             }
             function poll() {
               if (signal && signal.aborted) {
-                return Promise.resolve(J.cancel(key)).then(function () {}, function () {}).then(function () {
-                  throw makeError("aborted", "Extraction aborted");
-                });
+                cancelNativeOnce();
+                return Promise.reject(makeError("aborted", "Extraction aborted"));
               }
               return Promise.resolve(J.get(key)).then(function (st) {
+                if (signal && signal.aborted) {
+                  cancelNativeOnce();
+                  throw makeError("aborted", "Extraction aborted");
+                }
                 st = st || {};
                 if (st.state === "done") { report("done", st); return; }
                 if (st.state === "failed") throw nativeError(st.error);
@@ -629,15 +750,27 @@
             }
 
             return Promise.resolve().then(function () {
+              if (signal && signal.aborted) {
+                cancelNativeOnce();
+                throw makeError("aborted", "Extraction aborted");
+              }
               return J.writeTempPdf(u8);
             }).then(function (uri) {
               tmpUri = uri;
+              if (signal && signal.aborted) {
+                cancelNativeOnce();
+                throw makeError("aborted", "Extraction aborted");
+              }
               return Promise.resolve(typeof J.onProgress === "function" ? J.onProgress(function (ev) {
                 if (!ev || ev.jobKey !== key || !onProgress) return;
                 onProgress(Math.min(total, doneBefore + (Number(ev.done) || 0) + 1), total);
               }) : null).then(null, function () { return null; });
             }).then(function (h) {
               listener = h;
+              if (signal && signal.aborted) {
+                cancelNativeOnce();
+                throw makeError("aborted", "Extraction aborted");
+              }
               return startJob();
             }).then(function () {
               started = true;

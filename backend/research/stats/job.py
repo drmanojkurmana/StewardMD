@@ -131,9 +131,14 @@ def _parse_dataset(data: bytes, key: str) -> dict:
         if key.endswith(".json"):
             obj = json.loads(text)
             if isinstance(obj, dict) and isinstance(obj.get("columns"), dict):
-                return obj["columns"]
+                cols = obj["columns"]
+                if not cols:
+                    raise StatsJobError("dataset_invalid")
+                return cols
             if isinstance(obj, list) and obj and all(isinstance(r, dict) for r in obj):
                 names = list(obj[0])
+                if not names:
+                    raise StatsJobError("dataset_invalid")
                 return {name: [r.get(name) for r in obj] for name in names}
             raise ValueError("dataset_invalid")
         reader = csv.DictReader(io.StringIO(text))
@@ -149,8 +154,10 @@ def _parse_dataset(data: bytes, key: str) -> dict:
                 columns[name] = [float(v) for v in values]
             except (TypeError, ValueError):
                 columns[name] = values
+        if not columns:
+            raise StatsJobError("dataset_invalid")
         return columns
-    except (UnicodeDecodeError, json.JSONDecodeError, csv.Error) as exc:
+    except (UnicodeDecodeError, json.JSONDecodeError, csv.Error, ValueError) as exc:
         raise StatsJobError("dataset_invalid") from exc
 
 
@@ -293,7 +300,7 @@ def run_job(
         return fail(exc.code)
     except ValueError as exc:
         code = str(exc)
-        return fail(code if _CODE_RE.match(code) else "stats_failed")
+        return fail(code if _CODE_RE.match(code) else "dataset_invalid")
     except Exception:
         log.exception("stats model crashed for job %s", job_id)
         return fail("stats_failed")

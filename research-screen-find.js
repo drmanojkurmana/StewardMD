@@ -647,27 +647,27 @@
 
   function uploadPdfServer(idx, p, file, fallbackMeta) {
     var form = new G.FormData();
-    form.append("file", file);
+    form.append("file", file, file.name || "study.pdf");
     if (fallbackMeta) {
       form.append("fallback", JSON.stringify(fallbackMeta));
     }
     p.text = "Uploading PDF";
     render();
-    return SMD.api.upload("/v1/projects/" + state.pid + "/pdfs", form)
+    return SMD.api.upload("/v1/projects/" + encodeURIComponent(state.pid) + "/pdf-uploads", form)
       .then(function (data) {
-        var pdf = data && data.pdf;
-        if (!pdf || !pdf.id) throw new Error("no pdf");
-        var jobBody = {
-          kind: "pdf_extract", pdfId: pdf.id, idempotencyKey: "find-" + p.key + "-" + Date.now()
-        };
-        if (fallbackMeta) jobBody.fallback = fallbackMeta;
-        return SMD.api.request("POST", "/v1/projects/" + state.pid + "/jobs", jobBody);
-      })
-      .then(function () {
+        var art = data && data.artifact;
+        if (!art || !art.id) throw new Error("no artifact");
         p.status = "pdf_sent";
-        p.text = "PDF sent for reading. The numbers will be filled once extraction finishes.";
+        p.text = art.status === "succeeded"
+          ? "PDF read on server. Open Extract to review values."
+          : "PDF sent for reading. The numbers will be filled once extraction finishes.";
         render();
-        if (SMD.p2 && SMD.p2.flashNotice) SMD.p2.flashNotice(sheetEl(), "PDF uploaded. We are reading it in the background.", "info");
+        if (SMD.p2 && SMD.p2.flashNotice) {
+          SMD.p2.flashNotice(sheetEl(), art.status === "succeeded"
+            ? "PDF already extracted."
+            : "PDF uploaded. We are reading it in the background.", "info");
+        }
+        return art;
       })
       .catch(function (err) {
         p.text = "Need the PDF to find the numbers";
@@ -735,6 +735,26 @@
       var u8 = new Uint8Array(ab);
       return (typeof OD.sha256 === "function" ? OD.sha256(u8) : Promise.resolve(null)).then(function (hash) {
         var ckKey = hash ? ("pdf:" + targetPid + ":" + hash) : ("pdf:" + targetPid + ":" + (p.key || idx));
+        function mergeCheckpoint(key, patch) {
+          if (JR && typeof JR.updateCheckpoint === "function") {
+            return JR.updateCheckpoint(CP, key, patch);
+          }
+          if (!CP || !key || typeof CP.get !== "function" || typeof CP.put !== "function") {
+            return Promise.resolve();
+          }
+          return Promise.resolve().then(function () { return CP.get(key); }).then(function (cur) {
+            var next = {};
+            if (cur && typeof cur === "object") {
+              for (var k in cur) {
+                if (Object.prototype.hasOwnProperty.call(cur, k)) next[k] = cur[k];
+              }
+            }
+            for (var pk in patch) {
+              if (Object.prototype.hasOwnProperty.call(patch, pk)) next[pk] = patch[pk];
+            }
+            return CP.put(key, next);
+          }).catch(function () {});
+        }
         function runOne(resumeCtx) {
           var resume = (resumeCtx && resumeCtx.checkpoint) || null;
           return OD.extract(u8, {
@@ -752,12 +772,20 @@
             },
             onPage: function (partial) {
               if (CP && partial && (partial.sha256 || ckKey)) {
-                partial.running = true;
-                if (resumeCtx && resumeCtx.checkpoint) {
-                  partial.failCount = resumeCtx.checkpoint.failCount;
-                  partial.reasons = resumeCtx.checkpoint.reasons;
-                }
-                return CP.put(partial.sha256 ? ("pdf:" + targetPid + ":" + partial.sha256) : ckKey, partial).catch(function () {});
+                var key = partial.sha256 ? ("pdf:" + targetPid + ":" + partial.sha256) : ckKey;
+                var patch = {
+                  pages: partial.pages,
+                  ocr: partial.ocr,
+                  sha256: partial.sha256,
+                  engine: partial.engine,
+                  ocrEngine: partial.ocrEngine,
+                  partial: partial.partial,
+                  nextPage: partial.nextPage,
+                  engineVersion: partial.engineVersion,
+                  running: true,
+                  finished: false
+                };
+                return mergeCheckpoint(key, patch);
               }
             }
           });

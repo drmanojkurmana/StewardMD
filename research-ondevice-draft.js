@@ -246,6 +246,8 @@
     var sleepFn = typeof opts.sleep === "function" ? opts.sleep : defaultSleep;
     var onProgress = typeof opts.onProgress === "function" ? opts.onProgress : function () {};
     var isCancelled = typeof opts.isCancelled === "function" ? opts.isCancelled : function () { return false; };
+    var beginAiWait = typeof opts.beginAiWait === "function" ? opts.beginAiWait : function () {};
+    var endAiWait = typeof opts.endAiWait === "function" ? opts.endAiWait : function () {};
 
     var job = (jobBundle && jobBundle.job) ? jobBundle.job : (jobBundle || {});
     var jobId = job.id || job.jobId || "";
@@ -320,11 +322,32 @@
       activeTimerStart = nowFn();
       state.updatedAt = new Date(nowFn()).toISOString();
       if (!cpStore || typeof cpStore.put !== "function" || !jobId) return Promise.resolve();
-      return cpStore.put(cpKey, state);
+      function writeMerged(cur) {
+        var next = {};
+        var runnerKeys = ["running", "finished", "failCount", "reasons", "jobKey"];
+        if (cur && typeof cur === "object") {
+          for (var ri = 0; ri < runnerKeys.length; ri++) {
+            var rk = runnerKeys[ri];
+            if (Object.prototype.hasOwnProperty.call(cur, rk)) next[rk] = cur[rk];
+          }
+        }
+        for (var k in state) {
+          if (Object.prototype.hasOwnProperty.call(state, k)) next[k] = state[k];
+        }
+        return cpStore.put(cpKey, next);
+      }
+      if (typeof cpStore.get === "function") {
+        return Promise.resolve().then(function () { return cpStore.get(cpKey); }).then(writeMerged, function () { return writeMerged(null); });
+      }
+      return writeMerged(null);
     }
 
     function checkPreCallGuards(stepId) {
-      if (isCancelled()) {
+      if (isCancelled() || (opts.signal && opts.signal.aborted)) {
+        var reason = opts.signal && opts.signal.reason;
+        if (reason && reason.code === "ceiling_seconds") {
+          return makeErr("ceiling_seconds", stepId, reason.message || "Draft exceeded time ceiling", reason.rule ? { rule: reason.rule } : null);
+        }
         return makeErr("cancelled", stepId, "Draft cancelled");
       }
       if (elapsedMs() / 1000 > maxSeconds) {
@@ -338,13 +361,16 @@
         return Promise.reject(makeErr("device_failed", activeStep, "Cannot refresh job token"));
       }
       pauseTimer();
+      beginAiWait();
       return apiRequest("POST", "/v1/jobs/" + encodeURIComponent(jobId) + "/token").then(function (res) {
+        endAiWait();
         resumeTimer();
         var tok = res && res.token;
         if (!tok) throw makeErr("device_failed", activeStep, "Empty refreshed job token");
         currentToken = tok;
         return tok;
       }, function (err) {
+        endAiWait();
         resumeTimer();
         throw makeErr("device_failed", activeStep, (err && err.message) || "Token refresh failed");
       });
@@ -398,8 +424,12 @@
       var refreshed401 = false;
 
       function attemptCall(attemptIdx) {
+        var preErr = checkPreCallGuards(stepId);
+        if (preErr) return Promise.reject(preErr);
         pauseTimer();
+        beginAiWait();
         return gatewayTransport(gatewayUrl, payload, currentToken).then(function (res) {
+          endAiWait();
           resumeTimer();
           var status = (res && res.status) || 200;
           var data = (res && res.data) || {};
@@ -452,6 +482,7 @@
           throw makeErr(errCode === "ceiling_input_tokens" ? "ceiling_input_tokens" : "device_failed",
             stepId, (data.error && data.error.message) || ("Gateway HTTP " + status));
         }, function (netErr) {
+          endAiWait();
           resumeTimer();
           if (netErr && netErr.code) throw netErr;
           if (attemptIdx < attempts - 1) {

@@ -26,17 +26,28 @@ def build_section_order(outline: dict | None) -> list[dict]:
     """Mirror research-ondevice-draft.js buildSectionOrder so cloud resumes hit JS stepIds."""
     plan = outline.get("section_plan") if isinstance(outline, dict) else None
     if isinstance(plan, list) and len(plan) > 0:
+        used: set[str] = set()
         out = []
         for idx, item in enumerate(plan):
-            raw = (
-                (item.get("section_name") or item.get("name") or item.get("section") or f"section_{idx + 1}")
-                if isinstance(item, dict) else f"section_{idx + 1}"
-            )
-            slug = re.sub(r"[^a-z0-9_]+", "-", str(raw).lower()).strip("-")[:60] or f"section_{idx + 1}"
+            raw = None
+            if isinstance(item, dict):
+                for key in ("section_title", "section_name", "name", "section"):
+                    val = item.get(key)
+                    if isinstance(val, str) and val.strip():
+                        raw = val.strip()
+                        break
+            title = raw or f"Section {idx + 1}"
+            base_id = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-") or f"section-{idx + 1}"
+            sec_id = base_id
+            suffix = 2
+            while sec_id in used:
+                sec_id = f"{base_id}-{suffix}"
+                suffix += 1
+            used.add(sec_id)
             out.append({
-                "id": slug,
-                "title": str(raw),
-                "stepId": sanitize_step_id(f"section:{slug}") or f"section:s{idx + 1}",
+                "id": sec_id,
+                "title": title,
+                "stepId": sanitize_step_id(f"section:{sec_id}") or f"section:s{idx + 1}",
                 "plan": item,
             })
         return out

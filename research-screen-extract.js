@@ -706,6 +706,26 @@
         if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
         var ckKey = hash ? ("pdf:" + targetPid + ":" + hash) : ("pdf:" + targetPid + ":" + targetSid);
         var jr = jobsRunner();
+        function mergeCheckpoint(key, patch) {
+          if (jr && typeof jr.updateCheckpoint === "function") {
+            return jr.updateCheckpoint(CP, key, patch);
+          }
+          if (!CP || !key || typeof CP.get !== "function" || typeof CP.put !== "function") {
+            return Promise.resolve();
+          }
+          return Promise.resolve().then(function () { return CP.get(key); }).then(function (cur) {
+            var next = {};
+            if (cur && typeof cur === "object") {
+              for (var k in cur) {
+                if (Object.prototype.hasOwnProperty.call(cur, k)) next[k] = cur[k];
+              }
+            }
+            for (var p in patch) {
+              if (Object.prototype.hasOwnProperty.call(patch, p)) next[p] = patch[p];
+            }
+            return CP.put(key, next);
+          }).catch(function () {});
+        }
         function runOneExtract(resumeCtx) {
           var resume = (resumeCtx && resumeCtx.checkpoint) || null;
           return OD.extract(u8, {
@@ -725,12 +745,20 @@
             },
             onPage: function (partial) {
               if (CP && partial && (partial.sha256 || ckKey)) {
-                partial.running = true;
-                if (resumeCtx && resumeCtx.checkpoint) {
-                  partial.failCount = resumeCtx.checkpoint.failCount;
-                  partial.reasons = resumeCtx.checkpoint.reasons;
-                }
-                return CP.put(partial.sha256 ? ("pdf:" + targetPid + ":" + partial.sha256) : ckKey, partial).catch(function () {});
+                var key = partial.sha256 ? ("pdf:" + targetPid + ":" + partial.sha256) : ckKey;
+                var patch = {
+                  pages: partial.pages,
+                  ocr: partial.ocr,
+                  sha256: partial.sha256,
+                  engine: partial.engine,
+                  ocrEngine: partial.ocrEngine,
+                  partial: partial.partial,
+                  nextPage: partial.nextPage,
+                  engineVersion: partial.engineVersion,
+                  running: true,
+                  finished: false
+                };
+                return mergeCheckpoint(key, patch);
               }
             }
           });
