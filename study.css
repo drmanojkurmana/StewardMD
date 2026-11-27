@@ -1793,22 +1793,10 @@ body.st5b-presenting #stTb { display: none !important; }
 }
 
 .pn-root .st-ink-seg.on {
-  border-color: var(--pn-km-mint);
-  background: color-mix(in srgb, var(--pn-pri) 16%, transparent);
-  color: var(--pn-text, #E5E7EB);
+  border-color: transparent;
+  background: var(--pn-sel-bg);
+  color: var(--pn-sel-ink);
   font-weight: 600;
-}
-
-body.dark .pn-root .st-ink-seg.on {
-  color: #E5E7EB;
-  border-color: var(--pn-km-mint);
-  background: color-mix(in srgb, var(--pn-pri) 16%, transparent);
-}
-
-body:not(.dark) .pn-root .st-ink-seg.on {
-  color: var(--pn-on-pri);
-  border-color: var(--pn-km-mint);
-  background: color-mix(in srgb, var(--pn-pri) 16%, transparent);
 }
 
 .pn-root .st-ink-seg:focus-visible {
@@ -2298,3 +2286,9 @@ body.dark .pn-root .st5a-lib .st5a-cover-folder { background: color-mix(in srgb,
 .pn-root .st5a-lib .st-hit > b { font-size: 15px; color: var(--pn-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pn-root .st5a-lib .st-hit > small { color: var(--pn-mut); font-size: 12.5px; }
 .pn-root .st5a-lib .st-hit > .st-sn { font-size: 13px; line-height: 1.4; color: var(--pn-mut); }
+
+/* The editor's bars never start a page drag on iOS (a drag there scrolled the editor up under the status bar); the
+   tool row still scrolls sideways on a phone. */
+.pn-root .st-body .st-p3-topbar, .pn-root .st-body .st-doc-tabs { touch-action: pan-x; overscroll-behavior: none; }
+.pn-root .st-body .st-tb { touch-action: pan-x; overscroll-behavior: none; }
+.pn-root .pn-body.st-body { overscroll-behavior: none; }

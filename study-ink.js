@@ -484,7 +484,7 @@
       drawnIndex = 0; snapped = null; clearHold();
       if (V._pinching) return;
       cur = { id: api.uid(), doc: V.id, page: api.pid(n), tool: V.tool, color: ts.color, w: ts.widths[ts.wi], pts: [pt], gone: false, t: Date.now(), t0: Date.now(), t1: Date.now(), style: V.tool === "hl" ? "ball" : ts.style, sens: ts.sens, tip: ts.tip };
-      cur._touch = e.pointerType === "touch";
+      cur._touch = e.pointerType === "touch"; cur._pid = e.pointerId;
       try { if (window.STUDY_MEDIA && window.STUDY_MEDIA.stampStroke) { var aOff = window.STUDY_MEDIA.stampStroke(); if (aOff != null) cur.a = aOff; } } catch (x) {} /* Phase 5b: audio offset for tap-to-seek */
       drawIncremental();
       scheduleFrame();
@@ -497,7 +497,10 @@
         V.sc.scrollTop -= e.clientY - pan.y; V.sc.scrollLeft -= e.clientX - pan.x; pan.y = e.clientY; pan.x = e.clientX; return;
       }
       if (V._pinching && cur && cur._touch) { clearHold(); cur = null; snapped = null; clearLive(); return; } /* second finger landed: a pinch, not ink */
-      if (e.pointerType === "touch" && (cur || (V && V._isPenDown))) return;
+      /* A touch while the PENCIL is writing is a palm: ignore it. A finger's own stroke (cur._touch) must keep its
+         moves; this used to drop every touch move once a stroke began, so finger writing left a single dot. */
+      if (e.pointerType === "touch" && ((cur && !cur._touch) || (V && V._isPenDown))) return;
+      if (cur && cur._pid != null && e.pointerId !== cur._pid) return;   /* only the pointer that started the stroke adds to it */
       if (eraseOrig.length || erasePieces.length || erasedWhole.length || (V.tool === "er" && e.buttons)) { eraseAt(e); showCursor(e); return; }
       if (V.tool === "er") { showCursor(e); return; }
       if (lassoPts) { lassoPts.push(posFast(e)); api.redraw(n, null, lassoPts); return; }
@@ -528,6 +531,7 @@
     });
     var end = function (e) {
       var V = api.getV(); if (!V) return;
+      if (cur && cur._pid != null && e && e.pointerId != null && e.pointerId !== cur._pid) return;   /* another finger lifting */
       if (e && e.pointerType === "pen" && V) {
         V._isPenDown = false;
       }
