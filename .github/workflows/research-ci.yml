@@ -5,6 +5,7 @@ on:
     paths:
       - 'backend/research/**'
       - 'research-engine.js'
+      - 'research-stats.js'
       - 'scripts/research-parity.R'
       - 'scripts/research-parity-5d.R'
       - 'test/research-*.test.mjs'
@@ -15,6 +16,7 @@ on:
     paths:
       - 'backend/research/**'
       - 'research-engine.js'
+      - 'research-stats.js'
       - 'scripts/research-parity.R'
       - 'scripts/research-parity-5d.R'
       - 'test/research-*.test.mjs'
@@ -80,6 +82,11 @@ jobs:
         run: Rscript -e 'for (p in c("survival", "mada")) if (!requireNamespace(p, quietly = TRUE)) install.packages(p, repos = "https://cloud.r-project.org")'
       - name: Generate 5D R parity fixtures
         run: Rscript scripts/research-parity-5d.R
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run 5D JS R parity tests
+        run: node --test test/research-stats-parity-5d.test.mjs
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

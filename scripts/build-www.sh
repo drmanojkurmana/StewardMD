@@ -31,6 +31,8 @@ done
 [ -f hospital-registry.js ] && cp hospital-registry.js "$WWW/"
 [ -f research-ondevice-checkpoint.js ] && cp research-ondevice-checkpoint.js "$WWW/"
 [ -f research-ondevice-pdf.js ] && cp research-ondevice-pdf.js "$WWW/"
+[ -f research-stats-worker.js ] && cp research-stats-worker.js "$WWW/"
+[ -f research-ondevice-stats.js ] && cp research-ondevice-stats.js "$WWW/"
 
 # ── 2a. Root ES modules. prescription.js dynamic-imports /rx-build.mjs at runtime, so the native
 # bundle needs it too; the *.js loop above never matched .mjs, which left that import unresolvable
