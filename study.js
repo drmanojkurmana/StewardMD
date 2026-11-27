@@ -228,8 +228,8 @@
   // Nothing is written by this: restore calls it first and stops on the first problem.
   function verifyBackup(ent, sha) {
     var bad = function (m) { return { ok: false, error: m }; }, dec = function (n) { return JSON.parse(new TextDecoder().decode(ent[n])); }, man, names, listed = {};
-    try { man = dec("manifest.json"); } catch (e) { return Promise.resolve(bad("This is not a Study Studio backup.")); }
-    if (!man || man.format !== BK || man.v !== 1 || !Array.isArray(man.files) || !man.counts) return Promise.resolve(bad("This is not a Study Studio backup."));
+    try { man = dec("manifest.json"); } catch (e) { return Promise.resolve(bad("This is not a NoteBook backup.")); }
+    if (!man || man.format !== BK || man.v !== 1 || !Array.isArray(man.files) || !man.counts) return Promise.resolve(bad("This is not a NoteBook backup."));
     names = Object.keys(ent).filter(function (n) { return n !== "manifest.json"; });
     man.files.forEach(function (f) { listed[f.name] = f; });
     if (names.length !== man.files.length || names.some(function (n) { return !listed[n]; })) return Promise.resolve(bad("The backup's file list does not match what is inside it."));
@@ -653,7 +653,7 @@
   function renderLib() {
     closeViewer();
     var h = host;
-    h.paint(h.bar("Study Studio", "Read and write on your PDFs", "back") + '<div class="pn-body st-lib" id="stLib">' +
+    h.paint(h.bar("NoteBook", "Read and write on your PDFs", "back") + '<div class="pn-body st-lib" id="stLib">' +
       '<div class="st-action-grid" id="stActionGrid">' +
         '<button type="button" class="st-action-tile pri" data-act="st-newnb">' +
           '<div class="st-action-ico">' + ICO.book + '</div>' +
@@ -1060,7 +1060,16 @@
     cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
     cv.style.touchAction = "none";
   }
-  function setTool(t) { if (!V) return; if (V.tool !== t) V.prevTool = V.tool; V.tool = t; if (V.lasso) { V.lasso = null; removeLassoBar(); } syncTb(); }
+  // Settings > Lock editing (study-pages.js): no writing tool until it is unlocked; reading and the laser still work.
+  function lockedFor(t) {
+    if (!(V && t && t !== "laser" && V.doc && V.doc.settings && V.doc.settings.lock)) return false;
+    if (host) host.toast("This document is locked. Unlock it in Settings to write.");
+    return true;
+  }
+  function setTool(t) {
+    if (!V) return;
+    if (lockedFor(t)) return;
+    if (V.tool !== t) V.prevTool = V.tool; V.tool = t; if (V.lasso) { V.lasso = null; removeLassoBar(); } syncTb(); }
   function zwClose() {
     var z = zwEl(); if (z) z.hidden = true;
     var btn = host && host.root && host.root() && host.root().querySelector('#stTb [data-act="st-zoom-window"]'); if (btn) btn.classList.remove("on");
@@ -1385,6 +1394,7 @@
     V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, items: items || [], stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 26), /* .st-pages padding 12 + 12, page border 1 + 1: fit width shows the whole page, no sideways scroll */ goto: goto, scribble: scrPref, lasso: null, prevTool: null, ink: null };
     V.onSel = onSel; D.addEventListener("selectionchange", onSel);
     if (carry) { V.tool = carry.tool; V.ci = carry.ci; V.wi = carry.wi; carry = null; }
+    else if (d.kind === "nb") V.tool = "pen";   // a notebook opens ready to write; a PDF opens to read (finger scrolls)
     bindPencil();
     if (pdf) pdf.getPage(1).then(function (p) { var v = p.getViewport({ scale: 1 }); V.ratio = v.height / v.width; build(); }); else build();
     syncTb();
@@ -2120,7 +2130,7 @@
   }
 
   /* ---- export and backup (A8) ---- */
-  function safeName(t) { return String(t || "").replace(/[\u0000-\u001f\\/:*?"<>|]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80) || "Study"; }
+  function safeName(t) { return String(t || "").replace(/[\u0000-\u001f\\/:*?"<>|]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80) || "NoteBook"; }
   function saveBlob(blob, name) {
     var a = D.createElement("a"), u = G.URL.createObjectURL(blob);
     a.href = u; a.download = name; D.body.appendChild(a); a.click(); D.body.removeChild(a);
@@ -2181,7 +2191,7 @@
     });
   }
   function backup() {
-    var F = G.fflate, name = "StewardMD Study backup " + stamp().slice(0, 10) + ".zip", nat = shareReady(), fs = nat && fsPlugin(), parts = [], n = 0, chain = Promise.resolve(), err = null, uri = null;
+    var F = G.fflate, name = "StewardMD NoteBook backup " + stamp().slice(0, 10) + ".zip", nat = shareReady(), fs = nat && fsPlugin(), parts = [], n = 0, chain = Promise.resolve(), err = null, uri = null;
     var man = { format: BK, v: 1, created: Date.now(), counts: { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0, audio: 0 }, files: [] };
     if (!(F && F.Zip && F.ZipPassThrough)) return bk("Backup is not available in this build.");
     var z = new F.Zip(function (e, chunk) {
@@ -2246,7 +2256,7 @@
   }
   function restoreBytes(bytes) {
     var F = G.fflate, ent;
-    try { ent = F.unzipSync(bytes); } catch (e) { return bk("Nothing was restored. That file is not a Study Studio backup."); }
+    try { ent = F.unzipSync(bytes); } catch (e) { return bk("Nothing was restored. That file is not a NoteBook backup."); }
     bk("Checking the backup...");
     return verifyBackup(ent, sha256).then(function (v) {
       if (!v.ok) return bk("Nothing was restored. " + v.error);
@@ -2381,7 +2391,7 @@
     if (a === "st-scancel") return closeSheet();
     if (a === "st-src") {
       var sd = el.getAttribute("data-doc"), sp = parseInt(el.getAttribute("data-p"), 10) || 1;
-      return get("docs", sd).then(function (d) { if (!d) return h.toast("That document is not in your Study Studio library any more."); h.push(function () { renderViewer(sd, sp); }); });
+      return get("docs", sd).then(function (d) { if (!d) return h.toast("That document is not in your NoteBook any more."); h.push(function () { renderViewer(sd, sp); }); });
     }
     if (a === "st-scan") return doScan();
     if (a === "st-filter") { lib.filter = el.getAttribute("data-v"); return fillLib(); }
@@ -2506,6 +2516,7 @@
     }
     if (a === "st-tool") {
       var t = el.getAttribute("data-v");
+      if (V.tool !== t && lockedFor(t)) return;
       // Phase 1: tapping the active pen/highlighter/eraser again opens its settings popover.
       if (V.tool === t && G.STUDY_INK && (t === "pen" || t === "hl" || t === "er")) { G.STUDY_INK.popover(inkApi(V.cur || 1, null), t); return syncTb(); }
       if (V.tool && V.tool !== "er" && t === "er") V.prevTool = V.tool;
@@ -2552,6 +2563,16 @@
         closeMoreMenu(); closePageSheet(); closeDocMenu(); closeFolderSheet();
         return true;
       }
+      // Editor sheets and popovers (study-pages.js, study-ink.js) close before the editor itself.
+      var p3 = root.querySelectorAll(".st-p3-sheet, [id^='stP3'][id$='Sheet'], .st-sheet, #stInkPop");
+      if (p3.length) { Array.prototype.forEach.call(p3, function (x) { if (x.parentNode) x.parentNode.removeChild(x); }); return true; }
+      // A lasso selection is dropped first (back used to leave the editor with it still up).
+      if (V && V.lasso) { var ln = V.lasso.n; V.lasso = null; removeLassoBar(); if (ln) redraw(ln); return true; }
+      var zw = root.querySelector("#stP3ZoomWindow");
+      if (zw && !zw.hidden) { zw.hidden = true; var zb = root.querySelector('#stTb [data-act="st-zoom-window"]'); if (zb) zb.classList.remove("on"); return true; }
+      // Back (the system back, Escape, the editor's own back button) on the editor: release it, then the host pops to
+      // the library. Without this the viewer stayed live under the library and its top bar was put back over it.
+      if (V && root.querySelector(":scope > .pn-body.st-body")) closeViewer();
     }
     return false;
   }

@@ -12617,3 +12617,17 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
 - **UI**: a restrained badge (owner tokens, no glow) with date and notice DOI on the study row, study detail and paper card; OpenAlex cited-by, OA status/link and up to five related works on the paper card only. Both hidden when the server says unavailable or returns `none`.
 - **Tests**: `test/research-enrich.test.mjs`, 17 tests, mocked fetch only: retraction parsing (retracted/EoC/none), cache, unavailable; OpenAlex batch, PMID path, related expansion, missing key, cache; client flags off, on with data, unavailable. Existing connector, audit, journey and paper-card suites still pass.
 - **Not enabled**: `OPENALEX_API_KEY` is an owner step. `RESEARCH_CONTACT_EMAIL` is already required by the existing Crossref connector and is reused for retractions.
+
+## 2026-11-27 - Study Studio becomes NoteBook, on the PrepNucleus skin
+- **Owner**: rename Study Studio to NoteBook; its UI did not match PrepNucleus and much of it did not work.
+- **Name**: user-facing only (bottom-nav tab, library bar, backup file name and messages, "Open in NoteBook"). Code ids,
+  the `smd_study` flag, `st-*` actions, the IndexedDB `study` store and file names stay, so existing libraries,
+  backups and flags keep working. Restore still accepts older backups (the manifest format is unchanged).
+- **Skin**: the navy + gold "GoodNotes" reskin is gone. study.css uses `--pn-*` tokens only; the `--st-*` names are
+  aliases of them. The library is a normal PrepNucleus tab: `pn-bar` (back, NoteBook, More, New), a `pn-seg`
+  (Documents / Search / Favourites) and the PrepNucleus bottom nav, which Study used to hide behind its own tab bar.
+- **Navigation**: the editor is one screen on the PrepNucleus stack. Its back button pops it (it used to paint the
+  library on top, so the stack grew per open and the system back reopened the document); the system back closes
+  sheets, then a lasso selection, then the editor (it used to leave the editor live under the library, with its top
+  bar put back over it). Switching document tabs replaces the editor. On the library, back leaves a folder or Trash
+  before leaving NoteBook.
