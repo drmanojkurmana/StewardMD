@@ -22,8 +22,57 @@ public class VisionOcrPlugin: CAPPlugin, CAPBridgedPlugin, WKNavigationDelegate 
         CAPPluginMethod(name: "detectText", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "detectVitals", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "readDigits", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "htmlToPdf", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "htmlToPdf", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "startPdfJob", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getPdfJob", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "readPdfJobPage", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "cancelPdfJob", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "clearPdfJob", returnType: CAPPluginReturnPromise)
     ]
+
+    // MARK: ResearchMD scanned-PDF job (phase 05). The work runs in PdfOcrJobManager so it keeps going
+    // while the WebView is paused; JS hears progress through the pdfJobProgress event.
+
+    @objc func startPdfJob(_ call: CAPPluginCall) {
+        guard let key = call.getString("jobKey"), let path = call.getString("path") else {
+            call.reject("Missing jobKey or path"); return
+        }
+        let pages = (call.getArray("pages") as? [Any] ?? []).compactMap { ($0 as? NSNumber)?.intValue }
+        let dpi = CGFloat(call.getFloat("dpi") ?? 200)
+        let mgr = PdfOcrJobManager.shared
+        mgr.onProgress = { [weak self] k, done, total in
+            self?.notifyListeners("pdfJobProgress", data: ["jobKey": k, "done": done, "total": total])
+        }
+        do {
+            try mgr.start(key: key, path: path, pages: pages, dpi: dpi)
+            call.resolve(["started": true])
+        } catch {
+            call.reject(error.localizedDescription)
+        }
+    }
+
+    @objc func getPdfJob(_ call: CAPPluginCall) {
+        guard let key = call.getString("jobKey") else { call.reject("Missing jobKey"); return }
+        call.resolve(PdfOcrJobManager.shared.status(key: key))
+    }
+
+    @objc func readPdfJobPage(_ call: CAPPluginCall) {
+        guard let key = call.getString("jobKey"), let n = call.getInt("n") else { call.reject("Missing jobKey or n"); return }
+        do { call.resolve(try PdfOcrJobManager.shared.readPage(key: key, n: n)) }
+        catch { call.reject("page-not-ready") }
+    }
+
+    @objc func cancelPdfJob(_ call: CAPPluginCall) {
+        guard let key = call.getString("jobKey") else { call.reject("Missing jobKey"); return }
+        PdfOcrJobManager.shared.cancel(key: key)
+        call.resolve()
+    }
+
+    @objc func clearPdfJob(_ call: CAPPluginCall) {
+        guard let key = call.getString("jobKey") else { call.reject("Missing jobKey"); return }
+        PdfOcrJobManager.shared.clear(key: key)
+        call.resolve()
+    }
 
     // Retained while a PDF render is in flight (WKWebView + the pending JS promise).
     private var pdfWebView: WKWebView?
