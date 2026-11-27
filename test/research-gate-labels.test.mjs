@@ -34,3 +34,11 @@ test("a research-question sentence is not an unlinked claim", () => {
 test("a plain claim without a source still fails", () => {
   assert.equal(unlinkedClaims("BCG vaccination reduces tuberculosis in infants.").length, 1);
 });
+
+test("exponent digits (I^2, chi^{2}) are notation, not result numbers; a bare result number still fails", async () => {
+  const { gateManuscript } = await import("../functions/api/research/_manuscript.js");
+  const ok = gateManuscript([{ id: "abstract", heading: "Abstract", text: "Heterogeneity was summarised with I^2 and chi^{2}." }], [], {});
+  assert.ok(!(ok.gateFailures || []).some((f) => f.type === "unresolved_token"), JSON.stringify(ok.gateFailures));
+  const bad = gateManuscript([{ id: "abstract", heading: "Abstract", text: "A reduction of 42 cases was seen." }], [], {});
+  assert.ok((bad.gateFailures || []).some((f) => f.type === "unresolved_token"));
+});
