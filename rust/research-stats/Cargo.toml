@@ -1,0 +1,25 @@
+[package]
+name = "research-stats"
+version = "0.1.0"
+edition = "2021"
+description = "ResearchMD statistics in Rust: linear and logistic regression, Kaplan-Meier, log-rank, Cox PH (Efron) with the cox.zph test. One core for the phone (WASM), Cloudflare Workers (WASM) and the cloud worker."
+license = "UNLICENSED"
+publish = false
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order", "float_roundtrip"] }
+nalgebra = { version = "0.33", default-features = false, features = ["std"] }
+statrs = { version = "0.18", default-features = false }
+sha2 = "0.10"
+ryu = "1"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
