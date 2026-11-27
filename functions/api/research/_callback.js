@@ -17,6 +17,7 @@
 import { jobOf } from "./_jobs.js";
 import { pdfActualMicroUsd, settleCredits, releaseCredits } from "./_credits.js";
 import { ingestManuscriptJob } from "./_manuscript.js";
+import { refundCloudFallbackForJob, checkContainerHoursAlerts } from "./_cloud_fallback.js";
 
 const MAX_CALLBACK_BYTES = 65536;
 const SKEW_SECONDS = 300;
@@ -157,6 +158,10 @@ export async function jobCallback(ctx, pathJobId) {
   }
   await audit(db, job.project_id, "worker", "job_settled", job.id,
     { status: terminal, usage: body.usage, errorCode });
+  if (terminal === "failed") {
+    await refundCloudFallbackForJob(db, job.id, errorCode).catch(() => {});
+  }
+  await checkContainerHoursAlerts(env, db, now).catch(() => {});
   /* A finished manuscript_draft result becomes a manuscript version. A bad
    * draft must not fail the callback; GET /manuscript ingests again. */
   if (terminal === "succeeded" && job.kind === "manuscript_draft") {

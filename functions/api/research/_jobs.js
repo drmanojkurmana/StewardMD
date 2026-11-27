@@ -23,6 +23,7 @@ import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCred
 import { scan, phiCategories } from "./_phi.js";
 import { mintJobToken } from "./_gateway.js";
 import { gateManuscript, ingestManuscriptJob, tokenTable } from "./_manuscript.js";
+import { checkCloudFallbackAvailable, parseFormFallback, recordCloudFallbackUsed, refundCloudFallbackForJob } from "./_cloud_fallback.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const SETTLED = ["succeeded", "failed", "cancelled"];
@@ -69,13 +70,18 @@ async function sha256Bytes(bytes) {
  * The PHI hard block stays at the gateway boundary (phi-gate.md placement);
  * pdf_extract makes no LLM call. */
 export async function uploadPdf(ctx) {
-  const { request, env, db, uid, projectId, requestId, api } = ctx;
+  const { request, env, db, uid, claims, projectId, requestId, api } = ctx;
   const { json, err, audit, uuid, projectGate, gateErr } = api;
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "PDF uploads need an owner, editor or analyst role", requestId);
   if (!env.RESEARCH_R2) return err(503, "storage_unavailable", "Research file storage is not provisioned", requestId);
   let form;
   try { form = await request.formData(); } catch { return err(400, "invalid_multipart", "Expected multipart PDF upload", requestId); }
+  const fallback = parseFormFallback(form.get("fallback"));
+  if (fallback) {
+    const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims);
+    if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
+  }
   const file = form.get("file");
   if (!file || typeof file === "string") return err(400, "missing_file", "Upload one PDF in the file field", requestId);
   if (file.size < 8) return err(400, "invalid_body", "PDF must be at least 8 bytes", requestId);
@@ -170,6 +176,11 @@ export async function createJob(ctx, body) {
   }
   if (fresh.length) {
     const now = Date.now();
+    const hasFallback = body.fallback != null && typeof body.fallback === "object" && !Array.isArray(body.fallback);
+    if (hasFallback && !body._fallbackPrechecked) {
+      const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims, now);
+      if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
+    }
     const capBreach = await checkPdfJobCaps(db, projectId, uid, fresh.length, now);
     if (capBreach) return err(429, capBreach.code, capBreach.message, requestId);
     const quote = quotePdfJob(env);
@@ -197,6 +208,9 @@ export async function createJob(ctx, body) {
         }
         throw insertErr;
       }
+      if (hasFallback) {
+        await recordCloudFallbackUsed(db, { uid, projectId, kind: "pdf", jobId, fallback: body.fallback, nowMs: now });
+      }
       const message = {
         v: 1, jobId, kind: "pdf_extract", projectId, idempotencyKey: e.key,
         input: { r2Key: e.pdf.r2_key },
@@ -207,6 +221,7 @@ export async function createJob(ctx, body) {
         await releaseCredits(db, uuid, reservation);
         await db.prepare("UPDATE research_job_runs SET status='failed',error_code='invalid_message',completed_ts=? WHERE id=?")
           .bind(Date.now(), jobId).run();
+        if (hasFallback) await refundCloudFallbackForJob(db, jobId, "invalid_message").catch(() => {});
         return err(500, "invalid_message", "Job message failed the contract schema", requestId);
       }
       try {
@@ -215,6 +230,7 @@ export async function createJob(ctx, body) {
         await db.prepare("UPDATE research_job_runs SET status='failed',error_code='queue_unavailable',completed_ts=? WHERE id=?")
           .bind(Date.now(), jobId).run();
         await releaseCredits(db, uuid, reservation);
+        if (hasFallback) await refundCloudFallbackForJob(db, jobId, "queue_unavailable").catch(() => {});
         return err(503, "queue_unavailable", "Could not queue the job; retry with the same idempotency key", requestId);
       }
       await audit(db, projectId, uid, "job_created", jobId, { kind: "pdf_extract", pdfId: e.pdf.id, quoteMicroUsd: quote });
@@ -619,9 +635,10 @@ export async function createManuscriptJob(ctx, body) {
   const idempotencyKey = typeof body.idempotencyKey === "string" ? body.idempotencyKey.trim() : "";
   if (!idempotencyKey || idempotencyKey.length > 120)
     return err(400, "invalid_body", "idempotencyKey must be 1-120 characters", requestId);
-  if (body.runner !== undefined && body.runner !== "device" && body.runner !== "cloud")
-    return err(400, "invalid_body", "runner must be cloud or device", requestId);
+  if (body.runner !== undefined && body.runner !== "device" && body.runner !== "cloud" && body.runner !== "container")
+    return err(400, "invalid_body", "runner must be cloud, container or device", requestId);
   const isDevice = body.runner === "device";
+  const hasFallback = !isDevice && body.fallback != null && typeof body.fallback === "object" && !Array.isArray(body.fallback);
   if (!isDevice && !env.RESEARCH_QUEUE) return err(503, "queue_unavailable", "Research job queue is not provisioned", requestId);
   if (isDevice && !env.RESEARCH_CALLBACK_SECRET) return err(503, "gateway_unavailable", "Research AI gateway is not configured", requestId);
   if (!env.RESEARCH_R2) return err(503, "storage_unavailable", "Research file storage is not provisioned", requestId);
@@ -653,8 +670,12 @@ export async function createManuscriptJob(ctx, body) {
   if (active)
     return err(409, "job_active", "A manuscript draft job is already queued or running for this project", requestId);
 
-  /* 5. Daily UTC caps: 3/project, 5/user. */
+  /* 5. Monthly cloud fallback allowance (if fallback payload present), then daily UTC caps: 3/project, 5/user. */
   const now = Date.now();
+  if (hasFallback) {
+    const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims, now);
+    if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
+  }
   const capBreach = await checkPoJobCaps(db, projectId, uid, now);
   if (capBreach) return err(429, capBreach.code, capBreach.message, requestId);
 
@@ -698,7 +719,7 @@ export async function createManuscriptJob(ctx, body) {
 
   /* 10. Insert research_job_runs row (same bound-kind shape as pdf_extract). */
   const ceilings = { maxSeconds: PO_MAX_SECONDS, maxCalls: PO_MAX_CALLS, quoteMicroUsd: quote };
-  const outputMeta = isDevice ? { runner: "device" } : {};
+  const outputMeta = isDevice ? { runner: "device" } : (body.runner === "container" ? { runner: "container" } : {});
   let cutoffDate = null;
   if (typeof body.cutoffDate === "string") {
     const cd = body.cutoffDate.trim();
@@ -731,6 +752,9 @@ export async function createManuscriptJob(ctx, body) {
     await audit(db, projectId, uid, "job_created", jobId, { kind: "manuscript_draft", runner: "device", quoteMicroUsd: quote });
     return json({ job: jobOf(row), manifest: snapshot, token, tokenExpiresAt: expiresAt, requestId }, 202, { "x-request-id": requestId });
   }
+  if (hasFallback) {
+    await recordCloudFallbackUsed(db, { uid, projectId, kind: "draft", jobId, fallback: body.fallback, nowMs: now });
+  }
 
   /* 11. Build, validate and enqueue queue message. */
   const input = { r2Key: snapshotKey };
@@ -749,6 +773,7 @@ export async function createManuscriptJob(ctx, body) {
     await releaseCredits(db, uuid, reservation);
     await db.prepare("UPDATE research_job_runs SET status='failed',error_code='invalid_message',completed_ts=? WHERE id=?")
       .bind(Date.now(), jobId).run();
+    if (hasFallback) await refundCloudFallbackForJob(db, jobId, "invalid_message").catch(() => {});
     if (typeof env.RESEARCH_R2.delete === "function") await env.RESEARCH_R2.delete(snapshotKey).catch(() => {});
     return err(500, "invalid_message", "Job message failed the contract schema", requestId);
   }
@@ -758,6 +783,7 @@ export async function createManuscriptJob(ctx, body) {
     await db.prepare("UPDATE research_job_runs SET status='failed',error_code='queue_unavailable',completed_ts=? WHERE id=?")
       .bind(Date.now(), jobId).run();
     await releaseCredits(db, uuid, reservation);
+    if (hasFallback) await refundCloudFallbackForJob(db, jobId, "queue_unavailable").catch(() => {});
     if (typeof env.RESEARCH_R2.delete === "function") await env.RESEARCH_R2.delete(snapshotKey).catch(() => {});
     return err(503, "queue_unavailable", "Could not queue the job; retry with the same idempotency key", requestId);
   }
@@ -1087,4 +1113,106 @@ export async function failDeviceJob(ctx, jobId, body) {
   await audit(db, row.project_id, uid, "job_settled", row.id, { status: "failed", runner: "device", errorCode: body.code, step });
   const fresh = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(row.id).first();
   return json({ job: jobOf(fresh), requestId }, 200, { "x-request-id": requestId });
+}
+
+/* POST /v1/jobs/{jobId}/to-cloud (Phase 04).
+ * Owner-only conversion of an on-device manuscript_draft job to runner "container"
+ * after checking monthly cloud fallback allowance and daily caps. Preserves jobId
+ * so research_job_steps cached from the device run hit at $0 in the gateway. */
+export async function convertJobToCloud(ctx, jobId, body) {
+  const { env, db, uid, claims, requestId, api } = ctx;
+  const { json, err, audit, uuid, member } = api;
+  await expireLostBefore(db, uuid);
+  const row = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(jobId).first();
+  if (!row || !(await member(db, row.project_id, uid)))
+    return err(404, "job_not_found", "Job not found", requestId);
+  if (row.created_by !== uid)
+    return err(403, "forbidden", "Only the job owner can move this job to cloud", requestId);
+  if (row.kind !== "manuscript_draft")
+    return err(409, "wrong_kind", "Only manuscript draft jobs can move to cloud", requestId);
+  if (row.status === "succeeded" || row.status === "cancelled")
+    return err(409, "job_settled", "This job is already finished", requestId);
+
+  const out = parseJson(row.output_json, {});
+  if ((out.runner === "container" || out.runner === "cloud") && (row.status === "queued" || row.status === "running")) {
+    return json({ job: jobOf(row), idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+  }
+  if (!env.RESEARCH_QUEUE)
+    return err(503, "queue_unavailable", "Research job queue is not provisioned", requestId);
+  if (!row.input_r2_key)
+    return err(409, "snapshot_missing", "Manuscript snapshot is missing for this job", requestId);
+
+  const now = Date.now();
+  const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims, now);
+  if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
+
+  const capBreach = await checkPoJobCaps(db, row.project_id, uid, now, row.id);
+  if (capBreach) return err(429, capBreach.code, capBreach.message, requestId);
+
+  /* Check if a credit hold is still active; failed device jobs released theirs. */
+  const ledgerNet = await db.prepare("SELECT COALESCE(SUM(delta),0) AS net FROM research_credit_ledger WHERE job_id=?")
+    .bind(row.id).first();
+  let newReservation = null;
+  if (!ledgerNet || Number(ledgerNet.net || 0) >= 0) {
+    const ceilingsJson = parseJson(row.ceilings_json, {});
+    const quote = Number(ceilingsJson.quoteMicroUsd) > 0
+      ? Number(ceilingsJson.quoteMicroUsd)
+      : quoteAiCall(env, "T2") * PO_MAX_CALLS;
+    const credits = await availableCredits(db, env, uid, claims && claims.email);
+    if (credits.availableMicroUsd < quote)
+      return err(402, "insufficient_credits", "Not enough research credits for this job. Top up the MaiK wallet or ask your institution admin.", requestId);
+    newReservation = await reserveCredits(db, env, uuid, { uid, email: claims && claims.email, jobId: row.id, quote });
+  }
+
+  const prevStatus = row.status;
+  const prevError = row.error_code || null;
+  const prevCompleted = row.completed_ts || null;
+  const prevStarted = row.started_ts || null;
+  const nextOut = Object.assign({}, out, { runner: "container" });
+  delete nextOut.failedStep;
+  let cutoffDate = out.cutoffDate || null;
+  if (isPlainObject(body) && typeof body.cutoffDate === "string" && /^\d{4}-(?:0[1-9]|1[0-2])$/.test(body.cutoffDate.trim())) {
+    cutoffDate = body.cutoffDate.trim();
+    nextOut.cutoffDate = cutoffDate;
+  }
+
+  await db.prepare(
+    "UPDATE research_job_runs SET status='queued', error_code=NULL, started_ts=NULL, completed_ts=NULL, worker_id=NULL, output_json=? WHERE id=?")
+    .bind(JSON.stringify(nextOut), row.id).run();
+
+  const fallbackMeta = isPlainObject(body) && isPlainObject(body.fallback) ? body.fallback : {};
+  await recordCloudFallbackUsed(db, { uid, projectId: row.project_id, kind: "draft", jobId: row.id, fallback: fallbackMeta, nowMs: now });
+
+  const input = { r2Key: row.input_r2_key };
+  if (cutoffDate) input.cutoffDate = cutoffDate;
+  const message = {
+    v: 1,
+    jobId: row.id,
+    kind: "manuscript_draft",
+    projectId: row.project_id,
+    idempotencyKey: row.idempotency_key,
+    createdAt: Math.floor(now / 1000),
+    input,
+    ceilings: { maxSeconds: PO_MAX_SECONDS, maxCalls: PO_MAX_CALLS },
+  };
+  if (!validateJobMessage(message)) {
+    if (newReservation) await releaseCredits(db, uuid, newReservation);
+    await db.prepare(
+      "UPDATE research_job_runs SET status=?, error_code=?, started_ts=?, completed_ts=?, output_json=? WHERE id=?")
+      .bind(prevStatus, prevError, prevStarted, prevCompleted, JSON.stringify(out), row.id).run();
+    await refundCloudFallbackForJob(db, row.id, "invalid_message").catch(() => {});
+    return err(500, "invalid_message", "Job message failed the contract schema", requestId);
+  }
+  try {
+    await env.RESEARCH_QUEUE.send(message);
+  } catch (queueErr) {
+    if (newReservation) await releaseCredits(db, uuid, newReservation);
+    await db.prepare("UPDATE research_job_runs SET status='failed', error_code='queue_unavailable', completed_ts=? WHERE id=?")
+      .bind(Date.now(), row.id).run();
+    await refundCloudFallbackForJob(db, row.id, "queue_unavailable").catch(() => {});
+    return err(503, "queue_unavailable", "Could not queue the job; retry with the same idempotency key", requestId);
+  }
+  await audit(db, row.project_id, uid, "job_moved_to_cloud", row.id, { kind: "manuscript_draft", runner: "container" });
+  const fresh = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(row.id).first();
+  return json({ job: jobOf(fresh), requestId }, 202, { "x-request-id": requestId });
 }

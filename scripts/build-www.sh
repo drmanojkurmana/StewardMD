@@ -30,6 +30,7 @@ done
 # guard keeps the native bundle complete even if that loop ever gains excludes.
 [ -f hospital-registry.js ] && cp hospital-registry.js "$WWW/"
 [ -f research-ondevice-checkpoint.js ] && cp research-ondevice-checkpoint.js "$WWW/"
+[ -f research-ondevice-jobs.js ] && cp research-ondevice-jobs.js "$WWW/"
 [ -f research-ondevice-pdf.js ] && cp research-ondevice-pdf.js "$WWW/"
 [ -f research-po-prompts.js ] && cp research-po-prompts.js "$WWW/"
 [ -f research-po-gates.js ] && cp research-po-gates.js "$WWW/"

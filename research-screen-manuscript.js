@@ -564,8 +564,9 @@
   function getPoStatusText() {
     if (st.poStatus === "cancelled") return "Cancelled";
     if (st.poCancelError) return st.poCancelError;
-    if (st.poStatus === "queued") return "Queued";
-    if (st.poStatus === "running") return st.poProgress || "Writing the draft";
+    if (st.poStatus === "paused") return "Saved on this device. Try again later.";
+    if (st.poStatus === "queued") return st.poProgress || "Queued";
+    if (st.poStatus === "running") return st.poRetryText || st.poProgress || "Writing the draft";
     if (st.poStatus === "succeeded") return "Done";
     if (st.poStatus === "failed") return "Failed: " + (st.poError || "Draft failed.");
     return "";
@@ -582,7 +583,7 @@
         stateClass = " rmd-po-status-ok rmd-verify-ok";
       } else if (st.poStatus === "failed") {
         stateClass = " rmd-po-status-err";
-      } else if (st.poStatus === "cancelled" || st.poCancelError) {
+      } else if (st.poStatus === "cancelled" || st.poStatus === "paused" || st.poCancelError) {
         stateClass = " rmd-po-status-warn rmd-verify-warn";
       }
       inner = '<span class="rmd-po-status-text' + stateClass + '">' + esc(statusText) + '</span>';
@@ -590,7 +591,10 @@
         inner += ' <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="po-cancel">Cancel</button>';
       }
     }
-    return '<div class="rmd-po-status" aria-live="polite">' + inner + '</div>';
+    var privLine = useOnDeviceDraft()
+      ? '<div class="rmd-muted rmd-device-privacy" style="font-size:12px;margin-top:4px;">' + esc((G && G.SMD_RMD_JOBS && G.SMD_RMD_JOBS.DEVICE_PRIVACY_LINE) || "Runs on this device. Your PDFs and patient data are read here and never uploaded. Works offline.") + '</div>'
+      : "";
+    return '<div class="rmd-po-status" aria-live="polite">' + inner + privLine + '</div>';
   }
 
   function clearPoPoll() {
@@ -754,38 +758,153 @@
     });
   }
 
+  function draftJobsRunner() {
+    var j = G && G.SMD_RMD_JOBS;
+    return (j && typeof j.runWithFallback === "function") ? j : null;
+  }
+
   function runOnDeviceDraft(target, jobBundle, resume) {
     st.poStatus = "running";
     st.poProgress = "Drafting on this device: outline";
+    st.poRetryText = null;
     st.poError = null;
     st.poCancelError = null;
     st.poCancelled = false;
     st.poResumeCheckpoint = null;
     if (target) render(target);
 
-    return G.SMD_RMD_ONDEVICE_DRAFT.run(jobBundle, {
-      resume: !!resume,
-      onProgress: function (info) {
+    var jobId = jobBundle && jobBundle.job && jobBundle.job.id;
+    var pid = apiProjectId();
+    var JR = draftJobsRunner();
+
+    if (!JR) {
+      return G.SMD_RMD_ONDEVICE_DRAFT.run(jobBundle, {
+        resume: !!resume,
+        onProgress: function (info) {
+          if (st.poCancelled) return;
+          if (info && info.label) {
+            st.poProgress = info.label;
+            if (target) render(target);
+          }
+        },
+        isCancelled: function () {
+          return !!st.poCancelled;
+        }
+      }).then(function () {
         if (st.poCancelled) return;
-        if (info && info.label) {
-          st.poProgress = info.label;
+        st.poStatus = "succeeded";
+        st.poProgress = null;
+        st.poError = null;
+        st.poResumeCheckpoint = null;
+        reloadVersions(target);
+      }).catch(function (err) {
+        if (st.poCancelled || (err && err.code === "cancelled")) return;
+        st.poStatus = "failed";
+        st.poProgress = null;
+        st.poError = mapPoError(err);
+        st.poResumeCheckpoint = null;
+        if (target) render(target);
+      });
+    }
+
+    var deferredFail = null;
+    function wrappedApiRequest(method, url, body) {
+      if (method === "POST" && /\/v1\/jobs\/[^/]+\/device-fail$/.test(String(url || ""))) {
+        deferredFail = { url: url, body: body };
+        return Promise.resolve({ deferred: true });
+      }
+      return SMD.api.request(method, url, body);
+    }
+
+    return JR.runWithFallback("draft", function (resumeCtx) {
+      deferredFail = null;
+      return G.SMD_RMD_ONDEVICE_DRAFT.run(jobBundle, {
+        resume: !!(resume || (resumeCtx && resumeCtx.resume)),
+        signal: resumeCtx && resumeCtx.signal,
+        apiRequest: wrappedApiRequest,
+        onProgress: function (info) {
+          if (resumeCtx && resumeCtx.touchStep && info && info.step) {
+            resumeCtx.touchStep(info.step);
+          }
+          if (st.poCancelled) return;
+          if (info && info.label) {
+            st.poProgress = info.label;
+            if (target) render(target);
+          }
+        },
+        isCancelled: function () {
+          return !!st.poCancelled;
+        }
+      });
+    }, function (latestCp, fallbackMeta) {
+      if (!jobId || !SMD.api || typeof SMD.api.request !== "function") {
+        return Promise.reject(new Error("Missing job ID for cloud continuation"));
+      }
+      return SMD.api.request("POST", "/v1/jobs/" + encodeURIComponent(jobId) + "/to-cloud", {
+        fallback: fallbackMeta
+      }).then(function (cloudRes) {
+        st.poStatus = "queued";
+        st.poRetryText = null;
+        st.poProgress = "Continuing draft in StewardMD cloud...";
+        st.poError = null;
+        if (target) render(target);
+        startPoPoll(target, jobId);
+        return cloudRes;
+      });
+    }, {
+      jobKey: "draft:" + (jobId || pid),
+      projectId: pid,
+      targetId: jobId || "draft",
+      engine: "ondevice:draft",
+      onStatus: function (info) {
+        if (st.poCancelled) return;
+        if (info && info.state === "retrying" && info.message) {
+          st.poRetryText = info.message;
+          st.poProgress = info.message;
           if (target) render(target);
         }
-      },
-      isCancelled: function () {
-        return !!st.poCancelled;
       }
-    }).then(function () {
+    }).then(function (out) {
       if (st.poCancelled) return;
-      st.poStatus = "succeeded";
+      st.poRetryText = null;
+      if (out && out.ok && out.source === "device") {
+        st.poStatus = "succeeded";
+        st.poProgress = null;
+        st.poError = null;
+        st.poResumeCheckpoint = null;
+        reloadVersions(target);
+        return;
+      }
+      if (out && out.ok && out.source === "cloud") {
+        return;
+      }
       st.poProgress = null;
-      st.poError = null;
-      st.poResumeCheckpoint = null;
-      reloadVersions(target);
-    }).catch(function (err) {
-      if (st.poCancelled || (err && err.code === "cancelled")) return;
+      if (out && out.state === "cancelled_to_device") {
+        st.poStatus = "paused";
+        st.poError = null;
+        checkResumeCheckpoint(target, pid);
+        if (target) render(target);
+        return;
+      }
       st.poStatus = "failed";
+      st.poError = (out && out.message) || "Could not continue to cloud.";
+      checkResumeCheckpoint(target, pid);
+      if (target) render(target);
+    }).catch(function (err) {
+      st.poRetryText = null;
+      if (st.poCancelled || (err && err.code === "cancelled")) return;
+      if (deferredFail && err && err.rmdState === "data_problem" && SMD.api && typeof SMD.api.request === "function") {
+        SMD.api.request("POST", deferredFail.url, deferredFail.body).catch(function () {});
+      }
       st.poProgress = null;
+      if (err && err.rmdState === "offline") {
+        st.poStatus = "paused";
+        st.poError = "Offline. Saved on this device where it stopped.";
+        checkResumeCheckpoint(target, pid);
+        if (target) render(target);
+        return;
+      }
+      st.poStatus = "failed";
       st.poError = mapPoError(err);
       st.poResumeCheckpoint = null;
       if (target) render(target);
