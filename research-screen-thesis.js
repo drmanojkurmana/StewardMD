@@ -39,11 +39,20 @@
 
   /* ---------- on-device DOCX & PDF extraction ---------- */
 
-  var _pdfLibPromise = null;
-  var PDFJS_LOCAL = "/vendor/pdfjs/pdf.min.js";
-  var PDFJS_LOCAL_W = "/vendor/pdfjs/pdf.worker.min.js";
-  var PDFJS_CDN = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
-  var PDFJS_CDN_W = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  function onDeviceOcrOn() {
+    var OD = G && G.SMD_RMD_ONDEVICE_PDF;
+    if (OD && typeof OD.isEnabled === "function") return OD.isEnabled();
+    try {
+      if (typeof location !== "undefined" && location.search) {
+        var m = location.search.match(/[?&]rmd_ondevice_ocr=([^&]+)/);
+        if (m != null) return m[1] === "1" || m[1] === "on" || m[1] === "true";
+      }
+    } catch (e) {}
+    try {
+      if (typeof localStorage !== "undefined") return localStorage.getItem("smd_rmd_ondevice_ocr") !== "0";
+    } catch (e) {}
+    return true;
+  }
 
   function decodeUtf8(u8) {
     if (G && G.TextDecoder) {
@@ -298,32 +307,10 @@
   }
 
   function loadPdfJs() {
-    if (_pdfLibPromise) return _pdfLibPromise;
-    if (G && G.pdfjsLib) {
-      try { G.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_LOCAL_W; } catch (e) {}
-      _pdfLibPromise = Promise.resolve(G.pdfjsLib);
-      return _pdfLibPromise;
-    }
-    if (!D) return Promise.reject(new Error("pdf_unavailable"));
-    _pdfLibPromise = new Promise(function (resolve, reject) {
-      function tryLoad(src, worker, fallback) {
-        var s = D.createElement("script");
-        s.src = src;
-        s.onload = function () {
-          var lib = G && G.pdfjsLib;
-          if (!lib) { if (fallback) fallback(); else { _pdfLibPromise = null; reject(new Error("pdf_load")); } return; }
-          try { lib.GlobalWorkerOptions.workerSrc = worker; } catch (e) {}
-          resolve(lib);
-        };
-        s.onerror = function () {
-          if (fallback) fallback();
-          else { _pdfLibPromise = null; reject(new Error("pdf_load")); }
-        };
-        D.head.appendChild(s);
-      }
-      tryLoad(PDFJS_LOCAL, PDFJS_LOCAL_W, function () { tryLoad(PDFJS_CDN, PDFJS_CDN_W, null); });
-    });
-    return _pdfLibPromise;
+    var OD = G && G.SMD_RMD_ONDEVICE_PDF;
+    if (OD && typeof OD.loadPdfJs === "function") return OD.loadPdfJs();
+    if (G && G.pdfjsLib) return Promise.resolve(G.pdfjsLib);
+    return Promise.reject(new Error("pdf_unavailable"));
   }
 
   function joinPdfTextItems(items) {
@@ -358,10 +345,45 @@
     return !!(C.platform && C.platform !== "web");
   }
 
+  /* The Rust PDF reader (vendor/rust-pdf, loaded by the on-device reader): every page's lines in one go, as
+     { pages: [{ n, text }] } in the shape below, or null (pdf.js reads it as before). */
+  var RUST_MAX_PAGES = 3000;
+  function rustPagesText(u8) {
+    var OD = G && G.SMD_RMD_ONDEVICE_PDF;
+    if (!OD || typeof OD.loadRust !== "function") return Promise.resolve(null);
+    return OD.loadRust().then(function (R) {
+      if (!R || (typeof R.isEnabled === "function" && !R.isEnabled())) return null;
+      var want = [];
+      for (var i = 1; i <= RUST_MAX_PAGES; i++) want.push(i);
+      return R.lines(u8, want);
+    }).then(function (res) { return rustToThesisPages(res); }, function () { return null; });
+  }
+  function rustToThesisPages(res) {
+    if (!res || !Array.isArray(res.pages) || !res.total || res.total > RUST_MAX_PAGES || res.pages.length !== res.total) return null;
+    var pages = [], chars = 0;
+    res.pages.forEach(function (p) {
+      var txt = (p.lines || []).map(function (l) { return String(l.tx || "").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, ""); }).filter(Boolean).join("\n");
+      chars += txt.replace(/\s+/g, "").length;
+      pages.push({ n: p.n, text: txt });
+    });
+    return { pages: pages, chars: chars };
+  }
+
   function readPdfLocal(file, onProgress) {
     if (!file || typeof file.arrayBuffer !== "function") return Promise.resolve(null);
-    return Promise.all([loadPdfJs(), file.arrayBuffer()]).then(function (pair) {
-      var pdfjs = pair[0], u8 = new Uint8Array(pair[1]);
+    return file.arrayBuffer().then(function (buf) {
+      var u8 = new Uint8Array(buf);
+      return rustPagesText(u8).then(function (rp) {
+        if (!rp) return readPdfLocalJs(u8, onProgress);
+        if (onProgress) onProgress(rp.pages.length, rp.pages.length);
+        if (rp.chars < 20) return { pages: [], emptyText: true, bytes: u8 };
+        return { pages: rp.pages, emptyText: false };
+      });
+    });
+  }
+
+  function readPdfLocalJs(u8, onProgress) {
+    return loadPdfJs().then(function (pdfjs) {
       var openOpts = isNativeShell() ? { data: u8, disableWorker: true } : { data: u8 };
       return pdfjs.getDocument(openOpts).promise.catch(function (err) {
         if (err && err.name === "PasswordException") throw err;
@@ -372,7 +394,8 @@
         var pages = [], chars = 0, idx = 1;
         function nextPage() {
           if (idx > total) {
-            if (chars < 20) return { pages: [], emptyText: true };
+            if (pdf && typeof pdf.destroy === "function") { try { pdf.destroy(); } catch (e) {} }
+            if (chars < 20) return { pages: [], emptyText: true, bytes: u8 };
             return { pages: pages, emptyText: false };
           }
           if (onProgress && (idx === 1 || idx % 10 === 0 || idx === total)) {
@@ -954,7 +977,9 @@
     } else {
       h.push('<div class="rmd-card">');
       h.push('<h2>Upload your thesis</h2>');
-      h.push('<p class="rmd-screen-subtitle">PDF or Word (.docx), up to 40 MB. Text and tables are read directly on your device; scanned PDFs use our OCR server.</p>');
+      h.push('<p class="rmd-screen-subtitle">' + (onDeviceOcrOn()
+        ? 'Text and scanned pages are read on your phone.'
+        : 'PDF or Word (.docx), up to 40 MB. Text and tables are read directly on your device; scanned PDFs use our OCR server.') + '</p>');
       h.push('<div class="rmd-field"><label for="rmdThesisFile">Thesis file</label>');
       h.push('<input type="file" id="rmdThesisFile" accept=".pdf,.docx,.doc,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-word.document.12,application/docx,application/msword"></div>');
       h.push('<p class="rmd-thesis-meta">Supports PDF and Word (.docx) thesis files directly, including results tables.</p>');
@@ -1078,17 +1103,60 @@
     // Try on-device PDF extraction first for real PDFs (works up to 40 MB and >60 pages, 0 tokens).
     // Tiny fixtures (< 100 bytes) or scanned image-only PDFs automatically fall back to server OCR.
     if (file.size >= 100 && (typeof file.arrayBuffer === "function" || typeof FileReader !== "undefined")) {
-      setMsg(container, (SMD.p2 && SMD.p2.loadingHtml) ? SMD.p2.loadingHtml("Reading your thesis") : "Reading your thesis");
+      var loadHtml = (SMD.p2 && SMD.p2.loadingHtml) ? SMD.p2.loadingHtml : function (t) { return t; };
+      setMsg(container, loadHtml("Reading your thesis"));
       readPdfLocal(file, function (cur, tot) {
-        setMsg(container, (SMD.p2 && SMD.p2.loadingHtml) ? SMD.p2.loadingHtml("Reading page " + cur + " of " + tot) : "Reading page " + cur + " of " + tot);
+        setMsg(container, loadHtml("Reading page " + cur + " of " + tot));
       }).then(function (res) {
         if (res && res.pages && res.pages.length) {
           saveExtractedPages(res.pages, file.name, container, { artifactId: null, jobId: null });
           return;
         }
+        var OD = G && G.SMD_RMD_ONDEVICE_PDF;
+        var CP = G && G.SMD_RMD_CHECKPOINT;
+        if (onDeviceOcrOn() && OD && typeof OD.hasNativeOcr === "function" && OD.hasNativeOcr() && typeof OD.extract === "function") {
+          setMsg(container, loadHtml("Reading scanned PDF on your phone"));
+          var bytesP = (res && res.bytes)
+            ? Promise.resolve(res.bytes)
+            : readFileAsArrayBuffer(file).then(function (ab) { return new Uint8Array(ab); });
+          bytesP.then(function (u8) {
+            return (typeof OD.sha256 === "function" ? OD.sha256(u8) : Promise.resolve(null)).then(function (hash) {
+              var ckKey = hash ? ("pdf:" + tpid + ":" + hash) : "";
+              var resumeP = (CP && ckKey) ? CP.get(ckKey).catch(function () { return null; }) : Promise.resolve(null);
+              return resumeP.then(function (resume) {
+                return OD.extract(u8, {
+                  sha256: hash,
+                  resume: resume,
+                  onProgress: function (cur, tot) {
+                    setMsg(container, loadHtml("Reading scanned page " + cur + " of " + tot + " on your phone"));
+                  },
+                  onPage: function (partial) {
+                    if (CP && partial && partial.sha256) {
+                      return CP.put("pdf:" + tpid + ":" + partial.sha256, partial).catch(function () {});
+                    }
+                  }
+                }).then(function (result) {
+                  var clearP = (CP && result && result.sha256)
+                    ? CP.remove("pdf:" + tpid + ":" + result.sha256).catch(function () {})
+                    : Promise.resolve();
+                  return clearP.then(function () {
+                    saveExtractedPages(result.pages, file.name, container, { artifactId: null, jobId: null });
+                  });
+                });
+              });
+            });
+          }).catch(function (err) {
+            if (err && (err.name === "PasswordException" || err.code === "password")) {
+              setMsg(container, '<div class="rmd-banner rmd-banner-warn">This PDF is password-protected. Save an unlocked copy (or export as Word .docx) and upload again.</div>');
+              return;
+            }
+            uploadPdfServer(file, container);
+          });
+          return;
+        }
         uploadPdfServer(file, container);
       }).catch(function (err) {
-        if (err && err.name === "PasswordException") {
+        if (err && (err.name === "PasswordException" || err.code === "password")) {
           setMsg(container, '<div class="rmd-banner rmd-banner-warn">This PDF is password-protected. Save an unlocked copy (or export as Word .docx) and upload again.</div>');
           return;
         }
@@ -2156,6 +2224,7 @@
     countWords: countWords,
     parseDocx: parseDocx,
     readZipEntries: readZipEntries,
+    rustToThesisPages: rustToThesisPages,
     extractDocxXmlBlocks: extractDocxXmlBlocks,
     paginateBlocks: paginateBlocks,
     handleFile: handleFile,

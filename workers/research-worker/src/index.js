@@ -1,5 +1,5 @@
 // ResearchMD Phase 3 worker front door.
-// Cron (every minute) -> one named Durable Object -> container POST /drain.
+// Cron (every minute) -> D1 open-job check -> one named Durable Object -> container POST /drain.
 // The container pulls the research-jobs queue itself; this Worker only wakes
 // it and forwards config. fetch() returns 404: nothing here is public.
 //
@@ -112,8 +112,30 @@ export class ResearchWorkerContainer extends DurableObject {
   }
 }
 
+// Only rows this recent count as waiting work. Rows left in "queued" by a lost message would
+// otherwise keep the container awake forever (lease is 2 h, so a live job is always newer).
+// shortcut: a job older than 3 h whose message is still in the queue waits for the next new job; fine while jobs finish in minutes.
+const OPEN_WINDOW_MS = 3 * 60 * 60 * 1000;
+const OPEN_JOBS_SQL =
+  "SELECT (SELECT COUNT(*) FROM research_job_runs WHERE status IN ('queued','running') AND created_ts > ?1)" +
+  " + (SELECT COUNT(*) FROM research_stats_jobs WHERE status IN ('queued','running') AND created_ts > ?1) AS n";
+
+// The cron must not wake the container when nothing is waiting: every /drain call counts as
+// activity, so an unconditional drain kept the 4 GB container running 24/7.
+export async function hasOpenJobs(env, now = Date.now()) {
+  if (!env.RESEARCH_DB) return true; // no binding: keep the old always-drain behaviour
+  try {
+    const row = await env.RESEARCH_DB.prepare(OPEN_JOBS_SQL).bind(now - OPEN_WINDOW_MS).first();
+    return Number((row && row.n) || 0) > 0;
+  } catch (err) {
+    console.error("research open-job check failed; draining anyway", String((err && err.message) || err));
+    return true; // fail open: a D1 blip must not strand jobs
+  }
+}
+
 export default {
   async scheduled(event, env, ctx) {
+    if (!(await hasOpenJobs(env))) return;
     const stub = env.RESEARCH_WORKER.getByName("singleton");
     ctx.waitUntil(
       stub.drain().then((r) => {

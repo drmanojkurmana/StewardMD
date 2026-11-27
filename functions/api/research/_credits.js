@@ -106,6 +106,50 @@ export async function outstandingReserves(db, ownerType, ownerId) {
     .bind(ownerType, ownerId).first();
   return (row && row.n) || 0;
 }
+/* A queued/running job older than this can no longer be running: the worker
+ * lease is 2 h and the research worker cron ignores rows older than 3 h, so
+ * a queue message that was lost (or a container that died) is permanent.
+ * Expiry releases the hold so the doctor's credits do not stay reserved. */
+export const LOST_JOB_MS = 3 * 60 * 60 * 1000;
+
+/* Fail lost jobs and release their holds. Idempotent and concurrency-safe:
+ * the guarded transition changes a row exactly once, so a second runner (or
+ * a racing getter) sees 0 changes and writes no release. Runs are capped at
+ * 20 rows per call because callers run it inline on request paths. */
+export async function expireLostJobs(db, uuid, now) {
+  const at = Number.isFinite(now) ? now : Date.now();
+  const cutoff = at - LOST_JOB_MS;
+  const rows = (await db.prepare(
+    "SELECT id FROM research_job_runs WHERE status IN ('queued','running') AND created_ts<? ORDER BY created_ts ASC LIMIT 20")
+    .bind(cutoff).all()).results || [];
+  let failedJobs = 0;
+  let releasedMicroUsd = 0;
+  for (const row of rows) {
+    const upd = await db.prepare(
+      "UPDATE research_job_runs SET status='failed',error_code='job_lost',completed_ts=? WHERE id=? AND status IN ('queued','running')")
+      .bind(at, row.id).run();
+    if (!upd.meta || upd.meta.changes !== 1) continue;
+    failedJobs++;
+    /* Same release shape as a failed worker job (_callback.js): the first
+     * reserve row pins owner and quote. */
+    const reserveRow = await db.prepare(
+      "SELECT * FROM research_credit_ledger WHERE job_id=? AND reason='reserve' ORDER BY ts ASC LIMIT 1")
+      .bind(row.id).first();
+    if (!reserveRow) continue;
+    const reservation = { ownerType: reserveRow.owner_type, ownerId: reserveRow.owner_id,
+      quote: -reserveRow.delta, jobId: row.id };
+    await releaseCredits(db, uuid, reservation);
+    releasedMicroUsd += reservation.quote;
+  }
+  /* Stats jobs hold no credits (T0 work), but their status is polled the
+   * same way, so they must not stay queued/running forever either. */
+  const statsUpd = await db.prepare(
+    "UPDATE research_stats_jobs SET status='failed',error_code='job_lost',completed_ts=? WHERE status IN ('queued','running') AND created_ts<?")
+    .bind(at, cutoff).run();
+  const failedStatsJobs = (statsUpd.meta && statsUpd.meta.changes) || 0;
+  return { failedJobs, failedStatsJobs, releasedMicroUsd };
+}
+
 /* The member's institution with the largest available pool, if any. */
 export async function pickInstitution(db, uid) {
   const rows = (await db.prepare(

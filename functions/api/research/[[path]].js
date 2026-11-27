@@ -45,7 +45,7 @@ import { adminInstitutionRoute, creditsView } from "./_credits.js";
  * (above) and the project role, and an outsider gets 404. */
 import { extractionTemplates, getExtraction, putExtraction, verifyExtraction,
   correctExtraction, extractionAudit, acceptSuggestion, promoteExtraction,
-  listArtifacts, uploadPdfArtifact, artifactResult } from "./_extraction.js";
+  listArtifacts, uploadPdfArtifact, uploadDeviceExtraction, artifactResult } from "./_extraction.js";
 import { extractionSuggestions, screeningSuggestion, listScreeningSuggestions } from "./_suggest.js";
 import { robTools, getRob, submitRob, listRobConflicts, resolveRobConflict, robAudit } from "./_rob.js";
 import { getDictionary, putDictionary, uploadData, createDataImport,
@@ -79,7 +79,7 @@ import { createComment, listComments, createResponse, listResponses,
  * (_checklists.js). Firebase auth is the block above; each project route
  * uses projectGate and an outsider gets 404. */
 import { listVersions, getManuscript, putSection, requestApproval, approveManuscript,
-  lockManuscript, manuscriptGates, exportManuscript } from "./_manuscript.js";
+  lockManuscript, manuscriptGates, exportManuscript, savePublicationConsent } from "./_manuscript.js";
 import { listChecklists, getChecklist, checklistSnapshot, getManual, putManual } from "./_checklists.js";
 import { findStudies, autoAddStudies } from "./_auto_studies.js";
 import { aiDraft } from "./_ai_draft.js";
@@ -2062,6 +2062,8 @@ export async function onRequest({ request, env, params }) {
   if (artCol && request.method === "GET") return listArtifacts(p3Ctx, artCol[1]);
   const pdfUp = path.match(/^\/v1\/projects\/([^/]+)\/pdf-uploads$/);
   if (pdfUp && request.method === "POST") return uploadPdfArtifact(Object.assign({}, p3Ctx, { projectId: pdfUp[1] }));
+  const devExt = path.match(/^\/v1\/projects\/([^/]+)\/extractions\/device$/);
+  if (devExt && request.method === "POST") return uploadDeviceExtraction(Object.assign({}, p3Ctx, { projectId: devExt[1] }));
   const artResult = path.match(/^\/v1\/artifacts\/([^/]+)\/result$/);
   if (artResult && request.method === "GET") return artifactResult(p3Ctx, artResult[1]);
 
@@ -2117,6 +2119,12 @@ export async function onRequest({ request, env, params }) {
   }
   const manVersions = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/versions$/);
   if (manVersions && request.method === "GET") return listVersions(p3Ctx, manVersions[1]);
+  /* F-12: case-report publication consent attestation (owner or editor). */
+  const pubConsent = path.match(/^\/v1\/projects\/([^/]+)\/publication-consent$/);
+  if (pubConsent && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid publication consent payload", requestId);
+    return savePublicationConsent(p3Ctx, pubConsent[1], body);
+  }
   const manSection = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/sections\/([^/]+)$/);
   if (manSection && request.method === "PUT") {
     const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid manuscript payload", requestId);

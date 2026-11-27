@@ -52,17 +52,19 @@ export function utcDayStart(nowMs) {
   return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
 }
 
-/* pdf_extract daily job caps, checked before enqueue. Counts every job
- * created today (any status): a failed attempt still used a slot. */
+/* pdf_extract daily job caps, checked before enqueue. Counts every server
+ * container job created today (any status): a failed attempt still used a
+ * slot. On-device extractions never used the container and are excluded. */
+const SERVER_PDF_FILTER = " AND (output_json IS NULL OR output_json NOT LIKE '%\"engine\":\"ondevice\"%')";
 export async function checkPdfJobCaps(db, projectId, uid, addJobs, nowMs) {
   const dayStart = utcDayStart(nowMs);
   const p = await db.prepare(
-    "SELECT COUNT(*) AS n FROM research_job_runs WHERE project_id=? AND kind='pdf_extract' AND created_ts>=?")
+    "SELECT COUNT(*) AS n FROM research_job_runs WHERE project_id=? AND kind='pdf_extract' AND created_ts>=?" + SERVER_PDF_FILTER)
     .bind(projectId, dayStart).first();
   if (((p && p.n) || 0) + addJobs > DAILY_CAPS.projectJobs)
     return { code: "project_daily_cap", message: HARD_STOP_MESSAGES.project_daily_cap };
   const u = await db.prepare(
-    "SELECT COUNT(*) AS n FROM research_job_runs WHERE created_by=? AND kind='pdf_extract' AND created_ts>=?")
+    "SELECT COUNT(*) AS n FROM research_job_runs WHERE created_by=? AND kind='pdf_extract' AND created_ts>=?" + SERVER_PDF_FILTER)
     .bind(uid, dayStart).first();
   if (((u && u.n) || 0) + addJobs > DAILY_CAPS.userJobs)
     return { code: "user_daily_cap", message: HARD_STOP_MESSAGES.user_daily_cap };
@@ -74,7 +76,7 @@ export async function checkPdfJobCaps(db, projectId, uid, addJobs, nowMs) {
  * not lose a slot to a gateway, callback or worker fault. Failures caused by the doctor's data (phi_blocked,
  * invalid_*) and AI-quality stops (gate_failed, ceiling_*) still count: those spent AI calls. */
 const PO_FREE_FAILURE_SQL =
-  "NOT (status='failed' AND (error_code LIKE 'gateway%' OR error_code IN ('callback_unavailable','snapshot_invalid','manuscript_failed')))";
+  "NOT (status='failed' AND (error_code LIKE 'gateway%' OR error_code IN ('callback_unavailable','snapshot_invalid','manuscript_failed','job_lost')))";
 export async function checkPoJobCaps(db, projectId, uid, nowMs) {
   const dayStart = utcDayStart(nowMs);
   const p = await db.prepare(

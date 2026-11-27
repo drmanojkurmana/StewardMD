@@ -1,0 +1,28 @@
+[package]
+name = "research-pdf"
+version = "0.1.0"
+edition = "2021"
+description = "ResearchMD PDF reader: words with positions, page text and tables, matching pdfplumber"
+license = "UNLICENSED"
+publish = false
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+lopdf = { version = "0.47", default-features = false }
+serde_json = { version = "1", features = ["preserve_order", "float_roundtrip"] }
+sha2 = "0.10"
+ryu = "1"
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+# lopdf pulls in getrandom (only used when writing encrypted files). On plain
+# wasm32 we give it a backend that always fails, so the .wasm needs no JS
+# imports. See .cargo/config.toml.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = "0.4"

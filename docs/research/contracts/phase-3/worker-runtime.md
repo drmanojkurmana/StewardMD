@@ -26,7 +26,7 @@ Worker stewardmd-research-worker (cron "* * * * *")
 |---|---|---|
 | `image` | `../../backend/research/worker/Dockerfile` | python:3.12-slim + tesseract-ocr, non-root uid 10001, port 8080 |
 | `image_build_context` | `../../backend/research` | Dockerfile COPYs requirements.txt, app/ and worker/ from the service root |
-| `instance_type` | `standard-1` (1/2 vCPU, 4 GiB memory, 8 GB disk) | pdfplumber plus Tesseract OCR needs headroom over `basic` (1 GiB); 25 MB PDFs rasterise to large images |
+| `instance_type` | `standard-1` (1/2 vCPU, 4 GiB memory, 8 GB disk) | Tesseract OCR (PyMuPDF renders the page) needs headroom over `basic` (1 GiB); 25 MB PDFs rasterise to large images |
 | `max_instances` | 3 | upper bound; v1 routes every cron to one named DO, so effective concurrency is 1 container. Scale-out (multiple named DOs) is a later contract change |
 | inactivity timeout | 5 min (`setInactivityTimeout(300000)`) | the current-API equivalent of the legacy `sleepAfter`; re-armed in the DO constructor when the container is already running |
 | cron | `* * * * *` | every minute; an empty pull returns immediately, so idle cost is one short RPC |

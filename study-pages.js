@@ -281,7 +281,7 @@
           '<button type="button" class="st-p3-btn" data-act="st-undo" id="stP3Undo" aria-label="Undo">'+ICO.undo+'</button>' +
           '<button type="button" class="st-p3-btn" data-act="st-redo" id="stP3Redo" aria-label="Redo">'+ICO.redo+'</button>' +
           '<button type="button" class="st-p3-btn st-p3-collapse" data-act="st-p3-fav" id="stP3Fav" aria-label="Star this page" aria-pressed="false">'+ICO.star+'</button>' +
-          '<button type="button" class="st-p3-btn" data-act="st-p3-add" aria-label="Add page">'+ICO.plus+'</button>' +
+          (v.nb ? '<button type="button" class="st-p3-btn" data-act="st-p3-add" aria-label="Add page">'+ICO.plus+'</button>' : '') +   /* a PDF's pages are fixed */
           '<button type="button" class="st-p3-btn st-p3-collapse" data-act="st-p3-close" aria-label="Close">'+ICO.x+'</button>' +
           '<button type="button" class="st-p3-btn" data-act="st-p3-more" aria-label="More options">'+ICO.more+'</button>' +
         '</div>' +
@@ -347,15 +347,8 @@
     }
     var sc = host() && host().root() ? host().root().querySelector("#stSc") : null;
     if(sc) sc.style.overflowY = s.scrollDir==="horizontal" ? "hidden" : "auto";
-    /* lock */
-    var locked = !!s.lock;
-    var ink = host() && host().root() ? host().root().querySelector(".st-ink") : null;
-    if(locked && v.tool){ /* tool stays but overlay pointer events off */
-      var col = host().root().querySelector("#stPages");
-      if(col) col.classList.remove("st-ink");
-    }
-    /* palm rejection stored but Phase1 owns behaviour: we expose flag */
-    v.palm = s.palm !== false;
+    /* lock: put the writing tool down (study.js setTool refuses one while locked) */
+    if(s.lock && v.tool && v.tool!=="laser"){ v.tool=null; if(G.STUDY&&G.STUDY.syncTb) G.STUDY.syncTb(); }
   }
   var origSc = null;
   function bindPaging(){
@@ -662,14 +655,14 @@
     var pageKey=curPageKey(), cur=v.cur||1, n=v.n||1;
     var thumbHtml='<canvas id="stP3MoreThumb" width="90" height="127" class="st-p3-more-thumb"></canvas>';
     var html = '<div class="st-p3-sh-head"><h3>Page '+cur+' of '+n+'</h3><button type="button" class="pn-btn sm" data-act="st-p3-close-sheet">Done</button></div>' +
-      '<div class="st-p3-more-head">'+thumbHtml+'<div><div class="st-p3-more-title">Page '+cur+'</div><small>'+esc(tplLabel(tplForPage(v.doc, pageKey||"")))+' • '+(v.nb?"Notebook":"PDF")+'</small></div></div>' +
+      '<div class="st-p3-more-head">'+thumbHtml+'<div><div class="st-p3-more-title">Page '+cur+'</div><small>'+(v.nb ? esc(tplLabel(tplForPage(v.doc, pageKey||"")))+' • Notebook' : 'PDF page')+'</small></div></div>' +
       '<div class="st-p3-menu">' +
-        '<button type="button" class="st-p3-menu-item" data-act="st-p3-copy">'+ICO.copy+'<div class="st-p3-menu-txt"><strong>Copy Page</strong><small>Duplicates page + strokes</small></div></button>' +
-        '<button type="button" class="st-p3-menu-item" data-act="st-p3-rotate">'+ICO.rotate+'<div class="st-p3-menu-txt"><strong>Rotate Page</strong><small>90° steps</small></div></button>' +
+        (v.nb ? '<button type="button" class="st-p3-menu-item" data-act="st-p3-copy">'+ICO.copy+'<div class="st-p3-menu-txt"><strong>Copy Page</strong><small>Duplicates page + strokes</small></div></button>' : '') +
+        (v.nb ? '<button type="button" class="st-p3-menu-item" data-act="st-p3-rotate">'+ICO.rotate+'<div class="st-p3-menu-txt"><strong>Rotate Page</strong><small>90° steps</small></div></button>' : '') +
         '<button type="button" class="st-p3-menu-item" data-act="st-p3-outline">'+ICO.bookmark+'<div class="st-p3-menu-txt"><strong>Add Page to Outline</strong><small>Bookmark this page</small></div></button>' +
-        '<button type="button" class="st-p3-menu-item" data-act="st-p3-change-tpl">'+ICO.tpl+'<div class="st-p3-menu-txt"><strong>Change Template</strong><small>This page or all pages</small></div></button>' +
+        (v.nb ? '<button type="button" class="st-p3-menu-item" data-act="st-p3-change-tpl">'+ICO.tpl+'<div class="st-p3-menu-txt"><strong>Change Template</strong><small>This page or all pages</small></div></button>' : '') +
         '<button type="button" class="st-p3-menu-item" data-act="st-p3-go">'+ICO.gotoIco+'<div class="st-p3-menu-txt"><strong>Go to Page</strong><small>1–'+n+'</small></div></button>' +
-        '<button type="button" class="st-p3-menu-item" data-act="st-p3-settings">'+ICO.gear+'<div class="st-p3-menu-txt"><strong>Settings</strong><small>Scroll, palm rejection, lock</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-p3-settings">'+ICO.gear+'<div class="st-p3-menu-txt"><strong>Settings</strong><small>Scroll direction, lock editing</small></div></button>' +
         '<button type="button" class="st-p3-menu-item" data-act="st-print-open">'+ICO.print+'<div class="st-p3-menu-txt"><strong>Print</strong><small>This page or all pages</small></div></button>' +
         '<button type="button" class="st-p3-menu-item" data-act="st-present">'+ICO.present+'<div class="st-p3-menu-txt"><strong>Present</strong><small>Fullscreen, laser follows pointer</small></div></button>' +
         '<button type="button" class="st-p3-menu-item" data-act="st-audio-list">'+ICO.mic+'<div class="st-p3-menu-txt"><strong>Recordings</strong><small>Play and tap a stroke to jump</small></div></button>' +
@@ -694,8 +687,7 @@
     var s=v.doc.settings||{scrollDir:"vertical", palm:true, lock:false};
     var html = '<div class="st-p3-sh-head"><h3>Settings</h3><button type="button" class="pn-btn sm" data-act="st-p3-close-sheet">Done</button></div>' +
       '<div class="st-p3-setting"><div><strong>Scrolling direction</strong><small>Vertical for reading, horizontal for boards</small></div><div class="st-p3-seg"><button type="button" class="st-p3-seg-btn'+(s.scrollDir!=="horizontal"?" on":"")+'" data-act="st-p3-scroll" data-v="vertical">Vertical</button><button type="button" class="st-p3-seg-btn'+(s.scrollDir==="horizontal"?" on":"")+'" data-act="st-p3-scroll" data-v="horizontal">Horizontal</button></div></div>' +
-      '<div class="st-p3-setting"><div><strong>Stylus &amp; palm rejection</strong><small>Phase 1 owns behaviour</small></div><button type="button" class="pn-btn sm" data-act="st-p3-palm" aria-pressed="'+!!s.palm+'">'+(s.palm?"ON":"OFF")+'</button></div>' +
-      '<div class="st-p3-setting"><div><strong>Document editing lock</strong><small>Read-only</small></div><button type="button" class="pn-btn sm" data-act="st-p3-lock" aria-pressed="'+!!s.lock+'">'+(s.lock?"LOCKED":"EDIT")+'</button></div>' +
+      '<div class="st-p3-setting"><div><strong>Lock editing</strong><small>Read only: no pen, eraser or text until unlocked</small></div><button type="button" class="pn-btn sm" data-act="st-p3-lock" aria-pressed="'+!!s.lock+'">'+(s.lock?"Locked":"Off")+'</button></div>' +
       '<div class="st-p3-setting"><div><strong>Storage used</strong><small id="st5bStorage">Calculating…</small></div></div>';
     var el=sheetEl("stP3SettingsSheet", html);
     if(!el) return;
@@ -707,21 +699,13 @@
         el.querySelectorAll("[data-act='st-p3-scroll']").forEach(function(x){ x.classList.remove("on"); }); b.classList.add("on");
       });
     });
-    el.querySelector("[data-act='st-p3-palm']").addEventListener("click", function(){
-      var btn=el.querySelector("[data-act='st-p3-palm']");
-      var curOn = btn.getAttribute("aria-pressed")==="true";
-      var next=!curOn;
-      v.doc.settings.palm=next;
-      put("docs", v.doc).then(function(){ applySettings(); });
-      btn.textContent=next?"ON":"OFF"; btn.setAttribute("aria-pressed", next?"true":"false");
-    });
     el.querySelector("[data-act='st-p3-lock']").addEventListener("click", function(){
       var btn=el.querySelector("[data-act='st-p3-lock']");
       var curLock = btn.getAttribute("aria-pressed")==="true";
       var next=!curLock;
       v.doc.settings.lock=next;
       put("docs", v.doc).then(function(){ applySettings(); });
-      btn.textContent=next?"LOCKED":"EDIT"; btn.setAttribute("aria-pressed", next?"true":"false");
+      btn.textContent=next?"Locked":"Off"; btn.setAttribute("aria-pressed", next?"true":"false");
       toast(next?"Document locked (read-only).":"Document unlocked.");
     });
   }
@@ -1129,9 +1113,10 @@
         var shB=rootB.querySelectorAll(".st-sheet"); if(shB) Array.prototype.forEach.call(shB, function(s){ if(s.parentNode) s.parentNode.removeChild(s); });
       }
       try{ if(G.STUDY&&G.STUDY.leave) G.STUDY.leave(); }catch(e){}
+      /* Pop the editor off the PrepNucleus stack. Painting the library on top (the old way) left the editor under it,
+         so the system back reopened the document and every open grew the stack. */
       var host2=h||host();
-      if(G.STUDY&&G.STUDY.lib) G.STUDY.lib(host2);
-      else if(host2&&host2.root&&host2.back) host2.back();
+      if(host2&&host2.back) host2.back();
       return;
     }
     if(a==="st-p3-grid"){

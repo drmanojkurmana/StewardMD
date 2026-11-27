@@ -228,8 +228,8 @@
   // Nothing is written by this: restore calls it first and stops on the first problem.
   function verifyBackup(ent, sha) {
     var bad = function (m) { return { ok: false, error: m }; }, dec = function (n) { return JSON.parse(new TextDecoder().decode(ent[n])); }, man, names, listed = {};
-    try { man = dec("manifest.json"); } catch (e) { return Promise.resolve(bad("This is not a Study Studio backup.")); }
-    if (!man || man.format !== BK || man.v !== 1 || !Array.isArray(man.files) || !man.counts) return Promise.resolve(bad("This is not a Study Studio backup."));
+    try { man = dec("manifest.json"); } catch (e) { return Promise.resolve(bad("This is not a NoteBook backup.")); }
+    if (!man || man.format !== BK || man.v !== 1 || !Array.isArray(man.files) || !man.counts) return Promise.resolve(bad("This is not a NoteBook backup."));
     names = Object.keys(ent).filter(function (n) { return n !== "manifest.json"; });
     man.files.forEach(function (f) { listed[f.name] = f; });
     if (names.length !== man.files.length || names.some(function (n) { return !listed[n]; })) return Promise.resolve(bad("The backup's file list does not match what is inside it."));
@@ -288,8 +288,17 @@
     return null;
   }
 
+  /* Search text for pages a..b from the Rust reader's lines ({ page: [{ tx }] }, PREP_SRC.rustLinesFromBytes): one string
+     per page, spaces squashed, "" for a page with no text (a scan, read later by OCR). null in, null out (use pdf.js). */
+  function rustSearchTexts(rl, a, b) {
+    if (!rl) return null;
+    var out = {}, p;
+    for (p = a; p <= b; p++) out[p] = (rl[p] || []).map(function (l) { return l.tx; }).join(" ").replace(/\s+/g, " ").trim();
+    return out;
+  }
+
   var PURE = {
-    BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem,
+    rustSearchTexts: rustSearchTexts, BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem,
     bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs,
     hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure, penPressure: penPressure,
     r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble, coveredBy: coveredBy,
@@ -653,7 +662,7 @@
   function renderLib() {
     closeViewer();
     var h = host;
-    h.paint(h.bar("Study Studio", "Read and write on your PDFs", "back") + '<div class="pn-body st-lib" id="stLib">' +
+    h.paint(h.bar("NoteBook", "Read and write on your PDFs", "back") + '<div class="pn-body st-lib" id="stLib">' +
       '<div class="st-action-grid" id="stActionGrid">' +
         '<button type="button" class="st-action-tile pri" data-act="st-newnb">' +
           '<div class="st-action-ico">' + ICO.book + '</div>' +
@@ -854,16 +863,28 @@
       });
     });
   }
+  // Search text for pages a..b: the Rust reader (vendor/rust-pdf, via PREP_SRC) reads a batch in one go; null = use pdf.js.
+  function rustTexts(bytes, a, b) {
+    var SR = G.PREP_SRC, pages = [], p;
+    if (!SR || !SR.rustLinesFromBytes || !bytes) return Promise.resolve(null);
+    for (p = a; p <= b; p++) pages.push(p);
+    return SR.rustLinesFromBytes(bytes, pages).then(function (rl) { return rustSearchTexts(rl, a, b); }, function () { return null; });
+  }
   function indexDoc(d, from) {
-    return loadOriginal(d).then(openPdf).then(function (pdf) {
+    var bytes = null, rustOk = true;
+    return loadOriginal(d).then(function (b) { bytes = b; return openPdf(b); }).then(function (pdf) {
       var n = from, fin = function () { try { pdf.destroy(); } catch (e) {} };
       function batch() {
         return get("docs", d.id).then(function (cur) {
           if (!cur) return purge(d.id);
           if (n >= pdf.numPages) return;
-          var end = Math.min(n + 3, pdf.numPages), t = [], p;
-          for (p = n + 1; p <= end; p++) t.push((function (pg) { return pageText(pdf, pg).then(function (txt) { return put("ptext", { id: d.id + ":" + pg + ":pdf", doc: d.id, page: pg, src: "pdf", text: txt }); }); })(p));
-          return Promise.all(t).then(function () { n = end; return put("index", { doc: d.id, done: n }); }).then(function () {
+          var end = Math.min(n + (rustOk ? 25 : 3), pdf.numPages);
+          return (rustOk ? rustTexts(bytes, n + 1, end) : Promise.resolve(null)).then(function (rt) {
+            if (!rt) { rustOk = false; end = Math.min(n + 3, pdf.numPages); }
+            var t = [], p;
+            for (p = n + 1; p <= end; p++) t.push((function (pg) { return (rt ? Promise.resolve(rt[pg]) : pageText(pdf, pg)).then(function (txt) { return put("ptext", { id: d.id + ":" + pg + ":pdf", doc: d.id, page: pg, src: "pdf", text: txt }); }); })(p));
+            return Promise.all(t);
+          }).then(function () { n = end; return put("index", { doc: d.id, done: n }); }).then(function () {
             setIx(d.id, n, pdf.numPages);
             return new Promise(function (r) { G.setTimeout(r, 30); });
           }).then(batch);
@@ -1060,7 +1081,16 @@
     cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
     cv.style.touchAction = "none";
   }
-  function setTool(t) { if (!V) return; if (V.tool !== t) V.prevTool = V.tool; V.tool = t; if (V.lasso) { V.lasso = null; removeLassoBar(); } syncTb(); }
+  // Settings > Lock editing (study-pages.js): no writing tool until it is unlocked; reading and the laser still work.
+  function lockedFor(t) {
+    if (!(V && t && t !== "laser" && V.doc && V.doc.settings && V.doc.settings.lock)) return false;
+    if (host) host.toast("This document is locked. Unlock it in Settings to write.");
+    return true;
+  }
+  function setTool(t) {
+    if (!V) return;
+    if (lockedFor(t)) return;
+    if (V.tool !== t) V.prevTool = V.tool; V.tool = t; if (V.lasso) { V.lasso = null; removeLassoBar(); } syncTb(); }
   function zwClose() {
     var z = zwEl(); if (z) z.hidden = true;
     var btn = host && host.root && host.root() && host.root().querySelector('#stTb [data-act="st-zoom-window"]'); if (btn) btn.classList.remove("on");
@@ -1316,8 +1346,39 @@
             '<div class="st-pages" id="stPages"></div>' +
           '</div>' +
         '</div>');
+      pinEditor();
       return Promise.all([d.kind === "nb" ? null : loadOriginal(d).then(openPdf), strokesOf(id), get("undo", id), itemsOf(id)]).then(function (r) { startViewer(d, r[0], r[1], r[2], goto, r[3]); });
     }).catch(function () { h.toast("That PDF could not be opened."); });
+  }
+
+  /* The editor never scrolls as a whole; only #stSc (the pages) does. On the iPhone the WebView still moved it: a focus
+     (text box, search) or a drag on the bars scrolled .st-body or the window and left the top bar and tool row under
+     the status bar (owner's screenshot 2026-11-27). Anything that scrolls them is put straight back, except while a
+     text field has the keyboard (iOS lifts the page for it and gives it back when the keyboard closes). */
+  var pinOn = false;
+  function typing() { var a = D.activeElement; return !!(a && (a.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))); }
+  function repin() {
+    var r = host && host.root && host.root(), b = r && r.querySelector(":scope > .pn-body.st-body");
+    if (!b) return;
+    if (b.scrollTop || b.scrollLeft) { b.scrollTop = 0; b.scrollLeft = 0; }
+    if (r.scrollTop || r.scrollLeft) { r.scrollTop = 0; r.scrollLeft = 0; }
+    if (!typing() && (G.scrollY || G.scrollX)) { try { G.scrollTo(0, 0); } catch (e) {} }
+  }
+  // The floating dock (study.css) changes height with its options row; the page end, page pill and popovers follow.
+  function watchDock(b, r) {
+    var tb = b && b.querySelector("#stTb"); if (!tb) return;
+    var set = function () { var h = tb.offsetHeight; if (h) r.style.setProperty("--st-dock-h", h + "px"); };
+    set();
+    if (G.ResizeObserver) { try { new G.ResizeObserver(set).observe(tb); } catch (e) {} }
+  }
+  function pinEditor() {
+    var r = host && host.root && host.root(), b = r && r.querySelector(":scope > .pn-body.st-body");
+    if (b) { b.addEventListener("scroll", repin); watchDock(b, r); }
+    if (pinOn) return;
+    pinOn = true;
+    G.addEventListener("scroll", repin, { passive: true });
+    if (G.visualViewport) G.visualViewport.addEventListener("resize", function () { G.setTimeout(repin, 60); });
+    D.addEventListener("focusout", function () { G.setTimeout(repin, 120); }, true);
   }
 
   function toolbarHtml(d) {
@@ -1385,6 +1446,7 @@
     V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, items: items || [], stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 26), /* .st-pages padding 12 + 12, page border 1 + 1: fit width shows the whole page, no sideways scroll */ goto: goto, scribble: scrPref, lasso: null, prevTool: null, ink: null };
     V.onSel = onSel; D.addEventListener("selectionchange", onSel);
     if (carry) { V.tool = carry.tool; V.ci = carry.ci; V.wi = carry.wi; carry = null; }
+    else if (d.kind === "nb") V.tool = "pen";   // a notebook opens ready to write; a PDF opens to read (finger scrolls)
     bindPencil();
     if (pdf) pdf.getPage(1).then(function (p) { var v = p.getViewport({ scale: 1 }); V.ratio = v.height / v.width; build(); }); else build();
     syncTb();
@@ -2120,7 +2182,7 @@
   }
 
   /* ---- export and backup (A8) ---- */
-  function safeName(t) { return String(t || "").replace(/[\u0000-\u001f\\/:*?"<>|]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80) || "Study"; }
+  function safeName(t) { return String(t || "").replace(/[\u0000-\u001f\\/:*?"<>|]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80) || "NoteBook"; }
   function saveBlob(blob, name) {
     var a = D.createElement("a"), u = G.URL.createObjectURL(blob);
     a.href = u; a.download = name; D.body.appendChild(a); a.click(); D.body.removeChild(a);
@@ -2181,7 +2243,7 @@
     });
   }
   function backup() {
-    var F = G.fflate, name = "StewardMD Study backup " + stamp().slice(0, 10) + ".zip", nat = shareReady(), fs = nat && fsPlugin(), parts = [], n = 0, chain = Promise.resolve(), err = null, uri = null;
+    var F = G.fflate, name = "StewardMD NoteBook backup " + stamp().slice(0, 10) + ".zip", nat = shareReady(), fs = nat && fsPlugin(), parts = [], n = 0, chain = Promise.resolve(), err = null, uri = null;
     var man = { format: BK, v: 1, created: Date.now(), counts: { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0, audio: 0 }, files: [] };
     if (!(F && F.Zip && F.ZipPassThrough)) return bk("Backup is not available in this build.");
     var z = new F.Zip(function (e, chunk) {
@@ -2246,7 +2308,7 @@
   }
   function restoreBytes(bytes) {
     var F = G.fflate, ent;
-    try { ent = F.unzipSync(bytes); } catch (e) { return bk("Nothing was restored. That file is not a Study Studio backup."); }
+    try { ent = F.unzipSync(bytes); } catch (e) { return bk("Nothing was restored. That file is not a NoteBook backup."); }
     bk("Checking the backup...");
     return verifyBackup(ent, sha256).then(function (v) {
       if (!v.ok) return bk("Nothing was restored. " + v.error);
@@ -2300,8 +2362,11 @@
   }
   function signedIn() { var a = G.SMD_AUTH; return !!(a && a.currentUser); }
   function pagesText(pdf, id, pages) {
-    var SR = G.PREP_SRC;
-    return textOf(id).then(function (rows) {
+    var SR = G.PREP_SRC, rl = null;
+    // The Rust reader's lines (same as deck creation); a page it leaves out, or any failure, uses pdf.js below.
+    var rustP = (pdf && SR.rustLinesFromBytes) ? get("docs", id).then(function (d) { return d ? loadOriginal(d) : null; })
+      .then(function (b) { return b ? SR.rustLinesFromBytes(b, pages) : null; }).then(null, function () { return null; }) : Promise.resolve(null);
+    return rustP.then(function (r) { rl = r; return textOf(id); }).then(function (rows) {
       var ocr = {};
       rows.forEach(function (x) { if (x.src === "ocr" && x.text) ocr[x.page] = x.text; });
       return pages.reduce(function (pr, n) {
@@ -2312,6 +2377,7 @@
             if (lines.length) out.push({ p: n, ocr: true, lines: lines });
             return out;
           }
+          if (rl && rl[n] && rl[n].length) { out.push({ p: n, ocr: false, lines: rl[n] }); return out; }
           return pdf.getPage(n).then(function (pg) {
             return pg.getTextContent().then(function (tc) {
               pg.cleanup();
@@ -2381,7 +2447,7 @@
     if (a === "st-scancel") return closeSheet();
     if (a === "st-src") {
       var sd = el.getAttribute("data-doc"), sp = parseInt(el.getAttribute("data-p"), 10) || 1;
-      return get("docs", sd).then(function (d) { if (!d) return h.toast("That document is not in your Study Studio library any more."); h.push(function () { renderViewer(sd, sp); }); });
+      return get("docs", sd).then(function (d) { if (!d) return h.toast("That document is not in your NoteBook any more."); h.push(function () { renderViewer(sd, sp); }); });
     }
     if (a === "st-scan") return doScan();
     if (a === "st-filter") { lib.filter = el.getAttribute("data-v"); return fillLib(); }
@@ -2506,6 +2572,7 @@
     }
     if (a === "st-tool") {
       var t = el.getAttribute("data-v");
+      if (V.tool !== t && lockedFor(t)) return;
       // Phase 1: tapping the active pen/highlighter/eraser again opens its settings popover.
       if (V.tool === t && G.STUDY_INK && (t === "pen" || t === "hl" || t === "er")) { G.STUDY_INK.popover(inkApi(V.cur || 1, null), t); return syncTb(); }
       if (V.tool && V.tool !== "er" && t === "er") V.prevTool = V.tool;
@@ -2552,6 +2619,16 @@
         closeMoreMenu(); closePageSheet(); closeDocMenu(); closeFolderSheet();
         return true;
       }
+      // Editor sheets and popovers (study-pages.js, study-ink.js) close before the editor itself.
+      var p3 = root.querySelectorAll(".st-p3-sheet, [id^='stP3'][id$='Sheet'], .st-sheet, #stInkPop");
+      if (p3.length) { Array.prototype.forEach.call(p3, function (x) { if (x.parentNode) x.parentNode.removeChild(x); }); return true; }
+      // A lasso selection is dropped first (back used to leave the editor with it still up).
+      if (V && V.lasso) { var ln = V.lasso.n; V.lasso = null; removeLassoBar(); if (ln) redraw(ln); return true; }
+      var zw = root.querySelector("#stP3ZoomWindow");
+      if (zw && !zw.hidden) { zw.hidden = true; var zb = root.querySelector('#stTb [data-act="st-zoom-window"]'); if (zb) zb.classList.remove("on"); return true; }
+      // Back (the system back, Escape, the editor's own back button) on the editor: release it, then the host pops to
+      // the library. Without this the viewer stayed live under the library and its top bar was put back over it.
+      if (V && root.querySelector(":scope > .pn-body.st-body")) closeViewer();
     }
     return false;
   }

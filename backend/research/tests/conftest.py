@@ -15,6 +15,24 @@ from pypdf import PdfReader, PdfWriter
 from research_worker.queue import Message
 
 
+def pytest_configure(config):
+    """Build the Rust PDF reader (rust-pdf/) the worker loads, when it is not built yet.
+    CI runners and dev machines have cargo; the container builds it in worker/Dockerfile."""
+    import os
+    import shutil
+    import subprocess
+    from pathlib import Path
+
+    from research_worker import rust_pdf
+
+    if any(p and os.path.isfile(p) for p in rust_pdf.CANDIDATES):
+        return
+    crate = Path(__file__).resolve().parents[1] / "rust-pdf"
+    if shutil.which("cargo"):
+        subprocess.run(["cargo", "build", "--release", "--lib", "--manifest-path", str(crate / "Cargo.toml")],
+                       check=True)
+
+
 def text_pdf(pages: int = 1, line: str = "Hello research world") -> bytes:
     pdf = FPDF()
     for p in range(pages):

@@ -59,6 +59,8 @@ class GatewayError(Exception):
 
 
 GATEWAY_FRAMING_TOKENS = 1000
+# Must stay above the gateway's own call deadline (LLM_CALL_DEADLINE_MS = 120 s in _gateway.js).
+GATEWAY_HTTP_TIMEOUT_SECONDS = 150.0
 
 
 def estimate_tokens(text: str) -> int:
@@ -218,16 +220,30 @@ class GatewayLLMClient:
         try:
             last_error = None
             for attempt in range(attempts):
+                # A retried unparseable reply already counted a call, so the
+                # max-calls guard must hold on retries too, not only pre-loop.
+                if attempt and self.calls >= self.max_calls:
+                    raise CeilingError("ceiling_calls",
+                                       f"max {self.max_calls} calls per job")
                 try:
                     resp = client.post(self.gateway_url, content=raw_body,
-                                       headers=headers, timeout=60.0)
+                                       headers=headers, timeout=GATEWAY_HTTP_TIMEOUT_SECONDS)
                 except httpx.HTTPError as exc:
                     last_error = GatewayError("gateway_transport", str(exc))
                 else:
                     if 200 <= resp.status_code < 300:
-                        return self._finish(resp, model_name, purpose,
-                                            result_parsing_func, check_not_none)
-                    if resp.status_code == 429 or resp.status_code >= 500:
+                        try:
+                            return self._finish(resp, model_name, purpose,
+                                                result_parsing_func, check_not_none)
+                        except GatewayError as exc:
+                            # A reply we cannot decode is retryable, like 429/5xx.
+                            # CeilingError (output tokens) is not a GatewayError
+                            # and keeps failing fast.
+                            if exc.code not in ("unparseable_response",
+                                                "gateway_bad_response"):
+                                raise
+                            last_error = exc
+                    elif resp.status_code == 429 or resp.status_code >= 500:
                         last_error = GatewayError("gateway_http_" + str(resp.status_code))
                     else:
                         # Keep the gateway's own error code (e.g. ceiling_input_tokens) so a failed job says why.

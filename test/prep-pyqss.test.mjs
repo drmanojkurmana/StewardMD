@@ -36,3 +36,10 @@ test("analysis counts, tiers and must-do", () => {
   assert.equal(PQ.mustItems(items, an).length, 2); // same subtopic asked twice
   assert.equal(PQ.paperTitle({ year: 2025, session: "set-3" }), "NEET-SS 2025 · Recall set 3");
 });
+test("a topic the build matched to the wrong lesson opens the right one (owner 2026-11-26)", () => {
+  const lesFor = (PQ._pure || PQ).lesFor;
+  assert.equal(lesFor({ name: "Cisplatin Emetogenicity (HEC at Any Dose) & Dose-Dependent HEC Cutoffs", les: "son-symptom-control" }), "son-cinv");
+  assert.equal(lesFor({ name: "Cytokine Mediators of Cancer Cachexia (Leptin vs. Pro-Inflammatory Cytokines)", les: "son-bone-cachexia" }), "son-bone-cachexia");
+  assert.equal(lesFor({ name: "Cisplatin nephrotoxicity and magnesium", les: "son-chemo-organ-tox" }), "son-chemo-organ-tox");
+  assert.equal(lesFor({ name: "No lesson", les: undefined }), "");
+});

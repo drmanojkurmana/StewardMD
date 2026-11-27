@@ -169,3 +169,57 @@ def test_composite_ci_without_bounds_is_unknown(token_table):
     sections = [section("results", "OR {{run:r1.ci}}.")]
     violations = gates.check_numbers(sections, table)
     assert any(v["gate"] == "unknown_token" for v in violations)
+
+
+def test_latex_escaped_percent_ci_allowed(token_table):
+    # The draft writes "95\% CI" before writer.latex_to_text runs.
+    sections = [section("abstract",
+                        "The pooled estimate was {{run:r1.estimate}} "
+                        "(95\\% CI {{run:r1.ciLower}} to {{run:r1.ciUpper}}).")]
+    violations = gates.check_numbers(sections, token_table)
+    assert not any(v.get("number") == "95" for v in violations)
+
+
+def test_latex_escaped_percent_tilde_ci_allowed(token_table):
+    sections = [section("abstract",
+                        "The pooled estimate was {{run:r1.estimate}} "
+                        "(95\\%~CI {{run:r1.ciLower}} to {{run:r1.ciUpper}}).")]
+    violations = gates.check_numbers(sections, token_table)
+    assert not any(v.get("number") == "95" for v in violations)
+
+
+def test_latex_escaped_percent_confidence_allowed(token_table):
+    sections = [section("abstract",
+                        "The pooled estimate was {{run:r1.estimate}} "
+                        "(95 \\% confidence interval {{run:r1.ciLower}} to "
+                        "{{run:r1.ciUpper}}).")]
+    violations = gates.check_numbers(sections, token_table)
+    assert not any(v.get("number") == "95" for v in violations)
+
+
+def test_bare_number_still_flagged_with_escaped_percent_rule(token_table):
+    sections = [section("abstract", "There was a reduction of 95 cases.")]
+    violations = gates.check_numbers(sections, token_table)
+    assert any(v["gate"] == "untokenised_number" and v["number"] == "95"
+               for v in violations)
+
+
+def test_research_question_sentence_is_not_a_claim():
+    # Exact live sentence (2026-11-27), with the verb restored after the comma.
+    sentence = (r"\noindent\textbf{Background and objective.} This systematic review "
+                r"and meta-analysis addresses whether BCG vaccination reduces "
+                r"tuberculosis in infants.")
+    sections = [section("abstract", sentence)]
+    assert gates.check_claim_links(sections) == []
+
+
+def test_objective_phrasing_is_not_a_claim():
+    sections = [section("abstract",
+                        "Our objective was to quantify how BCG reduces tuberculosis.")]
+    assert gates.check_claim_links(sections) == []
+
+
+def test_plain_claim_without_source_still_flagged():
+    sections = [section("abstract", "BCG vaccination reduces tuberculosis in infants.")]
+    violations = gates.check_claim_links(sections)
+    assert any(v["gate"] == "claim_without_source" for v in violations)

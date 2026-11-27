@@ -2183,3 +2183,11 @@ Owner (Revenge screenshot, "No explanation is stored for this question yet"): "I
   `scan` reads every served file from R2 (live bank version per subject, listed overlay sets, PYQ), `run --max-usd n` writes the
   missing explanations with claude-haiku-5-5 Message Batches (resumable, one retry), `apply --yes` uploads the changed files and then
   the touched manifests. Items get `x`, `r` (when none) and `ax: 1`. Work dir `~/prep-data/fill-missing`. Test: `test/prep-fill-missing.test.mjs`.
+
+## Fixes 2026-11-27 (owner screenshots)
+- Lesson image "Image Attribution and License (i)" opened its sheet behind the PrepNucleus overlay (z 60 under 885); now z 1000 (`prep-pearl.css`).
+- Learn more lesson rows use the lesson index title when the links shard carries only a slug ("Lesson: son cll"): `titled()` in `prep-reason.js`.
+- NEET-SS Medical Oncology topic rows: `lesFor()` in `prep-pyqss.js` corrects lexical mismatches from `tools/pyq-ss-build.mjs` (Cisplatin emetogenicity -> `son-cinv`); the build applies the same map.
+- Ask MaiK on iPad with a hardware keyboard: WebKit panned the page for the small shortcut bar; `onVV` in `prep-ask.js` undoes the pan when the gap is under 160 px. Not yet checked on the iPad.
+- `son-fn-infections` step 5 now lists all seven MASCC criteria (max 26). Phones that cached the lesson (remote media builds keep it in IndexedDB) need the R2 copy at `app/prep/lessons/v1/` re-uploaded or a Review Desk lesson fix.
+

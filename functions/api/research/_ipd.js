@@ -19,6 +19,7 @@ import { adminAuth, adminErr } from "./_institutions.js";
 import { readRawBody, verifySignedHeaders } from "./_callback.js";
 import { parseCsv } from "./_data.js";
 import { verhoeffValid } from "./_phi.js";
+import { expireLostJobs } from "./_credits.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const ALL_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
@@ -38,6 +39,13 @@ const SETTLED = ["succeeded", "failed", "cancelled"];
 const STATS_R2_KEY_RE = /^projects\/[A-Za-z0-9_-]+\/data\/(snapshots\/)?[A-Za-z0-9_.-]+\.(csv|json)$/;
 
 function isInt(n) { return typeof n === "number" && Number.isInteger(n); }
+
+/* Lost jobs must not stay queued/running forever. Best effort: a failure
+ * here never fails the doctor's request. */
+async function expireLostBefore(db, uuid) {
+  try { await expireLostJobs(db, uuid); }
+  catch (e) { console.error("research: expireLostJobs failed", e && e.message); }
+}
 async function sha256Bytes(bytes) {
   const digest = await crypto.subtle.digest("SHA-256", bytes);
   return [...new Uint8Array(digest)].map((x) => x.toString(16).padStart(2, "0")).join("");
@@ -634,6 +642,7 @@ export function validateStatsMessage(msg) {
 export async function createStatsJob(ctx, projectId, body) {
   const { env, db, uid, projectId: _p, requestId, api } = ctx;
   const { json, err, audit, uuid, projectGate, gateErr } = api;
+  await expireLostBefore(db, uuid);
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "Stats jobs need an owner, editor or analyst role", requestId);
   const datasetId = typeof body.datasetId === "string" ? body.datasetId : "";
@@ -696,6 +705,7 @@ export async function createStatsJob(ctx, projectId, body) {
 }
 export async function getStatsJob(ctx, jobId) {
   const { db, uid, requestId, api } = ctx;
+  await expireLostBefore(db, api.uuid);
   const row = await db.prepare("SELECT * FROM research_stats_jobs WHERE id=?").bind(jobId).first();
   if (!row || !(await api.member(db, row.project_id, uid)))
     return api.err(404, "job_not_found", "Job not found", requestId);

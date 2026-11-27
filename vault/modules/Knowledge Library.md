@@ -120,6 +120,10 @@ The reading text sits on one raised white sheet (solid fill, 1px border, contact
   flowchart-dx, foot); kb-v2-loader.js renders each kind into its slot from the one cached bucket and
   hides a slot-only section that comes back empty. A slot without a kind (differential-card Know more)
   still renders everything. Legacy tables/algorithms/diagrams are placed by title/content.
+- **No "Tables PDF" source (owner 2026-11-27):** the internal working source is never named. Its citations were
+  removed from `kb/diseases` and `kb/reference` (929 labels; text mentions reworded to "Harrison Table N" or "Harrison tables")
+  and `kb/dist/v2` rebuilt (`node kb/tools/build-kb-v2.mjs`); `render()` in kb-v2-loader.js also skips any citation
+  label starting "Tables PDF", so a stale bucket cannot show it. Bucket token `kbv24-nopdf`.
 - The reader no longer shows the "Know more" Harrison panel; IDSA/Sanford viewers sit in Management.
 - Tests: `node test/run-kb-reader-mobile-ui.mjs` (390/360, zoom 0.95 and 1, order, homes, chips, dark, ?kbv2=0).
 
