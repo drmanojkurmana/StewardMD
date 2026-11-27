@@ -692,6 +692,7 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     assert.match(privacy, /AI drafting and patient identifiers/);
     assert.match(privacy, /Draft for counsel review/);
     assert.match(privacy, /at least one year/);
-    assert.match(privacy, /Runware and Google Vertex AI/);
+    assert.match(privacy, /Runware, which passes it to the AI model in use/); // real chain: Runware -> OpenAI GPT model (2026-11-27)
+    assert.match(privacy, /Google Vertex AI \(Gemini\)/);
   });
 });
