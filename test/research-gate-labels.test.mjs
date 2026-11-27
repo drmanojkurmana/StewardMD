@@ -19,3 +19,18 @@ test("Table/Figure labels and list numbering are not bare numbers", () => {
 test("a real untokenised result number still fails", () => {
   assert.deepEqual(bare("The pooled risk ratio was 0.42 across trials."), ["0.42"]);
 });
+
+function unlinkedClaims(text, section = "abstract") {
+  const out = gateManuscript([{ id: section, heading: section, text }], [], {});
+  const failures = (out && out.gateFailures) || [];
+  return failures.filter((f) => f.type === "unlinked_claim");
+}
+
+test("a research-question sentence is not an unlinked claim", () => {
+  const text = "This systematic review and meta-analysis addresses whether BCG vaccination reduces tuberculosis in infants.";
+  assert.deepEqual(unlinkedClaims(text), []);
+});
+
+test("a plain claim without a source still fails", () => {
+  assert.equal(unlinkedClaims("BCG vaccination reduces tuberculosis in infants.").length, 1);
+});
