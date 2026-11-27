@@ -14,8 +14,29 @@ from __future__ import annotations
 
 import re
 
-_SECTION_RE = re.compile(r"\\(section|subsection)\*?\{([^}]*)\}")
+_SECTION_RE = re.compile(r"\\(section|subsection|subsubsection)\*?\{([^}]*)\}")
 IMRAD_ORDER = ["abstract", "introduction", "methods", "results", "discussion"]
+
+_MATH_SYMBOLS = {
+    "times": "\u00d7",
+    "pm": "\u00b1",
+    "le": "\u2264",
+    "leq": "\u2264",
+    "ge": "\u2265",
+    "geq": "\u2265",
+    "approx": "\u2248",
+}
+_STRIP_NOARG_CMDS = re.compile(
+    r"\\(?:noindent|smallskip|medskip|bigskip|centering|maketitle|"
+    r"tableofcontents|newpage|clearpage|hline|toprule|midrule|bottomrule)"
+    r"(?![A-Za-z@])[ \t]*"
+)
+_DROP_ARG_CMDS = {
+    "label", "vspace", "hspace", "setlength", "addtolength", "color",
+    "usepackage", "documentclass", "bibliographystyle", "bibliography",
+    "includegraphics", "cline", "cmidrule",
+}
+_TWO_ARG_KEEP_SECOND = {"href", "textcolor", "colorbox"}
 
 
 def _slug(heading: str) -> str:
@@ -24,7 +45,7 @@ def _slug(heading: str) -> str:
 
 def parse_latex_sections(tex: str) -> list:
     r"""Deterministic split of a draft into sections. No LLM, no latex parser
-    dependency; handles \section and \subsection (starred or not).
+    dependency; handles \section, \subsection, and \subsubsection (starred or not).
     LaTeX comments are NOT stripped: deleting text before the integrity gates
     could hide numbers or claims (a bare % in "95% CI" is prose, not a comment).
     """
@@ -37,10 +58,400 @@ def parse_latex_sections(tex: str) -> list:
         heading = match.group(2).strip()
         text = tex[start:end].strip()
         text = re.sub(r"\\(?:maketitle|tableofcontents|newpage|clearpage)\b", "", text)
+        kind = match.group(1)
+        level = 1 if kind == "section" else (2 if kind == "subsection" else 3)
         sections.append({"id": _slug(heading), "heading": heading,
-                         "level": 1 if match.group(1) == "section" else 2,
-                         "text": text.strip()})
+                         "level": level, "text": text.strip()})
     return sections
+
+
+def _even_backslashes(text: str, pos: int) -> bool:
+    count = 0
+    i = pos - 1
+    while i >= 0 and text[i] == "\\":
+        count += 1
+        i -= 1
+    return (count % 2) == 0
+
+
+def _find_matching_brace(text: str, open_idx: int) -> int:
+    depth = 1
+    i = open_idx + 1
+    n = len(text)
+    while i < n:
+        ch = text[i]
+        if ch == "\\" and i + 1 < n:
+            i += 2
+            continue
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    return -1
+
+
+def _find_matching_bracket(text: str, open_idx: int) -> int:
+    depth = 1
+    i = open_idx + 1
+    n = len(text)
+    while i < n:
+        ch = text[i]
+        if ch == "\\" and i + 1 < n:
+            i += 2
+            continue
+        if ch == "[":
+            depth += 1
+        elif ch == "]":
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    return -1
+
+
+def _skip_optional_args(text: str, pos: int) -> int:
+    n = len(text)
+    while pos < n and text[pos] == "[":
+        end = _find_matching_bracket(text, pos)
+        if end < 0:
+            break
+        pos = end + 1
+    return pos
+
+
+def _wrap_markdown(marker: str, content: str) -> str:
+    if not content or not content.strip():
+        return content
+    lead = content[:len(content) - len(content.lstrip(" \t"))]
+    trail = content[len(content.rstrip(" \t")):]
+    core = content.strip(" \t")
+    return f"{lead}{marker}{core}{marker}{trail}"
+
+
+def _convert_tabular_envs(text: str) -> str:
+    begin_re = re.compile(r"\\begin\{(tabular\*?)\}")
+    out = []
+    pos = 0
+    while True:
+        m = begin_re.search(text, pos)
+        while m and not _even_backslashes(text, m.start()):
+            m = begin_re.search(text, m.start() + 1)
+        if not m:
+            out.append(text[pos:])
+            break
+        out.append(text[pos:m.start()])
+        env = m.group(1)
+        cursor = m.end()
+        if env == "tabular*" and cursor < len(text) and text[cursor] == "{":
+            w_end = _find_matching_brace(text, cursor)
+            if w_end >= 0:
+                cursor = w_end + 1
+        cursor = _skip_optional_args(text, cursor)
+        if cursor < len(text) and text[cursor] == "{":
+            spec_end = _find_matching_brace(text, cursor)
+            if spec_end >= 0:
+                cursor = spec_end + 1
+        end_tag = f"\\end{{{env}}}"
+        end_idx = text.find(end_tag, cursor)
+        while end_idx >= 0 and not _even_backslashes(text, end_idx):
+            end_idx = text.find(end_tag, end_idx + 1)
+        if end_idx < 0:
+            out.append(text[m.start():])
+            break
+        body = text[cursor:end_idx]
+        pos = end_idx + len(end_tag)
+
+        # Drop rules and unwrap multicolumn/multirow inside table cells.
+        body = re.sub(r"\\(?:hline|toprule|midrule|bottomrule)(?![A-Za-z@])", "", body)
+        body = re.sub(r"\\cline\{[^}]*\}", "", body)
+        body = re.sub(r"\\cmidrule(?:\([^)]*\))?\{[^}]*\}", "", body)
+        body = _unwrap_multicolumn(body)
+        raw_rows = re.split(r"(?<!\\)\\\\(?:\[[^\]]*\])?\*?|\\tabularnewline(?![A-Za-z@])", body)
+        row_lines = []
+        for raw_row in raw_rows:
+            cells = [re.sub(r"\s+", " ", c).strip() for c in re.split(r"(?<!\\)&", raw_row)]
+            if any(cells):
+                row_lines.append(" | ".join(cells))
+        if row_lines:
+            out.append("\n" + "\n".join(row_lines) + "\n")
+    return "".join(out)
+
+
+def _unwrap_multicolumn(text: str) -> str:
+    cmd_re = re.compile(r"\\(multicolumn|multirow)\{")
+    out = []
+    pos = 0
+    while True:
+        m = cmd_re.search(text, pos)
+        while m and not _even_backslashes(text, m.start()):
+            m = cmd_re.search(text, m.start() + 1)
+        if not m:
+            out.append(text[pos:])
+            break
+        out.append(text[pos:m.start()])
+        c1_end = _find_matching_brace(text, m.end() - 1)
+        if c1_end < 0 or c1_end + 1 >= len(text) or text[c1_end + 1] != "{":
+            out.append(text[m.start():m.end()])
+            pos = m.end()
+            continue
+        c2_end = _find_matching_brace(text, c1_end + 1)
+        if c2_end < 0 or c2_end + 1 >= len(text) or text[c2_end + 1] != "{":
+            out.append(text[m.start():m.end()])
+            pos = m.end()
+            continue
+        c3_end = _find_matching_brace(text, c2_end + 1)
+        if c3_end < 0:
+            out.append(text[m.start():m.end()])
+            pos = m.end()
+            continue
+        out.append(text[c2_end + 2:c3_end])
+        pos = c3_end + 1
+    return "".join(out)
+
+
+def _convert_list_envs(text: str) -> str:
+    list_re = re.compile(
+        r"\\begin\{(itemize|enumerate)\}(?:\[[^\]]*\])?"
+        r"((?:(?!\\begin\{(?:itemize|enumerate)\}).)*?)"
+        r"\\end\{\1\}",
+        re.DOTALL,
+    )
+    for _ in range(12):
+        changed = False
+
+        def repl(match):
+            nonlocal changed
+            changed = True
+            kind = match.group(1)
+            body = match.group(2)
+            parts = re.split(r"(?<!\\)\\item(?![A-Za-z@])(?:\[([^\]]*)\])?", body)
+            # parts: [preamble, opt1, item1, opt2, item2, ...]
+            lines = []
+            idx = 1
+            for i in range(1, len(parts), 2):
+                opt = (parts[i] or "").strip()
+                item_body = (parts[i + 1] if i + 1 < len(parts) else "") or ""
+                item_lines = [ln.strip() for ln in item_body.strip().splitlines() if ln.strip()]
+                joined_parts = []
+                for ln in item_lines:
+                    if ln.startswith("- ") or re.match(r"^\d+\.\s", ln):
+                        joined_parts.append("\n" + ln)
+                    elif joined_parts:
+                        joined_parts.append(" " + ln)
+                    else:
+                        joined_parts.append(ln)
+                item_text = "".join(joined_parts).strip()
+                if opt:
+                    item_text = f"{opt} {item_text}".strip()
+                prefix = "- " if kind == "itemize" else f"{idx}. "
+                idx += 1
+                if item_text:
+                    lines.append(prefix + item_text)
+            return ("\n" + "\n".join(lines) + "\n") if lines else "\n"
+
+        next_text = list_re.sub(repl, text)
+        text = next_text
+        if not changed:
+            break
+    return text
+
+
+def _replace_braced_commands(text: str, ref_map: dict, *, mask_url) -> str:
+    cmd_re = re.compile(r"\\([A-Za-z@]+)\*?(?=(?:\[|\{))")
+    out = []
+    pos = 0
+    n = len(text)
+    while pos < n:
+        m = cmd_re.search(text, pos)
+        while m and not _even_backslashes(text, m.start()):
+            m = cmd_re.search(text, m.start() + 1)
+        if not m:
+            out.append(text[pos:])
+            break
+        out.append(text[pos:m.start()])
+        cmd = m.group(1)
+        cursor = m.end()
+        if cmd == "cmidrule" and cursor < n and text[cursor] == "(":
+            p_end = text.find(")", cursor)
+            if p_end >= 0:
+                cursor = p_end + 1
+        cursor = _skip_optional_args(text, cursor)
+        if cursor >= n or text[cursor] != "{":
+            out.append(text[m.start():m.end()])
+            pos = m.end()
+            continue
+        b1_end = _find_matching_brace(text, cursor)
+        if b1_end < 0:
+            out.append(text[m.start():m.end()])
+            pos = m.end()
+            continue
+        arg1 = text[cursor + 1:b1_end]
+        pos = b1_end + 1
+
+        if cmd in ("begin", "end"):
+            env_name = arg1.strip()
+            if cmd == "begin":
+                pos = _skip_optional_args(text, pos)
+                if env_name == "minipage" and pos < n and text[pos] == "{":
+                    w_end = _find_matching_brace(text, pos)
+                    if w_end >= 0:
+                        pos = w_end + 1
+            continue
+        if cmd in _DROP_ARG_CMDS:
+            if cmd in ("setlength", "addtolength") and pos < n and text[pos] == "{":
+                b2_end = _find_matching_brace(text, pos)
+                if b2_end >= 0:
+                    pos = b2_end + 1
+            continue
+        if cmd == "ref":
+            lbl = arg1.strip()
+            ns = lbl.split(":", 1)[0] if ":" in lbl else "other"
+            if lbl not in ref_map["labels"]:
+                num = ref_map["counters"].get(ns, 0) + 1
+                ref_map["counters"][ns] = num
+                ref_map["labels"][lbl] = str(num)
+            out.append(ref_map["labels"][lbl])
+            continue
+        if cmd in _TWO_ARG_KEEP_SECOND:
+            if pos < n and text[pos] == "{":
+                b2_end = _find_matching_brace(text, pos)
+                if b2_end >= 0:
+                    arg2 = text[pos + 1:b2_end]
+                    pos = b2_end + 1
+                    out.append(_replace_braced_commands(arg2, ref_map, mask_url=mask_url))
+                    continue
+        if cmd == "url":
+            out.append(mask_url(arg1))
+            continue
+        inner = _replace_braced_commands(arg1, ref_map, mask_url=mask_url)
+        if cmd == "textbf":
+            out.append(_wrap_markdown("**", inner))
+        elif cmd in ("textit", "emph"):
+            out.append(_wrap_markdown("*", inner))
+        elif cmd == "caption":
+            out.append("\n" + inner.strip() + "\n")
+        else:
+            out.append(inner)
+    return "".join(out)
+
+
+def latex_to_text(text: str, ref_map: dict | None = None) -> str:
+    r"""Convert LaTeX section text to readable plain text with light markdown
+    (**bold**, *italic*, - bullets, tabular pipe rows) while preserving
+    {{run:...}} tokens, digits, and \cite{...}/[@...] citation markers."""
+    if not text:
+        return ""
+    if ref_map is None:
+        ref_map = {"labels": {}, "counters": {}}
+
+    text = str(text).replace("\r\n", "\n")
+
+    prefix = "SMDMASK"
+    while prefix in text:
+        prefix += "X"
+
+    protected = []
+
+    def mask(val: str) -> str:
+        tok = f"{prefix}P{len(protected)}Z"
+        protected.append(val)
+        return tok
+
+    # 1. Preserve {{run:...}} tokens and citation markers verbatim.
+    text = re.sub(
+        r"\{\{run:[^}]*\}\}|\\cite(?:\[[^\]]*\])?\{[^}]+\}|\[@[A-Za-z0-9_:-]+\]",
+        lambda m: mask(m.group(0)),
+        text,
+    )
+
+    # 2. Preserve escaped literal braces \{ and \} so group brace stripping
+    #    leaves them intact.
+    escaped_braces = []
+
+    def mask_esc_brace(m: re.Match) -> str:
+        if not _even_backslashes(text, m.start()):
+            return m.group(0)
+        tok = f"{prefix}B{len(escaped_braces)}Z"
+        escaped_braces.append(m.group(1))
+        return tok
+
+    text = re.sub(r"\\([{}])", mask_esc_brace, text)
+
+    # 3. Tables and list environments.
+    text = _convert_tabular_envs(text)
+    text = _convert_list_envs(text)
+
+    # 4. Inline/display math delimiters and math symbols.
+    text = re.sub(r"(?<!\\)\$\$(.+?)(?<!\\)\$\$", lambda m: m.group(1), text, flags=re.DOTALL)
+    text = re.sub(r"(?<!\\)\\\[(.+?)(?<!\\)\\\]", lambda m: m.group(1), text, flags=re.DOTALL)
+    text = re.sub(r"(?<!\\)\\\((.+?)(?<!\\)\\\)", lambda m: m.group(1), text, flags=re.DOTALL)
+    text = re.sub(r"(?<!\\)\$(?!\$)((?:\\.|[^$\n\\])+?)(?<!\\)\$", lambda m: m.group(1), text)
+
+    math_re = re.compile(r"\\(times|pm|leq|le|geq|ge|approx)(?![A-Za-z@])")
+    text = math_re.sub(
+        lambda m: _MATH_SYMBOLS[m.group(1)] if _even_backslashes(text, m.start()) else m.group(0),
+        text,
+    )
+
+    # 5. Strip layout/spacing commands and \par before brace wrapping so
+    #    constructs like \textbf{\noindent} collapse to empty instead of ****.
+    text = re.sub(
+        r"[ \t]*\\par(?![A-Za-z@])[ \t]*",
+        lambda m: "\n\n" if _even_backslashes(text, m.start()) else m.group(0),
+        text,
+    )
+    text = _STRIP_NOARG_CMDS.sub(
+        lambda m: "" if _even_backslashes(text, m.start()) else m.group(0),
+        text,
+    )
+
+    # 6. Formatting / braced commands (preserving \url tilde from ~ -> space).
+    url_masks = []
+
+    def mask_url(raw_url: str) -> str:
+        tok = f"{prefix}U{len(url_masks)}Z"
+        cleaned = (raw_url.replace("\\_", "_").replace("\\%", "%")
+                   .replace("\\&", "&").replace("\\#", "#"))
+        url_masks.append(cleaned)
+        return tok
+
+    text = _replace_braced_commands(text, ref_map, mask_url=mask_url)
+
+    # 7. Tilde non-breaking space -> ASCII space (outside \url and \~).
+    text = re.sub(r"(?<!\\)~", " ", text)
+
+    # 8. Remaining LaTeX linebreaks, escaped literals, accents, and bare commands.
+    text = re.sub(
+        r"\\\\(?:\[[^\]]*\])?\*?",
+        lambda m: "\n" if _even_backslashes(text, m.start()) else m.group(0),
+        text,
+    )
+    esc_map = {"_": "_", "%": "%", "&": "&", "#": "#", "$": "$", " ": " ",
+               ",": " ", ";": " ", ":": " ", "!": "", "-": "", "/": ""}
+    text = re.sub(r"\\([_%&#$ ,;:!\-/])", lambda m: esc_map[m.group(1)], text)
+    text = re.sub(r"\\['\"`^~=.]", "", text)
+    text = re.sub(r"\\[A-Za-z@]+\*?", "", text)
+
+    # 9. Strip leftover TeX grouping braces (tokens/cites/escaped braces are masked).
+    text = text.replace("{", "").replace("}", "")
+
+    # 10. Restore masked literal braces, URLs, tokens, and citations.
+    for idx, ch in enumerate(escaped_braces):
+        text = text.replace(f"{prefix}B{idx}Z", ch)
+    for idx, val in enumerate(url_masks):
+        text = text.replace(f"{prefix}U{idx}Z", val)
+    for idx, val in enumerate(protected):
+        text = text.replace(f"{prefix}P{idx}Z", val)
+
+    # 11. Whitespace normalization.
+    text = re.sub(r"[ \t]{2,}", " ", text)
+    text = re.sub(r"[ \t]+\n", "\n", text)
+    text = re.sub(r"\n[ \t]+", "\n", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
 
 
 def vancouver(entry: dict, number: int) -> str:
@@ -95,6 +506,25 @@ def render_tokens(text: str, token_table: dict) -> str:
                   sub, text)
 
 
+def _order_sections(sections: list) -> list:
+    groups = []
+    for idx, section in enumerate(sections):
+        level = section.get("level", 1)
+        if level is None:
+            level = 1
+        if level <= 1 or not groups:
+            sid = str(section.get("id", "")).lower()
+            if level <= 1 and sid in IMRAD_ORDER:
+                key = (0, IMRAD_ORDER.index(sid), idx)
+            else:
+                key = (1, 0, idx)
+            groups.append((key, [section]))
+        else:
+            groups[-1][1].append(section)
+    groups.sort(key=lambda g: g[0])
+    return [sec for _, grp in groups for sec in grp]
+
+
 def build_manuscript(*, title, sections, token_table, references=None,
                      citation_map=None, manifest=None, outline=None) -> dict:
     """Assemble the JSON manuscript model. sections: parsed draft sections
@@ -104,9 +534,12 @@ def build_manuscript(*, title, sections, token_table, references=None,
     by_key = {r["key"]: r for r in references if r.get("key")}
     by_key.update({k: v for k, v in citation_map.items() if k not in by_key})
 
-    ordered = sorted(sections, key=lambda s: (
-        IMRAD_ORDER.index(s["id"]) if s.get("id") in IMRAD_ORDER
-        else len(IMRAD_ORDER), s.get("heading", "")))
+    ordered_raw = _order_sections(list(sections))
+    ref_map = {"labels": {}, "counters": {}}
+    ordered = [
+        {**s, "text": latex_to_text(s.get("text", ""), ref_map=ref_map)}
+        for s in ordered_raw
+    ]
 
     ref_entries = []
     for number, key in enumerate(_citation_keys_in_order(ordered), 1):

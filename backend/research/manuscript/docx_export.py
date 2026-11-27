@@ -272,7 +272,14 @@ def export(
             return (0, IMRAD_ORDER.index(sid))
         return (1, s.get("heading", ""))
 
-    sorted_sections = sorted(raw_sections, key=_section_sort_key)
+    # Keep the manuscript's own order (subsections sit under their IMRaD parent); fall back to the IMRaD key
+    # only for sections that carry no order. The old key put every subsection last, alphabetically.
+    if all(isinstance(s.get("sortOrder", s.get("sort_order")), int) for s in raw_sections):
+        sorted_sections = sorted(raw_sections, key=lambda s: s.get("sortOrder", s.get("sort_order")))
+    elif any(int(s.get("level") or 1) > 1 for s in raw_sections):
+        sorted_sections = list(raw_sections)
+    else:
+        sorted_sections = sorted(raw_sections, key=_section_sort_key)
 
     # Collect text blocks
     text_blocks_for_citations: list[str] = []
