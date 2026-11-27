@@ -11,6 +11,12 @@ on:
       - "prep/bank/rematch-links.json"
       - "prep/lessons/**"
       - "prep/taxonomy.json"
+# Cost guard (Nov 2026): a flood of content PRs ran this 350+ times in a day, each fetching every bank and overlay
+# file through a Pages Function (one KV + one R2 read per file), part of ~13M billable requests. The fetch step skips
+# files already in its cache dir, so keep that dir between runs, and run one at a time per branch.
+concurrency:
+  group: links-floor-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   gaps:
     runs-on: ubuntu-latest
@@ -21,6 +27,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Reuse fetched bank files
+        uses: actions/cache@v4
+        with:
+          path: /tmp/links-cache
+          key: links-cache-${{ hashFiles('prep/bank/overlay-counts.json', 'prep/taxonomy.json', 'prep/bank/index*.json') }}
+          restore-keys: links-cache-
       - name: Build the links index over live bank text
         env:
           # the bank is gated (PREP_BANK_ENFORCE=1); the tools credential lets CI read it (functions/api/prep/bank toolOK)
