@@ -12637,3 +12637,15 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
 - **Motion**: the overlay keeps the shared slide-up from `dialog-motion.js` (owner rule 2026-10-31). The update detail opts out (`data-own-motion`) and pushes in from the right, since it is navigation inside the screen. Pull to refresh, refresh-button spin while loading, a short row cascade on load. All off under reduced motion.
 - **States**: loading, empty, filtered-to-nothing, and load error with Try again. A failed pull/refresh keeps the old list and says so.
 - **Tests**: `test/run-notifications.mjs` (7), `test/run-bulletins-ui.mjs` (rows are `.mu-row`).
+
+## 2026-11-27: Dose calculator result-first layout (owner picked variant C)
+- **What**: `dose-calc.js` result renders dose-first: drug, indication chips, a hero card with the dose to give
+  (kidney/liver-adjusted when the monograph has a factor), warnings sorted by severity, then the patient folded
+  to value chips with Edit. Light and dark (OLED) from the app theme.
+- **Why**: the classic card made the unadjusted dose the biggest number and the adjusted one a smaller line
+  under it, which invites the wrong dose. Three variants were mocked on a Design canvas; owner chose C.
+- **Flag**: `smd_dose_v3`, DEFAULT ON; `"0"` restores the classic card. Recovery point: parent commit of this change.
+- **Not built**: the mockup's titration ladder. The rules have no structured titration (step size, interval,
+  ceiling as one object), so drawing a ladder would mean inferring it from free text.
+- **Tests**: `test/run-dose-calc-ui.mjs` (classic path with `?dosev3=0`, plus 17 v3 checks incl. light/dark).
+
