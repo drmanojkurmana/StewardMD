@@ -11,7 +11,7 @@ contract uses the current API.
 
 ```
 Pages API ──send()──> research-jobs (HTTP pull consumer, 3 retries, DLQ research-jobs-dlq)
-Worker stewardmd-research-worker (cron "* * * * *")
+Worker stewardmd-research-worker (cron "*/10 * * * *")
   └─ DO stub RESEARCH_WORKER.getByName("singleton") .drain()
        └─ ctx.container.start({env, enableInternet: true}) if not running
        └─ getTcpPort(8080).fetch POST /drain  (X-Drain-Token)
@@ -28,8 +28,8 @@ Worker stewardmd-research-worker (cron "* * * * *")
 | `image_build_context` | `../../backend/research` | Dockerfile COPYs requirements.txt, app/ and worker/ from the service root |
 | `instance_type` | `standard-1` (1/2 vCPU, 4 GiB memory, 8 GB disk) | pdfplumber plus Tesseract OCR needs headroom over `basic` (1 GiB); 25 MB PDFs rasterise to large images |
 | `max_instances` | 3 | upper bound; v1 routes every cron to one named DO, so effective concurrency is 1 container. Scale-out (multiple named DOs) is a later contract change |
-| inactivity timeout | 5 min (`setInactivityTimeout(300000)`) | the current-API equivalent of the legacy `sleepAfter`; re-armed in the DO constructor when the container is already running |
-| cron | `* * * * *` | every minute; an empty pull returns immediately, so idle cost is one short RPC |
+| inactivity timeout | 1 min (`setInactivityTimeout(60000)`) | backstop only: drain() stops the container (`destroy()`) once a round pulls nothing; re-armed in the DO constructor when the container is already running |
+| cron | `*/10 * * * *` | every 10 minutes; drain rounds repeat while jobs arrive, then the container stops. A running container bills memory and disk per second, so an every-minute cron with a 5 min timeout kept it running all day (2026-11-27) |
 | DO storage | sqlite (`[exports.ResearchWorkerContainer]`) | required by the container linkage |
 
 `enableInternet: true` is required: the container calls the Cloudflare Queues

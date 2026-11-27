@@ -1,5 +1,6 @@
 # ResearchMD Phase 3 worker front door (D-3: Cloudflare Containers).
-# Cron every minute -> Durable Object -> container POST /drain.
+# Cron every 10 minutes -> Durable Object -> container POST /drain until the
+# queue is empty, then the container is stopped (it bills while running).
 # Config fields verified against Cloudflare docs 2026-11-23. The legacy
 # @cloudflare/containers Container class is superseded by the Durable Object
 # Container API (ctx.container + [exports]); see
@@ -31,7 +32,7 @@ type = "durable-object"
 storage = "sqlite"
 
 [triggers]
-crons = ["* * * * *"]
+crons = ["*/10 * * * *"]
 
 [vars]
 # Non-secret config, forwarded to the container via start({env}).
