@@ -233,7 +233,12 @@
     var fac = (res.renal.band && res.renal.band.factor) || (res.hepatic.cls && res.hepatic.cls.factor) || null;
     if (fac) res.rows.forEach(function (row) { row.lines.forEach(function (l) {
       var lo = l.raw.lo != null ? l.raw.lo * fac : null, hi = l.raw.hi != null ? l.raw.hi * fac : null;
-      l.adjusted = fmtAmt(lo, hi, l.raw.u) + perTxt(l.raw.tm) + " (" + Math.round(fac * 100) + "% for " + (res.renal.band && res.renal.band.factor ? "kidney function" : "liver function") + ")";
+      var why = res.renal.band && res.renal.band.factor ? "kidney" : "liver";
+      l.adjusted = fmtAmt(lo, hi, l.raw.u) + perTxt(l.raw.tm) + " (" + Math.round(fac * 100) + "% for " + why + " function)";
+      // Structured copy for the result-first layout: the adjusted amount is the one to give, so it
+      // leads, and its rounding suggestion is made on the adjusted amount (not the full one).
+      l.adj = { value: fmtAmt(lo, hi, l.raw.u) + perTxt(l.raw.tm), pct: Math.round(fac * 100), why: why,
+        practical: lo != null && hi == null ? (function () { var s = show(practical(lo), l.raw.u); return s.v.toLocaleString("en-IN") + " " + s.u; })() : "" };
     }); });
     res.avoid = !!((res.renal.band && res.renal.band.avoid) || (res.hepatic.cls && res.hepatic.cls.avoid));
     return res;
@@ -294,6 +299,15 @@
     try { return localStorage.getItem(FLAG) !== "0"; } catch (e) { return true; }
   }
 
+  /* Result-first layout (owner picked variant C, 2026-11-27): the dose to give leads, the warnings
+   * follow by severity, the patient folds to a row of values. Flag smd_dose_v3, DEFAULT ON; "0" (or
+   * ?dosev3=0) brings back the classic layout. Same engine either way. */
+  var FLAG3 = "smd_dose_v3";
+  function v3() {
+    try { var m = (location.search.match(/[?&]dosev3=([^&]+)/) || [])[1]; if (m != null) return m === "1" || m === "on" || m === "true"; } catch (e) {}
+    try { return localStorage.getItem(FLAG3) !== "0"; } catch (e) { return true; }
+  }
+
   /* ================================ PATIENTS ================================ */
   /* Patients the doctor already has on this device: the ICU patient open now, the saved ICU roster
    * (which also holds patients brought in from Ward Sync), and the OPD patient open now. Read only. */
@@ -327,7 +341,7 @@
 
   /* ================================ UI ================================ */
   var D = G.document, root = null;
-  var S = { p: { weight: "", age: "", ageUnit: "years", sex: "", height: "", scr: "", crcl: "", childPugh: "", dialysis: false }, drug: null, q: "", source: "" };
+  var S = { p: { weight: "", age: "", ageUnit: "years", sex: "", height: "", scr: "", crcl: "", childPugh: "", dialysis: false }, drug: null, q: "", source: "", col: false, ri: 0 };
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   // Privacy mode (privacy-mode.js): wrap a patient name so it can be masked on screen; plain esc() without it.
   function phi(kind, v, html) { var P = G.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
@@ -390,6 +404,36 @@
       "#doseCalc details summary{font:600 13.5px var(--dc-f);color:var(--dc-acc);cursor:pointer;min-height:36px;display:flex;align-items:center}",
       "#doseCalc .dc-foot{font:500 12px var(--dc-f);color:var(--dc-mut);text-align:center;padding:4px 8px}",
       "#doseCalc .dc-plist{display:flex;flex-direction:column;gap:2px;max-height:50vh;overflow:auto}#doseCalc .dc-pl{text-align:left;border:0;border-top:1px solid var(--dc-line);background:none;color:var(--dc-ink);padding:10px 2px;cursor:pointer;font:600 15px var(--dc-f)}#doseCalc .dc-pl small{display:block;font:500 12.5px var(--dc-f);color:var(--dc-mut)}",
+      // ---- Result-first layout (flag smd_dose_v3). Light by default, OLED black under the dark themes.
+      "#doseCalc.dc3{--dc-bg:#f2f4f3;--dc-panel:#fff;--dc-line:#e1e7e4;--dc-chip:#eef2f0;--dc-on-acc:#fff;--dc-ok-dot:#7b8784}",
+      "body.dark #doseCalc.dc3,body.v3-dark #doseCalc.dc3{--dc-bg:#000;--dc-panel:#0f1513;--dc-line:#1d2724;--dc-ink:#f4f6f5;--dc-mut:#9ba6a2;--dc-acc:#5ee0c0;--dc-acc-soft:#12302a;--dc-chip:#1a2220;--dc-on-acc:#04120e;--dc-warn:#f6c35b;--dc-warn-soft:#17130a;--dc-bad:#ff8a7e;--dc-bad-soft:#1a0f0e;--dc-ok-dot:#7e8985}",
+      "#doseCalc.dc3 .dc-body{gap:16px}#doseCalc.dc3 .dc-res{order:-1;display:flex;flex-direction:column;gap:14px}",
+      "#doseCalc .dc-dh{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:4px 4px 0}#doseCalc .dc-dn{margin:0;font:700 28px/1.15 var(--dc-f);letter-spacing:-.02em;color:var(--dc-ink)}#doseCalc .dc-dh .dc-cls{margin-top:4px}#doseCalc .dc-dh .dc-chg{min-height:44px;font-size:15px}",
+      "#doseCalc .dc-ind{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -16px;padding:0 16px}#doseCalc .dc-ind::-webkit-scrollbar{display:none}",
+      "#doseCalc .dc-ind button{flex:0 0 auto;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-height:44px;padding:0 16px;border:0;border-radius:999px;background:var(--dc-chip);color:var(--dc-ink);font:500 14px var(--dc-f);cursor:pointer;transition:background-color .15s ease-out,color .15s ease-out}#doseCalc .dc-ind button[aria-pressed=true]{background:var(--dc-ink);color:var(--dc-bg);font-weight:600}",
+      "#doseCalc .dc-hero{background:var(--dc-panel);border:1px solid var(--dc-line);border-radius:22px;padding:20px 18px;display:flex;flex-direction:column;gap:14px}",
+      "#doseCalc .dc-hh{display:flex;align-items:center;justify-content:space-between;gap:10px}#doseCalc .dc-hl{font:600 13px var(--dc-f);color:var(--dc-mut)}",
+      "#doseCalc .dc-badge{flex:0 0 auto;font:700 12px var(--dc-f);color:var(--dc-warn);background:var(--dc-warn-soft);border-radius:999px;padding:5px 10px;white-space:nowrap}",
+      "#doseCalc .dc-big{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;font-variant-numeric:tabular-nums}#doseCalc .dc-big b{font:700 64px/1 var(--dc-f);letter-spacing:-.035em;color:var(--dc-ink)}#doseCalc .dc-big.l b{font-size:44px}#doseCalc .dc-big span{font:600 22px var(--dc-f);color:var(--dc-mut)}",
+      "#doseCalc .dc-why{margin:0;font:400 15px/1.5 var(--dc-f);color:var(--dc-ink);font-variant-numeric:tabular-nums}#doseCalc .dc-why span{color:var(--dc-mut)}",
+      "#doseCalc .dc-acts{display:flex;gap:8px}#doseCalc .dc-btn{flex:1;min-height:48px;border:0;border-radius:14px;background:var(--dc-chip);color:var(--dc-ink);font:600 15px var(--dc-f);cursor:pointer;transition:transform .1s ease-out,opacity .1s}#doseCalc .dc-btn:active{transform:scale(.98);opacity:.85}#doseCalc .dc-btn.dc-pri{background:var(--dc-acc);color:var(--dc-on-acc);font-weight:700}",
+      "#doseCalc .dc-also{display:flex;flex-direction:column;border-top:1px solid var(--dc-line)}#doseCalc .dc-al1{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 0 0}#doseCalc .dc-al1 small{display:block;font:500 12.5px var(--dc-f);color:var(--dc-mut);margin-top:2px}#doseCalc .dc-al1 b{font:600 15px var(--dc-f);text-align:right;font-variant-numeric:tabular-nums}",
+      "#doseCalc .dc-hero details summary,#doseCalc .dc-alerts details summary{min-height:44px}#doseCalc .dc-hero .dc-src,#doseCalc .dc-alerts .dc-src{font:400 13.5px/1.5 var(--dc-f);padding:0}",
+      "#doseCalc .dc-sec{margin:4px 4px 0;font:600 13px var(--dc-f);letter-spacing:0;text-transform:none;color:var(--dc-mut)}",
+      "#doseCalc .dc-alerts{display:flex;flex-direction:column;gap:1px;background:var(--dc-line);border:1px solid var(--dc-line);border-radius:18px;overflow:hidden}",
+      "#doseCalc .dc-ai{display:flex;gap:12px;padding:14px 16px;background:var(--dc-panel)}#doseCalc .dc-ai>i{flex:0 0 8px;height:8px;border-radius:4px;margin-top:7px;background:var(--dc-ok-dot)}#doseCalc .dc-ai>div{display:flex;flex-direction:column;gap:3px;min-width:0}",
+      "#doseCalc .dc-ai b{font:600 15px var(--dc-f);color:var(--dc-ink)}#doseCalc .dc-ai p{margin:0;font:400 14px/1.45 var(--dc-f);color:var(--dc-ink);opacity:.86}",
+      "#doseCalc .dc-ai.bad{background:var(--dc-bad-soft)}#doseCalc .dc-ai.bad>i{background:var(--dc-bad)}#doseCalc .dc-ai.bad b{color:var(--dc-bad)}",
+      "#doseCalc .dc-ai.warn{background:var(--dc-warn-soft)}#doseCalc .dc-ai.warn>i{background:var(--dc-warn)}#doseCalc .dc-ai.warn b{color:var(--dc-warn)}",
+      "#doseCalc.dc3 .dc-res>details{background:var(--dc-panel);border:1px solid var(--dc-line);border-radius:16px;padding:2px 16px}#doseCalc.dc3 .dc-res>details>summary{min-height:50px;font-size:15px}#doseCalc.dc3 .dc-res>details .dc-row{padding-bottom:12px}",
+      // Patient card: folds to a row of values once a dose is showing; Edit opens the form again.
+      "#doseCalc .dc-chips{display:none}#doseCalc .dc-edit{display:none}",
+      "#doseCalc.dc3 .dc-edit{display:inline-flex;align-items:center}",
+      "#doseCalc#doseCalc.dc3 .dc-card.dc-form.dc-col{background:var(--dc-panel)!important;border:1px solid var(--dc-line)!important;border-radius:20px;padding:2px 0 14px}",
+      "#doseCalc.dc3 .dc-form.dc-col .dc-grid{display:none}#doseCalc.dc3 .dc-form.dc-col .dc-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px}#doseCalc.dc3 .dc-form.dc-col #dcDer{border-top:1px solid var(--dc-line);margin-top:8px;padding-top:12px}",
+      "#doseCalc .dc-chips span{padding:7px 11px;border-radius:10px;background:var(--dc-chip);font:500 14px var(--dc-f);color:var(--dc-ink);font-variant-numeric:tabular-nums}",
+      "#doseCalc .dc-hbtns{display:flex;gap:14px;align-items:center}",
+      "@media (prefers-reduced-motion:reduce){#doseCalc .dc-btn,#doseCalc .dc-ind button{transition:none}}",
       "@media(min-width:720px){#doseCalc .dc-body{max-width:720px;margin:0 auto;width:100%}}"
     ].join("\n");
     D.head.appendChild(s);
@@ -404,10 +448,27 @@
     if (d.renal) der.push((d.ageY != null && d.ageY < 18 && d.renal.how !== "entered" ? "eGFR" : "CrCl") + " <b>" + d.renal.value + " mL/min</b> <span>(" + esc(d.renal.how) + ")</span>");
     return der.join(" · ");
   }
+  /* Result-first layout: the patient folds to a row of values once a dose is showing. Never folded
+   * while the values are incomplete (the doctor must see the empty field) or before a drug is chosen. */
+  function colNow() { return !!(S.col && S.drug && !check(S.p).length); }
+  function editBtn() { return S.drug ? '<button class="dc-pick dc-edit" data-dc="edit" aria-expanded="' + !colNow() + '">' + (colNow() ? "Edit" : "Done") + "</button>" : ""; }
+  function chipsHtml() {
+    var p = S.p, c = [];
+    if (p.weight) c.push(esc(p.weight) + " kg");
+    if (p.age) c.push(esc(p.age) + " " + (p.ageUnit === "years" ? "y" : esc(p.ageUnit)));
+    if (p.sex) c.push(p.sex === "F" ? "Female" : "Male");
+    if (p.height) c.push(esc(p.height) + " cm");
+    if (p.scr) c.push("Cr " + esc(p.scr));
+    if (p.crcl) c.push("CrCl " + esc(p.crcl));
+    c.push(p.childPugh ? "Child-Pugh " + esc(p.childPugh) : "Liver normal");
+    c.push(p.dialysis ? "On dialysis" : "No dialysis");
+    return c.map(function (x) { return "<span>" + x + "</span>"; }).join("");
+  }
   function patientTitle() { return "Patient" + (S.source ? " · " + sourceHtml(S.source) : ""); }
   function patientHtml() {
     var p = S.p;
-    return '<section class="dc-card dc-form" aria-labelledby="dcPt"><div class="dc-hrow"><h3 id="dcPt">' + patientTitle() + '</h3><button class="dc-pick" data-dc="pick">Select patient</button></div>' +
+    return '<section class="dc-card dc-form' + (colNow() ? " dc-col" : "") + '" aria-labelledby="dcPt"><div class="dc-hrow"><h3 id="dcPt">' + patientTitle() + '</h3><span class="dc-hbtns"><button class="dc-pick" data-dc="pick">Select patient</button>' + editBtn() + "</span></div>" +
+      '<div class="dc-chips" id="dcChips">' + chipsHtml() + "</div>" +
       '<div class="dc-grid">' +
         field("weight", '<span>Weight (kg) <span class="dc-req">*</span></span>', ' placeholder="e.g. 55"') +
         '<label>Age<span class="dc-age"><input id="dc_age" data-k="age" inputmode="decimal" autocomplete="off" value="' + esc(p.age) + '" placeholder="e.g. 45"><select id="dc_ageUnit" data-k="ageUnit"><option value="years"' + (p.ageUnit === "years" ? " selected" : "") + '>years</option><option value="months"' + (p.ageUnit === "months" ? " selected" : "") + '>months</option><option value="days"' + (p.ageUnit === "days" ? " selected" : "") + '>days</option></select></span></label>' +
@@ -509,6 +570,84 @@
     return h + other + '<div class="dc-foot">Calculated from the StewardMD monograph shown above. Decision support: verify before prescribing.</div></section>';
   }
 
+  /* ---------------- Result-first layout (flag smd_dose_v3) ----------------
+   * Leads with the dose to GIVE: the kidney/liver-adjusted amount when the monograph has a factor
+   * (the classic layout led with the full dose and put the adjusted one underneath). Neonates, input
+   * errors and drugs with no weight-based row keep the classic card: they have no single number. */
+  function cap1(t) { t = String(t || ""); return t.charAt(0).toUpperCase() + t.slice(1); }
+  function splitAmt(v) { var m = /^((?:up to )?[\d.,]+(?:-[\d.,]+)?)\s+(.+)$/.exec(v || ""); return m ? { n: m[1], u: m[2] } : { n: v || "", u: "" }; }
+  function alertHtml(a) {
+    return '<div class="dc-ai' + (a.tone ? " " + a.tone : "") + '"><i aria-hidden="true"></i><div>' + (a.title ? "<b>" + a.title + "</b>" : "") + (a.body ? "<p>" + a.body + "</p>" : "") + (a.more || "") + "</div></div>";
+  }
+  function alerts3(x, res, row) {
+    var out = [];
+    if (res.avoid) out.push({ tone: "bad", title: "Avoid at this " + (res.renal.band && res.renal.band.avoid ? "kidney function" : "liver class"), body: "Read the monograph note below." });
+    var notes = res.notes.concat(row.notes);
+    row.lines.forEach(function (l) { if (l.capped) notes.push(l.capped); });
+    notes.forEach(function (n) {
+      var m = /^Maximum (.+?) \((.+)\)\.$/.exec(n);
+      out.push(m ? { tone: "warn", title: "Maximum " + esc(m[1]), body: esc(m[2]) + "." } : { tone: "warn", title: "", body: esc(n) });
+    });
+    // Kidney: same order of truth as the classic card (verified renal table, then the monograph band).
+    var R = res.renal, V = !R.dialysis && R.fn ? verifiedRenal(x.n, R.fn.value) : null, k = { tone: "", title: "Kidney", body: "" };
+    var fnTxt = R.fn ? (R.fn.how === "entered" ? "CrCl " : (res.derived.ageY != null && res.derived.ageY < 18 ? "eGFR " : "CrCl ")) + esc(R.fn.value) + " mL/min" : "";
+    if (V) { k.tone = V.noChange ? "" : "bad"; k.title = "Kidney: " + fnTxt; k.body = (V.noChange ? "No kidney adjustment." : esc(V.dose)) + (V.note ? " " + esc(V.note) : "") + " From the StewardMD " + (V.draft ? "draft renal table (verify locally)." : "verified renal table."); }
+    else if (R.dialysis) { k.tone = "warn"; k.title = "On dialysis"; k.body = esc(R.advice || R.note); }
+    else if (R.needs) { k.tone = "warn"; k.title = "Kidney not checked"; k.body = "Add creatinine (with age and sex) or a CrCl to check kidney dosing."; }
+    else if (R.band) { k.tone = R.band.factor || R.band.avoid ? "bad" : "warn"; k.title = "Kidney: " + fnTxt; k.body = esc(R.band.advice) + (R.boundary ? " This value sits on the edge of two bands; the lower-function band is shown." : ""); }
+    else if (R.normal) { k.title = "Kidney: " + fnTxt; k.body = "Above every adjustment band: no kidney adjustment in our monograph."; }
+    else if (R.unclear) { k.tone = "warn"; k.title = "Kidney: " + fnTxt; k.body = "Our monograph gives several kidney bands in one sentence; read it and choose."; }
+    else if (R.fn) { k.title = "Kidney: " + fnTxt; k.body = "No kidney bands in our monograph."; }
+    if (R.text && !R.dialysis) k.more = '<details><summary>Monograph kidney note</summary><div class="dc-src">' + esc(R.text) + "</div></details>";
+    out.push(k);
+    var H = res.hepatic;
+    if (H.cls || H.text) {
+      var h = { tone: "", title: "Liver", body: "" };
+      if (H.cls) { h.tone = H.cls.avoid ? "bad" : H.cls.factor ? "warn" : H.cls.none ? "" : "warn"; h.title = "Liver: Child-Pugh " + esc(H.cls.k); h.body = esc(H.cls.advice); }
+      else if (H.noRule) { h.tone = "warn"; h.title = "Liver: Child-Pugh " + esc(S.p.childPugh); h.body = "No Child-Pugh guidance in our monograph; read the note."; }
+      else h.body = "Normal function selected.";
+      if (H.text) h.more = "<details" + (H.noRule ? " open" : "") + '><summary>Monograph liver note</summary><div class="dc-src">' + esc(H.text) + "</div></details>";
+      out.push(h);
+    }
+    var rank = { bad: 0, warn: 1, "": 2 };
+    return out.map(function (a, i) { a.i = i; return a; }).sort(function (a, b) { return rank[a.tone] - rank[b.tone] || a.i - b.i; });
+  }
+  function resultHtml3() {
+    var x = S.drug, res = compute(x, neoOn() ? withNeo(S.p) : S.p);
+    if (res.errors || res.strictNeo || !res.weightBased) return resultHtml();
+    var rows = res.rows.filter(function (r) { return r.lines.length; });
+    var ri = Math.max(0, Math.min(S.ri, rows.length - 1)), row = rows[ri], l0 = row.lines[0], A = l0.adj;
+    var amt = splitAmt(A ? A.value : l0.value), prac = A ? A.practical : l0.practical;
+    var h = '<section class="dc-res" aria-live="polite"><div class="dc-dh"><div><h2 class="dc-dn">' + esc(x.n) + '</h2><div class="dc-cls">' + esc(x.c) + '</div></div><button class="dc-chg" data-dc="change">Change</button></div>';
+    if (rows.length > 1) h += '<div class="dc-ind" role="group" aria-label="Indication">' + rows.map(function (r, i) { return '<button type="button" data-ri="' + i + '" aria-pressed="' + (i === ri) + '">' + esc(r.row.ctx || "Dose " + (i + 1)) + "</button>"; }).join("") + "</div>";
+    else if (row.row.ctx) h += '<div class="dc-sec">' + esc(row.row.ctx) + "</div>";
+    h += '<div class="dc-hero"><div class="dc-hh"><span class="dc-hl">' + esc([cap1(l0.label) || "Dose", row.row.rt].filter(Boolean).join(" · ")) + "</span>" +
+      (A ? '<span class="dc-badge">' + (A.why === "kidney" ? "Kidney " : "Liver ") + (A.pct < 100 ? "−" + (100 - A.pct) + "%" : A.pct + "%") + "</span>" : "") + "</div>" +
+      '<div class="dc-big' + (amt.n.length > 6 ? " l" : "") + '"><b>' + esc(amt.n) + "</b><span>" + esc(amt.u) + "</span></div>" +
+      '<p class="dc-why">' + esc(l0.working) + " = " + esc(l0.value) + (A ? ", " + A.pct + "% for " + A.why + " function" : "") + "." +
+      (prac ? ' <span>Round to about ' + esc(prac) + " (an available strength).</span>" : "") + "</p>" +
+      '<div class="dc-acts"><button type="button" class="dc-btn dc-pri" data-dc="copy">Copy dose</button></div>';
+    if (row.lines.length > 1) h += '<div class="dc-also">' + row.lines.slice(1).map(function (l) {
+      return '<div class="dc-al1"><span>' + esc(cap1(l.label) || "Dose") + "<small>" + esc(l.working) + (l.adj ? ", " + l.adj.pct + "% for " + l.adj.why : "") + "</small></span><b>" + esc(l.adj ? l.adj.value : l.value) + "</b></div>";
+    }).join("") + "</div>";
+    var src = [row.row.d, row.row.t, row.row.note].filter(Boolean).join(" · ");
+    if (src) h += '<details><summary>Monograph text</summary><div class="dc-src">' + esc(src) + "</div></details>";
+    h += "</div>";
+    h += '<h3 class="dc-sec">Check before prescribing</h3><div class="dc-alerts">' + alerts3(x, res, row).map(alertHtml).join("") + "</div>";
+    if (res.other.length) h += "<details><summary>Other doses for this drug (" + res.other.length + ")</summary>" + res.other.map(function (o) { return '<div class="dc-row"><div class="dc-ctx">' + esc(o.ctx || "Dose") + (o.rt ? " · " + esc(o.rt) : "") + '</div><div class="dc-fixed">' + esc(o.d) + "</div>" + (o.t || o.note ? '<div class="dc-src">' + esc([o.t, o.note].filter(Boolean).join(" · ")) + "</div>" : "") + "</div>"; }).join("") + "</details>";
+    S._copy = x.n + ": " + (A ? A.value : l0.value) + (row.row.rt ? ", " + row.row.rt : "") + (row.row.ctx ? " (" + row.row.ctx + ")" : "") + (A ? ". " + A.pct + "% of " + l0.value + " for " + A.why + " function" : "") + ". " + l0.working + ". StewardMD dose calculator: verify before prescribing.";
+    return h + '<div class="dc-foot">Calculated from the StewardMD monograph. Decision support: verify before prescribing.</div></section>';
+  }
+  // Keep the chosen indication chip in view (the strip scrolls sideways; long names run off screen).
+  function showChip() { var c = root && root.querySelector(".dc-ind [aria-pressed=true]"); if (c) { var st = c.parentNode; st.scrollLeft = Math.max(0, c.offsetLeft - 16); } }
+  function resHtml() { return root && root.classList.contains("dc3") ? resultHtml3() : resultHtml(); }
+  function copyDose(btn) {
+    var t = S._copy || "", done = function () { haptic(); btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy dose"; }, 1500); };
+    try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(done, function () { fallback(); }); return; } } catch (e) {}
+    fallback();
+    function fallback() { try { var a = D.createElement("textarea"); a.value = t; a.setAttribute("readonly", ""); a.style.position = "fixed"; a.style.opacity = "0"; D.body.appendChild(a); a.select(); D.execCommand("copy"); a.remove(); done(); } catch (e) {} }
+  }
+
   function wireNeo(body) {
     var blk = body.querySelector("[data-neo-blk]");
     if (blk && G.SMD_NEO_DOSE) { var bd = G.SMD_NEO_DOSE.find(S.drug.n); if (bd) G.SMD_NEO_DOSE.wireGuards(blk, bd, G.SMD_NEO.derived()); }
@@ -516,8 +655,9 @@
   function render() {
     if (!root) return;
     var body = root.querySelector(".dc-body");
-    body.innerHTML = patientHtml() + (S.drug ? resultHtml() : drugPickerHtml());
+    body.innerHTML = patientHtml() + (S.drug ? resHtml() : drugPickerHtml());
     wireNeo(body);
+    showChip();
   }
   // While the user types, only the output changes. The inputs must stay the same DOM nodes:
   // rebuilding a focused input makes iOS drop the keyboard after every character.
@@ -527,7 +667,9 @@
     if (!card) { render(); return; }
     card.querySelector("#dcPt").innerHTML = patientTitle();
     card.querySelector("#dcDer").innerHTML = derivedHtml();
-    if (S.drug) { var side = card.nextElementSibling; if (side) side.outerHTML = resultHtml(); wireNeo(body); }
+    card.querySelector("#dcChips").innerHTML = chipsHtml();
+    card.classList.toggle("dc-col", colNow());
+    if (S.drug) { var side = card.nextElementSibling; if (side) side.outerHTML = resHtml(); wireNeo(body); showChip(); }
     else { var hits = body.querySelector("#dcHits"); if (hits) hits.innerHTML = drugHitsHtml(); }
   }
   function syncSegs() {
@@ -558,12 +700,21 @@
     var sx = t.closest("[data-sex]"); if (sx) { S.p.sex = S.p.sex === sx.dataset.sex ? "" : sx.dataset.sex; haptic(); syncSegs(); refresh(); return; }
     var cp = t.closest("[data-cp]"); if (cp) { S.p.childPugh = cp.dataset.cp; haptic(); syncSegs(); refresh(); return; }
     if (t.closest("[data-dc=pick]")) { openPatientPicker(); return; }
+    var rb = t.closest("[data-ri]"); if (rb) { S.ri = +rb.dataset.ri; haptic(); refresh(); return; }
+    var cb = t.closest("[data-dc=copy]"); if (cb) { copyDose(cb); return; }
+    if (t.closest("[data-dc=edit]")) {
+      S.col = !colNow(); haptic(); render();
+      var bd = root.querySelector(".dc-body");
+      if (S.col) { if (bd) bd.scrollTop = 0; }
+      else { var w = D.getElementById("dc_weight"), card = root.querySelector(".dc-form"); if (card && card.scrollIntoView) card.scrollIntoView({ block: "start" }); if (w) w.focus({ preventScroll: true }); }
+      return;
+    }
     if (t.closest("[data-dc=back]")) { render(); return; }
     var pi = t.closest("[data-pi]");
-    if (pi) { var x = root.querySelector(".dc-body")._list[+pi.dataset.pi]; if (x) { Object.keys(x.patient).forEach(function (k) { S.p[k] = x.patient[k] == null ? "" : String(x.patient[k]); }); S.source = x.label; } haptic(); render(); return; }
-    var dr = t.closest("[data-drug]"); if (dr) { S.drug = findDrug(dr.dataset.drug); haptic(); render(); var b = root.querySelector(".dc-body"); if (b) b.scrollTop = 0; return; }
+    if (pi) { var x = root.querySelector(".dc-body")._list[+pi.dataset.pi]; if (x) { Object.keys(x.patient).forEach(function (k) { S.p[k] = x.patient[k] == null ? "" : String(x.patient[k]); }); S.source = x.label; } S.col = !!S.drug && !check(S.p).length; haptic(); render(); return; }
+    var dr = t.closest("[data-drug]"); if (dr) { S.drug = findDrug(dr.dataset.drug); S.ri = 0; S.col = !check(S.p).length; haptic(); render(); var b = root.querySelector(".dc-body"); if (b) b.scrollTop = 0; return; }
     var br = t.closest("[data-neo-babyrec]"); if (br && G.SMD_NEO_HUB) { var id = br.getAttribute("data-neo-babyrec"); close(); G.SMD_NEO_HUB.open("dose", { drug: id }); return; }
-    if (t.closest("[data-dc=change]")) { S.drug = null; render(); setTimeout(function () { var q = D.getElementById("dc_q"); if (q) q.focus(); }, 50); return; }
+    if (t.closest("[data-dc=change]")) { S.drug = null; S.ri = 0; S.col = false; render(); setTimeout(function () { var q = D.getElementById("dc_q"); if (q) q.focus(); }, 50); return; }
   }
   function onInput(e) {
     var t = e.target, k = t.getAttribute && t.getAttribute("data-k");
@@ -589,11 +740,12 @@
       D.body.appendChild(root);
     }
     root.hidden = false;
+    root.classList.toggle("dc3", v3());
     D.body.classList.add("smd-dosecalc-open");
     if (opts.patient) { Object.keys(S.p).forEach(function (k) { if (opts.patient[k] != null) S.p[k] = typeof S.p[k] === "boolean" ? !!opts.patient[k] : String(opts.patient[k]); }); S.source = opts.source || "prefilled"; }
     render();
     load().then(function () {
-      if (opts.drug) { var f = findDrug(opts.drug); S.drug = f || null; if (!f) S.q = String(opts.drug).replace(/\s*\(.*$/, ""); }
+      if (opts.drug) { var f = findDrug(opts.drug); S.drug = f || null; S.ri = 0; S.col = !!(f && opts.patient) && !check(S.p).length; if (!f) S.q = String(opts.drug).replace(/\s*\(.*$/, ""); }
       render();
       if (!S.drug && !opts.patient) { var w = D.getElementById("dc_weight"); if (w && !S.p.weight) w.focus(); }
     }).catch(function () {
@@ -604,7 +756,7 @@
     if (root) root.hidden = true;
     D.body.classList.remove("smd-dosecalc-open");
     // Patient values are not kept once the calculator closes (no PHI lingers in memory).
-    S.p = { weight: "", age: "", ageUnit: "years", sex: "", height: "", scr: "", crcl: "", childPugh: "", dialysis: false }; S.drug = null; S.q = ""; S.source = "";
+    S.p = { weight: "", age: "", ageUnit: "years", sex: "", height: "", scr: "", crcl: "", childPugh: "", dialysis: false }; S.drug = null; S.q = ""; S.source = ""; S.col = false; S.ri = 0; S._copy = "";
   }
 
   /* Drug page button (api.js renderDetail). Shown only when the flag is on; a drug with no monograph
@@ -622,5 +774,5 @@
   }, false);
   D.addEventListener("keydown", function (e) { if (e.key === "Escape" && root && !root.hidden) close(); }, false);
 
-  G.SMD_DOSECALC = { open: open, close: close, on: on, buttonHTML: buttonHTML, load: load, find: function (n) { return findDrug(n); }, has: function (n) { return !!findDrug(n); }, listPatients: listPatients, engine: ENGINE, FLAG: FLAG };
+  G.SMD_DOSECALC = { open: open, close: close, on: on, buttonHTML: buttonHTML, load: load, find: function (n) { return findDrug(n); }, has: function (n) { return !!findDrug(n); }, listPatients: listPatients, engine: ENGINE, FLAG: FLAG, FLAG3: FLAG3, v3: v3 };
 })(typeof window !== "undefined" ? window : globalThis);
