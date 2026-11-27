@@ -2367,8 +2367,15 @@ body.dark .pn-root .st5a-lib .st5a-cover-folder { background: color-mix(in srgb,
   .pn-root .st-body .st-tb .st-tb-tools .st-b[data-act="st-zoom-window"] { display: none; }
   .pn-root .st-body .st-tb .st-tb-tools .st-b { flex-basis: 34px; min-width: 34px; }
 }
-/* The dock steps aside while typing (the format bar and keyboard own the bottom) and while presenting. */
-.pn-root:has(#stFormatBar) .st-body .st-tb { opacity: 0; pointer-events: none; transform: translate(-50%, 16px); }
+/* Text format bar: its own glass capsule just above the dock (on the keyboard while typing: study-insert.js). */
+.pn-root .st-format-bar.st-format-bar {
+  left: 50%; right: auto; transform: translateX(-50%); width: min(620px, calc(100% - 16px)); box-sizing: border-box;
+  bottom: calc(var(--st-dock-h, 64px) + 10px + env(safe-area-inset-bottom, 0px) + 8px);
+  border: 0; border-radius: 22px; padding: 4px 8px; min-height: 46px; z-index: 36; overflow-x: auto; scrollbar-width: none; justify-content: flex-start; gap: 4px;
+  background: var(--pnv-tint); -webkit-backdrop-filter: var(--pnv-blur); backdrop-filter: var(--pnv-blur);
+  box-shadow: inset 0 1px 0 var(--pnv-rim), inset 0 0 0 1px var(--pnv-rim-lo), var(--pnv-shadow);
+}
+.pn-root .st-format-bar .st-fb-btn { color: var(--pnv-ink); border-radius: 16px; }
 
 /* Page area under the dock: the last page scrolls clear of it. */
 .pn-root .st-body .st-pages { padding-bottom: calc(var(--st-dock-h, 64px) + var(--st-dock-b, 10px) + 40px); }
