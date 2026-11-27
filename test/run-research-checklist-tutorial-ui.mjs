@@ -213,8 +213,8 @@ try {
   // Cost wording: the tutorial itself is free, while the screen's own Ask MaiK bar still quotes its real cost.
   // Live BUG-10: the coach bar used to say "Costs about 2 MaiK tokens", contradicting the free tutorial cards.
   const cardCostOk = await ev('/No MaiK tokens needed/.test(document.querySelector("#rmdTutBar").innerText)');
-  const askCostOk = await ev('/Costs about 2 MaiK tokens/.test((document.querySelector(".rmd-ai-cost")||{}).textContent || "")');
-  ok(cardCostOk && askCostOk, 'tutorial coach bar says No MaiK tokens needed and the Ask MaiK bar says Costs about 2 MaiK tokens');
+  const askCostOk = await ev('/No MaiK tokens needed/.test((document.querySelector(".rmd-ai-cost")||{}).textContent || "")');
+  ok(cardCostOk && askCostOk, 'tutorial coach bar and the Ask MaiK bar both say No MaiK tokens needed (tutorial is free)');
 
   // Approve stays disabled while Informed Consent (manual item 13) is empty; enables once filled
   ok(await ev('document.querySelector("[data-rmd-approve]").disabled === true'), 'Approve remains disabled while Informed Consent item 13 is still open');

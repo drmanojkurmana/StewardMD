@@ -951,6 +951,12 @@
   function aiBarHtml(st, opts) {
     var o = opts || {};
     var cost = typeof o.cost === "number" ? o.cost : 2;
+    /* Tutorial projects run Ask MaiK against the tutorial sandbox (no provider call, no charge), so say so;
+     * the coach bar says the same (owner item 8: one cost wording everywhere). */
+    try {
+      var tutProj = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
+      if (tutProj && tutProj.tutorial) cost = 0;
+    } catch (eTut) {}
     var h = '<div class="rmd-ai-bar">';
     h += '<div class="rmd-ai-actions">';
     h += '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd-ai="ask"' + (st.busy ? " disabled" : "") + '><span class="rmd-ai-mark" aria-hidden="true">R</span>Ask MaiK to draft it</button>';
