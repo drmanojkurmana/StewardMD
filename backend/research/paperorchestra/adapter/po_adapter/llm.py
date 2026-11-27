@@ -160,6 +160,15 @@ class GatewayLLMClient:
             return base
         return sanitize_step_id(self._step_id)
 
+    def _retry_step_id(self, explicit_step_id, current, retry_no):
+        """Step id for asking again after a reply we could not use."""
+        if explicit_step_id is None and self._step_prefix is not None and self._step_track_retries:
+            nxt = self._resolve_step_id(None)
+            if nxt and nxt != current:
+                return nxt
+        base = re.sub(r":r\d+$", "", current)
+        return sanitize_step_id(f"{base}:r{retry_no}") or current
+
     @contextmanager
     def step(self, step_id: str | None):
         prev_id = self._step_id
@@ -328,6 +337,13 @@ class GatewayLLMClient:
                                                 "gateway_bad_response"):
                                 raise
                             last_error = exc
+                            # The gateway caches each reply by stepId (research_job_steps),
+                            # so resending the same id would return the same bad reply.
+                            # Ask again under the next retry id instead.
+                            if resolved_step_id:
+                                resolved_step_id = self._retry_step_id(step_id, resolved_step_id, attempt + 1)
+                                body["stepId"] = resolved_step_id
+                                raw_body = json.dumps(body, separators=(",", ":")).encode("utf-8")
                     elif resp.status_code == 429 or resp.status_code >= 500:
                         last_error = GatewayError("gateway_http_" + str(resp.status_code))
                     else:
