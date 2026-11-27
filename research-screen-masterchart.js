@@ -38,7 +38,7 @@
   function freshState(pid) {
     return {
       pid: pid, stage: "upload", fileName: "", sample: false, fromCasefiles: false,
-      columns: [], rows: [], types: {}, infer: {}, phiCols: [],
+      columns: [], rows: [], types: {}, infer: {}, phiCols: [], varLabels: {},
       analysis: "", showMean: false, matched: false, running: false,
       ctri: null, iecStatus: null, journey: [],
       isSeries: false, isRct: false, isStudy: false, isCohort: false,
@@ -53,6 +53,14 @@
   }
 
   function stats() { return G.SMD_RESEARCH_STATS; }
+  function statFile() { return G.SMD_RESEARCH_STATFILE; }
+  /* SPSS and Stata upload: ON by default. localStorage smd_rmd_statfile = "0" turns it off on a device. */
+  function statFileEnabled() {
+    var SF = statFile();
+    if (!SF || typeof SF.read !== "function") return false;
+    try { if (G.localStorage && G.localStorage.getItem("smd_rmd_statfile") === "0") return false; } catch (e) { /* storage blocked */ }
+    return true;
+  }
   function onDeviceStats() { return G.SMD_RMD_ONDEVICE_STATS; }
   function onDeviceV2Enabled() {
     var OD = onDeviceStats();
@@ -171,7 +179,7 @@
       var all = JSON.parse(localStorage.getItem(MC_KEY) || "{}") || {};
       all[mc.pid] = {
         fileName: mc.fileName, sample: mc.sample,
-        columns: mc.columns, rows: mc.rows, types: mc.types
+        columns: mc.columns, rows: mc.rows, types: mc.types, varLabels: mc.varLabels || {}
       };
       localStorage.setItem(MC_KEY, JSON.stringify(all));
       mc.notice = "Saved on this phone. Nothing was uploaded.";
@@ -203,6 +211,7 @@
     mc.columns = saved.columns.slice();
     mc.rows = saved.rows;
     mc.types = saved.types || {};
+    mc.varLabels = saved.varLabels || {};
     mc.results = null;
     if (stats()) inferAll();
   }
@@ -395,6 +404,7 @@
     }
     mc.fileName = fileName;
     mc.sample = sample;
+    mc.varLabels = table.varLabels || {};
     mc.columns = table.columns.slice();
     mc.rows = table.rows;
     mc.types = {};
@@ -416,7 +426,17 @@
       mc.error = "Could not read that file. Try again, or save the sheet as CSV and upload that.";
       draw();
     };
-    if (/\.xlsx$/i.test(name)) {
+    if (statFileEnabled() && statFile().isStatFileName(name)) {
+      reader.onload = function () {
+        try {
+          adoptStatFile(reader.result, name);
+        } catch (err) {
+          mc.error = statFileError(err && err.message);
+          draw();
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    } else if (/\.xlsx$/i.test(name)) {
       reader.onload = function () {
         parseXlsx(reader.result).then(function (table) {
           adoptTable(table, name, false);
@@ -437,6 +457,36 @@
       };
       reader.readAsText(file);
     }
+  }
+
+  /* ---------- SPSS (.sav) and Stata (.dta), read on this phone ---------- */
+
+  function statFileError(msg) {
+    var m = String(msg || "").replace(/^statfile:\s*/, "");
+    if (!m) m = "Could not read that file.";
+    m = m.charAt(0).toUpperCase() + m.slice(1);
+    if (!/[.!?]$/.test(m)) m += ".";
+    return m + " You can also save it as CSV in SPSS or Stata and upload that.";
+  }
+
+  function adoptStatFile(buf, name) {
+    var SF = statFile();
+    var res = SF.read(buf, { name: name });
+    var table = SF.toTable(res, { applyLabels: true });
+    var varLabels = {};
+    for (var i = 0; i < res.variables.length; i++) {
+      if (res.variables[i].label) varLabels[res.variables[i].name] = res.variables[i].label;
+    }
+    table.varLabels = varLabels;
+    adoptTable(table, name, false);
+    if (mc.stage !== "identifiers") return;
+    var what = res.format === "dta" ? "Stata" : "SPSS";
+    var bits = ["Read on this phone from the " + what + " file. Nothing was uploaded."];
+    if (res.notes.labelledColumns) bits.push(res.notes.labelledColumns + " column" + (res.notes.labelledColumns === 1 ? " has its" : "s have their") + " " + what + " description shown under the name.");
+    if (table.labelsApplied) bits.push("Value labels written in for " + table.labelsApplied + " column" + (table.labelsApplied === 1 ? "" : "s") + ", so you see the words instead of the codes.");
+    if (res.notes.missingBlanked) bits.push(res.notes.missingBlanked + " value" + (res.notes.missingBlanked === 1 ? " was" : "s were") + " marked as missing in " + what + " and " + (res.notes.missingBlanked === 1 ? "is" : "are") + " left blank.");
+    mc.notice = bits.join(" ");
+    draw();
   }
 
   /* ---------- Analysis ---------- */
@@ -1744,13 +1794,16 @@
   function drawUpload() {
     var h = headHtml("Analyse my master chart", "Upload the Excel sheet with one row per patient. We pick the right tests and write Table 1 and the results.");
     h += '<div class="rmd-card rmd-mc-upload">';
-    h += '  <label class="rmd-btn rmd-btn-primary rmd-mc-filelabel" for="rmdMcFile">Upload master chart (.csv or .xlsx)</label>';
-    h += '  <input type="file" id="rmdMcFile" class="rmd-mc-fileinput" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">';
+    var sfOn = statFileEnabled();
+    h += '  <label class="rmd-btn rmd-btn-primary rmd-mc-filelabel" for="rmdMcFile">' + (sfOn ? 'Upload master chart (.csv, .xlsx, .sav or .dta)' : 'Upload master chart (.csv or .xlsx)') + '</label>';
+    h += '  <input type="file" id="rmdMcFile" class="rmd-mc-fileinput" accept=".csv,.xlsx,' + (sfOn ? '.sav,.zsav,.dta,' : '') + 'text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' + (sfOn ? ',application/x-spss-sav,application/x-stata-dta,application/octet-stream' : '') + '">';
     h += '  <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-mc="sample">Try with a sample thesis</button>';
     if (loadLocal(mc.pid)) {
       h += '  <button type="button" class="rmd-btn rmd-btn-quiet" data-rmd-mc="use-saved">Use the chart saved on this phone</button>';
     }
-    h += '  <p class="rmd-muted">CSV works everywhere. Excel (.xlsx) is read on this phone when supported.</p>';
+    h += sfOn
+      ? '  <p class="rmd-muted">CSV works everywhere. Excel (.xlsx), SPSS (.sav) and Stata (.dta) files are read on this phone. Nothing is uploaded.</p>'
+      : '  <p class="rmd-muted">CSV works everywhere. Excel (.xlsx) is read on this phone when supported.</p>';
     h += '</div>';
     return h;
   }
@@ -1778,6 +1831,7 @@
       var inf = mc.infer[name] || {};
       h += '<div class="rmd-mc-colcard" data-rmd-mc-colcard="' + esc(name) + '">';
       h += '  <div class="rmd-mc-colname"><strong>' + esc(name) + '</strong><span class="rmd-mc-missing">' + (inf.missing || 0) + ' missing</span></div>';
+      if (mc.varLabels && mc.varLabels[name]) h += '  <div class="rmd-muted rmd-mc-varlabel">' + esc(mc.varLabels[name]) + '</div>';
       if (isPhi(name)) {
         h += '  <span class="rmd-badge rmd-badge-pill">Left out (identifier)</span>';
       } else {
@@ -2319,6 +2373,7 @@
         mc.columns = saved.columns.slice();
         mc.rows = saved.rows;
         mc.types = saved.types || {};
+        mc.varLabels = saved.varLabels || {};
         mc.results = null;
         inferAll();
         mc.stage = "identifiers";

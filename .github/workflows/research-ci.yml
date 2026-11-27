@@ -11,6 +11,10 @@ on:
       - 'scripts/research-parity-epi.R'
       - 'scripts/research-parity-roc.R'
       - 'research-roc-view.js'
+      - 'research-statfile.js'
+      - 'research-screen-masterchart.js'
+      - 'scripts/research-statfile-*.py'
+      - 'test/run-research-statfile-ui.mjs'
       - 'test/research-*.test.mjs'
       - 'test/fixtures/research/**'
       - 'docs/research/**'
@@ -25,6 +29,10 @@ on:
       - 'scripts/research-parity-epi.R'
       - 'scripts/research-parity-roc.R'
       - 'research-roc-view.js'
+      - 'research-statfile.js'
+      - 'research-screen-masterchart.js'
+      - 'scripts/research-statfile-*.py'
+      - 'test/run-research-statfile-ui.mjs'
       - 'test/research-*.test.mjs'
       - 'test/fixtures/research/**'
       - 'docs/research/**'
@@ -141,3 +149,23 @@ jobs:
           node-version: '22'
       - name: Run ROC unit and pROC parity tests
         run: node --test test/research-stats-roc.test.mjs test/research-stats-parity-roc.test.mjs test/research-roc-view.test.mjs
+  parity-statfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pyreadstat (checker only; the app reads these files on the phone)
+        run: pip install "pyreadstat==1.3.8" "pandas>=2.2,<4"
+      - name: Read every SPSS and Stata test file with pyreadstat
+        run: python3 scripts/research-statfile-parity.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: On-device reader unit tests
+        run: node --test test/research-statfile.test.mjs
+      - name: On-device reader against pyreadstat
+        run: node --test test/research-statfile-parity.test.mjs
+      - name: Master chart upload in a real browser (SPSS and Stata)
+        run: CHROME="$(command -v google-chrome || command -v chromium)" node test/run-research-statfile-ui.mjs
