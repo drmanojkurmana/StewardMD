@@ -29,6 +29,8 @@ done
 # connect-agent-boot.js). The *.js loop above already copies it; this explicit
 # guard keeps the native bundle complete even if that loop ever gains excludes.
 [ -f hospital-registry.js ] && cp hospital-registry.js "$WWW/"
+[ -f research-ondevice-checkpoint.js ] && cp research-ondevice-checkpoint.js "$WWW/"
+[ -f research-ondevice-pdf.js ] && cp research-ondevice-pdf.js "$WWW/"
 
 # ── 2a. Root ES modules. prescription.js dynamic-imports /rx-build.mjs at runtime, so the native
 # bundle needs it too; the *.js loop above never matched .mjs, which left that import unresolvable

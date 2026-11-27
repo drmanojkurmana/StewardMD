@@ -621,9 +621,22 @@
       });
   }
 
-  function uploadPdf(idx, file) {
-    var p = state.progress[idx];
-    if (!p) return;
+  function onDeviceOcrOn() {
+    var OD = G && G.SMD_RMD_ONDEVICE_PDF;
+    if (OD && typeof OD.isEnabled === "function") return OD.isEnabled();
+    try {
+      if (typeof location !== "undefined" && location.search) {
+        var m = location.search.match(/[?&]rmd_ondevice_ocr=([^&]+)/);
+        if (m != null) return m[1] === "1" || m[1] === "on" || m[1] === "true";
+      }
+    } catch (e) {}
+    try {
+      if (typeof localStorage !== "undefined") return localStorage.getItem("smd_rmd_ondevice_ocr") !== "0";
+    } catch (e) {}
+    return true;
+  }
+
+  function uploadPdfServer(idx, p, file) {
     var form = new G.FormData();
     form.append("file", file);
     p.text = "Uploading PDF";
@@ -650,6 +663,94 @@
           SMD.p2.flashNotice(sheetEl(), msg, "error");
         }
       });
+  }
+
+  function uploadPdf(idx, file) {
+    var p = state.progress[idx];
+    if (!p) return;
+    var OD = G && G.SMD_RMD_ONDEVICE_PDF;
+    var CP = G && G.SMD_RMD_CHECKPOINT;
+    if (!onDeviceOcrOn() || !OD || typeof OD.extract !== "function" || typeof file.arrayBuffer !== "function") {
+      uploadPdfServer(idx, p, file);
+      return;
+    }
+    var isLocalOnly = !state.project || !state.project.serverId;
+    var targetPid = state.pid;
+    p.text = "Reading on your phone";
+    render();
+    file.arrayBuffer().then(function (ab) {
+      var u8 = new Uint8Array(ab);
+      return (typeof OD.sha256 === "function" ? OD.sha256(u8) : Promise.resolve(null)).then(function (hash) {
+        var ckKey = hash ? ("pdf:" + targetPid + ":" + hash) : "";
+        var resumeP = (CP && ckKey) ? CP.get(ckKey).catch(function () { return null; }) : Promise.resolve(null);
+        return resumeP.then(function (resume) {
+          return OD.extract(u8, {
+            sha256: hash,
+            resume: resume,
+            onProgress: function (cur, tot) {
+              p.text = "Reading on your phone, page " + cur + " of " + tot;
+              render();
+            },
+            onPage: function (partial) {
+              if (CP && partial && partial.sha256) {
+                return CP.put("pdf:" + targetPid + ":" + partial.sha256, partial).catch(function () {});
+              }
+            }
+          });
+        });
+      }).then(function (result) {
+        var clearKey = (result && result.sha256) ? ("pdf:" + targetPid + ":" + result.sha256) : "";
+        if (isLocalOnly) {
+          var clearP = (CP && clearKey) ? CP.remove(clearKey).catch(function () {}) : Promise.resolve();
+          var artId = "local_" + (result.sha256 || Date.now());
+          var localKey = "local-artifact:" + targetPid + ":" + (result.sha256 || Date.now());
+          var storeP = CP ? CP.put(localKey, {
+            artifact: {
+              id: artId, projectId: targetPid, filename: file.name || "study.pdf",
+              sha256: result.sha256, bytes: file.size || u8.byteLength,
+              pages: result.pages.length, status: "succeeded", createdTs: Date.now()
+            },
+            result: result
+          }).catch(function () {}) : Promise.resolve();
+          return Promise.all([clearP, storeP]).then(function () {
+            p.status = "pdf_sent";
+            p.text = result.ocr
+              ? "PDF read on your phone (some pages used OCR). Check values against the original."
+              : "PDF read on your phone.";
+            render();
+          });
+        }
+        return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(targetPid) + "/extractions/device", {
+          filename: file.name || "study.pdf",
+          sha256: result.sha256,
+          bytes: file.size || u8.byteLength,
+          result: result
+        }).then(function () {
+          if (CP && clearKey) CP.remove(clearKey).catch(function () {});
+          p.status = "pdf_sent";
+          p.text = result.ocr
+            ? "PDF read on your phone (some pages used OCR). Open Extract to verify values."
+            : "PDF read on your phone. Open Extract to review pages.";
+          render();
+          if (SMD.p2 && SMD.p2.flashNotice) SMD.p2.flashNotice(sheetEl(), "PDF read on your phone.", "info");
+        }, function (postErr) {
+          if (postErr && (postErr.status === 413 || postErr.code === "ceiling_bytes")) {
+            uploadPdfServer(idx, p, file);
+            return;
+          }
+          p.text = "Need the PDF to find the numbers";
+          render();
+          if (SMD.p2 && SMD.p2.flashNotice) {
+            var msg = (SMD.p2.friendlyError) ? SMD.p2.friendlyError(postErr).message : "Upload failed. Try again.";
+            SMD.p2.flashNotice(sheetEl(), msg, "error");
+          }
+        });
+      }, function () {
+        uploadPdfServer(idx, p, file);
+      });
+    }, function () {
+      uploadPdfServer(idx, p, file);
+    });
   }
 
   function prefillOutcome() {
