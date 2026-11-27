@@ -206,8 +206,13 @@
     activeRunResult: null,
     offlineQueue: [],
     syncState: "synced", // "synced", "offline", "queue", "conflict"
-    conflict: null       // { studyId, local, server, resolved: false }
+    conflict: null,      // { studyId, local, server, resolved: false }
+    idMap: {},           // local study id -> server study id (session cross-check)
+    serverVersions: {},  // projectId|serverStudyId -> last version the server confirmed
+    lastServerError: null // last write the server rejected with a 4xx (shown by screens)
   };
+  var pendingOps = [];
+  var creationWait = {};
 
   function notify() {
     for (var i = 0; i < listeners.length; i++) {
@@ -223,6 +228,286 @@
       if (/network|offline|failed to fetch|cannot reach/i.test(msg)) return true;
     }
     return false;
+  }
+
+  /* ---- Server-backed projects ------------------------------------------- *
+   * A project is server-backed only when it carries a serverId. Practice
+   * projects (the seed BCG data) and tutorial sandboxes stay on the device. */
+  function serverProjectId(pid) {
+    var p = STORE.getProject(pid);
+    if (!p) return null;
+    if (p.practice || p.tutorial) return null;
+    return p.serverId || null;
+  }
+
+  function enc(v) {
+    return encodeURIComponent(String(v == null ? "" : v));
+  }
+
+  function apiRequest(method, path, body) {
+    if (!SMD.api || typeof SMD.api.request !== "function") {
+      var e = new Error("The research API is not available.");
+      e.code = "api_unavailable";
+      return Promise.reject(e);
+    }
+    return SMD.api.request(method, path, body);
+  }
+
+  function studyKey(pid, sid) {
+    return pid + "|" + sid;
+  }
+
+  function track(promise) {
+    pendingOps.push(promise);
+    promise.then(function () {}, function () {});
+    var drop = function () {
+      var idx = pendingOps.indexOf(promise);
+      if (idx >= 0) pendingOps.splice(idx, 1);
+    };
+    promise.then(drop, drop);
+    return promise;
+  }
+
+  /* Resolves when every write started in this session has settled. The
+   * manuscript screen awaits this before starting a PaperOrchestra job so the
+   * server already holds the studies and the run. */
+  function pendingSync() {
+    return Promise.all(pendingOps.slice()).then(function () { return true; }, function () { return false; });
+  }
+
+  function rememberServerVersion(pid, sid, version) {
+    if (!pid || !sid || !version) return;
+    state.serverVersions[studyKey(pid, sid)] = version;
+  }
+
+  function serverVersionFor(pid, sid) {
+    return state.serverVersions[studyKey(pid, sid)] || 0;
+  }
+
+  function findStudy(pid, id) {
+    var list = state.studies[pid] || [];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].id === id) return list[i];
+    }
+    var mapped = state.idMap[id];
+    if (mapped) {
+      for (var j = 0; j < list.length; j++) {
+        if (list[j].id === mapped) return list[j];
+      }
+    }
+    return null;
+  }
+
+  function studyFromServer(pid, sp) {
+    var locator = sp.locator || {};
+    return {
+      id: sp.id,
+      projectId: pid,
+      label: (sp.label || "Untitled Study").trim(),
+      measure: sp.measure || "RR",
+      inputs: sp.inputs || {},
+      locator: {
+        kind: locator.kind || "manual",
+        citation: (locator.citation || "").trim(),
+        page: locator.page != null ? String(locator.page).trim() : "",
+        section: (locator.section || "").trim(),
+        table: (locator.table || "").trim(),
+        quote: (sp.quote || locator.quote || "").trim()
+      },
+      quote: (sp.quote || locator.quote || "").trim(),
+      verified: !!sp.verified,
+      verifiedBy: sp.verifiedBy || null,
+      verifiedAt: sp.verifiedAt || null,
+      version: sp.version || 1,
+      createdBy: sp.createdBy || "clinician",
+      createdAt: sp.createdAt || Date.now(),
+      updatedAt: sp.updatedAt || Date.now(),
+      serverKnown: true,
+      serverVerified: !!sp.verified
+    };
+  }
+
+  /* Give the local optimistic row the server identity, keeping the values the
+   * clinician just typed. The server is the source for the id and version. */
+  function adoptServerIdentity(pid, localId, sp) {
+    var study = findStudy(pid, localId);
+    if (!study || !sp || !sp.id) return study;
+    study.id = sp.id;
+    study.projectId = pid;
+    study.version = sp.version || 1;
+    if (sp.createdAt) study.createdAt = sp.createdAt;
+    if (sp.updatedAt) study.updatedAt = sp.updatedAt;
+    if (sp.createdBy) study.createdBy = sp.createdBy;
+    if (localId !== sp.id) state.idMap[localId] = sp.id;
+    if (state.activeStudyId === localId) state.activeStudyId = sp.id;
+    study.serverKnown = true;
+    study.serverVerified = !!sp.verified;
+    rememberServerVersion(pid, sp.id, study.version);
+    return study;
+  }
+
+  function reportWriteError(type, err) {
+    var status = (err && err.status) || 0;
+    if (!status && err && err.code && String(err.code).indexOf("http_") === 0) {
+      status = parseInt(String(err.code).slice(5), 10) || 0;
+    }
+    state.lastServerError = {
+      type: type,
+      status: status,
+      message: String((err && (err.message || (err.error && err.error.message))) || "The server rejected this change.")
+    };
+    saveState();
+    notify();
+  }
+
+  function studyBody(study) {
+    return {
+      label: study.label || "",
+      measure: study.measure,
+      inputs: study.inputs || {},
+      locator: study.locator || {},
+      quote: study.quote || "",
+      verified: !!study.verified
+    };
+  }
+
+  /* Send now when online; queue only when the network actually failed. A 4xx
+   * is a real answer from the server, so it is reported and never retried. */
+  function persistOrQueue(type, payload, onError) {
+    return function (err) {
+      if (isDeviceOffline(err)) {
+        STORE.queueAction(type, payload, err);
+        return null;
+      }
+      reportWriteError(type, err);
+      if (onError) onError(err);
+      return null;
+    };
+  }
+
+  /* ---- Run upload -------------------------------------------------------- *
+   * Local engine ids are not server ids until the study create returns. The
+   * manifest is remapped before upload, and studies created offline are
+   * matched to their server rows by citation when the queue drains. */
+  function runPins(pid, manifest) {
+    var pins = [];
+    var inputs = (manifest && manifest.inputs) || [];
+    for (var i = 0; i < inputs.length; i++) {
+      var inp = inputs[i] || {};
+      var localId = inp.id;
+      var sid = state.idMap[localId] || localId;
+      var study = findStudy(pid, localId) || findStudy(pid, sid);
+      pins.push({
+        localId: localId,
+        studyId: sid,
+        study: study,
+        version: (study && study.version) || inp.version || 1
+      });
+    }
+    return pins;
+  }
+
+  function sameStudy(a, b) {
+    if (!a || !b) return false;
+    var ca = a.locator && a.locator.citation ? String(a.locator.citation).trim() : "";
+    var cb = b.locator && b.locator.citation ? String(b.locator.citation).trim() : "";
+    if (!ca || ca !== cb) return false;
+    var la = String(a.label || "").trim().toLowerCase();
+    var lb = String(b.label || "").trim().toLowerCase();
+    return !la || !lb || la === lb;
+  }
+
+  function matchServerStudy(pin, studies) {
+    var i;
+    for (i = 0; i < studies.length; i++) {
+      if (studies[i] && studies[i].id === pin.studyId) return studies[i];
+    }
+    if (!pin.study) return null;
+    for (i = 0; i < studies.length; i++) {
+      if (sameStudy(pin.study, studies[i])) return studies[i];
+    }
+    return null;
+  }
+
+  function reconcileRunStudies(pid, serverPid, pins, studies) {
+    var chain = Promise.resolve();
+    for (var i = 0; i < pins.length; i++) {
+      (function (pin) {
+        chain = chain.then(function () {
+          var match = matchServerStudy(pin, studies);
+          if (!match) return null;
+          if (pin.study && pin.study.id !== match.id) {
+            adoptServerIdentity(pid, pin.study.id, match);
+          }
+          pin.studyId = match.id;
+          pin.study = findStudy(pid, match.id) || pin.study;
+          rememberServerVersion(pid, match.id, match.version);
+          if (pin.study && pin.study.verified && match.verified !== true) {
+            var base = match.version || 1;
+            return apiRequest("PUT", "/v1/projects/" + enc(serverPid) + "/studies/" + enc(match.id), {
+              version: base,
+              verified: true
+            }).then(function (res) {
+              var sp = res && res.study;
+              if (sp) {
+                pin.study.version = sp.version || pin.study.version;
+                pin.study.verified = !!sp.verified;
+                pin.study.serverVerified = !!sp.verified;
+                rememberServerVersion(pid, match.id, pin.study.version);
+              }
+              return sp || null;
+            }, function (err) {
+              if (isDeviceOffline(err)) {
+                STORE.queueAction("study_update", { id: match.id, projectId: serverPid, version: base, verified: true }, err);
+              } else {
+                reportWriteError("study_update", err);
+              }
+              return null;
+            });
+          }
+          return null;
+        });
+      })(pins[i]);
+    }
+    return chain;
+  }
+
+  function prepareRunPayload(pid, serverPid, run, manifest) {
+    var pins = runPins(pid, manifest);
+    var needLookup = false;
+    for (var i = 0; i < pins.length; i++) {
+      if (!pins[i].study || !pins[i].study.serverKnown) needLookup = true;
+    }
+    var flush = pendingSync().then(function () {
+      return (SMD.drainQueue ? SMD.drainQueue() : 0);
+    });
+    return Promise.resolve(flush).then(function () {
+      if (!needLookup) return null;
+      return apiRequest("GET", "/v1/projects/" + enc(serverPid) + "/studies?limit=200").then(function (res) {
+        return (res && res.studies) || [];
+      }, function (err) {
+        if (!isDeviceOffline(err)) reportWriteError("studies_list", err);
+        return null;
+      });
+    }).then(function (studies) {
+      var work = studies ? reconcileRunStudies(pid, serverPid, pins, studies) : Promise.resolve();
+      return work.then(function () {
+        var payload = [];
+        for (var j = 0; j < pins.length; j++) {
+          var pin = pins[j];
+          var ver = serverVersionFor(pid, pin.studyId) || (pin.study && pin.study.version) || pin.version || 1;
+          payload.push({ studyId: pin.studyId, version: ver });
+          if (manifest && manifest.inputs && manifest.inputs[j]) manifest.inputs[j].id = pin.studyId;
+        }
+        return {
+          measure: run.measure,
+          model: run.model,
+          test: run.test,
+          level: run.level,
+          studyVersions: payload
+        };
+      });
+    });
   }
 
   function cleanQueue(queue) {
@@ -261,7 +546,9 @@
           runs: state.runs,
           offlineQueue: state.offlineQueue,
           syncState: state.syncState,
-          conflict: state.conflict
+          conflict: state.conflict,
+          idMap: state.idMap,
+          serverVersions: state.serverVersions
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
       }
@@ -288,6 +575,8 @@
               state.syncState = "synced";
             }
             state.conflict = parsed.conflict || null;
+            state.idMap = parsed.idMap || {};
+            state.serverVersions = parsed.serverVersions || {};
             return;
           }
         }
@@ -327,6 +616,8 @@
     state.offlineQueue = [];
     state.syncState = "synced";
     state.conflict = null;
+    state.idMap = {};
+    state.serverVersions = {};
     saveState();
   }
 
@@ -537,10 +828,65 @@
       if (!state.studies[pid]) state.studies[pid] = [];
       state.studies[pid].unshift(study);
       state.activeStudyId = id;
-
-      STORE.queueAction("study_create", study);
       saveState();
       notify();
+
+      var serverPid = serverProjectId(pid);
+      if (!serverPid) {
+        STORE.queueAction("study_create", study);
+        return study;
+      }
+
+      /* Send now. The server assigns the study id; the local row keeps it so a
+       * later run pins real server ids. Verification is a second PUT because
+       * the create route always inserts an unverified row. */
+      var localId = id;
+      var body = studyBody(study);
+      var chain = apiRequest("POST", "/v1/projects/" + enc(serverPid) + "/studies", body).then(function (res) {
+        var sp = res && res.study;
+        if (!sp || !sp.id) return null;
+        adoptServerIdentity(pid, localId, sp);
+        if (!study.verified) {
+          saveState();
+          notify();
+          return sp;
+        }
+        var base = sp.version || 1;
+        return apiRequest("PUT", "/v1/projects/" + enc(serverPid) + "/studies/" + enc(sp.id), {
+          version: base,
+          verified: true
+        }).then(function (r2) {
+          var s2 = r2 && r2.study;
+          if (s2) {
+            study.verified = !!s2.verified;
+            study.verifiedAt = s2.verifiedAt || study.verifiedAt;
+            study.version = s2.version || study.version;
+            study.serverVerified = !!s2.verified;
+            rememberServerVersion(pid, s2.id, study.version);
+          }
+          saveState();
+          notify();
+          return s2 || sp;
+        }, function (err) {
+          if (isDeviceOffline(err)) {
+            STORE.queueAction("study_update", { id: sp.id, projectId: serverPid, version: base, verified: true }, err);
+          } else {
+            reportWriteError("study_update", err);
+          }
+          return sp;
+        });
+      }, function (err) {
+        if (isDeviceOffline(err)) {
+          var qp = studyBody(study);
+          qp.id = localId;
+          qp.projectId = serverPid;
+          STORE.queueAction("study_create", qp, err);
+        } else {
+          reportWriteError("study_create", err);
+        }
+        return null;
+      });
+      creationWait[localId] = track(chain);
       return study;
     },
 
@@ -550,36 +896,14 @@
     adoptServerStudy: function (projectId, sp) {
       var pid = projectId || state.activeProjectId;
       if (!pid || !sp || !sp.id) return null;
-      var locator = sp.locator || {};
-      var study = {
-        id: sp.id,
-        projectId: pid,
-        label: (sp.label || "Untitled Study").trim(),
-        measure: sp.measure || "RR",
-        inputs: sp.inputs || {},
-        locator: {
-          kind: locator.kind || "manual",
-          citation: (locator.citation || "").trim(),
-          page: locator.page != null ? String(locator.page).trim() : "",
-          section: (locator.section || "").trim(),
-          table: (locator.table || "").trim(),
-          quote: (sp.quote || locator.quote || "").trim()
-        },
-        quote: (sp.quote || locator.quote || "").trim(),
-        verified: !!sp.verified,
-        verifiedBy: sp.verifiedBy || null,
-        verifiedAt: sp.verifiedAt || null,
-        version: sp.version || 1,
-        createdBy: sp.createdBy || "clinician",
-        createdAt: sp.createdAt || Date.now(),
-        updatedAt: sp.updatedAt || Date.now()
-      };
+      var study = studyFromServer(pid, sp);
       if (!state.studies[pid]) state.studies[pid] = [];
       var replaced = false;
       for (var i = 0; i < state.studies[pid].length; i++) {
         if (state.studies[pid][i].id === study.id) { state.studies[pid][i] = study; replaced = true; break; }
       }
       if (!replaced) state.studies[pid].unshift(study);
+      rememberServerVersion(pid, study.id, study.version);
       state.activeStudyId = study.id;
       saveState();
       notify();
@@ -636,10 +960,49 @@
       }
       study.version = (study.version || 1) + 1;
       study.updatedAt = now;
-
-      STORE.queueAction("study_update", study);
       saveState();
       notify();
+
+      var serverPid = serverProjectId(pid);
+      if (!serverPid) {
+        STORE.queueAction("study_update", study);
+        return study;
+      }
+
+      var localId = id;
+      var wait = creationWait[localId] || Promise.resolve(null);
+      var chain = wait.then(function () {
+        var current = findStudy(pid, localId);
+        if (!current) return null;
+        var sid = current.id;
+        /* The server checks the version the edit was based on. The local row
+         * is already incremented optimistically, so send the previous one. */
+        var base = serverVersionFor(pid, sid) || Math.max(1, (current.version || 2) - 1);
+        var body = studyBody(current);
+        body.version = base;
+        return apiRequest("PUT", "/v1/projects/" + enc(serverPid) + "/studies/" + enc(sid), body).then(function (res) {
+          var sp = res && res.study;
+          if (sp) {
+            current.version = sp.version || current.version;
+            current.verified = !!sp.verified;
+            current.serverVerified = !!sp.verified;
+            current.verifiedBy = sp.verifiedBy || current.verifiedBy;
+            current.verifiedAt = sp.verifiedAt || current.verifiedAt;
+            current.updatedAt = sp.updatedAt || current.updatedAt;
+            rememberServerVersion(pid, sid, current.version);
+            saveState();
+            notify();
+          }
+          return sp || null;
+        }, function (err) {
+          var qp = studyBody(current);
+          qp.id = sid;
+          qp.projectId = serverPid;
+          qp.version = base;
+          return persistOrQueue("study_update", qp, null)(err);
+        });
+      });
+      track(chain);
       return study;
     },
 
@@ -686,7 +1049,33 @@
         if (local.verified !== undefined) study.verified = local.verified;
         study.version = (conf.server.version || study.version || 1) + 1;
         study.updatedAt = Date.now();
-        STORE.queueAction("study_update_forced", study);
+        var serverPid = serverProjectId(pid);
+        if (serverPid) {
+          var sid = study.id;
+          var base = (conf.server && conf.server.version) || Math.max(1, study.version - 1);
+          var body = studyBody(study);
+          body.version = base;
+          track(apiRequest("PUT", "/v1/projects/" + enc(serverPid) + "/studies/" + enc(sid), body).then(function (res) {
+            var sp = res && res.study;
+            if (sp) {
+              study.version = sp.version || study.version;
+              study.verified = !!sp.verified;
+              study.serverVerified = !!sp.verified;
+              rememberServerVersion(pid, sid, study.version);
+              saveState();
+              notify();
+            }
+            return sp || null;
+          }, function (err) {
+            var qp = studyBody(study);
+            qp.id = sid;
+            qp.projectId = serverPid;
+            qp.version = base;
+            return persistOrQueue("study_update_forced", qp, null)(err);
+          }));
+        } else {
+          STORE.queueAction("study_update_forced", study);
+        }
       }
       // If "accept_server", we keep server values as is
 
@@ -697,7 +1086,7 @@
     },
 
     // Runs & Results
-    saveRunResult: function (result, manifest) {
+    saveRunResult: function (result, manifest, onDone) {
       var pid = state.activeProjectId;
       if (!pid) return;
       var now = Date.now();
@@ -718,9 +1107,50 @@
       if (!state.runs[pid]) state.runs[pid] = [];
       state.runs[pid].unshift(run);
       state.activeRunResult = { run: run, result: result, manifest: manifest };
-      STORE.queueAction("run_create", run);
       saveState();
       notify();
+
+      var serverPid = serverProjectId(pid);
+      if (!serverPid) {
+        STORE.queueAction("run_create", run);
+        if (onDone) onDone(null, null);
+        return run;
+      }
+
+      /* PaperOrchestra needs this run on the server. Wait for study creates
+       * and verification PUTs, remap local ids, then upload. */
+      var chain = prepareRunPayload(pid, serverPid, run, manifest).then(function (payload) {
+        run.studyVersions = payload.studyVersions;
+        saveState();
+        return apiRequest("POST", "/v1/projects/" + enc(serverPid) + "/runs", payload).then(function (res) {
+          var sr = res && res.run;
+          if (sr && sr.id) {
+            run.serverId = sr.id;
+            run.serverVersion = sr.version;
+            saveState();
+          }
+          if (onDone) onDone(null, sr || null);
+          return sr || null;
+        }, function (err) {
+          /* Offline: keep the mapped payload so the queue drain can send it
+           * without the local ids. 4xx: the server said no, show its words. */
+          if (isDeviceOffline(err)) {
+            var queued = { projectId: serverPid, measure: payload.measure, model: payload.model,
+              test: payload.test, level: payload.level, studyVersions: payload.studyVersions };
+            STORE.queueAction("run_create", queued, err);
+            if (onDone) onDone(null, null);
+          } else {
+            reportWriteError("run_create", err);
+            if (onDone) onDone(err, null);
+          }
+          return null;
+        });
+      }, function (err) {
+        reportWriteError("run_create", err);
+        if (onDone) onDone(err, null);
+        return null;
+      });
+      track(chain);
       return run;
     },
 
@@ -820,6 +1250,22 @@
       state.syncState = st;
       saveState();
       notify();
+    },
+
+    /* Resolves when every server write started here has settled. */
+    pendingSync: pendingSync,
+
+    serverProjectId: function (pid) {
+      return serverProjectId(pid || state.activeProjectId);
+    },
+
+    getLastServerError: function () {
+      return state.lastServerError || null;
+    },
+
+    clearLastServerError: function () {
+      state.lastServerError = null;
+      saveState();
     }
   };
 

@@ -553,6 +553,27 @@ function scanSnapshotPhi(snapshot) {
   return { blocked: hits.length > 0, hits };
 }
 
+/* GET /v1/projects/{id}/jobs/quote?kind=manuscript_draft. The same ceiling the
+ * create route reserves, with no credits held. */
+export async function quoteManuscriptJob(ctx) {
+  const { env, db, uid, projectId, requestId, api } = ctx;
+  const { json, err, projectGate, gateErr } = api;
+  if (!env || env.RESEARCH_PO_ENABLED !== "1")
+    return err(404, "not_found", "Unknown Research API endpoint", requestId);
+  const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
+  if (gate.status) return gateErr(gate, "Jobs need an owner, editor or analyst role", requestId);
+  if (!isSystematicReviewStudyType(gate.project && gate.project.study_type))
+    return err(409, "not_systematic_review", "Manuscript drafting jobs are only available for systematic review and meta-analysis projects", requestId);
+  const quoteMicroUsd = quoteAiCall(env, "T2") * PO_CALL_BUDGET;
+  return json({
+    quoteMicroUsd,
+    usd: quoteMicroUsd / 1000000,
+    calls: PO_CALL_BUDGET,
+    tier: "T2",
+    requestId
+  }, 200, { "x-request-id": requestId });
+}
+
 export async function createManuscriptJob(ctx, body) {
   const { env, db, uid, claims, projectId, requestId, api } = ctx;
   const { json, err, audit, uuid, projectGate, gateErr } = api;
