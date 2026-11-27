@@ -41,7 +41,7 @@ function makePdf(pages = ["Cardiology notes: ventricular systole.", "Ventricular
 }
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const browser = await chromium.launch();
-const page = await (await browser.newContext({ viewport: { width: 390, height: 844 } })).newPage();
+const page = await (await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true })).newPage();
 const errors = []; page.on("pageerror", (e) => errors.push(e.message));
 await page.route("**/api/**", (r) => r.fulfill({ status: 404, body: "{}" }));
 await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; window.prompt = () => "Cardiology"; });
@@ -99,6 +99,18 @@ await page.waitForSelector("#stPages"); await sleep(700);
 ok(await page.evaluate(() => STUDY._state().tool) === "pen", "notebook: opens with the pen");
 await draw(40, 90); await draw(40, 190);
 ok((await strokes()).filter((s) => !s.gone).length === 2, "notebook: two mouse strokes saved");
+/* finger: a real touch drag (CDP touch events) writes a full stroke, not a dot (2026-11-27: every touch move after the
+   first was dropped), and nothing in the editor scrolls */
+{
+  const cdp = await page.context().newCDPSession(page), fb = await ovBox(), x0 = fb.x + 40, y0 = fb.y + 300;
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ x: x0, y: y0, id: 1 }] });
+  for (let i = 1; i <= 15; i++) { await cdp.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [{ x: x0 + i * 12, y: y0 + Math.sin(i / 3) * 15, id: 1 }] }); await sleep(16); }
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] }); await sleep(400);
+  const fs = (await strokes()).filter((s) => !s.gone);
+  ok(fs.length === 3 && fs[2].pts.length >= 10, "finger: a touch drag writes a whole stroke (" + (fs[2] ? fs[2].pts.length : 0) + " points)");
+  const pin = await page.evaluate(() => { const b = document.querySelector("#smdPrep > .st-body"); b.scrollTop = 120; return new Promise((r) => setTimeout(() => r({ body: b.scrollTop, top: Math.round(document.querySelector("#stP3Top").getBoundingClientRect().top) }), 100)); });
+  ok(pin.body === 0 && pin.top === 0, "editor: a scroll of the editor body is put back, the top bar stays at the top " + JSON.stringify(pin));
+}
 /* lasso + back */
 await page.click('#stTb [data-v="lasso"]');
 let b = await ovBox();
