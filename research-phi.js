@@ -306,8 +306,18 @@
     }
     var sexStr = casefile.sex || casefile.gender || "";
     if (ageStr || sexStr) {
-      var patLine = "Patient: " + (ageStr ? "Age " + ageStr : "") + (ageStr && sexStr ? ", " : "") + (sexStr ? sexStr : "");
-      parts.push(patLine);
+      // No "Patient:"/"Name:" label: the global redactor (SMD_redactPHI) treats any such
+      // labelled line as a name and redacts it, so the case blocks itself (live BUG-03).
+      // Age and sex alone are allowed fields, so the line must pass both scan layers.
+      var line;
+      if (ageStr && sexStr) {
+        line = "Age and sex: " + (ageStr === "90 or older" ? "90 or older, " + String(sexStr).toLowerCase() : ageStr + "-year-old " + String(sexStr).toLowerCase());
+      } else if (ageStr) {
+        line = "Age: " + ageStr;
+      } else {
+        line = "Sex: " + sexStr;
+      }
+      parts.push(line);
     }
 
     var complaint = casefile.presentingComplaint || casefile.presenting_complaint || casefile.chiefComplaint;

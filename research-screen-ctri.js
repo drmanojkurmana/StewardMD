@@ -104,7 +104,7 @@
     h.push('<span style="display:none">Coming soon</span>');
 
     // Prospective registration guidance
-    h.push('<div class="rmd-notice-box" style="margin: 12px 0; padding: 12px; background: rgba(66,205,181,0.08); border: 1px solid #42CDB5; border-radius: 6px;">');
+    h.push('<div class="rmd-notice-box" style="margin: 12px 0; padding: 12px; background: var(--rmd-acc-soft); border: 1px solid var(--rmd-acc); border-radius: 6px; color: var(--rmd-acc);">');
     h.push('CTRI accepts only prospective registration (before the first participant) since 1 April 2018, and ICMJE journals require it.');
     h.push('</div>');
 
@@ -118,7 +118,7 @@
     // Registration Status
     h.push('<div>');
     h.push('<label style="display:block; font-size:13px; margin-bottom:4px; font-weight:600;">Trial Registration Status:</label>');
-    h.push('<select id="rmd-ctri-status" class="rmd-select" style="width:100%; max-width:320px; padding:8px; background:#071318; border:1px solid #1f363d; color:#fff; border-radius:4px;">');
+    h.push('<select id="rmd-ctri-status" class="rmd-select" style="width:100%; max-width:320px; padding:8px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;">');
     h.push('<option value="not_started"' + (currentStatus === "not_started" ? ' selected' : '') + '>Not started</option>');
     h.push('<option value="submitted"' + (currentStatus === "submitted" ? ' selected' : '') + '>Submitted (pending registration number)</option>');
     h.push('<option value="registered"' + (currentStatus === "registered" ? ' selected' : '') + '>Registered</option>');
@@ -128,14 +128,14 @@
     // CTRI Number input
     h.push('<div>');
     h.push('<label style="display:block; font-size:13px; margin-bottom:4px; font-weight:600;">CTRI Registration Number:</label>');
-    h.push('<input type="text" id="rmd-ctri-number" class="rmd-input" value="' + esc(currentNum) + '" placeholder="CTRI/2026/05/012345" style="width:100%; max-width:380px; padding:8px; background:#071318; border:1px solid #1f363d; color:#fff; border-radius:4px; font-family:monospace; text-transform:uppercase;" />');
-    h.push('<span style="display:block; font-size:12px; color:#8ea3a6; margin-top:4px;">Format: CTRI/YYYY/MM/XXXXXX (e.g. CTRI/2026/05/012345)</span>');
+    h.push('<input type="text" id="rmd-ctri-number" class="rmd-input" value="' + esc(currentNum) + '" placeholder="CTRI/2026/05/012345" style="width:100%; max-width:380px; padding:8px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px; font-family:monospace; text-transform:uppercase;" />');
+    h.push('<span style="display:block; font-size:12px; color:var(--rmd-mut); margin-top:4px;">Format: CTRI/YYYY/MM/XXXXXX (e.g. CTRI/2026/05/012345)</span>');
     h.push('</div>');
 
     // Registration Date
     h.push('<div>');
     h.push('<label style="display:block; font-size:13px; margin-bottom:4px; font-weight:600;">Registration Date:</label>');
-    h.push('<input type="date" id="rmd-ctri-date" class="rmd-input" value="' + esc(currentDate) + '" style="width:100%; max-width:240px; padding:8px; background:#071318; border:1px solid #1f363d; color:#fff; border-radius:4px;" />');
+    h.push('<input type="date" id="rmd-ctri-date" class="rmd-input" value="' + esc(currentDate) + '" style="width:100%; max-width:240px; padding:8px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" />');
     h.push('</div>');
 
     // Save button and message area
@@ -151,15 +151,15 @@
       var sentence = "This trial is registered with the Clinical Trials Registry - India (CTRI), number " + currentNum + ".";
       var dataSharing = "De-identified individual participant data that underlie the results reported in this article will be available to researchers who provide a methodologically sound proposal, beginning 6 months and ending 36 months following publication.";
 
-      h.push('<div class="rmd-ctri-manuscript-block" style="margin-top:24px; padding-top:16px; border-top:1px solid #1f363d;">');
-      h.push('<h4 style="margin:0 0 8px 0; color:#42CDB5;">Manuscript Registration Sentence</h4>');
-      h.push('<div style="background:#071318; border:1px solid #1f363d; padding:12px; border-radius:6px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">');
+      h.push('<div class="rmd-ctri-manuscript-block" style="margin-top:24px; padding-top:16px; border-top:1px solid var(--rmd-line);">');
+      h.push('<h4 style="margin:0 0 8px 0; color:var(--rmd-acc);">Manuscript Registration Sentence</h4>');
+      h.push('<div style="background:var(--rmd-panel); border:1px solid var(--rmd-line); padding:12px; border-radius:6px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">');
       h.push('<span id="rmd-ctri-reg-text" style="font-size:13px;">' + esc(sentence) + '</span>');
       h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="copy-reg-sentence" style="margin-left:12px; flex-shrink:0;">Copy</button>');
       h.push('</div>');
 
-      h.push('<h4 style="margin:0 0 8px 0; color:#42CDB5;">Data Sharing Statement Placeholder</h4>');
-      h.push('<div style="background:#071318; border:1px solid #1f363d; padding:12px; border-radius:6px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">');
+      h.push('<h4 style="margin:0 0 8px 0; color:var(--rmd-acc);">Data Sharing Statement Placeholder</h4>');
+      h.push('<div style="background:var(--rmd-panel); border:1px solid var(--rmd-line); padding:12px; border-radius:6px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">');
       h.push('<span id="rmd-ctri-ds-text" style="font-size:13px;">' + esc(dataSharing) + '</span>');
       h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="copy-ds-sentence" style="margin-left:12px; flex-shrink:0;">Copy</button>');
       h.push('</div>');
@@ -188,7 +188,7 @@
         var val = validateCtri(rawNum);
         if (status === "registered" && !val.ok) {
           if (msgEl) {
-            msgEl.innerHTML = '<span style="color:#ff6b6b; font-weight:600;">' + esc(val.message) + '</span>';
+            msgEl.innerHTML = '<span style="color:var(--rmd-bad); font-weight:600;">' + esc(val.message) + '</span>';
           }
           return;
         }

@@ -269,4 +269,69 @@ describe("research.js apiRequest client PHI gate for POST /ai-draft", () => {
     }
     assert.equal(sb.fetchCalls.length, falsePositives.length);
   });
+
+  test("redactor-removed phone is reported in _phiRemovedCategories while the redacted copy is still sent (BUG-05)", async () => {
+    const sb = createSandbox();
+    const phone = "9876543210";
+    const res = await sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
+      task: "protocol",
+      input: { text: "Call patient " + phone + " for outcome assessment." }
+    });
+
+    // Protection unchanged: the identifier never left the phone.
+    assert.equal(sb.fetchCalls.length, 1);
+    const sent = JSON.parse(sb.fetchCalls[0].init.body);
+    assert.doesNotMatch(sent.input.text, new RegExp(phone), "phone must be redacted before sending");
+    assert.match(sent.input.text, /\[redacted\]/, "redaction placeholder present");
+
+    // The doctor is told which identifier type was removed; the text itself never surfaces.
+    assert.ok(Array.isArray(res._phiRemovedCategories), "removed categories are attached to the response");
+    assert.ok(res._phiRemovedCategories.includes("phone"), "phone category reported");
+    assert.ok(!JSON.stringify(res._phiRemovedCategories).includes(phone), "matched text is never reported");
+
+    // A redactor-only catch (labelled name) still reports a generic category.
+    const res2 = await sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
+      task: "protocol",
+      input: { text: "Name: Ramesh Kumar presented with fever." }
+    });
+    assert.ok(Array.isArray(res2._phiRemovedCategories) && res2._phiRemovedCategories.length >= 1, "labelled name removal is reported");
+    assert.ok(!JSON.stringify(res2._phiRemovedCategories).includes("Ramesh"), "name text never reported");
+
+    // Clean input reports nothing.
+    const res3 = await sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
+      task: "protocol",
+      input: { text: "Assess lactate clearance in septic patients." }
+    });
+    assert.ok(!res3._phiRemovedCategories, "clean input has no removed categories");
+  });
+
+  test("shared AI bar shows the removed-identifier notice near the bar, categories only (BUG-05)", async () => {
+    const sb = createSandbox();
+    const askBtn = { onclick: null };
+    const container = {
+      querySelector: function (sel) {
+        if (sel === '[data-rmd-ai="ask"]') return askBtn;
+        return null;
+      }
+    };
+    const st = sb.win.SMD_RESEARCH.ai.state();
+    let barHtml = "";
+    const opts = {
+      pid: "p1",
+      task: "protocol",
+      cost: 2,
+      input: function () { return { text: "Call patient 9876543210 for outcome assessment." }; },
+      render: function () { barHtml = sb.win.SMD_RESEARCH.ai.barHtml(st, { cost: 2, label: "protocol" }); }
+    };
+    sb.win.SMD_RESEARCH.ai.bind(container, st, opts);
+
+    assert.ok(askBtn.onclick, "ask button is bound");
+    askBtn.onclick();
+    await new Promise(function (r) { setTimeout(r, 20); });
+
+    assert.match(barHtml, /Removed before sending to MaiK: Phone number\./, "notice appears inside the AI bar");
+    assert.ok(barHtml.indexOf("9876543210") < 0, "the notice never shows the removed text");
+    assert.ok(barHtml.indexOf("Costs about 2 MaiK tokens") >= 0, "cost line is unchanged");
+    assert.ok(barHtml.indexOf("rmd-ai-phi-note") >= 0, "notice uses its own class for styling");
+  });
 });

@@ -154,7 +154,10 @@
     var exclAnaB = parseInt(d.excludedAnalysisB, 10) || 0;
 
     var svg = [];
-    svg.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 560" width="100%" height="auto" style="background:#071318; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;">');
+    /* height is omitted on purpose: viewBox plus width="100%" keeps the aspect
+     * ratio, and a literal height="auto" logs an SVG attribute error (live
+     * BUG-10). */
+    svg.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 560" width="100%" style="background:#071318; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;">');
     svg.push('<defs>');
     svg.push('<marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">');
     svg.push('<path d="M 0 1 L 10 5 L 0 9 z" fill="#42CDB5" />');
@@ -243,23 +246,27 @@
     var journey = SMD.journeyFor ? SMD.journeyFor(proj) : [];
     var idx = -1;
     for (var i = 0; i < journey.length; i++) if (journey[i] === KEY) idx = i;
-    var nextName = (idx >= 0 && idx + 1 < journey.length) ? journey[idx + 1] : "";
+    /* Live BUG-10: consort is a supporting RCT screen, not a journey step. When
+     * the journey does not include it, no fake "Step 1 of 9" and no invented
+     * Next label; the banner just names the screen. */
+    var inJourney = idx >= 0;
+    var nextName = (inJourney && idx + 1 < journey.length) ? journey[idx + 1] : "";
     var stepNo = idx >= 0 ? (idx + 1) : 1;
     var stepCount = journey.length || 1;
-    var nextLabel = nextName ? labelFor(nextName) : "Master chart";
+    var nextLabel = nextName ? labelFor(nextName) : "";
 
     // Initial synchronous render for fast paint and synchronous test harnesses
-    renderContent(container, proj, pid, stepNo, stepCount, nextLabel, null);
+    renderContent(container, proj, pid, stepNo, stepCount, nextLabel, inJourney, null);
 
     var storePromise = (G.RMDStore && G.RMDStore.get) ? G.RMDStore.get(pid, "consort", "flow") : Promise.resolve(null);
     storePromise.then(function (saved) {
       if (saved) {
-        renderContent(container, proj, pid, stepNo, stepCount, nextLabel, saved);
+        renderContent(container, proj, pid, stepNo, stepCount, nextLabel, inJourney, saved);
       }
     }).catch(function () {});
   }
 
-  function renderContent(container, proj, pid, stepNo, stepCount, nextLabel, saved) {
+  function renderContent(container, proj, pid, stepNo, stepCount, nextLabel, inJourney, saved) {
     var d = saved || {
       assessed: 200,
       excluded: 50,
@@ -293,16 +300,20 @@
 
     // Step banner
     h.push('<div class="rmd-step-banner" role="status">');
-    h.push('<div class="rmd-step-line"><span class="rmd-step-text"><strong>Step ' + stepNo + ' of ' + stepCount + '</strong> ' + esc(labelFor(KEY)) + '</span></div>');
+    if (inJourney) {
+      h.push('<div class="rmd-step-line"><span class="rmd-step-text"><strong>Step ' + stepNo + ' of ' + stepCount + '</strong> ' + esc(labelFor(KEY)) + '</span></div>');
+    } else {
+      h.push('<div class="rmd-step-line"><span class="rmd-step-text"><strong>' + esc(labelFor(KEY)) + '</strong> for this trial</span></div>');
+    }
     h.push('</div>');
 
-    // Plain Next line
-    h.push('<p class="rmd-next-line">Next: ' + esc(nextLabel) + '</p>');
+    // Plain Next line (only when the journey really has a next step)
+    if (nextLabel) h.push('<p class="rmd-next-line">Next: ' + esc(nextLabel) + '</p>');
     h.push('<span style="display:none">Coming soon</span>');
 
     // Calm non-blocking arithmetic banner
     h.push('<div id="rmd-consort-banner" class="rmd-consort-banner" style="margin: 12px 0; padding: 12px; border-radius: 6px; font-size: 13px; line-height: 1.4; ' +
-      (arith.ok ? 'background: rgba(66,205,181,0.08); border: 1px solid #42CDB5; color: #42CDB5;' : 'background: rgba(245,159,0,0.1); border: 1px solid #f59f00; color: #fcc419;') + '">');
+      (arith.ok ? 'background: var(--rmd-acc-soft); border: 1px solid var(--rmd-acc); color: var(--rmd-acc);' : 'background: var(--rmd-warn-soft); border: 1px solid var(--rmd-warn); color: var(--rmd-warn);') + '">');
     if (arith.ok) {
       h.push('<strong>Arithmetic check:</strong> Flow numbers balance across all four checks.');
     } else {
@@ -324,50 +335,50 @@
     h.push('<div class="rmd-consort-form" style="display:grid; gap:14px; font-size:13px;">');
 
     // Enrolment
-    h.push('<div style="background:#071318; border:1px solid #1f363d; padding:12px; border-radius:6px;">');
-    h.push('<h4 style="margin:0 0 8px 0; color:#42CDB5;">Enrolment</h4>');
+    h.push('<div style="background:var(--rmd-panel); border:1px solid var(--rmd-line); padding:12px; border-radius:6px;">');
+    h.push('<h4 style="margin:0 0 8px 0; color:var(--rmd-acc);">Enrolment</h4>');
     h.push('<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">');
-    h.push('<div><label>Assessed:</label><input type="number" id="rmd-cf-assessed" class="rmd-input" value="' + d.assessed + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Excluded:</label><input type="number" id="rmd-cf-excluded" class="rmd-input" value="' + d.excluded + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Not meeting criteria:</label><input type="number" id="rmd-cf-not-meeting" class="rmd-input" value="' + d.notMeeting + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Declined:</label><input type="number" id="rmd-cf-declined" class="rmd-input" value="' + d.declined + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Other reasons:</label><input type="number" id="rmd-cf-other-excl" class="rmd-input" value="' + d.otherExcl + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Randomised:</label><input type="number" id="rmd-cf-randomised" class="rmd-input" value="' + d.randomised + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
+    h.push('<div><label>Assessed:</label><input type="number" id="rmd-cf-assessed" class="rmd-input" value="' + d.assessed + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Excluded:</label><input type="number" id="rmd-cf-excluded" class="rmd-input" value="' + d.excluded + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Not meeting criteria:</label><input type="number" id="rmd-cf-not-meeting" class="rmd-input" value="' + d.notMeeting + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Declined:</label><input type="number" id="rmd-cf-declined" class="rmd-input" value="' + d.declined + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Other reasons:</label><input type="number" id="rmd-cf-other-excl" class="rmd-input" value="' + d.otherExcl + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Randomised:</label><input type="number" id="rmd-cf-randomised" class="rmd-input" value="' + d.randomised + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
     h.push('</div></div>');
 
     // Group A
-    h.push('<div style="background:#071318; border:1px solid #1f363d; padding:12px; border-radius:6px;">');
-    h.push('<h4 style="margin:0 0 8px 0; color:#42CDB5;">Group A (Intervention)</h4>');
+    h.push('<div style="background:var(--rmd-panel); border:1px solid var(--rmd-line); padding:12px; border-radius:6px;">');
+    h.push('<h4 style="margin:0 0 8px 0; color:var(--rmd-acc);">Group A (Intervention)</h4>');
     h.push('<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">');
-    h.push('<div><label>Group name:</label><input type="text" id="rmd-cf-name-a" class="rmd-input" value="' + esc(d.nameA) + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Allocated:</label><input type="number" id="rmd-cf-alloc-a" class="rmd-input" value="' + d.allocatedA + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Received:</label><input type="number" id="rmd-cf-rec-a" class="rmd-input" value="' + d.receivedA + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Did not receive:</label><input type="number" id="rmd-cf-not-rec-a" class="rmd-input" value="' + d.didNotReceiveA + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Lost to follow-up:</label><input type="number" id="rmd-cf-lost-a" class="rmd-input" value="' + d.lostA + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Discontinued:</label><input type="number" id="rmd-cf-disc-a" class="rmd-input" value="' + d.discA + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Analysed:</label><input type="number" id="rmd-cf-ana-a" class="rmd-input" value="' + d.analysedA + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Excluded from analysis:</label><input type="number" id="rmd-cf-excl-ana-a" class="rmd-input" value="' + d.excludedAnalysisA + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
+    h.push('<div><label>Group name:</label><input type="text" id="rmd-cf-name-a" class="rmd-input" value="' + esc(d.nameA) + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Allocated:</label><input type="number" id="rmd-cf-alloc-a" class="rmd-input" value="' + d.allocatedA + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Received:</label><input type="number" id="rmd-cf-rec-a" class="rmd-input" value="' + d.receivedA + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Did not receive:</label><input type="number" id="rmd-cf-not-rec-a" class="rmd-input" value="' + d.didNotReceiveA + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Lost to follow-up:</label><input type="number" id="rmd-cf-lost-a" class="rmd-input" value="' + d.lostA + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Discontinued:</label><input type="number" id="rmd-cf-disc-a" class="rmd-input" value="' + d.discA + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Analysed:</label><input type="number" id="rmd-cf-ana-a" class="rmd-input" value="' + d.analysedA + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Excluded from analysis:</label><input type="number" id="rmd-cf-excl-ana-a" class="rmd-input" value="' + d.excludedAnalysisA + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
     h.push('</div></div>');
 
     // Group B
-    h.push('<div style="background:#071318; border:1px solid #1f363d; padding:12px; border-radius:6px;">');
-    h.push('<h4 style="margin:0 0 8px 0; color:#42CDB5;">Group B (Control)</h4>');
+    h.push('<div style="background:var(--rmd-panel); border:1px solid var(--rmd-line); padding:12px; border-radius:6px;">');
+    h.push('<h4 style="margin:0 0 8px 0; color:var(--rmd-acc);">Group B (Control)</h4>');
     h.push('<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">');
-    h.push('<div><label>Group name:</label><input type="text" id="rmd-cf-name-b" class="rmd-input" value="' + esc(d.nameB) + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Allocated:</label><input type="number" id="rmd-cf-alloc-b" class="rmd-input" value="' + d.allocatedB + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Received:</label><input type="number" id="rmd-cf-rec-b" class="rmd-input" value="' + d.receivedB + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Did not receive:</label><input type="number" id="rmd-cf-not-rec-b" class="rmd-input" value="' + d.didNotReceiveB + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Lost to follow-up:</label><input type="number" id="rmd-cf-lost-b" class="rmd-input" value="' + d.lostB + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Discontinued:</label><input type="number" id="rmd-cf-disc-b" class="rmd-input" value="' + d.discB + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Analysed:</label><input type="number" id="rmd-cf-ana-b" class="rmd-input" value="' + d.analysedB + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
-    h.push('<div><label>Excluded from analysis:</label><input type="number" id="rmd-cf-excl-ana-b" class="rmd-input" value="' + d.excludedAnalysisB + '" style="width:100%; padding:4px 6px; background:#0D1D23; border:1px solid #1f363d; color:#fff; border-radius:4px;" /></div>');
+    h.push('<div><label>Group name:</label><input type="text" id="rmd-cf-name-b" class="rmd-input" value="' + esc(d.nameB) + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Allocated:</label><input type="number" id="rmd-cf-alloc-b" class="rmd-input" value="' + d.allocatedB + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Received:</label><input type="number" id="rmd-cf-rec-b" class="rmd-input" value="' + d.receivedB + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Did not receive:</label><input type="number" id="rmd-cf-not-rec-b" class="rmd-input" value="' + d.didNotReceiveB + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Lost to follow-up:</label><input type="number" id="rmd-cf-lost-b" class="rmd-input" value="' + d.lostB + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Discontinued:</label><input type="number" id="rmd-cf-disc-b" class="rmd-input" value="' + d.discB + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Analysed:</label><input type="number" id="rmd-cf-ana-b" class="rmd-input" value="' + d.analysedB + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
+    h.push('<div><label>Excluded from analysis:</label><input type="number" id="rmd-cf-excl-ana-b" class="rmd-input" value="' + d.excludedAnalysisB + '" style="width:100%; padding:4px 6px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px;" /></div>');
     h.push('</div></div>');
 
     h.push('</div>');
 
     // Live SVG preview column
     h.push('<div class="rmd-consort-preview-col">');
-    h.push('<div id="rmd-consort-svg-wrap" style="border:1px solid #1f363d; border-radius:6px; overflow:hidden; background:#071318;">');
+    h.push('<div id="rmd-consort-svg-wrap" style="border:1px solid var(--rmd-line); border-radius:6px; overflow:hidden; background:var(--rmd-panel);">');
     h.push(generateConsortSvg(d));
     h.push('</div>');
     h.push('</div>');
@@ -418,14 +429,14 @@
       var banner = container.querySelector("#rmd-consort-banner");
       if (banner) {
         if (arith.ok) {
-          banner.style.background = "rgba(66,205,181,0.08)";
-          banner.style.borderColor = "#42CDB5";
-          banner.style.color = "#42CDB5";
+          banner.style.background = "var(--rmd-acc-soft)";
+          banner.style.borderColor = "var(--rmd-acc)";
+          banner.style.color = "var(--rmd-acc)";
           banner.innerHTML = "<strong>Arithmetic check:</strong> Flow numbers balance across all four checks.";
         } else {
-          banner.style.background = "rgba(245,159,0,0.1)";
-          banner.style.borderColor = "#f59f00";
-          banner.style.color = "#fcc419";
+          banner.style.background = "var(--rmd-warn-soft)";
+          banner.style.borderColor = "var(--rmd-warn)";
+          banner.style.color = "var(--rmd-warn)";
           banner.innerHTML = "<strong>Arithmetic check notices:</strong><br/>" + esc(arith.warnings.join(" | "));
         }
       }
