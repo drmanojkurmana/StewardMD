@@ -116,6 +116,7 @@
   var st = {
     projectId: null, loaded: false, loading: false, error: null,
     artifacts: [], artifactId: null, result: null, resultLoading: false,
+    localResults: {},
     page: 1, highlight: null, captured: null, announce: ""
   };
   var seq = 0;
@@ -123,9 +124,42 @@
   function loadArtifacts(container) {
     var mySeq = ++seq;
     st.loading = true; st.error = null;
+    var store = SMD.store;
+    var project = store && store.getActiveProject ? store.getActiveProject() : null;
+    if (project && !project.serverId) {
+      var CP = G && G.SMD_RMD_CHECKPOINT;
+      var readP = (CP && typeof CP.list === "function")
+        ? CP.list("local-artifact:" + st.projectId + ":")
+        : Promise.resolve([]);
+      readP.then(function (entries) {
+        if (mySeq !== seq) return;
+        st.artifacts = [];
+        st.localResults = {};
+        for (var i = 0; i < (entries || []).length; i++) {
+          var val = entries[i] && entries[i].value;
+          if (val && val.artifact && val.result) {
+            st.artifacts.push(val.artifact);
+            st.localResults[val.artifact.id] = val.result;
+          }
+        }
+        st.loading = false; st.loaded = true;
+        var first = st.artifacts[0] || null;
+        if (first) {
+          st.artifactId = first.id;
+          st.result = st.localResults[first.id] || null;
+          st.page = 1;
+        }
+        render(container);
+      }).catch(function (err) {
+        if (mySeq !== seq) return;
+        st.loading = false; st.loaded = true; st.error = err; render(container);
+      });
+      return;
+    }
     SMD.api.request("GET", "/v1/projects/" + encodeURIComponent(st.projectId) + "/artifacts").then(function (data) {
       if (mySeq !== seq) return;
       st.artifacts = (data && data.artifacts) || [];
+      st.localResults = {};
       st.loading = false; st.loaded = true;
       var first = null;
       for (var i = 0; i < st.artifacts.length; i++) if (st.artifacts[i].status === "succeeded") { first = st.artifacts[i]; break; }
@@ -140,6 +174,13 @@
   function loadResult(container, artifactId) {
     var mySeq = ++seq;
     st.resultLoading = true; st.result = null; st.highlight = null; st.captured = null;
+    if (st.localResults && st.localResults[artifactId]) {
+      st.resultLoading = false;
+      st.result = st.localResults[artifactId];
+      st.page = 1;
+      render(container);
+      return;
+    }
     render(container);
     SMD.api.request("GET", "/v1/artifacts/" + encodeURIComponent(artifactId) + "/result").then(function (data) {
       if (mySeq !== seq) return;
@@ -165,9 +206,10 @@
       if (tp) tp.onclick = function () { SMD.navigate("projects"); };
       return;
     }
-    if (st.projectId !== project.id) {
-      st.projectId = project.id; st.loaded = false; st.loading = false; st.error = null;
-      st.artifacts = []; st.artifactId = null; st.result = null; st.page = 1; st.highlight = null; st.captured = null; st.announce = "";
+    var activePid = project.serverId || project.id;
+    if (st.projectId !== activePid) {
+      st.projectId = activePid; st.loaded = false; st.loading = false; st.error = null;
+      st.artifacts = []; st.artifactId = null; st.result = null; st.localResults = {}; st.page = 1; st.highlight = null; st.captured = null; st.announce = "";
     }
     if (!st.loaded && !st.loading) {
       container.innerHTML = '<div class="rmd-p2-screen">' + p2().loadingHtml("Loading PDFs") + '</div>';

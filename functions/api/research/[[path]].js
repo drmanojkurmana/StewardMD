@@ -45,7 +45,7 @@ import { adminInstitutionRoute, creditsView } from "./_credits.js";
  * (above) and the project role, and an outsider gets 404. */
 import { extractionTemplates, getExtraction, putExtraction, verifyExtraction,
   correctExtraction, extractionAudit, acceptSuggestion, promoteExtraction,
-  listArtifacts, uploadPdfArtifact, artifactResult } from "./_extraction.js";
+  listArtifacts, uploadPdfArtifact, uploadDeviceExtraction, artifactResult } from "./_extraction.js";
 import { extractionSuggestions, screeningSuggestion, listScreeningSuggestions } from "./_suggest.js";
 import { robTools, getRob, submitRob, listRobConflicts, resolveRobConflict, robAudit } from "./_rob.js";
 import { getDictionary, putDictionary, uploadData, createDataImport,
@@ -2062,6 +2062,8 @@ export async function onRequest({ request, env, params }) {
   if (artCol && request.method === "GET") return listArtifacts(p3Ctx, artCol[1]);
   const pdfUp = path.match(/^\/v1\/projects\/([^/]+)\/pdf-uploads$/);
   if (pdfUp && request.method === "POST") return uploadPdfArtifact(Object.assign({}, p3Ctx, { projectId: pdfUp[1] }));
+  const devExt = path.match(/^\/v1\/projects\/([^/]+)\/extractions\/device$/);
+  if (devExt && request.method === "POST") return uploadDeviceExtraction(Object.assign({}, p3Ctx, { projectId: devExt[1] }));
   const artResult = path.match(/^\/v1\/artifacts\/([^/]+)\/result$/);
   if (artResult && request.method === "GET") return artifactResult(p3Ctx, artResult[1]);
 
