@@ -86,7 +86,16 @@ export async function uploadPdf(ctx) {
   const sha256 = await sha256Bytes(bytes);
   const existing = await db.prepare("SELECT * FROM research_pdfs WHERE project_id=? AND sha256=?")
     .bind(projectId, sha256).first();
-  if (existing) return json({ pdf: pdfOf(existing), idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+  if (existing && existing.r2_key) return json({ pdf: pdfOf(existing), idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+  if (existing) {
+    /* A device extraction stored this sha without the PDF bytes (r2_key ""). Store them now so a server job can read them. */
+    const fillKey = "projects/" + projectId + "/pdf/" + sha256 + ".pdf";
+    await env.RESEARCH_R2.put(fillKey, bytes, { httpMetadata: { contentType: "application/pdf" },
+      customMetadata: { projectId, uploadedBy: uid, sha256 } });
+    await db.prepare("UPDATE research_pdfs SET r2_key=? WHERE id=? AND r2_key=''").bind(fillKey, existing.id).run();
+    const filled = await db.prepare("SELECT * FROM research_pdfs WHERE id=?").bind(existing.id).first();
+    return json({ pdf: pdfOf(filled), idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
+  }
   let reportId = null;
   const rawReport = form.get("reportId");
   if (rawReport && typeof rawReport === "string") {
@@ -146,6 +155,7 @@ export async function createJob(ctx, body) {
     const row = await db.prepare("SELECT * FROM research_pdfs WHERE id=? AND project_id=?")
       .bind(pid, projectId).first();
     if (!row) return err(404, "pdf_not_found", "PDF not found", requestId);
+    if (!row.r2_key) return err(409, "pdf_not_stored", "Upload this PDF again before starting a server job", requestId);
     pdfs.push(row);
   }
   if (!env.RESEARCH_QUEUE) return err(503, "queue_unavailable", "Research job queue is not provisioned", requestId);

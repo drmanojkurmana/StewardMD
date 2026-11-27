@@ -1024,7 +1024,26 @@ CREATE TABLE IF NOT EXISTS research_paper_cards (
   created_ts INTEGER NOT NULL
 );
 
--- On-device drafting step cache (docs/research/contracts/phase-5/0008_research_v8.sql).
+-- Phase 5 contract 0008 (docs/research/contracts/phase-5/0008_research_v8.sql):
+-- publication consent attestations for case reports and case series (F-12).
+-- Append-only rows; the export and case_report_draft gates pass when any row
+-- exists for the project. Identical to the 0008 CREATE statement.
+
+CREATE TABLE IF NOT EXISTS research_publication_consents (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  written_consent_obtained INTEGER NOT NULL CHECK(written_consent_obtained IN (0,1)),
+  patient_saw_manuscript INTEGER NOT NULL CHECK(patient_saw_manuscript IN (0,1)),
+  consent_date TEXT NOT NULL,
+  manuscript_version INTEGER,
+  signed_by TEXT NOT NULL,
+  signed_at INTEGER NOT NULL,
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_publication_consents_project
+  ON research_publication_consents(project_id, created_ts DESC);
+
+-- On-device drafting step cache (docs/research/contracts/phase-5/0009_research_v9.sql).
 -- Keyed by (job_id, step_id); hit returns cached reply and charges nothing.
 CREATE TABLE IF NOT EXISTS research_job_steps (
   job_id TEXT NOT NULL REFERENCES research_job_runs(id) ON DELETE CASCADE,

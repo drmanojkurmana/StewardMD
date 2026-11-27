@@ -400,7 +400,7 @@ test("device-fail marks failed, releases reserve, and device_failed does not cou
   assert.equal(fifth.http, 202, JSON.stringify(fifth));
 });
 
-test("0008 migration applies over 0001..0007, rolls back cleanly, and mirror is a no-op", { skip: SKIP }, () => {
+test("0009 migration applies over 0001..0008, rolls back cleanly, and mirror is a no-op", { skip: SKIP }, () => {
   const db = new DatabaseSync(":memory:");
   const migrations = [
     "../docs/research/contracts/phase-1/0001_research_v1.sql",
@@ -411,21 +411,22 @@ test("0008 migration applies over 0001..0007, rolls back cleanly, and mirror is 
     "../docs/research/contracts/phase-5/0006_research_v6.sql",
     "../docs/research/contracts/phase-5/0007_research_v7.sql",
     "../docs/research/contracts/phase-5/0008_research_v8.sql",
+    "../docs/research/contracts/phase-5/0009_research_v9.sql",
   ];
   for (const m of migrations) {
     db.exec(readFileSync(new URL(m, import.meta.url), "utf8"));
   }
   const hasTable = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='research_job_steps'").get();
-  assert.ok(hasTable, "research_job_steps created by 0008");
+  assert.ok(hasTable, "research_job_steps created by 0009");
 
-  /* Re-applying 0008 over schema mirror is a no-op. */
+  /* Re-applying 0009 over schema mirror is a no-op. */
   const db2 = new DatabaseSync(":memory:");
   db2.exec(SCHEMA);
-  db2.exec(readFileSync(new URL("../docs/research/contracts/phase-5/0008_research_v8.sql", import.meta.url), "utf8"));
+  db2.exec(readFileSync(new URL("../docs/research/contracts/phase-5/0009_research_v9.sql", import.meta.url), "utf8"));
   assert.ok(db2.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='research_job_steps'").get());
 
   /* Rollback drops research_job_steps cleanly. */
-  db.exec(readFileSync(new URL("../docs/research/contracts/phase-5/0008_rollback.sql", import.meta.url), "utf8"));
+  db.exec(readFileSync(new URL("../docs/research/contracts/phase-5/0009_rollback.sql", import.meta.url), "utf8"));
   const afterRb = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='research_job_steps'").get();
-  assert.equal(afterRb, undefined, "research_job_steps dropped by 0008_rollback");
+  assert.equal(afterRb, undefined, "research_job_steps dropped by 0009_rollback");
 });

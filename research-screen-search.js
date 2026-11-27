@@ -95,6 +95,7 @@
     topicSearched: false,
     topicError: null,
     topicResults: [],
+    topicRetrievedAt: 0,
     topicExpanded: {},
     topicAdding: {},
     topicAdded: {},
@@ -290,6 +291,7 @@
       st.topicSearched = false;
       st.topicError = null;
       st.topicResults = [];
+      st.topicRetrievedAt = 0;
       st.topicExpanded = {};
       st.topicAdding = {};
       st.topicAdded = {};
@@ -356,6 +358,7 @@
     h.push('<input type="search" id="rmd_topic_q" value="' + esc(st.topicQuery) + '" maxlength="500" placeholder="e.g. BCG vaccine tuberculosis randomised trial" aria-label="Search topic across PubMed, Europe PMC, and Crossref" style="flex:1 1 220px;min-width:0;">');
     h.push('<button type="button" class="rmd-btn rmd-btn-primary" data-rmd="topic-search"' + (st.topicBusy ? " disabled" : "") + '>' + (st.topicBusy ? "Searching…" : "Search All Sources") + '</button>');
     h.push('</div>');
+    h.push('<p class="rmd-field-hint" style="margin:6px 0 0;">Search words go to PubMed, Europe PMC, Crossref, ClinicalTrials.gov and OpenAlex (mostly US-hosted). Do not type patient information.</p>');
     if (st.topicError) h.push('<div style="margin-top:10px;">' + p2().errHtml(st.topicError, "topic-search") + '</div>');
     if (st.topicSearched && !st.topicBusy && !st.topicResults.length && !st.topicError) {
       h.push('<p class="rmd-muted" style="margin-top:10px;">No matching papers found. Try shorter or broader topic keywords.</p>');
@@ -422,6 +425,11 @@
         h.push('</div>');
       }
       h.push('</div>');
+      /* F-20: the credit lines for the sources actually present in these
+       * results, plus the retrieval date the search completed. */
+      if (SMD.sources && SMD.sources.creditHtml) {
+        h.push(SMD.sources.creditHtml(st.topicResults, st.topicRetrievedAt, { attr: 'data-rmd="topic-sources-credit"' }));
+      }
     }
     h.push('</div>');
 
@@ -573,7 +581,7 @@
       return;
     }
     if (checkQueryPhi(q)) {
-      st.topicError = { message: "Query looks like it contains personal details. Remove patient identifiers before searching.", code: "phi_in_query" };
+      st.topicError = { message: "Remove patient information from the search words before searching.", code: "phi_in_query" };
       render(container);
       return;
     }
@@ -591,6 +599,7 @@
       if (mySeq !== seq) return;
       st.topicBusy = false;
       st.topicResults = (data && data.results) || [];
+      st.topicRetrievedAt = Date.now();
       render(container);
     }).catch(function (err) {
       if (mySeq !== seq) return;

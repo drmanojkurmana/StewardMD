@@ -17,8 +17,11 @@ import { efetchAbstracts } from "./_connectors/pubmed_efetch.js";
 import { resolveNcbiApiKey } from "./_connectors/pubmed.js";
 import { fetchRecords, normalise } from "./_connectors/crossref.js";
 import { normaliseDoi } from "./_dedup.js";
+import { fullTextAllowed } from "./_fulltext_licence.js";
 import { parseFindings } from "./_auto_studies.js";
 import { runUserAi, extractJson } from "./_suggest.js";
+
+export { fullTextAllowed };
 
 const READ_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
 const WRITE_ROLES = ["owner", "editor", "analyst"];
@@ -319,6 +322,16 @@ async function writeCache(db, card) {
     await db.prepare("INSERT INTO research_paper_cards (cache_key,card_json,created_ts) VALUES (?,?,?) ON CONFLICT(cache_key) DO UPDATE SET card_json=excluded.card_json, created_ts=excluded.created_ts")
       .bind(keys[i], payload, now).run();
   }
+}
+
+/* Every read of cached full text goes through the licence guard. A card that
+ * no longer qualifies keeps its abstract and link-out but not the full text
+ * or the findings derived from it. */
+function withoutFullText(card) {
+  if (fullTextAllowed(card)) return card;
+  const copy = Object.assign({}, card, { fullTextResults: "" });
+  if (Array.isArray(card.findings)) copy.findings = card.findings.filter((f) => !f || f.source !== "Full text");
+  return copy;
 }
 
 function served(card, method) {
@@ -752,9 +765,10 @@ export function extractResultsSectionFromXml(xml) {
   return { resultsText, tableText: tableRows.join(" ") };
 }
 
-async function fetchFreeFullTextResults(pmcid, config) {
+async function fetchFreeFullTextResults(pmcid, meta, config) {
   const id = String(pmcid || "").trim().toUpperCase();
   if (!/^PMC\d+$/.test(id)) return { resultsText: "", tableText: "" };
+  if (!fullTextAllowed(meta)) return { resultsText: "", tableText: "" };
   const email = (config && config.contactEmail) || "support@stewardmd.in";
   const headers = { "User-Agent": TOOL + "/1.0 (mailto:" + email + ")", "Accept": "application/xml, text/xml" };
   const urls = [EPMC_REST + id + "/fullTextXML"];
@@ -808,7 +822,8 @@ function buildCard(rec, fullTextData) {
   const doi = normaliseDoi(rec.doi) || "";
   const pmcid = /^PMC\d+$/.test(String(rec.pmcid || "")) ? String(rec.pmcid) : "";
   const year = Number.isInteger(rec.year) ? rec.year : null;
-  const ft = fullTextData || { resultsText: "", tableText: "" };
+  const canUseFullText = fullTextAllowed(rec);
+  const ft = canUseFullText && fullTextData ? fullTextData : { resultsText: "", tableText: "" };
   const sampleText = [whole, ft.resultsText].filter(Boolean).join(" ");
   return {
     pmid, pmcid, doi,
@@ -816,8 +831,11 @@ function buildCard(rec, fullTextData) {
     journal: String(rec.journal || ""),
     year,
     authors: (Array.isArray(rec.authors) ? rec.authors : []).map((a) => String(a || "").trim()).filter(Boolean).slice(0, 6),
-    url: pmid ? "https://pubmed.ncbi.nlm.nih.gov/" + pmid + "/" : (doi ? "https://doi.org/" + doi : ""),
+    url: pmid ? "https://pubmed.ncbi.nlm.nih.gov/" + pmid + "/" :
+      (doi ? "https://doi.org/" + doi : (pmcid ? "https://europepmc.org/article/PMC/" + pmcid : "")),
     freeFullText: /^PMC\d+$/.test(pmcid),
+    isOpenAccess: rec.isOpenAccess === true,
+    license: String(rec.license || rec.licence || ""),
     design: designOf(rec.publicationTypes, rec.mesh),
     sampleSize: sampleSizeOf(sampleText),
     structured: sections.some((s) => String(s.label || "").trim()),
@@ -913,6 +931,8 @@ async function fromEuropePmc(ids, config) {
       authors,
       sections: absText ? [{ label: "", text: absText }] : [],
       publicationTypes: pubTypes, mesh: [], keywords: [],
+      isOpenAccess: r.isOpenAccess === true || String(r.isOpenAccess || "").toUpperCase() === "Y",
+      license: String(r.license || r.licence || ""),
     };
   } catch (e) {
     return null;
@@ -968,7 +988,16 @@ async function loadRecord(ids, config) {
     try {
       const art = await fromPubmed(pmid, doi, pmcid, config);
       reachedPrimary = true;
-      if (art) return art;
+      if (art) {
+        if (art.pmcid) {
+          const meta = await fromEuropePmc({ pmid: art.pmid, pmcid: art.pmcid, doi: art.doi || doi }, config);
+          if (meta) {
+            art.isOpenAccess = meta.isOpenAccess;
+            art.license = meta.license;
+          }
+        }
+        return art;
+      }
     } catch (e) { transientErr = e; }
   }
   if (doi) {
@@ -992,6 +1021,8 @@ async function loadRecord(ids, config) {
               publicationTypes: (epmc.publicationTypes && epmc.publicationTypes.length) ? epmc.publicationTypes : cr.publicationTypes,
               mesh: cr.mesh || [],
               keywords: cr.keywords || [],
+              isOpenAccess: epmc.isOpenAccess === true,
+              license: String(epmc.license || ""),
             };
           }
         }
@@ -1030,17 +1061,18 @@ export async function paperCard(ctx, projectId, body) {
   const cached = await readCache(db, ids);
   if (cached) {
     if (cached.extractorVersion === EXTRACTOR_VERSION) {
-      const card = served(cached, "cache");
+      const card = served(withoutFullText(cached), "cache");
       await viewed(api, db, projectId, uid, card);
       return json({ card }, 200, { "x-request-id": requestId });
     }
-    let ftData = { resultsText: String(cached.fullTextResults || ""), tableText: "" };
-    if (!ftData.resultsText && cached.pmcid && env.RESEARCH_CONTACT_EMAIL) {
-      ftData = await fetchFreeFullTextResults(cached.pmcid, configOf(env));
+    const allowedFullText = fullTextAllowed(cached);
+    let ftData = { resultsText: allowedFullText ? String(cached.fullTextResults || "") : "", tableText: "" };
+    if (!ftData.resultsText && cached.pmcid && allowedFullText && env.RESEARCH_CONTACT_EMAIL) {
+      ftData = await fetchFreeFullTextResults(cached.pmcid, cached, configOf(env));
     }
     const upgraded = Object.assign({}, cached, {
       findings: combineFindings(cached.sections, ftData),
-      fullTextResults: ftData.resultsText || String(cached.fullTextResults || ""),
+      fullTextResults: ftData.resultsText || "",
       extractorVersion: EXTRACTOR_VERSION,
     });
     if (!upgraded.sampleSize) {
@@ -1048,7 +1080,7 @@ export async function paperCard(ctx, projectId, body) {
       upgraded.sampleSize = sampleSizeOf(sampleText);
     }
     await writeCache(db, upgraded);
-    const card = served(upgraded, "cache");
+    const card = served(withoutFullText(upgraded), "cache");
     await viewed(api, db, projectId, uid, card);
     return json({ card }, 200, { "x-request-id": requestId });
   }
@@ -1062,7 +1094,7 @@ export async function paperCard(ctx, projectId, body) {
     return err(502, "search_failed", "The literature databases could not be reached. Try again.", requestId);
   }
   if (!rec) return err(404, "paper_not_found", "This study could not be found from that link.", requestId);
-  const fullTextData = rec.pmcid ? await fetchFreeFullTextResults(rec.pmcid, cfg) : { resultsText: "", tableText: "" };
+  const fullTextData = rec.pmcid ? await fetchFreeFullTextResults(rec.pmcid, rec, cfg) : { resultsText: "", tableText: "" };
   const card = buildCard(rec, fullTextData);
   if (!card.title && !card.sections.length)
     return err(404, "paper_not_found", "This study could not be found from that link.", requestId);
@@ -1115,16 +1147,17 @@ export async function explainPaperCard(ctx, projectId, body) {
   if (!pmid && !doi) return err(400, "invalid_body", "pmid or doi is required", requestId);
   const cached = await readCache(db, { pmid, doi });
   if (!cached) return err(404, "paper_not_found", "Paste the study link first, then ask for a summary.", requestId);
+  const allowedFullText = fullTextAllowed(cached);
   const findings = Array.isArray(cached.findings) ? cached.findings : [];
   const hasMetaFindings = findings.some((f) => f && (f.format === "estimate" || f.format === "counts"));
   if (cached.structured === true && hasMetaFindings)
     return err(400, "not_needed", NOT_NEEDED, requestId);
   if (cached.ai && typeof cached.ai === "object") {
-    return json({ card: served(cached, "cache"), model: cached.aiModel || "", costInr: 0 }, 200, { "x-request-id": requestId });
+    return json({ card: served(withoutFullText(cached), "cache"), model: cached.aiModel || "", costInr: 0 }, 200, { "x-request-id": requestId });
   }
-  let fullResults = String(cached.fullTextResults || "").trim();
-  if (!fullResults && cached.pmcid && env.RESEARCH_CONTACT_EMAIL) {
-    const ft = await fetchFreeFullTextResults(cached.pmcid, configOf(env));
+  let fullResults = allowedFullText ? String(cached.fullTextResults || "").trim() : "";
+  if (!fullResults && cached.pmcid && allowedFullText && env.RESEARCH_CONTACT_EMAIL) {
+    const ft = await fetchFreeFullTextResults(cached.pmcid, cached, configOf(env));
     fullResults = String(ft.resultsText || "").trim();
   }
   const abstract = abstractOf(cached.sections);
@@ -1143,8 +1176,9 @@ export async function explainPaperCard(ctx, projectId, body) {
   if (out.error) return out.error;
   const ai = aiFields(extractJson(out.text), sourceText);
   if (!ai) return err(422, "invalid_draft", "MaiK did not return a summary that could be checked.", requestId);
-  const card = Object.assign({}, cached, {
-    fullTextResults: fullResults || cached.fullTextResults || "",
+  const base = withoutFullText(cached);
+  const card = Object.assign({}, base, {
+    fullTextResults: fullResults || base.fullTextResults || "",
     ai,
     aiModel: out.model || "",
     tokensUsed: 0,

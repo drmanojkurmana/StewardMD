@@ -290,6 +290,31 @@ test("device POST then pdf-uploads of same sha stays readable and never enqueues
   assert.match(env.RESEARCH_QUEUE._messages[0].input.r2Key, /^projects\/[^/]+\/pdf\/[0-9a-f]{64}\.pdf$/);
 });
 
+test("pdfs + jobs path: empty r2_key is filled on upload and a job never starts without stored bytes", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  env.MAIK_KV._m.set("maik:credit:em:alice@example.com", JSON.stringify({ balance: 100, day: "", chargedToday: 0 }));
+  const p = await makeProject(env, "tok-alice");
+  const pdfBytes = new TextEncoder().encode("%PDF-1.4 pdfs-route-after-device");
+  const digest = await crypto.subtle.digest("SHA-256", pdfBytes);
+  const sha = [...new Uint8Array(digest)].map((x) => x.toString(16).padStart(2, "0")).join("");
+  const dev = await call(env, "POST", "v1/projects/" + p.id + "/extractions/device", "tok-alice", validDevicePayload(sha));
+  assert.equal(dev.http, 201, JSON.stringify(dev));
+  const row = env.RESEARCH_DB._db.prepare("SELECT id, r2_key FROM research_pdfs WHERE project_id=? AND sha256=?").get(p.id, sha);
+  assert.equal(row.r2_key, "");
+
+  const early = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice",
+    { kind: "pdf_extract", idempotencyKey: "k-early", pdfId: row.id });
+  assert.equal(early.http, 409, JSON.stringify(early));
+  assert.equal(early.error && early.error.code || early.code, "pdf_not_stored");
+  assert.equal(env.RESEARCH_QUEUE._messages.length, 0);
+
+  const up = await callForm(env, "v1/projects/" + p.id + "/pdfs", "tok-alice", pdfForm(pdfBytes, "study-trial.pdf"));
+  assert.equal(up.http, 200, JSON.stringify(up));
+  const after = env.RESEARCH_DB._db.prepare("SELECT r2_key FROM research_pdfs WHERE id=?").get(row.id);
+  assert.match(after.r2_key, /^projects\/[^/]+\/pdf\/[0-9a-f]{64}\.pdf$/);
+  assert.ok(env.RESEARCH_R2._objects.has(after.r2_key));
+});
+
 test("role gate: non-member 404, viewer 403", { skip: SKIP }, async () => {
   const env = freshEnv();
   const p = await makeProject(env, "tok-alice");

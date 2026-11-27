@@ -17,9 +17,11 @@ gates run BEFORE any score.
 from __future__ import annotations
 
 import importlib
+import json
 import os
 
-from . import gates
+from . import gates, repair
+from .llm import CeilingError
 
 
 def _no_provider(*args, **kwargs):
@@ -89,6 +91,37 @@ def install(client, search=None, gate_context=None):
                                    result_parsing_func, check_parsed_response_not_none,
                                    system_prompt)
 
+    def record_ceiling(exc):
+        # Upstream catches Exception in its refinement loop and in
+        # _get_peer_review; pipeline.run_refinement re-raises this afterwards.
+        if gate_context is not None:
+            gate_context["ceiling_error"] = exc
+
+    def repairing_parser(result_parsing_func):
+        # The refinement agent stores this latex verbatim, so repair it here
+        # as well as in gated_review: otherwise a repaired review would score
+        # text that the accepted draft does not keep.
+        def parse_and_repair(raw):
+            parsed = result_parsing_func(raw)
+            try:
+                obj = json.loads(parsed)
+            except (TypeError, ValueError):
+                return parsed
+            latex = obj.get("latex") if isinstance(obj, dict) else None
+            if not isinstance(latex, str) or not latex.strip():
+                return parsed
+            try:
+                repaired, _remaining = repair.apply_repair(
+                    client, latex, gate_context.get("token_table"),
+                    gate_context.get("citation_map"),
+                    gate_context.get("manifest"), gate_context)
+            except CeilingError as exc:
+                record_ceiling(exc)
+                raise
+            obj["latex"] = repaired
+            return json.dumps(obj)
+        return parse_and_repair
+
     def refinement_contents_wrapper(contents, model_name, max_retries=5,
                                     base_interval_sec=5, result_parsing_func=None,
                                     generation_configs=None,
@@ -96,11 +129,14 @@ def install(client, search=None, gate_context=None):
         # The content loop passes parse_gemini_json_latex_response; the
         # formatting loop passes a lambda. Only content rounds count against
         # the refinement-round ceiling.
-        purpose = ("refinement"
-                   if result_parsing_func is refine.parse_gemini_json_latex_response
-                   else "format")
+        is_content = result_parsing_func is refine.parse_gemini_json_latex_response
+        purpose = "refinement" if is_content else "format"
+        parser = result_parsing_func
+        if (is_content and gate_context is not None
+                and gate_context.get("token_table") is not None):
+            parser = repairing_parser(result_parsing_func)
         return client.call_contents(contents, model_name,
-                                    result_parsing_func=result_parsing_func,
+                                    result_parsing_func=parser,
                                     generation_configs=generation_configs,
                                     check_parsed_response_not_none=check_parsed_response_not_none,
                                     purpose=purpose)
@@ -110,12 +146,17 @@ def install(client, search=None, gate_context=None):
     def gated_review(text, model_name, num_review_ensemble=3, temperature=0.75,
                      reviewer_system_prompt=None, review_instruction_form=None):
         if gate_context and gate_context.get("token_table") is not None:
-            violations = gates.check_paper(
-                text, gate_context["token_table"],
-                gate_context.get("citation_map"), gate_context.get("manifest"))
+            try:
+                repaired, violations = repair.apply_repair(
+                    client, text, gate_context["token_table"],
+                    gate_context.get("citation_map"),
+                    gate_context.get("manifest"), gate_context)
+            except CeilingError as exc:
+                record_ceiling(exc)
+                raise
             if violations:
-                gate_context.setdefault("gate_hits", []).extend(violations)
                 raise gates.GateError(violations)
+            text = repaired
         kwargs = {}
         if review_instruction_form is not None:
             kwargs["review_instruction_form"] = review_instruction_form

@@ -1,10 +1,10 @@
--- ResearchMD 0008 rollback. Drops the on-device drafting step cache.
--- Jobs and manuscript versions survive; a resumed draft simply pays for
--- its AI calls again. Run once.
+-- ResearchMD 0008 rollback. Drops the publication consent attestation table
+-- (F-12). Manuscript versions, sections and audit rows survive; the
+-- publication_consent_confirmed audit events reference the dropped table's
+-- ids only as opaque strings. Run once.
 
 PRAGMA foreign_keys = OFF;
 
-DROP INDEX IF EXISTS idx_research_job_steps_project;
-DROP TABLE IF EXISTS research_job_steps;
+DROP TABLE IF EXISTS research_publication_consents;
 
 PRAGMA foreign_keys = ON;
