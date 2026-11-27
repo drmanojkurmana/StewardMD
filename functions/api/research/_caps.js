@@ -23,6 +23,25 @@ export const TIER_CEILINGS = {
   T3: { maxInputTokens: 24000, maxOutputTokens: 4000, maxRetries: 1, maxRefinementRounds: 1 },
 };
 
+/* Monthly cloud fallback allowances per UTC calendar month, keyed by billing
+ * plan key (functions/api/billing/[[path]].js) + _entitlements.js tier key.
+ * No rollover; annual and founding members receive the same monthly number. */
+export const CLOUD_FALLBACKS_PER_MONTH = {
+  free: 0,
+  student: 15,       /* billing key for Trainee */
+  trainee: 15,       /* _entitlements normalized key for Trainee */
+  coresident: 15,    /* per seat holder */
+  pro: 25,           /* Resident Pro */
+  physician: 30,     /* Clinician */
+  physicianpro: 100, /* Clinician Pro */
+  ultimate: 100,     /* top normalized tier alias */
+};
+
+export const CLOUD_FALLBACK_MESSAGES = {
+  cloud_fallback_free: "Cloud fallback comes with the paid plans. The job stays on this device, saved where it stopped.",
+  cloud_fallback_limit: "You've used this month's cloud fallbacks. The job stays on this device, saved where it stopped. Try again later or next month.",
+};
+
 /* Daily caps, UTC day, ceilings.md. AI spend is micro-USD. */
 export const DAILY_CAPS = {
   projectJobs: 200,
@@ -77,16 +96,19 @@ export async function checkPdfJobCaps(db, projectId, uid, addJobs, nowMs) {
  * invalid_*) and AI-quality stops (gate_failed, ceiling_*) still count: those spent AI calls. */
 const PO_FREE_FAILURE_SQL =
   "NOT (status='failed' AND (error_code LIKE 'gateway%' OR error_code IN ('callback_unavailable','snapshot_invalid','manuscript_failed','job_lost','device_failed')))";
-export async function checkPoJobCaps(db, projectId, uid, nowMs) {
+export async function checkPoJobCaps(db, projectId, uid, nowMs, excludeJobId) {
   const dayStart = utcDayStart(nowMs);
+  const exSql = excludeJobId ? " AND id!=?" : "";
+  const pBinds = excludeJobId ? [projectId, dayStart, excludeJobId] : [projectId, dayStart];
   const p = await db.prepare(
-    "SELECT COUNT(*) AS n FROM research_job_runs WHERE project_id=? AND kind='manuscript_draft' AND created_ts>=? AND " + PO_FREE_FAILURE_SQL)
-    .bind(projectId, dayStart).first();
+    "SELECT COUNT(*) AS n FROM research_job_runs WHERE project_id=? AND kind='manuscript_draft' AND created_ts>=? AND " + PO_FREE_FAILURE_SQL + exSql)
+    .bind(...pBinds).first();
   if (((p && p.n) || 0) + 1 > DAILY_CAPS.poProjectJobs)
     return { code: "cap_po_project_daily", message: HARD_STOP_MESSAGES.cap_po_project_daily };
+  const uBinds = excludeJobId ? [uid, dayStart, excludeJobId] : [uid, dayStart];
   const u = await db.prepare(
-    "SELECT COUNT(*) AS n FROM research_job_runs WHERE created_by=? AND kind='manuscript_draft' AND created_ts>=? AND " + PO_FREE_FAILURE_SQL)
-    .bind(uid, dayStart).first();
+    "SELECT COUNT(*) AS n FROM research_job_runs WHERE created_by=? AND kind='manuscript_draft' AND created_ts>=? AND " + PO_FREE_FAILURE_SQL + exSql)
+    .bind(...uBinds).first();
   if (((u && u.n) || 0) + 1 > DAILY_CAPS.poUserJobs)
     return { code: "cap_po_user_daily", message: HARD_STOP_MESSAGES.cap_po_user_daily };
   return null;

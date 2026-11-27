@@ -948,6 +948,10 @@
       h.push('<div class="rmd-field"><label for="rmdThesisFile">Thesis file</label>');
       h.push('<input type="file" id="rmdThesisFile" accept=".pdf,.docx,.doc,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-word.document.12,application/docx,application/msword"></div>');
       h.push('<p class="rmd-thesis-meta">Supports PDF and Word (.docx) thesis files directly, including results tables.</p>');
+      if (onDeviceOcrOn()) {
+        var privLine = (G && G.SMD_RMD_JOBS && G.SMD_RMD_JOBS.DEVICE_PRIVACY_LINE) || "Runs on this device. Your PDFs and patient data are read here and never uploaded. Works offline.";
+        h.push('<p class="rmd-thesis-meta">' + esc(privLine) + '</p>');
+      }
       h.push('<div id="rmdThesisMsg"></div>');
       h.push('</div>');
     }
@@ -976,24 +980,28 @@
     if (box) box.innerHTML = html;
   }
 
-  function uploadPdfServer(file, container) {
+  function uploadPdfServer(file, container, fallbackMeta) {
     var proj = activeProject();
     if (!proj || !proj.serverId) {
       setMsg(container, '<div class="rmd-banner rmd-banner-warn">This PDF has no selectable text (scanned pages) and requires a synced account project for server OCR. Save this project to your account first, or upload a selectable-text PDF or Word (.docx) file.</div>');
-      return;
+      return Promise.resolve(null);
     }
     if (file.size > 26214400) {
       setMsg(container, '<div class="rmd-banner rmd-banner-warn">This scanned PDF has no selectable text and exceeds the 25 MB server OCR limit. Export a selectable-text PDF, upload a .docx file, or split this PDF under 25 MB.</div>');
-      return;
+      return Promise.resolve(null);
     }
     setMsg(container, SMD.p2.loadingHtml("Uploading your thesis"));
     var form = new FormData();
     form.append("file", file);
-    SMD.api.upload("/v1/projects/" + tpid + "/pdf-uploads", form).then(function (res) {
+    if (fallbackMeta) {
+      form.append("fallback", JSON.stringify(fallbackMeta));
+    }
+    return SMD.api.upload("/v1/projects/" + tpid + "/pdf-uploads", form).then(function (res) {
       var art = (res && res.artifact) || {};
       saveThesis(tpid, { artifactId: art.id, jobId: art.jobId, filename: art.filename || file.name, phi: null });
       ts = loadThesis(tpid);
       pollJob(art.jobId, 0, container);
+      return art;
     }).catch(function (err) {
       var msg;
       if (err && (err.code === "ceiling_bytes" || err.status === 413)) {
@@ -1079,6 +1087,7 @@
         }
         var OD = G && G.SMD_RMD_ONDEVICE_PDF;
         var CP = G && G.SMD_RMD_CHECKPOINT;
+        var JR = G && G.SMD_RMD_JOBS;
         if (onDeviceOcrOn() && OD && typeof OD.hasNativeOcr === "function" && OD.hasNativeOcr() && typeof OD.extract === "function") {
           setMsg(container, loadHtml("Reading scanned PDF on your phone"));
           var bytesP = (res && res.bytes)
@@ -1086,20 +1095,34 @@
             : readFileAsArrayBuffer(file).then(function (ab) { return new Uint8Array(ab); });
           bytesP.then(function (u8) {
             return (typeof OD.sha256 === "function" ? OD.sha256(u8) : Promise.resolve(null)).then(function (hash) {
-              var ckKey = hash ? ("pdf:" + tpid + ":" + hash) : "";
-              var resumeP = (CP && ckKey) ? CP.get(ckKey).catch(function () { return null; }) : Promise.resolve(null);
-              return resumeP.then(function (resume) {
+              var ckKey = hash ? ("pdf:" + tpid + ":" + hash) : ("pdf:" + tpid + ":thesis");
+              function runOne(resumeCtx) {
+                var resume = (resumeCtx && resumeCtx.checkpoint) || null;
                 return OD.extract(u8, {
                   sha256: hash,
                   resume: resume,
+                  signal: resumeCtx && resumeCtx.signal,
                   onProgress: function (cur, tot) {
+                    if (resumeCtx && resumeCtx.touchPage) resumeCtx.touchPage();
                     setMsg(container, loadHtml("Reading scanned page " + cur + " of " + tot + " on your phone"));
                   },
                   onPage: function (partial) {
-                    if (CP && partial && partial.sha256) {
-                      return CP.put("pdf:" + tpid + ":" + partial.sha256, partial).catch(function () {});
+                    if (CP && partial && (partial.sha256 || ckKey)) {
+                      partial.running = true;
+                      if (resumeCtx && resumeCtx.checkpoint) {
+                        partial.failCount = resumeCtx.checkpoint.failCount;
+                        partial.reasons = resumeCtx.checkpoint.reasons;
+                      }
+                      return CP.put(partial.sha256 ? ("pdf:" + tpid + ":" + partial.sha256) : ckKey, partial).catch(function () {});
                     }
                   }
+                });
+              }
+
+              if (!JR || typeof JR.runWithFallback !== "function") {
+                var resumeP = (CP && ckKey) ? CP.get(ckKey).catch(function () { return null; }) : Promise.resolve(null);
+                return resumeP.then(function (saved) {
+                  return runOne({ checkpoint: saved });
                 }).then(function (result) {
                   var clearP = (CP && result && result.sha256)
                     ? CP.remove("pdf:" + tpid + ":" + result.sha256).catch(function () {})
@@ -1108,6 +1131,33 @@
                     saveExtractedPages(result.pages, file.name, container, { artifactId: null, jobId: null });
                   });
                 });
+              }
+
+              return JR.runWithFallback("pdf", runOne, function (cpIgnored, fallbackMeta) {
+                return uploadPdfServer(file, container, fallbackMeta);
+              }, {
+                jobKey: ckKey,
+                projectId: tpid,
+                targetId: "thesis",
+                engine: "ondevice:pdf",
+                onStatus: function (info) {
+                  if (info && info.state === "retrying" && info.message) {
+                    setMsg(container, loadHtml(info.message));
+                  }
+                }
+              }).then(function (out) {
+                if (out && out.ok && out.source === "device") {
+                  var result = out.result;
+                  var clearP = (CP && result && result.sha256)
+                    ? CP.remove("pdf:" + tpid + ":" + result.sha256).catch(function () {})
+                    : Promise.resolve();
+                  return clearP.then(function () {
+                    saveExtractedPages(result.pages, file.name, container, { artifactId: null, jobId: null });
+                  });
+                }
+                if (out && out.source !== "cloud" && out.message) {
+                  setMsg(container, '<div class="rmd-banner">' + esc(out.message) + '</div>');
+                }
               });
             });
           }).catch(function (err) {
@@ -1115,7 +1165,11 @@
               setMsg(container, '<div class="rmd-banner rmd-banner-warn">This PDF is password-protected. Save an unlocked copy (or export as Word .docx) and upload again.</div>');
               return;
             }
-            uploadPdfServer(file, container);
+            if (err && (err.code === "aborted" || err.code === "cancelled" || err.rmdState === "data_problem" || err.rmdState === "offline")) {
+              setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc((err && err.message) || "Could not read this PDF on device.") + '</div>');
+              return;
+            }
+            setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc((err && err.message) || "Could not read this PDF.") + '</div>');
           });
           return;
         }

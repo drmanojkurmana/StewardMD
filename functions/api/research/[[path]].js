@@ -35,7 +35,8 @@ import { dedupRecords, normaliseDoi } from "./_dedup.js";
  * reusing callGemini from ../ai/[[path]].js). The pilot routes below are
  * untouched; Phase 3 jobs live in research_job_runs (0003 header decision). */
 import { uploadPdf, createJob, getJob, cancelJob, quoteManuscriptJob,
-  refreshJobToken, submitDeviceResult, failDeviceJob } from "./_jobs.js";
+  refreshJobToken, submitDeviceResult, failDeviceJob, convertJobToCloud } from "./_jobs.js";
+import { getCloudFallbackStatus, checkContainerHoursAlerts } from "./_cloud_fallback.js";
 import { jobCallback } from "./_callback.js";
 import { llmRoute, literatureSearchRoute, trialsStatusRoute, trialsSearchRoute, trialsLookupRoute } from "./_gateway.js";
 import { adminInstitutionRoute, creditsView } from "./_credits.js";
@@ -70,7 +71,7 @@ import { projectCostReport, userCostReport, pricingNote } from "./_reports.js";
 import { createInstitution, listAllInstitutions, myInstitutions, getInstitutionRoute,
   institutionSeats, addInstitutionMember, updateInstitutionMember, removeInstitutionMember,
   listInstitutionProjects, createInstitutionProject, institutionOnboarding,
-  putInstitutionOnboarding } from "./_institutions.js";
+  putInstitutionOnboarding, adminAuth, adminErr } from "./_institutions.js";
 import { listTemplates, getTemplate } from "./_templates.js";
 import { listJournals, getJournal, matchJournals } from "./_journals.js";
 import { createComment, listComments, createResponse, listResponses,
@@ -1891,6 +1892,12 @@ export async function onRequest({ request, env, params }) {
   }
   if (path === "/v1/admin/institutions" && request.method === "GET") return listAllInstitutions(p6Ctx);
   if (path === "/v1/admin/pricing-note" && request.method === "GET") return pricingNote(p6Ctx);
+  if (path === "/v1/admin/container-usage" && request.method === "GET") {
+    const auth = await adminAuth(p6Ctx);
+    if (!auth.ok) return adminErr(p6Ctx, auth);
+    const usage = await checkContainerHoursAlerts(env, db, Date.now());
+    return json(Object.assign({ requestId }, usage), 200, { "x-request-id": requestId });
+  }
   if (path === "/v1/admin/incidents" && request.method === "POST") {
     const body = await p6Body(); if (!body) return err(400, "invalid_body", "Invalid incident payload", requestId);
     return createIncident(p6Ctx, body);
@@ -2022,6 +2029,23 @@ export async function onRequest({ request, env, params }) {
   if (p3DevFail && request.method === "POST") {
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid device fail payload", requestId); }
     return failDeviceJob(p3Ctx, p3DevFail[1], body);
+  }
+  const p3ToCloud = path.match(/^\/v1\/jobs\/([^/]+)\/to-cloud$/);
+  if (p3ToCloud && request.method === "POST") {
+    let body = {};
+    try { const parsed = await bodyJson(request); if (parsed && typeof parsed === "object") body = parsed; } catch { body = {}; }
+    return convertJobToCloud(p3Ctx, p3ToCloud[1], body);
+  }
+  if (path === "/v1/me/research-cloud" && request.method === "GET") {
+    const quota = await getCloudFallbackStatus(env, db, uid, claims, Date.now());
+    return json({
+      plan: quota.plan,
+      allowance: quota.allowance,
+      used: quota.used,
+      remaining: quota.remaining,
+      resetsAt: quota.resetsAt,
+      requestId,
+    }, 200, { "x-request-id": requestId });
   }
   if (path === "/v1/credits" && request.method === "GET") return creditsView(p3Ctx);
 

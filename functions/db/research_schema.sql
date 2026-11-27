@@ -1058,3 +1058,21 @@ CREATE TABLE IF NOT EXISTS research_job_steps (
 );
 CREATE INDEX IF NOT EXISTS idx_research_job_steps_project
   ON research_job_steps(project_id, job_id);
+
+-- Phase 04 cloud fallback monthly allowance ledger (docs/research/contracts/phase-5/0010_research_v10.sql).
+-- Tracks cloud fallbacks per user per UTC calendar month ('YYYY-MM').
+CREATE TABLE IF NOT EXISTS research_cloud_fallbacks (
+  id TEXT PRIMARY KEY,
+  uid TEXT NOT NULL,
+  project_id TEXT NOT NULL DEFAULT '',
+  kind TEXT NOT NULL CHECK(kind IN ('pdf', 'stats', 'draft')),
+  job_id TEXT NOT NULL DEFAULT '',
+  month TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'used' CHECK(status IN ('used', 'refunded')),
+  reason_json TEXT NOT NULL DEFAULT '{}',
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_cloud_fallbacks_uid_month
+  ON research_cloud_fallbacks(uid, month, status);
+CREATE INDEX IF NOT EXISTS idx_research_cloud_fallbacks_job
+  ON research_cloud_fallbacks(job_id);

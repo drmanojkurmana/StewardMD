@@ -33,6 +33,7 @@
 import { getCreditRecord, putCreditRecord, getCredits } from "../../_credits.js";
 import { modelRate } from "../../_ai_usage.js";
 import { TIER_CEILINGS } from "./_caps.js";
+import { refundCloudFallbackForJob } from "./_cloud_fallback.js";
 
 export function usdInrRate(env) {
   const v = Number(env && env.RESEARCH_USD_INR);
@@ -130,6 +131,7 @@ export async function expireLostJobs(db, uuid, now) {
       .bind(at, row.id).run();
     if (!upd.meta || upd.meta.changes !== 1) continue;
     failedJobs++;
+    await refundCloudFallbackForJob(db, row.id, "job_lost").catch(() => {});
     /* Same release shape as a failed worker job (_callback.js): the first
      * reserve row pins owner and quote. */
     const reserveRow = await db.prepare(
@@ -143,9 +145,15 @@ export async function expireLostJobs(db, uuid, now) {
   }
   /* Stats jobs hold no credits (T0 work), but their status is polled the
    * same way, so they must not stay queued/running forever either. */
+  const statsRows = (await db.prepare(
+    "SELECT id FROM research_stats_jobs WHERE status IN ('queued','running') AND created_ts<?")
+    .bind(cutoff).all()).results || [];
   const statsUpd = await db.prepare(
     "UPDATE research_stats_jobs SET status='failed',error_code='job_lost',completed_ts=? WHERE status IN ('queued','running') AND created_ts<?")
     .bind(at, cutoff).run();
+  for (const sr of statsRows) {
+    await refundCloudFallbackForJob(db, sr.id, "job_lost").catch(() => {});
+  }
   const failedStatsJobs = (statsUpd.meta && statsUpd.meta.changes) || 0;
   return { failedJobs, failedStatsJobs, releasedMicroUsd };
 }

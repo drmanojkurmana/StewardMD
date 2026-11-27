@@ -620,8 +620,127 @@
           draw();
           return;
         }
-        var linSeq = ++runSeq;
-        var linPid = mc.pid;
+  function jobsRunner() {
+    var j = G && G.SMD_RMD_JOBS;
+    return (j && typeof j.runWithFallback === "function") ? j : null;
+  }
+
+  /* NOTE (MasterChart cloud stats): MasterChart runs over in-memory table rows
+   * (mc.columns/mc.rows) and has no inline uploadIpd client flow. Only projects
+   * with an uploaded server dataset (mc.ipdDatasetId) can submit /stats-jobs;
+   * otherwise we show the patient-data privacy notice (Continue gated by ethics
+   * approval on file) and then "Cloud analysis isn't available for this dataset yet". */
+  function checkMcEthicsApproval(pid) {
+    if (!pid || !SMD || !SMD.api || typeof SMD.api.request !== "function") {
+      return Promise.resolve(false);
+    }
+    var base = "/v1/projects/" + encodeURIComponent(pid);
+    return Promise.all([
+      SMD.api.request("GET", base + "/ipd-config").catch(function () { return null; }),
+      SMD.api.request("GET", base + "/ipd-evidence").catch(function () { return null; })
+    ]).then(function (pair) {
+      var cfg = pair[0] && (pair[0].config || pair[0]);
+      var list = (pair[1] && (pair[1].evidence || pair[1].items)) || [];
+      if (!cfg) return false;
+      for (var i = 0; i < list.length; i++) {
+        if (list[i] && list[i].status === "approved") return true;
+      }
+      return false;
+    }, function () { return false; });
+  }
+
+  function runMcCloudFallback(targetPid, spec, fallbackMeta) {
+    if (!mc.ipdDatasetId || !targetPid || !SMD || !SMD.api || typeof SMD.api.request !== "function") {
+      return Promise.resolve({
+        unavailable: true,
+        message: "Cloud analysis isn't available for this dataset yet"
+      });
+    }
+    var key = "mc_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
+    return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(targetPid) + "/stats-jobs", {
+      datasetId: mc.ipdDatasetId,
+      model: spec,
+      idempotencyKey: key,
+      fallback: fallbackMeta
+    });
+  }
+
+  function runWithDeviceFallback(targetId, spec, runDeviceFn, onSuccessFn) {
+    var seqNow = ++runSeq;
+    var pidNow = mc.pid;
+    var JR = jobsRunner();
+    mc.running = true;
+    mc.retryText = "";
+    draw();
+
+    var p;
+    if (!JR) {
+      p = Promise.resolve().then(function () {
+        return runDeviceFn({ signal: null });
+      }).then(function (res) {
+        return { ok: true, source: "device", result: res };
+      });
+    } else {
+      p = JR.runWithFallback("stats", runDeviceFn, function (cpIgnored, fallbackMeta) {
+        return runMcCloudFallback(pidNow, spec, fallbackMeta);
+      }, {
+        jobKey: "stats:" + (pidNow || "local") + ":" + targetId,
+        projectId: pidNow || "local",
+        targetId: targetId,
+        engine: "ondevice:stats",
+        hasEthicsApproval: function () { return checkMcEthicsApproval(pidNow); },
+        onStatus: function (info) {
+          if (seqNow !== runSeq || mc.pid !== pidNow) return;
+          if (info && info.state === "retrying" && info.message) {
+            mc.retryText = info.message;
+            draw();
+          }
+        }
+      });
+    }
+
+    p.then(function (out) {
+      if (seqNow !== runSeq || mc.pid !== pidNow) return;
+      mc.running = false;
+      mc.retryText = "";
+      if (out && out.ok && out.source === "device") {
+        onSuccessFn(out.result);
+        return;
+      }
+      if (out && out.ok && out.source === "cloud") {
+        if (out.result && out.result.unavailable) {
+          mc.error = out.result.message;
+        } else {
+          mc.error = "Cloud stats job queued. Results will appear once finished.";
+        }
+        draw();
+        return;
+      }
+      mc.error = (out && out.message) || "Saved on this device. Try again later.";
+      draw();
+    }, function (err) {
+      if (seqNow !== runSeq || mc.pid !== pidNow) return;
+      mc.running = false;
+      mc.retryText = "";
+      if (err && err.code === "logistic_not_converged") {
+        var lgFail = {
+          n: mc.rows.length, events: 0, converged: false,
+          warning: "The model could not settle on stable numbers (a factor perfectly predicts the outcome). Try fewer factors.",
+          coefficients: []
+        };
+        mc.results = {
+          kind: "logistic", outcome: spec.outcome, log: lgFail,
+          warnings: [lgFail.warning], paragraph: "", onDevice: true
+        };
+        mc.stage = "results";
+        draw();
+        return;
+      }
+      mc.error = calmDeviceError(err);
+      draw();
+    });
+  }
+
         var linCols = [f.outcome].concat(f.predictors);
         var linSpec = {
           family: "linear",
@@ -630,11 +749,10 @@
           types: typesMap(),
           robust: f.robustHc3 ? "HC3" : null
         };
-        mc.running = true;
-        draw();
-        onDeviceStats().run(linSpec, subTable(linCols), {}).then(function (res) {
-          if (linSeq !== runSeq || mc.pid !== linPid) return;
-          mc.running = false;
+        var linRows = subTable(linCols);
+        runWithDeviceFallback("linear:" + f.outcome, linSpec, function (resumeCtx) {
+          return onDeviceStats().run(linSpec, linRows, { signal: resumeCtx && resumeCtx.signal });
+        }, function (res) {
           var w = [];
           if (res.dropped > 0) w.push(res.dropped + " rows were left out (missing values).");
           mc.results = {
@@ -642,11 +760,6 @@
             paragraph: linearParagraph(res, f.outcome), onDevice: true
           };
           mc.stage = "results";
-          draw();
-        }, function (err) {
-          if (linSeq !== runSeq || mc.pid !== linPid) return;
-          mc.running = false;
-          mc.error = calmDeviceError(err);
           draw();
         });
         return;
@@ -662,8 +775,6 @@
           return;
         }
         if (onDeviceV2Enabled()) {
-          var logSeq = ++runSeq;
-          var logPid = mc.pid;
           var logCols = [f.outcome].concat(f.predictors);
           var logSpec = {
             family: "logistic",
@@ -671,11 +782,10 @@
             predictors: f.predictors.slice(),
             types: typesMap()
           };
-          mc.running = true;
-          draw();
-          onDeviceStats().run(logSpec, subTable(logCols), {}).then(function (res) {
-            if (logSeq !== runSeq || mc.pid !== logPid) return;
-            mc.running = false;
+          var logRows = subTable(logCols);
+          runWithDeviceFallback("logistic:" + f.outcome, logSpec, function (resumeCtx) {
+            return onDeviceStats().run(logSpec, logRows, { signal: resumeCtx && resumeCtx.signal });
+          }, function (res) {
             var lgDev = adaptLogisticFromDevice(res);
             var lwDev = [];
             if (lgDev.warning) lwDev.push(lgDev.warning);
@@ -684,25 +794,6 @@
               paragraph: sentenceFor(lgDev, f.outcome, []), onDevice: true
             };
             mc.stage = "results";
-            draw();
-          }, function (err) {
-            if (logSeq !== runSeq || mc.pid !== logPid) return;
-            mc.running = false;
-            if (err && err.code === "logistic_not_converged") {
-              var lgFail = {
-                n: mc.rows.length, events: 0, converged: false,
-                warning: "The model could not settle on stable numbers (a factor perfectly predicts the outcome). Try fewer factors.",
-                coefficients: []
-              };
-              mc.results = {
-                kind: "logistic", outcome: f.outcome, log: lgFail,
-                warnings: [lgFail.warning], paragraph: "", onDevice: true
-              };
-              mc.stage = "results";
-              draw();
-              return;
-            }
-            mc.error = calmDeviceError(err);
             draw();
           });
           return;
@@ -850,47 +941,57 @@
     mc.error = "";
     if (!f.time || !f.event) { mc.error = "Choose a time column and an event column."; draw(); return; }
     if (onDeviceV2Enabled()) {
-      var svSeq = ++runSeq;
-      var svPid = mc.pid;
       var OD = onDeviceStats();
-      mc.running = true;
-      draw();
+      var svSpec = (f.cox && f.cox.length)
+        ? { family: "cox", time: f.time, event: f.event, covariates: f.cox.slice(), types: typesMap() }
+        : { family: "km", time: f.time, event: f.event, group: f.sgroup || null };
+      function catchDataOnly(err) {
+        var JR = jobsRunner();
+        var cls = (JR && typeof JR.classifyError === "function") ? JR.classifyError(err, {}) : { counted: false };
+        if (cls.counted) throw err;
+        return { ok: false, warnings: [calmDeviceError(err)] };
+      }
       var kmCols = f.sgroup ? [f.time, f.event, f.sgroup] : [f.time, f.event];
-      var kmP = OD.run({ family: "km", time: f.time, event: f.event, group: f.sgroup || null }, subTable(kmCols), {}).then(
-        adaptKmFromDevice,
-        function (err) { return { ok: false, warnings: [calmDeviceError(err)] }; }
-      );
-      var lrP = f.sgroup
-        ? OD.run({ family: "logrank", time: f.time, event: f.event, group: f.sgroup }, subTable([f.time, f.event, f.sgroup]), {}).then(
-            function (res) { return { ok: true, chi2: res.chisq, df: res.df, p: res.p, table: res.groups, warnings: res.warnings || [] }; },
-            function (err) { return { ok: false, warnings: [calmDeviceError(err)] }; }
-          )
-        : Promise.resolve(null);
-      var coxP = (f.cox && f.cox.length)
-        ? OD.run({ family: "cox", time: f.time, event: f.event, covariates: f.cox.slice(), types: typesMap() }, subTable([f.time, f.event].concat(f.cox)), {}).then(
-            function (res) {
-              var coefs = [];
-              for (var j = 0; j < res.coefficients.length; j++) {
-                var c = res.coefficients[j];
-                coefs.push({
-                  term: c.term,
-                  hr: c.hr,
-                  ciLower: c.hrCiLower,
-                  ciUpper: c.hrCiUpper,
-                  p: c.p,
-                  estimable: c.estimable !== false,
-                  predictor: c.predictor,
-                  level: c.level
-                });
-              }
-              return { ok: true, converged: true, coefficients: coefs, phTest: res.phTest || null, warnings: res.warnings || [] };
-            },
-            function (err) { return { ok: false, warnings: [calmDeviceError(err)] }; }
-          )
-        : Promise.resolve(null);
-      Promise.all([kmP, lrP, coxP]).then(function (all) {
-        if (svSeq !== runSeq || mc.pid !== svPid) return;
-        mc.running = false;
+      var kmRows = subTable(kmCols);
+      var lrRows = f.sgroup ? subTable([f.time, f.event, f.sgroup]) : null;
+      var coxRows = (f.cox && f.cox.length) ? subTable([f.time, f.event].concat(f.cox)) : null;
+
+      runWithDeviceFallback("survival:" + f.time + ":" + f.event, svSpec, function (resumeCtx) {
+        var sig = resumeCtx && resumeCtx.signal;
+        var kmP = OD.run({ family: "km", time: f.time, event: f.event, group: f.sgroup || null }, kmRows, { signal: sig }).then(
+          adaptKmFromDevice,
+          catchDataOnly
+        );
+        var lrP = lrRows
+          ? OD.run({ family: "logrank", time: f.time, event: f.event, group: f.sgroup }, lrRows, { signal: sig }).then(
+              function (res) { return { ok: true, chi2: res.chisq, df: res.df, p: res.p, table: res.groups, warnings: res.warnings || [] }; },
+              catchDataOnly
+            )
+          : Promise.resolve(null);
+        var coxP = coxRows
+          ? OD.run({ family: "cox", time: f.time, event: f.event, covariates: f.cox.slice(), types: typesMap() }, coxRows, { signal: sig }).then(
+              function (res) {
+                var coefs = [];
+                for (var j = 0; j < res.coefficients.length; j++) {
+                  var c = res.coefficients[j];
+                  coefs.push({
+                    term: c.term,
+                    hr: c.hr,
+                    ciLower: c.hrCiLower,
+                    ciUpper: c.hrCiUpper,
+                    p: c.p,
+                    estimable: c.estimable !== false,
+                    predictor: c.predictor,
+                    level: c.level
+                  });
+                }
+                return { ok: true, converged: true, coefficients: coefs, phTest: res.phTest || null, warnings: res.warnings || [] };
+              },
+              catchDataOnly
+            )
+          : Promise.resolve(null);
+        return Promise.all([kmP, lrP, coxP]);
+      }, function (all) {
         var km = all[0], lr = all[1], cox = all[2];
         var warnings = [];
         if (km && km.warnings) warnings = warnings.concat(km.warnings);
@@ -1645,9 +1746,13 @@
       h += '</div>';
     }
     h += '<div class="rmd-mc-actions">';
-    h += '  <button type="button" class="rmd-btn rmd-btn-primary" data-rmd-mc="run"' + (mc.running ? ' disabled' : '') + '>' + (mc.running ? 'Running on this device...' : 'Run the analysis') + '</button>';
+    h += '  <button type="button" class="rmd-btn rmd-btn-primary" data-rmd-mc="run"' + (mc.running ? ' disabled' : '') + '>' + (mc.running ? (mc.retryText ? esc(mc.retryText) : 'Running on this device...') : 'Run the analysis') + '</button>';
     h += '  <button type="button" class="rmd-btn rmd-btn-quiet" data-rmd-mc="to-question">Back</button>';
     h += '</div>';
+    if (onDeviceV2Enabled()) {
+      var privLine = (G && G.SMD_RMD_JOBS && G.SMD_RMD_JOBS.DEVICE_PRIVACY_LINE) || "Runs on this device. Your PDFs and patient data are read here and never uploaded. Works offline.";
+      h += '<p class="rmd-muted rmd-device-privacy" style="font-size:12px;margin-top:6px;">' + esc(privLine) + '</p>';
+    }
     return h;
   }
 
