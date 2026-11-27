@@ -314,7 +314,7 @@
   }
   function b64(bytes) { var s = "", i, n = bytes.length; for (i = 0; i < n; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000)); return G.btoa(s); }
   function saveBlob(blob, name) { var a = D.createElement("a"), u = G.URL.createObjectURL(blob); a.href = u; a.download = name; D.body.appendChild(a); a.click(); D.body.removeChild(a); G.setTimeout(function () { G.URL.revokeObjectURL(u); }, 40000); }
-  function safeName(t) { return String(t || "").replace(/[\u0000-\u001f\\\/:*?"<>|]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80) || "Study"; }
+  function safeName(t) { return String(t || "").replace(/[\u0000-\u001f\\\/:*?"<>|]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80) || "NoteBook"; }
   function fsPlugin() { try { var P = G.Capacitor && G.Capacitor.Plugins; return P && P.Filesystem && P.Filesystem.writeFile ? P.Filesystem : null; } catch (e) { return null; } }
   function shareReady() { try { var N = G.SMD_NATIVE; return G.SMD_IS_NATIVE && fsPlugin() && N && N.share ? N : null; } catch (e) { return null; } }
   function shareFile(name, bytes, mime) {
@@ -430,9 +430,9 @@
     // if we closed the current one and there are tabs left, switch to last
     var curState = G.STUDY && G.STUDY._state && G.STUDY._state();
     var curId = curState && curState.id;
-    if (curId === docId && tabs.length) {
-      var h = getHost();
-      if (h && h.push) h.push(function () { openDocById(tabs[tabs.length - 1], null); });
+    if (curId === docId) {
+      if (tabs.length) openDocById(tabs[tabs.length - 1], null);   // replaces the closed document's editor
+      else { var h = getHost(); if (h && h.back) h.back(); }        // the last tab closed: back to the library
     }
   }
   function captureCurrentTab() {
@@ -443,10 +443,20 @@
   }
   var origAct = null;
   function openDocById(id, page) {
+    libState.ret = true;
     captureCurrentTab();
     var h = getHost();
     if (!h) return;
     addTab(id);
+    // Switching documents from the tab strip replaces the open editor instead of stacking a second one on it
+    // (each switch used to grow the PrepNucleus stack, so back walked through every document seen).
+    try {
+      var rt = h.root && h.root(), stk = h.stack && h.stack();
+      if (rt && stk && stk.length > 1 && rt.querySelector(":scope > .pn-body.st-body")) {
+        if (G.STUDY && G.STUDY.leave) G.STUDY.leave();
+        stk.pop();
+      }
+    } catch (e) {}
     // delegate to STUDY's original open (it pushes the viewer itself)
     if (page && page > 1) {
       try { origAct("st-hit", { getAttribute: function (n) { return n === "data-id" ? id : n === "data-page" ? page : null; } }, h); } catch (e) {}
@@ -467,16 +477,14 @@
     if (page && st.pg && st.pg[page]) { try { st.sc.scrollTop = st.pg[page].el.offsetTop; if (st.cur !== undefined) st.cur = page; } catch (e) {} }
     if (saved) {
       try {
-        if (saved.tool) { st.tool = saved.tool; st.ci = saved.ci; st.wi = saved.wi; }
+        // Through study.js so the toolbar, touch-action and page sizes follow (setting the fields alone left the pen
+        // "on" with no tool shown, and a zoom with pages laid out at the old size).
+        if (saved.tool) { st.tool = saved.tool; st.ci = saved.ci; st.wi = saved.wi; if (G.STUDY._syncTb) G.STUDY._syncTb(); }
+        if (saved.z && saved.z !== st.z && G.STUDY._setZoom) G.STUDY._setZoom(saved.z);
         if (!page && saved.scrollTop != null && st.sc) { st.sc.scrollTop = saved.scrollTop; st.sc.scrollLeft = saved.scrollLeft || 0; }
-        if (saved.z && saved.z !== st.z) { /* use study.js setZoom via internal? we set directly and sync */ st.z = saved.z; /* trigger re-render of pages */ try { G.setTimeout(function () { var s2 = G.STUDY && G.STUDY._state && G.STUDY._state(); if (s2 && s2.sc) { /* re-render visible pages large */ } }, 100); } catch (e) {} }
-        // sync toolbar
-        try { var tb = G.STUDY && G.STUDY._state && G.STUDY._state(); /* syncTb is internal, but calling act tool with same tool will re-sync */ } catch (e) {}
       } catch (e) {}
     }
     injectDocTabs();
-    // ensure tool toolbar reflects restored tool via study.js syncTb helper exposed via _state box class toggle
-    try { var root = hRoot(); if (root) { var box = root.querySelector("#stPages"); if (box && st.tool) box.classList.add("st-ink"); } } catch (e) {}
   }
   function hRoot() { try { var h = getHost(); return h && h.root && h.root(); } catch (e) { return null; } }
   function injectDocTabs() {
@@ -492,7 +500,8 @@
       if (existingTabs[k].parentNode) existingTabs[k].parentNode.removeChild(existingTabs[k]);
     }
     var existing = existingTabs && existingTabs[0];
-    if (!tabs.length) {
+    // One open document: no strip (it only repeated the title under the top bar and cost a row of the page).
+    if (tabs.length < 2) {
       if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
       return;
     }
@@ -650,27 +659,29 @@
       '<div class="st5a-seg st5a-seg-ic" role="group" aria-label="View">' + vb("grid", LIB_ICO.grid, "Grid view") + vb("list", LIB_ICO.list, "List view") + '</div>' +
     '</div>';
   }
-  function bottomBarHtml() {
-    function t(v, ic, label) { return '<button type="button" class="st5a-tab' + (libState.tab === v ? " on" : "") + '" data-act="st5a-tab" data-v="' + v + '" aria-pressed="' + (libState.tab === v) + '"><span class="st5a-tab-ic">' + ic + '</span><span class="st5a-tab-l">' + label + '</span></button>'; }
-    return '<nav class="st5a-bottom" aria-label="Study library">' +
-      t("documents", LIB_ICO.docsIc, "Documents") +
-      t("search", LIB_ICO.search, "Search") +
-      t("favorites", LIB_ICO.favIc, "Favorites") +
-    '</nav>';
+  // Documents / Search / Favourites: the same segmented control as Tests | QBank (prep.css .pn-seg), under the bar.
+  // The PrepNucleus bottom nav stays visible on the library (NoteBook is one of its tabs), so no second tab bar.
+  var LIB_TABS = [["documents", "Documents"], ["search", "Search"], ["favorites", "Favourites"]];
+  function segHtml() {
+    var i = 0; LIB_TABS.forEach(function (t, k) { if (libState.tab === t[0]) i = k; });
+    var none = libState.tab === "trash";
+    return '<div class="pn-filters pn-seg st5a-libseg' + (none ? " st5a-seg-none" : "") + '" role="group" aria-label="Show" style="--n:' + LIB_TABS.length + ";--i:" + i + '"><span class="pn-seg-th" aria-hidden="true"></span>' + LIB_TABS.map(function (t) {
+      var on = libState.tab === t[0];
+      return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="st5a-tab" data-v="' + t[0] + '">' + t[1] + "</button>";
+    }).join("") + "</div>";
+  }
+  function barHtml(h) {
+    var sub = libState.tab === "trash" ? "Trash: items stay 30 days" : "PDFs, notebooks and scans";
+    var right = '<div class="st5a-acts">' +
+      '<button type="button" class="pn-ib" data-act="st5a-libmore" aria-label="More: back up, restore, trash">' + LIB_ICO.dots + "</button>" +
+      '<button type="button" class="pn-ib st5a-newib" data-act="st5a-new" aria-label="New notebook or import">' + LIB_ICO.plus + "</button>" +
+    "</div>";
+    return h.bar ? h.bar("NoteBook", sub, "back", right) : "";
   }
   function libHtml() {
-    var title = libState.tab === "trash" ? "Trash" : libState.tab === "search" ? "Search" : libState.tab === "favorites" ? "Favorites" : "Documents";
     var showBc = !!(libState.currentFolderId);
-    return '<header class="st5a-top" role="banner">' +
-        '<button type="button" class="st5a-top-ib" data-act="back" aria-label="Back to PrepNucleus">' + LIB_ICO.back + '</button>' +
-        '<h1 class="st5a-h1" id="st5aH1">' + esc(title) + '</h1>' +
-        '<div class="st5a-top-acts">' +
-          '<button type="button" class="st5a-top-ib" data-act="st5a-tab" data-v="search" aria-label="Search">' + LIB_ICO.search + '</button>' +
-          '<button type="button" class="st5a-top-ib" data-act="st5a-libmore" aria-label="More: back up, restore, trash">' + LIB_ICO.dots + '</button>' +
-          '<button type="button" class="st5a-new-btn" data-act="st5a-new" aria-label="New notebook or import">' + LIB_ICO.plus + '<span>New</span></button>' +
-        '</div>' +
-      '</header>' +
-      '<div class="st5a-wrap smd-books-keep smd-emo-keep">' +
+    return '<div class="st5a-wrap smd-books-keep smd-emo-keep">' +
+      (libState.tab === "trash" ? '<div class="st5a-trash-head"><button type="button" class="pn-chip" data-act="st5a-tab" data-v="documents">' + LIB_ICO.back + ' Documents</button><b>Trash</b></div>' : '') +
       (showBc ? '<div class="st5a-header"><div class="st5a-bc" id="st5aBc"></div></div>' : '<div class="st5a-bc" id="st5aBc" hidden></div>') +
       (libState.tab === "search" ? '' : sortChipsHtml()) +
       '<p class="st5a-status pn-note" id="stBk" role="status"></p>' +
@@ -692,9 +703,18 @@
       // apply folder filter for documents tab
       if (libState.tab === "documents" && libState.currentFolderId) filtered = filtered.filter(function (d) { return d.folderId === libState.currentFolderId; });
       if (libState.tab === "search") {
-        var q = (bodyEl.parentNode && bodyEl.parentNode.querySelector("#st5aSearchQ") || D.getElementById("st5aSearchQ"));
-        var raw = q ? q.value : "";
-        raw = String(raw || "").trim().toLowerCase();
+        // The box is drawn once and kept: only the results under it are redrawn, so typing never loses focus or letters
+        // (the whole list, input included, used to be replaced 200 ms after each key).
+        var q = bodyEl.querySelector("#st5aSearchQ");
+        if (!q) {
+          bodyEl.innerHTML = '<div class="st5a-search-wrap"><div class="st-search-box"><span class="st-search-ico">' + LIB_ICO.search + '</span><input type="search" id="st5aSearchQ" class="st-q" placeholder="Search titles and text" aria-label="Search titles and text" autocomplete="off" enterkeyhint="search"></div></div>' +
+            '<div id="st5aRes" class="st5a-res" aria-live="polite"></div>';
+          q = bodyEl.querySelector("#st5aSearchQ");
+          q.value = libState.q || "";
+          q.addEventListener("input", function () { libState.q = q.value; G.clearTimeout(q._deb); q._deb = G.setTimeout(renderLibBody, 200); });
+        }
+        var res = bodyEl.querySelector("#st5aRes");
+        var raw = String(q.value || "").trim().toLowerCase();
         if (raw.length >= 2) {
           var byId = {}; docs.forEach(function (d) { byId[d.id] = d; });
           var hits = [];
@@ -705,40 +725,26 @@
             if (x.text && x.text.toLowerCase().indexOf(raw) !== -1) {
               var d = byId[x.doc];
               if (d && !d.trashedAt && (libState.currentFolderId ? d.folderId === libState.currentFolderId : true)) {
-                // avoid dupe if already title hit? allow multiple pages distinct
                 var exists = hits.some(function (h) { return h.d.id === d.id && h.page === x.page; });
                 if (!exists) hits.push({ d: d, page: x.page, title: false, html: snippet(x.text, raw) });
               }
             }
           });
           hits.sort(function (a, b) { return ((b.title ? 1 : 0) - (a.title ? 1 : 0)) || (a.d.title < b.d.title ? -1 : a.d.title > b.d.title ? 1 : 0) || ((a.page || 1) - (b.page || 1)); });
-          var pend = docs.filter(function (d) { return d.kind !== "nb" && (ixd[d.id] || 0) < (d.pageCount || 0); });
+          var pend = docs.filter(function (d) { return d.kind !== "nb" && !d.trashedAt && (ixd[d.id] || 0) < (d.pageCount || 0); });
           var pendingNote = pend.length ? '<p class="pn-note">Some pages are not yet indexed, so more matches may appear: ' + pend.map(function (d) { return esc(d.title) + " (" + ixLabel5a(ixd[d.id] || 0, d.pageCount) + ")"; }).join("; ") + ".</p>" : "";
-          // render search results
-          var searchInputHtml = '<div class="st5a-search-wrap"><div class="st-search-box"><span class="st-search-ico">' + LIB_ICO.search + '</span><input type="search" id="st5aSearchQ" class="st-q" placeholder="Search titles and text" aria-label="Search titles and text" autocomplete="off" value="' + esc(raw) + '"></div></div>';
           if (!hits.length) {
-            bodyEl.innerHTML = searchInputHtml + '<div class="st-empty-box"><div class="st-empty-ico">' + LIB_ICO.search + '</div><h3>No results</h3><p>Nothing found for \u201c' + esc(raw) + '\u201d.</p></div>' + pendingNote;
+            res.innerHTML = '<div class="st-empty-box"><div class="st-empty-ico">' + LIB_ICO.search + '</div><h3>No results</h3><p>Nothing found for \u201c' + esc(raw) + '\u201d.</p></div>' + pendingNote;
           } else {
-            hits = hits.slice(0, 60);
-            bodyEl.innerHTML = searchInputHtml + hits.map(function (h) {
+            res.innerHTML = '<div class="st5a-hits">' + hits.slice(0, 60).map(function (h) {
               var d = h.d;
               return '<button type="button" class="st-hit" data-act="st-hit" data-id="' + d.id + '" data-page="' + (h.page || 1) + '"><b>' + esc(d.title) + '</b><small>' + (h.page ? "Page " + h.page : (d.kind === "nb" ? "Notebook title" : "Title")) + '</small><span class="st-sn">' + h.html + '</span></button>';
-            }).join("");
+            }).join("") + "</div>" + pendingNote;
           }
-          var inp2 = D.getElementById("st5aSearchQ");
-          if (inp2 && !inp2._bound) { inp2._bound = true; inp2.addEventListener("input", function () { G.clearTimeout(inp2._deb); inp2._deb = G.setTimeout(renderLibBody, 200); }); }
-          return;
         } else {
-          // search tab empty state with input
-          bodyEl.innerHTML = '<div class="st5a-search-wrap"><div class="st-search-box"><span class="st-search-ico">' + LIB_ICO.search + '</span><input type="search" id="st5aSearchQ" class="st-q" placeholder="Search titles and text" aria-label="Search titles and text" autocomplete="off" value="' + esc(raw) + '"></div><p class="pn-note">Searches titles and PDF text on this phone.</p></div>' +
-            '<div id="st5aList"></div>';
-          // reuse same list rendering? For search tab with no query, fall through to show nothing? Instead show prompt.
-          var listEl = D.getElementById("st5aList");
-          if (listEl) listEl.innerHTML = '<p class="pn-empty">Type at least 2 characters to search.</p>';
-          var inp = D.getElementById("st5aSearchQ");
-          if (inp && !inp._bound) { inp._bound = true; inp.addEventListener("input", function () { G.clearTimeout(inp._deb); inp._deb = G.setTimeout(renderLibBody, 200); }); }
-          return;
+          res.innerHTML = '<p class="pn-note st5a-search-hint">Searches titles, PDF text and your typed notes on this phone. Type at least 2 letters.</p>';
         }
+        return;
       }
       // folders for current view
       var shownFolders = [];
@@ -872,7 +878,7 @@
           '<button type="button" class="st-menu-item bad" data-act="st5a-purge" data-id="' + d.id + '"><div class="st-menu-ico">' + LIB_ICO.trash + '</div><div class="st-menu-txt"><strong>Delete forever</strong><small>Immediately purge</small></div></button>';
       } else {
         items = '<button type="button" class="st-menu-item" data-act="st5a-rename" data-id="' + d.id + '"><div class="st-menu-ico">' + LIB_ICO.edit + '</div><div class="st-menu-txt"><strong>Rename</strong></div></button>' +
-          '<button type="button" class="st-menu-item" data-act="st5a-duplicate" data-id="' + d.id + '"><div class="st-menu-ico">' + LIB_ICO.copy + '</div><div class="st-menu-txt"><strong>Duplicate</strong><small>Copy notebook with ink</small></div></button>' +
+          '<button type="button" class="st-menu-item" data-act="st5a-duplicate" data-id="' + d.id + '"><div class="st-menu-ico">' + LIB_ICO.copy + '</div><div class="st-menu-txt"><strong>Duplicate</strong><small>A copy with its ink</small></div></button>' +
           '<button type="button" class="st-menu-item" data-act="st5a-move" data-id="' + d.id + '"><div class="st-menu-ico">' + LIB_ICO.move + '</div><div class="st-menu-txt"><strong>Move to folder</strong><small>' + (folderName ? esc(folderName) : "No folder") + '</small></div></button>' +
           '<button type="button" class="st-menu-item" data-act="st5a-change-cover" data-id="' + d.id + '"><div class="st-menu-ico">' + LIB_ICO.cover + '</div><div class="st-menu-txt"><strong>Change cover</strong><small>Regenerate thumbnail</small></div></button>' +
           '<button type="button" class="st-menu-item" data-act="st5a-export-sheet" data-id="' + d.id + '"><div class="st-menu-ico">' + LIB_ICO.download + '</div><div class="st-menu-txt"><strong>Export</strong><small>PDF with ink</small></div></button>' +
@@ -1063,7 +1069,7 @@
   function bk5a(msg) { try { var e = hRoot() && hRoot().querySelector("#stBk"); if (e) e.textContent = msg; else if (getHost()) getHost().toast(msg); } catch (e) {} }
   function restoreBytes5a(bytes) {
     var F = G.fflate, ent;
-    try { ent = F.unzipSync(bytes); } catch (e) { bk5a("Nothing was restored. That file is not a Study Studio backup."); return; }
+    try { ent = F.unzipSync(bytes); } catch (e) { bk5a("Nothing was restored. That file is not a NoteBook backup."); return; }
     var verify = (G.STUDY && G.STUDY._pure && G.STUDY._pure.verifyBackup) || null;
     if (!verify) { bk5a("Nothing was restored. Restore is not available in this build."); return; }
     bk5a("Checking the backup...");
@@ -1176,6 +1182,7 @@
     if (a === "st5a-close") { closeSheet5a(); return; }
     if (a === "st5a-tab") {
       libState.tab = el.getAttribute("data-v") || "documents";
+      if (libState.tab === "trash") libState.currentFolderId = null;   // Trash lists every deleted item, not one folder's
       closeSheet5a();
       renderLibPaint();
       return;
@@ -1311,10 +1318,9 @@
   /* ================= render + init ================= */
   function renderLibPaint() {
     var h = getHost(); if (!h) return;
-    h.paint(
+    h.paint(barHtml(h) + segHtml() +
       '<div class="pn-body st-lib st5a-lib smd-books-keep smd-emo-keep" id="stLib">' +
         libHtml() +
-        bottomBarHtml() +
         '<input type="file" id="stFile" accept="application/pdf" hidden>' +
         '<input type="file" id="stPhotos" accept="image/*" multiple hidden>' +
         '<input type="file" id="stRestoreF" accept=".zip,application/zip" hidden>' +
@@ -1369,8 +1375,10 @@
     var origLib = S.lib;
     S.lib = function (h) {
       if (h) host = h;
-      libState.tab = "documents";
-      libState.currentFolderId = null;
+      // Coming back from a document keeps the tab, folder and search it was opened from (a search hit returns to its
+      // results); arriving any other way (the NoteBook tab) starts at Documents.
+      if (!libState.ret || libState.tab === "trash") { libState.tab = "documents"; libState.currentFolderId = null; libState.q = ""; }
+      libState.ret = false;
       return renderLibPaint();
     };
     S.act = function (a, el, h) {
@@ -1378,6 +1386,7 @@
       if (a.indexOf("st5a-") === 0 || a === "st-dt-open" || a === "st-dt-close") return libAct5a(a, el, h);
       // opening a document through the old actions also tracks tabs + injects the tab bar
       if (a === "st-open" || a === "st-hit" || a === "st-src" || a === "st-mknb" || a === "st5a-mknb") {
+        if (hRoot() && hRoot().querySelector(":scope > #stLib")) libState.ret = true;
         captureCurrentTab();
         var r = origAct(a, el, h);
         var id = a === "st-src" ? el.getAttribute("data-doc") : (el.getAttribute("data-id") || (el.getAttribute && el.getAttribute("data-id")));
@@ -1392,6 +1401,18 @@
     var origBack = S.back;
     S.back = function () {
       var root = hRoot(); if (root && root.querySelector("#st5aSheet")) { closeSheet5a(); return true; }
+      // On the library itself, back climbs out of a folder (to its parent) and out of Trash before leaving NoteBook.
+      if (root && root.querySelector(":scope > #stLib")) {
+        if (libState.tab === "trash") { libState.tab = "documents"; renderLibPaint(); return true; }
+        if (libState.currentFolderId && libState.tab === "documents") {
+          idbAll("folders").then(function (fs) {
+            var f = folderById(fs, libState.currentFolderId);
+            libState.currentFolderId = (f && f.parentId) || null;
+            renderLibBody();
+          });
+          return true;
+        }
+      }
       return origBack();
     };
     // viewer leave: capture tab state (scroll/tool) before STUDY releases it

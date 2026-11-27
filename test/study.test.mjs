@@ -247,7 +247,7 @@ test("A8 backup verify: wrong record count, wrong size, extra file, missing mani
   v = await S.verifyBackup((await makeBackup((e) => { e["files/x.pdf"] = new Uint8Array(3); })).ent, shaN);
   assert.match(v.error, /file list/);
   v = await S.verifyBackup((await makeBackup((e) => { delete e["manifest.json"]; })).ent, shaN);
-  assert.match(v.error, /not a Study Studio backup/);
+  assert.match(v.error, /not a NoteBook backup/);
   v = await S.verifyBackup((await makeBackup(async (e, m) => { const r = JSON.parse(new TextDecoder().decode(e["docs/d1.json"])); r.doc.sha256 = "0".repeat(64); e["docs/d1.json"] = enc(r); m.files.find((f) => f.name === "docs/d1.json").sha256 = await shaN(e["docs/d1.json"]); m.files.find((f) => f.name === "docs/d1.json").bytes = e["docs/d1.json"].length; e["manifest.json"] = enc(m); })).ent, shaN);
   assert.match(v.error, /does not match its file/);
 });

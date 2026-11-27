@@ -1223,7 +1223,7 @@
     var s = it && it.src, S = G.STUDY;
     if (!s || !s.std || !S || !S.on()) return "";
     var e = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
-    return '<button type="button" class="pn-btn sm" data-act="st-src" data-doc="' + e(s.std) + '" data-p="' + (+(s.p && s.p[0]) || 1) + '">Open in Study Studio</button>';
+    return '<button type="button" class="pn-btn sm" data-act="st-src" data-doc="' + e(s.std) + '" data-p="' + (+(s.p && s.p[0]) || 1) + '">Open in NoteBook</button>';
   }
 
   /* ---------- progress: real counts only (questions that passed every check), no made-up percentage ---------- */

@@ -895,7 +895,7 @@ if (!(await page.locator('[data-act="st5a-backup"]:visible').count())) { await p
 const bk = await dl(() => page.click('[data-act="st5a-backup"]'));
 const zmap = FF.unzipSync(new Uint8Array(bk.buf)), zman = JSON.parse(Buffer.from(zmap["manifest.json"]).toString());
 const nPdf = Object.keys(before.shas).length;
-ok(/^StewardMD Study backup \d{4}-\d\d-\d\d\.zip$/.test(bk.name) && zman.counts.docs === before.n && zman.counts.strokes === before.st && zman.counts.files === nPdf && zman.counts.folders === 1 && zman.files.length === Object.keys(zmap).length - 1, "backup: one zip with the manifest counts (documents, strokes, originals, folders) and a sha256 per file");
+ok(/^StewardMD NoteBook backup \d{4}-\d\d-\d\d\.zip$/.test(bk.name) && zman.counts.docs === before.n && zman.counts.strokes === before.st && zman.counts.files === nPdf && zman.counts.folders === 1 && zman.files.length === Object.keys(zmap).length - 1, "backup: one zip with the manifest counts (documents, strokes, originals, folders) and a sha256 per file");
 ok(Object.keys(before.shas).every((id) => Buffer.from(zmap["files/" + id + ".pdf"]).equals(Buffer.from(Object.keys(zmap).length ? zmap["files/" + id + ".pdf"] : [])) && shaOf(Buffer.from(zmap["files/" + id + ".pdf"])) === before.shas[id]) && shaOf(Buffer.from(zmap["files/" + fixtureDoc.id + ".pdf"])) === SHA, "backup: every original in the zip is byte-identical to the stored one");
 /* wipe: fresh page, delete the study database (records and stored originals) */
 await boot("prep=1&study=1");

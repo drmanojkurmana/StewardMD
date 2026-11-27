@@ -140,7 +140,8 @@ ok(await page.locator("#stLib").isVisible(), "5.8: back returns to 5a library gr
 await boot("prep=1&study=1");
 const tabs = await page.evaluate(() => JSON.parse(localStorage.getItem("smd_study_openTabs") || "[]"));
 ok(tabs.length >= 2, "5.8: tabs remembered on relaunch (" + tabs.length + ")");
-/* 5.10 export: all pages PDF via download */
+/* 5.10 export: all pages PDF via download (opened from the library: the editor's back pops to where it was opened) */
+await openLib();
 await page.evaluate((id) => STUDY_LIB.openById(id, null), ids[0]);
 await page.waitForSelector(".st-pg", { timeout: 20000 });
 const [d] = await Promise.all([page.waitForEvent("download", { timeout: 60000 }), page.evaluate((id) => STUDY_LIB.exportAll(id, null), ids[0])]);
@@ -181,13 +182,16 @@ const gridCols1024 = await page.evaluate(() => {
 ok(gridCols1024 >= 4, "P5a-B: iPad grid has >= 4 columns at 1024px (" + gridCols1024 + " inferred cols)");
 await page.setViewportSize({ width: 390, height: 844 });
 /* P5a design: check no pn-bar visible when library is shown (Fix A: removed h.bar()) */
-const hasLibPnBar = await page.evaluate(() => {
-  var bar = document.querySelector(".pn-bar");
-  if (!bar) return false;
-  var r = bar.getBoundingClientRect();
-  return r.width > 0 && r.height > 0;
-});
-ok(!hasLibPnBar, "P5a-C: library screen has no duplicate pn-bar header element");
+// NoteBook (2026-11-27): the library uses the PrepNucleus bar and segment like every other tab; exactly one header.
+const libHead = await page.evaluate(() => ({
+  bars: [...document.querySelectorAll("#smdPrep .pn-bar")].filter((b) => b.getBoundingClientRect().height > 0).length,
+  title: (document.querySelector("#smdPrep .pn-bar h1") || {}).textContent,
+  oldTop: document.querySelectorAll(".st5a-top, .st5a-bottom").length,
+  seg: document.querySelectorAll('#smdPrep .pn-seg [data-act="st5a-tab"]').length,
+  nav: !document.querySelector("#smdPrep .pnv").classList.contains("pnv-off")
+}));
+ok(libHead.bars === 1 && libHead.title === "NoteBook" && libHead.oldTop === 0, "P5a-C: library has one header, the PrepNucleus bar titled NoteBook (" + JSON.stringify(libHead) + ")");
+ok(libHead.seg === 3 && libHead.nav, "P5a-C: Documents / Search / Favourites segment and the PrepNucleus bottom nav are shown");
 /* P5a design: open a PDF and verify #stP3Top present, no legacy pn-bar */
 await page.evaluate((id) => STUDY_LIB.openById(id, null), ids[0]);
 await page.waitForSelector(".st-pg", { timeout: 20000 });

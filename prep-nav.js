@@ -5,7 +5,7 @@
      Home  - the home screen (plan, question of the day, practice rows, subjects).
      Learn - every lesson, by subject (prep-lessons.js; the tab is left out when that file is missing). Lessons were
              reachable only from inside a subject; this is the first place that lists them all.
-     Study - Study Studio's library (study.js; only while smd_study is on): your PDFs, notebooks and scans.
+     NoteBook - Study Studio's library (renamed NoteBook 2026-11-27) (study.js; only while smd_study is on): your PDFs, notebooks and scans.
      Tests - mock exams (renderMocks) with the previous year papers row on top for NEET-PG.
      You   - the menu (renderMenu: exam and plan, Pro, downloads, stats, bookmarks, mistakes, friends).
    Navigation: a tab resets the stack to [home] or [home, tab root], so Android back from a tab goes home and back from
@@ -45,7 +45,7 @@
   var TABS = [
     { id: "home", label: "Home" },
     { id: "learn", label: "Learn" },
-    { id: "study", label: "Study" },
+    { id: "study", label: "NoteBook" },
     { id: "tests", label: "Tests" },
     { id: "you", label: "You" }
   ];
