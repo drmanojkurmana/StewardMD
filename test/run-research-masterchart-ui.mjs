@@ -273,7 +273,7 @@ try {
 
   // 5. Question cards (5 when on-device stats v2 adds Linear regression).
   await click('[data-rmd-mc="continue-columns"]');
-  ok(await until(`document.querySelectorAll('[data-rmd-mc-choice]').length === 5`, 5000), 'five analysis questions offered (including linear regression)');
+  ok(await until(`document.querySelectorAll('[data-rmd-mc-choice]').length === 6`, 5000), 'six analysis questions offered (including linear regression and ROC)');
   ok(/Table 1 \(baseline characteristics\)/.test(await text('.rmd-mc-screen')), 'Table 1 question present');
   ok(/Risk factors \(logistic regression\)/.test(await text('.rmd-mc-screen')), 'logistic regression question present');
   ok(/Linear regression \(numeric outcome\)/.test(await text('.rmd-mc-screen')), 'linear regression question present');
