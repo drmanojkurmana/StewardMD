@@ -141,6 +141,9 @@ function inputOf(body) {
 function asText(value, max) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
 }
+function noEmDash(text) {
+  return String(text || "").replace(/\s*\u2014\s*/g, " - ").replace(/\s{2,}/g, " ").trim();
+}
 function roundInr(n) {
   return Math.round((Number(n) || 0) * 100) / 100;
 }
@@ -319,19 +322,39 @@ function checklistDraft(parsed, guide, headings) {
   return { guidelineId: guide.id, name: guide.name, items };
 }
 
-function stripBareNumbers(text) {
+function extractAllowedNumbers(chunks) {
+  const out = new Set();
+  const re = /(?<![A-Za-z0-9_.])\d+(?:\.\d+)?%?/g;
+  for (const raw of chunks || []) {
+    const s = String(raw || "");
+    if (!s) continue;
+    let m;
+    re.lastIndex = 0;
+    while ((m = re.exec(s)) !== null) {
+      out.add(m[0]);
+      out.add(m[0].replace(/%$/, ""));
+    }
+  }
+  return out;
+}
+function stripBareNumbers(text, allowedNumbers) {
   const tokens = [];
   const masked = String(text || "").replace(/\{\{run:[A-Za-z0-9_-]+[:.][A-Za-z0-9_.]+\}\}/g, (m) => {
     tokens.push(m);
     return "\u0000";
   });
-  const stripped = masked.replace(/(?<![A-Za-z0-9_.])\d+(?:\.\d+)?%?/g, "");
+  const stripped = masked.replace(/(?<![A-Za-z0-9_.])\d+(?:\.\d+)?%?/g, (m, offset, str) => {
+    /* Preserve standard hyphenated identifiers (e.g. COVID-19, SARS-CoV-2, IL-6). */
+    if (offset >= 2 && /[A-Za-z]-$/.test(str.slice(0, offset))) return m;
+    if (allowedNumbers && (allowedNumbers.has(m) || allowedNumbers.has(m.replace(/%$/, "")))) return m;
+    return "";
+  });
   let i = 0;
   return stripped.replace(/\u0000/g, () => tokens[i++] || "").replace(/\s{2,}/g, " ").trim();
 }
-function manuscriptDraft(parsed, fallbackTitle) {
+function manuscriptDraft(parsed, fallbackTitle, allowedNumbers) {
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
-  const title = stripBareNumbers(asText(parsed.title, 300)) || asText(fallbackTitle, 300);
+  const title = noEmDash(stripBareNumbers(asText(parsed.title, 300), allowedNumbers)) || noEmDash(asText(fallbackTitle, 300));
   const byId = new Map();
   if (Array.isArray(parsed.sections)) {
     for (const s of parsed.sections) {
@@ -353,9 +376,9 @@ function manuscriptDraft(parsed, fallbackTitle) {
   for (const s of THESIS_SECTIONS) {
     const raw = byId.get(s.id);
     if (!raw) continue;
-    const cleaned = (s.id === "abstract" || s.id === "results")
-      ? stripBareNumbers(asText(raw, 6000))
-      : asText(raw, 8000);
+    const cleaned = noEmDash((s.id === "abstract" || s.id === "results")
+      ? stripBareNumbers(asText(raw, 6000), allowedNumbers)
+      : asText(raw, 8000));
     if (cleaned) sections.push({ id: s.id, heading: s.heading, text: cleaned });
   }
   if (!sections.length) return null;
@@ -680,17 +703,17 @@ function publicationConsentDraft(parsed, requestedLang) {
 function caseReportDraft(parsed) {
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
   const sec = parsed.sections && typeof parsed.sections === "object" && !Array.isArray(parsed.sections) ? parsed.sections : parsed;
-  const title = asText(sec.title, 500);
-  const abstract = asText(sec.abstract, 4000);
-  const introduction = asText(sec.introduction, 4000);
-  const casePresentation = asText(sec.casePresentation || sec.presentation || sec.case_presentation, 8000);
-  const timeline = asText(sec.timeline, 4000);
-  const discussion = asText(sec.discussion, 8000);
-  const conclusion = asText(sec.conclusion, 4000);
-  const patientPerspective = asText(sec.patientPerspective || sec.perspective || "", 2000);
+  const title = noEmDash(asText(sec.title, 500));
+  const abstract = noEmDash(asText(sec.abstract, 4000));
+  const introduction = noEmDash(asText(sec.introduction, 4000));
+  const casePresentation = noEmDash(asText(sec.casePresentation || sec.presentation || sec.case_presentation, 8000));
+  const timeline = noEmDash(asText(sec.timeline, 4000));
+  const discussion = noEmDash(asText(sec.discussion, 8000));
+  const conclusion = noEmDash(asText(sec.conclusion, 4000));
+  const patientPerspective = noEmDash(asText(sec.patientPerspective || sec.perspective || "", 2000));
   let learningPoints = [];
   if (Array.isArray(sec.learningPoints || sec.learning_points)) {
-    learningPoints = (sec.learningPoints || sec.learning_points).map((lp) => asText(lp, 500)).filter(Boolean);
+    learningPoints = (sec.learningPoints || sec.learning_points).map((lp) => noEmDash(asText(lp, 500))).filter(Boolean);
   }
   if (!title || !abstract || !introduction || !casePresentation || !discussion || !conclusion) {
     return null;
@@ -1408,12 +1431,19 @@ export async function aiDraft(ctx, projectId, body) {
     const question = asText(input.researchQuestion || project.research_question, 1000);
     const notes = asText(input.notes || input.note, 2000);
     const journalId = asText(input.journalId, 80);
+    const dbResultsSec = (bits.sections || []).find((s) => s && s.section_id === "results" && s.text && s.text.trim());
+    const savedResults = asText(input.resultsText || input.savedResults || (dbResultsSec ? dbResultsSec.text : ""), 6000);
     const studyList = bits.studies.slice(0, 20)
       .map((s) => (s.label || "Study") + ": " + String(s.quote || "").slice(0, 250))
       .join("\n");
+    const numberRule = tokens.length
+      ? "For Abstract and Results, any statistical result must be one of the allowed {{run:...}} tokens. Do not invent or compute numbers. "
+      : (savedResults
+        ? "For Abstract and Results, report ONLY the exact statistical values from the saved study analysis results provided below. Do not invent or alter any numbers. "
+        : "For Abstract and Results, do not invent or compute statistical numbers if no analysis results are provided. ");
     system = "You draft an IMRaD medical research manuscript (Abstract, Introduction, Methods, Results, Discussion). " +
       "Return ONLY JSON {title, sections:[{id, heading, text}]} where id is one of abstract, introduction, methods, results, discussion. " +
-      "For Abstract and Results, any statistical result must be one of the allowed {{run:...}} tokens. Do not invent or compute numbers. " +
+      numberRule +
       "Do not invent citations, patient identifiers, or unverified claims.";
     prompt = "Title: " + titleText +
       "\nStudy type: " + studyType +
@@ -1422,6 +1452,7 @@ export async function aiDraft(ctx, projectId, body) {
       (notes ? "\nNotes: " + notes : "") +
       "\nProtocol: " + JSON.stringify(bits.protocol).slice(0, 2000) +
       "\nAllowed result tokens (use these exact strings, do not invent numbers): " + (tokens.join(", ") || "(none saved yet)") +
+      (savedResults ? "\nSaved study analysis results:\n" + savedResults : "") +
       (studyList ? "\nIncluded study notes:\n" + studyList : "");
   }
 
@@ -1437,7 +1468,23 @@ export async function aiDraft(ctx, projectId, body) {
   else if (task === "ctri_fields") draft = ctriDraft(parsed);
   else if (task === "publication_consent") draft = publicationConsentDraft(parsed, input.language);
   else if (task === "case_report_draft") draft = caseReportDraft(parsed);
-  else if (task === "manuscript_draft") draft = manuscriptDraft(parsed, project.title || input.title || "");
+  else if (task === "manuscript_draft") {
+    const dbResSec = (bits.sections || []).find((s) => s && s.section_id === "results" && s.text && s.text.trim());
+    const allowedNumbers = extractAllowedNumbers([
+      input.title,
+      input.researchQuestion,
+      input.notes,
+      input.note,
+      input.resultsText,
+      input.savedResults,
+      project.title,
+      project.research_question,
+      bits.protocol ? JSON.stringify(bits.protocol) : "",
+      !bits.run && dbResSec ? dbResSec.text : "",
+      ...(bits.studies || []).map((s) => (s.label || "") + " " + (s.quote || "")),
+    ]);
+    draft = manuscriptDraft(parsed, project.title || input.title || "", allowedNumbers);
+  }
   if (!draft) return err(422, "invalid_draft", "MaiK did not return a draft that matched the required fields.", requestId);
   const stored = await storeDraft(ctx, projectId, task, draft, out.model, out.costInr || 0);
   return respond(ctx, stored, out.model, out.costInr || 0);

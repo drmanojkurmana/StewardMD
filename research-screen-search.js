@@ -94,12 +94,14 @@
     topicBusy: false,
     topicSearched: false,
     topicError: null,
+    topicNotice: "",
     topicResults: [],
     topicRetrievedAt: 0,
     topicExpanded: {},
     topicAdding: {},
     topicAdded: {},
     topicAddingAll: false,
+    topicStudyAdding: {},
     topicStudyAdded: {},
     importFormat: "ris",
     importFileName: "",
@@ -271,6 +273,15 @@
   function render(container) {
     var store = SMD.store;
     var project = store ? store.getActiveProject() : null;
+    if (project && st.projectId === project.id) {
+      var curTopicEl = container ? container.querySelector("#rmd_topic_q") : null;
+      if (curTopicEl && typeof curTopicEl.value === "string" && curTopicEl.value.length > 0) st.topicQuery = curTopicEl.value;
+      var curQueryEl = container ? container.querySelector("#rmd_search_query") : null;
+      if (curQueryEl && typeof curQueryEl.value === "string" && curQueryEl.value.length > 0) {
+        var qDb = curQueryEl.getAttribute("data-rmd-query-db") || st.database;
+        if (qDb && Object.prototype.hasOwnProperty.call(st.queries, qDb)) st.queries[qDb] = curQueryEl.value;
+      }
+    }
     if (!project) {
       container.innerHTML = '<div class="rmd-empty-state"><h3>No project selected</h3><p>Open a project to search the literature.</p><button type="button" class="rmd-btn rmd-btn-primary" data-rmd="to-projects">Go to Projects</button></div>';
       var toP = container.querySelector('[data-rmd="to-projects"]');
@@ -290,12 +301,14 @@
       st.topicBusy = false;
       st.topicSearched = false;
       st.topicError = null;
+      st.topicNotice = "";
       st.topicResults = [];
       st.topicRetrievedAt = 0;
       st.topicExpanded = {};
       st.topicAdding = {};
       st.topicAdded = {};
       st.topicAddingAll = false;
+      st.topicStudyAdding = {};
       st.topicStudyAdded = {};
       st.importResult = null;
       st.importError = null;
@@ -360,6 +373,7 @@
     h.push('</div>');
     h.push('<p class="rmd-field-hint" style="margin:6px 0 0;">Search words go to PubMed, Europe PMC, Crossref, ClinicalTrials.gov and OpenAlex (mostly US-hosted). Do not type patient information.</p>');
     if (st.topicError) h.push('<div style="margin-top:10px;">' + p2().errHtml(st.topicError, "topic-search") + '</div>');
+    if (st.topicNotice) h.push('<div class="rmd-banner rmd-banner-warn" role="status" style="margin-top:10px;">' + esc(st.topicNotice) + '</div>');
     if (st.topicSearched && !st.topicBusy && !st.topicResults.length && !st.topicError) {
       h.push('<p class="rmd-muted" style="margin-top:10px;">No matching papers found. Try shorter or broader topic keywords.</p>');
     }
@@ -418,7 +432,8 @@
           if (studyDone) {
             h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" disabled>Added to Studies</button>');
           } else {
-            h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-topic-study="' + ti + '">+ Add to Studies</button>');
+            var addingStudy = !!(st.topicStudyAdding && st.topicStudyAdding[tk]);
+            h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-topic-study="' + ti + '"' + (addingStudy ? " disabled" : "") + '>' + (addingStudy ? "Adding…" : "+ Add to Studies") + '</button>');
           }
           h.push('</div>');
         }
@@ -453,7 +468,7 @@
       h.push(trialsPanelHtml());
     } else {
       h.push('<div class="rmd-field"><label for="rmd_search_query">Query for ' + esc(db.label) + ' <span class="rmd-req">*</span></label>');
-      h.push('<textarea id="rmd_search_query" rows="4" maxlength="4000" placeholder="' + esc(db.hint) + '" spellcheck="false">' + esc(st.queries[st.database]) + '</textarea>');
+      h.push('<textarea id="rmd_search_query" data-rmd-query-db="' + esc(st.database) + '" rows="4" maxlength="4000" placeholder="' + esc(db.hint) + '" spellcheck="false">' + esc(st.queries[st.database]) + '</textarea>');
       h.push('<span class="rmd-field-hint">Stored verbatim on the run so the search can be replayed exactly.</span>');
       if (st.ai) h.push(SMD.ai.noteHtml(st.ai, st.database));
       h.push('</div>');
@@ -574,6 +589,8 @@
   }
 
   function runTopicSearch(container, project) {
+    var tqEl = container ? container.querySelector("#rmd_topic_q") : null;
+    if (tqEl && typeof tqEl.value === "string" && tqEl.value.length > 0) st.topicQuery = tqEl.value;
     var q = String(st.topicQuery || "").trim();
     if (!q) {
       st.topicError = { message: "Enter a topic or keywords to search.", code: "invalid_search" };
@@ -593,17 +610,20 @@
     st.topicBusy = true;
     st.topicSearched = true;
     st.topicError = null;
+    st.topicNotice = "";
     render(container);
     var mySeq = ++seq;
     SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPidFor(project)) + "/find-studies", { q: q, limit: 30 }).then(function (data) {
       if (mySeq !== seq) return;
       st.topicBusy = false;
       st.topicResults = (data && data.results) || [];
+      st.topicNotice = (data && data.notice) ? String(data.notice) : "";
       st.topicRetrievedAt = Date.now();
       render(container);
     }).catch(function (err) {
       if (mySeq !== seq) return;
       st.topicBusy = false;
+      st.topicNotice = "";
       st.topicError = err;
       render(container);
     });
@@ -661,12 +681,7 @@
     var item = st.topicResults[idx];
     if (!item) return;
     var tk = topicItemKey(item);
-    if (st.topicStudyAdded[tk]) return;
-    if (!SMD.store || !SMD.store.createStudy) {
-      st.topicError = { message: "Study store is not available yet.", code: "store_unavailable" };
-      render(container);
-      return;
-    }
+    if (st.topicStudyAdded[tk] || (st.topicStudyAdding && st.topicStudyAdding[tk])) return;
     var parts = [];
     var authTxt = formatAuthorsShort(item.authors);
     if (authTxt) parts.push(authTxt);
@@ -675,7 +690,8 @@
     if (item.year) parts.push(String(item.year));
     if (item.pmid) parts.push("PMID: " + item.pmid);
     if (item.doi) parts.push("DOI: " + item.doi);
-    try {
+    function saveLocalStub() {
+      if (!SMD.store || !SMD.store.createStudy) return;
       SMD.store.createStudy(project.id, {
         label: String(item.title || "Study").trim().slice(0, 120) || "Study",
         measure: "RR",
@@ -687,6 +703,38 @@
         },
         verified: false
       });
+    }
+    var isLocalOnly = !project.serverId && (project.practice || project.tutorial || String(project.id || "").indexOf("loc_") === 0);
+    if (SMD.api && typeof SMD.api.request === "function" && !isLocalOnly) {
+      st.topicStudyAdding[tk] = true;
+      st.topicError = null;
+      render(container);
+      var mySeq = seq;
+      SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPidFor(project)) + "/records", {
+        source: item.source || "",
+        pmid: item.pmid || "",
+        doi: item.doi || "",
+        title: item.title || "Untitled paper",
+        authors: item.authors || [],
+        year: item.year,
+        journal: item.journal || "",
+        abstract: item.abstract || ""
+      }).then(function () {
+        delete st.topicStudyAdding[tk];
+        if (mySeq !== seq) return;
+        try { saveLocalStub(); } catch (e) {}
+        st.topicStudyAdded[tk] = true;
+        render(container);
+      }).catch(function (err) {
+        delete st.topicStudyAdding[tk];
+        if (mySeq !== seq) return;
+        st.topicError = err;
+        render(container);
+      });
+      return;
+    }
+    try {
+      saveLocalStub();
       st.topicStudyAdded[tk] = true;
       render(container);
     } catch (err) {
@@ -696,6 +744,8 @@
   }
 
   function runSearch(container, project) {
+    var qEl = container ? container.querySelector("#rmd_search_query") : null;
+    if (qEl && typeof qEl.value === "string" && qEl.value.length > 0) st.queries[st.database] = qEl.value;
     var query = (st.queries[st.database] || "").trim();
     if (!query) {
       st.runError = { message: "Enter a query for " + dbLabel(st.database) + " before running.", code: "invalid_search" };
@@ -730,7 +780,9 @@
       st.busy = false;
       var run = data.searchRun;
       st.runs.unshift(run);
-      st.announce = dbLabel(run.database) + " search complete: " + run.resultCount + " records. The full ID list is archived for replay.";
+      st.announce = (data && data.notice)
+        ? String(data.notice)
+        : (dbLabel(run.database) + " search complete: " + run.resultCount + " records. The full ID list is archived for replay.");
       render(container);
     }).catch(function (err) {
       if (mySeq !== seq) return;
@@ -889,18 +941,20 @@
     st.trialsStatusLoading = true;
     SMD.api.request("GET", "/v1/projects/" + encodeURIComponent(apiPidFor(project)) + "/trials").then(function (data) {
       if (mySeq !== trialsProbeSeq) return;
+      var prev = st.trialsAvailable;
       st.trialsStatusLoading = false;
       st.trialsStatusLoaded = true;
       st.trialsAvailable = !!(data && data.available !== false);
       if (!st.trialsAvailable && st.database === "clinicaltrials") st.database = "pubmed";
-      render(container);
+      if (st.loaded && st.trialsAvailable !== prev) render(container);
     }).catch(function () {
       if (mySeq !== trialsProbeSeq) return;
+      var prev = st.trialsAvailable;
       st.trialsStatusLoading = false;
       st.trialsStatusLoaded = true;
       st.trialsAvailable = false;
       if (st.database === "clinicaltrials") st.database = "pubmed";
-      render(container);
+      if (st.loaded && st.trialsAvailable !== prev) render(container);
     });
   }
 
@@ -1130,6 +1184,11 @@
     var dbBtns = container.querySelectorAll("[data-rmd-db]");
     for (var d = 0; d < dbBtns.length; d++) {
       dbBtns[d].onclick = function () {
+        var curQ = container.querySelector("#rmd_search_query");
+        if (curQ && typeof curQ.value === "string" && curQ.value.length > 0) {
+          var qDb = curQ.getAttribute("data-rmd-query-db") || st.database;
+          if (qDb && Object.prototype.hasOwnProperty.call(st.queries, qDb)) st.queries[qDb] = curQ.value;
+        }
         st.database = this.getAttribute("data-rmd-db");
         render(container);
       };

@@ -75,12 +75,20 @@ const MEASURE_WORDS = {
 const FINDING_MEASURES = ["RR", "OR", "HR", "MD", "SMD", "RD"];
 const STOP = new Set(["with", "from", "that", "this", "were", "have", "been", "into", "over", "under", "than", "then", "them", "they", "their", "about", "after", "before", "between", "among", "using", "used", "study", "trial", "patients", "patient"]);
 
+const DEFAULT_SOURCE_TIMEOUT_MS = 10000;
+const SOURCE_LABELS = { pubmed: "PubMed", europe_pmc: "Europe PMC", crossref: "Crossref" };
+
 function configOf(env) {
+  const rawTimeout = env && env.RESEARCH_SOURCE_TIMEOUT_MS ? parseInt(env.RESEARCH_SOURCE_TIMEOUT_MS, 10) : NaN;
+  const sourceTimeoutMs = Number.isFinite(rawTimeout) && rawTimeout > 0 ? rawTimeout : DEFAULT_SOURCE_TIMEOUT_MS;
   return {
     contactEmail: env.RESEARCH_CONTACT_EMAIL,
     apiKey: pubmed.resolveNcbiApiKey(env),
     plusToken: env.RESEARCH_CROSSREF_TOKEN,
-    deadline: Date.now() + 60000,
+    sourceTimeoutMs,
+    timeoutMs: sourceTimeoutMs,
+    maxRetries: 1,
+    deadline: Date.now() + Math.max(sourceTimeoutMs * 2, 25000),
     bucket: BUCKET,
   };
 }
@@ -88,6 +96,9 @@ function transport(config, headers) {
   return {
     headers: headers || {},
     deadline: config.deadline,
+    timeoutMs: config.timeoutMs || DEFAULT_SOURCE_TIMEOUT_MS,
+    maxRetries: config.maxRetries === undefined ? 1 : config.maxRetries,
+    signal: config.signal || null,
     bucket: config.bucket,
   };
 }
@@ -332,6 +343,31 @@ function hasPhiInQuery(q) {
   return false;
 }
 
+async function runSourceWithTimeout(name, fn, baseConfig) {
+  const timeoutMs = baseConfig.sourceTimeoutMs || DEFAULT_SOURCE_TIMEOUT_MS;
+  const controller = typeof AbortController === "function" ? new AbortController() : null;
+  let timer = null;
+  const srcConfig = Object.assign({}, baseConfig, {
+    timeoutMs,
+    deadline: Math.min(baseConfig.deadline || Infinity, Date.now() + timeoutMs),
+    signal: controller ? controller.signal : null,
+  });
+  const timeoutP = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      if (controller) try { controller.abort(); } catch (e) {}
+      reject(new ConnectorError("search_failed", (SOURCE_LABELS[name] || name) + " timed out"));
+    }, timeoutMs);
+  });
+  try {
+    const items = await Promise.race([fn(srcConfig), timeoutP]);
+    return { source: name, ok: true, items: Array.isArray(items) ? items : [] };
+  } catch (e) {
+    return { source: name, ok: false, error: (e && e.message) || String(e || "failed") };
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 export async function findStudies(ctx, projectId, body) {
   const { env, db, uid, requestId, api } = ctx;
   const { json, err, projectGate, gateErr } = api;
@@ -347,21 +383,33 @@ export async function findStudies(ctx, projectId, body) {
   if (!env.RESEARCH_CONTACT_EMAIL)
     return err(503, "search_unconfigured", "Research database contact is not configured", requestId);
   const config = configOf(env);
-  const settled = await Promise.allSettled([
-    pubmedLimited(q, limit, config),
-    epmcLimited(q, limit, config),
-    crossrefLimited(q, limit, config),
+  const outcomes = await Promise.all([
+    runSourceWithTimeout("pubmed", (c) => pubmedLimited(q, limit, c), config),
+    runSourceWithTimeout("europe_pmc", (c) => epmcLimited(q, limit, c), config),
+    runSourceWithTimeout("crossref", (c) => crossrefLimited(q, limit, c), config),
   ]);
   const records = [];
-  let failures = 0;
-  for (const s of settled) {
-    if (s.status === "fulfilled") records.push(...s.value);
-    else failures++;
+  const failedSources = [];
+  const okSources = [];
+  for (const o of outcomes) {
+    if (o.ok) {
+      okSources.push(SOURCE_LABELS[o.source] || o.source);
+      records.push(...o.items);
+    } else {
+      failedSources.push(o.source);
+    }
   }
-  if (failures === settled.length)
+  if (!okSources.length)
     return err(502, "search_failed", "The literature databases could not be searched. Try again.", requestId);
   const merged = mergeDedup(records).slice(0, limit);
-  return json({ results: merged.map(publicResult) }, 200, { "x-request-id": requestId });
+  const out = { results: merged.map(publicResult) };
+  if (failedSources.length) {
+    const failedNames = failedSources.map((s) => SOURCE_LABELS[s] || s);
+    out.partial = true;
+    out.failedSources = failedSources;
+    out.notice = "Partial results from " + okSources.join(" and ") + " (" + failedNames.join(", ") + " timed out or could not be reached).";
+  }
+  return json(out, 200, { "x-request-id": requestId });
 }
 
 /* ---- auto-add ----------------------------------------------------------- */

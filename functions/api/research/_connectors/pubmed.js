@@ -53,6 +53,9 @@ function optsOf(opts = {}) {
     random: opts.random,
     now: opts.now || Date.now,
     deadline: opts.deadline === undefined ? Infinity : opts.deadline,
+    timeoutMs: opts.timeoutMs === undefined ? 30000 : opts.timeoutMs,
+    maxRetries: opts.maxRetries === undefined ? 5 : opts.maxRetries,
+    signal: opts.signal || null,
     bucket: opts.bucket || selectBucket(apiKey),
   };
 }
@@ -68,7 +71,7 @@ function commonParams(o) {
 function transport(o) {
   return {
     fetchImpl: o.fetchImpl, sleep: o.sleep, random: o.random, now: o.now,
-    deadline: o.deadline, bucket: o.bucket,
+    deadline: o.deadline, timeoutMs: o.timeoutMs, maxRetries: o.maxRetries, signal: o.signal, bucket: o.bucket,
   };
 }
 

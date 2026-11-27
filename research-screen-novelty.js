@@ -74,7 +74,7 @@
       pid: pid, container: null,
       cf: null, patientNote: "", query: "",
       results: null, searching: false, searched: false,
-      error: null, added: {}, expanded: {}
+      error: null, addError: null, adding: {}, added: {}, expanded: {}
     };
   }
 
@@ -125,6 +125,7 @@
     if (item.journal) meta.push(item.journal);
     if (item.year) meta.push(String(item.year));
     var added = !!st.added[k];
+    var adding = !!(st.adding && st.adding[k]);
     var expanded = !!st.expanded[k];
     var h = '<div class="rmd-nv-result">';
     h += '<div class="rmd-nv-title">' + esc(item.title || "Untitled paper") + '</div>';
@@ -139,7 +140,7 @@
     if (added) {
       h += '<span class="rmd-nv-added" role="status">Added to your references</span>';
     } else {
-      h += '<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-nv-add="' + esc(k) + '">Add to my references</button>';
+      h += '<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-nv-add="' + esc(k) + '"' + (adding ? " disabled" : "") + '>' + (adding ? "Adding..." : "Add to my references") + '</button>';
     }
     h += '</div></div>';
     return h;
@@ -184,6 +185,9 @@
     } else if (st.searched && st.results) {
       h.push('<div class="rmd-card">');
       h.push('<h3 role="status">We found ' + st.results.length + ' similar published cases</h3>');
+      if (st.addError) {
+        h.push(SMD.p2 ? SMD.p2.errHtml(st.addError, null) : '<div class="rmd-banner rmd-banner-error" role="alert">' + esc(st.addError.message || "Could not add reference.") + '</div>');
+      }
       if (!st.results.length) {
         h.push('<p class="rmd-muted">Nothing close came back. That supports the novelty of your case. Still read the journal\u2019s scope before you submit.</p>');
       } else {
@@ -286,13 +290,13 @@
     for (i = 0; st.results && i < st.results.length; i++) {
       if (keyOf(st.results[i]) === k) { item = st.results[i]; break; }
     }
-    if (!item || st.added[k]) return;
-    if (!SMD.store || !SMD.store.createStudy) {
-      st.error = { message: "The study store is not available on this device yet." };
-      draw();
-      return;
-    }
-    try {
+    if (!item || st.added[k] || (st.adding && st.adding[k])) return;
+    st.addError = null;
+    var apiProj = (SMD.store && SMD.store.getProject) ? SMD.store.getProject(st.pid) : null;
+    var apiPid = (apiProj && apiProj.serverId) || st.pid;
+    var isLocalOnly = !!(apiProj && !apiProj.serverId && (apiProj.practice || apiProj.tutorial || String(apiProj.id || "").indexOf("loc_") === 0));
+    function saveLocalRef() {
+      if (!SMD.store || !SMD.store.createStudy) return;
       SMD.store.createStudy(st.pid, {
         label: trim(item.title || "Published case").slice(0, 120) || "Published case",
         measure: "RR",
@@ -304,10 +308,39 @@
         },
         verified: false
       });
+    }
+    if (SMD.api && typeof SMD.api.request === "function" && !isLocalOnly && apiPid) {
+      st.adding[k] = true;
+      draw();
+      SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPid) + "/records", {
+        source: item.source || "",
+        pmid: item.pmid || "",
+        doi: item.doi || "",
+        title: trim(item.title || "Published case") || "Published case",
+        authors: Array.isArray(item.authors) ? item.authors : [],
+        year: item.year,
+        journal: item.journal || "",
+        abstract: trim(item.abstract || "").slice(0, 4000)
+      }).then(function () {
+        delete st.adding[k];
+        try { saveLocalRef(); } catch (e) {}
+        st.added[k] = true;
+        draw();
+      }).catch(function (err) {
+        delete st.adding[k];
+        st.addError = (SMD.p2 && SMD.p2.friendlyError)
+          ? SMD.p2.friendlyError(err)
+          : { message: (err && err.message) || "Could not add this reference. Try again." };
+        draw();
+      });
+      return;
+    }
+    try {
+      saveLocalRef();
       st.added[k] = true;
       draw();
     } catch (err) {
-      st.error = { message: "Could not add this reference on this phone. Try again." };
+      st.addError = { message: "Could not add this reference on this phone. Try again." };
       draw();
     }
   }

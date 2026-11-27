@@ -195,9 +195,26 @@ def check_claim_links(sections) -> list:
     return violations
 
 
+_FIELD_ALIASES = {
+    "estimate": ("effect", "pooled.effect"),
+    "effect": ("estimate", "pooled.effect"),
+    "ciLower": ("ci_lower", "pooled.ciLower"),
+    "ci_lower": ("ciLower", "pooled.ciLower"),
+    "ciUpper": ("ci_upper", "pooled.ciUpper"),
+    "ci_upper": ("ciUpper", "pooled.ciUpper"),
+    "p": ("pooled.p",),
+}
+
+
 def _run_field(token_table, run_id, field):
     entry = token_table.get(f"{run_id}.{field}")
-    return entry["value"] if entry else None
+    if entry:
+        return entry["value"]
+    for alt in _FIELD_ALIASES.get(field, ()):
+        e2 = token_table.get(f"{run_id}.{alt}")
+        if e2:
+            return e2["value"]
+    return None
 
 
 def check_direction(sections, token_table) -> list:

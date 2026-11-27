@@ -153,6 +153,8 @@
     ciUpper: formatEffect,
     ci_lower: formatEffect,
     ci_upper: formatEffect,
+    lower: formatEffect,
+    upper: formatEffect,
     tau2: formatEffect,
     tau: formatEffect,
     se: formatEffect,
@@ -283,6 +285,8 @@
     phoneTab: "sections", /* "sections" | "detail" | "approve" */
     lastRange: null,
     ai: null,
+    aiDraftedSections: {},
+    draftSyncPromise: null,
     polishBusy: false,
     polishError: null,
     polishDraft: null,
@@ -1150,9 +1154,20 @@
     Promise.all([pMan, pVers]).then(function (res) {
       if (mySeq !== seq) return;
       st.loading = false;
-      if (res[0] && res[0].manuscript) manuscriptMissing[mpid] = false;
-      st.manuscript = (res[0] && res[0].manuscript) || localManuscript(st.projectId) || defaultManuscript(st.projectId);
-      st.versions = (res[1] && res[1].versions) || defaultVersions(proj);
+      var manRes = res && res[0];
+      var versRes = res && res[1];
+      if (manRes && manRes.manuscript) {
+        manuscriptMissing[mpid] = false;
+        st.manuscript = manRes.manuscript;
+        if (manRes.manuscript.ai && Array.isArray(manRes.manuscript.ai.draftedSectionIds)) {
+          for (var aiIdx = 0; aiIdx < manRes.manuscript.ai.draftedSectionIds.length; aiIdx++) {
+            st.aiDraftedSections[manRes.manuscript.ai.draftedSectionIds[aiIdx]] = true;
+          }
+        }
+      } else {
+        st.manuscript = localManuscript(st.projectId) || defaultManuscript(st.projectId);
+      }
+      st.versions = (versRes && versRes.versions) || defaultVersions(proj);
       if (!params || !params.sectionId) {
         var foundSel = false;
         var mSecs = (st.manuscript && st.manuscript.sections) || [];
@@ -1536,6 +1551,7 @@
           var secMap = resp.data.draft.sections;
           var fullDraftText = "";
           var draftedHeadings = [];
+          var draftedIds = [];
 
           if (!st.manuscript) st.manuscript = defaultManuscript(pid);
           if (!st.manuscript.sections) st.manuscript.sections = [];
@@ -1550,13 +1566,14 @@
             fullDraftText += " " + textVal;
 
             var existingSec = getSection(key);
-            var markPrefix = "Drafted by MaiK, check it:\n";
+            st.aiDraftedSections[key] = true;
+            draftedIds.push(key);
             if (existingSec) {
               draftedHeadings.push(existingSec.heading || key);
               if (existingSec.text && existingSec.text.trim()) {
-                existingSec.text = existingSec.text + "\n\n" + markPrefix + textVal;
+                existingSec.text = existingSec.text + "\n\n" + textVal;
               } else {
-                existingSec.text = markPrefix + textVal;
+                existingSec.text = textVal;
               }
             } else {
               var heading = key === "casePresentation" ? "Case Presentation" :
@@ -1567,7 +1584,7 @@
               st.manuscript.sections.push({
                 id: key,
                 heading: heading,
-                text: markPrefix + textVal
+                text: textVal
               });
             }
           }
@@ -1578,7 +1595,7 @@
             st.caseReportMissingNumbers = [];
           }
 
-          recordAiProvenance(resp.data.model, draftedHeadings);
+          recordAiProvenance(resp.data.model, draftedHeadings, draftedIds);
           saveLocalManuscript(localPid || st.projectId || pid, st.manuscript);
           if (getSection("casePresentation")) st.selectedSectionId = "casePresentation";
           st.saveNotice = "Drafted by MaiK. Review and verify every clinical detail before approving.";
@@ -1620,6 +1637,14 @@
     }
   }
 
+  function isSectionAiDrafted(secObj) {
+    if (!secObj) return false;
+    if (st.aiDraftedSections && st.aiDraftedSections[secObj.id]) return true;
+    var ai = st.manuscript && st.manuscript.ai;
+    if (ai && Array.isArray(ai.draftedSectionIds) && ai.draftedSectionIds.indexOf(secObj.id) >= 0) return true;
+    return !!(secObj.text && secObj.text.indexOf("Drafted by MaiK") >= 0);
+  }
+
   /* Ask MaiK to draft a manuscript for review / primary projects via the
    * synchronous /ai-draft endpoint so it never triggers an unimplemented /jobs kind. */
   function startManuscriptDraft() {
@@ -1627,12 +1652,31 @@
     var pid = apiProjectId();
     var store = SMD.store;
     var proj = store ? store.getActiveProject() : null;
-    var man = st.manuscript;
+    var man = st.manuscript || localManuscript(st.projectId);
+    var savedResults = "";
+    var secs = (man && man.sections) || [];
+    for (var si = 0; si < secs.length; si++) {
+      if (secs[si] && secs[si].id === "results" && secs[si].text && secs[si].text.trim()) {
+        savedResults = secs[si].text.trim();
+        break;
+      }
+    }
+    if (!savedResults) {
+      var locMan = localManuscript(st.projectId);
+      var locSecs = (locMan && locMan.sections) || [];
+      for (var lsi = 0; lsi < locSecs.length; lsi++) {
+        if (locSecs[lsi] && locSecs[lsi].id === "results" && locSecs[lsi].text && locSecs[lsi].text.trim()) {
+          savedResults = locSecs[lsi].text.trim();
+          break;
+        }
+      }
+    }
     var input = {
       title: (man && man.title) || (proj && proj.title) || "",
       studyType: (proj && (proj.studyType || proj.study_type)) || "",
       researchQuestion: (proj && proj.researchQuestion) || ""
     };
+    if (savedResults) input.resultsText = savedResults.slice(0, 6000);
     var targetJournal = proj && (proj.targetJournal || proj.journal);
     if (targetJournal) input.journalId = targetJournal;
     return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/ai-draft", {
@@ -1667,9 +1711,14 @@
         list.push({ id: keys[k], heading: keys[k].charAt(0).toUpperCase() + keys[k].slice(1), text: secs[keys[k]] });
       }
     }
+    var draftedHeadings = [];
+    var draftedIds = [];
     for (var i = 0; i < list.length; i++) {
       var item = list[i];
       if (!item || !item.id || typeof item.text !== "string") continue;
+      st.aiDraftedSections[item.id] = true;
+      draftedIds.push(item.id);
+      draftedHeadings.push(item.heading || item.id);
       var existing = null;
       for (var j = 0; j < st.manuscript.sections.length; j++) {
         if (st.manuscript.sections[j].id === item.id) { existing = st.manuscript.sections[j]; break; }
@@ -1686,7 +1735,38 @@
         });
       }
     }
+    recordAiProvenance(res && res.model, draftedHeadings, draftedIds);
     saveLocalManuscript(st.projectId, st.manuscript);
+    manuscriptMissing[apiProjectId()] = false;
+    var store = SMD.store;
+    var proj = store ? store.getProject(st.projectId) : null;
+    if (SMD.api && (!proj || proj.serverId || !proj.practice) && draftedIds.length) {
+      var apid = encodeURIComponent(apiProjectId());
+      var ver = (st.manuscript && st.manuscript.version) || 1;
+      var chain = Promise.resolve();
+      for (var si = 0; si < list.length; si++) {
+        (function (secItem) {
+          if (!secItem || !secItem.id || typeof secItem.text !== "string") return;
+          chain = chain.then(function () {
+            return SMD.api.request("PUT", "/v1/projects/" + apid + "/manuscript/sections/" + encodeURIComponent(secItem.id), {
+              version: ver,
+              heading: secItem.heading || secItem.id,
+              text: secItem.text
+            }).then(function (putRes) {
+              if (putRes && putRes.version) {
+                ver = putRes.version;
+                if (st.manuscript) st.manuscript.version = putRes.version;
+              }
+            });
+          });
+        })(list[si]);
+      }
+      st.draftSyncPromise = chain.then(function () {
+        st.draftSyncPromise = null;
+      }, function () {
+        st.draftSyncPromise = null;
+      });
+    }
     st.saveNotice = "Drafted by MaiK. Review each section and save when ready.";
     return ["manuscript"];
   }
@@ -1743,20 +1823,43 @@
         v = pooled.ciLower; return v == null ? undefined : (ratio ? Math.exp(v) : v);
       case "ciUpper":
         v = pooled.ciUpper; return v == null ? undefined : (ratio ? Math.exp(v) : v);
-      case "p": case "pValue": case "p_value": case "pval":
+      case "pooled.effect":
+        v = pooled.effect; return v == null ? undefined : (ratio ? Math.exp(v) : v);
+      case "pooled.ciLower":
+        v = pooled.ciLower; return v == null ? undefined : (ratio ? Math.exp(v) : v);
+      case "pooled.ciUpper":
+        v = pooled.ciUpper; return v == null ? undefined : (ratio ? Math.exp(v) : v);
+      case "pooled.p": case "p": case "pValue": case "p_value": case "pval":
+        if (pooled.p != null && isFinite(pooled.p)) return pooled.p;
         if (pooled.effect == null || !pooled.se) return undefined;
         return 2 * (1 - normCdf(Math.abs(pooled.effect / pooled.se)));
-      case "se": case "se_yi":
+      case "pooled.se": case "se": case "se_yi":
         return pooled.se == null ? undefined : pooled.se;
-      case "i2": case "i_squared":
+      case "wald.effect":
+        v = res.wald && res.wald.effect; return v == null ? undefined : (ratio ? Math.exp(v) : v);
+      case "wald.ciLower":
+        v = res.wald && res.wald.ciLower; return v == null ? undefined : (ratio ? Math.exp(v) : v);
+      case "wald.ciUpper":
+        v = res.wald && res.wald.ciUpper; return v == null ? undefined : (ratio ? Math.exp(v) : v);
+      case "hksj.effect":
+        v = res.hksj && res.hksj.effect; return v == null ? undefined : (ratio ? Math.exp(v) : v);
+      case "hksj.ciLower":
+        v = res.hksj && res.hksj.ciLower; return v == null ? undefined : (ratio ? Math.exp(v) : v);
+      case "hksj.ciUpper":
+        v = res.hksj && res.hksj.ciUpper; return v == null ? undefined : (ratio ? Math.exp(v) : v);
+      case "predictionInterval.lower":
+        v = res.predictionInterval && res.predictionInterval.lower; return v == null ? undefined : (ratio ? Math.exp(v) : v);
+      case "predictionInterval.upper":
+        v = res.predictionInterval && res.predictionInterval.upper; return v == null ? undefined : (ratio ? Math.exp(v) : v);
+      case "heterogeneity.i2": case "i2": case "i_squared":
         return het.i2 == null ? undefined : het.i2;
-      case "tau2":
+      case "heterogeneity.tau2": case "tau2":
         return het.tau2 == null ? undefined : het.tau2;
       case "tau":
         return het.tau2 == null ? undefined : Math.sqrt(het.tau2);
-      case "q":
+      case "heterogeneity.q": case "q":
         return het.q == null ? undefined : het.q;
-      case "df":
+      case "heterogeneity.df": case "df":
         return het.df == null ? undefined : het.df;
       case "k": case "studies":
         return res.weights ? res.weights.length : undefined;
@@ -1823,10 +1926,13 @@
 
   /* Section text with every token replaced by its resolved value. */
   function plainText(text) {
-    return String(text || "").replace(TOKEN_RE, function (m, runId, field) {
+    var out = String(text || "").replace(TOKEN_RE, function (m, runId, field) {
       var r = resolveToken(runId, field);
       return r.resolved ? r.formatted : "[result pending]";
     });
+    out = out.replace(/(\d+(?:\.\d+)?)%{2,}/g, "$1%");
+    out = out.replace(/\b([pP])\s*=\s*([<>]\s*\.\d+)/g, "$1 $2");
+    return out;
   }
 
   function wordCount(text) {
@@ -2499,14 +2605,17 @@
 
   /* Records what AI did on this manuscript so the export disclosure can name
    * the model and the sections it drafted. */
-  function recordAiProvenance(model, draftedSections) {
+  function recordAiProvenance(model, draftedSections, draftedSectionIds) {
     if (!st.manuscript) st.manuscript = defaultManuscript(st.projectId);
     var prev = (st.manuscript.ai && typeof st.manuscript.ai === "object") ? st.manuscript.ai : {};
+    var prevIds = Array.isArray(prev.draftedSectionIds) ? prev.draftedSectionIds.slice(0, 40) : [];
+    var nextIds = Array.isArray(draftedSectionIds) ? draftedSectionIds.slice(0, 40) : prevIds;
     st.manuscript.ai = {
       model: String(model || prev.model || ""),
       draftedSections: Array.isArray(draftedSections)
         ? draftedSections.slice(0, 40)
-        : (prev.draftedSections || [])
+        : (prev.draftedSections || []),
+      draftedSectionIds: nextIds
     };
     return st.manuscript.ai;
   }
@@ -2575,12 +2684,14 @@
     render(container);
 
     var pid = encodeURIComponent(apiProjectId());
-    var payload = { version: st.manuscript ? st.manuscript.version : 1, format: "docx" };
 
     function showGates(failures) {
       st.exporting = false;
       st.gateFailures = failures;
-      st.exportNotice = "Fix the items below, then try again.";
+      var firstCopy = failures && failures.length ? gateCopy(failures[0]) : null;
+      st.exportNotice = firstCopy
+        ? ("Fix before download: " + firstCopy.label + " - " + firstCopy.message)
+        : "Fix the items below, then try again.";
       st.exportNoticeKind = "warn";
       render(container);
     }
@@ -2605,7 +2716,11 @@
     }
 
     if (SMD.api) {
-      SMD.api.request("POST", "/v1/projects/" + pid + "/manuscript/export", payload)
+      var waitSync = st.draftSyncPromise ? st.draftSyncPromise.catch(function () {}) : Promise.resolve();
+      waitSync.then(function () {
+        var payload = { version: st.manuscript ? st.manuscript.version : 1, format: "docx" };
+        return SMD.api.request("POST", "/v1/projects/" + pid + "/manuscript/export", payload);
+      })
         .then(function (res) {
           if (res && (res.gatesPassed === false || (res.gateFailures && res.gateFailures.length > 0))) {
             showGates(res.gateFailures || []);
@@ -2614,7 +2729,9 @@
           return deliverDocx();
         })
         .catch(function (err) {
-          var fails = (err && err.body && err.body.gateFailures) ||
+          var fails = (err && err.gateFailures) ||
+            (err && err.body && err.body.gateFailures) ||
+            (err && err.data && err.data.gateFailures) ||
             (err && err.current && err.current.gateFailures);
           if (fails && fails.length) {
             showGates(fails);
@@ -2622,7 +2739,12 @@
             /* F-12: case-report export needs the consent attestation first. */
             st.exporting = false;
             st.consentBlocked = true;
-            st.exportNotice = err.message || PUBLICATION_CONSENT_MSG;
+            st.exportNotice = "Confirm the patient's written consent first.";
+            st.exportNoticeKind = "warn";
+            render(container);
+          } else if (err && err.code === "gate_failed") {
+            st.exporting = false;
+            st.exportNotice = err.message || "Some sections need a fix before downloading. Check Results and citations, then try again.";
             st.exportNoticeKind = "warn";
             render(container);
           } else {
@@ -2870,8 +2992,8 @@
       h.push('        <span class="rmd-section-item-label">' + esc(item.label) + '</span>');
       h.push('        <span class="rmd-section-item-meta">' + words + ' words</span>');
       h.push('      </div>');
-      if (secObj && secObj.text && secObj.text.indexOf("Drafted by MaiK") >= 0) {
-        h.push('      <span class="rmd-drafted-by-maik" style="display:block; font-size:11px; color:var(--rmd-acc); margin-top:2px;">Drafted by MaiK, check it</span>');
+      if (isSectionAiDrafted(secObj)) {
+        h.push('      <span class="rmd-drafted-by-maik" data-rmd-drafted="maik" style="display:block; font-size:11px; color:var(--rmd-acc); margin-top:2px;">Drafted by MaiK, check it</span>');
       }
       h.push('      <span class="rmd-section-item-desc">' + esc(item.hint) + '</span>');
       h.push('    </button>');
@@ -3015,6 +3137,9 @@
       h.push('    <div>');
       h.push('      <h4 class="rmd-editor-title">' + esc(curSec ? curSec.heading : "Section") + '</h4>');
       h.push('      <span class="rmd-editor-sub">Numbers come straight from your analysis, so they are always correct.</span>');
+      if (isSectionAiDrafted(curSec)) {
+        h.push('      <div class="rmd-drafted-by-maik" data-rmd-drafted="maik" style="font-size:12px; color:var(--rmd-acc); margin-top:4px;">Drafted by MaiK, check it before exporting or approving.</div>');
+      }
       h.push('    </div>');
 
       if (!isLocked && !phone) {
@@ -3470,7 +3595,12 @@
       headingsMap[s.id] = s.heading || s.id;
       order.push(s.id);
     }
-    all[pid] = { sections: sectionsMap, headings: headingsMap, order: order };
+    all[pid] = {
+      sections: sectionsMap,
+      headings: headingsMap,
+      order: order,
+      draftedIds: Object.keys(st.aiDraftedSections || {})
+    };
     try {
       localStorage.setItem(LOCAL_DRAFT_KEY, JSON.stringify(all));
     } catch (e) {}
@@ -3479,6 +3609,11 @@
   function localManuscript(pid) {
     var d = readLocalDrafts()[pid];
     if (!d || !d.sections) return null;
+    if (Array.isArray(d.draftedIds)) {
+      for (var di = 0; di < d.draftedIds.length; di++) {
+        st.aiDraftedSections[d.draftedIds[di]] = true;
+      }
+    }
     var man = defaultManuscript(pid);
     var seen = {};
     for (var i = 0; i < man.sections.length; i++) {
@@ -3521,8 +3656,10 @@
     var proj = store && store.getProject ? store.getProject(pid) : null;
     if (!SMD.api || !proj || !proj.serverId) return appendLocalResults(pid, text);
     var base = "/v1/projects/" + encodeURIComponent(proj.serverId);
-    return SMD.api.request("GET", base + "/manuscript").then(function (res) {
-      var man = (res && res.manuscript) || defaultManuscript(pid);
+    manuscriptMissing[pid] = false;
+    manuscriptMissing[proj.serverId] = false;
+    function saveWithBase(manObj) {
+      var man = manObj || defaultManuscript(pid);
       var sec = null;
       for (var i = 0; i < man.sections.length; i++) {
         if (man.sections[i].id === "results" || /^results$/i.test(man.sections[i].heading || "")) {
@@ -3536,15 +3673,22 @@
       }
       var merged = (sec.text ? sec.text + "\n\n" : "") + text;
       return SMD.api.request("PUT", base + "/manuscript/sections/" + encodeURIComponent(sec.id), {
-        version: man.version,
+        version: man.version || 1,
         heading: sec.heading,
         text: merged
       }).then(function (r) {
+        appendLocalResults(pid, text);
         return r || { ok: true };
       }, function () {
         return appendLocalResults(pid, text);
       });
-    }, function () {
+    }
+    return SMD.api.request("GET", base + "/manuscript").then(function (res) {
+      return saveWithBase(res && res.manuscript);
+    }, function (err) {
+      if (err && (err.status === 404 || err.code === "manuscript_not_found" || err.code === "not_found")) {
+        return saveWithBase(null);
+      }
       return appendLocalResults(pid, text);
     });
   }

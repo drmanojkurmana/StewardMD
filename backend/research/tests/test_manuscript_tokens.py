@@ -174,3 +174,22 @@ def test_render_tokens_strict_rejects_retired_colon_form(sample_runs):
 
 def test_render_tokens_preview_leaves_colon_form(sample_runs):
     assert render_tokens("{{run:r1:estimate}}", sample_runs, strict=False) == "{{run:r1:estimate}}"
+
+
+def test_render_tokens_nested_log_ratio_and_aliases():
+    import math
+    runs = [{
+        "runId": "r1",
+        "measure": "RR",
+        "method": "random",
+        "result": {
+            "pooled": {"effect": math.log(0.49), "ciLower": math.log(0.34), "ciUpper": math.log(0.70), "p": 0.0001},
+            "heterogeneity": {"i2": 92.2, "p": 0.0001},
+        },
+    }]
+    rendered = render_tokens("RR {{run:r1.estimate}} (95% CI {{run:r1.ciLower}} to {{run:r1.ciUpper}}, p={{run:r1.p}}, I2 {{run:r1.i2}}%, Q p={{run:r1.heterogeneity.p}})", runs, strict=True)
+    assert "0.49" in rendered
+    assert "0.34 to 0.70" in rendered
+    assert "p < .001" in rendered
+    assert "Q p < .001" in rendered
+    assert "92.2%%" not in rendered

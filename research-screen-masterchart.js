@@ -41,7 +41,7 @@
       columns: [], rows: [], types: {}, infer: {}, phiCols: [],
       analysis: "", showMean: false, matched: false, running: false,
       ctri: null, iecStatus: null, journey: [],
-      isSeries: false, isRct: false, isStudy: false, isCohort: false,
+      isSeries: false, isRct: false, isStudy: false, isCohort: false, isCaseControl: false,
       form: {
         group: "", outcomes: [], variables: [], outcome: "", predictors: [], robustHc3: false, a: "", b: "",
         time: "", event: "", sgroup: "", cox: [],
@@ -77,9 +77,18 @@
     var t = ((proj && proj.studyType) || "").toLowerCase();
     mc.journey = journey || [];
     mc.isSeries = mc.journey.indexOf("casefile") >= 0 && mc.journey.indexOf("masterchart") >= 0;
-    mc.isRct = mc.journey.indexOf("ctri") >= 0 || mc.journey.indexOf("randomise") >= 0;
+    mc.isCaseControl = /case[-_\s]?control/.test(t);
+    mc.isRct = !mc.isCaseControl && (mc.journey.indexOf("ctri") >= 0 || mc.journey.indexOf("randomise") >= 0 || /\brct\b|randomi[sz]ed|clinical.?trial/.test(t));
     mc.isStudy = mc.journey.indexOf("plan") >= 0;
     mc.isCohort = /cohort|survival|time to event/.test(t);
+  }
+
+  function currentStudyDesign() {
+    updateFlags();
+    if (mc.isCaseControl) return "case-control";
+    if (mc.isRct) return "rct";
+    if (mc.isCohort) return "cohort";
+    return "";
   }
 
   function fmt(x, d) {
@@ -431,9 +440,9 @@
 
   /* ---------- Analysis ---------- */
 
-  function sentenceFor(result, outcome, groupLabels) {
+  function sentenceFor(result, outcome, groupLabels, studyType) {
     try {
-      return stats().resultsSentence(result, { outcome: outcome, groupLabels: groupLabels || [] }) || "";
+      return stats().resultsSentence(result, { outcome: outcome, groupLabels: groupLabels || [], studyType: studyType || "" }) || "";
     } catch (e) { return ""; }
   }
 
@@ -771,14 +780,17 @@
         var items = [];
         var warnings = [];
         var sentences = [];
+        var studyDesign = currentStudyDesign();
         for (var i = 0; i < f.outcomes.length; i++) {
           var name = f.outcomes[i];
           try {
-            var r = S.compare(colValues(name), colValues(f.group), { outcomeType: mc.types[name], paired: false });
-            var sentence = sentenceFor(r, name, groupLevels(f.group));
+            var r = S.compare(colValues(name), colValues(f.group), {
+              outcomeType: mc.types[name], paired: false, studyType: studyDesign
+            });
+            var sentence = sentenceFor(r, name, groupLevels(f.group), studyDesign);
             if (sentence) sentences.push(sentence);
             if (r.dropped > 0) warnings.push(name + ": " + r.dropped + " rows were left out (missing values).");
-            items.push({ name: name, result: r, sentence: sentence });
+            items.push({ name: name, result: r, sentence: sentence, studyDesign: studyDesign });
           } catch (e) {
             items.push({ name: name, error: calm(e && e.message) });
             warnings.push(name + ": " + calm(e && e.message));
@@ -1267,7 +1279,7 @@
     return row.type === "numeric" ? row.variable + ", " + row.label : row.variable + ": " + row.label;
   }
 
-  function effectGloss(effect, p, groupLabel) {
+  function effectGloss(effect, p, groupLabel, outcomeName, studyDesign) {
     if (!effect || effect.estimate == null) return "";
     var m = effect.measure;
     if (m !== "MD" && m !== "OR" && m !== "RR" && m !== "HR" && m !== "SMD") return "";
@@ -1281,6 +1293,8 @@
       };
       if (p != null && isFinite(p) && p >= 0 && p <= 1) opts.p = p;
       if (groupLabel) opts.group = groupLabel;
+      if (outcomeName) opts.outcome = outcomeName;
+      if (studyDesign) opts.studyType = studyDesign;
       return EX.effect(opts);
     } catch (e) { return ""; }
   }
@@ -1356,6 +1370,10 @@
       if (e && e.estimate != null && isFinite(e.estimate)) {
         line += "; " + e.measure + " " + fmt(e.estimate);
         if (isFinite(e.ciLower) && isFinite(e.ciUpper)) line += " (95% CI " + fmt(e.ciLower) + " to " + fmt(e.ciUpper) + ")";
+        if (e.measure === "RR" && e.or != null && isFinite(e.or)) {
+          line += "; secondary OR " + fmt(e.or);
+          if (isFinite(e.orCiLower) && isFinite(e.orCiUpper)) line += " (95% CI " + fmt(e.orCiLower) + " to " + fmt(e.orCiUpper) + ")";
+        }
       }
       lines.push(line);
     }
@@ -1468,7 +1486,7 @@
     var lines = [];
     var i;
     if (r.kind === "compare" || r.kind === "related") {
-      lines.push(["Outcome", "Test", "Statistic", "Value", "df", "p", "Effect", "Estimate", "CI lower", "CI upper", "Rows dropped"]);
+      lines.push(["Outcome", "Test", "Statistic", "Value", "df", "p", "Effect", "Estimate", "CI lower", "CI upper", "Secondary OR", "Secondary OR CI lower", "Secondary OR CI upper", "Rows dropped"]);
       for (i = 0; i < r.items.length; i++) {
         var it = r.items[i];
         if (!it.result) continue;
@@ -1477,7 +1495,11 @@
         lines.push([it.name, res.label, res.statisticName, fmt(res.statistic, 3),
           res.df == null ? "" : res.df, pStr(res.p), e.measure || "",
           e.estimate == null ? "" : fmt(e.estimate), e.ciLower == null ? "" : fmt(e.ciLower),
-          e.ciUpper == null ? "" : fmt(e.ciUpper), res.dropped || 0]);
+          e.ciUpper == null ? "" : fmt(e.ciUpper),
+          e.measure === "RR" && e.or != null ? fmt(e.or) : "",
+          e.measure === "RR" && e.orCiLower != null ? fmt(e.orCiLower) : "",
+          e.measure === "RR" && e.orCiUpper != null ? fmt(e.orCiUpper) : "",
+          res.dropped || 0]);
       }
     } else if (r.kind === "table1") {
       var head = ["Variable", "Overall"];
@@ -1857,8 +1879,16 @@
     } else {
       /* the effect is group 1 minus (or over) group 2, so the plain sentence names group 1, e.g. "Drug A" */
       var g1 = r.byGroup && r.byGroup[0] && r.byGroup[0].group;
-      var gloss = effectGloss(r.effect, r.p, g1 ? String(g1) : groupLabel);
+      var design = it.studyDesign || r.studyDesign || "";
+      var gloss = effectGloss(r.effect, r.p, g1 ? String(g1) : groupLabel, it.name, design);
       if (gloss) h += '<p class="rmd-mc-gloss">' + esc(gloss) + '</p>';
+      if (r.effect && r.effect.measure === "RR" && r.effect.or != null && isFinite(r.effect.or)) {
+        var secOr = "Secondary effect: Odds ratio (OR) " + fmt(r.effect.or);
+        if (isFinite(r.effect.orCiLower) && isFinite(r.effect.orCiUpper)) {
+          secOr += ", 95% CI " + fmt(r.effect.orCiLower) + " to " + fmt(r.effect.orCiUpper);
+        }
+        h += '<p class="rmd-mc-gloss">' + esc(secOr) + '</p>';
+      }
     }
     var pg = pGloss(r.p);
     if (pg) h += '<p class="rmd-mc-gloss">' + esc(pg) + '</p>';
