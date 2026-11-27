@@ -37,6 +37,7 @@ done
 [ -f research-ondevice-draft.js ] && cp research-ondevice-draft.js "$WWW/"
 [ -f research-stats-worker.js ] && cp research-stats-worker.js "$WWW/"
 [ -f research-ondevice-stats.js ] && cp research-ondevice-stats.js "$WWW/"
+[ -f research-roc-view.js ] && cp research-roc-view.js "$WWW/"
 [ -f research-statfile.js ] && cp research-statfile.js "$WWW/"
 
 # ── 2a. Root ES modules. prescription.js dynamic-imports /rx-build.mjs at runtime, so the native
