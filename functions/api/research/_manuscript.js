@@ -171,9 +171,12 @@ function runIdsOf(sections, table) {
 function maskTokens(text) {
   return text.replace(new RegExp(TOKEN_RE.source, "g"), (s) => " ".repeat(s.length));
 }
+/* Draft text is converted from LaTeX ("Table 1", numbered lists); those numbers are labels, not results. */
+const TABLE_FIGURE_RE = /\b(?:Table|Figure|Fig\.|Supplementary Table|eTable|eFigure)\s+\d+[A-Za-z]?\b/g;
+const LIST_NUMBER_RE = /(?:^|\n)\s*\d+\.\s/g;
 function allowedNumberSpans(text) {
   const spans = [];
-  for (const re of [REVIEWER_RE, THRESHOLD_RE]) {
+  for (const re of [REVIEWER_RE, THRESHOLD_RE, TABLE_FIGURE_RE, LIST_NUMBER_RE]) {
     re.lastIndex = 0;
     let m;
     while ((m = re.exec(text)) !== null) {

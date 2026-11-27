@@ -338,3 +338,19 @@ def test_hard_gate_blocks_export_with_violation_list(tmp_path, valid_runs, valid
         export(manuscript, valid_runs, valid_references, out_file)
     assert any(v["gate"] == "untokenised_number" for v in exc.value.violations)
     assert not out_file.exists()  # nothing written on a gate failure
+
+
+def test_subsections_stay_under_their_parent_in_docx(tmp_path, valid_manuscript, valid_runs, valid_references):
+    # Live paper draft 2026-11-27: subsections were exported last, alphabetically, after Discussion.
+    ms = dict(valid_manuscript)
+    secs = list(ms["sections"])
+    methods_at = next(i for i, s in enumerate(secs) if s["id"] == "methods")
+    secs.insert(methods_at + 1, {"id": "statistical-analysis", "heading": "Statistical analysis", "level": 2,
+                                 "text": "Random-effects pooling was used."})
+    ms["sections"] = secs
+    out = export(ms, valid_runs, valid_references, tmp_path / "order.docx")
+    paras = [p.text for p in docx.Document(str(out)).paragraphs]
+    i_methods = next(i for i, t in enumerate(paras) if t.strip() == "Methods")
+    i_stats = next(i for i, t in enumerate(paras) if t.strip() == "Statistical analysis")
+    i_results = next(i for i, t in enumerate(paras) if t.strip() == "Results")
+    assert i_methods < i_stats < i_results
