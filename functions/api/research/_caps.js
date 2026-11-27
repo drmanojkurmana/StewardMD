@@ -74,7 +74,7 @@ export async function checkPdfJobCaps(db, projectId, uid, addJobs, nowMs) {
  * not lose a slot to a gateway, callback or worker fault. Failures caused by the doctor's data (phi_blocked,
  * invalid_*) and AI-quality stops (gate_failed, ceiling_*) still count: those spent AI calls. */
 const PO_FREE_FAILURE_SQL =
-  "NOT (status='failed' AND (error_code LIKE 'gateway%' OR error_code IN ('callback_unavailable','snapshot_invalid','manuscript_failed')))";
+  "NOT (status='failed' AND (error_code LIKE 'gateway%' OR error_code IN ('callback_unavailable','snapshot_invalid','manuscript_failed','job_lost')))";
 export async function checkPoJobCaps(db, projectId, uid, nowMs) {
   const dayStart = utcDayStart(nowMs);
   const p = await db.prepare(
