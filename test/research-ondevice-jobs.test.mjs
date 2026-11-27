@@ -63,9 +63,12 @@ function makeFakeClock(initial = 1000) {
   return clock;
 }
 
-async function flushMicrotasks(rounds = 8) {
+/* Drains every pending promise chain: one setImmediate turn runs only after
+ * the microtask queue is empty, so a few turns settle chains of any length
+ * (checkpoint reads and writes add several hops before each device try). */
+async function flushMicrotasks(rounds = 4) {
   for (let i = 0; i < rounds; i++) {
-    await Promise.resolve();
+    await new Promise((r) => setImmediate(r));
   }
 }
 
@@ -431,7 +434,7 @@ test("too-slow foreground timers with fake clock, background pause, and AI wait 
     appListener({ isActive: true }); // back in foreground with 60s left
     await clock.advance(59000); // still under 2 min active foreground (119s total)
     assert.equal(devCalls, 1);
-    await clock.advance(2000); // crosses 2 min active foreground -> try 1 times out
+    await clock.advance(1005); // crosses 2 min active foreground -> try 1 times out (retry wait of 10 ms not over yet)
     assert.equal(devCalls, 1);
     await clock.advance(10);
     assert.equal(devCalls, 2);
@@ -471,4 +474,28 @@ test("too-slow foreground timers with fake clock, background pause, and AI wait 
     assert.equal(res.source, "device");
     assert.deepEqual(res.result, { manuscript: "ok" });
   }
+});
+
+test("holdClock stops the too-slow clock while a background job is paused by the OS", async () => {
+  const cp = makeMemoryCp();
+  const clock = makeFakeClock(0);
+  let ctxRef = null;
+  let finish = null;
+  const p = JOBS.runWithFallback(
+    "pdf",
+    (ctx) => { ctxRef = ctx; return new Promise((r) => { finish = r; }); },
+    async () => assert.fail("held time must not count as slow"),
+    { checkpointStore: cp, jobKey: "pdf:hold", clock, appPlugin: { addListener: () => ({ remove() {} }) } }
+  );
+  await flushMicrotasks();
+  await clock.advance(20000); // 20 s of a 30 s page budget
+  ctxRef.holdClock(true);
+  await clock.advance(10 * 60 * 1000); // paused by the OS for 10 min
+  ctxRef.holdClock(false);
+  await clock.advance(9000); // 29 s counted in total
+  finish({ pages: [] });
+  const out = await p;
+  assert.equal(out.ok, true);
+  assert.equal(out.source, "device");
+  assert.equal(out.attempts, 1);
 });

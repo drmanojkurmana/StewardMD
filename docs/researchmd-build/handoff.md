@@ -1,3 +1,29 @@
+# Update from the cloud build thread, 27 Nov 2026
+
+The WIP commit was cherry-picked onto the current `origin/rmd-od-3-drafts` (94ff3a2d) as branch
+`rmd-od-4-fallback-limits-cc`; merge conflicts in llm.py, pipeline.py, seams.py and index.html kept both sides.
+Migrations renumbered: phase 3 job_steps is 0009, phase 4 cloud fallbacks is 0010.
+
+Fixed since the WIP:
+- Plan resolution: entitlement records store the Trainee plan as `student`, which normalizeTier rejected, so every user
+  resolved to Free. `_cloud_fallback.js` now maps it to `trainee` and reports it back as `student`.
+- Real bug in `convertJobToCloud` (`_jobs.js`): it wrote a `worker_id` column that does not exist and set NULL into the
+  NOT NULL `error_code`. Both fixed.
+- "Older clients get 402" was not a code bug: the test KV shim ignored `{type: "json"}`, so the wallet read as empty.
+  Jobs sent without `fallback` skip the allowance check entirely.
+- Cloud fallback API tests rebuilt against the real schema (approved IRB and consent evidence, real dataset keys and
+  envelopes, systematic-review project). 9/9 pass.
+- On-device runner (`research-ondevice-jobs.js`): the timers did use the fake clock; the tests counted a fixed number of
+  microtask turns, fewer than the checkpoint reads and writes need. Tests now drain with setImmediate turns. One real
+  ordering change: for stats, the ethics (IPD) gate now runs before the quota call, so it works offline. New `holdClock`
+  on the job context lets phase 5's native background job stop the too-slow clock while the OS has paused it. 8/8 pass.
+
+Still open:
+- Container-hours alerts (6 h, 100 h) are logged once per month per threshold and returned on the admin endpoints;
+  there is no push channel, so nobody is notified automatically.
+- backend/research pytest was not run here (httpx is not installed in the cloud container); research-ci runs it on the PR.
+- Nothing exercised on a device.
+
 # Phase 04 handoff (Mac session to cloud build thread), 27 Nov 2026 18:45 IST
 
 Branch `rmd-od-4-fallback-limits`, one WIP commit on top of the Mac session's local `rmd-od-3-drafts` (740df8b8c).

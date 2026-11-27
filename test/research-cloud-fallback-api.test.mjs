@@ -66,7 +66,7 @@ mock.module("../functions/api/billing/[[path]].js", {
 const { onRequest } = await import("../functions/api/research/[[path]].js");
 const { utcMonthRange } = await import("../functions/api/research/_cloud_fallback.js");
 const { CLOUD_FALLBACKS_PER_MONTH } = await import("../functions/api/research/_caps.js");
-const { expireLostJobs } = await import("../functions/api/research/_credits.js");
+const { expireLostJobs, LOST_JOB_MS } = await import("../functions/api/research/_credits.js");
 const SCHEMA = readFileSync(new URL("../functions/db/research_schema.sql", import.meta.url), "utf8");
 const SECRET = "test-cb-secret-p4";
 
@@ -119,8 +119,9 @@ function kvShim() {
   const m = new Map();
   return {
     _m: m,
-    get: async (k) => (m.has(k) ? m.get(k) : null),
+    get: async (k, type) => { if (!m.has(k)) return null; const v = m.get(k); return type === "json" ? JSON.parse(v) : v; },
     put: async (k, v) => { m.set(k, String(v)); },
+    delete: async (k) => { m.delete(k); },
   };
 }
 
@@ -129,6 +130,7 @@ function freshEnv({ queue = true, r2 = true } = {}) {
   D._db.exec(SCHEMA);
   const env = {
     RESEARCH_MODE: "pilot",
+    RESEARCH_PO_ENABLED: "1",
     RESEARCH_DB: D,
     RESEARCH_CONTACT_EMAIL: "support@example.com",
     RESEARCH_ADMIN_TOKEN: "admin-p4-tok",
@@ -194,37 +196,40 @@ async function sendCallback(env, jobId, payload) {
 }
 
 async function makeProject(env, token, title = "P4 Project") {
-  const r = await call(env, "POST", "v1/projects", token, { title });
+  const r = await call(env, "POST", "v1/projects", token, { title, studyType: "systematic_review", researchQuestion: "Does X reduce Y in adults?" });
   assert.equal(r.http, 201, JSON.stringify(r));
   return r.project;
 }
 
+/* Locked protocol + one analysis run: what a manuscript_draft job needs (same seed as research-po-device-api). */
 function seedManuscriptReady(env, pid, uid) {
   const now = Date.now();
   const db = env.RESEARCH_DB._db;
-  const protoId = "proto_" + pid;
   db.prepare(
-    "INSERT INTO research_protocols (id,project_id,version,status,title,study_type,pico_json,outcomes_json,eligibility_json,lock_hash,locked_at,created_by,created_ts) VALUES (?,?,1,'locked','Test Review','intervention','{}','[]','{}','h1',?,?,?)")
-    .run(protoId, pid, now, uid, now);
+    "INSERT INTO research_protocols (id,project_id,version,status,content_json,lock_hash,locked_at,created_by,created_ts) VALUES (?,?,1,'locked',?,?,?,?,?)")
+    .run("proto_" + pid, pid, JSON.stringify({ pico: { population: "adults", intervention: "X", comparison: "placebo", outcome: "Y" } }), "a".repeat(64), now, uid, now);
   db.prepare(
-    "INSERT INTO research_runs (id,project_id,outcome_name,measure,effect_model,k,pooled_estimate,ci_lower,ci_upper,p_value,i2,tau2,q_stat,result_json,manifest_json,created_by,created_ts) VALUES (?,?, 'Mortality','RR','RE',2,-0.5,-0.9,-0.1,0.01,0,0,0.2,'{}','{}',?,?)")
-    .run("run_" + pid, pid, uid, now);
+    "INSERT INTO research_runs (id,project_id,measure,model,result_json,engine,engine_version,created_by,created_ts) VALUES (?,?,'OR','random_dl',?,'research-engine','rmd1',?,?)")
+    .run("run_" + pid, pid, JSON.stringify({ estimate: 0.62, ciLower: 0.41, ciUpper: 0.93, p: 0.02, k: 12, i2: 35.2 }), uid, now);
 }
 
+/* IN config + owner-approved ethics and consent evidence + one dataset: what a stats_model job needs. */
 function seedIpdReady(env, pid, uid) {
   const now = Date.now();
   const db = env.RESEARCH_DB._db;
-  const evId = "ev_" + pid;
-  const dsId = "ds_" + pid;
+  const evId = "ev_" + pid, consentId = "evc_" + pid, dsId = "ds_" + pid;
   db.prepare(
-    "INSERT INTO research_ipd_evidence (id,project_id,kind,title,jurisdiction,r2_key,sha256,bytes,status,uploaded_by,uploaded_ts,decided_by,decided_ts) VALUES (?,?,'irb_approval','IRB-1','IN','k','a',100,'approved',?,?,?,?)")
-    .run(evId, pid, uid, now, uid, now);
+    "INSERT INTO research_ipd_config (project_id,data_region,jurisdictions_json,identifiability_tier,legal_basis_json,attestation_json,agreements_json,locked_ts,updated_by,updated_ts) VALUES (?,'IN','[\"IN\"]','coded_pseudonymised','{\"IN\":\"consent\"}','{\"responsibility\":true}','{}',?,?,?)")
+    .run(pid, now, uid, now);
+  for (const [id, kind] of [[evId, "irb_approval"], [consentId, "consent_basis"]]) {
+    db.prepare(
+      "INSERT INTO research_ipd_evidence (id,project_id,kind,jurisdiction,title,r2_key,sha256,bytes,status,uploaded_by,approved_by,approved_ts,created_ts) VALUES (?,?,?,'IN','Evidence','k','a',100,'approved',?,?,?,?)")
+      .run(id, pid, kind, uid, uid, now, now);
+  }
   db.prepare(
-    "INSERT INTO research_ipd_config (project_id,identifiability_tier,data_region,ethics_evidence_id,attested_by,attested_ts) VALUES (?,'deid','IN',?,?,?)")
-    .run(pid, evId, uid, now);
-  db.prepare(
-    "INSERT INTO research_ipd_datasets (id,project_id,version,r2_key,storage_key,sha256,bytes,row_count,columns_json,envelope_json,uploaded_by,uploaded_ts,created_ts) VALUES (?,?,1,?,?,?,100,20,'[]','{\"v\":1}',?,?,?)")
-    .run(dsId, pid, "projects/" + pid + "/ipd/ds1.enc", "projects/" + pid + "/ipd/ds1.enc", "abc", uid, now, now);
+    "INSERT INTO research_ipd_datasets (id,project_id,version,storage_key,sha256,bytes,row_count,identifiability_tier,jurisdictions_json,data_region,evidence_id,envelope_json,created_by,created_ts) VALUES (?,?,1,?,'abc',100,20,'coded_pseudonymised','[\"IN\"]','IN',?,?,?,?)")
+    .run(dsId, pid, "projects/" + pid + "/data/snapshots/ds1.csv", evId,
+      JSON.stringify({ alg: "AES-256-GCM", wrap: "AES-KW", iv: "AAAA", wrappedKey: "AAAA" }), uid, now);
   return dsId;
 }
 
@@ -316,7 +321,7 @@ test("402 on free and on limit, checked BEFORE accepting upload or enqueueing", 
   const dsId = seedIpdReady(env, pStud.id, "u_student");
   const statsLim = await call(env, "POST", "v1/projects/" + pStud.id + "/stats-jobs", "tok-student", {
     datasetId: dsId,
-    model: { family: "linear", outcome: "y", predictors: ["x"] },
+    model: { family: "cox", time: "follow_up_time", event: "event", covariates: ["age"] },
     idempotencyKey: "st-lim",
     fallback: fbMeta,
   });
@@ -331,7 +336,7 @@ test("402 on free and on limit, checked BEFORE accepting upload or enqueueing", 
     idempotencyKey: "po-lim",
     fallback: fbMeta,
   });
-  assert.equal(poLim.http, 402);
+  assert.equal(poLim.http, 402, JSON.stringify(poLim));
   assert.equal(poLim.error.code, "cloud_fallback_limit");
   assert.equal(env.RESEARCH_R2._m.size, 0);
   assert.equal(env.RESEARCH_QUEUE._msgs.length, 0);
@@ -343,7 +348,7 @@ test("old-client jobs without fallback are unaffected even on free plan", { skip
   const p = await makeProject(env, "tok-free", "Legacy Client");
 
   const up = await callForm(env, "v1/projects/" + p.id + "/pdf-uploads", "tok-free", pdfForm("legacy1", null));
-  assert.equal(up.http, 201);
+  assert.equal(up.http, 201, JSON.stringify(up));
   assert.equal(env.RESEARCH_QUEUE._msgs.length, 1);
 
   const fbCount = env.RESEARCH_DB._db.prepare("SELECT COUNT(*) AS n FROM research_cloud_fallbacks").get().n;
@@ -398,16 +403,16 @@ test("refund on our-side failures via callbacks and expireLostJobs; no refund on
   const dsId = seedIpdReady(env, p.id, "u_student");
   const sj = await call(env, "POST", "v1/projects/" + p.id + "/stats-jobs", "tok-student", {
     datasetId: dsId,
-    model: { family: "linear", outcome: "y", predictors: ["x"] },
+    model: { family: "cox", time: "follow_up_time", event: "event", covariates: ["age"] },
     idempotencyKey: "sj-lost",
     fallback: fbMeta,
   });
-  assert.equal(sj.http, 202);
+  assert.equal(sj.http, 202, JSON.stringify(sj));
   quota = await call(env, "GET", "v1/me/research-cloud", "tok-student");
   assert.equal(quota.used, 2);
 
   // Force expiration well past LOST_JOB_MS
-  await expireLostJobs(env.RESEARCH_DB, () => "u_" + Date.now(), Date.now() + 2 * 60 * 60 * 1000);
+  await expireLostJobs(env.RESEARCH_DB, () => "u_" + Date.now(), Date.now() + LOST_JOB_MS + 60 * 1000);
   quota = await call(env, "GET", "v1/me/research-cloud", "tok-student");
   assert.equal(quota.used, 1, "expired stats job must be refunded while password-failed stays used");
   assert.equal(quota.remaining, 14);
@@ -451,7 +456,7 @@ test("POST /v1/jobs/:jobId/to-cloud converts device job preserving jobId + step 
 
   // Invite tok-colleague as editor so they are project member (for 403 non-owner test)
   env.RESEARCH_DB._db.prepare(
-    "INSERT INTO research_members (project_id,user_id,role,invited_by,joined_ts) VALUES (?,'u_colleague','editor','u_pro',?)")
+    "INSERT INTO research_members (project_id,uid,role,created_ts) VALUES (?,'u_colleague','editor',?)")
     .run(p.id, Date.now());
 
   const dev = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-pro", {

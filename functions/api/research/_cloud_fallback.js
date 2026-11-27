@@ -63,10 +63,15 @@ export async function resolveUserPlan(env, uid, claims, nowMs = Date.now()) {
   }
   let tier = "free";
   try {
-    tier = effectiveTierFor(rec, nowMs) || "free";
+    /* _entitlements stores Trainee as "trainee"; older records and the billing plan key say "student". */
+    const raw = String((rec && rec.tier) || "").trim().toLowerCase();
+    const norm = raw === "student" ? Object.assign({}, rec, { tier: "trainee" }) : rec;
+    tier = effectiveTierFor(norm, nowMs) || "free";
   } catch {
     tier = "free";
   }
+  /* Report Trainee under the billing plan key the allowance table and the app use. */
+  if (tier === "trainee") tier = "student";
   /* Founding coupons and legacy Pro set claims.pro=true on Firebase token;
    * free trials live on claims.freePro/promo and stay excluded from paid fallback. */
   if (tier === "free" && claims && claims.pro === true && (!claims.proExp || Number(claims.proExp) > nowMs)) {

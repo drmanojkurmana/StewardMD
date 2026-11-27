@@ -402,12 +402,15 @@
     var disposed = false;
     var pauseListeners = [];
     var unsubs = [];
+    /* Held while a native background job reports that the OS has paused it:
+     * that time is not the device being slow, so it must not count. */
+    var held = false;
 
     function flush() {
       var now = clock.now();
       var delta = Math.max(0, now - lastTickAt);
       lastTickAt = now;
-      if (!fgActive) return;
+      if (!fgActive || held) return;
       totalFgMs += delta;
       pageFgMs += delta;
       if (kind !== "draft" || aiWaitDepth === 0) {
@@ -436,7 +439,7 @@
 
     function schedule() {
       clearTimer();
-      if (disposed || !fgActive) return;
+      if (disposed || !fgActive || held) return;
       var breach = checkBreach();
       if (breach) {
         disposed = true;
@@ -545,6 +548,15 @@
         schedule();
       },
       setForeground: setForeground,
+      holdClock: function (on) {
+        var next = !!on;
+        if (next === held || disposed) return;
+        flush();
+        held = next;
+        lastTickAt = clock.now();
+        if (held) clearTimer();
+        else schedule();
+      },
       isPaused: function () { return !fgActive; },
       waitIfPaused: function () {
         if (fgActive) return Promise.resolve();
@@ -598,6 +610,7 @@
           tryNumber: 1,
           signal: makeAbortSignal(),
           touchPage: function () {},
+          holdClock: function () {},
           touchStep: function () {},
           beginAiWait: function () {},
           endAiWait: function () {},
@@ -720,6 +733,18 @@
               return resBlocked;
             }
 
+            /* Patient-level stats never leave the device without ethics approval,
+             * so this gate comes before the quota call (no network needed). */
+            if (kind === "stats" && !ethicsOk) {
+              return {
+                ok: false,
+                state: "ipd_gate",
+                code: "ipd_gate",
+                message: NOTICES.stats,
+                checkpoint: latestCp
+              };
+            }
+
             /* Action === "continue": check GET /v1/me/research-cloud first unless already checked by dialog. */
             var quotaP = (decision && decision.quota)
               ? Promise.resolve(decision.quota)
@@ -730,15 +755,6 @@
                 var blocked = quotaErrorResult(quota, latestCp);
                 emitStatus(opts, blocked);
                 return blocked;
-              }
-              if (kind === "stats" && !ethicsOk) {
-                return {
-                  ok: false,
-                  state: "ipd_gate",
-                  code: "ipd_gate",
-                  message: NOTICES.stats,
-                  checkpoint: latestCp
-                };
               }
               return Promise.all([readLatestCheckpoint(), getDeviceMeta(opts)]).then(function (pair) {
                 var freshestCp = pair[0] || latestCp;
@@ -854,6 +870,7 @@
                 tryNumber: tryNumber,
                 signal: sig,
                 touchPage: fg.touchPage,
+                holdClock: fg.holdClock,
                 touchStep: fg.touchStep,
                 beginAiWait: fg.beginAiWait,
                 endAiWait: fg.endAiWait,

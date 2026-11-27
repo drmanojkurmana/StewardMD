@@ -1175,7 +1175,7 @@ export async function convertJobToCloud(ctx, jobId, body) {
   }
 
   const prevStatus = row.status;
-  const prevError = row.error_code || null;
+  const prevError = row.error_code || "";
   const prevCompleted = row.completed_ts || null;
   const prevStarted = row.started_ts || null;
   const nextOut = Object.assign({}, out, { runner: "container" });
@@ -1187,7 +1187,7 @@ export async function convertJobToCloud(ctx, jobId, body) {
   }
 
   await db.prepare(
-    "UPDATE research_job_runs SET status='queued', error_code=NULL, started_ts=NULL, completed_ts=NULL, worker_id=NULL, output_json=? WHERE id=?")
+    "UPDATE research_job_runs SET status='queued', error_code='', started_ts=NULL, completed_ts=NULL, cancel_requested_ts=NULL, output_json=? WHERE id=?")
     .bind(JSON.stringify(nextOut), row.id).run();
 
   const fallbackMeta = isPlainObject(body) && isPlainObject(body.fallback) ? body.fallback : {};
