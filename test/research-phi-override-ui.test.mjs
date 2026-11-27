@@ -1,5 +1,9 @@
 /* test/research-phi-override-ui.test.mjs
  * Tests the interactive PHI override modal for POST /v1/projects/{id}/ai-draft in research.js.
+ * Owner decision 27 Nov 2026: the override is ONE action, the doctor confirming
+ * that the flag is a false detection. No radio list, no consent evidence fields.
+ * A never-overridable hit (name, ID number, phone) shows the block with no
+ * override button and the never note.
  *
  * Synthetic data only. No em or en dashes except inside the quoted legal copy.
  * Run:
@@ -22,15 +26,12 @@ const REDACT_FN_BODY = REASONING_SRC.slice(
   REASONING_SRC.indexOf("  window.SMD_redactPHI = redactPHI;")
 );
 
-/* Legal review F-03 verbatim copy. */
+/* Owner decision 27 Nov 2026. Verbatim legal copy shown in the dialog. */
 const TITLE = "Before you send \u2014 patient information check";
-const BODY = "This text was flagged because it may contain patient identifiers (for example, a name, phone number, ID number, address or date). StewardMD blocks such text by default. You may send it for this one draft only if one of the following is true. Select which applies:";
-const OPT_FALSE = "This is a false positive \u2014 the flagged text does not identify any patient.";
-const OPT_ANON = "The text has been anonymised \u2014 no patient can be identified from it, directly or in combination with other information.";
-const OPT_CONSENT = "I have the patient's valid consent to share this text for this purpose, with institutional approval where required, and I can evidence it if asked.";
-const CONFIRM_1 = "By continuing, you confirm that the statement you selected is true; that you are the Data Fiduciary for this patient data (or are acting for the Data Fiduciary) and that this sharing is lawful under the Digital Personal Data Protection Act 2023, the IT Act 2000 and your institution's rules; and that only the text needed for this draft will be sent.";
-const CONFIRM_2 = "The text will be sent to our AI providers \u2014 Runware and Google Vertex AI (Gemini) \u2014 whose servers may be outside India. StewardMD acts only as a Data Processor on your instructions. StewardMD logs this override (your user ID, the time, the type of identifier flagged and these terms version) but never the text itself. Always check AI output before use \u2014 it may be inaccurate, incomplete or biased.";
-const NOTE = "Note: overrides are not available for Aadhaar/ID numbers or phone numbers unless you have selected the third option (patient consent with institutional approval). If you are unsure, keep the block and remove the identifiers before drafting.";
+const BODY = "This text was flagged because it may contain patient identifiers. If you have checked it and it does not identify any patient, you can continue. Otherwise remove the identifiers first.";
+const CONFIRM = "By continuing, you confirm that the flagged text does not identify any patient. The text will be sent to our AI providers: Runware, which passes it to an OpenAI GPT model, and Google Vertex AI (Gemini), whose servers may be outside India. StewardMD logs this override (your user ID, the time, the type of identifier flagged and these terms version) but never the text itself.";
+const BUTTON = "False detection, ignore and go ahead";
+const NEVER_NOTE = "Names, ID numbers and phone numbers can never be sent. Remove them before drafting.";
 
 /* Counsel wording, 2026-11-27. No em or en dashes in any of it (asserted below). */
 const T32_OPENING = "ResearchMD is a drafting and documentation aid for registered medical practitioners. It is not a medical device and is not intended for diagnosis, prevention, monitoring, treatment or alleviation of any disease or disorder, and it does not give patient-specific diagnostic or treatment directions. AI-generated output is a draft only. It may be inaccurate, incomplete or biased. You must review, edit and verify every citation, number and patient-consent position before use or submission, exercise your independent clinical judgment, and you remain solely responsible as author for anything you submit. You own AI-assisted text you produce in the app to the extent copyright subsists in it under Indian law; StewardMD does not warrant that such text is copyrightable or that it does not infringe third-party rights. You must not use ResearchMD to create deepfakes or other synthetically generated information that impersonates a person, to fabricate data or results, or to identify a patient without that patient's consent.";
@@ -47,6 +48,11 @@ const P14_CLOUDFLARE = "Project data is served through Cloudflare's global netwo
 function istToday() {
   return new Date(Date.now() + 19800000).toISOString().slice(0, 10);
 }
+/* docs/research/PHI_OVERRIDE_TERMS.md still carries the settled v1 wording;
+ * that file is outside this change, so the docs assertions below keep v1. */
+const V1_OPT_CONSENT = "I have the patient's valid consent to share this text for this purpose, with institutional approval where required, and I can evidence it if asked.";
+const V1_CONFIRM_2 = "The text will be sent to our AI providers \u2014 Runware and Google Vertex AI (Gemini) \u2014 whose servers may be outside India. StewardMD acts only as a Data Processor on your instructions. StewardMD logs this override (your user ID, the time, the type of identifier flagged and these terms version) but never the text itself. Always check AI output before use \u2014 it may be inaccurate, incomplete or biased.";
+const V1_NOTE = "Note: overrides are not available for Aadhaar/ID numbers or phone numbers unless you have selected the third option (patient consent with institutional approval). If you are unsure, keep the block and remove the identifiers before drafting.";
 
 function sliceBetween(html, startMarker, endMarker) {
   const start = html.indexOf(startMarker);
@@ -162,26 +168,7 @@ function createMiniDom() {
       },
       click() {
         if (node.disabled) return;
-        if (node.tagName === "INPUT" && attrs.type === "checkbox") {
-          _checked = !_checked;
-          node.dispatchEvent({ type: "change", target: node });
-        } else if (node.tagName === "INPUT" && attrs.type === "radio") {
-          let top = node;
-          while (top.parentNode) top = top.parentNode;
-          (function uncheckGroup(n) {
-            for (const ch of n.children) {
-              if (ch.tagName === "INPUT" && ch.getAttribute("type") === "radio" &&
-                  ch.getAttribute("name") === attrs.name) {
-                ch.checked = false;
-              }
-              uncheckGroup(ch);
-            }
-          })(top);
-          _checked = true;
-          node.dispatchEvent({ type: "change", target: node });
-        } else {
-          node.dispatchEvent({ type: "click", target: node });
-        }
+        node.dispatchEvent({ type: "click", target: node });
       },
       focus() {
         activeElement = node;
@@ -384,8 +371,8 @@ function blocked422(categories, overridable, allowedConditions) {
   return { ok: false, status: 422, text: async () => JSON.stringify(body) };
 }
 
-describe("ResearchMD /ai-draft PHI override dialog v1", () => {
-  test("legal review F-01: a client-side hit is a hard block (no dialog, no fetch, categories kept)", async () => {
+describe("ResearchMD /ai-draft PHI override dialog (one action: false detection)", () => {
+  test("a client-side hit is a hard block (no dialog, no fetch, categories kept)", async () => {
     const sb = createUiSandbox();
     const secretPhone = "9876543210";
     let rejected = null;
@@ -401,10 +388,10 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     assert.equal(JSON.stringify(rejected.categories).indexOf(secretPhone), -1, "flagged text never in the error");
   });
 
-  test("low-risk 422 renders the verbatim v1 text and resends with the chosen condition", async () => {
+  test("low-risk 422 renders the verbatim one-action copy and the exact single button label, then resends the exact override", async () => {
     const sb = createUiSandbox({
       fetchImpl: async (url, init, callNo) => {
-        if (callNo === 1) return blocked422(["address"], true, ["false_positive", "anonymised", "consent"]);
+        if (callNo === 1) return blocked422(["address"], true, ["false_positive"]);
         return { ok: true, status: 200, text: async () => JSON.stringify({ draft: { sections: { abstract: "Ok" } } }) };
       }
     });
@@ -418,29 +405,23 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     assert.ok(modal, "dialog opened on server 422 overridable");
     assert.ok(modal.innerHTML.includes(TITLE), "title verbatim");
     assert.ok(modal.innerHTML.includes(BODY), "body verbatim");
-    assert.ok(modal.innerHTML.includes(OPT_FALSE), "false-positive option verbatim");
-    assert.ok(modal.innerHTML.includes(OPT_ANON), "anonymised option verbatim");
-    assert.ok(modal.innerHTML.includes(OPT_CONSENT), "consent option verbatim");
-    assert.ok(modal.innerHTML.includes(CONFIRM_1), "first confirmation verbatim");
-    assert.ok(modal.innerHTML.includes(CONFIRM_2), "second confirmation verbatim");
-    assert.ok(modal.innerHTML.includes(NOTE), "note verbatim");
+    assert.ok(modal.innerHTML.includes(CONFIRM), "confirmation line verbatim");
     assert.match(modal.innerHTML, /<li>Address<\/li>/);
-    assert.match(modal.innerHTML, /Date consent was given/);
-    assert.match(modal.innerHTML, /Consent reference \(form number or where it is filed\)/);
 
-    const radios = modal.querySelectorAll('[data-rmd-phi-condition]');
-    assert.equal(radios.length, 3, "a real radio group with three options");
-    for (const r of radios) {
-      assert.equal(r.checked, false, "nothing preselected");
-      assert.equal(r.disabled, false, "all three allowed for a low-risk category");
-    }
+    assert.equal(modal.querySelectorAll("[data-rmd-phi-condition]").length, 0, "no radio list");
+    assert.equal(modal.querySelector('[data-rmd-phi-consent-date="1"]'), null, "no consent date field");
+    assert.equal(modal.querySelector('[data-rmd-phi-consent-ref="1"]'), null, "no consent reference field");
+    assert.ok(!modal.innerHTML.includes("Date consent was given"));
+    assert.ok(!modal.innerHTML.includes("Consent reference"));
+
     const send = modal.querySelector('[data-rmd-phi-send="1"]');
-    assert.equal(send.disabled, true, "send disabled until a choice");
-    assert.equal(modal.querySelector('[data-rmd-phi-evidence="1"]').style.display, "none");
+    assert.ok(send, "one override button");
+    assert.equal(send.textContent, BUTTON, "the single button label is exact");
+    assert.ok(modal.innerHTML.includes(">" + BUTTON + "</button>"), "the single button label renders verbatim");
+    assert.equal(modal.querySelectorAll('[data-rmd-phi-send="1"]').length, 1, "exactly one override button");
+    assert.equal(send.disabled, false, "the single action is available immediately");
+    assert.ok(modal.querySelector('[data-rmd-phi-edit="1"]'), "the cancel button is kept");
 
-    modal.querySelector('[data-rmd-phi-condition="false_positive"]').click();
-    assert.equal(send.disabled, false, "send enabled after a valid choice");
-    assert.equal(modal.querySelector('[data-rmd-phi-evidence="1"]').style.display, "none", "no evidence fields for this option");
     send.click();
 
     const res = await reqPromise;
@@ -449,19 +430,16 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     const secondBody = JSON.parse(sb.fetchCalls[1].init.body);
     assert.deepEqual(secondBody.phiOverride, {
       accepted: true,
-      termsVersion: "rmd-phi-override-v1",
+      termsVersion: "rmd-phi-override-v2",
       condition: "false_positive"
     });
     assert.equal(secondBody.phiOverride.consentEvidence, undefined);
     assert.equal(callerBody.phiOverride, undefined, "caller body not mutated");
   });
 
-  test("high-risk 422 disables non-consent options and requires consent evidence", async () => {
+  test("a phone hit shows the block with no override button and the never note", async () => {
     const sb = createUiSandbox({
-      fetchImpl: async (url, init, callNo) => {
-        if (callNo === 1) return blocked422(["phone"], true, ["consent"]);
-        return { ok: true, status: 200, text: async () => JSON.stringify({ draft: { capOk: false } }) };
-      }
+      fetchImpl: async () => blocked422(["phone"], false, [])
     });
 
     const reqPromise = sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
@@ -471,83 +449,76 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     await flushMicrotasks();
 
     const modal = sb.dom.root.querySelector("#rmdPhiOverrideModal");
-    assert.ok(modal);
+    assert.ok(modal, "the block dialog opens for a never-overridable hit");
+    assert.ok(modal.innerHTML.includes(TITLE), "title verbatim");
     assert.match(modal.innerHTML, /<li>Phone number<\/li>/);
-    const falseRadio = modal.querySelector('[data-rmd-phi-condition="false_positive"]');
-    const anonRadio = modal.querySelector('[data-rmd-phi-condition="anonymised"]');
-    const consentRadio = modal.querySelector('[data-rmd-phi-condition="consent"]');
-    assert.equal(falseRadio.disabled, true, "false positive disabled for a phone hit");
-    assert.equal(anonRadio.disabled, true, "anonymised disabled for a phone hit");
-    assert.equal(consentRadio.disabled, false);
-    assert.match(modal.innerHTML, /Not available when an ID number or phone number was flagged/);
+    assert.ok(modal.innerHTML.includes(NEVER_NOTE), "never note verbatim");
+    assert.equal(modal.querySelector('[data-rmd-phi-send="1"]'), null, "no override button");
+    assert.equal(modal.querySelectorAll("[data-rmd-phi-condition]").length, 0, "no radio list");
+    assert.ok(!modal.innerHTML.includes(BODY), "the continue copy is not shown");
+    assert.ok(!modal.innerHTML.includes(CONFIRM), "the confirmation line is not shown");
+    assert.ok(modal.querySelector('[data-rmd-phi-edit="1"]'), "the cancel button is kept");
 
-    const send = modal.querySelector('[data-rmd-phi-send="1"]');
-    const evidence = modal.querySelector('[data-rmd-phi-evidence="1"]');
-    const date = modal.querySelector('[data-rmd-phi-consent-date="1"]');
-    const ref = modal.querySelector('[data-rmd-phi-consent-ref="1"]');
-
-    falseRadio.click();
-    assert.equal(send.disabled, true, "a disabled option cannot enable send");
-
-    consentRadio.click();
-    assert.notEqual(evidence.style.display, "none", "evidence fields shown for consent");
-    assert.equal(send.disabled, true, "send stays disabled without evidence");
-
-    ref.value = "IEC-2026-014";
-    date.value = "2999-01-01";
-    ref.dispatchEvent({ type: "change", target: ref });
-    date.dispatchEvent({ type: "change", target: date });
-    assert.equal(send.disabled, true, "a future consent date is rejected");
-
-    date.value = "";
-    date.dispatchEvent({ type: "change", target: date });
-    ref.value = "";
-    ref.dispatchEvent({ type: "change", target: ref });
-    assert.equal(send.disabled, true, "an empty reference is rejected");
-
-    date.value = istToday();
-    ref.value = "IEC-2026-014";
-    date.dispatchEvent({ type: "change", target: date });
-    ref.dispatchEvent({ type: "change", target: ref });
-    assert.equal(send.disabled, false, "valid date and reference enable send");
-    send.click();
-
-    await reqPromise;
-    assert.equal(sb.fetchCalls.length, 2);
-    const secondBody = JSON.parse(sb.fetchCalls[1].init.body);
-    assert.deepEqual(secondBody.phiOverride, {
-      accepted: true,
-      termsVersion: "rmd-phi-override-v1",
-      condition: "consent",
-      consentEvidence: { consentDate: istToday(), reference: "IEC-2026-014" }
-    });
+    modal.querySelector('[data-rmd-phi-edit="1"]').click();
+    await assert.rejects(reqPromise, (err) => err.code === "phi_blocked" && err.status === 422);
+    assert.equal(sb.fetchCalls.length, 1, "no resend without an override action");
   });
 
-  test("allowedConditions restricts the radio group to the allowed subset", async () => {
-    const sb = createUiSandbox({
-      fetchImpl: async (url, init, callNo) => {
-        if (callNo === 1) return blocked422(["mrn"], true, ["consent"]);
-        return { ok: true, status: 200, text: async () => JSON.stringify({ draft: { ok: true } }) };
-      }
-    });
-    const reqPromise = sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
-      task: "polish",
-      input: { text: "Clean" }
-    });
-    await flushMicrotasks();
-    const modal = sb.dom.root.querySelector("#rmdPhiOverrideModal");
-    assert.ok(modal);
-    const enabled = modal.querySelectorAll('[data-rmd-phi-condition]').filter((r) => !r.disabled);
-    assert.equal(enabled.length, 1);
-    assert.equal(enabled[0].getAttribute("data-rmd-phi-condition"), "consent");
-    modal.querySelector('[data-rmd-phi-edit="1"]').click();
-    await assert.rejects(reqPromise, (err) => err.code === "phi_blocked");
-    assert.equal(sb.fetchCalls.length, 1);
+  test("name, aadhaar, abha, mrn and phone show the never block even when a stale server says overridable", async () => {
+    for (const category of ["patient_name", "aadhaar", "abha", "mrn", "phone"]) {
+      const sb = createUiSandbox({
+        fetchImpl: async () => blocked422([category], true, ["false_positive"])
+      });
+
+      const reqPromise = sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
+        task: "case_report_draft",
+        input: { caseText: "Clean text after client redact" }
+      });
+      await flushMicrotasks();
+
+      const modal = sb.dom.root.querySelector("#rmdPhiOverrideModal");
+      assert.ok(modal, "the block dialog opens for " + category);
+      assert.ok(modal.innerHTML.includes(NEVER_NOTE), "never note verbatim for " + category);
+      assert.equal(modal.querySelector('[data-rmd-phi-send="1"]'), null, "no override button for " + category);
+      assert.ok(!modal.innerHTML.includes(CONFIRM), "no confirmation line for " + category);
+
+      modal.querySelector('[data-rmd-phi-edit="1"]').click();
+      await assert.rejects(reqPromise, (err) => {
+        assert.equal(err.code, "phi_blocked");
+        assert.equal(err.status, 422);
+        assert.deepEqual(Array.from(err.categories), [category]);
+        return true;
+      });
+      assert.equal(sb.fetchCalls.length, 1, "no resend for " + category);
+    }
+  });
+
+  test("server 422 without overridable for a low-risk hit (switch off) opens no dialog and rejects", async () => {
+    for (const overridableVal of [undefined, false, "true"]) {
+      const sb = createUiSandbox({
+        fetchImpl: async () => blocked422(["dates"], overridableVal, [])
+      });
+
+      await assert.rejects(
+        sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
+          task: "case_report_draft",
+          input: { caseText: "Clean text" }
+        }),
+        (err) => {
+          assert.equal(err.code, "phi_blocked");
+          assert.equal(err.status, 422);
+          return true;
+        }
+      );
+      assert.equal(sb.fetchCalls.length, 1);
+      assert.equal(sb.dom.root.querySelector("#rmdPhiOverrideModal"), null,
+        "no dialog while the server switch is off (" + String(overridableVal) + ")");
+    }
   });
 
   test("server 422 overridable + Edit my text rejects with single fetch", async () => {
     const sb = createUiSandbox({
-      fetchImpl: async () => blocked422(["address"], true, ["false_positive", "anonymised", "consent"])
+      fetchImpl: async () => blocked422(["address"], true, ["false_positive"])
     });
 
     const reqPromise = sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
@@ -569,9 +540,9 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     assert.equal(sb.fetchCalls.length, 1);
   });
 
-  test("never loops: a second 422 overridable after override just rejects without reopening dialog", async () => {
+  test("never loops: a second 422 overridable after the override just rejects without reopening dialog", async () => {
     const sb = createUiSandbox({
-      fetchImpl: async () => blocked422(["address"], true, ["false_positive", "anonymised", "consent"])
+      fetchImpl: async () => blocked422(["address"], true, ["false_positive"])
     });
 
     const reqPromise = sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
@@ -580,7 +551,6 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     });
     await flushMicrotasks();
 
-    sb.dom.root.querySelector('[data-rmd-phi-condition="false_positive"]').click();
     sb.dom.root.querySelector('[data-rmd-phi-send="1"]').click();
 
     await assert.rejects(reqPromise, (err) => {
@@ -590,28 +560,6 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     });
     assert.equal(sb.fetchCalls.length, 2);
     assert.equal(sb.dom.root.querySelector("#rmdPhiOverrideModal"), null);
-  });
-
-  test("server 422 without overridable:true opens no dialog and rejects", async () => {
-    for (const overridableVal of [undefined, false, "true"]) {
-      const sb = createUiSandbox({
-        fetchImpl: async () => blocked422(["patient_name"], overridableVal, [])
-      });
-
-      await assert.rejects(
-        sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
-          task: "case_report_draft",
-          input: { caseText: "Clean text" }
-        }),
-        (err) => {
-          assert.equal(err.code, "phi_blocked");
-          assert.equal(err.status, 422);
-          return true;
-        }
-      );
-      assert.equal(sb.fetchCalls.length, 1);
-      assert.equal(sb.dom.root.querySelector("#rmdPhiOverrideModal"), null);
-    }
   });
 
   test("non /ai-draft paths never show override dialog even on 422 phi_blocked overridable:true", async () => {
@@ -624,7 +572,7 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
 
     for (const [method, path, body] of paths) {
       const sb = createUiSandbox({
-        fetchImpl: async () => blocked422(["address"], true, ["false_positive", "anonymised", "consent"])
+        fetchImpl: async () => blocked422(["address"], true, ["false_positive"])
       });
 
       await assert.rejects(
@@ -640,7 +588,7 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     }
   });
 
-  test("CapacitorHttp 422 overridable opens dialog and sends the v1 override on confirm", async () => {
+  test("CapacitorHttp 422 overridable opens the dialog and sends the exact override on confirm", async () => {
     const sb = createUiSandbox({
       withCapacitor: true,
       capImpl: async (reqOpts, callNo) => {
@@ -651,7 +599,7 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
               error: { code: "phi_blocked", message: "Blocked.", requestId: "req-cap" },
               categories: ["address"],
               overridable: true,
-              allowedConditions: ["false_positive", "anonymised", "consent"]
+              allowedConditions: ["false_positive"]
             }
           };
         }
@@ -668,15 +616,16 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     const modal = sb.dom.root.querySelector("#rmdPhiOverrideModal");
     assert.ok(modal);
     assert.match(modal.innerHTML, /<li>Address<\/li>/);
-    modal.querySelector('[data-rmd-phi-condition="anonymised"]').click();
-    modal.querySelector('[data-rmd-phi-send="1"]').click();
+    const send = modal.querySelector('[data-rmd-phi-send="1"]');
+    assert.equal(send.textContent, BUTTON, "the single button label is exact");
+    send.click();
 
     const res = await reqPromise;
     assert.equal(res.draft.capOk, true);
     assert.equal(sb.capCalls.length, 2);
     assert.deepEqual(
       JSON.parse(JSON.stringify(sb.capCalls[1].data.phiOverride)),
-      { accepted: true, termsVersion: "rmd-phi-override-v1", condition: "anonymised" }
+      { accepted: true, termsVersion: "rmd-phi-override-v2", condition: "false_positive" }
     );
   });
 
@@ -690,10 +639,9 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     assert.match(terms, /rmd-phi-override-v0/);
     assert.match(terms, /DPDP Act/);
     assert.match(terms, /ai_phi_override/);
-    assert.ok(terms.includes(BODY), "terms reproduces the verbatim body");
-    assert.ok(terms.includes(OPT_CONSENT), "terms reproduces the verbatim consent option");
-    assert.ok(terms.includes(CONFIRM_2), "terms reproduces the verbatim provider paragraph");
-    assert.ok(terms.includes(NOTE), "terms reproduces the verbatim note");
+    assert.ok(terms.includes(V1_OPT_CONSENT), "terms reproduces the verbatim consent option");
+    assert.ok(terms.includes(V1_CONFIRM_2), "terms reproduces the verbatim provider paragraph");
+    assert.ok(terms.includes(V1_NOTE), "terms reproduces the verbatim note");
     assert.ok(terms.includes("\u2014"), "verbatim legal text keeps its em dashes");
     assert.equal(terms.indexOf("\u2013"), -1);
     assert.match(terms, /at least one year/);

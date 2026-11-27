@@ -10,14 +10,14 @@
  *   message "You need more MaiK tokens".
  *   A blocked user-input PHI hit: 422 phi_blocked with overridable and
  *   allowedConditions (empty when not overridable).
- *   phiOverride is { accepted: true, termsVersion: "rmd-phi-override-v1",
- *   condition: "false_positive" | "anonymised" | "consent",
- *   consentEvidence?: { consentDate: "YYYY-MM-DD", reference: string } }
- *   and is accepted on this route only. ID numbers and phone numbers need the
- *   consent condition with evidence; a patient name is never overridable. A
- *   valid override skips the user-input PHI block for that request and writes
- *   one ai_phi_override audit (categories, condition and consent date only,
- *   never the text or the reference). Automated paths ignore it.
+ *   phiOverride is { accepted: true, termsVersion: "rmd-phi-override-v2",
+ *   condition: "false_positive" } and is accepted on this route only.
+ *   "anonymised" and "consent" are rejected: the override is one action, the
+ *   doctor confirming a false detection. A patient name and any ID number or
+ *   phone number (aadhaar, abha, ssn, nhs, mrn, phone) are never overridable.
+ *   A valid override skips the user-input PHI block for that request and
+ *   writes one ai_phi_override audit (categories, condition, terms version
+ *   and channel only, never the text). Automated paths ignore it.
  *   Every scan of user-typed input here runs in mode "user".
  *
  * draft.status is always "unverified". The row is stored in
@@ -168,13 +168,13 @@ async function oneCall(ctx, projectId, task, system, prompt, extraOpts) {
   }, extraOpts || {}));
 }
 
-/* Legal review F-01 (2026-11-27): the hard block is the default. The override
- * exists only when the server switch RESEARCH_PHI_OVERRIDE is "1"; otherwise a
- * phiOverride body is ignored and 422 responses are not marked overridable.
- * v1 (F-02): the request is parsed here, then validated after the scan because
- * the allowed conditions depend on the categories found. */
+/* Owner decision 27 Nov 2026: the override is ON by default. The server
+ * switch RESEARCH_PHI_OVERRIDE turns it off only when it is exactly "0";
+ * then a phiOverride body is ignored and 422 responses are not marked
+ * overridable. The request is parsed here, then validated after the scan
+ * because the override depends on the categories found. */
 function overrideEnabled(env) {
-  return !!(env && env.RESEARCH_PHI_OVERRIDE === "1");
+  return !(env && env.RESEARCH_PHI_OVERRIDE === "0");
 }
 function overrideOpts(enabled, request) {
   return {
@@ -1231,7 +1231,7 @@ export async function aiDraft(ctx, projectId, body) {
     }
     const report = scan(caseText, { mode: "user" });
     if (report.blocked) {
-      const decision = evaluatePhiOverride(report.hits, phiOverrideRequest, canOverride, new Date());
+      const decision = evaluatePhiOverride(report.hits, phiOverrideRequest, canOverride);
       if (!decision.accepted) {
         await api.audit(db, projectId, uid, "ai_phi_blocked", "case_report_draft",
           { categories: decision.categories, purpose: "case_report_draft" });
