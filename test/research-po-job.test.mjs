@@ -261,6 +261,38 @@ test("manuscript_draft: unlocked protocol -> 409, no saved run -> 409, active jo
   assert.equal(whileRunning.error.code, "job_active");
 });
 
+test("manuscript_draft: infrastructure failures do not use a daily slot; doctor-side and AI-quality failures do", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "alice@example.com", 1000);
+  const p = await makeProject(env, "tok-alice", "systematic_review", "SR free");
+  lockProtocol(env, p.id);
+  addRun(env, p.id, "rf");
+  const now = Date.now();
+  const ins = env.RESEARCH_DB._db.prepare(
+    "INSERT INTO research_job_runs (id,project_id,kind,status,idempotency_key,created_by,created_ts,error_code) VALUES (?,?,?,'failed',?,?,?,?)");
+  /* Five infrastructure failures today: none of them count, so a new draft is allowed. */
+  ["gateway_http_400", "gateway_http_400__invalid_body", "gateway_transport", "callback_unavailable", "manuscript_failed"]
+    .forEach((code, i) => ins.run("infra_" + i, p.id, "manuscript_draft", "infra_" + i, "u-alice", now, code));
+  const ok = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice",
+    { kind: "manuscript_draft", idempotencyKey: "k-after-infra" });
+  assert.equal(ok.http, 202, JSON.stringify(ok));
+
+  /* Doctor-side / AI-quality failures still count toward the 3-per-project cap. */
+  const env2 = freshEnv();
+  fundWallet(env2, "alice@example.com", 1000);
+  const p2 = await makeProject(env2, "tok-alice", "systematic_review", "SR counted");
+  lockProtocol(env2, p2.id);
+  addRun(env2, p2.id, "rc");
+  const ins2 = env2.RESEARCH_DB._db.prepare(
+    "INSERT INTO research_job_runs (id,project_id,kind,status,idempotency_key,created_by,created_ts,error_code) VALUES (?,?,?,'failed',?,?,?,?)");
+  ["phi_blocked", "gate_failed", "ceiling_calls"].forEach((code, i) =>
+    ins2.run("dr_" + i, p2.id, "manuscript_draft", "dr_" + i, "u-alice", now, code));
+  const capped = await call(env2, "POST", "v1/projects/" + p2.id + "/jobs", "tok-alice",
+    { kind: "manuscript_draft", idempotencyKey: "k-after-doctor" });
+  assert.equal(capped.http, 429);
+  assert.equal(capped.error.code, "cap_po_project_daily");
+});
+
 test("manuscript_draft: daily caps 3/project and 5/user -> 429, insufficient credits -> 402", { skip: SKIP }, async () => {
   const env = freshEnv();
   fundWallet(env, "alice@example.com", 1000);
