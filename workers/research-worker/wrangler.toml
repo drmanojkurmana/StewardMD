@@ -1,5 +1,5 @@
 # ResearchMD Phase 3 worker front door (D-3: Cloudflare Containers).
-# Cron every minute -> Durable Object -> container POST /drain.
+# Cron every minute -> D1 open-job check -> Durable Object -> container POST /drain.
 # Config fields verified against Cloudflare docs 2026-11-23. The legacy
 # @cloudflare/containers Container class is superseded by the Durable Object
 # Container API (ctx.container + [exports]); see
@@ -29,6 +29,12 @@ class_name = "ResearchWorkerContainer"
 [exports.ResearchWorkerContainer]
 type = "durable-object"
 storage = "sqlite"
+
+# Read-only use: the cron counts open jobs before waking the container.
+[[d1_databases]]
+binding = "RESEARCH_DB"
+database_name = "stewardmd-research"
+database_id = "fcb5adad-89d8-4d32-a6d1-315b007d2b7a"
 
 [triggers]
 crons = ["* * * * *"]
