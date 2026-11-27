@@ -2362,11 +2362,10 @@ body.dark .pn-root .st5a-lib .st5a-cover-folder { background: color-mix(in srgb,
 .pn-root .st-body .st-tb .st-fb-group { display: flex; gap: 4px; }
 .pn-root .st-body .st-tb .st-fb-sep { width: 1px; height: 20px; background: var(--pnv-rim-lo); margin: 0 4px; flex: none; }
 .pn-root .st-body .st-tb .st-laser-col { width: 26px; height: 26px; min-width: 26px; }
-/* Phone: the overview and zoom-window buttons live in the top bar's grid and the More sheet; nine tools fit. */
+/* Phone: the zoom window is for a tablet and a pencil; the other ten tools fit without scrolling. */
 @media (max-width: 560px) {
-  .pn-root .st-body .st-tb .st-tb-tools .st-b[data-act="st-zoom-window"],
-  .pn-root .st-body .st-tb .st-tb-tools .st-b[data-act="st-page-sheet"] { display: none; }
-  .pn-root .st-body .st-tb .st-tb-tools .st-b { flex-basis: 36px; min-width: 36px; }
+  .pn-root .st-body .st-tb .st-tb-tools .st-b[data-act="st-zoom-window"] { display: none; }
+  .pn-root .st-body .st-tb .st-tb-tools .st-b { flex-basis: 34px; min-width: 34px; }
 }
 /* The dock steps aside while typing (the format bar and keyboard own the bottom) and while presenting. */
 .pn-root:has(#stFormatBar) .st-body .st-tb { opacity: 0; pointer-events: none; transform: translate(-50%, 16px); }
