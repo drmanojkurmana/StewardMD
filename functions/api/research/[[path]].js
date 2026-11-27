@@ -34,7 +34,7 @@ import { dedupRecords, normaliseDoi } from "./_dedup.js";
  * (_credits.js), PHI gate (_phi.js) and the central AI gateway (_gateway.js,
  * reusing callGemini from ../ai/[[path]].js). The pilot routes below are
  * untouched; Phase 3 jobs live in research_job_runs (0003 header decision). */
-import { uploadPdf, createJob, getJob, cancelJob } from "./_jobs.js";
+import { uploadPdf, createJob, getJob, cancelJob, quoteManuscriptJob } from "./_jobs.js";
 import { jobCallback } from "./_callback.js";
 import { llmRoute, literatureSearchRoute, trialsStatusRoute, trialsSearchRoute, trialsLookupRoute } from "./_gateway.js";
 import { adminInstitutionRoute, creditsView } from "./_credits.js";
@@ -1998,6 +1998,9 @@ export async function onRequest({ request, env, params }) {
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid job payload", requestId); }
     return createJob(Object.assign({}, p3Ctx, { projectId: p3Jobs[1] }), body);
   }
+  const p3Quote = path.match(/^\/v1\/projects\/([^/]+)\/jobs\/quote$/);
+  if (p3Quote && request.method === "GET")
+    return quoteManuscriptJob(Object.assign({}, p3Ctx, { projectId: p3Quote[1] }));
   const p3JobOne = path.match(/^\/v1\/jobs\/([^/]+)$/);
   if (p3JobOne && request.method === "GET") {
     const out = await getJob(p3Ctx, p3JobOne[1]);

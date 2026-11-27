@@ -165,6 +165,20 @@ export async function checklistSnapshot(ctx, projectId) {
     });
   }
 
+  /* Researcher-entered checklist text, grouped by guideline. The fill engine
+   * reads snapshot.checklistManual[checklist.id], so Submit sees the same
+   * completed items the Checklist screen approved. */
+  const manualRows = (await db.prepare("SELECT guideline_id,item_num,text FROM research_checklist_manual WHERE project_id=? ORDER BY guideline_id ASC,item_num ASC")
+    .bind(projectId).all()).results || [];
+  if (manualRows.length) {
+    const byGuide = {};
+    for (const row of manualRows) {
+      if (!byGuide[row.guideline_id]) byGuide[row.guideline_id] = {};
+      byGuide[row.guideline_id][row.item_num] = row.text;
+    }
+    snapshot.checklistManual = byGuide;
+  }
+
   await ingestProjectDrafts(ctx, projectId);
   const version = await db.prepare("SELECT id FROM research_manuscript_versions WHERE project_id=? ORDER BY version DESC LIMIT 1")
     .bind(projectId).first();

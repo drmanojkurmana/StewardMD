@@ -95,6 +95,18 @@
       t.indexOf("case-series") >= 0 || t.indexOf("case series") >= 0;
   }
 
+  /* Only the built-in BCG demo carries the seeded BCG manuscript. A new
+   * project starts from an empty draft with its own title. */
+  function isDemoProject(proj) {
+    if (!proj) return false;
+    if (proj.id === "prj_bcg_1994" || proj.serverId === "prj_bcg_1994") return true;
+    if (!proj.tutorial) return false;
+    var key = String(proj.tutorialKey || "");
+    if (key === "sr") return true;
+    var t = String(proj.studyType || "").toLowerCase();
+    return t.indexOf("systematic review") >= 0 || t.indexOf("meta-analysis") >= 0 || t.indexOf("meta analysis") >= 0;
+  }
+
   function sectionSidebarItems(man, proj) {
     var items = [];
     var seen = {};
@@ -276,13 +288,18 @@
     poJobId: null,
     poStatus: null,
     poError: null,
-    poCreating: false
+    poCreating: false,
+    poConfirm: null,
+    poQuoteMicroUsd: null,
+    poQuoteSource: ""
   };
 
   var seq = 0;
   var lastContainer = null;
   var mqlBound = false;
   var poTimer = null;
+  var manuscriptMissing = {};
+  var loadError = null;
 
   function bindBreakpoint() {
     if (mqlBound || !G.matchMedia) return;
@@ -366,6 +383,28 @@
         lock: null
       };
     }
+    if (!isDemoProject(proj)) {
+      return {
+        id: "man_v1",
+        projectId: pid,
+        version: 1,
+        title: (proj && proj.title) || "Research manuscript",
+        authors: [],
+        affiliations: "",
+        status: "draft",
+        sections: [
+          { id: "abstract", heading: "Abstract", level: 1, text: "" },
+          { id: "introduction", heading: "Introduction", level: 1, text: "" },
+          { id: "methods", heading: "Methods", level: 1, text: "" },
+          { id: "results", heading: "Results", level: 1, text: "" },
+          { id: "discussion", heading: "Discussion", level: 1, text: "" }
+        ],
+        tokens: {},
+        references: [],
+        approval: null,
+        lock: null
+      };
+    }
     return {
       id: "man_v2",
       projectId: pid,
@@ -424,7 +463,8 @@
     };
   }
 
-  function defaultVersions() {
+  function defaultVersions(proj) {
+    if (!isDemoProject(proj)) return [];
     return [
       {
         id: "man_v1",
@@ -549,6 +589,7 @@
     return Promise.all([pMan, pVers]).then(function (res) {
       if (res[0] && res[0].manuscript) {
         st.manuscript = res[0].manuscript;
+        manuscriptMissing[apiProjectId()] = false;
       }
       if (res[1] && res[1].versions) {
         st.versions = res[1].versions;
@@ -625,6 +666,72 @@
     }, 10000);
   }
 
+  function quoteUsdText(micro) {
+    var usd = Number(micro) / 1000000;
+    if (!isFinite(usd) || usd <= 0) return "";
+    return "$" + (usd >= 0.01 ? usd.toFixed(2) : usd.toFixed(4));
+  }
+
+  function poQuoteNote() {
+    if (st.poQuoteMicroUsd != null) {
+      return "Server quote: " + quoteUsdText(st.poQuoteMicroUsd) + " for up to 64 model calls.";
+    }
+    return "Cost shown before the draft starts. The server quotes this job separately from Ask MaiK.";
+  }
+
+  function poConfirmHtml() {
+    if (!st.poConfirm) return "";
+    var q = st.poConfirm.quote;
+    var sentence = (q != null)
+      ? "The server quotes " + esc(quoteUsdText(q)) + " for up to 64 model calls."
+      : "Cost shown before the draft starts. The server quotes the exact cost when the job is created, and you can cancel while it is queued.";
+    var h = [];
+    h.push('<div class="rmd-po-confirm" role="group" aria-label="Confirm the full draft">');
+    h.push('  <p><strong>Start a full draft?</strong> PaperOrchestra writes every section from your locked protocol, verified studies and saved analysis. You review and approve the result.</p>');
+    h.push('  <p class="rmd-po-cost-note" data-rmd-po-quote>' + sentence + '</p>');
+    h.push('  <div class="rmd-po-confirm-actions">');
+    h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="po-start">Start draft</button>');
+    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="po-dismiss">Cancel</button>');
+    h.push('  </div>');
+    h.push('</div>');
+    return h.join("\n");
+  }
+
+  function poBlockHtml() {
+    if (!isPoEnabled()) return "";
+    var isPoActive = st.poCreating || st.poStatus === "queued" || st.poStatus === "running";
+    var h = [];
+    h.push('<div class="rmd-po-block">');
+    h.push('  <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="full-draft-po"' + (isPoActive ? ' disabled="disabled"' : '') + '>Full draft (PaperOrchestra)</button>');
+    h.push('  <p class="rmd-po-cost-note" data-rmd-po-cost>' + esc(poQuoteNote()) + '</p>');
+    h.push(poConfirmHtml());
+    h.push(poStatusHtml());
+    h.push('</div>');
+    return h.join("\n");
+  }
+
+  /* Confirm the job and, when the server exposes a quote endpoint, show its
+   * number before anything is reserved. A missing endpoint falls back to the
+   * honest label instead of borrowing the Ask MaiK token estimate. */
+  function openPoConfirm(container) {
+    if (st.poCreating || st.poStatus === "queued" || st.poStatus === "running") return;
+    var store = SMD.store;
+    var proj = store ? store.getActiveProject() : null;
+    st.poConfirm = { quote: st.poQuoteMicroUsd };
+    render(container);
+    if (!SMD.api || !proj || !proj.serverId || proj.tutorial || proj.practice) return;
+    SMD.api.request("GET", "/v1/projects/" + encodeURIComponent(proj.serverId) + "/jobs/quote?kind=manuscript_draft").then(function (res) {
+      var micro = res && (res.quoteMicroUsd != null ? res.quoteMicroUsd : (res.quote && res.quote.quoteMicroUsd));
+      if (micro == null) return;
+      st.poQuoteMicroUsd = micro;
+      st.poQuoteSource = "server";
+      if (st.poConfirm) st.poConfirm.quote = micro;
+      render(container);
+    }, function () {
+      /* No quote endpoint yet: keep the honest fallback sentence. */
+    });
+  }
+
   function startPoDraft(container) {
     if (st.poCreating || st.poStatus === "queued" || st.poStatus === "running") return;
     var target = container || lastContainer;
@@ -642,6 +749,7 @@
     st.poCancelling = false;
     st.poCancelError = null;
     st.poFailures = 0;
+    st.poConfirm = null;
     if (target) render(target);
 
     var pid = encodeURIComponent(apiProjectId());
@@ -650,14 +758,25 @@
       kind: "manuscript_draft",
       idempotencyKey: randKey
     };
+    var store = SMD.store;
+    /* The job reads studies and runs on the server. Let the immediate study
+     * and run writes land first so a fresh Calculate is included. */
+    var ready = (store && typeof store.pendingSync === "function") ? store.pendingSync() : Promise.resolve(true);
 
-    SMD.api.request("POST", "/v1/projects/" + pid + "/jobs", body).then(function (res) {
+    ready.then(function () {
+      return SMD.api.request("POST", "/v1/projects/" + pid + "/jobs", body);
+    }).then(function (res) {
       st.poCreating = false;
       var job = (res && res.job) || (res && res.jobs && res.jobs[0]) || res;
       var jid = (job && job.id) || (res && res.jobId) || (res && res.id);
       var jStatus = (job && job.status) || "queued";
       st.poJobId = jid;
       st.poStatus = jStatus;
+      var ceilings = job && job.ceilings;
+      if (ceilings && ceilings.quoteMicroUsd != null) {
+        st.poQuoteMicroUsd = ceilings.quoteMicroUsd;
+        st.poQuoteSource = "server";
+      }
 
       if (jStatus === "succeeded" || jStatus === "done") {
         st.poStatus = "succeeded";
@@ -718,6 +837,9 @@
       st.poCancelling = false;
       st.poCancelError = null;
       st.poFailures = 0;
+      st.poConfirm = null;
+      st.poQuoteMicroUsd = null;
+      st.poQuoteSource = "";
     }
     st.projectId = newPid;
     if (params && params.sectionId) {
@@ -728,16 +850,24 @@
     st.loading = true;
     st.error = null;
     st.saveNotice = null;
+    loadError = null;
 
-    var base = "/v1/projects/" + encodeURIComponent(apiProjectId());
-    var pMan = SMD.api ? SMD.api.request("GET", base + "/manuscript") : Promise.resolve(null);
-    var pVers = SMD.api ? SMD.api.request("GET", base + "/manuscript/versions") : Promise.resolve(null);
+    var mpid = apiProjectId();
+    var base = "/v1/projects/" + encodeURIComponent(mpid);
+    var store = SMD.store;
+    var proj = store ? store.getActiveProject() : null;
+    /* A new project has no manuscript yet. After one 404 the screen knows
+     * there is nothing to fetch, so later tab opens stay quiet. */
+    var knownMissing = !!manuscriptMissing[mpid];
+    var pMan = (SMD.api && !knownMissing) ? SMD.api.request("GET", base + "/manuscript") : Promise.resolve(null);
+    var pVers = (SMD.api && !knownMissing) ? SMD.api.request("GET", base + "/manuscript/versions") : Promise.resolve(null);
 
     Promise.all([pMan, pVers]).then(function (res) {
       if (mySeq !== seq) return;
       st.loading = false;
+      if (res[0] && res[0].manuscript) manuscriptMissing[mpid] = false;
       st.manuscript = (res[0] && res[0].manuscript) || localManuscript(st.projectId) || defaultManuscript(st.projectId);
-      st.versions = (res[1] && res[1].versions) || defaultVersions();
+      st.versions = (res[1] && res[1].versions) || defaultVersions(proj);
       if (!params || !params.sectionId) {
         var foundSel = false;
         var mSecs = (st.manuscript && st.manuscript.sections) || [];
@@ -750,9 +880,15 @@
     }).catch(function (err) {
       if (mySeq !== seq) return;
       st.loading = false;
+      if (err && (err.status === 404 || err.code === "manuscript_not_found" || err.code === "not_found")) {
+        manuscriptMissing[mpid] = true;
+      } else {
+        loadError = String((err && (err.message || (err.error && err.error.message))) || "Could not load the manuscript.")
+          .replace(/[\u2014\u2013]/g, "-");
+      }
       /* Fallback to local default if API unmocked or offline */
       st.manuscript = localManuscript(st.projectId) || defaultManuscript(st.projectId);
-      st.versions = defaultVersions();
+      st.versions = defaultVersions(proj);
       if (!params || !params.sectionId) {
         var foundSelC = false;
         var mSecsC = (st.manuscript && st.manuscript.sections) || [];
@@ -984,7 +1120,7 @@
 
     var box = D.createElement("div");
     box.className = "rmd-modal-card rmd-modal-wide";
-    box.style.cssText = "background:#0D1D23; border:1px solid #1f363d; border-radius:8px; max-width:680px; width:100%; max-height:90vh; overflow-y:auto; padding:20px; color:#fff;";
+    box.style.cssText = "background:var(--rmd-panel); border:1px solid var(--rmd-line); border-radius:8px; max-width:680px; width:100%; max-height:90vh; overflow-y:auto; padding:20px; color:var(--rmd-ink);";
 
     function updateView() {
       if (G.RMDPhi && G.RMDPhi.prepareCaseText) {
@@ -998,9 +1134,9 @@
 
       var findingsHtml = "";
       if (currentBlocked && currentFindings.length) {
-        findingsHtml = '<div id="rmd-cr-findings" style="margin-top:10px; padding:10px; background:rgba(255,107,107,0.1); border:1px solid #ff6b6b; border-radius:4px;">' +
-          '<strong style="color:#ff6b6b; font-size:13px;">De-identification findings (must fix before sending):</strong>' +
-          '<ul style="margin:6px 0 0 16px; padding:0; font-size:12px; color:#ff8787;">' +
+        findingsHtml = '<div id="rmd-cr-findings" style="margin-top:10px; padding:10px; background:var(--rmd-bad-soft); border:1px solid var(--rmd-bad); border-radius:4px;">' +
+          '<strong style="color:var(--rmd-bad); font-size:13px;">De-identification findings (must fix before sending):</strong>' +
+          '<ul style="margin:6px 0 0 16px; padding:0; font-size:12px; color:var(--rmd-bad);">' +
           currentFindings.map(function (f) {
             var fix = f.indexOf("phone") >= 0 ? "Remove phone number." :
                       f.indexOf("date") >= 0 ? "Convert dates to Day N." :
@@ -1031,11 +1167,11 @@
     h.push('  <h3 style="margin:0; font-size:18px;">Draft Case Report with MaiK</h3>');
     h.push('  <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" id="rmd-cr-close-modal">Cancel</button>');
     h.push('</div>');
-    h.push('<p style="font-size:13px; color:#8ea3a6; margin-bottom:12px;">Preview of the exact text that will be sent to MaiK. Ensure all personal identifiers are removed.</p>');
+    h.push('<p style="font-size:13px; color:var(--rmd-mut); margin-bottom:12px;">Preview of the exact text that will be sent to MaiK. Ensure all personal identifiers are removed.</p>');
 
     h.push('<div>');
     h.push('  <label style="display:block; font-size:13px; font-weight:600; margin-bottom:4px;">De-identified Case Text:</label>');
-    h.push('  <textarea id="rmd-cr-preview-text" rows="10" style="width:100%; padding:10px; background:#071318; border:1px solid #1f363d; color:#fff; border-radius:4px; font-family:inherit; font-size:13px; line-height:1.4;">' + esc(currentText) + '</textarea>');
+    h.push('  <textarea id="rmd-cr-preview-text" rows="10" style="width:100%; padding:10px; background:var(--rmd-fill); border:1px solid var(--rmd-line); color:var(--rmd-ink); border-radius:4px; font-family:inherit; font-size:13px; line-height:1.4;">' + esc(currentText) + '</textarea>');
     h.push('</div>');
 
     h.push('<div id="rmd-cr-findings-container"></div>');
@@ -1085,7 +1221,7 @@
     sendBtn.onclick = function () {
       if (currentBlocked || !tickBox.checked) return;
       sendBtn.disabled = true;
-      if (statusMsg) statusMsg.innerHTML = '<span style="color:#42CDB5;">Drafting case report sections with MaiK...</span>';
+      if (statusMsg) statusMsg.innerHTML = '<span style="color:var(--rmd-acc);">Drafting case report sections with MaiK...</span>';
 
       var body = {
         task: "case_report_draft",
@@ -1159,11 +1295,11 @@
         } else {
           sendBtn.disabled = false;
           var msg = (resp.data && resp.data.error && resp.data.error.message) || "Draft request failed";
-          if (statusMsg) statusMsg.innerHTML = '<span style="color:#ff6b6b;">' + esc(msg) + '</span>';
+          if (statusMsg) statusMsg.innerHTML = '<span style="color:var(--rmd-bad);">' + esc(msg) + '</span>';
         }
       }).catch(function (err) {
         sendBtn.disabled = false;
-        if (statusMsg) statusMsg.innerHTML = '<span style="color:#ff6b6b;">Error: ' + esc(err.message || String(err)) + '</span>';
+        if (statusMsg) statusMsg.innerHTML = '<span style="color:var(--rmd-bad);">Error: ' + esc(err.message || String(err)) + '</span>';
       });
     };
   }
@@ -1850,6 +1986,7 @@
       SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + sid, payload)
         .then(function (res) {
           st.saveNotice = "Saved.";
+          manuscriptMissing[apiProjectId()] = false;
           if (res && typeof res.version === "number") st.manuscript.version = res.version;
           if (res && res.tokens) st.manuscript.tokens = res.tokens;
           render(container);
@@ -1878,7 +2015,7 @@
 
     if (SMD.api) {
       SMD.api.request("POST", "/v1/projects/" + pid + "/manuscript/approval/approve", payload)
-        .then(done, done);
+        .then(function () { manuscriptMissing[apiProjectId()] = false; done(); }, done);
     } else {
       done();
     }
@@ -2145,6 +2282,14 @@
       "#researchMD .rmd-po-status-ok { color: var(--rmd-acc); }",
       "#researchMD .rmd-po-status-warn { color: var(--rmd-warn); }",
       "#researchMD .rmd-po-status-err { color: var(--rmd-bad); }",
+      "#researchMD .rmd-po-block { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; max-width: 100%; }",
+      "#researchMD .rmd-po-block .rmd-btn { max-width: 100%; white-space: normal; text-align: left; }",
+      "#researchMD .rmd-po-cost-note { margin: 0; font: 400 12.5px/1.45 var(--rmd-f); color: var(--rmd-mut); max-width: 60ch; }",
+      "#researchMD .rmd-po-confirm { border: 1px solid var(--rmd-line); background: var(--rmd-fill); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; width: 100%; }",
+      "#researchMD .rmd-po-confirm p { margin: 0; font: 400 13px/1.5 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-po-confirm .rmd-po-cost-note { color: var(--rmd-mut); }",
+      "#researchMD .rmd-po-confirm-actions { display: flex; flex-wrap: wrap; gap: 8px; }",
+      "#researchMD .rmd-po-confirm-actions .rmd-btn { min-height: 44px; }",
       "#researchMD .rmd-man-phone-bar { display: none; flex-shrink: 0; background: var(--rmd-fill); padding: 4px; border-bottom: 1px solid var(--rmd-line); }",
       "#researchMD .rmd-man-phone-btn { flex: 1; border: 0; background: none; font: 500 13px var(--rmd-f); color: var(--rmd-mut); padding: 7px; border-radius: 6px; cursor: pointer; }",
       "#researchMD .rmd-man-phone-btn.rmd-seg-active { background: var(--rmd-panel); color: var(--rmd-ink); font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }",
@@ -2205,9 +2350,8 @@
       "@media (max-width: 767px) {",
       "  #researchMD .rmd-man-topbar { flex-direction: column; align-items: stretch; gap: 10px; padding: 10px 14px; }",
       "  #researchMD .rmd-man-topbar-info { flex: 0 0 auto; width: 100%; gap: 8px; }",
-      "  #researchMD .rmd-man-actions { width: 100%; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 2px 2px 4px; }",
-      "  #researchMD .rmd-man-actions::-webkit-scrollbar { display: none; }",
-      "  #researchMD .rmd-man-actions .rmd-btn { flex: 0 0 auto; white-space: nowrap; min-height: 44px; padding: 8px 12px; }",
+      "  #researchMD .rmd-man-actions { width: 100%; flex-wrap: wrap; overflow: visible; padding: 2px 2px 4px; row-gap: 6px; }",
+      "  #researchMD .rmd-man-actions .rmd-btn { flex: 0 1 auto; white-space: nowrap; min-height: 44px; padding: 8px 12px; max-width: 100%; }",
       "  #researchMD .rmd-man-actions .rmd-btn:focus-visible { outline-offset: -2px; }",
       "  #researchMD .rmd-man-ai-wrap { margin: 10px 14px 0; }",
       "  #researchMD .rmd-man-phone-btn { min-height: 44px; }",
@@ -2242,6 +2386,9 @@
 
     var h = [];
     h.push('<div class="rmd-manuscript-screen">');
+    if (loadError) {
+      h.push('<div class="rmd-banner rmd-banner-error" role="alert" style="margin:10px 14px 0;"><strong>' + esc(loadError) + '</strong></div>');
+    }
 
     /* Top bar */
     h.push('<div class="rmd-man-topbar">');
@@ -2282,19 +2429,9 @@
       if (!isCaseReport) {
         if (!st.ai) st.ai = SMD.ai.state();
         h.push('<div class="rmd-man-ai-wrap">');
-        var barHtml = SMD.ai.barHtml(st.ai, { task: "manuscript_draft", label: "manuscript draft", cost: 2 });
-        if (isPoEnabled()) {
-          var isPoActive = st.poCreating || st.poStatus === "queued" || st.poStatus === "running";
-          var poBtn = '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="full-draft-po"' + (isPoActive ? ' disabled="disabled"' : '') + '>Full draft (PaperOrchestra)</button>';
-          if (barHtml.indexOf('data-rmd-ai="ask"') >= 0) {
-            barHtml = barHtml.replace('</button>', '</button>' + poBtn);
-          } else {
-            barHtml = barHtml + poBtn;
-          }
-          barHtml = barHtml + poStatusHtml();
-        }
-        h.push(barHtml);
+        h.push(SMD.ai.barHtml(st.ai, { task: "manuscript_draft", label: "manuscript draft", cost: 2 }));
         h.push(SMD.ai.noteHtml(st.ai, "manuscript"));
+        h.push(poBlockHtml());
         h.push('</div>');
       }
     }
@@ -2341,7 +2478,7 @@
       h.push('        <span class="rmd-section-item-meta">' + words + ' words</span>');
       h.push('      </div>');
       if (secObj && secObj.text && secObj.text.indexOf("Drafted by MaiK") >= 0) {
-        h.push('      <span class="rmd-drafted-by-maik" style="display:block; font-size:11px; color:#42CDB5; margin-top:2px;">Drafted by MaiK, check it</span>');
+        h.push('      <span class="rmd-drafted-by-maik" style="display:block; font-size:11px; color:var(--rmd-acc); margin-top:2px;">Drafted by MaiK, check it</span>');
       }
       h.push('      <span class="rmd-section-item-desc">' + esc(item.hint) + '</span>');
       h.push('    </button>');
@@ -2648,7 +2785,20 @@
       var poBtns = container.querySelectorAll('[data-rmd="full-draft-po"]');
       for (var pbi = 0; pbi < poBtns.length; pbi++) {
         poBtns[pbi].onclick = function () {
+          openPoConfirm(container);
+        };
+      }
+      var poStart = container.querySelector('[data-rmd="po-start"]');
+      if (poStart) {
+        poStart.onclick = function () {
           startPoDraft(container);
+        };
+      }
+      var poDismiss = container.querySelector('[data-rmd="po-dismiss"]');
+      if (poDismiss) {
+        poDismiss.onclick = function () {
+          st.poConfirm = null;
+          render(container);
         };
       }
       var poCancelBtns = container.querySelectorAll('[data-rmd="po-cancel"]');
@@ -3002,6 +3152,7 @@
       st.poCancelling = false;
       st.poCancelError = null;
       st.poFailures = 0;
+      st.poConfirm = null;
     },
     _loadCasePromise: loadCasePromise,
     _mapPoError: mapPoError,
@@ -3009,6 +3160,10 @@
     _pollPoJob: pollPoJob,
     _cancelPoJob: cancelPoJob,
     _getState: function () { return st; },
+    _defaultManuscript: defaultManuscript,
+    _defaultVersions: defaultVersions,
+    _isDemoProject: isDemoProject,
+    _openPoConfirm: openPoConfirm,
     showDraftPreviewModal: showDraftPreviewModal
   };
 

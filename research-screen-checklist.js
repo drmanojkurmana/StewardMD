@@ -48,6 +48,8 @@
     manual: {},
     filled: null,
     approved: false,
+    approving: false,
+    approveError: "",
     csv: "",
     manuscript: null,
     manuscriptTitle: "",
@@ -57,6 +59,8 @@
     docEditor: null,
     seq: 0
   };
+  var APPROVAL_KEY = "checklist_approval";
+  var manuscriptMissing = {};
   var lastContainer = null;
   var mqlBound = false;
 
@@ -102,6 +106,29 @@
   function unwrapSnapshot(data) {
     if (data && data.snapshot && typeof data.snapshot === "object") return data.snapshot;
     return data || {};
+  }
+
+  function approvalRecord(entries) {
+    if (!entries || !entries[APPROVAL_KEY]) return null;
+    var raw = entries[APPROVAL_KEY];
+    if (typeof raw === "object" && raw) return raw;
+    try {
+      var parsed = JSON.parse(String(raw));
+      return parsed && typeof parsed === "object" ? parsed : null;
+    } catch (e) {
+      return String(raw) === "approved" ? { approved: true } : null;
+    }
+  }
+
+  function serverProjectIdForChecklist(proj) {
+    return (proj && proj.serverId && !proj.tutorial && !proj.practice) ? proj.serverId : "";
+  }
+
+  function saveManualEntry(apiPid, gid, num, text) {
+    return api("PUT", "/v1/projects/" + encodeURIComponent(apiPid) + "/checklist-manual/" + encodeURIComponent(gid), {
+      num: String(num),
+      text: String(text)
+    });
   }
 
   function compute() {
@@ -163,6 +190,8 @@
     st.error = "";
     st.errObj = null;
     st.approved = false;
+    st.approving = false;
+    st.approveError = "";
     st.csv = "";
     st.filled = null;
     st.manuscript = null;
@@ -176,15 +205,32 @@
     return Promise.all([
       api("GET", "/v1/checklists/" + encodeURIComponent(gid)),
       api("GET", base + "/checklist-snapshot"),
-      api("GET", base + "/checklist-manual/" + encodeURIComponent(gid)),
-      api("GET", "/v1/projects/" + encodeURIComponent(apiPid) + "/manuscript").catch(function () { return null; })
+      api("GET", base + "/checklist-manual/" + encodeURIComponent(gid))
     ]).then(function (parts) {
-      var manObj, snapSecs, manSecs, chosenSecs, rawTitle;
-      if (seq !== st.seq) return;
+      if (seq !== st.seq) return null;
       st.checklist = unwrapChecklist(parts[0]);
       st.snapshot = unwrapSnapshot(parts[1]);
       st.manual = (parts[2] && parts[2].entries) ? parts[2].entries : {};
-      manObj = (parts[3] && parts[3].manuscript) || null;
+      st.approved = !!approvalRecord(st.manual);
+      st.approveError = "";
+      /* A project with no manuscript yet is a normal state, not an error.
+       * Skip the request when the snapshot already carries the sections or a
+       * previous 404 already established there is nothing saved. */
+      var snapHasMan = nonEmptySections(st.snapshot && st.snapshot.manuscript && st.snapshot.manuscript.sections).length > 0;
+      if (snapHasMan || manuscriptMissing[apiPid]) return null;
+      return api("GET", "/v1/projects/" + encodeURIComponent(apiPid) + "/manuscript").then(function (m) {
+        return m;
+      }, function (err) {
+        if (err && (err.status === 404 || err.code === "manuscript_not_found")) {
+          manuscriptMissing[apiPid] = true;
+          return null;
+        }
+        throw err;
+      });
+    }).then(function (manPart) {
+      var manObj, snapSecs, manSecs, chosenSecs, rawTitle;
+      if (seq !== st.seq) return;
+      manObj = (manPart && manPart.manuscript) || null;
       st.manuscript = manObj;
       rawTitle = (manObj && manObj.title) ||
         (st.snapshot && st.snapshot.manuscript && st.snapshot.manuscript.title) ||
@@ -236,6 +282,8 @@
     st.checklist = null;
     st.filled = null;
     st.approved = false;
+    st.approving = false;
+    st.approveError = "";
     st.csv = "";
     st.manuscript = null;
     st.manuscriptTitle = "";
@@ -279,6 +327,73 @@
       SMD.p2.flashNotice(lastContainer, "Your file is ready to save or share.", "info");
     }, function (err) {
       SMD.p2.flashNotice(lastContainer, SMD.p2.friendlyError(err).message, "error");
+    });
+  }
+
+  function approvalPayload() {
+    return JSON.stringify({
+      approved: true,
+      guidelineId: st.guidelineId,
+      approvedAt: Date.now()
+    });
+  }
+
+  /* Approval is a server fact, not a session flag: the Submit screen reads the
+   * checklist from the project snapshot. Persist the document-filled items as
+   * manual entries first, then the approval marker. A failure keeps the button
+   * available instead of claiming an approval the server never stored. */
+  function persistApproval(container) {
+    if (st.approved || st.approving || remainingRequiredCount() !== 0) return;
+    var target = lastContainer || container;
+    var proj = activeProject();
+    var apiPid = serverProjectIdForChecklist(proj);
+    var gid = st.guidelineId;
+    var items = (st.filled && st.filled.items) || [];
+    var rows = [], i, it, text;
+    st.approveError = "";
+    for (i = 0; i < items.length; i++) {
+      it = items[i];
+      if (!isItemFilled(it)) continue;
+      /* Save text written in this screen's document editor. Server-backed auto
+       * items and manual entries already loaded from the server need no write. */
+      if (!it._doc && (it.status !== "manual" || st.manual[String(it.num)] != null)) continue;
+      text = String(it.filled || "").trim();
+      if (!text) continue;
+      rows.push({ num: it.num, text: text.length > 8000 ? text.slice(0, 8000) : text });
+    }
+    if (!apiPid || !SMD.api || !gid) {
+      st.approved = true;
+      st.manual[APPROVAL_KEY] = approvalPayload();
+      try { compute(); } catch (e) {}
+      paint(target);
+      return;
+    }
+    st.approving = true;
+    paint(target);
+    var chain = Promise.resolve();
+    for (i = 0; i < rows.length; i++) {
+      (function (row) {
+        chain = chain.then(function () { return saveManualEntry(apiPid, gid, row.num, row.text); });
+      })(rows[i]);
+    }
+    var marker = approvalPayload();
+    chain.then(function () {
+      return saveManualEntry(apiPid, gid, APPROVAL_KEY, marker);
+    }).then(function () {
+      st.approving = false;
+      st.approved = true;
+      st.approveError = "";
+      for (i = 0; i < rows.length; i++) st.manual[String(rows[i].num)] = rows[i].text;
+      st.manual[APPROVAL_KEY] = marker;
+      try { compute(); } catch (e) {}
+      paint(target);
+    }, function (err) {
+      st.approving = false;
+      var msg = err && (err.message || (err.error && err.error.message));
+      st.approveError = msg
+        ? String(msg).replace(/[\u2014\u2013]/g, "-")
+        : "Could not save the approval. Check the connection and try again.";
+      paint(target);
     });
   }
 
@@ -461,10 +576,12 @@
     h.push('<div class="rmd-checklist-actions">');
     h.push('<button type="button" class="rmd-checklist-btn" data-rmd-export="csv">Download CSV</button>');
     var remCount = remainingRequiredCount();
-    var canApprove = !st.approved && remCount === 0;
+    var canApprove = !st.approved && !st.approving && remCount === 0;
     var reasonMsg = st.approved ? "" : approveReasonText();
     if (st.approved) {
       h.push('<button type="button" class="rmd-checklist-btn" data-rmd-approve disabled>Approved</button>');
+    } else if (st.approving) {
+      h.push('<button type="button" class="rmd-checklist-btn rmd-checklist-btn-primary" data-rmd-approve disabled aria-busy="true">Saving approval...</button>');
     } else {
       h.push('<button type="button" class="rmd-checklist-btn rmd-checklist-btn-primary" data-rmd-approve' + (canApprove ? '' : ' disabled aria-describedby="rmdChecklistApproveReason"') + '>Approve</button>');
     }
@@ -472,7 +589,15 @@
     if (reasonMsg) h.push('<p id="rmdChecklistApproveReason" class="rmd-checklist-note rmd-checklist-approve-reason" data-rmd-approve-reason>' + esc(reasonMsg) + '</p>');
     else h.push('<p id="rmdChecklistApproveReason" class="rmd-checklist-note rmd-checklist-approve-reason" data-rmd-approve-reason hidden></p>');
     if (phone) h.push('<p class="rmd-checklist-note">Tap an item to jump to that part of the document.</p>');
-    if (st.approved) h.push('<p id="rmdChecklistApproved" class="rmd-checklist-approved">Approved on this device. You still upload the pack yourself.</p>');
+    if (st.approved) {
+      var approvedCopy = serverProjectIdForChecklist(proj)
+        ? "Approved and saved to your project. You still upload the pack yourself."
+        : "Approved on this device. You still upload the pack yourself.";
+      h.push('<p id="rmdChecklistApproved" class="rmd-checklist-approved">' + esc(approvedCopy) + '</p>');
+    }
+    if (st.approveError) {
+      h.push('<div class="rmd-checklist-banner" role="alert"><strong>' + esc(st.approveError) + '</strong></div>');
+    }
     if (st.error) {
       if (SMD.p2 && SMD.p2.errHtml) {
         h.push(SMD.p2.errHtml(st.errObj || { message: st.error }, "retry"));
@@ -563,11 +688,10 @@
       };
     }
     if (exp) exp.onclick = function () { exportCsv(); };
-    if (approve && !st.approved) {
+    if (approve && !st.approved && !st.approving) {
       approve.onclick = function () {
         if (remainingRequiredCount() !== 0) return;
-        st.approved = true;
-        paint(lastContainer);
+        persistApproval(container);
       };
     }
     if (retry) {
@@ -678,7 +802,7 @@
     var btn = root.querySelector("[data-rmd-approve]");
     var reason = root.querySelector("[data-rmd-approve-reason]");
     var rem, msg;
-    if (!btn || st.approved) return;
+    if (!btn || st.approved || st.approving) return;
     rem = remainingRequiredCount();
     msg = approveReasonText();
     btn.disabled = rem !== 0;

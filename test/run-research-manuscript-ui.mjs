@@ -506,11 +506,14 @@ try {
   ok((await text('[data-rmd="full-draft-po"]')).trim() === 'Full draft (PaperOrchestra)', 'PO button has exact text "Full draft (PaperOrchestra)"');
   const countBeforePo = jobsCalls.length;
   await click('[data-rmd="full-draft-po"]');
+  ok(await until(`!!document.querySelector('[data-rmd="po-start"]')`, 3000), 'PO button asks for confirmation before starting the job');
+  ok(jobsCalls.length === countBeforePo, 'no job is created before the clinician confirms');
+  await click('[data-rmd="po-start"]');
   for (let i = 0; i < 50; i++) {
     if (jobsCalls.length > countBeforePo) break;
     await sleep(100);
   }
-  ok(jobsCalls.length > countBeforePo, 'tapping PO button POSTs to /jobs');
+  ok(jobsCalls.length > countBeforePo, 'confirming the PO quote POSTs to /jobs');
   const poJobCall = jobsCalls[jobsCalls.length - 1];
   ok(poJobCall && poJobCall.kind === 'manuscript_draft', 'PO job request kind is manuscript_draft');
   ok(poJobCall && typeof poJobCall.idempotencyKey === 'string' && poJobCall.idempotencyKey.length > 0, 'PO job request has valid random idempotencyKey');

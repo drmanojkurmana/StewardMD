@@ -434,6 +434,10 @@ test("checklists: list, alias, 404, snapshot from real rows, manual round trip",
   assert.deepEqual(viaFile.entries, { "1a": "Reported in the title." });
   const viaAlias = await call(env, "GET", "v1/projects/" + pid + "/checklist-manual/consort", "tok-bob");
   assert.deepEqual(viaAlias.entries, put.entries);
+  const snapWithManual = await call(env, "GET", "v1/projects/" + pid + "/checklist-snapshot", "tok-alice");
+  assert.deepEqual(snapWithManual.snapshot.checklistManual,
+    { consort2025: { "1a": "Reported in the title." } },
+    "the project snapshot carries manual entries so Submit sees the checklist completion");
   assert.equal(sql(env).prepare("SELECT COUNT(*) AS n FROM research_audit_events WHERE project_id=? AND event_type='checklist_manual_saved'").get(pid).n, 1);
   assert.equal((await call(env, "PUT", "v1/projects/" + pid + "/checklist-manual/missing", "tok-bob",
     { num: "1a", text: "x" })).http, 404);
