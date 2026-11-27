@@ -370,11 +370,18 @@
     }
     st.approving = true;
     paint(target);
+    /* Write manual entries in bounded parallel batches so multi-item checklists
+     * finish within interactive latency before writing the approval marker. */
+    var BATCH = 6;
     var chain = Promise.resolve();
-    for (i = 0; i < rows.length; i++) {
-      (function (row) {
-        chain = chain.then(function () { return saveManualEntry(apiPid, gid, row.num, row.text); });
-      })(rows[i]);
+    for (i = 0; i < rows.length; i += BATCH) {
+      (function (chunk) {
+        chain = chain.then(function () {
+          return Promise.all(chunk.map(function (row) {
+            return saveManualEntry(apiPid, gid, row.num, row.text);
+          }));
+        });
+      })(rows.slice(i, i + BATCH));
     }
     var marker = approvalPayload();
     chain.then(function () {
@@ -418,7 +425,7 @@
       "#researchMD .rmd-checklist-actions { display: flex; flex-wrap: wrap; gap: 8px; }",
       "#researchMD .rmd-checklist-btn { appearance: none; min-height: 48px; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--rmd-line, #e5ddce); background: var(--rmd-panel, #fffdf9); color: var(--rmd-ink, #e3ecea); font: 600 14px/1.2 var(--rmd-f, system-ui, sans-serif); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; touch-action: manipulation; }",
       "#researchMD .rmd-checklist-btn-primary { background: var(--rmd-acc-grad, #1b41bf); border-color: transparent; color: #fff; box-shadow: var(--rmd-lift, none); }",
-      "#researchMD .rmd-checklist-btn[disabled] { color: var(--rmd-mut, #93a4a8); }",
+      "#researchMD .rmd-checklist-btn[disabled], #researchMD .rmd-checklist-btn-primary[disabled] { background: var(--rmd-panel, #fffdf9); border: 1px dashed var(--rmd-line, #c6d0cf); color: var(--rmd-mut, #485458); box-shadow: none; cursor: not-allowed; opacity: 1; }",
       "#researchMD .rmd-checklist-screen :focus-visible { outline: 2px solid var(--rmd-acc, #1b41bf); outline-offset: 2px; }",
       "#researchMD .rmd-checklist-counts { margin: 0 0 12px; font: 600 13px/1.4 var(--rmd-f, system-ui, sans-serif); }",
       "#researchMD .rmd-checklist-note, #researchMD .rmd-checklist-approved { margin: 0 0 12px; color: var(--rmd-mut, #93a4a8); font-size: 13px; }",

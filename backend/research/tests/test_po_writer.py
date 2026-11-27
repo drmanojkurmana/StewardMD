@@ -240,3 +240,29 @@ def test_build_manuscript_orders_imrad_and_keeps_subsections_attached():
         "acknowledgements",
         "references",
     ]
+
+
+def test_latex_symbols_dashes_and_token_punctuation_cleanup():
+    raw = (
+        "Heterogeneity $\\tau^2$ was {{run:r1.i2}}%; significance p={{run:r1.p}}; "
+        "effect -- see https://example.com/a--b --- overall.\n"
+        "| col1 | col2 |\n| --- | --- |"
+    )
+    text = writer.latex_to_text(raw)
+    assert "τ^2" in text or "τ" in text
+    assert "{{run:r1.i2}}%" not in text
+    assert "https://example.com/a--b" in text
+    assert "| --- | --- |" in text
+    assert "effect -- see" not in text
+    assert "b - overall" in text
+    rendered = writer.render_tokens(
+        "I2 {{run:r1.i2}}%; p={{run:r1.p}}; upper {{run:r1.ciUpper}}",
+        {
+            "r1.i2": {"value": 92.2, "formatted": "92.2%"},
+            "r1.p": {"value": 0.0001, "formatted": "< .001"},
+            "r1.ciUpper": {"value": 0.70, "formatted": "0.70"},
+        },
+    )
+    assert "92.2%%" not in rendered
+    assert "p < .001" in rendered
+    assert "p=<" not in rendered

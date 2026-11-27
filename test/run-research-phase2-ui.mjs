@@ -596,6 +596,15 @@ try {
       ok(await noOverflow(), `no horizontal overflow on ${name} at ${width}px`);
       ok(await noEmDash(), `no em-dash in UI text on ${name} at ${width}px`);
     }
+    if (width === 390) {
+      await nav('prisma');
+      await until(`!!document.querySelector('[data-rmd="prisma-fit"]')`, 5000);
+      ok(await ev(`(()=>{const w=document.querySelector('.rmd-prisma-scroll-wrap');const s=document.querySelector('.rmd-svg-scroll-container');return !!w && !!s && s.scrollWidth > s.clientWidth && w.classList.contains('is-scrollable')})()`), 'PRISMA 2020 shows horizontal scroll affordance at 390px');
+      await click('[data-rmd="prisma-fit"]');
+      ok(await until(`(()=>{const w=document.querySelector('.rmd-prisma-scroll-wrap');const s=document.querySelector('.rmd-svg-scroll-container');return !!w && w.classList.contains('is-fit') && s && s.scrollWidth <= s.clientWidth + 2})()`, 3000), 'PRISMA Fit screen fits full diagram within 390px');
+      await click('[data-rmd="prisma-fit"]');
+      ok(await until(`(()=>{const w=document.querySelector('.rmd-prisma-scroll-wrap');return !!w && !w.classList.contains('is-fit')})()`, 3000), 'PRISMA toggles back to full size scrollable view');
+    }
     if (width >= 768) {
       await nav('screening');
       await until(`!!document.querySelector('.rmd-pane-left')`, 5000);

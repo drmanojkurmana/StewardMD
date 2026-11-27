@@ -1556,19 +1556,40 @@ async function createSearchRun(env, db, uid, projectId, body, requestId) {
     .bind(projectId, database, query, canonicalJson(filters), dateTo, Date.now() - 86400000).first();
   if (existing) return json({ searchRun: searchRunOf(existing) }, 200, { "x-request-id": requestId });
   const connector = SEARCH_DATABASES[database];
+  const isEpmc = database === "europe_pmc";
+  const budgetMs = isEpmc ? 50000 : 80000;
   const config = {
     contactEmail: env.RESEARCH_CONTACT_EMAIL,
     apiKey: pubmedConnector.resolveNcbiApiKey(env),
     plusToken: env.RESEARCH_CROSSREF_TOKEN,
-    deadline: Date.now() + 600000,
+    deadline: Date.now() + budgetMs,
+    timeoutMs: isEpmc ? 22000 : 30000,
+    maxRetries: isEpmc ? 1 : 5,
+    partialOnBudget: isEpmc,
   };
   let result;
   try {
     result = await connector.search(query, filters, dateTo, config);
   } catch (e) { return searchFailure(env, db, uid, projectId, spec, e, requestId); }
-  let raws;
-  try { raws = await connector.fetchRecords(result.ids, config); }
-  catch (e) { return searchFailure(env, db, uid, projectId, spec, e, requestId); }
+  let raws = [];
+  let partial = !!result.partial;
+  try {
+    const fetchIds = isEpmc && result.ids.length > 200 ? result.ids.slice(0, 200) : result.ids;
+    if (fetchIds.length < result.ids.length) partial = true;
+    raws = await connector.fetchRecords(fetchIds, config);
+    if (isEpmc && (!raws || !raws.length) && Array.isArray(result.liteRecords) && result.liteRecords.length) {
+      raws = result.liteRecords;
+      partial = true;
+    }
+    if (isEpmc && raws.length < result.ids.length) partial = true;
+  } catch (e) {
+    if (isEpmc && Array.isArray(result.liteRecords) && result.liteRecords.length) {
+      raws = result.liteRecords;
+      partial = true;
+    } else {
+      return searchFailure(env, db, uid, projectId, spec, e, requestId);
+    }
+  }
   const now = Date.now();
   const runId = uuid("srch_");
   const archive = {
@@ -1592,9 +1613,14 @@ async function createSearchRun(env, db, uid, projectId, body, requestId) {
         JSON.stringify(rec.authors), rec.year, rec.doi, JSON.stringify(rec.extra || {}), now).run();
     recordsAdded += (inserted.meta && inserted.meta.changes) || 0;
   }
-  await audit(db, projectId, uid, "search_run_created", runId, { database, resultCount: result.ids.length, recordsAdded });
+  await audit(db, projectId, uid, "search_run_created", runId, { database, resultCount: result.ids.length, recordsAdded, partial });
   const row = await db.prepare("SELECT * FROM research_search_runs WHERE id=?").bind(runId).first();
-  return json({ searchRun: searchRunOf(row) }, 201, { "x-request-id": requestId });
+  const payload = { searchRun: searchRunOf(row) };
+  if (partial) {
+    payload.partial = true;
+    payload.notice = "Large search completed within server time limits: archived " + result.ids.length + " IDs and loaded the first " + recordsAdded + " records. Narrow your query for a smaller set.";
+  }
+  return json(payload, 201, { "x-request-id": requestId });
 }
 async function getSearchRun(db, uid, searchRunId, requestId) {
   const row = await db.prepare("SELECT * FROM research_search_runs WHERE id=?").bind(searchRunId).first();

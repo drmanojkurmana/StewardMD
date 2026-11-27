@@ -696,6 +696,10 @@
 
     adoptServerProject: function (sp) {
       var now = Date.now();
+      var prev = null;
+      for (var pi = 0; pi < state.projects.length; pi++) {
+        if (state.projects[pi].id === sp.id) { prev = state.projects[pi]; break; }
+      }
       var project = {
         id: sp.id,
         serverId: sp.id,
@@ -705,6 +709,8 @@
         specialty: sp.specialty || "",
         studyType: sp.studyType || "Systematic Review",
         researchQuestion: sp.researchQuestion || "",
+        targetJournal: sp.targetJournal || (prev && prev.targetJournal) || "",
+        targetJournalName: sp.targetJournalName || (prev && prev.targetJournalName) || "",
         role: sp.role || "owner",
         createdAt: sp.createdAt || now,
         updatedAt: now
@@ -765,6 +771,27 @@
       }
       saveState();
       notify();
+    },
+
+    updateProject: function (id, patch) {
+      if (!id || !patch) return null;
+      var target = null;
+      for (var i = 0; i < state.projects.length; i++) {
+        if (state.projects[i].id === id || state.projects[i].serverId === id) {
+          target = state.projects[i];
+          break;
+        }
+      }
+      if (!target) return null;
+      var fields = ["title", "discipline", "specialty", "studyType", "researchQuestion", "targetJournal", "targetJournalName"];
+      for (var f = 0; f < fields.length; f++) {
+        var key = fields[f];
+        if (patch[key] !== undefined) target[key] = patch[key];
+      }
+      target.updatedAt = Date.now();
+      saveState();
+      notify();
+      return target;
     },
 
     // Studies CRUD
@@ -832,10 +859,13 @@
       notify();
 
       var serverPid = serverProjectId(pid);
-      /* A reference with no outcome numbers (e.g. a published case added from Novelty) is not an
-       * analysable study: the server refuses it (400 invalid_study), so it stays on the phone as before. */
+      /* A reference with no outcome numbers (e.g. from Novelty or Search) is not an
+       * analysable study row for /studies (400 invalid_study); never queue or POST it to /studies. */
       var hasInputs = !!(study.inputs && typeof study.inputs === "object" && Object.keys(study.inputs).length);
-      if (!serverPid || !hasInputs) {
+      if (!hasInputs) {
+        return study;
+      }
+      if (!serverPid) {
         STORE.queueAction("study_create", study);
         return study;
       }

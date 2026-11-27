@@ -322,5 +322,13 @@ describe("format check route", { concurrency: false, skip: SKIP }, () => {
     assert.equal(byId(again.checks, "abstract").status, "fail");
     assert.equal(byId(again.checks, "reporting_checklist").status, "warn");
     assert.match(byId(again.checks, "reporting_checklist").detail, /1 of/);
+
+    const catCheck = await call(env, "GET", "v1/projects/" + pid + "/format-check?journal=ijccm", "tok-alice");
+    assert.equal(catCheck.http, 200, JSON.stringify(catCheck));
+    assert.equal(catCheck.journalId, "ijccm");
+    assert.equal(catCheck.journalName, "Indian Journal of Critical Care Medicine (IJCCM)");
+    assert.equal(byId(catCheck.checks, "word_count").status, "pass");
+    assert.equal(byId(catCheck.checks, "tables_figures").status, "pass");
+    assert.equal(byId(catCheck.checks, "reference_count").status, "pass");
   });
 });

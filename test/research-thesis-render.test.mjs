@@ -58,3 +58,55 @@ test("digits inside a word (HbA1c, T2DM) are not badged as thesis numbers", () =
   assert.match(html, />8\.4<\/span>/, "8.4 is still a badge");
   assert.match(html, /role="button">1<\/span> patient/, "a standalone 1 is still a badge");
 });
+
+test("journalView merges matched seed row by name and dedupes boilerplate", () => {
+  const annalsSeed = {
+    id: "annals",
+    name: "Annals of Internal Medicine",
+    wordLimit: null,
+    publisher: null,
+    abstractFormat: null,
+    referenceStyle: null,
+    apcNote: null,
+    url: null
+  };
+  const annalsCatalogue = {
+    id: "annals_internal_med",
+    name: "Annals of Internal Medicine",
+    shortName: "Ann Intern Med",
+    publisher: "American College of Physicians",
+    specialty: "Internal Medicine",
+    wordLimit: 3000,
+    abstractFormat: "Structured (Background, Objective...), up to 250 words",
+    referenceStyle: "vancouver",
+    apcNote: "Subscription publication is free; open access fee optional",
+    url: "https://www.acpjournals.org/journal/aim/authors"
+  };
+  const cureus = {
+    id: "cureus",
+    name: "Cureus",
+    publisher: "Springer Nature",
+    specialty: "General Medicine",
+    wordLimit: null,
+    abstractFormat: "Structured, up to 3500 characters",
+    referenceStyle: "vancouver",
+    apcNote: "Free publishing tier available",
+    url: "https://www.cureus.com/author_guide"
+  };
+  const view = THESIS.journalView({
+    items: [THESIS.normJournal(annalsCatalogue), THESIS.normJournal(cureus)],
+    matches: [Object.assign(THESIS.normJournal(annalsSeed), { matchScore: 7 })]
+  });
+  const annalsRows = view.filter((j) => /Annals of Internal Medicine/.test(j.name));
+  assert.equal(annalsRows.length, 1, "Annals of Internal Medicine is deduplicated across seed and catalogue");
+  assert.equal(annalsRows[0].wordLimit, 3000, "merged row inherits catalogue wordLimit");
+  const annalsHtml = THESIS.journalRowHtml(annalsRows[0]);
+  assert.equal(annalsHtml.indexOf("Check the author guidelines"), -1, "merged Annals card shows real metadata without boilerplate");
+
+  const sparseOnlyHtml = THESIS.journalRowHtml(THESIS.normJournal(annalsSeed));
+  const boilerplateHits = sparseOnlyHtml.match(/Check the author guidelines/g) || [];
+  assert.ok(boilerplateHits.length <= 1, "sparse journal card repeats Check the author guidelines at most once");
+
+  const cureusHtml = THESIS.journalRowHtml(THESIS.normJournal(cureus));
+  assert.ok(/Word limit:<\/b> Check the author guidelines/.test(cureusHtml), "single missing field (Cureus wordLimit) keeps inline guidance");
+});

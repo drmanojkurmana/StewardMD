@@ -53,8 +53,9 @@ test("checklist picker uses protocol and publication keys", function () {
 
 test("legacy journeys stay on their old paths", function () {
   const thesis = journey("Thesis to Journal Article");
-  assert.equal(thesis.length, 8);
+  assert.equal(thesis.length, 9);
   assert.equal(thesis[0], "thesis");
+  assert.ok(thesis.indexOf("manuscript") >= 0);
   assert.equal(journey("Systematic Review & Meta-Analysis").length, 15);
   const obs = journey("Observational Study");
   assert.equal(obs.indexOf("iec"), -1);

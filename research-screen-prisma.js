@@ -19,6 +19,8 @@
       .replace(/'/g, "&#39;");
   };
 
+  var D = G.document;
+
   var st = {
     projectId: null,
     loaded: false,
@@ -26,9 +28,35 @@
     error: null,
     prisma: null,
     generatedTs: null,
-    reasons: []
+    reasons: [],
+    fitMode: false
   };
   var seq = 0;
+
+  var cssInjected = false;
+  function injectCss() {
+    if (cssInjected || !D || !D.head || D.getElementById("rmdPrismaCss")) {
+      cssInjected = true;
+      return;
+    }
+    cssInjected = true;
+    var el = D.createElement("style");
+    el.id = "rmdPrismaCss";
+    el.textContent = [
+      "#researchMD .rmd-prisma-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }",
+      "#researchMD .rmd-prisma-head .rmd-card-heading { margin: 0; }",
+      "#researchMD .rmd-prisma-fit-btn { min-height: 44px; padding: 8px 12px; font-size: 12.5px; }",
+      "#researchMD .rmd-prisma-scroll-wrap { position: relative; max-width: 100%; border: 1px solid var(--rmd-line, #e5ddce); border-radius: 10px; background: var(--rmd-bg, #f8f1e4); overflow: hidden; }",
+      "#researchMD .rmd-svg-scroll-container { width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 8px; box-sizing: border-box; }",
+      "#researchMD .rmd-prisma-scroll-wrap.is-scrollable::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 28px; pointer-events: none; background: linear-gradient(90deg, rgba(0, 0, 0, 0), var(--rmd-bg, #f8f1e4) 92%); }",
+      "#researchMD .rmd-prisma-scroll-wrap.is-at-end::after, #researchMD .rmd-prisma-scroll-wrap.is-fit::after { display: none; }",
+      "#researchMD .rmd-prisma-scroll-wrap.is-fit .rmd-svg-scroll-container { overflow-x: hidden; padding: 6px; }",
+      "#researchMD .rmd-prisma-scroll-wrap.is-fit .rmd-prisma-svg { min-width: 0; width: 100%; }",
+      "#researchMD .rmd-prisma-hint { margin: 6px 0 0; font: 400 12.5px/1.4 var(--rmd-f, system-ui, sans-serif); color: var(--rmd-mut, #5b607a); display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }",
+      "@media (min-width: 700px) { #researchMD .rmd-prisma-hint, #researchMD .rmd-prisma-fit-btn { display: none; } }"
+    ].join("\n");
+    D.head.appendChild(el);
+  }
 
   function p2() { return SMD.p2 || {}; }
 
@@ -88,8 +116,9 @@
 
   function buildDiagramSvg(pr) {
     var byReason = pr.excludedByReason || [];
-    var reasonH = 64 + byReason.length * 18;
-    var totalH = Math.max(576, 384 + reasonH + 20);
+    var boxH = 74;
+    var reasonH = boxH + byReason.length * 18;
+    var totalH = Math.max(660, 442 + reasonH + 24);
     var s = [];
     s.push('<svg class="rmd-prisma-svg" viewBox="0 0 720 ' + totalH + '" role="img" aria-label="PRISMA 2020 flow diagram" xmlns="http://www.w3.org/2000/svg">');
     s.push('<title>PRISMA 2020 flow: records, reports and studies through screening</title>');
@@ -102,47 +131,48 @@
     s.push('</style>');
 
     // Identification row
-    s.push(svgBox(20, 16, 340, 64, ["Records identified from databases", "(PubMed, Europe PMC, Crossref, S2)"], pr.recordsFromDatabases, "recordsFromDatabases", false));
-    s.push(svgBox(380, 16, 320, 64, ["Records identified from other sources", "(RIS, BibTeX, CSV imports)"], pr.recordsFromOtherSources, "recordsFromOtherSources", false));
+    s.push(svgBox(20, 16, 340, boxH, ["Records identified from databases", "(PubMed, Europe PMC, Crossref, S2)"], pr.recordsFromDatabases, "recordsFromDatabases", false));
+    s.push(svgBox(380, 16, 320, boxH, ["Records identified from other sources", "(RIS, BibTeX, CSV imports)"], pr.recordsFromOtherSources, "recordsFromOtherSources", false));
 
     // Merge junction, duplicates branch
-    s.push('<line x1="190" y1="80" x2="190" y2="112" class="rp-arrow"/>');
-    s.push('<line x1="540" y1="80" x2="540" y2="112" class="rp-arrow"/>');
-    s.push('<line x1="540" y1="112" x2="190" y2="112" class="rp-arrow"/>');
-    s.push(svgArrow(190, 112, 190, 158));
-    s.push(svgArrow(240, 112, 418, 128));
-    s.push(svgBox(420, 96, 280, 64, ["Records removed before screening:", "duplicates"], pr.recordsDuplicatesRemoved, "recordsDuplicatesRemoved", false));
+    s.push('<line x1="190" y1="90" x2="190" y2="118" class="rp-arrow"/>');
+    s.push('<line x1="540" y1="90" x2="540" y2="118" class="rp-arrow"/>');
+    s.push('<line x1="540" y1="118" x2="190" y2="118" class="rp-arrow"/>');
+    s.push(svgArrow(190, 118, 190, 192));
+    s.push(svgArrow(190, 139, 418, 139));
+    s.push(svgBox(420, 102, 280, boxH, ["Records removed before screening:", "duplicates"], pr.recordsDuplicatesRemoved, "recordsDuplicatesRemoved", false));
 
     // Records screened
-    s.push(svgBox(20, 160, 340, 64, ["Records screened", "(title and abstract)"], pr.recordsScreened, "recordsScreened", false));
-    s.push(svgArrow(360, 192, 418, 192));
-    s.push(svgBox(420, 160, 280, 64, ["Records excluded", "(title and abstract)"], pr.recordsExcluded, "recordsExcluded", false));
-    s.push(svgArrow(190, 224, 190, 270));
+    s.push(svgBox(20, 194, 340, boxH, ["Records screened", "(title and abstract)"], pr.recordsScreened, "recordsScreened", false));
+    s.push(svgArrow(360, 231, 418, 231));
+    s.push(svgBox(420, 194, 280, boxH, ["Records excluded", "(title and abstract)"], pr.recordsExcluded, "recordsExcluded", false));
+    s.push(svgArrow(190, 268, 190, 316));
 
     // Reports sought
-    s.push(svgBox(20, 272, 340, 64, ["Reports sought for retrieval"], pr.reportsSought, "reportsSought", false));
-    s.push(svgArrow(360, 304, 418, 304));
-    s.push(svgBox(420, 272, 280, 64, ["Reports not retrieved"], pr.reportsNotRetrieved, "reportsNotRetrieved", false));
-    s.push(svgArrow(190, 336, 190, 382));
+    s.push(svgBox(20, 318, 340, boxH, ["Reports sought for retrieval"], pr.reportsSought, "reportsSought", false));
+    s.push(svgArrow(360, 355, 418, 355));
+    s.push(svgBox(420, 318, 280, boxH, ["Reports not retrieved"], pr.reportsNotRetrieved, "reportsNotRetrieved", false));
+    s.push(svgArrow(190, 392, 190, 440));
 
     // Reports assessed
-    s.push(svgBox(20, 384, 340, 64, ["Reports assessed for eligibility", "(full text)"], pr.reportsAssessed, "reportsAssessed", false));
-    s.push(svgArrow(360, 416, 418, 416));
-    s.push(svgBox(420, 384, 280, reasonH, ["Reports excluded, with reasons"], pr.reportsExcluded, "reportsExcluded", false));
+    s.push(svgBox(20, 442, 340, boxH, ["Reports assessed for eligibility", "(full text)"], pr.reportsAssessed, "reportsAssessed", false));
+    s.push(svgArrow(360, 479, 418, 479));
+    s.push(svgBox(420, 442, 280, reasonH, ["Reports excluded, with reasons"], pr.reportsExcluded, "reportsExcluded", false));
     for (var i = 0; i < byReason.length; i++) {
       var label = p2().reasonLabel(byReason[i].reasonCode, st.reasons);
-      s.push('<text x="434" y="' + (384 + 64 + 14 + i * 18) + '" class="rp-reason">' + esc(label) + ': ' + byReason[i].count + '</text>');
+      s.push('<text x="434" y="' + (442 + boxH + 14 + i * 18) + '" class="rp-reason">' + esc(label) + ': ' + byReason[i].count + '</text>');
     }
-    s.push(svgArrow(190, 448, 190, 494));
+    s.push(svgArrow(190, 516, 190, 564));
 
     // Studies included
-    s.push(svgBox(20, 496, 340, 64, ["Studies included in review"], pr.studiesIncluded, "studiesIncluded", true));
+    s.push(svgBox(20, 566, 340, boxH, ["Studies included in review"], pr.studiesIncluded, "studiesIncluded", true));
 
     s.push('</svg>');
     return s.join("\n");
   }
 
   function render(container) {
+    injectCss();
     var store = SMD.store;
     var project = store ? store.getActiveProject() : null;
     if (!project) {
@@ -183,8 +213,14 @@
         h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="to-conflicts">Open Conflicts</button></div>');
       }
       h.push('<div class="rmd-card">');
+      h.push('<div class="rmd-prisma-head">');
       h.push('<h3 class="rmd-card-heading">Flow Diagram</h3>');
-      h.push('<div class="rmd-svg-scroll-container">' + buildDiagramSvg(pr) + '</div>');
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm rmd-prisma-fit-btn" data-rmd="prisma-fit" aria-pressed="' + (st.fitMode ? "true" : "false") + '">' + (st.fitMode ? "Full size" : "Fit screen") + '</button>');
+      h.push('</div>');
+      h.push('<div class="rmd-prisma-scroll-wrap ' + (st.fitMode ? "is-fit" : "is-scrollable") + '">');
+      h.push('<div class="rmd-svg-scroll-container" tabindex="0" aria-label="PRISMA 2020 flow diagram scroll area">' + buildDiagramSvg(pr) + '</div>');
+      h.push('</div>');
+      h.push('<p class="rmd-prisma-hint" data-rmd="prisma-hint">' + (st.fitMode ? "Fitted to screen width. Tap Full size to read larger text." : "Swipe sideways to view full diagram, or tap Fit screen.") + '</p>');
       h.push('</div>');
 
       h.push('<div class="rmd-card">');
@@ -208,6 +244,27 @@
     bindEvents(container);
   }
 
+  function syncScrollAffordance(container) {
+    var wrap = container.querySelector(".rmd-prisma-scroll-wrap");
+    var scroller = container.querySelector(".rmd-svg-scroll-container");
+    if (!wrap || !scroller) return;
+    if (st.fitMode) {
+      wrap.classList.add("is-fit");
+      wrap.classList.remove("is-scrollable");
+      wrap.classList.remove("is-at-end");
+      return;
+    }
+    wrap.classList.remove("is-fit");
+    var overflow = scroller.scrollWidth > scroller.clientWidth + 4;
+    if (overflow) wrap.classList.add("is-scrollable");
+    else wrap.classList.remove("is-scrollable");
+    if (!overflow || scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth - 4) {
+      wrap.classList.add("is-at-end");
+    } else {
+      wrap.classList.remove("is-at-end");
+    }
+  }
+
   function bindEvents(container) {
     function on(sel, fn) {
       var els = container.querySelectorAll(sel);
@@ -217,6 +274,15 @@
     on('[data-rmd="to-search"]', function () { SMD.navigate("search", {}); });
     on('[data-rmd="to-conflicts"]', function () { SMD.navigate("conflicts", {}); });
     on('[data-rmd="prisma-refresh"]', function () { st.loaded = false; render(container); });
+    on('[data-rmd="prisma-fit"]', function () {
+      st.fitMode = !st.fitMode;
+      render(container);
+    });
+    var scroller = container.querySelector(".rmd-svg-scroll-container");
+    if (scroller) {
+      scroller.addEventListener("scroll", function () { syncScrollAffordance(container); });
+      syncScrollAffordance(container);
+    }
   }
 
   SMD.screens.prisma = {

@@ -67,27 +67,39 @@ export async function fetchWithRetry(url, options = {}) {
     method = "GET", headers = {}, body,
     fetchImpl = (...a) => globalThis.fetch(...a),
     sleep = defaultSleep, random = Math.random, now = Date.now,
-    bucket = null, deadline = Infinity, timeoutMs = 30000, maxRetries = 5,
+    bucket = null, deadline = Infinity, timeoutMs = 30000, maxRetries = 5, signal = null,
   } = options;
   let lastDelay = 0;
   for (let attempt = 0; ; attempt++) {
+    if (signal && signal.aborted)
+      throw new ConnectorError("search_failed", "Database request timed out");
     if (now() > deadline)
-      throw new ConnectorError("search_failed", "Search run exceeded the 10 minute ceiling");
+      throw new ConnectorError("search_failed", "Search run exceeded the time ceiling");
     if (bucket) await bucket.acquire(now, sleep);
+    if (signal && signal.aborted)
+      throw new ConnectorError("search_failed", "Database request timed out");
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
+    const onAbort = () => controller.abort();
+    if (signal) signal.addEventListener("abort", onAbort, { once: true });
     let res;
     try {
       res = await fetchImpl(url, { method, headers, body, signal: controller.signal });
     } catch (e) {
       clearTimeout(timer);
+      if (signal) signal.removeEventListener("abort", onAbort);
+      if (signal && signal.aborted)
+        throw new ConnectorError("search_failed", "Database request timed out");
       if (attempt >= maxRetries)
         throw new ConnectorError("search_failed", "Database request failed after retries: " + String((e && e.message) || e).slice(0, 160));
       lastDelay = backoffDelay(attempt, random);
+      if (now() + lastDelay > deadline)
+        throw new ConnectorError("search_failed", "Search run exceeded the time ceiling");
       await sleep(lastDelay);
       continue;
     }
     clearTimeout(timer);
+    if (signal) signal.removeEventListener("abort", onAbort);
     if (res.status === 429 || res.status >= 500) {
       if (attempt >= maxRetries) {
         const code = res.status === 429 ? "search_rate_limited" : "search_failed";

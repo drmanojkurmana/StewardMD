@@ -1399,11 +1399,52 @@ export async function listJournals(ctx, url) {
     j.name.toLowerCase().includes(q) || j.scope.some((s) => s.toLowerCase().includes(q)));
   return api.json({ journals }, 200, { "x-request-id": requestId });
 }
+function journalFromCatalogue(entry) {
+  if (!entry) return null;
+  const limits = {};
+  if (entry.maxReferences != null) limits.references = entry.maxReferences;
+  if (entry.maxTables != null) limits.tables = entry.maxTables;
+  if (entry.maxFigures != null) limits.figures = entry.maxFigures;
+  return {
+    id: entry.id,
+    name: entry.name,
+    shortName: entry.shortName || "",
+    issn: entry.issn || "",
+    scope: [],
+    designs: [],
+    authorInstructionsUrl: entry.url || null,
+    wordLimits: {
+      abstract: entry.abstractWordLimit == null ? null : entry.abstractWordLimit,
+      main: entry.wordLimit == null ? null : entry.wordLimit,
+    },
+    referenceStyle: entry.referenceStyle || null,
+    limits,
+    checkedTs: null,
+  };
+}
+
 /* One journal row, or null. Seeds on first read. Used by format-check. */
 export async function loadJournal(db, id) {
   await ensureSeeded(db);
   const row = await db.prepare("SELECT * FROM research_journals WHERE id=?").bind(id).first();
-  return row ? journalOf(row) : null;
+  if (row) return journalOf(row);
+  const cat = JOURNALS_CATALOGUE.find((j) => j.id === id);
+  if (cat) return journalFromCatalogue(cat);
+  if (id === "default") {
+    return {
+      id: "default",
+      name: "General Indian medical journal format",
+      issn: "",
+      scope: [],
+      designs: [],
+      authorInstructionsUrl: null,
+      wordLimits: { abstract: 250, main: 3000 },
+      referenceStyle: "vancouver",
+      limits: {},
+      checkedTs: null,
+    };
+  }
+  return null;
 }
 
 /* GET /v1/journals/{id} */

@@ -804,15 +804,31 @@
     } catch (e) { return {}; }
   }
 
+  function syncProjectJournal(pid, j) {
+    if (!pid || !j || !SMD || !SMD.store) return;
+    var jid = j.id ? String(j.id) : (j.custom ? "custom" : "default");
+    var jname = String(j.shortName || j.name || "");
+    if (typeof SMD.store.updateProject === "function") {
+      SMD.store.updateProject(pid, { targetJournal: jid, targetJournalName: jname });
+      return;
+    }
+    if (typeof SMD.store.getProject === "function") {
+      var p = SMD.store.getProject(pid);
+      if (p) { p.targetJournal = jid; p.targetJournalName = jname; }
+    }
+  }
+
   function saveThesis(pid, patch) {
     try {
-      if (typeof localStorage === "undefined") return;
-      var all = JSON.parse(localStorage.getItem(THESIS_KEY) || "{}");
-      var cur = all[pid] || {}, k;
-      for (k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) cur[k] = patch[k];
-      all[pid] = cur;
-      localStorage.setItem(THESIS_KEY, JSON.stringify(all));
+      if (typeof localStorage !== "undefined") {
+        var all = JSON.parse(localStorage.getItem(THESIS_KEY) || "{}");
+        var cur = all[pid] || {}, k;
+        for (k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) cur[k] = patch[k];
+        all[pid] = cur;
+        localStorage.setItem(THESIS_KEY, JSON.stringify(all));
+      }
     } catch (e) {}
+    if (patch && patch.journal) syncProjectJournal(pid, patch.journal);
   }
 
   function activeProject() {
@@ -1543,28 +1559,41 @@
     return true;
   }
 
+  function normJournalName(name) {
+    return String(name || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/^\s+|\s+$/g, "");
+  }
+
   function journalView(state) {
-    var items = state.items || [], matches = state.matches || [], byId = {}, used = {}, out = [], i, j, key, cat;
-    for (i = 0; i < items.length; i++) byId[journalKey(items[i])] = items[i];
+    var items = state.items || [], matches = state.matches || [], byId = {}, byName = {}, used = {}, usedNames = {}, out = [], i, j, key, nkey, cat;
+    for (i = 0; i < items.length; i++) {
+      byId[journalKey(items[i])] = items[i];
+      nkey = normJournalName(items[i].name);
+      if (nkey && !byName[nkey]) byName[nkey] = items[i];
+    }
     for (i = 0; i < matches.length; i++) {
       j = matches[i];
       key = journalKey(j);
-      if (used[key]) continue;
-      cat = byId[key];
+      nkey = normJournalName(j.name);
+      cat = byId[key] || (nkey ? byName[nkey] : null);
+      if (used[key] || (cat && used[journalKey(cat)]) || (nkey && usedNames[nkey])) continue;
       if (cat) {
         j = copyJournal(cat);
         j.matchScore = matches[i].matchScore;
+        used[journalKey(cat)] = true;
       } else {
         j = copyJournal(j);
       }
       j._best = true;
       used[key] = true;
+      if (nkey) usedNames[nkey] = true;
       out.push(j);
     }
     for (i = 0; i < items.length; i++) {
       key = journalKey(items[i]);
-      if (used[key]) continue;
+      nkey = normJournalName(items[i].name);
+      if (used[key] || (nkey && usedNames[nkey])) continue;
       used[key] = true;
+      if (nkey) usedNames[nkey] = true;
       j = copyJournal(items[i]);
       j._best = false;
       out.push(j);
@@ -1574,28 +1603,38 @@
 
   function journalRowHtml(j) {
     var pressed = selectedJournalKey() === j.id;
-    var meta = [j.publisher || "Check the author guidelines"];
-    var words = j.wordLimit == null ? "Check the author guidelines" : fmtInt(j.wordLimit) + " words";
-    var abs = checkValue(j.abstractFormat);
-    var refs = j.referenceStyle ? styleName(j.referenceStyle) : "Check the author guidelines";
-    var fee = checkValue(j.apcNote);
-    var h = [];
+    var meta = [];
+    if (j.publisher) meta.push(j.publisher);
     if (j.specialty) meta.push(j.specialty);
+    var missingCount = (j.wordLimit == null ? 1 : 0) + (!j.abstractFormat ? 1 : 0) + (!j.referenceStyle ? 1 : 0) + (!j.apcNote ? 1 : 0);
+    var specs = [];
+    if (j.wordLimit != null) specs.push('<span><b>Word limit:</b> ' + esc(fmtInt(j.wordLimit) + " words") + '</span>');
+    else if (missingCount === 1) specs.push('<span><b>Word limit:</b> Check the author guidelines</span>');
+    if (j.abstractFormat) specs.push('<span><b>Abstract:</b> ' + esc(j.abstractFormat) + '</span>');
+    else if (missingCount === 1) specs.push('<span><b>Abstract:</b> Check the author guidelines</span>');
+    if (j.referenceStyle) specs.push('<span><b>References:</b> ' + esc(styleName(j.referenceStyle)) + '</span>');
+    else if (missingCount === 1) specs.push('<span><b>References:</b> Check the author guidelines</span>');
+    var h = [];
     h.push('<li class="rmd-journal-item" data-selected="' + (pressed ? "true" : "false") + '">');
     h.push('<button type="button" class="rmd-journal-pick" data-rmd-journal-id="' + esc(j.id) + '" aria-pressed="' + (pressed ? "true" : "false") + '">');
     h.push('<span class="rmd-journal-head"><span class="rmd-journal-name">' + esc(j.name) + '</span><span class="rmd-journal-selected"' + (pressed ? "" : " hidden") + '>Selected</span></span>');
-    h.push('<span class="rmd-journal-meta">' + esc(meta.join(", ")) + '</span>');
-    h.push('<span class="rmd-journal-specs">');
-    h.push('<span><b>Word limit:</b> ' + esc(words) + '</span>');
-    h.push('<span><b>Abstract:</b> ' + esc(abs) + '</span>');
-    h.push('<span><b>References:</b> ' + esc(refs) + '</span>');
-    h.push('</span>');
-    h.push('<span class="rmd-journal-fee"><b>Fee:</b> ' + esc(fee) + '</span>');
+    if (meta.length) h.push('<span class="rmd-journal-meta">' + esc(meta.join(", ")) + '</span>');
+    if (specs.length) h.push('<span class="rmd-journal-specs">' + specs.join("") + '</span>');
+    if (j.apcNote) {
+      h.push('<span class="rmd-journal-fee"><b>Fee:</b> ' + esc(j.apcNote) + '</span>');
+    } else if (missingCount === 1) {
+      h.push('<span class="rmd-journal-fee"><b>Fee:</b> Check the author guidelines</span>');
+    }
+    if (missingCount > 1 && !j.url && !specs.length) {
+      h.push('<span class="rmd-journal-meta">Requirements: Check the author guidelines</span>');
+    }
     h.push('</button>');
     if (j.url) {
       h.push('<a class="rmd-journal-link" href="' + esc(j.url) + '" target="_blank" rel="noopener noreferrer">Author guidelines</a>');
-    } else {
+    } else if (missingCount > 1 && specs.length) {
       h.push('<span class="rmd-journal-link rmd-journal-link-missing">Author guidelines: Check the author guidelines</span>');
+    } else if (missingCount <= 1) {
+      h.push('<span class="rmd-journal-link rmd-journal-link-missing">Author guidelines: not on file</span>');
     }
     h.push('</li>');
     return h.join("");
@@ -1666,6 +1705,7 @@
     ts = loadThesis(tpid);
     injectCSS();
     if (!ts.pages || !ts.pages.length) { needPagesHtml(container); return; }
+    if (!proj.targetJournal && ts && ts.journal) syncProjectJournal(tpid, ts.journal);
     var seq = ++journalSeq;
     var sel = journalOf();
     var custom = selectedJournalKey() === "custom";
@@ -2133,32 +2173,73 @@
     G.setTimeout(function () { D.addEventListener("click", onDoc, true); }, 0);
   }
 
+  var saveBusy = false;
+  var pendingSavePromise = null;
+
+  function mirrorDraftLocal(pid, sections) {
+    try {
+      if (typeof localStorage === "undefined") return;
+      var key = "smd_rmd_manuscript_local_v1";
+      var all = JSON.parse(localStorage.getItem(key) || "{}");
+      var entry = all[pid] || { sections: {}, order: [], headings: {} };
+      entry.sections = entry.sections || {};
+      entry.headings = entry.headings || {};
+      var order = [];
+      for (var i = 0; i < sections.length; i++) {
+        var s = sections[i];
+        entry.sections[s.id] = s.text || "";
+        entry.headings[s.id] = s.heading || s.id;
+        order.push(s.id);
+      }
+      entry.order = order;
+      all[pid] = entry;
+      localStorage.setItem(key, JSON.stringify(all));
+    } catch (e) {}
+  }
+
   function saveDraft(container) {
+    if (saveBusy) return pendingSavePromise;
     var draft = ts.draft;
     if (!draft || !draft.sections || !draft.sections.length) {
       SMD.p2.flashNotice(container, "Write or draft the paper first.", "error");
-      return;
+      return Promise.resolve(false);
     }
     var pid = tpid;
-    SMD.api.request("GET", "/v1/projects/" + pid + "/manuscript").then(function (res) {
+    var btn = container ? container.querySelector("#rmdDraftSave") : null;
+    saveBusy = true;
+    if (btn) { btn.disabled = true; btn.textContent = "Saving..."; }
+    mirrorDraftLocal(pid, draft.sections);
+    var p = SMD.api.request("GET", "/v1/projects/" + pid + "/manuscript").then(function (res) {
       return (res && res.manuscript && res.manuscript.version) || 1;
     }).catch(function () { return 1; }).then(function (version) {
-      var chain = Promise.resolve(), i;
-      for (i = 0; i < draft.sections.length; i++) {
-        (function (sec) {
-          chain = chain.then(function () {
-            return SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + sec.id, { version: version, heading: sec.heading, text: sec.text });
-          });
-        })(draft.sections[i]);
-      }
-      return chain;
+      var secs = draft.sections;
+      var first = SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + secs[0].id, { version: version, heading: secs[0].heading, text: secs[0].text });
+      return first.then(function () {
+        var rest = [];
+        for (var i = 1; i < secs.length; i++) {
+          (function (sec) {
+            rest.push(SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + sec.id, { version: version, heading: sec.heading, text: sec.text }));
+          })(secs[i]);
+        }
+        return Promise.all(rest);
+      });
     }).then(function () {
+      saveBusy = false;
+      pendingSavePromise = null;
+      if (btn) { btn.disabled = false; btn.textContent = "Save to the manuscript"; }
       SMD.p2.flashNotice(container, "Saved to the manuscript.", "info");
       SMD.navigate("thesis-tables");
+      return true;
     }).catch(function () {
+      saveBusy = false;
+      pendingSavePromise = null;
+      if (btn) { btn.disabled = false; btn.textContent = "Save to the manuscript"; }
       SMD.p2.flashNotice(container, "Saved on this device.", "info");
       SMD.navigate("thesis-tables");
+      return false;
     });
+    pendingSavePromise = p;
+    return p;
   }
 
   /* ---------- screen: tables ---------- */
@@ -2236,7 +2317,7 @@
       }
       h.push('</div>');
     }
-    h.push('<div class="rmd-card-actions">' + nextBtn("checklist", "Next: reporting checklist") + '</div>');
+    h.push('<div class="rmd-card-actions">' + nextBtn("manuscript", "Next: manuscript") + '</div>');
     h.push('</div></div>');
     container.innerHTML = h.join("");
     bindNext(container);
@@ -2354,6 +2435,10 @@
     paginateBlocks: paginateBlocks,
     handleFile: handleFile,
     sectionHtml: sectionHtml,
+    journalView: journalView,
+    journalRowHtml: journalRowHtml,
+    normJournal: normJournal,
+    pendingSave: function () { return pendingSavePromise || Promise.resolve(true); },
     PAPER_TYPES: PAPER_TYPES,
     DEFAULT_JOURNAL: DEFAULT_JOURNAL
   };

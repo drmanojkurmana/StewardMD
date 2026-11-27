@@ -233,3 +233,22 @@ def test_exponent_digits_are_notation_not_numbers():
     numbers = [v["number"] for v in gates.check_numbers(sections, {})]
     assert "2" not in numbers
     assert "42" in numbers  # a real untokenised result number is still caught
+
+
+def test_direction_gate_checks_nested_pooled_tokens():
+    import math
+    from paperorchestra.adapter.po_adapter.loader import build_token_table
+    table = build_token_table([{
+        "runId": "r1",
+        "measure": "RR",
+        "method": "random",
+        "result": {
+            "pooled": {"effect": math.log(0.49), "ciLower": math.log(0.34), "ciUpper": math.log(0.70)},
+            "heterogeneity": {"i2": 72.8, "p": 0.0001},
+        },
+    }])
+    ok_sections = [section("results", "BCG significantly reduced tuberculosis (RR {{run:r1.pooled.effect}}).")]
+    assert gates.check_direction(ok_sections, table) == []
+    bad_sections = [section("results", "BCG significantly increased tuberculosis (RR {{run:r1.pooled.effect}}).")]
+    violations = gates.check_direction(bad_sections, table)
+    assert any(v["gate"] == "direction_mismatch" for v in violations)

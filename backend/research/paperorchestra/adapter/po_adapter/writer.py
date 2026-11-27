@@ -25,6 +25,13 @@ _MATH_SYMBOLS = {
     "ge": "\u2265",
     "geq": "\u2265",
     "approx": "\u2248",
+    "tau": "\u03c4",
+    "chi": "\u03c7",
+    "alpha": "\u03b1",
+    "beta": "\u03b2",
+    "mu": "\u03bc",
+    "sigma": "\u03c3",
+    "Delta": "\u0394",
 }
 _STRIP_NOARG_CMDS = re.compile(
     r"\\(?:noindent|smallskip|medskip|bigskip|centering|maketitle|"
@@ -390,7 +397,9 @@ def latex_to_text(text: str, ref_map: dict | None = None) -> str:
     text = re.sub(r"(?<!\\)\\\((.+?)(?<!\\)\\\)", lambda m: m.group(1), text, flags=re.DOTALL)
     text = re.sub(r"(?<!\\)\$(?!\$)((?:\\.|[^$\n\\])+?)(?<!\\)\$", lambda m: m.group(1), text)
 
-    math_re = re.compile(r"\\(times|pm|leq|le|geq|ge|approx)(?![A-Za-z@])")
+    math_re = re.compile(
+        r"\\(times|pm|leq|le|geq|ge|approx|tau|chi|alpha|beta|mu|sigma|Delta)(?![A-Za-z@])"
+    )
     text = math_re.sub(
         lambda m: _MATH_SYMBOLS[m.group(1)] if _even_backslashes(text, m.start()) else m.group(0),
         text,
@@ -419,6 +428,8 @@ def latex_to_text(text: str, ref_map: dict | None = None) -> str:
         return tok
 
     text = _replace_braced_commands(text, ref_map, mask_url=mask_url)
+    # Also mask bare http/https URLs so "--" inside URL paths is never rewritten.
+    text = re.sub(r"https?://[^\s<>\"')}\]]+", lambda m: mask_url(m.group(0)), text)
 
     # 7. Tilde non-breaking space -> ASCII space (outside \url and \~).
     text = re.sub(r"(?<!\\)~", " ", text)
@@ -438,6 +449,17 @@ def latex_to_text(text: str, ref_map: dict | None = None) -> str:
     # 9. Strip leftover TeX grouping braces (tokens/cites/escaped braces are masked).
     text = text.replace("{", "").replace("}", "")
 
+    # 9.5 Normalize LaTeX en/em-dash ligatures (-- / ---) outside table dividers and masked tokens/URLs.
+    dash_lines = []
+    for ln in text.split("\n"):
+        if re.match(r"^\s*\|[\s\-|:]+\|\s*$", ln):
+            dash_lines.append(ln)
+        else:
+            ln = re.sub(r"(?<!-)---(?!-)", " - ", ln)
+            ln = re.sub(r"(?<!-)--(?!-)", "-", ln)
+            dash_lines.append(ln)
+    text = "\n".join(dash_lines)
+
     # 10. Restore masked literal braces, URLs, tokens, and citations.
     for idx, ch in enumerate(escaped_braces):
         text = text.replace(f"{prefix}B{idx}Z", ch)
@@ -445,6 +467,9 @@ def latex_to_text(text: str, ref_map: dict | None = None) -> str:
         text = text.replace(f"{prefix}U{idx}Z", val)
     for idx, val in enumerate(protected):
         text = text.replace(f"{prefix}P{idx}Z", val)
+
+    # 10.5 Strip duplicate trailing '%' immediately after an i2/i_squared percentage token.
+    text = re.sub(r"(\{\{run:[^}]*\.(?:i2|i_squared)\}\})\s*%", r"\1", text)
 
     # 11. Whitespace normalization.
     text = re.sub(r"[ \t]{2,}", " ", text)
@@ -499,11 +524,27 @@ def render_tokens(text: str, token_table: dict) -> str:
     """Deterministic token -> value substitution for previews. The canonical
     manuscript text keeps tokens (plan rule 6; contracts/phase-5/tokens.md).
     Unknown tokens are left as-is so the gates can still flag them."""
+    try:
+        from manuscript.render_tokens import format_value_for_field
+    except Exception:
+        format_value_for_field = None
+
     def sub(match):
-        entry = token_table.get(f"{match.group(1)}.{match.group(2)}")
-        return str(entry["value"]) if entry else match.group(0)
-    return re.sub(r"\{\{run:([A-Za-z0-9_-]+)\.([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*)\}\}",
-                  sub, text)
+        field = match.group(2)
+        entry = token_table.get(f"{match.group(1)}.{field}")
+        if not entry:
+            return match.group(0)
+        if entry.get("formatted") not in (None, ""):
+            return str(entry["formatted"])
+        val = entry.get("value")
+        if format_value_for_field is not None and isinstance(val, (int, float)) and not isinstance(val, bool):
+            return format_value_for_field(field, val)
+        return str(val)
+    out = re.sub(r"\{\{run:([A-Za-z0-9_-]+)\.([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*)\}\}",
+                 sub, text)
+    out = re.sub(r"(\d+(?:\.\d+)?)%{2,}", r"\1%", out)
+    out = re.sub(r"\b([pP])\s*=\s*([<>]\s*\.\d+)", r"\1 \2", out)
+    return out
 
 
 def _order_sections(sections: list) -> list:
