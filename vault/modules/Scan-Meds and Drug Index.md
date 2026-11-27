@@ -167,3 +167,61 @@ blank preg/lact, renal/hepatic and PK cards) with the registered mechanism scene
   against prod D1) plus the path-filtered `deploy-worker.yml` run on merge to `main` (environment-gated
   approval). Until then `/structured?name=Blinatumomab` answers `found:false` on the server while the app
   opens the full monograph offline; no production data was touched from this agent.
+
+## "No drugs match" for molecules with no Indian brand (2026-11-27, Oxandrolone report)
+
+Owner searched **Oxandrolone** and got "No drugs match". It has no Indian brand (server `/search` is the brand
+catalogue) and no record in `data/clinical-index.js`, yet the Turner syndrome and cachexia lessons mention it.
+A sweep of `prep/` + `kb/reference` against the DailyMed generic-name list and NLEM 2022 found ~190 such molecules.
+
+- **Label monographs added** to `data/fda-labels/` by `scripts/build-fda-monographs.py` (DailyMed, then openFDA);
+  Health Canada product monographs by `scripts/build-hc-monographs.py` for the ones with no US label.
+  Molecules with no label anywhere (withdrawn or never marketed in the US/Canada) stay absent: no invented records.
+- **Builder fixes** (`build-fda-monographs.py`): the first DailyMed hit is no longer trusted. The SPL document type
+  must be a human label (`HUMAN_DOC_TYPES`): LUTALYSE (dinoprost) and CYDECTIN (moxidectin) are cattle labels with
+  nothing in the title to say so. Older labels whose sections are all "SPL unclassified" are read by section title
+  (`TITLE_CODES`, ZANOSAR-era SPLs). openFDA refuses combination products (riboflavin returned "Multivitamin with
+  Fluoride") except `COMBO_ONLY` molecules sold only in a combination (bictegravir, atoltivimab, nirmatrelvir), and
+  refuses homeopathic potencies ("30C", HPUS). `PINNED` holds hand-checked setids the title matcher cannot parse
+  (Tretten, Advate, Paxlovid). Salt words gained lysine/meglumine.
+  `build-hc-monographs.py` needs `pip install pymupdf`; without it every PDF fails silently as "failed".
+- **Health Canada builder fixes** (`build-hc-monographs.py`): the PDF was fetched as `pdf.hres.ca/dpd_pm/<DIN>.PDF`.
+  The PM number is NOT the DIN: most DINs 404, and some return ANOTHER drug's monograph (HONVOL's DIN fetched
+  PRISTIQ, TUBOCURARINE's fetched Sandoz Omeprazole, DIPHTHERIA ANTITOXIN's fetched gliclazide). Now `pm_urls()`
+  reads the real link from the DPD product page, never guesses, and `names_molecule()` refuses a monograph whose
+  indications/dosage do not name the molecule or brand. Numbered headings ("1 INDICATIONS") and the table of
+  contents (keep the longer body) are handled. All four records the old builder had committed were the wrong drug
+  and were live in the app: bendroflumethiazide showed paroxetine, reserpine pantoprazole, sulfisoxazole memantine,
+  thrombin dasatinib. They were deleted; neither DailyMed nor the fixed HC builder has a correct label for them.
+- **Synonyms** (`build-clinical-index.mjs` `EXTRA_ALIASES`): INN/BP/abbreviation names keyed to the exact row
+  (benzylpenicillin, calcium folinate, desferrioxamine, GTN, 5-FU, 6-MP, thiamazole, leuprorelin, zoledronate, ...).
+  A key with no row is warned and ignored. The generated search also matches with separators removed
+  ("cotrimoxazole") and retries British spellings (sulph, aluminium, oestr, haem) when nothing matches.
+- **Empty state** (`api.js` `emptyHTML`): says the molecule is in neither the Indian brand list nor the monograph
+  library and may not be marketed in India, instead of a bare "No drugs match".
+- Tokens: `IDX_VER` idx16, `api.js` `-empty1`, `offline-clinical.js` `idx16`.
+- Tests: `test/clinical-index.test.mjs` (synonyms, separators, label rows), `test/fda-label-match.test.mjs`
+  (animal doc type, titled sections, lysine/meglumine), UI `test/run-drug-missing-ui.mjs` (Playwright).
+- Environment: the build needs `dailymed.nlm.nih.gov`, `api.fda.gov`, `health-products.canada.ca`, `pdf.hres.ca`
+  (the cloud "stewardmd" environment allows them).
+
+### Every catalogue molecule (2026-11-27, owner: "all drugs should have the monograph")
+- Measured against `GET /compositions` (all letters, curl; Python's UA gets a Cloudflare 403): 2,979 compositions,
+  1,710 distinct molecules after splitting on "+" and "/" the way `offline-clinical.js splitCombo` does.
+- Before: 204 molecules had no monograph. Fixed by catalogue-spelling aliases in `EXTRA_ALIASES` (Tazobactum,
+  Vitamin B6, Potassium Clavulanate, Soluble Insulin, Nph, Mecobalamin, ...) and 34 more label records (mostly US
+  OTC Drug Facts: antacids, sunscreens, menthol, camphor; Novocain, Paragard refused as the wrong product).
+- After: 1,565 of 1,710 covered; 2,775 of 2,979 compositions fully covered. The ~145 left have NO US or Canadian
+  label: nutraceuticals, excipients, enzymes, herbals, India-only drugs (oxetacaine, etofylline, centbucridine,
+  arterolane, sulfamethopyrazine), withdrawn drugs (phenylpropanolamine, ticarcillin, phenformin). Gap list:
+  regenerate with the method above.
+- Builder guard: a label record with no Indications/Dosage/Purpose is refused ("Ammonium Muriaticum" came back empty).
+
+### Drafts for the rest (2026-11-27)
+- 126 StewardMD-authored draft monographs in `data/authored/` (flag `smd_drug_drafts`, default OFF) cover the molecules with no
+  US/Canadian label. With drafts on: 1,707 of 1,710 catalogue molecules and 2,977 of 2,979 compositions have a monograph;
+  with drafts off: 1,571 and 2,778. Decision and the skipped EU/UK step: [[Decisions]] 2026-11-27.
+- `offline-clinical.js resolveOne()`: every component of a combination now resolves bundle -> index alias -> label/draft file.
+  Before, components were bundle-only, so "Piperacillin + Tazobactum" lost its Tazobactum section and label-only components showed nothing.
+- `build-www.sh` copies `data/authored/`. Tokens: `IDX_VER` idx17, `LABEL_VER` lbl3, `api.js -empty3`, sidebar `-drugdraft1`.
+- UI test `test/run-drug-missing-ui.mjs` covers drafts hidden/shown, banner, and the Tazobactum combination.

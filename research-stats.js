@@ -10,7 +10,8 @@
  * approximation with the continuity correction. 2 by 2 chi-square uses Yates.
  * Odds ratios use the Woolf logit interval (0.5 on every cell only when a
  * cell is 0). Risk ratios use the Katz log interval. Logistic regression is
- * IRLS binomial logit with Wald intervals.
+ * IRLS binomial logit with Wald intervals. ROC curves and AUC follow R pROC
+ * (DeLong interval and paired DeLong test, Youden cut-off).
  */
 (function (G) {
   "use strict";
@@ -4054,6 +4055,296 @@
     }
   }
 
+  /* ---------------- ROC curve and AUC (patient-level diagnostic accuracy) ----------------
+   * Matches R pROC 1.18:
+   *   roc(response, predictor, levels = c(negative, positive), direction = "auto")
+   *     direction "auto": "<" (higher values mean the condition) when the median
+   *     of the controls is <= the median of the cases, else ">".
+   *     thresholds: -Inf, midpoints between sorted unique values, +Inf.
+   *     "<": positive when value > threshold; ">": positive when value < threshold.
+   *   auc(): Mann-Whitney AUC, ties count one half.
+   *   ci.auc(method = "delong"): AUC +/- z * sqrt(S10 / m + S01 / n), kept inside [0, 1].
+   *   coords(x = "best", best.method = "youden"): every threshold with the largest
+   *     sensitivity + specificity (best.weights c(1, 0.5) give plain Youden).
+   *   roc.test(method = "delong", paired = TRUE): Z, two-sided p, CI of the difference.
+   * Placements use midranks (fast DeLong, Sun and Xu 2014), so ties are exact and
+   * the cost is n log n. Sensitivity and specificity at the chosen cut-off carry
+   * exact Clopper-Pearson intervals (R binom.test).
+   */
+  var ROC_MAX_TESTS = 4;
+
+  function midranks(vals) {
+    var n = vals.length, idx = [], r = new Array(n), i, j, k, avg;
+    for (i = 0; i < n; i++) idx.push(i);
+    idx.sort(function (a, b) { return vals[a] - vals[b]; });
+    i = 0;
+    while (i < n) {
+      j = i;
+      while (j + 1 < n && vals[idx[j + 1]] === vals[idx[i]]) j++;
+      avg = (i + j) / 2 + 1;
+      for (k = i; k <= j; k++) r[idx[k]] = avg;
+      i = j + 1;
+    }
+    return r;
+  }
+
+  function medianOf(vals) {
+    var a = vals.slice().sort(function (x, y) { return x - y; });
+    var n = a.length;
+    if (!n) return NaN;
+    return n % 2 ? a[(n - 1) / 2] : (a[n / 2 - 1] + a[n / 2]) / 2;
+  }
+
+  /* cases and controls on the "higher means positive" scale. */
+  function rocPlacements(cases, controls) {
+    var m = cases.length, n = controls.length, all = cases.concat(controls);
+    var rAll = midranks(all), rX = midranks(cases), rY = midranks(controls);
+    var V10 = new Array(m), V01 = new Array(n), i, theta = 0;
+    for (i = 0; i < m; i++) { V10[i] = (rAll[i] - rX[i]) / n; theta += V10[i]; }
+    for (i = 0; i < n; i++) V01[i] = 1 - (rAll[m + i] - rY[i]) / m;
+    theta = theta / m;
+    return { theta: theta, X: V10, Y: V01, m: m, n: n };
+  }
+
+  function placementCov(a, b, theta1, theta2) {
+    var s = 0, i;
+    if (a.length < 2) return NaN;
+    for (i = 0; i < a.length; i++) s += (a[i] - theta1) * (b[i] - theta2);
+    return s / (a.length - 1);
+  }
+
+  function rocVariance(P) {
+    return placementCov(P.X, P.X, P.theta, P.theta) / P.m + placementCov(P.Y, P.Y, P.theta, P.theta) / P.n;
+  }
+
+  function clopperPearson(x, n, level) {
+    var a = 1 - level;
+    if (!(n > 0)) return [null, null];
+    return [x === 0 ? 0 : qbetaPolished(x, n - x + 1, a / 2),
+            x === n ? 1 : qbetaPolished(x + 1, n - x, 1 - a / 2)];
+  }
+
+  function rocTruthLevels(truthVals, positiveLevel) {
+    var seen = {}, levels = [], i, s;
+    for (i = 0; i < truthVals.length; i++) {
+      if (isMissingToken(truthVals[i])) continue;
+      s = trim(truthVals[i]);
+      if (!seen[s]) { seen[s] = 1; levels.push(s); }
+    }
+    levels = sortLevels(levels);
+    if (levels.length !== 2) {
+      badCode("roc_truth_levels", "the condition column must have exactly 2 values (has it, does not have it); it has " + levels.length);
+    }
+    var pos = positiveLevel != null && positiveLevel !== "" ? trim(positiveLevel) : eventLevel(levels);
+    if (indexOfLevel(levels, pos) < 0) badCode("roc_truth_levels", "\"" + pos + "\" is not a value of the condition column");
+    return { positive: pos, negative: levels[0] === pos ? levels[1] : levels[0] };
+  }
+
+  /* One ROC curve. truth: 1 has the condition, 0 does not. values: numbers. */
+  function rocOne(values, truth, opts) {
+    var cases = [], controls = [], i, dir, level, z;
+    opts = opts || {};
+    level = opts.level == null ? 0.95 : opts.level;
+    for (i = 0; i < values.length; i++) {
+      if (truth[i] === 1) cases.push(values[i]); else controls.push(values[i]);
+    }
+    var m = cases.length, n = controls.length;
+    if (!m || !n) badCode("roc_one_class", "need people both with and without the condition (has it: " + m + ", does not: " + n + ")");
+    dir = opts.direction || "auto";
+    if (dir === "auto") dir = medianOf(controls) <= medianOf(cases) ? "<" : ">";
+    if (dir !== "<" && dir !== ">") bad("direction must be auto, < or >");
+    var sx = cases, sy = controls;
+    if (dir === ">") {
+      sx = []; sy = [];
+      for (i = 0; i < m; i++) sx.push(-cases[i]);
+      for (i = 0; i < n; i++) sy.push(-controls[i]);
+    }
+    var P = rocPlacements(sx, sy);
+    var auc = P.theta;
+    var warnings = [];
+    var variance = rocVariance(P), se = null, lo = null, hi = null;
+    if (m < 2 || n < 2 || !isFin(variance)) {
+      warnings.push("Too few people in one group for a confidence interval (needs at least 2 with and 2 without the condition).");
+    } else {
+      se = Math.sqrt(Math.max(variance, 0));
+      z = normalQuantile(1 - (1 - level) / 2);
+      lo = auc - z * se; hi = auc + z * se;
+      if (lo < 0) lo = 0;
+      if (hi > 1) hi = 1;
+    }
+
+    /* thresholds and the curve, in increasing threshold order like pROC */
+    var u = [], all = cases.concat(controls).slice().sort(function (a, b) { return a - b; });
+    for (i = 0; i < all.length; i++) if (!u.length || all[i] !== u[u.length - 1]) u.push(all[i]);
+    var thr = [-Infinity];
+    for (i = 0; i + 1 < u.length; i++) {
+      var mid = (u[i] + u[i + 1]) / 2;
+      if (Math.abs(mid) > 1e100) mid = u[i] / 2 + u[i + 1] / 2;
+      thr.push(mid);
+    }
+    thr.push(Infinity);
+    var cs = cases.slice().sort(function (a, b) { return a - b; });
+    var ct = controls.slice().sort(function (a, b) { return a - b; });
+    var sens = [], spec = [], tps = [], tns = [];
+    var ic = 0, it = 0, k;
+    for (k = 0; k < thr.length; k++) {
+      while (ic < m && cs[ic] < thr[k]) ic++;
+      while (it < n && ct[it] < thr[k]) it++;
+      /* no value equals a midpoint threshold, so "below" and "at or below" agree */
+      var casesBelow = ic, controlsBelow = it, tp, tn;
+      if (dir === "<") { tp = m - casesBelow; tn = controlsBelow; }
+      else { tp = casesBelow; tn = n - controlsBelow; }
+      tps.push(tp); tns.push(tn);
+      sens.push(tp / m); spec.push(tn / n);
+    }
+
+    /* Youden: largest sensitivity + specificity, compared on whole counts */
+    var bestScore = -1, ties = [];
+    for (k = 0; k < thr.length; k++) {
+      var score = tps[k] * n + tns[k] * m;
+      if (score > bestScore) { bestScore = score; ties = [k]; }
+      else if (score === bestScore) ties.push(k);
+    }
+    /* several cut-offs can tie; the app shows the one that misses the fewest
+       people with the condition (highest sensitivity), and lists the rest */
+    var pick = ties[0];
+    for (k = 1; k < ties.length; k++) if (tps[ties[k]] > tps[pick]) pick = ties[k];
+    var tpB = tps[pick], tnB = tns[pick], fnB = m - tpB, fpB = n - tnB;
+    var best = {
+      threshold: thr[pick],
+      sensitivity: sens[pick],
+      specificity: spec[pick],
+      youden: sens[pick] + spec[pick] - 1,
+      tp: tpB, fp: fpB, fn: fnB, tn: tnB,
+      sensitivityCi: clopperPearson(tpB, m, level),
+      specificityCi: clopperPearson(tnB, n, level),
+      ppv: (tpB + fpB) > 0 ? tpB / (tpB + fpB) : null,
+      npv: (tnB + fnB) > 0 ? tnB / (tnB + fnB) : null,
+      positiveWhen: dir === "<" ? "above" : "below",
+      ties: ties.map(function (t) { return thr[t]; })
+    };
+    if (auc < 0.5) {
+      warnings.push("The area is below 0.5, so this test does worse than chance in the direction you chose.");
+    }
+    return {
+      n: m + n, nCases: m, nControls: n, direction: dir,
+      auc: auc, se: se, ciLower: lo, ciUpper: hi, ciMethod: "DeLong", level: level,
+      thresholds: thr, sensitivities: sens, specificities: spec,
+      best: best, warnings: warnings,
+      _placements: P
+    };
+  }
+
+  /* Paired DeLong test of two curves built on the same people. */
+  function rocCompareDelong(P1, P2, level) {
+    var m = P1.m, n = P1.n;
+    if (P2.m !== m || P2.n !== n) bad("paired ROC curves need the same people");
+    var s11 = placementCov(P1.X, P1.X, P1.theta, P1.theta) / m + placementCov(P1.Y, P1.Y, P1.theta, P1.theta) / n;
+    var s22 = placementCov(P2.X, P2.X, P2.theta, P2.theta) / m + placementCov(P2.Y, P2.Y, P2.theta, P2.theta) / n;
+    var s12 = placementCov(P1.X, P2.X, P1.theta, P2.theta) / m + placementCov(P1.Y, P2.Y, P1.theta, P2.theta) / n;
+    var v = s11 + s22 - 2 * s12;
+    var d = P1.theta - P2.theta;
+    var sig = Math.sqrt(Math.max(v, 0));
+    var zs, p, zq = normalQuantile(1 - (1 - level) / 2);
+    if (!isFin(v)) return { z: null, p: null, diff: d, ciLower: null, ciUpper: null };
+    if (sig === 0) {
+      zs = d === 0 ? 0 : (d > 0 ? Infinity : -Infinity);
+    } else {
+      zs = d / sig;
+    }
+    p = isFin(zs) ? 2 * normalUpper(Math.abs(zs)) : 0;
+    return { z: zs, p: p, diff: d, ciLower: d - zq * sig, ciUpper: d + zq * sig };
+  }
+
+  /* roc(rows, columns, truthColumn, testColumns, opts)
+   * opts.positiveLevel: value of the condition column that means "has it"
+   *   (default: the usual yes/positive word, else the last level).
+   * opts.direction: "auto" (default), "<" or ">", used for every test.
+   * opts.level: confidence level (default 0.95).
+   * Up to 4 test columns. With 2 or more, every pair is compared with the paired
+   * DeLong test on the people who have both values. */
+  function roc(rows, columns, truthColumn, testColumns, opts) {
+    var i, j, k;
+    opts = opts || {};
+    if (!isArray(rows) || !isArray(columns)) bad("roc needs rows and columns");
+    if (!truthColumn) bad("pick the column that says who has the condition");
+    if (typeof testColumns === "string") testColumns = [testColumns];
+    if (!isArray(testColumns) || !testColumns.length) bad("pick at least one test column");
+    if (testColumns.length > ROC_MAX_TESTS) bad("pick at most " + ROC_MAX_TESTS + " test columns");
+    for (i = 0; i < testColumns.length; i++) {
+      if (testColumns[i] === truthColumn) bad("the test column cannot be the condition column");
+    }
+    var level = opts.level == null ? 0.95 : opts.level;
+    if (!(level > 0 && level < 1)) bad("level must be between 0 and 1");
+    var truthRaw = columnValues(rows, columns, truthColumn);
+    var lv = rocTruthLevels(truthRaw, opts.positiveLevel);
+    var truth = [];
+    for (i = 0; i < truthRaw.length; i++) {
+      if (isMissingToken(truthRaw[i])) truth.push(null);
+      else truth.push(trim(truthRaw[i]) === lv.positive ? 1 : 0);
+    }
+    var testVals = [];
+    for (j = 0; j < testColumns.length; j++) {
+      var raw = columnValues(rows, columns, testColumns[j]), nums = [];
+      for (i = 0; i < raw.length; i++) nums.push(typeof raw[i] === "number" && isFinite(raw[i]) ? raw[i] : parseNumber(raw[i]));
+      testVals.push(nums);
+    }
+    var tests = [];
+    for (j = 0; j < testColumns.length; j++) {
+      var v = [], t = [], dropped = 0;
+      for (i = 0; i < truth.length; i++) {
+        if (truth[i] === null || testVals[j][i] === null) { dropped++; continue; }
+        v.push(testVals[j][i]); t.push(truth[i]);
+      }
+      var res = rocOne(v, t, { direction: opts.direction, level: level });
+      res.name = testColumns[j];
+      res.dropped = dropped;
+      tests.push(res);
+    }
+    var comparisons = [];
+    for (j = 0; j < testColumns.length; j++) {
+      for (k = j + 1; k < testColumns.length; k++) {
+        var va = [], vb = [], tt = [];
+        for (i = 0; i < truth.length; i++) {
+          if (truth[i] === null || testVals[j][i] === null || testVals[k][i] === null) continue;
+          va.push(testVals[j][i]); vb.push(testVals[k][i]); tt.push(truth[i]);
+        }
+        var ra, rb;
+        try {
+          ra = rocOne(va, tt, { direction: tests[j].direction, level: level });
+          rb = rocOne(vb, tt, { direction: tests[k].direction, level: level });
+        } catch (eCmp) {
+          comparisons.push({ a: testColumns[j], b: testColumns[k], n: tt.length, error: eCmp.message });
+          continue;
+        }
+        var cmp = rocCompareDelong(ra._placements, rb._placements, level);
+        comparisons.push({
+          a: testColumns[j], b: testColumns[k], method: "DeLong (paired)",
+          n: tt.length, nCases: ra.nCases, nControls: ra.nControls,
+          aucA: ra.auc, aucB: rb.auc, diff: cmp.diff,
+          z: cmp.z, p: cmp.p, ciLower: cmp.ciLower, ciUpper: cmp.ciUpper,
+          /* pROC warns here too: one test reads high values as positive, the other low */
+          directionsDiffer: ra.direction !== rb.direction
+        });
+      }
+    }
+    for (j = 0; j < tests.length; j++) delete tests[j]._placements;
+    return {
+      truth: truthColumn, positiveLevel: lv.positive, negativeLevel: lv.negative,
+      level: level, tests: tests, comparisons: comparisons, engineVersion: ENGINE_VERSION
+    };
+  }
+
+  /* Plain-language label for an AUC, the usual Hosmer and Lemeshow bands. */
+  function aucBand(auc) {
+    if (!isFin(auc)) return "";
+    if (auc >= 0.9) return "outstanding";
+    if (auc >= 0.8) return "excellent";
+    if (auc >= 0.7) return "acceptable";
+    if (auc > 0.5) return "poor";
+    return "no better than chance";
+  }
+
   var STATS = {
     ENGINE_VERSION: ENGINE_VERSION,
     parseCsv: parseCsv,
@@ -4075,6 +4366,9 @@
     reitsma: reitsma,
     sroc: sroc,
     matchedOr: matchedOr,
+    roc: roc,
+    aucBand: aucBand,
+    defaultPositiveLevel: function (levels) { return eventLevel(sortLevels(levels || [])); },
     _rank: { mannWhitney: mannWhitney, wilcoxonSigned: wilcoxonSigned } /* exposed for the R parity tests */
   };
 

@@ -28,7 +28,7 @@
   var URL_SUP = "/clinical-supplement.json.gz?v=" + SUP_VER;
   // Name/class/tags only, so search costs 329 KB instead of the 6 MB bundle. Loaded on the first
   // search, not at boot. Built by scripts/build-clinical-index.mjs.
-  var IDX_VER = "idx15";
+  var IDX_VER = "idx17";
   var URL_IDX = "/clinical-index.js?v=" + IDX_VER;
   var FLAG = "stewardmd_offline_clinical";        // "0" disables
   var _data = null;      // { v, struct:{comp:{gold|fields}}, mono:{comp:{…}} }
@@ -182,7 +182,7 @@
   /* FDA-label monographs (data/fda-labels/<slug>.json, built by scripts/build-fda-monographs.py). Not in
    * the bundle: each is tens of KB, so one is fetched when its drug is opened, never at startup.
    * slugFor() must match the Python slug() in that script exactly. */
-  var LABEL_VER = "lbl2";
+  var LABEL_VER = "lbl3";
   function slugFor(name) {
     var safe = String(name || "").replace(/[^A-Za-z0-9 ._-]/g, "").trim();
     return safe.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -195,8 +195,13 @@
       var key = row ? row.n : name;
       var slug = slugFor(key);
       if (!slug) return null;
+      /* Draft rows (d:1) are StewardMD-authored monographs for molecules with no regulatory label
+       * (data/authored/, flag smd_drug_drafts, default OFF). The index hides them while the flag is
+       * off, so a draft is only ever fetched when the doctor turned drafts on. */
+      var dir = row && row.d ? "/data/authored/" : "/data/fda-labels/";
+      slug = (row && row.d ? "a:" : "") + slug;
       if (_labelCache[slug] !== undefined) return _labelCache[slug];
-      var labelUrl = "/data/fda-labels/" + slug + ".json?v=" + LABEL_VER;
+      var labelUrl = dir + slug.replace(/^a:/, "") + ".json?v=" + LABEL_VER;
       return ((window.SMD_CONTENT && SMD_CONTENT.fetchJSON)
         ? SMD_CONTENT.fetchJSON(labelUrl, { optional: true })
         : fetch(labelUrl).then(function (r) { return r.ok ? r.json() : null; }))
@@ -204,19 +209,31 @@
         .catch(function () { return null; });
     }).catch(function () { return null; });
   }
+  /* One molecule's record: the bundle, then the index (aliases such as "Tazobactum" -> tazobactam,
+   * British spellings), then a label or draft file. Each component of a combination goes through
+   * this too; before 2026-11-27 components were looked up in the bundle only, so "Aluminium
+   * Hydroxide + Magnesium Hydroxide" showed nothing for a component whose record is a label file. */
+  function resolveOne(name) {
+    var d = lookStruct(name);
+    if (d) return Promise.resolve(d);
+    return ensureIndex().then(function (I) {
+      var row = I && I.get ? I.get(name) : null;
+      if (row) { var d2 = lookStruct(row.n); if (d2) return d2; }
+      return labelFor(name).then(function (rec) { return rec ? { gold: JSON.stringify(rec) } : null; });
+    }).catch(function () { return null; });
+  }
   function structResp(name) {
     return ensureData().then(function () {
       if (isCombo(name)) {
-        var comps = splitCombo(name).map(function (p) { return { name: p, data: lookStruct(p) || null }; });
-        var hasAny = comps.some(function (c) { return c.data; });
-        if (hasAny) {
-          return { composition: name, combo: true, found: true, components: comps };
-        }
+        var parts = splitCombo(name);
+        return Promise.all(parts.map(function (p) { return resolveOne(p).then(function (d) { return { name: p, data: d || null }; }); }))
+          .then(function (comps) {
+            if (comps.some(function (c) { return c.data; })) return { composition: name, combo: true, found: true, components: comps };
+            return resolveOne(name).then(function (d) { return d ? { composition: name, found: true, data: d } : { composition: name, found: false }; });
+          });
       }
-      var d = lookStruct(name);
-      if (d) return { composition: name, found: true, data: d };
-      return labelFor(name).then(function (rec) {
-        return rec ? { composition: name, found: true, data: { gold: JSON.stringify(rec) } } : { composition: name, found: false };
+      return resolveOne(name).then(function (d) {
+        return d ? { composition: name, found: true, data: d } : { composition: name, found: false };
       });
     });
   }

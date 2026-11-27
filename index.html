@@ -2407,12 +2407,12 @@ window.openExternal = function (u) {
 <script src="/fig-guide.js?v=fig18" defer></script>
 <script src="/fig-viewer.js?v=fig18" defer></script>
 <script src="/ilearn.js?v=il1" defer></script>
-<script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1-lbl1-fig1-ipad1-dbclean3-dbhead4-imgs1" defer></script>
+<script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1-lbl1-fig1-ipad1-dbclean3-dbhead4-imgs1-empty3" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
      route MEDAPI drug searches to the local SQLite copy when offline. -->
 <script src="/fflate.min.js" defer></script>
 <script src="/offline-db.js?v=gold363" defer></script>
-<script src="/offline-clinical.js?v=gold367-syn1-idx15-gzfb1-belz1-lbl2-blina1" defer></script>
+<script src="/offline-clinical.js?v=gold367-syn1-idx17-gzfb1-belz1-lbl3-blina1" defer></script>
 <!-- KB data (KB_CORE/CLINICAL/ENRICHMENT/EXPANDED, ~4.8MB) is LAZY-loaded AFTER first paint
      so the branded loading splash appears fast. Reasoning uses closure fallbacks until it's
      ready; StewardRAG awaits window.SMD_KB_READY. -->
@@ -2524,9 +2524,12 @@ window.openExternal = function (u) {
 <script src="/research-explain.js?v=rmd1-scia1" defer></script>
 <script src="/research-glossary.js?v=rmd1" defer></script>
 <!-- ResearchMD master chart: on-device statistics engine + analysis screen (patient rows never leave the phone) -->
-<script src="/research-stats.js?v=ra3-rod2-scia1" defer></script>
+<script src="/research-stats.js?v=ra3-rod2-roc1-scia1" defer></script>
+<script src="/research-roc-view.js?v=roc1" defer></script>
 <script src="/research-ondevice-stats.js?v=rod2-fx1" defer></script>
-<script src="/research-screen-masterchart.js?v=ra3-rod2-rod4-fx1-ux1-scia1" defer></script>
+<!-- ResearchMD: SPSS (.sav) and Stata (.dta) reader for the master chart, on the phone (smd_rmd_statfile, default on) -->
+<script src="/research-statfile.js?v=sf1" defer></script>
+<script src="/research-screen-masterchart.js?v=ra3-rod2-rod4-fx1-ux1-sf1-roc1-scia1" defer></script>
 <script src="/research-phi.js?v=ra5-lf1" defer></script>
 <script src="/research-randomise.js?v=ra2" defer></script>
 <script src="/research-backup.js?v=ra2" defer></script>
@@ -2605,7 +2608,7 @@ window.openExternal = function (u) {
      via window.SMD_SBR). Must load AFTER home.js. -->
 <link rel="stylesheet" href="/settings-ui.css?v=settings1005-ipad2-ipad3-ios9-inner1-ai1-noedgemodel1">
 <script defer src="/settings-ui.js?v=settings1005-ios3-admin1"></script>
-<script defer src="/sidebar-redesign.js?v=surgx1-settings1005-dd1-acct1-prog1-otaonly1-push3-ios1-sbtheme1-swg1"></script>
+<script defer src="/sidebar-redesign.js?v=surgx1-settings1005-dd1-acct1-prog1-otaonly1-push3-ios1-sbtheme1-swg1-drugdraft1"></script>
 <!-- Settings ▸ Apple Watch page (SMD_APPLE_WATCH). Additive; the sidebar's Apple Watch row
      opens it. Auto-detects pairing via the WatchBridge plugin; degrades to an info card on web.
      Must load after sidebar-redesign.js so the row's action resolves. -->

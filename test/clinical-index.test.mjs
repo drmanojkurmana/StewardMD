@@ -225,3 +225,76 @@ test("build-www ships both new payloads, or the app 404s them on the phone", () 
   assert.ok(sh.includes("data/clinical-supplement.json.gz"), "supplement not copied into www/");
   assert.ok(sh.includes("data/clinical-index.js"), "index not copied into www/");
 });
+
+/* 2026-11-27: INN / BP names and old abbreviations found nothing offline although the monograph
+ * ships under the USAN name, and a molecule with no Indian brand and no monograph (Oxandrolone)
+ * answered "No drugs match". */
+test("INN, BP and abbreviation synonyms find the molecule", () => {
+  const cases = {
+    "benzylpenicillin": "Penicillin G", "calcium folinate": "leucovorin", "desferrioxamine": "Deferoxamine",
+    "cytosine arabinoside": "Cytarabine", "glyceryl trinitrate": "Nitroglycerin", "5-FU": "Fluorouracil",
+    "6-mercaptopurine": "Mercaptopurine", "acetylsalicylic acid": "Aspirin", "thiamazole": "Methimazole",
+    "leuprorelin": "Leuprolide", "zoledronate": "Zoledronic Acid", "adriamycin": "Doxorubicin",
+    "xylocaine": "Lidocaine", "valaciclovir": "Valacyclovir", "actinomycin D": "Dactinomycin",
+    "activated charcoal": "Charcoal", "N-acetylcysteine": "Acetylcysteine", "factor VIII": "antihemophilic factor",
+  };
+  for (const [q, want] of Object.entries(cases)) {
+    const top = (I.search(q, 3)[0] || {}).n;
+    assert.equal(top, want, q);
+  }
+});
+
+test("separators and British spellings do not hide a molecule", () => {
+  assert.equal((I.search("cotrimoxazole", 1)[0] || {}).n, "Co-Trimoxazole");
+  assert.equal((I.search("silver sulphadiazine", 1)[0] || {}).n, "Silver Sulfadiazine");
+  assert.ok(I.get("cotrimoxazole"), "get() resolves the unhyphenated form");
+});
+
+test("drugs with no Indian brand now have a label monograph (the Oxandrolone report)", () => {
+  for (const n of ["oxandrolone", "canakinumab", "caplacizumab", "emicizumab", "sodium thiosulfate", "sodium nitrite", "bictegravir"]) {
+    const r = I.get(n);
+    assert.ok(r, n + " is findable");
+    assert.ok(JSON.parse(readFileSync(join(ROOT, "data", "fda-labels", n.replace(/ /g, "-") + ".json"), "utf8")).generic, n + " opens");
+  }
+});
+
+test("Indian brand-catalogue composition spellings resolve to a monograph row", () => {
+  const cases = {
+    "Tazobactum": "tazobactam", "Vitamin B6": "pyridoxine", "Potassium Clavulanate": "clavulanic acid",
+    "Soluble Insulin": "Human Insulin", "Nph": "Insulin Isophane", "Mecobalamin": "Methylcobalamin",
+    "Aluminium Hydroxide": "aluminum hydroxide", "Sulphur": "sulfur", "Copper Sulphate": "copper sulfate",
+    "Eicosapentaenoic Acid": "Omega-3 Fatty Acids (EPA/DHA)", "Light Mineral Oil": "Liquid Paraffin",
+  };
+  for (const [q, want] of Object.entries(cases)) assert.equal((I.get(q) || {}).n, want, q);
+});
+
+/* Draft monographs (data/authored/, owner 2026-11-27): StewardMD-authored records for catalogue molecules
+ * with no US, Canadian or EU label. Hidden unless smd_drug_drafts is "1"; every one must say what it is. */
+test("draft rows are hidden by default and shown only with smd_drug_drafts on", () => {
+  assert.equal(I.get("Oxetacaine"), null, "hidden with the flag off");
+  globalThis.localStorage = { getItem: (k) => (k === "smd_drug_drafts" ? "1" : null) };
+  try {
+    const r = I.get("Oxetacaine");
+    assert.ok(r && r.d === 1, "visible and marked as a draft with the flag on");
+    assert.equal((I.get("Vitamin B2") || {}).n, "Riboflavin", "draft aliases resolve");
+  } finally { delete globalThis.localStorage; }
+  assert.equal(I.get("Oxetacaine"), null, "hidden again once the flag is off");
+});
+
+test("every draft monograph is marked, referenced and free of em/en dashes", () => {
+  const dir = join(ROOT, "data", "authored");
+  const files = readdirSync(dir).filter((f) => f.endsWith(".json"));
+  assert.ok(files.length >= 100, "drafts present");
+  for (const f of files) {
+    const raw = readFileSync(join(dir, f), "utf8");
+    const g = JSON.parse(raw);
+    assert.equal(g.status, "ai_drafted", f);
+    assert.equal(g.src, "stewardmd-authored", f);
+    assert.ok(Array.isArray(g.refs) && g.refs.length >= 1, f + " has references");
+    assert.ok(/DRAFT/.test(g.footer || ""), f + " footer says draft");
+    assert.ok(g.summary && g.cls, f + " has summary and class");
+    assert.ok(!/[–—]/.test(raw), f + " has no en/em dash");
+    // a draft never shadows a regulatory label or bundled record of the same molecule
+    assert.ok(!readdirSync(join(ROOT, "data", "fda-labels")).includes(f), f + " is not also a label file");
+  }
+});

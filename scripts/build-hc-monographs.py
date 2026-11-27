@@ -35,6 +35,9 @@ HEADINGS = {
     "DOSAGE FORMS, COMPOSITION AND PACKAGING": "How supplied",
     "AVAILABILITY OF DOSAGE FORMS": "How supplied",
     "DIRECTIONS FOR USE": "Directions for use",
+    "STORAGE, STABILITY AND DISPOSAL": "Storage and handling",
+    "DOSAGE FORMS, STRENGTHS, COMPOSITION AND PACKAGING": "How supplied",
+    "SERIOUS WARNINGS AND PRECAUTIONS BOX": "Boxed warning",
 }
 TRUNC = 30000
 
@@ -94,6 +97,27 @@ def find_products(name, by_code_ings, products):
         out.extend(products.get(c, []))
     return out
 
+def pm_urls(drug_code, din):
+    """The product monograph PDF is keyed by its own PM number, not the DIN: the DPD product page
+    (dpd-bdpp/info?code=<drug_code>) links it as pdf.hres.ca/dpd_pm/<PM no>.PDF. Using the DIN 404s for
+    most products (ANDROCUR, MYLAN-CYPROTERONE), and where it does not 404 it is often ANOTHER drug's
+    monograph: the DIN for HONVOL fetched PRISTIQ, TUBOCURARINE fetched Sandoz Omeprazole. Never guessed."""
+    urls = []
+    try:
+        page = http_get(f"https://health-products.canada.ca/dpd-bdpp/info?lang=eng&code={drug_code}")
+        urls = list(dict.fromkeys(re.findall(r"https://pdf\.hres\.ca/dpd_pm/\d+\.PDF", page)))
+    except Exception:
+        pass
+    return urls
+
+def names_molecule(sections, name, brand):
+    """The monograph must be about this molecule: its indications name the molecule or the product's
+    brand. A PDF that parses but is about another drug is refused (see pm_urls)."""
+    ind = (sections.get("Indications and usage", "") + "\n" + sections.get("Dosage and administration", "")[:3000]).lower()
+    word = core(name).split(" ")[0]
+    b = re.sub(r"[^a-z]+", " ", (brand or "").lower()).split()
+    return bool(word and re.search(r"\b" + re.escape(word), ind)) or bool(b and len(b[0]) >= 4 and re.search(r"\b" + re.escape(b[0]), ind))
+
 def parse_pdf(data):
     import pymupdf
     doc = pymupdf.open(stream=data, filetype="pdf")
@@ -104,10 +128,13 @@ def parse_pdf(data):
         if cur and buf:
             key = HEADINGS[cur]
             body = clean("\n".join(buf))
-            if body:
-                sections[key] = (sections.get(key, "") + "\n" + body).strip()
+            # A heading seen twice is the table of contents and then the section itself (current PM
+            # format). Keep the longer body rather than gluing the TOC page numbers onto the text.
+            if body and len(body) > len(sections.get(key, "")):
+                sections[key] = body
     for l in lines:
-        head = l.rstrip(":").strip()
+        # Current PMs number their headings: "1 INDICATIONS", "7 WARNINGS AND PRECAUTIONS".
+        head = re.sub(r"^\d{1,2}\.?\s+", "", l.rstrip(":").strip())
         if head in HEADINGS:
             flush(); cur = head; buf = []
         elif cur:
@@ -118,7 +145,7 @@ def parse_pdf(data):
 def build(name, din, brand, sections, pdf_url):
     rec = {"generic": name, "src": "health-canada-monograph", "setid": din, "labelTitle": brand,
            "labelDate": "", "cls": "", "pharm": "", "tags": [], "quick": [], "indications": [], "label": {}, "refs": []}
-    for key in ["Indications and usage", "Dosage and administration", "Contraindications", "Warnings and precautions",
+    for key in ["Boxed warning", "Indications and usage", "Dosage and administration", "Contraindications", "Warnings and precautions",
                 "Adverse reactions", "Drug interactions", "Pregnancy and special populations", "Overdosage",
                 "Clinical pharmacology", "Storage and handling", "Description", "Pharmaceutical information",
                 "How supplied", "Directions for use"]:
@@ -155,13 +182,21 @@ def main():
                 return ("no_product", name)
             for p in prods[:40]:
                 din = str(p["drug_identification_number"]).zfill(8)
-                url = f"https://pdf.hres.ca/dpd_pm/{din}.PDF"
-                try:
-                    data = http_get(url, binary=True)
-                except Exception:
+                data, url = None, ""
+                for url in pm_urls(p["drug_code"], din):
+                    try:
+                        data = http_get(url, binary=True)
+                        if data[:4] == b"%PDF":
+                            break
+                        data = None
+                    except Exception:
+                        data = None
+                if not data:
                     continue
                 sections = parse_pdf(data)
                 if "Indications and usage" not in sections and "Dosage and administration" not in sections:
+                    continue
+                if not names_molecule(sections, name, p.get("brand_name", "")):
                     continue
                 rec = build(name, din, p.get("brand_name", name), sections, url)
                 with open(out, "w", encoding="utf-8") as f:

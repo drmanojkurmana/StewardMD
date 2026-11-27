@@ -38,20 +38,29 @@
   function freshState(pid) {
     return {
       pid: pid, stage: "upload", fileName: "", sample: false, fromCasefiles: false,
-      columns: [], rows: [], types: {}, infer: {}, phiCols: [],
+      columns: [], rows: [], types: {}, infer: {}, phiCols: [], varLabels: {},
       analysis: "", showMean: false, matched: false, running: false,
       ctri: null, iecStatus: null, journey: [],
       isSeries: false, isRct: false, isStudy: false, isCohort: false, isCaseControl: false,
       form: {
         group: "", outcomes: [], variables: [], outcome: "", predictors: [], robustHc3: false, a: "", b: "",
         time: "", event: "", sgroup: "", cox: [],
-        mgroup: "", caseLevel: "", exposure: "", matchSet: ""
+        mgroup: "", caseLevel: "", exposure: "", matchSet: "",
+        truth: "", posLevel: "", tests: []
       },
       results: null, error: "", notice: ""
     };
   }
 
   function stats() { return G.SMD_RESEARCH_STATS; }
+  function statFile() { return G.SMD_RESEARCH_STATFILE; }
+  /* SPSS and Stata upload: ON by default. localStorage smd_rmd_statfile = "0" turns it off on a device. */
+  function statFileEnabled() {
+    var SF = statFile();
+    if (!SF || typeof SF.read !== "function") return false;
+    try { if (G.localStorage && G.localStorage.getItem("smd_rmd_statfile") === "0") return false; } catch (e) { /* storage blocked */ }
+    return true;
+  }
   function onDeviceStats() { return G.SMD_RMD_ONDEVICE_STATS; }
   function onDeviceV2Enabled() {
     var OD = onDeviceStats();
@@ -63,6 +72,15 @@
     return true;
   }
   function explain() { return G.SMD_RESEARCH_EXPLAIN; }
+  function rocView() { return G.SMD_RESEARCH_ROC_VIEW; }
+  function rocEnabled() {
+    var V = rocView(), S = stats();
+    return !!(V && S && typeof S.roc === "function" && (typeof V.isEnabled !== "function" || V.isEnabled()));
+  }
+  function rocHelpers() { return { esc: esc, fmt: fmt, pStr: pStr, pGloss: pGloss }; }
+  function rocLevels(col) {
+    return (mc.infer[col] && mc.infer[col].levels) || [];
+  }
   function rmdStore() { return G.RMDStore; }
   function contracts() { return G.SMD_RESEARCH_CONTRACTS; }
 
@@ -170,7 +188,7 @@
       var all = JSON.parse(localStorage.getItem(MC_KEY) || "{}") || {};
       all[mc.pid] = {
         fileName: mc.fileName, sample: mc.sample,
-        columns: mc.columns, rows: mc.rows, types: mc.types
+        columns: mc.columns, rows: mc.rows, types: mc.types, varLabels: mc.varLabels || {}
       };
       localStorage.setItem(MC_KEY, JSON.stringify(all));
       mc.notice = "Saved on this phone. Nothing was uploaded.";
@@ -202,6 +220,7 @@
     mc.columns = saved.columns.slice();
     mc.rows = saved.rows;
     mc.types = saved.types || {};
+    mc.varLabels = saved.varLabels || {};
     mc.results = null;
     if (stats()) inferAll();
   }
@@ -394,6 +413,7 @@
     }
     mc.fileName = fileName;
     mc.sample = sample;
+    mc.varLabels = table.varLabels || {};
     mc.columns = table.columns.slice();
     mc.rows = table.rows;
     mc.types = {};
@@ -415,7 +435,17 @@
       mc.error = "Could not read that file. Try again, or save the sheet as CSV and upload that.";
       draw();
     };
-    if (/\.xlsx$/i.test(name)) {
+    if (statFileEnabled() && statFile().isStatFileName(name)) {
+      reader.onload = function () {
+        try {
+          adoptStatFile(reader.result, name);
+        } catch (err) {
+          mc.error = statFileError(err && err.message);
+          draw();
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    } else if (/\.xlsx$/i.test(name)) {
       reader.onload = function () {
         parseXlsx(reader.result).then(function (table) {
           adoptTable(table, name, false);
@@ -436,6 +466,36 @@
       };
       reader.readAsText(file);
     }
+  }
+
+  /* ---------- SPSS (.sav) and Stata (.dta), read on this phone ---------- */
+
+  function statFileError(msg) {
+    var m = String(msg || "").replace(/^statfile:\s*/, "");
+    if (!m) m = "Could not read that file.";
+    m = m.charAt(0).toUpperCase() + m.slice(1);
+    if (!/[.!?]$/.test(m)) m += ".";
+    return m + " You can also save it as CSV in SPSS or Stata and upload that.";
+  }
+
+  function adoptStatFile(buf, name) {
+    var SF = statFile();
+    var res = SF.read(buf, { name: name });
+    var table = SF.toTable(res, { applyLabels: true });
+    var varLabels = {};
+    for (var i = 0; i < res.variables.length; i++) {
+      if (res.variables[i].label) varLabels[res.variables[i].name] = res.variables[i].label;
+    }
+    table.varLabels = varLabels;
+    adoptTable(table, name, false);
+    if (mc.stage !== "identifiers") return;
+    var what = res.format === "dta" ? "Stata" : "SPSS";
+    var bits = ["Read on this phone from the " + what + " file. Nothing was uploaded."];
+    if (res.notes.labelledColumns) bits.push(res.notes.labelledColumns + " column" + (res.notes.labelledColumns === 1 ? " has its" : "s have their") + " " + what + " description shown under the name.");
+    if (table.labelsApplied) bits.push("Value labels written in for " + table.labelsApplied + " column" + (table.labelsApplied === 1 ? "" : "s") + ", so you see the words instead of the codes.");
+    if (res.notes.missingBlanked) bits.push(res.notes.missingBlanked + " value" + (res.notes.missingBlanked === 1 ? " was" : "s were") + " marked as missing in " + what + " and " + (res.notes.missingBlanked === 1 ? "is" : "are") + " left blank.");
+    mc.notice = bits.join(" ");
+    draw();
   }
 
   /* ---------- Analysis ---------- */
@@ -762,6 +822,38 @@
     });
   }
 
+  /* ROC curves run on this device in research-stats.js (n log n, fast enough
+     for the main thread even at the 100 000-row ceiling). */
+  function runRoc() {
+    var f = mc.form;
+    if (!f.truth || !f.tests.length) {
+      mc.error = "Pick the condition column and tick 1 to 4 test columns.";
+      draw();
+      return;
+    }
+    if (f.tests.length > 4) {
+      mc.error = "Tick at most 4 tests.";
+      draw();
+      return;
+    }
+    try {
+      var tbl = subTable([f.truth].concat(f.tests));
+      var res = stats().roc(tbl.rows, tbl.columns, f.truth, f.tests.slice(), { positiveLevel: f.posLevel || null });
+      var w = [];
+      for (var i = 0; i < res.tests.length; i++) {
+        if (res.tests[i].dropped > 0) w.push(res.tests[i].name + ": " + res.tests[i].dropped + " rows were left out (missing values).");
+      }
+      mc.results = {
+        kind: "roc", outcome: f.truth, roc: res, warnings: w,
+        paragraph: rocView().paragraph(res, rocHelpers()), onDevice: true
+      };
+      mc.stage = "results";
+    } catch (err) {
+      mc.error = calm(err && err.message);
+    }
+    draw();
+  }
+
   function runAnalysis() {
     var S = stats();
     var f = mc.form;
@@ -770,6 +862,7 @@
     if (mc.analysis === "describe") { runDescribe(); return; }
     if (mc.analysis === "survival") { runSurvival(); return; }
     if (mc.analysis === "matched") { runMatched(); return; }
+    if (mc.analysis === "roc") { runRoc(); return; }
     try {
       if (mc.analysis === "compare") {
         if (!f.group || !f.outcomes.length) {
@@ -1261,6 +1354,11 @@
       f.sgroup = f.sgroup || groups[0] || "";
       f.cox = f.cox || [];
     }
+    if (key === "roc") {
+      f.truth = (f.truth && binaryOptions().indexOf(f.truth) >= 0) ? f.truth : (binaryOptions()[0] || "");
+      f.posLevel = stats().defaultPositiveLevel(rocLevels(f.truth)) || "";
+      f.tests = [];
+    }
     if (key === "matched") {
       f.mgroup = f.mgroup || groups[0] || "";
       f.exposure = f.exposure || binaryOptions()[0] || "";
@@ -1464,6 +1562,7 @@
     else if (r.kind === "describe") parts.push(describeText(r));
     else if (r.kind === "survival") parts.push(survivalText(r));
     else if (r.kind === "matched") parts.push(matchedText(r));
+    else if (r.kind === "roc") parts.push(rocView().manuscriptText(r.roc, rocHelpers()));
     else parts.push(compareText(r));
     return parts.join("\n\n");
   }
@@ -1546,6 +1645,8 @@
           lines.push([g.name, g.n, g.nEvents, med.value == null ? "not reached" : fmt(med.value, 1), med.lower == null ? "" : fmt(med.lower, 1), med.upper == null ? "" : fmt(med.upper, 1)]);
         }
       }
+    } else if (r.kind === "roc") {
+      lines = rocView().csvRows(r.roc, rocHelpers());
     } else if (r.kind === "matched") {
       lines.push(["b", "c", "OR", "CI lower", "CI upper", "p", "Method"]);
       if (r.res && r.res.ok) lines.push([r.res.b, r.res.c, isFinite(r.res.or) ? fmt(r.res.or) : "Inf", fmt(r.res.ciLower), isFinite(r.res.ciUpper) ? fmt(r.res.ciUpper) : "", pStr(r.res.p), r.res.method]);
@@ -1624,6 +1725,7 @@
       "#researchMD .rmd-mc-toggle { display: flex; align-items: center; gap: 8px; min-height: 44px; font: 500 14px var(--rmd-f); color: var(--rmd-ink); margin: 10px 0; }",
       "#researchMD .rmd-mc-toggle input { width: 20px; height: 20px; }",
       "#researchMD .rmd-mc-km { width: 100%; height: auto; display: block; margin: 8px 0; }",
+      "#researchMD .rmd-mc-roc { width: 100%; max-width: 560px; height: auto; display: block; margin: 8px 0; }",
       "#researchMD .rmd-mc-risk { font: 400 12px var(--rmd-f); color: var(--rmd-mut); }",
       "#researchMD .rmd-mc-atrisk { width: 100%; border-collapse: collapse; font: 400 12px var(--rmd-f); color: var(--rmd-mut); margin: 4px 0 10px; }",
       "#researchMD .rmd-mc-atrisk td, #researchMD .rmd-mc-atrisk th { padding: 3px 6px; text-align: center; border-bottom: 1px solid var(--rmd-line); }",
@@ -1714,13 +1816,16 @@
   function drawUpload() {
     var h = headHtml("Analyse my master chart", "Upload the Excel sheet with one row per patient. We pick the right tests and write Table 1 and the results.");
     h += '<div class="rmd-card rmd-mc-upload">';
-    h += '  <label class="rmd-btn rmd-btn-primary rmd-mc-filelabel" for="rmdMcFile">Upload master chart (.csv or .xlsx)</label>';
-    h += '  <input type="file" id="rmdMcFile" class="rmd-mc-fileinput" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">';
+    var sfOn = statFileEnabled();
+    h += '  <label class="rmd-btn rmd-btn-primary rmd-mc-filelabel" for="rmdMcFile">' + (sfOn ? 'Upload master chart (.csv, .xlsx, .sav or .dta)' : 'Upload master chart (.csv or .xlsx)') + '</label>';
+    h += '  <input type="file" id="rmdMcFile" class="rmd-mc-fileinput" accept=".csv,.xlsx,' + (sfOn ? '.sav,.zsav,.dta,' : '') + 'text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' + (sfOn ? ',application/x-spss-sav,application/x-stata-dta,application/octet-stream' : '') + '">';
     h += '  <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-mc="sample">Try with a sample thesis</button>';
     if (loadLocal(mc.pid)) {
       h += '  <button type="button" class="rmd-btn rmd-btn-quiet" data-rmd-mc="use-saved">Use the chart saved on this phone</button>';
     }
-    h += '  <p class="rmd-muted">CSV works everywhere. Excel (.xlsx) is read on this phone when supported.</p>';
+    h += sfOn
+      ? '  <p class="rmd-muted">CSV works everywhere. Excel (.xlsx), SPSS (.sav) and Stata (.dta) files are read on this phone. Nothing is uploaded.</p>'
+      : '  <p class="rmd-muted">CSV works everywhere. Excel (.xlsx) is read on this phone when supported.</p>';
     h += '</div>';
     return h;
   }
@@ -1748,6 +1853,7 @@
       var inf = mc.infer[name] || {};
       h += '<div class="rmd-mc-colcard" data-rmd-mc-colcard="' + esc(name) + '">';
       h += '  <div class="rmd-mc-colname"><strong>' + esc(name) + '</strong><span class="rmd-mc-missing">' + (inf.missing || 0) + ' missing</span></div>';
+      if (mc.varLabels && mc.varLabels[name]) h += '  <div class="rmd-muted rmd-mc-varlabel">' + esc(mc.varLabels[name]) + '</div>';
       if (isPhi(name)) {
         h += '  <span class="rmd-badge rmd-badge-pill">Left out (identifier)</span>';
       } else {
@@ -1777,6 +1883,9 @@
     h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="logistic">Risk factors (logistic regression)<span>Which factors raise the odds of a yes-no outcome, like a complication? Up to 6 factors.</span></button>';
     if (onDeviceV2Enabled()) {
       h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="linear">Linear regression (numeric outcome)<span>How much does a number outcome like HbA1c change for each factor? Up to 6 factors.</span></button>';
+    }
+    if (rocEnabled()) {
+      h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="roc">How good is a test? (ROC curve and AUC)<span>How well does a lab value or score, like troponin or a CURB-65 score, pick out a yes-no diagnosis? Best cut-off with sensitivity and specificity. Compare up to 4 tests.</span></button>';
     }
     h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="related">Is it related?<span>Is BMI related to HbA1c? Correlation between two number columns.</span></button>';
     if (mc.isSeries) {
@@ -1838,6 +1947,13 @@
       h += '  <div class="rmd-field"><label for="rmdMcEvent">Event column (yes-no)</label>' + selectHtml("rmdMcEvent", bins, f.event) + '</div>';
       h += '  <div class="rmd-field"><label for="rmdMcSgroup">Group column (optional)</label>' + selectHtml("rmdMcSgroup", [""].concat(groups), f.sgroup) + '</div>';
       h += '  <div class="rmd-field"><label>Cox factors (optional)</label>' + checkListHtml("cox", elig.filter(function (c) { return c !== f.time && c !== f.event && mc.types[c] !== "text" && mc.types[c] !== "date"; }), f.cox, 0) + '</div>';
+      h += '</div>';
+    } else if (mc.analysis === "roc") {
+      h += headHtml("How good is a test? (ROC curve)", "Pick the yes-no column that says who truly has the condition, then tick the test values to check.");
+      h += '<div class="rmd-form">';
+      h += '  <div class="rmd-field"><label for="rmdMcTruth">Who has the condition (yes-no, the reference standard)</label>' + selectHtml("rmdMcTruth", bins, f.truth) + '</div>';
+      h += '  <div class="rmd-field"><label for="rmdMcPosLevel">Which value means they have it?</label>' + selectHtml("rmdMcPosLevel", rocLevels(f.truth), f.posLevel) + '</div>';
+      h += '  <div class="rmd-field"><label>Tests or scores (numbers, up to 4)</label>' + checkListHtml("tests", nums.filter(function (c) { return c !== f.truth; }), f.tests, 4) + '</div>';
       h += '</div>';
     } else if (mc.analysis === "matched") {
       h += headHtml("Matched case-control (odds ratio)", "Pick the case/control column, the exposure column and the match-set column that links each case to its controls.");
@@ -2084,6 +2200,7 @@
     else if (r.kind === "describe") sub = "Case series description.";
     else if (r.kind === "survival") sub = "Time to event.";
     else if (r.kind === "matched") sub = "Matched pairs.";
+    else if (r.kind === "roc") sub = "How well each test picks out " + r.roc.positiveLevel + ".";
     var h = headHtml("Results", sub);
     if (onDeviceV2Enabled()) {
       h += '<span class="rmd-badge rmd-badge-pill rmd-mc-ondevice">On this device</span>';
@@ -2155,6 +2272,8 @@
       h += drawSurvival(r);
     } else if (r.kind === "matched") {
       h += drawMatched(r);
+    } else if (r.kind === "roc") {
+      h += rocView().resultsHtml(r.roc, rocHelpers());
     }
     if (r.paragraph) {
       h += '<div class="rmd-card rmd-mc-result"><h3>Results paragraph</h3>';
@@ -2218,6 +2337,14 @@
     if (selEvent) selEvent.onchange = function () { mc.form.event = selEvent.value; };
     var selSgroup = view.querySelector("#rmdMcSgroup");
     if (selSgroup) selSgroup.onchange = function () { mc.form.sgroup = selSgroup.value; };
+    var selTruth = view.querySelector("#rmdMcTruth");
+    if (selTruth) selTruth.onchange = function () {
+      mc.form.truth = selTruth.value;
+      mc.form.posLevel = stats().defaultPositiveLevel(rocLevels(selTruth.value)) || "";
+      draw();
+    };
+    var selPos = view.querySelector("#rmdMcPosLevel");
+    if (selPos) selPos.onchange = function () { mc.form.posLevel = selPos.value; };
     var selMgroup = view.querySelector("#rmdMcMgroup");
     if (selMgroup) selMgroup.onchange = function () {
       mc.form.mgroup = selMgroup.value;
@@ -2243,16 +2370,21 @@
             this.checked = false;
             return;
           }
+          if (listName === "tests" && arr.length >= 4) {
+            this.checked = false;
+            return;
+          }
           if (arr.indexOf(this.value) < 0) arr.push(this.value);
         } else {
           var at = arr.indexOf(this.value);
           if (at >= 0) arr.splice(at, 1);
         }
         mc.form[listName] = arr;
-        if (listName === "predictors") {
-          var boxes = view.querySelectorAll('.rmd-mc-check-input[data-rmd-mc-list="predictors"]');
+        if (listName === "predictors" || listName === "tests") {
+          var cap = listName === "tests" ? 4 : 6;
+          var boxes = view.querySelectorAll('.rmd-mc-check-input[data-rmd-mc-list="' + listName + '"]');
           for (var b = 0; b < boxes.length; b++) {
-            boxes[b].disabled = !boxes[b].checked && arr.length >= 6;
+            boxes[b].disabled = !boxes[b].checked && arr.length >= cap;
           }
         }
       };
@@ -2271,6 +2403,7 @@
         mc.columns = saved.columns.slice();
         mc.rows = saved.rows;
         mc.types = saved.types || {};
+        mc.varLabels = saved.varLabels || {};
         mc.results = null;
         inferAll();
         mc.stage = "identifiers";

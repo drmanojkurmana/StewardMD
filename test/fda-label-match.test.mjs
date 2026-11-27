@@ -48,3 +48,21 @@ test("app slugFor() matches the builder's slug() for every name the builder can 
   const py_slugs = JSON.parse(py(`import json as j\nprint(j.dumps([b.slug(b.re.sub(r"[^A-Za-z0-9 ._-]", "", n).strip()) for n in ${JSON.stringify(names)}]))`));
   names.forEach((n, i) => assert.equal(slugFor(n), py_slugs[i], n));
 });
+
+/* 2026-11-27: the first DailyMed hit for dinoprost was LUTALYSE (cattle) and for moxidectin CYDECTIN
+ * (pour-on); neither title says "veterinary". The SPL document type is the reliable signal. */
+test("an animal drug label is refused by its SPL document type, whatever the title says", () => {
+  const spl = (code) => `<document xmlns="urn:hl7-org:v3"><code code="${code}"/></document>`;
+  for (const c of ["50577-6", "50578-4"]) assert.equal(py(`print(b.doc_type(${JSON.stringify(spl(c))}) in b.HUMAN_DOC_TYPES)`), "False", c);
+  for (const c of ["34391-3", "34390-5", "60683-0"]) assert.equal(py(`print(b.doc_type(${JSON.stringify(spl(c))}) in b.HUMAN_DOC_TYPES)`), "True", c);
+});
+
+test("an older label with uncoded sections is read by its section titles", () => {
+  const xml = `<document xmlns="urn:hl7-org:v3"><code code="34391-3"/><component><structuredBody><component><section><code code="42229-5"/><title>INDICATIONS AND USAGE</title><text><paragraph>Indicated for metastatic islet cell carcinoma.</paragraph></text></section></component></structuredBody></component></document>`;
+  assert.equal(py(`print(list(b.parse_label(${JSON.stringify(xml)}).keys()))`), "['34067-9']");
+});
+
+test("salt words cover lysine and meglumine (LIVDELZI, DOTAREM)", () => {
+  assert.equal(py(`print(b.ingredient_match("LIVDELZI (SELADELPAR LYSINE) CAPSULE [GILEAD]", "seladelpar"))`), "True");
+  assert.equal(py(`print(b.ingredient_match("DOTAREM (GADOTERATE MEGLUMINE) INJECTION [GUERBET LLC]", "gadoterate"))`), "True");
+});
