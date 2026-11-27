@@ -29,7 +29,7 @@ Worker stewardmd-research-worker (cron "*/10 * * * *")
 | `instance_type` | `standard-1` (1/2 vCPU, 4 GiB memory, 8 GB disk) | pdfplumber plus Tesseract OCR needs headroom over `basic` (1 GiB); 25 MB PDFs rasterise to large images |
 | `max_instances` | 3 | upper bound; v1 routes every cron to one named DO, so effective concurrency is 1 container. Scale-out (multiple named DOs) is a later contract change |
 | inactivity timeout | 1 min (`setInactivityTimeout(60000)`) | backstop only: drain() stops the container (`destroy()`) once a round pulls nothing; re-armed in the DO constructor when the container is already running |
-| cron | `*/10 * * * *` | every 10 minutes; drain rounds repeat while jobs arrive, then the container stops. A running container bills memory and disk per second, so an every-minute cron with a 5 min timeout kept it running all day (2026-11-27) |
+| cron | `*/10 * * * *` | every 10 minutes; the Worker first asks D1 (read-only `RESEARCH_DB` binding) for a queued job from the last 6 h or a running one from the last 3 h, and starts nothing if there is none. Otherwise drain rounds repeat while jobs arrive, then the container stops. A running container bills memory and disk per second, so an every-minute cron with a 5 min timeout kept it running all day (2026-11-27) |
 | DO storage | sqlite (`[exports.ResearchWorkerContainer]`) | required by the container linkage |
 
 `enableInternet: true` is required: the container calls the Cloudflare Queues

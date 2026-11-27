@@ -1,6 +1,7 @@
 // ResearchMD Phase 3 worker front door.
-// Cron (every 10 minutes) -> one named Durable Object -> container POST /drain,
-// repeated while jobs keep coming, then the container is stopped.
+// Cron (every 10 minutes) -> D1 check for waiting jobs -> only if there are any,
+// one named Durable Object -> container POST /drain, repeated while jobs keep
+// coming, then the container is stopped.
 // The container pulls the research-jobs queue itself; this Worker only wakes
 // it and forwards config. fetch() returns 404: nothing here is public.
 //
@@ -136,8 +137,37 @@ export class ResearchWorkerContainer extends DurableObject {
   }
 }
 
+// Only jobs this recent count as waiting. A row left 'queued' by a message that
+// dead-lettered must not wake the container every tick forever.
+const QUEUED_WINDOW_MS = 6 * 60 * 60 * 1000;
+const RUNNING_WINDOW_MS = 3 * 60 * 60 * 1000;
+
+// Ask D1 whether any job is waiting before starting the container, so an
+// empty tick costs one cheap query instead of a container start.
+// If the check itself fails, drain anyway: a missed job is worse than a wake.
+async function jobsWaiting(env) {
+  if (!env.RESEARCH_DB) return true;
+  const now = Date.now();
+  const q = (table) =>
+    `SELECT 1 FROM ${table} WHERE (status='queued' AND created_ts > ?1) ` +
+    `OR (status='running' AND started_ts > ?2) LIMIT 1`;
+  try {
+    for (const table of ["research_job_runs", "research_stats_jobs"]) {
+      const row = await env.RESEARCH_DB.prepare(q(table))
+        .bind(now - QUEUED_WINDOW_MS, now - RUNNING_WINDOW_MS)
+        .first();
+      if (row) return true;
+    }
+    return false;
+  } catch (err) {
+    console.error("waiting-jobs check failed; draining anyway", err);
+    return true;
+  }
+}
+
 export default {
   async scheduled(event, env, ctx) {
+    if (!(await jobsWaiting(env))) return; // nothing queued: leave it stopped
     const stub = env.RESEARCH_WORKER.getByName("singleton");
     ctx.waitUntil(
       stub.drain().catch((err) => {

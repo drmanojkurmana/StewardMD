@@ -31,6 +31,13 @@ class_name = "ResearchWorkerContainer"
 type = "durable-object"
 storage = "sqlite"
 
+# Read only: the cron checks research_job_runs / research_stats_jobs for waiting
+# jobs before it starts the container, so an empty queue costs no container time.
+[[d1_databases]]
+binding = "RESEARCH_DB"
+database_name = "stewardmd-research"
+database_id = "fcb5adad-89d8-4d32-a6d1-315b007d2b7a"
+
 [triggers]
 crons = ["*/10 * * * *"]
 
