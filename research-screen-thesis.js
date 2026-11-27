@@ -345,10 +345,45 @@
     return !!(C.platform && C.platform !== "web");
   }
 
+  /* The Rust PDF reader (vendor/rust-pdf, loaded by the on-device reader): every page's lines in one go, as
+     { pages: [{ n, text }] } in the shape below, or null (pdf.js reads it as before). */
+  var RUST_MAX_PAGES = 3000;
+  function rustPagesText(u8) {
+    var OD = G && G.SMD_RMD_ONDEVICE_PDF;
+    if (!OD || typeof OD.loadRust !== "function") return Promise.resolve(null);
+    return OD.loadRust().then(function (R) {
+      if (!R || (typeof R.isEnabled === "function" && !R.isEnabled())) return null;
+      var want = [];
+      for (var i = 1; i <= RUST_MAX_PAGES; i++) want.push(i);
+      return R.lines(u8, want);
+    }).then(function (res) { return rustToThesisPages(res); }, function () { return null; });
+  }
+  function rustToThesisPages(res) {
+    if (!res || !Array.isArray(res.pages) || !res.total || res.total > RUST_MAX_PAGES || res.pages.length !== res.total) return null;
+    var pages = [], chars = 0;
+    res.pages.forEach(function (p) {
+      var txt = (p.lines || []).map(function (l) { return String(l.tx || "").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, ""); }).filter(Boolean).join("\n");
+      chars += txt.replace(/\s+/g, "").length;
+      pages.push({ n: p.n, text: txt });
+    });
+    return { pages: pages, chars: chars };
+  }
+
   function readPdfLocal(file, onProgress) {
     if (!file || typeof file.arrayBuffer !== "function") return Promise.resolve(null);
-    return Promise.all([loadPdfJs(), file.arrayBuffer()]).then(function (pair) {
-      var pdfjs = pair[0], u8 = new Uint8Array(pair[1]);
+    return file.arrayBuffer().then(function (buf) {
+      var u8 = new Uint8Array(buf);
+      return rustPagesText(u8).then(function (rp) {
+        if (!rp) return readPdfLocalJs(u8, onProgress);
+        if (onProgress) onProgress(rp.pages.length, rp.pages.length);
+        if (rp.chars < 20) return { pages: [], emptyText: true, bytes: u8 };
+        return { pages: rp.pages, emptyText: false };
+      });
+    });
+  }
+
+  function readPdfLocalJs(u8, onProgress) {
+    return loadPdfJs().then(function (pdfjs) {
       var openOpts = isNativeShell() ? { data: u8, disableWorker: true } : { data: u8 };
       return pdfjs.getDocument(openOpts).promise.catch(function (err) {
         if (err && err.name === "PasswordException") throw err;
@@ -2247,6 +2282,7 @@
     countWords: countWords,
     parseDocx: parseDocx,
     readZipEntries: readZipEntries,
+    rustToThesisPages: rustToThesisPages,
     extractDocxXmlBlocks: extractDocxXmlBlocks,
     paginateBlocks: paginateBlocks,
     handleFile: handleFile,

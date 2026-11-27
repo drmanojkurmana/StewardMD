@@ -119,3 +119,28 @@ def test_unreadable_pdf():
     with pytest.raises(ExtractError) as exc:
         extract_pdf(b"this is not a pdf")
     assert exc.value.code == "pdf_unreadable"
+
+@pytest.mark.parametrize("rotation", [0, 90, 180, 270])
+def test_unsupported_by_rust_reads_with_pymupdf(monkeypatch, rotation):
+    """A file the Rust reader leaves out is still read: words and text, no tables."""
+    from research_worker import extract as ex
+
+    monkeypatch.setattr(ex, "read_pdf", lambda data, **kw: {"unsupported": "vertical_font"})
+    data = text_pdf() if rotation == 0 else rotated_pdf(text_pdf(), rotation)
+    page = extract_pdf(data)["pages"][0]
+    assert page["ocr"] is False and page["tables"] == []
+    assert "Hello research world page1" in page["text"]
+    for w in page["words"]:
+        assert 0 <= w["x0"] <= w["x1"] <= page["width"] + 1
+        assert 0 <= w["y0"] <= w["y1"] <= page["height"] + 1
+
+
+def test_rust_reader_matches_page_shape():
+    """The worker returns the Rust reader's pages as they are (the app gets the same from WebAssembly)."""
+    from research_worker.rust_pdf import read_pdf
+
+    data = table_pdf()
+    rust = read_pdf(data, max_pages=60, max_bytes=25 * 1024 * 1024)["pages"][0]
+    page = extract_pdf(data)["pages"][0]
+    for key in ("width", "height", "text", "words", "tables"):
+        assert page[key] == rust[key]

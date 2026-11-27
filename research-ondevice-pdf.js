@@ -348,6 +348,40 @@
     };
   }
 
+  /* The Rust PDF reader (vendor/rust-pdf/rust-pdf.js, a WebAssembly copy of the server's reader). It gives the same
+     text, words and tables as the server for every page that has a text layer, about 50x faster than the Python
+     reader. Pages it marks needs_ocr, and any Rust failure, take the pdf.js + OCR path below as before.
+     opts.rust: false = off, an object = use it (tests); otherwise window.SMD_RUST_PDF, loaded on first use. */
+  var RUST_URL = "/vendor/rust-pdf/rust-pdf.js", rustLoad = null;
+  function loadRust() {
+    if (G && G.SMD_RUST_PDF) return Promise.resolve(G.SMD_RUST_PDF);
+    if (rustLoad) return rustLoad;
+    if (!G || !G.document || !G.document.createElement) return Promise.resolve(null);
+    rustLoad = new Promise(function (res) {
+      var s = G.document.createElement("script");
+      s.src = RUST_URL;
+      s.onload = function () { res(G.SMD_RUST_PDF || null); };
+      s.onerror = function () { rustLoad = null; res(null); };
+      (G.document.head || G.document.documentElement).appendChild(s);
+    });
+    return rustLoad;
+  }
+  function rustPagesFor(u8, opts, maxPages) {
+    if (opts.rust === false) return Promise.resolve(null);
+    var src = (opts.rust && typeof opts.rust.extract === "function") ? Promise.resolve(opts.rust) : loadRust();
+    return src.then(function (R) {
+      if (!R || (typeof R.isEnabled === "function" && !R.isEnabled())) return null;
+      return R.extract(u8, { maxPages: maxPages });
+    }).then(function (res) {
+      if (!res || !Array.isArray(res.pages)) return null;
+      var byN = {};
+      res.pages.forEach(function (p) {
+        if (p && typeof p.n === "number" && !p.needs_ocr && Array.isArray(p.words) && Array.isArray(p.tables)) byN[p.n] = p;
+      });
+      return byN;
+    }, function () { return null; });
+  }
+
   function extract(source, opts) {
     opts = opts || {};
     var maxPages = (typeof opts.maxPages === "number" && opts.maxPages > 0) ? opts.maxPages : DEFAULT_MAX_PAGES;
@@ -374,7 +408,8 @@
       var u8 = pair[1];
       if (signal && signal.aborted) throw makeError("aborted", "Extraction aborted");
       var preSha = (typeof opts.sha256 === "string" && /^[0-9a-f]{64}$/.test(opts.sha256)) ? opts.sha256 : null;
-      return (preSha ? Promise.resolve(preSha) : sha256Hex(u8)).then(function (sha256Val) {
+      return Promise.all([preSha ? Promise.resolve(preSha) : sha256Hex(u8), rustPagesFor(u8, opts, maxPages)]).then(function (sr) {
+        var sha256Val = sr[0], rustPages = sr[1], usedRust = false;
         if (signal && signal.aborted) throw makeError("aborted", "Extraction aborted");
         var openOpts = isNativeShell() ? { data: u8, disableWorker: true } : { data: u8 };
         var docPromise;
@@ -444,7 +479,7 @@
               ocrEngine: anyOcr ? usedEngine : null,
               partial: isPartial,
               nextPage: nextPage,
-              engineVersion: ENGINE_VERSION
+              engineVersion: usedRust ? ENGINE_VERSION + "-rs1" : ENGINE_VERSION
             };
           }
 
@@ -669,6 +704,13 @@
               var vp = page.getViewport({ scale: 1 });
               var ptW = vp.width;
               var ptH = vp.height;
+              var rp = rustPages && rustPages[pNo];
+              if (rp) {
+                usedRust = true;
+                cleanupPage();
+                return { n: pNo, width: rp.width, height: rp.height, text: String(rp.text || ""),
+                  words: rp.words, tables: rp.tables, ocr: false };
+              }
 
               return Promise.resolve(page.getTextContent()).then(function (tc) {
                 var items = (tc && tc.items) || [];
@@ -755,6 +797,7 @@
     hasNativeOcr: hasNativeOcr,
     detectOcrEngine: detectOcrEngine,
     loadPdfJs: loadPdfJs,
+    loadRust: loadRust,
     sha256: sha256,
     extract: extract,
     ENGINE_VERSION: ENGINE_VERSION
