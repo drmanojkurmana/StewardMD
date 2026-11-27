@@ -12,7 +12,7 @@ import json
 import shutil
 from pathlib import Path
 
-from . import gates, seams, writer
+from . import gates, repair, seams, writer
 from .loader import build_inputs
 from .llm import GatewayLLMClient
 
@@ -110,7 +110,12 @@ def run_refinement(manifest, workdir, client, draft_tex, citation_map,
     citation_map_path.write_text(json.dumps(citation_map, indent=2), encoding="utf-8")
 
     gate_context = {"token_table": token_table, "citation_map": citation_map,
-                    "manifest": manifest, "gate_hits": []}
+                    "manifest": manifest, "gate_hits": [], "repairs": []}
+    # Keep the candidate gate-clean before the refinement agent reads it; a
+    # job must not die because of one stray sentence in the initial draft.
+    draft_tex, _remaining = repair.apply_repair(
+        client, draft_tex, token_table, citation_map, manifest, gate_context)
+    draft_path.write_text(draft_tex, encoding="utf-8")
     rounds = min(max_reflections, client.ceilings["max_refinement_rounds"])
     uninstall = seams.install(client, search, gate_context)
     try:
@@ -122,21 +127,35 @@ def run_refinement(manifest, workdir, client, draft_tex, citation_map,
             max_reflections=rounds,
             work_dir=str(refinement_dir))
         agent.run(texfile_path=str(draft_path))
+        # Upstream swallows exceptions from review/parse callbacks; a ceiling
+        # hit during repair is re-raised here so it reaches the job unchanged.
+        ceiling_error = gate_context.pop("ceiling_error", None)
+        if ceiling_error is not None:
+            raise ceiling_error
         final_tex = (refinement_dir / "final_refined_paper.tex").read_text(encoding="utf-8")
         return final_tex, gate_context
     finally:
         uninstall()
 
 
-def assemble_manuscript(manifest, final_tex, token_table, citation_map, outline=None):
-    """Final hard gates, then the JSON manuscript model (writer seam)."""
+def assemble_manuscript(manifest, final_tex, token_table, citation_map, outline=None,
+                        client=None, gate_context=None):
+    """Repair (bounded), then final hard gates, then the JSON manuscript model
+    (writer seam). Without a client this is the old enforce-only path."""
+    if client is not None:
+        final_tex, _remaining = repair.apply_repair(
+            client, final_tex, token_table, citation_map, manifest, gate_context)
     sections = writer.parse_latex_sections(final_tex)
     gates.enforce(sections, token_table, citation_map, manifest)
-    return writer.build_manuscript(
+    manuscript = writer.build_manuscript(
         title=(manifest.get("protocol") or {}).get("title", ""),
         sections=sections, token_table=token_table,
         references=manifest.get("references") or [],
         citation_map=citation_map, manifest=manifest, outline=outline)
+    if gate_context is not None:
+        manuscript["provenance"]["gateHits"] = list(gate_context.get("gate_hits") or [])
+        manuscript["provenance"]["repairs"] = list(gate_context.get("repairs") or [])
+    return manuscript
 
 
 def run_manuscript(manifest, workdir, client, search=None, cutoff_date=None,
@@ -152,7 +171,7 @@ def run_manuscript(manifest, workdir, client, search=None, cutoff_date=None,
         manifest, workdir, client, draft, citation_map, inputs.token_table,
         search=search, max_reflections=max_reflections)
     manuscript = assemble_manuscript(manifest, final_tex, inputs.token_table,
-                                     citation_map, outline)
-    manuscript["provenance"]["gateHits"] = gate_context["gate_hits"]
+                                     citation_map, outline,
+                                     client=client, gate_context=gate_context)
     manuscript["provenance"]["usage"] = client.total_usage()
     return manuscript
