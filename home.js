@@ -11090,16 +11090,22 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (it.est_read_min) meta.push(it.est_read_min + " min read");
     // A doctor signed a Clinical Bulletin from this item; the row text itself is still the AI summary.
     var signed = it.signed_bulletin ? '<span class="mu-signed">Signed bulletin in Library</span>' : "";
-    return '<li class="mu-row' + (unread ? " is-unread" : "") + '" data-uid="' + nEsc(it.id) + '" role="button" tabindex="0">' +
-      (unread ? '<span class="mu-unread"><span class="mu-sr">Unread. </span></span>' : "") +
-      '<div class="mu-line1"><span class="mu-kind' + (warn ? " is-warn" : "") + '">' + nEsc(TYPE_TXT[it.type] || NCAT_TXT[it.category] || "Update") + '</span>' +
+    var dd = new Date(it.ts || 0), dcol = "";
+    try { dcol = '<span class="mu-dcol" aria-hidden="true"><b>' + dd.getDate() + '</b><span>' + dd.toLocaleDateString([], { month: "short" }) + '</span></span>'; } catch (e) {}
+    return '<li class="mu-row' + (unread ? " is-unread" : "") + (hi ? " is-hi" : "") + '" data-uid="' + nEsc(it.id) + '" role="button" tabindex="0">' +
+      (unread ? '<span class="mu-unread"><span class="mu-sr">Unread. </span></span>' : "") + dcol +
+      '<div class="mu-body"><div class="mu-line1"><span class="mu-kind' + (warn ? " is-warn" : "") + '">' + nEsc(TYPE_TXT[it.type] || NCAT_TXT[it.category] || "Update") + '</span>' +
         (crit ? '<span class="mu-imp is-crit">Critical</span>' : (hi ? '<span class="mu-imp">Important</span>' : "")) +
         '<time class="mu-when">' + nEsc(nWhen(it.ts)) + '</time></div>' +
       '<h3 class="mu-title">' + nEsc(it.title) + '</h3>' +
       (lead ? '<p class="mu-lead">' + nEsc(lead) + '</p>' : "") +
       (meta.length ? '<div class="mu-src"><span class="mu-org">' + meta.join(" \u00b7 ") + '</span></div>' : "") +
-      (signed ? '<div class="mu-src">' + signed + '</div>' : "") + '</li>';
+      (signed ? '<div class="mu-src">' + signed + '</div>' : "") + '</div></li>';
   }
+  // Layout variant for the owner to choose between (2026-11-27): a = grouped list, b = timeline,
+  // c = priority first. localStorage smd_alerts_variant; default a. Same rows, states and motion in all three.
+  function muVariant() { try { var q = (location.search.match(/[?&]alerts=([abc])\b/) || [])[1]; var v = q || localStorage.getItem("smd_alerts_variant"); return /^[abc]$/.test(v || "") ? v : "a"; } catch (e) { return "a"; } }
+  try { window.SMD_setAlertsVariant = function (v) { try { localStorage.setItem("smd_alerts_variant", v); } catch (e) {} if (_notifRoot) { _notifRoot.classList.remove("mu-v-a", "mu-v-b", "mu-v-c"); _notifRoot.classList.add("mu-v-" + muVariant()); renderFeed(); } }; } catch (e) {}
   // Rows are grouped by age so the list has a real structure: what arrived today, this week, before.
   function feedGroupLabel(ts) {
     var d = new Date(ts || 0), t = new Date(); t.setHours(0, 0, 0, 0);
@@ -11122,10 +11128,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var rb = body.querySelector("#muRetry"); if (rb) rb.addEventListener("click", function () { muLoadFeed(true); });
       muReveal(body); return;
     }
-    var html = "", cur = null, open = false;
+    var html = "", cur = null, open = false, V = muVariant();
+    items = items.slice().sort(function (x, y) { return (y.ts || 0) - (x.ts || 0); });   // newest first, so each date heading appears once
+    if (V === "c") {   // priority first: what needs attention, then everything else in date order
+      var top = items.filter(function (it) { return it.importance === "critical" || it.importance === "high"; });
+      var rest = items.filter(function (it) { return top.indexOf(it) < 0; });
+      items = top.concat(rest);
+    }
     items.forEach(function (it) {
-      var g = feedGroupLabel(it.ts);
-      if (g !== cur) { if (open) html += "</ul></section>"; html += '<section class="mu-sec"><h2 class="mu-sech">' + g + '</h2><ul class="mu-group">'; cur = g; open = true; }
+      var g = V === "c" ? ((it.importance === "critical" || it.importance === "high") ? "Needs your attention" : "Everything else") : feedGroupLabel(it.ts);
+      if (g !== cur) { if (open) html += "</ul></section>"; html += '<section class="mu-sec' + (g === "Everything else" ? " is-compact" : "") + '"><h2 class="mu-sech">' + g + '</h2><ul class="mu-group">'; cur = g; open = true; }
       html += feedCardHTML(it);
     });
     if (open) html += "</ul></section>";
@@ -11239,6 +11251,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function openNotifications() {
     buildNotif(); _notifRoot.classList.add("on"); document.body.classList.add("ntf-lock");
     _feedPrevSeen = nSeen();
+    _notifRoot.classList.remove("mu-v-a", "mu-v-b", "mu-v-c"); _notifRoot.classList.add("mu-v-" + muVariant());
     switchTab(_activeTab); renderPushRow(); bmMergeFromServer(); renderDigestBanner();
     muLoadFeed(true);
     requestAnimationFrame(function () { muMoveInk(false); });
@@ -12280,6 +12293,28 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".mu.mu-dt .dt-btn{min-height:44px;border-radius:10px;border-color:var(--mu-line);background:var(--mu-surface);color:var(--mu-ink);font:600 14px var(--mu-f)}",
       ".mu.mu-dt .dt-btn.primary{background:var(--mu-acc);border-color:var(--mu-acc);color:#fff}body.dark .mu.mu-dt .dt-btn.primary{color:#062a23}",
       ".mu.mu-dt .ntf-cat{background:none;padding:0;text-transform:none;letter-spacing:0;font:600 13px var(--mu-f);color:var(--mu-mut)}.mu.mu-dt .ntf-hi{background:none;color:var(--mu-red);text-transform:none;letter-spacing:0;font:600 13px var(--mu-f);padding:0}",
+      ".mu .mu-dcol{display:none}",
+      // ---- variant B: timeline. Full-bleed rows on the page, a date column carries the time axis ----
+      ".mu.mu-v-b .mu-group{margin:0 -16px;border-radius:0;background:none;box-shadow:none!important;border-top:1px solid var(--mu-line)}",
+      ".mu.mu-v-b .mu-row{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:14px 16px;border-bottom:1px solid var(--mu-line);box-shadow:none}",
+      ".mu.mu-v-b .mu-dcol{display:flex;flex-direction:column;align-items:center;padding-top:2px;font:500 12px/1.2 var(--mu-f);color:var(--mu-mut);text-transform:uppercase;letter-spacing:.02em}",
+      ".mu.mu-v-b .mu-dcol b{font:600 22px/1 var(--mu-f);letter-spacing:-.02em;color:var(--mu-ink);font-variant-numeric:tabular-nums}",
+      ".mu.mu-v-b .mu-when{display:none}",
+      ".mu.mu-v-b .mu-unread{left:auto;right:16px;top:18px}",
+      ".mu.mu-v-b .mu-sech{position:sticky;top:0;z-index:1;margin:0 -16px;padding:18px 20px 8px;background:var(--mu-page)}",
+      ".mu.mu-v-b .mu-sec{margin-top:8px}",
+      ".mu.mu-v-b .mu-digest{border-radius:0;margin:0 -16px;width:calc(100% + 32px);padding:16px 20px;background:var(--mu-surface);border-top:1px solid var(--mu-line);border-bottom:1px solid var(--mu-line);box-shadow:none}",
+      ".mu.mu-v-b .mu-row:focus-visible{border-radius:0}",
+      // ---- variant C: priority first. Important items in full, the rest as one-line rows for triage ----
+      ".mu.mu-v-c #ntfFeed .mu-sec:not(.is-compact) .mu-row{padding:16px 16px 16px 20px}",
+      ".mu.mu-v-c #ntfFeed .mu-sec:not(.is-compact) .mu-title{font-size:18px}",
+      ".mu.mu-v-c #ntfFeed .mu-sec:not(.is-compact) .mu-lead{-webkit-line-clamp:3;color:var(--mu-ink);opacity:.82}",
+      ".mu.mu-v-c #ntfFeed .mu-sec:not(.is-compact) .mu-sech{color:var(--mu-red)}",
+      ".mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-row{padding:11px 16px 11px 20px}",
+      ".mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-lead,.mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-signed{display:none}",
+      ".mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-title{font-size:15.5px;font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}",
+      ".mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-row.is-unread .mu-title{font-weight:600}",
+      ".mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-src{margin-top:3px}",
       "@media (prefers-reduced-motion:reduce){#ntfDetail.mu.on{animation:none}.mu .mu-tab-ink,.mu .mu-bar-t,.mu .mu-ptr,.mu #ntfFeed{transition:none}.mu .mu-icbtn.is-busy .smd-ico{animation:none}}"
     ].join("");
     var st = document.createElement("style"); st.id = "ntf-css"; st.textContent = css; document.head.appendChild(st);
