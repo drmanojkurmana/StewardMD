@@ -193,6 +193,7 @@ def test_drain_acks_settled_and_retries_unsettled():
     client, _ = callback_client(statuses)
     counts = drain_once(queue, storage, callback_client=client, callback_url=URL,
                         secret=SECRET, sleep=lambda *_: None)
+    assert counts.pop("lastError").startswith("not settled")
     assert counts == {"pulled": 2, "done": 1, "failed": 0, "cancelled": 0, "retried": 1}
     assert queue.acked == ["l1"]
     assert queue.retried == [("l2", 60)]
@@ -210,3 +211,23 @@ def test_drain_retries_malformed_and_invalid_messages():
     assert counts["retried"] == 2 and counts["pulled"] == 2
     assert queue.acked == []
     assert calls == []  # nothing to call back about
+
+def test_storage_failure_is_retried_quickly_not_hidden_for_the_lease():
+    # 2026-11-27: missing R2 keys left jobs un-acked, hidden for the whole 2 h lease.
+    from research_worker.storage import StorageError
+
+    class BrokenStorage(FakeStorage):
+        def exists(self, key):
+            raise StorageError("r2 head failed")
+
+        def get_bytes(self, key):
+            raise StorageError("r2 get failed")
+
+    msg = make_msg(text_pdf())
+    queue = FakeQueue([Message(id="m1", lease_id="l1", attempts=1, body=msg, raw_body="")])
+    client, calls = callback_client()
+    counts = drain_once(queue, BrokenStorage(), callback_client=client, callback_url=URL,
+                        secret=SECRET, sleep=lambda *_: None)
+    assert counts["retried"] == 1
+    assert queue.retried == [("l1", 60)]
+    assert queue.acked == []

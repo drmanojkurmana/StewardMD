@@ -120,3 +120,11 @@ def test_http_error_raises():
 
     with pytest.raises(QueueError):
         make_client(handler).ack(["l1"])
+
+def test_json_body_delivered_as_plain_text_is_decoded():
+    # Production delivered json-typed messages that were not base64; the old decoder dropped them.
+    from research_worker.queue import _decode_body
+    assert _decode_body('{"v": 1, "kind": "manuscript_draft"}', "json") == {"v": 1, "kind": "manuscript_draft"}
+    import base64
+    raw = base64.b64encode(b'{"v": 1}').decode()
+    assert _decode_body(raw, "json") == {"v": 1}

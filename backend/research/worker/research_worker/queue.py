@@ -33,15 +33,14 @@ class Message:
     attempts: int
     body: dict | None  # decoded JSON; None when the body is malformed
     raw_body: str
+    content_type: str = ""
 
 
 def _decode_body(raw: str, content_type: str) -> dict | None:
     """Pull delivers json/bytes content types base64-encoded, text as UTF-8."""
-    candidates = []
-    if content_type in ("json", "bytes"):
-        candidates.append("base64")
-    else:
-        candidates.extend(("plain", "base64"))
+    # Try both forms for every type: production delivered json messages that the base64-only path could not
+    # read, so every job was retried to the dead-letter queue (2026-11-27).
+    candidates = ["base64", "plain"] if content_type in ("json", "bytes") else ["plain", "base64"]
     for mode in candidates:
         text = raw
         if mode == "base64":
@@ -115,6 +114,7 @@ class QueueClient:
                     attempts=int(raw.get("attempts", 1)),
                     body=_decode_body(body_text, content_type),
                     raw_body=body_text,
+                    content_type=content_type,
                 )
             )
         return messages
