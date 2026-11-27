@@ -12649,3 +12649,19 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
   ceiling as one object), so drawing a ladder would mean inferring it from free text.
 - **Tests**: `test/run-dose-calc-ui.mjs` (classic path with `?dosev3=0`, plus 17 v3 checks incl. light/dark).
 
+## 2026-11-27 - Drugs: every catalogue molecule gets a monograph; drafts behind `smd_drug_drafts` (default OFF)
+
+- **Owner ask**: "All drugs should have the monograph" (after the Oxandrolone "No drugs match" report).
+- **Source order**: US FDA label (DailyMed, openFDA) > Health Canada product monograph > EU/UK SmPC > StewardMD-authored draft.
+  Owner chose "EU/UK labels, then author" for molecules with no US/Canadian label.
+- **EU/UK step not done**: the session's safety classifier refused scraping the MHRA product site (its search API key lives in
+  page JavaScript) and a retry of EMA product-information PDFs after a 429. ~15 molecules that have an SmPC (Strepsils actives,
+  S-1 components, benserazide, gestodene, sertindole, casirivimab) were drafted instead and should be replaced by SmPC text when
+  a sanctioned route exists.
+- **Drafts**: `data/authored/<slug>.json`, gold schema, `status: "ai_drafted"`, `src: "stewardmd-authored"`, references to named
+  works (Martindale, NIH ODS/NCCIH, LiverTox, NCVBDC, IAP, EMA/FDA safety pages) and a footer saying no regulatory label exists.
+  Index rows carry `d:1` and are hidden unless `smd_drug_drafts` = "1" (Settings > Experimental Features > Draft drug monographs,
+  or `?drug_drafts=1`). The drug page shows a Draft banner; the result row says "draft monograph".
+  A regulatory record of the same name always wins (the index never lists a draft beside one).
+- **Turning drafts ON for everyone is the owner's clinical call** after review, like CliniX/SURGX/Neonatal drafts.
+- **Not monographs**: catalogue entries "Plain", "Oral Corticosteroids", "Luvistin" are data noise, left alone.
