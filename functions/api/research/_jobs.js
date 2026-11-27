@@ -19,11 +19,18 @@
 import { PDF_MAX_BYTES, PDF_MAX_PAGES, PDF_MAX_SECONDS, BATCH_MAX,
   PO_MAX_SECONDS, PO_MAX_CALLS, HARD_STOP_MESSAGES,
   checkPdfJobCaps, checkPoJobCaps, validateJobMessage } from "./_caps.js";
-import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCredits } from "./_credits.js";
+import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCredits, expireLostJobs } from "./_credits.js";
 import { scan, phiCategories } from "./_phi.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const SETTLED = ["succeeded", "failed", "cancelled"];
+
+/* Lost jobs must not keep counting against caps or hold credits forever.
+ * Best effort: a failure here never fails the doctor's request. */
+async function expireLostBefore(db, uuid) {
+  try { await expireLostJobs(db, uuid); }
+  catch (e) { console.error("research: expireLostJobs failed", e && e.message); }
+}
 
 function pdfOf(row) {
   return {
@@ -108,6 +115,7 @@ export async function createJob(ctx, body) {
   if (body && body.kind === "manuscript_draft") return createManuscriptJob(ctx, body);
   const { env, db, uid, claims, projectId, requestId, api } = ctx;
   const { json, err, audit, uuid, projectGate, gateErr } = api;
+  await expireLostBefore(db, uuid);
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "Jobs need an owner, editor or analyst role", requestId);
   if (body.kind !== "pdf_extract")
@@ -582,6 +590,8 @@ export async function createManuscriptJob(ctx, body) {
   if (!env || env.RESEARCH_PO_ENABLED !== "1")
     return err(404, "not_found", "Unknown Research API endpoint", requestId);
 
+  await expireLostBefore(db, uuid);
+
   /* 1. Write role + systematic review / meta-analysis project. */
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "Jobs need an owner, editor or analyst role", requestId);
@@ -723,6 +733,7 @@ export async function createManuscriptJob(ctx, body) {
 export async function getJob(ctx, jobId) {
   const { db, uid, requestId, api } = ctx;
   const { json, err, member } = api;
+  await expireLostBefore(db, api.uuid);
   const row = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(jobId).first();
   if (!row) return null;
   if (!(await member(db, row.project_id, uid)))
