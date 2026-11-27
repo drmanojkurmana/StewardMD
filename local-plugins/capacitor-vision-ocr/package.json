@@ -1,7 +1,7 @@
 {
   "name": "@stewardmd/capacitor-vision-ocr",
   "version": "1.0.0",
-  "description": "On-device text recognition via Apple Vision (VNRecognizeTextRequest) on iOS. On Android, readDigits() only, via the on-device DigitReader TFLite model (CRNN-CTC). The image never leaves the device.",
+  "description": "On-device text recognition via Apple Vision (VNRecognizeTextRequest) on iOS. On Android, readDigits() via the on-device DigitReader TFLite model (CRNN-CTC). Both platforms: startPdfJob() and friends read a whole scanned PDF in the background (iOS Vision, Android ML Kit). Nothing leaves the device.",
   "capacitor": {
     "ios": {
       "src": "ios"

@@ -36,14 +36,22 @@ _REVIEWER_COUNT_RE = re.compile(
     r"\b\d+\s+(?:reviewers|assessors|screeners)\b"
     r"|\b(?:reviewers|assessors|screeners)\s*(?:=|:)\s*\d+", re.IGNORECASE)
 _THRESHOLD_RE = re.compile(
-    r"\b(?:threshold|cutoff|alpha|significance level|type I error)\b[^.!?]{0,30}?\d+(?:\.\d+)?%?"
-    r"|\b(?:heterogeneity|I2|I\u00b2)\b[^.!?]{0,30}?\b(?:25|50|75)\s*%"
-    r"|\b(?:90|95|99)\s*%\s*(?:CI|confidence)\b",
+    r"\b(?:threshold|cutoff|alpha|significance level|type I error)\b[^.!?]{0,30}?\d+(?:\.\d+)?\\?%?"
+    r"|\b(?:heterogeneity|I2|I\u00b2)\b[^.!?]{0,30}?\b(?:25|50|75)\s*\\?%"
+    r"|\b(?:90|95|99)\s*\\?%[~\s]*(?:CI|confidence)\b",
     re.IGNORECASE)
+# An exponent is notation, not a result: I$^2$, \\chi^{2}, \\textsuperscript{2}.
+_EXPONENT_RE = re.compile(r"(?:\^\{?|\\textsuperscript\{)\s*\d+(?:\.\d+)?")
 _CITE_RE = re.compile(r"\\cite\{([^}]+)\}|\[@([A-Za-z0-9_:-]+)\]")
 _CLAIM_RE = re.compile(
     r"\b(?:reduc\w*|decreas\w*|increas\w*|improv\w*|worsen\w*"
     r"|significant\w*|associat\w*|superior|inferior)\b", re.IGNORECASE)
+# A research question or objective is not a result claim; it needs no source.
+_WHETHER_RE = re.compile(r"\bwhether\b", re.IGNORECASE)
+_OBJECTIVE_RE = re.compile(
+    r"\b(?:aim(?:s|ed)?|objective|purpose|we (?:sought|set out) to"
+    r"|this (?:review|study|analysis) (?:asks|examines|assesses|evaluates|addresses))\b",
+    re.IGNORECASE)
 _DIR_DOWN_RE = re.compile(r"\b(?:reduc\w*|decreas\w*|lower(?:ed|ing|s)?|declin\w*)\b",
                           re.IGNORECASE)
 _DIR_UP_RE = re.compile(r"\b(?:increas\w*|higher|elevat\w*|greater)\b", re.IGNORECASE)
@@ -73,7 +81,7 @@ def _mask_tokens(text: str) -> str:
 
 def _allowed_numbers(text: str) -> set:
     allowed = set()
-    for pattern in (_REVIEWER_COUNT_RE, _THRESHOLD_RE):
+    for pattern in (_REVIEWER_COUNT_RE, _THRESHOLD_RE, _EXPONENT_RE):
         for match in pattern.finditer(text):
             for num in _NUMBER_RE.finditer(match.group(0)):
                 allowed.add((match.start() + num.start(), match.start() + num.end()))
@@ -177,6 +185,8 @@ def check_claim_links(sections) -> list:
             continue
         for sentence in _sentences(section.get("text", "")):
             if not _CLAIM_RE.search(sentence):
+                continue
+            if _WHETHER_RE.search(sentence) or _OBJECTIVE_RE.search(sentence):
                 continue
             if TOKEN_RE.search(sentence) or _CITE_RE.search(sentence):
                 continue

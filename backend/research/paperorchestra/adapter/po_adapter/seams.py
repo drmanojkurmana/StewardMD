@@ -17,9 +17,11 @@ gates run BEFORE any score.
 from __future__ import annotations
 
 import importlib
+import json
 import os
 
-from . import gates
+from . import gates, repair
+from .llm import CeilingError
 
 
 def _no_provider(*args, **kwargs):
@@ -89,6 +91,61 @@ def install(client, search=None, gate_context=None):
                                    result_parsing_func, check_parsed_response_not_none,
                                    system_prompt)
 
+    def record_ceiling(exc):
+        # Upstream catches Exception in its refinement loop and in
+        # _get_peer_review; pipeline.run_refinement re-raises this afterwards.
+        if gate_context is not None:
+            gate_context["ceiling_error"] = exc
+
+    def repairing_parser(result_parsing_func):
+        # The refinement agent stores this latex verbatim, so repair it here
+        # as well as in gated_review: otherwise a repaired review would score
+        # text that the accepted draft does not keep.
+        def parse_and_repair(raw):
+            parsed = result_parsing_func(raw)
+            try:
+                obj = json.loads(parsed)
+            except (TypeError, ValueError):
+                return parsed
+            latex = obj.get("latex") if isinstance(obj, dict) else None
+            if not isinstance(latex, str) or not latex.strip():
+                return parsed
+            try:
+                repaired, _remaining = repair.apply_repair(
+                    client, latex, gate_context.get("token_table"),
+                    gate_context.get("citation_map"),
+                    gate_context.get("manifest"), gate_context)
+            except CeilingError as exc:
+                record_ceiling(exc)
+                raise
+            obj["latex"] = repaired
+            return json.dumps(obj)
+        return parse_and_repair
+
+    step_state = gate_context if gate_context is not None else {}
+
+    def _review_text_wrapper(prompt, model_name, result_parsing_func=None,
+                             generation_configs=None,
+                             check_parsed_response_not_none=True,
+                             max_retries=None, base_interval_sec=None):
+        r = int(step_state.get("refine_round", 0))
+        idx = int(step_state.get("review_call_idx", 0))
+        step_state["review_call_idx"] = idx + 1
+        if idx < 3:
+            sid = f"refine:{r}:rev{idx + 1}"
+        elif idx == 3:
+            sid = f"refine:{r}:meta"
+        else:
+            sid = f"refine:{r}:r{idx - 3}"
+        return client.call_text(
+            prompt, model_name,
+            result_parsing_func=result_parsing_func,
+            generation_configs=generation_configs,
+            check_parsed_response_not_none=check_parsed_response_not_none,
+            max_retries=max_retries, base_interval_sec=base_interval_sec,
+            purpose="review", step_id=sid,
+        )
+
     def refinement_contents_wrapper(contents, model_name, max_retries=5,
                                     base_interval_sec=5, result_parsing_func=None,
                                     generation_configs=None,
@@ -96,34 +153,62 @@ def install(client, search=None, gate_context=None):
         # The content loop passes parse_gemini_json_latex_response; the
         # formatting loop passes a lambda. Only content rounds count against
         # the refinement-round ceiling.
-        purpose = ("refinement"
-                   if result_parsing_func is refine.parse_gemini_json_latex_response
-                   else "format")
+        is_content = result_parsing_func is refine.parse_gemini_json_latex_response
+        purpose = "refinement" if is_content else "format"
+        parser = result_parsing_func
+        if (is_content and gate_context is not None
+                and gate_context.get("token_table") is not None):
+            parser = repairing_parser(result_parsing_func)
+        if purpose == "refinement":
+            if step_state.get("review_done_for_round") or int(step_state.get("refine_round", 0)) == 0:
+                step_state["refine_round"] = int(step_state.get("refine_round", 0)) + 1
+                step_state["review_done_for_round"] = False
+                step_state["refine_retry"] = 0
+                step_state["format_retry"] = 0
+            else:
+                step_state["refine_retry"] = int(step_state.get("refine_retry", 0)) + 1
+            r = int(step_state["refine_round"])
+            retry = int(step_state.get("refine_retry", 0))
+            sid = f"refine:{r}" if retry == 0 else f"refine:{r}:r{retry}"
+        else:
+            r = int(step_state.get("refine_round", 0))
+            fmt_retry = int(step_state.get("format_retry", 0))
+            step_state["format_retry"] = fmt_retry + 1
+            sid = f"refine:{r}:format" if fmt_retry == 0 else f"refine:{r}:format:r{fmt_retry}"
         return client.call_contents(contents, model_name,
-                                    result_parsing_func=result_parsing_func,
+                                    result_parsing_func=parser,
                                     generation_configs=generation_configs,
                                     check_parsed_response_not_none=check_parsed_response_not_none,
-                                    purpose=purpose)
+                                    purpose=purpose, step_id=sid)
 
     original_review = refine.perform_review_agentreview
 
     def gated_review(text, model_name, num_review_ensemble=3, temperature=0.75,
                      reviewer_system_prompt=None, review_instruction_form=None):
         if gate_context and gate_context.get("token_table") is not None:
-            violations = gates.check_paper(
-                text, gate_context["token_table"],
-                gate_context.get("citation_map"), gate_context.get("manifest"))
+            try:
+                repaired, violations = repair.apply_repair(
+                    client, text, gate_context["token_table"],
+                    gate_context.get("citation_map"),
+                    gate_context.get("manifest"), gate_context)
+            except CeilingError as exc:
+                record_ceiling(exc)
+                raise
             if violations:
-                gate_context.setdefault("gate_hits", []).extend(violations)
                 raise gates.GateError(violations)
+            text = repaired
+        step_state["review_call_idx"] = 0
         kwargs = {}
         if review_instruction_form is not None:
             kwargs["review_instruction_form"] = review_instruction_form
-        return original_review(text, model_name,
-                               num_review_ensemble=num_review_ensemble,
-                               temperature=temperature,
-                               reviewer_system_prompt=reviewer_system_prompt,
-                               **kwargs)
+        try:
+            return original_review(text, model_name,
+                                   num_review_ensemble=num_review_ensemble,
+                                   temperature=temperature,
+                                   reviewer_system_prompt=reviewer_system_prompt,
+                                   **kwargs)
+        finally:
+            step_state["review_done_for_round"] = True
 
     def citation_map_wrapper(self, papers):
         base = original_citation_map(self, papers)
@@ -165,8 +250,7 @@ def install(client, search=None, gate_context=None):
         (refine, "load_paper", _load_paper_text),
         (refine, "pdf_to_grid_images", _no_grid_images),
         (refine, "perform_review_agentreview", gated_review),
-        (review, "call_gemini_with_text_prompt",
-         lambda *a, **k: client.call_text(*a, purpose="review", **k)),
+        (review, "call_gemini_with_text_prompt", _review_text_wrapper),
         (parsing, "call_gemini_with_text_prompt", client.call_text),
         (scholar, "s2_title_search", s2),
         (lit_cls, "_generate_citation_map", citation_map_wrapper),

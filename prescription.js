@@ -2943,6 +2943,26 @@
       try { console.error("[rx] export failed:", e); } catch (_) {}
     });
   }
+  /* html2canvas options for the export. Same picture as before (scale 2, white, CORS), two changes
+   * that only make it faster:
+   *  - ignoreElements: before drawing, html2canvas copies the WHOLE page into a hidden frame, and this
+   *    page is the entire app (2,500+ elements, 120 style sheets). Timed on a phone-speed run that copy
+   *    was about 4.7 s of every 7.4 s render, and Save as PDF renders twice (sheet + QR stamp), so a PDF
+   *    took about 13 s. Skipping every top-level body element except the sheet itself cuts the copy;
+   *    the style sheets (<style>/<link>) are kept, so every rule still applies. Only the COPY skips
+   *    them: html2canvas also asks this for elements inside the copy, whose parent is the copy's body,
+   *    never document.body, so nothing in the sheet is ever skipped. Pixel-compared with the old way:
+   *    0 pixels differ.
+   *  - logging:false: with logging on it writes every embedded image (logo, signature, QR) to the
+   *    console as a full data URL on every export, which the native app forwards to the device log. */
+  function rxH2cOpts(node) {
+    return {
+      scale: 2, backgroundColor: "#ffffff", useCORS: true, logging: false,
+      ignoreElements: function (el) {
+        return el.parentNode === document.body && el !== node && el.tagName !== "STYLE" && el.tagName !== "LINK";
+      }
+    };
+  }
   /* The QR block rasterised on its own, so it can be stamped in PDF units instead of being baked
    * into the page image. Two reasons, both of which bit a long prescription: a page break sliced
    * straight through the QR and left half of one on each page, and only the LAST page carried it at
@@ -2954,7 +2974,7 @@
     n.style.cssText="position:fixed;left:-9999px;top:0;width:700px;background:#fff;z-index:-1";
     n.innerHTML=rxDocQrBlock(rec, true);
     document.body.appendChild(n);
-    return window.html2canvas(n, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(c){
+    return window.html2canvas(n, rxH2cOpts(n)).then(function(c){
       n.remove();
       return { data:c.toDataURL("image/jpeg",0.95), ratio:(c.height/c.width) };
     }).catch(function(){ try{ n.remove(); }catch(e){} return null; });
@@ -2969,7 +2989,7 @@
     node.style.cssText="position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1"; document.body.appendChild(node);
     // RETURNED so exportRx()'s catch sees a rasterise or PDF failure; unreturned, a failure here
     // was an unhandled rejection and the doctor saw nothing happen.
-    return window.html2canvas(node, { scale:2, backgroundColor:"#ffffff", useCORS:true }).then(function(canvas){
+    return window.html2canvas(node, rxH2cOpts(node)).then(function(canvas){
       node.remove();
       if(kind==="jpeg"){ rxSaveOrShare(canvas.toDataURL("image/jpeg",0.95), "prescription.jpg"); rxHaptic("success"); return; }
       var JS=(window.jspdf&&window.jspdf.jsPDF)||window.jsPDF; if(!JS){ rxToast("PDF engine unavailable"); return; }

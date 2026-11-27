@@ -32,17 +32,18 @@
   };
 
   var view = null;
+  var runSeq = 0;
   var mc = freshState("");
 
   function freshState(pid) {
     return {
       pid: pid, stage: "upload", fileName: "", sample: false, fromCasefiles: false,
       columns: [], rows: [], types: {}, infer: {}, phiCols: [],
-      analysis: "", showMean: false, matched: false,
+      analysis: "", showMean: false, matched: false, running: false,
       ctri: null, iecStatus: null, journey: [],
       isSeries: false, isRct: false, isStudy: false, isCohort: false,
       form: {
-        group: "", outcomes: [], variables: [], outcome: "", predictors: [], a: "", b: "",
+        group: "", outcomes: [], variables: [], outcome: "", predictors: [], robustHc3: false, a: "", b: "",
         time: "", event: "", sgroup: "", cox: [],
         mgroup: "", caseLevel: "", exposure: "", matchSet: ""
       },
@@ -51,6 +52,16 @@
   }
 
   function stats() { return G.SMD_RESEARCH_STATS; }
+  function onDeviceStats() { return G.SMD_RMD_ONDEVICE_STATS; }
+  function onDeviceV2Enabled() {
+    var OD = onDeviceStats();
+    if (!OD || typeof OD.run !== "function") return false;
+    if (typeof OD.isEnabled === "function") return !!OD.isEnabled();
+    try {
+      if (typeof localStorage !== "undefined") return localStorage.getItem("smd_rmd_ondevice_stats_v2") !== "0";
+    } catch (e) {}
+    return true;
+  }
   function explain() { return G.SMD_RESEARCH_EXPLAIN; }
   function rmdStore() { return G.RMDStore; }
   function contracts() { return G.SMD_RESEARCH_CONTRACTS; }
@@ -431,6 +442,317 @@
     return (inf && inf.levels) || [];
   }
 
+  function calmDeviceError(err) {
+    var code = err && err.code;
+    if (code === "ceiling_rows") return "This chart has too many rows to run on this device.";
+    if (code === "ceiling_seconds") return "This calculation took too long and was stopped.";
+    if (code === "no_events") return "No events yet, so the groups cannot be compared.";
+    if (code === "cox_not_converged") return "The model did not settle on an answer. Do not report a hazard ratio; ask your statistician.";
+    if (code === "too_few_rows") return "Not enough complete rows for this model.";
+    if (code === "singular_design") return "Two or more selected factors carry the same information. Try removing one.";
+    return calm(err && err.message);
+  }
+
+  function subTable(colNames) {
+    var seen = {}, cols = [], idxs = [], i, j, rows = [];
+    for (j = 0; j < colNames.length; j++) {
+      var c = colNames[j];
+      if (!c || seen[c]) continue;
+      var idx = mc.columns.indexOf(c);
+      if (idx < 0) continue;
+      seen[c] = 1;
+      cols.push(c);
+      idxs.push(idx);
+    }
+    for (i = 0; i < mc.rows.length; i++) {
+      var row = [];
+      for (j = 0; j < idxs.length; j++) row.push(mc.rows[i][idxs[j]]);
+      rows.push(row);
+    }
+    return { columns: cols, rows: rows };
+  }
+
+  function linearParagraph(res, outcome) {
+    if (!res || !res.coefficients || res.coefficients.length < 2) return "";
+    var best = null;
+    for (var i = 1; i < res.coefficients.length; i++) {
+      var c = res.coefficients[i];
+      if (best === null || (c.p != null && c.p < best.p)) best = c;
+    }
+    var s = "In linear regression for " + outcome + " (n = " + res.n + ", R2 = " + fmt(res.r2, 2);
+    if (res.robust === "HC3") s += ", HC3 robust errors";
+    s += ")";
+    if (best && isFinite(best.estimate)) {
+      s += ", " + best.term + " had estimate " + fmt(best.estimate, 2) + " (95% CI " + fmt(best.ciLower, 2) + " to " + fmt(best.ciUpper, 2) + ", " + pStr(best.p) + ")";
+    }
+    return s + ".";
+  }
+
+  function adaptLogisticFromDevice(res) {
+    var coefs = [];
+    var raw = (res && res.coefficients) || [];
+    for (var i = 0; i < raw.length; i++) {
+      var c = raw[i];
+      coefs.push({
+        name: c.term,
+        estimate: c.estimate,
+        se: c.se,
+        z: c.z,
+        or: Math.exp(c.estimate),
+        ciLower: Math.exp(c.ciLower),
+        ciUpper: Math.exp(c.ciUpper),
+        p: c.p
+      });
+    }
+    return {
+      n: res.n,
+      events: res.events,
+      converged: true,
+      iterations: res.iterations,
+      warning: res.warning || "",
+      aic: res.aic,
+      deviance: res.deviance,
+      nullDeviance: res.nullDeviance,
+      coefficients: coefs
+    };
+  }
+
+  function adaptKmFromDevice(res) {
+    if (res.groups && res.groups.length) {
+      return { ok: true, warnings: res.warnings || [], nExcluded: res.nExcluded || 0, groups: res.groups };
+    }
+    var steps = [];
+    var rawSteps = res.steps || [];
+    for (var i = 0; i < rawSteps.length; i++) {
+      var st = rawSteps[i];
+      steps.push({
+        t: st.time,
+        atRisk: st.nRisk,
+        events: st.nEvent,
+        censored: st.nCensor,
+        survival: st.surv,
+        seLogS: st.se,
+        ciLower: st.ciLower,
+        ciUpper: st.ciUpper
+      });
+    }
+    return {
+      ok: true,
+      warnings: res.warnings || [],
+      nExcluded: res.nExcluded || 0,
+      groups: [{
+        name: "All",
+        n: res.n,
+        nEvents: res.events,
+        steps: steps,
+        median: { value: res.median, lower: res.medianCiLower, upper: res.medianCiUpper }
+      }]
+    };
+  }
+
+  function jobsRunner() {
+    var j = G && G.SMD_RMD_JOBS;
+    return (j && typeof j.runWithFallback === "function") ? j : null;
+  }
+
+  var IPD_TIERS = { anonymised_deid: 1, hipaa_lds: 1, coded_pseudonymised: 1 };
+
+  function ipdRequiredGroups(cfg) {
+    var jurisdictions = Array.isArray(cfg.jurisdictions) ? cfg.jurisdictions : [];
+    var tier = cfg.identifiabilityTier;
+    var basis = (cfg.legalBasis && typeof cfg.legalBasis === "object") ? cfg.legalBasis : {};
+    var groups = [["irb_approval", "exemption_waiver"]];
+    if (jurisdictions.indexOf("IN") >= 0 && basis.IN === "consent") {
+      groups.push(["consent_basis"]);
+    }
+    if (jurisdictions.indexOf("EU") >= 0) {
+      groups.push(["dpa"]);
+      if (basis.EU === "9_2_a_explicit_consent") groups.push(["consent_basis"]);
+    }
+    if (jurisdictions.indexOf("US") >= 0) {
+      if (tier === "anonymised_deid") groups.push(["safe_harbor", "expert_determination"]);
+      else {
+        groups.push(["baa"]);
+        if (tier === "hipaa_lds") groups.push(["dua"]);
+        else groups.push(["dua", "exemption_waiver", "authorization"]);
+      }
+    }
+    if (!jurisdictions.length) {
+      groups.push(["safe_harbor", "expert_determination"]);
+    }
+    return groups;
+  }
+
+  function isIpdComplianceSatisfied(cfg, list, now) {
+    if (!cfg || typeof cfg !== "object" || !IPD_TIERS[cfg.identifiabilityTier]) return false;
+    var jurisdictions = Array.isArray(cfg.jurisdictions) ? cfg.jurisdictions : [];
+    var basis = (cfg.legalBasis && typeof cfg.legalBasis === "object") ? cfg.legalBasis : {};
+    var att = (cfg.attestation && typeof cfg.attestation === "object") ? cfg.attestation : {};
+    var agreements = (cfg.agreements && typeof cfg.agreements === "object") ? cfg.agreements : {};
+    if (att.responsibility !== true) return false;
+    if (jurisdictions.indexOf("IN") >= 0) {
+      if (basis.IN === "dpdp_s17_2_b_research" && att.noIndividualDecisions !== true) return false;
+      if (att.pediatric === true && att.guardianConsent !== true) return false;
+    }
+    if (jurisdictions.indexOf("EU") >= 0) {
+      if (agreements.dpa !== true) return false;
+      if (att.dpia !== true) return false;
+      if (basis.EU === "9_2_j_scientific_research" &&
+        !(typeof att.memberStateLaw === "string" && att.memberStateLaw.replace(/^\s+|\s+$/g, ""))) {
+        return false;
+      }
+    }
+    if (jurisdictions.indexOf("US") >= 0 && cfg.identifiabilityTier !== "anonymised_deid" && agreements.baa !== true) {
+      return false;
+    }
+    if ((jurisdictions.indexOf("US") >= 0 && cfg.identifiabilityTier === "anonymised_deid") || !jurisdictions.length) {
+      if (att.noActualKnowledge !== true) return false;
+    }
+    var groups = ipdRequiredGroups(cfg);
+    var evList = Array.isArray(list) ? list : [];
+    var t = typeof now === "number" ? now : Date.now();
+    for (var gi = 0; gi < groups.length; gi++) {
+      var kinds = groups[gi];
+      var satisfied = false;
+      for (var ei = 0; ei < evList.length; ei++) {
+        var ev = evList[ei];
+        if (!ev || ev.status !== "approved") continue;
+        if (kinds.indexOf(ev.kind) < 0) continue;
+        var exp = ev.expiresTs != null ? ev.expiresTs : ev.expires_ts;
+        if (exp != null && !(Number(exp) > t)) continue;
+        satisfied = true;
+        break;
+      }
+      if (!satisfied) return false;
+    }
+    return true;
+  }
+
+  /* NOTE (MasterChart cloud stats): MasterChart runs over in-memory table rows
+   * (mc.columns/mc.rows) and has no inline uploadIpd client flow. Only projects
+   * with an uploaded server dataset (mc.ipdDatasetId) can submit /stats-jobs;
+   * otherwise we show the patient-data privacy notice (Continue gated by ethics
+   * approval on file) and then "Cloud analysis isn't available for this dataset yet". */
+  function checkMcEthicsApproval(pid) {
+    if (!pid || !SMD || !SMD.api || typeof SMD.api.request !== "function") {
+      return Promise.resolve(false);
+    }
+    var base = "/v1/projects/" + encodeURIComponent(pid);
+    return Promise.all([
+      SMD.api.request("GET", base + "/ipd-config").catch(function () { return null; }),
+      SMD.api.request("GET", base + "/ipd-evidence").catch(function () { return null; })
+    ]).then(function (pair) {
+      var cfg = pair[0] && pair[0].config;
+      if (!cfg || !pair[1]) return false;
+      var list = pair[1].evidence || pair[1].items || [];
+      return isIpdComplianceSatisfied(cfg, list, Date.now());
+    }, function () { return false; });
+  }
+
+  function runMcCloudFallback(targetPid, spec, fallbackMeta) {
+    var datasetId = mc.ipdDatasetId || (spec && spec.datasetId);
+    if (!datasetId || !targetPid || !SMD || !SMD.api || typeof SMD.api.request !== "function") {
+      return Promise.resolve({
+        unavailable: true,
+        message: "Cloud analysis isn't available for this dataset yet"
+      });
+    }
+    var modelSpec = spec;
+    if (spec && (spec.family === "linear" || spec.family === "logistic") && !spec.formula && spec.outcome && spec.predictors) {
+      modelSpec = {
+        family: spec.family,
+        formula: spec.outcome + " ~ " + spec.predictors.join(" + "),
+        outcome: spec.outcome,
+        predictors: spec.predictors.slice(),
+        types: spec.types
+      };
+      if (spec.family === "linear") modelSpec.robust = spec.robust || null;
+    }
+    var key = "mc_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
+    return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(targetPid) + "/stats-jobs", {
+      datasetId: datasetId,
+      model: modelSpec,
+      idempotencyKey: key,
+      fallback: fallbackMeta
+    });
+  }
+
+  function runWithDeviceFallback(targetId, spec, runDeviceFn, onSuccessFn) {
+    var seqNow = ++runSeq;
+    var pidNow = mc.pid;
+    var JR = jobsRunner();
+    mc.running = true;
+    mc.retryText = "";
+    draw();
+
+    var p;
+    if (!JR) {
+      p = Promise.resolve().then(function () {
+        return runDeviceFn({ signal: null });
+      }).then(function (res) {
+        return { ok: true, source: "device", result: res };
+      });
+    } else {
+      p = JR.runWithFallback("stats", runDeviceFn, function (cpIgnored, fallbackMeta) {
+        return runMcCloudFallback(pidNow, spec, fallbackMeta);
+      }, {
+        jobKey: "stats:" + (pidNow || "local") + ":" + targetId,
+        projectId: pidNow || "local",
+        targetId: targetId,
+        engine: "ondevice:stats",
+        hasEthicsApproval: function () { return checkMcEthicsApproval(pidNow); },
+        onStatus: function (info) {
+          if (seqNow !== runSeq || mc.pid !== pidNow) return;
+          if (info && info.state === "retrying" && info.message) {
+            mc.retryText = info.message;
+            draw();
+          }
+        }
+      });
+    }
+
+    p.then(function (out) {
+      if (seqNow !== runSeq || mc.pid !== pidNow) return;
+      mc.running = false;
+      mc.retryText = "";
+      if (out && out.ok && out.source === "device") {
+        onSuccessFn(out.result);
+        return;
+      }
+      if (out && out.ok && out.source === "cloud") {
+        if (out.result && out.result.unavailable) {
+          mc.error = out.result.message;
+        } else {
+          mc.error = "Cloud stats job queued. Results will appear once finished.";
+        }
+        draw();
+        return;
+      }
+      mc.error = (out && out.message) || "Saved on this device. Try again later.";
+      draw();
+    }, function (err) {
+      if (seqNow !== runSeq || mc.pid !== pidNow) return;
+      mc.running = false;
+      mc.retryText = "";
+      if (err && err.code === "logistic_not_converged") {
+        var lgFail = {
+          n: mc.rows.length, events: 0, converged: false,
+          warning: "The model could not settle on stable numbers (a factor perfectly predicts the outcome). Try fewer factors.",
+          coefficients: []
+        };
+        mc.results = {
+          kind: "logistic", outcome: spec.outcome, log: lgFail,
+          warnings: [lgFail.warning], paragraph: "", onDevice: true
+        };
+        mc.stage = "results";
+        draw();
+        return;
+      }
+      mc.error = calmDeviceError(err);
+      draw();
+    });
+  }
+
   function runAnalysis() {
     var S = stats();
     var f = mc.form;
@@ -485,6 +807,44 @@
         }
         var t = S.table1(mc.rows, mc.columns, f.group, f.variables, typesMap());
         mc.results = { kind: "table1", group: f.group, table: t, warnings: [], paragraph: "" };
+      } else if (mc.analysis === "linear") {
+        if (!onDeviceV2Enabled()) {
+          mc.stage = "question";
+          draw();
+          return;
+        }
+        if (!f.outcome || !f.predictors.length) {
+          mc.error = "Pick a number outcome and tick 1 to 6 factors.";
+          draw();
+          return;
+        }
+        if (f.predictors.length > 6) {
+          mc.error = "Tick at most 6 factors.";
+          draw();
+          return;
+        }
+        var linCols = [f.outcome].concat(f.predictors);
+        var linSpec = {
+          family: "linear",
+          outcome: f.outcome,
+          predictors: f.predictors.slice(),
+          types: typesMap(),
+          robust: f.robustHc3 ? "HC3" : null
+        };
+        var linRows = subTable(linCols);
+        runWithDeviceFallback("linear:" + f.outcome, linSpec, function (resumeCtx) {
+          return onDeviceStats().run(linSpec, linRows, { signal: resumeCtx && resumeCtx.signal });
+        }, function (res) {
+          var w = [];
+          if (res.dropped > 0) w.push(res.dropped + " rows were left out (missing values).");
+          mc.results = {
+            kind: "linear", outcome: f.outcome, robust: linSpec.robust, lin: res, warnings: w,
+            paragraph: linearParagraph(res, f.outcome), onDevice: true
+          };
+          mc.stage = "results";
+          draw();
+        });
+        return;
       } else if (mc.analysis === "logistic") {
         if (!f.outcome || !f.predictors.length) {
           mc.error = "Pick a yes-no outcome and tick 1 to 6 risk factors.";
@@ -494,6 +854,30 @@
         if (f.predictors.length > 6) {
           mc.error = "Tick at most 6 risk factors.";
           draw();
+          return;
+        }
+        if (onDeviceV2Enabled()) {
+          var logCols = [f.outcome].concat(f.predictors);
+          var logSpec = {
+            family: "logistic",
+            outcome: f.outcome,
+            predictors: f.predictors.slice(),
+            types: typesMap()
+          };
+          var logRows = subTable(logCols);
+          runWithDeviceFallback("logistic:" + f.outcome, logSpec, function (resumeCtx) {
+            return onDeviceStats().run(logSpec, logRows, { signal: resumeCtx && resumeCtx.signal });
+          }, function (res) {
+            var lgDev = adaptLogisticFromDevice(res);
+            var lwDev = [];
+            if (lgDev.warning) lwDev.push(lgDev.warning);
+            mc.results = {
+              kind: "logistic", outcome: f.outcome, log: lgDev, warnings: lwDev,
+              paragraph: sentenceFor(lgDev, f.outcome, []), onDevice: true
+            };
+            mc.stage = "results";
+            draw();
+          });
           return;
         }
         var lg = S.logistic(mc.rows, mc.columns, f.outcome, f.predictors, typesMap());
@@ -638,6 +1022,84 @@
     var f = mc.form;
     mc.error = "";
     if (!f.time || !f.event) { mc.error = "Choose a time column and an event column."; draw(); return; }
+    if (onDeviceV2Enabled()) {
+      var OD = onDeviceStats();
+      var svSpec = (f.cox && f.cox.length)
+        ? { family: "cox", time: f.time, event: f.event, covariates: f.cox.slice(), types: typesMap() }
+        : { family: "km", time: f.time, event: f.event, group: f.sgroup || null };
+      function catchDataOnly(err) {
+        var JR = jobsRunner();
+        var cls = (JR && typeof JR.classifyError === "function") ? JR.classifyError(err, {}) : { counted: false };
+        if (cls.counted) throw err;
+        return { ok: false, warnings: [calmDeviceError(err)] };
+      }
+      var kmCols = f.sgroup ? [f.time, f.event, f.sgroup] : [f.time, f.event];
+      var kmRows = subTable(kmCols);
+      var lrRows = f.sgroup ? subTable([f.time, f.event, f.sgroup]) : null;
+      var coxRows = (f.cox && f.cox.length) ? subTable([f.time, f.event].concat(f.cox)) : null;
+
+      runWithDeviceFallback("survival:" + f.time + ":" + f.event, svSpec, function (resumeCtx) {
+        var sig = resumeCtx && resumeCtx.signal;
+        var kmP = OD.run({ family: "km", time: f.time, event: f.event, group: f.sgroup || null }, kmRows, { signal: sig }).then(
+          adaptKmFromDevice,
+          catchDataOnly
+        );
+        var lrP = lrRows
+          ? OD.run({ family: "logrank", time: f.time, event: f.event, group: f.sgroup }, lrRows, { signal: sig }).then(
+              function (res) { return { ok: true, chi2: res.chisq, df: res.df, p: res.p, table: res.groups, warnings: res.warnings || [] }; },
+              catchDataOnly
+            )
+          : Promise.resolve(null);
+        var coxP = coxRows
+          ? OD.run({ family: "cox", time: f.time, event: f.event, covariates: f.cox.slice(), types: typesMap() }, coxRows, { signal: sig }).then(
+              function (res) {
+                var coefs = [];
+                for (var j = 0; j < res.coefficients.length; j++) {
+                  var c = res.coefficients[j];
+                  coefs.push({
+                    term: c.term,
+                    hr: c.hr,
+                    ciLower: c.hrCiLower,
+                    ciUpper: c.hrCiUpper,
+                    p: c.p,
+                    estimable: c.estimable !== false,
+                    predictor: c.predictor,
+                    level: c.level
+                  });
+                }
+                return { ok: true, converged: true, coefficients: coefs, phTest: res.phTest || null, warnings: res.warnings || [] };
+              },
+              catchDataOnly
+            )
+          : Promise.resolve(null);
+        return Promise.all([kmP, lrP, coxP]);
+      }, function (all) {
+        var km = all[0], lr = all[1], cox = all[2];
+        var warnings = [];
+        if (km && km.warnings) warnings = warnings.concat(km.warnings);
+        if (lr && lr.warnings) warnings = warnings.concat(lr.warnings);
+        if (cox && cox.warnings) warnings = warnings.concat(cox.warnings);
+        var ok = !!(km && km.ok);
+        var paragraph = "";
+        if (cox && cox.ok && cox.coefficients) {
+          for (var k = 0; k < cox.coefficients.length; k++) {
+            var co = cox.coefficients[k];
+            if (co.estimable === false || co.hr == null || !isFinite(co.hr)) continue;
+            var EX = explain();
+            if (EX && EX.effect) {
+              try {
+                paragraph = EX.effect({ measure: "HR", estimate: co.hr, ciLower: co.ciLower, ciUpper: co.ciUpper, p: co.p, outcome: f.event, group: co.term });
+              } catch (e) { paragraph = ""; }
+            }
+            break;
+          }
+        }
+        mc.results = { kind: "survival", ok: ok, km: km, lr: lr, cox: cox, warnings: warnings, paragraph: paragraph, onDevice: true };
+        mc.stage = "results";
+        draw();
+      });
+      return;
+    }
     var times = colValues(f.time);
     var events = colValues(f.event);
     var groups = f.sgroup ? colValues(f.sgroup) : null;
@@ -769,6 +1231,11 @@
       f.outcome = binaryOptions()[0] || "";
       f.predictors = [];
     }
+    if (key === "linear") {
+      f.outcome = numericOptions()[0] || "";
+      f.predictors = [];
+      f.robustHc3 = false;
+    }
     if (key === "related") {
       var nums = numericOptions();
       f.a = nums[0] || "";
@@ -895,6 +1362,16 @@
     return lines.join("\n");
   }
 
+  function linearText(r) {
+    var ln = r.lin;
+    var lines = ["Linear regression for " + r.outcome + " (n = " + ln.n + ", R2 = " + fmt(ln.r2, 3) + ", AIC = " + fmt(ln.aic, 2) + (r.robust === "HC3" ? ", HC3 robust errors" : "") + ")."];
+    for (var i = 0; i < ln.coefficients.length; i++) {
+      var c = ln.coefficients[i];
+      lines.push(c.term + ": estimate " + fmt(c.estimate, 3) + " (SE " + fmt(c.se, 3) + ", 95% CI " + fmt(c.ciLower, 3) + " to " + fmt(c.ciUpper, 3) + "), " + pStr(c.p));
+    }
+    return lines.join("\n");
+  }
+
   function logisticText(r) {
     var lg = r.log;
     var lines = ["Logistic regression for " + r.outcome + " (n = " + lg.n + ", events = " + lg.events + ")."];
@@ -945,6 +1422,9 @@
         if (co.estimable === false) { lines.push(co.term + ": hazard ratio could not be estimated (separation)."); continue; }
         lines.push(co.term + ": HR " + fmt(co.hr) + " (95% CI " + fmt(co.ciLower) + " to " + fmt(co.ciUpper) + "), " + pStr(co.p));
       }
+      if (r.cox.phTest && r.cox.phTest.global) {
+        lines.push("Proportional hazards check (Schoenfeld): global chi-square = " + fmt(r.cox.phTest.global.chisq, 2) + ", df = " + r.cox.phTest.global.df + ", " + pStr(r.cox.phTest.global.p) + ".");
+      }
     }
     return lines.join("\n");
   }
@@ -961,6 +1441,7 @@
     var parts = [];
     if (r.paragraph) parts.push(r.paragraph);
     if (r.kind === "table1") parts.push(table1Text(r.table, r.group));
+    else if (r.kind === "linear") parts.push(linearText(r));
     else if (r.kind === "logistic") parts.push(logisticText(r));
     else if (r.kind === "describe") parts.push(describeText(r));
     else if (r.kind === "survival") parts.push(survivalText(r));
@@ -1011,6 +1492,12 @@
         cells.push(pStr(row.p));
         cells.push(row.test || "");
         lines.push(cells);
+      }
+    } else if (r.kind === "linear") {
+      lines.push(["Factor", "Estimate", "SE", "t", "CI lower", "CI upper", "p"]);
+      for (i = 0; i < r.lin.coefficients.length; i++) {
+        var cl = r.lin.coefficients[i];
+        lines.push([cl.term, fmt(cl.estimate, 4), fmt(cl.se, 4), fmt(cl.t, 3), fmt(cl.ciLower, 4), fmt(cl.ciUpper, 4), pStr(cl.p)]);
       }
     } else if (r.kind === "logistic") {
       lines.push(["Factor", "OR", "CI lower", "CI upper", "p"]);
@@ -1121,6 +1608,10 @@
       "#researchMD .rmd-mc-list { font: 400 14px/1.6 var(--rmd-f); color: var(--rmd-ink); margin: 6px 0; word-break: break-word; }",
       "#researchMD .rmd-mc-common { margin: 8px 0; }",
       "#researchMD .rmd-mc-ph { font: 400 13px/1.5 var(--rmd-f); color: var(--rmd-mut); margin: 8px 0; }",
+      "#researchMD .rmd-mc-ph-warn { color: var(--rmd-warn); font-weight: 500; }",
+      "#researchMD .rmd-mc-phtest { margin: 12px 0 4px; padding-top: 8px; border-top: 1px solid var(--rmd-line); }",
+      "#researchMD .rmd-mc-phtest h4 { margin: 0 0 6px; font: 600 13.5px var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-mc-ondevice { display: inline-block; margin: 2px 0 8px; }",
       "#researchMD .rmd-mc-cox-sep { color: var(--rmd-warn); }",
       /* Shared base only forces 44px targets at iPad width and skips date inputs; scope phone fixes here. */
       "#researchMD .rmd-mc-screen .rmd-btn, #researchMD .rmd-mc-screen label.rmd-btn { min-height: 44px; }",
@@ -1262,6 +1753,9 @@
     h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="compare">Compare groups<span>Does HbA1c at 12 weeks differ between Drug A and Drug B? Pick a group column and one or more outcomes.</span></button>';
     h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="table1">Table 1 (baseline characteristics)<span>Age, sex and BMI by group, with p values. The first table of most papers.</span></button>';
     h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="logistic">Risk factors (logistic regression)<span>Which factors raise the odds of a yes-no outcome, like a complication? Up to 6 factors.</span></button>';
+    if (onDeviceV2Enabled()) {
+      h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="linear">Linear regression (numeric outcome)<span>How much does a number outcome like HbA1c change for each factor? Up to 6 factors.</span></button>';
+    }
     h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="related">Is it related?<span>Is BMI related to HbA1c? Correlation between two number columns.</span></button>';
     if (mc.isSeries) {
       h += '<button type="button" class="rmd-start-choice" data-rmd-mc-choice="describe">Describe the series<span>List every value for a small series, or median (IQR) and range. Counts as n (%). No hypothesis test unless you ask.</span></button>';
@@ -1296,6 +1790,13 @@
       h += '  <div class="rmd-field"><label for="rmdMcGroup">Group column</label>' + selectHtml("rmdMcGroup", groups, f.group) + '</div>';
       h += '  <div class="rmd-field"><label>Variables</label>' + checkListHtml("variables", elig.filter(function (c) { return c !== f.group; }), f.variables, 0) + '</div>';
       h += '</div>';
+    } else if (mc.analysis === "linear") {
+      h += headHtml("Linear regression (numeric outcome)", "Pick a number outcome and up to 6 factors.");
+      h += '<div class="rmd-form">';
+      h += '  <div class="rmd-field"><label for="rmdMcOutcome">Outcome (number)</label>' + selectHtml("rmdMcOutcome", nums, f.outcome) + '</div>';
+      h += '  <div class="rmd-field"><label>Factors (up to 6)</label>' + checkListHtml("predictors", elig.filter(function (c) { return c !== f.outcome && mc.types[c] !== "text" && mc.types[c] !== "date"; }), f.predictors, 6) + '</div>';
+      h += '  <label class="rmd-mc-toggle"><input type="checkbox" id="rmdMcHc3"' + (f.robustHc3 ? ' checked' : '') + '> HC3 robust errors</label>';
+      h += '</div>';
     } else if (mc.analysis === "logistic") {
       h += headHtml("Risk factors (logistic regression)", "Pick a yes-no outcome and up to 6 risk factors.");
       h += '<div class="rmd-form">';
@@ -1327,9 +1828,13 @@
       h += '</div>';
     }
     h += '<div class="rmd-mc-actions">';
-    h += '  <button type="button" class="rmd-btn rmd-btn-primary" data-rmd-mc="run">Run the analysis</button>';
+    h += '  <button type="button" class="rmd-btn rmd-btn-primary" data-rmd-mc="run"' + (mc.running ? ' disabled' : '') + '>' + (mc.running ? (mc.retryText ? esc(mc.retryText) : 'Running on this device...') : 'Run the analysis') + '</button>';
     h += '  <button type="button" class="rmd-btn rmd-btn-quiet" data-rmd-mc="to-question">Back</button>';
     h += '</div>';
+    if (onDeviceV2Enabled()) {
+      var privLine = (G && G.SMD_RMD_JOBS && G.SMD_RMD_JOBS.DEVICE_PRIVACY_LINE) || "Runs on this device. Your PDFs and patient data are read here and never uploaded. Works offline.";
+      h += '<p class="rmd-muted rmd-device-privacy" style="font-size:12px;margin-top:6px;">' + esc(privLine) + '</p>';
+    }
     return h;
   }
 
@@ -1469,7 +1974,13 @@
       for (var i = 0; i < km.groups.length; i++) {
         var g = km.groups[i];
         var med = g.median || {};
-        var medStr = med.value == null ? "not reached" : fmt(med.value, 1) + " (" + fmt(med.lower, 1) + " to " + fmt(med.upper, 1) + ")";
+        var medStr = "not reached";
+        if (med.value != null) {
+          medStr = fmt(med.value, 1);
+          if (med.lower != null || med.upper != null) {
+            medStr += " (" + (med.lower == null ? "not reached" : fmt(med.lower, 1)) + " to " + (med.upper == null ? "not reached" : fmt(med.upper, 1)) + ")";
+          }
+        }
         h += "<tr><td>" + esc(g.name) + "</td><td>" + g.n + "</td><td>" + g.nEvents + "</td><td>" + esc(medStr) + "</td></tr>";
       }
       h += "</tbody></table></div>";
@@ -1490,7 +2001,27 @@
         }
       }
       h += "</tbody></table></div>";
-      h += '<p class="rmd-mc-ph">Hazard ratios assume the effect stays the same over time. If the survival curves cross, ask your statistician before reporting.</p>';
+      if (onDeviceV2Enabled() && r.cox.phTest && r.cox.phTest.terms && r.cox.phTest.global) {
+        var ph = r.cox.phTest;
+        var phBad = ph.global.p != null && ph.global.p < 0.05;
+        h += '<div class="rmd-mc-phtest"><h4>Proportional hazards check</h4>';
+        h += '<div class="rmd-mc-tablewrap"><table class="rmd-mc-table"><thead><tr><th>Term</th><th>Chi-square</th><th>df</th><th>p</th></tr></thead><tbody>';
+        for (var pt = 0; pt < ph.terms.length; pt++) {
+          var trm = ph.terms[pt];
+          if (trm.p != null && trm.p < 0.05) phBad = true;
+          h += "<tr><td>" + esc(trm.term) + "</td><td>" + fmt(trm.chisq, 2) + "</td><td>" + trm.df + "</td><td>" + esc(pStr(trm.p)) + "</td></tr>";
+        }
+        h += "<tr><td><strong>Global</strong></td><td><strong>" + fmt(ph.global.chisq, 2) + "</strong></td><td><strong>" + ph.global.df + "</strong></td><td><strong>" + esc(pStr(ph.global.p)) + "</strong></td></tr>";
+        h += "</tbody></table></div>";
+        if (phBad) {
+          h += '<p class="rmd-mc-ph rmd-mc-ph-warn">The proportional hazards assumption may not hold (p &lt; 0.05), so the hazard ratio may change over time. Ask your statistician before reporting.</p>';
+        } else {
+          h += '<p class="rmd-mc-ph">Proportional hazards check found no clear change over time (global ' + esc(pStr(ph.global.p)) + ').</p>';
+        }
+        h += "</div>";
+      } else {
+        h += '<p class="rmd-mc-ph">Hazard ratios assume the effect stays the same over time. If the survival curves cross, ask your statistician before reporting.</p>';
+      }
     }
     h += "</div>";
     return h;
@@ -1518,11 +2049,15 @@
     if (r.kind === "compare") sub = "Comparing groups by " + r.group + ".";
     else if (r.kind === "related") sub = r.a + " vs " + r.b + ".";
     else if (r.kind === "table1") sub = "Baseline characteristics by " + r.group + ".";
+    else if (r.kind === "linear") sub = "Linear regression for " + r.outcome + ".";
     else if (r.kind === "logistic") sub = "Risk factors for " + r.outcome + ".";
     else if (r.kind === "describe") sub = "Case series description.";
     else if (r.kind === "survival") sub = "Time to event.";
     else if (r.kind === "matched") sub = "Matched pairs.";
     var h = headHtml("Results", sub);
+    if (onDeviceV2Enabled()) {
+      h += '<span class="rmd-badge rmd-badge-pill rmd-mc-ondevice">On this device</span>';
+    }
     if (r.warnings && r.warnings.length) {
       h += '<div class="rmd-banner rmd-banner-warn" role="alert"><strong>Check before you report:</strong><ul>';
       for (var w = 0; w < r.warnings.length; w++) h += '<li>' + esc(r.warnings[w]) + '</li>';
@@ -1545,6 +2080,21 @@
         h += '<tr><td>' + esc(t1Label(row)) + '</td><td>' + esc(row.overall) + '</td>';
         for (var c = 0; c < row.cells.length; c++) h += '<td>' + esc(row.cells[c]) + '</td>';
         h += '<td>' + esc(pStr(row.p)) + '</td></tr>';
+      }
+      h += '</tbody></table></div>';
+    } else if (r.kind === "linear") {
+      var ln = r.lin;
+      var statLine = "n = " + ln.n + ", R2 = " + fmt(ln.r2, 3) + ", adj R2 = " + fmt(ln.adjR2, 3) + ", AIC = " + fmt(ln.aic, 2);
+      if (ln.fStatistic != null && ln.fDf) {
+        statLine += ", F(" + ln.fDf[0] + ", " + ln.fDf[1] + ") = " + fmt(ln.fStatistic, 2) + ", " + pStr(ln.fP);
+      }
+      if (r.robust === "HC3") statLine += " (HC3 robust errors)";
+      h += '<p class="rmd-mc-stat">' + esc(statLine) + '</p>';
+      h += '<div class="rmd-mc-tablewrap"><table class="rmd-mc-table"><thead><tr><th>Factor</th><th>Estimate (95% CI)</th><th>SE</th><th>t</th><th>p</th></tr></thead><tbody>';
+      for (i = 0; i < ln.coefficients.length; i++) {
+        var cl = ln.coefficients[i];
+        var estCell = fmt(cl.estimate, 3) + " (" + fmt(cl.ciLower, 3) + " to " + fmt(cl.ciUpper, 3) + ")";
+        h += '<tr><td>' + esc(cl.term) + '</td><td>' + esc(estCell) + '</td><td>' + esc(fmt(cl.se, 3)) + '</td><td>' + esc(fmt(cl.t, 2)) + '</td><td>' + esc(pStr(cl.p)) + '</td></tr>';
       }
       h += '</tbody></table></div>';
     } else if (r.kind === "logistic") {
@@ -1626,6 +2176,8 @@
     }
     var outcome = view.querySelector("#rmdMcOutcome");
     if (outcome) outcome.onchange = function () { mc.form.outcome = outcome.value; };
+    var hc3 = view.querySelector("#rmdMcHc3");
+    if (hc3) hc3.onchange = function () { mc.form.robustHc3 = hc3.checked; };
     var selA = view.querySelector("#rmdMcA");
     if (selA) selA.onchange = function () { mc.form.a = selA.value; };
     var selB = view.querySelector("#rmdMcB");
@@ -1702,17 +2254,20 @@
       mc.stage = "question";
       draw();
     } else if (act === "back-upload") {
+      ++runSeq;
       var pid = mc.pid;
       mc = freshState(pid);
       draw();
     } else if (act === "save-phone") {
       saveLocal();
     } else if (act === "to-question" || act === "ask-another") {
+      ++runSeq;
+      mc.running = false;
       mc.stage = "question";
       mc.error = "";
       draw();
     } else if (act === "run") {
-      runAnalysis();
+      if (!mc.running) runAnalysis();
     } else if (act === "show-mean") {
       mc.showMean = !mc.showMean;
       draw();
@@ -1799,7 +2354,9 @@
     module.exports = {
       render: render, describeRule: describeRule, computeDescribeData: computeDescribeData,
       commonFeaturesFrom: commonFeaturesFrom, describeParagraph: describeParagraph,
-      buildKmPath: buildKmPath, riskAtTime: riskAtTime, buildMatchedPairs: buildMatchedPairs
+      buildKmPath: buildKmPath, riskAtTime: riskAtTime, buildMatchedPairs: buildMatchedPairs,
+      checkMcEthicsApproval: checkMcEthicsApproval, runMcCloudFallback: runMcCloudFallback,
+      isIpdComplianceSatisfied: isIpdComplianceSatisfied
     };
   }
 

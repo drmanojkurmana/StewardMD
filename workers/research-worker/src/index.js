@@ -10,7 +10,7 @@
 import { DurableObject } from "cloudflare:workers";
 
 const PORT = 8080;
-const IDLE_MS = 5 * 60 * 1000; // sleepAfter equivalent: setInactivityTimeout
+const IDLE_MS = 1 * 60 * 1000; // sleepAfter equivalent: setInactivityTimeout (Phase 04: 5m -> 1m)
 const READY_ATTEMPTS = 60;
 const READY_DELAY_MS = 500;
 

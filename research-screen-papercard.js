@@ -642,6 +642,13 @@
     h.push('    </button>');
     h.push('  </div>');
 
+    /* F-20: the card record is fetched through the PubMed, Crossref and Europe
+     * PMC lookup chain, so all three required credit lines appear here. OpenAlex
+     * and retraction credits render in the enrichment block above. */
+    if (SMD.sources && SMD.sources.creditHtml) {
+      h.push(SMD.sources.creditHtml(["pubmed", "europe_pmc", "crossref"], null, { attr: 'data-rmd="card-sources-credit"' }));
+    }
+
     h.push('</article>'); // .rmd-papercard
 
     container.innerHTML = h.join("\n");

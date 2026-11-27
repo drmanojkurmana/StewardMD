@@ -13,13 +13,26 @@ const WRITE_ROLES = ["owner", "editor", "analyst"];
 const APPROVE_ROLES = ["owner", "editor"];
 
 const TOKEN_RE = /\{\{run:([A-Za-z0-9_-]+)\.([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*)\}\}/g;
+/* F-10: an AI or vendor name is never a valid author entry (exact,
+ * case-insensitive match only; "MaiK Rao" stays a human byline entry). */
+const AI_AUTHOR_NAMES = new Set(["maik", "stewardmd", "researchmd", "chatgpt", "gpt", "gemini", "claude", "openai"]);
+export const AI_AUTHOR_MESSAGE = "AI tools cannot be listed as authors.";
+/* F-12: publication consent is required only for single-patient publications. */
+const CASE_STUDY_RE = /case[-_\s]?(?:report|series)/i;
+export const PUBLICATION_CONSENT_MESSAGE =
+  "Confirm the patient's written consent for publication first (Publication consent step).";
 const LOOSE_RE = /\{\{run:([^}]*)\}\}/g;
 const NUMBER_RE = /(?<![A-Za-z0-9_])\d+(?:\.\d+)?(?![A-Za-z0-9_])/g;
 const YEAR_RE = /^(?:19|20)\d{2}$/;
 const REVIEWER_RE = /\b\d+\s+(?:reviewers|assessors|screeners)\b|\b(?:reviewers|assessors|screeners)\s*(?:=|:)\s*\d+/gi;
 const THRESHOLD_RE = /\b(?:threshold|cutoff|alpha|significance level|type I error)\b[^.!?]{0,30}?\d+(?:\.\d+)?%?|\b(?:heterogeneity|I2|I\u00b2)\b[^.!?]{0,30}?\b(?:25|50|75)\s*%|\b(?:90|95|99)\s*%\s*(?:CI|confidence)\b/gi;
+/* An exponent is notation, not a result: I^2, chi^{2}, \\textsuperscript{2}. */
+const EXPONENT_RE = /(?:\^\{?|\\textsuperscript\{)\s*\d+(?:\.\d+)?/g;
 const CITE_RE = /\\cite\{([^}]+)\}|\[@([A-Za-z0-9_:-]+)\]/g;
 const CLAIM_RE = /\b(?:reduc\w*|decreas\w*|increas\w*|improv\w*|worsen\w*|significant\w*|associat\w*|superior|inferior)\b/i;
+/* A research question or objective is not a result claim; it needs no source. */
+const WHETHER_RE = /\bwhether\b/i;
+const OBJECTIVE_RE = /\b(?:aim(?:s|ed)?|objective|purpose|we (?:sought|set out) to|this (?:review|study|analysis) (?:asks|examines|assesses|evaluates|addresses))\b/i;
 const DIR_DOWN_RE = /\b(?:reduc\w*|decreas\w*|lower(?:ed|ing|s)?|declin\w*)\b/i;
 const DIR_UP_RE = /\b(?:increas\w*|higher|elevat\w*|greater)\b/i;
 const SIG_NEG_RE = /\b(?:not|no|without)\s+significan\w*|\bnon-?significan\w*/i;
@@ -34,6 +47,42 @@ const NULLS = { OR: 1, RR: 1, HR: 1, ROM: 1, IRR: 1, RRR: 1, MD: 0, RD: 0, SMD: 
 
 function iso(ts) {
   return new Date(ts).toISOString().replace(/\.\d{3}Z$/, "Z");
+}
+export function isAiAuthor(name) {
+  return AI_AUTHOR_NAMES.has(String(name || "").trim().toLowerCase());
+}
+export function isCaseStudyType(studyType) {
+  return CASE_STUDY_RE.test(String(studyType || ""));
+}
+export async function publicationConsentRecord(db, projectId) {
+  const row = await db.prepare(
+    "SELECT * FROM research_publication_consents WHERE project_id=? ORDER BY created_ts DESC, id DESC LIMIT 1"
+  ).bind(projectId).first();
+  if (!row) return null;
+  return {
+    id: row.id,
+    projectId: row.project_id,
+    writtenConsentObtained: row.written_consent_obtained === 1,
+    patientSawManuscript: row.patient_saw_manuscript === 1,
+    consentDate: row.consent_date || "",
+    manuscriptVersion: row.manuscript_version == null ? null : row.manuscript_version,
+    signedBy: row.signed_by || "",
+    signedAt: row.signed_at ? iso(row.signed_at) : "",
+  };
+}
+/* True when the project is a case report or case series and no publication
+ * consent record exists yet. Every other study type is exempt (F-12). */
+export async function publicationConsentRequired(db, projectId) {
+  const project = await db.prepare("SELECT study_type FROM research_projects WHERE id=? AND status!='deleted'")
+    .bind(projectId).first();
+  if (!project || !isCaseStudyType(project.study_type)) return false;
+  return !(await publicationConsentRecord(db, projectId));
+}
+function consentDateOk(value) {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value.trim())) return false;
+  const t = Date.parse(value.trim());
+  if (Number.isNaN(t)) return false;
+  return value.trim() <= new Date().toISOString().slice(0, 10);
 }
 function parseJson(text, fallback) {
   try { const v = JSON.parse(text || ""); return v == null ? fallback : v; } catch { return fallback; }
@@ -75,7 +124,7 @@ function formatCi(lo, hi) {
 
 /* Stored numbers only: draft token table first, then each saved run's
  * result_json. No derived estimates. */
-async function tokenTable(db, projectId, stored) {
+export async function tokenTable(db, projectId, stored) {
   const table = {};
   const src = stored && typeof stored === "object" && !Array.isArray(stored) ? stored : {};
   for (const key of Object.keys(src)) {
@@ -176,7 +225,7 @@ const TABLE_FIGURE_RE = /\b(?:Table|Figure|Fig\.|Supplementary Table|eTable|eFig
 const LIST_NUMBER_RE = /(?:^|\n)\s*\d+\.\s/g;
 function allowedNumberSpans(text) {
   const spans = [];
-  for (const re of [REVIEWER_RE, THRESHOLD_RE, TABLE_FIGURE_RE, LIST_NUMBER_RE]) {
+  for (const re of [REVIEWER_RE, THRESHOLD_RE, TABLE_FIGURE_RE, LIST_NUMBER_RE, EXPONENT_RE]) {
     re.lastIndex = 0;
     let m;
     while ((m = re.exec(text)) !== null) {
@@ -273,16 +322,19 @@ export function gateManuscript(sections, references, table) {
     if (!sectionGated(section, CLAIM_SECTIONS)) continue;
     for (const sentence of text.split(SENTENCE_RE)) {
       if (!CLAIM_RE.test(sentence)) continue;
-      checks.claims.total++;
-      const linked = new RegExp(TOKEN_RE.source).test(sentence) || new RegExp(CITE_RE.source).test(sentence);
-      if (linked) checks.claims.linked++;
-      else {
-        checks.claims.unlinked++;
-        failures.push({
-          type: "unlinked_claim",
-          message: "Claim in " + location + " has no linked run token or citation.",
-          sectionId: sid, location,
-        });
+      const claimExempt = WHETHER_RE.test(sentence) || OBJECTIVE_RE.test(sentence);
+      if (!claimExempt) {
+        checks.claims.total++;
+        const linked = new RegExp(TOKEN_RE.source).test(sentence) || new RegExp(CITE_RE.source).test(sentence);
+        if (linked) checks.claims.linked++;
+        else {
+          checks.claims.unlinked++;
+          failures.push({
+            type: "unlinked_claim",
+            message: "Claim in " + location + " has no linked run token or citation.",
+            sectionId: sid, location,
+          });
+        }
       }
       const down = sentence.match(DIR_DOWN_RE);
       const up = sentence.match(DIR_UP_RE);
@@ -487,7 +539,10 @@ export async function ingestManuscriptJob(ctx, job) {
   if (!draft || typeof draft !== "object" || !Array.isArray(draft.sections) || !draft.sections.length) return null;
   const project = await db.prepare("SELECT title FROM research_projects WHERE id=?").bind(job.project_id).first();
   const title = typeof draft.title === "string" && draft.title.trim() ? draft.title.trim().slice(0, 500) : ((project && project.title) || "");
-  const authors = Array.isArray(draft.authors) ? draft.authors.filter((a) => typeof a === "string").slice(0, 40) : [];
+  /* F-10: AI tool names are rejected as author entries on save. */
+  const authors = Array.isArray(draft.authors)
+    ? draft.authors.filter((a) => typeof a === "string" && !isAiAuthor(a)).slice(0, 40)
+    : [];
   const affiliations = typeof draft.affiliations === "string" ? draft.affiliations.slice(0, 500) : "";
   const references = Array.isArray(draft.references) ? draft.references : [];
   const tokens = draft.tokens && typeof draft.tokens === "object" && !Array.isArray(draft.tokens) ? draft.tokens : {};
@@ -558,6 +613,46 @@ export async function getManuscript(ctx, projectId, url) {
   }
   if (!row) return err(404, "manuscript_not_found", "Manuscript not found", requestId);
   return json({ manuscript: await manuscriptOf(db, projectId, row) }, 200, { "x-request-id": requestId });
+}
+
+/* F-12: records the clinician's attestation that written publication consent
+ * exists and the patient saw the manuscript. Append-only: each confirmation
+ * is a new row, and the audit event carries the date and version only. */
+export async function savePublicationConsent(ctx, projectId, body) {
+  const { db, uid, requestId, api } = ctx;
+  const { json, err, audit, uuid, projectGate, gateErr } = api;
+  const gate = await projectGate(db, projectId, uid, APPROVE_ROLES);
+  if (gate.status) return gateErr(gate, "Publication consent needs an owner or editor role", requestId);
+  if (body.writtenConsentObtained !== true)
+    return err(400, "invalid_body", "writtenConsentObtained must be true", requestId);
+  if (body.patientSawManuscript !== true)
+    return err(400, "invalid_body", "patientSawManuscript must be true", requestId);
+  const consentDate = typeof body.consentDate === "string" ? body.consentDate.trim() : "";
+  if (!consentDateOk(consentDate))
+    return err(400, "invalid_body", "consentDate must be a YYYY-MM-DD date that is not in the future", requestId);
+  let version = null;
+  if (body.manuscriptVersion !== undefined && body.manuscriptVersion !== null) {
+    if (!Number.isInteger(body.manuscriptVersion) || body.manuscriptVersion < 1)
+      return err(400, "invalid_body", "manuscriptVersion must be an integer of at least 1", requestId);
+    version = body.manuscriptVersion;
+  }
+  const now = Date.now();
+  const id = uuid("pcons_");
+  await db.prepare(
+    "INSERT INTO research_publication_consents (id,project_id,written_consent_obtained,patient_saw_manuscript,consent_date,manuscript_version,signed_by,signed_at,created_ts) VALUES (?,?,1,1,?,?,?,?,?)"
+  ).bind(id, projectId, consentDate, version, uid, now, now).run();
+  await audit(db, projectId, uid, "publication_consent_confirmed", id, { consentDate, manuscriptVersion: version });
+  return json({
+    publicationConsent: {
+      id, projectId,
+      writtenConsentObtained: true,
+      patientSawManuscript: true,
+      consentDate,
+      manuscriptVersion: version,
+      signedBy: uid,
+      signedAt: iso(now),
+    },
+  }, 201, { "x-request-id": requestId });
 }
 
 export async function putSection(ctx, projectId, sectionId, body) {
@@ -687,6 +782,11 @@ async function gatesFor(ctx, projectId, version) {
   const { db, err } = ctx.api ? { db: ctx.db, err: ctx.api.err } : ctx;
   const row = version == null ? await latestVersion(db, projectId) : await versionByNumber(db, projectId, version);
   if (!row) return { error: err(404, "manuscript_not_found", "Manuscript not found", ctx.requestId) };
+  /* F-12: the export gate path (gates + export) refuses case reports and case
+   * series until a publication consent record exists. */
+  if (await publicationConsentRequired(db, projectId)) {
+    return { error: err(409, "publication_consent_required", PUBLICATION_CONSENT_MESSAGE, ctx.requestId) };
+  }
   const sections = (await loadSections(db, row.id)).map(sectionOf);
   const refs = parseJson(row.references_json, []);
   const table = await tokenTable(db, projectId, parseJson(row.tokens_json, {}));
@@ -727,6 +827,11 @@ export async function exportManuscript(ctx, projectId, body) {
       error: { code: "stale_version", message: "Manuscript changed on the server", requestId },
       current: { manuscript: await manuscriptOf(db, projectId, row) },
     }, 409, { "x-request-id": requestId });
+  }
+  /* F-10: an AI tool listed as an author blocks the export outright. */
+  const savedAuthors = parseJson(row.authors_json, []);
+  if (Array.isArray(savedAuthors) && savedAuthors.some((a) => isAiAuthor(a))) {
+    return err(422, "ai_author_rejected", AI_AUTHOR_MESSAGE, requestId);
   }
   const got = await gatesFor(ctx, projectId, row.version);
   if (got.error) return got.error;

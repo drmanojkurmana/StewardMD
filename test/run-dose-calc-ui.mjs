@@ -37,10 +37,10 @@ try {
   const created = await call('Target.createTarget', { url: 'about:blank' });
   sid = (await call('Target.attachToTarget', { targetId: created.result.targetId, flatten: true })).result.sessionId;
   await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
-  await call('Page.navigate', { url: `http://localhost:${PORT}/?dosecalc=1` });
+  await call('Page.navigate', { url: `http://localhost:${PORT}/?dosecalc=1&dosev3=0` });
   ok(await until('!!window.SMD_DOSECALC && !!window.SMD_openRoute', 30000), 'app loaded with the dose calculator');
   // Flag OFF by default: without ?dosecalc=1 and no localStorage the calculator reports off.
-  ok(await ev(`(()=>{try{localStorage.removeItem('smd_dose_calc')}catch(e){};history.replaceState(null,'','/');const a=SMD_DOSECALC.on();localStorage.setItem('smd_dose_calc','0');const b=SMD_DOSECALC.on();localStorage.removeItem('smd_dose_calc');history.replaceState(null,'','/?dosecalc=1');return a===true&&b===false})()`) === true, 'flag DEFAULT ON; smd_dose_calc=0 turns it off');
+  ok(await ev(`(()=>{try{localStorage.removeItem('smd_dose_calc')}catch(e){};history.replaceState(null,'','/');const a=SMD_DOSECALC.on();localStorage.setItem('smd_dose_calc','0');const b=SMD_DOSECALC.on();localStorage.removeItem('smd_dose_calc');history.replaceState(null,'','/?dosecalc=1&dosev3=0');return a===true&&b===false})()`) === true, 'flag DEFAULT ON; smd_dose_calc=0 turns it off');
   // 1) Drugs sheet -> Dose calculator
   await ev(`SMD_openRoute('drugmenu');1`);
   ok(await until(`!!document.querySelector('[data-mi=dose]')`, 5000), 'Drugs sheet lists "Dose calculator"');
@@ -94,7 +94,38 @@ try {
   ok(await ev(`getComputedStyle(document.getElementById('doseCalc')).display === 'none'`), 'Escape closes');
   // 4) Flag off: no entry points
   ok(await ev(`(()=>{history.replaceState(null,'','/?dosecalc=0');return SMD_DOSECALC.buttonHTML('Amikacin')===''&&!SMD_DOSECALC.on()})()`), 'flag off: no drug page button');
-  // 5) Page layout: no horizontal overflow at 390 px
+  // 5) Result-first layout (smd_dose_v3, owner picked variant C 2026-11-27), the owner's screenshot case:
+  // hydroxyurea, 55 kg, 45 y F, 155 cm, creatinine 5 -> CrCl 11, sickle cell start 15 mg/kg = 825, halved = 413.
+  ok(await ev(`(()=>{history.replaceState(null,'','/?dosecalc=1');try{localStorage.removeItem('smd_dose_v3')}catch(e){};const a=SMD_DOSECALC.v3();localStorage.setItem('smd_dose_v3','0');const b=SMD_DOSECALC.v3();localStorage.removeItem('smd_dose_v3');return a===true&&b===false})()`), 'v3 flag DEFAULT ON; smd_dose_v3=0 turns it off');
+  await ev(`SMD_DOSECALC.open({drug:'Hydroxyurea', patient:{weight:55, age:45, ageUnit:'years', sex:'F', height:155, scr:5}});1`);
+  ok(await until(`!!document.querySelector('#doseCalc.dc3 .dc-hero')`, 8000), 'v3: hero dose card shown');
+  ok(await ev(`(()=>{const r=document.querySelector('#doseCalc .dc-res').getBoundingClientRect(),f=document.querySelector('#doseCalc .dc-form').getBoundingClientRect();return r.top<f.top})()`), 'v3: the dose sits above the patient');
+  ok(await ev(`!!document.querySelector('#doseCalc .dc-form.dc-col') && document.getElementById('dc_weight').offsetParent===null && /55 kg/.test(document.getElementById('dcChips').innerText)`), 'v3: prefilled patient folds to values');
+  ok(await ev(`(()=>{const b=[...document.querySelectorAll('#doseCalc [data-ri]')].find(x=>/sickle/i.test(x.textContent));if(!b)return false;b.click();return true})()`), 'v3: indication chip for sickle cell');
+  ok(await until(`document.querySelector('#doseCalc .dc-big b').textContent==='413' && /Kidney −50%/.test(document.querySelector('#doseCalc .dc-badge').textContent)`, 3000), 'v3: hero leads with the kidney-adjusted 413 mg, badge Kidney -50%');
+  ok(/825 mg/.test(await text('#doseCalc .dc-why')), 'v3: working shows the full 825 mg');
+  ok(await ev(`(()=>{const a=document.querySelector('#doseCalc .dc-ai');return a.classList.contains('bad')&&/CrCl 11 mL\\/min/.test(a.innerText)})()`), 'v3: kidney warning first, red');
+  ok(/Maximum 1,925 mg per day/.test(await text('#doseCalc .dc-alerts')), 'v3: ceiling shown in the warnings');
+  ok(!/—/.test(await text('#doseCalc')), 'v3: no em dash');
+  await shot('v3-light');
+  await ev(`document.body.classList.add('dark');1`); await sleep(100);
+  ok(await ev(`getComputedStyle(document.getElementById('doseCalc')).backgroundColor==='rgb(0, 0, 0)'`), 'v3: dark theme is OLED black');
+  await shot('v3-dark');
+  await ev(`document.querySelector('#doseCalc .dc-body').scrollTop=9999;1`); await shot('v3-dark-bottom');
+  await ev(`document.body.classList.remove('dark');1`);
+  await click('#doseCalc [data-dc=edit]');
+  ok(await until(`document.getElementById('dc_weight').offsetParent!==null && document.activeElement.id==='dc_weight'`, 2000), 'v3: Edit opens the form, focus in weight');
+  await ev(`window.__dcW=document.getElementById('dc_weight');1`);
+  await typeIn('dc_weight', '52');
+  ok(await ev(`document.getElementById('dc_weight')===window.__dcW && !document.querySelector('#doseCalc .dc-form.dc-col')`), 'v3: typing keeps the input and the form open');
+  ok(await until(`document.querySelector('#doseCalc .dc-big b').textContent==='390'`, 3000), 'v3: 52 kg recalculates (780 halved = 390)');
+  await click('#doseCalc [data-dc=edit]');
+  ok(await ev(`!!document.querySelector('#doseCalc .dc-form.dc-col')`), 'v3: Done folds the patient again');
+  await click('#doseCalc [data-dc=change]');
+  ok(await ev(`!document.querySelector('#doseCalc .dc-form.dc-col') && !!document.getElementById('dc_q')`), 'v3: Change drug reopens the picker with the form open');
+  ok(await ev(`(()=>{const b=document.querySelector('#doseCalc .dc-body');return b.scrollWidth<=b.clientWidth+1})()`), 'v3: no horizontal overflow');
+  await click('#doseCalc [data-dc=close]');
+  // 6) Page layout: no horizontal overflow at 390 px
   await ev(`history.replaceState(null,'','/?dosecalc=1');SMD_DOSECALC.open();1`);
   ok(await until(`!!document.querySelector('#doseCalc:not([hidden]) #dc_weight')`, 3000) && await ev(`(()=>{const b=document.querySelector('#doseCalc .dc-body');return b.scrollWidth<=b.clientWidth+1})()`), 'no horizontal overflow at phone width');
 } catch (e) { console.log('FAIL', e.message); failures++; } finally { try { ws.close(); } catch {} chrome.kill(); server.close(); }

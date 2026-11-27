@@ -34,7 +34,9 @@ import { dedupRecords, normaliseDoi } from "./_dedup.js";
  * (_credits.js), PHI gate (_phi.js) and the central AI gateway (_gateway.js,
  * reusing callGemini from ../ai/[[path]].js). The pilot routes below are
  * untouched; Phase 3 jobs live in research_job_runs (0003 header decision). */
-import { uploadPdf, createJob, getJob, cancelJob, quoteManuscriptJob } from "./_jobs.js";
+import { uploadPdf, createJob, getJob, cancelJob, quoteManuscriptJob,
+  refreshJobToken, submitDeviceResult, failDeviceJob, convertJobToCloud } from "./_jobs.js";
+import { getCloudFallbackStatus, checkContainerHoursAlerts } from "./_cloud_fallback.js";
 import { jobCallback } from "./_callback.js";
 import { llmRoute, literatureSearchRoute, trialsStatusRoute, trialsSearchRoute, trialsLookupRoute } from "./_gateway.js";
 import { adminInstitutionRoute, creditsView } from "./_credits.js";
@@ -45,7 +47,7 @@ import { adminInstitutionRoute, creditsView } from "./_credits.js";
  * (above) and the project role, and an outsider gets 404. */
 import { extractionTemplates, getExtraction, putExtraction, verifyExtraction,
   correctExtraction, extractionAudit, acceptSuggestion, promoteExtraction,
-  listArtifacts, uploadPdfArtifact, artifactResult } from "./_extraction.js";
+  listArtifacts, uploadPdfArtifact, uploadDeviceExtraction, artifactResult } from "./_extraction.js";
 import { extractionSuggestions, screeningSuggestion, listScreeningSuggestions } from "./_suggest.js";
 import { robTools, getRob, submitRob, listRobConflicts, resolveRobConflict, robAudit } from "./_rob.js";
 import { getDictionary, putDictionary, uploadData, createDataImport,
@@ -69,7 +71,7 @@ import { projectCostReport, userCostReport, pricingNote } from "./_reports.js";
 import { createInstitution, listAllInstitutions, myInstitutions, getInstitutionRoute,
   institutionSeats, addInstitutionMember, updateInstitutionMember, removeInstitutionMember,
   listInstitutionProjects, createInstitutionProject, institutionOnboarding,
-  putInstitutionOnboarding } from "./_institutions.js";
+  putInstitutionOnboarding, adminAuth, adminErr } from "./_institutions.js";
 import { listTemplates, getTemplate } from "./_templates.js";
 import { listJournals, getJournal, matchJournals } from "./_journals.js";
 import { createComment, listComments, createResponse, listResponses,
@@ -79,7 +81,7 @@ import { createComment, listComments, createResponse, listResponses,
  * (_checklists.js). Firebase auth is the block above; each project route
  * uses projectGate and an outsider gets 404. */
 import { listVersions, getManuscript, putSection, requestApproval, approveManuscript,
-  lockManuscript, manuscriptGates, exportManuscript } from "./_manuscript.js";
+  lockManuscript, manuscriptGates, exportManuscript, savePublicationConsent } from "./_manuscript.js";
 import { listChecklists, getChecklist, checklistSnapshot, getManual, putManual } from "./_checklists.js";
 import { findStudies, autoAddStudies } from "./_auto_studies.js";
 import { aiDraft } from "./_ai_draft.js";
@@ -1890,6 +1892,12 @@ export async function onRequest({ request, env, params }) {
   }
   if (path === "/v1/admin/institutions" && request.method === "GET") return listAllInstitutions(p6Ctx);
   if (path === "/v1/admin/pricing-note" && request.method === "GET") return pricingNote(p6Ctx);
+  if (path === "/v1/admin/container-usage" && request.method === "GET") {
+    const auth = await adminAuth(p6Ctx);
+    if (!auth.ok) return adminErr(p6Ctx, auth);
+    const usage = await checkContainerHoursAlerts(env, db, Date.now());
+    return json(Object.assign({ requestId }, usage), 200, { "x-request-id": requestId });
+  }
   if (path === "/v1/admin/incidents" && request.method === "POST") {
     const body = await p6Body(); if (!body) return err(400, "invalid_body", "Invalid incident payload", requestId);
     return createIncident(p6Ctx, body);
@@ -2009,6 +2017,36 @@ export async function onRequest({ request, env, params }) {
   const p3Cancel = path.match(/^\/v1\/jobs\/([^/]+)\/cancel$/);
   if (p3Cancel && request.method === "POST")
     return cancelJob(p3Ctx, p3Cancel[1]);
+  const p3Token = path.match(/^\/v1\/jobs\/([^/]+)\/token$/);
+  if (p3Token && request.method === "POST")
+    return refreshJobToken(p3Ctx, p3Token[1]);
+  const p3DevResult = path.match(/^\/v1\/jobs\/([^/]+)\/device-result$/);
+  if (p3DevResult && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid device result payload", requestId); }
+    return submitDeviceResult(p3Ctx, p3DevResult[1], body);
+  }
+  const p3DevFail = path.match(/^\/v1\/jobs\/([^/]+)\/device-fail$/);
+  if (p3DevFail && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid device fail payload", requestId); }
+    return failDeviceJob(p3Ctx, p3DevFail[1], body);
+  }
+  const p3ToCloud = path.match(/^\/v1\/jobs\/([^/]+)\/to-cloud$/);
+  if (p3ToCloud && request.method === "POST") {
+    let body = {};
+    try { const parsed = await bodyJson(request); if (parsed && typeof parsed === "object") body = parsed; } catch { body = {}; }
+    return convertJobToCloud(p3Ctx, p3ToCloud[1], body);
+  }
+  if (path === "/v1/me/research-cloud" && request.method === "GET") {
+    const quota = await getCloudFallbackStatus(env, db, uid, claims, Date.now());
+    return json({
+      plan: quota.plan,
+      allowance: quota.allowance,
+      used: quota.used,
+      remaining: quota.remaining,
+      resetsAt: quota.resetsAt,
+      requestId,
+    }, 200, { "x-request-id": requestId });
+  }
   if (path === "/v1/credits" && request.method === "GET") return creditsView(p3Ctx);
 
   /* ---- Phase 3.4/3.5/3.6/3.8 + Phase 4.3 routes (Firebase auth above; each
@@ -2062,6 +2100,8 @@ export async function onRequest({ request, env, params }) {
   if (artCol && request.method === "GET") return listArtifacts(p3Ctx, artCol[1]);
   const pdfUp = path.match(/^\/v1\/projects\/([^/]+)\/pdf-uploads$/);
   if (pdfUp && request.method === "POST") return uploadPdfArtifact(Object.assign({}, p3Ctx, { projectId: pdfUp[1] }));
+  const devExt = path.match(/^\/v1\/projects\/([^/]+)\/extractions\/device$/);
+  if (devExt && request.method === "POST") return uploadDeviceExtraction(Object.assign({}, p3Ctx, { projectId: devExt[1] }));
   const artResult = path.match(/^\/v1\/artifacts\/([^/]+)\/result$/);
   if (artResult && request.method === "GET") return artifactResult(p3Ctx, artResult[1]);
 
@@ -2117,6 +2157,12 @@ export async function onRequest({ request, env, params }) {
   }
   const manVersions = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/versions$/);
   if (manVersions && request.method === "GET") return listVersions(p3Ctx, manVersions[1]);
+  /* F-12: case-report publication consent attestation (owner or editor). */
+  const pubConsent = path.match(/^\/v1\/projects\/([^/]+)\/publication-consent$/);
+  if (pubConsent && request.method === "POST") {
+    const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid publication consent payload", requestId);
+    return savePublicationConsent(p3Ctx, pubConsent[1], body);
+  }
   const manSection = path.match(/^\/v1\/projects\/([^/]+)\/manuscript\/sections\/([^/]+)$/);
   if (manSection && request.method === "PUT") {
     const body = await p3bBody(); if (!body) return err(400, "invalid_body", "Invalid manuscript payload", requestId);

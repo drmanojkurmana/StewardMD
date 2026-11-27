@@ -3,6 +3,17 @@
 # directory: the Dockerfile COPYs requirements.txt and the service packages
 # from the service root. stats/ (5D stats_model) and manuscript/ +
 # paperorchestra/ (5A manuscript_draft) ship so every registered kind runs.
+
+# The Rust PDF reader (rust-pdf/), loaded by research_worker/rust_pdf.py. The
+# app runs the same code as WebAssembly (vendor/rust-pdf).
+FROM rust:1.97-slim-bookworm AS rustpdf
+WORKDIR /src
+COPY rust-pdf/Cargo.toml rust-pdf/Cargo.lock ./
+COPY rust-pdf/.cargo ./.cargo
+COPY rust-pdf/src ./src
+COPY rust-pdf/examples ./examples
+RUN cargo build --release --locked --lib
+
 FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -18,6 +29,7 @@ WORKDIR /srv/research
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+COPY --from=rustpdf /src/target/release/libresearch_pdf.so /usr/local/lib/libresearch_pdf.so
 
 COPY app ./app
 COPY worker ./worker

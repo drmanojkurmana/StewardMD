@@ -331,6 +331,9 @@ test("0005 applies on live 0001-0004, rolls back cleanly, mirror matches", { ski
   for (const sql of m) live.exec(sql);
   live.exec(readFileSync(new URL("../docs/research/contracts/phase-5/0006_research_v6.sql", import.meta.url), "utf8"));
   live.exec(readFileSync(new URL("../docs/research/contracts/phase-5/0007_research_v7.sql", import.meta.url), "utf8"));
+  live.exec(readFileSync(new URL("../docs/research/contracts/phase-5/0008_research_v8.sql", import.meta.url), "utf8"));
+  live.exec(readFileSync(new URL("../docs/research/contracts/phase-5/0009_research_v9.sql", import.meta.url), "utf8"));
+  live.exec(readFileSync(new URL("../docs/research/contracts/phase-5/0010_research_v10.sql", import.meta.url), "utf8"));
   const tset = (d) => d.prepare("SELECT name FROM sqlite_master WHERE type='table'").all().map((r) => r.name).filter((n) => !PILOT.has(n)).sort();
   assert.deepEqual(tset(mirror), tset(live));
   for (const t of tset(mirror)) {

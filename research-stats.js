@@ -18,8 +18,14 @@
   var BIG = 10000000;
   var Z975_P = 0.975;
   var PM = " \u00b1 ";
+  var ENGINE_VERSION = "rod2";
 
   function bad(msg) { throw new Error("research: " + msg); }
+  function badCode(code, msg) {
+    var err = new Error("research: " + (msg || code));
+    err.code = code;
+    throw err;
+  }
 
   function isFin(n) { return typeof n === "number" && isFinite(n); }
 
@@ -1863,12 +1869,12 @@
   }
 
   /* Covariance of a binomial logit fit from the QR of sqrt(weight) * X. */
-  function qrCovariance(X, wgt) {
+  function qrDecompose(X) {
     var n = X.length, p = X[0].length, i, j, k, t, dot, norm;
-    var V = [], R = [], Q = [], invR = [], cov = [];
+    var V = [], R = [], Q = [], invR = [];
     for (j = 0; j < p; j++) {
       V[j] = [];
-      for (i = 0; i < n; i++) V[j][i] = X[i][j] * Math.sqrt(wgt[i]);
+      for (i = 0; i < n; i++) V[j][i] = X[i][j];
     }
     for (i = 0; i < p; i++) {
       R[i] = [];
@@ -1901,6 +1907,11 @@
         invR[j][k] = -dot / R[j][j];
       }
     }
+    return { Q: Q, R: R, invR: invR };
+  }
+
+  function invRToBread(invR) {
+    var p = invR.length, j, k, t, dot, cov = [];
     for (j = 0; j < p; j++) {
       cov[j] = [];
       for (k = 0; k < p; k++) {
@@ -1910,6 +1921,17 @@
       }
     }
     return cov;
+  }
+
+  function qrCovariance(X, wgt) {
+    var n = X.length, p = X[0].length, i, j, Xw = [], qr;
+    for (i = 0; i < n; i++) {
+      Xw[i] = [];
+      var sw = Math.sqrt(wgt[i]);
+      for (j = 0; j < p; j++) Xw[i][j] = X[i][j] * sw;
+    }
+    qr = qrDecompose(Xw);
+    return qr ? invRToBread(qr.invR) : null;
   }
 
   function invertMatrix(A) {
@@ -2090,21 +2112,38 @@
       name = designNames[a];
       se = inv && inv[a][a] > 0 ? Math.sqrt(inv[a][a]) : null;
       if (se === null || !isFin(beta[a])) {
-        coefs.push({ name: name, or: null, ciLower: null, ciUpper: null, p: null });
+        coefs.push({ name: name, estimate: null, se: null, z: null, or: null, ciLower: null, ciUpper: null, p: null });
       } else {
         zp = beta[a] / se;
         or = Math.exp(beta[a]);
         lo = Math.exp(beta[a] - crit * se);
         hi = Math.exp(beta[a] + crit * se);
-        coefs.push({ name: name, or: or, ciLower: lo, ciUpper: hi, p: chiSqUpper(zp * zp, 1) });
+        coefs.push({
+          name: name,
+          estimate: beta[a],
+          se: se,
+          z: zp,
+          or: or,
+          ciLower: lo,
+          ciUpper: hi,
+          p: chiSqUpper(zp * zp, 1)
+        });
       }
     }
+    var yBar = events / n;
+    var muNull = [];
+    for (i = 0; i < n; i++) muNull.push(yBar);
+    var nullDev = binomDev(y, muNull);
+    var devFinal = binomDev(y, mu);
     return {
       n: n,
       events: events,
       converged: conv,
       iterations: iter,
       warning: warn,
+      deviance: devFinal,
+      nullDeviance: nullDev,
+      aic: devFinal + 2 * p,
       coefficients: coefs
     };
   }
@@ -2112,9 +2151,212 @@
   function nullCoefs(names) {
     var out = [], i;
     for (i = 0; i < names.length; i++) {
-      out.push({ name: names[i], or: null, ciLower: null, ciUpper: null, p: null });
+      out.push({ name: names[i], estimate: null, se: null, z: null, or: null, ciLower: null, ciUpper: null, p: null });
     }
     return out;
+  }
+
+  /* ---- linear regression (OLS with optional HC3 robust SEs) ---- */
+
+  function buildPredictorSpec(rows, columns, predictors, typeMap) {
+    var predVals = [], designNames = ["Intercept"], levelInfo = [], j, i, t, levels, tmpSeen, tmp, ref, dummies, lv;
+    for (j = 0; j < predictors.length; j++) predVals.push(columnValues(rows, columns, predictors[j]));
+    for (j = 0; j < predictors.length; j++) {
+      t = typeMap[predictors[j]];
+      if (!t) t = inferColumn(predictors[j], predVals[j]).type;
+      if (t === "binary" || t === "categorical") {
+        levels = inferColumn(predictors[j], predVals[j]).levels;
+        if (!levels.length) {
+          tmpSeen = {}; tmp = [];
+          for (i = 0; i < predVals[j].length; i++) {
+            if (isMissingToken(predVals[j][i])) continue;
+            if (!tmpSeen[trim(predVals[j][i])]) { tmpSeen[trim(predVals[j][i])] = 1; tmp.push(trim(predVals[j][i])); }
+          }
+          levels = sortLevels(tmp);
+        }
+        if (levels.length < 2) bad("predictor " + predictors[j] + " has fewer than 2 levels");
+        ref = levels[0];
+        dummies = [];
+        for (lv = 1; lv < levels.length; lv++) {
+          dummies.push(levels[lv]);
+          designNames.push(predictors[j] + ": " + levels[lv] + " vs " + ref);
+        }
+        levelInfo.push({ kind: "cat", levels: levels, ref: ref, dummies: dummies });
+      } else if (t === "numeric") {
+        designNames.push(predictors[j]);
+        levelInfo.push({ kind: "num" });
+      } else {
+        bad("predictor " + predictors[j] + " must be numeric, binary, or categorical");
+      }
+    }
+    return { predVals: predVals, designNames: designNames, levelInfo: levelInfo };
+  }
+
+  function linear(rows, columns, outcome, predictors, types, opts) {
+    var typeMap, yRaw, pSpec, predVals, designNames, levelInfo, y, X, i, j, k, yv, xv, skip, rowx, lab;
+    var dropped = 0, n, p, robust, level, qr, qty, beta, bread, yhat, resid, ssr, ySum, yMean, sst;
+    var V, a, b, c, h, denom, w, meat, tmp, s2, crit, coefs, est, se, tStat, pVal, sigma, r2, adjR2, fStat, fDf, fP, aic;
+    if (!isArray(rows) || !isArray(columns) || !isArray(predictors)) bad("linear needs rows, columns, and predictors");
+    opts = opts || {};
+    robust = opts.robust == null ? null : opts.robust;
+    if (robust !== null && robust !== "HC3") badCode("invalid_robust", "robust must be null or HC3");
+    level = opts.level == null ? 0.95 : opts.level;
+    if (!isFin(level) || !(level > 0 && level < 1)) bad("level must be between 0 and 1");
+    typeMap = resolveTypes(columns, types);
+    yRaw = columnValues(rows, columns, outcome);
+    pSpec = buildPredictorSpec(rows, columns, predictors, typeMap);
+    predVals = pSpec.predVals;
+    designNames = pSpec.designNames;
+    levelInfo = pSpec.levelInfo;
+    y = [];
+    X = [];
+    for (i = 0; i < rows.length; i++) {
+      if (isMissingToken(yRaw[i])) { dropped++; continue; }
+      yv = parseNumber(yRaw[i]);
+      if (yv === null) { dropped++; continue; }
+      skip = false;
+      rowx = [1];
+      for (j = 0; j < predictors.length; j++) {
+        if (isMissingToken(predVals[j][i])) { skip = true; break; }
+        if (levelInfo[j].kind === "num") {
+          xv = parseNumber(predVals[j][i]);
+          if (xv === null) { skip = true; break; }
+          rowx.push(xv);
+        } else {
+          lab = trim(predVals[j][i]);
+          for (k = 0; k < levelInfo[j].dummies.length; k++) rowx.push(lab === levelInfo[j].dummies[k] ? 1 : 0);
+        }
+      }
+      if (skip) { dropped++; continue; }
+      y.push(yv);
+      X.push(rowx);
+    }
+    n = y.length;
+    p = designNames.length;
+    if (n <= p) badCode("too_few_rows", "not enough complete rows for linear regression");
+    qr = qrDecompose(X);
+    if (!qr) badCode("singular_design", "predictors are collinear or constant");
+    qty = [];
+    for (j = 0; j < p; j++) {
+      var qdot = 0;
+      for (i = 0; i < n; i++) qdot += qr.Q[j][i] * y[i];
+      qty[j] = qdot;
+    }
+    beta = [];
+    for (j = 0; j < p; j++) {
+      var bs = 0;
+      for (k = j; k < p; k++) bs += qr.invR[j][k] * qty[k];
+      beta[j] = bs;
+    }
+    bread = invRToBread(qr.invR);
+    yhat = [];
+    resid = [];
+    ssr = 0;
+    ySum = 0;
+    for (i = 0; i < n; i++) {
+      var yh = 0;
+      for (j = 0; j < p; j++) yh += X[i][j] * beta[j];
+      yhat[i] = yh;
+      resid[i] = y[i] - yh;
+      ssr += resid[i] * resid[i];
+      ySum += y[i];
+    }
+    yMean = ySum / n;
+    sst = 0;
+    for (i = 0; i < n; i++) {
+      var dy = y[i] - yMean;
+      sst += dy * dy;
+    }
+    s2 = ssr / (n - p);
+    if (robust === "HC3") {
+      meat = [];
+      for (a = 0; a < p; a++) {
+        meat[a] = [];
+        for (b = 0; b < p; b++) meat[a][b] = 0;
+      }
+      for (i = 0; i < n; i++) {
+        h = 0;
+        for (j = 0; j < p; j++) h += qr.Q[j][i] * qr.Q[j][i];
+        denom = 1 - h;
+        if (!(denom > 1e-12)) badCode("singular_design", "leverage equals 1; HC3 is undefined");
+        w = (resid[i] / denom) * (resid[i] / denom);
+        for (a = 0; a < p; a++) {
+          for (b = 0; b < p; b++) meat[a][b] += w * X[i][a] * X[i][b];
+        }
+      }
+      tmp = [];
+      for (a = 0; a < p; a++) {
+        tmp[a] = [];
+        for (b = 0; b < p; b++) {
+          var s = 0;
+          for (c = 0; c < p; c++) s += bread[a][c] * meat[c][b];
+          tmp[a][b] = s;
+        }
+      }
+      V = [];
+      for (a = 0; a < p; a++) {
+        V[a] = [];
+        for (b = 0; b < p; b++) {
+          var vab = 0;
+          for (c = 0; c < p; c++) vab += tmp[a][c] * bread[c][b];
+          V[a][b] = vab;
+        }
+      }
+    } else {
+      V = [];
+      for (a = 0; a < p; a++) {
+        V[a] = [];
+        for (b = 0; b < p; b++) V[a][b] = s2 * bread[a][b];
+      }
+    }
+    crit = tQuantile((1 + level) / 2, n - p);
+    coefs = [];
+    for (j = 0; j < p; j++) {
+      est = beta[j];
+      se = V[j][j] > 0 ? Math.sqrt(V[j][j]) : 0;
+      tStat = se > 0 ? est / se : (est === 0 ? 0 : Infinity);
+      pVal = se > 0 ? tTail(tStat, n - p) : 0;
+      coefs.push({
+        term: designNames[j],
+        estimate: est,
+        se: se,
+        t: tStat,
+        p: pVal,
+        ciLower: est - crit * se,
+        ciUpper: est + crit * se
+      });
+    }
+    sigma = Math.sqrt(s2);
+    r2 = p === 1 ? 0 : (sst > 0 ? 1 - ssr / sst : 0);
+    adjR2 = (p > 1 && sst > 0) ? 1 - (1 - r2) * (n - 1) / (n - p) : 0;
+    if (p > 1 && ssr > 0) {
+      fStat = ((sst - ssr) / (p - 1)) / (ssr / (n - p));
+      fDf = [p - 1, n - p];
+      fP = fTail(fStat, p - 1, n - p);
+    } else {
+      fStat = null;
+      fDf = null;
+      fP = null;
+    }
+    aic = ssr > 0 ? (n * (Math.log(2 * Math.PI) + Math.log(ssr / n) + 1) + 2 * (p + 1)) : -Infinity;
+    return {
+      family: "linear",
+      outcome: outcome,
+      predictors: predictors.slice(),
+      robust: robust,
+      level: level,
+      coefficients: coefs,
+      n: n,
+      dropped: dropped,
+      dfResidual: n - p,
+      sigma: sigma,
+      r2: r2,
+      adjR2: adjR2,
+      fStatistic: fStat,
+      fDf: fDf,
+      fP: fP,
+      aic: aic
+    };
   }
 
   function resultsSentence(result, opts) {
@@ -2730,16 +2972,130 @@
     return base;
   }
 
+  function normalizeCoxPredictors(opts) {
+    var preds = opts.predictors, covs = opts.covariates, i, out = [];
+    if (isArray(preds) && preds.length) return preds;
+    if (isArray(covs) && covs.length) {
+      for (i = 0; i < covs.length; i++) {
+        out.push(typeof covs[i] === "string" ? { name: covs[i], type: "numeric" } : covs[i]);
+      }
+      return out;
+    }
+    return null;
+  }
+
+  function prepareCoxSubjects(rows, opts) {
+    var preds, i, j, k, row, t, e, pred, num, raw, missing;
+    var included, badTE, missCov, levels, seen, columns, ref, found, lv, p, subjects, x, means, nSub, nEvents;
+    var vals, name, cat, xi;
+    if (!isArray(rows) || !opts || typeof opts !== "object") return null;
+    preds = normalizeCoxPredictors(opts);
+    if (!isArray(preds) || !preds.length) return null;
+    if (opts.time == null || opts.event == null) return null;
+    for (i = 0; i < preds.length; i++) {
+      pred = preds[i];
+      if (!pred || typeof pred !== "object" || pred.name == null || pred.name === "") return null;
+      if (pred.type !== "numeric" && pred.type !== "categorical") return null;
+    }
+    included = [];
+    badTE = 0;
+    missCov = 0;
+    for (i = 0; i < rows.length; i++) {
+      row = rows[i];
+      if (!row || typeof row !== "object" || isArray(row)) { badTE += 1; continue; }
+      t = coerceTime(row[opts.time]);
+      e = coerceEvent(row[opts.event]);
+      if (t == null || e == null) { badTE += 1; continue; }
+      vals = [];
+      missing = false;
+      for (j = 0; j < preds.length; j++) {
+        pred = preds[j];
+        if (pred.type === "numeric") {
+          num = asCovariateNumber(row[pred.name]);
+          if (num == null) { missing = true; break; }
+          vals.push(num);
+        } else {
+          raw = row[pred.name];
+          if (raw == null) { missing = true; break; }
+          cat = trim(String(raw));
+          if (cat === "") { missing = true; break; }
+          vals.push(cat);
+        }
+      }
+      if (missing) { missCov += 1; continue; }
+      included.push({ t: t, e: e, vals: vals });
+    }
+    columns = [];
+    for (j = 0; j < preds.length; j++) {
+      pred = preds[j];
+      name = String(pred.name);
+      if (pred.type === "numeric") {
+        columns.push({ predictor: name, level: null, term: name, predIndex: j });
+      } else {
+        seen = {};
+        levels = [];
+        for (i = 0; i < included.length; i++) {
+          cat = included[i].vals[j];
+          if (!seen[cat]) { seen[cat] = 1; levels.push(cat); }
+        }
+        levels.sort();
+        if (!levels.length) continue;
+        ref = levels[0];
+        if (pred.reference != null && trim(String(pred.reference)) !== "") {
+          ref = trim(String(pred.reference));
+          found = false;
+          for (k = 0; k < levels.length; k++) if (levels[k] === ref) found = true;
+          if (!found) ref = levels[0];
+        }
+        for (k = 0; k < levels.length; k++) {
+          lv = levels[k];
+          if (lv === ref) continue;
+          columns.push({ predictor: name, level: lv, term: name + "=" + lv, predIndex: j });
+        }
+      }
+    }
+    p = columns.length;
+    nSub = included.length;
+    nEvents = 0;
+    for (i = 0; i < nSub; i++) if (included[i].e === 1) nEvents += 1;
+    means = zerosVec(p);
+    subjects = [];
+    for (i = 0; i < nSub; i++) {
+      x = [];
+      for (j = 0; j < p; j++) {
+        if (columns[j].level == null) xi = included[i].vals[columns[j].predIndex];
+        else xi = included[i].vals[columns[j].predIndex] === columns[j].level ? 1 : 0;
+        x.push(xi);
+        means[j] += xi;
+      }
+      subjects.push({ t: included[i].t, e: included[i].e, x: x });
+    }
+    for (j = 0; j < p; j++) means[j] /= (nSub || 1);
+    for (i = 0; i < nSub; i++) {
+      for (j = 0; j < p; j++) subjects[i].x[j] -= means[j];
+    }
+    subjects.sort(function (a, b) {
+      if (a.t < b.t) return -1;
+      if (a.t > b.t) return 1;
+      return 0;
+    });
+    return {
+      subjects: subjects,
+      columns: columns,
+      p: p,
+      nSub: nSub,
+      nEvents: nEvents,
+      badTE: badTE,
+      missCov: missCov
+    };
+  }
+
   function cox(rows, opts) {
     try {
-      var preds, ties, maxIter, eps, confLevel, zcrit, i, j, k, row, t, e, pred, num, raw, missing;
-      var included, badTE, missCov, levels, seen, columns, ref, found, lv, p, subjects, x, means, nSub, nEvents;
+      var ties, maxIter, eps, confLevel, zcrit, j, prep, columns, p, subjects, nSub, nEvents, badTE, missCov;
       var beta, fit0, ll0, ll, iterations, converged, sep, prevAbs, grow, iter, parts, step, scale, h, trial, trialFit;
       var oldLL, dll, absb, sepFlag, finalFit, variances, col, unit, allEst, warnings, coefficients, coef, se, zstat, hr, lo, hi, wp, chi, lp;
-      var vals, name, cat, xi;
       if (!isArray(rows) || !opts || typeof opts !== "object") return coxFail();
-      preds = opts.predictors;
-      if (!isArray(preds) || !preds.length) return coxFail();
       ties = opts.ties == null ? "efron" : opts.ties;
       if (ties !== "efron" && ties !== "breslow") return coxFail();
       maxIter = opts.maxIter == null ? 20 : opts.maxIter;
@@ -2749,73 +3105,15 @@
       confLevel = opts.confLevel == null ? 0.95 : opts.confLevel;
       zcrit = zForLevel(confLevel);
       if (zcrit == null) return coxFail();
-      if (opts.time == null || opts.event == null) return coxFail();
-      for (i = 0; i < preds.length; i++) {
-        pred = preds[i];
-        if (!pred || typeof pred !== "object" || pred.name == null || pred.name === "") return coxFail();
-        if (pred.type !== "numeric" && pred.type !== "categorical") return coxFail();
-      }
-      included = [];
-      badTE = 0;
-      missCov = 0;
-      for (i = 0; i < rows.length; i++) {
-        row = rows[i];
-        if (!row || typeof row !== "object" || isArray(row)) { badTE += 1; continue; }
-        t = coerceTime(row[opts.time]);
-        e = coerceEvent(row[opts.event]);
-        if (t == null || e == null) { badTE += 1; continue; }
-        vals = [];
-        missing = false;
-        for (j = 0; j < preds.length; j++) {
-          pred = preds[j];
-          if (pred.type === "numeric") {
-            num = asCovariateNumber(row[pred.name]);
-            if (num == null) { missing = true; break; }
-            vals.push(num);
-          } else {
-            raw = row[pred.name];
-            if (raw == null) { missing = true; break; }
-            cat = trim(String(raw));
-            if (cat === "") { missing = true; break; }
-            vals.push(cat);
-          }
-        }
-        if (missing) { missCov += 1; continue; }
-        included.push({ t: t, e: e, vals: vals });
-      }
-      columns = [];
-      for (j = 0; j < preds.length; j++) {
-        pred = preds[j];
-        name = String(pred.name);
-        if (pred.type === "numeric") {
-          columns.push({ predictor: name, level: null, term: name, predIndex: j });
-        } else {
-          seen = {};
-          levels = [];
-          for (i = 0; i < included.length; i++) {
-            cat = included[i].vals[j];
-            if (!seen[cat]) { seen[cat] = 1; levels.push(cat); }
-          }
-          levels.sort();
-          if (!levels.length) continue;
-          ref = levels[0];
-          if (pred.reference != null && trim(String(pred.reference)) !== "") {
-            ref = trim(String(pred.reference));
-            found = false;
-            for (k = 0; k < levels.length; k++) if (levels[k] === ref) found = true;
-            if (!found) ref = levels[0];
-          }
-          for (k = 0; k < levels.length; k++) {
-            lv = levels[k];
-            if (lv === ref) continue;
-            columns.push({ predictor: name, level: lv, term: name + "=" + lv, predIndex: j });
-          }
-        }
-      }
-      p = columns.length;
-      nSub = included.length;
-      nEvents = 0;
-      for (i = 0; i < nSub; i++) if (included[i].e === 1) nEvents += 1;
+      prep = prepareCoxSubjects(rows, opts);
+      if (!prep) return coxFail();
+      subjects = prep.subjects;
+      columns = prep.columns;
+      p = prep.p;
+      nSub = prep.nSub;
+      nEvents = prep.nEvents;
+      badTE = prep.badTE;
+      missCov = prep.missCov;
       warnings = [];
       if (badTE > 0) warnings.push(msgExcluded(badTE));
       if (!p || !nSub) {
@@ -2826,27 +3124,6 @@
         return coxFail({ ok: false, n: nSub, nEvents: 0, nExcluded: badTE + missCov, warnings: warnings });
       }
       if (nEvents < 10 * p) warnings.push(MSG_TOO_FEW);
-      means = zerosVec(p);
-      subjects = [];
-      for (i = 0; i < nSub; i++) {
-        x = [];
-        for (j = 0; j < p; j++) {
-          if (columns[j].level == null) xi = included[i].vals[columns[j].predIndex];
-          else xi = included[i].vals[columns[j].predIndex] === columns[j].level ? 1 : 0;
-          x.push(xi);
-          means[j] += xi;
-        }
-        subjects.push({ t: included[i].t, e: included[i].e, x: x });
-      }
-      for (j = 0; j < p; j++) means[j] /= nSub;
-      for (i = 0; i < nSub; i++) {
-        for (j = 0; j < p; j++) subjects[i].x[j] -= means[j];
-      }
-      subjects.sort(function (a, b) {
-        if (a.t < b.t) return -1;
-        if (a.t > b.t) return 1;
-        return 0;
-      });
       beta = zerosVec(p);
       fit0 = coxPartial(subjects, beta, ties, true);
       if (!fit0) {
@@ -2991,6 +3268,628 @@
     }
   }
 
+  /* ---- Schoenfeld proportional hazards test (cox.zph transform = "km") ---- */
+
+  function lowerBound(arr, target) {
+    var lo = 0, hi = arr.length, mid;
+    while (lo < hi) {
+      mid = (lo + hi) >>> 1;
+      if (arr[mid] < target) lo = mid + 1;
+      else hi = mid;
+    }
+    return lo;
+  }
+
+  function schoenfeld(coxResult, rows, spec, opts) {
+    var transform, prep, subjects, columns, p, n, beta, i, j, k, c, ties;
+    var eventTimes, surv, s, idx, start, d, nRisk, prefix, g, meanG, evCount, gc;
+    var etas, maxEta, w, U, Ibb, Ibt, Itt, deathIdx, dcount, sumW, sumWx, sumWxx, sumDW, sumDWx, sumDWxx, sumDx;
+    var dw, wi, di, a, b, A, xbSum, frac, s0, xb, invS0, gt, rt;
+    var IbbInvIbt, unit, col, schur, terms, chisq, uSchur, globalChisq;
+    opts = opts || {};
+    transform = opts.transform == null ? "km" : opts.transform;
+    if (transform !== "km") bad("schoenfeld only supports transform = 'km'");
+    if (!coxResult || !coxResult.ok || !coxResult.converged || !isArray(coxResult.coefficients) || !coxResult.coefficients.length) {
+      return { ok: false, transform: transform, terms: [], global: null };
+    }
+    prep = prepareCoxSubjects(rows, spec);
+    if (!prep || !prep.p || !prep.nSub || !prep.nEvents) {
+      return { ok: false, transform: transform, terms: [], global: null };
+    }
+    subjects = prep.subjects;
+    columns = prep.columns;
+    p = prep.p;
+    n = prep.nSub;
+    ties = (spec && spec.ties) || "efron";
+    if (coxResult.coefficients.length !== p) {
+      return { ok: false, transform: transform, terms: [], global: null };
+    }
+    beta = [];
+    for (j = 0; j < p; j++) {
+      c = coxResult.coefficients[j];
+      if (!c || !isFin(c.beta)) return { ok: false, transform: transform, terms: [], global: null };
+      beta.push(c.beta);
+    }
+    eventTimes = [];
+    surv = [];
+    s = 1.0;
+    idx = 0;
+    while (idx < n) {
+      start = idx;
+      d = 0;
+      while (idx < n && subjects[idx].t === subjects[start].t) {
+        if (subjects[idx].e === 1) d += 1;
+        idx += 1;
+      }
+      if (d > 0) {
+        nRisk = n - start;
+        s *= 1 - d / nRisk;
+        eventTimes.push(subjects[start].t);
+        surv.push(s);
+      }
+    }
+    prefix = [1.0].concat(surv);
+    g = [];
+    meanG = 0;
+    evCount = 0;
+    for (i = 0; i < n; i++) {
+      g[i] = 1.0 - prefix[lowerBound(eventTimes, subjects[i].t)];
+      if (subjects[i].e === 1) {
+        meanG += g[i];
+        evCount += 1;
+      }
+    }
+    if (!evCount) return { ok: false, transform: transform, terms: [], global: null };
+    meanG /= evCount;
+    gc = [];
+    for (i = 0; i < n; i++) gc[i] = g[i] - meanG;
+
+    etas = [];
+    maxEta = -1e300;
+    for (i = 0; i < n; i++) {
+      etas[i] = dotVec(subjects[i].x, beta);
+      if (etas[i] > maxEta) maxEta = etas[i];
+    }
+    w = [];
+    for (i = 0; i < n; i++) {
+      dw = etas[i] - maxEta;
+      w[i] = dw < -745 ? 0 : Math.exp(dw);
+    }
+
+    U = zerosVec(p);
+    Ibb = zeroMat(p);
+    Ibt = zeroMat(p);
+    Itt = zeroMat(p);
+
+    idx = 0;
+    while (idx < n) {
+      start = idx;
+      deathIdx = [];
+      while (idx < n && subjects[idx].t === subjects[start].t) {
+        if (subjects[idx].e === 1) deathIdx.push(idx);
+        idx += 1;
+      }
+      dcount = deathIdx.length;
+      if (dcount === 0) continue;
+      sumW = 0; sumWx = zerosVec(p); sumWxx = zeroMat(p);
+      sumDW = 0; sumDWx = zerosVec(p); sumDWxx = zeroMat(p);
+      sumDx = zerosVec(p);
+      for (j = start; j < n; j++) {
+        wi = w[j];
+        sumW += wi;
+        accumCov(subjects[j].x, wi, sumWx, sumWxx);
+      }
+      if (!(sumW > 0)) return { ok: false, transform: transform, terms: [], global: null };
+      for (di = 0; di < dcount; di++) {
+        j = deathIdx[di];
+        wi = w[j];
+        sumDW += wi;
+        for (a = 0; a < p; a++) sumDx[a] += subjects[j].x[a];
+        accumCov(subjects[j].x, wi, sumDWx, sumDWxx);
+      }
+      A = zeroMat(p);
+      xbSum = zerosVec(p);
+      for (k = 0; k < dcount; k++) {
+        frac = ties === "breslow" ? 0 : (k / dcount);
+        s0 = sumW - frac * sumDW;
+        if (!(s0 > 0)) return { ok: false, transform: transform, terms: [], global: null };
+        invS0 = 1 / s0;
+        xb = [];
+        for (a = 0; a < p; a++) {
+          xb[a] = (sumWx[a] - frac * sumDWx[a]) * invS0;
+          xbSum[a] += xb[a];
+        }
+        for (a = 0; a < p; a++) {
+          for (b = 0; b < p; b++) {
+            A[a][b] += (sumWxx[a][b] - frac * sumDWxx[a][b]) * invS0 - xb[a] * xb[b];
+          }
+        }
+      }
+      gt = gc[deathIdx[0]];
+      for (a = 0; a < p; a++) {
+        rt = sumDx[a] - xbSum[a];
+        U[a] += gt * rt;
+        for (b = 0; b < p; b++) {
+          Ibb[a][b] += A[a][b];
+          Ibt[a][b] += gt * A[a][b];
+          Itt[a][b] += gt * gt * A[a][b];
+        }
+      }
+    }
+
+    IbbInvIbt = zeroMat(p);
+    for (b = 0; b < p; b++) {
+      unit = [];
+      for (a = 0; a < p; a++) unit.push(Ibt[a][b]);
+      col = solveLinear(Ibb, unit);
+      if (!col) return { ok: false, transform: transform, terms: [], global: null };
+      for (a = 0; a < p; a++) IbbInvIbt[a][b] = col[a];
+    }
+    schur = zeroMat(p);
+    for (a = 0; a < p; a++) {
+      for (b = 0; b < p; b++) {
+        var sub = 0;
+        for (k = 0; k < p; k++) sub += Ibt[k][a] * IbbInvIbt[k][b];
+        schur[a][b] = Itt[a][b] - sub;
+      }
+    }
+    terms = [];
+    for (j = 0; j < p; j++) {
+      if (!(schur[j][j] > 0)) return { ok: false, transform: transform, terms: [], global: null };
+      chisq = (U[j] * U[j]) / schur[j][j];
+      terms.push({ term: columns[j].term, chisq: chisq, df: 1, p: chiSqUpper(chisq, 1) });
+    }
+    uSchur = solveLinear(schur, U);
+    if (!uSchur) return { ok: false, transform: transform, terms: [], global: null };
+    globalChisq = 0;
+    for (j = 0; j < p; j++) globalChisq += U[j] * uSchur[j];
+    if (globalChisq < 0 && globalChisq > -1e-9) globalChisq = 0;
+    return {
+      ok: true,
+      transform: transform,
+      terms: terms,
+      global: { chisq: globalChisq, df: p, p: chiSqUpper(globalChisq, p) }
+    };
+  }
+
+  /* ---- diagnostic accuracy: per-study and Reitsma bivariate REML + SROC ---- */
+
+  function validateDiagnosticStudies(counts) {
+    var cells = ["TP", "FN", "FP", "TN"], out = [], i, j, s, name, v, rec;
+    if (!isArray(counts) || !counts.length) bad("studies must be a non-empty array");
+    for (i = 0; i < counts.length; i++) {
+      s = counts[i];
+      if (!s || typeof s !== "object" || isArray(s)) bad("each study must be an object");
+      rec = { id: s.id != null ? s.id : ("study-" + (i + 1)) };
+      for (j = 0; j < 4; j++) {
+        name = cells[j];
+        v = s[name] !== undefined ? s[name] : s[name.toLowerCase()];
+        if (typeof v !== "number" || !isFin(v) || v < 0) {
+          bad("study " + i + ": " + name + " must be a non-negative number");
+        }
+        rec[name] = v;
+      }
+      out.push(rec);
+    }
+    return out;
+  }
+
+  function applyDiagnosticCorrection(studies, correction, control) {
+    var cells = ["TP", "FN", "FP", "TN"], anyZero = false, i, j, s, rec, out = [], touched = false, hasZero;
+    if (control !== "all" && control !== "single" && control !== "none") {
+      badCode("invalid_correction_control", "invalid correctionControl");
+    }
+    if (!isFin(correction) || correction < 0) {
+      badCode("invalid_correction", "invalid correction");
+    }
+    for (i = 0; i < studies.length; i++) {
+      for (j = 0; j < 4; j++) if (studies[i][cells[j]] === 0) anyZero = true;
+    }
+    if (control === "none") {
+      if (anyZero) badCode("zero_cell", "zero cell with correctionControl = 'none'");
+      return { studies: studies.slice(), applied: false };
+    }
+    if (control === "all") {
+      if (!anyZero) return { studies: studies.slice(), applied: false };
+      for (i = 0; i < studies.length; i++) {
+        s = studies[i];
+        out.push({ id: s.id, TP: s.TP + correction, FN: s.FN + correction, FP: s.FP + correction, TN: s.TN + correction });
+      }
+      return { studies: out, applied: true };
+    }
+    for (i = 0; i < studies.length; i++) {
+      s = studies[i];
+      hasZero = (s.TP === 0 || s.FN === 0 || s.FP === 0 || s.TN === 0);
+      if (hasZero) {
+        touched = true;
+        out.push({ id: s.id, TP: s.TP + correction, FN: s.FN + correction, FP: s.FP + correction, TN: s.TN + correction });
+      } else {
+        out.push({ id: s.id, TP: s.TP, FN: s.FN, FP: s.FP, TN: s.TN });
+      }
+    }
+    return { studies: out, applied: touched };
+  }
+
+  function diagnosticPerStudy(counts, opts) {
+    var raw, corr, correction, control, rows = [], i, s, nPos, nNeg;
+    opts = opts || {};
+    correction = opts.correction == null ? 0.5 : opts.correction;
+    control = opts.correctionControl != null ? opts.correctionControl : (opts.correction_control != null ? opts.correction_control : "all");
+    raw = validateDiagnosticStudies(counts);
+    corr = applyDiagnosticCorrection(raw, correction, control);
+    for (i = 0; i < corr.studies.length; i++) {
+      s = corr.studies[i];
+      nPos = s.TP + s.FN;
+      nNeg = s.FP + s.TN;
+      if (nPos <= 0 || nNeg <= 0) badCode("zero_marginal", "zero marginal in diagnostic study");
+      rows.push({
+        id: s.id,
+        tp: s.TP,
+        fn: s.FN,
+        fp: s.FP,
+        tn: s.TN,
+        sens: s.TP / nPos,
+        spec: s.TN / nNeg
+      });
+    }
+    return {
+      family: "diagnostic",
+      model: "per-study",
+      correction: correction,
+      correctionControl: control,
+      correctionApplied: corr.applied,
+      k: rows.length,
+      studies: rows
+    };
+  }
+
+  function remlProfile2x2(theta, y, S) {
+    var t0 = theta[0], t1 = theta[1], t2 = theta[2];
+    var p00 = t0 * t0, p01 = t0 * t1, p11 = t1 * t1 + t2 * t2;
+    var m = y.length, i, a, b, d, det, logdetV = 0;
+    var v00, v01, v11, A00 = 0, A01 = 0, A11 = 0, rhs0 = 0, rhs1 = 0;
+    var Vinvs = [];
+    for (i = 0; i < m; i++) {
+      a = S[i][0] + p00;
+      b = p01;
+      d = S[i][1] + p11;
+      det = a * d - b * b;
+      if (!(a > 0) || !(det > 0) || !isFin(det)) return 1e12;
+      logdetV += Math.log(det);
+      v00 = d / det;
+      v01 = -b / det;
+      v11 = a / det;
+      Vinvs.push([v00, v01, v11]);
+      A00 += v00;
+      A01 += v01;
+      A11 += v11;
+      rhs0 += v00 * y[i][0] + v01 * y[i][1];
+      rhs1 += v01 * y[i][0] + v11 * y[i][1];
+    }
+    var detA = A00 * A11 - A01 * A01;
+    if (!(A00 > 0) || !(detA > 0) || !isFin(detA)) return 1e12;
+    var logdetA = Math.log(detA);
+    var b0 = (A11 * rhs0 - A01 * rhs1) / detA;
+    var b1 = (A00 * rhs1 - A01 * rhs0) / detA;
+    var quad = 0, r0, r1;
+    for (i = 0; i < m; i++) {
+      r0 = y[i][0] - b0;
+      r1 = y[i][1] - b1;
+      quad += r0 * r0 * Vinvs[i][0] + 2 * r0 * r1 * Vinvs[i][1] + r1 * r1 * Vinvs[i][2];
+    }
+    var ll = -0.5 * (2 * m - 2) * Math.log(2 * Math.PI) - 0.5 * logdetV - 0.5 * quad - 0.5 * logdetA;
+    return isFin(ll) ? -ll : 1e12;
+  }
+
+  function bfgsMinimize(fn, x0, gtol, maxiter) {
+    var dim = x0.length, x = x0.slice(), H = [], i, j, k, iter;
+    function vecAdd(a, b, s) {
+      var out = [], idx;
+      for (idx = 0; idx < dim; idx++) out.push(a[idx] + s * b[idx]);
+      return out;
+    }
+    function vecDot(a, b) {
+      var s = 0, idx;
+      for (idx = 0; idx < dim; idx++) s += a[idx] * b[idx];
+      return s;
+    }
+    function grad(pt) {
+      var g = [], idx, h, xp, xm, fp, fm;
+      for (idx = 0; idx < dim; idx++) {
+        h = 1e-6 * Math.max(1, Math.abs(pt[idx]));
+        xp = pt.slice(); xp[idx] += h;
+        xm = pt.slice(); xm[idx] -= h;
+        fp = fn(xp); fm = fn(xm);
+        g.push((fp - fm) / (2 * h));
+      }
+      return g;
+    }
+    function eye() {
+      var M = [], r, c;
+      for (r = 0; r < dim; r++) {
+        M[r] = [];
+        for (c = 0; c < dim; c++) M[r][c] = r === c ? 1 : 0;
+      }
+      return M;
+    }
+    H = eye();
+    var f = fn(x), g = grad(x);
+    for (iter = 0; iter < maxiter; iter++) {
+      var maxG = 0;
+      for (i = 0; i < dim; i++) if (Math.abs(g[i]) > maxG) maxG = Math.abs(g[i]);
+      if (maxG <= gtol) break;
+      var d = [];
+      for (i = 0; i < dim; i++) {
+        var s = 0;
+        for (j = 0; j < dim; j++) s -= H[i][j] * g[j];
+        d.push(s);
+      }
+      var slope = vecDot(g, d);
+      if (!(slope < 0)) {
+        H = eye();
+        d = [];
+        for (i = 0; i < dim; i++) d.push(-g[i]);
+        slope = vecDot(g, d);
+        if (!(slope < 0)) break;
+      }
+      /* Strong Wolfe backtracking + zoom line search */
+      var c1 = 1e-4, c2 = 0.9;
+      var alphaPrev = 0, fPrev = f, gPrevSlope = slope;
+      var alpha = 1.0, xNew = null, fNew = f, gNew = g, accepted = false;
+      function zoom(aLo, fLo, gLoSlope, aHi, fHi) {
+        var zIter, aMid, xM, fM, gM, gMSlope;
+        for (zIter = 0; zIter < 25; zIter++) {
+          aMid = 0.5 * (aLo + aHi);
+          xM = vecAdd(x, d, aMid);
+          fM = fn(xM);
+          if (fM > f + c1 * aMid * slope || fM >= fLo || !isFin(fM)) {
+            aHi = aMid;
+            fHi = fM;
+          } else {
+            gM = grad(xM);
+            gMSlope = vecDot(gM, d);
+            if (Math.abs(gMSlope) <= -c2 * slope) {
+              xNew = xM; fNew = fM; gNew = gM; accepted = true;
+              return;
+            }
+            if (gMSlope * (aHi - aLo) >= 0) {
+              aHi = aLo;
+              fHi = fLo;
+            }
+            aLo = aMid;
+            fLo = fM;
+            gLoSlope = gMSlope;
+          }
+          if (Math.abs(aHi - aLo) < 1e-14) break;
+        }
+        xNew = vecAdd(x, d, aLo);
+        fNew = fn(xNew);
+        gNew = grad(xNew);
+        accepted = isFin(fNew) && fNew <= f;
+      }
+      var ls;
+      for (ls = 0; ls < 30; ls++) {
+        var xCand = vecAdd(x, d, alpha);
+        var fCand = fn(xCand);
+        if (!isFin(fCand) || fCand >= 1e11) {
+          alpha *= 0.5;
+          continue;
+        }
+        if (fCand > f + c1 * alpha * slope || (ls > 0 && fCand >= fPrev)) {
+          zoom(alphaPrev, fPrev, gPrevSlope, alpha, fCand);
+          break;
+        }
+        var gCand = grad(xCand);
+        var gCandSlope = vecDot(gCand, d);
+        if (Math.abs(gCandSlope) <= -c2 * slope) {
+          xNew = xCand; fNew = fCand; gNew = gCand; accepted = true;
+          break;
+        }
+        if (gCandSlope >= 0) {
+          zoom(alpha, fCand, gCandSlope, alphaPrev, fPrev);
+          break;
+        }
+        alphaPrev = alpha;
+        fPrev = fCand;
+        gPrevSlope = gCandSlope;
+        alpha *= 2.0;
+        if (alpha > 1e6) break;
+      }
+      if (!accepted || !xNew) {
+        /* Fallback simple Armijo */
+        alpha = 1.0;
+        for (ls = 0; ls < 40; ls++) {
+          xNew = vecAdd(x, d, alpha);
+          fNew = fn(xNew);
+          if (isFin(fNew) && fNew < f) {
+            gNew = grad(xNew);
+            accepted = true;
+            break;
+          }
+          alpha *= 0.5;
+        }
+      }
+      if (!accepted) break;
+      var sVec = [], yVec = [];
+      for (i = 0; i < dim; i++) {
+        sVec.push(xNew[i] - x[i]);
+        yVec.push(gNew[i] - g[i]);
+      }
+      var sy = vecDot(sVec, yVec);
+      var sNorm = Math.sqrt(vecDot(sVec, sVec));
+      var yNorm = Math.sqrt(vecDot(yVec, yVec));
+      if (sy > 1e-12 * sNorm * yNorm) {
+        var rho = 1 / sy;
+        var Hy = [];
+        for (i = 0; i < dim; i++) {
+          var hyi = 0;
+          for (j = 0; j < dim; j++) hyi += H[i][j] * yVec[j];
+          Hy.push(hyi);
+        }
+        var yHy = vecDot(yVec, Hy);
+        var Hnew = [];
+        for (i = 0; i < dim; i++) {
+          Hnew[i] = [];
+          for (j = 0; j < dim; j++) {
+            Hnew[i][j] = H[i][j] + (1 + rho * yHy) * rho * sVec[i] * sVec[j] -
+              rho * (Hy[i] * sVec[j] + sVec[i] * Hy[j]);
+          }
+        }
+        H = Hnew;
+      }
+      x = xNew;
+      f = fNew;
+      g = gNew;
+      if (sNorm < 1e-12) break;
+    }
+    return { x: x, fun: f };
+  }
+
+  function sroc(fit, fpr, type) {
+    var t = type == null ? "ruttergatsonis" : type;
+    var grid, b, psi, i, out, tau1, tau2, lam, beta, theta, f, lf;
+    if (t !== "ruttergatsonis" && t !== "naive") bad("invalid sroc type: " + t);
+    if (!fit || !isArray(fit.coefficients) || fit.coefficients.length < 2 || !isArray(fit.psi)) {
+      bad("sroc needs a fitted reitsma object");
+    }
+    if (fpr == null) {
+      grid = [];
+      for (i = 1; i < 100; i++) grid.push(i / 100);
+    } else {
+      grid = fpr;
+    }
+    b = [fit.coefficients[0].estimate, fit.coefficients[1].estimate];
+    psi = fit.psi;
+    if (t === "ruttergatsonis") {
+      tau1 = Math.sqrt(Math.max(psi[0][0], 0));
+      tau2 = Math.sqrt(Math.max(psi[1][1], 0));
+      if (!(tau1 > 1e-8 && tau2 > 1e-8)) return null;
+      lam = Math.sqrt(tau2 / tau1) * b[0] - Math.sqrt(tau1 / tau2) * b[1];
+      beta = Math.log(tau2 / tau1);
+      out = [];
+      for (i = 0; i < grid.length; i++) {
+        f = grid[i];
+        lf = Math.log(f / (1 - f));
+        out.push(expit(lam * Math.exp(-beta / 2) + Math.exp(-beta) * lf));
+      }
+      return out;
+    }
+    if (!(psi[1][1] > 1e-12)) return null;
+    theta = psi[0][1] / psi[1][1];
+    out = [];
+    for (i = 0; i < grid.length; i++) {
+      f = grid[i];
+      lf = Math.log(f / (1 - f));
+      out.push(expit(b[0] + theta * (lf - b[1])));
+    }
+    return out;
+  }
+
+  function reitsma(counts, opts) {
+    var raw, corr, correction, control, level, y = [], S = [], i, s, nPos, nNeg, sens, fpr;
+    var starts, best = null, res, theta, p00, p01, p11, psi, A00, A01, A11, rhs0, rhs1, a, b, d, det, v00, v01, v11;
+    var detA, vcov, estB, z, se, coefs, terms, est, seJ, zJ, pJ, pooledSens, pooledFpr, fprGrid, k;
+    opts = opts || {};
+    correction = opts.correction == null ? 0.5 : opts.correction;
+    control = opts.correctionControl != null ? opts.correctionControl : (opts.correction_control != null ? opts.correction_control : "all");
+    level = opts.level == null ? 0.95 : opts.level;
+    if (!isFin(level) || !(level > 0 && level < 1)) bad("level must be between 0 and 1");
+    raw = validateDiagnosticStudies(counts);
+    if (raw.length < 2) bad("reitsma needs at least two studies");
+    corr = applyDiagnosticCorrection(raw, correction, control);
+    for (i = 0; i < corr.studies.length; i++) {
+      s = corr.studies[i];
+      nPos = s.TP + s.FN;
+      nNeg = s.FP + s.TN;
+      if (nPos <= 0 || nNeg <= 0) badCode("zero_marginal", "zero marginal in diagnostic study");
+      sens = s.TP / nPos;
+      fpr = s.FP / nNeg;
+      if (!(sens > 0 && sens < 1 && fpr > 0 && fpr < 1)) badCode("zero_cell", "zero cell in diagnostic study");
+      y.push([Math.log(sens / (1 - sens)), Math.log(fpr / (1 - fpr))]);
+      S.push([1 / s.TP + 1 / s.FN, 1 / s.FP + 1 / s.TN]);
+    }
+    starts = [
+      [Math.sqrt(0.1), 0.0, Math.sqrt(0.1)],
+      [Math.sqrt(0.5), 0.0, Math.sqrt(0.5)]
+    ];
+    for (k = 0; k < starts.length; k++) {
+      res = bfgsMinimize(function (th) { return remlProfile2x2(th, y, S); }, starts[k], 1e-10, 500);
+      if (!best || res.fun < best.fun) best = res;
+    }
+    if (!best || !isFin(best.fun) || best.fun >= 1e11) {
+      badCode("reitsma_not_converged", "reitsma REML did not converge");
+    }
+    theta = best.x;
+    p00 = theta[0] * theta[0];
+    p01 = theta[0] * theta[1];
+    p11 = theta[1] * theta[1] + theta[2] * theta[2];
+    psi = [[p00, p01], [p01, p11]];
+    A00 = 0; A01 = 0; A11 = 0; rhs0 = 0; rhs1 = 0;
+    for (i = 0; i < y.length; i++) {
+      a = S[i][0] + p00;
+      b = p01;
+      d = S[i][1] + p11;
+      det = a * d - b * b;
+      v00 = d / det; v01 = -b / det; v11 = a / det;
+      A00 += v00; A01 += v01; A11 += v11;
+      rhs0 += v00 * y[i][0] + v01 * y[i][1];
+      rhs1 += v01 * y[i][0] + v11 * y[i][1];
+    }
+    detA = A00 * A11 - A01 * A01;
+    vcov = [[A11 / detA, -A01 / detA], [-A01 / detA, A00 / detA]];
+    estB = [
+      vcov[0][0] * rhs0 + vcov[0][1] * rhs1,
+      vcov[1][0] * rhs0 + vcov[1][1] * rhs1
+    ];
+    z = normalQuantile((1 + level) / 2);
+    se = [Math.sqrt(vcov[0][0]), Math.sqrt(vcov[1][1])];
+    terms = ["tsens", "tfpr"];
+    coefs = [];
+    for (i = 0; i < 2; i++) {
+      est = estB[i];
+      seJ = se[i];
+      zJ = est / seJ;
+      pJ = 2 * normalUpper(Math.abs(zJ));
+      coefs.push({
+        term: terms[i],
+        estimate: est,
+        se: seJ,
+        z: zJ,
+        p: pJ,
+        ciLower: est - z * seJ,
+        ciUpper: est + z * seJ
+      });
+    }
+    pooledSens = expit(estB[0]);
+    pooledFpr = expit(estB[1]);
+    fprGrid = [];
+    for (i = 1; i < 100; i++) fprGrid.push(i / 100);
+    var fitObj = {
+      family: "diagnostic",
+      model: "reitsma",
+      correction: correction,
+      correctionControl: control,
+      correctionApplied: corr.applied,
+      level: level,
+      k: corr.studies.length,
+      coefficients: coefs,
+      psi: psi,
+      pooledSens: pooledSens,
+      pooledSensCiLower: expit(estB[0] - z * se[0]),
+      pooledSensCiUpper: expit(estB[0] + z * se[0]),
+      pooledFpr: pooledFpr,
+      pooledSpec: 1 - pooledFpr,
+      pooledSpecCiLower: 1 - expit(estB[1] + z * se[1]),
+      pooledSpecCiUpper: 1 - expit(estB[1] - z * se[1])
+    };
+    fitObj.sroc = {
+      fpr: fprGrid,
+      ruttergatsonis: sroc(fitObj, fprGrid, "ruttergatsonis"),
+      naive: sroc(fitObj, fprGrid, "naive")
+    };
+    return fitObj;
+  }
+
   function qbetaPolished(a, b, p) {
     var x, i, cdf, dens, g, step;
     if (!(p > 0)) return 0;
@@ -3120,6 +4019,7 @@
   }
 
   var STATS = {
+    ENGINE_VERSION: ENGINE_VERSION,
     parseCsv: parseCsv,
     inferColumn: inferColumn,
     describe: describe,
@@ -3127,12 +4027,17 @@
     compare: compare,
     crosstab: crosstab,
     table1: table1,
+    linear: linear,
     logistic: logistic,
     formatP: formatP,
     resultsSentence: resultsSentence,
     kaplanMeier: kaplanMeier,
     logRank: logRank,
     cox: cox,
+    schoenfeld: schoenfeld,
+    diagnosticPerStudy: diagnosticPerStudy,
+    reitsma: reitsma,
+    sroc: sroc,
     matchedOr: matchedOr,
     _rank: { mannWhitney: mannWhitney, wilcoxonSigned: wilcoxonSigned } /* exposed for the R parity tests */
   };
@@ -3140,4 +4045,4 @@
   if (typeof module !== "undefined" && module.exports) { module.exports = STATS; }
   if (G) { G.SMD_RESEARCH_STATS = STATS; }
 
-})(typeof window !== "undefined" ? window : undefined);
+})(typeof window !== "undefined" ? window : (typeof self !== "undefined" ? self : undefined));

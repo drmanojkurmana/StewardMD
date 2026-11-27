@@ -21,6 +21,8 @@ import { parseCsv } from "./_data.js";
 import { verhoeffValid } from "./_phi.js";
 import { expireLostJobs } from "./_credits.js";
 
+import { checkCloudFallbackAvailable, recordCloudFallbackUsed, refundCloudFallbackForJob, checkContainerHoursAlerts } from "./_cloud_fallback.js";
+
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const ALL_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
 const REGIONS = ["IN", "EU", "US", "GLOBAL_DEID"];
@@ -640,7 +642,7 @@ export function validateStatsMessage(msg) {
   return true;
 }
 export async function createStatsJob(ctx, projectId, body) {
-  const { env, db, uid, projectId: _p, requestId, api } = ctx;
+  const { env, db, uid, claims, projectId: _p, requestId, api } = ctx;
   const { json, err, audit, uuid, projectGate, gateErr } = api;
   await expireLostBefore(db, uuid);
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
@@ -674,13 +676,31 @@ export async function createStatsJob(ctx, projectId, body) {
       return err(409, "idempotency_conflict", "This idempotencyKey was already used with a different input", requestId);
     return json({ job: statsJobOf(existing), idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
   }
+  const hasFallback = body.fallback != null && typeof body.fallback === "object" && !Array.isArray(body.fallback);
+  let fallbackAllowance = null;
+  if (hasFallback) {
+    const fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims);
+    if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
+    fallbackAllowance = fbCheck.status.allowance;
+  }
   if (!env.RESEARCH_QUEUE) return err(503, "queue_unavailable", "Research job queue is not provisioned", requestId);
   const jobId = uuid("job_"), now = Date.now();
+  if (hasFallback) {
+    const fbRec = await recordCloudFallbackUsed(db, {
+      uid, projectId, kind: "stats", jobId, fallback: body.fallback, allowance: fallbackAllowance, nowMs: now,
+    });
+    if (!fbRec.ok) return err(fbRec.http, fbRec.code, fbRec.message, requestId);
+  }
   const compliance = { ipdApproved: true, evidenceId: checked.ethicsEvidenceId };
   const ceilings = { maxSeconds, maxRows };
-  await db.prepare("INSERT INTO research_stats_jobs (id,project_id,kind,status,idempotency_key,dataset_id,input_r2_key,model_json,compliance_json,contains_ipd,evidence_id,ceilings_json,created_by,created_ts) VALUES (?,?, 'stats_model','queued',?,?,?,?,?,1,?,?,?,?)")
-    .bind(jobId, projectId, idempotencyKey, datasetId, dataset.storage_key, JSON.stringify(body.model),
-      JSON.stringify(compliance), checked.ethicsEvidenceId, JSON.stringify(ceilings), uid, now).run();
+  try {
+    await db.prepare("INSERT INTO research_stats_jobs (id,project_id,kind,status,idempotency_key,dataset_id,input_r2_key,model_json,compliance_json,contains_ipd,evidence_id,ceilings_json,created_by,created_ts) VALUES (?,?, 'stats_model','queued',?,?,?,?,?,1,?,?,?,?)")
+      .bind(jobId, projectId, idempotencyKey, datasetId, dataset.storage_key, JSON.stringify(body.model),
+        JSON.stringify(compliance), checked.ethicsEvidenceId, JSON.stringify(ceilings), uid, now).run();
+  } catch (e) {
+    if (hasFallback) await db.prepare("DELETE FROM research_cloud_fallbacks WHERE job_id=?").bind(jobId).run().catch(() => {});
+    throw e;
+  }
   const message = {
     v: 1, kind: "stats_model", jobId, projectId, idempotencyKey,
     input: { r2Key: dataset.storage_key, model: body.model, compliance, envelope: JSON.parse(dataset.envelope_json) },
@@ -689,6 +709,7 @@ export async function createStatsJob(ctx, projectId, body) {
   if (!validateStatsMessage(message)) {
     await db.prepare("UPDATE research_stats_jobs SET status='failed',error_code='invalid_message',completed_ts=? WHERE id=?")
       .bind(Date.now(), jobId).run();
+    if (hasFallback) await refundCloudFallbackForJob(db, jobId, "invalid_message").catch(() => {});
     return err(500, "invalid_message", "Job message failed the contract schema", requestId);
   }
   try {
@@ -696,6 +717,7 @@ export async function createStatsJob(ctx, projectId, body) {
   } catch (e) {
     await db.prepare("UPDATE research_stats_jobs SET status='failed',error_code='queue_unavailable',completed_ts=? WHERE id=?")
       .bind(Date.now(), jobId).run();
+    if (hasFallback) await refundCloudFallbackForJob(db, jobId, "queue_unavailable").catch(() => {});
     return err(503, "queue_unavailable", "Could not queue the job; retry with the same idempotency key", requestId);
   }
   await ipdLog(ctx, projectId, datasetId, "analysis", "ok");
@@ -788,6 +810,10 @@ export async function statsJobCallback(ctx, pathJobId) {
   }
   if (env.RESEARCH_R2)
     await env.RESEARCH_R2.delete("projects/" + job.project_id + "/jobs/" + job.id + "/cancel").catch(() => {});
+  if (terminal === "failed") {
+    await refundCloudFallbackForJob(db, job.id, body.error).catch(() => {});
+  }
+  await checkContainerHoursAlerts(env, db, now).catch(() => {});
   await audit(db, job.project_id, "worker", "stats_job_settled", job.id, { status: terminal, usage: body.usage });
   const fresh = await db.prepare("SELECT * FROM research_stats_jobs WHERE id=?").bind(job.id).first();
   return json({ job: statsJobOf(fresh), requestId }, 200, { "x-request-id": requestId });

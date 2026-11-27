@@ -1,9 +1,43 @@
-# Study Studio
+# Study Studio (shown as NoteBook)
 
 A PDF library, viewer, pen, notebooks, search, scan, study link and export / backup inside PrepNucleus (phase A1 to A8 of [[plans/PrepNucleus-StudyStudio]]). Part of [[PrepNucleus]].
 
+**Renamed NoteBook for users on 2026-11-27** (owner). Only the visible text changed: the bottom-nav tab, the library bar,
+the backup file name (`StewardMD NoteBook backup <date>.zip`) and messages. Code names (`STUDY`, `st-*`, `study*.js`,
+flag `smd_study`, IndexedDB `study`) are unchanged on purpose. See Decisions 2026-11-27.
+
+## Look (2026-11-27)
+- PrepNucleus tokens only. `study.css` starts with `--st-*` aliases of `--pn-*` and ends with the "NoteBook skin"
+  section; do not add colours of its own (the navy + gold reskin made it look like another app).
+- Library = an ordinary PrepNucleus tab: `host.bar("NoteBook", ...)` with More and New (`.st5a-newib`, amber fill), a
+  `pn-seg` for Documents / Search / Favourites (`segHtml`, study-library.js), and the PrepNucleus bottom nav stays
+  visible (`#stLib` is in prep-nav.js `SCREENS`). There is no `.st5a-top` header or `.st5a-bottom` bar any more.
+- Editor chrome: white (light) / navy (dark) top bar and tool row, page on the paper background, pager pill
+  bottom-left. Document tabs show only with two or more open documents.
+
+## Finger and phone (2026-11-27, owner's iPhone report)
+- **Finger writing left a dot**: study-ink.js pointermove returned for every touch move once a stroke existed (meant as
+  palm rejection while the Pencil writes). Now only a touch during a *Pencil* stroke (`cur._touch` false) or
+  `V._isPenDown` is dropped, and only the pointer that started a stroke (`cur._pid`) adds to or ends it.
+  Test: `test/run-notebook-ui.mjs` (CDP touch events; fails on the old code with 1 point).
+- **Editor slid up under the status bar** (iPhone only, not reproduced in Chromium): the WebView scrolled `.st-body`
+  or the window. `pinEditor`/`repin` (study.js) put any such scroll straight back (window only when no text field has
+  the keyboard); the top bar, doc tabs and tool row are `touch-action: pan-x`. Not yet confirmed on the device.
+- `.st-ink-seg.on` (laser Keep, text presets) is `--pn-sel-bg` / `--pn-sel-ink`; the first skin pass left it white on
+  light grey.
+
+## Navigation rules (2026-11-27)
+- The editor is pushed (`h.push(renderViewer)`); `st-p3-back` calls `host.back()` (never `STUDY.lib()`).
+- `STUDY.back()` order: insert sheets and selection, old sheets, editor sheets and popovers, lasso selection, zoom
+  window, then `closeViewer()` (returns false so the host pops). study-library.js wraps it: its own sheet, then on
+  the library Trash and folder levels.
+- Returning from a document keeps the library tab, folder and search query (`libState.ret`); the NoteBook tab
+  itself starts at Documents.
+- Search: the input is drawn once (`#st5aSearchQ`), only `#st5aRes` is redrawn (it used to rebuild the input and
+  drop focus and letters while typing).
+
 - **Flag + default:** `smd_study`, default **ON** (owner 2026-11-15: "on for all", app not public yet, same as `smd_prep`), needs `smd_prep`. Off per device: `localStorage.smd_study = "0"` or `?study=0`. Rule in `study.js` (`enabled`) and `prep-loader.js` (`studyOn`, which also keeps `study.js` / `study.css` from downloading while off).
-- **Entry point:** a fifth "Study" tab in the PrepNucleus bottom bar (`prep-nav.js`, root `STUDY.lib`), shown only with the flag on (owner 2026-11-15: replaced the home row).
+- **Entry point:** the "NoteBook" tab (was "Study") in the PrepNucleus bottom bar (`prep-nav.js`, root `STUDY.lib`), shown only with the flag on (owner 2026-11-15: replaced the home row).
 - **Status (2026-11-15):** A1 to A8 built and tested in a headless browser (stubbed scanner, OCR, network). Loader token prep157. NOT passed (only the owner can): A3 latency gate (iPad + Apple Pencil, Samsung S Pen), 1,000-page open under 2 s on a mid Android phone, force-quit mid-stroke, A6 gate (page 742 of 1,000), A4 force-quit, **A5** 10-page scan on both platforms with OCR text found by search, **A7** on a phone (Make cards, Explain, tapping a card or answer opens its page), **A8** back up, uninstall, reinstall, restore (same count, strokes, checksums) and the share sheet itself.
 
 ## Files

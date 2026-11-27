@@ -192,9 +192,10 @@ try {
   await until("!!document.querySelector('#rmdStartForm')");
   await setVal("#rmd_start_title", "Compliance case report");
   await click('[data-rmd="start-create"]');
-  ok("casefile opens", await until("!!document.querySelector('.rmd-casefile-screen')", 12000));
+  ok("casefile opens", await until("!!document.querySelector('[data-rmd-cf=\"example\"]')", 12000));
   await click('[data-rmd-cf="example"]');
-  await until("(document.querySelector('#rmdCfAge')||{}).value==='34'");
+  ok("casefile example loads", await until("(document.querySelector('#rmdCfAge')||{}).value==='34'", 5000));
+  await until("!!document.querySelector('#rmdCfSaveStatus') && /Saved/.test(document.querySelector('#rmdCfSaveStatus').innerText||'')", 5000);
   await measureScreen("casefile", ".rmd-casefile-screen", "light");
   await focusCheck("casefile", ".rmd-casefile-screen");
   await shot("casefile-light");
@@ -203,7 +204,7 @@ try {
   await ev("document.body.classList.remove('dark')");
 
   await ev("SMD_RESEARCH.navigate('novelty',{projectId:'prj_cmp_1'})");
-  ok("novelty opens", await until("!!document.querySelector('#rmdNvQuery')", 10000));
+  ok("novelty opens", await until("!!document.querySelector('#rmdNvQuery') && !document.querySelector('[data-rmd-nv=\"search\"]').disabled", 10000));
   await measureScreen("novelty", ".rmd-novelty-screen", "light");
   await focusCheck("novelty", ".rmd-novelty-screen");
   await measureScreen("novelty", ".rmd-novelty-screen", "dark");

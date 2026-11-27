@@ -27,7 +27,7 @@
     studies: [], studyId: null, templates: [], template: "rct_binary",
     extraction: null, extractionLoading: false,
     artifactId: null, result: null, page: 1, highlight: null,
-    pdfJobId: null, pdfJobStatus: null, pdfUploading: false,
+    pdfJobId: null, pdfJobStatus: null, pdfUploading: false, pdfProgressText: "", pdfSeq: 0,
     form: {}, activeField: null, correctFor: null, invalidField: null,
     busy: false, actionError: null, announce: "",
     showAudit: false, audit: [], promoteMeasure: "RR",
@@ -192,7 +192,33 @@
       st.artifactId = st.extraction.artifactId || null;
       st.result = null; st.page = 1; st.highlight = null;
       render(container);
-      if (st.artifactId) loadResult(container, st.artifactId);
+      if (st.artifactId) {
+        loadResult(container, st.artifactId);
+      } else {
+        var proj = SMD.store ? SMD.store.getActiveProject() : null;
+        var CP = G && G.SMD_RMD_CHECKPOINT;
+        if ((!proj || !proj.serverId) && CP && typeof CP.list === "function") {
+          var targetPid = st.projectId;
+          var targetSid = st.studyId;
+          CP.list("local-artifact:" + targetPid + ":").then(function (entries) {
+            if (mySeq !== seq || st.projectId !== targetPid || st.studyId !== targetSid || st.artifactId) return;
+            var best = null;
+            for (var i = 0; i < (entries || []).length; i++) {
+              var val = entries[i] && entries[i].value;
+              if (val && val.studyId === targetSid && val.artifact && val.result) {
+                if (!best || (val.artifact.createdTs || 0) >= (best.artifact.createdTs || 0)) best = val;
+              }
+            }
+            if (best) {
+              st.artifactId = best.artifact.id;
+              st.result = best.result;
+              st.page = 1;
+              st.pdfJobStatus = "succeeded";
+              render(container);
+            }
+          }).catch(function () {});
+        }
+      }
     }).catch(function (err) {
       if (mySeq !== seq) return;
       st.extractionLoading = false; st.actionError = err; render(container);
@@ -201,6 +227,23 @@
 
   function loadResult(container, artifactId) {
     var mySeq = seq;
+    if (artifactId && String(artifactId).indexOf("local_") === 0) {
+      var CP = G && G.SMD_RMD_CHECKPOINT;
+      if (CP && typeof CP.list === "function") {
+        CP.list("local-artifact:" + st.projectId + ":").then(function (entries) {
+          if (mySeq !== seq) return;
+          for (var i = 0; i < (entries || []).length; i++) {
+            var val = entries[i] && entries[i].value;
+            if (val && val.artifact && val.artifact.id === artifactId && val.result) {
+              st.result = val.result; st.page = 1; st.pdfJobStatus = "succeeded";
+              render(container);
+              return;
+            }
+          }
+        }).catch(function () {});
+      }
+      return;
+    }
     SMD.api.request("GET", "/v1/artifacts/" + encodeURIComponent(artifactId) + "/result").then(function (data) {
       if (mySeq !== seq) return;
       st.result = data; st.page = 1; st.pdfJobStatus = "succeeded"; render(container);
@@ -456,16 +499,61 @@
     requestSuggestionsOnce().then(applySuggestionsRes, handleSuggestError);
   }
 
-  function uploadStudyPdf(container, file) {
-    if (!file || st.pdfUploading || !st.projectId || !st.studyId) return;
-    var mySeq = ++seq;
+  function onDeviceOcrOn() {
+    var OD = G && G.SMD_RMD_ONDEVICE_PDF;
+    if (OD && typeof OD.isEnabled === "function") return OD.isEnabled();
+    try {
+      if (typeof location !== "undefined" && location.search) {
+        var m = location.search.match(/[?&]rmd_ondevice_ocr=([^&]+)/);
+        if (m != null) return m[1] === "1" || m[1] === "on" || m[1] === "true";
+      }
+    } catch (e) {}
+    try {
+      if (typeof localStorage !== "undefined") return localStorage.getItem("smd_rmd_ondevice_ocr") !== "0";
+    } catch (e) {}
+    return true;
+  }
+
+  function isPdfStale(myPdfSeq, targetPid, targetSid) {
+    return myPdfSeq !== st.pdfSeq || st.projectId !== targetPid || st.studyId !== targetSid;
+  }
+
+  function resetPdfUploadIfCurrent(myPdfSeq) {
+    if (myPdfSeq === st.pdfSeq) {
+      st.pdfUploading = false;
+      st.pdfProgressText = "";
+    }
+  }
+
+  function jobsRunner() {
+    var j = G && G.SMD_RMD_JOBS;
+    return (j && typeof j.runWithFallback === "function") ? j : null;
+  }
+
+  function devicePrivacyHtml() {
+    if (!onDeviceOcrOn()) return "";
+    var jr = jobsRunner();
+    var line = (jr && jr.DEVICE_PRIVACY_LINE) || "Runs on this device. Your PDFs and patient data are read here and never uploaded. Works offline.";
+    return '<p class="rmd-muted rmd-device-privacy" style="font-size:12px;margin-top:6px;">' + esc(line) + '</p>';
+  }
+
+  function uploadStudyPdfServer(container, file, fallbackMeta) {
+    if (!file || st.pdfUploading || !st.projectId || !st.studyId) return Promise.resolve(null);
+    var targetPid = st.projectId;
+    var targetSid = st.studyId;
+    var myPdfSeq = st.pdfSeq = (st.pdfSeq || 0) + 1;
+    var mySeq = seq;
     st.pdfUploading = true;
+    st.pdfProgressText = "";
     st.actionError = null;
     render(container);
     var fd = new G.FormData();
     fd.append("file", file, file.name || "study.pdf");
-    SMD.api.upload("/v1/projects/" + encodeURIComponent(st.projectId) + "/pdf-uploads", fd).then(function (res) {
-      if (mySeq !== seq) return;
+    if (fallbackMeta) {
+      fd.append("fallback", JSON.stringify(fallbackMeta));
+    }
+    return SMD.api.upload("/v1/projects/" + encodeURIComponent(targetPid) + "/pdf-uploads", fd).then(function (res) {
+      if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
       var art = res && res.artifact;
       if (!art || !art.id) throw { message: "Could not read the uploaded PDF.", code: "invalid_multipart" };
       st.artifactId = art.id;
@@ -477,11 +565,12 @@
         fields[k] = { value: f.value === "" ? null : f.value, locator: f.locator, quote: f.quote };
       }
       var ver = st.extraction ? st.extraction.version : 0;
-      return SMD.api.request("PUT", "/v1/projects/" + encodeURIComponent(st.projectId) + "/studies/" + encodeURIComponent(st.studyId) + "/extraction", {
+      return SMD.api.request("PUT", "/v1/projects/" + encodeURIComponent(targetPid) + "/studies/" + encodeURIComponent(targetSid) + "/extraction", {
         template: st.template, version: ver, fields: fields, artifactId: art.id
       }).then(function (saved) {
-        if (mySeq !== seq) return;
+        if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
         st.pdfUploading = false;
+        st.pdfProgressText = "";
         st.extraction = saved.extraction;
         if (st.ai) st.ai.guidance = null;
         st.announce = "PDF attached. MaiK is reading the paper.";
@@ -489,17 +578,241 @@
         if (st.pdfJobStatus === "succeeded") {
           loadResult(container, art.id);
         } else {
-          waitForPdfJob(container, mySeq, st.projectId, st.studyId, art.id, art.jobId).then(function (out) {
-            if (mySeq !== seq || out.aborted) return;
+          waitForPdfJob(container, mySeq, targetPid, targetSid, art.id, art.jobId).then(function (out) {
+            if (isPdfStale(myPdfSeq, targetPid, targetSid) || out.aborted) return;
             if (out.succeeded) loadResult(container, art.id);
             else render(container);
           });
         }
+        return art;
       });
     }).catch(function (err) {
-      if (mySeq !== seq) return;
+      if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
       st.pdfUploading = false;
+      st.pdfProgressText = "";
       st.actionError = err;
+      render(container);
+    });
+  }
+
+  function handleDevicePdfResult(container, file, u8, result, myPdfSeq, targetPid, targetSid, CP) {
+    if (!result) { resetPdfUploadIfCurrent(myPdfSeq); return Promise.resolve(); }
+    if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return Promise.resolve(); }
+    var proj = SMD.store ? SMD.store.getActiveProject() : null;
+    var isLocalOnly = !proj || !proj.serverId;
+    var clearKey = (result && result.sha256) ? ("pdf:" + targetPid + ":" + result.sha256) : "";
+    if (isLocalOnly) {
+      var clearP = (CP && clearKey) ? CP.remove(clearKey).catch(function () {}) : Promise.resolve();
+      var artId = "local_" + (result.sha256 || Date.now());
+      var localKey = "local-artifact:" + targetPid + ":" + (result.sha256 || Date.now());
+      var storeP = CP ? CP.put(localKey, {
+        studyId: targetSid,
+        artifact: {
+          id: artId, projectId: targetPid, filename: file.name || "study.pdf",
+          sha256: result.sha256, bytes: file.size || u8.byteLength,
+          pages: result.pages.length, status: "succeeded", createdTs: Date.now()
+        },
+        result: result
+      }).catch(function () {}) : Promise.resolve();
+      return Promise.all([clearP, storeP]).then(function () {
+        if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+        st.pdfUploading = false;
+        st.pdfProgressText = "";
+        st.artifactId = artId;
+        st.pdfJobStatus = "succeeded";
+        st.result = result;
+        st.page = 1;
+        st.announce = "PDF read on your phone.";
+        render(container);
+      });
+    }
+    return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(targetPid) + "/extractions/device", {
+      filename: file.name || "study.pdf",
+      sha256: result.sha256,
+      bytes: file.size || u8.byteLength,
+      result: result
+    }).then(function (res) {
+      if (CP && clearKey) CP.remove(clearKey).catch(function () {});
+      if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+      var art = res && res.artifact;
+      if (!art || !art.id) {
+        st.pdfUploading = false;
+        st.pdfProgressText = "";
+        st.actionError = { message: "Could not save the extracted PDF." };
+        render(container);
+        return;
+      }
+      st.artifactId = art.id;
+      st.pdfJobId = art.jobId || null;
+      st.pdfJobStatus = art.status || "succeeded";
+      st.result = result;
+      st.page = 1;
+      var fields = {};
+      for (var k in st.form) {
+        var f = st.form[k];
+        fields[k] = { value: f.value === "" ? null : f.value, locator: f.locator, quote: f.quote };
+      }
+      var ver = st.extraction ? st.extraction.version : 0;
+      return SMD.api.request("PUT", "/v1/projects/" + encodeURIComponent(targetPid) + "/studies/" + encodeURIComponent(targetSid) + "/extraction", {
+        template: st.template, version: ver, fields: fields, artifactId: art.id
+      }).then(function (saved) {
+        if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+        st.pdfUploading = false;
+        st.pdfProgressText = "";
+        st.extraction = saved.extraction;
+        if (st.ai) st.ai.guidance = null;
+        st.announce = "PDF read on your phone.";
+        render(container);
+        loadResult(container, art.id);
+      }, function (putErr) {
+        if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+        st.pdfUploading = false;
+        st.pdfProgressText = "";
+        if (putErr && putErr.code === "stale_version" && putErr.current && putErr.current.extraction) {
+          st.extraction = putErr.current.extraction;
+        }
+        st.actionError = putErr;
+        render(container);
+      });
+    }, function (postErr) {
+      if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+      st.pdfUploading = false;
+      st.pdfProgressText = "";
+      st.actionError = postErr;
+      render(container);
+    });
+  }
+
+  function uploadStudyPdf(container, file) {
+    if (!file || st.pdfUploading || !st.projectId || !st.studyId) return;
+    var OD = G && G.SMD_RMD_ONDEVICE_PDF;
+    var CP = G && G.SMD_RMD_CHECKPOINT;
+    if (!onDeviceOcrOn() || !OD || typeof OD.extract !== "function" || typeof file.arrayBuffer !== "function") {
+      uploadStudyPdfServer(container, file);
+      return;
+    }
+    var targetPid = st.projectId;
+    var targetSid = st.studyId;
+    var myPdfSeq = st.pdfSeq = (st.pdfSeq || 0) + 1;
+    st.pdfUploading = true;
+    st.pdfProgressText = "Reading on your phone";
+    st.actionError = null;
+    render(container);
+
+    file.arrayBuffer().then(function (ab) {
+      if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+      var u8 = new Uint8Array(ab);
+      return (typeof OD.sha256 === "function" ? OD.sha256(u8) : Promise.resolve(null)).then(function (hash) {
+        if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+        var ckKey = hash ? ("pdf:" + targetPid + ":" + hash) : ("pdf:" + targetPid + ":" + targetSid);
+        var jr = jobsRunner();
+        function mergeCheckpoint(key, patch) {
+          if (jr && typeof jr.updateCheckpoint === "function") {
+            return jr.updateCheckpoint(CP, key, patch);
+          }
+          if (!CP || !key || typeof CP.get !== "function" || typeof CP.put !== "function") {
+            return Promise.resolve();
+          }
+          return Promise.resolve().then(function () { return CP.get(key); }).then(function (cur) {
+            var next = {};
+            if (cur && typeof cur === "object") {
+              for (var k in cur) {
+                if (Object.prototype.hasOwnProperty.call(cur, k)) next[k] = cur[k];
+              }
+            }
+            for (var p in patch) {
+              if (Object.prototype.hasOwnProperty.call(patch, p)) next[p] = patch[p];
+            }
+            return CP.put(key, next);
+          }).catch(function () {});
+        }
+        function runOneExtract(resumeCtx) {
+          var resume = (resumeCtx && resumeCtx.checkpoint) || null;
+          return OD.extract(u8, {
+            sha256: hash,
+            resume: resume,
+            signal: resumeCtx && resumeCtx.signal,
+            /* A background page job paused by the phone is not the phone being slow. */
+            onNativeState: function (ns) {
+              if (resumeCtx && resumeCtx.holdClock) resumeCtx.holdClock(!!ns && ns.state === "paused");
+            },
+            onProgress: function (cur, tot) {
+              if (resumeCtx && resumeCtx.touchPage) resumeCtx.touchPage();
+              if (isPdfStale(myPdfSeq, targetPid, targetSid)) return;
+              st.pdfProgressText = "Reading on your phone, page " + cur + " of " + tot;
+              var progEl = container.querySelector("#rmdExtractPdfProgress");
+              if (progEl) progEl.textContent = st.pdfProgressText;
+            },
+            onPage: function (partial) {
+              if (CP && partial && (partial.sha256 || ckKey)) {
+                var key = partial.sha256 ? ("pdf:" + targetPid + ":" + partial.sha256) : ckKey;
+                var patch = {
+                  pages: partial.pages,
+                  ocr: partial.ocr,
+                  sha256: partial.sha256,
+                  engine: partial.engine,
+                  ocrEngine: partial.ocrEngine,
+                  partial: partial.partial,
+                  nextPage: partial.nextPage,
+                  engineVersion: partial.engineVersion,
+                  running: true,
+                  finished: false
+                };
+                return mergeCheckpoint(key, patch);
+              }
+            }
+          });
+        }
+
+        if (!jr) {
+          var resumeP = (CP && ckKey) ? CP.get(ckKey).catch(function () { return null; }) : Promise.resolve(null);
+          return resumeP.then(function (saved) {
+            return runOneExtract({ checkpoint: saved });
+          }).then(function (result) {
+            return handleDevicePdfResult(container, file, u8, result, myPdfSeq, targetPid, targetSid, CP);
+          });
+        }
+
+        return jr.runWithFallback("pdf", runOneExtract, function (cpIgnored, fallbackMeta) {
+          st.pdfUploading = false;
+          return uploadStudyPdfServer(container, file, fallbackMeta);
+        }, {
+          jobKey: ckKey,
+          projectId: targetPid,
+          targetId: targetSid,
+          engine: "ondevice:pdf",
+          onStatus: function (info) {
+            if (isPdfStale(myPdfSeq, targetPid, targetSid)) return;
+            if (info && info.state === "retrying" && info.message) {
+              st.pdfProgressText = info.message;
+              var progEl = container.querySelector("#rmdExtractPdfProgress");
+              if (progEl) progEl.textContent = st.pdfProgressText;
+            }
+          }
+        }).then(function (out) {
+          if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+          if (out && out.ok && out.source === "device") {
+            return handleDevicePdfResult(container, file, u8, out.result, myPdfSeq, targetPid, targetSid, CP);
+          }
+          if (!out || out.source !== "cloud") {
+            st.pdfUploading = false;
+            st.pdfProgressText = "";
+            if (out && out.message) st.actionError = { message: out.message };
+            render(container);
+          }
+        });
+      }).catch(function (err) {
+        if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+        st.pdfUploading = false;
+        st.pdfProgressText = "";
+        st.actionError = err;
+        render(container);
+      });
+    }, function (readErr) {
+      if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+      st.pdfUploading = false;
+      st.pdfProgressText = "";
+      st.actionError = readErr || { message: "Could not read this PDF file." };
       render(container);
     });
   }
@@ -927,6 +1240,10 @@
       if (canEdit) {
         h.push('<input type="file" id="rmdExtractPdfFile" accept="application/pdf,.pdf" aria-label="Choose study PDF" style="max-width:280px">');
         h.push('<button type="button" class="rmd-btn rmd-btn-primary" data-rmd="extract-upload-pdf" style="min-height:44px"' + (st.pdfUploading ? " disabled" : "") + '>' + (st.pdfUploading ? "Attaching PDF..." : "Attach study PDF") + '</button>');
+        if (st.pdfUploading && st.pdfProgressText) {
+          h.push('<p class="rmd-muted" id="rmdExtractPdfProgress" role="status" aria-live="polite">' + esc(st.pdfProgressText) + '</p>');
+        }
+        h.push(devicePrivacyHtml());
       }
       h.push('</div>');
     } else if (st.pdfJobStatus === "queued" || st.pdfJobStatus === "running") {
@@ -936,6 +1253,10 @@
       if (canEdit) {
         h.push('<input type="file" id="rmdExtractPdfFile" accept="application/pdf,.pdf" aria-label="Choose study PDF" style="max-width:280px">');
         h.push('<button type="button" class="rmd-btn rmd-btn-primary" data-rmd="extract-upload-pdf" style="min-height:44px"' + (st.pdfUploading ? " disabled" : "") + '>' + (st.pdfUploading ? "Attaching PDF..." : "Attach study PDF") + '</button>');
+        if (st.pdfUploading && st.pdfProgressText) {
+          h.push('<p class="rmd-muted" id="rmdExtractPdfProgress" role="status" aria-live="polite">' + esc(st.pdfProgressText) + '</p>');
+        }
+        h.push(devicePrivacyHtml());
       }
       h.push('</div>');
     } else if (!st.result) {
@@ -974,10 +1295,11 @@
         st.ai.statusText = "";
       }
     }
-    if (st.projectId !== project.id) {
-      st.projectId = project.id; st.loaded = false; st.loading = false; st.error = null;
+    var activePid = project.serverId || project.id;
+    if (st.projectId !== activePid) {
+      st.projectId = activePid; st.loaded = false; st.loading = false; st.error = null;
       st.studies = []; st.studyId = null; st.extraction = null; st.form = {}; st.result = null;
-      st.artifactId = null; st.pdfJobId = null; st.pdfJobStatus = null; st.pdfUploading = false;
+      st.artifactId = null; st.pdfJobId = null; st.pdfJobStatus = null; st.pdfUploading = false; st.pdfProgressText = ""; st.pdfSeq = (st.pdfSeq || 0) + 1;
       st.page = 1; st.highlight = null; st.announce = ""; st.actionError = null; st.invalidField = null;
       st.showAudit = false; st.audit = []; st.ai = null;
     }
@@ -1022,7 +1344,7 @@
     for (var v = 0; v < viewBtns.length; v++) viewBtns[v].onclick = function () { st.phoneView = this.getAttribute("data-rmd-extract-view"); render(container); };
 
     var studySel = container.querySelector("#rmdExtractStudy");
-    if (studySel) studySel.onchange = function () { st.studyId = this.value; st.correctFor = null; st.showAudit = false; loadExtraction(container); };
+    if (studySel) studySel.onchange = function () { st.studyId = this.value; st.correctFor = null; st.showAudit = false; st.pdfUploading = false; st.pdfProgressText = ""; st.pdfSeq = (st.pdfSeq || 0) + 1; loadExtraction(container); };
     var tplSel = container.querySelector("#rmdExtractTemplate");
     if (tplSel) tplSel.onchange = function () { st.template = this.value; st.correctFor = null; loadExtraction(container); };
 

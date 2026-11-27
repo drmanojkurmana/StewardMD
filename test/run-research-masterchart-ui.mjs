@@ -271,11 +271,12 @@ try {
   ok(await until(`/Saved on this phone\\. Nothing was uploaded\\./.test(document.querySelector('.rmd-mc-screen').innerText)`, 3000), 'save confirmation shown');
   ok(await ev(`(()=>{try{const all=JSON.parse(localStorage.getItem('smd_rmd_masterchart_v1')||'{}');const s=all['prj_mc_1'];return !!s && s.rows.length===200 && s.columns.length===12}catch(e){return false}})()`), 'chart saved in localStorage under the project id (200 rows)');
 
-  // 5. Question cards.
+  // 5. Question cards (5 when on-device stats v2 adds Linear regression).
   await click('[data-rmd-mc="continue-columns"]');
-  ok(await until(`document.querySelectorAll('[data-rmd-mc-choice]').length === 4`, 5000), 'four analysis questions offered');
+  ok(await until(`document.querySelectorAll('[data-rmd-mc-choice]').length === 5`, 5000), 'five analysis questions offered (including linear regression)');
   ok(/Table 1 \(baseline characteristics\)/.test(await text('.rmd-mc-screen')), 'Table 1 question present');
   ok(/Risk factors \(logistic regression\)/.test(await text('.rmd-mc-screen')), 'logistic regression question present');
+  ok(/Linear regression \(numeric outcome\)/.test(await text('.rmd-mc-screen')), 'linear regression question present');
   await shot('phone-390-question');
 
   // 6. Compare groups: HbA1c at 12 weeks by Group.

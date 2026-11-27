@@ -2289,7 +2289,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-pdf4-scribe18-frs1-ondev2-edge4-ondev3-wg1-add1-alts1-rmdtout1" defer></script>
+<script src="/native-bridge.js?v=nb-pdf4-scribe18-frs1-ondev2-edge4-ondev3-wg1-add1-alts1-rmdtout1-rod5" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
@@ -2344,7 +2344,7 @@ window.openExternal = function (u) {
      retinoscope): iso-figures.js is the small runtime; each figure (iso-fig-<id>.js, built by tools/iso/build.mjs with
      the MIT Anatomy kit) and iso-figures.css load only when a module shows one. Kill switch: smd_iso = "0" or ?iso=0. -->
 <script src="/iso-figures.js?v=iso3" defer></script>
-<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1-fr1-exp1-trainee1-cel1-pf1-ddisync1-ns2" defer></script>
+<script src="/prescription.js?v=gold982-brandsearch-dict1-ui1-rxscan1-why1-pdfqr1-always1-qrfix1-mask1-rxc4-rxmobile1-rxfull1-rxcde1-fr1-exp1-trainee1-cel1-pf1-ddisync1-ns2-h2cfast1" defer></script>
 <script src="/ku.js?v=gold434-thread-authwatch1-ns2" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
@@ -2469,37 +2469,43 @@ window.openExternal = function (u) {
 <script src="/specialty-kits.js?v=kits10.286fc2ed2b" defer></script>
 <script src="/renal-dose.js?v=rd2-pick1" defer></script>
 <!-- Dose calculator (dose-calc.js): flag smd_dose_calc, DEFAULT ON (owner 2026-09-28); "0" hides it. Rules: data/dose-rules.json.gz (scripts/build-dose-rules.mjs). vault/modules/Dose Calculator.md -->
-<script src="/dose-calc.js?v=dc5-gzfb1-pm1-ipad1-native2" defer></script>
+<script src="/dose-calc.js?v=dc6-v3" defer></script>
 <!-- ResearchMD (Phase 1.2): flag smd_research, DEFAULT ON (owner 2026-11-24); "0" turns it off. vault/modules/ResearchMD.md -->
 <script src="/research-contracts.js?v=ra1" defer></script>
 <script src="/research-idb.js?v=ra1" defer></script>
 <script src="/research-engine.js?v=rmd3" defer></script>
 <script src="/research-store.js?v=rmd6-lf1-lf2" defer></script>
 <script src="/research-screen-projects.js?v=ra3-lf1" defer></script>
-<script src="/research-screen-thesis.js?v=rmd10-sf1-lf1-lf2" defer></script>
-<script src="/research-screen-studies.js?v=rmd10-fa1-on1" defer></script>
-<script src="/research-screen-find.js?v=rmd3-lf1" defer></script>
-<script src="/research-screen-papercard.js?v=rmd5-sf1-fa1-on1" defer></script>
+<script src="/research-ondevice-checkpoint.js?v=rod1" defer></script>
+<script src="/research-ondevice-jobs.js?v=rod4-fx1-ux1" defer></script>
+<script src="/research-ondevice-pdf.js?v=rod5-fx1" defer></script>
+<script src="/research-po-prompts.js?v=rod3" defer></script>
+<script src="/research-po-gates.js?v=rod3-fx1" defer></script>
+<script src="/research-ondevice-draft.js?v=rod3-fx1" defer></script>
+<script src="/research-screen-thesis.js?v=rmd10-sf1-lf1-lf2-rod1-rod4-rod5-fx1" defer></script>
+<script src="/research-screen-studies.js?v=rmd10-fa1-on1-f20" defer></script>
+<script src="/research-screen-find.js?v=rmd3-lf1-rod1-f20-rod4-rod5-fx1" defer></script>
+<script src="/research-screen-papercard.js?v=rmd5-sf1-fa1-on1-f20" defer></script>
 <script src="/research-screen-run.js?v=rmd9-lf1" defer></script>
 <!-- ResearchMD Phase 2 screens: protocol, search, screening, conflicts, PRISMA.
      protocol + prisma stay ?v=rmd2: the frozen Phase 2 harness pins that token. -->
 <script src="/research-samplesize.js?v=ra2" defer></script>
 <script src="/research-screen-start.js?v=ra4-lf1" defer></script>
 <script src="/research-screen-protocol.js?v=rmd4" defer></script>
-<script src="/research-screen-search.js?v=rmd8-fa1-on1-lf1" defer></script>
+<script src="/research-screen-search.js?v=rmd8-fa1-on1-lf1-ov2-f20" defer></script>
 <script src="/research-screen-screening.js?v=rmd3" defer></script>
 <script src="/research-screen-conflicts.js?v=rmd3" defer></script>
 <script src="/research-screen-prisma.js?v=rmd4" defer></script>
 <!-- ResearchMD Phase 3 screens: PDF viewer, extraction, risk of bias, study data -->
-<script src="/research-screen-pdf.js?v=rmd3" defer></script>
-<script src="/research-screen-extract.js?v=rmd4-sf1" defer></script>
+<script src="/research-screen-pdf.js?v=rmd3-rod1" defer></script>
+<script src="/research-screen-extract.js?v=rmd4-sf1-rod1-rod4-rod5-fx1" defer></script>
 <script src="/research-screen-rob.js?v=rmd4" defer></script>
 <script src="/research-screen-data.js?v=rmd3" defer></script>
 <!-- ResearchMD Phase 4.3: GRADE module M + Summary of Findings screen -->
 <script src="/research-grade.js?v=rmd3" defer></script>
 <script src="/research-screen-grade.js?v=rmd5-lf1" defer></script>
 <!-- ResearchMD Phase 5A: Manuscript editor, versions, approval, version lock, DOCX -->
-<script src="/research-screen-manuscript.js?v=ra6-po1-sf1-on1-lf1" defer></script>
+<script src="/research-screen-manuscript.js?v=ra6-po1-sf1-on1-lf1-f10-rod3-rod4-fx1" defer></script>
 <!-- ResearchMD Phase 5B: reporting checklists, shared document editor, submission pack -->
 <script src="/research-checklist.js?v=rmd4-ck1" defer></script>
 <script src="/research-doc-editor.js?v=rmddoc1-sf1-ck1" defer></script>
@@ -2511,26 +2517,30 @@ window.openExternal = function (u) {
 <script src="/research-screen-institution.js?v=rmd3-lf1" defer></script>
 <script src="/research-screen-templates.js?v=rmd3" defer></script>
 <script src="/research-screen-journals.js?v=rmd3" defer></script>
+<!-- ResearchMD launch blocker F-20: Data sources and licences screen (sources table, sub-processor
+     list, shared credit-line helper for search/find/paper card/studies) -->
+<script src="/research-screen-sources.js?v=rmd20-sr1-fb1" defer></script>
 <!-- ResearchMD guided: plain-words statistics helper + 30-term glossary (data only, no AI) -->
 <script src="/research-explain.js?v=rmd1" defer></script>
 <script src="/research-glossary.js?v=rmd1" defer></script>
 <!-- ResearchMD master chart: on-device statistics engine + analysis screen (patient rows never leave the phone) -->
-<script src="/research-stats.js?v=ra3" defer></script>
-<script src="/research-screen-masterchart.js?v=ra3" defer></script>
+<script src="/research-stats.js?v=ra3-rod2" defer></script>
+<script src="/research-ondevice-stats.js?v=rod2-fx1" defer></script>
+<script src="/research-screen-masterchart.js?v=ra3-rod2-rod4-fx1-ux1" defer></script>
 <script src="/research-phi.js?v=ra5-lf1" defer></script>
 <script src="/research-randomise.js?v=ra2" defer></script>
 <script src="/research-backup.js?v=ra2" defer></script>
 <script src="/research-screen-casefile.js?v=ra2" defer></script>
-<script src="/research-screen-novelty.js?v=ra5" defer></script>
+<script src="/research-screen-novelty.js?v=ra5-ux1" defer></script>
 <script src="/research-screen-iec.js?v=ra2" defer></script>
-<script src="/research-screen-pubconsent.js?v=ra6-ce1-lf1" defer></script>
+<script src="/research-screen-pubconsent.js?v=ra6-ce1-lf1-f12" defer></script>
 <script src="/research-screen-images.js?v=ra2" defer></script>
 <script src="/research-screen-ctri.js?v=ra4-lf1" defer></script>
 <script src="/research-screen-randomise.js?v=ra3" defer></script>
 <script src="/research-screen-consort.js?v=ra2-lf1" defer></script>
 <script src="/research-screen-backup.js?v=ra2" defer></script>
 <script src="/research-tutorial.js?v=rmd2-ck1-ce1-lf1" defer></script>
-<script src="/research.js?v=rmd32-po2-sf1-hb1-ck1-ov1-lf1-lf2" defer></script>
+<script src="/research.js?v=rmd32-po2-sf1-hb1-ck1-ov1-lf1-lf2-ov2-f20" defer></script>
 <!-- Neonatal layer (neo-*.js): master flag smd_neo, DEFAULT ON under a Beta label (owner 2026-10-01); off: Settings > Experimental Features, ?neo=0.
      neo-flags.js loads the rest only when the flag is on. Data: data/neo/*.json (quoted sources,
      ai_drafted). vault/modules/Neonatal.md -->
@@ -2589,7 +2599,7 @@ window.openExternal = function (u) {
 <script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1-nodraft1-ipad2" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1-q2a" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1-th1" defer></script><script src="/maik-companion.js?v=2b-quiz1" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg3-hometabs1" defer></script><script src="/home-greetings.js?v=greet1" defer></script><script src="/home.js?v=greet1-surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1-tablet5-liq1-krd1-calm1-anest1-onc2-ipad2-hometabs2-seg1-facts1-fontlbl1-hold2-homefix1-bannermd1-homefit2-home10b-gender1-ns2-acctdel1-mkroll1-hdr1-otaui1-otazip1-sbtheme1-exspin1-expill1-hico1-rmdon1" defer></script><link rel="stylesheet" href="/today-history.css?v=th22"><script src="/today-history.js?v=th22" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1-gender1-ns2-sf1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1-ipad1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm5-ipad1-own1-ns2-pop1" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1-q2a" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1-th1" defer></script><script src="/maik-companion.js?v=2b-quiz1" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg3-hometabs1" defer></script><script src="/home-greetings.js?v=greet1" defer></script><script src="/home.js?v=alerts5b-greet1-surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1-tablet5-liq1-krd1-calm1-anest1-onc2-ipad2-hometabs2-seg1-facts1-fontlbl1-hold2-homefix1-bannermd1-homefit2-home10b-gender1-ns2-acctdel1-mkroll1-hdr1-otaui1-otazip1-sbtheme1-exspin1-expill1-hico1-rmdon1" defer></script><link rel="stylesheet" href="/today-history.css?v=th22"><script src="/today-history.js?v=th22" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1-gender1-ns2-sf1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1-ipad1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm5-ipad1-own1-ns2-pop1" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -3410,7 +3420,7 @@ window.openExternal = function (u) {
 <!-- PrepNucleus: only the loader at boot; prep.css, specialty-core.js and prep.js load on first open (prep-loader.js).
      Flag smd_prep, default ON ("0" or ?prep=0 turns it off). -->
 <script src="/prep-startup.js?v=pnstart5" defer></script>
-<script src="/prep-loader.js?v=prep201" defer></script>
+<script src="/prep-loader.js?v=prep202" defer></script>
 <script src="/smd-speak.js?v=speak1" defer></script>
 <!-- Anaesthetica (Anaesthesia, code id narke): only the loader at boot; the engine and its files load on first open (narke-loader.js) -->
 <script src="/narke-loader.js?v=nrk13" defer></script>

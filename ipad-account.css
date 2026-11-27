@@ -82,7 +82,7 @@
 /* 6. Alerts (home.js #ntfOverlay, the bell). Two 665 px tab halves spanned iPad Pro; iPadOS centres a segmented
       choice. The list below already sits in a readable column. */
 @media (min-width: 700px) {
-  html.smd-tablet #ntfOverlay .ntf-tabs { justify-content: center; }
+  html.smd-tablet #ntfOverlay .ntf-tabs, html.smd-tablet #ntfOverlay .mu-seg { justify-content: center; }
   html.smd-tablet #ntfOverlay .ntf-tab { flex: 0 1 220px; min-height: 44px; }
 }
 

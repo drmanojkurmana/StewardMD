@@ -15,8 +15,9 @@
  * full reservation. Stored statuses: done -> succeeded (callback.md table).
  */
 import { jobOf } from "./_jobs.js";
-import { pdfActualMicroUsd, settleCredits, releaseCredits } from "./_credits.js";
+import { pdfActualMicroUsd, settleCredits, releaseCredits, activeJobReservation } from "./_credits.js";
 import { ingestManuscriptJob } from "./_manuscript.js";
+import { refundCloudFallbackForJob, checkContainerHoursAlerts } from "./_cloud_fallback.js";
 
 const MAX_CALLBACK_BYTES = 65536;
 const SKEW_SECONDS = 300;
@@ -118,9 +119,12 @@ export async function jobCallback(ctx, pathJobId) {
   /* 8: guarded transition, one statement. */
   const now = Date.now();
   const terminal = body.status === "done" ? "succeeded" : body.status;
+  let prevOut = null;
+  try { prevOut = JSON.parse(job.output_json || "{}"); } catch {}
   const output = body.status === "done"
     ? { resultKey: body.resultKey, usage: body.usage }
     : { usage: body.usage };
+  if (prevOut && prevOut.runner) output.runner = prevOut.runner;
   const resultKey = body.status === "done" ? body.resultKey : "";
   const errorCode = body.status === "failed" ? body.error : "";
   const upd = await db.prepare(
@@ -132,12 +136,8 @@ export async function jobCallback(ctx, pathJobId) {
   }
   /* Credits settle on the transition: charge actual usage on done, release
    * the rest; failed/cancelled charge nothing (only completed steps). */
-  const reserveRow = await db.prepare(
-    "SELECT * FROM research_credit_ledger WHERE job_id=? AND reason='reserve' ORDER BY ts ASC LIMIT 1")
-    .bind(job.id).first();
-  if (reserveRow) {
-    const reservation = { ownerType: reserveRow.owner_type, ownerId: reserveRow.owner_id,
-      quote: -reserveRow.delta, jobId: job.id };
+  const reservation = await activeJobReservation(db, job.id);
+  if (reservation) {
     if (body.status === "done") {
       const ceilings = JSON.parse(job.ceilings_json || "{}");
       const actual = pdfActualMicroUsd(reservation.quote, body.usage, ceilings);
@@ -157,6 +157,10 @@ export async function jobCallback(ctx, pathJobId) {
   }
   await audit(db, job.project_id, "worker", "job_settled", job.id,
     { status: terminal, usage: body.usage, errorCode });
+  if (terminal === "failed") {
+    await refundCloudFallbackForJob(db, job.id, errorCode).catch(() => {});
+  }
+  await checkContainerHoursAlerts(env, db, now).catch(() => {});
   /* A finished manuscript_draft result becomes a manuscript version. A bad
    * draft must not fail the callback; GET /manuscript ingests again. */
   if (terminal === "succeeded" && job.kind === "manuscript_draft") {

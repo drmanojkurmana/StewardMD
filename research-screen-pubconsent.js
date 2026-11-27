@@ -1529,9 +1529,67 @@
       h.push("</div>");
     }
 
+    /* F-12: the attestation the server needs before a case report can be
+     * exported. Separate from the letter above: the letter is the form, this
+     * records that the signed form exists and the patient saw the manuscript. */
+    h.push('<div class="rmd-card" id="rmd-pubconsent-confirm" style="margin-top:12px;">');
+    h.push("<h3>Confirm publication consent</h3>");
+    if (confirmedFor[pid]) {
+      h.push('<p role="status">Consent confirmed (consent date ' + esc(confirmedFor[pid]) + "). You can export the manuscript.</p>");
+    } else {
+      h.push("<p>Needed before you export a case report or case series.</p>");
+      h.push('<label style="display:block;margin:6px 0;"><input type="checkbox" id="rmd-pc-written"> I have the patient\'s (or legal representative\'s) written consent for publication.</label>');
+      h.push('<label style="display:block;margin:6px 0;"><input type="checkbox" id="rmd-pc-saw"> The patient (or representative) has seen the manuscript to be submitted.</label>');
+      h.push('<label style="display:block;margin:6px 0;">Consent date <input type="date" id="rmd-pc-date" max="' + esc(todayIso()) + '"></label>');
+      h.push('<div><button type="button" class="rmd-btn rmd-btn-primary" data-rmd="confirm-pubconsent">Confirm consent</button></div>');
+      h.push('<div id="rmd-pc-confirm-status" aria-live="polite"></div>');
+    }
+    h.push("</div>");
+
     h.push("</div></div>");
     container.innerHTML = h.join("");
     wireEvents(container, proj, pid, saved, altPid, stepNo, stepCount, nextLabel, editing);
+    wireConfirm(container, proj, pid, function () {
+      renderContent(container, proj, pid, stepNo, stepCount, nextLabel, saved, altPid, opts);
+    });
+  }
+
+  var confirmedFor = {};
+
+  function todayIso() {
+    var d = new Date();
+    var p = function (n) { return (n < 10 ? "0" : "") + n; };
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+  }
+
+  function wireConfirm(container, proj, pid, rerender) {
+    if (!container || !container.querySelector) return;
+    var btn = container.querySelector('[data-rmd="confirm-pubconsent"]');
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var statusEl = container.querySelector("#rmd-pc-confirm-status");
+      var written = container.querySelector("#rmd-pc-written");
+      var saw = container.querySelector("#rmd-pc-saw");
+      var dateEl = container.querySelector("#rmd-pc-date");
+      var date = dateEl ? trim(dateEl.value) : "";
+      var say = function (msg) { if (statusEl) statusEl.innerHTML = '<span class="rmd-pc-status-error" role="alert">' + esc(msg) + "</span>"; };
+      if (!written || !written.checked || !saw || !saw.checked) return say("Tick both statements to confirm.");
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || date > todayIso()) return say("Enter the consent date (not in the future).");
+      var apiPid = (proj && proj.serverId) || pid;
+      if (!SMD.api || typeof SMD.api.request !== "function") return say("Connect to the internet to confirm consent.");
+      btn.disabled = true;
+      SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPid) + "/publication-consent", {
+        writtenConsentObtained: true, patientSawManuscript: true, consentDate: date
+      }).then(function (res) {
+        btn.disabled = false;
+        if (res && res.ok === false) return say((res.data && res.data.error && res.data.error.message) || "Could not confirm consent. Try again.");
+        confirmedFor[pid] = date;
+        rerender();
+      }, function (err) {
+        btn.disabled = false;
+        say((err && err.message) || "Could not confirm consent. Try again.");
+      });
+    });
   }
 
   function wireEvents(container, proj, pid, saved, altPid, stepNo, stepCount, nextLabel, editing) {

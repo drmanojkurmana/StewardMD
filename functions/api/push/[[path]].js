@@ -18,6 +18,7 @@
  * Subscribing/registering is open to any user (it's their own device opting in). Sending is
  * gated by the same UPDATES_ADMIN_TOKEN as the notifications API.
  */
+import { drain as drainUpdatesPush } from "../../_updates_pushq.js";
 import { saveSubscription, deleteSubscription, sendPushToAll, pushEnabled } from "../../_webpush.js";
 import { saveNativeToken, deleteNativeToken, sendNativeToAll, nativePushEnabled, listNativeTokens, tokenId, nativeTokensById } from "../../_nativepush.js";
 import { identify as identifyAccount } from "../../_usage.js";
@@ -327,7 +328,10 @@ export async function onRequest(context) {
   if (method === "POST" && seg === "task-overdue-run") {
     if (adminOK(request, env) !== true) return json({ error: "unauthorised" }, 401);
     const res = await sweepOverdue(env);
-    return json(res || { error: "failed" });
+    // Same 15-minute cron, fresh invocation: send any queued Medical Updates pushes (_updates_pushq.js).
+    let updatesPush = null;
+    try { updatesPush = await drainUpdatesPush(env); } catch (e) { updatesPush = { ok: false, reason: String((e && e.message) || e).slice(0, 120) }; }
+    return json(Object.assign({}, res || { error: "failed" }, { updatesPush }));
   }
   return json({ error: "not-found", seg }, 404);
 }

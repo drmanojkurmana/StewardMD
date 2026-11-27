@@ -403,6 +403,71 @@
         return { available: !!(r && r.available), reads: (r && Array.isArray(r.reads)) ? r.reads : [] };
       }, function () { return { available: false, reads: [] }; });
     },
+    // ResearchMD phase 05: a whole scanned-PDF OCR job run by the native plugin (iOS Vision with a
+    // continued-processing background task on iOS 26+, Android ML Kit in a WorkManager foreground worker),
+    // so it keeps going while the app is put away. Pages land on disk one by one; nothing leaves the device.
+    // Every wrapper is safe when the plugin (or the method, on an older build) is absent: available() is
+    // false and the calls reject with "native-job-unavailable".
+    pdfJob: {
+      available: function () {
+        var P = plugins(), TR = P && P.VisionOcr;
+        return !!(TR && TR.startPdfJob && TR.getPdfJob && TR.readPdfJobPage);
+      },
+      // Write the PDF bytes (ArrayBuffer or Uint8Array) to a CACHE file in chunks, so a big PDF never needs
+      // one giant base64 string. Resolves the file URI the plugin reads. Caller removes it with removeTempPdf.
+      writeTempPdf: function (bytes) {
+        var P = plugins();
+        if (!(P && P.Filesystem && P.Filesystem.writeFile)) return Promise.reject(new Error("native-job-unavailable"));
+        var u8 = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes || []);
+        var name = "smd-rmdod-" + Date.now() + "-" + (ocrTmpN++) + ".pdf";
+        var CH = 3 * 256 * 1024; // multiple of 3, so each chunk's base64 joins cleanly
+        function b64(from, to) {
+          var bin = "", i, end = Math.min(to, u8.length), step = 0x8000;
+          for (i = from; i < end; i += step) bin += String.fromCharCode.apply(null, u8.subarray(i, Math.min(i + step, end)));
+          return btoa(bin);
+        }
+        var first = P.Filesystem.writeFile({ path: name, data: b64(0, CH), directory: "CACHE" });
+        var chain = first, off;
+        for (off = CH; off < u8.length; off += CH) {
+          (function (o) {
+            chain = chain.then(function () { return P.Filesystem.appendFile({ path: name, data: b64(o, o + CH), directory: "CACHE" }); });
+          })(off);
+        }
+        return chain.then(function () { return first; }).then(function (r) { return r.uri; });
+      },
+      removeTempPdf: function (uri) { removeTempImage(uri); },
+      start: function (opts) {
+        var TR = plugins() && plugins().VisionOcr;
+        if (!(TR && TR.startPdfJob)) return Promise.reject(new Error("native-job-unavailable"));
+        return TR.startPdfJob(opts || {});
+      },
+      get: function (jobKey) {
+        var TR = plugins() && plugins().VisionOcr;
+        if (!(TR && TR.getPdfJob)) return Promise.reject(new Error("native-job-unavailable"));
+        return TR.getPdfJob({ jobKey: jobKey });
+      },
+      readPage: function (jobKey, n) {
+        var TR = plugins() && plugins().VisionOcr;
+        if (!(TR && TR.readPdfJobPage)) return Promise.reject(new Error("native-job-unavailable"));
+        return TR.readPdfJobPage({ jobKey: jobKey, n: n });
+      },
+      cancel: function (jobKey) {
+        var TR = plugins() && plugins().VisionOcr;
+        if (!(TR && TR.cancelPdfJob)) return Promise.resolve();
+        return TR.cancelPdfJob({ jobKey: jobKey });
+      },
+      clear: function (jobKey) {
+        var TR = plugins() && plugins().VisionOcr;
+        if (!(TR && TR.clearPdfJob)) return Promise.resolve();
+        return TR.clearPdfJob({ jobKey: jobKey });
+      },
+      // Progress events: fn({ jobKey, done, total }). Resolves a handle with remove(), or null when absent.
+      onProgress: function (fn) {
+        var TR = plugins() && plugins().VisionOcr;
+        if (!(TR && TR.addListener)) return Promise.resolve(null);
+        try { return Promise.resolve(TR.addListener("pdfJobProgress", fn)); } catch (e) { return Promise.resolve(null); }
+      }
+    },
     ocr: function (dataUrl, opts) {
       var P = plugins();
       var TR = P && P.VisionOcr;   // local Apple Vision plugin (@stewardmd/capacitor-vision-ocr), iOS only

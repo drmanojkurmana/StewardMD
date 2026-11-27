@@ -1023,3 +1023,56 @@ CREATE TABLE IF NOT EXISTS research_paper_cards (
   card_json TEXT NOT NULL,
   created_ts INTEGER NOT NULL
 );
+
+-- Phase 5 contract 0008 (docs/research/contracts/phase-5/0008_research_v8.sql):
+-- publication consent attestations for case reports and case series (F-12).
+-- Append-only rows; the export and case_report_draft gates pass when any row
+-- exists for the project. Identical to the 0008 CREATE statement.
+
+CREATE TABLE IF NOT EXISTS research_publication_consents (
+  id TEXT PRIMARY KEY,
+  project_id TEXT NOT NULL REFERENCES research_projects(id) ON DELETE CASCADE,
+  written_consent_obtained INTEGER NOT NULL CHECK(written_consent_obtained IN (0,1)),
+  patient_saw_manuscript INTEGER NOT NULL CHECK(patient_saw_manuscript IN (0,1)),
+  consent_date TEXT NOT NULL,
+  manuscript_version INTEGER,
+  signed_by TEXT NOT NULL,
+  signed_at INTEGER NOT NULL,
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_publication_consents_project
+  ON research_publication_consents(project_id, created_ts DESC);
+
+-- On-device drafting step cache (docs/research/contracts/phase-5/0009_research_v9.sql).
+-- Keyed by (job_id, step_id); hit returns cached reply and charges nothing.
+CREATE TABLE IF NOT EXISTS research_job_steps (
+  job_id TEXT NOT NULL REFERENCES research_job_runs(id) ON DELETE CASCADE,
+  step_id TEXT NOT NULL,
+  project_id TEXT NOT NULL,
+  text TEXT NOT NULL,
+  model TEXT NOT NULL DEFAULT '',
+  tokens_in INTEGER NOT NULL DEFAULT 0 CHECK(tokens_in >= 0),
+  tokens_out INTEGER NOT NULL DEFAULT 0 CHECK(tokens_out >= 0),
+  created_ts INTEGER NOT NULL,
+  PRIMARY KEY (job_id, step_id)
+);
+CREATE INDEX IF NOT EXISTS idx_research_job_steps_project
+  ON research_job_steps(project_id, job_id);
+
+-- Phase 04 cloud fallback monthly allowance ledger (docs/research/contracts/phase-5/0010_research_v10.sql).
+-- Tracks cloud fallbacks per user per UTC calendar month ('YYYY-MM').
+CREATE TABLE IF NOT EXISTS research_cloud_fallbacks (
+  id TEXT PRIMARY KEY,
+  uid TEXT NOT NULL,
+  project_id TEXT NOT NULL DEFAULT '',
+  kind TEXT NOT NULL CHECK(kind IN ('pdf', 'stats', 'draft')),
+  job_id TEXT NOT NULL DEFAULT '',
+  month TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'used' CHECK(status IN ('used', 'refunded')),
+  reason_json TEXT NOT NULL DEFAULT '{}',
+  created_ts INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_research_cloud_fallbacks_uid_month
+  ON research_cloud_fallbacks(uid, month, status);
+CREATE INDEX IF NOT EXISTS idx_research_cloud_fallbacks_job
+  ON research_cloud_fallbacks(job_id);

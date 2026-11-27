@@ -23,7 +23,8 @@ import kotlin.math.roundToInt
 /**
  * Android counterpart to VisionOcrPlugin.swift. iOS has Apple Vision for detectText/htmlToPdf;
  * Android has none of that (ML Kit covers plain OCR via a separate plugin - see native-bridge.js).
- * This exposes ONLY readDigits: the on-device DigitReader model (CRNN-CTC, 1.5M params, converted
+ * This exposes readDigits plus the ResearchMD whole-PDF job methods (startPdfJob and friends,
+ * see PdfOcrJob.kt). readDigits uses the on-device DigitReader model (CRNN-CTC, 1.5M params, converted
  * from the same best.pt checkpoint as the iOS Core ML build - see spec.json in the training job
  * output for the exact preprocessing/decode contract this mirrors). Nothing leaves the device.
  */
@@ -213,5 +214,69 @@ class VisionOcrPlugin : Plugin() {
         result.put("reads", reads)
         result.put("ms", (System.currentTimeMillis() - t0).toInt())
         call.resolve(result)
+    }
+
+    // ---- ResearchMD phase 05: native scanned-PDF job (see PdfOcrJob.kt). Same contract as iOS. ----
+
+    override fun load() {
+        super.load()
+        PdfOcrJobs.listener = { key, done, total ->
+            val d = JSObject(); d.put("jobKey", key); d.put("done", done); d.put("total", total)
+            notifyListeners("pdfJobProgress", d)
+        }
+    }
+
+    /** startPdfJob({ jobKey, path, pages:[n...], dpi }) -> { started:true }. Pages already on disk are skipped. */
+    @PluginMethod
+    fun startPdfJob(call: PluginCall) {
+        val key = call.getString("jobKey")
+        val path = call.getString("path")
+        if (key.isNullOrEmpty() || path.isNullOrEmpty()) { call.reject("Missing jobKey or path"); return }
+        if (!PdfOcrJobs.isValidKey(key)) { call.reject("invalid-job-key"); return }
+        val arr = call.getArray("pages") ?: JSArray()
+        val pages = (0 until arr.length()).mapNotNull { i -> arr.optInt(i, -1).takeIf { it >= 1 } }
+        if (pages.isEmpty()) { call.reject("Missing pages"); return }
+        val dpi = (call.getFloat("dpi") ?: 200f).toInt()
+        try {
+            PdfOcrJobs.start(context, key, path, pages, dpi)
+            val r = JSObject(); r.put("started", true); call.resolve(r)
+        } catch (e: Exception) {
+            call.reject(e.message ?: "start-failed")
+        }
+    }
+
+    /** getPdfJob({ jobKey }) -> { state: running|paused|done|failed, donePages:[n...], total, error? }. */
+    @PluginMethod
+    fun getPdfJob(call: PluginCall) {
+        val key = call.getString("jobKey")
+        if (key.isNullOrEmpty() || !PdfOcrJobs.isValidKey(key)) { call.reject("Missing jobKey"); return }
+        Thread {
+            try { call.resolve(JSObject.fromJSONObject(PdfOcrJobs.status(context, key))) }
+            catch (e: Exception) { call.reject(e.message ?: "status-failed") }
+        }.start()
+    }
+
+    /** readPdfJobPage({ jobKey, n }) -> the page object written by the worker (normalized boxes). */
+    @PluginMethod
+    fun readPdfJobPage(call: PluginCall) {
+        val key = call.getString("jobKey")
+        val n = call.getInt("n")
+        if (key.isNullOrEmpty() || n == null || !PdfOcrJobs.isValidKey(key)) { call.reject("Missing jobKey or n"); return }
+        try { call.resolve(JSObject.fromJSONObject(PdfOcrJobs.readPage(context, key, n))) }
+        catch (e: Exception) { call.reject("page-not-ready") }
+    }
+
+    @PluginMethod
+    fun cancelPdfJob(call: PluginCall) {
+        val key = call.getString("jobKey")
+        if (key.isNullOrEmpty() || !PdfOcrJobs.isValidKey(key)) { call.reject("Missing jobKey"); return }
+        PdfOcrJobs.cancel(context, key); call.resolve()
+    }
+
+    @PluginMethod
+    fun clearPdfJob(call: PluginCall) {
+        val key = call.getString("jobKey")
+        if (key.isNullOrEmpty() || !PdfOcrJobs.isValidKey(key)) { call.reject("Missing jobKey"); return }
+        PdfOcrJobs.clear(context, key); call.resolve()
     }
 }

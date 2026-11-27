@@ -3,8 +3,9 @@ uvicorn[standard]>=0.30
 pydantic>=2.7,<3.0
 pydantic-settings>=2.3
 structlog>=24.1
-pdfplumber>=0.11
 pytesseract>=0.3.10
+# PDF text layer: the Rust reader (rust-pdf/, built in worker/Dockerfile). PyMuPDF
+# (below) renders scanned pages for Tesseract and reads files Rust leaves out.
 boto3>=1.34
 httpx>=0.27
 # PaperOrchestra upstream import-time deps (paperorchestra/UPSTREAM.md).

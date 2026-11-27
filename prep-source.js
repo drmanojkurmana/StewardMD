@@ -288,9 +288,10 @@
     function textPass() {
       if (i >= pageList.length) return Promise.resolve();
       var p = pageList[i++];
+      var rl = opts.rustLines && opts.rustLines[p];
       return doc.getPage(p).then(function (page) {
-        return page.getTextContent().then(function (tc) {
-          var lines = itemsToLines(tc.items), d = pageDecision(lines, canOcr);
+        return (rl ? Promise.resolve(null) : page.getTextContent()).then(function (tc) {
+          var lines = rl || itemsToLines(tc.items), d = pageDecision(lines, canOcr);
           got[p] = { page: page, lines: lines, d: d, use: null };
           if (d.why) scanned.push(p);
           if (d.use === "ocr") { if (ocrList.length < cap) ocrList.push(p); else { var d2 = pageDecision(lines, false); got[p].d = d2.use === "skip" ? { use: "skip", why: "ocr-cap" } : d2; } }
@@ -321,6 +322,19 @@
   }
 
   /* ---------- pages and caps ---------- */
+  /* The Rust reader's lines (SMD_RUST_PDF.lines, vendor/rust-pdf) -> { page: [{ tx, size }] }, cleaned exactly as
+     itemsToLines cleans pdf.js lines. readPages uses them in place of pdf.js's text layer when opts.rustLines is set:
+     same headings, about 5 times faster. A page the Rust reader left out falls back to pdf.js. */
+  function rustToLines(res) {
+    if (!res || !res.pages || !res.pages.length) return null;
+    var out = {};
+    res.pages.forEach(function (pg) {
+      var ls = [];
+      (pg.lines || []).forEach(function (l) { var tx = squash(fixText(l.tx)); if (tx) ls.push({ tx: tx, size: +l.size || 0 }); });
+      out[pg.n] = ls;
+    });
+    return out;
+  }
   function defaultPages(total) { return total <= 1 ? "1" : "1-" + Math.min(total, PAGE_CAP); }
   // "1-20, 25" -> { pages: [1..20, 25] } or { error } in plain words.
   function parsePages(spec, total, cap) {
@@ -792,7 +806,7 @@
     capCheck: capCheck, estTokens: estTokens, chunkSentences: chunkSentences, chunkOrder: chunkOrder, chunkPayload: chunkPayload,
     scrubFind: scrubFind, prepScrub: prepScrub, scrubSummary: scrubSummary,
     OCR_PAGE_CAP: OCR_PAGE_CAP, OCR_PAGE_MS: OCR_PAGE_MS, nonWordRatio: nonWordRatio, textChars: textChars, pageDecision: pageDecision, ocrToLines: ocrToLines,
-    pickOcr: pickOcr, readPages: readPages
+    pickOcr: pickOcr, readPages: readPages, rustToLines: rustToLines
   };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
@@ -826,7 +840,11 @@
       return readFile(file).then(function (buf) { return lib.getDocument({ data: new Uint8Array(buf) }).promise.then(function (doc) { return openDone(doc, file); }); });
     });
   }
-  function openDone(doc, file) { return { doc: doc, pages: doc.numPages, name: String(file.name || "Document.pdf"), bytes: file.size || 0 }; }
+  function openDone(doc, file) {
+    // Small files (read whole) keep the file for the Rust reader; ranged files never load whole, so they stay on pdf.js.
+    if (file && !(file.size > RANGE_MIN)) { try { doc.__smdFile = file; } catch (e) {} }
+    return { doc: doc, pages: doc.numPages, name: String(file.name || "Document.pdf"), bytes: file.size || 0 };
+  }
   function readSlice(file, begin, end) {
     var bl = file.slice(begin, end);
     if (bl.arrayBuffer) return bl.arrayBuffer();
@@ -878,8 +896,38 @@
   function canOcr() { return !!nativeOcr(); }
   // The chosen pages of an open PDF, with OCR for scanned pages when the app runs on a phone.
   function readPdfPages(doc, pageList, onPage) {
-    var ocr = nativeOcr();
-    return readPages(doc, pageList, onPage, ocr ? { ocr: ocr, render: renderPage } : {});
+    var ocr = nativeOcr(), opts = ocr ? { ocr: ocr, render: renderPage } : {};
+    return rustLines(doc, pageList).then(function (rl) {
+      if (rl) opts.rustLines = rl;
+      return readPages(doc, pageList, onPage, opts);
+    });
+  }
+  // The Rust reader (vendor/rust-pdf/rust-pdf.js, loaded only when a PDF is read). null = use pdf.js as before.
+  var RUST = "/vendor/rust-pdf/rust-pdf.js", rustP = null;
+  function loadRust() {
+    if (G.SMD_RUST_PDF) return Promise.resolve(G.SMD_RUST_PDF);
+    if (rustP) return rustP;
+    rustP = new Promise(function (res) {
+      var s = G.document.createElement("script");
+      s.src = RUST;
+      s.onload = function () { res(G.SMD_RUST_PDF || null); };
+      s.onerror = function () { rustP = null; res(null); };
+      G.document.head.appendChild(s);
+    });
+    return rustP;
+  }
+  function rustLines(doc, pageList) {
+    var f = doc && doc.__smdFile;
+    if (!f) return Promise.resolve(null);
+    return readFile(f).then(function (buf) { return rustLinesFromBytes(new Uint8Array(buf), pageList); }, function () { return null; });
+  }
+  // The Rust reader's cleaned lines for these pages of a PDF held in memory: { page: [{ tx, size }] }, or null (use pdf.js).
+  // Also used by the Study Studio notebook (study.js) for search and for flashcards from a PDF.
+  function rustLinesFromBytes(u8, pageList) {
+    return loadRust().then(function (R) {
+      if (!R || !R.isEnabled()) return null;
+      return R.lines(u8, pageList);
+    }).then(rustToLines, function () { return null; });
   }
 
   /* extractImages(doc, pageList, onStep?) -> Promise([{ p, k, w, h, data (data: URL), mime }]). Reads each page's operator
@@ -974,6 +1022,6 @@
 
   var API = {};
   for (var k in PURE) API[k] = PURE[k];
-  API.loadPdfJs = loadPdfJs; API.openPdf = openPdf; API.readPdfPages = readPdfPages; API.renderPage = renderPage; API.canOcr = canOcr; API.extractImages = extractImages; API.renderThumb = renderThumb; API.pageAspect = pageAspect; API._pure = PURE;
+  API.loadPdfJs = loadPdfJs; API.openPdf = openPdf; API.readPdfPages = readPdfPages; API.renderPage = renderPage; API.canOcr = canOcr; API.extractImages = extractImages; API.renderThumb = renderThumb; API.pageAspect = pageAspect; API.rustLinesFromBytes = rustLinesFromBytes; API._pure = PURE;
   G.PREP_SRC = API;
 })(typeof window !== "undefined" ? window : this);

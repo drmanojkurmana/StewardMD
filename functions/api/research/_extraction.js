@@ -24,6 +24,7 @@
  * moves a value into a field STILL unverified; nothing is auto-verified.
  */
 import { createJob } from "./_jobs.js";
+import { checkCloudFallbackAvailable, parseFormFallback } from "./_cloud_fallback.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const ALL_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
@@ -517,13 +518,19 @@ export async function listArtifacts(ctx, projectId) {
 }
 
 export async function uploadPdfArtifact(ctx) {
-  const { request, env, db, uid, requestId, api, projectId } = ctx;
+  const { request, env, db, uid, claims, requestId, api, projectId } = ctx;
   const { json, err, audit, projectGate, gateErr } = api;
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "PDF uploads need an owner, editor or analyst role", requestId);
   if (!env.RESEARCH_R2) return err(503, "storage_unavailable", "Research file storage is not provisioned", requestId);
   let form;
   try { form = await request.formData(); } catch { return err(400, "invalid_multipart", "Expected multipart PDF upload", requestId); }
+  const fallback = parseFormFallback(form.get("fallback"));
+  let fbCheck = null;
+  if (fallback) {
+    fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims);
+    if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
+  }
   const file = form.get("file");
   if (!file || typeof file === "string") return err(400, "missing_file", "Upload one PDF in the file field", requestId);
   if (file.size > 26214400) return err(413, "ceiling_bytes", "This file is larger than 25 MB. Upload a smaller version.", requestId);
@@ -544,16 +551,39 @@ export async function uploadPdfArtifact(ctx) {
     await db.prepare("INSERT INTO research_pdfs (id,project_id,sha256,r2_key,bytes,uploaded_by,ts) VALUES (?,?,?,?,?,?,?)")
       .bind(pdfId, projectId, sha256, r2Key, file.size, uid, now).run();
     pdf = await db.prepare("SELECT * FROM research_pdfs WHERE id=?").bind(pdfId).first();
+  } else {
+    if (!pdf.r2_key) {
+      const r2Key = "projects/" + projectId + "/pdf/" + sha256 + ".pdf";
+      await env.RESEARCH_R2.put(r2Key, bytes, { httpMetadata: { contentType: "application/pdf" },
+        customMetadata: { projectId, uploadedBy: uid, sha256 } });
+      await db.prepare("UPDATE research_pdfs SET r2_key=? WHERE id=? AND r2_key=''").bind(r2Key, pdf.id).run();
+      pdf = await db.prepare("SELECT * FROM research_pdfs WHERE id=?").bind(pdf.id).first();
+    }
+    const existingPre = await db.prepare(
+      "SELECT a.*, j.status AS job_status, j.usage_json AS job_usage FROM research_extraction_artifacts a LEFT JOIN research_job_runs j ON j.id=a.job_id WHERE a.project_id=? AND a.pdf_id=?")
+      .bind(projectId, pdf.id).first();
+    if (existingPre && (existingPre.status === "succeeded" || existingPre.job_status === "succeeded")) {
+      return json({
+        artifact: artifactOf(existingPre, existingPre.job_status ? { status: existingPre.job_status, usage_json: existingPre.job_usage } : null),
+        idempotentReplay: true,
+        requestId
+      }, 200, { "x-request-id": requestId });
+    }
   }
   /* Enqueue through the existing job machinery (caps, credits, queue, idempotency). */
-  const jobRes = await createJob(ctx, { kind: "pdf_extract", pdfId: pdf.id, idempotencyKey: "pdfup:" + sha256 });
+  const jobRes = await createJob(
+    ctx,
+    { kind: "pdf_extract", pdfId: pdf.id, idempotencyKey: "pdfup:" + sha256, fallback },
+    { fallbackPrechecked: true, fallbackStatus: fbCheck ? fbCheck.status : null }
+  );
   if (jobRes.status >= 400) return jobRes;
   const jobBody = await jobRes.json();
   const job = jobBody.job;
-  const existing = await db.prepare("SELECT * FROM research_extraction_artifacts WHERE project_id=? AND pdf_id=?")
+  const existing = await db.prepare(
+    "SELECT a.*, j.status AS job_status, j.usage_json AS job_usage FROM research_extraction_artifacts a LEFT JOIN research_job_runs j ON j.id=a.job_id WHERE a.project_id=? AND a.pdf_id=?")
     .bind(projectId, pdf.id).first();
   if (existing) {
-    if (job && existing.job_id !== job.id)
+    if (existing.status !== "succeeded" && existing.job_status !== "succeeded" && job && existing.job_id !== job.id)
       await db.prepare("UPDATE research_extraction_artifacts SET job_id=?,status=? WHERE id=?").bind(job.id, job.status, existing.id).run();
     const fresh = await db.prepare("SELECT a.*, j.status AS job_status, j.usage_json AS job_usage FROM research_extraction_artifacts a LEFT JOIN research_job_runs j ON j.id=a.job_id WHERE a.id=?").bind(existing.id).first();
     return json({ artifact: artifactOf(fresh, fresh.job_status ? { status: fresh.job_status, usage_json: fresh.job_usage } : null), idempotentReplay: true, requestId }, 200, { "x-request-id": requestId });
@@ -599,4 +629,225 @@ export async function artifactResult(ctx, artifactId) {
   }
   const result = await obj.json();
   return json(result, 200, { "x-request-id": requestId });
+}
+
+const MAX_DEVICE_JSON_BYTES = 8 * 1024 * 1024;
+const SHA256_HEX_RE = /^[0-9a-f]{64}$/;
+
+async function readJsonUpTo(request, maxBytes) {
+  const announced = Number(request.headers.get("content-length") || 0);
+  if (announced > maxBytes) return { error: "ceiling_bytes" };
+  if (!request.body) return { error: "invalid_body" };
+  const reader = request.body.getReader();
+  const chunks = [];
+  let size = 0;
+  while (true) {
+    const part = await reader.read();
+    if (part.done) break;
+    size += part.value.byteLength;
+    if (size > maxBytes) {
+      await reader.cancel();
+      return { error: "ceiling_bytes" };
+    }
+    chunks.push(part.value);
+  }
+  const bytes = new Uint8Array(size);
+  let offset = 0;
+  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+  try {
+    const body = JSON.parse(new TextDecoder().decode(bytes));
+    if (!body || typeof body !== "object" || Array.isArray(body)) return { error: "invalid_body" };
+    return { body };
+  } catch {
+    return { error: "invalid_body" };
+  }
+}
+
+function validateDevicePage(p) {
+  if (!p || typeof p !== "object" || Array.isArray(p)) return "each page must be an object";
+  if (!isInt(p.n) || p.n < 1) return "page.n must be an integer of at least 1";
+  if (!isFin(p.width) || p.width <= 0 || !isFin(p.height) || p.height <= 0)
+    return "page.width and page.height must be positive numbers";
+  if (typeof p.text !== "string") return "page.text must be a string";
+  if (!Array.isArray(p.words)) return "page.words must be an array";
+  for (const w of p.words) {
+    if (!w || typeof w !== "object" || Array.isArray(w)) return "each word must be an object";
+    if (typeof w.t !== "string") return "word.t must be a string";
+    if (!isFin(w.x0) || !isFin(w.y0) || !isFin(w.x1) || !isFin(w.y1))
+      return "word coordinates x0, y0, x1, y1 must be finite numbers";
+  }
+  if (!Array.isArray(p.tables)) return "page.tables must be an array";
+  if (typeof p.ocr !== "boolean") return "page.ocr must be a boolean";
+  return null;
+}
+
+/* POST /v1/projects/:projectId/extractions/device
+ * Stores an on-device extraction result.json directly in R2 without uploading the PDF.
+ * NOTE on research_pdfs: research_extraction_artifacts.pdf_id is NOT NULL REFERENCES
+ * research_pdfs(id), and research_pdfs.r2_key is NOT NULL. We therefore insert a
+ * research_pdfs row with the sha256 and r2_key="" (no PDF bytes stored in R2). */
+export async function uploadDeviceExtraction(ctx) {
+  const { request, env, db, uid, requestId, api, projectId } = ctx;
+  const { json, err, audit, projectGate, gateErr } = api;
+  const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
+  if (gate.status) return gateErr(gate, "Device extraction upload needs an owner, editor or analyst role", requestId);
+  if (!env.RESEARCH_R2) return err(503, "storage_unavailable", "Research file storage is not provisioned", requestId);
+
+  const readRes = await readJsonUpTo(request, MAX_DEVICE_JSON_BYTES);
+  if (readRes.error === "ceiling_bytes") {
+    return err(413, "ceiling_bytes", "Extracted result exceeds the 8 MB limit.", requestId);
+  }
+  if (readRes.error) {
+    return err(400, "invalid_body", "Invalid JSON payload", requestId);
+  }
+  const body = readRes.body;
+
+  const sha256 = typeof body.sha256 === "string" ? body.sha256 : "";
+  if (!SHA256_HEX_RE.test(sha256)) {
+    return err(400, "invalid_body", "sha256 must be 64 lowercase hex characters", requestId);
+  }
+  if (body.filename !== undefined && typeof body.filename !== "string") {
+    return err(400, "invalid_body", "filename must be a string", requestId);
+  }
+  const filename = typeof body.filename === "string" ? body.filename.slice(0, 240) : "";
+  const fileBytes = body.bytes === undefined ? 0 : body.bytes;
+  if (!isInt(fileBytes) || fileBytes < 0) {
+    return err(400, "invalid_body", "bytes must be a non-negative integer", requestId);
+  }
+
+  const result = body.result;
+  if (!result || typeof result !== "object" || Array.isArray(result)) {
+    return err(400, "invalid_body", "result must be an object", requestId);
+  }
+  if (result.engine !== "ondevice") {
+    return err(400, "invalid_body", "result.engine must be ondevice", requestId);
+  }
+  if (result.sha256 !== sha256) {
+    return err(400, "invalid_body", "result.sha256 must match sha256", requestId);
+  }
+  if (result.partial === true) {
+    return err(400, "invalid_body", "partial extractions cannot be uploaded", requestId);
+  }
+  if (typeof result.ocr !== "boolean") {
+    return err(400, "invalid_body", "result.ocr must be a boolean", requestId);
+  }
+  if (!Array.isArray(result.pages) || result.pages.length < 1 || result.pages.length > 200) {
+    return err(400, "invalid_body", "result.pages must be a non-empty array of at most 200 pages", requestId);
+  }
+  for (let i = 0; i < result.pages.length; i++) {
+    const p = result.pages[i];
+    const pageErr = validateDevicePage(p);
+    if (pageErr) return err(400, "invalid_body", pageErr, requestId);
+    if (p.n !== i + 1) {
+      return err(400, "invalid_body", "result.pages must be numbered 1..N in order", requestId);
+    }
+  }
+  const anyOcr = result.pages.some((p) => p.ocr);
+  if (result.ocr !== anyOcr) {
+    return err(400, "invalid_body", "result.ocr must match whether any page used OCR", requestId);
+  }
+
+  let pdf = await db.prepare("SELECT * FROM research_pdfs WHERE project_id=? AND sha256=?")
+    .bind(projectId, sha256).first();
+  if (pdf) {
+    const existingArt = await db.prepare(
+      "SELECT a.*, j.status AS job_status, j.usage_json AS job_usage FROM research_extraction_artifacts a LEFT JOIN research_job_runs j ON j.id=a.job_id WHERE a.project_id=? AND a.pdf_id=?")
+      .bind(projectId, pdf.id).first();
+    if (existingArt && (existingArt.status === "succeeded" || existingArt.job_status === "succeeded")) {
+      return json({
+        artifact: artifactOf(existingArt, existingArt.job_status ? { status: existingArt.job_status, usage_json: existingArt.job_usage } : null),
+        idempotentReplay: true,
+        requestId,
+      }, 200, { "x-request-id": requestId });
+    }
+  }
+
+  const now = Date.now();
+  const pageCount = result.pages.length;
+  if (!pdf) {
+    const pdfId = "pdf_" + crypto.randomUUID().replace(/-/g, "");
+    try {
+      await db.prepare("INSERT INTO research_pdfs (id,project_id,sha256,r2_key,bytes,pages,uploaded_by,ts) VALUES (?,?,?,?,?,?,?,?)")
+        .bind(pdfId, projectId, sha256, "", fileBytes, pageCount, uid, now).run();
+      pdf = await db.prepare("SELECT * FROM research_pdfs WHERE id=?").bind(pdfId).first();
+    } catch (e) {
+      pdf = await db.prepare("SELECT * FROM research_pdfs WHERE project_id=? AND sha256=?")
+        .bind(projectId, sha256).first();
+      if (!pdf) throw e;
+    }
+  } else if (pdf.pages == null) {
+    await db.prepare("UPDATE research_pdfs SET pages=? WHERE id=?").bind(pageCount, pdf.id).run();
+  }
+
+  const ocrEngine = result.ocrEngine === "vision" || result.ocrEngine === "mlkit" ? result.ocrEngine : null;
+  const engineVersion = typeof result.engineVersion === "string" && result.engineVersion ? result.engineVersion.slice(0, 40) : "rod1";
+  const outputObj = { engine: "ondevice", ocrEngine, engineVersion };
+  const usageObj = { pages: pageCount, seconds: 0 };
+
+  const idempotencyKey = "device:" + sha256;
+  let job = await db.prepare("SELECT * FROM research_job_runs WHERE project_id=? AND idempotency_key=?")
+    .bind(projectId, idempotencyKey).first();
+  if (!job) {
+    const jobId = "job_" + crypto.randomUUID().replace(/-/g, "");
+    const resultKey = "projects/" + projectId + "/jobs/" + jobId + "/result.json";
+    const storedResult = {
+      pages: result.pages,
+      ocr: result.ocr,
+      sha256,
+      engine: "ondevice",
+      ocrEngine,
+      engineVersion,
+    };
+    await env.RESEARCH_R2.put(resultKey, JSON.stringify(storedResult), {
+      httpMetadata: { contentType: "application/json" },
+      customMetadata: { projectId, uploadedBy: uid, sha256, engine: "ondevice" },
+    });
+    try {
+      await db.prepare(
+        "INSERT INTO research_job_runs (id,project_id,kind,status,idempotency_key,input_r2_key,result_r2_key,ceilings_json,usage_json,output_json,error_code,created_by,created_ts,started_ts,completed_ts) VALUES (?,?,'pdf_extract','succeeded',?,'',?,'{}',?,?,'',?,?,?,?)")
+        .bind(jobId, projectId, idempotencyKey, resultKey, JSON.stringify(usageObj), JSON.stringify(outputObj), uid, now, now, now).run();
+      job = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(jobId).first();
+    } catch (e) {
+      job = await db.prepare("SELECT * FROM research_job_runs WHERE project_id=? AND idempotency_key=?")
+        .bind(projectId, idempotencyKey).first();
+      if (!job) throw e;
+    }
+  }
+
+  const existing = await db.prepare("SELECT * FROM research_extraction_artifacts WHERE project_id=? AND pdf_id=?")
+    .bind(projectId, pdf.id).first();
+  if (existing) {
+    if (existing.status === "succeeded" && existing.job_id === job.id) {
+      const fresh = await db.prepare(
+        "SELECT a.*, j.status AS job_status, j.usage_json AS job_usage FROM research_extraction_artifacts a LEFT JOIN research_job_runs j ON j.id=a.job_id WHERE a.id=?")
+        .bind(existing.id).first();
+      return json({
+        artifact: artifactOf(fresh, fresh.job_status ? { status: fresh.job_status, usage_json: fresh.job_usage } : null),
+        idempotentReplay: true,
+        requestId,
+      }, 200, { "x-request-id": requestId });
+    }
+    await db.prepare("UPDATE research_extraction_artifacts SET job_id=?,status='succeeded',pages=?,filename=CASE WHEN ?!='' THEN ? ELSE filename END WHERE id=?")
+      .bind(job.id, pageCount, filename, filename, existing.id).run();
+    await audit(db, projectId, uid, "artifact_device_extracted", existing.id, { bytes: fileBytes, sha256, pages: pageCount, ocr: result.ocr });
+    const fresh = await db.prepare(
+      "SELECT a.*, j.status AS job_status, j.usage_json AS job_usage FROM research_extraction_artifacts a LEFT JOIN research_job_runs j ON j.id=a.job_id WHERE a.id=?")
+      .bind(existing.id).first();
+    return json({
+      artifact: artifactOf(fresh, fresh.job_status ? { status: fresh.job_status, usage_json: fresh.job_usage } : null),
+      requestId,
+    }, 200, { "x-request-id": requestId });
+  }
+
+  const artId = "art_" + crypto.randomUUID().replace(/-/g, "");
+  await db.prepare("INSERT INTO research_extraction_artifacts (id,project_id,pdf_id,filename,sha256,bytes,pages,job_id,status,created_by,created_ts) VALUES (?,?,?,?,?,?,?,?,'succeeded',?,?)")
+    .bind(artId, projectId, pdf.id, filename, sha256, fileBytes, pageCount, job.id, uid, now).run();
+  await audit(db, projectId, uid, "artifact_device_extracted", artId, { bytes: fileBytes, sha256, pages: pageCount, ocr: result.ocr });
+  const fresh = await db.prepare(
+    "SELECT a.*, j.status AS job_status, j.usage_json AS job_usage FROM research_extraction_artifacts a LEFT JOIN research_job_runs j ON j.id=a.job_id WHERE a.id=?")
+    .bind(artId).first();
+  return json({
+    artifact: artifactOf(fresh, fresh.job_status ? { status: fresh.job_status, usage_json: fresh.job_usage } : null),
+    requestId,
+  }, 201, { "x-request-id": requestId });
 }

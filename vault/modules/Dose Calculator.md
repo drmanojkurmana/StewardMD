@@ -13,6 +13,9 @@ adjusted weight in obesity, kidney (CrCl bands, dialysis) and liver (Child-Pugh)
 - While OFF: no Drugs-sheet row, no Home/All tools/search entry, no drug-page button, no ICU/OPD button.
   `dose-calc.js` still loads (small) but the rules file is only fetched when the calculator opens.
 
+- `smd_dose_v3` (result-first layout, owner picked variant C 2026-11-27): **DEFAULT ON**. `"0"` or `?dosev3=0`
+  brings back the classic card. Same engine; only the result and patient card render differently.
+
 ## Key files
 - `scripts/lib/dose-parse.mjs`: text -> rules. Only unambiguous numbers become rules; every number is
   round-trip checked against its sentence (0 rejections). Caps (max / not to exceed) vs "up to" vs doses.
@@ -50,3 +53,13 @@ adjusted weight in obesity, kidney (CrCl bands, dialysis) and liver (Child-Pugh)
 - `#doseCalc` sets `display:flex`, which beats the browser's `[hidden]{display:none}`. The stylesheet
   needs `#doseCalc[hidden]{display:none!important}`, or a closed calculator stays painted and eats every tap
   (SMD-MSCQX9, iOS 2026-09-28). The UI test checks computed display and `elementFromPoint`, not `.hidden`.
+- Result-first layout (`smd_dose_v3`): the hero leads with the ADJUSTED dose when a kidney/liver factor applies
+  (engine `line.adj`: value, pct, why, practical on the adjusted amount). Multiple weight-based rows become
+  indication chips (`S.ri`). Warnings are one list sorted red > amber > grey (avoid, caps, notes, kidney, liver).
+  The patient card folds to value chips (`S.col`) only once a drug is chosen AND the inputs pass `check()`, so a
+  form never folds away while the doctor is still typing. Neonates, input errors and non-weight-based drugs fall
+  back to the classic card. Result sits first via CSS `order:-1`, NOT DOM order: `refresh()` swaps
+  `card.nextElementSibling` and must keep the inputs as the same nodes (iOS keyboard).
+- Light by default; under `body.dark`/`body.v3-dark` it goes OLED black (`#doseCalc.dc3` tokens).
+- Engine fact worth knowing: a row with `b:"actual"` switches to the drug's other basis (ideal/adjusted) once
+  the patient counts as obese (over 120% of ideal weight), e.g. hydroxyurea at 60 kg, 155 cm F uses 47.9 kg.

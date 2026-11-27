@@ -278,6 +278,7 @@
     exporting: false,
     exportNotice: null,
     exportNoticeKind: "warn",
+    consentBlocked: false,
     saveNotice: null,
     phoneTab: "sections", /* "sections" | "detail" | "approve" */
     lastRange: null,
@@ -502,6 +503,20 @@
     return false;
   }
 
+  /* On-device drafting flag: DEFAULT ON. Off per device with localStorage.smd_rmd_ondevice_draft = "0" */
+  function isOnDeviceDraftEnabled() {
+    try {
+      if (typeof localStorage !== "undefined" && localStorage && typeof localStorage.getItem === "function") {
+        return localStorage.getItem("smd_rmd_ondevice_draft") !== "0";
+      }
+    } catch (e) {}
+    return true;
+  }
+
+  function useOnDeviceDraft() {
+    return isOnDeviceDraftEnabled() && !!(G && G.SMD_RMD_ONDEVICE_DRAFT && typeof G.SMD_RMD_ONDEVICE_DRAFT.run === "function");
+  }
+
   var PO_ERROR_MESSAGES = {
     not_systematic_review: "Full drafts are only available for systematic review projects.",
     protocol_unlocked: "Lock the research protocol before drafting the manuscript.",
@@ -511,6 +526,11 @@
     cap_po_user_daily: "Daily draft limit reached for your account. Try again tomorrow.",
     insufficient_credits: "Not enough research credits for this draft. Top up your wallet to continue.",
     phi_blocked: "Patient identifiers were detected. Remove personal identifiers and try again.",
+    gate_failed: "Draft failed integrity checks for numbers, citations, or claim links.",
+    ceiling_calls: "Draft reached the 64-call limit before completing.",
+    ceiling_seconds: "Draft exceeded the step time limit.",
+    invalid_snapshot: "Project snapshot is incomplete or contains unverified data.",
+    device_failed: "Could not complete draft on this device. Try again.",
     not_found: "Feature not available yet."
   };
 
@@ -545,8 +565,9 @@
   function getPoStatusText() {
     if (st.poStatus === "cancelled") return "Cancelled";
     if (st.poCancelError) return st.poCancelError;
-    if (st.poStatus === "queued") return "Queued";
-    if (st.poStatus === "running") return "Writing the draft";
+    if (st.poStatus === "paused") return "Saved on this device. Try again later.";
+    if (st.poStatus === "queued") return st.poProgress || "Queued";
+    if (st.poStatus === "running") return st.poRetryText || st.poProgress || "Writing the draft";
     if (st.poStatus === "succeeded") return "Done";
     if (st.poStatus === "failed") return "Failed: " + (st.poError || "Draft failed.");
     return "";
@@ -563,7 +584,7 @@
         stateClass = " rmd-po-status-ok rmd-verify-ok";
       } else if (st.poStatus === "failed") {
         stateClass = " rmd-po-status-err";
-      } else if (st.poStatus === "cancelled" || st.poCancelError) {
+      } else if (st.poStatus === "cancelled" || st.poStatus === "paused" || st.poCancelError) {
         stateClass = " rmd-po-status-warn rmd-verify-warn";
       }
       inner = '<span class="rmd-po-status-text' + stateClass + '">' + esc(statusText) + '</span>';
@@ -571,7 +592,10 @@
         inner += ' <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="po-cancel">Cancel</button>';
       }
     }
-    return '<div class="rmd-po-status" aria-live="polite">' + inner + '</div>';
+    var privLine = useOnDeviceDraft()
+      ? '<div class="rmd-muted rmd-device-privacy" style="font-size:12px;margin-top:4px;">' + esc((G && G.SMD_RMD_JOBS && G.SMD_RMD_JOBS.DEVICE_PRIVACY_LINE) || "Runs on this device. Your PDFs and patient data are read here and never uploaded. Works offline.") + '</div>'
+      : "";
+    return '<div class="rmd-po-status" aria-live="polite">' + inner + privLine + '</div>';
   }
 
   function clearPoPoll() {
@@ -703,6 +727,9 @@
     var h = [];
     h.push('<div class="rmd-po-block">');
     h.push('  <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="full-draft-po"' + (isPoActive ? ' disabled="disabled"' : '') + '>Full draft (PaperOrchestra)</button>');
+    if (!isPoActive && st.poResumeCheckpoint && isOnDeviceDraftEnabled()) {
+      h.push('  <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="po-continue">Continue draft</button>');
+    }
     h.push('  <p class="rmd-po-cost-note" data-rmd-po-cost>' + esc(poQuoteNote()) + '</p>');
     h.push(poConfirmHtml());
     h.push(poStatusHtml());
@@ -732,6 +759,247 @@
     });
   }
 
+  function draftJobsRunner() {
+    var j = G && G.SMD_RMD_JOBS;
+    return (j && typeof j.runWithFallback === "function") ? j : null;
+  }
+
+  function runOnDeviceDraft(target, jobBundle, resume) {
+    st.poStatus = "running";
+    st.poProgress = "Drafting on this device: outline";
+    st.poRetryText = null;
+    st.poError = null;
+    st.poCancelError = null;
+    st.poCancelled = false;
+    st.poResumeCheckpoint = null;
+    if (target) render(target);
+
+    var jobId = jobBundle && jobBundle.job && jobBundle.job.id;
+    var pid = apiProjectId();
+    var JR = draftJobsRunner();
+
+    if (!JR) {
+      return G.SMD_RMD_ONDEVICE_DRAFT.run(jobBundle, {
+        resume: !!resume,
+        onProgress: function (info) {
+          if (st.poCancelled) return;
+          if (info && info.label) {
+            st.poProgress = info.label;
+            if (target) render(target);
+          }
+        },
+        isCancelled: function () {
+          return !!st.poCancelled;
+        }
+      }).then(function () {
+        if (st.poCancelled) return;
+        st.poStatus = "succeeded";
+        st.poProgress = null;
+        st.poError = null;
+        st.poResumeCheckpoint = null;
+        reloadVersions(target);
+      }).catch(function (err) {
+        if (st.poCancelled || (err && err.code === "cancelled")) return;
+        st.poStatus = "failed";
+        st.poProgress = null;
+        st.poError = mapPoError(err);
+        st.poResumeCheckpoint = null;
+        if (target) render(target);
+      });
+    }
+
+    var deferredFail = null;
+    function wrappedApiRequest(method, url, body) {
+      if (method === "POST" && /\/v1\/jobs\/[^/]+\/device-fail$/.test(String(url || ""))) {
+        deferredFail = { url: url, body: body };
+        return Promise.resolve({ deferred: true });
+      }
+      return SMD.api.request(method, url, body);
+    }
+
+    return JR.runWithFallback("draft", function (resumeCtx) {
+      deferredFail = null;
+      return G.SMD_RMD_ONDEVICE_DRAFT.run(jobBundle, {
+        resume: !!(resume || (resumeCtx && resumeCtx.resume)),
+        signal: resumeCtx && resumeCtx.signal,
+        beginAiWait: resumeCtx && resumeCtx.beginAiWait,
+        endAiWait: resumeCtx && resumeCtx.endAiWait,
+        apiRequest: wrappedApiRequest,
+        onProgress: function (info) {
+          if (resumeCtx && resumeCtx.touchStep && info && info.step) {
+            resumeCtx.touchStep(info.step);
+          }
+          if (st.poCancelled) return;
+          if (info && info.label) {
+            st.poProgress = info.label;
+            if (target) render(target);
+          }
+        },
+        isCancelled: function () {
+          return !!st.poCancelled;
+        }
+      });
+    }, function (latestCp, fallbackMeta) {
+      if (!jobId || !SMD.api || typeof SMD.api.request !== "function") {
+        return Promise.reject(new Error("Missing job ID for cloud continuation"));
+      }
+      return SMD.api.request("POST", "/v1/jobs/" + encodeURIComponent(jobId) + "/to-cloud", {
+        fallback: fallbackMeta
+      }).then(function (cloudRes) {
+        st.poStatus = "queued";
+        st.poRetryText = null;
+        st.poProgress = "Continuing draft in StewardMD cloud...";
+        st.poError = null;
+        if (target) render(target);
+        startPoPoll(target, jobId);
+        return cloudRes;
+      });
+    }, {
+      jobKey: "runner:draft:" + (jobId || pid),
+      projectId: pid,
+      targetId: jobId || "draft",
+      engine: "ondevice:draft",
+      onStatus: function (info) {
+        if (st.poCancelled) return;
+        if (info && info.state === "retrying" && info.message) {
+          st.poRetryText = info.message;
+          st.poProgress = info.message;
+          if (target) render(target);
+        }
+      }
+    }).then(function (out) {
+      if (st.poCancelled) return;
+      st.poRetryText = null;
+      if (out && out.ok && out.source === "device") {
+        st.poStatus = "succeeded";
+        st.poProgress = null;
+        st.poError = null;
+        st.poResumeCheckpoint = null;
+        reloadVersions(target);
+        return;
+      }
+      if (out && out.ok && out.source === "cloud") {
+        return;
+      }
+      st.poProgress = null;
+      var outState = out && out.state;
+      if ((outState === "cancelled_to_device" || outState === "cloud_fallback_free" || outState === "cloud_fallback_limit") &&
+          SMD.api && typeof SMD.api.request === "function" && (deferredFail || jobId)) {
+        var dfUrl = deferredFail ? deferredFail.url : ("/v1/jobs/" + encodeURIComponent(jobId) + "/device-fail");
+        var dfStep = (deferredFail && deferredFail.body && deferredFail.body.step) || "validate";
+        deferredFail = null;
+        SMD.api.request("POST", dfUrl, { code: "device_failed", step: dfStep }).catch(function () {});
+      }
+      if (outState === "cancelled_to_device") {
+        st.poStatus = "paused";
+        st.poError = null;
+        checkResumeCheckpoint(target, pid);
+        if (target) render(target);
+        return;
+      }
+      st.poStatus = "failed";
+      st.poError = (out && out.message) || "Could not continue to cloud.";
+      checkResumeCheckpoint(target, pid);
+      if (target) render(target);
+    }).catch(function (err) {
+      st.poRetryText = null;
+      if (st.poCancelled || (err && err.code === "cancelled")) return;
+      if (deferredFail && err && err.rmdState === "data_problem" && SMD.api && typeof SMD.api.request === "function") {
+        SMD.api.request("POST", deferredFail.url, deferredFail.body).catch(function () {});
+      }
+      st.poProgress = null;
+      if (err && err.rmdState === "offline") {
+        st.poStatus = "paused";
+        st.poError = "Offline. Saved on this device where it stopped.";
+        checkResumeCheckpoint(target, pid);
+        if (target) render(target);
+        return;
+      }
+      st.poStatus = "failed";
+      st.poError = mapPoError(err);
+      st.poResumeCheckpoint = null;
+      if (target) render(target);
+    });
+  }
+
+  function checkResumeCheckpoint(container, pid) {
+    var cp = G && G.SMD_RMD_CHECKPOINT;
+    if (!isOnDeviceDraftEnabled() || !cp || typeof cp.list !== "function") {
+      st.poResumeCheckpoint = null;
+      return Promise.resolve(null);
+    }
+    return cp.list("draft:").then(function (items) {
+      var found = null;
+      for (var i = 0; i < (items || []).length; i++) {
+        var rec = items[i] && items[i].value;
+        if (!rec || rec.projectId !== pid) continue;
+        if (rec.status === "succeeded" || rec.status === "cancelled" || rec.finished === true) continue;
+        if (!found || (rec.updatedAt || "") > (found.updatedAt || "")) {
+          found = rec;
+        }
+      }
+      st.poResumeCheckpoint = found;
+      if (found && container && st.projectId === activeProjectId()) render(container);
+      return found;
+    }).catch(function () {
+      return null;
+    });
+  }
+
+  function continuePoDraft(container) {
+    var cp = st.poResumeCheckpoint;
+    var target = container || lastContainer;
+    if (!cp || !cp.jobId || !SMD.api || typeof SMD.api.request !== "function") return;
+    if (!useOnDeviceDraft()) return;
+    if (st.poCreating || st.poStatus === "queued" || st.poStatus === "running") return;
+
+    st.poCreating = true;
+    st.poStatus = "running";
+    st.poProgress = "Drafting on this device: resuming";
+    st.poJobId = cp.jobId;
+    st.poError = null;
+    if (target) render(target);
+
+    SMD.api.request("GET", "/v1/jobs/" + encodeURIComponent(cp.jobId)).then(function (res) {
+      var job = (res && res.job) || res;
+      if (!job || (job.status !== "queued" && job.status !== "running")) {
+        st.poCreating = false;
+        st.poProgress = null;
+        st.poResumeCheckpoint = null;
+        if (G.SMD_RMD_CHECKPOINT && typeof G.SMD_RMD_CHECKPOINT.remove === "function") {
+          G.SMD_RMD_CHECKPOINT.remove("draft:" + cp.jobId).catch(function () {});
+          G.SMD_RMD_CHECKPOINT.remove("runner:draft:" + cp.jobId).catch(function () {});
+        }
+        if (job && job.status === "succeeded") {
+          st.poStatus = "succeeded";
+          reloadVersions(target);
+        } else if (job && job.status === "cancelled") {
+          st.poStatus = "cancelled";
+          if (target) render(target);
+        } else {
+          st.poStatus = "failed";
+          st.poError = mapPoError(job);
+          if (target) render(target);
+        }
+        return;
+      }
+      return SMD.api.request("POST", "/v1/jobs/" + encodeURIComponent(cp.jobId) + "/token").then(function (tokRes) {
+        st.poCreating = false;
+        return runOnDeviceDraft(target, {
+          job: job,
+          manifest: cp.manifest,
+          token: tokRes && tokRes.token
+        }, true);
+      });
+    }).catch(function (err) {
+      st.poCreating = false;
+      st.poProgress = null;
+      st.poStatus = "failed";
+      st.poError = mapPoError(err);
+      if (target) render(target);
+    });
+  }
+
   function startPoDraft(container) {
     if (st.poCreating || st.poStatus === "queued" || st.poStatus === "running") return;
     var target = container || lastContainer;
@@ -744,6 +1012,8 @@
     clearPoPoll();
     st.poCreating = true;
     st.poStatus = "queued";
+    st.poProgress = null;
+    st.poCancelled = false;
     st.poError = null;
     st.poJobId = null;
     st.poCancelling = false;
@@ -754,10 +1024,12 @@
 
     var pid = encodeURIComponent(apiProjectId());
     var randKey = "po_" + Date.now() + "_" + Math.random().toString(36).slice(2, 10);
+    var onDevice = useOnDeviceDraft();
     var body = {
       kind: "manuscript_draft",
       idempotencyKey: randKey
     };
+    if (onDevice) body.runner = "device";
     var store = SMD.store;
     /* The job reads studies and runs on the server. Let the immediate study
      * and run writes land first so a fresh Calculate is included. */
@@ -785,6 +1057,8 @@
         st.poStatus = "failed";
         st.poError = mapPoError(job);
         if (target) render(target);
+      } else if (onDevice && res && res.manifest && res.token) {
+        runOnDeviceDraft(target, { job: job, manifest: res.manifest, token: res.token }, false);
       } else {
         if (target) render(target);
         if (jid) {
@@ -794,6 +1068,7 @@
     }).catch(function (err) {
       st.poCreating = false;
       st.poStatus = "failed";
+      st.poProgress = null;
       st.poError = mapPoError(err);
       clearPoPoll();
       if (target) render(target);
@@ -806,12 +1081,19 @@
     if (!jid || !SMD.api || typeof SMD.api.request !== "function") return;
     st.poCancelling = true;
     st.poCancelError = null;
+    st.poCancelled = true;
 
     SMD.api.request("POST", "/v1/jobs/" + encodeURIComponent(jid) + "/cancel").then(function () {
       clearPoPoll();
       st.poCancelling = false;
       st.poStatus = "cancelled";
+      st.poProgress = null;
       st.poCancelError = null;
+      st.poResumeCheckpoint = null;
+      if (G.SMD_RMD_CHECKPOINT && typeof G.SMD_RMD_CHECKPOINT.remove === "function") {
+        G.SMD_RMD_CHECKPOINT.remove("draft:" + jid).catch(function () {});
+        G.SMD_RMD_CHECKPOINT.remove("runner:draft:" + jid).catch(function () {});
+      }
       if (target) render(target);
     }).catch(function () {
       st.poCancelling = false;
@@ -832,6 +1114,9 @@
       clearPoPoll();
       st.poJobId = null;
       st.poStatus = null;
+      st.poProgress = null;
+      st.poCancelled = false;
+      st.poResumeCheckpoint = null;
       st.poError = null;
       st.poCreating = false;
       st.poCancelling = false;
@@ -877,6 +1162,7 @@
         if (!foundSel && mSecs.length) st.selectedSectionId = mSecs[0].id;
       }
       render(container);
+      checkResumeCheckpoint(container, mpid);
     }).catch(function (err) {
       if (mySeq !== seq) return;
       st.loading = false;
@@ -898,6 +1184,7 @@
         if (!foundSelC && mSecsC.length) st.selectedSectionId = mSecsC[0].id;
       }
       render(container);
+      checkResumeCheckpoint(container, mpid);
     });
   }
 
@@ -1016,6 +1303,7 @@
         changes: changes
       };
       render(container);
+      checkResumeCheckpoint(container, mpid);
     }).catch(function (err) {
       st.polishBusy = false;
       st.polishError = manuscriptAiError(err, "MaiK could not polish the wording.");
@@ -1247,6 +1535,7 @@
         if (resp.status >= 200 && resp.status < 300 && resp.data && resp.data.draft && resp.data.draft.sections) {
           var secMap = resp.data.draft.sections;
           var fullDraftText = "";
+          var draftedHeadings = [];
 
           if (!st.manuscript) st.manuscript = defaultManuscript(pid);
           if (!st.manuscript.sections) st.manuscript.sections = [];
@@ -1263,6 +1552,7 @@
             var existingSec = getSection(key);
             var markPrefix = "Drafted by MaiK, check it:\n";
             if (existingSec) {
+              draftedHeadings.push(existingSec.heading || key);
               if (existingSec.text && existingSec.text.trim()) {
                 existingSec.text = existingSec.text + "\n\n" + markPrefix + textVal;
               } else {
@@ -1273,6 +1563,7 @@
                             key === "patientPerspective" ? "Patient Perspective" :
                             key === "learningPoints" ? "Learning Points" :
                             key.charAt(0).toUpperCase() + key.slice(1);
+              draftedHeadings.push(heading);
               st.manuscript.sections.push({
                 id: key,
                 heading: heading,
@@ -1287,6 +1578,7 @@
             st.caseReportMissingNumbers = [];
           }
 
+          recordAiProvenance(resp.data.model, draftedHeadings);
           saveLocalManuscript(localPid || st.projectId || pid, st.manuscript);
           if (getSection("casePresentation")) st.selectedSectionId = "casePresentation";
           st.saveNotice = "Drafted by MaiK. Review and verify every clinical detail before approving.";
@@ -1295,13 +1587,37 @@
         } else {
           sendBtn.disabled = false;
           var msg = (resp.data && resp.data.error && resp.data.error.message) || "Draft request failed";
+          if (resp.data && resp.data.error && resp.data.error.code === "publication_consent_required") {
+            showConsentBlockedInModal(msg);
+            return;
+          }
           if (statusMsg) statusMsg.innerHTML = '<span style="color:var(--rmd-bad);">' + esc(msg) + '</span>';
         }
       }).catch(function (err) {
         sendBtn.disabled = false;
+        if (err && err.code === "publication_consent_required") {
+          showConsentBlockedInModal(err.message);
+          return;
+        }
         if (statusMsg) statusMsg.innerHTML = '<span style="color:var(--rmd-bad);">Error: ' + esc(err.message || String(err)) + '</span>';
       });
     };
+
+    /* F-12: the server refused the draft because publication consent is not
+     * confirmed. Offer the jump to the Publication consent screen. */
+    function showConsentBlockedInModal(message) {
+      sendBtn.disabled = false;
+      if (!statusMsg) return;
+      statusMsg.innerHTML = '<span style="color:var(--rmd-bad);">' + esc(message || PUBLICATION_CONSENT_MSG) + '</span> ' +
+        '<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" id="rmd-cr-open-pubconsent">Open Publication consent</button>';
+      var openBtn = statusMsg.querySelector("#rmd-cr-open-pubconsent");
+      if (openBtn) {
+        openBtn.onclick = function () {
+          closeModal();
+          SMD.navigate("pubconsent", {});
+        };
+      }
+    }
   }
 
   /* Ask MaiK to draft a manuscript for review / primary projects via the
@@ -1327,7 +1643,7 @@
     });
   }
 
-  function applyManuscriptDraft(container, draft) {
+  function applyManuscriptDraft(container, draft, res) {
     var d = draft || {};
     if (d.status === "failed" || d.status === "error") {
       throw { message: "MaiK could not draft the manuscript. Try again." };
@@ -2134,10 +2450,78 @@
     return "<w:p><w:r>" + rpr + '<w:t xml:space="preserve">' + xmlEsc(text) + "</w:t></w:r></w:p>";
   }
 
+  /* ---------- F-10: AI-use disclosure and author rules ---------- */
+
+  var AI_AUTHOR_NAMES = {
+    maik: 1, stewardmd: 1, researchmd: 1, chatgpt: 1,
+    gpt: 1, gemini: 1, claude: 1, openai: 1
+  };
+  var PUBLICATION_CONSENT_MSG = "Confirm the patient's written consent for publication first (Publication consent step).";
+
+  function isAiAuthorName(name) {
+    return !!AI_AUTHOR_NAMES[String(name == null ? "" : name).replace(/^\s+|\s+$/g, "").toLowerCase()];
+  }
+
+  function todayLocalIso() {
+    var d = new Date();
+    var p = function (n) { return (n < 10 ? "0" : "") + n; };
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+  }
+
+  function appVersionString() {
+    try {
+      return String((G.SMD_APP_VERSION || SMD.version || "unspecified") || "unspecified");
+    } catch (e) {
+      return "unspecified";
+    }
+  }
+
+  /* Mandatory in every ResearchMD Word export. <model> comes from the
+   * manuscript's AI provenance (the server returns the model name with each
+   * AI draft and the client persists it on the manuscript). */
+  function aiDisclosureText(ai) {
+    var prov = (ai && typeof ai === "object") ? ai : {};
+    var model = String(prov.model || "").replace(/^\s+|\s+$/g, "");
+    var did;
+    if (prov.whatItDid) {
+      did = String(prov.whatItDid);
+    } else if (prov.draftedSections && prov.draftedSections.length) {
+      did = "It drafted the sections: " + prov.draftedSections.join(", ");
+    } else {
+      /* No record of AI drafting on this document: do not claim it was used. */
+      return "AI use disclosure: this document was prepared in StewardMD ResearchMD (app version " + appVersionString() +
+        "), which offers AI drafting (MaiK AI). Any AI-assisted text in it was reviewed and verified by the named authors, who take responsibility for it. AI is not an author.";
+    }
+    return "AI use disclosure: parts of this document were drafted or edited with StewardMD ResearchMD (MaiK AI, model " +
+      (model || "unspecified") + ", app version " + appVersionString() + ") on " + todayLocalIso() + ". " + did +
+      ". The named authors reviewed and verified all content and take responsibility for it. AI is not an author.";
+  }
+
+  /* Records what AI did on this manuscript so the export disclosure can name
+   * the model and the sections it drafted. */
+  function recordAiProvenance(model, draftedSections) {
+    if (!st.manuscript) st.manuscript = defaultManuscript(st.projectId);
+    var prev = (st.manuscript.ai && typeof st.manuscript.ai === "object") ? st.manuscript.ai : {};
+    st.manuscript.ai = {
+      model: String(model || prev.model || ""),
+      draftedSections: Array.isArray(draftedSections)
+        ? draftedSections.slice(0, 40)
+        : (prev.draftedSections || [])
+    };
+    return st.manuscript.ai;
+  }
+
   function buildDocxBytes(man) {
     var parts = [];
     parts.push(docxParagraph(man.title || "Manuscript", true, 32));
-    if (man.authors && man.authors.length) parts.push(docxParagraph(man.authors.join(", "), false, 0));
+    if (man.authors && man.authors.length) {
+      /* F-10: an AI tool name is rejected from the byline. */
+      var humanAuthors = [];
+      for (var a = 0; a < man.authors.length; a++) {
+        if (!isAiAuthorName(man.authors[a])) humanAuthors.push(man.authors[a]);
+      }
+      if (humanAuthors.length) parts.push(docxParagraph(humanAuthors.join(", "), false, 0));
+    }
     if (man.affiliations) parts.push(docxParagraph(man.affiliations, false, 0));
     for (var i = 0; i < man.sections.length; i++) {
       var sec = man.sections[i];
@@ -2147,6 +2531,7 @@
         parts.push(docxParagraph(lines[j], false, 0));
       }
     }
+    parts.push(docxParagraph(aiDisclosureText(man.ai), false, 0));
     var doc = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
       '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>' +
       parts.join("") +
@@ -2186,6 +2571,7 @@
     st.exportNotice = "Checking the paper before download...";
     st.exportNoticeKind = "info";
     st.gateFailures = [];
+    st.consentBlocked = false;
     render(container);
 
     var pid = encodeURIComponent(apiProjectId());
@@ -2232,6 +2618,13 @@
             (err && err.current && err.current.gateFailures);
           if (fails && fails.length) {
             showGates(fails);
+          } else if (err && err.code === "publication_consent_required") {
+            /* F-12: case-report export needs the consent attestation first. */
+            st.exporting = false;
+            st.consentBlocked = true;
+            st.exportNotice = err.message || PUBLICATION_CONSENT_MSG;
+            st.exportNoticeKind = "warn";
+            render(container);
           } else {
             st.exporting = false;
             st.exportNotice = SMD.p2.friendlyError(err).message;
@@ -2528,6 +2921,11 @@
         (st.exportNoticeKind === "error" ? "rmd-banner-error" : "rmd-banner-warn");
       h.push('<div class="rmd-banner ' + noticeClass + '" role="' + (st.exportNoticeKind === "info" ? "status" : "alert") + '"><span>' + esc(st.exportNotice) + '</span></div>');
     }
+    if (st.consentBlocked) {
+      h.push('<div style="margin: 0 0 12px;">');
+      h.push('  <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="open-pubconsent">Open Publication consent</button>');
+      h.push('</div>');
+    }
 
     if (isLocked) {
       h.push('<div class="rmd-locked-banner">');
@@ -2807,6 +3205,12 @@
           cancelPoJob(container);
         };
       }
+      var poContinue = container.querySelector('[data-rmd="po-continue"]');
+      if (poContinue) {
+        poContinue.onclick = function () {
+          continuePoDraft(container);
+        };
+      }
     }
 
     var btnSave = container.querySelector('[data-rmd="section-save"]');
@@ -2841,6 +3245,14 @@
     if (btnExport) {
       btnExport.onclick = function () {
         exportDocx(container);
+      };
+    }
+
+    var btnPubConsent = container.querySelector('[data-rmd="open-pubconsent"]');
+    if (btnPubConsent) {
+      btnPubConsent.onclick = function () {
+        st.consentBlocked = false;
+        SMD.navigate("pubconsent", {});
       };
     }
 

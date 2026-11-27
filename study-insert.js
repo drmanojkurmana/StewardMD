@@ -288,6 +288,23 @@
     });
   }
 
+  function clearSelection() {
+    selectedItemId = null;
+    Array.prototype.forEach.call(D.querySelectorAll(".st-item.selected"), function (el) { el.classList.remove("selected"); });
+  }
+  // An empty text box goes quietly: marked gone (strokes and items are never hard-deleted), no undo step, no toast.
+  function dropEmptyText(it) {
+    var v = V(); if (!v || !it || it.gone) return;
+    G.setTimeout(function () {
+      var fb = D.getElementById("stFormatBar"), a = D.activeElement;
+      if (fb && fb.contains(a)) return;   // a format button took focus: the box is still being edited
+      it.gone = true; S().put("items", it);
+      if (selectedItemId === it.id) selectedItemId = null;
+      hideFormatBar();
+      var pgN = S().posOf(it.page);
+      if (v.pg && v.pg[pgN]) renderPageItems(pgN, v.pg[pgN]);
+    }, 150);
+  }
   function deleteItemById(dId) {
     var v = V(), h = S() && S().host ? S().host() : null;
     if (v && v.items) {
@@ -449,6 +466,14 @@
       p.itemLayer.addEventListener("pointerdown", function (e) {
         if (!V() || V().tool !== "text") return;
         if (e.target.closest(".st-item")) return;
+        // A tap off the box being typed in ends the typing; it does not drop a second, empty box there.
+        var ae = D.activeElement;
+        if ((ae && ae.classList && ae.classList.contains("st-text-editable")) || selectedItemId) {
+          if (ae && ae.blur) ae.blur();
+          clearSelection();
+          hideFormatBar();
+          return;
+        }
         // User tapped empty page area while text tool is active: create text box
         var rect = p.el.getBoundingClientRect();
         var rx = Math.max(0.02, Math.min(0.9, (e.clientX - rect.left) / rect.width));
@@ -551,7 +576,13 @@
 
       textDiv.addEventListener("blur", function () {
         d.text = textDiv.textContent;
+        // A box left empty is not kept (it was invisible on the page and only showed up as stray handles).
+        if (!String(d.text || "").trim()) { dropEmptyText(item); return; }
         S().put("items", item);
+        G.setTimeout(function () {
+          var a = D.activeElement, fb = D.getElementById("stFormatBar");
+          if (!(a && a.classList && a.classList.contains("st-text-editable")) && !(fb && fb.contains(a))) hideFormatBar();
+        }, 200);
       });
 
       content.appendChild(textDiv);
@@ -811,7 +842,8 @@
     function updatePos() {
       if (G.visualViewport) {
         var bottomOffset = Math.max(0, G.innerHeight - G.visualViewport.height - G.visualViewport.offsetTop);
-        bar.style.bottom = bottomOffset + "px";
+        // On the keyboard while typing; otherwise study.css floats it just above the tool dock.
+        bar.style.bottom = bottomOffset > 60 ? bottomOffset + "px" : "";
       }
     }
     if (G.visualViewport) {
@@ -1372,6 +1404,7 @@
   function syncTb(v, root) {
     if (v && v.tool !== "laser" && laserStrokes.length) clearLaser(); /* Keep-mode trails live only while the laser is the tool */
     if (!v || !root) return;
+    if (v.tool !== "text") hideFormatBar();
     var insertOpt = root.querySelector("#stInsertOptions");
     if (!insertOpt) return;
 
