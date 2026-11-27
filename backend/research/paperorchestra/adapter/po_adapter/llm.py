@@ -59,6 +59,8 @@ class GatewayError(Exception):
 
 
 GATEWAY_FRAMING_TOKENS = 1000
+# Must stay above the gateway's own call deadline (LLM_CALL_DEADLINE_MS = 120 s in _gateway.js).
+GATEWAY_HTTP_TIMEOUT_SECONDS = 150.0
 
 
 def estimate_tokens(text: str) -> int:
@@ -220,7 +222,7 @@ class GatewayLLMClient:
             for attempt in range(attempts):
                 try:
                     resp = client.post(self.gateway_url, content=raw_body,
-                                       headers=headers, timeout=60.0)
+                                       headers=headers, timeout=GATEWAY_HTTP_TIMEOUT_SECONDS)
                 except httpx.HTTPError as exc:
                     last_error = GatewayError("gateway_transport", str(exc))
                 else:
