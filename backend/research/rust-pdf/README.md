@@ -5,26 +5,32 @@ A Rust copy of the ResearchMD server's PDF reader
 pdfminer.six 20260107). It returns the same `result.json` page shape: page
 size, words with boxes, page text and tables, value for value.
 
-Not wired into the app or the worker yet. Nothing here changes what runs live.
+## Where it runs
 
-## How it fits with on-device reading (PRs #2782, #2785)
+- **Server backup reader**: the research container's `extract.py` calls the
+  `.so` through `research_worker/rust_pdf.py` (built by `worker/Dockerfile`).
+  pdfplumber is no longer installed.
+- **ResearchMD on the phone**: `research-ondevice-pdf.js` loads the `.wasm`
+  (`vendor/rust-pdf/`) and uses its pages, tables included, so a PDF read on
+  the phone gives the same result as one read by the server. Scanned pages
+  still go to Apple Vision / ML Kit, and any Rust failure falls back to pdf.js.
+- **PrepNucleus deck creation**: `prep-source.js` uses `rs_lines` (lines with
+  font sizes, in content order, as pdf.js gives them) to find headings and
+  sentences. Files over 8 MB, which are opened in pieces, stay on pdf.js.
 
-The app's own reader (`research-ondevice-pdf.js`, pdf.js plus Apple Vision /
-ML Kit for scans) stays the main path on phones and Macs, untouched. This crate
-is for the server side: the research container that reads a PDF when the
-device read fails, and for uploads that still go to the server. Its output is
-identical to today's server output, so nothing downstream changes. The device
-path returns `tables: []`; the server path (Python or this crate) finds tables.
+Kill switch in the app: `localStorage.smd_rust_pdf = "0"` (or `?rust_pdf=0`).
 
-A `.wasm` build is included in case the app later wants server-identical
-tables on the device, but nothing loads it today.
+The `.wasm` in `vendor/rust-pdf/` is built with
+`cargo build --release --target wasm32-unknown-unknown` and copied there.
 
-## What it leaves to Python
+## What it leaves to the caller
 
 - Pages with no text layer: returned with `"needs_ocr": true` (and
-  `"needs_ocr": true` at the top), for Tesseract, as extract.py does today.
+  `"needs_ocr": true` at the top), for OCR (Tesseract on the server, the
+  phone's own OCR in the app).
 - Files that use something this crate does not copy exactly come back as
-  `{"unsupported": "<reason>"}`, meaning "use pdfplumber for this file":
+  `{"unsupported": "<reason>"}` (the server then reads them with PyMuPDF,
+  words and text without tables; the app with pdf.js):
   vertical writing, predefined CJK CMaps, a font whose only Unicode map is
   inside an embedded TrueType file, a file lopdf cannot open, or a number
   whose exact value lopdf's f32 parsing lost and the file does not give back.
@@ -64,12 +70,13 @@ cargo build --release --target wasm32-unknown-unknown
 node js/run-file.js target/wasm32-unknown-unknown/release/research_pdf.wasm paper.pdf
 ```
 
-Compare with Python (needs pdfplumber 0.11.11 in the venv):
+Compare with the old pdfplumber reader (needs pdfplumber 0.11.11 in the venv; the
+script reads that version of extract.py from git history):
 
 ```
-python rust/research-pdf/scripts/make_test_pdfs.py /tmp/tpdf
-python rust/research-pdf/scripts/compare_python.py \
-  rust/research-pdf/target/release/examples/run_file /tmp/tpdf/*.pdf
+python backend/research/rust-pdf/scripts/make_test_pdfs.py /tmp/tpdf
+python backend/research/rust-pdf/scripts/compare_python.py \
+  backend/research/rust-pdf/target/release/examples/run_file /tmp/tpdf/*.pdf
 ```
 
 ## Calling it
@@ -80,19 +87,7 @@ max_bytes)`, `rs_result_len`, `rs_free`. Input is the PDF bytes, output is
 UTF-8 JSON. `js/research-pdf-wasm.js` is a small loader for a WebView, a
 Cloudflare Worker or Node.
 
-From Python with ctypes, a sketch of how the worker could use it:
-
-```python
-lib = ctypes.CDLL("libresearch_pdf.so")
-lib.rs_alloc.restype = ctypes.c_void_p
-lib.rs_run_limits.restype = ctypes.c_void_p
-lib.rs_run_limits.argtypes = [ctypes.c_void_p, ctypes.c_size_t, ctypes.c_size_t, ctypes.c_size_t]
-lib.rs_free.argtypes = [ctypes.c_void_p, ctypes.c_size_t]
-ptr = lib.rs_alloc(len(data)); ctypes.memmove(ptr, data, len(data))
-out = lib.rs_run_limits(ptr, len(data), 60, 25 * 1024 * 1024)
-n = lib.rs_result_len(); result = json.loads(ctypes.string_at(out, n)); lib.rs_free(out, n)
-# "unsupported" -> run today's pdfplumber path; pages with needs_ocr -> Tesseract
-```
+From Python: `backend/research/worker/research_worker/rust_pdf.py`.
 
 ## Layout
 
@@ -105,4 +100,5 @@ n = lib.rs_result_len(); result = json.loads(ctypes.string_at(out, n)); lib.rs_f
   path
 - `src/tablefind.rs`: pdfplumber `find_tables()` and `Table.extract()`
 - `src/lib.rs`: page tree, page boxes, the result JSON
+- `src/lines.rs`: PrepNucleus lines (text and font size, pdf.js order)
 - `src/ffi.rs`: C / wasm exports

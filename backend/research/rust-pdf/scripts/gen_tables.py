@@ -6,7 +6,7 @@ decodes text exactly as pdfplumber (which uses pdfminer.six) does:
 - Standard, MacRoman, WinAnsi and PDFDoc encodings
 - metrics (descent, ascent, widths) of the standard 14 fonts and their aliases
 
-    python3 rust/research-pdf/scripts/gen_tables.py > rust/research-pdf/src/tables.rs
+    python3 backend/research/rust-pdf/scripts/gen_tables.py > backend/research/rust-pdf/src/tables.rs
 """
 import pdfminer
 from pdfminer.encodingdb import EncodingDB

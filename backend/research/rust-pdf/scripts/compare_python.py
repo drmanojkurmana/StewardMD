@@ -3,6 +3,10 @@
 Usage: python compare_python.py RUN_FILE_BINARY PDF [PDF ...]
 Run from the repo root with a venv that has pdfplumber 0.11.
 
+The reference is the pdfplumber version of extract.py, read from git history
+(REF below): the worker itself now uses this crate, so comparing against the
+current file would compare the crate with itself.
+
 OCR is switched off on the Python side (Rust leaves it to Python), so this
 compares page sizes, words with boxes, page text and tables, exactly. A page
 Rust marks needs_ocr must be one Python would OCR.
@@ -13,8 +17,14 @@ import subprocess
 import sys
 import time
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../../../backend/research/worker"))
-from research_worker import extract as ex  # noqa: E402
+import types  # noqa: E402
+
+# Last commit where extract.py read PDFs with pdfplumber.
+REF = os.environ.get("EXTRACT_REF", "f7dcae3b8b3f53937f245f51252a62c2ca14a5c8")
+_src = subprocess.run(["git", "show", REF + ":backend/research/worker/research_worker/extract.py"],
+                      capture_output=True, check=True, text=True).stdout
+ex = types.ModuleType("extract_pdfplumber_reference")
+exec(compile(_src, "extract_pdfplumber_reference.py", "exec"), ex.__dict__)
 
 ex._ocr_page = lambda page, deadline, cancel: ([], "")
 

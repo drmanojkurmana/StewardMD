@@ -20,6 +20,7 @@ pub mod tables;
 pub mod tables_cmap;
 pub mod tablefind;
 pub mod words;
+pub mod lines;
 pub mod ffi;
 
 
@@ -285,6 +286,61 @@ pub fn extract(data: &[u8], limits: &Limits) -> Result<Value, Error> {
         return Err(Error::Unsupported("real_precision"));
     }
     Ok(v)
+}
+
+/// Stream-order text lines with font sizes for the chosen pages (1-based),
+/// for PrepNucleus deck creation: `{"pages": [{"n", "lines": [{"tx", "size"}]}]}`.
+/// Pages that are out of range are left out.
+pub fn extract_lines(data: &[u8], wanted: &[usize], max_bytes: usize) -> Result<Value, Error> {
+    if data.len() > max_bytes {
+        return Err(Error::Code("ceiling_bytes"));
+    }
+    let mut doc = Document::load_mem(data).map_err(|_| Error::Unsupported("load_failed"))?;
+    if doc.is_encrypted() {
+        doc.decrypt("").map_err(|_| Error::Unsupported("encrypted"))?;
+    }
+    pdfobj::load_reals(data, &doc);
+    let r = (|| {
+        let pages = collect_pages(&doc)?;
+        let mut fonts = FontCache::new();
+        let mut out = Vec::new();
+        for &n in wanted {
+            if n == 0 || n > pages.len() {
+                continue;
+            }
+            let attrs = &pages[n - 1];
+            let ctm = page_ctm(&doc, attrs)?;
+            let resources = attrs.get(b"Resources").ok().and_then(|o| deref(&doc, o).as_dict().ok());
+            let (content, ids) = page_contents(&doc, attrs)?;
+            let mut it = Interp::new(&doc, &mut fonts);
+            let mut anc = ids;
+            it.run(resources, &content, ctm, &mut anc)?;
+            let ls: Vec<Value> = lines::page_lines(&it.chars)
+                .into_iter()
+                .map(|(tx, size)| json!({ "tx": tx, "size": size }))
+                .collect();
+            out.push(json!({ "n": n, "lines": ls }));
+        }
+        Ok(json!({ "pages": out, "total": pages.len() }))
+    })();
+    pdfobj::clear_reals();
+    r
+}
+
+fn page_ctm(doc: &Document, attrs: &Dictionary) -> Result<M, Error> {
+    let rotate_raw = match attrs.get(b"Rotate").ok().map(|o| deref(doc, o)) {
+        None => 0.0,
+        Some(o) => num(doc, o).ok_or(Error::Unsupported("rotate"))?,
+    };
+    let rot_miner = ((rotate_raw as i64 + 360) % 360 + 360) % 360;
+    let mb = rect_of(doc, attrs.get(b"MediaBox").ok()).ok_or(Error::Unsupported("mediabox"))?;
+    let [x0, y0, x1, y1] = mb;
+    Ok(match rot_miner {
+        90 => [0.0, -1.0, 1.0, 0.0, -y0, x1],
+        180 => [-1.0, 0.0, 0.0, -1.0, x1, y1],
+        270 => [0.0, 1.0, -1.0, 0.0, y1, -x0],
+        _ => [1.0, 0.0, 0.0, 1.0, -x0, -y0],
+    })
 }
 
 fn read_doc(doc: &Document, sha: &str, limits: &Limits) -> Result<Value, Error> {
