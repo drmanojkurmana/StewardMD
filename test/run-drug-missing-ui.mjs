@@ -28,6 +28,7 @@ try {
   await page.evaluate(() => { ["smdBootSplash", "introPoster", "splash", "accountGate", "introOverlay"].forEach((k) => { const e = document.getElementById(k); if (e) e.remove(); }); MEDDB.openList(); });
   await page.waitForSelector("#dbSearch");
   async function search(q) {
+    if (!(await page.$("#dbSearch"))) { await page.evaluate(() => { MEDDB.close(); MEDDB.openList(); }); await page.waitForSelector("#dbSearch"); }
     await page.fill("#dbSearch", q);
     await page.waitForFunction(() => { const r = document.querySelector("#dbResults"); return r && !/Searching/.test(r.textContent) && r.textContent.trim().length > 0; }, null, { timeout: 15000 });
     await sleep(400);
@@ -47,6 +48,23 @@ try {
   await search("Oxandrolone");
   await page.click('#dbResults .db-comp[data-comp="oxandrolone"]');
   await page.waitForFunction(() => /peliosis hepatis/i.test(document.body.innerText), null, { timeout: 15000 }).then(() => ok(true, "opening Oxandrolone shows its FDA label (boxed warning)"), () => ok(false, "opening Oxandrolone shows its FDA label"));
+  // Draft monographs (data/authored/, smd_drug_drafts default OFF): hidden until the flag is on.
+  const offRes = await search("Oxetacaine");
+  ok(/No drugs match/.test(offRes), "drafts OFF: Oxetacaine (draft only) is not listed");
+  await page.evaluate(() => { localStorage.setItem("smd_drug_drafts", "1"); });
+  const onRes = await search("Oxetacaine");
+  ok(/Oxetacaine/.test(onRes) && /draft monograph/.test(onRes) && !/No drugs match/.test(onRes), "drafts ON: Oxetacaine is listed as a draft monograph");
+  await page.click('#dbResults .db-comp[data-comp="Oxetacaine"]');
+  await page.waitForFunction(() => /Draft monograph\./.test(document.body.innerText) && /gastritis/i.test(document.body.innerText), null, { timeout: 15000 })
+    .then(() => ok(true, "opening a draft shows the Draft banner and its content"), () => ok(false, "opening a draft shows the Draft banner"));
+  await sleep(1200);
+  await page.screenshot({ path: process.env.SHOT2 || join(process.env.TMPDIR || "/tmp", "drug-draft-oxetacaine.png") });
+  // A catalogue combination whose component is spelled differently resolves per component.
+  const combo = await page.evaluate(() => window.SMD_OFFLINE_CLINICAL && SMD_OFFLINE_CLINICAL.structured
+    ? SMD_OFFLINE_CLINICAL.structured("Piperacillin + Tazobactum").then((r) => JSON.stringify(r.components.map((c) => [c.name, !!c.data])))
+    : "no-structured");
+  ok(/\["Tazobactum",true\]/.test(combo || ""), "Piperacillin + Tazobactum: the Tazobactum component resolves (" + combo + ")");
+  await page.evaluate(() => localStorage.removeItem("smd_drug_drafts"));
 } finally { await browser.close(); srv.kill(); }
 console.log(fails ? `${fails} FAILED` : "ALL PASS");
 process.exit(fails ? 1 : 0);

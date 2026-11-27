@@ -492,7 +492,7 @@
     });
     if (!fresh.length) return "";
     return '<div class="db-sec-l">' + dbIco("flask") + ' Clinical monographs</div>' + fresh.map(function (x) {
-      var sub = [x.c, "monograph"].filter(Boolean).join(" · ");
+      var sub = [x.c, x.d ? "draft monograph" : "monograph"].filter(Boolean).join(" · ");
       return '<button class="db-comp" data-comp="' + esc(x.n) + '"><span class="db-comp-ic">' + dbIco("pills") +
         '</span><span class="db-comp-main"><span class="db-comp-name">' + esc(x.n) +
         '</span><span class="db-comp-sub">' + esc(sub) + '</span></span><span class="db-chev">' + dbIco("chev") + '</span></button>';
@@ -1084,6 +1084,9 @@
     function bl(a) { return '<ul class="gd-b">' + (a || []).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>'; }
     function S(ic, t, q, body, cls) { return '<div class="gd-sec' + (cls ? ' ' + cls : '') + '"><div class="gd-h">' + esc(t) + (q ? '<span class="gd-q">' + esc(q) + '</span>' : '') + '</div>' + body + '</div>'; }
     var H = "";
+    // StewardMD-authored draft (data/authored/, flag smd_drug_drafts): no regulatory label exists for
+    // this molecule, so say so above everything else rather than let it read like a label monograph.
+    if (g.status === "ai_drafted") H += '<div class="gd-draft"><b>Draft monograph.</b> No US, Canadian or EU drug label exists for this molecule. AI-drafted from published references and awaiting clinician review. Verify before prescribing.</div>';
     if (g.quick) H += S('⚡', 'Quick Facts', '10 seconds', '<div class="gd-qf">' + g.quick.map(function (p) { return '<div><div class="gd-qk">' + esc(p[0]) + '</div><div class="gd-qv">' + esc(p[1]) + '</div></div>'; }).join("") + '</div>');
     if (g.summary) H += S('📋', 'Summary', 'What is it?', '<div>' + esc(g.summary) + '</div>');
     if (g.indications) H += S('🎯', 'Indications', 'When?', bl(g.indications));
@@ -1149,6 +1152,7 @@
       ".db-msec-x .db-ico{width:15px;height:15px;vertical-align:middle;transition:transform .18s}.db-msec-h.open .db-msec-x .db-ico{transform:rotate(90deg)}",
       ".db-note{font:500 11.5px var(--sans,system-ui);color:var(--slate-soft,#888);margin:8px 2px 12px;line-height:1.5}",
       ".db-empty,.db-allshown{font:500 13px var(--sans,system-ui);color:var(--slate-soft,#888);padding:18px;text-align:center}",
+      ".gd-draft{margin:0 0 12px;padding:10px 12px;border-radius:10px;border:1px solid rgba(217,119,6,.45);background:rgba(245,158,11,.10);font:400 13px/1.45 var(--sans,system-ui);color:inherit}",
       ".db-empty-sub{font:400 12.5px/1.45 var(--sans,system-ui);margin:8px auto 0;max-width:34em;opacity:.85}",
       ".db-comp{display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:11px 13px;margin-bottom:8px;cursor:pointer}",
       ".db-comp-ic{font-size:19px}.db-comp-main{flex:1;min-width:0}",

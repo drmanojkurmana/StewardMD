@@ -166,6 +166,10 @@ const EXTRA_ALIASES = {
   "Trypsin Chymotrypsin": ["Trypsin"],
   "Theophylline": ["Choline Theophyllinate"],
   "capsaicin": ["Capsaicin Based Rubefacients"],
+  "Polio Vaccine": ["Poliomyelitis Virus Type 1", "Poliomyelitis Virus Type 2", "Poliomyelitis Virus Type 3"],
+  "Haemophilus Type B Conjugate Vaccine": ["Haemophilus Influenzae Type B Capsular Polysaccharide"],
+  "Human Papillomavirus Vaccine": ["Human Papillomavirus Bivalent Vaccine"],
+  "Snake Venom Antiserum": ["Standard Cobra Venom", "Standard Common Krait Venom", "Standard Russell's Viper Venom", "Standard Saw Scaled Viper Venom"],
 };
 
 const rows = [];
@@ -205,6 +209,25 @@ try {
     labelRows++;
   }
 } catch { /* no fda-labels directory: index covers the bundle only */ }
+/* StewardMD-authored DRAFT monographs (data/authored/, owner 2026-11-27): molecules in the Indian brand
+ * catalogue with no US, Canadian or EU label. Rows carry d:1; the runtime hides them unless the doctor
+ * turned on smd_drug_drafts, and the record itself carries status "ai_drafted" and a Draft banner. A
+ * regulatory record of the same name always wins: a draft is never listed beside one. */
+const draftDir = join(ROOT, "data", "authored");
+let draftRows = 0;
+try {
+  for (const f of readdirSync(draftDir).filter((x) => x.endsWith(".json"))) {
+    let g;
+    try { g = JSON.parse(readFileSync(join(draftDir, f), "utf8")); } catch { continue; }
+    const n = String(g.generic || "").trim();
+    const k = n.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+    if (!n || haveName.has(k)) continue;
+    if (g.status !== "ai_drafted") throw new Error(`data/authored/${f}: status must be "ai_drafted"`);
+    haveName.add(k);
+    rows.push({ n, a: Array.isArray(g.aliases) ? g.aliases.map(String) : [], c: trim(g.cls || "", 90), t: (g.tags || []).map(String), m: 0, d: 1 });
+    draftRows++;
+  }
+} catch (e) { if (e && /status must be/.test(e.message)) throw e; }
 {
   const byName = new Map(rows.map((r) => [r.n, r]));
   const missing = [];
@@ -251,13 +274,24 @@ const body = `(function () {
    * genuinely distinct products that differ by salt stay separate rows and both remain findable. */
   var SALT = /\\s+(sodium|potassium|calcium|disodium|hydrochloride|hcl|sulfate|sulphate|acetate|citrate|tartrate|maleate|besilate|besylate|mesylate|mesilate|phosphate|succinate|fumarate|bisulfate|bitartrate|dipropionate|propionate|valerate|furoate|tromethamine|pivoxil|axetil|etexilate|decanoate|palmitate|monohydrate|dihydrate|xinafoate|bromide|chloride|nitrate|oxide|gluconate|lactate|malate|oxalate|pamoate|stearate|trometamol)$/;
   function deSalt(q) { var t = String(q || "").replace(SALT, "").trim(); return t && t !== q ? t : ""; }
-  function all() { return R.slice(); }
-  function count() { return R.length; }
+  /* Draft rows (d:1) only while smd_drug_drafts is on: ?drug_drafts=1 or localStorage "1". Default OFF. */
+  function draftsOn() {
+    try {
+      var m = (typeof location !== "undefined" && location.search || "").match(/[?&]drug_drafts=([^&]+)/);
+      if (m) return m[1] === "1" || m[1] === "on" || m[1] === "true";
+      return typeof localStorage !== "undefined" && localStorage.getItem("smd_drug_drafts") === "1";
+    } catch (e) { return false; }
+  }
+  var R_ALL = R;
+  function live() { return draftsOn() ? R_ALL : R_ALL.filter(function (r) { return !r.d; }); }
+  function all() { return live().slice(); }
+  function count() { return live().length; }
   function has(name) { return !!get(name); }
   /* Exact lookup by name. api.js compClass() uses it to show a molecule's authored class, so it
    * matches the way a composition is written in the brand catalogue as well as the plain name:
    * "Ceftriaxone (1000mg)" and "ceftriaxone" both resolve to the Ceftriaxone row. */
   function aliasHit(q) {
+    var R = live();
     for (var i = 0; i < R.length; i++) {
       var al = R[i].a || [];
       for (var j = 0; j < al.length; j++) if (norm(al[j]) === q) return R[i];
@@ -265,6 +299,7 @@ const body = `(function () {
     return null;
   }
   function get(name) {
+    var R = live();
     var q = norm(name);
     if (!q) return null;
     for (var i = 0; i < R.length; i++) if (norm(R[i].n) === q) return R[i];
@@ -288,6 +323,7 @@ const body = `(function () {
   /* Ranked the way a doctor expects: an exact name, then a name that starts with what was typed,
    * then a word inside the name, then anywhere in the name, then the class, then a tag. */
   function search(q, limit) {
+    var R = live();
     var nq = norm(q);
     if (!nq) return [];
     var cq = nq.replace(/ /g, "");
@@ -325,6 +361,6 @@ const body = `(function () {
 `;
 
 writeFileSync(OUT, header + body);
-console.log(`data/clinical-index.js: ${rows.length} molecules, ${(statSync(OUT).size / 1024).toFixed(0)} KB`);
+console.log(`data/clinical-index.js: ${rows.length} molecules (${draftRows} drafts), ${(statSync(OUT).size / 1024).toFixed(0)} KB`);
 const probe = ["Cefiderocol", "Atropine sulfate", "Enoxaparin sodium", "Pantoprazole"];
 console.log("sanity — " + probe.map((p) => p + ": " + rows.some((r) => r.n === p)).join(", "));

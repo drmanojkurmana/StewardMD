@@ -267,3 +267,34 @@ test("Indian brand-catalogue composition spellings resolve to a monograph row", 
   };
   for (const [q, want] of Object.entries(cases)) assert.equal((I.get(q) || {}).n, want, q);
 });
+
+/* Draft monographs (data/authored/, owner 2026-11-27): StewardMD-authored records for catalogue molecules
+ * with no US, Canadian or EU label. Hidden unless smd_drug_drafts is "1"; every one must say what it is. */
+test("draft rows are hidden by default and shown only with smd_drug_drafts on", () => {
+  assert.equal(I.get("Oxetacaine"), null, "hidden with the flag off");
+  globalThis.localStorage = { getItem: (k) => (k === "smd_drug_drafts" ? "1" : null) };
+  try {
+    const r = I.get("Oxetacaine");
+    assert.ok(r && r.d === 1, "visible and marked as a draft with the flag on");
+    assert.equal((I.get("Vitamin B2") || {}).n, "Riboflavin", "draft aliases resolve");
+  } finally { delete globalThis.localStorage; }
+  assert.equal(I.get("Oxetacaine"), null, "hidden again once the flag is off");
+});
+
+test("every draft monograph is marked, referenced and free of em/en dashes", () => {
+  const dir = join(ROOT, "data", "authored");
+  const files = readdirSync(dir).filter((f) => f.endsWith(".json"));
+  assert.ok(files.length >= 100, "drafts present");
+  for (const f of files) {
+    const raw = readFileSync(join(dir, f), "utf8");
+    const g = JSON.parse(raw);
+    assert.equal(g.status, "ai_drafted", f);
+    assert.equal(g.src, "stewardmd-authored", f);
+    assert.ok(Array.isArray(g.refs) && g.refs.length >= 1, f + " has references");
+    assert.ok(/DRAFT/.test(g.footer || ""), f + " footer says draft");
+    assert.ok(g.summary && g.cls, f + " has summary and class");
+    assert.ok(!/[–—]/.test(raw), f + " has no en/em dash");
+    // a draft never shadows a regulatory label or bundled record of the same molecule
+    assert.ok(!readdirSync(join(ROOT, "data", "fda-labels")).includes(f), f + " is not also a label file");
+  }
+});

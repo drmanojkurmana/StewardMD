@@ -479,3 +479,9 @@ regulatory claim, `NMC_PG_LOGBOOK_REQUIREMENTS.md`.
 |---|---|---|
 | `smd_privacy_mode_enabled` (localStorage) | enabled (anything but `"0"`) | Kill switch: `"0"` removes the home-header toggle and forces privacy mode off. |
 | `smd_privacy_mode` (sessionStorage) | absent = off | The mode itself, `"1"` while on. Session only, never synced. |
+
+## Added by hand 2026-11-27 (no `*-flags.js` registry; read in `data/clinical-index.js` and Settings)
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_drug_drafts` | OFF | Shows the 126 StewardMD-authored draft drug monographs (`data/authored/`) for catalogue molecules with no US/Canadian/EU label. Owner's clinical call to turn on after review. See [[Scan-Meds and Drug Index]]. |

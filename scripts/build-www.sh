@@ -132,6 +132,8 @@ if [ -d data/history/img ]; then mkdir -p "$WWW/data/history/img"; cp data/histo
 # FDA-label monographs for drugs with no bundled record (scripts/build-fda-monographs.py): one small JSON per
 # drug, fetched by offline-clinical.js when that drug is opened. Not in the bundle, so startup stays small.
 if [ -d data/fda-labels ]; then mkdir -p "$WWW/data/fda-labels"; cp data/fda-labels/*.json "$WWW/data/fda-labels/"; fi
+# StewardMD-authored DRAFT monographs (no regulatory label exists; shown only with smd_drug_drafts on).
+if [ -d data/authored ]; then mkdir -p "$WWW/data/authored"; cp data/authored/*.json "$WWW/data/authored/"; fi
 # India access on Clinical Bulletins cards (bulletins.js): NLEM 2022 (scripts/india/build_nlem.py) and, when the
 # owner has run scripts/india/fetch-janaushadhi.mjs, the Jan Aushadhi price list. Read offline from the bundle.
 if ls data/india/*.json >/dev/null 2>&1; then mkdir -p "$WWW/data/india"; cp data/india/*.json "$WWW/data/india/"; fi

@@ -12617,3 +12617,20 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
 - **UI**: a restrained badge (owner tokens, no glow) with date and notice DOI on the study row, study detail and paper card; OpenAlex cited-by, OA status/link and up to five related works on the paper card only. Both hidden when the server says unavailable or returns `none`.
 - **Tests**: `test/research-enrich.test.mjs`, 17 tests, mocked fetch only: retraction parsing (retracted/EoC/none), cache, unavailable; OpenAlex batch, PMID path, related expansion, missing key, cache; client flags off, on with data, unavailable. Existing connector, audit, journey and paper-card suites still pass.
 - **Not enabled**: `OPENALEX_API_KEY` is an owner step. `RESEARCH_CONTACT_EMAIL` is already required by the existing Crossref connector and is reused for retractions.
+
+## 2026-11-27 - Drugs: every catalogue molecule gets a monograph; drafts behind `smd_drug_drafts` (default OFF)
+
+- **Owner ask**: "All drugs should have the monograph" (after the Oxandrolone "No drugs match" report).
+- **Source order**: US FDA label (DailyMed, openFDA) > Health Canada product monograph > EU/UK SmPC > StewardMD-authored draft.
+  Owner chose "EU/UK labels, then author" for molecules with no US/Canadian label.
+- **EU/UK step not done**: the session's safety classifier refused scraping the MHRA product site (its search API key lives in
+  page JavaScript) and a retry of EMA product-information PDFs after a 429. ~15 molecules that have an SmPC (Strepsils actives,
+  S-1 components, benserazide, gestodene, sertindole, casirivimab) were drafted instead and should be replaced by SmPC text when
+  a sanctioned route exists.
+- **Drafts**: `data/authored/<slug>.json`, gold schema, `status: "ai_drafted"`, `src: "stewardmd-authored"`, references to named
+  works (Martindale, NIH ODS/NCCIH, LiverTox, NCVBDC, IAP, EMA/FDA safety pages) and a footer saying no regulatory label exists.
+  Index rows carry `d:1` and are hidden unless `smd_drug_drafts` = "1" (Settings > Experimental Features > Draft drug monographs,
+  or `?drug_drafts=1`). The drug page shows a Draft banner; the result row says "draft monograph".
+  A regulatory record of the same name always wins (the index never lists a draft beside one).
+- **Turning drafts ON for everyone is the owner's clinical call** after review, like CliniX/SURGX/Neonatal drafts.
+- **Not monographs**: catalogue entries "Plain", "Oral Corticosteroids", "Luvistin" are data noise, left alone.

@@ -216,3 +216,12 @@ A sweep of `prep/` + `kb/reference` against the DailyMed generic-name list and N
   arterolane, sulfamethopyrazine), withdrawn drugs (phenylpropanolamine, ticarcillin, phenformin). Gap list:
   regenerate with the method above.
 - Builder guard: a label record with no Indications/Dosage/Purpose is refused ("Ammonium Muriaticum" came back empty).
+
+### Drafts for the rest (2026-11-27)
+- 126 StewardMD-authored draft monographs in `data/authored/` (flag `smd_drug_drafts`, default OFF) cover the molecules with no
+  US/Canadian label. With drafts on: 1,707 of 1,710 catalogue molecules and 2,977 of 2,979 compositions have a monograph;
+  with drafts off: 1,571 and 2,778. Decision and the skipped EU/UK step: [[Decisions]] 2026-11-27.
+- `offline-clinical.js resolveOne()`: every component of a combination now resolves bundle -> index alias -> label/draft file.
+  Before, components were bundle-only, so "Piperacillin + Tazobactum" lost its Tazobactum section and label-only components showed nothing.
+- `build-www.sh` copies `data/authored/`. Tokens: `IDX_VER` idx17, `LABEL_VER` lbl3, `api.js -empty3`, sidebar `-drugdraft1`.
+- UI test `test/run-drug-missing-ui.mjs` covers drafts hidden/shown, banner, and the Tazobactum combination.
