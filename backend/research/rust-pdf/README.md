@@ -17,6 +17,11 @@ size, words with boxes, page text and tables, value for value.
 - **PrepNucleus deck creation**: `prep-source.js` uses `rs_lines` (lines with
   font sizes, in content order, as pdf.js gives them) to find headings and
   sentences. Files over 8 MB, which are opened in pieces, stay on pdf.js.
+- **PrepNucleus notebook (Study Studio, `study.js`)**: search text for imported
+  PDFs, and "Make flashcards and questions" from a PDF, use the same lines.
+  The page view (drawing, selectable text, thumbnails) stays on pdf.js.
+- **ResearchMD thesis screen (`research-screen-thesis.js`)**: page text of an
+  uploaded PDF thesis.
 
 Kill switch in the app: `localStorage.smd_rust_pdf = "0"` (or `?rust_pdf=0`).
 

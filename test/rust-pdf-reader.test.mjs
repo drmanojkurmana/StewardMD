@@ -111,3 +111,28 @@ test("deck creation: Rust lines replace pdf.js text reading; pages Rust left out
   assert.deepEqual(rd.pages.map((p) => p.p), [1, 2]);
   assert.equal(rd.pages[0].lines[0].tx, "AML");
 });
+
+/* ---------- Study Studio notebook ---------- */
+test("notebook search text comes from the Rust lines, one string per page", async () => {
+  const S = req("../study.js");
+  const rl = SR.rustToLines(await R.lines(makePdf(), [1, 2]));
+  assert.deepEqual(S.rustSearchTexts(rl, 1, 2), {
+    1: "Acute myeloid leukaemia More than twenty percent myeloblasts in the marrow. Auer rods are needle shaped granules.",
+    2: "",
+  });
+  assert.equal(S.rustSearchTexts(null, 1, 2), null, "no Rust: the notebook uses pdf.js");
+});
+
+/* ---------- ResearchMD thesis screen ---------- */
+test("thesis screen: Rust lines become page texts; too many pages or junk means pdf.js", async () => {
+  const T = req("../research-screen-thesis.js");
+  const res = await R.lines(makePdf(), [1, 2, 3]);
+  const got = T.rustToThesisPages(res);
+  assert.deepEqual(got.pages, [
+    { n: 1, text: "Acute myeloid leukaemia\nMore than twenty percent myeloblasts in the marrow.\nAuer rods are needle shaped granules." },
+    { n: 2, text: "" },
+  ]);
+  assert.ok(got.chars > 20);
+  assert.equal(T.rustToThesisPages(null), null);
+  assert.equal(T.rustToThesisPages({ pages: [{ n: 1, lines: [] }], total: 2 }), null, "a page missing: pdf.js reads it");
+});

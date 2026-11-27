@@ -554,6 +554,7 @@
     hasNativeOcr: hasNativeOcr,
     detectOcrEngine: detectOcrEngine,
     loadPdfJs: loadPdfJs,
+    loadRust: loadRust,
     sha256: sha256,
     extract: extract,
     ENGINE_VERSION: ENGINE_VERSION

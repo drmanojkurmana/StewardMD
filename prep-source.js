@@ -919,9 +919,14 @@
   function rustLines(doc, pageList) {
     var f = doc && doc.__smdFile;
     if (!f) return Promise.resolve(null);
+    return readFile(f).then(function (buf) { return rustLinesFromBytes(new Uint8Array(buf), pageList); }, function () { return null; });
+  }
+  // The Rust reader's cleaned lines for these pages of a PDF held in memory: { page: [{ tx, size }] }, or null (use pdf.js).
+  // Also used by the Study Studio notebook (study.js) for search and for flashcards from a PDF.
+  function rustLinesFromBytes(u8, pageList) {
     return loadRust().then(function (R) {
       if (!R || !R.isEnabled()) return null;
-      return readFile(f).then(function (buf) { return R.lines(new Uint8Array(buf), pageList); });
+      return R.lines(u8, pageList);
     }).then(rustToLines, function () { return null; });
   }
 
@@ -1017,6 +1022,6 @@
 
   var API = {};
   for (var k in PURE) API[k] = PURE[k];
-  API.loadPdfJs = loadPdfJs; API.openPdf = openPdf; API.readPdfPages = readPdfPages; API.renderPage = renderPage; API.canOcr = canOcr; API.extractImages = extractImages; API.renderThumb = renderThumb; API.pageAspect = pageAspect; API._pure = PURE;
+  API.loadPdfJs = loadPdfJs; API.openPdf = openPdf; API.readPdfPages = readPdfPages; API.renderPage = renderPage; API.canOcr = canOcr; API.extractImages = extractImages; API.renderThumb = renderThumb; API.pageAspect = pageAspect; API.rustLinesFromBytes = rustLinesFromBytes; API._pure = PURE;
   G.PREP_SRC = API;
 })(typeof window !== "undefined" ? window : this);
