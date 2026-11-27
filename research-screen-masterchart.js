@@ -1974,7 +1974,13 @@
       for (var i = 0; i < km.groups.length; i++) {
         var g = km.groups[i];
         var med = g.median || {};
-        var medStr = med.value == null ? "not reached" : fmt(med.value, 1) + " (" + fmt(med.lower, 1) + " to " + fmt(med.upper, 1) + ")";
+        var medStr = "not reached";
+        if (med.value != null) {
+          medStr = fmt(med.value, 1);
+          if (med.lower != null || med.upper != null) {
+            medStr += " (" + (med.lower == null ? "not reached" : fmt(med.lower, 1)) + " to " + (med.upper == null ? "not reached" : fmt(med.upper, 1)) + ")";
+          }
+        }
         h += "<tr><td>" + esc(g.name) + "</td><td>" + g.n + "</td><td>" + g.nEvents + "</td><td>" + esc(medStr) + "</td></tr>";
       }
       h += "</tbody></table></div>";
