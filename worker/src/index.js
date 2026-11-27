@@ -561,7 +561,8 @@ export default {
       return;
     }
     if (event.cron === "30 5 * * *") {
-      ctx.waitUntil(post("/api/updates/sync"));            // daily Medical Updates crawl
+      // daily Medical Updates crawl, then send its queued push from a fresh invocation (_updates_pushq.js)
+      ctx.waitUntil(post("/api/updates/sync").then(() => post("/api/updates/push-run")));
       ctx.waitUntil(post("/api/lifecycle/run"));           // daily: Pro-upsell email for day-3 non-converters
       return;
     }

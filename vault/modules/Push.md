@@ -71,6 +71,19 @@ non-vacuous: 12 of the 13 fail against the previous implementation.
 5. Only then look at the server. `POST /api/push/test` returns `{sent, total}`; `total: 0` means the
    registration never reached us, which is a device or auth problem, not a sending one.
 
+## Medical Updates push never arrived (fixed 2026-11-27)
+Symptom: the Medical Updates feed filled daily, but no Android or iOS phone ever got a banner for it,
+while kits / PrepNucleus / support-reply pushes arrived fine. Cause: the push was fanned out from inside
+`POST /api/updates/sync`, the same invocation that had just crawled every source and called the AI
+summariser, so it ran on an exhausted per-invocation subrequest/KV budget, in `waitUntil`, with every
+error swallowed and nothing logged. The pushes that work all run in their own small invocation.
+Fix: `functions/_updates_pushq.js`. The crawl only ENQUEUES (KV `updates:pushq`, one job per workspace);
+`drain()` sends from a fresh invocation: the 15-minute cron (`/api/push/task-overdue-run`, which now also
+drains) and `POST /api/updates/push-run` (worker calls it right after the 05:30 UTC sync once the worker
+is redeployed). Each send is logged to `crawl_logs` as source `push` with `native=sent/total`, so the
+admin crawl log now shows whether Apple/Google accepted it. Test: `test/updates-pushq.test.mjs`.
+The Alerts screen also has a "Send a test" link next to "Phone alerts on" (`POST /api/push/test`).
+
 ## Gotcha: verify the RUNNING bundle
 A client fix reaches a handset only after `build-www` -> `cap sync` -> rebuild + reinstall, or an OTA
 publish. A bug report whose on-screen text does not match this repo's source is being made against a
