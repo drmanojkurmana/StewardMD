@@ -10947,7 +10947,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   try { window.SMD_isOwner = nIsOwner; } catch (e) {}
   var _notifItems = null;                 // Tab 1: manual app notices (auto=0)
   var _feedItems = [], _feedCursor = null, _feedEnd = false, _feedLoading = false;
-  var _feedType = "all", _feedQ = "", _feedBranch = "all";
+  var _feedType = "all", _feedQ = "", _feedBranch = "all", _feedError = false;
   var _notifRoot = null, _activeTab = "updates", _detailRoot = null;
   function nEsc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   // Inline: escape, then render **bold**/__bold__ only (safe — no raw HTML passthrough).
@@ -10987,7 +10987,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   // Internal-Medicine sub-specialties ("branches") — used to filter the feed and in Notification preferences.
   var BRANCH_ORDER = ["cardiology", "nephrology", "pulmonology", "endocrinology", "infectious_diseases", "critical_care", "gastroenterology", "hepatology", "oncology", "emergency_medicine", "family_medicine"];
   var BRANCH_LBL = { cardiology: "Cardiology", nephrology: "Nephrology", pulmonology: "Pulmonology", endocrinology: "Endocrinology", infectious_diseases: "Infectious Diseases", critical_care: "Critical Care", gastroenterology: "Gastroenterology", hepatology: "Hepatology", oncology: "Oncology", emergency_medicine: "Emergency Medicine", family_medicine: "Family Medicine" };
-  var TYPE_FILTERS = [["all", "All"], ["guideline", "Guidelines"], ["drug_approval", "Drug Approvals"], ["safety_alert", "Safety Alerts"], ["trial", "Major Trials"]];
+  var TYPE_FILTERS = [["all", "All"], ["guideline", "Guidelines"], ["drug_approval", "Approvals"], ["safety_alert", "Safety"], ["trial", "Trials"]];
   var TYPE_TAG = { guideline: svg("list","smd-ico")+" Guideline", drug_approval: svg("check","smd-ico")+" Approval", safety_alert: svg("warn","smd-ico")+" Safety", trial: svg("flask","smd-ico")+" Trial" };
 
   function bmGet() { try { return JSON.parse(localStorage.getItem(NOTIF_BM) || "[]") || []; } catch (e) { return []; } }
@@ -11038,8 +11038,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var items = (j && j.items) || [];
         _feedItems = reset ? items : _feedItems.concat(items);
         _feedCursor = (j && j.nextCursor) || null; _feedEnd = !_feedCursor;
-        _feedLoading = false; return _feedItems;
-      }).catch(function () { _feedLoading = false; _feedEnd = true; return _feedItems; });
+        _feedLoading = false; _feedError = false; return _feedItems;
+      }).catch(function () { _feedLoading = false; _feedEnd = true; _feedError = true; if (reset) _feedItems = []; return _feedItems; });
   }
   function refreshBadge() {
     var badge = function () { var b = document.getElementById("v3BellBtn"); if (b) b.classList.toggle("has-unread", nMaxTs(_feedItems) > nSeen()); };
@@ -11051,20 +11051,21 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   /* ---- Tab 1: app notices ---- */
   function nItemHTML(it) {
     var hi = it.importance === "high" || it.importance === "critical";
-    var link = it.url ? '<a class="mu-src-link" href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Read source</a>' : "";
-    return '<article class="mu-card mu-notice' + (hi ? " is-hi" : "") + '">' +
-      '<div class="mu-meta"><span class="mu-type t-' + nEsc(it.category || "general") + '">' + (NCAT[it.category] || NCAT.general) + '</span>' +
-        (hi ? '<span class="mu-flag">Important</span>' : "") + '<span class="mu-when">' + nEsc(nWhen(it.ts)) + '</span></div>' +
+    var link = it.url ? '<a class="mu-srclink" href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Read source</a>' : "";
+    return '<li class="mu-row mu-row-static">' +
+      '<div class="mu-line1"><span class="mu-kind">' + nEsc((NCAT_TXT[it.category] || "Update")) + '</span>' +
+        (hi ? '<span class="mu-imp">Important</span>' : "") + '<time class="mu-when">' + nEsc(nWhen(it.ts)) + '</time></div>' +
       '<h3 class="mu-title">' + nEsc(it.title) + '</h3>' +
       (it.body ? '<p class="mu-lead mu-lead-full">' + nEsc(it.body) + '</p>' : "") +
-      ((it.source || link) ? '<div class="mu-foot">' + (it.source ? '<span class="mu-org">' + nEsc(it.source) + '</span>' : "") + link + '</div>' : "") +
-      '</article>';
+      ((it.source || link) ? '<div class="mu-src">' + (it.source ? nEsc(it.source) : "") + link + '</div>' : "") +
+      '</li>';
   }
   function renderNotices() {
     var body = _notifRoot && _notifRoot.querySelector("#ntfNotices"); if (!body) return;
     var items = _notifItems || [];
-    body.innerHTML = items.length ? items.map(nItemHTML).join("")
+    body.innerHTML = items.length ? '<ul class="mu-group">' + items.map(nItemHTML).join("") + '</ul>'
       : '<div class="mu-empty"><b>No notifications</b><span>Announcements from the StewardMD team will appear here.</span></div>';
+    muReveal(body);
   }
 
   /* ---- Tab 2: medical updates feed ---- */
@@ -11075,37 +11076,64 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     t = t.slice(0, n); var sp = t.lastIndexOf(" ");
     return (sp > n * 0.6 ? t.slice(0, sp) : t).replace(/[\s,.;:]+$/, "") + "\u2026";
   }
-  var _feedPrevSeen = 0;   // seen-timestamp captured when the panel opened, so new cards can be marked
+  var _feedPrevSeen = 0;   // seen-timestamp captured when the panel opened, so unread rows can be marked
+  var TYPE_TXT = { guideline: "Guideline", drug_approval: "Drug approval", safety_alert: "Safety alert", trial: "Trial" };
+  var NCAT_TXT = { drug: "Drug", approval: "Approval", safety: "Safety", recall: "Recall", guideline: "Guideline", study: "Study", general: "Update" };
   function feedCardHTML(it) {
     var crit = it.importance === "critical", hi = crit || it.importance === "high";
-    var flag = crit ? '<span class="mu-flag crit">Critical</span>' : (hi ? '<span class="mu-flag">Important</span>' : "");
-    var isNew = _feedPrevSeen && (it.ts || 0) > _feedPrevSeen;
+    var unread = _feedPrevSeen && (it.ts || 0) > _feedPrevSeen;
+    var warn = it.type === "safety_alert" || it.category === "safety" || it.category === "recall";
     var org = it.organization || it.source || "";
-    var lead = nTeaser(it.summary || it.body, 200);
-    var bits = [];
-    if (it.workspace) bits.push(nEsc(WSLBL[it.workspace] || it.workspace));
-    if (it.est_read_min) bits.push(it.est_read_min + " min read");
-    // A doctor signed a Clinical Bulletin from this item; the card text itself is still the AI summary.
+    var lead = nTeaser(it.summary || it.body, 180);
+    var meta = [];
+    if (org) meta.push(nEsc(org));
+    if (it.est_read_min) meta.push(it.est_read_min + " min read");
+    // A doctor signed a Clinical Bulletin from this item; the row text itself is still the AI summary.
     var signed = it.signed_bulletin ? '<span class="mu-signed">Signed bulletin in Library</span>' : "";
-    return '<article class="mu-card' + (hi ? " is-hi" : "") + '" data-uid="' + nEsc(it.id) + '" role="button" tabindex="0" aria-label="' + nEsc(it.title) + '">' +
-      '<div class="mu-meta"><span class="mu-type t-' + nEsc(it.type || it.category || "general") + '">' + (TYPE_TAG[it.type] || NCAT.general) + '</span>' + flag +
-        (isNew ? '<span class="mu-new">New</span>' : "") +
-        '<span class="mu-when">' + nEsc(nWhen(it.ts)) + '</span></div>' +
+    return '<li class="mu-row' + (unread ? " is-unread" : "") + '" data-uid="' + nEsc(it.id) + '" role="button" tabindex="0">' +
+      (unread ? '<span class="mu-unread"><span class="mu-sr">Unread. </span></span>' : "") +
+      '<div class="mu-line1"><span class="mu-kind' + (warn ? " is-warn" : "") + '">' + nEsc(TYPE_TXT[it.type] || NCAT_TXT[it.category] || "Update") + '</span>' +
+        (crit ? '<span class="mu-imp is-crit">Critical</span>' : (hi ? '<span class="mu-imp">Important</span>' : "")) +
+        '<time class="mu-when">' + nEsc(nWhen(it.ts)) + '</time></div>' +
       '<h3 class="mu-title">' + nEsc(it.title) + '</h3>' +
-      (org ? '<div class="mu-org">' + nEsc(org) + '</div>' : "") +
       (lead ? '<p class="mu-lead">' + nEsc(lead) + '</p>' : "") +
-      '<div class="mu-foot"><span class="mu-bits">' + bits.join('<span class="mu-dot" aria-hidden="true"></span>') + '</span>' + signed +
-        '<span class="mu-go" aria-hidden="true">' + svg("chev", "smd-ico") + '</span></div></article>';
+      (meta.length ? '<div class="mu-src"><span class="mu-org">' + meta.join(" \u00b7 ") + '</span></div>' : "") +
+      (signed ? '<div class="mu-src">' + signed + '</div>' : "") + '</li>';
+  }
+  // Rows are grouped by age so the list has a real structure: what arrived today, this week, before.
+  function feedGroupLabel(ts) {
+    var d = new Date(ts || 0), t = new Date(); t.setHours(0, 0, 0, 0);
+    var day = 86400000, start = t.getTime();
+    if (d.getTime() >= start) return "Today";
+    if (d.getTime() >= start - day) return "Yesterday";
+    if (d.getTime() >= start - 6 * day) return "This week";
+    if (d.getTime() >= start - 29 * day) return "This month";
+    return "Earlier";
   }
   function renderFeed() {
     var body = _notifRoot && _notifRoot.querySelector("#ntfFeed"); if (!body) return;
     var items = _feedItems || [];
-    var cards = items.length ? items.map(feedCardHTML).join("")
-      : ((_feedType !== "all" || _feedQ || _feedBranch !== "all")
-          ? '<div class="mu-empty"><b>Nothing matches</b><span>Try another filter or clear the search.</span></div>'
+    if (!items.length) {
+      body.innerHTML = _feedError
+        ? '<div class="mu-empty"><b>Couldn\u2019t load updates</b><span>Check your connection, then try again.</span><button class="mu-retry" id="muRetry">Try again</button></div>'
+        : ((_feedType !== "all" || _feedQ || _feedBranch !== "all")
+          ? '<div class="mu-empty"><b>Nothing matches</b><span>No updates fit this filter. Try another type or specialty, or clear the search.</span></div>'
           : '<div class="mu-empty"><b>No medical updates yet</b><span>New guidelines, drug approvals, safety alerts and major trials appear here after the daily sync.</span></div>');
-    var more = (!_feedEnd && items.length) ? '<div class="mu-more">Loading more\u2026</div>' : (items.length > 3 ? '<div class="mu-more">You\u2019re all caught up</div>' : "");
-    body.innerHTML = cards + more;
+      var rb = body.querySelector("#muRetry"); if (rb) rb.addEventListener("click", function () { muLoadFeed(true); });
+      muReveal(body); return;
+    }
+    var html = "", cur = null, open = false;
+    items.forEach(function (it) {
+      var g = feedGroupLabel(it.ts);
+      if (g !== cur) { if (open) html += "</ul></section>"; html += '<section class="mu-sec"><h2 class="mu-sech">' + g + '</h2><ul class="mu-group">'; cur = g; open = true; }
+      html += feedCardHTML(it);
+    });
+    if (open) html += "</ul></section>";
+    var more = (!_feedEnd && items.length) ? '<div class="mu-more"><span class="mu-spin" aria-hidden="true"></span>Loading more</div>' : "";
+    var had = body.querySelectorAll(".mu-row").length;
+    body.innerHTML = html + more;
+    if (!had || _muAnimateNext) muReveal(body, had);
+    _muAnimateNext = false;
   }
 
   /* ---- weekly "This Week in Medicine" digest banner + detail ---- */
@@ -11119,10 +11147,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (!dg || !dg.data) { el.innerHTML = ""; return; }
       var d = dg.data;
       var head = String(d.headline || "Weekly digest").replace(/^\s*this week in medicine\s*[:\-\u2013\u2014]\s*/i, "");
-      el.innerHTML = '<button class="mu-digest" id="dgOpen">' +
-        '<span class="mu-dg-h">' + nEsc(head) + '</span>' +
-        (d.intro ? '<span class="mu-dg-sub">' + nEsc(nTeaser(d.intro, 130)) + '</span>' : "") +
-        '<span class="mu-dg-foot"><span>This week in medicine</span><span class="mu-dg-go">Read' + svg("chev", "smd-ico") + '</span></span></button>';
+      el.innerHTML = '<section class="mu-sec"><h2 class="mu-sech">This week in medicine</h2>' +
+        '<button class="mu-digest" id="dgOpen"><span class="mu-dg-h">' + nEsc(head) + '</span>' +
+        (d.intro ? '<span class="mu-lead">' + nEsc(nTeaser(d.intro, 150)) + '</span>' : "") +
+        '<span class="mu-dg-go">Read the digest</span></button></section>';
       var b = el.querySelector("#dgOpen"); if (b) b.addEventListener("click", function () { openDigest(d); });
     });
   }
@@ -11143,6 +11171,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function switchTab(t) {
     _activeTab = t; if (!_notifRoot) return;
     _notifRoot.querySelectorAll(".ntf-tab").forEach(function (b) { var on = b.getAttribute("data-tab") === t; b.classList.toggle("on", on); b.setAttribute("aria-selected", String(on)); });
+    muMoveInk(true);
     _notifRoot.querySelector("#paneNotices").style.display = t === "notices" ? "block" : "none";
     _notifRoot.querySelector("#paneUpdates").style.display = t === "updates" ? "block" : "none";
     if (t === "notices" && _notifItems == null) fetchNotices().then(renderNotices);
@@ -11151,65 +11180,169 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (_notifRoot) return _notifRoot;
     injectNotifCSS();
     _notifRoot = document.createElement("div"); _notifRoot.id = "ntfOverlay"; _notifRoot.className = "ntf-overlay"; _notifRoot.setAttribute("role", "dialog"); _notifRoot.setAttribute("aria-modal", "true"); _notifRoot.setAttribute("aria-label", "Notifications");
-    var chips = TYPE_FILTERS.map(function (f) { return '<button class="mu-chip' + (f[0] === _feedType ? " on" : "") + '" data-fchip="' + f[0] + '" aria-pressed="' + (f[0] === _feedType) + '">' + f[1] + '</button>'; }).join("");
+    var chips = TYPE_FILTERS.map(function (f) { return '<button class="mu-chip' + (f[0] === _feedType ? " on" : "") + '" data-fchip="' + f[0] + '" aria-pressed="' + (f[0] === _feedType) + '">' + (f[0] === "trial" ? "Trials" : f[1]) + '</button>'; }).join("");
     var branchOpts = '<option value="all">All specialties</option>' + BRANCH_ORDER.map(function (b) { return '<option value="' + b + '"' + (_feedBranch === b ? " selected" : "") + '>' + nEsc(BRANCH_LBL[b]) + '</option>'; }).join("");
     _notifRoot.classList.add("mu");
     _notifRoot.innerHTML =
-      '<header class="mu-bar"><button class="mu-icbtn" id="ntfClose" aria-label="Close">' + svg("chev", "smd-ico mu-flip") + '</button>' +
-        '<h2 class="mu-h">Alerts</h2><button class="mu-icbtn" id="ntfRefresh" aria-label="Refresh">' + svg("refresh", "smd-ico") + '</button></header>' +
-      '<div class="mu-seg" role="tablist"><button class="ntf-tab" role="tab" data-tab="notices">Notifications</button>' +
-        '<button class="ntf-tab on" role="tab" data-tab="updates">Medical updates</button></div>' +
+      '<header class="mu-bar"><button class="mu-icbtn" id="ntfClose" aria-label="Close alerts">' + svg("chev", "smd-ico mu-flip") + '</button>' +
+        '<span class="mu-bar-t" aria-hidden="true">Alerts</span>' +
+        '<button class="mu-icbtn" id="ntfRefresh" aria-label="Refresh">' + svg("refresh", "smd-ico") + '</button></header>' +
       '<div class="ntf-scroll mu-scroll" id="ntfScroll">' +
+        '<div class="mu-ptr" aria-hidden="true"><span class="mu-ptr-ic">' + svg("refresh", "smd-ico") + '</span></div>' +
+        '<h1 class="mu-large" id="muLarge">Alerts</h1>' +
+        '<div class="mu-tabs" role="tablist"><button class="ntf-tab" role="tab" data-tab="notices">Notifications</button>' +
+          '<button class="ntf-tab on" role="tab" data-tab="updates" aria-selected="true">Medical updates</button><span class="mu-tab-ink" aria-hidden="true"></span></div>' +
         '<div id="paneNotices" style="display:none">' +
-          '<div id="ntfNotices" class="mu-list"><div class="mu-more">Loading\u2026</div></div></div>' +
+          '<div id="ntfNotices"><div class="mu-more"><span class="mu-spin" aria-hidden="true"></span>Loading</div></div></div>' +
         '<div id="paneUpdates">' +
+          '<label class="mu-search">' + svg("search", "smd-ico") + '<input id="fdSearch" type="search" placeholder="Search updates" autocomplete="off" aria-label="Search updates"></label>' +
+          '<div class="mu-filters"><div class="mu-chips" role="toolbar" aria-label="Filter by type">' + chips + '</div>' +
+            '<label class="mu-branch"><span class="mu-sr">Specialty</span><select id="fdBranch">' + branchOpts + '</select></label></div>' +
           '<div id="ntfPush" class="mu-push"></div>' +
           '<div id="ntfDigest" class="mu-digest-wrap"></div>' +
-          '<div class="mu-tools"><div class="mu-chips" role="toolbar" aria-label="Filter by type">' + chips + '</div>' +
-            '<div class="mu-row2"><label class="mu-search">' + svg("search", "smd-ico") + '<input id="fdSearch" type="search" placeholder="Search updates" autocomplete="off" aria-label="Search updates"></label>' +
-            '<label class="mu-branch"><select id="fdBranch" aria-label="Specialty">' + branchOpts + '</select></label></div></div>' +
-          '<div id="ntfFeed" class="mu-list"><div class="mu-more">Loading\u2026</div></div></div>' +
+          '<div id="ntfFeed" aria-live="polite"><div class="mu-more"><span class="mu-spin" aria-hidden="true"></span>Loading updates</div></div></div>' +
       '</div>';
     document.body.appendChild(_notifRoot);
     _notifRoot.querySelector("#ntfClose").addEventListener("click", closeNotifications);
     _notifRoot.querySelector("#ntfRefresh").addEventListener("click", function () {
       var rb = this; rb.classList.remove("spin"); void rb.offsetWidth; rb.classList.add("spin");
       if (_activeTab === "notices") { fetchNotices().then(renderNotices); }
-      else { fetchFeed(true).then(function () { renderFeed(); nSetSeen(nMaxTs(_feedItems)); refreshBadge(); }); }
+      else { muLoadFeed(true, true); }
     });
     _notifRoot.querySelectorAll(".ntf-tab").forEach(function (b) { b.addEventListener("click", function () { switchTab(b.getAttribute("data-tab")); }); });
     _notifRoot.querySelectorAll("[data-fchip]").forEach(function (b) {
       b.addEventListener("click", function () {
         _feedType = b.getAttribute("data-fchip");
         _notifRoot.querySelectorAll("[data-fchip]").forEach(function (x) { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", String(x === b)); });
-        fetchFeed(true).then(renderFeed);
+        muLoadFeed(true);
       });
     });
     var si = _notifRoot.querySelector("#fdSearch"), sT = null;
-    if (si) si.addEventListener("input", function () { clearTimeout(sT); sT = setTimeout(function () { _feedQ = si.value.trim(); fetchFeed(true).then(renderFeed); }, 350); });
+    if (si) si.addEventListener("input", function () { clearTimeout(sT); sT = setTimeout(function () { _feedQ = si.value.trim(); muLoadFeed(true); }, 350); });
     var bsel = _notifRoot.querySelector("#fdBranch");
-    if (bsel) bsel.addEventListener("change", function () { _feedBranch = bsel.value; fetchFeed(true).then(renderFeed); });
+    if (bsel) bsel.addEventListener("change", function () { _feedBranch = bsel.value; muLoadFeed(true); });
     var sc = _notifRoot.querySelector("#ntfScroll");
     sc.addEventListener("scroll", function () {
       if (_activeTab !== "updates" || _feedEnd || _feedLoading) return;
       if (sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 120) fetchFeed(false).then(renderFeed);
     });
     _notifRoot.querySelector("#ntfFeed").addEventListener("click", function (e) {
-      var card = e.target.closest && e.target.closest(".mu-card[data-uid]"); if (card) openDetail(card.getAttribute("data-uid"));
+      var card = e.target.closest && e.target.closest(".mu-row[data-uid]"); if (card) openDetail(card.getAttribute("data-uid"));
     });
     _notifRoot.querySelector("#ntfFeed").addEventListener("keydown", function (e) {
       if (e.key !== "Enter" && e.key !== " ") return;
-      var card = e.target.closest && e.target.closest(".mu-card[data-uid]"); if (card) { e.preventDefault(); openDetail(card.getAttribute("data-uid")); }
+      var card = e.target.closest && e.target.closest(".mu-row[data-uid]"); if (card) { e.preventDefault(); openDetail(card.getAttribute("data-uid")); }
     });
+    muWireMotion(_notifRoot);
     return _notifRoot;
   }
   function openNotifications() {
     buildNotif(); _notifRoot.classList.add("on"); document.body.classList.add("ntf-lock");
     _feedPrevSeen = nSeen();
     switchTab(_activeTab); renderPushRow(); bmMergeFromServer(); renderDigestBanner();
-    fetchFeed(true).then(function () { renderFeed(); nSetSeen(nMaxTs(_feedItems)); refreshBadge(); });
+    muLoadFeed(true);
+    requestAnimationFrame(function () { muMoveInk(false); });
   }
-  function closeNotifications() { if (_notifRoot) { _notifRoot.classList.remove("on"); document.body.classList.remove("ntf-lock"); } }
+  function closeNotifications() {
+    if (!_notifRoot || !_notifRoot.classList.contains("on")) return;
+    _notifRoot.classList.remove("on"); document.body.classList.remove("ntf-lock");   // the shared dialog motion slides it down
+  }
+
+  /* ---- Alerts motion (2026-11-27). Each movement explains a change of state; nothing loops.
+     - tab ink slides to the selected tab, so the two panes read as one control
+     - the large title hands off to the bar title as it scrolls away (iOS large-title pattern)
+     - pull down at the top to refresh; the icon turns with the pull and spins while loading
+     - new rows settle in with a short cascade (first 8 only); a filter swap cross-fades the list
+     - the update detail pushes in from the right and slides back out
+     All of it is skipped under prefers-reduced-motion. ---- */
+  var _muAnimateNext = false;
+  function muReduced() { try { return !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) { return false; } }
+  var MU_EASE = "cubic-bezier(.22,1,.36,1)";
+  function muReveal(root, skip) {
+    if (muReduced() || !root || !root.animate) return;
+    var rows = root.querySelectorAll(".mu-row, .mu-empty, .mu-sech");
+    for (var i = skip || 0, n = 0; i < rows.length && n < 10; i++, n++) {
+      try { rows[i].animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 380, delay: n * 34, easing: MU_EASE, fill: "backwards" }); } catch (e) {}
+    }
+  }
+  function muLeave(el, cls, done) {
+    if (muReduced()) { done(); return; }
+    el.classList.add(cls);
+    var fin = false, end = function () { if (fin) return; fin = true; el.classList.remove(cls); done(); };
+    el.addEventListener("animationend", end, { once: true }); setTimeout(end, 420);
+  }
+  function muLoadFeed(reset, fromUser) {
+    var rb = _notifRoot && _notifRoot.querySelector("#ntfRefresh");
+    if (rb) rb.classList.add("is-busy");
+    var list = _notifRoot && _notifRoot.querySelector("#ntfFeed");
+    if (list && reset && list.querySelector(".mu-row") && !muReduced()) list.classList.add("is-swapping");
+    var prev = fromUser ? (_feedItems || []).slice() : null;
+    return fetchFeed(!!reset).then(function () {
+      // a pull or the refresh button that fails keeps what was on screen and says so; a failed filter change
+      // shows the error state instead of the previous filter's results
+      if (_feedError && prev && prev.length) { _feedItems = prev; try { toast("Couldn\u2019t refresh. Showing the updates you already had"); } catch (e) {} }
+      _muAnimateNext = !!reset;
+      renderFeed();
+      if (list) list.classList.remove("is-swapping");
+      if (rb) rb.classList.remove("is-busy");
+      nSetSeen(nMaxTs(_feedItems)); refreshBadge();
+      if (fromUser) muPtrDone();
+    });
+  }
+  function muMoveInk(animate) {
+    if (!_notifRoot) return;
+    var ink = _notifRoot.querySelector(".mu-tab-ink"), on = _notifRoot.querySelector(".mu-tabs .ntf-tab.on");
+    if (!ink || !on) return;
+    ink.style.transition = (animate && !muReduced()) ? "" : "none";
+    ink.style.width = on.offsetWidth + "px";
+    ink.style.transform = "translateX(" + on.offsetLeft + "px)";
+  }
+  function muPtrDone() {
+    var p = _notifRoot && _notifRoot.querySelector(".mu-ptr"); if (!p) return;
+    p.classList.remove("is-loading"); p.style.height = "0px";
+  }
+  function muWireMotion(root) {
+    var sc = root.querySelector("#ntfScroll"), large = root.querySelector("#muLarge"), bar = root.querySelector(".mu-bar");
+    // large title hand-off: the bar title appears only once the big one has scrolled under the bar
+    if (sc && large && bar) {
+      var tick = false;
+      sc.addEventListener("scroll", function () {
+        if (tick) return; tick = true;
+        requestAnimationFrame(function () {
+          tick = false;
+          var past = sc.scrollTop > large.offsetTop + large.offsetHeight - 6;
+          bar.classList.toggle("is-compact", past);
+        });
+      }, { passive: true });
+    }
+    // pull to refresh (touch only; native-feeling resistance)
+    var ptr = root.querySelector(".mu-ptr"), ic = ptr && ptr.querySelector(".mu-ptr-ic"), y0 = null, pull = 0, MAX = 76, GO = 58;
+    if (sc && ptr) {
+      sc.addEventListener("touchstart", function (e) { if (sc.scrollTop <= 0 && !ptr.classList.contains("is-loading")) { y0 = e.touches[0].clientY; pull = 0; ptr.style.transition = "none"; } else y0 = null; }, { passive: true });
+      sc.addEventListener("touchmove", function (e) {
+        if (y0 == null) return;
+        var dy = e.touches[0].clientY - y0; if (dy <= 0) { pull = 0; ptr.style.height = "0px"; return; }
+        pull = Math.min(MAX, dy * 0.45);
+        ptr.style.height = pull + "px";
+        if (ic) { ic.style.opacity = String(Math.min(1, pull / GO)); ic.style.transform = "rotate(" + (pull / GO) * 270 + "deg)"; }
+        ptr.classList.toggle("is-armed", pull >= GO);
+      }, { passive: true });
+      sc.addEventListener("touchend", function () {
+        if (y0 == null) return; y0 = null;
+        ptr.style.transition = "";
+        if (pull >= GO && _activeTab === "updates") {
+          ptr.classList.add("is-loading"); ptr.style.height = "48px";
+          try { if (window.SMD_haptic) SMD_haptic("light"); } catch (e) {}
+          muLoadFeed(true, true);
+        } else if (pull >= GO && _activeTab === "notices") {
+          ptr.classList.add("is-loading"); ptr.style.height = "48px";
+          fetchNotices().then(function () { renderNotices(); muPtrDone(); });
+        } else ptr.style.height = "0px";
+        ptr.classList.remove("is-armed"); pull = 0;
+      });
+    }
+    window.addEventListener("resize", function () { muMoveInk(false); });
+  }
 
   /* ---- Guideline / update detail overlay ---- */
   function detailSection(title, arr) {
@@ -11233,7 +11366,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   }
   function renderDetail(data) {
     var body = _detailRoot && _detailRoot.querySelector("#dtBody"); if (!body) return;
-    if (!data || !data.item) { body.innerHTML = '<div class="ntf-empty">Couldn\'t load this update.</div>'; return; }
+    if (!data || !data.item) {
+      body.innerHTML = '<div class="mu-empty"><b>Couldn\u2019t load this update</b><span>Check your connection, then try again.</span><button class="mu-retry" id="dtRetry">Try again</button></div>';
+      var rt = body.querySelector("#dtRetry"); if (rt) rt.addEventListener("click", function () { openDetail(_dtLastId); });
+      return;
+    }
     var it = data.item, s = data.structured || {};
     var refs = [];
     if (it.url) refs.push('<a href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Official website ↗</a>');
@@ -11265,12 +11402,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       (refs.length ? '<div class="dt-sec"><h4>References</h4><div class="dt-refs">' + refs.join("") + '</div></div>' : "") +
       '<div class="dt-actions">' +
         (it.url ? '<a class="dt-btn primary" href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Open Official Guideline</a>' : "") +
-        '<button class="dt-btn" id="dtBookmark">' + (bmHas(it.id) ? "★ Bookmarked" : "☆ Bookmark") + '</button>' +
+        '<button class="dt-btn" id="dtBookmark">' + (bmHas(it.id) ? "Bookmarked" : "Bookmark") + '</button>' +
         '<button class="dt-btn" id="dtShare">Share</button>' +
         (nIsOwner() ? '<button class="dt-btn" id="dtDelete" style="color:#dc2626;border-color:rgba(220,38,38,.4)">Delete</button>' : "") +
         '</div>';
     var bm = body.querySelector("#dtBookmark");
-    if (bm) bm.addEventListener("click", function () { bm.textContent = bmToggle(it.id) ? "★ Bookmarked" : "☆ Bookmark"; });
+    if (bm) bm.addEventListener("click", function () { bm.textContent = bmToggle(it.id) ? "Bookmarked" : "Bookmark"; bm.setAttribute("aria-pressed", String(bmHas(it.id))); });
     var sh = body.querySelector("#dtShare");
     if (sh) sh.addEventListener("click", function () {
       var url = it.url || location.href, txt = it.title || "StewardMD medical update";
@@ -11296,16 +11433,20 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (_detailRoot) return _detailRoot;
     _detailRoot = document.createElement("div"); _detailRoot.id = "ntfDetail"; _detailRoot.className = "ntf-overlay dt-overlay"; _detailRoot.setAttribute("role", "dialog"); _detailRoot.setAttribute("aria-modal", "true");
     _detailRoot.innerHTML =
-      '<div class="ntf-top-bar"><button class="ntf-close" id="dtClose" aria-label="Back">‹ Back</button><div class="ntf-h">Medical Update</div><span style="width:38px"></span></div>' +
+      '<header class="mu-bar is-compact"><button class="mu-icbtn" id="dtClose" aria-label="Back to alerts">' + svg("chev", "smd-ico mu-flip") + '</button><span class="mu-bar-t">Medical update</span><span class="mu-icbtn" aria-hidden="true"></span></header>' +
       '<div class="ntf-scroll"><div id="dtBody" class="dt-body"><div class="ntf-empty">Loading…</div></div></div>';
     document.body.appendChild(_detailRoot);
-    _detailRoot.querySelector("#dtClose").addEventListener("click", function () { _detailRoot.classList.remove("on"); });
+    _detailRoot.classList.add("mu", "mu-dt");
+    _detailRoot.setAttribute("data-own-motion", "");   // a push from the right, not the shared slide-up (dialog-motion.js)
+    _detailRoot.querySelector("#dtClose").addEventListener("click", function () { muLeave(_detailRoot, "mu-out-right", function () { _detailRoot.classList.remove("on"); }); });
     return _detailRoot;
   }
+  var _dtLastId = null;
   function openDetail(id) {
     if (!id) return;
     buildDetail(); _detailRoot.classList.add("on");
-    var body = _detailRoot.querySelector("#dtBody"); if (body) body.innerHTML = '<div class="ntf-empty">Loading…</div>';
+    var body = _detailRoot.querySelector("#dtBody"); if (body) body.innerHTML = '<div class="mu-more"><span class="mu-spin" aria-hidden="true"></span>Loading update</div>';
+    _dtLastId = id;
     fetch(NOTIF_API + "?id=" + encodeURIComponent(id), { headers: { "Accept": "application/json" } })
       .then(function (r) { return r.json(); }).then(renderDetail).catch(function () { renderDetail(null); });
   }
@@ -11711,7 +11852,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       return;
     }
     if (pushIsOn()) {
-      el.innerHTML = '<div class="mu-pstat"><span class="mu-pdot" aria-hidden="true"></span><span class="mu-ptxt">Phone alerts on</span><button class="mu-plink" data-push="off">Turn off</button></div>';
+      el.innerHTML = '<div class="mu-pstat">' + svg("check", "smd-ico") + '<span class="mu-ptxt">Phone alerts on</span><button class="mu-plink" data-push="off">Turn off</button></div>';
     } else if (("Notification" in window) && Notification.permission === "denied") {
       el.innerHTML = '<div class="mu-pcard warn"><b>Phone alerts are blocked</b><span>Allow notifications for StewardMD in your device settings.</span></div>';
     } else {
@@ -11774,7 +11915,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     P.checkPermissions().then(function (res) {
       var st = res && res.receive;
       if (st === "granted") {
-        el.innerHTML = '<div class="mu-pstat"><span class="mu-pdot" aria-hidden="true"></span><span class="mu-ptxt">Phone alerts on</span><button class="mu-plink" data-pushtest="1">Send a test</button></div>';
+        el.innerHTML = '<div class="mu-pstat">' + svg("check", "smd-ico") + '<span class="mu-ptxt">Phone alerts on</span><button class="mu-plink" data-pushtest="1">Send a test</button></div>';
         var tb = el.querySelector("[data-pushtest]"); if (tb) tb.addEventListener("click", function () { sendPushTest(tb); });
       } else if (st === "denied") {
         var andr = /android/i.test(navigator.userAgent || "");
@@ -12030,88 +12171,116 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".dg-h{font:800 15.5px var(--sans,system-ui);line-height:1.3}",
       ".dg-sub{font:500 12.5px var(--sans,system-ui);opacity:.92;line-height:1.45;margin-top:4px}",
       ".dg-go{font:700 12px var(--sans,system-ui);opacity:.95;margin-top:9px}",
-      // ---- Alerts redesign (2026-11-27): solid calm page in the home's teal world, quiet cards ----
-      "#ntfOverlay.mu{--mu-page:#EEF4F6;--mu-card:#fff;--mu-line:rgba(13,40,48,.09);--mu-ink:#0f2228;--mu-mut:#55707a;--mu-deep:#0b4f43;--mu-green:#046856;--mu-mint:#8ff0d2;--mu-soft:#e3f1ec;--mu-f:var(--rds-font,var(--sans,system-ui));--mu-ring:0 0 0 3px rgba(4,104,86,.28)}",
-      "body.dark #ntfOverlay.mu{--mu-page:#0b1418;--mu-card:#121e23;--mu-line:rgba(255,255,255,.08);--mu-ink:#e6eff1;--mu-mut:#93a9b0;--mu-green:#5fd3b3;--mu-soft:rgba(95,211,179,.12);--mu-ring:0 0 0 3px rgba(95,211,179,.35)}",
-      "html body #ntfOverlay.mu:not(#_):not(#__){background:var(--mu-page)!important}",
-      "#ntfOverlay.mu ::selection{background:rgba(4,104,86,.22)}",
-      // header: deep teal band, same voice as the home hero
-      "#ntfOverlay .mu-bar{display:flex;align-items:center;gap:8px;padding:calc(8px + env(safe-area-inset-top)) 8px 8px;background:var(--mu-deep);color:#fff}",
-      "#ntfOverlay .mu-h{flex:1;margin:0;text-align:center;font:700 17px/1.2 var(--mu-f);letter-spacing:-.01em;color:#fff}",
-      "#ntfOverlay .mu-icbtn{width:44px;height:44px;flex:0 0 44px;display:grid;place-items:center;border:0;border-radius:12px;background:transparent;color:#fff;cursor:pointer;touch-action:manipulation}",
-      "#ntfOverlay .mu-icbtn .smd-ico{width:22px;height:22px}#ntfOverlay .mu-flip{transform:scaleX(-1)}",
-      "#ntfOverlay .mu-icbtn:active{background:rgba(255,255,255,.12)}#ntfOverlay .mu-icbtn:focus-visible{outline:2px solid var(--mu-mint);outline-offset:-2px}",
-      "#ntfOverlay .mu-icbtn.spin .smd-ico{animation:muSpin .7s cubic-bezier(.22,1,.36,1)}@keyframes muSpin{to{transform:rotate(360deg)}}",
-      // segmented tabs sit on the same band
-      "#ntfOverlay .mu-seg{display:flex;gap:4px;padding:0 16px 14px;background:var(--mu-deep)}",
-      "#ntfOverlay .mu-seg .ntf-tab{flex:1;min-height:40px;border:0;border-radius:11px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.78);font:600 14px var(--mu-f);cursor:pointer;touch-action:manipulation;border-bottom:0;padding:0 8px;transition:background .2s,color .2s}",
-      "#ntfOverlay .mu-seg .ntf-tab.on{background:#fff;color:var(--mu-deep)}",
-      "body.dark #ntfOverlay .mu-seg .ntf-tab.on{background:var(--mu-mint);color:#06312a}",
-      "#ntfOverlay .mu-seg .ntf-tab:focus-visible{outline:2px solid var(--mu-mint);outline-offset:2px}",
-      "#ntfOverlay .mu-scroll{padding:14px 16px calc(40px + env(safe-area-inset-bottom))}",
-      // phone-alert status: one quiet line when on, a card only when action is needed
-      "#ntfOverlay .mu-push:empty{display:none}#ntfOverlay .mu-push{margin:0 0 12px}",
-      "#ntfOverlay .mu-pstat{display:flex;align-items:center;gap:8px;min-height:32px;padding:0 2px;font:500 13.5px var(--mu-f);color:var(--mu-mut)}",
-      "#ntfOverlay .mu-pdot{width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.16)}",
-      "#ntfOverlay .mu-ptxt{flex:1}",
-      "#ntfOverlay .mu-plink{min-height:36px;border:0;background:none;padding:0 4px;font:600 13.5px var(--mu-f);color:var(--mu-green);cursor:pointer;touch-action:manipulation}",
-      "#ntfOverlay .mu-plink:disabled{opacity:.55}#ntfOverlay .mu-plink:focus-visible{outline:none;box-shadow:var(--mu-ring);border-radius:8px}",
-      "#ntfOverlay .mu-pcard{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--mu-soft);font:500 14px/1.45 var(--mu-f);color:var(--mu-ink)}",
-      "#ntfOverlay .mu-pcard>span{flex:1}#ntfOverlay .mu-pcard.warn{display:block;background:#fdf3dc;color:#5c3d05}#ntfOverlay .mu-pcard.warn b{display:block;margin-bottom:2px}",
-      "body.dark #ntfOverlay .mu-pcard.warn{background:rgba(234,179,8,.12);color:#f5d690}",
-      "#ntfOverlay .mu-pbtn{flex:0 0 auto;min-height:40px;padding:0 16px;border:0;border-radius:11px;background:var(--mu-green);color:#fff;font:600 14px var(--mu-f);cursor:pointer}",
-      // weekly digest
-      "#ntfOverlay .mu-digest-wrap:empty{display:none}#ntfOverlay .mu-digest-wrap{margin-bottom:16px}",
-      "#ntfOverlay .mu-digest{display:flex;flex-direction:column;gap:6px;width:100%;text-align:left;border:0;border-radius:18px;padding:16px 16px 15px;cursor:pointer;color:#fff;background:linear-gradient(150deg,#0d5d4f 0%,#0a463c 100%);box-shadow:0 8px 22px rgba(6,60,50,.18);touch-action:manipulation}",
-      "#ntfOverlay .mu-digest:active{transform:scale(.99)}#ntfOverlay .mu-digest:focus-visible{outline:none;box-shadow:var(--mu-ring)}",
-      "#ntfOverlay .mu-dg-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:10px;border-top:1px solid rgba(255,255,255,.14);font:500 13px var(--mu-f);color:#cfe8e1}",
-      "#ntfOverlay .mu-dg-h{font:700 18px/1.28 var(--mu-f);letter-spacing:-.01em;text-wrap:balance}",
-      "#ntfOverlay .mu-dg-sub{font:400 14px/1.45 var(--mu-f);color:#cfe8e1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}",
-      "#ntfOverlay .mu-dg-go{flex:0 0 auto;display:flex;align-items:center;gap:2px;font:600 14px var(--mu-f);color:var(--mu-mint)}#ntfOverlay .mu-dg-go .smd-ico{width:18px;height:18px}",
-      // filters
-      "#ntfOverlay .mu-tools{display:flex;flex-direction:column;gap:10px;margin:0 -16px 14px}",
-      "#ntfOverlay .mu-chips{display:flex;gap:8px;overflow-x:auto;padding:2px 16px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 24px),transparent)}#ntfOverlay .mu-chips::-webkit-scrollbar{display:none}",
-      "#ntfOverlay .mu-chip{flex:0 0 auto;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--mu-line);background:var(--mu-card);color:var(--mu-ink);font:500 14px var(--mu-f);white-space:nowrap;cursor:pointer;touch-action:manipulation}",
-      "#ntfOverlay .mu-chip.on{background:var(--mu-ink);border-color:var(--mu-ink);color:var(--mu-page)}",
-      "#ntfOverlay .mu-chip:focus-visible{outline:none;box-shadow:var(--mu-ring)}",
-      "#ntfOverlay .mu-row2{display:flex;gap:8px;padding:0 16px}",
-      "#ntfOverlay .mu-search{flex:1;min-width:0;display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-radius:12px;background:var(--mu-card);border:1px solid var(--mu-line);color:var(--mu-mut)}",
-      "#ntfOverlay .mu-search .smd-ico{width:18px;height:18px;flex:0 0 18px}",
-      "#ntfOverlay .mu-search input{flex:1;min-width:0;border:0;background:none;outline:none;font:400 16px var(--mu-f);color:var(--mu-ink);-webkit-appearance:none;appearance:none}",
-      "#ntfOverlay .mu-search input::placeholder{color:var(--mu-mut)}",
-      "#ntfOverlay .mu-search:focus-within,#ntfOverlay .mu-branch:focus-within{box-shadow:var(--mu-ring);border-color:transparent}",
-      "#ntfOverlay .mu-branch{position:relative;flex:0 0 auto;max-width:42%;border-radius:12px;background:var(--mu-card);border:1px solid var(--mu-line)}",
-      "#ntfOverlay .mu-branch::after{content:'';position:absolute;right:13px;top:50%;width:7px;height:7px;margin-top:-6px;border-right:1.8px solid var(--mu-mut);border-bottom:1.8px solid var(--mu-mut);transform:rotate(45deg);pointer-events:none}",
-      "#ntfOverlay .mu-branch select{width:100%;height:44px;padding:0 32px 0 12px;border:0;background:none;outline:none;font:500 15px var(--mu-f);color:var(--mu-ink);-webkit-appearance:none;appearance:none;text-overflow:ellipsis}",
-      // cards
-      "#ntfOverlay .mu-list{display:flex;flex-direction:column;gap:10px}",
-      "#ntfOverlay .mu-card{position:relative;display:block;padding:14px 16px 12px;border-radius:16px;background:var(--mu-card);border:1px solid var(--mu-line);box-shadow:0 1px 2px rgba(13,40,48,.04);cursor:pointer;touch-action:manipulation;transition:transform .16s cubic-bezier(.22,1,.36,1),box-shadow .16s}",
-      "#ntfOverlay .mu-notice{cursor:default}",
-      "#ntfOverlay .mu-card[data-uid]:active{transform:scale(.988)}#ntfOverlay .mu-card:focus-visible{outline:none;box-shadow:var(--mu-ring)}",
-      "#ntfOverlay .mu-meta{display:flex;align-items:center;gap:8px;min-height:20px;font:600 12.5px var(--mu-f)}",
-      "#ntfOverlay .mu-type{display:inline-flex;align-items:center;gap:5px;color:var(--mu-green)}#ntfOverlay .mu-type .smd-ico{width:15px;height:15px}",
-      "#ntfOverlay .mu-type.t-drug_approval,#ntfOverlay .mu-type.t-approval{color:#047857}",
-      "#ntfOverlay .mu-type.t-safety_alert,#ntfOverlay .mu-type.t-safety,#ntfOverlay .mu-type.t-recall{color:#a1530a}",
-      "#ntfOverlay .mu-type.t-trial,#ntfOverlay .mu-type.t-study{color:#3c5a99}",
-      "body.dark #ntfOverlay .mu-type.t-drug_approval,body.dark #ntfOverlay .mu-type.t-approval{color:#5fd3b3}body.dark #ntfOverlay .mu-type.t-safety_alert,body.dark #ntfOverlay .mu-type.t-safety,body.dark #ntfOverlay .mu-type.t-recall{color:#f2b766}body.dark #ntfOverlay .mu-type.t-trial,body.dark #ntfOverlay .mu-type.t-study{color:#9db4ec}",
-      "#ntfOverlay .mu-flag{display:inline-flex;align-items:center;gap:5px;color:#b42318}#ntfOverlay .mu-flag::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}",
-      "#ntfOverlay .mu-flag.crit{color:#fff;background:#b42318;border-radius:6px;padding:1px 7px}#ntfOverlay .mu-flag.crit::before{display:none}",
-      "body.dark #ntfOverlay .mu-flag:not(.crit){color:#ff8a7a}",
-      "#ntfOverlay .mu-new{color:var(--mu-deep);background:var(--mu-mint);border-radius:6px;padding:1px 7px;font-weight:700}",
-      "#ntfOverlay .mu-when{margin-left:auto;font-weight:500;color:var(--mu-mut);font-variant-numeric:tabular-nums;white-space:nowrap}",
-      "#ntfOverlay .mu-title{margin:8px 0 0;font:700 17px/1.3 var(--mu-f);letter-spacing:-.01em;color:var(--mu-ink);text-wrap:pretty}",
-      "#ntfOverlay .mu-org{margin-top:4px;font:500 13.5px var(--mu-f);color:var(--mu-mut)}",
-      "#ntfOverlay .mu-lead{margin:8px 0 0;font:400 15px/1.5 var(--mu-f);color:var(--mu-ink);opacity:.86;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}",
-      "#ntfOverlay .mu-lead-full{display:block;-webkit-line-clamp:unset}",
-      "#ntfOverlay .mu-foot{display:flex;align-items:center;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--mu-line);font:500 13px var(--mu-f);color:var(--mu-mut)}",
-      "#ntfOverlay .mu-bits{flex:1;min-width:0;display:flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
-      "#ntfOverlay .mu-dot{width:3px;height:3px;border-radius:50%;background:currentColor;opacity:.6;flex:0 0 3px}",
-      "#ntfOverlay .mu-signed{font-weight:600;color:var(--mu-green);white-space:nowrap}",
-      "#ntfOverlay .mu-go{display:grid;place-items:center;width:28px;height:28px;margin-right:-6px;color:var(--mu-mut)}#ntfOverlay .mu-go .smd-ico{width:18px;height:18px}",
-      "#ntfOverlay .mu-src-link{margin-left:auto;font-weight:600;color:var(--mu-green);text-decoration:none}",
-      "#ntfOverlay .mu-empty{display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center;padding:48px 24px;font:400 14px/1.5 var(--mu-f);color:var(--mu-mut)}#ntfOverlay .mu-empty b{font:600 16px var(--mu-f);color:var(--mu-ink)}",
-      "#ntfOverlay .mu-more{text-align:center;padding:18px;font:500 13px var(--mu-f);color:var(--mu-mut)}",
-      "@media (prefers-reduced-motion:reduce){#ntfOverlay .mu-card,#ntfOverlay .mu-seg .ntf-tab{transition:none}#ntfOverlay .mu-icbtn.spin .smd-ico{animation:none}}"
+      // ---- Alerts (2026-11-27, second pass). Native grouped-list language on a solid page; teal is the one
+      // accent (links, unread, selected tab), red and amber only mark importance and safety. ----
+      ".mu{--mu-page:#F1F4F5;--mu-surface:#fff;--mu-line:rgba(16,38,43,.11);--mu-ink:#10262B;--mu-mut:#4C656E;--mu-acc:#046856;--mu-warn:#8F5300;--mu-red:#B42318;--mu-press:rgba(16,38,43,.05);--mu-fill:rgba(16,38,43,.06);--mu-f:var(--rds-font,var(--sans,system-ui));--mu-out:cubic-bezier(.22,1,.36,1);--mu-push:cubic-bezier(.32,.72,0,1)}",
+      "body.dark .mu{--mu-page:#0B1416;--mu-surface:#131E21;--mu-line:rgba(255,255,255,.09);--mu-ink:#E7EFF0;--mu-mut:#98AEB4;--mu-acc:#5FD3B3;--mu-warn:#F0B35B;--mu-red:#FF8A7A;--mu-press:rgba(255,255,255,.06);--mu-fill:rgba(255,255,255,.08)}",
+      "html body #ntfOverlay.mu:not(#_):not(#__),html body #ntfDetail.mu:not(#_):not(#__){background:var(--mu-page)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;color:var(--mu-ink);font-family:var(--mu-f)}",
+      ".mu ::selection{background:color-mix(in srgb,var(--mu-acc) 24%,transparent)}",
+      ".mu .mu-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}",
+      // entrance / exit
+      "#ntfOverlay.mu.on{animation:none}",
+      "#ntfDetail.mu.on{animation:muPushIn .42s var(--mu-push) both;box-shadow:-12px 0 32px rgba(0,0,0,.12)}@keyframes muPushIn{from{transform:translateX(100%)}to{transform:none}}",
+      "#ntfDetail.mu.mu-out-right{animation:muPushOut .3s var(--mu-push) both}@keyframes muPushOut{to{transform:translateX(100%)}}",
+      // bar: transparent over the page until the large title scrolls under it
+      ".mu .mu-bar{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:env(safe-area-inset-top) 4px 0;background:var(--mu-page);border-bottom:1px solid transparent;transition:background .2s,border-color .2s}",
+      ".mu .mu-bar.is-compact{background:var(--mu-surface);border-bottom-color:var(--mu-line)}",
+      ".mu .mu-bar-t{position:absolute;left:56px;right:56px;bottom:0;height:44px;display:flex;align-items:center;justify-content:center;font:600 17px var(--mu-f);color:var(--mu-ink);opacity:0;transform:translateY(6px);transition:opacity .2s,transform .28s var(--mu-out);pointer-events:none}",
+      ".mu .mu-bar.is-compact .mu-bar-t{opacity:1;transform:none}",
+      ".mu .mu-icbtn{width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:10px;background:none;color:var(--mu-acc);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}",
+      ".mu span.mu-icbtn{cursor:default}",
+      ".mu .mu-icbtn .smd-ico{width:22px;height:22px}.mu .mu-flip{transform:scaleX(-1)}",
+      ".mu .mu-icbtn:active{background:var(--mu-press)}.mu .mu-icbtn:focus-visible{outline:2px solid var(--mu-acc);outline-offset:-2px}",
+      ".mu .mu-icbtn.is-busy .smd-ico{animation:muSpin .8s linear infinite}@keyframes muSpin{to{transform:rotate(360deg)}}",
+      // scroll area, large title, tabs
+      ".mu .mu-scroll{position:relative;padding:0 16px calc(48px + env(safe-area-inset-bottom));max-width:720px;margin:0 auto;width:100%;box-sizing:border-box;overscroll-behavior-y:contain}",
+      ".mu .mu-large{margin:2px 0 10px;font:700 32px/1.12 var(--mu-f);letter-spacing:-.02em;color:var(--mu-ink)}",
+      ".mu .mu-tabs{position:relative;display:flex;gap:24px;border-bottom:1px solid var(--mu-line);margin:0 0 14px}",
+      ".mu .mu-tabs .ntf-tab{flex:0 0 auto;min-height:44px;padding:0;border:0;background:none;font:600 15px var(--mu-f);color:var(--mu-mut);cursor:pointer;touch-action:manipulation;transition:color .2s}",
+      ".mu .mu-tabs .ntf-tab.on{color:var(--mu-ink)}",
+      ".mu .mu-tabs .ntf-tab:focus-visible{outline:2px solid var(--mu-acc);outline-offset:2px;border-radius:4px}",
+      ".mu .mu-tab-ink{position:absolute;left:0;bottom:-1px;height:2px;width:0;border-radius:2px;background:var(--mu-acc);transition:transform .34s var(--mu-out),width .34s var(--mu-out)}",
+      // pull to refresh
+      ".mu .mu-ptr{height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:height .3s var(--mu-out);color:var(--mu-mut)}",
+      ".mu .mu-ptr-ic{display:grid;place-items:center;opacity:0}.mu .mu-ptr-ic .smd-ico{width:22px;height:22px}",
+      ".mu .mu-ptr.is-armed{color:var(--mu-acc)}.mu .mu-ptr.is-loading .mu-ptr-ic{opacity:1!important;color:var(--mu-acc);animation:muSpin .8s linear infinite}",
+      // search + filters
+      ".mu .mu-search{display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:10px;background:var(--mu-fill);color:var(--mu-mut)}",
+      ".mu .mu-search .smd-ico{width:18px;height:18px;flex:0 0 18px}",
+      ".mu .mu-search input{flex:1;min-width:0;height:100%;border:0;background:none;outline:none;font:400 16px var(--mu-f);color:var(--mu-ink);-webkit-appearance:none;appearance:none}",
+      ".mu .mu-search input::placeholder{color:var(--mu-mut);opacity:1}",
+      ".mu .mu-search:focus-within{box-shadow:0 0 0 2px var(--mu-acc)}",
+      ".mu .mu-filters{display:flex;align-items:center;gap:6px;margin:10px -16px 0}",
+      ".mu .mu-chips{flex:1;min-width:0;display:flex;gap:6px;overflow-x:auto;padding:6px 8px 6px 16px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 20px),transparent)}.mu .mu-chips::-webkit-scrollbar{display:none}",
+      ".mu .mu-chip{position:relative;flex:0 0 auto;height:34px;padding:0 12px;border-radius:8px;border:1px solid var(--mu-line);background:var(--mu-surface);color:var(--mu-ink);font:500 14px var(--mu-f);white-space:nowrap;cursor:pointer;touch-action:manipulation;transition:background .18s,color .18s,border-color .18s}",
+      ".mu .mu-chip::after{content:'';position:absolute;left:0;right:0;top:-5px;bottom:-5px}",
+      ".mu .mu-chip.on{background:var(--mu-ink);border-color:var(--mu-ink);color:var(--mu-surface)}",
+      ".mu .mu-chip:active{background:var(--mu-press)}.mu .mu-chip.on:active{opacity:.85}",
+      ".mu .mu-chip:focus-visible{outline:2px solid var(--mu-acc);outline-offset:2px}",
+      ".mu .mu-branch{position:relative;flex:0 0 auto;margin-right:16px}",
+      ".mu .mu-branch::after{content:'';position:absolute;right:2px;top:50%;width:6px;height:6px;margin-top:-5px;border-right:1.6px solid var(--mu-acc);border-bottom:1.6px solid var(--mu-acc);transform:rotate(45deg);pointer-events:none}",
+      ".mu .mu-branch select{height:44px;max-width:130px;padding:0 16px 0 4px;border:0;background:none;font:600 14px var(--mu-f);color:var(--mu-acc);-webkit-appearance:none;appearance:none;text-overflow:ellipsis;cursor:pointer}",
+      ".mu .mu-branch select:focus-visible{outline:2px solid var(--mu-acc);outline-offset:0;border-radius:6px}",
+      // phone alert status
+      ".mu .mu-push:empty{display:none}.mu .mu-push{margin:12px 0 0}",
+      ".mu .mu-pstat{display:flex;align-items:center;gap:6px;font:400 13.5px var(--mu-f);color:var(--mu-mut)}",
+      ".mu .mu-pstat .smd-ico{width:16px;height:16px;color:var(--mu-acc)}",
+      ".mu .mu-ptxt{flex:1}",
+      ".mu .mu-plink{min-height:44px;margin:-12px 0;padding:0 2px;border:0;background:none;font:600 13.5px var(--mu-f);color:var(--mu-acc);cursor:pointer;touch-action:manipulation}",
+      ".mu .mu-plink:disabled{color:var(--mu-mut);cursor:not-allowed}.mu .mu-plink:focus-visible{outline:2px solid var(--mu-acc);border-radius:6px}",
+      ".mu .mu-pcard{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:var(--mu-surface);font:400 14px/1.45 var(--mu-f);color:var(--mu-ink)}",
+      ".mu .mu-pcard>span{flex:1}.mu .mu-pcard.warn{display:block}.mu .mu-pcard.warn b{display:block;color:var(--mu-warn);font-weight:600;margin-bottom:2px}",
+      ".mu .mu-pbtn{flex:0 0 auto;height:40px;padding:0 14px;border:0;border-radius:10px;background:var(--mu-acc);color:#fff;font:600 14px var(--mu-f);cursor:pointer}",
+      "body.dark .mu .mu-pbtn{color:#062a23}",
+      // sections + grouped list
+      ".mu .mu-sec{margin-top:22px}",
+      ".mu .mu-sech{margin:0 0 8px 4px;font:600 13px var(--mu-f);color:var(--mu-mut)}",
+      ".mu .mu-group{list-style:none;margin:0;padding:0;border-radius:12px;background:var(--mu-surface);overflow:hidden}",
+      "body.dark .mu .mu-group,body.dark .mu .mu-digest{box-shadow:inset 0 0 0 1px var(--mu-line)}",
+      ".mu .mu-row{position:relative;padding:13px 16px 13px 20px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .12s}",
+      ".mu .mu-row+.mu-row{box-shadow:inset 0 1px 0 var(--mu-line)}",
+      ".mu .mu-row-static{cursor:default}",
+      ".mu .mu-row[data-uid]:active{background:var(--mu-press)}",
+      "@media (hover:hover){.mu .mu-row[data-uid]:hover{background:var(--mu-press)}}",
+      ".mu .mu-row:focus-visible{outline:2px solid var(--mu-acc);outline-offset:-2px;border-radius:12px}",
+      ".mu .mu-unread{position:absolute;left:7px;top:19px;width:7px;height:7px;border-radius:50%;background:var(--mu-acc)}",
+      ".mu .mu-line1{display:flex;align-items:baseline;gap:8px;font:500 13px var(--mu-f);color:var(--mu-mut)}",
+      ".mu .mu-kind{font-weight:600;color:var(--mu-mut)}.mu .mu-kind.is-warn{color:var(--mu-warn)}",
+      ".mu .mu-imp{font-weight:600;color:var(--mu-red)}.mu .mu-imp.is-crit{font-weight:700}",
+      ".mu .mu-when{margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap}",
+      ".mu .mu-title{margin:3px 0 0;font:600 16.5px/1.32 var(--mu-f);letter-spacing:-.005em;color:var(--mu-ink);text-wrap:pretty}",
+      ".mu .mu-row.is-unread .mu-title{font-weight:700}",
+      ".mu .mu-lead{display:-webkit-box;margin:4px 0 0;font:400 14.5px/1.45 var(--mu-f);color:var(--mu-mut);-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}",
+      ".mu .mu-lead-full{display:block}",
+      ".mu .mu-src{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 2px;margin-top:6px;font:400 13px var(--mu-f);color:var(--mu-mut)}",
+      ".mu .mu-org{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}",
+      ".mu .mu-signed{font-weight:600;color:var(--mu-acc)}",
+      ".mu .mu-srclink{margin-left:auto;font-weight:600;color:var(--mu-acc);text-decoration:none}",
+      // digest
+      ".mu .mu-digest-wrap:empty{display:none}",
+      ".mu .mu-digest{display:flex;flex-direction:column;gap:0;width:100%;padding:14px 16px;border:0;border-radius:12px;background:var(--mu-surface);text-align:left;cursor:pointer;touch-action:manipulation;color:var(--mu-ink);transition:background .12s}",
+      ".mu .mu-digest:active{background:color-mix(in srgb,var(--mu-surface) 92%,var(--mu-ink))}.mu .mu-digest:focus-visible{outline:2px solid var(--mu-acc);outline-offset:2px}",
+      ".mu .mu-dg-h{font:600 17px/1.3 var(--mu-f);letter-spacing:-.01em;text-wrap:balance}",
+      ".mu .mu-dg-go{margin-top:10px;font:600 14px var(--mu-f);color:var(--mu-acc)}",
+      // states
+      ".mu #ntfFeed{transition:opacity .16s}.mu #ntfFeed.is-swapping{opacity:.4}",
+      ".mu .mu-empty{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:28px;padding:36px 20px;text-align:center;font:400 14.5px/1.5 var(--mu-f);color:var(--mu-mut)}",
+      ".mu .mu-empty b{font:600 17px var(--mu-f);color:var(--mu-ink)}",
+      ".mu .mu-retry{margin-top:10px;height:44px;padding:0 18px;border:0;border-radius:10px;background:var(--mu-acc);color:#fff;font:600 15px var(--mu-f);cursor:pointer}body.dark .mu .mu-retry{color:#062a23}",
+      ".mu .mu-more{display:flex;align-items:center;justify-content:center;gap:8px;padding:22px;font:500 13.5px var(--mu-f);color:var(--mu-mut)}",
+      ".mu .mu-spin{width:14px;height:14px;border-radius:50%;border:2px solid var(--mu-line);border-top-color:var(--mu-acc);animation:muSpin .8s linear infinite}",
+      // update detail sits on the same tokens
+      ".mu.mu-dt .ntf-scroll{padding:6px 18px calc(48px + env(safe-area-inset-bottom))}",
+      ".mu.mu-dt .dt-head h2{font:700 24px/1.22 var(--mu-f);letter-spacing:-.015em;color:var(--mu-ink);margin:10px 0 6px;text-wrap:balance}",
+      ".mu.mu-dt .dt-sub{font:400 14px/1.5 var(--mu-f);color:var(--mu-mut)}",
+      ".mu.mu-dt .dt-summary{font:400 16px/1.6 var(--mu-f);color:var(--mu-ink)}",
+      ".mu.mu-dt .dt-sec{border-top-color:var(--mu-line)}.mu.mu-dt .dt-sec h4{text-transform:none;letter-spacing:0;font:600 15px var(--mu-f);color:var(--mu-ink)}",
+      ".mu.mu-dt .dt-sec li,.mu.mu-dt .dt-sec p{font:400 15px/1.6 var(--mu-f);color:var(--mu-ink)}",
+      ".mu.mu-dt .dt-refs a{color:var(--mu-acc)}.mu.mu-dt .fd-read{font:500 13px var(--mu-f);color:var(--mu-mut)}",
+      ".mu.mu-dt .dt-btn{min-height:44px;border-radius:10px;border-color:var(--mu-line);background:var(--mu-surface);color:var(--mu-ink);font:600 14px var(--mu-f)}",
+      ".mu.mu-dt .dt-btn.primary{background:var(--mu-acc);border-color:var(--mu-acc);color:#fff}body.dark .mu.mu-dt .dt-btn.primary{color:#062a23}",
+      ".mu.mu-dt .ntf-cat{background:none;padding:0;text-transform:none;letter-spacing:0;font:600 13px var(--mu-f);color:var(--mu-mut)}.mu.mu-dt .ntf-hi{background:none;color:var(--mu-red);text-transform:none;letter-spacing:0;font:600 13px var(--mu-f);padding:0}",
+      "@media (prefers-reduced-motion:reduce){#ntfDetail.mu.on{animation:none}.mu .mu-tab-ink,.mu .mu-bar-t,.mu .mu-ptr,.mu #ntfFeed{transition:none}.mu .mu-icbtn.is-busy .smd-ico{animation:none}}"
     ].join("");
     var st = document.createElement("style"); st.id = "ntf-css"; st.textContent = css; document.head.appendChild(st);
   }

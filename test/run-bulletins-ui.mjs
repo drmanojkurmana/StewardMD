@@ -428,8 +428,8 @@ try {
 
   /* 12. bell feed: the signed-bulletin marker, worded so it never implies the AI text was reviewed */
   await ev("window.SMD_openUpdate&&SMD_openUpdate('u9');true");
-  ok(await until(`!!document.querySelector('.mu-card[data-uid="u9"]')`), "bell feed renders");
-  ok(await ev(`(function(){var s=document.querySelector('.mu-card[data-uid="u9"] .mu-signed');return !!s&&s.textContent==='Signed bulletin in Library'&&!document.querySelector('.mu-card[data-uid="u8"] .mu-signed')})()`), "only the item with a live bulletin carries the marker");
+  ok(await until(`!!document.querySelector('.mu-row[data-uid="u9"]')`), "bell feed renders");
+  ok(await ev(`(function(){var s=document.querySelector('.mu-row[data-uid="u9"] .mu-signed');return !!s&&s.textContent==='Signed bulletin in Library'&&!document.querySelector('.mu-row[data-uid="u8"] .mu-signed')})()`), "only the item with a live bulletin carries the marker");
 
   /* 13. the Saturday review push: tapping it (cold start at /?rvtab=bulletins) opens the Clinical updates tab */
   await load("?rvtab=bulletins");
