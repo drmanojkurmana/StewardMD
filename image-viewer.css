@@ -3,10 +3,12 @@
    Always dark (a light-box reads images best on near black, in both themes). It owns every touch on it (touch-action:
    none; the script keeps the page behind still). Controls are 44 px, inside the safe areas; the bottom bar holds zoom
    out, the zoom level (tap to fit) and zoom in, for anyone who cannot pinch. */
-.pv { position: fixed; inset: 0; z-index: 2147483000; display: flex; flex-direction: column; color: #f5f3ee; touch-action: none; overscroll-behavior: contain;
+/* Scoped to the viewer root (prep-viewer.js sets role="dialog"): a bare .pv also matched the Help & Support
+   conversation preview and the infusion pump value, turning each into an invisible full-screen layer that took every tap. */
+.pv[role="dialog"] { position: fixed; inset: 0; z-index: 2147483000; display: flex; flex-direction: column; color: #f5f3ee; touch-action: none; overscroll-behavior: contain;
   -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
   font-family: var(--sans, -apple-system, "Segoe UI", Roboto, sans-serif); }
-.pv:focus { outline: none; }
+.pv[role="dialog"]:focus { outline: none; }
 .pv-scrim { position: absolute; inset: 0; background: #0e0e1c; }
 .pv-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; touch-action: none; cursor: zoom-in;
   padding: calc(64px + env(safe-area-inset-top, 0px)) calc(8px + env(safe-area-inset-right, 0px)) calc(88px + env(safe-area-inset-bottom, 0px)) calc(8px + env(safe-area-inset-left, 0px)); }
