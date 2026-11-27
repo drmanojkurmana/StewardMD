@@ -770,6 +770,12 @@ test("gateway llm: token expiry, mismatch, settled job, PHI block, input ceiling
   envPoor.MAIK_KV._m.clear();
   const poorToken = await mintJobToken(SECRET, poor.job.id, nowSec + 600);
   assert.equal((await llmCall(envPoor, poor.job, llmBody(poor.job), poorToken)).http, 402);
+  /* The manuscript_draft worker sends userId "" (the queue message has none): the signed job token
+   * already binds the call, so an empty userId is accepted (live 2026-11-27 every draft failed 409). */
+  const freshJob = await createJob(env, p.id, "tok-alice", (await uploadPdf(env, p.id, "tok-alice", "y")).id, "kg-empty-uid");
+  const freshToken = await mintJobToken(SECRET, freshJob.id, Math.floor(Date.now() / 1000) + 600);
+  const emptyUid = await llmCall(env, freshJob, llmBody(freshJob, { userId: "" }), freshToken);
+  assert.notEqual(emptyUid.error && emptyUid.error.code, "job_mismatch", JSON.stringify(emptyUid));
 });
 
 /* ---- Prompt-injection set ------------------------------------------------------ */
