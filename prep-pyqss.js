@@ -59,7 +59,16 @@
     return { k: d.k === "rev" ? "rev" : "learn", title: "Day " + d.n + (d.k === "learn" ? ": " + short(d.dom).slice(0, 40) : ": revision"), body: (d.k === "learn" ? "Read " : "Revise ") + names + ". Then practise " + d.q + " questions." };
   }
   function dayOf(ys, today) { return ys && ys.start != null ? today - ys.start + 1 : 0; }
-  var PURE = { paperTitle: paperTitle, byIds: byIds, inDomain: inDomain, mustItems: mustItems, makePlan: makePlan, itemsOfDay: itemsOfDay, noticeOf: noticeOf, dayOf: dayOf, short: short };
+  /* lesFor(t) -> the lesson a topic opens. t.les is a lexical best match made at build time (tools/pyq-ss-build.mjs) and a
+     few land on the wrong lesson; those names are corrected here, so the fix reaches phones without rebuilding the R2 index.
+     Owner 2026-11-26 recording: "Cisplatin Emetogenicity (HEC at Any Dose)" opened the cancer pain ladder lesson. */
+  var LES_FIX = [[/\bcisplatin\b[^]*\bemetogen|\bemetogen[^]*\bcisplatin\b|\bHEC\b[^]*\bcut-?offs?\b/i, "son-cinv"]];
+  function lesFor(t) {
+    var n = String((t && t.name) || "");
+    for (var i = 0; i < LES_FIX.length; i++) if (LES_FIX[i][0].test(n)) return LES_FIX[i][1];
+    return (t && t.les) || "";
+  }
+  var PURE = { lesFor: lesFor, paperTitle: paperTitle, byIds: byIds, inDomain: inDomain, mustItems: mustItems, makePlan: makePlan, itemsOfDay: itemsOfDay, noticeOf: noticeOf, dayOf: dayOf, short: short };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -139,10 +148,10 @@
    * topic itself opens the Learn lesson that teaches it (t.les, from tools/pyq-ss-build.mjs). */
   function ticks(host) { var s = host.store(); s.ys = s.ys || {}; return (s.ys.tick = s.ys.tick || {}); }
   function topicRow(host, t, meta) {
-    var e = host.esc, k = (t.dom || "") + "|" + t.name, on = !!ticks(host)[k];
+    var e = host.esc, k = (t.dom || "") + "|" + t.name, on = !!ticks(host)[k], les = lesFor(t);
     var body = "<b>" + e(t.name) + "</b><small>" + meta + (t.kp ? "<br>" + e(t.kp) : "") + "</small>";
     return '<div class="pn-row pn-yq-trow' + (on ? " on" : "") + '"><button type="button" class="pn-yq-tick" data-act="ys-tick" data-v="' + e(k) + '" aria-pressed="' + on + '" aria-label="Mark ' + e(t.name) + ' done">' + host.ico("check") + "</button>" +
-      (t.les ? '<button type="button" class="pn-rb pn-yq-tgo" data-act="l-open" data-s="' + SUBJECT + '" data-m="' + e(t.les) + '">' + body + '<span class="pn-st">Lesson ' + host.ico("chev") + "</span></button>" : '<span class="pn-rb">' + body + "</span>") + "</div>";
+      (les ? '<button type="button" class="pn-rb pn-yq-tgo" data-act="l-open" data-s="' + SUBJECT + '" data-m="' + e(les) + '">' + body + '<span class="pn-st">Lesson ' + host.ico("chev") + "</span></button>" : '<span class="pn-rb">' + body + "</span>") + "</div>";
   }
   function renderDomain(host, name) {
     var e = host.esc, d = null; S.ix.analysis.domains.forEach(function (x) { if (x.name === name) d = x; });

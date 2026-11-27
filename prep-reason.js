@@ -560,12 +560,28 @@
   }
   /* Lesson and card targets are re-checked against the live indexes; a check that cannot run (offline before the
      first open) keeps the target: opening it then says plainly when it is missing. */
+  /* titled(l, ixTitle) -> l, or a copy carrying the lesson index title when l's own title is missing or only its key
+     spelled out (owner 2026-11-27: a row read "Lesson: son cll" for Chronic lymphocytic leukaemia). */
+  function slugTitle(t, key) {
+    var n = function (x) { return String(x || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); };
+    t = String(t || "").trim();
+    if (!t) return true;
+    var k = n(key);
+    return n(t) === k || n(t) === n(String(key || "").replace(/^[a-z]{2,4}-/, "")) || (t === t.toLowerCase() && /^[a-z0-9 _-]+$/.test(t) && k.indexOf(n(t)) >= 0);
+  }
+  function titled(l, ixTitle) {
+    if (typeof ixTitle !== "string" || !ixTitle || !slugTitle(l.title, l.key)) return l;
+    var c = {}; for (var p in l) c[p] = l[p];
+    c.title = ixTitle;
+    return c;
+  }
   function checkLesson(key, mid) {
     if (!G.PREP_LESSONS || !G.PREP_LESSONS.index) return Promise.resolve(true);
     try {
       return G.PREP_LESSONS.index().then(function (ix) {
         var ms = (ix && ix.modules) || {};
-        return !!(ms[key] || ms[mid]);
+        // The lesson's own index title when it has one, so a row never shows a links-shard slug ("son cll").
+        return ms[key] ? (ms[key].title || true) : !!ms[mid];
       }, function () { return true; });
     } catch (e) { return Promise.resolve(true); }
   }
@@ -833,8 +849,9 @@
       var wantCd = itemCards || !!(sh && sh.mod && sh.mod.cd);
       return Promise.all([Promise.all(checks), wantCd ? checkCards(mid) : false,
         resolveRelated(H, sh ? relOf(sh, iid) : []), ownLesson(mid)]).then(function (rr) {
-        var okLessons = lessons.filter(function (l, i) { return rr[0][i]; });
-        var lesson = (!okLessons.length && lsKeys[0] && rr[0][0]) ? { key: lsKeys[0] } : null;
+        var okLessons = [];
+        lessons.forEach(function (l, i) { if (rr[0][i]) okLessons.push(titled(l, rr[0][i])); });
+        var lesson = (!okLessons.length && lsKeys[0] && rr[0][0]) ? titled({ key: lsKeys[0] }, rr[0][0]) : null;
         var pipeLs = {};
         pipe.forEach(function (l) { if (l.k === "ls") pipeLs[l.id] = 1; });
         var routed = routeFallbackLessons(okLessons, lesson, rr[3], pipeLs);

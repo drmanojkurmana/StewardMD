@@ -513,6 +513,15 @@
     var w = el(), vv = G.visualViewport, r = root(); if (!w || !vv || !r) return;
     if (r.scrollTop) r.scrollTop = 0;                                // the overlay itself never scrolls (a reveal must not move it)
     var b = body(), end = atEnd(b) || (S && S.kbFollow > Date.now()), p = kbPlace(vv, r);
+    /* iPad with a hardware keyboard (owner 2026-11-21 screenshot): only the small shortcut bar (keyboard, up/down, mic)
+       covers the bottom, yet WebKit still pans the whole page up to "reveal" the box. The header slid under the status
+       bar and the web view's own green background showed in a band at the bottom. The box is already above the bar, so
+       the pan is undone; the wrap then ends right on top of the bar. A real on-screen keyboard (gap above 160) keeps
+       the pan, which it needs. */
+    if (!(vv.scale && Math.abs(vv.scale - 1) > 0.01) && p.gap > 1 && p.gap < 160 && ((vv.offsetTop || 0) > 1 || (G.pageYOffset || 0) > 1)) {
+      try { G.scrollTo(0, 0); } catch (e) {}
+      p = kbPlace(vv, r);
+    }
     if ((vv.scale && Math.abs(vv.scale - 1) > 0.01) || (p.gap < 1 && p.top < 1)) {
       if (w.style.height) { w.style.top = ""; w.style.height = ""; w.style.bottom = ""; }
       w.classList.remove("pa-kb"); w.classList.remove("pa-kbs");

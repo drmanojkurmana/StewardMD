@@ -31,7 +31,7 @@
   function load(id) {
     var b = bucketOf(id);
     if (!cache[b]) {
-      var url = "/kb/dist/v2/b" + pad2(b) + ".json?v=kbv23";
+      var url = "/kb/dist/v2/b" + pad2(b) + ".json?v=kbv24-nopdf";
       cache[b] = ((window.SMD_CONTENT && SMD_CONTENT.fetchJSON)
         ? SMD_CONTENT.fetchJSON(url, { optional: true }).then(function (j) { return j || {}; })
         : fetch(url).then(function (r) { return r.ok ? r.json() : {}; }))
@@ -115,7 +115,9 @@
    * single-slot form. */
   function render(x, kind) {
     var cites = {};
-    (x.citations || []).forEach(function (c) { cites[c.id] = c.label || c.id; });
+    // Owner 2026-11-27: the internal "Tables PDF" working source is never shown as a Source line
+    // (stripped from kb/ data too; this guards a bucket cached before that rebuild).
+    (x.citations || []).forEach(function (c) { if (!/^Tables PDF/i.test(String(c.label || ""))) cites[c.id] = c.label || c.id; });
     var fcs = x.flowcharts || [], vts = x.valueTables || [];
     if (kind === "foot") return (fcs.length || vts.length) ? NOTE : "";
     if (kind === "figures") return figuresHTML(x.figures);
