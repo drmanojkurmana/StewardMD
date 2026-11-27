@@ -397,4 +397,22 @@ describe("research-ondevice-pdf", () => {
     assert.equal(log.canvases[0].width, 0);
     assert.equal(log.canvases[0].height, 0);
   });
+
+  test("11. pure ES5 SHA-256 fallback matches Node crypto when crypto.subtle is unavailable (Item 10)", async () => {
+    const cryptoMod = await import("node:crypto");
+    const desc = Object.getOwnPropertyDescriptor(globalThis, "crypto");
+    try {
+      Object.defineProperty(globalThis, "crypto", { configurable: true, value: undefined });
+      for (const size of [0, 13, 55, 56, 63, 64, 65, 250]) {
+        const buf = new Uint8Array(size);
+        for (let i = 0; i < size; i++) buf[i] = (i * 37 + 11) & 0xff;
+        const got = await ondevice.sha256(buf);
+        const want = cryptoMod.createHash("sha256").update(buf).digest("hex");
+        assert.equal(got, want, "pure ES5 SHA-256 mismatch for size " + size);
+      }
+    } finally {
+      if (desc) Object.defineProperty(globalThis, "crypto", desc);
+      else delete globalThis.crypto;
+    }
+  });
 });

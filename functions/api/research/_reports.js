@@ -5,6 +5,7 @@
  * are the caller's own; the pricing note is adminAuth. Outsiders get 404.
  */
 import { adminAuth, adminErr } from "./_institutions.js";
+import { checkContainerHoursAlerts } from "./_cloud_fallback.js";
 import { walletKeyFor } from "./_credits.js";
 
 function bounds(url) {
@@ -151,5 +152,7 @@ export async function pricingNote(ctx) {
       : "The section 12 gate is NOT met: at least 5 real reviews must be measured before any price is set. ") +
     "Unit economics must also count worker compute, R2 storage, app-store fees (15 to 30 percent when bought in-app) and taxes; none of those are in the AI number above. " +
     "This note is deterministic and sets no price.";
-  return api.json({ note, measured, generatedTs: Date.now() }, 200, { "x-request-id": requestId });
+  let containerUsage = null;
+  try { containerUsage = await checkContainerHoursAlerts(ctx.env, db, Date.now()); } catch { containerUsage = null; }
+  return api.json({ note, measured, containerUsage, generatedTs: Date.now() }, 200, { "x-request-id": requestId });
 }

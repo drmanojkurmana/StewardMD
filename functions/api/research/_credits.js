@@ -33,6 +33,7 @@
 import { getCreditRecord, putCreditRecord, getCredits } from "../../_credits.js";
 import { modelRate } from "../../_ai_usage.js";
 import { TIER_CEILINGS } from "./_caps.js";
+import { refundCloudFallbackForJob } from "./_cloud_fallback.js";
 
 export function usdInrRate(env) {
   const v = Number(env && env.RESEARCH_USD_INR);
@@ -102,9 +103,35 @@ export async function institutionBalance(db, institutionId) {
  * running worker jobs hold funds. */
 export async function outstandingReserves(db, ownerType, ownerId) {
   const row = await db.prepare(
-    "SELECT COALESCE(SUM(-delta),0) AS n FROM research_credit_ledger WHERE owner_type=? AND owner_id=? AND reason='reserve' AND job_id IN (SELECT id FROM research_job_runs WHERE status IN ('queued','running'))")
+    "SELECT MAX(0, COALESCE(SUM(-delta),0)) AS n FROM research_credit_ledger WHERE owner_type=? AND owner_id=? AND reason IN ('reserve','release') AND job_id IN (SELECT id FROM research_job_runs WHERE status IN ('queued','running'))")
     .bind(ownerType, ownerId).first();
   return (row && row.n) || 0;
+}
+
+/* Currently unreleased hold for a job, keyed to the latest active reserve row
+ * so released holds from prior device failures or paired gateway reserves are
+ * never double-released or double-settled. */
+export async function activeJobReservation(db, jobId) {
+  const holdRow = await db.prepare(
+    "SELECT COALESCE(SUM(CASE WHEN reason IN ('reserve','release') THEN delta ELSE 0 END), 0) AS hold_net FROM research_credit_ledger WHERE job_id=?")
+    .bind(jobId).first();
+  const unreleased = -Number((holdRow && holdRow.hold_net) || 0);
+  if (!(unreleased > 0)) return null;
+  let reserveRow = await db.prepare(
+    "SELECT * FROM research_credit_ledger WHERE job_id=? AND reason='reserve' AND delta=? ORDER BY ts DESC, rowid DESC LIMIT 1")
+    .bind(jobId, -unreleased).first();
+  if (!reserveRow) {
+    reserveRow = await db.prepare(
+      "SELECT * FROM research_credit_ledger WHERE job_id=? AND reason='reserve' ORDER BY ts DESC, rowid DESC LIMIT 1")
+      .bind(jobId).first();
+  }
+  if (!reserveRow) return null;
+  return {
+    ownerType: reserveRow.owner_type,
+    ownerId: reserveRow.owner_id,
+    quote: unreleased,
+    jobId,
+  };
 }
 /* A queued/running job older than this can no longer be running: the worker
  * lease is 2 h and the research worker cron ignores rows older than 3 h, so
@@ -130,22 +157,25 @@ export async function expireLostJobs(db, uuid, now) {
       .bind(at, row.id).run();
     if (!upd.meta || upd.meta.changes !== 1) continue;
     failedJobs++;
-    /* Same release shape as a failed worker job (_callback.js): the first
-     * reserve row pins owner and quote. */
-    const reserveRow = await db.prepare(
-      "SELECT * FROM research_credit_ledger WHERE job_id=? AND reason='reserve' ORDER BY ts ASC LIMIT 1")
-      .bind(row.id).first();
-    if (!reserveRow) continue;
-    const reservation = { ownerType: reserveRow.owner_type, ownerId: reserveRow.owner_id,
-      quote: -reserveRow.delta, jobId: row.id };
+    await refundCloudFallbackForJob(db, row.id, "job_lost").catch(() => {});
+    /* Same release shape as a failed worker job (_callback.js): release only
+     * the currently active reserve row. */
+    const reservation = await activeJobReservation(db, row.id);
+    if (!reservation) continue;
     await releaseCredits(db, uuid, reservation);
     releasedMicroUsd += reservation.quote;
   }
   /* Stats jobs hold no credits (T0 work), but their status is polled the
    * same way, so they must not stay queued/running forever either. */
+  const statsRows = (await db.prepare(
+    "SELECT id FROM research_stats_jobs WHERE status IN ('queued','running') AND created_ts<?")
+    .bind(cutoff).all()).results || [];
   const statsUpd = await db.prepare(
     "UPDATE research_stats_jobs SET status='failed',error_code='job_lost',completed_ts=? WHERE status IN ('queued','running') AND created_ts<?")
     .bind(at, cutoff).run();
+  for (const sr of statsRows) {
+    await refundCloudFallbackForJob(db, sr.id, "job_lost").catch(() => {});
+  }
   const failedStatsJobs = (statsUpd.meta && statsUpd.meta.changes) || 0;
   return { failedJobs, failedStatsJobs, releasedMicroUsd };
 }

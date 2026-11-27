@@ -37,6 +37,7 @@ const MAX_SEARCH_BYTES = 65536;
 const LLM_CALL_DEADLINE_MS = 120000;
 const TOKEN_TTL_SECONDS = 900; /* short-lived; matches the queue visibility */
 const SETTLED = ["succeeded", "failed", "cancelled"];
+const STEP_ID_RE = /^[a-z0-9:_-]{1,80}$/;
 const SEARCH_DATABASES = { pubmed, europe_pmc: europepmc, crossref };
 const TRIALS_READ_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
 
@@ -133,6 +134,12 @@ export async function llmRoute(ctx) {
     return err(400, "invalid_body", "purpose must be at most 40 characters", requestId);
   if (body.maxOutputTokens !== undefined && (!Number.isInteger(body.maxOutputTokens) || body.maxOutputTokens < 1))
     return err(400, "invalid_body", "maxOutputTokens must be a positive integer", requestId);
+  let stepId = null;
+  if (body.stepId !== undefined && body.stepId !== null) {
+    if (typeof body.stepId !== "string" || !STEP_ID_RE.test(body.stepId))
+      return err(400, "invalid_body", "stepId must be 1-80 characters of [a-z0-9:_-]", requestId);
+    stepId = body.stepId;
+  }
   const job = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(token.jobId).first();
   if (!job) {
     /* 5C.3: a stats_model job over IPD can never mint an LLM call, even with
@@ -170,6 +177,31 @@ export async function llmRoute(ctx) {
     await audit(db, job.project_id, "worker", "ai_phi_blocked", job.id, { categories });
     return json({ error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
       categories }, 422, { "x-request-id": requestId });
+  }
+  /* NOTE (D1 stepId cache): Cached replies are stored in D1 table research_job_steps
+   * keyed by (job_id, step_id) rather than R2 because D1 gives atomic PK dedup,
+   * strong read-after-write consistency on mobile resume, and ON DELETE CASCADE cleanup. */
+  if (stepId) {
+    const cached = await db.prepare(
+      "SELECT text, model, tokens_in, tokens_out FROM research_job_steps WHERE job_id=? AND step_id=?")
+      .bind(job.id, stepId).first();
+    if (cached) {
+      return json({
+        text: String(cached.text || ""),
+        model: cached.model || "",
+        usage: { inputTokens: cached.tokens_in | 0, outputTokens: cached.tokens_out | 0 },
+        cached: true,
+      }, 200, { "x-request-id": requestId });
+    }
+  }
+  if (job.status === "queued") {
+    try {
+      const outJson = JSON.parse(job.output_json || "{}");
+      if (outJson && outJson.runner === "device") {
+        await db.prepare("UPDATE research_job_runs SET status='running', started_ts=COALESCE(started_ts, ?) WHERE id=? AND status='queued'")
+          .bind(Date.now(), job.id).run();
+      }
+    } catch {}
   }
   /* 2. Caps: per-call input ceiling, then daily AI spend (quote included). */
   const ceiling = TIER_CEILINGS[tier];
@@ -214,6 +246,11 @@ export async function llmRoute(ctx) {
     .bind(uuid("aiu_"), job.project_id, job.created_by, job.id,
       String(body.purpose || "llm").slice(0, 40), tier, usedModel, inTok, outTok, actual, Date.now()).run();
   await settleCredits(db, env, uuid, reservation, actual);
+  if (stepId) {
+    await db.prepare(
+      "INSERT OR IGNORE INTO research_job_steps (job_id,step_id,project_id,text,model,tokens_in,tokens_out,created_ts) VALUES (?,?,?,?,?,?,?,?)")
+      .bind(job.id, stepId, job.project_id, String(text || ""), usedModel, inTok, outTok, Date.now()).run();
+  }
   await audit(db, job.project_id, "worker", "ai_call", job.id,
     { tier, model: usedModel, tokensIn: inTok, tokensOut: outTok, costMicroUsd: actual });
   return json({ text: String(text || ""), model: usedModel,

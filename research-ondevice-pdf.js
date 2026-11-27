@@ -10,6 +10,9 @@
 
   var D = G && G.document;
   var FLAG = "smd_rmd_ondevice_ocr";
+  var NATIVE_JOB_FLAG = "smd_rmd_od_native_job";
+  var NATIVE_POLL_MS = 1000;
+  var NATIVE_MAX_RESTARTS = 5;
   var ENGINE_VERSION = "rod1";
   var DEFAULT_MAX_PAGES = 200;
   var DEFAULT_DPI = 200;
@@ -36,6 +39,66 @@
       }
     } catch (e) {}
     return true;
+  }
+
+  /* Phase 05 kill switch, DEFAULT ON (needs the main flag on too). Off per device with ?rmd_od_native_job=0
+     or localStorage.smd_rmd_od_native_job = "0". When on and the native plugin has the job methods, scanned
+     pages are read by one native background job (keeps going when the app is put away) instead of page by page. */
+  function isNativeJobEnabled() {
+    if (!isEnabled()) return false;
+    try {
+      if (typeof location !== "undefined" && location.search) {
+        var m = location.search.match(/[?&]rmd_od_native_job=([^&]+)/);
+        if (m != null) return m[1] === "1" || m[1] === "on" || m[1] === "true";
+      }
+    } catch (e) {}
+    try {
+      if (typeof localStorage !== "undefined") return localStorage.getItem(NATIVE_JOB_FLAG) !== "0";
+    } catch (e) {}
+    return true;
+  }
+
+  function nativeJobApi(opts) {
+    if (opts && opts.nativeJob === false) return null;
+    var J = (opts && opts.nativeJob) || (G && G.SMD_NATIVE && G.SMD_NATIVE.pdfJob) || null;
+    if (!J || typeof J.available !== "function") return null;
+    try { return J.available() ? J : null; } catch (e) { return null; }
+  }
+
+  function isForeground() {
+    try { if (D && D.visibilityState) return D.visibilityState === "visible"; } catch (e) {}
+    return true;
+  }
+
+  /* A page from the native job: words have NORMALIZED top-left boxes {t,x,y,w,h}; convert to PDF points with
+     the page size pdf.js measured, the same way ocrResultToPage does for single-page OCR. */
+  function nativePageToPage(np, pageNum, width, height) {
+    var src = (np && Array.isArray(np.words)) ? np.words : [];
+    var words = [];
+    for (var i = 0; i < src.length; i++) {
+      var b = src[i];
+      if (!b || b.t == null) continue;
+      var t = String(b.t).trim();
+      if (!t) continue;
+      var x = Number(b.x) || 0, y = Number(b.y) || 0, w = Number(b.w) || 0, h = Number(b.h) || 0;
+      words.push({ t: t, x0: round2(x * width), y0: round2(y * height), x1: round2((x + w) * width), y1: round2((y + h) * height) });
+    }
+    return {
+      n: pageNum,
+      width: round2(width),
+      height: round2(height),
+      text: np && np.text != null ? String(np.text) : "",
+      words: words,
+      tables: (np && Array.isArray(np.tables)) ? np.tables : [],
+      ocr: true
+    };
+  }
+
+  function nativeError(code) {
+    if (code === "password") return makeError("password", "PDF is password-protected");
+    if (code === "cancelled") return makeError("aborted", "Extraction aborted");
+    if (code === "pdf-open-failed" || code === "not-found") return makeError("pdf-open-failed", "Failed to open PDF");
+    return makeError("ocr-failed", "Background page reading failed" + (code ? " (" + code + ")" : ""));
   }
 
   function detectOcrEngine() {
@@ -120,24 +183,101 @@
     return Promise.reject(makeError("pdf-open-failed", "Unsupported PDF source"));
   }
 
+  var SHA_K = [
+    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+    0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+    0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+    0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+    0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+    0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+    0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+  ];
+
+  function rotr(x, n) { return (x >>> n) | (x << (32 - n)); }
+
+  function sha256BytesPure(u8) {
+    var len = u8.length;
+    var H = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
+    var W = new Array(64);
+    function compress(buf, off) {
+      var t, a, b, c, d, e, f, g, h, S1, ch, temp1, S0, maj, temp2, s0, s1;
+      for (t = 0; t < 16; t++) {
+        W[t] = ((buf[off + t * 4] << 24) | (buf[off + t * 4 + 1] << 16) |
+          (buf[off + t * 4 + 2] << 8) | buf[off + t * 4 + 3]) >>> 0;
+      }
+      for (t = 16; t < 64; t++) {
+        s0 = rotr(W[t - 15], 7) ^ rotr(W[t - 15], 18) ^ (W[t - 15] >>> 3);
+        s1 = rotr(W[t - 2], 17) ^ rotr(W[t - 2], 19) ^ (W[t - 2] >>> 10);
+        W[t] = (W[t - 16] + s0 + W[t - 7] + s1) >>> 0;
+      }
+      a = H[0]; b = H[1]; c = H[2]; d = H[3]; e = H[4]; f = H[5]; g = H[6]; h = H[7];
+      for (t = 0; t < 64; t++) {
+        S1 = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25);
+        ch = (e & f) ^ ((~e) & g);
+        temp1 = (h + S1 + ch + SHA_K[t] + W[t]) >>> 0;
+        S0 = rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22);
+        maj = (a & b) ^ (a & c) ^ (b & c);
+        temp2 = (S0 + maj) >>> 0;
+        h = g; g = f; f = e; e = (d + temp1) >>> 0;
+        d = c; c = b; b = a; a = (temp1 + temp2) >>> 0;
+      }
+      H[0] = (H[0] + a) >>> 0; H[1] = (H[1] + b) >>> 0;
+      H[2] = (H[2] + c) >>> 0; H[3] = (H[3] + d) >>> 0;
+      H[4] = (H[4] + e) >>> 0; H[5] = (H[5] + f) >>> 0;
+      H[6] = (H[6] + g) >>> 0; H[7] = (H[7] + h) >>> 0;
+    }
+    var fullEnd = len - (len % 64);
+    var i;
+    for (i = 0; i < fullEnd; i += 64) {
+      compress(u8, i);
+    }
+    var rem = len - fullEnd;
+    var tailLen = rem < 56 ? 64 : 128;
+    var tail = new Uint8Array(tailLen);
+    for (i = 0; i < rem; i++) tail[i] = u8[fullEnd + i];
+    tail[rem] = 0x80;
+    var bitLen = len * 8;
+    var hi = Math.floor(bitLen / 0x100000000);
+    var lo = bitLen >>> 0;
+    tail[tailLen - 8] = (hi >>> 24) & 0xff;
+    tail[tailLen - 7] = (hi >>> 16) & 0xff;
+    tail[tailLen - 6] = (hi >>> 8) & 0xff;
+    tail[tailLen - 5] = hi & 0xff;
+    tail[tailLen - 4] = (lo >>> 24) & 0xff;
+    tail[tailLen - 3] = (lo >>> 16) & 0xff;
+    tail[tailLen - 2] = (lo >>> 8) & 0xff;
+    tail[tailLen - 1] = lo & 0xff;
+    for (i = 0; i < tailLen; i += 64) {
+      compress(tail, i);
+    }
+    var hex = "";
+    for (i = 0; i < 8; i++) {
+      var part = H[i].toString(16);
+      while (part.length < 8) part = "0" + part;
+      hex += part;
+    }
+    return hex;
+  }
+
   function sha256Hex(u8) {
     var subtle = G && G.crypto && G.crypto.subtle;
-    if (!subtle || typeof subtle.digest !== "function") return Promise.resolve(null);
-    try {
-      return Promise.resolve(subtle.digest("SHA-256", u8)).then(function (digest) {
-        var bytes = new Uint8Array(digest);
-        var hex = "";
-        for (var i = 0; i < bytes.length; i++) {
-          var h = bytes[i].toString(16);
-          hex += h.length < 2 ? "0" + h : h;
-        }
-        return hex;
-      }, function () {
-        return null;
-      });
-    } catch (e) {
-      return Promise.resolve(null);
+    if (subtle && typeof subtle.digest === "function") {
+      try {
+        return Promise.resolve(subtle.digest("SHA-256", u8)).then(function (digest) {
+          var bytes = new Uint8Array(digest);
+          var hex = "";
+          for (var i = 0; i < bytes.length; i++) {
+            var h = bytes[i].toString(16);
+            hex += h.length < 2 ? "0" + h : h;
+          }
+          return hex;
+        }, function () {
+          return sha256BytesPure(u8);
+        });
+      } catch (e) {}
     }
+    return Promise.resolve(sha256BytesPure(u8));
   }
 
   function sha256(source) {
@@ -330,6 +470,10 @@
     var customOcr = typeof opts.ocr === "function" ? opts.ocr : null;
     var detectedEngine = detectOcrEngine();
     var ocrFn = customOcr || (G && G.SMD_NATIVE && typeof G.SMD_NATIVE.ocr === "function" ? G.SMD_NATIVE.ocr : null);
+    // Phase 05: one native background job for all scanned pages (not with a custom per-page OCR function).
+    var nativeJob = (!customOcr && isNativeJobEnabled()) ? nativeJobApi(opts) : null;
+    var nativePollMs = (typeof opts.nativePollMs === "number" && opts.nativePollMs >= 0) ? opts.nativePollMs : NATIVE_POLL_MS;
+    var onNativeState = typeof opts.onNativeState === "function" ? opts.onNativeState : null;
 
     if (signal && signal.aborted) {
       return Promise.reject(makeError("aborted", "Extraction aborted"));
@@ -394,10 +538,18 @@
           }
 
           var usedEngine = anyOcr ? (detectedEngine || (resume && resume.ocrEngine) || opts.ocrEngine || null) : null;
+          // Scanned pages waiting for the native job: [{n, w, h}] (w/h in points from pdf.js).
+          var pending = [];
 
           function buildSnapshot(nextPage, isPartial) {
+            // While scanned pages wait for the native job, a resume restarts at the first of them (the job's
+            // own finished pages stay on disk, so nothing is read twice); pages are always in page order.
+            for (var q = 0; q < pending.length; q++) {
+              if (pending[q].n < nextPage) { nextPage = pending[q].n; isPartial = true; }
+            }
+            var sorted = pages.slice().sort(function (a, b) { return a.n - b.n; });
             return {
-              pages: pages.slice(),
+              pages: sorted,
               ocr: anyOcr,
               sha256: sha256Val,
               engine: "ondevice",
@@ -408,11 +560,257 @@
             };
           }
 
+          // Render one scanned page and OCR it in-process (the phase 01 path). Owns its canvas.
+          function renderAndOcr(page, pNo, ptW, ptH) {
+            if ((!customOcr && !hasNativeOcr()) || !ocrFn) {
+              return Promise.reject(makeError("ocr-unavailable", "Native OCR is unavailable on this device", pNo));
+            }
+            var canvas = null;
+            function dropCanvas() {
+              if (canvas) { try { canvas.width = 0; canvas.height = 0; } catch (e) {} canvas = null; }
+            }
+            return Promise.resolve().then(function () {
+              var scale = dpi / 72;
+              var longSide = Math.max(ptW, ptH);
+              if (longSide > 0 && longSide * scale > MAX_RENDER_PX) {
+                scale = MAX_RENDER_PX / longSide;
+              }
+              var rvp = page.getViewport({ scale: scale });
+              var cw = Math.max(1, Math.round(rvp.width));
+              var ch = Math.max(1, Math.round(rvp.height));
+              canvas = createPageCanvas(cw, ch, opts);
+              var ctx = canvas.getContext ? canvas.getContext("2d") : null;
+              var renderTask = page.render({ canvasContext: ctx, viewport: rvp });
+              return (renderTask && renderTask.promise) ? renderTask.promise : Promise.resolve(renderTask);
+            }).then(function () {
+              var dataUrl = canvas.toDataURL("image/jpeg", 0.9);
+              dropCanvas();
+              return Promise.resolve().then(function () {
+                return ocrFn(dataUrl, { languageCorrection: true });
+              }).then(function (ocrRes) {
+                usedEngine = detectedEngine || opts.ocrEngine || null;
+                return ocrResultToPage(ocrRes, pNo, ptW, ptH);
+              }, function (ocrErr) {
+                if (ocrErr && (ocrErr.code === "ocr-unavailable" || ocrErr.message === "ocr-unavailable")) {
+                  throw makeError("ocr-unavailable", ocrErr.message, pNo);
+                }
+                throw makeError("ocr-failed", (ocrErr && ocrErr.message) || "OCR failed on page " + pNo, pNo);
+              });
+            }, function (err) {
+              dropCanvas();
+              if (err && err.code) throw err;
+              throw makeError("ocr-failed", (err && err.message) || "OCR failed on page " + pNo, pNo);
+            });
+          }
+
+          function addPage(pageObj) {
+            for (var q = 0; q < pending.length; q++) {
+              if (pending[q].n === pageObj.n) { pending.splice(q, 1); break; }
+            }
+            pages.push(pageObj);
+            if (pageObj.ocr) anyOcr = true;
+            if (onPage) return Promise.resolve(onPage(buildSnapshot(total + 1, pending.length > 0)));
+            return Promise.resolve();
+          }
+
+          // The native job could not start (older app build, plugin error): read the waiting pages in-process.
+          function inlineFallback() {
+            var list = pending.slice();
+            var i = 0;
+            function next() {
+              if (i >= list.length) return Promise.resolve();
+              var it = list[i++];
+              if (signal && signal.aborted) return Promise.reject(makeError("aborted", "Extraction aborted", it.n));
+              if (onProgress) onProgress(it.n, total);
+              var pageRef = null;
+              return Promise.resolve(pdf.getPage(it.n)).then(function (page) {
+                pageRef = page;
+                return renderAndOcr(page, it.n, it.w, it.h);
+              }).then(function (pageObj) {
+                if (pageRef && typeof pageRef.cleanup === "function") { try { pageRef.cleanup(); } catch (e) {} }
+                return addPage(pageObj);
+              }, function (err) {
+                if (pageRef && typeof pageRef.cleanup === "function") { try { pageRef.cleanup(); } catch (e) {} }
+                if (err && err.code) { if (err.page == null && err.code !== "aborted") err.page = it.n; throw err; }
+                throw makeError("ocr-failed", (err && err.message) || "OCR failed on page " + it.n, it.n);
+              }).then(next);
+            }
+            return next();
+          }
+
+          // Phase 05: hand every scanned page to one native job, wait for it (it keeps going in the background),
+          // then merge its pages in page order. Paused time is reported through onNativeState so a caller's
+          // "too slow" clock can stop while the app is put away.
+          function runNative() {
+            var J = nativeJob;
+            var shaPart = sha256Val ? String(sha256Val).slice(0, 40) : ("tmp-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8));
+            var key = "rmd-" + shaPart + "-" + Math.round(dpi);
+            var want = pending.map(function (p) { return p.n; });
+            var doneBefore = total - want.length;
+            var clock = (opts && opts.clock) || {
+              setTimeout: function (fn, ms) { return setTimeout(fn, ms); },
+              clearTimeout: function (id) { return clearTimeout(id); }
+            };
+            var tmpUri = null, listener = null, started = false, restarts = 0, pausedPolls = 0, lastState = null, lastDone = -1;
+            var waitTimer = null, waitReject = null, abortListener = null, cancelSent = false;
+
+            function cancelNativeOnce() {
+              if (cancelSent) return;
+              cancelSent = true;
+              try { Promise.resolve(J.cancel(key)).catch(function () {}); } catch (e) {}
+            }
+            function tidy() {
+              if (waitTimer != null) { clock.clearTimeout(waitTimer); waitTimer = null; }
+              waitReject = null;
+              if (abortListener && signal && typeof signal.removeEventListener === "function") {
+                try { signal.removeEventListener("abort", abortListener); } catch (e) {}
+              }
+              abortListener = null;
+              if (listener && typeof listener.remove === "function") { try { listener.remove(); } catch (e) {} }
+              listener = null;
+              if (tmpUri && typeof J.removeTempPdf === "function") { try { J.removeTempPdf(tmpUri); } catch (e) {} }
+              tmpUri = null;
+            }
+            function onAbortSignal() {
+              var rej = waitReject;
+              waitReject = null;
+              cancelNativeOnce();
+              tidy();
+              if (rej) {
+                rej(makeError("aborted", "Extraction aborted"));
+              }
+            }
+            if (signal && typeof signal.addEventListener === "function") {
+              abortListener = onAbortSignal;
+              signal.addEventListener("abort", abortListener);
+            }
+            function wait() {
+              if (signal && signal.aborted) {
+                cancelNativeOnce();
+                return Promise.reject(makeError("aborted", "Extraction aborted"));
+              }
+              return new Promise(function (res, rej) {
+                waitReject = rej;
+                waitTimer = clock.setTimeout(function () {
+                  waitTimer = null;
+                  waitReject = null;
+                  res();
+                }, nativePollMs);
+              });
+            }
+            function report(state, st) {
+              if (state !== lastState) {
+                lastState = state;
+                if (onNativeState) {
+                  try { onNativeState({ state: state, done: (st && st.donePages ? st.donePages.length : 0), total: want.length }); } catch (e) {}
+                }
+              }
+            }
+            function startJob() {
+              return J.start({ jobKey: key, path: tmpUri, pages: want, dpi: dpi });
+            }
+            function poll() {
+              if (signal && signal.aborted) {
+                cancelNativeOnce();
+                return Promise.reject(makeError("aborted", "Extraction aborted"));
+              }
+              return Promise.resolve(J.get(key)).then(function (st) {
+                if (signal && signal.aborted) {
+                  cancelNativeOnce();
+                  throw makeError("aborted", "Extraction aborted");
+                }
+                st = st || {};
+                if (st.state === "done") { report("done", st); return; }
+                if (st.state === "failed") throw nativeError(st.error);
+                if (st.state === "paused") {
+                  report("paused", st);
+                  if (isForeground()) {
+                    // Back in the app but the job is still stopped (Android stopped the worker, or iOS has not
+                    // resumed it yet): start it again; finished pages on disk are skipped.
+                    pausedPolls++;
+                    if (pausedPolls >= 2) {
+                      pausedPolls = 0;
+                      if (++restarts > NATIVE_MAX_RESTARTS) throw makeError("ocr-failed", "Background page reading kept stopping");
+                      return Promise.resolve(startJob()).then(wait).then(poll);
+                    }
+                  }
+                  return wait().then(poll);
+                }
+                pausedPolls = 0;
+                report("running", st);
+                // Progress from the poll too, in case the native listener is not delivering (iOS suspended,
+                // or the plugin was reloaded): a caller's per-page clock is reset by each new page.
+                var nowDone = st.donePages ? st.donePages.length : 0;
+                if (nowDone !== lastDone) {
+                  lastDone = nowDone;
+                  if (onProgress) onProgress(Math.min(total, doneBefore + nowDone + 1), total);
+                }
+                return wait().then(poll);
+              });
+            }
+
+            return Promise.resolve().then(function () {
+              if (signal && signal.aborted) {
+                cancelNativeOnce();
+                throw makeError("aborted", "Extraction aborted");
+              }
+              return J.writeTempPdf(u8);
+            }).then(function (uri) {
+              tmpUri = uri;
+              if (signal && signal.aborted) {
+                cancelNativeOnce();
+                throw makeError("aborted", "Extraction aborted");
+              }
+              return Promise.resolve(typeof J.onProgress === "function" ? J.onProgress(function (ev) {
+                if (!ev || ev.jobKey !== key || !onProgress) return;
+                onProgress(Math.min(total, doneBefore + (Number(ev.done) || 0) + 1), total);
+              }) : null).then(null, function () { return null; });
+            }).then(function (h) {
+              listener = h;
+              if (signal && signal.aborted) {
+                cancelNativeOnce();
+                throw makeError("aborted", "Extraction aborted");
+              }
+              return startJob();
+            }).then(function () {
+              started = true;
+              return poll();
+            }).then(function () {
+              var i = 0;
+              function readNext() {
+                if (i >= want.length) return Promise.resolve();
+                var n = want[i++];
+                var meta = null;
+                for (var q = 0; q < pending.length; q++) if (pending[q].n === n) meta = pending[q];
+                return Promise.resolve(J.readPage(key, n)).then(function (np) {
+                  usedEngine = detectedEngine || opts.ocrEngine || null;
+                  return addPage(nativePageToPage(np, n, meta ? meta.w : (np && np.width) || 0, meta ? meta.h : (np && np.height) || 0));
+                }, function () {
+                  throw makeError("ocr-failed", "Background page reading lost page " + n, n);
+                }).then(readNext);
+              }
+              return readNext();
+            }).then(function () {
+              tidy();
+              return Promise.resolve(J.clear(key)).then(function () {}, function () {});
+            }, function (err) {
+              tidy();
+              if (!started && !(err && err.code === "aborted")) {
+                // Could not hand the job over: read the waiting pages here instead (the phase 01 way).
+                return inlineFallback();
+              }
+              throw (err && err.code) ? err : makeError("ocr-failed", (err && err.message) || "Background page reading failed");
+            });
+          }
+
           function processPage(pNo) {
             if (signal && signal.aborted) {
               return Promise.reject(makeError("aborted", "Extraction aborted", pNo));
             }
             if (pNo > total) {
+              if (pending.length) {
+                return runNative().then(function () { return buildSnapshot(total + 1, false); });
+              }
               return Promise.resolve(buildSnapshot(total + 1, false));
             }
             if (onProgress) onProgress(pNo, total);
@@ -467,43 +865,16 @@
                   };
                 }
 
-                if (!customOcr && !hasNativeOcr()) {
+                if (nativeJob) {
+                  // Read later by the native background job, together with the other scanned pages.
                   cleanupPage();
-                  throw makeError("ocr-unavailable", "Native OCR is unavailable on this device", pNo);
-                }
-                if (!ocrFn) {
-                  cleanupPage();
-                  throw makeError("ocr-unavailable", "Native OCR is unavailable on this device", pNo);
+                  return { n: pNo, _nativePending: true, _w: ptW, _h: ptH };
                 }
 
                 inOcrBranch = true;
-                var scale = dpi / 72;
-                var longSide = Math.max(ptW, ptH);
-                if (longSide > 0 && longSide * scale > MAX_RENDER_PX) {
-                  scale = MAX_RENDER_PX / longSide;
-                }
-                var rvp = page.getViewport({ scale: scale });
-                var cw = Math.max(1, Math.round(rvp.width));
-                var ch = Math.max(1, Math.round(rvp.height));
-                canvas = createPageCanvas(cw, ch, opts);
-                var ctx = canvas.getContext ? canvas.getContext("2d") : null;
-                var renderTask = page.render({ canvasContext: ctx, viewport: rvp });
-                var renderPromise = (renderTask && renderTask.promise) ? renderTask.promise : Promise.resolve(renderTask);
-
-                return renderPromise.then(function () {
-                  var dataUrl = canvas.toDataURL("image/jpeg", 0.9);
+                return renderAndOcr(page, pNo, ptW, ptH).then(function (pageObj) {
                   cleanupPage();
-                  return Promise.resolve().then(function () {
-                    return ocrFn(dataUrl, { languageCorrection: true });
-                  }).then(function (ocrRes) {
-                    usedEngine = detectedEngine || opts.ocrEngine || null;
-                    return ocrResultToPage(ocrRes, pNo, ptW, ptH);
-                  }, function (ocrErr) {
-                    if (ocrErr && (ocrErr.code === "ocr-unavailable" || ocrErr.message === "ocr-unavailable")) {
-                      throw makeError("ocr-unavailable", ocrErr.message, pNo);
-                    }
-                    throw makeError("ocr-failed", (ocrErr && ocrErr.message) || "OCR failed on page " + pNo, pNo);
-                  });
+                  return pageObj;
                 });
               });
             }).catch(function (err) {
@@ -521,6 +892,10 @@
                 pNo
               );
             }).then(function (pageObj) {
+              if (pageObj && pageObj._nativePending) {
+                pending.push({ n: pageObj.n, w: pageObj._w, h: pageObj._h });
+                return processPage(pNo + 1);
+              }
               pages.push(pageObj);
               if (pageObj.ocr) anyOcr = true;
               var snap = buildSnapshot(pNo + 1, pNo < total);
@@ -551,6 +926,7 @@
 
   var API = {
     isEnabled: isEnabled,
+    isNativeJobEnabled: isNativeJobEnabled,
     hasNativeOcr: hasNativeOcr,
     detectOcrEngine: detectOcrEngine,
     loadPdfJs: loadPdfJs,

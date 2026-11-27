@@ -525,8 +525,20 @@
     }
   }
 
-  function uploadStudyPdfServer(container, file) {
-    if (!file || st.pdfUploading || !st.projectId || !st.studyId) return;
+  function jobsRunner() {
+    var j = G && G.SMD_RMD_JOBS;
+    return (j && typeof j.runWithFallback === "function") ? j : null;
+  }
+
+  function devicePrivacyHtml() {
+    if (!onDeviceOcrOn()) return "";
+    var jr = jobsRunner();
+    var line = (jr && jr.DEVICE_PRIVACY_LINE) || "Runs on this device. Your PDFs and patient data are read here and never uploaded. Works offline.";
+    return '<p class="rmd-muted rmd-device-privacy" style="font-size:12px;margin-top:6px;">' + esc(line) + '</p>';
+  }
+
+  function uploadStudyPdfServer(container, file, fallbackMeta) {
+    if (!file || st.pdfUploading || !st.projectId || !st.studyId) return Promise.resolve(null);
     var targetPid = st.projectId;
     var targetSid = st.studyId;
     var myPdfSeq = st.pdfSeq = (st.pdfSeq || 0) + 1;
@@ -537,7 +549,10 @@
     render(container);
     var fd = new G.FormData();
     fd.append("file", file, file.name || "study.pdf");
-    SMD.api.upload("/v1/projects/" + encodeURIComponent(targetPid) + "/pdf-uploads", fd).then(function (res) {
+    if (fallbackMeta) {
+      fd.append("fallback", JSON.stringify(fallbackMeta));
+    }
+    return SMD.api.upload("/v1/projects/" + encodeURIComponent(targetPid) + "/pdf-uploads", fd).then(function (res) {
       if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
       var art = res && res.artifact;
       if (!art || !art.id) throw { message: "Could not read the uploaded PDF.", code: "invalid_multipart" };
@@ -569,12 +584,101 @@
             else render(container);
           });
         }
+        return art;
       });
     }).catch(function (err) {
       if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
       st.pdfUploading = false;
       st.pdfProgressText = "";
       st.actionError = err;
+      render(container);
+    });
+  }
+
+  function handleDevicePdfResult(container, file, u8, result, myPdfSeq, targetPid, targetSid, CP) {
+    if (!result) { resetPdfUploadIfCurrent(myPdfSeq); return Promise.resolve(); }
+    if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return Promise.resolve(); }
+    var proj = SMD.store ? SMD.store.getActiveProject() : null;
+    var isLocalOnly = !proj || !proj.serverId;
+    var clearKey = (result && result.sha256) ? ("pdf:" + targetPid + ":" + result.sha256) : "";
+    if (isLocalOnly) {
+      var clearP = (CP && clearKey) ? CP.remove(clearKey).catch(function () {}) : Promise.resolve();
+      var artId = "local_" + (result.sha256 || Date.now());
+      var localKey = "local-artifact:" + targetPid + ":" + (result.sha256 || Date.now());
+      var storeP = CP ? CP.put(localKey, {
+        studyId: targetSid,
+        artifact: {
+          id: artId, projectId: targetPid, filename: file.name || "study.pdf",
+          sha256: result.sha256, bytes: file.size || u8.byteLength,
+          pages: result.pages.length, status: "succeeded", createdTs: Date.now()
+        },
+        result: result
+      }).catch(function () {}) : Promise.resolve();
+      return Promise.all([clearP, storeP]).then(function () {
+        if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+        st.pdfUploading = false;
+        st.pdfProgressText = "";
+        st.artifactId = artId;
+        st.pdfJobStatus = "succeeded";
+        st.result = result;
+        st.page = 1;
+        st.announce = "PDF read on your phone.";
+        render(container);
+      });
+    }
+    return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(targetPid) + "/extractions/device", {
+      filename: file.name || "study.pdf",
+      sha256: result.sha256,
+      bytes: file.size || u8.byteLength,
+      result: result
+    }).then(function (res) {
+      if (CP && clearKey) CP.remove(clearKey).catch(function () {});
+      if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+      var art = res && res.artifact;
+      if (!art || !art.id) {
+        st.pdfUploading = false;
+        st.pdfProgressText = "";
+        st.actionError = { message: "Could not save the extracted PDF." };
+        render(container);
+        return;
+      }
+      st.artifactId = art.id;
+      st.pdfJobId = art.jobId || null;
+      st.pdfJobStatus = art.status || "succeeded";
+      st.result = result;
+      st.page = 1;
+      var fields = {};
+      for (var k in st.form) {
+        var f = st.form[k];
+        fields[k] = { value: f.value === "" ? null : f.value, locator: f.locator, quote: f.quote };
+      }
+      var ver = st.extraction ? st.extraction.version : 0;
+      return SMD.api.request("PUT", "/v1/projects/" + encodeURIComponent(targetPid) + "/studies/" + encodeURIComponent(targetSid) + "/extraction", {
+        template: st.template, version: ver, fields: fields, artifactId: art.id
+      }).then(function (saved) {
+        if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+        st.pdfUploading = false;
+        st.pdfProgressText = "";
+        st.extraction = saved.extraction;
+        if (st.ai) st.ai.guidance = null;
+        st.announce = "PDF read on your phone.";
+        render(container);
+        loadResult(container, art.id);
+      }, function (putErr) {
+        if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+        st.pdfUploading = false;
+        st.pdfProgressText = "";
+        if (putErr && putErr.code === "stale_version" && putErr.current && putErr.current.extraction) {
+          st.extraction = putErr.current.extraction;
+        }
+        st.actionError = putErr;
+        render(container);
+      });
+    }, function (postErr) {
+      if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+      st.pdfUploading = false;
+      st.pdfProgressText = "";
+      st.actionError = postErr;
       render(container);
     });
   }
@@ -587,8 +691,6 @@
       uploadStudyPdfServer(container, file);
       return;
     }
-    var proj = SMD.store ? SMD.store.getActiveProject() : null;
-    var isLocalOnly = !proj || !proj.serverId;
     var targetPid = st.projectId;
     var targetSid = st.studyId;
     var myPdfSeq = st.pdfSeq = (st.pdfSeq || 0) + 1;
@@ -602,127 +704,116 @@
       var u8 = new Uint8Array(ab);
       return (typeof OD.sha256 === "function" ? OD.sha256(u8) : Promise.resolve(null)).then(function (hash) {
         if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
-        var ckKey = hash ? ("pdf:" + targetPid + ":" + hash) : "";
-        var resumeP = (CP && ckKey) ? CP.get(ckKey).catch(function () { return null; }) : Promise.resolve(null);
-        return resumeP.then(function (resume) {
-          if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+        var ckKey = hash ? ("pdf:" + targetPid + ":" + hash) : ("pdf:" + targetPid + ":" + targetSid);
+        var jr = jobsRunner();
+        function mergeCheckpoint(key, patch) {
+          if (jr && typeof jr.updateCheckpoint === "function") {
+            return jr.updateCheckpoint(CP, key, patch);
+          }
+          if (!CP || !key || typeof CP.get !== "function" || typeof CP.put !== "function") {
+            return Promise.resolve();
+          }
+          return Promise.resolve().then(function () { return CP.get(key); }).then(function (cur) {
+            var next = {};
+            if (cur && typeof cur === "object") {
+              for (var k in cur) {
+                if (Object.prototype.hasOwnProperty.call(cur, k)) next[k] = cur[k];
+              }
+            }
+            for (var p in patch) {
+              if (Object.prototype.hasOwnProperty.call(patch, p)) next[p] = patch[p];
+            }
+            return CP.put(key, next);
+          }).catch(function () {});
+        }
+        function runOneExtract(resumeCtx) {
+          var resume = (resumeCtx && resumeCtx.checkpoint) || null;
           return OD.extract(u8, {
             sha256: hash,
             resume: resume,
+            signal: resumeCtx && resumeCtx.signal,
+            /* A background page job paused by the phone is not the phone being slow. */
+            onNativeState: function (ns) {
+              if (resumeCtx && resumeCtx.holdClock) resumeCtx.holdClock(!!ns && ns.state === "paused");
+            },
             onProgress: function (cur, tot) {
+              if (resumeCtx && resumeCtx.touchPage) resumeCtx.touchPage();
               if (isPdfStale(myPdfSeq, targetPid, targetSid)) return;
               st.pdfProgressText = "Reading on your phone, page " + cur + " of " + tot;
               var progEl = container.querySelector("#rmdExtractPdfProgress");
               if (progEl) progEl.textContent = st.pdfProgressText;
             },
             onPage: function (partial) {
-              if (CP && partial && partial.sha256) {
-                return CP.put("pdf:" + targetPid + ":" + partial.sha256, partial).catch(function () {});
+              if (CP && partial && (partial.sha256 || ckKey)) {
+                var key = partial.sha256 ? ("pdf:" + targetPid + ":" + partial.sha256) : ckKey;
+                var patch = {
+                  pages: partial.pages,
+                  ocr: partial.ocr,
+                  sha256: partial.sha256,
+                  engine: partial.engine,
+                  ocrEngine: partial.ocrEngine,
+                  partial: partial.partial,
+                  nextPage: partial.nextPage,
+                  engineVersion: partial.engineVersion,
+                  running: true,
+                  finished: false
+                };
+                return mergeCheckpoint(key, patch);
               }
             }
           });
-        });
-      }).then(function (result) {
-        if (!result) { resetPdfUploadIfCurrent(myPdfSeq); return; }
-        if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
-        var clearKey = (result && result.sha256) ? ("pdf:" + targetPid + ":" + result.sha256) : "";
-        if (isLocalOnly) {
-          var clearP = (CP && clearKey) ? CP.remove(clearKey).catch(function () {}) : Promise.resolve();
-          var artId = "local_" + (result.sha256 || Date.now());
-          var localKey = "local-artifact:" + targetPid + ":" + (result.sha256 || Date.now());
-          var storeP = CP ? CP.put(localKey, {
-            studyId: targetSid,
-            artifact: {
-              id: artId, projectId: targetPid, filename: file.name || "study.pdf",
-              sha256: result.sha256, bytes: file.size || u8.byteLength,
-              pages: result.pages.length, status: "succeeded", createdTs: Date.now()
-            },
-            result: result
-          }).catch(function () {}) : Promise.resolve();
-          return Promise.all([clearP, storeP]).then(function () {
-            if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
-            st.pdfUploading = false;
-            st.pdfProgressText = "";
-            st.artifactId = artId;
-            st.pdfJobStatus = "succeeded";
-            st.result = result;
-            st.page = 1;
-            st.announce = "PDF read on your phone.";
-            render(container);
+        }
+
+        if (!jr) {
+          var resumeP = (CP && ckKey) ? CP.get(ckKey).catch(function () { return null; }) : Promise.resolve(null);
+          return resumeP.then(function (saved) {
+            return runOneExtract({ checkpoint: saved });
+          }).then(function (result) {
+            return handleDevicePdfResult(container, file, u8, result, myPdfSeq, targetPid, targetSid, CP);
           });
         }
-        return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(targetPid) + "/extractions/device", {
-          filename: file.name || "study.pdf",
-          sha256: result.sha256,
-          bytes: file.size || u8.byteLength,
-          result: result
-        }).then(function (res) {
-          if (CP && clearKey) CP.remove(clearKey).catch(function () {});
-          if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
-          var art = res && res.artifact;
-          if (!art || !art.id) {
-            st.pdfUploading = false;
-            st.pdfProgressText = "";
-            st.actionError = { message: "Could not save the extracted PDF." };
-            render(container);
-            return;
-          }
-          st.artifactId = art.id;
-          st.pdfJobId = art.jobId || null;
-          st.pdfJobStatus = art.status || "succeeded";
-          st.result = result;
-          st.page = 1;
-          var fields = {};
-          for (var k in st.form) {
-            var f = st.form[k];
-            fields[k] = { value: f.value === "" ? null : f.value, locator: f.locator, quote: f.quote };
-          }
-          var ver = st.extraction ? st.extraction.version : 0;
-          return SMD.api.request("PUT", "/v1/projects/" + encodeURIComponent(targetPid) + "/studies/" + encodeURIComponent(targetSid) + "/extraction", {
-            template: st.template, version: ver, fields: fields, artifactId: art.id
-          }).then(function (saved) {
-            if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
-            st.pdfUploading = false;
-            st.pdfProgressText = "";
-            st.extraction = saved.extraction;
-            if (st.ai) st.ai.guidance = null;
-            st.announce = "PDF read on your phone.";
-            render(container);
-            loadResult(container, art.id);
-          }, function (putErr) {
-            if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
-            st.pdfUploading = false;
-            st.pdfProgressText = "";
-            if (putErr && putErr.code === "stale_version" && putErr.current && putErr.current.extraction) {
-              st.extraction = putErr.current.extraction;
-            }
-            st.actionError = putErr;
-            render(container);
-          });
-        }, function (postErr) {
-          if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
-          if (postErr && (postErr.status === 413 || postErr.code === "ceiling_bytes")) {
-            st.pdfUploading = false;
-            st.pdfProgressText = "";
-            uploadStudyPdfServer(container, file);
-            return;
-          }
+
+        return jr.runWithFallback("pdf", runOneExtract, function (cpIgnored, fallbackMeta) {
           st.pdfUploading = false;
-          st.pdfProgressText = "";
-          st.actionError = postErr;
-          render(container);
+          return uploadStudyPdfServer(container, file, fallbackMeta);
+        }, {
+          jobKey: ckKey,
+          projectId: targetPid,
+          targetId: targetSid,
+          engine: "ondevice:pdf",
+          onStatus: function (info) {
+            if (isPdfStale(myPdfSeq, targetPid, targetSid)) return;
+            if (info && info.state === "retrying" && info.message) {
+              st.pdfProgressText = info.message;
+              var progEl = container.querySelector("#rmdExtractPdfProgress");
+              if (progEl) progEl.textContent = st.pdfProgressText;
+            }
+          }
+        }).then(function (out) {
+          if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
+          if (out && out.ok && out.source === "device") {
+            return handleDevicePdfResult(container, file, u8, out.result, myPdfSeq, targetPid, targetSid, CP);
+          }
+          if (!out || out.source !== "cloud") {
+            st.pdfUploading = false;
+            st.pdfProgressText = "";
+            if (out && out.message) st.actionError = { message: out.message };
+            render(container);
+          }
         });
-      }, function () {
+      }).catch(function (err) {
         if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
         st.pdfUploading = false;
         st.pdfProgressText = "";
-        uploadStudyPdfServer(container, file);
+        st.actionError = err;
+        render(container);
       });
-    }, function () {
+    }, function (readErr) {
       if (isPdfStale(myPdfSeq, targetPid, targetSid)) { resetPdfUploadIfCurrent(myPdfSeq); return; }
       st.pdfUploading = false;
       st.pdfProgressText = "";
-      uploadStudyPdfServer(container, file);
+      st.actionError = readErr || { message: "Could not read this PDF file." };
+      render(container);
     });
   }
 
@@ -1152,6 +1243,7 @@
         if (st.pdfUploading && st.pdfProgressText) {
           h.push('<p class="rmd-muted" id="rmdExtractPdfProgress" role="status" aria-live="polite">' + esc(st.pdfProgressText) + '</p>');
         }
+        h.push(devicePrivacyHtml());
       }
       h.push('</div>');
     } else if (st.pdfJobStatus === "queued" || st.pdfJobStatus === "running") {
@@ -1164,6 +1256,7 @@
         if (st.pdfUploading && st.pdfProgressText) {
           h.push('<p class="rmd-muted" id="rmdExtractPdfProgress" role="status" aria-live="polite">' + esc(st.pdfProgressText) + '</p>');
         }
+        h.push(devicePrivacyHtml());
       }
       h.push('</div>');
     } else if (!st.result) {

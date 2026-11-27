@@ -24,6 +24,7 @@
  * moves a value into a field STILL unverified; nothing is auto-verified.
  */
 import { createJob } from "./_jobs.js";
+import { checkCloudFallbackAvailable, parseFormFallback } from "./_cloud_fallback.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const ALL_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
@@ -517,13 +518,19 @@ export async function listArtifacts(ctx, projectId) {
 }
 
 export async function uploadPdfArtifact(ctx) {
-  const { request, env, db, uid, requestId, api, projectId } = ctx;
+  const { request, env, db, uid, claims, requestId, api, projectId } = ctx;
   const { json, err, audit, projectGate, gateErr } = api;
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "PDF uploads need an owner, editor or analyst role", requestId);
   if (!env.RESEARCH_R2) return err(503, "storage_unavailable", "Research file storage is not provisioned", requestId);
   let form;
   try { form = await request.formData(); } catch { return err(400, "invalid_multipart", "Expected multipart PDF upload", requestId); }
+  const fallback = parseFormFallback(form.get("fallback"));
+  let fbCheck = null;
+  if (fallback) {
+    fbCheck = await checkCloudFallbackAvailable(env, db, uid, claims);
+    if (!fbCheck.ok) return err(fbCheck.http, fbCheck.code, fbCheck.message, requestId);
+  }
   const file = form.get("file");
   if (!file || typeof file === "string") return err(400, "missing_file", "Upload one PDF in the file field", requestId);
   if (file.size > 26214400) return err(413, "ceiling_bytes", "This file is larger than 25 MB. Upload a smaller version.", requestId);
@@ -564,7 +571,11 @@ export async function uploadPdfArtifact(ctx) {
     }
   }
   /* Enqueue through the existing job machinery (caps, credits, queue, idempotency). */
-  const jobRes = await createJob(ctx, { kind: "pdf_extract", pdfId: pdf.id, idempotencyKey: "pdfup:" + sha256 });
+  const jobRes = await createJob(
+    ctx,
+    { kind: "pdf_extract", pdfId: pdf.id, idempotencyKey: "pdfup:" + sha256, fallback },
+    { fallbackPrechecked: true, fallbackStatus: fbCheck ? fbCheck.status : null }
+  );
   if (jobRes.status >= 400) return jobRes;
   const jobBody = await jobRes.json();
   const job = jobBody.job;

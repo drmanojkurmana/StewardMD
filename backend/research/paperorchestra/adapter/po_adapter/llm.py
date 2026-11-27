@@ -24,8 +24,10 @@ Gateway request/response shape (the 3.5 gateway adapter implements this):
 """
 from __future__ import annotations
 
+from contextlib import contextmanager
 import json
 import os
+import re
 import time
 
 import httpx
@@ -44,6 +46,15 @@ TIER_CEILINGS = {
 }
 # Adapter-local runaway guard, NOT a ceilings.md row (see SEAMS.md).
 DEFAULT_MAX_CALLS = 64
+PO_MAX_SECONDS = 600
+_STEP_ID_SANITIZE_RE = re.compile(r"[^a-z0-9:_-]+")
+
+
+def sanitize_step_id(step_id: str | None) -> str | None:
+    if not step_id:
+        return None
+    s = _STEP_ID_SANITIZE_RE.sub("-", str(step_id).strip().lower()).strip("-")[:80]
+    return s or None
 
 
 class CeilingError(Exception):
@@ -95,8 +106,9 @@ def _part_text(part) -> str:
 class GatewayLLMClient:
     def __init__(self, *, gateway_url=None, job_token=None, job_id="job_local",
                  project_id="proj_local", user_id="user_local", tier="T2",
-                 max_calls=DEFAULT_MAX_CALLS, http_client=None,
-                 sleep=time.sleep, now=time.time):
+                 max_calls=DEFAULT_MAX_CALLS, max_seconds=PO_MAX_SECONDS,
+                 http_client=None, sleep=time.sleep, now=time.time,
+                 monotonic=None):
         if tier not in TIER_CEILINGS:
             raise ValueError("unknown tier " + str(tier))
         self.gateway_url = gateway_url or os.environ.get("RESEARCH_GATEWAY_URL", "")
@@ -107,19 +119,92 @@ class GatewayLLMClient:
         self.tier = tier
         self.ceilings = dict(TIER_CEILINGS[tier])
         self.max_calls = max_calls
+        self.max_seconds = float(max_seconds if max_seconds is not None else PO_MAX_SECONDS)
         self.calls = 0
         self.refinement_rounds = 0
         self.usage = []  # per-call token records (plan section 6 logging)
         self._http = http_client
         self._sleep = sleep
         self._now = now
+        self._now_is_custom = now is not time.time
+        self._monotonic_fn = monotonic
+        self._started_at = self._clock()
+        self._step_id = None
+        self._step_prefix = None
+        self._step_track_retries = False
+        self._step_counts = {}
+
+    def _clock(self) -> float:
+        if self._monotonic_fn is not None:
+            return float(self._monotonic_fn())
+        if self._now_is_custom:
+            return float(self._now())
+        return float(time.monotonic())
+
+    def _check_elapsed(self) -> None:
+        elapsed = self._clock() - self._started_at
+        if elapsed > self.max_seconds:
+            raise CeilingError("ceiling_seconds", f"elapsed {elapsed:.1f}s > {self.max_seconds}s")
+
+    def _resolve_step_id(self, explicit_step_id: str | None) -> str | None:
+        if explicit_step_id is not None:
+            return sanitize_step_id(explicit_step_id)
+        if self._step_prefix is not None:
+            base = sanitize_step_id(self._step_prefix)
+            if not base:
+                return None
+            if self._step_track_retries:
+                count = self._step_counts.get(base, 0)
+                self._step_counts[base] = count + 1
+                return base if count == 0 else sanitize_step_id(f"{base}:r{count}")
+            return base
+        return sanitize_step_id(self._step_id)
+
+    def _retry_step_id(self, explicit_step_id, current, retry_no):
+        """Step id for asking again after a reply we could not use."""
+        if explicit_step_id is None and self._step_prefix is not None and self._step_track_retries:
+            nxt = self._resolve_step_id(None)
+            if nxt and nxt != current:
+                return nxt
+        base = re.sub(r":r\d+$", "", current)
+        return sanitize_step_id(f"{base}:r{retry_no}") or current
+
+    @contextmanager
+    def step(self, step_id: str | None):
+        prev_id = self._step_id
+        prev_prefix = self._step_prefix
+        prev_track = self._step_track_retries
+        self._step_id = sanitize_step_id(step_id)
+        self._step_prefix = None
+        self._step_track_retries = False
+        try:
+            yield
+        finally:
+            self._step_id = prev_id
+            self._step_prefix = prev_prefix
+            self._step_track_retries = prev_track
+
+    @contextmanager
+    def step_prefix(self, step_id: str | None, *, track_retries: bool = True):
+        prev_id = self._step_id
+        prev_prefix = self._step_prefix
+        prev_track = self._step_track_retries
+        self._step_id = None
+        self._step_prefix = sanitize_step_id(step_id)
+        self._step_track_retries = track_retries
+        try:
+            yield
+        finally:
+            self._step_id = prev_id
+            self._step_prefix = prev_prefix
+            self._step_track_retries = prev_track
 
     # -- upstream-compatible entry points -----------------------------------
 
     def call_contents(self, contents, model_name, max_retries=None,
                       base_interval_sec=None, result_parsing_func=None,
                       generation_configs=None, check_parsed_response_not_none=True,
-                      purpose="write"):
+                      purpose="write", step_id=None):
         configs = dict(generation_configs or {})
         system = configs.pop("system_instruction", None)
         # Upstream literature discovery asks for the google_search tool. The
@@ -129,21 +214,22 @@ class GatewayLLMClient:
         configs.pop("temperature", None)  # gateway owns sampling per tier
         text = "\n\n".join(_part_text(p) for p in contents)
         return self._call(text, system, model_name, result_parsing_func,
-                          check_parsed_response_not_none, purpose)
+                          check_parsed_response_not_none, purpose, step_id=step_id)
 
     def call_text(self, prompt, model_name, result_parsing_func=None,
                   generation_configs=None, check_parsed_response_not_none=True,
-                  max_retries=None, base_interval_sec=None, purpose="write"):
+                  max_retries=None, base_interval_sec=None, purpose="write",
+                  step_id=None):
         configs = dict(generation_configs or {})
         system = configs.pop("system_instruction", None)
         configs.pop("tools", None)
         configs.pop("temperature", None)
         return self._call(prompt, system, model_name, result_parsing_func,
-                          check_parsed_response_not_none, purpose)
+                          check_parsed_response_not_none, purpose, step_id=step_id)
 
     def call_images(self, prompt, images, model_name, generation_configs=None,
                     check_parsed_response_not_none=True, return_json=True,
-                    result_parsing_func=None, purpose="write"):
+                    result_parsing_func=None, purpose="write", step_id=None):
         if images:
             raise GatewayError("gateway_text_only",
                                "image inputs are not sent; figures are deterministic")
@@ -151,11 +237,12 @@ class GatewayLLMClient:
                               result_parsing_func=result_parsing_func,
                               generation_configs=generation_configs,
                               check_parsed_response_not_none=check_parsed_response_not_none,
-                              purpose=purpose)
+                              purpose=purpose, step_id=step_id)
 
     def call_pdf(self, pdf_path, prompt, model_name, system_instruction=None,
                  temperature=0.7, check_parsed_response_not_none=True,
-                 return_json=True, result_parsing_func=None, purpose="write"):
+                 return_json=True, result_parsing_func=None, purpose="write",
+                 step_id=None):
         with open(pdf_path, "r", encoding="utf-8") as f:
             paper_text = f.read()
         configs = {"system_instruction": system_instruction} if system_instruction else {}
@@ -163,7 +250,7 @@ class GatewayLLMClient:
                               model_name, result_parsing_func=result_parsing_func,
                               generation_configs=configs,
                               check_parsed_response_not_none=check_parsed_response_not_none,
-                              purpose=purpose)
+                              purpose=purpose, step_id=step_id)
 
     # -- core ----------------------------------------------------------------
 
@@ -172,10 +259,12 @@ class GatewayLLMClient:
         return parse_gemini_json_results(raw)
 
     def _call(self, prompt, system, model_name, result_parsing_func,
-              check_not_none, purpose):
+              check_not_none, purpose, step_id=None):
         if not self.gateway_url or not self.job_token:
             raise GatewayError("gateway_unconfigured",
                                "RESEARCH_GATEWAY_URL and RESEARCH_JOB_TOKEN required")
+        # 0. Wall-clock ceiling before every provider call (phase 04).
+        self._check_elapsed()
         assembled = (system + "\n\n" if system else "") + prompt
 
         # 1. PHI gate on the exact text about to leave (phi-gate.md placement).
@@ -199,12 +288,15 @@ class GatewayLLMClient:
             raise CeilingError("ceiling_input_tokens",
                                f"estimate {est_in} > {self.ceilings['max_input_tokens']}")
 
+        resolved_step_id = self._resolve_step_id(step_id)
         body = {
             "jobId": self.job_id, "projectId": self.project_id, "userId": self.user_id,
             "tier": self.tier, "model": model_name,
             "prompt": prompt, "maxOutputTokens": self.ceilings["max_output_tokens"],
             "purpose": purpose,
         }
+        if resolved_step_id:
+            body["stepId"] = resolved_step_id
         # The gateway accepts a string or no system field; JSON null is a 400 invalid_body.
         if isinstance(system, str) and system:
             body["system"] = system
@@ -225,6 +317,7 @@ class GatewayLLMClient:
                 if attempt and self.calls >= self.max_calls:
                     raise CeilingError("ceiling_calls",
                                        f"max {self.max_calls} calls per job")
+                self._check_elapsed()
                 try:
                     resp = client.post(self.gateway_url, content=raw_body,
                                        headers=headers, timeout=GATEWAY_HTTP_TIMEOUT_SECONDS)
@@ -234,7 +327,8 @@ class GatewayLLMClient:
                     if 200 <= resp.status_code < 300:
                         try:
                             return self._finish(resp, model_name, purpose,
-                                                result_parsing_func, check_not_none)
+                                                result_parsing_func, check_not_none,
+                                                step_id=resolved_step_id)
                         except GatewayError as exc:
                             # A reply we cannot decode is retryable, like 429/5xx.
                             # CeilingError (output tokens) is not a GatewayError
@@ -243,6 +337,13 @@ class GatewayLLMClient:
                                                 "gateway_bad_response"):
                                 raise
                             last_error = exc
+                            # The gateway caches each reply by stepId (research_job_steps),
+                            # so resending the same id would return the same bad reply.
+                            # Ask again under the next retry id instead.
+                            if resolved_step_id:
+                                resolved_step_id = self._retry_step_id(step_id, resolved_step_id, attempt + 1)
+                                body["stepId"] = resolved_step_id
+                                raw_body = json.dumps(body, separators=(",", ":")).encode("utf-8")
                     elif resp.status_code == 429 or resp.status_code >= 500:
                         last_error = GatewayError("gateway_http_" + str(resp.status_code))
                     else:
@@ -265,7 +366,7 @@ class GatewayLLMClient:
             if owns_client:
                 client.close()
 
-    def _finish(self, resp, model_name, purpose, result_parsing_func, check_not_none):
+    def _finish(self, resp, model_name, purpose, result_parsing_func, check_not_none, *, step_id=None):
         try:
             payload = resp.json()
             raw = payload["text"]
@@ -278,12 +379,15 @@ class GatewayLLMClient:
             raise CeilingError("ceiling_output_tokens",
                                f"{out_tok} > {self.ceilings['max_output_tokens']}")
         self.calls += 1
-        self.usage.append({
+        rec = {
             "jobId": self.job_id, "projectId": self.project_id, "userId": self.user_id,
             "tier": self.tier, "modelRequested": model_name,
             "model": payload.get("model", model_name), "purpose": purpose,
             "inputTokens": in_tok, "outputTokens": out_tok, "ts": int(self._now()),
-        })
+        }
+        if step_id:
+            rec["stepId"] = step_id
+        self.usage.append(rec)
         parser = result_parsing_func if result_parsing_func is not None else self._default_parser
         parsed = parser(raw)
         if check_not_none and parsed is None:

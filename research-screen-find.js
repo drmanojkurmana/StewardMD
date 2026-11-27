@@ -331,10 +331,12 @@
     h.push('    <div class="rmd-find-ptitle">' + escSrc(p.item.title || "Untitled paper") + '</div>');
     h.push('    <div class="rmd-find-pstatus">' + esc(p.text) + '</div>');
     if (done && p.status === "needs_pdf") {
+      var privLine = onDeviceOcrOn() ? ((G && G.SMD_RMD_JOBS && G.SMD_RMD_JOBS.DEVICE_PRIVACY_LINE) || "Runs on this device. Your PDFs and patient data are read here and never uploaded. Works offline.") : "";
       h.push('    <div class="rmd-find-btnrow">');
       h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-find-upload="' + i + '">Upload PDF</button>');
       h.push('      <input type="file" accept="application/pdf" class="rmd-find-file" data-find-file="' + i + '" />');
       h.push('    </div>');
+      if (privLine) h.push('    <div class="rmd-find-privacy" style="font-size:11px;opacity:0.8;margin-top:4px;">' + esc(privLine) + '</div>');
     }
     if (done && p.status === "failed") {
       h.push('    <div class="rmd-find-btnrow"><button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-find-retry="' + i + '">Try again</button></div>');
@@ -643,24 +645,29 @@
     return true;
   }
 
-  function uploadPdfServer(idx, p, file) {
+  function uploadPdfServer(idx, p, file, fallbackMeta) {
     var form = new G.FormData();
-    form.append("file", file);
+    form.append("file", file, file.name || "study.pdf");
+    if (fallbackMeta) {
+      form.append("fallback", JSON.stringify(fallbackMeta));
+    }
     p.text = "Uploading PDF";
     render();
-    SMD.api.upload("/v1/projects/" + state.pid + "/pdfs", form)
+    return SMD.api.upload("/v1/projects/" + encodeURIComponent(state.pid) + "/pdf-uploads", form)
       .then(function (data) {
-        var pdf = data && data.pdf;
-        if (!pdf || !pdf.id) throw new Error("no pdf");
-        return SMD.api.request("POST", "/v1/projects/" + state.pid + "/jobs", {
-          kind: "pdf_extract", pdfId: pdf.id, idempotencyKey: "find-" + p.key + "-" + Date.now()
-        });
-      })
-      .then(function () {
+        var art = data && data.artifact;
+        if (!art || !art.id) throw new Error("no artifact");
         p.status = "pdf_sent";
-        p.text = "PDF sent for reading. The numbers will be filled once extraction finishes.";
+        p.text = art.status === "succeeded"
+          ? "PDF read on server. Open Extract to review values."
+          : "PDF sent for reading. The numbers will be filled once extraction finishes.";
         render();
-        if (SMD.p2 && SMD.p2.flashNotice) SMD.p2.flashNotice(sheetEl(), "PDF uploaded. We are reading it in the background.", "info");
+        if (SMD.p2 && SMD.p2.flashNotice) {
+          SMD.p2.flashNotice(sheetEl(), art.status === "succeeded"
+            ? "PDF already extracted."
+            : "PDF uploaded. We are reading it in the background.", "info");
+        }
+        return art;
       })
       .catch(function (err) {
         p.text = "Need the PDF to find the numbers";
@@ -672,91 +679,161 @@
       });
   }
 
+  function handleFindDeviceResult(idx, p, file, u8, result, targetPid, CP) {
+    var isLocalOnly = !state.project || !state.project.serverId;
+    var clearKey = (result && result.sha256) ? ("pdf:" + targetPid + ":" + result.sha256) : "";
+    if (isLocalOnly) {
+      var clearP = (CP && clearKey) ? CP.remove(clearKey).catch(function () {}) : Promise.resolve();
+      var artId = "local_" + (result.sha256 || Date.now());
+      var localKey = "local-artifact:" + targetPid + ":" + (result.sha256 || Date.now());
+      var storeP = CP ? CP.put(localKey, {
+        artifact: {
+          id: artId, projectId: targetPid, filename: file.name || "study.pdf",
+          sha256: result.sha256, bytes: file.size || u8.byteLength,
+          pages: result.pages.length, status: "succeeded", createdTs: Date.now()
+        },
+        result: result
+      }).catch(function () {}) : Promise.resolve();
+      return Promise.all([clearP, storeP]).then(function () {
+        p.status = "pdf_sent";
+        p.text = result.ocr
+          ? "PDF read on your phone (some pages used OCR). Check values against the original."
+          : "PDF read on your phone.";
+        render();
+      });
+    }
+    return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(targetPid) + "/extractions/device", {
+      filename: file.name || "study.pdf",
+      sha256: result.sha256,
+      bytes: file.size || u8.byteLength,
+      result: result
+    }).then(function () {
+      if (CP && clearKey) CP.remove(clearKey).catch(function () {});
+      p.status = "pdf_sent";
+      p.text = result.ocr
+        ? "PDF read on your phone (some pages used OCR). Open Extract to verify values."
+        : "PDF read on your phone. Open Extract to review pages.";
+      render();
+      if (SMD.p2 && SMD.p2.flashNotice) SMD.p2.flashNotice(sheetEl(), "PDF read on your phone.", "info");
+    });
+  }
+
   function uploadPdf(idx, file) {
     var p = state.progress[idx];
     if (!p) return;
     var OD = G && G.SMD_RMD_ONDEVICE_PDF;
     var CP = G && G.SMD_RMD_CHECKPOINT;
+    var JR = G && G.SMD_RMD_JOBS;
     if (!onDeviceOcrOn() || !OD || typeof OD.extract !== "function" || typeof file.arrayBuffer !== "function") {
       uploadPdfServer(idx, p, file);
       return;
     }
-    var isLocalOnly = !state.project || !state.project.serverId;
     var targetPid = state.pid;
     p.text = "Reading on your phone";
     render();
     file.arrayBuffer().then(function (ab) {
       var u8 = new Uint8Array(ab);
       return (typeof OD.sha256 === "function" ? OD.sha256(u8) : Promise.resolve(null)).then(function (hash) {
-        var ckKey = hash ? ("pdf:" + targetPid + ":" + hash) : "";
-        var resumeP = (CP && ckKey) ? CP.get(ckKey).catch(function () { return null; }) : Promise.resolve(null);
-        return resumeP.then(function (resume) {
+        var ckKey = hash ? ("pdf:" + targetPid + ":" + hash) : ("pdf:" + targetPid + ":" + (p.key || idx));
+        function mergeCheckpoint(key, patch) {
+          if (JR && typeof JR.updateCheckpoint === "function") {
+            return JR.updateCheckpoint(CP, key, patch);
+          }
+          if (!CP || !key || typeof CP.get !== "function" || typeof CP.put !== "function") {
+            return Promise.resolve();
+          }
+          return Promise.resolve().then(function () { return CP.get(key); }).then(function (cur) {
+            var next = {};
+            if (cur && typeof cur === "object") {
+              for (var k in cur) {
+                if (Object.prototype.hasOwnProperty.call(cur, k)) next[k] = cur[k];
+              }
+            }
+            for (var pk in patch) {
+              if (Object.prototype.hasOwnProperty.call(patch, pk)) next[pk] = patch[pk];
+            }
+            return CP.put(key, next);
+          }).catch(function () {});
+        }
+        function runOne(resumeCtx) {
+          var resume = (resumeCtx && resumeCtx.checkpoint) || null;
           return OD.extract(u8, {
             sha256: hash,
             resume: resume,
+            signal: resumeCtx && resumeCtx.signal,
+            /* A background page job paused by the phone is not the phone being slow. */
+            onNativeState: function (ns) {
+              if (resumeCtx && resumeCtx.holdClock) resumeCtx.holdClock(!!ns && ns.state === "paused");
+            },
             onProgress: function (cur, tot) {
+              if (resumeCtx && resumeCtx.touchPage) resumeCtx.touchPage();
               p.text = "Reading on your phone, page " + cur + " of " + tot;
               render();
             },
             onPage: function (partial) {
-              if (CP && partial && partial.sha256) {
-                return CP.put("pdf:" + targetPid + ":" + partial.sha256, partial).catch(function () {});
+              if (CP && partial && (partial.sha256 || ckKey)) {
+                var key = partial.sha256 ? ("pdf:" + targetPid + ":" + partial.sha256) : ckKey;
+                var patch = {
+                  pages: partial.pages,
+                  ocr: partial.ocr,
+                  sha256: partial.sha256,
+                  engine: partial.engine,
+                  ocrEngine: partial.ocrEngine,
+                  partial: partial.partial,
+                  nextPage: partial.nextPage,
+                  engineVersion: partial.engineVersion,
+                  running: true,
+                  finished: false
+                };
+                return mergeCheckpoint(key, patch);
               }
             }
           });
-        });
-      }).then(function (result) {
-        var clearKey = (result && result.sha256) ? ("pdf:" + targetPid + ":" + result.sha256) : "";
-        if (isLocalOnly) {
-          var clearP = (CP && clearKey) ? CP.remove(clearKey).catch(function () {}) : Promise.resolve();
-          var artId = "local_" + (result.sha256 || Date.now());
-          var localKey = "local-artifact:" + targetPid + ":" + (result.sha256 || Date.now());
-          var storeP = CP ? CP.put(localKey, {
-            artifact: {
-              id: artId, projectId: targetPid, filename: file.name || "study.pdf",
-              sha256: result.sha256, bytes: file.size || u8.byteLength,
-              pages: result.pages.length, status: "succeeded", createdTs: Date.now()
-            },
-            result: result
-          }).catch(function () {}) : Promise.resolve();
-          return Promise.all([clearP, storeP]).then(function () {
-            p.status = "pdf_sent";
-            p.text = result.ocr
-              ? "PDF read on your phone (some pages used OCR). Check values against the original."
-              : "PDF read on your phone.";
-            render();
+        }
+        if (!JR || typeof JR.runWithFallback !== "function") {
+          var resumeP = (CP && ckKey) ? CP.get(ckKey).catch(function () { return null; }) : Promise.resolve(null);
+          return resumeP.then(function (saved) {
+            return runOne({ checkpoint: saved });
+          }).then(function (result) {
+            return handleFindDeviceResult(idx, p, file, u8, result, targetPid, CP);
           });
         }
-        return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(targetPid) + "/extractions/device", {
-          filename: file.name || "study.pdf",
-          sha256: result.sha256,
-          bytes: file.size || u8.byteLength,
-          result: result
-        }).then(function () {
-          if (CP && clearKey) CP.remove(clearKey).catch(function () {});
-          p.status = "pdf_sent";
-          p.text = result.ocr
-            ? "PDF read on your phone (some pages used OCR). Open Extract to verify values."
-            : "PDF read on your phone. Open Extract to review pages.";
-          render();
-          if (SMD.p2 && SMD.p2.flashNotice) SMD.p2.flashNotice(sheetEl(), "PDF read on your phone.", "info");
-        }, function (postErr) {
-          if (postErr && (postErr.status === 413 || postErr.code === "ceiling_bytes")) {
-            uploadPdfServer(idx, p, file);
-            return;
+        return JR.runWithFallback("pdf", runOne, function (cpIgnored, fallbackMeta) {
+          return uploadPdfServer(idx, p, file, fallbackMeta);
+        }, {
+          jobKey: ckKey,
+          projectId: targetPid,
+          targetId: p.key || String(idx),
+          engine: "ondevice:pdf",
+          onStatus: function (info) {
+            if (info && info.state === "retrying" && info.message) {
+              p.text = info.message;
+              render();
+            }
           }
-          p.text = "Need the PDF to find the numbers";
-          render();
-          if (SMD.p2 && SMD.p2.flashNotice) {
-            var msg = (SMD.p2.friendlyError) ? SMD.p2.friendlyError(postErr).message : "Upload failed. Try again.";
-            SMD.p2.flashNotice(sheetEl(), msg, "error");
+        }).then(function (out) {
+          if (out && out.ok && out.source === "device") {
+            return handleFindDeviceResult(idx, p, file, u8, out.result, targetPid, CP);
+          }
+          if (!out || out.source !== "cloud") {
+            p.status = "needs_pdf";
+            p.text = (out && out.message) || "Saved on this device. Try again later.";
+            render();
           }
         });
-      }, function () {
-        uploadPdfServer(idx, p, file);
+      }).catch(function (err) {
+        p.status = "failed";
+        p.text = (err && err.message) || "Could not read this PDF.";
+        render();
+        if (SMD.p2 && SMD.p2.flashNotice) {
+          var msg = (SMD.p2.friendlyError) ? SMD.p2.friendlyError(err).message : p.text;
+          SMD.p2.flashNotice(sheetEl(), msg, "error");
+        }
       });
     }, function () {
-      uploadPdfServer(idx, p, file);
+      p.status = "failed";
+      p.text = "Could not open this PDF file.";
+      render();
     });
   }
 
