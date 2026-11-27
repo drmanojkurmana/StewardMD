@@ -645,7 +645,12 @@ export async function callGemini(env, parts, maxTokens, opts) {
     else { const fm = fastModel(env); if (fm) opts = Object.assign({}, opts, { model: fm }); }                        // simple query -> cheaper/faster non-thinking model (opt-in)
   }
   const order = providerOrder(env, opts);
-  const deadline = Date.now() + aiDeadlineMs(env);
+  // A caller with a longer budget (a paper draft, not a phone chat) may pass opts.deadlineMs; it replaces
+  // the chat deadline for this call and also becomes the per-attempt cap, so a slow provider gets the
+  // whole budget instead of being cut off at MAIK_AI_TIMEOUT_MS. Absent/invalid: MaiK's behaviour is unchanged.
+  const budgetMs = (opts && Number.isFinite(opts.deadlineMs) && opts.deadlineMs > 0) ? opts.deadlineMs : 0;
+  const deadline = Date.now() + (budgetMs || aiDeadlineMs(env));
+  const attemptCap = budgetMs || aiTimeoutMs(env);
   let lastErr = null;
   for (let i = 0; i < order.length; i++) {
     const name = order[i], p = PROVIDERS[name];
@@ -656,7 +661,9 @@ export async function callGemini(env, parts, maxTokens, opts) {
     for (let a = 0; a < attempts; a++) {
       const left = deadline - Date.now();
       if (left < MIN_ATTEMPT_MS) throw lastErr || new Error("AI deadline exceeded");
-      try { const out = await p.generate(env, parts, maxTokens, Object.assign({}, opts || {}, { timeoutMs: Math.min(aiTimeoutMs(env), left) })); _lastSuccess[name] = new Date().toISOString(); return out; }
+      // deadlineMs rides along in opts; genBody/chatBody/nativeTask whitelist the fields they send, so it
+      // never reaches a provider's request body.
+      try { const out = await p.generate(env, parts, maxTokens, Object.assign({}, opts || {}, { timeoutMs: Math.min(attemptCap, left) })); _lastSuccess[name] = new Date().toISOString(); return out; }
       catch (e) {
         lastErr = e;
         if (!failoverAllowed(e)) throw e;                   // 400: malformed request, every provider refuses it

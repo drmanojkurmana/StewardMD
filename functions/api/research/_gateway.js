@@ -33,6 +33,8 @@ import { ConnectorError } from "./_connectors/_http.js";
 import { efetchAbstracts } from "./_connectors/pubmed_efetch.js";
 
 const MAX_SEARCH_BYTES = 65536;
+/* A paper/analysis call needs longer than a phone chat, so give the facade its own 120 s budget (was MaiK's 28 s chat deadline). */
+const LLM_CALL_DEADLINE_MS = 120000;
 const TOKEN_TTL_SECONDS = 900; /* short-lived; matches the queue visibility */
 const SETTLED = ["succeeded", "failed", "cancelled"];
 const SEARCH_DATABASES = { pubmed, europe_pmc: europepmc, crossref };
@@ -198,7 +200,7 @@ export async function llmRoute(ctx) {
   let text;
   try {
     text = await callGemini(env, [{ text: body.prompt }], maxOut,
-      { model, system: finalSystem, temperature: 0.2, meta });
+      { model, system: finalSystem, temperature: 0.2, meta, deadlineMs: LLM_CALL_DEADLINE_MS });
   } catch (e) {
     await releaseCredits(db, uuid, reservation);
     return err(502, "ai_provider_error", "The AI service could not complete this request. Try again.", requestId);
