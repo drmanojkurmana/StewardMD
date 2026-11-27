@@ -370,11 +370,18 @@
     }
     st.approving = true;
     paint(target);
+    /* Write manual entries in bounded parallel batches so multi-item checklists
+     * finish within interactive latency before writing the approval marker. */
+    var BATCH = 6;
     var chain = Promise.resolve();
-    for (i = 0; i < rows.length; i++) {
-      (function (row) {
-        chain = chain.then(function () { return saveManualEntry(apiPid, gid, row.num, row.text); });
-      })(rows[i]);
+    for (i = 0; i < rows.length; i += BATCH) {
+      (function (chunk) {
+        chain = chain.then(function () {
+          return Promise.all(chunk.map(function (row) {
+            return saveManualEntry(apiPid, gid, row.num, row.text);
+          }));
+        });
+      })(rows.slice(i, i + BATCH));
     }
     var marker = approvalPayload();
     chain.then(function () {

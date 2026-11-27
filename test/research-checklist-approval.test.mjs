@@ -27,6 +27,8 @@ function makeContainer() {
           tagName: "BUTTON",
           attrs,
           getAttribute(k) { return attrs[k] !== undefined ? String(attrs[k]) : null; },
+          setAttribute(k, v) { attrs[k] = String(v); },
+          removeAttribute(k) { delete attrs[k]; },
           disabled: attrs.disabled !== undefined,
           onclick: null
         });
@@ -150,5 +152,62 @@ describe("BUG-09: checklist approval persists to the project", () => {
     screen.render(container);
     for (let i = 0; i < 20; i++) await new Promise((r) => setTimeout(r, 5));
     assert.equal(checklistMissingCalls, 1, "a known-missing manuscript is not fetched again");
+  });
+
+  test("batched approval saves every multi-item doc entry before the approval marker", async () => {
+    const items = [];
+    const itemSub = {};
+    const subheadings = [];
+    for (let k = 1; k <= 10; k++) {
+      const n = String(k);
+      items.push({ number: n, topic: "Item " + n, text: "Req " + n, section: "Case", projectField: "manual" });
+      itemSub[n] = "sub_" + n;
+      subheadings.push({ id: "sub_" + n, html: "Doc text for item " + n });
+    }
+    const bigChecklist = { id: "care", name: "CARE", version: "1", sections: [{ title: "Case", items }] };
+    const order = [];
+    let inflight = 0;
+    let maxInflight = 0;
+    const oldReq = globalThis.SMD_RESEARCH.api.request;
+    globalThis.SMD_RESEARCH.api.request = async (method, path, body) => {
+      if (method === "GET" && path === "/v1/checklists/care") return bigChecklist;
+      if (method === "PUT" && /\/checklist-manual\/care$/.test(path)) {
+        inflight++;
+        if (inflight > maxInflight) maxInflight = inflight;
+        await new Promise((r) => setTimeout(r, 5));
+        inflight--;
+        order.push(String(body.num));
+      }
+      return oldReq(method, path, body);
+    };
+    globalThis.SMD_RESEARCH_DOC = {
+      outlineFor: () => ({ itemSub, sections: [{ id: "sec_1", title: "Case", subheadings }] }),
+      htmlToText: (h) => String(h || ""),
+      countWords: (t) => (String(t || "").trim() ? String(t).trim().split(/\s+/).length : 0),
+      render: () => ({
+        getDoc: () => ({ sections: [{ id: "sec_1", subheadings }] }),
+        destroy: () => {}
+      })
+    };
+    const origQs = container.querySelector.bind(container);
+    container.querySelector = (sel) => {
+      if (sel === "#rmdChecklistDoc") return { innerHTML: "" };
+      return origQs(sel);
+    };
+    const screen = globalThis.SMD_RESEARCH.screens.checklist;
+    screen.render(container);
+    let approve = null;
+    for (let i = 0; i < 60; i++) {
+      approve = container.querySelector("[data-rmd-approve]");
+      if (approve && !approve.disabled) break;
+      await new Promise((r) => setTimeout(r, 10));
+    }
+    assert.ok(approve && !approve.disabled, "Approve enabled when all 10 doc items are filled");
+    approve.onclick();
+    for (let i = 0; i < 80 && !/Approved and saved to your project/.test(container.innerHTML); i++) await new Promise((r) => setTimeout(r, 10));
+    assert.match(container.innerHTML, /Approved and saved to your project/, "approval completed");
+    assert.equal(order.length, 11, "all 10 doc entries plus approval marker written");
+    assert.equal(order[10], "checklist_approval", "approval marker written strictly last after all batched puts");
+    assert.ok(maxInflight > 1 && maxInflight <= 6, "puts ran in bounded parallel batches (maxInflight=" + maxInflight + ")");
   });
 });
