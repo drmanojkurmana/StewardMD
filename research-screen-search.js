@@ -95,6 +95,7 @@
     topicSearched: false,
     topicError: null,
     topicResults: [],
+    topicRetrievedAt: 0,
     topicExpanded: {},
     topicAdding: {},
     topicAdded: {},
@@ -290,6 +291,7 @@
       st.topicSearched = false;
       st.topicError = null;
       st.topicResults = [];
+      st.topicRetrievedAt = 0;
       st.topicExpanded = {};
       st.topicAdding = {};
       st.topicAdded = {};
@@ -423,6 +425,11 @@
         h.push('</div>');
       }
       h.push('</div>');
+      /* F-20: the credit lines for the sources actually present in these
+       * results, plus the retrieval date the search completed. */
+      if (SMD.sources && SMD.sources.creditHtml) {
+        h.push(SMD.sources.creditHtml(st.topicResults, st.topicRetrievedAt, { attr: 'data-rmd="topic-sources-credit"' }));
+      }
     }
     h.push('</div>');
 
@@ -592,6 +599,7 @@
       if (mySeq !== seq) return;
       st.topicBusy = false;
       st.topicResults = (data && data.results) || [];
+      st.topicRetrievedAt = Date.now();
       render(container);
     }).catch(function (err) {
       if (mySeq !== seq) return;
