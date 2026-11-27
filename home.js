@@ -11102,10 +11102,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       (meta.length ? '<div class="mu-src"><span class="mu-org">' + meta.join(" \u00b7 ") + '</span></div>' : "") +
       (signed ? '<div class="mu-src">' + signed + '</div>' : "") + '</div></li>';
   }
-  // Layout variant for the owner to choose between (2026-11-27): a = grouped list, b = timeline,
-  // c = priority first. localStorage smd_alerts_variant; default a. Same rows, states and motion in all three.
-  function muVariant() { try { var q = (location.search.match(/[?&]alerts=([abc])\b/) || [])[1]; var v = q || localStorage.getItem("smd_alerts_variant"); return /^[abc]$/.test(v || "") ? v : "a"; } catch (e) { return "a"; } }
-  try { window.SMD_setAlertsVariant = function (v) { try { localStorage.setItem("smd_alerts_variant", v); } catch (e) {} if (_notifRoot) { _notifRoot.classList.remove("mu-v-a", "mu-v-b", "mu-v-c"); _notifRoot.classList.add("mu-v-" + muVariant()); renderFeed(); } }; } catch (e) {}
   // Rows are grouped by age so the list has a real structure: what arrived today, this week, before.
   function feedGroupLabel(ts) {
     var d = new Date(ts || 0), t = new Date(); t.setHours(0, 0, 0, 0);
@@ -11128,16 +11124,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var rb = body.querySelector("#muRetry"); if (rb) rb.addEventListener("click", function () { muLoadFeed(true); });
       muReveal(body); return;
     }
-    var html = "", cur = null, open = false, V = muVariant();
+    var html = "", cur = null, open = false;
     items = items.slice().sort(function (x, y) { return (y.ts || 0) - (x.ts || 0); });   // newest first, so each date heading appears once
-    if (V === "c") {   // priority first: what needs attention, then everything else in date order
-      var top = items.filter(function (it) { return it.importance === "critical" || it.importance === "high"; });
-      var rest = items.filter(function (it) { return top.indexOf(it) < 0; });
-      items = top.concat(rest);
-    }
     items.forEach(function (it) {
-      var g = V === "c" ? ((it.importance === "critical" || it.importance === "high") ? "Needs your attention" : "Everything else") : feedGroupLabel(it.ts);
-      if (g !== cur) { if (open) html += "</ul></section>"; html += '<section class="mu-sec' + (g === "Everything else" ? " is-compact" : "") + '"><h2 class="mu-sech">' + g + '</h2><ul class="mu-group">'; cur = g; open = true; }
+      var g = feedGroupLabel(it.ts);
+      if (g !== cur) { if (open) html += "</ul></section>"; html += '<section class="mu-sec"><h2 class="mu-sech">' + g + '</h2><ul class="mu-group">'; cur = g; open = true; }
       html += feedCardHTML(it);
     });
     if (open) html += "</ul></section>";
@@ -11251,7 +11242,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function openNotifications() {
     buildNotif(); _notifRoot.classList.add("on"); document.body.classList.add("ntf-lock");
     _feedPrevSeen = nSeen();
-    _notifRoot.classList.remove("mu-v-a", "mu-v-b", "mu-v-c"); _notifRoot.classList.add("mu-v-" + muVariant());
     switchTab(_activeTab); renderPushRow(); bmMergeFromServer(); renderDigestBanner();
     muLoadFeed(true);
     requestAnimationFrame(function () { muMoveInk(false); });
@@ -12246,21 +12236,24 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".mu .mu-pbtn{flex:0 0 auto;height:40px;padding:0 14px;border:0;border-radius:10px;background:var(--mu-acc);color:#fff;font:600 14px var(--mu-f);cursor:pointer}",
       "body.dark .mu .mu-pbtn{color:#062a23}",
       // sections + grouped list
-      ".mu .mu-sec{margin-top:22px}",
-      ".mu .mu-sech{margin:0 0 8px 4px;font:600 13px var(--mu-f);color:var(--mu-mut)}",
-      ".mu .mu-group{list-style:none;margin:0;padding:0;border-radius:12px;background:var(--mu-surface);overflow:hidden}",
-      "body.dark .mu .mu-group,body.dark .mu .mu-digest{box-shadow:inset 0 0 0 1px var(--mu-line)}",
-      ".mu .mu-row{position:relative;padding:13px 16px 13px 20px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .12s}",
-      ".mu .mu-row+.mu-row{box-shadow:inset 0 1px 0 var(--mu-line)}",
+      // timeline (owner chose layout B, 2026-11-27): full-bleed rows on the page, a date column carries the time axis,
+      // date headings stay pinned while their rows scroll under them
+      ".mu .mu-sec{margin-top:8px}",
+      ".mu .mu-sech{position:sticky;top:0;z-index:1;margin:0 -16px;padding:18px 20px 8px;background:var(--mu-page);font:600 13px var(--mu-f);color:var(--mu-mut)}",
+      ".mu .mu-group{list-style:none;margin:0 -16px;padding:0;border-top:1px solid var(--mu-line)}",
+      ".mu .mu-row{position:relative;display:grid;grid-template-columns:44px 1fr;gap:12px;padding:14px 16px;border-bottom:1px solid var(--mu-line);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .12s}",
+      ".mu .mu-row-static{display:block;padding:14px 20px}",
+      ".mu .mu-dcol{display:flex;flex-direction:column;align-items:center;padding-top:2px;font:500 12px/1.2 var(--mu-f);color:var(--mu-mut);text-transform:uppercase;letter-spacing:.02em}",
+      ".mu .mu-dcol b{font:600 22px/1 var(--mu-f);letter-spacing:-.02em;color:var(--mu-ink);font-variant-numeric:tabular-nums}",
       ".mu .mu-row-static{cursor:default}",
       ".mu .mu-row[data-uid]:active{background:var(--mu-press)}",
       "@media (hover:hover){.mu .mu-row[data-uid]:hover{background:var(--mu-press)}}",
-      ".mu .mu-row:focus-visible{outline:2px solid var(--mu-acc);outline-offset:-2px;border-radius:12px}",
-      ".mu .mu-unread{position:absolute;left:7px;top:19px;width:7px;height:7px;border-radius:50%;background:var(--mu-acc)}",
+      ".mu .mu-row:focus-visible{outline:2px solid var(--mu-acc);outline-offset:-2px}",
+      ".mu .mu-unread{position:absolute;right:16px;top:18px;width:7px;height:7px;border-radius:50%;background:var(--mu-acc)}",
       ".mu .mu-line1{display:flex;align-items:baseline;gap:8px;font:500 13px var(--mu-f);color:var(--mu-mut)}",
       ".mu .mu-kind{font-weight:600;color:var(--mu-mut)}.mu .mu-kind.is-warn{color:var(--mu-warn)}",
       ".mu .mu-imp{font-weight:600;color:var(--mu-red)}.mu .mu-imp.is-crit{font-weight:700}",
-      ".mu .mu-when{margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap}",
+      ".mu #ntfFeed .mu-when{display:none}.mu .mu-when{margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap}",
       ".mu .mu-title{margin:3px 0 0;font:600 16.5px/1.32 var(--mu-f);letter-spacing:-.005em;color:var(--mu-ink);text-wrap:pretty}",
       ".mu .mu-row.is-unread .mu-title{font-weight:700}",
       ".mu .mu-lead{display:-webkit-box;margin:4px 0 0;font:400 14.5px/1.45 var(--mu-f);color:var(--mu-mut);-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}",
@@ -12271,7 +12264,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".mu .mu-srclink{margin-left:auto;font-weight:600;color:var(--mu-acc);text-decoration:none}",
       // digest
       ".mu .mu-digest-wrap:empty{display:none}",
-      ".mu .mu-digest{display:flex;flex-direction:column;gap:0;width:100%;padding:14px 16px;border:0;border-radius:12px;background:var(--mu-surface);text-align:left;cursor:pointer;touch-action:manipulation;color:var(--mu-ink);transition:background .12s}",
+      ".mu .mu-digest{display:flex;flex-direction:column;gap:0;width:calc(100% + 32px);margin:0 -16px;padding:16px 20px;border:0;border-top:1px solid var(--mu-line);border-bottom:1px solid var(--mu-line);border-radius:0;background:var(--mu-surface);text-align:left;cursor:pointer;touch-action:manipulation;color:var(--mu-ink);transition:background .12s}",
       ".mu .mu-digest:active{background:color-mix(in srgb,var(--mu-surface) 92%,var(--mu-ink))}.mu .mu-digest:focus-visible{outline:2px solid var(--mu-acc);outline-offset:2px}",
       ".mu .mu-dg-h{font:600 17px/1.3 var(--mu-f);letter-spacing:-.01em;text-wrap:balance}",
       ".mu .mu-dg-go{margin-top:10px;font:600 14px var(--mu-f);color:var(--mu-acc)}",
@@ -12293,28 +12286,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".mu.mu-dt .dt-btn{min-height:44px;border-radius:10px;border-color:var(--mu-line);background:var(--mu-surface);color:var(--mu-ink);font:600 14px var(--mu-f)}",
       ".mu.mu-dt .dt-btn.primary{background:var(--mu-acc);border-color:var(--mu-acc);color:#fff}body.dark .mu.mu-dt .dt-btn.primary{color:#062a23}",
       ".mu.mu-dt .ntf-cat{background:none;padding:0;text-transform:none;letter-spacing:0;font:600 13px var(--mu-f);color:var(--mu-mut)}.mu.mu-dt .ntf-hi{background:none;color:var(--mu-red);text-transform:none;letter-spacing:0;font:600 13px var(--mu-f);padding:0}",
-      ".mu .mu-dcol{display:none}",
-      // ---- variant B: timeline. Full-bleed rows on the page, a date column carries the time axis ----
-      ".mu.mu-v-b .mu-group{margin:0 -16px;border-radius:0;background:none;box-shadow:none!important;border-top:1px solid var(--mu-line)}",
-      ".mu.mu-v-b .mu-row{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:14px 16px;border-bottom:1px solid var(--mu-line);box-shadow:none}",
-      ".mu.mu-v-b .mu-dcol{display:flex;flex-direction:column;align-items:center;padding-top:2px;font:500 12px/1.2 var(--mu-f);color:var(--mu-mut);text-transform:uppercase;letter-spacing:.02em}",
-      ".mu.mu-v-b .mu-dcol b{font:600 22px/1 var(--mu-f);letter-spacing:-.02em;color:var(--mu-ink);font-variant-numeric:tabular-nums}",
-      ".mu.mu-v-b .mu-when{display:none}",
-      ".mu.mu-v-b .mu-unread{left:auto;right:16px;top:18px}",
-      ".mu.mu-v-b .mu-sech{position:sticky;top:0;z-index:1;margin:0 -16px;padding:18px 20px 8px;background:var(--mu-page)}",
-      ".mu.mu-v-b .mu-sec{margin-top:8px}",
-      ".mu.mu-v-b .mu-digest{border-radius:0;margin:0 -16px;width:calc(100% + 32px);padding:16px 20px;background:var(--mu-surface);border-top:1px solid var(--mu-line);border-bottom:1px solid var(--mu-line);box-shadow:none}",
-      ".mu.mu-v-b .mu-row:focus-visible{border-radius:0}",
-      // ---- variant C: priority first. Important items in full, the rest as one-line rows for triage ----
-      ".mu.mu-v-c #ntfFeed .mu-sec:not(.is-compact) .mu-row{padding:16px 16px 16px 20px}",
-      ".mu.mu-v-c #ntfFeed .mu-sec:not(.is-compact) .mu-title{font-size:18px}",
-      ".mu.mu-v-c #ntfFeed .mu-sec:not(.is-compact) .mu-lead{-webkit-line-clamp:3;color:var(--mu-ink);opacity:.82}",
-      ".mu.mu-v-c #ntfFeed .mu-sec:not(.is-compact) .mu-sech{color:var(--mu-red)}",
-      ".mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-row{padding:11px 16px 11px 20px}",
-      ".mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-lead,.mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-signed{display:none}",
-      ".mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-title{font-size:15.5px;font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}",
-      ".mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-row.is-unread .mu-title{font-weight:600}",
-      ".mu.mu-v-c #ntfFeed .mu-sec.is-compact .mu-src{margin-top:3px}",
       "@media (prefers-reduced-motion:reduce){#ntfDetail.mu.on{animation:none}.mu .mu-tab-ink,.mu .mu-bar-t,.mu .mu-ptr,.mu #ntfFeed{transition:none}.mu .mu-icbtn.is-busy .smd-ico{animation:none}}"
     ].join("");
     var st = document.createElement("style"); st.id = "ntf-css"; st.textContent = css; document.head.appendChild(st);
