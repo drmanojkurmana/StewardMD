@@ -1793,22 +1793,10 @@ body.st5b-presenting #stTb { display: none !important; }
 }
 
 .pn-root .st-ink-seg.on {
-  border-color: var(--pn-km-mint);
-  background: color-mix(in srgb, var(--pn-pri) 16%, transparent);
-  color: var(--pn-text, #E5E7EB);
+  border-color: transparent;
+  background: var(--pn-sel-bg);
+  color: var(--pn-sel-ink);
   font-weight: 600;
-}
-
-body.dark .pn-root .st-ink-seg.on {
-  color: #E5E7EB;
-  border-color: var(--pn-km-mint);
-  background: color-mix(in srgb, var(--pn-pri) 16%, transparent);
-}
-
-body:not(.dark) .pn-root .st-ink-seg.on {
-  color: var(--pn-on-pri);
-  border-color: var(--pn-km-mint);
-  background: color-mix(in srgb, var(--pn-pri) 16%, transparent);
 }
 
 .pn-root .st-ink-seg:focus-visible {
@@ -2298,3 +2286,212 @@ body.dark .pn-root .st5a-lib .st5a-cover-folder { background: color-mix(in srgb,
 .pn-root .st5a-lib .st-hit > b { font-size: 15px; color: var(--pn-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pn-root .st5a-lib .st-hit > small { color: var(--pn-mut); font-size: 12.5px; }
 .pn-root .st5a-lib .st-hit > .st-sn { font-size: 13px; line-height: 1.4; color: var(--pn-mut); }
+
+/* The editor's bars never start a page drag on iOS (a drag there scrolled the editor up under the status bar); the
+   tool row still scrolls sideways on a phone. */
+.pn-root .st-body .st-p3-topbar, .pn-root .st-body .st-doc-tabs { touch-action: pan-x; overscroll-behavior: none; }
+.pn-root .st-body .st-tb { touch-action: pan-x; overscroll-behavior: none; }
+.pn-root .pn-body.st-body { overscroll-behavior: none; }
+
+/* ===== NoteBook editor: floating glass dock (owner 2026-11-27: "make it look premium") =====
+   The tool row is a capsule floating over the page, the same Liquid Glass material as the PrepNucleus bottom nav
+   (prep-nav.css --pnv-*): white glass on paper (light), navy glass (dark). The current tool sits on the nav's
+   amber/Prussian pill. Tool options (widths and colours, laser, text styles) ride in the same capsule above the
+   tools. The page gets the whole screen; --st-dock-h (study.js watchDock) keeps the page end, the page pill, the
+   pen popover and the zoom window clear of it. */
+.pn-root .pn-body.st-body { --st-dock-b: calc(10px + env(safe-area-inset-bottom, 0px)); }
+.pn-root .st-body .st-tb {
+  position: fixed; z-index: 35; left: 50%; right: auto; transform: translateX(-50%);
+  bottom: var(--st-dock-b); width: min(620px, calc(100% - 16px)); box-sizing: border-box;
+  display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: flex-end; gap: 0;
+  padding: 5px; margin: 0; border: 0; border-radius: 26px; overflow: hidden;
+  background: var(--pnv-tint); -webkit-backdrop-filter: var(--pnv-blur); backdrop-filter: var(--pnv-blur);
+  box-shadow: inset 0 1px 0 var(--pnv-rim), inset 0 0 0 1px var(--pnv-rim-lo), var(--pnv-shadow);
+}
+.pn-root .st-body .st-tb .st-tb-group { order: 2; flex: none; width: 100%; min-width: 0; }
+.pn-root .st-body .st-tb .st-tb-tools { display: flex; justify-content: space-between; align-items: center; gap: 0; padding: 0; overflow-x: auto; scrollbar-width: none; scroll-snap-type: none; }
+.pn-root .st-body .st-tb .st-tb-tools::-webkit-scrollbar { display: none; }
+.pn-root .st-body .st-tb .st-tb-tools .st-b {
+  flex: 1 0 40px; min-width: 40px; max-width: 56px; height: 46px; min-height: 46px; padding: 0; margin: 0;
+  border: 0; border-radius: 20px; background: transparent; color: var(--pnv-ink); box-shadow: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background-color var(--pn-d-quick) var(--pn-ease), color var(--pn-d-quick) var(--pn-ease), transform var(--pn-d-press) var(--pn-ease);
+}
+.pn-root .st-body .st-tb .st-tb-tools .st-b svg { width: 22px; height: 22px; }
+.pn-root .st-body .st-tb .st-tb-tools .st-b:active { transform: scale(.9); }
+.pn-root .st-body .st-tb .st-tb-tools .st-b.on {
+  background: var(--pnv-pill); color: var(--pnv-on);
+  box-shadow: inset 0 1px 0 var(--pnv-pill-rim), 0 1px 2px rgba(19, 32, 61, .08);
+}
+/* Pen and highlighter show their ink: a dot of the current colour under the icon. */
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="pen"].on,
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="hl"].on { color: var(--pnv-on); position: relative; }
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="pen"].on::after,
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="hl"].on::after {
+  content: ""; position: absolute; bottom: 5px; left: 50%; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%;
+  background: var(--st-pen, var(--pnv-on)); box-shadow: 0 0 0 1.5px var(--pnv-tint);
+}
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="pen"].on svg,
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="hl"].on svg { fill: none; }
+/* Options row: above the tools, same capsule, a hairline between. */
+.pn-root .st-body .st-tb #stInkCtx:not(:empty),
+.pn-root .st-body .st-tb #stInsertOptions:not([hidden]):not(:empty) {
+  order: 1; flex: none; width: 100%; min-width: 0; box-sizing: border-box;
+  margin: 0 0 5px; padding: 2px 4px 7px; border: 0; border-bottom: 1px solid var(--pnv-rim-lo);
+  display: flex; align-items: center; overflow-x: auto; scrollbar-width: none;
+}
+.pn-root .st-body .st-tb #stInkCtx::-webkit-scrollbar, .pn-root .st-body .st-tb #stInsertOptions::-webkit-scrollbar { display: none; }
+.pn-root .st-body .st-tb #stInsertOptions:empty { display: none; }
+.pn-root .st-body .st-tb .st-ink-strip,
+.pn-root .st-body .st-tb .st-laser-strip,
+.pn-root .st-body .st-tb .st-text-strip,
+.pn-root .st-body .st-tb .st-insert-strip,
+.pn-root .st-body .st-tb .st-opt-strip { display: flex; flex-wrap: nowrap; align-items: center; gap: 6px; padding: 0; margin: 0 auto; min-width: max-content; background: transparent; border: 0; box-shadow: none; }
+.pn-root .st-body .st-tb .st-ink-colors { display: flex !important; flex-wrap: nowrap; gap: 2px; }
+.pn-root .st-body .st-tb .st-ink-custom, .pn-root .st-body .st-tb .st-ink-hint { display: none !important; }
+.pn-root .st-body .st-tb .st-ink-c { width: 34px; height: 34px; min-width: 34px; min-height: 34px; }
+.pn-root .st-body .st-tb .st-ink-c::before { inset: 6px; }
+.pn-root .st-body .st-tb .st-ink-w, .pn-root .st-body .st-tb .st-w { width: 38px; height: 34px; min-width: 38px; min-height: 34px; border: 0; border-radius: 17px; background: transparent; box-shadow: none; }
+.pn-root .st-body .st-tb .st-ink-w.on, .pn-root .st-body .st-tb .st-w.on { background: var(--pnv-pill); box-shadow: inset 0 1px 0 var(--pnv-pill-rim); }
+.pn-root .st-body .st-tb .st-ink-divider { align-self: center; height: 20px; margin: 0 4px; background: var(--pnv-rim-lo); }
+.pn-root .st-body .st-tb .st-ink-seg, .pn-root .st-body .st-tb .st-fb-btn {
+  min-height: 34px; height: 34px; padding: 0 13px; border: 0; border-radius: 17px; white-space: nowrap;
+  background: color-mix(in srgb, var(--pn-text) 6%, transparent); color: var(--pnv-ink); font-size: 13.5px; font-weight: 600;
+}
+.pn-root .st-body .st-tb .st-ink-seg.on { background: var(--pnv-pill); color: var(--pnv-on); box-shadow: inset 0 1px 0 var(--pnv-pill-rim); }
+.pn-root .st-body .st-tb .st-fb-group { display: flex; gap: 4px; }
+.pn-root .st-body .st-tb .st-fb-sep { width: 1px; height: 20px; background: var(--pnv-rim-lo); margin: 0 4px; flex: none; }
+.pn-root .st-body .st-tb .st-laser-col { width: 26px; height: 26px; min-width: 26px; }
+/* Phone: the zoom window is for a tablet and a pencil; the other ten tools fit without scrolling. */
+@media (max-width: 560px) {
+  .pn-root .st-body .st-tb .st-tb-tools .st-b[data-act="st-zoom-window"] { display: none; }
+  .pn-root .st-body .st-tb .st-tb-tools .st-b { flex-basis: 34px; min-width: 34px; }
+}
+/* Text format bar: its own glass capsule just above the dock (on the keyboard while typing: study-insert.js). */
+.pn-root .st-format-bar.st-format-bar {
+  left: 50%; right: auto; transform: translateX(-50%); width: min(620px, calc(100% - 16px)); box-sizing: border-box;
+  bottom: calc(var(--st-dock-h, 64px) + 10px + env(safe-area-inset-bottom, 0px) + 8px);
+  border: 0; border-radius: 22px; padding: 4px 8px; min-height: 46px; z-index: 36; overflow-x: auto; scrollbar-width: none; justify-content: flex-start; gap: 4px;
+  background: var(--pnv-tint); -webkit-backdrop-filter: var(--pnv-blur); backdrop-filter: var(--pnv-blur);
+  box-shadow: inset 0 1px 0 var(--pnv-rim), inset 0 0 0 1px var(--pnv-rim-lo), var(--pnv-shadow);
+}
+.pn-root .st-format-bar .st-fb-btn { color: var(--pnv-ink); border-radius: 16px; }
+
+/* Page area under the dock: the last page scrolls clear of it. */
+.pn-root .st-body .st-pages { padding-bottom: calc(var(--st-dock-h, 64px) + var(--st-dock-b, 10px) + 40px); }
+.pn-root .st-body .st-sc { background: var(--pn-bg); }
+
+/* Top bar: the same glass, no hard line. */
+.pn-root .st-body .st-p3-topbar {
+  background: color-mix(in srgb, var(--pn-bg) 78%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6); backdrop-filter: blur(18px) saturate(1.6);
+  border-bottom: 0; box-shadow: 0 1px 0 var(--pn-line); z-index: 31;
+}
+.pn-root .st-body .st-p3-btn { width: 42px; height: 42px; min-width: 42px; min-height: 42px; border-radius: 50%; color: var(--pn-text); }
+.pn-root .st-body .st-p3-title { font-size: 16px; font-weight: 700; letter-spacing: -.01em; }
+
+/* Page pill: small glass capsule just above the dock. */
+.pn-root .st-p3-pager {
+  left: 50%; right: auto; transform: translateX(-50%);
+  bottom: calc(var(--st-dock-h, 64px) + 10px + env(safe-area-inset-bottom, 0px) + 10px);
+  min-height: 30px; height: 30px; padding: 0 12px; border-radius: 15px; font-size: 12.5px; font-weight: 650;
+  background: var(--pnv-tint); color: var(--pnv-ink); border: 0;
+  -webkit-backdrop-filter: var(--pnv-blur); backdrop-filter: var(--pnv-blur);
+  box-shadow: inset 0 0 0 1px var(--pnv-rim-lo), var(--pnv-shadow);
+}
+.pn-root:has(#stFormatBar) .st-p3-pager { visibility: hidden; }
+
+/* Pen / eraser settings: a glass card rising from the dock. */
+.pn-root .st-ink-pop.st-ink-pop {
+  position: fixed; top: auto; left: 50%; right: auto; transform: translateX(-50%);
+  bottom: calc(var(--st-dock-h, 64px) + 10px + env(safe-area-inset-bottom, 0px) + 10px);
+  width: min(420px, calc(100vw - 16px)); max-height: calc(100dvh - var(--st-dock-h, 64px) - 150px);
+  border: 0; border-radius: 22px; padding: 14px;
+  background: var(--pn-card); box-shadow: inset 0 0 0 1px var(--pnv-rim-lo), 0 18px 48px -18px rgba(19, 32, 61, .45);
+}
+body.dark .pn-root .st-ink-pop.st-ink-pop { background: var(--pn-card); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 18px 48px -18px rgba(0, 0, 0, .7); }
+.pn-root .st-p3-zoomwin { bottom: calc(var(--st-dock-h, 64px) + 10px + env(safe-area-inset-bottom, 0px) + 8px); }
+@media (prefers-reduced-motion: reduce) { .pn-root .st-body .st-tb .st-tb-tools .st-b { transition: none; } }
+@media (min-width: 561px) { .pn-root .st-body .st-tb .st-tb-tools { justify-content: center; gap: 4px; } .pn-root .st-body .st-tb { width: auto; max-width: calc(100% - 32px); } }
+
+/* ===== NoteBook pen / highlighter / eraser card (2026-11-27) =====
+   One rounded card rising from the dock: grab handle, kicker + title, a live preview on dotted paper, illustrated
+   nib cards, a swatch row, then one grouped list (label left, value right, a filled slider under it; switches). */
+.pn-root .st-ink-pop.st-ink-pop { display: block; padding: 6px 16px 16px; gap: 0; border-radius: 26px; overflow-y: auto; scrollbar-width: none;
+  --nb-nib-fill: color-mix(in srgb, var(--pn-c-amber) 30%, transparent); }
+.pn-root .st-ink-pop.st-ink-pop::-webkit-scrollbar { display: none; }
+.pn-root .st-ink-pop .nb-grab { width: 36px; height: 5px; border-radius: 3px; margin: 2px auto 8px; background: var(--pn-s2); }
+.pn-root .st-ink-pop .nb-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.pn-root .st-ink-pop .nb-head small { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--pn-mut); }
+.pn-root .st-ink-pop .nb-head h3 { margin: 1px 0 0; font-size: 21px; font-weight: 750; letter-spacing: -.02em; color: var(--pn-text); }
+.pn-root .st-ink-pop .nb-x { width: 34px; height: 34px; min-width: 34px; border: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--pn-s1); color: var(--pn-mut); cursor: pointer; }
+.pn-root .st-ink-pop .nb-x::before { content: ""; position: absolute; width: 44px; height: 44px; }
+.pn-root .st-ink-pop .nb-prev { position: relative; border-radius: 18px; overflow: hidden; margin-bottom: 12px;
+  background: #fff radial-gradient(circle, rgba(19, 32, 61, .13) 1px, transparent 1.4px) 0 0 / 14px 14px;
+  box-shadow: inset 0 0 0 1px rgba(19, 32, 61, .07), inset 0 -18px 30px -24px rgba(19, 32, 61, .18); }
+.pn-root .st-ink-pop .nb-prev .st-ink-preview { display: block; width: 100%; height: auto; aspect-ratio: 840 / 220; border: 0; border-radius: 0; background: transparent; }
+
+.pn-root .st-ink-pop .nb-nibs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 14px; }
+.pn-root .st-ink-pop .nb-nib { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 92px; padding: 10px 6px 9px;
+  border: 0; border-radius: 18px; background: var(--pn-s1); color: var(--pn-mut); cursor: pointer; font: inherit; text-align: center;
+  transition: background-color var(--pn-d-quick) var(--pn-ease), color var(--pn-d-quick) var(--pn-ease), box-shadow var(--pn-d-quick) var(--pn-ease), transform var(--pn-d-press) var(--pn-ease); }
+.pn-root .st-ink-pop .nb-nib:active { transform: scale(.96); }
+.pn-root .st-ink-pop .nb-nib-art { width: 40px; height: 40px; display: block; transition: transform var(--pn-d-base) var(--pn-spring-pop, ease); }
+.pn-root .st-ink-pop .nb-nib-art svg { width: 100%; height: 100%; display: block; }
+.pn-root .st-ink-pop .nb-nib b { font-size: 13.5px; font-weight: 650; color: inherit; }
+.pn-root .st-ink-pop .nb-nib small { font-size: 11px; line-height: 1.25; color: var(--pn-mut); }
+.pn-root .st-ink-pop .nb-nib.on { background: var(--pn-card); color: var(--pn-text); box-shadow: 0 0 0 2px var(--pn-pri), 0 8px 18px -10px rgba(19, 32, 61, .45); --nb-nib-fill: color-mix(in srgb, var(--pn-c-amber) 70%, transparent); }
+.pn-root .st-ink-pop .nb-nib.on .nb-nib-art { transform: translateY(-2px) rotate(-8deg); }
+body.dark .pn-root .st-ink-pop .nb-nib.on { background: var(--pn-c-prussian-hi); color: var(--pn-c-amber); box-shadow: 0 0 0 1.5px var(--pn-c-amber); }
+
+.pn-root .st-ink-pop .nb-swatches { display: flex; flex-wrap: wrap; gap: 6px 4px; justify-content: space-between; margin-bottom: 14px; }
+.pn-root .st-ink-pop .nb-swatch { position: relative; width: 36px; height: 36px; min-width: 36px; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+.pn-root .st-ink-pop .nb-swatch::before { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px rgba(19, 32, 61, .14);
+  transition: inset var(--pn-d-quick) var(--pn-ease); }
+.pn-root .st-ink-pop .nb-swatch.on::before { inset: 8px; }
+.pn-root .st-ink-pop .nb-swatch.on::after { content: ""; position: absolute; inset: 1px; border-radius: 50%; box-shadow: 0 0 0 2.5px var(--c); }
+.pn-root .st-ink-pop .nb-wheel::before { background: conic-gradient(from 0deg, #ff3b30, #ff9500, #ffcc00, #34c759, #00c7be, #007aff, #5856d6, #af52de, #ff2d55, #ff3b30); }
+.pn-root .st-ink-pop .nb-wheel.on::before { background: radial-gradient(circle, var(--c) 52%, transparent 54%), conic-gradient(from 0deg, #ff3b30, #ff9500, #ffcc00, #34c759, #00c7be, #007aff, #5856d6, #af52de, #ff2d55, #ff3b30); }
+.pn-root .st-ink-pop .nb-wheel input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border: 0; padding: 0; }
+
+.pn-root .st-ink-pop .nb-group { border-radius: 18px; background: var(--pn-s1); padding: 2px 14px; margin-bottom: 4px; }
+.pn-root .st-ink-pop .nb-row { display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 12px; min-height: 52px; padding: 10px 0; }
+.pn-root .st-ink-pop .nb-row + .nb-row { border-top: 1px solid var(--pn-line); }
+.pn-root .st-ink-pop .nb-rl { font-size: 14.5px; font-weight: 600; color: var(--pn-text); }
+.pn-root .st-ink-pop .nb-rl small { display: block; font-size: 12px; font-weight: 500; color: var(--pn-mut); margin-top: 1px; }
+.pn-root .st-ink-pop .nb-rv { font-size: 14px; font-weight: 700; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
+.pn-root .st-ink-pop .nb-slide input[type="range"] { grid-column: 1 / -1; width: 100%; height: 28px; margin: 6px 0 0; background: transparent; -webkit-appearance: none; appearance: none; accent-color: auto; cursor: pointer; }
+.pn-root .st-ink-pop .nb-slide input[type="range"]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px;
+  background: linear-gradient(90deg, var(--pn-pri) 0 var(--p, 50%), var(--pn-s2) var(--p, 50%) 100%); }
+.pn-root .st-ink-pop .nb-slide input[type="range"]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--pn-s2); }
+.pn-root .st-ink-pop .nb-slide input[type="range"]::-moz-range-progress { height: 6px; border-radius: 3px; background: var(--pn-pri); }
+.pn-root .st-ink-pop .nb-slide input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; margin-top: -10px; border-radius: 50%; border: 0;
+  background: #fff; box-shadow: 0 0 0 .5px rgba(19, 32, 61, .12), 0 3px 8px rgba(19, 32, 61, .22); }
+.pn-root .st-ink-pop .nb-slide input[type="range"]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; border: 0; background: #fff; box-shadow: 0 3px 8px rgba(19, 32, 61, .22); }
+.pn-root .st-ink-pop .nb-switch { position: relative; width: 51px; height: 31px; min-width: 51px; padding: 0; border: 0; border-radius: 16px; background: var(--pn-s2); cursor: pointer;
+  transition: background-color var(--pn-d-base) var(--pn-ease); }
+.pn-root .st-ink-pop .nb-switch i { position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 3px 8px rgba(0, 0, 0, .15), 0 1px 1px rgba(0, 0, 0, .16);
+  transition: transform var(--pn-d-base) var(--pn-spring-snap, ease); }
+.pn-root .st-ink-pop .nb-switch.on { background: var(--pn-ok); }
+.pn-root .st-ink-pop .nb-switch.on i { transform: translateX(20px); }
+.pn-root .st-ink-pop .nb-switch::before { content: ""; position: absolute; inset: -7px -2px; }
+
+.pn-root .st-ink-pop .nb-sizes { display: flex; gap: 8px; margin-bottom: 14px; }
+.pn-root .st-ink-pop .nb-size { flex: 1; height: 48px; border: 0; border-radius: 16px; background: var(--pn-s1); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.pn-root .st-ink-pop .nb-size i { width: var(--d); height: var(--d); border-radius: 50%; border: 2px solid var(--pn-mut); }
+.pn-root .st-ink-pop .nb-size.on { background: var(--pn-card); box-shadow: 0 0 0 2px var(--pn-pri); }
+.pn-root .st-ink-pop .nb-size.on i { border-color: var(--pn-pri); }
+.pn-root .st-ink-pop .nb-danger { width: 100%; min-height: 48px; margin-top: 12px; border: 0; border-radius: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--pn-bad-bg); color: var(--pn-bad); font: inherit; font-size: 15px; font-weight: 650; cursor: pointer; }
+.pn-root .st-ink-pop .nb-note { margin: 8px 2px 0; font-size: 12px; color: var(--pn-mut); text-align: center; }
+.pn-root .st-ink-pop .nb-nib:focus-visible, .pn-root .st-ink-pop .nb-swatch:focus-visible, .pn-root .st-ink-pop .nb-switch:focus-visible, .pn-root .st-ink-pop .nb-x:focus-visible, .pn-root .st-ink-pop .nb-size:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
+@media (min-width: 900px) and (orientation: landscape) { .pn-root .st-ink-pop.st-ink-pop { display: block; width: min(440px, calc(100vw - 24px)); } }
+@media (prefers-reduced-motion: reduce) { .pn-root .st-ink-pop * { transition: none !important; } .pn-root .st-ink-pop .nb-nib.on .nb-nib-art { transform: none; } }
+.pn-root .st-ink-pop .nb-swatches { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); justify-items: center; gap: 6px 0; }
+body.dark .pn-root .st-ink-pop .nb-swatch::before { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .28); }
+body.dark .pn-root .st-ink-pop .nb-swatch.on::after { box-shadow: 0 0 0 2.5px var(--c), 0 0 0 4px rgba(255, 255, 255, .22); }
+.pn-root .st-body .st-tb .st-ink-sizes { display: flex; gap: 2px; margin-left: 4px; }
+.pn-root .st-body .st-tb .st-ink-size { width: 38px; height: 34px; min-width: 38px; min-height: 34px; border: 0; border-radius: 17px; background: transparent; display: inline-flex; align-items: center; justify-content: center; box-shadow: none; }
+.pn-root .st-body .st-tb .st-ink-size i { border-color: var(--pnv-ink); }
+.pn-root .st-body .st-tb .st-ink-size.on { background: var(--pnv-pill); box-shadow: inset 0 1px 0 var(--pnv-pill-rim); }
+.pn-root .st-body .st-tb .st-ink-size.on i { border-color: var(--pnv-on); }

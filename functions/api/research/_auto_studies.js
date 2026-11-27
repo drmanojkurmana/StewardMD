@@ -32,7 +32,9 @@
  *
  * No DOCX and no new provider client. Full text is fetched only from the
  * fixed Europe PMC host when the PMC id matches PMC plus digits and the
- * record is open access (and not NC or ND when a licence is present).
+ * record is open access with a commercial-reuse licence (cc by, cc by-sa,
+ * cc0 or public domain). Any NC or ND term, a missing licence or an unknown
+ * licence blocks the fetch.
  */
 import * as pubmed from "./_connectors/pubmed.js";
 import * as europepmc from "./_connectors/europepmc.js";
@@ -40,8 +42,11 @@ import * as crossref from "./_connectors/crossref.js";
 import { efetchAbstracts } from "./_connectors/pubmed_efetch.js";
 import { fetchWithRetry, readJson, politeUserAgent, requireContactEmail, createBucket, ConnectorError } from "./_connectors/_http.js";
 import { dedupRecords, normaliseDoi, firstAuthorKey } from "./_dedup.js";
+import { fullTextAllowed } from "./_fulltext_licence.js";
 import { runUserAi, extractJson } from "./_suggest.js";
 import { scan, phiCategories } from "./_phi.js";
+
+export { fullTextAllowed };
 
 const READ_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
 const WRITE_ROLES = ["owner", "editor", "analyst"];
@@ -606,13 +611,6 @@ function snippetsFromXml(xml, words) {
   }
   return out;
 }
-function licenceAllows(raw) {
-  const licence = String((raw && (raw.license || raw.licence)) || "").toLowerCase();
-  if (!licence) return true;
-  if (/nc|nd/.test(licence)) return false;
-  return /cc0|cc[- ]?by|open/.test(licence);
-}
-
 async function epmcLookup(pmid, doi, config) {
   const parts = [];
   if (pmid) parts.push("(EXT_ID:" + pmid + " AND SRC:MED)");
@@ -631,7 +629,7 @@ async function epmcLookup(pmid, doi, config) {
   return list.length ? list[0] : null;
 }
 async function oaSnippets(raw, words, config) {
-  if (!raw || !epmcFree(raw) || !licenceAllows(raw)) return [];
+  if (!raw || !fullTextAllowed(raw)) return [];
   const pmcid = String(raw.pmcid || "");
   if (!/^PMC\d+$/.test(pmcid)) return [];
   const res = await fetchWithRetry(EPMC_XML + pmcid + "/fullTextXML", transport(config, {

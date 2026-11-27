@@ -278,6 +278,7 @@
     exporting: false,
     exportNotice: null,
     exportNoticeKind: "warn",
+    consentBlocked: false,
     saveNotice: null,
     phoneTab: "sections", /* "sections" | "detail" | "approve" */
     lastRange: null,
@@ -1247,6 +1248,7 @@
         if (resp.status >= 200 && resp.status < 300 && resp.data && resp.data.draft && resp.data.draft.sections) {
           var secMap = resp.data.draft.sections;
           var fullDraftText = "";
+          var draftedHeadings = [];
 
           if (!st.manuscript) st.manuscript = defaultManuscript(pid);
           if (!st.manuscript.sections) st.manuscript.sections = [];
@@ -1263,6 +1265,7 @@
             var existingSec = getSection(key);
             var markPrefix = "Drafted by MaiK, check it:\n";
             if (existingSec) {
+              draftedHeadings.push(existingSec.heading || key);
               if (existingSec.text && existingSec.text.trim()) {
                 existingSec.text = existingSec.text + "\n\n" + markPrefix + textVal;
               } else {
@@ -1273,6 +1276,7 @@
                             key === "patientPerspective" ? "Patient Perspective" :
                             key === "learningPoints" ? "Learning Points" :
                             key.charAt(0).toUpperCase() + key.slice(1);
+              draftedHeadings.push(heading);
               st.manuscript.sections.push({
                 id: key,
                 heading: heading,
@@ -1287,6 +1291,7 @@
             st.caseReportMissingNumbers = [];
           }
 
+          recordAiProvenance(resp.data.model, draftedHeadings);
           saveLocalManuscript(localPid || st.projectId || pid, st.manuscript);
           if (getSection("casePresentation")) st.selectedSectionId = "casePresentation";
           st.saveNotice = "Drafted by MaiK. Review and verify every clinical detail before approving.";
@@ -1295,13 +1300,37 @@
         } else {
           sendBtn.disabled = false;
           var msg = (resp.data && resp.data.error && resp.data.error.message) || "Draft request failed";
+          if (resp.data && resp.data.error && resp.data.error.code === "publication_consent_required") {
+            showConsentBlockedInModal(msg);
+            return;
+          }
           if (statusMsg) statusMsg.innerHTML = '<span style="color:var(--rmd-bad);">' + esc(msg) + '</span>';
         }
       }).catch(function (err) {
         sendBtn.disabled = false;
+        if (err && err.code === "publication_consent_required") {
+          showConsentBlockedInModal(err.message);
+          return;
+        }
         if (statusMsg) statusMsg.innerHTML = '<span style="color:var(--rmd-bad);">Error: ' + esc(err.message || String(err)) + '</span>';
       });
     };
+
+    /* F-12: the server refused the draft because publication consent is not
+     * confirmed. Offer the jump to the Publication consent screen. */
+    function showConsentBlockedInModal(message) {
+      sendBtn.disabled = false;
+      if (!statusMsg) return;
+      statusMsg.innerHTML = '<span style="color:var(--rmd-bad);">' + esc(message || PUBLICATION_CONSENT_MSG) + '</span> ' +
+        '<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" id="rmd-cr-open-pubconsent">Open Publication consent</button>';
+      var openBtn = statusMsg.querySelector("#rmd-cr-open-pubconsent");
+      if (openBtn) {
+        openBtn.onclick = function () {
+          closeModal();
+          SMD.navigate("pubconsent", {});
+        };
+      }
+    }
   }
 
   /* Ask MaiK to draft a manuscript for review / primary projects via the
@@ -1327,7 +1356,7 @@
     });
   }
 
-  function applyManuscriptDraft(container, draft) {
+  function applyManuscriptDraft(container, draft, res) {
     var d = draft || {};
     if (d.status === "failed" || d.status === "error") {
       throw { message: "MaiK could not draft the manuscript. Try again." };
@@ -2134,10 +2163,78 @@
     return "<w:p><w:r>" + rpr + '<w:t xml:space="preserve">' + xmlEsc(text) + "</w:t></w:r></w:p>";
   }
 
+  /* ---------- F-10: AI-use disclosure and author rules ---------- */
+
+  var AI_AUTHOR_NAMES = {
+    maik: 1, stewardmd: 1, researchmd: 1, chatgpt: 1,
+    gpt: 1, gemini: 1, claude: 1, openai: 1
+  };
+  var PUBLICATION_CONSENT_MSG = "Confirm the patient's written consent for publication first (Publication consent step).";
+
+  function isAiAuthorName(name) {
+    return !!AI_AUTHOR_NAMES[String(name == null ? "" : name).replace(/^\s+|\s+$/g, "").toLowerCase()];
+  }
+
+  function todayLocalIso() {
+    var d = new Date();
+    var p = function (n) { return (n < 10 ? "0" : "") + n; };
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+  }
+
+  function appVersionString() {
+    try {
+      return String((G.SMD_APP_VERSION || SMD.version || "unspecified") || "unspecified");
+    } catch (e) {
+      return "unspecified";
+    }
+  }
+
+  /* Mandatory in every ResearchMD Word export. <model> comes from the
+   * manuscript's AI provenance (the server returns the model name with each
+   * AI draft and the client persists it on the manuscript). */
+  function aiDisclosureText(ai) {
+    var prov = (ai && typeof ai === "object") ? ai : {};
+    var model = String(prov.model || "").replace(/^\s+|\s+$/g, "");
+    var did;
+    if (prov.whatItDid) {
+      did = String(prov.whatItDid);
+    } else if (prov.draftedSections && prov.draftedSections.length) {
+      did = "It drafted the sections: " + prov.draftedSections.join(", ");
+    } else {
+      /* No record of AI drafting on this document: do not claim it was used. */
+      return "AI use disclosure: this document was prepared in StewardMD ResearchMD (app version " + appVersionString() +
+        "), which offers AI drafting (MaiK AI). Any AI-assisted text in it was reviewed and verified by the named authors, who take responsibility for it. AI is not an author.";
+    }
+    return "AI use disclosure: parts of this document were drafted or edited with StewardMD ResearchMD (MaiK AI, model " +
+      (model || "unspecified") + ", app version " + appVersionString() + ") on " + todayLocalIso() + ". " + did +
+      ". The named authors reviewed and verified all content and take responsibility for it. AI is not an author.";
+  }
+
+  /* Records what AI did on this manuscript so the export disclosure can name
+   * the model and the sections it drafted. */
+  function recordAiProvenance(model, draftedSections) {
+    if (!st.manuscript) st.manuscript = defaultManuscript(st.projectId);
+    var prev = (st.manuscript.ai && typeof st.manuscript.ai === "object") ? st.manuscript.ai : {};
+    st.manuscript.ai = {
+      model: String(model || prev.model || ""),
+      draftedSections: Array.isArray(draftedSections)
+        ? draftedSections.slice(0, 40)
+        : (prev.draftedSections || [])
+    };
+    return st.manuscript.ai;
+  }
+
   function buildDocxBytes(man) {
     var parts = [];
     parts.push(docxParagraph(man.title || "Manuscript", true, 32));
-    if (man.authors && man.authors.length) parts.push(docxParagraph(man.authors.join(", "), false, 0));
+    if (man.authors && man.authors.length) {
+      /* F-10: an AI tool name is rejected from the byline. */
+      var humanAuthors = [];
+      for (var a = 0; a < man.authors.length; a++) {
+        if (!isAiAuthorName(man.authors[a])) humanAuthors.push(man.authors[a]);
+      }
+      if (humanAuthors.length) parts.push(docxParagraph(humanAuthors.join(", "), false, 0));
+    }
     if (man.affiliations) parts.push(docxParagraph(man.affiliations, false, 0));
     for (var i = 0; i < man.sections.length; i++) {
       var sec = man.sections[i];
@@ -2147,6 +2244,7 @@
         parts.push(docxParagraph(lines[j], false, 0));
       }
     }
+    parts.push(docxParagraph(aiDisclosureText(man.ai), false, 0));
     var doc = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
       '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>' +
       parts.join("") +
@@ -2186,6 +2284,7 @@
     st.exportNotice = "Checking the paper before download...";
     st.exportNoticeKind = "info";
     st.gateFailures = [];
+    st.consentBlocked = false;
     render(container);
 
     var pid = encodeURIComponent(apiProjectId());
@@ -2232,6 +2331,13 @@
             (err && err.current && err.current.gateFailures);
           if (fails && fails.length) {
             showGates(fails);
+          } else if (err && err.code === "publication_consent_required") {
+            /* F-12: case-report export needs the consent attestation first. */
+            st.exporting = false;
+            st.consentBlocked = true;
+            st.exportNotice = err.message || PUBLICATION_CONSENT_MSG;
+            st.exportNoticeKind = "warn";
+            render(container);
           } else {
             st.exporting = false;
             st.exportNotice = SMD.p2.friendlyError(err).message;
@@ -2527,6 +2633,11 @@
       var noticeClass = st.exportNoticeKind === "info" ? "rmd-banner-info" :
         (st.exportNoticeKind === "error" ? "rmd-banner-error" : "rmd-banner-warn");
       h.push('<div class="rmd-banner ' + noticeClass + '" role="' + (st.exportNoticeKind === "info" ? "status" : "alert") + '"><span>' + esc(st.exportNotice) + '</span></div>');
+    }
+    if (st.consentBlocked) {
+      h.push('<div style="margin: 0 0 12px;">');
+      h.push('  <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="open-pubconsent">Open Publication consent</button>');
+      h.push('</div>');
     }
 
     if (isLocked) {
@@ -2841,6 +2952,14 @@
     if (btnExport) {
       btnExport.onclick = function () {
         exportDocx(container);
+      };
+    }
+
+    var btnPubConsent = container.querySelector('[data-rmd="open-pubconsent"]');
+    if (btnPubConsent) {
+      btnPubConsent.onclick = function () {
+        st.consentBlocked = false;
+        SMD.navigate("pubconsent", {});
       };
     }
 

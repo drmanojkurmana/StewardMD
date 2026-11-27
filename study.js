@@ -1325,8 +1325,39 @@
             '<div class="st-pages" id="stPages"></div>' +
           '</div>' +
         '</div>');
+      pinEditor();
       return Promise.all([d.kind === "nb" ? null : loadOriginal(d).then(openPdf), strokesOf(id), get("undo", id), itemsOf(id)]).then(function (r) { startViewer(d, r[0], r[1], r[2], goto, r[3]); });
     }).catch(function () { h.toast("That PDF could not be opened."); });
+  }
+
+  /* The editor never scrolls as a whole; only #stSc (the pages) does. On the iPhone the WebView still moved it: a focus
+     (text box, search) or a drag on the bars scrolled .st-body or the window and left the top bar and tool row under
+     the status bar (owner's screenshot 2026-11-27). Anything that scrolls them is put straight back, except while a
+     text field has the keyboard (iOS lifts the page for it and gives it back when the keyboard closes). */
+  var pinOn = false;
+  function typing() { var a = D.activeElement; return !!(a && (a.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))); }
+  function repin() {
+    var r = host && host.root && host.root(), b = r && r.querySelector(":scope > .pn-body.st-body");
+    if (!b) return;
+    if (b.scrollTop || b.scrollLeft) { b.scrollTop = 0; b.scrollLeft = 0; }
+    if (r.scrollTop || r.scrollLeft) { r.scrollTop = 0; r.scrollLeft = 0; }
+    if (!typing() && (G.scrollY || G.scrollX)) { try { G.scrollTo(0, 0); } catch (e) {} }
+  }
+  // The floating dock (study.css) changes height with its options row; the page end, page pill and popovers follow.
+  function watchDock(b, r) {
+    var tb = b && b.querySelector("#stTb"); if (!tb) return;
+    var set = function () { var h = tb.offsetHeight; if (h) r.style.setProperty("--st-dock-h", h + "px"); };
+    set();
+    if (G.ResizeObserver) { try { new G.ResizeObserver(set).observe(tb); } catch (e) {} }
+  }
+  function pinEditor() {
+    var r = host && host.root && host.root(), b = r && r.querySelector(":scope > .pn-body.st-body");
+    if (b) { b.addEventListener("scroll", repin); watchDock(b, r); }
+    if (pinOn) return;
+    pinOn = true;
+    G.addEventListener("scroll", repin, { passive: true });
+    if (G.visualViewport) G.visualViewport.addEventListener("resize", function () { G.setTimeout(repin, 60); });
+    D.addEventListener("focusout", function () { G.setTimeout(repin, 120); }, true);
   }
 
   function toolbarHtml(d) {

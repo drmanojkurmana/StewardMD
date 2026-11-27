@@ -842,7 +842,8 @@
     function updatePos() {
       if (G.visualViewport) {
         var bottomOffset = Math.max(0, G.innerHeight - G.visualViewport.height - G.visualViewport.offsetTop);
-        bar.style.bottom = bottomOffset + "px";
+        // On the keyboard while typing; otherwise study.css floats it just above the tool dock.
+        bar.style.bottom = bottomOffset > 60 ? bottomOffset + "px" : "";
       }
     }
     if (G.visualViewport) {
