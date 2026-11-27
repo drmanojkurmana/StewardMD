@@ -1,0 +1,53 @@
+name: rx-export-bench
+
+# Dev-only timing run for prescription Save as PDF / JPEG. Runs only on a push to the
+# rx-export-bench-run branch (or by hand). Times main ("before") and, when AFTER_REF is set,
+# that branch ("after"), in headless Chrome at phone size with the CPU slowed 4x.
+on:
+  workflow_dispatch:
+  push:
+    branches: [rx-export-bench-run]
+
+env:
+  AFTER_REF: ""
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/checkout@v4
+        with:
+          path: harness
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: before
+      - name: Bench main (before)
+        env:
+          CHROME: /usr/bin/google-chrome
+          ROOT: ${{ github.workspace }}/before
+          OUT: ${{ github.workspace }}/bench-out
+          LABEL: before
+        run: node harness/test/run-rx-export-bench.mjs
+      - uses: actions/checkout@v4
+        if: env.AFTER_REF != ''
+        with:
+          ref: ${{ env.AFTER_REF }}
+          path: after
+      - name: Bench branch (after)
+        if: always() && env.AFTER_REF != ''
+        env:
+          CHROME: /usr/bin/google-chrome
+          ROOT: ${{ github.workspace }}/after
+          OUT: ${{ github.workspace }}/bench-out
+          LABEL: after
+        run: node harness/test/run-rx-export-bench.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rx-export-bench
+          path: bench-out
