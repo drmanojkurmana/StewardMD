@@ -32,8 +32,28 @@ const CONFIRM_1 = "By continuing, you confirm that the statement you selected is
 const CONFIRM_2 = "The text will be sent to our AI providers \u2014 Runware and Google Vertex AI (Gemini) \u2014 whose servers may be outside India. StewardMD acts only as a Data Processor on your instructions. StewardMD logs this override (your user ID, the time, the type of identifier flagged and these terms version) but never the text itself. Always check AI output before use \u2014 it may be inaccurate, incomplete or biased.";
 const NOTE = "Note: overrides are not available for Aadhaar/ID numbers or phone numbers unless you have selected the third option (patient consent with institutional approval). If you are unsure, keep the block and remove the identifiers before drafting.";
 
+/* Counsel wording, 2026-11-27. No em or en dashes in any of it (asserted below). */
+const T32_OPENING = "ResearchMD is a drafting and documentation aid for registered medical practitioners. It is not a medical device and is not intended for diagnosis, prevention, monitoring, treatment or alleviation of any disease or disorder, and it does not give patient-specific diagnostic or treatment directions. AI-generated output is a draft only. It may be inaccurate, incomplete or biased. You must review, edit and verify every citation, number and patient-consent position before use or submission, exercise your independent clinical judgment, and you remain solely responsible as author for anything you submit. You own AI-assisted text you produce in the app to the extent copyright subsists in it under Indian law; StewardMD does not warrant that such text is copyrightable or that it does not infringe third-party rights. You must not use ResearchMD to create deepfakes or other synthetically generated information that impersonates a person, to fabricate data or results, or to identify a patient without that patient's consent.";
+const T32_REVIEW_STEP = "ResearchMD drafts from your own analyses and sources, requires a review step, and only accepts citations with a real DOI or PMID.";
+const T32_TAKEDOWN = "We acknowledge every grievance within 24 hours. We resolve general grievances within 7 days. We act within 36 hours on removal requests for content in the categories the Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules 2021 specify, within 2 hours on complaints about intimate images or impersonation, and within 3 hours on a court order or an authorised Government officer's reasoned direction to remove unlawful content. Grievances about personal data are also handled under our privacy policy and are redressed within one month.";
+const T32_LIABILITY = "Section 21 applies: our total liability is limited to the greater of the amount you paid us in the 12 months before the claim or INR 5,000. Nothing in this clause limits liability for death or personal injury caused by negligence, for fraud, or for wilful misconduct. The cap in this clause applies to the aggregate of all claims in the 12 months before the claim, and does not exclude liability for deficiency in service, which is capped as above.";
+const P27_PROVIDERS = "Your drafting text is processed by Runware, which passes it to an OpenAI GPT model, and by Google Vertex AI (Gemini). Their servers may be outside India, including in the United States and the European Union. We do not send patient identifiers to Runware on its standard plan. A full list of our processors and sub-processors, the data shared with each, and the countries in which they process it, is available on request and is kept up to date on our data-sources page.";
+const P28_OVERRIDE = "Override records are retained for at least one year for audit and breach investigation, and erased thereafter unless another law requires longer retention. They are erased on withdrawal of consent or when the purpose for which they were kept is spent, subject to that one-year hold.";
+const P28_LITERATURE = "Literature search sends only your search words or article identifiers (such as a DOI, PMID or trial number) to PubMed, Europe PMC, Crossref, ClinicalTrials.gov and OpenAlex, which are mostly hosted in the United States. It never sends patient data. Do not type patient information into the search box.";
+const P28_LOG = "What we log. When you override the patient-information block, we log your user ID, the time, the type of identifier flagged, the statement you selected, the consent date and reference you entered (for the consent option) and the terms version, but never the text itself. We keep this log to show that the override was made lawfully.";
+const P28_DELETION = "Deletion. On withdrawal of consent or deletion of your account, we erase your operational personal data within 30 days, and we require our processors to do the same. Data held in backups is suppressed from processing and erased on the backup cycle. We retain only the records the law requires us to keep, processing logs for one year, and erase those when that period ends.";
+const P14_CLOUDFLARE = "Project data is served through Cloudflare's global network. Personal data may be cached or stored on Cloudflare edge servers outside India, including in the United States, the European Union and Singapore; where it is, that is a transfer outside India, which is permitted under the Digital Personal Data Protection Act 2023. Encrypted personal data in transit through Cloudflare's network is not stored or accessed in transit. Public, non-personal content may be cached on Cloudflare's global network.";
+
 function istToday() {
   return new Date(Date.now() + 19800000).toISOString().slice(0, 10);
+}
+
+function sliceBetween(html, startMarker, endMarker) {
+  const start = html.indexOf(startMarker);
+  assert.ok(start !== -1, "start marker not found: " + startMarker);
+  const end = html.indexOf(endMarker, start);
+  assert.ok(end !== -1, "end marker not found: " + endMarker);
+  return html.slice(start, end);
 }
 
 function parseAttrs(attrStr) {
@@ -692,7 +712,64 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     assert.match(privacy, /AI drafting and patient identifiers/);
     assert.match(privacy, /Draft for counsel review/);
     assert.match(privacy, /at least one year/);
-    assert.match(privacy, /Runware, which passes it to the AI model in use/); // real chain: Runware -> OpenAI GPT model (2026-11-27)
+    assert.match(privacy, /Runware, which passes it to an OpenAI GPT model/); // real chain: Runware -> OpenAI GPT model (2026-11-27)
     assert.match(privacy, /Google Vertex AI \(Gemini\)/);
+  });
+
+  test("counsel wording 2026-11-27: terms and privacy carry the reviewed ResearchMD copy", () => {
+    const terms = readFileSync(join(ROOT, "terms.html"), "utf8");
+    const privacy = readFileSync(join(ROOT, "privacy.html"), "utf8");
+
+    // Draft markers stay in place until instructed counsel approves the final text.
+    assert.ok(terms.includes("Draft for counsel review."), "terms keeps the counsel draft marker");
+    assert.ok(privacy.includes("Draft for counsel review."), "privacy keeps the counsel draft markers");
+
+    // terms.html section 32: opening, review step, takedown, liability.
+    assert.ok(terms.includes(T32_OPENING), "s32 opening paragraph verbatim");
+    assert.ok(terms.includes(T32_REVIEW_STEP), "s32 review-step sentence kept as its own paragraph");
+    assert.ok(terms.includes(T32_TAKEDOWN), "s32 takedown timeline verbatim");
+    assert.ok(terms.includes(T32_LIABILITY), "s32 liability cap and carve-outs verbatim");
+    assert.ok(terms.includes('(subject "ResearchMD grievance")'), "s32 keeps the Grievance Officer contact line");
+    assert.equal(terms.indexOf("<li><b>What ResearchMD is.</b>"), -1, "old What ResearchMD is item replaced");
+    assert.equal(terms.indexOf("<li><b>AI output.</b>"), -1, "old AI output item replaced");
+    assert.equal(terms.indexOf("<li><b>Ownership of your drafts.</b>"), -1, "old ownership item replaced");
+    assert.equal(terms.indexOf("<li><b>Prohibited use.</b>"), -1, "old prohibited use item replaced");
+    assert.equal(terms.indexOf("We acknowledge within 24 hours and resolve within 7 days"), -1, "old takedown timeline replaced");
+    assert.equal(terms.indexOf("and nothing in these Terms limits liability"), -1, "old s32 liability tail replaced");
+
+    // privacy.html section 27: provider chain.
+    assert.ok(privacy.includes(P27_PROVIDERS), "p27 provider chain verbatim");
+    assert.equal(privacy.indexOf("Runware, which passes it to the AI model in use"), -1, "old p27 provider sentence replaced");
+
+    // privacy.html section 28: retention, literature, logging, deletion.
+    assert.ok(privacy.includes(P28_OVERRIDE), "p28 override retention verbatim");
+    assert.ok(privacy.includes(P28_LITERATURE), "p28 literature paragraph verbatim");
+    assert.ok(privacy.includes(P28_LOG), "p28 what we log paragraph verbatim");
+    assert.ok(privacy.includes(P28_DELETION), "p28 deletion paragraph verbatim");
+    assert.equal(privacy.indexOf("Override records are kept for at least one year for audit."), -1, "old p28 override sentence replaced");
+    assert.equal(privacy.indexOf("Literature features send only bibliographic identifiers"), -1, "old p28 literature sentence replaced");
+
+    // privacy.html section 14: Cloudflare storage and transfers.
+    assert.ok(privacy.includes(P14_CLOUDFLARE), "p14 Cloudflare storage paragraph verbatim");
+
+    // Keywords the counsel brief requires on the pages.
+    assert.ok(terms.includes("wilful misconduct"), "terms: wilful misconduct");
+    assert.ok(terms.includes("36 hours"), "terms: 36 hours");
+    assert.ok(privacy.includes("OpenAI GPT model"), "privacy: OpenAI GPT model");
+    assert.ok(privacy.includes("within 30 days"), "privacy: within 30 days");
+
+    // No em or en dash inside the new paragraphs (scoped to the changed sections;
+    // the kept p14 GDPR sentence predates this change and is excluded by slicing
+    // only the new Cloudflare paragraph).
+    const s32 = sliceBetween(terms, 'id="s32"', 'class="foot"');
+    const p27 = sliceBetween(privacy, 'id="p27"', 'id="p28"');
+    const p28 = sliceBetween(privacy, 'id="p28"', 'class="foot"');
+    const p14Cloudflare = sliceBetween(privacy, "Project data is served through Cloudflare", "</p>");
+    const dashFree = { "terms s32": s32, "privacy p27": p27, "privacy p28": p28, "privacy p14 Cloudflare": p14Cloudflare };
+    for (const [name, text] of Object.entries(dashFree)) {
+      assert.equal(text.indexOf("\u2014"), -1, name + " contains no em dash");
+      assert.equal(text.indexOf("\u2013"), -1, name + " contains no en dash");
+    }
+    assert.equal(/region/i.test(p14Cloudflare), false, "Cloudflare paragraph claims no region controls");
   });
 });
