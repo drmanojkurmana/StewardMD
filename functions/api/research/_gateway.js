@@ -142,7 +142,10 @@ export async function llmRoute(ctx) {
     }
     return err(404, "job_not_found", "Job not found", requestId);
   }
-  if (body.projectId !== job.project_id || body.userId !== job.created_by)
+  /* The signed per-job token already binds the call to this job; the manuscript_draft queue message
+   * carries no userId, so the worker sends "" (live 2026-11-27: every draft failed 409 job_mismatch).
+   * Check userId only when one is sent; usage is always logged against job.created_by. */
+  if (body.projectId !== job.project_id || (body.userId && body.userId !== job.created_by))
     return err(409, "job_mismatch", "Request does not match the stored job", requestId);
   if (SETTLED.indexOf(job.status) >= 0)
     return err(409, "job_settled", "Job already settled", requestId);
