@@ -142,3 +142,30 @@ def test_outline_and_section_retry_suffixes(tmp_path):
     assert calls[:2] == ["outline", "outline:r1"]
     assert "section:introduction" in calls
     assert "section:introduction:r1" in calls
+
+
+def test_unusable_reply_is_asked_again_under_a_new_step_id():
+    """The gateway caches replies by stepId, so a retry after an unusable reply must not reuse the id."""
+    calls = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        body = json.loads(request.content.decode("utf-8"))
+        calls.append(body.get("stepId"))
+        text = "bad" if len(calls) == 1 else "good"
+        return httpx.Response(200, json={"text": text, "model": "gemini-2.5-flash", "usage": {"inputTokens": 5, "outputTokens": 2}})
+
+    client = GatewayLLMClient(
+        gateway_url="https://gw.test/v1/internal/llm",
+        job_token="tok",
+        http_client=httpx.Client(transport=httpx.MockTransport(handler)),
+        sleep=lambda _s: None,
+    )
+    resp = client.call_text(
+        "prompt", "researchmd-writer",
+        result_parsing_func=lambda raw: None if raw == "bad" else raw,
+        check_parsed_response_not_none=True,
+        purpose="write",
+        step_id="refine:0:rev1",
+    )
+    assert resp["raw_response"] == "good"
+    assert calls == ["refine:0:rev1", "refine:0:rev1:r1"]
