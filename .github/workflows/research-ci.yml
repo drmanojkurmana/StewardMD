@@ -9,6 +9,8 @@ on:
       - 'scripts/research-parity.R'
       - 'scripts/research-parity-5d.R'
       - 'scripts/research-parity-epi.R'
+      - 'scripts/research-parity-roc.R'
+      - 'research-roc-view.js'
       - 'test/research-*.test.mjs'
       - 'test/fixtures/research/**'
       - 'docs/research/**'
@@ -21,6 +23,8 @@ on:
       - 'scripts/research-parity.R'
       - 'scripts/research-parity-5d.R'
       - 'scripts/research-parity-epi.R'
+      - 'scripts/research-parity-roc.R'
+      - 'research-roc-view.js'
       - 'test/research-*.test.mjs'
       - 'test/fixtures/research/**'
       - 'docs/research/**'
@@ -118,3 +122,22 @@ jobs:
           node-version: '22'
       - name: Run epiR and tableone JS R parity tests
         run: node --test test/research-stats-parity-epi.test.mjs
+  parity-roc:
+    runs-on: ubuntu-24.04  # setup-r system deps are missing on the 26.04 image
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - name: Install pROC
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::pROC
+      - name: Generate pROC R parity fixtures
+        run: Rscript scripts/research-parity-roc.R
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run ROC unit and pROC parity tests
+        run: node --test test/research-stats-roc.test.mjs test/research-stats-parity-roc.test.mjs test/research-roc-view.test.mjs
