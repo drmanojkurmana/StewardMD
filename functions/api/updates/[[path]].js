@@ -35,6 +35,7 @@ import { handleBulletins } from "../../_bulletins_api.js";
 import { retractForDeletedUpdate } from "../../_bulletins_repo.js";
 import { sha256Hex } from "../../_bulletin_rules.js";
 import { runWeeklyReview } from "../../_bulletins_review_digest.js";
+import { enqueue as enqueuePush, drain as drainPush, pushMessage } from "../../_updates_pushq.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache }
@@ -55,9 +56,6 @@ function normImportance(v) { v = String(v || "").toLowerCase().trim(); return (v
 function normWorkspace(v) { v = String(v || "").toLowerCase().trim(); return WORKSPACES.indexOf(v) >= 0 ? v : "internal_medicine"; }
 function cleanWorkspaces(v) { return Array.isArray(v) ? v.filter((w) => WORKSPACES.indexOf(w) >= 0) : []; }
 function normType(t) { t = String(t || "").toLowerCase().trim(); return ["guideline", "drug_approval", "safety_alert", "trial"].indexOf(t) >= 0 ? t : ""; }
-// Notification label prefix by content type, e.g. "New Guideline: <title>".
-const NOTIF_LABEL = { guideline: "New Guideline", drug_approval: "New Drug Approval", safety_alert: "Safety Alert", trial: "New Trial" };
-function pushLabel(item) { const t = (item && (item.type || CAT_TYPE[item.category])) || ""; return NOTIF_LABEL[t] || "Medical Update"; }
 
 // Fire OS push banners (best-effort). Web push is payloadless (SW fetches newest);
 // native carries the text. Pass `workspace` to deliver only to that workspace's
@@ -67,13 +65,7 @@ function firePush(context, item, workspace) {
   try { if (pushEnabled(context.env)) context.waitUntil(sendPushToAll(context.env, wsOpt)); } catch (e) {}
   try {
     if (nativePushEnabled(context.env)) {
-      // Title = "<label>: <title>"; body = the summary/description. Tap target is an
-      // IN-APP deep link (/?u=<id>) so tapping opens the summary, not the PDF in Safari.
-      const msg = item
-        ? { title: pushLabel(item) + ": " + (item.title || "StewardMD"),
-            body: String(item.body || item.summary || item.organization || item.source || "New medical update").split("\n")[0].replace(/\*\*/g, "").replace(/^[•\-*]\s+/, "").slice(0, 180),
-            url: item.id ? "/?u=" + item.id : "/", tag: item.id ? "smd-" + item.id : undefined }
-        : { title: "StewardMD", body: "New medical update", url: "/" };
+      const msg = pushMessage(item);   // shared with the crawl queue (_updates_pushq.js)
       context.waitUntil(sendNativeToAll(context.env, msg, wsOpt));
     }
   } catch (e) {}
@@ -126,16 +118,11 @@ async function fetchUrlText(env, u) {
     return { ok: true, title, text: text.slice(0, 16000) };
   } catch (e) { return { ok: false, error: String((e && e.message) || e) }; }
 }
-// Group new/updated pipeline items by workspace and fire one targeted push per
-// workspace (a representative item per group — highest importance first).
-function firePushForItems(context, items) {
-  const rank = { critical: 3, high: 2, normal: 1 };
-  const byWs = {};
-  for (const it of items || []) {
-    const w = it.workspace || "internal_medicine";
-    if (!byWs[w] || (rank[it.importance] || 1) > (rank[byWs[w].importance] || 1)) byWs[w] = it;
-  }
-  Object.keys(byWs).forEach((w) => firePush(context, byWs[w], w));
+// Crawl results are QUEUED, not sent here: this invocation has already spent its subrequest budget on
+// the crawl, and the old in-place fan-out failed silently (see _updates_pushq.js). The queue is sent
+// from a fresh invocation by the 15-minute cron and POST /api/updates/push-run.
+async function firePushForItems(context, items) {
+  try { return await enqueuePush(context.env, items); } catch (e) { return { queued: 0, error: String((e && e.message) || e).slice(0, 120) }; }
 }
 
 // One-time import of the legacy KV feed (updates:list) into D1.
@@ -244,9 +231,12 @@ export async function onRequest(context) {
     if (method === "GET" && head === "sources") return json({ sources: await repo.listSources(env, false) });
     if (method === "GET" && head === "crawl-logs") return json({ logs: await repo.listCrawlLogs(env, url.searchParams.get("limit")) });
 
+    // Send queued Medical Updates pushes (fresh invocation). Also drained by the 15-minute cron.
+    if (method === "POST" && head === "push-run") return json(await drainPush(env));
+
     if (method === "POST" && head === "sync") {
       const res = await runPipeline(env);
-      if (res && res.items && res.items.length) firePushForItems(context, res.items);
+      if (res && res.items && res.items.length) res.push = await firePushForItems(context, res.items);
       return json(res.ok === false ? { ok: false, ...res } : { ok: true, ...res });
     }
 
@@ -255,7 +245,7 @@ export async function onRequest(context) {
       if (!repo.hasDb(env)) return json({ error: "no-db" }, 501);
       let items = [];
       const res = await runWeeklyReview(env, { runPipeline: async (e) => { const p = await runPipeline(e); items = (p && p.items) || []; return p; } });
-      if (items.length) firePushForItems(context, items);
+      if (items.length) await firePushForItems(context, items);
       const p = res.pipeline || {};
       return json(Object.assign({}, res, { pipeline: { ok: p.ok, new: p.new, updated: p.updated, errors: p.errors, cdsco: p.cdsco } }));
     }
