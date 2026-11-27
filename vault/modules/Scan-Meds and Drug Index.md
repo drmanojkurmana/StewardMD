@@ -204,3 +204,15 @@ A sweep of `prep/` + `kb/reference` against the DailyMed generic-name list and N
   (animal doc type, titled sections, lysine/meglumine), UI `test/run-drug-missing-ui.mjs` (Playwright).
 - Environment: the build needs `dailymed.nlm.nih.gov`, `api.fda.gov`, `health-products.canada.ca`, `pdf.hres.ca`
   (the cloud "stewardmd" environment allows them).
+
+### Every catalogue molecule (2026-11-27, owner: "all drugs should have the monograph")
+- Measured against `GET /compositions` (all letters, curl; Python's UA gets a Cloudflare 403): 2,979 compositions,
+  1,710 distinct molecules after splitting on "+" and "/" the way `offline-clinical.js splitCombo` does.
+- Before: 204 molecules had no monograph. Fixed by catalogue-spelling aliases in `EXTRA_ALIASES` (Tazobactum,
+  Vitamin B6, Potassium Clavulanate, Soluble Insulin, Nph, Mecobalamin, ...) and 34 more label records (mostly US
+  OTC Drug Facts: antacids, sunscreens, menthol, camphor; Novocain, Paragard refused as the wrong product).
+- After: 1,565 of 1,710 covered; 2,775 of 2,979 compositions fully covered. The ~145 left have NO US or Canadian
+  label: nutraceuticals, excipients, enzymes, herbals, India-only drugs (oxetacaine, etofylline, centbucridine,
+  arterolane, sulfamethopyrazine), withdrawn drugs (phenylpropanolamine, ticarcillin, phenformin). Gap list:
+  regenerate with the method above.
+- Builder guard: a label record with no Indications/Dosage/Purpose is refused ("Ammonium Muriaticum" came back empty).

@@ -142,6 +142,30 @@ const EXTRA_ALIASES = {
   "gentian violet": ["methylrosanilinium chloride", "crystal violet"],
   "succimer": ["dimercaptosuccinic acid", "DMSA"],
   "sodium thiosulfate": ["sodium thiosulphate"],
+  /* Composition spellings in the Indian brand catalogue (api.stewardmd.in /compositions) whose molecule
+   * has a monograph under another name. Without these, opening a brand showed no monograph for that
+   * component. Same molecule or the active vitamer only; a different salt or drug is never aliased. */
+  "tazobactam": ["Tazobactum"],
+  "pyridoxine": ["Vitamin B6", "Pyridoxal-5-Phosphate", "Pyridoxamine Dihydrochloride"],
+  "clavulanic acid": ["Potassium Clavulanate"],
+  "Methylcobalamin": ["Mecobalamin"],
+  "Vitamin E": ["Tocoferol", "tocopherol"],
+  "Human Insulin": ["Soluble Insulin", "regular insulin", "insulin human"],
+  "Insulin Isophane": ["Nph", "NPH insulin"],
+  "Insulin Lispro": ["Insulin Lispro Protamine"],
+  "Insulin Aspart": ["Insulin Aspart Protamine"],
+  "Magnesium Hydroxide (Milk of Magnesia)": ["Magnesium Hydroxide"],
+  "Liquid Paraffin": ["Light Mineral Oil", "White Mineral Oil", "mineral oil"],
+  "Diatrizoic Acid": ["Meglumine Diatrizoate", "Sodium Diatrizoate", "diatrizoate"],
+  "Levocarnitine (L-Carnitine)": ["L-Carnitine L-Tartrate"],
+  "Glutathione": ["L Glutathione Reduced", "reduced glutathione"],
+  "L-Arginine": ["Arginine"],
+  "Sodium Acid Phosphate": ["Monobasic Sodium Phosphate"],
+  "Omega-3 Fatty Acids (EPA/DHA)": ["Eicosapentaenoic Acid", "EPA"],
+  "Lactobacillus": ["Lactobacillus Acidophilus", "Lactic Acid Bacillus", "Lacto Bacillus Rhamnosus", "Lactobacillus Brevis", "Lactobacillus Salivarius"],
+  "Trypsin Chymotrypsin": ["Trypsin"],
+  "Theophylline": ["Choline Theophyllinate"],
+  "capsaicin": ["Capsaicin Based Rubefacients"],
 };
 
 const rows = [];

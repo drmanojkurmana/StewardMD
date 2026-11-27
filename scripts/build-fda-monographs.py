@@ -370,6 +370,9 @@ def main():
                 rec = openfda_record(safe); via = "openFDA"
             if rec is None:
                 return ("no_label", name)
+            # A record with no usable section is no monograph ("Ammonium Muriaticum" came back empty).
+            if not any(k in rec.get("label", {}) for k in ("Indications and usage", "Dosage and administration", "Purpose")):
+                return ("no_label", name)
             rec["generic"] = safe
             with open(out, "w", encoding="utf-8") as f:
                 json.dump(rec, f, ensure_ascii=False, indent=2); f.write("\n")

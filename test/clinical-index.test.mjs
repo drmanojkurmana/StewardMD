@@ -257,3 +257,13 @@ test("drugs with no Indian brand now have a label monograph (the Oxandrolone rep
     assert.ok(JSON.parse(readFileSync(join(ROOT, "data", "fda-labels", n.replace(/ /g, "-") + ".json"), "utf8")).generic, n + " opens");
   }
 });
+
+test("Indian brand-catalogue composition spellings resolve to a monograph row", () => {
+  const cases = {
+    "Tazobactum": "tazobactam", "Vitamin B6": "pyridoxine", "Potassium Clavulanate": "clavulanic acid",
+    "Soluble Insulin": "Human Insulin", "Nph": "Insulin Isophane", "Mecobalamin": "Methylcobalamin",
+    "Aluminium Hydroxide": "aluminum hydroxide", "Sulphur": "sulfur", "Copper Sulphate": "copper sulfate",
+    "Eicosapentaenoic Acid": "Omega-3 Fatty Acids (EPA/DHA)", "Light Mineral Oil": "Liquid Paraffin",
+  };
+  for (const [q, want] of Object.entries(cases)) assert.equal((I.get(q) || {}).n, want, q);
+});
