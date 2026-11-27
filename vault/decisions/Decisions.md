@@ -12631,3 +12631,9 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
   sheets, then a lasso selection, then the editor (it used to leave the editor live under the library, with its top
   bar put back over it). Switching document tabs replaces the editor. On the library, back leaves a folder or Trash
   before leaving NoteBook.
+
+## 2026-11-27: Alerts screen (bell) rebuilt as a native grouped list
+- **What**: `home.js` Notifications/Medical updates overlay (`#ntfOverlay`, `#ntfDetail`, class `mu`). Large title that hands off to the bar title on scroll, underline tabs with a sliding ink bar, filled search field, 8px-radius type filters, teal unread dot, importance as red text (no badges), digest as a plain row. **Layout: timeline** (owner picked B of three on 2026-11-27, over A grouped inset lists and C priority first): full-bleed rows with a date column (day + month), age headings (Today / Yesterday / This week / This month / Earlier) pinned while their rows scroll. Solid page; the appearance themes' glass and gradient do not apply here.
+- **Motion**: the overlay keeps the shared slide-up from `dialog-motion.js` (owner rule 2026-10-31). The update detail opts out (`data-own-motion`) and pushes in from the right, since it is navigation inside the screen. Pull to refresh, refresh-button spin while loading, a short row cascade on load. All off under reduced motion.
+- **States**: loading, empty, filtered-to-nothing, and load error with Try again. A failed pull/refresh keeps the old list and says so.
+- **Tests**: `test/run-notifications.mjs` (7), `test/run-bulletins-ui.mjs` (rows are `.mu-row`).
