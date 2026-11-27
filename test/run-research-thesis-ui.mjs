@@ -43,6 +43,7 @@ const createdProjects = [];
 const aiDraftCalls = [];
 const journalMatchCalls = [];
 const savedSections = [];
+const formatCheckCalls = [];
 const pageErrors = [];
 
 const JOURNALS = [
@@ -209,7 +210,24 @@ const server = http.createServer((req, res) => {
       }
       const manMatch = p.match(/^\/api\/research\/v1\/projects\/([^/]+)\/manuscript$/);
       if (manMatch && req.method === 'GET') {
-        return send(200, { manuscript: { version: 1, status: 'draft', sections: [] } });
+        const secs = savedSections.map((s) => ({ id: s.sid, heading: (s.body && s.body.heading) || s.sid, text: (s.body && s.body.text) || '' }));
+        return send(200, { manuscript: { version: 1, status: 'draft', sections: secs } });
+      }
+      if (/\/manuscript\/versions$/.test(p) && req.method === 'GET') {
+        return send(200, { versions: [] });
+      }
+      if (/\/checklist-snapshot$/.test(p) && req.method === 'GET') {
+        return send(200, { snapshot: {} });
+      }
+      if (/\/format-check$/.test(p) && req.method === 'GET') {
+        const jid = (new URL(req.url, 'http://x').searchParams.get('journal') || '').trim();
+        formatCheckCalls.push(jid);
+        const found = JOURNALS.find((j) => j.id === jid);
+        return send(200, {
+          journalId: jid,
+          journalName: found ? (found.shortName || found.name) : jid.toUpperCase(),
+          checks: [{ check: 'word_count', status: 'pass', label: 'Word count', detail: savedSections.length + ' sections saved' }]
+        });
       }
       const secMatch = p.match(/^\/api\/research\/v1\/projects\/([^/]+)\/manuscript\/sections\/([^/]+)$/);
       if (secMatch && req.method === 'PUT') {
@@ -444,7 +462,7 @@ try {
   ok(createdProjects[0].studyType === 'Thesis to Journal Article', 'create payload carries the thesis study type');
   ok(await until(`!!document.querySelector('#rmdThesisFile')`, 5000), 'upload step rendered with a file input');
   ok(/Upload your thesis/.test(await text('#rmdScreenBody')), 'upload step asks for the thesis');
-  ok(/Step 1 of 8/.test(await text('#rmdStepBanner')), 'banner reads Step 1 of 8 for the thesis journey');
+  ok(/Step 1 of 9/.test(await text('#rmdStepBanner')), 'banner reads Step 1 of 9 for the thesis journey');
   await shot('phone-375-upload');
 
   // 3. Soft hits / phone number open the calm consent sheet instead of a red block.
@@ -600,9 +618,10 @@ try {
   await call('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
   await sleep(200);
 
-  // Choosing a catalogue journal drives the draft word limit.
+  // Choosing a catalogue journal drives the draft word limit and updates project targetJournal.
   await ev(`(()=>{const b=document.querySelector('[data-rmd-journal-id="japi"]');if(!b)return false;b.click();return true})()`);
   ok(await ev(`(()=>{const t=JSON.parse(localStorage.getItem('smd_rmd_thesis_v1')||'{}')['prj_thesis_1']||{};return t.journal&&t.journal.id==='japi'&&t.journal.wordLimit===2000;})()`), 'choosing JAPI stores its 2,000 word limit');
+  ok(await ev(`(()=>{const p=SMD_RESEARCH.store.getActiveProject();return !!p && p.targetJournal==='japi';})()`), 'choosing JAPI sets proj.targetJournal on store project');
   ok(await ev(`document.querySelector('[data-rmd-journal-id="japi"]').getAttribute('aria-pressed') === 'true'`), 'chosen journal is marked pressed');
   await click('[data-rmd-thesis-next="thesis-draft"]');
   ok(await until(`/Word limit: 2000 words/.test(document.querySelector('#rmdScreenBody').innerText)`, 5000), 'draft uses the chosen journal word limit');
@@ -689,9 +708,27 @@ try {
   ok(/doi: 10\.1001/.test(await text('#rmdScreenBody')), 'DOI shown in the formatted reference');
   await shot('phone-375-refs');
 
-  // 11. Checklist step uses the stored preference; journey continues.
-  await click('[data-rmd-thesis-next="checklist"]');
-  ok(await until(`(()=>{const b=document.querySelector('#rmdStepBanner');return !!b && /Step 7 of 8/.test(b.innerText)})()`, 5000), 'banner reads Step 7 of 8 at the checklist');
+  // 11. References advances to Manuscript (Step 7 of 9), then Checklist (Step 8 of 9), then Ready (Step 9 of 9).
+  await click('[data-rmd-thesis-next="manuscript"]');
+  ok(await until(`(()=>{const b=document.querySelector('#rmdStepBanner');return !!b && /Step 7 of 9/.test(b.innerText)})()`, 5000), 'banner reads Step 7 of 9 at the manuscript step');
+  ok(await until(`!!document.querySelector('[data-rmd="manuscript-export"]')`, 5000), 'manuscript screen exposes DOCX export in thesis journey');
+  await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await sleep(150);
+  await ev(`SMD_RESEARCH.navigate('manuscript',{});1`);
+  ok(await until(`!!document.querySelector('.rmd-tab-active[data-rmd-tab="manuscript"]')`, 5000), 'manuscript tab active at 390px');
+  ok(await ev(`(()=>{const nav=document.querySelector('.rmd-shell-tabs');const act=nav&&nav.querySelector('.rmd-tab-active');if(!nav||!act)return false;const nr=nav.getBoundingClientRect();const ar=act.getBoundingClientRect();return nav.scrollLeft>0 && ar.left>=nr.left-2 && ar.right<=nr.right+2;})()`), 'active Manuscript pill scrolls cleanly into view at 390px');
+
+  await ev(`SMD_RESEARCH.navigate('checklist',{});1`);
+  ok(await until(`(()=>{const b=document.querySelector('#rmdStepBanner');return !!b && /Step 8 of 9/.test(b.innerText)})()`, 5000), 'banner reads Step 8 of 9 at the checklist');
+
+  await ev(`SMD_RESEARCH.navigate('ready',{});1`);
+  ok(await until(`(()=>{const b=document.querySelector('#rmdStepBanner');return !!b && /Step 9 of 9/.test(b.innerText)})()`, 5000), 'banner reads Step 9 of 9 at ready');
+  ok(await until(`!!document.querySelector('[data-rmd="format-check-card"]')`, 5000), 'format check card renders on ready step');
+  ok(formatCheckCalls.includes('japi') && !formatCheckCalls.includes('jama'), 'ready screen checks format against chosen journal japi, not JAMA');
+  ok(/ready for JAPI\?/.test(await text('[data-rmd="format-check-card"]')), 'format check card names JAPI');
+  ok(await ev(`(()=>{const nav=document.querySelector('.rmd-shell-tabs');const act=nav&&nav.querySelector('.rmd-tab-active');if(!nav||!act)return false;const nr=nav.getBoundingClientRect();const ar=act.getBoundingClientRect();return nav.scrollLeft>0 && ar.left>=nr.left-2 && ar.right<=nr.right+2;})()`), 'active Ready pill scrolls cleanly into view at 390px');
+  await call('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
+  await sleep(150);
 
   // 11b. "< ResearchMD" header navigation from Draft tab lands on project list; X closes ResearchMD.
   await ev(`SMD_RESEARCH.navigate('thesis-draft',{});1`);

@@ -527,7 +527,7 @@ export async function formatCheck(ctx, projectId, url) {
       name: journal.name,
       wordLimits: journal.wordLimits,
       referenceStyle: journal.referenceStyle,
-      limits: {},
+      limits: journal.limits || {},
     },
     resolvedTokens: resolvedFromRuns(runs, row.tokens_json),
     studyType,

@@ -177,4 +177,27 @@ describe("Submit (ready) screen single source of truth (BUG-09)", () => {
     assert.ok(container.innerHTML.indexOf("Some reporting checklist items are still missing.") >= 0,
       "missing counts no longer pass just because a snapshot exists");
   });
+
+  test("targetJournal from project or thesis store drives format-check and display instead of defaulting to JAMA", async () => {
+    let waited = false;
+    const sb = createSandbox(Object.assign({}, BASE, {
+      "/v1/projects/p1/manuscript": { manuscript: { id: "m1", status: "approved", sections: [] } },
+      "/v1/projects/p1/checklist-snapshot": { snapshot: {} },
+      "/v1/projects/p1/format-check?journal=ijccm": { journalId: "ijccm", journalName: "Indian Journal of Critical Care Medicine", checks: [{ check: "word_count", status: "pass", detail: "Within limit" }] }
+    }));
+    sb.win.localStorage.setItem("smd_rmd_thesis_v1", JSON.stringify({
+      p1: { journal: { id: "ijccm", shortName: "IJCCM", name: "Indian Journal of Critical Care Medicine", wordLimit: 3000 } }
+    }));
+    sb.win.SMD_RESEARCH_THESIS = {
+      pendingSave: function () {
+        return new Promise(function (resolve) { setTimeout(function () { waited = true; resolve(true); }, 5); });
+      }
+    };
+    const container = createContainer();
+    await renderReadyAsync(sb, container);
+    assert.equal(waited, true, "awaits pending thesis section save before running format-check");
+    assert.ok(sb.calls.some((c) => c.url.indexOf("/format-check?journal=ijccm") >= 0), "uses chosen thesis journal ijccm for format-check");
+    assert.ok(!sb.calls.some((c) => c.url.indexOf("journal=jama") >= 0), "does not fall back to JAMA when journal is chosen");
+    assert.ok(container.innerHTML.indexOf("Indian Journal of Critical Care Medicine") >= 0, "heading shows chosen journal name");
+  });
 });

@@ -1334,10 +1334,13 @@
       "  #researchMD .rmd-project-grid { grid-template-columns: 1fr 1fr 1fr; }",
       "}",
       "/* Phase 2: shell screen tabs */",
-      "#researchMD .rmd-shell-tabs { display: flex; gap: 6px; padding: 4px 14px 10px; overflow-x: auto; background: transparent; scrollbar-width: none; }",
+      "#researchMD .rmd-shell-tabs { position: relative; display: flex; gap: 6px; padding: 4px 14px 10px; overflow-x: auto; scroll-padding-inline: 14px; -webkit-overflow-scrolling: touch; background: transparent; scrollbar-width: none; }",
       "#researchMD .rmd-shell-tabs::-webkit-scrollbar { display: none; }",
-      "#researchMD .rmd-tab { flex: 0 0 auto; border: 0; background: none; font: 500 13px var(--rmd-f); color: var(--rmd-mut); padding: 7px 12px; border-radius: 999px; cursor: pointer; min-height: 34px; touch-action: manipulation; }",
-      "#researchMD .rmd-tab:hover { background: var(--rmd-fill); color: var(--rmd-ink); }",
+      "#researchMD .rmd-tab { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; border: 0; background: none; font: 500 13px var(--rmd-f); color: var(--rmd-mut); padding: 8px 12px; border-radius: 999px; cursor: pointer; min-height: 44px; white-space: nowrap; touch-action: manipulation; }",
+      "@media (hover: hover) and (pointer: fine) {",
+      "  #researchMD .rmd-tab:hover { background: var(--rmd-fill); color: var(--rmd-ink); }",
+      "  #researchMD .rmd-tab.rmd-tab-active:hover { background: var(--rmd-acc-grad); color: #fff; }",
+      "}",
       "#researchMD .rmd-tab-active { background: var(--rmd-acc-grad); color: #fff; font-weight: 600; box-shadow: var(--rmd-lift); }",
       "#researchMD button:focus-visible, #researchMD a:focus-visible { outline: 2px solid var(--rmd-acc); outline-offset: 2px; }",
       "/* Phase 2: shared screen scaffolding */",
@@ -1502,8 +1505,8 @@
       "#researchMD .rmd-step-dismiss { border: 0; background: none; color: var(--rmd-mut); font: 600 16px var(--rmd-f); cursor: pointer; padding: 4px 6px; min-height: 36px; line-height: 1; touch-action: manipulation; }",
       "#researchMD .rmd-step-tip { margin-top: 6px; font: 400 12.5px/1.45 var(--rmd-f); color: var(--rmd-mut); border-top: 1px solid var(--rmd-line); padding-top: 6px; }",
       "#researchMD .rmd-step-tip p { margin: 3px 0; }",
-      "#researchMD .rmd-tab-done { color: var(--rmd-acc); opacity: 0.85; }",
-      "#researchMD .rmd-tab-later { opacity: 0.6; }",
+      "#researchMD .rmd-tab-done { color: var(--rmd-acc); opacity: 1; }",
+      "#researchMD .rmd-tab-later { color: var(--rmd-mut); opacity: 1; }",
       "#researchMD .rmd-tab-more { font-weight: 600; }",
       "#researchMD .rmd-shell-tabs-more { padding-top: 0; }",
       "#researchMD #rmdHelpWrap { padding: 0 16px; }",
@@ -2003,15 +2006,22 @@
         var name = journey[t];
         var active = currentScreen === name;
         var stateCls = active ? " rmd-tab-active" : (curIdx >= 0 && t < curIdx ? " rmd-tab-done" : " rmd-tab-later");
-        h.push('<button type="button" class="rmd-tab' + stateCls + '" data-rmd-tab="' + name + '"' + (active ? ' aria-current="page"' : '') + '>' + esc(TAB_LABELS[name] || name) + '</button>');
+        var pillLabel = PILL_LABELS[name] || TAB_LABELS[name] || name;
+        var fullLabel = TAB_LABELS[name] || name;
+        var labelAttr = pillLabel !== fullLabel ? ' aria-label="' + esc(fullLabel) + '"' : '';
+        h.push('<button type="button" class="rmd-tab' + stateCls + '" data-rmd-tab="' + name + '"' + (active ? ' aria-current="page"' : '') + labelAttr + '>' + esc(pillLabel) + '</button>');
       }
       h.push('<button type="button" class="rmd-tab rmd-tab-more" data-rmd-action="toggle-more" aria-expanded="' + (moreOpen ? "true" : "false") + '">More</button>');
       h.push('</nav>');
       if (moreOpen) {
         h.push('<nav class="rmd-shell-tabs rmd-shell-tabs-more" aria-label="More tools">');
         for (var a = 0; a < ADVANCED_TABS.length; a++) {
-          var aActive = currentScreen === ADVANCED_TABS[a];
-          h.push('<button type="button" class="rmd-tab' + (aActive ? ' rmd-tab-active' : '') + '" data-rmd-tab="' + ADVANCED_TABS[a] + '"' + (aActive ? ' aria-current="page"' : '') + '>' + esc(TAB_LABELS[ADVANCED_TABS[a]]) + '</button>');
+          var aName = ADVANCED_TABS[a];
+          var aActive = currentScreen === aName;
+          var aPill = PILL_LABELS[aName] || TAB_LABELS[aName] || aName;
+          var aFull = TAB_LABELS[aName] || aName;
+          var aAttr = aPill !== aFull ? ' aria-label="' + esc(aFull) + '"' : '';
+          h.push('<button type="button" class="rmd-tab' + (aActive ? ' rmd-tab-active' : '') + '" data-rmd-tab="' + aName + '"' + (aActive ? ' aria-current="page"' : '') + aAttr + '>' + esc(aPill) + '</button>');
         }
         h.push('</nav>');
       }
@@ -2024,6 +2034,21 @@
 
     root.innerHTML = h.join("\n");
     bindShellEvents();
+    scrollActiveTabsIntoView();
+    if (G.requestAnimationFrame) G.requestAnimationFrame(scrollActiveTabsIntoView);
+  }
+
+  function scrollActiveTabsIntoView() {
+    if (!root) return;
+    var navs = root.querySelectorAll(".rmd-shell-tabs");
+    for (var i = 0; i < navs.length; i++) {
+      var nav = navs[i];
+      var active = nav.querySelector(".rmd-tab-active");
+      if (!active || !nav.clientWidth) continue;
+      var target = active.offsetLeft - (nav.clientWidth - active.offsetWidth) / 2;
+      var max = Math.max(0, nav.scrollWidth - nav.clientWidth);
+      nav.scrollLeft = Math.max(0, Math.min(max, target));
+    }
   }
 
   function bindShellEvents() {
@@ -2114,6 +2139,17 @@
   var moreOpen = false;
   var accountSaveNotice = "";
 
+  var PILL_LABELS = {
+    screening: "Screen",
+    conflicts: "Conflicts",
+    "thesis-type": "Type",
+    "thesis-refs": "Refs",
+    masterchart: "Chart",
+    iec: "Ethics",
+    pubconsent: "Consent",
+    consort: "CONSORT"
+  };
+
   var TAB_LABELS = {
     plan: "Plan",
     studies: "Studies", "read-study": "Read study", protocol: "Protocol", search: "Search", screening: "Screening",
@@ -2192,7 +2228,7 @@
       do: "We reformat references to the journal style. A reference without a DOI or PMID is marked for you to check.",
       eg: "Add a DOI (digital object identifier) so the journal can locate the paper.",
       gloss: "New words: DOI (digital object identifier, a permanent link to a paper) and PMID (PubMed identifier, the number PubMed gives a paper).",
-      action: { label: "Next: tick the checklist", fallback: "checklist" }
+      action: { label: "Next: manuscript", fallback: "manuscript" }
     },
     "read-study": {
       name: "Read a study",
@@ -2492,7 +2528,7 @@
         t.indexOf("cross-sectional") >= 0 || t.indexOf("cross sectional") >= 0) {
       return ["plan", "protocol", "masterchart", "manuscript", "checklist", "ready"];
     }
-    if (t.indexOf("thesis") >= 0) return ["thesis", "thesis-type", "thesis-journal", "thesis-draft", "thesis-tables", "thesis-refs", "checklist", "ready"];
+    if (t.indexOf("thesis") >= 0) return ["thesis", "thesis-type", "thesis-journal", "thesis-draft", "thesis-tables", "thesis-refs", "manuscript", "checklist", "ready"];
     if (t.indexOf("observational") >= 0 || t.indexOf("cohort") >= 0 || t.indexOf("survey") >= 0 || t.indexOf("diagnostic") >= 0) {
       return ["plan", "protocol", "masterchart", "manuscript", "checklist", "ready"];
     }
@@ -2917,10 +2953,23 @@
       if (f.action === "signin" || f.action === "save-or-back" || f.action === "back" || (err && (err.code === "network" || (err.status || 0) >= 500))) throw err;
       return null;
     }
-    var targetJournal = proj.targetJournal || proj.journalId || proj.journal || "jama";
-    /* Live BUG-09: fetch the manuscript first. format-check only runs when a
-     * manuscript exists; asking before that just logged a 404. */
-    SMD.api.request("GET", base + "/manuscript").catch(softFail).then(function (manRes) {
+    var thesisRec = null;
+    try {
+      if (typeof localStorage !== "undefined") {
+        var allTh = JSON.parse(localStorage.getItem("smd_rmd_thesis_v1") || "{}");
+        thesisRec = allTh[proj.serverId || proj.id] || allTh[proj.id] || null;
+      }
+    } catch (e) {}
+    var targetJournal = proj.targetJournal || proj.journalId || proj.journal || (thesisRec && thesisRec.journal && (thesisRec.journal.id || (thesisRec.journal.custom ? "custom" : "default"))) || "jama";
+    var targetJournalName = proj.targetJournalName || proj.journalName || (thesisRec && thesisRec.journal && (thesisRec.journal.shortName || thesisRec.journal.name)) || "";
+    /* Wait for any in-flight thesis section save before checking word count and
+     * format rules, then fetch the manuscript before format-check (Live BUG-09). */
+    var waitThesis = (G.SMD_RESEARCH_THESIS && typeof G.SMD_RESEARCH_THESIS.pendingSave === "function")
+      ? G.SMD_RESEARCH_THESIS.pendingSave()
+      : Promise.resolve();
+    waitThesis.then(function () {
+      return SMD.api.request("GET", base + "/manuscript").catch(softFail);
+    }).then(function (manRes) {
       var reqs = [
         SMD.api.request("GET", base + "/checklist-snapshot").catch(softFail),
         SMD.api.request("GET", "/v1/checklists/" + gid).catch(function () { return null; })
@@ -2979,6 +3028,13 @@
         if (id === "bmj") return "The BMJ";
         if (id === "nejm") return "NEJM";
         if (id === "plos_one" || id === "plosone") return "PLOS ONE";
+        if (id === "annals") return "Annals of Internal Medicine";
+        if (id === "annals_internal_med") return "Annals of Internal Medicine";
+        if (id === "ijmr") return "Indian Journal of Medical Research";
+        if (id === "ijccm") return "IJCCM";
+        if (id === "japi") return "JAPI";
+        if (id === "nmji") return "National Medical Journal of India";
+        if (id === "default") return "General Indian medical journal format";
         return jid ? jid.toUpperCase() : "Target Journal";
       }
 
@@ -3013,10 +3069,11 @@
       }
 
       var checks = (formatCheck && formatCheck.checks) || [];
+      var formatJournalName = (formatCheck && formatCheck.journalName) || targetJournalName || journalTitle(targetJournal);
       if (formatCheck && checks) {
         h += '<div class="rmd-card rmd-format-check-card" style="margin-top:14px;" data-rmd="format-check-card">';
         h += '<div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;">';
-        h += '<h3 style="margin:0;">Journal format check (is it ready for ' + esc(journalTitle(targetJournal)) + '?)</h3>';
+        h += '<h3 style="margin:0;">Journal format check (is it ready for ' + esc(formatJournalName) + '?)</h3>';
         h += '<span class="rmd-badge rmd-badge-pill">' + checks.length + ' checks</span>';
         h += '</div>';
         h += '<p class="rmd-muted" style="margin:4px 0 0;font-size:13px;">Deterministic checks against author guidelines, limits, and declarations. No tokens spent.</p>';
@@ -3057,7 +3114,7 @@
       /* Submission & Publication milestone card (real projects & tutorials) */
       var pubRec = (SMD.tutorial && SMD.tutorial.getPubStatus) ? SMD.tutorial.getPubStatus(proj.id) : null;
       var pubStage = (pubRec && pubRec.status) || "draft";
-      var selJournal = (pubRec && pubRec.journal) || journalTitle(targetJournal);
+      var selJournal = (pubRec && pubRec.journal) || targetJournalName || (formatCheck && formatCheck.journalName) || journalTitle(targetJournal);
       h += '<div class="rmd-card rmd-pub-card" data-rmd="submission-tracker">';
       h += '  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">';
       h += '    <h3 style="margin:0;">Submission &amp; Publication</h3>';
@@ -3080,6 +3137,7 @@
         h += '    <label for="rmd_sub_journal">Target Journal</label>';
         h += '    <select id="rmd_sub_journal">';
         var jOpts = ["JAMA", "The Lancet", "BMJ", "NEJM", "PLOS ONE", "Indian Journal of Medical Research"];
+        if (selJournal && jOpts.indexOf(selJournal) < 0) jOpts.unshift(selJournal);
         for (var ji = 0; ji < jOpts.length; ji++) {
           h += '<option value="' + esc(jOpts[ji]) + '"' + (selJournal === jOpts[ji] ? ' selected' : '') + '>' + esc(jOpts[ji]) + '</option>';
         }
@@ -3364,6 +3422,7 @@
     renderShell();
     if (root) {
       root.removeAttribute("hidden");
+      scrollActiveTabsIntoView();
     }
     if (D.body) {
       D.body.classList.add("smd-research-open");

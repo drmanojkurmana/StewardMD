@@ -1144,14 +1144,19 @@
     /* A new project has no manuscript yet. After one 404 the screen knows
      * there is nothing to fetch, so later tab opens stay quiet. */
     var knownMissing = !!manuscriptMissing[mpid];
-    var pMan = (SMD.api && !knownMissing) ? SMD.api.request("GET", base + "/manuscript") : Promise.resolve(null);
-    var pVers = (SMD.api && !knownMissing) ? SMD.api.request("GET", base + "/manuscript/versions") : Promise.resolve(null);
-
-    Promise.all([pMan, pVers]).then(function (res) {
+    var waitSave = (G.SMD_RESEARCH_THESIS && typeof G.SMD_RESEARCH_THESIS.pendingSave === "function")
+      ? G.SMD_RESEARCH_THESIS.pendingSave()
+      : Promise.resolve();
+    waitSave.then(function () {
       if (mySeq !== seq) return;
+      var pMan = (SMD.api && !knownMissing) ? SMD.api.request("GET", base + "/manuscript") : Promise.resolve(null);
+      var pVers = (SMD.api && !knownMissing) ? SMD.api.request("GET", base + "/manuscript/versions") : Promise.resolve(null);
+      return Promise.all([pMan, pVers]);
+    }).then(function (res) {
+      if (!res || mySeq !== seq) return;
       st.loading = false;
       if (res[0] && res[0].manuscript) manuscriptMissing[mpid] = false;
-      st.manuscript = (res[0] && res[0].manuscript) || localManuscript(st.projectId) || defaultManuscript(st.projectId);
+      st.manuscript = (res[0] && res[0].manuscript) || localManuscript(st.projectId) || thesisManuscript(st.projectId) || defaultManuscript(st.projectId);
       st.versions = (res[1] && res[1].versions) || defaultVersions(proj);
       if (!params || !params.sectionId) {
         var foundSel = false;
@@ -1173,7 +1178,7 @@
           .replace(/[\u2014\u2013]/g, "-");
       }
       /* Fallback to local default if API unmocked or offline */
-      st.manuscript = localManuscript(st.projectId) || defaultManuscript(st.projectId);
+      st.manuscript = localManuscript(st.projectId) || thesisManuscript(st.projectId) || defaultManuscript(st.projectId);
       st.versions = defaultVersions(proj);
       if (!params || !params.sectionId) {
         var foundSelC = false;
@@ -2905,13 +2910,6 @@
     var rightHideClass = (phone && st.phoneTab === "sections") ? " rmd-phone-hide" : "";
     h.push('<div class="rmd-man-right' + rightHideClass + '">');
 
-    /* Phone notice */
-    if (phone) {
-      h.push('<div class="rmd-phone-notice">');
-      h.push('  On a phone you can read sections and mark them as final. Editing needs a tablet.');
-      h.push('</div>');
-    }
-
     /* Save/export notice */
     if (st.saveNotice) {
       h.push('<div class="rmd-banner rmd-banner-info" role="status"><span>' + esc(st.saveNotice) + '</span></div>');
@@ -3496,6 +3494,26 @@
       man.sections.push({ id: eid, heading: heading, level: 1, text: d.sections[eid] });
     }
     return man;
+  }
+
+  function thesisManuscript(pid) {
+    try {
+      if (typeof localStorage === "undefined") return null;
+      var all = JSON.parse(localStorage.getItem("smd_rmd_thesis_v1") || "{}");
+      var entry = all[pid] || (activeProject() && activeProject().serverId ? all[activeProject().serverId] : null);
+      var secs = entry && entry.draft && entry.draft.sections;
+      if (!secs || !secs.length) return null;
+      var man = defaultManuscript(pid);
+      var byId = {};
+      for (var i = 0; i < secs.length; i++) {
+        if (secs[i] && secs[i].id) byId[secs[i].id] = secs[i];
+      }
+      for (var j = 0; j < man.sections.length; j++) {
+        var cur = byId[man.sections[j].id];
+        if (cur && cur.text != null) man.sections[j].text = cur.text;
+      }
+      return man;
+    } catch (e) { return null; }
   }
 
   function appendLocalResults(pid, text) {

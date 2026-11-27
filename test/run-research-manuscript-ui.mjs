@@ -483,6 +483,7 @@ try {
     ok(info && !info.overlapWith, `no element overlaps status badge at ${label} (${w}x${h})${info && info.overlapWith ? ' (overlapped ' + info.overlapWith + ')' : ''}`);
     if (w === 390) {
       ok(info && info.minActionH >= 44, `phone topbar/tab targets are >= 44px at ${label} (${w}x${h}): min=${info && info.minActionH}`);
+      ok(await ev(`document.querySelectorAll('#researchMD .rmd-phone-notice').length === 1`), `manuscript shows exactly one phone notice banner at ${w}x${h}`);
     }
   };
 
