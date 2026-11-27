@@ -238,7 +238,7 @@ try {
 
   // B3: Cost text
   const costText = await text("#rmd-maik-consent-panel .rmd-ai-cost");
-  ok(costText.trim() === "Costs about 2 MaiK tokens", `cost line matches standard: "${costText.trim()}"`);
+  ok(costText.trim() === "No MaiK tokens needed", `tutorial cost line says it is free, like the coach bar: "${costText.trim()}"`);
 
   // Check 44px touch targets (CSS px via offsetWidth/offsetHeight) and aria-labels on toolbar buttons at 375px
   const toolbarAudit = await ev(`(()=>{

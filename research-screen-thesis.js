@@ -1812,18 +1812,113 @@
     for (i = 0; i < nums.length; i++) nums[i].onclick = function () { openThesisPop(this); };
   }
 
-  function sectionHtml(text, locators) {
-    var html = esc(text), i, loc, re;
-    html = html.split("[check this number]").join('<span class="rmd-thesis-flag">[check this number]</span>');
-    var sorted = (locators || []).slice().sort(function (a, b) { return b.number.length - a.number.length; });
-    for (i = 0; i < sorted.length; i++) {
-      loc = sorted[i];
-      re = new RegExp("(^|[^0-9.])(" + loc.number.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(?=$|[^0-9.]|\\.(?![0-9]))");
-      html = html.replace(re, function (m, pre, num) {
-        return pre + '<span class="rmd-thesis-num" data-page="' + loc.page + '" data-table="' + (loc.table != null ? loc.table : "") + '" tabindex="0" role="button">' + num + '</span>';
-      });
+  /* One pass over the plain text: numbers are tokenised before any HTML exists
+   so a digit inside an attribute can never be rewritten. Markdown is parsed
+   on the raw text and every literal fragment is escaped on output. */
+  function locateNumber(text, from, number) {
+    var idx = text.indexOf(number, from);
+    while (idx >= 0) {
+      var before = idx > 0 ? text.charAt(idx - 1) : "";
+      var end = idx + number.length;
+      var after = end < text.length ? text.charAt(end) : "";
+      var after2 = end + 1 < text.length ? text.charAt(end + 1) : "";
+      var okBefore = !before || !/[0-9.]/.test(before);
+      var okAfter = !after || !/[0-9.]/.test(after) || (after === "." && !/[0-9]/.test(after2));
+      if (okBefore && okAfter) return idx;
+      idx = text.indexOf(number, idx + 1);
     }
-    return html;
+    return -1;
+  }
+
+  function emitPlain(text, locators, out) {
+    var i = 0, best, bestIdx, idx, l;
+    while (i < text.length) {
+      best = null;
+      bestIdx = -1;
+      for (l = 0; l < locators.length; l++) {
+        idx = locateNumber(text, i, String(locators[l].number));
+        if (idx < 0) continue;
+        if (best === null || idx < bestIdx ||
+            (idx === bestIdx && String(locators[l].number).length > String(best.number).length)) {
+          best = locators[l];
+          bestIdx = idx;
+        }
+      }
+      if (best === null) {
+        out.push({ t: "text", v: text.slice(i) });
+        return;
+      }
+      if (bestIdx > i) out.push({ t: "text", v: text.slice(i, bestIdx) });
+      out.push({ t: "num", v: String(best.number), page: best.page, table: best.table });
+      i = bestIdx + String(best.number).length;
+    }
+  }
+
+  function parseInline(text, locators, out) {
+    var i = 0, buf = "", end, e2, rest;
+    function flush() {
+      if (!buf) return;
+      emitPlain(buf, locators, out);
+      buf = "";
+    }
+    while (i < text.length) {
+      rest = text.slice(i);
+      if (rest.indexOf("[check this number]") === 0) {
+        flush();
+        out.push({ t: "flag" });
+        i += "[check this number]".length;
+        continue;
+      }
+      if (rest.indexOf("**") === 0) {
+        end = text.indexOf("**", i + 2);
+        if (end > i + 2) {
+          flush();
+          out.push({ t: "open", tag: "strong" });
+          parseInline(text.slice(i + 2, end), locators, out);
+          out.push({ t: "close", tag: "strong" });
+          i = end + 2;
+          continue;
+        }
+      }
+      if (text.charAt(i) === "*") {
+        e2 = text.indexOf("*", i + 1);
+        if (e2 > i + 1) {
+          flush();
+          out.push({ t: "open", tag: "em" });
+          parseInline(text.slice(i + 1, e2), locators, out);
+          out.push({ t: "close", tag: "em" });
+          i = e2 + 1;
+          continue;
+        }
+      }
+      buf += text.charAt(i);
+      i++;
+    }
+    flush();
+  }
+
+  function tokensHtml(tokens) {
+    var h = [], i, t;
+    for (i = 0; i < tokens.length; i++) {
+      t = tokens[i];
+      if (t.t === "text") h.push(esc(t.v));
+      else if (t.t === "flag") h.push('<span class="rmd-thesis-flag">[check this number]</span>');
+      else if (t.t === "num") {
+        h.push('<span class="rmd-thesis-num" data-page="' + esc(t.page) + '" data-table="' +
+          esc(t.table != null ? t.table : "") + '" tabindex="0" role="button">' + esc(t.v) + '</span>');
+      } else if (t.t === "open") h.push("<" + t.tag + ">");
+      else if (t.t === "close") h.push("</" + t.tag + ">");
+    }
+    return h.join("");
+  }
+
+  function sectionHtml(text, locators) {
+    var sorted = (locators || []).slice().sort(function (a, b) {
+      return String(b.number).length - String(a.number).length;
+    });
+    var tokens = [];
+    parseInline(String(text == null ? "" : text), sorted, tokens);
+    return tokensHtml(tokens);
   }
 
   function openThesisPop(el) {
@@ -2062,6 +2157,7 @@
     extractDocxXmlBlocks: extractDocxXmlBlocks,
     paginateBlocks: paginateBlocks,
     handleFile: handleFile,
+    sectionHtml: sectionHtml,
     PAPER_TYPES: PAPER_TYPES,
     DEFAULT_JOURNAL: DEFAULT_JOURNAL
   };

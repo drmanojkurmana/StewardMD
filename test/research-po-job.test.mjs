@@ -184,6 +184,32 @@ test("manuscript_draft: viewer -> 403, outsider -> 404, non-SR -> 409", { skip: 
   }
 });
 
+test("manuscript_draft: quote endpoint returns the same ceiling without reserving credits", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "alice@example.com", 500);
+  const p = await makeProject(env, "tok-alice", "systematic_review");
+  const q = await call(env, "GET", "v1/projects/" + p.id + "/jobs/quote?kind=manuscript_draft", "tok-alice");
+  assert.equal(q.http, 200, JSON.stringify(q));
+  assert.equal(q.quoteMicroUsd, quoteAiCall(env, "T2") * 64);
+  assert.equal(q.calls, 64);
+  assert.equal(q.tier, "T2");
+  assert.equal(env.RESEARCH_DB._db.prepare("SELECT COUNT(*) AS n FROM research_job_runs WHERE project_id=?").get(p.id).n, 0,
+    "quoting creates no job");
+  assert.equal(env.MAIK_KV._m.get("maik:credit:em:alice@example.com").includes('"balance":500'), true,
+    "quoting reserves no credits");
+
+  const viewer = await call(env, "POST", "v1/projects/" + p.id + "/members", "tok-alice", { uid: "u-bob", role: "viewer" });
+  assert.equal(viewer.http, 201);
+  const denied = await call(env, "GET", "v1/projects/" + p.id + "/jobs/quote?kind=manuscript_draft", "tok-bob");
+  assert.equal(denied.http, 403);
+  assert.equal(denied.error.code, "not_member");
+
+  const off = freshEnv({ poEnabled: undefined });
+  await makeProject(off, "tok-alice", "systematic_review");
+  const disabled = await call(off, "GET", "v1/projects/prj_missing/jobs/quote?kind=manuscript_draft", "tok-alice");
+  assert.equal(disabled.http, 404);
+});
+
 test("manuscript_draft: unlocked protocol -> 409, no saved run -> 409, active job -> 409", { skip: SKIP }, async () => {
   const env = freshEnv();
   fundWallet(env, "alice@example.com", 500);

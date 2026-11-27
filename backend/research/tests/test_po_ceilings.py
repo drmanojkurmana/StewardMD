@@ -199,3 +199,15 @@ def test_callable_job_token_is_minted_fresh_per_call():
     client.call_text("hello", "m")
     client.call_text("again", "m")
     assert seen == ["Bearer job_1.100.aa", "Bearer job_1.200.bb"]
+
+
+def test_system_none_is_omitted_not_sent_as_null():
+    # The gateway answers 400 invalid_body to "system": null (seen live 2026-11-27).
+    seen = []
+
+    def handler(request):
+        seen.append(json.loads(request.content))
+        return ok_handler(request)
+
+    client_with(handler).call_text("hello", "m")
+    assert "system" not in seen[0]

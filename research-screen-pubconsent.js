@@ -1474,7 +1474,7 @@
       // 1. Ask MaiK Section
       h.push('<div id="rmd-maik-consent-panel" class="rmd-card-sub"' + (editing ? ' style="display:none;"' : "") + ">");
       h.push("<h4>Ask MaiK to draft consent</h4>");
-      h.push('<p class="rmd-ai-cost">Costs about 2 MaiK tokens</p>');
+      h.push('<p class="rmd-ai-cost">' + ((proj && proj.tutorial) ? 'No MaiK tokens needed' : 'Costs about 2 MaiK tokens') + '</p>');
       h.push('<div><label class="rmd-pc-field-label" for="rmd-maik-lang">Language:</label>');
       h.push('<select id="rmd-maik-lang" class="rmd-select">' + langOptionsHtml(initLangCode) + "</select></div>");
 

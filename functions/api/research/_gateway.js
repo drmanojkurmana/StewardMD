@@ -122,6 +122,7 @@ export async function llmRoute(ctx) {
   if (!TIER_CEILINGS[tier]) return err(400, "invalid_body", "tier must be T1, T2 or T3", requestId);
   if (typeof body.prompt !== "string" || !body.prompt || body.prompt.length > 200000)
     return err(400, "invalid_body", "prompt must be 1-200000 characters", requestId);
+  if (body.system === null) delete body.system; /* older workers sent "system": null when there was none */
   if (body.system !== undefined && (typeof body.system !== "string" || body.system.length > 40000))
     return err(400, "invalid_body", "system must be at most 40000 characters", requestId);
   if (typeof body.projectId !== "string" || typeof body.userId !== "string")

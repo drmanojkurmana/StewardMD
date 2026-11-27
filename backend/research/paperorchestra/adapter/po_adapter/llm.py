@@ -58,6 +58,9 @@ class GatewayError(Exception):
         super().__init__(code + (": " + detail if detail else ""))
 
 
+GATEWAY_FRAMING_TOKENS = 1000
+
+
 def estimate_tokens(text: str) -> int:
     """Deterministic pre-call estimate (~4 chars/token). The gateway's actual
     usage is what gets recorded and checked against the output ceiling."""
@@ -187,17 +190,22 @@ class GatewayLLMClient:
             self.refinement_rounds += 1
         if self.calls >= self.max_calls:
             raise CeilingError("ceiling_calls", f"max {self.max_calls} calls per job")
-        est_in = estimate_tokens(assembled)
+        # The gateway prepends its own framing (RESEARCH_FRAMING in _gateway.js, well under 1,000 tokens) before
+        # its ceiling check, so reserve that here or a call just under the ceiling fails there with HTTP 400.
+        est_in = estimate_tokens(assembled) + GATEWAY_FRAMING_TOKENS
         if est_in > self.ceilings["max_input_tokens"]:
             raise CeilingError("ceiling_input_tokens",
                                f"estimate {est_in} > {self.ceilings['max_input_tokens']}")
 
         body = {
             "jobId": self.job_id, "projectId": self.project_id, "userId": self.user_id,
-            "tier": self.tier, "model": model_name, "system": system,
+            "tier": self.tier, "model": model_name,
             "prompt": prompt, "maxOutputTokens": self.ceilings["max_output_tokens"],
             "purpose": purpose,
         }
+        # The gateway accepts a string or no system field; JSON null is a 400 invalid_body.
+        if isinstance(system, str) and system:
+            body["system"] = system
         raw_body = json.dumps(body, separators=(",", ":")).encode("utf-8")
         # job_token may be a callable that mints a fresh token per call: the gateway
         # caps a token at 15 minutes and a full draft can run longer than that.
@@ -222,7 +230,17 @@ class GatewayLLMClient:
                     if resp.status_code == 429 or resp.status_code >= 500:
                         last_error = GatewayError("gateway_http_" + str(resp.status_code))
                     else:
-                        raise GatewayError("gateway_http_" + str(resp.status_code),
+                        # Keep the gateway's own error code (e.g. ceiling_input_tokens) so a failed job says why.
+                        detail = ""
+                        try:
+                            detail = str(((resp.json() or {}).get("error") or {}).get("code") or "")
+                            detail = "".join(ch for ch in detail.lower() if ch.isalnum() or ch == "_")[:40]
+                        except Exception:
+                            # Not our JSON envelope (an edge or proxy page): keep a short, sanitised hint.
+                            raw = (resp.text or "")[:60].lower().replace(" ", "_")
+                            hint = "".join(ch for ch in raw if ch.isalnum() or ch == "_")[:30]
+                            detail = ("nj_" + hint) if hint else ""
+                        raise GatewayError("gateway_http_" + str(resp.status_code) + ("__" + detail if detail else ""),
                                            "non-retryable")
                 if attempt < attempts - 1:
                     self._sleep(2 ** attempt)

@@ -21,6 +21,8 @@
   var showCreateModal = false;
   var createBusy = false;
   var startChoice = null;
+  var renamePid = "";
+  var renameBusy = false;
   var startBusy = false;
 
   var START_CHOICES = [
@@ -121,6 +123,23 @@
     return '<div class="rmd-banner rmd-banner-error" role="alert"><strong>' + esc(msg) + '</strong></div>';
   }
 
+  /* Live BUG-11: rename a project in the store. research-store.js has no
+   * rename method, so update the live state object and persist through the
+   * store's own save path: setSyncState re-serializes the state unchanged
+   * (same value back) and notifies listeners. Only public store APIs. */
+  function applyLocalRename(store, pid, title) {
+    if (!store || !store.getState) return;
+    var st = store.getState();
+    if (!st || !Array.isArray(st.projects)) return;
+    for (var i = 0; i < st.projects.length; i++) {
+      if (st.projects[i] && st.projects[i].id === pid) {
+        st.projects[i].title = title;
+        st.projects[i].updatedAt = Date.now();
+      }
+    }
+    if (store.setSyncState) store.setSyncState(st.syncState);
+  }
+
   function formatDate(ts) {
     if (!ts) return "";
     try {
@@ -162,7 +181,7 @@
       h.push('    <div class="rmd-tut-hub-head">');
       h.push('      <div>');
       h.push('        <h3 style="margin:0;font:700 16px var(--rmd-f);color:var(--rmd-ink);">Interactive Tutorials: Learn Any Study Scratch to Published</h3>');
-      h.push('        <p class="rmd-muted" style="margin:3px 0 0;font-size:13px;">Try a real worked example first (0 MaiK tokens). Practice by clicking and entering yourself or tap Enter &amp; Show Me.</p>');
+      h.push('        <p class="rmd-muted" style="margin:3px 0 0;font-size:13px;">Try a real worked example first, free. Practice by clicking and entering yourself or tap Enter &amp; Show Me.</p>');
       h.push('      </div>');
       var globalDef = tut.isTutorialDefault ? tut.isTutorialDefault("") : true;
       h.push('      <label class="rmd-tut-def"><input type="checkbox" data-rmd-tut-global-def="1"' + (globalDef ? ' checked' : '') + '> Recommend tutorials by default</label>');
@@ -222,7 +241,7 @@
         if (p.practice) {
           h.push('          <span class="rmd-badge rmd-badge-pill">Practice project (on this phone only)</span>');
         } else if (p.tutorial) {
-          h.push('          <span class="rmd-badge rmd-badge-pill" style="background:var(--rmd-acc);color:#fff;">Interactive Tutorial · 0 tokens</span>');
+          h.push('          <span class="rmd-badge rmd-badge-pill" style="background:var(--rmd-acc);color:#fff;">Free Interactive Tutorial</span>');
         } else if (!p.serverId) {
           h.push('          <span class="rmd-badge rmd-badge-pill">On this phone only</span>');
         }
@@ -247,6 +266,7 @@
 
         h.push('      <div class="rmd-card-actions">');
         h.push('        <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-open-project="' + esc(p.id) + '">Open Workspace</button>');
+        h.push('        <button type="button" class="rmd-btn rmd-btn-quiet rmd-btn-sm" data-rmd-rename-project="' + esc(p.id) + '">Rename</button>');
         h.push('        <button type="button" class="rmd-btn rmd-btn-quiet rmd-btn-sm" data-rmd-delete-project="' + esc(p.id) + '">Delete</button>');
         h.push('      </div>');
         h.push('    </div>');
@@ -310,6 +330,31 @@
       h.push('        <div class="rmd-modal-footer">');
       h.push('          <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="create-project-cancel">Cancel</button>');
       h.push('          <button type="submit" class="rmd-btn rmd-btn-primary" data-rmd="create-project-submit">Create Project</button>');
+      h.push('        </div>');
+      h.push('      </form>');
+      h.push('    </div>');
+      h.push('  </div>');
+    }
+
+    // Rename Project Modal
+    if (renamePid) {
+      var renameProj = store.getProject ? store.getProject(renamePid) : null;
+      h.push('  <div class="rmd-modal-backdrop" id="rmdRenameModal">');
+      h.push('    <div class="rmd-modal-card" role="dialog" aria-modal="true" aria-labelledby="rmdRenameTitle">');
+      h.push('      <div class="rmd-modal-header">');
+      h.push('        <h3 id="rmdRenameTitle">Rename Project</h3>');
+      h.push('        <button type="button" class="rmd-btn-close" data-rmd="rename-cancel" aria-label="Close dialog">&times;</button>');
+      h.push('      </div>');
+      h.push('      <form id="rmdRenameForm" class="rmd-form">');
+      h.push('        <div class="rmd-field">');
+      h.push('          <label for="rmd_rename_title">Project Title</label>');
+      h.push('          <input type="text" id="rmd_rename_title" maxlength="180" required autofocus autocomplete="off" value="' + esc(renameProj ? renameProj.title : "") + '">');
+      h.push('          <span class="rmd-field-hint">Max 180 characters. Clear, clinical title.</span>');
+      h.push('        </div>');
+      h.push('        <div id="rmdRenameErr"></div>');
+      h.push('        <div class="rmd-modal-footer">');
+      h.push('          <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="rename-cancel">Cancel</button>');
+      h.push('          <button type="submit" class="rmd-btn rmd-btn-primary" data-rmd="rename-submit"' + (renameBusy ? ' disabled' : '') + '>' + (renameBusy ? "Saving" : "Save Name") + '</button>');
       h.push('        </div>');
       h.push('      </form>');
       h.push('    </div>');
@@ -430,6 +475,80 @@
       };
     }
 
+    // Rename project
+    var renameBtns = container.querySelectorAll("[data-rmd-rename-project]");
+    for (var rn = 0; rn < renameBtns.length; rn++) {
+      renameBtns[rn].onclick = function (e) {
+        if (e && e.stopPropagation) e.stopPropagation();
+        var pid = this.getAttribute("data-rmd-rename-project");
+        if (!pid) return;
+        renamePid = pid;
+        renameBusy = false;
+        renderProjects(container);
+        var titleInput = container.querySelector("#rmd_rename_title");
+        if (titleInput && titleInput.focus) {
+          try { titleInput.focus(); titleInput.select(); } catch (fe) {}
+        }
+      };
+    }
+    var renameCancelBtns = container.querySelectorAll('[data-rmd="rename-cancel"]');
+    for (var rc = 0; rc < renameCancelBtns.length; rc++) {
+      renameCancelBtns[rc].onclick = function () {
+        renamePid = "";
+        renameBusy = false;
+        renderProjects(container);
+      };
+    }
+    var renameForm = container.querySelector("#rmdRenameForm");
+    if (renameForm) {
+      renameForm.onsubmit = function (e) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (renameBusy || !renamePid) return false;
+        var titleInput = renameForm.querySelector("#rmd_rename_title");
+        var errBox = renameForm.querySelector("#rmdRenameErr");
+        var submitBtn = renameForm.querySelector('[data-rmd="rename-submit"]');
+        var title = (titleInput ? titleInput.value : "").trim();
+        if (!title || title.length > 180) {
+          if (errBox) errBox.innerHTML = bannerHtml({ message: "The project title must be between 1 and 180 characters." });
+          if (titleInput && titleInput.focus) titleInput.focus();
+          return false;
+        }
+        var proj = store.getProject ? store.getProject(renamePid) : null;
+        if (!proj) {
+          renamePid = "";
+          renderProjects(container);
+          return false;
+        }
+        if (title === proj.title) {
+          renamePid = "";
+          renderProjects(container);
+          return false;
+        }
+        renameBusy = true;
+        if (errBox) errBox.innerHTML = "";
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Saving"; }
+        function doneLocal() {
+          renameBusy = false;
+          renamePid = "";
+          applyLocalRename(store, proj.id, title);
+          renderProjects(container);
+        }
+        function failRename(err) {
+          renameBusy = false;
+          if (errBox) errBox.innerHTML = bannerHtml(err);
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Save Name"; }
+        }
+        if (proj.serverId && SMD.api && SMD.api.request) {
+          SMD.api.request("PATCH", "/v1/projects/" + encodeURIComponent(proj.serverId), { title: title })
+            .then(function () { doneLocal(); })
+            .catch(function (err) { failRename(err); });
+        } else {
+          doneLocal();
+        }
+        return false;
+      };
+    }
+
     // Delete project
     var delBtns = container.querySelectorAll("[data-rmd-delete-project]");
     for (var m = 0; m < delBtns.length; m++) {
@@ -476,7 +595,7 @@
           h.push('<div class="rmd-start-tut-box" data-rmd="start-tut-box">');
           h.push('  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">');
           h.push('    <strong style="font-size:14px;color:var(--rmd-ink);">Try Worked Example Tutorial First' + (isDef ? ' (Default)' : '') + '</strong>');
-          h.push('    <span class="rmd-badge rmd-badge-soft">0 MaiK tokens · Scratch to Published</span>');
+          h.push('    <span class="rmd-badge rmd-badge-soft">Free · Scratch to Published</span>');
           h.push('  </div>');
           h.push('  <p class="rmd-muted" style="margin:0;font-size:12.5px;">Practice with our real example (' + esc(ex.shortTitle) + ') where we ask you to click, enter, or tap Enter &amp; Show Me all the way to Published.</p>');
           h.push('  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">');

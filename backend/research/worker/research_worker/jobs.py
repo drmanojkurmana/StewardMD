@@ -245,12 +245,15 @@ def drain_once(
     counts = {"pulled": len(messages), "done": 0, "failed": 0, "cancelled": 0, "retried": 0}
     for message in messages:
         if message.body is None:
+            counts["lastError"] = ("undecodable body: content_type=" + repr(getattr(message, "content_type", "")) +
+                                   " len=" + str(len(message.raw_body or "")))[:300]
             log.warning("malformed message %s; retrying to DLQ", message.id)
             queue.retry(message.lease_id, delay_seconds=RETRY_DELAY_SECONDS)
             counts["retried"] += 1
             continue
         handler = handler_for(message.body.get("kind"))
         if handler is None:
+            counts["lastError"] = "unknown kind: " + str(message.body.get("kind"))[:60]
             log.warning("unknown kind %r in %s; retrying to DLQ",
                         message.body.get("kind"), message.id)
             queue.retry(message.lease_id, delay_seconds=RETRY_DELAY_SECONDS)
@@ -261,6 +264,7 @@ def drain_once(
             validate(message.body)
         except ValueError as exc:
             log.warning("invalid message %s: %s; retrying to DLQ", message.id, exc)
+            counts["lastError"] = ("invalid message: " + str(exc))[:300]
             queue.retry(message.lease_id, delay_seconds=RETRY_DELAY_SECONDS)
             counts["retried"] += 1
             continue
@@ -273,8 +277,18 @@ def drain_once(
                 secret=secret,
                 sleep=sleep,
             )
-        except (StorageError, httpx.HTTPError):
-            log.exception("infra failure on job %s; leaving un-acked", message.body.get("jobId"))
+        except (StorageError, httpx.HTTPError) as exc:
+            # Surfaced in the drain counts the front door logs: error class and message only (an R2 key path
+            # or a URL), never credentials, which live in headers/env.
+            counts["lastError"] = (type(exc).__name__ + ": " + str(exc) + (" <- " + repr(exc.__cause__) if exc.__cause__ else ""))[:300]
+            # Hand it back for a retry in a minute: with the 2 h lease, leaving it un-acked hid the job for
+            # 2 hours (seen 2026-11-27 when R2 keys were missing). Retries still dead-letter after 3.
+            log.exception("infra failure on job %s; retrying in %ss", message.body.get("jobId"), RETRY_DELAY_SECONDS)
+            try:
+                queue.retry(message.lease_id, delay_seconds=RETRY_DELAY_SECONDS)
+            except Exception:
+                log.exception("retry failed for %s; the lease will expire", message.id)
+            counts["retried"] += 1
             continue
         if outcome["settled"]:
             try:
@@ -283,6 +297,8 @@ def drain_once(
                 log.exception("ack failed for %s; redelivery is idempotent", message.id)
             counts[outcome["status"]] += 1
         else:
+            counts["lastError"] = ("not settled: status=" + str(outcome.get("status")) + " error=" +
+                                   str(outcome.get("error", "")))[:300]
             queue.retry(message.lease_id, delay_seconds=RETRY_DELAY_SECONDS)
             counts["retried"] += 1
     return counts

@@ -141,7 +141,14 @@ test("still-stub screens render a step banner, Next line and Coming soon", funct
     SMD.screens[key].render(el);
     assert.match(el.innerHTML, /rmd-step-banner/);
     assert.equal(el.innerHTML.indexOf("rmdStepBanner"), -1);
-    assert.match(el.innerHTML, /Next:/);
+    if (key === "consort") {
+      /* Live BUG-10: consort is a supporting screen, not a journey step, so it
+       * renders an honest banner instead of a fake step and an invented Next. */
+      assert.match(el.innerHTML, /CONSORT flow<\/strong> for this trial/);
+      assert.equal(el.innerHTML.indexOf("Next:"), -1);
+    } else {
+      assert.match(el.innerHTML, /Next:/);
+    }
     if (key === "backup") {
       assert.equal(el.innerHTML.indexOf("Coming soon"), -1);
       assert.match(el.innerHTML, /If you forget this passphrase, nobody can open the backup, including us\./);

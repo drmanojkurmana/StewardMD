@@ -92,6 +92,15 @@ function makeMockContainer() {
       if (sel === '[data-rmd="po-cancel"]') {
         return this._nodes.filter((n) => n.attrs["data-rmd"] === "po-cancel");
       }
+      if (sel === '[data-rmd="po-start"]') {
+        return this._nodes.filter((n) => n.attrs["data-rmd"] === "po-start");
+      }
+      if (sel === '[data-rmd="po-dismiss"]') {
+        return this._nodes.filter((n) => n.attrs["data-rmd"] === "po-dismiss");
+      }
+      if (sel === "[data-rmd-po-cost]") {
+        return this._nodes.filter((n) => n.attrs["data-rmd-po-cost"] !== undefined);
+      }
       if (sel === ".rmd-po-status") {
         return this._nodes.filter((n) => (n.attrs["class"] || "").indexOf("rmd-po-status") >= 0);
       }
@@ -145,6 +154,17 @@ function setupEnv() {
 }
 
 describe("PaperOrchestra UI integration", () => {
+  async function confirmAndStart(c) {
+    const btn = c.querySelector('[data-rmd="full-draft-po"]');
+    assert.ok(btn, "PO button rendered before confirming");
+    btn.onclick();
+    await new Promise((r) => setTimeout(r, 20));
+    const start = c.querySelector('[data-rmd="po-start"]');
+    assert.ok(start, "Confirm step shown after tapping the PO button");
+    start.onclick();
+    await new Promise((r) => setTimeout(r, 30));
+  }
+
   beforeEach(() => {
     setupEnv();
     const scriptSrc = fs.readFileSync(new URL("../research-screen-manuscript.js", import.meta.url), "utf8");
@@ -230,8 +250,7 @@ describe("PaperOrchestra UI integration", () => {
     assert.equal(btn.disabled, false, "PO button initially enabled");
 
     // Tap button
-    btn.onclick();
-    await new Promise((r) => setTimeout(r, 30));
+    await confirmAndStart(c);
 
     const postCall = apiCalls.find((call) => call.method === "POST" && call.path.includes("/jobs"));
     assert.ok(postCall, "SMD.api.request called with POST /jobs");
@@ -284,8 +303,7 @@ describe("PaperOrchestra UI integration", () => {
     await new Promise((r) => setTimeout(r, 20));
 
     const btn = c.querySelector('[data-rmd="full-draft-po"]');
-    btn.onclick();
-    await new Promise((r) => setTimeout(r, 30));
+    await confirmAndStart(c);
     assert.match(c.innerHTML, /Queued/, "Initial status is Queued");
 
     // Simulate poll returning running
@@ -326,8 +344,7 @@ describe("PaperOrchestra UI integration", () => {
     await new Promise((r) => setTimeout(r, 20));
 
     const btn = c.querySelector('[data-rmd="full-draft-po"]');
-    btn.onclick();
-    await new Promise((r) => setTimeout(r, 30));
+    await confirmAndStart(c);
 
     const cancelBtn = c.querySelector('[data-rmd="po-cancel"]');
     assert.ok(cancelBtn, "Cancel button exists while job queued");
@@ -369,8 +386,7 @@ describe("PaperOrchestra UI integration", () => {
     await new Promise((r) => setTimeout(r, 20));
 
     const btn = c.querySelector('[data-rmd="full-draft-po"]');
-    btn.onclick();
-    await new Promise((r) => setTimeout(r, 30));
+    await confirmAndStart(c);
 
     // First cancel attempt - fails
     const cancelBtn1 = c.querySelector('[data-rmd="po-cancel"]');
@@ -423,8 +439,7 @@ describe("PaperOrchestra UI integration", () => {
     await new Promise((r) => setTimeout(r, 20));
 
     const btn = c.querySelector('[data-rmd="full-draft-po"]');
-    btn.onclick();
-    await new Promise((r) => setTimeout(r, 30));
+    await confirmAndStart(c);
 
     const st = globalThis.SMD_RESEARCH.screens.manuscript._getState();
     assert.equal(st.poStatus, "running");
@@ -480,8 +495,7 @@ describe("PaperOrchestra UI integration", () => {
     await new Promise((r) => setTimeout(r, 20));
 
     const btn = c.querySelector('[data-rmd="full-draft-po"]');
-    btn.onclick();
-    await new Promise((r) => setTimeout(r, 30));
+    await confirmAndStart(c);
 
     const st = globalThis.SMD_RESEARCH.screens.manuscript._getState();
 
@@ -512,8 +526,7 @@ describe("PaperOrchestra UI integration", () => {
     await new Promise((r) => setTimeout(r, 20));
 
     const btn = c.querySelector('[data-rmd="full-draft-po"]');
-    btn.onclick();
-    await new Promise((r) => setTimeout(r, 30));
+    await confirmAndStart(c);
 
     // Verify .rmd-po-status and .rmd-po-status-text classes are used
     assert.match(c.innerHTML, /class="rmd-po-status"/);
@@ -575,8 +588,7 @@ describe("PaperOrchestra UI integration", () => {
     await new Promise((r) => setTimeout(r, 20));
 
     const btn = c.querySelector('[data-rmd="full-draft-po"]');
-    btn.onclick();
-    await new Promise((r) => setTimeout(r, 30));
+    await confirmAndStart(c);
 
     assert.match(c.innerHTML, /Failed: Lock the research protocol before drafting the manuscript\./,
       "Status row displays mapped error message for protocol_unlocked");
@@ -604,8 +616,7 @@ describe("PaperOrchestra UI integration", () => {
     await new Promise((r) => setTimeout(r, 20));
 
     const btn = c.querySelector('[data-rmd="full-draft-po"]');
-    btn.onclick();
-    await new Promise((r) => setTimeout(r, 30));
+    await confirmAndStart(c);
 
     // Manually trigger poll callback with the failed job
     const jobRes = await globalThis.SMD_RESEARCH.api.request("GET", "/v1/jobs/job_err_1");
@@ -627,8 +638,7 @@ describe("PaperOrchestra UI integration", () => {
     await new Promise((r) => setTimeout(r, 20));
 
     const btn = c.querySelector('[data-rmd="full-draft-po"]');
-    btn.onclick();
-    await new Promise((r) => setTimeout(r, 30));
+    await confirmAndStart(c);
     assert.match(c.innerHTML, /Queued/);
 
     // Switch active project
@@ -640,6 +650,51 @@ describe("PaperOrchestra UI integration", () => {
     const newBtn = c.querySelector('[data-rmd="full-draft-po"]');
     assert.ok(newBtn);
     assert.equal(newBtn.disabled, false, "Button is re-enabled for new project");
+  });
+
+  test("BUG-10: PO cost is the server quote, not the 2-token Ask MaiK label, and is confirmed first", async () => {
+    globalThis.localStorage.setItem("smd_rmd_po", "1");
+    storeState.activeProject = { id: "prj_local_1", serverId: "prj_srv_1", title: "SR", studyType: "systematic_review" };
+    const apiCalls = [];
+    globalThis.SMD_RESEARCH.api.request = (method, path, body) => {
+      apiCalls.push({ method, path, body });
+      if (method === "GET" && path.includes("/jobs/quote")) {
+        return Promise.resolve({ quoteMicroUsd: 32000, usd: 0.032, calls: 64, tier: "T2" });
+      }
+      if (method === "POST" && path.includes("/jobs")) {
+        return Promise.resolve({
+          job: { id: "job_quote_1", status: "queued", ceilings: { quoteMicroUsd: 32000, maxCalls: 64 } }
+        });
+      }
+      return Promise.resolve({ versions: [], manuscript: { title: "Test", sections: [] } });
+    };
+
+    const c = makeMockContainer();
+    globalThis.SMD_RESEARCH.screens.manuscript.render(c);
+    await new Promise((r) => setTimeout(r, 20));
+
+    const note = (c.innerHTML.match(/data-rmd-po-cost[^>]*>([^<]*)/) || [])[1] || "";
+    assert.ok(note, "PO cost note rendered");
+    assert.doesNotMatch(note, /2 MaiK tokens/, "PO block never reuses the Ask MaiK 2-token label");
+    assert.match(note, /Cost shown before the draft starts/i, "honest fallback before a quote is known");
+
+    // Tapping the button must confirm first, not create the job yet.
+    c.querySelector('[data-rmd="full-draft-po"]').onclick();
+    await new Promise((r) => setTimeout(r, 20));
+    assert.ok(c.querySelector('[data-rmd="po-start"]'), "Confirmation step shown");
+    assert.equal(apiCalls.filter((x) => x.method === "POST" && x.path.includes("/jobs")).length, 0,
+      "No job is created before the clinician confirms");
+    const quoteCall = apiCalls.find((x) => x.method === "GET" && x.path.includes("/jobs/quote"));
+    assert.ok(quoteCall, "Server quote requested while confirming");
+    assert.match(c.innerHTML, /Server quote: \$0\.03/, "Server quote shown in the confirmation");
+
+    c.querySelector('[data-rmd="po-start"]').onclick();
+    await new Promise((r) => setTimeout(r, 30));
+    const post = apiCalls.find((x) => x.method === "POST" && x.path.includes("/jobs"));
+    assert.ok(post, "Job created after confirmation");
+    assert.equal(post.path, "/v1/projects/prj_srv_1/jobs", "Job uses the server project id");
+    assert.match(c.innerHTML, /Queued/, "Job enters Queued");
+    assert.match(c.innerHTML, /Server quote: \$0\.03/, "Job ceiling quote is shown in the status area");
   });
 
   test("Task 3: loadCasePromise returns the .value record, fixing items[i].data bug", async () => {

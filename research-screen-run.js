@@ -1073,7 +1073,12 @@
 
       try {
         var res = engine.run(spec);
-        store.saveRunResult(res, res.manifest);
+        store.saveRunResult(res, res.manifest, function (err) {
+          if (!err) return;
+          var msg = String(err.message || (err.error && err.error.message) || "Could not save this analysis to your project.")
+            .replace(/[\u2014\u2013]/g, "-");
+          if (SMD.p2 && SMD.p2.flashNotice) SMD.p2.flashNotice(container, msg, "error");
+        });
         renderRunScreen(container);
       } catch (err) {
         showCalcWarning(friendlyCalcError(err, measure, verifiedStudies));

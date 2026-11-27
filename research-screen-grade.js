@@ -66,7 +66,11 @@
     selectedRunId: null,
     data: {},
     ai: null,
-    serverSugs: {}
+    serverSugs: {},
+    serverRuns: {},
+    runsFetched: {},
+    runsLoading: false,
+    runsError: null
   };
   var lastContainer = null;
   var mqlBound = false;
@@ -141,7 +145,41 @@
   function getRuns(pid) {
     var store = SMD.store;
     var state = store ? store.getState() : null;
-    return (state && state.runs && state.runs[pid]) ? state.runs[pid] : [];
+    var local = (state && state.runs && state.runs[pid]) ? state.runs[pid] : [];
+    var server = st.serverRuns[pid] || [];
+    if (!server.length) return local;
+    var seen = {}, out = [], i;
+    for (i = 0; i < local.length; i++) {
+      out.push(local[i]);
+      if (local[i] && local[i].serverId) seen[local[i].serverId] = true;
+    }
+    for (i = 0; i < server.length; i++) {
+      if (server[i] && server[i].id && !seen[server[i].id]) out.push(server[i]);
+    }
+    return out;
+  }
+
+  function canUseServer(project) {
+    return !!(project && project.serverId && !project.tutorial && !project.practice && SMD.api && typeof SMD.api.request === "function");
+  }
+
+  function loadServerRuns(container, project) {
+    if (st.runsLoading || st.runsFetched[project.id] || !canUseServer(project)) return;
+    st.runsLoading = true;
+    st.runsError = null;
+    render(container);
+    SMD.api.request("GET", "/v1/projects/" + encodeURIComponent(project.serverId) + "/runs?limit=50").then(function (res) {
+      st.serverRuns[project.id] = (res && res.runs) || [];
+      st.runsFetched[project.id] = true;
+      st.runsLoading = false;
+      st.runsError = null;
+      render(container);
+    }, function (err) {
+      st.runsFetched[project.id] = true;
+      st.runsLoading = false;
+      st.runsError = err || { message: "Could not load saved runs." };
+      render(container);
+    });
   }
 
   /* ---- grade computation ------------------------------------------------ */
@@ -862,6 +900,10 @@
       st.data = loadAll();
       st.ai = null;
       st.serverSugs = {};
+      st.serverRuns = {};
+      st.runsFetched = {};
+      st.runsLoading = false;
+      st.runsError = null;
     }
     if (!grade()) {
       container.innerHTML = '<div class="rmd-p2-screen"><div class="rmd-banner rmd-banner-error" role="alert"><strong>The GRADE module did not load.</strong><span>Update the app and reopen ResearchMD.</span></div></div>';
@@ -869,7 +911,17 @@
     }
     var runs = getRuns(project.id);
     if (runs.length === 0) {
-      container.innerHTML = '<div class="rmd-empty-state"><h3>No saved runs yet</h3><p>GRADE assesses an outcome from a saved meta-analysis run. Run one first.</p><button type="button" class="rmd-btn rmd-btn-primary" data-rmd="to-run">Go to Run</button></div>';
+      if (st.runsLoading) {
+        container.innerHTML = '<div class="rmd-empty-state"><h3>Loading saved runs</h3><p>Checking your project for analysis runs.</p></div>';
+        return;
+      }
+      if (canUseServer(project) && !st.runsFetched[project.id]) {
+        loadServerRuns(container, project);
+        return;
+      }
+      container.innerHTML = '<div class="rmd-empty-state"><h3>No saved runs yet</h3><p>GRADE assesses an outcome from a saved meta-analysis run. Run one first.</p>' +
+        (st.runsError ? '<p>' + esc(String(st.runsError.message || "Could not load runs from your project.").replace(/[\u2014\u2013]/g, "-")) + '</p>' : '') +
+        '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd="to-run">Go to Run</button></div>';
       var toR = container.querySelector('[data-rmd="to-run"]');
       if (toR) toR.onclick = function () { SMD.navigate("run", {}); };
       return;
@@ -900,7 +952,8 @@
   }
 
   SMD.screens.grade = {
-    render: render
+    render: render,
+    _getState: function () { return st; }
   };
 
 })(typeof window !== "undefined" ? window : globalThis);

@@ -32,6 +32,12 @@ const ENV_KEYS = [
   "DRAIN_TOKEN",
 ];
 
+async function envFingerprint(env) {
+  const text = Object.keys(env).sort().map((k) => k + "=" + env[k]).join("\n");
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
 export class ResearchWorkerContainer extends DurableObject {
   constructor(ctx, env) {
     super(ctx, env);
@@ -55,16 +61,25 @@ export class ResearchWorkerContainer extends DurableObject {
   async drain() {
     const container = this.ctx.container;
     if (!container) throw new Error("container binding missing");
+    const env = { RESEARCH_ENV: "production" };
+    for (const key of ENV_KEYS) {
+      const value = this.env[key];
+      if (value !== undefined && value !== null && value !== "") env[key] = String(value);
+    }
+    // The container reads its env once, at start. A secret or var changed since then (e.g. R2 keys added
+    // after the first deploy) left it running with the old set and every job stuck in "queued". Keep a
+    // hash of the env (never the values) and restart the container when it changes.
+    const fingerprint = await envFingerprint(env);
+    if (container.running && (await this.ctx.storage.get("envFingerprint")) !== fingerprint) {
+      console.log("research container env changed; restarting");
+      await container.destroy("env changed").catch(() => {});
+    }
     if (!container.running) {
-      const env = { RESEARCH_ENV: "production" };
-      for (const key of ENV_KEYS) {
-        const value = this.env[key];
-        if (value !== undefined && value !== null && value !== "") env[key] = String(value);
-      }
       // enableInternet is required when passing options: the container calls
       // the Queues API, R2 and the Pages callback.
       container.start({ env, enableInternet: true });
       await container.setInactivityTimeout(IDLE_MS);
+      await this.ctx.storage.put("envFingerprint", fingerprint);
       this.armMonitor();
     }
     const port = container.getTcpPort(PORT);
@@ -101,8 +116,11 @@ export default {
   async scheduled(event, env, ctx) {
     const stub = env.RESEARCH_WORKER.getByName("singleton");
     ctx.waitUntil(
-      stub.drain().catch((err) => {
-        console.error("research drain failed", err);
+      stub.drain().then((r) => {
+        // drain_once returns counts only ({pulled, done, failed, ...}); safe to log.
+        console.log("research drain " + r.status + " " + String(r.body || "").slice(0, 300));
+      }).catch((err) => {
+        console.error("research drain failed", String((err && err.message) || err));
       })
     );
   },

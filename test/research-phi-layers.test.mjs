@@ -272,6 +272,58 @@ describe("Finding 2: Negative clinical list and redactPHI defenses", () => {
       globalThis.window = originalWindow;
     }
   });
+
+  test("case demographics line passes the redactor instead of self-blocking (BUG-03)", () => {
+    const originalWindow = globalThis.window;
+    try {
+      globalThis.window = {
+        SMD_redactPHI: redactPHI
+      };
+
+      // Normal case: age, sex, complaint, diagnosis, treatment, outcome, no identifiers.
+      const cleanCase = {
+        age: 45,
+        sex: "Male",
+        presentingComplaint: "Acute chest pain for 12 hours.",
+        diagnosis: "Toxic myocarditis.",
+        treatment: "Supportive care and antidote.",
+        outcome: "Recovered and discharged in stable condition."
+      };
+      const res = RMDPhi.prepareCaseText(cleanCase, {});
+      assert.equal(res.blocked, false, "normal case must pass unblocked: " + JSON.stringify(res.findings));
+      assert.equal(res.findings.length, 0, "no findings for a clean case");
+      assert.ok(res.text.indexOf("Age and sex: 45-year-old male") >= 0, "demographics line is built without a Patient label");
+      assert.ok(res.text.indexOf("Patient:") < 0, "no Patient: label that the redactor treats as a name");
+
+      // The modal re-scans the assembled string; that path must stay clean too.
+      const resStr = RMDPhi.prepareCaseText(res.text, {});
+      assert.equal(resStr.blocked, false, "string form of the assembled case text stays unblocked");
+
+      // A phone number in a clinical field is still caught.
+      const phoneCase = {
+        age: 45,
+        sex: "Male",
+        presentingComplaint: "Family called 9876543210 after ingestion.",
+        diagnosis: "Toxic myocarditis."
+      };
+      const phoneRes = RMDPhi.prepareCaseText(phoneCase, {});
+      assert.equal(phoneRes.blocked, true, "phone number still blocks");
+      assert.ok(phoneRes.findings.some((f) => f.indexOf("phone") >= 0), "phone finding is reported");
+
+      // A labelled real name is still caught by the redactor layer.
+      const nameCase = {
+        age: 45,
+        sex: "Male",
+        history: "Name: Ramesh Kumar, referred from a peripheral hospital.",
+        diagnosis: "Toxic myocarditis."
+      };
+      const nameRes = RMDPhi.prepareCaseText(nameCase, {});
+      assert.equal(nameRes.blocked, true, "labelled name still blocks");
+      assert.ok(nameRes.findings.some((f) => f.indexOf("privacy filter") >= 0), "redactor finding is reported for the name");
+    } finally {
+      globalThis.window = originalWindow;
+    }
+  });
 });
 
 describe("Novelty & Server: findStudies query scrubbing", () => {
