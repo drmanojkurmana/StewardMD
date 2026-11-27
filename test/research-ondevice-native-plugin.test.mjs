@@ -113,7 +113,9 @@ describe("Item 11: iOS PdfOcrJob.swift synchronization, pending bgTask, and star
     }
   });
 
-  test("PdfOcrJob.swift passes swiftc -typecheck on iphonesimulator SDK (iOS 15 and iOS 26 targets)", () => {
+  /* Needs Xcode: CI runs on Linux, so this only runs on a Mac with the iOS SDK. */
+  const hasXcode = (() => { try { execFileSync("xcrun", ["--sdk", "iphonesimulator", "--show-sdk-path"], { stdio: "ignore" }); return true; } catch (e) { return false; } })();
+  test("PdfOcrJob.swift passes swiftc -typecheck on iphonesimulator SDK (iOS 15 and iOS 26 targets)", { skip: hasXcode ? false : "Xcode iOS SDK not available" }, () => {
     const swiftFile = absPath(swiftPath);
     const env = { ...process.env, DEVELOPER_DIR: "/Applications/Xcode.app/Contents/Developer" };
     for (const target of ["arm64-apple-ios15.0-simulator", "arm64-apple-ios26.0-simulator"]) {
