@@ -10,11 +10,14 @@ on:
       - "prep/**"
       - "tools/prep-r2-*.mjs"
   schedule:
-    - cron: "17 */6 * * *"
+    - cron: "17 3 * * *"
   workflow_dispatch: {}
-  pull_request:
-    paths:
-      - "prep/**"
+# Cost guard (Nov 2026): each run fetches every bank file through a Pages Function (one KV + one R2 read per
+# file). A flood of content PRs ran this ~400 times in 2 days, part of ~13M billable requests. R2 only changes
+# after an upload, so a PR run proved nothing: no PR trigger, daily schedule, one run at a time.
+concurrency:
+  group: prep-r2-parity
+  cancel-in-progress: true
 jobs:
   parity:
     runs-on: ubuntu-latest

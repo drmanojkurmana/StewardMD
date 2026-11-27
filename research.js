@@ -31,40 +31,16 @@
     return (G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.CapacitorHttp) || G.CapacitorHttp || null;
   }
 
-  var PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v1";
-  /* Legal review F-03 text, settled verbatim for v1. This is legal copy, so
-   * the app's no-em-dash rule does not apply to it. The em dashes are part of
-   * the approved wording and must not be "fixed". */
+  var PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v2";
+  /* Owner decision 27 Nov 2026: the override is ONE action, the doctor
+   * confirming that the flag is a false detection. This is legal copy, so the
+   * app's no-em-dash rule does not apply to it. The only em dash is in
+   * PHI_OVERRIDE_TITLE, per the approved wording, and must not be "fixed". */
   var PHI_OVERRIDE_TITLE = "Before you send \u2014 patient information check";
-  var PHI_OVERRIDE_BODY = "This text was flagged because it may contain patient identifiers (for example, a name, phone number, ID number, address or date). StewardMD blocks such text by default. You may send it for this one draft only if one of the following is true. Select which applies:";
-  var PHI_OVERRIDE_OPTIONS = [
-    {
-      value: "false_positive",
-      label: "This is a false positive \u2014 the flagged text does not identify any patient.",
-      disabledReason: "Not available when an ID number or phone number was flagged."
-    },
-    {
-      value: "anonymised",
-      label: "The text has been anonymised \u2014 no patient can be identified from it, directly or in combination with other information.",
-      disabledReason: "Not available when an ID number or phone number was flagged."
-    },
-    {
-      value: "consent",
-      label: "I have the patient's valid consent to share this text for this purpose, with institutional approval where required, and I can evidence it if asked.",
-      disabledReason: "Not available for this text."
-    }
-  ];
-  var PHI_OVERRIDE_CONFIRM_1 = "By continuing, you confirm that the statement you selected is true; that you are the Data Fiduciary for this patient data (or are acting for the Data Fiduciary) and that this sharing is lawful under the Digital Personal Data Protection Act 2023, the IT Act 2000 and your institution's rules; and that only the text needed for this draft will be sent.";
-  var PHI_OVERRIDE_CONFIRM_2 = "The text will be sent to our AI providers \u2014 Runware and Google Vertex AI (Gemini) \u2014 whose servers may be outside India. StewardMD acts only as a Data Processor on your instructions. StewardMD logs this override (your user ID, the time, the type of identifier flagged and these terms version) but never the text itself. Always check AI output before use \u2014 it may be inaccurate, incomplete or biased.";
-  var PHI_OVERRIDE_NOTE = "Note: overrides are not available for Aadhaar/ID numbers or phone numbers unless you have selected the third option (patient consent with institutional approval). If you are unsure, keep the block and remove the identifiers before drafting.";
-
-  function phiOverrideToday() {
-    /* IST calendar date: the consent is given in India. */
-    var d = new Date(Date.now() + 19800000);
-    var m = d.getUTCMonth() + 1;
-    var day = d.getUTCDate();
-    return d.getUTCFullYear() + "-" + (m < 10 ? "0" : "") + m + "-" + (day < 10 ? "0" : "") + day;
-  }
+  var PHI_OVERRIDE_BODY = "This text was flagged because it may contain patient identifiers. If you have checked it and it does not identify any patient, you can continue. Otherwise remove the identifiers first.";
+  var PHI_OVERRIDE_CONFIRM = "By continuing, you confirm that the flagged text does not identify any patient. The text will be sent to our AI providers: Runware, which passes it to an OpenAI GPT model, and Google Vertex AI (Gemini), whose servers may be outside India. StewardMD logs this override (your user ID, the time, the type of identifier flagged and these terms version) but never the text itself.";
+  var PHI_OVERRIDE_BUTTON = "False detection, ignore and go ahead";
+  var PHI_OVERRIDE_NEVER_NOTE = "Names, ID numbers and phone numbers can never be sent. Remove them before drafting.";
 
   var PHI_CATEGORY_LABELS = {
     phone: "Phone number",
@@ -187,7 +163,7 @@
     return { body: copy, blocked: state.blocked, categories: state.categories, removedCategories: state.removedCategories };
   }
 
-  function withPhiOverride(body, condition, consentEvidence) {
+  function withPhiOverride(body) {
     var next = {};
     if (body && typeof body === "object") {
       var keys = Object.keys(body);
@@ -198,21 +174,32 @@
     next.phiOverride = {
       accepted: true,
       termsVersion: PHI_OVERRIDE_TERMS_VERSION,
-      condition: condition
+      condition: "false_positive"
     };
-    if (condition === "consent" && consentEvidence) {
-      next.phiOverride.consentEvidence = {
-        consentDate: consentEvidence.consentDate,
-        reference: consentEvidence.reference
-      };
-    }
     return next;
   }
 
-  function phiConditionAllowed(allowedConditions, value) {
-    if (!Array.isArray(allowedConditions)) return true;
-    for (var i = 0; i < allowedConditions.length; i++) {
-      if (allowedConditions[i] === value) return true;
+  /* Names, ID numbers and phone numbers are never overridable. The server
+   * refuses them and the app refuses them again, so a stale server cannot
+   * offer a choice for text that must never be sent. */
+  var PHI_NEVER_CATEGORIES = {
+    patient_name: 1,
+    name: 1,
+    aadhaar: 1,
+    abha: 1,
+    ssn: 1,
+    nhs: 1,
+    mrn: 1,
+    uhid: 1,
+    id: 1,
+    phone: 1
+  };
+
+  function phiNeverOverridable(categories) {
+    var list = Array.isArray(categories) ? categories : [];
+    for (var i = 0; i < list.length; i++) {
+      var cat = String(list[i] || "").toLowerCase();
+      if (PHI_NEVER_CATEGORIES[cat]) return true;
     }
     return false;
   }
@@ -230,7 +217,9 @@
 
   var activePhiOverrideCancel = null;
 
-  function openPhiOverrideDialog(categories, allowedConditions, originalErr) {
+  /* canOverride true renders the one confirmation action; false renders the
+   * never-overridable block with no override button at all. */
+  function openPhiOverrideDialog(categories, canOverride, originalErr) {
     var host = phiOverrideHost();
     if (!host) return Promise.reject(originalErr);
 
@@ -264,64 +253,36 @@
       itemsHtml += "<li>" + esc(catList[j]) + "</li>";
     }
 
-    var optionsHtml = "";
-    for (var oi = 0; oi < PHI_OVERRIDE_OPTIONS.length; oi++) {
-      var opt = PHI_OVERRIDE_OPTIONS[oi];
-      var isAllowed = phiConditionAllowed(allowedConditions, opt.value);
-      optionsHtml +=
-        '<label class="rmd-phi-ovr-option' + (isAllowed ? "" : " rmd-phi-ovr-option-off") + '">' +
-          '<input type="radio" name="rmdPhiOverrideCondition" value="' + esc(opt.value) + '" data-rmd-phi-condition="' + esc(opt.value) + '"' + (isAllowed ? "" : " disabled") + ' />' +
-          '<span class="rmd-phi-ovr-option-text">' + opt.label + '</span>' +
-          (isAllowed ? "" : '<span class="rmd-phi-ovr-reason">' + esc(opt.disabledReason) + '</span>') +
-        '</label>';
-    }
-
     back.className = "rmd-modal-backdrop";
     back.id = "rmdPhiOverrideModal";
     back.innerHTML =
-      '<div class="rmd-modal-card rmd-phi-ovr-card" role="dialog" aria-modal="true" aria-labelledby="rmdPhiOverrideTitle" aria-describedby="rmdPhiOverrideLead" tabindex="-1">' +
+      '<div class="rmd-modal-card rmd-phi-ovr-card" role="dialog" aria-modal="true" aria-labelledby="rmdPhiOverrideTitle"' + (canOverride ? ' aria-describedby="rmdPhiOverrideLead"' : "") + ' tabindex="-1">' +
         '<div class="rmd-modal-header rmd-modal-warn">' +
           '<h3 id="rmdPhiOverrideTitle">' + PHI_OVERRIDE_TITLE + '</h3>' +
         '</div>' +
         '<div class="rmd-phi-ovr-body">' +
-          '<p class="rmd-phi-ovr-lead" id="rmdPhiOverrideLead">' + PHI_OVERRIDE_BODY + '</p>' +
           '<div class="rmd-phi-ovr-cats-wrap">' +
             '<p class="rmd-phi-ovr-cats-lead">Flagged identifier types</p>' +
             '<ul class="rmd-phi-ovr-cats">' + itemsHtml + '</ul>' +
           '</div>' +
-          '<fieldset class="rmd-phi-ovr-options">' +
-            '<legend class="rmd-phi-ovr-legend">Select which applies</legend>' +
-            optionsHtml +
-          '</fieldset>' +
-          '<p class="rmd-phi-ovr-confirm">' + PHI_OVERRIDE_CONFIRM_1 + '</p>' +
-          '<p class="rmd-phi-ovr-confirm">' + PHI_OVERRIDE_CONFIRM_2 + '</p>' +
-          '<p class="rmd-phi-ovr-note"><em>' + PHI_OVERRIDE_NOTE + '</em></p>' +
-          '<div class="rmd-phi-ovr-evidence" data-rmd-phi-evidence="1" style="display:none;">' +
-            '<label class="rmd-phi-ovr-field" for="rmdPhiConsentDate">' +
-              '<span>Date consent was given</span>' +
-              '<input type="date" id="rmdPhiConsentDate" data-rmd-phi-consent-date="1" max="' + phiOverrideToday() + '" required />' +
-            '</label>' +
-            '<label class="rmd-phi-ovr-field" for="rmdPhiConsentRef">' +
-              '<span>Consent reference (form number or where it is filed)</span>' +
-              '<input type="text" id="rmdPhiConsentRef" data-rmd-phi-consent-ref="1" maxlength="80" autocomplete="off" required />' +
-            '</label>' +
-          '</div>' +
+          (canOverride
+            ? '<p class="rmd-phi-ovr-lead" id="rmdPhiOverrideLead">' + PHI_OVERRIDE_BODY + '</p>' +
+              '<p class="rmd-phi-ovr-confirm">' + PHI_OVERRIDE_CONFIRM + '</p>'
+            : '<p class="rmd-phi-ovr-note"><em>' + PHI_OVERRIDE_NEVER_NOTE + '</em></p>') +
         '</div>' +
         '<div class="rmd-modal-footer rmd-phi-ovr-footer">' +
           '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-phi-edit="1">Edit my text</button>' +
-          '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd-phi-send="1" disabled>I take responsibility, send anyway</button>' +
+          (canOverride
+            ? '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd-phi-send="1">' + PHI_OVERRIDE_BUTTON + '</button>'
+            : "") +
         '</div>' +
       '</div>';
 
     var card = back.querySelector('[role="dialog"]');
-    var radios = back.querySelectorAll('[data-rmd-phi-condition]');
-    var dateInput = back.querySelector('[data-rmd-phi-consent-date="1"]');
-    var refInput = back.querySelector('[data-rmd-phi-consent-ref="1"]');
-    var evidenceWrap = back.querySelector('[data-rmd-phi-evidence="1"]');
     var editBtn = back.querySelector('[data-rmd-phi-edit="1"]');
     var sendBtn = back.querySelector('[data-rmd-phi-send="1"]');
 
-    if (!card || !radios || !radios.length || !dateInput || !refInput || !evidenceWrap || !editBtn || !sendBtn) {
+    if (!card || !editBtn) {
       return Promise.reject(originalErr);
     }
 
@@ -330,46 +291,9 @@
     var prevFocused = null;
     try { prevFocused = D.activeElement || null; } catch (fe) { prevFocused = null; }
 
-    function selectedCondition() {
-      for (var i = 0; i < radios.length; i++) {
-        if (radios[i].checked) {
-          return radios[i].getAttribute("data-rmd-phi-condition") || radios[i].value || "";
-        }
-      }
-      return "";
-    }
-
-    function trimmedValue(el) {
-      return String((el && el.value) || "").replace(/^\s+|\s+$/g, "");
-    }
-
-    function consentEvidenceValid() {
-      var dateVal = trimmedValue(dateInput);
-      var refVal = trimmedValue(refInput);
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(dateVal)) return false;
-      if (dateVal > phiOverrideToday()) return false;
-      if (!refVal || refVal.length > 80) return false;
-      return true;
-    }
-
-    function syncDialog() {
-      var condition = selectedCondition();
-      var showEvidence = condition === "consent";
-      evidenceWrap.style.display = showEvidence ? "" : "none";
-      sendBtn.disabled = !condition || (condition === "consent" && !consentEvidenceValid());
-    }
-
     function focusables() {
-      var list = [];
-      for (var i = 0; i < radios.length; i++) {
-        if (!radios[i].disabled) list.push(radios[i]);
-      }
-      if (selectedCondition() === "consent") {
-        list.push(dateInput);
-        list.push(refInput);
-      }
-      list.push(editBtn);
-      if (!sendBtn.disabled) list.push(sendBtn);
+      var list = [editBtn];
+      if (sendBtn) list.push(sendBtn);
       return list;
     }
 
@@ -399,37 +323,19 @@
 
       function confirm() {
         if (settled) return;
-        var condition = selectedCondition();
-        if (!condition) return;
-        if (condition === "consent" && !consentEvidenceValid()) return;
-        var evidence = null;
-        if (condition === "consent") {
-          evidence = {
-            consentDate: trimmedValue(dateInput),
-            reference: trimmedValue(refInput)
-          };
-        }
+        if (!sendBtn) return;
         settled = true;
         cleanup();
-        resolve({ condition: condition, consentEvidence: evidence });
+        resolve();
       }
 
       activePhiOverrideCancel = cancel;
 
-      for (var ri = 0; ri < radios.length; ri++) {
-        radios[ri].addEventListener("change", syncDialog);
-      }
-      dateInput.addEventListener("change", syncDialog);
-      dateInput.addEventListener("input", syncDialog);
-      refInput.addEventListener("change", syncDialog);
-      refInput.addEventListener("input", syncDialog);
       editBtn.addEventListener("click", cancel);
-      sendBtn.addEventListener("click", confirm);
+      if (sendBtn) sendBtn.addEventListener("click", confirm);
       back.addEventListener("click", function (e) {
         if (e && e.target === back) cancel();
       });
-
-      syncDialog();
 
       keyHandler = function (e) {
         if (!e) return;
@@ -465,13 +371,8 @@
         D.addEventListener("keydown", keyHandler);
       }
 
-      var firstFocus = null;
-      for (var fi = 0; fi < radios.length; fi++) {
-        if (!radios[fi].disabled) { firstFocus = radios[fi]; break; }
-      }
-      if (!firstFocus) firstFocus = editBtn;
-      if (firstFocus && typeof firstFocus.focus === "function") {
-        try { firstFocus.focus(); } catch (f1) {}
+      if (editBtn && typeof editBtn.focus === "function") {
+        try { editBtn.focus(); } catch (f1) {}
       } else if (typeof card.focus === "function") {
         try { card.focus(); } catch (f2) {}
       }
@@ -590,9 +491,10 @@
       }
     }
 
-    /* Legal review F-01 (2026-11-27): a client-side hit is a hard block. The
-     * override dialog only opens when the server itself marks a 422 overridable,
-     * which it does only while its RESEARCH_PHI_OVERRIDE switch is on. */
+    /* A client-side hit is a hard block (no dialog, nothing sent). The dialog
+     * opens only from a server 422: the one-action override when the server
+     * marks it overridable, or the block with no override button for a
+     * never-overridable hit. */
     if (clientBlockedErr) {
       return Promise.reject(clientBlockedErr);
     }
@@ -605,15 +507,20 @@
       }
       return data;
     }).catch(function (err) {
-      if (isAiDraft && err && err.status === 422 && err.code === "phi_blocked" &&
-          err.body && err.body.overridable === true) {
+      if (isAiDraft && err && err.status === 422 && err.code === "phi_blocked" && err.body) {
         var cats = err.categories || (Array.isArray(err.body.categories) ? err.body.categories : []);
-        var allowed = Array.isArray(err.body.allowedConditions) ? err.body.allowedConditions : null;
-        return openPhiOverrideDialog(cats, allowed, err).then(function (choice) {
-          /* F-05: resend the same redacted input as the first request, nothing
-           * else. withPhiOverride only adds the override object. */
-          return dispatchRequest(method, path, withPhiOverride(sendBody, choice.condition, choice.consentEvidence), options);
-        });
+        var never = phiNeverOverridable(cats);
+        var serverOverridable = err.body.overridable === true;
+        /* A never-overridable hit still shows the block with no override
+         * button; a low-risk hit opens the one-action dialog only when the
+         * server itself marks it overridable (its switch is on). */
+        if (never || serverOverridable) {
+          return openPhiOverrideDialog(cats, serverOverridable && !never, err).then(function () {
+            /* F-05: resend the same redacted input as the first request,
+             * nothing else. withPhiOverride only adds the override object. */
+            return dispatchRequest(method, path, withPhiOverride(sendBody), options);
+          });
+        }
       }
       throw err;
     });
@@ -1692,23 +1599,9 @@
       "#researchMD .rmd-phi-ovr-cats-wrap { display: flex; flex-direction: column; gap: 6px; }",
       "#researchMD .rmd-phi-ovr-cats-lead { margin: 0; font: 600 11px/1.3 var(--rmd-f); letter-spacing: 0.04em; text-transform: uppercase; color: var(--rmd-mut); }",
       "#researchMD .rmd-phi-ovr-cats { margin: 0; padding: 10px 12px 10px 28px; background: var(--rmd-warn-soft); border: 1px solid var(--rmd-warn); border-radius: 10px; display: flex; flex-direction: column; gap: 4px; font: 500 13px/1.4 var(--rmd-f); color: var(--rmd-ink); }",
-      "#researchMD .rmd-phi-ovr-options { margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }",
-      "#researchMD .rmd-phi-ovr-legend { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }",
-      "#researchMD .rmd-phi-ovr-option { display: grid; grid-template-columns: 22px 1fr; column-gap: 10px; align-items: start; min-height: 44px; padding: 10px 12px; background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 10px; cursor: pointer; box-sizing: border-box; }",
-      "#researchMD .rmd-phi-ovr-option input[type=\"radio\"] { width: 20px; height: 20px; margin: 1px 0 0; flex: 0 0 auto; accent-color: var(--rmd-acc); cursor: pointer; }",
-      "#researchMD .rmd-phi-ovr-option-text { font: 500 13px/1.45 var(--rmd-f); color: var(--rmd-ink); }",
-      "#researchMD .rmd-phi-ovr-reason { grid-column: 2; margin-top: 3px; font: 400 12px/1.4 var(--rmd-f); color: var(--rmd-mut); }",
-      "#researchMD .rmd-phi-ovr-option-off { background: transparent; cursor: not-allowed; }",
-      "#researchMD .rmd-phi-ovr-option-off .rmd-phi-ovr-option-text { color: var(--rmd-mut); }",
-      "#researchMD .rmd-phi-ovr-option-off .rmd-phi-ovr-reason { color: var(--rmd-ink); }",
-      "#researchMD .rmd-phi-ovr-option-off input[type=\"radio\"] { cursor: not-allowed; }",
-      "#researchMD .rmd-phi-ovr-option:focus-within { border-color: var(--rmd-acc); }",
       "#researchMD .rmd-phi-ovr-confirm { margin: 0; font: 400 12.5px/1.5 var(--rmd-f); color: var(--rmd-ink); }",
       "#researchMD .rmd-phi-ovr-note { margin: 0; padding: 10px 12px; background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 10px; font: 400 12.5px/1.5 var(--rmd-f); color: var(--rmd-mut); }",
-      "#researchMD .rmd-phi-ovr-evidence { display: flex; flex-direction: column; gap: 10px; padding: 12px; background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 10px; }",
-      "#researchMD .rmd-phi-ovr-field { display: flex; flex-direction: column; gap: 6px; font: 500 12.5px/1.4 var(--rmd-f); color: var(--rmd-ink); }",
-      "#researchMD .rmd-phi-ovr-field input { width: 100%; box-sizing: border-box; min-height: 44px; padding: 10px 12px; font: 400 16px/1.4 var(--rmd-f); color: var(--rmd-ink); background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 10px; }",
-      "#researchMD .rmd-phi-ovr-field input:focus-visible, #researchMD .rmd-phi-ovr-option input:focus-visible, #researchMD .rmd-phi-ovr-footer .rmd-btn:focus-visible { outline: 2px solid var(--rmd-acc); outline-offset: 2px; }",
+      "#researchMD .rmd-phi-ovr-footer .rmd-btn:focus-visible { outline: 2px solid var(--rmd-acc); outline-offset: 2px; }",
       "#researchMD .rmd-phi-ovr-footer { flex-wrap: wrap; }",
       "#researchMD .rmd-phi-ovr-footer .rmd-btn { min-height: 44px; }"
     ].join("\n");
