@@ -12,7 +12,7 @@
 .pn-pearl-foot { border-top: 1px solid #2B4378; padding-top: 10px; }
 /* The footer buttons are the shared filled pills (prep-action-row.css); no outlined variant here. */
 .pn-pearl-credit:focus-visible, .pn-pearl-sheet button:focus-visible { outline: 2px solid #6F8FD6; outline-offset: 2px; }
-.pn-pearl-sheet { position: fixed; inset: 0; background: rgba(0,0,0,.72); display: flex; align-items: flex-end; justify-content: center; z-index: 60; padding: 12px; box-sizing: border-box; }
+.pn-pearl-sheet { position: fixed; inset: 0; background: rgba(0,0,0,.72); display: flex; align-items: flex-end; justify-content: center; z-index: 1000; padding: 12px; box-sizing: border-box; } /* above the PrepNucleus overlay (885): at 60 it opened unseen behind the lesson reader */
 .pn-pearl-sheet-c { background: #111214; color: #ECEEF2; border: 1px solid #2B4378; border-radius: 12px; padding: 18px; width: 100%; max-width: 520px; max-height: 80vh; overflow-y: auto; }
 .pn-pearl-sheet-c h3 { font-size: 16px; margin: 0 0 8px; }
 .pn-pearl-cred { font-size: 14px; line-height: 1.55; margin: 0 0 6px; overflow-wrap: anywhere; }

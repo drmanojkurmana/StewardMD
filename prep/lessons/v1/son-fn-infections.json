@@ -125,8 +125,8 @@
       }
     },
     {
-      "tx": "The **Multinational Association for Supportive Cancer Care (MASCC)** risk index sorts patients into high and low risk groups by adding points. Having no hypotension earns 5 points, having no chronic obstructive pulmonary disease (a long-term lung disease) earns 4, outpatient status earns 3, and an age under 60 years earns 2. A total of 21 or higher is low risk, while a total below 21 is high risk.",
-      "say": "The Multinational Association for Supportive Cancer Care risk index, usually called MASCC, places each patient into a high or low risk group. Points are added for several features. No low blood pressure earns 5 points, and no chronic obstructive pulmonary disease earns 4. Being an outpatient earns 3, and being under 60 years old earns 2. A total of 21 or higher is low risk, while a total below 21 is high risk.",
+      "tx": "The **Multinational Association for Supportive Care in Cancer (MASCC)** risk index adds points for seven features, up to 26. Burden of illness scores 5 for no or mild symptoms, or 3 for moderate ones. No hypotension scores 5, no chronic obstructive pulmonary disease 4, a solid tumour or blood cancer without previous fungal infection 4, no dehydration needing intravenous fluids 3, outpatient status at fever onset 3, and age under 60 years 2. A total of 21 or higher is low risk; below 21 is high risk.",
+      "say": "The Multinational Association for Supportive Care in Cancer risk index, usually called MASCC, adds points for seven features, to a maximum of 26. Burden of illness earns 5 points when symptoms are absent or mild, or 3 when they are moderate. No low blood pressure earns 5. No chronic obstructive pulmonary disease earns 4. A solid tumour, or a blood cancer with no previous fungal infection, earns 4. No dehydration needing intravenous fluids earns 3. Being an outpatient when the fever starts earns 3, and being under 60 years old earns 2. A total of 21 or higher is low risk, while a total below 21 is high risk.",
       "vis": {
         "kind": "table",
         "cols": [
@@ -135,7 +135,11 @@
         ],
         "rows": [
           [
-            "No hypotension",
+            "Burden of illness",
+            "5 points if no or mild symptoms, 3 if moderate"
+          ],
+          [
+            "No hypotension (systolic above 90 mmHg)",
             "5 points"
           ],
           [
@@ -143,7 +147,15 @@
             "4 points"
           ],
           [
-            "Outpatient status",
+            "Solid tumour, or blood cancer with no previous fungal infection",
+            "4 points"
+          ],
+          [
+            "No dehydration needing intravenous fluids",
+            "3 points"
+          ],
+          [
+            "Outpatient status at fever onset",
             "3 points"
           ],
           [
@@ -151,12 +163,8 @@
             "2 points"
           ],
           [
-            "Total of 21 or higher",
-            "Low risk"
-          ],
-          [
-            "Total below 21",
-            "High risk"
+            "Total (maximum 26)",
+            "21 or higher is low risk; below 21 is high risk"
           ]
         ]
       }

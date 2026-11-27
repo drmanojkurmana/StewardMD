@@ -7,6 +7,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { createRequire } from "node:module";
+// The same lesson corrections the app applies at runtime (prep-pyqss.js lesFor), so a rebuilt index carries them too.
+const { lesFor } = createRequire(import.meta.url)("../prep-pyqss.js");
 
 export const SUBJECT = "ss-medical-oncology";
 // Session text in the CSV -> neutral paper (year + set). Matched by the session's year and part words only.
@@ -133,7 +136,7 @@ export function attachLessons(analysis, items, lessons) {
   const find = lessonIndex(lessons), byId = Object.fromEntries(items.map((i) => [i.id, i]));
   const textOf = (t) => [t.name, t.name, t.kp].concat((t.ids || []).map((id) => byId[id] && [byId[id].q, byId[id].exp].join(" "))).join(" ");
   const seen = {};
-  analysis.domains.forEach((d) => d.topics.forEach((t) => { const b = find(textOf(t)); if (b) { t.les = b.id; seen[d.name + "|" + t.name] = b.id; } }));
+  analysis.domains.forEach((d) => d.topics.forEach((t) => { const b = find(textOf(t)); if (b) { t.les = lesFor({ name: t.name, les: b.id }); seen[d.name + "|" + t.name] = t.les; } }));
   analysis.mustDo.forEach((t) => { const id = seen[t.dom + "|" + t.name]; if (id) t.les = id; });
   return analysis;
 }
