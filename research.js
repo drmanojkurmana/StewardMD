@@ -31,32 +31,32 @@
     return (G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.CapacitorHttp) || G.CapacitorHttp || null;
   }
 
-  var PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v1";
-  /* Legal review F-03 text, settled verbatim for v1. This is legal copy, so
-   * the app's no-em-dash rule does not apply to it. The em dashes are part of
-   * the approved wording and must not be "fixed". */
+  var PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v2";
+  /* Counsel answers 27 Nov 2026, v2. This is legal copy, so the app's
+   * no-em-dash rule does not apply to it. The only em dash is in
+   * PHI_OVERRIDE_TITLE, per the approved wording, and must not be "fixed". */
   var PHI_OVERRIDE_TITLE = "Before you send \u2014 patient information check";
   var PHI_OVERRIDE_BODY = "This text was flagged because it may contain patient identifiers (for example, a name, phone number, ID number, address or date). StewardMD blocks such text by default. You may send it for this one draft only if one of the following is true. Select which applies:";
   var PHI_OVERRIDE_OPTIONS = [
     {
       value: "false_positive",
-      label: "This is a false positive \u2014 the flagged text does not identify any patient.",
+      label: "This is a false positive: the flagged text does not identify any patient.",
       disabledReason: "Not available when an ID number or phone number was flagged."
     },
     {
       value: "anonymised",
-      label: "The text has been anonymised \u2014 no patient can be identified from it, directly or in combination with other information.",
+      label: "The text has been anonymised: I have removed or masked all identifiers, and no patient can be identified from it, directly or in combination with other information.",
       disabledReason: "Not available when an ID number or phone number was flagged."
     },
     {
       value: "consent",
-      label: "I have the patient's valid consent to share this text for this purpose, with institutional approval where required, and I can evidence it if asked.",
+      label: "I have the patient's valid written consent, free, specific, informed and unambiguous and given by clear affirmative action, to share this text for this purpose, with institutional approval where required, and I can evidence it if asked.",
       disabledReason: "Not available for this text."
     }
   ];
-  var PHI_OVERRIDE_CONFIRM_1 = "By continuing, you confirm that the statement you selected is true; that you are the Data Fiduciary for this patient data (or are acting for the Data Fiduciary) and that this sharing is lawful under the Digital Personal Data Protection Act 2023, the IT Act 2000 and your institution's rules; and that only the text needed for this draft will be sent.";
-  var PHI_OVERRIDE_CONFIRM_2 = "The text will be sent to our AI providers \u2014 Runware and Google Vertex AI (Gemini) \u2014 whose servers may be outside India. StewardMD acts only as a Data Processor on your instructions. StewardMD logs this override (your user ID, the time, the type of identifier flagged and these terms version) but never the text itself. Always check AI output before use \u2014 it may be inaccurate, incomplete or biased.";
-  var PHI_OVERRIDE_NOTE = "Note: overrides are not available for Aadhaar/ID numbers or phone numbers unless you have selected the third option (patient consent with institutional approval). If you are unsure, keep the block and remove the identifiers before drafting.";
+  var PHI_OVERRIDE_CONFIRM_1 = "By continuing, you confirm that the statement you selected is true; that you are the Data Fiduciary for this patient data, or act for the Data Fiduciary, to the extent that you determine the purpose and means of processing it, and that this sharing is lawful under the Digital Personal Data Protection Act 2023, the IT Act 2000 and your institution's rules; that StewardMD acts only as a Data Processor on your instructions for this data; and that only the text needed for this draft will be sent.";
+  var PHI_OVERRIDE_CONFIRM_2 = "The text will be sent to our AI providers: Runware, which passes it to an OpenAI GPT model, and Google Vertex AI (Gemini), whose servers may be outside India. StewardMD logs this override (your user ID, the time, the type of identifier flagged, the statement you selected, the consent date and reference, and these terms version) but never the text itself. For the consent option, keep the patient's written consent on file. Always check AI output before use: it may be inaccurate, incomplete or biased.";
+  var PHI_OVERRIDE_NOTE = "Note: Aadhaar numbers can never be sent. Other ID numbers and phone numbers can be sent only under the consent option. If you are unsure, keep the block and remove the identifiers before drafting.";
 
   function phiOverrideToday() {
     /* IST calendar date: the consent is given in India. */
@@ -213,6 +213,18 @@
     if (!Array.isArray(allowedConditions)) return true;
     for (var i = 0; i < allowedConditions.length; i++) {
       if (allowedConditions[i] === value) return true;
+    }
+    return false;
+  }
+
+  /* Aadhaar and a patient name are never overridable. The server refuses them
+   * and the app refuses them again, so a stale server cannot offer a choice
+   * for text that must never be sent. */
+  function phiNeverOverridable(categories) {
+    var list = Array.isArray(categories) ? categories : [];
+    for (var i = 0; i < list.length; i++) {
+      var cat = String(list[i] || "").toLowerCase();
+      if (cat === "aadhaar" || cat === "patient_name" || cat === "name") return true;
     }
     return false;
   }
@@ -609,6 +621,7 @@
           err.body && err.body.overridable === true) {
         var cats = err.categories || (Array.isArray(err.body.categories) ? err.body.categories : []);
         var allowed = Array.isArray(err.body.allowedConditions) ? err.body.allowedConditions : null;
+        if (phiNeverOverridable(cats)) throw err;
         return openPhiOverrideDialog(cats, allowed, err).then(function (choice) {
           /* F-05: resend the same redacted input as the first request, nothing
            * else. withPhiOverride only adds the override object. */

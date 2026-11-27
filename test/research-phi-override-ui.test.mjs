@@ -22,15 +22,21 @@ const REDACT_FN_BODY = REASONING_SRC.slice(
   REASONING_SRC.indexOf("  window.SMD_redactPHI = redactPHI;")
 );
 
-/* Legal review F-03 verbatim copy. */
+/* Counsel answers 27 Nov 2026, v2. Verbatim legal copy shown in the dialog. */
 const TITLE = "Before you send \u2014 patient information check";
 const BODY = "This text was flagged because it may contain patient identifiers (for example, a name, phone number, ID number, address or date). StewardMD blocks such text by default. You may send it for this one draft only if one of the following is true. Select which applies:";
-const OPT_FALSE = "This is a false positive \u2014 the flagged text does not identify any patient.";
-const OPT_ANON = "The text has been anonymised \u2014 no patient can be identified from it, directly or in combination with other information.";
-const OPT_CONSENT = "I have the patient's valid consent to share this text for this purpose, with institutional approval where required, and I can evidence it if asked.";
-const CONFIRM_1 = "By continuing, you confirm that the statement you selected is true; that you are the Data Fiduciary for this patient data (or are acting for the Data Fiduciary) and that this sharing is lawful under the Digital Personal Data Protection Act 2023, the IT Act 2000 and your institution's rules; and that only the text needed for this draft will be sent.";
-const CONFIRM_2 = "The text will be sent to our AI providers \u2014 Runware and Google Vertex AI (Gemini) \u2014 whose servers may be outside India. StewardMD acts only as a Data Processor on your instructions. StewardMD logs this override (your user ID, the time, the type of identifier flagged and these terms version) but never the text itself. Always check AI output before use \u2014 it may be inaccurate, incomplete or biased.";
-const NOTE = "Note: overrides are not available for Aadhaar/ID numbers or phone numbers unless you have selected the third option (patient consent with institutional approval). If you are unsure, keep the block and remove the identifiers before drafting.";
+const OPT_FALSE = "This is a false positive: the flagged text does not identify any patient.";
+const OPT_ANON = "The text has been anonymised: I have removed or masked all identifiers, and no patient can be identified from it, directly or in combination with other information.";
+const OPT_CONSENT = "I have the patient's valid written consent, free, specific, informed and unambiguous and given by clear affirmative action, to share this text for this purpose, with institutional approval where required, and I can evidence it if asked.";
+const CONFIRM_1 = "By continuing, you confirm that the statement you selected is true; that you are the Data Fiduciary for this patient data, or act for the Data Fiduciary, to the extent that you determine the purpose and means of processing it, and that this sharing is lawful under the Digital Personal Data Protection Act 2023, the IT Act 2000 and your institution's rules; that StewardMD acts only as a Data Processor on your instructions for this data; and that only the text needed for this draft will be sent.";
+const CONFIRM_2 = "The text will be sent to our AI providers: Runware, which passes it to an OpenAI GPT model, and Google Vertex AI (Gemini), whose servers may be outside India. StewardMD logs this override (your user ID, the time, the type of identifier flagged, the statement you selected, the consent date and reference, and these terms version) but never the text itself. For the consent option, keep the patient's written consent on file. Always check AI output before use: it may be inaccurate, incomplete or biased.";
+const NOTE = "Note: Aadhaar numbers can never be sent. Other ID numbers and phone numbers can be sent only under the consent option. If you are unsure, keep the block and remove the identifiers before drafting.";
+
+/* docs/research/PHI_OVERRIDE_TERMS.md still carries the settled v1 wording;
+ * that file is outside this change, so the docs assertions below keep v1. */
+const V1_OPT_CONSENT = "I have the patient's valid consent to share this text for this purpose, with institutional approval where required, and I can evidence it if asked.";
+const V1_CONFIRM_2 = "The text will be sent to our AI providers \u2014 Runware and Google Vertex AI (Gemini) \u2014 whose servers may be outside India. StewardMD acts only as a Data Processor on your instructions. StewardMD logs this override (your user ID, the time, the type of identifier flagged and these terms version) but never the text itself. Always check AI output before use \u2014 it may be inaccurate, incomplete or biased.";
+const V1_NOTE = "Note: overrides are not available for Aadhaar/ID numbers or phone numbers unless you have selected the third option (patient consent with institutional approval). If you are unsure, keep the block and remove the identifiers before drafting.";
 
 function istToday() {
   return new Date(Date.now() + 19800000).toISOString().slice(0, 10);
@@ -364,7 +370,7 @@ function blocked422(categories, overridable, allowedConditions) {
   return { ok: false, status: 422, text: async () => JSON.stringify(body) };
 }
 
-describe("ResearchMD /ai-draft PHI override dialog v1", () => {
+describe("ResearchMD /ai-draft PHI override dialog v2", () => {
   test("legal review F-01: a client-side hit is a hard block (no dialog, no fetch, categories kept)", async () => {
     const sb = createUiSandbox();
     const secretPhone = "9876543210";
@@ -381,7 +387,7 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     assert.equal(JSON.stringify(rejected.categories).indexOf(secretPhone), -1, "flagged text never in the error");
   });
 
-  test("low-risk 422 renders the verbatim v1 text and resends with the chosen condition", async () => {
+  test("low-risk 422 renders the verbatim v2 text and resends with the chosen condition", async () => {
     const sb = createUiSandbox({
       fetchImpl: async (url, init, callNo) => {
         if (callNo === 1) return blocked422(["address"], true, ["false_positive", "anonymised", "consent"]);
@@ -429,7 +435,7 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     const secondBody = JSON.parse(sb.fetchCalls[1].init.body);
     assert.deepEqual(secondBody.phiOverride, {
       accepted: true,
-      termsVersion: "rmd-phi-override-v1",
+      termsVersion: "rmd-phi-override-v2",
       condition: "false_positive"
     });
     assert.equal(secondBody.phiOverride.consentEvidence, undefined);
@@ -497,7 +503,7 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     const secondBody = JSON.parse(sb.fetchCalls[1].init.body);
     assert.deepEqual(secondBody.phiOverride, {
       accepted: true,
-      termsVersion: "rmd-phi-override-v1",
+      termsVersion: "rmd-phi-override-v2",
       condition: "consent",
       consentEvidence: { consentDate: istToday(), reference: "IEC-2026-014" }
     });
@@ -594,6 +600,27 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     }
   });
 
+  test("an Aadhaar hit is never offered an override, even if a stale server says overridable", async () => {
+    const sb = createUiSandbox({
+      fetchImpl: async () => blocked422(["aadhaar"], true, ["false_positive", "anonymised", "consent"])
+    });
+
+    await assert.rejects(
+      sb.win.SMD_RESEARCH.api.request("POST", "/v1/projects/p1/ai-draft", {
+        task: "case_report_draft",
+        input: { caseText: "Clean text after client redact" }
+      }),
+      (err) => {
+        assert.equal(err.code, "phi_blocked");
+        assert.equal(err.status, 422);
+        assert.deepEqual(Array.from(err.categories), ["aadhaar"]);
+        return true;
+      }
+    );
+    assert.equal(sb.fetchCalls.length, 1, "no resend without a choice");
+    assert.equal(sb.dom.root.querySelector("#rmdPhiOverrideModal"), null, "no override dialog for an Aadhaar hit");
+  });
+
   test("non /ai-draft paths never show override dialog even on 422 phi_blocked overridable:true", async () => {
     const paths = [
       ["POST", "/v1/projects/p1/jobs", { kind: "manuscript_draft" }],
@@ -620,7 +647,7 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     }
   });
 
-  test("CapacitorHttp 422 overridable opens dialog and sends the v1 override on confirm", async () => {
+  test("CapacitorHttp 422 overridable opens dialog and sends the v2 override on confirm", async () => {
     const sb = createUiSandbox({
       withCapacitor: true,
       capImpl: async (reqOpts, callNo) => {
@@ -656,7 +683,7 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     assert.equal(sb.capCalls.length, 2);
     assert.deepEqual(
       JSON.parse(JSON.stringify(sb.capCalls[1].data.phiOverride)),
-      { accepted: true, termsVersion: "rmd-phi-override-v1", condition: "anonymised" }
+      { accepted: true, termsVersion: "rmd-phi-override-v2", condition: "anonymised" }
     );
   });
 
@@ -671,9 +698,9 @@ describe("ResearchMD /ai-draft PHI override dialog v1", () => {
     assert.match(terms, /DPDP Act/);
     assert.match(terms, /ai_phi_override/);
     assert.ok(terms.includes(BODY), "terms reproduces the verbatim body");
-    assert.ok(terms.includes(OPT_CONSENT), "terms reproduces the verbatim consent option");
-    assert.ok(terms.includes(CONFIRM_2), "terms reproduces the verbatim provider paragraph");
-    assert.ok(terms.includes(NOTE), "terms reproduces the verbatim note");
+    assert.ok(terms.includes(V1_OPT_CONSENT), "terms reproduces the verbatim consent option");
+    assert.ok(terms.includes(V1_CONFIRM_2), "terms reproduces the verbatim provider paragraph");
+    assert.ok(terms.includes(V1_NOTE), "terms reproduces the verbatim note");
     assert.ok(terms.includes("\u2014"), "verbatim legal text keeps its em dashes");
     assert.equal(terms.indexOf("\u2013"), -1);
     assert.match(terms, /at least one year/);

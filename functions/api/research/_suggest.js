@@ -27,11 +27,12 @@ import { TEMPLATES, templateById, extractionOf, rowFor } from "./_extraction.js"
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const VOTE_ROLES = ["owner", "editor", "analyst", "reviewer"];
 const DOC_CHAR_BUDGET = 28000; /* keeps the assembled T1 prompt under 8000 tokens */
-export const PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v1";
+export const PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v2";
 export const PHI_OVERRIDE_CONDITIONS = ["false_positive", "anonymised", "consent"];
-/* Legal review F-02: ID numbers and phone numbers need patient consent with
- * evidence. A patient name can never be overridden. */
-export const PHI_HIGH_RISK_CATEGORIES = ["aadhaar", "abha", "ssn", "nhs", "mrn", "phone"];
+/* Legal review 27 Nov 2026 (v2): ID numbers and phone numbers need patient
+ * consent with evidence. A patient name and an Aadhaar number can never be
+ * overridden, whatever the chosen condition. */
+export const PHI_HIGH_RISK_CATEGORIES = ["abha", "ssn", "nhs", "mrn", "phone"];
 const CONSENT_DATE_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
 const CONSENT_REFERENCE_MAX = 80;
 const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
@@ -72,9 +73,12 @@ export function parsePhiOverrideRequest(body) {
 export function overridePolicy(hits, enabled) {
   const categories = phiCategories(hits);
   const hasPatientName = categories.indexOf("patient_name") >= 0;
+  /* An Aadhaar number can never be sent, so it has no allowed condition,
+   * exactly like a patient name. */
+  const hasAadhaar = categories.indexOf("aadhaar") >= 0;
   const highRisk = categories.some((c) => PHI_HIGH_RISK_CATEGORIES.indexOf(c) >= 0);
-  if (enabled !== true || hasPatientName) {
-    return { overridable: false, allowedConditions: [], categories, highRisk, hasPatientName };
+  if (enabled !== true || hasPatientName || hasAadhaar) {
+    return { overridable: false, allowedConditions: [], categories, highRisk, hasPatientName, hasAadhaar };
   }
   return {
     overridable: true,
@@ -82,6 +86,7 @@ export function overridePolicy(hits, enabled) {
     categories,
     highRisk,
     hasPatientName,
+    hasAadhaar,
   };
 }
 /* Returns the override decision plus the exact audit metadata. Never includes
@@ -157,9 +162,13 @@ export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, 
           categories: decision.categories,
           termsVersion: PHI_OVERRIDE_TERMS_VERSION,
           condition: decision.condition,
+          consentDate: decision.consentDate || "",
           consentEvidenced: decision.consentEvidenced,
+          /* The reference itself is never logged; the audit records only
+           * whether one was supplied. */
+          consentReferenceGiven: decision.consentEvidenced === true,
+          channel: "app_override_dialog",
         };
-        if (decision.consentEvidenced) meta.consentDate = decision.consentDate;
         await audit(db, projectId, uid, "ai_phi_override", refId, meta);
       } else {
         await audit(db, projectId, uid, "ai_phi_blocked", refId, { categories, purpose });
