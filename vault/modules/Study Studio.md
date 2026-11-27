@@ -15,6 +15,17 @@ flag `smd_study`, IndexedDB `study`) are unchanged on purpose. See Decisions 202
 - Editor chrome: white (light) / navy (dark) top bar and tool row, page on the paper background, pager pill
   bottom-left. Document tabs show only with two or more open documents.
 
+## Finger and phone (2026-11-27, owner's iPhone report)
+- **Finger writing left a dot**: study-ink.js pointermove returned for every touch move once a stroke existed (meant as
+  palm rejection while the Pencil writes). Now only a touch during a *Pencil* stroke (`cur._touch` false) or
+  `V._isPenDown` is dropped, and only the pointer that started a stroke (`cur._pid`) adds to or ends it.
+  Test: `test/run-notebook-ui.mjs` (CDP touch events; fails on the old code with 1 point).
+- **Editor slid up under the status bar** (iPhone only, not reproduced in Chromium): the WebView scrolled `.st-body`
+  or the window. `pinEditor`/`repin` (study.js) put any such scroll straight back (window only when no text field has
+  the keyboard); the top bar, doc tabs and tool row are `touch-action: pan-x`. Not yet confirmed on the device.
+- `.st-ink-seg.on` (laser Keep, text presets) is `--pn-sel-bg` / `--pn-sel-ink`; the first skin pass left it white on
+  light grey.
+
 ## Navigation rules (2026-11-27)
 - The editor is pushed (`h.push(renderViewer)`); `st-p3-back` calls `host.back()` (never `STUDY.lib()`).
 - `STUDY.back()` order: insert sheets and selection, old sheets, editor sheets and popovers, lasso selection, zoom
