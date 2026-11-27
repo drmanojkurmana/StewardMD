@@ -31,6 +31,9 @@ done
 [ -f hospital-registry.js ] && cp hospital-registry.js "$WWW/"
 [ -f research-ondevice-checkpoint.js ] && cp research-ondevice-checkpoint.js "$WWW/"
 [ -f research-ondevice-pdf.js ] && cp research-ondevice-pdf.js "$WWW/"
+[ -f research-po-prompts.js ] && cp research-po-prompts.js "$WWW/"
+[ -f research-po-gates.js ] && cp research-po-gates.js "$WWW/"
+[ -f research-ondevice-draft.js ] && cp research-ondevice-draft.js "$WWW/"
 [ -f research-stats-worker.js ] && cp research-stats-worker.js "$WWW/"
 [ -f research-ondevice-stats.js ] && cp research-ondevice-stats.js "$WWW/"
 

@@ -34,7 +34,8 @@ import { dedupRecords, normaliseDoi } from "./_dedup.js";
  * (_credits.js), PHI gate (_phi.js) and the central AI gateway (_gateway.js,
  * reusing callGemini from ../ai/[[path]].js). The pilot routes below are
  * untouched; Phase 3 jobs live in research_job_runs (0003 header decision). */
-import { uploadPdf, createJob, getJob, cancelJob, quoteManuscriptJob } from "./_jobs.js";
+import { uploadPdf, createJob, getJob, cancelJob, quoteManuscriptJob,
+  refreshJobToken, submitDeviceResult, failDeviceJob } from "./_jobs.js";
 import { jobCallback } from "./_callback.js";
 import { llmRoute, literatureSearchRoute, trialsStatusRoute, trialsSearchRoute, trialsLookupRoute } from "./_gateway.js";
 import { adminInstitutionRoute, creditsView } from "./_credits.js";
@@ -2009,6 +2010,19 @@ export async function onRequest({ request, env, params }) {
   const p3Cancel = path.match(/^\/v1\/jobs\/([^/]+)\/cancel$/);
   if (p3Cancel && request.method === "POST")
     return cancelJob(p3Ctx, p3Cancel[1]);
+  const p3Token = path.match(/^\/v1\/jobs\/([^/]+)\/token$/);
+  if (p3Token && request.method === "POST")
+    return refreshJobToken(p3Ctx, p3Token[1]);
+  const p3DevResult = path.match(/^\/v1\/jobs\/([^/]+)\/device-result$/);
+  if (p3DevResult && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid device result payload", requestId); }
+    return submitDeviceResult(p3Ctx, p3DevResult[1], body);
+  }
+  const p3DevFail = path.match(/^\/v1\/jobs\/([^/]+)\/device-fail$/);
+  if (p3DevFail && request.method === "POST") {
+    let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid device fail payload", requestId); }
+    return failDeviceJob(p3Ctx, p3DevFail[1], body);
+  }
   if (path === "/v1/credits" && request.method === "GET") return creditsView(p3Ctx);
 
   /* ---- Phase 3.4/3.5/3.6/3.8 + Phase 4.3 routes (Firebase auth above; each

@@ -1023,3 +1023,19 @@ CREATE TABLE IF NOT EXISTS research_paper_cards (
   card_json TEXT NOT NULL,
   created_ts INTEGER NOT NULL
 );
+
+-- On-device drafting step cache (docs/research/contracts/phase-5/0008_research_v8.sql).
+-- Keyed by (job_id, step_id); hit returns cached reply and charges nothing.
+CREATE TABLE IF NOT EXISTS research_job_steps (
+  job_id TEXT NOT NULL REFERENCES research_job_runs(id) ON DELETE CASCADE,
+  step_id TEXT NOT NULL,
+  project_id TEXT NOT NULL,
+  text TEXT NOT NULL,
+  model TEXT NOT NULL DEFAULT '',
+  tokens_in INTEGER NOT NULL DEFAULT 0 CHECK(tokens_in >= 0),
+  tokens_out INTEGER NOT NULL DEFAULT 0 CHECK(tokens_out >= 0),
+  created_ts INTEGER NOT NULL,
+  PRIMARY KEY (job_id, step_id)
+);
+CREATE INDEX IF NOT EXISTS idx_research_job_steps_project
+  ON research_job_steps(project_id, job_id);

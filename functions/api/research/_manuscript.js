@@ -78,7 +78,7 @@ function formatCi(lo, hi) {
 
 /* Stored numbers only: draft token table first, then each saved run's
  * result_json. No derived estimates. */
-async function tokenTable(db, projectId, stored) {
+export async function tokenTable(db, projectId, stored) {
   const table = {};
   const src = stored && typeof stored === "object" && !Array.isArray(stored) ? stored : {};
   for (const key of Object.keys(src)) {
