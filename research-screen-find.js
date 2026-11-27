@@ -49,6 +49,7 @@
     outcome: "",
     query: "",
     results: [],
+    retrievedAt: 0,
     selected: {},
     expanded: {},
     searching: false,
@@ -246,6 +247,11 @@
       h.push('    <button type="button" class="rmd-find-link" data-find="select-all">' + (selCount === state.results.length ? 'Clear all' : 'Select all') + '</button></div>');
       for (var i = 0; i < state.results.length; i++) {
         h.push(renderResult(state.results[i]));
+      }
+      /* F-20: credit lines for the sources present in these results, plus the
+       * retrieval date the search completed. */
+      if (SMD.sources && SMD.sources.creditHtml) {
+        h.push(SMD.sources.creditHtml(state.results, state.retrievedAt, { attr: 'data-find="sources-credit"' }));
       }
     }
     h.push('</div>');
@@ -512,6 +518,7 @@
     SMD.api.request("POST", "/v1/projects/" + state.pid + "/find-studies", { q: q, limit: 20 })
       .then(function (data) {
         state.results = (data && data.results) || [];
+        state.retrievedAt = Date.now();
         state.selected = {};
         state.searched = true;
         state.searching = false;
@@ -701,6 +708,7 @@
     state.outcome = "";
     state.query = "";
     state.results = [];
+    state.retrievedAt = 0;
     state.selected = {};
     state.expanded = {};
     state.searching = false;

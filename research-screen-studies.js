@@ -85,6 +85,20 @@
     return normDoi(study && study.locator && study.locator.doi);
   }
 
+  /* F-20: which literature databases a study's record came through, read from
+   * the citation markers the find and auto-add flows store (citationOf writes
+   * "PMID <n>. DOI <10...>", the topic add writes "PMID: <n>" / "DOI: <10...>").
+   * A PMID marks a PubMed record; a DOI marks Crossref-registered metadata read
+   * through Europe PMC. Manually typed citations without either get no credit
+   * line because no database record is shown. */
+  function studySourceIds(study) {
+    var cit = String((study && study.locator && study.locator.citation) || "");
+    var ids = [];
+    if (/\bPMID:?\s*\d+/i.test(cit)) ids.push("pubmed");
+    if (studyDoi(study) || /\bDOI:?\s*10\./i.test(cit)) ids.push("europe_pmc", "crossref");
+    return ids;
+  }
+
   /* Adds retraction badges to the study rows and detail pane. Runs only when
    * smd_research_retraction is "1"; the server answers unavailable before any
    * lookup, in which case nothing is rendered. */
@@ -408,6 +422,10 @@
       h.push('        <div class="rmd-quote-tag">Exact Source Quote</div>');
       h.push('        <blockquote>&ldquo;' + esc(quote) + '&rdquo;</blockquote>');
       h.push('      </div>');
+    }
+    var creditIds = studySourceIds(s);
+    if (creditIds.length && SMD.sources && SMD.sources.creditHtml) {
+      h.push(SMD.sources.creditHtml(creditIds, null, { attr: 'data-rmd="study-sources-credit"' }));
     }
     h.push('    </div>');
     h.push('  </div>');

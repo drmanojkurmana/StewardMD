@@ -2104,8 +2104,8 @@
     }
   }
 
-  var ADVANCED_SCREENS = { ipd: 1, institution: 1, credits: 1, templates: 1, journals: 1 };
-  var ADVANCED_TABS = ["ipd", "credits", "institution", "templates", "journals"];
+  var ADVANCED_SCREENS = { ipd: 1, institution: 1, credits: 1, templates: 1, journals: 1, sources: 1 };
+  var ADVANCED_TABS = ["ipd", "credits", "institution", "templates", "journals", "sources"];
   var SERVER_SCREENS = {
     protocol: 1, search: 1, screening: 1, conflicts: 1, prisma: 1, pdf: 1,
     extract: 1, rob: 1, data: 1, grade: 1, manuscript: 1, checklist: 1, ipd: 1, ready: 1,
@@ -2121,7 +2121,7 @@
     rob: "Risk of Bias", data: "Data", run: "Run", grade: "GRADE",
     manuscript: "Manuscript", checklist: "Checklist", ready: "Submit",
     ipd: "IPD", credits: "Credits", institution: "Institution",
-    templates: "Templates", journals: "Journals",
+    templates: "Templates", journals: "Journals", sources: "Data sources",
     thesis: "Thesis", "thesis-type": "Paper type", "thesis-journal": "Journal",
     "thesis-draft": "Draft", "thesis-tables": "Tables", "thesis-refs": "References",
     masterchart: "Master chart",
@@ -2330,6 +2330,13 @@
     journals: {
       name: "Find a journal",
       do: "Look for journals that publish your kind of paper.",
+      eg: "",
+      gloss: "",
+      action: { label: "Back to my project", fallback: "studies" }
+    },
+    sources: {
+      name: "Data sources and licences",
+      do: "See which public databases ResearchMD searches, what is sent to each one, their licence terms, and which companies process your data.",
       eg: "",
       gloss: "",
       action: { label: "Back to my project", fallback: "studies" }
