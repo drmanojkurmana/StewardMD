@@ -75,3 +75,168 @@ def test_unresolved_reference_marked():
                  "text": "Background \\cite{ghost}."}]
     model = writer.build_manuscript(title="T", sections=sections, token_table={})
     assert model["references"][0]["resolved"] is False
+
+
+def test_live_like_layout_and_latex_conversion():
+    manifest = make_manifest()
+    table = build_token_table(manifest["runs"])
+    tex = (
+        "\\section*{Abstract}\n"
+        "\\noindent\\textbf{Background and objective.} To assess intervention X "
+        "on outcome Y (OR {{run:r1.estimate}}, 95\\% CI {{run:r1.ciLower}} to "
+        "{{run:r1.ciUpper}}; p {{run:r1.p}}).\n\n"
+        "\\section{Introduction}\n"
+        "This \\emph{systematic review} and \\textit{meta-analysis} evaluates X "
+        "\\cite{ref1}. Study details appear in Table~\\ref{tab:study-data}.\n\n"
+        "\\section{Methods}\n"
+        "\\subsection{Protocol and eligibility}\n"
+        "\\label{sec:protocol}\n"
+        "\\begin{itemize}\n"
+        "  \\item Adults aged 18 or older\n"
+        "  \\item Randomised trials only\n"
+        "\\end{itemize}\n"
+        "Steps followed:\n"
+        "\\begin{enumerate}\n"
+        "  \\item Screen titles and abstracts\n"
+        "  \\item Extract verified outcomes\n"
+        "\\end{enumerate}\n"
+        "\\subsection{Data and outcome definition}\n"
+        "Extracted from \\texttt{run\\_7f09c578d6214e4ba6928f9b40e8ffdd} "
+        "(95\\% CI, Smith \\& Doe, item \\#1, cost \\$50).\n"
+        "\\subsection{Statistical analysis}\n"
+        "Thresholds were $p \\le 0.05$, $p \\leq 0.01$, $n \\ge 10$, $k \\geq 2$, "
+        "difference $1.2 \\pm 0.3$, scale $2 \\times 3$, and $p \\approx 0.02$.\n\n"
+        "\\section{Results}\n"
+        "\\subsection{Included evidence}\n"
+        "Characteristics are in Table~\\ref{tab:study-data}, outcomes in "
+        "Table~\\ref{tab:outcomes}, and plots in Figure~\\ref{fig:forest}.\n"
+        "\\begin{table}[t]\n"
+        "\\centering\n"
+        "\\caption{Summary of included studies.}\n"
+        "\\label{tab:study-data}\n"
+        "\\begin{tabular}{@{}lcc@{}}\n"
+        "\\toprule\n"
+        "Study & Year & Events \\\\\n"
+        "\\midrule\n"
+        "Trial One & 2019 & 12 \\\\\n"
+        "\\hline\n"
+        "\\bottomrule\n"
+        "\\end{tabular}\n"
+        "\\end{table}\n"
+        "\\subsection{Pooled analysis and heterogeneity}\n"
+        "\\textbf{Pooled effect:} OR {{run:r1.estimate}} "
+        "({{run:r1.ciLower}} to {{run:r1.ciUpper}}).\n"
+        "\\subsection{Reporting}\n"
+        "Checklist at \\url{https://example.com/~user/a_b} per \\mbox{PRISMA 2020}.\n\n"
+        "\\section{Discussion}\n"
+        "Findings in Table~\\ref{tab:study-data} support intervention X \\cite{ref1}.\n\n"
+        "\\section*{Acknowledgements}\n"
+        "We thank the reviewers.\n\n"
+        "\\section*{References}\n"
+        "See reference list.\n"
+    )
+
+    sections = writer.parse_latex_sections(tex)
+    model = writer.build_manuscript(
+        title="Test review", sections=sections, token_table=table,
+        references=manifest["references"], manifest=manifest,
+    )
+
+    assert [s["id"] for s in model["sections"]] == [
+        "abstract",
+        "introduction",
+        "methods",
+        "protocol-and-eligibility",
+        "data-and-outcome-definition",
+        "statistical-analysis",
+        "results",
+        "included-evidence",
+        "pooled-analysis-and-heterogeneity",
+        "reporting",
+        "discussion",
+        "acknowledgements",
+        "references",
+    ]
+
+    by_id = {s["id"]: s for s in model["sections"]}
+    assert by_id["methods"]["text"] == ""
+    assert by_id["results"]["text"] == ""
+    assert by_id["abstract"]["text"].startswith("**Background and objective.** To assess")
+    assert "{{run:r1.estimate}}" in by_id["abstract"]["text"]
+    assert "{{run:r1.ciLower}}" in by_id["pooled-analysis-and-heterogeneity"]["text"]
+    assert "*systematic review*" in by_id["introduction"]["text"]
+    assert "*meta-analysis*" in by_id["introduction"]["text"]
+    assert "Table 1" in by_id["introduction"]["text"]
+    assert "Table 1" in by_id["included-evidence"]["text"]
+    assert "Table 2" in by_id["included-evidence"]["text"]
+    assert "Figure 1" in by_id["included-evidence"]["text"]
+    assert "Table 1" in by_id["discussion"]["text"]
+    assert "run_7f09c578d6214e4ba6928f9b40e8ffdd" in by_id["data-and-outcome-definition"]["text"]
+    assert "95% CI, Smith & Doe, item #1, cost $50" in by_id["data-and-outcome-definition"]["text"]
+    assert "- Adults aged 18 or older" in by_id["protocol-and-eligibility"]["text"]
+    assert "- Randomised trials only" in by_id["protocol-and-eligibility"]["text"]
+    assert "1. Screen titles and abstracts" in by_id["protocol-and-eligibility"]["text"]
+    assert "2. Extract verified outcomes" in by_id["protocol-and-eligibility"]["text"]
+
+    stat = by_id["statistical-analysis"]["text"]
+    for sym in ("≤", "≥", "±", "×", "≈"):
+        assert sym in stat
+    for num in ("0.05", "0.01", "10", "2", "1.2", "0.3", "3", "0.02"):
+        assert num in stat
+
+    inc = by_id["included-evidence"]["text"]
+    assert "Summary of included studies." in inc
+    assert "Study | Year | Events" in inc
+    assert "Trial One | 2019 | 12" in inc
+    assert "https://example.com/~user/a_b" in by_id["reporting"]["text"]
+    assert "PRISMA 2020" in by_id["reporting"]["text"]
+    assert "\\cite{ref1}" in by_id["introduction"]["text"]
+    assert model["references"][0]["key"] == "ref1"
+
+    # No LaTeX backslash commands remain outside preserved \cite{...} markers.
+    import re
+    for sec in model["sections"]:
+        stripped_cites = re.sub(r"\\cite\{[^}]+\}", "", sec["text"])
+        assert "\\" not in stripped_cites, f"Leftover backslash in {sec['id']}: {stripped_cites}"
+
+
+def test_latex_to_text_edge_cases():
+    raw = (
+        "\\maketitle\\centering\\smallskip\\medskip\\bigskip\n"
+        "First\\par Second \\customcmd{kept} \\barecmd \\{braced\\} "
+        "na\\\"ive \\textbf{{{run:r1.estimate}}} \\textbf{\\noindent}."
+    )
+    out = writer.latex_to_text(raw)
+    assert "\\" not in out
+    assert "First" in out and "Second" in out
+    assert "kept" in out
+    assert "{braced}" in out
+    assert "naive" in out
+    assert "**{{run:r1.estimate}}**" in out
+    assert "****" not in out
+
+
+def test_build_manuscript_orders_imrad_and_keeps_subsections_attached():
+    sections = [
+        {"id": "acknowledgements", "heading": "Acknowledgements", "level": 1, "text": "Thanks."},
+        {"id": "results", "heading": "Results", "level": 1, "text": ""},
+        {"id": "included-evidence", "heading": "Included evidence", "level": 2, "text": "Evidence."},
+        {"id": "references", "heading": "References", "level": 1, "text": "Refs."},
+        {"id": "methods", "heading": "Methods", "level": 1, "text": ""},
+        {"id": "statistical-analysis", "heading": "Statistical analysis", "level": 2, "text": "Stats."},
+        {"id": "discussion", "heading": "Discussion", "level": 1, "text": "Disc."},
+        {"id": "abstract", "heading": "Abstract", "level": 1, "text": "Abs."},
+        {"id": "introduction", "heading": "Introduction", "level": 1, "text": "Intro."},
+    ]
+    model = writer.build_manuscript(title="T", sections=sections, token_table={})
+    assert [s["id"] for s in model["sections"]] == [
+        "abstract",
+        "introduction",
+        "methods",
+        "statistical-analysis",
+        "results",
+        "included-evidence",
+        "discussion",
+        "acknowledgements",
+        "references",
+    ]
