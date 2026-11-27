@@ -105,7 +105,7 @@
       name: "Google Firebase",
       data: "Your sign-in details and the app data you save to your account",
       purpose: "Sign-in and app data storage",
-      countries: "Google servers, which may be outside India"
+      countries: "India (Mumbai region) for stored data; other processing per Google infrastructure"
     },
     {
       name: "Google Vertex AI (Gemini)",
