@@ -167,3 +167,40 @@ blank preg/lact, renal/hepatic and PK cards) with the registered mechanism scene
   against prod D1) plus the path-filtered `deploy-worker.yml` run on merge to `main` (environment-gated
   approval). Until then `/structured?name=Blinatumomab` answers `found:false` on the server while the app
   opens the full monograph offline; no production data was touched from this agent.
+
+## "No drugs match" for molecules with no Indian brand (2026-11-27, Oxandrolone report)
+
+Owner searched **Oxandrolone** and got "No drugs match". It has no Indian brand (server `/search` is the brand
+catalogue) and no record in `data/clinical-index.js`, yet the Turner syndrome and cachexia lessons mention it.
+A sweep of `prep/` + `kb/reference` against the DailyMed generic-name list and NLEM 2022 found ~190 such molecules.
+
+- **Label monographs added** to `data/fda-labels/` by `scripts/build-fda-monographs.py` (DailyMed, then openFDA);
+  Health Canada product monographs by `scripts/build-hc-monographs.py` for the ones with no US label.
+  Molecules with no label anywhere (withdrawn or never marketed in the US/Canada) stay absent: no invented records.
+- **Builder fixes** (`build-fda-monographs.py`): the first DailyMed hit is no longer trusted. The SPL document type
+  must be a human label (`HUMAN_DOC_TYPES`): LUTALYSE (dinoprost) and CYDECTIN (moxidectin) are cattle labels with
+  nothing in the title to say so. Older labels whose sections are all "SPL unclassified" are read by section title
+  (`TITLE_CODES`, ZANOSAR-era SPLs). openFDA refuses combination products (riboflavin returned "Multivitamin with
+  Fluoride") except `COMBO_ONLY` molecules sold only in a combination (bictegravir, atoltivimab, nirmatrelvir), and
+  refuses homeopathic potencies ("30C", HPUS). `PINNED` holds hand-checked setids the title matcher cannot parse
+  (Tretten, Advate, Paxlovid). Salt words gained lysine/meglumine.
+  `build-hc-monographs.py` needs `pip install pymupdf`; without it every PDF fails silently as "failed".
+- **Health Canada builder fixes** (`build-hc-monographs.py`): the PDF was fetched as `pdf.hres.ca/dpd_pm/<DIN>.PDF`.
+  The PM number is NOT the DIN: most DINs 404, and some return ANOTHER drug's monograph (HONVOL's DIN fetched
+  PRISTIQ, TUBOCURARINE's fetched Sandoz Omeprazole, DIPHTHERIA ANTITOXIN's fetched gliclazide). Now `pm_urls()`
+  reads the real link from the DPD product page, never guesses, and `names_molecule()` refuses a monograph whose
+  indications/dosage do not name the molecule or brand. Numbered headings ("1 INDICATIONS") and the table of
+  contents (keep the longer body) are handled. All four records the old builder had committed were the wrong drug
+  and were live in the app: bendroflumethiazide showed paroxetine, reserpine pantoprazole, sulfisoxazole memantine,
+  thrombin dasatinib. They were deleted; neither DailyMed nor the fixed HC builder has a correct label for them.
+- **Synonyms** (`build-clinical-index.mjs` `EXTRA_ALIASES`): INN/BP/abbreviation names keyed to the exact row
+  (benzylpenicillin, calcium folinate, desferrioxamine, GTN, 5-FU, 6-MP, thiamazole, leuprorelin, zoledronate, ...).
+  A key with no row is warned and ignored. The generated search also matches with separators removed
+  ("cotrimoxazole") and retries British spellings (sulph, aluminium, oestr, haem) when nothing matches.
+- **Empty state** (`api.js` `emptyHTML`): says the molecule is in neither the Indian brand list nor the monograph
+  library and may not be marketed in India, instead of a bare "No drugs match".
+- Tokens: `IDX_VER` idx16, `api.js` `-empty1`, `offline-clinical.js` `idx16`.
+- Tests: `test/clinical-index.test.mjs` (synonyms, separators, label rows), `test/fda-label-match.test.mjs`
+  (animal doc type, titled sections, lysine/meglumine), UI `test/run-drug-missing-ui.mjs` (Playwright).
+- Environment: the build needs `dailymed.nlm.nih.gov`, `api.fda.gov`, `health-products.canada.ca`, `pdf.hres.ca`
+  (the cloud "stewardmd" environment allows them).

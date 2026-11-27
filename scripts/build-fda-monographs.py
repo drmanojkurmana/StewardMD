@@ -26,7 +26,7 @@ CODES = {
     "openfda:purpose": "Purpose", "openfda:active": "Active ingredient", "openfda:other": "Other label text",
     "34066-1": "Boxed warning", "34067-9": "Indications and usage", "34068-7": "Dosage and administration",
     "43678-2": "Dosage forms and strengths", "34070-3": "Contraindications", "43685-7": "Warnings and precautions",
-    "34071-1": "Warnings", "34084-4": "Adverse reactions", "34073-7": "Drug interactions",
+    "34071-1": "Warnings", "42232-9": "Precautions", "34084-4": "Adverse reactions", "34073-7": "Drug interactions",
     "42228-7": "Pregnancy", "77290-5": "Lactation", "34080-2": "Nursing mothers", "77291-3": "Females and males of reproductive potential",
     "34081-0": "Pediatric use", "34082-8": "Geriatric use", "88828-9": "Renal impairment", "88829-7": "Hepatic impairment",
     "34088-5": "Overdosage", "34089-3": "Description", "34090-1": "Clinical pharmacology", "43679-0": "Mechanism of action",
@@ -102,12 +102,31 @@ def parse_label(xml_text):
         if code_el is None:
             continue
         code = code_el.get("code")
-        if code not in CODES or code in sections:
+        if code not in CODES:
+            # Older labels (ZANOSAR, 2000s SPLs) file every section as "SPL UNCLASSIFIED" (42229-5) and
+            # carry the real heading only as the section title. Map those by title so the label is not
+            # read as having no indications. A coded section of the same kind always wins.
+            t = sec.find("v3:title", NS)
+            code = TITLE_CODES.get(re.sub(r"[^a-z ]+", " ", "".join(t.itertext()).lower()).strip()) if t is not None else None
+            code = re.sub(r"\s+", " ", code) if code else None
+            if not code or code in sections:
+                continue
+        elif code in sections:
             continue
         body = section_text(sec)
         if body:
             sections[code] = body
     return sections
+
+# Section titles of uncoded (42229-5) sections -> the LOINC code a modern label would use.
+TITLE_CODES = {
+    "indications and usage": "34067-9", "indications": "34067-9", "dosage and administration": "34068-7",
+    "contraindications": "34070-3", "warnings": "34071-1", "warnings and precautions": "43685-7",
+    "precautions": "42232-9", "adverse reactions": "34084-4", "drug interactions": "34073-7",
+    "overdosage": "34088-5", "description": "34089-3", "clinical pharmacology": "34090-1",
+    "how supplied": "34069-5", "boxed warning": "34066-1", "pregnancy": "42228-7",
+    "nursing mothers": "34080-2", "pediatric use": "34081-0", "geriatric use": "34082-8",
+}
 
 # openFDA field name -> the same keys the DailyMed path produces (OTC-only fields get their own keys)
 OPENFDA_FIELDS = {
@@ -127,6 +146,9 @@ def core_name(s):
     for _ in range(3):
         x = re.sub(r"\b" + SALT_WORDS + r"\b", " ", x)
     return re.sub(r"\s+", " ", x).strip()
+
+# Molecules marketed ONLY inside a fixed combination, so the combination label is the only label there is.
+COMBO_ONLY = {"bictegravir", "atoltivimab", "nirmatrelvir", "enmetazobactam", "taniborbactam"}
 
 def openfda_get(search, limit=20):
     key = os.environ.get("FDA_API_KEY", "")
@@ -149,6 +171,16 @@ def pick_openfda(name):
             of = r.get("openfda", {})
             names = of.get("generic_name", []) + of.get("substance_name", [])
             if not any(core_name(n) == want for n in names):
+                continue
+            # A combination product is a label for the combination, not for this molecule: the riboflavin
+            # search otherwise returns "Multivitamin with Fluoride". Allowed only where the molecule is
+            # sold in no other form (COMBO_ONLY), e.g. bictegravir exists only as Biktarvy.
+            if len(of.get("substance_name", [])) > 1 and want not in COMBO_ONLY:
+                continue
+            if "HUMAN" not in " ".join(of.get("product_type", ["HUMAN"])).upper():
+                continue
+            # Homeopathic dilutions ("Ipecacuanha 30C", "HPUS") are not the drug, whatever the labeler is called.
+            if re.search(r"\b\d+\s?(c|x|ch|ck|lm)\b|hpus|\[hp_", " ".join(str(x) for x in r.get("active_ingredient", [])).lower()):
                 continue
             if not (r.get("indications_and_usage") or r.get("dosage_and_administration") or r.get("purpose")):
                 continue
@@ -199,7 +231,7 @@ def build_record(name, setid, title, published, sections):
     rec["footer"] = "Verbatim from the FDA-approved label on DailyMed. Verify against the current label before prescribing."
     return rec
 
-SALT_WORDS = r"(anhydrous|anhyd|dipropionate|diacetate|dimesylate|mesylate|sodium|potassium|calcium|magnesium|hydrochloride|hcl|dihydrochloride|hydrobromide|sulfate|sulphate|acetate|citrate|tartrate|maleate|besylate|mesylate|phosphate|succinate|fumarate|bisulfate|bitartrate|disodium|dihydrate|monohydrate|trihydrate|hydrate|propionate|tromethamine|tosylate|diphosphate|hemihydrate|mesilate|besilate|bromide|chloride|nitrate|lactate|gluconate|pivoxil)"
+SALT_WORDS = r"(anhydrous|anhyd|dipropionate|diacetate|dimesylate|mesylate|sodium|potassium|calcium|magnesium|hydrochloride|hcl|dihydrochloride|hydrobromide|sulfate|sulphate|acetate|citrate|tartrate|maleate|besylate|mesylate|phosphate|succinate|fumarate|bisulfate|bitartrate|disodium|dihydrate|monohydrate|trihydrate|hydrate|propionate|tromethamine|tosylate|diphosphate|hemihydrate|mesilate|besilate|bromide|chloride|nitrate|lactate|gluconate|pivoxil|meglumine|dimeglumine|lysine|olamine|trometamol)"
 DOSAGE_FORM = r"(tablets?|capsules?|ointment|cream|gel|lotion|solution|suspension|injection|powder|liquid|film|kit|granules?|caplets?|patch|spray|drops?|syrup|aerosol|inhaler|suppository|foam|emulsion|for solution|for suspension|extended release|delayed release|film coated|oral|topical|ophthalmic|injectable)"
 NONPHARMA_LABELERS = r"complementary health|homeopath|hylands|boiron|heel inc|guna\b|nature'?s |herbal|dr\.? reckeweg|pekana|vetone|mwi|veterin|animal|canine|feline|equine|bovine|porcine|avian"
 VET_TITLE = r"canine|feline|equine|bovine|porcine|veterin|\bdogs?\b|\bcats?\b|\bhorse"
@@ -231,15 +263,44 @@ def ingredient_match(title, name):
     # Biologic names carry a USAN suffix that varies by labeler: "ANIFROLUMAB-FNIA" is anifrolumab.
     return core == want or re.fullmatch(re.escape(want) + r"-[a-z]{2,6}", core) is not None
 
-def pick_setid(name):
-    """First DailyMed SPL whose ACTIVE INGREDIENT is this molecule (see ingredient_match)."""
+# Labels the title matcher cannot pick (nested parentheses, a kit of two molecules), chosen by hand from
+# DailyMed and checked to be the human label for this molecule. name -> (setid, title).
+PINNED = {
+    "coagulation factor xiii": ("8664978e-1814-4930-aca5-97a24455f6df", "TRETTEN (COAGULATION FACTOR XIII A-SUBUNIT (RECOMBINANT)) KIT"),
+    "antihemophilic factor": ("80fa03d2-cd4c-4155-9b57-1396c4fa42da", "ADVATE (ANTIHEMOPHILIC FACTOR (RECOMBINANT)) KIT"),
+    "nirmatrelvir": ("8a99d6d6-fd9e-45bb-b1bf-48c7f761232a", "PAXLOVID (NIRMATRELVIR AND RITONAVIR) KIT"),
+}
+
+def pick_setids(name):
+    """DailyMed SPLs whose ACTIVE INGREDIENT is this molecule (see ingredient_match), in DailyMed order.
+    More than one is returned because the first can be an animal label the title does not give away
+    (LUTALYSE is dinoprost for cattle, CYDECTIN is moxidectin pour-on): dailymed_record checks each."""
+    if name.lower() in PINNED:
+        sid, t = PINNED[name.lower()]
+        return [(sid, t, "")]
     q = urllib.parse.urlencode({"drug_name": name, "pagesize": 100})
     data = json.loads(http_get(f"https://dailymed.nlm.nih.gov/dailymed/services/v2/spls.json?{q}"))
+    out = []
     for item in data.get("data", []):
         t = item.get("title", "")
         if ingredient_match(t, name):
-            return item["setid"], t, item.get("published_date", "")
-    return None, None, None
+            out.append((item["setid"], t, item.get("published_date", "")))
+    return out
+
+# SPL document type (LOINC) of the label itself. Only these are labels for people; animal drug
+# labels (50577-6, 50578-4) and the rest are refused whatever their title says.
+HUMAN_DOC_TYPES = {
+    "34391-3",   # HUMAN PRESCRIPTION DRUG LABEL
+    "34390-5",   # HUMAN OTC DRUG LABEL
+    "60683-0",   # PLASMA DERIVATIVE (factor concentrates: ADVATE, TRETTEN)
+    "53404-0",   # VACCINE LABEL
+    "60684-8",   # CELLULAR THERAPY
+}
+
+def doc_type(xml_text):
+    root = ET.fromstring(xml_text.encode("utf-8"))
+    c = root.find("v3:code", NS)
+    return c.get("code") if c is not None else ""
 
 def label_is_about(sections, name):
     """Second check on the label itself: the molecule is named in its indications, dosage or description."""
@@ -253,22 +314,23 @@ SYNONYMS = {"frusemide": "furosemide", "lignocaine": "lidocaine", "noradrenaline
             "oestradiol": "estradiol", "adrenaline": "epinephrine", "paracetamol": "acetaminophen"}
 
 def dailymed_record(name):
-    """A record from the DailyMed SPL for this molecule, or None if no usable label."""
-    setid, title, published = pick_setid(name)
-    if not setid:
-        return None
-    cpath = os.path.join(CACHE, setid + ".xml")
-    if os.path.exists(cpath):
-        xml_text = open(cpath, encoding="utf-8").read()
-    else:
-        xml_text = http_get(f"https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/{setid}.xml")
-        open(cpath, "w", encoding="utf-8").write(xml_text)
-    sections = parse_label(xml_text)
-    if "34067-9" not in sections and "34068-7" not in sections:
-        return None
-    if not label_is_about(sections, name):
-        return None
-    return build_record(name, setid, title.split(" [")[0], published, sections)
+    """A record from the first HUMAN DailyMed SPL for this molecule, or None if no usable label."""
+    for setid, title, published in pick_setids(name)[:8]:
+        cpath = os.path.join(CACHE, setid + ".xml")
+        if os.path.exists(cpath):
+            xml_text = open(cpath, encoding="utf-8").read()
+        else:
+            xml_text = http_get(f"https://dailymed.nlm.nih.gov/dailymed/services/v2/spls/{setid}.xml")
+            open(cpath, "w", encoding="utf-8").write(xml_text)
+        if doc_type(xml_text) not in HUMAN_DOC_TYPES:
+            continue
+        sections = parse_label(xml_text)
+        if "34067-9" not in sections and "34068-7" not in sections:
+            continue
+        if not label_is_about(sections, name):
+            continue
+        return build_record(name, setid, title.split(" [")[0], published, sections)
+    return None
 
 def openfda_record(name):
     for q in [name] + ([SYNONYMS[name]] if name in SYNONYMS else []):

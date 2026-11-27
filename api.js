@@ -498,6 +498,13 @@
         '</span><span class="db-comp-sub">' + esc(sub) + '</span></span><span class="db-chev">' + dbIco("chev") + '</span></button>';
     }).join("");
   }
+  // Nothing in the Indian brand catalogue and nothing in the monograph library. Say which of the two
+  // it is rather than a bare "No drugs match": the commonest cause is a molecule not marketed in
+  // India (the reported case was Oxandrolone), which a doctor otherwise reads as a broken search.
+  function emptyHTML(q) {
+    return '<div class="db-empty">No drugs match \u201c' + esc(q) + '\u201d.' +
+      '<div class="db-empty-sub">Not in the Indian brand list and no StewardMD monograph yet. It may not be marketed in India. Check the spelling, or try the generic or INN name.</div></div>';
+  }
   function wireCompButtons(r) {
     r.querySelectorAll(".db-comp").forEach(function (b) { b.addEventListener("click", function () { openComposition(b.getAttribute("data-comp")); }); });
   }
@@ -522,7 +529,7 @@
       html += '<div class="db-sec-l">' + dbIco("flask") + ' Molecules &amp; compositions</div>' + compHits.map(compCardHTML).join("");
     }
     html += goldHitsHTML(q, gold, brandHits.map(function (b) { return b.composition; }).concat(compHits.map(function (c) { return c.composition; })));
-    r.innerHTML = html || '<div class="db-empty">No drugs match \u201c' + esc(q) + '\u201d.</div>';
+    r.innerHTML = html || emptyHTML(q);
     wireCompButtons(r);
   }
   function runList(q) {
@@ -541,7 +548,7 @@
           if (q !== q2) return;
           var r2 = root.querySelector("#dbResults"); if (!r2) return;
           if (local.length || gold.length) { renderLocalHits(r2, q, local, gold); return; }
-          r2.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>';
+          r2.innerHTML = emptyHTML(q);
         });
         // Show what is already in hand rather than a blank pane while the index loads.
         if (local.length) renderLocalHits(r, q, local, []);
@@ -573,7 +580,7 @@
         if (q !== q2) return;
         var r2 = root.querySelector("#dbResults"); if (!r2) return;
         if (local.length || gold.length) { renderLocalHits(r2, q, local, gold); return; }
-        r2.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>';
+        r2.innerHTML = emptyHTML(q);
       });
       if (local.length) renderLocalHits(r, q, local, []);
     });
@@ -1142,6 +1149,7 @@
       ".db-msec-x .db-ico{width:15px;height:15px;vertical-align:middle;transition:transform .18s}.db-msec-h.open .db-msec-x .db-ico{transform:rotate(90deg)}",
       ".db-note{font:500 11.5px var(--sans,system-ui);color:var(--slate-soft,#888);margin:8px 2px 12px;line-height:1.5}",
       ".db-empty,.db-allshown{font:500 13px var(--sans,system-ui);color:var(--slate-soft,#888);padding:18px;text-align:center}",
+      ".db-empty-sub{font:400 12.5px/1.45 var(--sans,system-ui);margin:8px auto 0;max-width:34em;opacity:.85}",
       ".db-comp{display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:11px 13px;margin-bottom:8px;cursor:pointer}",
       ".db-comp-ic{font-size:19px}.db-comp-main{flex:1;min-width:0}",
       ".db-comp-name{display:block;font:700 13.5px var(--sans,system-ui);color:var(--ink,#1a1a1a)}",
