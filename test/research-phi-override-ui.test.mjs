@@ -658,7 +658,7 @@ describe("ResearchMD /ai-draft PHI override dialog (one action: false detection)
     assert.equal(runbook.indexOf("\u2013"), -1);
 
     assert.match(privacy, /AI drafting and patient identifiers/);
-    assert.match(privacy, /Draft for counsel review/);
+    assert.ok(!/Draft for counsel review/.test(privacy), "counsel signed off (27 Nov 2026): no draft marker");
     assert.match(privacy, /at least one year/);
     assert.match(privacy, /Runware, which passes it to an OpenAI GPT model/); // real chain: Runware -> OpenAI GPT model (2026-11-27)
     assert.match(privacy, /Google Vertex AI \(Gemini\)/);
@@ -669,8 +669,8 @@ describe("ResearchMD /ai-draft PHI override dialog (one action: false detection)
     const privacy = readFileSync(join(ROOT, "privacy.html"), "utf8");
 
     // Draft markers stay in place until instructed counsel approves the final text.
-    assert.ok(terms.includes("Draft for counsel review."), "terms keeps the counsel draft marker");
-    assert.ok(privacy.includes("Draft for counsel review."), "privacy keeps the counsel draft markers");
+    assert.ok(!terms.includes("Draft for counsel review."), "counsel signed off: terms has no draft marker");
+    assert.ok(!privacy.includes("Draft for counsel review."), "counsel signed off: privacy has no draft marker");
 
     // terms.html section 32: opening, review step, takedown, liability.
     assert.ok(terms.includes(T32_OPENING), "s32 opening paragraph verbatim");
