@@ -223,3 +223,13 @@ def test_plain_claim_without_source_still_flagged():
     sections = [section("abstract", "BCG vaccination reduces tuberculosis in infants.")]
     violations = gates.check_claim_links(sections)
     assert any(v["gate"] == "claim_without_source" for v in violations)
+
+
+def test_exponent_digits_are_notation_not_numbers():
+    """A live draft failed on I$^2$ (heterogeneity): an exponent is not a result number."""
+    sections = [{"id": "abstract", "heading": "Abstract",
+                 "text": "Heterogeneity was summarised with I$^2$ and \\chi^{2}; a \\textsuperscript{2} mark. "
+                         "A reduction of 42 cases was seen."}]
+    numbers = [v["number"] for v in gates.check_numbers(sections, {})]
+    assert "2" not in numbers
+    assert "42" in numbers  # a real untokenised result number is still caught

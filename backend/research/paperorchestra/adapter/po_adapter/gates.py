@@ -40,6 +40,8 @@ _THRESHOLD_RE = re.compile(
     r"|\b(?:heterogeneity|I2|I\u00b2)\b[^.!?]{0,30}?\b(?:25|50|75)\s*\\?%"
     r"|\b(?:90|95|99)\s*\\?%[~\s]*(?:CI|confidence)\b",
     re.IGNORECASE)
+# An exponent is notation, not a result: I$^2$, \\chi^{2}, \\textsuperscript{2}.
+_EXPONENT_RE = re.compile(r"(?:\^\{?|\\textsuperscript\{)\s*\d+(?:\.\d+)?")
 _CITE_RE = re.compile(r"\\cite\{([^}]+)\}|\[@([A-Za-z0-9_:-]+)\]")
 _CLAIM_RE = re.compile(
     r"\b(?:reduc\w*|decreas\w*|increas\w*|improv\w*|worsen\w*"
@@ -79,7 +81,7 @@ def _mask_tokens(text: str) -> str:
 
 def _allowed_numbers(text: str) -> set:
     allowed = set()
-    for pattern in (_REVIEWER_COUNT_RE, _THRESHOLD_RE):
+    for pattern in (_REVIEWER_COUNT_RE, _THRESHOLD_RE, _EXPONENT_RE):
         for match in pattern.finditer(text):
             for num in _NUMBER_RE.finditer(match.group(0)):
                 allowed.add((match.start() + num.start(), match.start() + num.end()))

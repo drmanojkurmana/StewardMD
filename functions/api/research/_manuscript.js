@@ -26,6 +26,8 @@ const NUMBER_RE = /(?<![A-Za-z0-9_])\d+(?:\.\d+)?(?![A-Za-z0-9_])/g;
 const YEAR_RE = /^(?:19|20)\d{2}$/;
 const REVIEWER_RE = /\b\d+\s+(?:reviewers|assessors|screeners)\b|\b(?:reviewers|assessors|screeners)\s*(?:=|:)\s*\d+/gi;
 const THRESHOLD_RE = /\b(?:threshold|cutoff|alpha|significance level|type I error)\b[^.!?]{0,30}?\d+(?:\.\d+)?%?|\b(?:heterogeneity|I2|I\u00b2)\b[^.!?]{0,30}?\b(?:25|50|75)\s*%|\b(?:90|95|99)\s*%\s*(?:CI|confidence)\b/gi;
+/* An exponent is notation, not a result: I^2, chi^{2}, \\textsuperscript{2}. */
+const EXPONENT_RE = /(?:\^\{?|\\textsuperscript\{)\s*\d+(?:\.\d+)?/g;
 const CITE_RE = /\\cite\{([^}]+)\}|\[@([A-Za-z0-9_:-]+)\]/g;
 const CLAIM_RE = /\b(?:reduc\w*|decreas\w*|increas\w*|improv\w*|worsen\w*|significant\w*|associat\w*|superior|inferior)\b/i;
 /* A research question or objective is not a result claim; it needs no source. */
@@ -223,7 +225,7 @@ const TABLE_FIGURE_RE = /\b(?:Table|Figure|Fig\.|Supplementary Table|eTable|eFig
 const LIST_NUMBER_RE = /(?:^|\n)\s*\d+\.\s/g;
 function allowedNumberSpans(text) {
   const spans = [];
-  for (const re of [REVIEWER_RE, THRESHOLD_RE, TABLE_FIGURE_RE, LIST_NUMBER_RE]) {
+  for (const re of [REVIEWER_RE, THRESHOLD_RE, TABLE_FIGURE_RE, LIST_NUMBER_RE, EXPONENT_RE]) {
     re.lastIndex = 0;
     let m;
     while ((m = re.exec(text)) !== null) {
