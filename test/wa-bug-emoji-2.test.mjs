@@ -59,8 +59,13 @@ test("home.js: Notification preferences rows carry no per-category emoji", () =>
 
 test("home.js: the Medical Updates read-time badge carries no clock emoji", () => {
   const s = read("home.js");
+  // The feed card was redesigned on 2026-11-27 (mu-card): its read time is now plain text
+  // (`est_read_min + " min read"`); the detail view keeps the fd-read badge.
   const matches = [...s.matchAll(/fd-read">([^<]*)</g)];
-  assert.ok(matches.length === 2, `both read-time badge sites found (${matches.length})`);
+  assert.ok(matches.length === 1, `detail read-time badge found (${matches.length})`);
+  const card = s.match(/est_read_min \+ " min read"/);
+  assert.ok(card, "feed card read-time text found");
+  assert.ok(!card[0].includes("⏱"), "no stopwatch emoji on the feed card");
   for (const m of matches) assert.ok(!m[1].includes("⏱"), `stopwatch emoji should be gone from the read-time badge (got "${m[1]}")`);
   // A THIRD, unrelated ⏱ (MaiK AI response-time diagnostics, a flagged-off debug display) still
   // legitimately exists elsewhere in home.js - it wasn't part of this report and wasn't touched.
