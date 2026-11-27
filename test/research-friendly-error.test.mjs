@@ -110,4 +110,10 @@ ok("empty error still gives a generic retry", F(null).action === "retry");
 }
 
 console.log(`research-friendly-error: ${pass} passed, ${fail} failed`);
+// Live run 2026-11-27: CTRI got 422 invalid_draft and showed the generic "Something went wrong on our side".
+{
+  const f = F({ status: 422, code: "invalid_draft", message: "MaiK did not return a draft that matched the required fields." });
+  ok("invalid_draft shows the server message", /did not return a draft/.test(f.message));
+  ok("invalid_draft is not the generic error", !/Something went wrong on our side/.test(f.message));
+}
 if (fail) process.exit(1);

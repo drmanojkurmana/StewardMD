@@ -178,6 +178,16 @@ describe("BUG-01: online writes are sent now, queued only offline", () => {
     assert.equal(STORE.getQueue().length, 0, "Successful run is not queued");
   });
 
+  test("a reference with no outcome numbers (Novelty) stays on the phone and is never POSTed", async () => {
+    adoptProject();
+    mockServer();
+    const ref = STORE.createStudy(PID, { label: "Published case", measure: "RR", inputs: {},
+      locator: { kind: "manual", citation: "BMJ Case Rep 2024" }, verified: false });
+    await STORE.pendingSync();
+    assert.ok(ref && ref.id, "kept locally");
+    assert.equal(calls.filter((c) => c.method === "POST" && /\/studies$/.test(c.path)).length, 0, "no server POST for a data-less reference");
+  });
+
   test("a server validation message reaches the caller and is never queued", async () => {
     adoptProject();
     mockServer({ rejectRun: { status: 400, code: "invalid_run", message: "At least 2 studies are required for a run" } });

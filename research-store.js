@@ -832,7 +832,10 @@
       notify();
 
       var serverPid = serverProjectId(pid);
-      if (!serverPid) {
+      /* A reference with no outcome numbers (e.g. a published case added from Novelty) is not an
+       * analysable study: the server refuses it (400 invalid_study), so it stays on the phone as before. */
+      var hasInputs = !!(study.inputs && typeof study.inputs === "object" && Object.keys(study.inputs).length);
+      if (!serverPid || !hasInputs) {
         STORE.queueAction("study_create", study);
         return study;
       }

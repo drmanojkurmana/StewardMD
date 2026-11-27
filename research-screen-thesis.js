@@ -1822,7 +1822,9 @@
       var end = idx + number.length;
       var after = end < text.length ? text.charAt(end) : "";
       var after2 = end + 1 < text.length ? text.charAt(end + 1) : "";
-      var okBefore = !before || !/[0-9.]/.test(before);
+      /* A letter right before means the digit is part of a word (HbA1c, T2DM), not a reported number;
+       * a letter after is still fine (120mg). */
+      var okBefore = !before || !/[0-9.A-Za-z]/.test(before);
       var okAfter = !after || !/[0-9.]/.test(after) || (after === "." && !/[0-9]/.test(after2));
       if (okBefore && okAfter) return idx;
       idx = text.indexOf(number, idx + 1);
