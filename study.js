@@ -1343,9 +1343,16 @@
     if (r.scrollTop || r.scrollLeft) { r.scrollTop = 0; r.scrollLeft = 0; }
     if (!typing() && (G.scrollY || G.scrollX)) { try { G.scrollTo(0, 0); } catch (e) {} }
   }
+  // The floating dock (study.css) changes height with its options row; the page end, page pill and popovers follow.
+  function watchDock(b, r) {
+    var tb = b && b.querySelector("#stTb"); if (!tb) return;
+    var set = function () { var h = tb.offsetHeight; if (h) r.style.setProperty("--st-dock-h", h + "px"); };
+    set();
+    if (G.ResizeObserver) { try { new G.ResizeObserver(set).observe(tb); } catch (e) {} }
+  }
   function pinEditor() {
     var r = host && host.root && host.root(), b = r && r.querySelector(":scope > .pn-body.st-body");
-    if (b) b.addEventListener("scroll", repin);
+    if (b) { b.addEventListener("scroll", repin); watchDock(b, r); }
     if (pinOn) return;
     pinOn = true;
     G.addEventListener("scroll", repin, { passive: true });

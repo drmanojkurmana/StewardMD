@@ -2292,3 +2292,118 @@ body.dark .pn-root .st5a-lib .st5a-cover-folder { background: color-mix(in srgb,
 .pn-root .st-body .st-p3-topbar, .pn-root .st-body .st-doc-tabs { touch-action: pan-x; overscroll-behavior: none; }
 .pn-root .st-body .st-tb { touch-action: pan-x; overscroll-behavior: none; }
 .pn-root .pn-body.st-body { overscroll-behavior: none; }
+
+/* ===== NoteBook editor: floating glass dock (owner 2026-11-27: "make it look premium") =====
+   The tool row is a capsule floating over the page, the same Liquid Glass material as the PrepNucleus bottom nav
+   (prep-nav.css --pnv-*): white glass on paper (light), navy glass (dark). The current tool sits on the nav's
+   amber/Prussian pill. Tool options (widths and colours, laser, text styles) ride in the same capsule above the
+   tools. The page gets the whole screen; --st-dock-h (study.js watchDock) keeps the page end, the page pill, the
+   pen popover and the zoom window clear of it. */
+.pn-root .pn-body.st-body { --st-dock-b: calc(10px + env(safe-area-inset-bottom, 0px)); }
+.pn-root .st-body .st-tb {
+  position: fixed; z-index: 35; left: 50%; right: auto; transform: translateX(-50%);
+  bottom: var(--st-dock-b); width: min(620px, calc(100% - 16px)); box-sizing: border-box;
+  display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; justify-content: flex-end; gap: 0;
+  padding: 5px; margin: 0; border: 0; border-radius: 26px; overflow: hidden;
+  background: var(--pnv-tint); -webkit-backdrop-filter: var(--pnv-blur); backdrop-filter: var(--pnv-blur);
+  box-shadow: inset 0 1px 0 var(--pnv-rim), inset 0 0 0 1px var(--pnv-rim-lo), var(--pnv-shadow);
+}
+.pn-root .st-body .st-tb .st-tb-group { order: 2; flex: none; width: 100%; min-width: 0; }
+.pn-root .st-body .st-tb .st-tb-tools { display: flex; justify-content: space-between; align-items: center; gap: 0; padding: 0; overflow-x: auto; scrollbar-width: none; scroll-snap-type: none; }
+.pn-root .st-body .st-tb .st-tb-tools::-webkit-scrollbar { display: none; }
+.pn-root .st-body .st-tb .st-tb-tools .st-b {
+  flex: 1 0 40px; min-width: 40px; max-width: 56px; height: 46px; min-height: 46px; padding: 0; margin: 0;
+  border: 0; border-radius: 20px; background: transparent; color: var(--pnv-ink); box-shadow: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background-color var(--pn-d-quick) var(--pn-ease), color var(--pn-d-quick) var(--pn-ease), transform var(--pn-d-press) var(--pn-ease);
+}
+.pn-root .st-body .st-tb .st-tb-tools .st-b svg { width: 22px; height: 22px; }
+.pn-root .st-body .st-tb .st-tb-tools .st-b:active { transform: scale(.9); }
+.pn-root .st-body .st-tb .st-tb-tools .st-b.on {
+  background: var(--pnv-pill); color: var(--pnv-on);
+  box-shadow: inset 0 1px 0 var(--pnv-pill-rim), 0 1px 2px rgba(19, 32, 61, .08);
+}
+/* Pen and highlighter show their ink: a dot of the current colour under the icon. */
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="pen"].on,
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="hl"].on { color: var(--pnv-on); position: relative; }
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="pen"].on::after,
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="hl"].on::after {
+  content: ""; position: absolute; bottom: 5px; left: 50%; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%;
+  background: var(--st-pen, var(--pnv-on)); box-shadow: 0 0 0 1.5px var(--pnv-tint);
+}
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="pen"].on svg,
+.pn-root .st-body .st-tb .st-tb-tools .st-b[data-v="hl"].on svg { fill: none; }
+/* Options row: above the tools, same capsule, a hairline between. */
+.pn-root .st-body .st-tb #stInkCtx:not(:empty),
+.pn-root .st-body .st-tb #stInsertOptions:not([hidden]):not(:empty) {
+  order: 1; flex: none; width: 100%; min-width: 0; box-sizing: border-box;
+  margin: 0 0 5px; padding: 2px 4px 7px; border: 0; border-bottom: 1px solid var(--pnv-rim-lo);
+  display: flex; align-items: center; overflow-x: auto; scrollbar-width: none;
+}
+.pn-root .st-body .st-tb #stInkCtx::-webkit-scrollbar, .pn-root .st-body .st-tb #stInsertOptions::-webkit-scrollbar { display: none; }
+.pn-root .st-body .st-tb #stInsertOptions:empty { display: none; }
+.pn-root .st-body .st-tb .st-ink-strip,
+.pn-root .st-body .st-tb .st-laser-strip,
+.pn-root .st-body .st-tb .st-text-strip,
+.pn-root .st-body .st-tb .st-insert-strip,
+.pn-root .st-body .st-tb .st-opt-strip { display: flex; flex-wrap: nowrap; align-items: center; gap: 6px; padding: 0; margin: 0 auto; min-width: max-content; background: transparent; border: 0; box-shadow: none; }
+.pn-root .st-body .st-tb .st-ink-colors { display: flex !important; flex-wrap: nowrap; gap: 2px; }
+.pn-root .st-body .st-tb .st-ink-custom, .pn-root .st-body .st-tb .st-ink-hint { display: none !important; }
+.pn-root .st-body .st-tb .st-ink-c { width: 34px; height: 34px; min-width: 34px; min-height: 34px; }
+.pn-root .st-body .st-tb .st-ink-c::before { inset: 6px; }
+.pn-root .st-body .st-tb .st-ink-w, .pn-root .st-body .st-tb .st-w { width: 38px; height: 34px; min-width: 38px; min-height: 34px; border: 0; border-radius: 17px; background: transparent; box-shadow: none; }
+.pn-root .st-body .st-tb .st-ink-w.on, .pn-root .st-body .st-tb .st-w.on { background: var(--pnv-pill); box-shadow: inset 0 1px 0 var(--pnv-pill-rim); }
+.pn-root .st-body .st-tb .st-ink-divider { align-self: center; height: 20px; margin: 0 4px; background: var(--pnv-rim-lo); }
+.pn-root .st-body .st-tb .st-ink-seg, .pn-root .st-body .st-tb .st-fb-btn {
+  min-height: 34px; height: 34px; padding: 0 13px; border: 0; border-radius: 17px; white-space: nowrap;
+  background: color-mix(in srgb, var(--pn-text) 6%, transparent); color: var(--pnv-ink); font-size: 13.5px; font-weight: 600;
+}
+.pn-root .st-body .st-tb .st-ink-seg.on { background: var(--pnv-pill); color: var(--pnv-on); box-shadow: inset 0 1px 0 var(--pnv-pill-rim); }
+.pn-root .st-body .st-tb .st-fb-group { display: flex; gap: 4px; }
+.pn-root .st-body .st-tb .st-fb-sep { width: 1px; height: 20px; background: var(--pnv-rim-lo); margin: 0 4px; flex: none; }
+.pn-root .st-body .st-tb .st-laser-col { width: 26px; height: 26px; min-width: 26px; }
+/* Phone: the overview and zoom-window buttons live in the top bar's grid and the More sheet; nine tools fit. */
+@media (max-width: 560px) {
+  .pn-root .st-body .st-tb .st-tb-tools .st-b[data-act="st-zoom-window"],
+  .pn-root .st-body .st-tb .st-tb-tools .st-b[data-act="st-page-sheet"] { display: none; }
+  .pn-root .st-body .st-tb .st-tb-tools .st-b { flex-basis: 36px; min-width: 36px; }
+}
+/* The dock steps aside while typing (the format bar and keyboard own the bottom) and while presenting. */
+.pn-root:has(#stFormatBar) .st-body .st-tb { opacity: 0; pointer-events: none; transform: translate(-50%, 16px); }
+
+/* Page area under the dock: the last page scrolls clear of it. */
+.pn-root .st-body .st-pages { padding-bottom: calc(var(--st-dock-h, 64px) + var(--st-dock-b, 10px) + 40px); }
+.pn-root .st-body .st-sc { background: var(--pn-bg); }
+
+/* Top bar: the same glass, no hard line. */
+.pn-root .st-body .st-p3-topbar {
+  background: color-mix(in srgb, var(--pn-bg) 78%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6); backdrop-filter: blur(18px) saturate(1.6);
+  border-bottom: 0; box-shadow: 0 1px 0 var(--pn-line); z-index: 31;
+}
+.pn-root .st-body .st-p3-btn { width: 42px; height: 42px; min-width: 42px; min-height: 42px; border-radius: 50%; color: var(--pn-text); }
+.pn-root .st-body .st-p3-title { font-size: 16px; font-weight: 700; letter-spacing: -.01em; }
+
+/* Page pill: small glass capsule just above the dock. */
+.pn-root .st-p3-pager {
+  left: 50%; right: auto; transform: translateX(-50%);
+  bottom: calc(var(--st-dock-h, 64px) + 10px + env(safe-area-inset-bottom, 0px) + 10px);
+  min-height: 30px; height: 30px; padding: 0 12px; border-radius: 15px; font-size: 12.5px; font-weight: 650;
+  background: var(--pnv-tint); color: var(--pnv-ink); border: 0;
+  -webkit-backdrop-filter: var(--pnv-blur); backdrop-filter: var(--pnv-blur);
+  box-shadow: inset 0 0 0 1px var(--pnv-rim-lo), var(--pnv-shadow);
+}
+.pn-root:has(#stFormatBar) .st-p3-pager { visibility: hidden; }
+
+/* Pen / eraser settings: a glass card rising from the dock. */
+.pn-root .st-ink-pop.st-ink-pop {
+  position: fixed; top: auto; left: 50%; right: auto; transform: translateX(-50%);
+  bottom: calc(var(--st-dock-h, 64px) + 10px + env(safe-area-inset-bottom, 0px) + 10px);
+  width: min(420px, calc(100vw - 16px)); max-height: calc(100dvh - var(--st-dock-h, 64px) - 150px);
+  border: 0; border-radius: 22px; padding: 14px;
+  background: var(--pn-card); box-shadow: inset 0 0 0 1px var(--pnv-rim-lo), 0 18px 48px -18px rgba(19, 32, 61, .45);
+}
+body.dark .pn-root .st-ink-pop.st-ink-pop { background: var(--pn-card); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 18px 48px -18px rgba(0, 0, 0, .7); }
+.pn-root .st-p3-zoomwin { bottom: calc(var(--st-dock-h, 64px) + 10px + env(safe-area-inset-bottom, 0px) + 8px); }
+@media (prefers-reduced-motion: reduce) { .pn-root .st-body .st-tb .st-tb-tools .st-b { transition: none; } }
+@media (min-width: 561px) { .pn-root .st-body .st-tb .st-tb-tools { justify-content: center; gap: 4px; } .pn-root .st-body .st-tb { width: auto; max-width: calc(100% - 32px); } }
