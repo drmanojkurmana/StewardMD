@@ -69,17 +69,21 @@ export async function checkPdfJobCaps(db, projectId, uid, addJobs, nowMs) {
   return null;
 }
 
-/* manuscript_draft daily job caps, checked before enqueue. Counts every
- * manuscript_draft job created today (any status): a failed attempt still used a slot. */
+/* manuscript_draft daily job caps, checked before enqueue. Counts every manuscript_draft job created
+ * today EXCEPT ones that failed because of our own infrastructure (owner 2026-11-27): the doctor should
+ * not lose a slot to a gateway, callback or worker fault. Failures caused by the doctor's data (phi_blocked,
+ * invalid_*) and AI-quality stops (gate_failed, ceiling_*) still count: those spent AI calls. */
+const PO_FREE_FAILURE_SQL =
+  "NOT (status='failed' AND (error_code LIKE 'gateway%' OR error_code IN ('callback_unavailable','snapshot_invalid','manuscript_failed')))";
 export async function checkPoJobCaps(db, projectId, uid, nowMs) {
   const dayStart = utcDayStart(nowMs);
   const p = await db.prepare(
-    "SELECT COUNT(*) AS n FROM research_job_runs WHERE project_id=? AND kind='manuscript_draft' AND created_ts>=?")
+    "SELECT COUNT(*) AS n FROM research_job_runs WHERE project_id=? AND kind='manuscript_draft' AND created_ts>=? AND " + PO_FREE_FAILURE_SQL)
     .bind(projectId, dayStart).first();
   if (((p && p.n) || 0) + 1 > DAILY_CAPS.poProjectJobs)
     return { code: "cap_po_project_daily", message: HARD_STOP_MESSAGES.cap_po_project_daily };
   const u = await db.prepare(
-    "SELECT COUNT(*) AS n FROM research_job_runs WHERE created_by=? AND kind='manuscript_draft' AND created_ts>=?")
+    "SELECT COUNT(*) AS n FROM research_job_runs WHERE created_by=? AND kind='manuscript_draft' AND created_ts>=? AND " + PO_FREE_FAILURE_SQL)
     .bind(uid, dayStart).first();
   if (((u && u.n) || 0) + 1 > DAILY_CAPS.poUserJobs)
     return { code: "cap_po_user_daily", message: HARD_STOP_MESSAGES.cap_po_user_daily };
