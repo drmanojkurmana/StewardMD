@@ -253,6 +253,12 @@
   /* ==================== Loader (po_adapter/loader.py) ==================== */
 
   var RATIO_MEASURES = { OR: 1, RR: 1, HR: 1, ROM: 1, IRR: 1, RRR: 1 };
+  var LOG_RATIO_PATHS = {
+    "pooled.effect": 1, "pooled.ciLower": 1, "pooled.ciUpper": 1,
+    "wald.effect": 1, "wald.ciLower": 1, "wald.ciUpper": 1,
+    "hksj.effect": 1, "hksj.ciLower": 1, "hksj.ciUpper": 1,
+    "predictionInterval.lower": 1, "predictionInterval.upper": 1
+  };
   var GRADE_CERTAINTIES = { high: 1, moderate: 1, low: 1, "very low": 1 };
 
   function nullForMeasure(measure) {
@@ -273,6 +279,18 @@
     }
   }
 
+  var ALIAS_PAIRS = [
+    ["estimate", "pooled.effect"],
+    ["effect", "pooled.effect"],
+    ["ciLower", "pooled.ciLower"],
+    ["ciUpper", "pooled.ciUpper"],
+    ["p", "pooled.p"],
+    ["i2", "heterogeneity.i2"],
+    ["tau2", "heterogeneity.tau2"],
+    ["q", "heterogeneity.q"],
+    ["df", "heterogeneity.df"]
+  ];
+
   function buildTokenTable(runs) {
     var table = {};
     var list = Array.isArray(runs) ? runs : [];
@@ -282,18 +300,39 @@
       if (!runId || !isPlainObject(run.result)) {
         throw makeError("invalid_run", String(runId));
       }
-      var nullVal = nullForMeasure(run.measure || "");
+      var measure = String(run.measure || "");
+      var nullVal = nullForMeasure(measure);
+      var isEngineRatio = !!(
+        RATIO_MEASURES[measure.toUpperCase()] &&
+        isPlainObject(run.result.pooled) &&
+        run.result.scale !== "ratio"
+      );
       var pairs = [];
       flattenNumeric(run.result, "", pairs);
       for (var j = 0; j < pairs.length; j++) {
         var path = pairs[j][0];
         var val = pairs[j][1];
+        var outVal = (isEngineRatio && LOG_RATIO_PATHS[path]) ? Math.exp(val) : val;
+        if (!isFinite(outVal)) outVal = val;
         table[runId + "." + path] = {
-          value: val,
+          value: outVal,
           "null": nullVal,
-          measure: run.measure || "",
+          measure: measure,
           runId: runId
         };
+      }
+      for (var ai = 0; ai < ALIAS_PAIRS.length; ai++) {
+        var sk = runId + "." + ALIAS_PAIRS[ai][0];
+        var nk = runId + "." + ALIAS_PAIRS[ai][1];
+        if (!table[sk] && table[nk]) {
+          var src = table[nk];
+          table[sk] = {
+            value: src.value,
+            "null": src["null"],
+            measure: src.measure,
+            runId: src.runId
+          };
+        }
       }
     }
     return table;
@@ -429,22 +468,29 @@
   }
 
   function renderLog(manifest, tokenTable) {
-    var lines = ["# Analysis runs (deterministic engine output; insert as tokens)", ""];
+    var lines = [
+      "# Analysis runs (deterministic engine output; insert as tokens)",
+      "Formatting notes: all ratio effects (OR/RR/HR/ROM/IRR/RRR) below are already exponentiated on the ratio display scale (null = 1.0; < 1.0 favors intervention). I^2 tokens already render '%', so write I^2={{run:...i2}} without a trailing %. P-value tokens render APA format ('< .001' or '.023'), so write 'p {{run:...p}}' without '=' when p < 0.001.",
+      ""
+    ];
     var runs = manifest.runs || [];
     var tableKeys = Object.keys(tokenTable);
     for (var i = 0; i < runs.length; i++) {
       var run = runs[i] || {};
+      var measure = String(run.measure || "");
+      var isRatio = !!RATIO_MEASURES[measure.toUpperCase()];
+      var scaleLabel = isRatio ? "ratio display scale (null 1.0)" : "difference scale (null 0.0)";
       lines.push("## Run " + run.runId);
       lines.push("Engine: " + (run.engine || "") + " " + (run.engineVersion || "") + "; measure " +
-        (run.measure || "") + "; method " + (run.method || ""));
+        measure + " (" + scaleLabel + "); method " + (run.method || ""));
       for (var j = 0; j < tableKeys.length; j++) {
         var path = tableKeys[j];
         var entry = tokenTable[path];
         if (entry.runId !== run.runId) continue;
         var fieldPath = path.slice(path.indexOf(".") + 1);
         var token = "{{run:" + entry.runId + "." + fieldPath + "}}";
-        lines.push("- " + fieldPath + ": " + token + " (internal value " + entry.value + "; null " + entry["null"] +
-          ". Insert the TOKEN in Abstract/Results, never the number.)");
+        lines.push("- " + fieldPath + ": " + token + " (display value " + entry.value + "; null " + entry["null"] +
+          "; " + scaleLabel + ". Insert the TOKEN in Abstract/Results, never the number.)");
       }
       lines.push("");
     }
@@ -482,7 +528,14 @@
     leq: "\u2264",
     ge: "\u2265",
     geq: "\u2265",
-    approx: "\u2248"
+    approx: "\u2248",
+    tau: "\u03c4",
+    chi: "\u03c7",
+    alpha: "\u03b1",
+    beta: "\u03b2",
+    mu: "\u03bc",
+    sigma: "\u03c3",
+    Delta: "\u0394"
   };
   var STRIP_NOARG_CMDS = /\\(?:noindent|smallskip|medskip|bigskip|centering|maketitle|tableofcontents|newpage|clearpage|hline|toprule|midrule|bottomrule)(?![A-Za-z@])[ \t]*/g;
   var DROP_ARG_CMDS = {
@@ -970,7 +1023,7 @@
     s = unwrapPairedDelim(s, /\\\(/, /\\\)/);
     s = unwrapInlineDollar(s);
 
-    s = s.replace(/\\(times|pm|leq|le|geq|ge|approx)(?![A-Za-z@])/g, function (full, name, offset) {
+    s = s.replace(/\\(times|pm|leq|le|geq|ge|approx|tau|chi|alpha|beta|mu|sigma|Delta)(?![A-Za-z@])/g, function (full, name, offset) {
       return evenBackslashes(s, offset) ? MATH_SYMBOLS[name] : full;
     });
 
@@ -990,6 +1043,9 @@
       return tok;
     }
     s = replaceBracedCommands(s, refMap, maskUrl);
+    s = s.replace(/https?:\/\/[^\s<>"')}\]]+/g, function (m) {
+      return maskUrl(m);
+    });
 
     s = s.replace(/~/g, function (full, offset) {
       return (offset > 0 && s.charAt(offset - 1) === "\\") ? full : " ";
@@ -1010,6 +1066,16 @@
     s = s.replace(/\\[A-Za-z@]+\*?/g, "");
     s = s.replace(/[{}]/g, "");
 
+    var dashLines = s.split("\n");
+    for (var dli = 0; dli < dashLines.length; dli++) {
+      var dl = dashLines[dli];
+      if (!/^\s*\|[\s\-|:]+\|\s*$/.test(dl)) {
+        dl = dl.replace(/(^|[^-])---(?!-)/g, "$1 - ").replace(/(^|[^-])--(?!-)/g, "$1-");
+        dashLines[dli] = dl;
+      }
+    }
+    s = dashLines.join("\n");
+
     for (var bi = 0; bi < escapedBraces.length; bi++) {
       s = s.split(prefix + "B" + bi + "Z").join(escapedBraces[bi]);
     }
@@ -1019,6 +1085,8 @@
     for (var pi = 0; pi < protectedList.length; pi++) {
       s = s.split(prefix + "P" + pi + "Z").join(protectedList[pi]);
     }
+
+    s = s.replace(/(\{\{run:[^}]*\.(?:i2|i_squared)\}\})\s*%/g, "$1");
 
     s = s.replace(/[ \t]{2,}/g, " ");
     s = s.replace(/[ \t]+\n/g, "\n");
@@ -1437,9 +1505,27 @@
     return violations;
   }
 
+  var FIELD_ALIASES = {
+    estimate: ["effect", "pooled.effect"],
+    effect: ["estimate", "pooled.effect"],
+    ciLower: ["ci_lower", "pooled.ciLower"],
+    ci_lower: ["ciLower", "pooled.ciLower"],
+    ciUpper: ["ci_upper", "pooled.ciUpper"],
+    ci_upper: ["ciUpper", "pooled.ciUpper"],
+    p: ["pooled.p"]
+  };
+
   function runField(table, runId, field) {
     var entry = table[runId + "." + field];
-    return entry ? entry.value : null;
+    if (entry) return entry.value;
+    var alts = FIELD_ALIASES[field];
+    if (alts) {
+      for (var i = 0; i < alts.length; i++) {
+        var e2 = table[runId + "." + alts[i]];
+        if (e2) return e2.value;
+      }
+    }
+    return null;
   }
 
   function checkDirection(sections, tokenTable) {

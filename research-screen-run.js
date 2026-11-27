@@ -518,25 +518,27 @@
     var topPadding = 50;
     var bottomPadding = 75;
     var totalHeight = topPadding + (rows.length * rowHeight) + bottomPadding;
-    var totalWidth = 840;
+    var totalWidth = 1040;
 
-    // Column positions
+    // Column positions (wide enough that Data and Effect [CI] never overlap)
     var colStudyX = 15;
-    var colDataX = 185;
-    var colEffectX = 310;
-    var plotLeft = 400;
-    var plotRight = 720;
+    var colDataX = 205;
+    var colEffectX = 390;
+    var plotLeft = 580;
+    var plotRight = 955;
     var plotWidth = plotRight - plotLeft;
-    var colWeightX = 770;
+    var colWeightX = 1025;
 
-    // X-Axis range determination
+    // X-Axis range determination (r.calc.effect / ciLower / ciUpper are already on display scale)
     var minVal = Infinity, maxVal = -Infinity;
     for (var j = 0; j < rows.length; j++) {
       var r = rows[j];
       if (r.calc && !r.calc.excluded) {
-        var lo = isRatio ? Math.exp(r.calc.ciLower) : r.calc.ciLower;
-        var hi = isRatio ? Math.exp(r.calc.ciUpper) : r.calc.ciUpper;
-        var pt = isRatio ? Math.exp(r.calc.yi) : r.calc.yi;
+        var lo = r.calc.ciLower;
+        var hi = r.calc.ciUpper;
+        var pt = (r.calc.effect != null && isFinite(r.calc.effect))
+          ? r.calc.effect
+          : (isRatio ? Math.exp(r.calc.yi) : r.calc.yi);
         if (lo < minVal) minVal = lo;
         if (hi > maxVal) maxVal = hi;
         if (pt < minVal) minVal = pt;
@@ -618,6 +620,7 @@
       var row = rows[k];
       var y = topPadding + (k * rowHeight);
       var studyLabel = row.study.label || ("Study " + (k + 1));
+      if (studyLabel.length > 26) studyLabel = studyLabel.slice(0, 23) + "...";
 
       // Study label
       svg.push('  <text x="' + colStudyX + '" y="' + (y + 4) + '" class="rf-text rf-bold">' + esc(studyLabel) + '</text>');
@@ -629,12 +632,15 @@
       } else if (row.study.inputs && row.study.inputs.mean1 !== undefined) {
         dataStr = row.study.inputs.mean1 + " vs " + row.study.inputs.mean2;
       }
+      if (dataStr.length > 24) dataStr = dataStr.slice(0, 21) + "...";
       svg.push('  <text x="' + colDataX + '" y="' + (y + 4) + '" class="rf-text rf-mono">' + esc(dataStr) + '</text>');
 
       if (row.calc && !row.calc.excluded) {
-        var effPt = isRatio ? Math.exp(row.calc.yi) : row.calc.yi;
-        var effLo = isRatio ? Math.exp(row.calc.ciLower) : row.calc.ciLower;
-        var effHi = isRatio ? Math.exp(row.calc.ciUpper) : row.calc.ciUpper;
+        var effPt = (row.calc.effect != null && isFinite(row.calc.effect))
+          ? row.calc.effect
+          : (isRatio ? Math.exp(row.calc.yi) : row.calc.yi);
+        var effLo = row.calc.ciLower;
+        var effHi = row.calc.ciUpper;
 
         // Effect [CI] text
         var effStr = fmtNum(effPt, 2) + " [" + fmtNum(effLo, 2) + ", " + fmtNum(effHi, 2) + "]";
@@ -741,9 +747,12 @@
       }
 
       var weight = result.weights && result.weights[i] != null ? result.weights[i].toFixed(2) : "0.00";
-      var effPt = eff && !eff.excluded ? (isRatio ? Math.exp(eff.yi).toFixed(4) : eff.yi.toFixed(4)) : "";
-      var effLo = eff && !eff.excluded ? (isRatio ? Math.exp(eff.ciLower).toFixed(4) : eff.ciLower.toFixed(4)) : "";
-      var effHi = eff && !eff.excluded ? (isRatio ? Math.exp(eff.ciUpper).toFixed(4) : eff.ciUpper.toFixed(4)) : "";
+      var effPtVal = eff && !eff.excluded
+        ? ((eff.effect != null && isFinite(eff.effect)) ? eff.effect : (isRatio ? Math.exp(eff.yi) : eff.yi))
+        : null;
+      var effPt = effPtVal != null ? effPtVal.toFixed(4) : "";
+      var effLo = eff && !eff.excluded && eff.ciLower != null ? Number(eff.ciLower).toFixed(4) : "";
+      var effHi = eff && !eff.excluded && eff.ciUpper != null ? Number(eff.ciUpper).toFixed(4) : "";
       var ev1 = (s.inputs && s.inputs.events1 != null) ? s.inputs.events1 : "";
       var n1 = (s.inputs && s.inputs.n1 != null) ? s.inputs.n1 : "";
       var ev2 = (s.inputs && s.inputs.events2 != null) ? s.inputs.events2 : "";
@@ -812,7 +821,7 @@
         cleanSvg = cleanSvg.replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg"');
       }
       var vb = cleanSvg.match(/viewBox="0 0 (\d+) (\d+)"/);
-      var w = vb ? parseInt(vb[1], 10) : 840;
+      var w = vb ? parseInt(vb[1], 10) : 1040;
       var h = vb ? parseInt(vb[2], 10) : 480;
       cleanSvg = cleanSvg.replace(/width="100%"/, 'width="' + w + '"');
       var scale = 2;
@@ -1095,7 +1104,8 @@
     render: renderRunScreen,
     exportCsv: exportCsv,
     exportManifest: exportManifest,
-    exportForestPng: exportForestPng
+    exportForestPng: exportForestPng,
+    generateForestPlotSvg: generateForestPlotSvg
   };
 
 })(typeof window !== "undefined" ? window : globalThis);

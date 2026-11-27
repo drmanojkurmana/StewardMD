@@ -89,6 +89,8 @@ RULE_TABLE: dict[str, Callable[[Any], str]] = {
     "ciUpper": format_effect,
     "ci_lower": format_effect,
     "ci_upper": format_effect,
+    "lower": format_effect,
+    "upper": format_effect,
     "tau2": format_effect,
     "tau": format_effect,
     "se": format_effect,
@@ -156,6 +158,68 @@ def format_value_for_field(field_path: str, value: Any) -> str:
     return str(value)
 
 
+_RATIO_MEASURES = {"OR", "RR", "HR", "ROM", "IRR", "RRR"}
+_LOG_RATIO_PATHS = {
+    "pooled.effect", "pooled.ciLower", "pooled.ciUpper",
+    "wald.effect", "wald.ciLower", "wald.ciUpper",
+    "hksj.effect", "hksj.ciLower", "hksj.ciUpper",
+    "predictionInterval.lower", "predictionInterval.upper",
+}
+_FIELD_ALIASES = {
+    "estimate": ("effect", "pooled.effect"),
+    "effect": ("estimate", "pooled.effect"),
+    "ciLower": ("ci_lower", "pooled.ciLower"),
+    "ci_lower": ("ciLower", "pooled.ciLower"),
+    "ciUpper": ("ci_upper", "pooled.ciUpper"),
+    "ci_upper": ("ciUpper", "pooled.ciUpper"),
+    "p": ("pooled.p",),
+    "i2": ("heterogeneity.i2",),
+    "tau2": ("heterogeneity.tau2",),
+    "q": ("heterogeneity.q",),
+    "df": ("heterogeneity.df",),
+}
+
+
+def _lookup_direct(result: dict, field_path: str):
+    if field_path in result:
+        return field_path, result[field_path]
+    curr = result
+    for part in field_path.split("."):
+        if isinstance(curr, dict) and part in curr:
+            curr = curr[part]
+        else:
+            return field_path, None
+    if curr is not None:
+        return field_path, curr
+    return field_path, None
+
+
+def _lookup_path(result: dict, field_path: str):
+    path, val = _lookup_direct(result, field_path)
+    if val is not None:
+        return path, val
+    for alt in _FIELD_ALIASES.get(field_path, ()):
+        found_path, found_val = _lookup_direct(result, alt)
+        if found_val is not None:
+            return found_path, found_val
+    return field_path, None
+
+
+def _maybe_exp(run: dict, result: dict, resolved_path: str, value: Any):
+    import math
+    if not isinstance(value, (int, float)) or isinstance(value, bool):
+        return value
+    measure = str(run.get("measure", "") or "").upper()
+    is_engine_ratio = (
+        measure in _RATIO_MEASURES
+        and isinstance(result.get("pooled"), dict)
+        and result.get("scale") != "ratio"
+    )
+    if is_engine_ratio and resolved_path in _LOG_RATIO_PATHS:
+        return math.exp(value)
+    return value
+
+
 def render_tokens(text: str, runs: list | dict, *, strict: bool = False) -> str:
     """Deterministic token -> formatted value substitution.
 
@@ -183,38 +247,30 @@ def render_tokens(text: str, runs: list | dict, *, strict: bool = False) -> str:
 
         # Composite CI tokens
         if field_path.lower() in ("ci", "ci95", "confidence_interval", "confidenceinterval"):
-            lo = result.get("ciLower") if "ciLower" in result else result.get("ci_lower")
-            hi = result.get("ciUpper") if "ciUpper" in result else result.get("ci_upper")
+            lo_path, lo = _lookup_path(result, "ciLower")
+            hi_path, hi = _lookup_path(result, "ciUpper")
             if lo is None or hi is None:
                 ci_pair = result.get("ci")
                 if isinstance(ci_pair, (list, tuple)) and len(ci_pair) == 2:
                     lo, hi = ci_pair[0], ci_pair[1]
+            else:
+                lo = _maybe_exp(run, result, lo_path, lo)
+                hi = _maybe_exp(run, result, hi_path, hi)
             if lo is None or hi is None:
                 if strict:
                     raise UnresolvedTokenError(token_str, f"missing ciLower/ciUpper in run '{run_id}'")
                 return token_str
             return format_ci(lo, hi)
 
-        # Lookup by exact field path or dot-path traversal
-        value = None
-        if field_path in result:
-            value = result[field_path]
-        else:
-            curr = result
-            parts = field_path.split(".")
-            for part in parts:
-                if isinstance(curr, dict) and part in curr:
-                    curr = curr[part]
-                else:
-                    curr = None
-                    break
-            value = curr
+        # Lookup by exact field path, dot-path traversal, or alias
+        resolved_path, value = _lookup_path(result, field_path)
 
         if value is None:
             if strict:
                 raise UnresolvedTokenError(token_str, f"field '{field_path}' not found in run '{run_id}'")
             return token_str
 
+        value = _maybe_exp(run, result, resolved_path, value)
         return format_value_for_field(field_path, value)
 
     text = text or ""
@@ -224,4 +280,7 @@ def render_tokens(text: str, runs: list | dict, *, strict: bool = False) -> str:
         for match in LOOSE_TOKEN_RE.finditer(text):
             if TOKEN_RE.fullmatch(match.group(0)) is None:
                 raise UnresolvedTokenError(match.group(0), "malformed token; canonical form is {{run:<runId>.<fieldPath>}}")
-    return TOKEN_RE.sub(sub, text)
+    out = TOKEN_RE.sub(sub, text)
+    out = re.sub(r"(\d+(?:\.\d+)?)%{2,}", r"\1%", out)
+    out = re.sub(r"\b([pP])\s*=\s*([<>]\s*\.\d+)", r"\1 \2", out)
+    return out

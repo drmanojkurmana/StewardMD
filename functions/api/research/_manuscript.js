@@ -41,9 +41,18 @@ const SENTENCE_RE = /(?<=[.!?])\s+/;
 const NUMBER_SECTIONS = ["abstract", "results"];
 const CLAIM_SECTIONS = ["abstract", "results", "discussion"];
 const CI_ALIASES = { ci: 1, ci95: 1, confidence_interval: 1, confidenceinterval: 1 };
-const TWO_DEC = { estimate: 1, effect: 1, yi: 1, or: 1, rr: 1, rd: 1, md: 1, smd: 1, hr: 1, hedges_g: 1, ciLower: 1, ciUpper: 1, ci_lower: 1, ci_upper: 1, tau2: 1, tau: 1, se: 1, se_yi: 1, q: 1 };
+const TWO_DEC = { estimate: 1, effect: 1, yi: 1, or: 1, rr: 1, rd: 1, md: 1, smd: 1, hr: 1, hedges_g: 1, ciLower: 1, ciUpper: 1, ci_lower: 1, ci_upper: 1, lower: 1, upper: 1, tau2: 1, tau: 1, se: 1, se_yi: 1, q: 1 };
 const INT_FIELDS = { k: 1, n: 1, total: 1, sample_size: 1, count: 1, studies: 1, participants: 1, events: 1, events_intervention: 1, events_control: 1, df: 1 };
 const NULLS = { OR: 1, RR: 1, HR: 1, ROM: 1, IRR: 1, RRR: 1, MD: 0, RD: 0, SMD: 0 };
+const RATIO_MEASURES = new Set(["OR", "RR", "HR", "ROM", "IRR", "RRR"]);
+/* Engine runs (research-engine.js) store pooled/wald/hksj/predictionInterval on log scale
+ * for ratio measures; exponentiate those paths once so tokens render on ratio display scale. */
+const LOG_RATIO_PATHS = new Set([
+  "pooled.effect", "pooled.ciLower", "pooled.ciUpper",
+  "wald.effect", "wald.ciLower", "wald.ciUpper",
+  "hksj.effect", "hksj.ciLower", "hksj.ciUpper",
+  "predictionInterval.lower", "predictionInterval.upper",
+]);
 
 function iso(ts) {
   return new Date(ts).toISOString().replace(/\.\d{3}Z$/, "Z");
@@ -138,11 +147,14 @@ export async function tokenTable(db, projectId, stored) {
   const runs = (await db.prepare("SELECT id, measure, result_json FROM research_runs WHERE project_id=?").bind(projectId).all()).results || [];
   for (const run of runs) {
     const result = parseJson(run.result_json, {});
-    walkResult(result, "", table, run.id, run.measure);
+    const isEngineRatio = RATIO_MEASURES.has(String(run.measure || "").toUpperCase()) &&
+      !!(result && result.pooled && typeof result.pooled === "object" && !Array.isArray(result.pooled)) &&
+      result.scale !== "ratio";
+    walkResult(result, "", table, run.id, run.measure, isEngineRatio);
   }
   return table;
 }
-function walkResult(node, prefix, table, runId, measure) {
+function walkResult(node, prefix, table, runId, measure, isEngineRatio) {
   if (!node || typeof node !== "object") return;
   for (const k of Object.keys(node)) {
     if (!/^[A-Za-z0-9_]+$/.test(k)) continue;
@@ -150,31 +162,51 @@ function walkResult(node, prefix, table, runId, measure) {
     const v = node[k];
     const key = runId + "." + path;
     if (typeof v === "number" && Number.isFinite(v)) {
-      if (!table[key]) table[key] = { value: v, runId, measure, null: NULLS[measure] };
+      const outVal = (isEngineRatio && LOG_RATIO_PATHS.has(path)) ? Math.exp(v) : v;
+      if (!table[key] && Number.isFinite(outVal)) table[key] = { value: outVal, runId, measure, null: NULLS[measure] };
     } else if (Array.isArray(v) && v.length === 2 && v.every((n) => typeof n === "number" && Number.isFinite(n))) {
       if (!table[key]) table[key] = { value: v.slice(), runId, measure, null: NULLS[measure] };
     } else if (v && typeof v === "object" && !Array.isArray(v)) {
-      walkResult(v, path, table, runId, measure);
+      walkResult(v, path, table, runId, measure, isEngineRatio);
     }
   }
 }
+const FIELD_ALIASES = {
+  estimate: ["effect", "pooled.effect"],
+  effect: ["estimate", "pooled.effect"],
+  ciLower: ["ci_lower", "pooled.ciLower"],
+  ci_lower: ["ciLower", "pooled.ciLower"],
+  ciUpper: ["ci_upper", "pooled.ciUpper"],
+  ci_upper: ["ciUpper", "pooled.ciUpper"],
+  p: ["pooled.p"],
+  i2: ["heterogeneity.i2"],
+  tau2: ["heterogeneity.tau2"],
+  q: ["heterogeneity.q"],
+  df: ["heterogeneity.df"],
+};
 function fieldValue(table, runId, field) {
   const entry = table[runId + "." + field];
-  return entry && typeof entry.value === "number" ? entry.value : null;
+  if (entry && typeof entry.value === "number") return entry.value;
+  const alts = FIELD_ALIASES[field];
+  if (alts) {
+    for (const alt of alts) {
+      const e2 = table[runId + "." + alt];
+      if (e2 && typeof e2.value === "number") return e2.value;
+    }
+  }
+  return null;
 }
 function boundsOf(table, runId) {
   const lo = fieldValue(table, runId, "ciLower");
   const hi = fieldValue(table, runId, "ciUpper");
   if (lo != null && hi != null) return [lo, hi];
-  const lo2 = fieldValue(table, runId, "ci_lower");
-  const hi2 = fieldValue(table, runId, "ci_upper");
-  if (lo2 != null && hi2 != null) return [lo2, hi2];
   const ci = table[runId + ".ci"];
   if (ci && Array.isArray(ci.value) && ci.value.length === 2) return ci.value;
   return null;
 }
 function tokenResolves(table, runId, field) {
   if (table[runId + "." + field]) return true;
+  if (fieldValue(table, runId, field) != null) return true;
   if (CI_ALIASES[String(field).toLowerCase()] && boundsOf(table, runId)) return true;
   return false;
 }
@@ -192,14 +224,16 @@ function publicTokens(text, table) {
       continue;
     }
     const entry = table[key];
-    if (Array.isArray(entry.value) && entry.value.length === 2) {
+    if (entry && Array.isArray(entry.value) && entry.value.length === 2) {
       const formatted = formatCi(entry.value[0], entry.value[1]);
       if (formatted) out[key] = { value: entry.value, formatted };
       continue;
     }
-    const formatted = formatField(field, entry.value);
+    const val = entry ? entry.value : fieldValue(table, runId, field);
+    if (val == null) continue;
+    const formatted = formatField(field, val);
     if (formatted == null) continue;
-    out[key] = { value: entry.value, formatted };
+    out[key] = { value: val, formatted };
   }
   return out;
 }
@@ -242,7 +276,8 @@ function spanAllowed(spans, start, end) {
 
 /* Release gates. Types follow manuscript-api.md. Values compared here are
  * the stored token table, never a freshly computed effect. */
-export function gateManuscript(sections, references, table) {
+export function gateManuscript(sections, references, table, opts) {
+  const requireRunTokens = !(opts && opts.requireRunTokens === false);
   const failures = [];
   const checks = {
     tokens: { total: 0, resolved: 0, unresolved: 0 },
@@ -256,7 +291,7 @@ export function gateManuscript(sections, references, table) {
     const text = String(section.text || "");
     const sid = section.id || "";
     const location = (section.heading || sid || "Section") + " section";
-    const numberGated = sectionGated(section, NUMBER_SECTIONS);
+    const numberGated = requireRunTokens && sectionGated(section, NUMBER_SECTIONS);
     if (numberGated) {
       const masked = maskTokens(text);
       const allowed = allowedNumberSpans(text);
@@ -319,7 +354,7 @@ export function gateManuscript(sections, references, table) {
         }
       }
     }
-    if (!sectionGated(section, CLAIM_SECTIONS)) continue;
+    if (!requireRunTokens || !sectionGated(section, CLAIM_SECTIONS)) continue;
     for (const sentence of text.split(SENTENCE_RE)) {
       if (!CLAIM_RE.test(sentence)) continue;
       const claimExempt = WHETHER_RE.test(sentence) || OBJECTIVE_RE.test(sentence);
@@ -611,7 +646,10 @@ export async function getManuscript(ctx, projectId, url) {
     if (!Number.isInteger(version)) return err(400, "invalid_body", "version must be an integer", requestId);
     row = await versionByNumber(db, projectId, version);
   }
-  if (!row) return err(404, "manuscript_not_found", "Manuscript not found", requestId);
+  if (!row) {
+    if (raw == null || raw === "") return json({ manuscript: null }, 200, { "x-request-id": requestId });
+    return err(404, "manuscript_not_found", "Manuscript not found", requestId);
+  }
   return json({ manuscript: await manuscriptOf(db, projectId, row) }, 200, { "x-request-id": requestId });
 }
 
@@ -790,7 +828,13 @@ async function gatesFor(ctx, projectId, version) {
   const sections = (await loadSections(db, row.id)).map(sectionOf);
   const refs = parseJson(row.references_json, []);
   const table = await tokenTable(db, projectId, parseJson(row.tokens_json, {}));
-  return { row, report: gateManuscript(sections, refs, table) };
+  const project = await db.prepare("SELECT study_type FROM research_projects WHERE id=? AND status!='deleted'").bind(projectId).first();
+  const st = project && project.study_type ? String(project.study_type) : "";
+  const isReview = !st || /systematic|meta[-_\s]?analys/i.test(st);
+  const hasRuns = Object.keys(table).length > 0;
+  const tokOnce = new RegExp(TOKEN_RE.source);
+  const hasTokens = sections.some((s) => tokOnce.test(String(s.text || "")));
+  return { row, report: gateManuscript(sections, refs, table, { requireRunTokens: isReview || hasRuns || hasTokens }) };
 }
 
 export async function manuscriptGates(ctx, projectId, url) {

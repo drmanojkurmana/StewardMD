@@ -142,7 +142,9 @@ test("manuscript: draft job becomes a version, roles, stale 409, approve, lock, 
   const env = freshEnv();
   const p = await makeProject(env);
   const pid = p.id;
-  assert.equal((await call(env, "GET", "v1/projects/" + pid + "/manuscript", "tok-alice")).http, 404);
+  const initialMan = await call(env, "GET", "v1/projects/" + pid + "/manuscript", "tok-alice");
+  assert.equal(initialMan.http, 200);
+  assert.equal(initialMan.manuscript, null);
 
   await seedDraft(env, pid);
   const got = await call(env, "GET", "v1/projects/" + pid + "/manuscript", "tok-alice");
@@ -265,7 +267,9 @@ test("manuscript: first section save creates version 1, upserts sections, export
   sql(env).prepare("INSERT INTO research_runs (id,project_id,measure,model,result_json,engine,created_by,created_ts) VALUES ('r1',?,'RR','random_dl',?,'research-engine','u-alice',?)")
     .run(pid, JSON.stringify({ estimate: 0.49, ciLower: 0.31, ciUpper: 0.78, p: 0.002, k: 8, i2: 22.4 }), now);
 
-  assert.equal((await call(env, "GET", "v1/projects/" + pid + "/manuscript", "tok-alice")).http, 404);
+  const initialMan = await call(env, "GET", "v1/projects/" + pid + "/manuscript", "tok-alice");
+  assert.equal(initialMan.http, 200);
+  assert.equal(initialMan.manuscript, null);
   assert.deepEqual((await call(env, "GET", "v1/projects/" + pid + "/manuscript/versions", "tok-alice")).versions, []);
 
   // Role and validation checks before creating version 1

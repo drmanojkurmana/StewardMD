@@ -107,7 +107,15 @@
       crossesNull = (opts.ciLower <= 1 && opts.ciUpper >= 1);
     }
 
+    var isCaseControl = !!(opts.caseControl || /case[-_\s]?control/i.test(String(opts.studyType || "")));
+    var expName = (typeof opts.outcome === "string" && opts.outcome.trim())
+      ? opts.outcome.trim()
+      : ((typeof opts.exposure === "string" && opts.exposure.trim()) ? opts.exposure.trim() : "exposure");
+
     if (crossesNull) {
+      if (measure === "OR" && isCaseControl) {
+        return stat + " (cases vs controls did not clearly differ in odds of " + expName + ")";
+      }
       return stat + " (the result could go either way; these studies cannot tell if it helps or harms)";
     }
 
@@ -141,6 +149,23 @@
     var est = opts.estimate;
     var sentence1 = "";
     var sentence2 = "";
+
+    if (measure === "OR" && isCaseControl) {
+      if (est >= 1) {
+        var pctCcHi = Math.round((est - 1) * 100);
+        sentence1 = "cases vs controls had higher odds of " + expName + "; " + pctCcHi + "% higher.";
+        var ccLoH = Math.round((opts.ciLower - 1) * 100);
+        var ccHiH = Math.round((opts.ciUpper - 1) * 100);
+        sentence2 = "We are fairly sure the real effect is somewhere between " + Math.min(ccLoH, ccHiH) + "% and " + Math.max(ccLoH, ccHiH) + "% higher.";
+      } else {
+        var pctCcLo = Math.round((1 - est) * 100);
+        sentence1 = "cases vs controls had lower odds of " + expName + "; " + pctCcLo + "% lower.";
+        var ccLoL = Math.round((1 - opts.ciUpper) * 100);
+        var ccHiL = Math.round((1 - opts.ciLower) * 100);
+        sentence2 = "We are fairly sure the real effect is somewhere between " + Math.min(ccLoL, ccHiL) + "% and " + Math.max(ccLoL, ccHiL) + "% lower.";
+      }
+      return stat + " (" + sentence1 + " " + sentence2 + ")";
+    }
 
     if (!harmful) {
       /* Outcome is beneficial (e.g. cure). Ratio > 1 is the benefit. */

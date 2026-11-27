@@ -115,6 +115,9 @@ export async function efetchAbstracts(ids, opts = {}) {
   const transport = {
     fetchImpl: opts.fetch, sleep: opts.sleep, random: opts.random,
     now: opts.now || Date.now, deadline: opts.deadline === undefined ? Infinity : opts.deadline,
+    timeoutMs: opts.timeoutMs === undefined ? 30000 : opts.timeoutMs,
+    maxRetries: opts.maxRetries === undefined ? 5 : opts.maxRetries,
+    signal: opts.signal || null,
     bucket: opts.bucket || selectBucket(apiKey),
   };
   const out = new Map();

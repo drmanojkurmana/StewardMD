@@ -1427,7 +1427,7 @@
       res = kruskalTest(ordered);
       return pack(choice, "H", res.statistic, res.df, res.p, byGroup, blankEffect(), dropped);
     }
-    return compareCategorical(labels, ordered, byGroup, dropped);
+    return compareCategorical(labels, ordered, byGroup, dropped, opts);
   }
 
   function compareCorrelation(outcomeValues, groupValues) {
@@ -1486,8 +1486,41 @@
     }, dropped);
   }
 
-  function compareCategorical(labels, ordered, byGroup, dropped) {
-    var colSeen = {}, cols = [], i, j, r, c, counts, choice, small, chi, wk, effect, a, b, d, ev, evIdx, other;
+  function binaryEffectForDesign(wk, opts) {
+    var st = String((opts && opts.studyType) || "").toLowerCase();
+    if (/case[-_\s]?control/.test(st)) {
+      return {
+        measure: "OR",
+        estimate: wk.or,
+        ciLower: wk.orLo,
+        ciUpper: wk.orHi
+      };
+    }
+    if (/\brct\b|randomi|trial|cohort|survival|time to event/.test(st)) {
+      return {
+        measure: "RR",
+        estimate: wk.rr,
+        ciLower: wk.rrLo,
+        ciUpper: wk.rrHi,
+        or: wk.or,
+        orCiLower: wk.orLo,
+        orCiUpper: wk.orHi
+      };
+    }
+    return {
+      measure: "OR",
+      estimate: wk.or,
+      ciLower: wk.orLo,
+      ciUpper: wk.orHi,
+      rr: wk.rr,
+      rrCiLower: wk.rrLo,
+      rrCiUpper: wk.rrHi
+    };
+  }
+
+  function compareCategorical(labels, ordered, byGroup, dropped, opts) {
+    var colSeen = {}, cols = [], i, j, r, c, counts, choice, small, chi, wk, effect, a, b, d, ev, evIdx, other, out;
+    var studyDesign = String((opts && opts.studyType) || "").toLowerCase();
     for (i = 0; i < ordered.length; i++) {
       for (j = 0; j < ordered[i].length; j++) {
         if (!colSeen[ordered[i][j]]) { colSeen[ordered[i][j]] = 1; cols.push(ordered[i][j]); }
@@ -1525,16 +1558,10 @@
       c = counts[1][evIdx];
       d = counts[1][other];
       wk = woolfAndKatz(a, b, c, d);
-      effect = {
-        measure: "OR",
-        estimate: wk.or,
-        ciLower: wk.orLo,
-        ciUpper: wk.orHi,
-        rr: wk.rr,
-        rrCiLower: wk.rrLo,
-        rrCiUpper: wk.rrHi
-      };
-      return pack(choice, null, null, null, fisherExactP(counts), byGroup, effect, dropped);
+      effect = binaryEffectForDesign(wk, opts);
+      out = pack(choice, null, null, null, fisherExactP(counts), byGroup, effect, dropped);
+      if (/case[-_\s]?control/.test(studyDesign)) out.studyDesign = "case-control";
+      return out;
     }
     chi = chiSquare(counts);
     if (labels.length === 2 && cols.length === 2) {
@@ -1546,17 +1573,11 @@
       c = counts[1][evIdx];
       d = counts[1][other];
       wk = woolfAndKatz(a, b, c, d);
-      effect = {
-        measure: "OR",
-        estimate: wk.or,
-        ciLower: wk.orLo,
-        ciUpper: wk.orHi,
-        rr: wk.rr,
-        rrCiLower: wk.rrLo,
-        rrCiUpper: wk.rrHi
-      };
+      effect = binaryEffectForDesign(wk, opts);
     }
-    return pack(choice, "chi2", chi.statistic, chi.df, chi.p, byGroup, effect, dropped);
+    out = pack(choice, "chi2", chi.statistic, chi.df, chi.p, byGroup, effect, dropped);
+    if (/case[-_\s]?control/.test(studyDesign)) out.studyDesign = "case-control";
+    return out;
   }
 
   function crosstab(aValues, bValues) {
@@ -2409,10 +2430,25 @@
       return result.label + " between " + left + " and " + right + " was " + tail + ".";
     }
     if (result.test === "chi_square" || result.test === "fisher" || result.test === "mcnemar") {
+      var isCaseCtrl = /case[-_\s]?control/i.test(String((opts && opts.studyType) || result.studyDesign || ""));
+      if (eff && eff.measure === "RR" && isFin(eff.estimate)) {
+        tail = "risk ratio " + fmtNum(eff.estimate, 2) + ", 95% CI " +
+          fmtNum(eff.ciLower, 2) + " to " + fmtNum(eff.ciUpper, 2);
+        if (isFin(eff.or) && isFin(eff.orCiLower) && isFin(eff.orCiUpper)) {
+          tail += "; odds ratio " + fmtNum(eff.or, 2) + ", 95% CI " +
+            fmtNum(eff.orCiLower, 2) + " to " + fmtNum(eff.orCiUpper, 2);
+        }
+        tail += "; " + result.label + ", " + pbit();
+        return "The risk of " + outcome + " differed between the groups (" + tail + ").";
+      }
       if (eff && eff.measure === "OR" && isFin(eff.estimate)) {
         tail = "odds ratio " + fmtNum(eff.estimate, 2) + ", 95% CI " +
           fmtNum(eff.ciLower, 2) + " to " + fmtNum(eff.ciUpper, 2) + "; " +
           result.label + ", " + pbit();
+        if (isCaseCtrl) {
+          var ccDir = eff.estimate > 1 ? "higher" : (eff.estimate < 1 ? "lower" : "similar");
+          return "Cases vs controls had " + ccDir + " odds of " + outcome + " (" + tail + ").";
+        }
         return "The odds of " + outcome + " differed between the groups (" + tail + ").";
       }
       statBit = isFin(result.statistic) ? (result.statisticName + " = " + fmtNum(result.statistic, 2) + ", ") : "";

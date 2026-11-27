@@ -48,6 +48,14 @@ class LoaderError(ValueError):
         super().__init__(code + (": " + detail if detail else ""))
 
 
+_LOG_RATIO_PATHS = {
+    "pooled.effect", "pooled.ciLower", "pooled.ciUpper",
+    "wald.effect", "wald.ciLower", "wald.ciUpper",
+    "hksj.effect", "hksj.ciLower", "hksj.ciUpper",
+    "predictionInterval.lower", "predictionInterval.upper",
+}
+
+
 def null_for_measure(measure: str) -> float:
     return 1.0 if (measure or "").upper() in RATIO_MEASURES else 0.0
 
@@ -61,18 +69,45 @@ def _flatten_numeric(result: dict, prefix: str = ""):
             yield path, value
 
 
+_ALIAS_PAIRS = (
+    ("estimate", "pooled.effect"),
+    ("effect", "pooled.effect"),
+    ("ciLower", "pooled.ciLower"),
+    ("ciUpper", "pooled.ciUpper"),
+    ("p", "pooled.p"),
+    ("i2", "heterogeneity.i2"),
+    ("tau2", "heterogeneity.tau2"),
+    ("q", "heterogeneity.q"),
+    ("df", "heterogeneity.df"),
+)
+
+
 def build_token_table(runs: list) -> dict:
+    import math
     table = {}
     for run in runs:
         run_id = run.get("runId")
-        if not run_id or not isinstance(run.get("result"), dict):
+        result = run.get("result")
+        if not run_id or not isinstance(result, dict):
             raise LoaderError("invalid_run", str(run_id))
-        null = null_for_measure(run.get("measure", ""))
-        for path, value in _flatten_numeric(run["result"]):
+        measure = str(run.get("measure", "") or "")
+        null = null_for_measure(measure)
+        is_engine_ratio = (
+            measure.upper() in RATIO_MEASURES
+            and isinstance(result.get("pooled"), dict)
+            and result.get("scale") != "ratio"
+        )
+        for path, value in _flatten_numeric(result):
+            out_val = math.exp(value) if (is_engine_ratio and path in _LOG_RATIO_PATHS) else value
             table[f"{run_id}.{path}"] = {
-                "value": value, "null": null,
-                "measure": run.get("measure", ""), "runId": run_id,
+                "value": out_val, "null": null,
+                "measure": measure, "runId": run_id,
             }
+        for short_key, nested_key in _ALIAS_PAIRS:
+            sk = f"{run_id}.{short_key}"
+            nk = f"{run_id}.{nested_key}"
+            if sk not in table and nk in table:
+                table[sk] = dict(table[nk])
     return table
 
 
@@ -213,17 +248,24 @@ def _render_idea(manifest: dict) -> str:
 
 
 def _render_log(manifest: dict, token_table: dict) -> str:
-    lines = ["# Analysis runs (deterministic engine output; insert as tokens)", ""]
+    lines = [
+        "# Analysis runs (deterministic engine output; insert as tokens)",
+        "Formatting notes: all ratio effects (OR/RR/HR/ROM/IRR/RRR) below are already exponentiated on the ratio display scale (null = 1.0; < 1.0 favors intervention). I^2 tokens already render '%', so write I^2={{run:...i2}} without a trailing %. P-value tokens render APA format ('< .001' or '.023'), so write 'p {{run:...p}}' without '=' when p < 0.001.",
+        "",
+    ]
     for run in manifest.get("runs") or []:
+        measure = str(run.get("measure", "") or "")
+        is_ratio = measure.upper() in RATIO_MEASURES
+        scale_label = "ratio display scale (null 1.0)" if is_ratio else "difference scale (null 0.0)"
         lines.append(f"## Run {run.get('runId')}")
         lines.append(f"Engine: {run.get('engine', '')} {run.get('engineVersion', '')}; "
-                     f"measure {run.get('measure', '')}; method {run.get('method', '')}")
+                     f"measure {measure} ({scale_label}); method {run.get('method', '')}")
         for path, entry in token_table.items():
             if entry["runId"] != run.get("runId"):
                 continue
             token = TOKEN_TEMPLATE % (entry["runId"], path.split(".", 1)[1])
             lines.append(f"- {path.split('.', 1)[1]}: {token} "
-                         f"(internal value {entry['value']}; null {entry['null']}. "
+                         f"(display value {entry['value']}; null {entry['null']}; {scale_label}. "
                          f"Insert the TOKEN in Abstract/Results, never the number.)")
         lines.append("")
     return "\n".join(lines)

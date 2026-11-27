@@ -38,6 +38,10 @@ function optsOf(opts = {}) {
     random: opts.random,
     now: opts.now || Date.now,
     deadline: opts.deadline === undefined ? Infinity : opts.deadline,
+    timeoutMs: opts.timeoutMs === undefined ? 30000 : opts.timeoutMs,
+    maxRetries: opts.maxRetries === undefined ? 5 : opts.maxRetries,
+    signal: opts.signal || null,
+    partialOnBudget: !!opts.partialOnBudget,
     bucket: opts.bucket || BUCKET,
   };
 }
@@ -45,7 +49,7 @@ function optsOf(opts = {}) {
 function transport(o) {
   return {
     headers: o.headers, fetchImpl: o.fetchImpl, sleep: o.sleep, random: o.random,
-    now: o.now, deadline: o.deadline, bucket: o.bucket,
+    now: o.now, deadline: o.deadline, timeoutMs: o.timeoutMs, maxRetries: o.maxRetries, signal: o.signal, bucket: o.bucket,
   };
 }
 
@@ -89,32 +93,58 @@ export async function search(query, filters = {}, dateTo = null, opts = {}) {
   const q = buildQuery(query, f, dateTo);
 
   const ids = [];
+  const liteRecords = [];
   let totalCount = null;
   let cursorMark = "*";
   let queryEcho = "";
+  let partial = false;
+  const searchDeadline = o.partialOnBudget && Number.isFinite(o.deadline)
+    ? Math.min(o.deadline, o.now() + Math.max(15000, Math.floor((o.deadline - o.now()) * 0.55)))
+    : o.deadline;
   for (;;) {
+    if (o.partialOnBudget && ids.length > 0 && o.now() > searchDeadline) {
+      partial = true;
+      break;
+    }
     const p = new URLSearchParams();
     p.set("query", q);
     p.set("resultType", "lite");
     p.set("format", "json");
     p.set("pageSize", String(PAGE_SIZE));
     p.set("cursorMark", cursorMark);
-    const body = await readJson(await fetchWithRetry(SEARCH_URL + "?" + p.toString(), transport(o)));
+    let body;
+    try {
+      body = await readJson(await fetchWithRetry(SEARCH_URL + "?" + p.toString(), transport(o)));
+    } catch (e) {
+      if (o.partialOnBudget && ids.length > 0) {
+        partial = true;
+        break;
+      }
+      throw e;
+    }
     if (totalCount === null) {
       totalCount = parseInt(body.hitCount, 10) || 0;
       queryEcho = String(body.query || "");
     }
     const list = resultListOf(body);
-    for (const r of list) ids.push(String(r.source) + ":" + String(r.id));
+    for (const r of list) {
+      ids.push(String(r.source) + ":" + String(r.id));
+      if (o.partialOnBudget && liteRecords.length < 200) liteRecords.push(r);
+    }
     const next = body.nextCursorMark;
     if (ids.length >= totalCount) break;
     if (!list.length || !next || next === cursorMark)
       throw new ConnectorError("search_failed", "Europe PMC returned a short page at cursor " + cursorMark);
     cursorMark = next;
   }
-  if (ids.length !== totalCount)
+  if (!partial && ids.length !== totalCount)
     throw new ConnectorError("search_failed", "Europe PMC id count mismatch: " + ids.length + " of " + totalCount);
-  return { ids, totalCount, metadata: { apiVersion: "unknown", executedAt, queryEcho } };
+  const out = { ids, totalCount, metadata: { apiVersion: "unknown", executedAt, queryEcho } };
+  if (partial) {
+    out.partial = true;
+    out.liteRecords = liteRecords;
+  }
+  return out;
 }
 
 /* Batched raw-record fetch (resultType=core for abstracts + licence). */
@@ -122,6 +152,7 @@ export async function fetchRecords(ids, opts = {}) {
   const o = optsOf(opts);
   const out = [];
   for (let i = 0; i < ids.length; i += FETCH_BATCH) {
+    if (o.partialOnBudget && i > 0 && o.now() > o.deadline) break;
     const parts = ids.slice(i, i + FETCH_BATCH).map((composite) => {
       const at = composite.indexOf(":");
       const src = composite.slice(0, at), id = composite.slice(at + 1);
@@ -132,8 +163,13 @@ export async function fetchRecords(ids, opts = {}) {
     p.set("resultType", "core");
     p.set("format", "json");
     p.set("pageSize", String(PAGE_SIZE));
-    const body = await readJson(await fetchWithRetry(SEARCH_URL + "?" + p.toString(), transport(o)));
-    for (const r of resultListOf(body)) out.push(r);
+    try {
+      const body = await readJson(await fetchWithRetry(SEARCH_URL + "?" + p.toString(), transport(o)));
+      for (const r of resultListOf(body)) out.push(r);
+    } catch (e) {
+      if (o.partialOnBudget) break;
+      throw e;
+    }
   }
   return out;
 }

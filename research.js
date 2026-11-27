@@ -653,8 +653,14 @@
       /* The AI's reply missed required fields (seen live on CTRI); nothing was charged as a stored draft. */
       return { message: e.message || "MaiK did not return a complete draft this time. Try again.", action: "retry", actionLabel: "Try again" };
     }
+    if (code === "gate_failed") {
+      return { message: e.message || "This section needs a fix before exporting. Check your results and references, then try again.", action: "retry", actionLabel: "Try again" };
+    }
     if (code === "consent_needed") {
       return { message: e.message || "Please confirm there are no patient names left in your thesis before continuing.", action: "retry", actionLabel: "Try again" };
+    }
+    if (code === "publication_consent_required") {
+      return { message: "Confirm the patient's written consent first.", action: "pubconsent", actionLabel: "Open Publication consent" };
     }
     if (code === "ceiling_bytes" || status === 413) {
       return { message: "This file is too large for server upload (limit 25 MB). Upload a smaller file or a Word (.docx) document.", action: "retry", actionLabel: "Try again" };
@@ -697,6 +703,8 @@
       var p = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
       if (p && !p.serverId) h += '<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-action="save">Save it to my account</button>';
       h += '<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-action="projects">Back to projects</button>';
+    } else if (f.action === "pubconsent") {
+      h += '<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd-action="pubconsent">' + esc(f.actionLabel || "Open Publication consent") + '</button>';
     } else if (f.action === "back") {
       h += '<button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-action="projects">' + esc(f.actionLabel) + '</button>';
     } else if (retryAttr) {
@@ -2870,6 +2878,8 @@
       saveActiveProjectToAccount();
     } else if (act === "practice-start") {
       navigate("start", {});
+    } else if (act === "pubconsent") {
+      navigate("pubconsent", {});
     } else if (act === "glossary") {
       openGlossary();
     } else if (act === "feedback") {

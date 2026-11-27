@@ -1771,11 +1771,30 @@
     }
 
     function persistRecord(record, statusEl) {
+      var apiPid = (proj && proj.serverId) || pid;
+      var written = container.querySelector("#rmd-pc-written");
+      var saw = container.querySelector("#rmd-pc-saw");
+      var dateEl = container.querySelector("#rmd-pc-date");
+      var date = dateEl ? trim(dateEl.value) : "";
+      var bothTicked = !!(written && written.checked && saw && saw.checked);
+      var shouldConfirmServer = !confirmedFor[pid] && bothTicked && /^\d{4}-\d{2}-\d{2}$/.test(date) && date <= todayIso() &&
+        SMD.api && typeof SMD.api.request === "function" && (!proj || proj.serverId || String(pid || "").indexOf("loc_") !== 0);
+      var serverConfirmP = shouldConfirmServer
+        ? SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(apiPid) + "/publication-consent", {
+            writtenConsentObtained: true, patientSawManuscript: true, consentDate: date
+          }).then(function (res) {
+            if (!res || res.ok !== false) confirmedFor[pid] = date;
+          }, function () {})
+        : Promise.resolve();
       if (G.RMDStore && G.RMDStore.put) {
-        G.RMDStore.put(pid, "pubconsent", "consent", record).then(function () {
-          if (altPid) {
-            G.RMDStore.put(altPid, "pubconsent", "consent", record).catch(function () {});
-          }
+        Promise.all([
+          G.RMDStore.put(pid, "pubconsent", "consent", record).then(function () {
+            if (altPid) {
+              return G.RMDStore.put(altPid, "pubconsent", "consent", record).catch(function () {});
+            }
+          }),
+          serverConfirmP
+        ]).then(function () {
           render(container, { projectId: pid });
         }).catch(function (err) {
           if (statusEl) {
@@ -1783,7 +1802,9 @@
           }
         });
       } else {
-        renderContent(container, proj, pid, stepNo, stepCount, nextLabel, record, altPid, null);
+        serverConfirmP.then(function () {
+          renderContent(container, proj, pid, stepNo, stepCount, nextLabel, record, altPid, null);
+        });
       }
     }
 

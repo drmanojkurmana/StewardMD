@@ -127,3 +127,34 @@ def test_refuses_invalid_grade_certainty(tmp_path):
     with pytest.raises(loader.LoaderError) as exc:
         loader.build_inputs(manifest, tmp_path)
     assert exc.value.code == "invalid_grade"
+
+
+def test_engine_nested_log_ratio_exponentiated_and_log_scale_stated(tmp_path):
+    import math
+    manifest = make_manifest()
+    manifest["runs"] = [{
+        "runId": "r1",
+        "engine": "research-engine.js",
+        "measure": "RR",
+        "method": "random",
+        "result": {
+            "pooled": {
+                "effect": math.log(0.49),
+                "ciLower": math.log(0.34),
+                "ciUpper": math.log(0.70),
+                "se": 0.18,
+            },
+            "heterogeneity": {"i2": 72.8, "tau2": 0.36, "q": 44.1, "df": 12, "p": 0.0001},
+            "k": 13,
+        },
+    }]
+    table = loader.build_token_table(manifest["runs"])
+    assert abs(table["r1.pooled.effect"]["value"] - 0.49) < 1e-6
+    assert abs(table["r1.pooled.ciLower"]["value"] - 0.34) < 1e-6
+    assert abs(table["r1.pooled.ciUpper"]["value"] - 0.70) < 1e-6
+    assert abs(table["r1.estimate"]["value"] - 0.49) < 1e-6
+    assert table["r1.pooled.ciLower"]["null"] == 1.0
+    inputs = loader.build_inputs(manifest, tmp_path)
+    log_text = inputs.experimental_log_file.read_text()
+    assert "display scale" in log_text
+    assert "without a trailing %" in log_text
