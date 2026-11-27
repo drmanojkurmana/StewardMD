@@ -18,6 +18,7 @@ import { extname, join, normalize, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { setTimeout as sleep } from "node:timers/promises";
 import { freePort } from "./free-port.mjs";
+import { createHash } from "node:crypto";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = process.env.ROOT || join(HERE, "..");
@@ -163,7 +164,7 @@ try {
   async function saveOuts(tag) {
     const outs = JSON.parse(await ev(`return JSON.stringify(window.__rx.outs);`) || "{}");
     for (const [name, href] of Object.entries(outs)) { const b64 = String(href).split(",")[1] || ""; writeFileSync(join(OUT, `${LABEL}-${tag}-${name}`), Buffer.from(b64, "base64")); }
-    return Object.fromEntries(Object.entries(outs).map(([k, v]) => [k, Math.round((String(v).split(",")[1] || "").length * 3 / 4)]));
+    return Object.fromEntries(Object.entries(outs).map(([k, v]) => { const buf = Buffer.from(String(v).split(",")[1] || "", "base64"); return [k, { bytes: buf.length, sha256: createHash("sha256").update(k.endsWith(".pdf") ? buf.toString("latin1").replace(/\/CreationDate \([^)]*\)/g, "").replace(/\/ID \[[^\]]*\]/g, "") : buf).digest("hex").slice(0, 16) }]; }));
   }
 
   // First export after app start: includes loading html2canvas + jsPDF on demand.
