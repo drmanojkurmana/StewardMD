@@ -20,6 +20,9 @@ const REVIEWER_RE = /\b\d+\s+(?:reviewers|assessors|screeners)\b|\b(?:reviewers|
 const THRESHOLD_RE = /\b(?:threshold|cutoff|alpha|significance level|type I error)\b[^.!?]{0,30}?\d+(?:\.\d+)?%?|\b(?:heterogeneity|I2|I\u00b2)\b[^.!?]{0,30}?\b(?:25|50|75)\s*%|\b(?:90|95|99)\s*%\s*(?:CI|confidence)\b/gi;
 const CITE_RE = /\\cite\{([^}]+)\}|\[@([A-Za-z0-9_:-]+)\]/g;
 const CLAIM_RE = /\b(?:reduc\w*|decreas\w*|increas\w*|improv\w*|worsen\w*|significant\w*|associat\w*|superior|inferior)\b/i;
+/* A research question or objective is not a result claim; it needs no source. */
+const WHETHER_RE = /\bwhether\b/i;
+const OBJECTIVE_RE = /\b(?:aim(?:s|ed)?|objective|purpose|we (?:sought|set out) to|this (?:review|study|analysis) (?:asks|examines|assesses|evaluates|addresses))\b/i;
 const DIR_DOWN_RE = /\b(?:reduc\w*|decreas\w*|lower(?:ed|ing|s)?|declin\w*)\b/i;
 const DIR_UP_RE = /\b(?:increas\w*|higher|elevat\w*|greater)\b/i;
 const SIG_NEG_RE = /\b(?:not|no|without)\s+significan\w*|\bnon-?significan\w*/i;
@@ -273,16 +276,19 @@ export function gateManuscript(sections, references, table) {
     if (!sectionGated(section, CLAIM_SECTIONS)) continue;
     for (const sentence of text.split(SENTENCE_RE)) {
       if (!CLAIM_RE.test(sentence)) continue;
-      checks.claims.total++;
-      const linked = new RegExp(TOKEN_RE.source).test(sentence) || new RegExp(CITE_RE.source).test(sentence);
-      if (linked) checks.claims.linked++;
-      else {
-        checks.claims.unlinked++;
-        failures.push({
-          type: "unlinked_claim",
-          message: "Claim in " + location + " has no linked run token or citation.",
-          sectionId: sid, location,
-        });
+      const claimExempt = WHETHER_RE.test(sentence) || OBJECTIVE_RE.test(sentence);
+      if (!claimExempt) {
+        checks.claims.total++;
+        const linked = new RegExp(TOKEN_RE.source).test(sentence) || new RegExp(CITE_RE.source).test(sentence);
+        if (linked) checks.claims.linked++;
+        else {
+          checks.claims.unlinked++;
+          failures.push({
+            type: "unlinked_claim",
+            message: "Claim in " + location + " has no linked run token or citation.",
+            sectionId: sid, location,
+          });
+        }
       }
       const down = sentence.match(DIR_DOWN_RE);
       const up = sentence.match(DIR_UP_RE);
