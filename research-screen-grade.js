@@ -728,7 +728,10 @@
         apply: function (draft) {
           var d = draft || {};
           st.serverSugs[run.id] = { imprecision: d.imprecision || null, inconsistency: d.inconsistency || null };
-          return ["imprecision", "inconsistency"];
+          var keys = [];
+          if (d.imprecision && (typeof d.imprecision !== "string" || d.imprecision.trim())) keys.push("imprecision");
+          if (d.inconsistency && (typeof d.inconsistency !== "string" || d.inconsistency.trim())) keys.push("inconsistency");
+          return keys;
         },
         render: function () { render(container); }
       });

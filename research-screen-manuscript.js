@@ -1746,11 +1746,11 @@
   }
 
   function isSectionAiDrafted(secObj) {
-    if (!secObj) return false;
+    if (!secObj || !String(secObj.text || "").trim()) return false;
     if (st.aiDraftedSections && st.aiDraftedSections[secObj.id]) return true;
     var ai = st.manuscript && st.manuscript.ai;
     if (ai && Array.isArray(ai.draftedSectionIds) && ai.draftedSectionIds.indexOf(secObj.id) >= 0) return true;
-    return !!(secObj.text && secObj.text.indexOf("Drafted by MaiK") >= 0);
+    return secObj.text.indexOf("Drafted by MaiK") >= 0;
   }
 
   function formatMonthYear(dateStr) {
@@ -2084,8 +2084,7 @@
     }
     var secs = d.sections;
     if (!secs || (Array.isArray(secs) && !secs.length)) {
-      load(container);
-      return ["manuscript"];
+      return [];
     }
     if (!st.manuscript) st.manuscript = defaultManuscript(st.projectId);
     if (!st.manuscript.sections) st.manuscript.sections = [];
@@ -2105,7 +2104,7 @@
     var draftedIds = [];
     for (var i = 0; i < list.length; i++) {
       var item = list[i];
-      if (!item || !item.id || typeof item.text !== "string") continue;
+      if (!item || !item.id || typeof item.text !== "string" || !item.text.trim()) continue;
       st.aiDraftedSections[item.id] = true;
       draftedIds.push(item.id);
       draftedHeadings.push(item.heading || item.id);
@@ -2125,12 +2124,13 @@
         });
       }
     }
+    if (!draftedIds.length) {
+      return [];
+    }
     st.manuscript.sections = sortSections(st.manuscript.sections);
     recordAiProvenance(res && res.model, draftedHeadings, draftedIds);
     saveLocalManuscript(st.projectId, st.manuscript);
-    if (draftedIds.length) {
-      syncDraftSectionsToServer(list);
-    }
+    syncDraftSectionsToServer(list);
     st.saveNotice = "Drafted by MaiK. Review each section and save when ready.";
     return ["manuscript"];
   }
@@ -3357,7 +3357,12 @@
         if (!st.ai) st.ai = SMD.ai.state();
         h.push('<div class="rmd-man-ai-wrap">');
         h.push(SMD.ai.barHtml(st.ai, { task: "manuscript_draft", label: "manuscript draft", cost: 2 }));
-        h.push(SMD.ai.noteHtml(st.ai, "manuscript"));
+        var hasDraftedSectionText = false;
+        var allSecs = (st.manuscript && st.manuscript.sections) || [];
+        for (var si = 0; si < allSecs.length; si++) {
+          if (isSectionAiDrafted(allSecs[si])) { hasDraftedSectionText = true; break; }
+        }
+        if (hasDraftedSectionText) h.push(SMD.ai.noteHtml(st.ai, "manuscript"));
         h.push(poBlockHtml());
         h.push('</div>');
       }

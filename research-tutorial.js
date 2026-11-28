@@ -387,11 +387,12 @@
       exampleBlurb: "Convert a full 80-page MD/MS thesis into a crisp 3,000-word journal article with verified tables & citations.",
       firstScreen: "thesis",
       manuscriptSections: [
-        { id: "abstract", heading: "Abstract", level: 1, text: "Background: Converting thesis dissertations into concise peer-reviewed manuscripts amplifies clinical impact. Results: Among 120 adults with type 2 diabetes, retinopathy prevalence was 31.7%, driven by diabetes duration and elevated HbA1c. Conclusion: Early fundus screening catches preventable vision loss." },
-        { id: "introduction", heading: "Introduction", level: 1, text: "Diabetic retinopathy remains the leading preventable cause of adult blindness." },
-        { id: "methods", heading: "Methods", level: 1, text: "We condensed our cross-sectional university thesis into IMRaD sections while verifying every table statistic." },
-        { id: "results", heading: "Results", level: 1, text: "Mean age was 54.2 years across 120 participants; multivariable predictors matched the primary thesis Table 7 verbatim." },
-        { id: "discussion", heading: "Discussion", level: 1, text: "Routine annual retinal photography should prioritize patients exceeding 5 years of diabetes duration." }
+        { id: "abstract", heading: "Abstract", level: 1, text: "Background: Converting thesis dissertations into concise peer-reviewed manuscripts amplifies clinical impact. Methods: We conducted an observational cross-sectional evaluation of 120 adults with type 2 diabetes. Results: Retinopathy prevalence was 31.7% (38/120), driven by diabetes duration (OR 1.42) and elevated HbA1c (8.4%). Conclusion: Early fundus screening catches preventable vision loss." },
+        { id: "introduction", heading: "Introduction", level: 1, text: "Diabetic retinopathy remains a leading preventable cause of adult blindness, yet thesis findings rarely reach indexed journals promptly." },
+        { id: "methods", heading: "Methods", level: 1, text: "We condensed our cross-sectional university thesis of 120 adults with type 2 diabetes into IMRaD sections while verifying every table statistic." },
+        { id: "results", heading: "Results", level: 1, text: "Mean age was 54.2 years across 120 participants; retinopathy prevalence was 31.7% (38/120), mean HbA1c 8.4%, and diabetes duration OR 1.42 in Table 7." },
+        { id: "discussion", heading: "Discussion", level: 1, text: "Routine annual retinal photography should prioritize patients exceeding 5 years of diabetes duration." },
+        { id: "conclusion", heading: "Conclusion", level: 1, text: "Structured annual retinal screening in patients with diabetes duration exceeding 5 years helps identify sight-threatening disease early." }
       ]
     }
   ];
@@ -429,7 +430,18 @@
 
   function writeJson(key, val) {
     try {
-      if (G.localStorage) G.localStorage.setItem(key, JSON.stringify(val));
+      if (!G.localStorage) return;
+      try {
+        G.localStorage.setItem(key, JSON.stringify(val));
+      } catch (qErr) {
+        if (key === "smd_rmd_thesis_v1" && val && typeof val === "object") {
+          var ks = Object.keys(val);
+          for (var i = 0; i < ks.length; i++) {
+            if (ks[i].indexOf("tut_") !== 0 && val[ks[i]] && val[ks[i]].pages) delete val[ks[i]].pages;
+          }
+          G.localStorage.setItem(key, JSON.stringify(val));
+        }
+      }
     } catch (e) {}
   }
 
@@ -964,6 +976,32 @@
             costInr: 0
           });
         }
+        if (body && body.task === "thesis_to_paper") {
+          var thStore = readJson("smd_rmd_thesis_v1", {});
+          var thEntry = (thStore && thStore[pid]) || {};
+          if (thEntry.ownUpload || (thEntry.pages && thEntry.pages.length && !thEntry.isTutorialSample)) {
+            return Promise.reject({
+              code: "tutorial_own_thesis",
+              message: "Tutorial drafts are practice only. Start a real project with this thesis so Ask MaiK drafts from your document."
+            });
+          }
+          var sampleSecs = ex.manuscriptSections ? JSON.parse(JSON.stringify(ex.manuscriptSections)) : [];
+          return Promise.resolve({
+            draft: {
+              paperType: "cross_sectional",
+              checklist: "strobe",
+              sections: sampleSecs,
+              tables: [
+                { id: "Table 7", caption: "Table 7: Predictors of Diabetic Retinopathy (n = 120)", reason: "Reports primary multivariable predictors and HbA1c association." }
+              ],
+              references: [
+                { citation: "Colditz GA et al. Efficacy of BCG / Observational Methods. JAMA 1994.", doi: "10.1001/jama.1994.03510370074034", pmid: "8309034" }
+              ]
+            },
+            model: "tutorial-demo",
+            costInr: 0
+          });
+        }
         return Promise.resolve({ draft: {}, model: "tutorial-demo", costInr: 0 });
       }
 
@@ -1488,11 +1526,13 @@
           var thAll = readJson("smd_rmd_thesis_v1", {});
           thAll[proj.id] = {
             filename: "MD_Ophthalmology_Thesis_Diabetic_Retinopathy.pdf",
+            isTutorialSample: true,
+            ownUpload: false,
             paperType: "obs",
             journal: { id: "ijmr", name: "Indian Journal of Medical Research", wordLimit: 3500, abstractFormat: "Structured abstract", referenceStyle: "vancouver" },
             pages: [
-              { n: 1, text: "Chapter 1 Introduction. Prevalence of diabetic retinopathy was assessed across 120 adults with type 2 diabetes. Mean age was 54.2 years.", words: [{ t: "Prevalence", x: 20, y: 20 }, { t: "120", x: 80, y: 20 }, { t: "54.2", x: 120, y: 20 }] },
-              { n: 2, text: "Table 7. Logistic regression predictors: retinopathy prevalence 31.7% (38/120), mean HbA1c 8.4%, diabetes duration OR 1.42.", words: [{ t: "Table 7", x: 20, y: 20 }, { t: "31.7%", x: 80, y: 20 }, { t: "8.4%", x: 120, y: 20 }] }
+              { n: 1, text: "Chapter 1 Introduction. Prevalence of diabetic retinopathy was assessed across 120 adults with type 2 diabetes. Mean age was 54.2 years. Patients exceeding 5 years of diabetes duration were evaluated.", words: [{ t: "Prevalence", x: 20, y: 20 }, { t: "120", x: 80, y: 20 }, { t: "54.2", x: 120, y: 20 }, { t: "5", x: 160, y: 20 }] },
+              { n: 2, text: "Table 7. Logistic regression predictors: retinopathy prevalence 31.7% (38/120), mean HbA1c 8.4%, diabetes duration OR 1.42.", words: [{ t: "Table 7", x: 20, y: 20 }, { t: "31.7%", x: 80, y: 20 }, { t: "38/120", x: 100, y: 20 }, { t: "8.4%", x: 120, y: 20 }, { t: "1.42", x: 160, y: 20 }] }
             ],
             tables: [
               { id: "t7", title: "Table 7: Predictors of Diabetic Retinopathy (n = 120)", page: 2, selected: true }

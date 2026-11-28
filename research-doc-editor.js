@@ -1442,7 +1442,8 @@
       } else if (sub.overview) {
         h.push('<h5 class="rmd-doc-h3"><span>Section text</span><span class="rmd-doc-words" data-doc-words="' + esc(sub.id) + '">0 words</span></h5>');
       }
-      if (state.ai && state.ai.drafted && state.ai.drafted[sub.id]) {
+      var subHasText = !!String(sub.html || "").replace(/<[^>]+>/g, " ").trim();
+      if (state.ai && state.ai.drafted && state.ai.drafted[sub.id] && subHasText) {
         h.push('<span class="rmd-ai-note" data-rmd-ai-note="' + esc(sub.id) + '">Drafted by MaiK, check it</span>');
       }
       h.push('<div class="rmd-doc-body" contenteditable="true" role="textbox" aria-multiline="true" spellcheck="true" data-doc-body="' + esc(sub.id) + '" data-doc-section="' + esc(section.id) + '" data-placeholder="Type here, or ask MaiK to draft it." aria-label="' + esc((sub.title || section.title) + " text") + '">' + sanitizeHtml(sub.html || "") + '</div>');
@@ -1761,18 +1762,23 @@
       readDocFromDom();
       var d = draft || {};
       var secs = d.sections;
-      if (!secs || (isArr(secs) && !secs.length)) {
-        setNotice("MaiK did not return a draft.", "error");
+      var srcs = sourceSections(secs);
+      var hasAnySourceText = false;
+      var i;
+      for (i = 0; i < srcs.length; i++) {
+        if (String(srcs[i].text || "").trim()) { hasAnySourceText = true; break; }
+      }
+      if (!hasAnySourceText) {
         return [];
       }
       var filled = applySources(state.doc, outline, secs, true);
-      var i;
       for (i = 0; i < filled.length; i++) state.ai.drafted[filled[i]] = 1;
       autosave();
       refreshCounts();
       if (filled.length) {
         setNotice("Drafted by MaiK. Check each marked section.", "info");
       } else {
+        d._alreadyFilled = true;
         setNotice("Every section already has text.", "info");
       }
       scheduleChange();
