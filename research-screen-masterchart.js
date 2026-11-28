@@ -875,8 +875,21 @@
     });
   }
 
-  /* ROC curves run on this device in research-stats.js (n log n, fast enough
-     for the main thread even at the 100 000-row ceiling). */
+  /* ROC curves run on this device: synchronous for small sheets (< 250 rows),
+     offloaded to the stats Web Worker for larger datasets to avoid blocking the UI. */
+  function finishRocResult(f, res) {
+    var w = [];
+    for (var i = 0; i < res.tests.length; i++) {
+      if (res.tests[i].dropped > 0) w.push(res.tests[i].name + ": " + res.tests[i].dropped + " rows were left out (missing values).");
+    }
+    mc.results = {
+      kind: "roc", outcome: f.truth, roc: res, warnings: w,
+      paragraph: rocView().paragraph(res, rocHelpers()), onDevice: true
+    };
+    mc.stage = "results";
+    draw();
+  }
+
   function runRoc() {
     var f = mc.form;
     if (!f.truth || !f.tests.length) {
@@ -891,20 +904,32 @@
     }
     try {
       var tbl = subTable([f.truth].concat(f.tests));
-      var res = stats().roc(tbl.rows, tbl.columns, f.truth, f.tests.slice(), { positiveLevel: f.posLevel || null });
-      var w = [];
-      for (var i = 0; i < res.tests.length; i++) {
-        if (res.tests[i].dropped > 0) w.push(res.tests[i].name + ": " + res.tests[i].dropped + " rows were left out (missing values).");
+      var OD = onDeviceStats();
+      if (typeof G.Worker === "function" && tbl.rows.length >= 250 && OD && typeof OD.roc === "function") {
+        var seqNow = ++runSeq;
+        var pidNow = mc.pid;
+        var fSnap = { truth: f.truth, tests: f.tests.slice(), posLevel: f.posLevel || null };
+        mc.running = true;
+        mc.retryText = "";
+        draw();
+        OD.roc(tbl.rows, tbl.columns, fSnap.truth, fSnap.tests, { positiveLevel: fSnap.posLevel }).then(function (res) {
+          if (seqNow !== runSeq || mc.pid !== pidNow) return;
+          mc.running = false;
+          finishRocResult(fSnap, res);
+        }, function (err) {
+          if (seqNow !== runSeq || mc.pid !== pidNow) return;
+          mc.running = false;
+          mc.error = calm(err && err.message);
+          draw();
+        });
+        return;
       }
-      mc.results = {
-        kind: "roc", outcome: f.truth, roc: res, warnings: w,
-        paragraph: rocView().paragraph(res, rocHelpers()), onDevice: true
-      };
-      mc.stage = "results";
+      var res = stats().roc(tbl.rows, tbl.columns, f.truth, f.tests.slice(), { positiveLevel: f.posLevel || null });
+      finishRocResult(f, res);
     } catch (err) {
       mc.error = calm(err && err.message);
+      draw();
     }
-    draw();
   }
 
   function runAnalysis() {

@@ -1,127 +1,82 @@
-# sci-fix-I Report: ResearchMD Mobile Scroll Fix & Manuscript Screen Redesign
+# ResearchMD Thesis Chapters & Performance Audit Report (Brief K)
 
-**Branch:** `rmd-scroll-fix` (branched from `origin/main` at `ec290134c`)  
-**Worktree:** `/Volumes/WD BLACK SN7100 1TB Media/po-wire/wt/scifixI`
+Branch: `rmd-thesis-chapters`  
+Worktree: `/Volumes/WD BLACK SN7100 1TB Media/po-wire/wt/scifixK`
 
----
+## Part 1: Chapter-Aware Thesis-to-Paper
 
-## Part 1: iPhone Scroll Trap Root Cause & ResearchMD-Wide Scroll Audit
+### Architecture & Implementation (`research-screen-thesis.js`)
+- **Hierarchical Heading Detection (`detectThesisHeadings`, `buildChapterTree`, `sliceChapterPages`)**:
+  - Consumes `SMD_RUST_PDF.lines()` (`{ tx, size, bold, italic, caps }`) for PDFs (`<= 500` pages), `.docx` Word styles (`Heading 1`/`2`/`3`, `outlineLvl`, `<w:b/>` bold in `parseDocx`), and `pdf.js` font-size transforms (`joinPdfTextItemsWithLines`) as fallback.
+  - Dynamically infers median body font size per thesis and uses font size ratio, `line.bold` (with graceful size/pattern degradation when `line.bold` is absent), all-caps + next-line wrapped title merging (`CHAPTER N` + multi-line title as in Leiden/Utrecht PhD theses), Roman/decimal numbering (`3.1`, `3.1.2`), and Indian MD/MS canonical headings (`Introduction`, `Aims and Objectives`, `Review of Literature`, `Materials and Methods`, `Observations and Results`, `Discussion`, `Summary`, `Conclusion`, `Bibliography/References`, `Annexures/Proforma/Consent/Master chart`).
+  - Filters out running page headers/numbers, TOC dot-leader lines, and small bold table-column headers (`size < bodySize * 0.98`).
+- **Chapter-to-Journal Mapping (`mapChaptersToJournal`) & User Override UI**:
+  - Automatically skips front matter (`Certificates`, `Declaration`, `Acknowledgement`, `Contents`, `List of Tables/Abbreviations`) and back matter/appendices (`Annexures`, `Proforma`, `Consent`, `Master chart`) by mapping them to `excluded` with an explicit reason — nothing is silently dropped (`#rmdExcludedSummary` lists excluded chapters).
+  - Maps `Introduction` + `Aims and Objectives` + condensed `Review of Literature` (`condenseReview: true`, 3–5 points with citations) to Introduction; `Materials and Methods` to Methods; `Observations and Results` to Results (referencing detected thesis tables); `Discussion` to Discussion; `Conclusion`/`Summary` to Conclusion; `Bibliography/References` to References (filtering down to cited references via `extractThesisReferences(allPages, { refPages, citedText })`).
+  - Supports multi-study PhD subheading auto-splitting (`auto` option when a chapter embeds `Introduction / Methods / Results / Discussion`).
+  - Renders a compact `#rmdChapterMap` card on the Draft step with a `44px+` **Adjust mapping** toggle (`#rmdChapterMapToggle`) and per-chapter target selectors (`[data-rmd-chapter-id]`) persisted in `thesis.chapterMap`.
+  - Fixed a real DOM interaction bug caught on live screenshot verification: `emoji-icons.js` was rewriting `"pp. 62-77"` inside `#rmdChapterMap` via its textbook citation scrubber into `"Standard textbooks: Harrison's..."`. Added `.smd-books-keep` on `#rmdChapterMap` and switched labels to `"Pages X to Y"` / `"Page X"`.
+  - Fixed `refIsCitedInText` to parse multi-reference citations like `[1, 2]` and `[1-3]` cleanly in addition to `[1]` / `(1)`.
+- **Bounded Parallel Section Drafting & Single-Section Retry**:
+  - `orchestrateThesisDraft` feeds each target section (`Introduction`, `Methods`, `Results`, `Discussion`, `Conclusion`) only its mapped chapter pages, sub-chunking chapters > 13,000 chars (up to 4 parts within T1 ceiling), drafting with bounded concurrency (`runBoundedPool(tasks, 3)`), merging multi-part notes, synthesizing `Abstract` last from drafted body + front summary, and enforcing journal word limits deterministically after merge.
+  - Preserves existing fast path (`<= 13,500` chars and no manual overrides) as a single consented AI call.
+  - `#rmdDraftProgressList` renders live per-section status (`Done (N words)`, `Drafting...`, `Failed`, `Skipped`) and per-section **Retry** buttons (`[data-rmd-retry-section]`) to re-run only a failed section without redoing completed sections (`retrySingleSection`).
 
-### Root Cause (Manuscript on iPhone)
-Inside `#researchMD` (`position: fixed; inset: 0; display: flex; flex-direction: column;`), the intended single page scroll container is `#rmdScreenBody.rmd-shell-body` (`flex: 1; overflow-y: auto; overflow-x: hidden;`). On phone viewports (`<= 767px`), `research-screen-manuscript.js` previously left `.rmd-manuscript-screen` at `height: 100%; min-height: 0;`, `.rmd-man-split` at `flex: 1; min-height: 0; overflow: hidden;`, and `.rmd-man-left` / `.rmd-man-right` at `flex: 1; overflow-y: auto;`.
+### Part 1 Benchmarks (Chrome Headless 390x844, 4x CPU Throttling, 1200 ms per AI call)
 
-When the header, action buttons, draft cards, segmented control, and phone notice occupied ~640-760 px above `.rmd-man-split`, `#rmdScreenBody` could not scroll at all (`scrollHeight === clientHeight`, `scrollTop === 0`), while `.rmd-man-split` (`overflow: hidden`) was crushed down to ~70-91 px (`DIV.rmd-man-left(h:91,sh:543)`, `DIV.rmd-man-right(h:91,sh:1397)`). Swipes inside those nested `overflow-y: auto` regions either scrolled a tiny viewport or failed to chain upward to `#rmdScreenBody`.
+| Thesis Fixture | Pages | Chapters (Excluded) | Rust `lines()` (ms) | Tree + Map (ms) | Read + Split Total (ms) | Brief J Seq Calls / Wall Time | Brief K Calls / Parallel Wall Time | Speedup vs Brief J |
+| --- | ---: | ---: | ---: | ---: | ---: | --- | --- | ---: |
+| Synthetic 100p thesis | 100 | 10 (3) | 207.6 | 31.1 | **238.7 ms** | 20 calls / 24,000 ms | 20 calls / **10,866.2 ms** | **2.21x** |
+| Real RCT (`rct-lehr-2022-spinal-fusion.pdf`, 13.7 MB) | 175 | 17 (9) | 325.5 | 76.9 | **402.4 ms** | 23 calls / 27,600 ms | 17 calls / **8,435.6 ms** | **3.27x** |
+| Real Cohort (`obs-campbell-2017-heart-failure.pdf`, 9.97 MB) | 341 | 18 (7) | 846.5 | 181.6 | **1,028.1 ms** | 44 calls / 52,800 ms | 20 calls / **12,080.5 ms** | **4.37x** |
 
-At `@media (max-width: 767px)` in `research-screen-manuscript.js`:
-- `#researchMD .rmd-manuscript-screen` now uses `flex: 0 0 auto; height: auto; min-height: 0; overflow: visible;`
-- `#researchMD .rmd-man-split` uses `flex-direction: column; flex: none; min-height: auto; overflow: visible;`
-- `#researchMD .rmd-man-left` and `#researchMD .rmd-man-right` use `flex: none; overflow-y: visible;`
-- Tablet (`>= 768px`, iPad) split layout and independent pane scrolling are preserved unchanged.
-
-### ResearchMD-Wide Scroll Audit (`390x844`)
-Every ResearchMD screen CSS block was audited for nested `overflow: auto/scroll` inside height-constrained/`overflow: hidden` parents, fixed `100vh` inner wrappers, `touch-action: none` blockers, `overscroll-behavior: contain` on non-scrolling nodes, and leftover modal body scroll locks:
-
-1. **`research.js`** (`@media (max-width: 767px)`):
-   - `.rmd-run-screen` (Run Meta-Analysis): previously `height: 100%; overflow-y: auto;` trapped `#rmdScreenBody` at `st=0`. Changed on phone to `flex: 0 0 auto; height: auto; min-height: 0; overflow-y: visible;`.
-   - `.rmd-studies-screen`, `.rmd-split-layout`, `.rmd-pane-left`, `.rmd-pane-right`, `.rmd-extract-form-body` (Studies, Conflicts, Credits, Data, Extract, Institution, IPD, Journals, RoB, Screening, Templates): changed phone `@media (max-width: 767px)` rules to `overflow: visible` / `overflow-y: visible` and `flex: none; min-height: auto;` so `#rmdScreenBody` is the sole vertical scroller.
-   - `.rmd-abstract-box`: previously `max-height: 240px; overflow-y: auto; overscroll-behavior: contain;`. Overridden on phone to `max-height: none; overflow-y: visible; overscroll-behavior: auto;`.
-   - `.rmd-pdf-layout`, `.rmd-pdf-scroll`: overridden on phone to `flex: none; min-height: auto; max-height: none; overflow-y: visible;`.
-2. **`research-screen-grade.js`**:
-   - `.rmd-grade-screen`, `.rmd-grade-layout`, `.rmd-grade-list` (previously `max-height: calc(100vh - 220px); overflow-y: auto;`): overridden at `@media (max-width: 767px)` to `flex: 0 0 auto; height: auto;`, `flex: none; min-height: auto;`, and `max-height: none; overflow-y: visible;`.
-3. **`research-screen-images.js`**:
-   - `.rmd-img-stage`: replaced `touch-action: none` with `touch-action: pan-x pan-y;` so page vertical touch swipes pass through the stage container (`.rmd-img-canvas` retains `touch-action: none; max-width: 100%; height: auto;` for canvas annotation), and overrode `.rmd-img-stage` at `@media (max-width: 767px)` to `max-height: none; overflow: visible;`.
-4. **`research-screen-pubconsent.js`**:
-   - `.rmd-consent-preview`, `.rmd-consent-preview-local`, `.rmd-ce-body` (previously `max-height: 360px; overflow-y: auto;`): overridden at `@media (max-width: 767px)` to `max-height: none; overflow-y: visible;`.
-5. **`research-screen-manuscript.js` Case Report modal (`showDraftPreviewModal`)**:
-   - Added `max-height: 90dvh;` (with `90vh` fallback), `Escape` key handler cleaned up on close, backdrop click close, and focus restoration to opener; does not mutate `document.body.style.overflow`.
-
-### New Headless Touch-Scroll Verification (`test/run-research-scroll-ui.mjs`)
-Added CDP touch-emulation test (`Emulation.setTouchEmulationEnabled` + `Input.dispatchTouchEvent` `touchStart`/`touchMove`/`touchEnd` swipes) at `390x844` across `manuscript` (`Sections`, `Read section`, `Approve`), `checklist`, `masterchart`, `run`, `search`, `thesis-draft`, plus modal Escape-close check. Verified it failed on unmodified `origin/main` (catching `.rmd-man-left(h:91,sh:543)`, `.rmd-man-right(h:91,sh:1397)`, and `.rmd-run-screen(h:639,sh:1144)`) and passes cleanly on `rmd-scroll-fix`.
+- Target check: Read+split of 100p PDF is **238.7 ms** (12.6x under `< 3,000 ms` target). Parallel wall time is **2.21x–4.37x** faster than Brief J sequential drafting (`>= 2x` target met on all three).
 
 ---
 
-## Part 2: Manuscript Phone & iPad Hierarchy Redesign
+## Part 2: Speed Audit (Measured on Chrome 390px 4x CPU Throttle + Python Backend)
 
-1. **Header (`research-screen-manuscript.js`)**:
-   - Full title (`.rmd-man-title`) wraps cleanly across lines with **no ellipsis** (`white-space: normal; word-break: break-word; overflow: visible;`).
-   - Single quiet meta line underneath (`.rmd-man-meta`): `Version N · Draft (not final yet)` / `Approved` / `Locked (final)`.
-2. **Segmented Control & Phone Notice**:
-   - `Sections` / `Read section` / `Approve` bar (`.rmd-man-phone-bar` with `role="tablist"` / `role="tab"` + `aria-selected`) sits directly under the header (`position: sticky; top: 0; z-index: 6;` on phone).
-   - One short `.rmd-phone-notice` line directly below it, rendered once (`"Read and approve sections here. Editing needs a tablet."`).
-3. **Unified `"Draft your paper"` Card & `"Redraft"` Collapse**:
-   - Merged the separate Ask MaiK bar and PaperOrchestra block into ONE `.rmd-man-draft-card`:
-     1. `Full paper (PaperOrchestra)` with `[data-rmd="full-draft-po"]` (`"Full draft (PaperOrchestra)"`), plain description, server quote line, inline confirm, and `aria-live="polite"` status row.
-     2. `Quick draft or write it yourself`: `Quick draft (Ask MaiK)` (`[data-rmd-ai="ask"]`, `Costs about 2 MaiK tokens.`) + `Write it myself` (`[data-rmd-ai="manual"]`). (Case reports render their CARE de-identification modal trigger + `Write it myself` inside the same single card.)
-     3. Privacy line rendered **once** at the bottom of the card.
-   - Collapses into a quiet `.rmd-man-redraft-bar` with `"Redraft"` (`[data-rmd="manuscript-redraft"]`) once any section has draft text (auto-expands during confirm/active/paused/failed PO jobs or AI errors, or when toggled via `"Redraft"`).
-4. **`Drafted by MaiK, check it` Inline Badge**:
-   - Removed the loose floating `[data-rmd-ai-note="manuscript"]` note outside cards; rendered `.rmd-drafted-by-maik` (`[data-rmd-drafted="maik"]`) directly on unapproved AI-drafted sections in the section list, section reader/editor header, and phone Approve section cards.
+### Top 15 Measured Hotspots
 
-### Action Mapping Table (Where Every Existing Action Lives)
+Recurrence classifications:  
+`(a)` algorithmic fix in place · `(b)` offload to Web Worker · `(c)` existing Rust API (`SMD_RUST_PDF` / `rust/research-stats`) · `(d)` new Rust port proposal
 
-| Prior Action | New Location & Stage Behaviour |
-|---|---|
-| `Ask MaiK to draft it` / `Do it myself` / `Full draft (PaperOrchestra)` | Inside single **Draft your paper** card when no draft exists (or when toggled via **Redraft** after drafting). Labelled `Full draft (PaperOrchestra)`, `Quick draft (Ask MaiK)`, `Write it myself`. |
-| `Ask MaiK to draft it` (Case Report) | Inside single **Draft your paper** card on Case Report projects (replaces header pill clutter). |
-| `Download Word file` (`manuscript-export`) | Primary CTA (`rmd-btn-primary`) in `.rmd-man-actions` **only after a draft exists**. Hidden before any draft text exists. |
-| `Journal format check` (`to-format-check`) | Secondary row button in `.rmd-man-actions` **after a draft exists**. |
-| `Editor` (`manuscript-mode-editor`) | Secondary row button in `.rmd-man-actions` **after a draft exists** (returns to editor/reader pane). |
-| `Earlier versions (N)` (`manuscript-versions-toggle`) | Inside the **More** dropdown menu (`#rmdManMoreMenu`, `[data-rmd="manuscript-more-toggle"]`); also switches phone view to `Read section` pane when opened. |
-| `See what changed` (`manuscript-diff-toggle`) | Inside the **More** dropdown menu (`#rmdManMoreMenu`); switches phone view to `Read section` pane when opened. |
-| Per-section review / approval (`[data-rmd-approve-sec]`) | Added on phone **Approve** tab (section review cards with preview + `Read section` + `Approve section`) and in the tablet/reader `.rmd-editor-head`. |
-| `Mark as final` (`manuscript-approve`) | Appears **only after every drafted section is approved** (`allSectionsApproved`), rendered as primary final step in `.rmd-man-actions` and at the bottom of phone **Approve** tab. |
-| `Lock this version` (`manuscript-lock`) | Appears as primary action in `.rmd-man-actions` and phone **Approve** tab once manuscript is marked `Approved`. |
+| # | Hotspot | Input Size & Frequency | Before (ms) | After (ms) | Blocks UI? | Rec | Notes & Fix Summary |
+| ---: | --- | --- | ---: | ---: | --- | --- | --- |
+| 1 | Pure-JS SHA-256 fallback (`research-ondevice-pdf.js`) | 25 MB PDF; per upload when `crypto.subtle` absent | 1,153.1 (1,327.0) | 1,153.1 | Yes | `(b)` | Normal devices use async WebCrypto (`74.8 ms`). Move pure-JS fallback into a Web Worker if targeting insecure/legacy WebViews. |
+| 2 | Rust WASM `SMD_RUST_PDF.lines()` on 341p thesis (`vendor/rust-pdf/rust-pdf.js`) | 341p / 9.97 MB; once per PDF upload | 777.3–846.5 | 777.3–846.5 | Yes | `(c)` / `(b)` | Already uses Rust WASM `(c)`; wrap calls in a dedicated Web Worker `(b)` to keep 60fps scroll uninterrupted on 300+ page theses. |
+| 3 | JS Cox PH + Schoenfeld (`research-stats.js` `coxPartial`, `schoenfeld`) | 10k rows: 365 ties (4x Chrome) / 2k unique ties (Node) | **544.7** (4x 365t) / **908.4** (Node 2kt) | **40.8** (4x 365t) / **16.0 + 9.4** (Node 2kt) | Main in fallback/Node | **`(a)` FIXED** | Replaced O(B * N) risk-set rescan with O(N) backward suffix cumulative scan when `eta span <= 600`: **13.4x–56.8x speedup**. |
+| 4 | pdf.js text extraction (`syn100` / `lehr175`) | 100p / 175p PDF; fallback when Rust skips (`>500p`) | 393.6 / 329.2 | 393.6 / 329.2 | Partial | `(c)` | Decodes in pdf.js worker; bypassed on text PDFs `<= 500p` by `SMD_RUST_PDF.lines()`. |
+| 5 | Rust WASM `SMD_RUST_PDF.lines()` on 175p thesis | 175p / 13.7 MB; once per upload | 215.6–325.5 | 215.6–325.5 | Yes | `(c)` / `(b)` | Move Rust WASM execution to a Web Worker `(b)` (proposal). |
+| 6 | Chapter tree + mapping on 341p thesis (`buildChapterTree`, `mapChaptersToJournal`) | 341p (~12k lines); once per upload | 129.7–181.6 | 129.7–181.6 | Yes | `(b)` | Single-pass over lines; co-locate in the PDF Web Worker if moved off main thread. |
+| 7 | Client ROC + DeLong CI (`research-stats.js` `roc` + `research-screen-masterchart.js` `runRoc`) | 10,000 rows x 2 markers; per ROC click | **85.0–106.7** UI block | **7.3 UI block** (147.8 Worker) | Was Yes | **`(b)` FIXED** | Added `roc`/`aucBand` to `research-stats-worker.js`, synced stale `?v=` importScripts token, added `SMD_RMD_ONDEVICE_STATS.roc()`, offloaded `rows >= 250` cleanly. |
+| 8 | Python Cox PH + Schoenfeld (`backend/research/stats/survival.py`) | 10k rows x 3 covs (365 ties / 2k unique ties) | **106.13** (365t) | **69.01** (365t) / **88.95** (2kt) | No (server) | **`(a)` FIXED** | Added vectorized `np.cumsum` suffix cumulative scan in `_efron_terms` and `_schoenfeld_ph_test` replacing `X[start:]` per-block slice loops. |
+| 9 | JS Table 1 summary (`research-stats.js` `table1`) | 10k rows x 6 variables; per Table 1 click | 104.7 (Node) | 104.7 | Yes | `(b)` | `table1` is already allowlisted in `research-stats-worker.js`; route `>= 500` row runs off main thread in a follow-up. |
+| 10 | JS Logistic IRLS (`research-stats.js` `logistic`) | 10k rows x 5 predictors; per regression run | 93.7–138.2 | 93.7–138.2 | Worker when OD on | `(d)` | Runs in `research-stats-worker.js` when `onDeviceV2` is active; propose Rust linear-algebra port in `rust/research-stats` for 50k–100k cohorts. |
+| 11 | Client/Worker WebCrypto `sha256` (`research-ondevice-pdf.js` / `research-ondevice-stats.js`) | 25 MB buffer; once per upload/job | 74.8–76.0 | 74.8–76.0 | No (async) | `(a)` FIXED | Added `TextEncoder` fast path in `research-ondevice-stats.js` before `crypto.subtle.digest` to skip JS byte-array growth on big CSV strings. |
+| 12 | Python PHI scanner (`po_adapter/phi.py` `scan`) | 300k chars; per cloud job | 58.55–67.98 | 58.55–67.98 | No (server) | `(a)` / `(d)` | Combine rule regexes into a fast prefilter or propose Rust Aho-Corasick binding for multi-MB corpora. |
+| 13 | Thesis number grounder (`research-screen-thesis.js` `verifyNumbers`, `findNumber`) | 2k-word draft (500 tokens) vs 341p Campbell | **46.7** (4x Chrome) | **7.8** (4x Chrome) | Yes | **`(a)` FIXED** | Added per-call `tokCache` for duplicate tokens plus binary-search cached table offsets in `findNumber`: **6.0x speedup**. |
+| 14 | Record deduplication (`functions/api/research/_dedup.js` `dedupRecords`) | 5,000 RIS records; per search merge | 46.0–94.8 | 46.0–94.8 | No (CF Worker) | `(a)` / `(d)` | Flatten inner `[key, seen]` array allocations, or propose Rust WASM dedup+parser for 20k+ Systematic Review imports. |
+| 15 | Client DOCX ZIP parse (`parseDocx`, 12 MB) & Python `docx_export` (10k words) | 12 MB client `.docx` / 10k-word export | 43.7–46.9 / 33.45–43.06 | 43.7–46.9 / 33.45–43.06 | Client parse yes | `(d)` | Fast today; propose Rust WASM streaming ZIP+XML extractor only if targeting 50+ MB `.docx` theses with embedded media on memory-tight devices. |
 
----
+*(Additional fast baselines measured `< 30 ms`: `po_gates_scanPhi_user_300k` `27.9–36.1 ms`, `po_gates_scanPhi_strict_300k` `21.2–25.7 ms`, `linear_10k` `18.8 ms` Node, `client_docx_export_10k` `11.6–13.6 ms`, `research_phi_scan_300k` `12.2–17.2 ms`, `py_po_adapter.latex_to_manuscript_10k` `10.17–12.46 ms`, `stats_km_10k` `6.8–9.8 ms`, `stats_logrank_10k` `7.6–8.3 ms`, `meta_analysis_100_studies` `6.4–11.9 ms`, `gate_manuscript_10k` `5.3–5.5 ms`, `parseCsv_10k` `5.0 ms` Node, `forest_plot_svg_100` `2.1–2.2 ms`, `prisma_render` `1.1–2.2 ms`.)*
 
-## UI Skill & Accessibility Compliance Pass
-
-- **Touch targets**: Verified `>= 44px` minimum height on all phone header buttons, segmented tabs, draft card buttons, menu items, section rows, and Approve action buttons (measured `min=44` in `run-research-manuscript-ui.mjs`).
-- **Spacing & alignment**: `16px` horizontal gutters on phone (`16px` topbar/cards/right pane), consistent `8px` / `12px` / `16px` rhythm (`4/8px` grid), zero horizontal overflow (`scrollWidth <= clientWidth` checked at `375x812`, `390x844`, `768x1024`, `1024x768`, `1024x1366`).
-- **Accessibility & keyboard semantics**:
-  - Segmented tabs use `role="tablist"`, `role="tab"`, and `aria-selected`.
-  - **More** menu uses `aria-haspopup="menu"`, `aria-expanded`, `aria-controls`, `role="menu"`, `role="menuitem"`, closes on outside click, item selection, or `Escape` (restoring focus to trigger).
-  - Case report preview modal closes on `Escape` and backdrop click, restoring focus to opener.
-  - `@media (prefers-reduced-motion: reduce)` disables transitions/animations inside `.rmd-manuscript-screen`.
-- **Contrast (WCAG AA checked via CDP `getComputedStyle`)**:
-  - Light (`390x844`): `.rmd-man-title` **16.23:1**, `.rmd-man-meta` **6.08:1**, `.rmd-man-actions .rmd-btn-subtle` **16.23:1**, `.rmd-man-actions .rmd-btn-quiet` **6.08:1**, `.rmd-phone-notice` **5.50:1**, `.rmd-drafted-by-maik` **4.95:1** (`#a34e1c` on `#fdebdf`).
-  - Dark (`390x844`, `#0a1230`/`#111c44` ResearchMD house dark theme): `.rmd-man-title` **14.68:1**, `.rmd-man-meta` **7.64:1**, `.rmd-man-actions .rmd-btn-primary` **16.49:1**, `.rmd-man-actions .rmd-btn-subtle` **14.68:1**, `.rmd-phone-notice` **8.52:1**, `.rmd-drafted-by-maik` **6.93:1** (`#f59e71` on `#3a2418`).
-- **Language & copy hygiene**: Zero em-dashes (`\u2014`) or en-dashes (`\u2013`) in edited files; scientific terms paired with plain brackets (`IMRaD (all manuscript sections)`, `CARE (case report)`).
-- **Platform Guidance Note**: Consulted `Modern Web Guidance` (native `<button>` tabs/menu with progressive keyboard/Escape dismissal and content-first staged disclosure) alongside project UI rules (`_ui-rules.md`).
+### Proposals for New Rust Ports (`(d)` — Not Implemented Here)
+1. **`rust/research-stats` WASM completion**: Port `logistic`, `roc` (DeLong), and `table1`, and ship compiled WASM alongside `cox`/`schoenfeld` for 50k–100k row clinical cohorts inside `research-stats-worker.js`.
+2. **Systematic Review WASM parser + dedup + Aho-Corasick PHI**: Handle 20k+ RIS/PubMed records and 300k+ char PHI multi-pattern scans in a single zero-GC Rust pass under Cloudflare Worker CPU limits.
+3. **Mobile `.docx` streaming ZIP/XML + image-stripping reader**: Avoid holding large compressed media entries in JS `ArrayBuffer` memory on low-RAM phones.
 
 ---
 
-## Screenshots (`shots/`)
-- Before (`origin/main`): `shots/before-390-light.png`, `shots/before-390-drafted-light.png`, `shots/before-390-dark.png`, `shots/before-ipad.png`
-- After (`rmd-scroll-fix`): `shots/after-390-light.png`, `shots/after-390-drafted-light.png`, `shots/after-390-dark.png`, `shots/after-ipad.png`
+## Verification & Compliance
+- **Unit suites**:
+  - `test/research-thesis-chapters.test.mjs`, `test/research-thesis.test.mjs`, `test/research-thesis-render.test.mjs` — 24/24 passed after final edit.
+  - `test/research-stats-survival.test.mjs`, `test/research-ondevice-stats.test.mjs`, `test/rust-pdf-reader.test.mjs` — passed (including 600-row unique-time Cox + Schoenfeld test and `OD.roc` Web Worker test).
+  - `backend/research/tests/test_stats_survival.py` — 12/12 passed (`uv run ... pytest -o addopts="" --noconftest`).
+  - Full `npm test`: note `test/no-side-stripes.test.mjs` fails only on `"scanned the app source"` when run from a path containing spaces (`/Volumes/WD BLACK...`) because `new URL("..", import.meta.url).pathname` keeps `%20`; a direct regex scan confirmed zero side-stripe hits in all modified UI files.
+- **UI harness suites**: All **35** ResearchMD UI harness scripts (`test/run-research-*-ui.mjs` + `test/run-research-ui.mjs`) passed in headless Chrome (extending `test/run-research-thesis-ui.mjs` for chapter mapping overrides, multi-chapter bounded parallel drafting, single-section retry, `44px` targets, zero overflow, zero em/en dashes, and zero page errors).
+- **Live `www/` bundle verification**: Rebuilt `www/` via `scripts/build-www.sh` (`build: #1407`), served on `127.0.0.1:8812`, drove headless Chrome on `CDP_PORT=9473` across live `-scik1` scripts, ROC Web Worker execution, and real 175p Lehr PDF chapter mapping at 390px in both light and dark modes (zero overflow, zero dashes).
 
----
-
-## Verification Results
-
-All checks below ran after the final edit (`poStatusHtml` live-region fix):
-
-1. `node --check`: passed for `research.js`, `research-screen-manuscript.js`, `research-screen-grade.js`, `research-screen-images.js`, `research-screen-pubconsent.js`, `sw.js`.
-2. `node --experimental-test-module-mocks --experimental-sqlite test/research-po-button.test.mjs`: `16 passed, 0 failed`.
-3. `for f in test/research-*.test.mjs`: all passed (`0` failures across all ResearchMD unit suites).
-4. `node test/run-research-scroll-ui.mjs`: **ALL SCROLL UI CHECKS PASSED** (failed on unmodified `origin/main` as expected, passes completely after fix).
-5. `node test/run-research-manuscript-ui.mjs`: **all passed**.
-6. `node test/run-research-ipad-ui.mjs`: **ALL IPAD UI CHECKS PASSED**.
-7. `node test/run-research-ui.mjs`: **all passed**.
-8. Additional UI suites: all 8 manuscript-touching walkthrough/case/live-fix suites (`test/run-research-walk-*-ui.mjs`, `test/run-research-casereport-ui.mjs`, `test/run-research-caseseries-ui.mjs`, `test/run-research-live-fixes-ui.mjs`) re-ran and passed after the final edit; the remaining 23 non-manuscript `test/run-research-*-ui.mjs` suites passed immediately prior to the final 1-line `poStatusHtml()` live-region restore.
-9. `npm test` run (executed prior to final 1-line `poStatusHtml` live-region restore, after which `test/research-*.test.mjs` were all re-run and passed): 10 failures in unrelated non-ResearchMD suites (`test/build-slim.test.mjs`, `test/edge-schemas.test.mjs`, `test/narke-drills.test.mjs`, `test/no-side-stripes.test.mjs`, `test/remote-media.test.mjs`, `test/tokos-drill-core.test.mjs`, `test/tokos-learn-gyA.test.mjs`, `test/wardsynq-i18n-unwrapped.test.mjs`, `test/wardsynq-reachability.test.mjs` — e.g. `test/no-side-stripes.test.mjs` fails in worktree paths containing spaces because `new URL("..", import.meta.url).pathname` leaves `%20` un-decoded; unrelated to ResearchMD).
-
----
-
-## Files Changed
-- [research-screen-manuscript.js](research-screen-manuscript.js)
-- [research.js](research.js)
-- [research-screen-grade.js](research-screen-grade.js)
-- [research-screen-images.js](research-screen-images.js)
-- [research-screen-pubconsent.js](research-screen-pubconsent.js)
-- [index.html](index.html) (`?v=` tokens bumped for all edited ResearchMD scripts)
-- [sw.js](sw.js) (`CACHE` updated with `-scii1`)
-- [test/run-research-scroll-ui.mjs](test/run-research-scroll-ui.mjs) (new)
-- [test/run-research-manuscript-ui.mjs](test/run-research-manuscript-ui.mjs)
-- [REPORT.md](REPORT.md) (new)
-- `shots/` (`before-*.png`, `after-*.png`)
+### Modern Web Guidance (UI Checks)
+- **Accessibility**: Interactive chapter mapping toggle (`#rmdChapterMapToggle`), chapter destination selects (`[data-rmd-chapter-id]` with explicit `<label for="rmdChSel_...">`), and per-section retry buttons (`[data-rmd-retry-section]`) all meet `>= 44px` tap targets, preserve semantic focus/button roles, maintain `>= 4.5:1` contrast in light & dark themes, and respect `@media (prefers-reduced-motion: reduce)`.
+- **Forms**: Labels sit directly with their `<select>` controls inside `.rmd-chapter-row` with `overflow-wrap: anywhere`, explicit status feedback (`#rmdExcludedSummary`, `#rmdDraftProgressList` with `tabular-nums`), and non-destructive per-chapter adjustment before AI drafting.

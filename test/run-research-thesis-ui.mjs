@@ -39,6 +39,7 @@ let projN = 0, uploadN = 0;
 let jobMode = 'phi'; // 'phi' -> job prompts consent_needed; 'clean' -> job succeeds
 let requireDraftConsent = false;
 let returnEmptyDraft = false;
+let failSection = null;
 let journalsFail = false;
 let slowSectionPutMs = 0;
 const createdProjects = [];
@@ -167,6 +168,29 @@ const server = http.createServer((req, res) => {
         }
         if (returnEmptyDraft) {
           return send(200, { draft: {}, model: 'empty-test' });
+        }
+        const reqSec = b && b.input && b.input.section ? String(b.input.section) : '';
+        if (failSection && reqSec === failSection) {
+          return send(500, { error: { code: 'ai_timeout', message: 'Section timed out' } });
+        }
+        if (reqSec) {
+          const cap = reqSec.charAt(0).toUpperCase() + reqSec.slice(1);
+          const secTexts = {
+            abstract: 'Background: we studied BCG. Methods: a review of 120 patients. Results: risk ratio 0.49 (95% CI 0.34 to 0.70). Conclusion: BCG helps.',
+            introduction: 'Tuberculosis remains common across 120 adults. BCG is widely used.',
+            methods: 'We analyzed 120 patients in a prospective cohort design.',
+            results: 'The pooled risk ratio was 0.49 (95% CI 0.34 to 0.70) across 120 patients.',
+            discussion: 'BCG appears protective in 120 patients. Limitations include heterogeneity.',
+            conclusion: 'BCG vaccination remains beneficial.'
+          };
+          return send(200, {
+            draft: {
+              sections: [{ id: reqSec, heading: cap, text: secTexts[reqSec] || ('Drafted ' + reqSec + ' across 120 patients (RR 0.49).') }],
+              tables: [{ id: 't1', caption: 'Main results', reason: 'It carries the pooled estimate.', score: 9 }],
+              references: [{ authors: 'Colditz GA', year: '1994', title: 'Efficacy of BCG vaccine', journal: 'JAMA', volume: '271', pages: '698' }]
+            },
+            requestId: 'req_draft_' + reqSec
+          });
         }
         return send(200, {
           draft: {
@@ -809,6 +833,63 @@ try {
   ok(await ev(`(()=>{const p=SMD_RESEARCH.store.getActiveProject();return !!p && !p.tutorial && !!p.serverId;})()`), 'active project is now a real synced project');
   ok(await ev(`document.querySelector('[data-rmd-type="rct"]').getAttribute('aria-pressed') === 'true'`), 'real RCT thesis suggested and carried over without re-upload');
   ok(await ev(`!!document.querySelector('#rmdThesisTypeQuote')`) && /Page\s+1:\s*"Randomized controlled trial/.test(await text('#rmdThesisTypeQuote')), 'verbatim quote from uploaded thesis shown on type step');
+
+  // 13c. Chapter mapping adjustment + bounded parallel drafting (>13.5k chars) + single-section retry.
+  await resetToSeed();
+  await ev(`SMD_RESEARCH.open({screen:'start'});1`);
+  ok(await until(`!!document.querySelector('[data-rmd-start-choice="thesis"]')`, 5000), 'start ready for chapter-aware flow');
+  await click('[data-rmd-start-choice="thesis"]');
+  ok(await until(`!!document.querySelector('#rmd_start_title')`, 5000), 'naming form ready');
+  await ev(`(()=>{document.getElementById('rmd_start_title').value='Long Chaptered Thesis';return true})()`);
+  await click('[data-rmd="start-create"]');
+  ok(await until(`!!document.querySelector('#rmdThesisFile')`, 5000), 'upload ready for multi-chapter docx');
+  const chBody = 'Prospective cohort of 120 ICU patients with risk ratio 0.49 (95% CI 0.34 to 0.70). '.repeat(45);
+  await uploadDocx({
+    filename: 'MultiChapter_Thesis.docx',
+    xml: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>' +
+      '<w:p><w:pPr><w:pStyle w:val="Heading1"/></w:pPr><w:r><w:t>Certificate</w:t></w:r></w:p><w:p><w:r><w:t>Bonafide certificate.</w:t></w:r></w:p><w:p><w:r><w:br w:type="page"/></w:r></w:p>' +
+      '<w:p><w:pPr><w:pStyle w:val="Heading1"/></w:pPr><w:r><w:t>1. Introduction</w:t></w:r></w:p><w:p><w:r><w:t>' + chBody + '</w:t></w:r></w:p><w:p><w:r><w:br w:type="page"/></w:r></w:p>' +
+      '<w:p><w:pPr><w:pStyle w:val="Heading1"/></w:pPr><w:r><w:t>2. Materials and Methods</w:t></w:r></w:p><w:p><w:r><w:t>' + chBody + '</w:t></w:r></w:p><w:p><w:r><w:br w:type="page"/></w:r></w:p>' +
+      '<w:p><w:pPr><w:pStyle w:val="Heading1"/></w:pPr><w:r><w:t>3. Observations and Results</w:t></w:r></w:p><w:p><w:r><w:t>' + chBody + '</w:t></w:r></w:p><w:p><w:r><w:br w:type="page"/></w:r></w:p>' +
+      '<w:p><w:pPr><w:pStyle w:val="Heading1"/></w:pPr><w:r><w:t>4. Discussion</w:t></w:r></w:p><w:p><w:r><w:t>' + chBody + '</w:t></w:r></w:p><w:p><w:r><w:br w:type="page"/></w:r></w:p>' +
+      '<w:p><w:pPr><w:pStyle w:val="Heading1"/></w:pPr><w:r><w:t>Annexure: Case Proforma</w:t></w:r></w:p><w:p><w:r><w:t>Proforma fields.</w:t></w:r></w:p>' +
+      '</w:body></w:document>'
+  });
+  ok(await until(`!!document.querySelector('[data-rmd-thesis-next="thesis-type"]')`, 10000), 'multi-chapter docx extracted');
+  await click('[data-rmd-thesis-next="thesis-type"]');
+  ok(await until(`!!document.querySelector('[data-rmd-thesis-next="thesis-journal"]')`, 5000), 'type step ready');
+  await click('[data-rmd-thesis-next="thesis-journal"]');
+  ok(await until(`!!document.querySelector('[data-rmd-thesis-next="thesis-draft"]')`, 5000), 'journal step ready');
+  await click('[data-rmd-thesis-next="thesis-draft"]');
+  ok(await until(`!!document.querySelector('#rmdChapterMap')`, 5000), 'chapter mapping summary rendered on Draft step');
+  ok(/Excluded:/i.test(await text('#rmdExcludedSummary')) && /Certificate/i.test(await text('#rmdExcludedSummary')) && /Annexure/i.test(await text('#rmdExcludedSummary')), 'excluded front-matter and annexure explicitly listed without silent drop');
+  ok(await ev(`document.querySelector('#rmdChapterMapToggle').offsetHeight >= 44`), 'chapter map toggle meets 44px touch target');
+  await click('#rmdChapterMapToggle');
+  ok(await until(`(()=>{const l=document.querySelector('#rmdChapterMapList');return !!l && !l.hidden && document.querySelectorAll('[data-rmd-chapter-id]').length >= 5})()`, 4000), 'chapter mapping adjust list expands with per-chapter selectors');
+  ok(await ev(`document.querySelector('[data-rmd-chapter-id]').offsetHeight >= 44`), 'chapter selector meets 44px touch target');
+
+  // Adjust last chapter (Annexure) override and verify persistence in thesis state
+  const adjustedId = await ev(`(()=>{const sels=Array.from(document.querySelectorAll('[data-rmd-chapter-id]'));const annx=sels[sels.length-1];annx.value='methods';annx.dispatchEvent(new Event('change',{bubbles:true}));return annx.getAttribute('data-rmd-chapter-id');})()`);
+  ok(typeof adjustedId === 'string' && adjustedId.length > 0, 'adjusted chapter id resolved');
+  ok(await ev(`(()=>{const store=JSON.parse(localStorage.getItem('smd_rmd_thesis_v1')||'{}');const proj=SMD_RESEARCH.store.getActiveProject();const key=(proj&&(proj.serverId||proj.id))||'';const ts=store[key]||{};return !!(ts.chapterMap&&ts.chapterMap[${JSON.stringify(adjustedId)}]==='methods');})()`), 'user chapter override persisted on thesis state');
+
+  // Trigger bounded parallel chapter drafting with injected failure on discussion
+  requireDraftConsent = false;
+  failSection = 'discussion';
+  const parallelStartIdx = aiDraftCalls.length;
+  await click('[data-rmd-ai="ask"]');
+  ok(await until(`!!document.querySelector('[data-rmd-retry-section="discussion"]')`, 10000), 'single-section retry button shown for failed discussion while other sections completed');
+  const parallelCalls = aiDraftCalls.slice(parallelStartIdx);
+  ok(parallelCalls.some((c) => c.input && c.input.section === 'introduction') && parallelCalls.some((c) => c.input && c.input.section === 'methods') && parallelCalls.some((c) => c.input && c.input.section === 'results'), 'mapped body sections drafted in separate per-section AI calls');
+  ok(await ev(`document.querySelector('[data-rmd-retry-section="discussion"]').offsetHeight >= 44`), 'single-section retry button meets 44px touch target');
+
+  // Retry ONLY the failed section without re-calling already completed sections
+  failSection = null;
+  const beforeRetryLen = aiDraftCalls.length;
+  await click('[data-rmd-retry-section="discussion"]');
+  ok(await until(`!document.querySelector('[data-rmd-retry-section="discussion"]') && /BCG appears protective/.test((document.querySelector('#rmdDraftBody')||{}).innerText||'')`, 8000), 'retrying failed discussion populates discussion section');
+  const retryCalls = aiDraftCalls.slice(beforeRetryLen);
+  ok(!retryCalls.some((c) => c.input && (c.input.section === 'methods' || c.input.section === 'results')), 'single-section retry did not re-call already completed methods or results');
 
   // 14. No em/en dashes; zero page errors; no horizontal overflow at 375, 390x844 and 1024x1366.
   const dashes = await ev(`(()=>{const t=document.querySelector('#researchMD').innerText||'';return (t.match(/[\\u2013\\u2014]/g)||[]).length})()`);

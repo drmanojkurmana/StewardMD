@@ -480,3 +480,32 @@ test("chooseTest offers Kaplan-Meier with log-rank test for survival", function 
   assert.equal(pick.ok, true);
   assert.deepEqual(pick.warnings, []);
 });
+
+test("Cox PH and Schoenfeld O(N) suffix scan converge cleanly on 600 unique-time rows", function () {
+  const rows = [];
+  for (let i = 0; i < 600; i++) {
+    rows.push({
+      t: 1 + i * 0.25,
+      e: i % 3 === 0 ? 1 : 0,
+      x1: (i % 19) / 5,
+      x2: (i % 7) - 3
+    });
+  }
+  const spec = {
+    time: "t",
+    event: "e",
+    predictors: [{ name: "x1", type: "numeric" }, { name: "x2", type: "numeric" }],
+    ties: "efron"
+  };
+  const fit = STATS.cox(rows, spec);
+  assert.equal(fit.ok, true);
+  assert.equal(fit.converged, true);
+  assert.equal(fit.n, 600);
+  assert.equal(fit.nEvents, 200);
+  assert.equal(fit.coefficients.length, 2);
+  assert.ok(Number.isFinite(fit.logLik) && fit.logLik < 0);
+  const ph = STATS.schoenfeld(fit, rows, spec);
+  assert.equal(ph.ok, true);
+  assert.equal(ph.terms.length, 2);
+  assert.ok(ph.global && Number.isFinite(ph.global.chisq) && ph.global.p >= 0 && ph.global.p <= 1);
+});

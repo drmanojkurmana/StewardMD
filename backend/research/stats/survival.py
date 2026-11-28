@@ -235,13 +235,44 @@ def _efron_terms(beta, ts, es, X, blocks, shift=0.0):
 
     blocks: list of (start_index, death_indices) per unique event time,
     rows sorted by time. shift stabilises exp(); ratios are shift-invariant.
+    Uses O(N * p^2) backward suffix cumulative sums when eta span <= 600.
     """
     n, p = X.shape
     eta = X @ beta - shift
-    w = np.exp(eta)
     ll = 0.0
     score = np.zeros(p)
     info = np.zeros((p, p))
+    if not blocks:
+        return ll, score, info
+    if float(eta.max() - eta.min()) <= 600.0:
+        w = np.exp(eta)
+        wx = X * w[:, None]
+        wxx = (X[:, :, None] * wx[:, None, :]).reshape(n, p * p)
+        cum_w = np.cumsum(w[::-1])[::-1]
+        cum_wx = np.cumsum(wx[::-1], axis=0)[::-1]
+        cum_wxx = np.cumsum(wxx[::-1], axis=0)[::-1]
+        for start, deaths in blocks:
+            d = len(deaths)
+            S0 = float(cum_w[start])
+            S1 = cum_wx[start]
+            S2 = cum_wxx[start].reshape(p, p)
+            Xd, wd = X[deaths], w[deaths]
+            S0d = float(wd.sum())
+            S1d = wd @ Xd
+            S2d = (Xd * wd[:, None]).T @ Xd
+            ll += float(eta[deaths].sum())
+            score += Xd.sum(axis=0)
+            for l in range(d):
+                f = l / d
+                s0 = S0 - f * S0d
+                s1 = S1 - f * S1d
+                s2 = S2 - f * S2d
+                xb = s1 / s0
+                ll -= math.log(s0)
+                score -= xb
+                info += s2 / s0 - np.outer(xb, xb)
+        return ll, score, info
+    w = np.exp(eta)
     for start, deaths in blocks:
         d = len(deaths)
         Xr, wr = X[start:], w[start:]
@@ -395,12 +426,26 @@ def _schoenfeld_ph_test(t, e, X, beta, ts, es, Xs, blocks, names) -> dict:
     Itt = np.zeros((p, p))
     eta = Xs @ beta
     w = np.exp(eta - eta.max())
+    n_rows = Xs.shape[0]
+    if blocks and float(eta.max() - eta.min()) <= 600.0:
+        wx = Xs * w[:, None]
+        wxx = (Xs[:, :, None] * wx[:, None, :]).reshape(n_rows, p * p)
+        cum_w = np.cumsum(w[::-1])[::-1]
+        cum_wx = np.cumsum(wx[::-1], axis=0)[::-1]
+        cum_wxx = np.cumsum(wxx[::-1], axis=0)[::-1]
+    else:
+        cum_w = cum_wx = cum_wxx = None
     for start, deaths in blocks:
         d = len(deaths)
-        Xr, wr = Xs[start:], w[start:]
-        S0 = wr.sum()
-        S1 = wr @ Xr
-        S2 = (Xr * wr[:, None]).T @ Xr
+        if cum_w is not None:
+            S0 = float(cum_w[start])
+            S1 = cum_wx[start]
+            S2 = cum_wxx[start].reshape(p, p)
+        else:
+            Xr, wr = Xs[start:], w[start:]
+            S0 = wr.sum()
+            S1 = wr @ Xr
+            S2 = (Xr * wr[:, None]).T @ Xr
         Xd, wd = Xs[deaths], w[deaths]
         S0d = wd.sum()
         S1d = wd @ Xd
