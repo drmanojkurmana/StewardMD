@@ -12,7 +12,7 @@
   var DEFAULT_MAX_SECONDS = 120;
   var GLOBAL_MAX_SECONDS = 240;
   var GLOBAL_MAX_ROWS = 100000;
-  var WORKER_URL = "/research-stats-worker.js?v=rod2";
+  var WORKER_URL = "/research-stats-worker.js?v=rod2-scik1";
 
   var _worker = null;
   var _nextId = 1;
@@ -157,7 +157,9 @@
     var subtle = G && G.crypto && G.crypto.subtle;
     if (subtle && typeof subtle.digest === "function") {
       try {
-        var bytes = new Uint8Array(utf8Bytes(str));
+        var bytes = (typeof G.TextEncoder === "function")
+          ? new G.TextEncoder().encode(str)
+          : new Uint8Array(utf8Bytes(str));
         return Promise.resolve(subtle.digest("SHA-256", bytes)).then(function (buf) {
           var u8 = new Uint8Array(buf);
           var hex = "";
@@ -935,9 +937,18 @@
     });
   }
 
+  function runRocWorker(rows, columns, truthColumn, testColumns, opts) {
+    var ceilingSec = Number(opts && opts.ceilingSeconds);
+    if (!isFinite(ceilingSec) || ceilingSec <= 0) ceilingSec = DEFAULT_MAX_SECONDS;
+    if (ceilingSec > GLOBAL_MAX_SECONDS) ceilingSec = GLOBAL_MAX_SECONDS;
+    var rocOpts = { positiveLevel: (opts && opts.positiveLevel) || null };
+    return callStatsFn("roc", [rows, columns, truthColumn, testColumns, rocOpts], opts || {}, Date.now(), ceilingSec * 1000);
+  }
+
   var API = {
     isEnabled: isEnabled,
     run: run,
+    roc: runRocWorker,
     parseFormula: parseFormula,
     canonicalCsv: canonicalCsv,
     terminateWorker: terminateWorker

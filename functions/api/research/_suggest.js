@@ -21,7 +21,7 @@ import { RESEARCH_FRAMING, tierModel } from "./_gateway.js";
 import { scan, phiCategories } from "./_phi.js";
 import { TIER_CEILINGS, estimateTokens, checkAiCaps, HARD_STOP_MESSAGES } from "./_caps.js";
 import { quoteAiCall, aiActualMicroUsd, availableCredits, reserveCredits,
-  settleCredits, releaseCredits, microUsdToInr, usdInrRate } from "./_credits.js";
+  settleCredits, releaseCredits, microUsdToInr, microUsdToMt, usdInrRate } from "./_credits.js";
 import { TEMPLATES, templateById, extractionOf, rowFor } from "./_extraction.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
@@ -174,10 +174,13 @@ export async function runUserAi(ctx, projectId, purpose, system, prompt, refId, 
     .bind(uuid("aiu_"), projectId, uid, refId, purpose, "T1", usedModel, inTok, outTok, actual, Date.now()).run();
   await settleCredits(db, env, uuid, reservation, actual);
   await audit(db, projectId, uid, "ai_call", refId, { tier: "T1", model: usedModel, purpose, tokensIn: inTok, tokensOut: outTok, costMicroUsd: actual });
+  const rate = usdInrRate(env);
   return {
     text: String(text || ""), model: usedModel,
     usage: { inputTokens: inTok, outputTokens: outTok },
-    costInr: microUsdToInr(actual, usdInrRate(env)),
+    costInr: microUsdToInr(actual, rate),
+    costMt: microUsdToMt(actual, rate),
+    costMicroUsd: actual,
   };
 }
 
@@ -285,7 +288,7 @@ export async function extractionSuggestions(ctx, projectId, studyId, body) {
   const fresh = await db.prepare("SELECT * FROM research_extractions WHERE id=?").bind(row.id).first();
   /* Suggestions arrive UNVERIFIED; Accept moves a value into a field still
    * unverified, and a human must Verify before promote. Nothing auto-applied. */
-  return json({ extraction: await extractionOf(db, fresh), added, requestId }, 200, { "x-request-id": requestId });
+  return json({ extraction: await extractionOf(db, fresh), added, costInr: out.costInr || 0, costMt: out.costMt || 0, requestId }, 200, { "x-request-id": requestId });
 }
 
 /* ---- POST / GET screening suggestions -------------------------------------- */
@@ -318,7 +321,7 @@ export async function screeningSuggestion(ctx, projectId, recordId) {
   await audit(db, projectId, uid, "screening_suggested", recordId, { decision, model: out.model });
   /* B6: a suggestion NEVER writes a screening decision. The reviewer who accepts
    * it submits their own vote through the decisions route. */
-  return json({ suggestion: { id, recordId, decision, reasonCode, rationale, model: out.model, status: "unverified", createdTs: now }, requestId },
+  return json({ suggestion: { id, recordId, decision, reasonCode, rationale, model: out.model, status: "unverified", createdTs: now }, costInr: out.costInr || 0, costMt: out.costMt || 0, requestId },
     201, { "x-request-id": requestId });
 }
 export async function listScreeningSuggestions(ctx, projectId, recordId) {

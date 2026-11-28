@@ -851,6 +851,8 @@
     if (skip) apply({ exam: c.exam || null, group: c.group, subject: c.subject, date: c.date, min: c.min || 30, rem: c.rem });
     else apply(c);
     P.ob = null;
+    // The first win (prep-welcome.js, flag smd_onboard_story): warm-up and Focus setup, once, never after Skip.
+    if (!skip && G.PREP_WELCOME && G.PREP_WELCOME.open(H)) return;
     var stk = H.stack(); stk.length = 0; stk.push(H.home); H.home();
   }
 

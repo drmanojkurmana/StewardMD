@@ -776,7 +776,9 @@
       var w = e.target.closest && e.target.closest("[data-w]"); if (!w) return;
       var act = w.getAttribute("data-w");
       hideWelcome();
-      if (act === "start") { startAppTour(); }
+      // The particle story (onboard-story.js, flag smd_onboard_story, default OFF) plays first, once per device.
+      // A finished story (not Skip) hands over to a renal dose on an example patient first (owner 2026-11-28).
+      if (act === "start") { var ST = window.SMD_STORY; if (ST && ST.enabled() && !ST.seen("clinician")) ST.play("clinician").then(function (r) { return r && r.done && ST.demoDose ? ST.demoDose() : null; }).then(function () { startAppTour(); }); else startAppTour(); }
       else { var s = getState(); s.skippedCount = (s.skippedCount || 0) + 1; setState(s); toast("You can replay tours from Menu → About & Help"); emit("skipped", { tour: "welcome" }); }
     };
     emit("started", { tour: "welcome", replay: !!fromReplay });

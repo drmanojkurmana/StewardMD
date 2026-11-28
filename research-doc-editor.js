@@ -1429,9 +1429,11 @@
 
     function aiBarHtml() {
       if (SMD.ai && SMD.ai.barHtml) {
-        return SMD.ai.barHtml(state.ai, { task: "manuscript_draft", label: "manuscript", cost: 2 });
+        return SMD.ai.barHtml(state.ai, { task: "manuscript_draft", label: "manuscript" });
       }
-      return '<div class="rmd-ai-bar"><div class="rmd-ai-actions"><button type="button" class="rmd-doc-btn rmd-doc-btn-primary" data-doc-ai="ask">Ask MaiK to draft it</button></div><p class="rmd-ai-cost">Costs about 2 MaiK tokens</p></div>';
+      var costTxt = (SMD.pricing && SMD.pricing.quoteText) ? SMD.pricing.quoteText("manuscript_draft") : "Checking live server estimate...";
+      var chgHtml = (SMD.pricing && SMD.pricing.chargedHtml) ? SMD.pricing.chargedHtml(state.ai) : "";
+      return '<div class="rmd-ai-bar"><div class="rmd-ai-actions"><button type="button" class="rmd-doc-btn rmd-doc-btn-primary" data-doc-ai="ask">Ask MaiK to draft it</button></div><p class="rmd-ai-cost" data-rmd-cost-task="manuscript_draft">' + esc(costTxt) + '</p>' + chgHtml + '</div>';
     }
 
     function bodyHtml(section, sub) {
@@ -1597,12 +1599,12 @@
           pid: apiPid,
           task: "manuscript_draft",
           label: "manuscript",
-          cost: 2,
           request: requestDraft,
           apply: applyDraft,
           render: function () { renderAll(); }
         });
       } else {
+        if (SMD.pricing && SMD.pricing.ensureLoaded) SMD.pricing.ensureLoaded();
         var ask = host.querySelector("[data-doc-ai=\"ask\"]");
         if (ask) {
           ask.onclick = function () {
@@ -1611,6 +1613,7 @@
             renderAll();
             requestDraft().then(function (res) {
               state.ai.busy = false;
+              if (SMD.pricing && SMD.pricing.recordCharge) SMD.pricing.recordCharge(state.ai, res);
               applyDraft(res && res.draft !== undefined ? res.draft : res);
               renderAll();
             }, function (err) {

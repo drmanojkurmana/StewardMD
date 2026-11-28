@@ -8,7 +8,7 @@
 
   try {
     if (G && typeof G.importScripts === "function" && !G.SMD_RESEARCH_STATS) {
-      G.importScripts("/research-stats.js?v=ra3-rod2");
+      G.importScripts("/research-stats.js?v=ra3-rod2-roc1-scia1-scie1-scik1");
     }
   } catch (err) {
     try {
@@ -37,7 +37,9 @@
     diagnosticPerStudy: 1,
     reitsma: 1,
     sroc: 1,
-    matchedOr: 1
+    matchedOr: 1,
+    roc: 1,
+    aucBand: 1
   };
 
   function getStats() {

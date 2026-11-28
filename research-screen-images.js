@@ -73,8 +73,9 @@
     var s = D.createElement("style");
     s.id = "rmdImagesCss";
     s.textContent = [
-      "#researchMD .rmd-img-stage { overflow: auto; max-height: 60vh; border: 1px solid var(--rmd-line); border-radius: 12px; background: var(--rmd-bg); touch-action: none; }",
-      "#researchMD .rmd-img-canvas { display: block; margin: 0 auto; touch-action: none; user-select: none; -webkit-user-select: none; cursor: crosshair; }",
+      "#researchMD .rmd-img-stage { overflow: auto; max-height: 60vh; border: 1px solid var(--rmd-line); border-radius: 12px; background: var(--rmd-bg); touch-action: pan-x pan-y; }",
+      "#researchMD .rmd-img-canvas { display: block; margin: 0 auto; touch-action: none; user-select: none; -webkit-user-select: none; cursor: crosshair; max-width: 100%; height: auto; }",
+      "@media (max-width: 767px) { #researchMD .rmd-img-stage { max-height: none; overflow: visible; } }",
       "#researchMD .rmd-img-toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }",
       "#researchMD .rmd-img-tool { min-height: 44px; min-width: 44px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--rmd-line); background: var(--rmd-panel); color: var(--rmd-ink); font: 600 13.5px var(--rmd-f); cursor: pointer; }",
       "#researchMD .rmd-img-tool-active { border-color: var(--rmd-acc); background: var(--rmd-acc-soft); color: var(--rmd-acc); }",

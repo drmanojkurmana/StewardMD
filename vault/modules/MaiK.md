@@ -596,3 +596,15 @@ Tests: `test/maik-figures.test.mjs` (+4), `run-maik-convo-fixes-ui.mjs`, `run-ma
 - **Welcome icons** (same day, "AI slop icons"): the tinted tiles with a pulse line, a generic book and a
   paperclip-looking pill are now drawn line icons in the accent with no tile: stethoscope (assess), open
   book with text lines (cited answer), capsule (Drug Index). `MK.cAssess / cKnow / cDrug` in home.js.
+
+## GOTCHA - composer mic (Ask MaiK) after a pause, and a Clinical start that never comes (2026-11-28)
+- **iOS restarts the Fast transcript after a pause.** SFSpeechRecognizer's next `partialResults` carries
+  only the new sentence, so writing it straight into the box wiped the first sentence. `transcribe()` in
+  `native-bridge.js` now folds partials through the pure `stitchSegments()` (new segment = under 60% of the
+  live one's length AND a different first word or a 1.2 s gap). Every Fast caller gets this, not just MaiK.
+  Tests: `test/speech-segment-stitch.test.mjs`.
+- **Clinical (Whisper) could pulse teal for 15 s+ with no text.** `scStart()` in `home.js` now shows the
+  state in the composer placeholder (Preparing / Downloading N% / Listening / Transcribing) and, if Clinical
+  has not reached the mic in 8 s and no download is under way, cancels it (`SMD_NATIVE.cancelWhisper()`,
+  which now bumps the session token so a pending model check cannot start the mic later) and falls back to
+  Fast. `recGen` drops late callbacks from the replaced session. UI test: `test/run-maik-mic-reset-ui.mjs`.

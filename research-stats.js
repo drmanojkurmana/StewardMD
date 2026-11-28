@@ -2970,17 +2970,10 @@
     }
   }
 
-  /* Partial log likelihood, score and observed information. subjects sorted by time. */
-  function coxPartial(subjects, beta, ties, wantDeriv) {
-    var p, ll, score, info, n, idx, etas, t, start, deathIdx, dcount, maxEta, j, dw, w;
+  function coxPartialPerBlock(subjects, etas, p, ties, wantDeriv) {
+    var ll = 0, score = zerosVec(p), info = zeroMat(p), n = subjects.length, idx = 0;
+    var t, start, deathIdx, dcount, maxEta, j, dw, w;
     var sumW, sumWx, sumWxx, sumDW, sumDWx, sumDWxx, sumDx, sumDeta, di, k, frac, s0, s1, invS0, i1, j1, v;
-    p = beta.length;
-    ll = 0;
-    score = zerosVec(p);
-    info = zeroMat(p);
-    n = subjects.length;
-    etas = [];
-    idx = 0;
     while (idx < n) {
       t = subjects[idx].t;
       start = idx;
@@ -2993,17 +2986,11 @@
       if (dcount === 0) continue;
       maxEta = -1e300;
       for (j = start; j < n; j++) {
-        etas[j] = dotVec(subjects[j].x, beta);
         if (etas[j] > maxEta) maxEta = etas[j];
       }
-      sumW = 0;
-      sumWx = zerosVec(p);
-      sumWxx = zeroMat(p);
-      sumDW = 0;
-      sumDWx = zerosVec(p);
-      sumDWxx = zeroMat(p);
-      sumDx = zerosVec(p);
-      sumDeta = 0;
+      sumW = 0; sumWx = zerosVec(p); sumWxx = zeroMat(p);
+      sumDW = 0; sumDWx = zerosVec(p); sumDWxx = zeroMat(p);
+      sumDx = zerosVec(p); sumDeta = 0;
       for (j = start; j < n; j++) {
         dw = etas[j] - maxEta;
         w = dw < -745 ? 0 : Math.exp(dw);
@@ -3055,6 +3042,110 @@
           for (i1 = 0; i1 < p; i1++) score[i1] += sumDx[i1];
         }
       }
+    }
+    if (!isFinite(ll)) return null;
+    return { ll: ll, score: score, info: info };
+  }
+
+  /* Partial log likelihood, score and observed information. subjects sorted by time.
+   * Uses an O(N) backward suffix cumulative scan when the linear-predictor span is
+   * safely within exp() range (<= 600), falling back per-block otherwise. */
+  function coxPartial(subjects, beta, ties, wantDeriv) {
+    var p = beta.length, ll = 0, score = zerosVec(p), info = zeroMat(p), n = subjects.length;
+    var etas = new Array(n), minEta = Infinity, maxEta = -Infinity, j;
+    for (j = 0; j < n; j++) {
+      var eta = dotVec(subjects[j].x, beta);
+      etas[j] = eta;
+      if (eta < minEta) minEta = eta;
+      if (eta > maxEta) maxEta = eta;
+    }
+    if (!n) return { ll: 0, score: score, info: info };
+    if (!isFinite(minEta) || !isFinite(maxEta) || (maxEta - minEta) > 600) {
+      return coxPartialPerBlock(subjects, etas, p, ties, wantDeriv);
+    }
+    var runW = 0, runWx = wantDeriv ? zerosVec(p) : null, runWxx = wantDeriv ? zerosVec(p * p) : null;
+    var sumDWx = wantDeriv ? zerosVec(p) : null, sumDWxx = wantDeriv ? zerosVec(p * p) : null;
+    var sumDx = wantDeriv ? zerosVec(p) : null, s1 = wantDeriv ? zerosVec(p) : null;
+    var end = n, t, start, dcount, sumDW, sumDeta, w, xj, xja, a, b, off, k, frac, s0, invS0;
+    while (end > 0) {
+      t = subjects[end - 1].t;
+      start = end - 1;
+      while (start > 0 && subjects[start - 1].t === t) start -= 1;
+      dcount = 0;
+      sumDW = 0;
+      sumDeta = 0;
+      if (wantDeriv) {
+        for (a = 0; a < p; a++) { sumDWx[a] = 0; sumDx[a] = 0; }
+        for (a = 0; a < p * p; a++) sumDWxx[a] = 0;
+      }
+      for (j = start; j < end; j++) {
+        w = Math.exp(etas[j] - maxEta);
+        runW += w;
+        xj = subjects[j].x;
+        if (wantDeriv) {
+          for (a = 0; a < p; a++) {
+            xja = w * xj[a];
+            runWx[a] += xja;
+            off = a * p;
+            for (b = 0; b < p; b++) runWxx[off + b] += xja * xj[b];
+          }
+        }
+        if (subjects[j].e === 1) {
+          dcount += 1;
+          sumDeta += etas[j];
+          sumDW += w;
+          if (wantDeriv) {
+            for (a = 0; a < p; a++) {
+              sumDx[a] += xj[a];
+              xja = w * xj[a];
+              sumDWx[a] += xja;
+              off = a * p;
+              for (b = 0; b < p; b++) sumDWxx[off + b] += xja * xj[b];
+            }
+          }
+        }
+      }
+      if (dcount > 0) {
+        if (!(runW > 0)) return null;
+        if (ties === "breslow") {
+          ll += sumDeta - dcount * (maxEta + Math.log(runW));
+          if (wantDeriv) {
+            invS0 = 1 / runW;
+            for (a = 0; a < p; a++) score[a] += sumDx[a] - dcount * runWx[a] * invS0;
+            for (a = 0; a < p; a++) {
+              off = a * p;
+              for (b = 0; b < p; b++) {
+                info[a][b] += dcount * (runWxx[off + b] * invS0 - runWx[a] * runWx[b] * invS0 * invS0);
+              }
+            }
+          }
+        } else {
+          ll += sumDeta;
+          for (k = 0; k < dcount; k++) {
+            frac = k / dcount;
+            s0 = runW - frac * sumDW;
+            if (!(s0 > 0)) return null;
+            ll -= maxEta + Math.log(s0);
+            if (wantDeriv) {
+              invS0 = 1 / s0;
+              for (a = 0; a < p; a++) {
+                s1[a] = runWx[a] - frac * sumDWx[a];
+                score[a] -= s1[a] * invS0;
+              }
+              for (a = 0; a < p; a++) {
+                off = a * p;
+                for (b = 0; b < p; b++) {
+                  info[a][b] += (runWxx[off + b] - frac * sumDWxx[off + b]) * invS0 - s1[a] * s1[b] * invS0 * invS0;
+                }
+              }
+            }
+          }
+          if (wantDeriv) {
+            for (a = 0; a < p; a++) score[a] += sumDx[a];
+          }
+        }
+      }
+      end = start;
     }
     if (!isFinite(ll)) return null;
     return { ll: ll, score: score, info: info };
@@ -3467,60 +3558,73 @@
     Ibt = zeroMat(p);
     Itt = zeroMat(p);
 
-    idx = 0;
-    while (idx < n) {
-      start = idx;
+    var runW = 0, runWx = zerosVec(p), runWxx = zerosVec(p * p);
+    var sumDWx = zerosVec(p), sumDWxx = zerosVec(p * p), sumDx = zerosVec(p);
+    var end = n, tVal, xj, xja, off;
+    while (end > 0) {
+      tVal = subjects[end - 1].t;
+      start = end - 1;
+      while (start > 0 && subjects[start - 1].t === tVal) start -= 1;
       deathIdx = [];
-      while (idx < n && subjects[idx].t === subjects[start].t) {
-        if (subjects[idx].e === 1) deathIdx.push(idx);
-        idx += 1;
-      }
-      dcount = deathIdx.length;
-      if (dcount === 0) continue;
-      sumW = 0; sumWx = zerosVec(p); sumWxx = zeroMat(p);
-      sumDW = 0; sumDWx = zerosVec(p); sumDWxx = zeroMat(p);
-      sumDx = zerosVec(p);
-      for (j = start; j < n; j++) {
+      sumDW = 0;
+      for (a = 0; a < p; a++) { sumDWx[a] = 0; sumDx[a] = 0; }
+      for (a = 0; a < p * p; a++) sumDWxx[a] = 0;
+      for (j = start; j < end; j++) {
         wi = w[j];
-        sumW += wi;
-        accumCov(subjects[j].x, wi, sumWx, sumWxx);
-      }
-      if (!(sumW > 0)) return { ok: false, transform: transform, terms: [], global: null };
-      for (di = 0; di < dcount; di++) {
-        j = deathIdx[di];
-        wi = w[j];
-        sumDW += wi;
-        for (a = 0; a < p; a++) sumDx[a] += subjects[j].x[a];
-        accumCov(subjects[j].x, wi, sumDWx, sumDWxx);
-      }
-      A = zeroMat(p);
-      xbSum = zerosVec(p);
-      for (k = 0; k < dcount; k++) {
-        frac = ties === "breslow" ? 0 : (k / dcount);
-        s0 = sumW - frac * sumDW;
-        if (!(s0 > 0)) return { ok: false, transform: transform, terms: [], global: null };
-        invS0 = 1 / s0;
-        xb = [];
+        runW += wi;
+        xj = subjects[j].x;
         for (a = 0; a < p; a++) {
-          xb[a] = (sumWx[a] - frac * sumDWx[a]) * invS0;
-          xbSum[a] += xb[a];
+          xja = wi * xj[a];
+          runWx[a] += xja;
+          off = a * p;
+          for (b = 0; b < p; b++) runWxx[off + b] += xja * xj[b];
         }
-        for (a = 0; a < p; a++) {
-          for (b = 0; b < p; b++) {
-            A[a][b] += (sumWxx[a][b] - frac * sumDWxx[a][b]) * invS0 - xb[a] * xb[b];
+        if (subjects[j].e === 1) {
+          deathIdx.push(j);
+          sumDW += wi;
+          for (a = 0; a < p; a++) {
+            sumDx[a] += xj[a];
+            xja = wi * xj[a];
+            sumDWx[a] += xja;
+            off = a * p;
+            for (b = 0; b < p; b++) sumDWxx[off + b] += xja * xj[b];
           }
         }
       }
-      gt = gc[deathIdx[0]];
-      for (a = 0; a < p; a++) {
-        rt = sumDx[a] - xbSum[a];
-        U[a] += gt * rt;
-        for (b = 0; b < p; b++) {
-          Ibb[a][b] += A[a][b];
-          Ibt[a][b] += gt * A[a][b];
-          Itt[a][b] += gt * gt * A[a][b];
+      dcount = deathIdx.length;
+      if (dcount > 0) {
+        if (!(runW > 0)) return { ok: false, transform: transform, terms: [], global: null };
+        A = zeroMat(p);
+        xbSum = zerosVec(p);
+        for (k = 0; k < dcount; k++) {
+          frac = ties === "breslow" ? 0 : (k / dcount);
+          s0 = runW - frac * sumDW;
+          if (!(s0 > 0)) return { ok: false, transform: transform, terms: [], global: null };
+          invS0 = 1 / s0;
+          xb = [];
+          for (a = 0; a < p; a++) {
+            xb[a] = (runWx[a] - frac * sumDWx[a]) * invS0;
+            xbSum[a] += xb[a];
+          }
+          for (a = 0; a < p; a++) {
+            off = a * p;
+            for (b = 0; b < p; b++) {
+              A[a][b] += (runWxx[off + b] - frac * sumDWxx[off + b]) * invS0 - xb[a] * xb[b];
+            }
+          }
+        }
+        gt = gc[deathIdx[0]];
+        for (a = 0; a < p; a++) {
+          rt = sumDx[a] - xbSum[a];
+          U[a] += gt * rt;
+          for (b = 0; b < p; b++) {
+            Ibb[a][b] += A[a][b];
+            Ibt[a][b] += gt * A[a][b];
+            Itt[a][b] += gt * gt * A[a][b];
+          }
         }
       }
+      end = start;
     }
 
     IbbInvIbt = zeroMat(p);

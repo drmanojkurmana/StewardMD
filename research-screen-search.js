@@ -454,7 +454,7 @@
     h.push('<div class="rmd-card">');
     h.push('<h3 class="rmd-card-heading">Run a Search</h3>');
     if (canRun && st.database !== "clinicaltrials" && !st.ai) st.ai = SMD.ai.state();
-    if (canRun && st.database !== "clinicaltrials" && st.ai) h.push(SMD.ai.barHtml(st.ai, { task: "search_query", label: "search query", cost: 2 }));
+    if (canRun && st.database !== "clinicaltrials" && st.ai) h.push(SMD.ai.barHtml(st.ai, { task: "search_query", label: "search query" }));
     h.push('<div class="rmd-field"><span class="rmd-section-label" id="rmdDbLabel">Database</span>');
     h.push('<div class="rmd-filter-tabs" role="group" aria-labelledby="rmdDbLabel">');
     for (var d = 0; d < DATABASES.length; d++) {
@@ -1205,7 +1205,7 @@
 
     if (st.ai) {
       SMD.ai.bind(container, st.ai, {
-        pid: apiPidFor(project), task: "search_query", label: "search query", cost: 2,
+        pid: apiPidFor(project), task: "search_query", label: "search query",
         input: function () {
           return {
             researchQuestion: project.researchQuestion || "",

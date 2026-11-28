@@ -467,18 +467,20 @@ try {
   ok(await ev(`!!document.querySelector('#rmdSectionEditor') && !document.querySelector('#rmdSectionText')`), 'single contenteditable editor replaces the source textarea');
   ok(await ev(`!document.querySelector('.rmd-token-chip') && !document.querySelector('.rmd-preview-box')`), 'token chips and duplicate preview box removed');
 
-  /* 1b. Draft badge layout on 390x844 and 1024x1366 (single line, no overlap) */
+  /* 1b. Header title (no ellipsis), quiet meta line, 44px targets, and single phone notice at 390x844 and 1024x1366 */
   const checkDraftBadgeLayout = async (label, w, h, mob) => {
     await call('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 2, mobile: mob });
-    await until(`(()=>{const b=document.querySelector('.rmd-man-topbar-info .rmd-badge');return !!b && b.getBoundingClientRect().height > 0})()`, 3000);
+    await until(`(()=>{const b=document.querySelector('.rmd-man-topbar-info .rmd-man-meta');return !!b && b.getBoundingClientRect().height > 0})()`, 3000);
     await sleep(100);
     const info = await ev(`(()=>{
-      const b = document.querySelector('.rmd-man-topbar-info .rmd-badge');
-      if (!b) return null;
+      const b = document.querySelector('.rmd-man-topbar-info .rmd-man-meta');
+      const t = document.querySelector('.rmd-man-topbar-info .rmd-man-title');
+      if (!b || !t) return null;
       const br = b.getBoundingClientRect();
       const cs = getComputedStyle(b);
+      const tcs = getComputedStyle(t);
       const lh = parseFloat(cs.lineHeight) || (parseFloat(cs.fontSize) * 1.4) || 18;
-      const others = Array.from(document.querySelectorAll('.rmd-man-topbar .rmd-btn, .rmd-man-topbar .rmd-man-title, .rmd-man-topbar .rmd-version-tag'));
+      const others = Array.from(document.querySelectorAll('.rmd-man-topbar .rmd-btn, .rmd-man-topbar .rmd-man-title'));
       let overlapWith = null;
       for (const el of others) {
         const er = el.getBoundingClientRect();
@@ -488,11 +490,12 @@ try {
           break;
         }
       }
-      const actionHeights = Array.from(document.querySelectorAll('.rmd-man-actions .rmd-btn, .rmd-man-phone-btn'))
+      const actionHeights = Array.from(document.querySelectorAll('.rmd-man-actions .rmd-btn, .rmd-man-phone-btn, .rmd-man-draft-card .rmd-btn'))
         .map(el => el.offsetHeight)
         .filter(ht => ht > 0);
       return {
         text: (b.textContent || '').trim(),
+        titleOverflow: tcs.textOverflow,
         whiteSpace: cs.whiteSpace,
         height: br.height,
         lineHeight: lh,
@@ -500,12 +503,12 @@ try {
         overlapWith
       };
     })()`);
-    ok(info && /Draft \(not final yet\)|Locked|Approved/.test(info.text), `status badge present at ${label} (${w}x${h})`);
-    ok(info && info.whiteSpace === 'nowrap', `status badge has white-space: nowrap at ${label} (${w}x${h})`);
-    ok(info && info.height > 8 && info.height <= info.lineHeight * 1.85, `status badge stays on one line at ${label} (${w}x${h}): h=${info && info.height}, lh=${info && info.lineHeight}`);
-    ok(info && !info.overlapWith, `no element overlaps status badge at ${label} (${w}x${h})${info && info.overlapWith ? ' (overlapped ' + info.overlapWith + ')' : ''}`);
+    ok(info && /Version \d+ .* (Draft \(not final yet\)|Locked \(final\)|Approved)/.test(info.text), `quiet version + status meta line present at ${label} (${w}x${h}): ${info && info.text}`);
+    ok(info && info.titleOverflow !== 'ellipsis', `title renders without ellipsis at ${label} (${w}x${h})`);
+    ok(info && info.height > 8 && info.height <= info.lineHeight * 1.85, `meta line stays concise at ${label} (${w}x${h}): h=${info && info.height}, lh=${info && info.lineHeight}`);
+    ok(info && !info.overlapWith, `no element overlaps meta line at ${label} (${w}x${h})${info && info.overlapWith ? ' (overlapped ' + info.overlapWith + ')' : ''}`);
     if (w === 390) {
-      ok(info && info.minActionH >= 44, `phone topbar/tab targets are >= 44px at ${label} (${w}x${h}): min=${info && info.minActionH}`);
+      ok(info && info.minActionH >= 44, `phone topbar/tab/draft targets are >= 44px at ${label} (${w}x${h}): min=${info && info.minActionH}`);
       ok(await ev(`document.querySelectorAll('#researchMD .rmd-phone-notice').length === 1`), `manuscript shows exactly one phone notice banner at ${w}x${h}`);
     }
   };
@@ -515,18 +518,27 @@ try {
   await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 768, deviceScaleFactor: 2, mobile: false });
   await sleep(150);
 
-  /* 1c. Ask MaiK to draft on a review project sends ai-draft manuscript_draft (never /jobs) */
+  /* 1c. Ask MaiK to draft on a review project sends ai-draft manuscript_draft (never /jobs), tags sections, collapses Draft card */
+  if (await ev(`!!document.querySelector('[data-rmd="manuscript-redraft"]')`)) {
+    await click('[data-rmd="manuscript-redraft"]');
+  }
   await click('[data-rmd-ai="ask"]');
-  ok(await until(`!!document.querySelector('[data-rmd-ai-note="manuscript"]')`, 5000), 'Ask MaiK draft on review project succeeds and shows drafted note');
+  ok(await until(`!!document.querySelector('[data-rmd-drafted="maik"]')`, 5000), 'Ask MaiK draft on review project succeeds and tags drafted sections');
   ok(aiDraftCalls.some((c) => c.task === 'manuscript_draft'), 'Ask MaiK sends ai-draft task manuscript_draft');
   ok(jobsCalls.length === 0, 'Ask MaiK does not call /jobs endpoint with invalid manuscript_draft kind');
-  ok(!/Something went wrong on our side/.test(await text('.rmd-ai-bar')), 'Ask MaiK bar never shows "Something went wrong on our side" on review project');
+  ok(!/Something went wrong on our side/.test(await text('.rmd-manuscript-screen')), 'Manuscript never shows "Something went wrong on our side" on review project');
 
-  /* 1c-po. PaperOrchestra full draft button: flag off -> no button; flag on -> button -> tap -> POST /jobs -> status row -> cancel */
+  /* 1c-po. PaperOrchestra full draft button (behind Redraft toggle once draft exists): flag off -> no button; flag on -> button -> tap -> POST /jobs -> status row -> cancel */
+  if (await ev(`!!document.querySelector('[data-rmd="manuscript-redraft"]')`)) {
+    await click('[data-rmd="manuscript-redraft"]');
+  }
   ok(await ev(`!document.querySelector('[data-rmd="full-draft-po"]')`), 'PO flag OFF: no Full draft (PaperOrchestra) button rendered');
   await ev(`localStorage.setItem('smd_rmd_po', '1')`);
   await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
-  ok(await until(`!!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO flag ON: Full draft (PaperOrchestra) button rendered');
+  if (await until(`!!document.querySelector('[data-rmd="manuscript-redraft"]')`, 2000)) {
+    await click('[data-rmd="manuscript-redraft"]');
+  }
+  ok(await until(`!!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO flag ON: Full draft (PaperOrchestra) button rendered inside Draft card');
   ok((await text('[data-rmd="full-draft-po"]')).trim() === 'Full draft (PaperOrchestra)', 'PO button has exact text "Full draft (PaperOrchestra)"');
   const countBeforePo = jobsCalls.length;
   await click('[data-rmd="full-draft-po"]');
@@ -562,6 +574,7 @@ try {
 
   // Verify non case-report only: case-report project renders NO PO button
   await ev(`(()=>{
+    window.__origGetActive1c = SMD_RESEARCH.store.getActiveProject;
     window.__prevProj = SMD_RESEARCH.store.getActiveProject();
     const crProj = Object.assign({}, window.__prevProj, { studyType: 'case-report' });
     SMD_RESEARCH.store.getActiveProject = () => crProj;
@@ -569,20 +582,35 @@ try {
     return 1;
   })()`);
   ok(await until(`!!document.querySelector('.rmd-manuscript-screen')`, 5000), 'manuscript opened in case-report mode');
+  if (await ev(`!!document.querySelector('[data-rmd="manuscript-redraft"]')`)) {
+    await click('[data-rmd="manuscript-redraft"]');
+  }
   ok(await ev(`!document.querySelector('[data-rmd="full-draft-po"]')`), 'PO button not rendered for case-report project');
   await ev(`(()=>{
-    SMD_RESEARCH.store.getActiveProject = () => window.__prevProj;
+    SMD_RESEARCH.store.getActiveProject = window.__origGetActive1c;
     SMD_RESEARCH.open({screen:'manuscript'});
     return 1;
   })()`);
+  if (await until(`!!document.querySelector('[data-rmd="manuscript-redraft"]')`, 2000)) {
+    await click('[data-rmd="manuscript-redraft"]');
+  }
   ok(await until(`!!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO button restored for systematic review project');
 
   await ev(`localStorage.setItem('smd_rmd_po', '0')`);
   await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
+  if (await until(`!!document.querySelector('[data-rmd="manuscript-redraft"]')`, 2000)) {
+    await click('[data-rmd="manuscript-redraft"]');
+  }
   ok(await until(`!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO button cleaned up when flag set to 0');
   await ev(`localStorage.removeItem('smd_rmd_po')`);
   await ev(`SMD_RESEARCH.open({screen:'manuscript'});1`);
+  if (await until(`!!document.querySelector('[data-rmd="manuscript-redraft"]')`, 2000)) {
+    await click('[data-rmd="manuscript-redraft"]');
+  }
   ok(await until(`!!document.querySelector('[data-rmd="full-draft-po"]')`, 5000), 'PO button shown by default when flag is unset');
+  if (await ev(`!!document.querySelector('[data-rmd="manuscript-redraft-close"]')`)) {
+    await click('[data-rmd="manuscript-redraft-close"]');
+  }
   ok(await until(`!!document.getElementById('rmdSectionEditor')`, 5000), 'editor ready after reload');
 
   /* 1d. Polish empty or >5000 char section shows plain message, never "on our side" */
@@ -692,7 +720,10 @@ try {
   ok(insertPut && insertPut.text === RESULTS_TEXT + '{{run:run_local_1.estimate}}', 'save after insert sends original text plus the exact token');
   await noRawCode('after insert');
 
-  /* 7. Version diff in plain text */
+  /* 7. More menu -> Version diff in plain text */
+  ok(await until(`!!document.querySelector('[data-rmd="manuscript-more-toggle"]')`, 3000), 'More menu toggle rendered after draft');
+  await click('[data-rmd="manuscript-more-toggle"]');
+  ok(await until(`!document.getElementById('rmdManMoreMenu').hidden`, 3000), 'More menu opens on click');
   await click('[data-rmd="manuscript-diff-toggle"]');
   ok(await until(`!!document.querySelector('.rmd-diff-view')`, 5000), 'what-changed view renders');
   ok(await ev(`!!document.querySelector('.rmd-diff-view .rmd-diff-ins') || !!document.querySelector('.rmd-diff-view .rmd-diff-del')`), 'diff shows inserted/deleted content');
@@ -701,8 +732,17 @@ try {
   await click('[data-rmd="manuscript-mode-editor"]');
   ok(await until(`!!document.querySelector('#rmdSectionEditor')`, 5000), 'back to editor restores section view');
 
-  /* 8. Approve then lock makes it read-only */
+  /* 8. Section approvals unlock Mark as final; approve then lock makes it read-only */
   ok(await ev(`!document.querySelector('.rmd-locked-banner')`), 'manuscript is initially unlocked');
+  ok(await ev(`!document.querySelector('[data-rmd="manuscript-approve"]')`), 'Mark as final is hidden until all drafted sections are approved');
+  const secIds = await ev(`Array.from(document.querySelectorAll('.rmd-section-item[data-section-id]')).filter(el => { var m = el.querySelector('.rmd-section-item-meta'); return m && !/^0 words/.test((m.textContent||'').trim()); }).map(el => el.getAttribute('data-section-id'))`);
+  for (const sid of secIds) {
+    await ev(`document.querySelector('.rmd-section-item[data-section-id="' + ${JSON.stringify(sid)} + '"]').click()`);
+    await until(`!!document.querySelector('[data-rmd-approve-sec]')`, 2000);
+    const already = await ev(`document.querySelector('[data-rmd-approve-sec]').textContent.trim() === 'Approved section'`);
+    if (!already) await click('[data-rmd-approve-sec]');
+  }
+  ok(await until(`!!document.querySelector('[data-rmd="manuscript-approve"]')`, 3000), 'Mark as final unlocks once every section is approved');
   await click('[data-rmd="manuscript-approve"]');
   ok(await until(`/Approved/.test(document.querySelector('.rmd-man-topbar').textContent)`, 5000), 'Mark as final approves the manuscript');
   await click('[data-rmd="manuscript-lock"]');
@@ -776,12 +816,30 @@ try {
     }
   }
 
-  /* 11b. Fresh project (GET /manuscript 404 before first save): Export before draft explains "Draft the manuscript first.", then Save syncs version 1, then export sends version 1 */
+  /* 11b. Fresh project (GET /manuscript 404 before first save): before a draft only drafting shows; once draft text entered locally, Export hits 404 recovery, then Save syncs version 1, then export sends version 1 */
   firstSaveMode = true;
   firstSaveCreated = false;
   await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 768, deviceScaleFactor: 2, mobile: false });
-  await ev(`(function(){localStorage.removeItem('smd_rmd_manuscript_local_v1');localStorage.removeItem('smd_rmd_po');window.__exports=[];SMD_RESEARCH.open({screen:'manuscript'});return 1})()`);
+  await ev(`(function(){
+    localStorage.removeItem('smd_rmd_manuscript_local_v1');
+    localStorage.removeItem('smd_rmd_po');
+    window.__exports=[];
+    var st = SMD_RESEARCH.store;
+    var fp = st.createProject({ title: 'Fresh Study Without Draft', studyType: 'systematic_review', discipline: 'medicine' });
+    fp.serverId = 'prj_fresh_11b';
+    st.updateProject && st.updateProject(fp.id, { serverId: 'prj_fresh_11b' });
+    st.setActiveProject(fp.id);
+    window.__fresh11bId = fp.id;
+    SMD_RESEARCH.open({screen:'manuscript'});
+    return 1;
+  })()`);
   ok(await until(`!!document.querySelector('[data-rmd="section-save"]')`, 5000), 'fresh project renders manuscript editor on 404 fallback');
+  const preDraftActs = await ev(`({ hasExp: !!document.querySelector('[data-rmd="manuscript-export"]'), hasApp: !!document.querySelector('[data-rmd="manuscript-approve"]'), title: (document.querySelector('.rmd-man-title')||{}).textContent, acts: (document.querySelector('.rmd-man-actions')||{}).innerText, secWords: Array.from(document.querySelectorAll('.rmd-section-item-meta')).map(e=>e.textContent) })`);
+  if (preDraftActs.hasExp || preDraftActs.hasApp) console.log('DIAG 11b', JSON.stringify(preDraftActs));
+  ok(!preDraftActs.hasExp && !preDraftActs.hasApp, 'before a draft, Download Word file and Mark as final stay hidden');
+  await ev(`(function(){var e=document.getElementById('rmdSectionEditor');if(e){e.textContent='Draft study results text.';e.dispatchEvent(new Event('input',{bubbles:true}));}return 1})()`);
+  await click('.rmd-section-item[data-section-id="methods"]');
+  ok(await until(`!!document.querySelector('[data-rmd="manuscript-export"]')`, 3000), 'Download Word file appears once a section has local text');
   await click('[data-rmd="manuscript-export"]');
   ok(await until(`/Draft the manuscript first/.test((document.querySelector('.rmd-man-right')||{}).textContent||'') && !!document.querySelector('[data-rmd="draft-manuscript-first"]')`, 5000), '404 manuscript_not_found shows Draft the manuscript first with action button');
   ok(await ev(`document.querySelector('[data-rmd="draft-manuscript-first"]').offsetHeight >= 44`), 'Draft the manuscript button meets 44px touch target');
