@@ -122,6 +122,7 @@ public class SmdFocusPlugin: CAPPlugin, CAPBridgedPlugin {
     @objc func start(_ call: CAPPluginCall) {
         let endsAtMs = call.getDouble("endsAt")
         let strict = call.getBool("strict") ?? false
+        let web = call.getBool("web") ?? false
         DispatchQueue.main.async {
             let sel = self.loadSelection()
             let empty = sel.applicationTokens.isEmpty && sel.categoryTokens.isEmpty && sel.webDomainTokens.isEmpty
@@ -132,9 +133,10 @@ public class SmdFocusPlugin: CAPPlugin, CAPBridgedPlugin {
             let store = SmdFocusShared.store
             store.shield.applications = sel.applicationTokens.isEmpty ? nil : sel.applicationTokens
             store.shield.applicationCategories = sel.categoryTokens.isEmpty ? nil : .specific(sel.categoryTokens)
-            store.shield.webDomains = sel.webDomainTokens.isEmpty ? nil : sel.webDomainTokens
-            // A picked category (Games, Social) also covers its websites in Safari.
-            store.shield.webDomainCategories = sel.categoryTokens.isEmpty ? nil : .specific(sel.categoryTokens)
+            // Websites only when the student switched on "Block websites too" (web, a Pro extra; contract in
+            // vault/plans/Mac-Remaining-Focus-Onboarding.md). A picked category then also covers its websites.
+            store.shield.webDomains = web && !sel.webDomainTokens.isEmpty ? sel.webDomainTokens : nil
+            store.shield.webDomainCategories = web && !sel.categoryTokens.isEmpty ? .specific(sel.categoryTokens) : nil
             // Strict (owner 2026-11-28, like Regain): apps cannot be deleted until the session ends, so deleting StewardMD
             // cannot cut a session short. iOS applies it to every app on the phone; clearAllSettings() lifts it.
             store.application.denyAppRemoval = strict ? true : nil
