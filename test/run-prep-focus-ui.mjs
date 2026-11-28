@@ -75,10 +75,10 @@ try {
   await ev(`window.__off=0; var _n=Date.now.bind(Date); Date.now=function(){return _n()+window.__off;}; return 1;`);
   const jump = (minutes) => ev(`window.__off += ${minutes * 60e3}; return 1;`);
   // A stand-in SmdFocus plugin that records calls.
-  await ev(`window.__nat=[]; window.Capacitor=window.Capacitor||{}; window.Capacitor.Plugins=window.Capacitor.Plugins||{};
-    window.Capacitor.Plugins.SmdFocus={ status:function(){__nat.push("status"); return Promise.resolve({available:true,authorized:true,apps:3,categories:1,domains:0});},
+  await ev(`window.__la=[]; window.SMD_liveActivity={upsert:function(o){__la.push("up:"+o.key+":"+(o.endsAt?"t":"w"));}, end:function(k){__la.push("end:"+k);}}; window.__nat=[]; window.Capacitor=window.Capacitor||{}; window.Capacitor.Plugins=window.Capacitor.Plugins||{};
+    window.Capacitor.Plugins.SmdFocus={ status:function(){__nat.push("status"); return Promise.resolve({available:true,authorized:true,apps:3,categories:1,domains:1});},
       authorize:function(){__nat.push("authorize"); return Promise.resolve({authorized:true});}, pick:function(){__nat.push("pick"); return Promise.resolve({apps:3});},
-      start:function(o){__nat.push("start:"+(o.endsAt?"t":"w")+(o.strict?"s":"")); return Promise.resolve({shielding:true});}, stop:function(){__nat.push("stop"); return Promise.resolve({});} }; return 1;`);
+      start:function(o){__nat.push("start:"+(o.endsAt?"t":"w")+(o.strict?"s":"")); if(o.web) __nat.push("web"); return Promise.resolve({shielding:true});}, schedule:function(o){__nat.push("schedule:"+o.items.length); window.__sch=o.items; return Promise.resolve({});}, stop:function(){__nat.push("stop"); return Promise.resolve({});} }; return 1;`);
 
   // Flag off first: the Play row is still the Focus room.
   await ev(`PREP.open(); return 1;`);
@@ -88,21 +88,46 @@ try {
   // Flag on.
   await ev(`localStorage.setItem("smd_prep_focus","1"); return 1;`);
   await call("Page.navigate", { url: BASE + "?prep=1" }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await theme(false);
-  await ev(`window.__off=0; var _n=Date.now.bind(Date); Date.now=function(){return _n()+window.__off;}; window.__nat=[]; window.Capacitor=window.Capacitor||{}; window.Capacitor.Plugins=window.Capacitor.Plugins||{};
-    window.Capacitor.Plugins.SmdFocus={ status:function(){__nat.push("status"); return Promise.resolve({available:true,authorized:true,apps:3,categories:1,domains:0});},
+  await ev(`window.__off=0; var _n=Date.now.bind(Date); Date.now=function(){return _n()+window.__off;}; window.__la=[]; window.SMD_liveActivity={upsert:function(o){__la.push("up:"+o.key+":"+(o.endsAt?"t":"w"));}, end:function(k){__la.push("end:"+k);}}; window.__nat=[]; window.Capacitor=window.Capacitor||{}; window.Capacitor.Plugins=window.Capacitor.Plugins||{};
+    window.Capacitor.Plugins.SmdFocus={ status:function(){__nat.push("status"); return Promise.resolve({available:true,authorized:true,apps:3,categories:1,domains:1});},
       authorize:function(){__nat.push("authorize"); return Promise.resolve({authorized:true});}, pick:function(){__nat.push("pick"); return Promise.resolve({apps:3});},
-      start:function(o){__nat.push("start:"+(o.endsAt?"t":"w")+(o.strict?"s":"")); return Promise.resolve({shielding:true});}, stop:function(){__nat.push("stop"); return Promise.resolve({});} }; return 1;`);
+      start:function(o){__nat.push("start:"+(o.endsAt?"t":"w")+(o.strict?"s":"")); if(o.web) __nat.push("web"); return Promise.resolve({shielding:true});}, schedule:function(o){__nat.push("schedule:"+o.items.length); window.__sch=o.items; return Promise.resolve({});}, stop:function(){__nat.push("stop"); return Promise.resolve({});} }; return 1;`);
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!window.PREP_FOCUS && !!document.querySelector("#smdPrep [data-act=v-focus]");`, 20000), "flag on: prep-loader.js loads prep-focus.js");
   ok(/Focus/.test(await text("#smdPrep [data-act=v-focus] b")) && !/room/.test(await text("#smdPrep [data-act=v-focus] b")), "the Play row is now Focus (" + await text("#smdPrep [data-act=v-focus]") + ")");
   await click("#smdPrep [data-act=v-focus]");
   ok(await until(`return !!document.querySelector("#smdPrep .fo-home .fo-ring");`, 4000), "Focus home: the goal ring");
-  ok(await until(`return /3 apps, 1 category/.test(document.querySelector("#smdPrep .fo-home").textContent);`, 3000), "blocking row shows what is picked (from the plugin)");
+  ok(await until(`return /3 apps, 1 category, 1 website/.test(document.querySelector("#smdPrep .fo-home").textContent);`, 3000), "blocking row shows what is picked (from the plugin)");
   ok(await ev(`return !!document.querySelector('#smdPrep [data-act=fo-blk][aria-checked="false"]');`) === true, "Block during focus starts off");
   await click("#smdPrep [data-act=fo-blk]");
   ok(await ev(`return !!document.querySelector('#smdPrep [data-act=fo-blk][aria-checked="true"]');`) === true, "Block during focus switches on");
   await sleep(900); await shot("home");
   ok(!(await overflow()), "nothing wider than the screen on Focus home");
+
+  // Website blocking (Pro extra; PrepPro does not enforce here, so it is open).
+  ok(await ev(`return !!document.querySelector('#smdPrep [data-act=fo-web][aria-checked="false"]');`) === true, "Block websites too shows once websites are picked");
+  await click("#smdPrep [data-act=fo-web]");
+  ok(await ev(`return PREP._host.store().fo.web === true;`) === true, "website blocking switches on");
+  // Schedules.
+  ok(await until(`return /Schedules/.test(document.querySelector("#smdPrep .fo-home").textContent) && !!document.querySelector('#smdPrep [data-act=fo-schadd][data-v="morning"]');`, 2000), "Schedules offers Morning study");
+  await click('#smdPrep [data-act=fo-schadd][data-v="morning"]');
+  ok(await until(`return __nat.indexOf("schedule:1") >= 0 && window.__sch[0].from === "06:00" && window.__sch[0].days.join() === "1,2,3,4,5";`, 2000), "adding it sends one schedule to the plugin (6:00, weekdays)");
+  ok(/6:00 to 8:00 AM, weekdays/.test(await text("#smdPrep .fo-sch")), "the row reads 6:00 to 8:00 AM, weekdays");
+  await click('#smdPrep [data-act=fo-schon][data-v="morning"]');
+  ok(await until(`return __nat[__nat.length-1] === "schedule:0";`, 2000), "switching it off clears it in the plugin");
+  await click('#smdPrep [data-act=fo-schon][data-v="morning"]');
+  await click("#smdPrep [data-act=fo-schnew]");
+  ok(await until(`return !!document.querySelector("#foSheet #foSchF");`, 2000), "Custom opens the new schedule sheet");
+  await ev(`document.querySelectorAll('#foSheet [data-act=fo-schday][aria-pressed="true"]').forEach(function(b){b.click();}); return 1;`);
+  await click("#foSheet [data-act=fo-schsave]");
+  ok(/at least one day/.test(await text("#foSchMsg")), "no day picked: it says so");
+  await ev(`document.querySelector('#foSheet [data-act=fo-schday][data-v="6"]').click(); var f=document.querySelector("#foSchF"), t=document.querySelector("#foSchT"); f.value="10:00"; t.value="12:30"; return 1;`);
+  await click("#foSheet [data-act=fo-schsave]");
+  ok(await until(`return !document.querySelector("#foSheet") && window.__sch.length === 2 && window.__sch[1].days.join() === "6";`, 2000), "a custom Saturday 10:00 to 12:30 schedule is saved and sent");
+  await sleep(400); await shot("schedules");
+  await ev(`var d=document.querySelectorAll("#smdPrep [data-act=fo-schdel]"); d[d.length-1].click(); return 1;`);
+  ok(await until(`return window.__sch.length === 1;`, 2000), "Remove drops it from the plugin");
+  ok(!(await overflow()), "nothing wider than the screen with schedules");
 
   // Pomodoro choice, then back to a 25 min timer.
   await click('#smdPrep [data-act=fo-mode][data-v="pomo"]');
@@ -114,7 +139,7 @@ try {
   await click("#smdPrep [data-act=fo-start]");
   ok(await until(`return !!document.querySelector("#smdPrep .fo-run #foClock");`, 3000), "Start: the running ring");
   ok(/^2[45]:\d\d$/.test(await text("#foClock")), "the clock counts down from 25:00 (" + await text("#foClock") + ")");
-  ok(await until(`return __nat.indexOf("start:t") >= 0;`, 2000), "the native plugin is asked to block until the end");
+  ok(await until(`return __nat.indexOf("start:t") >= 0 && __nat.indexOf("web") >= 0;`, 2000), "the native plugin is asked to block apps and websites until the end");
   await sleep(900); await shot("run");
   ok(!(await overflow()), "nothing wider than the screen while running");
 
@@ -146,6 +171,7 @@ try {
   ok(await until(`return !!document.querySelector("#smdPrep .fo-done .fo-tiles");`, 3000), "End and save: the summary");
   ok(await ev(`var f=PREP._host.store().fo; return f.log.length===1 && f.log[0].m>=12 && f.log[0].q===2 && f.log[0].ok===0;`) === true, "the session is logged with its minutes and answers");
   ok(await until(`return __nat.indexOf("stop") >= 0;`, 2000), "the native plugin is told to stop blocking");
+  ok(await ev(`return __la.indexOf("up:prep-focus:t") >= 0 && __la[__la.length-1] === "end:prep-focus";`) === true, "the Live Activity starts with the end time and ends with the session");
   await shot("done");
 
   // Strict mode locks End.

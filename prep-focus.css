@@ -108,6 +108,18 @@ body.dark .pn-root .fo-wk li.td .fo-wkb i { background: var(--pn-fill); }
 .pn-root .fo-tiles small { color: var(--pn-mut); font-size: 12px; }
 .pn-root .fo-acts { display: flex; flex-direction: column; gap: 10px; }
 
+/* Schedules */
+.pn-root .fo-sch { display: flex; align-items: center; gap: 8px; border-top: 1px solid var(--pn-line); }
+.pn-root .fo-sch .fo-sw { border-top: 0; flex: 1 1 auto; min-width: 0; }
+.pn-root .fo-schdel { flex: 0 0 auto; min-height: 44px; padding: 0 4px; color: var(--pn-mut); }
+.pn-root .fo-schnow { background: var(--pn-pri-soft); border-color: transparent; }
+.pn-root .fo-schnow p { margin: 0; color: var(--pn-pri-ink); }
+.pn-root .fo-lab { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: var(--pn-text); }
+.pn-root .fo-times { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pn-root .fo-days { display: flex; flex-wrap: wrap; gap: 6px; }
+.pn-root .fo-days .pn-chip { min-width: 44px; justify-content: center; }
+.pn-root .fo-days .pn-chip.on { background: var(--pn-pri); border-color: var(--pn-pri); color: var(--pn-on-pri); }
+
 /* Sheet */
 .pn-root .fo-sheet p { margin: 0; }
 .pn-root .fo-sheet-acts { display: flex; flex-direction: column; gap: 10px; }
@@ -118,3 +130,8 @@ body.dark .pn-root .fo-wk li.td .fo-wkb i { background: var(--pn-fill); }
   .pn-root .fo-tlbar i.live { animation: none; }
   .pn-root .fo-knob, .pn-root .fo-knob::after { transition: none; }
 }
+
+/* Welcome (prep-welcome.js) */
+.pn-root .wl-body { display: flex; flex-direction: column; gap: 14px; }
+.pn-root .wl-go { width: 100%; min-height: 56px; font-size: 17px; }
+.pn-root .wl-later { align-self: center; min-height: 44px; color: var(--pn-mut); }

@@ -20,6 +20,14 @@ Regain teardown and the full feature table: the Claude Docs page "Regain teardow
   `fxm` month minutes shared with Play's Wrapped. Live count rides `/api/prep/play/focus` heartbeats (signed in).
 - Tests: `test/prep-focus.test.mjs` (engine), `test/run-prep-focus-ui.mjs` (headless, `SHOTS=<dir>`).
 
+## Phase 1b (done, branch `feat/onboard-next`, loader `prep204`)
+- Website blocking switch ("Block websites too", Pro) when the picker returned websites; `start({ web })`.
+- Schedules (Pro): Morning / Evening suggestions and custom windows (name, from, to, days; 15 min minimum, same day);
+  sent to `SmdFocus.schedule({ items, web })`; "is on now" banner on Focus home. Store `fo.sch`.
+- Live Activity / Dynamic Island countdown through `SMD_liveActivity` (key `prep-focus`).
+- Welcome screen after the plan onboarding (`prep-welcome.js`, flag `smd_onboard_story`): 5-question warm-up, Focus setup.
+- Native and on-device work left: [[plans/Mac-Remaining-Focus-Onboarding]].
+
 ## Phase 2 (Mac session): iOS `SmdFocus` plugin
 The JS already calls these. Register like `SmdDevicePlugin` in `ios/App/App/MainViewController.swift`
 (`bridge?.registerPluginInstance(...)`, `CAPBridgedPlugin`, `jsName = "SmdFocus"`). Every method resolves; never reject

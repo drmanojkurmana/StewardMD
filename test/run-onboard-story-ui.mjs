@@ -158,6 +158,23 @@ try {
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!document.getElementById("smdStory") && /NEET-PG/.test(document.querySelector("#smdStory").textContent);`, 20000), "first PrepNucleus open plays the prep track");
   ok(await until(`return !!document.querySelector("#smdPrep .pl-ob");`, 6000), "the plan onboarding waits underneath");
+  // The plan steps' Skip never shows the welcome screen.
+  await ev(`var x=document.getElementById("smdStory"); if (x) x.remove(); return 1;`);
+  await click("#smdPrep [data-act=p-skip]").catch(() => {});
+  await ev(`var b=document.querySelector("#smdPrep [data-act=p-skip]"); if (b) b.click(); return 1;`);
+  await sleep(600);
+  ok(await ev(`return !document.querySelector("#smdPrep .wl-body");`) === true, "Skip on the plan steps: no welcome screen");
+  // The welcome screen itself.
+  await ev(`localStorage.removeItem("smd_prep_welcome_seen"); window.__wl = PREP_WELCOME.open(PREP._host); return 1;`);
+  ok(await until(`return window.__wl === true && !!document.querySelector("#smdPrep .wl-body");`, 3000), "welcome: Your plan is ready");
+  ok(/5-question warm-up/.test(await text("#smdPrep .wl-body")), "it offers the 5-question warm-up");
+  await sleep(500); await shot("welcome");
+  ok(await ev(`return PREP_WELCOME.open(PREP._host) === false;`) === true, "shown once per device");
+  await ev(`window.__wl2 = 1; return 1;`);
+  await ev(`localStorage.removeItem("smd_prep_welcome_seen"); PREP_WELCOME.open(PREP._host); return 1;`);
+  await until(`return !!document.querySelector("#smdPrep [data-act=wl-warm]");`, 3000);
+  await click("#smdPrep [data-act=wl-warm]");
+  ok(await until(`return !!document.querySelector("#smdPrep [data-act=answer]") && /Warm-up/.test(document.querySelector("#smdPrep .pn-bar").textContent);`, 15000), "the warm-up opens real questions in the runner");
   ok(errors.length === 0, "no uncaught error" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
 } catch (e) { console.log("FAIL harness: " + (e && e.stack || e)); fails++; }
 finally {

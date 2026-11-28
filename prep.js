@@ -4603,6 +4603,7 @@
     if (a.indexOf("x-") === 0 && G.PREP_TOOLS) return G.PREP_TOOLS.act(a, b, HOST);
     if (a.indexOf("tt-") === 0 && G.PREP_TT) return G.PREP_TT.act(a, b, HOST);
     if (a.indexOf("fo-") === 0 && G.PREP_FOCUS) return G.PREP_FOCUS.act(a, b, HOST);
+    if (a.indexOf("wl-") === 0 && G.PREP_WELCOME) return G.PREP_WELCOME.act(a, b, HOST);
     if (a.indexOf("v-") === 0 && G.PREP_PLAY) return G.PREP_PLAY.act(a, b, HOST);
     if (a.indexOf("mg-") === 0 && G.PREP_MEDIGRAM) return G.PREP_MEDIGRAM.act(a, b, HOST);
     // Sound (prep-sound.js) owns every data-act starting "s-" except "sp-" (the Spotify mini-player owns that; its check runs later).
