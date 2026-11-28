@@ -25,8 +25,13 @@
   var PAPER_TYPES = [
     { key: "obs", label: "Original article (observational study)", checklist: "strobe", checklistName: "STROBE", gloss: "the reporting checklist for observational studies", eg: "A cohort, case-control or cross-sectional study from your thesis data." },
     { key: "rct", label: "Randomized controlled trial (RCT)", checklist: "consort", checklistName: "CONSORT", gloss: "the reporting checklist for randomized trials", eg: "A trial that randomly allocated people to groups." },
+    { key: "cohort", label: "Cohort study", checklist: "strobe", checklistName: "STROBE", gloss: "the reporting checklist for cohort studies", eg: "Follows defined patient groups over time for outcomes." },
+    { key: "case_control", label: "Case-control study", checklist: "strobe", checklistName: "STROBE", gloss: "the reporting checklist for case-control studies", eg: "Compares patients with an outcome against matched controls." },
+    { key: "cross_sectional", label: "Cross-sectional study", checklist: "strobe", checklistName: "STROBE", gloss: "the reporting checklist for cross-sectional studies", eg: "Measures prevalence or associations at a single time point." },
+    { key: "diagnostic", label: "Diagnostic accuracy study", checklist: "stard2015", checklistName: "STARD", gloss: "the reporting checklist for diagnostic accuracy studies", eg: "Evaluates sensitivity and specificity against a reference standard." },
     { key: "case", label: "Case series or case report", checklist: "care", checklistName: "CARE", gloss: "the reporting checklist for case reports", eg: "One patient or a small series of unusual cases." },
-    { key: "sr", label: "Systematic review", checklist: "prisma2020", checklistName: "PRISMA", gloss: "the reporting checklist for systematic reviews", eg: "A structured search and synthesis of many studies." }
+    { key: "sr", label: "Systematic review or meta-analysis", checklist: "prisma2020", checklistName: "PRISMA", gloss: "the reporting checklist for systematic reviews", eg: "A structured search and synthesis of many prior studies." },
+    { key: "qualitative", label: "Qualitative study", checklist: "srqr", checklistName: "SRQR", gloss: "the reporting checklist for qualitative studies", eg: "Thematic or content analysis of interviews or focus groups." }
   ];
 
   var SECTION_ORDER = [
@@ -34,7 +39,8 @@
     { id: "introduction", heading: "Introduction" },
     { id: "methods", heading: "Methods" },
     { id: "results", heading: "Results" },
-    { id: "discussion", heading: "Discussion" }
+    { id: "discussion", heading: "Discussion" },
+    { id: "conclusion", heading: "Conclusion" }
   ];
 
   /* ---------- on-device DOCX & PDF extraction ---------- */
@@ -530,23 +536,54 @@
     return t ? t.split(/\s+/).length : 0;
   }
 
-  /* Trim whole sentences from the end of the main text (never the abstract)
-     until it fits the journal word limit. Deterministic, no recomputation. */
-  function enforceWordLimit(sections, limit) {
-    var secs = [], i, total = 0, li, sentences, trimmed = false;
-    for (i = 0; i < (sections || []).length; i++) {
-      secs.push({ id: sections[i].id, heading: sections[i].heading, text: sections[i].text });
+  /* Trim whole sentences from the end of the main text (never the abstract, and
+     preserving Conclusion unless everything else is exhausted) until it fits the
+     journal word limit. Deterministic, no recomputation. */
+  function trimToWordBudget(text, maxWords) {
+    var sentences = splitSentences(String(text || ""));
+    while (countWords(sentences.join("")) > maxWords) {
+      if (sentences.length > 1) sentences.pop();
+      else return "";
     }
-    if (!isFinite(limit) || limit <= 0) return { sections: secs, words: 0, trimmed: false };
+    return sentences.join("").replace(/\s+$/, "");
+  }
+
+  function enforceWordLimit(sections, limit, abstractLimit) {
+    var secs = [], i, total = 0, li, sentences, trimmed = false;
+    var absLimit = isFinite(abstractLimit) && abstractLimit > 0 ? abstractLimit : 0;
+    for (i = 0; i < (sections || []).length; i++) {
+      var curText = sections[i].text || "";
+      if (sections[i].id === "abstract" && absLimit > 0 && countWords(curText) > absLimit) {
+        curText = trimToWordBudget(curText, absLimit);
+        trimmed = true;
+      }
+      secs.push({ id: sections[i].id, heading: sections[i].heading, text: curText });
+    }
+    if (!isFinite(limit) || limit <= 0) return { sections: secs, words: 0, trimmed: trimmed };
     function mainTotal() {
       var sum = 0, j;
       for (j = 0; j < secs.length; j++) if (secs[j].id !== "abstract") sum += countWords(secs[j].text);
       return sum;
     }
+    function pickTrimTarget() {
+      var priority = ["discussion", "introduction", "results", "methods"];
+      var p, j;
+      for (p = 0; p < priority.length; p++) {
+        for (j = 0; j < secs.length; j++) {
+          if (secs[j].id === priority[p] && countWords(secs[j].text) > 40) return j;
+        }
+      }
+      for (j = secs.length - 1; j >= 0; j--) {
+        if (secs[j].id !== "abstract" && secs[j].id !== "conclusion" && countWords(secs[j].text) > 0) return j;
+      }
+      for (j = secs.length - 1; j >= 0; j--) {
+        if (secs[j].id !== "abstract" && countWords(secs[j].text) > 0) return j;
+      }
+      return -1;
+    }
     total = mainTotal();
     while (total > limit) {
-      li = -1;
-      for (i = 0; i < secs.length; i++) if (secs[i].id !== "abstract" && countWords(secs[i].text) > 0) li = i;
+      li = pickTrimTarget();
       if (li < 0) break;
       sentences = splitSentences(secs[li].text);
       if (sentences.length > 1) {
@@ -561,18 +598,347 @@
     return { sections: secs, words: total, trimmed: trimmed };
   }
 
-  function suggestPaperType(text) {
-    var t = String(text || "").toLowerCase();
-    if (t.indexOf("systematic review") >= 0 || t.indexOf("meta-analysis") >= 0 || t.indexOf("meta analysis") >= 0) {
-      return { key: "sr", checklist: "prisma2020", checklistName: "PRISMA", why: "Your thesis mentions a systematic review or meta-analysis." };
+  function normalizePagesInput(input) {
+    if (Object.prototype.toString.call(input) === "[object Array]") {
+      var out = [], i;
+      for (i = 0; i < input.length; i++) {
+        var pg = input[i] || {};
+        out.push({ n: pg.n != null ? pg.n : (i + 1), text: String(pg.text || "") });
+      }
+      return out;
     }
-    if (t.indexOf("randomized") >= 0 || t.indexOf("randomised") >= 0 || t.indexOf(" rct ") >= 0) {
-      return { key: "rct", checklist: "consort", checklistName: "CONSORT", why: "Your thesis describes a randomized controlled trial." };
+    var raw = String(input || "");
+    if (!raw) return [];
+    var parts = raw.split("\f");
+    if (parts.length > 1) {
+      var fp = [];
+      for (var k = 0; k < parts.length; k++) fp.push({ n: k + 1, text: parts[k] });
+      return fp;
     }
-    if (t.indexOf("case report") >= 0 || t.indexOf("case series") >= 0) {
-      return { key: "case", checklist: "care", checklistName: "CARE", why: "Your thesis is a case report or case series." };
+    return [{ n: null, text: raw }];
+  }
+
+  function isTocOrFrontListPage(txt) {
+    var head = String(txt || "").slice(0, 360);
+    if (/\b(table\s+of\s+contents|list\s+of\s+tables|list\s+of\s+figures)\b/i.test(head)) return true;
+    var dots = String(txt || "").match(/\.{4,}\s*\d+/g);
+    return !!(dots && dots.length >= 3);
+  }
+
+  function extractQuoteForRule(pages, patterns, negPattern) {
+    var p, s, clean, low, r;
+    for (p = 0; p < pages.length; p++) {
+      if (isTocOrFrontListPage(pages[p].text)) continue;
+      if (/^\s*(references|bibliography|acknowledgements|dankwoord|curriculum\s+vitae)\b/im.test(String(pages[p].text || "").slice(0, 240))) continue;
+      var sents = String(pages[p].text || "").replace(/\s+/g, " ").split(/([.!?]\s+)/);
+      for (s = 0; s < sents.length; s += 2) {
+        clean = (sents[s] + (sents[s + 1] || "")).replace(/^\s+|\s+$/g, "");
+        if (clean.length < 22 || /\.{4,}/.test(clean)) continue;
+        low = clean.toLowerCase();
+        if (negPattern && negPattern.test(low)) continue;
+        for (r = 0; r < patterns.length; r++) {
+          if (patterns[r].global) patterns[r].lastIndex = 0;
+          if (patterns[r].test(low)) {
+            if (clean.length > 180) clean = clean.slice(0, 177).replace(/\s+\S*$/, "") + "...";
+            return { quote: clean, page: pages[p].n };
+          }
+        }
+      }
     }
-    return { key: "obs", checklist: "strobe", checklistName: "STROBE", why: "Your thesis looks like an observational study (cohort, case-control or cross-sectional)." };
+    return { quote: "", page: null };
+  }
+
+  function suggestPaperType(input) {
+    var pages = normalizePagesInput(input);
+    var rules = [
+      {
+        key: "sr", checklist: "prisma2020", checklistName: "PRISMA",
+        pats: [/\bsystematic\s+review(?:\s+and\s+meta[- ]analysis)?\b/g, /\bmeta[- ]analysis\b/g, /\bmeta\s+analysis\b/g, /\bprisma\b/g, /\brisk\s+of\s+bias\s+tool\b/g],
+        neg: /\b(i\s+systematically\s+reviewed|systematic\s+review\s+(?:also\s+)?identified|literature\s+review)\b/,
+        baseWhy: "Your thesis describes a systematic review or meta-analysis."
+      },
+      {
+        key: "rct", checklist: "consort", checklistName: "CONSORT",
+        pats: [/\brandomi[sz]ed\s+(?:controlled|intrapatient|clinical|placebo|double[- ]blind|single[- ]blind|open[- ]label|multicentre|multicenter)?\s*(?:controlled\s+)?trial\b/g, /\brandomly\s+(?:allocated|assigned|divided)\b/g, /\bintrapatient\s+(?:concurrent\s+)?controlled\b/g, /\brandomi[sz]ation\b/g, /\bplacebo[- ]controlled\b/g, /\bconsort\b/g],
+        neg: /\b(inform\s+the\s+design\s+of\s+a\s+randomi[sz]ed|future\s+randomi[sz]ed|preliminary\s+randomi[sz]ed)\b/,
+        baseWhy: "Your thesis describes a randomized controlled trial."
+      },
+      {
+        key: "diagnostic", checklist: "stard2015", checklistName: "STARD",
+        pats: [/\bdiagnostic\s+accuracy\b/g, /\breference\s+standard\b/g, /\bsensitivity\b.{0,35}\bspecificity\b/g, /\broc\s+curve\b/g, /\bstard\b/g],
+        neg: null,
+        baseWhy: "Your thesis evaluates diagnostic accuracy against a reference standard."
+      },
+      {
+        key: "cohort", checklist: "strobe", checklistName: "STROBE",
+        pats: [/\bprospective\s+cohort\b/g, /\bretrospective\s+cohort\b/g, /\bcohort\s+study\b/g, /\bunselected[^.]{0,40}\bcohort\b/g, /\bfollowed\s+up\s+(?:for|every|until|passively)\b/g, /\bkaplan[- ]meier\b/g, /\bnear\s+consecutive\s+patients\b.{0,50}\benrolled\b/g, /\bcohort\s+of\s+patients\b/g],
+        neg: null,
+        baseWhy: "Your thesis follows an observational cohort of patients over time."
+      },
+      {
+        key: "case_control", checklist: "strobe", checklistName: "STROBE",
+        pats: [/\bcase[- ]control\s+study\b/g, /\bmatched\s+controls?\b/g, /\bcases?\s+and\s+(?:matched\s+)?controls?\b/g],
+        neg: null,
+        baseWhy: "Your thesis compares cases with matched controls."
+      },
+      {
+        key: "cross_sectional", checklist: "strobe", checklistName: "STROBE",
+        pats: [/\bcross[- ]sectional\s+(?:study|survey|analysis|evaluation)\b/g, /\bpoint\s+prevalence\b/g],
+        neg: null,
+        baseWhy: "Your thesis examines a cross-sectional sample or prevalence at one time point."
+      },
+      {
+        key: "qualitative", checklist: "srqr", checklistName: "SRQR",
+        pats: [/\bqualitative\s+(?:study|research|analysis)\b/g, /\bthematic\s+analysis\b/g, /\bsemi[- ]structured\s+interviews?\b/g, /\bfocus\s+groups?\b/g],
+        neg: null,
+        baseWhy: "Your thesis uses qualitative methods such as interviews or thematic analysis."
+      },
+      {
+        key: "case", checklist: "care", checklistName: "CARE",
+        pats: [/\bcase\s+series\b/g, /\bcase\s+report\b/g],
+        neg: null,
+        baseWhy: "Your thesis is a case report or case series."
+      }
+    ];
+    var scores = {}, p, k, r, m, pgText, head, zoneWeight, best = null, bestScore = 0;
+    var usablePages = [];
+    for (p = 0; p < pages.length; p++) {
+      if (!isTocOrFrontListPage(pages[p].text)) usablePages.push(pages[p]);
+    }
+    if (!usablePages.length) usablePages = pages;
+    for (r = 0; r < rules.length; r++) scores[rules[r].key] = 0;
+    for (p = 0; p < usablePages.length; p++) {
+      pgText = String(usablePages[p].text || "");
+      if (!pgText) continue;
+      if (/^\s*(references|bibliography|acknowledgements|dankwoord|curriculum\s+vitae)\b/im.test(pgText.slice(0, 260))) continue;
+      head = pgText.slice(0, 400).toLowerCase();
+      zoneWeight = p < 4 ? 6 : ((p < 14 || /\b(summary|abstract|aims|methods|study\s+design|patients)\b/.test(head)) ? 3 : 1);
+      if (/\bchapter\s*2\b/.test(head) && /\bliterature|systematic\s+review\b/.test(head)) zoneWeight = 0.4;
+      var lowPg = pgText.toLowerCase();
+      for (r = 0; r < rules.length; r++) {
+        var rule = rules[r], pts = 0;
+        for (k = 0; k < rule.pats.length; k++) {
+          var rx = new RegExp(rule.pats[k].source, "gi");
+          m = lowPg.match(rx);
+          if (m) pts += m.length;
+        }
+        if (pts > 0 && rule.neg && rule.neg.test(lowPg)) {
+          pts = Math.max(0, pts - 3);
+        }
+        scores[rule.key] += pts * zoneWeight;
+      }
+    }
+    /* Empirical thesis title/summary beat literature citations or an isolated Ch2 review. */
+    var titleArea = usablePages.slice(0, Math.min(6, usablePages.length)).map(function (x) { return x.text; }).join(" ").toLowerCase();
+    var hasEmpiricalAim = /\b(?:enrolled\s+in\s+the\s+study|consecutive\s+patients|patients\s+were\s+followed|randomi[sz]ed\s+(?:controlled|intrapatient)|prevalence\s+of)\b/.test(titleArea);
+    if (scores.sr > 0 && (scores.rct >= 6 || scores.cohort >= 4 || scores.cross_sectional >= 4 || hasEmpiricalAim)) {
+      if (!/\bsystematic\s+review\b|\bmeta[- ]analysis\b/.test(titleArea.slice(0, 1800))) scores.sr *= 0.08;
+    }
+    for (r = 0; r < rules.length; r++) {
+      if (scores[rules[r].key] > bestScore) {
+        bestScore = scores[rules[r].key];
+        best = rules[r];
+      }
+    }
+    if (best && bestScore > 0) {
+      var qInfo = extractQuoteForRule(usablePages, best.pats, best.neg);
+      var why = best.baseWhy;
+      if (qInfo.quote) {
+        why = (qInfo.page != null ? ("Thesis page " + qInfo.page + " states: ") : "Thesis excerpt: ") + '"' + qInfo.quote + '"';
+      }
+      return { key: best.key, checklist: best.checklist, checklistName: best.checklistName, why: why, quote: qInfo.quote, page: qInfo.page };
+    }
+    var obsQ = extractQuoteForRule(usablePages, [/\bobservation|\bprevalence|\bcohort|\bpatients?\b/i], null);
+    var obsWhy = "Your thesis looks like an observational study (cohort, case-control or cross-sectional).";
+    if (obsQ.quote) {
+      obsWhy = (obsQ.page != null ? ("Thesis page " + obsQ.page + " states: ") : "Thesis excerpt: ") + '"' + obsQ.quote + '"';
+    }
+    return { key: "obs", checklist: "strobe", checklistName: "STROBE", why: obsWhy, quote: obsQ.quote, page: obsQ.page };
+  }
+
+  function classifyThesisPage(text, idx, prevZone) {
+    var head = String(text || "").slice(0, 420);
+    if (isTocOrFrontListPage(text)) return "appendix";
+    var yearSemicolonHits = (String(text || "").match(/\b(?:19|20)\d{2}\s*;\s*\d+/g) || []).length;
+    if (/^\s*(references|bibliography|works\s+cited)\b/im.test(head) || (idx > 10 && yearSemicolonHits >= 3)) return "references";
+    if (/^\s*(appendix|appendices|acknowledgements?|dankwoord|curriculum\s+vitae|list\s+of\s+publications|abbreviations|table\s+of\s+contents)\b/im.test(head)) return "appendix";
+    if (idx < 10 && /\b(abstract|summary|executive\s+summary|samenvatting)\b/im.test(head)) return "abstract";
+    if (idx < 8 && prevZone === "front") return "front";
+    if (/\b(conclusion|conclusions|future\s+directions|clinical\s+implications)\b/im.test(head)) return "conclusion";
+    if (/\b(general\s+discussion|discussion|limitations?\s+and\s+strengths)\b/im.test(head)) return "discussion";
+    if (/\b(methods?|patients?\s+and\s+methods?|materials?\s+and\s+methods?|methodology|study\s+design|statistical\s+analysis)\b/im.test(head)) return "methods";
+    if (/\b(results?|findings|outcomes|baseline\s+characteristics)\b/im.test(head)) return "results";
+    if (/\b(introduction|background|aims?|objectives?|literature\s+review|systematic\s+review)\b/im.test(head)) return "introduction";
+    return prevZone || (idx < 5 ? "front" : "results");
+  }
+
+  function segmentThesisChapters(pages) {
+    var buckets = { front: [], abstract: [], introduction: [], methods: [], results: [], discussion: [], conclusion: [], references: [], appendix: [] };
+    var list = normalizePagesInput(pages);
+    var prev = "front", i, p, zone;
+    for (i = 0; i < list.length; i++) {
+      p = list[i];
+      if (!String(p.text || "").replace(/\s+/g, "")) continue;
+      zone = classifyThesisPage(p.text, i, prev);
+      if (zone !== "appendix") buckets[zone].push(p);
+      else buckets.appendix.push(p);
+      /* On multi-paper PhD theses, study chapters repeat methods/results/discussion cues */
+      if (zone !== "references" && zone !== "appendix") {
+        if (/\b(patients?\s+and\s+methods?|statistical\s+analysis|eligibility)\b/i.test(p.text) && zone !== "methods") buckets.methods.push(p);
+        if (/\b(results|p\s*[<>=]\s*0\.\d|95%\s*ci|mean\s+\(|median\s+\[)\b/i.test(p.text) && zone !== "results") buckets.results.push(p);
+        if (/\b(discussion|limitations?|in\s+conclusion)\b/i.test(p.text) && zone !== "discussion") buckets.discussion.push(p);
+      }
+      prev = zone;
+    }
+    var prose = [];
+    for (i = 0; i < list.length; i++) {
+      zone = classifyThesisPage(list[i].text, i, "results");
+      if (zone !== "references" && zone !== "appendix" && String(list[i].text || "").trim()) prose.push(list[i]);
+    }
+    if (!prose.length) prose = list;
+    var n = prose.length;
+    if (!buckets.abstract.length) buckets.abstract = buckets.front.length ? buckets.front.slice(0, 8) : prose.slice(0, Math.min(6, n));
+    if (!buckets.introduction.length) buckets.introduction = prose.slice(0, Math.max(1, Math.ceil(n * 0.28)));
+    if (!buckets.methods.length) buckets.methods = prose.slice(Math.floor(n * 0.2), Math.max(1, Math.ceil(n * 0.55)));
+    if (!buckets.results.length) buckets.results = prose.slice(Math.floor(n * 0.35), Math.max(1, Math.ceil(n * 0.8)));
+    if (!buckets.discussion.length) buckets.discussion = prose.slice(Math.floor(n * 0.6), n);
+    if (!buckets.conclusion.length) {
+      var tail = buckets.discussion.slice(-Math.min(6, buckets.discussion.length));
+      var headSum = buckets.abstract.slice(0, Math.min(4, buckets.abstract.length));
+      buckets.conclusion = headSum.concat(tail);
+    }
+    return buckets;
+  }
+
+  function condenseLongBucket(pages, totalTargetChars) {
+    var list = normalizePagesInput(pages);
+    if (!list.length) return [];
+    var perPageMax = Math.max(260, Math.floor(totalTargetChars / list.length));
+    var out = [], i, raw, sents, picked, len, s, hasSignal;
+    for (i = 0; i < list.length; i++) {
+      raw = String(list[i].text || "").replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
+      if (!raw) continue;
+      if (raw.length <= perPageMax) { out.push({ n: list[i].n, text: raw }); continue; }
+      sents = splitSentences(raw);
+      picked = [];
+      len = 0;
+      for (s = 0; s < sents.length; s++) {
+        hasSignal = s === 0 || s === sents.length - 1 || /\d/.test(sents[s]) || /\b(table|method|cohort|random|result|conclu|significant|p\s*<|ci|mean|median|patients?)\b/i.test(sents[s]);
+        if (hasSignal && len + sents[s].length <= perPageMax) {
+          picked.push(sents[s]);
+          len += sents[s].length + 1;
+        }
+      }
+      if (!picked.length) picked.push(raw.slice(0, perPageMax));
+      out.push({ n: list[i].n, text: picked.join(" ") });
+    }
+    return out;
+  }
+
+  function chunkPagesByChars(pages, maxChars, maxChunks) {
+    var cap = maxChars || 13500;
+    var limit = maxChunks || 3;
+    var list = normalizePagesInput(pages);
+    var totalChars = 0, i;
+    for (i = 0; i < list.length; i++) totalChars += String(list[i].text || "").length + 12;
+    if (totalChars > cap * limit) {
+      list = condenseLongBucket(list, cap * limit);
+    }
+    var chunks = [], cur = [], curChars = 0;
+    for (i = 0; i < list.length; i++) {
+      var pText = String(list[i].text || "");
+      if (!pText.replace(/\s+/g, "")) continue;
+      if (pText.length > cap - 100) pText = pText.slice(0, cap - 100);
+      var pieceLen = pText.length + 14;
+      if (cur.length && curChars + pieceLen > cap) {
+        chunks.push(cur);
+        if (chunks.length >= limit) break;
+        cur = [];
+        curChars = 0;
+      }
+      cur.push({ n: list[i].n, text: pText });
+      curChars += pieceLen;
+    }
+    if (cur.length && chunks.length < limit) chunks.push(cur);
+    return chunks;
+  }
+
+  function extractThesisTables(pages) {
+    var list = normalizePagesInput(pages);
+    var seen = {}, out = [], p, text, m, re = /(?:^|\n)\s*(Table\s+\d+(?:[.\-]\d+)?[A-Za-z]?)\s*[:.\-]?\s*([^\n]{0,120})/gi;
+    for (p = 0; p < list.length; p++) {
+      text = String(list[p].text || "");
+      if (isTocOrFrontListPage(text)) continue;
+      re.lastIndex = 0;
+      while ((m = re.exec(text)) !== null) {
+        var tid = m[1].replace(/\s+/g, " ");
+        var cap = String(m[2] || "").replace(/^\s+|\s+$/g, "");
+        if (/\.{4,}\s*\d+$/.test(cap)) continue;
+        var lowId = tid.toLowerCase();
+        if (seen[lowId]) continue;
+        seen[lowId] = true;
+        var fullCap = cap ? (tid + ": " + cap) : tid;
+        var win = text.slice(Math.max(0, m.index - 40), Math.min(text.length, m.index + 240));
+        var numHits = (win.match(/\d+/g) || []).length;
+        out.push({
+          id: tid,
+          caption: fullCap,
+          page: list[p].n,
+          score: Math.min(10, 2 + numHits),
+          reason: "Found on thesis page " + (list[p].n != null ? list[p].n : (p + 1)) + " with study figures."
+        });
+        if (out.length >= 12) return out;
+      }
+    }
+    return out;
+  }
+
+  function extractThesisReferences(pages) {
+    var list = normalizePagesInput(pages);
+    var buckets = segmentThesisChapters(list);
+    var refPages = buckets.references.slice();
+    var p;
+    if (!refPages.length) {
+      for (p = Math.floor(list.length * 0.5); p < list.length; p++) {
+        var t = String(list[p].text || "");
+        if ((t.match(/\b(?:19|20)\d{2}\s*[;,]/g) || []).length >= 2) refPages.push(list[p]);
+      }
+    }
+    var out = [], seen = {}, lines, li, cur = "";
+    function pushRef(raw) {
+      var s = raw.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
+      if (s.length < 24 || s.length > 500 || !/\b(19|20)\d{2}\b/.test(s)) return;
+      if (/submitted\s+in\s+fulfilment|table\s+of\s+contents|doctor\s+of\s+philosophy/i.test(s)) return;
+      if (!/[;:,]\s*\d+|doi:|pmid/i.test(s) && !/^\s*(?:\[\d+\]|\d+[.)])\s+/.test(s)) return;
+      var k = s.slice(0, 60).toLowerCase();
+      if (seen[k]) return;
+      seen[k] = true;
+      var doiM = s.match(/\b(10\.\d{4,9}\/[-._;()/:A-Za-z0-9]+)\b/);
+      var pmidM = s.match(/PMID\s*:?\s*(\d{5,9})/i);
+      out.push({
+        authors: s.split(/[.(]/)[0] || "",
+        title: s,
+        journal: "",
+        year: (s.match(/\b((?:19|20)\d{2})\b/) || [])[1] || "",
+        doi: doiM ? doiM[1].replace(/[.,;)]$/, "") : "",
+        pmid: pmidM ? pmidM[1] : ""
+      });
+    }
+    for (p = 0; p < refPages.length && out.length < 30; p++) {
+      lines = String(refPages[p].text || "").split(/\n+/);
+      for (li = 0; li < lines.length && out.length < 30; li++) {
+        var line = lines[li].replace(/^\s+|\s+$/g, "");
+        if (!line || /^(References|Bibliography|\d+)$/i.test(line)) continue;
+        if (/^(?:\[?\d+\]?[.)]\s+|[A-Z][a-zA-Z\-']+,?\s+[A-Z]{1,3}\b)/.test(line) && cur) {
+          pushRef(cur);
+          cur = line;
+        } else {
+          cur = cur ? (cur + " " + line) : line;
+        }
+      }
+      if (cur) { pushRef(cur); cur = ""; }
+    }
+    return out;
   }
 
   function referenceFlags(refs) {
@@ -796,12 +1162,20 @@
 
   /* ---------- state ---------- */
 
+  var memThesis = {};
+
   function loadThesis(pid) {
+    var stored = {};
     try {
-      if (typeof localStorage === "undefined") return {};
-      var all = JSON.parse(localStorage.getItem(THESIS_KEY) || "{}");
-      return all[pid] || {};
-    } catch (e) { return {}; }
+      if (typeof localStorage !== "undefined") {
+        var all = JSON.parse(localStorage.getItem(THESIS_KEY) || "{}");
+        stored = all[pid] || {};
+      }
+    } catch (e) { stored = {}; }
+    if (memThesis[pid] && (!stored.pages || !stored.pages.length) && memThesis[pid].pages) {
+      return memThesis[pid];
+    }
+    return stored;
   }
 
   function syncProjectJournal(pid, j) {
@@ -819,13 +1193,25 @@
   }
 
   function saveThesis(pid, patch) {
+    var base = loadThesis(pid);
+    var cur = {}, k;
+    for (k in base) if (Object.prototype.hasOwnProperty.call(base, k)) cur[k] = base[k];
+    for (k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) cur[k] = patch[k];
+    memThesis[pid] = cur;
     try {
       if (typeof localStorage !== "undefined") {
         var all = JSON.parse(localStorage.getItem(THESIS_KEY) || "{}");
-        var cur = all[pid] || {}, k;
-        for (k in patch) if (Object.prototype.hasOwnProperty.call(patch, k)) cur[k] = patch[k];
         all[pid] = cur;
-        localStorage.setItem(THESIS_KEY, JSON.stringify(all));
+        try {
+          localStorage.setItem(THESIS_KEY, JSON.stringify(all));
+        } catch (qErr) {
+          /* Evict heavy raw pages from older thesis entries if storage quota is full */
+          var keys = Object.keys(all);
+          for (var i = 0; i < keys.length; i++) {
+            if (keys[i] !== pid && all[keys[i]] && all[keys[i]].pages) delete all[keys[i]].pages;
+          }
+          localStorage.setItem(THESIS_KEY, JSON.stringify(all));
+        }
       }
     } catch (e) {}
     if (patch && patch.journal) syncProjectJournal(pid, patch.journal);
@@ -970,12 +1356,105 @@
 
   /* ---------- screen: upload ---------- */
 
+  function isTutorialProject(proj) {
+    return !!(proj && proj.tutorial);
+  }
+
+  function cleanThesisTitle(filename, pages) {
+    var f = String(filename || "").replace(/\.(pdf|docx?)$/i, "").replace(/[_\-]+/g, " ").replace(/\s{2,}/g, " ").replace(/^\s+|\s+$/g, "");
+    if (f && f.length >= 6 && !/^thesis$/i.test(f)) return f.slice(0, 110);
+    if (pages && pages.length && pages[0] && pages[0].text) {
+      var lines = String(pages[0].text).split(/\n+/);
+      for (var i = 0; i < Math.min(lines.length, 6); i++) {
+        var s = lines[i].replace(/^\s+|\s+$/g, "");
+        if (s.length >= 12 && s.length <= 120 && !/^(university|repository|chapter|abstract|table of contents)/i.test(s)) return s;
+      }
+    }
+    return "Thesis to Journal Article";
+  }
+
+  function tutorialOwnGateHtml(curTs, heading) {
+    var h = ['<div class="rmd-p2-screen rmd-thesis-screen"><div class="rmd-card rmd-thesis-real-gate">'];
+    h.push('<h2>' + esc(heading || "Your own thesis is ready") + '</h2>');
+    h.push('<p class="rmd-screen-subtitle">' + esc(curTs.filename || "Your uploaded thesis") + (curTs.pages && curTs.pages.length ? (' (' + curTs.pages.length + ' page(s))') : '') + '.</p>');
+    h.push('<p class="rmd-thesis-meta" id="rmdThesisTutNote">Tutorial drafts are practice only. Start a real project so Ask MaiK drafts from your thesis.</p>');
+    h.push('<div id="rmdThesisRealErr"></div>');
+    h.push('<div class="rmd-card-actions">');
+    h.push('<button type="button" class="rmd-btn rmd-btn-primary" id="rmdThesisStartReal">Start a real project with this thesis</button>');
+    h.push('<button type="button" class="rmd-btn rmd-btn-subtle" id="rmdThesisReupload">Upload a different file</button>');
+    h.push('</div></div></div>');
+    return h.join("");
+  }
+
+  function startRealProjectFromThesis(container, sourceTutPid) {
+    var btn = container.querySelector("#rmdThesisStartReal");
+    var errBox = container.querySelector("#rmdThesisRealErr");
+    var srcState = loadThesis(sourceTutPid);
+    if (!SMD.api || !SMD.api.request || !SMD.store || !SMD.store.adoptServerProject) {
+      if (errBox) errBox.innerHTML = '<div class="rmd-banner rmd-banner-warn">Sign in to start a real project. Your thesis text stays loaded on this device.</div>';
+      return;
+    }
+    if (btn) { btn.disabled = true; btn.textContent = "Creating project..."; }
+    if (errBox) errBox.innerHTML = "";
+    var title = cleanThesisTitle(srcState.filename, srcState.pages);
+    SMD.api.request("POST", "/v1/projects", {
+      title: title,
+      discipline: "medicine",
+      specialty: "",
+      studyType: "Thesis to Journal Article",
+      researchQuestion: ""
+    }).then(function (res) {
+      var sp = (res && res.project) ? res.project : res;
+      if (!sp || !sp.id) throw { message: "Could not create the real project on the server." };
+      var created = SMD.store.adoptServerProject(sp);
+      var newPid = (created && (created.serverId || created.id)) || sp.id;
+      saveThesis(newPid, {
+        pages: srcState.pages || null,
+        filename: srcState.filename || "",
+        phi: srcState.phi || null,
+        phiConsent: srcState.phiConsent || null,
+        ownUpload: true,
+        isTutorialSample: false,
+        paperType: null,
+        checklist: null,
+        journal: null,
+        draft: null
+      });
+      saveThesis(sourceTutPid, { pages: null, filename: null, phi: null, phiConsent: null, ownUpload: false, isTutorialSample: false, draft: null });
+      tpid = newPid;
+      ts = loadThesis(newPid);
+      if (SMD.tutorial && SMD.tutorial.clearCoachMessage) SMD.tutorial.clearCoachMessage();
+      if (SMD.navigate) SMD.navigate("thesis-type", { projectId: created.id });
+    }).catch(function (err) {
+      if (btn) { btn.disabled = false; btn.textContent = "Start a real project with this thesis"; }
+      var msg = (SMD.p2 && SMD.p2.friendlyError) ? SMD.p2.friendlyError(err).message : ((err && err.message) || "Could not create a real project right now.");
+      if (errBox) errBox.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><strong>' + esc(msg) + '</strong><span class="rmd-banner-sub">Your thesis text is still loaded here. Try again when ready.</span></div>';
+    });
+  }
+
+  function bindTutorialOwnGate(container) {
+    var startReal = container.querySelector("#rmdThesisStartReal");
+    if (startReal) startReal.onclick = function () { startRealProjectFromThesis(container, tpid); };
+    var re = container.querySelector("#rmdThesisReupload");
+    if (re) re.onclick = function () {
+      saveThesis(tpid, { pages: null, phi: null, phiConsent: null, artifactId: null, jobId: null, draft: null, ownUpload: false, isTutorialSample: false });
+      ts = loadThesis(tpid);
+      if (SMD.navigate) SMD.navigate("thesis");
+      else renderUpload(container);
+    };
+  }
+
   function renderUpload(container) {
     var proj = activeProject();
     if (!proj) { container.innerHTML = SMD.p2.errHtml("Open a project first."); return; }
     tpid = pidOf(proj);
     ts = loadThesis(tpid);
     injectCSS();
+    if (ts.pages && ts.pages.length && isTutorialProject(proj) && ts.ownUpload) {
+      container.innerHTML = tutorialOwnGateHtml(ts, "Your own thesis is ready");
+      bindTutorialOwnGate(container);
+      return;
+    }
     var h = ['<div class="rmd-p2-screen rmd-thesis-screen">'];
     if (ts.pages && ts.pages.length) {
       h.push('<div class="rmd-card">');
@@ -1013,7 +1492,7 @@
     if (fileEl) fileEl.onchange = function () { if (this.files && this.files[0]) handleFile(this.files[0], container); };
     var re = container.querySelector("#rmdThesisReupload");
     if (re) re.onclick = function () {
-      saveThesis(tpid, { pages: null, phi: null, phiConsent: null, artifactId: null, jobId: null, draft: null });
+      saveThesis(tpid, { pages: null, phi: null, phiConsent: null, artifactId: null, jobId: null, draft: null, ownUpload: false, isTutorialSample: false });
       ts = loadThesis(tpid);
       renderUpload(container);
     };
@@ -1033,6 +1512,13 @@
 
   function uploadPdfServer(file, container, fallbackMeta) {
     var proj = activeProject();
+    if (isTutorialProject(proj)) {
+      saveThesis(tpid, { filename: file ? file.name : "Your thesis", ownUpload: true, isTutorialSample: false });
+      ts = loadThesis(tpid);
+      setMsg(container, '<div class="rmd-banner rmd-banner-warn">Tutorial drafts are practice only, and scanned-PDF server OCR needs a real project. Start a real project to read and draft from this thesis.</div><div class="rmd-card-actions" style="margin-top:8px;"><button type="button" class="rmd-btn rmd-btn-primary" id="rmdThesisStartReal">Start a real project with this thesis</button></div><div id="rmdThesisRealErr"></div>');
+      bindTutorialOwnGate(container);
+      return Promise.resolve(null);
+    }
     if (!proj || !proj.serverId) {
       setMsg(container, '<div class="rmd-banner rmd-banner-warn">This PDF has no selectable text (scanned pages) and requires a synced account project for server OCR. Save this project to your account first, or upload a selectable-text PDF or Word (.docx) file.</div>');
       return Promise.resolve(null);
@@ -1075,11 +1561,18 @@
     var phiInfo = scanRes.softPages.length
       ? { softPages: scanRes.softPages, maskedCount: scanRes.maskedCount, findings: scanRes.findings }
       : (scanRes.maskedCount ? { softPages: [], maskedCount: scanRes.maskedCount, findings: [] } : null);
+    var proj = activeProject();
+    var own = (extra && typeof extra.ownUpload === "boolean") ? extra.ownUpload : true;
     var patch = {
       pages: scanRes.pages,
       filename: filename,
       phi: phiInfo,
-      phiConsent: null
+      phiConsent: null,
+      ownUpload: own,
+      isTutorialSample: !!(extra && extra.isTutorialSample),
+      paperType: null,
+      checklist: null,
+      draft: null
     };
     if (extra) {
       if ("artifactId" in extra) patch.artifactId = extra.artifactId;
@@ -1088,7 +1581,7 @@
     saveThesis(tpid, patch);
     ts = loadThesis(tpid);
     renderUpload(container);
-    if (scanRes.softPages.length) {
+    if (scanRes.softPages.length && !(isTutorialProject(proj) && own)) {
       openConsentSheet(phiInfo, {
         onConfirm: function () { renderUpload(container); },
         onReupload: function () { renderUpload(container); }
@@ -1362,12 +1855,27 @@
     tpid = pidOf(proj);
     ts = loadThesis(tpid);
     injectCSS();
+    if (isTutorialProject(proj) && ts.ownUpload) {
+      container.innerHTML = tutorialOwnGateHtml(ts, "Start a real project to classify your thesis");
+      bindTutorialOwnGate(container);
+      return;
+    }
     if (!ts.pages || !ts.pages.length) { needPagesHtml(container); return; }
-    var sug = suggestPaperType(allThesisText());
+    var sug = suggestPaperType(ts.pages && ts.pages.length ? ts.pages : allThesisText());
     var chosen = ts.paperType || sug.key;
+    if (!ts.paperType) {
+      saveThesis(tpid, { paperType: chosen, checklist: sug.checklist });
+      if (SMD.setPreferredChecklist) SMD.setPreferredChecklist(tpid, sug.checklist);
+      ts = loadThesis(tpid);
+    }
     var h = ['<div class="rmd-p2-screen rmd-thesis-screen"><div class="rmd-card">'];
     h.push('<h2>Pick the paper type</h2>');
-    h.push('<p class="rmd-screen-subtitle">Suggested: ' + esc(labelFor(chosen)) + '. ' + esc(sug.why) + '</p>');
+    h.push('<p class="rmd-screen-subtitle smd-books-keep">Suggested: <strong>' + esc(labelFor(sug.key)) + '</strong> (' + esc(sug.checklistName) + ').' + (sug.quote ? ' You can change it below.' : (' ' + esc(sug.why))) + '</p>');
+    if (sug.quote) {
+      h.push('<blockquote class="rmd-thesis-quote smd-books-keep" id="rmdThesisTypeQuote">' +
+        (sug.page != null ? ('<strong>Page ' + esc(sug.page) + ':</strong> ') : '') +
+        '"' + esc(sug.quote) + '"</blockquote>');
+    }
     var i, pt;
     for (i = 0; i < PAPER_TYPES.length; i++) {
       pt = PAPER_TYPES[i];
@@ -1448,6 +1956,7 @@
       indexedPubMed: typeof j.indexedPubMed === "boolean" ? j.indexedPubMed : null,
       noFee: typeof j.noFee === "boolean" ? j.noFee : null,
       wordLimit: isFinite(numeric) && numeric > 0 ? numeric : null,
+      abstractLimit: isFinite(Number(limits.abstract)) && Number(limits.abstract) > 0 ? Number(limits.abstract) : null,
       abstractFormat: af == null || af === "" ? null : String(af),
       referenceStyle: j.referenceStyle == null || j.referenceStyle === "" ? null : String(j.referenceStyle),
       apcNote: j.apcNote == null || j.apcNote === "" ? null : String(j.apcNote),
@@ -1477,7 +1986,23 @@
     if (t === "rct") return "rct";
     if (t === "sr") return "systematic_review";
     if (t === "case") return "case_report";
+    if (t === "cohort") return "cohort";
+    if (t === "case_control") return "case_control";
+    if (t === "cross_sectional") return "cross_sectional";
+    if (t === "diagnostic") return "diagnostic";
+    if (t === "qualitative") return "qualitative";
     return "observational";
+  }
+
+  function abstractLimitOf(j) {
+    if (j && isFinite(j.abstractLimit) && j.abstractLimit > 0) return j.abstractLimit;
+    var af = j && j.abstractFormat ? String(j.abstractFormat) : "";
+    var m = af.match(/(\d{2,4})\s*words?/i);
+    if (m) {
+      var n = parseInt(m[1], 10);
+      if (isFinite(n) && n >= 50 && n <= 1000) return n;
+    }
+    return 250;
   }
 
   function journalFromCatalogue(j) {
@@ -1486,6 +2011,7 @@
       name: j.name,
       shortName: j.shortName,
       wordLimit: j.wordLimit == null ? DEFAULT_JOURNAL.wordLimit : j.wordLimit,
+      abstractLimit: j.abstractLimit != null ? j.abstractLimit : abstractLimitOf(j),
       abstractFormat: j.abstractFormat || DEFAULT_JOURNAL.abstractFormat,
       referenceStyle: j.referenceStyle || "vancouver",
       publisher: j.publisher,
@@ -1704,6 +2230,11 @@
     tpid = pidOf(proj);
     ts = loadThesis(tpid);
     injectCSS();
+    if (isTutorialProject(proj) && ts.ownUpload) {
+      container.innerHTML = tutorialOwnGateHtml(ts, "Start a real project to choose your target journal");
+      bindTutorialOwnGate(container);
+      return;
+    }
     if (!ts.pages || !ts.pages.length) { needPagesHtml(container); return; }
     if (!proj.targetJournal && ts && ts.journal) syncProjectJournal(tpid, ts.journal);
     var seq = ++journalSeq;
@@ -1883,12 +2414,265 @@
 
   /* ---------- screen: draft ---------- */
 
+  function totalThesisChars(pages) {
+    var sum = 0, i;
+    for (i = 0; i < (pages || []).length; i++) sum += String((pages[i] && pages[i].text) || "").length;
+    return sum;
+  }
+
+  function extractSingleSectionText(res, sectionId) {
+    var d = (res && res.draft !== undefined) ? res.draft : res;
+    if (!d) return "";
+    if (typeof d.text === "string" && d.text.replace(/^\s+|\s+$/g, "")) return d.text.replace(/^\s+|\s+$/g, "");
+    var secs = d.sections || [], i;
+    for (i = 0; i < secs.length; i++) {
+      if (secs[i] && secs[i].id === sectionId && typeof secs[i].text === "string" && secs[i].text.replace(/^\s+|\s+$/g, "")) {
+        return secs[i].text.replace(/^\s+|\s+$/g, "");
+      }
+    }
+    for (i = 0; i < secs.length; i++) {
+      var rawSec = (secs[i] && typeof secs[i].text === "string") ? secs[i].text.replace(/^\s+|\s+$/g, "") : "";
+      if (rawSec) {
+        var cleanSec = rawSec.replace(/^\s*#{1,4}\s*(?:Abstract|Introduction|Methods|Results|Discussion|Conclusion)\s*[:\-.]*\s*/i, "");
+        if (cleanSec) return cleanSec;
+      }
+    }
+    return "";
+  }
+
+  function setLiveDraftProgress(container, st, text, pct) {
+    st.progressText = text;
+    st.progressPct = pct;
+    var pEl = container.querySelector(".rmd-ai-progress");
+    if (pEl) pEl.textContent = text;
+    var bar = container.querySelector(".rmd-ai-pbar > span");
+    if (bar) bar.style.width = Math.max(4, Math.min(100, Math.round(pct || 0))) + "%";
+  }
+
+  function handleThesisAiError(err) {
+    if (err && (err.code === "consent_needed" || err.code === "phi_blocked" || err.status === 409)) {
+      var b = err.body || {};
+      var pPages = b.pages || [];
+      if (!pPages.length && ts.phi && ts.phi.softPages) pPages = ts.phi.softPages.slice();
+      var mCount = typeof b.maskedCount === "number" ? b.maskedCount : ((ts.phi && ts.phi.maskedCount) || 0);
+      var fList = b.findings || (ts.phi && ts.phi.findings) || [];
+      var phiInfo = { softPages: pPages, maskedCount: mCount, findings: fList };
+      saveThesis(tpid, { phi: phiInfo, phiConsent: null });
+      ts = loadThesis(tpid);
+      err._handledByConsent = true;
+      err._phiConsentInfo = phiInfo;
+    }
+    throw err;
+  }
+
+  function callThesisAi(reqSection, pages, budget, extraMeta) {
+    var jr = journalOf();
+    var inp = {
+      pages: pages || [],
+      filename: ts.filename || "",
+      paperType: labelFor(ts.paperType || "obs"),
+      checklist: ts.checklist || "strobe",
+      journalId: jr.id || "",
+      wordLimit: budget
+    };
+    if (reqSection) inp.section = reqSection;
+    if (extraMeta && extraMeta.abstractLimit) inp.abstractLimit = extraMeta.abstractLimit;
+    if (ts.phiConsent && ts.phiConsent.confirmed) inp.phiConsent = ts.phiConsent;
+    return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(tpid) + "/ai-draft", {
+      task: "thesis_to_paper",
+      input: inp
+    }).catch(handleThesisAiError);
+  }
+
+  function orchestrateThesisDraft(container, st) {
+    ts = loadThesis(tpid);
+    var jr = journalOf();
+    var mainLimit = jr.wordLimit || 3000;
+    var absLimit = abstractLimitOf(jr);
+    var allPages = ts.pages || [];
+    var chars = totalThesisChars(allPages);
+
+    /* Fast path for short fixtures / tutorial sample (<= 13,500 chars) */
+    if (chars <= 13500) {
+      return callThesisAi(null, allPages, mainLimit, { abstractLimit: absLimit });
+    }
+
+    var buckets = segmentThesisChapters(allPages);
+    var plan = [
+      { id: "introduction", heading: "Introduction", reqSection: "introduction", pages: buckets.introduction, budget: Math.max(250, Math.round(mainLimit * 0.18)), hint: "SECTION INSTRUCTION: Condense the thesis introduction and literature review into a concise background and study rationale.\n\n" },
+      { id: "methods", heading: "Methods", reqSection: "methods", pages: buckets.methods, budget: Math.max(300, Math.round(mainLimit * 0.25)), hint: "SECTION INSTRUCTION: Summarize study design, setting, participants, interventions or exposures, outcomes and statistical methods with exact figures from the thesis.\n\n" },
+      { id: "results", heading: "Results", reqSection: "results", pages: buckets.results, budget: Math.max(350, Math.round(mainLimit * 0.30)), hint: "SECTION INSTRUCTION: Report key participant numbers, primary and secondary outcomes and statistics copied verbatim from the thesis.\n\n" },
+      { id: "discussion", heading: "Discussion", reqSection: "discussion", pages: buckets.discussion, budget: Math.max(250, Math.round(mainLimit * 0.20)), hint: "SECTION INSTRUCTION: Synthesize main findings, comparison with prior studies, strengths and limitations from the thesis.\n\n" },
+      { id: "conclusion", heading: "Conclusion", reqSection: "conclusion", fallbackSection: "discussion", pages: buckets.conclusion, budget: Math.max(80, Math.min(180, Math.round(mainLimit * 0.08))), hint: "CONCLUSION SECTION ONLY: Write 2 to 4 concise clinical sentences stating the primary conclusion and practical implication strictly from these thesis conclusion pages.\n\n" }
+    ];
+
+    var resultsMap = {}, serverTables = [], serverRefs = [], missingSecs = [], lastModel = "", idx = 0;
+
+    function prependHint(chunkPages, hint) {
+      if (!hint || !chunkPages.length) return chunkPages;
+      var out = [{ n: chunkPages[0].n, text: hint + String(chunkPages[0].text || "") }];
+      for (var k = 1; k < chunkPages.length; k++) out.push(chunkPages[k]);
+      return out;
+    }
+
+    function mergeTables(resTables) {
+      var list = (resTables || []).slice();
+      for (var ti = 0; ti < list.length; ti++) serverTables.push(list[ti]);
+    }
+
+    function mergeRefs(resRefs) {
+      var list = (resRefs || []).slice();
+      for (var ri = 0; ri < list.length; ri++) serverRefs.push(list[ri]);
+    }
+
+    function runOneChunk(step, chunkPages, chunkBudget, allowFallback) {
+      var payloadPages = prependHint(chunkPages, step.hint);
+      return callThesisAi(step.reqSection, payloadPages, chunkBudget).catch(function (err) {
+        if (err && err._handledByConsent) throw err;
+        var isBadSec = err && (err.status === 400 || err.code === "invalid_body");
+        if (allowFallback && isBadSec && step.fallbackSection) {
+          return callThesisAi(step.fallbackSection, payloadPages, chunkBudget);
+        }
+        /* Retry transient error once */
+        return callThesisAi(step.reqSection, payloadPages, chunkBudget);
+      }).then(function (res) {
+        var txt = extractSingleSectionText(res, step.id);
+        if (!txt) {
+          return callThesisAi(step.reqSection, payloadPages, chunkBudget);
+        }
+        return res;
+      });
+    }
+
+    function updateProgressivePreview() {
+      var preview = [], draftedNow = [], s;
+      for (s = 0; s < SECTION_ORDER.length; s++) {
+        var sid = SECTION_ORDER[s].id;
+        var raw = resultsMap[sid] || "";
+        var ver = raw ? verifyNumbers(raw, allPages).text : "";
+        preview.push({ id: sid, heading: SECTION_ORDER[s].heading, text: ver });
+        if (countWords(ver) > 0) draftedNow.push(sid);
+      }
+      saveThesis(tpid, {
+        draft: {
+          sections: preview,
+          aiDraftedIds: draftedNow,
+          flags: [],
+          locators: [],
+          tables: extractThesisTables(allPages),
+          references: extractThesisReferences(allPages),
+          words: 0,
+          trimmed: false
+        }
+      });
+      ts = loadThesis(tpid);
+      renderDraftBody(container);
+    }
+
+    var chain = Promise.resolve();
+    for (idx = 0; idx < plan.length; idx++) {
+      (function (step, stepNum) {
+        chain = chain.then(function () {
+          /* Compress proportionally across EVERY page of this chapter bucket so all
+             chapters contribute within one unified 13,000-char context (never fragmented). */
+          var chunks = chunkPagesByChars(step.pages, 13000, 1);
+          if (!chunks.length) chunks = [allPages.slice(0, 6)];
+          var unifiedChunk = chunks[0];
+          var firstP = unifiedChunk[0] ? unifiedChunk[0].n : 1;
+          var lastP = unifiedChunk[unifiedChunk.length - 1] ? unifiedChunk[unifiedChunk.length - 1].n : firstP;
+          setLiveDraftProgress(container, st,
+            "Drafting " + step.heading + " (" + stepNum + " of 6, thesis pages " + firstP + " to " + lastP + ")",
+            Math.round(((stepNum - 0.6) / 6) * 100));
+
+          return runOneChunk(step, unifiedChunk, step.budget, true).then(function (res) {
+            if (res && res.model) lastModel = res.model;
+            var d = (res && res.draft) ? res.draft : res;
+            if (d) {
+              mergeTables(d.tables || d.suggestedTables);
+              mergeRefs(d.references);
+            }
+            var txt = extractSingleSectionText(res, step.id);
+            txt = txt.replace(/^\s*#{1,4}\s*(?:Abstract|Introduction|Methods|Results|Discussion|Conclusion)\s*[:\-.]*\s*/i, "").replace(/^\s+|\s+$/g, "");
+            if (txt) {
+              resultsMap[step.id] = txt;
+              updateProgressivePreview();
+            } else {
+              missingSecs.push(step.heading);
+            }
+          }).catch(function (err) {
+            if (err && err._handledByConsent) throw err;
+            missingSecs.push(step.heading);
+          });
+        });
+      })(plan[idx], idx + 1);
+    }
+
+    /* Final step (6 of 6): Structured Abstract synthesized from thesis front pages + verified main sections */
+    chain = chain.then(function () {
+      setLiveDraftProgress(container, st, "Drafting Abstract (6 of 6, structured summary)", 90);
+      var frontChunks = chunkPagesByChars(buckets.abstract, 6500, 1);
+      var absPages = (frontChunks[0] || []).slice();
+      var summarySnip = [];
+      if (resultsMap.methods) summarySnip.push("Drafted Methods summary: " + resultsMap.methods.slice(0, 1600));
+      if (resultsMap.results) summarySnip.push("Drafted Results summary: " + resultsMap.results.slice(0, 2200));
+      if (resultsMap.conclusion) summarySnip.push("Drafted Conclusion summary: " + resultsMap.conclusion.slice(0, 800));
+      if (summarySnip.length) {
+        absPages.push({ n: 1, text: summarySnip.join("\n\n") });
+      }
+      var absStep = {
+        id: "abstract",
+        reqSection: "abstract",
+        pages: absPages,
+        hint: "STRUCTURED ABSTRACT ONLY (" + absLimit + " words max): Use exact headings Background:, Methods:, Results:, Conclusion: and copy numbers verbatim from the thesis.\n\n"
+      };
+      return runOneChunk(absStep, absPages, absLimit, false).then(function (res) {
+        if (res && res.model) lastModel = res.model;
+        var absTxt = extractSingleSectionText(res, "abstract");
+        if (absTxt) {
+          resultsMap.abstract = absTxt;
+          updateProgressivePreview();
+        } else {
+          missingSecs.push("Abstract");
+        }
+      }).catch(function (err) {
+        if (err && err._handledByConsent) throw err;
+        missingSecs.push("Abstract");
+      });
+    });
+
+    return chain.then(function () {
+      var detTables = extractThesisTables(allPages);
+      var combinedTables = detTables.length ? detTables : serverTables;
+      var detRefs = extractThesisReferences(allPages);
+      var combinedRefs = detRefs.length ? detRefs : serverRefs;
+      var outSecs = [];
+      for (var j = 0; j < SECTION_ORDER.length; j++) {
+        var sid = SECTION_ORDER[j].id;
+        outSecs.push({ id: sid, heading: SECTION_ORDER[j].heading, text: resultsMap[sid] || "" });
+      }
+      return {
+        draft: {
+          sections: outSecs,
+          tables: combinedTables,
+          references: combinedRefs,
+          _missingSections: missingSecs
+        },
+        model: lastModel
+      };
+    });
+  }
+
   function renderDraft(container) {
     var proj = activeProject();
     if (!proj) { container.innerHTML = SMD.p2.errHtml("Open a project first."); return; }
     tpid = pidOf(proj);
     ts = loadThesis(tpid);
     injectCSS();
+    if (isTutorialProject(proj) && ts.ownUpload) {
+      container.innerHTML = tutorialOwnGateHtml(ts, "Start a real project to draft from your thesis");
+      bindTutorialOwnGate(container);
+      return;
+    }
     var gate = aiGate(proj);
     if (!ts.pages || !ts.pages.length) { needPagesHtml(container); return; }
     var jr = journalOf();
@@ -1900,7 +2684,6 @@
     if (mayAi) {
       var st = draftAi || (draftAi = SMD.ai.state());
       h.push(SMD.ai.barHtml(st, { task: "thesis_to_paper", label: "paper draft", cost: 3 }));
-      h.push('<div id="rmdDraftNote">' + SMD.ai.noteHtml(st, "draft") + '</div>');
     } else {
       h.push('<p class="rmd-thesis-meta">Only the project owner, editor or analyst can ask MaiK. You can still edit and save the draft yourself.</p>');
     }
@@ -1917,33 +2700,9 @@
       SMD.ai.bind(container, st2, {
         pid: tpid,
         task: "thesis_to_paper",
+        emptyMessage: "MaiK returned an empty draft with 0 words. Check your connection and try again.",
         request: function () {
-          ts = loadThesis(tpid);
-          var inp = {
-            pages: ts.pages || [],
-            filename: ts.filename || "",
-            paperType: labelFor(ts.paperType || "obs"),
-            checklist: ts.checklist || "strobe",
-            journalId: journalOf().id || "",
-            wordLimit: journalOf().wordLimit
-          };
-          if (ts.phiConsent && ts.phiConsent.confirmed) inp.phiConsent = ts.phiConsent;
-          var body = { task: "thesis_to_paper", input: inp };
-          return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(tpid) + "/ai-draft", body).catch(function (err) {
-            if (err && (err.code === "consent_needed" || err.code === "phi_blocked" || err.status === 409)) {
-              var b = err.body || {};
-              var pPages = b.pages || [];
-              if (!pPages.length && ts.phi && ts.phi.softPages) pPages = ts.phi.softPages.slice();
-              var mCount = typeof b.maskedCount === "number" ? b.maskedCount : ((ts.phi && ts.phi.maskedCount) || 0);
-              var fList = b.findings || (ts.phi && ts.phi.findings) || [];
-              var phiInfo = { softPages: pPages, maskedCount: mCount, findings: fList };
-              saveThesis(tpid, { phi: phiInfo, phiConsent: null });
-              ts = loadThesis(tpid);
-              err._handledByConsent = true;
-              err._phiConsentInfo = phiInfo;
-            }
-            throw err;
-          });
+          return orchestrateThesisDraft(container, st2, proj);
         },
         onConsentNeeded: function (err) {
           var phiInfo = (err && err._phiConsentInfo) || (ts && ts.phi) || { softPages: [1], maskedCount: 0, findings: [] };
@@ -1957,7 +2716,7 @@
             }
           });
         },
-        apply: function (draft) { return applyDraft(draft); },
+        apply: function (draft) { return applyDraft(draft, st2); },
         render: function () { renderDraft(container); }
       });
     }
@@ -1971,15 +2730,15 @@
     if (save) save.onclick = function () { saveDraft(container); };
   }
 
-  function applyDraft(draft) {
+  function applyDraft(draft, aiState) {
     draft = draft || {};
     var sections = draft.sections || [], pageTexts = ts.pages || [];
     var allFlags = [], allLocators = [], seen = {}, i, sec, v, k, loc;
-    var built = [];
+    var built = [], aiDraftedIds = [], emptyHeadings = [];
     for (i = 0; i < SECTION_ORDER.length; i++) {
       sec = null;
-      for (k = 0; k < sections.length; k++) if (sections[k].id === SECTION_ORDER[i].id) sec = sections[k];
-      var text = sec ? sec.text : "";
+      for (k = 0; k < sections.length; k++) if (sections[k] && sections[k].id === SECTION_ORDER[i].id) sec = sections[k];
+      var text = sec && typeof sec.text === "string" ? sec.text : "";
       v = verifyNumbers(text, pageTexts);
       for (k = 0; k < v.flags.length; k++) allFlags.push(v.flags[k]);
       for (k = 0; k < v.locators.length; k++) {
@@ -1988,11 +2747,34 @@
       }
       built.push({ id: SECTION_ORDER[i].id, heading: SECTION_ORDER[i].heading, text: v.text });
     }
-    var enf = enforceWordLimit(built, journalOf().wordLimit);
-    var tables = draft.tables || draft.suggestedTables || [];
-    var refs = draft.references || [];
+    var jr = journalOf();
+    var enf = enforceWordLimit(built, jr.wordLimit, abstractLimitOf(jr));
+    for (i = 0; i < enf.sections.length; i++) {
+      if (countWords(enf.sections[i].text) > 0) aiDraftedIds.push(enf.sections[i].id);
+      else emptyHeadings.push(enf.sections[i].heading || enf.sections[i].id);
+    }
+    if (!aiDraftedIds.length) {
+      if (aiState && aiState.drafted) delete aiState.drafted.draft;
+      saveThesis(tpid, {
+        draft: null,
+        editMode: true
+      });
+      ts = loadThesis(tpid);
+      return [];
+    }
+    if (emptyHeadings.length && aiState) {
+      aiState.error = {
+        code: "empty_draft",
+        message: "MaiK returned 0 words for: " + emptyHeadings.join(", ") + ". Check your connection and try again."
+      };
+    }
+    var detTables = extractThesisTables(pageTexts);
+    var tables = (draft.tables && draft.tables.length) ? draft.tables : ((draft.suggestedTables && draft.suggestedTables.length) ? draft.suggestedTables : detTables);
+    if (detTables.length > (tables || []).length) tables = detTables;
+    var detRefs = extractThesisReferences(pageTexts);
+    var refs = (draft.references && draft.references.length) ? draft.references : detRefs;
     saveThesis(tpid, {
-      draft: { sections: enf.sections, flags: allFlags, locators: allLocators, tables: tables, references: refs, trimmed: enf.trimmed, words: enf.words },
+      draft: { sections: enf.sections, aiDraftedIds: aiDraftedIds, flags: allFlags, locators: allLocators, tables: tables, references: refs, trimmed: enf.trimmed, words: enf.words },
       tablePicks: suggestTables(tables, 3),
       editMode: false
     });
@@ -2005,6 +2787,9 @@
     if (!box) return;
     var draft = ts.draft;
     var editMode = ts.editMode || !draft;
+    var aiMap = {}, aIdx;
+    var draftedIds = (draft && draft.aiDraftedIds) || [];
+    for (aIdx = 0; aIdx < draftedIds.length; aIdx++) aiMap[draftedIds[aIdx]] = true;
     var h = [], i, sec;
     if (draft && draft.flags && draft.flags.length) {
       h.push('<div class="rmd-banner rmd-banner-warn">' + draft.flags.length + ' sentence(s) need a number check. A number that was not found verbatim in your thesis was removed and marked.</div>');
@@ -2015,8 +2800,12 @@
     var secs = (draft && draft.sections) || SECTION_ORDER;
     for (i = 0; i < secs.length; i++) {
       sec = secs[i];
+      var wc = countWords(sec.text);
+      var showPill = wc > 0 && aiMap[sec.id];
       h.push('<div class="rmd-thesis-section">');
-      h.push('<div class="rmd-field"><label>' + esc(sec.heading || sec.id) + ' <span class="rmd-thesis-meta">' + countWords(sec.text) + ' words</span></label>');
+      h.push('<div class="rmd-field"><label>' + esc(sec.heading || sec.id) + ' <span class="rmd-thesis-meta">' + wc + ' words</span>' +
+        (showPill ? ' <span class="rmd-ai-note" data-rmd-ai-note="' + esc(sec.id) + '">Drafted by MaiK, check it</span>' : '') +
+        '</label>');
       if (editMode) {
         h.push('<textarea class="rmd-thesis-edit" data-rmd-section="' + esc(sec.id) + '" rows="5">' + esc(sec.text || "") + '</textarea>');
       } else {
@@ -2033,7 +2822,7 @@
       areas[i].oninput = function () {
         var id = this.getAttribute("data-rmd-section"), j, d = ts.draft;
         if (!d) {
-          d = { sections: [], flags: [], locators: [], tables: [], references: [], words: 0 };
+          d = { sections: [], aiDraftedIds: [], flags: [], locators: [], tables: [], references: [], words: 0 };
           for (j = 0; j < SECTION_ORDER.length; j++) d.sections.push({ id: SECTION_ORDER[j].id, heading: SECTION_ORDER[j].heading, text: "" });
         }
         for (j = 0; j < d.sections.length; j++) if (d.sections[j].id === id) d.sections[j].text = this.value;
@@ -2235,7 +3024,8 @@
       pendingSavePromise = null;
       if (btn) { btn.disabled = false; btn.textContent = "Save to the manuscript"; }
       /* Never hijack navigation if the user moved away while PUTs were in-flight. */
-      if (!wasMounted || isDomMounted(container)) {
+      var stillOnDraft = btn ? isDomMounted(btn) : (!wasMounted || isDomMounted(container));
+      if (stillOnDraft) {
         SMD.p2.flashNotice(container, "Saved to the manuscript.", "info");
         SMD.navigate("thesis-tables");
       }
@@ -2244,7 +3034,8 @@
       saveBusy = false;
       pendingSavePromise = null;
       if (btn) { btn.disabled = false; btn.textContent = "Save to the manuscript"; }
-      if (!wasMounted || isDomMounted(container)) {
+      var stillOnDraftErr = btn ? isDomMounted(btn) : (!wasMounted || isDomMounted(container));
+      if (stillOnDraftErr) {
         SMD.p2.flashNotice(container, "Saved on this device.", "info");
         SMD.navigate("thesis-tables");
       }
@@ -2262,6 +3053,11 @@
     tpid = pidOf(proj);
     ts = loadThesis(tpid);
     injectCSS();
+    if (isTutorialProject(proj) && ts.ownUpload) {
+      container.innerHTML = tutorialOwnGateHtml(ts, "Start a real project to select tables from your thesis");
+      bindTutorialOwnGate(container);
+      return;
+    }
     var tables = (ts.draft && ts.draft.tables) || [];
     var picks = ts.tablePicks || [];
     var h = ['<div class="rmd-p2-screen rmd-thesis-screen"><div class="rmd-card">'];
@@ -2310,6 +3106,11 @@
     tpid = pidOf(proj);
     ts = loadThesis(tpid);
     injectCSS();
+    if (isTutorialProject(proj) && ts.ownUpload) {
+      container.innerHTML = tutorialOwnGateHtml(ts, "Start a real project to format thesis references");
+      bindTutorialOwnGate(container);
+      return;
+    }
     var refs = (ts.draft && ts.draft.references) || [];
     var flags = referenceFlags(refs);
     var style = journalOf().referenceStyle;
@@ -2344,6 +3145,8 @@
     var s = D.createElement("style");
     s.textContent = [
       "#researchMD .rmd-thesis-meta { font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); display: block; margin-top: 2px; }",
+      "#researchMD .rmd-thesis-quote { margin: 4px 0 12px; padding: 10px 12px; border: 1px solid var(--rmd-line); background: var(--rmd-fill); border-radius: 8px; font: 400 13px/1.5 var(--rmd-f); color: var(--rmd-ink); overflow-wrap: anywhere; }",
+      "#researchMD .rmd-thesis-real-gate .rmd-card-actions { margin-top: 8px; }",
       "#researchMD .rmd-thesis-section { margin-bottom: 14px; }",
       "#researchMD .rmd-thesis-section-text { font: 400 14px/1.65 var(--rmd-f); color: var(--rmd-ink); white-space: pre-wrap; overflow-wrap: anywhere; }",
       "#researchMD .rmd-thesis-edit { width: 100%; box-sizing: border-box; font: 400 14px/1.6 var(--rmd-f); }",
@@ -2432,7 +3235,12 @@
     buildPageTexts: buildPageTexts,
     verifyNumbers: verifyNumbers,
     enforceWordLimit: enforceWordLimit,
+    abstractLimitOf: abstractLimitOf,
     suggestPaperType: suggestPaperType,
+    segmentThesisChapters: segmentThesisChapters,
+    chunkPagesByChars: chunkPagesByChars,
+    extractThesisTables: extractThesisTables,
+    extractThesisReferences: extractThesisReferences,
     referenceFlags: referenceFlags,
     formatReference: formatReference,
     suggestTables: suggestTables,

@@ -269,8 +269,9 @@ describe("research thesis to paper", { concurrency: false, skip: SKIP }, () => {
       input: { wordLimit: 12, text: "A systematic review and meta-analysis of the reports. " + long },
     });
     assert.equal(many.http, 200, JSON.stringify(many));
-    assert.equal(llm.calls.length, 5);
-    assert.equal(many.draft.sections.length, 5);
+    assert.equal(llm.calls.length, 6);
+    assert.equal(many.draft.sections.length, 6);
+    assert.equal(many.draft.sections[5].id, "conclusion");
     assert.ok(many.draft.wordCount <= 12);
     assert.equal(many.draft.suggestion.paperType, "systematic_review");
     assert.equal(many.draft.suggestion.checklist, "PRISMA");
@@ -500,5 +501,97 @@ describe("on-device DOCX extraction and parsing", () => {
     // Non-docx invalid format
     messages.length = 0;
     thesisClient.handleFile({ name: "corrupted.docx", type: "application/docx", size: 500, arrayBuffer: async () => new Uint8Array([0, 1, 2, 3]).buffer }, container);
+  });
+});
+
+describe("long thesis segmentation, design suggestion and word limits", { concurrency: false, skip: SKIP }, () => {
+  test("suggestPaperType extracts verbatim quotes and distinguishes cohort/RCT even with a literature review chapter", () => {
+    const rctPages = [
+      { n: 1, text: "PhD Thesis. Randomized intrapatient controlled trial of ceramic vs autograft in 96 spinal fusion patients." },
+      { n: 2, text: "Table of contents\n2 Systematic review of radiological fusion criteria .......... 17" },
+      { n: 17, text: "Chapter 2. Systematic review and meta-analysis of fusion criteria across prior publications." },
+      { n: 43, text: "Chapter 3. Patients were randomly allocated side-to-side (n = 96)." }
+    ];
+    const rctSug = thesisClient.suggestPaperType(rctPages);
+    assert.equal(rctSug.key, "rct");
+    assert.ok(rctSug.quote.length > 10);
+    assert.ok(rctSug.page != null);
+
+    const cohortPages = [
+      { n: 1, text: "Summary. 313 near consecutive patients with heart failure were enrolled and followed up for a minimum of one year as an unselected cohort." },
+      { n: 2, text: "Although a meta-analysis of 41 studies and a systematic review identified limitations, this prospective cohort studied 272 participants." }
+    ];
+    const cohSug = thesisClient.suggestPaperType(cohortPages);
+    assert.equal(cohSug.key, "cohort");
+    assert.ok(cohSug.quote.length > 10);
+
+    const diagSug = thesisClient.suggestPaperType("A prospective diagnostic accuracy study comparing rapid antigen testing against RT-PCR reference standard showed sensitivity 91% and specificity 98%.");
+    assert.equal(diagSug.key, "diagnostic");
+    assert.equal(diagSug.checklist, "stard2015");
+  });
+
+  test("100-page synthetic thesis segments all chapters, chunks within ceiling, extracts tables/refs, and preserves conclusion", async () => {
+    const pages = [];
+    for (let i = 1; i <= 100; i++) {
+      let heading = "Results";
+      if (i <= 5) heading = "Summary\nAbstract of our cohort study.";
+      else if (i <= 25) heading = "Chapter 1 Introduction\nBackground on condition.";
+      else if (i <= 50) heading = "Chapter 2 Methods\nCohort study design enrolled " + (100 + i) + " patients.";
+      else if (i <= 78) heading = "Chapter 3 Results\nTable " + i + ": Primary outcome rate " + (10 + (i % 50)) + "%.";
+      else if (i <= 88) heading = "Chapter 4 Discussion\nGeneral discussion and limitations.";
+      else if (i <= 92) heading = "Chapter 5 Conclusion\nClinical conclusion supporting early follow-up.";
+      else heading = "References\n" + i + ". Smith A, Lee B. Cohort findings. BMJ 2022;378:123-" + i + ". doi: 10.1136/bmj.000" + i + "\n" + (i + 100) + ". Doe J. Prior cohort outcomes. Lancet 2021;398:45-" + i + ".";
+      pages.push({ n: i, text: i > 92 ? heading : (heading + " " + "Detailed clinical text here. ".repeat(18)) });
+    }
+    const seg = thesisClient.segmentThesisChapters(pages);
+    assert.ok(seg.methods.length > 0 && seg.results.length > 0 && seg.discussion.length > 0 && seg.conclusion.length > 0);
+    assert.ok(seg.references.length >= 6);
+    const chunks = thesisClient.chunkPagesByChars(seg.results, 13000, 3);
+    assert.ok(chunks.length >= 1);
+    for (const ch of chunks) {
+      const len = ch.reduce((s, p) => s + p.text.length, 0);
+      assert.ok(len <= 13500, "chunk chars must stay inside ceiling: " + len);
+    }
+    const tables = thesisClient.extractThesisTables(pages);
+    assert.ok(tables.length >= 3);
+    const refs = thesisClient.extractThesisReferences(pages);
+    assert.ok(refs.length >= 3 && refs[0].doi);
+
+    const enf = thesisClient.enforceWordLimit([
+      { id: "abstract", heading: "Abstract", text: "Background: " + "word ".repeat(300) },
+      { id: "introduction", heading: "Introduction", text: "Intro sentence one. Intro sentence two. " },
+      { id: "methods", heading: "Methods", text: "Methods sentence one. Methods sentence two. " },
+      { id: "results", heading: "Results", text: "Results sentence one. Results sentence two. " },
+      { id: "discussion", heading: "Discussion", text: ("Long discussion sentence. ").repeat(40) },
+      { id: "conclusion", heading: "Conclusion", text: "Conclusion stays intact with key clinical takeaway." }
+    ], 100, 120);
+    const abs = enf.sections.find((s) => s.id === "abstract");
+    const conc = enf.sections.find((s) => s.id === "conclusion");
+    assert.ok(thesisClient.countWords(abs.text) <= 120);
+    assert.ok(enf.words <= 100);
+    assert.ok(thesisClient.countWords(conc.text) > 0, "conclusion preserved when discussion trimmed");
+
+    // Server thesisTask reads beyond 20,000 chars across late pages (not silently sliced at 20K)
+    const env = freshEnv();
+    fundWallet(env);
+    const project = await makeProject(env);
+    const lateMarker = "987.65";
+    const bigPages = [
+      { n: 1, text: "Chapter 1 Introduction. Cohort study of acute admissions. " + "filler words here ".repeat(1400) },
+      { n: 90, text: "Chapter 5 Conclusion. Final mortality predictor odds ratio was " + lateMarker + " in validated cohort." }
+    ];
+    resetLlm(async (e, parts) => {
+      const promptStr = JSON.stringify(parts);
+      if (promptStr.includes(lateMarker)) {
+        return JSON.stringify({ text: "Final mortality predictor odds ratio was " + lateMarker + " in validated cohort." });
+      }
+      return JSON.stringify({ text: "Summary based on cohort findings." });
+    });
+    const out = await call(env, "POST", "v1/projects/" + project.id + "/ai-draft", "tok-alice", {
+      task: "thesis_to_paper",
+      input: { section: "conclusion", pages: bigPages, wordLimit: 200 },
+    });
+    assert.equal(out.http, 200);
+    assert.ok(out.draft.sections[0].text.includes(lateMarker), "server chunking reached page 90 beyond 20,000 chars");
   });
 });

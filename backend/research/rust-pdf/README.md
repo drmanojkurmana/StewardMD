@@ -23,6 +23,24 @@ size, words with boxes, page text and tables, value for value.
 - **ResearchMD thesis screen (`research-screen-thesis.js`)**: page text of an
   uploaded PDF thesis.
 
+### Lines: how each line looks
+
+`rs_lines` (`SMD_RUST_PDF.lines` in the app) gives every line as
+`{ tx, size, bold, italic, caps }`, so callers can find headings (for
+example, splitting a thesis by its own chapter headings):
+
+- `bold`: more than half of the line's visible characters are in a bold font
+  (name such as Bold, Black, Heavy, Semibold, Demi, URW `Medi`, TeX `CMBX`;
+  FontDescriptor FontWeight 600 or more; the ForceBold flag), or drawn with
+  text render mode 2 (fill and stroke, the usual "fake bold").
+- `italic`: the same for italic / oblique / slanted fonts (name, the Italic
+  flag, or a non-zero ItalicAngle).
+- `caps`: at least two letters and no lower-case letter ("CHAPTER 3").
+
+A heading usually shows as bold and/or caps and/or a size above the body
+text, so use them together. This is only in the lines output: `rs_run`
+(extract.py's result: words, text, tables) is unchanged, byte for byte.
+
 Kill switch in the app: `localStorage.smd_rust_pdf = "0"` (or `?rust_pdf=0`).
 
 The `.wasm` in `vendor/rust-pdf/` is built with
@@ -105,5 +123,5 @@ From Python: `backend/research/worker/research_worker/rust_pdf.py`.
   path
 - `src/tablefind.rs`: pdfplumber `find_tables()` and `Table.extract()`
 - `src/lib.rs`: page tree, page boxes, the result JSON
-- `src/lines.rs`: PrepNucleus lines (text and font size, pdf.js order)
+- `src/lines.rs`: lines (text, font size, bold / italic / caps, pdf.js order)
 - `src/ffi.rs`: C / wasm exports

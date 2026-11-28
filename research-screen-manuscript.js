@@ -1779,7 +1779,7 @@
   }
 
   function isSectionAiDrafted(secObj) {
-    if (!secObj) return false;
+    if (!secObj || !String(secObj.text || "").trim()) return false;
     if (st.approvedSections && st.approvedSections[secObj.id]) return false;
     if (st.aiDraftedSections && st.aiDraftedSections[secObj.id]) return true;
     var ai = st.manuscript && st.manuscript.ai;
@@ -2208,8 +2208,7 @@
     }
     var secs = d.sections;
     if (!secs || (Array.isArray(secs) && !secs.length)) {
-      load(container);
-      return ["manuscript"];
+      return [];
     }
     if (!st.manuscript) st.manuscript = defaultManuscript(st.projectId);
     if (!st.manuscript.sections) st.manuscript.sections = [];
@@ -2229,7 +2228,7 @@
     var draftedIds = [];
     for (var i = 0; i < list.length; i++) {
       var item = list[i];
-      if (!item || !item.id || typeof item.text !== "string") continue;
+      if (!item || !item.id || typeof item.text !== "string" || !item.text.trim()) continue;
       st.aiDraftedSections[item.id] = true;
       draftedIds.push(item.id);
       draftedHeadings.push(item.heading || item.id);
@@ -2249,12 +2248,13 @@
         });
       }
     }
+    if (!draftedIds.length) {
+      return [];
+    }
     st.manuscript.sections = sortSections(st.manuscript.sections);
     recordAiProvenance(res && res.model, draftedHeadings, draftedIds);
     saveLocalManuscript(st.projectId, st.manuscript);
-    if (draftedIds.length) {
-      syncDraftSectionsToServer(list);
-    }
+    syncDraftSectionsToServer(list);
     st.saveNotice = "Drafted by MaiK. Review each section and save when ready.";
     return ["manuscript"];
   }
