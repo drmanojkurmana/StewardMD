@@ -35,10 +35,16 @@ Regain teardown and the full feature table: the Claude Docs page "Regain teardow
   shield up when `prepFocusEndsAt` is more than a minute ahead (a "Finish in 5 minutes" restart wrote a newer end before
   the old schedule stopped). Sessions under 15 minutes start the DeviceActivity interval in the past; an in-app Timer and
   `load()` (end already passed) clear as backups.
-- Verified: the three extensions build for the simulator with no warnings; the plugin type-checks against Capacitor.
-  Open: full `App` scheme build (needs `-skipPackagePluginValidation` for mlx-swift's CudaBuild plugin), simulator run,
-  phone acceptance (Screen Time does not shield in the Simulator), Family Controls (Distribution) request for the app
-  and the three extension bundle IDs (owner files it; needed for TestFlight / App Store only).
+- Verified 2026-11-28: signed Debug device build of the `App` scheme (`-destination 'generic/platform=iOS'
+  -skipPackagePluginValidation -skipMacroValidation -allowProvisioningUpdates`) succeeds, no warnings in Focus files.
+  `App.app/public/index.html` has `prep-loader.js?v=prep203` and `onboard-story.js?v=story1`, `App.debug.dylib` has
+  `SmdFocusPlugin`, `PlugIns/` has the three Focus appex, and the app and all three extensions are signed with
+  `com.apple.developer.family-controls` + the App Group (Xcode registered the new bundle IDs). `npm test` 18667 pass,
+  `test/run-prep-focus-ui.mjs` ALL PASS (`CHROME=` the local Chrome on a Mac).
+- The app cannot run in the iOS Simulator: `capacitor-llama`'s `llama.xcframework` has no simulator slice (device and
+  macOS only). Screen Time does not shield in the Simulator anyway, so Focus is verified on a phone only.
+- Open: phone acceptance (install wipes app data, see CLAUDE.md), Family Controls (Distribution) request for the app and
+  the three extension bundle IDs (owner files it; needed for TestFlight / App Store only).
 
 The JS already calls these. Register like `SmdDevicePlugin` in `ios/App/App/MainViewController.swift`
 (`bridge?.registerPluginInstance(...)`, `CAPBridgedPlugin`, `jsName = "SmdFocus"`). Every method resolves; never reject
