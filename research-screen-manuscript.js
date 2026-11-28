@@ -4471,6 +4471,8 @@
   }
 
   SMD.appendManuscriptResults = appendManuscriptResults;
+  SMD.aiDisclosureText = aiDisclosureText;
+  SMD.zipStore = zipStore;
   SMD.docxFromSections = function (title, sections) {
     return buildDocxBytes({ title: title, sections: sections || [] });
   };

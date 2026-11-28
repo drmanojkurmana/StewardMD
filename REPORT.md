@@ -1,73 +1,70 @@
-# Sci-Fix N Report: ResearchMD R Symbol on the Home Tile and In-App Marks
+# ResearchMD One-Tap Thesis to Journal Paper Report (Brief L)
 
-Branch: `rmd-logo-tile` (from origin/main @ 71727757a)
-Worktree: `/Volumes/WD BLACK SN7100 1TB Media/po-wire/wt/scifixN`
+Branch: `rmd-thesis-auto`  
+Worktree: `/Volumes/WD BLACK SN7100 1TB Media/po-wire/wt/scifixL`
 
-## What the brief asked
-The owner circled the ResearchMD tile on the home grid (green sphere, flask glyph, BETA badge) and said "Use this logo here too". Logo sheet 01 is the standalone R symbol: a separate vertical bar on the left, an R bowl, two parallel diagonal legs. The same symbol was to appear where ResearchMD draws a mark inside the tool, stored once and reused. Item 4 of the brief (owner approved) also asked for the tile subtitle to change from "Meta-analysis with sources" to "Research to publication".
+## Overview & Implemented Architecture
 
-## Implementation
+### 1. Pure Engine Module (`research-thesis-auto.js`)
+Dual-exported (`window.SMD_RESEARCH_THESIS_AUTO` and CommonJS `module.exports`) strict ES5 module providing deterministic journal matching, table condensation, reference verification, front-matter generation, format checks, cost estimation, and submission package builders:
+- **12-Step Pipeline Definition (`STEP_ORDER`)**: `chapters`, `study_type`, `journals`, `draft`, `tables`, `references`, `title_page`, `abstract_keywords`, `declarations`, `checklist`, `format_check`, `cover_letter`.
+- **Target Journal Matcher (`rankTargetJournals`, `inferSpecialty`, `FALLBACK_JOURNALS`)**: Scores the journal catalogue (falling back to 9 offline journals aligned with `JOURNALS_CATALOGUE` IDs) across specialty, study type, thesis length / word limits, reference/table caps, PubMed indexing, open access, and fee status. Returns Top 3 matches with limits (`wordLimit`, `abstractLimit`, `maxReferences`, `maxTables`, `referenceStyle`, `fitReason`) and preselects best fit.
+- **Table Extraction, Condensation & Renumbering (`extractTableContent`, `condenseTables`)**: Parses table captions/headers/rows from thesis pages (filtering wrapped prose continuation lines), ranks importance, caps to journal `maxTables`, renumbers sequentially (`Table 1..Table N`), and rewrites in-text references (`renameMap`) across drafted sections.
+- **Citation Filtering, Style Formatting & PubMed/Crossref Verification (`parseStructuredBibEntry`, `extractCitationsFromText`, `buildJournalReferences`, `formatJournalReference`, `verifyReferencesOnline`)**:
+  - De-hyphenates PDF wrap splits, distinguishes publication years from years inside titles, and avoids expanding statistical IQR/score brackets (`[14-21]`, `[5-9]`) or matching decimal digits after periods (`0.17`) as citations.
+  - Keeps only references actually cited in drafted prose, renumbers in-text citations for numbered styles (`vancouver`, `ama`), and sorts alphabetically for `apa`.
+  - Verifies cited references against live PubMed (`eutils.ncbi.nlm.nih.gov`) and Crossref (`api.crossref.org`) APIs, rejecting non-matching hits via `refMatchesCandidate`, flagging unverified items with `needCheck: true`, and never inventing citations.
+- **Title Page, Abstract & MeSH Keywords (`buildTitlePage`, `extractKeywordCandidates`, `verifyKeywordsMesh`)**: Pre-fills from signed-in user profile (`SMD_AUTH.currentUser` / local `smd_profile_v1`) and thesis header lines (rejecting clinical prose sentences from institutional extraction) with explicit `[Confirm ...]` placeholders, computes abstract/main/table/figure/reference counts, and checks keyword candidates against NCBI MeSH (`db=mesh`).
+- **Declarations, CRediT, Checklist & Format Check (`extractThesisClues`, `buildDeclarationsAndCredit`, `prefillChecklist`, `runFormatCheck`)**: Detects IEC numbers (avoiding funding false positives), trial registration IDs (`CTRI`/`NCT`/`ISRCTN`), and genuine funding statements; generates editable consent/funding/conflicts/data/CRediT statements plus AI-use disclosure (`SMD.aiDisclosureText`); prefills reporting checklists (`strobe`, `consort2025`, `prisma2020`, `care`, `stard2015`); and runs deterministic format checks.
+- **MaiK Token Estimator & Submission Package Export (`estimateAutoCost`, `buildCoverLetter`, `buildChecklistPdfBytes`, `buildReferencesRis`, `buildSubmissionPackageFiles`)**:
+  - Shows pre-run MaiK token estimate using `MT_PER_INR = 2000`.
+  - Exports `.zip` archive via `SMD.zipStore` / local CRC32 ZIP writer containing: `01-title-page.docx`, `02-manuscript.docx` (with OOXML `<w:lnNumType>` when `journal.lineNumbers` is set and XML 1.0 control chars stripped), `03-tables.docx`, `04-cover-letter.docx`, `05-reporting-checklist.docx`, `05-reporting-checklist.pdf` (`%PDF-1.4`), `06-references.ris`, and `submission-manifest.txt` (`Approved: No` until user clicks Approve).
 
-### 1. The standalone symbol, stored once (`research.js`, after `SMD.esc`)
-- `RMD_MARK_PATHS` holds the four paths of the symbol: bar (`M0 0h110v589H0z`), bowl with stem (`M135 0h122a175 175 0 0 1 0 350H135v-85h122a90 90 0 0 0 0-180H135z`), short leg (`M135 372h60l140 217h-60z`), long leg (`M250 372h80l140 217h-80z`).
-- The geometry is exactly the header logo's `rmd-logo` viewBox `0 0 470 589`, so every size of the mark is the same shape and there is one source of truth for the symbol.
-- `rmdMarkSvg(height, cls)` emits the inline SVG: filled paths with `fill="currentColor" stroke="none"` as presentation attributes (badge CSS sets `fill: none` on bare svgs; a presentation attribute on the path outranks an inherited value), explicit `width`/`height` attributes plus inline `style="display:block;width:Wpx;height:Hpx"` because some contexts ignore attribute-only sizing (measured: the tile svg computed 21.985px square with attributes alone; inline style pins it exactly).
-- Exported twice for the two consumers: `SMD.mark` (in-IIFE) and `window.SMD_RMD_MARK = { svg: rmdMarkSvg }`.
+### 2. One-Tap Screen & Orchestration (`research-screen-thesis.js`, `research.js`, `research-screen-manuscript.js`, `index.html`, `sw.js`)
+- **Primary Upload Action (`renderUpload`)**: Shows `#rmdThesisAutoEstimate` before starting and `#rmdMakeJournalPaper` (`Make my journal paper`, switching to `Continue journal paper` when paused or `Review journal paper` when ready), while retaining the step-by-step path (`Edit step by step`) and enforcing the PHI consent gate (`openConsentSheet`) before navigating to `"thesis-auto"` with `{ autoStart: true }`.
+- **Resilient Pipeline Execution (`renderThesisAuto`, `runAutoChain`, `runSingleAutoStep`, `orchestrateThesisDraft`)**:
+  - `orchestrateThesisDraft` supports `resume` (skips already completed sections), `shouldStop()` (pauses cleanly), and deterministic `joinNotesFallback` if a multi-part section merge truncates on huge chapters (caught live on Campbell 341p Results & Lehr 175p Discussion).
+  - Server `409 consent_needed` mid-pipeline opens `#rmdThesisConsentSheet` and automatically resumes `runAutoChain` at the draft step upon confirmation (caught live on synthetic 100p `.docx`).
+  - `ts.auto` persists to `localStorage smd_rmd_thesis_v1` per project so Stop/Continue and full app restarts preserve completed steps and succeeded token counters.
+  - Succeeded AI calls accumulate in `actualAiCalls`/`actualCostInr`/`actualMaikTokens`; 5xx/empty-draft failures never charge tokens and preserve any existing draft.
+  - `429` / `402` / cap errors pause cleanly with progress intact.
+- **Review & Approve + Journal Switching + Export**:
+  - Stops once at `"Review and approve"` (`status = "review"`), collapsing the 12-step detail list inside `<details id="rmdAutoStepsDetails">` so the Target Journal switcher and Amber/Green readiness cards appear immediately on 390px screens.
+  - Switching among Top 3 target journals re-runs steps `5..12` locally/online with zero additional AI calls.
+  - Inline inputs and explicit confirmation checkboxes (`[data-rmd-auto-confirm]`) transition Author list, IEC/Ethics, Declarations/CRediT, and Unverified References from Amber (`Amber: Confirm`) to Green (`Green: Ready`).
+  - Only clicking `#rmdAutoApproveBtn` (`Approve and mark final`) syncs sections and calls `POST /v1/projects/:id/manuscript/approval/approve`, marking `approved = true`.
+  - `#rmdAutoExportPackBtn` exports the `.zip` package through `SMD.p2.downloadBytes` (`SMD.p2.saveFile` Capacitor Share sheet on native mobile), alongside individual file download buttons.
+- **Cache-busting & Wiring**: Added `/research-thesis-auto.js?v=rmd1-scil1` to `index.html`, bumped `?v=` tokens on `research-screen-thesis.js`, `research-screen-manuscript.js`, and `research.js`, appended `-scil1` to `CACHE` in `sw.js`, and exported `SMD.aiDisclosureText` + `SMD.zipStore` on `research-screen-manuscript.js`.
 
-### 2. Home tile (`home.js`)
-- `toolMark(t)` returns the symbol for the research tile via `window.SMD_RMD_MARK.svg(24, "rmd-tile-mark")`; if research.js failed to load, the tile falls back to the Material flask it always had (guarded, like the existing `SMD_MAIK_MARK` pattern).
-- `homeToolTile`: the mark replaces the flask inside the same `liveIcon` wrapper (`<span class="rds-icon ai-live" data-live="tilt">`), so the tile keeps the identical live-motion treatment, white color, 70px green sphere, BETA badge, label, subtitle and tap target of every other tile. Measured on the built page: svg 19.15 x 24 css px, vertically centered (22.9 above / 22.9 below in the 70px badge), `color: rgb(255,255,255)`, 4 paths, `animationName liveTilt` still running on the wrapper.
-- `listIcon` (All tools / Customize lists): static mark at 24px in the same `rds-icon` span the other tools use.
-- BETA badge, "ResearchMD" label and the `data-act="research"` tap target are untouched.
+---
 
-### 3. In-app marks
-- Ask MaiK buttons (`research.js` `aiBarHtml`, `research-screen-extract.js` `aiBarHtml`): the `<span class="rmd-ai-mark">R</span>` text is now the 14px-high symbol (11.17 x 14). The chip itself is unchanged (18px `--rmd-acc-grad` rounded square, white foreground), so the mark inherits exactly the color and contrast the letter R had.
-- `research-screen-extract.js` loads before `research.js` but renders at click time, so it reads `G.SMD_RMD_MARK` with the plain "R" as a fallback.
-- The ResearchMD header was checked: it already renders the full two-tone logo SVG (bar + bowl + legs as `rmd-logo-a`/`rmd-logo-b` paths), not a plain R, so it is left as the two-tone brand version. "RStudy" is a text button label, not a mark, and stays text.
+## Live E2E Metrics (`http://127.0.0.1:8812` + `CDP_PORT=9473 ANY_USER=1`)
 
-### 4. Two-tone decision
-The brief allows a two-tone version (blue bar, cream/ink R) if it passes contrast in light and dark. On the Ask MaiK chip the bar would sit `#2457ff` on the `--rmd-acc-grad` blue chip: about 1.35:1, far below 3:1. Both themes use the same blue chip, so the monochrome `currentColor` symbol is the only variant that passes everywhere; the two-tone version stays where it already passes (the header logo on cream/dark backgrounds).
+Outputs saved under `/Users/mkk/prep-data/assessment/rmd-live/e2e/outputs/thesis-auto-{1,2,3}` (including `.zip`, 8 individual package files, `metrics.json`, `editorial-review.txt`, and `390px` light/dark + `1024px` iPad screenshots):
 
-### 5. Rendering note (documented, inherent)
-At the 14px chip size the gap between bar and bowl is 25/470 of the width, about 0.6 css px (1.19 device px at dsf 2). That is the sheet's own geometry at small sizes, not a defect of the redraw; at the 24px tile size the gap is about 1.0 css px and reads cleanly. The `#researchMD` context renders its UI at a uniform 0.95 scale (pre-existing; the old 18px chip computed 17.09px too), which shrinks the mark proportionally with everything around it.
+| Run | Thesis Fixture (Pages) | Detected Type & Preselected Journal | Wall Time (ms) | Est. / Actual AI Calls | Actual MaiK Tokens | Main / Abstract Words | Tables Kept | Refs Cited (Verified) | Verbatim Numbers Checked (Missing) |
+| --- | --- | --- | ---: | ---: | ---: | --- | ---: | --- | --- |
+| `thesis-auto-1` | `obs-campbell-2017-heart-failure.pdf` (341p) | Cohort -> Indian Heart Journal (3,500w / 250w) | 61,185 | 17 / 18 | 5,860 MT | 2,738 / 250 | 5 | 8 (5 / 62.5% Crossref) | 244 (0 missing) |
+| `thesis-auto-2` | `rct-lehr-2022-spinal-fusion.pdf` (175p) | RCT -> Indian J Orthopaedics (4,000w / 250w) | 74,395 | 18 / 20 | 7,360 MT | 2,892 / 200 | 6 | 14 (14 / 100.0% Crossref) | 295 (0 missing) |
+| `thesis-auto-3` | `stewardmd-synthetic-100p-thesis.docx` (96p extracted / 100p doc) | Cohort -> Indian J Crit Care Med (3,000w / 350w) | 41,253 | 10 / 10 | 1,840 MT | 747 / 223 | 6 | 8 (6 / 75.0% Crossref) | 196 (0 missing) |
 
-### 6. Tile subtitle (brief item 4, owner approved)
-- `home.js` `HOME_TOOLS` research entry: `sub: "Meta-analysis with sources"` is now `sub: "Research to publication"`.
-- `git grep "Meta-analysis with sources"` returns only this one source. The Home grid, the search index and the All tools / Customize lists all read the same `HOME_TOOLS` entry (via `window.SMD_HOME_TOOLS`, `orderedHomeTools` and the `hv-at-row` builder), so there is no second copy to change. The "what's new" / Try card uses `T.desc(a) || t.sub` and therefore picks the new line up automatically.
-- No em dash; length is 23 characters, the same two-line fit the old subtitle had.
+Note: After observing `thesis-auto-3` during editorial review, fixed `supRe` in `research-thesis-auto.js` so decimal numbers like `0.17` are not parsed as superscript citations, and re-verified on `thesis-auto-3` section text that `extractCitationsFromText` returns `[1..7]` only (excluding uncited ref #8).
 
-## Cache busting
-- `index.html`: `-scin1` appended to the `?v=` chains of `research-screen-extract.js` (line 2501), `research.js` (line 2546) and `home.js` (line 2605); all other tokens kept.
-- `sw.js` line 16: `-scin1` appended to the single `CACHE` string after `-scik1`; all earlier markers kept.
+---
 
-## Screenshots (390x844 @2x, committed under `shots/`)
-All taken with the CDP harness pattern of `test/run-research-ui.mjs` (static server, POST `/api/research/v1/projects` stub, headless Chrome, `Target.attachToTarget` flatten). Home shots boot with `smd_home_tools = {"research":true}` so the research tile is pinned; the ResearchMD shots create a real project through the new-project modal (practice projects gate the AI screens) and land on the Search screen where the Ask MaiK chip renders.
+## Automated Verification Summary
 
-| Shot | Before | After |
-| --- | --- | --- |
-| Home grid, light | `shots/n-before-home-390-light.png` | `shots/n-after-home-390-light.png` |
-| Home grid, dark | `shots/n-before-home-390-dark.png` | `shots/n-after-home-390-dark.png` |
-| ResearchMD search screen, light | `shots/n-before-researchmd-390-light.png` | `shots/n-after-researchmd-390-light.png` |
-| ResearchMD search screen, dark | `shots/n-before-researchmd-390-dark.png` | `shots/n-after-researchmd-390-dark.png` |
+- **Syntax checks**: `node --check` passed on `research-thesis-auto.js`, `research-screen-thesis.js`, `research-screen-manuscript.js`, `research.js`, and `sw.js`.
+- **Unit tests**:
+  - `test/research-thesis-auto.test.mjs` (9 tests covering ranking, table condensation, bib parsing/renumbering, online ref verification, MeSH keywords, declarations/CRediT, checklists, format check, cost estimation, `.docx`/`.pdf`/`.ris`/`.zip` builders, ES5/dash/side-stripe invariants) — passed after final edit.
+  - `test/research-thesis.test.mjs`, `test/research-thesis-chapters.test.mjs`, `test/research-thesis-render.test.mjs`, `test/research-journey.test.mjs`, `test/research-tutorial-cost-copy.test.mjs` — all passed (`0` failures) after final edit.
+  - Note on repo-wide `npm test` run (executed prior to the final 1-line `supRe` fix): 9 pre-existing suite failures in unrelated/worktree-path tests (`test/no-side-stripes.test.mjs` fails scanning 0 files when the worktree path contains spaces due to un-decoded `%20` in `new URL`, plus pre-existing `build-slim.test.mjs`, `edge-schemas.test.mjs`, `narke-drills.test.mjs`, `remote-media.test.mjs`, `tokos-drill-core.test.mjs`, `tokos-learn-gyA.test.mjs`, `wardsynq-i18n-unwrapped.test.mjs`, `wardsynq-reachability.test.mjs`). Direct regex scan inside `test/research-thesis-auto.test.mjs` verified zero CSS side stripes (`>= 2px`) and zero em/en dashes in `research-thesis-auto.js` and `research-screen-thesis.js`.
+- **Headless UI harnesses (`test/run-research-*-ui.mjs`)**:
+  - `test/run-research-thesis-auto-ui.mjs`: All **30** checks passed after final edit (upload token estimate, Stop & Continue, reload persistence, 500 non-charge, single-step Re-run, journal switch with 0 AI calls, Amber->Green checklist, manual Approve & `.zip` export, 390px light/dark & 1024px iPad zero overflow, >=44px touch targets, 0 dashes, 0 page errors).
+  - `test/run-research-thesis-ui.mjs`: All checks passed (`0` failures) after final edit.
+  - All 34 other `test/run-research-*-ui.mjs` scripts passed (`EXIT=0`) when run sequentially (after re-running `run-research-compliance-ui.mjs` & `run-research-ipad-ui.mjs` standalone cleanly: `COMPLIANCE=0`, `IPAD=0`).
+- **Bundle assembly**: `scripts/build-www.sh` (`build: #1414`, 17,285 files) assembled `www/` cleanly after final edit.
 
-Before: flask ligature on the tile, old subtitle "Meta-analysis with sources", letter R in the chip. After: the R symbol in both places, same size class, color and motion as the neighbors, and the tile subtitle "Research to publication".
-
-## Verification
-
-### Harness suites (headless Chrome)
-- `test/run-research-ui.mjs`: all passed (includes the Ask MaiK bar screens, zero horizontal overflow at 390/768/1024, zero em/en dashes).
-- `test/run-home-live-icons-ui.mjs`: all passed (every unlocked tile icon still moves; stagger and reduced-motion rules intact).
-- `test/run-home-tabs-ui.mjs`: flaky on this machine. Run 1 failed at step 8 with `window.openSearch is not a function`; run 2 failed the reload-dependent tab assertions ("the last tab is remembered", Bedside, Practice). The same suite fails at the same points on pristine origin/main (`0afd731d0`), so the flakiness is pre-existing and no tile assertion fails.
-- `test/run-all-tools-ui.mjs`: 1 failure, "solid parts of the drawn icons are filled: 0", reproduced identically on pristine origin/main (`0afd731d0`). Pre-existing, unrelated to this change.
-- `test/research-po-button.test.mjs` and `test/research-ai-draft-phi-client.test.mjs` were checked for mark coupling: the first only mocks `barHtml` without asserting the mark's content, the second asserts notice text and class names only. Neither needed changes.
-
-### Full unit suite
-- `npm test` in this worktree: every test passes except 10 files that fail only because the mandated worktree path contains spaces. Those tests build a path with `new URL(..., import.meta.url).pathname` and do not decode `%20`, so they look for `/Volumes/WD%20BLACK%20SN7100%201TB%20Media/...` and get ENOENT; the failures are `build-slim`, `edge-schemas`, `narke-drills`, `no-side-stripes`, `remote-media`, `tokos-drill-core`, `tokos-learn-gyA`, `wardsynq-i18n-unwrapped`, `wardsynq-reachability` and `wardsynq-support-ops`.
-- Those same 10 files were re-run at the branch base commit `71727757a` in a path without spaces (`/tmp/scin-base717`): all pass. They were then run again in `/tmp/scin-verify` with this branch's five changed source files copied in: all pass. So `npm test` has no new failures from this change; the 10 failures are purely the worktree path.
-- Everything else in the suite (browser-independent tests included) passed on this branch.
-
-## Compliance (ui rules)
-- Read the required skill files before building (anti-slop, styling, brand and craft references, including the icon guidance: icons drawn as authored SVG in one consistent weight, never emoji or unicode stand-ins; this change replaces a generic glyph with the product's own drawn mark, which is the direction the rules ask for).
-- `impeccable detect --json research.js home.js research-screen-extract.js index.html sw.js`: 154 findings, 146 in `index.html` and 7 in `home.js` / 1 in `research.js`, all pre-existing patterns (width/height transitions, an Inter reference, the rnavJiggle keyframe, dark-glow and halo backgrounds in legacy index styles). None falls on any line this brief added; the new SVG paths, the chip markup and the tile branches are clean.
-- Contrast: tile mark `#fff` on the sphere (same as every neighbor), chip mark `#fff` on `--rmd-acc-grad` (same as the letter it replaces), two-tone variant rejected on the 1.35:1 measurement above.
-- No em dashes in any new UI string or in this report.
+### Modern Web Guidance (UI Compliance)
+- **Progress (`progress`)**: `#rmdAutoStepsList` uses a semantic ordered list with `role="progressbar"` (`aria-valuemin`, `aria-valuemax`, `aria-valuenow`, `aria-valuetext`), live status badges, tabular numbers (`font-variant-numeric: tabular-nums`), non-jarring layout without full-page blocking after completion, and `@media (prefers-reduced-motion: reduce)` disabling bar transitions.
+- **Accessibility (`accessibility`)**: Explicit `<label for="...">` bindings on every title page / declaration input and confirmation checkbox, `aria-pressed` on Top-3 journal selection buttons, `>= 44px` minimum interactive touch targets (`min-height: 47px` rule yielding `~44.6px` rendered height), high-contrast light/dark palette (`#136d45`/`#e6f5ec` light, `#42cdb5`/`#103239` dark on `#0a1230`/`#111c44`), `1px` full borders without side stripes, and verified `0` horizontal overflow at `390px` and `1024px`.
