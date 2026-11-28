@@ -2294,7 +2294,7 @@
     { act: "dosecalc", ic: "medication", tt: "Dose calculator", sub: "Dose for one patient", defOn: false,
       eligible: function () { return doseCalcOn(); } },
     // ResearchMD meta-analysis workspace (research.js). Flag smd_research, DEFAULT ON.
-    { act: "research", ic: "science", tt: "ResearchMD", sub: "Meta-analysis with sources", defOn: true, beta: true,
+    { act: "research", ic: "science", tt: "ResearchMD", sub: "Research to publication", defOn: true, beta: true,
       eligible: function () { return researchOn(); } },
     // Neonatal hub: dosing, preparation, infusions, fluids, growth, bilirubin, scores, reference values,
     // procedures, drug levels. Shown on Home by default once the flag is on.
@@ -2556,20 +2556,29 @@
     sweep: ["search", "neurology", "psychology", "body_system", "oncology"]
   };
   function liveMotion(ic) { for (var k in LIVE_MOTION) if (LIVE_MOTION[k].indexOf(ic) >= 0) return k; return "float"; }
-  function liveIcon(t) {
+  function liveIcon(t, inner) {
     var h = 0, a = String(t.act || ""); for (var i = 0; i < a.length; i++) h = (h * 31 + a.charCodeAt(i)) % 997;
-    return '<span class="rds-icon ai-live" data-live="' + liveMotion(t.ic) + '" style="--live-d:-' + ((h % 23) / 10).toFixed(1) + 's" aria-hidden="true">' + t.ic + '</span>';
+    return '<span class="rds-icon ai-live" data-live="' + liveMotion(t.ic) + '" style="--live-d:-' + ((h % 23) / 10).toFixed(1) + 's" aria-hidden="true">' + (inner || t.ic) + '</span>';
+  }
+  /* ResearchMD's own mark, brief N: the standalone R symbol from its logo sheet
+   * stands in for the generic flask glyph wherever the tool's icon is shown.
+   * The shared SVG lives in research.js (window.SMD_RMD_MARK); if that file
+   * failed to load the tile falls back to the Material glyph it always had. */
+  function toolMark(t) {
+    return (t.act === "research" && window.SMD_RMD_MARK) ? window.SMD_RMD_MARK.svg(24, "rmd-tile-mark") : "";
   }
   /* The tool's own icon, as on its Home tile, in a small badge for the All tools / Customize lists
    * (owner 2026-09-28: "use their original icons here"). Those lists used the generic Material
    * glyph, which is not the tool's icon at all, and Ophthalmós's "eye" is not a Material glyph, so
    * it printed the word EYE. Static: a list of moving icons is noise. */
   function listIcon(t, locked) {
-    var inner = locked ? '<span class="rds-icon">lock</span>' : ((t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : '<span class="rds-icon">' + t.ic + '</span>');
+    var mark = toolMark(t);
+    var inner = locked ? '<span class="rds-icon">lock</span>' : (mark ? '<span class="rds-icon">' + mark + '</span>' : ((t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : '<span class="rds-icon">' + t.ic + '</span>'));
     return '<span class="hv-tbadge' + (locked ? ' locked' : '') + '" data-tb="' + t.act + '" aria-hidden="true">' + inner + '</span>';
   }
   function homeToolTile(t, locked, fresh) {
-    var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : (locked ? ric(t.ic) : liveIcon(t));
+    var mark = toolMark(t);
+    var icon = mark ? (locked ? '<span class="rds-icon">' + mark + '</span>' : liveIcon(t, mark)) : ((t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : (locked ? ric(t.ic) : liveIcon(t)));
     // A1: the Specialty Kits tile names the doctor's own kit once one is known (profile or chosen).
     if (t.act === "speckit") { var mk = ""; try { mk = (window.SMD_KITS && SMD_KITS.myLabel) ? SMD_KITS.myLabel() : ""; } catch (e) {} if (mk) t = { act: t.act, ic: t.ic, tt: t.tt, sub: "My kit: " + mk, defOn: t.defOn, feat: t.feat }; }
     // BETA chip: these models are clinically unvalidated, so the label rides the tile on EVERY path
