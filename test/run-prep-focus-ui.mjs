@@ -68,7 +68,7 @@ try {
   await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_SETUP=false; window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
-  await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.removeItem("smd_prep_v1");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
+  await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.removeItem("smd_prep_v1"); localStorage.setItem("smd_prep_focus","0");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await call("Page.navigate", { url: BASE + "?prep=1" }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean);
 
   // Wall clock under test control: Focus reads Date.now(), so the session can be moved forward.
@@ -80,13 +80,13 @@ try {
       authorize:function(){__nat.push("authorize"); return Promise.resolve({authorized:true});}, pick:function(){__nat.push("pick"); return Promise.resolve({apps:3});},
       start:function(o){__nat.push("start:"+(o.endsAt?"t":"w")+(o.strict?"s":"")); if(o.web) __nat.push("web"); return Promise.resolve({shielding:true});}, schedule:function(o){__nat.push("schedule:"+o.items.length); window.__sch=o.items; return Promise.resolve({});}, stop:function(){__nat.push("stop"); return Promise.resolve({});} }; return 1;`);
 
-  // Flag off first: the Play row is still the Focus room.
+  // Flag turned off ("0") first: the Play row is still the Focus room.
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!window.PREP_PLAY && !!document.querySelector("#smdPrep [data-act=v-focus]");`, 20000), "PrepNucleus opens with the Play Focus row");
   ok(await ev(`return !window.PREP_FOCUS && /Focus room/.test(document.querySelector("#smdPrep [data-act=v-focus]").textContent);`) === true, "flag off: no PREP_FOCUS, the row is the Focus room");
 
-  // Flag on.
-  await ev(`localStorage.setItem("smd_prep_focus","1"); return 1;`);
+  // Flag unset: on by default (owner 2026-11-28).
+  await ev(`localStorage.removeItem("smd_prep_focus"); return 1;`);
   await call("Page.navigate", { url: BASE + "?prep=1" }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await theme(false);
   await ev(`window.__off=0; var _n=Date.now.bind(Date); Date.now=function(){return _n()+window.__off;}; window.__la=[]; window.SMD_liveActivity={upsert:function(o){__la.push("up:"+o.key+":"+(o.endsAt?"t":"w"));}, end:function(k){__la.push("end:"+k);}}; window.__nat=[]; window.Capacitor=window.Capacitor||{}; window.Capacitor.Plugins=window.Capacitor.Plugins||{};
     window.Capacitor.Plugins.SmdFocus={ status:function(){__nat.push("status"); return Promise.resolve({available:true,authorized:true,apps:3,categories:1,domains:1});},
@@ -95,6 +95,13 @@ try {
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!window.PREP_FOCUS && !!document.querySelector("#smdPrep [data-act=v-focus]");`, 20000), "flag on: prep-loader.js loads prep-focus.js");
   ok(/Focus/.test(await text("#smdPrep [data-act=v-focus] b")) && !/room/.test(await text("#smdPrep [data-act=v-focus] b")), "the Play row is now Focus (" + await text("#smdPrep [data-act=v-focus]") + ")");
+  // Practise grid: Focus has its own amber tile (owner 2026-11-28) and it opens Focus.
+  ok(await ev(`var t=document.querySelector("#smdPrep .pn-home > .pn-grid4 > .fo-tile[data-act=fo-home]"); if(!t) return false; t.scrollIntoView({block:"center"}); return getComputedStyle(t.querySelector(".pn-ri")).backgroundColor === "rgb(239, 192, 123)";`) === true, "Practise grid has the amber Focus tile");
+  await sleep(400); await shot("ph-grid");
+  await click("#smdPrep .fo-tile[data-act=fo-home]");
+  ok(await until(`return !!document.querySelector("#smdPrep .fo-home .fo-ring");`, 4000), "the Focus tile opens Focus");
+  await click("#smdPrep [data-act=back]");
+  ok(await until(`return !!document.querySelector("#smdPrep [data-act=v-focus]");`, 4000), "back from Focus returns to PrepNucleus home");
   await click("#smdPrep [data-act=v-focus]");
   ok(await until(`return !!document.querySelector("#smdPrep .fo-home .fo-ring");`, 4000), "Focus home: the goal ring");
   ok(await until(`return /3 apps, 1 category, 1 website/.test(document.querySelector("#smdPrep .fo-home").textContent);`, 3000), "blocking row shows what is picked (from the plugin)");
@@ -103,6 +110,17 @@ try {
   ok(await ev(`return !!document.querySelector('#smdPrep [data-act=fo-blk][aria-checked="true"]');`) === true, "Block during focus switches on");
   await sleep(900); await shot("home");
   ok(!(await overflow()), "nothing wider than the screen on Focus home");
+
+  // Custom timer (owner 2026-11-28): type a time, step it, use it.
+  await click("#smdPrep [data-act=fo-custom]");
+  ok(await until(`return !!document.querySelector("#foSheet #foC_dur");`, 2000), "Custom opens a sheet with a minutes field");
+  await ev(`var i=document.getElementById("foC_dur"); i.value="35"; return 1;`);
+  await click('#foSheet [data-act=fo-step][data-v="dur:5"]');
+  ok(await ev(`return document.getElementById("foC_dur").value;`) === "40", "+ steps the field by 5");
+  await sleep(300); await shot("custom-timer");
+  await click("#foSheet [data-act=fo-csave]");
+  ok(await until(`return !document.getElementById("foSheet") && PREP._host.store().fo.dur === 40;`, 2000), "Use this saves 40 min");
+  ok(/Custom · 40m/.test(await text("#smdPrep .fo-home [data-act=fo-custom]")), "the Custom chip shows the time and is selected");
 
   // Website blocking (Pro extra; PrepPro does not enforce here, so it is open).
   ok(await ev(`return !!document.querySelector('#smdPrep [data-act=fo-web][aria-checked="false"]');`) === true, "Block websites too shows once websites are picked");
@@ -129,9 +147,17 @@ try {
   ok(await until(`return window.__sch.length === 1;`, 2000), "Remove drops it from the plugin");
   ok(!(await overflow()), "nothing wider than the screen with schedules");
 
-  // Pomodoro choice, then back to a 25 min timer.
+  // Pomodoro choice, custom Pomodoro, then back to a 25 min timer.
   await click('#smdPrep [data-act=fo-mode][data-v="pomo"]');
   ok(/25 \+ 5 x 4/.test(await text("#smdPrep .fo-home")), "Pomodoro shows its block choices");
+  await click("#smdPrep [data-act=fo-pcustom]");
+  ok(await until(`return !!document.querySelector("#foSheet #foC_f") && !!document.querySelector("#foSheet #foC_b") && !!document.querySelector("#foSheet #foC_n");`, 2000), "custom Pomodoro asks focus, break and rounds");
+  await ev(`document.getElementById("foC_f").value="40"; document.getElementById("foC_b").value="8"; document.getElementById("foC_n").value="3"; return 1;`);
+  await sleep(300); await shot("custom-pomo");
+  ok(!(await overflow()), "nothing wider than the screen in the custom sheet");
+  await click("#foSheet [data-act=fo-csave]");
+  ok(await until(`var f=PREP._host.store().fo; return f.pomo === "c" && f.pc.f === 40 && f.pc.b === 8 && f.pc.n === 3;`, 2000), "custom Pomodoro is saved");
+  ok(/40 \+ 8 x 3/.test(await text("#smdPrep .fo-home [data-act=fo-pcustom]")), "its chip reads 40 + 8 x 3");
   await click('#smdPrep [data-act=fo-mode][data-v="timer"]'); await click('#smdPrep [data-act=fo-dur][data-v="25"]');
   ok(await ev(`return PREP._host.store().fo.mode === "timer" && PREP._host.store().fo.dur === 25;`) === true, "mode and duration are saved");
 

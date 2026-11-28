@@ -496,8 +496,24 @@
     if (!FLAGS.study && !FLAGS.discovery && !FLAGS.breakMode) return "";
     var n = 0; try { n = Object.keys((host.store() || {}).mgsv || {}).length; } catch (e) {}
     var ico = host && host.ico ? host.ico : function () { return ""; };
-    return '<div class="pn-mgh"><button type="button" class="pn-next" data-act="mg-open"><span class="pn-ri" aria-hidden="true">' + ico("play") +
-      '</span><span class="pn-rb"><small>PrepReels</small><b>Questions, videos, images</b></span>' + ico("chev") + "</button>" +
+    // Owner 2026-11-28: glowing card with sliding motion, "mixture of A and B" from the variants page, in palette 02
+    // Amber & Violet (vault/design/palettes). A: a light travels round the edge, and a mini reel on the right slides a
+    // question, a video and an image up in turn. B: a strip of what the feed holds glides past under the title.
+    // The strip names the feed's real card kinds, never sample content. prep.css .pn-mgx.
+    var svg = function (d) { return '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' + d + "</svg>"; };
+    var KINDS = [
+      ["q", svg('<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 0 1 5 .9c0 1.7-2.5 2.2-2.5 3.6M12 17.2h.01"/>'), "Questions", "Tap to answer"],
+      ["v", svg('<path d="M8 5.5v13l11-6.5z"/>'), "Videos", "Official channels"],
+      ["i", svg('<rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M4 17l5-5 4 4 2.5-2.5L20 18"/><circle cx="15.5" cy="9" r="1.4"/>'), "Images", "Spot the diagnosis"],
+      ["p", svg('<path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/>'), "Pearls", "One-line facts"],
+      ["l", svg('<path d="M4.5 5.5A2 2 0 0 1 6.5 3.5H19v15H6.5a2 2 0 0 0-2 2z"/><path d="M4.5 20.5v-15"/>'), "Lessons", "Short stories"]
+    ];
+    var tiles = KINDS.map(function (k) { return '<span class="pn-mgx-k ' + k[0] + '">' + k[1] + "<b>" + k[2] + "</b><small>" + k[3] + "</small></span>"; }).join("");
+    return '<div class="pn-mgh"><button type="button" class="pn-next pn-mgx" data-act="mg-open" aria-label="PrepReels: questions, videos, images, pearls and lessons, one swipe each">' +
+      '<span class="pn-mgx-in" aria-hidden="true"><span class="pn-mgx-glow"></span>' +
+      '<span class="pn-mgx-top"><span class="pn-ri">' + ico("play") + '</span><span class="pn-rb"><small>PrepReels</small><b>Questions, videos, images</b></span>' +
+      '<span class="pn-mgx-reel">' + KINDS.slice(0, 3).map(function (k) { return '<i class="' + k[0] + '">' + k[1] + "</i>"; }).join("") + "</span></span>" +
+      '<span class="pn-mgx-strip"><span class="pn-mgx-track">' + tiles + tiles + "</span></span></span></button>" +
       (n ? '<button type="button" class="pn-next pn-mgh-sv" data-act="mg-saved" aria-label="Saved from PrepReels, ' + n + (n === 1 ? " card" : " cards") + '"><span class="pn-ri" aria-hidden="true">' + ico("bm") + '</span><span class="pn-rb"><small>Saved</small><b>' + n + "</b></span></button>" : "") + "</div>";
   }
 

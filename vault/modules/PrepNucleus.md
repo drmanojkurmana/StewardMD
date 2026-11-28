@@ -68,11 +68,14 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
   `v1/ids/` index). See "Share IDs".
 
 ## Focus (2026-11-28, `prep-focus.js`, loader `prep203`, branch `feat/prep-focus`)
-Owner: Regain-like focus timer with app blocking. Flag `smd_prep_focus` default OFF. Replaces the Play Focus room row when
+Owner: Regain-like focus timer with app blocking. Flag `smd_prep_focus` default ON since 2026-11-28 (loader `prep204`; `"0"` off). Own amber tile in the Practise grid (prep205; full-width bar when alone on its row). Replaces the Play Focus room row when
 on. Timer / Pomodoro / Stopwatch, goal ring, answers during a session counted and tagged by subject, Leave early? sheet,
 summary, timeline, week, recent. App blocking through the native `SmdFocus` plugin (iOS built in a Mac session; JS fails
 open without it). Strict mode is a Pro extra once `smd_prep_pro_enforce` is on. Brief and plugin contract:
 [[plans/PrepNucleus-Focus]]. Tests: `test/prep-focus.test.mjs`, `test/run-prep-focus-ui.mjs`. Not seen on a phone yet.
+iOS native (2026-11-28, branch `feat/prep-focus-ios`): `ios/App/App/SmdFocusPlugin.swift` (+ `SmdFocusShared.swift`) and
+extensions `ios/App/FocusMonitor`, `FocusShield`, `FocusShieldAction` (bundle IDs `in.stewardmd.app.Focus*`). Extensions
+build signed for device with the app (all checks in the plan); the on-phone acceptance is still open.
 
 ## Startup clip (2026-11-26, `prep-startup.js?v=pnstart3`, loader `prep199`)
 Owner supplied two silent intro clips (cosmos to cell to logo on cream). `prep/startup/prep-startup-v.mp4` (1512x2688,

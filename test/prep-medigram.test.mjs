@@ -201,9 +201,14 @@ test("wiring: loader fetches PrepReels only when on; prep.js hooks stay guarded;
   assert.match(prep, /G\.PREP_MEDIGRAM \? G\.PREP_MEDIGRAM\.homeHtml\(HOST\)/);
   assert.match(css, /\.pn-mg-btn \{[^}]*min-height: 52px/);
   assert.match(css, /prefers-reduced-motion: reduce/);
-  assert.match(css, /#42cdb5/i);
-  assert.doesNotMatch(css, /linear-gradient|radial-gradient/);
-  assert.equal((css.match(/(^|[^-])backdrop-filter:/g) || []).length, 1, "the only blur is the glass video controls");
+  // Owner 2026-11-28: the feed wears palette 02 Amber & Violet (vault/design/palettes), glow and gradients included,
+  // scoped to the PrepReels screen. Gradients live only in that block; its motion stops under reduced motion and Low Power.
+  const pal = css.indexOf("Palette 02 Amber & Violet inside PrepReels");
+  assert.ok(pal > 0, "the palette 02 block is there");
+  assert.match(css, /\.pn-root:has\(> \.pn-body\.pn-mg\) \{[^}]*--mg-amber: #f4a62a[^}]*--mg-violet|--mg-violet: #6a5acd/);
+  assert.doesNotMatch(css.slice(0, pal), /linear-gradient|radial-gradient/, "no gradients outside the palette block");
+  assert.match(css.slice(pal), /html\.smd-low-power \.pn-root \.pn-body\.pn-mg::before \{ animation: none; \}/);
+  assert.equal((css.match(/(^|[^-])backdrop-filter: (?!none)/g) || []).length, 1, "the only blur is the glass video controls");
   const ui = read("prep-medigram.js");
   assert.match(ui, /data-act="mg-done">Finish/);
   assert.doesNotMatch(ui, /data-act="mg-cadence"/);
@@ -222,7 +227,12 @@ test("home card: one PrepReels card in the Solve next style, Saved beside it onc
   assert.ok(mg, "PREP_MEDIGRAM registered");
   const host = (mgsv) => ({ ico: (n) => `<ico-${n}/>`, store: () => ({ mgsv }) });
   const html = mg.homeHtml(host({}));
-  assert.match(html, /^<div class="pn-mgh"><button type="button" class="pn-next" data-act="mg-open"><span class="pn-ri" aria-hidden="true"><ico-play\/><\/span><span class="pn-rb"><small>PrepReels<\/small><b>[^<]+<\/b><\/span><ico-chev\/><\/button><\/div>$/);
+  // Glowing card (owner 2026-11-28, palette 02, mix of variants A and B): rim, glow, play chip, mini reel of three
+  // kinds and a strip of the feed's five kinds drawn twice for the loop; the label carries the full text.
+  assert.match(html, /^<div class="pn-mgh"><button type="button" class="pn-next pn-mgx" data-act="mg-open" aria-label="PrepReels: questions, videos, images, pearls and lessons, one swipe each"><span class="pn-mgx-in" aria-hidden="true"><span class="pn-mgx-glow"><\/span><span class="pn-mgx-top"><span class="pn-ri"><ico-play\/><\/span><span class="pn-rb"><small>PrepReels<\/small><b>Questions, videos, images<\/b><\/span><span class="pn-mgx-reel">/);
+  assert.equal((html.match(/<i class="[qvi]">/g) || []).length, 3, "the mini reel slides a question, a video and an image");
+  for (const k of ["Questions", "Videos", "Images", "Pearls", "Lessons"]) assert.equal(html.split("<b>" + k + "</b>").length - 1, 2, "the strip shows " + k + " (twice, for the loop)");
+  assert.ok(html.endsWith("</span></span></span></button></div>"), "no Saved button and nothing after the strip");
   assert.doesNotMatch(html, /mg-saved/, "no Saved button with nothing saved");
   const two = mg.homeHtml(host({ a: {}, b: {} }));
   assert.match(two, /data-act="mg-saved" aria-label="Saved from PrepReels, 2 cards"/);

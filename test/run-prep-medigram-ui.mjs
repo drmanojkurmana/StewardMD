@@ -9,6 +9,7 @@ import { freePort } from "./free-port.mjs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import fs from "node:fs";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || await freePort()) + "/").replace(/\/?$/, "/");
 const PORT = +(process.env.CHROME_PORT || await freePort()), userDir = "/tmp/prep-mg-chrome-" + PORT + "-" + Date.now();
@@ -72,6 +73,13 @@ try {
   const kinds = await ev(`var k={}; document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').forEach(function(e){ k[e.classList.contains('vf-q')?'q':e.classList.contains('vf-pearl')?'pearl':e.classList.contains('pn-mg-vid')?'video':e.classList.contains('vf-img')?'img':e.classList.contains('pn-mg-lib')?'lib':e.classList.contains('vf-end')?'end':'lesson']=1; }); return Object.keys(k).sort().join(",");`);
   ok(/q/.test(kinds) && /video/.test(kinds) && /pearl/.test(kinds) && /end/.test(kinds), "the reel mixes formats (questions, pearls, videos, end card): " + kinds);
   ok(await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-c').classList.contains('vf-q');`) === true, "the first card is a question");
+  // SHOTS=<dir> saves the first reel cards and an answered question (palette work, owner 2026-11-28). Off by default.
+  if (process.env.SHOTS) {
+    const snap = async (name) => { await sleep(500); const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) fs.writeFileSync(join(process.env.SHOTS, "mg-" + name + ".png"), Buffer.from(r.result.data, "base64")); };
+    const n = await ev(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length;`);
+    for (let c = 0; c < Math.min(5, n); c++) { await ev(`var f=document.getElementById('pnMgFeed'), c=f.querySelectorAll('.vf-c')[${c}]; f.scrollTop=c.offsetTop; return 1;`); await snap("card" + c); }
+    await ev(`document.getElementById('pnMgFeed').scrollTop=0; return 1;`);
+  }
   ok(await ev(`var f=document.querySelector('#smdPrep #pnMgFeed .vf-c .pn-mg-from'); return !!f && /Sent by Asha Rao/.test(f.textContent) && /ana-bones-ossification/.test(document.querySelector('#smdPrep #pnMgFeed .vf-c .vf-stem').textContent);`) === true, "a card a friend sent comes first, marked with who sent it");
   ok(await until(`return window.__seen.length === 1 && window.__seen[0].ids[0] === 7;`, 3000), "and leaves the inbox once shown");
   ok(await ev(`return [].every.call(document.querySelectorAll('#smdPrep #pnMgFeed .vf-c:not(.vf-end)'), function(c){ return !!c.querySelector('[data-act=mg-like]') && !!c.querySelector('[data-act=mg-share]'); });`) === true, "every card has Like and Share");
@@ -218,7 +226,7 @@ try {
   ok(await ev(`return !!(window.PREP_SOUND && window.PREP_SOUND.isPlaying());`) === true, "Play starts the first-party ambience (playing state)");
   ok(await ev(`return !!(window.PREP_SOUND_WEB && window.PREP_SOUND_WEB.supported() && window.PREP_SOUND_WEB.current());`) === true, "a live WebAudio track backs the playing state");
   await sleep(1500);
-  ok(await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1 && !e.closest(".pn-strip")) o.push(1);}); return o.length;`) === 0, "after a 1500ms settle nothing in #smdPrep is wider than the 390 px screen");
+  ok(await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1 && !e.closest(".pn-strip, .pn-mgx-strip")) o.push(1);}); return o.length;`) === 0, "after a 1500ms settle nothing in #smdPrep is wider than the 390 px screen");
   // Now Playing card (rs-player-ui): the same card renders ambience in the Sound
   // sheet — play shows pause, progress (elapsed) and the volume control present.
   ok(await ev(`return !!document.querySelector('.pn-sound-sheet .pn-player');`) === true, "Sound sheet shows the shared Now Playing card for ambience");
