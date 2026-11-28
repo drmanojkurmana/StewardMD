@@ -749,4 +749,19 @@ describe("PaperOrchestra UI integration", () => {
     const res4 = await loadCasePromise("p_cr_4");
     assert.deepEqual(res4, { id: "case", diagnosis: "Raw record", age: 70 });
   });
+
+  test("mapPoError surfaces trim guidance and sortSections ranks numbered 5-references at end", () => {
+    const mapPoError = globalThis.SMD_RESEARCH.screens.manuscript._mapPoError;
+    const sortSections = globalThis.SMD_RESEARCH.screens.manuscript._sortSections;
+    assert.equal(
+      mapPoError({ code: "ceiling_input_tokens", message: "Input for outline (~18200 tokens) exceeds the 16000-token model limit. Trim quotes and try again." }),
+      "Input for outline (~18200 tokens) exceeds the 16000-token model limit. Trim quotes and try again."
+    );
+    const ordered = sortSections([
+      { id: "5-references", heading: "5. References", text: "1. Ref." },
+      { id: "results", heading: "Results", text: "Res." },
+      { id: "abstract", heading: "Abstract", text: "Abs." }
+    ]);
+    assert.deepEqual(ordered.map((s) => s.id), ["abstract", "results", "5-references"]);
+  });
 });

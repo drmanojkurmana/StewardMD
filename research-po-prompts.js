@@ -79,11 +79,15 @@
     "   intervals, p-values, sample sizes, heterogeneity) MUST be inserted as the",
     "   token {{run:<runId>.<fieldPath>}} exactly as listed in experimental_log.md.",
     "   Never type a raw statistical number. Years, reviewer counts and stated",
-    "   thresholds are the only allowed bare numbers.",
-    "2. Every citation MUST use a key from the provided reference library",
-    "   (\\cite{key}); every cited work must resolve to a DOI or PMID.",
+    "   thresholds (such as 95% CI) are the only allowed bare numbers; write counts",
+    "   without a run token (such as study counts) in words or in Methods.",
+    "2. Every \\cite{key} MUST use a key from the provided reference library",
+    "   that carries a DOI or PMID. Included trials that only have a manual",
+    "   bibliographic citation without a DOI or PMID must be cited by their",
+    "   study label (e.g. Aronson 1948) in prose and tables, never with an",
+    "   invented DOI or PMID.",
     "3. Every claim sentence in Results and Discussion MUST carry a source link:",
-    "   a {{run:...}} token or a citation.",
+    "   a {{run:...}} token or a \\cite{key} with a verified DOI or PMID.",
     "4. Direction and significance words must agree with the token values:",
     "   \"reduced\"/\"decreased\" needs an estimate below the null (1 for OR/RR/HR,",
     "   0 for MD/RD); \"increased\" needs above; \"significant\" needs a confidence",
@@ -383,7 +387,57 @@
     return keys;
   }
 
-  function orderCitationKeys(keys, priorityKeys) {
+  function estimatePromptTokens(text) {
+    return Math.floor(String(text == null ? "" : text).length / 4) + 1;
+  }
+
+  function normSecTitle(s) {
+    return String(s || "").toLowerCase().replace(/^\d+\.\s*/, "").replace(/[^a-z0-9]+/g, " ").trim();
+  }
+
+  function compactOutlineForSection(outlineJsonStr, sectionTitle) {
+    if (!outlineJsonStr || outlineJsonStr.length < 3000 || !sectionTitle) return outlineJsonStr || "{}";
+    var parsed;
+    try { parsed = JSON.parse(outlineJsonStr); } catch (e) { return outlineJsonStr; }
+    if (!parsed || typeof parsed !== "object" || !Array.isArray(parsed.section_plan)) return outlineJsonStr;
+    var targetNorm = normSecTitle(sectionTitle);
+    var compactPlan = [];
+    for (var i = 0; i < parsed.section_plan.length; i++) {
+      var item = parsed.section_plan[i] || {};
+      var itemNorm = normSecTitle(item.section_title || item.section_name || "");
+      var isTarget = itemNorm === targetNorm ||
+        (targetNorm && itemNorm && (itemNorm.indexOf(targetNorm) >= 0 || targetNorm.indexOf(itemNorm) >= 0));
+      if (isTarget) {
+        compactPlan.push(item);
+      } else {
+        var subTitles = [];
+        var subs = Array.isArray(item.subsections) ? item.subsections : [];
+        for (var si = 0; si < subs.length; si++) {
+          if (subs[si] && subs[si].subsection_title) subTitles.push(subs[si].subsection_title);
+        }
+        compactPlan.push({
+          section_title: item.section_title || ("Section " + (i + 1)),
+          subsections: subTitles
+        });
+      }
+    }
+    var outObj = { section_plan: compactPlan };
+    if (Array.isArray(parsed.plotting_plan) && parsed.plotting_plan.length) {
+      outObj.plotting_plan = parsed.plotting_plan.map(function (fp) {
+        return { figure_id: fp && fp.figure_id, title: fp && fp.title };
+      });
+    }
+    return JSON.stringify(outObj, null, 2);
+  }
+
+  function isRequiredCitationEntry(data) {
+    if (!data || typeof data !== "object") return false;
+    if (data.isIncludedStudy) return true;
+    var dec = String(data.screeningDecision || "").toLowerCase();
+    return dec === "include" || data.included === true;
+  }
+
+  function orderCitationKeys(keys, priorityKeys, citationMap) {
     var ordered = [];
     var seen = {};
     var pri = Array.isArray(priorityKeys) ? priorityKeys : [];
@@ -396,11 +450,29 @@
         ordered.push(pk);
       }
     }
+    var map = citationMap || {};
+    var includedStudyKeys = [];
+    var screenedIncludeKeys = [];
+    var otherKeys = [];
+    var excludedKeys = [];
     for (var ki = 0; ki < keys.length; ki++) {
       var k = keys[ki];
-      if (!seen[k]) {
-        seen[k] = true;
-        ordered.push(k);
+      if (seen[k]) continue;
+      var entry = map[k] || {};
+      var dec = String(entry.screeningDecision || "").toLowerCase();
+      if (entry.isIncludedStudy) includedStudyKeys.push(k);
+      else if (dec === "include" || entry.included === true) screenedIncludeKeys.push(k);
+      else if (dec === "exclude") excludedKeys.push(k);
+      else otherKeys.push(k);
+    }
+    var groups = [includedStudyKeys, screenedIncludeKeys, otherKeys, excludedKeys];
+    for (var gi = 0; gi < groups.length; gi++) {
+      for (var gj = 0; gj < groups[gi].length; gj++) {
+        var gk = groups[gi][gj];
+        if (!seen[gk]) {
+          seen[gk] = true;
+          ordered.push(gk);
+        }
       }
     }
     return ordered;
@@ -410,49 +482,75 @@
     var keys = citationMap ? Object.keys(citationMap) : [];
     if (!keys.length) return "No citation data provided.";
     var o = opts || {};
-    var ordered = orderCitationKeys(keys, o.priorityKeys);
+    var priList = Array.isArray(o.priorityKeys) ? o.priorityKeys : [];
+    var priSet = {};
+    for (var pi = 0; pi < priList.length; pi++) priSet[priList[pi]] = true;
+    var ordered = orderCitationKeys(keys, priList, citationMap);
     var maxChars = o.maxChars > 0 ? o.maxChars : 0;
-    var compact = !!o.compact || (maxChars > 0 && ordered.length > 25);
-    var context = "### REFERENCE LIBRARY (Use these keys for \\cite{})\n";
+    var compact = !!o.compact || (maxChars > 0 && ordered.length > 20);
+    var context = "### REFERENCE LIBRARY (Use \\cite{key} for entries with DOI/PMID; cite included trials without DOI/PMID by study label)\n";
+    var omittedOptional = 0;
     for (var i = 0; i < ordered.length; i++) {
       var key = ordered[i];
       var data = citationMap[key] || {};
-      var title = data.title || "Unknown Title";
+      var title = data.title || data.citation || data.label || "Unknown Title";
       var authorsList = Array.isArray(data.authors) ? data.authors : [];
       var authors = compact
         ? (authorsList.length > 1 ? authorsList[0] + " et al." : (authorsList[0] || ""))
         : authorsList.slice(0, 3).join(", ") + (authorsList.length > 3 ? " et al." : "");
-      var year = data.year != null ? data.year : "N/A";
+      var year = data.year != null ? data.year : "";
       var abs = data.abstract ? String(data.abstract) : "";
-      var idTag = data.pmid ? ("PMID:" + data.pmid) : (data.doi ? ("DOI:" + data.doi) : "");
+      var ext = data.externalIds || {};
+      var doi = data.doi || ext.DOI || "";
+      var pmid = data.pmid || ext.PMID || "";
+      var idTag = pmid ? ("PMID:" + pmid) : (doi ? ("DOI:" + doi) : "");
+      var dec = String(data.screeningDecision || "").toLowerCase();
+      var roleTag = "";
+      if (data.isIncludedStudy) {
+        roleTag = idTag
+          ? ("[INCLUDED STUDY" + (data.label ? ": " + data.label : "") + "] ")
+          : ("[INCLUDED STUDY - cite in prose as \"" + (data.label || key) + "\", no DOI/PMID] ");
+      } else if (dec === "include" || data.included === true) {
+        roleTag = "[SCREENED INCLUDE] ";
+      } else if (dec === "exclude") {
+        roleTag = "[EXCLUDED RECORD] ";
+      }
+      var isRequired = !!(priSet[key] || isRequiredCitationEntry(data));
       var entry;
       if (compact) {
-        entry = "--- " + key + " | " + (authors ? authors + " (" + year + ") " : "(" + year + ") ") +
-          title + (idTag ? " [" + idTag + "]" : "") + "\n";
+        var metaHead = (authors ? authors + (year ? " (" + year + ") " : " ") : (year ? "(" + year + ") " : ""));
+        entry = "--- " + key + " | " + roleTag + metaHead + title + (idTag ? " [" + idTag + "]" : "") + "\n";
       } else {
         entry = "--- Key: " + key + " ---\n" +
+          (roleTag ? "Role: " + roleTag + "\n" : "") +
           "Title: " + title + "\n" +
-          "Authors: " + authors + " (" + year + ")" + (idTag ? " [" + idTag + "]" : "") + "\n" +
+          (authors || year ? ("Authors: " + authors + (year ? " (" + year + ")" : "") + (idTag ? " [" + idTag + "]" : "") + "\n") : (idTag ? "ID: " + idTag + "\n" : "")) +
+          (data.citation && data.title ? ("Citation: " + data.citation + "\n") : "") +
           (abs ? "Abstract: " + abs + "\n\n" : "\n");
       }
-      if (maxChars > 0 && context.length + entry.length > maxChars && i > 0) {
-        context += "[+" + (ordered.length - i) + " additional verified references omitted to fit model input budget]\n";
-        break;
+      if (maxChars > 0 && context.length + entry.length > maxChars && !isRequired && i > 0) {
+        omittedOptional++;
+        continue;
       }
       context += entry;
+    }
+    if (omittedOptional > 0) {
+      context += "[+" + omittedOptional + " unscreened/excluded search records beyond input budget; all included studies and screened-include records are listed above]\n";
     }
     return context;
   }
 
   function buildSectionPrompt(opts) {
     var o = opts || {};
-    var outlineStr = o.outlineJsonStr || "{}";
+    var rawOutlineStr = o.outlineJsonStr || "{}";
+    var outlineStr = compactOutlineForSection(rawOutlineStr, o.sectionTitle);
     var ideaStr = o.ideaMd || "";
     var expStr = o.experimentalLogMd || "";
     var guideStr = o.guidelinesMd || GUIDELINES;
     var tmplStr = o.templateTex || IMRAD_TEMPLATE;
-    var baseLen = SECTION_WRITING_AGENT_PROMPT.length + outlineStr.length + ideaStr.length + expStr.length + guideStr.length + tmplStr.length + 1200;
-    var libBudget = Math.max(8000, 52000 - baseLen);
+    var maxPromptChars = o.maxPromptChars > 0 ? o.maxPromptChars : 55000;
+    var baseLen = SECTION_WRITING_AGENT_PROMPT.length + outlineStr.length + ideaStr.length + expStr.length + guideStr.length + tmplStr.length + (o.sectionTitle ? String(o.sectionTitle).length + 180 : 0) + (o.retryReason ? String(o.retryReason).length + 140 : 0) + 1400;
+    var libBudget = Math.max(400, maxPromptChars - baseLen);
     var priKeys = Array.isArray(o.priorityKeys) ? o.priorityKeys : extractCitedKeyList(outlineStr + "\n" + ideaStr);
     var citationLibraryContent = formatCitationLibrary(o.citationMap, {
       maxChars: libBudget,
@@ -489,7 +587,7 @@
       "2. Generate LaTeX content for those sections based on `outline.json`.",
       "3. Construct tables using data from `experimental_log.md`.",
       "4. Insert figures using the filenames from the 'figures_list' input.",
-      "5. Use citations from the Reference Library.",
+      "5. Cite included trials by their study label (e.g., Aronson 1948, Ferguson & Simes 1949) and cite verified records carrying a DOI or PMID using \\cite{key} from the Reference Library.",
       "6. Return the **full** compilable LaTeX file.",
       ""
     ].join("\n");
@@ -584,19 +682,25 @@
       mapObj = strOrMap;
     }
     if (!mapObj) return "{}";
-    var ordered = orderCitationKeys(Object.keys(mapObj), extractCitedKeyList(currentTex));
+    var cited = extractCitedKeyList(currentTex);
+    var citedSet = {};
+    for (var ci = 0; ci < cited.length; ci++) citedSet[cited[ci]] = true;
+    var ordered = orderCitationKeys(Object.keys(mapObj), cited, mapObj);
     var out = {};
     for (var i = 0; i < ordered.length; i++) {
       var k = ordered[i];
       var r = mapObj[k] || {};
-      out[k] = {
-        title: r.title || "",
-        year: r.year != null ? r.year : null,
+      var isReq = !!(citedSet[k] || isRequiredCitationEntry(r));
+      var entry = {
+        label: r.label || undefined,
+        title: r.title || r.citation || undefined,
+        year: r.year != null ? r.year : undefined,
         doi: r.doi || undefined,
         pmid: r.pmid || undefined
       };
+      out[k] = entry;
       var s = JSON.stringify(out);
-      if (s.length > maxChars && i > 0) {
+      if (maxChars > 0 && s.length > maxChars && !isReq && i > 0) {
         delete out[k];
         break;
       }
@@ -610,8 +714,9 @@
     var guideStr = o.guidelinesMd || GUIDELINES;
     var expStr = o.experimentalLogMd || "";
     var curTex = o.currentTex || "";
-    var baseLen = CONTENT_REFINEMENT_AGENT_SYSTEM_PROMPT.length + curTex.length + reviewStr.length + guideStr.length + expStr.length + 1400;
-    var citeBudget = Math.max(4000, 52000 - baseLen);
+    var maxPromptChars = o.maxPromptChars > 0 ? o.maxPromptChars : 55000;
+    var baseLen = CONTENT_REFINEMENT_AGENT_SYSTEM_PROMPT.length + curTex.length + reviewStr.length + guideStr.length + expStr.length + (o.retryReason ? String(o.retryReason).length + 140 : 0) + 1400;
+    var citeBudget = Math.max(400, maxPromptChars - baseLen);
     var citeStr = compactCitationJson(o.citationMapJsonStr || o.citationMap || "{}", curTex, citeBudget);
     var userPromptText = [
       "",
@@ -644,8 +749,68 @@
     if (o.retryReason) {
       userPromptText += "\nPrevious attempt failed integrity checks:\n" + o.retryReason + "\nFix every listed violation.";
     }
-    var assembled = curTex + "\n\n" + userPromptText;
-    return { system: CONTENT_REFINEMENT_AGENT_SYSTEM_PROMPT, prompt: assembled };
+    return { system: CONTENT_REFINEMENT_AGENT_SYSTEM_PROMPT, prompt: userPromptText };
+  }
+
+  function summarizeLatexSection(heading, tex) {
+    var s = String(tex || "").replace(/\\(?:section|subsection|subsubsection)\*?\{[^}]*\}/g, " ").replace(/\s+/g, " ").trim();
+    var words = s ? s.split(" ").length : 0;
+    var tokens = s.match(/\{\{run:[^}]+\}\}/g) || [];
+    var cites = extractCitedKeyList(tex);
+    var snippet = s.length > 320 ? (s.slice(0, 220) + " ... " + s.slice(-90)) : s;
+    var parts = ["[" + heading + " (" + words + " words)]: " + snippet];
+    if (tokens.length) parts.push("  tokens: " + tokens.slice(0, 8).join(", "));
+    if (cites.length) parts.push("  cites: " + cites.slice(0, 8).join(", "));
+    return parts.join("\n");
+  }
+
+  function buildSectionRefinementPrompt(opts) {
+    var o = opts || {};
+    var reviewStr = JSON.stringify(o.currentReview || {}, null, 2);
+    var guideStr = o.guidelinesMd || GUIDELINES;
+    var expStr = o.experimentalLogMd || "";
+    var targetTex = o.targetSectionTex || "";
+    var targetTitle = o.targetSectionTitle || "Target Section";
+    var summaries = Array.isArray(o.otherSectionSummaries) ? o.otherSectionSummaries.join("\n") : (o.otherSectionSummaries || "None");
+    var maxPromptChars = o.maxPromptChars > 0 ? o.maxPromptChars : 55000;
+    var baseLen = CONTENT_REFINEMENT_AGENT_SYSTEM_PROMPT.length + targetTex.length + summaries.length + reviewStr.length + guideStr.length + expStr.length + (o.retryReason ? String(o.retryReason).length + 140 : 0) + 1600;
+    var citeBudget = Math.max(400, maxPromptChars - baseLen);
+    var citeStr = compactCitationJson(o.citationMapJsonStr || o.citationMap || "{}", targetTex, citeBudget);
+    var userPromptText = [
+      "",
+      "REFLECTION ITERATION " + (o.round || 1) + " (SECTION-SCOPED REVISION: " + targetTitle + ").",
+      "",
+      "--- PREVIOUS ITERATION LOG ---",
+      o.previousLogStr || "None",
+      "",
+      "--- CURRENT REVIEWER FEEDBACK (Score: " + (o.currentScore != null ? o.currentScore : 0) + ") ---",
+      reviewStr,
+      "",
+      "--- OTHER MANUSCRIPT SECTIONS (Summaries for Context) ---",
+      summaries,
+      "",
+      "--- CONFERENCE GUIDELINES ---",
+      guideStr,
+      "",
+      "--- EXPERIMENTAL LOG (Data Truth) ---",
+      expStr,
+      "",
+      "--- CITATION MAP (Reference Truth) ---",
+      citeStr,
+      "",
+      "--- TARGET SECTION LATEX TO REVISE (" + targetTitle + ") ---",
+      targetTex,
+      "",
+      "INSTRUCTION: ",
+      "1. Address any 'Weaknesses' and 'Questions' relevant to \"" + targetTitle + "\".",
+      "2. Keep all {{run:...}} tokens exact and preserve valid \\cite{...} keys.",
+      "3. Output the JSON Worklog first, then ONLY the full revised LaTeX for \"" + targetTitle + "\" (starting with its \\section command) inside ```latex ... ```.",
+      ""
+    ].join("\n");
+    if (o.retryReason) {
+      userPromptText += "\nPrevious attempt failed integrity checks:\n" + o.retryReason + "\nFix every listed violation.";
+    }
+    return { system: CONTENT_REFINEMENT_AGENT_SYSTEM_PROMPT, prompt: userPromptText };
   }
 
   /* From upstream/autoraters/agent_review.py */
@@ -745,6 +910,22 @@
     };
   }
 
+  function buildSummarizedReviewPrompt(sections) {
+    var list = Array.isArray(sections) ? sections : [];
+    var parts = [];
+    for (var i = 0; i < list.length; i++) {
+      var sec = list[i] || {};
+      var sid = String(sec.id || "").toLowerCase();
+      var heading = sec.heading || sec.id || ("Section " + (i + 1));
+      if (sid === "abstract" || sid === "results" || String(sec.text || "").length <= 1600) {
+        parts.push("\\section{" + heading + "}\n" + (sec.text || ""));
+      } else {
+        parts.push(summarizeLatexSection(heading, sec.text || ""));
+      }
+    }
+    return buildReviewPrompt(parts.join("\n\n"));
+  }
+
   function buildMetaReviewPrompt(reviews) {
     var list = Array.isArray(reviews) ? reviews : [];
     var reviewText = "";
@@ -769,12 +950,17 @@
     META_REVIEWER_SYSTEM_PROMPT: META_REVIEWER_SYSTEM_PROMPT,
     outlineSystemPrompt: outlineSystemPrompt,
     buildOutlinePrompt: buildOutlinePrompt,
+    compactOutlineForSection: compactOutlineForSection,
     formatCitationLibrary: formatCitationLibrary,
     buildSectionPrompt: buildSectionPrompt,
     buildRefinementPrompt: buildRefinementPrompt,
+    summarizeLatexSection: summarizeLatexSection,
+    buildSectionRefinementPrompt: buildSectionRefinementPrompt,
     getAgentReviewSystemPrompt: getAgentReviewSystemPrompt,
     buildReviewPrompt: buildReviewPrompt,
-    buildMetaReviewPrompt: buildMetaReviewPrompt
+    buildSummarizedReviewPrompt: buildSummarizedReviewPrompt,
+    buildMetaReviewPrompt: buildMetaReviewPrompt,
+    estimatePromptTokens: estimatePromptTokens
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = API;

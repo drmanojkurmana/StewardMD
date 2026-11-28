@@ -149,6 +149,9 @@ def run_section_draft(manifest, workdir, client, outline, citation_map=None,
         pieces = []
         max_retries = max(0, int(client.ceilings.get("max_retries", 2)))
         for sec in order:
+            if re.match(r"^(?:\d+\.\s*)?references$", str(sec.get("title") or "").strip(), re.I):
+                pieces.append("\\section*{References}\n")
+                continue
             sec_text = ""
             for attempt in range(max_retries + 1):
                 sid = sec["stepId"] if attempt == 0 else sanitize_step_id(f"{sec['stepId']}:r{attempt}")

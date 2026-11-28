@@ -158,3 +158,35 @@ def test_engine_nested_log_ratio_exponentiated_and_log_scale_stated(tmp_path):
     log_text = inputs.experimental_log_file.read_text()
     assert "display scale" in log_text
     assert "without a trailing %" in log_text
+
+
+def test_collect_merged_references_and_references_section(tmp_path):
+    from paperorchestra.adapter.po_adapter import writer
+    manifest = make_manifest()
+    manifest["evidence"] = [{
+        "studyId": "st_aron",
+        "label": "Aronson 1948",
+        "source": {},
+        "values": [{
+            "field": "effect",
+            "value": 0.49,
+            "verified": True,
+            "locator": {"kind": "manual", "citation": "Aronson JD, Am Rev Tuberc 1948; 58:255-281"},
+            "quote": "4/123 vs 11/139",
+        }],
+    }]
+    inputs = loader.build_inputs(manifest, tmp_path)
+    idea_txt = inputs.idea_file.read_text()
+    assert "citeKey:aronson_1948" in idea_txt
+    assert "Aronson JD, Am Rev Tuberc 1948; 58:255-281" in idea_txt
+    assert any(r.get("key") == "aronson_1948" and r.get("isIncludedStudy") for r in inputs.references)
+
+    man = writer.build_manuscript(
+        title="BCG",
+        sections=[{"id": "5-references", "heading": "5. References", "level": 1, "text": ""}],
+        token_table={},
+        references=inputs.references,
+        manifest=manifest,
+    )
+    ref_sec = [s for s in man["sections"] if s["id"] == "references"][0]
+    assert "Aronson JD, Am Rev Tuberc 1948" in ref_sec["text"]

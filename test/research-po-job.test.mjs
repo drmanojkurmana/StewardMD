@@ -657,3 +657,30 @@ test("manuscript_draft: snapshot build throwing releases reserved credits", { sk
   assert.deepEqual(ledger.map((x) => x.reason), ["reserve", "release"]);
   assert.equal(ledger[0].delta + ledger[1].delta, 0);
 });
+
+test("manuscript_draft: snapshot carries manual study locator.citation and screeningDecision", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  fundWallet(env, "alice@example.com", 500);
+  const p = await makeProject(env, "tok-alice", "systematic_review", "BCG review", "Does BCG prevent TB?");
+  lockProtocol(env, p.id);
+  addRun(env, p.id, "r1");
+  const now = Date.now();
+  env.RESEARCH_DB._db.prepare(
+    "INSERT INTO research_studies (id,project_id,label,measure,inputs_json,locator_json,quote,verified,created_ts,updated_ts) VALUES ('st_aron',?,'Aronson 1948','RR',?,?,?,1,?,?)")
+    .run(p.id, JSON.stringify({ events1: 4, n1: 123, events2: 11, n2: 139 }), JSON.stringify({ kind: "manual", citation: "Aronson JD, Am Rev Tuberc 1948; 58:255-281", section: "Results" }), "4/123 vs 11/139", now, now);
+  env.RESEARCH_DB._db.prepare(
+    "INSERT INTO research_records (id,project_id,source,external_id,title,authors_json,year,doi,metadata_json,created_ts) VALUES ('rec_inc',?,'pubmed','123456','Colditz BCG meta-analysis',?,1994,'10.1001/jama.1994',?,?)")
+    .run(p.id, JSON.stringify(["Colditz GA"]), JSON.stringify({ venue: "JAMA" }), now);
+  env.RESEARCH_DB._db.prepare(
+    "INSERT INTO research_screening_decisions (id,project_id,record_id,stage,decision,reviewer_uid,created_ts) VALUES ('scr_1',?,'rec_inc','title_abstract','include','alice@example.com',?)")
+    .run(p.id, now);
+
+  const res = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice",
+    { kind: "manuscript_draft", idempotencyKey: "k-cit-snap" });
+  assert.equal(res.http, 202, JSON.stringify(res));
+  const snap = JSON.parse(env.RESEARCH_R2._objects.get(res.job.inputR2Key));
+  const st = snap.evidence.find((e) => e.studyId === "st_aron");
+  assert.ok(st && st.source && st.source.citation === "Aronson JD, Am Rev Tuberc 1948; 58:255-281", "manual locator.citation exposed in study.source");
+  const ref = snap.references.find((r) => r.key === "rec_inc");
+  assert.ok(ref && ref.screeningDecision === "include", "screeningDecision carried on manifest reference");
+});

@@ -899,4 +899,224 @@ describe("UI integration with smd_rmd_ondevice_draft", () => {
     }), (err) => err && err.code === "phi_blocked");
     assert.equal(highRiskModalOpened, false);
   });
+
+  test("included Colditz-style studies and screened records populate citation library and References without LLM call", async () => {
+    await CHECKPOINT._setBackend({ records: {} });
+    const manifest = makeManifest({
+      evidence: [
+        {
+          studyId: "st_aron",
+          label: "Aronson 1948",
+          values: [{
+            field: "events1",
+            value: 4,
+            verified: true,
+            locator: { kind: "manual", citation: "Aronson JD, Am Rev Tuberc 1948; 58:255-281", section: "Results" },
+            quote: "4/123 vaccinated vs 11/139 control"
+          }]
+        },
+        {
+          studyId: "st_ferg",
+          label: "Ferguson & Simes 1949",
+          values: [{
+            field: "events1",
+            value: 6,
+            verified: true,
+            locator: { kind: "manual", citation: "Ferguson RG, Simes AB, Tubercle 1949; 30:5-11", section: "Results" },
+            quote: "6/306 vs 29/303"
+          }]
+        }
+      ],
+      references: [
+        {
+          key: "ref1",
+          title: "Primary randomized trial of BCG vaccination",
+          authors: ["Doe J"],
+          year: 2020,
+          doi: "10.1000/trial1",
+          screeningDecision: "include"
+        },
+        ...Array.from({ length: 60 }, (_, idx) => ({
+          key: "rec_unscr_" + idx,
+          title: "Background cohort " + idx + " on general thoracic epidemiology with extended abstract filler prose",
+          authors: ["Author A" + idx],
+          year: 2010 + (idx % 10),
+          doi: "10.1000/bg." + idx,
+          abstract: "Extended background abstract filler sentence. ".repeat(15)
+        })),
+        {
+          key: "rec_inc_screened",
+          title: "BCG trial included during abstract screening",
+          authors: ["Colditz GA", "Brewer TF"],
+          year: 1994,
+          doi: "10.1001/jama.1994.03510330076038",
+          screeningDecision: "include"
+        }
+      ]
+    });
+
+    const inputs = GATES.buildInputs(manifest);
+    assert.ok(inputs.ideaMd.includes("citeKey:aronson_1948"), "idea.md includes deterministic study citeKey");
+    assert.ok(inputs.ideaMd.includes("Aronson JD, Am Rev Tuberc 1948; 58:255-281"), "idea.md includes locator citation");
+    const citMap = {};
+    for (const r of inputs.references) citMap[r.key] = r;
+    const compactLib = PROMPTS.formatCitationLibrary(citMap, { maxChars: 2400 });
+    assert.ok(compactLib.includes("aronson_1948"), "included study prioritized under tight budget");
+    assert.ok(compactLib.includes("ferguson_simes_1949"), "second included study prioritized under tight budget");
+    assert.ok(compactLib.includes("rec_inc_screened"), "screened include record kept under tight budget");
+
+    assert.equal(
+      GATES.checkNumbers([{ id: "abstract", heading: "Abstract", text: "Heterogeneity I\\textsuperscript{2}={{run:r1.ciUpper}}." }], inputs.tokenTable).length,
+      0,
+      "I\\textsuperscript{2} exponent not flagged as untokenised number"
+    );
+
+    const outlineWithRefs = {
+      ...FULL_OUTLINE,
+      section_plan: [
+        ...FULL_OUTLINE.section_plan,
+        { section_title: "5. References", description: "Included references", key_points: [] }
+      ]
+    };
+    const seenSteps = [];
+    const ms = await DRAFT.run({
+      job: { id: "job_refs_1", projectId: "p1", createdBy: "u1" },
+      manifest,
+      token: "tok-1",
+    }, {
+      checkpoint: CHECKPOINT,
+      maxRefinementRounds: 0,
+      sleep: () => Promise.resolve(),
+      gatewayRequest: async (_url, payload) => {
+        seenSteps.push(payload.stepId);
+        if (payload.stepId === "outline") {
+          return { status: 200, data: { text: "```json\n" + JSON.stringify(outlineWithRefs) + "\n```", model: "m", usage: { inputTokens: 10, outputTokens: 10 } } };
+        }
+        if (payload.stepId === "section:results") {
+          return { status: 200, data: { text: "```latex\n\\section{Results}\nAcross trials \\cite{aronson_1948, rec_inc_screened}, pooled effect was {{run:r1.estimate}}.\n```", model: "m", usage: { inputTokens: 10, outputTokens: 10 } } };
+        }
+        return { status: 200, data: { text: "```latex\n" + sectionLatexFor(payload.stepId) + "\n```", model: "m", usage: { inputTokens: 10, outputTokens: 10 } } };
+      },
+      apiRequest: async () => ({ ok: true }),
+    });
+
+    assert.ok(!seenSteps.some((s) => s.includes("references")), "References section must not consume an LLM step");
+    const refSec = ms.sections.find((s) => s.id === "references");
+    assert.ok(refSec && refSec.text.includes("Aronson JD, Am Rev Tuberc 1948"), "References section lists Aronson 1948");
+    assert.ok(refSec.text.includes("Ferguson RG, Simes AB"), "References section lists Ferguson & Simes 1949");
+    assert.ok(refSec.text.includes("10.1001/jama.1994.03510330076038"), "References section lists cited record");
+    assert.ok(ms.references.length >= 3, "manuscript.references populated");
+  });
+
+  test("per-section refinement avoids T2 16000-token ceiling and preflight rejects oversized inputs cleanly", async () => {
+    await CHECKPOINT._setBackend({ records: {} });
+    const manifest = makeManifest();
+
+    /* buildRefinementPrompt must never duplicate currentTex */
+    const refPrompt = PROMPTS.buildRefinementPrompt({
+      currentTex: "UNIQUE_SECTION_MARKER_XYZ",
+      currentReview: { Overall: 6, Weaknesses: ["w1"], Questions: [] },
+      currentScore: 6,
+      citationMap: { [manifest.references[0].key]: manifest.references[0] },
+      maxPromptChars: 12000
+    });
+    assert.equal(refPrompt.prompt.split("UNIQUE_SECTION_MARKER_XYZ").length - 1, 1, "currentTex appears exactly once");
+
+    /* Pre-flight over-ceiling fails BEFORE spending any gateway call */
+    const hugeManifest = makeManifest({
+      evidence: [{
+        studyId: "s1",
+        label: "LongStudy 2024",
+        source: { title: "S1", doi: "10.1000/trial1" },
+        values: [{
+          field: "effect",
+          value: 0.62,
+          verified: true,
+          locator: { page: 1 },
+          quote: "Very long verbatim quote sentence for trimming test. ".repeat(1400)
+        }]
+      }]
+    });
+    let gwCalls = 0;
+    await assert.rejects(() => DRAFT.run({
+      job: { id: "job_preflight_big", projectId: "p1", createdBy: "u1" },
+      manifest: hugeManifest,
+      token: "tok-1",
+    }, {
+      checkpoint: CHECKPOINT,
+      sleep: () => Promise.resolve(),
+      gatewayRequest: async () => { gwCalls += 1; throw new Error("must not spend gateway calls"); },
+      apiRequest: async () => ({ ok: true }),
+    }), (err) => {
+      assert.equal(err.code, "ceiling_input_tokens");
+      assert.match(err.message, /Trim/i);
+      assert.match(err.message, /16000/);
+      return true;
+    });
+    assert.equal(gwCalls, 0, "pre-flight ceiling rejection spends zero gateway calls");
+
+    /* Large drafted sections trigger per-section refinement while staying <= 16,000 tokens per call */
+    await CHECKPOINT._setBackend({ records: {} });
+    const seenSteps = [];
+    let reviewTurn = 0;
+    const longFiller = "Additional clinical subgroup methodological elaboration sentence without digits. ".repeat(145);
+    const ms = await DRAFT.run({
+      job: { id: "job_persec_refine", projectId: "p1", createdBy: "u1" },
+      manifest,
+      token: "tok-1",
+    }, {
+      checkpoint: CHECKPOINT,
+      maxRefinementRounds: 1,
+      sleep: () => Promise.resolve(),
+      gatewayRequest: async (_url, payload) => {
+        seenSteps.push({ stepId: payload.stepId, chars: (payload.system || "").length + (payload.prompt || "").length });
+        const est = DRAFT.estimateTokens((payload.system || "") + "\n\n" + (payload.prompt || "")) + 1000;
+        assert.ok(est <= 16000, `step ${payload.stepId} est ${est} must fit T2 16,000 ceiling`);
+        if (payload.stepId === "outline") {
+          return { status: 200, data: { text: "```json\n" + JSON.stringify(FULL_OUTLINE) + "\n```", model: "m", usage: { inputTokens: 10, outputTokens: 10 } } };
+        }
+        if (payload.purpose === "review") {
+          reviewTurn += 1;
+          return {
+            status: 200,
+            data: {
+              text: "<THOUGHT>ok</THOUGHT><JSON>" + JSON.stringify({
+                Summary: "ok", Strengths: ["s"], Weaknesses: reviewTurn <= 3 ? ["Clarify."] : [],
+                Originality: 3, Quality: 3, Clarity: 3, Significance: 3,
+                Questions: [], Limitations: [], "Ethical Concerns": false,
+                Soundness: 3, Presentation: 3, Contribution: 3,
+                Overall: reviewTurn <= 3 ? 6 : 8, Confidence: 4, Decision: "Accept"
+              }) + "</JSON>",
+              model: "m",
+              usage: { inputTokens: 10, outputTokens: 10 }
+            }
+          };
+        }
+        if (payload.purpose === "refinement") {
+          const m = String(payload.prompt || "").match(/SECTION-SCOPED REVISION:\s*([^\)\n]+)/);
+          assert.ok(m, "oversized manuscript must invoke section-scoped refinement");
+          const heading = m[1].trim();
+          const secKey = heading.toLowerCase().includes("abstract") ? "abstract" : ("section:" + heading.toLowerCase().replace(/[^a-z]+/g, ""));
+          return {
+            status: 200,
+            data: {
+              text: JSON.stringify({ addressed_weaknesses: ["Clarified"] }) + "\n```latex\n" + sectionLatexFor(secKey) + "\n```",
+              model: "m",
+              usage: { inputTokens: 10, outputTokens: 10 }
+            }
+          };
+        }
+        if (payload.stepId === "abstract") {
+          return { status: 200, data: { text: "```latex\n" + sectionLatexFor("abstract") + "\n```", model: "m", usage: { inputTokens: 10, outputTokens: 10 } } };
+        }
+        return {
+          status: 200,
+          data: { text: "```latex\n" + sectionLatexFor(payload.stepId) + "\n" + longFiller + "\n```", model: "m", usage: { inputTokens: 10, outputTokens: 10 } }
+        };
+      },
+      apiRequest: async () => ({ ok: true }),
+    });
+    assert.equal(ms.v, 1);
+    assert.ok(seenSteps.some((s) => String(s.stepId).startsWith("refine:1:")), "per-section refinement stepIds used");
+  });
 });
