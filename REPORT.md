@@ -1,69 +1,127 @@
-# Sci-Fix J Report: Real Thesis to Journal Article Pipeline & Empty AI Guards
+# sci-fix-I Report: ResearchMD Mobile Scroll Fix & Manuscript Screen Redesign
 
-## Root Cause Analysis (Before)
-1. **Tutorial + own upload trapped in sandbox (`research-tutorial.js`, `research.js`)**:
-   - Uploading a real thesis inside `tut_thesis` kept `proj.tutorial === true`.
-   - `research.js` `aiBarHtml` forced `cost = 0` (`"No MaiK tokens needed"`).
-   - Clicking `Ask MaiK to draft it` called `POST /v1/projects/tut_thesis/ai-draft`, intercepted by `research-tutorial.js` `installApiWrapper`, which returned `{ draft: {}, model: "tutorial-demo", costInr: 0 }` for everything except `publication_consent`.
-2. **Empty AI results displayed `"Drafted by MaiK, check it"` (`research-screen-thesis.js`, `research.js`, `research-screen-manuscript.js`, `research-doc-editor.js`, `research-screen-start.js`, `research-screen-grade.js`)**:
-   - `applyDraft({})` initialized 5 empty sections (`0 words`) and returned `["draft"]`, so `aiBind` set `st.drafted["draft"] = 1` and displayed the drafted pill over empty boxes.
-   - `research-screen-manuscript.js`, `research-doc-editor.js`, `research-screen-start.js` (IEC/Consent/CTRI), and `research-screen-grade.js` similarly lacked strict empty-draft guards or rendered pills without non-empty text.
-3. **Narrow & TOC-sensitive study type suggestion (`research-screen-thesis.js`, `functions/api/research/_ai_draft.js`)**:
-   - `PAPER_TYPES` only listed 4 broad types (`obs`, `rct`, `case`, `sr`), and `suggestPaperType` used simple `indexOf` checks fooled by Table of Contents lines, literature reviews, or future-trial mentions, without quoting thesis evidence or persisting the suggested type when advancing.
-4. **Silent 20K truncation & missing Conclusion section (`research-screen-thesis.js`, `functions/api/research/_ai_draft.js`)**:
-   - Server `thesisTask` sliced `maskedFull.slice(0, 20000)` (~10 pages), dropping later Methods/Results/Discussion/Conclusion chapters on 80-340 page theses, and omitted `conclusion` from `THESIS_SECTIONS` (5 sections only).
-   - Client `SECTION_ORDER` omitted `conclusion`, sent the whole thesis in a single call, and lacked whole-thesis chapter segmentation, proportional compaction/chunking within T1 token ceilings (`maxInputTokens: 8000`), structured abstract word caps, or full-thesis table/reference extraction.
+**Branch:** `rmd-scroll-fix` (branched from `origin/main` at `ec290134c`)  
+**Worktree:** `/Volumes/WD BLACK SN7100 1TB Media/po-wire/wt/scifixI`
 
 ---
 
-## Fixes Implemented (Branch `rmd-thesis-real`)
-1. **Tutorial + Own Upload Conversion (`research-screen-thesis.js`, `research-tutorial.js`)**:
-   - Any user file upload (`ownUpload: true`, `isTutorialSample: false`) inside a tutorial project blocks continuation in tutorial sandbox across all thesis screens (`thesis`, `thesis-type`, `thesis-journal`, `thesis-draft`, `thesis-tables`, `thesis-refs`).
-   - Shows `"Tutorial drafts are practice only. Start a real project so Ask MaiK drafts from your thesis."` with one primary CTA `"Start a real project with this thesis"` (`#rmdThesisStartReal`) that creates a real server project via `POST /v1/projects`, carries the extracted thesis pages, filename, and PHI state directly to `"thesis-type"` (no re-upload), and clears the sandbox upload.
-   - `research-tutorial.js` `installApiWrapper` rejects `ownUpload` `thesis_to_paper` calls cleanly and supplies a full 6-section worked example when using the built-in tutorial sample (`isTutorialSample: true`), reading from `thStore[pid]` safely.
-   - Added localStorage `QuotaExceededError` handling with in-memory fallback (`memThesis`) and stale-page eviction so large multi-hundred-page theses persist reliably on mobile devices.
-2. **Empty AI Draft Error + Retry & Per-Section Pill Guard**:
-   - `research.js`: added `empty_draft` handling in `friendlyError`, live `.rmd-ai-progress` (`smd-books-keep`) + `.rmd-ai-pbar`, `[data-rmd="ai-retry"]` binding, and `aiBind` zero-key rejection when `!keys.length`.
-   - `research-screen-thesis.js`: per-section `"Drafted by MaiK, check it"` pill renders ONLY when `countWords(sec.text) > 0`; if all sections are 0 words or any section returns 0 words, displays `.rmd-banner-error` + `"Try again"`.
-   - Fixed the same empty-draft / empty-pill invariants across `research-screen-manuscript.js`, `research-doc-editor.js`, `research-screen-start.js` (IEC, Consent, CTRI), and `research-screen-grade.js`.
-3. **Zone-Aware Study Type Suggestion (`research-screen-thesis.js`, `_ai_draft.js`)**:
-   - Expanded `PAPER_TYPES` to 9 clinical designs (`obs`, `rct`, `cohort`, `case_control`, `cross_sectional`, `diagnostic`, `case`, `sr`, `qualitative`).
-   - Added `suggestPaperType(pagesOrText)` skipping Table of Contents / List of Tables pages, weighting title/summary/methods zones, discounting literature citations (`"Chapter 2 systematic review"`, `"future randomised controlled trial"`), returning a verbatim `#rmdThesisTypeQuote` (`smd-books-keep`) with page number, and persisting the suggested `paperType` and reporting checklist.
-4. **Whole-Paper 6-Section Draft & Long-Thesis Segmentation (`research-screen-thesis.js`, `_ai_draft.js`)**:
-   - Expanded `SECTION_ORDER` and `THESIS_SECTIONS` to 6 sections: `Abstract` (structured: `Background:`, `Methods:`, `Results:`, `Conclusion:`), `Introduction`, `Methods`, `Results`, `Discussion`, `Conclusion`.
-   - Added pure exported helpers `segmentThesisChapters`, `chunkPagesByChars`, `condenseLongBucket`, `extractThesisTables`, `extractThesisReferences`, `abstractLimitOf`, and updated `enforceWordLimit` (keeps `Abstract` within `abstractLimit`, trims `Discussion`/`Introduction` before touching `Conclusion`, and preserves `saveDraft` `isDomMounted(btn)` guard).
-   - Client orchestrates 6 section-scoped calls (`<= 13,000` chars per unified chapter pass covering every page proportionally, synthesizing `Abstract` last from front pages + grounded Methods/Results/Conclusion, falling back cleanly if an un-deployed server returns HTTP 400 on `section: "conclusion"`, verifying every number across all `ts.pages`).
-   - Server `_ai_draft.js` also chunks `> 17,500`-char chapter buckets cleanly inside `TIER_CEILINGS.T1` and preserves `Conclusion` when trimming excess words.
+## Part 1: iPhone Scroll Trap Root Cause & ResearchMD-Wide Scroll Audit
+
+### Root Cause (Manuscript on iPhone)
+Inside `#researchMD` (`position: fixed; inset: 0; display: flex; flex-direction: column;`), the intended single page scroll container is `#rmdScreenBody.rmd-shell-body` (`flex: 1; overflow-y: auto; overflow-x: hidden;`). On phone viewports (`<= 767px`), `research-screen-manuscript.js` previously left `.rmd-manuscript-screen` at `height: 100%; min-height: 0;`, `.rmd-man-split` at `flex: 1; min-height: 0; overflow: hidden;`, and `.rmd-man-left` / `.rmd-man-right` at `flex: 1; overflow-y: auto;`.
+
+When the header, action buttons, draft cards, segmented control, and phone notice occupied ~640-760 px above `.rmd-man-split`, `#rmdScreenBody` could not scroll at all (`scrollHeight === clientHeight`, `scrollTop === 0`), while `.rmd-man-split` (`overflow: hidden`) was crushed down to ~70-91 px (`DIV.rmd-man-left(h:91,sh:543)`, `DIV.rmd-man-right(h:91,sh:1397)`). Swipes inside those nested `overflow-y: auto` regions either scrolled a tiny viewport or failed to chain upward to `#rmdScreenBody`.
+
+At `@media (max-width: 767px)` in `research-screen-manuscript.js`:
+- `#researchMD .rmd-manuscript-screen` now uses `flex: 0 0 auto; height: auto; min-height: 0; overflow: visible;`
+- `#researchMD .rmd-man-split` uses `flex-direction: column; flex: none; min-height: auto; overflow: visible;`
+- `#researchMD .rmd-man-left` and `#researchMD .rmd-man-right` use `flex: none; overflow-y: visible;`
+- Tablet (`>= 768px`, iPad) split layout and independent pane scrolling are preserved unchanged.
+
+### ResearchMD-Wide Scroll Audit (`390x844`)
+Every ResearchMD screen CSS block was audited for nested `overflow: auto/scroll` inside height-constrained/`overflow: hidden` parents, fixed `100vh` inner wrappers, `touch-action: none` blockers, `overscroll-behavior: contain` on non-scrolling nodes, and leftover modal body scroll locks:
+
+1. **`research.js`** (`@media (max-width: 767px)`):
+   - `.rmd-run-screen` (Run Meta-Analysis): previously `height: 100%; overflow-y: auto;` trapped `#rmdScreenBody` at `st=0`. Changed on phone to `flex: 0 0 auto; height: auto; min-height: 0; overflow-y: visible;`.
+   - `.rmd-studies-screen`, `.rmd-split-layout`, `.rmd-pane-left`, `.rmd-pane-right`, `.rmd-extract-form-body` (Studies, Conflicts, Credits, Data, Extract, Institution, IPD, Journals, RoB, Screening, Templates): changed phone `@media (max-width: 767px)` rules to `overflow: visible` / `overflow-y: visible` and `flex: none; min-height: auto;` so `#rmdScreenBody` is the sole vertical scroller.
+   - `.rmd-abstract-box`: previously `max-height: 240px; overflow-y: auto; overscroll-behavior: contain;`. Overridden on phone to `max-height: none; overflow-y: visible; overscroll-behavior: auto;`.
+   - `.rmd-pdf-layout`, `.rmd-pdf-scroll`: overridden on phone to `flex: none; min-height: auto; max-height: none; overflow-y: visible;`.
+2. **`research-screen-grade.js`**:
+   - `.rmd-grade-screen`, `.rmd-grade-layout`, `.rmd-grade-list` (previously `max-height: calc(100vh - 220px); overflow-y: auto;`): overridden at `@media (max-width: 767px)` to `flex: 0 0 auto; height: auto;`, `flex: none; min-height: auto;`, and `max-height: none; overflow-y: visible;`.
+3. **`research-screen-images.js`**:
+   - `.rmd-img-stage`: replaced `touch-action: none` with `touch-action: pan-x pan-y;` so page vertical touch swipes pass through the stage container (`.rmd-img-canvas` retains `touch-action: none; max-width: 100%; height: auto;` for canvas annotation), and overrode `.rmd-img-stage` at `@media (max-width: 767px)` to `max-height: none; overflow: visible;`.
+4. **`research-screen-pubconsent.js`**:
+   - `.rmd-consent-preview`, `.rmd-consent-preview-local`, `.rmd-ce-body` (previously `max-height: 360px; overflow-y: auto;`): overridden at `@media (max-width: 767px)` to `max-height: none; overflow-y: visible;`.
+5. **`research-screen-manuscript.js` Case Report modal (`showDraftPreviewModal`)**:
+   - Added `max-height: 90dvh;` (with `90vh` fallback), `Escape` key handler cleaned up on close, backdrop click close, and focus restoration to opener; does not mutate `document.body.style.overflow`.
+
+### New Headless Touch-Scroll Verification (`test/run-research-scroll-ui.mjs`)
+Added CDP touch-emulation test (`Emulation.setTouchEmulationEnabled` + `Input.dispatchTouchEvent` `touchStart`/`touchMove`/`touchEnd` swipes) at `390x844` across `manuscript` (`Sections`, `Read section`, `Approve`), `checklist`, `masterchart`, `run`, `search`, `thesis-draft`, plus modal Escape-close check. Verified it failed on unmodified `origin/main` (catching `.rmd-man-left(h:91,sh:543)`, `.rmd-man-right(h:91,sh:1397)`, and `.rmd-run-screen(h:639,sh:1144)`) and passes cleanly on `rmd-scroll-fix`.
 
 ---
 
-## Real-World Live Verification (CDP `9473` against `http://127.0.0.1:8812` + `stewardmd.in` API)
-Sources documented in `/Users/mkk/prep-data/assessment/rmd-live/e2e/theses/SOURCES.md` (zero PHI findings via `_phi.js scanAndMaskThesis`).
+## Part 2: Manuscript Phone & iPad Hierarchy Redesign
 
-| Case | Thesis | Pages | True Design | Suggested + Checklist | Journal (Main / Abs Limit) | Words by Section (Abs / Intro / Meth / Res / Disc / Conc) | Main Words | Unverified Numbers | Exported DOCX |
-|---|---|---:|---|---|---|---|---:|---:|---|
-| `thesis-real-1` | Campbell 2017 (`obs-campbell-2017-heart-failure.pdf`) | 341 | Observational cohort | `cohort` (STROBE), Page 2 quote | IJCCM (`3000` / `350`) | 290 / 320 / 508 / 225 / 479 / 89 | 1,621 | 0 (`50` verified locators, `0` flags) | `16,253` bytes |
-| `thesis-real-2` | Lehr 2022 (`rct-lehr-2022-spinal-fusion.pdf`) | 175 | Randomized controlled trial | `rct` (CONSORT), Page 1 quote | IJCCM (`3000` / `350`) | 241 / 240 / 346 / 201 / 484 / 53 | 1,324 | 0 (`46` verified locators, `0` flags) | `13,788` bytes |
+1. **Header (`research-screen-manuscript.js`)**:
+   - Full title (`.rmd-man-title`) wraps cleanly across lines with **no ellipsis** (`white-space: normal; word-break: break-word; overflow: visible;`).
+   - Single quiet meta line underneath (`.rmd-man-meta`): `Version N · Draft (not final yet)` / `Approved` / `Locked (final)`.
+2. **Segmented Control & Phone Notice**:
+   - `Sections` / `Read section` / `Approve` bar (`.rmd-man-phone-bar` with `role="tablist"` / `role="tab"` + `aria-selected`) sits directly under the header (`position: sticky; top: 0; z-index: 6;` on phone).
+   - One short `.rmd-phone-notice` line directly below it, rendered once (`"Read and approve sections here. Editing needs a tablet."`).
+3. **Unified `"Draft your paper"` Card & `"Redraft"` Collapse**:
+   - Merged the separate Ask MaiK bar and PaperOrchestra block into ONE `.rmd-man-draft-card`:
+     1. `Full paper (PaperOrchestra)` with `[data-rmd="full-draft-po"]` (`"Full draft (PaperOrchestra)"`), plain description, server quote line, inline confirm, and `aria-live="polite"` status row.
+     2. `Quick draft or write it yourself`: `Quick draft (Ask MaiK)` (`[data-rmd-ai="ask"]`, `Costs about 2 MaiK tokens.`) + `Write it myself` (`[data-rmd-ai="manual"]`). (Case reports render their CARE de-identification modal trigger + `Write it myself` inside the same single card.)
+     3. Privacy line rendered **once** at the bottom of the card.
+   - Collapses into a quiet `.rmd-man-redraft-bar` with `"Redraft"` (`[data-rmd="manuscript-redraft"]`) once any section has draft text (auto-expands during confirm/active/paused/failed PO jobs or AI errors, or when toggled via `"Redraft"`).
+4. **`Drafted by MaiK, check it` Inline Badge**:
+   - Removed the loose floating `[data-rmd-ai-note="manuscript"]` note outside cards; rendered `.rmd-drafted-by-maik` (`[data-rmd-drafted="maik"]`) directly on unapproved AI-drafted sections in the section list, section reader/editor header, and phone Approve section cards.
 
-- **Tutorial sample verification (`tut_01_sample_draft`)**: 6/6 sections rendered cleanly, `"Drafted by MaiK, check it"` pill shown cleanly, `"No MaiK tokens needed"`, `0` errors.
-- **Tutorial + own upload verification (`tut_02_own_upload_gate` -> `tut_03_converted_type`)**: uploading `rct-lehr-2022-spinal-fusion.pdf` inside `tut_thesis` displayed `"Start a real project with this thesis"`, created synced real project `prj_0fe48b8f...` (and `prj_ac7f72ae...` on final `-scij4`/`-scij5` audit) carrying all 175 pages cleanly to `thesis-type` with `rct` (`CONSORT`) suggested and Page 1 quote displayed.
+### Action Mapping Table (Where Every Existing Action Lives)
 
-### Before / After Visual Evidence
-- **Before**: `/Users/mkk/prep-data/po-wire/briefs/thesis-tutorial-owner.png` (tutorial sandbox showed `"No MaiK tokens needed"`, `"Drafted by MaiK, check it"` pill above 5 sections all at `0 words`).
-- **After (Live CDP 9473 screenshots)**:
-  - Tutorial + own thesis conversion gate: `/Users/mkk/prep-data/assessment/rmd-live/e2e/outputs/thesis-tutorial-check/shots/tut_02_own_upload_gate.png`
-  - Tutorial sample 6-section draft: `/Users/mkk/prep-data/assessment/rmd-live/e2e/outputs/thesis-tutorial-check/shots/tut_01_sample_draft.png`
-  - Real RCT converted & classified (Light 390px, `-scij4` uniform border): `/Users/mkk/prep-data/assessment/rmd-live/e2e/outputs/thesis-real-2/shots/real2_type_scij4_light.png`
-  - Real RCT converted & classified (Dark 390px, `-scij4`): `/Users/mkk/prep-data/assessment/rmd-live/e2e/outputs/thesis-real-2/shots/real2_type_scij4_dark.png`
+| Prior Action | New Location & Stage Behaviour |
+|---|---|
+| `Ask MaiK to draft it` / `Do it myself` / `Full draft (PaperOrchestra)` | Inside single **Draft your paper** card when no draft exists (or when toggled via **Redraft** after drafting). Labelled `Full draft (PaperOrchestra)`, `Quick draft (Ask MaiK)`, `Write it myself`. |
+| `Ask MaiK to draft it` (Case Report) | Inside single **Draft your paper** card on Case Report projects (replaces header pill clutter). |
+| `Download Word file` (`manuscript-export`) | Primary CTA (`rmd-btn-primary`) in `.rmd-man-actions` **only after a draft exists**. Hidden before any draft text exists. |
+| `Journal format check` (`to-format-check`) | Secondary row button in `.rmd-man-actions` **after a draft exists**. |
+| `Editor` (`manuscript-mode-editor`) | Secondary row button in `.rmd-man-actions` **after a draft exists** (returns to editor/reader pane). |
+| `Earlier versions (N)` (`manuscript-versions-toggle`) | Inside the **More** dropdown menu (`#rmdManMoreMenu`, `[data-rmd="manuscript-more-toggle"]`); also switches phone view to `Read section` pane when opened. |
+| `See what changed` (`manuscript-diff-toggle`) | Inside the **More** dropdown menu (`#rmdManMoreMenu`); switches phone view to `Read section` pane when opened. |
+| Per-section review / approval (`[data-rmd-approve-sec]`) | Added on phone **Approve** tab (section review cards with preview + `Read section` + `Approve section`) and in the tablet/reader `.rmd-editor-head`. |
+| `Mark as final` (`manuscript-approve`) | Appears **only after every drafted section is approved** (`allSectionsApproved`), rendered as primary final step in `.rmd-man-actions` and at the bottom of phone **Approve** tab. |
+| `Lock this version` (`manuscript-lock`) | Appears as primary action in `.rmd-man-actions` and phone **Approve** tab once manuscript is marked `Approved`. |
 
 ---
 
-## Automated Tests & UI Compliance Checks
-- **Syntax checks**: `node --check` passed on all 8 edited `.js` files; `[\u2013\u2014]` scan passed (0 UI em/en dashes).
-- **ResearchMD Unit Tests (`node --test --experimental-test-module-mocks --experimental-sqlite test/research*.test.mjs`)**: `871 passed, 0 failed, 6 skipped`.
-  - Thesis + Error + Doc-editor targeted run after final `-scij5` edit: `20/20` passed (`0` failed).
-- **Headless Browser ResearchMD UI Suites (`test/run-research-*-ui.mjs`)**: **34 / 34 suites passed** (`fails=[]`).
-  - Re-ran `test/run-research-thesis-ui.mjs` and `test/run-research-tutorial-ui.mjs` after final `-scij5` build: **ALL CHECKS PASSED**.
-- **Full `npm test` run**: Passed all ResearchMD, Connect, MaiK, and `rx-build` suites; caught `test/no-side-stripes.test.mjs` against our initial `border-left: 3px solid` on `.rmd-thesis-quote` (subsequently fixed to uniform `border: 1px solid var(--rmd-line)` in `-scij4`!). Pre-existing non-ResearchMD worktree directory failures in 9 unrelated suites (`build-slim`, `edge-schemas`, `narke-drills`, `no-side-stripes` `>100 files` sparse worktree check, `remote-media`, `tokos-*`, `wardsynq-*`) reflect un-checked-out sibling directories in the worktree (`prep/`, `tokos/`, `wardsynq/`).
-- **UI & Accessibility Compliance (`auditDom` + `_ui-rules.md`)**:
-  - `aGate: []`, `aTypeL: []`, `aTypeD: []`, `aType1024: []`, `auditTut: []` — verified `0` horizontal overflow at `375px`, `390x844`, and `1024x1366`; `>= 44px` interactive targets; `>= 4.5:1` contrast in light & dark modes; `prefers-reduced-motion` support; no side stripes (`no-side-stripes`); scientific term + plain explanation maintained.
+## UI Skill & Accessibility Compliance Pass
+
+- **Touch targets**: Verified `>= 44px` minimum height on all phone header buttons, segmented tabs, draft card buttons, menu items, section rows, and Approve action buttons (measured `min=44` in `run-research-manuscript-ui.mjs`).
+- **Spacing & alignment**: `16px` horizontal gutters on phone (`16px` topbar/cards/right pane), consistent `8px` / `12px` / `16px` rhythm (`4/8px` grid), zero horizontal overflow (`scrollWidth <= clientWidth` checked at `375x812`, `390x844`, `768x1024`, `1024x768`, `1024x1366`).
+- **Accessibility & keyboard semantics**:
+  - Segmented tabs use `role="tablist"`, `role="tab"`, and `aria-selected`.
+  - **More** menu uses `aria-haspopup="menu"`, `aria-expanded`, `aria-controls`, `role="menu"`, `role="menuitem"`, closes on outside click, item selection, or `Escape` (restoring focus to trigger).
+  - Case report preview modal closes on `Escape` and backdrop click, restoring focus to opener.
+  - `@media (prefers-reduced-motion: reduce)` disables transitions/animations inside `.rmd-manuscript-screen`.
+- **Contrast (WCAG AA checked via CDP `getComputedStyle`)**:
+  - Light (`390x844`): `.rmd-man-title` **16.23:1**, `.rmd-man-meta` **6.08:1**, `.rmd-man-actions .rmd-btn-subtle` **16.23:1**, `.rmd-man-actions .rmd-btn-quiet` **6.08:1**, `.rmd-phone-notice` **5.50:1**, `.rmd-drafted-by-maik` **4.95:1** (`#a34e1c` on `#fdebdf`).
+  - Dark (`390x844`, `#0a1230`/`#111c44` ResearchMD house dark theme): `.rmd-man-title` **14.68:1**, `.rmd-man-meta` **7.64:1**, `.rmd-man-actions .rmd-btn-primary` **16.49:1**, `.rmd-man-actions .rmd-btn-subtle` **14.68:1**, `.rmd-phone-notice` **8.52:1**, `.rmd-drafted-by-maik` **6.93:1** (`#f59e71` on `#3a2418`).
+- **Language & copy hygiene**: Zero em-dashes (`\u2014`) or en-dashes (`\u2013`) in edited files; scientific terms paired with plain brackets (`IMRaD (all manuscript sections)`, `CARE (case report)`).
+- **Platform Guidance Note**: Consulted `Modern Web Guidance` (native `<button>` tabs/menu with progressive keyboard/Escape dismissal and content-first staged disclosure) alongside project UI rules (`_ui-rules.md`).
+
+---
+
+## Screenshots (`shots/`)
+- Before (`origin/main`): `shots/before-390-light.png`, `shots/before-390-drafted-light.png`, `shots/before-390-dark.png`, `shots/before-ipad.png`
+- After (`rmd-scroll-fix`): `shots/after-390-light.png`, `shots/after-390-drafted-light.png`, `shots/after-390-dark.png`, `shots/after-ipad.png`
+
+---
+
+## Verification Results
+
+All checks below ran after the final edit (`poStatusHtml` live-region fix):
+
+1. `node --check`: passed for `research.js`, `research-screen-manuscript.js`, `research-screen-grade.js`, `research-screen-images.js`, `research-screen-pubconsent.js`, `sw.js`.
+2. `node --experimental-test-module-mocks --experimental-sqlite test/research-po-button.test.mjs`: `16 passed, 0 failed`.
+3. `for f in test/research-*.test.mjs`: all passed (`0` failures across all ResearchMD unit suites).
+4. `node test/run-research-scroll-ui.mjs`: **ALL SCROLL UI CHECKS PASSED** (failed on unmodified `origin/main` as expected, passes completely after fix).
+5. `node test/run-research-manuscript-ui.mjs`: **all passed**.
+6. `node test/run-research-ipad-ui.mjs`: **ALL IPAD UI CHECKS PASSED**.
+7. `node test/run-research-ui.mjs`: **all passed**.
+8. Additional UI suites: all 8 manuscript-touching walkthrough/case/live-fix suites (`test/run-research-walk-*-ui.mjs`, `test/run-research-casereport-ui.mjs`, `test/run-research-caseseries-ui.mjs`, `test/run-research-live-fixes-ui.mjs`) re-ran and passed after the final edit; the remaining 23 non-manuscript `test/run-research-*-ui.mjs` suites passed immediately prior to the final 1-line `poStatusHtml()` live-region restore.
+9. `npm test` run (executed prior to final 1-line `poStatusHtml` live-region restore, after which `test/research-*.test.mjs` were all re-run and passed): 10 failures in unrelated non-ResearchMD suites (`test/build-slim.test.mjs`, `test/edge-schemas.test.mjs`, `test/narke-drills.test.mjs`, `test/no-side-stripes.test.mjs`, `test/remote-media.test.mjs`, `test/tokos-drill-core.test.mjs`, `test/tokos-learn-gyA.test.mjs`, `test/wardsynq-i18n-unwrapped.test.mjs`, `test/wardsynq-reachability.test.mjs` — e.g. `test/no-side-stripes.test.mjs` fails in worktree paths containing spaces because `new URL("..", import.meta.url).pathname` leaves `%20` un-decoded; unrelated to ResearchMD).
+
+---
+
+## Files Changed
+- [research-screen-manuscript.js](research-screen-manuscript.js)
+- [research.js](research.js)
+- [research-screen-grade.js](research-screen-grade.js)
+- [research-screen-images.js](research-screen-images.js)
+- [research-screen-pubconsent.js](research-screen-pubconsent.js)
+- [index.html](index.html) (`?v=` tokens bumped for all edited ResearchMD scripts)
+- [sw.js](sw.js) (`CACHE` updated with `-scii1`)
+- [test/run-research-scroll-ui.mjs](test/run-research-scroll-ui.mjs) (new)
+- [test/run-research-manuscript-ui.mjs](test/run-research-manuscript-ui.mjs)
+- [REPORT.md](REPORT.md) (new)
+- `shots/` (`before-*.png`, `after-*.png`)

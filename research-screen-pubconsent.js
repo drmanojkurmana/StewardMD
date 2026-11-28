@@ -836,6 +836,8 @@
       "  #researchMD .rmd-pubconsent-screen .rmd-card-sub, .rmd-pubconsent-screen .rmd-card-sub { padding: 12px; }",
       "  #researchMD .rmd-pubconsent-screen .rmd-select, #researchMD .rmd-pubconsent-screen .rmd-input, .rmd-pubconsent-screen .rmd-select, .rmd-pubconsent-screen .rmd-input { max-width: 100%; }",
       "  #researchMD .rmd-pubconsent-screen .rmd-ce-box, .rmd-pubconsent-screen .rmd-ce-box { padding: 8px; }",
+      "  #researchMD .rmd-pubconsent-screen .rmd-consent-preview, #researchMD .rmd-pubconsent-screen .rmd-consent-preview-local, .rmd-pubconsent-screen .rmd-consent-preview, .rmd-pubconsent-screen .rmd-consent-preview-local { max-height: none; overflow-y: visible; }",
+      "  #researchMD .rmd-pubconsent-screen .rmd-ce-body, .rmd-pubconsent-screen .rmd-ce-body { max-height: none; overflow-y: visible; }",
       "}",
       "@media (prefers-reduced-motion: reduce) {",
       "  #researchMD .rmd-pubconsent-screen *, #researchMD .rmd-pubconsent-screen *:before, #researchMD .rmd-pubconsent-screen *:after, .rmd-pubconsent-screen *, .rmd-pubconsent-screen *:before, .rmd-pubconsent-screen *:after { transition: none !important; animation: none !important; }",
