@@ -170,13 +170,66 @@
     return node.localName || String(node.nodeName || "").split(":").pop();
   }
 
+  function docxHeadingFromStyle(val) {
+    var s = String(val || "").replace(/^\s+|\s+$/g, "");
+    if (!s) return null;
+    var m = s.match(/^(?:heading|titre|h)\s*([1-6])$/i);
+    if (m) return Math.min(3, Math.max(1, parseInt(m[1], 10)));
+    if (/^title$/i.test(s)) return 1;
+    if (/^subtitle$/i.test(s)) return 2;
+    return null;
+  }
+
   function extractDocxParaDom(paraNode) {
     var parts = [];
     var hasPageBreak = false;
-    function walk(node) {
+    var headingLevel = null;
+    var paraBold = false;
+    var boldChars = 0;
+    var totalChars = 0;
+    function hasBoldRPr(rPrNode) {
+      if (!rPrNode) return false;
+      for (var k = rPrNode.firstChild; k; k = k.nextSibling) {
+        if (k.nodeType === 1 && localNameOf(k) === "b") {
+          var v = k.getAttribute("w:val") || k.getAttribute("val") || "";
+          return v !== "0" && v !== "false";
+        }
+      }
+      return false;
+    }
+    function walk(node, inBold) {
       if (!node || node.nodeType !== 1) return;
       var ln = localNameOf(node);
       if (ln === "del" || ln === "instrText" || ln === "fldSimple" || ln === "moveFrom") return;
+      if (ln === "pPr") {
+        for (var p = node.firstChild; p; p = p.nextSibling) {
+          if (p.nodeType !== 1) continue;
+          var pln = localNameOf(p);
+          if (pln === "pStyle") {
+            var hl = docxHeadingFromStyle(p.getAttribute("w:val") || p.getAttribute("val"));
+            if (hl != null) headingLevel = hl;
+          } else if (pln === "outlineLvl" && headingLevel == null) {
+            var ov = parseInt(p.getAttribute("w:val") || p.getAttribute("val"), 10);
+            if (isFinite(ov) && ov >= 0 && ov <= 5) headingLevel = Math.min(3, ov + 1);
+          } else if (pln === "rPr") {
+            if (hasBoldRPr(p)) paraBold = true;
+          }
+        }
+        return;
+      }
+      if (ln === "r") {
+        var runBold = paraBold;
+        for (var rc = node.firstChild; rc; rc = rc.nextSibling) {
+          if (rc.nodeType === 1 && localNameOf(rc) === "rPr") {
+            if (hasBoldRPr(rc)) runBold = true;
+            break;
+          }
+        }
+        for (var rn = node.firstChild; rn; rn = rn.nextSibling) {
+          if (rn.nodeType === 1 && localNameOf(rn) !== "rPr") walk(rn, runBold);
+        }
+        return;
+      }
       if (ln === "lastRenderedPageBreak") { hasPageBreak = true; return; }
       if (ln === "br") {
         var btype = node.getAttribute("w:type") || node.getAttribute("type") || "";
@@ -186,11 +239,20 @@
       }
       if (ln === "cr") { parts.push("\n"); return; }
       if (ln === "tab") { parts.push(" "); return; }
-      if (ln === "t" || ln === "delText") { parts.push(node.textContent || ""); return; }
-      for (var c = node.firstChild; c; c = c.nextSibling) walk(c);
+      if (ln === "t" || ln === "delText") {
+        var tv = node.textContent || "";
+        var nonWs = tv.replace(/\s+/g, "").length;
+        totalChars += nonWs;
+        if (inBold) boldChars += nonWs;
+        parts.push(tv);
+        return;
+      }
+      for (var c = node.firstChild; c; c = c.nextSibling) walk(c, inBold);
     }
-    walk(paraNode);
-    return { text: parts.join("").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, ""), pageBreak: hasPageBreak };
+    walk(paraNode, false);
+    var txt = parts.join("").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, "");
+    var isBold = paraBold || (totalChars > 0 && boldChars * 2 >= totalChars);
+    return { text: txt, pageBreak: hasPageBreak, headingLevel: headingLevel, bold: isBold };
   }
 
   function extractDocxXmlBlocks(xmlText) {
@@ -212,7 +274,7 @@
               if (ln === "p") {
                 var p = extractDocxParaDom(n);
                 if (p.pageBreak) blocks.push({ pageBreak: true });
-                if (p.text) blocks.push({ text: p.text });
+                if (p.text) blocks.push({ text: p.text, headingLevel: p.headingLevel, bold: p.bold });
               } else if (ln === "tbl") {
                 for (var r = n.firstChild; r; r = r.nextSibling) {
                   if (localNameOf(r) !== "tr") continue;
@@ -229,7 +291,7 @@
                     var ct = cellParts.join(" ").replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
                     if (ct) cells.push(ct);
                   }
-                  if (cells.length) blocks.push({ text: cells.join("  ") });
+                  if (cells.length) blocks.push({ text: cells.join("  "), inTable: true });
                 }
               } else if (ln === "sdt" || ln === "sdtContent" || ln === "footnote" || ln === "endnote") {
                 walkContainer(n);
@@ -251,14 +313,41 @@
       if (/<w:br\b[^>]*type=["']page["']|<w:lastRenderedPageBreak\b/i.test(inner)) {
         blocks.push({ pageBreak: true });
       }
+      var styleM = inner.match(/<w:pStyle\b[^>]*w:val=["']([^"']+)["']/i);
+      var hLevel = styleM ? docxHeadingFromStyle(styleM[1]) : null;
+      if (hLevel == null) {
+        var olM = inner.match(/<w:outlineLvl\b[^>]*w:val=["'](\d+)["']/i);
+        if (olM) hLevel = Math.min(3, parseInt(olM[1], 10) + 1);
+      }
+      var hasBold = /<w:b\b(?![^>]*w:val=["'](?:0|false)["'])/i.test(inner);
       var stripped = inner
         .replace(/<w:tab\b[^>]*\/?>/gi, " ")
         .replace(/<w:(?:br|cr)\b[^>]*\/?>/gi, "\n")
         .replace(/<[^>]+>/g, "");
       var txt = decodeXmlEntities(stripped).replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, "");
-      if (txt) blocks.push({ text: txt });
+      if (txt) blocks.push({ text: txt, headingLevel: hLevel, bold: hasBold });
     }
     return blocks;
+  }
+
+  function blockToLines(b) {
+    var subLines = String(b.text || "").split(/\n+/);
+    var out = [], i, tx;
+    var sz = b.headingLevel === 1 ? 18 : (b.headingLevel === 2 ? 14 : (b.headingLevel === 3 ? 13 : 11));
+    for (i = 0; i < subLines.length; i++) {
+      tx = subLines[i].replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, "");
+      if (!tx) continue;
+      var lineObj = {
+        tx: tx,
+        size: sz,
+        bold: !!b.bold,
+        caps: /[A-Za-z].*[A-Za-z]/.test(tx) && !/[a-z]/.test(tx)
+      };
+      if (b.headingLevel != null) lineObj.headingLevel = b.headingLevel;
+      if (b.inTable) lineObj.inTable = true;
+      out.push(lineObj);
+    }
+    return out;
   }
 
   function paginateBlocks(blocks, wordsPerPage) {
@@ -266,13 +355,16 @@
     for (i = 0; i < blocks.length; i++) {
       if (blocks[i].pageBreak) { hasBreaks = true; break; }
     }
-    var pages = [], cur = [], curWords = 0, limit = wordsPerPage || 350;
+    var pages = [], pageLines = [], cur = [], curLines = [], curWords = 0, limit = wordsPerPage || 350;
     function flush() {
       var joined = cur.join("\n");
       if (joined.replace(/\s+/g, "").length > 0) {
-        pages.push({ n: pages.length + 1, text: joined });
+        var pn = pages.length + 1;
+        pages.push({ n: pn, text: joined });
+        pageLines.push({ n: pn, lines: curLines });
       }
       cur = [];
+      curLines = [];
       curWords = 0;
     }
     for (i = 0; i < blocks.length; i++) {
@@ -284,9 +376,14 @@
       var w = countWords(b.text);
       if (!hasBreaks && cur.length > 0 && curWords + w > limit) flush();
       cur.push(b.text);
+      var bl = blockToLines(b);
+      for (var li = 0; li < bl.length; li++) curLines.push(bl[li]);
       curWords += w;
     }
     flush();
+    try {
+      Object.defineProperty(pages, "_pageLines", { value: pageLines, enumerable: false, configurable: true });
+    } catch (e) {}
     return pages;
   }
 
@@ -319,29 +416,56 @@
     return Promise.reject(new Error("pdf_unavailable"));
   }
 
-  function joinPdfTextItems(items) {
-    var lines = [], curLine = [], lastY = null;
+  function joinPdfTextItemsWithLines(items) {
+    var lines = [], lineObjs = [], curLine = [], curChars = 0, curSizeWeighted = 0, curMaxSize = 0, lastY = null;
+    function flushLine() {
+      if (!curLine.length) return;
+      var tx = curLine.join(" ").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, "");
+      if (tx) {
+        lines.push(tx);
+        var avgSz = curChars > 0 ? Math.round((curSizeWeighted / curChars) * 10) / 10 : curMaxSize;
+        lineObjs.push({
+          tx: tx,
+          size: avgSz || curMaxSize || 11,
+          caps: /[A-Za-z].*[A-Za-z]/.test(tx) && !/[a-z]/.test(tx)
+        });
+      }
+      curLine = [];
+      curChars = 0;
+      curSizeWeighted = 0;
+      curMaxSize = 0;
+    }
     for (var i = 0; i < (items || []).length; i++) {
       var it = items[i] || {};
       var str = String(it.str || "");
       var y = (it.transform && it.transform.length >= 6) ? it.transform[5] : null;
+      var sz = (it.transform && it.transform.length >= 4)
+        ? Math.round(Math.hypot(Number(it.transform[0]) || 0, Number(it.transform[1]) || 0) * 10) / 10
+        : 0;
+      if (!sz && it.height) sz = Math.round(Number(it.height) * 10) / 10;
       if (lastY !== null && y !== null && Math.abs(y - lastY) > 3) {
-        if (curLine.length) {
-          lines.push(curLine.join(" ").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, ""));
-          curLine = [];
-        }
+        flushLine();
       }
-      if (str.replace(/\s+/g, "")) curLine.push(str);
-      if (it.hasEOL && curLine.length) {
-        lines.push(curLine.join(" ").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, ""));
-        curLine = [];
+      var nonWs = str.replace(/\s+/g, "").length;
+      if (nonWs) {
+        curLine.push(str);
+        curChars += nonWs;
+        curSizeWeighted += (sz || 11) * nonWs;
+        if (sz > curMaxSize) curMaxSize = sz;
+      }
+      if (it.hasEOL) {
+        flushLine();
         lastY = null;
       } else if (y !== null) {
         lastY = y;
       }
     }
-    if (curLine.length) lines.push(curLine.join(" ").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, ""));
-    return lines.filter(Boolean).join("\n");
+    flushLine();
+    return { text: lines.join("\n"), lines: lineObjs };
+  }
+
+  function joinPdfTextItems(items) {
+    return joinPdfTextItemsWithLines(items).text;
   }
 
   function isNativeShell() {
@@ -352,7 +476,7 @@
   }
 
   /* The Rust PDF reader (vendor/rust-pdf, loaded by the on-device reader): every page's lines in one go, as
-     { pages: [{ n, text }] } in the shape below, or null (pdf.js reads it as before). */
+     { pages: [{ n, text }], pageLines: [{ n, lines }] } in the shape below, or null (pdf.js reads it as before). */
   var RUST_MAX_PAGES = 3000;
   function rustPagesText(u8) {
     var OD = G && G.SMD_RMD_ONDEVICE_PDF;
@@ -366,13 +490,32 @@
   }
   function rustToThesisPages(res) {
     if (!res || !Array.isArray(res.pages) || !res.total || res.total > RUST_MAX_PAGES || res.pages.length !== res.total) return null;
-    var pages = [], chars = 0;
+    var pages = [], pageLines = [], chars = 0;
     res.pages.forEach(function (p) {
-      var txt = (p.lines || []).map(function (l) { return String(l.tx || "").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, ""); }).filter(Boolean).join("\n");
+      var lines = [];
+      var txList = [];
+      var rawLines = p.lines || [];
+      for (var i = 0; i < rawLines.length; i++) {
+        var l = rawLines[i] || {};
+        var tx = String(l.tx || "").replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, "");
+        if (!tx) continue;
+        txList.push(tx);
+        var obj = {
+          tx: tx,
+          size: typeof l.size === "number" ? l.size : 0
+        };
+        /* Use Rust bold/italic/caps flags when present; works cleanly if absent. */
+        if (typeof l.bold === "boolean") obj.bold = l.bold;
+        if (typeof l.italic === "boolean") obj.italic = l.italic;
+        if (typeof l.caps === "boolean") obj.caps = l.caps;
+        lines.push(obj);
+      }
+      var txt = txList.join("\n");
       chars += txt.replace(/\s+/g, "").length;
       pages.push({ n: p.n, text: txt });
+      pageLines.push({ n: p.n, lines: lines });
     });
-    return { pages: pages, chars: chars };
+    return { pages: pages, pageLines: pageLines, chars: chars };
   }
 
   function readPdfLocal(file, onProgress) {
@@ -383,7 +526,7 @@
         if (!rp) return readPdfLocalJs(u8, onProgress);
         if (onProgress) onProgress(rp.pages.length, rp.pages.length);
         if (rp.chars < 20) return { pages: [], emptyText: true, bytes: u8 };
-        return { pages: rp.pages, emptyText: false };
+        return { pages: rp.pages, pageLines: rp.pageLines, emptyText: false };
       });
     });
   }
@@ -397,12 +540,12 @@
       }).then(function (pdf) {
         var total = pdf.numPages || 0;
         if (!total) return null;
-        var pages = [], chars = 0, idx = 1;
+        var pages = [], pageLines = [], chars = 0, idx = 1;
         function nextPage() {
           if (idx > total) {
             if (pdf && typeof pdf.destroy === "function") { try { pdf.destroy(); } catch (e) {} }
             if (chars < 20) return { pages: [], emptyText: true, bytes: u8 };
-            return { pages: pages, emptyText: false };
+            return { pages: pages, pageLines: pageLines, emptyText: false };
           }
           if (onProgress && (idx === 1 || idx % 10 === 0 || idx === total)) {
             onProgress(idx, total);
@@ -411,9 +554,10 @@
           return pdf.getPage(pNo).then(function (pg) {
             return pg.getTextContent();
           }).then(function (tc) {
-            var txt = joinPdfTextItems((tc && tc.items) || []);
-            chars += txt.replace(/\s+/g, "").length;
-            pages.push({ n: pNo, text: txt });
+            var res = joinPdfTextItemsWithLines((tc && tc.items) || []);
+            chars += res.text.replace(/\s+/g, "").length;
+            pages.push({ n: pNo, text: res.text });
+            pageLines.push({ n: pNo, lines: res.lines });
             return nextPage();
           });
         }
@@ -453,10 +597,27 @@
     return false;
   }
 
-  function tableFor(text, idx) {
-    var head = text.slice(0, idx), re = /Table\s+(\d+)/gi, m, last = null;
-    while ((m = re.exec(head))) last = m[1];
-    return last ? Number(last) : null;
+  function pageTableOffsets(pt) {
+    if (pt._tableOffsets) return pt._tableOffsets;
+    var list = [], re = /Table\s+(\d+)/gi, m;
+    while ((m = re.exec(pt.text || ""))) list.push({ idx: m.index, num: Number(m[1]) });
+    pt._tableOffsets = list;
+    return list;
+  }
+
+  function tableFor(pt, idx) {
+    if (typeof pt === "string") {
+      var head = pt.slice(0, idx), re = /Table\s+(\d+)/gi, m, last = null;
+      while ((m = re.exec(head))) last = m[1];
+      return last ? Number(last) : null;
+    }
+    var offs = pageTableOffsets(pt), lo = 0, hi = offs.length - 1, mid, found = null;
+    while (lo <= hi) {
+      mid = (lo + hi) >>> 1;
+      if (offs[mid].idx < idx) { found = offs[mid].num; lo = mid + 1; }
+      else hi = mid - 1;
+    }
+    return found;
   }
 
   function findNumber(pageTexts, tok) {
@@ -470,7 +631,7 @@
         nextAfter = t.charAt(idx + tok.length + 1);
         bOk = !(before >= "0" && before <= "9") && before !== ".";
         aOk = !(after >= "0" && after <= "9") && (after !== "." || !(nextAfter >= "0" && nextAfter <= "9"));
-        if (bOk && aOk) return { page: pageTexts[p].n, table: tableFor(t, idx) };
+        if (bOk && aOk) return { page: pageTexts[p].n, table: tableFor(pageTexts[p], idx) };
         idx = t.indexOf(tok, idx + 1);
       }
     }
@@ -495,7 +656,7 @@
      p < .001) are not thesis data and are left alone. */
   function verifyNumbers(text, pageTexts) {
     var sentences = splitSentences(String(text || ""));
-    var flags = [], locators = [], seen = {}, outParts = [];
+    var flags = [], locators = [], seen = {}, tokCache = Object.create(null), outParts = [];
     var s, sent, lead, body, toks, flagged, newBody, removals, k, t, loc, r, rm;
     for (s = 0; s < sentences.length; s++) {
       sent = sentences[s];
@@ -508,7 +669,9 @@
       for (k = 0; k < toks.length; k++) {
         t = toks[k];
         if (isReportingConstant(body, t.idx, t.tok)) continue;
-        loc = findNumber(pageTexts || [], t.tok);
+        loc = Object.prototype.hasOwnProperty.call(tokCache, t.tok)
+          ? tokCache[t.tok]
+          : (tokCache[t.tok] = findNumber(pageTexts || [], t.tok));
         if (loc) {
           if (!seen[t.tok]) { seen[t.tok] = true; locators.push({ number: t.tok, page: loc.page, table: loc.table }); }
         } else {
@@ -810,6 +973,695 @@
     return buckets;
   }
 
+  /* ---------- chapter tree from Rust lines / DOCX headings / pdf.js ---------- */
+
+  function pageLinesFromPages(pages) {
+    var list = normalizePagesInput(pages);
+    var out = [], i, lines, j, tx;
+    for (i = 0; i < list.length; i++) {
+      lines = String(list[i].text || "").split(/\n+/);
+      var lObjs = [];
+      for (j = 0; j < lines.length; j++) {
+        tx = lines[j].replace(/[ \t]+/g, " ").replace(/^\s+|\s+$/g, "");
+        if (!tx) continue;
+        lObjs.push({
+          tx: tx,
+          size: 11,
+          caps: /[A-Za-z].*[A-Za-z]/.test(tx) && !/[a-z]/.test(tx)
+        });
+      }
+      out.push({ n: list[i].n, lines: lObjs });
+    }
+    return out;
+  }
+
+  function computeBodyFontSize(pageLines) {
+    var weights = {}, i, j, l, sz, len, hasSize = false;
+    for (i = 0; i < pageLines.length; i++) {
+      var lines = (pageLines[i] && pageLines[i].lines) || [];
+      for (j = 0; j < lines.length; j++) {
+        l = lines[j];
+        if (!l || !l.size || l.size <= 0) continue;
+        hasSize = true;
+        len = String(l.tx || "").length;
+        if (len < 15 && pageLines.length > 3) continue;
+        sz = String(Math.round(l.size * 2) / 2);
+        weights[sz] = (weights[sz] || 0) + len;
+      }
+    }
+    if (!hasSize) return 11;
+    var bestSz = 11, bestW = -1, k;
+    for (k in weights) {
+      if (Object.prototype.hasOwnProperty.call(weights, k) && weights[k] > bestW) {
+        bestW = weights[k];
+        bestSz = Number(k);
+      }
+    }
+    if (bestW <= 0) {
+      for (i = 0; i < pageLines.length; i++) {
+        var lines2 = (pageLines[i] && pageLines[i].lines) || [];
+        for (j = 0; j < lines2.length; j++) {
+          l = lines2[j];
+          if (!l || !l.size || l.size <= 0) continue;
+          sz = String(Math.round(l.size * 2) / 2);
+          weights[sz] = (weights[sz] || 0) + Math.max(1, String(l.tx || "").length);
+        }
+      }
+      for (k in weights) {
+        if (Object.prototype.hasOwnProperty.call(weights, k) && weights[k] > bestW) {
+          bestW = weights[k];
+          bestSz = Number(k);
+        }
+      }
+    }
+    return bestSz || 11;
+  }
+
+  function normHeadingText(tx) {
+    return String(tx || "")
+      .replace(/^\s*(?:chapter|section|part)\s+(?:\d+|[ivxlcdm]+)\s*[:.\-\u2013\u2014]?\s*/i, "")
+      .replace(/^\s*(?:\d+(?:\.\d+)*|[ivxlcdm]+)[.):\-\s]+/i, "")
+      .replace(/\s+/g, " ")
+      .replace(/[:.\s]+$/, "")
+      .toLowerCase();
+  }
+
+  function classifyHeadingRole(title, pageIdx, totalPages) {
+    var raw = String(title || "").replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
+    var low = normHeadingText(raw);
+    if (!low) return { kind: "other", role: "other", isFrontMatter: false, condenseReview: false };
+
+    if (/^(?:certificates?|bonafide\s+certificate|declaration|acknowledgements?|acknowledgments?|dankwoord|table\s+of\s+contents|contents|list\s+of\s+tables|list\s+of\s+figures|list\s+of\s+abbreviations|abbreviations|definitions\s*\/\s*abbreviations|dedication|preface|promotoren|curriculum\s+vitae|publications?\s+containing|presentation\s+to\s+learned|list\s+of\s+publications|summary\s+in\s+dutch|nederlandse\s+samenvatting)\b/i.test(low) ||
+        /\b(?:submitted\s+in\s+fulfilment|degree\s+of\s+doctor|proefschrift|university\s+repository)\b/i.test(raw)) {
+      return { kind: "front_matter", role: "excluded", isFrontMatter: true, condenseReview: false };
+    }
+    if (/^(?:annexures?|appendices|appendix\b|proforma|consent\s+forms?|patient\s+information\s+sheets?|master\s+chart|case\s+report\s+form)/i.test(low)) {
+      return { kind: "annexure", role: "excluded", isFrontMatter: false, condenseReview: false };
+    }
+    if (/^(?:references|bibliography|list\s+of\s+references|works\s+cited)\b/i.test(low)) {
+      return { kind: "references", role: "references", isFrontMatter: false, condenseReview: false };
+    }
+    if (/^(?:review\s+of\s+literature|literature\s+review)\b/i.test(low) ||
+        (/\bsystematic\s+review\b/i.test(low) && pageIdx < Math.max(25, Math.floor(totalPages * 0.45)))) {
+      return { kind: "review", role: "introduction", isFrontMatter: false, condenseReview: true };
+    }
+    if (/^(?:summary\s+and\s+conclusions?|conclusions?|future\s+directions?)\b/i.test(low)) {
+      return { kind: "conclusion", role: "conclusion", isFrontMatter: false, condenseReview: false };
+    }
+    if (/^(?:abstract|executive\s+summary|structured\s+abstract)\b/i.test(low) ||
+        (/^summary\b/i.test(low) && pageIdx <= Math.max(6, Math.floor(totalPages * 0.12)))) {
+      return { kind: "abstract", role: "abstract", isFrontMatter: false, condenseReview: false };
+    }
+    if (/^summary\b/i.test(low)) {
+      return { kind: "conclusion", role: "conclusion", isFrontMatter: false, condenseReview: false };
+    }
+    if (/^(?:introduction|background|aims?\s+and\s+objectives?|aim\s*(?:&|and)\s*objectives?|aim\s+of\s+(?:the\s+study|this\s+thesis)|aims|objectives)\b/i.test(low)) {
+      return { kind: "introduction", role: "introduction", isFrontMatter: false, condenseReview: false };
+    }
+    if (/^(?:materials?\s+and\s+methods?|patients?\s+and\s+methods?|subjects?\s+and\s+methods?|methodology|methods?|study\s+design|study\s+protocol|study\s+population|statistical\s+analysis|ethical\s+considerations)\b/i.test(low)) {
+      return { kind: "methods", role: "methods", isFrontMatter: false, condenseReview: false };
+    }
+    if (/^(?:observations?\s+and\s+results?|observations?|results?|findings|recruitment\b|baseline\s+characteristics|follow\s+up|predicting\b|outcomes?)\b/i.test(low)) {
+      return { kind: "results", role: "results", isFrontMatter: false, condenseReview: false };
+    }
+    if (/^(?:general\s+discussion|discussion)\b/i.test(low)) {
+      return { kind: "discussion", role: "discussion", isFrontMatter: false, condenseReview: false };
+    }
+    /* Secondary keyword fallback inside multi-word chapter titles */
+    if (/\b(?:materials?\s+and\s+methods?|methodology|methods?)\b/i.test(low)) {
+      return { kind: "methods", role: "methods", isFrontMatter: false, condenseReview: false };
+    }
+    if (/\b(?:observations?\s+and\s+results?|results|recruitment|baseline|follow\s+up|outcomes?)\b/i.test(low)) {
+      return { kind: "results", role: "results", isFrontMatter: false, condenseReview: false };
+    }
+    if (/\b(?:discussion)\b/i.test(low)) {
+      return { kind: "discussion", role: "discussion", isFrontMatter: false, condenseReview: false };
+    }
+    if (/\b(?:conclusions?)\b/i.test(low)) {
+      return { kind: "conclusion", role: "conclusion", isFrontMatter: false, condenseReview: false };
+    }
+    if (/\b(?:introduction|aims?|objectives?)\b/i.test(low)) {
+      return { kind: "introduction", role: "introduction", isFrontMatter: false, condenseReview: false };
+    }
+    return { kind: "chapter", role: "other", isFrontMatter: false, condenseReview: false };
+  }
+
+  function isKnownThesisHeadingLine(tx) {
+    var s = String(tx || "").replace(/^\s+|\s+$/g, "");
+    if (!s || s.length > 96) return false;
+    var low = normHeadingText(s);
+    return /^(?:introduction|aims?\s*(?:&|and)\s*objectives?|aim\s+of\s+(?:the\s+study|this\s+thesis)|aims|objectives|review\s+of\s+literature|literature\s+review|materials?\s*(?:&|and)\s*methods?|patients?\s*(?:&|and)\s*methods?|subjects?\s*(?:&|and)\s*methods?|methodology|methods|observations?\s*(?:&|and)\s*results?|observations|results|discussion|general\s+discussion|summary|summary\s+and\s+conclusions?|conclusions?|bibliography|references|list\s+of\s+references|works\s+cited|annexures?|appendices|appendix(?:\s+\d+)?|proforma|consent(?:\s+form)?|master\s+chart|abstract|certificate|bonafide\s+certificate|declaration|acknowledgements?|acknowledgments?|table\s+of\s+contents|contents|list\s+of\s+tables|list\s+of\s+figures|list\s+of\s+abbreviations|abbreviations|curriculum\s+vitae)\b/i.test(low);
+  }
+
+  function detectThesisHeadings(pageLines, pages) {
+    var pl = (pageLines && pageLines.length) ? pageLines : pageLinesFromPages(pages || []);
+    if (!pl.length) return { bodySize: 11, headings: [] };
+    var bodySize = computeBodyFontSize(pl);
+    var totalPages = pl.length;
+
+    /* Detect running headers/footers repeated across >= 4 pages */
+    var edgeCounts = {}, i, j, l, lines, normFirst, normLast;
+    if (totalPages >= 8) {
+      for (i = 0; i < pl.length; i++) {
+        lines = (pl[i] && pl[i].lines) || [];
+        if (lines.length) {
+          normFirst = String(lines[0].tx || "").replace(/\d+/g, "#").replace(/\s+/g, " ").toLowerCase();
+          if (normFirst && normFirst.length < 90) edgeCounts[normFirst] = (edgeCounts[normFirst] || 0) + 1;
+          if (lines.length > 1) {
+            normLast = String(lines[lines.length - 1].tx || "").replace(/\d+/g, "#").replace(/\s+/g, " ").toLowerCase();
+            if (normLast && normLast.length < 90) edgeCounts[normLast] = (edgeCounts[normLast] || 0) + 1;
+          }
+        }
+      }
+    }
+
+    var rawCandidates = [];
+    for (i = 0; i < pl.length; i++) {
+      var pg = pl[i] || {};
+      var pNo = pg.n != null ? pg.n : (i + 1);
+      lines = pg.lines || [];
+      var pageTxt = "";
+      for (j = 0; j < lines.length; j++) pageTxt += (j ? "\n" : "") + (lines[j].tx || "");
+      var isTocPage = isTocOrFrontListPage(pageTxt);
+      var firstNonEmptyLine = true;
+
+      for (j = 0; j < lines.length; j++) {
+        l = lines[j] || {};
+        var tx = String(l.tx || "").replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
+        if (!tx) continue;
+        if (tx.length > 110) { firstNonEmptyLine = false; continue; }
+        /* Skip pure numbers, page numbers, table/figure captions, TOC dot-leader rows */
+        if (/^(?:\d+|[ivxlcdm]+|page\s+\d+(?:\s+of\s+\d+)?|\d+\s*\|\s*page)$/i.test(tx)) { firstNonEmptyLine = false; continue; }
+        if (/^(?:table|figure|fig\.?)\s+\d+(?:[.\-]\d+)?[a-z]?(?:\s*[:.\-]|$)/i.test(tx)) { firstNonEmptyLine = false; continue; }
+        if (/\.{3,}\s*\d+\s*$/.test(tx)) { firstNonEmptyLine = false; continue; }
+        var sz = typeof l.size === "number" && l.size > 0 ? l.size : bodySize;
+        var ratio = sz / bodySize;
+        var isMuchLarger = ratio >= 1.35;
+        var isLarger = ratio >= 1.12;
+        var isBold = l.bold === true;
+        var isCaps = l.caps === true || (/[A-Za-z].*[A-Za-z]/.test(tx) && !/[a-z]/.test(tx));
+        var isChapterPrefix = /^(?:Chapter|CHAPTER|Section|SECTION|Part|PART)\s+(?:\d+|[IVXLCDM]+)(?:\s*[:.\-\u2013\u2014]|\s+[A-Z0-9]|\s*$)/.test(tx) && !/^Chapter\s+\d+,/i.test(tx);
+        var isSubNum = /^\d+\.\d+(?:\.\d+)?\s+[A-Za-z]/.test(tx);
+        var isTopNum = /^(?:\d+|[IVXLCDM]+)\.\s+[A-Za-z]/.test(tx);
+        var isNumbered = isSubNum || isTopNum;
+        var isKnown = isKnownThesisHeadingLine(tx);
+        var wc = tx.split(/\s+/).length;
+
+        var edgeKey = tx.replace(/\d+/g, "#").toLowerCase();
+        if (totalPages >= 8 && edgeCounts[edgeKey] >= 4 && (j === 0 || j === lines.length - 1) &&
+            !isChapterPrefix && !isMuchLarger) {
+          firstNonEmptyLine = false;
+          continue;
+        }
+        /* Inside a TOC page, only allow the TOC heading itself on line 0/1 */
+        if (isTocPage && !firstNonEmptyLine) continue;
+        firstNonEmptyLine = false;
+
+        /* Reject table header cells smaller than body font, and long sentence lines ending in '.' */
+        if (sz < bodySize * 0.98 && !isChapterPrefix && !isKnown && l.headingLevel == null) continue;
+        if (/\.\s*$/.test(tx) && wc >= 9 && !isChapterPrefix && !isKnown && l.headingLevel == null) continue;
+        /* Reject citation-like lines */
+        if (/\b(?:19|20)\d{2}\s*[;:]\s*\d+|doi\s*:|pmid\s*:/i.test(tx) && l.headingLevel == null) continue;
+
+        var accepted = false;
+        if (l.headingLevel != null) accepted = true;
+        else if (isChapterPrefix && wc <= 14) accepted = true;
+        else if (isMuchLarger && wc <= 14) accepted = true;
+        else if (isLarger && (isBold || isCaps || isNumbered || isKnown || (wc <= 10 && !/[,;]$/.test(tx)))) accepted = true;
+        else if (isBold && (isNumbered || isKnown || (ratio >= 0.98 && wc <= 8 && !/[.,:;]$/.test(tx)))) accepted = true;
+        else if (isCaps && (isKnown || isNumbered) && wc <= 10) accepted = true;
+        else if (isKnown && wc <= 8 && ratio >= 0.98) accepted = true;
+
+        if (!accepted) continue;
+
+        rawCandidates.push({
+          page: pNo,
+          pageIdx: i,
+          lineIdx: j,
+          tx: tx,
+          size: Math.round(sz * 10) / 10,
+          bold: isBold,
+          caps: isCaps,
+          headingLevel: l.headingLevel != null ? l.headingLevel : null,
+          isChapterPrefix: isChapterPrefix,
+          isSubNum: isSubNum,
+          isTopNum: isTopNum,
+          isKnown: isKnown
+        });
+      }
+    }
+
+    /* Merge wrapped multi-line headings on the same page (e.g. "CHAPTER 1" + "Introduction and aims",
+       or 2-4 wrapped title lines at the same size/level) */
+    var merged = [];
+    for (i = 0; i < rawCandidates.length; i++) {
+      var cur = rawCandidates[i];
+      var prev = merged.length ? merged[merged.length - 1] : null;
+      var samePageAdjacent = prev && prev.page === cur.page && (cur.lineIdx - prev.endLineIdx) <= 2;
+      var chapterPlusTitle = prev && prev.isChapterPrefix && !cur.isChapterPrefix && !cur.isSubNum &&
+        prev.tx.split(/\s+/).length <= 3 && cur.size >= bodySize * 1.3;
+      var prevTitleSz = prev ? (prev._titleSize || prev.size) : 0;
+      var prevDangling = prev && /\b(?:and|or|of|in|for|the|to|with|a|an)$/i.test(prev.tx);
+      var sameSizeWrap = prev && Math.abs(prevTitleSz - cur.size) <= 0.3 &&
+        prev.headingLevel === cur.headingLevel &&
+        !cur.isChapterPrefix && !cur.isSubNum && !cur.isTopNum &&
+        (!isKnownThesisHeadingLine(cur.tx) || prevDangling || /^\(/.test(cur.tx)) &&
+        (prev._fromChapterPlusTitle || prevDangling || /^\(/.test(cur.tx) || !(isKnownThesisHeadingLine(prev.tx) && prev.tx.split(/\s+/).length <= 4));
+
+      if (samePageAdjacent && (chapterPlusTitle || sameSizeWrap)) {
+        prev.tx = chapterPlusTitle ? (prev.tx + ": " + cur.tx) : (prev.tx + " " + cur.tx);
+        prev.endLineIdx = cur.lineIdx;
+        if (chapterPlusTitle) { prev._titleSize = cur.size; prev._fromChapterPlusTitle = true; }
+        if (cur.isKnown) prev.isKnown = true;
+        continue;
+      }
+      cur.endLineIdx = cur.lineIdx;
+      merged.push(cur);
+    }
+
+    /* Assign hierarchical level (1 = chapter, 2 = section, 3 = subsection) */
+    var topSize = 0;
+    for (i = 0; i < merged.length; i++) {
+      if (merged[i].isChapterPrefix || (merged[i].isKnown && !merged[i].isSubNum)) {
+        if (merged[i].size > topSize) topSize = merged[i].size;
+      }
+    }
+    if (!topSize) {
+      for (i = 0; i < merged.length; i++) if (merged[i].size > topSize) topSize = merged[i].size;
+    }
+
+    var headings = [];
+    for (i = 0; i < merged.length; i++) {
+      var h = merged[i];
+      var lvl = 2;
+      if (h.headingLevel != null) {
+        lvl = h.headingLevel;
+      } else if (h.isChapterPrefix) {
+        lvl = 1;
+      } else if (h.isSubNum) {
+        var dotMatch = h.tx.match(/^(\d+(?:\.\d+)+)/);
+        var dots = dotMatch ? dotMatch[1].split(".").length : 2;
+        lvl = Math.min(3, dots);
+      } else if (h.size >= topSize * 0.80 && h.size > bodySize * 1.35) {
+        lvl = 1;
+      } else if (h.size >= topSize * 0.92 && h.size > bodySize * 1.15) {
+        lvl = 1;
+      } else if (h.isKnown && (h.size >= bodySize * 1.1 || h.caps || h.isTopNum) && (!topSize || topSize <= bodySize * 1.25)) {
+        lvl = 1;
+      } else if (h.size <= bodySize * 1.22 && topSize >= bodySize * 1.5) {
+        lvl = h.size <= bodySize * 1.08 ? 3 : 2;
+      }
+      var info = classifyHeadingRole(h.tx, h.pageIdx, totalPages);
+      headings.push({
+        title: h.tx,
+        level: lvl,
+        page: h.page,
+        pageIdx: h.pageIdx,
+        lineIdx: h.lineIdx,
+        size: h.size,
+        bold: h.bold,
+        caps: h.caps,
+        kind: info.kind,
+        role: info.role,
+        isFrontMatter: info.isFrontMatter,
+        condenseReview: info.condenseReview
+      });
+    }
+
+    return { bodySize: bodySize, headings: headings };
+  }
+
+  function sliceChapterPages(pages, node) {
+    var list = normalizePagesInput(pages);
+    if (!list.length || !node) return [];
+    var sp = node.startPageIdx != null ? node.startPageIdx : 0;
+    var sl = node.startLineIdx != null ? node.startLineIdx : 0;
+    var ep = node.endPageIdx != null ? node.endPageIdx : (list.length - 1);
+    var el = node.endLineIdx;
+    var out = [], i, pg, lines, from, to, txt;
+    for (i = sp; i <= ep && i < list.length; i++) {
+      pg = list[i];
+      lines = String(pg.text || "").split(/\n+/);
+      from = (i === sp) ? Math.max(0, sl) : 0;
+      to = (i === ep && el != null) ? Math.min(lines.length, el) : lines.length;
+      txt = lines.slice(from, to).join("\n").replace(/^\s+|\s+$/g, "");
+      if (txt) out.push({ n: pg.n, text: txt });
+    }
+    return out;
+  }
+
+  function buildChapterTree(pageLines, pages) {
+    var pl = (pageLines && pageLines.length) ? pageLines : pageLinesFromPages(pages || []);
+    var pgList = normalizePagesInput(pages && pages.length ? pages : pl.map(function (p) {
+      return { n: p.n, text: (p.lines || []).map(function (l) { return l.tx || ""; }).filter(Boolean).join("\n") };
+    }));
+    var det = detectThesisHeadings(pl, pgList);
+    var headings = det.headings;
+    var totalPages = pgList.length;
+    var chapters = [];
+
+    if (!headings.length) {
+      /* Graceful fallback when no typographic/numbered headings exist (e.g. OCR scans or 1-page note) */
+      var seg = segmentThesisChapters(pgList);
+      var order = [
+        { key: "abstract", title: "Summary / Abstract", kind: "abstract", role: "abstract" },
+        { key: "introduction", title: "Introduction", kind: "introduction", role: "introduction" },
+        { key: "methods", title: "Methods", kind: "methods", role: "methods" },
+        { key: "results", title: "Results", kind: "results", role: "results" },
+        { key: "discussion", title: "Discussion", kind: "discussion", role: "discussion" },
+        { key: "conclusion", title: "Conclusion", kind: "conclusion", role: "conclusion" },
+        { key: "references", title: "References", kind: "references", role: "references" },
+        { key: "appendix", title: "Front matter / Appendices", kind: "annexure", role: "excluded" }
+      ];
+      for (var oi = 0; oi < order.length; oi++) {
+        var o = order[oi];
+        var bucket = seg[o.key] || [];
+        if (!bucket.length) continue;
+        var firstP = bucket[0].n != null ? bucket[0].n : 1;
+        var lastP = bucket[bucket.length - 1].n != null ? bucket[bucket.length - 1].n : firstP;
+        chapters.push({
+          id: "ch_" + (chapters.length + 1),
+          title: o.title,
+          level: 1,
+          startPage: firstP,
+          endPage: lastP,
+          startPageIdx: Math.max(0, firstP - 1),
+          startLineIdx: 0,
+          endPageIdx: Math.max(0, lastP - 1),
+          endLineIdx: null,
+          kind: o.kind,
+          role: o.role,
+          isFrontMatter: false,
+          condenseReview: false,
+          children: []
+        });
+      }
+      /* Cover/title pages before TOC or Chapter 1 are front matter, not study results */
+    var firstBodyIdx = -1;
+    for (hi = 0; hi < chapters.length; hi++) {
+      if (chapters[hi].kind === "introduction" || chapters[hi].kind === "methods" || chapters[hi].kind === "review" ||
+          /^(?:chapter|section)\s+1\b/i.test(chapters[hi].title || "")) {
+        firstBodyIdx = hi;
+        break;
+      }
+    }
+    if (firstBodyIdx > 0) {
+      for (hi = 0; hi < firstBodyIdx; hi++) {
+        if (chapters[hi].kind === "chapter" && chapters[hi].startPageIdx <= 5 && chapters[hi].endPageIdx <= 6) {
+          chapters[hi].kind = "front_matter";
+          chapters[hi].role = "excluded";
+          chapters[hi].isFrontMatter = true;
+        }
+      }
+    }
+
+    return { bodySize: det.bodySize, totalPages: totalPages, chapters: chapters };
+    }
+
+    /* Promote level-2 headings before the first level-1 heading if no level-1 heading exists at all */
+    var hasTop = false, hi;
+    for (hi = 0; hi < headings.length; hi++) if (headings[hi].level === 1) { hasTop = true; break; }
+    if (!hasTop) {
+      for (hi = 0; hi < headings.length; hi++) if (headings[hi].level === 2) headings[hi].level = 1;
+    }
+
+    var firstH = headings[0];
+    if (firstH && firstH.pageIdx > 0) {
+      chapters.push({
+        id: "ch_front_0",
+        title: "Title and front matter",
+        level: 1,
+        startPage: pgList[0].n,
+        endPage: pgList[Math.max(0, firstH.pageIdx - 1)].n,
+        startPageIdx: 0,
+        startLineIdx: 0,
+        endPageIdx: firstH.lineIdx > 0 ? firstH.pageIdx : Math.max(0, firstH.pageIdx - 1),
+        endLineIdx: firstH.lineIdx > 0 ? firstH.lineIdx : null,
+        kind: "front_matter",
+        role: "excluded",
+        isFrontMatter: true,
+        condenseReview: false,
+        children: []
+      });
+    }
+
+    var curTop = null;
+    for (hi = 0; hi < headings.length; hi++) {
+      var hd = headings[hi];
+      var nextHd = hi + 1 < headings.length ? headings[hi + 1] : null;
+      var endPgIdx = totalPages - 1;
+      var endLine = null;
+      if (nextHd) {
+        if (nextHd.lineIdx > 0) {
+          endPgIdx = nextHd.pageIdx;
+          endLine = nextHd.lineIdx;
+        } else {
+          endPgIdx = Math.max(hd.pageIdx, nextHd.pageIdx - 1);
+          endLine = null;
+        }
+      }
+      if (hd.level === 1 || !curTop) {
+        /* Compute top-level end bound extending until the next level-1 heading */
+        var nextTop = null;
+        for (var nj = hi + 1; nj < headings.length; nj++) {
+          if (headings[nj].level === 1) { nextTop = headings[nj]; break; }
+        }
+        var topEndPgIdx = totalPages - 1;
+        var topEndLine = null;
+        if (nextTop) {
+          if (nextTop.lineIdx > 0) {
+            topEndPgIdx = nextTop.pageIdx;
+            topEndLine = nextTop.lineIdx;
+          } else {
+            topEndPgIdx = Math.max(hd.pageIdx, nextTop.pageIdx - 1);
+            topEndLine = null;
+          }
+        }
+        curTop = {
+          id: "ch_" + (chapters.length + 1),
+          title: hd.title,
+          level: 1,
+          startPage: hd.page,
+          endPage: pgList[topEndPgIdx] ? pgList[topEndPgIdx].n : hd.page,
+          startPageIdx: hd.pageIdx,
+          startLineIdx: hd.lineIdx,
+          endPageIdx: topEndPgIdx,
+          endLineIdx: topEndLine,
+          kind: hd.kind,
+          role: hd.role,
+          isFrontMatter: hd.isFrontMatter,
+          condenseReview: hd.condenseReview,
+          children: []
+        };
+        chapters.push(curTop);
+      } else {
+        curTop.children.push({
+          id: curTop.id + "_s" + (curTop.children.length + 1),
+          title: hd.title,
+          level: hd.level,
+          startPage: hd.page,
+          endPage: pgList[endPgIdx] ? pgList[endPgIdx].n : hd.page,
+          startPageIdx: hd.pageIdx,
+          startLineIdx: hd.lineIdx,
+          endPageIdx: endPgIdx,
+          endLineIdx: endLine,
+          kind: hd.kind,
+          role: hd.role,
+          isFrontMatter: hd.isFrontMatter,
+          condenseReview: hd.condenseReview
+        });
+      }
+    }
+
+    /* Cover/title pages before TOC or Chapter 1 are front matter, not study results */
+    var firstBodyIdx = -1;
+    for (hi = 0; hi < chapters.length; hi++) {
+      if (chapters[hi].kind === "introduction" || chapters[hi].kind === "methods" || chapters[hi].kind === "review" ||
+          /^(?:chapter|section)\s+1\b/i.test(chapters[hi].title || "")) {
+        firstBodyIdx = hi;
+        break;
+      }
+    }
+    if (firstBodyIdx > 0) {
+      for (hi = 0; hi < firstBodyIdx; hi++) {
+        if (chapters[hi].kind === "chapter" && chapters[hi].startPageIdx <= 5 && chapters[hi].endPageIdx <= 6) {
+          chapters[hi].kind = "front_matter";
+          chapters[hi].role = "excluded";
+          chapters[hi].isFrontMatter = true;
+        }
+      }
+    }
+
+    return { bodySize: det.bodySize, totalPages: totalPages, chapters: chapters };
+  }
+
+  function journalHeadingsFor(journal, paperType) {
+    if (journal && Array.isArray(journal.requiredHeadings) && journal.requiredHeadings.length) {
+      return journal.requiredHeadings.map(function (h) {
+        return typeof h === "string" ? { id: h.toLowerCase().replace(/[^a-z0-9]+/g, "_"), heading: h } : h;
+      });
+    }
+    if (paperType === "case") {
+      return [
+        { id: "abstract", heading: "Abstract" },
+        { id: "introduction", heading: "Introduction" },
+        { id: "methods", heading: "Case Presentation" },
+        { id: "results", heading: "Results / Course" },
+        { id: "discussion", heading: "Discussion" },
+        { id: "conclusion", heading: "Conclusion" },
+        { id: "references", heading: "References" }
+      ];
+    }
+    return [
+      { id: "abstract", heading: "Abstract" },
+      { id: "introduction", heading: "Introduction" },
+      { id: "methods", heading: "Methods" },
+      { id: "results", heading: "Results" },
+      { id: "discussion", heading: "Discussion" },
+      { id: "conclusion", heading: "Conclusion" },
+      { id: "references", heading: "References" }
+    ];
+  }
+
+  function mapChaptersToJournal(tree, pages, journal, paperType, overrides) {
+    tree = tree || buildChapterTree(null, pages || []);
+    overrides = overrides || {};
+    var headings = journalHeadingsFor(journal, paperType);
+    var chapters = tree.chapters || [];
+    var items = [];
+    var excluded = [];
+    var bySection = {
+      abstract: { pages: [], reviewPages: [], tables: [] },
+      introduction: { pages: [], reviewPages: [], tables: [] },
+      methods: { pages: [], reviewPages: [], tables: [] },
+      results: { pages: [], reviewPages: [], tables: [] },
+      discussion: { pages: [], reviewPages: [], tables: [] },
+      conclusion: { pages: [], reviewPages: [], tables: [] },
+      references: { pages: [], reviewPages: [], tables: [] }
+    };
+
+    function addPagesTo(secId, chPages, isReview) {
+      var bucket = bySection[secId];
+      if (!bucket || !chPages || !chPages.length) return;
+      for (var k = 0; k < chPages.length; k++) {
+        bucket.pages.push(chPages[k]);
+        if (isReview) bucket.reviewPages.push(chPages[k]);
+      }
+    }
+
+    for (var i = 0; i < chapters.length; i++) {
+      var ch = chapters[i];
+      var children = ch.children || [];
+      var childImrad = {};
+      var distinctRoles = 0;
+      for (var ci = 0; ci < children.length; ci++) {
+        var r = children[ci].role;
+        if ((r === "methods" || r === "results" || r === "discussion") && !childImrad[r]) {
+          childImrad[r] = true;
+          distinctRoles++;
+        }
+      }
+      var hasMultiChildren = distinctRoles >= 2 && (ch.kind === "chapter" || (/^(?:chapter|section)\s+\d+/i.test(ch.title || "") && ch.kind !== "review" && ch.kind !== "references" && ch.kind !== "annexure"));
+      var defaultTarget = ch.role || "excluded";
+      if (hasMultiChildren) defaultTarget = "auto";
+      else if (defaultTarget === "other") defaultTarget = "results";
+
+      var chosen = Object.prototype.hasOwnProperty.call(overrides, ch.id) ? overrides[ch.id] : defaultTarget;
+      var chPages = sliceChapterPages(pages, ch);
+      var item = {
+        id: ch.id,
+        title: ch.title,
+        startPage: ch.startPage,
+        endPage: ch.endPage,
+        kind: ch.kind,
+        isFrontMatter: !!ch.isFrontMatter,
+        condenseReview: !!ch.condenseReview,
+        canAutoSplit: hasMultiChildren,
+        defaultTarget: defaultTarget,
+        target: chosen
+      };
+      items.push(item);
+
+      if (chosen === "excluded") {
+        excluded.push({
+          id: ch.id,
+          title: ch.title,
+          startPage: ch.startPage,
+          endPage: ch.endPage,
+          reason: ch.isFrontMatter ? "Front matter" : (ch.kind === "annexure" ? "Annexure / appendix" : "Excluded by user")
+        });
+        continue;
+      }
+
+      if (chosen === "auto" && hasMultiChildren) {
+        /* Route subheadings inside a multi-study chapter (e.g. Ch 3 Intro/Methods/Results/Discussion) */
+        var firstChild = children[0];
+        if (firstChild && (firstChild.startPageIdx > ch.startPageIdx || firstChild.startLineIdx > ch.startLineIdx)) {
+          var headOnly = sliceChapterPages(pages, {
+            startPageIdx: ch.startPageIdx,
+            startLineIdx: ch.startLineIdx,
+            endPageIdx: firstChild.startPageIdx,
+            endLineIdx: firstChild.startLineIdx
+          });
+          addPagesTo("introduction", headOnly, false);
+        }
+        for (var j = 0; j < children.length; j++) {
+          var sub = children[j];
+          if (sub.role === "excluded" || sub.kind === "annexure") {
+            excluded.push({ id: sub.id, title: ch.title + " - " + sub.title, startPage: sub.startPage, endPage: sub.endPage, reason: "Annexure / appendix" });
+            continue;
+          }
+          var subTarget = (sub.role && sub.role !== "other") ? sub.role : "results";
+          addPagesTo(subTarget, sliceChapterPages(pages, sub), !!sub.condenseReview);
+        }
+      } else {
+        addPagesTo(chosen, chPages, !!ch.condenseReview);
+        /* If Discussion contains an explicit Conclusion subheading (e.g. 9.5 Conclusions), also feed Conclusion */
+        if (chosen === "discussion") {
+          for (var dk = 0; dk < children.length; dk++) {
+            if (children[dk].role === "conclusion") {
+              addPagesTo("conclusion", sliceChapterPages(pages, children[dk]), false);
+            }
+          }
+        }
+      }
+    }
+
+    if (bySection.results.pages.length) {
+      bySection.results.tables = extractThesisTables(bySection.results.pages);
+    }
+
+    return {
+      headings: headings,
+      items: items,
+      excluded: excluded,
+      bySection: bySection,
+      overrides: overrides
+    };
+  }
+
+  function runBoundedPool(tasks, concurrency) {
+    var list = Array.isArray(tasks) ? tasks : [];
+    var limit = Math.max(1, Number(concurrency) || 3);
+    if (!list.length) return Promise.resolve([]);
+    var results = new Array(list.length);
+    var nextIdx = 0;
+    function worker() {
+      if (nextIdx >= list.length) return Promise.resolve();
+      var i = nextIdx++;
+      return Promise.resolve().then(function () { return list[i](); }).then(function (val) {
+        results[i] = { ok: true, value: val };
+      }, function (err) {
+        results[i] = { ok: false, error: err };
+        if (err && err._handledByConsent) throw err;
+      }).then(worker);
+    }
+    var workers = [];
+    var n = Math.min(limit, list.length);
+    for (var w = 0; w < n; w++) workers.push(worker());
+    return Promise.all(workers).then(function () { return results; });
+  }
+
   function condenseLongBucket(pages, totalTargetChars) {
     var list = normalizePagesInput(pages);
     if (!list.length) return [];
@@ -893,10 +1745,50 @@
     return out;
   }
 
-  function extractThesisReferences(pages) {
+  function refIsCitedInText(ref, citedLow) {
+    if (!citedLow) return true;
+    if (ref.doi && citedLow.indexOf(String(ref.doi).toLowerCase()) >= 0) return true;
+    if (ref.pmid && citedLow.indexOf(String(ref.pmid).toLowerCase()) >= 0) return true;
+    var yr = String(ref.year || "");
+    var authRaw = String(ref.authors || "").replace(/^\s*(?:\[\d+\]|\d+[.)])\s*/, "");
+    var surname = (authRaw.match(/^([A-Za-z][A-Za-z\-']{1,30})/) || [])[1] || "";
+    if (surname && surname.length >= 3 && yr) {
+      var sLow = surname.toLowerCase();
+      var idx = citedLow.indexOf(sLow);
+      while (idx >= 0) {
+        var win = citedLow.slice(Math.max(0, idx - 6), Math.min(citedLow.length, idx + sLow.length + 32));
+        if (win.indexOf(yr) >= 0) return true;
+        idx = citedLow.indexOf(sLow, idx + sLow.length);
+      }
+    }
+    if (ref.numMarker && yr) {
+      var nStr = String(ref.numMarker);
+      var nNum = Number(nStr);
+      var grpRe = /[\[\(](\d+(?:\s*[-,\u2013]\s*\d+)*)[\]\)]/g, gm;
+      while ((gm = grpRe.exec(citedLow)) !== null) {
+        var parts = gm[1].split(/\s*,\s*/);
+        for (var pi = 0; pi < parts.length; pi++) {
+          var rng = parts[pi].match(/^(\d+)\s*[-\u2013]\s*(\d+)$/);
+          if (rng) {
+            var lo = Number(rng[1]), hi = Number(rng[2]);
+            if (isFinite(nNum) && hi >= lo && (hi - lo) <= 30 && nNum >= lo && nNum <= hi) return true;
+          } else if (parts[pi].replace(/\s+/g, "") === nStr) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  function extractThesisReferences(pages, opts) {
+    opts = opts || {};
     var list = normalizePagesInput(pages);
-    var buckets = segmentThesisChapters(list);
-    var refPages = buckets.references.slice();
+    var refPages = (opts.refPages && opts.refPages.length) ? normalizePagesInput(opts.refPages) : null;
+    if (!refPages) {
+      var buckets = segmentThesisChapters(list);
+      refPages = buckets.references.slice();
+    }
     var p;
     if (!refPages.length) {
       for (p = Math.floor(list.length * 0.5); p < list.length; p++) {
@@ -904,12 +1796,15 @@
         if ((t.match(/\b(?:19|20)\d{2}\s*[;,]/g) || []).length >= 2) refPages.push(list[p]);
       }
     }
+    var citedLow = opts.citedText ? String(opts.citedText).toLowerCase() : "";
+    var rawCap = citedLow ? 160 : 30;
     var out = [], seen = {}, lines, li, cur = "";
     function pushRef(raw) {
       var s = raw.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
       if (s.length < 24 || s.length > 500 || !/\b(19|20)\d{2}\b/.test(s)) return;
       if (/submitted\s+in\s+fulfilment|table\s+of\s+contents|doctor\s+of\s+philosophy/i.test(s)) return;
       if (!/[;:,]\s*\d+|doi:|pmid/i.test(s) && !/^\s*(?:\[\d+\]|\d+[.)])\s+/.test(s)) return;
+      var numM = s.match(/^\s*\[?(\d{1,3})\]?[.)]\s+/);
       var k = s.slice(0, 60).toLowerCase();
       if (seen[k]) return;
       seen[k] = true;
@@ -921,14 +1816,15 @@
         journal: "",
         year: (s.match(/\b((?:19|20)\d{2})\b/) || [])[1] || "",
         doi: doiM ? doiM[1].replace(/[.,;)]$/, "") : "",
-        pmid: pmidM ? pmidM[1] : ""
+        pmid: pmidM ? pmidM[1] : "",
+        numMarker: numM ? numM[1] : ""
       });
     }
-    for (p = 0; p < refPages.length && out.length < 30; p++) {
+    for (p = 0; p < refPages.length && out.length < rawCap; p++) {
       lines = String(refPages[p].text || "").split(/\n+/);
-      for (li = 0; li < lines.length && out.length < 30; li++) {
+      for (li = 0; li < lines.length && out.length < rawCap; li++) {
         var line = lines[li].replace(/^\s+|\s+$/g, "");
-        if (!line || /^(References|Bibliography|\d+)$/i.test(line)) continue;
+        if (!line || /^(References|Bibliography|List of references|\d+)$/i.test(line)) continue;
         if (/^(?:\[?\d+\]?[.)]\s+|[A-Z][a-zA-Z\-']+,?\s+[A-Z]{1,3}\b)/.test(line) && cur) {
           pushRef(cur);
           cur = line;
@@ -938,7 +1834,15 @@
       }
       if (cur) { pushRef(cur); cur = ""; }
     }
-    return out;
+    if (citedLow && out.length) {
+      var citedOnly = [];
+      for (var ci = 0; ci < out.length; ci++) {
+        if (refIsCitedInText(out[ci], citedLow)) citedOnly.push(out[ci]);
+      }
+      if (citedOnly.length) return citedOnly.slice(0, 40);
+      return out.slice(0, 30);
+    }
+    return out.slice(0, 30);
   }
 
   function referenceFlags(refs) {
@@ -1563,8 +2467,13 @@
       : (scanRes.maskedCount ? { softPages: [], maskedCount: scanRes.maskedCount, findings: [] } : null);
     var proj = activeProject();
     var own = (extra && typeof extra.ownUpload === "boolean") ? extra.ownUpload : true;
+    var pLines = (extra && extra.pageLines) || (pages && pages._pageLines) || null;
+    var tree = buildChapterTree(pLines, scanRes.pages);
     var patch = {
       pages: scanRes.pages,
+      chapterTree: tree,
+      chapterMap: {},
+      sectionStatus: null,
       filename: filename,
       phi: phiInfo,
       phiConsent: null,
@@ -1610,7 +2519,7 @@
     if (isDocxFile) {
       setMsg(container, (SMD.p2 && SMD.p2.loadingHtml) ? SMD.p2.loadingHtml("Reading your Word (.docx) thesis") : "Reading your Word (.docx) thesis");
       readFileAsArrayBuffer(file).then(parseDocx).then(function (pages) {
-        saveExtractedPages(pages, file.name, container, { artifactId: null, jobId: null });
+        saveExtractedPages(pages, file.name, container, { artifactId: null, jobId: null, pageLines: pages && pages._pageLines });
       }).catch(function (err) {
         var msg = (err && err.message) ? err.message : "Could not read this Word (.docx) document. Export it as PDF and upload again.";
         setMsg(container, '<div class="rmd-banner rmd-banner-warn">' + esc(msg) + '</div>');
@@ -1626,7 +2535,7 @@
         setMsg(container, loadHtml("Reading page " + cur + " of " + tot));
       }).then(function (res) {
         if (res && res.pages && res.pages.length) {
-          saveExtractedPages(res.pages, file.name, container, { artifactId: null, jobId: null });
+          saveExtractedPages(res.pages, file.name, container, { artifactId: null, jobId: null, pageLines: res.pageLines });
           return;
         }
         var OD = G && G.SMD_RMD_ONDEVICE_PDF;
@@ -2484,6 +3393,180 @@
     }).catch(handleThesisAiError);
   }
 
+  function ensureChapterTree() {
+    if (ts.chapterTree && Array.isArray(ts.chapterTree.chapters) && ts.chapterTree.chapters.length) {
+      return ts.chapterTree;
+    }
+    var pLines = (ts.pages && ts.pages._pageLines) || null;
+    var tree = buildChapterTree(pLines, ts.pages || []);
+    saveThesis(tpid, { chapterTree: tree });
+    ts = loadThesis(tpid);
+    return tree;
+  }
+
+  function draftOneSectionStep(step, onSubProgress) {
+    function prependHint(chunkPages, hint) {
+      if (!hint || !chunkPages.length) return chunkPages;
+      var out = [{ n: chunkPages[0].n, text: hint + String(chunkPages[0].text || "") }];
+      for (var k = 1; k < chunkPages.length; k++) out.push(chunkPages[k]);
+      return out;
+    }
+    function cleanSectionOutput(txt) {
+      return String(txt || "")
+        .replace(/^\s*#{1,4}\s*(?:Abstract|Introduction|Methods|Results|Discussion|Conclusion)\s*[:\-.]*\s*/i, "")
+        .replace(/^\s+|\s+$/g, "");
+    }
+    function runOneChunk(reqSec, fallbackSec, hint, chunkPages, chunkBudget, allowFallback) {
+      var payloadPages = prependHint(chunkPages, hint);
+      return callThesisAi(reqSec, payloadPages, chunkBudget).catch(function (err) {
+        if (err && err._handledByConsent) throw err;
+        var isBadSec = err && (err.status === 400 || err.code === "invalid_body");
+        if (allowFallback && isBadSec && fallbackSec) {
+          return callThesisAi(fallbackSec, payloadPages, chunkBudget);
+        }
+        return callThesisAi(reqSec, payloadPages, chunkBudget);
+      }).then(function (res) {
+        var txt = cleanSectionOutput(extractSingleSectionText(res, step.id));
+        if (!txt) {
+          return callThesisAi(reqSec, payloadPages, chunkBudget);
+        }
+        return res;
+      });
+    }
+
+    var pages = step.pages || [];
+    if (!pages.length) {
+      return Promise.resolve({ id: step.id, text: "", tables: [], references: [], model: "", skipped: true });
+    }
+    var chars = totalThesisChars(pages);
+    if (chars <= 13000) {
+      return runOneChunk(step.reqSection, step.fallbackSection, step.hint, pages, step.budget, true).then(function (res) {
+        var d = (res && res.draft) ? res.draft : res;
+        return {
+          id: step.id,
+          text: cleanSectionOutput(extractSingleSectionText(res, step.id)),
+          tables: (d && (d.tables || d.suggestedTables)) || [],
+          references: (d && d.references) || [],
+          model: (res && res.model) || ""
+        };
+      });
+    }
+
+    /* Long chapters: split into <= 13,000-char sub-chunks (up to 4), condense in bounded parallel, then merge */
+    var chunks = chunkPagesByChars(pages, 13000, 4);
+    if (chunks.length <= 1) {
+      var single = chunks[0] || pages.slice(0, 6);
+      return runOneChunk(step.reqSection, step.fallbackSection, step.hint, single, step.budget, true).then(function (res) {
+        var d = (res && res.draft) ? res.draft : res;
+        return {
+          id: step.id,
+          text: cleanSectionOutput(extractSingleSectionText(res, step.id)),
+          tables: (d && (d.tables || d.suggestedTables)) || [],
+          references: (d && d.references) || [],
+          model: (res && res.model) || ""
+        };
+      });
+    }
+
+    var subTasks = [];
+    var subBudget = Math.max(220, Math.min(700, Math.round(step.budget * 0.9)));
+    for (var ci = 0; ci < chunks.length; ci++) {
+      (function (chunkPages, idx, total) {
+        subTasks.push(function () {
+          if (onSubProgress) onSubProgress(idx + 1, total);
+          var subHint = "PART " + (idx + 1) + " OF " + total + " FOR " + step.heading.toUpperCase() +
+            ": Extract and condense the key points for " + step.heading +
+            ". Keep the author's wording and copy all exact numbers, statistics and table names verbatim.\n\n";
+          return runOneChunk(step.reqSection, step.fallbackSection, subHint, chunkPages, subBudget, true);
+        });
+      })(chunks[ci], ci, chunks.length);
+    }
+
+    return runBoundedPool(subTasks, 3).then(function (subResults) {
+      var notes = [], subTables = [], subRefs = [], lastMod = "";
+      for (var si = 0; si < subResults.length; si++) {
+        var sr = subResults[si];
+        if (!sr || !sr.ok) {
+          if (sr && sr.error && sr.error._handledByConsent) throw sr.error;
+          continue;
+        }
+        var res = sr.value;
+        if (res && res.model) lastMod = res.model;
+        var d = (res && res.draft) ? res.draft : res;
+        if (d) {
+          if (Array.isArray(d.tables || d.suggestedTables)) subTables = subTables.concat(d.tables || d.suggestedTables);
+          if (Array.isArray(d.references)) subRefs = subRefs.concat(d.references);
+        }
+        var txt = cleanSectionOutput(extractSingleSectionText(res, step.id));
+        if (txt) notes.push({ n: chunks[si][0] ? chunks[si][0].n : 1, text: txt });
+      }
+      if (!notes.length) {
+        throw new Error("All sub-chunks failed for " + step.heading);
+      }
+      if (notes.length === 1 && countWords(notes[0].text) <= step.budget) {
+        return { id: step.id, text: notes[0].text, tables: subTables, references: subRefs, model: lastMod };
+      }
+      var mergeHint = step.hint + "MERGE INSTRUCTION: Combine these " + notes.length +
+        " part summaries into one cohesive " + step.heading + " section within " + step.budget +
+        " words. Keep the author's wording and every exact number verbatim.\n\n";
+      return runOneChunk(step.reqSection, step.fallbackSection, mergeHint, notes, step.budget, true).then(function (mRes) {
+        var md = (mRes && mRes.draft) ? mRes.draft : mRes;
+        if (md) {
+          if (Array.isArray(md.tables || md.suggestedTables)) subTables = subTables.concat(md.tables || md.suggestedTables);
+          if (Array.isArray(md.references)) subRefs = subRefs.concat(md.references);
+        }
+        return {
+          id: step.id,
+          text: cleanSectionOutput(extractSingleSectionText(mRes, step.id)),
+          tables: subTables,
+          references: subRefs,
+          model: (mRes && mRes.model) || lastMod
+        };
+      });
+    });
+  }
+
+  function buildSectionPlan(allPages, jr, mapping) {
+    var mainLimit = jr.wordLimit || 3000;
+    var buckets = mapping.bySection;
+    var introBucket = buckets.introduction || { pages: [], reviewPages: [] };
+    var methodsBucket = buckets.methods || { pages: [] };
+    var resultsBucket = buckets.results || { pages: [], tables: [] };
+    var discBucket = buckets.discussion || { pages: [] };
+    var concBucket = buckets.conclusion || { pages: [] };
+
+    /* If thesis had no conclusion chapter at all (not explicitly excluded), use tail of discussion + front summary */
+    var concExcludedByUser = (mapping.excluded || []).some(function (x) {
+      return /conclu|summary/i.test(x.title || "") && x.reason === "Excluded by user";
+    });
+    var concPages = concBucket.pages.slice();
+    if (!concPages.length && !concExcludedByUser) {
+      var tail = discBucket.pages.slice(-Math.min(6, discBucket.pages.length));
+      var headSum = (buckets.abstract && buckets.abstract.pages || []).slice(0, Math.min(4, (buckets.abstract && buckets.abstract.pages || []).length));
+      concPages = headSum.concat(tail);
+    }
+
+    var introHint = "SECTION INSTRUCTION: Condense the thesis introduction and aims into a crisp background and rationale, keeping the author's wording.\n\n";
+    if (introBucket.reviewPages && introBucket.reviewPages.length) {
+      introHint = "SECTION INSTRUCTION: Condense the Review of Literature into the 3 to 5 most relevant points with their citations, combined with the thesis introduction and aims.\n\n";
+    }
+    var resTables = (resultsBucket.tables && resultsBucket.tables.length) ? resultsBucket.tables : extractThesisTables(resultsBucket.pages);
+    var resHint = "SECTION INSTRUCTION: Report key participant numbers, primary and secondary outcomes and statistics copied verbatim from the thesis.\n\n";
+    if (resTables.length) {
+      var tIds = [];
+      for (var ti = 0; ti < resTables.length && ti < 8; ti++) tIds.push(resTables[ti].id);
+      resHint = "SECTION INSTRUCTION: Report key participant numbers, primary and secondary outcomes and statistics copied verbatim from the thesis, referencing thesis tables (" + tIds.join(", ") + ") where applicable.\n\n";
+    }
+
+    return [
+      { id: "introduction", heading: "Introduction", reqSection: "introduction", pages: introBucket.pages, budget: Math.max(250, Math.round(mainLimit * 0.18)), hint: introHint },
+      { id: "methods", heading: "Methods", reqSection: "methods", pages: methodsBucket.pages, budget: Math.max(300, Math.round(mainLimit * 0.25)), hint: "SECTION INSTRUCTION: Summarize study design, setting, participants, interventions or exposures, outcomes and statistical methods with exact figures from the thesis.\n\n" },
+      { id: "results", heading: "Results", reqSection: "results", pages: resultsBucket.pages, budget: Math.max(350, Math.round(mainLimit * 0.30)), hint: resHint },
+      { id: "discussion", heading: "Discussion", reqSection: "discussion", pages: discBucket.pages, budget: Math.max(250, Math.round(mainLimit * 0.20)), hint: "SECTION INSTRUCTION: Synthesize main findings, comparison with prior studies, strengths and limitations from the thesis.\n\n" },
+      { id: "conclusion", heading: "Conclusion", reqSection: "conclusion", fallbackSection: "discussion", pages: concPages, budget: Math.max(80, Math.min(180, Math.round(mainLimit * 0.08))), hint: "CONCLUSION SECTION ONLY: Write 2 to 4 concise clinical sentences stating the primary conclusion and practical implication strictly from these thesis conclusion pages.\n\n" }
+    ];
+  }
+
   function orchestrateThesisDraft(container, st) {
     ts = loadThesis(tpid);
     var jr = journalOf();
@@ -2491,28 +3574,21 @@
     var absLimit = abstractLimitOf(jr);
     var allPages = ts.pages || [];
     var chars = totalThesisChars(allPages);
+    var overrides = ts.chapterMap || {};
+    var hasOverrides = Object.keys(overrides).length > 0;
 
-    /* Fast path for short fixtures / tutorial sample (<= 13,500 chars) */
-    if (chars <= 13500) {
+    /* Fast path for short fixtures / tutorial sample (<= 13,500 chars) without manual chapter overrides */
+    if (chars <= 13500 && !hasOverrides) {
       return callThesisAi(null, allPages, mainLimit, { abstractLimit: absLimit });
     }
 
-    var buckets = segmentThesisChapters(allPages);
-    var plan = [
-      { id: "introduction", heading: "Introduction", reqSection: "introduction", pages: buckets.introduction, budget: Math.max(250, Math.round(mainLimit * 0.18)), hint: "SECTION INSTRUCTION: Condense the thesis introduction and literature review into a concise background and study rationale.\n\n" },
-      { id: "methods", heading: "Methods", reqSection: "methods", pages: buckets.methods, budget: Math.max(300, Math.round(mainLimit * 0.25)), hint: "SECTION INSTRUCTION: Summarize study design, setting, participants, interventions or exposures, outcomes and statistical methods with exact figures from the thesis.\n\n" },
-      { id: "results", heading: "Results", reqSection: "results", pages: buckets.results, budget: Math.max(350, Math.round(mainLimit * 0.30)), hint: "SECTION INSTRUCTION: Report key participant numbers, primary and secondary outcomes and statistics copied verbatim from the thesis.\n\n" },
-      { id: "discussion", heading: "Discussion", reqSection: "discussion", pages: buckets.discussion, budget: Math.max(250, Math.round(mainLimit * 0.20)), hint: "SECTION INSTRUCTION: Synthesize main findings, comparison with prior studies, strengths and limitations from the thesis.\n\n" },
-      { id: "conclusion", heading: "Conclusion", reqSection: "conclusion", fallbackSection: "discussion", pages: buckets.conclusion, budget: Math.max(80, Math.min(180, Math.round(mainLimit * 0.08))), hint: "CONCLUSION SECTION ONLY: Write 2 to 4 concise clinical sentences stating the primary conclusion and practical implication strictly from these thesis conclusion pages.\n\n" }
-    ];
-
-    var resultsMap = {}, serverTables = [], serverRefs = [], missingSecs = [], lastModel = "", idx = 0;
-
-    function prependHint(chunkPages, hint) {
-      if (!hint || !chunkPages.length) return chunkPages;
-      var out = [{ n: chunkPages[0].n, text: hint + String(chunkPages[0].text || "") }];
-      for (var k = 1; k < chunkPages.length; k++) out.push(chunkPages[k]);
-      return out;
+    var tree = ensureChapterTree();
+    var mapping = mapChaptersToJournal(tree, allPages, jr, ts.paperType, overrides);
+    var plan = buildSectionPlan(allPages, jr, mapping);
+    var resultsMap = {}, serverTables = [], serverRefs = [], missingSecs = [], lastModel = "";
+    var sectionStatus = {};
+    for (var s0 = 0; s0 < SECTION_ORDER.length; s0++) {
+      sectionStatus[SECTION_ORDER[s0].id] = { status: "queued", heading: SECTION_ORDER[s0].heading, words: 0 };
     }
 
     function mergeTables(resTables) {
@@ -2525,25 +3601,6 @@
       for (var ri = 0; ri < list.length; ri++) serverRefs.push(list[ri]);
     }
 
-    function runOneChunk(step, chunkPages, chunkBudget, allowFallback) {
-      var payloadPages = prependHint(chunkPages, step.hint);
-      return callThesisAi(step.reqSection, payloadPages, chunkBudget).catch(function (err) {
-        if (err && err._handledByConsent) throw err;
-        var isBadSec = err && (err.status === 400 || err.code === "invalid_body");
-        if (allowFallback && isBadSec && step.fallbackSection) {
-          return callThesisAi(step.fallbackSection, payloadPages, chunkBudget);
-        }
-        /* Retry transient error once */
-        return callThesisAi(step.reqSection, payloadPages, chunkBudget);
-      }).then(function (res) {
-        var txt = extractSingleSectionText(res, step.id);
-        if (!txt) {
-          return callThesisAi(step.reqSection, payloadPages, chunkBudget);
-        }
-        return res;
-      });
-    }
-
     function updateProgressivePreview() {
       var preview = [], draftedNow = [], s;
       for (s = 0; s < SECTION_ORDER.length; s++) {
@@ -2553,64 +3610,90 @@
         preview.push({ id: sid, heading: SECTION_ORDER[s].heading, text: ver });
         if (countWords(ver) > 0) draftedNow.push(sid);
       }
+      var doneCount = 0;
+      for (var k in sectionStatus) {
+        if (Object.prototype.hasOwnProperty.call(sectionStatus, k) &&
+            (sectionStatus[k].status === "done" || sectionStatus[k].status === "failed" || sectionStatus[k].status === "skipped")) {
+          doneCount++;
+        }
+      }
+      setLiveDraftProgress(container, st,
+        "Drafted " + doneCount + " of 6 sections (parallel)",
+        Math.round((doneCount / 6) * 90));
       saveThesis(tpid, {
+        sectionStatus: sectionStatus,
         draft: {
           sections: preview,
           aiDraftedIds: draftedNow,
           flags: [],
           locators: [],
-          tables: extractThesisTables(allPages),
-          references: extractThesisReferences(allPages),
+          tables: extractThesisTables(mapping.bySection.results.pages.length ? mapping.bySection.results.pages : allPages),
+          references: extractThesisReferences(allPages, { refPages: mapping.bySection.references.pages }),
+          excludedChapters: mapping.excluded,
           words: 0,
           trimmed: false
         }
       });
       ts = loadThesis(tpid);
+      renderSectionProgress(container);
       renderDraftBody(container);
     }
 
-    var chain = Promise.resolve();
-    for (idx = 0; idx < plan.length; idx++) {
-      (function (step, stepNum) {
-        chain = chain.then(function () {
-          /* Compress proportionally across EVERY page of this chapter bucket so all
-             chapters contribute within one unified 13,000-char context (never fragmented). */
-          var chunks = chunkPagesByChars(step.pages, 13000, 1);
-          if (!chunks.length) chunks = [allPages.slice(0, 6)];
-          var unifiedChunk = chunks[0];
-          var firstP = unifiedChunk[0] ? unifiedChunk[0].n : 1;
-          var lastP = unifiedChunk[unifiedChunk.length - 1] ? unifiedChunk[unifiedChunk.length - 1].n : firstP;
-          setLiveDraftProgress(container, st,
-            "Drafting " + step.heading + " (" + stepNum + " of 6, thesis pages " + firstP + " to " + lastP + ")",
-            Math.round(((stepNum - 0.6) / 6) * 100));
+    setLiveDraftProgress(container, st, "Drafting sections in parallel (3 at a time)...", 8);
+    saveThesis(tpid, { sectionStatus: sectionStatus });
+    ts = loadThesis(tpid);
+    renderSectionProgress(container);
 
-          return runOneChunk(step, unifiedChunk, step.budget, true).then(function (res) {
-            if (res && res.model) lastModel = res.model;
-            var d = (res && res.draft) ? res.draft : res;
-            if (d) {
-              mergeTables(d.tables || d.suggestedTables);
-              mergeRefs(d.references);
-            }
-            var txt = extractSingleSectionText(res, step.id);
-            txt = txt.replace(/^\s*#{1,4}\s*(?:Abstract|Introduction|Methods|Results|Discussion|Conclusion)\s*[:\-.]*\s*/i, "").replace(/^\s+|\s+$/g, "");
-            if (txt) {
-              resultsMap[step.id] = txt;
-              updateProgressivePreview();
+    var mainTasks = [];
+    for (var idx = 0; idx < plan.length; idx++) {
+      (function (step) {
+        mainTasks.push(function () {
+          if (!step.pages || !step.pages.length) {
+            sectionStatus[step.id] = { status: "skipped", heading: step.heading, words: 0 };
+            updateProgressivePreview();
+            return null;
+          }
+          sectionStatus[step.id] = { status: "running", heading: step.heading, words: 0 };
+          saveThesis(tpid, { sectionStatus: sectionStatus });
+          ts = loadThesis(tpid);
+          renderSectionProgress(container);
+
+          return draftOneSectionStep(step, function (part, totalParts) {
+            sectionStatus[step.id] = { status: "running", heading: step.heading, detail: "part " + part + "/" + totalParts, words: 0 };
+            renderSectionProgress(container);
+          }).then(function (out) {
+            if (out.model) lastModel = out.model;
+            mergeTables(out.tables);
+            mergeRefs(out.references);
+            if (out.text) {
+              resultsMap[step.id] = out.text;
+              sectionStatus[step.id] = { status: "done", heading: step.heading, words: countWords(out.text) };
             } else {
               missingSecs.push(step.heading);
+              sectionStatus[step.id] = { status: "failed", heading: step.heading, words: 0 };
             }
+            updateProgressivePreview();
+            return out;
           }).catch(function (err) {
             if (err && err._handledByConsent) throw err;
             missingSecs.push(step.heading);
+            sectionStatus[step.id] = { status: "failed", heading: step.heading, words: 0 };
+            updateProgressivePreview();
+            return null;
           });
         });
-      })(plan[idx], idx + 1);
+      })(plan[idx]);
     }
 
-    /* Final step (6 of 6): Structured Abstract synthesized from thesis front pages + verified main sections */
-    chain = chain.then(function () {
-      setLiveDraftProgress(container, st, "Drafting Abstract (6 of 6, structured summary)", 90);
-      var frontChunks = chunkPagesByChars(buckets.abstract, 6500, 1);
+    return runBoundedPool(mainTasks, 3).then(function () {
+      sectionStatus.abstract = { status: "running", heading: "Abstract", words: 0 };
+      saveThesis(tpid, { sectionStatus: sectionStatus });
+      ts = loadThesis(tpid);
+      renderSectionProgress(container);
+      setLiveDraftProgress(container, st, "Drafting Abstract (structured summary)", 88);
+
+      var frontPages = (mapping.bySection.abstract && mapping.bySection.abstract.pages) || [];
+      var frontChunks = chunkPagesByChars(frontPages, 6500, 1);
       var absPages = (frontChunks[0] || []).slice();
       var summarySnip = [];
       if (resultsMap.methods) summarySnip.push("Drafted Methods summary: " + resultsMap.methods.slice(0, 1600));
@@ -2619,31 +3702,45 @@
       if (summarySnip.length) {
         absPages.push({ n: 1, text: summarySnip.join("\n\n") });
       }
+      if (!absPages.length) absPages = allPages.slice(0, 4);
       var absStep = {
         id: "abstract",
+        heading: "Abstract",
         reqSection: "abstract",
         pages: absPages,
+        budget: absLimit,
         hint: "STRUCTURED ABSTRACT ONLY (" + absLimit + " words max): Use exact headings Background:, Methods:, Results:, Conclusion: and copy numbers verbatim from the thesis.\n\n"
       };
-      return runOneChunk(absStep, absPages, absLimit, false).then(function (res) {
-        if (res && res.model) lastModel = res.model;
-        var absTxt = extractSingleSectionText(res, "abstract");
-        if (absTxt) {
-          resultsMap.abstract = absTxt;
-          updateProgressivePreview();
+      return draftOneSectionStep(absStep).then(function (out) {
+        if (out.model) lastModel = out.model;
+        if (out.text) {
+          resultsMap.abstract = out.text;
+          sectionStatus.abstract = { status: "done", heading: "Abstract", words: countWords(out.text) };
         } else {
           missingSecs.push("Abstract");
+          sectionStatus.abstract = { status: "failed", heading: "Abstract", words: 0 };
         }
       }).catch(function (err) {
         if (err && err._handledByConsent) throw err;
         missingSecs.push("Abstract");
+        sectionStatus.abstract = { status: "failed", heading: "Abstract", words: 0 };
       });
-    });
-
-    return chain.then(function () {
-      var detTables = extractThesisTables(allPages);
+    }).then(function () {
+      var resSourcePages = mapping.bySection.results.pages.length ? mapping.bySection.results.pages : allPages;
+      var detTables = extractThesisTables(resSourcePages);
+      if (!detTables.length) detTables = extractThesisTables(allPages);
       var combinedTables = detTables.length ? detTables : serverTables;
-      var detRefs = extractThesisReferences(allPages);
+      var citedMainText = [
+        resultsMap.introduction || "",
+        resultsMap.methods || "",
+        resultsMap.results || "",
+        resultsMap.discussion || "",
+        resultsMap.conclusion || ""
+      ].join("\n\n");
+      var detRefs = extractThesisReferences(allPages, {
+        refPages: mapping.bySection.references.pages,
+        citedText: citedMainText
+      });
       var combinedRefs = detRefs.length ? detRefs : serverRefs;
       var outSecs = [];
       for (var j = 0; j < SECTION_ORDER.length; j++) {
@@ -2655,11 +3752,242 @@
           sections: outSecs,
           tables: combinedTables,
           references: combinedRefs,
+          excludedChapters: mapping.excluded,
+          _sectionStatus: sectionStatus,
           _missingSections: missingSecs
         },
         model: lastModel
       };
     });
+  }
+
+  function retrySingleSection(container, sectionId) {
+    ts = loadThesis(tpid);
+    var jr = journalOf();
+    var allPages = ts.pages || [];
+    if (!allPages.length) return Promise.resolve(false);
+    var tree = ensureChapterTree();
+    var mapping = mapChaptersToJournal(tree, allPages, jr, ts.paperType, ts.chapterMap || {});
+    var step = null;
+    if (sectionId === "abstract") {
+      var absLimit = abstractLimitOf(jr);
+      var frontChunks = chunkPagesByChars((mapping.bySection.abstract && mapping.bySection.abstract.pages) || [], 6500, 1);
+      var absPages = (frontChunks[0] || []).slice();
+      var existing = (ts.draft && ts.draft.sections) || [];
+      var secTextById = {};
+      for (var ei = 0; ei < existing.length; ei++) secTextById[existing[ei].id] = existing[ei].text || "";
+      var snip = [];
+      if (secTextById.methods) snip.push("Drafted Methods summary: " + secTextById.methods.slice(0, 1600));
+      if (secTextById.results) snip.push("Drafted Results summary: " + secTextById.results.slice(0, 2200));
+      if (secTextById.conclusion) snip.push("Drafted Conclusion summary: " + secTextById.conclusion.slice(0, 800));
+      if (snip.length) absPages.push({ n: 1, text: snip.join("\n\n") });
+      if (!absPages.length) absPages = allPages.slice(0, 4);
+      step = {
+        id: "abstract",
+        heading: "Abstract",
+        reqSection: "abstract",
+        pages: absPages,
+        budget: absLimit,
+        hint: "STRUCTURED ABSTRACT ONLY (" + absLimit + " words max): Use exact headings Background:, Methods:, Results:, Conclusion: and copy numbers verbatim from the thesis.\n\n"
+      };
+    } else {
+      var plan = buildSectionPlan(allPages, jr, mapping);
+      for (var pi = 0; pi < plan.length; pi++) {
+        if (plan[pi].id === sectionId) { step = plan[pi]; break; }
+      }
+    }
+    if (!step) return Promise.resolve(false);
+
+    var sectionStatus = ts.sectionStatus || {};
+    sectionStatus[sectionId] = { status: "running", heading: step.heading, words: 0 };
+    saveThesis(tpid, { sectionStatus: sectionStatus });
+    ts = loadThesis(tpid);
+    renderSectionProgress(container);
+
+    return draftOneSectionStep(step).then(function (out) {
+      ts = loadThesis(tpid);
+      var curDraft = ts.draft || { sections: [], aiDraftedIds: [], flags: [], locators: [], tables: [], references: [], words: 0 };
+      var curSecs = (curDraft.sections && curDraft.sections.length) ? curDraft.sections.slice() : SECTION_ORDER.map(function (s) {
+        return { id: s.id, heading: s.heading, text: "" };
+      });
+      var replaced = false;
+      for (var i = 0; i < curSecs.length; i++) {
+        if (curSecs[i].id === sectionId) {
+          curSecs[i] = { id: sectionId, heading: step.heading, text: out.text || "" };
+          replaced = true;
+          break;
+        }
+      }
+      if (!replaced) curSecs.push({ id: sectionId, heading: step.heading, text: out.text || "" });
+      var nextStatus = ts.sectionStatus || {};
+      if (out.text) {
+        nextStatus[sectionId] = { status: "done", heading: step.heading, words: countWords(out.text) };
+      } else {
+        nextStatus[sectionId] = { status: "failed", heading: step.heading, words: 0 };
+      }
+      saveThesis(tpid, { sectionStatus: nextStatus });
+      ts = loadThesis(tpid);
+      if (draftAi) draftAi.error = null;
+      applyDraft({
+        sections: curSecs,
+        tables: curDraft.tables,
+        references: curDraft.references,
+        excludedChapters: mapping.excluded,
+        _sectionStatus: nextStatus
+      }, draftAi);
+      renderDraft(container);
+      return !!out.text;
+    }).catch(function (err) {
+      if (err && err._handledByConsent) {
+        openConsentSheet(err._phiConsentInfo || (ts && ts.phi) || { softPages: [1], maskedCount: 0, findings: [] }, {
+          onConfirm: function () { retrySingleSection(container, sectionId); },
+          onReupload: function () { if (SMD.navigate) SMD.navigate("thesis"); }
+        });
+        return false;
+      }
+      var nextStatus = ts.sectionStatus || {};
+      nextStatus[sectionId] = { status: "failed", heading: step.heading, words: 0 };
+      saveThesis(tpid, { sectionStatus: nextStatus });
+      ts = loadThesis(tpid);
+      renderDraft(container);
+      return false;
+    });
+  }
+
+  function renderChapterMapBox(container) {
+    var box = container.querySelector("#rmdChapterMap");
+    if (!box) return;
+    var tree = ensureChapterTree();
+    if (!tree || !tree.chapters || !tree.chapters.length) {
+      box.innerHTML = "";
+      return;
+    }
+    var jr = journalOf();
+    var mapping = mapChaptersToJournal(tree, ts.pages || [], jr, ts.paperType, ts.chapterMap || {});
+    var items = mapping.items || [];
+    var frontItems = [], mainItems = [], i;
+    for (i = 0; i < items.length; i++) {
+      if (items[i].isFrontMatter && items[i].target === "excluded") frontItems.push(items[i]);
+      else mainItems.push(items[i]);
+    }
+    var mappedCount = 0;
+    for (i = 0; i < items.length; i++) if (items[i].target !== "excluded") mappedCount++;
+    var excludedCount = mapping.excluded.length;
+    var isOpen = ts.chapterMapOpen === true;
+
+    var h = [];
+    h.push('<div class="rmd-chapter-map-head">');
+    h.push('<div class="rmd-chapter-map-summary"><strong>Thesis chapters</strong>');
+    h.push('<span class="rmd-thesis-meta">' + mappedCount + ' chapter(s) mapped to ' + esc(jr.shortName || jr.name) + (excludedCount ? (', ' + excludedCount + ' excluded') : '') + '.</span></div>');
+    h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-chapter-toggle" id="rmdChapterMapToggle" aria-expanded="' + (isOpen ? "true" : "false") + '" aria-controls="rmdChapterMapList">' + (isOpen ? "Hide chapters" : "Adjust mapping") + '</button>');
+    h.push('</div>');
+
+    if (mapping.excluded.length) {
+      var exNames = [];
+      for (i = 0; i < mapping.excluded.length && i < 6; i++) {
+        exNames.push(mapping.excluded[i].title + " (p. " + mapping.excluded[i].startPage + (mapping.excluded[i].endPage !== mapping.excluded[i].startPage ? ("-" + mapping.excluded[i].endPage) : "") + ")");
+      }
+      if (mapping.excluded.length > 6) exNames.push("+" + (mapping.excluded.length - 6) + " more");
+      h.push('<p class="rmd-thesis-meta" id="rmdExcludedSummary">Excluded: ' + esc(exNames.join("; ")) + '.</p>');
+    }
+
+    h.push('<div class="rmd-chapter-list" id="rmdChapterMapList"' + (isOpen ? '' : ' hidden') + '>');
+    var displayItems = mainItems.length ? mainItems : items;
+    if (frontItems.length && mainItems.length) {
+      var fStart = frontItems[0].startPage;
+      var fEnd = frontItems[frontItems.length - 1].endPage;
+      h.push('<div class="rmd-chapter-row rmd-chapter-row-muted">');
+      h.push('<div class="rmd-chapter-info"><span class="rmd-chapter-title">Front matter (' + frontItems.length + ' parts)</span><span class="rmd-thesis-meta">Pages ' + esc(fStart + " to " + fEnd) + ' - skipped automatically</span></div>');
+      h.push('<span class="rmd-chapter-pill">Excluded</span>');
+      h.push('</div>');
+    }
+    var opts = [
+      { v: "introduction", l: "Introduction" },
+      { v: "methods", l: "Methods" },
+      { v: "results", l: "Results" },
+      { v: "discussion", l: "Discussion" },
+      { v: "conclusion", l: "Conclusion" },
+      { v: "references", l: "References" },
+      { v: "excluded", l: "Exclude" }
+    ];
+    for (i = 0; i < displayItems.length; i++) {
+      var it = displayItems[i];
+      var pgSpan = it.startPage === it.endPage ? ("Page " + it.startPage) : ("Pages " + it.startPage + " to " + it.endPage);
+      h.push('<div class="rmd-chapter-row">');
+      h.push('<div class="rmd-chapter-info">');
+      h.push('<label class="rmd-chapter-title" for="rmdChSel_' + esc(it.id) + '">' + esc(it.title) + '</label>');
+      h.push('<span class="rmd-thesis-meta">' + esc(pgSpan) + (it.condenseReview ? ' - condensed to 3-5 points' : '') + '</span>');
+      h.push('</div>');
+      h.push('<select class="rmd-chapter-select" id="rmdChSel_' + esc(it.id) + '" data-rmd-chapter-id="' + esc(it.id) + '">');
+      if (it.canAutoSplit) {
+        h.push('<option value="auto"' + (it.target === "auto" ? " selected" : "") + '>Auto (by subheadings)</option>');
+      }
+      for (var oi = 0; oi < opts.length; oi++) {
+        h.push('<option value="' + opts[oi].v + '"' + (it.target === opts[oi].v ? " selected" : "") + '>' + esc(opts[oi].l) + '</option>');
+      }
+      h.push('</select>');
+      h.push('</div>');
+    }
+    h.push('</div>');
+    box.innerHTML = h.join("");
+
+    var tog = box.querySelector("#rmdChapterMapToggle");
+    if (tog) tog.onclick = function () {
+      saveThesis(tpid, { chapterMapOpen: !ts.chapterMapOpen });
+      ts = loadThesis(tpid);
+      renderChapterMapBox(container);
+    };
+    var sels = box.querySelectorAll("[data-rmd-chapter-id]");
+    for (i = 0; i < sels.length; i++) {
+      sels[i].onchange = function () {
+        var cid = this.getAttribute("data-rmd-chapter-id");
+        var nextMap = {}, k;
+        var prev = ts.chapterMap || {};
+        for (k in prev) if (Object.prototype.hasOwnProperty.call(prev, k)) nextMap[k] = prev[k];
+        nextMap[cid] = this.value;
+        saveThesis(tpid, { chapterMap: nextMap });
+        ts = loadThesis(tpid);
+        renderChapterMapBox(container);
+      };
+    }
+  }
+
+  function renderSectionProgress(container) {
+    var box = container.querySelector("#rmdDraftProgressList");
+    if (!box) return;
+    var statusMap = ts.sectionStatus;
+    if (!statusMap) { box.innerHTML = ""; return; }
+    var h = ['<ul class="rmd-section-progress" role="list">'];
+    var hasAny = false;
+    for (var i = 0; i < SECTION_ORDER.length; i++) {
+      var sid = SECTION_ORDER[i].id;
+      var st = statusMap[sid];
+      if (!st) continue;
+      hasAny = true;
+      var label = st.status === "done"
+        ? ("Done (" + (st.words || 0) + " words)")
+        : (st.status === "running"
+          ? ("Drafting" + (st.detail ? (" " + st.detail) : "") + "...")
+          : (st.status === "failed" ? "Failed" : (st.status === "skipped" ? "Skipped" : "Queued")));
+      h.push('<li class="rmd-sec-prog-item" data-sec-status="' + esc(st.status) + '">');
+      h.push('<span class="rmd-sec-prog-name">' + esc(st.heading || SECTION_ORDER[i].heading) + '</span>');
+      h.push('<span class="rmd-sec-prog-state">' + esc(label) + '</span>');
+      if (st.status === "failed") {
+        h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-sec-retry" data-rmd-retry-section="' + esc(sid) + '" aria-label="Retry ' + esc(st.heading || SECTION_ORDER[i].heading) + '">Retry</button>');
+      }
+      h.push('</li>');
+    }
+    h.push('</ul>');
+    box.innerHTML = hasAny ? h.join("") : "";
+    var retries = box.querySelectorAll("[data-rmd-retry-section]");
+    for (var r = 0; r < retries.length; r++) {
+      retries[r].onclick = function () {
+        var sid = this.getAttribute("data-rmd-retry-section");
+        this.disabled = true;
+        this.textContent = "Retrying...";
+        retrySingleSection(container, sid);
+      };
+    }
   }
 
   function renderDraft(container) {
@@ -2681,12 +4009,14 @@
     h.push('<div class="rmd-card">');
     h.push('<h2>Shape the draft</h2>');
     h.push('<p class="rmd-screen-subtitle">Target: ' + esc(jr.name) + '. Word limit: ' + jr.wordLimit + ' words. ' + esc(jr.abstractFormat) + '. MaiK keeps your wording and never invents a number; every number is checked against your thesis.</p>');
+    h.push('<div class="rmd-chapter-map smd-books-keep" id="rmdChapterMap"></div>');
     if (mayAi) {
       var st = draftAi || (draftAi = SMD.ai.state());
       h.push(SMD.ai.barHtml(st, { task: "thesis_to_paper", label: "paper draft", cost: 3 }));
     } else {
       h.push('<p class="rmd-thesis-meta">Only the project owner, editor or analyst can ask MaiK. You can still edit and save the draft yourself.</p>');
     }
+    h.push('<div id="rmdDraftProgressList"></div>');
     h.push('<div id="rmdDraftBody"></div>');
     h.push('<div class="rmd-card-actions"><button type="button" class="rmd-btn" id="rmdDraftToggle">' + (ts.editMode ? "Done editing" : "Edit draft") + '</button>');
     h.push('<button type="button" class="rmd-btn rmd-btn-primary" id="rmdDraftSave">Save to the manuscript</button>');
@@ -2694,6 +4024,8 @@
     h.push('</div></div>');
     container.innerHTML = h.join("");
     bindNext(container);
+    renderChapterMapBox(container);
+    renderSectionProgress(container);
     renderDraftBody(container);
     if (mayAi) {
       var st2 = draftAi;
@@ -2773,11 +4105,23 @@
     if (detTables.length > (tables || []).length) tables = detTables;
     var detRefs = extractThesisReferences(pageTexts);
     var refs = (draft.references && draft.references.length) ? draft.references : detRefs;
-    saveThesis(tpid, {
-      draft: { sections: enf.sections, aiDraftedIds: aiDraftedIds, flags: allFlags, locators: allLocators, tables: tables, references: refs, trimmed: enf.trimmed, words: enf.words },
+    var patchObj = {
+      draft: {
+        sections: enf.sections,
+        aiDraftedIds: aiDraftedIds,
+        flags: allFlags,
+        locators: allLocators,
+        tables: tables,
+        references: refs,
+        excludedChapters: draft.excludedChapters || (ts.draft && ts.draft.excludedChapters) || [],
+        trimmed: enf.trimmed,
+        words: enf.words
+      },
       tablePicks: suggestTables(tables, 3),
       editMode: false
-    });
+    };
+    if (draft._sectionStatus) patchObj.sectionStatus = draft._sectionStatus;
+    saveThesis(tpid, patchObj);
     ts = loadThesis(tpid);
     return ["draft"];
   }
@@ -3211,7 +4555,26 @@
       ".rmd-thesis-consent-list li:last-child { margin-bottom: 0; }",
       ".rmd-thesis-consent-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; margin-top: 8px; }",
       ".rmd-thesis-consent-actions .rmd-btn { min-height: 44px; flex: 1 1 160px; touch-action: manipulation; }",
-      "@media (prefers-reduced-motion: reduce) { dialog.rmd-thesis-consent-dialog { transition: none; } }"
+      "@media (prefers-reduced-motion: reduce) { dialog.rmd-thesis-consent-dialog { transition: none; } }",
+      "#researchMD .rmd-chapter-map { margin: 8px 0 12px; padding: 12px 14px; border: 1px solid var(--rmd-line); border-radius: 10px; background: var(--rmd-fill); }",
+      "#researchMD .rmd-chapter-map-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }",
+      "#researchMD .rmd-chapter-map-summary { flex: 1 1 180px; font: 600 13.5px/1.4 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-chapter-toggle { min-height: 44px; flex: 0 0 auto; }",
+      "#researchMD .rmd-chapter-list { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }",
+      "#researchMD .rmd-chapter-list[hidden] { display: none; }",
+      "#researchMD .rmd-chapter-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px; border: 1px solid var(--rmd-line); border-radius: 8px; background: var(--rmd-panel); flex-wrap: wrap; }",
+      "#researchMD .rmd-chapter-row-muted { opacity: 0.85; }",
+      "#researchMD .rmd-chapter-info { flex: 1 1 170px; min-width: 0; }",
+      "#researchMD .rmd-chapter-title { display: block; font: 600 13px/1.35 var(--rmd-f); color: var(--rmd-ink); overflow-wrap: anywhere; }",
+      "#researchMD .rmd-chapter-select { min-height: 44px; max-width: 100%; font: 500 13px var(--rmd-f); padding: 6px 10px; border: 1px solid var(--rmd-line); border-radius: 8px; background: var(--rmd-panel); color: var(--rmd-ink); }",
+      "#researchMD .rmd-chapter-pill { font: 600 12px var(--rmd-f); color: var(--rmd-mut); padding: 4px 8px; border-radius: 999px; border: 1px solid var(--rmd-line); }",
+      "#researchMD .rmd-section-progress { list-style: none; margin: 10px 0 14px; padding: 0; display: flex; flex-direction: column; gap: 6px; }",
+      "#researchMD .rmd-sec-prog-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; border: 1px solid var(--rmd-line); border-radius: 8px; background: var(--rmd-panel); font: 400 13px/1.4 var(--rmd-f); }",
+      "#researchMD .rmd-sec-prog-name { font-weight: 600; color: var(--rmd-ink); }",
+      "#researchMD .rmd-sec-prog-state { margin-left: auto; color: var(--rmd-mut); font-variant-numeric: tabular-nums; }",
+      "#researchMD .rmd-sec-prog-item[data-sec-status=\"done\"] .rmd-sec-prog-state { color: var(--rmd-ok); font-weight: 600; }",
+      "#researchMD .rmd-sec-prog-item[data-sec-status=\"failed\"] .rmd-sec-prog-state { color: var(--rmd-bad); font-weight: 600; }",
+      "#researchMD .rmd-sec-retry { min-height: 44px; padding: 6px 12px; }"
     ].join("\n");
     D.head.appendChild(s);
   }
@@ -3238,6 +4601,12 @@
     abstractLimitOf: abstractLimitOf,
     suggestPaperType: suggestPaperType,
     segmentThesisChapters: segmentThesisChapters,
+    detectThesisHeadings: detectThesisHeadings,
+    buildChapterTree: buildChapterTree,
+    sliceChapterPages: sliceChapterPages,
+    journalHeadingsFor: journalHeadingsFor,
+    mapChaptersToJournal: mapChaptersToJournal,
+    runBoundedPool: runBoundedPool,
     chunkPagesByChars: chunkPagesByChars,
     extractThesisTables: extractThesisTables,
     extractThesisReferences: extractThesisReferences,

@@ -250,6 +250,18 @@ test("worker handleMessage and Worker path end-to-end", async function () {
   assert.equal(diagRes.correctionApplied, false);
   assert.ok(diagRes.pooledSens > 0 && diagRes.pooledSens < 1);
   assert.equal(diagRes.rows, undefined);
+
+  const rocRows = [
+    ["pos", 9.1], ["pos", 8.2], ["pos", 7.4], ["pos", 6.8],
+    ["neg", 3.1], ["neg", 2.5], ["neg", 1.9], ["neg", 4.0]
+  ];
+  const rocRes = await OD.roc(
+    rocRows, ["y", "marker"], "y", ["marker"],
+    { positiveLevel: "pos", Worker: FakeWorker }
+  );
+  assert.equal(rocRes.positiveLevel, "pos");
+  assert.equal(rocRes.tests.length, 1);
+  assert.ok(rocRes.tests[0].auc > 0.9);
   OD.terminateWorker();
 });
 
