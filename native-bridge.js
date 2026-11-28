@@ -72,6 +72,26 @@
   // so the web build is byte-for-byte unchanged. ----
   function plugins() { return (window.Capacitor && window.Capacitor.Plugins) || null; }
 
+  // Pure: fold one recognizer partial into the running transcript (see SEGMENT STITCHING in transcribe()).
+  // A partial is a NEW segment when it is much shorter than the live one (under 60% of its length) and
+  // either starts with a different word or follows a pause of 1.2 s or more. A revision of the same
+  // segment ("F5 Centre" -> "A5 centimetre RCC") keeps or grows its length, so it replaces in place.
+  // A partial that already starts with the committed text means the recognizer sent the whole session.
+  function stitchSegments(st, p, now) {
+    var committed = st.committed || "", seg = st.seg || "";
+    p = String(p == null ? "" : p).trim();
+    function norm(x) { return String(x).toLowerCase().replace(/[^a-z0-9\u0900-\u0d7f ]+/g, "").replace(/\s+/g, " ").trim(); }
+    function first(x) { return norm(x).split(" ")[0] || ""; }
+    if (p) {
+      if (committed && norm(p).indexOf(norm(committed)) === 0) { committed = ""; seg = p; }
+      else if (seg && p.length < seg.length * 0.6 && (first(p) !== first(seg) || (st.lastAt && now - st.lastAt >= 1200))) {
+        committed = committed ? committed + " " + seg : seg; seg = p;
+      } else seg = p;
+    }
+    return { committed: committed, seg: seg, lastAt: p ? now : st.lastAt, text: committed ? committed + (seg ? " " + seg : "") : seg };
+  }
+  window.SMD_stitchSegments = stitchSegments;   // exposed for tests
+
   // Dump every same-origin stylesheet rule so an exported page looks like the app.
   function collectCss() {
     var css = "";
@@ -527,6 +547,12 @@
       // absent so SMD_VOICE can fall back to Web Speech / AI STT.
       if (!(SP && SP.start)) throw new Error("speech-unavailable");
       var self = this, last = "", done = false;
+      // SEGMENT STITCHING (owner video 2026-11-28: "I speak the second sentence and it removes the first").
+      // Newer iOS SFSpeechRecognizer starts a fresh transcript after a pause: the next partialResults
+      // carries ONLY the new sentence, so writing it straight through wiped everything said before.
+      // `committed` keeps the finished segments; `seg` is the live one the recognizer is still revising.
+      var committed = "", seg = "", lastAt = 0;
+      function stitch(p) { var r = stitchSegments({ committed: committed, seg: seg, lastAt: lastAt }, p, Date.now()); committed = r.committed; seg = r.seg; lastAt = r.lastAt; return r.text; }
       // Session token: every transcribe() bumps it. Callbacks/timers left over from a PRIOR
       // session (the 450ms "stopped" finish, the 800ms stop fallback) check `current()` and
       // no-op — otherwise a stale timer fires mid-way through the NEXT session and tears it
@@ -556,10 +582,11 @@
           self._speechSub = SP.addListener("partialResults", function (data) {
             if (!current()) return;
             var m = data && data.matches && data.matches[0];
-            if (m != null) { last = String(m); if (opts.onPartial) opts.onPartial(last); }
+            if (m != null) { last = stitch(m); if (opts.onPartial) opts.onPartial(last); }
             // Ranked alternatives, when the caller wants them (opts.onMatches): the native side already
             // sends up to maxResults matches; onPartial above keeps the first for existing callers.
-            if (opts.onMatches && data && data.matches && data.matches.length) { try { opts.onMatches(data.matches.map(String)); } catch (e) {} }
+            // Each alternative covers only the live segment, so the finished ones are put in front.
+            if (opts.onMatches && data && data.matches && data.matches.length) { try { opts.onMatches(data.matches.map(function (x) { return committed ? committed + " " + String(x).trim() : String(x); })); } catch (e) {} }
           });
           self._modeSub = SP.addListener("recognitionMode", function (data) {
             if (!current()) return;
@@ -591,7 +618,7 @@
       }).then(function (res) {
         if (!current()) return;
         var m = res && res.matches && res.matches[0];
-        if (m != null) { last = String(m); finish(last); }   // iOS: start() carried the final result
+        if (m != null) { last = stitch(m); finish(last); }   // iOS: start() carried the final result
         // Android: res is empty — keep listening; finalize via listeningState / stop().
       }).catch(function (e) {
         if (!current()) return;
@@ -730,7 +757,8 @@
     // which is why the continuous-capture path stays inert until the app is rebuilt.
     whisperCanFlush: function () { var P = plugins(); var W = P && P.Whisper; return !!(W && typeof W.flushTranscribe === "function"); },
     // Abort with no transcription (release native resources).
-    cancelWhisper: function () { var P = plugins(); var W = P && P.Whisper; try { if (W && W.cancel) W.cancel(); } catch (e) {} this._removeWhisperSubs(); },
+    // Bumps the session token too: a session still checking/loading its model must not start the mic later.
+    cancelWhisper: function () { this._wToken = (this._wToken || 0) + 1; var P = plugins(); var W = P && P.Whisper; try { if (W && W.cancel) W.cancel(); } catch (e) {} this._removeWhisperSubs(); },
     // Is a Clinical model on the device? Checks the given model, or ALL known models (no arg) so the
     // "Remove model" UI reflects any downloaded weights. → { installed, bytes }.
     whisperModelInstalled: function (model) {

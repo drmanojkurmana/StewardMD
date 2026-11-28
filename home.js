@@ -10368,12 +10368,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function scGetEngine() { try { var v = localStorage.getItem(EKEY); return (v === "fast" || v === "clinical") ? v : null; } catch (e) { return null; } }
     function scSetEngine(v) { try { localStorage.setItem(EKEY, v); } catch (e) {} }
     function scClinicalAvail() { try { return !!(window.SMD_VOICE && SMD_VOICE.available && SMD_VOICE.available().whisper); } catch (e) { return false; } }
+    // recGen: every scStart bumps it and each callback checks it, so a late final from a session that was
+    // replaced (Clinical watchdog -> Fast) cannot end or overwrite the new one. recWatch: that watchdog.
+    var recGen = 0, recWatch = null, recPh = qEl.getAttribute("placeholder") || "";
+    // The composer placeholder says what the mic is doing: a 181 MB first-use download or a model load used
+    // to show only as a teal pulse with an empty box (owner video 2026-11-28, ~15 s that looked dead).
+    function scPh(t) { try { qEl.setAttribute("placeholder", t || recPh); } catch (e) {} }
     function scMicState(s) { if (!micBtn) return; micBtn.classList.toggle("live", s === "live"); micBtn.classList.toggle("prep", s === "prep"); micBtn.setAttribute("aria-label", s === "live" ? "Stop dictation" : "Dictate to MaiK"); }
     function scWrite(t) { if (recSuppress || t == null) return; var s = String(t).trim(); qEl.value = recBase ? (recBase + " " + s) : s; autosizeQ(); refreshExtract(); }
-    function scEnd(focusBox) { recActive = null; recStopping = false; scMicState("idle"); try { micBtn.title = "Dictate"; } catch (e) {} try { if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {} if (focusBox) { try { qEl.focus(); } catch (e) {} } }
+    function scEnd(focusBox) { recGen++; if (recWatch) { clearTimeout(recWatch); recWatch = null; } recActive = null; recStopping = false; scMicState("idle"); scPh(""); try { micBtn.title = "Dictate"; } catch (e) {} try { if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {} if (focusBox) { try { qEl.focus(); } catch (e) {} } }
     // Hard stop used by send(): stop recording immediately (red off) and SUPPRESS any trailing
     // partial/final so the just-cleared composer box stays clear. Reset on the next scStart.
-    function scAbort() { recSuppress = true; recActive = null; recStopping = false; try { if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {} scMicState("idle"); try { if (micBtn) micBtn.title = "Dictate"; } catch (e) {} }
+    function scAbort() { recGen++; if (recWatch) { clearTimeout(recWatch); recWatch = null; } recSuppress = true; recActive = null; recStopping = false; try { if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {} scMicState("idle"); scPh(""); try { if (micBtn) micBtn.title = "Dictate"; } catch (e) {} }
     function scErr(err) {
       if (err === "clinical-unavailable") { toast("Clinical dictation isn’t ready yet, so using Fast."); scSetEngine("fast"); setTimeout(function () { scStart("fast"); }, 0); return; }
       scEnd(false);
@@ -10386,15 +10392,34 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       recBase = (qEl.value || "").trim(); recStopping = false; recSuppress = false;
       try { qEl.blur(); } catch (e) {}   // drop the keyboard so it can't steal the mic (the prior inline-capture bug)
       scMicState("prep");
+      var clin = engine === "clinical", gen = ++recGen, live = false, dl = false;
+      if (recWatch) { clearTimeout(recWatch); recWatch = null; }
+      scPh(clin ? "Preparing clinical dictation\u2026" : "Starting the mic\u2026");
+      function mine() { return gen === recGen; }
+      // Clinical that never reaches the mic (model load hung, no download under way) falls back to Fast
+      // instead of pulsing teal forever. A real download keeps going: its progress shows in the box.
+      if (clin) recWatch = setTimeout(function () {
+        recWatch = null;
+        if (!mine() || live || dl || recStopping) return;
+        try { if (window.SMD_NATIVE && SMD_NATIVE.cancelWhisper) SMD_NATIVE.cancelWhisper(); else if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {}
+        toast("Clinical dictation is slow to start, so using Fast.");
+        scStart("fast");
+      }, 8000);
       recActive = SMD_VOICE.listen({
-        engine: engine === "clinical" ? "clinical" : undefined,
-        onState: function (st) { if (st === "listening" || st === "recording") scMicState("live"); else if (st === "transcribing" || st === "preparing" || st === "downloading") scMicState("prep"); },
-        onDownloadProgress: function (p) { scMicState("prep"); try { micBtn.title = "Downloading clinical model " + Math.round((p || 0) * 100) + "%"; } catch (e) {} },
-        onPartial: function (t) { scWrite(t); },
-        onFinal: function (t) { scWrite(t); scEnd(true); },
-        onError: function (err) { scErr(err); }
+        engine: clin ? "clinical" : undefined,
+        onState: function (st) {
+          if (!mine()) return;
+          if (st === "listening" || st === "recording") { live = true; scMicState("live"); scPh(clin ? "Listening\u2026 text appears when you tap the mic to stop" : "Listening\u2026"); }
+          else if (st === "transcribing") { scMicState("prep"); scPh("Transcribing\u2026"); }
+          else if (st === "downloading") { dl = true; scMicState("prep"); scPh("Downloading clinical model (first use only)\u2026"); }
+          else if (st === "preparing") scMicState("prep");
+        },
+        onDownloadProgress: function (p) { if (!mine()) return; dl = true; scMicState("prep"); var pc = Math.round((p || 0) * 100); scPh("Downloading clinical model " + pc + "% (first use only)"); try { micBtn.title = "Downloading clinical model " + pc + "%"; } catch (e) {} },
+        onPartial: function (t) { if (mine()) scWrite(t); },
+        onFinal: function (t) { if (!mine()) return; scWrite(t); scEnd(true); },
+        onError: function (err) { if (mine()) scErr(err); }
       });
-      if (!recActive && !recStopping) scMicState("idle");
+      if (!recActive && !recStopping && mine()) { scMicState("idle"); scPh(""); }
     }
     function scTap() {
       if (!INLINE_MIC) { openScribeDialog(); return; }
