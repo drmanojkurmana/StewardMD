@@ -21,6 +21,7 @@ import { PDF_MAX_BYTES, PDF_MAX_PAGES, PDF_MAX_SECONDS, BATCH_MAX,
   checkPdfJobCaps, checkPoJobCaps, validateJobMessage } from "./_caps.js";
 import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCredits, activeJobReservation, expireLostJobs } from "./_credits.js";
 import { scan, phiCategories } from "./_phi.js";
+import { PHI_OVERRIDE_TERMS_VERSION, parsePhiOverrideRequest, evaluatePhiOverride } from "./_suggest.js";
 import { mintJobToken } from "./_gateway.js";
 import { gateManuscript, ingestManuscriptJob, tokenTable } from "./_manuscript.js";
 import { checkCloudFallbackAvailable, parseFormFallback, recordCloudFallbackUsed, refundCloudFallbackForJob } from "./_cloud_fallback.js";
@@ -717,11 +718,28 @@ export async function createManuscriptJob(ctx, body) {
   const snapshotKey = "projects/" + projectId + "/manuscript/snapshots/" + jobId + ".json";
   let snapshot;
   let phi;
+  let phiOverrideAccepted = null;
   let r2Written = false;
   try {
     snapshot = await buildManuscriptSnapshot(db, gate.project, proto, projectId, jobId);
     phi = scanSnapshotPhi(snapshot);
-    if (!phi.blocked) {
+    let canWrite = !phi.blocked;
+    if (phi.blocked) {
+      const overrideReq = parsePhiOverrideRequest(body);
+      const decision = evaluatePhiOverride(phi.hits, overrideReq, env.RESEARCH_PHI_OVERRIDE !== "0");
+      if (decision.accepted) {
+        phiOverrideAccepted = {
+          accepted: true,
+          termsVersion: PHI_OVERRIDE_TERMS_VERSION,
+          condition: decision.condition,
+          categories: decision.categories,
+        };
+        canWrite = true;
+      } else {
+        phi._decision = decision;
+      }
+    }
+    if (canWrite) {
       await env.RESEARCH_R2.put(snapshotKey, JSON.stringify(snapshot), {
         httpMetadata: { contentType: "application/json" },
         customMetadata: { projectId, jobId, createdBy: uid },
@@ -735,17 +753,35 @@ export async function createManuscriptJob(ctx, body) {
     }
     throw e;
   }
-  if (phi.blocked) {
+  if (phi.blocked && !phiOverrideAccepted) {
+    const dec = phi._decision || evaluatePhiOverride(phi.hits, null, env.RESEARCH_PHI_OVERRIDE !== "0");
     await releaseCredits(db, uuid, reservation);
+    await audit(db, projectId, uid, "ai_phi_blocked", jobId, { kind: "manuscript_draft", categories: dec.categories });
     return json({
       error: { code: "phi_blocked", message: "Patient identifiers detected in project data; manuscript drafting was blocked.", requestId },
-      categories: phiCategories(phi.hits),
+      categories: dec.categories,
+      overridable: dec.overridable,
+      allowedConditions: dec.allowedConditions,
     }, 422, { "x-request-id": requestId });
   }
 
   /* 10. Insert research_job_runs row (same bound-kind shape as pdf_extract). */
   const ceilings = { maxSeconds: PO_MAX_SECONDS, maxCalls: PO_MAX_CALLS, quoteMicroUsd: quote };
   const outputMeta = isDevice ? { runner: "device" } : (body.runner === "container" ? { runner: "container" } : {});
+  if (phiOverrideAccepted) {
+    outputMeta.phiOverride = {
+      accepted: true,
+      termsVersion: phiOverrideAccepted.termsVersion,
+      condition: phiOverrideAccepted.condition,
+    };
+    await audit(db, projectId, uid, "ai_phi_override", jobId, {
+      route: "jobs",
+      categories: phiOverrideAccepted.categories,
+      termsVersion: phiOverrideAccepted.termsVersion,
+      condition: phiOverrideAccepted.condition,
+      channel: "app_override_dialog",
+    });
+  }
   let cutoffDate = null;
   if (typeof body.cutoffDate === "string") {
     const cd = body.cutoffDate.trim();
@@ -1028,12 +1064,26 @@ export async function submitDeviceResult(ctx, jobId, body) {
     if (hs.blocked) phiHits.push(...hs.hits);
   }
   if (phiHits.length) {
-    const categories = phiCategories(phiHits);
-    await audit(db, row.project_id, uid, "device_result_phi_blocked", row.id, { categories });
-    return json({
-      error: { code: "phi_blocked", message: "Patient identifiers detected in drafted manuscript.", requestId },
-      categories,
-    }, 422, { "x-request-id": requestId });
+    const reqOverride = parsePhiOverrideRequest(body) ||
+      (out && out.phiOverride ? parsePhiOverrideRequest({ phiOverride: out.phiOverride }) : null);
+    const decision = evaluatePhiOverride(phiHits, reqOverride, env.RESEARCH_PHI_OVERRIDE !== "0");
+    if (decision.accepted) {
+      await audit(db, row.project_id, uid, "ai_phi_override", row.id, {
+        route: "device-result",
+        categories: decision.categories,
+        termsVersion: PHI_OVERRIDE_TERMS_VERSION,
+        condition: decision.condition,
+        channel: "app_override_dialog",
+      });
+    } else {
+      await audit(db, row.project_id, uid, "device_result_phi_blocked", row.id, { categories: decision.categories });
+      return json({
+        error: { code: "phi_blocked", message: "Patient identifiers detected in drafted manuscript.", requestId },
+        categories: decision.categories,
+        overridable: decision.overridable,
+        allowedConditions: decision.allowedConditions,
+      }, 422, { "x-request-id": requestId });
+    }
   }
 
   let snapshot = null;

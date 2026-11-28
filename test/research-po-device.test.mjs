@@ -762,4 +762,141 @@ describe("UI integration with smd_rmd_ondevice_draft", () => {
     await new Promise((r) => setTimeout(r, 20));
     assert.equal(container.querySelector('[data-rmd="po-continue"]'), null, "Continue draft hidden when kill switch is 0");
   });
+
+  test("published bibliography titles/authors/trial labels from BCG snapshot pass cleanly while real PHI stays blocked", () => {
+    const metaRefs = [
+      {
+        key: "rec_tb_ev",
+        title: "Optimized Mass Spectrometry to Uncover M. tuberculosis Biomarkers in Extracellular Vesicles From Asymptomatic Tuberculosis Patients.",
+        authors: ["Nieto Ramirez LM", "Shelton K", "Belisle JT"],
+        year: 2026,
+        pmid: "41234567",
+      },
+      {
+        key: "rec_cath",
+        title: "Effect of Catheter Type and Size on Patient Comfort and Complications in Intravesical Bacillus Calmette-Guerin and Chemotherapy Administration: A Randomized Trial.",
+        authors: ["Buisan O", "Gomez A"],
+        year: 2025,
+        doi: "10.1000/cath.2025",
+      },
+      {
+        key: "rec_rutivac",
+        title: "Safety and Immunogenicity of RUTI Vaccination in Non-muscle-invasive Bladder Cancer Patients: Phase 1 RUTIVAC-1 Trial.",
+        authors: ["Perez M"],
+        year: 2025,
+        pmid: "40987654",
+      },
+    ];
+    const refsMap = {};
+    for (const r of metaRefs) refsMap[r.key] = r;
+    const manifest = makeManifest({
+      protocol: {
+        title: "Efficacy of BCG Vaccination Against Tuberculosis: Systematic Review",
+        question: "Does BCG reduce tuberculosis across Colditz trials including TPT Madras 1980?",
+        pico: { population: "Adults and infants", intervention: "BCG vaccine", comparator: "Placebo", outcome: "TB incidence" },
+        design: "systematic review and meta-analysis",
+        eligibility: "TPT Madras 1980, Aronson 1958, Hart 1977",
+        outcomes: ["TB incidence"],
+        lockHash: "b".repeat(64),
+        lockedAt: "2026-11-01T00:00:00Z",
+      },
+      evidence: [{
+        studyId: "s_madras",
+        label: "TPT Madras 1980",
+        source: { title: "Tuberculosis Prevention Trial Madras 1980", doi: "10.1000/madras", pmid: "7001122", authors: ["Baily GV"], year: 1980 },
+        values: [{ field: "events_intervention", value: 260, verified: true, locator: { page: 2, table: "Table 1" }, quote: "260 cases in TPT Madras 1980" }],
+      }],
+      references: metaRefs,
+    });
+    const inputs = GATES.buildInputs(manifest);
+    const secPrompt = PROMPTS.buildSectionPrompt({
+      ...inputs,
+      citationMap: refsMap,
+      outlineJsonStr: "{}",
+      sectionTitle: "Introduction",
+    });
+    const assembled = secPrompt.system + "\n\n" + secPrompt.prompt;
+    const cleanReport = GATES.scanPhi(assembled, { allowCitationLibraryNames: true });
+    assert.equal(cleanReport.blocked, false, "published citation titles/authors and TPT Madras pass: " + JSON.stringify(cleanReport.hits));
+
+    /* Real identifiers injected into user data or reference block remain blocked. */
+    assert.equal(GATES.scanPhi(assembled.replace("TPT Madras 1980", "Call +91 9876543210"), { allowCitationLibraryNames: true }).blocked, true);
+    assert.equal(GATES.scanPhi(assembled + "\nPatient Ramesh Kumar, MRN 483920", { allowCitationLibraryNames: true }).blocked, true);
+    assert.equal(GATES.scanPhi(assembled + "\ndob 12/03/1980, email test@example.com, Address: 12 MG Road, Bengaluru", { allowCitationLibraryNames: true }).blocked, true);
+
+    /* Large 150-reference library stays under T2 16000-token limit. */
+    const bigMap = {};
+    for (let i = 0; i < 150; i++) {
+      bigMap["rec_" + i] = { ...metaRefs[i % metaRefs.length], key: "rec_" + i, pmid: String(40000000 + i) };
+    }
+    const bigSec = PROMPTS.buildSectionPrompt({ ...inputs, citationMap: bigMap, outlineJsonStr: "{}", sectionTitle: "Introduction" });
+    const bigFull = bigSec.system + "\n\n" + bigSec.prompt;
+    assert.ok(DRAFT.estimateTokens(bigFull) + 1000 < DRAFT.TIER_CEILINGS.T2.maxInputTokens, "150-ref section prompt fits T2 ceiling");
+  });
+
+  test("on-device draft allows false_positive override for low-risk hits when onPhiOverride confirms, never for high-risk", async () => {
+    await CHECKPOINT._setBackend({ records: {} });
+    const manifest = makeManifest();
+    const sentPayloads = [];
+    let overridePrompts = 0;
+    const ms = await DRAFT.run({
+      job: { id: "job_ovr_ok", projectId: "p1", createdBy: "u1" },
+      manifest,
+      token: "tok-1",
+    }, {
+      checkpoint: CHECKPOINT,
+      maxRefinementRounds: 0,
+      sleep: () => Promise.resolve(),
+      onPhiOverride: async (cats, canOverride) => {
+        overridePrompts += 1;
+        assert.deepEqual(cats, ["address"]);
+        assert.equal(canOverride, true);
+      },
+      gatewayRequest: async (_url, payload) => {
+        sentPayloads.push(payload);
+        if (!payload.phiOverride) {
+          return {
+            status: 422,
+            data: { error: { code: "phi_blocked", message: "blocked" }, categories: ["address"], overridable: true, allowedConditions: ["false_positive"] },
+          };
+        }
+        if (payload.stepId === "outline") {
+          return { status: 200, data: { text: "```json\n" + JSON.stringify(FULL_OUTLINE) + "\n```", model: "m", usage: { inputTokens: 10, outputTokens: 10 } } };
+        }
+        return { status: 200, data: { text: "```latex\n" + sectionLatexFor(payload.stepId) + "\n```", model: "m", usage: { inputTokens: 10, outputTokens: 10 } } };
+      },
+      apiRequest: async () => ({ ok: true }),
+    });
+    assert.equal(overridePrompts, 1);
+    assert.equal(ms.v, 1);
+    assert.ok(sentPayloads.some((p) => p.phiOverride && p.phiOverride.condition === "false_positive"));
+
+    let highRiskModalOpened = false;
+    await assert.rejects(() => DRAFT.run({
+      job: { id: "job_ovr_never", projectId: "p1", createdBy: "u1" },
+      manifest: makeManifest({
+        protocol: {
+          title: "SR",
+          question: "Call 9876543210",
+          pico: { population: "adults", intervention: "X", comparator: "usual", outcome: "Y" },
+          design: "systematic review",
+          eligibility: "adults",
+          outcomes: ["Y"],
+          lockHash: "a".repeat(64),
+          lockedAt: "2026-11-01T00:00:00Z",
+        },
+      }),
+      token: "tok-1",
+    }, {
+      checkpoint: CHECKPOINT,
+      maxRefinementRounds: 0,
+      sleep: () => Promise.resolve(),
+      onPhiOverride: async () => {
+        highRiskModalOpened = true;
+        throw new Error("must not prompt for high-risk");
+      },
+      gatewayRequest: async () => { throw new Error("must not call gateway"); },
+    }), (err) => err && err.code === "phi_blocked");
+    assert.equal(highRiskModalOpened, false);
+  });
 });

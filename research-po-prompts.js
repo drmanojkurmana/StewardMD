@@ -364,55 +364,125 @@
     ""
   ].join("\n") + "\n" + UNIVERSAL_NO_LEAKAGE_PROMPT;
 
-  function formatCitationLibrary(citationMap) {
+  function extractCitedKeyList(text) {
+    var keys = [];
+    var seen = {};
+    var re = /\\cite\{([^}]+)\}/g;
+    var m;
+    var s = String(text || "");
+    while ((m = re.exec(s)) !== null) {
+      var parts = m[1].split(",");
+      for (var i = 0; i < parts.length; i++) {
+        var k = parts[i].replace(/^\s+|\s+$/g, "");
+        if (k && !seen[k]) {
+          seen[k] = true;
+          keys.push(k);
+        }
+      }
+    }
+    return keys;
+  }
+
+  function orderCitationKeys(keys, priorityKeys) {
+    var ordered = [];
+    var seen = {};
+    var pri = Array.isArray(priorityKeys) ? priorityKeys : [];
+    var hasKey = {};
+    for (var hi = 0; hi < keys.length; hi++) hasKey[keys[hi]] = true;
+    for (var pi = 0; pi < pri.length; pi++) {
+      var pk = pri[pi];
+      if (hasKey[pk] && !seen[pk]) {
+        seen[pk] = true;
+        ordered.push(pk);
+      }
+    }
+    for (var ki = 0; ki < keys.length; ki++) {
+      var k = keys[ki];
+      if (!seen[k]) {
+        seen[k] = true;
+        ordered.push(k);
+      }
+    }
+    return ordered;
+  }
+
+  function formatCitationLibrary(citationMap, opts) {
     var keys = citationMap ? Object.keys(citationMap) : [];
     if (!keys.length) return "No citation data provided.";
+    var o = opts || {};
+    var ordered = orderCitationKeys(keys, o.priorityKeys);
+    var maxChars = o.maxChars > 0 ? o.maxChars : 0;
+    var compact = !!o.compact || (maxChars > 0 && ordered.length > 25);
     var context = "### REFERENCE LIBRARY (Use these keys for \\cite{})\n";
-    for (var i = 0; i < keys.length; i++) {
-      var key = keys[i];
+    for (var i = 0; i < ordered.length; i++) {
+      var key = ordered[i];
       var data = citationMap[key] || {};
       var title = data.title || "Unknown Title";
       var authorsList = Array.isArray(data.authors) ? data.authors : [];
-      var authors = authorsList.slice(0, 3).join(", ");
-      if (authorsList.length > 3) authors += " et al.";
+      var authors = compact
+        ? (authorsList.length > 1 ? authorsList[0] + " et al." : (authorsList[0] || ""))
+        : authorsList.slice(0, 3).join(", ") + (authorsList.length > 3 ? " et al." : "");
       var year = data.year != null ? data.year : "N/A";
-      var abs = data.abstract || "No abstract available.";
-      context += "--- Key: " + key + " ---\n";
-      context += "Title: " + title + "\n";
-      context += "Authors: " + authors + " (" + year + ")\n";
-      context += "Abstract: " + abs + "\n\n";
+      var abs = data.abstract ? String(data.abstract) : "";
+      var idTag = data.pmid ? ("PMID:" + data.pmid) : (data.doi ? ("DOI:" + data.doi) : "");
+      var entry;
+      if (compact) {
+        entry = "--- " + key + " | " + (authors ? authors + " (" + year + ") " : "(" + year + ") ") +
+          title + (idTag ? " [" + idTag + "]" : "") + "\n";
+      } else {
+        entry = "--- Key: " + key + " ---\n" +
+          "Title: " + title + "\n" +
+          "Authors: " + authors + " (" + year + ")" + (idTag ? " [" + idTag + "]" : "") + "\n" +
+          (abs ? "Abstract: " + abs + "\n\n" : "\n");
+      }
+      if (maxChars > 0 && context.length + entry.length > maxChars && i > 0) {
+        context += "[+" + (ordered.length - i) + " additional verified references omitted to fit model input budget]\n";
+        break;
+      }
+      context += entry;
     }
     return context;
   }
 
   function buildSectionPrompt(opts) {
     var o = opts || {};
-    var citationLibraryContent = formatCitationLibrary(o.citationMap);
+    var outlineStr = o.outlineJsonStr || "{}";
+    var ideaStr = o.ideaMd || "";
+    var expStr = o.experimentalLogMd || "";
+    var guideStr = o.guidelinesMd || GUIDELINES;
+    var tmplStr = o.templateTex || IMRAD_TEMPLATE;
+    var baseLen = SECTION_WRITING_AGENT_PROMPT.length + outlineStr.length + ideaStr.length + expStr.length + guideStr.length + tmplStr.length + 1200;
+    var libBudget = Math.max(8000, 52000 - baseLen);
+    var priKeys = Array.isArray(o.priorityKeys) ? o.priorityKeys : extractCitedKeyList(outlineStr + "\n" + ideaStr);
+    var citationLibraryContent = formatCitationLibrary(o.citationMap, {
+      maxChars: libBudget,
+      priorityKeys: priKeys
+    });
     var figuresContent = "No figures provided.";
     var prompt = [
       "",
       "Here are the input materials for the paper.",
       "",
       "--- INPUT: outline.json (Structure & Citation Candidates) ---",
-      o.outlineJsonStr || "{}",
+      outlineStr,
       "",
       "--- INPUT: citation_map.json (Reference Library) ---",
       citationLibraryContent,
       "",
       "--- INPUT: idea.md (Technical Method Details) ---",
-      o.ideaMd || "",
+      ideaStr,
       "",
       "--- INPUT: experimental_log.md (Raw Data for Tables) ---",
-      o.experimentalLogMd || "",
+      expStr,
       "",
       "--- INPUT: figures_list (Available Figure Files) ---",
       figuresContent,
       "",
       "--- INPUT: conference_guidelines.md ---",
-      o.guidelinesMd || GUIDELINES,
+      guideStr,
       "",
       "--- INPUT: template.tex (DO NOT CHANGE EXISTING TEXT. FILL MISSING SECTIONS.) ---",
-      o.templateTex || IMRAD_TEMPLATE,
+      tmplStr,
       "",
       "**INSTRUCTION**: ",
       "1. Identify missing sections in `template.tex`.",
@@ -505,8 +575,44 @@
     ""
   ].join("\n") + "\n" + UNIVERSAL_NO_LEAKAGE_PROMPT;
 
+  function compactCitationJson(strOrMap, currentTex, maxChars) {
+    if (typeof strOrMap === "string" && strOrMap.length <= maxChars) return strOrMap;
+    var mapObj = null;
+    if (typeof strOrMap === "string") {
+      try { mapObj = JSON.parse(strOrMap); } catch (e) { return strOrMap.slice(0, maxChars); }
+    } else if (strOrMap && typeof strOrMap === "object") {
+      mapObj = strOrMap;
+    }
+    if (!mapObj) return "{}";
+    var ordered = orderCitationKeys(Object.keys(mapObj), extractCitedKeyList(currentTex));
+    var out = {};
+    for (var i = 0; i < ordered.length; i++) {
+      var k = ordered[i];
+      var r = mapObj[k] || {};
+      out[k] = {
+        title: r.title || "",
+        year: r.year != null ? r.year : null,
+        doi: r.doi || undefined,
+        pmid: r.pmid || undefined
+      };
+      var s = JSON.stringify(out);
+      if (s.length > maxChars && i > 0) {
+        delete out[k];
+        break;
+      }
+    }
+    return JSON.stringify(out);
+  }
+
   function buildRefinementPrompt(opts) {
     var o = opts || {};
+    var reviewStr = JSON.stringify(o.currentReview || {}, null, 2);
+    var guideStr = o.guidelinesMd || GUIDELINES;
+    var expStr = o.experimentalLogMd || "";
+    var curTex = o.currentTex || "";
+    var baseLen = CONTENT_REFINEMENT_AGENT_SYSTEM_PROMPT.length + curTex.length + reviewStr.length + guideStr.length + expStr.length + 1400;
+    var citeBudget = Math.max(4000, 52000 - baseLen);
+    var citeStr = compactCitationJson(o.citationMapJsonStr || o.citationMap || "{}", curTex, citeBudget);
     var userPromptText = [
       "",
       "REFLECTION ITERATION " + (o.round || 1) + ".",
@@ -515,19 +621,19 @@
       o.previousLogStr || "None",
       "",
       "--- CURRENT REVIEWER FEEDBACK (Score: " + (o.currentScore != null ? o.currentScore : 0) + ") ---",
-      JSON.stringify(o.currentReview || {}, null, 2),
+      reviewStr,
       "",
       "--- CONFERENCE GUIDELINES ---",
-      o.guidelinesMd || GUIDELINES,
+      guideStr,
       "",
       "--- EXPERIMENTAL LOG (Data Truth) ---",
-      o.experimentalLogMd || "",
+      expStr,
       "",
       "--- CITATION MAP (Reference Truth) ---",
-      o.citationMapJsonStr || "{}",
+      citeStr,
       "",
       "--- CURRENT LATEX SOURCE ---",
-      o.currentTex || "",
+      curTex,
       "",
       "INSTRUCTION: ",
       "1. Your goal is to IMPROVE the reviewer score (Current: " + (o.currentScore != null ? o.currentScore : 0) + ").",
@@ -538,7 +644,7 @@
     if (o.retryReason) {
       userPromptText += "\nPrevious attempt failed integrity checks:\n" + o.retryReason + "\nFix every listed violation.";
     }
-    var assembled = (o.currentTex || "") + "\n\n" + userPromptText;
+    var assembled = curTex + "\n\n" + userPromptText;
     return { system: CONTENT_REFINEMENT_AGENT_SYSTEM_PROMPT, prompt: assembled };
   }
 

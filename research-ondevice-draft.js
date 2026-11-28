@@ -17,6 +17,30 @@
   var GATEWAY_FRAMING_TOKENS = 1000;
   var DEFAULT_GATEWAY_PATH = "/api/research/v1/internal/llm";
   var APP_MARKER = "smdapp_ddc578ad04b399a332e53e04706433d96803e91c2d373b7d";
+  var PHI_NEVER_CATEGORIES = {
+    patient_name: 1, name: 1, aadhaar: 1, abha: 1,
+    ssn: 1, nhs: 1, mrn: 1, uhid: 1, id: 1, phone: 1
+  };
+  var PHI_OVERRIDE_TERMS_VERSION = "rmd-phi-override-v2";
+
+  function phiHasNeverOverridable(categories) {
+    var list = Array.isArray(categories) ? categories : [];
+    for (var i = 0; i < list.length; i++) {
+      if (PHI_NEVER_CATEGORIES[String(list[i] || "").toLowerCase()]) return true;
+    }
+    return false;
+  }
+
+  function isPhiOverrideEnabled() {
+    try {
+      if (G && G.RESEARCH_PHI_OVERRIDE === "0") return false;
+      if (typeof localStorage !== "undefined" && localStorage && typeof localStorage.getItem === "function") {
+        if (localStorage.getItem("RESEARCH_PHI_OVERRIDE") === "0") return false;
+      }
+    } catch (e) {}
+    return true;
+  }
+
   var DEVICE_FAIL_CODES = {
     gate_failed: 1,
     phi_blocked: 1,
@@ -289,6 +313,7 @@
       currentReview: null,
       currentScore: 0,
       gateHits: [],
+      phiOverride: opts.phiOverride || null,
       callCount: 0,
       refinementRounds: 0,
       usage: { calls: 0, inputTokens: 0, outputTokens: 0, records: [] },
@@ -382,13 +407,52 @@
       if (guardErr) return Promise.reject(guardErr);
 
       var assembled = (system ? system + "\n\n" : "") + prompt;
-      var phiReport = GATES.scanPhi(assembled);
-      if (phiReport.blocked) {
-        return Promise.reject(makeErr("phi_blocked", stepId, "Patient identifiers detected in prompt", {
-          categories: GATES.phiCategories(phiReport.hits)
-        }));
+      var phiReport = GATES.scanPhi(assembled, { allowCitationLibraryNames: true });
+      var onPhiOverride = typeof opts.onPhiOverride === "function" ? opts.onPhiOverride : null;
+
+      function tryOverrideThenSend(cats, canOvr, origErr, retryFn) {
+        if (!onPhiOverride || state.phiOverride || !isPhiOverrideEnabled()) {
+          return Promise.reject(origErr);
+        }
+        var never = phiHasNeverOverridable(cats);
+        var allow = !never && canOvr;
+        /* Background PaperOrchestra jobs fail cleanly with st.poError instead of
+         * trapping the screen behind a non-overridable modal. */
+        if (!allow) return Promise.reject(origErr);
+        pauseTimer();
+        beginAiWait();
+        return Promise.resolve().then(function () {
+          return onPhiOverride(cats, true, origErr);
+        }).then(function () {
+          endAiWait();
+          resumeTimer();
+          state.phiOverride = {
+            accepted: true,
+            termsVersion: PHI_OVERRIDE_TERMS_VERSION,
+            condition: "false_positive"
+          };
+          return retryFn();
+        }, function (declinedErr) {
+          endAiWait();
+          resumeTimer();
+          throw declinedErr || origErr;
+        });
       }
 
+      if (phiReport.blocked && !state.phiOverride) {
+        var preCats = GATES.phiCategories(phiReport.hits);
+        var preErr = makeErr("phi_blocked", stepId, "Patient identifiers detected in prompt", {
+          categories: preCats
+        });
+        var preNever = phiHasNeverOverridable(preCats);
+        if (!onPhiOverride || preNever || !isPhiOverrideEnabled()) {
+          return Promise.reject(preErr);
+        }
+        return tryOverrideThenSend(preCats, true, preErr, sendAfterPhiCheck);
+      }
+      return sendAfterPhiCheck();
+
+      function sendAfterPhiCheck() {
       if (purpose === "refinement") {
         if (state.refinementRounds >= ceiling.maxRefinementRounds) {
           return Promise.reject(makeErr("ceiling_refinement_rounds", stepId, "Refinement round ceiling reached"));
@@ -419,6 +483,9 @@
       if (typeof system === "string" && system) {
         payload.system = system;
       }
+      if (state.phiOverride) {
+        payload.phiOverride = state.phiOverride;
+      }
 
       var attempts = 1 + ceiling.maxRetries;
       var refreshed401 = false;
@@ -426,6 +493,7 @@
       function attemptCall(attemptIdx) {
         var preErr = checkPreCallGuards(stepId);
         if (preErr) return Promise.reject(preErr);
+        if (state.phiOverride) payload.phiOverride = state.phiOverride;
         pauseTimer();
         beginAiWait();
         return gatewayTransport(gatewayUrl, payload, currentToken).then(function (res) {
@@ -470,9 +538,17 @@
           }
           var errCode = (data && data.error && data.error.code) || "";
           if (status === 422 && (errCode === "phi_blocked" || errCode === "ipd_blocked")) {
-            throw makeErr(errCode, stepId, (data.error && data.error.message) || errCode, {
-              categories: data.categories || []
+            var gwPhiErr = makeErr(errCode, stepId, (data.error && data.error.message) || errCode, {
+              categories: data.categories || [],
+              overridable: data.overridable === true,
+              allowedConditions: data.allowedConditions || []
             });
+            if (errCode === "phi_blocked" && onPhiOverride) {
+              return tryOverrideThenSend(data.categories || [], data.overridable === true, gwPhiErr, function () {
+                return attemptCall(attemptIdx);
+              });
+            }
+            throw gwPhiErr;
           }
           if ((status === 429 || status >= 500) && attemptIdx < attempts - 1) {
             return sleepFn(Math.pow(2, attemptIdx) * 1000).then(function () {
@@ -495,6 +571,7 @@
       }
 
       return attemptCall(0);
+      }
     }
 
     var inputs = null;
@@ -546,6 +623,7 @@
           state.currentReview = saved.currentReview || null;
           state.currentScore = saved.currentScore || 0;
           state.gateHits = saved.gateHits || [];
+          state.phiOverride = saved.phiOverride || opts.phiOverride || null;
           state.callCount = saved.callCount || 0;
           state.refinementRounds = saved.refinementRounds || 0;
           state.usage = saved.usage || { calls: 0, inputTokens: 0, outputTokens: 0, records: [] };
@@ -760,7 +838,7 @@
               currentReview: state.currentReview,
               guidelinesMd: inputs.guidelinesMd,
               experimentalLogMd: inputs.experimentalLogMd,
-              citationMapJsonStr: JSON.stringify(citationMap, null, 2),
+              citationMap: citationMap,
               currentTex: state.currentTex
             });
 
@@ -871,10 +949,12 @@
         return saveCheckpoint().then(function () { return manuscript; });
       }
 
-      return apiRequest("POST", "/v1/jobs/" + encodeURIComponent(jobId) + "/device-result", {
+      var resultBody = {
         manuscript: manuscript,
         usage: submitUsage
-      }).then(function () {
+      };
+      if (state.phiOverride) resultBody.phiOverride = state.phiOverride;
+      return apiRequest("POST", "/v1/jobs/" + encodeURIComponent(jobId) + "/device-result", resultBody).then(function () {
         state.status = "succeeded";
         state.completedSteps["final"] = true;
         state.lastCompletedStep = "final";

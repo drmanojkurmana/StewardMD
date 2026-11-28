@@ -562,9 +562,8 @@ describe("ResearchMD /ai-draft PHI override dialog (one action: false detection)
     assert.equal(sb.dom.root.querySelector("#rmdPhiOverrideModal"), null);
   });
 
-  test("non /ai-draft paths never show override dialog even on 422 phi_blocked overridable:true", async () => {
+  test("paths other than /ai-draft and POST /jobs never show override dialog even on 422 phi_blocked overridable:true", async () => {
     const paths = [
-      ["POST", "/v1/projects/p1/jobs", { kind: "manuscript_draft" }],
       ["POST", "/v1/projects/p1/extraction/suggestions", { studyId: "s1" }],
       ["POST", "/v1/projects/p1/ai-draft/subpath", { input: { text: "Clean" } }],
       ["GET", "/v1/projects/p1/ai-draft", undefined]

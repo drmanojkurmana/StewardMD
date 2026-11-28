@@ -225,6 +225,9 @@ async function handleApi(req, res, path, query) {
   // POST /v1/projects/:projectId/manuscript/export
   if (path.match(/^\/v1\/projects\/[^/]+\/manuscript\/export$/) && req.method === 'POST') {
     exportLog.push({ version: body.version, format: body.format });
+    if (firstSaveMode && !firstSaveCreated) {
+      return send(404, { error: { code: 'manuscript_not_found', message: 'Manuscript not found' } });
+    }
     if (firstSaveMode) {
       if (body.version !== 1) {
         return send(409, { error: { code: 'stale_version', message: 'Expected version 1 after first save, got ' + body.version } });
@@ -753,12 +756,20 @@ try {
     }
   }
 
-  /* 11b. Fresh project (GET /manuscript 404 before first save): Save syncs version 1, then export sends version 1 */
+  /* 11b. Fresh project (GET /manuscript 404 before first save): Export before draft explains "Draft the manuscript first.", then Save syncs version 1, then export sends version 1 */
   firstSaveMode = true;
   firstSaveCreated = false;
   await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 768, deviceScaleFactor: 2, mobile: false });
-  await ev(`(function(){localStorage.removeItem('smd_rmd_manuscript_local_v1');window.__exports=[];SMD_RESEARCH.open({screen:'manuscript'});return 1})()`);
+  await ev(`(function(){localStorage.removeItem('smd_rmd_manuscript_local_v1');localStorage.removeItem('smd_rmd_po');window.__exports=[];SMD_RESEARCH.open({screen:'manuscript'});return 1})()`);
   ok(await until(`!!document.querySelector('[data-rmd="section-save"]')`, 5000), 'fresh project renders manuscript editor on 404 fallback');
+  await click('[data-rmd="manuscript-export"]');
+  ok(await until(`/Draft the manuscript first/.test((document.querySelector('.rmd-man-right')||{}).textContent||'') && !!document.querySelector('[data-rmd="draft-manuscript-first"]')`, 5000), '404 manuscript_not_found shows Draft the manuscript first with action button');
+  ok(await ev(`document.querySelector('[data-rmd="draft-manuscript-first"]').offsetHeight >= 44`), 'Draft the manuscript button meets 44px touch target');
+  await click('[data-rmd="draft-manuscript-first"]');
+  ok(await until(`!!document.querySelector('[data-rmd="po-start"], [data-rmd-drafted="maik"]')`, 5000), 'Draft the manuscript button opens start-draft prompt or starts draft');
+  if (await ev(`!!document.querySelector('[data-rmd="po-dismiss"]')`)) {
+    await click('[data-rmd="po-dismiss"]');
+  }
   await click('[data-rmd="section-save"]');
   ok(await until(`/Saved\\./.test((document.querySelector('.rmd-banner-info')||{}).textContent||'')`, 5000), 'first save on fresh project shows Saved.');
   await click('[data-rmd="manuscript-export"]');

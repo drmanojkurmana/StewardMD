@@ -2197,6 +2197,13 @@
     } catch (e) {}
   }
 
+  function isDomMounted(el) {
+    if (!el) return false;
+    if (typeof el.isConnected === "boolean") return el.isConnected;
+    if (D && D.body && typeof D.body.contains === "function") return D.body.contains(el);
+    return true;
+  }
+
   function saveDraft(container) {
     if (saveBusy) return pendingSavePromise;
     var draft = ts.draft;
@@ -2204,6 +2211,7 @@
       SMD.p2.flashNotice(container, "Write or draft the paper first.", "error");
       return Promise.resolve(false);
     }
+    var wasMounted = isDomMounted(container);
     var pid = tpid;
     var btn = container ? container.querySelector("#rmdDraftSave") : null;
     saveBusy = true;
@@ -2227,15 +2235,20 @@
       saveBusy = false;
       pendingSavePromise = null;
       if (btn) { btn.disabled = false; btn.textContent = "Save to the manuscript"; }
-      SMD.p2.flashNotice(container, "Saved to the manuscript.", "info");
-      SMD.navigate("thesis-tables");
+      /* Never hijack navigation if the user moved away while PUTs were in-flight. */
+      if (!wasMounted || isDomMounted(container)) {
+        SMD.p2.flashNotice(container, "Saved to the manuscript.", "info");
+        SMD.navigate("thesis-tables");
+      }
       return true;
     }).catch(function () {
       saveBusy = false;
       pendingSavePromise = null;
       if (btn) { btn.disabled = false; btn.textContent = "Save to the manuscript"; }
-      SMD.p2.flashNotice(container, "Saved on this device.", "info");
-      SMD.navigate("thesis-tables");
+      if (!wasMounted || isDomMounted(container)) {
+        SMD.p2.flashNotice(container, "Saved on this device.", "info");
+        SMD.navigate("thesis-tables");
+      }
       return false;
     });
     pendingSavePromise = p;

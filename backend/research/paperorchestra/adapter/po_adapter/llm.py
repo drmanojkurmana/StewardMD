@@ -268,7 +268,7 @@ class GatewayLLMClient:
         assembled = (system + "\n\n" if system else "") + prompt
 
         # 1. PHI gate on the exact text about to leave (phi-gate.md placement).
-        report = phi.scan(assembled)
+        report = phi.scan(assembled, allow_citation_library_names=True)
         if report["blocked"]:
             raise phi.PhiBlockedError(report["hits"])
 
