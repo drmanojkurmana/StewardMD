@@ -307,6 +307,10 @@ pub struct Font {
     descent: f64,
     umap: Option<UMap>,
     cid2unicode: Option<HashMap<u32, String>>,
+    /// Bold or heavier, from the font's name or its descriptor. Only the
+    /// stream-order lines use it (chapter headings in a thesis); the pdfminer
+    /// word and table output is unchanged.
+    pub bold: bool,
 }
 
 fn int_key(o: &Object, doc: &Document) -> Option<i64> {
@@ -375,6 +379,42 @@ fn bbox_of(doc: &Document, desc: Option<&Dictionary>) -> [f64; 4] {
         }
     }
     [0.0; 4]
+}
+
+/// Bold, Black, Heavy, Semibold or Demi in the font name (after any subset
+/// tag such as "ABCDEF+"), the descriptor's ForceBold flag, or a FontWeight
+/// of 600 or more.
+pub fn bold_name(name: &[u8]) -> bool {
+    let s = String::from_utf8_lossy(name).to_ascii_lowercase();
+    let s = match s.find('+') {
+        Some(i) if i == 6 => &s[7..],
+        _ => &s[..],
+    };
+    ["bold", "black", "heavy", "semibold", "demi", "extrab", "ultrab"].iter().any(|k| s.contains(k))
+}
+
+fn is_bold(doc: &Document, spec: &Dictionary) -> bool {
+    if let Some(n) = dict_get(doc, spec, b"BaseFont").and_then(as_name) {
+        if bold_name(n) {
+            return true;
+        }
+    }
+    let desc = dict_get(doc, spec, b"FontDescriptor").and_then(|o| o.as_dict().ok());
+    if let Some(d) = desc {
+        if let Some(n) = dict_get(doc, d, b"FontName").and_then(as_name) {
+            if bold_name(n) {
+                return true;
+            }
+        }
+        let flags = dict_get(doc, d, b"Flags").and_then(|o| num(doc, o)).unwrap_or(0.0) as i64;
+        if flags & (1 << 18) != 0 {
+            return true;
+        }
+        if dict_get(doc, d, b"FontWeight").and_then(|o| num(doc, o)).unwrap_or(0.0) >= 600.0 {
+            return true;
+        }
+    }
+    false
 }
 
 fn desc_num(doc: &Document, desc: Option<&Dictionary>, key: &[u8]) -> f64 {
@@ -489,8 +529,14 @@ impl Font {
         }
     }
 
-    /// pdfminer `PDFResourceManager.get_font`.
+    /// pdfminer `PDFResourceManager.get_font`, plus the bold flag.
     pub fn load(doc: &Document, spec: &Dictionary) -> Result<Font, Unsupported> {
+        let mut f = Self::load_inner(doc, spec)?;
+        f.bold = f.bold || is_bold(doc, spec);
+        Ok(f)
+    }
+
+    fn load_inner(doc: &Document, spec: &Dictionary) -> Result<Font, Unsupported> {
         let subtype: Vec<u8> = dict_get(doc, spec, b"Subtype").and_then(as_name).unwrap_or(b"Type1").to_vec();
         match subtype.as_slice() {
             b"Type3" => Self::load_type3(doc, spec),
@@ -546,6 +592,7 @@ impl Font {
             descent: if descent > 0.0 { -descent } else { descent },
             umap,
             cid2unicode: Some(cid2unicode),
+            bold: false,
         })
     }
 
@@ -583,6 +630,7 @@ impl Font {
             descent: bbox[1],
             umap,
             cid2unicode: Some(cid2unicode),
+            bold: false,
         })
     }
 
@@ -670,6 +718,7 @@ impl Font {
             descent: if descent > 0.0 { -descent } else { descent },
             umap,
             cid2unicode: None,
+            bold: false,
         })
     }
 }

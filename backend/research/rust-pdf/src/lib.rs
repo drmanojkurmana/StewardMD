@@ -289,7 +289,8 @@ pub fn extract(data: &[u8], limits: &Limits) -> Result<Value, Error> {
 }
 
 /// Stream-order text lines with font sizes for the chosen pages (1-based),
-/// for PrepNucleus deck creation: `{"pages": [{"n", "lines": [{"tx", "size"}]}]}`.
+/// for PrepNucleus deck creation and thesis chapter splitting:
+/// `{"pages": [{"n", "lines": [{"tx", "size", "bold"}]}]}`.
 /// Pages that are out of range are left out.
 pub fn extract_lines(data: &[u8], wanted: &[usize], max_bytes: usize) -> Result<Value, Error> {
     if data.len() > max_bytes {
@@ -317,7 +318,7 @@ pub fn extract_lines(data: &[u8], wanted: &[usize], max_bytes: usize) -> Result<
             it.run(resources, &content, ctm, &mut anc)?;
             let ls: Vec<Value> = lines::page_lines(&it.chars)
                 .into_iter()
-                .map(|(tx, size)| json!({ "tx": tx, "size": size }))
+                .map(|(tx, size, bold)| json!({ "tx": tx, "size": size, "bold": bold }))
                 .collect();
             out.push(json!({ "n": n, "lines": ls }));
         }

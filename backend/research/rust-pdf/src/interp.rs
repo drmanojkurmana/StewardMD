@@ -91,6 +91,8 @@ pub struct Char {
     pub adv: f64,
     /// Font size (Tf), for the stream-order lines PrepNucleus reads.
     pub fs: f64,
+    /// Set in a bold font, for the stream-order lines.
+    pub bold: bool,
 }
 
 #[derive(Clone)]
@@ -642,7 +644,7 @@ impl<'d, 'c> Interp<'d, 'c> {
                         if y1 < y0 {
                             std::mem::swap(&mut y0, &mut y1);
                         }
-                        self.chars.push(Char { text, x0, y0, x1, y1, upright, size: y1 - y0, matrix: m, adv, fs: fontsize });
+                        self.chars.push(Char { text, x0, y0, x1, y1, upright, size: y1 - y0, matrix: m, adv, fs: fontsize, bold: font.bold });
                         x += adv;
                         if cid == 32 && wordspace != 0.0 {
                             x += wordspace;
