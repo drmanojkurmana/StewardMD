@@ -47,7 +47,8 @@ Regain teardown and the full feature table: the Claude Docs page "Regain teardow
   account (team-wide, Apple's email: "you can now configure this capability for eligible apps"). It is a managed
   capability: enable Family Controls (Distribution) under Additional Capabilities on `in.stewardmd.app` and the three
   `in.stewardmd.app.Focus*` identifiers, then archive and export / upload with automatic signing (no project change).
-  **Uploaded to TestFlight 2026-11-28: StewardMD 2.1 (16)** from `feat/prep-focus-ios` @ `3f6de0c03` (loader `prep204`, Focus
+  **Uploaded to TestFlight 2026-11-28: StewardMD 2.1 (63)** (a first upload went out as 2.1 (16) by mistake: the pbxproj build
+  number is stale, pass `CURRENT_PROJECT_VERSION=<last+1>` when archiving) from `feat/prep-focus-ios` @ `3f6de0c03` (loader `prep204`, Focus
   default ON), App Store signing with Family Controls (Distribution) on the app and all three extensions.
 - Open: phone acceptance (install wipes app data, see CLAUDE.md).
 
