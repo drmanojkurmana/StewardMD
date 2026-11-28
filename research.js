@@ -886,12 +886,16 @@
       var tutProj = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
       if (tutProj && tutProj.tutorial) cost = 0;
     } catch (eTut) {}
+    var askLbl = o.askLabel || "Ask MaiK to draft it";
+    var manualLbl = o.manualLabel || "Do it myself";
+    var askCls = o.askBtnClass || "rmd-btn-primary";
+    var costLine = o.costText || (cost > 0 ? "Costs about " + cost + " MaiK token" + (cost === 1 ? "" : "s") : "No MaiK tokens needed");
     var h = '<div class="rmd-ai-bar">';
     h += '<div class="rmd-ai-actions">';
-    h += '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd-ai="ask"' + (st.busy ? " disabled" : "") + '><span class="rmd-ai-mark" aria-hidden="true">R</span>Ask MaiK to draft it</button>';
-    h += '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-ai="manual">Do it myself</button>';
+    h += '<button type="button" class="rmd-btn ' + askCls + '" data-rmd-ai="ask"' + (st.busy ? " disabled" : "") + '><span class="rmd-ai-mark" aria-hidden="true">R</span>' + esc(askLbl) + '</button>';
+    h += '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-ai="manual">' + esc(manualLbl) + '</button>';
     h += '</div>';
-    h += '<p class="rmd-ai-cost">' + (cost > 0 ? "Costs about " + cost + " MaiK token" + (cost === 1 ? "" : "s") : "No MaiK tokens needed") + '</p>';
+    h += '<p class="rmd-ai-cost">' + esc(costLine) + '</p>';
     if (st.notice) h += st.notice;
     if (st.busy) {
       h += '<p class="rmd-ai-progress smd-books-keep" role="status">' + esc(st.progressText || ("MaiK is drafting your " + (o.label || "draft"))) + (st.progressText ? "" : "&#8230;") + '</p>';
@@ -1347,13 +1351,14 @@
       "#researchMD .rmd-conflict-ver { font-size: 12px; color: var(--rmd-mut); }",
       "/* Responsive Breakpoints: Tablet (>= 768px) vs Phone (< 768px) */",
       "@media (max-width: 767px) {",
-      "  #researchMD .rmd-studies-screen { height: auto; min-height: 0; overflow-x: hidden; }",
+      "  #researchMD .rmd-studies-screen { flex: 0 0 auto; height: auto; min-height: 0; overflow: visible; }",
       "  #researchMD .rmd-topbar-actions { width: 100%; }",
       "  #researchMD .rmd-topbar-actions .rmd-btn { flex: 1 1 auto; min-height: 44px; min-width: 0; max-width: 100%; }",
       "  #researchMD .rmd-study-row { flex-wrap: wrap; }",
-      "  #researchMD .rmd-split-layout { flex-direction: column; min-width: 0; width: 100%; }",
-      "  #researchMD .rmd-pane-left { flex: 1; border-right: 0; min-width: 0; width: 100%; }",
-      "  #researchMD .rmd-pane-right { flex: 1; padding: 14px; min-width: 0; width: 100%; }",
+      "  #researchMD .rmd-split-layout { flex-direction: column; flex: none; min-height: auto; overflow: visible; min-width: 0; width: 100%; }",
+      "  #researchMD .rmd-pane-left { flex: none; border-right: 0; min-width: 0; width: 100%; overflow-y: visible; }",
+      "  #researchMD .rmd-pane-right { flex: none; padding: 14px; min-width: 0; width: 100%; overflow-y: visible; }",
+      "  #researchMD .rmd-run-screen { flex: 0 0 auto; height: auto; min-height: 0; overflow-y: visible; }",
       "  #researchMD .rmd-phone-seg { display: flex; }",
       "  #researchMD .rmd-phone-hidden { display: none !important; }",
       "  #researchMD .rmd-mobile-back-studies { display: inline-flex; }",
@@ -1481,7 +1486,12 @@
       "#researchMD .rmd-pdf-hint { font-size: 12px; margin: 0; }",
       "/* Phase 3: extraction form */",
       "#researchMD .rmd-extract-selects { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }",
-      "#researchMD .rmd-extract-form-body { padding: 14px 16px 40px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }",
+      "#researchMD .rmd-extract-form-body { padding: 14px 16px 40px; display: flex; flex-direction: column; gap: 14px; overflow-y: visible; }",
+      "@media (max-width: 767px) {",
+      "  #researchMD .rmd-abstract-box { max-height: none; overflow-y: visible; overscroll-behavior: auto; }",
+      "  #researchMD .rmd-pdf-layout { flex: none; min-height: auto; overflow-y: visible; }",
+      "  #researchMD .rmd-pdf-scroll { max-height: none; overflow: visible; }",
+      "}",
       "#researchMD .rmd-extract-field { display: flex; flex-direction: column; gap: 7px; border: 1px solid var(--rmd-line); border-radius: 10px; padding: 12px; background: var(--rmd-panel); }",
       "#researchMD .rmd-extract-field-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }",
       "#researchMD .rmd-extract-field-head label { font: 600 13px var(--rmd-f); color: var(--rmd-ink); }",
