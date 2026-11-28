@@ -273,6 +273,26 @@ async function handleApi(req, res, path, query) {
   // POST /v1/projects/:projectId/ai-draft
   if (path.match(/^\/v1\/projects\/[^/]+\/ai-draft$/) && req.method === 'POST') {
     aiDraftCalls.push(body);
+    if (body.task === 'case_report_draft') {
+      return send(200, {
+        draft: {
+          id: 'draft_cr_1',
+          status: 'unverified',
+          task: 'case_report_draft',
+          sections: {
+            title: 'Scrub typhus complicated by ARDS: a case report',
+            abstract: 'A 45-year-old man presented with fever and eschar.',
+            introduction: 'Scrub typhus is an acute febrile illness.',
+            casePresentation: 'A 45-year-old man with fever for 7 days and right axillary eschar.',
+            timeline: 'Day 1: admission; Day 2: doxycycline; Day 10: discharge.',
+            discussion: 'Early empiric doxycycline led to rapid recovery.',
+            conclusion: 'Prompt recognition prevents mortality.'
+          }
+        },
+        model: 'gemini-2.5-flash',
+        costInr: 0.25
+      });
+    }
     if (body.task === 'manuscript_draft') {
       return send(200, {
         draft: {
@@ -776,6 +796,53 @@ try {
   ok(await until(`window.__exports && window.__exports.some(function(x){return x.kind==='share'})`, 5000), 'export after first save succeeds and shares DOCX');
   const firstExport = exportLog[exportLog.length - 1];
   ok(firstExport && firstExport.version === 1, 'export after first save sends server version 1');
+
+  /* 11c. Case Report on fresh project: Ask MaiK draft syncs all sections to server, tablet edit + Save reaches server, then export succeeds */
+  firstSaveCreated = false;
+  putLog.length = 0;
+  exportLog.length = 0;
+  await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await ev(`(function(){
+    localStorage.removeItem('smd_rmd_manuscript_local_v1');
+    window.__exports = [];
+    window.__origActiveProj = SMD_RESEARCH.store.getActiveProject;
+    window.__origGetProj = SMD_RESEARCH.store.getProject;
+    var crP = Object.assign({}, window.__origActiveProj(), { studyType: 'Case Report', serverId: ${JSON.stringify(PID)}, practice: false });
+    SMD_RESEARCH.store.getActiveProject = function () { return crP; };
+    SMD_RESEARCH.store.getProject = function () { return crP; };
+    SMD_RESEARCH.open({ screen: 'manuscript' });
+    return 1;
+  })()`);
+  ok(await until(`!!document.querySelector('[data-rmd="ask-maik-case-report"]')`, 5000), 'case report manuscript screen opens on phone');
+  await click('[data-rmd="ask-maik-case-report"]');
+  ok(await until(`!!document.querySelector('#rmdCaseReportDraftModal')`, 5000), 'case report Ask MaiK modal opens');
+  await click('#rmd-cr-tick-noid');
+  await click('#rmd-cr-send-btn');
+  ok(await until(`!document.querySelector('#rmdCaseReportDraftModal')`, 5000), 'case report Ask MaiK draft closes modal');
+  for (let i = 0; i < 50 && putLog.length < 6; i++) await sleep(100);
+  ok(putLog.length >= 6, 'case report Ask MaiK draft syncs drafted sections to server');
+  await call('Emulation.setDeviceMetricsOverride', { width: 1024, height: 1366, deviceScaleFactor: 2, mobile: false });
+  ok(await until(`!!document.querySelector('[data-rmd="section-save"]') && document.querySelector('#rmdSectionEditor')?.getAttribute('contenteditable') === 'true'`, 5000), 'tablet resize renders editable editor and Save button');
+  await ev(`(function(){
+    var ed = document.querySelector('#rmdSectionEditor');
+    ed.innerText = (ed.innerText || '') + '\\nTablet verification edit.';
+    ed.dispatchEvent(new Event('input', { bubbles: true }));
+    return 1;
+  })()`);
+  const putsBeforeTabletSave = putLog.length;
+  await click('[data-rmd="section-save"]');
+  const tabletSavedNotice = await until(`/Saved\\./.test((document.querySelector('.rmd-man-right .rmd-banner-info')||{}).textContent||'')`, 5000);
+  for (let i = 0; i < 50 && putLog.length <= putsBeforeTabletSave; i++) await sleep(100);
+  ok(tabletSavedNotice && putLog.length > putsBeforeTabletSave, 'tablet section edit + Save reaches server and shows Saved.');
+  const tabletPut = putLog[putLog.length - 1];
+  ok(tabletPut && /Tablet verification edit\./.test(tabletPut.text || ''), 'tablet Save sends edited section text to server');
+  await click('[data-rmd="manuscript-export"]');
+  ok(await until(`window.__exports && window.__exports.some(function(x){return x.kind==='share'})`, 5000), 'DOCX export succeeds after Case Report Ask MaiK draft + tablet edit + Save');
+  await ev(`(function(){
+    SMD_RESEARCH.store.getActiveProject = window.__origActiveProj;
+    SMD_RESEARCH.store.getProject = window.__origGetProj;
+    return 1;
+  })()`);
   firstSaveMode = false;
 
   /* 12. No page errors, Escape closes */

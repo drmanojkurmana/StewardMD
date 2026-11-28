@@ -356,6 +356,7 @@
   var seq = 0;
   var lastContainer = null;
   var mqlBound = false;
+  var lastBreakpointPhone = null;
   var poTimer = null;
   var manuscriptMissing = {};
   var loadError = null;
@@ -363,9 +364,17 @@
   function bindBreakpoint() {
     if (mqlBound || !G.matchMedia) return;
     try {
+      lastBreakpointPhone = isPhone();
       var mql = G.matchMedia("(max-width: 767px)");
       var fn = function () {
-        if (lastContainer && D.body && D.body.contains(lastContainer)) render(lastContainer);
+        var nowPhone = isPhone();
+        if (nowPhone === lastBreakpointPhone) return;
+        lastBreakpointPhone = nowPhone;
+        if (lastContainer && D.body && D.body.contains(lastContainer)) {
+          var ed = lastContainer.querySelector("#rmdSectionEditor");
+          if (ed && ed.getAttribute("contenteditable") === "true") syncEditorText(ed);
+          render(lastContainer);
+        }
       };
       if (mql.addEventListener) mql.addEventListener("change", fn);
       else if (mql.addListener) mql.addListener(fn);
@@ -1241,6 +1250,7 @@
           }
         }
       } else {
+        manuscriptMissing[mpid] = true;
         st.manuscript = localManuscript(st.projectId) || thesisManuscript(st.projectId) || defaultManuscript(st.projectId);
         if (st.manuscript && st.manuscript.sections) st.manuscript.sections = sortSections(st.manuscript.sections);
       }
@@ -1675,6 +1685,12 @@
           st.manuscript.sections = sortSections(st.manuscript.sections);
           recordAiProvenance(resp.data.model, draftedHeadings, draftedIds);
           saveLocalManuscript(localPid || st.projectId || pid, st.manuscript);
+          var syncedList = [];
+          for (var sk = 0; sk < draftedIds.length; sk++) {
+            var sObj = getSection(draftedIds[sk]);
+            if (sObj) syncedList.push({ id: sObj.id, heading: sObj.heading, text: sObj.text });
+          }
+          syncDraftSectionsToServer(syncedList);
           if (getSection("casePresentation")) st.selectedSectionId = "casePresentation";
           st.saveNotice = "Drafted by MaiK. Review and verify every clinical detail before approving.";
           closeModal();
@@ -1987,6 +2003,64 @@
     });
   }
 
+  function syncDraftSectionsToServer(sectionsList) {
+    var store = SMD.store;
+    var proj = store ? store.getProject(st.projectId) : null;
+    if (!SMD.api || (proj && !proj.serverId && proj.practice) || !sectionsList || !sectionsList.length) {
+      return Promise.resolve();
+    }
+    var rawPid = apiProjectId();
+    var apid = encodeURIComponent(rawPid);
+    var prevSync = st.draftSyncPromise ? st.draftSyncPromise.catch(function () {}) : Promise.resolve();
+    var ver = (st.manuscript && typeof st.manuscript.version === "number") ? st.manuscript.version : 1;
+    function sendItemPut(secItem, useVer, retried) {
+      return SMD.api.request("PUT", "/v1/projects/" + apid + "/manuscript/sections/" + encodeURIComponent(secItem.id), {
+        version: useVer,
+        heading: secItem.heading || secItem.id,
+        text: secItem.text
+      }).then(function (putRes) {
+        manuscriptMissing[rawPid] = false;
+        if (putRes && typeof putRes.version === "number") {
+          ver = putRes.version;
+          if (st.manuscript) st.manuscript.version = putRes.version;
+        }
+        if (putRes && putRes.tokens && st.manuscript) {
+          st.manuscript.tokens = putRes.tokens;
+        }
+      }, function (err) {
+        if (!retried && err && err.code === "stale_version" && err.current && err.current.manuscript && typeof err.current.manuscript.version === "number") {
+          ver = err.current.manuscript.version;
+          if (st.manuscript) st.manuscript.version = ver;
+          return sendItemPut(secItem, ver, true);
+        }
+        throw err;
+      });
+    }
+    var validItems = [];
+    for (var si = 0; si < sectionsList.length; si++) {
+      var item = sectionsList[si];
+      if (item && item.id && typeof item.text === "string") validItems.push(item);
+    }
+    if (!validItems.length) return Promise.resolve();
+    var chain = prevSync.then(function () {
+      if (st.manuscript && typeof st.manuscript.version === "number") ver = st.manuscript.version;
+      return sendItemPut(validItems[0], ver, false);
+    }).then(function () {
+      if (validItems.length <= 1) return;
+      return Promise.all(validItems.slice(1).map(function (secItem) {
+        return sendItemPut(secItem, ver, false);
+      }));
+    });
+    var myPromise;
+    myPromise = chain.then(function () {
+      if (st.draftSyncPromise === myPromise) st.draftSyncPromise = null;
+    }, function () {
+      if (st.draftSyncPromise === myPromise) st.draftSyncPromise = null;
+    });
+    st.draftSyncPromise = myPromise;
+    return myPromise;
+  }
+
   function applyManuscriptDraft(container, draft, res) {
     var d = draft || {};
     if (d.status === "failed" || d.status === "error") {
@@ -2038,35 +2112,8 @@
     st.manuscript.sections = sortSections(st.manuscript.sections);
     recordAiProvenance(res && res.model, draftedHeadings, draftedIds);
     saveLocalManuscript(st.projectId, st.manuscript);
-    manuscriptMissing[apiProjectId()] = false;
-    var store = SMD.store;
-    var proj = store ? store.getProject(st.projectId) : null;
-    if (SMD.api && (!proj || proj.serverId || !proj.practice) && draftedIds.length) {
-      var apid = encodeURIComponent(apiProjectId());
-      var ver = (st.manuscript && st.manuscript.version) || 1;
-      var chain = Promise.resolve();
-      for (var si = 0; si < list.length; si++) {
-        (function (secItem) {
-          if (!secItem || !secItem.id || typeof secItem.text !== "string") return;
-          chain = chain.then(function () {
-            return SMD.api.request("PUT", "/v1/projects/" + apid + "/manuscript/sections/" + encodeURIComponent(secItem.id), {
-              version: ver,
-              heading: secItem.heading || secItem.id,
-              text: secItem.text
-            }).then(function (putRes) {
-              if (putRes && putRes.version) {
-                ver = putRes.version;
-                if (st.manuscript) st.manuscript.version = putRes.version;
-              }
-            });
-          });
-        })(list[si]);
-      }
-      st.draftSyncPromise = chain.then(function () {
-        st.draftSyncPromise = null;
-      }, function () {
-        st.draftSyncPromise = null;
-      });
+    if (draftedIds.length) {
+      syncDraftSectionsToServer(list);
     }
     st.saveNotice = "Drafted by MaiK. Review each section and save when ready.";
     return ["manuscript"];
@@ -2696,28 +2743,52 @@
     st.saveNotice = "Saving...";
     render(container);
 
-    var pid = encodeURIComponent(apiProjectId());
+    var rawPid = apiProjectId();
+    var pid = encodeURIComponent(rawPid);
     var sid = encodeURIComponent(sec.id);
-    var payload = {
-      version: st.manuscript.version,
-      heading: sec.heading,
-      text: newText
-    };
+    var wasMissing = !!manuscriptMissing[rawPid];
 
     saveLocalManuscript(st.projectId, st.manuscript);
     if (SMD.api) {
-      SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + sid, payload)
-        .then(function (res) {
-          st.saveNotice = "Saved.";
-          manuscriptMissing[apiProjectId()] = false;
-          if (res && typeof res.version === "number") st.manuscript.version = res.version;
-          if (res && res.tokens) st.manuscript.tokens = res.tokens;
-          render(container);
-        })
-        .catch(function (err) {
-          st.saveNotice = "Saved on this device.";
-          render(container);
-        });
+      var waitSync = st.draftSyncPromise ? st.draftSyncPromise.catch(function () {}) : Promise.resolve();
+      waitSync.then(function () {
+        function putCur(useVer, retried) {
+          return SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + sid, {
+            version: useVer,
+            heading: sec.heading,
+            text: newText
+          }).catch(function (err) {
+            if (!retried && err && err.code === "stale_version" && err.current && err.current.manuscript && typeof err.current.manuscript.version === "number") {
+              st.manuscript.version = err.current.manuscript.version;
+              return putCur(st.manuscript.version, true);
+            }
+            throw err;
+          });
+        }
+        return putCur((st.manuscript && typeof st.manuscript.version === "number") ? st.manuscript.version : 1, false);
+      }).then(function (res) {
+        manuscriptMissing[rawPid] = false;
+        if (res && typeof res.version === "number") st.manuscript.version = res.version;
+        if (res && res.tokens) st.manuscript.tokens = res.tokens;
+        if (wasMissing && st.manuscript && Array.isArray(st.manuscript.sections)) {
+          var otherNonEmpty = [];
+          for (var i = 0; i < st.manuscript.sections.length; i++) {
+            var s = st.manuscript.sections[i];
+            if (s && s.id && s.id !== sec.id && typeof s.text === "string" && s.text.trim()) {
+              otherNonEmpty.push({ id: s.id, heading: s.heading, text: s.text });
+            }
+          }
+          if (otherNonEmpty.length) {
+            return syncDraftSectionsToServer(otherNonEmpty);
+          }
+        }
+      }).then(function () {
+        st.saveNotice = "Saved.";
+        render(lastContainer || container);
+      }).catch(function () {
+        st.saveNotice = "Saved on this device.";
+        render(lastContainer || container);
+      });
     } else {
       st.saveNotice = "Saved on this device.";
       render(container);

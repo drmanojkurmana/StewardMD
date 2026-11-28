@@ -108,7 +108,7 @@ const MAX_OUT = {
   polish: 2000,
   iec_application: 2000,
   consent_form: 2000,
-  ctri_fields: 1500,
+  ctri_fields: 2000,
   publication_consent: 2000,
   case_report_draft: 2500,
   manuscript_draft: 2000,
@@ -654,42 +654,124 @@ function consentDraft(parsed, requestedLang) {
   };
 }
 
+function unwrapCtriObject(parsed) {
+  let obj = parsed;
+  if (Array.isArray(obj)) obj = obj.length === 1 ? obj[0] : null;
+  if (!obj || typeof obj !== "object" || Array.isArray(obj)) return null;
+  for (const key of ["ctri", "ctriFields", "ctri_fields", "fields", "draft", "data", "registration"]) {
+    const inner = obj[key];
+    if (inner && typeof inner === "object" && !Array.isArray(inner) &&
+        !(obj.publicTitle || obj.public_title || obj.scientificTitle || obj.scientific_title)) {
+      return inner;
+    }
+  }
+  return obj;
+}
+
+function pickProp(obj, keys) {
+  if (!obj || typeof obj !== "object") return undefined;
+  for (const k of keys) {
+    if (obj[k] !== undefined && obj[k] !== null && obj[k] !== "") return obj[k];
+  }
+  return undefined;
+}
+
+function ctriText(val, clean, max) {
+  if (typeof val === "string") return clean(val, max);
+  if (typeof val === "number" && Number.isFinite(val)) return clean(String(val), max);
+  if (Array.isArray(val)) {
+    const parts = [];
+    for (const item of val) {
+      if (typeof item === "string") {
+        const t = clean(item, max);
+        if (t) parts.push(t);
+      } else if (item && typeof item === "object") {
+        const t = clean(pickProp(item, ["text", "criterion", "name", "outcome", "description", "title", "value"]), max);
+        if (t) parts.push(t);
+      }
+    }
+    return clean(parts.join("\n"), max);
+  }
+  if (val && typeof val === "object") {
+    return clean(pickProp(val, ["text", "name", "outcome", "description", "title", "value"]), max);
+  }
+  return "";
+}
+
 function ctriDraft(parsed) {
-  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+  const obj = unwrapCtriObject(parsed);
+  if (!obj) return null;
   const clean = (s, max = 2000) => stripContactInfo(asText(s, max));
-  const publicTitle = clean(parsed.publicTitle, 300);
-  const scientificTitle = clean(parsed.scientificTitle, 300);
+  const publicTitle = ctriText(pickProp(obj, [
+    "publicTitle", "public_title", "publicStudyTitle", "public_study_title", "shortTitle", "short_title", "title",
+  ]), clean, 300);
+  const scientificTitle = ctriText(pickProp(obj, [
+    "scientificTitle", "scientific_title", "scientificStudyTitle", "scientific_study_title",
+    "officialTitle", "official_title", "fullTitle", "full_title",
+  ]), clean, 300);
   if (!publicTitle || !scientificTitle) return null;
 
-  const studyType = clean(parsed.studyType, 200);
-  const phase = clean(parsed.phase, 100);
-  const condition = clean(parsed.condition, 500);
-  const intervention = clean(parsed.intervention, 2000);
-  const comparator = clean(parsed.comparator, 2000);
-  const inclusion = clean(parsed.inclusion, 3000);
-  const exclusion = clean(parsed.exclusion, 3000);
+  const studyType = ctriText(pickProp(obj, ["studyType", "study_type", "typeOfStudy", "type_of_study"]), clean, 200);
+  const phase = ctriText(pickProp(obj, ["phase", "studyPhase", "study_phase", "trialPhase", "trial_phase"]), clean, 100);
+  const condition = ctriText(pickProp(obj, [
+    "condition", "healthCondition", "health_condition", "conditionStudied", "condition_studied", "disease", "indication",
+  ]), clean, 500);
+  const intervention = ctriText(pickProp(obj, ["intervention", "interventions", "interventionName", "intervention_name"]), clean, 2000);
+  const comparator = ctriText(pickProp(obj, [
+    "comparator", "comparatorAgent", "comparator_agent", "control", "controlIntervention", "control_intervention",
+  ]), clean, 2000);
+  const inclusion = ctriText(pickProp(obj, ["inclusion", "inclusionCriteria", "inclusion_criteria"]), clean, 3000);
+  const exclusion = ctriText(pickProp(obj, ["exclusion", "exclusionCriteria", "exclusion_criteria"]), clean, 3000);
 
-  const po = parsed.primaryOutcome && typeof parsed.primaryOutcome === "object" ? parsed.primaryOutcome : {};
-  const primaryOutcome = {
-    outcome: clean(po.outcome, 1000),
-    timepoint: clean(po.timepoint, 500),
-  };
+  let rawPo = pickProp(obj, ["primaryOutcome", "primary_outcome", "primaryOutcomes", "primary_outcomes", "primaryOutcomeName", "primary_outcome_name"]);
+  if (Array.isArray(rawPo)) rawPo = rawPo.find((x) => x != null && x !== "");
+  let poOutcome = "";
+  let poTime = "";
+  if (typeof rawPo === "string") {
+    poOutcome = clean(rawPo, 1000);
+    poTime = ctriText(pickProp(obj, [
+      "primaryOutcomeTime", "primary_outcome_time", "primaryTimepoint", "primary_timepoint", "timepoint", "timeFrame", "timeframe",
+    ]), clean, 500);
+  } else if (rawPo && typeof rawPo === "object") {
+    poOutcome = ctriText(pickProp(rawPo, [
+      "outcome", "outcomeMeasure", "outcome_measure", "measure", "name", "title", "description", "endpoint",
+    ]), clean, 1000);
+    poTime = ctriText(pickProp(rawPo, [
+      "timepoint", "timePoint", "time_point", "timeframe", "timeFrame", "time_frame", "time", "duration",
+    ]), clean, 500);
+  }
+  const primaryOutcome = { outcome: poOutcome, timepoint: poTime };
   if (!primaryOutcome.outcome) return null;
 
-  const secondaryOutcomes = Array.isArray(parsed.secondaryOutcomes)
-    ? parsed.secondaryOutcomes.map((s) => clean(s, 1000)).filter(Boolean)
-    : [];
+  const rawSec = pickProp(obj, ["secondaryOutcomes", "secondary_outcomes"]);
+  let secondaryOutcomes = [];
+  if (Array.isArray(rawSec)) {
+    secondaryOutcomes = rawSec.map((item) => {
+      if (typeof item === "string") return clean(item, 1000);
+      if (item && typeof item === "object") {
+        const name = ctriText(pickProp(item, ["outcome", "outcomeMeasure", "outcome_measure", "measure", "name", "title", "description"]), clean, 800);
+        const tp = ctriText(pickProp(item, ["timepoint", "timePoint", "time_point", "timeframe", "timeFrame", "time_frame", "time"]), clean, 200);
+        return name ? (tp ? name + " (" + tp + ")" : name) : "";
+      }
+      return "";
+    }).filter(Boolean);
+  } else if (typeof rawSec === "string") {
+    secondaryOutcomes = rawSec.split(/[\n;]+/).map((s) => clean(s, 1000)).filter(Boolean);
+  }
 
-  let targetSampleSize = parsed.targetSampleSize;
-  if (typeof targetSampleSize === "string") targetSampleSize = parseInt(targetSampleSize, 10) || targetSampleSize;
+  let targetSampleSize = pickProp(obj, ["targetSampleSize", "target_sample_size", "sampleSize", "sample_size"]);
+  if (typeof targetSampleSize === "string") {
+    const parsedNum = parseInt(targetSampleSize, 10);
+    if (!Number.isNaN(parsedNum) && String(parsedNum) === targetSampleSize.trim()) targetSampleSize = parsedNum;
+  }
 
-  const sites = clean(parsed.sites, 1000);
+  const sites = ctriText(pickProp(obj, ["sites", "studySites", "study_sites", "centres", "centers"]), clean, 1000);
   const recruitmentStatus = "Not Yet Recruiting";
   const ethicsCommittee = "";
   const regulatoryClearance = "";
-  const fundingSource = clean(parsed.fundingSource, 500);
+  const fundingSource = ctriText(pickProp(obj, ["fundingSource", "funding_source", "funding", "sourceOfFunding", "source_of_funding"]), clean, 500);
 
-  let briefSummary = clean(parsed.briefSummary, 5000);
+  let briefSummary = ctriText(pickProp(obj, ["briefSummary", "brief_summary", "summary", "laySummary", "lay_summary"]), clean, 5000);
   if (briefSummary) {
     briefSummary = trimWords(briefSummary, 300);
   }
@@ -1416,9 +1498,11 @@ export async function aiDraft(ctx, projectId, body) {
     const proto = bits.protocol || {};
     const ss = input.sampleSize ? JSON.stringify(input.sampleSize) : "";
     const notes = asText(input.notes || input.note, 2000);
-    system = "You draft Clinical Trials Registry - India (CTRI) registration fields. Return ONLY JSON with: " +
-      "publicTitle, scientificTitle, studyType, phase, condition, intervention, comparator, inclusion, exclusion, primaryOutcome {outcome, timepoint}, secondaryOutcomes (array of strings), targetSampleSize, sites, recruitmentStatus, ethicsCommittee, regulatoryClearance, fundingSource, briefSummary. " +
+    system = "You draft Clinical Trials Registry - India (CTRI) registration fields. Return ONLY a single valid JSON object (no markdown fences, no commentary) with exact camelCase keys: " +
+      "publicTitle (string, required), scientificTitle (string, required), studyType (string), phase (string), condition (string), intervention (string), comparator (string), inclusion (string), exclusion (string), " +
+      "primaryOutcome (object {\"outcome\": string, \"timepoint\": string}, outcome required), secondaryOutcomes (array of strings), targetSampleSize (number or string), sites (string), recruitmentStatus (string), ethicsCommittee (string), regulatoryClearance (string), fundingSource (string), briefSummary (string). " +
       "briefSummary must be at most 300 words. recruitmentStatus must be 'Not Yet Recruiting'. " +
+      "If Question or Protocol is sparse, infer sensible clinical trial placeholders from Title, Study type, and Sample size so publicTitle, scientificTitle, and primaryOutcome.outcome are always non-empty. " +
       "Do not invent investigator names, phone numbers, emails, ethics committee approval numbers or regulatory clearance numbers. Leave ethicsCommittee and regulatoryClearance as empty string ''.";
     prompt = "Title: " + (project.title || "") +
       "\nStudy type: " + (project.study_type || "") +
@@ -1513,6 +1597,8 @@ export async function aiDraft(ctx, projectId, body) {
 
   const out = await oneCall(ctx, projectId, task, system, prompt, overrideArgs);
   if (out.error) return out.error;
+  let totalCostInr = out.costInr || 0;
+  let usedModel = out.model;
   const parsed = extractJson(out.text);
   let draft = null;
   if (task === "protocol") draft = protocolDraft(parsed);
@@ -1520,7 +1606,17 @@ export async function aiDraft(ctx, projectId, body) {
   else if (task === "title_abstract") draft = titleDraft(parsed);
   else if (task === "iec_application") draft = iecDraft(parsed);
   else if (task === "consent_form") draft = consentDraft(parsed, input.language);
-  else if (task === "ctri_fields") draft = ctriDraft(parsed);
+  else if (task === "ctri_fields") {
+    draft = ctriDraft(parsed);
+    if (!draft) {
+      const repairPrompt = prompt + "\n\nYour previous response did not match the required JSON shape. Return ONLY one valid JSON object with non-empty strings for publicTitle, scientificTitle, and primaryOutcome: {\"outcome\": \"...\", \"timepoint\": \"...\"}.";
+      const retryOut = await oneCall(ctx, projectId, task, system, repairPrompt, overrideArgs);
+      if (retryOut.error) return retryOut.error;
+      totalCostInr += retryOut.costInr || 0;
+      usedModel = retryOut.model || usedModel;
+      draft = ctriDraft(extractJson(retryOut.text));
+    }
+  }
   else if (task === "publication_consent") draft = publicationConsentDraft(parsed, input.language);
   else if (task === "case_report_draft") draft = caseReportDraft(parsed);
   else if (task === "manuscript_draft") {
@@ -1548,6 +1644,6 @@ export async function aiDraft(ctx, projectId, body) {
     draft = manuscriptDraft(parsed, project.title || input.title || "", allowedNumbers);
   }
   if (!draft) return err(422, "invalid_draft", "MaiK did not return a draft that matched the required fields.", requestId);
-  const stored = await storeDraft(ctx, projectId, task, draft, out.model, out.costInr || 0);
-  return respond(ctx, stored, out.model, out.costInr || 0);
+  const stored = await storeDraft(ctx, projectId, task, draft, usedModel, totalCostInr);
+  return respond(ctx, stored, usedModel, totalCostInr);
 }
