@@ -41,3 +41,29 @@ test('resolveToken still reports a genuinely missing run', () => {
   m._getState().serverRuns = { p1: [] };
   assert.equal(m._resolveToken('run_missing', 'effect').resolved, false);
 });
+
+test('model and test codes render as the published wording, not engine codes', () => {
+  const ctx = screen();
+  const m = ctx.SMD.screens.manuscript;
+  m._getState().projectId = 'p1';
+  m._getState().serverRuns = { p1: [{
+    id: 'run_x', measure: 'RR',
+    result: { model: 'random_reml', test: 'knha', weights: [1, 2, 3, 4], pooled: { effect: Math.log(0.83) } }
+  }] };
+  assert.equal(m._resolveToken('run_x', 'model').formatted, 'random-effects (REML)');
+  assert.equal(m._resolveToken('run_x', 'test').formatted, 'Knapp-Hartung');
+  assert.equal(m._resolveToken('run_x', 'k').formatted, '4');
+});
+
+test('a server run resolves even when the local store holds unrelated runs', () => {
+  const ctx = screen();
+  ctx.SMD_RESEARCH.store.getState = () => ({ runs: { p1: [{ id: 'run_1795866066009', result: { pooled: { effect: 0 } } }] } });
+  const m = ctx.SMD.screens.manuscript;
+  m._getState().projectId = 'p1';
+  m._getState().serverRuns = { p1: [{
+    id: 'run_x', measure: 'RR',
+    result: { model: 'random_reml', test: 'knha', weights: [1, 2, 3, 4], pooled: { effect: Math.log(0.83) }, heterogeneity: { i2: 0 } }
+  }] };
+  assert.equal(m._resolveToken('run_x', 'k').formatted, '4');
+  assert.equal(m._resolveToken('run_x', 'model').resolved, true);
+});

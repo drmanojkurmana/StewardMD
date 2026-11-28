@@ -268,9 +268,22 @@
     var last = parts[parts.length - 1];
     if (RULE_TABLE[fieldPath]) return RULE_TABLE[fieldPath](value);
     if (RULE_TABLE[last]) return RULE_TABLE[last](value);
+    if (last === "model") return MODEL_LABELS[String(value)] || String(value);
+    if (last === "test") return TEST_LABELS[String(value)] || String(value);
     if (typeof value === "number") return value.toFixed(2);
     return String(value);
   }
+
+  /* Engine names are stored as codes; the reader sees the published wording. */
+  var MODEL_LABELS = {
+    fixed: "fixed-effect",
+    random_dl: "random-effects (DerSimonian-Laird)",
+    random_reml: "random-effects (REML)"
+  };
+  var TEST_LABELS = {
+    wald: "Wald",
+    knha: "Knapp-Hartung"
+  };
 
   /* Plain names: scientific term first, plain meaning in brackets. */
   var MEASURE_NAMES = {
@@ -2277,9 +2290,13 @@
 
     var store = SMD.store;
     var state = store ? store.getState() : null;
-    var savedRuns = (state && state.runs && state.runs[st.projectId]) || [];
+    /* Local mirrors can hold runs under different ids, and may be non-empty
+     * while the run this manuscript cites exists only on the server. Search
+     * both, local first; only checking the server when local is empty hid
+     * every k/model/test token after a reload. */
+    var savedRuns = ((state && state.runs && state.runs[st.projectId]) || []).slice();
     var serverRuns = st.serverRuns[st.projectId] || [];
-    if (savedRuns.length === 0 && serverRuns.length) savedRuns = serverRuns;
+    for (var si = 0; si < serverRuns.length; si++) savedRuns.push(serverRuns[si]);
     for (var r = 0; r < savedRuns.length; r++) {
       if (savedRuns[r].id === runId && savedRuns[r].result) {
         var run = savedRuns[r];

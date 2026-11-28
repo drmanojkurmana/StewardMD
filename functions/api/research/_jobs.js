@@ -23,7 +23,7 @@ import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCred
 import { scan, phiCategories } from "./_phi.js";
 import { PHI_OVERRIDE_TERMS_VERSION, parsePhiOverrideRequest, evaluatePhiOverride } from "./_suggest.js";
 import { mintJobToken } from "./_gateway.js";
-import { gateManuscript, ingestManuscriptJob, tokenTable } from "./_manuscript.js";
+import { gateManuscript, ingestManuscriptJob, tokenTable, verifiedEvidenceNumbers } from "./_manuscript.js";
 import { checkCloudFallbackAvailable, parseFormFallback, recordCloudFallbackUsed, refundCloudFallbackForJob } from "./_cloud_fallback.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
@@ -1145,7 +1145,8 @@ export async function submitDeviceResult(ctx, jobId, body) {
   }
 
   const table = await tokenTable(db, row.project_id, {});
-  const gateReport = gateManuscript(manuscript.sections, manuscript.references, table);
+  const traceableNumbers = await verifiedEvidenceNumbers(db, row.project_id);
+  const gateReport = gateManuscript(manuscript.sections, manuscript.references, table, { traceableNumbers });
   const snapCiteFailures = checkManifestCitations(manuscript.sections, manuscript.references, snapshot);
   const allFailures = gateReport.gateFailures.concat(snapCiteFailures);
   if (allFailures.length) {

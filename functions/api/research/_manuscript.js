@@ -144,15 +144,61 @@ export async function tokenTable(db, projectId, stored) {
       value: entry.value, null: entry.null, measure: entry.measure || "", runId,
     };
   }
-  const runs = (await db.prepare("SELECT id, measure, result_json FROM research_runs WHERE project_id=?").bind(projectId).all()).results || [];
+  const runs = (await db.prepare("SELECT id, measure, result_json, manifest_json FROM research_runs WHERE project_id=?").bind(projectId).all()).results || [];
   for (const run of runs) {
     const result = parseJson(run.result_json, {});
+    const manifest = parseJson(run.manifest_json, {});
     const isEngineRatio = RATIO_MEASURES.has(String(run.measure || "").toUpperCase()) &&
       !!(result && result.pooled && typeof result.pooled === "object" && !Array.isArray(result.pooled)) &&
       result.scale !== "ratio";
     walkResult(result, "", table, run.id, run.measure, isEngineRatio);
+    addRunMetadata(table, run, result);
+    addRunCounts(table, run, result, manifest);
   }
   return table;
+}
+/* The engine stores the model and test names on result_json as strings, and
+ * the study count only as the length of result.weights (or the manifest
+ * inputs). The client resolver has always derived these; the export gate
+ * needs the same view or it blocks a manuscript the app itself drafted. */
+function addRunMetadata(table, run, result) {
+  for (const field of ["model", "test"]) {
+    const v = result && result[field];
+    const key = run.id + "." + field;
+    if (typeof v === "string" && v && !table[key]) table[key] = { value: v, runId: run.id, measure: run.measure, null: NULLS[run.measure] };
+  }
+}
+function addRunCounts(table, run, result, manifest) {
+  const weights = Array.isArray(result && result.weights) ? result.weights : null;
+  const inputs = Array.isArray(manifest && manifest.inputs) ? manifest.inputs : [];
+  const excluded = new Set((Array.isArray(result && result.excluded) ? result.excluded : [])
+    .map((e) => String(e && typeof e === "object" ? e.id : e)));
+  const analysed = inputs.filter((input) => !excluded.has(String(input && input.id)));
+  const k = (weights && weights.length) || analysed.length || 0;
+  if (k > 0) {
+    for (const field of ["k", "studies"]) {
+      const key = run.id + "." + field;
+      if (!table[key]) table[key] = { value: k, runId: run.id, measure: run.measure, null: NULLS[run.measure] };
+    }
+  }
+  /* A total that silently drops trials without arm counts is a wrong number,
+   * not a partial one, so only publish it when every analysed trial has n. */
+  let total = 0;
+  const complete = analysed.length > 0 && analysed.every((input) => {
+    const n1 = Number(input && input.values && input.values.n1);
+    const n2 = Number(input && input.values && input.values.n2);
+    if (input && input.values && input.values.n1 != null && input.values.n2 != null && Number.isFinite(n1) && Number.isFinite(n2)) {
+      total += n1 + n2;
+      return true;
+    }
+    return false;
+  });
+  if (complete) {
+    for (const field of ["n", "total", "sample_size", "participants"]) {
+      const key = run.id + "." + field;
+      if (!table[key]) table[key] = { value: total, runId: run.id, measure: run.measure, null: NULLS[run.measure] };
+    }
+  }
 }
 function walkResult(node, prefix, table, runId, measure, isEngineRatio) {
   if (!node || typeof node !== "object") return;
@@ -257,9 +303,50 @@ function maskTokens(text) {
 /* Draft text is converted from LaTeX ("Table 1", numbered lists); those numbers are labels, not results. */
 const TABLE_FIGURE_RE = /\b(?:Table|Figure|Fig\.|Supplementary Table|eTable|eFigure)\s+\d+[A-Za-z]?\b/g;
 const LIST_NUMBER_RE = /(?:^|\n)\s*\d+\.\s/g;
+/* A number carrying a measurement unit states a definition or a timepoint
+ * ("500 mL", "24 hours", "10 mg"), not a result effect. */
+const UNIT_RE = /(?<![A-Za-z0-9_.])\d+(?:\.\d+)?\s*(?:mL|ml|millilit(?:re|er)s?|litres?|liters?|hours?|hrs?|minutes?|mins?|days?|weeks?|months?|kg|mg|µg|ug|mmHg|°C)\b/gi;
+const NUMBER_IN_TEXT_RE = /\d+(?:\.\d+)?/g;
+function numericKey(token) {
+  const n = Number(token);
+  return Number.isFinite(n) ? String(n) : null;
+}
+/* Numbers a human verified on the extraction screen are traceable evidence,
+ * not hand-typed results. They may be reported at trial level in Abstract or
+ * Results while the pooled estimate stays a run token. */
+export function numbersInText(text, into) {
+  const set = into || new Set();
+  const re = new RegExp(NUMBER_IN_TEXT_RE.source, "g");
+  let m;
+  while ((m = re.exec(String(text || ""))) !== null) {
+    const key = numericKey(m[0]);
+    if (key != null) set.add(key);
+  }
+  return set;
+}
+function numbersInJson(value, into) {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    const key = numericKey(value);
+    if (key != null) into.add(key);
+  } else if (Array.isArray(value)) {
+    for (const v of value) numbersInJson(v, into);
+  } else if (value && typeof value === "object") {
+    for (const key of Object.keys(value)) numbersInJson(value[key], into);
+  }
+  return into;
+}
+export async function verifiedEvidenceNumbers(db, projectId) {
+  const set = new Set();
+  const rows = (await db.prepare("SELECT quote, inputs_json FROM research_studies WHERE project_id=? AND verified=1").bind(projectId).all()).results || [];
+  for (const row of rows) {
+    numbersInText(row.quote, set);
+    numbersInJson(parseJson(row.inputs_json, {}), set);
+  }
+  return set;
+}
 function allowedNumberSpans(text) {
   const spans = [];
-  for (const re of [REVIEWER_RE, THRESHOLD_RE, TABLE_FIGURE_RE, LIST_NUMBER_RE, EXPONENT_RE]) {
+  for (const re of [REVIEWER_RE, THRESHOLD_RE, TABLE_FIGURE_RE, LIST_NUMBER_RE, EXPONENT_RE, UNIT_RE]) {
     re.lastIndex = 0;
     let m;
     while ((m = re.exec(text)) !== null) {
@@ -278,6 +365,7 @@ function spanAllowed(spans, start, end) {
  * the stored token table, never a freshly computed effect. */
 export function gateManuscript(sections, references, table, opts) {
   const requireRunTokens = !(opts && opts.requireRunTokens === false);
+  const traceable = opts && opts.traceableNumbers instanceof Set ? opts.traceableNumbers : null;
   const failures = [];
   const checks = {
     tokens: { total: 0, resolved: 0, unresolved: 0 },
@@ -299,6 +387,7 @@ export function gateManuscript(sections, references, table, opts) {
       let n;
       while ((n = numRe.exec(masked)) !== null) {
         if (YEAR_RE.test(n[0]) || spanAllowed(allowed, n.index, n.index + n[0].length)) continue;
+        if (traceable && traceable.has(numericKey(n[0]))) continue;
         failures.push({
           type: "unresolved_token",
           message: "Bare number " + n[0] + " in " + location + " is not a run token.",
@@ -887,7 +976,8 @@ async function gatesFor(ctx, projectId, version) {
   const hasRuns = Object.keys(table).length > 0;
   const tokOnce = new RegExp(TOKEN_RE.source);
   const hasTokens = sections.some((s) => tokOnce.test(String(s.text || "")));
-  return { row, report: gateManuscript(sections, refs, table, { requireRunTokens: isReview || hasRuns || hasTokens }) };
+  const traceableNumbers = await verifiedEvidenceNumbers(db, projectId);
+  return { row, report: gateManuscript(sections, refs, table, { requireRunTokens: isReview || hasRuns || hasTokens, traceableNumbers }) };
 }
 
 export async function manuscriptGates(ctx, projectId, url) {
