@@ -70,7 +70,8 @@ Accessibility service (Play restricts it). Add the Play Console declaration text
 ## 6. On-device checks (both platforms where built)
 With `smd_onboard_story = "1"`, `smd_prep_focus = "1"` set in the WebView and a fresh install:
 - Clinician story after the welcome role picker: smooth at 60 fps on the phone, haptics land on each beat (count-up
-  ticks, heavy on the number, warning on the scatter, success at the mark), Skip after 3 s, then the tour.
+  ticks, heavy on the number, warning on the scatter, success at the mark), Skip after 3 s. Finishing it opens the renal
+  dose example (banner, filled values, a computed dose); closing it starts the tour. Skip goes straight to the tour.
 - PrepNucleus first open: prep story, then the 4 plan steps, then "Your plan is ready" with the warm-up and the Focus
   row; the warm-up runs 5 real questions; Readiness on Home reflects them.
 - Focus: timer, Pomodoro, stopwatch, Leave early, Strict lock, shield, schedules, Live Activity, widget.
@@ -82,13 +83,15 @@ With `smd_onboard_story = "1"`, `smd_prep_focus = "1"` set in the WebView and a 
   Do not merge: the owner approves turning `smd_onboard_story` and `smd_prep_focus` on.
 - Update `vault/plans/PrepNucleus-Focus.md` (phase status) and `vault/modules/PrepNucleus.md` ("seen on a phone").
 
-## For the owner (not the Mac session)
-- File Apple's **Family Controls (Distribution)** request for `in.stewardmd.app` and the extension bundle IDs
-  (`FocusMonitor`, `FocusShield`, `FocusShieldAction`, `FocusReport`). TestFlight needs it.
-- Decide: a clinician "first win" in onboarding (a dose calculator opened with demo values)? Not built: demo values
-  in a clinical calculator are a patient-safety call.
-- Decide: ask for sign-in at the end of the PrepNucleus onboarding? PrepNucleus has no sign-in screen of its own today.
-- After phone checks: turn the two flags on, merge, and compare 2 weeks of story on vs off (drop-off per screen,
-  permission grants, D1 and D7 return).
+## Owner decisions (2026-11-28)
+- Family Controls (Distribution) request: **filed with Apple**. Add the `FocusReport` bundle ID to it if you build section 4.
+- Clinician first win: **yes, built**. After the clinician story (not after Skip) the real renal dose tool opens for
+  piperacillin-tazobactam with an example (70 y, 60 kg, creatinine 2.0), under an "Example patient, not a real person"
+  banner; closing it starts the tour. Check on the phone that the banner, the values and the tour hand-off look right.
+- Sign-in at the end of PrepNucleus onboarding: **not needed**. PrepNucleus opens only after StewardMD login and shares it.
+- Flags and merge: **approved after the phone checks** in section 6. Turn `smd_onboard_story` and `smd_prep_focus`
+  on only when those pass, then merge, then compare 2 weeks of story on vs off.
+- Open clinical review (owner, not Mac): at CrCl 29 the renal tool labels "Severe impairment" while the verified
+  RENAL_DOSING table in app.js files CrCl 20-40 as "Moderate impairment". The onboarding example shows this case.
 - Each exam year: update the two NEET-PG figures in `onboard-story.js` (`STATS`) with their sources.
 - Later, server and JS (not Mac): study rooms with friends on top of `/api/prep/play/focus`.

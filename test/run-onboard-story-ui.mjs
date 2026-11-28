@@ -102,7 +102,7 @@ try {
   ok(await until(`return !!document.querySelector("#smdStory .ss-cta");`, 3000), "taps step through to the last scene");
   await sleep(900); await shot("c9-go");
   await click("#smdStory .ss-cta");
-  ok(await until(`return !!window.__res && window.__res.done === true && window.__res.answers.patients === 50;`, 2000), "Start the tour resolves done with the answer");
+  ok(await until(`return !!window.__res && window.__res.done === true && window.__res.answers.patients === 50;`, 2000), "Try a renal dose resolves done with the answer");
   ok(await until(`return !document.getElementById("smdStory");`, 2000), "the story is removed");
   ok(await ev(`return SMD_STORY.seen("clinician");`) === true, "the clinician track is marked seen");
 
@@ -143,8 +143,23 @@ try {
   ok(await until(`return !!document.querySelector(".smdt-wel [data-w=start]") && document.querySelector(".smdt-wel").style.display !== "none";`, 3000), "welcome screen shows");
   await click(".smdt-wel [data-w=start]");
   ok(await until(`return !!document.getElementById("smdStory");`, 2000), "welcome Start plays the story first");
-  await until(`return document.querySelector("#smdStory .ss-skip.on");`, 4000); await click("#smdStory .ss-skip");
-  ok(await until(`return !document.getElementById("smdStory") && !!document.querySelector(".smdt-card");`, 4000), "after the story the app tour starts");
+  // Finish it (not Skip): the renal dose example opens, then the tour.
+  await until(`return !!document.querySelector("#smdStory .ss-opt");`, 3000);
+  await click('#smdStory .ss-opt[data-v="25"]');
+  for (let i = 0; i < 10 && !(await ev(`return !!document.querySelector("#smdStory .ss-cta");`)); i++) { await tapOn(); await sleep(250); }
+  await click("#smdStory .ss-cta");
+  ok(await until(`return !!document.querySelector(".rd-scrim .rd-demo");`, 4000), "the renal dose tool opens with the example banner");
+  ok(/Example patient, not a real person/.test(await text(".rd-demo")), "the banner says it is an example");
+  ok(await until(`return document.querySelector("#rdAge").value === "70" && document.querySelector("#rdScr").value === "2" && /Piperacillin/i.test(document.querySelector(".rd-h").textContent);`, 2000), "example values are filled for piperacillin-tazobactam");
+  ok(await until(`var r=document.querySelector("#rdResult"); return r && r.style.display !== "none" && /29/.test(r.textContent) && /Give at this renal function/.test(r.textContent);`, 3000), "the real tool computes CrCl 29 and shows its own dose (" + (await text("#rdResult")).slice(0, 90) + ")");
+  await sleep(400); await shot("c10-demo");
+  ok(await ev(`return !document.querySelector(".smdt-card");`) === true, "the tour waits while the example is open");
+  await click(".rd-scrim .rd-x");
+  ok(await until(`return !document.querySelector(".rd-scrim") && !!document.querySelector(".smdt-card");`, 4000), "closing the example starts the app tour");
+  // Next open of the tool starts empty (nothing from the example is kept).
+  await ev(`SMD_RENAL_DOSE.open("Piperacillin-Tazobactam"); return 1;`);
+  ok(await until(`return !!document.querySelector("#rdAge") && document.querySelector("#rdAge").value === "" && !document.querySelector(".rd-demo");`, 2000), "the next open of the renal tool is empty, no banner");
+  await ev(`document.querySelector(".rd-scrim .rd-x").click(); return 1;`);
   await ev(`var x=document.querySelector(".smdt-card [data-a=close], .smdt-card .smdt-x"); if (x) x.click(); return 1;`);
   // Flag off: straight to the tour.
   await ev(`localStorage.setItem("smd_onboard_story","0"); localStorage.removeItem("smd_story_seen_clinician"); document.querySelectorAll(".smdt-card,.smdt-dim,.smdt-spot").forEach(function(e){e.remove();}); return 1;`);

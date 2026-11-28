@@ -9,7 +9,12 @@
    NMC added 2,337, as reported by Careers360 on 20 Nov 2025). No timers, no offers, Skip after 3 s.
    Flag smd_onboard_story, default OFF: localStorage "1" or ?story=1 turns it on; "0" or ?story=0 off. Each track plays
    once per device (smd_story_seen_<track>); ?story=1 replays. Reduced motion: each scene is a still, crossfaded.
-   API: SMD_STORY.enabled(), seen(track), play(track) -> Promise<{ done, skipped, answers }>. Pure helpers under node. */
+   First win (owner 2026-11-28: yes): after the clinician story (not after Skip) demoDose() opens the real renal dose
+   tool (renal-dose.js) for piperacillin-tazobactam filled with that tool's own placeholder example (70 years, 60 kg,
+   creatinine 2.0 mg/dL, male), under a banner that says it is an example and not a patient. Nothing is saved; the
+   next open starts empty. Closing it resolves, and onboarding.js starts the tour.
+   API: SMD_STORY.enabled(), seen(track), play(track) -> Promise<{ done, skipped, answers }>, demoDose() -> Promise.
+   Pure helpers under node. */
 (function (G) {
   "use strict";
   var NODE = typeof module !== "undefined" && module.exports && !(G && G.document);
@@ -66,7 +71,7 @@
       { id: "dose", lines: ["Doses, adjusted for the kidney."], shape: "pill", pal: "teal", hap: "medium", hold: 2300 },
       { id: "abx", lines: ["Antibiotics, from your hospital's own antibiogram."], shape: "bug", pal: "teal", hap: "medium", hold: 2500 },
       { id: "icu", lines: ["ICU, Code Blue and the ward, on one screen."], shape: "wave", pal: "teal", hap: "medium", hold: 2500 },
-      { id: "go", lines: ["Let's show you around."], shape: "logo-smd", pal: "teal", hap: "success", cta: "Start the tour" }
+      { id: "go", lines: ["Try one now, on an example patient."], shape: "logo-smd", pal: "teal", hap: "success", cta: "Try a renal dose" }
     ];
   }
   var PURE = { fmtIN: fmtIN, monthsFrom: monthsFrom, limiter: limiter, sampleMask: sampleMask, scenes: scenes, STATS: STATS };
@@ -318,5 +323,28 @@
     });
   }
 
-  G.SMD_STORY = { enabled: enabled, seen: seen, play: play, playing: function () { return !!S; }, _pure: PURE, _s: function () { return S; } };
+  /* ---------- first win: a renal dose on an example ---------- */
+  var DEMO = { drug: "Piperacillin-Tazobactam", age: 70, wt: 60, scr: 2.0 };
+  function demoDose() {
+    return new Promise(function (resolve) {
+      var R = G.SMD_RENAL_DOSE;
+      if (!R || !R.open) return resolve(false);
+      try { R.open(DEMO.drug); } catch (e) { return resolve(false); }
+      var el = D.querySelector(".rd-scrim");
+      if (!el) return resolve(false);
+      var sheet = el.querySelector(".rd-sheet");
+      var ban = D.createElement("div"); ban.className = "rd-demo"; ban.setAttribute("role", "note");
+      ban.innerHTML = "<b>Example patient, not a real person.</b> 70 years, 60 kg, creatinine 2.0 mg/dL. See how the dose changes, then close this to continue.";
+      ban.style.cssText = "margin:0 0 10px;padding:10px 12px;border-radius:10px;background:#fdf2de;color:#6b4a07;border:1px solid #f0d49b;font-size:13.5px;line-height:1.45";
+      var hd = sheet && sheet.querySelector(".rd-h");
+      if (hd && hd.parentNode) hd.parentNode.insertBefore(ban, hd.nextSibling); else if (sheet) sheet.insertBefore(ban, sheet.firstChild);
+      function fill(id, v) { var i = el.querySelector("#" + id); if (!i) return; i.value = String(v); try { i.dispatchEvent(new Event("input", { bubbles: true })); } catch (e) {} }
+      fill("rdAge", DEMO.age); fill("rdWt", DEMO.wt); fill("rdScr", DEMO.scr);
+      hap("medium");
+      var mo = new MutationObserver(function () { if (!el.isConnected) { mo.disconnect(); resolve(true); } });
+      mo.observe(D.body, { childList: true });
+    });
+  }
+
+  G.SMD_STORY = { enabled: enabled, seen: seen, play: play, demoDose: demoDose, playing: function () { return !!S; }, _pure: PURE, _s: function () { return S; } };
 })(typeof window !== "undefined" ? window : this);
