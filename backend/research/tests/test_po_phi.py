@@ -31,6 +31,15 @@ def test_nhs_mod11():
     assert not phi.nhs_mod11_valid("1234567890")
 
 
+def test_bibliographic_ids_are_not_patient_identifiers():
+    # A ten-digit run inside a record id can pass the NHS checksum; the real
+    # PaperOrchestra snapshot blocked on rec_86eaba4595964145...
+    clean = ("rec_86eaba4595964145bafaaeae92d02357 | [SCREENED INCLUDE] "
+             "Kashanian M et al. (2022) [PMID:35241023] doi 10.1080/07853890.2024.2389302")
+    assert phi.scan(clean)["blocked"] is False
+    assert phi.scan("NHS number 9999999999 for the patient")["blocked"] is True
+
+
 SYNTHETIC_PHI = [
     ("Patient Ramesh Kumar, MRN 483920, admitted on 12/03/2024", {"mrn", "patient_name", "admission_date"}),
     ("UHID: AB123456 was reviewed.", {"mrn"}),

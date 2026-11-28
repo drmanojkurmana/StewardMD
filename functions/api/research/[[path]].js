@@ -1140,6 +1140,11 @@ async function conflictFor(db, projectId, stage, itemId) {
 /* Outcome for the API views (blinding.md): open conflict -> conflict; resolved
  * conflict follows the resolution; fewer than two current voters -> pending;
  * unanimous include/exclude decides; a split or uncertain vote is pending. */
+async function soloVoters(db, projectId) {
+  const row = await db.prepare("SELECT COUNT(*) AS n FROM research_members WHERE project_id=? AND role IN ('owner','editor','analyst','reviewer')")
+    .bind(projectId).first();
+  return ((row && row.n) || 0) <= 1;
+}
 function outcomeOf(votes, conflict) {
   if (conflict) return conflict.status === "open" ? "conflict" : conflict.resolution;
   if (votes.length < 2) return "pending";
@@ -1188,9 +1193,13 @@ async function createDecision(db, uid, kind, itemId, body, requestId) {
     return err(409, "conflict_open", "This item has an open conflict; resolve it first", requestId);
   if (conflict && conflict.status === "resolved")
     return err(409, "conflict_open", "Votes are frozen after resolution; the resolution stands", requestId);
+  /* A project with one eligible voter (the common solo review) cannot wait for
+   * a second reviewer. Its vote is final at title/abstract and full text, and
+   * the reviewer may change it until the item is settled. */
+  const solo = await soloVoters(db, projectId);
   const votes = await latestVotes(db, projectId, stage, itemId);
   const mine = votes.find((v) => v.reviewer_uid === uid);
-  if (votes.length >= 2) {
+  if (!solo && votes.length >= 2) {
     if (mine)
       return err(409, "conflict_open", "Votes are frozen once both reviewers have decided; a conflict is required to change them", requestId);
     return err(400, "invalid_decision", "This item already has two reviewers", requestId);
@@ -1218,7 +1227,10 @@ async function createDecision(db, uid, kind, itemId, body, requestId) {
     Object.assign({ stage, decision }, reasonCode ? { reasonCode } : {}, kind === "record" ? { recordId: itemId } : { reportId: itemId }));
   const after = await latestVotes(db, projectId, stage, itemId);
   let outcome = "pending", conflictId;
-  if (after.length >= 2) {
+  if (solo) {
+    outcome = decision === "uncertain" ? "pending" : decision;
+    if (kind === "report") await syncReportStatus(db, row, outcome, now);
+  } else if (after.length >= 2) {
     if (votes.length < 2)
       await audit(db, projectId, uid, "decisions_unblinded", itemId, { stage });
     const values = after.map((v) => v.decision);
@@ -1235,6 +1247,15 @@ async function createDecision(db, uid, kind, itemId, body, requestId) {
       if (kind === "report") await syncReportStatus(db, row, outcome, now);
     }
   }
+  /* Including a record at title/abstract seeks its full text. Create the
+   * report row here so the full-text stage is not an empty dead end. */
+  if (kind === "record" && outcome === "include") {
+    const existingReport = await db.prepare("SELECT id FROM research_reports WHERE record_id=?").bind(itemId).first();
+    if (!existingReport) {
+      await db.prepare("INSERT INTO research_reports (id,project_id,record_id,status,retrieval_source,created_ts,updated_ts) VALUES (?,?,?,'sought','',?,?)")
+        .bind(uuid("rep_"), projectId, itemId, now, now).run();
+    }
+  }
   const stored = { id, stage, decision, createdTs: now };
   if (reasonCode) stored.reasonCode = reasonCode;
   const out = { decision: stored, outcome };
@@ -1248,7 +1269,10 @@ async function listDecisions(db, uid, kind, itemId, requestId) {
   const { projectId, role } = resolved;
   const votes = await latestVotes(db, projectId, stage, itemId);
   const conflict = await conflictFor(db, projectId, stage, itemId);
-  const outcome = outcomeOf(votes, conflict);
+  let outcome = outcomeOf(votes, conflict);
+  /* A solo review is decided by its one voter; uncertain stays pending. */
+  if (!conflict && outcome === "pending" && votes.length === 1 && votes[0].decision !== "uncertain" &&
+      await soloVoters(db, projectId)) outcome = votes[0].decision;
   /* B1: the audit log records who viewed what, never the votes. */
   await audit(db, projectId, uid, "decisions_viewed", itemId, { stage });
   if (role === "viewer") return json({ votes: [], outcome }, 200, { "x-request-id": requestId });
@@ -1557,13 +1581,13 @@ async function createSearchRun(env, db, uid, projectId, body, requestId) {
   if (existing) return json({ searchRun: searchRunOf(existing) }, 200, { "x-request-id": requestId });
   const connector = SEARCH_DATABASES[database];
   const isEpmc = database === "europe_pmc";
-  const budgetMs = isEpmc ? 50000 : 80000;
+  const budgetMs = isEpmc ? 60000 : 80000;
   const config = {
     contactEmail: env.RESEARCH_CONTACT_EMAIL,
     apiKey: pubmedConnector.resolveNcbiApiKey(env),
     plusToken: env.RESEARCH_CROSSREF_TOKEN,
     deadline: Date.now() + budgetMs,
-    timeoutMs: isEpmc ? 22000 : 30000,
+    timeoutMs: 30000,
     maxRetries: isEpmc ? 1 : 5,
     partialOnBudget: isEpmc,
   };
@@ -1749,18 +1773,18 @@ function recordRowsToDedup(rows) {
 /* Computes groups over the scope and persists only genuinely new ones; an
  * identical re-run reuses the stored groups (idempotent). Nothing is deleted. */
 async function persistDedup(db, projectId, searchRunIds, now) {
-  let rows;
+  /* Groups are derived data, so every run computes one disjoint set over every
+   * record. Repeated dedup runs after new searches used to append overlapping
+   * groups; the screening queue then hid records that were canonical in one
+   * group and a duplicate in another. An identical re-run reuses the stored
+   * rows so the route stays idempotent. */
   if (searchRunIds) {
-    rows = [];
     for (const runId of searchRunIds) {
       const run = await db.prepare("SELECT id FROM research_search_runs WHERE id=? AND project_id=?").bind(runId, projectId).first();
       if (!run) return { notFound: runId };
-      const part = (await db.prepare("SELECT * FROM research_records WHERE project_id=? AND search_run_id=?").bind(projectId, runId).all()).results || [];
-      rows.push(...part);
     }
-  } else {
-    rows = (await db.prepare("SELECT * FROM research_records WHERE project_id=?").bind(projectId).all()).results || [];
   }
+  const rows = (await db.prepare("SELECT * FROM research_records WHERE project_id=?").bind(projectId).all()).results || [];
   const { groups } = dedupRecords(recordRowsToDedup(rows));
   const existingGroups = (await db.prepare("SELECT * FROM research_dedup_groups WHERE project_id=?").bind(projectId).all()).results || [];
   const existingMembers = (await db.prepare("SELECT m.group_id,m.record_id FROM research_dedup_members m JOIN research_dedup_groups g ON g.id=m.group_id WHERE g.project_id=?")
@@ -1770,18 +1794,25 @@ async function persistDedup(db, projectId, searchRunIds, now) {
     if (!membersByGroup.has(m.group_id)) membersByGroup.set(m.group_id, []);
     membersByGroup.get(m.group_id).push(m.record_id);
   }
+  const groupKey = (canonicalId, memberIds) => canonicalId + "::" + memberIds.slice().sort().join("|");
   const existingByKey = new Map();
-  for (const g of existingGroups) {
-    const key = (membersByGroup.get(g.id) || []).slice().sort().join("|");
-    existingByKey.set(g.canonical_record_id + "::" + key, g);
+  for (const g of existingGroups) existingByKey.set(groupKey(g.canonical_record_id, membersByGroup.get(g.id) || []), g);
+  const oldKeys = new Set(existingByKey.keys());
+  const newKeys = new Set(groups.map((g) => groupKey(g.canonicalRecordId, g.memberIds)));
+  const same = oldKeys.size === newKeys.size && [...newKeys].every((k) => oldKeys.has(k));
+  if (same) {
+    const dr = await db.prepare("SELECT COUNT(DISTINCT m.record_id) AS n FROM research_dedup_members m JOIN research_dedup_groups g ON g.id=m.group_id WHERE g.project_id=? AND m.record_id != g.canonical_record_id")
+      .bind(projectId).first();
+    const allGroups = existingGroups.map((g) => ({ id: g.id, memberIds: membersByGroup.get(g.id) || [] }));
+    return { groupsCreated: 0, duplicatesRemoved: (dr && dr.n) || 0, groupIds: existingGroups.map((g) => g.id), allGroups };
   }
+  await db.prepare("DELETE FROM research_dedup_members WHERE group_id IN (SELECT id FROM research_dedup_groups WHERE project_id=?)")
+    .bind(projectId).run();
+  await db.prepare("DELETE FROM research_dedup_groups WHERE project_id=?").bind(projectId).run();
   let groupsCreated = 0;
   const groupIds = [];
-  const allGroups = existingGroups.map((g) => ({ id: g.id, memberIds: membersByGroup.get(g.id) || [] }));
+  const allGroups = [];
   for (const g of groups) {
-    const key = g.canonicalRecordId + "::" + g.memberIds.slice().sort().join("|");
-    const hit = existingByKey.get(key);
-    if (hit) { groupIds.push(hit.id); continue; }
     const gid = uuid("ddg_");
     await db.prepare("INSERT INTO research_dedup_groups (id,project_id,canonical_record_id,algorithm,created_ts) VALUES (?,?,?,'deterministic-v1',?)")
       .bind(gid, projectId, g.canonicalRecordId, now).run();
@@ -1795,6 +1826,7 @@ async function persistDedup(db, projectId, searchRunIds, now) {
     .bind(projectId).first();
   return { groupsCreated, duplicatesRemoved: (dr && dr.n) || 0, groupIds, allGroups };
 }
+
 async function runDedupRoute(db, uid, projectId, body, requestId) {
   const gate = await projectGate(db, projectId, uid, WRITE_ROLES);
   if (gate.status) return gateErr(gate, "Dedup needs an owner, editor or analyst role", requestId);
