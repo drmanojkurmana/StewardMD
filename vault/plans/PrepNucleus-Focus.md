@@ -43,8 +43,11 @@ Regain teardown and the full feature table: the Claude Docs page "Regain teardow
   `test/run-prep-focus-ui.mjs` ALL PASS (`CHROME=` the local Chrome on a Mac).
 - The app cannot run in the iOS Simulator: `capacitor-llama`'s `llama.xcframework` has no simulator slice (device and
   macOS only). Screen Time does not shield in the Simulator anyway, so Focus is verified on a phone only.
-- Open: phone acceptance (install wipes app data, see CLAUDE.md), Family Controls (Distribution) request for the app and
-  the three extension bundle IDs (owner files it; needed for TestFlight / App Store only).
+- Family Controls (Distribution): owner filed the request 2026-11-28 (Apple's "Configuring Family Controls" page: one
+  request for the app and one for each Screen Time extension). Waiting on Apple. After approval, check that all four
+  identifiers show the capability in Certificates, Identifiers & Profiles (forum reports of extensions left out), then
+  build Release / TestFlight; automatic signing picks up the profiles, no project change.
+- Open: phone acceptance (install wipes app data, see CLAUDE.md).
 
 The JS already calls these. Register like `SmdDevicePlugin` in `ios/App/App/MainViewController.swift`
 (`bridge?.registerPluginInstance(...)`, `CAPBridgedPlugin`, `jsName = "SmdFocus"`). Every method resolves; never reject
