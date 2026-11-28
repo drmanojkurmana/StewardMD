@@ -21,6 +21,34 @@ Regain teardown and the full feature table: the Claude Docs page "Regain teardow
 - Tests: `test/prep-focus.test.mjs` (engine), `test/run-prep-focus-ui.mjs` (headless, `SHOTS=<dir>`).
 
 ## Phase 2 (Mac session): iOS `SmdFocus` plugin
+**Status 2026-11-28, branch `feat/prep-focus-ios` (from `feat/onboard-story`):** code written.
+- `ios/App/App/SmdFocusPlugin.swift` (registered in `MainViewController.capacitorDidLoad`), `ios/App/App/SmdFocusShared.swift`
+  (App Group keys `prepFocusSelection`, `prepFocusEndsAt`, `prepFocusStrict`; `DeviceActivityName.prepFocus`; store
+  `prepFocus`), compiled into App, FocusMonitor and FocusShield.
+- Extension targets (synchronized folders, like `StewardMDExtension`), embedded in App, iOS 17.0, Family Controls + App
+  Group entitlements each: `in.stewardmd.app.FocusMonitor` (`ios/App/FocusMonitor`), `in.stewardmd.app.FocusShield`
+  (`ios/App/FocusShield`, icon `PrepMark` from `prep/art/logo-mark-amber-96.webp`), `in.stewardmd.app.FocusShieldAction`.
+  `App.entitlements` has `com.apple.developer.family-controls`.
+- Differs from the table below: the shield's button is "OK" and closes the blocked app (iOS does not let a shield open
+  another app), no secondary button. A picked category also shields that category's websites (`webDomainCategories`).
+  `stop()` keeps the selection (it is the student's pick) and clears only the session keys. The monitor leaves the
+  shield up when `prepFocusEndsAt` is more than a minute ahead (a "Finish in 5 minutes" restart wrote a newer end before
+  the old schedule stopped). Sessions under 15 minutes start the DeviceActivity interval in the past; an in-app Timer and
+  `load()` (end already passed) clear as backups.
+- Verified 2026-11-28: signed Debug device build of the `App` scheme (`-destination 'generic/platform=iOS'
+  -skipPackagePluginValidation -skipMacroValidation -allowProvisioningUpdates`) succeeds, no warnings in Focus files.
+  `App.app/public/index.html` has `prep-loader.js?v=prep203` and `onboard-story.js?v=story1`, `App.debug.dylib` has
+  `SmdFocusPlugin`, `PlugIns/` has the three Focus appex, and the app and all three extensions are signed with
+  `com.apple.developer.family-controls` + the App Group (Xcode registered the new bundle IDs). `npm test` 18667 pass,
+  `test/run-prep-focus-ui.mjs` ALL PASS (`CHROME=` the local Chrome on a Mac).
+- The app cannot run in the iOS Simulator: `capacitor-llama`'s `llama.xcframework` has no simulator slice (device and
+  macOS only). Screen Time does not shield in the Simulator anyway, so Focus is verified on a phone only.
+- Family Controls (Distribution): owner filed the request 2026-11-28 (Apple's "Configuring Family Controls" page: one
+  request for the app and one for each Screen Time extension). Waiting on Apple. After approval, check that all four
+  identifiers show the capability in Certificates, Identifiers & Profiles (forum reports of extensions left out), then
+  build Release / TestFlight; automatic signing picks up the profiles, no project change.
+- Open: phone acceptance (install wipes app data, see CLAUDE.md).
+
 The JS already calls these. Register like `SmdDevicePlugin` in `ios/App/App/MainViewController.swift`
 (`bridge?.registerPluginInstance(...)`, `CAPBridgedPlugin`, `jsName = "SmdFocus"`). Every method resolves; never reject
 for "not available" (JS treats null/failed as "no blocking").

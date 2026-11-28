@@ -26,6 +26,7 @@ class MainViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(SmdDevicePlugin())
         bridge?.registerPluginInstance(NfcPlugin())
         bridge?.registerPluginInstance(PencilPlugin())
+        bridge?.registerPluginInstance(SmdFocusPlugin())
         if let launchBackground = UIColor(named: "LaunchBackground") {
             webView?.backgroundColor = launchBackground
             webView?.scrollView.backgroundColor = launchBackground

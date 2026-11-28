@@ -74,6 +74,13 @@
 		FE0000000000000000000002 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = FE0000000000000000000001 /* PrivacyInfo.xcprivacy */; };
 		FE0000000000000000000011 /* StewardMDWatchCore in Frameworks */ = {isa = PBXBuildFile; productRef = FE0000000000000000000010 /* StewardMDWatchCore */; };
 		FE0000000000000000000021 /* BriefRecWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0000000000000000000020 /* BriefRecWidgets.swift */; };
+		4F865BBC01ABA9F185C95D7F /* SmdFocusPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F662792F2A0FEC65B7AC3C92 /* SmdFocusPlugin.swift */; };
+		0CA72F71B5D7E1E838D61425 /* SmdFocusShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CC23C03C1D97BF935B56 /* SmdFocusShared.swift */; };
+		A758699D1C7FEC6D765F878C /* FocusMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 534FE726B3ABAAD401FA7D21 /* FocusMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3B7982F93EE66B31BBD1BA4D /* SmdFocusShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CC23C03C1D97BF935B56 /* SmdFocusShared.swift */; };
+		519BB8738E29ED34F0084280 /* FocusShield.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0A6EE8ADE567B37D7FBD51F4 /* FocusShield.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0D067B1D1C1A1EE78F9CBDD2 /* SmdFocusShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D2CC23C03C1D97BF935B56 /* SmdFocusShared.swift */; };
+		8AFFF4FF15E9F0852ACAC8D2 /* FocusShieldAction.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 396864D6C801C6DCA6E572D0 /* FocusShieldAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +111,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = F9467A3F1DF82675802A6C0F;
 			remoteInfo = StewardMDWatchWidgets;
+		};
+		5F4921C0F2DA82910549090B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FBE6A6EED2BA1E9863E3DA3F;
+			remoteInfo = FocusMonitor;
+		};
+		4BBF5539AAC08D2426130EAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D19F127A893321ABE6A160E3;
+			remoteInfo = FocusShield;
+		};
+		6B337E138BD9F4D80AFFBE89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2B3486ED29DC6888E400A1A5;
+			remoteInfo = FocusShieldAction;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -136,6 +164,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				8AFFF4FF15E9F0852ACAC8D2 /* FocusShieldAction.appex in Embed Foundation Extensions */,
+				519BB8738E29ED34F0084280 /* FocusShield.appex in Embed Foundation Extensions */,
+				A758699D1C7FEC6D765F878C /* FocusMonitor.appex in Embed Foundation Extensions */,
 				F3D561BD3012AD5600536EA8 /* StewardMDWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -222,6 +253,11 @@
 		F968246DA3B85ACF4DD711B5 /* WardSyncView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WardSyncView.swift; sourceTree = "<group>"; };
 		FE0000000000000000000001 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		FE0000000000000000000020 /* BriefRecWidgets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BriefRecWidgets.swift; sourceTree = "<group>"; };
+		F662792F2A0FEC65B7AC3C92 /* SmdFocusPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmdFocusPlugin.swift; sourceTree = "<group>"; };
+		05D2CC23C03C1D97BF935B56 /* SmdFocusShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmdFocusShared.swift; sourceTree = "<group>"; };
+		534FE726B3ABAAD401FA7D21 /* FocusMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FocusMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A6EE8ADE567B37D7FBD51F4 /* FocusShield.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FocusShield.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		396864D6C801C6DCA6E572D0 /* FocusShieldAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FocusShieldAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -240,6 +276,27 @@
 			);
 			target = F3D561AD3012AD5400536EA8 /* StewardMDWidgetExtension */;
 		};
+		3E76FA15073540053BFAC0F4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = FBE6A6EED2BA1E9863E3DA3F /* FocusMonitor */;
+		};
+		1279250737FEE9596C1A018B /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = D19F127A893321ABE6A160E3 /* FocusShield */;
+		};
+		3E52702A2B22AA77DB79EAE7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2B3486ED29DC6888E400A1A5 /* FocusShieldAction */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -255,6 +312,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F3D561733012A83F00536EA8 /* StewardMD */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F3D561873012A84100536EA8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StewardMD; sourceTree = "<group>"; };
 		F3D561B13012AD5400536EA8 /* StewardMDWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F3D561BE3012AD5600536EA8 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, F3D561C23012AD7C00536EA8 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StewardMDWidget; sourceTree = "<group>"; };
+		B30741DAB07DBDDAD4EA5B6C /* FocusMonitor */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3E76FA15073540053BFAC0F4 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FocusMonitor; sourceTree = "<group>"; };
+		62F02C19890E7F16F0F3421B /* FocusShield */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1279250737FEE9596C1A018B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FocusShield; sourceTree = "<group>"; };
+		E4B68F8BCAA98C3AFC65259B /* FocusShieldAction */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3E52702A2B22AA77DB79EAE7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = FocusShieldAction; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +363,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3BE691671CA54EF2E0C19AA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABDB9C7A7EBF2AA7E273195B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7914129C98B78A7D1FB506E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -317,6 +398,9 @@
 		504EC2FB1FED79650016851F = {
 			isa = PBXGroup;
 			children = (
+				E4B68F8BCAA98C3AFC65259B /* FocusShieldAction */,
+				62F02C19890E7F16F0F3421B /* FocusShield */,
+				B30741DAB07DBDDAD4EA5B6C /* FocusMonitor */,
 				958DCC722DB07C7200EA8C5F /* debug.xcconfig */,
 				504EC3061FED79650016851F /* App */,
 				F3D561733012A83F00536EA8 /* StewardMD */,
@@ -331,6 +415,9 @@
 		504EC3051FED79650016851F /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				396864D6C801C6DCA6E572D0 /* FocusShieldAction.appex */,
+				0A6EE8ADE567B37D7FBD51F4 /* FocusShield.appex */,
+				534FE726B3ABAAD401FA7D21 /* FocusMonitor.appex */,
 				504EC3041FED79650016851F /* App.app */,
 				02DAB70050CD079FDE101F07 /* StewardMDWatch.app */,
 				67391FBC62E08BF4BBC47984 /* StewardMDWatchWidgets.appex */,
@@ -343,6 +430,8 @@
 		504EC3061FED79650016851F /* App */ = {
 			isa = PBXGroup;
 			children = (
+				F662792F2A0FEC65B7AC3C92 /* SmdFocusPlugin.swift */,
+				05D2CC23C03C1D97BF935B56 /* SmdFocusShared.swift */,
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,
 				5D3F0A112E9F000100A0B0C1 /* MainViewController.swift */,
@@ -478,6 +567,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				10C2454BECA32FFF9B3B65D9 /* PBXTargetDependency */,
+				5A15DCFEFF9019CB8D05172E /* PBXTargetDependency */,
+				39444104512CAE590240DBA2 /* PBXTargetDependency */,
 				9BA663798674D08903D8B07B /* PBXTargetDependency */,
 				F3D561823012A84100536EA8 /* PBXTargetDependency */,
 				F3D561BC3012AD5600536EA8 /* PBXTargetDependency */,
@@ -578,6 +670,72 @@
 			productReference = 67391FBC62E08BF4BBC47984 /* StewardMDWatchWidgets.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		FBE6A6EED2BA1E9863E3DA3F /* FocusMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C4415901163CB11D8EB8133 /* Build configuration list for PBXNativeTarget "FocusMonitor" */;
+			buildPhases = (
+				550603A7D90144F767DADCFD /* Sources */,
+				3BE691671CA54EF2E0C19AA8 /* Frameworks */,
+				FC8222F56C17679C8681DE40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B30741DAB07DBDDAD4EA5B6C /* FocusMonitor */,
+			);
+			name = FocusMonitor;
+			packageProductDependencies = (
+			);
+			productName = FocusMonitor;
+			productReference = 534FE726B3ABAAD401FA7D21 /* FocusMonitor.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		D19F127A893321ABE6A160E3 /* FocusShield */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83A4C8B1E60A49316C17683A /* Build configuration list for PBXNativeTarget "FocusShield" */;
+			buildPhases = (
+				22A82C648F5039AF4A424FD2 /* Sources */,
+				ABDB9C7A7EBF2AA7E273195B /* Frameworks */,
+				AFEA51B4F5AD2E1292C5CA07 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				62F02C19890E7F16F0F3421B /* FocusShield */,
+			);
+			name = FocusShield;
+			packageProductDependencies = (
+			);
+			productName = FocusShield;
+			productReference = 0A6EE8ADE567B37D7FBD51F4 /* FocusShield.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		2B3486ED29DC6888E400A1A5 /* FocusShieldAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA521CE1F9429704095CAF94 /* Build configuration list for PBXNativeTarget "FocusShieldAction" */;
+			buildPhases = (
+				CC081343D87E5B8AEDAB6028 /* Sources */,
+				B7914129C98B78A7D1FB506E /* Frameworks */,
+				A1927DA9BD70A71AD457AD1F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E4B68F8BCAA98C3AFC65259B /* FocusShieldAction */,
+			);
+			name = FocusShieldAction;
+			packageProductDependencies = (
+			);
+			productName = FocusShieldAction;
+			productReference = 396864D6C801C6DCA6E572D0 /* FocusShieldAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -587,6 +745,15 @@
 				LastSwiftUpdateCheck = 2700;
 				LastUpgradeCheck = 920;
 				TargetAttributes = {
+					2B3486ED29DC6888E400A1A5 = {
+						CreatedOnToolsVersion = 27.1;
+					};
+					D19F127A893321ABE6A160E3 = {
+						CreatedOnToolsVersion = 27.1;
+					};
+					FBE6A6EED2BA1E9863E3DA3F = {
+						CreatedOnToolsVersion = 27.1;
+					};
 					504EC3031FED79650016851F = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1100;
@@ -617,6 +784,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				2B3486ED29DC6888E400A1A5 /* FocusShieldAction */,
+				D19F127A893321ABE6A160E3 /* FocusShield */,
+				FBE6A6EED2BA1E9863E3DA3F /* FocusMonitor */,
 				504EC3031FED79650016851F /* App */,
 				CE40D4F41B6077727F605178 /* StewardMDWatch */,
 				F9467A3F1DF82675802A6C0F /* StewardMDWatchWidgets */,
@@ -665,6 +835,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F3D561AC3012AD5400536EA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC8222F56C17679C8681DE40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFEA51B4F5AD2E1292C5CA07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1927DA9BD70A71AD457AD1F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -731,6 +922,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CA72F71B5D7E1E838D61425 /* SmdFocusShared.swift in Sources */,
+				4F865BBC01ABA9F185C95D7F /* SmdFocusPlugin.swift in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
 				5D3F0A122E9F000100A0B0C1 /* MainViewController.swift in Sources */,
 				5D3F0A142E9F000100A0B0C1 /* NfcPlugin.swift in Sources */,
@@ -746,6 +939,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F3D561AA3012AD5400536EA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		550603A7D90144F767DADCFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B7982F93EE66B31BBD1BA4D /* SmdFocusShared.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22A82C648F5039AF4A424FD2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D067B1D1C1A1EE78F9CBDD2 /* SmdFocusShared.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC081343D87E5B8AEDAB6028 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -776,6 +992,21 @@
 			isa = PBXTargetDependency;
 			target = F3D561AD3012AD5400536EA8 /* StewardMDWidgetExtension */;
 			targetProxy = F3D561BB3012AD5600536EA8 /* PBXContainerItemProxy */;
+		};
+		39444104512CAE590240DBA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FBE6A6EED2BA1E9863E3DA3F /* FocusMonitor */;
+			targetProxy = 5F4921C0F2DA82910549090B /* PBXContainerItemProxy */;
+		};
+		5A15DCFEFF9019CB8D05172E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D19F127A893321ABE6A160E3 /* FocusShield */;
+			targetProxy = 4BBF5539AAC08D2426130EAA /* PBXContainerItemProxy */;
+		};
+		10C2454BECA32FFF9B3B65D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2B3486ED29DC6888E400A1A5 /* FocusShieldAction */;
+			targetProxy = 6B337E138BD9F4D80AFFBE89 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1220,6 +1451,192 @@
 			};
 			name = Release;
 		};
+		613D82FC3E175F446A1745D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = FocusMonitor/FocusMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 16;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				ENABLE_DEBUG_DYLIB = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusMonitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FocusMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.FocusMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+			};
+			name = Debug;
+		};
+		D24EBD51EF7BD50431957CFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = FocusMonitor/FocusMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 16;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				ENABLE_DEBUG_DYLIB = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusMonitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FocusMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.FocusMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4BFC7B4A541C926B492C5821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = FocusShield/FocusShield.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 16;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				ENABLE_DEBUG_DYLIB = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusShield/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FocusShield;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.FocusShield;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+			};
+			name = Debug;
+		};
+		8646426FF5BB751E01D652E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = FocusShield/FocusShield.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 16;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				ENABLE_DEBUG_DYLIB = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusShield/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FocusShield;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.FocusShield;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4A67FDCB77CF8EB882981B6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = FocusShieldAction/FocusShieldAction.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 16;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				ENABLE_DEBUG_DYLIB = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusShieldAction/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FocusShieldAction;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.FocusShieldAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+			};
+			name = Debug;
+		};
+		8A601BABF0B0DDEE1AE41EF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = FocusShieldAction/FocusShieldAction.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 16;
+				DEVELOPMENT_TEAM = 5QY4LUKX23;
+				ENABLE_DEBUG_DYLIB = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusShieldAction/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = FocusShieldAction;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 2.1;
+				PRODUCT_BUNDLE_IDENTIFIER = in.stewardmd.app.FocusShieldAction;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1273,6 +1690,33 @@
 			buildConfigurations = (
 				F3D561C03012AD5600536EA8 /* Debug */,
 				F3D561C13012AD5600536EA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1C4415901163CB11D8EB8133 /* Build configuration list for PBXNativeTarget "FocusMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				613D82FC3E175F446A1745D5 /* Debug */,
+				D24EBD51EF7BD50431957CFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83A4C8B1E60A49316C17683A /* Build configuration list for PBXNativeTarget "FocusShield" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4BFC7B4A541C926B492C5821 /* Debug */,
+				8646426FF5BB751E01D652E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA521CE1F9429704095CAF94 /* Build configuration list for PBXNativeTarget "FocusShieldAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A67FDCB77CF8EB882981B6D /* Debug */,
+				8A601BABF0B0DDEE1AE41EF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
