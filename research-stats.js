@@ -1267,6 +1267,45 @@
     return levels[levels.length - 1];
   }
 
+  /* Two groups, yes/no outcome: put the treated, exposed or case group first,
+   * so a risk ratio or odds ratio reads "this group vs the comparison group"
+   * however the labels happen to sort. Coded Yes/No, 1/0 or Treatment/Control
+   * used to sort the comparison group first and flip the result. Labels the
+   * app cannot read keep their sorted order. Number outcomes keep the sorted
+   * order, the same way round as R's t.test, so the parity checks still hold. */
+  var REF_GROUP = {
+    "0": 1, "no": 1, "n": 1, "false": 1, "none": 1, "negative": 1, "absent": 1,
+    "control": 1, "controls": 1, "control group": 1, "placebo": 1, "sham": 1,
+    "usual care": 1, "standard care": 1, "standard of care": 1, "standard": 1,
+    "routine care": 1, "unexposed": 1, "untreated": 1, "no treatment": 1, "comparator": 1
+  };
+  var INDEX_GROUP = {
+    "1": 1, "yes": 1, "y": 1, "true": 1, "positive": 1, "present": 1,
+    "case": 1, "cases": 1, "exposed": 1, "treatment": 1, "treated": 1,
+    "treatment group": 1, "intervention": 1, "experimental": 1, "active": 1
+  };
+  function groupKey(label) {
+    return trim(String(label)).toLowerCase().replace(/\s+/g, " ");
+  }
+  function isRefGroup(label) {
+    var u = groupKey(label);
+    if (REF_GROUP[u]) return true;
+    /* "Non-smoker", "No lung cancer", "Not vaccinated", "Nonsmoker" */
+    return /^(non|no|not)[\s-]+\S/.test(u) || /^non[a-z]{4,}/.test(u);
+  }
+  function indexFirstOrder(labels) {
+    var r0, r1, i0, i1;
+    if (labels.length !== 2) return null;
+    r0 = isRefGroup(labels[0]);
+    r1 = isRefGroup(labels[1]);
+    if (r0 && !r1) return [1, 0];
+    if (r1 && !r0) return [0, 1];
+    i0 = !!INDEX_GROUP[groupKey(labels[0])];
+    i1 = !!INDEX_GROUP[groupKey(labels[1])];
+    if (i1 && !i0) return [1, 0];
+    return [0, 1];
+  }
+
   function indexOfLevel(levels, level) {
     var i;
     for (i = 0; i < levels.length; i++) if (levels[i] === level) return i;
@@ -1402,11 +1441,18 @@
       buckets[index[gx]].push(ox);
     }
     labels = sortLevels(names);
+    /* levelOrder[k] is where byGroup[k] sits in the sorted levels, so callers
+     * that pass display labels in sorted order still name the right group. */
+    var levelOrder = outcomeType === "numeric" ? null : indexFirstOrder(labels);
+    if (levelOrder) labels = [labels[levelOrder[0]], labels[levelOrder[1]]];
     var ordered = [];
     for (i = 0; i < labels.length; i++) ordered.push(buckets[index[labels[i]]]);
     if (labels.length < 2) bad("compare needs at least two groups");
     byGroup = [];
-    for (i = 0; i < labels.length; i++) byGroup.push(describeGroup(labels[i], ordered[i], outcomeType));
+    for (i = 0; i < labels.length; i++) {
+      byGroup.push(describeGroup(labels[i], ordered[i], outcomeType));
+      byGroup[i].levelIndex = levelOrder ? levelOrder[i] : i;
+    }
 
     if (outcomeType === "numeric") {
       flags = groupNormFlags(ordered);
@@ -2433,7 +2479,9 @@
     labels = opts.groupLabels;
     if (!isArray(labels)) labels = [];
     function gname(i0, fallback) {
-      if (labels[i0]) return String(labels[i0]);
+      var li = (result.byGroup && result.byGroup[i0] && typeof result.byGroup[i0].levelIndex === "number") ?
+        result.byGroup[i0].levelIndex : i0;
+      if (labels[li]) return String(labels[li]);
       if (result.byGroup && result.byGroup[i0]) return String(result.byGroup[i0].group);
       return fallback;
     }
