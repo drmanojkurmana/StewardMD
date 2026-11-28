@@ -1692,6 +1692,11 @@
     function saveNow() {
       readDocFromDom();
       autosave();
+      if (state.changeTimer) {
+        clearTimeout(state.changeTimer);
+        state.changeTimer = null;
+      }
+      if (options.onChange) options.onChange(state.doc, { totalWords: state.totalWords });
       mergeLocalManuscript(pid, docToSections(state.doc));
       setNotice("Saving...", "info");
       if (!SMD.api || !SMD.api.request) {

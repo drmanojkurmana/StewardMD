@@ -124,3 +124,54 @@ A case-control study compared smoking status between men with lung carcinoma (ca
 
 Cases vs controls had higher odds of smoking: 647 of 649 (99.7%) in Case vs 622 of 649 (95.8%) in Control (odds ratio 14.04, 95% CI 3.33 to 59.30; Chi-square test, p < 0.001).
 
+---
+
+# Brief F: Remaining Live Button-Suite Fixes (`rmd-sci-fixes-d`)
+
+## 1. Root Causes & Fixes Implemented
+
+### Issue 1: Case Report on tablet (1024x1366) Ask MaiK draft + section save + DOCX export
+- **Root causes**:
+  1. `openCaseReportDraftModal` in [research-screen-manuscript.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-manuscript.js) only saved the drafted Case Report sections to `localStorage` (`saveLocalManuscript`) and never synced them to the server, leaving the project without a server manuscript (`404 manuscript_not_found` on `POST /manuscript/export`).
+  2. `load()` did not mark `manuscriptMissing[mpid] = true` on `200 { manuscript: null }`, `saveCurrentSection` did not wait on `st.draftSyncPromise` or retry `stale_version` or sync other locally drafted sections when the manuscript was missing on the server, and `bindBreakpoint()` re-rendered on any `resize` event (including when viewport height changed or before breakpoint flipped).
+  3. Sequential `PUT`s for all 7+ drafted sections took ~15 s over live network, exceeding the 15 s wait in [02-case-report-and-series.mjs](file:///Users/mkk/prep-data/assessment/rmd-live/e2e/02-case-report-and-series.mjs).
+- **Fixes**:
+  - Added `syncDraftSectionsToServer(sectionsList)` in [research-screen-manuscript.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-manuscript.js) (creates the server manuscript with the first section PUT, then syncs remaining sections in parallel, handling `stale_version` retries and chaining onto any in-flight `st.draftSyncPromise`) and invoked it from `openCaseReportDraftModal` and `applyManuscriptDraft`.
+  - Updated `saveCurrentSection` and `exportDocx` to await `st.draftSyncPromise`, retry `stale_version`, and backfill non-empty local sections if `wasMissing` was true.
+  - Guarded `bindBreakpoint()` in [research-screen-manuscript.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-manuscript.js) to re-render only when `isPhone()` changes and sync editor text first.
+  - Updated [02-case-report-and-series.mjs](file:///Users/mkk/prep-data/assessment/rmd-live/e2e/02-case-report-and-series.mjs) to wait for tablet editor readiness after `setViewport(1024, 1366)` and wait for `Saved.` / export completion instead of fixed sleeps.
+  - Added UI regression test `11c` in [test/run-research-manuscript-ui.mjs](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/test/run-research-manuscript-ui.mjs).
+
+### Issue 2: Plan screen "CTRI fields Ask MaiK" 422 (`invalid_draft`)
+- **Root cause**: `MAX_OUT.ctri_fields` (`1500`) could truncate JSON when sparse Plan inputs caused verbose CTRI JSON, and `ctriDraft()` in [functions/api/research/_ai_draft.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/functions/api/research/_ai_draft.js) rejected wrapped objects, snake_case/synonym keys, array-valued criteria/outcomes, or flat `primaryOutcomeName` without retrying.
+- **Fixes**:
+  - Raised `MAX_OUT.ctri_fields` to `2000`, strengthened the `ctri_fields` system prompt to infer clinical trial placeholders from sparse Plan inputs while keeping required-field validation (`publicTitle`, `scientificTitle`, `primaryOutcome.outcome`), added `unwrapCtriObject`/`pickProp`/`ctriText` to normalize realistic model shapes, and added a single repair retry in `aiDraft` when the first reply fails shape validation.
+  - Added unit test `"ctri_fields accepts realistic model variants and retries once on a bad shape"` in [test/research-ai-draft.test.mjs](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/test/research-ai-draft.test.mjs).
+
+### Issue 3: `auditDom` `em_dash` check on OpenAlex `.rmd-enrich-link`
+- **Fix**: Added `DEFAULT_EM_DASH_EXEMPT_SELECTORS` in [lib/audit.mjs](file:///Users/mkk/prep-data/assessment/rmd-live/e2e/lib/audit.mjs) exempting external bibliographic elements (`.rmd-enrich-related` containing `.rmd-enrich-link`, `.rmd-papercard-title`, `.rmd-papercard-meta`, `.rmd-papercard-abstract`, `.rmd-find-*`, `.rmd-nv-*`, `.rmd-trial-card`, `.rmd-study-loc-str`) while preserving the `em_dash` check for all app copy.
+
+### Issue 4: `04b` CARE checklist Approve + 1800 s timeout
+- **Root causes**:
+  1. [04b-po-and-checklist-recheck.mjs](file:///Users/mkk/prep-data/assessment/rmd-live/e2e/04b-po-and-checklist-recheck.mjs) had a negated selector typo (`!document.querySelector('.rmd-checklist-approve-error')`) in `waitFor` so it returned in 0 ms while `"Saving approval..."` was still saving 32 manual entries, and never clicked `[data-doc-save]` or waited for `[data-rmd-approve]` to enable.
+  2. Both [04b-po-and-checklist-recheck.mjs](file:///Users/mkk/prep-data/assessment/rmd-live/e2e/04b-po-and-checklist-recheck.mjs) and [04-systematic-review-and-po.mjs](file:///Users/mkk/prep-data/assessment/rmd-live/e2e/04-systematic-review-and-po.mjs) tapped `[data-rmd="full-draft-po"]` without clicking the confirmation button `[data-rmd="po-start"]`, leaving `finalPoStatus` empty and spinning in the 30-minute poll loop until the 1800 s timeout killed the suite.
+- **Fixes**:
+  - Updated `saveNow()` in [research-doc-editor.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-doc-editor.js) to flush `state.changeTimer` and fire `options.onChange` immediately on Save.
+  - Updated [04b-po-and-checklist-recheck.mjs](file:///Users/mkk/prep-data/assessment/rmd-live/e2e/04b-po-and-checklist-recheck.mjs) to fill empty `.rmd-doc-body` sections, tap `[data-doc-save]`, wait for `[data-rmd-approve]` to enable, tap Approve, and wait for `#rmdChecklistApproved`.
+  - Updated [04b-po-and-checklist-recheck.mjs](file:///Users/mkk/prep-data/assessment/rmd-live/e2e/04b-po-and-checklist-recheck.mjs) and [04-systematic-review-and-po.mjs](file:///Users/mkk/prep-data/assessment/rmd-live/e2e/04-systematic-review-and-po.mjs) to tap `[data-rmd="po-start"]`, remove the `|| (Date.now() > 0)` no-op wait, poll every 3 s (cap 600 s), and exit early if no active job started within 20 s.
+
+### Cache-Busting & Bundle
+- Appended `-scif1` to `research-screen-manuscript.js` and `research-doc-editor.js` `?v=` tokens in [index.html](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/index.html) and `CACHE` in [sw.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/sw.js).
+- Rebuilt `www/` cleanly via `bash scripts/build-www.sh` (`build: #1387`).
+
+## 2. Verification Results
+
+- **Syntax & em-dash checks**: `node --check` passed on `research-screen-manuscript.js`, `research-doc-editor.js`, `functions/api/research/_ai_draft.js`, and `sw.js`; `0` em/en dashes in `research-screen-manuscript.js` and `research-doc-editor.js`.
+- **Unit suite (`npm test`)**: Ran after final edit; all 102 `test/research-*.test.mjs` files (including `test/research-ai-draft.test.mjs`: 9/9 passed), `test/connect/**`, and `rx-build.test.mjs` passed. The full `npm test` run reported only the 9 pre-existing non-research failures caused by `%20`-encoded spaces in the worktree directory path (`test/build-slim.test.mjs`, `test/edge-schemas.test.mjs`, `test/narke-drills.test.mjs`, `test/no-side-stripes.test.mjs`, `test/remote-media.test.mjs`, `test/tokos-drill-core.test.mjs`, `test/tokos-learn-gyA.test.mjs`, `test/wardsynq-i18n-unwrapped.test.mjs`, `test/wardsynq-reachability.test.mjs`).
+- **Headless CDP UI suites**: All 34 `test/run-research-*-ui.mjs` scripts passed after the final edit (`ALL_RESEARCH_UI_PASSED`).
+- **Live checks against `http://127.0.0.1:8812` (`CDP_PORT=9473 ANY_USER=1`, 4 live AI drafts used total)**:
+  - `02-case-report-and-series.mjs` (2 AI drafts: `pubconsent` + `case_report_draft`): `Download Word file (DOCX)` passed (`"Saved. | Your file is ready to save or share."`), `CARE checklist` passed (`approved=true`), `Submit` passed (`hasFormatCard=true`). *(During that run prior to the `syncDraftSectionsToServer` parallelization edit, `Section edit + Save` showed `"Saving..."` at 15.0 s while 9 sequential PUTs completed 200 ms later; `syncDraftSectionsToServer` was then parallelized after the 1st section and verified in `test/run-research-manuscript-ui.mjs`.)*
+  - `04` `read-study` OpenAlex (`10.1056/NEJMoa2007764`, 0 AI drafts): **PASS** (`Cited by 7,595`, `Open access`, `Related works`, 0 DOM `em_dash` issues).
+  - `04b-po-and-checklist-recheck.mjs` (1 Case Report Ask MaiK + 1 PaperOrchestra draft = 2 drafts, completed in ~3 min instead of 1800 s timeout): `CARE checklist` **PASS** (`disAfter=false, approved=true`), `Submit` **PASS** (`Done The reporting checklist`), `Case Report Ask MaiK` **PASS**, `PaperOrchestra after UI Run Calculate` **PASS** (`serverRunsAfterUiCalc=1, poStatus="Queued"`), `PaperOrchestra Cancel on 2nd job` **PASS** (`post="Cancelled"`). (PO Job #1 ran `outline -> section 1..6 -> review 1..2` in 165 s and hit the expected `integrity checks` gate on the minimal 3-study synthetic fixture.)
+  - *Undeployed server caveat*: `03` `CTRI fields Ask MaiK` lives in `functions/api/research/_ai_draft.js`, which is not yet deployed to live `stewardmd.in`; verified locally via unit tests in `test/research-ai-draft.test.mjs`.
+

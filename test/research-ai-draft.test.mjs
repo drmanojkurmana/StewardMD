@@ -788,4 +788,104 @@ describe("research ai draft", { concurrency: false, skip: SKIP }, () => {
     });
     assert.equal(viewer.http, 403);
   });
+
+  test("ctri_fields accepts realistic model variants and retries once on a bad shape", async () => {
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 100);
+    const project = await makeProject(env);
+    const pid = project.id;
+
+    // Realistic wrapped snake_case model reply with array inclusion/exclusion and object measure/timeframe
+    resetLlm(async () => JSON.stringify({
+      ctri: {
+        public_title: "Dexamethasone in hospitalized COVID-19 adults",
+        scientific_title: "Randomized evaluation of low-dose dexamethasone vs usual care in hospitalized COVID-19 pneumonia",
+        study_type: "Interventional",
+        trial_phase: "Phase 3",
+        health_condition: "COVID-19 pneumonia",
+        interventions: ["Oral/IV dexamethasone 6 mg daily for 10 days"],
+        control: "Usual care alone",
+        inclusion_criteria: ["Age >= 18 years", "Confirmed SARS-CoV-2 infection"],
+        exclusion_criteria: ["Known contraindication to corticosteroids"],
+        primary_outcome: { measure: "28-day all-cause mortality", timeframe: "28 days from randomization" },
+        secondary_outcomes: [
+          { outcome: "Duration of hospital stay", timepoint: "Up to day 28" },
+          "Need for invasive mechanical ventilation"
+        ],
+        target_sample_size: "6425",
+        study_sites: ["AIIMS New Delhi", "KEM Hospital Mumbai"],
+        funding_source: "Investigator-initiated institutional grant",
+        brief_summary: "Open-label randomized trial assessing 28-day mortality with dexamethasone 6 mg daily."
+      }
+    }));
+    const variantRes = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "ctri_fields"
+    });
+    assert.equal(variantRes.http, 200, JSON.stringify(variantRes));
+    assert.equal(variantRes.draft.publicTitle, "Dexamethasone in hospitalized COVID-19 adults");
+    assert.equal(variantRes.draft.scientificTitle, "Randomized evaluation of low-dose dexamethasone vs usual care in hospitalized COVID-19 pneumonia");
+    assert.equal(variantRes.draft.phase, "Phase 3");
+    assert.equal(variantRes.draft.condition, "COVID-19 pneumonia");
+    assert.equal(variantRes.draft.inclusion, "Age >= 18 years\nConfirmed SARS-CoV-2 infection");
+    assert.deepEqual(variantRes.draft.primaryOutcome, {
+      outcome: "28-day all-cause mortality",
+      timepoint: "28 days from randomization"
+    });
+    assert.deepEqual(variantRes.draft.secondaryOutcomes, [
+      "Duration of hospital stay (Up to day 28)",
+      "Need for invasive mechanical ventilation"
+    ]);
+    assert.equal(variantRes.draft.targetSampleSize, 6425);
+    assert.equal(llm.calls.length, 1);
+
+    // Retry once when first reply has bad shape (string prose / missing primaryOutcome), second reply succeeds
+    let attempt = 0;
+    resetLlm(async () => {
+      attempt++;
+      if (attempt === 1) {
+        return "Here are the CTRI fields: please provide protocol details first.";
+      }
+      return JSON.stringify({
+        publicTitle: "Lifestyle intervention for mild hypertension",
+        scientificTitle: "Randomized controlled trial of structured lifestyle counselling versus usual advice in mild hypertension",
+        studyType: "Interventional",
+        phase: "Not Applicable",
+        condition: "Mild essential hypertension",
+        intervention: "Structured diet and exercise counselling",
+        comparator: "Standard clinic advice",
+        inclusion: "Adults aged 18 to 65 years with SBP 140-159 mmHg",
+        exclusion: "Secondary hypertension or recent cardiovascular event",
+        primaryOutcome: "Change in office systolic blood pressure",
+        primaryOutcomeTime: "12 weeks",
+        secondaryOutcomes: ["Diastolic blood pressure change at 12 weeks"],
+        targetSampleSize: 180,
+        sites: "Department of Medicine outpatient clinic",
+        recruitmentStatus: "Not Yet Recruiting",
+        ethicsCommittee: "",
+        regulatoryClearance: "",
+        fundingSource: "Institutional research fund",
+        briefSummary: "Two-arm randomized trial evaluating lifestyle counselling over 12 weeks."
+      });
+    });
+    const retryRes = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "ctri_fields",
+      input: { sampleSize: { total: 180 } }
+    });
+    assert.equal(retryRes.http, 200, JSON.stringify(retryRes));
+    assert.equal(llm.calls.length, 2);
+    assert.equal(retryRes.draft.publicTitle, "Lifestyle intervention for mild hypertension");
+    assert.deepEqual(retryRes.draft.primaryOutcome, {
+      outcome: "Change in office systolic blood pressure",
+      timepoint: "12 weeks"
+    });
+
+    // Missing required final fields after retry still returns 422
+    resetLlm(async () => JSON.stringify({ publicTitle: "Only public title", scientificTitle: "And scientific title" }));
+    const missingOutcome = await call(env, "POST", "v1/projects/" + pid + "/ai-draft", "tok-alice", {
+      task: "ctri_fields"
+    });
+    assert.equal(missingOutcome.http, 422);
+    assert.equal(missingOutcome.error.code, "invalid_draft");
+    assert.equal(llm.calls.length, 2);
+  });
 });
