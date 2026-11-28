@@ -47,7 +47,8 @@ Regain teardown and the full feature table: the Claude Docs page "Regain teardow
   account (team-wide, Apple's email: "you can now configure this capability for eligible apps"). It is a managed
   capability: enable Family Controls (Distribution) under Additional Capabilities on `in.stewardmd.app` and the three
   `in.stewardmd.app.Focus*` identifiers, then archive and export / upload with automatic signing (no project change).
-  Release archive of `feat/prep-focus-ios` succeeds (2026-11-28); the App Store export was not run from the session.
+  **Uploaded to TestFlight 2026-11-28: StewardMD 2.1 (16)** from `feat/prep-focus-ios` @ `3f6de0c03` (loader `prep204`, Focus
+  default ON), App Store signing with Family Controls (Distribution) on the app and all three extensions.
 - Open: phone acceptance (install wipes app data, see CLAUDE.md).
 
 The JS already calls these. Register like `SmdDevicePlugin` in `ios/App/App/MainViewController.swift`
