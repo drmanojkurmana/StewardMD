@@ -25,7 +25,7 @@ function resultListOf(body) {
   return [];
 }
 const PAGE_SIZE = 1000;
-const FETCH_BATCH = 50;
+const FETCH_BATCH = 25;
 const BUCKET = createBucket(10);
 const FILTER_KEYS = ["dateFrom", "languages", "pubTypes"];
 
@@ -129,7 +129,7 @@ export async function search(query, filters = {}, dateTo = null, opts = {}) {
     const list = resultListOf(body);
     for (const r of list) {
       ids.push(String(r.source) + ":" + String(r.id));
-      if (o.partialOnBudget && liteRecords.length < 200) liteRecords.push(r);
+      if (liteRecords.length < 200) liteRecords.push(r);
     }
     const next = body.nextCursorMark;
     if (ids.length >= totalCount) break;
@@ -139,11 +139,12 @@ export async function search(query, filters = {}, dateTo = null, opts = {}) {
   }
   if (!partial && ids.length !== totalCount)
     throw new ConnectorError("search_failed", "Europe PMC id count mismatch: " + ids.length + " of " + totalCount);
+  /* Keep the lite records even on a complete search: the route falls back to
+   * them when the core-record fetch times out, so a slow Europe PMC response
+   * cannot leave the project with a run that has zero retrievable records. */
   const out = { ids, totalCount, metadata: { apiVersion: "unknown", executedAt, queryEcho } };
-  if (partial) {
-    out.partial = true;
-    out.liteRecords = liteRecords;
-  }
+  if (partial) out.partial = true;
+  if (liteRecords.length) out.liteRecords = liteRecords;
   return out;
 }
 

@@ -97,6 +97,26 @@
     return items.length ? items[0] : null;
   }
 
+  /* The list routes cap a page at 100. A real review can identify hundreds of
+   * records, so walk every page before screening; otherwise records after the
+   * first 100 can never be seen or voted on. */
+  function fetchAllPages(path, key) {
+    var out = [];
+    var cursor = null;
+    var pages = 0;
+    function next() {
+      var url = path + "?limit=100" + (cursor ? "&cursor=" + encodeURIComponent(cursor) : "");
+      return SMD.api.request("GET", url).then(function (data) {
+        out = out.concat((data && data[key]) || []);
+        cursor = data && data.nextCursor;
+        pages++;
+        if (cursor && pages < 100) return next();
+        return out;
+      });
+    }
+    return next();
+  }
+
   function load(container) {
     var mySeq = ++seq;
     st.loading = true;
@@ -104,17 +124,17 @@
     var pid = encodeURIComponent(st.projectId);
     var base = "/v1/projects/" + pid;
     Promise.all([
-      SMD.api.request("GET", base + "/records?limit=100"),
-      SMD.api.request("GET", base + "/reports?limit=100"),
+      fetchAllPages(base + "/records", "records"),
+      fetchAllPages(base + "/reports", "reports"),
       SMD.api.request("GET", base + "/exclusion-reasons"),
-      SMD.api.request("GET", base + "/dedup-groups?limit=100")
+      fetchAllPages(base + "/dedup-groups", "groups")
     ]).then(function (res) {
       if (mySeq !== seq) return;
-      st.records = (res[0] && res[0].records) || [];
-      st.reports = (res[1] && res[1].reports) || [];
+      st.records = res[0] || [];
+      st.reports = res[1] || [];
       st.reasons = (res[2] && res[2].reasons) || [];
       st.dupRemoved = {};
-      var groups = (res[3] && res[3].groups) || [];
+      var groups = res[3] || [];
       for (var g = 0; g < groups.length; g++) {
         var members = groups[g].memberIds || [];
         for (var m = 0; m < members.length; m++) {
@@ -574,7 +594,8 @@
   }
 
   SMD.screens.screening = {
-    render: render
+    render: render,
+    fetchAllPages: fetchAllPages
   };
 
 })(typeof window !== "undefined" ? window : globalThis);

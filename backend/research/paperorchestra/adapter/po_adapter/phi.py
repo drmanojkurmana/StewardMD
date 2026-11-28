@@ -261,6 +261,20 @@ _VALIDATORS = {
 }
 
 
+_ID_TOKEN_RE = re.compile(
+    r"(?:\[?PMID\s*:?\s*\d+\]?|PMC\d+|DOI\s*:?\s*10\.[^\s,;)\]]+|NCT\d{8}|ISRCTN\d+|CTRI\/[^\s,;]+"
+    r"|\b(?:rec|st|run|job|prj|srch|ddg|pdf|prot|aut|ma)_[A-Za-z0-9]+)",
+    re.IGNORECASE,
+)
+_NUMERIC_CATEGORIES = {"nhs", "aadhaar", "abha", "ssn", "phone", "dob", "admission_date", "dates"}
+
+
+def _identifier_spans(text: str) -> list[tuple[int, int]]:
+    """Bibliographic ids are not patient ids; a ten-digit run inside a record
+    id can pass the NHS checksum, so numeric rules skip these spans."""
+    return [(m.start(), m.end()) for m in _ID_TOKEN_RE.finditer(text)]
+
+
 def scan(text: str, mode: str = "default", allow_citation_library_names: bool = False) -> dict:
     """Scan the exact assembled prompt text. Any hit blocks the call.
 
@@ -269,6 +283,7 @@ def scan(text: str, mode: str = "default", allow_citation_library_names: bool = 
     """
     user_mode = mode == "user"
     cite_spans = _citation_library_spans(text) if allow_citation_library_names else []
+    id_spans = _identifier_spans(text)
     hits = []
     seen = set()
     for category, rule, pattern, validator in _RULES:
@@ -279,6 +294,10 @@ def scan(text: str, mode: str = "default", allow_citation_library_names: bool = 
                 continue
             if category == "patient_name" and cite_spans and any(
                 lo <= match.start() and match.end() <= hi for lo, hi in cite_spans
+            ):
+                continue
+            if category in _NUMERIC_CATEGORIES and id_spans and any(
+                lo <= match.start() and match.end() <= hi for lo, hi in id_spans
             ):
                 continue
             # indian_mobile and indian_mobile_spaced overlap on the unspaced form.
