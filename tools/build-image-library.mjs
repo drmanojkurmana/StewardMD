@@ -209,7 +209,7 @@ export function buildAll(root = ROOT) {
       const cap = captionOf(v);
       if (!cap) return;
       pushL({ s: bankUrl(v.src), t: clean(d.title), c: cap, a: clean(v.alt), ar: Number(v.ar) || null,
-        k: kindOf(cap, "Illustration"), o: originOf(cap), f: "Lessons", ri: d.module || f.replace(/\.json$/, ""),
+        k: kindOf(cap, /-ph\d+\.webp$/.test(v.src) ? "Photo" : "Illustration"), o: originOf(cap), f: "Lessons", ri: d.module || f.replace(/\.json$/, ""),
         rn: clean(d.title), cr: "", li: "", lk: "lesson", sys: slugify(system), sysName: system, step: i });
     });
   }
