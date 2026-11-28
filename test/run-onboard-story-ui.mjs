@@ -79,8 +79,12 @@ try {
   const line = () => text("#smdStory .ss-text .ss-l");
   const drawn = () => ev(`var c=document.querySelector("#smdStory canvas"); if(!c) return 0; var d=c.getContext("2d").getImageData(0,0,c.width,c.height).data, n=0; for (var i=3;i<d.length;i+=64) if (d[i]>0) n++; return n;`);
   // Tap the empty middle (advances a timed scene).
-  const tapOn = () => ev(`document.querySelector("#smdStory .ss-fill").click(); return 1;`);
+  // A quick tap on the right side (next) or the left side (back), as pointer events.
+  const tapAt = (fx) => ev(`var el=document.getElementById("smdStory"), x=innerWidth*${fx}, y=innerHeight*0.55; ["pointerdown","pointerup"].forEach(function(t){ el.dispatchEvent(new PointerEvent(t,{bubbles:true,clientX:x,clientY:y,pointerId:1,pointerType:"touch"})); }); return 1;`);
+  const tapOn = () => tapAt(0.8);
   await ev(`localStorage.setItem("smd_onboard_story","1"); ["clinician","prep"].forEach(function(t){localStorage.removeItem("smd_story_seen_"+t);}); return 1;`);
+  // Record haptics instead of firing them.
+  await ev(`window.__h=[]; window.SMD_HAPTICS={}; ["tap","light","medium","heavy","selection","success","warning","error"].forEach(function(k){ SMD_HAPTICS[k]=function(){ __h.push(k); }; }); return 1;`);
   ok(await ev(`return !!window.SMD_STORY && SMD_STORY.enabled() && !SMD_STORY.seen("clinician");`) === true, "onboard-story.js loads at boot; flag on; not seen");
 
   // Clinician track.
@@ -91,14 +95,36 @@ try {
   ok((await drawn()) > 200, "the canvas draws the ward (" + await drawn() + " samples lit)");
   await shot("c1-ward");
   ok(await ev(`return !document.querySelector("#smdStory .ss-skip.on");`) === true, "Skip is hidden in the first 3 s");
+  ok(await ev(`return document.querySelectorAll("#smdStory .ss-bars i").length === 10 && !!document.querySelector("#smdStory .ss-bars i.now.wait");`) === true, "10 progress bars; a question waits (no timer)");
+  ok(await ev(`return document.querySelectorAll("#smdStory .ss-l .ss-w").length >= 8 && !!document.querySelector("#smdStory .ss-text.ss-in");`) === true, "words are wrapped and rise in");
+  // The finger in the field: a sweep gives light ticks.
+  await ev(`__h.length=0; var el=document.getElementById("smdStory"), y=innerHeight*0.55; el.dispatchEvent(new PointerEvent("pointerdown",{bubbles:true,clientX:60,clientY:y,pointerId:2})); for (var i=0;i<8;i++) el.dispatchEvent(new PointerEvent("pointermove",{bubbles:true,clientX:60+i*35,clientY:y,pointerId:2})); return 1;`);
+  await sleep(150);
+  await ev(`var el=document.getElementById("smdStory"); el.dispatchEvent(new PointerEvent("pointerup",{bubbles:true,clientX:340,clientY:innerHeight*0.55,pointerId:2})); return 1;`);
+  ok(await ev(`return __h.filter(function(k){return k==="selection";}).length >= 1;`) === true, "sweeping a finger through the points ticks");
+  ok(/Every shift/.test(await line()), "a sweep is not a tap: the scene stays");
   await click('#smdStory .ss-opt[data-v="50"]');
   ok(await until(`return /50 patients today/.test(document.querySelector("#smdStory .ss-text").textContent);`, 2000), "the answer becomes the next line: 50 patients today");
+  ok(await until(`return __h.indexOf("heavy") >= 0;`, 2000), "the scene lands with its haptic (heavy)");
+  // Hold to pause: the timed scene does not move on while held.
+  await ev(`var el=document.getElementById("smdStory"); el.dispatchEvent(new PointerEvent("pointerdown",{bubbles:true,clientX:300,clientY:innerHeight*0.55,pointerId:3})); return 1;`);
+  ok(await until(`return document.getElementById("smdStory").classList.contains("paused");`, 1500), "press and hold pauses");
+  await sleep(2600);
+  ok(/50 patients today/.test(await text("#smdStory .ss-text")), "held past its 2.4 s: still on the same scene");
+  await ev(`var el=document.getElementById("smdStory"); el.dispatchEvent(new PointerEvent("pointerup",{bubbles:true,clientX:300,clientY:innerHeight*0.55,pointerId:3})); return 1;`);
+  ok(await ev(`return !document.getElementById("smdStory").classList.contains("paused");`) === true, "release resumes");
+  // Back: a tap on the left goes to the previous scene.
+  await tapAt(0.12);
+  ok(await until(`return /Every shift/.test(document.querySelector("#smdStory .ss-text").textContent);`, 2000), "a tap on the left goes back");
+  await click('#smdStory .ss-opt[data-v="50"]');
+  await until(`return /50 patients today/.test(document.querySelector("#smdStory .ss-text").textContent);`, 2000);
   await tapOn();
   ok(await until(`return /four decisions each/.test(document.querySelector("#smdStory .ss-text").textContent);`, 2000), "decisions scene");
-  ok(await until(`return /200/.test(document.querySelector("#smdStory .ss-text em").textContent);`, 3000), "the count climbs to 50 x 4 = 200");
+  ok(await until(`return /^200$/.test(document.querySelector("#smdStory .ss-text em").textContent);`, 3500), "the count climbs to 50 x 4 = 200");
+  ok(await until(`return document.querySelector("#smdStory .ss-text em").classList.contains("pop");`, 1000), "the number lands with a pop");
   await sleep(700); await shot("c3-decide");
   ok(await ev(`return document.querySelector("#smdStory .ss-skip").classList.contains("on");`) === true, "Skip shows after 3 s");
-  for (let i = 0; i < 6; i++) { await tapOn(); await sleep(250); }
+  for (let i = 0; i < 12 && !(await ev(`return !!document.querySelector("#smdStory .ss-cta");`)); i++) { await tapOn(); await sleep(250); if (i === 4) await shot("c7-wave"); }
   ok(await until(`return !!document.querySelector("#smdStory .ss-cta");`, 3000), "taps step through to the last scene");
   await sleep(900); await shot("c9-go");
   await click("#smdStory .ss-cta");
@@ -111,7 +137,7 @@ try {
   ok(await until(`return /doctors sat NEET-PG 2025/.test(document.querySelector("#smdStory .ss-text").textContent);`, 3000), "prep: the crowd scene");
   ok(/NBEMS/.test(await text("#smdStory .ss-src")), "the figure shows its source (" + await text("#smdStory .ss-src") + ")");
   ok(await until(`return document.querySelector("#smdStory .ss-text em").textContent === "2,30,114";`, 4000), "the count lands on 2,30,114");
-  ok(await ev(`var p=document.querySelector("#smdStory .ss-l"), em=p.querySelector("em"), r=document.createRange(); r.setStartAfter(em); r.setEnd(p.lastChild, 2); return r.getBoundingClientRect().width > 3;`) === true, "a space separates the number from doctors");
+  ok(await ev(`var p=document.querySelector("#smdStory .ss-l"), w=p.querySelectorAll(".ss-w"); return w[0].textContent === "2,30,114" && w[1].textContent === "doctors" && w[1].getBoundingClientRect().left - w[0].getBoundingClientRect().right >= 3;`) === true, "a space separates the number from doctors");
   await sleep(500); await shot("p1-crowd");
   await tapOn();
   ok(await until(`return /52,244/.test(document.querySelector("#smdStory .ss-text").textContent) && /NMC/.test(document.querySelector("#smdStory .ss-src").textContent);`, 2000), "seats scene with its source");
@@ -122,6 +148,11 @@ try {
   ok(await until(`return /5 hours.*a day is.*2\\.5 months/.test(document.querySelector("#smdStory .ss-text").textContent);`, 2000), "5 hours a day is 2.5 months a year");
   await sleep(1000); await shot("p4-months");
   await tapOn(); await sleep(1100); await shot("p5-turn");
+  // Background: the story stops drawing and its clock waits.
+  await ev(`Object.defineProperty(document,"hidden",{configurable:true,get:function(){return true;}}); document.dispatchEvent(new Event("visibilitychange")); return 1;`);
+  ok(await ev(`return SMD_STORY._s().hidden === true;`) === true, "in the background the story pauses");
+  await ev(`Object.defineProperty(document,"hidden",{configurable:true,get:function(){return false;}}); document.dispatchEvent(new Event("visibilitychange")); return 1;`);
+  ok(await ev(`return SMD_STORY._s().hidden === false;`) === true, "back in front it resumes");
   await until(`return document.querySelector("#smdStory .ss-skip.on");`, 4000);
   await click("#smdStory .ss-skip");
   ok(await until(`return !!window.__res && window.__res.skipped === true && window.__res.answers.hours === 5;`, 2000), "Skip resolves skipped, the answer kept");
@@ -173,6 +204,10 @@ try {
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!document.getElementById("smdStory") && /NEET-PG/.test(document.querySelector("#smdStory").textContent);`, 20000), "first PrepNucleus open plays the prep track");
   ok(await until(`return !!document.querySelector("#smdPrep .pl-ob");`, 6000), "the plan onboarding waits underneath");
+  await tapOn(); await sleep(300); await tapOn();
+  ok(await until(`return !!document.querySelector("#smdStory .ss-opt") && !!document.querySelector("#smdStory .ss-mascot .pnm");`, 4000), "Nucleo asks the phone question");
+  await sleep(900); await shot("p3-nucleo");
+  await ev(`document.querySelector("#smdStory .ss-skip").click(); return 1;`); await until(`return !document.getElementById("smdStory");`, 2000);
   // The plan steps' Skip never shows the welcome screen.
   await ev(`var x=document.getElementById("smdStory"); if (x) x.remove(); return 1;`);
   await click("#smdPrep [data-act=p-skip]").catch(() => {});

@@ -72,7 +72,12 @@ With `smd_onboard_story = "1"`, `smd_prep_focus = "1"` set in the WebView and a 
 - Clinician story after the welcome role picker: smooth at 60 fps on the phone, haptics land on each beat (count-up
   ticks, heavy on the number, warning on the scatter, success at the mark), Skip after 3 s. Finishing it opens the renal
   dose example (banner, filled values, a computed dose); closing it starts the tour. Skip goes straight to the tour.
-- PrepNucleus first open: prep story, then the 4 plan steps, then "Your plan is ready" with the warm-up and the Focus
+- Story feel (owner 2026-11-28 asked for more motion and haptics): staggered morphs with burst, swirl and rain entries,
+  motion trails, glow, words rising in; haptic patterns per scene (heartbeat on the ECG, a tick crescendo under each
+  count, a bloom at the logo). Check each pattern feels right on the Taptic Engine and none buzzes continuously; sweep a
+  finger through the points (light ticks, points flow away); tap right for next, left for back, hold to pause. If a
+  scene drops frames on an older iPhone, note which; the engine halves points when frames run slow.
+- PrepNucleus first open: prep story (Nucleo asks the phone question), then the 4 plan steps, then "Your plan is ready" with the warm-up and the Focus
   row; the warm-up runs 5 real questions; Readiness on Home reflects them.
 - Focus: timer, Pomodoro, stopwatch, Leave early, Strict lock, shield, schedules, Live Activity, widget.
 - Reduced motion (Settings > Accessibility > Motion) and Larger Text: nothing overflows, story still steps.
