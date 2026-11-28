@@ -67,6 +67,13 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
 - Share IDs: `prep-ids.js` + `prep-ids.css` (optional), `tools/prep-ids.mjs` (fetch, build, verify, publish the
   `v1/ids/` index). See "Share IDs".
 
+## Focus (2026-11-28, `prep-focus.js`, loader `prep203`, branch `feat/prep-focus`)
+Owner: Regain-like focus timer with app blocking. Flag `smd_prep_focus` default OFF. Replaces the Play Focus room row when
+on. Timer / Pomodoro / Stopwatch, goal ring, answers during a session counted and tagged by subject, Leave early? sheet,
+summary, timeline, week, recent. App blocking through the native `SmdFocus` plugin (iOS built in a Mac session; JS fails
+open without it). Strict mode is a Pro extra once `smd_prep_pro_enforce` is on. Brief and plugin contract:
+[[plans/PrepNucleus-Focus]]. Tests: `test/prep-focus.test.mjs`, `test/run-prep-focus-ui.mjs`. Not seen on a phone yet.
+
 ## Startup clip (2026-11-26, `prep-startup.js?v=pnstart3`, loader `prep199`)
 Owner supplied two silent intro clips (cosmos to cell to logo on cream). `prep/startup/prep-startup-v.mp4` (1512x2688,
 7.8 s) plays in portrait, `-h.mp4` (2688x1512, 6.35 s) in landscape; HEVC (`hvc1`) CRF 22, 60 fps, no audio, VMAF about 96
