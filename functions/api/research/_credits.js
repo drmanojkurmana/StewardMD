@@ -133,11 +133,14 @@ export async function activeJobReservation(db, jobId) {
     jobId,
   };
 }
-/* A queued/running job older than this can no longer be running: the worker
- * lease is 2 h and the research worker cron ignores rows older than 3 h, so
- * a queue message that was lost (or a container that died) is permanent.
- * Expiry releases the hold so the doctor's credits do not stay reserved. */
+/* A queued/running server job older than this can no longer be running: the
+ * worker lease is 2 h and the research worker cron ignores rows older than
+ * 3 h, so a queue message that was lost (or a container that died) is
+ * permanent. Device-run jobs heartbeat while the app is open and expire after
+ * DEVICE_LOST_JOB_MS (15 min) of inactivity as device_failed so credits
+ * release and the failed attempt stays excluded from the daily PO cap. */
 export const LOST_JOB_MS = 3 * 60 * 60 * 1000;
+export const DEVICE_LOST_JOB_MS = 15 * 60 * 1000;
 
 /* Fail lost jobs and release their holds. Idempotent and concurrency-safe:
  * the guarded transition changes a row exactly once, so a second runner (or
@@ -147,7 +150,7 @@ export async function expireLostJobs(db, uuid, now) {
   const at = Number.isFinite(now) ? now : Date.now();
   const cutoff = at - LOST_JOB_MS;
   const rows = (await db.prepare(
-    "SELECT id FROM research_job_runs WHERE status IN ('queued','running') AND created_ts<? ORDER BY created_ts ASC LIMIT 20")
+    "SELECT id FROM research_job_runs WHERE status IN ('queued','running') AND created_ts<? AND (output_json IS NULL OR output_json NOT LIKE '%\"runner\":\"device\"%') ORDER BY created_ts ASC LIMIT 20")
     .bind(cutoff).all()).results || [];
   let failedJobs = 0;
   let releasedMicroUsd = 0;
@@ -160,6 +163,27 @@ export async function expireLostJobs(db, uuid, now) {
     await refundCloudFallbackForJob(db, row.id, "job_lost").catch(() => {});
     /* Same release shape as a failed worker job (_callback.js): release only
      * the currently active reserve row. */
+    const reservation = await activeJobReservation(db, row.id);
+    if (!reservation) continue;
+    await releaseCredits(db, uuid, reservation);
+    releasedMicroUsd += reservation.quote;
+  }
+  const devCutoff = at - DEVICE_LOST_JOB_MS;
+  const devRows = (await db.prepare(
+    "SELECT id, created_ts, started_ts, output_json FROM research_job_runs WHERE status IN ('queued','running') AND output_json LIKE '%\"runner\":\"device\"%' ORDER BY created_ts ASC LIMIT 50")
+    .all()).results || [];
+  for (const row of devRows) {
+    if (failedJobs >= 40) break;
+    let out = {};
+    try { out = JSON.parse(row.output_json || "{}") || {}; } catch { out = {}; }
+    if (out.runner !== "device") continue;
+    const leaseRefTs = Number(out.lastHeartbeatTs || out.heartbeatTs || row.started_ts || row.created_ts || 0);
+    if (leaseRefTs >= devCutoff) continue;
+    const upd = await db.prepare(
+      "UPDATE research_job_runs SET status='failed',error_code='device_failed',completed_ts=? WHERE id=? AND status IN ('queued','running')")
+      .bind(at, row.id).run();
+    if (!upd.meta || upd.meta.changes !== 1) continue;
+    failedJobs++;
     const reservation = await activeJobReservation(db, row.id);
     if (!reservation) continue;
     await releaseCredits(db, uuid, reservation);

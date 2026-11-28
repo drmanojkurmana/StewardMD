@@ -898,10 +898,14 @@
       return SMD.api.request(method, url, body);
     }
 
+    var activePoCancel = null;
     return JR.runWithFallback("draft", function (resumeCtx) {
       deferredFail = null;
+      activePoCancel = resumeCtx && typeof resumeCtx.cancel === "function" ? resumeCtx.cancel : null;
+      st.poCancelActiveFn = activePoCancel;
       return G.SMD_RMD_ONDEVICE_DRAFT.run(jobBundle, {
         resume: !!(resume || (resumeCtx && resumeCtx.resume)),
+        tryNumber: (resumeCtx && resumeCtx.tryNumber) || 1,
         phiOverride: jobBundle && jobBundle.phiOverride,
         onPhiOverride: poOverridePrompt,
         signal: resumeCtx && resumeCtx.signal,
@@ -951,6 +955,7 @@
         }
       }
     }).then(function (out) {
+      st.poCancelActiveFn = null;
       if (st.poCancelled) return;
       st.poRetryText = null;
       if (out && out.ok && out.source === "device") {
@@ -976,9 +981,9 @@
         SMD.api.request("POST", dfUrl, { code: "device_failed", step: dfStep }).catch(function () {});
       }
       if (outState === "cancelled_to_device") {
-        st.poStatus = "paused";
-        st.poError = null;
-        checkResumeCheckpoint(target, pid);
+        st.poStatus = "failed";
+        st.poError = "Cancelled before cloud continuation. Could not complete draft on this device; try again when ready.";
+        st.poResumeCheckpoint = null;
         if (target) render(target);
         return;
       }
@@ -987,6 +992,7 @@
       checkResumeCheckpoint(target, pid);
       if (target) render(target);
     }).catch(function (err) {
+      st.poCancelActiveFn = null;
       st.poRetryText = null;
       if (st.poCancelled || (err && err.code === "cancelled")) return;
       if (deferredFail && err && err.rmdState === "data_problem" && SMD.api && typeof SMD.api.request === "function") {
@@ -1169,6 +1175,10 @@
     st.poCancelling = true;
     st.poCancelError = null;
     st.poCancelled = true;
+    if (typeof st.poCancelActiveFn === "function") {
+      try { st.poCancelActiveFn(); } catch (e) {}
+      st.poCancelActiveFn = null;
+    }
 
     SMD.api.request("POST", "/v1/jobs/" + encodeURIComponent(jid) + "/cancel").then(function () {
       clearPoPoll();
@@ -2046,15 +2056,17 @@
       if (item && item.id && typeof item.text === "string") validItems.push(item);
     }
     if (!validItems.length) return Promise.resolve();
-    var chain = prevSync.then(function () {
-      if (st.manuscript && typeof st.manuscript.version === "number") ver = st.manuscript.version;
-      return sendItemPut(validItems[0], ver, false);
-    }).then(function () {
-      if (validItems.length <= 1) return;
-      return Promise.all(validItems.slice(1).map(function (secItem) {
-        return sendItemPut(secItem, ver, false);
-      }));
-    });
+    var chain = prevSync;
+    for (var vi = 0; vi < validItems.length; vi++) {
+      (function (secItem, idx) {
+        chain = chain.then(function () {
+          if (idx === 0 && st.manuscript && typeof st.manuscript.version === "number") {
+            ver = st.manuscript.version;
+          }
+          return sendItemPut(secItem, ver, false);
+        });
+      })(validItems[vi], vi);
+    }
     var myPromise;
     myPromise = chain.then(function () {
       if (st.draftSyncPromise === myPromise) st.draftSyncPromise = null;
@@ -3286,6 +3298,7 @@
     st.lastRange = null;
     closeNumPopover();
     bindBreakpoint();
+    lastBreakpointPhone = isPhone();
     injectCss();
 
     if (st.loading) {

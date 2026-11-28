@@ -91,6 +91,11 @@ pub struct Char {
     pub adv: f64,
     /// Font size (Tf), for the stream-order lines PrepNucleus reads.
     pub fs: f64,
+    /// Bold / italic look, for the lines output only (not part of pdfminer's
+    /// LTChar): the font's style, plus text render mode 2 (fill and stroke,
+    /// the usual "fake bold") counted as bold.
+    pub bold: bool,
+    pub italic: bool,
 }
 
 #[derive(Clone)]
@@ -104,6 +109,8 @@ struct TextState {
     rise: f64,
     matrix: M,
     linematrix: (f64, f64),
+    /// Text render mode (Tr).
+    render: i64,
 }
 
 impl TextState {
@@ -118,6 +125,7 @@ impl TextState {
             rise: 0.0,
             matrix: IDENT,
             linematrix: (0.0, 0.0),
+            render: 0,
         }
     }
 }
@@ -368,6 +376,11 @@ impl<'d, 'c> Interp<'d, 'c> {
                     fr.ts.wordspace = v;
                 }
             }
+            b"Tr" => {
+                if let Some(v) = safe_float(&a[0]) {
+                    fr.ts.render = v as i64;
+                }
+            }
             b"Tz" => {
                 if let Some(v) = safe_float(&a[0]) {
                     fr.ts.scaling = v;
@@ -611,6 +624,8 @@ impl<'d, 'c> Interp<'d, 'c> {
         let (mut x, y) = ts.linematrix;
         let mut needcharspace = false;
         let descent = font.get_descent() * fontsize;
+        let bold = font.style.bold || ts.render == 2;
+        let italic = font.style.italic;
         let mut cids = std::mem::take(&mut self.cid_buf);
         for obj in seq {
             match obj {
@@ -642,7 +657,7 @@ impl<'d, 'c> Interp<'d, 'c> {
                         if y1 < y0 {
                             std::mem::swap(&mut y0, &mut y1);
                         }
-                        self.chars.push(Char { text, x0, y0, x1, y1, upright, size: y1 - y0, matrix: m, adv, fs: fontsize });
+                        self.chars.push(Char { text, x0, y0, x1, y1, upright, size: y1 - y0, matrix: m, adv, fs: fontsize, bold, italic });
                         x += adv;
                         if cid == 32 && wordspace != 0.0 {
                             x += wordspace;

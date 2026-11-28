@@ -20,6 +20,7 @@
     pdfTotalMs: 10 * 60 * 1000,
     statsModelMs: 2 * 60 * 1000,
     draftStepMs: 5 * 60 * 1000,
+    draftAiWaitMs: 15 * 60 * 1000,
     retryDelayMs: 3 * 1000
   };
 
@@ -299,7 +300,7 @@
       overlay.setAttribute("role", "dialog");
       overlay.setAttribute("aria-modal", "true");
       overlay.style.cssText =
-        "position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,0.6);" +
+        "position:fixed;inset:0;z-index:10100;background:rgba(15,23,42,0.6);" +
         "display:flex;align-items:center;justify-content:center;padding:16px;";
 
       var card = document.createElement("div");
@@ -399,6 +400,7 @@
     var totalFgMs = 0;
     var pageFgMs = 0;
     var stepFgMs = 0;
+    var aiWaitFgMs = 0;
     var timerId = null;
     var disposed = false;
     var pauseListeners = [];
@@ -416,6 +418,8 @@
       pageFgMs += delta;
       if (kind !== "draft" || aiWaitDepth === 0) {
         stepFgMs += delta;
+      } else {
+        aiWaitFgMs += delta;
       }
     }
 
@@ -434,6 +438,7 @@
         if (totalFgMs > TIMEOUTS.statsModelMs) return "timeout_stats_model";
       } else if (kind === "draft") {
         if (stepFgMs > TIMEOUTS.draftStepMs) return "timeout_draft_step";
+        if (aiWaitFgMs > TIMEOUTS.draftAiWaitMs) return "timeout_draft_ai_wait";
       }
       return null;
     }
@@ -457,9 +462,14 @@
       } else if (kind === "stats") {
         nextWait = TIMEOUTS.statsModelMs - totalFgMs;
         rule = "timeout_stats_model";
-      } else if (kind === "draft" && aiWaitDepth === 0) {
-        nextWait = TIMEOUTS.draftStepMs - stepFgMs;
-        rule = "timeout_draft_step";
+      } else if (kind === "draft") {
+        if (aiWaitDepth === 0) {
+          nextWait = TIMEOUTS.draftStepMs - stepFgMs;
+          rule = "timeout_draft_step";
+        } else {
+          nextWait = TIMEOUTS.draftAiWaitMs - aiWaitFgMs;
+          rule = "timeout_draft_ai_wait";
+        }
       }
       if (nextWait != null) {
         var capturedRule = rule;

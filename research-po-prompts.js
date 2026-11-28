@@ -280,9 +280,28 @@
     ""
   ].join("\n") + "\n" + UNIVERSAL_NO_LEAKAGE_PROMPT;
 
-  function outlineSystemPrompt(cutoffDate) {
+  var OUTLINE_CLINICAL_TEMPLATE = [
+    "You are a senior medical researcher planning a clinical IMRAD systematic review / meta-analysis paper.",
+    "Convert the provided inputs into a concise, valid JSON outline object matching the exact schema below.",
+    "",
+    "Inputs: `idea.md`, `experimental_log.md`, `template.tex`, and guidelines.",
+    "",
+    "Rules (CRITICAL - stay concise so JSON never truncates):",
+    "- Top-level keys MUST be exactly: \"plotting_plan\", \"intro_related_work_plan\", and \"section_plan\".",
+    "- \"plotting_plan\": array of at most 2 key figures with keys: \"figure_id\" (semantic snake_case without the word figure), \"title\", \"plot_type\" (\"plot\" or \"diagram\"), \"data_source\" (\"idea.md\" | \"experimental_log.md\" | \"both\"), \"objective\" (<= 20 words), \"aspect_ratio\" (e.g. \"16:9\" or \"4:3\").",
+    "- \"intro_related_work_plan\": set strictly to {} (citations are already provided in the project library).",
+    "- \"section_plan\": array matching the \\section{{...}} headings in template.tex (e.g. Abstract, Introduction, Methods, Results, Discussion, References).",
+    "  * Only use subsections when a section genuinely needs >= 2 subsections (never create an orphaned single subsection).",
+    "  * Each subsection: \"subsection_title\", \"content_bullets\" (2 to 4 short bullets, <= 16 words each, citing exact tokens/outcomes from idea.md/experimental_log.md), and \"citation_hints\": [].",
+    "  * References section should have one subsection with \"content_bullets\": [\"List cited verified references\"] and \"citation_hints\": [].",
+    "- Output ONLY a single valid JSON object inside ```json ... ```.",
+    ""
+  ].join("\n") + "\n" + UNIVERSAL_NO_LEAKAGE_PROMPT;
+
+  function outlineSystemPrompt(cutoffDate, withLiterature) {
     var cd = String(cutoffDate || "2024-10");
-    return OUTLINE_AGENT_TEMPLATE
+    var tpl = withLiterature ? OUTLINE_AGENT_TEMPLATE : OUTLINE_CLINICAL_TEMPLATE;
+    return tpl
       .replace(/\{cutoff_date\}/g, cd)
       .replace(/\{\{/g, "{")
       .replace(/\}\}/g, "}");
@@ -291,7 +310,7 @@
   function buildOutlinePrompt(opts) {
     var o = opts || {};
     var parts = [
-      outlineSystemPrompt(o.cutoffDate),
+      outlineSystemPrompt(o.cutoffDate, !!o.withLiterature),
       "'idea.md':\n" + (o.ideaMd || ""),
       "'experimental_log.md':\n" + (o.experimentalLogMd || ""),
       "'template.tex':\n" + (o.templateTex || IMRAD_TEMPLATE),

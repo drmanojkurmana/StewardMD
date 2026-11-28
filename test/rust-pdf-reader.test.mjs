@@ -50,6 +50,99 @@ test("the Rust reader reads text, words and lines, marks the empty page for OCR,
   assert.equal(await R.extract(new TextEncoder().encode("not a pdf"), {}), null, "a failure means: use the old reader");
 });
 
+// Thesis-style page: bold headings by font name (std 14 and a subset-tagged
+// TrueType name), by the descriptor's ForceBold flag and by FontWeight, plus a
+// plain body line, a mixed line and a regular line in a Times font.
+function makeBoldPdf() {
+  const c = "BT /FB 14 Tf 72 740 Td (CHAPTER 3) Tj ET\n" +
+    "BT /FS 12 Tf 72 720 Td (3.1 Materials and methods) Tj ET\n" +
+    "BT /FF 12 Tf 72 700 Td (Observations) Tj ET\n" +
+    "BT /FW 12 Tf 72 680 Td (Discussion) Tj ET\n" +
+    "BT /FR 11 Tf 72 660 Td (Patients aged 18 to 60 were enrolled.) Tj ET\n" +
+    "BT /FB 11 Tf 72 640 Td (Table 2) Tj /FR 11 Tf ( shows the baseline characteristics of all enrolled patients.) Tj ET\n" +
+    "BT /FT 11 Tf 72 620 Td (Times body text stays regular.) Tj ET";
+  const objs = [
+    "<< /Type /Catalog /Pages 2 0 R >>",
+    "<< /Type /Pages /Kids [3 0 R] /Count 1 /MediaBox [0 0 612 792] >>",
+    "<< /Type /Page /Parent 2 0 R /Resources << /Font << /FB 4 0 R /FS 5 0 R /FF 6 0 R /FW 7 0 R /FR 8 0 R /FT 9 0 R >> >> /Contents 12 0 R >>",
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>",
+    "<< /Type /Font /Subtype /Type1 /BaseFont /ABCDEF+Calibri-Bold /FirstChar 32 /LastChar 126 /Widths [] >>",
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman /FontDescriptor 10 0 R >>",
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman /FontDescriptor 11 0 R >>",
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>",
+    "<< /Type /FontDescriptor /FontName /Thesis /Flags 262178 >>",
+    "<< /Type /FontDescriptor /FontName /Thesis /Flags 34 /FontWeight 700 >>",
+  ];
+  objs.push("<< /Length " + c.length + " >>\nstream\n" + c + "\nendstream");
+  let out = "%PDF-1.4\n";
+  const offs = [];
+  objs.forEach((o, i) => { offs.push(out.length); out += (i + 1) + " 0 obj\n" + o + "\nendobj\n"; });
+  const x = out.length;
+  out += "xref\n0 " + (objs.length + 1) + "\n0000000000 65535 f \n" + offs.map((o) => String(o).padStart(10, "0") + " 00000 n \n").join("");
+  out += "trailer\n<< /Size " + (objs.length + 1) + " /Root 1 0 R >>\nstartxref\n" + x + "\n%%EOF\n";
+  return new TextEncoder().encode(out);
+}
+
+test("Rust lines mark bold headings for the thesis chapter split", async () => {
+  const ln = await R.lines(makeBoldPdf(), [1]);
+  assert.deepEqual(ln.pages[0].lines.map((l) => [l.tx.replace(/\s+/g, " ").trim(), l.size, l.bold]), [
+    ["CHAPTER 3", 14, true],
+    ["3.1 Materials and methods", 12, true],
+    ["Observations", 12, true],
+    ["Discussion", 12, true],
+    ["Patients aged 18 to 60 were enrolled.", 11, false],
+    ["Table 2 shows the baseline characteristics of all enrolled patients.", 11, false],
+    ["Times body text stays regular.", 11, false],
+  ]);
+  const plain = await R.lines(makePdf(), [1]);
+  assert.ok(plain.pages[0].lines.every((l) => l.bold === false), "regular Helvetica is not bold");
+});
+
+// A thesis-like page: a bold caps chapter line, a bold heading, plain text, italic text, a "fake bold" line
+// (text render mode 2) and a run-in bold word that does not make its line bold.
+function makeStyledPdf() {
+  const c = "BT /F2 16 Tf 72 720 Td (CHAPTER 3) Tj ET\n" +
+    "BT /F2 14 Tf 72 700 Td (Materials and Methods) Tj ET\n" +
+    "BT /F1 11 Tf 72 680 Td (This was a prospective study of sixty patients.) Tj ET\n" +
+    "BT /F3 11 Tf 72 660 Td (Inclusion criteria) Tj ET\n" +
+    "BT 2 Tr /F1 12 Tf 72 640 Td (Statistical analysis) Tj 0 Tr ET\n" +
+    "BT /F2 11 Tf 72 620 Td (Note.) Tj /F1 11 Tf ( Values are median and range for each group.) Tj ET";
+  const objs = [
+    "<< /Type /Catalog /Pages 2 0 R >>",
+    "<< /Type /Pages /Kids [3 0 R] /Count 1 /MediaBox [0 0 612 792] >>",
+    "<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R /F3 6 0 R >> >> /Contents 7 0 R >>",
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>",
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >>",
+    "<< /Length " + c.length + " >>\nstream\n" + c + "\nendstream",
+  ];
+  let out = "%PDF-1.4\n";
+  const offs = [];
+  objs.forEach((o, i) => { offs.push(out.length); out += (i + 1) + " 0 obj\n" + o + "\nendobj\n"; });
+  const x = out.length;
+  out += "xref\n0 " + (objs.length + 1) + "\n0000000000 65535 f \n" + offs.map((o) => String(o).padStart(10, "0") + " 00000 n \n").join("");
+  out += "trailer\n<< /Size " + (objs.length + 1) + " /Root 1 0 R >>\nstartxref\n" + x + "\n%%EOF\n";
+  return new TextEncoder().encode(out);
+}
+
+test("lines say which are bold, italic or in capitals (for finding thesis chapter headings)", async () => {
+  const ln = await R.lines(makeStyledPdf(), [1]);
+  assert.deepEqual(ln.pages[0].lines.map((l) => [l.tx, l.size, l.bold, l.italic, l.caps]), [
+    ["CHAPTER 3", 16, true, false, true],
+    ["Materials and Methods", 14, true, false, false],
+    ["This was a prospective study of sixty patients.", 11, false, false, false],
+    ["Inclusion criteria", 11, false, true, false],
+    ["Statistical analysis", 12, true, false, false],
+    ["Note. Values are median and range for each group.", 11, false, false, false],
+  ]);
+  const plain = await R.lines(makePdf(), [1]);
+  assert.ok(plain.pages[0].lines.every((l) => l.bold === false && l.italic === false), "Helvetica is not bold");
+  // The extract.py-shaped result is unchanged: words carry no style keys.
+  const ex = await R.extract(makeStyledPdf(), {});
+  assert.deepEqual(Object.keys(ex.pages[0].words[0]).sort(), Object.keys((await R.extract(makePdf(), {})).pages[0].words[0]).sort());
+});
+
 /* ---------- ResearchMD phone reader ---------- */
 function fakePdfjs(n, log) {
   const pdf = {

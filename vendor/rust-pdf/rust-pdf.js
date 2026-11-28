@@ -4,7 +4,15 @@
  * table for table, so the phone and the server give the same result. It does not draw pages or read scans:
  * pdf.js and the phone's own OCR still do that.
  *   SMD_RUST_PDF.extract(u8, { maxPages, maxBytes }) -> Promise(extract.py result, or null)
- *   SMD_RUST_PDF.lines(u8, [pageNumbers], { maxBytes }) -> Promise({ pages: [{ n, lines: [{ tx, size }] }], total }, or null)
+ *   SMD_RUST_PDF.lines(u8, [pageNumbers], { maxBytes })
+ *     -> Promise({ pages: [{ n, lines: [{ tx, size, bold, italic, caps }] }], total }, or null)
+ *     Each line: tx text, size font size (pt, 0.1), and how it looks, for finding headings (true/false):
+ *       bold    more than half of its letters are in a bold font (font name such as Bold, Black, Heavy,
+ *               Semibold, Demi, TeX CMBX; FontWeight 600 or more; ForceBold flag) or drawn as "fake bold"
+ *               (text render mode 2, fill and stroke)
+ *       italic  more than half in an italic / oblique / slanted font (name, Italic flag or ItalicAngle)
+ *       caps    at least two letters and none of them lower case ("CHAPTER 3", "RESULTS")
+ *     A heading usually shows as bold and/or caps and/or a larger size than the body text; use them together.
  * null means "use the old reader": the reader is off, failed to load, or met a PDF feature it does not copy.
  * Kill switch: localStorage smd_rust_pdf = "0" (or ?rust_pdf=0) turns it off on this device.
  * Nothing here sends anything anywhere. No em or en dashes. */

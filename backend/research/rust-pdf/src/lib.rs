@@ -289,7 +289,9 @@ pub fn extract(data: &[u8], limits: &Limits) -> Result<Value, Error> {
 }
 
 /// Stream-order text lines with font sizes for the chosen pages (1-based),
-/// for PrepNucleus deck creation: `{"pages": [{"n", "lines": [{"tx", "size"}]}]}`.
+/// for PrepNucleus deck creation and thesis chapter splitting:
+/// `{"pages": [{"n", "lines": [{"tx", "size", "bold", "italic", "caps"}]}]}`
+/// (see `lines.rs` for what the three flags mean).
 /// Pages that are out of range are left out.
 pub fn extract_lines(data: &[u8], wanted: &[usize], max_bytes: usize) -> Result<Value, Error> {
     if data.len() > max_bytes {
@@ -317,7 +319,7 @@ pub fn extract_lines(data: &[u8], wanted: &[usize], max_bytes: usize) -> Result<
             it.run(resources, &content, ctm, &mut anc)?;
             let ls: Vec<Value> = lines::page_lines(&it.chars)
                 .into_iter()
-                .map(|(tx, size)| json!({ "tx": tx, "size": size }))
+                .map(|l| json!({ "tx": l.tx, "size": l.size, "bold": l.bold, "italic": l.italic, "caps": l.caps }))
                 .collect();
             out.push(json!({ "n": n, "lines": ls }));
         }
@@ -373,4 +375,85 @@ pub fn extract_json(data: &[u8]) -> String {
         Err(Error::Unsupported(r)) => json!({ "unsupported": r }),
     };
     serde_json::to_string(&v).unwrap_or_else(|_| "{\"error\":\"internal\"}".into())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// A one-page PDF from a content stream and font dictionaries.
+    fn make_pdf(content: &str, fonts: &[(&str, &str)]) -> Vec<u8> {
+        let fontrefs: String = fonts.iter().enumerate().map(|(i, (n, _))| format!("/{n} {} 0 R ", 5 + i)).collect();
+        let mut objs = vec![
+            "<< /Type /Catalog /Pages 2 0 R >>".to_string(),
+            "<< /Type /Pages /Kids [3 0 R] /Count 1 /MediaBox [0 0 612 792] >>".to_string(),
+            format!("<< /Type /Page /Parent 2 0 R /Resources << /Font << {fontrefs}>> >> /Contents 4 0 R >>"),
+            format!("<< /Length {} >>\nstream\n{content}\nendstream", content.len()),
+        ];
+        objs.extend(fonts.iter().map(|(_, d)| d.to_string()));
+        let mut out = String::from("%PDF-1.4\n");
+        let mut offs = Vec::new();
+        for (i, o) in objs.iter().enumerate() {
+            offs.push(out.len());
+            out += &format!("{} 0 obj\n{o}\nendobj\n", i + 1);
+        }
+        let x = out.len();
+        out += &format!("xref\n0 {}\n0000000000 65535 f \n", objs.len() + 1);
+        for o in offs {
+            out += &format!("{o:010} 00000 n \n");
+        }
+        out += &format!("trailer\n<< /Size {} /Root 1 0 R >>\nstartxref\n{x}\n%%EOF\n", objs.len() + 1);
+        out.into_bytes()
+    }
+
+    #[test]
+    fn lines_carry_bold_italic_and_caps() {
+        let fonts = [
+            ("F1", "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"),
+            ("F2", "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>"),
+            ("F3", "<< /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >>"),
+            // Bold only by FontWeight in its descriptor (the name says nothing).
+            ("F4", "<< /Type /Font /Subtype /Type1 /BaseFont /ABCDEF+Thesis /FirstChar 32 /LastChar 126 \
+                    /Widths [] /FontDescriptor << /Type /FontDescriptor /FontName /ABCDEF+Thesis /Flags 32 \
+                    /FontWeight 700 /ItalicAngle 0 >> >>"),
+        ];
+        let content = "BT /F2 16 Tf 72 720 Td (CHAPTER 1) Tj ET\n\
+            BT /F2 14 Tf 72 700 Td (Introduction) Tj ET\n\
+            BT /F1 11 Tf 72 680 Td (Plain body text, not bold.) Tj ET\n\
+            BT /F3 11 Tf 72 660 Td (An italic line) Tj ET\n\
+            BT /F4 12 Tf 72 640 Td (Weight seven hundred) Tj ET\n\
+            BT 2 Tr /F1 12 Tf 72 620 Td (Fake bold heading) Tj 0 Tr ET\n\
+            BT /F2 11 Tf 72 600 Td (Methods.) Tj /F1 11 Tf ( We studied the patients in the ward.) Tj ET\n\
+            BT /F1 11 Tf 72 580 Td (WHO 2022) Tj ET";
+        let v = extract_lines(&make_pdf(content, &fonts), &[1], usize::MAX).ok().unwrap();
+        let got: Vec<(String, bool, bool, bool)> = v["pages"][0]["lines"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|l| {
+                (
+                    l["tx"].as_str().unwrap().to_string(),
+                    l["bold"].as_bool().unwrap(),
+                    l["italic"].as_bool().unwrap(),
+                    l["caps"].as_bool().unwrap(),
+                )
+            })
+            .collect();
+        let want = [
+            ("CHAPTER 1", true, false, true),
+            ("Introduction", true, false, false),
+            ("Plain body text, not bold.", false, false, false),
+            ("An italic line", false, true, false),
+            ("Weight seven hundred", true, false, false),
+            ("Fake bold heading", true, false, false),
+            ("Methods. We studied the patients in the ward.", false, false, false),
+            ("WHO 2022", false, false, true),
+        ];
+        let want: Vec<(String, bool, bool, bool)> =
+            want.iter().map(|(t, b, i, c)| (t.to_string(), *b, *i, *c)).collect();
+        assert_eq!(got, want);
+        // Words and text (extract.py's result) do not change.
+        let e = extract(&make_pdf(content, &fonts), &Limits::default()).ok().unwrap();
+        assert!(e["pages"][0]["words"][0].get("bold").is_none());
+    }
 }

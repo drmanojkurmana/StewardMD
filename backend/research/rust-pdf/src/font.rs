@@ -307,6 +307,86 @@ pub struct Font {
     descent: f64,
     umap: Option<UMap>,
     cid2unicode: Option<HashMap<u32, String>>,
+    /// Bold / italic look of the font (name, FontWeight, Flags, ItalicAngle).
+    /// Only the lines output uses it; words and text do not.
+    pub style: FontStyle,
+}
+
+/// How a font looks, read from its dictionary (see `font_style`).
+#[derive(Clone, Copy, Default, Debug, PartialEq)]
+pub struct FontStyle {
+    pub bold: bool,
+    pub italic: bool,
+}
+
+/// The style words in a font name, after any subset tag (`ABCDEF+`):
+/// `Arial-BoldItalicMT`, `MyriadPro-SemiboldIt`, `Arial-BdIt`, TeX's `CMBX10`
+/// and `CMTI10`, URW's `NimbusRomNo9L-Medi`.
+fn name_style(name: &[u8]) -> FontStyle {
+    let full = String::from_utf8_lossy(name).to_ascii_lowercase();
+    let full = match full.find('+') {
+        Some(6) => &full[7..],
+        _ => &full[..],
+    };
+    // TeX Computer Modern / cm-super short names (CMBX10, CMBXTI10, SFBX1200).
+    const TEX_BOLD: [&str; 7] = ["cmbx", "cmssbx", "cmb1", "cmb9", "sfbx", "sfssbx", "cmbsy"];
+    const TEX_ITALIC: [&str; 7] = ["cmti", "cmsl", "cmbxti", "cmbxsl", "cmssi", "sfti", "sfsl"];
+    let mut st = FontStyle {
+        bold: TEX_BOLD.iter().any(|p| full.starts_with(p)),
+        italic: TEX_ITALIC.iter().any(|p| full.starts_with(p)),
+    };
+    if ["bold", "black", "heavy", "demi", "fett"].iter().any(|w| full.contains(w)) {
+        st.bold = true;
+    }
+    if ["italic", "oblique", "slant", "kursiv", "inclined"].iter().any(|w| full.contains(w)) {
+        st.italic = true;
+    }
+    // Short style codes after the family name.
+    let style: String = full.split(['-', ',', '_']).skip(1).collect::<Vec<_>>().join("-");
+    let s = style.trim_end_matches("mt").trim_end_matches("ps");
+    if !s.is_empty() {
+        let code = |c: &str| s == c || s == format!("{c}it") || s == format!("{c}obl") || s == format!("{c}ital");
+        if ["bd", "blk", "hv", "hvy", "sb", "smbd", "xbd", "medi"].iter().any(|c| code(c)) {
+            st.bold = true;
+        }
+        // "It" alone or after a weight ("BoldIt", "LightIt", "ReguItal"), so
+        // that a family such as "Digital" is not read as italic.
+        const WEIGHTS: [&str; 22] = [
+            "", "bold", "semibold", "demibold", "extrabold", "black", "heavy", "light", "extralight", "thin", "medium",
+            "regular", "book", "roman", "bd", "sb", "smbd", "xbd", "blk", "lt", "medi", "regu",
+        ];
+        for suf in ["ital", "it", "obl", "ita"] {
+            if let Some(rest) = s.strip_suffix(suf) {
+                if WEIGHTS.contains(&rest) {
+                    st.italic = true;
+                }
+            }
+        }
+    }
+    st
+}
+
+/// Bold / italic from the font dictionary: the BaseFont name, and the
+/// FontDescriptor's FontName, FontWeight (600 or more), Flags (Italic bit 7,
+/// ForceBold bit 19) and ItalicAngle.
+pub fn font_style(doc: &Document, spec: &Dictionary) -> FontStyle {
+    let mut st = dict_get(doc, spec, b"BaseFont").and_then(as_name).map(name_style).unwrap_or_default();
+    if let Some(desc) = dict_get(doc, spec, b"FontDescriptor").and_then(|o| o.as_dict().ok()) {
+        let ds = dict_get(doc, desc, b"FontName").and_then(as_name).map(name_style).unwrap_or_default();
+        st.bold |= ds.bold;
+        st.italic |= ds.italic;
+        if desc_num(doc, Some(desc), b"FontWeight") >= 600.0 {
+            st.bold = true;
+        }
+        let flags = desc_num(doc, Some(desc), b"Flags") as i64;
+        if flags & (1 << 18) != 0 {
+            st.bold = true;
+        }
+        if flags & (1 << 6) != 0 || desc_num(doc, Some(desc), b"ItalicAngle").abs() >= 1.0 {
+            st.italic = true;
+        }
+    }
+    st
 }
 
 fn int_key(o: &Object, doc: &Document) -> Option<i64> {
@@ -491,6 +571,14 @@ impl Font {
 
     /// pdfminer `PDFResourceManager.get_font`.
     pub fn load(doc: &Document, spec: &Dictionary) -> Result<Font, Unsupported> {
+        let mut f = Self::load_inner(doc, spec)?;
+        let st = font_style(doc, spec);
+        f.style.bold |= st.bold;
+        f.style.italic |= st.italic;
+        Ok(f)
+    }
+
+    fn load_inner(doc: &Document, spec: &Dictionary) -> Result<Font, Unsupported> {
         let subtype: Vec<u8> = dict_get(doc, spec, b"Subtype").and_then(as_name).unwrap_or(b"Type1").to_vec();
         match subtype.as_slice() {
             b"Type3" => Self::load_type3(doc, spec),
@@ -546,6 +634,7 @@ impl Font {
             descent: if descent > 0.0 { -descent } else { descent },
             umap,
             cid2unicode: Some(cid2unicode),
+            style: FontStyle::default(),
         })
     }
 
@@ -583,6 +672,7 @@ impl Font {
             descent: bbox[1],
             umap,
             cid2unicode: Some(cid2unicode),
+            style: FontStyle::default(),
         })
     }
 
@@ -670,6 +760,7 @@ impl Font {
             descent: if descent > 0.0 { -descent } else { descent },
             umap,
             cid2unicode: None,
+            style: FontStyle::default(),
         })
     }
 }
@@ -677,6 +768,41 @@ impl Font {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn style_from_font_names() {
+        let st = |n: &str| {
+            let s = name_style(n.as_bytes());
+            (s.bold, s.italic)
+        };
+        assert_eq!(st("Helvetica"), (false, false));
+        assert_eq!(st("Helvetica-Bold"), (true, false));
+        assert_eq!(st("Times-BoldItalic"), (true, true));
+        assert_eq!(st("Courier-Oblique"), (false, true));
+        assert_eq!(st("ABCDEF+TimesNewRomanPS-BoldMT"), (true, false));
+        assert_eq!(st("BAAAAA+Calibri,Bold"), (true, false));
+        assert_eq!(st("XYZABC+MyriadPro-SemiboldIt"), (true, true));
+        assert_eq!(st("Arial-BdIt"), (true, true));
+        assert_eq!(st("MinionPro-It"), (false, true));
+        assert_eq!(st("Helvetica-Black"), (true, false));
+        assert_eq!(st("Futura-Demi"), (true, false));
+        assert_eq!(st("KUYGUP+NimbusRomNo9L-Regu"), (false, false));
+        assert_eq!(st("TACTGM+NimbusRomNo9L-Medi"), (true, false));
+        assert_eq!(st("NWBJZL+NimbusRomNo9L-MediItal"), (true, true));
+        assert_eq!(st("FCXRUF+NimbusRomNo9L-ReguItal"), (false, true));
+        assert_eq!(st("FQDHWA+NimbusRomNo9L-Regu-Slant_167"), (false, true));
+        assert_eq!(st("CMBX10"), (true, false));
+        assert_eq!(st("ABCDEF+CMBX12"), (true, false));
+        assert_eq!(st("CMTI10"), (false, true));
+        assert_eq!(st("CMBXTI10"), (true, true));
+        assert_eq!(st("CMR10"), (false, false));
+        assert_eq!(st("DKHBTQ+LMRoman12-Bold-Identity-H"), (true, false));
+        assert_eq!(st("AHCZZF+LMRoman10-Italic-Identity-H"), (false, true));
+        assert_eq!(st("Roboto-Medium"), (false, false));
+        assert_eq!(st("Roboto-Light"), (false, false));
+        assert_eq!(st("DS-Digital"), (false, false));
+        assert_eq!(st("Merriweather-LightIt"), (false, true));
+    }
 
     #[test]
     fn glyph_names() {

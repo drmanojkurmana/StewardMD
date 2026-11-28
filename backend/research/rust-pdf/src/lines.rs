@@ -4,6 +4,11 @@
 //! two-column ones included); a line ends when the baseline moves by more than
 //! half the font size; a space goes in at a visible gap; a line's size is the
 //! font size carrying most of its characters, rounded to 0.1.
+//!
+//! Each line also says how it looks, for finding headings: `bold` / `italic`
+//! when more than half of its visible characters are in a bold / italic font
+//! (or drawn with text render mode 2, "fake bold", for bold), and `caps` when
+//! it has at least two letters and none of them is lower case.
 
 use crate::interp::Char;
 use crate::words::py_isspace;
@@ -12,8 +17,20 @@ fn r1(v: f64) -> f64 {
     (v * 10.0).round() / 10.0
 }
 
+/// One line: text, font size and how it looks.
+#[derive(Debug, Clone, PartialEq)]
+pub struct Line {
+    pub tx: String,
+    pub size: f64,
+    pub bold: bool,
+    pub italic: bool,
+    pub caps: bool,
+}
+
 struct Cur {
     tx: String,
+    nbold: usize,
+    nitalic: usize,
     w: Vec<(f64, usize)>,
     key: f64,
     dir: (f64, f64),
@@ -22,7 +39,7 @@ struct Cur {
     size0: f64,
 }
 
-fn close(cur: &mut Option<Cur>, out: &mut Vec<(String, f64)>) {
+fn close(cur: &mut Option<Cur>, out: &mut Vec<Line>) {
     if let Some(c) = cur.take() {
         let mut best = 0.0;
         let mut bw: isize = -1;
@@ -33,12 +50,14 @@ fn close(cur: &mut Option<Cur>, out: &mut Vec<(String, f64)>) {
             }
         }
         if !c.tx.trim().is_empty() {
-            out.push((c.tx, best));
+            let letters = c.tx.chars().filter(|ch| ch.is_alphabetic()).count();
+            let caps = letters >= 2 && !c.tx.chars().any(|ch| ch.is_lowercase());
+            out.push(Line { bold: c.nbold * 2 > c.n, italic: c.nitalic * 2 > c.n, caps, tx: c.tx, size: best });
         }
     }
 }
 
-pub fn page_lines(chars: &[Char]) -> Vec<(String, f64)> {
+pub fn page_lines(chars: &[Char]) -> Vec<Line> {
     let mut out = Vec::new();
     let mut cur: Option<Cur> = None;
     for ch in chars {
@@ -60,7 +79,7 @@ pub fn page_lines(chars: &[Char]) -> Vec<(String, f64)> {
                     close(&mut cur, &mut out);
                 }
             }
-            let c = cur.get_or_insert_with(|| Cur { tx: String::new(), w: Vec::new(), key, dir, end: None, n: 0, size0: size });
+            let c = cur.get_or_insert_with(|| Cur { tx: String::new(), nbold: 0, nitalic: 0, w: Vec::new(), key, dir, end: None, n: 0, size0: size });
             if c.n > 0 {
                 if let Some(end) = c.end {
                     if pos > end + 1f64.max(size * 0.15) && !c.tx.ends_with(' ') {
@@ -70,6 +89,8 @@ pub fn page_lines(chars: &[Char]) -> Vec<(String, f64)> {
             }
             c.tx.push_str(text);
             c.n += 1;
+            c.nbold += ch.bold as usize;
+            c.nitalic += ch.italic as usize;
             c.key = key;
             c.dir = dir;
             match c.w.iter_mut().find(|(s, _)| *s == size) {
