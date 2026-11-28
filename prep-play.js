@@ -438,7 +438,7 @@
       H.row("v-boss", ic(IC.boss), "Boss battles", (beaten ? beaten + " beaten · " : "") + BOSS_N + " hard questions, " + BOSS_LIVES + " lives") +
       H.row("v-quick", ic(IC.bolt), "Quick fire", "One question, right now") +
       H.row("v-voice", ic(IC.voice), "Voice mode", "Hear the question, say the answer") +
-      H.row("v-focus", ic(IC.focus), "Focus room", focusOn() ? "In session: " + focusLeft() + " min left" : "A timed session with others studying now") +
+      (G.PREP_FOCUS ? H.row("v-focus", ic(IC.focus), "Focus", G.PREP_FOCUS.rowSub(H)) : H.row("v-focus", ic(IC.focus), "Focus room", focusOn() ? "In session: " + focusLeft() + " min left" : "A timed session with others studying now")) +
       H.row("v-wrap", ic(IC.wrap), "Wrapped", "Your month in cards, ready to share") +
       (arena ? H.row("v-season", ic(IC.season), "Season", "8-week league, Bronze to Diamond") : "") + "</div>";
   }
@@ -1198,6 +1198,8 @@
     if (a === "v-voicestart") return resumeVoice();
     if (a === "v-voicerepeat") return repeatVoice();
     if (a === "v-voicespeed") return cycleVoiceSpeed();
+    // Focus (prep-focus.js, flag smd_prep_focus) replaces the Focus room when it is on.
+    if (a === "v-focus" && G.PREP_FOCUS) return G.PREP_FOCUS.open(H);
     if (a === "v-focus") { P.focusN = null; return H.push(renderFocus); }
     if (a === "v-fstart") return startFocus(Number(v) || 25);
     if (a === "v-fend") return endFocus(false);
@@ -1226,10 +1228,10 @@
     if (kind === "quick") return quick();
     if (kind === "spot") return openSpot();
     if (kind === "feed") return feed();
-    if (kind === "focus") return H.push(renderFocus);
+    if (kind === "focus") return G.PREP_FOCUS ? G.PREP_FOCUS.open(H) : H.push(renderFocus);
   }
   // A focus session that outlives a closed PrepNucleus picks its heartbeat back up on the next open.
-  function bind(h) { H = h; if (focusOn() && !P.focusT) P.focusT = G.setInterval(focusTick, 60e3); }
+  function bind(h) { H = h; if (focusOn() && !P.focusT) P.focusT = G.setInterval(focusTick, 60e3); if (G.PREP_FOCUS) G.PREP_FOCUS.bind(h); }
 
   G.PREP_PLAY = { act: act, back: back, leave: leave, open: open, bind: bind, homeHtml: function (h) { bind(h); return homeHtml(h); }, freezeRow: freezeRow, mnHtml: mnHtml, noteAnswer: noteAnswer, _pure: PURE, _p: P };
 })(typeof window !== "undefined" ? window : this);

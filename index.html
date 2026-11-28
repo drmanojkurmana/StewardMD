@@ -2617,6 +2617,7 @@ window.openExternal = function (u) {
      Additive/flag-gated (smd_onboarding_tour, default ON; ?tour=0 disables). Loads after
      home.js + account.js so it can read the home DOM and the signed-in account. -->
 <script src="/onboarding.js?v=logo1003-guides1-demo1-energy1-bugs1-help1-font1-dd2-sb1" defer></script>
+<script src="/onboard-story.js?v=story1" defer></script>
 <!-- Global haptics (SMD_HAPTICS): tactile feedback on every interactive tap. Additive; uses
      @capacitor/haptics on iOS, SmdDevice system haptics on Android, no-op on web. Pref smd_haptics
      (default ON; ?haptics=0 disables). Loads after native-bridge so Capacitor.Plugins exists. -->
@@ -3423,7 +3424,7 @@ window.openExternal = function (u) {
 <!-- PrepNucleus: only the loader at boot; prep.css, specialty-core.js and prep.js load on first open (prep-loader.js).
      Flag smd_prep, default ON ("0" or ?prep=0 turns it off). -->
 <script src="/prep-startup.js?v=pnstart5" defer></script>
-<script src="/prep-loader.js?v=prep202" defer></script>
+<script src="/prep-loader.js?v=prep204" defer></script>
 <script src="/smd-speak.js?v=speak1" defer></script>
 <!-- Anaesthetica (Anaesthesia, code id narke): only the loader at boot; the engine and its files load on first open (narke-loader.js) -->
 <script src="/narke-loader.js?v=nrk13" defer></script>
