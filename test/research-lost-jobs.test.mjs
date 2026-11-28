@@ -14,7 +14,7 @@ let DatabaseSync = null;
 try { ({ DatabaseSync } = await import("node:sqlite")); } catch (e) {}
 const SKIP = DatabaseSync ? false : "node:sqlite unavailable";
 
-const { expireLostJobs, outstandingReserves, LOST_JOB_MS } =
+const { expireLostJobs, outstandingReserves, LOST_JOB_MS, DEVICE_LOST_JOB_MS } =
   await import("../functions/api/research/_credits.js");
 const { checkPoJobCaps } = await import("../functions/api/research/_caps.js");
 const { getJob, createJob } = await import("../functions/api/research/_jobs.js");
@@ -59,10 +59,10 @@ function seedProject(db, id, uid) {
     .run(id, uid || "u-alice", "Lost job project", now, now);
 }
 function seedJob(db, { id, projectId = "p1", kind = "pdf_extract", status = "queued",
-  createdTs, createdBy = "u-alice", errorCode = "" }) {
+  createdTs, createdBy = "u-alice", errorCode = "", outputJson = "{}" }) {
   db._db.prepare(
-    "INSERT INTO research_job_runs (id,project_id,kind,status,idempotency_key,input_r2_key,ceilings_json,error_code,created_by,created_ts) VALUES (?,?,?,?,?,?,?,?,?,?)")
-    .run(id, projectId, kind, status, "key-" + id, "", "{}", errorCode, createdBy, createdTs);
+    "INSERT INTO research_job_runs (id,project_id,kind,status,idempotency_key,input_r2_key,ceilings_json,output_json,error_code,created_by,created_ts) VALUES (?,?,?,?,?,?,?,?,?,?,?)")
+    .run(id, projectId, kind, status, "key-" + id, "", "{}", outputJson, errorCode, createdBy, createdTs);
 }
 function seedReserve(db, { id, ownerType = "user", ownerId = "em:alice@example.com",
   quote = 50000, jobId, ts }) {
@@ -246,4 +246,45 @@ test("the pdf job-create path expires a lost job before reserving", { skip: SKIP
   assert.equal(jobRow(db, "job_lost_old").error_code, "job_lost");
   assert.equal(releaseCount(db, "job_lost_old"), 1);
   assert.equal(body.job.status, "queued");
+});
+
+test("device job expires after 15-min inactivity as device_failed, releases reserve, and skips daily cap", { skip: SKIP }, async () => {
+  const now = Date.now();
+  const db = freshDb();
+  seedProject(db, "p1");
+  seedJob(db, {
+    id: "job_dev_stale",
+    kind: "manuscript_draft",
+    status: "running",
+    createdTs: now - DEVICE_LOST_JOB_MS - 60000,
+    outputJson: JSON.stringify({ runner: "device", heartbeatTs: now - DEVICE_LOST_JOB_MS - 1000 }),
+  });
+  seedJob(db, {
+    id: "job_dev_alive",
+    kind: "manuscript_draft",
+    status: "running",
+    createdTs: now - DEVICE_LOST_JOB_MS - 120000,
+    outputJson: JSON.stringify({ runner: "device", heartbeatTs: now - 60000 }),
+  });
+  seedReserve(db, { id: "crd_dev_stale", jobId: "job_dev_stale", quote: 120000, ts: now - DEVICE_LOST_JOB_MS - 60000 });
+  seedReserve(db, { id: "crd_dev_alive", jobId: "job_dev_alive", quote: 120000, ts: now - DEVICE_LOST_JOB_MS - 120000 });
+
+  const out = await expireLostJobs(db, uuidFactory(), now);
+  assert.equal(out.failedJobs, 1);
+  assert.equal(out.releasedMicroUsd, 120000);
+
+  const stale = jobRow(db, "job_dev_stale");
+  assert.equal(stale.status, "failed");
+  assert.equal(stale.error_code, "device_failed");
+  assert.equal(releaseCount(db, "job_dev_stale"), 1);
+
+  const alive = jobRow(db, "job_dev_alive");
+  assert.equal(alive.status, "running");
+  assert.equal(releaseCount(db, "job_dev_alive"), 0);
+  assert.equal(await outstandingReserves(db, "user", "em:alice@example.com"), 120000);
+
+  /* Even with 3 stale device_failed jobs today, daily cap (3/project) still allows another job. */
+  seedJob(db, { id: "job_dev_2", kind: "manuscript_draft", status: "failed", errorCode: "device_failed", createdTs: now - 1000 });
+  seedJob(db, { id: "job_dev_3", kind: "manuscript_draft", status: "failed", errorCode: "device_failed", createdTs: now - 2000 });
+  assert.equal(await checkPoJobCaps(db, "p1", "u-alice", now), null);
 });

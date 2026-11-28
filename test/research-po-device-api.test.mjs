@@ -430,3 +430,41 @@ test("0009 migration applies over 0001..0008, rolls back cleanly, and mirror is 
   const afterRb = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='research_job_steps'").get();
   assert.equal(afterRb, undefined, "research_job_steps dropped by 0009_rollback");
 });
+
+test("POST /v1/jobs/:jobId/heartbeat and /internal/llm renew device lease while settled/other users fail", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  const { p } = await setupSystematicReview(env);
+  const dev = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice", {
+    kind: "manuscript_draft", idempotencyKey: "dev-hb", runner: "device",
+  });
+  assert.equal(dev.http, 202);
+
+  /* Owner heartbeat succeeds and records heartbeatTs + lastHeartbeatTs. */
+  const hb1 = await call(env, "POST", "v1/jobs/" + dev.job.id + "/heartbeat", "tok-alice");
+  assert.equal(hb1.http, 200, JSON.stringify(hb1));
+  assert.equal(hb1.ok, true);
+  assert.ok(hb1.heartbeatTs > 0);
+  assert.equal(hb1.leaseMs, 15 * 60 * 1000);
+
+  /* Non-member gets 404. */
+  const outsider = await call(env, "POST", "v1/jobs/" + dev.job.id + "/heartbeat", "tok-bob");
+  assert.equal(outsider.http, 404);
+
+  /* Gateway call updates lastHeartbeatTs in output_json as well. */
+  geminiCalls = 0;
+  const gw = await llmCall(env, {
+    jobId: dev.job.id, projectId: p.id, userId: "u-alice",
+    tier: "T2", prompt: "Draft outline", stepId: "outline",
+  }, dev.token);
+  assert.equal(gw.http, 200);
+  const rowAfterGw = env.RESEARCH_DB._db.prepare("SELECT status, output_json FROM research_job_runs WHERE id=?").get(dev.job.id);
+  assert.equal(rowAfterGw.status, "running");
+  const parsedOut = JSON.parse(rowAfterGw.output_json || "{}");
+  assert.ok(parsedOut.lastHeartbeatTs >= hb1.heartbeatTs);
+
+  /* Settled job heartbeat rejects with 409 job_settled. */
+  await call(env, "POST", "v1/jobs/" + dev.job.id + "/device-fail", "tok-alice", { code: "device_failed", step: "outline" });
+  const hbSettled = await call(env, "POST", "v1/jobs/" + dev.job.id + "/heartbeat", "tok-alice");
+  assert.equal(hbSettled.http, 409);
+  assert.equal(hbSettled.error.code, "job_settled");
+});

@@ -35,7 +35,7 @@ import { dedupRecords, normaliseDoi } from "./_dedup.js";
  * reusing callGemini from ../ai/[[path]].js). The pilot routes below are
  * untouched; Phase 3 jobs live in research_job_runs (0003 header decision). */
 import { uploadPdf, createJob, getJob, cancelJob, quoteManuscriptJob,
-  refreshJobToken, submitDeviceResult, failDeviceJob, convertJobToCloud } from "./_jobs.js";
+  refreshJobToken, heartbeatDeviceJob, submitDeviceResult, failDeviceJob, convertJobToCloud } from "./_jobs.js";
 import { getCloudFallbackStatus, checkContainerHoursAlerts } from "./_cloud_fallback.js";
 import { jobCallback } from "./_callback.js";
 import { llmRoute, literatureSearchRoute, trialsStatusRoute, trialsSearchRoute, trialsLookupRoute } from "./_gateway.js";
@@ -2046,6 +2046,9 @@ export async function onRequest({ request, env, params }) {
   const p3Token = path.match(/^\/v1\/jobs\/([^/]+)\/token$/);
   if (p3Token && request.method === "POST")
     return refreshJobToken(p3Ctx, p3Token[1]);
+  const p3Heartbeat = path.match(/^\/v1\/jobs\/([^/]+)\/heartbeat$/);
+  if (p3Heartbeat && request.method === "POST")
+    return heartbeatDeviceJob(p3Ctx, p3Heartbeat[1]);
   const p3DevResult = path.match(/^\/v1\/jobs\/([^/]+)\/device-result$/);
   if (p3DevResult && request.method === "POST") {
     let body; try { body = await bodyJson(request); } catch { return err(400, "invalid_body", "Invalid device result payload", requestId); }

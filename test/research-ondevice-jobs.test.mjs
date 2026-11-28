@@ -3,6 +3,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
@@ -555,4 +556,46 @@ test("cancelled_to_device resets failCount so Try again retries on device and pr
   assert.equal(out2.ok, true);
   assert.equal(out2.source, "device");
   assert.equal(seenResume.pages[0].text, "saved");
+});
+
+test("hung draft AI wait hits draftAiWaitMs timeout and falls through to cloud notice after Retry 2", async () => {
+  const cp = makeMemoryCp();
+  const clock = makeFakeClock(0);
+  let devCalls = 0;
+  let needsCloudCount = 0;
+  const p = JOBS.runWithFallback(
+    "draft",
+    (ctx) => {
+      devCalls++;
+      ctx.beginAiWait();
+      return new Promise(() => {}); // hung gateway request that never resolves
+    },
+    async () => ({ cloudDone: true }),
+    {
+      checkpointStore: cp,
+      jobKey: "draft:hung-ai",
+      clock,
+      retryDelayMs: 10,
+      checkQuota: async () => ({ plan: "pro", allowance: 25, used: 0, remaining: 25 }),
+      onNeedsCloud: async () => { needsCloudCount++; return { action: "continue" }; },
+    }
+  );
+  await flushMicrotasks();
+  await clock.advance(JOBS.TIMEOUTS.draftAiWaitMs + 5);
+  await clock.advance(10);
+  await clock.advance(JOBS.TIMEOUTS.draftAiWaitMs + 5);
+  await clock.advance(10);
+  await clock.advance(JOBS.TIMEOUTS.draftAiWaitMs + 5);
+  const out = await p;
+  assert.equal(devCalls, 3);
+  assert.equal(needsCloudCount, 1);
+  assert.equal(out.ok, true);
+  assert.equal(out.source, "cloud");
+});
+
+test("defaultNeedsCloudPrompt overlays #researchMD (z-index > 10050)", () => {
+  const src = fs.readFileSync(new URL("../research-ondevice-jobs.js", import.meta.url), "utf8");
+  const m = src.match(/rmd-cloud-notice-backdrop[\s\S]*?z-index:(\d+)/);
+  assert.ok(m, "defaultNeedsCloudPrompt has z-index");
+  assert.ok(Number(m[1]) > 10050, "cloud notice z-index must be above #researchMD (10050)");
 });

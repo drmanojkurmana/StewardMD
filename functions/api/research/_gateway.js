@@ -214,12 +214,14 @@ export async function llmRoute(ctx) {
       }, 200, { "x-request-id": requestId });
     }
   }
-  if (job.status === "queued") {
+  if (job.status === "queued" || job.status === "running") {
     try {
-      const outJson = JSON.parse(job.output_json || "{}");
+      const outJson = JSON.parse(job.output_json || "{}") || {};
       if (outJson && outJson.runner === "device") {
-        await db.prepare("UPDATE research_job_runs SET status='running', started_ts=COALESCE(started_ts, ?) WHERE id=? AND status='queued'")
-          .bind(Date.now(), job.id).run();
+        const beatNow = Date.now();
+        const nextOut = Object.assign({}, outJson, { heartbeatTs: beatNow, lastHeartbeatTs: beatNow });
+        await db.prepare("UPDATE research_job_runs SET status='running', started_ts=COALESCE(started_ts, ?), output_json=? WHERE id=? AND status IN ('queued','running')")
+          .bind(beatNow, JSON.stringify(nextOut), job.id).run();
       }
     } catch {}
   }
