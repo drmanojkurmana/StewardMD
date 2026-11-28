@@ -1475,8 +1475,13 @@
 
       // 1. Ask MaiK Section
       h.push('<div id="rmd-maik-consent-panel" class="rmd-card-sub"' + (editing ? ' style="display:none;"' : "") + ">");
+      var pcIsFree = !!(proj && proj.tutorial);
+      var pcCostTxt = pcIsFree
+        ? "No MaiK tokens needed"
+        : ((SMD.pricing && SMD.pricing.quoteText) ? SMD.pricing.quoteText("publication_consent") : "Checking live server estimate...");
       h.push("<h4>Ask MaiK to draft consent</h4>");
-      h.push('<p class="rmd-ai-cost">' + ((proj && proj.tutorial) ? 'No MaiK tokens needed' : 'Costs about 2 MaiK tokens') + '</p>');
+      h.push('<p class="rmd-ai-cost" data-rmd-cost-task="publication_consent" data-rmd-cost-free="' + (pcIsFree ? "1" : "0") + '">' + esc(pcCostTxt) + '</p>');
+      if (!pcIsFree && SMD.pricing && SMD.pricing.ensureLoaded) SMD.pricing.ensureLoaded();
       h.push('<div><label class="rmd-pc-field-label" for="rmd-maik-lang">Language:</label>');
       h.push('<select id="rmd-maik-lang" class="rmd-select">' + langOptionsHtml(initLangCode) + "</select></div>");
 
@@ -1873,7 +1878,9 @@
               maikEngEd.setHtml(toEditorHtml(engRaw));
             }
             if (statusEl) {
-              statusEl.innerHTML = '<span class="rmd-pc-status-info">Draft loaded below. Review or format it, then tap Save consent.</span>';
+              var pcChg = (SMD.pricing && SMD.pricing.chargeMtFromResponse) ? SMD.pricing.chargeMtFromResponse(resp.data) : null;
+              var pcChgStr = (pcChg != null && SMD.pricing && SMD.pricing.formatMt) ? (" Charged: " + SMD.pricing.formatMt(pcChg) + ".") : "";
+              statusEl.innerHTML = '<span class="rmd-pc-status-info">Draft loaded below. Review or format it, then tap Save consent.' + esc(pcChgStr) + '</span>';
             }
           } else {
             var msg = (resp.data && resp.data.error && resp.data.error.message) || "Failed to generate consent.";

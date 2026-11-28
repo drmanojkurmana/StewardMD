@@ -363,6 +363,7 @@
       if (mySeq !== seq || st.projectId !== targetPid || st.studyId !== targetSid) return;
       st.ai.busy = false;
       st.ai.statusText = "";
+      if (SMD.pricing && SMD.pricing.recordCharge) SMD.pricing.recordCharge(st.ai, res);
       if (res && res.extraction) {
         st.extraction = res.extraction;
         syncForm();
@@ -1131,8 +1132,15 @@
     if (noPdf) {
       h += '<p class="rmd-ai-cost">Attach the study PDF on the Page tab first to let MaiK draft from it.</p>';
     } else {
-      h += '<p class="rmd-ai-cost">Costs about 2 MaiK tokens</p>';
+      var exChars = 0;
+      if (st.result && Array.isArray(st.result.pages)) {
+        for (var px = 0; px < st.result.pages.length; px++) exChars += String((st.result.pages[px] && st.result.pages[px].text) || "").length;
+      }
+      var quoteTxt = (SMD.pricing && SMD.pricing.quoteText) ? SMD.pricing.quoteText("extraction_suggestion", { inputLength: exChars }) : "Checking live server estimate...";
+      h += '<p class="rmd-ai-cost" data-rmd-cost-task="extraction_suggestion" data-rmd-cost-chars="' + esc(String(Math.round(exChars))) + '">' + esc(quoteTxt) + '</p>';
+      if (SMD.pricing && SMD.pricing.fetchQuote && exChars > 0) SMD.pricing.fetchQuote("extraction_suggestion", exChars);
     }
+    if (SMD.pricing && SMD.pricing.chargedHtml) h += SMD.pricing.chargedHtml(ai);
     if (ai.busy) {
       h += '<progress aria-label="' + esc(ai.statusText || "MaiK is reading the paper") + '" style="width:100%;height:6px"></progress>';
       h += '<p class="rmd-ai-progress" role="status" aria-live="polite">' + esc(ai.statusText || "MaiK is reading the paper") + '&#8230;</p>';
@@ -1331,6 +1339,7 @@
     }
     h.push('</div>');
     container.innerHTML = h.join("\n");
+    if (st.artifactId && SMD.pricing && SMD.pricing.ensureLoaded) SMD.pricing.ensureLoaded();
     bind(container, canEdit);
   }
 

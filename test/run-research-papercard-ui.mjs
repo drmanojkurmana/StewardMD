@@ -548,7 +548,8 @@ try {
   })()`);
   ok(await until(`/Unstructured pilot study/.test(document.querySelector('.rmd-papercard-title').innerText)`, 5000), 'unstructured card loaded');
   ok(await ev(`!!document.querySelector('[data-rmd="explain-study"]')`), 'Explain button shown for unstructured card');
-  ok(/Explain with MaiK \(costs about 1 MaiK token\)/.test(await text('[data-rmd="explain-study"]')), 'explain button text correct');
+  ok(/^Explain with MaiK$/.test((await text('[data-rmd="explain-study"]')).trim()), 'explain button text has no hardcoded price');
+  ok(await ev(`!!document.querySelector('[data-rmd-cost-task="paper_card_explain"]')`), 'explain button carries a server-backed cost line');
 
   // Click Explain with MaiK and verify PICO lines render
   await click('[data-rmd="explain-study"]');

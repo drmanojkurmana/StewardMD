@@ -39,7 +39,7 @@ import { uploadPdf, createJob, getJob, cancelJob, quoteManuscriptJob,
 import { getCloudFallbackStatus, checkContainerHoursAlerts } from "./_cloud_fallback.js";
 import { jobCallback } from "./_callback.js";
 import { llmRoute, literatureSearchRoute, trialsStatusRoute, trialsSearchRoute, trialsLookupRoute } from "./_gateway.js";
-import { adminInstitutionRoute, creditsView } from "./_credits.js";
+import { adminInstitutionRoute, creditsView, aiQuoteView } from "./_credits.js";
 /* Phase 3.4/3.5/3.6/3.8 + Phase 4.3 (docs/research/contracts/phase-3 and
  * phase-4/grade.md): extraction (_extraction.js), T1 suggestions (_suggest.js),
  * risk of bias (_rob.js), study-level data import (_data.js) and GRADE
@@ -2077,6 +2077,7 @@ export async function onRequest({ request, env, params }) {
     }, 200, { "x-request-id": requestId });
   }
   if (path === "/v1/credits" && request.method === "GET") return creditsView(p3Ctx);
+  if (path === "/v1/ai-quote" && request.method === "GET") return aiQuoteView(p3Ctx);
 
   /* ---- Phase 3.4/3.5/3.6/3.8 + Phase 4.3 routes (Firebase auth above; each
    * module enforces the project role and answers 404 to an outsider). ---- */

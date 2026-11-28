@@ -90,6 +90,7 @@
 import { runUserAi, extractJson, parsePhiOverrideRequest, evaluatePhiOverride } from "./_suggest.js";
 import { scan, scanAndMaskThesis } from "./_phi.js";
 import { checklistItems } from "./_checklists.js";
+import { inrToMt } from "./_credits.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const TOKENS_MESSAGE = "You need more MaiK tokens";
@@ -197,8 +198,9 @@ async function storeDraft(ctx, projectId, task, draft, model, costInr) {
   await api.audit(db, projectId, uid, "ai_draft_stored", id, { task, status: "unverified" });
   return stored;
 }
-function respond(ctx, stored, model, costInr) {
-  return ctx.api.json({ draft: stored, model: model || "", costInr: roundInr(costInr) }, 200, { "x-request-id": ctx.requestId });
+function respond(ctx, stored, model, costInr, costMt) {
+  const mt = costMt != null ? Math.max(0, Math.round(Number(costMt) || 0)) : inrToMt(costInr);
+  return ctx.api.json({ draft: stored, model: model || "", costInr: roundInr(costInr), costMt: mt }, 200, { "x-request-id": ctx.requestId });
 }
 
 async function loadProjectBits(db, projectId) {
@@ -1205,6 +1207,7 @@ async function thesisTask(ctx, projectId, input) {
     "Keep the author's wording where you can. Stay within the word budget. No em-dash characters.";
   let model = "";
   let costInr = 0;
+  let costMt = 0;
   const drafted = [];
   const modelRefs = [];
   for (const section of sections) {
@@ -1220,6 +1223,7 @@ async function thesisTask(ctx, projectId, input) {
         if (subOut.error) return subOut.error;
         model = subOut.model || model;
         costInr += subOut.costInr || 0;
+        costMt += subOut.costMt != null ? subOut.costMt : inrToMt(subOut.costInr || 0);
         const noteTxt = sectionText(subOut.text);
         if (noteTxt) notes.push(noteTxt);
       }
@@ -1236,6 +1240,7 @@ async function thesisTask(ctx, projectId, input) {
     if (out.error) return out.error;
     model = out.model || model;
     costInr += out.costInr || 0;
+    costMt += out.costMt != null ? out.costMt : inrToMt(out.costInr || 0);
     const parsed = extractJson(out.text);
     if (parsed && typeof parsed === "object" && !Array.isArray(parsed) && Array.isArray(parsed.references))
       modelRefs.push(...parsed.references);
@@ -1285,7 +1290,7 @@ async function thesisTask(ctx, projectId, input) {
     references: thesisReferences(maskedFull, modelRefs),
   };
   const stored = await storeDraft(ctx, projectId, "thesis_to_paper", draft, model, roundInr(costInr));
-  return respond(ctx, stored, model, costInr);
+  return respond(ctx, stored, model, costInr, costMt);
 }
 
 function studySnippets(bits, input) {
@@ -1480,7 +1485,7 @@ async function polishTask(ctx, projectId, input, extraOpts) {
     spelling,
   };
   const stored = await storeDraft(ctx, projectId, "polish", draft, out.model, out.costInr || 0);
-  return respond(ctx, stored, out.model, out.costInr || 0);
+  return respond(ctx, stored, out.model, out.costInr || 0, out.costMt);
 }
 
 function tokenList(run) {
@@ -1595,7 +1600,7 @@ export async function aiDraft(ctx, projectId, body) {
     const draft = robDraft(extractJson(out.text), studies);
     if (!draft) return err(422, "invalid_draft", "MaiK did not return a Risk of Bias 2 (RoB 2) draft that could be checked.", requestId);
     const stored = await storeDraft(ctx, projectId, task, draft, out.model, out.costInr || 0);
-    return respond(ctx, stored, out.model, out.costInr || 0);
+    return respond(ctx, stored, out.model, out.costInr || 0, out.costMt);
   } else if (task === "checklist") {
     const guide = checklistItems(input.guidelineId || input.guideline || "strobe");
     if (!guide) return err(400, "invalid_body", "Unknown checklist. Use CARE, SPIRIT, PRISMA, STROBE or CONSORT.", requestId);
@@ -1614,7 +1619,7 @@ export async function aiDraft(ctx, projectId, body) {
     const draft = checklistDraft(extractJson(out.text), guide, headings);
     if (!draft) return err(422, "invalid_draft", "MaiK did not return a checklist draft that could be checked.", requestId);
     const stored = await storeDraft(ctx, projectId, task, draft, out.model, out.costInr || 0);
-    return respond(ctx, stored, out.model, out.costInr || 0);
+    return respond(ctx, stored, out.model, out.costInr || 0, out.costMt);
   } else if (task === "title_abstract") {
     const tokens = tokenList(bits.run);
     system = "You draft a paper title and a structured abstract. Return ONLY JSON {title, abstract:{background, methods, results, conclusions}}. " +
@@ -1760,6 +1765,7 @@ export async function aiDraft(ctx, projectId, body) {
   const out = await oneCall(ctx, projectId, task, system, prompt, overrideArgs);
   if (out.error) return out.error;
   let totalCostInr = out.costInr || 0;
+  let totalCostMt = out.costMt != null ? out.costMt : inrToMt(totalCostInr);
   let usedModel = out.model;
   const parsed = extractJson(out.text);
   let draft = null;
@@ -1775,6 +1781,7 @@ export async function aiDraft(ctx, projectId, body) {
       const retryOut = await oneCall(ctx, projectId, task, system, repairPrompt, overrideArgs);
       if (retryOut.error) return retryOut.error;
       totalCostInr += retryOut.costInr || 0;
+      totalCostMt += retryOut.costMt != null ? retryOut.costMt : inrToMt(retryOut.costInr || 0);
       usedModel = retryOut.model || usedModel;
       draft = ctriDraft(extractJson(retryOut.text));
     }
@@ -1807,5 +1814,5 @@ export async function aiDraft(ctx, projectId, body) {
   }
   if (!draft) return err(422, "invalid_draft", "MaiK did not return a draft that matched the required fields.", requestId);
   const stored = await storeDraft(ctx, projectId, task, draft, usedModel, totalCostInr);
-  return respond(ctx, stored, usedModel, totalCostInr);
+  return respond(ctx, stored, usedModel, totalCostInr, totalCostMt);
 }

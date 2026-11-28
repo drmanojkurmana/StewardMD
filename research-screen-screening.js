@@ -350,7 +350,7 @@
         h.push('</div>');
       } else {
         if (!st.ai) st.ai = SMD.ai.state();
-        h.push(SMD.ai.barHtml(st.ai, { task: "screening", label: "screening suggestion", cost: 2 }));
+        h.push(SMD.ai.barHtml(st.ai, { task: "screening", label: "screening suggestion" }));
         if (st.suggestion) h.push(suggestionHtml());
         h.push('<div class="rmd-vote-bar">');
         h.push('<button type="button" class="rmd-vote-btn rmd-vote-include" data-rmd-vote="include"' + (st.busy ? " disabled" : "") + '>Include</button>');
@@ -557,7 +557,7 @@
 
     if (st.ai) {
       SMD.ai.bind(container, st.ai, {
-        pid: project.id, task: "screening", label: "screening suggestion", cost: 2,
+        pid: project.id, task: "screening", label: "screening suggestion",
         request: function () {
           var it = currentItem();
           var rid = (it && it.record && it.record.id) || (it && it.id) || "";

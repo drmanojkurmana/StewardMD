@@ -208,7 +208,65 @@ test("verifyKeywordsMesh, prefillChecklist, runFormatCheck, estimateAutoCost", a
 
   const cost = TA.estimateAutoCost([{ n: 1, text: "Short thesis under limit." }], {}, { wordLimit: 3000 });
   assert.equal(cost.aiCalls, 1);
-  assert.equal(cost.estimatedMaikTokens, Math.round(0.06 * TA.MT_PER_INR));
+  assert.ok(cost.minMaikTokens > 0 && cost.maxMaikTokens > cost.minMaikTokens);
+  assert.ok(cost.estimatedMaikTokens >= cost.minMaikTokens && cost.estimatedMaikTokens <= cost.maxMaikTokens);
+  assert.notEqual(cost.minMaikTokens, 120, "the old flat 0.06 INR quote (120 MT) is not used");
+});
+
+test("estimateAutoCost calibrates a 341-page thesis to a range that contains the live run", () => {
+  const total = 555148;
+  /* A real 341-page thesis maps only the IMRaD chapters into the paper; the
+   * literature review, appendices and bibliography are excluded. The live run
+   * used 18 calls, so about 200k of the 555k characters reached the sections. */
+  const mk = (n, chars) => [{ n: n, text: "x".repeat(chars) }];
+  const mapping = {
+    bySection: {
+      introduction: { pages: mk(1, 35000) },
+      methods: { pages: mk(2, 40000) },
+      results: { pages: mk(3, 70000) },
+      discussion: { pages: mk(4, 45000) },
+      conclusion: { pages: mk(5, 10000) }
+    }
+  };
+  const est = TA.estimateAutoCost([{ n: 1, text: "x".repeat(total) }], mapping, { wordLimit: 3500, abstractLimit: 250 });
+  assert.ok(est.aiCalls >= 10, "a 341-page thesis is many AI calls");
+  assert.ok(est.minMaikTokens <= 5860 && est.maxMaikTokens >= 5860,
+    "the quote contains the live 5,860 MT charge, not 2,040 MT: " + est.minMaikTokens + " to " + est.maxMaikTokens);
+  assert.ok(est.maxCostInr < 20, "upper bound stays a sane multiple of the real charge");
+});
+
+test("buildTableGrids rebuilds wrapped headers and columns from Rust word positions", () => {
+  const word = (t, x, y) => ({ t: t, x0: x, y0: y, x1: x + t.length * 5.2, y1: y + 10 });
+  const words = [];
+  const add = (y, arr) => { for (const it of arr) words.push(word(it[0], it[1], y)); };
+  add(100, [["Table", 113], ["1", 140], ["Baseline", 156], ["demographics", 194]]);
+  add(120, [["All", 250], ["participants", 266], ["Completed", 340], ["Did", 430], ["not", 449], ["complete", 464], ["p", 520]]);
+  add(130, [["PROMS", 340], ["PROMS", 430]]);
+  add(140, [["n", 250], ["=", 258], ["313", 266], ["n", 340], ["=272", 348], ["n", 430], ["=", 439], ["41", 447]]);
+  add(160, [["Age-", 125], ["yr", 148], ["77.1", 251], ["[70.6,", 273], ["83.4]", 301], ["76.0", 341], ["[69.8,", 363], ["82.4]", 391], ["84.2", 431], ["[79.1,", 453], ["87.8]", 482], ["<", 522], ["0.001", 531]]);
+  add(180, [["Systolic", 125], ["blood", 160], ["pressure-", 185], ["134", 251], ["[117,", 270], ["155]", 296], ["134", 341], ["[118,", 360], ["155]", 386], ["129", 431], ["[112,", 451], ["154]", 476], ["0.370", 522]]);
+  add(190, [["mmHg", 125]]);
+  const grids = TA.buildTableGrids([{ n: 77, width: 595, text: "Table 1: Baseline demographics\nAll participants Completed Did not complete p\nPROMS\nSystolic blood pressure-\nmmHg", words: words }]);
+  assert.equal(grids.length, 1);
+  const g = grids[0];
+  assert.equal(g.page, 77);
+  assert.match(g.headers[2], /Completed PROMS/);
+  assert.equal(g.headers[4], "p");
+  assert.equal(g.rows[0][0], "Age- yr");
+  assert.equal(g.rows[0][1], "77.1 [70.6, 83.4]");
+  assert.equal(g.rows[1][0], "Systolic blood pressure- mmHg");
+  assert.equal(g.rows[1][1], "134 [117, 155]");
+  assert.equal(g.rows[1][4], "0.370");
+});
+
+test("condenseTables uses the rebuilt grid instead of the broken text lines", () => {
+  const pages = [{ n: 77, text: "Table 1: Baseline demographics\nAll participants Completed\nPROMS\nDid not complete\nPROMS\np\nAge- yr 77.1 [70.6, 83.4] 76.0 [69.8, 82.4]\n" }];
+  const grids = [{ id: "Table 1", page: 77, headers: ["", "All participants", "Completed PROMS", "p"], rows: [["Age- yr", "77.1 [70.6, 83.4]", "76.0 [69.8, 82.4]", "< 0.001"]] }];
+  const out = TA.condenseTables([{ id: "Table 1", page: 77, caption: "Table 1: Baseline demographics" }], pages, { maxTables: 2 }, [], grids);
+  assert.equal(out.kept.length, 1);
+  assert.deepEqual(out.kept[0].content.headers, ["", "All participants", "Completed PROMS", "p"]);
+  assert.equal(out.kept[0].content.rows[0][0], "Age- yr");
+  assert.equal(out.kept[0].content.rows[0][1], "77.1 [70.6, 83.4]");
 });
 
 test("buildSubmissionPackageFiles emits valid docx, PDF checklist, RIS, and ZIP bundle", () => {

@@ -267,7 +267,7 @@
     }
   }
 
-  function renderPicoHtml(ai) {
+  function renderPicoHtml(ai, costMt) {
     if (!ai) return "";
     var h = [];
     h.push('<div class="rmd-ai-pico-box">');
@@ -292,6 +292,9 @@
     }
     if (ai.conclusion) {
       h.push('  <div class="rmd-pico-line"><strong>Conclusion:</strong> <span>' + esc(ai.conclusion) + '</span></div>');
+    }
+    if (costMt != null && SMD.pricing && SMD.pricing.formatMt) {
+      h.push('  <div class="rmd-ai-charged" role="status">Charged: ' + esc(SMD.pricing.formatMt(costMt)) + (costMt === 0 ? " (cached)" : "") + '</div>');
     }
     h.push('</div>');
     return h.join("\n");
@@ -597,12 +600,17 @@
     if ((needsExplain && !isViewer) || card.ai) {
       h.push('  <div class="rmd-papercard-explain-box" id="rmdPaperCardExplainBox">');
       if (card.ai) {
-        h.push(renderPicoHtml(card.ai));
+        h.push(renderPicoHtml(card.ai, card._explainCostMt));
       } else {
+        var explainCostTxt = (SMD.pricing && SMD.pricing.quoteText)
+          ? SMD.pricing.quoteText("paper_card_explain", { free: !!(project && project.tutorial) })
+          : "Checking live server estimate...";
         h.push('    <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="explain-study">');
         h.push('      <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>');
-        h.push('      <span>Explain with MaiK (costs about 1 MaiK token)</span>');
+        h.push('      <span>Explain with MaiK</span>');
         h.push('    </button>');
+        h.push('    <p class="rmd-ai-cost" data-rmd-cost-task="paper_card_explain" data-rmd-cost-free="' + ((project && project.tutorial) ? "1" : "0") + '" style="margin-top:6px;">' + esc(explainCostTxt) + '</p>');
+        if (!(project && project.tutorial) && SMD.pricing && SMD.pricing.ensureLoaded) SMD.pricing.ensureLoaded();
       }
       h.push('  </div>');
     }
@@ -747,8 +755,9 @@
               return;
             }
             card.ai = ai;
+            card._explainCostMt = (SMD.pricing && SMD.pricing.chargeMtFromResponse) ? SMD.pricing.chargeMtFromResponse(data) : null;
             currentCard = card;
-            explainBox.innerHTML = renderPicoHtml(ai);
+            explainBox.innerHTML = renderPicoHtml(ai, card._explainCostMt);
           })
           .catch(function (err) {
             if (settled) return;

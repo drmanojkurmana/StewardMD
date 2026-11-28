@@ -357,7 +357,7 @@
     if (a && a.outcome === "conflict") h.push('<div class="rmd-banner rmd-banner-warn">A conflict is open. Resolve it by consensus on the Summary pane.</div>');
     if (canAssess && (!a || !a.self || !a.self.submitted || a.outcome === "conflict")) {
       if (!st.ai) st.ai = SMD.ai.state();
-      h.push(SMD.ai.barHtml(st.ai, { task: "rob", label: "risk of bias assessment", cost: 2 }));
+      h.push(SMD.ai.barHtml(st.ai, { task: "rob", label: "risk of bias assessment", inputLength: (studySourceText() || "").length }));
       for (var d = 0; d < def.domains.length; d++) h.push(domainFormHtml(def.domains[d]));
       h.push('<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-block" data-rmd="rob-submit"' + (st.busy ? " disabled" : "") + '>Submit assessment</button>');
       h.push('<p class="rmd-muted">Your assessment is independent. The other assessor cannot see it until you both submit.</p>');
@@ -416,7 +416,7 @@
 
     if (st.ai) {
       SMD.ai.bind(container, st.ai, {
-        pid: st.projectId, task: "rob", label: "risk of bias assessment", cost: 2,
+        pid: st.projectId, task: "rob", label: "risk of bias assessment", inputLength: (studySourceText() || "").length,
         input: function () {
           var s = currentStudy() || {};
           var def = toolDef();
