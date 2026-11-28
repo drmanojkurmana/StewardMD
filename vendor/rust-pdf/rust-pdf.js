@@ -4,7 +4,7 @@
  * table for table, so the phone and the server give the same result. It does not draw pages or read scans:
  * pdf.js and the phone's own OCR still do that.
  *   SMD_RUST_PDF.extract(u8, { maxPages, maxBytes }) -> Promise(extract.py result, or null)
- *   SMD_RUST_PDF.lines(u8, [pageNumbers], { maxBytes }) -> Promise({ pages: [{ n, lines: [{ tx, size }] }], total }, or null)
+ *   SMD_RUST_PDF.lines(u8, [pageNumbers], { maxBytes }) -> Promise({ pages: [{ n, lines: [{ tx, size, bold }] }], total }, or null)
  * null means "use the old reader": the reader is off, failed to load, or met a PDF feature it does not copy.
  * Kill switch: localStorage smd_rust_pdf = "0" (or ?rust_pdf=0) turns it off on this device.
  * Nothing here sends anything anywhere. No em or en dashes. */
