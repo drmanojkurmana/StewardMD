@@ -96,3 +96,19 @@ test("timeline places today's sessions and the live one", () => {
   assert.ok(Math.abs(tl[0].a - 9 / 24) < 1e-9); assert.ok(Math.abs(tl[0].b - 10 / 24) < 1e-9);
   assert.equal(tl[1].live, true);
 });
+
+test("schedules: labels, validity and the one on now", () => {
+  assert.equal(F.schLabel({ from: "06:00", to: "08:00", days: [5, 1, 2, 3, 4] }), "6:00 to 8:00 AM, weekdays");
+  assert.equal(F.schLabel({ from: "11:30", to: "13:00", days: [6, 0] }), "11:30 AM to 1:00 PM, weekends");
+  assert.equal(F.schLabel({ from: "19:00", to: "21:00", days: [1, 3] }), "7:00 to 9:00 PM, Mon, Wed");
+  assert.equal(F.schValid({ from: "09:00", to: "09:10", days: [1] }), false, "under 15 minutes");
+  assert.equal(F.schValid({ from: "22:00", to: "01:00", days: [1] }), false, "no window across midnight");
+  assert.equal(F.schValid({ from: "09:00", to: "10:00", days: [] }), false, "needs a day");
+  assert.equal(F.schValid({ from: "9:00", to: "10:00", days: [2] }), true);
+  const sat = new Date(2026, 10, 28, 7, 0).getTime(), mon = new Date(2026, 10, 30, 7, 0).getTime();
+  const list = [{ id: "m", from: "06:00", to: "08:00", days: [1, 2, 3, 4, 5] }];
+  assert.equal(F.schActive(list, sat), null, "weekday schedule is off on Saturday");
+  assert.equal(F.schActive(list, mon).id, "m");
+  assert.equal(F.schActive([{ ...list[0], on: false }], mon), null, "switched off");
+  assert.equal(F.schActive(list, new Date(2026, 10, 30, 8, 0).getTime()), null, "the end minute is outside");
+});

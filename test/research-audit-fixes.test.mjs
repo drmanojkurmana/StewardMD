@@ -227,7 +227,7 @@ test("research-screen-run places exports below forest plot, supports PNG downloa
   assert.match(shell, /isShareCancel/);
 });
 
-test("ResearchMD overlays render above shell and cost copy uses Costs about", () => {
+test("ResearchMD overlays render above shell and cost copy comes from server pricing", () => {
   const man = read("research-screen-manuscript.js");
   assert.match(man, /modal\.className\s*=\s*["']rmd-modal-backdrop/);
   assert.match(man, /box\.className\s*=\s*["']rmd-modal-card rmd-modal-wide["']/);
@@ -240,19 +240,20 @@ test("ResearchMD overlays render above shell and cost copy uses Costs about", ()
   assert.doesNotMatch(thesis, /\.rmd-thesis-pop\s*\{[^}]*z-index:\s*9999/);
 
   const shell = read("research.js");
-  assert.match(shell, /Costs about\s*["']\s*\+\s*cost/);
-  assert.doesNotMatch(shell, /About\s*["']\s*\+\s*cost/);
+  assert.match(shell, /function quoteTextFor/);
+  assert.match(shell, /data-rmd-cost-task/);
+  assert.doesNotMatch(shell, /Costs about\s*["']\s*\+\s*cost/);
   assert.match(shell, /No MaiK tokens needed/);
 
   const doc = read("research-doc-editor.js");
-  assert.match(doc, /Costs about 2 MaiK tokens/);
-  assert.doesNotMatch(doc, /About 2 MaiK tokens/);
+  assert.doesNotMatch(doc, /Costs about 2 MaiK tokens/);
+  assert.match(doc, /SMD\.pricing\.quoteText/);
 
   const ext = read("research-screen-extract.js");
-  assert.match(ext, /Costs about 2 MaiK tokens/);
-  assert.doesNotMatch(ext, /About 2 MaiK tokens/);
+  assert.doesNotMatch(ext, /Costs about 2 MaiK tokens/);
+  assert.match(ext, /data-rmd-cost-task="extraction_suggestion"/);
 
   const pc = read("research-screen-papercard.js");
-  assert.match(pc, /Explain with MaiK \(costs about 1 MaiK token\)/);
-  assert.doesNotMatch(pc, /Explain with MaiK \(about 1 MaiK token\)/);
+  assert.doesNotMatch(pc, /Explain with MaiK \(costs about 1 MaiK token\)/);
+  assert.match(pc, /data-rmd-cost-task="paper_card_explain"/);
 });

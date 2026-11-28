@@ -842,6 +842,8 @@ export async function autoAddStudies(ctx, projectId, body) {
   if (!measure) return err(400, "invalid_body", "measure must be RR, OR, HR, MD or SMD", requestId);
   const words = outcomeWords(outcome);
   const results = [];
+  let totalCostInr = 0;
+  let totalCostMt = 0;
   for (const item of items) {
     if (!item || typeof item !== "object" || Array.isArray(item)) {
       results.push(failedItem("Each item needs a PMID (PubMed identifier) or a DOI (digital object identifier)."));
@@ -923,6 +925,8 @@ export async function autoAddStudies(ctx, projectId, body) {
       }
       parsed = aiRowOk(extractJson(out.text), measure, kept);
       method = "ai";
+      totalCostInr += Number(out.costInr) || 0;
+      totalCostMt += Number(out.costMt) || 0;
       if (!parsed) {
         results.push(needsPdf());
         continue;
@@ -942,5 +946,5 @@ export async function autoAddStudies(ctx, projectId, body) {
       await writeCache(db, api, uid, projectId, loadedKey, loaded.pmid, loaded.doi, outcome, measure, cacheValue);
     results.push(filled);
   }
-  return json({ results }, 200, { "x-request-id": requestId });
+  return json({ results, costInr: Math.round(totalCostInr * 100) / 100, costMt: Math.round(totalCostMt) }, 200, { "x-request-id": requestId });
 }

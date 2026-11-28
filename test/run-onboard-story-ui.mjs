@@ -79,8 +79,12 @@ try {
   const line = () => text("#smdStory .ss-text .ss-l");
   const drawn = () => ev(`var c=document.querySelector("#smdStory canvas"); if(!c) return 0; var d=c.getContext("2d").getImageData(0,0,c.width,c.height).data, n=0; for (var i=3;i<d.length;i+=64) if (d[i]>0) n++; return n;`);
   // Tap the empty middle (advances a timed scene).
-  const tapOn = () => ev(`document.querySelector("#smdStory .ss-fill").click(); return 1;`);
+  // A quick tap on the right side (next) or the left side (back), as pointer events.
+  const tapAt = (fx) => ev(`var el=document.getElementById("smdStory"), x=innerWidth*${fx}, y=innerHeight*0.55; ["pointerdown","pointerup"].forEach(function(t){ el.dispatchEvent(new PointerEvent(t,{bubbles:true,clientX:x,clientY:y,pointerId:1,pointerType:"touch"})); }); return 1;`);
+  const tapOn = () => tapAt(0.8);
   await ev(`localStorage.setItem("smd_onboard_story","1"); ["clinician","prep"].forEach(function(t){localStorage.removeItem("smd_story_seen_"+t);}); return 1;`);
+  // Record haptics instead of firing them.
+  await ev(`window.__h=[]; window.SMD_HAPTICS={}; ["tap","light","medium","heavy","selection","success","warning","error"].forEach(function(k){ SMD_HAPTICS[k]=function(){ __h.push(k); }; }); return 1;`);
   ok(await ev(`return !!window.SMD_STORY && SMD_STORY.enabled() && !SMD_STORY.seen("clinician");`) === true, "onboard-story.js loads at boot; flag on; not seen");
 
   // Clinician track.
@@ -91,18 +95,40 @@ try {
   ok((await drawn()) > 200, "the canvas draws the ward (" + await drawn() + " samples lit)");
   await shot("c1-ward");
   ok(await ev(`return !document.querySelector("#smdStory .ss-skip.on");`) === true, "Skip is hidden in the first 3 s");
+  ok(await ev(`return document.querySelectorAll("#smdStory .ss-bars i").length === 10 && !!document.querySelector("#smdStory .ss-bars i.now.wait");`) === true, "10 progress bars; a question waits (no timer)");
+  ok(await ev(`return document.querySelectorAll("#smdStory .ss-l .ss-w").length >= 8 && !!document.querySelector("#smdStory .ss-text.ss-in");`) === true, "words are wrapped and rise in");
+  // The finger in the field: a sweep gives light ticks.
+  await ev(`__h.length=0; var el=document.getElementById("smdStory"), y=innerHeight*0.55; el.dispatchEvent(new PointerEvent("pointerdown",{bubbles:true,clientX:60,clientY:y,pointerId:2})); for (var i=0;i<8;i++) el.dispatchEvent(new PointerEvent("pointermove",{bubbles:true,clientX:60+i*35,clientY:y,pointerId:2})); return 1;`);
+  await sleep(150);
+  await ev(`var el=document.getElementById("smdStory"); el.dispatchEvent(new PointerEvent("pointerup",{bubbles:true,clientX:340,clientY:innerHeight*0.55,pointerId:2})); return 1;`);
+  ok(await ev(`return __h.filter(function(k){return k==="selection";}).length >= 1;`) === true, "sweeping a finger through the points ticks");
+  ok(/Every shift/.test(await line()), "a sweep is not a tap: the scene stays");
   await click('#smdStory .ss-opt[data-v="50"]');
   ok(await until(`return /50 patients today/.test(document.querySelector("#smdStory .ss-text").textContent);`, 2000), "the answer becomes the next line: 50 patients today");
+  ok(await until(`return __h.indexOf("heavy") >= 0;`, 2000), "the scene lands with its haptic (heavy)");
+  // Hold to pause: the timed scene does not move on while held.
+  await ev(`var el=document.getElementById("smdStory"); el.dispatchEvent(new PointerEvent("pointerdown",{bubbles:true,clientX:300,clientY:innerHeight*0.55,pointerId:3})); return 1;`);
+  ok(await until(`return document.getElementById("smdStory").classList.contains("paused");`, 1500), "press and hold pauses");
+  await sleep(2600);
+  ok(/50 patients today/.test(await text("#smdStory .ss-text")), "held past its 2.4 s: still on the same scene");
+  await ev(`var el=document.getElementById("smdStory"); el.dispatchEvent(new PointerEvent("pointerup",{bubbles:true,clientX:300,clientY:innerHeight*0.55,pointerId:3})); return 1;`);
+  ok(await ev(`return !document.getElementById("smdStory").classList.contains("paused");`) === true, "release resumes");
+  // Back: a tap on the left goes to the previous scene.
+  await tapAt(0.12);
+  ok(await until(`return /Every shift/.test(document.querySelector("#smdStory .ss-text").textContent);`, 2000), "a tap on the left goes back");
+  await click('#smdStory .ss-opt[data-v="50"]');
+  await until(`return /50 patients today/.test(document.querySelector("#smdStory .ss-text").textContent);`, 2000);
   await tapOn();
   ok(await until(`return /four decisions each/.test(document.querySelector("#smdStory .ss-text").textContent);`, 2000), "decisions scene");
-  ok(await until(`return /200/.test(document.querySelector("#smdStory .ss-text em").textContent);`, 3000), "the count climbs to 50 x 4 = 200");
+  ok(await until(`return /^200$/.test(document.querySelector("#smdStory .ss-text em").textContent);`, 3500), "the count climbs to 50 x 4 = 200");
+  ok(await until(`return document.querySelector("#smdStory .ss-text em").classList.contains("pop");`, 1000), "the number lands with a pop");
   await sleep(700); await shot("c3-decide");
   ok(await ev(`return document.querySelector("#smdStory .ss-skip").classList.contains("on");`) === true, "Skip shows after 3 s");
-  for (let i = 0; i < 6; i++) { await tapOn(); await sleep(250); }
+  for (let i = 0; i < 12 && !(await ev(`return !!document.querySelector("#smdStory .ss-cta");`)); i++) { await tapOn(); await sleep(250); if (i === 4) await shot("c7-wave"); }
   ok(await until(`return !!document.querySelector("#smdStory .ss-cta");`, 3000), "taps step through to the last scene");
   await sleep(900); await shot("c9-go");
   await click("#smdStory .ss-cta");
-  ok(await until(`return !!window.__res && window.__res.done === true && window.__res.answers.patients === 50;`, 2000), "Start the tour resolves done with the answer");
+  ok(await until(`return !!window.__res && window.__res.done === true && window.__res.answers.patients === 50;`, 2000), "Try a renal dose resolves done with the answer");
   ok(await until(`return !document.getElementById("smdStory");`, 2000), "the story is removed");
   ok(await ev(`return SMD_STORY.seen("clinician");`) === true, "the clinician track is marked seen");
 
@@ -111,7 +137,7 @@ try {
   ok(await until(`return /doctors sat NEET-PG 2025/.test(document.querySelector("#smdStory .ss-text").textContent);`, 3000), "prep: the crowd scene");
   ok(/NBEMS/.test(await text("#smdStory .ss-src")), "the figure shows its source (" + await text("#smdStory .ss-src") + ")");
   ok(await until(`return document.querySelector("#smdStory .ss-text em").textContent === "2,30,114";`, 4000), "the count lands on 2,30,114");
-  ok(await ev(`var p=document.querySelector("#smdStory .ss-l"), em=p.querySelector("em"), r=document.createRange(); r.setStartAfter(em); r.setEnd(p.lastChild, 2); return r.getBoundingClientRect().width > 3;`) === true, "a space separates the number from doctors");
+  ok(await ev(`var p=document.querySelector("#smdStory .ss-l"), w=p.querySelectorAll(".ss-w"); return w[0].textContent === "2,30,114" && w[1].textContent === "doctors" && w[1].getBoundingClientRect().left - w[0].getBoundingClientRect().right >= 3;`) === true, "a space separates the number from doctors");
   await sleep(500); await shot("p1-crowd");
   await tapOn();
   ok(await until(`return /52,244/.test(document.querySelector("#smdStory .ss-text").textContent) && /NMC/.test(document.querySelector("#smdStory .ss-src").textContent);`, 2000), "seats scene with its source");
@@ -122,6 +148,11 @@ try {
   ok(await until(`return /5 hours.*a day is.*2\\.5 months/.test(document.querySelector("#smdStory .ss-text").textContent);`, 2000), "5 hours a day is 2.5 months a year");
   await sleep(1000); await shot("p4-months");
   await tapOn(); await sleep(1100); await shot("p5-turn");
+  // Background: the story stops drawing and its clock waits.
+  await ev(`Object.defineProperty(document,"hidden",{configurable:true,get:function(){return true;}}); document.dispatchEvent(new Event("visibilitychange")); return 1;`);
+  ok(await ev(`return SMD_STORY._s().hidden === true;`) === true, "in the background the story pauses");
+  await ev(`Object.defineProperty(document,"hidden",{configurable:true,get:function(){return false;}}); document.dispatchEvent(new Event("visibilitychange")); return 1;`);
+  ok(await ev(`return SMD_STORY._s().hidden === false;`) === true, "back in front it resumes");
   await until(`return document.querySelector("#smdStory .ss-skip.on");`, 4000);
   await click("#smdStory .ss-skip");
   ok(await until(`return !!window.__res && window.__res.skipped === true && window.__res.answers.hours === 5;`, 2000), "Skip resolves skipped, the answer kept");
@@ -143,8 +174,23 @@ try {
   ok(await until(`return !!document.querySelector(".smdt-wel [data-w=start]") && document.querySelector(".smdt-wel").style.display !== "none";`, 3000), "welcome screen shows");
   await click(".smdt-wel [data-w=start]");
   ok(await until(`return !!document.getElementById("smdStory");`, 2000), "welcome Start plays the story first");
-  await until(`return document.querySelector("#smdStory .ss-skip.on");`, 4000); await click("#smdStory .ss-skip");
-  ok(await until(`return !document.getElementById("smdStory") && !!document.querySelector(".smdt-card");`, 4000), "after the story the app tour starts");
+  // Finish it (not Skip): the renal dose example opens, then the tour.
+  await until(`return !!document.querySelector("#smdStory .ss-opt");`, 3000);
+  await click('#smdStory .ss-opt[data-v="25"]');
+  for (let i = 0; i < 10 && !(await ev(`return !!document.querySelector("#smdStory .ss-cta");`)); i++) { await tapOn(); await sleep(250); }
+  await click("#smdStory .ss-cta");
+  ok(await until(`return !!document.querySelector(".rd-scrim .rd-demo");`, 4000), "the renal dose tool opens with the example banner");
+  ok(/Example patient, not a real person/.test(await text(".rd-demo")), "the banner says it is an example");
+  ok(await until(`return document.querySelector("#rdAge").value === "70" && document.querySelector("#rdScr").value === "2" && /Piperacillin/i.test(document.querySelector(".rd-h").textContent);`, 2000), "example values are filled for piperacillin-tazobactam");
+  ok(await until(`var r=document.querySelector("#rdResult"); return r && r.style.display !== "none" && /29/.test(r.textContent) && /Give at this renal function/.test(r.textContent);`, 3000), "the real tool computes CrCl 29 and shows its own dose (" + (await text("#rdResult")).slice(0, 90) + ")");
+  await sleep(400); await shot("c10-demo");
+  ok(await ev(`return !document.querySelector(".smdt-card");`) === true, "the tour waits while the example is open");
+  await click(".rd-scrim .rd-x");
+  ok(await until(`return !document.querySelector(".rd-scrim") && !!document.querySelector(".smdt-card");`, 4000), "closing the example starts the app tour");
+  // Next open of the tool starts empty (nothing from the example is kept).
+  await ev(`SMD_RENAL_DOSE.open("Piperacillin-Tazobactam"); return 1;`);
+  ok(await until(`return !!document.querySelector("#rdAge") && document.querySelector("#rdAge").value === "" && !document.querySelector(".rd-demo");`, 2000), "the next open of the renal tool is empty, no banner");
+  await ev(`document.querySelector(".rd-scrim .rd-x").click(); return 1;`);
   await ev(`var x=document.querySelector(".smdt-card [data-a=close], .smdt-card .smdt-x"); if (x) x.click(); return 1;`);
   // Flag off: straight to the tour.
   await ev(`localStorage.setItem("smd_onboard_story","0"); localStorage.removeItem("smd_story_seen_clinician"); document.querySelectorAll(".smdt-card,.smdt-dim,.smdt-spot").forEach(function(e){e.remove();}); return 1;`);
@@ -158,6 +204,27 @@ try {
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!document.getElementById("smdStory") && /NEET-PG/.test(document.querySelector("#smdStory").textContent);`, 20000), "first PrepNucleus open plays the prep track");
   ok(await until(`return !!document.querySelector("#smdPrep .pl-ob");`, 6000), "the plan onboarding waits underneath");
+  await tapOn(); await sleep(300); await tapOn();
+  ok(await until(`return !!document.querySelector("#smdStory .ss-opt") && !!document.querySelector("#smdStory .ss-mascot .pnm");`, 4000), "Nucleo asks the phone question");
+  await sleep(900); await shot("p3-nucleo");
+  await ev(`document.querySelector("#smdStory .ss-skip").click(); return 1;`); await until(`return !document.getElementById("smdStory");`, 2000);
+  // The plan steps' Skip never shows the welcome screen.
+  await ev(`var x=document.getElementById("smdStory"); if (x) x.remove(); return 1;`);
+  await click("#smdPrep [data-act=p-skip]").catch(() => {});
+  await ev(`var b=document.querySelector("#smdPrep [data-act=p-skip]"); if (b) b.click(); return 1;`);
+  await sleep(600);
+  ok(await ev(`return !document.querySelector("#smdPrep .wl-body");`) === true, "Skip on the plan steps: no welcome screen");
+  // The welcome screen itself.
+  await ev(`localStorage.removeItem("smd_prep_welcome_seen"); window.__wl = PREP_WELCOME.open(PREP._host); return 1;`);
+  ok(await until(`return window.__wl === true && !!document.querySelector("#smdPrep .wl-body");`, 3000), "welcome: Your plan is ready");
+  ok(/5-question warm-up/.test(await text("#smdPrep .wl-body")), "it offers the 5-question warm-up");
+  await sleep(500); await shot("welcome");
+  ok(await ev(`return PREP_WELCOME.open(PREP._host) === false;`) === true, "shown once per device");
+  await ev(`window.__wl2 = 1; return 1;`);
+  await ev(`localStorage.removeItem("smd_prep_welcome_seen"); PREP_WELCOME.open(PREP._host); return 1;`);
+  await until(`return !!document.querySelector("#smdPrep [data-act=wl-warm]");`, 3000);
+  await click("#smdPrep [data-act=wl-warm]");
+  ok(await until(`return !!document.querySelector("#smdPrep [data-act=answer]") && /Warm-up/.test(document.querySelector("#smdPrep .pn-bar").textContent);`, 15000), "the warm-up opens real questions in the runner");
   ok(errors.length === 0, "no uncaught error" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
 } catch (e) { console.log("FAIL harness: " + (e && e.stack || e)); fails++; }
 finally {

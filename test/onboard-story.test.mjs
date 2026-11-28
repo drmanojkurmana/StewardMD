@@ -40,7 +40,7 @@ test("clinician track uses the user's own number", () => {
   assert.match(a[1].lines[0], /50<\/em> patients/);
   assert.equal(a[2].count, 200);
   assert.match(a[2].lines[0], /200/);
-  assert.equal(a[a.length - 1].cta, "Start the tour");
+  assert.equal(a[a.length - 1].cta, "Try a renal dose");
   const strip = (s) => s.replace(/<[^>]+>/g, "");
   for (const sc of a) for (const l of sc.lines) assert.ok(!/[—–]/.test(strip(l)), "no em or en dash: " + l);
 });

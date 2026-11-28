@@ -15,6 +15,9 @@
      pick()                   -> { apps, categories, domains }
      start({ endsAt, strict, title, plan }) -> { shielding }     endsAt ms or null (stopwatch), plan [[kind, sec]]
      stop()                   -> {}
+     schedule({ items, web })  -> {}     items [{ id, name, from "HH:MM", to "HH:MM", days [0..6 Sun..Sat] }]: repeating
+                                         focus windows that block the picked apps even with PrepNucleus closed; [] clears
+   start() also carries web (block the picked websites too). Website blocking and schedules are Pro extras.
    Strict mode is a Pro extra (owner 2026-11-28: blocking free, extras Pro) when PrepPro enforces the free tier; while
    PrepPro does not enforce, everything is open, like the rest of PrepNucleus.
 
@@ -23,7 +26,7 @@
    Flag smd_prep_focus, default ON (owner 2026-11-28, for the TestFlight build with iOS app blocking): localStorage "0"
    or ?focus=0 leaves PREP_FOCUS undefined (the Play Focus room stays as it was); anything else, or nothing, turns it on.
    Store (smd_prep_v1): fo = { goal (min a day), mode, dur, pomo, strict, block, d: { "YYYY-MM-DD": min }, log: [ { s, e,
-   m, tag, q, r, ok } ] newest last, at most 200 }; fxm["YYYY-MM"] (focus minutes a month) is shared with Play's Wrapped. */
+   m, tag, q, r, ok } ] newest last, at most 200, web, sch: [schedule items + on] }; fxm["YYYY-MM"] (focus minutes a month) is shared with Play's Wrapped. */
 (function (G) {
   "use strict";
   var NODE = typeof module !== "undefined" && module.exports && !(G && G.document);
@@ -121,7 +124,27 @@
     if (run) add(run.t0, now, true);
     return o;
   }
-  var PURE = { dayKey: dayKey, fmtClock: fmtClock, fmtMin: fmtMin, planOf: planOf, pomoOf: pomoOf, LIM: LIM, totalSec: totalSec, phaseAt: phaseAt, focusBlocks: focusBlocks, blockNo: blockNo, topTag: topTag, saveRun: saveRun, streak: streak, week: week, timeline: timeline, POMOS: POMOS };
+  // Schedules: "HH:MM" -> minutes; the label "6:00 to 8:00 AM, weekdays"; the one running at a time.
+  function hm(t) { var m = /^(\d{1,2}):(\d{2})$/.exec(String(t || "")); return m ? +m[1] * 60 + +m[2] : -1; }
+  function clock12(t) { var v = hm(t), h = Math.floor(v / 60), m = v % 60, ap = h < 12 ? "AM" : "PM", h12 = h % 12 || 12; return h12 + ":" + pad(m) + " " + ap; }
+  function daysLabel(d) {
+    var k = (d || []).slice().sort().join("");
+    if (k === "12345") return "weekdays"; if (k === "06") return "weekends"; if (k === "0123456") return "every day";
+    return (d || []).slice().sort().map(function (x) { return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][x]; }).join(", ");
+  }
+  function schLabel(x) {
+    var a = clock12(x.from), b = clock12(x.to);
+    if (a.slice(-2) === b.slice(-2)) a = a.slice(0, -3);
+    return a + " to " + b + ", " + daysLabel(x.days);
+  }
+  function schValid(x) { var a = hm(x && x.from), b = hm(x && x.to); return a >= 0 && b > a && b - a >= 15 && !!(x.days && x.days.length); }
+  // The schedule that is on at a moment (local time), or null. Windows do not cross midnight (schValid).
+  function schActive(list, ms) {
+    var d = new Date(ms), m = d.getHours() * 60 + d.getMinutes(), dow = d.getDay();
+    for (var i = 0; i < (list || []).length; i++) { var x = list[i]; if (x.on !== false && schValid(x) && x.days.indexOf(dow) >= 0 && m >= hm(x.from) && m < hm(x.to)) return x; }
+    return null;
+  }
+  var PURE = { hm: hm, schLabel: schLabel, schValid: schValid, schActive: schActive, dayKey: dayKey, fmtClock: fmtClock, fmtMin: fmtMin, planOf: planOf, pomoOf: pomoOf, LIM: LIM, totalSec: totalSec, phaseAt: phaseAt, focusBlocks: focusBlocks, blockNo: blockNo, topTag: topTag, saveRun: saveRun, streak: streak, week: week, timeline: timeline, POMOS: POMOS };
   if (NODE) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -176,6 +199,18 @@
     }).then(function () { var f = fo(); if (P.nat && P.nat.authorized && (P.nat.apps || P.nat.categories || P.nat.domains)) { f.block = true; H.save(); } H.rerender(); });
   }
 
+  /* ---------- Live Activity / Dynamic Island (live-activities.js; iOS 16.2+, a no-op elsewhere) ---------- */
+  // The clock ticks natively from startedAt / endsAt. Lock Screen text is only "Focus" and the subject count rule
+  // of live-activities.js: no names, nothing private.
+  function liveUp(r) {
+    try {
+      var L = G.SMD_liveActivity; if (!L || !L.upsert || !r) return;
+      L.upsert({ key: "prep-focus", title: "PrepNucleus Focus", detail: r.mode === "pomo" ? "Pomodoro" : r.mode === "watch" ? "Stopwatch" : "Timer",
+        startedAt: r.t0, endsAt: r.mode === "watch" ? 0 : r.t0 + totalSec(r.plan) * 1000, symbol: "timer", tint: "#efc07b" });
+    } catch (e) {}
+  }
+  function liveEnd() { try { var L = G.SMD_liveActivity; if (L && L.end) L.end("prep-focus"); } catch (e) {} }
+
   /* ---------- session ---------- */
   function start() {
     var f = fo(), mode = f.mode || "timer", plan = planOf(mode, f.dur || 25, f.pomo === "c" ? f.pc : f.pomo || 25);
@@ -183,14 +218,15 @@
     var r = { t0: now(), mode: mode, plan: plan, strict: strict, q: 0, r: 0, tags: {}, block: !!f.block };
     setRun(r);
     hap("success");
-    if (r.block) natCall("start", { endsAt: mode === "watch" ? null : r.t0 + totalSec(plan) * 1000, strict: strict, title: "Focus", plan: plan });
-    beat(true); arm();
+    r.web = !!f.web && proOk();
+    if (r.block) natCall("start", { endsAt: mode === "watch" ? null : r.t0 + totalSec(plan) * 1000, strict: strict, web: r.web, title: "Focus", plan: plan });
+    beat(true); arm(); liveUp(r);
     H.push(renderRun);
   }
   function finish(early) {
     var r = run(); if (!r) return;
     var s = store(), e = saveRun(fo(), s.fxm || (s.fxm = {}), r, now());
-    setRun(null); disarm(); beat(false);
+    setRun(null); disarm(); beat(false); liveEnd();
     if (r.block) natCall("stop");
     H.save();
     P.summary = { e: e, early: !!early, mode: r.mode };
@@ -209,7 +245,8 @@
     for (var i = 0; i < r.plan.length && acc < cut; i++) { var len = Math.min(r.plan[i][1], cut - acc); plan.push([r.plan[i][0], len]); acc += len; }
     if (ph.kind === "b") plan.push(["f", 300]);
     r.plan = plan; setRun(r);
-    if (r.block) natCall("start", { endsAt: r.t0 + totalSec(plan) * 1000, strict: r.strict, title: "Focus", plan: plan });
+    if (r.block) natCall("start", { endsAt: r.t0 + totalSec(plan) * 1000, strict: r.strict, web: !!r.web, title: "Focus", plan: plan });
+    liveUp(r);
     H.toast("5 more minutes. Make them count.");
   }
   function beat(on) {
@@ -304,6 +341,37 @@
     }).join("") + "</ul>";
   }
 
+  /* Schedules (Pro): repeating windows the native plugin blocks on its own. */
+  var SUGGEST = [{ id: "morning", name: "Morning study", from: "06:00", to: "08:00", days: [1, 2, 3, 4, 5] }, { id: "evening", name: "Evening study", from: "19:00", to: "21:00", days: [1, 2, 3, 4, 5] }];
+  function schHtml(f) {
+    var list = f.sch || [], pro = proOk();
+    var rows = list.map(function (x) {
+      return '<div class="fo-sch">' + sw("fo-schon", x.on !== false && pro, esc(x.name), esc(schLabel(x)), false).replace('data-act="fo-schon"', 'data-act="fo-schon" data-v="' + esc(x.id) + '"') +
+        '<button type="button" class="pn-link fo-schdel" data-act="fo-schdel" data-v="' + esc(x.id) + '" aria-label="Remove ' + esc(x.name) + '">Remove</button></div>';
+    }).join("");
+    var have = {}; list.forEach(function (x) { have[x.id] = 1; });
+    var sug = SUGGEST.filter(function (x) { return !have[x.id]; }).map(function (x) { return chip("fo-schadd", x.id, "+ " + esc(x.name) + " \u00b7 " + esc(schLabel(x)), false); }).join("");
+    return '<section class="fo-panel"><h2 class="fo-h">Schedules' + (pro ? "" : ' <i class="fo-pro">Pro</i>') + "</h2>" +
+      '<p class="pn-mut pn-small">Picked apps are blocked in these hours, even with PrepNucleus closed.</p>' + rows +
+      '<div class="fo-chips">' + sug + chip("fo-schnew", "", "+ Custom", false) + "</div></section>";
+  }
+  function schSync() { var f = fo(), on = proOk() ? (f.sch || []).filter(function (x) { return x.on !== false && schValid(x); }) : []; natCall("schedule", { items: on.map(function (x) { return { id: x.id, name: x.name, from: x.from, to: x.to, days: x.days }; }), web: !!f.web && proOk() }); }
+  function schNewSheet() {
+    var D7 = ["S", "M", "T", "W", "T", "F", "S"], dsel = [1, 2, 3, 4, 5];
+    sheet("sch", "New schedule",
+      '<label class="fo-lab" for="foSchN">Name</label><input id="foSchN" class="pn-in" maxlength="40" value="Study block">' +
+      '<div class="fo-times"><label class="fo-lab">From<input id="foSchF" class="pn-in" type="time" value="15:00"></label><label class="fo-lab">To<input id="foSchT" class="pn-in" type="time" value="17:00"></label></div>' +
+      '<div class="fo-days" role="group" aria-label="Days">' + D7.map(function (d, i) { return '<button type="button" class="pn-chip' + (dsel.indexOf(i) >= 0 ? " on" : "") + '" data-act="fo-schday" data-v="' + i + '" aria-pressed="' + (dsel.indexOf(i) >= 0) + '" aria-label="' + ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][i] + '">' + d + "</button>"; }).join("") + "</div>" +
+      '<p class="pn-mut pn-small" id="foSchMsg" role="status"></p><div class="fo-sheet-acts"><button type="button" class="pn-btn pri" data-act="fo-schsave">Save schedule</button></div>');
+  }
+  function schSave() {
+    var el = P.sheet; if (!el) return;
+    var days = []; [].forEach.call(el.querySelectorAll('[data-act=fo-schday][aria-pressed="true"]'), function (b) { days.push(+b.getAttribute("data-v")); });
+    var x = { id: "s" + now().toString(36), name: (el.querySelector("#foSchN").value || "Study block").trim().slice(0, 40), from: el.querySelector("#foSchF").value, to: el.querySelector("#foSchT").value, days: days, on: true };
+    if (!schValid(x)) { el.querySelector("#foSchMsg").textContent = !days.length ? "Pick at least one day." : "End after the start, at least 15 minutes, same day."; return; }
+    var f = fo(); (f.sch || (f.sch = [])).push(x); H.save(); closeSheet(true); schSync(); hap("success"); H.rerender();
+  }
+
   /* Focus home. */
   function renderHome() {
     var f = fo(), r = run(), goal = goalMin(), today = todayMin(), st = streak(f.d, now()), mode = f.mode || "timer";
@@ -315,18 +383,22 @@
     if (natAvail) {
       opts += '<button type="button" class="pn-row" data-act="fo-block"><span class="pn-ri" aria-hidden="true">' + LOCK + '</span><span class="pn-rb"><b>Block distracting apps</b><small>' + esc(pickedText(nat)) + "</small></span>" + H.ico("chev") + "</button>";
       if (nat.authorized && (nat.apps || nat.categories || nat.domains)) opts += sw("fo-blk", !!f.block, "Block during focus", "Blocked apps show a PrepNucleus screen");
+      if (nat.authorized && nat.domains && f.block) opts += sw("fo-web", !!f.web && proOk(), "Block websites too", "The websites you picked, in every browser", !proOk());
     }
     if (mode !== "watch") opts += sw("fo-strict", !!f.strict && proOk(), "Strict mode", "End stays locked until the time is up", !proOk());
     var live = typeof P.live === "number" && P.live > 1 ? '<p class="pn-mut pn-small fo-live"><b>' + H.fmt(P.live) + "</b> students are focusing now</p>" : "";
     var main = r
       ? '<button type="button" class="pn-btn pri fo-go" data-act="fo-resume">' + H.ico("play") + " Back to your session</button>"
       : '<button type="button" class="pn-btn pri fo-go" data-act="fo-start">' + H.ico("play") + " Start focus</button>";
-    H.paint(H.bar("Focus", sub, "back") + '<div class="pn-body fo-home">' +
+    var schOn = !r && natAvail ? schActive(f.sch, now()) : null;
+    var nowBan = schOn ? '<section class="fo-panel fo-schnow"><p><b>' + esc(schOn.name) + "</b> is on now. Apps you picked are blocked until " + esc(clock12(schOn.to)) + '.</p><button type="button" class="pn-btn pri" data-act="fo-start">' + H.ico("play") + " Count it as a session</button></section>" : "";
+    H.paint(H.bar("Focus", sub, "back") + '<div class="pn-body fo-home">' + nowBan +
       '<section class="fo-hero">' + hero + "</section>" +
       '<section class="fo-panel"><div class="fo-seg" role="radiogroup" aria-label="Mode">' + MODES.map(function (m) { return '<button type="button" role="radio" aria-checked="' + (mode === m[0]) + '" class="' + (mode === m[0] ? "on" : "") + '" data-act="fo-mode" data-v="' + m[0] + '">' + m[1] + "</button>"; }).join("") + "</div>" +
       modeOpts(f) + "</section>" +
       (opts ? '<section class="fo-panel fo-opts">' + opts + "</section>" : "") +
       main + live +
+      (natAvail && nat.authorized ? schHtml(f) : "") +
       '<section class="fo-panel"><h2 class="fo-h">Today</h2>' + timelineHtml(f.log, r) + "</section>" +
       '<section class="fo-panel"><h2 class="fo-h">This week</h2>' + weekHtml(f.d, goal) + "</section>" +
       '<section class="fo-panel"><h2 class="fo-h">Recent</h2>' + recentHtml(f.log) + "</section>" +
@@ -450,6 +522,19 @@
       f.strict = !f.strict; H.save(); hap("selection"); return H.rerender();
     }
     if (a === "fo-blk") { f.block = !f.block; H.save(); hap("selection"); return H.rerender(); }
+    if (a === "fo-web") {
+      if (!proOk()) { if (G.PrepPro && G.PrepPro.openPricing) return G.PrepPro.openPricing(H); return H.toast("Website blocking is part of Pro."); }
+      f.web = !f.web; H.save(); hap("selection"); schSync(); return H.rerender();
+    }
+    if (a === "fo-schadd" || a === "fo-schnew" || a === "fo-schon") {
+      if (!proOk()) { if (G.PrepPro && G.PrepPro.openPricing) return G.PrepPro.openPricing(H); return H.toast("Schedules are part of Pro."); }
+      if (a === "fo-schnew") return schNewSheet();
+      if (a === "fo-schadd") { var sg = SUGGEST.filter(function (x) { return x.id === v; })[0]; if (sg) { (f.sch || (f.sch = [])).push({ id: sg.id, name: sg.name, from: sg.from, to: sg.to, days: sg.days.slice(), on: true }); H.save(); schSync(); hap("success"); } return H.rerender(); }
+      (f.sch || []).forEach(function (x) { if (x.id === v) x.on = x.on === false; }); H.save(); schSync(); hap("selection"); return H.rerender();
+    }
+    if (a === "fo-schdel") { f.sch = (f.sch || []).filter(function (x) { return x.id !== v; }); H.save(); schSync(); return H.rerender(); }
+    if (a === "fo-schday") { var pr = b.getAttribute("aria-pressed") !== "true"; b.setAttribute("aria-pressed", String(pr)); b.classList.toggle("on", pr); return; }
+    if (a === "fo-schsave") return schSave();
     if (a === "fo-block") return setupBlocking();
     if (a === "fo-goal") return goalSheet();
     if (a === "fo-setgoal") { f.goal = Number(v) || 120; H.save(); closeSheet(true); return H.rerender(); }
@@ -485,5 +570,9 @@
 
   var LOCK = '<svg class="fo-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
 
-  G.PREP_FOCUS = { act: act, back: back, leave: leave, open: open, homeRow: homeRow, bind: bind, rowSub: rowSub, noteAnswer: noteAnswer, running: function () { return !!run(); }, _pure: PURE, _p: P };
+  // The welcome screen (prep-welcome.js): is the native plugin here, and run the blocking setup from outside Focus.
+  function nativeAvailable() { return !!NAT(); }
+  function setup(h) { H = h; return natRefresh().then(function () { H.push(renderHome); return setupBlocking(); }); }
+
+  G.PREP_FOCUS = { act: act, back: back, leave: leave, open: open, homeRow: homeRow, bind: bind, rowSub: rowSub, noteAnswer: noteAnswer, nativeAvailable: nativeAvailable, setup: setup, running: function () { return !!run(); }, _pure: PURE, _p: P };
 })(typeof window !== "undefined" ? window : this);

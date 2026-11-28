@@ -836,6 +836,8 @@
       "  #researchMD .rmd-pubconsent-screen .rmd-card-sub, .rmd-pubconsent-screen .rmd-card-sub { padding: 12px; }",
       "  #researchMD .rmd-pubconsent-screen .rmd-select, #researchMD .rmd-pubconsent-screen .rmd-input, .rmd-pubconsent-screen .rmd-select, .rmd-pubconsent-screen .rmd-input { max-width: 100%; }",
       "  #researchMD .rmd-pubconsent-screen .rmd-ce-box, .rmd-pubconsent-screen .rmd-ce-box { padding: 8px; }",
+      "  #researchMD .rmd-pubconsent-screen .rmd-consent-preview, #researchMD .rmd-pubconsent-screen .rmd-consent-preview-local, .rmd-pubconsent-screen .rmd-consent-preview, .rmd-pubconsent-screen .rmd-consent-preview-local { max-height: none; overflow-y: visible; }",
+      "  #researchMD .rmd-pubconsent-screen .rmd-ce-body, .rmd-pubconsent-screen .rmd-ce-body { max-height: none; overflow-y: visible; }",
       "}",
       "@media (prefers-reduced-motion: reduce) {",
       "  #researchMD .rmd-pubconsent-screen *, #researchMD .rmd-pubconsent-screen *:before, #researchMD .rmd-pubconsent-screen *:after, .rmd-pubconsent-screen *, .rmd-pubconsent-screen *:before, .rmd-pubconsent-screen *:after { transition: none !important; animation: none !important; }",
@@ -1473,8 +1475,13 @@
 
       // 1. Ask MaiK Section
       h.push('<div id="rmd-maik-consent-panel" class="rmd-card-sub"' + (editing ? ' style="display:none;"' : "") + ">");
+      var pcIsFree = !!(proj && proj.tutorial);
+      var pcCostTxt = pcIsFree
+        ? "No MaiK tokens needed"
+        : ((SMD.pricing && SMD.pricing.quoteText) ? SMD.pricing.quoteText("publication_consent") : "Checking live server estimate...");
       h.push("<h4>Ask MaiK to draft consent</h4>");
-      h.push('<p class="rmd-ai-cost">' + ((proj && proj.tutorial) ? 'No MaiK tokens needed' : 'Costs about 2 MaiK tokens') + '</p>');
+      h.push('<p class="rmd-ai-cost" data-rmd-cost-task="publication_consent" data-rmd-cost-free="' + (pcIsFree ? "1" : "0") + '">' + esc(pcCostTxt) + '</p>');
+      if (!pcIsFree && SMD.pricing && SMD.pricing.ensureLoaded) SMD.pricing.ensureLoaded();
       h.push('<div><label class="rmd-pc-field-label" for="rmd-maik-lang">Language:</label>');
       h.push('<select id="rmd-maik-lang" class="rmd-select">' + langOptionsHtml(initLangCode) + "</select></div>");
 
@@ -1871,7 +1878,9 @@
               maikEngEd.setHtml(toEditorHtml(engRaw));
             }
             if (statusEl) {
-              statusEl.innerHTML = '<span class="rmd-pc-status-info">Draft loaded below. Review or format it, then tap Save consent.</span>';
+              var pcChg = (SMD.pricing && SMD.pricing.chargeMtFromResponse) ? SMD.pricing.chargeMtFromResponse(resp.data) : null;
+              var pcChgStr = (pcChg != null && SMD.pricing && SMD.pricing.formatMt) ? (" Charged: " + SMD.pricing.formatMt(pcChg) + ".") : "";
+              statusEl.innerHTML = '<span class="rmd-pc-status-info">Draft loaded below. Review or format it, then tap Save consent.' + esc(pcChgStr) + '</span>';
             }
           } else {
             var msg = (resp.data && resp.data.error && resp.data.error.message) || "Failed to generate consent.";

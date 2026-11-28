@@ -321,7 +321,7 @@ describe("research.js apiRequest client PHI gate for POST /ai-draft", () => {
       task: "protocol",
       cost: 2,
       input: function () { return { text: "Call patient 9876543210 for outcome assessment." }; },
-      render: function () { barHtml = sb.win.SMD_RESEARCH.ai.barHtml(st, { cost: 2, label: "protocol" }); }
+      render: function () { barHtml = sb.win.SMD_RESEARCH.ai.barHtml(st, { task: "protocol", label: "protocol" }); }
     };
     sb.win.SMD_RESEARCH.ai.bind(container, st, opts);
 
@@ -331,7 +331,8 @@ describe("research.js apiRequest client PHI gate for POST /ai-draft", () => {
 
     assert.match(barHtml, /Removed before sending to MaiK: Phone number\./, "notice appears inside the AI bar");
     assert.ok(barHtml.indexOf("9876543210") < 0, "the notice never shows the removed text");
-    assert.ok(barHtml.indexOf("Costs about 2 MaiK tokens") >= 0, "cost line is unchanged");
+    assert.ok(barHtml.indexOf("Costs about 2 MaiK tokens") < 0, "no hardcoded cost line");
+    assert.ok(barHtml.indexOf('data-rmd-cost-task="protocol"') >= 0, "cost line is server-quoted for the task");
     assert.ok(barHtml.indexOf("rmd-ai-phi-note") >= 0, "notice uses its own class for styling");
   });
 });

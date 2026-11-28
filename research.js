@@ -26,6 +26,26 @@
   }
   SMD.esc = esc;
 
+  /* The standalone ResearchMD mark from the logo sheet (brief N): a vertical bar,
+   * the R bowl, two parallel diagonal legs. It shares its exact geometry with the
+   * header logo (viewBox 0 0 470 589) so every size of the mark is the same shape;
+   * each path pins fill="currentColor" stroke="none" because badge CSS sets
+   * fill:none on bare svgs and presentation attributes outrank inherited values. */
+  var RMD_MARK_PATHS = [
+    "M0 0h110v589H0z",
+    "M135 0h122a175 175 0 0 1 0 350H135v-85h122a90 90 0 0 0 0-180H135z",
+    "M135 372h60l140 217h-60z",
+    "M250 372h80l140 217h-80z"
+  ];
+  function rmdMarkSvg(height, cls) {
+    var w = Math.round(height * 470 / 589 * 100) / 100;
+    var h = '<svg' + (cls ? ' class="' + cls + '"' : '') + ' viewBox="0 0 470 589" aria-hidden="true" focusable="false" width="' + w + '" height="' + height + '" style="display:block;width:' + w + 'px;height:' + height + 'px">';
+    for (var i = 0; i < RMD_MARK_PATHS.length; i++) h += '<path fill="currentColor" stroke="none" d="' + RMD_MARK_PATHS[i] + '"/>';
+    return h + '</svg>';
+  }
+  SMD.mark = rmdMarkSvg;
+  G.SMD_RMD_MARK = { svg: rmdMarkSvg };
+
   /* Native CapacitorHttp plugin reference when available. */
   function capHttp() {
     return (G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.CapacitorHttp) || G.CapacitorHttp || null;
@@ -655,6 +675,9 @@
       /* The AI's reply missed required fields (seen live on CTRI); nothing was charged as a stored draft. */
       return { message: e.message || "MaiK did not return a complete draft this time. Try again.", action: "retry", actionLabel: "Try again" };
     }
+    if (code === "empty_draft") {
+      return { message: e.message || "MaiK returned an empty draft. Check your connection and try again.", action: "retry", actionLabel: "Try again" };
+    }
     if (code === "gate_failed") {
       return { message: e.message || "This section needs a fix before exporting. Check your results and references, then try again.", action: "retry", actionLabel: "Try again" };
     }
@@ -854,7 +877,7 @@
    * screen's own Save button is the only write. opts: { pid, task, label,
    * cost, input(), apply(draft, res) -> [fieldKeys], render(), request() }. */
   function aiState() {
-    return { busy: false, error: null, drafted: {}, notice: null };
+    return { busy: false, error: null, drafted: {}, notice: null, lastCostMt: null, lastCostInr: null };
   }
 
   /* Live BUG-05: plain notice for identifiers the redactor removed before
@@ -874,24 +897,334 @@
     return '<p class="rmd-ai-phi-note" role="status">Removed before sending to MaiK: ' + esc(labels.join(", ")) + ".</p>";
   }
 
+  /* ---- Server-backed pricing & quote helpers (no hardcoded client rates) ---- */
+  var pricingCache = {
+    loaded: false,
+    failed: false,
+    inFlight: null,
+    mtPerInr: null,
+    usdInrRate: null,
+    tiers: null,
+    tasks: null,
+    credits: null,
+    quotes: {},
+    quoteInFlight: {},
+    listeners: []
+  };
+
+  function isTutorialActive() {
+    try {
+      var p = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
+      return !!(p && p.tutorial);
+    } catch (e) { return false; }
+  }
+
+  function formatMt(n) {
+    var v = Math.max(0, Math.round(Number(n) || 0));
+    var s;
+    try { s = v.toLocaleString("en-IN"); } catch (e) { s = String(v); }
+    return s + " MaiK Tokens";
+  }
+
+  function formatMtRange(minMt, maxMt) {
+    var a = Math.max(0, Math.round(Number(minMt) || 0));
+    var b = Math.max(a, Math.round(Number(maxMt) || 0));
+    if (a === b) return formatMt(a);
+    var sa, sb;
+    try { sa = a.toLocaleString("en-IN"); sb = b.toLocaleString("en-IN"); }
+    catch (e) { sa = String(a); sb = String(b); }
+    return sa + " to " + sb + " MaiK Tokens";
+  }
+
+  function quoteCacheKey(task, inputLength) {
+    var len = Number(inputLength) || 0;
+    var bucket = len > 0 ? Math.max(100, Math.ceil(len / 100) * 100) : 0;
+    return String(task || "") + ":" + bucket;
+  }
+
+  function applyPricingPayload(res) {
+    if (!res || typeof res !== "object") return false;
+    var p = res.pricing;
+    var cr = res.credits;
+    var updated = false;
+    if (cr && typeof cr === "object") {
+      pricingCache.credits = cr;
+      if (cr.mtPerInr > 0) pricingCache.mtPerInr = Number(cr.mtPerInr);
+      if (cr.usdInrRate > 0) pricingCache.usdInrRate = Number(cr.usdInrRate);
+      updated = true;
+    }
+    if (p && typeof p === "object") {
+      if (p.mtPerInr > 0) pricingCache.mtPerInr = Number(p.mtPerInr);
+      if (p.usdInrRate > 0) pricingCache.usdInrRate = Number(p.usdInrRate);
+      if (p.tiers) pricingCache.tiers = p.tiers;
+      if (p.tasks) pricingCache.tasks = p.tasks;
+      pricingCache.loaded = true;
+      pricingCache.failed = false;
+      updated = true;
+    }
+    if (res.quote && res.quote.task) {
+      pricingCache.quotes[quoteCacheKey(res.quote.task, res.quote._inputLength || 0)] = res.quote;
+      if (res.quote.mtPerInr > 0) pricingCache.mtPerInr = Number(res.quote.mtPerInr);
+      if (res.quote.usdInrRate > 0) pricingCache.usdInrRate = Number(res.quote.usdInrRate);
+      updated = true;
+    }
+    return updated;
+  }
+
+  function notifyPricingListeners() {
+    refreshPricingDom();
+    var ls = pricingCache.listeners.slice();
+    for (var i = 0; i < ls.length; i++) {
+      try { ls[i](pricingCache); } catch (e) {}
+    }
+  }
+
+  function ensurePricingLoaded() {
+    if (pricingCache.loaded) return Promise.resolve(pricingCache);
+    if (pricingCache.inFlight) return pricingCache.inFlight;
+    if (!SMD.api || typeof SMD.api.request !== "function") {
+      return Promise.resolve(pricingCache);
+    }
+    pricingCache.inFlight = SMD.api.request("GET", "/v1/credits").then(function (res) {
+      pricingCache.inFlight = null;
+      var ok = applyPricingPayload(res);
+      if (!ok) {
+        return SMD.api.request("GET", "/v1/ai-quote").then(function (qRes) {
+          if (!applyPricingPayload(qRes)) pricingCache.failed = true;
+          notifyPricingListeners();
+          return pricingCache;
+        }, function () {
+          pricingCache.failed = true;
+          notifyPricingListeners();
+          return pricingCache;
+        });
+      }
+      notifyPricingListeners();
+      return pricingCache;
+    }, function () {
+      pricingCache.inFlight = null;
+      if (!SMD.api || typeof SMD.api.request !== "function") {
+        pricingCache.failed = true;
+        notifyPricingListeners();
+        return pricingCache;
+      }
+      return SMD.api.request("GET", "/v1/ai-quote").then(function (qRes) {
+        if (!applyPricingPayload(qRes)) pricingCache.failed = true;
+        notifyPricingListeners();
+        return pricingCache;
+      }, function () {
+        pricingCache.failed = true;
+        notifyPricingListeners();
+        return pricingCache;
+      });
+    });
+    return pricingCache.inFlight;
+  }
+
+  function fetchTaskQuote(task, inputLength) {
+    if (!task || isTutorialActive()) return Promise.resolve(null);
+    var len = Number(inputLength) || 0;
+    var key = quoteCacheKey(task, len);
+    if (pricingCache.quotes[key]) return Promise.resolve(pricingCache.quotes[key]);
+    if (!(len > 0) && pricingCache.loaded && pricingCache.tasks && pricingCache.tasks[task]) {
+      return Promise.resolve(pricingCache.tasks[task]);
+    }
+    if (!SMD.api || typeof SMD.api.request !== "function") return Promise.resolve(null);
+    if (pricingCache.quoteInFlight[key]) return pricingCache.quoteInFlight[key];
+    var url = "/v1/ai-quote?task=" + encodeURIComponent(task) + (len > 0 ? "&inputChars=" + encodeURIComponent(Math.round(len)) : "");
+    pricingCache.quoteInFlight[key] = SMD.api.request("GET", url).then(function (res) {
+      delete pricingCache.quoteInFlight[key];
+      if (res && res.quote) res.quote._inputLength = len;
+      applyPricingPayload(res);
+      notifyPricingListeners();
+      return (res && res.quote) || null;
+    }, function () {
+      delete pricingCache.quoteInFlight[key];
+      return ensurePricingLoaded().then(function () {
+        return getTaskQuoteSync(task, len);
+      });
+    });
+    return pricingCache.quoteInFlight[key];
+  }
+
+  function getTaskQuoteSync(task, inputLength) {
+    if (!task) return null;
+    var len = Number(inputLength) || 0;
+    var key = quoteCacheKey(task, len);
+    if (pricingCache.quotes[key]) return pricingCache.quotes[key];
+    var base = pricingCache.tasks && pricingCache.tasks[task] ? pricingCache.tasks[task] : null;
+    if (!(len > 0)) return base;
+    /* Scale input tokens cleanly from server tier rates when pricing is loaded. */
+    var tier = (base && base.tier) || "T1";
+    var tr = pricingCache.tiers && pricingCache.tiers[tier];
+    if (tr && tr.inMtPer1k > 0 && base) {
+      var estInTok = Math.max(150, Math.ceil((len + 1200) / 4));
+      var inLowMt = Math.round((Math.max(150, Math.floor(estInTok * 0.85)) / 1000) * tr.inMtPer1k);
+      var inHighMt = Math.round((Math.ceil(estInTok * 1.15) / 1000) * tr.inMtPer1k);
+      var outLow = task === "polish" ? Math.max(80, Math.floor((len / 4) * 0.9)) : 300;
+      var outHigh = task === "polish" ? Math.min(2000, Math.max(outLow + 60, Math.ceil((len / 4) * 1.35) + 160)) : (base.maxMt > inHighMt ? (base.maxMt - inHighMt) : Math.round((1500 / 1000) * tr.outMtPer1k));
+      var outLowMt = task === "polish" ? Math.round((outLow / 1000) * tr.outMtPer1k) : Math.max(0, Math.round(base.minMt * 0.55));
+      var outHighMt = task === "polish" ? Math.round((outHigh / 1000) * tr.outMtPer1k) : Math.max(outLowMt, Math.round(base.maxMt * 0.65));
+      return {
+        task: task,
+        minMt: Math.max(1, inLowMt + outLowMt),
+        maxMt: Math.max(Math.max(1, inLowMt + outLowMt), inHighMt + outHighMt)
+      };
+    }
+    return base;
+  }
+
+  function formatInr(n) {
+    var v = Number(n) || 0;
+    return v >= 10 ? String(Math.round(v)) : String(Math.round(v * 100) / 100);
+  }
+
+  function formatQuote(q) {
+    if (!q || q.minMt == null || q.maxMt == null) return "";
+    var minMt = Math.max(0, Math.round(Number(q.minMt) || 0));
+    var maxMt = Math.max(minMt, Math.round(Number(q.maxMt) || 0));
+    var minInr = q.minInr != null ? Number(q.minInr) : (pricingCache.mtPerInr > 0 ? minMt / pricingCache.mtPerInr : null);
+    var maxInr = q.maxInr != null ? Number(q.maxInr) : (pricingCache.mtPerInr > 0 ? maxMt / pricingCache.mtPerInr : null);
+    var tokText = minMt === maxMt ? formatMt(minMt) : (formatMtRange(minMt, maxMt));
+    if (minInr != null && maxInr != null && isFinite(minInr) && isFinite(maxInr)) {
+      tokText += minInr === maxInr
+        ? (" (about Rs " + formatInr(minInr) + ")")
+        : (" (about Rs " + formatInr(minInr) + " to Rs " + formatInr(maxInr) + ")");
+    }
+    return "Estimated " + tokText;
+  }
+
+  function quoteTextFor(task, opts) {
+    var o = opts || {};
+    if (o.cost === 0 || o.free || isTutorialActive()) return "No MaiK tokens needed";
+    if (!task) return "Estimate unavailable until a task is chosen";
+    var len = typeof o.getInputLength === "function" ? o.getInputLength() : (Number(o.inputLength) || 0);
+    var q = getTaskQuoteSync(task, len);
+    if (q && q.minMt != null && q.maxMt != null) {
+      return formatQuote(q);
+    }
+    if (len > 0) fetchTaskQuote(task, len);
+    else ensurePricingLoaded();
+    if (pricingCache.failed) {
+      return "Cost estimate shown once connected to server pricing";
+    }
+    return "Checking live server estimate...";
+  }
+
+  function refreshPricingDom() {
+    if (!D || !D.querySelectorAll) return;
+    var els = D.querySelectorAll("[data-rmd-cost-task]");
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      var task = el.getAttribute("data-rmd-cost-task") || "";
+      var len = Number(el.getAttribute("data-rmd-cost-chars") || 0) || 0;
+      var freeAttr = el.getAttribute("data-rmd-cost-free") === "1";
+      var prefix = el.getAttribute("data-rmd-cost-prefix") || "";
+      var txt = quoteTextFor(task, { inputLength: len, free: freeAttr });
+      el.textContent = prefix ? (prefix + txt) : txt;
+    }
+  }
+
+  function chargeMtFromResponse(res) {
+    if (!res || typeof res !== "object") return null;
+    if (res.costMt != null && isFinite(Number(res.costMt))) {
+      return Math.max(0, Math.round(Number(res.costMt)));
+    }
+    if (res.actualCostMt != null && isFinite(Number(res.actualCostMt))) {
+      return Math.max(0, Math.round(Number(res.actualCostMt)));
+    }
+    if (res.draft && res.draft._costMt != null && isFinite(Number(res.draft._costMt))) {
+      return Math.max(0, Math.round(Number(res.draft._costMt)));
+    }
+    var inr = res.costInr != null ? Number(res.costInr) : (res.actualCostInr != null ? Number(res.actualCostInr) : null);
+    if (inr != null && isFinite(inr) && pricingCache.mtPerInr > 0) {
+      return Math.max(0, Math.round(inr * pricingCache.mtPerInr));
+    }
+    var micro = res.costMicroUsd != null ? Number(res.costMicroUsd) : (res.actualCostMicroUsd != null ? Number(res.actualCostMicroUsd) : null);
+    if (micro != null && isFinite(micro) && pricingCache.mtPerInr > 0 && pricingCache.usdInrRate > 0) {
+      return Math.max(0, Math.round((micro / 1e6) * pricingCache.usdInrRate * pricingCache.mtPerInr));
+    }
+    return null;
+  }
+
+  function recordCharge(st, res) {
+    var mt = chargeMtFromResponse(res);
+    if (st && mt != null) {
+      st.lastCostMt = mt;
+      st.lastCostInr = res && res.costInr != null ? Number(res.costInr) : null;
+    }
+    return mt;
+  }
+
+  function chargedHtml(st) {
+    if (!st || st.lastCostMt == null) return "";
+    return '<p class="rmd-ai-charged" role="status">Charged: ' + esc(formatMt(st.lastCostMt)) + (st.lastCostMt === 0 ? " (cached or free)" : "") + '</p>';
+  }
+
+  function microUsdToMt(microUsd) {
+    if (microUsd == null || !isFinite(Number(microUsd))) return null;
+    if (!(pricingCache.mtPerInr > 0) || !(pricingCache.usdInrRate > 0)) return null;
+    return Math.max(0, Math.round((Number(microUsd) / 1e6) * pricingCache.usdInrRate * pricingCache.mtPerInr));
+  }
+
+  function inrToMt(inr) {
+    if (inr == null || !isFinite(Number(inr)) || !(pricingCache.mtPerInr > 0)) return null;
+    return Math.max(0, Math.round(Number(inr) * pricingCache.mtPerInr));
+  }
+
+  SMD.pricing = {
+    ensureLoaded: ensurePricingLoaded,
+    fetchQuote: fetchTaskQuote,
+    getQuote: getTaskQuoteSync,
+    quoteText: quoteTextFor,
+    formatMt: formatMt,
+    formatRange: formatMtRange,
+    recordCharge: recordCharge,
+    chargeMtFromResponse: chargeMtFromResponse,
+    chargedHtml: chargedHtml,
+    microUsdToMt: microUsdToMt,
+    inrToMt: inrToMt,
+    subscribe: function (fn) {
+      if (typeof fn === "function") pricingCache.listeners.push(fn);
+    },
+    getData: function () { return pricingCache; },
+    _resetForTest: function () {
+      pricingCache.loaded = false;
+      pricingCache.failed = false;
+      pricingCache.inFlight = null;
+      pricingCache.mtPerInr = null;
+      pricingCache.usdInrRate = null;
+      pricingCache.tiers = null;
+      pricingCache.tasks = null;
+      pricingCache.credits = null;
+      pricingCache.quotes = {};
+      pricingCache.quoteInFlight = {};
+    }
+  };
+
   function aiBarHtml(st, opts) {
     var o = opts || {};
-    var cost = typeof o.cost === "number" ? o.cost : 2;
-    /* Tutorial projects run Ask MaiK against the tutorial sandbox (no provider call, no charge), so say so;
-     * the coach bar says the same (owner item 8: one cost wording everywhere). */
-    try {
-      var tutProj = SMD.store && SMD.store.getActiveProject ? SMD.store.getActiveProject() : null;
-      if (tutProj && tutProj.tutorial) cost = 0;
-    } catch (eTut) {}
+    var isFree = o.cost === 0 || !!o.free || isTutorialActive();
+    var askLbl = o.askLabel || "Ask MaiK to draft it";
+    var manualLbl = o.manualLabel || "Do it myself";
+    var askCls = o.askBtnClass || "rmd-btn-primary";
+    var inputLen = typeof o.getInputLength === "function" ? o.getInputLength() : (Number(o.inputLength) || 0);
+    var costLine = o.costText || (isFree ? "No MaiK tokens needed" : quoteTextFor(o.task, { inputLength: inputLen, free: isFree }));
     var h = '<div class="rmd-ai-bar">';
     h += '<div class="rmd-ai-actions">';
-    h += '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd-ai="ask"' + (st.busy ? " disabled" : "") + '><span class="rmd-ai-mark" aria-hidden="true">R</span>Ask MaiK to draft it</button>';
-    h += '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-ai="manual">Do it myself</button>';
+    h += '<button type="button" class="rmd-btn ' + askCls + '" data-rmd-ai="ask"' + (st.busy ? " disabled" : "") + '><span class="rmd-ai-mark" aria-hidden="true">' + rmdMarkSvg(14) + '</span>' + esc(askLbl) + '</button>';
+    h += '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-ai="manual">' + esc(manualLbl) + '</button>';
     h += '</div>';
-    h += '<p class="rmd-ai-cost">' + (cost > 0 ? "Costs about " + cost + " MaiK token" + (cost === 1 ? "" : "s") : "No MaiK tokens needed") + '</p>';
+    h += '<p class="rmd-ai-cost" data-rmd-cost-task="' + esc(o.task || "") + '" data-rmd-cost-chars="' + esc(String(Math.round(inputLen))) + '" data-rmd-cost-free="' + (isFree ? "1" : "0") + '">' + esc(costLine) + '</p>';
+    if (st && st.lastCostMt != null) h += chargedHtml(st);
     if (st.notice) h += st.notice;
-    if (st.busy) h += '<p class="rmd-ai-progress" role="status">MaiK is drafting your ' + esc(o.label || "draft") + '&#8230;</p>';
-    if (st.error) h += errHtml(st.error);
+    if (st.busy) {
+      h += '<p class="rmd-ai-progress smd-books-keep" role="status">' + esc(st.progressText || ("MaiK is drafting your " + (o.label || "draft"))) + (st.progressText ? "" : "&#8230;") + '</p>';
+      if (typeof st.progressPct === "number" && st.progressPct > 0) {
+        h += '<div class="rmd-ai-pbar" aria-hidden="true"><span style="width:' + Math.max(4, Math.min(100, Math.round(st.progressPct))) + '%"></span></div>';
+      }
+    }
+    if (st.error) h += errHtml(st.error, o.retryAttr || "ai-retry");
     h += '</div>';
     return h;
   }
@@ -906,12 +1239,24 @@
       };
     }
     var ask = container.querySelector('[data-rmd-ai="ask"]');
+    var retryAttr = o.retryAttr || "ai-retry";
+    var retryBtn = container.querySelector('[data-rmd="' + retryAttr + '"]') || container.querySelector('[data-rmd-action="retry"]');
+    if (retryBtn && ask) {
+      retryBtn.onclick = function () { ask.click(); };
+    }
+    if (o.task && o.cost !== 0 && !o.free && !isTutorialActive()) {
+      var len = typeof o.getInputLength === "function" ? o.getInputLength() : (Number(o.inputLength) || 0);
+      if (len > 0) fetchTaskQuote(o.task, len);
+      else ensurePricingLoaded();
+    }
     if (ask) {
       ask.onclick = function () {
         if (st.busy) return;
         st.busy = true;
         st.error = null;
         st.notice = null;
+        st.progressText = null;
+        st.progressPct = 0;
         if (o.render) o.render();
         var run;
         if (o.request) {
@@ -923,15 +1268,25 @@
         }
         Promise.resolve(run).then(function (res) {
           st.busy = false;
+          st.progressText = null;
+          st.progressPct = 0;
+          recordCharge(st, res);
           st.notice = (res && Array.isArray(res._phiRemovedCategories) && res._phiRemovedCategories.length)
             ? phiRemovedNoticeHtml(res._phiRemovedCategories)
             : null;
           var draft = res && res.draft !== undefined ? res.draft : res;
-          var keys = o.apply ? o.apply(draft, res) : [];
-          for (var i = 0; i < (keys || []).length; i++) st.drafted[keys[i]] = 1;
+          var keys = (o.apply ? o.apply(draft, res) : []) || [];
+          if (!keys.length && !(draft && draft._alreadyFilled)) {
+            st.error = { code: "empty_draft", message: o.emptyMessage || "MaiK returned an empty draft. Check your connection and try again." };
+            if (o.render) o.render();
+            return;
+          }
+          for (var i = 0; i < keys.length; i++) st.drafted[keys[i]] = 1;
           if (o.render) o.render();
         }).catch(function (err) {
           st.busy = false;
+          st.progressText = null;
+          st.progressPct = 0;
           if (err && err._handledByConsent) {
             st.error = null;
             if (o.render) o.render();
@@ -1160,8 +1515,11 @@
       "#researchMD .rmd-ai-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }",
       "#researchMD .rmd-ai-mark { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 5px; background: var(--rmd-acc-grad); color: #fff; font: 700 11px var(--rmd-f); }",
       "#researchMD .rmd-ai-cost { margin: 0; font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-ai-charged { margin: 0; font: 600 12.5px var(--rmd-f); color: var(--rmd-acc); }",
       "#researchMD .rmd-ai-phi-note { margin: 0; font: 500 13px var(--rmd-f); color: var(--rmd-warn); }",
       "#researchMD .rmd-ai-progress { margin: 0; font: 500 13px var(--rmd-f); color: var(--rmd-acc); }",
+      "#researchMD .rmd-ai-pbar { height: 6px; border-radius: 999px; background: var(--rmd-line); overflow: hidden; }",
+      "#researchMD .rmd-ai-pbar > span { display: block; height: 100%; border-radius: 999px; background: var(--rmd-acc); transition: width 180ms ease; }",
       "#researchMD .rmd-ai-note { display: inline-block; font: 500 11.5px var(--rmd-f); color: var(--rmd-acc); background: var(--rmd-acc-soft); border-radius: 999px; padding: 2px 8px; margin-top: 4px; }",
       "#researchMD .rmd-fillin-note { display: inline-block; font: 500 11.5px var(--rmd-f); color: var(--rmd-warn); background: var(--rmd-warn-soft); border-radius: 999px; padding: 2px 8px; margin-top: 4px; }",
       "#researchMD .rmd-consent-preview { font-size: 13.5px; color: var(--rmd-ink); background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 8px; padding: 8px 12px; white-space: pre-wrap; }",
@@ -1321,13 +1679,14 @@
       "#researchMD .rmd-conflict-ver { font-size: 12px; color: var(--rmd-mut); }",
       "/* Responsive Breakpoints: Tablet (>= 768px) vs Phone (< 768px) */",
       "@media (max-width: 767px) {",
-      "  #researchMD .rmd-studies-screen { height: auto; min-height: 0; overflow-x: hidden; }",
+      "  #researchMD .rmd-studies-screen { flex: 0 0 auto; height: auto; min-height: 0; overflow: visible; }",
       "  #researchMD .rmd-topbar-actions { width: 100%; }",
       "  #researchMD .rmd-topbar-actions .rmd-btn { flex: 1 1 auto; min-height: 44px; min-width: 0; max-width: 100%; }",
       "  #researchMD .rmd-study-row { flex-wrap: wrap; }",
-      "  #researchMD .rmd-split-layout { flex-direction: column; min-width: 0; width: 100%; }",
-      "  #researchMD .rmd-pane-left { flex: 1; border-right: 0; min-width: 0; width: 100%; }",
-      "  #researchMD .rmd-pane-right { flex: 1; padding: 14px; min-width: 0; width: 100%; }",
+      "  #researchMD .rmd-split-layout { flex-direction: column; flex: none; min-height: auto; overflow: visible; min-width: 0; width: 100%; }",
+      "  #researchMD .rmd-pane-left { flex: none; border-right: 0; min-width: 0; width: 100%; overflow-y: visible; }",
+      "  #researchMD .rmd-pane-right { flex: none; padding: 14px; min-width: 0; width: 100%; overflow-y: visible; }",
+      "  #researchMD .rmd-run-screen { flex: 0 0 auto; height: auto; min-height: 0; overflow-y: visible; }",
       "  #researchMD .rmd-phone-seg { display: flex; }",
       "  #researchMD .rmd-phone-hidden { display: none !important; }",
       "  #researchMD .rmd-mobile-back-studies { display: inline-flex; }",
@@ -1455,7 +1814,12 @@
       "#researchMD .rmd-pdf-hint { font-size: 12px; margin: 0; }",
       "/* Phase 3: extraction form */",
       "#researchMD .rmd-extract-selects { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }",
-      "#researchMD .rmd-extract-form-body { padding: 14px 16px 40px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }",
+      "#researchMD .rmd-extract-form-body { padding: 14px 16px 40px; display: flex; flex-direction: column; gap: 14px; overflow-y: visible; }",
+      "@media (max-width: 767px) {",
+      "  #researchMD .rmd-abstract-box { max-height: none; overflow-y: visible; overscroll-behavior: auto; }",
+      "  #researchMD .rmd-pdf-layout { flex: none; min-height: auto; overflow-y: visible; }",
+      "  #researchMD .rmd-pdf-scroll { max-height: none; overflow: visible; }",
+      "}",
       "#researchMD .rmd-extract-field { display: flex; flex-direction: column; gap: 7px; border: 1px solid var(--rmd-line); border-radius: 10px; padding: 12px; background: var(--rmd-panel); }",
       "#researchMD .rmd-extract-field-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }",
       "#researchMD .rmd-extract-field-head label { font: 600 13px var(--rmd-f); color: var(--rmd-ink); }",
@@ -2149,7 +2513,7 @@
   var SERVER_SCREENS = {
     protocol: 1, search: 1, screening: 1, conflicts: 1, prisma: 1, pdf: 1,
     extract: 1, rob: 1, data: 1, grade: 1, manuscript: 1, checklist: 1, ipd: 1, ready: 1,
-    thesis: 1, "thesis-type": 1, "thesis-journal": 1, "thesis-draft": 1, "thesis-tables": 1, "thesis-refs": 1
+    thesis: 1, "thesis-auto": 1, "thesis-type": 1, "thesis-journal": 1, "thesis-draft": 1, "thesis-tables": 1, "thesis-refs": 1
   };
   var moreOpen = false;
   var accountSaveNotice = "";
@@ -2157,6 +2521,7 @@
   var PILL_LABELS = {
     screening: "Screen",
     conflicts: "Conflicts",
+    "thesis-auto": "One-tap",
     "thesis-type": "Type",
     "thesis-refs": "Refs",
     masterchart: "Chart",
@@ -2173,7 +2538,7 @@
     manuscript: "Manuscript", checklist: "Checklist", ready: "Submit",
     ipd: "IPD", credits: "Credits", institution: "Institution",
     templates: "Templates", journals: "Journals", sources: "Data sources",
-    thesis: "Thesis", "thesis-type": "Paper type", "thesis-journal": "Journal",
+    thesis: "Thesis", "thesis-auto": "Make paper", "thesis-type": "Paper type", "thesis-journal": "Journal",
     "thesis-draft": "Draft", "thesis-tables": "Tables", "thesis-refs": "References",
     masterchart: "Master chart",
     casefile: "Case file", novelty: "Novelty", iec: "Ethics committee",
@@ -2209,6 +2574,13 @@
       eg: "Upload your thesis PDF or .docx directly.",
       gloss: "New words: patient identifiers (names, dates of birth, hospital numbers or contact details that could reveal who a patient is).",
       action: { label: "Next: pick the paper type", fallback: "thesis-type" }
+    },
+    "thesis-auto": {
+      name: "Make my journal paper",
+      do: "Run the full thesis-to-paper workflow automatically, then review every amber item and approve before exporting the submission package.",
+      eg: "Confirm author names, IEC approval number, declarations and any unverified references before approving.",
+      gloss: "New words: CRediT (standardised author contribution roles) and RIS (reference file imported by citation managers).",
+      action: { label: "Back to thesis", fallback: "thesis" }
     },
     "thesis-type": {
       name: "Pick the paper type",
@@ -2482,6 +2854,7 @@
     checklist: "point items to your paper.",
     ready: "check what is left to submit.",
     thesis: "upload your thesis PDF or Word (.docx).",
+    "thesis-auto": "turn your thesis into a submission-ready paper.",
     "thesis-type": "pick the paper type.",
     "thesis-journal": "pick the target journal.",
     "thesis-draft": "shape the draft, checking every number.",

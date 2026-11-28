@@ -90,6 +90,7 @@
 import { runUserAi, extractJson, parsePhiOverrideRequest, evaluatePhiOverride } from "./_suggest.js";
 import { scan, scanAndMaskThesis } from "./_phi.js";
 import { checklistItems } from "./_checklists.js";
+import { inrToMt } from "./_credits.js";
 
 const WRITE_ROLES = ["owner", "editor", "analyst"];
 const TOKENS_MESSAGE = "You need more MaiK tokens";
@@ -131,6 +132,7 @@ const THESIS_SECTIONS = [
   { id: "methods", heading: "Methods" },
   { id: "results", heading: "Results" },
   { id: "discussion", heading: "Discussion" },
+  { id: "conclusion", heading: "Conclusion" },
 ];
 const NUM_RE = /(?<![A-Za-z0-9.])(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?%?/g;
 
@@ -196,8 +198,9 @@ async function storeDraft(ctx, projectId, task, draft, model, costInr) {
   await api.audit(db, projectId, uid, "ai_draft_stored", id, { task, status: "unverified" });
   return stored;
 }
-function respond(ctx, stored, model, costInr) {
-  return ctx.api.json({ draft: stored, model: model || "", costInr: roundInr(costInr) }, 200, { "x-request-id": ctx.requestId });
+function respond(ctx, stored, model, costInr, costMt) {
+  const mt = costMt != null ? Math.max(0, Math.round(Number(costMt) || 0)) : inrToMt(costInr);
+  return ctx.api.json({ draft: stored, model: model || "", costInr: roundInr(costInr), costMt: mt }, 200, { "x-request-id": ctx.requestId });
 }
 
 async function loadProjectBits(db, projectId) {
@@ -854,15 +857,114 @@ function caseReportDraft(parsed) {
   };
 }
 
-function suggestDesign(text) {
-  const s = String(text || "").toLowerCase();
-  if (/\brandomi[sz]ed\b|\brct\b|\bplacebo\b/.test(s))
-    return { paperType: "rct", checklist: "CONSORT", label: "Randomised controlled trial (RCT) (a trial that assigns people by chance)" };
-  if (/systematic review|\bmeta-analysis\b|\bmeta analysis\b/.test(s))
-    return { paperType: "systematic_review", checklist: "PRISMA", label: "Systematic review (a review that finds and combines every eligible study)" };
-  if (/case series|case report/.test(s))
-    return { paperType: "case_series", checklist: "CARE", label: "Case series (a report of a run of similar patients)" };
-  return { paperType: "observational", checklist: "STROBE", label: "Observational study (a study that watches what happened, without assigning treatment)" };
+function designQuoteFor(rawText, patterns) {
+  const sentences = String(rawText || "").replace(/\s+/g, " ").split(/(?<=[.!?])\s+/);
+  for (const sent of sentences) {
+    const clean = sent.trim();
+    if (clean.length < 18 || clean.length > 280) continue;
+    const low = clean.toLowerCase();
+    if (/future\s+randomi[sz]ed|inform\s+the\s+design\s+of\s+a\s+randomi[sz]ed|systematic\s+review\s+identified/.test(low)) continue;
+    for (const re of patterns) {
+      if (re.test(clean)) return clean.length > 190 ? clean.slice(0, 187) + "..." : clean;
+    }
+  }
+  return "";
+}
+
+function suggestDesign(text, pages) {
+  const s = String(text || "");
+  const pageList = Array.isArray(pages) && pages.length ? pages : [{ n: 1, text: s }];
+  const nonToc = pageList.filter((p) => {
+    const t = String((p && p.text) || "");
+    const dotLines = (t.match(/\.{4,}\s*\d+/g) || []).length;
+    return !/\btable\s+of\s+contents\b|\blist\s+of\s+(?:tables|figures)\b/i.test(t.slice(0, 300)) && dotLines < 3;
+  });
+  const usable = nonToc.length ? nonToc : pageList;
+  const front = usable.slice(0, Math.min(18, usable.length)).map((p) => String((p && p.text) || "")).join("\n");
+  const titleText = usable.slice(0, Math.min(4, usable.length)).map((p) => String((p && p.text) || "")).join("\n").toLowerCase();
+  const fLow = front.toLowerCase();
+  const sLow = usable.map((p) => String((p && p.text) || "")).join("\n").toLowerCase();
+  const defs = [
+    {
+      paperType: "rct", checklist: "CONSORT",
+      label: "Randomised controlled trial (RCT) (a trial that assigns people by chance)",
+      pats: [/\brandomi[sz]ed\s+(?:controlled|intrapatient|clinical|placebo|double[- ]blind|multicentre|multicenter)?\s*(?:controlled\s+)?trial\b/i, /\brandomly\s+(?:allocated|assigned|divided)\b/i, /\bintrapatient\s+(?:concurrent\s+)?controlled\b/i, /\bplacebo[- ]controlled\b/i, /\bconsort\b/i],
+      neg: /\binform\s+the\s+design\s+of\s+a\s+randomi[sz]ed|\bfuture\s+randomi[sz]ed\b/i,
+    },
+    {
+      paperType: "diagnostic", checklist: "STARD",
+      label: "Diagnostic accuracy study (a study comparing a test against a reference standard)",
+      pats: [/\bdiagnostic\s+accuracy\b/i, /\breference\s+standard\b/i, /\bsensitivity\b.{0,40}\bspecificity\b/i, /\broc\s+curve\b|\bstard\b/i],
+    },
+    {
+      paperType: "cohort", checklist: "STROBE",
+      label: "Cohort study (a study following defined patient groups over time)",
+      pats: [/\bprospective\s+cohort\b|\bretrospective\s+cohort\b|\bcohort\s+study\b|\bunselected[^.]{0,40}cohort\b/i, /\bfollowed\s+up\s+(?:for|every)\b|\bkaplan[- ]meier\b/i, /\bnear\s+consecutive\s+patients\b.{0,50}\benrolled\b/i],
+    },
+    {
+      paperType: "case_control", checklist: "STROBE",
+      label: "Case-control study (a study comparing cases against matched controls)",
+      pats: [/\bcase[- ]control\s+study\b/i, /\bmatched\s+controls?\b/i, /\bodds\s+ratio\b.{0,50}\bcontrols?\b/i],
+    },
+    {
+      paperType: "cross_sectional", checklist: "STROBE",
+      label: "Cross-sectional study (a study measuring prevalence or findings at one point in time)",
+      pats: [/\bcross[- ]sectional\s+(?:study|survey|analysis)\b/i, /\bpoint\s+prevalence\b/i],
+    },
+    {
+      paperType: "qualitative", checklist: "SRQR",
+      label: "Qualitative study (a study analyzing interviews, themes, or experiences)",
+      pats: [/\bqualitative\s+study\b|\bthematic\s+analysis\b|\bfocus\s+groups?\b|\bsemi[- ]structured\s+interviews?\b/i],
+    },
+    {
+      paperType: "case_series", checklist: "CARE",
+      label: "Case series (a report of a run of similar patients)",
+      pats: [/\bcase\s+series\b|\bcase\s+report\b/i],
+    },
+    {
+      paperType: "systematic_review", checklist: "PRISMA",
+      label: "Systematic review (a review that finds and combines every eligible study)",
+      pats: [/\bsystematic\s+review(?:\s+and\s+meta[- ]analysis)?\b|\bmeta[- ]analysis\b|\bprisma\b/i],
+      neg: /\bi\s+systematically\s+reviewed\b|\bsystematic\s+review\s+(?:also\s+)?identified\b/i,
+    },
+  ];
+  let best = { score: 0, def: null, quote: "" };
+  const scores = new Map();
+  for (const d of defs) {
+    let sc = 0;
+    for (const re of d.pats) {
+      const mTitle = titleText.match(new RegExp(re.source, "gi"));
+      if (mTitle) sc += mTitle.length * 10;
+      const mFront = fLow.match(new RegExp(re.source, "gi"));
+      if (mFront) sc += mFront.length * 4;
+      const mAll = sLow.match(new RegExp(re.source, "gi"));
+      if (mAll) sc += Math.min(8, mAll.length);
+    }
+    if (d.neg && d.neg.test(front.slice(0, 6000)) && sc <= 10) sc = Math.max(0, sc - 8);
+    scores.set(d.paperType, sc);
+  }
+  const titleArea = usable.slice(0, Math.min(6, usable.length)).map((p) => String((p && p.text) || "")).join("\n").toLowerCase();
+  const hasEmpiricalAim = /\b(?:enrolled\s+in\s+the\s+study|consecutive\s+patients|patients\s+were\s+followed|randomi[sz]ed\s+(?:controlled|intrapatient)|prevalence\s+of)\b/.test(titleArea);
+  if ((scores.get("systematic_review") || 0) > 0 && ((scores.get("rct") || 0) >= 8 || (scores.get("cohort") || 0) >= 6 || hasEmpiricalAim)) {
+    if (!/\bsystematic\s+review\b|\bmeta[- ]analysis\b/.test(titleText)) {
+      scores.set("systematic_review", (scores.get("systematic_review") || 0) * 0.1);
+    }
+  }
+  for (const d of defs) {
+    const sc = scores.get(d.paperType) || 0;
+    if (sc > best.score) {
+      best = { score: sc, def: d, quote: designQuoteFor(front, d.pats) || designQuoteFor(s, d.pats) };
+    }
+  }
+  if (best.def && best.score > 0) {
+    return {
+      paperType: best.def.paperType,
+      checklist: best.def.checklist,
+      label: best.def.label,
+      quote: best.quote,
+    };
+  }
+  return { paperType: "observational", checklist: "STROBE", label: "Observational study (a study that watches what happened, without assigning treatment)", quote: "" };
 }
 function thesisSource(input) {
   if (Array.isArray(input.pages) && input.pages.length)
@@ -1003,6 +1105,41 @@ function budgetsFor(sections, wordLimit) {
   return map;
 }
 
+function thesisChapterExcerpt(maskedPages, maskedFull, sectionId, maxChars = 17500) {
+  if (maskedFull.length <= maxChars) return [maskedFull];
+  const pages = Array.isArray(maskedPages) && maskedPages.length
+    ? maskedPages.map((p, idx) => ({ n: (p && p.n != null) ? p.n : idx + 1, text: String((p && p.text) || "") }))
+    : [{ n: 1, text: maskedFull }];
+  const cues = {
+    abstract: /\b(summary|abstract|aims?|conclusions?|results?)\b/i,
+    introduction: /\b(introduction|background|aims?|objectives?|rationale|literature\s+review)\b/i,
+    methods: /\b(methods?|patients?\s+and\s+methods?|materials?\s+and\s+methods?|study\s+design|statistical\s+analysis|eligibility|randomi[sz]ation)\b/i,
+    results: /\b(results?|findings?|outcomes?|table\s+\d+|baseline\s+characteristics)\b/i,
+    discussion: /\b(discussion|general\s+discussion|limitations?|strengths?|implications?)\b/i,
+    conclusion: /\b(conclusions?|future\s+directions?|summary|clinical\s+implications?)\b/i,
+  }[sectionId] || /\b(introduction|methods|results|discussion)\b/i;
+
+  const matched = [];
+  for (const p of pages) {
+    if (/^\s*(references|bibliography|dankwoord|curriculum\s+vitae|acknowledgements?)\b/im.test(p.text.slice(0, 260))) continue;
+    if (cues.test(p.text) || (sectionId === "abstract" && p.n <= 8)) matched.push(p);
+  }
+  const sourcePages = matched.length ? matched : pages;
+  const chunks = [];
+  let cur = "";
+  for (const p of sourcePages) {
+    const piece = "[Page " + p.n + "]\n" + p.text.slice(0, 6000) + "\n\n";
+    if (cur.length + piece.length > maxChars && cur.length > 0) {
+      chunks.push(cur);
+      cur = "";
+      if (chunks.length >= 4) break;
+    }
+    cur += piece.slice(0, maxChars - cur.length);
+  }
+  if (cur.trim() && chunks.length < 4) chunks.push(cur);
+  return chunks.length ? chunks : [maskedFull.slice(0, maxChars)];
+}
+
 async function thesisTask(ctx, projectId, input) {
   const { db, uid, requestId, api } = ctx;
   const { json, err, audit } = api;
@@ -1058,29 +1195,52 @@ async function thesisTask(ctx, projectId, input) {
   if (input.section !== undefined && input.section !== null && input.section !== "") {
     const id = String(input.section).toLowerCase();
     const found = THESIS_SECTIONS.find((s) => s.id === id);
-    if (!found) return err(400, "invalid_body", "section must be abstract, introduction, methods, results or discussion", requestId);
+    if (!found) return err(400, "invalid_body", "section must be abstract, introduction, methods, results, discussion or conclusion", requestId);
     sections = [found];
   }
-  const suggestion = suggestDesign(maskedFull);
+  const suggestion = suggestDesign(maskedFull, maskedPages);
   const paperType = asText(input.paperType, 80) || suggestion.paperType;
   const checklist = asText(input.checklist, 40) || suggestion.checklist;
-  const excerpt = maskedFull.slice(0, 20000);
   const budgets = budgetsFor(sections, wordLimit);
-  const system = "You turn thesis text into one section of a journal article (IMRaD: Introduction, Methods, Results, Discussion). " +
+  const system = "You turn thesis text into one section of a journal article (IMRaD + Conclusion: Abstract, Introduction, Methods, Results, Discussion, Conclusion). " +
     "Return ONLY JSON {\"text\":\"...\"}. Copy numbers exactly from the thesis. Do not invent or recompute a number. " +
-    "Keep the author's wording where you can. Stay within the word budget.";
+    "Keep the author's wording where you can. Stay within the word budget. No em-dash characters.";
   let model = "";
   let costInr = 0;
+  let costMt = 0;
   const drafted = [];
   const modelRefs = [];
   for (const section of sections) {
     const budget = budgets.get(section.id) || wordLimit;
+    const chunks = thesisChapterExcerpt(maskedPages, maskedFull, section.id, 17500);
+    let sourceForSection = chunks[0];
+    if (chunks.length > 1) {
+      const notes = [];
+      for (let ci = 0; ci < chunks.length; ci++) {
+        const sumPrompt = "Condense part " + (ci + 1) + " of " + chunks.length + " for the " + section.heading +
+          " section. Keep exact numbers, outcomes, tables and sample sizes verbatim. Return ONLY JSON {\"text\":\"...\"}.\n\n" + chunks[ci];
+        const subOut = await oneCall(ctx, projectId, "thesis_to_paper", system, sumPrompt, { thesisCleared: true });
+        if (subOut.error) return subOut.error;
+        model = subOut.model || model;
+        costInr += subOut.costInr || 0;
+        costMt += subOut.costMt != null ? subOut.costMt : inrToMt(subOut.costInr || 0);
+        const noteTxt = sectionText(subOut.text);
+        if (noteTxt) notes.push(noteTxt);
+      }
+      if (notes.length) sourceForSection = notes.join("\n\n").slice(0, 17500);
+    }
+    const sectionHint = section.id === "abstract"
+      ? "\nFormat: Structured abstract using headings Background:, Methods:, Results:, Conclusion:."
+      : (section.id === "conclusion"
+        ? "\nFormat: Write a concise Conclusion (2-4 sentences) capturing the main clinical takeaway."
+        : (section.id === "introduction" ? "\nFormat: Condense thesis introduction and literature review cleanly into background and study rationale." : ""));
     const prompt = "Section: " + section.heading + "\nWord budget: " + budget +
-      "\nPaper type: " + paperType + "\nChecklist: " + checklist + "\n\nThesis text:\n" + excerpt;
+      "\nPaper type: " + paperType + "\nChecklist: " + checklist + sectionHint + "\n\nThesis text:\n" + sourceForSection;
     const out = await oneCall(ctx, projectId, "thesis_to_paper", system, prompt, { thesisCleared: true });
     if (out.error) return out.error;
     model = out.model || model;
     costInr += out.costInr || 0;
+    costMt += out.costMt != null ? out.costMt : inrToMt(out.costInr || 0);
     const parsed = extractJson(out.text);
     if (parsed && typeof parsed === "object" && !Array.isArray(parsed) && Array.isArray(parsed.references))
       modelRefs.push(...parsed.references);
@@ -1099,13 +1259,20 @@ async function thesisTask(ctx, projectId, input) {
   }
   let total = drafted.reduce((n, s) => n + wordCount(s.text), 0);
   let trimmedToWordLimit = drafted.some((s) => s.trimmedToWordLimit);
-  if (total > wordLimit && drafted.length) {
-    const last = drafted[drafted.length - 1];
+  while (total > wordLimit && drafted.length) {
+    let target = drafted.find((s) => s.id === "discussion" && wordCount(s.text) > 1);
+    if (!target) {
+      for (let di = drafted.length - 1; di >= 0; di--) {
+        if (wordCount(drafted[di].text) > 0) { target = drafted[di]; break; }
+      }
+    }
+    if (!target) break;
     const over = total - wordLimit;
-    const keep = Math.max(0, wordCount(last.text) - over);
-    last.text = trimWords(last.text, keep);
-    last.numbers = last.numbers.filter((n) => last.text.indexOf(n.value) >= 0);
-    last.trimmedToWordLimit = true;
+    const curW = wordCount(target.text);
+    const keep = target.id === "discussion" ? Math.max(0, curW - over) : Math.max(0, curW - over);
+    target.text = trimWords(target.text, keep);
+    target.numbers = target.numbers.filter((n) => target.text.indexOf(n.value) >= 0);
+    target.trimmedToWordLimit = true;
     trimmedToWordLimit = true;
     total = drafted.reduce((n, s) => n + wordCount(s.text), 0);
   }
@@ -1123,7 +1290,7 @@ async function thesisTask(ctx, projectId, input) {
     references: thesisReferences(maskedFull, modelRefs),
   };
   const stored = await storeDraft(ctx, projectId, "thesis_to_paper", draft, model, roundInr(costInr));
-  return respond(ctx, stored, model, costInr);
+  return respond(ctx, stored, model, costInr, costMt);
 }
 
 function studySnippets(bits, input) {
@@ -1318,7 +1485,7 @@ async function polishTask(ctx, projectId, input, extraOpts) {
     spelling,
   };
   const stored = await storeDraft(ctx, projectId, "polish", draft, out.model, out.costInr || 0);
-  return respond(ctx, stored, out.model, out.costInr || 0);
+  return respond(ctx, stored, out.model, out.costInr || 0, out.costMt);
 }
 
 function tokenList(run) {
@@ -1433,7 +1600,7 @@ export async function aiDraft(ctx, projectId, body) {
     const draft = robDraft(extractJson(out.text), studies);
     if (!draft) return err(422, "invalid_draft", "MaiK did not return a Risk of Bias 2 (RoB 2) draft that could be checked.", requestId);
     const stored = await storeDraft(ctx, projectId, task, draft, out.model, out.costInr || 0);
-    return respond(ctx, stored, out.model, out.costInr || 0);
+    return respond(ctx, stored, out.model, out.costInr || 0, out.costMt);
   } else if (task === "checklist") {
     const guide = checklistItems(input.guidelineId || input.guideline || "strobe");
     if (!guide) return err(400, "invalid_body", "Unknown checklist. Use CARE, SPIRIT, PRISMA, STROBE or CONSORT.", requestId);
@@ -1452,7 +1619,7 @@ export async function aiDraft(ctx, projectId, body) {
     const draft = checklistDraft(extractJson(out.text), guide, headings);
     if (!draft) return err(422, "invalid_draft", "MaiK did not return a checklist draft that could be checked.", requestId);
     const stored = await storeDraft(ctx, projectId, task, draft, out.model, out.costInr || 0);
-    return respond(ctx, stored, out.model, out.costInr || 0);
+    return respond(ctx, stored, out.model, out.costInr || 0, out.costMt);
   } else if (task === "title_abstract") {
     const tokens = tokenList(bits.run);
     system = "You draft a paper title and a structured abstract. Return ONLY JSON {title, abstract:{background, methods, results, conclusions}}. " +
@@ -1598,6 +1765,7 @@ export async function aiDraft(ctx, projectId, body) {
   const out = await oneCall(ctx, projectId, task, system, prompt, overrideArgs);
   if (out.error) return out.error;
   let totalCostInr = out.costInr || 0;
+  let totalCostMt = out.costMt != null ? out.costMt : inrToMt(totalCostInr);
   let usedModel = out.model;
   const parsed = extractJson(out.text);
   let draft = null;
@@ -1613,6 +1781,7 @@ export async function aiDraft(ctx, projectId, body) {
       const retryOut = await oneCall(ctx, projectId, task, system, repairPrompt, overrideArgs);
       if (retryOut.error) return retryOut.error;
       totalCostInr += retryOut.costInr || 0;
+      totalCostMt += retryOut.costMt != null ? retryOut.costMt : inrToMt(retryOut.costInr || 0);
       usedModel = retryOut.model || usedModel;
       draft = ctriDraft(extractJson(retryOut.text));
     }
@@ -1645,5 +1814,5 @@ export async function aiDraft(ctx, projectId, body) {
   }
   if (!draft) return err(422, "invalid_draft", "MaiK did not return a draft that matched the required fields.", requestId);
   const stored = await storeDraft(ctx, projectId, task, draft, usedModel, totalCostInr);
-  return respond(ctx, stored, usedModel, totalCostInr);
+  return respond(ctx, stored, usedModel, totalCostInr, totalCostMt);
 }

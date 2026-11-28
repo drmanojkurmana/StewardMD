@@ -302,7 +302,9 @@
       "#researchMD .rmd-grade-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }",
       "#researchMD .rmd-grade-phone-note { margin: 0; font-size: 12.5px; color: var(--rmd-mut); }",
       "@media (max-width: 767px) {",
-      "  #researchMD .rmd-grade-layout { grid-template-columns: 1fr; padding: 12px 14px; }",
+      "  #researchMD .rmd-grade-screen { flex: 0 0 auto; height: auto; min-height: 0; }",
+      "  #researchMD .rmd-grade-layout { grid-template-columns: 1fr; flex: none; min-height: auto; padding: 12px 14px; }",
+      "  #researchMD .rmd-grade-list { max-height: none; overflow-y: visible; }",
       "  #researchMD .rmd-grade-row2 { grid-template-columns: 1fr; }",
       "  #researchMD .rmd-grade-sof { padding: 12px 14px 40px; }",
       "  #researchMD .rmd-grade-domain select { max-width: none; }",
@@ -728,7 +730,10 @@
         apply: function (draft) {
           var d = draft || {};
           st.serverSugs[run.id] = { imprecision: d.imprecision || null, inconsistency: d.inconsistency || null };
-          return ["imprecision", "inconsistency"];
+          var keys = [];
+          if (d.imprecision && (typeof d.imprecision !== "string" || d.imprecision.trim())) keys.push("imprecision");
+          if (d.inconsistency && (typeof d.inconsistency !== "string" || d.inconsistency.trim())) keys.push("inconsistency");
+          return keys;
         },
         render: function () { render(container); }
       });

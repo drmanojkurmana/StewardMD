@@ -1429,9 +1429,11 @@
 
     function aiBarHtml() {
       if (SMD.ai && SMD.ai.barHtml) {
-        return SMD.ai.barHtml(state.ai, { task: "manuscript_draft", label: "manuscript", cost: 2 });
+        return SMD.ai.barHtml(state.ai, { task: "manuscript_draft", label: "manuscript" });
       }
-      return '<div class="rmd-ai-bar"><div class="rmd-ai-actions"><button type="button" class="rmd-doc-btn rmd-doc-btn-primary" data-doc-ai="ask">Ask MaiK to draft it</button></div><p class="rmd-ai-cost">Costs about 2 MaiK tokens</p></div>';
+      var costTxt = (SMD.pricing && SMD.pricing.quoteText) ? SMD.pricing.quoteText("manuscript_draft") : "Checking live server estimate...";
+      var chgHtml = (SMD.pricing && SMD.pricing.chargedHtml) ? SMD.pricing.chargedHtml(state.ai) : "";
+      return '<div class="rmd-ai-bar"><div class="rmd-ai-actions"><button type="button" class="rmd-doc-btn rmd-doc-btn-primary" data-doc-ai="ask">Ask MaiK to draft it</button></div><p class="rmd-ai-cost" data-rmd-cost-task="manuscript_draft">' + esc(costTxt) + '</p>' + chgHtml + '</div>';
     }
 
     function bodyHtml(section, sub) {
@@ -1442,7 +1444,8 @@
       } else if (sub.overview) {
         h.push('<h5 class="rmd-doc-h3"><span>Section text</span><span class="rmd-doc-words" data-doc-words="' + esc(sub.id) + '">0 words</span></h5>');
       }
-      if (state.ai && state.ai.drafted && state.ai.drafted[sub.id]) {
+      var subHasText = !!String(sub.html || "").replace(/<[^>]+>/g, " ").trim();
+      if (state.ai && state.ai.drafted && state.ai.drafted[sub.id] && subHasText) {
         h.push('<span class="rmd-ai-note" data-rmd-ai-note="' + esc(sub.id) + '">Drafted by MaiK, check it</span>');
       }
       h.push('<div class="rmd-doc-body" contenteditable="true" role="textbox" aria-multiline="true" spellcheck="true" data-doc-body="' + esc(sub.id) + '" data-doc-section="' + esc(section.id) + '" data-placeholder="Type here, or ask MaiK to draft it." aria-label="' + esc((sub.title || section.title) + " text") + '">' + sanitizeHtml(sub.html || "") + '</div>');
@@ -1596,12 +1599,12 @@
           pid: apiPid,
           task: "manuscript_draft",
           label: "manuscript",
-          cost: 2,
           request: requestDraft,
           apply: applyDraft,
           render: function () { renderAll(); }
         });
       } else {
+        if (SMD.pricing && SMD.pricing.ensureLoaded) SMD.pricing.ensureLoaded();
         var ask = host.querySelector("[data-doc-ai=\"ask\"]");
         if (ask) {
           ask.onclick = function () {
@@ -1610,6 +1613,7 @@
             renderAll();
             requestDraft().then(function (res) {
               state.ai.busy = false;
+              if (SMD.pricing && SMD.pricing.recordCharge) SMD.pricing.recordCharge(state.ai, res);
               applyDraft(res && res.draft !== undefined ? res.draft : res);
               renderAll();
             }, function (err) {
@@ -1761,18 +1765,23 @@
       readDocFromDom();
       var d = draft || {};
       var secs = d.sections;
-      if (!secs || (isArr(secs) && !secs.length)) {
-        setNotice("MaiK did not return a draft.", "error");
+      var srcs = sourceSections(secs);
+      var hasAnySourceText = false;
+      var i;
+      for (i = 0; i < srcs.length; i++) {
+        if (String(srcs[i].text || "").trim()) { hasAnySourceText = true; break; }
+      }
+      if (!hasAnySourceText) {
         return [];
       }
       var filled = applySources(state.doc, outline, secs, true);
-      var i;
       for (i = 0; i < filled.length; i++) state.ai.drafted[filled[i]] = 1;
       autosave();
       refreshCounts();
       if (filled.length) {
         setNotice("Drafted by MaiK. Check each marked section.", "info");
       } else {
+        d._alreadyFilled = true;
         setNotice("Every section already has text.", "info");
       }
       scheduleChange();

@@ -350,7 +350,16 @@
     poCreating: false,
     poConfirm: null,
     poQuoteMicroUsd: null,
-    poQuoteSource: ""
+    poQuoteSource: "",
+    poQuoteMt: null,
+    poQuoteInr: null,
+    poQuoteMinMt: null,
+    poQuoteMaxMt: null,
+    poActualMt: null,
+    poActualInr: null,
+    approvedSections: {},
+    redraftOpen: false,
+    moreMenuOpen: false
   };
 
   var seq = 0;
@@ -360,6 +369,14 @@
   var poTimer = null;
   var manuscriptMissing = {};
   var loadError = null;
+  var moreMenuCleanup = null;
+
+  function cleanupMoreMenuListeners() {
+    if (typeof moreMenuCleanup === "function") {
+      try { moreMenuCleanup(); } catch (e) {}
+      moreMenuCleanup = null;
+    }
+  }
 
   function bindBreakpoint() {
     if (mqlBound || !G.matchMedia) return;
@@ -659,14 +676,14 @@
         stateClass = " rmd-po-status-warn rmd-verify-warn";
       }
       inner = '<span class="rmd-po-status-text' + stateClass + '">' + esc(statusText) + '</span>';
+      if (st.poActualMt != null && (st.poStatus === "succeeded" || st.poStatus === "failed" || st.poStatus === "cancelled")) {
+        inner += ' <span class="rmd-ai-charged" role="status">Charged: ' + esc(poMtText(st.poActualMt)) + ' MaiK Tokens' + (st.poActualInr != null ? ' (Rs ' + esc(Math.round(Number(st.poActualInr) * 100) / 100) + ')' : '') + '</span>';
+      }
       if (isJobActive && st.poJobId) {
         inner += ' <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="po-cancel">Cancel</button>';
       }
     }
-    var privLine = useOnDeviceDraft()
-      ? '<div class="rmd-muted rmd-device-privacy" style="font-size:12px;margin-top:4px;">' + esc((G && G.SMD_RMD_JOBS && G.SMD_RMD_JOBS.DEVICE_PRIVACY_LINE) || "Runs on this device. Your PDFs and patient data are read here and never uploaded. Works offline.") + '</div>'
-      : "";
-    return '<div class="rmd-po-status" aria-live="polite">' + inner + privLine + '</div>';
+    return '<div class="rmd-po-status" aria-live="polite">' + inner + '</div>';
   }
 
   function clearPoPoll() {
@@ -706,6 +723,10 @@
       st.poFailures = 0;
       var job = (res && res.job) || res;
       var status = job && job.status;
+      if (job && job.actualCostMt != null) {
+        st.poActualMt = Number(job.actualCostMt);
+        st.poActualInr = job.actualCostInr != null ? Number(job.actualCostInr) : st.poActualInr;
+      }
       if (status === "succeeded" || status === "done") {
         clearPoPoll();
         st.poStatus = "succeeded";
@@ -767,7 +788,25 @@
     return "$" + (usd >= 0.01 ? usd.toFixed(2) : usd.toFixed(4));
   }
 
+  function poMtText(n) {
+    var v = Math.max(0, Math.round(Number(n) || 0));
+    try { return v.toLocaleString("en-IN"); } catch (e) { return String(v); }
+  }
+
+  function poQuoteTokensText() {
+    if (st.poQuoteMinMt != null && st.poQuoteMaxMt != null) {
+      return poMtText(st.poQuoteMinMt) + " to " + poMtText(st.poQuoteMaxMt) + " MaiK Tokens";
+    }
+    if (st.poQuoteMt != null) return poMtText(st.poQuoteMt) + " MaiK Tokens";
+    return "";
+  }
+
   function poQuoteNote() {
+    var tokText = poQuoteTokensText();
+    if (tokText) {
+      var inr = st.poQuoteInr != null ? (" (Rs " + (Math.round(Number(st.poQuoteInr) * 100) / 100) + " ceiling)") : "";
+      return "Server quote: " + tokText + inr + " for up to 64 model calls.";
+    }
     if (st.poQuoteMicroUsd != null) {
       return "Server quote: " + quoteUsdText(st.poQuoteMicroUsd) + " for up to 64 model calls.";
     }
@@ -777,9 +816,12 @@
   function poConfirmHtml() {
     if (!st.poConfirm) return "";
     var q = st.poConfirm.quote;
-    var sentence = (q != null)
-      ? "The server quotes " + esc(quoteUsdText(q)) + " for up to 64 model calls."
-      : "Cost shown before the draft starts. The server quotes the exact cost when the job is created, and you can cancel while it is queued.";
+    var tokText = poQuoteTokensText();
+    var sentence = tokText
+      ? "The server quotes " + esc(tokText) + (st.poQuoteInr != null ? (" (Rs " + esc(Math.round(Number(st.poQuoteInr) * 100) / 100) + " ceiling)") : "") + " for up to 64 model calls."
+      : (q != null
+        ? "The server quotes " + esc(quoteUsdText(q)) + " for up to 64 model calls."
+        : "Cost shown before the draft starts. The server quotes the exact cost when the job is created, and you can cancel while it is queued.");
     var h = [];
     h.push('<div class="rmd-po-confirm" role="group" aria-label="Confirm the full draft">');
     h.push('  <p><strong>Start a full draft?</strong> PaperOrchestra writes every section from your locked protocol, verified studies and saved analysis. You review and approve the result.</p>');
@@ -792,16 +834,24 @@
     return h.join("\n");
   }
 
+  function manuscriptInputChars() {
+    var man = st.manuscript || null;
+    var chars = 1500;
+    var secs = (man && man.sections) || [];
+    for (var i = 0; i < secs.length; i++) chars += String((secs[i] && secs[i].text) || "").length;
+    return chars;
+  }
+
   function poBlockHtml() {
     if (!isPoEnabled()) return "";
     var isPoActive = st.poCreating || st.poStatus === "queued" || st.poStatus === "running";
     var h = [];
     h.push('<div class="rmd-po-block">');
-    h.push('  <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd="full-draft-po"' + (isPoActive ? ' disabled="disabled"' : '') + '>Full draft (PaperOrchestra)</button>');
+    h.push('  <button type="button" class="rmd-btn rmd-btn-primary rmd-po-btn" data-rmd="full-draft-po"' + (isPoActive ? ' disabled="disabled"' : '') + '>Full draft (PaperOrchestra)</button>');
     if (!isPoActive && st.poResumeCheckpoint && isOnDeviceDraftEnabled()) {
       h.push('  <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="po-continue">Continue draft</button>');
     }
-    h.push('  <p class="rmd-po-cost-note" data-rmd-po-cost>' + esc(poQuoteNote()) + '</p>');
+    h.push('  <div class="rmd-po-cost-note rmd-draft-opt-meta" data-rmd-po-cost>' + esc(poQuoteNote()) + '</div>');
     h.push(poConfirmHtml());
     h.push(poStatusHtml());
     h.push('</div>');
@@ -820,10 +870,17 @@
     if (!SMD.api || !proj || !proj.serverId || proj.tutorial || proj.practice) return;
     SMD.api.request("GET", "/v1/projects/" + encodeURIComponent(proj.serverId) + "/jobs/quote?kind=manuscript_draft").then(function (res) {
       var micro = res && (res.quoteMicroUsd != null ? res.quoteMicroUsd : (res.quote && res.quote.quoteMicroUsd));
-      if (micro == null) return;
-      st.poQuoteMicroUsd = micro;
-      st.poQuoteSource = "server";
-      if (st.poConfirm) st.poConfirm.quote = micro;
+      if (micro != null) {
+        st.poQuoteMicroUsd = micro;
+        st.poQuoteSource = "server";
+        if (st.poConfirm) st.poConfirm.quote = micro;
+      }
+      if (res) {
+        if (res.quoteMt != null) st.poQuoteMt = Number(res.quoteMt);
+        if (res.quoteInr != null) st.poQuoteInr = Number(res.quoteInr);
+        if (res.expectedMinMt != null) st.poQuoteMinMt = Number(res.expectedMinMt);
+        if (res.expectedMaxMt != null) st.poQuoteMaxMt = Number(res.expectedMaxMt);
+      }
       render(container);
     }, function () {
       /* No quote endpoint yet: keep the honest fallback sentence. */
@@ -1141,6 +1198,8 @@
       if (ceilings && ceilings.quoteMicroUsd != null) {
         st.poQuoteMicroUsd = ceilings.quoteMicroUsd;
         st.poQuoteSource = "server";
+        if (ceilings.quoteMt != null) st.poQuoteMt = Number(ceilings.quoteMt);
+        if (ceilings.quoteInr != null) st.poQuoteInr = Number(ceilings.quoteInr);
       }
 
       if (jStatus === "succeeded" || jStatus === "done") {
@@ -1222,6 +1281,10 @@
       st.poConfirm = null;
       st.poQuoteMicroUsd = null;
       st.poQuoteSource = "";
+      st.approvedSections = {};
+      st.redraftOpen = false;
+      st.moreMenuOpen = false;
+      st.phoneTab = "sections";
     }
     st.projectId = newPid;
     if (params && params.sectionId) {
@@ -1258,6 +1321,14 @@
         manuscriptMissing[mpid] = false;
         st.manuscript = manRes.manuscript;
         if (st.manuscript.sections) st.manuscript.sections = sortSections(st.manuscript.sections);
+        if (st.manuscript.status === "approved" || st.manuscript.status === "locked") {
+          var loadedSecs = st.manuscript.sections || [];
+          for (var li = 0; li < loadedSecs.length; li++) {
+            if (loadedSecs[li] && loadedSecs[li].id && wordCount(loadedSecs[li].text) > 0) {
+              st.approvedSections[loadedSecs[li].id] = true;
+            }
+          }
+        }
         if (manRes.manuscript.ai && Array.isArray(manRes.manuscript.ai.draftedSectionIds)) {
           for (var aiIdx = 0; aiIdx < manRes.manuscript.ai.draftedSectionIds.length; aiIdx++) {
             st.aiDraftedSections[manRes.manuscript.ai.draftedSectionIds[aiIdx]] = true;
@@ -1522,9 +1593,10 @@
     modal.className = "rmd-modal-backdrop rmd-modal-overlay";
     modal.style.cssText = "position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:10060; padding:16px;";
 
+    var prevFocused = D.activeElement;
     var box = D.createElement("div");
     box.className = "rmd-modal-card rmd-modal-wide";
-    box.style.cssText = "background:var(--rmd-panel); border:1px solid var(--rmd-line); border-radius:8px; max-width:680px; width:100%; max-height:90vh; overflow-y:auto; padding:20px; color:var(--rmd-ink);";
+    box.style.cssText = "background:var(--rmd-panel); border:1px solid var(--rmd-line); border-radius:8px; max-width:680px; width:100%; max-height:90vh; max-height:90dvh; overflow-y:auto; padding:20px; color:var(--rmd-ink);";
 
     function updateView() {
       if (G.RMDPhi && G.RMDPhi.prepareCaseText) {
@@ -1564,6 +1636,13 @@
       if (fContainer) {
         fContainer.innerHTML = findingsHtml;
       }
+
+      var costEl = box.querySelector("#rmd-cr-cost");
+      if (costEl) {
+        costEl.textContent = (SMD.pricing && SMD.pricing.quoteText)
+          ? SMD.pricing.quoteText("case_report_draft", { inputLength: String(currentText || "").length })
+          : "Checking live server estimate...";
+      }
     }
 
     var h = [];
@@ -1579,6 +1658,7 @@
     h.push('</div>');
 
     h.push('<div id="rmd-cr-findings-container"></div>');
+    h.push('<p class="rmd-ai-cost" id="rmd-cr-cost">' + esc((SMD.pricing && SMD.pricing.quoteText) ? SMD.pricing.quoteText("case_report_draft", { inputLength: String(currentText || "").length }) : "Checking live server estimate...") + '</p>');
 
     h.push('<div style="margin:14px 0 16px 0;">');
     h.push('  <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer;">');
@@ -1605,9 +1685,21 @@
     var sendBtn = box.querySelector("#rmd-cr-send-btn");
     var statusMsg = box.querySelector("#rmd-cr-status-msg");
 
-    function closeModal() {
-      if (modal && modal.parentNode) modal.parentNode.removeChild(modal);
+    function onModalKey(e) {
+      if (e && (e.key === "Escape" || e.keyCode === 27)) {
+        e.stopPropagation();
+        closeModal();
+      }
     }
+    function closeModal() {
+      if (D && typeof D.removeEventListener === "function") D.removeEventListener("keydown", onModalKey, true);
+      if (modal && modal.parentNode) modal.parentNode.removeChild(modal);
+      if (prevFocused && typeof prevFocused.focus === "function") {
+        try { prevFocused.focus(); } catch (e) {}
+      }
+    }
+    if (D && typeof D.addEventListener === "function") D.addEventListener("keydown", onModalKey, true);
+    modal.onclick = function (e) { if (e && e.target === modal) closeModal(); };
     if (closeBtn) closeBtn.onclick = closeModal;
     if (cancelBtn) cancelBtn.onclick = closeModal;
 
@@ -1706,7 +1798,8 @@
           }
           syncDraftSectionsToServer(syncedList);
           if (getSection("casePresentation")) st.selectedSectionId = "casePresentation";
-          st.saveNotice = "Drafted by MaiK. Review and verify every clinical detail before approving.";
+          var crMt = (SMD.pricing && SMD.pricing.chargeMtFromResponse) ? SMD.pricing.chargeMtFromResponse(resp.data) : null;
+          st.saveNotice = "Drafted by MaiK. Review and verify every clinical detail before approving." + (crMt != null ? (" Charged: " + (SMD.pricing && SMD.pricing.formatMt ? SMD.pricing.formatMt(crMt) : (crMt + " MaiK Tokens")) + ".") : "");
           closeModal();
           render(container);
         } else {
@@ -1746,11 +1839,101 @@
   }
 
   function isSectionAiDrafted(secObj) {
-    if (!secObj) return false;
+    if (!secObj || !String(secObj.text || "").trim()) return false;
+    if (st.approvedSections && st.approvedSections[secObj.id]) return false;
     if (st.aiDraftedSections && st.aiDraftedSections[secObj.id]) return true;
     var ai = st.manuscript && st.manuscript.ai;
     if (ai && Array.isArray(ai.draftedSectionIds) && ai.draftedSectionIds.indexOf(secObj.id) >= 0) return true;
+    var aiMeta = st.manuscript && st.manuscript.aiMeta;
+    if (aiMeta && aiMeta.draftedByAi && wordCount(secObj.text) > 0) return true;
     return !!(secObj.text && secObj.text.indexOf("Drafted by MaiK") >= 0);
+  }
+
+  function hasAnyDraftText(man) {
+    var secs = (man && man.sections) || [];
+    for (var i = 0; i < secs.length; i++) {
+      if (secs[i] && wordCount(secs[i].text) > 0) return true;
+    }
+    return false;
+  }
+
+  function draftedSectionsForApproval(man) {
+    var secs = (man && man.sections) || [];
+    var out = [];
+    for (var i = 0; i < secs.length; i++) {
+      if (secs[i] && wordCount(secs[i].text) > 0) out.push(secs[i]);
+    }
+    return out;
+  }
+
+  function allSectionsApproved(man) {
+    var drafted = draftedSectionsForApproval(man);
+    if (!drafted.length) return false;
+    if (man && (man.status === "approved" || man.status === "locked")) return true;
+    for (var i = 0; i < drafted.length; i++) {
+      if (!st.approvedSections || !st.approvedSections[drafted[i].id]) return false;
+    }
+    return true;
+  }
+
+  function renderDraftCard(man, proj, isCaseReport, hasDraft) {
+    var isPoActive = st.poCreating || st.poStatus === "queued" || st.poStatus === "running";
+    var poBusyOrReview = !!(st.poConfirm || isPoActive || st.poResumeCheckpoint || st.poStatus === "failed" || st.poStatus === "paused" || st.poStatus === "cancelled" || st.poError || (st.ai && (st.ai.busy || st.ai.error)));
+    var showFullCard = !hasDraft || st.redraftOpen || poBusyOrReview;
+    var h = [];
+    if (!showFullCard) {
+      h.push('<div class="rmd-man-redraft-bar">');
+      h.push('  <span class="rmd-man-redraft-note">Draft ready. Check every section before marking as final.</span>');
+      h.push('  <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="manuscript-redraft">Redraft</button>');
+      h.push('</div>');
+      return h.join("\n");
+    }
+    h.push('<section class="rmd-man-draft-card" id="rmdManDraftCard" aria-labelledby="rmdDraftCardTitle">');
+    h.push('  <div class="rmd-man-draft-head">');
+    h.push('    <h3 id="rmdDraftCardTitle" class="rmd-man-draft-title">Draft your paper</h3>');
+    if (hasDraft && !poBusyOrReview) {
+      h.push('    <button type="button" class="rmd-btn rmd-btn-quiet rmd-btn-sm" data-rmd="manuscript-redraft-close">Hide</button>');
+    }
+    h.push('  </div>');
+    h.push('  <div class="rmd-man-draft-options">');
+    if (!isCaseReport) {
+      if (isPoEnabled()) {
+        h.push('    <div class="rmd-draft-opt">');
+        h.push('      <div class="rmd-draft-opt-label">Full paper (PaperOrchestra)</div>');
+        h.push('      <div class="rmd-draft-opt-desc">Drafts IMRaD (all manuscript sections) from your protocol, verified studies and saved analysis on this phone.</div>');
+        h.push(poBlockHtml());
+        h.push('    </div>');
+      }
+      if (!st.ai) st.ai = SMD.ai.state();
+      h.push('    <div class="rmd-draft-opt">');
+      h.push('      <div class="rmd-draft-opt-label">Quick draft or write it yourself</div>');
+      h.push('      <div class="rmd-draft-opt-desc">Draft quickly from your study summary with MaiK, or type sections manually.</div>');
+      h.push(SMD.ai.barHtml(st.ai, {
+        task: "manuscript_draft",
+        label: "manuscript draft",
+        inputLength: manuscriptInputChars(),
+        askLabel: "Quick draft (Ask MaiK)",
+        manualLabel: "Write it myself",
+        askBtnClass: isPoEnabled() ? "rmd-btn-subtle" : "rmd-btn-primary"
+      }));
+      h.push('    </div>');
+    } else {
+      h.push('    <div class="rmd-draft-opt">');
+      h.push('      <div class="rmd-draft-opt-label">Case report draft</div>');
+      h.push('      <div class="rmd-draft-opt-desc">Draft your CARE (case report) sections after an on-device identifier check, or write manually.</div>');
+      h.push('      <div class="rmd-ai-actions">');
+      h.push('        <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="ask-maik-case-report">Ask MaiK to draft it</button>');
+      h.push('        <button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-ai="manual">Write it myself</button>');
+      h.push('      </div>');
+      h.push('    </div>');
+    }
+    h.push('  </div>');
+    var privCopy = useOnDeviceDraft()
+      ? "Runs on this device. Your PDFs and patient data are read here and never uploaded."
+      : "Your PDFs and patient data stay on this phone and are never uploaded.";
+    h.push('  <p class="rmd-man-draft-privacy">' + esc(privCopy) + '</p>');
+    h.push('</section>');
+    return h.join("\n");
   }
 
   function formatMonthYear(dateStr) {
@@ -2084,8 +2267,7 @@
     }
     var secs = d.sections;
     if (!secs || (Array.isArray(secs) && !secs.length)) {
-      load(container);
-      return ["manuscript"];
+      return [];
     }
     if (!st.manuscript) st.manuscript = defaultManuscript(st.projectId);
     if (!st.manuscript.sections) st.manuscript.sections = [];
@@ -2105,7 +2287,7 @@
     var draftedIds = [];
     for (var i = 0; i < list.length; i++) {
       var item = list[i];
-      if (!item || !item.id || typeof item.text !== "string") continue;
+      if (!item || !item.id || typeof item.text !== "string" || !item.text.trim()) continue;
       st.aiDraftedSections[item.id] = true;
       draftedIds.push(item.id);
       draftedHeadings.push(item.heading || item.id);
@@ -2125,12 +2307,13 @@
         });
       }
     }
+    if (!draftedIds.length) {
+      return [];
+    }
     st.manuscript.sections = sortSections(st.manuscript.sections);
     recordAiProvenance(res && res.model, draftedHeadings, draftedIds);
     saveLocalManuscript(st.projectId, st.manuscript);
-    if (draftedIds.length) {
-      syncDraftSectionsToServer(list);
-    }
+    syncDraftSectionsToServer(list);
     st.saveNotice = "Drafted by MaiK. Review each section and save when ready.";
     return ["manuscript"];
   }
@@ -3196,13 +3379,43 @@
     s.textContent = [
       "/* ResearchMD Manuscript Screen Styles */",
       "#researchMD .rmd-manuscript-screen { display: flex; flex-direction: column; flex: 1; height: 100%; min-height: 0; }",
-      "#researchMD .rmd-man-topbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; flex-shrink: 0; gap: 10px 12px; padding: 12px 18px; border-bottom: 1px solid var(--rmd-line); background: var(--rmd-panel); min-width: 0; }",
-      "#researchMD .rmd-man-topbar-info { display: flex; align-items: center; gap: 8px; flex: 1 1 260px; min-width: 0; }",
-      "#researchMD .rmd-man-title { margin: 0; font: 600 16px/1.3 var(--rmd-f); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--rmd-ink); min-width: 0; }",
-      "#researchMD .rmd-man-topbar-info .rmd-version-tag, #researchMD .rmd-man-topbar-info .rmd-badge { flex: 0 0 auto; white-space: nowrap; line-height: 1.35; }",
-      "#researchMD .rmd-man-actions { display: flex; align-items: center; gap: 8px; flex: 0 1 auto; flex-wrap: wrap; min-width: 0; max-width: 100%; }",
-      "#researchMD .rmd-man-actions .rmd-btn { white-space: nowrap; flex-shrink: 0; }",
-      "#researchMD .rmd-man-ai-wrap { margin: 12px 18px 0; flex-shrink: 0; }",
+      "#researchMD .rmd-man-topbar { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; flex-shrink: 0; gap: 12px 16px; padding: 16px 20px; border-bottom: 1px solid var(--rmd-line); background: var(--rmd-panel); min-width: 0; }",
+      "#researchMD .rmd-man-topbar-info { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; flex: 1 1 280px; min-width: 0; }",
+      "#researchMD .rmd-man-title { margin: 0; font: 700 17px/1.3 var(--rmd-f); color: var(--rmd-ink); min-width: 0; width: 100%; display: block; overflow: visible; white-space: normal; word-break: break-word; }",
+      "#researchMD .rmd-man-meta { margin: 0; font: 500 13px/1.4 var(--rmd-f); color: var(--rmd-mut); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }",
+      "#researchMD .rmd-man-actions { display: flex; align-items: center; gap: 8px; flex: 0 1 auto; flex-wrap: wrap; min-width: 0; max-width: 100%; position: relative; }",
+      "#researchMD .rmd-man-actions .rmd-btn { white-space: nowrap; flex-shrink: 0; min-height: 44px; max-width: 100%; }",
+      "#researchMD .rmd-man-more-wrap { position: relative; display: inline-flex; }",
+      "#researchMD .rmd-man-more-menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 40; min-width: 220px; max-width: min(300px, calc(100vw - 32px)); background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 12px; padding: 6px; box-shadow: 0 10px 28px rgba(0,0,0,0.18); display: flex; flex-direction: column; gap: 4px; }",
+      "#researchMD .rmd-man-more-menu[hidden] { display: none; }",
+      "#researchMD .rmd-man-menu-item { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 44px; padding: 10px 12px; border: 0; background: transparent; color: var(--rmd-ink); font: 500 14px/1.3 var(--rmd-f); text-align: left; border-radius: 8px; cursor: pointer; }",
+      "#researchMD .rmd-man-menu-item:hover, #researchMD .rmd-man-menu-item:focus-visible { background: var(--rmd-acc-soft); color: var(--rmd-ink); }",
+      "#researchMD .rmd-man-ai-wrap { margin: 12px 20px 0; flex-shrink: 0; }",
+      "#researchMD .rmd-man-draft-card { background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }",
+      "#researchMD .rmd-man-draft-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }",
+      "#researchMD .rmd-man-draft-title { margin: 0; font: 700 16px/1.3 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-man-draft-options { display: flex; flex-direction: column; gap: 12px; }",
+      "#researchMD .rmd-draft-opt { background: var(--rmd-bg); border: 1px solid var(--rmd-line); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }",
+      "#researchMD .rmd-draft-opt-label { font: 600 14px/1.3 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-draft-opt-desc { font: 400 13px/1.45 var(--rmd-f); color: var(--rmd-mut); margin: 0; }",
+      "#researchMD .rmd-draft-opt-meta { font: 500 12.5px/1.4 var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-draft-opt .rmd-btn { min-height: 44px; align-self: flex-start; max-width: 100%; }",
+      "#researchMD .rmd-draft-opt .rmd-ai-bar { background: transparent; border: 0; padding: 0; margin: 0; }",
+      "#researchMD .rmd-draft-opt .rmd-ai-actions { display: flex; flex-wrap: wrap; gap: 8px; }",
+      "#researchMD .rmd-draft-opt .rmd-ai-cost { margin: 4px 0 0; font: 500 12.5px/1.4 var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-man-draft-privacy { margin: 0; padding-top: 8px; border-top: 1px solid var(--rmd-line); font: 400 12.5px/1.4 var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-man-redraft-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 12px; flex-wrap: wrap; }",
+      "#researchMD .rmd-man-redraft-note { font: 500 13px/1.4 var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-phone-notice { display: none; font: 400 13px/1.4 var(--rmd-f); color: var(--rmd-mut); padding: 8px 16px; background: var(--rmd-fill); border-bottom: 1px solid var(--rmd-line); margin: 0; }",
+      "#researchMD .rmd-approve-list { display: flex; flex-direction: column; gap: 12px; }",
+      "#researchMD .rmd-approve-card { background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }",
+      "#researchMD .rmd-approve-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }",
+      "#researchMD .rmd-approve-card-title { margin: 0; font: 600 15px/1.3 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-approve-card-preview { margin: 0; font: 400 13.5px/1.5 var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-approve-card-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }",
+      "#researchMD .rmd-approve-card-actions .rmd-btn { min-height: 44px; }",
+      "#researchMD .rmd-drafted-by-maik { display: inline-flex; align-items: center; align-self: flex-start; }",
+      "#researchMD .rmd-manuscript-screen .rmd-badge-warn.rmd-drafted-by-maik { background: var(--rmd-warn-soft, #fdebdf); color: var(--rmd-warn, #a34e1c); border: 1px solid var(--rmd-warn, #a34e1c); border-radius: 6px; padding: 3px 8px; font: 600 11.5px/1.35 var(--rmd-f); }",
       "#researchMD .rmd-po-status { margin-top: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }",
       "#researchMD .rmd-po-status-text { font: 500 13px var(--rmd-f); color: var(--rmd-mut); }",
       "#researchMD .rmd-po-status-ok { color: var(--rmd-acc); }",
@@ -3274,18 +3487,26 @@
       "#researchMD .rmd-polish-change-actions { display: flex; align-items: center; gap: 6px; }",
       "#researchMD .rmd-polish-diff { font-size: 13.5px; line-height: 1.5; color: var(--rmd-ink); }",
       "@media (max-width: 767px) {",
-      "  #researchMD .rmd-man-topbar { flex-direction: column; align-items: stretch; gap: 10px; padding: 10px 14px; }",
-      "  #researchMD .rmd-man-topbar-info { flex: 0 0 auto; width: 100%; gap: 8px; }",
-      "  #researchMD .rmd-man-actions { width: 100%; flex-wrap: wrap; overflow: visible; padding: 2px 2px 4px; row-gap: 6px; }",
-      "  #researchMD .rmd-man-actions .rmd-btn { flex: 0 1 auto; white-space: nowrap; min-height: 44px; padding: 8px 12px; max-width: 100%; }",
+      "  #researchMD .rmd-manuscript-screen { flex: 0 0 auto; height: auto; min-height: 0; overflow: visible; }",
+      "  #researchMD .rmd-man-topbar { flex-direction: column; align-items: stretch; gap: 12px; padding: 14px 16px; }",
+      "  #researchMD .rmd-man-topbar-info { flex: 0 0 auto; width: 100%; gap: 4px; }",
+      "  #researchMD .rmd-man-title { font-size: 16px; }",
+      "  #researchMD .rmd-man-actions { width: 100%; flex-wrap: wrap; overflow: visible; padding: 0; gap: 8px; }",
+      "  #researchMD .rmd-man-actions .rmd-btn { flex: 0 1 auto; white-space: nowrap; min-height: 44px; padding: 8px 14px; max-width: 100%; }",
       "  #researchMD .rmd-man-actions .rmd-btn:focus-visible { outline-offset: -2px; }",
-      "  #researchMD .rmd-man-ai-wrap { margin: 10px 14px 0; }",
+      "  #researchMD .rmd-man-more-menu { left: 0; right: auto; }",
+      "  #researchMD .rmd-man-ai-wrap { margin: 12px 16px 0; }",
+      "  #researchMD .rmd-man-phone-bar { display: flex; position: sticky; top: 0; z-index: 6; }",
       "  #researchMD .rmd-man-phone-btn { min-height: 44px; }",
-      "  #researchMD .rmd-man-split { flex-direction: column; }",
-      "  #researchMD .rmd-man-left { flex: 1; border-right: 0; min-width: 0; }",
-      "  #researchMD .rmd-man-right { flex: 1; padding: 12px; }",
-      "  #researchMD .rmd-man-phone-bar { display: flex; }",
+      "  #researchMD .rmd-phone-notice { display: block; }",
+      "  #researchMD .rmd-man-split { flex-direction: column; flex: none; min-height: auto; overflow: visible; }",
+      "  #researchMD .rmd-man-left { flex: none; border-right: 0; min-width: 0; width: 100%; overflow-y: visible; }",
+      "  #researchMD .rmd-man-right { flex: none; padding: 16px; min-width: 0; width: 100%; overflow-y: visible; }",
+      "  #researchMD .rmd-section-item { min-height: 44px; padding: 12px 16px; }",
       "  #researchMD .rmd-phone-hide { display: none !important; }",
+      "}",
+      "@media (prefers-reduced-motion: reduce) {",
+      "  #researchMD .rmd-manuscript-screen * { transition: none !important; animation: none !important; }",
       "}"
     ].join("\n");
     D.head.appendChild(s);
@@ -3296,6 +3517,7 @@
     if (!container) return;
     lastContainer = container;
     st.lastRange = null;
+    cleanupMoreMenuListeners();
     closeNumPopover();
     bindBreakpoint();
     lastBreakpointPhone = isPhone();
@@ -3310,69 +3532,80 @@
     var isLocked = man.status === "locked";
     var isApproved = man.status === "approved" || isLocked;
     var phone = isPhone();
+    var proj = (SMD.store && SMD.store.getActiveProject) ? SMD.store.getActiveProject() : null;
+    var isCaseReport = proj && isCaseProject(proj);
+    var hasDraft = hasAnyDraftText(man);
+    var draftedList = draftedSectionsForApproval(man);
+    var allApproved = allSectionsApproved(man);
+    var isPoActive = st.poCreating || st.poStatus === "queued" || st.poStatus === "running";
+    var poBusyOrReview = !!(st.poConfirm || isPoActive || st.poResumeCheckpoint || st.poStatus === "failed" || st.poStatus === "paused" || st.poStatus === "cancelled" || st.poError || (st.ai && (st.ai.busy || st.ai.error)));
+
+    var verNum = man.version || 1;
+    var statusText = isLocked ? "Locked (final)" : (isApproved ? "Approved" : "Draft (not final yet)");
 
     var h = [];
     h.push('<div class="rmd-manuscript-screen">');
     if (loadError) {
-      h.push('<div class="rmd-banner rmd-banner-error" role="alert" style="margin:10px 14px 0;"><strong>' + esc(loadError) + '</strong></div>');
+      h.push('<div class="rmd-banner rmd-banner-error" role="alert" style="margin:10px 16px 0;"><strong>' + esc(loadError) + '</strong></div>');
     }
 
-    /* Top bar */
+    /* Header */
     h.push('<div class="rmd-man-topbar">');
     h.push('  <div class="rmd-man-topbar-info">');
     h.push('    <h3 class="rmd-man-title">' + esc(man.title || "ResearchMD Manuscript") + '</h3>');
-    h.push('    <span class="rmd-version-tag">v' + esc(man.version) + '</span>');
-    if (isLocked) {
-      h.push('    <span class="rmd-badge rmd-badge-pill">Locked</span>');
-    } else if (isApproved) {
-      h.push('    <span class="rmd-badge rmd-badge-pill">Approved</span>');
-    } else {
-      h.push('    <span class="rmd-badge rmd-badge-soft">Draft (not final yet)</span>');
-    }
+    h.push('    <p class="rmd-man-meta">Version ' + esc(verNum) + ' &#183; ' + esc(statusText) + '</p>');
     h.push('  </div>');
 
-    /* Action buttons */
+    /* Stage-matched action buttons */
     h.push('  <div class="rmd-man-actions">');
-    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="manuscript-mode-editor">Editor</button>');
-    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="manuscript-versions-toggle">Earlier versions (' + st.versions.length + ')</button>');
-    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="manuscript-diff-toggle">See what changed</button>');
-    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="to-format-check">Journal format check</button>');
-
-    if (!isApproved) {
-      h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="manuscript-approve">Mark as final</button>');
-    } else if (!isLocked) {
-      h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="manuscript-lock">Lock this version</button>');
+    if (hasDraft) {
+      h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="manuscript-export">Download Word file</button>');
+      if (allApproved && !isApproved) {
+        h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="manuscript-approve">Mark as final</button>');
+      } else if (isApproved && !isLocked) {
+        h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="manuscript-lock">Lock this version</button>');
+      }
+      h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="to-format-check">Journal format check</button>');
+      h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="manuscript-mode-editor">Editor</button>');
+      h.push('    <div class="rmd-man-more-wrap">');
+      h.push('      <button type="button" class="rmd-btn rmd-btn-quiet rmd-btn-sm" data-rmd="manuscript-more-toggle" aria-haspopup="menu" aria-expanded="' + (st.moreMenuOpen ? 'true' : 'false') + '" aria-controls="rmdManMoreMenu">More</button>');
+      h.push('      <div id="rmdManMoreMenu" class="rmd-man-more-menu" role="menu"' + (st.moreMenuOpen ? '' : ' hidden') + '>');
+      h.push('        <button type="button" role="menuitem" class="rmd-man-menu-item" data-rmd="manuscript-versions-toggle">Earlier versions (' + st.versions.length + ')</button>');
+      h.push('        <button type="button" role="menuitem" class="rmd-man-menu-item" data-rmd="manuscript-diff-toggle">See what changed</button>');
+      h.push('      </div>');
+      h.push('    </div>');
+    } else if (st.versions.length > 1) {
+      h.push('    <div class="rmd-man-more-wrap">');
+      h.push('      <button type="button" class="rmd-btn rmd-btn-quiet rmd-btn-sm" data-rmd="manuscript-more-toggle" aria-haspopup="menu" aria-expanded="' + (st.moreMenuOpen ? 'true' : 'false') + '" aria-controls="rmdManMoreMenu">More</button>');
+      h.push('      <div id="rmdManMoreMenu" class="rmd-man-more-menu" role="menu"' + (st.moreMenuOpen ? '' : ' hidden') + '>');
+      h.push('        <button type="button" role="menuitem" class="rmd-man-menu-item" data-rmd="manuscript-versions-toggle">Earlier versions (' + st.versions.length + ')</button>');
+      h.push('        <button type="button" role="menuitem" class="rmd-man-menu-item" data-rmd="manuscript-diff-toggle">See what changed</button>');
+      h.push('      </div>');
+      h.push('    </div>');
     }
-    var proj = (SMD.store && SMD.store.getActiveProject) ? SMD.store.getActiveProject() : null;
-    var isCaseReport = proj && isCaseProject(proj);
-    if (isCaseReport && !isLocked) {
-      h.push('    <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="ask-maik-case-report">Ask MaiK to draft it</button>');
-    }
-    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="manuscript-export">Download Word file</button>');
     h.push('  </div>');
     h.push('</div>');
 
-    if (!isLocked) {
-      if (!isCaseReport) {
-        if (!st.ai) st.ai = SMD.ai.state();
-        h.push('<div class="rmd-man-ai-wrap">');
-        h.push(SMD.ai.barHtml(st.ai, { task: "manuscript_draft", label: "manuscript draft", cost: 2 }));
-        h.push(SMD.ai.noteHtml(st.ai, "manuscript"));
-        h.push(poBlockHtml());
-        h.push('</div>');
-      }
+    /* Phone segmented control and single notice directly below header */
+    if (phone) {
+      h.push('<div class="rmd-man-phone-bar" role="tablist" aria-label="Manuscript view">');
+      h.push('  <button type="button" role="tab" aria-selected="' + (st.phoneTab === "sections" ? "true" : "false") + '" class="rmd-man-phone-btn' + (st.phoneTab === "sections" ? " rmd-seg-active" : "") + '" data-rmd-phone-tab="sections">Sections</button>');
+      h.push('  <button type="button" role="tab" aria-selected="' + (st.phoneTab === "detail" ? "true" : "false") + '" class="rmd-man-phone-btn' + (st.phoneTab === "detail" ? " rmd-seg-active" : "") + '" data-rmd-phone-tab="detail">Read section</button>');
+      h.push('  <button type="button" role="tab" aria-selected="' + (st.phoneTab === "approve" ? "true" : "false") + '" class="rmd-man-phone-btn' + (st.phoneTab === "approve" ? " rmd-seg-active" : "") + '" data-rmd-phone-tab="approve">Approve</button>');
+      h.push('</div>');
+      h.push('<div class="rmd-phone-notice">');
+      h.push('  Read and approve sections here. Editing needs a tablet.');
+      h.push('</div>');
     }
 
-    /* Phone segmented bar */
-    if (phone) {
-      h.push('<div class="rmd-man-phone-bar">');
-      h.push('  <button type="button" class="rmd-man-phone-btn' + (st.phoneTab === "sections" ? " rmd-seg-active" : "") + '" data-rmd-phone-tab="sections">Sections</button>');
-      h.push('  <button type="button" class="rmd-man-phone-btn' + (st.phoneTab === "detail" ? " rmd-seg-active" : "") + '" data-rmd-phone-tab="detail">Read section</button>');
-      h.push('  <button type="button" class="rmd-man-phone-btn' + (st.phoneTab === "approve" ? " rmd-seg-active" : "") + '" data-rmd-phone-tab="approve">Approve</button>');
-      h.push('</div>');
-      h.push('<div class="rmd-phone-notice" style="margin: 8px 14px 0;">');
-      h.push('  On a phone you can read sections and mark them as final. Editing needs a tablet.');
-      h.push('</div>');
+    /* Unified Draft your paper card (collapses to Redraft once draft exists) */
+    if (!isLocked) {
+      var showDraftWrap = !phone || st.phoneTab === "sections" || poBusyOrReview;
+      if (showDraftWrap) {
+        h.push('<div class="rmd-man-ai-wrap">');
+        h.push(renderDraftCard(man, proj, isCaseReport, hasDraft));
+        h.push('</div>');
+      }
     }
 
     /* Main split layout */
@@ -3398,14 +3631,17 @@
       }
       var words = wordCount(secObj ? secObj.text : "");
       var isActive = activeCurSec ? (activeCurSec.id === item.id) : (st.selectedSectionId === item.id);
+      var secIsApproved = !!(secObj && st.approvedSections && st.approvedSections[secObj.id]);
 
       h.push('    <button type="button" class="rmd-section-item' + (isActive ? ' rmd-section-item-active' : '') + '" data-section-id="' + esc(item.id) + '">');
       h.push('      <div class="rmd-section-item-head">');
       h.push('        <span class="rmd-section-item-label">' + esc(item.label) + '</span>');
       h.push('        <span class="rmd-section-item-meta">' + words + ' words</span>');
       h.push('      </div>');
-      if (isSectionAiDrafted(secObj)) {
-        h.push('      <span class="rmd-drafted-by-maik" data-rmd-drafted="maik" style="display:block; font-size:11px; color:var(--rmd-acc); margin-top:2px;">Drafted by MaiK, check it</span>');
+      if (secIsApproved) {
+        h.push('      <span class="rmd-badge rmd-badge-pill">Approved</span>');
+      } else if (isSectionAiDrafted(secObj)) {
+        h.push('      <span class="rmd-badge rmd-badge-warn rmd-drafted-by-maik" data-rmd-drafted="maik">Drafted by MaiK, check it</span>');
       }
       h.push('      <span class="rmd-section-item-desc">' + esc(item.hint) + '</span>');
       h.push('    </button>');
@@ -3435,7 +3671,7 @@
     }
     h.push('</div>');
 
-    /* Right pane: editor, versions or diff */
+    /* Right pane: editor, versions, diff, or phone approve checklist */
     var rightHideClass = (phone && st.phoneTab === "sections") ? " rmd-phone-hide" : "";
     h.push('<div class="rmd-man-right' + rightHideClass + '">');
 
@@ -3536,19 +3772,69 @@
       h.push('  </div>');
       h.push('</div>');
     }
-    /* Sub-view: active section editor */
+    /* Sub-view: phone section-by-section approve checklist */
+    else if (phone && st.phoneTab === "approve") {
+      var appCount = 0;
+      for (var aci = 0; aci < draftedList.length; aci++) {
+        if (st.approvedSections && st.approvedSections[draftedList[aci].id]) appCount++;
+      }
+      h.push('<div class="rmd-approve-list">');
+      h.push('  <div class="rmd-approve-card">');
+      h.push('    <h4 class="rmd-approve-card-title">Approve sections (' + appCount + ' of ' + draftedList.length + ')</h4>');
+      h.push('    <p class="rmd-approve-card-preview">' + (draftedList.length ? 'Check the wording and numbers in each section, then mark it approved. Mark as final unlocks once every section is approved.' : 'Draft your manuscript first before approving sections.') + '</p>');
+      h.push('  </div>');
+      for (var di = 0; di < draftedList.length; di++) {
+        var dSec = draftedList[di];
+        var dWords = wordCount(dSec.text);
+        var dPlain = plainText(dSec.text || "").replace(/\s+/g, " ").trim();
+        var dPreview = dPlain.length > 140 ? dPlain.substring(0, 137) + "..." : dPlain;
+        var dApproved = !!(st.approvedSections && st.approvedSections[dSec.id]);
+        h.push('  <div class="rmd-approve-card">');
+        h.push('    <div class="rmd-approve-card-head">');
+        h.push('      <h4 class="rmd-approve-card-title">' + esc(dSec.heading || dSec.id) + '</h4>');
+        h.push('      <span class="rmd-section-item-meta">' + dWords + ' words</span>');
+        h.push('    </div>');
+        if (!dApproved && isSectionAiDrafted(dSec)) {
+          h.push('    <div><span class="rmd-badge rmd-badge-warn rmd-drafted-by-maik" data-rmd-drafted="maik">Drafted by MaiK, check it</span></div>');
+        }
+        h.push('    <p class="rmd-approve-card-preview">' + esc(dPreview) + '</p>');
+        h.push('    <div class="rmd-approve-card-actions">');
+        h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-read-sec="' + esc(dSec.id) + '">Read section</button>');
+        if (!isLocked) {
+          h.push('      <button type="button" class="rmd-btn ' + (dApproved ? 'rmd-btn-subtle' : 'rmd-btn-primary') + ' rmd-btn-sm" data-rmd-approve-sec="' + esc(dSec.id) + '">' + (dApproved ? 'Approved section' : 'Approve section') + '</button>');
+        }
+        h.push('    </div>');
+        h.push('  </div>');
+      }
+      h.push('  <div class="rmd-approve-card">');
+      h.push('    <h4 class="rmd-approve-card-title">Mark as final and lock</h4>');
+      h.push('    <p class="rmd-approve-card-preview">Check the numbers and claims, then mark this version as final. Locking is final and cannot be undone.</p>');
+      if (isLocked) {
+        h.push('    <div><span class="rmd-badge rmd-badge-pill">Locked</span></div>');
+      } else if (isApproved) {
+        h.push('    <div><button type="button" class="rmd-btn rmd-btn-primary" data-rmd="manuscript-lock">Lock this version (make it read-only)</button></div>');
+      } else if (allApproved) {
+        h.push('    <div><button type="button" class="rmd-btn rmd-btn-primary" data-rmd="manuscript-approve">Mark as final (approve this version)</button></div>');
+      } else {
+        h.push('    <p class="rmd-approve-card-preview">Approve every drafted section above to unlock Mark as final.</p>');
+      }
+      h.push('  </div>');
+      h.push('</div>');
+    }
+    /* Sub-view: active section editor / reader */
     else {
       var curSec = getSection(st.selectedSectionId);
       var secText = curSec ? curSec.text : "";
       var isReadOnly = isLocked || phone;
+      var curSecApproved = !!(curSec && st.approvedSections && st.approvedSections[curSec.id]);
 
       h.push('<div class="rmd-editor-card">');
       h.push('  <div class="rmd-editor-head">');
       h.push('    <div>');
       h.push('      <h4 class="rmd-editor-title">' + esc(curSec ? curSec.heading : "Section") + '</h4>');
       h.push('      <span class="rmd-editor-sub">Numbers come straight from your analysis, so they are always correct.</span>');
-      if (isSectionAiDrafted(curSec)) {
-        h.push('      <div class="rmd-drafted-by-maik" data-rmd-drafted="maik" style="font-size:12px; color:var(--rmd-acc); margin-top:4px;">Drafted by MaiK, check it before exporting or approving.</div>');
+      if (!curSecApproved && isSectionAiDrafted(curSec)) {
+        h.push('      <div style="margin-top:6px;"><span class="rmd-badge rmd-badge-warn rmd-drafted-by-maik" data-rmd-drafted="maik">Drafted by MaiK, check it</span></div>');
       }
       h.push('    </div>');
 
@@ -3556,10 +3842,16 @@
         h.push('    <div class="rmd-editor-actions">');
         h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="polish-wording">Ask MaiK: polish the wording</button>');
         h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="insert-result">Insert a result</button>');
+        if (curSec && wordCount(secText) > 0) {
+          h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd-approve-sec="' + esc(curSec.id) + '">' + (curSecApproved ? 'Approved section' : 'Approve section') + '</button>');
+        }
         h.push('      <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="section-save">Save</button>');
         h.push('    </div>');
       } else if (!isLocked && phone) {
         h.push('    <div class="rmd-editor-actions" style="margin-top:8px;">');
+        if (curSec && wordCount(secText) > 0) {
+          h.push('      <button type="button" class="rmd-btn ' + (curSecApproved ? 'rmd-btn-subtle' : 'rmd-btn-primary') + ' rmd-btn-sm" data-rmd-approve-sec="' + esc(curSec.id) + '">' + (curSecApproved ? 'Approved section' : 'Approve section') + '</button>');
+        }
         h.push('      <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="polish-wording">Ask MaiK: polish the wording</button>');
         h.push('    </div>');
       }
@@ -3629,21 +3921,6 @@
         (isReadOnly ? ' aria-readonly="true"' : '') + '>' +
         buildEditorHtml(secText) + '</div>');
 
-      /* Phone action cards */
-      if (phone && st.phoneTab === "approve") {
-        h.push('  <div class="rmd-card" style="margin-top:12px;">');
-        h.push('    <h4 class="rmd-card-heading">Mark as final and lock</h4>');
-        h.push('    <p style="font-size:13px;color:var(--rmd-mut);">Check the numbers and claims, then mark this version as final. Locking is final and cannot be undone.</p>');
-        if (!isApproved) {
-          h.push('    <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="manuscript-approve">Mark as final (approve this version)</button>');
-        } else if (!isLocked) {
-          h.push('    <button type="button" class="rmd-btn rmd-btn-primary" data-rmd="manuscript-lock">Lock this version (make it read-only)</button>');
-        } else {
-          h.push('    <span class="rmd-badge rmd-badge-pill">Locked</span>');
-        }
-        h.push('  </div>');
-      }
-
       h.push('</div>');
     }
 
@@ -3686,7 +3963,9 @@
     var btnEditor = container.querySelector('[data-rmd="manuscript-mode-editor"]');
     if (btnEditor) {
       btnEditor.onclick = function () {
+        st.moreMenuOpen = false;
         st.viewMode = "editor";
+        if (isPhone() && st.phoneTab === "approve") st.phoneTab = "detail";
         render(container);
       };
     }
@@ -3694,7 +3973,9 @@
     var btnVersions = container.querySelector('[data-rmd="manuscript-versions-toggle"]');
     if (btnVersions) {
       btnVersions.onclick = function () {
+        st.moreMenuOpen = false;
         st.viewMode = "versions";
+        if (isPhone()) st.phoneTab = "detail";
         render(container);
       };
     }
@@ -3702,7 +3983,91 @@
     var btnDiff = container.querySelector('[data-rmd="manuscript-diff-toggle"]');
     if (btnDiff) {
       btnDiff.onclick = function () {
+        st.moreMenuOpen = false;
         st.viewMode = "diff";
+        if (isPhone()) st.phoneTab = "detail";
+        render(container);
+      };
+    }
+
+    var btnMore = container.querySelector('[data-rmd="manuscript-more-toggle"]');
+    var moreMenu = container.querySelector("#rmdManMoreMenu");
+    if (btnMore && moreMenu) {
+      function setMoreOpen(open) {
+        st.moreMenuOpen = !!open;
+        moreMenu.hidden = !st.moreMenuOpen;
+        btnMore.setAttribute("aria-expanded", st.moreMenuOpen ? "true" : "false");
+        cleanupMoreMenuListeners();
+        if (st.moreMenuOpen && D && typeof D.addEventListener === "function") {
+          var onDocClick = function (ev) {
+            var target = ev && ev.target;
+            if (target === btnMore || btnMore.contains(target) || moreMenu.contains(target)) return;
+            setMoreOpen(false);
+          };
+          var onDocKey = function (ev) {
+            if (ev && (ev.key === "Escape" || ev.keyCode === 27)) {
+              ev.stopPropagation();
+              setMoreOpen(false);
+              if (typeof btnMore.focus === "function") btnMore.focus();
+            }
+          };
+          D.addEventListener("click", onDocClick, true);
+          D.addEventListener("keydown", onDocKey, true);
+          moreMenuCleanup = function () {
+            D.removeEventListener("click", onDocClick, true);
+            D.removeEventListener("keydown", onDocKey, true);
+          };
+        }
+      }
+      if (st.moreMenuOpen) setMoreOpen(true);
+      btnMore.onclick = function (e) {
+        if (e && e.stopPropagation) e.stopPropagation();
+        setMoreOpen(!st.moreMenuOpen);
+        if (st.moreMenuOpen) {
+          var firstItem = moreMenu.querySelector('[role="menuitem"]');
+          if (firstItem && typeof firstItem.focus === "function") firstItem.focus();
+        }
+      };
+    }
+
+    var btnRedraft = container.querySelector('[data-rmd="manuscript-redraft"]');
+    if (btnRedraft) {
+      btnRedraft.onclick = function () {
+        st.redraftOpen = true;
+        render(container);
+      };
+    }
+    var btnRedraftClose = container.querySelector('[data-rmd="manuscript-redraft-close"]');
+    if (btnRedraftClose) {
+      btnRedraftClose.onclick = function () {
+        st.redraftOpen = false;
+        render(container);
+      };
+    }
+
+    var approveSecBtns = container.querySelectorAll("[data-rmd-approve-sec]");
+    for (var asb = 0; asb < approveSecBtns.length; asb++) {
+      approveSecBtns[asb].onclick = function () {
+        var sid = this.getAttribute("data-rmd-approve-sec");
+        if (!sid) return;
+        st.approvedSections = st.approvedSections || {};
+        if (st.approvedSections[sid]) {
+          delete st.approvedSections[sid];
+        } else {
+          st.approvedSections[sid] = true;
+        }
+        render(container);
+      };
+    }
+
+    var readSecBtns = container.querySelectorAll("[data-rmd-read-sec]");
+    for (var rsb = 0; rsb < readSecBtns.length; rsb++) {
+      readSecBtns[rsb].onclick = function () {
+        var sid = this.getAttribute("data-rmd-read-sec");
+        if (!sid) return;
+        st.selectedSectionId = sid;
+        st.viewMode = "editor";
+        if (isPhone()) st.phoneTab = "detail";
         render(container);
       };
     }
@@ -3998,13 +4363,31 @@
 
     if (st.ai) {
       SMD.ai.bind(container, st.ai, {
-        pid: st.projectId, task: "manuscript_draft", label: "manuscript draft", cost: 2,
-        request: function () { return startManuscriptDraft(); },
+        pid: st.projectId, task: "manuscript_draft", label: "manuscript draft", inputLength: manuscriptInputChars(),
+        request: function () {
+          return startManuscriptDraft().then(function (res) {
+            if (SMD.pricing && SMD.pricing.recordCharge) SMD.pricing.recordCharge(st.ai, res);
+            return res;
+          });
+        },
         apply: function (draft) {
           return applyManuscriptDraft(container, draft);
         },
         render: function () { render(container); }
       });
+    }
+    var manualDraftBtn = container.querySelector('[data-rmd-ai="manual"]');
+    if (manualDraftBtn) {
+      manualDraftBtn.onclick = function () {
+        st.redraftOpen = false;
+        if (isPhone()) {
+          st.phoneTab = "detail";
+          render(container);
+          return;
+        }
+        var ed = container.querySelector("#rmdSectionEditor");
+        if (ed && typeof ed.focus === "function") ed.focus();
+      };
     }
   }
 
@@ -4152,6 +4535,8 @@
   }
 
   SMD.appendManuscriptResults = appendManuscriptResults;
+  SMD.aiDisclosureText = aiDisclosureText;
+  SMD.zipStore = zipStore;
   SMD.docxFromSections = function (title, sections) {
     return buildDocxBytes({ title: title, sections: sections || [] });
   };

@@ -2294,7 +2294,7 @@
     { act: "dosecalc", ic: "medication", tt: "Dose calculator", sub: "Dose for one patient", defOn: false,
       eligible: function () { return doseCalcOn(); } },
     // ResearchMD meta-analysis workspace (research.js). Flag smd_research, DEFAULT ON.
-    { act: "research", ic: "science", tt: "ResearchMD", sub: "Meta-analysis with sources", defOn: true, beta: true,
+    { act: "research", ic: "science", tt: "ResearchMD", sub: "Research to publication", defOn: true, beta: true,
       eligible: function () { return researchOn(); } },
     // Neonatal hub: dosing, preparation, infusions, fluids, growth, bilirubin, scores, reference values,
     // procedures, drug levels. Shown on Home by default once the flag is on.
@@ -2556,20 +2556,29 @@
     sweep: ["search", "neurology", "psychology", "body_system", "oncology"]
   };
   function liveMotion(ic) { for (var k in LIVE_MOTION) if (LIVE_MOTION[k].indexOf(ic) >= 0) return k; return "float"; }
-  function liveIcon(t) {
+  function liveIcon(t, inner) {
     var h = 0, a = String(t.act || ""); for (var i = 0; i < a.length; i++) h = (h * 31 + a.charCodeAt(i)) % 997;
-    return '<span class="rds-icon ai-live" data-live="' + liveMotion(t.ic) + '" style="--live-d:-' + ((h % 23) / 10).toFixed(1) + 's" aria-hidden="true">' + t.ic + '</span>';
+    return '<span class="rds-icon ai-live" data-live="' + liveMotion(t.ic) + '" style="--live-d:-' + ((h % 23) / 10).toFixed(1) + 's" aria-hidden="true">' + (inner || t.ic) + '</span>';
+  }
+  /* ResearchMD's own mark, brief N: the standalone R symbol from its logo sheet
+   * stands in for the generic flask glyph wherever the tool's icon is shown.
+   * The shared SVG lives in research.js (window.SMD_RMD_MARK); if that file
+   * failed to load the tile falls back to the Material glyph it always had. */
+  function toolMark(t) {
+    return (t.act === "research" && window.SMD_RMD_MARK) ? window.SMD_RMD_MARK.svg(24, "rmd-tile-mark") : "";
   }
   /* The tool's own icon, as on its Home tile, in a small badge for the All tools / Customize lists
    * (owner 2026-09-28: "use their original icons here"). Those lists used the generic Material
    * glyph, which is not the tool's icon at all, and Ophthalmós's "eye" is not a Material glyph, so
    * it printed the word EYE. Static: a list of moving icons is noise. */
   function listIcon(t, locked) {
-    var inner = locked ? '<span class="rds-icon">lock</span>' : ((t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : '<span class="rds-icon">' + t.ic + '</span>');
+    var mark = toolMark(t);
+    var inner = locked ? '<span class="rds-icon">lock</span>' : (mark ? '<span class="rds-icon">' + mark + '</span>' : ((t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : '<span class="rds-icon">' + t.ic + '</span>'));
     return '<span class="hv-tbadge' + (locked ? ' locked' : '') + '" data-tb="' + t.act + '" aria-hidden="true">' + inner + '</span>';
   }
   function homeToolTile(t, locked, fresh) {
-    var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : (locked ? ric(t.ic) : liveIcon(t));
+    var mark = toolMark(t);
+    var icon = mark ? (locked ? '<span class="rds-icon">' + mark + '</span>' : liveIcon(t, mark)) : ((t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : (locked ? ric(t.ic) : liveIcon(t)));
     // A1: the Specialty Kits tile names the doctor's own kit once one is known (profile or chosen).
     if (t.act === "speckit") { var mk = ""; try { mk = (window.SMD_KITS && SMD_KITS.myLabel) ? SMD_KITS.myLabel() : ""; } catch (e) {} if (mk) t = { act: t.act, ic: t.ic, tt: t.tt, sub: "My kit: " + mk, defOn: t.defOn, feat: t.feat }; }
     // BETA chip: these models are clinically unvalidated, so the label rides the tile on EVERY path
@@ -10368,12 +10377,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function scGetEngine() { try { var v = localStorage.getItem(EKEY); return (v === "fast" || v === "clinical") ? v : null; } catch (e) { return null; } }
     function scSetEngine(v) { try { localStorage.setItem(EKEY, v); } catch (e) {} }
     function scClinicalAvail() { try { return !!(window.SMD_VOICE && SMD_VOICE.available && SMD_VOICE.available().whisper); } catch (e) { return false; } }
+    // recGen: every scStart bumps it and each callback checks it, so a late final from a session that was
+    // replaced (Clinical watchdog -> Fast) cannot end or overwrite the new one. recWatch: that watchdog.
+    var recGen = 0, recWatch = null, recPh = qEl.getAttribute("placeholder") || "";
+    // The composer placeholder says what the mic is doing: a 181 MB first-use download or a model load used
+    // to show only as a teal pulse with an empty box (owner video 2026-11-28, ~15 s that looked dead).
+    function scPh(t) { try { qEl.setAttribute("placeholder", t || recPh); } catch (e) {} }
     function scMicState(s) { if (!micBtn) return; micBtn.classList.toggle("live", s === "live"); micBtn.classList.toggle("prep", s === "prep"); micBtn.setAttribute("aria-label", s === "live" ? "Stop dictation" : "Dictate to MaiK"); }
     function scWrite(t) { if (recSuppress || t == null) return; var s = String(t).trim(); qEl.value = recBase ? (recBase + " " + s) : s; autosizeQ(); refreshExtract(); }
-    function scEnd(focusBox) { recActive = null; recStopping = false; scMicState("idle"); try { micBtn.title = "Dictate"; } catch (e) {} try { if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {} if (focusBox) { try { qEl.focus(); } catch (e) {} } }
+    function scEnd(focusBox) { recGen++; if (recWatch) { clearTimeout(recWatch); recWatch = null; } recActive = null; recStopping = false; scMicState("idle"); scPh(""); try { micBtn.title = "Dictate"; } catch (e) {} try { if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {} if (focusBox) { try { qEl.focus(); } catch (e) {} } }
     // Hard stop used by send(): stop recording immediately (red off) and SUPPRESS any trailing
     // partial/final so the just-cleared composer box stays clear. Reset on the next scStart.
-    function scAbort() { recSuppress = true; recActive = null; recStopping = false; try { if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {} scMicState("idle"); try { if (micBtn) micBtn.title = "Dictate"; } catch (e) {} }
+    function scAbort() { recGen++; if (recWatch) { clearTimeout(recWatch); recWatch = null; } recSuppress = true; recActive = null; recStopping = false; try { if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {} scMicState("idle"); scPh(""); try { if (micBtn) micBtn.title = "Dictate"; } catch (e) {} }
     function scErr(err) {
       if (err === "clinical-unavailable") { toast("Clinical dictation isn’t ready yet, so using Fast."); scSetEngine("fast"); setTimeout(function () { scStart("fast"); }, 0); return; }
       scEnd(false);
@@ -10386,15 +10401,34 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       recBase = (qEl.value || "").trim(); recStopping = false; recSuppress = false;
       try { qEl.blur(); } catch (e) {}   // drop the keyboard so it can't steal the mic (the prior inline-capture bug)
       scMicState("prep");
+      var clin = engine === "clinical", gen = ++recGen, live = false, dl = false;
+      if (recWatch) { clearTimeout(recWatch); recWatch = null; }
+      scPh(clin ? "Preparing clinical dictation\u2026" : "Starting the mic\u2026");
+      function mine() { return gen === recGen; }
+      // Clinical that never reaches the mic (model load hung, no download under way) falls back to Fast
+      // instead of pulsing teal forever. A real download keeps going: its progress shows in the box.
+      if (clin) recWatch = setTimeout(function () {
+        recWatch = null;
+        if (!mine() || live || dl || recStopping) return;
+        try { if (window.SMD_NATIVE && SMD_NATIVE.cancelWhisper) SMD_NATIVE.cancelWhisper(); else if (window.SMD_VOICE && SMD_VOICE.stop) SMD_VOICE.stop(); } catch (e) {}
+        toast("Clinical dictation is slow to start, so using Fast.");
+        scStart("fast");
+      }, 8000);
       recActive = SMD_VOICE.listen({
-        engine: engine === "clinical" ? "clinical" : undefined,
-        onState: function (st) { if (st === "listening" || st === "recording") scMicState("live"); else if (st === "transcribing" || st === "preparing" || st === "downloading") scMicState("prep"); },
-        onDownloadProgress: function (p) { scMicState("prep"); try { micBtn.title = "Downloading clinical model " + Math.round((p || 0) * 100) + "%"; } catch (e) {} },
-        onPartial: function (t) { scWrite(t); },
-        onFinal: function (t) { scWrite(t); scEnd(true); },
-        onError: function (err) { scErr(err); }
+        engine: clin ? "clinical" : undefined,
+        onState: function (st) {
+          if (!mine()) return;
+          if (st === "listening" || st === "recording") { live = true; scMicState("live"); scPh(clin ? "Listening\u2026 text appears when you tap the mic to stop" : "Listening\u2026"); }
+          else if (st === "transcribing") { scMicState("prep"); scPh("Transcribing\u2026"); }
+          else if (st === "downloading") { dl = true; scMicState("prep"); scPh("Downloading clinical model (first use only)\u2026"); }
+          else if (st === "preparing") scMicState("prep");
+        },
+        onDownloadProgress: function (p) { if (!mine()) return; dl = true; scMicState("prep"); var pc = Math.round((p || 0) * 100); scPh("Downloading clinical model " + pc + "% (first use only)"); try { micBtn.title = "Downloading clinical model " + pc + "%"; } catch (e) {} },
+        onPartial: function (t) { if (mine()) scWrite(t); },
+        onFinal: function (t) { if (!mine()) return; scWrite(t); scEnd(true); },
+        onError: function (err) { if (mine()) scErr(err); }
       });
-      if (!recActive && !recStopping) scMicState("idle");
+      if (!recActive && !recStopping && mine()) { scMicState("idle"); scPh(""); }
     }
     function scTap() {
       if (!INLINE_MIC) { openScribeDialog(); return; }

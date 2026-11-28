@@ -1153,7 +1153,7 @@ export async function explainPaperCard(ctx, projectId, body) {
   if (cached.structured === true && hasMetaFindings)
     return err(400, "not_needed", NOT_NEEDED, requestId);
   if (cached.ai && typeof cached.ai === "object") {
-    return json({ card: served(withoutFullText(cached), "cache"), model: cached.aiModel || "", costInr: 0 }, 200, { "x-request-id": requestId });
+    return json({ card: served(withoutFullText(cached), "cache"), model: cached.aiModel || "", costInr: 0, costMt: 0 }, 200, { "x-request-id": requestId });
   }
   let fullResults = allowedFullText ? String(cached.fullTextResults || "").trim() : "";
   if (!fullResults && cached.pmcid && allowedFullText && env.RESEARCH_CONTACT_EMAIL) {
@@ -1184,5 +1184,5 @@ export async function explainPaperCard(ctx, projectId, body) {
     tokensUsed: 0,
   });
   await writeCache(db, card);
-  return json({ card: served(card, "cache"), model: out.model || "", costInr: out.costInr || 0 }, 200, { "x-request-id": requestId });
+  return json({ card: served(card, "cache"), model: out.model || "", costInr: out.costInr || 0, costMt: out.costMt || 0 }, 200, { "x-request-id": requestId });
 }

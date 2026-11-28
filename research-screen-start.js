@@ -778,7 +778,7 @@
     h.push('      <h3 class="rmd-card-heading">Ethics committee (IEC) application</h3>');
     h.push('      <span class="rmd-badge rmd-badge-neutral">ICMR 2017</span>');
     h.push('    </div>');
-    h.push(SMD.ai ? SMD.ai.barHtml(st.iecAi, { task: "iec_application", label: "ethics application", cost: 2 }) : "");
+    h.push(SMD.ai ? SMD.ai.barHtml(st.iecAi, { task: "iec_application", label: "ethics application" }) : "");
     h.push('    <div class="rmd-iec-form rmd-form"' + (st.iecOpen ? '' : ' style="display:none;"') + '>');
     var id = st.iecData;
     h.push('      <div class="rmd-field">');
@@ -893,7 +893,7 @@
     h.push('        </select>');
     h.push('      </div>');
     h.push('    </div>');
-    h.push(SMD.ai ? SMD.ai.barHtml(st.consentAi, { task: "consent_form", label: "consent form", cost: 2 }) : "");
+    h.push(SMD.ai ? SMD.ai.barHtml(st.consentAi, { task: "consent_form", label: "consent form" }) : "");
     h.push('    <div class="rmd-consent-form rmd-form"' + (st.consentOpen ? '' : ' style="display:none;"') + '>');
     var cd = st.consentData;
 
@@ -998,7 +998,7 @@
     h.push('      <h3 class="rmd-card-heading">CTRI registration</h3>');
     h.push('      <span class="rmd-badge rmd-badge-neutral">Clinical Trials Registry - India</span>');
     h.push('    </div>');
-    h.push(SMD.ai ? SMD.ai.barHtml(st.ctriAi, { task: "ctri_fields", label: "CTRI fields", cost: 2 }) : "");
+    h.push(SMD.ai ? SMD.ai.barHtml(st.ctriAi, { task: "ctri_fields", label: "CTRI fields" }) : "");
     h.push('    <div class="rmd-ctri-form rmd-form"' + (st.ctriOpen ? '' : ' style="display:none;"') + '>');
     var ctd = st.ctriData;
     h.push('      <div class="rmd-field">');
@@ -1111,6 +1111,7 @@
   }
 
   function bindEvents(container, proj) {
+    if (SMD.pricing && SMD.pricing.ensureLoaded) SMD.pricing.ensureLoaded();
     var on = function (sel, fn) {
       var els = container.querySelectorAll(sel);
       for (var i = 0; i < els.length; i++) els[i].onclick = fn;
@@ -1201,7 +1202,9 @@
           if (firstInp && firstInp.focus) firstInp.focus();
         };
       }
+      var retryBtnIec = cardIec.querySelector('[data-rmd="ai-retry"]') || cardIec.querySelector('[data-rmd-action="retry"]');
       var askBtn = cardIec.querySelector('[data-rmd-ai="ask"]');
+      if (retryBtnIec && askBtn) retryBtnIec.onclick = function () { askBtn.click(); };
       if (askBtn) {
         askBtn.onclick = function () {
           if (st.iecAi.busy) return;
@@ -1217,8 +1220,9 @@
           SMD.api.request("POST", "/v1/projects/" + encodeURIComponent((proj && proj.serverId) || proj.id) + "/ai-draft", body)
             .then(function (res) {
               st.iecAi.busy = false;
-              st.iecOpen = true;
+              if (SMD.pricing && SMD.pricing.recordCharge) SMD.pricing.recordCharge(st.iecAi, res);
               var d = res && res.draft ? res.draft : res;
+              var populated = 0;
               if (d) {
                 var keys = Object.keys(d);
                 for (var k = 0; k < keys.length; k++) {
@@ -1226,10 +1230,19 @@
                   if (st.iecData[key] !== undefined) {
                     var val = d[key];
                     if (Array.isArray(val)) val = val.join("\n");
-                    st.iecData[key] = val || "";
-                    if (val) st.iecDrafted[key] = true;
+                    val = val ? String(val) : "";
+                    st.iecData[key] = val;
+                    if (val.trim()) {
+                      st.iecDrafted[key] = true;
+                      populated++;
+                    }
                   }
                 }
+              }
+              if (!populated) {
+                st.iecAi.error = { code: "empty_draft", message: "MaiK returned an empty ethics draft. Check your connection and try again." };
+              } else {
+                st.iecOpen = true;
               }
               render(container);
             })
@@ -1379,7 +1392,9 @@
           if (firstInp && firstInp.focus) firstInp.focus();
         };
       }
+      var retryBtnC = cardConsent.querySelector('[data-rmd="ai-retry"]') || cardConsent.querySelector('[data-rmd-action="retry"]');
       var askBtnC = cardConsent.querySelector('[data-rmd-ai="ask"]');
+      if (retryBtnC && askBtnC) retryBtnC.onclick = function () { askBtnC.click(); };
       if (askBtnC) {
         askBtnC.onclick = function () {
           if (st.consentAi.busy) return;
@@ -1394,8 +1409,9 @@
           SMD.api.request("POST", "/v1/projects/" + encodeURIComponent((proj && proj.serverId) || proj.id) + "/ai-draft", body)
             .then(function (res) {
               st.consentAi.busy = false;
-              st.consentOpen = true;
+              if (SMD.pricing && SMD.pricing.recordCharge) SMD.pricing.recordCharge(st.consentAi, res);
               var d = res && res.draft ? res.draft : res;
+              var cPop = 0;
               if (d) {
                 var engVersion = d.englishVersion || d;
                 var pis = engVersion.participantInformationSheet || {};
@@ -1413,12 +1429,14 @@
                 st.consentData.statements = Array.isArray(cf.statements) ? cf.statements.join("\n") : (cf.statements || "");
                 st.consentData.signatureBlock = cf.signatureBlock || "";
 
-                st.consentDrafted = {
-                  title: true, purpose: true, procedures: true, duration: true,
-                  risks: true, benefits: true, alternatives: true, confidentiality: true,
-                  voluntary: true, contact: !pis.contact ? false : true,
-                  statements: true, signatureBlock: true
-                };
+                st.consentDrafted = {};
+                var cKeys = ["title", "purpose", "procedures", "duration", "risks", "benefits", "alternatives", "confidentiality", "voluntary", "contact", "statements", "signatureBlock"];
+                for (var ci = 0; ci < cKeys.length; ci++) {
+                  if (String(st.consentData[cKeys[ci]] || "").trim()) {
+                    st.consentDrafted[cKeys[ci]] = true;
+                    cPop++;
+                  }
+                }
 
                 if (d.translatedVersion) {
                   var tpis = d.translatedVersion.participantInformationSheet || {};
@@ -1437,9 +1455,9 @@
                     statements: Array.isArray(tcf.statements) ? tcf.statements.join("\n") : (tcf.statements || ""),
                     signatureBlock: tcf.signatureBlock || ""
                   };
-                  st.consentDrafted.trans_title = true;
-                  st.consentDrafted.trans_purpose = true;
-                  st.consentDrafted.trans_procedures = true;
+                  if (String(st.consentTransData.title || "").trim()) { st.consentDrafted.trans_title = true; cPop++; }
+                  if (String(st.consentTransData.purpose || "").trim()) { st.consentDrafted.trans_purpose = true; cPop++; }
+                  if (String(st.consentTransData.procedures || "").trim()) { st.consentDrafted.trans_procedures = true; cPop++; }
                 } else if (d.participantInformationSheet && d.language && d.language !== "English") {
                   var lpis = d.participantInformationSheet || {};
                   var lcf = d.consentForm || {};
@@ -1457,12 +1475,17 @@
                     statements: Array.isArray(lcf.statements) ? lcf.statements.join("\n") : (lcf.statements || ""),
                     signatureBlock: lcf.signatureBlock || ""
                   };
-                  st.consentDrafted.trans_title = true;
-                  st.consentDrafted.trans_purpose = true;
-                  st.consentDrafted.trans_procedures = true;
+                  if (String(st.consentTransData.title || "").trim()) { st.consentDrafted.trans_title = true; cPop++; }
+                  if (String(st.consentTransData.purpose || "").trim()) { st.consentDrafted.trans_purpose = true; cPop++; }
+                  if (String(st.consentTransData.procedures || "").trim()) { st.consentDrafted.trans_procedures = true; cPop++; }
                 } else {
                   st.consentTransData = null;
                 }
+              }
+              if (!cPop) {
+                st.consentAi.error = { code: "empty_draft", message: "MaiK returned an empty consent form draft. Check your connection and try again." };
+              } else {
+                st.consentOpen = true;
               }
               render(container);
             })
@@ -1609,7 +1632,9 @@
           if (firstInp && firstInp.focus) firstInp.focus();
         };
       }
+      var retryBtnCt = cardCtri.querySelector('[data-rmd="ai-retry"]') || cardCtri.querySelector('[data-rmd-action="retry"]');
       var askBtnCt = cardCtri.querySelector('[data-rmd-ai="ask"]');
+      if (retryBtnCt && askBtnCt) retryBtnCt.onclick = function () { askBtnCt.click(); };
       if (askBtnCt) {
         askBtnCt.onclick = function () {
           if (st.ctriAi.busy) return;
@@ -1625,8 +1650,9 @@
           SMD.api.request("POST", "/v1/projects/" + encodeURIComponent((proj && proj.serverId) || proj.id) + "/ai-draft", body)
             .then(function (res) {
               st.ctriAi.busy = false;
-              st.ctriOpen = true;
+              if (SMD.pricing && SMD.pricing.recordCharge) SMD.pricing.recordCharge(st.ctriAi, res);
               var d = res && res.draft ? res.draft : res;
+              var ctriPop = 0;
               if (d) {
                 st.ctriData.publicTitle = d.publicTitle || "";
                 st.ctriData.scientificTitle = d.scientificTitle || "";
@@ -1653,8 +1679,16 @@
                 var ctriKeys = Object.keys(st.ctriData);
                 for (var ci = 0; ci < ctriKeys.length; ci++) {
                   var ck = ctriKeys[ci];
-                  if (st.ctriData[ck]) st.ctriDrafted[ck] = true;
+                  if (String(st.ctriData[ck] || "").trim()) {
+                    st.ctriDrafted[ck] = true;
+                    if (ck !== "recruitmentStatus") ctriPop++;
+                  }
                 }
+              }
+              if (!ctriPop) {
+                st.ctriAi.error = { code: "empty_draft", message: "MaiK returned an empty CTRI draft. Check your connection and try again." };
+              } else {
+                st.ctriOpen = true;
               }
               render(container);
             })
