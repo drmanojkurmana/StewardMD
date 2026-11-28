@@ -322,6 +322,45 @@ function checklistDraft(parsed, guide, headings) {
   return { guidelineId: guide.id, name: guide.name, items };
 }
 
+const MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+function scrubFullDatesForPrompt(value) {
+  const s = String(value == null ? "" : value);
+  if (!s) return "";
+  return s
+    .replace(/(?<!\d)(\d{4})-(\d{1,2})-(\d{1,2})(?!\d)/g, (_, y, m) => {
+      const mi = parseInt(m, 10);
+      return (mi >= 1 && mi <= 12 ? MONTH_NAMES[mi - 1] + " " : "") + y;
+    })
+    .replace(/(?<!\d)(\d{1,2})[/-](\d{1,2})[/-](\d{4})(?!\d)/g, (_, _d, m, y) => {
+      const mi = parseInt(m, 10);
+      return (mi >= 1 && mi <= 12 ? MONTH_NAMES[mi - 1] + " " : "") + y;
+    });
+}
+function cleanPromptObj(val, maxLen) {
+  if (!val || typeof val !== "object") return "";
+  try {
+    return scrubFullDatesForPrompt(JSON.stringify(val)).slice(0, maxLen || 2500);
+  } catch (e) {
+    return "";
+  }
+}
+function planProportionPctStrings(plan) {
+  const ss = plan && typeof plan === "object" ? plan.ssInputs : null;
+  if (!ss || typeof ss !== "object") return "";
+  const out = [];
+  for (const k of ["p1", "p2", "p", "p0", "alpha", "power", "dropout", "allocation", "probEvent"]) {
+    const v = Number(ss[k]);
+    if (Number.isFinite(v) && v > 0 && v < 1) {
+      const pct = Math.round(v * 1000) / 10;
+      const pctStr = pct % 1 === 0 ? pct.toFixed(0) : pct.toFixed(1);
+      out.push(pctStr + "%");
+    }
+  }
+  return out.join(" ");
+}
 function extractAllowedNumbers(chunks) {
   const out = new Set();
   const re = /(?<![A-Za-z0-9_.])\d+(?:\.\d+)?%?/g;
@@ -1429,28 +1468,44 @@ export async function aiDraft(ctx, projectId, body) {
     const titleText = asText(input.title || project.title, 300);
     const studyType = asText(input.studyType || project.study_type, 120);
     const question = asText(input.researchQuestion || project.research_question, 1000);
-    const notes = asText(input.notes || input.note, 2000);
+    const notes = scrubFullDatesForPrompt(asText(input.notes || input.note, 3000));
     const journalId = asText(input.journalId, 80);
     const dbResultsSec = (bits.sections || []).find((s) => s && s.section_id === "results" && s.text && s.text.trim());
     const savedResults = asText(input.resultsText || input.savedResults || (dbResultsSec ? dbResultsSec.text : ""), 6000);
+    const planJson = cleanPromptObj(input.plan, 3000);
+    const protoObj = (input.protocol && typeof input.protocol === "object") ? input.protocol : null;
+    const mergedProto = (bits.protocol && Object.keys(bits.protocol).length)
+      ? cleanPromptObj(bits.protocol, 2500)
+      : cleanPromptObj(protoObj, 2500);
+    const randJson = cleanPromptObj(input.randomise, 1500);
+    const consortJson = cleanPromptObj(input.consort, 1500);
+    const iecJson = cleanPromptObj(input.iec, 1000);
+    const ctriJson = cleanPromptObj(input.ctri, 1500);
     const studyList = bits.studies.slice(0, 20)
       .map((s) => (s.label || "Study") + ": " + String(s.quote || "").slice(0, 250))
       .join("\n");
     const numberRule = tokens.length
       ? "For Abstract and Results, any statistical result must be one of the allowed {{run:...}} tokens. Do not invent or compute numbers. "
       : (savedResults
-        ? "For Abstract and Results, report ONLY the exact statistical values from the saved study analysis results provided below. Do not invent or alter any numbers. "
-        : "For Abstract and Results, do not invent or compute statistical numbers if no analysis results are provided. ");
+        ? "For Abstract and Results, report ONLY the exact values from the provided study inputs and saved analysis results below. Every number in every section must exist in the provided inputs; do not invent or alter any number. "
+        : "Every number in every section must exist in the provided inputs; do not invent or compute statistical numbers if no analysis results are provided. ");
     system = "You draft an IMRaD medical research manuscript (Abstract, Introduction, Methods, Results, Discussion). " +
       "Return ONLY JSON {title, sections:[{id, heading, text}]} where id is one of abstract, introduction, methods, results, discussion. " +
+      "Use all study details provided in Plan, Sample Size, Protocol, Randomisation/Blinding, CONSORT flow, Ethics (IEC), Trial Registration (CTRI), and Notes when writing Methods and Abstract. " +
+      "Never write that details were not provided when those fields are supplied below. " +
       numberRule +
       "Do not invent citations, patient identifiers, or unverified claims.";
     prompt = "Title: " + titleText +
       "\nStudy type: " + studyType +
       "\nResearch question: " + question +
       (journalId ? "\nTarget journal: " + journalId : "") +
-      (notes ? "\nNotes: " + notes : "") +
-      "\nProtocol: " + JSON.stringify(bits.protocol).slice(0, 2000) +
+      (planJson ? "\nPlan & sample size: " + planJson : "") +
+      "\nProtocol: " + (mergedProto || "{}") +
+      (randJson ? "\nRandomisation & blinding: " + randJson : "") +
+      (consortJson ? "\nCONSORT participant flow: " + consortJson : "") +
+      (iecJson ? "\nEthics approval (IEC): " + iecJson : "") +
+      (ctriJson ? "\nTrial registration (CTRI): " + ctriJson : "") +
+      (notes ? "\nAdditional study notes: " + notes : "") +
       "\nAllowed result tokens (use these exact strings, do not invent numbers): " + (tokens.join(", ") || "(none saved yet)") +
       (savedResults ? "\nSaved study analysis results:\n" + savedResults : "") +
       (studyList ? "\nIncluded study notes:\n" + studyList : "");
@@ -1477,6 +1532,13 @@ export async function aiDraft(ctx, projectId, body) {
       input.note,
       input.resultsText,
       input.savedResults,
+      cleanPromptObj(input.plan, 3000),
+      planProportionPctStrings(input.plan),
+      cleanPromptObj(input.protocol, 2500),
+      cleanPromptObj(input.randomise, 1500),
+      cleanPromptObj(input.consort, 1500),
+      cleanPromptObj(input.iec, 1000),
+      cleanPromptObj(input.ctri, 1500),
       project.title,
       project.research_question,
       bits.protocol ? JSON.stringify(bits.protocol) : "",

@@ -107,6 +107,57 @@
     return t.indexOf("systematic review") >= 0 || t.indexOf("meta-analysis") >= 0 || t.indexOf("meta analysis") >= 0;
   }
 
+  var TEMPLATE_SECTION_RANK = {
+    title: 0,
+    titlepage: 0,
+    abstract: 1,
+    introduction: 2,
+    background: 2,
+    methods: 3,
+    materials: 3,
+    materialsandmethods: 3,
+    casepresentation: 4,
+    presentation: 4,
+    timeline: 5,
+    results: 6,
+    discussion: 7,
+    conclusion: 8,
+    conclusions: 8,
+    patientperspective: 9,
+    learningpoints: 10,
+    references: 99
+  };
+
+  function sectionTemplateRank(sec) {
+    if (!sec || typeof sec !== "object") return 50;
+    var normId = String(sec.id || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+    if (Object.prototype.hasOwnProperty.call(TEMPLATE_SECTION_RANK, normId)) return TEMPLATE_SECTION_RANK[normId];
+    var normHead = String(sec.heading || sec.label || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+    if (Object.prototype.hasOwnProperty.call(TEMPLATE_SECTION_RANK, normHead)) return TEMPLATE_SECTION_RANK[normHead];
+    return 50;
+  }
+
+  function sortSections(sections) {
+    if (!Array.isArray(sections) || sections.length <= 1) return Array.isArray(sections) ? sections.slice() : [];
+    var groups = [];
+    var i, s, lvl;
+    for (i = 0; i < sections.length; i++) {
+      s = sections[i];
+      lvl = Number(s && s.level);
+      if (groups.length > 0 && isFinite(lvl) && lvl > 1) {
+        groups[groups.length - 1].items.push(s);
+      } else {
+        groups.push({ rank: sectionTemplateRank(s), idx: groups.length, items: [s] });
+      }
+    }
+    groups.sort(function (a, b) { return (a.rank - b.rank) || (a.idx - b.idx); });
+    var out = [];
+    for (i = 0; i < groups.length; i++) {
+      for (var j = 0; j < groups[i].items.length; j++) out.push(groups[i].items[j]);
+    }
+    return out;
+  }
+
   function sectionSidebarItems(man, proj) {
     var items = [];
     var seen = {};
@@ -131,11 +182,13 @@
       }
       items.push({
         id: s.id,
+        level: s.level || 1,
         label: (meta && meta.label) || s.heading || s.id,
         hint: (meta && meta.hint) || "Manuscript section."
       });
     }
-    return items.length ? items : IMRAD_SECTIONS;
+    var result = items.length ? items : IMRAD_SECTIONS.slice();
+    return sortSections(result);
   }
 
   var RULE_TABLE = {
@@ -1181,6 +1234,7 @@
       if (manRes && manRes.manuscript) {
         manuscriptMissing[mpid] = false;
         st.manuscript = manRes.manuscript;
+        if (st.manuscript.sections) st.manuscript.sections = sortSections(st.manuscript.sections);
         if (manRes.manuscript.ai && Array.isArray(manRes.manuscript.ai.draftedSectionIds)) {
           for (var aiIdx = 0; aiIdx < manRes.manuscript.ai.draftedSectionIds.length; aiIdx++) {
             st.aiDraftedSections[manRes.manuscript.ai.draftedSectionIds[aiIdx]] = true;
@@ -1188,6 +1242,7 @@
         }
       } else {
         st.manuscript = localManuscript(st.projectId) || thesisManuscript(st.projectId) || defaultManuscript(st.projectId);
+        if (st.manuscript && st.manuscript.sections) st.manuscript.sections = sortSections(st.manuscript.sections);
       }
       st.versions = (versRes && versRes.versions) || defaultVersions(proj);
       if (!params || !params.sectionId) {
@@ -1617,6 +1672,7 @@
             st.caseReportMissingNumbers = [];
           }
 
+          st.manuscript.sections = sortSections(st.manuscript.sections);
           recordAiProvenance(resp.data.model, draftedHeadings, draftedIds);
           saveLocalManuscript(localPid || st.projectId || pid, st.manuscript);
           if (getSection("casePresentation")) st.selectedSectionId = "casePresentation";
@@ -1667,11 +1723,101 @@
     return !!(secObj.text && secObj.text.indexOf("Drafted by MaiK") >= 0);
   }
 
+  function formatMonthYear(dateStr) {
+    var s = String(dateStr == null ? "" : dateStr).trim();
+    if (!s) return "";
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (m) {
+      var mi = parseInt(m[2], 10);
+      return (mi >= 1 && mi <= 12 ? months[mi - 1] + " " : "") + m[1];
+    }
+    var m2 = s.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})/);
+    if (m2) {
+      var mi2 = parseInt(m2[2], 10);
+      return (mi2 >= 1 && mi2 <= 12 ? months[mi2 - 1] + " " : "") + m2[3];
+    }
+    return s;
+  }
+
+  function computePlanSampleSize(plan) {
+    if (!plan || !plan.aim || !plan.ssInputs) return null;
+    var ss = G.SMD_RESEARCH_SAMPLESIZE;
+    if (!ss) return null;
+    var inp = plan.ssInputs;
+    try {
+      if (plan.aim === "two_proportions") {
+        return ss.twoProportions({ p1: Number(inp.p1), p2: Number(inp.p2), alpha: Number(inp.alpha) || 0.05, power: Number(inp.power) || 0.80, ratio: Number(inp.ratio) || 1, dropout: Number(inp.dropout) || 0 });
+      }
+      if (plan.aim === "two_means") {
+        return ss.twoMeans({ diff: Number(inp.diff), sd: Number(inp.sd), alpha: Number(inp.alpha) || 0.05, power: Number(inp.power) || 0.80, ratio: Number(inp.ratio) || 1, dropout: Number(inp.dropout) || 0 });
+      }
+      if (plan.aim === "single_proportion") {
+        var opts = { p: Number(inp.p), precision: Number(inp.precision), alpha: Number(inp.alpha) || 0.05, dropout: Number(inp.dropout) || 0 };
+        if (inp.population && Number(inp.population) > 0) opts.population = Number(inp.population);
+        return ss.singleProportion(opts);
+      }
+      if (plan.aim === "single_mean") {
+        return ss.singleMean({ sd: Number(inp.sd), precision: Number(inp.precision), alpha: Number(inp.alpha) || 0.05, dropout: Number(inp.dropout) || 0 });
+      }
+      if (plan.aim === "correlation") {
+        return ss.correlation({ r: Number(inp.r), alpha: Number(inp.alpha) || 0.05, power: Number(inp.power) || 0.80, dropout: Number(inp.dropout) || 0 });
+      }
+      if (plan.aim === "case_control") {
+        return ss.caseControl({ p0: Number(inp.p0), or: Number(inp.or), ratio: Number(inp.ratio) || 1, alpha: Number(inp.alpha) || 0.05, power: Number(inp.power) || 0.80, dropout: Number(inp.dropout) || 0 });
+      }
+      if (plan.aim === "time_to_event") {
+        return ss.logRankEvents({ hr: Number(inp.hr), alpha: Number(inp.alpha) || 0.05, power: Number(inp.power) || 0.80, allocation: Number(inp.allocation) || 0.5, probEvent: Number(inp.probEvent), dropout: Number(inp.dropout) || 0 });
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  function nonEmptyFields(obj, keys) {
+    if (!obj || typeof obj !== "object") return null;
+    var out = {};
+    var has = false;
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      var v = obj[k];
+      if (v != null && String(v).trim() !== "") {
+        out[k] = typeof v === "string" ? v.trim() : v;
+        has = true;
+      }
+    }
+    return has ? out : null;
+  }
+
+  function readLocalPlan(localPid, apiPid, proj) {
+    var plan = (proj && proj.plan) || null;
+    if (!plan && typeof localStorage !== "undefined" && localStorage && typeof localStorage.getItem === "function") {
+      try {
+        var raw = localStorage.getItem("smd_research_plan_" + localPid) ||
+          (apiPid && apiPid !== localPid ? localStorage.getItem("smd_research_plan_" + apiPid) : null);
+        if (raw) plan = JSON.parse(raw);
+      } catch (e) {}
+    }
+    return plan;
+  }
+
+  function readStoreRec(localPid, apiPid, kind, id) {
+    var rs = G.RMDStore;
+    if (!rs || typeof rs.get !== "function") return Promise.resolve(null);
+    return rs.get(localPid, kind, id).then(function (val) {
+      if (val || !apiPid || apiPid === localPid) return val || null;
+      return rs.get(apiPid, kind, id).catch(function () { return null; });
+    }, function () {
+      if (!apiPid || apiPid === localPid) return null;
+      return rs.get(apiPid, kind, id).catch(function () { return null; });
+    });
+  }
+
   /* Ask MaiK to draft a manuscript for review / primary projects via the
    * synchronous /ai-draft endpoint so it never triggers an unimplemented /jobs kind. */
   function startManuscriptDraft() {
     if (!SMD.api) return Promise.reject({ message: "API not available" });
     var pid = apiProjectId();
+    var localPid = activeProjectId();
     var store = SMD.store;
     var proj = store ? store.getActiveProject() : null;
     var man = st.manuscript || localManuscript(st.projectId);
@@ -1701,9 +1847,141 @@
     if (savedResults) input.resultsText = savedResults.slice(0, 6000);
     var targetJournal = proj && (proj.targetJournal || proj.journal);
     if (targetJournal) input.journalId = targetJournal;
-    return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/ai-draft", {
-      task: "manuscript_draft",
-      input: input
+
+    var rawPlan = readLocalPlan(localPid, pid, proj);
+    return Promise.all([
+      readStoreRec(localPid, pid, "iec", "iec"),
+      readStoreRec(localPid, pid, "ctri", "registration"),
+      readStoreRec(localPid, pid, "randomfingerprint", "main"),
+      readStoreRec(localPid, pid, "blinding", "blinding"),
+      readStoreRec(localPid, pid, "consort", "flow")
+    ]).then(function (recs) {
+      var iecRec = recs[0];
+      var ctriRec = recs[1];
+      var randFp = recs[2];
+      var blindingRec = recs[3];
+      var consortRec = recs[4];
+      var noteLines = [];
+
+      if (rawPlan && typeof rawPlan === "object") {
+        var planOut = {};
+        if (rawPlan.aim) planOut.aim = rawPlan.aim;
+        if (rawPlan.ssInputs) planOut.ssInputs = rawPlan.ssInputs;
+        var ssCalc = computePlanSampleSize(rawPlan);
+        if (ssCalc && ssCalc.ok !== false) {
+          planOut.sampleSize = {
+            nPerGroup: ssCalc.nPerGroup || ssCalc.n || null,
+            total: ssCalc.total || null,
+            totalWithDropout: ssCalc.totalWithDropout || null,
+            cases: ssCalc.cases || null,
+            controls: ssCalc.controls || null,
+            events: ssCalc.events || null,
+            paragraph: ssCalc.paragraph || ""
+          };
+          if (ssCalc.paragraph) noteLines.push("Sample size: " + ssCalc.paragraph);
+        }
+        var iecPlan = nonEmptyFields(rawPlan.iecData, [
+          "design", "setting", "duration", "sampleSize", "inclusion", "exclusion",
+          "methodology", "statisticalAnalysis", "objectives", "background", "funding", "consentProcess"
+        ]);
+        if (iecPlan) {
+          planOut.studyDetails = iecPlan;
+          if (iecPlan.design) noteLines.push("Design: " + iecPlan.design);
+          if (iecPlan.setting) noteLines.push("Setting: " + iecPlan.setting);
+          if (iecPlan.duration) noteLines.push("Duration: " + iecPlan.duration);
+          if (iecPlan.inclusion) noteLines.push("Inclusion criteria: " + iecPlan.inclusion);
+          if (iecPlan.exclusion) noteLines.push("Exclusion criteria: " + iecPlan.exclusion);
+          if (iecPlan.methodology) noteLines.push("Methodology: " + iecPlan.methodology);
+          if (iecPlan.statisticalAnalysis) noteLines.push("Planned analysis: " + iecPlan.statisticalAnalysis);
+        }
+        var ctriPlan = nonEmptyFields(rawPlan.ctriData, [
+          "studyType", "phase", "condition", "intervention", "comparator",
+          "inclusion", "exclusion", "primaryOutcomeName", "primaryOutcomeTime",
+          "secondaryOutcomes", "targetSampleSize", "sites", "fundingSource", "briefSummary"
+        ]);
+        if (ctriPlan) {
+          planOut.trialDetails = ctriPlan;
+          if (ctriPlan.intervention) noteLines.push("Intervention: " + ctriPlan.intervention);
+          if (ctriPlan.comparator) noteLines.push("Comparator: " + ctriPlan.comparator);
+          if (ctriPlan.primaryOutcomeName) {
+            noteLines.push("Primary outcome: " + ctriPlan.primaryOutcomeName + (ctriPlan.primaryOutcomeTime ? " (" + ctriPlan.primaryOutcomeTime + ")" : ""));
+          }
+          if (ctriPlan.secondaryOutcomes) noteLines.push("Secondary outcomes: " + ctriPlan.secondaryOutcomes);
+        }
+        if (Object.keys(planOut).length) input.plan = planOut;
+      }
+
+      if (iecRec && (iecRec.status && iecRec.status !== "none" || iecRec.reference || iecRec.date)) {
+        var iecOut = {
+          status: iecRec.status || "none",
+          reference: iecRec.reference || "",
+          approvalDate: formatMonthYear(iecRec.date)
+        };
+        input.iec = iecOut;
+        var iecParts = ["Ethics committee (IEC) status: " + iecOut.status];
+        if (iecOut.reference) iecParts.push("reference " + iecOut.reference);
+        if (iecOut.approvalDate) iecParts.push("dated " + iecOut.approvalDate);
+        noteLines.push(iecParts.join(", ") + ".");
+      }
+
+      if (ctriRec && (ctriRec.status && ctriRec.status !== "not_started" || ctriRec.ctriNumber || ctriRec.date)) {
+        var ctriOut = {
+          status: ctriRec.status || "not_started",
+          ctriNumber: ctriRec.ctriNumber || ctriRec.number || "",
+          registrationDate: formatMonthYear(ctriRec.date)
+        };
+        input.ctri = ctriOut;
+        var ctriParts = ["Trial registration (CTRI): " + ctriOut.status];
+        if (ctriOut.ctriNumber) ctriParts.push("number " + ctriOut.ctriNumber);
+        if (ctriOut.registrationDate) ctriParts.push("registered " + ctriOut.registrationDate);
+        noteLines.push(ctriParts.join(", ") + ".");
+      }
+
+      if (randFp || blindingRec) {
+        var randOut = {};
+        if (randFp) {
+          randOut.arms = randFp.arms || [];
+          if (randFp.n != null) randOut.n = randFp.n;
+          if (randFp.ratio) randOut.ratio = randFp.ratio;
+          if (randFp.blockSizes) randOut.blockSizes = randFp.blockSizes;
+          if (randFp.strata) randOut.strata = randFp.strata;
+          var rp = ["Randomisation: block randomisation"];
+          if (randFp.arms && randFp.arms.length) rp.push("arms " + randFp.arms.join(" vs "));
+          if (randFp.ratio) rp.push("ratio " + randFp.ratio);
+          if (randFp.blockSizes) rp.push("block sizes " + randFp.blockSizes);
+          if (randFp.n != null) rp.push("n = " + randFp.n);
+          if (randFp.strata) rp.push("stratified by " + randFp.strata);
+          noteLines.push(rp.join(", ") + ".");
+        }
+        if (blindingRec) {
+          randOut.blinding = {
+            unblinded: !!blindingRec.unblinded,
+            reason: blindingRec.reason || "",
+            groups: blindingRec.groups || [],
+            how: blindingRec.how || "",
+            paragraph: blindingRec.paragraph || ""
+          };
+          if (blindingRec.paragraph) noteLines.push("Blinding: " + blindingRec.paragraph);
+        }
+        input.randomise = randOut;
+      }
+
+      if (consortRec && typeof consortRec === "object") {
+        input.consort = consortRec;
+        noteLines.push(
+          "CONSORT flow: " + (consortRec.assessed || 0) + " assessed for eligibility, " +
+          (consortRec.excluded || 0) + " excluded, " + (consortRec.randomised || 0) + " randomised (" +
+          (consortRec.nameA || "Intervention") + ": allocated " + (consortRec.allocatedA || 0) + ", analysed " + (consortRec.analysedA || 0) + "; " +
+          (consortRec.nameB || "Control") + ": allocated " + (consortRec.allocatedB || 0) + ", analysed " + (consortRec.analysedB || 0) + ")."
+        );
+      }
+
+      if (noteLines.length) input.notes = noteLines.join("\n").slice(0, 2000);
+
+      return SMD.api.request("POST", "/v1/projects/" + encodeURIComponent(pid) + "/ai-draft", {
+        task: "manuscript_draft",
+        input: input
+      });
     }).catch(function (err) {
       throw manuscriptAiError(err, "MaiK could not draft the manuscript. Try again.");
     });
@@ -1757,6 +2035,7 @@
         });
       }
     }
+    st.manuscript.sections = sortSections(st.manuscript.sections);
     recordAiProvenance(res && res.model, draftedHeadings, draftedIds);
     saveLocalManuscript(st.projectId, st.manuscript);
     manuscriptMissing[apiProjectId()] = false;
@@ -2654,8 +2933,9 @@
       if (humanAuthors.length) parts.push(docxParagraph(humanAuthors.join(", "), false, 0));
     }
     if (man.affiliations) parts.push(docxParagraph(man.affiliations, false, 0));
-    for (var i = 0; i < man.sections.length; i++) {
-      var sec = man.sections[i];
+    var orderedSections = sortSections(man.sections || []);
+    for (var i = 0; i < orderedSections.length; i++) {
+      var sec = orderedSections[i];
       parts.push(docxParagraph(sec.heading || sec.id, true, 28));
       var lines = plainText(sec.text).split("\n");
       for (var j = 0; j < lines.length; j++) {
@@ -3683,6 +3963,7 @@
       var heading = (d.headings && d.headings[eid]) || (meta && meta.label) || eid;
       man.sections.push({ id: eid, heading: heading, level: 1, text: d.sections[eid] });
     }
+    man.sections = sortSections(man.sections);
     return man;
   }
 
@@ -3743,6 +4024,7 @@
       if (!sec) {
         sec = { id: "results", heading: "Results", level: 1, text: "" };
         man.sections.push(sec);
+        man.sections = sortSections(man.sections);
       }
       var merged = (sec.text ? sec.text + "\n\n" : "") + text;
       return SMD.api.request("PUT", base + "/manuscript/sections/" + encodeURIComponent(sec.id), {
@@ -3793,6 +4075,9 @@
     _defaultVersions: defaultVersions,
     _isDemoProject: isDemoProject,
     _openPoConfirm: openPoConfirm,
+    _sortSections: sortSections,
+    _sectionSidebarItems: sectionSidebarItems,
+    _startManuscriptDraft: startManuscriptDraft,
     showDraftPreviewModal: showDraftPreviewModal
   };
 

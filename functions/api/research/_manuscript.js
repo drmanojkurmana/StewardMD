@@ -420,9 +420,62 @@ export function gateManuscript(sections, references, table, opts) {
   return { gatesPassed: failures.length === 0, gateFailures: failures, checks };
 }
 
+const TEMPLATE_SECTION_RANK = {
+  title: 0,
+  titlepage: 0,
+  abstract: 1,
+  introduction: 2,
+  background: 2,
+  methods: 3,
+  materials: 3,
+  materialsandmethods: 3,
+  casepresentation: 4,
+  presentation: 4,
+  timeline: 5,
+  results: 6,
+  discussion: 7,
+  conclusion: 8,
+  conclusions: 8,
+  patientperspective: 9,
+  learningpoints: 10,
+  references: 99,
+};
+
+function sectionTemplateRank(row) {
+  if (!row || typeof row !== "object") return 50;
+  const normId = String(row.section_id || row.id || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+  if (Object.prototype.hasOwnProperty.call(TEMPLATE_SECTION_RANK, normId)) return TEMPLATE_SECTION_RANK[normId];
+  const normHead = String(row.heading || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+  if (Object.prototype.hasOwnProperty.call(TEMPLATE_SECTION_RANK, normHead)) return TEMPLATE_SECTION_RANK[normHead];
+  return 50;
+}
+
+/* Sort manuscript sections into canonical reporting template order while
+ * keeping any level > 1 subsections attached under their top-level parent. */
+export function sortSectionsInTemplateOrder(rows) {
+  if (!Array.isArray(rows) || rows.length <= 1) return Array.isArray(rows) ? rows.slice() : [];
+  const groups = [];
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    const lvl = Number(row && row.level);
+    if (groups.length > 0 && Number.isFinite(lvl) && lvl > 1) {
+      groups[groups.length - 1].items.push(row);
+    } else {
+      groups.push({ rank: sectionTemplateRank(row), idx: groups.length, items: [row] });
+    }
+  }
+  groups.sort((a, b) => (a.rank - b.rank) || (a.idx - b.idx));
+  const out = [];
+  for (const g of groups) {
+    for (const item of g.items) out.push(item);
+  }
+  return out;
+}
+
 async function loadSections(db, versionId) {
-  return (await db.prepare("SELECT * FROM research_manuscript_sections WHERE version_id=? ORDER BY sort_order ASC, section_id ASC")
+  const rows = (await db.prepare("SELECT * FROM research_manuscript_sections WHERE version_id=? ORDER BY sort_order ASC, section_id ASC")
     .bind(versionId).all()).results || [];
+  return sortSectionsInTemplateOrder(rows);
 }
 async function latestVersion(db, projectId) {
   return db.prepare("SELECT * FROM research_manuscript_versions WHERE project_id=? ORDER BY version DESC LIMIT 1")

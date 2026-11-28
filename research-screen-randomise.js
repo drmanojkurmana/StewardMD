@@ -482,6 +482,9 @@
             seed: res.seed,
             n: res.rows.length,
             arms: arms,
+            ratio: ratioInput,
+            blockSizes: blocksInput,
+            strata: strataInput,
             createdAt: new Date().toISOString()
           };
 

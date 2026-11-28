@@ -13,7 +13,7 @@ import stard2015 from "../../../data/research-checklists/stard2015.json";
 import tripod from "../../../data/research-checklists/tripod.json";
 import prisma2020 from "../../../data/research-checklists/prisma2020.json";
 import care from "../../../data/research-checklists/care.json";
-import { ingestProjectDrafts } from "./_manuscript.js";
+import { ingestProjectDrafts, sortSectionsInTemplateOrder } from "./_manuscript.js";
 
 const READ_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
 const WRITE_ROLES = ["owner", "editor", "analyst"];
@@ -183,8 +183,10 @@ export async function checklistSnapshot(ctx, projectId) {
   const version = await db.prepare("SELECT id FROM research_manuscript_versions WHERE project_id=? ORDER BY version DESC LIMIT 1")
     .bind(projectId).first();
   if (version) {
-    const sections = (await db.prepare("SELECT heading, text FROM research_manuscript_sections WHERE version_id=? ORDER BY sort_order ASC, section_id ASC")
-      .bind(version.id).all()).results || [];
+    const sections = sortSectionsInTemplateOrder(
+      (await db.prepare("SELECT section_id, heading, level, text FROM research_manuscript_sections WHERE version_id=? ORDER BY sort_order ASC, section_id ASC")
+        .bind(version.id).all()).results || []
+    );
     if (sections.length) snapshot.manuscript = { sections: sections.map((s) => ({ heading: s.heading, text: s.text })) };
   }
 

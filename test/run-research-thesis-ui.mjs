@@ -742,7 +742,7 @@ try {
   await click('#rmdDraftSave');
   await sleep(40);
   await click('[data-rmd-tab="ready"]');
-  await sleep(750);
+  await sleep(1900);
   ok(await ev(`!!document.querySelector('.rmd-ready-screen') && !!document.querySelector('[data-rmd="format-check-card"]')`), 'Ready screen stays rendered with format-check card even after in-flight saveDraft finishes');
   slowSectionPutMs = 0;
 

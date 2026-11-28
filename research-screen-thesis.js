@@ -2221,16 +2221,15 @@
       return (res && res.manuscript && res.manuscript.version) || 1;
     }).catch(function () { return 1; }).then(function (version) {
       var secs = draft.sections;
-      var first = SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + secs[0].id, { version: version, heading: secs[0].heading, text: secs[0].text });
-      return first.then(function () {
-        var rest = [];
-        for (var i = 1; i < secs.length; i++) {
-          (function (sec) {
-            rest.push(SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + sec.id, { version: version, heading: sec.heading, text: sec.text }));
-          })(secs[i]);
-        }
-        return Promise.all(rest);
-      });
+      var chain = Promise.resolve();
+      for (var i = 0; i < secs.length; i++) {
+        (function (sec) {
+          chain = chain.then(function () {
+            return SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + sec.id, { version: version, heading: sec.heading, text: sec.text });
+          });
+        })(secs[i]);
+      }
+      return chain;
     }).then(function () {
       saveBusy = false;
       pendingSavePromise = null;

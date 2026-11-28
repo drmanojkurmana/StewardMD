@@ -13,6 +13,7 @@
  */
 import { loadJournal } from "./_journals.js";
 import { checklistItems } from "./_checklists.js";
+import { sortSectionsInTemplateOrder } from "./_manuscript.js";
 
 const READ_ROLES = ["owner", "editor", "analyst", "reviewer", "viewer"];
 const TOKEN_RE = /\{\{run:([A-Za-z0-9_-]+)\.([A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)*)\}\}/g;
@@ -497,8 +498,10 @@ export async function formatCheck(ctx, projectId, url) {
   const row = await db.prepare("SELECT * FROM research_manuscript_versions WHERE project_id=? ORDER BY version DESC LIMIT 1")
     .bind(projectId).first();
   if (!row) return err(404, "manuscript_not_found", "Manuscript not found", requestId);
-  const sectionRows = (await db.prepare("SELECT * FROM research_manuscript_sections WHERE version_id=? ORDER BY sort_order ASC, section_id ASC")
-    .bind(row.id).all()).results || [];
+  const sectionRows = sortSectionsInTemplateOrder(
+    (await db.prepare("SELECT * FROM research_manuscript_sections WHERE version_id=? ORDER BY sort_order ASC, section_id ASC")
+      .bind(row.id).all()).results || []
+  );
   const sections = sectionRows.map((s) => ({ id: s.section_id, heading: s.heading, text: s.text }));
   const runs = (await db.prepare("SELECT id, result_json FROM research_runs WHERE project_id=?").bind(projectId).all()).results || [];
   const studyType = String((gate.project && gate.project.study_type) || "");
