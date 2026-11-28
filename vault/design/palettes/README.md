@@ -22,6 +22,7 @@ Hex values are copied from the images so they can be used without opening them.
 ## In use
 - **PrepReels home card (02 Amber & Violet), 2026-11-28.** PrepNucleus dark is already midnight + amber (`#1a1a2e`,
   `#efc07b`), so 02 is the one palette that extends it instead of fighting it: amber light from the play button's side,
-  violet light from the far edge, both drifting slowly. `prep-medigram.css` `.pn-mgh` (tokens `--mg-*`).
+  violet light from the far edge, both drifting slowly, a light travelling round the edge, a mini reel and a gliding
+  strip of the feed's kinds (owner: "mixture of A and B" from the variants page). `prep.css` `.pn-mgx` (tokens `--mg-*`).
 - Not adopted: the CLAUDE.md note for PrepNucleus says "no glows, gradients or backdrops"; the owner asked for a glowing
   PrepReels card on 2026-11-28, so the glow is limited to that one card.

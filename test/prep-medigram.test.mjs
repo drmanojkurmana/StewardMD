@@ -222,9 +222,12 @@ test("home card: one PrepReels card in the Solve next style, Saved beside it onc
   assert.ok(mg, "PREP_MEDIGRAM registered");
   const host = (mgsv) => ({ ico: (n) => `<ico-${n}/>`, store: () => ({ mgsv }) });
   const html = mg.homeHtml(host({}));
-  // Glowing card (owner 2026-11-28, palette 02): glow layer, play chip, sliding words; the label carries the full text.
-  assert.match(html, /^<div class="pn-mgh"><button type="button" class="pn-next pn-mgx" data-act="mg-open" aria-label="PrepReels: questions, videos, images"><span class="pn-mgx-glow" aria-hidden="true"><\/span><span class="pn-ri" aria-hidden="true"><ico-play\/><\/span><span class="pn-rb" aria-hidden="true"><small>PrepReels<\/small><b>Swipe through <span class="pn-mgx-w">(<span>[a-z]+<\/span>){4}<\/span><\/b><\/span><ico-chev\/><\/button><\/div>$/);
-  for (const w of ["questions", "videos", "images"]) assert.ok(html.includes("<span>" + w + "</span>"), "the card slides through " + w);
+  // Glowing card (owner 2026-11-28, palette 02, mix of variants A and B): rim, glow, play chip, mini reel of three
+  // kinds and a strip of the feed's five kinds drawn twice for the loop; the label carries the full text.
+  assert.match(html, /^<div class="pn-mgh"><button type="button" class="pn-next pn-mgx" data-act="mg-open" aria-label="PrepReels: questions, videos, images, pearls and lessons, one swipe each"><span class="pn-mgx-in" aria-hidden="true"><span class="pn-mgx-glow"><\/span><span class="pn-mgx-top"><span class="pn-ri"><ico-play\/><\/span><span class="pn-rb"><small>PrepReels<\/small><b>Questions, videos, images<\/b><\/span><span class="pn-mgx-reel">/);
+  assert.equal((html.match(/<i class="[qvi]">/g) || []).length, 3, "the mini reel slides a question, a video and an image");
+  for (const k of ["Questions", "Videos", "Images", "Pearls", "Lessons"]) assert.equal(html.split("<b>" + k + "</b>").length - 1, 2, "the strip shows " + k + " (twice, for the loop)");
+  assert.ok(html.endsWith("</span></span></span></button></div>"), "no Saved button and nothing after the strip");
   assert.doesNotMatch(html, /mg-saved/, "no Saved button with nothing saved");
   const two = mg.homeHtml(host({ a: {}, b: {} }));
   assert.match(two, /data-act="mg-saved" aria-label="Saved from PrepReels, 2 cards"/);
