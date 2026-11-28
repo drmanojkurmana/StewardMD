@@ -238,6 +238,20 @@
     return false;
   }
 
+  /* Bibliographic identifiers are not patient identifiers. PMIDs, DOIs, trial
+   * registrations and internal row ids can contain a run of ten digits that
+   * happens to pass the NHS checksum, so numeric PHI rules skip them. */
+  var PHI_ID_TOKEN =
+    /(?:\[?PMID\s*:?\s*\d+\]?|PMC\d+|DOI\s*:?\s*10\.[^\s,;)\]]+|NCT\d{8}|ISRCTN\d+|CTRI\/[^\s,;]+|\b(?:rec|st|run|job|prj|srch|ddg|pdf|prot|aut|ma)_[A-Za-z0-9]+)/gi;
+  var PHI_NUMERIC_CATEGORIES = { nhs: 1, aadhaar: 1, abha: 1, ssn: 1, phone: 1, dob: 1, admission_date: 1, dates: 1 };
+  function phiIdentifierSpans(text) {
+    var spans = [];
+    PHI_ID_TOKEN.lastIndex = 0;
+    var m;
+    while ((m = PHI_ID_TOKEN.exec(text)) !== null) spans.push([m.index, m.index + m[0].length]);
+    return spans;
+  }
+
   var PHI_RULES = [
     ["mrn", "labelled_id",
       new RegExp("\\b(?:MRN|UHID|medical\\s+record(?:\\s+(?:no|number|#))?|hospital\\s+no" +
@@ -288,6 +302,7 @@
     var userMode = mode === "user";
     var allowCitationNames = !!(opts && typeof opts === "object" && opts.allowCitationLibraryNames);
     var citeSpans = allowCitationNames ? phiCitationLibrarySpans(s) : [];
+    var idSpans = phiIdentifierSpans(s);
     var rules = userMode ? PHI_RULES.concat(PHI_USER_ONLY_RULES) : PHI_RULES;
     var hits = [];
     var seen = {};
@@ -309,6 +324,9 @@
         if (validator && !validator(m, s)) continue;
         var hitEnd = m.index + m[0].length;
         if (category === "patient_name" && citeSpans.length && inSpans(m.index, hitEnd, citeSpans)) {
+          continue;
+        }
+        if (PHI_NUMERIC_CATEGORIES[category] && idSpans.length && inSpans(m.index, hitEnd, idSpans)) {
           continue;
         }
         var key = category + ":" + m.index + ":" + hitEnd;

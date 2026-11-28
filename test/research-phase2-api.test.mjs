@@ -650,6 +650,63 @@ test("import: records added, re-import flagged not dropped, dedup idempotent, gr
   assert.ok(types.indexOf("dedup_run") >= 0);
 });
 
+test("dedup after new records replaces overlapping groups with one disjoint set", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  const p = await makeProject(env, "tok-alice");
+  const first = await importCsv(env, p.id, [
+    ["Alpha study", "Smith J", 2020, "10.1000/alpha"],
+    ["Alpha study", "Smith J", 2020, ""],
+    ["Gamma study", "Lee K", 2021, "10.1000/gamma"],
+    ["Gamma study", "Lee K", 2021, ""],
+  ], "projects/" + p.id + "/imports/first.csv");
+  assert.equal(first.groupIds.length, 2, "two disjoint pairs after the first dedup");
+  /* A later database search (not an import, which skips known records) adds E
+   * with Alpha's DOI and Gamma's title/year/author, so E bridges the two old
+   * groups. The old pairwise groups must be replaced, not kept alongside the
+   * merged cluster, or screening hides a canonical record. */
+  env.RESEARCH_DB._db.prepare("INSERT INTO research_records (id,project_id,search_run_id,source,external_id,title,authors_json,year,doi,metadata_json,created_ts) VALUES (?,?,NULL,?,?,?,?,?,?,?,?)")
+    .run("rec_bridge", p.id, "pubmed", "999", "Gamma study", JSON.stringify(["Lee K"]), 2021, "10.1000/alpha", "{}", 999999);
+  const rerunAfterAdd = await call(env, "POST", "v1/projects/" + p.id + "/dedup:run", "tok-alice", {});
+  assert.ok(rerunAfterAdd.dedupRun.groupsCreated >= 1);
+  const groups = await call(env, "GET", "v1/projects/" + p.id + "/dedup-groups", "tok-alice");
+  assert.equal(groups.groups.length, 1, "one merged cluster");
+  assert.equal(groups.groups[0].memberIds.length, 5);
+  const seen = new Set();
+  for (const g of groups.groups) {
+    for (const id of g.memberIds) {
+      assert.ok(!seen.has(id), "a record belongs to only one group");
+      seen.add(id);
+    }
+    assert.ok(g.memberIds.includes(g.canonicalRecordId));
+  }
+  const rerun = await call(env, "POST", "v1/projects/" + p.id + "/dedup:run", "tok-alice", {});
+  assert.equal(rerun.dedupRun.groupsCreated, 0, "idempotent after the merge");
+});
+
+test("solo review: one voter decides immediately and include seeks the report", { skip: SKIP }, async () => {
+  const env = freshEnv();
+  const p = await makeProject(env, "tok-alice", "Solo review");
+  await importCsv(env, p.id, [
+    ["Solo alpha", "Smith J", 2020, "10.1000/solo-alpha"],
+    ["Solo beta", "Brown B", 2021, "10.1000/solo-beta"],
+  ], "projects/" + p.id + "/imports/solo.csv");
+  const ids = await recordIds(env, p.id);
+  const inc = await call(env, "POST", "v1/records/" + ids[0] + "/decisions", "tok-alice", { decision: "include" });
+  assert.equal(inc.outcome, "include", "single reviewer is final, not pending");
+  const dec = await call(env, "GET", "v1/records/" + ids[0] + "/decisions", "tok-alice");
+  assert.equal(dec.outcome, "include");
+  const reports = await call(env, "GET", "v1/projects/" + p.id + "/reports", "tok-alice");
+  assert.equal(reports.reports.length, 1, "include creates the full-text report");
+  assert.equal(reports.reports[0].status, "sought");
+  /* The solo reviewer can change the vote; the new vote wins. */
+  const exc = await call(env, "POST", "v1/records/" + ids[0] + "/decisions", "tok-alice", { decision: "exclude", reasonCode: "WRONG_DESIGN" });
+  assert.equal(exc.outcome, "exclude");
+  const again = await call(env, "GET", "v1/records/" + ids[0] + "/decisions", "tok-alice");
+  assert.equal(again.outcome, "exclude");
+  const why = await call(env, "POST", "v1/records/" + ids[1] + "/decisions", "tok-alice", { decision: "uncertain" });
+  assert.equal(why.outcome, "pending", "uncertain still needs a decision");
+});
+
 /* ---- 2.6 PRISMA 2020: counts equal stored decisions ------------------------------ */
 
 test("PRISMA: every count equals the stored decisions, by-reason breakdown included", { skip: SKIP }, async () => {
@@ -691,7 +748,7 @@ test("PRISMA: every count equals the stored decisions, by-reason breakdown inclu
 
   const rep = async (recordId) => {
     const r = await call(env, "POST", "v1/projects/" + p.id + "/reports", "tok-alice", { recordId });
-    assert.equal(r.http, 201, JSON.stringify(r));
+    assert.ok(r.http === 200 || r.http === 201, JSON.stringify(r));
     return r.report;
   };
   const rep2 = await rep(r2);

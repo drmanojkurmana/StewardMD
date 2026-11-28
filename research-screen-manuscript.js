@@ -268,9 +268,22 @@
     var last = parts[parts.length - 1];
     if (RULE_TABLE[fieldPath]) return RULE_TABLE[fieldPath](value);
     if (RULE_TABLE[last]) return RULE_TABLE[last](value);
+    if (last === "model") return MODEL_LABELS[String(value)] || String(value);
+    if (last === "test") return TEST_LABELS[String(value)] || String(value);
     if (typeof value === "number") return value.toFixed(2);
     return String(value);
   }
+
+  /* Engine names are stored as codes; the reader sees the published wording. */
+  var MODEL_LABELS = {
+    fixed: "fixed-effect",
+    random_dl: "random-effects (DerSimonian-Laird)",
+    random_reml: "random-effects (REML)"
+  };
+  var TEST_LABELS = {
+    wald: "Wald",
+    knha: "Knapp-Hartung"
+  };
 
   /* Plain names: scientific term first, plain meaning in brackets. */
   var MEASURE_NAMES = {
@@ -336,6 +349,7 @@
     consentBlocked: false,
     missingManuscriptBlocked: false,
     saveNotice: null,
+    serverRuns: {},
     phoneTab: "sections", /* "sections" | "detail" | "approve" */
     lastRange: null,
     ai: null,
@@ -1311,12 +1325,17 @@
       if (mySeq !== seq) return;
       var pMan = (SMD.api && !knownMissing) ? SMD.api.request("GET", base + "/manuscript") : Promise.resolve(null);
       var pVers = (SMD.api && !knownMissing) ? SMD.api.request("GET", base + "/manuscript/versions") : Promise.resolve(null);
-      return Promise.all([pMan, pVers]);
+      /* Saved runs are server data; hydrate them so a manuscript drafted in an
+       * earlier session can still resolve its {{run:...}} tokens after reload. */
+      var pRuns = SMD.api ? SMD.api.request("GET", base + "/runs?limit=50").catch(function () { return null; }) : Promise.resolve(null);
+      return Promise.all([pMan, pVers, pRuns]);
     }).then(function (res) {
       if (!res || mySeq !== seq) return;
       st.loading = false;
       var manRes = res && res[0];
       var versRes = res && res[1];
+      var runsRes = res && res[2];
+      st.serverRuns[st.projectId] = (runsRes && runsRes.runs) || [];
       if (manRes && manRes.manuscript) {
         manuscriptMissing[mpid] = false;
         st.manuscript = manRes.manuscript;
@@ -2334,6 +2353,10 @@
     for (var i = 0; i < runs.length; i++) {
       if (runs[i].id === runId) return runs[i];
     }
+    var server = st.serverRuns[st.projectId] || [];
+    for (var j = 0; j < server.length; j++) {
+      if (server[j].id === runId) return server[j];
+    }
     return null;
   }
 
@@ -2450,7 +2473,13 @@
 
     var store = SMD.store;
     var state = store ? store.getState() : null;
-    var savedRuns = (state && state.runs && state.runs[st.projectId]) || [];
+    /* Local mirrors can hold runs under different ids, and may be non-empty
+     * while the run this manuscript cites exists only on the server. Search
+     * both, local first; only checking the server when local is empty hid
+     * every k/model/test token after a reload. */
+    var savedRuns = ((state && state.runs && state.runs[st.projectId]) || []).slice();
+    var serverRuns = st.serverRuns[st.projectId] || [];
+    for (var si = 0; si < serverRuns.length; si++) savedRuns.push(serverRuns[si]);
     for (var r = 0; r < savedRuns.length; r++) {
       if (savedRuns[r].id === runId && savedRuns[r].result) {
         var run = savedRuns[r];
@@ -4564,6 +4593,8 @@
     _isDemoProject: isDemoProject,
     _openPoConfirm: openPoConfirm,
     _sortSections: sortSections,
+    _resolveToken: resolveToken,
+    _findRun: findRun,
     _sectionSidebarItems: sectionSidebarItems,
     _startManuscriptDraft: startManuscriptDraft,
     showDraftPreviewModal: showDraftPreviewModal

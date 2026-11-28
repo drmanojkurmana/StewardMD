@@ -202,6 +202,184 @@
     return h.join("");
   }
 
+  /* The engine takes flat study fields (events1/n1/...), while the store keeps
+   * them under inputs. Same mapping the Calculate button uses. */
+  function engineStudiesOf(studies) {
+    var out = [];
+    for (var i = 0; i < (studies || []).length; i++) {
+      var s = studies[i];
+      var item = { id: s.id, label: s.label, verified: true };
+      if (s.inputs) {
+        for (var key in s.inputs) {
+          if (Object.prototype.hasOwnProperty.call(s.inputs, key)) item[key] = s.inputs[key];
+        }
+      }
+      out.push(item);
+    }
+    return out;
+  }
+
+  /* The last saved run fixes the model, test and level for the check analyses,
+   * so a leave-one-out or funnel plot can never silently use different settings. */
+  function activeAnalysisProject(project, studies) {
+    var ar = SMD.store.getActiveRunResult();
+    var m = (ar && ar.manifest) || {};
+    return {
+      measure: m.measure || runSettings.measure,
+      model: m.model || runSettings.model,
+      test: m.test || runSettings.test,
+      level: m.level || runSettings.level,
+      studies: engineStudiesOf(studies),
+      createdAt: project && project.createdAt
+    };
+  }
+
+  function effectOnScale(effect, measure) {
+    return RATIO_MEASURES[measure] ? Math.exp(effect) : effect;
+  }
+
+  function sensitivityCardHtml(activeResult, verifiedStudies) {
+    if (!activeResult) return "";
+    var k = verifiedStudies.length;
+    var measure = (activeResult.manifest && activeResult.manifest.measure) || "RR";
+    var h = [];
+    h.push('<div class="rmd-card rmd-sens-card" id="rmdSensitivityCard">');
+    h.push('  <h3 class="rmd-card-heading">Sensitivity and publication bias</h3>');
+    h.push('  <p class="rmd-muted">Checks that the pooled result is not carried by one study, and looks for small-study effects when there are enough studies.</p>');
+    h.push('  <div class="rmd-run-export-actions" style="display:flex;flex-wrap:wrap;gap:8px;">');
+    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="sens-loo"' + (k < 3 ? ' disabled' : '') + '>Leave-one-out</button>');
+    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="sens-fixed">Fixed-effect check</button>');
+    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="sens-funnel"' + (k < 10 ? ' disabled' : '') + '>Funnel plot</button>');
+    h.push('    <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="sens-egger"' + (k < 10 ? ' disabled' : '') + '>Egger test</button>');
+    h.push('  </div>');
+    if (k < 3) h.push('  <p class="rmd-muted">Leave-one-out needs at least three studies.</p>');
+    if (k < 10) h.push('  <p class="rmd-muted">The funnel plot and Egger test are only used at 10 or more studies. This analysis has ' + k + '.</p>');
+    h.push('  <div id="rmdSensitivityOut" role="status" aria-live="polite"></div>');
+    h.push('</div>');
+    return h.join("\n");
+  }
+
+  function sensLabel(studies, id) {
+    for (var i = 0; i < studies.length; i++) {
+      if (studies[i] && studies[i].id === id) return studies[i].label || id;
+    }
+    return id;
+  }
+
+  function outcomeLabel(measure) {
+    return measure === "OR" ? "odds ratio" : measure === "RR" ? "risk ratio" : measure === "HR" ? "hazard ratio" : "effect";
+  }
+
+  function renderLooTable(rows, ap) {
+    var measure = ap.measure;
+    var isRatio = !!RATIO_MEASURES[measure];
+    var flips = 0;
+    var h = [];
+    h.push('<div class="rmd-sens-table-wrap">');
+    h.push('<table class="rmd-count-table" data-rmd="sens-loo-table">');
+    h.push('<thead><tr><th scope="col">Study omitted</th><th scope="col">Pooled ' + esc(outcomeLabel(measure)) + ' (95% CI)</th><th scope="col">I&sup2;</th></tr></thead><tbody>');
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i];
+      var est = effectOnScale(r.effect, measure);
+      var lo = effectOnScale(r.ciLower, measure);
+      var hi = effectOnScale(r.ciUpper, measure);
+      var crosses = isRatio ? (lo <= 1 && hi >= 1) : (lo <= 0 && hi >= 0);
+      if (crosses) flips++;
+      h.push('<tr><td>' + esc(sensLabel(ap.studies, r.id)) + '</td><td>' + fmtNum(est, 3) + ' (' + fmtNum(lo, 3) + ' to ' + fmtNum(hi, 3) + ')' + (crosses ? ' <span class="rmd-muted">crosses no effect</span>' : '') + '</td><td>' + fmtNum(r.i2, 1) + '%</td></tr>');
+    }
+    h.push('</tbody></table>');
+    h.push('</div>');
+    h.push('<p class="rmd-muted">Each row refits the model with that one study removed. ' + flips + ' of ' + rows.length + ' refits ' + (flips === 1 ? 'has' : 'have') + ' a confidence interval that includes no effect.</p>');
+    return h.join("");
+  }
+
+  function renderFixedTable(ap) {
+    var engine = G.SMD_RESEARCH_ENGINE;
+    var fixed = engine.run({
+      measure: ap.measure, model: "fixed", test: "wald", level: ap.level,
+      studies: ap.studies, createdAt: ap.createdAt
+    });
+    var isRatio = !!RATIO_MEASURES[ap.measure];
+    var est = isRatio ? Math.exp(fixed.pooled.effect) : fixed.pooled.effect;
+    var lo = isRatio ? Math.exp(fixed.pooled.ciLower) : fixed.pooled.ciLower;
+    var hi = isRatio ? Math.exp(fixed.pooled.ciUpper) : fixed.pooled.ciUpper;
+    return '<table class="rmd-count-table" data-rmd="sens-fixed-table"><tbody>' +
+      '<tr><td>Fixed-effect ' + esc(outcomeLabel(ap.measure)) + '</td><td>' + fmtNum(est, 3) + ' (' + fmtNum(lo, 3) + ' to ' + fmtNum(hi, 3) + ')</td></tr>' +
+      '<tr><td>I&sup2;</td><td>' + fmtNum(fixed.heterogeneity.i2, 1) + '%</td></tr>' +
+      '</tbody></table><p class="rmd-muted">A fixed-effect estimate assumes every study measures the same effect. A large difference from the random-effects estimate is another sign of between-study heterogeneity.</p>';
+  }
+
+  function funnelBlockHtml(fd, eggerRes, ap) {
+    var plots = G.SMD_RESEARCH_PLOTS;
+    if (!plots || typeof plots.funnelSvg !== "function") return '<p class="rmd-muted">The funnel plot could not be drawn.</p>';
+    var dark = false;
+    try { dark = document.body.classList.contains("v3-dark") || document.body.classList.contains("dark"); } catch (e) {}
+    var h = [];
+    h.push('<div class="rmd-svg-scroll-container" data-rmd="sens-funnel-plot">');
+    h.push(plots.funnelSvg(fd, { theme: dark ? "dark" : "light", title: "Funnel plot of pseudo-95% limits" }));
+    h.push('</div>');
+    h.push('<p class="rmd-muted">Plotted on the analysis scale (log scale for ratios). Asymmetry suggests small-study effects; it is not proof of publication bias.</p>');
+    if (eggerRes) {
+      h.push('<p class="rmd-muted" data-rmd="sens-egger-result">Egger test: intercept ' + fmtNum(eggerRes.est, 3) + ' (t = ' + fmtNum(eggerRes.t, 2) + ', df = ' + eggerRes.df + ', p ' + esc(fmtP(eggerRes.p)) + ').</p>');
+    }
+    return h.join("");
+  }
+
+  /* One entry point for the four checks so the UI and the tests exercise the
+   * same code path. kind is loo, fixed, funnel or egger. */
+  function analyzeSensitivity(project, kind) {
+    var engine = G.SMD_RESEARCH_ENGINE;
+    if (!engine) throw new Error("The analysis engine is not loaded.");
+    if (!project) throw new Error("Run the meta-analysis first.");
+    /* Accept either the store shape (inputs nested) or the flat engine shape. */
+    if (project.studies && project.studies.length && project.studies[0].inputs) {
+      project = {
+        measure: project.measure, model: project.model, test: project.test,
+        level: project.level, createdAt: project.createdAt,
+        studies: engineStudiesOf(project.studies)
+      };
+    }
+    if (kind === "loo") return { kind: kind, rows: engine.leaveOneOut(project) };
+    if (kind === "fixed") {
+      return { kind: kind, result: engine.run({
+        measure: project.measure, model: "fixed", test: "wald", level: project.level,
+        studies: project.studies, createdAt: project.createdAt
+      }) };
+    }
+    if (kind === "funnel") return { kind: kind, data: engine.funnel(project) };
+    if (kind === "egger") return { kind: kind, data: engine.funnel(project), egger: engine.egger(project) };
+    throw new Error("Unknown check: " + kind);
+  }
+
+  function bindSensitivity(container, project, verifiedStudies, activeResult) {
+    if (!activeResult) return;
+    var out = container.querySelector("#rmdSensitivityOut");
+    if (!out) return;
+    var ap = activeAnalysisProject(project, verifiedStudies);
+    var looBtn = container.querySelector('[data-rmd="sens-loo"]');
+    var fixedBtn = container.querySelector('[data-rmd="sens-fixed"]');
+    var funnelBtn = container.querySelector('[data-rmd="sens-funnel"]');
+    var eggerBtn = container.querySelector('[data-rmd="sens-egger"]');
+    function fail(err) {
+      out.innerHTML = '<div class="rmd-banner rmd-banner-error" role="alert"><strong>' + esc((err && err.message) || "Could not run this check.") + '</strong></div>';
+    }
+    if (looBtn) looBtn.onclick = function () {
+      try { out.innerHTML = renderLooTable(analyzeSensitivity(ap, "loo").rows, ap); } catch (e) { fail(e); }
+    };
+    if (fixedBtn) fixedBtn.onclick = function () {
+      try { out.innerHTML = renderFixedTable(ap); } catch (e) { fail(e); }
+    };
+    if (funnelBtn) funnelBtn.onclick = function () {
+      try { out.innerHTML = funnelBlockHtml(analyzeSensitivity(ap, "funnel").data, null, ap); } catch (e) { fail(e); }
+    };
+    if (eggerBtn) eggerBtn.onclick = function () {
+      try {
+        var res = analyzeSensitivity(ap, "egger");
+        out.innerHTML = funnelBlockHtml(res.data, res.egger, ap);
+      } catch (e) { fail(e); }
+    };
+  }
+
   function renderRunScreen(container) {
     var store = SMD.store;
     var engine = G.SMD_RESEARCH_ENGINE;
@@ -365,6 +543,7 @@
 
     container.innerHTML = h.join("\n");
     bindEvents(container, project, verifiedStudies);
+    bindSensitivity(container, project, verifiedStudies, activeResult);
   }
 
   function renderRunResultsHtml(activeResult, measure, verifiedStudies) {
@@ -477,6 +656,8 @@
     h.push('      </button>');
     h.push('    </div>');
     h.push('  </div>');
+
+    h.push(sensitivityCardHtml(activeResult, verifiedStudies));
 
     h.push('</div>'); // .rmd-results-wrap
 
@@ -1105,7 +1286,9 @@
     exportCsv: exportCsv,
     exportManifest: exportManifest,
     exportForestPng: exportForestPng,
-    generateForestPlotSvg: generateForestPlotSvg
+    generateForestPlotSvg: generateForestPlotSvg,
+    analyzeSensitivity: analyzeSensitivity,
+    activeAnalysisProject: activeAnalysisProject
   };
 
 })(typeof window !== "undefined" ? window : globalThis);

@@ -395,7 +395,8 @@ test("phase 2 e2e: project -> invite -> protocol lock -> search -> RIS upload/im
   /* 9. Full-text reports (screening screen, full_text stage). */
   const rep = async (recordId) => {
     const r = await call(env, "POST", "v1/projects/" + p.id + "/reports", "tok-alice", { recordId });
-    assert.equal(r.http, 201, JSON.stringify(r));
+    /* An included record already has its report row, so this returns it. */
+    assert.ok(r.http === 200 || r.http === 201, JSON.stringify(r));
     return r.report;
   };
   const rep1 = await rep(pm1);
@@ -468,7 +469,7 @@ test("phase 2 e2e isolation: an outsider gets 404/403 on every route in the sequ
   const [r1] = recordIds(env, p.id);
   await call(env, "POST", "v1/records/" + r1 + "/decisions", "tok-alice", { decision: "include" });
   const rep = await call(env, "POST", "v1/projects/" + p.id + "/reports", "tok-alice", { recordId: r1 });
-  assert.equal(rep.http, 201);
+  assert.ok(rep.http === 200 || rep.http === 201, JSON.stringify(rep));
   const search = await call(env, "GET", "v1/projects/" + p.id + "/searches", "tok-alice");
   const runId = search.searchRuns[0].id;
   const inv = await call(env, "POST", "v1/projects/" + p.id + "/invitations", "tok-alice",

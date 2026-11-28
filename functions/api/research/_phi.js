@@ -197,6 +197,20 @@ function inSpans(start, end, spans) {
   return false;
 }
 
+/* Bibliographic identifiers are not patient identifiers. A run of ten digits
+ * inside a record id can satisfy the NHS checksum, so numeric PHI rules skip
+ * PMIDs, DOIs, trial registrations and internal row ids. */
+const ID_TOKEN_RE =
+  /(?:\[?PMID\s*:?\s*\d+\]?|PMC\d+|DOI\s*:?\s*10\.[^\s,;)\]]+|NCT\d{8}|ISRCTN\d+|CTRI\/[^\s,;]+|\b(?:rec|st|run|job|prj|srch|ddg|pdf|prot|aut|ma)_[A-Za-z0-9]+)/gi;
+const NUMERIC_CATEGORIES = new Set(["nhs", "aadhaar", "abha", "ssn", "phone", "dob", "admission_date", "dates"]);
+function identifierSpans(text) {
+  const spans = [];
+  ID_TOKEN_RE.lastIndex = 0;
+  let m;
+  while ((m = ID_TOKEN_RE.exec(text)) !== null) spans.push([m.index, m.index + m[0].length]);
+  return spans;
+}
+
 /* (category, rule, regex, validator) in the same order as phi.py _RULES. */
 const RULES = [
   ["mrn", "labelled_id",
@@ -253,6 +267,7 @@ export function scan(text, opts) {
   const userMode = !!(opts && opts.mode === "user");
   const allowCitationNames = !!(opts && opts.allowCitationLibraryNames === true);
   const citeSpans = allowCitationNames ? citationLibrarySpans(s) : [];
+  const idSpans = identifierSpans(s);
   const rules = userMode ? RULES.concat(USER_ONLY_RULES) : RULES;
   const hits = [];
   const seen = new Set();
@@ -264,6 +279,9 @@ export function scan(text, opts) {
       if (validator && !validator(m, s)) continue;
       const end = m.index + m[0].length;
       if (category === "patient_name" && citeSpans.length && inSpans(m.index, end, citeSpans)) {
+        continue;
+      }
+      if (NUMERIC_CATEGORIES.has(category) && idSpans.length && inSpans(m.index, end, idSpans)) {
         continue;
       }
       /* indian_mobile and indian_mobile_spaced overlap on the unspaced form. */
