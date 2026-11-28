@@ -42,6 +42,8 @@ public class MainActivity extends BridgeActivity {
         // App-local power state (Battery Saver) + system haptics for the web layer (Premium-Feel
         // plan, owner decisions 2026-10-03).
         registerPlugin(SmdDevicePlugin.class);
+        // PrepNucleus Focus app blocking (usage access + guard service), same JS surface as the iOS Screen Time plugin.
+        registerPlugin(SmdFocusPlugin.class);
         super.onCreate(savedInstanceState);
         // Launch chain follows the system light/dark mode (owner decision 2026-10-03). The WebView
         // defaults to white and shows that until the HTML paints, which would flash white between

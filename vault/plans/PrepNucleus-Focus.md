@@ -83,4 +83,21 @@ the end (shield clears), check `__nat` order in the UI test's stand-in matches t
 ## Later phases
 3. Live Activity / Dynamic Island countdown and a "Start focus" widget (existing `prep-native.js`, `StewardMDWidgets`).
 4. Android: usage access + foreground service + blocking activity behind the same `SmdFocus` surface.
+   **Code written 2026-11-28 (branch `feat/prep-focus-ios`), not compiled or run yet** (owner: no builds without asking):
+   `android/app/src/main/java/in/stewardmd/app/SmdFocusPlugin.java` (registered in `MainActivity`), `FocusGuardService.java`
+   (foreground service, type `specialUse`, reads the front app from UsageStatsManager every 0.7 s, START_STICKY),
+   `FocusBlockActivity.java` (Midnight "Back to studying", amber OK and Back go home). `authorize()` opens Settings for
+   Usage access, then Display over other apps (needed to start the block screen from the background on Android 10+).
+   `pick()` is a native tick-box list of launcher apps (`<queries>` MAIN/LAUNCHER); categories and websites are 0.
+   Manifest: `PACKAGE_USAGE_STATS`, `SYSTEM_ALERT_WINDOW`, `FOREGROUND_SERVICE(_SPECIAL_USE)`.
+   Play review: the special-use foreground service and Usage access need their declarations (reason text is in the
+   manifest property). Not done: surviving a reboot, and stopping uninstall or Force stop in strict mode (needs Device
+   Admin or an Accessibility service, both Play-restricted; owner decision pending).
+
+**Strict mode, what it holds (2026-11-28).** JS: End is disabled until the time is up and the session runs on wall
+time, so closing or killing StewardMD does not end it. iOS: the shield stays until `endsAt` even after a force quit
+(FocusMonitor), and in a strict session with blocking on `store.application.denyAppRemoval = true`, so no app (StewardMD
+included) can be deleted until the session ends; iOS applies it to every app. The student can still turn off
+StewardMD's Screen Time access in Settings. Android: the guard survives closing the app but not Force stop, revoking
+Usage access, or uninstalling.
 5. Screen Time report (DeviceActivityReport extension, native sheet), schedules from the timetable, study rooms.

@@ -135,6 +135,9 @@ public class SmdFocusPlugin: CAPPlugin, CAPBridgedPlugin {
             store.shield.webDomains = sel.webDomainTokens.isEmpty ? nil : sel.webDomainTokens
             // A picked category (Games, Social) also covers its websites in Safari.
             store.shield.webDomainCategories = sel.categoryTokens.isEmpty ? nil : .specific(sel.categoryTokens)
+            // Strict (owner 2026-11-28, like Regain): apps cannot be deleted until the session ends, so deleting StewardMD
+            // cannot cut a session short. iOS applies it to every app on the phone; clearAllSettings() lifts it.
+            store.application.denyAppRemoval = strict ? true : nil
 
             let defaults = SmdFocusShared.defaults
             defaults?.set(strict, forKey: SmdFocusShared.strictKey)

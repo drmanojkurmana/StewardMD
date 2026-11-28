@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -50,6 +50,25 @@
         <!-- FundX hybrid depth fusion (Phase 2): ARCore is OPTIONAL — the app runs without it
              (monocular fallback) and only uses it for depth on supported devices. -->
         <meta-data android:name="com.google.ar.core" android:value="optional" />
+
+        <!-- PrepNucleus Focus app blocking (SmdFocusPlugin.java). The guard runs only while a Focus session the student
+             started is blocking the apps they picked, and stops at the session's end. -->
+        <service
+            android:name=".FocusGuardService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Study focus timer: while a focus session the user started is running, shows a reminder screen over the apps the user chose to block, and stops when the session ends." />
+        </service>
+        <activity
+            android:name=".FocusBlockActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="in.stewardmd.app.focusblock"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Material.NoActionBar" />
     </application>
 
     <!-- Permissions -->
@@ -75,8 +94,19 @@
     <!-- NFC support for reading and writing physical patient file tags across OPD stations -->
     <uses-permission android:name="android.permission.NFC" />
     <uses-feature android:name="android.hardware.nfc" android:required="false" />
+    <!-- PrepNucleus Focus app blocking: which app is in front (granted by the student in Settings, Usage access),
+         the "Back to studying" screen over it (Display over other apps), and the guard service. -->
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 
     <queries>
+        <!-- Focus "Block during focus" picker lists the phone's apps (launcher entries only). -->
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
         <intent>
             <action android:name="android.speech.RecognitionService" />
         </intent>
