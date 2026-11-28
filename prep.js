@@ -1576,6 +1576,7 @@
     if (G.PREP_STARTUP && G.PREP_STARTUP._active && G.PREP_STARTUP._active()) { G.PREP_STARTUP.skip(); return true; }
     if (closeCreditSheet()) return true;   // an image credit sheet closes first
     if (G.PREP_TOOLS && G.PREP_TOOLS.back()) return true;   // a note or reset sheet (prep-tools.js) closes first
+    if (G.PREP_FOCUS && G.PREP_FOCUS.back()) return true;   // a Focus sheet (prep-focus.js) first
     if (G.PREP_PLAY && G.PREP_PLAY.back()) return true;   // a play sheet or the feed's own state (prep-play.js) first
     if (G.PREP_SOUND && G.PREP_SOUND.back()) return true;   // the Sound sheet (prep-sound.js) closes first
     if (G.PREP_MEDIGRAM && G.PREP_MEDIGRAM.back()) return true;   // PrepReels (prep-medigram.js): release the player first
@@ -1674,7 +1675,11 @@
       // Play (prep-play.js): a widget, watch or notification link straight into quick fire, the spot or the feed.
       else if (opts && opts.play && G.PREP_PLAY) { push(renderHome); G.PREP_PLAY.open(String(opts.play), HOST); }
       // First plain open: onboarding (prep-plan.js), skippable. SMD_PREP_ONBOARD = false (UI tests) skips it.
-      else if (G.PREP_PLAN && G.SMD_PREP_ONBOARD !== false && G.PREP_PLAN.needsOnboard(load())) push(function () { G.PREP_PLAN.onboard(HOST); });
+      else if (G.PREP_PLAN && G.SMD_PREP_ONBOARD !== false && G.PREP_PLAN.needsOnboard(load())) {
+        push(function () { G.PREP_PLAN.onboard(HOST); });
+        // The particle story (onboard-story.js, flag smd_onboard_story) plays over it once; the plan steps wait underneath.
+        if (G.SMD_STORY && G.SMD_STORY.enabled() && !G.SMD_STORY.seen("prep")) G.SMD_STORY.play("prep");
+      }
       else push(renderHome);
     }, function () { paint(bar("PrepNucleus", "", "close") + '<div class="pn-body"><p class="pn-err" role="alert">PrepNucleus did not load. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="retry">Try again</button></div>'); });
     return true;
@@ -1700,6 +1705,7 @@
     stopTimer();
     try { if (G.PREP_TOOLS) G.PREP_TOOLS.flush(); } catch (e) {}
     try { if (G.PREP_PLAY) G.PREP_PLAY.leave(); } catch (e) {}
+    try { if (G.PREP_FOCUS) G.PREP_FOCUS.leave(); } catch (e) {}
     try { if (G.PREP_BUDDY) G.PREP_BUDDY.leave(); } catch (e) {}
     try { if (G.PREP_SOUND) G.PREP_SOUND.leave(); } catch (e) {}
     try { if (G.PREP_MEDIGRAM) G.PREP_MEDIGRAM.leave(); } catch (e) {}
@@ -3261,6 +3267,8 @@
     if (G.PREP_TOOLS && !(st.run && st.run.t2)) G.PREP_TOOLS.noteAnswer(it, chosen, msT, s.exam);
     // Play (prep-play.js): the study hour, this month's subject counts, earned streak freezes.
     if (G.PREP_PLAY && chosen >= 0) G.PREP_PLAY.noteAnswer(s, it, ok, td);
+    // Focus (prep-focus.js): answers given during a focus session count toward it and tag it by subject.
+    if (G.PREP_FOCUS && chosen >= 0) G.PREP_FOCUS.noteAnswer(it, ok);
     // Mistakes (bank questions only; a deck's questions live in Layer C storage): kept until answered right.
     // PYQ items live in their paper, not a module file, so My mistakes (which reloads modules) leaves them out.
     if (it._s !== "deck" && !it._py) { if (ok) delete s.mt[it.id]; else s.mt[it.id] = [it._s, it._m || it.t, (s.mt[it.id] || [])[2] || null, Date.now(), String(it.q || "").slice(0, 140)]; }
@@ -4594,6 +4602,8 @@
     if (a.indexOf("t2-") === 0 && G.PREP_TESTS) return G.PREP_TESTS.act(a, b, HOST);
     if (a.indexOf("x-") === 0 && G.PREP_TOOLS) return G.PREP_TOOLS.act(a, b, HOST);
     if (a.indexOf("tt-") === 0 && G.PREP_TT) return G.PREP_TT.act(a, b, HOST);
+    if (a.indexOf("fo-") === 0 && G.PREP_FOCUS) return G.PREP_FOCUS.act(a, b, HOST);
+    if (a.indexOf("wl-") === 0 && G.PREP_WELCOME) return G.PREP_WELCOME.act(a, b, HOST);
     if (a.indexOf("v-") === 0 && G.PREP_PLAY) return G.PREP_PLAY.act(a, b, HOST);
     if (a.indexOf("mg-") === 0 && G.PREP_MEDIGRAM) return G.PREP_MEDIGRAM.act(a, b, HOST);
     // Sound (prep-sound.js) owns every data-act starting "s-" except "sp-" (the Spotify mini-player owns that; its check runs later).
