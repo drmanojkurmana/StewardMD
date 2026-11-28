@@ -655,6 +655,9 @@
       /* The AI's reply missed required fields (seen live on CTRI); nothing was charged as a stored draft. */
       return { message: e.message || "MaiK did not return a complete draft this time. Try again.", action: "retry", actionLabel: "Try again" };
     }
+    if (code === "empty_draft") {
+      return { message: e.message || "MaiK returned an empty draft. Check your connection and try again.", action: "retry", actionLabel: "Try again" };
+    }
     if (code === "gate_failed") {
       return { message: e.message || "This section needs a fix before exporting. Check your results and references, then try again.", action: "retry", actionLabel: "Try again" };
     }
@@ -890,8 +893,13 @@
     h += '</div>';
     h += '<p class="rmd-ai-cost">' + (cost > 0 ? "Costs about " + cost + " MaiK token" + (cost === 1 ? "" : "s") : "No MaiK tokens needed") + '</p>';
     if (st.notice) h += st.notice;
-    if (st.busy) h += '<p class="rmd-ai-progress" role="status">MaiK is drafting your ' + esc(o.label || "draft") + '&#8230;</p>';
-    if (st.error) h += errHtml(st.error);
+    if (st.busy) {
+      h += '<p class="rmd-ai-progress smd-books-keep" role="status">' + esc(st.progressText || ("MaiK is drafting your " + (o.label || "draft"))) + (st.progressText ? "" : "&#8230;") + '</p>';
+      if (typeof st.progressPct === "number" && st.progressPct > 0) {
+        h += '<div class="rmd-ai-pbar" aria-hidden="true"><span style="width:' + Math.max(4, Math.min(100, Math.round(st.progressPct))) + '%"></span></div>';
+      }
+    }
+    if (st.error) h += errHtml(st.error, o.retryAttr || "ai-retry");
     h += '</div>';
     return h;
   }
@@ -906,12 +914,19 @@
       };
     }
     var ask = container.querySelector('[data-rmd-ai="ask"]');
+    var retryAttr = o.retryAttr || "ai-retry";
+    var retryBtn = container.querySelector('[data-rmd="' + retryAttr + '"]') || container.querySelector('[data-rmd-action="retry"]');
+    if (retryBtn && ask) {
+      retryBtn.onclick = function () { ask.click(); };
+    }
     if (ask) {
       ask.onclick = function () {
         if (st.busy) return;
         st.busy = true;
         st.error = null;
         st.notice = null;
+        st.progressText = null;
+        st.progressPct = 0;
         if (o.render) o.render();
         var run;
         if (o.request) {
@@ -923,15 +938,24 @@
         }
         Promise.resolve(run).then(function (res) {
           st.busy = false;
+          st.progressText = null;
+          st.progressPct = 0;
           st.notice = (res && Array.isArray(res._phiRemovedCategories) && res._phiRemovedCategories.length)
             ? phiRemovedNoticeHtml(res._phiRemovedCategories)
             : null;
           var draft = res && res.draft !== undefined ? res.draft : res;
-          var keys = o.apply ? o.apply(draft, res) : [];
-          for (var i = 0; i < (keys || []).length; i++) st.drafted[keys[i]] = 1;
+          var keys = (o.apply ? o.apply(draft, res) : []) || [];
+          if (!keys.length && !(draft && draft._alreadyFilled)) {
+            st.error = { code: "empty_draft", message: o.emptyMessage || "MaiK returned an empty draft. Check your connection and try again." };
+            if (o.render) o.render();
+            return;
+          }
+          for (var i = 0; i < keys.length; i++) st.drafted[keys[i]] = 1;
           if (o.render) o.render();
         }).catch(function (err) {
           st.busy = false;
+          st.progressText = null;
+          st.progressPct = 0;
           if (err && err._handledByConsent) {
             st.error = null;
             if (o.render) o.render();
@@ -1162,6 +1186,8 @@
       "#researchMD .rmd-ai-cost { margin: 0; font: 400 12.5px var(--rmd-f); color: var(--rmd-mut); }",
       "#researchMD .rmd-ai-phi-note { margin: 0; font: 500 13px var(--rmd-f); color: var(--rmd-warn); }",
       "#researchMD .rmd-ai-progress { margin: 0; font: 500 13px var(--rmd-f); color: var(--rmd-acc); }",
+      "#researchMD .rmd-ai-pbar { height: 6px; border-radius: 999px; background: var(--rmd-line); overflow: hidden; }",
+      "#researchMD .rmd-ai-pbar > span { display: block; height: 100%; border-radius: 999px; background: var(--rmd-acc); transition: width 180ms ease; }",
       "#researchMD .rmd-ai-note { display: inline-block; font: 500 11.5px var(--rmd-f); color: var(--rmd-acc); background: var(--rmd-acc-soft); border-radius: 999px; padding: 2px 8px; margin-top: 4px; }",
       "#researchMD .rmd-fillin-note { display: inline-block; font: 500 11.5px var(--rmd-f); color: var(--rmd-warn); background: var(--rmd-warn-soft); border-radius: 999px; padding: 2px 8px; margin-top: 4px; }",
       "#researchMD .rmd-consent-preview { font-size: 13.5px; color: var(--rmd-ink); background: var(--rmd-panel); border: 1px solid var(--rmd-line); border-radius: 8px; padding: 8px 12px; white-space: pre-wrap; }",
