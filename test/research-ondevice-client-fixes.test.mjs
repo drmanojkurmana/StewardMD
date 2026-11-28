@@ -81,6 +81,7 @@ describe("ES5 + no em/en dash invariants on all modified app files", () => {
     "research-screen-thesis.js",
     "research-ondevice-stats.js",
     "research-ondevice-draft.js",
+    "research-po-prompts.js",
     "research-screen-manuscript.js",
     "research-ondevice-jobs.js",
     "research-ondevice-pdf.js",
@@ -641,6 +642,10 @@ describe("Item 9: Manuscript & on-device draft fixes", () => {
       assert.ok(dfCall, "deferred /device-fail flushed on " + outcome.action);
       assert.equal(dfCall.body.code, outcome.expectedCode);
 
+      const msState = win.SMD_RESEARCH.screens.manuscript._getState();
+      assert.equal(msState.poStatus, "failed", outcome.action + " sets poStatus=failed");
+      assert.ok(msState.poError && msState.poError.length > 5, outcome.action + " sets clear poError");
+
       // Even if draft checkpoint has status:"failed", Continue draft must appear on reopen
       await CP.put("draft:job_ui_" + outcome.action, {
         jobId: "job_ui_" + outcome.action,
@@ -653,6 +658,41 @@ describe("Item 9: Manuscript & on-device draft fixes", () => {
       await new Promise((r) => setTimeout(r, 30));
       assert.ok(container.querySelector('[data-rmd="po-continue"]'), "Continue draft shown for failed-try checkpoint");
     }
+  });
+
+  test("concise IMRAD outline default omits verbose Related Work queries, while tryNumber > 1 scopes gateway stepId", async () => {
+    const clinicalOut = PROMPTS.buildOutlinePrompt({ ideaMd: "BCG trial", experimentalLogMd: "RR 0.5", templateTex: PROMPTS.IMRAD_TEMPLATE });
+    assert.ok(clinicalOut.prompt.indexOf("\"intro_related_work_plan\": set strictly to {}") >= 0);
+    assert.equal(clinicalOut.prompt.indexOf("Related Work Strategy (Micro-Level Technical Baselines, 30-50 papers)"), -1);
+    const fullLitOut = PROMPTS.buildOutlinePrompt({ ideaMd: "ML", experimentalLogMd: "acc", withLiterature: true });
+    assert.ok(fullLitOut.prompt.indexOf("Related Work Strategy") >= 0);
+
+    await CP._setBackend({ records: {} });
+    const seenSteps = [];
+    await assert.rejects(() => DRAFT.run({
+      job: { id: "job_retry_scope", projectId: "p1", createdBy: "u1" },
+      manifest: {
+        v: 1, projectId: "p1",
+        protocol: { title: "SR", question: "Q?", pico: { population: "A", intervention: "B", comparator: "C", outcome: "D" }, design: "sr", eligibility: "e", outcomes: ["D"], lockHash: "a".repeat(64), lockedAt: "2026-11-01T00:00:00Z" },
+        evidence: [{ studyId: "s1", label: "S1", values: [{ field: "n", value: 10, verified: true, locator: { page: 1 }, quote: "n=10" }] }],
+        runs: [], references: [],
+      },
+      token: "tok-1",
+    }, {
+      checkpoint: CP,
+      tryNumber: 2,
+      gatewayTimeoutMs: 50,
+      sleep: () => Promise.resolve(),
+      gatewayRequest: async (_url, payload) => {
+        seenSteps.push(payload.stepId);
+        if (payload.stepId === "outline:t2") {
+          return new Promise(() => {}); // hang on first outline attempt in try 2
+        }
+        return { status: 200, data: { text: "bad json", model: "m", usage: { inputTokens: 10, outputTokens: 10 } } };
+      },
+      apiRequest: async () => ({ ok: true }),
+    }));
+    assert.ok(seenSteps.includes("outline:t2"), "try 2 uses :t2 suffix on outline stepId and times out cleanly");
   });
 });
 

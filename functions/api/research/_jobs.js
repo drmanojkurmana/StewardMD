@@ -19,7 +19,7 @@
 import { PDF_MAX_BYTES, PDF_MAX_PAGES, PDF_MAX_SECONDS, BATCH_MAX,
   PO_MAX_SECONDS, PO_MAX_CALLS, HARD_STOP_MESSAGES, CLOUD_FALLBACK_MESSAGES,
   checkPdfJobCaps, checkPoJobCaps, validateJobMessage } from "./_caps.js";
-import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCredits, activeJobReservation, expireLostJobs } from "./_credits.js";
+import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCredits, activeJobReservation, expireLostJobs, DEVICE_LOST_JOB_MS } from "./_credits.js";
 import { scan, phiCategories } from "./_phi.js";
 import { PHI_OVERRIDE_TERMS_VERSION, parsePhiOverrideRequest, evaluatePhiOverride } from "./_suggest.js";
 import { mintJobToken } from "./_gateway.js";
@@ -784,7 +784,7 @@ export async function createManuscriptJob(ctx, body) {
 
   /* 10. Insert research_job_runs row (same bound-kind shape as pdf_extract). */
   const ceilings = { maxSeconds: PO_MAX_SECONDS, maxCalls: PO_MAX_CALLS, quoteMicroUsd: quote };
-  const outputMeta = isDevice ? { runner: "device" } : (body.runner === "container" ? { runner: "container" } : {});
+  const outputMeta = isDevice ? { runner: "device", heartbeatTs: now } : (body.runner === "container" ? { runner: "container" } : {});
   if (phiOverrideAccepted) {
     outputMeta.phiOverride = {
       accepted: true,
@@ -1008,6 +1008,28 @@ function checkManifestCitations(sections, references, snapshot) {
     }
   }
   return failures;
+}
+
+/* POST /v1/jobs/:jobId/heartbeat — owner-only lease renewal for active device drafts. */
+export async function heartbeatDeviceJob(ctx, jobId) {
+  const { db, uid, requestId, api } = ctx;
+  const { json, err, member } = api;
+  const row = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(jobId).first();
+  if (!row || !(await member(db, row.project_id, uid)))
+    return err(404, "job_not_found", "Job not found", requestId);
+  if (row.created_by !== uid)
+    return err(403, "forbidden", "Only the job creator can renew the device lease", requestId);
+  const out = parseJson(row.output_json, {});
+  if (out.runner !== "device")
+    return err(409, "not_device_job", "Heartbeat is only available for device-run jobs", requestId);
+  if (row.status !== "queued" && row.status !== "running")
+    return err(409, "job_settled", "Job is already settled", requestId);
+  const now = Date.now();
+  const updatedOut = Object.assign({}, out, { heartbeatTs: now, lastHeartbeatTs: now });
+  await db.prepare("UPDATE research_job_runs SET output_json=? WHERE id=? AND status IN ('queued','running')")
+    .bind(JSON.stringify(updatedOut), row.id).run();
+  return json({ ok: true, heartbeatTs: now, leaseMs: DEVICE_LOST_JOB_MS, expiresAt: now + DEVICE_LOST_JOB_MS, requestId },
+    200, { "x-request-id": requestId });
 }
 
 /* POST /v1/jobs/:jobId/token — owner-only per-job token refresh for active device drafts.

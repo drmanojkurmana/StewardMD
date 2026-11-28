@@ -302,7 +302,12 @@
       if (typeof fetchFn !== "function") {
         return Promise.reject(new Error("fetch is unavailable"));
       }
-      return fetchFn(url, {
+      var timeoutMs = (opts && Number(opts.gatewayTimeoutMs) > 0) ? Number(opts.gatewayTimeoutMs) : 150000;
+      var ctrl = (typeof AbortController === "function") ? new AbortController() : null;
+      var timerId = null;
+      var timedOut = false;
+      var abortFn = null;
+      var fetchOpts = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -310,12 +315,39 @@
           "Authorization": "Bearer " + token
         },
         body: JSON.stringify(payload)
-      }).then(function (res) {
+      };
+      if (ctrl) {
+        fetchOpts.signal = ctrl.signal;
+        timerId = setTimeout(function () {
+          timedOut = true;
+          try { ctrl.abort(); } catch (e) {}
+        }, timeoutMs);
+        if (opts && opts.signal && typeof opts.signal.addEventListener === "function") {
+          abortFn = function () { try { ctrl.abort(); } catch (e) {} };
+          if (opts.signal.aborted) abortFn();
+          else opts.signal.addEventListener("abort", abortFn);
+        }
+      }
+      function clearGwTimer() {
+        if (timerId != null) { clearTimeout(timerId); timerId = null; }
+        if (abortFn && opts && opts.signal && typeof opts.signal.removeEventListener === "function") {
+          try { opts.signal.removeEventListener("abort", abortFn); } catch (e) {}
+        }
+      }
+      return fetchFn(url, fetchOpts).then(function (res) {
+        clearGwTimer();
         return res.text().then(function (txt) {
           var data = null;
           try { data = txt ? JSON.parse(txt) : null; } catch (e) {}
           return { status: res.status, data: data || {} };
         });
+      }, function (err) {
+        clearGwTimer();
+        if (timedOut) {
+          var te = new Error("Gateway request timed out after " + Math.round(timeoutMs / 1000) + "s");
+          throw te;
+        }
+        throw err;
       });
     };
   }
@@ -365,6 +397,28 @@
     var apiRequest = createApiCaller(opts);
     var cpKey = "draft:" + jobId;
     var cutoffDate = opts.cutoffDate || job.cutoffDate || defaultCutoffDate(nowFn());
+    var tryNumber = (opts && Number(opts.tryNumber) > 1) ? Math.floor(Number(opts.tryNumber)) : 1;
+    function stepScope(rawSid) {
+      return tryNumber > 1 ? (rawSid + ":t" + tryNumber) : rawSid;
+    }
+
+    var hbTimer = null;
+    var hbIntervalMs = (opts && opts.heartbeatIntervalMs != null) ? Number(opts.heartbeatIntervalMs) : 60000;
+    function stopHeartbeat() {
+      if (hbTimer != null) {
+        clearInterval(hbTimer);
+        hbTimer = null;
+      }
+    }
+    if (apiRequest && jobId && hbIntervalMs > 0) {
+      hbTimer = setInterval(function () {
+        if (state.status !== "running" || isCancelled() || (opts.signal && opts.signal.aborted)) {
+          stopHeartbeat();
+          return;
+        }
+        apiRequest("POST", "/v1/jobs/" + encodeURIComponent(jobId) + "/heartbeat").catch(function () {});
+      }, hbIntervalMs);
+    }
 
     var state = {
       jobId: jobId,
@@ -549,7 +603,7 @@
         prompt: prompt,
         maxOutputTokens: ceiling.maxOutputTokens,
         purpose: purpose,
-        stepId: sanitizeStepId(stepId)
+        stepId: sanitizeStepId(stepScope(stepId))
       };
       if (typeof system === "string" && system) {
         payload.system = system;
@@ -560,6 +614,37 @@
 
       var attempts = 1 + ceiling.maxRetries;
       var refreshed401 = false;
+      var callTimeoutMs = (opts && Number(opts.gatewayTimeoutMs) > 0) ? Number(opts.gatewayTimeoutMs) : 150000;
+
+      function raceWithSignalAndTimeout(p) {
+        return new Promise(function (resolveRace, rejectRace) {
+          var done = false;
+          var tId = null;
+          var onAbort = null;
+          function cleanupRace() {
+            if (tId != null) { clearTimeout(tId); tId = null; }
+            if (onAbort && opts.signal && typeof opts.signal.removeEventListener === "function") {
+              try { opts.signal.removeEventListener("abort", onAbort); } catch (e) {}
+            }
+          }
+          function okRace(v) { if (!done) { done = true; cleanupRace(); resolveRace(v); } }
+          function badRace(e) { if (!done) { done = true; cleanupRace(); rejectRace(e); } }
+          if (opts.signal && opts.signal.aborted) {
+            badRace(checkPreCallGuards(stepId) || makeErr("ceiling_seconds", stepId, "Draft aborted"));
+            return;
+          }
+          if (opts.signal && typeof opts.signal.addEventListener === "function") {
+            onAbort = function () {
+              badRace(checkPreCallGuards(stepId) || makeErr("ceiling_seconds", stepId, "Draft aborted"));
+            };
+            opts.signal.addEventListener("abort", onAbort);
+          }
+          tId = setTimeout(function () {
+            badRace(makeErr("device_failed", stepId, "Step request timed out after " + Math.round(callTimeoutMs / 1000) + "s"));
+          }, callTimeoutMs);
+          Promise.resolve(p).then(okRace, badRace);
+        });
+      }
 
       function attemptCall(attemptIdx) {
         var preErr = checkPreCallGuards(stepId);
@@ -567,7 +652,7 @@
         if (state.phiOverride) payload.phiOverride = state.phiOverride;
         pauseTimer();
         beginAiWait();
-        return gatewayTransport(gatewayUrl, payload, currentToken).then(function (res) {
+        return raceWithSignalAndTimeout(gatewayTransport(gatewayUrl, payload, currentToken)).then(function (res) {
           endAiWait();
           resumeTimer();
           var status = (res && res.status) || 200;
@@ -649,6 +734,7 @@
     var citationMap = {};
 
     function failAndReport(err) {
+      stopHeartbeat();
       pauseTimer();
       var code = (err && err.code) || "device_failed";
       var step = (err && err.step) || activeStep || "validate";
@@ -784,7 +870,11 @@
 
       function attemptOutline(retryIdx) {
         var sid = retryIdx === 0 ? "outline" : ("outline:r" + retryIdx);
-        return sendGatewayCall(sid, "write", outReq.system, outReq.prompt).then(function (resp) {
+        var outlinePrompt = outReq.prompt;
+        if (retryIdx > 0) {
+          outlinePrompt += "\n\nIMPORTANT: Your previous outline response was not complete valid JSON. Output ONLY one compact valid JSON object matching the exact schema, keep content_bullets short (<= 10 words), and close all braces.";
+        }
+        return sendGatewayCall(sid, "write", outReq.system, outlinePrompt).then(function (resp) {
           var parsed = GATES.parseGeminiJsonResults(resp.text);
           if (parsed && typeof parsed === "object") return parsed;
           if (retryIdx < ceiling.maxRetries) return attemptOutline(retryIdx + 1);
@@ -1243,6 +1333,7 @@
       };
 
       if (!apiRequest || !jobId) {
+        stopHeartbeat();
         state.status = "succeeded";
         state.completedSteps["final"] = true;
         state.lastCompletedStep = "final";
@@ -1255,11 +1346,13 @@
       };
       if (state.phiOverride) resultBody.phiOverride = state.phiOverride;
       return apiRequest("POST", "/v1/jobs/" + encodeURIComponent(jobId) + "/device-result", resultBody).then(function () {
+        stopHeartbeat();
         state.status = "succeeded";
         state.completedSteps["final"] = true;
         state.lastCompletedStep = "final";
         return saveCheckpoint().then(function () { return manuscript; });
       }, function (err) {
+        stopHeartbeat();
         var code = (err && err.code) || "device_failed";
         throw makeErr(code, "final", (err && err.message) || "Failed to submit device draft", {
           gateFailures: err && err.body && err.body.gateFailures
