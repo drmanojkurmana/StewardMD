@@ -83,7 +83,7 @@ the end (shield clears), check `__nat` order in the UI test's stand-in matches t
 ## Later phases
 3. Live Activity / Dynamic Island countdown and a "Start focus" widget (existing `prep-native.js`, `StewardMDWidgets`).
 4. Android: usage access + foreground service + blocking activity behind the same `SmdFocus` surface.
-   **Code written 2026-11-28 (branch `feat/prep-focus-ios`), not compiled or run yet** (owner: no builds without asking):
+   **Code written 2026-11-28 (branch `feat/prep-focus-ios`); compiles (`:app:compileDebugJavaWithJavac`, JDK = Android Studio jbr), not run on a phone yet**:
    `android/app/src/main/java/in/stewardmd/app/SmdFocusPlugin.java` (registered in `MainActivity`), `FocusGuardService.java`
    (foreground service, type `specialUse`, reads the front app from UsageStatsManager every 0.7 s, START_STICKY),
    `FocusBlockActivity.java` (Midnight "Back to studying", amber OK and Back go home). `authorize()` opens Settings for
