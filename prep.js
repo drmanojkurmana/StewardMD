@@ -1675,7 +1675,11 @@
       // Play (prep-play.js): a widget, watch or notification link straight into quick fire, the spot or the feed.
       else if (opts && opts.play && G.PREP_PLAY) { push(renderHome); G.PREP_PLAY.open(String(opts.play), HOST); }
       // First plain open: onboarding (prep-plan.js), skippable. SMD_PREP_ONBOARD = false (UI tests) skips it.
-      else if (G.PREP_PLAN && G.SMD_PREP_ONBOARD !== false && G.PREP_PLAN.needsOnboard(load())) push(function () { G.PREP_PLAN.onboard(HOST); });
+      else if (G.PREP_PLAN && G.SMD_PREP_ONBOARD !== false && G.PREP_PLAN.needsOnboard(load())) {
+        push(function () { G.PREP_PLAN.onboard(HOST); });
+        // The particle story (onboard-story.js, flag smd_onboard_story) plays over it once; the plan steps wait underneath.
+        if (G.SMD_STORY && G.SMD_STORY.enabled() && !G.SMD_STORY.seen("prep")) G.SMD_STORY.play("prep");
+      }
       else push(renderHome);
     }, function () { paint(bar("PrepNucleus", "", "close") + '<div class="pn-body"><p class="pn-err" role="alert">PrepNucleus did not load. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="retry">Try again</button></div>'); });
     return true;
