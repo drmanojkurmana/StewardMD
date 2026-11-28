@@ -2092,6 +2092,8 @@
       // Cards due (prep-flash.js): shows once the student has studied any module card.
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
+      // Focus (prep-focus.js): its own tile, amber so it is seen (owner 2026-11-28); Play's Focus row stays too.
+      (G.PREP_FOCUS ? G.PREP_FOCUS.homeRow(HOST) : "") +
       (G.STUDY ? G.STUDY.homeRow(HOST) : "") +
       "</div>" +
       // IQoach (My coaching): due today, groups, pairs and Ask MaiK. Nothing without the coach file.

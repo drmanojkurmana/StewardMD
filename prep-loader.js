@@ -35,7 +35,7 @@
    flag smd_prep_focus, default ON since prep204, "0" turns it off, optional: while off the Play Focus room stays as it was). */
 (function (G) {
   "use strict";
-  var V = "prep204";
+  var V = "prep205";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-tests.css", "prep-coach.css", "prep-nav.css", "prep-pearl.css", "prep-action-row.css", "prep-tools.css", "prep-timetable.css", "prep-play.css", "prep-focus.css"];
   var JS = ["prep-bank-client.js", "specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep-coach.js", "prep-insight.js", "prep-knowyouriq-data.js", "prep.js", "prep-listfmt.js", "prep-expfmt.js", "prep-reason.js", "prep-tests.js", "prep-nucleus360.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-action-row.js", "prep-pearl.js", "prep-voice.js", "prep-lessons.js", "prep-imglearn.js", "prep-pyq.js", "prep-rad.js", "prep-pyqss.js", "prep-ids.js", "prep-setup.js", "prep-ss-groups.js", "prep-timetable.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js", "prep-qgen.js", "prep-import.js", "prep-tools.js", "prep-play.js", "prep-focus.js", "prep-mascot.js", "prep-buddy.js"];

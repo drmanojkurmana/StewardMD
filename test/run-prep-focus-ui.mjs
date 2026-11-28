@@ -95,6 +95,13 @@ try {
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!window.PREP_FOCUS && !!document.querySelector("#smdPrep [data-act=v-focus]");`, 20000), "flag on: prep-loader.js loads prep-focus.js");
   ok(/Focus/.test(await text("#smdPrep [data-act=v-focus] b")) && !/room/.test(await text("#smdPrep [data-act=v-focus] b")), "the Play row is now Focus (" + await text("#smdPrep [data-act=v-focus]") + ")");
+  // Practise grid: Focus has its own amber tile (owner 2026-11-28) and it opens Focus.
+  ok(await ev(`var t=document.querySelector("#smdPrep .pn-home > .pn-grid4 > .fo-tile[data-act=fo-home]"); if(!t) return false; t.scrollIntoView({block:"center"}); return getComputedStyle(t.querySelector(".pn-ri")).backgroundColor === "rgb(239, 192, 123)";`) === true, "Practise grid has the amber Focus tile");
+  await sleep(400); await shot("ph-grid");
+  await click("#smdPrep .fo-tile[data-act=fo-home]");
+  ok(await until(`return !!document.querySelector("#smdPrep .fo-home .fo-ring");`, 4000), "the Focus tile opens Focus");
+  await click("#smdPrep [data-act=back]");
+  ok(await until(`return !!document.querySelector("#smdPrep [data-act=v-focus]");`, 4000), "back from Focus returns to PrepNucleus home");
   await click("#smdPrep [data-act=v-focus]");
   ok(await until(`return !!document.querySelector("#smdPrep .fo-home .fo-ring");`, 4000), "Focus home: the goal ring");
   ok(await until(`return /3 apps, 1 category/.test(document.querySelector("#smdPrep .fo-home").textContent);`, 3000), "blocking row shows what is picked (from the plugin)");

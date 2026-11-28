@@ -19,8 +19,12 @@ final class FocusShieldConfiguration: ShieldConfigurationDataSource {
             f.dateFormat = "h:mm"
             subtitle += " until " + f.string(from: end)
         }
+        // backgroundColor is blended into the shield's blur, not painted solid. With no blur style iOS picks an
+        // appearance-adaptive material, which in light mode turned the shield near white and hid the cream text (owner
+        // screenshot 2026-11-28). A dark material keeps it Midnight in both modes. Info.plist pins the extension to light
+        // appearance, the mode in which iOS honoured the OK label colour (in dark mode it drew the label near white).
         return ShieldConfiguration(
-            backgroundBlurStyle: nil,
+            backgroundBlurStyle: .systemThickMaterialDark,
             backgroundColor: Self.midnight,
             icon: UIImage(named: "PrepMark"),
             title: ShieldConfiguration.Label(text: "Back to studying", color: Self.paper),

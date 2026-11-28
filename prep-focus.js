@@ -388,6 +388,7 @@
   function act(a, b, h) {
     H = h;
     var v = b && b.getAttribute ? b.getAttribute("data-v") : null, f = fo();
+    if (a === "fo-home") return open(h);
     if (a === "fo-close") return closeSheet();
     if (a === "fo-mode") { f.mode = v; H.save(); hap("selection"); return H.rerender(); }
     if (a === "fo-dur") { f.dur = Number(v) || 25; H.save(); return H.rerender(); }
@@ -412,6 +413,15 @@
   function leave() { closeSheet(true); }
   // A running session opens over Focus home, so back (and Done after it ends) lands on Focus, not PrepNucleus home.
   function open(h) { H = h; P.nat = null; H.push(renderHome); if (run()) { arm(); H.push(renderRun); } }
+  /* PrepNucleus home: the Focus tile in the Practise grid (owner 2026-11-28: "place focus as button clearly visible").
+     Amber icon chip and edge (prep-focus.css .fo-tile); while a session runs it shows the time left and the chip breathes. */
+  function homeRow(h) {
+    var on = !!run(), sub = esc(rowSub(h));
+    return '<button type="button" class="pn-row fo-tile' + (on ? " is-on" : "") + '" data-act="fo-home" aria-label="Focus, ' + sub + '">' +
+      '<span class="pn-ri" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9.5 2.5h5"/></svg></span>' +
+      '<span class="pn-rb"><b>Focus</b>' + (on ? '<small class="fo-tile-t">' + sub + "</small>" : "<small>Timer and app blocking</small>") + "</span></button>";
+  }
   // The Play menu row (prep-play.js) and PrepNucleus home call this for their subtitle.
   function rowSub(h) {
     H = h || H; var r = run();
@@ -423,5 +433,5 @@
 
   var LOCK = '<svg class="fo-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
 
-  G.PREP_FOCUS = { act: act, back: back, leave: leave, open: open, bind: bind, rowSub: rowSub, noteAnswer: noteAnswer, running: function () { return !!run(); }, _pure: PURE, _p: P };
+  G.PREP_FOCUS = { act: act, back: back, leave: leave, open: open, homeRow: homeRow, bind: bind, rowSub: rowSub, noteAnswer: noteAnswer, running: function () { return !!run(); }, _pure: PURE, _p: P };
 })(typeof window !== "undefined" ? window : this);

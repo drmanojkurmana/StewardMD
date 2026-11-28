@@ -113,7 +113,27 @@ body.dark .pn-root .fo-wk li.td .fo-wkb i { background: var(--pn-fill); }
 .pn-root .fo-sheet-acts { display: flex; flex-direction: column; gap: 10px; }
 .pn-root .fo-quit { min-height: 44px; color: var(--pn-mut); }
 
+/* Home tile in the Practise grid (prep.js .pn-grid4, owner 2026-11-28: Focus clearly visible). Same tile as its
+   neighbours, told apart by an amber icon chip, an amber-tinted edge and surface; running, it shows the time left and
+   the chip breathes. */
+.pn-root .pn-home > .pn-grid4 > .fo-tile { border-color: color-mix(in srgb, var(--pn-c-amber) 48%, var(--pn-card-edge, var(--pn-edge))); background: color-mix(in srgb, var(--pn-c-amber) 8%, var(--pn-card)); }
+.pn-root .fo-tile .pn-ri { background: var(--pn-c-amber); color: var(--pn-c-midnight); box-shadow: 0 4px 12px -4px color-mix(in srgb, var(--pn-c-amber) 70%, transparent); }
+.pn-root .fo-tile .pn-rb b { color: var(--pn-text); }
+.pn-root .pn-home > .pn-grid4 > .fo-tile .pn-rb small.fo-tile-t { display: block; margin-top: 2px; font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--pn-pri-ink); }
+.pn-root .fo-tile.is-on .pn-ri { animation: fo-breathe 2.8s cubic-bezier(.16, 1, .3, 1) infinite; }
+.pn-root .pn-home > .pn-grid4 > .fo-tile:active { background: color-mix(in srgb, var(--pn-c-amber) 14%, var(--pn-card)); }
+/* Alone on the last row of the 4-up phone grid (NEET-PG has an extra tile): a full-width bar with its line under the
+   name, so it reads as a deliberate button and not a stray tile. */
+@media (max-width: 520px) {
+  .pn-root .pn-home > .pn-grid4 > .fo-tile:nth-child(4n+1):last-child { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; min-height: 64px; padding: 11px 14px; gap: 12px; text-align: left; }
+  .pn-root .pn-home > .pn-grid4 > .fo-tile:nth-child(4n+1):last-child .pn-rb { align-items: flex-start; }
+  .pn-root .pn-home > .pn-grid4 > .fo-tile:nth-child(4n+1):last-child .pn-rb b { font-size: 15px; }
+  .pn-root .pn-home > .pn-grid4 > .fo-tile:nth-child(4n+1):last-child .pn-rb small { display: block; font-size: 12px; font-weight: 500; color: var(--pn-mut); }
+}
+@keyframes fo-breathe { 50% { transform: scale(1.06); box-shadow: 0 6px 18px -4px color-mix(in srgb, var(--pn-c-amber) 85%, transparent); } }
+
 @media (prefers-reduced-motion: reduce) {
+  .pn-root .fo-tile.is-on .pn-ri { animation: none; }
   .pn-root .fo-arc { transition: none; }
   .pn-root .fo-tlbar i.live { animation: none; }
   .pn-root .fo-knob, .pn-root .fo-knob::after { transition: none; }
