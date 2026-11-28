@@ -483,11 +483,21 @@ def vancouver(entry: dict, number: int) -> str:
     """Vancouver reference string from a normalised reference record.
     Authors arrive as 'Family FM' strings (connector contract)."""
     authors = entry.get("authors") or []
+    title = str(entry.get("title") or "").strip()
+    if not title and entry.get("citation"):
+        raw_cite = str(entry.get("citation") or "").strip().rstrip(".")
+        label_prefix = f"{entry['label']}: " if entry.get("label") else ""
+        parts = [f"{number}. {label_prefix}{raw_cite}."]
+        if entry.get("doi"):
+            parts.append(f" doi:{entry['doi']}.")
+        if entry.get("pmid"):
+            parts.append(f" PMID:{entry['pmid']}.")
+        return "".join(parts).strip()
     if len(authors) > 6:
         author_str = ", ".join(authors[:6]) + ", et al"
     else:
         author_str = ", ".join(authors) if authors else "[No authors listed]"
-    parts = [f"{number}. {author_str}. {entry.get('title', '').rstrip('.')}."]
+    parts = [f"{number}. {author_str}. {title.rstrip('.')}."]
     venue = entry.get("venue") or entry.get("journal") or ""
     if isinstance(venue, dict):
         venue = venue.get("name", "")
@@ -566,6 +576,14 @@ def _order_sections(sections: list) -> list:
     return [sec for _, grp in groups for sec in grp]
 
 
+def _is_references_section_heading(sec: dict) -> bool:
+    if not isinstance(sec, dict):
+        return False
+    sid = str(sec.get("id") or "").lower()
+    head = re.sub(r"^\d+\.\s*", "", str(sec.get("heading") or "").lower()).strip()
+    return sid == "references" or bool(re.search(r"(?:^|-)references$", sid)) or head == "references"
+
+
 def build_manuscript(*, title, sections, token_table, references=None,
                      citation_map=None, manifest=None, outline=None) -> dict:
     """Assemble the JSON manuscript model. sections: parsed draft sections
@@ -583,18 +601,85 @@ def build_manuscript(*, title, sections, token_table, references=None,
     ]
 
     ref_entries = []
+    seen_keys = set()
+    seen_ids = set()
+
+    def _mark_seen(entry, key):
+        if key:
+            seen_keys.add(key)
+        if not entry:
+            return
+        ext = entry.get("externalIds") or {}
+        d = str(entry.get("doi") or ext.get("DOI") or "").lower()
+        p = str(entry.get("pmid") or ext.get("PMID") or "").lower()
+        if d:
+            seen_ids.add(f"doi:{d}")
+        if p:
+            seen_ids.add(f"pmid:{p}")
+        if entry.get("studyId"):
+            seen_ids.add(f"study:{entry['studyId']}")
+
+    def _already_seen(entry, key):
+        if key and key in seen_keys:
+            return True
+        if not entry:
+            return False
+        ext = entry.get("externalIds") or {}
+        d = str(entry.get("doi") or ext.get("DOI") or "").lower()
+        p = str(entry.get("pmid") or ext.get("PMID") or "").lower()
+        if d and f"doi:{d}" in seen_ids:
+            return True
+        if p and f"pmid:{p}" in seen_ids:
+            return True
+        if entry.get("studyId") and f"study:{entry['studyId']}" in seen_ids:
+            return True
+        return False
+
     for number, key in enumerate(_citation_keys_in_order(ordered), 1):
         entry = by_key.get(key)
         if entry is None:
+            seen_keys.add(key)
             ref_entries.append({"number": number, "key": key, "citation": "",
                                 "doi": "", "pmid": "", "resolved": False})
             continue
         ext = entry.get("externalIds") or {}
         doi = entry.get("doi") or ext.get("DOI") or ""
         pmid = entry.get("pmid") or ext.get("PMID") or ""
+        _mark_seen(entry, key)
         ref_entries.append({"number": number, "key": key,
                             "citation": vancouver(entry, number),
                             "doi": doi, "pmid": pmid, "resolved": bool(doi or pmid)})
+
+    all_lib = [r for r in references if isinstance(r, dict) and r.get("key")]
+    all_lib.extend(
+        v for v in citation_map.values()
+        if isinstance(v, dict) and v.get("isIncludedStudy")
+    )
+    for cand in all_lib:
+        if not cand.get("isIncludedStudy"):
+            continue
+        if not (cand.get("citation") or cand.get("title") or cand.get("doi") or cand.get("pmid")):
+            continue
+        if _already_seen(cand, cand.get("key")):
+            continue
+        num = len(ref_entries) + 1
+        ext = cand.get("externalIds") or {}
+        doi = cand.get("doi") or ext.get("DOI") or ""
+        pmid = cand.get("pmid") or ext.get("PMID") or ""
+        _mark_seen(cand, cand.get("key"))
+        ref_entries.append({"number": num, "key": cand["key"],
+                            "citation": vancouver(cand, num),
+                            "doi": doi, "pmid": pmid, "resolved": bool(doi or pmid)})
+
+    if ref_entries:
+        ref_lines = [r["citation"] for r in ref_entries if r.get("citation")]
+        ref_body = "\n".join(ref_lines)
+        if ref_body:
+            for sec in ordered:
+                if _is_references_section_heading(sec):
+                    sec["id"] = "references"
+                    sec["heading"] = "References"
+                    sec["text"] = ref_body
 
     protocol = (manifest or {}).get("protocol") or {}
     return {

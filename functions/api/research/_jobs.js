@@ -407,8 +407,8 @@ async function buildManuscriptSnapshot(db, project, proto, projectId, jobId) {
         }
       }
     }
+    const stLoc = parseJson(st.locator_json, null);
     if (st.verified === 1) {
-      const stLoc = parseJson(st.locator_json, null);
       if (hasProvenance(stLoc, st.quote)) {
         const inputs = parseJson(st.inputs_json, {});
         if (inputs && typeof inputs === "object" && !Array.isArray(inputs)) {
@@ -424,7 +424,14 @@ async function buildManuscriptSnapshot(db, project, proto, projectId, jobId) {
     if (!values.length) continue;
     const item = { studyId: st.id };
     if (st.label) item.label = st.label;
-    const src = sourceFromRecord(recByStudy.get(st.id));
+    let src = sourceFromRecord(recByStudy.get(st.id));
+    if (!src && stLoc && typeof stLoc === "object") {
+      const manualSrc = {};
+      if (typeof stLoc.citation === "string" && stLoc.citation.trim()) manualSrc.citation = stLoc.citation.trim();
+      if (typeof stLoc.doi === "string" && stLoc.doi.trim()) manualSrc.doi = stLoc.doi.trim();
+      if (typeof stLoc.pmid === "string" && stLoc.pmid.trim()) manualSrc.pmid = stLoc.pmid.trim();
+      if (Object.keys(manualSrc).length) src = manualSrc;
+    }
     if (src) item.source = src;
     item.values = values;
     evidence.push(item);
@@ -445,6 +452,14 @@ async function buildManuscriptSnapshot(db, project, proto, projectId, jobId) {
     };
   });
 
+  const decRows = (await db.prepare(
+    "SELECT record_id, decision FROM research_screening_decisions WHERE project_id=? AND record_id IS NOT NULL ORDER BY created_ts DESC, id DESC")
+    .bind(projectId).all()).results || [];
+  const decisionByRecord = new Map();
+  for (const d of decRows) {
+    if (d.record_id && !decisionByRecord.has(d.record_id)) decisionByRecord.set(d.record_id, d.decision);
+  }
+
   const recRows = (await db.prepare("SELECT * FROM research_records WHERE project_id=? ORDER BY created_ts ASC, id ASC")
     .bind(projectId).all()).results || [];
   const references = recRows.map((r) => {
@@ -462,6 +477,8 @@ async function buildManuscriptSnapshot(db, project, proto, projectId, jobId) {
     if (pmid) ref.pmid = pmid;
     if (meta.volume) ref.volume = String(meta.volume);
     if (meta.pages) ref.pages = String(meta.pages);
+    const dec = decisionByRecord.get(r.id);
+    if (dec) ref.screeningDecision = dec;
     return ref;
   });
 
@@ -1060,7 +1077,12 @@ export async function submitDeviceResult(ctx, jobId, body) {
   const titleScan = scan(manuscript.title || "");
   if (titleScan.blocked) phiHits.push(...titleScan.hits);
   for (const s of manuscript.sections) {
-    const hs = scan((s.heading || "") + "\n" + (s.text || ""));
+    const sid = String(s.id || "").toLowerCase();
+    const isRef = sid === "references" || /(?:^|-)references$/.test(sid);
+    const bodyText = isRef
+      ? "--- INPUT: citation_map.json (Reference Library) ---\n" + (s.text || "")
+      : ((s.heading || "") + "\n" + (s.text || ""));
+    const hs = scan(bodyText, isRef ? { allowCitationLibraryNames: true } : undefined);
     if (hs.blocked) phiHits.push(...hs.hits);
   }
   if (phiHits.length) {

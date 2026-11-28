@@ -130,9 +130,9 @@
 
   function sectionTemplateRank(sec) {
     if (!sec || typeof sec !== "object") return 50;
-    var normId = String(sec.id || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+    var normId = String(sec.id || "").toLowerCase().replace(/^\d+[-_.\s]*/, "").replace(/[^a-z0-9]+/g, "");
     if (Object.prototype.hasOwnProperty.call(TEMPLATE_SECTION_RANK, normId)) return TEMPLATE_SECTION_RANK[normId];
-    var normHead = String(sec.heading || sec.label || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+    var normHead = String(sec.heading || sec.label || "").toLowerCase().replace(/^\d+[-_.\s]*/, "").replace(/[^a-z0-9]+/g, "");
     if (Object.prototype.hasOwnProperty.call(TEMPLATE_SECTION_RANK, normHead)) return TEMPLATE_SECTION_RANK[normHead];
     return 50;
   }
@@ -594,6 +594,7 @@
     insufficient_credits: "Not enough research credits for this draft. Top up your wallet to continue.",
     phi_blocked: "Patient identifiers were detected. Remove personal identifiers and try again.",
     gate_failed: "Draft failed integrity checks for numbers, citations, or claim links.",
+    ceiling_input_tokens: "Draft input exceeded the 16,000-token model limit. Trim long study quotes or saved runs and try again.",
     ceiling_calls: "Draft reached the 64-call limit before completing.",
     ceiling_seconds: "Draft exceeded the step time limit.",
     invalid_snapshot: "Project snapshot is incomplete or contains unverified data.",
@@ -618,13 +619,16 @@
     if (err.status === 404 || code === "not_found") {
       return PO_ERROR_MESSAGES.not_found;
     }
+    var msg = (err.error && err.error.message) || err.message || "";
+    if (code === "ceiling_input_tokens" && msg) {
+      return String(msg).replace(/[\u2014\u2013]/g, "-");
+    }
     if (code && PO_ERROR_MESSAGES[code]) {
       return PO_ERROR_MESSAGES[code];
     }
     if (err.status === 402) {
       return PO_ERROR_MESSAGES.insufficient_credits;
     }
-    var msg = (err.error && err.error.message) || err.message || "";
     if (msg) return String(msg).replace(/[\u2014\u2013]/g, "-");
     return "Could not complete draft. Try again.";
   }
@@ -3005,12 +3009,27 @@
     }
     if (man.affiliations) parts.push(docxParagraph(man.affiliations, false, 0));
     var orderedSections = sortSections(man.sections || []);
+    var hasPopulatedRefsSection = false;
     for (var i = 0; i < orderedSections.length; i++) {
       var sec = orderedSections[i];
+      var sid = String(sec.id || "").toLowerCase();
+      if ((sid === "references" || /(?:^|-)references$/.test(sid)) && String(sec.text || "").trim()) {
+        hasPopulatedRefsSection = true;
+      }
       parts.push(docxParagraph(sec.heading || sec.id, true, 28));
       var lines = plainText(sec.text).split("\n");
       for (var j = 0; j < lines.length; j++) {
         parts.push(docxParagraph(lines[j], false, 0));
+      }
+    }
+    if (!hasPopulatedRefsSection && Array.isArray(man.references) && man.references.length) {
+      parts.push(docxParagraph("References", true, 28));
+      for (var ri = 0; ri < man.references.length; ri++) {
+        var refItem = man.references[ri];
+        var refText = typeof refItem === "string"
+          ? refItem
+          : ((refItem && refItem.citation) || ((ri + 1) + ". " + ((refItem && (refItem.title || refItem.key)) || "")));
+        if (refText) parts.push(docxParagraph(refText, false, 0));
       }
     }
     parts.push(docxParagraph(aiDisclosureText(man.ai), false, 0));

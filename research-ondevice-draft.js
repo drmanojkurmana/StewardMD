@@ -100,6 +100,75 @@
     return Math.floor(String(text == null ? "" : text).length / 4) + 1;
   }
 
+  function promptTokenEstimate(req) {
+    var sys = (req && typeof req.system === "string" && req.system) ? (req.system + "\n\n") : "";
+    var prm = (req && typeof req.prompt === "string") ? req.prompt : "";
+    return estimateTokens(sys + prm) + GATEWAY_FRAMING_TOKENS;
+  }
+
+  function maxPromptCharsForCeiling(ceiling) {
+    var avail = Math.max(1000, (ceiling.maxInputTokens || 16000) - GATEWAY_FRAMING_TOKENS - 500);
+    return avail * 4;
+  }
+
+  function trimAdviceMessage(stageLabel, estTok, maxTok, parts) {
+    var list = (Array.isArray(parts) ? parts.slice() : []).sort(function (a, b) {
+      return (b.tokens || 0) - (a.tokens || 0);
+    });
+    var top = [];
+    for (var i = 0; i < list.length && i < 3; i++) {
+      if (list[i] && list[i].tokens > 0) {
+        top.push(list[i].name + " (~" + list[i].tokens + " tokens)");
+      }
+    }
+    var detail = top.length ? (" Trim " + top.join(", ") + " and try again.") : " Trim your protocol quotes or saved runs and try again.";
+    return "Input for " + stageLabel + " (~" + estTok + " tokens) exceeds the " + maxTok + "-token model limit." + detail;
+  }
+
+  function isReferencesSection(secItem) {
+    if (!secItem) return false;
+    var id = String(secItem.id || "").toLowerCase();
+    var title = String(secItem.title || "").toLowerCase().replace(/^\d+\.\s*/, "").trim();
+    return id === "references" || /(?:^|-)references$/.test(id) || title === "references";
+  }
+
+  function stripNonDoiStudyCitations(latex, citationMap) {
+    if (!latex || !citationMap) return latex;
+    return String(latex).replace(/\\cite\{([^}]+)\}|\[@([A-Za-z0-9_:-]+)\]/g, function (full, braced, bracketed, offset, src) {
+      var raw = braced || bracketed || "";
+      var parts = raw.split(",");
+      var kept = [];
+      var replaced = [];
+      for (var i = 0; i < parts.length; i++) {
+        var k = parts[i].replace(/^\s+|\s+$/g, "");
+        if (!k) continue;
+        var entry = citationMap[k];
+        if (entry && entry.isIncludedStudy && !entry.doi && !entry.pmid) {
+          var lbl = entry.label || k;
+          var before = src.slice(Math.max(0, offset - lbl.length - 6), offset);
+          if (before.indexOf(lbl) < 0) replaced.push(lbl);
+        } else {
+          kept.push(k);
+        }
+      }
+      if (!replaced.length) return full;
+      var out = [];
+      if (replaced.length) out.push("(" + replaced.join("; ") + ")");
+      if (kept.length) out.push("\\cite{" + kept.join(", ") + "}");
+      return out.join(" ");
+    });
+  }
+
+  function formatGateViolationLine(v) {
+    if (!v) return "";
+    return "- " + v.gate +
+      (v.section ? " in " + v.section : "") +
+      (v.number ? " (bare number '" + v.number + "' must use a {{run:...}} token or words/Methods)" : "") +
+      (v.token ? " (token '" + v.token + "')" : "") +
+      (v.key ? " (key '" + v.key + "'" + (v.reason ? ": " + v.reason : "") + ")" : "") +
+      (v.sentence ? " (sentence needs {{run:...}} or \\cite{...}: \"" + v.sentence + "\")" : "");
+  }
+
   function defaultCutoffDate(nowMs) {
     var d = new Date(nowMs);
     var m = d.getUTCMonth() + 1;
@@ -401,7 +470,8 @@
       });
     }
 
-    function sendGatewayCall(stepId, purpose, system, prompt) {
+    function sendGatewayCall(stepId, purpose, system, prompt, callOpts) {
+      callOpts = callOpts || {};
       activeStep = stepId;
       var guardErr = checkPreCallGuards(stepId);
       if (guardErr) return Promise.reject(guardErr);
@@ -453,7 +523,7 @@
       return sendAfterPhiCheck();
 
       function sendAfterPhiCheck() {
-      if (purpose === "refinement") {
+      if (purpose === "refinement" && !callOpts.skipRoundCount) {
         if (state.refinementRounds >= ceiling.maxRefinementRounds) {
           return Promise.reject(makeErr("ceiling_refinement_rounds", stepId, "Refinement round ceiling reached"));
         }
@@ -463,7 +533,8 @@
       }
       var estIn = estimateTokens(assembled) + GATEWAY_FRAMING_TOKENS;
       if (estIn > ceiling.maxInputTokens) {
-        return Promise.reject(makeErr("ceiling_input_tokens", stepId, "Input exceeds tier token ceiling"));
+        return Promise.reject(makeErr("ceiling_input_tokens", stepId,
+          trimAdviceMessage(stepId, estIn, ceiling.maxInputTokens, [{ name: "prompt for " + stepId, tokens: estIn }])));
       }
       if (!currentToken) {
         return Promise.reject(makeErr("device_failed", stepId, "Missing job token"));
@@ -512,7 +583,7 @@
               throw makeErr("ceiling_output_tokens", stepId, "Output exceeded tier token ceiling");
             }
             state.callCount += 1;
-            if (purpose === "refinement") state.refinementRounds += 1;
+            if (purpose === "refinement" && !callOpts.skipRoundCount) state.refinementRounds += 1;
             state.usage.calls = state.callCount;
             state.usage.inputTokens += inTok;
             state.usage.outputTokens += outTok;
@@ -643,11 +714,53 @@
       state.manifest = manifest;
       citationMap = {};
       var refs = inputs.references || [];
+      var requiredCitationMap = {};
       for (var ri = 0; ri < refs.length; ri++) {
         if (refs[ri] && refs[ri].key && !citationMap[refs[ri].key]) {
           citationMap[refs[ri].key] = refs[ri];
+          var dec = String(refs[ri].screeningDecision || "").toLowerCase();
+          if (refs[ri].isIncludedStudy || dec === "include" || refs[ri].included === true) {
+            requiredCitationMap[refs[ri].key] = refs[ri];
+          }
         }
       }
+
+      /* Pre-flight ceiling check BEFORE spending any gateway calls. */
+      if (!opts.resume || !state.completedSteps["outline"]) {
+        var preOutReq = PROMPTS.buildOutlinePrompt({
+          ideaMd: inputs.ideaMd,
+          experimentalLogMd: inputs.experimentalLogMd,
+          templateTex: inputs.templateTex,
+          guidelinesMd: inputs.guidelinesMd,
+          cutoffDate: cutoffDate
+        });
+        var preOutTok = promptTokenEstimate(preOutReq);
+        if (preOutTok > ceiling.maxInputTokens) {
+          throw makeErr("ceiling_input_tokens", "validate", trimAdviceMessage("outline", preOutTok, ceiling.maxInputTokens, [
+            { name: "protocol and verified study quotes", tokens: estimateTokens(inputs.ideaMd) },
+            { name: "saved analysis runs", tokens: estimateTokens(inputs.experimentalLogMd) }
+          ]));
+        }
+      }
+      var preSecReq = PROMPTS.buildSectionPrompt({
+        outlineJsonStr: "{}",
+        citationMap: requiredCitationMap,
+        ideaMd: inputs.ideaMd,
+        experimentalLogMd: inputs.experimentalLogMd,
+        guidelinesMd: inputs.guidelinesMd,
+        templateTex: inputs.templateTex,
+        sectionTitle: "Methods",
+        maxPromptChars: maxPromptCharsForCeiling(ceiling)
+      });
+      var preSecTok = promptTokenEstimate(preSecReq);
+      if (preSecTok > ceiling.maxInputTokens) {
+        throw makeErr("ceiling_input_tokens", "validate", trimAdviceMessage("section drafting", preSecTok, ceiling.maxInputTokens, [
+          { name: "protocol and verified study quotes", tokens: estimateTokens(inputs.ideaMd) },
+          { name: "saved analysis runs", tokens: estimateTokens(inputs.experimentalLogMd) },
+          { name: "included studies and screened citations", tokens: estimateTokens(PROMPTS.formatCitationLibrary(requiredCitationMap, {})) }
+        ]));
+      }
+
       if (!state.completedSteps["validate"]) {
         state.completedSteps["validate"] = true;
         state.lastCompletedStep = "validate";
@@ -702,6 +815,12 @@
           if (opts.resume && resumeKeyDone && typeof state.sections[secItem.id] === "string") {
             return;
           }
+          if (isReferencesSection(secItem)) {
+            state.sections[secItem.id] = "\\section*{References}\n";
+            state.completedSteps[secItem.stepId] = true;
+            state.lastCompletedStep = secItem.stepId;
+            return saveCheckpoint();
+          }
           onProgress({
             step: secItem.stepId,
             phase: "section",
@@ -720,11 +839,12 @@
               guidelinesMd: inputs.guidelinesMd,
               templateTex: inputs.templateTex,
               sectionTitle: secItem.title,
+              maxPromptChars: maxPromptCharsForCeiling(ceiling),
               retryReason: retryReason
             });
             return sendGatewayCall(sid, "write", req.system, req.prompt).then(function (resp) {
               var latexRaw = GATES.parseGeminiLatexResults(resp.text);
-              var sectionTex = normalizeSectionLatex(GATES, latexRaw, secItem);
+              var sectionTex = stripNonDoiStudyCitations(normalizeSectionLatex(GATES, latexRaw, secItem), citationMap);
               if (!sectionTex) {
                 if (retryIdx < ceiling.maxRetries) {
                   return attemptSection(retryIdx + 1, "Empty LaTeX output; return the section inside a ```latex``` block.");
@@ -736,9 +856,7 @@
               if (violations.length && retryIdx < ceiling.maxRetries) {
                 var reasons = [];
                 for (var vi = 0; vi < violations.length; vi++) {
-                  reasons.push("- " + violations[vi].gate + (violations[vi].number ? " (" + violations[vi].number + ")" : "") +
-                    (violations[vi].token ? " (" + violations[vi].token + ")" : "") +
-                    (violations[vi].key ? " (" + violations[vi].key + ")" : ""));
+                  reasons.push(formatGateViolationLine(violations[vi]));
                 }
                 return attemptSection(retryIdx + 1, reasons.join("\n"));
               }
@@ -768,20 +886,43 @@
       /* Step 4: refine:<round> (gated autorater review + score-gain acceptance) */
       if (maxRounds <= 0) return;
 
+      function assembleSectionsTex(secMap) {
+        var ord = state.sectionOrder || buildSectionOrder(state.outline);
+        var parts = [];
+        for (var i = 0; i < ord.length; i++) {
+          if (secMap[ord[i].id]) parts.push(secMap[ord[i].id]);
+        }
+        return parts.join("\n\n");
+      }
+
       function gatedReview(tex, stepPrefix) {
         var violations = GATES.checkPaper(tex, inputs.tokenTable, citationMap, manifest);
         if (violations.length) {
           for (var vi = 0; vi < violations.length; vi++) state.gateHits.push(violations[vi]);
           return Promise.resolve({
-            review: { Error: "gate_failed", Overall: 0, Weaknesses: violations.map(function (v) { return v.gate; }) },
-            score: 0
+            review: {
+              Error: "gate_failed",
+              Overall: 0,
+              Weaknesses: violations.map(formatGateViolationLine)
+            },
+            score: 0,
+            violations: violations
           });
+        }
+        var revReq = PROMPTS.buildReviewPrompt(tex);
+        if (promptTokenEstimate(revReq) > ceiling.maxInputTokens && typeof PROMPTS.buildSummarizedReviewPrompt === "function") {
+          revReq = PROMPTS.buildSummarizedReviewPrompt(GATES.parseLatexSections(tex));
+        }
+        if (promptTokenEstimate(revReq) > ceiling.maxInputTokens) {
+          return Promise.reject(makeErr("ceiling_input_tokens", stepPrefix + ":rev1",
+            trimAdviceMessage("manuscript review", promptTokenEstimate(revReq), ceiling.maxInputTokens, [
+              { name: "drafted manuscript sections", tokens: estimateTokens(tex) }
+            ])));
         }
         var parsedReviews = [];
         var revChain = Promise.resolve();
         [1, 2, 3].forEach(function (idx) {
           revChain = revChain.then(function () {
-            var revReq = PROMPTS.buildReviewPrompt(tex);
             return sendGatewayCall(stepPrefix + ":rev" + idx, "review", revReq.system, revReq.prompt).then(function (resp) {
               var parsed = GATES.parseGeminiJsonResults(resp.text);
               if (!parsed || typeof parsed !== "object") {
@@ -798,6 +939,78 @@
             var score = extractScores(review).Overall || 0;
             return { review: review, score: score };
           });
+        });
+      }
+
+      function runPerSectionRefinement(roundNum, roundStepId, prevLogStr, curReview, curScore) {
+        var ord = (state.sectionOrder || buildSectionOrder(state.outline)).filter(function (s) {
+          return !isReferencesSection(s) && state.sections[s.id];
+        });
+        var curViolations = GATES.checkPaper(state.currentTex, inputs.tokenTable, citationMap, manifest);
+        var violSecs = {};
+        for (var vi = 0; vi < curViolations.length; vi++) {
+          if (curViolations[vi].section) violSecs[String(curViolations[vi].section).toLowerCase()] = true;
+        }
+        var targets = [];
+        if (Object.keys(violSecs).length) {
+          for (var i = 0; i < ord.length; i++) {
+            var s = ord[i];
+            var baseId = String(s.id || "").toLowerCase().replace(/^\d+-/, "");
+            if (violSecs[s.id] || violSecs[baseId]) targets.push(s);
+          }
+        }
+        if (!targets.length) targets = ord.slice();
+        var nextSections = {};
+        var skeys = Object.keys(state.sections || {});
+        for (var ki = 0; ki < skeys.length; ki++) nextSections[skeys[ki]] = state.sections[skeys[ki]];
+        var combinedPlan = [];
+        var secChain = Promise.resolve();
+        targets.forEach(function (secItem, tIdx) {
+          secChain = secChain.then(function () {
+            var otherSummaries = [];
+            for (var oi = 0; oi < ord.length; oi++) {
+              if (ord[oi].id === secItem.id) continue;
+              otherSummaries.push(PROMPTS.summarizeLatexSection(ord[oi].title, nextSections[ord[oi].id] || ""));
+            }
+            var secReq = PROMPTS.buildSectionRefinementPrompt({
+              round: roundNum,
+              previousLogStr: prevLogStr,
+              currentScore: curScore,
+              currentReview: curReview,
+              guidelinesMd: inputs.guidelinesMd,
+              experimentalLogMd: inputs.experimentalLogMd,
+              citationMap: citationMap,
+              targetSectionTitle: secItem.title,
+              targetSectionTex: nextSections[secItem.id] || "",
+              otherSectionSummaries: otherSummaries,
+              maxPromptChars: maxPromptCharsForCeiling(ceiling)
+            });
+            var secEst = promptTokenEstimate(secReq);
+            if (secEst > ceiling.maxInputTokens) {
+              throw makeErr("ceiling_input_tokens", roundStepId + ":" + secItem.id,
+                trimAdviceMessage("section refinement", secEst, ceiling.maxInputTokens, [
+                  { name: "section \"" + secItem.title + "\"", tokens: estimateTokens(nextSections[secItem.id] || "") },
+                  { name: "saved analysis runs", tokens: estimateTokens(inputs.experimentalLogMd) }
+                ]));
+            }
+            var callSid = targets.length === 1 ? roundStepId : (roundStepId + ":" + secItem.id);
+            return sendGatewayCall(callSid, "refinement", secReq.system, secReq.prompt, {
+              skipRoundCount: tIdx > 0
+            }).then(function (resp) {
+              var parsed = GATES.parseGeminiJsonLatexResponse(resp.text);
+              var rawSec = (parsed && parsed.latex) || GATES.parseGeminiLatexResults(resp.text);
+              var normSec = stripNonDoiStudyCitations(normalizeSectionLatex(GATES, rawSec, secItem), citationMap);
+              if (normSec) nextSections[secItem.id] = normSec;
+              if (parsed && parsed.json) combinedPlan.push(parsed.json);
+            });
+          });
+        });
+        return secChain.then(function () {
+          return {
+            latex: assembleSectionsTex(nextSections),
+            sections: nextSections,
+            json: combinedPlan.length ? combinedPlan : null
+          };
         });
       }
 
@@ -839,12 +1052,23 @@
               guidelinesMd: inputs.guidelinesMd,
               experimentalLogMd: inputs.experimentalLogMd,
               citationMap: citationMap,
-              currentTex: state.currentTex
+              currentTex: state.currentTex,
+              maxPromptChars: maxPromptCharsForCeiling(ceiling)
             });
 
-            return sendGatewayCall(roundStepId, "refinement", refReq.system, refReq.prompt).then(function (resp) {
-              var parsed = GATES.parseGeminiJsonLatexResponse(resp.text);
-              var newTex = parsed && parsed.latex;
+            var refineP;
+            if (promptTokenEstimate(refReq) <= ceiling.maxInputTokens) {
+              refineP = sendGatewayCall(roundStepId, "refinement", refReq.system, refReq.prompt).then(function (resp) {
+                var parsed = GATES.parseGeminiJsonLatexResponse(resp.text);
+                var latex = parsed && parsed.latex ? stripNonDoiStudyCitations(parsed.latex, citationMap) : null;
+                return { latex: latex, sections: null, json: parsed && parsed.json };
+              });
+            } else {
+              refineP = runPerSectionRefinement(roundNum, roundStepId, prevLogStr, state.currentReview, state.currentScore);
+            }
+
+            return refineP.then(function (refOut) {
+              var newTex = refOut && refOut.latex;
               if (!newTex) {
                 stopped = true;
                 return;
@@ -867,6 +1091,7 @@
                 if (newMetrics.Overall > oldMetrics.Overall) {
                   outcome = "ACCEPTED_SCORE_INCREASE";
                   state.currentTex = newTex;
+                  if (refOut.sections) state.sections = refOut.sections;
                   state.currentScore = revOut.score;
                   state.currentReview = revOut.review;
                 } else if (newMetrics.Overall < oldMetrics.Overall) {
@@ -878,12 +1103,13 @@
                 } else {
                   outcome = "ACCEPTED_NEUTRAL_IMPROVEMENT";
                   state.currentTex = newTex;
+                  if (refOut.sections) state.sections = refOut.sections;
                   state.currentScore = revOut.score;
                   state.currentReview = revOut.review;
                 }
                 var entry = {
                   round: roundNum,
-                  agent_plan: parsed.json,
+                  agent_plan: refOut.json,
                   scores_before: oldMetrics,
                   scores_after: newMetrics,
                   total_gain: totalGain,
@@ -902,6 +1128,80 @@
       }
 
       return rChain;
+    }).then(function () {
+      /* Bounded gate repair (mirrors po_adapter/repair.py) if any gate violations remain. */
+      function repairOneRound(roundIdx) {
+        var remaining = GATES.checkPaper(state.currentTex, inputs.tokenTable, citationMap, manifest);
+        if (!remaining.length || roundIdx >= 2 || state.callCount >= maxCalls) {
+          return Promise.resolve();
+        }
+        var ord = state.sectionOrder || buildSectionOrder(state.outline);
+        var violBySec = {};
+        for (var vi = 0; vi < remaining.length; vi++) {
+          if (remaining[vi].section) violBySec[String(remaining[vi].section).toLowerCase()] = true;
+        }
+        var targetItems = [];
+        for (var oi = 0; oi < ord.length; oi++) {
+          var sItem = ord[oi];
+          if (isReferencesSection(sItem) || !state.sections[sItem.id]) continue;
+          var baseId = String(sItem.id || "").toLowerCase().replace(/^\d+-/, "");
+          if (violBySec[sItem.id] || violBySec[baseId]) targetItems.push(sItem);
+        }
+        if (!targetItems.length) return Promise.resolve();
+        var allowedToks = Object.keys(inputs.tokenTable || {}).sort().map(function (k) { return "{{run:" + k + "}}"; }).join("\n") || "(none)";
+        var allowedCites = Object.keys(citationMap || {}).filter(function (k) {
+          var e = citationMap[k];
+          return e && (e.doi || e.pmid || (e.externalIds && (e.externalIds.DOI || e.externalIds.PMID)));
+        }).sort().map(function (k) { return "\\cite{" + k + "}"; }).join("\n") || "(none)";
+
+        var chain = Promise.resolve();
+        targetItems.forEach(function (secItem) {
+          chain = chain.then(function () {
+            if (state.callCount >= maxCalls) return;
+            var secTex = state.sections[secItem.id] || "";
+            var secV = remaining.filter(function (v) {
+              var vs = String(v.section || "").toLowerCase();
+              var baseId = String(secItem.id || "").toLowerCase().replace(/^\d+-/, "");
+              return vs === secItem.id || vs === baseId;
+            });
+            if (!secV.length) return;
+            var sys = "You repair hard integrity gate violations in a LaTeX manuscript section. Change only the sentences named in the violation list. Return ONLY the full LaTeX of the given section inside ```latex ... ```.";
+            var prm = [
+              "VIOLATIONS",
+              secV.map(formatGateViolationLine).join("\n"),
+              "",
+              "SECTION TO REPAIR (LaTeX)",
+              secTex,
+              "",
+              "ALLOWED TOKENS",
+              allowedToks,
+              "",
+              "ALLOWED CITATIONS (with DOI/PMID)",
+              allowedCites,
+              "",
+              "RULES",
+              "1. Change only sentences with violations.",
+              "2. Replace untokenised numbers with matching {{run:...}} tokens or write counts without a token in words (e.g., \"thirteen trials\"). For \"95% prediction interval\", write \"95% CI\" only for CIs or \"prediction interval\" without a bare \"95\" unless using the level token.",
+              "3. A claim sentence without a source must carry a {{run:...}} token or an allowed \\cite{...}, or be rephrased.",
+              "4. Return the full revised section inside ```latex ... ```."
+            ].join("\n");
+            if (estimateTokens(sys + "\n\n" + prm) + GATEWAY_FRAMING_TOKENS > ceiling.maxInputTokens) return;
+            return sendGatewayCall("repair:" + (roundIdx + 1) + ":" + secItem.id, "write", sys, prm).then(function (resp) {
+              var fixed = stripNonDoiStudyCitations(normalizeSectionLatex(GATES, GATES.parseGeminiLatexResults(resp.text), secItem), citationMap);
+              if (fixed) {
+                state.sections[secItem.id] = fixed;
+                var parts = [];
+                for (var pi = 0; pi < ord.length; pi++) {
+                  if (state.sections[ord[pi].id]) parts.push(state.sections[ord[pi].id]);
+                }
+                state.currentTex = parts.join("\n\n");
+              }
+            });
+          });
+        });
+        return chain.then(function () { return repairOneRound(roundIdx + 1); });
+      }
+      return repairOneRound(0);
     }).then(function () {
       /* Step 5: final gates + assemble + POST /v1/jobs/:id/device-result */
       activeStep = "final";

@@ -473,7 +473,115 @@
     buildTokenTable(manifest.runs || []);
   }
 
-  function renderIdea(manifest) {
+  function slugCiteKey(label, studyId, usedKeys) {
+    var base = String(label || "").toLowerCase()
+      .replace(/&/g, " ")
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "");
+    if (!base) base = String(studyId || "study").toLowerCase().replace(/[^a-z0-9_]+/g, "_");
+    if (!base) base = "study";
+    var key = base;
+    var suffix = 2;
+    while (usedKeys[key]) {
+      key = base + "_" + suffix;
+      suffix++;
+    }
+    usedKeys[key] = true;
+    return key;
+  }
+
+  function extractStudyLocatorInfo(study) {
+    var src = (study && isPlainObject(study.source)) ? study.source : {};
+    var vals = (study && Array.isArray(study.values)) ? study.values : [];
+    var citation = typeof src.citation === "string" && src.citation.trim() ? src.citation.trim() : "";
+    var doi = src.doi ? String(src.doi).trim() : "";
+    var pmid = src.pmid ? String(src.pmid).trim() : "";
+    var title = src.title ? String(src.title).trim() : "";
+    var authors = Array.isArray(src.authors) ? src.authors.slice() : [];
+    var year = src.year != null ? src.year : null;
+    var venue = src.venue ? String(src.venue).trim() : "";
+    for (var vi = 0; vi < vals.length; vi++) {
+      var loc = vals[vi] && isPlainObject(vals[vi].locator) ? vals[vi].locator : null;
+      if (!loc) continue;
+      if (!citation && typeof loc.citation === "string" && loc.citation.trim()) citation = loc.citation.trim();
+      if (!doi && typeof loc.doi === "string" && loc.doi.trim()) doi = loc.doi.trim();
+      if (!pmid && typeof loc.pmid === "string" && loc.pmid.trim()) pmid = loc.pmid.trim();
+      if (!title && typeof loc.title === "string" && loc.title.trim()) title = loc.title.trim();
+      if (!authors.length && Array.isArray(loc.authors) && loc.authors.length) authors = loc.authors.slice();
+      if (year == null && loc.year != null) year = loc.year;
+      if (!venue && typeof loc.venue === "string" && loc.venue.trim()) venue = loc.venue.trim();
+    }
+    return {
+      citation: citation,
+      doi: doi,
+      pmid: pmid,
+      title: title,
+      authors: authors,
+      year: year,
+      venue: venue
+    };
+  }
+
+  function collectMergedReferences(manifest) {
+    var baseRefs = (manifest && Array.isArray(manifest.references)) ? manifest.references : [];
+    var out = [];
+    var usedKeys = {};
+    var byDoi = {};
+    var byPmid = {};
+    var byStudyId = {};
+    for (var ri = 0; ri < baseRefs.length; ri++) {
+      var r = baseRefs[ri];
+      if (!r || !r.key) continue;
+      var copy = {};
+      var ks = Object.keys(r);
+      for (var ki = 0; ki < ks.length; ki++) copy[ks[ki]] = r[ks[ki]];
+      usedKeys[copy.key] = true;
+      if (copy.doi) byDoi[String(copy.doi).toLowerCase()] = copy;
+      if (copy.pmid) byPmid[String(copy.pmid).toLowerCase()] = copy;
+      if (copy.studyId) byStudyId[copy.studyId] = copy;
+      out.push(copy);
+    }
+    var evidence = (manifest && Array.isArray(manifest.evidence)) ? manifest.evidence : [];
+    var studyKeysById = {};
+    for (var ei = 0; ei < evidence.length; ei++) {
+      var study = evidence[ei] || {};
+      var info = extractStudyLocatorInfo(study);
+      var existing = null;
+      if (study.studyId && byStudyId[study.studyId]) existing = byStudyId[study.studyId];
+      if (!existing && info.doi && byDoi[info.doi.toLowerCase()]) existing = byDoi[info.doi.toLowerCase()];
+      if (!existing && info.pmid && byPmid[info.pmid.toLowerCase()]) existing = byPmid[info.pmid.toLowerCase()];
+      if (existing) {
+        existing.isIncludedStudy = true;
+        if (study.label && !existing.label) existing.label = study.label;
+        if (info.citation && !existing.citation) existing.citation = info.citation;
+        if (study.studyId) {
+          existing.studyId = study.studyId;
+          studyKeysById[study.studyId] = existing.key;
+        }
+        continue;
+      }
+      if (!info.citation && !info.title && !info.doi && !info.pmid && !study.label) continue;
+      var key = slugCiteKey(study.label, study.studyId, usedKeys);
+      var entry = {
+        key: key,
+        isIncludedStudy: true,
+        studyId: study.studyId || ""
+      };
+      if (study.label) entry.label = study.label;
+      if (info.title) entry.title = info.title;
+      if (info.citation) entry.citation = info.citation;
+      if (info.authors.length) entry.authors = info.authors;
+      if (info.year != null) entry.year = info.year;
+      if (info.venue) entry.venue = info.venue;
+      if (info.doi) entry.doi = info.doi;
+      if (info.pmid) entry.pmid = info.pmid;
+      if (study.studyId) studyKeysById[study.studyId] = key;
+      out.push(entry);
+    }
+    return { references: out, studyKeysById: studyKeysById };
+  }
+
+  function renderIdea(manifest, studyKeysById) {
     var p = manifest.protocol || {};
     var lines = [
       "# Protocol: " + (p.title || ""),
@@ -504,16 +612,20 @@
     var evidence = manifest.evidence || [];
     for (var ei = 0; ei < evidence.length; ei++) {
       var study = evidence[ei] || {};
-      var src = study.source || {};
+      var info = extractStudyLocatorInfo(study);
       var idParts = [];
-      if (src.doi) idParts.push(src.doi);
-      if (src.pmid) idParts.push("PMID:" + src.pmid);
-      lines.push("### " + (study.label || study.studyId || "") + " [" + idParts.join(" ") + "]");
+      if (studyKeysById && study.studyId && studyKeysById[study.studyId]) {
+        idParts.push("citeKey:" + studyKeysById[study.studyId]);
+      }
+      if (info.doi) idParts.push(info.doi);
+      if (info.pmid) idParts.push("PMID:" + info.pmid);
+      if (info.citation) idParts.push("citation: \"" + info.citation + "\"");
+      lines.push("### " + (study.label || study.studyId || "") + " [" + idParts.join("; ") + "]");
       var vals = study.values || [];
       for (var vi = 0; vi < vals.length; vi++) {
         var val = vals[vi] || {};
         var loc = val.locator || {};
-        var locStr = loc.page || loc.section || stableJson(loc);
+        var locStr = loc.page || loc.section || loc.citation || stableJson(loc);
         lines.push("- " + val.field + ": " + val.value + " (locator: " + locStr + "; quote: \"" + val.quote + "\")");
       }
       lines.push("");
@@ -583,13 +695,14 @@
   function buildInputs(manifest) {
     validateManifest(manifest);
     var tokenTable = buildTokenTable(manifest.runs || []);
-    var references = manifest.references || [];
+    var merged = collectMergedReferences(manifest);
+    var references = merged.references;
     var promptsMod = G && G.SMD_RMD_PO_PROMPTS;
     var templateTex = promptsMod ? promptsMod.IMRAD_TEMPLATE :
       "\\documentclass{article}\n\\begin{document}\n\\section*{Abstract}\n\\section{Introduction}\n\\section{Methods}\n\\section{Results}\n\\section{Discussion}\n\\section*{References}\n\\end{document}\n";
     var guidelinesMd = promptsMod ? promptsMod.GUIDELINES : "# ResearchMD manuscript guidelines (IMRAD, Vancouver)\n";
     return {
-      ideaMd: renderIdea(manifest),
+      ideaMd: renderIdea(manifest, merged.studyKeysById),
       experimentalLogMd: renderLog(manifest, tokenTable),
       templateTex: templateTex,
       guidelinesMd: guidelinesMd,
@@ -597,6 +710,7 @@
       tokenTable: tokenTable,
       runs: manifest.runs || [],
       references: references,
+      studyKeysById: merged.studyKeysById,
       manifest: manifest
     };
   }
@@ -1181,13 +1295,23 @@
   function vancouver(entry, number) {
     var e = entry || {};
     var authors = e.authors || [];
+    var ext = e.externalIds || {};
+    var doi = e.doi || ext.DOI || "";
+    var pmid = e.pmid || ext.PMID || "";
+    if (!e.title && e.citation) {
+      var citStr = String(e.citation).replace(/\.+$/, "");
+      var outParts = [number + ". " + citStr + "."];
+      if (doi && citStr.indexOf(String(doi)) < 0) outParts.push(" doi:" + doi + ".");
+      if (pmid && citStr.indexOf(String(pmid)) < 0) outParts.push(" PMID:" + pmid + ".");
+      return outParts.join("").trim();
+    }
     var authorStr;
     if (authors.length > 6) {
       authorStr = authors.slice(0, 6).join(", ") + ", et al";
     } else {
       authorStr = authors.length ? authors.join(", ") : "[No authors listed]";
     }
-    var title = String(e.title || "").replace(/\.+$/, "");
+    var title = String(e.title || e.label || "").replace(/\.+$/, "");
     var parts = [number + ". " + authorStr + ". " + title + "."];
     var venue = e.venue || e.journal || "";
     if (isPlainObject(venue)) venue = venue.name || "";
@@ -1201,8 +1325,8 @@
       }
       parts.push(" " + tail + ".");
     }
-    if (e.doi) parts.push(" doi:" + e.doi + ".");
-    if (e.pmid) parts.push(" PMID:" + e.pmid + ".");
+    if (doi) parts.push(" doi:" + doi + ".");
+    if (pmid) parts.push(" PMID:" + pmid + ".");
     return parts.join("").trim();
   }
 
@@ -1266,6 +1390,13 @@
     return out;
   }
 
+  function isReferencesSectionHeading(sec) {
+    if (!sec) return false;
+    var sid = String(sec.id || "").toLowerCase();
+    var head = String(sec.heading || "").toLowerCase().replace(/^\d+\.\s*/, "").trim();
+    return sid === "references" || /(?:^|-)references$/.test(sid) || head === "references";
+  }
+
   function buildManuscript(opts) {
     var o = opts || {};
     var title = o.title || "";
@@ -1300,18 +1431,43 @@
     }
 
     var refEntries = [];
+    var seenKeys = {};
+    var seenIds = {};
+    function markSeen(entry, key) {
+      if (key) seenKeys[key] = true;
+      if (!entry) return;
+      var ext = entry.externalIds || {};
+      var d = String(entry.doi || ext.DOI || "").toLowerCase();
+      var p = String(entry.pmid || ext.PMID || "").toLowerCase();
+      if (d) seenIds["doi:" + d] = true;
+      if (p) seenIds["pmid:" + p] = true;
+      if (entry.studyId) seenIds["study:" + entry.studyId] = true;
+    }
+    function alreadySeen(entry, key) {
+      if (key && seenKeys[key]) return true;
+      if (!entry) return false;
+      var ext = entry.externalIds || {};
+      var d = String(entry.doi || ext.DOI || "").toLowerCase();
+      var p = String(entry.pmid || ext.PMID || "").toLowerCase();
+      if (d && seenIds["doi:" + d]) return true;
+      if (p && seenIds["pmid:" + p]) return true;
+      if (entry.studyId && seenIds["study:" + entry.studyId]) return true;
+      return false;
+    }
     var citedKeys = citationKeysInOrder(ordered);
     for (var ki = 0; ki < citedKeys.length; ki++) {
       var key = citedKeys[ki];
-      var number = ki + 1;
+      var number = refEntries.length + 1;
       var entry = byKey[key];
       if (!entry) {
+        seenKeys[key] = true;
         refEntries.push({ number: number, key: key, citation: "", doi: "", pmid: "", resolved: false });
         continue;
       }
       var ext = entry.externalIds || {};
       var doi = String(entry.doi || ext.DOI || "");
       var pmid = String(entry.pmid || ext.PMID || "");
+      markSeen(entry, key);
       refEntries.push({
         number: number,
         key: key,
@@ -1320,6 +1476,55 @@
         pmid: pmid,
         resolved: Boolean(doi || pmid)
       });
+    }
+
+    /* Ensure every verified included study from the citation library/manifest
+     * appears in the References list even when cited by study label (e.g.
+     * "Aronson 1948") without a DOI/PMID. Never invent fields. */
+    var allLibEntries = [];
+    for (var li = 0; li < references.length; li++) {
+      if (references[li] && references[li].key) allLibEntries.push(references[li]);
+    }
+    for (var lci = 0; lci < cmKeys.length; lci++) {
+      var cmEntry = citationMap[cmKeys[lci]];
+      if (cmEntry && cmEntry.isIncludedStudy) allLibEntries.push(cmEntry);
+    }
+    for (var ai = 0; ai < allLibEntries.length; ai++) {
+      var cand = allLibEntries[ai];
+      if (!cand || !cand.isIncludedStudy) continue;
+      if (!cand.citation && !cand.title && !cand.doi && !cand.pmid) continue;
+      if (alreadySeen(cand, cand.key)) continue;
+      var incNum = refEntries.length + 1;
+      var incExt = cand.externalIds || {};
+      var incDoi = String(cand.doi || incExt.DOI || "");
+      var incPmid = String(cand.pmid || incExt.PMID || "");
+      markSeen(cand, cand.key);
+      refEntries.push({
+        number: incNum,
+        key: cand.key,
+        citation: vancouver(cand, incNum),
+        doi: incDoi,
+        pmid: incPmid,
+        resolved: Boolean(incDoi || incPmid)
+      });
+    }
+
+    /* Populate any References section deterministically from verified entries. */
+    if (refEntries.length) {
+      var refLines = [];
+      for (var rli = 0; rli < refEntries.length; rli++) {
+        if (refEntries[rli].citation) refLines.push(refEntries[rli].citation);
+      }
+      var refBody = refLines.join("\n");
+      if (refBody) {
+        for (var oi = 0; oi < ordered.length; oi++) {
+          if (isReferencesSectionHeading(ordered[oi])) {
+            ordered[oi].id = "references";
+            ordered[oi].heading = "References";
+            ordered[oi].text = refBody;
+          }
+        }
+      }
     }
 
     var protocol = manifest.protocol || {};
@@ -1362,6 +1567,7 @@
   var YEAR_RE = /^(?:19|20)\d{2}$/;
   var REVIEWER_COUNT_RE = /\b\d+\s+(?:reviewers|assessors|screeners)\b|\b(?:reviewers|assessors|screeners)\s*(?:=|:)\s*\d+/gi;
   var THRESHOLD_RE = /\b(?:threshold|cutoff|alpha|significance level|type I error)\b[^.!?]{0,30}?\d+(?:\.\d+)?\\?%?|\b(?:heterogeneity|I2|I\u00b2)\b[^.!?]{0,30}?\b(?:25|50|75)\s*\\?%|\b(?:90|95|99)\s*\\?%[~\s]*(?:CI|confidence)\b/gi;
+  var EXPONENT_RE = /(?:\^\{?|\\textsuperscript\{)\s*\d+(?:\.\d+)?/g;
   var CITE_RE = /\\cite\{([^}]+)\}|\[@([A-Za-z0-9_:-]+)\]/g;
   var CLAIM_RE = /\b(?:reduc\w*|decreas\w*|increas\w*|improv\w*|worsen\w*|significant\w*|associat\w*|superior|inferior)\b/i;
   var WHETHER_RE = /\bwhether\b/i;
@@ -1402,7 +1608,7 @@
 
   function allowedNumbers(text) {
     var allowed = {};
-    var patterns = [REVIEWER_COUNT_RE, THRESHOLD_RE];
+    var patterns = [REVIEWER_COUNT_RE, THRESHOLD_RE, EXPONENT_RE];
     for (var pi = 0; pi < patterns.length; pi++) {
       var pat = patterns[pi];
       pat.lastIndex = 0;

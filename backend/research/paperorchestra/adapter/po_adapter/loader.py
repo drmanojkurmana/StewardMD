@@ -33,6 +33,7 @@ the hard gates (gates.py) reject any untokenised number in Results/Abstract.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -195,7 +196,128 @@ Integrity rules (hard gates enforce these in code before any reviewer score):
 """
 
 
-def _render_idea(manifest: dict) -> str:
+def _slug_cite_key(label: str, study_id: str, used_keys: set) -> str:
+    base = re.sub(r"[^a-z0-9]+", "_", str(label or "").lower().replace("&", " ")).strip("_")
+    if not base:
+        base = re.sub(r"[^a-z0-9_]+", "_", str(study_id or "study").lower()).strip("_")
+    if not base:
+        base = "study"
+    key = base
+    suffix = 2
+    while key in used_keys:
+        key = f"{base}_{suffix}"
+        suffix += 1
+    used_keys.add(key)
+    return key
+
+
+def _extract_study_locator_info(study: dict) -> dict:
+    src = study.get("source") if isinstance(study.get("source"), dict) else {}
+    vals = study.get("values") if isinstance(study.get("values"), list) else []
+    citation = str(src.get("citation") or "").strip()
+    doi = str(src.get("doi") or "").strip()
+    pmid = str(src.get("pmid") or "").strip()
+    title = str(src.get("title") or "").strip()
+    authors = list(src.get("authors")) if isinstance(src.get("authors"), list) else []
+    year = src.get("year")
+    venue = str(src.get("venue") or "").strip()
+    for val in vals:
+        loc = val.get("locator") if isinstance(val, dict) and isinstance(val.get("locator"), dict) else None
+        if not loc:
+            continue
+        if not citation and isinstance(loc.get("citation"), str) and loc["citation"].strip():
+            citation = loc["citation"].strip()
+        if not doi and isinstance(loc.get("doi"), str) and loc["doi"].strip():
+            doi = loc["doi"].strip()
+        if not pmid and isinstance(loc.get("pmid"), str) and loc["pmid"].strip():
+            pmid = loc["pmid"].strip()
+        if not title and isinstance(loc.get("title"), str) and loc["title"].strip():
+            title = loc["title"].strip()
+        if not authors and isinstance(loc.get("authors"), list) and loc["authors"]:
+            authors = list(loc["authors"])
+        if year is None and loc.get("year") is not None:
+            year = loc["year"]
+        if not venue and isinstance(loc.get("venue"), str) and loc["venue"].strip():
+            venue = loc["venue"].strip()
+    return {
+        "citation": citation,
+        "doi": doi,
+        "pmid": pmid,
+        "title": title,
+        "authors": authors,
+        "year": year,
+        "venue": venue,
+    }
+
+
+def collect_merged_references(manifest: dict) -> tuple[list, dict]:
+    base_refs = manifest.get("references") or []
+    out = []
+    used_keys = set()
+    by_doi = {}
+    by_pmid = {}
+    by_study_id = {}
+    for ref in base_refs:
+        if not isinstance(ref, dict) or not ref.get("key"):
+            continue
+        copy_ref = dict(ref)
+        used_keys.add(copy_ref["key"])
+        if copy_ref.get("doi"):
+            by_doi[str(copy_ref["doi"]).lower()] = copy_ref
+        if copy_ref.get("pmid"):
+            by_pmid[str(copy_ref["pmid"]).lower()] = copy_ref
+        if copy_ref.get("studyId"):
+            by_study_id[copy_ref["studyId"]] = copy_ref
+        out.append(copy_ref)
+
+    study_keys_by_id = {}
+    for study in manifest.get("evidence") or []:
+        if not isinstance(study, dict):
+            continue
+        info = _extract_study_locator_info(study)
+        sid = study.get("studyId") or ""
+        existing = by_study_id.get(sid) if sid else None
+        if not existing and info["doi"]:
+            existing = by_doi.get(info["doi"].lower())
+        if not existing and info["pmid"]:
+            existing = by_pmid.get(info["pmid"].lower())
+        if existing:
+            existing["isIncludedStudy"] = True
+            if study.get("label") and not existing.get("label"):
+                existing["label"] = study["label"]
+            if info["citation"] and not existing.get("citation"):
+                existing["citation"] = info["citation"]
+            if sid:
+                existing["studyId"] = sid
+                study_keys_by_id[sid] = existing["key"]
+            continue
+        if not (info["citation"] or info["title"] or info["doi"] or info["pmid"] or study.get("label")):
+            continue
+        key = _slug_cite_key(study.get("label", ""), sid, used_keys)
+        entry = {"key": key, "isIncludedStudy": True, "studyId": sid}
+        if study.get("label"):
+            entry["label"] = study["label"]
+        if info["title"]:
+            entry["title"] = info["title"]
+        if info["citation"]:
+            entry["citation"] = info["citation"]
+        if info["authors"]:
+            entry["authors"] = info["authors"]
+        if info["year"] is not None:
+            entry["year"] = info["year"]
+        if info["venue"]:
+            entry["venue"] = info["venue"]
+        if info["doi"]:
+            entry["doi"] = info["doi"]
+        if info["pmid"]:
+            entry["pmid"] = info["pmid"]
+        if sid:
+            study_keys_by_id[sid] = key
+        out.append(entry)
+    return out, study_keys_by_id
+
+
+def _render_idea(manifest: dict, study_keys_by_id: dict | None = None) -> str:
     p = manifest.get("protocol") or {}
     lines = [f"# Protocol: {p.get('title', '')}", "",
              f"Research question: {p.get('question', '')}",
@@ -213,12 +335,21 @@ def _render_idea(manifest: dict) -> str:
         lines.append("")
     lines.append("## Verified evidence (study-level, human-verified)")
     for study in manifest.get("evidence") or []:
-        src = study.get("source") or {}
-        ids = " ".join(x for x in [src.get("doi"), ("PMID:" + src["pmid"]) if src.get("pmid") else ""] if x)
-        lines.append(f"### {study.get('label', study.get('studyId', ''))} [{ids}]")
+        info = _extract_study_locator_info(study)
+        id_parts = []
+        sid = study.get("studyId") or ""
+        if study_keys_by_id and sid and sid in study_keys_by_id:
+            id_parts.append(f"citeKey:{study_keys_by_id[sid]}")
+        if info["doi"]:
+            id_parts.append(info["doi"])
+        if info["pmid"]:
+            id_parts.append(f"PMID:{info['pmid']}")
+        if info["citation"]:
+            id_parts.append(f"citation: \"{info['citation']}\"")
+        lines.append(f"### {study.get('label', sid)} [{'; '.join(id_parts)}]")
         for value in study.get("values") or []:
             loc = value.get("locator") or {}
-            loc_str = loc.get("page") or loc.get("section") or json.dumps(loc, sort_keys=True)
+            loc_str = loc.get("page") or loc.get("section") or loc.get("citation") or json.dumps(loc, sort_keys=True)
             lines.append(f"- {value.get('field')}: {value.get('value')} "
                          f"(locator: {loc_str}; quote: \"{value.get('quote')}\")")
         lines.append("")
@@ -279,7 +410,7 @@ def build_inputs(manifest: dict, workdir) -> Inputs:
     figures.mkdir(parents=True, exist_ok=True)
 
     token_table = build_token_table(manifest.get("runs") or [])
-    references = manifest.get("references") or []
+    references, study_keys_by_id = collect_merged_references(manifest)
 
     idea = materials / "idea.md"
     log = materials / "experimental_log.md"
@@ -287,7 +418,7 @@ def build_inputs(manifest: dict, workdir) -> Inputs:
     guidelines = materials / "guidelines.md"
     figures_info = figures / "info.json"
 
-    idea.write_text(_render_idea(manifest), encoding="utf-8")
+    idea.write_text(_render_idea(manifest, study_keys_by_id), encoding="utf-8")
     log.write_text(_render_log(manifest, token_table), encoding="utf-8")
     template.write_text(_IMRAD_TEMPLATE, encoding="utf-8")
     guidelines.write_text(_GUIDELINES, encoding="utf-8")
