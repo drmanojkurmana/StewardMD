@@ -73,6 +73,9 @@ on. Timer / Pomodoro / Stopwatch, goal ring, answers during a session counted an
 summary, timeline, week, recent. App blocking through the native `SmdFocus` plugin (iOS built in a Mac session; JS fails
 open without it). Strict mode is a Pro extra once `smd_prep_pro_enforce` is on. Brief and plugin contract:
 [[plans/PrepNucleus-Focus]]. Tests: `test/prep-focus.test.mjs`, `test/run-prep-focus-ui.mjs`. Not seen on a phone yet.
+iOS native (2026-11-28, branch `feat/prep-focus-ios`): `ios/App/App/SmdFocusPlugin.swift` (+ `SmdFocusShared.swift`) and
+extensions `ios/App/FocusMonitor`, `FocusShield`, `FocusShieldAction` (bundle IDs `in.stewardmd.app.Focus*`). Extensions
+build and the plugin type-checks; full App build, simulator run and the on-phone acceptance are still open (see the plan).
 
 ## Startup clip (2026-11-26, `prep-startup.js?v=pnstart3`, loader `prep199`)
 Owner supplied two silent intro clips (cosmos to cell to logo on cream). `prep/startup/prep-startup-v.mp4` (1512x2688,

@@ -4,6 +4,10 @@
 <dict>
 	<key>aps-environment</key>
 	<string>production</string>
+	<!-- PrepNucleus Focus app blocking (App/SmdFocusPlugin.swift, Screen Time). TestFlight / App Store need
+	     Apple's Family Controls (Distribution) approval for this app and each Focus* extension. -->
+	<key>com.apple.developer.family-controls</key>
+	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>group.in.stewardmd.app</string>

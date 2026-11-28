@@ -21,6 +21,25 @@ Regain teardown and the full feature table: the Claude Docs page "Regain teardow
 - Tests: `test/prep-focus.test.mjs` (engine), `test/run-prep-focus-ui.mjs` (headless, `SHOTS=<dir>`).
 
 ## Phase 2 (Mac session): iOS `SmdFocus` plugin
+**Status 2026-11-28, branch `feat/prep-focus-ios` (from `feat/onboard-story`):** code written.
+- `ios/App/App/SmdFocusPlugin.swift` (registered in `MainViewController.capacitorDidLoad`), `ios/App/App/SmdFocusShared.swift`
+  (App Group keys `prepFocusSelection`, `prepFocusEndsAt`, `prepFocusStrict`; `DeviceActivityName.prepFocus`; store
+  `prepFocus`), compiled into App, FocusMonitor and FocusShield.
+- Extension targets (synchronized folders, like `StewardMDExtension`), embedded in App, iOS 17.0, Family Controls + App
+  Group entitlements each: `in.stewardmd.app.FocusMonitor` (`ios/App/FocusMonitor`), `in.stewardmd.app.FocusShield`
+  (`ios/App/FocusShield`, icon `PrepMark` from `prep/art/logo-mark-amber-96.webp`), `in.stewardmd.app.FocusShieldAction`.
+  `App.entitlements` has `com.apple.developer.family-controls`.
+- Differs from the table below: the shield's button is "OK" and closes the blocked app (iOS does not let a shield open
+  another app), no secondary button. A picked category also shields that category's websites (`webDomainCategories`).
+  `stop()` keeps the selection (it is the student's pick) and clears only the session keys. The monitor leaves the
+  shield up when `prepFocusEndsAt` is more than a minute ahead (a "Finish in 5 minutes" restart wrote a newer end before
+  the old schedule stopped). Sessions under 15 minutes start the DeviceActivity interval in the past; an in-app Timer and
+  `load()` (end already passed) clear as backups.
+- Verified: the three extensions build for the simulator with no warnings; the plugin type-checks against Capacitor.
+  Open: full `App` scheme build (needs `-skipPackagePluginValidation` for mlx-swift's CudaBuild plugin), simulator run,
+  phone acceptance (Screen Time does not shield in the Simulator), Family Controls (Distribution) request for the app
+  and the three extension bundle IDs (owner files it; needed for TestFlight / App Store only).
+
 The JS already calls these. Register like `SmdDevicePlugin` in `ios/App/App/MainViewController.swift`
 (`bridge?.registerPluginInstance(...)`, `CAPBridgedPlugin`, `jsName = "SmdFocus"`). Every method resolves; never reject
 for "not available" (JS treats null/failed as "no blocking").
