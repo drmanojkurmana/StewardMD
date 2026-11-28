@@ -68,7 +68,7 @@ try {
   await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_SETUP=false; window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
-  await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.removeItem("smd_prep_v1");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
+  await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.removeItem("smd_prep_v1"); localStorage.setItem("smd_prep_focus","0");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await call("Page.navigate", { url: BASE + "?prep=1" }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean);
 
   // Wall clock under test control: Focus reads Date.now(), so the session can be moved forward.
@@ -80,13 +80,13 @@ try {
       authorize:function(){__nat.push("authorize"); return Promise.resolve({authorized:true});}, pick:function(){__nat.push("pick"); return Promise.resolve({apps:3});},
       start:function(o){__nat.push("start:"+(o.endsAt?"t":"w")+(o.strict?"s":"")); return Promise.resolve({shielding:true});}, stop:function(){__nat.push("stop"); return Promise.resolve({});} }; return 1;`);
 
-  // Flag off first: the Play row is still the Focus room.
+  // Flag turned off ("0") first: the Play row is still the Focus room.
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!window.PREP_PLAY && !!document.querySelector("#smdPrep [data-act=v-focus]");`, 20000), "PrepNucleus opens with the Play Focus row");
   ok(await ev(`return !window.PREP_FOCUS && /Focus room/.test(document.querySelector("#smdPrep [data-act=v-focus]").textContent);`) === true, "flag off: no PREP_FOCUS, the row is the Focus room");
 
-  // Flag on.
-  await ev(`localStorage.setItem("smd_prep_focus","1"); return 1;`);
+  // Flag unset: on by default (owner 2026-11-28).
+  await ev(`localStorage.removeItem("smd_prep_focus"); return 1;`);
   await call("Page.navigate", { url: BASE + "?prep=1" }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await theme(false);
   await ev(`window.__off=0; var _n=Date.now.bind(Date); Date.now=function(){return _n()+window.__off;}; window.__nat=[]; window.Capacitor=window.Capacitor||{}; window.Capacitor.Plugins=window.Capacitor.Plugins||{};
     window.Capacitor.Plugins.SmdFocus={ status:function(){__nat.push("status"); return Promise.resolve({available:true,authorized:true,apps:3,categories:1,domains:0});},

@@ -20,8 +20,8 @@
 
    Loaded by prep-loader.js after prep.js (optional). prep.js forwards every data-act starting "fo-" here, asks back()
    first, calls noteAnswer() from record() and leave() on close. prep-play.js hands its Focus room row to open().
-   Flag smd_prep_focus, default OFF: localStorage "1" or ?focus=1 turns it on; "0" or ?focus=0 leaves PREP_FOCUS
-   undefined (the Play Focus room stays as it was).
+   Flag smd_prep_focus, default ON (owner 2026-11-28, for the TestFlight build with iOS app blocking): localStorage "0"
+   or ?focus=0 leaves PREP_FOCUS undefined (the Play Focus room stays as it was); anything else, or nothing, turns it on.
    Store (smd_prep_v1): fo = { goal (min a day), mode, dur, pomo, strict, block, d: { "YYYY-MM-DD": min }, log: [ { s, e,
    m, tag, q, r, ok } ] newest last, at most 200 }; fxm["YYYY-MM"] (focus minutes a month) is shared with Play's Wrapped. */
 (function (G) {
@@ -122,9 +122,9 @@
   function flagOn() {
     try {
       var q = (G.location.search.match(/[?&]focus=([^&]+)/) || [])[1];
-      if (q != null) return q === "1" || q === "on" || q === "true";
-      return G.localStorage.getItem("smd_prep_focus") === "1";
-    } catch (e) { return false; }
+      if (q != null) return !(q === "0" || q === "off" || q === "false");
+      return G.localStorage.getItem("smd_prep_focus") !== "0";
+    } catch (e) { return true; }
   }
   if (!flagOn()) return;
 

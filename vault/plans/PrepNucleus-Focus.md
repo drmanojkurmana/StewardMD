@@ -9,7 +9,7 @@ Owner decision 2026-11-28: **iOS work runs in a separate Mac session** (Xcode + 
 Regain teardown and the full feature table: the Claude Docs page "Regain teardown, StewardMD onboarding plan, PrepNucleus Focus".
 
 ## Phase 1 (done, branch `feat/prep-focus`): JS only
-- `prep-focus.js` (`window.PREP_FOCUS`) + `prep-focus.css`. Flag `smd_prep_focus`, default **OFF** (`?focus=1` / `"1"`).
+- `prep-focus.js` (`window.PREP_FOCUS`) + `prep-focus.css`. Flag `smd_prep_focus`, default **ON** since 2026-11-28 (owner, for the TestFlight build; loader `prep204`); `"0"` or `?focus=0` turns it off.
   Off: `PREP_FOCUS` stays undefined and the Play "Focus room" is unchanged.
 - Entry: Play section row "Focus" (was "Focus room"). `prep-play.js` hands `v-focus` and `open("focus")` to `PREP_FOCUS.open`.
 - Hooks in `prep.js`: `fo-` data-act prefix, `back()`, `leave()`, `noteAnswer(it, ok)` from `record()`.
