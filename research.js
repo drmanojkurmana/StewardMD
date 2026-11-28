@@ -26,6 +26,26 @@
   }
   SMD.esc = esc;
 
+  /* The standalone ResearchMD mark from the logo sheet (brief N): a vertical bar,
+   * the R bowl, two parallel diagonal legs. It shares its exact geometry with the
+   * header logo (viewBox 0 0 470 589) so every size of the mark is the same shape;
+   * each path pins fill="currentColor" stroke="none" because badge CSS sets
+   * fill:none on bare svgs and presentation attributes outrank inherited values. */
+  var RMD_MARK_PATHS = [
+    "M0 0h110v589H0z",
+    "M135 0h122a175 175 0 0 1 0 350H135v-85h122a90 90 0 0 0 0-180H135z",
+    "M135 372h60l140 217h-60z",
+    "M250 372h80l140 217h-80z"
+  ];
+  function rmdMarkSvg(height, cls) {
+    var w = Math.round(height * 470 / 589 * 100) / 100;
+    var h = '<svg' + (cls ? ' class="' + cls + '"' : '') + ' viewBox="0 0 470 589" aria-hidden="true" focusable="false" width="' + w + '" height="' + height + '" style="display:block;width:' + w + 'px;height:' + height + 'px">';
+    for (var i = 0; i < RMD_MARK_PATHS.length; i++) h += '<path fill="currentColor" stroke="none" d="' + RMD_MARK_PATHS[i] + '"/>';
+    return h + '</svg>';
+  }
+  SMD.mark = rmdMarkSvg;
+  G.SMD_RMD_MARK = { svg: rmdMarkSvg };
+
   /* Native CapacitorHttp plugin reference when available. */
   function capHttp() {
     return (G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.CapacitorHttp) || G.CapacitorHttp || null;
@@ -892,7 +912,7 @@
     var costLine = o.costText || (cost > 0 ? "Costs about " + cost + " MaiK token" + (cost === 1 ? "" : "s") : "No MaiK tokens needed");
     var h = '<div class="rmd-ai-bar">';
     h += '<div class="rmd-ai-actions">';
-    h += '<button type="button" class="rmd-btn ' + askCls + '" data-rmd-ai="ask"' + (st.busy ? " disabled" : "") + '><span class="rmd-ai-mark" aria-hidden="true">R</span>' + esc(askLbl) + '</button>';
+    h += '<button type="button" class="rmd-btn ' + askCls + '" data-rmd-ai="ask"' + (st.busy ? " disabled" : "") + '><span class="rmd-ai-mark" aria-hidden="true">' + rmdMarkSvg(14) + '</span>' + esc(askLbl) + '</button>';
     h += '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-ai="manual">' + esc(manualLbl) + '</button>';
     h += '</div>';
     h += '<p class="rmd-ai-cost">' + esc(costLine) + '</p>';

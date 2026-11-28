@@ -1,82 +1,73 @@
-# ResearchMD Thesis Chapters & Performance Audit Report (Brief K)
+# Sci-Fix N Report: ResearchMD R Symbol on the Home Tile and In-App Marks
 
-Branch: `rmd-thesis-chapters`  
-Worktree: `/Volumes/WD BLACK SN7100 1TB Media/po-wire/wt/scifixK`
+Branch: `rmd-logo-tile` (from origin/main @ 71727757a)
+Worktree: `/Volumes/WD BLACK SN7100 1TB Media/po-wire/wt/scifixN`
 
-## Part 1: Chapter-Aware Thesis-to-Paper
+## What the brief asked
+The owner circled the ResearchMD tile on the home grid (green sphere, flask glyph, BETA badge) and said "Use this logo here too". Logo sheet 01 is the standalone R symbol: a separate vertical bar on the left, an R bowl, two parallel diagonal legs. The same symbol was to appear where ResearchMD draws a mark inside the tool, stored once and reused. Item 4 of the brief (owner approved) also asked for the tile subtitle to change from "Meta-analysis with sources" to "Research to publication".
 
-### Architecture & Implementation (`research-screen-thesis.js`)
-- **Hierarchical Heading Detection (`detectThesisHeadings`, `buildChapterTree`, `sliceChapterPages`)**:
-  - Consumes `SMD_RUST_PDF.lines()` (`{ tx, size, bold, italic, caps }`) for PDFs (`<= 500` pages), `.docx` Word styles (`Heading 1`/`2`/`3`, `outlineLvl`, `<w:b/>` bold in `parseDocx`), and `pdf.js` font-size transforms (`joinPdfTextItemsWithLines`) as fallback.
-  - Dynamically infers median body font size per thesis and uses font size ratio, `line.bold` (with graceful size/pattern degradation when `line.bold` is absent), all-caps + next-line wrapped title merging (`CHAPTER N` + multi-line title as in Leiden/Utrecht PhD theses), Roman/decimal numbering (`3.1`, `3.1.2`), and Indian MD/MS canonical headings (`Introduction`, `Aims and Objectives`, `Review of Literature`, `Materials and Methods`, `Observations and Results`, `Discussion`, `Summary`, `Conclusion`, `Bibliography/References`, `Annexures/Proforma/Consent/Master chart`).
-  - Filters out running page headers/numbers, TOC dot-leader lines, and small bold table-column headers (`size < bodySize * 0.98`).
-- **Chapter-to-Journal Mapping (`mapChaptersToJournal`) & User Override UI**:
-  - Automatically skips front matter (`Certificates`, `Declaration`, `Acknowledgement`, `Contents`, `List of Tables/Abbreviations`) and back matter/appendices (`Annexures`, `Proforma`, `Consent`, `Master chart`) by mapping them to `excluded` with an explicit reason — nothing is silently dropped (`#rmdExcludedSummary` lists excluded chapters).
-  - Maps `Introduction` + `Aims and Objectives` + condensed `Review of Literature` (`condenseReview: true`, 3–5 points with citations) to Introduction; `Materials and Methods` to Methods; `Observations and Results` to Results (referencing detected thesis tables); `Discussion` to Discussion; `Conclusion`/`Summary` to Conclusion; `Bibliography/References` to References (filtering down to cited references via `extractThesisReferences(allPages, { refPages, citedText })`).
-  - Supports multi-study PhD subheading auto-splitting (`auto` option when a chapter embeds `Introduction / Methods / Results / Discussion`).
-  - Renders a compact `#rmdChapterMap` card on the Draft step with a `44px+` **Adjust mapping** toggle (`#rmdChapterMapToggle`) and per-chapter target selectors (`[data-rmd-chapter-id]`) persisted in `thesis.chapterMap`.
-  - Fixed a real DOM interaction bug caught on live screenshot verification: `emoji-icons.js` was rewriting `"pp. 62-77"` inside `#rmdChapterMap` via its textbook citation scrubber into `"Standard textbooks: Harrison's..."`. Added `.smd-books-keep` on `#rmdChapterMap` and switched labels to `"Pages X to Y"` / `"Page X"`.
-  - Fixed `refIsCitedInText` to parse multi-reference citations like `[1, 2]` and `[1-3]` cleanly in addition to `[1]` / `(1)`.
-- **Bounded Parallel Section Drafting & Single-Section Retry**:
-  - `orchestrateThesisDraft` feeds each target section (`Introduction`, `Methods`, `Results`, `Discussion`, `Conclusion`) only its mapped chapter pages, sub-chunking chapters > 13,000 chars (up to 4 parts within T1 ceiling), drafting with bounded concurrency (`runBoundedPool(tasks, 3)`), merging multi-part notes, synthesizing `Abstract` last from drafted body + front summary, and enforcing journal word limits deterministically after merge.
-  - Preserves existing fast path (`<= 13,500` chars and no manual overrides) as a single consented AI call.
-  - `#rmdDraftProgressList` renders live per-section status (`Done (N words)`, `Drafting...`, `Failed`, `Skipped`) and per-section **Retry** buttons (`[data-rmd-retry-section]`) to re-run only a failed section without redoing completed sections (`retrySingleSection`).
+## Implementation
 
-### Part 1 Benchmarks (Chrome Headless 390x844, 4x CPU Throttling, 1200 ms per AI call)
+### 1. The standalone symbol, stored once (`research.js`, after `SMD.esc`)
+- `RMD_MARK_PATHS` holds the four paths of the symbol: bar (`M0 0h110v589H0z`), bowl with stem (`M135 0h122a175 175 0 0 1 0 350H135v-85h122a90 90 0 0 0 0-180H135z`), short leg (`M135 372h60l140 217h-60z`), long leg (`M250 372h80l140 217h-80z`).
+- The geometry is exactly the header logo's `rmd-logo` viewBox `0 0 470 589`, so every size of the mark is the same shape and there is one source of truth for the symbol.
+- `rmdMarkSvg(height, cls)` emits the inline SVG: filled paths with `fill="currentColor" stroke="none"` as presentation attributes (badge CSS sets `fill: none` on bare svgs; a presentation attribute on the path outranks an inherited value), explicit `width`/`height` attributes plus inline `style="display:block;width:Wpx;height:Hpx"` because some contexts ignore attribute-only sizing (measured: the tile svg computed 21.985px square with attributes alone; inline style pins it exactly).
+- Exported twice for the two consumers: `SMD.mark` (in-IIFE) and `window.SMD_RMD_MARK = { svg: rmdMarkSvg }`.
 
-| Thesis Fixture | Pages | Chapters (Excluded) | Rust `lines()` (ms) | Tree + Map (ms) | Read + Split Total (ms) | Brief J Seq Calls / Wall Time | Brief K Calls / Parallel Wall Time | Speedup vs Brief J |
-| --- | ---: | ---: | ---: | ---: | ---: | --- | --- | ---: |
-| Synthetic 100p thesis | 100 | 10 (3) | 207.6 | 31.1 | **238.7 ms** | 20 calls / 24,000 ms | 20 calls / **10,866.2 ms** | **2.21x** |
-| Real RCT (`rct-lehr-2022-spinal-fusion.pdf`, 13.7 MB) | 175 | 17 (9) | 325.5 | 76.9 | **402.4 ms** | 23 calls / 27,600 ms | 17 calls / **8,435.6 ms** | **3.27x** |
-| Real Cohort (`obs-campbell-2017-heart-failure.pdf`, 9.97 MB) | 341 | 18 (7) | 846.5 | 181.6 | **1,028.1 ms** | 44 calls / 52,800 ms | 20 calls / **12,080.5 ms** | **4.37x** |
+### 2. Home tile (`home.js`)
+- `toolMark(t)` returns the symbol for the research tile via `window.SMD_RMD_MARK.svg(24, "rmd-tile-mark")`; if research.js failed to load, the tile falls back to the Material flask it always had (guarded, like the existing `SMD_MAIK_MARK` pattern).
+- `homeToolTile`: the mark replaces the flask inside the same `liveIcon` wrapper (`<span class="rds-icon ai-live" data-live="tilt">`), so the tile keeps the identical live-motion treatment, white color, 70px green sphere, BETA badge, label, subtitle and tap target of every other tile. Measured on the built page: svg 19.15 x 24 css px, vertically centered (22.9 above / 22.9 below in the 70px badge), `color: rgb(255,255,255)`, 4 paths, `animationName liveTilt` still running on the wrapper.
+- `listIcon` (All tools / Customize lists): static mark at 24px in the same `rds-icon` span the other tools use.
+- BETA badge, "ResearchMD" label and the `data-act="research"` tap target are untouched.
 
-- Target check: Read+split of 100p PDF is **238.7 ms** (12.6x under `< 3,000 ms` target). Parallel wall time is **2.21x–4.37x** faster than Brief J sequential drafting (`>= 2x` target met on all three).
+### 3. In-app marks
+- Ask MaiK buttons (`research.js` `aiBarHtml`, `research-screen-extract.js` `aiBarHtml`): the `<span class="rmd-ai-mark">R</span>` text is now the 14px-high symbol (11.17 x 14). The chip itself is unchanged (18px `--rmd-acc-grad` rounded square, white foreground), so the mark inherits exactly the color and contrast the letter R had.
+- `research-screen-extract.js` loads before `research.js` but renders at click time, so it reads `G.SMD_RMD_MARK` with the plain "R" as a fallback.
+- The ResearchMD header was checked: it already renders the full two-tone logo SVG (bar + bowl + legs as `rmd-logo-a`/`rmd-logo-b` paths), not a plain R, so it is left as the two-tone brand version. "RStudy" is a text button label, not a mark, and stays text.
 
----
+### 4. Two-tone decision
+The brief allows a two-tone version (blue bar, cream/ink R) if it passes contrast in light and dark. On the Ask MaiK chip the bar would sit `#2457ff` on the `--rmd-acc-grad` blue chip: about 1.35:1, far below 3:1. Both themes use the same blue chip, so the monochrome `currentColor` symbol is the only variant that passes everywhere; the two-tone version stays where it already passes (the header logo on cream/dark backgrounds).
 
-## Part 2: Speed Audit (Measured on Chrome 390px 4x CPU Throttle + Python Backend)
+### 5. Rendering note (documented, inherent)
+At the 14px chip size the gap between bar and bowl is 25/470 of the width, about 0.6 css px (1.19 device px at dsf 2). That is the sheet's own geometry at small sizes, not a defect of the redraw; at the 24px tile size the gap is about 1.0 css px and reads cleanly. The `#researchMD` context renders its UI at a uniform 0.95 scale (pre-existing; the old 18px chip computed 17.09px too), which shrinks the mark proportionally with everything around it.
 
-### Top 15 Measured Hotspots
+### 6. Tile subtitle (brief item 4, owner approved)
+- `home.js` `HOME_TOOLS` research entry: `sub: "Meta-analysis with sources"` is now `sub: "Research to publication"`.
+- `git grep "Meta-analysis with sources"` returns only this one source. The Home grid, the search index and the All tools / Customize lists all read the same `HOME_TOOLS` entry (via `window.SMD_HOME_TOOLS`, `orderedHomeTools` and the `hv-at-row` builder), so there is no second copy to change. The "what's new" / Try card uses `T.desc(a) || t.sub` and therefore picks the new line up automatically.
+- No em dash; length is 23 characters, the same two-line fit the old subtitle had.
 
-Recurrence classifications:  
-`(a)` algorithmic fix in place · `(b)` offload to Web Worker · `(c)` existing Rust API (`SMD_RUST_PDF` / `rust/research-stats`) · `(d)` new Rust port proposal
+## Cache busting
+- `index.html`: `-scin1` appended to the `?v=` chains of `research-screen-extract.js` (line 2501), `research.js` (line 2546) and `home.js` (line 2605); all other tokens kept.
+- `sw.js` line 16: `-scin1` appended to the single `CACHE` string after `-scik1`; all earlier markers kept.
 
-| # | Hotspot | Input Size & Frequency | Before (ms) | After (ms) | Blocks UI? | Rec | Notes & Fix Summary |
-| ---: | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | Pure-JS SHA-256 fallback (`research-ondevice-pdf.js`) | 25 MB PDF; per upload when `crypto.subtle` absent | 1,153.1 (1,327.0) | 1,153.1 | Yes | `(b)` | Normal devices use async WebCrypto (`74.8 ms`). Move pure-JS fallback into a Web Worker if targeting insecure/legacy WebViews. |
-| 2 | Rust WASM `SMD_RUST_PDF.lines()` on 341p thesis (`vendor/rust-pdf/rust-pdf.js`) | 341p / 9.97 MB; once per PDF upload | 777.3–846.5 | 777.3–846.5 | Yes | `(c)` / `(b)` | Already uses Rust WASM `(c)`; wrap calls in a dedicated Web Worker `(b)` to keep 60fps scroll uninterrupted on 300+ page theses. |
-| 3 | JS Cox PH + Schoenfeld (`research-stats.js` `coxPartial`, `schoenfeld`) | 10k rows: 365 ties (4x Chrome) / 2k unique ties (Node) | **544.7** (4x 365t) / **908.4** (Node 2kt) | **40.8** (4x 365t) / **16.0 + 9.4** (Node 2kt) | Main in fallback/Node | **`(a)` FIXED** | Replaced O(B * N) risk-set rescan with O(N) backward suffix cumulative scan when `eta span <= 600`: **13.4x–56.8x speedup**. |
-| 4 | pdf.js text extraction (`syn100` / `lehr175`) | 100p / 175p PDF; fallback when Rust skips (`>500p`) | 393.6 / 329.2 | 393.6 / 329.2 | Partial | `(c)` | Decodes in pdf.js worker; bypassed on text PDFs `<= 500p` by `SMD_RUST_PDF.lines()`. |
-| 5 | Rust WASM `SMD_RUST_PDF.lines()` on 175p thesis | 175p / 13.7 MB; once per upload | 215.6–325.5 | 215.6–325.5 | Yes | `(c)` / `(b)` | Move Rust WASM execution to a Web Worker `(b)` (proposal). |
-| 6 | Chapter tree + mapping on 341p thesis (`buildChapterTree`, `mapChaptersToJournal`) | 341p (~12k lines); once per upload | 129.7–181.6 | 129.7–181.6 | Yes | `(b)` | Single-pass over lines; co-locate in the PDF Web Worker if moved off main thread. |
-| 7 | Client ROC + DeLong CI (`research-stats.js` `roc` + `research-screen-masterchart.js` `runRoc`) | 10,000 rows x 2 markers; per ROC click | **85.0–106.7** UI block | **7.3 UI block** (147.8 Worker) | Was Yes | **`(b)` FIXED** | Added `roc`/`aucBand` to `research-stats-worker.js`, synced stale `?v=` importScripts token, added `SMD_RMD_ONDEVICE_STATS.roc()`, offloaded `rows >= 250` cleanly. |
-| 8 | Python Cox PH + Schoenfeld (`backend/research/stats/survival.py`) | 10k rows x 3 covs (365 ties / 2k unique ties) | **106.13** (365t) | **69.01** (365t) / **88.95** (2kt) | No (server) | **`(a)` FIXED** | Added vectorized `np.cumsum` suffix cumulative scan in `_efron_terms` and `_schoenfeld_ph_test` replacing `X[start:]` per-block slice loops. |
-| 9 | JS Table 1 summary (`research-stats.js` `table1`) | 10k rows x 6 variables; per Table 1 click | 104.7 (Node) | 104.7 | Yes | `(b)` | `table1` is already allowlisted in `research-stats-worker.js`; route `>= 500` row runs off main thread in a follow-up. |
-| 10 | JS Logistic IRLS (`research-stats.js` `logistic`) | 10k rows x 5 predictors; per regression run | 93.7–138.2 | 93.7–138.2 | Worker when OD on | `(d)` | Runs in `research-stats-worker.js` when `onDeviceV2` is active; propose Rust linear-algebra port in `rust/research-stats` for 50k–100k cohorts. |
-| 11 | Client/Worker WebCrypto `sha256` (`research-ondevice-pdf.js` / `research-ondevice-stats.js`) | 25 MB buffer; once per upload/job | 74.8–76.0 | 74.8–76.0 | No (async) | `(a)` FIXED | Added `TextEncoder` fast path in `research-ondevice-stats.js` before `crypto.subtle.digest` to skip JS byte-array growth on big CSV strings. |
-| 12 | Python PHI scanner (`po_adapter/phi.py` `scan`) | 300k chars; per cloud job | 58.55–67.98 | 58.55–67.98 | No (server) | `(a)` / `(d)` | Combine rule regexes into a fast prefilter or propose Rust Aho-Corasick binding for multi-MB corpora. |
-| 13 | Thesis number grounder (`research-screen-thesis.js` `verifyNumbers`, `findNumber`) | 2k-word draft (500 tokens) vs 341p Campbell | **46.7** (4x Chrome) | **7.8** (4x Chrome) | Yes | **`(a)` FIXED** | Added per-call `tokCache` for duplicate tokens plus binary-search cached table offsets in `findNumber`: **6.0x speedup**. |
-| 14 | Record deduplication (`functions/api/research/_dedup.js` `dedupRecords`) | 5,000 RIS records; per search merge | 46.0–94.8 | 46.0–94.8 | No (CF Worker) | `(a)` / `(d)` | Flatten inner `[key, seen]` array allocations, or propose Rust WASM dedup+parser for 20k+ Systematic Review imports. |
-| 15 | Client DOCX ZIP parse (`parseDocx`, 12 MB) & Python `docx_export` (10k words) | 12 MB client `.docx` / 10k-word export | 43.7–46.9 / 33.45–43.06 | 43.7–46.9 / 33.45–43.06 | Client parse yes | `(d)` | Fast today; propose Rust WASM streaming ZIP+XML extractor only if targeting 50+ MB `.docx` theses with embedded media on memory-tight devices. |
+## Screenshots (390x844 @2x, committed under `shots/`)
+All taken with the CDP harness pattern of `test/run-research-ui.mjs` (static server, POST `/api/research/v1/projects` stub, headless Chrome, `Target.attachToTarget` flatten). Home shots boot with `smd_home_tools = {"research":true}` so the research tile is pinned; the ResearchMD shots create a real project through the new-project modal (practice projects gate the AI screens) and land on the Search screen where the Ask MaiK chip renders.
 
-*(Additional fast baselines measured `< 30 ms`: `po_gates_scanPhi_user_300k` `27.9–36.1 ms`, `po_gates_scanPhi_strict_300k` `21.2–25.7 ms`, `linear_10k` `18.8 ms` Node, `client_docx_export_10k` `11.6–13.6 ms`, `research_phi_scan_300k` `12.2–17.2 ms`, `py_po_adapter.latex_to_manuscript_10k` `10.17–12.46 ms`, `stats_km_10k` `6.8–9.8 ms`, `stats_logrank_10k` `7.6–8.3 ms`, `meta_analysis_100_studies` `6.4–11.9 ms`, `gate_manuscript_10k` `5.3–5.5 ms`, `parseCsv_10k` `5.0 ms` Node, `forest_plot_svg_100` `2.1–2.2 ms`, `prisma_render` `1.1–2.2 ms`.)*
+| Shot | Before | After |
+| --- | --- | --- |
+| Home grid, light | `shots/n-before-home-390-light.png` | `shots/n-after-home-390-light.png` |
+| Home grid, dark | `shots/n-before-home-390-dark.png` | `shots/n-after-home-390-dark.png` |
+| ResearchMD search screen, light | `shots/n-before-researchmd-390-light.png` | `shots/n-after-researchmd-390-light.png` |
+| ResearchMD search screen, dark | `shots/n-before-researchmd-390-dark.png` | `shots/n-after-researchmd-390-dark.png` |
 
-### Proposals for New Rust Ports (`(d)` — Not Implemented Here)
-1. **`rust/research-stats` WASM completion**: Port `logistic`, `roc` (DeLong), and `table1`, and ship compiled WASM alongside `cox`/`schoenfeld` for 50k–100k row clinical cohorts inside `research-stats-worker.js`.
-2. **Systematic Review WASM parser + dedup + Aho-Corasick PHI**: Handle 20k+ RIS/PubMed records and 300k+ char PHI multi-pattern scans in a single zero-GC Rust pass under Cloudflare Worker CPU limits.
-3. **Mobile `.docx` streaming ZIP/XML + image-stripping reader**: Avoid holding large compressed media entries in JS `ArrayBuffer` memory on low-RAM phones.
+Before: flask ligature on the tile, old subtitle "Meta-analysis with sources", letter R in the chip. After: the R symbol in both places, same size class, color and motion as the neighbors, and the tile subtitle "Research to publication".
 
----
+## Verification
 
-## Verification & Compliance
-- **Unit suites**:
-  - `test/research-thesis-chapters.test.mjs`, `test/research-thesis.test.mjs`, `test/research-thesis-render.test.mjs` — 24/24 passed after final edit.
-  - `test/research-stats-survival.test.mjs`, `test/research-ondevice-stats.test.mjs`, `test/rust-pdf-reader.test.mjs` — passed (including 600-row unique-time Cox + Schoenfeld test and `OD.roc` Web Worker test).
-  - `backend/research/tests/test_stats_survival.py` — 12/12 passed (`uv run ... pytest -o addopts="" --noconftest`).
-  - Full `npm test`: note `test/no-side-stripes.test.mjs` fails only on `"scanned the app source"` when run from a path containing spaces (`/Volumes/WD BLACK...`) because `new URL("..", import.meta.url).pathname` keeps `%20`; a direct regex scan confirmed zero side-stripe hits in all modified UI files.
-- **UI harness suites**: All **35** ResearchMD UI harness scripts (`test/run-research-*-ui.mjs` + `test/run-research-ui.mjs`) passed in headless Chrome (extending `test/run-research-thesis-ui.mjs` for chapter mapping overrides, multi-chapter bounded parallel drafting, single-section retry, `44px` targets, zero overflow, zero em/en dashes, and zero page errors).
-- **Live `www/` bundle verification**: Rebuilt `www/` via `scripts/build-www.sh` (`build: #1407`), served on `127.0.0.1:8812`, drove headless Chrome on `CDP_PORT=9473` across live `-scik1` scripts, ROC Web Worker execution, and real 175p Lehr PDF chapter mapping at 390px in both light and dark modes (zero overflow, zero dashes).
+### Harness suites (headless Chrome)
+- `test/run-research-ui.mjs`: all passed (includes the Ask MaiK bar screens, zero horizontal overflow at 390/768/1024, zero em/en dashes).
+- `test/run-home-live-icons-ui.mjs`: all passed (every unlocked tile icon still moves; stagger and reduced-motion rules intact).
+- `test/run-home-tabs-ui.mjs`: flaky on this machine. Run 1 failed at step 8 with `window.openSearch is not a function`; run 2 failed the reload-dependent tab assertions ("the last tab is remembered", Bedside, Practice). The same suite fails at the same points on pristine origin/main (`0afd731d0`), so the flakiness is pre-existing and no tile assertion fails.
+- `test/run-all-tools-ui.mjs`: 1 failure, "solid parts of the drawn icons are filled: 0", reproduced identically on pristine origin/main (`0afd731d0`). Pre-existing, unrelated to this change.
+- `test/research-po-button.test.mjs` and `test/research-ai-draft-phi-client.test.mjs` were checked for mark coupling: the first only mocks `barHtml` without asserting the mark's content, the second asserts notice text and class names only. Neither needed changes.
 
-### Modern Web Guidance (UI Checks)
-- **Accessibility**: Interactive chapter mapping toggle (`#rmdChapterMapToggle`), chapter destination selects (`[data-rmd-chapter-id]` with explicit `<label for="rmdChSel_...">`), and per-section retry buttons (`[data-rmd-retry-section]`) all meet `>= 44px` tap targets, preserve semantic focus/button roles, maintain `>= 4.5:1` contrast in light & dark themes, and respect `@media (prefers-reduced-motion: reduce)`.
-- **Forms**: Labels sit directly with their `<select>` controls inside `.rmd-chapter-row` with `overflow-wrap: anywhere`, explicit status feedback (`#rmdExcludedSummary`, `#rmdDraftProgressList` with `tabular-nums`), and non-destructive per-chapter adjustment before AI drafting.
+### Full unit suite
+- `npm test` in this worktree: every test passes except 10 files that fail only because the mandated worktree path contains spaces. Those tests build a path with `new URL(..., import.meta.url).pathname` and do not decode `%20`, so they look for `/Volumes/WD%20BLACK%20SN7100%201TB%20Media/...` and get ENOENT; the failures are `build-slim`, `edge-schemas`, `narke-drills`, `no-side-stripes`, `remote-media`, `tokos-drill-core`, `tokos-learn-gyA`, `wardsynq-i18n-unwrapped`, `wardsynq-reachability` and `wardsynq-support-ops`.
+- Those same 10 files were re-run at the branch base commit `71727757a` in a path without spaces (`/tmp/scin-base717`): all pass. They were then run again in `/tmp/scin-verify` with this branch's five changed source files copied in: all pass. So `npm test` has no new failures from this change; the 10 failures are purely the worktree path.
+- Everything else in the suite (browser-independent tests included) passed on this branch.
+
+## Compliance (ui rules)
+- Read the required skill files before building (anti-slop, styling, brand and craft references, including the icon guidance: icons drawn as authored SVG in one consistent weight, never emoji or unicode stand-ins; this change replaces a generic glyph with the product's own drawn mark, which is the direction the rules ask for).
+- `impeccable detect --json research.js home.js research-screen-extract.js index.html sw.js`: 154 findings, 146 in `index.html` and 7 in `home.js` / 1 in `research.js`, all pre-existing patterns (width/height transitions, an Inter reference, the rnavJiggle keyframe, dark-glow and halo backgrounds in legacy index styles). None falls on any line this brief added; the new SVG paths, the chip markup and the tile branches are clean.
+- Contrast: tile mark `#fff` on the sphere (same as every neighbor), chip mark `#fff` on `--rmd-acc-grad` (same as the letter it replaces), two-tone variant rejected on the 1.35:1 measurement above.
+- No em dashes in any new UI string or in this report.

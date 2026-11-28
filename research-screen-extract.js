@@ -1125,7 +1125,7 @@
     var btnLabel = noPdf ? "Ask MaiK to draft it" : "Ask MaiK to draft it";
     var h = '<div class="rmd-ai-bar">';
     h += '<div class="rmd-ai-actions">';
-    h += '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd-ai="ask" style="min-height:44px"' + (ai.busy ? " disabled" : "") + '><span class="rmd-ai-mark" aria-hidden="true">R</span>' + esc(btnLabel) + '</button>';
+    h += '<button type="button" class="rmd-btn rmd-btn-primary" data-rmd-ai="ask" style="min-height:44px"' + (ai.busy ? " disabled" : "") + '><span class="rmd-ai-mark" aria-hidden="true">' + (G.SMD_RMD_MARK ? G.SMD_RMD_MARK.svg(14) : "R") + '</span>' + esc(btnLabel) + '</button>';
     h += '<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-ai="manual" style="min-height:44px">Do it myself</button>';
     h += '</div>';
     if (noPdf) {
