@@ -222,7 +222,9 @@ test("home card: one PrepReels card in the Solve next style, Saved beside it onc
   assert.ok(mg, "PREP_MEDIGRAM registered");
   const host = (mgsv) => ({ ico: (n) => `<ico-${n}/>`, store: () => ({ mgsv }) });
   const html = mg.homeHtml(host({}));
-  assert.match(html, /^<div class="pn-mgh"><button type="button" class="pn-next" data-act="mg-open"><span class="pn-ri" aria-hidden="true"><ico-play\/><\/span><span class="pn-rb"><small>PrepReels<\/small><b>[^<]+<\/b><\/span><ico-chev\/><\/button><\/div>$/);
+  // Glowing card (owner 2026-11-28, palette 02): glow layer, play chip, sliding words; the label carries the full text.
+  assert.match(html, /^<div class="pn-mgh"><button type="button" class="pn-next pn-mgx" data-act="mg-open" aria-label="PrepReels: questions, videos, images"><span class="pn-mgx-glow" aria-hidden="true"><\/span><span class="pn-ri" aria-hidden="true"><ico-play\/><\/span><span class="pn-rb" aria-hidden="true"><small>PrepReels<\/small><b>Swipe through <span class="pn-mgx-w">(<span>[a-z]+<\/span>){4}<\/span><\/b><\/span><ico-chev\/><\/button><\/div>$/);
+  for (const w of ["questions", "videos", "images"]) assert.ok(html.includes("<span>" + w + "</span>"), "the card slides through " + w);
   assert.doesNotMatch(html, /mg-saved/, "no Saved button with nothing saved");
   const two = mg.homeHtml(host({ a: {}, b: {} }));
   assert.match(two, /data-act="mg-saved" aria-label="Saved from PrepReels, 2 cards"/);

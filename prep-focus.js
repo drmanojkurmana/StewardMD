@@ -48,15 +48,21 @@
     var h = Math.floor(min / 60), m = min % 60;
     return h ? h + "h" + (m ? " " + m + "m" : "") : m + "m";
   }
+  // Custom limits (owner 2026-11-28: "custom timer also in Pomodoro and Timer, to enter time and break").
+  var LIM = { dur: [1, 360], f: [5, 120], b: [1, 60], n: [1, 12] };
+  function clampTo(k, v, d) { var x = Math.round(Number(v)); if (!isFinite(x) || x < 1) x = d; return Math.min(LIM[k][1], Math.max(LIM[k][0], x)); }
+  // A custom Pomodoro { f, b, n } in minutes and rounds, made safe.
+  function pomoOf(c) { c = c || {}; return { f: clampTo("f", c.f, 25), b: clampTo("b", c.b, 5), n: clampTo("n", c.n, 4) }; }
   // The phases of a session: [[kind, sec]] with kind "f" (focus) or "b" (break). A stopwatch is one open focus phase.
+  // pomo is a preset key ("25", "50") or a custom { f, b, n }; dur is any minutes from 1 to 360.
   function planOf(mode, dur, pomo) {
     if (mode === "watch") return [["f", WATCH_MAX]];
     if (mode === "pomo") {
-      var p = POMOS[String(pomo)] || POMOS["25"], o = [];
+      var p = pomo && typeof pomo === "object" ? pomoOf(pomo) : POMOS[String(pomo)] || POMOS["25"], o = [];
       for (var i = 0; i < p.n; i++) { o.push(["f", p.f * 60]); if (i < p.n - 1) o.push(["b", p.b * 60]); }
       return o;
     }
-    return [["f", (Number(dur) || 25) * 60]];
+    return [["f", clampTo("dur", dur, 25) * 60]];
   }
   function totalSec(plan) { return plan.reduce(function (a, p) { return a + p[1]; }, 0); }
   // Where a run is at a time: { i, kind, left, len, done (sec of focus so far), over }.
@@ -115,7 +121,7 @@
     if (run) add(run.t0, now, true);
     return o;
   }
-  var PURE = { dayKey: dayKey, fmtClock: fmtClock, fmtMin: fmtMin, planOf: planOf, totalSec: totalSec, phaseAt: phaseAt, focusBlocks: focusBlocks, blockNo: blockNo, topTag: topTag, saveRun: saveRun, streak: streak, week: week, timeline: timeline, POMOS: POMOS };
+  var PURE = { dayKey: dayKey, fmtClock: fmtClock, fmtMin: fmtMin, planOf: planOf, pomoOf: pomoOf, LIM: LIM, totalSec: totalSec, phaseAt: phaseAt, focusBlocks: focusBlocks, blockNo: blockNo, topTag: topTag, saveRun: saveRun, streak: streak, week: week, timeline: timeline, POMOS: POMOS };
   if (NODE) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -172,7 +178,7 @@
 
   /* ---------- session ---------- */
   function start() {
-    var f = fo(), mode = f.mode || "timer", plan = planOf(mode, f.dur || 25, f.pomo || 25);
+    var f = fo(), mode = f.mode || "timer", plan = planOf(mode, f.dur || 25, f.pomo === "c" ? f.pc : f.pomo || 25);
     var strict = !!f.strict && proOk() && mode !== "watch";
     var r = { t0: now(), mode: mode, plan: plan, strict: strict, q: 0, r: 0, tags: {}, block: !!f.block };
     setRun(r);
@@ -264,9 +270,17 @@
   var MODES = [["timer", "Timer"], ["pomo", "Pomodoro"], ["watch", "Stopwatch"]];
   function modeOpts(f) {
     var mode = f.mode || "timer";
-    if (mode === "timer") return '<div class="fo-chips">' + DURS.map(function (m) { return chip("fo-dur", m, fmtMin(m), (f.dur || 25) === m); }).join("") + "</div>";
-    if (mode === "pomo") return '<div class="fo-chips">' + Object.keys(POMOS).map(function (k) { var p = POMOS[k]; return chip("fo-pomo", k, p.f + " + " + p.b + " x " + p.n, String(f.pomo || 25) === k); }).join("") + "</div>" +
+    if (mode === "timer") {
+      var d = f.dur || 25, own = DURS.indexOf(d) < 0;
+      return '<div class="fo-chips">' + DURS.map(function (m) { return chip("fo-dur", m, fmtMin(m), d === m); }).join("") +
+        chip("fo-custom", "", own ? "Custom · " + fmtMin(d) : "Custom", own, ' aria-haspopup="dialog"') + "</div>";
+    }
+    if (mode === "pomo") {
+      var pc = f.pomo === "c" ? pomoOf(f.pc) : null;
+      return '<div class="fo-chips">' + Object.keys(POMOS).map(function (k) { var p = POMOS[k]; return chip("fo-pomo", k, p.f + " + " + p.b + " x " + p.n, !pc && String(f.pomo || 25) === k); }).join("") +
+        chip("fo-pcustom", "", pc ? pc.f + " + " + pc.b + " x " + pc.n : "Custom", !!pc, ' aria-haspopup="dialog"') + "</div>" +
       '<p class="pn-mut pn-small">Focus blocks with short breaks between them. Breaks do not count as focus time.</p>';
+    }
     return '<p class="pn-mut pn-small fo-note">Counts up until you stop, up to 6 hours.</p>';
   }
   function timelineHtml(log, r) {
@@ -368,6 +382,40 @@
     if (!quiet) try { if (P.prev && P.prev.isConnected) P.prev.focus({ preventScroll: true }); } catch (e) {}
     return true;
   }
+  /* Custom times: a number field per value with -/+ steps either side, then "Use this". */
+  function stepper(k, label, unit, v, step) {
+    var id = "foC_" + k;
+    return '<div class="fo-step"><label for="' + id + '">' + label + '</label><div class="fo-stepc">' +
+      '<button type="button" class="pn-ib" data-act="fo-step" data-v="' + k + ':-' + step + '" aria-label="' + step + " less " + unit + '">&minus;</button>' +
+      '<input id="' + id + '" type="number" inputmode="numeric" pattern="[0-9]*" min="' + LIM[k][0] + '" max="' + LIM[k][1] + '" value="' + v + '" data-k="' + k + '">' +
+      '<span class="fo-unit">' + unit + "</span>" +
+      '<button type="button" class="pn-ib" data-act="fo-step" data-v="' + k + ":" + step + '" aria-label="' + step + " more " + unit + '">+</button></div></div>';
+  }
+  function customSheet() {
+    var f = fo();
+    sheet("custom", "Custom timer", '<p class="pn-mut">Any length from 1 minute to 6 hours.</p>' +
+      stepper("dur", "Focus", "min", clampTo("dur", f.dur, 25), 5) +
+      '<div class="fo-sheet-acts"><button type="button" class="pn-btn pri" data-act="fo-csave" data-v="timer">Use this</button></div>');
+  }
+  function pomoSheet() {
+    var c = pomoOf(fo().pc);
+    sheet("pcustom", "Custom Pomodoro", '<p class="pn-mut">Your own focus block, break and number of rounds.</p>' +
+      stepper("f", "Focus", "min", c.f, 5) + stepper("b", "Break", "min", c.b, 1) + stepper("n", "Rounds", "rounds", c.n, 1) +
+      '<div class="fo-sheet-acts"><button type="button" class="pn-btn pri" data-act="fo-csave" data-v="pomo">Use this</button></div>');
+  }
+  function sheetVal(k) { var el = P.sheet && P.sheet.querySelector('input[data-k="' + k + '"]'); return el ? el.value : null; }
+  function stepVal(v) {
+    var kv = String(v || "").split(":"), k = kv[0], el = P.sheet && P.sheet.querySelector('input[data-k="' + k + '"]');
+    if (!el || !LIM[k]) return;
+    el.value = clampTo(k, (Number(el.value) || 0) + Number(kv[1]), LIM[k][0]);
+    hap("selection");
+  }
+  function saveCustom(kind) {
+    var f = fo();
+    if (kind === "pomo") { f.pc = pomoOf({ f: sheetVal("f"), b: sheetVal("b"), n: sheetVal("n") }); f.pomo = "c"; }
+    else f.dur = clampTo("dur", sheetVal("dur"), 25);
+    H.save(); hap("light"); closeSheet(true); H.rerender();
+  }
   function giveUpSheet() {
     var r = run(); if (!r) return;
     var ph = phaseAt(r, now()), m = Math.floor(ph.done / 60);
@@ -393,6 +441,10 @@
     if (a === "fo-mode") { f.mode = v; H.save(); hap("selection"); return H.rerender(); }
     if (a === "fo-dur") { f.dur = Number(v) || 25; H.save(); return H.rerender(); }
     if (a === "fo-pomo") { f.pomo = Number(v) || 25; H.save(); return H.rerender(); }
+    if (a === "fo-custom") return customSheet();
+    if (a === "fo-pcustom") return pomoSheet();
+    if (a === "fo-step") return stepVal(v);
+    if (a === "fo-csave") return saveCustom(v);
     if (a === "fo-strict") {
       if (!proOk()) { if (G.PrepPro && G.PrepPro.openPricing) return G.PrepPro.openPricing(H); return H.toast("Strict mode is part of Pro."); }
       f.strict = !f.strict; H.save(); hap("selection"); return H.rerender();

@@ -31,6 +31,17 @@ test("plans: timer, pomodoro, stopwatch", () => {
   assert.deepEqual(F.planOf("timer", "x"), [["f", 1500]], "a bad duration falls back to 25 min");
 });
 
+test("custom timer and Pomodoro (owner 2026-11-28)", () => {
+  assert.deepEqual(F.planOf("timer", 40), [["f", 2400]], "any minutes, not only the chips");
+  assert.deepEqual(F.planOf("timer", 999), [["f", 360 * 60]], "at most 6 hours");
+  assert.deepEqual(F.planOf("timer", 0), [["f", 1500]], "0 falls back to 25 min");
+  const c = F.planOf("pomo", 0, { f: 40, b: 8, n: 3 });
+  assert.deepEqual(c, [["f", 2400], ["b", 480], ["f", 2400], ["b", 480], ["f", 2400]]);
+  assert.deepEqual(F.pomoOf({ f: "2", b: 500, n: 40 }), { f: 5, b: 60, n: 12 }, "clamped to the limits");
+  assert.deepEqual(F.pomoOf(null), { f: 25, b: 5, n: 4 }, "nothing saved yet: the classic 25 + 5 x 4");
+  assert.deepEqual(F.planOf("pomo", 0, { f: 30, b: 5, n: 1 }), [["f", 1800]], "one round has no break");
+});
+
 test("phaseAt walks the plan and counts only focus", () => {
   const run = { t0: T0, plan: F.planOf("pomo", 0, 25) };
   let ph = F.phaseAt(run, T0 + min(10));

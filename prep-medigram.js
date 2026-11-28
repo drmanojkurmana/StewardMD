@@ -496,8 +496,11 @@
     if (!FLAGS.study && !FLAGS.discovery && !FLAGS.breakMode) return "";
     var n = 0; try { n = Object.keys((host.store() || {}).mgsv || {}).length; } catch (e) {}
     var ico = host && host.ico ? host.ico : function () { return ""; };
-    return '<div class="pn-mgh"><button type="button" class="pn-next" data-act="mg-open"><span class="pn-ri" aria-hidden="true">' + ico("play") +
-      '</span><span class="pn-rb"><small>PrepReels</small><b>Questions, videos, images</b></span>' + ico("chev") + "</button>" +
+    // Owner 2026-11-28: a glowing card with sliding motion, palette 02 Amber & Violet (vault/design/palettes): amber and
+    // violet light drift behind it and the last word slides through questions, videos, images (prep.css .pn-mgx).
+    return '<div class="pn-mgh"><button type="button" class="pn-next pn-mgx" data-act="mg-open" aria-label="PrepReels: questions, videos, images">' +
+      '<span class="pn-mgx-glow" aria-hidden="true"></span><span class="pn-ri" aria-hidden="true">' + ico("play") +
+      '</span><span class="pn-rb" aria-hidden="true"><small>PrepReels</small><b>Swipe through <span class="pn-mgx-w"><span>questions</span><span>videos</span><span>images</span><span>questions</span></span></b></span>' + ico("chev") + "</button>" +
       (n ? '<button type="button" class="pn-next pn-mgh-sv" data-act="mg-saved" aria-label="Saved from PrepReels, ' + n + (n === 1 ? " card" : " cards") + '"><span class="pn-ri" aria-hidden="true">' + ico("bm") + '</span><span class="pn-rb"><small>Saved</small><b>' + n + "</b></span></button>" : "") + "</div>";
   }
 

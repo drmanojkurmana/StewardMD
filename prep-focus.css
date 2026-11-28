@@ -113,6 +113,17 @@ body.dark .pn-root .fo-wk li.td .fo-wkb i { background: var(--pn-fill); }
 .pn-root .fo-sheet-acts { display: flex; flex-direction: column; gap: 10px; }
 .pn-root .fo-quit { min-height: 44px; color: var(--pn-mut); }
 
+/* Custom timer and Pomodoro sheets: label left, - field + right. */
+.pn-root .fo-step { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--pn-line); }
+.pn-root .fo-step:last-of-type { border-bottom: 0; }
+.pn-root .fo-step label { font-weight: 600; color: var(--pn-text); }
+.pn-root .fo-stepc { display: flex; align-items: center; gap: 8px; }
+.pn-root .fo-stepc .pn-ib { font-size: 20px; line-height: 1; color: var(--pn-text); }
+.pn-root .fo-stepc input { width: 64px; height: 44px; padding: 0 6px; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-md); background: var(--pn-s1); color: var(--pn-text); font: 650 18px/1 var(--pn-disp, inherit); font-variant-numeric: tabular-nums; text-align: center; -moz-appearance: textfield; appearance: textfield; }
+.pn-root .fo-stepc input::-webkit-inner-spin-button, .pn-root .fo-stepc input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.pn-root .fo-stepc input:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
+.pn-root .fo-unit { min-width: 46px; font-size: 13px; color: var(--pn-mut); }
+
 /* Home tile in the Practise grid (prep.js .pn-grid4, owner 2026-11-28: Focus clearly visible). Same tile as its
    neighbours, told apart by an amber icon chip, an amber-tinted edge and surface; running, it shows the time left and
    the chip breathes. */

@@ -111,9 +111,28 @@ try {
   await sleep(900); await shot("home");
   ok(!(await overflow()), "nothing wider than the screen on Focus home");
 
-  // Pomodoro choice, then back to a 25 min timer.
+  // Custom timer (owner 2026-11-28): type a time, step it, use it.
+  await click("#smdPrep [data-act=fo-custom]");
+  ok(await until(`return !!document.querySelector("#foSheet #foC_dur");`, 2000), "Custom opens a sheet with a minutes field");
+  await ev(`var i=document.getElementById("foC_dur"); i.value="35"; return 1;`);
+  await click('#foSheet [data-act=fo-step][data-v="dur:5"]');
+  ok(await ev(`return document.getElementById("foC_dur").value;`) === "40", "+ steps the field by 5");
+  await sleep(300); await shot("custom-timer");
+  await click("#foSheet [data-act=fo-csave]");
+  ok(await until(`return !document.getElementById("foSheet") && PREP._host.store().fo.dur === 40;`, 2000), "Use this saves 40 min");
+  ok(/Custom · 40m/.test(await text("#smdPrep .fo-home [data-act=fo-custom]")), "the Custom chip shows the time and is selected");
+
+  // Pomodoro choice, custom Pomodoro, then back to a 25 min timer.
   await click('#smdPrep [data-act=fo-mode][data-v="pomo"]');
   ok(/25 \+ 5 x 4/.test(await text("#smdPrep .fo-home")), "Pomodoro shows its block choices");
+  await click("#smdPrep [data-act=fo-pcustom]");
+  ok(await until(`return !!document.querySelector("#foSheet #foC_f") && !!document.querySelector("#foSheet #foC_b") && !!document.querySelector("#foSheet #foC_n");`, 2000), "custom Pomodoro asks focus, break and rounds");
+  await ev(`document.getElementById("foC_f").value="40"; document.getElementById("foC_b").value="8"; document.getElementById("foC_n").value="3"; return 1;`);
+  await sleep(300); await shot("custom-pomo");
+  ok(!(await overflow()), "nothing wider than the screen in the custom sheet");
+  await click("#foSheet [data-act=fo-csave]");
+  ok(await until(`var f=PREP._host.store().fo; return f.pomo === "c" && f.pc.f === 40 && f.pc.b === 8 && f.pc.n === 3;`, 2000), "custom Pomodoro is saved");
+  ok(/40 \+ 8 x 3/.test(await text("#smdPrep .fo-home [data-act=fo-pcustom]")), "its chip reads 40 + 8 x 3");
   await click('#smdPrep [data-act=fo-mode][data-v="timer"]'); await click('#smdPrep [data-act=fo-dur][data-v="25"]');
   ok(await ev(`return PREP._host.store().fo.mode === "timer" && PREP._host.store().fo.dur === 25;`) === true, "mode and duration are saved");
 
