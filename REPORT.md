@@ -1,64 +1,126 @@
-# ResearchMD Brief C (`sci-fix-C`) Triage & Fix Report
+# ResearchMD Scientific Fixes D (`rmd-sci-fixes-d`) Report
 
-Branch: `rmd-sci-fixes-c` (merge of `rmd-sci-fixes-b` + `rmd-sci-fixes-a`)  
-Worktree: `/Volumes/WD BLACK SN7100 1TB Media/po-wire/wt/scifixC`
+- **Worktree**: `/Volumes/WD BLACK SN7100 1TB Media/po-wire/wt/scifixD`
+- **Branch / Commit**: `rmd-sci-fixes-d` (`bf8d66c3b`) based on `origin/main` (`870db0852`)
+- **External test script update**: `/Users/mkk/prep-data/assessment/rmd-live/e2e/06-scientist.mjs`
 
-## Summary
+## 1. Root Causes & Fixes Implemented
 
-All 31 `FAIL` rows across live E2E suites `01`..`05` in `/Users/mkk/prep-data/assessment/rmd-live/e2e/results.jsonl` (rows `1..210`, excluding `06-scientist`) were triaged against the merged `rmd-sci-fixes-c` codebase:
+### Issue 1: False PHI block on Meta-Analysis PaperOrchestra draft
+- **Root cause (reproduced from `job_e010d5b03dcd4c36afdabb63317040c5` on `prj_64f21080635646d3802ef8062573c91e`)**:
+  1. `scanPhi` / `scan` flagged 7 `patient_name` (`name_near_patient_label`) false positives inside the formatted `citation_map.json` reference library of `buildSectionPrompt`: `"Extracellular Vesicles From"`, `"Asymptomatic Tuberculosis Patients"`, `"Nieto Ramirez"` (on `\nAuthors:` across a newline from `Patients.`), `"Catheter Type"`, `"Patient Comfort"`, `"Intravesical Bacillus Calmette"`, and `"Bladder Cancer Patients"`.
+  2. Additionally, formatting all 143 reference entries verbatim produced `63,984` chars (`16,997` estimated tokens with `GATEWAY_FRAMING_TOKENS = 1000`), which exceeded the T2 `16,000`-token input ceiling (`ceiling_input_tokens`).
+  3. PaperOrchestra (`POST /jobs`, `POST /v1/internal/llm`, `POST /jobs/:id/device-result`, and on-device `research-ondevice-draft.js`) did not yet expose the single-button `"False detection, ignore and go ahead"` (`PHI_OVERRIDE_CONDITIONS = ["false_positive"]`) override used by Ask MaiK.
+- **Fixes**:
+  - Updated [research-po-gates.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-po-gates.js), [functions/api/research/_phi.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/functions/api/research/_phi.js), and [backend/research/paperorchestra/adapter/po_adapter/phi.py](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/backend/research/paperorchestra/adapter/po_adapter/phi.py) identically:
+    - Removed plural `patients` from `PATIENT_LABEL` / `_PATIENT_LABEL` while keeping singular `patient`, honorifics (`Mr.`, `Mrs.`, `Ms.`), and clinical labels (`admitted`, `discharged`, `diagnosed`, `ward`, `bed no`, `IP no`, `OP no`).
+    - Scoped `name_near_patient_label` to the same line and sentence (`phiSameLineSentence` / `sameLineSentence` / `_same_line_sentence`, preserving honorific abbreviations `Mr.`, `Mrs.`, `Ms.`, `Dr.`), and rejected Title Case noun phrases ending in `Patient`/`Patients` or starting with `Patient `/`Patients ` with fewer than 2 trailing words.
+    - Added `{ allowCitationLibraryNames: true }` (`phiCitationLibrarySpans` / `citationLibrarySpans` / `_citation_library_spans`) suppressing `patient_name` hits inside delimited PaperOrchestra citation-library sections while keeping `phone`, `email`, `mrn`, `aadhaar`, `abha`, `ssn`, `nhs`, `dob`, `address`, and `dates` strictly blocked everywhere.
+  - Enabled `{ allowCitationLibraryNames: true }` in [research-ondevice-draft.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-ondevice-draft.js), [functions/api/research/_gateway.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/functions/api/research/_gateway.js), and [backend/research/paperorchestra/adapter/po_adapter/llm.py](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/backend/research/paperorchestra/adapter/po_adapter/llm.py).
+  - Updated `formatCitationLibrary`, `buildSectionPrompt`, and `buildRefinementPrompt` in [research-po-prompts.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-po-prompts.js) and [research-ondevice-draft.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-ondevice-draft.js) to omit redundant `"Abstract: No abstract available."` lines and compactly stay within the T2 `16,000`-token ceiling (real snapshot section prompt verified at `51,827` chars / `13,957` estimated tokens with `{ blocked: false, hits: [] }`).
+  - Added consistent `false_positive` override support across [functions/api/research/_jobs.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/functions/api/research/_jobs.js), [functions/api/research/_gateway.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/functions/api/research/_gateway.js), [research-ondevice-draft.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-ondevice-draft.js), [research-screen-manuscript.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-manuscript.js), and [research.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research.js) (high-risk categories and `patient_name` remain never-overridable).
 
-1. **App fixes in `rmd-sci-fixes-c`:**
-   - **Batched checklist approval persistence (`research-screen-checklist.js`, cache bumped in `index.html` & `sw.js` `-scic1`):** `persistApproval()` previously executed up to 33 sequential `PUT /checklist-manual/:gid` round-trips, causing multi-second UI latency after clicking Approve (failing `04b` row 165 within 400ms). Replaced sequential chaining with bounded parallel batches (`BATCH = 6` via `Promise.all`) before writing the reserved `checklist_approval` entry (`_checklists.js` `putManual` writes per-`(project_id, guideline_id, item_num)` rows cleanly). Added unit test coverage in `test/research-checklist-approval.test.mjs`.
-   - **Branch A fixes confirmed locally (server deployment note):** Branch A (`b37a6276e`) already fixed `POST /records` vs `400 /studies` (row 56), `GET /manuscript` returning `200 { manuscript: null }` (`functions/api/research/_manuscript.js`, rows 93, 132, 165-167, 206, 209, 210), and `findStudies` per-source 10s timeouts (`functions/api/research/_auto_studies.js`, row 107). Probing `http://127.0.0.1:8812` against the `https://stewardmd.in` proxy confirmed live `stewardmd.in` still runs pre-Branch-A Functions (`GET /manuscript` returned HTTP `404`), whereas local server unit tests (`test/research-sci-fixes-a.test.mjs` and `test/research*.test.mjs`) verify the `200 { manuscript: null }` behavior in this repo.
+### Issue 2: Meta DOCX export with no manuscript (`404 manuscript_not_found`)
+- Handled `err.code === "manuscript_not_found"` / `err.status === 404` in `exportDocx()` ([research-screen-manuscript.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-manuscript.js)) and `friendlyError()` ([research.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research.js)) to display `"Draft the manuscript first."` with a `44px`-tall `.rmd-btn-primary` button (`[data-rmd="draft-manuscript-first"]`) labeled `"Draft the manuscript"` that launches the study's drafting flow instead of `"Something went wrong on our side."`.
 
-2. **Harness fixes (`/Users/mkk/prep-data/assessment/rmd-live/`):**
-   - `e2e/lib/audit.mjs` & `lib/cdp.mjs`: Added `RMD_BASE_URL` env var override (defaulting to `http://127.0.0.1:8802`) so client code runs cleanly on `http://127.0.0.1:8812`. Updated `auditDom()` horizontal overflow check to skip descendants clipped inside an ancestor with `overflow-x: hidden | clip | auto | scroll` whose own box fits within `[0, vw]` (fixes false 440px `<svg>` loader overflow from `.smd-ld-ecg` in `smd-loader.js`).
-   - Updated stale selectors, timing waits, and intentional-behavior checks in `02-case-report-and-series.mjs`, `03-rct-and-observational.mjs`, `04-systematic-review-and-po.mjs`, `04b-po-and-checklist-recheck.mjs`, and `05-thesis-and-global-and-themes.mjs`.
+### Issue 3: Case Report Publication Consent
+- Confirmed `persistRecord` in `research-screen-pubconsent.js` works when checkboxes `#rmd-pc-written`, `#rmd-pc-saw`, and `#rmd-pc-date` are completed and `[data-rmd="confirm-pubconsent"]` is clicked. The previous `06-scientist.mjs` failure occurred because the test script only saved `#rmd-maik-english` without completing the attestation or clicking `[data-rmd="confirm-pubconsent"]`.
+- Updated `/Users/mkk/prep-data/assessment/rmd-live/e2e/06-scientist.mjs` to check both statements, set today's date, and tap `[data-rmd="confirm-pubconsent"]` before DOCX export.
 
-## Triage & Resolution Table (Suites `01`..`05`)
+### Issue 4: Thesis Ready screen empty
+- **Root cause**: `saveDraft(container)` in [research-screen-thesis.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-thesis.js) unconditionally called `SMD.navigate("thesis-tables")` when its async `PUT` requests completed, tearing down the active `Ready` DOM container if the user had already navigated to `Ready` while `saveDraft` was still in-flight (causing `renderReady` in [research.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research.js) to write `.rmd-ready-screen` into the detached container).
+- **Fixes**: Guarded `saveDraft` in [research-screen-thesis.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-thesis.js) with `isDomMounted(container)` so it never hijacks navigation when the user has moved away, and guarded `renderReady` in [research.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research.js) against screen changes and detached containers (re-binding `#rmdScreenBody` if still on `ready`).
 
-Suite `01` had 0 failures.
+### Cache-Busting & Bundle
+- Bumped `?v=` tokens with `-scid1` in [index.html](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/index.html) and appended `-scid1` to `CACHE` in [sw.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/sw.js).
+- Assembled `www/` cleanly via `bash scripts/build-www.sh`.
 
-| Row | Suite & Screen | Classification | Root Cause & Fix | Verification |
-| --- | --- | --- | --- | --- |
-| 56 | `02` `iec` | App (Branch A) + Stale harness | Prior `novelty` step sent `POST /studies` (`400`, fixed in Branch A); `iec` intentionally saves locally (`Saved on this phone.`), and `[data-rmd-iec="save"]` button doesn't exist. Guarded optional save button in `02`. | `scifixC-live-verify` live on `8812`: `novelty` + `iec` PASS (`Saved on this phone.`, 0 HTTP errors). |
-| 65 | `02` `manuscript` | Stale harness + Branch A server | `02` clicked `#rmd-cr-send-btn` without ticking `#rmd-cr-tick-noid` (button stayed disabled) and checked obsolete `[data-rmd="cr-draft-apply"]`. Updated `02` to tick `#rmd-cr-tick-noid` and wait for modal close & draft notice; `404 /manuscript` fixed in Branch A `_manuscript.js`. | `scifixC-live-verify` live on `8812`: Case Report Ask MaiK closes modal and renders `Drafted by MaiK...` PASS. |
-| 67 | `02` `manuscript (1024x1366)` | Stale harness (cascade from 65) | Open Case Report modal from row 65 blocked `[data-rmd="section-save"]`. Closed modal on draft completion fixes tablet edit & save. | `scifixC-live-verify` live on `8812`: `Saved.` PASS. |
-| 68 | `02` `manuscript (1024x1366)` | Stale harness (cascade + consent) | Blocked by modal + missing `confirm-pubconsent` attestation (`#rmd-pc-written`, `#rmd-pc-saw`, `#rmd-pc-date`, `[data-rmd="confirm-pubconsent"]`) + first `.rmd-banner` matched `Saved.` instead of export banner. Fixed in `02`. | `scifixC-live-verify-3` live on `8812`: `Saved. \| Your file is ready to save or share.` PASS. |
-| 69 | `02` `checklist` | Stale harness + App perf | Cascade from open modal + only 300ms wait after Approve. Updated `02` to wait for `#rmdChecklistApproved` + batched PUTs in `research-screen-checklist.js`. | `scifixC-live-verify` live on `8812`: `disBeforeClick=false, approved=true` PASS. |
-| 70 | `02` `ready` | Stale harness (cascade from 65/67) | Format check card only renders once manuscript exists (`research.js:2987`, tested by `research-ready-state.test.mjs`). Fixed once Case Report manuscript is drafted/saved. | `scifixC-live-verify` live on `8812`: `hasFormatCard=true` PASS. |
-| 91 | `03` `masterchart` | Stale harness | Table 1 sets `paragraph: ""` so `.rmd-mc-result h3` never renders (uses `.rmd-mc-table` / `h2 Results`), and `.rmd-mc-screen .rmd-banner-info` matched top IEC notice instead of bottom `Added to the Results section...` notice. Updated `03` selectors & wait. | `scifixC-live-verify-3` live on `8812`: `head="Variable", notice="Added to the Results section of your manuscript. Nothing was overwritten."` PASS; `run-research-masterchart-ui.mjs` PASS. |
-| 93 | `03` `plan` | App (Branch A server) | `404 GET /manuscript` on new project before manuscript exists. Fixed on server in Branch A (`_manuscript.js` returns `200 { manuscript: null }`). | `test/research-sci-fixes-a.test.mjs` PASS locally; awaiting server deploy on `stewardmd.in`. |
-| 107 | `04` `search` | App (Branch A) | Quick Search All Online Sources timed out / cleared input. Branch A added 10s per-source timeout & retained input (`_auto_studies.js`, `research-screen-search.js`). | `test/research-sci-fixes-a.test.mjs` & `test/run-research-auto-studies-ui.mjs` PASS. |
-| 110 | `04` `search` | Stale harness (`allowErrors`) | Broad `BCG AND tuberculosis` query hit daytime PubMed 429 rate-limit; app intentionally explained 429 cleanly (`test/research-bug12-live-fixes.test.mjs`), but `04` didn't pass `allowErrors: rateLimitedOk`. Updated `04`. | `test/research-bug12-live-fixes.test.mjs` PASS; `04` updated cleanly. |
-| 116 | `04` `search` (Import RIS + Dedup) | Stale harness (`auditDom` + wait) | `import-run` set `st.loaded = false` showing `.smd-ld-ecg` 440px `<svg>` inside 220px `overflow:hidden`. Fixed `auditDom()` overflow-ancestor check + wait for `!document.querySelector('.rmd-loading, .smd-ld')` in `04`. | `scifixC-live-verify` live on `8812` (`search` post-load + `auditDom`): PASS. |
-| 118 | `04` `conflicts` | Stale harness (`auditDom` + wait) | Audited `.smd-ld-ecg` loader during 1s sleep. Fixed `auditDom()` + loader wait in `04`. | `scifixC-live-verify` live on `8812` (`conflicts`): PASS. |
-| 119 | `04` `prisma` | Stale harness (`auditDom` + wait) | Audited `.smd-ld-ecg` loader during 1s sleep. Fixed `auditDom()` + loader wait in `04`. | `scifixC-live-verify` live on `8812` (`prisma`): PASS. |
-| 121 | `04` `extract` | Stale harness (`auditDom` + wait) | Audited `.smd-ld-ecg` loader during 1s sleep. Fixed `auditDom()` + loader wait in `04`. | `scifixC-live-verify` live on `8812` (`extract`): PASS. |
-| 123 | `04` `rob` | Stale harness (`auditDom` + wait) | Audited `.smd-ld-ecg` loader during 1s sleep. Fixed `auditDom()` + loader wait in `04`. | `scifixC-live-verify` live on `8812` (`rob`): PASS. |
-| 132 | `04` `manuscript` | App (Branch A server) | `404 GET /manuscript` before manuscript exists. Fixed on server in Branch A (`_manuscript.js`). | `test/research-sci-fixes-a.test.mjs` PASS locally. |
-| 165 | `04b` `checklist` | Real app latency bug + Stale harness + Branch A | `persistApproval()` sent 33 sequential PUTs while `04b` slept only 400ms (plus pre-deploy `404 /manuscript`). Batched PUTs (`BATCH = 6`) in `research-screen-checklist.js` + waited for `#rmdChecklistApproved` in `04b`. | `test/research-checklist-approval.test.mjs` (4/4) & `scifixC-live-verify` live on `8812` (`approved=true`) PASS. |
-| 166 | `04b` `ready` | Stale harness + Branch A server | Navigated to `ready` before any Case Report manuscript was drafted/saved (`hasFormatCard` intentionally omitted when manuscript is null, per `research-ready-state.test.mjs`), plus `404 /manuscript`. Updated `04b` expectation; verified `hasFormatCard=true` once manuscript exists. | `test/research-ready-state.test.mjs` & `scifixC-live-verify` (`ready` with manuscript) PASS. |
-| 167 | `04b` `manuscript` | App (already fixed) + Stale selectors + Branch A | `research-phi.js:314` already switched `"Patient:"` -> `"Age and sex:"`. `04b` queried nonexistent `#rmd-cr-text` and treated disabled initial `#rmd-cr-send-btn` (before checkbox tick) as self-block, plus `404 /manuscript`. Updated `04b` to `#rmd-cr-preview-text`. | `test/research-phi-layers.test.mjs` & `scifixC-live-verify` (`findings=""`, `cancelContrast` readable) PASS. |
-| 168 | `04b` `manuscript` | Stale selectors | `04b` used nonexistent `#rmd-cr-text` and `#rmd-cr-attest-cb` instead of `#rmd-cr-preview-text` and `#rmd-cr-tick-noid`. Updated `04b`. | `scifixC-live-verify` live on `8812`: Case Report modal & Ask MaiK PASS. |
-| 172 | `04b` `extract` | Stale harness (`auditDom` + wait) | Inner pane `.rmd-loading`/`.smd-ld-ecg` active after outer header rendered. Added loader wait in `04b` + `overflow-x` clipping fix in `auditDom()`. | `scifixC-live-verify` live on `8812` (`extract` post-load): PASS. |
-| 173 | `04b` `rob` | Stale harness (`auditDom` + wait) | Same inner loader + `.smd-ld-ecg` SVG clipping. Fixed in `04b` & `auditDom()`. | `scifixC-live-verify` live on `8812` (`rob` post-load): PASS. |
-| 182 | `05` `thesis-draft` | Stale selector | `05` queried `[data-rmd-section]` (edit-mode textarea), while `applyDraft()` renders read view `.rmd-thesis-section-text`. Updated selector to `.rmd-thesis-section-text, [data-rmd-section]`. | `scifixC-live-verify-2` live on `8812`: `sections=5, err=""` PASS. |
-| 185 | `05` `protocol` | Stale harness (input + BUG-05 spec) | `05` wrote phone into `#rmd_proto_pop`, which `protocol` Ask MaiK never sends (`input()` sends `{ title, framework, researchQuestion }`), and expected modal for client-redacted phone (`research.js` BUG-05 intentionally redacts `9876543210` before send and surfaces `.rmd-ai-phi-note` `"Removed before sending to MaiK: Phone number."`, while residual hits like `"March 12"` hard-block with `.rmd-banner-error`). Updated `05` to use `#rmd_proto_title` and check `.rmd-banner-error` / `.rmd-ai-phi-note`. | `test/research-ai-draft-phi-client.test.mjs` & `scifixC-live-verify` rows 185a (client block `0` AI calls) + 185b (`Removed before sending to MaiK: Phone number.`) PASS. |
-| 188 | `05` `ipd` | Stale harness (`auditDom` + wait) | Audited `.smd-ld-ecg` loader during 700ms sleep. Fixed `auditDom()` + loader wait in `05`. | `scifixC-live-verify` live on `8812` (`ipd`): PASS. |
-| 193 | `05` `shell` | Stale harness | `#rmdSyncBadge` is intentionally hidden when synced/empty (`display:none`, verified by `test/run-research-ui.mjs`). Updated `05` to verify hidden when synced, enqueue an offline change, open `#rmdSyncSheetModal`, and restore state. | `test/run-research-ui.mjs` & `scifixC-live-verify` (`hiddenSynced=true, syncOpen=true`) PASS. |
-| 203 | `05` `search (dark)` | Stale harness (`auditDom` + wait) | Audited `.smd-ld-ecg` loader during 700ms sleep. Fixed `auditDom()` + loader wait in `05`. | `scifixC-live-verify` live on `8812` (`search (dark)`): PASS. |
-| 206 | `05` `checklist (dark)` | App (Branch A server) | `404 GET /manuscript` from pre-deploy server. Fixed in Branch A `_manuscript.js`. | `test/research-checklist-approval.test.mjs` PASS locally. |
-| 208 | `05` `ready (dark)` | Stale harness (`auditDom` + wait) | Audited `.smd-ld-ecg` loader during 700ms sleep. Fixed `auditDom()` + loader wait in `05`. | `scifixC-live-verify` live on `8812` (`ready (dark)`): PASS. |
-| 209 | `05` `backup (dark)` | App (Branch A server) | Prior `404 GET /manuscript` carryover. Fixed in Branch A `_manuscript.js`. | `test/research-sci-fixes-a.test.mjs` PASS locally. |
-| 210 | `05` `read-study (dark)` | App (Branch A server) | Prior `404 GET /manuscript` carryover. Fixed in Branch A `_manuscript.js`. | `test/research-sci-fixes-a.test.mjs` PASS locally. |
+## 2. Verification Results
 
-## Verification Commands & Outcomes
+- **Syntax & em-dash checks**: `node --check` passed on all modified JS files; zero `—`/`–` added in client JS files.
+- **Python PHI parity**: `python3` check over `docs/research/contracts/phase-3/phi-vectors.json` (133 cases) and `test/fixtures/research/po/phi-vectors.json` (18 block, 10 clean) passed (`PYTHON_PHI_OK`).
+- **Node unit suites** (`node --experimental-test-module-mocks --experimental-sqlite test/research-*.test.mjs test/phi-india.test.mjs`): all suites passed after final edit, including updated tests in `test/research-po-device.test.mjs`, `test/research-phi-override.test.mjs`, `test/research-phi-override-ui.test.mjs`, and `test/research-po-job.test.mjs`. *(Note: an earlier full `npm test` before the final test fixes reported 14 failures: 2 expected assertion mismatches in `test/research-po-device.test.mjs` and `test/research-po-job.test.mjs` plus `test/research-ready-state.test.mjs` — all fixed and verified passing in the final run — along with unrelated pre-existing suite failures in `test/build-slim.test.mjs`, `test/edge-schemas.test.mjs`, `test/narke-drills.test.mjs`, `test/no-side-stripes.test.mjs`, `test/prep-ask-answers.test.mjs`, `test/remote-media.test.mjs`, `test/tokos-drill-core.test.mjs`, `test/tokos-learn-gyA.test.mjs`, `test/wardsynq-i18n-unwrapped.test.mjs`, `test/wardsynq-reachability.test.mjs` such as URL `%20` decoding on worktree paths containing spaces.)*
+- **Headless CDP UI suites** (after final edit & `build-www.sh`):
+  - `node test/run-research-manuscript-ui.mjs`: PASS (includes new `404 manuscript_not_found` -> `"Draft the manuscript first."` + 44px button regression)
+  - `node test/run-research-thesis-ui.mjs`: PASS (includes new in-flight `saveDraft` -> immediate `Ready` navigation regression showing `.rmd-ready-screen` and `[data-rmd="format-check-card"]`)
+  - `node test/run-research-compliance-ui.mjs`: PASS
+  - `node test/run-research-rct-ui.mjs`: PASS
+  - `node test/run-research-pubconsent-ui.mjs`: PASS
+  - `node test/run-research-casereport-ui.mjs`: PASS
+- **Live `06-scientist.mjs` run (`CDP_PORT=9473 ANY_USER=1 RMD_BASE_URL=http://127.0.0.1:8812 node 06-scientist.mjs`, 5 AI calls used <= 6 cap)**:
+  - `[rct]`: all PASS
+  - `[casecontrol]`: all PASS
+  - `[casereport]`: all PASS (including `[pubconsent] Publication consent save + DOCX export` and `[manuscript] Export manuscript DOCX`)
+  - `[thesis]`: all PASS (including `[ready] Journal format & readiness checks -> hasFormatCard=true`)
+  - `[meta]`: cleared client-side `scanPhi` and `outline` (2 calls to `/v1/internal/llm` succeeded with 200), then failed on live **undeployed server** code at `section 1 of 7` where live `stewardmd.in` `/api/research/v1/internal/llm` still runs old `_phi.js`/`_gateway.js` and returned `422 phi_blocked` (`categories: ["patient_name"]`).
+    - **Rows depending on undeployed server code (`functions/api/research/{_phi,_gateway,_jobs}.js`)**:
+      1. `[manuscript] [meta] PaperOrchestra full manuscript draft` (needs deployed `_phi.js` + `_gateway.js` on `stewardmd.in`)
+      2. `[manuscript] [meta] Export manuscript DOCX` (blocked on `#rmdPhiOverrideModal` that opened on non-overridable gateway 422 before the final post-run refinement in `bf8d66c3b`; Issue 2 UI independently verified PASS in `test/run-research-manuscript-ui.mjs`)
+      3. `[checklist] [meta] Checklist () + Export CSV` (cascaded from modal overlay during that run prior to `bf8d66c3b`).
 
-- **`node --test --experimental-test-module-mocks --experimental-sqlite test/research*.test.mjs`** (scifixC worktree): 91 suites, 819 tests run, **816 passed, 0 failed**, 3 skipped.
-- **`test/research-checklist-approval.test.mjs`**: **4/4 passed, 0 failed** (including multi-item bounded parallel batch test verifying `maxInflight` in `2..6` and `checklist_approval` written strictly last).
-- **All `test/run-research-*-ui.mjs` scripts** (33 scripts sequentially against headless Chromium): **33/33 passed, 0 failed** (`UI_TOTAL=33 UI_FAILS=NONE`).
-- **`npm test`**: All ResearchMD suites passed; 10 unrelated non-ResearchMD worktree suites failed due to pre-existing worktree/missing asset dependencies (`test/build-slim.test.mjs`, `test/edge-schemas.test.mjs`, `test/narke-drills.test.mjs`, `test/no-side-stripes.test.mjs`, `test/remote-media.test.mjs`, `test/tokos-drill-core.test.mjs`, `test/tokos-learn-gyA.test.mjs`, `test/wardsynq-i18n-unwrapped.test.mjs`, `test/wardsynq-reachability.test.mjs`, `test/wardsynq-support-ops.test.mjs`).
-- **Live CDP Verification (`CDP_PORT=9473 ANY_USER=1 RMD_BASE_URL=http://127.0.0.1:8812`):** Verified against temporary port `8812` server serving `scifixC` client files + `stewardmd.in` `/api/*` proxy using **4 AI drafts total** (within the `<= 6` budget):
-  - Passed: Novelty + IEC local save, Case Report Ask MaiK modal (`findings=""`, readable Cancel contrast) & draft apply, Tablet `section-save`, `confirm-pubconsent` + DOCX export (`Saved. | Your file is ready to save or share.`), batched Checklist `Approve` (`#rmdChecklistApproved`), Ready `format-check-card`, RCT Master Chart Table 1 -> `Use in my manuscript`, SR post-load + dark theme tabs (`search`, `conflicts`, `prisma`, `pdf`, `extract`, `rob`, `data`, `ipd`, `ready`) with zero overflow errors, Thesis-draft Ask MaiK (`sections=5`), Protocol PHI client hard block + BUG-05 phone notice, and Sync pill -> `#rmdSyncSheetModal`.
-  - Temporary server on port `8812` was stopped after verification.
+---
+
+# Brief E: Manuscript Quality for Primary Studies (`rmd-sci-fixes-d`)
+
+## 1. Fixes Implemented
+
+### Issue 1: Canonical section order everywhere + Thesis sequential save
+- **Server (`functions/api/research/`)**:
+  - Added `TEMPLATE_SECTION_RANK`, `sectionTemplateRank`, and `sortSectionsInTemplateOrder` in [functions/api/research/_manuscript.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/functions/api/research/_manuscript.js), preserving `level > 1` subsections beneath their parent section, and applied it in `loadSections(db, versionId)`.
+  - Imported and applied `sortSectionsInTemplateOrder` in [functions/api/research/_format_check.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/functions/api/research/_format_check.js) (`formatCheck`) and [functions/api/research/_checklists.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/functions/api/research/_checklists.js) (`checklistSnapshot`).
+- **Client ([research-screen-manuscript.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-manuscript.js))**:
+  - Added `TEMPLATE_SECTION_RANK`, `sectionTemplateRank`, and `sortSections` (keeping `level > 1` subsections under parent), applied across `sectionSidebarItems`, `load`, `showDraftPreviewModal`, `applyManuscriptDraft`, `buildDocxBytes`, `localManuscript`, and `appendManuscriptResults`.
+- **Thesis parallel save race ([research-screen-thesis.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-thesis.js))**:
+  - Updated `saveDraft` to chain `PUT /manuscript/sections/:id` sequentially in `draft.sections` order instead of `Promise.all` (fixing `Discussion` previously saving before `Methods`).
+
+### Issue 2: Master Chart "Use in my manuscript" result text
+- **[research-screen-masterchart.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-masterchart.js)**:
+  - Added `humanColumnLabel` (respecting `varLabels`, converting `death_28d` -> `"death by 28 days"`, expanding `_` and trailing lab/time units) and used it in `runAnalysis`, `t1Label`, `drawCompareItem`, `compareText`, and `manuscriptText`.
+  - Removed the duplicated chi-square summary block appended after `r.paragraph` in `manuscriptText` for `compare` / `related`.
+- **[research-stats.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-stats.js)**:
+  - Added `categoricalGroupSummary` and updated `resultsSentence` when `opts.includeN` is truthy so categorical compares include group counts and percentages (e.g. `482 of 2104 (22.9%) in Dexamethasone vs 1110 of 4321 (25.7%) in Usual care`) and numeric compares include group `n` and summary dispersion.
+
+### Issue 3: Primary-study structured inputs for AI drafting without PHI false positives
+- **[research-screen-manuscript.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-manuscript.js)** & **[research-screen-randomise.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/research-screen-randomise.js)**:
+  - Extended `randomise` saved fingerprint (`ratio`, `blockSizes`, `strata`) and updated `startManuscriptDraft` to load Plan (`smd_research_plan_*` + `SMD_RESEARCH_SAMPLESIZE`), IEC, CTRI, Randomise (`randomfingerprint` + `blinding`), and CONSORT from `RMDStore`, scrubbing `YYYY-MM-DD` dates to `Month YYYY` (`formatMonthYear`) and passing both structured fields and a concise `input.notes` summary.
+- **[functions/api/research/_ai_draft.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/functions/api/research/_ai_draft.js)**:
+  - Added `scrubFullDatesForPrompt`, `cleanPromptObj`, and `planProportionPctStrings`, and updated `manuscript_draft` system instructions, prompt formatting, and `extractAllowedNumbers` to ground all Plan/sample-size/allocation/IEC/CTRI/CONSORT numbers.
+
+### Cache-Busting, Tests & Bundle
+- Appended `-scie1` to affected `?v=` tokens in [index.html](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/index.html) and to `CACHE` in [sw.js](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/sw.js).
+- Added [test/research-sci-fixes-e.test.mjs](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/test/research-sci-fixes-e.test.mjs) and updated slow-save wait timing in [test/run-research-thesis-ui.mjs](file:///Volumes/WD%20BLACK%20SN7100%201TB%20Media/po-wire/wt/scifixD/test/run-research-thesis-ui.mjs).
+- Rebuilt `www/` via `bash scripts/build-www.sh` (`build: #1386`).
+
+## 2. Verification Results
+
+- **Unit suite (`npm test`)**: All 102 `test/research-*.test.mjs` test files passed (`0` failures across all `research-*` suites, including `test/research-sci-fixes-e.test.mjs`). The overall `npm test` run reported 9 pre-existing non-research failures caused by URL-encoded `%20` spaces in the worktree directory path (`test/build-slim.test.mjs`, `test/edge-schemas.test.mjs`, `test/narke-drills.test.mjs`, `test/no-side-stripes.test.mjs`, `test/remote-media.test.mjs`, `test/tokos-drill-core.test.mjs`, `test/tokos-learn-gyA.test.mjs`, `test/wardsynq-i18n-unwrapped.test.mjs`, `test/wardsynq-reachability.test.mjs`).
+- **Headless CDP UI suites**: All 34 `test/run-research-*-ui.mjs` scripts ran sequentially and exited `0` (`ALL_RESEARCH_UI_PASSED`).
+- **Live `06-scientist.mjs` run (`CDP_PORT=9473 ANY_USER=1 RMD_BASE_URL=http://127.0.0.1:8812 node 06-scientist.mjs`)**:
+  - `[rct]`: all steps PASS (`masterchart` result uses `"death by 28 days"`, `"482 of 2104 (22.9%) in Dexamethasone vs 1110 of 4321 (25.7%) in Usual care"`, no duplicate chi-square sentence; `Ask MaiK` drafted Methods with sample size, IEC, and CTRI numbers and 0 PHI blocks; exported `-draft.docx` section order: `Abstract -> Introduction -> Methods -> Results -> Discussion`).
+  - `[casecontrol]`: all steps PASS (`masterchart` result uses `"smoking"`, `"647 of 649 (99.7%) in Case vs 622 of 649 (95.8%) in Control (odds ratio 14.04, 95% CI 3.33 to 59.30; Chi-square test, p < 0.001)."`, no duplicate chi-square sentence; exported `-draft.docx` section order: `Abstract -> Introduction -> Methods -> Results -> Discussion`).
+  - `[casereport]`: all steps PASS (exported `-draft.docx`: `Abstract -> Introduction -> Case Presentation -> Timeline -> Discussion -> Conclusion`).
+  - `[thesis]`: all steps PASS (`thesis/manuscript.md` server API order: `Abstract -> Introduction -> Methods -> Results -> Discussion`).
+  - *Undeployed server caveat*: In `outputs/rct/manuscript.md` and `outputs/casecontrol/manuscript.md`, `06-scientist.mjs` snapshots `GET /api/research/projects/:id/manuscript` (`Source: server API`) from remote `stewardmd.in`, which does not yet have Brief E's server-side `_manuscript.js` sort deployed (hence `## Results` appears first in those two `manuscript.md` snapshots while the local-bundle `-draft.docx` exports are in canonical order). The `[meta]` track also failed on the undeployed remote PaperOrchestra server (`Input exceeds tier token ceiling` / `Draft the manuscript first.`).
+
+## 3. New RCT & Case-Control Methods and Results (`06-scientist.mjs`)
+
+### RCT (`/Users/mkk/prep-data/assessment/rmd-live/e2e/outputs/rct/manuscript.md`)
+
+#### Methods
+
+This study was described as a randomized controlled trial comparing dexamethasone 6 mg daily with usual care. The supplied sample-size note states that, assuming complication rates of 22.9% in Group 1 and 25.7% in Group 2, with 5% significance and 80% power, 3683 patients per group were estimated to be needed; allowing for 10% loss to follow-up, the planned enrolment was 4092 per group (8184 total). The supplied notes state that ethics approval was granted under reference IEC/2021/REC-01, but the approval date is unspecified. Trial registration is reported as CTRI/2020/03/024100; the registration date is unspecified. The protocol field was empty. Further methodological details were not provided.
+
+#### Results
+
+The risk of death by 28 days was 482 of 2104 (22.9%) in Dexamethasone vs 1110 of 4321 (25.7%) in Usual care (risk ratio 0.89, 95% CI 0.81 to 0.98; odds ratio 0.86, 95% CI 0.76 to 0.97; Chi-square test, p = 0.017).
+
+### Case-Control (`/Users/mkk/prep-data/assessment/rmd-live/e2e/outputs/casecontrol/manuscript.md`)
+
+#### Methods
+
+A case-control study compared smoking status between men with lung carcinoma (cases) and men without lung carcinoma (controls). The available study record does not provide further details about participant selection, smoking measurement, or analysis procedures.
+
+#### Results
+
+Cases vs controls had higher odds of smoking: 647 of 649 (99.7%) in Case vs 622 of 649 (95.8%) in Control (odds ratio 14.04, 95% CI 3.33 to 59.30; Chi-square test, p < 0.001).
+

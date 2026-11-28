@@ -500,9 +500,62 @@
 
   /* ---------- Analysis ---------- */
 
-  function sentenceFor(result, outcome, groupLabels, studyType) {
+  var TIME_UNIT_MAP = {
+    d: "day", day: "day", days: "day",
+    w: "week", wk: "week", wks: "week", week: "week", weeks: "week",
+    m: "month", mo: "month", mos: "month", month: "month", months: "month",
+    y: "year", yr: "year", yrs: "year", year: "year", years: "year",
+    h: "hour", hr: "hour", hrs: "hour", hour: "hour", hours: "hour"
+  };
+  var COMPOUND_UNIT_LABELS = {
+    "mg dl": "mg/dL", "g dl": "g/dL", "mmol l": "mmol/L", "umol l": "umol/L",
+    "ug l": "ug/L", "mcg l": "mcg/L", "ng ml": "ng/mL", "pg ml": "pg/mL",
+    "iu l": "IU/L", "u l": "U/L", "meq l": "mEq/L", "kg m2": "kg/m2",
+    "mm hg": "mmHg", "mmhg": "mmHg", "bpm": "bpm", "pct": "%", "percent": "%",
+    "yrs": "years", "yr": "years", "years": "years", "mos": "months", "months": "months",
+    "wks": "weeks", "weeks": "weeks", "days": "days", "hrs": "hours", "hours": "hours",
+    "mins": "min", "min": "min", "kg": "kg", "cm": "cm", "mm": "mm",
+    "mg": "mg", "ug": "ug", "mcg": "mcg", "ml": "mL"
+  };
+
+  function humanColumnLabel(colName) {
+    var raw = colName == null ? "" : String(colName).trim();
+    if (!raw) return "";
+    var varLbl = mc && mc.varLabels && mc.varLabels[raw];
+    if (varLbl && String(varLbl).trim()) {
+      return String(varLbl).replace(/_/g, " ").replace(/\s+/g, " ").trim();
+    }
+    var hadUnderscore = raw.indexOf("_") >= 0;
+    var s = raw.replace(/_/g, " ").replace(/\s+/g, " ").trim();
+    var tokens = s.split(" ");
+    if (tokens.length >= 2) {
+      var lastTwo = (tokens[tokens.length - 2] + " " + tokens[tokens.length - 1]).toLowerCase();
+      var lastOne = tokens[tokens.length - 1].toLowerCase();
+      if (COMPOUND_UNIT_LABELS[lastTwo] && tokens.length >= 3) {
+        return tokens.slice(0, -2).join(" ") + " (" + COMPOUND_UNIT_LABELS[lastTwo] + ")";
+      }
+      var timeM = tokens[tokens.length - 1].match(/^(\d+)\s*(d|day|days|w|wk|wks|week|weeks|m|mo|mos|month|months|y|yr|yrs|year|years|h|hr|hrs|hour|hours)$/i);
+      if (timeM) {
+        var n = parseInt(timeM[1], 10);
+        var uBase = TIME_UNIT_MAP[timeM[2].toLowerCase()];
+        var uWord = n === 1 ? uBase : (uBase + "s");
+        var prev = tokens[tokens.length - 2].toLowerCase();
+        var prep = /^(at|by|in|on|of|for|within|after|to|over)$/.test(prev);
+        var prefix = tokens.slice(0, -1).join(" ");
+        return prefix + (prep ? " " : " by ") + n + " " + uWord;
+      }
+      if (hadUnderscore && COMPOUND_UNIT_LABELS[lastOne]) {
+        return tokens.slice(0, -1).join(" ") + " (" + COMPOUND_UNIT_LABELS[lastOne] + ")";
+      }
+    }
+    return s;
+  }
+
+  function sentenceFor(result, outcome, groupLabels, studyType, extra) {
     try {
-      return stats().resultsSentence(result, { outcome: outcome, groupLabels: groupLabels || [], studyType: studyType || "" }) || "";
+      var opts = { outcome: outcome, groupLabels: groupLabels || [], studyType: studyType || "" };
+      if (extra && extra.includeN) opts.includeN = true;
+      return stats().resultsSentence(result, opts) || "";
     } catch (e) { return ""; }
   }
 
@@ -876,17 +929,18 @@
         var studyDesign = currentStudyDesign();
         for (var i = 0; i < f.outcomes.length; i++) {
           var name = f.outcomes[i];
+          var label = humanColumnLabel(name);
           try {
             var r = S.compare(colValues(name), colValues(f.group), {
               outcomeType: mc.types[name], paired: false, studyType: studyDesign
             });
-            var sentence = sentenceFor(r, name, groupLevels(f.group), studyDesign);
+            var sentence = sentenceFor(r, label, groupLevels(f.group), studyDesign, { includeN: true });
             if (sentence) sentences.push(sentence);
-            if (r.dropped > 0) warnings.push(name + ": " + r.dropped + " rows were left out (missing values).");
-            items.push({ name: name, result: r, sentence: sentence, studyDesign: studyDesign });
+            if (r.dropped > 0) warnings.push(label + ": " + r.dropped + " rows were left out (missing values).");
+            items.push({ name: name, label: label, result: r, sentence: sentence, studyDesign: studyDesign });
           } catch (e) {
-            items.push({ name: name, error: calm(e && e.message) });
-            warnings.push(name + ": " + calm(e && e.message));
+            items.push({ name: name, label: label, error: calm(e && e.message) });
+            warnings.push(label + ": " + calm(e && e.message));
           }
         }
         mc.results = { kind: "compare", group: f.group, items: items, warnings: warnings, paragraph: sentences.join(" ") };
@@ -896,11 +950,13 @@
           draw();
           return;
         }
+        var labelA = humanColumnLabel(f.a);
+        var labelB = humanColumnLabel(f.b);
         var rr = S.compare(colValues(f.b), colValues(f.a), { outcomeType: "numeric" });
-        var relSentence = sentenceFor(rr, f.b + " vs " + f.a, [f.a]);
+        var relSentence = sentenceFor(rr, labelB + " vs " + labelA, [labelA, labelB]);
         mc.results = {
           kind: "related", a: f.a, b: f.b,
-          items: [{ name: f.b + " vs " + f.a, result: rr, sentence: relSentence }],
+          items: [{ name: labelB + " vs " + labelA, label: labelB + " vs " + labelA, result: rr, sentence: relSentence }],
           warnings: rr.dropped > 0 ? [rr.dropped + " rows were left out (missing values)."] : [],
           paragraph: relSentence
         };
@@ -1373,8 +1429,9 @@
 
   /* Table 1 row name: "Age, mean ± SD" or "Sex: Female" (the label alone does not say which variable) */
   function t1Label(row) {
-    if (!row.label) return row.variable;
-    return row.type === "numeric" ? row.variable + ", " + row.label : row.variable + ": " + row.label;
+    var v = humanColumnLabel(row.variable);
+    if (!row.label) return v;
+    return row.type === "numeric" ? v + ", " + row.label : v + ": " + row.label;
   }
 
   function effectGloss(effect, p, groupLabel, outcomeName, studyDesign) {
@@ -1462,8 +1519,12 @@
     for (var i = 0; i < r.items.length; i++) {
       var it = r.items[i];
       if (!it.result) continue;
+      if (it.sentence) {
+        lines.push(it.sentence);
+        continue;
+      }
       var res = it.result;
-      var line = it.name + ": " + res.label + "; " + res.statisticName + " = " + fmt(res.statistic, 3) + ", " + pStr(res.p);
+      var line = (it.label || humanColumnLabel(it.name)) + ": " + res.label + "; " + res.statisticName + " = " + fmt(res.statistic, 3) + ", " + pStr(res.p);
       var e = res.effect;
       if (e && e.estimate != null && isFinite(e.estimate)) {
         line += "; " + e.measure + " " + fmt(e.estimate);
@@ -1555,8 +1616,13 @@
   function manuscriptText() {
     var r = mc.results;
     var parts = [];
+    if (r.kind === "compare" || r.kind === "related") {
+      if (r.paragraph) parts.push(r.paragraph);
+      else parts.push(compareText(r));
+      return parts.join("\n\n");
+    }
     if (r.paragraph) parts.push(r.paragraph);
-    if (r.kind === "table1") parts.push(table1Text(r.table, r.group));
+    if (r.kind === "table1") parts.push(table1Text(r.table, humanColumnLabel(r.group)));
     else if (r.kind === "linear") parts.push(linearText(r));
     else if (r.kind === "logistic") parts.push(logisticText(r));
     else if (r.kind === "describe") parts.push(describeText(r));
@@ -1977,8 +2043,9 @@
   }
 
   function drawCompareItem(it, groupLabel) {
+    var displayOutcome = it.label || humanColumnLabel(it.name);
     var h = '<div class="rmd-card rmd-mc-result">';
-    h += '<h3>' + esc(it.name) + '</h3>';
+    h += '<h3>' + esc(displayOutcome) + '</h3>';
     if (it.error) {
       h += '<p class="rmd-mc-gloss">' + esc(it.error) + '</p></div>';
       return h;
@@ -1996,7 +2063,7 @@
       /* the effect is group 1 minus (or over) group 2, so the plain sentence names group 1, e.g. "Drug A" */
       var g1 = r.byGroup && r.byGroup[0] && r.byGroup[0].group;
       var design = it.studyDesign || r.studyDesign || "";
-      var gloss = effectGloss(r.effect, r.p, g1 ? String(g1) : groupLabel, it.name, design);
+      var gloss = effectGloss(r.effect, r.p, g1 ? String(g1) : groupLabel, displayOutcome, design);
       if (gloss) h += '<p class="rmd-mc-gloss">' + esc(gloss) + '</p>';
       if (r.effect && r.effect.measure === "RR" && r.effect.or != null && isFinite(r.effect.or)) {
         var secOr = "Secondary effect: Odds ratio (OR) " + fmt(r.effect.or);
@@ -2511,7 +2578,17 @@
     loadBanners(pid);
   }
 
-  SMD.screens.masterchart = { render: render };
+  SMD.screens.masterchart = {
+    render: render,
+    _humanColumnLabel: humanColumnLabel,
+    _manuscriptTextFor: function (resultsObj, varLabels) {
+      var prevR = mc.results;
+      var prevVL = mc.varLabels;
+      mc.results = resultsObj;
+      if (varLabels) mc.varLabels = varLabels;
+      try { return manuscriptText(); } finally { mc.results = prevR; mc.varLabels = prevVL; }
+    }
+  };
 
   if (typeof module !== "undefined" && module.exports) {
     module.exports = {
@@ -2519,7 +2596,8 @@
       commonFeaturesFrom: commonFeaturesFrom, describeParagraph: describeParagraph,
       buildKmPath: buildKmPath, riskAtTime: riskAtTime, buildMatchedPairs: buildMatchedPairs,
       checkMcEthicsApproval: checkMcEthicsApproval, runMcCloudFallback: runMcCloudFallback,
-      isIpdComplianceSatisfied: isIpdComplianceSatisfied
+      isIpdComplianceSatisfied: isIpdComplianceSatisfied,
+      humanColumnLabel: humanColumnLabel
     };
   }
 

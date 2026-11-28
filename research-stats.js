@@ -2381,11 +2381,55 @@
     };
   }
 
+  function categoricalGroupSummary(result, gname) {
+    var bg = result && result.byGroup;
+    var i, j, levels = [], seen = {}, ev, d, c, parts = [], cntParts;
+    if (!isArray(bg) || !bg.length) return "";
+    for (i = 0; i < bg.length; i++) {
+      d = bg[i] && bg[i].describe;
+      if (!d || !isArray(d.counts)) return "";
+      for (j = 0; j < d.counts.length; j++) {
+        c = d.counts[j];
+        if (c && c.level != null && !seen[c.level]) {
+          seen[c.level] = 1;
+          levels.push(c.level);
+        }
+      }
+    }
+    levels = sortLevels(levels);
+    if (bg.length === 2 && levels.length === 2) {
+      ev = eventLevel(levels);
+      for (i = 0; i < 2; i++) {
+        d = bg[i].describe;
+        var evN = 0, evPct = 0;
+        for (j = 0; j < d.counts.length; j++) {
+          if (d.counts[j].level === ev) {
+            evN = d.counts[j].n;
+            evPct = d.counts[j].pct;
+            break;
+          }
+        }
+        parts.push(String(evN) + " of " + String(d.n) + " (" + fmtNum(evPct, 1) + "%) in " + gname(i, "group " + (i + 1)));
+      }
+      return parts.join(" vs ");
+    }
+    for (i = 0; i < bg.length; i++) {
+      d = bg[i].describe;
+      cntParts = [];
+      for (j = 0; j < d.counts.length; j++) {
+        cntParts.push(String(d.counts[j].level) + " " + String(d.counts[j].n) + " (" + fmtNum(d.counts[j].pct, 1) + "%)");
+      }
+      parts.push(gname(i, "group " + (i + 1)) + " (n = " + String(d.n) + ": " + cntParts.join(", ") + ")");
+    }
+    return parts.join("; ");
+  }
+
   function resultsSentence(result, opts) {
-    var outcome, labels, i, parts, g1, g2, d1, d2, eff, tail, statBit;
+    var outcome, labels, i, parts, g1, g2, d1, d2, eff, tail, statBit, includeN, catSummary;
     if (!result || typeof result !== "object") bad("resultsSentence needs a compare result");
     opts = opts || {};
     outcome = opts.outcome ? String(opts.outcome) : "the outcome";
+    includeN = !!opts.includeN;
     labels = opts.groupLabels;
     if (!isArray(labels)) labels = [];
     function gname(i0, fallback) {
@@ -2393,13 +2437,16 @@
       if (result.byGroup && result.byGroup[i0]) return String(result.byGroup[i0].group);
       return fallback;
     }
+    function nTag(d) {
+      return (includeN && d && d.n != null) ? " (n = " + d.n + ")" : "";
+    }
     function pbit() { return formatP(result.p); }
     eff = result.effect || blankEffect();
     if (result.test === "welch_t" || result.test === "paired_t") {
       d1 = result.byGroup[0].describe;
       d2 = result.byGroup[1].describe;
-      g1 = gname(0, "group A");
-      g2 = gname(1, "group B");
+      g1 = gname(0, "group A") + nTag(d1);
+      g2 = gname(1, "group B") + nTag(d2);
       tail = "mean difference " + fmtNum(eff.estimate, 1) + ", 95% CI " +
         fmtNum(eff.ciLower, 1) + " to " + fmtNum(eff.ciUpper, 1) + "; " +
         result.label + ", " + pbit();
@@ -2409,13 +2456,22 @@
     if (result.test === "mann_whitney" || result.test === "wilcoxon") {
       d1 = result.byGroup[0].describe;
       d2 = result.byGroup[1].describe;
-      g1 = gname(0, "group A");
-      g2 = gname(1, "group B");
+      g1 = gname(0, "group A") + nTag(d1);
+      g2 = gname(1, "group B") + nTag(d2);
       return "Median " + outcome + " was " + fmtMedian(d1) + " in " + g1 + " and " +
         fmtMedian(d2) + " in " + g2 + " (" + result.label + ", " + pbit() + ").";
     }
     if (result.test === "anova" || result.test === "kruskal") {
       statBit = result.statisticName + " = " + fmtNum(result.statistic, 2);
+      if (includeN && isArray(result.byGroup) && result.byGroup.length) {
+        parts = [];
+        for (i = 0; i < result.byGroup.length; i++) {
+          d1 = result.byGroup[i].describe;
+          parts.push((result.test === "anova" ? fmtMean(d1) : fmtMedian(d1)) + " in " + gname(i, "group " + (i + 1)) + nTag(d1));
+        }
+        return (result.test === "anova" ? "Mean " : "Median ") + outcome + " was " + parts.join(", ") +
+          " (" + result.label + ", " + statBit + ", " + pbit() + ").";
+      }
       return result.label + " compared " + outcome + " across " + result.byGroup.length +
         " groups (" + statBit + ", " + pbit() + ").";
     }
@@ -2432,6 +2488,7 @@
     }
     if (result.test === "chi_square" || result.test === "fisher" || result.test === "mcnemar") {
       var isCaseCtrl = /case[-_\s]?control/i.test(String((opts && opts.studyType) || result.studyDesign || ""));
+      catSummary = categoricalGroupSummary(result, gname);
       if (eff && eff.measure === "RR" && isFin(eff.estimate)) {
         tail = "risk ratio " + fmtNum(eff.estimate, 2) + ", 95% CI " +
           fmtNum(eff.ciLower, 2) + " to " + fmtNum(eff.ciUpper, 2);
@@ -2440,6 +2497,9 @@
             fmtNum(eff.orCiLower, 2) + " to " + fmtNum(eff.orCiUpper, 2);
         }
         tail += "; " + result.label + ", " + pbit();
+        if (catSummary) {
+          return "The risk of " + outcome + " was " + catSummary + " (" + tail + ").";
+        }
         return "The risk of " + outcome + " differed between the groups (" + tail + ").";
       }
       if (eff && eff.measure === "OR" && isFin(eff.estimate)) {
@@ -2448,11 +2508,20 @@
           result.label + ", " + pbit();
         if (isCaseCtrl) {
           var ccDir = eff.estimate > 1 ? "higher" : (eff.estimate < 1 ? "lower" : "similar");
+          if (catSummary) {
+            return "Cases vs controls had " + ccDir + " odds of " + outcome + ": " + catSummary + " (" + tail + ").";
+          }
           return "Cases vs controls had " + ccDir + " odds of " + outcome + " (" + tail + ").";
+        }
+        if (catSummary) {
+          return "The odds of " + outcome + " differed across groups (" + catSummary + "; " + tail + ").";
         }
         return "The odds of " + outcome + " differed between the groups (" + tail + ").";
       }
       statBit = isFin(result.statistic) ? (result.statisticName + " = " + fmtNum(result.statistic, 2) + ", ") : "";
+      if (catSummary) {
+        return result.label + " compared " + outcome + " across the groups (" + catSummary + "; " + statBit + pbit() + ").";
+      }
       return result.label + " compared " + outcome + " across the groups (" + statBit + pbit() + ").";
     }
     bad("resultsSentence does not recognise this test");
