@@ -88,7 +88,7 @@ _FULL_DATE = (
 )
 
 _PATIENT_LABEL = (
-    r"\b(?:patient|patients|Mr\.|Mrs\.|Ms\.|admitted|discharged|diagnosed"
+    r"\b(?:patient|Mr\.|Mrs\.|Ms\.|admitted|discharged|diagnosed"
     r"|ward|bed no|IP no|OP no)\b"
 )
 _NAME_BIGRAM = r"\b[A-Z][a-z]{1,20}\s+[A-Z][a-z]{1,20}(?:\s+[A-Z][a-z]{1,20})?\b"
@@ -174,6 +174,73 @@ def _same_sentence(text: str, start: int, end: int) -> str:
     return text[lo:hi]
 
 
+_HONORIFIC_RE = re.compile(r"\b(?:Mr|Mrs|Ms|Dr)$", re.IGNORECASE)
+_END_PATIENT_RE = re.compile(r"\s+(?:Patient|Patients)$", re.IGNORECASE)
+_LEAD_PATIENT_RE = re.compile(r"^(?:Patient|Patients)\s+", re.IGNORECASE)
+_CITATION_MARKERS = (
+    "--- INPUT: citation_map.json (Reference Library) ---",
+    "--- CITATION MAP (Reference Truth) ---",
+)
+
+
+def _same_line_sentence(text: str, start: int, end: int) -> str:
+    line_lo = max(text.rfind("\n", 0, start), text.rfind("\r", 0, start)) + 1
+    candidates = [i for i in (text.find("\n", end), text.find("\r", end)) if i != -1]
+    line_hi = min(candidates) if candidates else len(text)
+    line = text[line_lo:line_hi]
+    rel_start = start - line_lo
+    rel_end = end - line_lo
+    sent_lo = 0
+    for idx in range(rel_start - 1, -1, -1):
+        ch = line[idx]
+        if ch in ".!?" and not (ch == "." and _HONORIFIC_RE.search(line[max(0, idx - 4):idx])):
+            sent_lo = idx + 1
+            break
+    sent_hi = len(line)
+    for idx in range(rel_end, len(line)):
+        ch = line[idx]
+        if ch in ".!?" and not (ch == "." and _HONORIFIC_RE.search(line[max(0, idx - 4):idx])):
+            sent_hi = idx + 1
+            break
+    return line[sent_lo:sent_hi]
+
+
+def _name_context_ok(match: re.Match) -> bool:
+    phrase = match.group(0)
+    if _END_PATIENT_RE.search(phrase):
+        return False
+    if _LEAD_PATIENT_RE.search(phrase):
+        rest = _LEAD_PATIENT_RE.sub("", phrase).strip().split()
+        if len(rest) < 2:
+            return False
+    text = match.string
+    if not _near(text, match.start(), match.end(), re.compile(_PATIENT_LABEL, re.IGNORECASE)):
+        return False
+    return re.search(_PATIENT_LABEL, _same_line_sentence(text, match.start(), match.end()),
+                     re.IGNORECASE) is not None
+
+
+_CITATION_END_RE = re.compile(
+    r"\n--- (?:INPUT:|CURRENT |EXPERIMENTAL |CONFERENCE |CITATION )"
+)
+
+
+def _citation_library_spans(text: str) -> list[tuple[int, int]]:
+    spans: list[tuple[int, int]] = []
+    for marker in _CITATION_MARKERS:
+        pos = 0
+        while pos < len(text):
+            idx = text.find(marker, pos)
+            if idx == -1:
+                break
+            tail_start = idx + len(marker)
+            m = _CITATION_END_RE.search(text, tail_start)
+            end = len(text) if m is None else m.start()
+            spans.append((idx, end))
+            pos = end + 1
+    return spans
+
+
 def _mrn_id_ok(match: re.Match) -> bool:
     value = match.group(1)
     return any(ch.isdigit() for ch in value) and 4 <= len(value) <= 16
@@ -185,8 +252,7 @@ _VALIDATORS = {
     "mod11": lambda m: nhs_mod11_valid(m.group(0)),
     "birth_context": lambda m: _near(m.string, m.start(), m.end(),
                                      re.compile(_BIRTH_LABEL, re.IGNORECASE)),
-    "name_context": lambda m: _near(m.string, m.start(), m.end(),
-                                    re.compile(_PATIENT_LABEL, re.IGNORECASE)),
+    "name_context": _name_context_ok,
     "admission_context": lambda m: (
         _near(m.string, m.start(), m.end(), re.compile(_ADMISSION_LABEL, re.IGNORECASE))
         and re.search(_PATIENT_LABEL, _same_sentence(m.string, m.start(), m.end()),
@@ -195,13 +261,14 @@ _VALIDATORS = {
 }
 
 
-def scan(text: str, mode: str = "default") -> dict:
+def scan(text: str, mode: str = "default", allow_citation_library_names: bool = False) -> dict:
     """Scan the exact assembled prompt text. Any hit blocks the call.
 
     mode="user" adds the plain any-full-date rule; the default literature-safe
     mode omits it (owner decision A: published dates are not patient dates).
     """
     user_mode = mode == "user"
+    cite_spans = _citation_library_spans(text) if allow_citation_library_names else []
     hits = []
     seen = set()
     for category, rule, pattern, validator in _RULES:
@@ -209,6 +276,10 @@ def scan(text: str, mode: str = "default") -> dict:
             continue
         for match in pattern.finditer(text):
             if validator is not None and not _VALIDATORS[validator](match):
+                continue
+            if category == "patient_name" and cite_spans and any(
+                lo <= match.start() and match.end() <= hi for lo, hi in cite_spans
+            ):
                 continue
             # indian_mobile and indian_mobile_spaced overlap on the unspaced form.
             key = (category, match.start(), match.end())

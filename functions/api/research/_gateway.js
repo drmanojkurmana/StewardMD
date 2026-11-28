@@ -21,6 +21,7 @@
 import { callGemini } from "../ai/[[path]].js";
 import { envModel, MODEL_HARD_DEFAULT } from "../../_ai_usage.js";
 import { scan, phiCategories } from "./_phi.js";
+import { PHI_OVERRIDE_TERMS_VERSION, parsePhiOverrideRequest, evaluatePhiOverride } from "./_suggest.js";
 import { TIER_CEILINGS, estimateTokens, checkAiCaps, HARD_STOP_MESSAGES } from "./_caps.js";
 import { quoteAiCall, aiActualMicroUsd, ownerAvailable, reserveCredits,
   settleCredits, releaseCredits, walletKeyFor } from "./_credits.js";
@@ -171,12 +172,31 @@ export async function llmRoute(ctx) {
   /* 1. PHI gate FIRST, on the exact text about to leave (system included). */
   const finalSystem = RESEARCH_FRAMING + (body.system ? "\n\n" + body.system : "");
   const assembled = finalSystem + "\n\n" + body.prompt;
-  const report = scan(assembled);
+  const report = scan(assembled, { allowCitationLibraryNames: true });
   if (report.blocked) {
-    const categories = phiCategories(report.hits);
-    await audit(db, job.project_id, "worker", "ai_phi_blocked", job.id, { categories });
-    return json({ error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
-      categories }, 422, { "x-request-id": requestId });
+    let jobMeta = {};
+    try { jobMeta = JSON.parse(job.output_json || "{}") || {}; } catch {}
+    const overrideReq = parsePhiOverrideRequest(body) ||
+      (jobMeta && jobMeta.phiOverride ? parsePhiOverrideRequest({ phiOverride: jobMeta.phiOverride }) : null);
+    const decision = evaluatePhiOverride(report.hits, overrideReq, env.RESEARCH_PHI_OVERRIDE !== "0");
+    if (decision.accepted) {
+      await audit(db, job.project_id, job.created_by || "worker", "ai_phi_override", job.id, {
+        route: "gateway",
+        categories: decision.categories,
+        termsVersion: PHI_OVERRIDE_TERMS_VERSION,
+        condition: decision.condition,
+        channel: "app_override_dialog",
+      });
+    } else {
+      const categories = decision.categories;
+      await audit(db, job.project_id, "worker", "ai_phi_blocked", job.id, { categories });
+      return json({
+        error: { code: "phi_blocked", message: "Patient identifiers detected; the AI call was blocked.", requestId },
+        categories,
+        overridable: decision.overridable,
+        allowedConditions: decision.allowedConditions,
+      }, 422, { "x-request-id": requestId });
+    }
   }
   /* NOTE (D1 stepId cache): Cached replies are stored in D1 table research_job_steps
    * keyed by (job_id, step_id) rather than R2 because D1 gives atomic PK dedup,

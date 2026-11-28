@@ -471,6 +471,8 @@
    * SMD_AUTH when present; errors normalize to {code, status, current}. */
   function apiRequest(method, path, body, options) {
     var isAiDraft = String(method || "").toUpperCase() === "POST" && path && /\/ai-draft(\?|$)/.test(path);
+    var isPoJobs = String(method || "").toUpperCase() === "POST" && path && /\/jobs(\?|$)/.test(path);
+    var supportsPhiOverride = isAiDraft || isPoJobs;
     var sendBody = body;
     var clientBlockedErr = null;
     var phiRemovedCats = [];
@@ -507,7 +509,7 @@
       }
       return data;
     }).catch(function (err) {
-      if (isAiDraft && err && err.status === 422 && err.code === "phi_blocked" && err.body) {
+      if (supportsPhiOverride && err && err.status === 422 && err.code === "phi_blocked" && err.body) {
         var cats = err.categories || (Array.isArray(err.body.categories) ? err.body.categories : []);
         var never = phiNeverOverridable(cats);
         var serverOverridable = err.body.overridable === true;
@@ -661,6 +663,9 @@
     }
     if (code === "publication_consent_required") {
       return { message: "Confirm the patient's written consent first.", action: "pubconsent", actionLabel: "Open Publication consent" };
+    }
+    if (code === "manuscript_not_found") {
+      return { message: "Draft the manuscript first.", action: "retry", actionLabel: "Try again" };
     }
     if (code === "ceiling_bytes" || status === 413) {
       return { message: "This file is too large for server upload (limit 25 MB). Upload a smaller file or a Word (.docx) document.", action: "retry", actionLabel: "Try again" };
@@ -839,7 +844,9 @@
     saveFile: saveFile,
     fileSlug: fileSlug,
     flashNotice: flashNotice,
-    saveProjectToAccount: saveActiveProjectToAccount
+    saveProjectToAccount: saveActiveProjectToAccount,
+    openPhiOverrideDialog: openPhiOverrideDialog,
+    phiNeverOverridable: phiNeverOverridable
   };
 
   /* Shared "Ask MaiK to draft it" bar. One helper for every step: the draft
@@ -2935,6 +2942,7 @@
   }
 
   function renderReady(container) {
+    var startScreen = currentScreen;
     var store = SMD.store;
     var proj = store && store.getActiveProject ? store.getActiveProject() : null;
     if (!proj) {
@@ -2988,6 +2996,12 @@
         reqs.push(SMD.api.request("GET", base + "/format-check?journal=" + encodeURIComponent(targetJournal)).catch(function () { return null; }));
       }
       return Promise.all(reqs).then(function (res) {
+      if (startScreen === "ready" && currentScreen !== "ready") return;
+      if (container && typeof container.isConnected === "boolean" && !container.isConnected) {
+        var liveBody = root ? root.querySelector("#rmdScreenBody") : null;
+        if (!liveBody) return;
+        container = liveBody;
+      }
       var man = manRes && manRes.manuscript;
       var snap = res[0] && (res[0].snapshot || res[0]);
       var checklist = res[1] && (res[1].checklist || res[1]);

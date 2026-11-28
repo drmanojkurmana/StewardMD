@@ -1,6 +1,7 @@
-/* ResearchMD PHI override contract (server side), owner decision 27 Nov 2026.
+/* ResearchMD PHI override contract (server side), owner decision 27-28 Nov 2026.
  *
- * Only POST /v1/projects/{id}/ai-draft accepts body.phiOverride = {
+ * POST /v1/projects/{id}/ai-draft, POST /v1/projects/{id}/jobs (manuscript_draft),
+ * and POST /v1/internal/llm accept body.phiOverride = {
  * accepted: true, termsVersion: "rmd-phi-override-v2",
  * condition: "false_positive" }. The override is ONE action: the doctor
  * confirming that the flag is a false detection. "anonymised" and "consent"
@@ -11,8 +12,8 @@
  * false_positive. The kill switch RESEARCH_PHI_OVERRIDE is ON unless it is
  * exactly "0". The 422 body reports overridable and allowedConditions and
  * never echoes the text. The audit event carries categories, condition,
- * termsVersion and the channel, never the text and no consent fields. Any
- * other route (jobs, suggestions) ignores the field.
+ * termsVersion and the channel, never the text and no consent fields. Suggestion
+ * routes skip the gate for published literature and ignore phiOverride.
  *
  * Synthetic data only. No em or en dashes.
  * node --test --experimental-test-module-mocks --experimental-sqlite test/research-phi-override.test.mjs
@@ -336,7 +337,7 @@ describe("ai-draft PHI override: one action, false detection", () => {
     assert.equal(meta.channel, "app_override_dialog");
   });
 
-  test("phiOverride on POST /jobs manuscript_draft is ignored -> 422 phi_blocked", { skip: SKIP }, async () => {
+  test("high-risk phone on POST /jobs manuscript_draft is never overridable -> 422 phi_blocked", { skip: SKIP }, async () => {
     defaultLlm();
     const env = freshEnv();
     fundWallet(env, "alice@example.com", 500);
@@ -345,17 +346,46 @@ describe("ai-draft PHI override: one action, false detection", () => {
     addRun(env, p.id);
     const r = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice", {
       kind: "manuscript_draft",
-      idempotencyKey: "k-override-ignored",
+      idempotencyKey: "k-override-phone-blocked",
       phiOverride: override("false_positive"),
     });
     assert.equal(r.http, 422, JSON.stringify(r));
     assert.equal(r.error.code, "phi_blocked");
     assert.ok(r.categories.includes("phone"), JSON.stringify(r));
-    assert.equal(r.overridable, undefined, "override is /ai-draft only, never jobs");
-    assert.equal(r.allowedConditions, undefined, "jobs never report allowed conditions");
+    assert.equal(r.overridable, false, "high-risk phone is never overridable on jobs");
+    assert.deepEqual(r.allowedConditions, [], "high-risk jobs report empty allowedConditions");
     assert.equal(env.RESEARCH_QUEUE._messages.length, 0);
     assert.equal(env.RESEARCH_R2._objects.size, 0);
     assert.equal(overrideAudit(env).length, 0);
+  });
+
+  test("low-risk date on POST /jobs manuscript_draft reports overridable:true and accepts false_positive", { skip: SKIP }, async () => {
+    defaultLlm();
+    const env = freshEnv();
+    fundWallet(env, "alice@example.com", 500000);
+    const p = await makeProject(env, "tok-alice", "systematic_review", "BCG review", "Does BCG reduce TB?");
+    lockProtocol(env, p.id, "Cohort reviewed 12/03/2023 in systematic review.");
+    addRun(env, p.id);
+    const blocked = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice", {
+      kind: "manuscript_draft",
+      idempotencyKey: "k-jobs-date-blocked",
+    });
+    assert.equal(blocked.http, 422, JSON.stringify(blocked));
+    assert.equal(blocked.overridable, true);
+    assert.deepEqual(blocked.allowedConditions, ALLOWED_CONDITIONS);
+
+    const ok = await call(env, "POST", "v1/projects/" + p.id + "/jobs", "tok-alice", {
+      kind: "manuscript_draft",
+      idempotencyKey: "k-jobs-date-ok",
+      runner: "device",
+      phiOverride: override("false_positive"),
+    });
+    assert.equal(ok.http, 202, JSON.stringify(ok));
+    const audits = overrideAudit(env);
+    assert.equal(audits.length, 1);
+    const meta = JSON.parse(audits[0].metadata_json);
+    assert.equal(meta.route, "jobs");
+    assert.equal(meta.condition, "false_positive");
   });
 
   test("phiOverride on a suggestion route is ignored (no override audit, literature skip)", { skip: SKIP }, async () => {

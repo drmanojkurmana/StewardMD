@@ -281,6 +281,7 @@
     exportNotice: null,
     exportNoticeKind: "warn",
     consentBlocked: false,
+    missingManuscriptBlocked: false,
     saveNotice: null,
     phoneTab: "sections", /* "sections" | "detail" | "approve" */
     lastRange: null,
@@ -782,9 +783,17 @@
     var pid = apiProjectId();
     var JR = draftJobsRunner();
 
+    var poOverridePrompt = (SMD.p2 && typeof SMD.p2.openPhiOverrideDialog === "function")
+      ? function (cats, canOverride, origErr) {
+        return SMD.p2.openPhiOverrideDialog(cats, canOverride, origErr);
+      }
+      : null;
+
     if (!JR) {
       return G.SMD_RMD_ONDEVICE_DRAFT.run(jobBundle, {
         resume: !!resume,
+        phiOverride: jobBundle && jobBundle.phiOverride,
+        onPhiOverride: poOverridePrompt,
         onProgress: function (info) {
           if (st.poCancelled) return;
           if (info && info.label) {
@@ -801,6 +810,8 @@
         st.poProgress = null;
         st.poError = null;
         st.poResumeCheckpoint = null;
+        st.missingManuscriptBlocked = false;
+        st.exportNotice = null;
         reloadVersions(target);
       }).catch(function (err) {
         if (st.poCancelled || (err && err.code === "cancelled")) return;
@@ -825,6 +836,8 @@
       deferredFail = null;
       return G.SMD_RMD_ONDEVICE_DRAFT.run(jobBundle, {
         resume: !!(resume || (resumeCtx && resumeCtx.resume)),
+        phiOverride: jobBundle && jobBundle.phiOverride,
+        onPhiOverride: poOverridePrompt,
         signal: resumeCtx && resumeCtx.signal,
         beginAiWait: resumeCtx && resumeCtx.beginAiWait,
         endAiWait: resumeCtx && resumeCtx.endAiWait,
@@ -879,6 +892,8 @@
         st.poProgress = null;
         st.poError = null;
         st.poResumeCheckpoint = null;
+        st.missingManuscriptBlocked = false;
+        st.exportNotice = null;
         reloadVersions(target);
         return;
       }
@@ -1024,6 +1039,8 @@
     st.poCancelError = null;
     st.poFailures = 0;
     st.poConfirm = null;
+    st.missingManuscriptBlocked = false;
+    st.exportNotice = null;
     if (target) render(target);
 
     var pid = encodeURIComponent(apiProjectId());
@@ -2686,6 +2703,7 @@
     st.exportNoticeKind = "info";
     st.gateFailures = [];
     st.consentBlocked = false;
+    st.missingManuscriptBlocked = false;
     render(container);
 
     var pid = encodeURIComponent(apiProjectId());
@@ -2750,6 +2768,12 @@
           } else if (err && err.code === "gate_failed") {
             st.exporting = false;
             st.exportNotice = err.message || "Some sections need a fix before downloading. Check Results and citations, then try again.";
+            st.exportNoticeKind = "warn";
+            render(container);
+          } else if (err && (err.code === "manuscript_not_found" || err.status === 404)) {
+            st.exporting = false;
+            st.missingManuscriptBlocked = true;
+            st.exportNotice = "Draft the manuscript first.";
             st.exportNoticeKind = "warn";
             render(container);
           } else {
@@ -3044,6 +3068,11 @@
     if (st.consentBlocked) {
       h.push('<div style="margin: 0 0 12px;">');
       h.push('  <button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" data-rmd="open-pubconsent">Open Publication consent</button>');
+      h.push('</div>');
+    }
+    if (st.missingManuscriptBlocked && !isLocked) {
+      h.push('<div style="margin: 0 0 12px;">');
+      h.push('  <button type="button" class="rmd-btn rmd-btn-primary" style="min-height:44px;" data-rmd="draft-manuscript-first">Draft the manuscript</button>');
       h.push('</div>');
     }
 
@@ -3376,6 +3405,32 @@
       btnPubConsent.onclick = function () {
         st.consentBlocked = false;
         SMD.navigate("pubconsent", {});
+      };
+    }
+
+    var btnDraftFirst = container.querySelector('[data-rmd="draft-manuscript-first"]');
+    if (btnDraftFirst) {
+      btnDraftFirst.onclick = function () {
+        st.missingManuscriptBlocked = false;
+        st.exportNotice = null;
+        var curP = SMD.store ? (SMD.store.getActiveProject ? SMD.store.getActiveProject() : SMD.store.getProject(st.projectId)) : null;
+        var sType = String((curP && (curP.studyType || curP.study_type)) || "").toLowerCase().replace(/[-_\s]+/g, "");
+        if (sType === "casereport") {
+          openCaseReportDraftModal(container);
+          return;
+        }
+        if (isPoEnabled() && (sType === "systematicreview" || sType === "metaanalysis")) {
+          openPoConfirm(container);
+          return;
+        }
+        var askBtn = container.querySelector('.rmd-man-ai-wrap [data-rmd-ai="ask"], .rmd-man-ai-wrap button');
+        if (askBtn && typeof askBtn.click === "function") {
+          askBtn.click();
+        } else if (isPoEnabled()) {
+          openPoConfirm(container);
+        } else {
+          render(container);
+        }
       };
     }
 

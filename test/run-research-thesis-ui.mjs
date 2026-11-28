@@ -39,6 +39,7 @@ let projN = 0, uploadN = 0;
 let jobMode = 'phi'; // 'phi' -> job prompts consent_needed; 'clean' -> job succeeds
 let requireDraftConsent = false;
 let journalsFail = false;
+let slowSectionPutMs = 0;
 const createdProjects = [];
 const aiDraftCalls = [];
 const journalMatchCalls = [];
@@ -232,6 +233,10 @@ const server = http.createServer((req, res) => {
       const secMatch = p.match(/^\/api\/research\/v1\/projects\/([^/]+)\/manuscript\/sections\/([^/]+)$/);
       if (secMatch && req.method === 'PUT') {
         savedSections.push({ sid: secMatch[2], body: b });
+        if (slowSectionPutMs > 0) {
+          setTimeout(() => send(200, { ok: true, tokens: {} }), slowSectionPutMs);
+          return;
+        }
         return send(200, { ok: true, tokens: {} });
       }
       if (p === '/api/research/v1/checklists' && req.method === 'GET') {
@@ -729,6 +734,17 @@ try {
   ok(await ev(`(()=>{const nav=document.querySelector('.rmd-shell-tabs');const act=nav&&nav.querySelector('.rmd-tab-active');if(!nav||!act)return false;const nr=nav.getBoundingClientRect();const ar=act.getBoundingClientRect();return nav.scrollLeft>0 && ar.left>=nr.left-2 && ar.right<=nr.right+2;})()`), 'active Ready pill scrolls cleanly into view at 390px');
   await call('Emulation.setDeviceMetricsOverride', { width: 375, height: 812, deviceScaleFactor: 2, mobile: true });
   await sleep(150);
+
+  // 11a. Regression: clicking Ready while Save to manuscript PUTs are still in-flight stays on Ready (never hijacked to thesis-tables).
+  slowSectionPutMs = 350;
+  await ev(`SMD_RESEARCH.navigate('thesis-draft',{});1`);
+  ok(await until(`!!document.querySelector('#rmdDraftSave')`, 5000), 'Draft tab ready before slow save regression check');
+  await click('#rmdDraftSave');
+  await sleep(40);
+  await click('[data-rmd-tab="ready"]');
+  await sleep(750);
+  ok(await ev(`!!document.querySelector('.rmd-ready-screen') && !!document.querySelector('[data-rmd="format-check-card"]')`), 'Ready screen stays rendered with format-check card even after in-flight saveDraft finishes');
+  slowSectionPutMs = 0;
 
   // 11b. "< ResearchMD" header navigation from Draft tab lands on project list; X closes ResearchMD.
   await ev(`SMD_RESEARCH.navigate('thesis-draft',{});1`);

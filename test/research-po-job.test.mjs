@@ -596,7 +596,8 @@ test("manuscript_draft: full date in the protocol question blocks (user-typed te
   assert.equal(r.http, 422, JSON.stringify(r));
   assert.equal(r.error.code, "phi_blocked");
   assert.ok(Array.isArray(r.categories) && r.categories.includes("dates"), JSON.stringify(r));
-  assert.equal(r.overridable, undefined, "jobs never offer an override");
+  assert.equal(r.overridable, true, "low-risk date on jobs may be overridden with false_positive");
+  assert.deepEqual(r.allowedConditions, ["false_positive"]);
   assert.ok(!JSON.stringify(r).includes("12/03/2023"), "PHI date must never be echoed");
   assert.equal(env.RESEARCH_R2._objects.size, 0);
   assert.equal(env.RESEARCH_QUEUE._messages.length, 0);

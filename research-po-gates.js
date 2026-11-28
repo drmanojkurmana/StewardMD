@@ -118,7 +118,7 @@
     "|\\d{1,2}\\s+" + PHI_MONTH + "\\s+\\d{2,4}" +
     "|" + PHI_MONTH + "\\s+\\d{1,2},?\\s+\\d{4})(?!\\d)";
   var PHI_PATIENT_LABEL =
-    "\\b(?:patient|patients|Mr\\.|Mrs\\.|Ms\\.|admitted|discharged|diagnosed" +
+    "\\b(?:patient|Mr\\.|Mrs\\.|Ms\\.|admitted|discharged|diagnosed" +
     "|ward|bed no|IP no|OP no)\\b";
   var PHI_NAME_BIGRAM = "\\b[A-Z][a-z]{1,20}\\s+[A-Z][a-z]{1,20}(?:\\s+[A-Z][a-z]{1,20})?\\b";
   var PHI_BIRTH_LABEL = "\\b(?:DOB|date of birth|born on|birth date)\\b";
@@ -161,6 +161,83 @@
     return text.slice(lo, hi);
   }
 
+  function isHonorificDot(line, idx) {
+    if (line.charAt(idx) !== ".") return false;
+    return /\b(?:Mr|Mrs|Ms|Dr)$/i.test(line.slice(Math.max(0, idx - 4), idx));
+  }
+
+  function phiSameLineSentence(text, start, end) {
+    var lineLo = Math.max(text.lastIndexOf("\n", start - 1), text.lastIndexOf("\r", start - 1)) + 1;
+    var nIdx = text.indexOf("\n", end);
+    var rIdx = text.indexOf("\r", end);
+    var lineHi = text.length;
+    if (nIdx !== -1 && nIdx < lineHi) lineHi = nIdx;
+    if (rIdx !== -1 && rIdx < lineHi) lineHi = rIdx;
+    var line = text.slice(lineLo, lineHi);
+    var relStart = start - lineLo;
+    var relEnd = end - lineLo;
+    var sentLo = 0;
+    for (var i = relStart - 1; i >= 0; i--) {
+      var ch = line.charAt(i);
+      if ((ch === "." || ch === "!" || ch === "?") && !isHonorificDot(line, i)) {
+        sentLo = i + 1;
+        break;
+      }
+    }
+    var sentHi = line.length;
+    for (var j = relEnd; j < line.length; j++) {
+      var ch2 = line.charAt(j);
+      if ((ch2 === "." || ch2 === "!" || ch2 === "?") && !isHonorificDot(line, j)) {
+        sentHi = j + 1;
+        break;
+      }
+    }
+    return line.slice(sentLo, sentHi);
+  }
+
+  function phiValidNameNearLabel(m, text) {
+    var phrase = m[0];
+    if (/\s+(?:Patient|Patients)$/i.test(phrase)) return false;
+    if (/^(?:Patient|Patients)\s+/i.test(phrase)) {
+      var rest = phrase.replace(/^(?:Patient|Patients)\s+/i, "").trim().split(/\s+/);
+      if (rest.length < 2) return false;
+    }
+    var end = m.index + phrase.length;
+    if (!phiNear(text, m.index, end, PHI_PATIENT_RE)) return false;
+    return PHI_PATIENT_RE.test(phiSameLineSentence(text, m.index, end));
+  }
+
+  var PHI_CITATION_MARKERS = [
+    "--- INPUT: citation_map.json (Reference Library) ---",
+    "--- CITATION MAP (Reference Truth) ---"
+  ];
+
+  function phiCitationLibrarySpans(text) {
+    var spans = [];
+    var endRe = /\n--- (?:INPUT:|CURRENT |EXPERIMENTAL |CONFERENCE |CITATION )/;
+    for (var mi = 0; mi < PHI_CITATION_MARKERS.length; mi++) {
+      var marker = PHI_CITATION_MARKERS[mi];
+      var from = 0;
+      while (from < text.length) {
+        var idx = text.indexOf(marker, from);
+        if (idx === -1) break;
+        var tail = text.slice(idx + marker.length);
+        var em = endRe.exec(tail);
+        var spanEnd = em ? (idx + marker.length + em.index) : text.length;
+        spans.push([idx, spanEnd]);
+        from = spanEnd + 1;
+      }
+    }
+    return spans;
+  }
+
+  function inSpans(start, end, spans) {
+    for (var i = 0; i < spans.length; i++) {
+      if (start >= spans[i][0] && end <= spans[i][1]) return true;
+    }
+    return false;
+  }
+
   var PHI_RULES = [
     ["mrn", "labelled_id",
       new RegExp("\\b(?:MRN|UHID|medical\\s+record(?:\\s+(?:no|number|#))?|hospital\\s+no" +
@@ -193,7 +270,7 @@
     ["address", "pin_with_label",
       /\b(?:PIN\s*code|PIN|postal\s+code|zip\s*code)\D{0,10}(\d{6})\b/gi, null, null],
     ["patient_name", "name_near_patient_label", new RegExp(PHI_NAME_BIGRAM, "g"),
-      function (m, text) { return phiNear(text, m.index, m.index + m[0].length, PHI_PATIENT_RE); }, null],
+      phiValidNameNearLabel, null],
     ["admission_date", "date_near_admission_label", new RegExp(PHI_FULL_DATE, "gi"),
       function (m, text) {
         return phiNear(text, m.index, m.index + m[0].length, PHI_ADMISSION_RE) &&
@@ -209,6 +286,8 @@
     var s = String(text == null ? "" : text);
     var mode = typeof opts === "string" ? opts : (opts && opts.mode);
     var userMode = mode === "user";
+    var allowCitationNames = !!(opts && typeof opts === "object" && opts.allowCitationLibraryNames);
+    var citeSpans = allowCitationNames ? phiCitationLibrarySpans(s) : [];
     var rules = userMode ? PHI_RULES.concat(PHI_USER_ONLY_RULES) : PHI_RULES;
     var hits = [];
     var seen = {};
@@ -228,10 +307,14 @@
           continue;
         }
         if (validator && !validator(m, s)) continue;
-        var key = category + ":" + m.index + ":" + (m.index + m[0].length);
+        var hitEnd = m.index + m[0].length;
+        if (category === "patient_name" && citeSpans.length && inSpans(m.index, hitEnd, citeSpans)) {
+          continue;
+        }
+        var key = category + ":" + m.index + ":" + hitEnd;
         if (seen[key]) continue;
         seen[key] = true;
-        hits.push({ category: category, rule: rule, start: m.index, end: m.index + m[0].length });
+        hits.push({ category: category, rule: rule, start: m.index, end: hitEnd });
       }
     }
     hits.sort(function (a, b) {

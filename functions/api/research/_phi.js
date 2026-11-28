@@ -79,7 +79,7 @@ const FULL_DATE =
   "|" + MONTH + "\\s+\\d{1,2},?\\s+\\d{4})(?!\\d)";
 
 const PATIENT_LABEL =
-  "\\b(?:patient|patients|Mr\\.|Mrs\\.|Ms\\.|admitted|discharged|diagnosed" +
+  "\\b(?:patient|Mr\\.|Mrs\\.|Ms\\.|admitted|discharged|diagnosed" +
   "|ward|bed no|IP no|OP no)\\b";
 const NAME_BIGRAM = "\\b[A-Z][a-z]{1,20}\\s+[A-Z][a-z]{1,20}(?:\\s+[A-Z][a-z]{1,20})?\\b";
 const BIRTH_LABEL = "\\b(?:DOB|date of birth|born on|birth date)\\b";
@@ -117,9 +117,85 @@ function sameSentence(text, start, end) {
   return text.slice(lo, hi);
 }
 
+function isHonorificDot(line, idx) {
+  if (line.charAt(idx) !== ".") return false;
+  return /\b(?:Mr|Mrs|Ms|Dr)$/i.test(line.slice(Math.max(0, idx - 4), idx));
+}
+
+function sameLineSentence(text, start, end) {
+  const lineLo = Math.max(text.lastIndexOf("\n", start - 1), text.lastIndexOf("\r", start - 1)) + 1;
+  const nIdx = text.indexOf("\n", end);
+  const rIdx = text.indexOf("\r", end);
+  let lineHi = text.length;
+  if (nIdx !== -1 && nIdx < lineHi) lineHi = nIdx;
+  if (rIdx !== -1 && rIdx < lineHi) lineHi = rIdx;
+  const line = text.slice(lineLo, lineHi);
+  const relStart = start - lineLo;
+  const relEnd = end - lineLo;
+  let sentLo = 0;
+  for (let i = relStart - 1; i >= 0; i--) {
+    const ch = line.charAt(i);
+    if ((ch === "." || ch === "!" || ch === "?") && !isHonorificDot(line, i)) {
+      sentLo = i + 1;
+      break;
+    }
+  }
+  let sentHi = line.length;
+  for (let j = relEnd; j < line.length; j++) {
+    const ch2 = line.charAt(j);
+    if ((ch2 === "." || ch2 === "!" || ch2 === "?") && !isHonorificDot(line, j)) {
+      sentHi = j + 1;
+      break;
+    }
+  }
+  return line.slice(sentLo, sentHi);
+}
+
 const BIRTH_RE = new RegExp(BIRTH_LABEL, "i");
 const PATIENT_RE = new RegExp(PATIENT_LABEL, "i");
 const ADMISSION_RE = new RegExp(ADMISSION_LABEL, "i");
+
+function validNameNearLabel(m, text) {
+  const phrase = m[0];
+  if (/\s+(?:Patient|Patients)$/i.test(phrase)) return false;
+  if (/^(?:Patient|Patients)\s+/i.test(phrase)) {
+    const rest = phrase.replace(/^(?:Patient|Patients)\s+/i, "").trim().split(/\s+/);
+    if (rest.length < 2) return false;
+  }
+  const end = m.index + phrase.length;
+  if (!near(text, m.index, end, PATIENT_RE)) return false;
+  return PATIENT_RE.test(sameLineSentence(text, m.index, end));
+}
+
+const CITATION_MARKERS = [
+  "--- INPUT: citation_map.json (Reference Library) ---",
+  "--- CITATION MAP (Reference Truth) ---",
+];
+
+function citationLibrarySpans(text) {
+  const spans = [];
+  const endRe = /\n--- (?:INPUT:|CURRENT |EXPERIMENTAL |CONFERENCE |CITATION )/;
+  for (const marker of CITATION_MARKERS) {
+    let from = 0;
+    while (from < text.length) {
+      const idx = text.indexOf(marker, from);
+      if (idx === -1) break;
+      const tail = text.slice(idx + marker.length);
+      const em = endRe.exec(tail);
+      const spanEnd = em ? (idx + marker.length + em.index) : text.length;
+      spans.push([idx, spanEnd]);
+      from = spanEnd + 1;
+    }
+  }
+  return spans;
+}
+
+function inSpans(start, end, spans) {
+  for (const sp of spans) {
+    if (start >= sp[0] && end <= sp[1]) return true;
+  }
+  return false;
+}
 
 /* (category, rule, regex, validator) in the same order as phi.py _RULES. */
 const RULES = [
@@ -158,8 +234,7 @@ const RULES = [
   ["address", "house_locality", new RegExp(HOUSE, "g"), null],
   ["address", "pin_with_label",
     /\b(?:PIN\s*code|PIN|postal\s+code|zip\s*code)\D{0,10}(\d{6})\b/gi, null],
-  ["patient_name", "name_near_patient_label", new RegExp(NAME_BIGRAM, "g"),
-    (m, text) => near(text, m.index, m.index + m[0].length, PATIENT_RE)],
+  ["patient_name", "name_near_patient_label", new RegExp(NAME_BIGRAM, "g"), validNameNearLabel],
   ["admission_date", "date_near_admission_label", new RegExp(FULL_DATE, "gi"),
     (m, text) => near(text, m.index, m.index + m[0].length, ADMISSION_RE) &&
       PATIENT_RE.test(sameSentence(text, m.index, m.index + m[0].length))],
@@ -176,6 +251,8 @@ const USER_ONLY_RULES = [
 export function scan(text, opts) {
   const s = String(text == null ? "" : text);
   const userMode = !!(opts && opts.mode === "user");
+  const allowCitationNames = !!(opts && opts.allowCitationLibraryNames === true);
+  const citeSpans = allowCitationNames ? citationLibrarySpans(s) : [];
   const rules = userMode ? RULES.concat(USER_ONLY_RULES) : RULES;
   const hits = [];
   const seen = new Set();
@@ -185,11 +262,15 @@ export function scan(text, opts) {
     while ((m = pattern.exec(s)) !== null) {
       if (m[0].length === 0) { pattern.lastIndex++; continue; }
       if (validator && !validator(m, s)) continue;
+      const end = m.index + m[0].length;
+      if (category === "patient_name" && citeSpans.length && inSpans(m.index, end, citeSpans)) {
+        continue;
+      }
       /* indian_mobile and indian_mobile_spaced overlap on the unspaced form. */
-      const key = category + ":" + m.index + ":" + (m.index + m[0].length);
+      const key = category + ":" + m.index + ":" + end;
       if (seen.has(key)) continue;
       seen.add(key);
-      hits.push({ category, rule, start: m.index, end: m.index + m[0].length });
+      hits.push({ category, rule, start: m.index, end });
     }
   }
   hits.sort((a, b) => a.start - b.start || (a.category < b.category ? -1 : a.category > b.category ? 1 : 0));
