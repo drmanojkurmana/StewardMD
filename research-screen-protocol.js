@@ -301,7 +301,7 @@
     h.push('<button type="button" class="rmd-btn-close" data-rmd="proto-cancel" aria-label="Cancel editing">&times;</button></div>');
     h.push('<form id="rmdProtoForm" class="rmd-form">');
 
-    if (canEdit && st.ai) h.push(SMD.ai.barHtml(st.ai, { task: "protocol", label: "protocol", cost: 2 }));
+    if (canEdit && st.ai) h.push(SMD.ai.barHtml(st.ai, { task: "protocol", label: "protocol" }));
 
     h.push('<div class="rmd-field"><label for="rmd_proto_title">Review Title</label>');
     h.push('<input type="text" id="rmd_proto_title" maxlength="240" value="' + esc(d.title) + '" placeholder="e.g. BCG vaccination for tuberculosis prevention…" autocomplete="off">' + SMD.ai.noteHtml(st.ai, "title") + '</div>');
@@ -668,7 +668,6 @@
           pid: project.id,
           task: "protocol",
           label: "protocol",
-          cost: 2,
           input: function () { return { title: st.draft.title, framework: st.framework, researchQuestion: project.researchQuestion || "" }; },
           apply: function (draft) {
             var d = draft || {};

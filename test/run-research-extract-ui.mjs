@@ -232,10 +232,10 @@ try {
   await sleep(250);
   const runOpenBody = await text('#rmdScreenBody');
   ok(!/Something went wrong on our side/i.test(runOpenBody) && !/HTTP 409/.test(runOpenBody), 'opening study with running job shows no 409 error banner');
-  await ev(`if(SMD_RESEARCH.screens.extract._setPollOptions) SMD_RESEARCH.screens.extract._setPollOptions({ intervalMs: 60, timeoutMs: 5000 }); 1`);
+  await ev(`if(SMD_RESEARCH.screens.extract._setPollOptions) SMD_RESEARCH.screens.extract._setPollOptions({ intervalMs: 250, timeoutMs: 5000 }); 1`);
   await click('[data-rmd-ai="ask"]');
   ok(await until(`/MaiK is reading the paper/i.test(document.querySelector('#rmdScreenBody').textContent)`, 3000), 'visible "MaiK is reading the paper" state shown while polling');
-  ok(await until(`!!document.querySelector('.rmd-suggestion') && /27/.test(document.querySelector('.rmd-suggestion').textContent)`, 6000), 'after job succeeds, client fetches and displays suggestions');
+  ok(await until(`!!document.querySelector('.rmd-suggestion') && /27/.test(document.querySelector('.rmd-suggestion').textContent)`, 8000), 'after job succeeds, client fetches and displays suggestions');
 
   /* 3. Polling timeout shows plain timeout message (never "on our side") */
   state.artifacts[0].status = 'running';

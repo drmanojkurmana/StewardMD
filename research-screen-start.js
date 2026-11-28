@@ -778,7 +778,7 @@
     h.push('      <h3 class="rmd-card-heading">Ethics committee (IEC) application</h3>');
     h.push('      <span class="rmd-badge rmd-badge-neutral">ICMR 2017</span>');
     h.push('    </div>');
-    h.push(SMD.ai ? SMD.ai.barHtml(st.iecAi, { task: "iec_application", label: "ethics application", cost: 2 }) : "");
+    h.push(SMD.ai ? SMD.ai.barHtml(st.iecAi, { task: "iec_application", label: "ethics application" }) : "");
     h.push('    <div class="rmd-iec-form rmd-form"' + (st.iecOpen ? '' : ' style="display:none;"') + '>');
     var id = st.iecData;
     h.push('      <div class="rmd-field">');
@@ -893,7 +893,7 @@
     h.push('        </select>');
     h.push('      </div>');
     h.push('    </div>');
-    h.push(SMD.ai ? SMD.ai.barHtml(st.consentAi, { task: "consent_form", label: "consent form", cost: 2 }) : "");
+    h.push(SMD.ai ? SMD.ai.barHtml(st.consentAi, { task: "consent_form", label: "consent form" }) : "");
     h.push('    <div class="rmd-consent-form rmd-form"' + (st.consentOpen ? '' : ' style="display:none;"') + '>');
     var cd = st.consentData;
 
@@ -998,7 +998,7 @@
     h.push('      <h3 class="rmd-card-heading">CTRI registration</h3>');
     h.push('      <span class="rmd-badge rmd-badge-neutral">Clinical Trials Registry - India</span>');
     h.push('    </div>');
-    h.push(SMD.ai ? SMD.ai.barHtml(st.ctriAi, { task: "ctri_fields", label: "CTRI fields", cost: 2 }) : "");
+    h.push(SMD.ai ? SMD.ai.barHtml(st.ctriAi, { task: "ctri_fields", label: "CTRI fields" }) : "");
     h.push('    <div class="rmd-ctri-form rmd-form"' + (st.ctriOpen ? '' : ' style="display:none;"') + '>');
     var ctd = st.ctriData;
     h.push('      <div class="rmd-field">');
@@ -1111,6 +1111,7 @@
   }
 
   function bindEvents(container, proj) {
+    if (SMD.pricing && SMD.pricing.ensureLoaded) SMD.pricing.ensureLoaded();
     var on = function (sel, fn) {
       var els = container.querySelectorAll(sel);
       for (var i = 0; i < els.length; i++) els[i].onclick = fn;
@@ -1219,6 +1220,7 @@
           SMD.api.request("POST", "/v1/projects/" + encodeURIComponent((proj && proj.serverId) || proj.id) + "/ai-draft", body)
             .then(function (res) {
               st.iecAi.busy = false;
+              if (SMD.pricing && SMD.pricing.recordCharge) SMD.pricing.recordCharge(st.iecAi, res);
               var d = res && res.draft ? res.draft : res;
               var populated = 0;
               if (d) {
@@ -1407,6 +1409,7 @@
           SMD.api.request("POST", "/v1/projects/" + encodeURIComponent((proj && proj.serverId) || proj.id) + "/ai-draft", body)
             .then(function (res) {
               st.consentAi.busy = false;
+              if (SMD.pricing && SMD.pricing.recordCharge) SMD.pricing.recordCharge(st.consentAi, res);
               var d = res && res.draft ? res.draft : res;
               var cPop = 0;
               if (d) {
@@ -1647,6 +1650,7 @@
           SMD.api.request("POST", "/v1/projects/" + encodeURIComponent((proj && proj.serverId) || proj.id) + "/ai-draft", body)
             .then(function (res) {
               st.ctriAi.busy = false;
+              if (SMD.pricing && SMD.pricing.recordCharge) SMD.pricing.recordCharge(st.ctriAi, res);
               var d = res && res.draft ? res.draft : res;
               var ctriPop = 0;
               if (d) {

@@ -351,6 +351,12 @@
     poConfirm: null,
     poQuoteMicroUsd: null,
     poQuoteSource: "",
+    poQuoteMt: null,
+    poQuoteInr: null,
+    poQuoteMinMt: null,
+    poQuoteMaxMt: null,
+    poActualMt: null,
+    poActualInr: null,
     approvedSections: {},
     redraftOpen: false,
     moreMenuOpen: false
@@ -670,6 +676,9 @@
         stateClass = " rmd-po-status-warn rmd-verify-warn";
       }
       inner = '<span class="rmd-po-status-text' + stateClass + '">' + esc(statusText) + '</span>';
+      if (st.poActualMt != null && (st.poStatus === "succeeded" || st.poStatus === "failed" || st.poStatus === "cancelled")) {
+        inner += ' <span class="rmd-ai-charged" role="status">Charged: ' + esc(poMtText(st.poActualMt)) + ' MaiK Tokens' + (st.poActualInr != null ? ' (Rs ' + esc(Math.round(Number(st.poActualInr) * 100) / 100) + ')' : '') + '</span>';
+      }
       if (isJobActive && st.poJobId) {
         inner += ' <button type="button" class="rmd-btn rmd-btn-subtle rmd-btn-sm" data-rmd="po-cancel">Cancel</button>';
       }
@@ -714,6 +723,10 @@
       st.poFailures = 0;
       var job = (res && res.job) || res;
       var status = job && job.status;
+      if (job && job.actualCostMt != null) {
+        st.poActualMt = Number(job.actualCostMt);
+        st.poActualInr = job.actualCostInr != null ? Number(job.actualCostInr) : st.poActualInr;
+      }
       if (status === "succeeded" || status === "done") {
         clearPoPoll();
         st.poStatus = "succeeded";
@@ -775,7 +788,25 @@
     return "$" + (usd >= 0.01 ? usd.toFixed(2) : usd.toFixed(4));
   }
 
+  function poMtText(n) {
+    var v = Math.max(0, Math.round(Number(n) || 0));
+    try { return v.toLocaleString("en-IN"); } catch (e) { return String(v); }
+  }
+
+  function poQuoteTokensText() {
+    if (st.poQuoteMinMt != null && st.poQuoteMaxMt != null) {
+      return poMtText(st.poQuoteMinMt) + " to " + poMtText(st.poQuoteMaxMt) + " MaiK Tokens";
+    }
+    if (st.poQuoteMt != null) return poMtText(st.poQuoteMt) + " MaiK Tokens";
+    return "";
+  }
+
   function poQuoteNote() {
+    var tokText = poQuoteTokensText();
+    if (tokText) {
+      var inr = st.poQuoteInr != null ? (" (Rs " + (Math.round(Number(st.poQuoteInr) * 100) / 100) + " ceiling)") : "";
+      return "Server quote: " + tokText + inr + " for up to 64 model calls.";
+    }
     if (st.poQuoteMicroUsd != null) {
       return "Server quote: " + quoteUsdText(st.poQuoteMicroUsd) + " for up to 64 model calls.";
     }
@@ -785,9 +816,12 @@
   function poConfirmHtml() {
     if (!st.poConfirm) return "";
     var q = st.poConfirm.quote;
-    var sentence = (q != null)
-      ? "The server quotes " + esc(quoteUsdText(q)) + " for up to 64 model calls."
-      : "Cost shown before the draft starts. The server quotes the exact cost when the job is created, and you can cancel while it is queued.";
+    var tokText = poQuoteTokensText();
+    var sentence = tokText
+      ? "The server quotes " + esc(tokText) + (st.poQuoteInr != null ? (" (Rs " + esc(Math.round(Number(st.poQuoteInr) * 100) / 100) + " ceiling)") : "") + " for up to 64 model calls."
+      : (q != null
+        ? "The server quotes " + esc(quoteUsdText(q)) + " for up to 64 model calls."
+        : "Cost shown before the draft starts. The server quotes the exact cost when the job is created, and you can cancel while it is queued.");
     var h = [];
     h.push('<div class="rmd-po-confirm" role="group" aria-label="Confirm the full draft">');
     h.push('  <p><strong>Start a full draft?</strong> PaperOrchestra writes every section from your locked protocol, verified studies and saved analysis. You review and approve the result.</p>');
@@ -798,6 +832,14 @@
     h.push('  </div>');
     h.push('</div>');
     return h.join("\n");
+  }
+
+  function manuscriptInputChars() {
+    var man = st.manuscript || null;
+    var chars = 1500;
+    var secs = (man && man.sections) || [];
+    for (var i = 0; i < secs.length; i++) chars += String((secs[i] && secs[i].text) || "").length;
+    return chars;
   }
 
   function poBlockHtml() {
@@ -828,10 +870,17 @@
     if (!SMD.api || !proj || !proj.serverId || proj.tutorial || proj.practice) return;
     SMD.api.request("GET", "/v1/projects/" + encodeURIComponent(proj.serverId) + "/jobs/quote?kind=manuscript_draft").then(function (res) {
       var micro = res && (res.quoteMicroUsd != null ? res.quoteMicroUsd : (res.quote && res.quote.quoteMicroUsd));
-      if (micro == null) return;
-      st.poQuoteMicroUsd = micro;
-      st.poQuoteSource = "server";
-      if (st.poConfirm) st.poConfirm.quote = micro;
+      if (micro != null) {
+        st.poQuoteMicroUsd = micro;
+        st.poQuoteSource = "server";
+        if (st.poConfirm) st.poConfirm.quote = micro;
+      }
+      if (res) {
+        if (res.quoteMt != null) st.poQuoteMt = Number(res.quoteMt);
+        if (res.quoteInr != null) st.poQuoteInr = Number(res.quoteInr);
+        if (res.expectedMinMt != null) st.poQuoteMinMt = Number(res.expectedMinMt);
+        if (res.expectedMaxMt != null) st.poQuoteMaxMt = Number(res.expectedMaxMt);
+      }
       render(container);
     }, function () {
       /* No quote endpoint yet: keep the honest fallback sentence. */
@@ -1149,6 +1198,8 @@
       if (ceilings && ceilings.quoteMicroUsd != null) {
         st.poQuoteMicroUsd = ceilings.quoteMicroUsd;
         st.poQuoteSource = "server";
+        if (ceilings.quoteMt != null) st.poQuoteMt = Number(ceilings.quoteMt);
+        if (ceilings.quoteInr != null) st.poQuoteInr = Number(ceilings.quoteInr);
       }
 
       if (jStatus === "succeeded" || jStatus === "done") {
@@ -1585,6 +1636,13 @@
       if (fContainer) {
         fContainer.innerHTML = findingsHtml;
       }
+
+      var costEl = box.querySelector("#rmd-cr-cost");
+      if (costEl) {
+        costEl.textContent = (SMD.pricing && SMD.pricing.quoteText)
+          ? SMD.pricing.quoteText("case_report_draft", { inputLength: String(currentText || "").length })
+          : "Checking live server estimate...";
+      }
     }
 
     var h = [];
@@ -1600,6 +1658,7 @@
     h.push('</div>');
 
     h.push('<div id="rmd-cr-findings-container"></div>');
+    h.push('<p class="rmd-ai-cost" id="rmd-cr-cost">' + esc((SMD.pricing && SMD.pricing.quoteText) ? SMD.pricing.quoteText("case_report_draft", { inputLength: String(currentText || "").length }) : "Checking live server estimate...") + '</p>');
 
     h.push('<div style="margin:14px 0 16px 0;">');
     h.push('  <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer;">');
@@ -1739,7 +1798,8 @@
           }
           syncDraftSectionsToServer(syncedList);
           if (getSection("casePresentation")) st.selectedSectionId = "casePresentation";
-          st.saveNotice = "Drafted by MaiK. Review and verify every clinical detail before approving.";
+          var crMt = (SMD.pricing && SMD.pricing.chargeMtFromResponse) ? SMD.pricing.chargeMtFromResponse(resp.data) : null;
+          st.saveNotice = "Drafted by MaiK. Review and verify every clinical detail before approving." + (crMt != null ? (" Charged: " + (SMD.pricing && SMD.pricing.formatMt ? SMD.pricing.formatMt(crMt) : (crMt + " MaiK Tokens")) + ".") : "");
           closeModal();
           render(container);
         } else {
@@ -1851,11 +1911,10 @@
       h.push(SMD.ai.barHtml(st.ai, {
         task: "manuscript_draft",
         label: "manuscript draft",
-        cost: 2,
+        inputLength: manuscriptInputChars(),
         askLabel: "Quick draft (Ask MaiK)",
         manualLabel: "Write it myself",
-        askBtnClass: isPoEnabled() ? "rmd-btn-subtle" : "rmd-btn-primary",
-        costText: (proj && proj.tutorial) ? "No MaiK tokens needed." : "Costs about 2 MaiK tokens."
+        askBtnClass: isPoEnabled() ? "rmd-btn-subtle" : "rmd-btn-primary"
       }));
       h.push('    </div>');
     } else {
@@ -4304,8 +4363,13 @@
 
     if (st.ai) {
       SMD.ai.bind(container, st.ai, {
-        pid: st.projectId, task: "manuscript_draft", label: "manuscript draft", cost: 2,
-        request: function () { return startManuscriptDraft(); },
+        pid: st.projectId, task: "manuscript_draft", label: "manuscript draft", inputLength: manuscriptInputChars(),
+        request: function () {
+          return startManuscriptDraft().then(function (res) {
+            if (SMD.pricing && SMD.pricing.recordCharge) SMD.pricing.recordCharge(st.ai, res);
+            return res;
+          });
+        },
         apply: function (draft) {
           return applyManuscriptDraft(container, draft);
         },

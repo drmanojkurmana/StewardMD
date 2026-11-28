@@ -113,7 +113,9 @@ describe("research-screen-pubconsent editor & docx unit tests", () => {
 
   test("pubconsent source uses ResearchMD theme tokens, updated cost text, and zero em/en dashes", () => {
     const src = readFileSync(new URL("../research-screen-pubconsent.js", import.meta.url), "utf8");
-    assert.match(src, /Costs about 2 MaiK tokens/, "uses standard cost text");
+    assert.doesNotMatch(src, /Costs about 2 MaiK tokens/, "no hardcoded cost text");
+    assert.match(src, /data-rmd-cost-task="publication_consent"/, "consent cost line carries its server task");
+    assert.match(src, /quoteText\("publication_consent"\)/, "consent cost comes from server pricing");
     assert.doesNotMatch(src, /Estimated cost:/, "old cost text removed");
     assert.doesNotMatch(src, /#071318|#1f363d|#8ea3a6|#ff6b6b|#ff8787/i, "hardcoded dark colours removed");
     assert.match(src, /MaiK returned an empty consent\. Try again, or type it below\./, "empty draft error copy present");

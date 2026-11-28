@@ -19,7 +19,8 @@
 import { PDF_MAX_BYTES, PDF_MAX_PAGES, PDF_MAX_SECONDS, BATCH_MAX,
   PO_MAX_SECONDS, PO_MAX_CALLS, HARD_STOP_MESSAGES, CLOUD_FALLBACK_MESSAGES,
   checkPdfJobCaps, checkPoJobCaps, validateJobMessage } from "./_caps.js";
-import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCredits, activeJobReservation, expireLostJobs, DEVICE_LOST_JOB_MS } from "./_credits.js";
+import { quotePdfJob, quoteAiCall, availableCredits, reserveCredits, releaseCredits, activeJobReservation, expireLostJobs, DEVICE_LOST_JOB_MS, usdInrRate, microUsdToMt, microUsdToInr, inrToMt, MT_PER_INR, researchTierModel } from "./_credits.js";
+import { modelRate } from "../../_ai_usage.js";
 import { scan, phiCategories } from "./_phi.js";
 import { PHI_OVERRIDE_TERMS_VERSION, parsePhiOverrideRequest, evaluatePhiOverride } from "./_suggest.js";
 import { mintJobToken } from "./_gateway.js";
@@ -59,6 +60,22 @@ export function jobOf(row) {
     cancelRequestedTs: row.cancel_requested_ts == null ? null : row.cancel_requested_ts,
   };
   if (out && out.runner) job.runner = out.runner;
+  return job;
+}
+
+async function attachJobActualCost(db, env, job) {
+  if (!job || !db) return job;
+  try {
+    const agg = await db.prepare("SELECT COALESCE(SUM(cost_micro_usd),0) AS micro FROM research_ai_usage WHERE job_id=?")
+      .bind(job.id).first();
+    const micro = Number(agg && agg.micro) || 0;
+    const rate = usdInrRate(env);
+    if (micro > 0 || SETTLED.indexOf(job.status) >= 0) {
+      job.actualCostMicroUsd = micro;
+      job.actualCostInr = microUsdToInr(micro, rate);
+      job.actualCostMt = microUsdToMt(micro, rate);
+    }
+  } catch (e) {}
   return job;
 }
 async function sha256Bytes(bytes) {
@@ -639,12 +656,28 @@ export async function quoteManuscriptJob(ctx) {
   if (!isSystematicReviewStudyType(gate.project && gate.project.study_type))
     return err(409, "not_systematic_review", "Manuscript drafting jobs are only available for systematic review and meta-analysis projects", requestId);
   const quoteMicroUsd = quoteAiCall(env, "T2") * PO_CALL_BUDGET;
+  const rate = usdInrRate(env);
+  const quoteInr = microUsdToInr(quoteMicroUsd, rate);
+  const quoteMt = microUsdToMt(quoteMicroUsd, rate);
+  const t2Model = researchTierModel(env, "T2");
+  const r = modelRate(env, t2Model);
+  const minCallInr = (3500 / 1000) * r.in + (700 / 1000) * r.out;
+  const maxTypCallInr = (9000 / 1000) * r.in + (2200 / 1000) * r.out;
+  const expectedMinMt = Math.min(quoteMt, inrToMt(minCallInr * 10));
+  const expectedMaxMt = Math.min(quoteMt, Math.max(expectedMinMt, inrToMt(maxTypCallInr * 45)));
   return json({
     quoteMicroUsd,
     usd: quoteMicroUsd / 1000000,
+    quoteInr,
+    quoteMt,
+    expectedMinMt,
+    expectedMaxMt,
+    mtPerInr: MT_PER_INR,
+    usdInrRate: rate,
     calls: PO_CALL_BUDGET,
     tier: "T2",
-    requestId
+    model: t2Model,
+    requestId,
   }, 200, { "x-request-id": requestId });
 }
 
@@ -882,14 +915,15 @@ export async function createManuscriptJob(ctx, body) {
  * router can fall through to the pilot research_jobs lookup. Outsiders get
  * 404 (Phase 1 convention: non-members see no project). */
 export async function getJob(ctx, jobId) {
-  const { db, uid, requestId, api } = ctx;
+  const { env, db, uid, requestId, api } = ctx;
   const { json, err, member } = api;
   await expireLostBefore(db, api.uuid);
   const row = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(jobId).first();
   if (!row) return null;
   if (!(await member(db, row.project_id, uid)))
     return err(404, "job_not_found", "Job not found", requestId);
-  return json({ job: jobOf(row), requestId }, 200, { "x-request-id": requestId });
+  const job = await attachJobActualCost(db, env, jobOf(row));
+  return json({ job, requestId }, 200, { "x-request-id": requestId });
 }
 
 /* POST /v1/jobs/{jobId}/cancel. Writes the R2 cancel object (retention.md)
@@ -1193,7 +1227,8 @@ export async function submitDeviceResult(ctx, jobId, body) {
   }));
   await audit(db, row.project_id, uid, "job_settled", row.id, { status: "succeeded", runner: "device", usage: usageObj });
   const fresh = await db.prepare("SELECT * FROM research_job_runs WHERE id=?").bind(row.id).first();
-  return json({ job: jobOf(fresh), versionId, requestId }, 200, { "x-request-id": requestId });
+  const job = await attachJobActualCost(db, env, jobOf(fresh));
+  return json({ job, versionId, requestId }, 200, { "x-request-id": requestId });
 }
 
 /* POST /v1/jobs/:jobId/device-fail — marks a device job failed with a stable code

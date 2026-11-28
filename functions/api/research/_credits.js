@@ -30,10 +30,12 @@
  * balance; the debit is min(balance, actualInr) and the ledger settle row
  * records the full actual for daily reconciliation.
  */
-import { getCreditRecord, putCreditRecord, getCredits } from "../../_credits.js";
-import { modelRate } from "../../_ai_usage.js";
+import { getCreditRecord, putCreditRecord, getCredits, MT_PER_INR, inrToMt, mtToInr } from "../../_credits.js";
+import { modelRate, envModel, MODEL_HARD_DEFAULT } from "../../_ai_usage.js";
 import { TIER_CEILINGS } from "./_caps.js";
 import { refundCloudFallbackForJob } from "./_cloud_fallback.js";
+
+export { MT_PER_INR, inrToMt, mtToInr };
 
 export function usdInrRate(env) {
   const v = Number(env && env.RESEARCH_USD_INR);
@@ -41,6 +43,154 @@ export function usdInrRate(env) {
 }
 export function inrToMicroUsd(inr, rate) { return Math.round((Number(inr) || 0) / rate * 1e6); }
 export function microUsdToInr(microUsd, rate) { return Math.round((Number(microUsd) || 0) / 1e6 * rate * 100) / 100; }
+export function microUsdToInrExact(microUsd, rate) { return (Math.max(0, Number(microUsd) || 0) / 1e6) * (Number(rate) || 96); }
+export function microUsdToMt(microUsd, rate) { return inrToMt(microUsdToInrExact(microUsd, rate)); }
+
+export function researchTierModel(env, tier) {
+  if (tier === "T1") return envModel(env && env.RESEARCH_T1_MODEL, MODEL_HARD_DEFAULT);
+  if (tier === "T2") return envModel(env && env.RESEARCH_T2_MODEL, "gemini-3.5-flash");
+  return envModel(env && env.RESEARCH_T3_MODEL, envModel(env && env.STRONG_MODEL, "gemini-3.5-flash"));
+}
+
+const TASK_QUOTE_PROFILES = {
+  protocol: { tier: "T1", minIn: 450, maxIn: 1400, minOut: 300, maxOut: 1200 },
+  search_query: { tier: "T1", minIn: 350, maxIn: 1000, minOut: 100, maxOut: 500 },
+  screening: { tier: "T1", minIn: 400, maxIn: 3500, minOut: 80, maxOut: 250 },
+  screening_suggestion: { tier: "T1", minIn: 400, maxIn: 3500, minOut: 80, maxOut: 250 },
+  extraction: { tier: "T1", minIn: 1500, maxIn: 12500, minOut: 250, maxOut: 1200 },
+  extraction_suggestion: { tier: "T1", minIn: 1500, maxIn: 12500, minOut: 250, maxOut: 1200 },
+  rob: { tier: "T1", minIn: 700, maxIn: 3500, minOut: 300, maxOut: 1500 },
+  checklist: { tier: "T1", minIn: 700, maxIn: 3500, minOut: 300, maxOut: 1500 },
+  title_abstract: { tier: "T1", minIn: 500, maxIn: 2000, minOut: 150, maxOut: 800 },
+  iec_application: { tier: "T1", minIn: 500, maxIn: 2500, minOut: 500, maxOut: 2000 },
+  consent_form: { tier: "T1", minIn: 500, maxIn: 2500, minOut: 500, maxOut: 2000 },
+  ctri_fields: { tier: "T1", minIn: 500, maxIn: 2500, minOut: 400, maxOut: 2000, minCalls: 1, maxCalls: 2 },
+  publication_consent: { tier: "T1", minIn: 400, maxIn: 1500, minOut: 450, maxOut: 2000 },
+  case_report_draft: { tier: "T1", minIn: 600, maxIn: 4500, minOut: 700, maxOut: 2500 },
+  manuscript_draft: { tier: "T1", minIn: 800, maxIn: 5500, minOut: 600, maxOut: 2000 },
+  polish: { tier: "T1", minIn: 450, maxIn: 2000, minOut: 250, maxOut: 2000 },
+  paper_card_explain: { tier: "T1", minIn: 300, maxIn: 1800, minOut: 120, maxOut: 350 },
+  thesis_to_paper: { tier: "T1", minIn: 1500, maxIn: 4500, minOut: 400, maxOut: 1200, minCalls: 1, maxCalls: 6 },
+};
+
+export function quoteTaskPricing(env, task, inputChars) {
+  const key = String(task || "protocol").trim();
+  const prof = TASK_QUOTE_PROFILES[key] || { tier: "T1", minIn: 500, maxIn: 3000, minOut: 300, maxOut: 1200 };
+  const tier = prof.tier || "T1";
+  const model = researchTierModel(env, tier);
+  const r = modelRate(env, model);
+  const rate = usdInrRate(env);
+  let minIn = prof.minIn;
+  let maxIn = prof.maxIn;
+  let minOut = prof.minOut;
+  let maxOut = prof.maxOut;
+  const nChars = Number(inputChars);
+  if (key === "thesis_to_paper" && Number.isFinite(nChars) && nChars > 0) {
+    /* Thesis drafting is chunked: one call per 13,000-char chapter chunk
+     * (at most 4 chunks per section) plus an abstract and merge calls. The
+     * live one-tap runs used 18 calls on 555k chars, 20 on 259k and 10 on
+     * 60k. Quote a wide, monotonic range so a 341-page thesis never shows a
+     * two-token price; the client's mapped estimate is tighter and enforces
+     * its own upper bound. */
+    const calls = Math.max(1, Math.min(24, Math.ceil(nChars / 13000)));
+    const chunkChars = Math.min(13000, nChars / calls);
+    const inTok = chunkChars / 3.6 + 720;
+    const outTok = 500;
+    const perCallInr = (inTok / 1000) * r.in + (outTok / 1000) * r.out;
+    const mid = perCallInr * calls * 1.12;
+    const low = Math.max(0.01, mid * 0.5);
+    const high = Math.max(low, mid * 1.4);
+    const minMt = Math.max(1, inrToMt(low));
+    const maxMt = Math.max(minMt, inrToMt(high));
+    return {
+      task: key,
+      tier,
+      model,
+      minInr: Math.round(low * 10000) / 10000,
+      maxInr: Math.round(high * 10000) / 10000,
+      minMt,
+      maxMt,
+      typicalMt: Math.round((minMt + maxMt) / 2),
+      mtPerInr: MT_PER_INR,
+      usdInrRate: rate,
+      calls,
+      inMtPer1k: Math.round(r.in * MT_PER_INR * 100) / 100,
+      outMtPer1k: Math.round(r.out * MT_PER_INR * 100) / 100,
+    };
+  }
+  if (Number.isFinite(nChars) && nChars > 0) {
+    const estIn = Math.max(150, Math.ceil((nChars + 1200) / 4));
+    minIn = Math.max(150, Math.floor(estIn * 0.85));
+    maxIn = Math.max(minIn, Math.ceil(estIn * 1.15));
+    if (key === "polish") {
+      const textTok = Math.max(40, Math.ceil(nChars / 4));
+      minOut = Math.min(prof.maxOut, Math.max(80, Math.floor(textTok * 0.9)));
+      maxOut = Math.min(prof.maxOut, Math.max(minOut + 60, Math.ceil(textTok * 1.35) + 160));
+    }
+  }
+  const minCalls = prof.minCalls || 1;
+  const maxCalls = prof.maxCalls || 1;
+  const minInr = ((minIn / 1000) * r.in + (minOut / 1000) * r.out) * minCalls;
+  const maxInr = ((maxIn / 1000) * r.in + (maxOut / 1000) * r.out) * maxCalls;
+  const minMt = Math.max(1, inrToMt(minInr));
+  const maxMt = Math.max(minMt, inrToMt(maxInr));
+  return {
+    task: key,
+    tier,
+    model,
+    minInr: Math.round(minInr * 10000) / 10000,
+    maxInr: Math.round(maxInr * 10000) / 10000,
+    minMt,
+    maxMt,
+    typicalMt: Math.round((minMt + maxMt) / 2),
+    mtPerInr: MT_PER_INR,
+    usdInrRate: rate,
+    inMtPer1k: Math.round(r.in * MT_PER_INR * 100) / 100,
+    outMtPer1k: Math.round(r.out * MT_PER_INR * 100) / 100,
+  };
+}
+
+export function researchPricingView(env) {
+  const rate = usdInrRate(env);
+  const t1Model = researchTierModel(env, "T1");
+  const t2Model = researchTierModel(env, "T2");
+  const r1 = modelRate(env, t1Model);
+  const r2 = modelRate(env, t2Model);
+  const tasks = {};
+  for (const k of Object.keys(TASK_QUOTE_PROFILES)) {
+    const q = quoteTaskPricing(env, k, 0);
+    tasks[k] = {
+      tier: q.tier,
+      model: q.model,
+      minMt: q.minMt,
+      maxMt: q.maxMt,
+      typicalMt: q.typicalMt,
+      minInr: q.minInr,
+      maxInr: q.maxInr,
+    };
+  }
+  return {
+    mtPerInr: MT_PER_INR,
+    usdInrRate: rate,
+    tiers: {
+      T1: {
+        model: t1Model,
+        inInrPer1k: r1.in,
+        outInrPer1k: r1.out,
+        inMtPer1k: Math.round(r1.in * MT_PER_INR * 100) / 100,
+        outMtPer1k: Math.round(r1.out * MT_PER_INR * 100) / 100,
+      },
+      T2: {
+        model: t2Model,
+        inInrPer1k: r2.in,
+        outInrPer1k: r2.out,
+        inMtPer1k: Math.round(r2.in * MT_PER_INR * 100) / 100,
+        outMtPer1k: Math.round(r2.out * MT_PER_INR * 100) / 100,
+      },
+    },
+    tasks,
+  };
+}
 
 /* Same binding resolution as _usage.js usageKv (the wallet's store). */
 export function walletStore(env) {
@@ -230,11 +380,14 @@ export async function availableCredits(db, env, uid, email) {
     (institution ? await outstandingReserves(db, "institution", institution.id) : 0);
   const availableMicroUsd = walletMicroUsd + (institution ? institution.available : 0) - reserved;
   return {
-    walletInr, walletMicroUsd,
+    walletInr,
+    walletMt: inrToMt(walletInr),
+    walletMicroUsd,
     institutionId: institution ? institution.id : null,
     institutionMicroUsd: institution ? institution.available : 0,
     reservedMicroUsd: reserved,
     availableMicroUsd,
+    availableMt: microUsdToMt(availableMicroUsd, rate),
   };
 }
 
@@ -344,11 +497,36 @@ export async function adminInstitutionRoute(ctx, id, action, body) {
   return err(404, "not_found", "Unknown admin endpoint", requestId);
 }
 
-/* GET /v1/credits: the caller's own spendable view. Read-only; the client
- * never writes balances. */
+/* GET /v1/credits: the caller's own spendable view plus live pricing rates. Read-only;
+ * the client never writes balances. */
 export async function creditsView(ctx) {
   const { env, db, uid, claims, requestId, api } = ctx;
   const view = await availableCredits(db, env, uid, claims && claims.email);
-  return api.json({ credits: Object.assign({ unit: "micro-USD", usdInrRate: usdInrRate(env) }, view),
-    requestId }, 200, { "x-request-id": requestId });
+  return api.json({
+    credits: Object.assign({
+      unit: "micro-USD",
+      usdInrRate: usdInrRate(env),
+      mtPerInr: MT_PER_INR,
+    }, view),
+    pricing: researchPricingView(env),
+    requestId,
+  }, 200, { "x-request-id": requestId });
+}
+
+/* GET /v1/ai-quote?task=<task>&inputChars=<n>: server-derived estimate for a single
+ * ResearchMD AI action (or full task pricing catalog when task is omitted). */
+export async function aiQuoteView(ctx) {
+  const { request, env, requestId, api } = ctx;
+  let task = "";
+  let inputChars = 0;
+  try {
+    const u = new URL(request.url);
+    task = u.searchParams.get("task") || "";
+    inputChars = Number(u.searchParams.get("inputChars") || 0) || 0;
+  } catch (e) {}
+  if (task) {
+    return api.json({ quote: quoteTaskPricing(env, task, inputChars), pricing: researchPricingView(env), requestId },
+      200, { "x-request-id": requestId });
+  }
+  return api.json({ pricing: researchPricingView(env), requestId }, 200, { "x-request-id": requestId });
 }

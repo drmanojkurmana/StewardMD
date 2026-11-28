@@ -526,9 +526,29 @@
         if (!rp) return readPdfLocalJs(u8, onProgress);
         if (onProgress) onProgress(rp.pages.length, rp.pages.length);
         if (rp.chars < 20) return { pages: [], emptyText: true, bytes: u8 };
-        return { pages: rp.pages, pageLines: rp.pageLines, emptyText: false };
+        return rustTableGrids(u8).then(function (grids) {
+          return { pages: rp.pages, pageLines: rp.pageLines, tableGrids: grids, emptyText: false };
+        });
       });
     });
+  }
+
+  /* The Rust reader's word boxes let the one-tap table step rebuild real rows
+     and columns (wrapped headers merged, numbers verbatim). It is a second
+     read of the same bytes, on this device, and never sent anywhere. */
+  function rustTableGrids(u8) {
+    var OD = G && G.SMD_RMD_ONDEVICE_PDF;
+    if (!OD || typeof OD.loadRust !== "function") return Promise.resolve(null);
+    return OD.loadRust().then(function (R) {
+      if (!R || typeof R.extract !== "function") return null;
+      if (typeof R.isEnabled === "function" && !R.isEnabled()) return null;
+      return R.extract(u8, { maxPages: RUST_MAX_PAGES, maxBytes: 30 * 1024 * 1024 });
+    }).then(function (res) {
+      if (!res || !Array.isArray(res.pages)) return null;
+      var ta = TA();
+      if (!ta || typeof ta.buildTableGrids !== "function") return null;
+      return ta.buildTableGrids(res.pages);
+    }, function () { return null; });
   }
 
   function readPdfLocalJs(u8, onProgress) {
@@ -1951,6 +1971,22 @@
     return chk === Number(d10.charAt(9));
   }
 
+  function maskTableGrids(grids) {
+    var out = [], i, j, k;
+    for (i = 0; i < grids.length; i++) {
+      var g = grids[i] || {};
+      var heads = [], rows = [];
+      for (j = 0; j < (g.headers || []).length; j++) heads.push(maskThesisHardIds(g.headers[j] || "").text);
+      for (j = 0; j < (g.rows || []).length; j++) {
+        var row = [], cells = g.rows[j] || [];
+        for (k = 0; k < cells.length; k++) row.push(maskThesisHardIds(cells[k] || "").text);
+        rows.push(row);
+      }
+      out.push({ id: g.id, page: g.page, headers: heads, rows: rows });
+    }
+    return out;
+  }
+
   function maskThesisHardIds(text) {
     var out = String(text || "");
     var count = 0;
@@ -2380,6 +2416,7 @@
     tpid = pidOf(proj);
     ts = loadThesis(tpid);
     injectCSS();
+    if (SMD.pricing && typeof SMD.pricing.ensureLoaded === "function") SMD.pricing.ensureLoaded();
     if (ts.pages && ts.pages.length && isTutorialProject(proj) && ts.ownUpload) {
       container.innerHTML = tutorialOwnGateHtml(ts, "Your own thesis is ready");
       bindTutorialOwnGate(container);
@@ -2392,7 +2429,7 @@
       if (AUTO && typeof AUTO.estimateAutoCost === "function") {
         var estTree = ensureChapterTree();
         var estMap = mapChaptersToJournal(estTree, ts.pages, journalOf(), ts.paperType, ts.chapterMap || {});
-        estCost = AUTO.estimateAutoCost(ts.pages, estMap, journalOf());
+        estCost = AUTO.estimateAutoCost(ts.pages, estMap, journalOf(), estimateOpts());
       }
       var hasAutoSaved = !!(ts.auto && ts.auto.steps && Object.keys(ts.auto.steps).length);
       var makeBtnLabel = (ts.auto && ts.auto.status === "stopped")
@@ -2404,7 +2441,7 @@
       h.push('<h2>Thesis read</h2>');
       h.push('<p class="rmd-screen-subtitle">' + esc(ts.filename || "Your thesis") + ' was read: ' + ts.pages.length + ' page(s). The text stays on this device and on our server; it is only sent to an AI provider when you ask MaiK to draft.</p>');
       if (!isTutorialProject(proj) && estCost) {
-        h.push('<p class="rmd-thesis-meta" id="rmdThesisAutoEstimate">Estimated MaiK cost: about ' + esc(String(estCost.estimatedMaikTokens)) + ' MaiK tokens (' + esc(String(estCost.aiCalls)) + ' AI step' + (estCost.aiCalls === 1 ? '' : 's') + '). Charged only for steps that run and succeed.</p>');
+        h.push('<p class="rmd-thesis-meta" id="rmdThesisAutoEstimate">Estimated MaiK cost: ' + esc(formatEstimateRange(estCost)) + ' (' + esc(String(estCost.aiCalls)) + ' AI step' + (estCost.aiCalls === 1 ? '' : 's') + '). Charged only for steps that run and succeed. We pause before going above the upper estimate.</p>');
       }
       if (ts.phi && ts.phi.softPages && ts.phi.softPages.length && !(ts.phiConsent && ts.phiConsent.confirmed)) {
         h.push('<p class="rmd-thesis-meta" id="rmdThesisConsentHint">We flagged pages ' + esc(ts.phi.softPages.join(", ")) + ' for a quick patient-details check before AI drafting.</p>');
@@ -2535,8 +2572,11 @@
     var own = (extra && typeof extra.ownUpload === "boolean") ? extra.ownUpload : true;
     var pLines = (extra && extra.pageLines) || (pages && pages._pageLines) || null;
     var tree = buildChapterTree(pLines, scanRes.pages);
+    var grids = (extra && Array.isArray(extra.tableGrids)) ? extra.tableGrids : null;
+    if (grids) grids = maskTableGrids(grids);
     var patch = {
       pages: scanRes.pages,
+      tableGrids: grids,
       chapterTree: tree,
       chapterMap: {},
       sectionStatus: null,
@@ -2601,7 +2641,7 @@
         setMsg(container, loadHtml("Reading page " + cur + " of " + tot));
       }).then(function (res) {
         if (res && res.pages && res.pages.length) {
-          saveExtractedPages(res.pages, file.name, container, { artifactId: null, jobId: null, pageLines: res.pageLines });
+          saveExtractedPages(res.pages, file.name, container, { artifactId: null, jobId: null, pageLines: res.pageLines, tableGrids: res.tableGrids });
           return;
         }
         var OD = G && G.SMD_RMD_ONDEVICE_PDF;
@@ -2899,6 +2939,30 @@
 
   function fmtInt(n) {
     return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function fmtInr(n) {
+    var v = Number(n) || 0;
+    return v >= 10 ? String(Math.round(v)) : String(Math.round(v * 100) / 100);
+  }
+
+  function estimateOpts() {
+    var d = (SMD.pricing && typeof SMD.pricing.getData === "function") ? SMD.pricing.getData() : null;
+    var t1 = d && d.tiers && d.tiers.T1 ? d.tiers.T1 : null;
+    return {
+      mtPerInr: d ? d.mtPerInr : undefined,
+      rateIn: t1 ? t1.inInrPer1k : undefined,
+      rateOut: t1 ? t1.outInrPer1k : undefined
+    };
+  }
+
+  function formatEstimateRange(est) {    var minMt = Number(est && est.minMaikTokens);
+    var maxMt = Number(est && est.maxMaikTokens);
+    if (!(minMt > 0) || !(maxMt > 0)) return "about " + fmtInt((est && est.estimatedMaikTokens) || 0) + " MaiK Tokens";
+    var minInr = est && est.minCostInr != null ? est.minCostInr : (minMt / ((est && est.mtPerInr) || 2000));
+    var maxInr = est && est.maxCostInr != null ? est.maxCostInr : (maxMt / ((est && est.mtPerInr) || 2000));
+    if (minMt === maxMt) return fmtInt(minMt) + " MaiK Tokens (about Rs " + fmtInr(minInr) + ")";
+    return fmtInt(minMt) + " to " + fmtInt(maxMt) + " MaiK Tokens (about Rs " + fmtInr(minInr) + " to Rs " + fmtInr(maxInr) + ")";
   }
 
   function safeHttpUrl(u) {
@@ -3479,9 +3543,29 @@
     return tree;
   }
 
-  function draftOneSectionStep(step, onSubProgress) {
+  function draftOneSectionStep(step, onSubProgress, spendRef) {
     var totalCostInr = 0;
     var totalAiCalls = 0;
+    var taGuard = TA();
+    function quoteExceeded(perCallInr) {
+      var e = new Error("The draft reached the quoted upper estimate.");
+      e.code = "quote_exceeded";
+      e.quoteExceeded = true;
+      e.spentInr = spendRef ? spendRef.inr : totalCostInr;
+      e.capInr = spendRef ? spendRef.capInr : 0;
+      e.nextCallInr = Number(perCallInr) || 0;
+      return e;
+    }
+    function checkQuote(payloadPages, chunkBudget) {
+      if (!spendRef || !(spendRef.capInr > 0)) return;
+      if (spendRef.inr > spendRef.capInr) throw quoteExceeded(0);
+      var chars = totalThesisChars(payloadPages);
+      var rates = spendRef.rates || {};
+      var perCall = (taGuard && typeof taGuard.estimateCallInr === "function")
+        ? taGuard.estimateCallInr(chars, chunkBudget, rates)
+        : 0;
+      if (spendRef.inr + perCall > spendRef.capInr) throw quoteExceeded(perCall);
+    }
     function prependHint(chunkPages, hint) {
       if (!hint || !chunkPages.length) return chunkPages;
       var out = [{ n: chunkPages[0].n, text: hint + String(chunkPages[0].text || "") }];
@@ -3499,9 +3583,12 @@
         c === "project_ai_cap" || c === "user_ai_cap" || c === "insufficient_credits");
     }
     function trackedCall(reqSec, payloadPages, chunkBudget) {
+      checkQuote(payloadPages, chunkBudget);
       return callThesisAi(reqSec, payloadPages, chunkBudget).then(function (res) {
         totalAiCalls += 1;
-        totalCostInr += Number((res && res.costInr) || 0);
+        var cost = Number((res && res.costInr) || 0);
+        totalCostInr += cost;
+        if (spendRef) spendRef.inr += cost;
         return res;
       });
     }
@@ -3699,13 +3786,33 @@
     var chars = totalThesisChars(allPages);
     var overrides = ts.chapterMap || {};
     var hasOverrides = Object.keys(overrides).length > 0;
+    var spendRef = {
+      inr: 0,
+      capInr: Number(opts.costCapInr) || 0,
+      rates: opts.callRates || {}
+    };
+    var taGuard = TA();
+    function taGuardCost(pages, budget, ref) {
+      if (!taGuard || typeof taGuard.estimateCallInr !== "function") return 0;
+      return taGuard.estimateCallInr(totalThesisChars(pages), budget, ref && ref.rates);
+    }
 
     /* Fast path for short fixtures / tutorial sample (<= 13,500 chars) without manual chapter overrides */
     if (chars <= 13500 && !hasOverrides) {
+      if (spendRef.capInr > 0 && taGuardCost(allPages, mainLimit, spendRef) > spendRef.capInr) {
+        var qErr = new Error("The draft reached the quoted upper estimate.");
+        qErr.code = "quote_exceeded";
+        qErr.quoteExceeded = true;
+        qErr.spentInr = 0;
+        qErr.capInr = spendRef.capInr;
+        qErr.nextCallInr = taGuardCost(allPages, mainLimit, spendRef);
+        throw qErr;
+      }
       return callThesisAi(null, allPages, mainLimit, { abstractLimit: absLimit }).then(function (res) {
         if (res && res.draft) {
           res.draft._aiCalls = 1;
           res.draft._costInr = Number(res.costInr || 0);
+          spendRef.inr += res.draft._costInr;
         }
         return res;
       });
@@ -3823,7 +3930,7 @@
             sectionStatus[step.id] = { status: "running", heading: step.heading, detail: "part " + part + "/" + totalParts, words: 0 };
             if (opts.onProgress) opts.onProgress({ sectionStatus: sectionStatus, aiCalls: totalAiCalls, costInr: totalCostInr });
             renderSectionProgress(container);
-          }).then(function (out) {
+          }, spendRef).then(function (out) {
             if (out.model) lastModel = out.model;
             totalAiCalls += Number(out.aiCalls || 0);
             totalCostInr += Number(out.costInr || 0);
@@ -3840,7 +3947,7 @@
             return out;
           }).catch(function (err) {
             var c = err && (err.code || (err.body && err.body.error && err.body.error.code));
-            if (err && (err._handledByConsent || err.status === 429 || err.status === 402 || c === "project_ai_cap" || c === "user_ai_cap" || c === "insufficient_credits")) {
+            if (err && (err._handledByConsent || err.quoteExceeded || err.status === 429 || err.status === 402 || c === "project_ai_cap" || c === "user_ai_cap" || c === "insufficient_credits")) {
               hardErr = err;
               throw err;
             }
@@ -3890,7 +3997,7 @@
         budget: absLimit,
         hint: "STRUCTURED ABSTRACT ONLY (" + absLimit + " words max): Use exact headings Background:, Methods:, Results:, Conclusion: and copy numbers verbatim from the thesis.\n\n"
       };
-      return draftOneSectionStep(absStep).then(function (out) {
+      return draftOneSectionStep(absStep, null, spendRef).then(function (out) {
         if (out.model) lastModel = out.model;
         totalAiCalls += Number(out.aiCalls || 0);
         totalCostInr += Number(out.costInr || 0);
@@ -3903,7 +4010,7 @@
         }
       }).catch(function (err) {
         var c = err && (err.code || (err.body && err.body.error && err.body.error.code));
-        if (err && (err._handledByConsent || err.status === 429 || err.status === 402 || c === "project_ai_cap" || c === "user_ai_cap" || c === "insufficient_credits")) {
+        if (err && (err._handledByConsent || err.quoteExceeded || err.status === 429 || err.status === 402 || c === "project_ai_cap" || c === "user_ai_cap" || c === "insufficient_credits")) {
           throw err;
         }
         missingSecs.push("Abstract");
@@ -4201,7 +4308,7 @@
     h.push('<div class="rmd-chapter-map smd-books-keep" id="rmdChapterMap"></div>');
     if (mayAi) {
       var st = draftAi || (draftAi = SMD.ai.state());
-      h.push(SMD.ai.barHtml(st, { task: "thesis_to_paper", label: "paper draft", cost: 3 }));
+      h.push(SMD.ai.barHtml(st, { task: "thesis_to_paper", label: "paper draft", inputLength: totalThesisChars(ts.pages || []) }));
     } else {
       h.push('<p class="rmd-thesis-meta">Only the project owner, editor or analyst can ask MaiK. You can still edit and save the draft yourself.</p>');
     }
@@ -4221,6 +4328,7 @@
       SMD.ai.bind(container, st2, {
         pid: tpid,
         task: "thesis_to_paper",
+        inputLength: totalThesisChars(ts.pages || []),
         emptyMessage: "MaiK returned an empty draft with 0 words. Check your connection and try again.",
         request: function () {
           return orchestrateThesisDraft(container, st2, proj);
@@ -4892,7 +5000,7 @@
       var tree = ensureChapterTree();
       var jr = journalOf();
       var map = mapChaptersToJournal(tree, ts.pages || [], jr, ts.paperType, ts.chapterMap || {});
-      a.estimated = ta.estimateAutoCost(ts.pages, map, jr);
+      a.estimated = ta.estimateAutoCost(ts.pages, map, jr, estimateOpts());
     }
     return a;
   }
@@ -5048,6 +5156,14 @@
     if (a.lastError) {
       h.push('<div class="rmd-banner rmd-banner-warn" id="rmdAutoErrBanner" role="status">' + esc(a.lastError) + '</div>');
     }
+    if (a.quoteExceeded) {
+      var qx = a.quoteExceeded;
+      h.push('<div class="rmd-banner rmd-banner-warn" id="rmdAutoQuoteBanner" role="status">');
+      h.push('The draft reached the quoted upper estimate (' + esc(fmtInt(qx.capMt || 0)) + ' MaiK Tokens, Rs ' + esc(fmtInr(qx.capInr || 0)) + '). ');
+      h.push('Nothing more is charged until you choose. ');
+      h.push('<button type="button" class="rmd-btn rmd-btn-primary rmd-btn-sm" id="rmdAutoQuoteContinue">Continue up to ' + esc(fmtInt(qx.nextCapMt || 0)) + ' MaiK Tokens (Rs ' + esc(fmtInr(qx.nextCapInr || 0)) + ')</button>');
+      h.push('</div>');
+    }
 
     /* Progress bar + MaiK token ledger */
     h.push('<div class="rmd-auto-progress-box">');
@@ -5065,8 +5181,8 @@
     h.push('<div class="rmd-auto-bar-track" role="progressbar" aria-label="Thesis to journal paper progress" aria-valuemin="0" aria-valuemax="' + order.length + '" aria-valuenow="' + doneCount + '" aria-valuetext="' + doneCount + ' of ' + order.length + ' steps completed">');
     h.push('<div class="rmd-auto-bar-fill" style="width:' + pct + '%;"></div></div>');
     h.push('<div class="rmd-auto-cost" id="rmdAutoCostSummary">');
-    h.push('<div><span class="rmd-auto-stat-k">Estimated tokens</span><span class="rmd-auto-stat-v">~' + fmtInt(est.estimatedMaikTokens || 0) + ' MT (' + (est.aiCalls || 0) + ' AI)</span></div>');
-    h.push('<div><span class="rmd-auto-stat-k">Used so far (succeeded only)</span><span class="rmd-auto-stat-v">' + fmtInt(a.actualMaikTokens || 0) + ' MT (' + (a.actualAiCalls || 0) + ' AI)</span></div>');
+    h.push('<div><span class="rmd-auto-stat-k">Quoted estimate</span><span class="rmd-auto-stat-v">' + esc(formatEstimateRange(est)) + ' (' + (est.aiCalls || 0) + ' AI)</span></div>');
+    h.push('<div><span class="rmd-auto-stat-k">Charged so far (succeeded only)</span><span class="rmd-auto-stat-v">' + fmtInt(a.actualMaikTokens || 0) + ' MT (Rs ' + fmtInr(a.actualCostInr || 0) + ', ' + (a.actualAiCalls || 0) + ' AI)</span></div>');
     h.push('<div><span class="rmd-auto-stat-k">Elapsed time</span><span class="rmd-auto-stat-v">' + (Math.round(secElapsed / 100) / 10) + 's</span></div>');
     h.push('</div></div>');
 
@@ -5315,7 +5431,7 @@
         ts = loadThesis(tpid);
         var treeJ = ensureChapterTree();
         var mapJ = mapChaptersToJournal(treeJ, allPages, chosen, ts.paperType, ts.chapterMap || {});
-        a.estimated = ta.estimateAutoCost(allPages, mapJ, chosen);
+        a.estimated = ta.estimateAutoCost(allPages, mapJ, chosen, estimateOpts());
         return finishStep("Preselected " + (chosen.shortName || chosen.name) + " (" + chosen.wordLimit + "w, " + chosen.fitReason + ")");
       });
     }
@@ -5327,8 +5443,18 @@
         saveThesis(tpid, { sectionStatus: null });
         ts = loadThesis(tpid);
       }
+      var prData = (SMD.pricing && typeof SMD.pricing.getData === "function") ? SMD.pricing.getData() : null;
+      var t1Rates = prData && prData.tiers && prData.tiers.T1 ? prData.tiers.T1 : null;
+      var callRates = {
+        rateIn: t1Rates ? t1Rates.inInrPer1k : undefined,
+        rateOut: t1Rates ? t1Rates.outInrPer1k : undefined,
+        mtPerInr: prData ? prData.mtPerInr : undefined
+      };
+      var capInr = Number(a.quoteCapInr) || Number(a.estimated && a.estimated.maxCostInr) || 0;
       return orchestrateThesisDraft(container, stShim, proj, {
         resume: useResume,
+        costCapInr: capInr,
+        callRates: callRates,
         shouldStop: function () { return !!autoStopFlag; },
         onProgress: function (info) {
           if (info && info.aiCalls != null) {
@@ -5389,6 +5515,28 @@
         }
         return finishStep(((ts.draft && ts.draft.words) || 0) + " words across " + ((ts.draft && ts.draft.aiDraftedIds && ts.draft.aiDraftedIds.length) || 0) + " sections", runCalls, runInr);
       }).catch(function (err) {
+        if (err && err.quoteExceeded) {
+          var perInrQ = (ta && ta.MT_PER_INR) || 2000;
+          var capQ = Number(err.capInr) || capInr || 0;
+          var nextQ = Math.max(capQ * 1.6, (Number(err.spentInr) || 0) + (Number(err.nextCallInr) || 0) * 6, capQ + 1);
+          a.quoteCapInr = Math.round(nextQ * 10000) / 10000;
+          a.quoteExceeded = {
+            spentInr: Math.round((Number(err.spentInr) || 0) * 10000) / 10000,
+            capInr: capQ,
+            capMt: Math.round(capQ * perInrQ),
+            nextCapInr: a.quoteCapInr,
+            nextCapMt: Math.round(a.quoteCapInr * perInrQ)
+          };
+          a.steps.draft.status = "stopped";
+          a.steps.draft.durationMs = Date.now() - t0;
+          a.steps.draft.detail = "Paused at the quoted upper estimate; partial sections saved";
+          a.status = "stopped";
+          a.lastError = "";
+          autoStopFlag = true;
+          saveAutoState(a);
+          paintAutoScreen(container, a, proj);
+          return null;
+        }
         if (err && err._handledByConsent) {
           a.steps.draft.status = "stopped";
           a.steps.draft.durationMs = Date.now() - t0;
@@ -5427,7 +5575,7 @@
         : allPages;
       var rawTables = extractThesisTables(resSrc);
       if (!rawTables.length) rawTables = extractThesisTables(allPages);
-      var condensed = ta.condenseTables(rawTables, allPages, jrT, secsT);
+      var condensed = ta.condenseTables(rawTables, allPages, jrT, secsT, ts.tableGrids);
       a.tablesData = {
         kept: condensed.kept,
         droppedCount: condensed.droppedCount,
@@ -5802,6 +5950,23 @@
       var ta = TA();
       var order = (ta && ta.STEP_ORDER) || [];
       var a = ensureAutoState();
+      var startAt = 0;
+      for (var i = 0; i < order.length; i++) {
+        if (!a.steps[order[i].id] || a.steps[order[i].id].status !== "done") { startAt = i; break; }
+      }
+      runAutoChain(container, startAt, { preserveEdits: true });
+    };
+
+    var quoteContinue = container.querySelector("#rmdAutoQuoteContinue");
+    if (quoteContinue) quoteContinue.onclick = function () {
+      var ta = TA();
+      var order = (ta && ta.STEP_ORDER) || [];
+      var a = ensureAutoState();
+      var next = (a.quoteExceeded && a.quoteExceeded.nextCapInr) || a.quoteCapInr;
+      a.quoteCapInr = Number(next) || a.quoteCapInr;
+      a.quoteExceeded = null;
+      a.lastError = null;
+      saveAutoState(a);
       var startAt = 0;
       for (var i = 0; i < order.length; i++) {
         if (!a.steps[order[i].id] || a.steps[order[i].id].status !== "done") { startAt = i; break; }

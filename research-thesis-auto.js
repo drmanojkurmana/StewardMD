@@ -434,7 +434,7 @@
     return base;
   }
 
-  function condenseTables(tables, pages, journal, sections) {
+  function condenseTables(tables, pages, journal, sections, tableGrids) {
     var list = Array.isArray(tables) ? tables.slice() : [];
     var limit = Math.max(1, Math.min(Number((journal && journal.maxTables) || 3), 6));
     var totalPages = Array.isArray(pages) ? pages.length : 0;
@@ -450,7 +450,10 @@
         score: scoreTableForPaper(t, totalPages),
         reason: t.reason || ""
       };
-      copy.content = extractTableContent(pages, copy);
+      var grid = tableGridFor(tableGrids, copy);
+      copy.content = (grid && grid.rows && grid.rows.length >= 1)
+        ? { headers: grid.headers || [], rows: grid.rows, rawLines: [], footnotes: [] }
+        : extractTableContent(pages, copy);
       if (copy.content.rows.length >= 3) copy.score += 3;
       enriched.push(copy);
     }
@@ -1622,17 +1625,85 @@
   }
 
   /* ---------- 7. MaiK token estimate ---------- */
+  /* Calibrated from the three live one-tap runs (thesis-auto-1/2/3):
+   *   341 p / 18 calls / Rs 2.93 / 5,860 MT  = Rs 0.163 per call, 326 MT
+   *   175 p / 20 calls / Rs 3.68 / 7,360 MT  = Rs 0.184 per call, 368 MT
+   *    96 p / 10 calls / Rs 0.92 / 1,840 MT  = Rs 0.092 per call, 184 MT
+   * A call is one 13,000-char chapter chunk plus the task prompt (about 720
+   * input tokens) and a section-budget answer (about 160 tokens of JSON
+   * overhead). Rates are the server's T1 model rates (functions/_ai_usage.js)
+   * and the credit conversion is functions/_credits.js MT_PER_INR. The old
+   * flat Rs 0.06 per call under-quoted a 341-page thesis by 2.9x.
+   * The quote is a range: low covers cached/shorter answers, high covers
+   * retries and longer answers. The run pauses before spending above high. */
+  var CALL_CHARS_PER_TOKEN = 3.6;
+  var CALL_PROMPT_TOKENS = 720;
+  var CALL_OUT_TOKENS_PER_WORD = 1.35;
+  var CALL_OUT_OVERHEAD_TOKENS = 160;
+  var CALL_RETRY_FACTOR = 1.12;
+  var QUOTE_LOW_FACTOR = 0.55;
+  var QUOTE_HIGH_FACTOR = 1.15;
+  var DEFAULT_RATE_IN = 0.024;   /* gemini-3.1-flash-lite, INR per 1k input */
+  var DEFAULT_RATE_OUT = 0.144;  /* gemini-3.1-flash-lite, INR per 1k output */
 
-  function estimateAutoCost(pages, mapping, journal) {
+  function callRates(opts) {
+    var o = opts || {};
+    var inR = Number(o.rateIn);
+    var outR = Number(o.rateOut);
+    return {
+      in: isFinite(inR) && inR >= 0 ? inR : DEFAULT_RATE_IN,
+      out: isFinite(outR) && outR >= 0 ? outR : DEFAULT_RATE_OUT,
+      promptTokens: isFinite(Number(o.promptTokens)) && Number(o.promptTokens) > 0 ? Number(o.promptTokens) : CALL_PROMPT_TOKENS,
+      mtPerInr: isFinite(Number(o.mtPerInr)) && Number(o.mtPerInr) > 0 ? Number(o.mtPerInr) : MT_PER_INR
+    };
+  }
+
+  function estimateCallInr(chars, outWords, opts) {
+    var r = callRates(opts);
+    var inTok = Math.ceil(Math.max(0, Number(chars) || 0) / CALL_CHARS_PER_TOKEN) + r.promptTokens;
+    var outTok = Math.ceil(Math.max(60, Number(outWords) || 0) * CALL_OUT_TOKENS_PER_WORD) + CALL_OUT_OVERHEAD_TOKENS;
+    return Math.round(((inTok / 1000) * r.in + (outTok / 1000) * r.out) * 10000) / 10000;
+  }
+
+  function sectionBudgets(journal) {
+    var limit = Number((journal && journal.wordLimit) || 3000);
+    var absLimit = Number((journal && (journal.abstractLimit || journal.abstractWordLimit)) || 250);
+    return {
+      abstract: absLimit,
+      introduction: Math.round(limit * 0.17),
+      methods: Math.round(limit * 0.18),
+      results: Math.round(limit * 0.31),
+      discussion: Math.round(limit * 0.24),
+      conclusion: Math.round(limit * 0.08)
+    };
+  }
+
+  function estimateAutoCost(pages, mapping, journal, opts) {
     var list = Array.isArray(pages) ? pages : [];
+    var r = callRates(opts);
+    var budgets = sectionBudgets(journal);
     var totalChars = 0;
     for (var i = 0; i < list.length; i++) totalChars += String((list[i] && list[i].text) || "").length;
-    if (totalChars <= 13500) {
-      return { aiCalls: 1, estimatedCostInr: 0.06, estimatedMaikTokens: Math.round(0.06 * MT_PER_INR) };
+
+    function callOutWords(budget, factor, cap, floor) {
+      var v = Math.round((Number(budget) || 0) * factor);
+      if (v < floor) v = floor;
+      if (v > cap) v = cap;
+      return v;
     }
+
+    if (totalChars <= 13500) {
+      var oneWords = callOutWords(Math.max(budgets.introduction, 600), 0.35, 650, 180);
+      var oneInr = estimateCallInr(totalChars, oneWords, opts);
+      var oneCalls = Math.max(1, Math.round(CALL_RETRY_FACTOR));
+      return finishQuote(oneCalls, oneInr * CALL_RETRY_FACTOR, r);
+    }
+
     var bySec = (mapping && mapping.bySection) || {};
     var keys = ["introduction", "methods", "results", "discussion", "conclusion"];
-    var calls = 1; /* abstract */
+    var planCalls = 1; /* abstract */
+    var baseInr = estimateCallInr(6500, callOutWords(budgets.abstract, 0.8, 420, 120), opts);
+
     for (var k = 0; k < keys.length; k++) {
       var b = bySec[keys[k]];
       var bPages = (b && b.pages) || [];
@@ -1641,15 +1712,267 @@
       for (var p = 0; p < bPages.length; p++) bChars += String((bPages[p] && bPages[p].text) || "").length;
       if (!bChars && keys[k] !== "conclusion") continue;
       var chunks = Math.min(4, Math.max(1, Math.ceil((bChars || 1) / 13000)));
-      calls += chunks > 1 ? (chunks + 1) : 1;
+      var chunkChars = bChars / chunks;
+      var secBudget = budgets[keys[k]] || 500;
+      var chunkBudget = chunks > 1 ? Math.max(220, Math.min(700, Math.round(secBudget * 0.9))) : secBudget;
+      var chunkOut = callOutWords(chunkBudget, 0.4, 420, 120);
+      for (var c = 0; c < chunks; c++) baseInr += estimateCallInr(chunkChars, chunkOut, opts);
+      planCalls += chunks;
+      if (chunks > 1) {
+        /* merge call: the part summaries come back as input */
+        baseInr += estimateCallInr(chunks * 900, callOutWords(secBudget, 0.55, 650, 180), opts);
+        planCalls += 1;
+      }
     }
-    var inrPerCall = 0.06;
-    var estInr = Math.round(calls * inrPerCall * 100) / 100;
+    var expectedCalls = Math.max(1, Math.round(planCalls * CALL_RETRY_FACTOR));
+    return finishQuote(expectedCalls, baseInr * CALL_RETRY_FACTOR, r);
+  }
+
+  function finishQuote(calls, baseInr, r) {
+    var mid = Math.max(0.01, Math.round(baseInr * 10000) / 10000);
+    var low = Math.max(0.01, Math.round(mid * QUOTE_LOW_FACTOR * 10000) / 10000);
+    var high = Math.max(low, Math.round(mid * QUOTE_HIGH_FACTOR * 10000) / 10000);
     return {
       aiCalls: calls,
-      estimatedCostInr: estInr,
-      estimatedMaikTokens: Math.round(estInr * MT_PER_INR)
+      estimatedCostInr: mid,
+      estimatedMaikTokens: Math.round(mid * r.mtPerInr),
+      minCostInr: low,
+      maxCostInr: high,
+      minMaikTokens: Math.round(low * r.mtPerInr),
+      maxMaikTokens: Math.round(high * r.mtPerInr),
+      mtPerInr: r.mtPerInr,
+      rateIn: r.in,
+      rateOut: r.out
     };
+  }
+
+  /* ---------- 7b. Tables from the Rust reader's word positions ---------- */
+  /* The plain page text loses the column grid: headers wrap ("Completed" /
+   * "PROMS"), units wrap ("Systolic blood pressure-" / "mmHg"), and columns
+   * run together. The Rust reader gives every word's x/y box, so rows can be
+   * rebuilt: words are split into cells on horizontal gaps, cells are aligned
+   * to column anchors, wrapped header and label lines are merged, and every
+   * number stays verbatim. No Rust change is needed. */
+  function tableWordsLines(words) {
+    var w = (Array.isArray(words) ? words : []).slice();
+    w.sort(function (a, b) { return (a.y0 - b.y0) || (a.x0 - b.x0); });
+    var lines = [], cur = [], lastY = null;
+    for (var i = 0; i < w.length; i++) {
+      var x = w[i] || {};
+      if (lastY == null || Math.abs(x.y0 - lastY) <= 3) {
+        cur.push(x);
+        if (lastY == null) lastY = x.y0;
+      } else {
+        lines.push(cur);
+        cur = [x];
+        lastY = x.y0;
+      }
+    }
+    if (cur.length) lines.push(cur);
+    var out = [];
+    for (var j = 0; j < lines.length; j++) {
+      var ws = lines[j].slice().sort(function (a, b) { return a.x0 - b.x0; });
+      var y1 = ws[0].y1;
+      for (var k = 1; k < ws.length; k++) if (ws[k].y1 > y1) y1 = ws[k].y1;
+      var txt = [];
+      for (var t = 0; t < ws.length; t++) txt.push(String(ws[t].t || ""));
+      out.push({ y0: ws[0].y0, y1: y1, ws: ws, text: trim(txt.join(" ")) });
+    }
+    return out;
+  }
+
+  function tableLineCells(line, pageWidth) {
+    var gapMin = Math.max(9, (Number(pageWidth) || 595) * 0.018);
+    var groups = [], cur = [];
+    for (var i = 0; i < line.ws.length; i++) {
+      var w = line.ws[i] || {};
+      if (!cur.length) { cur.push(w); continue; }
+      var prev = cur[cur.length - 1];
+      if (w.x0 - prev.x1 > gapMin) {
+        groups.push(cur);
+        cur = [w];
+      } else {
+        cur.push(w);
+      }
+    }
+    if (cur.length) groups.push(cur);
+    var cells = [];
+    for (var g = 0; g < groups.length; g++) {
+      var gs = groups[g], x1 = gs[0].x1, parts = [];
+      for (var p = 1; p < gs.length; p++) if (gs[p].x1 > x1) x1 = gs[p].x1;
+      for (var q = 0; q < gs.length; q++) parts.push(String(gs[q].t || ""));
+      cells.push({ x0: gs[0].x0, x1: x1, text: trim(parts.join(" ")) });
+    }
+    return cells;
+  }
+
+  var TABLE_SECTION_LABELS = /^(symptoms|signs|hf symptoms|biochemistry|haematology|coagulation|microbiology|serology|past medical history|nyha functional class)(?:\s*-?\s*n\s*\(%\))?$/i;
+
+  function tableColumnAnchors(rows) {
+    var xs = [];
+    for (var r = 0; r < rows.length; r++) {
+      for (var c = 0; c < rows[r].cells.length; c++) xs.push(rows[r].cells[c].x0);
+    }
+    xs.sort(function (a, b) { return a - b; });
+    var anchors = [];
+    for (var i = 0; i < xs.length; i++) {
+      var hit = -1;
+      for (var a = 0; a < anchors.length; a++) {
+        if (Math.abs(anchors[a] - xs[i]) <= 22) { hit = a; break; }
+      }
+      if (hit < 0) anchors.push(xs[i]);
+      else anchors[hit] = (anchors[hit] + xs[i]) / 2;
+    }
+    anchors.sort(function (a, b) { return a - b; });
+    var merged = [];
+    for (var m = 0; m < anchors.length; m++) {
+      if (merged.length && anchors[m] - merged[merged.length - 1] <= 28) {
+        merged[merged.length - 1] = (merged[merged.length - 1] + anchors[m]) / 2;
+      } else merged.push(anchors[m]);
+    }
+    return merged;
+  }
+
+  function buildTableGridFromPage(pg, tableId, captionLineIndex) {
+    var lines = tableWordsLines(pg && pg.words);
+    var ci = typeof captionLineIndex === "number" && captionLineIndex >= 0 ? captionLineIndex : -1;
+    var idRe = new RegExp("^Table\\s+" + String(tableId || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "(?:\\b|(?=[A-Z(]))", "i");
+    if (ci < 0) {
+      for (var l = 0; l < lines.length; l++) {
+        if (idRe.test(lines[l].text)) { ci = l; break; }
+      }
+    }
+    if (ci < 0) return null;
+    var cap = lines[ci];
+    var rows = [];
+    for (var i = ci + 1; i < lines.length; i++) {
+      var ln = lines[i];
+      if (ln.y0 < cap.y0 + 3) continue;
+      if (/^(Continuous variables|Values are|Data are|HF\s*=|CI\s*=|IQR\s*=|SD\s*=|Abbreviations|\*|†|‡|NOTE|Notes?)/i.test(ln.text)) break;
+      if (/^\d+$/.test(ln.text)) break;
+      if (rows.length && /^Table\s+\d/i.test(ln.text)) break;
+      if (rows.length && ln.text.split(/\s+/).length > 10 && (ln.ws.length < 4 || /^(These|This|The|In|Our|There)\b/.test(ln.text))) break;
+      if (rows.length >= 2) {
+        var prevLine = rows[rows.length - 1];
+        if (ln.y0 - prevLine.y1 > 18 && !/\d/.test(ln.text) && ln.text.split(/\s+/).length < 5) break;
+      }
+      var cells = tableLineCells(ln, pg && pg.width);
+      if (!cells.length) continue;
+      rows.push({ y1: ln.y1, cells: cells });
+    }
+    if (!rows.length) return null;
+    var anchors = tableColumnAnchors(rows);
+    if (anchors.length < 2) return null;
+    var grid = [];
+    for (var r = 0; r < rows.length; r++) {
+      var arr = [];
+      for (var a = 0; a < anchors.length; a++) arr.push("");
+      for (var c = 0; c < rows[r].cells.length; c++) {
+        var cell = rows[r].cells[c];
+        var best = 0, dist = 1e9;
+        for (var q = 0; q < anchors.length; q++) {
+          var d = Math.abs(anchors[q] - cell.x0);
+          if (d < dist) { dist = d; best = q; }
+        }
+        arr[best] = arr[best] ? (arr[best] + " " + cell.text) : cell.text;
+      }
+      grid.push(arr);
+    }
+
+    /* Header: the first row of column labels (>= 2 cells, no row label). */
+    var headerStart = -1;
+    var scanTo = Math.min(4, grid.length);
+    for (var hs = 0; hs < scanTo; hs++) {
+      var non = 0;
+      for (var hc = 0; hc < grid[hs].length; hc++) if (grid[hs][hc]) non++;
+      if (non >= 2 && !grid[hs][0]) { headerStart = hs; break; }
+    }
+    if (headerStart < 0) headerStart = 0;
+    var bodyStart = grid.length;
+    for (var bs = headerStart; bs < grid.length; bs++) {
+      if (grid[bs][0] && /\d/.test(grid[bs].slice(1).join(" "))) { bodyStart = bs; break; }
+    }
+    var hasHeader = bodyStart > headerStart;
+    var headerRows = [], preRows = [], rb;
+    for (rb = headerStart; rb < (hasHeader ? bodyStart : headerStart); rb++) {
+      var rowNon = [];
+      for (var rc = 0; rc < grid[rb].length; rc++) if (grid[rb][rc]) rowNon.push(grid[rb][rc]);
+      if (rowNon.length === 1 && TABLE_SECTION_LABELS.test(rowNon[0].replace(/\s+/g, " "))) preRows.push(grid[rb]);
+      else headerRows.push(grid[rb]);
+    }
+    var headers = [];
+    for (var ha = 0; ha < anchors.length; ha++) {
+      var parts = [];
+      for (var hr = 0; hr < headerRows.length; hr++) if (headerRows[hr][ha]) parts.push(headerRows[hr][ha]);
+      headers.push(parts.join(" "));
+    }
+    var body = (hasHeader ? grid.slice(0, headerStart) : []).concat(preRows, grid.slice(hasHeader ? bodyStart : 0));
+    var outRows = [];
+    for (var br = 0; br < body.length; br++) {
+      var g = body[br], count = 0, only = -1;
+      for (var gc = 0; gc < g.length; gc++) if (g[gc]) { count++; only = gc; }
+      if (count === 1 && outRows.length && !TABLE_SECTION_LABELS.test(g[only].replace(/\s+/g, " ")) && !/-\s*n\s*\(%\)$/i.test(g[only])) {
+        outRows[outRows.length - 1][only] = outRows[outRows.length - 1][only] ? (outRows[outRows.length - 1][only] + " " + g[only]) : g[only];
+      } else {
+        outRows.push(g);
+      }
+    }
+    /* Drop fully empty rows and keep the numbers verbatim. */
+    var clean = [];
+    for (var cr = 0; cr < outRows.length; cr++) {
+      var hasText = false;
+      for (var cc = 0; cc < outRows[cr].length; cc++) if (trim(outRows[cr][cc])) hasText = true;
+      if (hasText) clean.push(outRows[cr]);
+    }
+    if (!clean.length) return null;
+    return { headers: headers, rows: clean };
+  }
+
+  function buildTableGrids(extractPages) {
+    var list = Array.isArray(extractPages) ? extractPages : [];
+    var byId = {}, out = [], order = [];
+    for (var p = 0; p < list.length; p++) {
+      var pg = list[p] || {};
+      var text = String(pg.text || "");
+      var lines = text.split(/\n+/);
+      var seenOnPage = {};
+      for (var li = 0; li < lines.length; li++) {
+        var m = /^\s*Table\s+([0-9]+(?:[.\-][0-9]+)?[A-Za-z]?)(?=[:\-.\s(]|[A-Z]|$)/i.exec(lines[li]);
+        if (!m) continue;
+        var id = m[1];
+        if (seenOnPage[id]) continue;
+        seenOnPage[id] = true;
+        var cont = /\(continued\)|continued/i.test(lines[li]) || /\(continued\)/i.test(text.slice(0, 300));
+        var grid = buildTableGridFromPage(pg, id);
+        if (!grid) continue;
+        var key = id.toLowerCase();
+        if (cont && byId[key]) {
+          var base = byId[key];
+          for (var rr = 0; rr < grid.rows.length; rr++) base.rows.push(grid.rows[rr]);
+        } else if (!byId[key]) {
+          var entry = { id: "Table " + id, page: Number(pg.n) || 0, headers: grid.headers, rows: grid.rows };
+          byId[key] = entry;
+          order.push(key);
+        }
+      }
+    }
+    for (var o = 0; o < order.length; o++) out.push(byId[order[o]]);
+    return out;
+  }
+
+  function tableGridFor(tableGrids, tbl) {
+    var list = Array.isArray(tableGrids) ? tableGrids : [];
+    var id = String((tbl && (tbl.originalId || tbl.id)) || "").replace(/^Table\s+/i, "").toLowerCase();
+    var page = Number(tbl && tbl.page);
+    var best = null;
+    for (var i = 0; i < list.length; i++) {
+      var g = list[i] || {};
+      if (Number(g.page) !== page) continue;
+      var gid = String(g.id || "").replace(/^Table\s+/i, "").toLowerCase();
+      if (gid === id) return g;
+      if (!best && gid && id && (gid.indexOf(id) === 0 || id.indexOf(gid) === 0)) best = g;
+    }
+    return best;
   }
 
   /* ---------- 8. DOCX, RIS & Submission Package ZIP Builders ---------- */
@@ -1827,6 +2150,8 @@
       var content = t.content || {};
       if (content.headers && content.headers.length) {
         parts.push(docxTable(content.headers, content.rows || []));
+      } else if (content.rows && content.rows.length) {
+        parts.push(docxTable([], content.rows));
       } else if (content.rawLines && content.rawLines.length) {
         for (var r = 1; r < content.rawLines.length; r++) {
           parts.push(docxPara(content.rawLines[r], { size: 20, spacing: 260 }));
@@ -2122,6 +2447,8 @@
     normJournalEntry: normJournalEntry,
     rankTargetJournals: rankTargetJournals,
     extractTableContent: extractTableContent,
+    buildTableGrids: buildTableGrids,
+    tableGridFor: tableGridFor,
     condenseTables: condenseTables,
     parseStructuredBibEntry: parseStructuredBibEntry,
     extractCitationsFromText: extractCitationsFromText,
@@ -2143,6 +2470,7 @@
     buildCoverLetter: buildCoverLetter,
     buildChecklistPdfBytes: buildChecklistPdfBytes,
     estimateAutoCost: estimateAutoCost,
+    estimateCallInr: estimateCallInr,
     buildManuscriptDocxBytes: buildManuscriptDocxBytes,
     buildTitlePageDocxBytes: buildTitlePageDocxBytes,
     buildCoverLetterDocxBytes: buildCoverLetterDocxBytes,

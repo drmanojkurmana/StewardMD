@@ -18,7 +18,7 @@
  */
 import { adminAuth, adminErr } from "./_institutions.js";
 import { verifiedClaimsFor } from "../../_fbauth.js";
-import { grantInstitutionCredits, institutionBalance, usdInrRate } from "./_credits.js";
+import { grantInstitutionCredits, institutionBalance, usdInrRate, MT_PER_INR } from "./_credits.js";
 
 const TOKEN_PRODUCT_RE = /^in\.stewardmd\.tokens\.([a-z]+)$/;
 
@@ -46,7 +46,7 @@ export async function purchasePacks(ctx) {
   const mod = await billingModule();
   const tokens = mod.plans(env).tokens;
   return api.json({
-    packs: tokens, usdInrRate: usdInrRate(env), currency: "INR",
+    packs: tokens, usdInrRate: usdInrRate(env), mtPerInr: MT_PER_INR, currency: "INR",
     note: "Research spend draws from the MaiK wallet. Buy a MaiK Token pack through the existing purchase route; the balance is shared with the rest of StewardMD.",
   }, 200, { "x-request-id": requestId });
 }
