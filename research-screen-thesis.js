@@ -1717,15 +1717,19 @@
 
   function extractThesisTables(pages) {
     var list = normalizePagesInput(pages);
-    var seen = {}, out = [], p, text, m, re = /(?:^|\n)\s*(Table\s+\d+(?:[.\-]\d+)?[A-Za-z]?)\s*[:.\-]?\s*([^\n]{0,120})/gi;
+    var seen = {}, out = [], p, text, m, re = /(?:^|\n)\s*(Table\s+\d+(?:[.\-]\d+)?[A-Za-z]?)\s*([:.\-])?\s*([^\n]{0,120})/gi;
     for (p = 0; p < list.length; p++) {
       text = String(list[p].text || "");
       if (isTocOrFrontListPage(text)) continue;
       re.lastIndex = 0;
       while ((m = re.exec(text)) !== null) {
         var tid = m[1].replace(/\s+/g, " ");
-        var cap = String(m[2] || "").replace(/^\s+|\s+$/g, "");
+        var sep = m[2] || "";
+        var cap = String(m[3] || "").replace(/^\s+|\s+$/g, "");
         if (/\.{4,}\s*\d+$/.test(cap)) continue;
+        if (!sep && /^(?:shows?|showed|presents?|presented|summarizes?|summarized|lists?|reports?|reported|compares?|is|was|are|were|for|of|in|on|and|the|with|as|that|to)\b/.test(cap)) {
+          continue;
+        }
         var lowId = tid.toLowerCase();
         if (seen[lowId]) continue;
         seen[lowId] = true;
@@ -1739,7 +1743,7 @@
           score: Math.min(10, 2 + numHits),
           reason: "Found on thesis page " + (list[p].n != null ? list[p].n : (p + 1)) + " with study figures."
         });
-        if (out.length >= 12) return out;
+        if (out.length >= 40) return out;
       }
     }
     return out;
@@ -1777,6 +1781,19 @@
           }
         }
       }
+      var supRe = /[.;!?](\d{1,3}(?:\s*[,\-\u2013]\s*\d{1,3})*)(?=\s|$)/g, sm;
+      while ((sm = supRe.exec(citedLow)) !== null) {
+        var sparts = sm[1].split(/\s*,\s*/);
+        for (var si = 0; si < sparts.length; si++) {
+          var srng = sparts[si].match(/^(\d+)\s*[-\u2013]\s*(\d+)$/);
+          if (srng) {
+            var slo = Number(srng[1]), shi = Number(srng[2]);
+            if (isFinite(nNum) && shi >= slo && (shi - slo) <= 30 && nNum >= slo && nNum <= shi) return true;
+          } else if (sparts[si].replace(/\s+/g, "") === nStr) {
+            return true;
+          }
+        }
+      }
     }
     return false;
   }
@@ -1797,27 +1814,34 @@
       }
     }
     var citedLow = opts.citedText ? String(opts.citedText).toLowerCase() : "";
-    var rawCap = citedLow ? 160 : 30;
+    var rawCap = citedLow ? 500 : (opts.all ? 500 : 30);
     var out = [], seen = {}, lines, li, cur = "";
     function pushRef(raw) {
       var s = raw.replace(/\s+/g, " ").replace(/^\s+|\s+$/g, "");
-      if (s.length < 24 || s.length > 500 || !/\b(19|20)\d{2}\b/.test(s)) return;
+      if (s.length < 24 || s.length > 700 || !/\b(19|20)\d{2}\b/.test(s)) return;
       if (/submitted\s+in\s+fulfilment|table\s+of\s+contents|doctor\s+of\s+philosophy/i.test(s)) return;
       if (!/[;:,]\s*\d+|doi:|pmid/i.test(s) && !/^\s*(?:\[\d+\]|\d+[.)])\s+/.test(s)) return;
       var numM = s.match(/^\s*\[?(\d{1,3})\]?[.)]\s+/);
       var k = s.slice(0, 60).toLowerCase();
       if (seen[k]) return;
       seen[k] = true;
-      var doiM = s.match(/\b(10\.\d{4,9}\/[-._;()/:A-Za-z0-9]+)\b/);
-      var pmidM = s.match(/PMID\s*:?\s*(\d{5,9})/i);
+      var AUTO = G && G.SMD_RESEARCH_THESIS_AUTO;
+      if (AUTO && typeof AUTO.parseStructuredBibEntry === "function") {
+        out.push(AUTO.parseStructuredBibEntry(s, numM ? numM[1] : ""));
+        return;
+      }
+      var cleanBody = s.replace(/^\s*\[?\d{1,3}\]?[.)]\s+/, "");
+      var doiM = cleanBody.match(/\b(10\.\d{4,9}\/[-._;()/:A-Za-z0-9]+)\b/);
+      var pmidM = cleanBody.match(/PMID\s*:?\s*(\d{5,9})/i);
       out.push({
-        authors: s.split(/[.(]/)[0] || "",
-        title: s,
+        authors: cleanBody.split(/[.(]/)[0] || "",
+        title: cleanBody,
         journal: "",
-        year: (s.match(/\b((?:19|20)\d{2})\b/) || [])[1] || "",
+        year: (cleanBody.match(/\b((?:19|20)\d{2})\b/) || [])[1] || "",
         doi: doiM ? doiM[1].replace(/[.,;)]$/, "") : "",
         pmid: pmidM ? pmidM[1] : "",
-        numMarker: numM ? numM[1] : ""
+        numMarker: numM ? numM[1] : "",
+        raw: cleanBody
       });
     }
     for (p = 0; p < refPages.length && out.length < rawCap; p++) {
@@ -1825,7 +1849,8 @@
       for (li = 0; li < lines.length && out.length < rawCap; li++) {
         var line = lines[li].replace(/^\s+|\s+$/g, "");
         if (!line || /^(References|Bibliography|List of references|\d+)$/i.test(line)) continue;
-        if (/^(?:\[?\d+\]?[.)]\s+|[A-Z][a-zA-Z\-']+,?\s+[A-Z]{1,3}\b)/.test(line) && cur) {
+        var curIsOnlyNum = /^\s*\[?\d{1,3}\]?[.)]\s*$/.test(cur);
+        if (/^(?:\[?\d+\]?[.)]\s*$|\[\d+\]\s+|\d+[.)]\s+|[A-Z][a-zA-Z\-']+,?\s+[A-Z]{1,3}\b)/.test(line) && cur && !curIsOnlyNum) {
           pushRef(cur);
           cur = line;
         } else {
@@ -1834,6 +1859,7 @@
       }
       if (cur) { pushRef(cur); cur = ""; }
     }
+    if (opts.all) return out;
     if (citedLow && out.length) {
       var citedOnly = [];
       for (var ci = 0; ci < out.length; ci++) {
@@ -2361,17 +2387,38 @@
     }
     var h = ['<div class="rmd-p2-screen rmd-thesis-screen">'];
     if (ts.pages && ts.pages.length) {
+      var AUTO = G && G.SMD_RESEARCH_THESIS_AUTO;
+      var estCost = null;
+      if (AUTO && typeof AUTO.estimateAutoCost === "function") {
+        var estTree = ensureChapterTree();
+        var estMap = mapChaptersToJournal(estTree, ts.pages, journalOf(), ts.paperType, ts.chapterMap || {});
+        estCost = AUTO.estimateAutoCost(ts.pages, estMap, journalOf());
+      }
+      var hasAutoSaved = !!(ts.auto && ts.auto.steps && Object.keys(ts.auto.steps).length);
+      var makeBtnLabel = (ts.auto && ts.auto.status === "stopped")
+        ? "Continue journal paper"
+        : (hasAutoSaved && (ts.auto.status === "review" || ts.auto.status === "approved")
+          ? "Review journal paper"
+          : "Make my journal paper");
       h.push('<div class="rmd-card">');
       h.push('<h2>Thesis read</h2>');
       h.push('<p class="rmd-screen-subtitle">' + esc(ts.filename || "Your thesis") + ' was read: ' + ts.pages.length + ' page(s). The text stays on this device and on our server; it is only sent to an AI provider when you ask MaiK to draft.</p>');
+      if (!isTutorialProject(proj) && estCost) {
+        h.push('<p class="rmd-thesis-meta" id="rmdThesisAutoEstimate">Estimated MaiK cost: about ' + esc(String(estCost.estimatedMaikTokens)) + ' MaiK tokens (' + esc(String(estCost.aiCalls)) + ' AI step' + (estCost.aiCalls === 1 ? '' : 's') + '). Charged only for steps that run and succeed.</p>');
+      }
       if (ts.phi && ts.phi.softPages && ts.phi.softPages.length && !(ts.phiConsent && ts.phiConsent.confirmed)) {
         h.push('<p class="rmd-thesis-meta" id="rmdThesisConsentHint">We flagged pages ' + esc(ts.phi.softPages.join(", ")) + ' for a quick patient-details check before AI drafting.</p>');
       }
-      h.push('<div class="rmd-card-actions"><button type="button" class="rmd-btn" id="rmdThesisReupload">Upload a different file</button>');
+      h.push('<div class="rmd-card-actions">');
+      if (!isTutorialProject(proj) && AUTO) {
+        h.push('<button type="button" class="rmd-btn rmd-btn-primary" id="rmdMakeJournalPaper" data-rmd-thesis-auto="start">' + esc(makeBtnLabel) + '</button>');
+      }
+      h.push('<button type="button" class="rmd-btn' + ((!isTutorialProject(proj) && AUTO) ? '' : ' rmd-btn-primary') + '" data-rmd-thesis-next="thesis-type">' + ((!isTutorialProject(proj) && AUTO) ? 'Edit step by step' : 'Next: pick the paper type') + '</button>');
       if (ts.phi && ts.phi.softPages && ts.phi.softPages.length && !(ts.phiConsent && ts.phiConsent.confirmed)) {
         h.push('<button type="button" class="rmd-btn" id="rmdThesisOpenConsent">Check for patient details</button>');
       }
-      h.push(nextBtn("thesis-type", "Next: pick the paper type") + '</div>');
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle" id="rmdThesisReupload">Upload a different file</button>');
+      h.push('</div>');
       h.push('</div>');
     } else {
       h.push('<div class="rmd-card">');
@@ -2406,6 +2453,25 @@
         onConfirm: function () { renderUpload(container); },
         onReupload: function () { renderUpload(container); }
       });
+    };
+    var makeAuto = container.querySelector("#rmdMakeJournalPaper");
+    if (makeAuto) makeAuto.onclick = function () {
+      var curAuto = ts.auto || {};
+      var alreadyReview = curAuto.status === "review" || curAuto.status === "approved";
+      if (alreadyReview) {
+        if (SMD.navigate) SMD.navigate("thesis-auto", {});
+        return;
+      }
+      if (ts.phi && ts.phi.softPages && ts.phi.softPages.length && !(ts.phiConsent && ts.phiConsent.confirmed)) {
+        openConsentSheet(ts.phi, {
+          onConfirm: function () {
+            if (SMD.navigate) SMD.navigate("thesis-auto", { autoStart: true });
+          },
+          onReupload: function () { renderUpload(container); }
+        });
+        return;
+      }
+      if (SMD.navigate) SMD.navigate("thesis-auto", { autoStart: true });
     };
   }
 
@@ -2865,9 +2931,13 @@
       indexedPubMed: typeof j.indexedPubMed === "boolean" ? j.indexedPubMed : null,
       noFee: typeof j.noFee === "boolean" ? j.noFee : null,
       wordLimit: isFinite(numeric) && numeric > 0 ? numeric : null,
-      abstractLimit: isFinite(Number(limits.abstract)) && Number(limits.abstract) > 0 ? Number(limits.abstract) : null,
+      abstractLimit: isFinite(Number(j.abstractWordLimit != null ? j.abstractWordLimit : limits.abstract)) && Number(j.abstractWordLimit != null ? j.abstractWordLimit : limits.abstract) > 0 ? Number(j.abstractWordLimit != null ? j.abstractWordLimit : limits.abstract) : null,
       abstractFormat: af == null || af === "" ? null : String(af),
       referenceStyle: j.referenceStyle == null || j.referenceStyle === "" ? null : String(j.referenceStyle),
+      maxReferences: isFinite(Number(j.maxReferences)) && Number(j.maxReferences) > 0 ? Number(j.maxReferences) : null,
+      maxTables: isFinite(Number(j.maxTables)) && Number(j.maxTables) > 0 ? Number(j.maxTables) : null,
+      maxFigures: isFinite(Number(j.maxFigures)) && Number(j.maxFigures) > 0 ? Number(j.maxFigures) : null,
+      articleTypes: Array.isArray(j.articleTypes) ? j.articleTypes.slice() : [],
       apcNote: j.apcNote == null || j.apcNote === "" ? null : String(j.apcNote),
       url: safeHttpUrl(j.url || j.authorInstructionsUrl),
       _best: false,
@@ -2919,10 +2989,15 @@
       id: j.id,
       name: j.name,
       shortName: j.shortName,
+      specialty: j.specialty || "",
       wordLimit: j.wordLimit == null ? DEFAULT_JOURNAL.wordLimit : j.wordLimit,
       abstractLimit: j.abstractLimit != null ? j.abstractLimit : abstractLimitOf(j),
       abstractFormat: j.abstractFormat || DEFAULT_JOURNAL.abstractFormat,
       referenceStyle: j.referenceStyle || "vancouver",
+      maxReferences: j.maxReferences || 35,
+      maxTables: j.maxTables || 4,
+      maxFigures: j.maxFigures || 4,
+      lineNumbers: typeof j.lineNumbers === "boolean" ? j.lineNumbers : true,
       publisher: j.publisher,
       guidelinesUrl: j.url,
       feeNote: j.apcNote
@@ -3405,6 +3480,8 @@
   }
 
   function draftOneSectionStep(step, onSubProgress) {
+    var totalCostInr = 0;
+    var totalAiCalls = 0;
     function prependHint(chunkPages, hint) {
       if (!hint || !chunkPages.length) return chunkPages;
       var out = [{ n: chunkPages[0].n, text: hint + String(chunkPages[0].text || "") }];
@@ -3416,19 +3493,31 @@
         .replace(/^\s*#{1,4}\s*(?:Abstract|Introduction|Methods|Results|Discussion|Conclusion)\s*[:\-.]*\s*/i, "")
         .replace(/^\s+|\s+$/g, "");
     }
+    function isHardQuotaErr(err) {
+      var c = err && (err.code || (err.body && err.body.error && err.body.error.code));
+      return err && (err._handledByConsent || err.status === 429 || err.status === 402 ||
+        c === "project_ai_cap" || c === "user_ai_cap" || c === "insufficient_credits");
+    }
+    function trackedCall(reqSec, payloadPages, chunkBudget) {
+      return callThesisAi(reqSec, payloadPages, chunkBudget).then(function (res) {
+        totalAiCalls += 1;
+        totalCostInr += Number((res && res.costInr) || 0);
+        return res;
+      });
+    }
     function runOneChunk(reqSec, fallbackSec, hint, chunkPages, chunkBudget, allowFallback) {
       var payloadPages = prependHint(chunkPages, hint);
-      return callThesisAi(reqSec, payloadPages, chunkBudget).catch(function (err) {
-        if (err && err._handledByConsent) throw err;
+      return trackedCall(reqSec, payloadPages, chunkBudget).catch(function (err) {
+        if (isHardQuotaErr(err)) throw err;
         var isBadSec = err && (err.status === 400 || err.code === "invalid_body");
         if (allowFallback && isBadSec && fallbackSec) {
-          return callThesisAi(fallbackSec, payloadPages, chunkBudget);
+          return trackedCall(fallbackSec, payloadPages, chunkBudget);
         }
-        return callThesisAi(reqSec, payloadPages, chunkBudget);
+        return trackedCall(reqSec, payloadPages, chunkBudget);
       }).then(function (res) {
         var txt = cleanSectionOutput(extractSingleSectionText(res, step.id));
         if (!txt) {
-          return callThesisAi(reqSec, payloadPages, chunkBudget);
+          return trackedCall(reqSec, payloadPages, chunkBudget);
         }
         return res;
       });
@@ -3436,7 +3525,7 @@
 
     var pages = step.pages || [];
     if (!pages.length) {
-      return Promise.resolve({ id: step.id, text: "", tables: [], references: [], model: "", skipped: true });
+      return Promise.resolve({ id: step.id, text: "", tables: [], references: [], model: "", aiCalls: 0, costInr: 0, skipped: true });
     }
     var chars = totalThesisChars(pages);
     if (chars <= 13000) {
@@ -3447,7 +3536,9 @@
           text: cleanSectionOutput(extractSingleSectionText(res, step.id)),
           tables: (d && (d.tables || d.suggestedTables)) || [],
           references: (d && d.references) || [],
-          model: (res && res.model) || ""
+          model: (res && res.model) || "",
+          aiCalls: totalAiCalls,
+          costInr: totalCostInr
         };
       });
     }
@@ -3463,7 +3554,9 @@
           text: cleanSectionOutput(extractSingleSectionText(res, step.id)),
           tables: (d && (d.tables || d.suggestedTables)) || [],
           references: (d && d.references) || [],
-          model: (res && res.model) || ""
+          model: (res && res.model) || "",
+          aiCalls: totalAiCalls,
+          costInr: totalCostInr
         };
       });
     }
@@ -3476,7 +3569,7 @@
           if (onSubProgress) onSubProgress(idx + 1, total);
           var subHint = "PART " + (idx + 1) + " OF " + total + " FOR " + step.heading.toUpperCase() +
             ": Extract and condense the key points for " + step.heading +
-            ". Keep the author's wording and copy all exact numbers, statistics and table names verbatim.\n\n";
+            ". Keep the author's wording, preserve in-text citation markers (such as [1] or (Author, Year)), and copy all exact numbers, statistics and table names verbatim.\n\n";
           return runOneChunk(step.reqSection, step.fallbackSection, subHint, chunkPages, subBudget, true);
         });
       })(chunks[ci], ci, chunks.length);
@@ -3487,7 +3580,7 @@
       for (var si = 0; si < subResults.length; si++) {
         var sr = subResults[si];
         if (!sr || !sr.ok) {
-          if (sr && sr.error && sr.error._handledByConsent) throw sr.error;
+          if (sr && sr.error && isHardQuotaErr(sr.error)) throw sr.error;
           continue;
         }
         var res = sr.value;
@@ -3504,23 +3597,52 @@
         throw new Error("All sub-chunks failed for " + step.heading);
       }
       if (notes.length === 1 && countWords(notes[0].text) <= step.budget) {
-        return { id: step.id, text: notes[0].text, tables: subTables, references: subRefs, model: lastMod };
+        return { id: step.id, text: notes[0].text, tables: subTables, references: subRefs, model: lastMod, aiCalls: totalAiCalls, costInr: totalCostInr };
+      }
+      function joinNotesFallback(notesArr, budget) {
+        var raw = [];
+        for (var ni = 0; ni < notesArr.length; ni++) {
+          if (notesArr[ni] && notesArr[ni].text) raw.push(notesArr[ni].text);
+        }
+        var joined = raw.join("\n\n").replace(/^\s+|\s+$/g, "");
+        if (!joined) return "";
+        var words = joined.split(/\s+/);
+        if (words.length <= budget) return joined;
+        var cut = words.slice(0, budget).join(" ");
+        var endDot = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf(".\n"));
+        return (endDot > cut.length * 0.5 ? cut.slice(0, endDot + 1) : (cut + "."))
+          .replace(/^\s+|\s+$/g, "");
       }
       var mergeHint = step.hint + "MERGE INSTRUCTION: Combine these " + notes.length +
-        " part summaries into one cohesive " + step.heading + " section within " + step.budget +
-        " words. Keep the author's wording and every exact number verbatim.\n\n";
+        " part summaries into one cohesive " + step.heading + " section strictly within " + step.budget +
+        " words. Respond with compact valid JSON {\"text\":\"...\"} and copy every exact number verbatim.\n\n";
       return runOneChunk(step.reqSection, step.fallbackSection, mergeHint, notes, step.budget, true).then(function (mRes) {
         var md = (mRes && mRes.draft) ? mRes.draft : mRes;
         if (md) {
           if (Array.isArray(md.tables || md.suggestedTables)) subTables = subTables.concat(md.tables || md.suggestedTables);
           if (Array.isArray(md.references)) subRefs = subRefs.concat(md.references);
         }
+        var mergedTxt = cleanSectionOutput(extractSingleSectionText(mRes, step.id));
+        if (!mergedTxt) mergedTxt = joinNotesFallback(notes, step.budget);
         return {
           id: step.id,
-          text: cleanSectionOutput(extractSingleSectionText(mRes, step.id)),
+          text: mergedTxt,
           tables: subTables,
           references: subRefs,
-          model: (mRes && mRes.model) || lastMod
+          model: (mRes && mRes.model) || lastMod,
+          aiCalls: totalAiCalls,
+          costInr: totalCostInr
+        };
+      }, function (mErr) {
+        if (isHardQuotaErr(mErr)) throw mErr;
+        return {
+          id: step.id,
+          text: joinNotesFallback(notes, step.budget),
+          tables: subTables,
+          references: subRefs,
+          model: lastMod,
+          aiCalls: totalAiCalls,
+          costInr: totalCostInr
         };
       });
     });
@@ -3546,9 +3668,9 @@
       concPages = headSum.concat(tail);
     }
 
-    var introHint = "SECTION INSTRUCTION: Condense the thesis introduction and aims into a crisp background and rationale, keeping the author's wording.\n\n";
+    var introHint = "SECTION INSTRUCTION: Condense the thesis introduction and aims into a crisp background and rationale, keeping the author's wording and exact citation markers (e.g. [1]).\n\n";
     if (introBucket.reviewPages && introBucket.reviewPages.length) {
-      introHint = "SECTION INSTRUCTION: Condense the Review of Literature into the 3 to 5 most relevant points with their citations, combined with the thesis introduction and aims.\n\n";
+      introHint = "SECTION INSTRUCTION: Condense the Review of Literature into the 3 to 5 most relevant points with their exact citation markers (e.g. [1]), combined with the thesis introduction and aims.\n\n";
     }
     var resTables = (resultsBucket.tables && resultsBucket.tables.length) ? resultsBucket.tables : extractThesisTables(resultsBucket.pages);
     var resHint = "SECTION INSTRUCTION: Report key participant numbers, primary and secondary outcomes and statistics copied verbatim from the thesis.\n\n";
@@ -3560,14 +3682,15 @@
 
     return [
       { id: "introduction", heading: "Introduction", reqSection: "introduction", pages: introBucket.pages, budget: Math.max(250, Math.round(mainLimit * 0.18)), hint: introHint },
-      { id: "methods", heading: "Methods", reqSection: "methods", pages: methodsBucket.pages, budget: Math.max(300, Math.round(mainLimit * 0.25)), hint: "SECTION INSTRUCTION: Summarize study design, setting, participants, interventions or exposures, outcomes and statistical methods with exact figures from the thesis.\n\n" },
+      { id: "methods", heading: "Methods", reqSection: "methods", pages: methodsBucket.pages, budget: Math.max(300, Math.round(mainLimit * 0.25)), hint: "SECTION INSTRUCTION: Summarize study design, setting, participants, interventions or exposures, outcomes and statistical methods with exact figures and citation markers from the thesis.\n\n" },
       { id: "results", heading: "Results", reqSection: "results", pages: resultsBucket.pages, budget: Math.max(350, Math.round(mainLimit * 0.30)), hint: resHint },
-      { id: "discussion", heading: "Discussion", reqSection: "discussion", pages: discBucket.pages, budget: Math.max(250, Math.round(mainLimit * 0.20)), hint: "SECTION INSTRUCTION: Synthesize main findings, comparison with prior studies, strengths and limitations from the thesis.\n\n" },
+      { id: "discussion", heading: "Discussion", reqSection: "discussion", pages: discBucket.pages, budget: Math.max(250, Math.round(mainLimit * 0.20)), hint: "SECTION INSTRUCTION: Synthesize main findings, comparison with prior studies (preserving citation markers like [1]), strengths and limitations from the thesis.\n\n" },
       { id: "conclusion", heading: "Conclusion", reqSection: "conclusion", fallbackSection: "discussion", pages: concPages, budget: Math.max(80, Math.min(180, Math.round(mainLimit * 0.08))), hint: "CONCLUSION SECTION ONLY: Write 2 to 4 concise clinical sentences stating the primary conclusion and practical implication strictly from these thesis conclusion pages.\n\n" }
     ];
   }
 
-  function orchestrateThesisDraft(container, st) {
+  function orchestrateThesisDraft(container, st, projIgnored, opts) {
+    opts = opts || {};
     ts = loadThesis(tpid);
     var jr = journalOf();
     var mainLimit = jr.wordLimit || 3000;
@@ -3579,16 +3702,42 @@
 
     /* Fast path for short fixtures / tutorial sample (<= 13,500 chars) without manual chapter overrides */
     if (chars <= 13500 && !hasOverrides) {
-      return callThesisAi(null, allPages, mainLimit, { abstractLimit: absLimit });
+      return callThesisAi(null, allPages, mainLimit, { abstractLimit: absLimit }).then(function (res) {
+        if (res && res.draft) {
+          res.draft._aiCalls = 1;
+          res.draft._costInr = Number(res.costInr || 0);
+        }
+        return res;
+      });
     }
 
     var tree = ensureChapterTree();
     var mapping = mapChaptersToJournal(tree, allPages, jr, ts.paperType, overrides);
     var plan = buildSectionPlan(allPages, jr, mapping);
     var resultsMap = {}, serverTables = [], serverRefs = [], missingSecs = [], lastModel = "";
+    var totalAiCalls = 0, totalCostInr = 0, hardErr = null, stoppedByUser = false;
     var sectionStatus = {};
+    var prevStatus = (opts.resume && ts.sectionStatus) || {};
+    var prevSecs = (opts.resume && ts.draft && Array.isArray(ts.draft.sections)) ? ts.draft.sections : [];
+    var prevTextById = {};
+    for (var ps = 0; ps < prevSecs.length; ps++) {
+      if (prevSecs[ps] && prevSecs[ps].id) prevTextById[prevSecs[ps].id] = prevSecs[ps].text || "";
+    }
     for (var s0 = 0; s0 < SECTION_ORDER.length; s0++) {
-      sectionStatus[SECTION_ORDER[s0].id] = { status: "queued", heading: SECTION_ORDER[s0].heading, words: 0 };
+      var sId0 = SECTION_ORDER[s0].id;
+      var psRec = prevStatus[sId0];
+      if (opts.resume && psRec && psRec.status === "done" && countWords(prevTextById[sId0]) > 0) {
+        resultsMap[sId0] = prevTextById[sId0];
+        sectionStatus[sId0] = {
+          status: "done",
+          heading: SECTION_ORDER[s0].heading,
+          words: countWords(prevTextById[sId0]),
+          aiCalls: Number(psRec.aiCalls || 0),
+          costInr: Number(psRec.costInr || 0)
+        };
+      } else {
+        sectionStatus[sId0] = { status: "queued", heading: SECTION_ORDER[s0].heading, words: 0 };
+      }
     }
 
     function mergeTables(resTables) {
@@ -3635,6 +3784,7 @@
         }
       });
       ts = loadThesis(tpid);
+      if (opts.onProgress) opts.onProgress({ sectionStatus: sectionStatus, doneCount: doneCount, aiCalls: totalAiCalls, costInr: totalCostInr });
       renderSectionProgress(container);
       renderDraftBody(container);
     }
@@ -3648,6 +3798,16 @@
     for (var idx = 0; idx < plan.length; idx++) {
       (function (step) {
         mainTasks.push(function () {
+          if (hardErr) return null;
+          if (opts.resume && resultsMap[step.id] && sectionStatus[step.id] && sectionStatus[step.id].status === "done") {
+            return null;
+          }
+          if (opts.shouldStop && opts.shouldStop()) {
+            stoppedByUser = true;
+            sectionStatus[step.id] = { status: "stopped", heading: step.heading, words: 0 };
+            updateProgressivePreview();
+            return null;
+          }
           if (!step.pages || !step.pages.length) {
             sectionStatus[step.id] = { status: "skipped", heading: step.heading, words: 0 };
             updateProgressivePreview();
@@ -3656,28 +3816,36 @@
           sectionStatus[step.id] = { status: "running", heading: step.heading, words: 0 };
           saveThesis(tpid, { sectionStatus: sectionStatus });
           ts = loadThesis(tpid);
+          if (opts.onProgress) opts.onProgress({ sectionStatus: sectionStatus, aiCalls: totalAiCalls, costInr: totalCostInr });
           renderSectionProgress(container);
 
           return draftOneSectionStep(step, function (part, totalParts) {
             sectionStatus[step.id] = { status: "running", heading: step.heading, detail: "part " + part + "/" + totalParts, words: 0 };
+            if (opts.onProgress) opts.onProgress({ sectionStatus: sectionStatus, aiCalls: totalAiCalls, costInr: totalCostInr });
             renderSectionProgress(container);
           }).then(function (out) {
             if (out.model) lastModel = out.model;
+            totalAiCalls += Number(out.aiCalls || 0);
+            totalCostInr += Number(out.costInr || 0);
             mergeTables(out.tables);
             mergeRefs(out.references);
             if (out.text) {
               resultsMap[step.id] = out.text;
-              sectionStatus[step.id] = { status: "done", heading: step.heading, words: countWords(out.text) };
+              sectionStatus[step.id] = { status: "done", heading: step.heading, words: countWords(out.text), aiCalls: out.aiCalls || 0, costInr: out.costInr || 0 };
             } else {
               missingSecs.push(step.heading);
-              sectionStatus[step.id] = { status: "failed", heading: step.heading, words: 0 };
+              sectionStatus[step.id] = { status: "failed", heading: step.heading, words: 0, aiCalls: 0, costInr: 0 };
             }
             updateProgressivePreview();
             return out;
           }).catch(function (err) {
-            if (err && err._handledByConsent) throw err;
+            var c = err && (err.code || (err.body && err.body.error && err.body.error.code));
+            if (err && (err._handledByConsent || err.status === 429 || err.status === 402 || c === "project_ai_cap" || c === "user_ai_cap" || c === "insufficient_credits")) {
+              hardErr = err;
+              throw err;
+            }
             missingSecs.push(step.heading);
-            sectionStatus[step.id] = { status: "failed", heading: step.heading, words: 0 };
+            sectionStatus[step.id] = { status: "failed", heading: step.heading, words: 0, aiCalls: 0, costInr: 0 };
             updateProgressivePreview();
             return null;
           });
@@ -3686,9 +3854,20 @@
     }
 
     return runBoundedPool(mainTasks, 3).then(function () {
+      if (hardErr) throw hardErr;
+      if (opts.resume && resultsMap.abstract && sectionStatus.abstract && sectionStatus.abstract.status === "done") {
+        return null;
+      }
+      if (stoppedByUser || (opts.shouldStop && opts.shouldStop())) {
+        stoppedByUser = true;
+        sectionStatus.abstract = { status: "stopped", heading: "Abstract", words: 0 };
+        updateProgressivePreview();
+        return null;
+      }
       sectionStatus.abstract = { status: "running", heading: "Abstract", words: 0 };
       saveThesis(tpid, { sectionStatus: sectionStatus });
       ts = loadThesis(tpid);
+      if (opts.onProgress) opts.onProgress({ sectionStatus: sectionStatus, aiCalls: totalAiCalls, costInr: totalCostInr });
       renderSectionProgress(container);
       setLiveDraftProgress(container, st, "Drafting Abstract (structured summary)", 88);
 
@@ -3713,17 +3892,22 @@
       };
       return draftOneSectionStep(absStep).then(function (out) {
         if (out.model) lastModel = out.model;
+        totalAiCalls += Number(out.aiCalls || 0);
+        totalCostInr += Number(out.costInr || 0);
         if (out.text) {
           resultsMap.abstract = out.text;
-          sectionStatus.abstract = { status: "done", heading: "Abstract", words: countWords(out.text) };
+          sectionStatus.abstract = { status: "done", heading: "Abstract", words: countWords(out.text), aiCalls: out.aiCalls || 0, costInr: out.costInr || 0 };
         } else {
           missingSecs.push("Abstract");
-          sectionStatus.abstract = { status: "failed", heading: "Abstract", words: 0 };
+          sectionStatus.abstract = { status: "failed", heading: "Abstract", words: 0, aiCalls: 0, costInr: 0 };
         }
       }).catch(function (err) {
-        if (err && err._handledByConsent) throw err;
+        var c = err && (err.code || (err.body && err.body.error && err.body.error.code));
+        if (err && (err._handledByConsent || err.status === 429 || err.status === 402 || c === "project_ai_cap" || c === "user_ai_cap" || c === "insufficient_credits")) {
+          throw err;
+        }
         missingSecs.push("Abstract");
-        sectionStatus.abstract = { status: "failed", heading: "Abstract", words: 0 };
+        sectionStatus.abstract = { status: "failed", heading: "Abstract", words: 0, aiCalls: 0, costInr: 0 };
       });
     }).then(function () {
       var resSourcePages = mapping.bySection.results.pages.length ? mapping.bySection.results.pages : allPages;
@@ -3754,9 +3938,14 @@
           references: combinedRefs,
           excludedChapters: mapping.excluded,
           _sectionStatus: sectionStatus,
-          _missingSections: missingSecs
+          _missingSections: missingSecs,
+          _aiCalls: totalAiCalls,
+          _costInr: totalCostInr,
+          _stopped: stoppedByUser
         },
-        model: lastModel
+        model: lastModel,
+        costInr: totalCostInr,
+        stopped: stoppedByUser
       };
     });
   }
@@ -4574,9 +4763,1201 @@
       "#researchMD .rmd-sec-prog-state { margin-left: auto; color: var(--rmd-mut); font-variant-numeric: tabular-nums; }",
       "#researchMD .rmd-sec-prog-item[data-sec-status=\"done\"] .rmd-sec-prog-state { color: var(--rmd-ok); font-weight: 600; }",
       "#researchMD .rmd-sec-prog-item[data-sec-status=\"failed\"] .rmd-sec-prog-state { color: var(--rmd-bad); font-weight: 600; }",
-      "#researchMD .rmd-sec-retry { min-height: 44px; padding: 6px 12px; }"
+      "#researchMD .rmd-sec-retry { min-height: 44px; padding: 6px 12px; }",
+      "#researchMD { --rmd-ok: #136d45; --rmd-ok-soft: #e6f5ec; }",
+      "body.dark #researchMD, body.v3-dark #researchMD { --rmd-ok: #42cdb5; --rmd-ok-soft: #103239; }",
+      "#researchMD .rmd-auto-wrap { display: flex; flex-direction: column; gap: 14px; max-width: 100%; }",
+      "#researchMD .rmd-auto-progress-box { padding: 12px 14px; border: 1px solid var(--rmd-line); border-radius: 12px; background: var(--rmd-panel); display: flex; flex-direction: column; gap: 10px; }",
+      "#researchMD .rmd-auto-prog-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }",
+      "#researchMD .rmd-auto-bar-track { width: 100%; height: 8px; border-radius: 999px; background: var(--rmd-fill); overflow: hidden; }",
+      "#researchMD .rmd-auto-bar-fill { height: 100%; border-radius: 999px; background: var(--rmd-acc); transition: width 0.25s ease; }",
+      "#researchMD .rmd-auto-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }",
+      "#researchMD .rmd-auto-step { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border: 1px solid var(--rmd-line); border-radius: 10px; background: var(--rmd-panel); min-width: 0; }",
+      "#researchMD .rmd-auto-step[data-step-status=\"running\"] { border-color: var(--rmd-acc); background: var(--rmd-acc-soft); }",
+      "#researchMD .rmd-auto-step[data-step-status=\"done\"] { border-color: var(--rmd-line); }",
+      "#researchMD .rmd-auto-step[data-step-status=\"failed\"] { border-color: var(--rmd-bad); background: var(--rmd-bad-soft); }",
+      "#researchMD .rmd-auto-step-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1 1 200px; }",
+      "#researchMD .rmd-auto-step-title { font: 600 13.5px/1.35 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-auto-step-detail { font: 400 12.5px/1.35 var(--rmd-f); color: var(--rmd-mut); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }",
+      "#researchMD .rmd-auto-step-ctrl { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }",
+      "#researchMD .rmd-auto-pill { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px; font: 600 12px/1.2 var(--rmd-f); border: 1px solid var(--rmd-line); background: var(--rmd-fill); color: var(--rmd-mut); font-variant-numeric: tabular-nums; }",
+      "#researchMD .rmd-auto-pill.is-done { background: var(--rmd-ok-soft); color: var(--rmd-ok); border-color: var(--rmd-ok); }",
+      "#researchMD .rmd-auto-pill.is-warn { background: var(--rmd-warn-soft); color: var(--rmd-warn); border-color: var(--rmd-warn); }",
+      "#researchMD .rmd-auto-pill.is-bad { background: var(--rmd-bad-soft); color: var(--rmd-bad); border-color: var(--rmd-bad); }",
+      "#researchMD .rmd-auto-pill.is-run { background: var(--rmd-acc-soft); color: var(--rmd-acc); border-color: var(--rmd-acc); }",
+      "#researchMD .rmd-auto-cost { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; padding: 10px 12px; border: 1px solid var(--rmd-line); border-radius: 10px; background: var(--rmd-fill); }",
+      "#researchMD .rmd-auto-stat-k { display: block; font: 500 11.5px/1.3 var(--rmd-f); color: var(--rmd-mut); }",
+      "#researchMD .rmd-auto-stat-v { display: block; font: 600 14px/1.35 var(--rmd-f); color: var(--rmd-ink); font-variant-numeric: tabular-nums; }",
+      "#researchMD .rmd-auto-jgrid { display: grid; grid-template-columns: 1fr; gap: 8px; }",
+      "@media (min-width: 720px) { #researchMD .rmd-auto-jgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }",
+      "#researchMD .rmd-auto-jcard { text-align: left; width: 100%; min-height: 44px; padding: 12px; border: 1px solid var(--rmd-line); border-radius: 10px; background: var(--rmd-panel); color: var(--rmd-ink); cursor: pointer; display: flex; flex-direction: column; gap: 6px; min-width: 0; }",
+      "#researchMD .rmd-auto-jcard[aria-pressed=\"true\"] { border-color: var(--rmd-acc); background: var(--rmd-acc-soft); }",
+      "#researchMD .rmd-auto-checkcard { padding: 12px 14px; border: 1px solid var(--rmd-line); border-radius: 10px; background: var(--rmd-panel); display: flex; flex-direction: column; gap: 10px; }",
+      "#researchMD .rmd-auto-checkcard[data-readiness=\"green\"] { border-color: var(--rmd-ok); }",
+      "#researchMD .rmd-auto-checkcard[data-readiness=\"amber\"] { border-color: var(--rmd-warn); }",
+      "#researchMD .rmd-auto-checkhead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }",
+      "#researchMD .rmd-auto-confirm-row { display: flex; align-items: center; gap: 10px; min-height: 47px; padding: 8px 12px; border: 1px solid var(--rmd-line); border-radius: 8px; background: var(--rmd-fill); cursor: pointer; font: 500 13.5px/1.35 var(--rmd-f); color: var(--rmd-ink); }",
+      "#researchMD .rmd-auto-confirm-row input[type=\"checkbox\"] { width: 20px; height: 20px; flex-shrink: 0; }",
+      "#researchMD .rmd-auto-grid2 { display: grid; grid-template-columns: 1fr; gap: 10px; }",
+      "@media (min-width: 640px) { #researchMD .rmd-auto-grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }",
+      "#researchMD .rmd-auto-export-grid { display: flex; flex-wrap: wrap; gap: 8px; }",
+      "#researchMD .rmd-auto-wrap .rmd-btn, #researchMD .rmd-auto-wrap summary.rmd-btn, #researchMD .rmd-auto-wrap .rmd-auto-jcard { min-height: 47px; padding: 10px 14px; display: inline-flex; align-items: center; justify-content: center; }",
+      "#researchMD .rmd-auto-wrap .rmd-auto-jcard { display: flex; justify-content: flex-start; align-items: stretch; }",
+      "#researchMD .rmd-auto-export-grid .rmd-btn { min-height: 47px; }",
+      "#researchMD .rmd-auto-reflist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; max-height: 260px; overflow-y: auto; }",
+      "#researchMD .rmd-auto-refitem { padding: 8px 10px; border: 1px solid var(--rmd-line); border-radius: 8px; font: 400 12.5px/1.4 var(--rmd-f); color: var(--rmd-ink); display: flex; flex-direction: column; gap: 4px; }",
+      "#researchMD .rmd-auto-preview-pre { white-space: pre-wrap; word-break: break-word; font: 400 12.5px/1.45 var(--rmd-f); color: var(--rmd-ink); background: var(--rmd-fill); border: 1px solid var(--rmd-line); border-radius: 8px; padding: 10px; max-height: 260px; overflow-y: auto; margin: 0; }",
+      "@media (prefers-reduced-motion: reduce) { #researchMD .rmd-auto-bar-fill { transition: none; } }"
     ].join("\n");
     D.head.appendChild(s);
+  }
+
+  /* ---------- screen: one-tap thesis-to-journal orchestration ---------- */
+
+  var autoRunToken = 0;
+  var autoStopFlag = false;
+
+  function TA() {
+    return (G && G.SMD_RESEARCH_THESIS_AUTO) || null;
+  }
+
+  function autoUserProfile() {
+    var u = (G.SMD_AUTH && G.SMD_AUTH.currentUser) || {};
+    var prof = { displayName: u.displayName || u.name || "", email: u.email || "", affiliation: "" };
+    try {
+      var raw = G.localStorage && G.localStorage.getItem("smd_profile_v1");
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed) {
+          if (!prof.displayName && parsed.name) prof.displayName = parsed.name;
+          if (!prof.affiliation && (parsed.institution || parsed.affiliation)) prof.affiliation = parsed.institution || parsed.affiliation;
+          if (!prof.email && parsed.email) prof.email = parsed.email;
+        }
+      }
+    } catch (e) {}
+    return prof;
+  }
+
+  function defaultAutoSteps() {
+    var ta = TA();
+    var order = (ta && ta.STEP_ORDER) || [];
+    var out = {};
+    for (var i = 0; i < order.length; i++) {
+      out[order[i].id] = { status: "pending", detail: "", durationMs: 0, aiCalls: 0, costInr: 0, maikTokens: 0 };
+    }
+    return out;
+  }
+
+  function ensureAutoState() {
+    ts = loadThesis(tpid);
+    var ta = TA();
+    var a = ts.auto ? JSON.parse(JSON.stringify(ts.auto)) : null;
+    if (!a || typeof a !== "object") {
+      a = {
+        status: "idle",
+        activeStep: "",
+        steps: defaultAutoSteps(),
+        stopRequested: false,
+        actualAiCalls: 0,
+        actualCostInr: 0,
+        actualMaikTokens: 0,
+        estimated: null,
+        specialty: "",
+        topJournals: [],
+        selectedJournalId: "",
+        tablesData: null,
+        refsData: null,
+        titlePage: null,
+        keywords: [],
+        declarations: null,
+        checklistPrefill: null,
+        formatCheck: null,
+        coverLetterText: "",
+        lastModel: "",
+        confirmations: { titlePage: false, ethics: false, declarations: false, references: false },
+        approved: false,
+        approvedAt: "",
+        lastError: null
+      };
+    }
+    var def = defaultAutoSteps();
+    a.steps = a.steps || {};
+    for (var k in def) {
+      if (Object.prototype.hasOwnProperty.call(def, k) && !a.steps[k]) {
+        a.steps[k] = def[k];
+      }
+    }
+    if (!a.confirmations) a.confirmations = { titlePage: false, ethics: false, declarations: false, references: false };
+    if (!a.estimated && ta && Array.isArray(ts.pages) && ts.pages.length) {
+      var tree = ensureChapterTree();
+      var jr = journalOf();
+      var map = mapChaptersToJournal(tree, ts.pages || [], jr, ts.paperType, ts.chapterMap || {});
+      a.estimated = ta.estimateAutoCost(ts.pages, map, jr);
+    }
+    return a;
+  }
+
+  function recalcAutoTotals(a) {
+    var ta = TA();
+    var perInr = (ta && ta.MT_PER_INR) || 2000;
+    var calls = 0, inr = 0;
+    for (var k in a.steps) {
+      if (!Object.prototype.hasOwnProperty.call(a.steps, k)) continue;
+      var s = a.steps[k];
+      if (s && s.aiCalls > 0) calls += Number(s.aiCalls);
+      if (s && s.costInr > 0) inr += Number(s.costInr);
+    }
+    a.actualAiCalls = calls;
+    a.actualCostInr = Math.round(inr * 10000) / 10000;
+    a.actualMaikTokens = Math.round(inr * perInr);
+    return a;
+  }
+
+  function saveAutoState(a) {
+    recalcAutoTotals(a);
+    saveThesis(tpid, { auto: a });
+    ts = loadThesis(tpid);
+    return a;
+  }
+
+  function selectedAutoJournal(a) {
+    var list = (a && a.topJournals) || [];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] && list[i].id === a.selectedJournalId) return list[i];
+    }
+    return list[0] || journalOf();
+  }
+
+  function syncManuscriptToServer(sections, opts) {
+    opts = opts || {};
+    var pid = tpid;
+    mirrorDraftLocal(pid, sections || []);
+    if (!SMD || !SMD.api) {
+      return Promise.resolve({ synced: false, localOnly: true, approved: !!opts.approve });
+    }
+    var version = 1;
+    return SMD.api.request("GET", "/v1/projects/" + pid + "/manuscript").then(function (res) {
+      version = (res && res.manuscript && res.manuscript.version) || 1;
+      var chain = Promise.resolve();
+      var list = Array.isArray(sections) ? sections : [];
+      for (var i = 0; i < list.length; i++) {
+        (function (sec) {
+          chain = chain.then(function () {
+            return SMD.api.request("PUT", "/v1/projects/" + pid + "/manuscript/sections/" + sec.id, {
+              version: version,
+              heading: sec.heading || sec.id,
+              text: sec.text || ""
+            }).then(function (putRes) {
+              if (putRes && putRes.manuscript && putRes.manuscript.version) version = putRes.manuscript.version;
+              else if (putRes && putRes.version) version = putRes.version;
+              else version += 1;
+            });
+          });
+        })(list[i]);
+      }
+      return chain;
+    }).then(function () {
+      if (!opts.approve) return { synced: true, version: version };
+      return SMD.api.request("POST", "/v1/projects/" + pid + "/manuscript/approval/approve", {
+        version: version,
+        decision: "approved"
+      }).then(function () {
+        return { synced: true, version: version, approved: true };
+      });
+    }).catch(function () {
+      return { synced: false, version: version, localOnly: true };
+    });
+  }
+
+  function isQuotaCapError(err) {
+    var c = err && (err.code || (err.body && err.body.error && err.body.error.code));
+    return !!(err && (err.status === 429 || err.status === 402 ||
+      c === "project_ai_cap" || c === "user_ai_cap" || c === "insufficient_credits"));
+  }
+
+  function renderAutoChecklistRows(a) {
+    var items = [];
+    var tp = a.titlePage || {};
+    var decl = a.declarations || {};
+    var refsData = a.refsData || {};
+    var cl = a.checklistPrefill || {};
+    var fmt = a.formatCheck || {};
+    var conf = a.confirmations || {};
+
+    var tpReady = !!conf.titlePage && !tp.hasPlaceholders &&
+      (tp.authors || []).length > 0 &&
+      String((tp.authors[0] && tp.authors[0].name) || "").indexOf("[Confirm") < 0 &&
+      String((tp.correspondingAuthor && tp.correspondingAuthor.email) || "").indexOf("[Confirm") < 0;
+
+    var iecNum = decl.ethics && decl.ethics.iecNumber ? String(decl.ethics.iecNumber).replace(/^\s+|\s+$/g, "") : "";
+    var ethReady = !!conf.ethics && !!iecNum;
+    var declReady = !!conf.declarations;
+
+    var unv = (refsData.unverifiedIndices || []).length;
+    var refCount = (refsData.references || []).length;
+    var refReady = refCount === 0 ? true : (unv === 0 ? true : !!conf.references);
+
+    var fmtReady = (fmt.failCount || 0) === 0;
+
+    items.push({ id: "title_page", label: "Author list and title page", ready: tpReady, note: tpReady ? "Confirmed" : "Confirm author names, affiliation and email" });
+    items.push({ id: "ethics", label: "IEC / IRB ethics approval number", ready: ethReady, note: ethReady ? ("IEC: " + iecNum) : "Enter and confirm ethics committee number" });
+    items.push({ id: "declarations", label: "Funding, conflicts, consent and CRediT", ready: declReady, note: declReady ? "Confirmed" : "Review statements and check confirm" });
+    items.push({ id: "references", label: "References verified (" + (refsData.verifiedCount || 0) + "/" + (refsData.totalCount || refCount) + ")", ready: refReady, note: unv > 0 ? (conf.references ? (unv + " manually checked") : (unv + " unverified reference(s) need confirmation")) : "All cited references verified online" });
+    items.push({ id: "format", label: "Format checks and reporting checklist (" + (cl.covered || 0) + "/" + (cl.total || 0) + ")", ready: fmtReady, note: fmtReady ? ((fmt.passCount || 0) + " passed, " + (fmt.warnCount || 0) + " advisory") : ((fmt.failCount || 0) + " format issue(s) to check") });
+    return items;
+  }
+
+  function renderAutoScreenHtml(a, proj) {
+    var ta = TA();
+    var order = (ta && ta.STEP_ORDER) || [];
+    var doneCount = 0;
+    for (var i = 0; i < order.length; i++) {
+      var stObj = a.steps[order[i].id];
+      if (stObj && stObj.status === "done") doneCount++;
+    }
+    var pct = order.length ? Math.round((doneCount / order.length) * 100) : 0;
+    var isRunning = a.status === "running";
+    var isStopped = a.status === "stopped" || a.status === "error";
+    var isReview = a.status === "review" || a.status === "approved";
+    var jr = selectedAutoJournal(a);
+    var est = a.estimated || { aiCalls: 0, estimatedMaikTokens: 0, estimatedCostInr: 0 };
+    var secElapsed = 0;
+    for (i = 0; i < order.length; i++) secElapsed += Number((a.steps[order[i].id] && a.steps[order[i].id].durationMs) || 0);
+
+    var h = [];
+    h.push('<div class="rmd-panel rmd-auto-wrap">');
+
+    /* Header & primary status */
+    h.push('<div class="rmd-card">');
+    h.push('<div class="rmd-card-head">');
+    h.push('<div><h2 class="rmd-h2">' + esc(a.approved ? "Approved Submission Package" : (isReview ? "Review and Approve Paper" : "Make My Journal Paper")) + '</h2>');
+    h.push('<p class="rmd-muted">' + esc((ts && ts.filename) || (proj && proj.title) || "Thesis") + ' -> ' + esc(jr.shortName || jr.name || "Target Journal") + '</p></div>');
+    if (a.approved) {
+      h.push('<span class="rmd-auto-pill is-done" id="rmdAutoStatusBadge">Approved final</span>');
+    } else if (isReview) {
+      h.push('<span class="rmd-auto-pill is-warn" id="rmdAutoStatusBadge">Awaiting approval</span>');
+    } else if (isRunning) {
+      h.push('<span class="rmd-auto-pill is-run" id="rmdAutoStatusBadge">Running step ' + (doneCount + 1) + ' of ' + order.length + '</span>');
+    } else if (isStopped) {
+      h.push('<span class="rmd-auto-pill is-warn" id="rmdAutoStatusBadge">Paused (' + doneCount + '/' + order.length + ')</span>');
+    } else {
+      h.push('<span class="rmd-auto-pill" id="rmdAutoStatusBadge">Ready to run</span>');
+    }
+    h.push('</div>');
+
+    if (a.lastError) {
+      h.push('<div class="rmd-banner rmd-banner-warn" id="rmdAutoErrBanner" role="status">' + esc(a.lastError) + '</div>');
+    }
+
+    /* Progress bar + MaiK token ledger */
+    h.push('<div class="rmd-auto-progress-box">');
+    h.push('<div class="rmd-auto-prog-top">');
+    h.push('<span class="rmd-thesis-meta" id="rmdAutoProgSummary">' + doneCount + ' of ' + order.length + ' steps completed (' + pct + '%)</span>');
+    h.push('<div class="rmd-card-actions" style="margin:0;">');
+    if (isRunning) {
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle" id="rmdAutoStopBtn">Stop</button>');
+    } else if (isStopped || a.status === "idle") {
+      h.push('<button type="button" class="rmd-btn rmd-btn-primary" id="rmdAutoContinueBtn">' + (doneCount > 0 ? "Continue paper" : "Start making paper") + '</button>');
+    } else if (isReview && !a.approved) {
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle" id="rmdAutoBackThesis">' + "Back to thesis upload" + '</button>');
+    }
+    h.push('</div></div>');
+    h.push('<div class="rmd-auto-bar-track" role="progressbar" aria-label="Thesis to journal paper progress" aria-valuemin="0" aria-valuemax="' + order.length + '" aria-valuenow="' + doneCount + '" aria-valuetext="' + doneCount + ' of ' + order.length + ' steps completed">');
+    h.push('<div class="rmd-auto-bar-fill" style="width:' + pct + '%;"></div></div>');
+    h.push('<div class="rmd-auto-cost" id="rmdAutoCostSummary">');
+    h.push('<div><span class="rmd-auto-stat-k">Estimated tokens</span><span class="rmd-auto-stat-v">~' + fmtInt(est.estimatedMaikTokens || 0) + ' MT (' + (est.aiCalls || 0) + ' AI)</span></div>');
+    h.push('<div><span class="rmd-auto-stat-k">Used so far (succeeded only)</span><span class="rmd-auto-stat-v">' + fmtInt(a.actualMaikTokens || 0) + ' MT (' + (a.actualAiCalls || 0) + ' AI)</span></div>');
+    h.push('<div><span class="rmd-auto-stat-k">Elapsed time</span><span class="rmd-auto-stat-v">' + (Math.round(secElapsed / 100) / 10) + 's</span></div>');
+    h.push('</div></div>');
+
+    /* 12-Step list (auto-expanded while running/paused/failed; collapsible once in Review so approval checklist fits cleanly) */
+    var stepsOpen = !isReview;
+    h.push('<details id="rmdAutoStepsDetails"' + (stepsOpen ? ' open' : '') + '>');
+    h.push('<summary class="rmd-btn rmd-btn-subtle">' + (isReview ? ('12 steps completed (' + doneCount + '/' + order.length + ') - show or re-run') : ('Steps (' + doneCount + '/' + order.length + ')')) + '</summary>');
+    h.push('<ol class="rmd-auto-steps smd-books-keep" id="rmdAutoStepsList" style="margin-top:8px;">');
+    for (i = 0; i < order.length; i++) {
+      var defStep = order[i];
+      var sState = a.steps[defStep.id] || { status: "pending", detail: "" };
+      var pillCls = sState.status === "done" ? "is-done" : (sState.status === "running" ? "is-run" : (sState.status === "failed" ? "is-bad" : (sState.status === "stopped" ? "is-warn" : "")));
+      var stLabel = sState.status === "done" ? "Done" : (sState.status === "running" ? "Running" : (sState.status === "failed" ? "Failed" : (sState.status === "stopped" ? "Paused" : "Pending")));
+      h.push('<li class="rmd-auto-step" data-auto-step="' + esc(defStep.id) + '" data-step-status="' + esc(sState.status) + '">');
+      h.push('<div class="rmd-auto-step-main">');
+      h.push('<span class="rmd-auto-step-title">' + (i + 1) + '. ' + esc(defStep.label) + '</span>');
+      h.push('<span class="rmd-auto-step-detail">' + esc(sState.detail || (defStep.ai ? "Uses MaiK AI section drafting" : "Automatic local + verified check")) + '</span>');
+      h.push('</div>');
+      h.push('<div class="rmd-auto-step-ctrl">');
+      h.push('<span class="rmd-auto-pill ' + pillCls + '">' + esc(stLabel) + '</span>');
+      if (!isRunning && (sState.status === "done" || sState.status === "failed" || sState.status === "stopped")) {
+        h.push('<button type="button" class="rmd-btn rmd-btn-subtle rmd-sec-retry" data-rmd-auto-rerun="' + esc(defStep.id) + '">Re-run</button>');
+      }
+      h.push('</div></li>');
+    }
+    h.push('</ol></details>');
+    h.push('</div>');
+
+    /* Review & Approve section (shown once steps complete or in review/approved state) */
+    if (isReview) {
+      /* 1. Top 3 Matched Journals */
+      var jList = a.topJournals || [];
+      if (jList.length) {
+        h.push('<div class="rmd-card" id="rmdAutoJournalsCard">');
+        h.push('<h3 class="rmd-h3">Target Journal (' + esc(a.specialty || "General Medicine") + ')</h3>');
+        h.push('<p class="rmd-muted">Preselected the best match. Switch journal below to re-format tables, references, and limits with zero extra AI tokens.</p>');
+        h.push('<div class="rmd-auto-jgrid">');
+        for (i = 0; i < jList.length; i++) {
+          var jItem = jList[i];
+          var isSel = (jr.id === jItem.id);
+          h.push('<button type="button" class="rmd-auto-jcard" data-rmd-auto-journal="' + esc(jItem.id) + '" aria-pressed="' + (isSel ? "true" : "false") + '">');
+          h.push('<div class="rmd-auto-checkhead"><strong>' + esc(jItem.name) + '</strong>' + (i === 0 ? '<span class="rmd-auto-pill is-done">Best match</span>' : '') + '</div>');
+          h.push('<span class="rmd-thesis-meta">' + fmtInt(jItem.wordLimit || 3000) + ' words max | ' + fmtInt(jItem.abstractLimit || 250) + 'w abstract | ' + (jItem.maxReferences || 35) + ' refs (' + esc(String(jItem.referenceStyle || "vancouver").toUpperCase()) + ') | ' + (jItem.maxTables || 4) + ' tables</span>');
+          h.push('<span class="rmd-thesis-meta">' + esc(jItem.fitReason || jItem.specialty || "") + '</span>');
+          h.push('</button>');
+        }
+        h.push('</div></div>');
+      }
+
+      /* 2. Green vs Amber Submission Checklist */
+      var readyRows = renderAutoChecklistRows(a);
+      var allGreen = true;
+      for (i = 0; i < readyRows.length; i++) if (!readyRows[i].ready) allGreen = false;
+      h.push('<div class="rmd-card" id="rmdAutoReadinessCard">');
+      h.push('<div class="rmd-card-head"><h3 class="rmd-h3">Submission Readiness</h3>');
+      h.push('<span class="rmd-auto-pill ' + (allGreen ? "is-done" : "is-warn") + '">' + (allGreen ? "All items ready" : "Confirm amber items below") + '</span></div>');
+      h.push('<ul class="rmd-auto-steps" id="rmdAutoReadySummary">');
+      for (i = 0; i < readyRows.length; i++) {
+        var rr = readyRows[i];
+        h.push('<li class="rmd-auto-step" data-ready-item="' + esc(rr.id) + '" data-ready-state="' + (rr.ready ? "green" : "amber") + '">');
+        h.push('<div class="rmd-auto-step-main"><span class="rmd-auto-step-title">' + esc(rr.label) + '</span><span class="rmd-auto-step-detail">' + esc(rr.note) + '</span></div>');
+        h.push('<span class="rmd-auto-pill ' + (rr.ready ? "is-done" : "is-warn") + '">' + (rr.ready ? "Green: Ready" : "Amber: Confirm") + '</span>');
+        h.push('</li>');
+      }
+      h.push('</ul></div>');
+
+      /* 3. Editable Confirmable Details: Title Page & Authors + Ethics & Declarations */
+      var tp = a.titlePage || { authors: [{ name: "" }, { name: "" }], affiliations: [""], correspondingAuthor: {}, wordCounts: {} };
+      var decl = a.declarations || { ethics: {}, consent: {}, funding: {}, conflicts: {}, dataAvailability: {}, aiDisclosure: {}, credit: {} };
+      var conf = a.confirmations || {};
+
+      h.push('<div class="rmd-auto-checkcard" data-readiness="' + (readyRows[0].ready ? "green" : "amber") + '" id="rmdAutoTitleCard">');
+      h.push('<div class="rmd-auto-checkhead"><h3 class="rmd-h3">1. Title Page & Authors</h3><span class="rmd-auto-pill ' + (readyRows[0].ready ? "is-done" : "is-warn") + '">' + (readyRows[0].ready ? "Confirmed" : "Confirm details") + '</span></div>');
+      h.push('<div class="rmd-field"><label for="rmdAutoTitleIn">Manuscript title</label><input type="text" id="rmdAutoTitleIn" value="' + esc(tp.title || "") + '"></div>');
+      h.push('<div class="rmd-auto-grid2">');
+      h.push('<div class="rmd-field"><label for="rmdAutoShortTitleIn">Running / short title</label><input type="text" id="rmdAutoShortTitleIn" value="' + esc(tp.shortTitle || "") + '"></div>');
+      h.push('<div class="rmd-field"><label for="rmdAutoAuth1In">First / corresponding author</label><input type="text" id="rmdAutoAuth1In" value="' + esc((tp.authors && tp.authors[0] && tp.authors[0].name) || "") + '"></div>');
+      h.push('<div class="rmd-field"><label for="rmdAutoAuth2In">Co-author / guide</label><input type="text" id="rmdAutoAuth2In" value="' + esc((tp.authors && tp.authors[1] && tp.authors[1].name) || "") + '"></div>');
+      h.push('<div class="rmd-field"><label for="rmdAutoEmailIn">Corresponding email</label><input type="email" id="rmdAutoEmailIn" value="' + esc((tp.correspondingAuthor && tp.correspondingAuthor.email) || "") + '"></div>');
+      h.push('</div>');
+      h.push('<div class="rmd-field"><label for="rmdAutoAffilIn">Department & Institution</label><input type="text" id="rmdAutoAffilIn" value="' + esc((tp.correspondingAuthor && tp.correspondingAuthor.affiliation) || "") + '"></div>');
+      h.push('<label class="rmd-auto-confirm-row" for="rmdConfirmTitleCb"><input type="checkbox" id="rmdConfirmTitleCb" data-rmd-auto-confirm="titlePage"' + (conf.titlePage ? " checked" : "") + '><span>I confirm the author list, order, affiliations, and title page</span></label>');
+      h.push('</div>');
+
+      h.push('<div class="rmd-auto-checkcard" data-readiness="' + ((readyRows[1].ready && readyRows[2].ready) ? "green" : "amber") + '" id="rmdAutoDeclCard">');
+      h.push('<div class="rmd-auto-checkhead"><h3 class="rmd-h3">2. Ethics (IEC) & Declarations</h3><span class="rmd-auto-pill ' + ((readyRows[1].ready && readyRows[2].ready) ? "is-done" : "is-warn") + '">' + ((readyRows[1].ready && readyRows[2].ready) ? "Confirmed" : "Confirm IEC & statements") + '</span></div>');
+      h.push('<div class="rmd-auto-grid2">');
+      h.push('<div class="rmd-field"><label for="rmdAutoIecIn">IEC / IRB approval number</label><input type="text" id="rmdAutoIecIn" placeholder="e.g. IEC/2024/112" value="' + esc((decl.ethics && decl.ethics.iecNumber) || "") + '"></div>');
+      h.push('<div class="rmd-field"><label for="rmdAutoRegIn">Trial registration (optional CTRI/NCT)</label><input type="text" id="rmdAutoRegIn" value="' + esc(decl.registration || "") + '"></div>');
+      h.push('</div>');
+      h.push('<div class="rmd-field"><label for="rmdAutoFundingIn">Funding statement</label><input type="text" id="rmdAutoFundingIn" value="' + esc((decl.funding && decl.funding.text) || "") + '"></div>');
+      h.push('<div class="rmd-field"><label for="rmdAutoConflictsIn">Conflict of interest statement</label><input type="text" id="rmdAutoConflictsIn" value="' + esc((decl.conflicts && decl.conflicts.text) || "") + '"></div>');
+      h.push('<div class="rmd-field"><label for="rmdAutoCreditIn">CRediT author contributions</label><input type="text" id="rmdAutoCreditIn" value="' + esc((decl.credit && decl.credit.text) || "") + '"></div>');
+      h.push('<p class="rmd-thesis-meta"><strong>AI use disclosure:</strong> ' + esc(String((decl.aiDisclosure && decl.aiDisclosure.text) || "").replace(/^AI\s+use\s+disclosure\s*:\s*/i, "")) + '</p>');
+      h.push('<label class="rmd-auto-confirm-row" for="rmdConfirmEthicsCb"><input type="checkbox" id="rmdConfirmEthicsCb" data-rmd-auto-confirm="ethics"' + (conf.ethics ? " checked" : "") + '><span>I confirm ethics approval and participant consent</span></label>');
+      h.push('<label class="rmd-auto-confirm-row" for="rmdConfirmDeclCb"><input type="checkbox" id="rmdConfirmDeclCb" data-rmd-auto-confirm="declarations"' + (conf.declarations ? " checked" : "") + '><span>I confirm funding, conflicts, data availability, and CRediT roles</span></label>');
+      h.push('</div>');
+
+      /* 4. References + Keywords + Tables + Checklist + Format Check Summary */
+      var refsData = a.refsData || { references: [] };
+      var rList = refsData.references || [];
+      h.push('<div class="rmd-auto-checkcard" data-readiness="' + (readyRows[3].ready ? "green" : "amber") + '" id="rmdAutoRefsCard">');
+      h.push('<div class="rmd-auto-checkhead"><h3 class="rmd-h3">3. Verified References (' + esc(String(jr.referenceStyle || "vancouver").toUpperCase()) + ')</h3><span class="rmd-auto-pill ' + (readyRows[3].ready ? "is-done" : "is-warn") + '">' + (refsData.verifiedCount || 0) + '/' + rList.length + ' verified</span></div>');
+      h.push('<p class="rmd-thesis-meta">' + rList.length + ' cited reference(s) kept from ' + (refsData.totalBibliography || 0) + ' thesis bibliography entries. Limit: ' + (refsData.maxReferences || jr.maxReferences || 35) + '.</p>');
+      if (rList.length) {
+        h.push('<ul class="rmd-auto-reflist">');
+        for (i = 0; i < rList.length; i++) {
+          var rf = rList[i];
+          h.push('<li class="rmd-auto-refitem"><div>' + esc(rf.formatted || rf.title || "") + '</div><div><span class="rmd-auto-pill ' + (rf.verified ? "is-done" : "is-warn") + '">' + esc(rf.verified ? ("Verified: " + (rf.verificationSource || "Online")) : "Unverified - check manually") + '</span></div></li>');
+        }
+        h.push('</ul>');
+      }
+      if ((refsData.unverifiedIndices || []).length) {
+        h.push('<label class="rmd-auto-confirm-row" for="rmdConfirmRefsCb"><input type="checkbox" id="rmdConfirmRefsCb" data-rmd-auto-confirm="references"' + (conf.references ? " checked" : "") + '><span>I manually verified the flagged unverified references</span></label>');
+      }
+      h.push('</div>');
+
+      var tData = a.tablesData || { kept: [] };
+      var clData = a.checklistPrefill || { items: [] };
+      var fCheck = a.formatCheck || { checks: [] };
+      h.push('<div class="rmd-card" id="rmdAutoPreviewCard">');
+      h.push('<h3 class="rmd-h3">4. Manuscript, Tables, Keywords & Format Check</h3>');
+      var kwNames = (a.keywords || []).map(function (k) { return k && (k.meshVerified ? (k.term + " [MeSH]") : k.term); }).filter(Boolean);
+      h.push('<p class="rmd-thesis-meta"><strong>Keywords:</strong> ' + esc(kwNames.join("; ") || "None") + '</p>');
+      h.push('<p class="rmd-thesis-meta"><strong>Tables condensed:</strong> ' + ((tData.kept && tData.kept.length) || 0) + ' kept (dropped ' + (tData.droppedCount || 0) + ', limit ' + (tData.limit || jr.maxTables || 4) + ').</p>');
+      h.push('<p class="rmd-thesis-meta"><strong>Checklist (' + esc(clData.guidelineName || "Reporting") + '):</strong> ' + (clData.covered || 0) + ' of ' + (clData.total || 0) + ' items covered.</p>');
+      if (fCheck.checks && fCheck.checks.length) {
+        h.push('<ul class="rmd-auto-steps" style="margin-top:8px;">');
+        for (i = 0; i < fCheck.checks.length; i++) {
+          var fc = fCheck.checks[i];
+          var fcCls = fc.status === "pass" ? "is-done" : (fc.status === "fail" ? "is-bad" : "is-warn");
+          h.push('<li class="rmd-auto-step"><div class="rmd-auto-step-main"><span class="rmd-auto-step-title">' + esc(fc.label) + '</span><span class="rmd-auto-step-detail">' + esc(fc.detail) + '</span></div><span class="rmd-auto-pill ' + fcCls + '">' + esc(String(fc.status || "").toUpperCase()) + '</span></li>');
+        }
+        h.push('</ul>');
+      }
+      h.push('<details style="margin-top:10px;"><summary class="rmd-btn rmd-btn-subtle">Preview Cover Letter & Draft Abstract</summary>');
+      var absSec = (ts.draft && ts.draft.sections && ts.draft.sections[0]) ? ts.draft.sections[0].text : "";
+      h.push('<div style="margin-top:8px;display:flex;flex-direction:column;gap:8px;"><p class="rmd-thesis-meta"><strong>Abstract:</strong></p><pre class="rmd-auto-preview-pre">' + esc(absSec) + '</pre><p class="rmd-thesis-meta"><strong>Cover letter:</strong></p><pre class="rmd-auto-preview-pre">' + esc(a.coverLetterText || "") + '</pre></div></details>');
+      h.push('</div>');
+
+      /* 5. Approve + Export Package */
+      h.push('<div class="rmd-card" id="rmdAutoActionsCard">');
+      h.push('<h3 class="rmd-h3">Approve & Export Submission Package</h3>');
+      h.push('<p class="rmd-muted">' + (a.approved ? ("Marked final on " + esc(a.approvedAt || "") + ". All files ready for journal portal upload.") : "Nothing is marked final until you click Approve below. You can still download a draft preview or export the full zip package after approval.") + '</p>');
+      h.push('<div class="rmd-card-actions" style="margin-bottom:10px;">');
+      if (!a.approved) {
+        h.push('<button type="button" class="rmd-btn rmd-btn-primary" id="rmdAutoApproveBtn">Approve and mark final</button>');
+      } else {
+        h.push('<button type="button" class="rmd-btn rmd-btn-primary" id="rmdAutoApproveBtn" disabled>Approved as final</button>');
+      }
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle" id="rmdAutoOpenManuscript">Open in Manuscript editor</button>');
+      h.push('</div>');
+      h.push('<div class="rmd-auto-export-grid">');
+      h.push('<button type="button" class="rmd-btn rmd-btn-primary" id="rmdAutoExportPackBtn">Export full package (.zip)</button>');
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-auto-export="manuscript">Manuscript .docx</button>');
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-auto-export="title_page">Title page .docx</button>');
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-auto-export="tables">Tables .docx</button>');
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-auto-export="cover_letter">Cover letter .docx</button>');
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-auto-export="checklist_docx">Checklist .docx</button>');
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-auto-export="checklist_pdf">Checklist .pdf</button>');
+      h.push('<button type="button" class="rmd-btn rmd-btn-subtle" data-rmd-auto-export="references_ris">References .ris</button>');
+      h.push('</div></div>');
+    }
+
+    h.push('</div>');
+    return h.join("");
+  }
+
+  function runSingleAutoStep(container, stepId, a, opts) {
+    opts = opts || {};
+    var ta = TA();
+    var proj = activeProject() || { id: tpid, title: "" };
+    var t0 = Date.now();
+    a.activeStep = stepId;
+    a.lastError = null;
+    a.steps[stepId] = {
+      status: "running",
+      detail: a.steps[stepId] && a.steps[stepId].detail ? a.steps[stepId].detail : "Running...",
+      durationMs: 0,
+      aiCalls: (stepId === "draft" && a.steps[stepId]) ? (a.steps[stepId].aiCalls || 0) : 0,
+      costInr: (stepId === "draft" && a.steps[stepId]) ? (a.steps[stepId].costInr || 0) : 0,
+      maikTokens: (stepId === "draft" && a.steps[stepId]) ? (a.steps[stepId].maikTokens || 0) : 0
+    };
+    saveAutoState(a);
+    paintAutoScreen(container, a, proj);
+
+    function finishStep(detail, extraCalls, extraInr) {
+      var prevCalls = Number((a.steps[stepId] && a.steps[stepId].aiCalls) || 0);
+      var prevInr = Number((a.steps[stepId] && a.steps[stepId].costInr) || 0);
+      var newCalls = prevCalls + Number(extraCalls || 0);
+      var newInr = prevInr + Number(extraInr || 0);
+      var perInr = (ta && ta.MT_PER_INR) || 2000;
+      a.steps[stepId] = {
+        status: "done",
+        detail: detail || "Done",
+        durationMs: Date.now() - t0,
+        aiCalls: newCalls,
+        costInr: Math.round(newInr * 10000) / 10000,
+        maikTokens: Math.round(newInr * perInr)
+      };
+      a.activeStep = "";
+      saveAutoState(a);
+      paintAutoScreen(container, a, proj);
+      return a;
+    }
+
+    var allPages = ts.pages || [];
+
+    if (stepId === "chapters") {
+      var tree = ensureChapterTree();
+      var chLen = (tree && tree.chapters && tree.chapters.length) || 0;
+      return Promise.resolve(finishStep(chLen + " chapters detected across " + allPages.length + " pages"));
+    }
+
+    if (stepId === "study_type") {
+      var sug = suggestPaperType(allPages);
+      var pt = (sug && sug.key) || ts.paperType || "obs";
+      var clId = ta.checklistIdForPaperType(pt);
+      saveThesis(tpid, { paperType: pt, checklist: clId });
+      ts = loadThesis(tpid);
+      return Promise.resolve(finishStep(labelFor(pt) + (sug && sug.reason ? (": " + sug.reason) : "")));
+    }
+
+    if (stepId === "journals") {
+      var catP = (SMD && SMD.api)
+        ? SMD.api.request("GET", "/v1/journals?catalogue=1").catch(function () { return null; })
+        : Promise.resolve(null);
+      return catP.then(function (catRes) {
+        var catalogue = (catRes && Array.isArray(catRes.journals) && catRes.journals.length) ? catRes.journals : ta.FALLBACK_JOURNALS;
+        var ranked = ta.rankTargetJournals(catalogue, [], {
+          paperType: ts.paperType || "obs",
+          pages: allPages,
+          title: proj.title || ts.filename || ""
+        });
+        a.specialty = ranked.specialty;
+        a.topJournals = ranked.top3;
+        var chosen = ranked.best;
+        if (a.selectedJournalId) {
+          for (var ji = 0; ji < ranked.top3.length; ji++) {
+            if (ranked.top3[ji].id === a.selectedJournalId) { chosen = ranked.top3[ji]; break; }
+          }
+        }
+        a.selectedJournalId = chosen.id;
+        saveThesis(tpid, { journal: copyJournal(chosen) });
+        syncProjectJournal(tpid, chosen);
+        ts = loadThesis(tpid);
+        var treeJ = ensureChapterTree();
+        var mapJ = mapChaptersToJournal(treeJ, allPages, chosen, ts.paperType, ts.chapterMap || {});
+        a.estimated = ta.estimateAutoCost(allPages, mapJ, chosen);
+        return finishStep("Preselected " + (chosen.shortName || chosen.name) + " (" + chosen.wordLimit + "w, " + chosen.fitReason + ")");
+      });
+    }
+
+    if (stepId === "draft") {
+      var stShim = { busy: false, error: null, drafted: {}, notice: null };
+      var useResume = !opts.freshDraft;
+      if (opts.freshDraft) {
+        saveThesis(tpid, { sectionStatus: null });
+        ts = loadThesis(tpid);
+      }
+      return orchestrateThesisDraft(container, stShim, proj, {
+        resume: useResume,
+        shouldStop: function () { return !!autoStopFlag; },
+        onProgress: function (info) {
+          if (info && info.aiCalls != null) {
+            a.steps.draft.detail = "Drafting sections (" + (info.doneCount || 0) + "/6)...";
+          }
+        }
+      }).then(function (res) {
+        var runCalls = (res && res.draft && res.draft._aiCalls) || 0;
+        var runInr = Number((res && res.draft && res.draft._costInr) || (res && res.costInr) || 0);
+        if (res && res.model) a.lastModel = res.model;
+        if (res && res.stopped) {
+          var prevCallsS = Number((a.steps.draft && a.steps.draft.aiCalls) || 0) + runCalls;
+          var prevInrS = Number((a.steps.draft && a.steps.draft.costInr) || 0) + runInr;
+          a.steps.draft = {
+            status: "stopped",
+            detail: "Paused by user; partial sections saved",
+            durationMs: Date.now() - t0,
+            aiCalls: prevCallsS,
+            costInr: Math.round(prevInrS * 10000) / 10000,
+            maikTokens: Math.round(prevInrS * ((ta && ta.MT_PER_INR) || 2000))
+          };
+          a.status = "stopped";
+          saveAutoState(a);
+          paintAutoScreen(container, a, proj);
+          return null;
+        }
+        var draftResSecs = (res && res.draft && res.draft.sections) || [];
+        var nonEmptySecs = 0;
+        for (var ds = 0; ds < draftResSecs.length; ds++) {
+          if (draftResSecs[ds] && countWords(draftResSecs[ds].text) > 0) nonEmptySecs++;
+        }
+        if (nonEmptySecs === 0) {
+          if (res && res._error) throw res._error;
+          throw new Error("Could not draft manuscript sections (no AI response). No failed call was charged.");
+        }
+        applyDraft(res.draft, stShim);
+        ts = loadThesis(tpid);
+        a.approved = false;
+        a.approvedAt = "";
+        var secsNow = (ts.draft && ts.draft.sections) || [];
+        mirrorDraftLocal(tpid, secsNow);
+        if (res && res.draft && res.draft._missingSections && res.draft._missingSections.length) {
+          var prevCallsP = Number((a.steps.draft && a.steps.draft.aiCalls) || 0) + runCalls;
+          var prevInrP = Number((a.steps.draft && a.steps.draft.costInr) || 0) + runInr;
+          a.steps.draft = {
+            status: "failed",
+            detail: "Some sections failed (" + res.draft._missingSections.join(", ") + "); succeeded calls recorded",
+            durationMs: Date.now() - t0,
+            aiCalls: prevCallsP,
+            costInr: Math.round(prevInrP * 10000) / 10000,
+            maikTokens: Math.round(prevInrP * ((ta && ta.MT_PER_INR) || 2000))
+          };
+          a.status = "error";
+          a.lastError = "Some sections failed: " + res.draft._missingSections.join(", ") + ". Failed calls were not charged.";
+          saveAutoState(a);
+          paintAutoScreen(container, a, proj);
+          throw new Error(a.lastError);
+        }
+        return finishStep(((ts.draft && ts.draft.words) || 0) + " words across " + ((ts.draft && ts.draft.aiDraftedIds && ts.draft.aiDraftedIds.length) || 0) + " sections", runCalls, runInr);
+      }).catch(function (err) {
+        if (err && err._handledByConsent) {
+          a.steps.draft.status = "stopped";
+          a.steps.draft.durationMs = Date.now() - t0;
+          a.steps.draft.detail = "Confirm patient-details check to continue";
+          a.status = "stopped";
+          a.lastError = "Please confirm there are no patient details in your thesis to continue AI drafting.";
+          saveAutoState(a);
+          paintAutoScreen(container, a, proj);
+          openConsentSheet(err._phiConsentInfo || (ts && ts.phi) || { softPages: [1], maskedCount: 0, findings: [] }, {
+            onConfirm: function () { runAutoChain(container, 3, { preserveEdits: true }); },
+            onReupload: function () { if (SMD && SMD.navigate) SMD.navigate("thesis"); }
+          });
+          throw err;
+        }
+        var isCap = isQuotaCapError(err);
+        a.steps.draft.status = isCap ? "stopped" : "failed";
+        a.steps.draft.durationMs = Date.now() - t0;
+        a.steps.draft.detail = isCap ? "Paused at MaiK quota/cap (progress saved)" : ((err && err.message) || "Draft failed (not charged)");
+        a.status = isCap ? "stopped" : "error";
+        a.lastError = isCap
+          ? "Paused at MaiK daily cap or low credit balance. Your saved sections remain intact; Continue later."
+          : ((err && err.message) || "Could not complete drafting. No failed call was charged.");
+        saveAutoState(a);
+        paintAutoScreen(container, a, proj);
+        throw err;
+      });
+    }
+
+    if (stepId === "tables") {
+      var jrT = selectedAutoJournal(a);
+      var secsT = (ts.draft && ts.draft.sections) || [];
+      var treeT = ensureChapterTree();
+      var mapT = mapChaptersToJournal(treeT, allPages, jrT, ts.paperType, ts.chapterMap || {});
+      var resSrc = (mapT.bySection && mapT.bySection.results && mapT.bySection.results.pages && mapT.bySection.results.pages.length)
+        ? mapT.bySection.results.pages
+        : allPages;
+      var rawTables = extractThesisTables(resSrc);
+      if (!rawTables.length) rawTables = extractThesisTables(allPages);
+      var condensed = ta.condenseTables(rawTables, allPages, jrT, secsT);
+      a.tablesData = {
+        kept: condensed.kept,
+        droppedCount: condensed.droppedCount,
+        totalFound: condensed.totalFound,
+        limit: condensed.limit,
+        renameMap: condensed.renameMap
+      };
+      var draftCopyT = ts.draft ? JSON.parse(JSON.stringify(ts.draft)) : { sections: secsT };
+      draftCopyT.sections = condensed.sections;
+      draftCopyT.tables = condensed.kept;
+      saveThesis(tpid, { draft: draftCopyT, tablePicks: condensed.kept.map(function (t) { return t.id; }) });
+      ts = loadThesis(tpid);
+      return Promise.resolve(finishStep(condensed.kept.length + " of " + condensed.totalFound + " table(s) kept (limit " + condensed.limit + ")"));
+    }
+
+    if (stepId === "references") {
+      var jrR = selectedAutoJournal(a);
+      var secsR = (ts.draft && ts.draft.sections) || [];
+      var treeR = ensureChapterTree();
+      var mapR = mapChaptersToJournal(treeR, allPages, jrR, ts.paperType, ts.chapterMap || {});
+      var allBib = extractThesisReferences(allPages, {
+        refPages: (mapR.bySection && mapR.bySection.references && mapR.bySection.references.pages) || []
+      });
+      var built = ta.buildJournalReferences(allBib, secsR, jrR);
+      var fetchFn = (G && typeof G.fetch === "function") ? G.fetch.bind(G) : null;
+      return ta.verifyReferencesOnline(built.references, fetchFn, { journal: jrR }).then(function (ver) {
+        a.refsData = {
+          references: ver.references,
+          totalBibliography: built.totalBibliography,
+          citedCount: built.citedCount,
+          maxReferences: built.maxReferences,
+          overLimit: built.overLimit,
+          verifiedCount: ver.verifiedCount,
+          totalCount: ver.totalCount,
+          unverifiedIndices: ver.unverifiedIndices
+        };
+        var draftCopyR = ts.draft ? JSON.parse(JSON.stringify(ts.draft)) : { sections: built.sections };
+        draftCopyR.sections = built.sections;
+        draftCopyR.references = ver.references;
+        saveThesis(tpid, { draft: draftCopyR });
+        mirrorDraftLocal(tpid, built.sections);
+        ts = loadThesis(tpid);
+        return finishStep(ver.verifiedCount + " of " + ver.totalCount + " cited reference(s) verified (" + String(jrR.referenceStyle || "vancouver").toUpperCase() + ")");
+      });
+    }
+
+    if (stepId === "title_page") {
+      var jrTP = selectedAutoJournal(a);
+      var secsTP = (ts.draft && ts.draft.sections) || [];
+      var prevTP = a.titlePage;
+      var tpNew = ta.buildTitlePage({
+        pages: allPages,
+        sections: secsTP,
+        user: autoUserProfile(),
+        project: proj,
+        journal: jrTP,
+        tablesCount: (a.tablesData && a.tablesData.kept && a.tablesData.kept.length) || 0,
+        referencesCount: (a.refsData && a.refsData.totalCount) || 0
+      });
+      if (prevTP && opts.preserveEdits) {
+        if (prevTP.title) tpNew.title = prevTP.title;
+        if (prevTP.shortTitle) tpNew.shortTitle = prevTP.shortTitle;
+        if (prevTP.authors && prevTP.authors.length) tpNew.authors = prevTP.authors;
+        if (prevTP.correspondingAuthor) tpNew.correspondingAuthor = prevTP.correspondingAuthor;
+        if (prevTP.affiliations) tpNew.affiliations = prevTP.affiliations;
+      }
+      a.titlePage = tpNew;
+      return Promise.resolve(finishStep(tpNew.hasPlaceholders ? "Built with [Confirm ...] placeholders" : "Title page populated from thesis + profile"));
+    }
+
+    if (stepId === "abstract_keywords") {
+      var jrAK = selectedAutoJournal(a);
+      var secsAK = (ts.draft && ts.draft.sections) || [];
+      var absText = "";
+      for (var ai = 0; ai < secsAK.length; ai++) {
+        if (secsAK[ai] && secsAK[ai].id === "abstract") { absText = String(secsAK[ai].text || ""); break; }
+      }
+      var cands = ta.extractKeywordCandidates((a.titlePage && a.titlePage.title) || proj.title || "", absText, secsAK);
+      var fetchKw = (G && typeof G.fetch === "function") ? G.fetch.bind(G) : null;
+      return ta.verifyKeywordsMesh(cands, fetchKw).then(function (kwRes) {
+        a.keywords = kwRes || [];
+        var meshHit = 0;
+        for (var ki = 0; ki < a.keywords.length; ki++) if (a.keywords[ki].meshVerified) meshHit++;
+        return finishStep("Abstract " + countWords(absText) + "/" + (jrAK.abstractLimit || 250) + "w; " + a.keywords.length + " keywords (" + meshHit + " MeSH)");
+      });
+    }
+
+    if (stepId === "declarations") {
+      var prevDecl = a.declarations;
+      var declNew = ta.buildDeclarationsAndCredit({
+        pages: allPages,
+        titlePage: a.titlePage || {},
+        aiProvenance: {
+          aiUsed: (a.actualAiCalls || 0) > 0,
+          draftAi: true,
+          models: a.lastModel ? [a.lastModel] : ["MaiK"],
+          scope: "condensed uploaded thesis chapters into target journal manuscript",
+          verifiedByAuthor: !!a.approved
+        }
+      });
+      if (prevDecl && opts.preserveEdits) {
+        if (prevDecl.ethics && prevDecl.ethics.iecNumber) declNew.ethics = prevDecl.ethics;
+        if (prevDecl.funding && prevDecl.funding.text) declNew.funding = prevDecl.funding;
+        if (prevDecl.conflicts && prevDecl.conflicts.text) declNew.conflicts = prevDecl.conflicts;
+        if (prevDecl.credit && prevDecl.credit.text) declNew.credit = prevDecl.credit;
+        if (prevDecl.registration) declNew.registration = prevDecl.registration;
+      }
+      a.declarations = declNew;
+      var iecMsg = (declNew.ethics && declNew.ethics.iecNumber) ? ("IEC " + declNew.ethics.iecNumber) : "Confirm IEC & funding";
+      return Promise.resolve(finishStep(iecMsg + "; CRediT + AI disclosure prepared"));
+    }
+
+    if (stepId === "checklist") {
+      var clIdStep = ta.checklistIdForPaperType(ts.paperType || "obs");
+      var clFetch = (SMD && SMD.api)
+        ? SMD.api.request("GET", "/v1/checklists/" + encodeURIComponent(clIdStep)).catch(function () { return null; })
+        : Promise.resolve(null);
+      return clFetch.then(function (clRes) {
+        var def = (clRes && (clRes.checklist || clRes)) || null;
+        var secsC = (ts.draft && ts.draft.sections) || [];
+        a.checklistPrefill = ta.prefillChecklist(def, ts.paperType || "obs", secsC, a.declarations || {}, a.titlePage || {});
+        return finishStep(a.checklistPrefill.guidelineName + ": " + a.checklistPrefill.covered + "/" + a.checklistPrefill.total + " items covered");
+      });
+    }
+
+    if (stepId === "format_check") {
+      var jrFC = selectedAutoJournal(a);
+      var secsFC = (ts.draft && ts.draft.sections) || [];
+      a.formatCheck = ta.runFormatCheck({
+        journal: jrFC,
+        sections: secsFC,
+        references: (a.refsData && a.refsData.references) || [],
+        tables: (a.tablesData && a.tablesData.kept) || [],
+        keywords: a.keywords || [],
+        declarations: a.declarations || {},
+        checklistPrefill: a.checklistPrefill || {},
+        titlePage: a.titlePage || {}
+      });
+      return finishStep(a.formatCheck.passCount + " pass, " + a.formatCheck.warnCount + " warn, " + a.formatCheck.failCount + " fail");
+    }
+
+    if (stepId === "cover_letter") {
+      var jrCL = selectedAutoJournal(a);
+      var secsCL = (ts.draft && ts.draft.sections) || [];
+      a.coverLetterText = ta.buildCoverLetter({
+        titlePage: a.titlePage || {},
+        journal: jrCL,
+        declarations: a.declarations || {},
+        sections: secsCL,
+        paperTypeLabel: labelFor(ts.paperType || "obs")
+      });
+      return syncManuscriptToServer(secsCL, { approve: false }).then(function () {
+        return finishStep("Cover letter drafted for " + (jrCL.shortName || jrCL.name));
+      });
+    }
+
+    return Promise.resolve(a);
+  }
+
+  function runAutoChain(container, startIdx, opts) {
+    opts = opts || {};
+    var ta = TA();
+    if (!ta) return Promise.resolve();
+    var order = ta.STEP_ORDER || [];
+    var myTok = ++autoRunToken;
+    autoStopFlag = false;
+    var a = ensureAutoState();
+    a.status = "running";
+    a.lastError = null;
+    saveAutoState(a);
+    paintAutoScreen(container, a, activeProject());
+
+    var chain = Promise.resolve();
+    for (var i = startIdx; i < order.length; i++) {
+      (function (idx, sDef) {
+        chain = chain.then(function () {
+          if (myTok !== autoRunToken) return null;
+          a = ensureAutoState();
+          if (autoStopFlag) {
+            a.status = "stopped";
+            saveAutoState(a);
+            paintAutoScreen(container, a, activeProject());
+            return null;
+          }
+          if (opts.onlyIds && opts.onlyIds.indexOf(sDef.id) < 0) return null;
+          if (!opts.forceAll && a.steps[sDef.id] && a.steps[sDef.id].status === "done" && idx !== startIdx) {
+            return null;
+          }
+          if (sDef.id === "draft" && a.steps.draft && a.steps.draft.status === "done" && !opts.freshDraft) {
+            return null;
+          }
+          return runSingleAutoStep(container, sDef.id, a, opts);
+        });
+      })(i, order[i]);
+    }
+
+    return chain.then(function () {
+      if (myTok !== autoRunToken) return;
+      a = ensureAutoState();
+      if (autoStopFlag || a.status === "stopped") {
+        a.status = "stopped";
+        saveAutoState(a);
+        paintAutoScreen(container, a, activeProject());
+        return;
+      }
+      var allDone = true;
+      for (var k = 0; k < order.length; k++) {
+        if (!a.steps[order[k].id] || a.steps[order[k].id].status !== "done") { allDone = false; break; }
+      }
+      a.status = allDone ? (a.approved ? "approved" : "review") : "stopped";
+      saveAutoState(a);
+      paintAutoScreen(container, a, activeProject());
+    }).catch(function () {
+      if (myTok !== autoRunToken) return;
+      a = ensureAutoState();
+      if (a.status === "running") {
+        a.status = "error";
+        saveAutoState(a);
+      }
+      paintAutoScreen(container, a, activeProject());
+    });
+  }
+
+  function exportAutoFile(container, kind) {
+    var ta = TA();
+    var a = ensureAutoState();
+    var jr = selectedAutoJournal(a);
+    var secs = (ts.draft && ts.draft.sections) || [];
+    var refs = (a.refsData && a.refsData.references) || [];
+    var tables = (a.tablesData && a.tablesData.kept) || [];
+    var tp = a.titlePage || {};
+    var decl = a.declarations || {};
+    var cl = a.checklistPrefill || {};
+    var slug = (SMD && SMD.p2 && SMD.p2.fileSlug) ? SMD.p2.fileSlug(tp.title || ts.filename || "manuscript", "manuscript") : "manuscript";
+    var pack = ta.buildSubmissionPackageFiles({
+      title: tp.title || ts.filename,
+      journal: jr,
+      sections: secs,
+      references: refs,
+      tables: tables,
+      titlePage: tp,
+      declarations: decl,
+      checklistPrefill: cl,
+      coverLetterText: a.coverLetterText,
+      approved: !!a.approved,
+      approvedAt: a.approvedAt || "",
+      aiProvenance: {
+        aiUsed: (a.actualAiCalls || 0) > 0,
+        models: a.lastModel ? [a.lastModel] : ["MaiK"],
+        scope: "thesis-to-journal conversion",
+        verifiedByAuthor: !!a.approved
+      }
+    });
+
+    var dl = SMD && SMD.p2 && SMD.p2.downloadBytes;
+    if (!dl) return;
+    if (kind === "zip") {
+      dl(slug + "-submission-package.zip", new Uint8Array(pack.zipBytes), "application/zip", (tp.title || "Submission package"));
+      if (SMD.p2.flashNotice) SMD.p2.flashNotice(container, "Exported full submission package (.zip).", "info");
+      return;
+    }
+    var mapIdx = {
+      title_page: 0,
+      manuscript: 1,
+      tables: 2,
+      cover_letter: 3,
+      checklist_docx: 4,
+      checklist_pdf: 5,
+      references_ris: 6
+    };
+    var entry = pack.files[mapIdx[kind]];
+    if (!entry) return;
+    dl(slug + "-" + entry.name, new Uint8Array(entry.data), entry.mime, entry.name);
+  }
+
+  function paintAutoScreen(container, a, proj) {
+    if (!container) return;
+    container.innerHTML = renderAutoScreenHtml(a, proj);
+    bindAutoScreenEvents(container);
+  }
+
+  function syncInlineFieldsToAuto(container, a) {
+    if (!a.titlePage) a.titlePage = { authors: [{ name: "" }, { name: "" }], affiliations: [""], correspondingAuthor: {} };
+    var tp = a.titlePage;
+    var vTitle = container.querySelector("#rmdAutoTitleIn");
+    var vShort = container.querySelector("#rmdAutoShortTitleIn");
+    var vA1 = container.querySelector("#rmdAutoAuth1In");
+    var vA2 = container.querySelector("#rmdAutoAuth2In");
+    var vEmail = container.querySelector("#rmdAutoEmailIn");
+    var vAff = container.querySelector("#rmdAutoAffilIn");
+    if (vTitle) tp.title = vTitle.value;
+    if (vShort) tp.shortTitle = vShort.value;
+    if (vA1) {
+      if (!tp.authors[0]) tp.authors[0] = { affiliationNum: 1, isCorresponding: true };
+      tp.authors[0].name = vA1.value;
+      if (tp.correspondingAuthor) tp.correspondingAuthor.name = vA1.value;
+    }
+    if (vA2) {
+      if (!tp.authors[1]) tp.authors[1] = { affiliationNum: 1, isCorresponding: false };
+      tp.authors[1].name = vA2.value;
+    }
+    if (vEmail && tp.correspondingAuthor) tp.correspondingAuthor.email = vEmail.value;
+    if (vAff) {
+      if (tp.correspondingAuthor) tp.correspondingAuthor.affiliation = vAff.value;
+      tp.affiliations = ["1. " + vAff.value];
+    }
+    var allText = [tp.title, tp.shortTitle, tp.authors[0] && tp.authors[0].name, tp.authors[1] && tp.authors[1].name, tp.correspondingAuthor && tp.correspondingAuthor.email, tp.correspondingAuthor && tp.correspondingAuthor.affiliation].join(" ");
+    tp.hasPlaceholders = allText.indexOf("[Confirm") >= 0;
+
+    if (!a.declarations) a.declarations = { ethics: {}, consent: {}, funding: {}, conflicts: {}, credit: {} };
+    var decl = a.declarations;
+    var vIec = container.querySelector("#rmdAutoIecIn");
+    var vReg = container.querySelector("#rmdAutoRegIn");
+    var vFund = container.querySelector("#rmdAutoFundingIn");
+    var vConf = container.querySelector("#rmdAutoConflictsIn");
+    var vCred = container.querySelector("#rmdAutoCreditIn");
+    if (vIec) {
+      decl.ethics = decl.ethics || {};
+      decl.ethics.iecNumber = vIec.value.replace(/^\s+|\s+$/g, "");
+      if (decl.ethics.iecNumber) decl.ethics.text = "Ethical approval was obtained (reference: " + decl.ethics.iecNumber + ").";
+    }
+    if (vReg) decl.registration = vReg.value.replace(/^\s+|\s+$/g, "");
+    if (vFund && decl.funding) decl.funding.text = vFund.value;
+    if (vConf && decl.conflicts) decl.conflicts.text = vConf.value;
+    if (vCred && decl.credit) decl.credit.text = vCred.value;
+  }
+
+  function refreshAutoReadyDom(container, a) {
+    var rows = renderAutoChecklistRows(a);
+    var cards = {
+      title_page: "#rmdAutoTitleCard",
+      ethics: "#rmdAutoDeclCard",
+      declarations: "#rmdAutoDeclCard",
+      references: "#rmdAutoRefsCard"
+    };
+    var summary = container.querySelector("#rmdAutoReadySummary");
+    if (summary) {
+      for (var i = 0; i < rows.length; i++) {
+        var li = summary.querySelector('[data-ready-item="' + rows[i].id + '"]');
+        if (li) {
+          li.setAttribute("data-ready-state", rows[i].ready ? "green" : "amber");
+          var pill = li.querySelector(".rmd-auto-pill");
+          var note = li.querySelector(".rmd-auto-step-detail");
+          if (pill) {
+            pill.className = "rmd-auto-pill " + (rows[i].ready ? "is-done" : "is-warn");
+            pill.textContent = rows[i].ready ? "Green: Ready" : "Amber: Confirm";
+          }
+          if (note) note.textContent = rows[i].note;
+        }
+      }
+    }
+    for (var k in cards) {
+      if (!Object.prototype.hasOwnProperty.call(cards, k)) continue;
+      var card = container.querySelector(cards[k]);
+      if (card) {
+        var ok = (k === "ethics" || k === "declarations") ? (rows[1].ready && rows[2].ready) : (k === "title_page" ? rows[0].ready : rows[3].ready);
+        card.setAttribute("data-readiness", ok ? "green" : "amber");
+      }
+    }
+  }
+
+  function bindAutoScreenEvents(container) {
+    var stopBtn = container.querySelector("#rmdAutoStopBtn");
+    if (stopBtn) stopBtn.onclick = function () {
+      autoStopFlag = true;
+      stopBtn.disabled = true;
+      stopBtn.textContent = "Stopping...";
+    };
+
+    var contBtn = container.querySelector("#rmdAutoContinueBtn");
+    if (contBtn) contBtn.onclick = function () {
+      var ta = TA();
+      var order = (ta && ta.STEP_ORDER) || [];
+      var a = ensureAutoState();
+      var startAt = 0;
+      for (var i = 0; i < order.length; i++) {
+        if (!a.steps[order[i].id] || a.steps[order[i].id].status !== "done") { startAt = i; break; }
+      }
+      runAutoChain(container, startAt, { preserveEdits: true });
+    };
+
+    var backBtn = container.querySelector("#rmdAutoBackThesis");
+    if (backBtn) backBtn.onclick = function () {
+      if (SMD && SMD.navigate) SMD.navigate("thesis");
+    };
+
+    var reruns = container.querySelectorAll("[data-rmd-auto-rerun]");
+    for (var r = 0; r < reruns.length; r++) {
+      reruns[r].onclick = function () {
+        var sid = this.getAttribute("data-rmd-auto-rerun");
+        var ta = TA();
+        var order = (ta && ta.STEP_ORDER) || [];
+        var idx = 0;
+        for (var k = 0; k < order.length; k++) if (order[k].id === sid) { idx = k; break; }
+        var opts = { preserveEdits: true };
+        if (sid === "draft") {
+          opts.freshDraft = true;
+          opts.onlyIds = ["draft", "tables", "references", "title_page", "abstract_keywords", "declarations", "checklist", "format_check", "cover_letter"];
+          opts.forceAll = true;
+        } else if (sid === "journals") {
+          opts.onlyIds = ["journals", "tables", "references", "title_page", "abstract_keywords", "checklist", "format_check", "cover_letter"];
+          opts.forceAll = true;
+        } else {
+          opts.onlyIds = [sid];
+          opts.forceAll = true;
+        }
+        runAutoChain(container, idx, opts);
+      };
+    }
+
+    var jCards = container.querySelectorAll("[data-rmd-auto-journal]");
+    for (var j = 0; j < jCards.length; j++) {
+      jCards[j].onclick = function () {
+        var jid = this.getAttribute("data-rmd-auto-journal");
+        var a = ensureAutoState();
+        a.selectedJournalId = jid;
+        a.approved = false;
+        a.approvedAt = "";
+        var chosen = selectedAutoJournal(a);
+        saveThesis(tpid, { journal: copyJournal(chosen) });
+        syncProjectJournal(tpid, chosen);
+        saveAutoState(a);
+        runAutoChain(container, 4, {
+          onlyIds: ["tables", "references", "title_page", "abstract_keywords", "checklist", "format_check", "cover_letter"],
+          forceAll: true,
+          preserveEdits: true
+        });
+      };
+    }
+
+    var textInputs = container.querySelectorAll("#rmdAutoTitleCard input[type], #rmdAutoDeclCard input[type]");
+    for (var t = 0; t < textInputs.length; t++) {
+      if (textInputs[t].type === "checkbox") continue;
+      textInputs[t].oninput = function () {
+        var a = ensureAutoState();
+        syncInlineFieldsToAuto(container, a);
+        saveAutoState(a);
+        refreshAutoReadyDom(container, a);
+      };
+    }
+
+    var confirms = container.querySelectorAll("[data-rmd-auto-confirm]");
+    for (var c = 0; c < confirms.length; c++) {
+      confirms[c].onchange = function () {
+        var key = this.getAttribute("data-rmd-auto-confirm");
+        var a = ensureAutoState();
+        syncInlineFieldsToAuto(container, a);
+        a.confirmations[key] = !!this.checked;
+        saveAutoState(a);
+        refreshAutoReadyDom(container, a);
+      };
+    }
+
+    var appBtn = container.querySelector("#rmdAutoApproveBtn");
+    if (appBtn) appBtn.onclick = function () {
+      var a = ensureAutoState();
+      syncInlineFieldsToAuto(container, a);
+      var ta = TA();
+      if (ta && a.declarations && a.declarations.aiDisclosure) {
+        a.declarations.aiDisclosure.text = ta.buildAiDisclosure({
+          aiUsed: (a.actualAiCalls || 0) > 0,
+          models: a.lastModel ? [a.lastModel] : ["MaiK"],
+          scope: "condensed thesis chapters into target journal manuscript",
+          verifiedByAuthor: true
+        });
+      }
+      a.coverLetterText = ta.buildCoverLetter({
+        titlePage: a.titlePage || {},
+        journal: selectedAutoJournal(a),
+        declarations: a.declarations || {},
+        sections: (ts.draft && ts.draft.sections) || [],
+        paperTypeLabel: labelFor(ts.paperType || "obs")
+      });
+      appBtn.disabled = true;
+      appBtn.textContent = "Approving...";
+      var secs = (ts.draft && ts.draft.sections) || [];
+      syncManuscriptToServer(secs, { approve: true }).then(function () {
+        a.approved = true;
+        a.approvedAt = new Date().toISOString();
+        a.status = "approved";
+        saveAutoState(a);
+        paintAutoScreen(container, a, activeProject());
+        if (SMD && SMD.p2 && SMD.p2.flashNotice) {
+          SMD.p2.flashNotice(container, "Marked final and ready to export submission package.", "info");
+        }
+      });
+    };
+
+    var openMs = container.querySelector("#rmdAutoOpenManuscript");
+    if (openMs) openMs.onclick = function () {
+      if (SMD && SMD.navigate) SMD.navigate("manuscript");
+    };
+
+    var zipBtn = container.querySelector("#rmdAutoExportPackBtn");
+    if (zipBtn) zipBtn.onclick = function () {
+      exportAutoFile(container, "zip");
+    };
+
+    var indBtns = container.querySelectorAll("[data-rmd-auto-export]");
+    for (var b = 0; b < indBtns.length; b++) {
+      indBtns[b].onclick = function () {
+        exportAutoFile(container, this.getAttribute("data-rmd-auto-export"));
+      };
+    }
+  }
+
+  function renderThesisAuto(container, params) {
+    var proj = activeProject();
+    if (!proj) { container.innerHTML = SMD.p2.errHtml("Open a project first."); return; }
+    tpid = pidOf(proj);
+    ts = loadThesis(tpid);
+    injectCSS();
+    if (!ts || !ts.pages || !ts.pages.length) {
+      container.innerHTML = '<div class="rmd-panel"><div class="rmd-card"><h2 class="rmd-h2">Make My Journal Paper</h2><p class="rmd-muted">Upload your thesis PDF or Word (.docx) first, then tap Make my journal paper.</p><div class="rmd-card-actions"><button type="button" class="rmd-btn rmd-btn-primary" id="rmdAutoUploadFirst">Go to upload</button></div></div></div>';
+      var upBtn = container.querySelector("#rmdAutoUploadFirst");
+      if (upBtn) upBtn.onclick = function () { if (SMD && SMD.navigate) SMD.navigate("thesis"); };
+      return;
+    }
+    var a = ensureAutoState();
+    saveAutoState(a);
+    paintAutoScreen(container, a, proj);
+    if (params && params.autoStart && a.status !== "review" && a.status !== "approved") {
+      var ta = TA();
+      var order = (ta && ta.STEP_ORDER) || [];
+      var startAt = 0;
+      for (var i = 0; i < order.length; i++) {
+        if (!a.steps[order[i].id] || a.steps[order[i].id].status !== "done") { startAt = i; break; }
+      }
+      runAutoChain(container, startAt, { preserveEdits: true });
+    }
   }
 
   /* ---------- registration + export ---------- */
@@ -4584,6 +5965,7 @@
   if (SMD) {
     SMD.screens = SMD.screens || {};
     SMD.screens.thesis = { render: renderUpload };
+    SMD.screens["thesis-auto"] = { render: renderThesisAuto };
     SMD.screens["thesis-type"] = { render: renderType };
     SMD.screens["thesis-journal"] = { render: renderJournal };
     SMD.screens["thesis-draft"] = { render: renderDraft };

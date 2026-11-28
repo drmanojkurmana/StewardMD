@@ -2185,7 +2185,7 @@
   var SERVER_SCREENS = {
     protocol: 1, search: 1, screening: 1, conflicts: 1, prisma: 1, pdf: 1,
     extract: 1, rob: 1, data: 1, grade: 1, manuscript: 1, checklist: 1, ipd: 1, ready: 1,
-    thesis: 1, "thesis-type": 1, "thesis-journal": 1, "thesis-draft": 1, "thesis-tables": 1, "thesis-refs": 1
+    thesis: 1, "thesis-auto": 1, "thesis-type": 1, "thesis-journal": 1, "thesis-draft": 1, "thesis-tables": 1, "thesis-refs": 1
   };
   var moreOpen = false;
   var accountSaveNotice = "";
@@ -2193,6 +2193,7 @@
   var PILL_LABELS = {
     screening: "Screen",
     conflicts: "Conflicts",
+    "thesis-auto": "One-tap",
     "thesis-type": "Type",
     "thesis-refs": "Refs",
     masterchart: "Chart",
@@ -2209,7 +2210,7 @@
     manuscript: "Manuscript", checklist: "Checklist", ready: "Submit",
     ipd: "IPD", credits: "Credits", institution: "Institution",
     templates: "Templates", journals: "Journals", sources: "Data sources",
-    thesis: "Thesis", "thesis-type": "Paper type", "thesis-journal": "Journal",
+    thesis: "Thesis", "thesis-auto": "Make paper", "thesis-type": "Paper type", "thesis-journal": "Journal",
     "thesis-draft": "Draft", "thesis-tables": "Tables", "thesis-refs": "References",
     masterchart: "Master chart",
     casefile: "Case file", novelty: "Novelty", iec: "Ethics committee",
@@ -2245,6 +2246,13 @@
       eg: "Upload your thesis PDF or .docx directly.",
       gloss: "New words: patient identifiers (names, dates of birth, hospital numbers or contact details that could reveal who a patient is).",
       action: { label: "Next: pick the paper type", fallback: "thesis-type" }
+    },
+    "thesis-auto": {
+      name: "Make my journal paper",
+      do: "Run the full thesis-to-paper workflow automatically, then review every amber item and approve before exporting the submission package.",
+      eg: "Confirm author names, IEC approval number, declarations and any unverified references before approving.",
+      gloss: "New words: CRediT (standardised author contribution roles) and RIS (reference file imported by citation managers).",
+      action: { label: "Back to thesis", fallback: "thesis" }
     },
     "thesis-type": {
       name: "Pick the paper type",
@@ -2518,6 +2526,7 @@
     checklist: "point items to your paper.",
     ready: "check what is left to submit.",
     thesis: "upload your thesis PDF or Word (.docx).",
+    "thesis-auto": "turn your thesis into a submission-ready paper.",
     "thesis-type": "pick the paper type.",
     "thesis-journal": "pick the target journal.",
     "thesis-draft": "shape the draft, checking every number.",

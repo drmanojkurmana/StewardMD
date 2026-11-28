@@ -1,82 +1,70 @@
-# ResearchMD Thesis Chapters & Performance Audit Report (Brief K)
+# ResearchMD One-Tap Thesis to Journal Paper Report (Brief L)
 
-Branch: `rmd-thesis-chapters`  
-Worktree: `/Volumes/WD BLACK SN7100 1TB Media/po-wire/wt/scifixK`
+Branch: `rmd-thesis-auto`  
+Worktree: `/Volumes/WD BLACK SN7100 1TB Media/po-wire/wt/scifixL`
 
-## Part 1: Chapter-Aware Thesis-to-Paper
+## Overview & Implemented Architecture
 
-### Architecture & Implementation (`research-screen-thesis.js`)
-- **Hierarchical Heading Detection (`detectThesisHeadings`, `buildChapterTree`, `sliceChapterPages`)**:
-  - Consumes `SMD_RUST_PDF.lines()` (`{ tx, size, bold, italic, caps }`) for PDFs (`<= 500` pages), `.docx` Word styles (`Heading 1`/`2`/`3`, `outlineLvl`, `<w:b/>` bold in `parseDocx`), and `pdf.js` font-size transforms (`joinPdfTextItemsWithLines`) as fallback.
-  - Dynamically infers median body font size per thesis and uses font size ratio, `line.bold` (with graceful size/pattern degradation when `line.bold` is absent), all-caps + next-line wrapped title merging (`CHAPTER N` + multi-line title as in Leiden/Utrecht PhD theses), Roman/decimal numbering (`3.1`, `3.1.2`), and Indian MD/MS canonical headings (`Introduction`, `Aims and Objectives`, `Review of Literature`, `Materials and Methods`, `Observations and Results`, `Discussion`, `Summary`, `Conclusion`, `Bibliography/References`, `Annexures/Proforma/Consent/Master chart`).
-  - Filters out running page headers/numbers, TOC dot-leader lines, and small bold table-column headers (`size < bodySize * 0.98`).
-- **Chapter-to-Journal Mapping (`mapChaptersToJournal`) & User Override UI**:
-  - Automatically skips front matter (`Certificates`, `Declaration`, `Acknowledgement`, `Contents`, `List of Tables/Abbreviations`) and back matter/appendices (`Annexures`, `Proforma`, `Consent`, `Master chart`) by mapping them to `excluded` with an explicit reason — nothing is silently dropped (`#rmdExcludedSummary` lists excluded chapters).
-  - Maps `Introduction` + `Aims and Objectives` + condensed `Review of Literature` (`condenseReview: true`, 3–5 points with citations) to Introduction; `Materials and Methods` to Methods; `Observations and Results` to Results (referencing detected thesis tables); `Discussion` to Discussion; `Conclusion`/`Summary` to Conclusion; `Bibliography/References` to References (filtering down to cited references via `extractThesisReferences(allPages, { refPages, citedText })`).
-  - Supports multi-study PhD subheading auto-splitting (`auto` option when a chapter embeds `Introduction / Methods / Results / Discussion`).
-  - Renders a compact `#rmdChapterMap` card on the Draft step with a `44px+` **Adjust mapping** toggle (`#rmdChapterMapToggle`) and per-chapter target selectors (`[data-rmd-chapter-id]`) persisted in `thesis.chapterMap`.
-  - Fixed a real DOM interaction bug caught on live screenshot verification: `emoji-icons.js` was rewriting `"pp. 62-77"` inside `#rmdChapterMap` via its textbook citation scrubber into `"Standard textbooks: Harrison's..."`. Added `.smd-books-keep` on `#rmdChapterMap` and switched labels to `"Pages X to Y"` / `"Page X"`.
-  - Fixed `refIsCitedInText` to parse multi-reference citations like `[1, 2]` and `[1-3]` cleanly in addition to `[1]` / `(1)`.
-- **Bounded Parallel Section Drafting & Single-Section Retry**:
-  - `orchestrateThesisDraft` feeds each target section (`Introduction`, `Methods`, `Results`, `Discussion`, `Conclusion`) only its mapped chapter pages, sub-chunking chapters > 13,000 chars (up to 4 parts within T1 ceiling), drafting with bounded concurrency (`runBoundedPool(tasks, 3)`), merging multi-part notes, synthesizing `Abstract` last from drafted body + front summary, and enforcing journal word limits deterministically after merge.
-  - Preserves existing fast path (`<= 13,500` chars and no manual overrides) as a single consented AI call.
-  - `#rmdDraftProgressList` renders live per-section status (`Done (N words)`, `Drafting...`, `Failed`, `Skipped`) and per-section **Retry** buttons (`[data-rmd-retry-section]`) to re-run only a failed section without redoing completed sections (`retrySingleSection`).
+### 1. Pure Engine Module (`research-thesis-auto.js`)
+Dual-exported (`window.SMD_RESEARCH_THESIS_AUTO` and CommonJS `module.exports`) strict ES5 module providing deterministic journal matching, table condensation, reference verification, front-matter generation, format checks, cost estimation, and submission package builders:
+- **12-Step Pipeline Definition (`STEP_ORDER`)**: `chapters`, `study_type`, `journals`, `draft`, `tables`, `references`, `title_page`, `abstract_keywords`, `declarations`, `checklist`, `format_check`, `cover_letter`.
+- **Target Journal Matcher (`rankTargetJournals`, `inferSpecialty`, `FALLBACK_JOURNALS`)**: Scores the journal catalogue (falling back to 9 offline journals aligned with `JOURNALS_CATALOGUE` IDs) across specialty, study type, thesis length / word limits, reference/table caps, PubMed indexing, open access, and fee status. Returns Top 3 matches with limits (`wordLimit`, `abstractLimit`, `maxReferences`, `maxTables`, `referenceStyle`, `fitReason`) and preselects best fit.
+- **Table Extraction, Condensation & Renumbering (`extractTableContent`, `condenseTables`)**: Parses table captions/headers/rows from thesis pages (filtering wrapped prose continuation lines), ranks importance, caps to journal `maxTables`, renumbers sequentially (`Table 1..Table N`), and rewrites in-text references (`renameMap`) across drafted sections.
+- **Citation Filtering, Style Formatting & PubMed/Crossref Verification (`parseStructuredBibEntry`, `extractCitationsFromText`, `buildJournalReferences`, `formatJournalReference`, `verifyReferencesOnline`)**:
+  - De-hyphenates PDF wrap splits, distinguishes publication years from years inside titles, and avoids expanding statistical IQR/score brackets (`[14-21]`, `[5-9]`) or matching decimal digits after periods (`0.17`) as citations.
+  - Keeps only references actually cited in drafted prose, renumbers in-text citations for numbered styles (`vancouver`, `ama`), and sorts alphabetically for `apa`.
+  - Verifies cited references against live PubMed (`eutils.ncbi.nlm.nih.gov`) and Crossref (`api.crossref.org`) APIs, rejecting non-matching hits via `refMatchesCandidate`, flagging unverified items with `needCheck: true`, and never inventing citations.
+- **Title Page, Abstract & MeSH Keywords (`buildTitlePage`, `extractKeywordCandidates`, `verifyKeywordsMesh`)**: Pre-fills from signed-in user profile (`SMD_AUTH.currentUser` / local `smd_profile_v1`) and thesis header lines (rejecting clinical prose sentences from institutional extraction) with explicit `[Confirm ...]` placeholders, computes abstract/main/table/figure/reference counts, and checks keyword candidates against NCBI MeSH (`db=mesh`).
+- **Declarations, CRediT, Checklist & Format Check (`extractThesisClues`, `buildDeclarationsAndCredit`, `prefillChecklist`, `runFormatCheck`)**: Detects IEC numbers (avoiding funding false positives), trial registration IDs (`CTRI`/`NCT`/`ISRCTN`), and genuine funding statements; generates editable consent/funding/conflicts/data/CRediT statements plus AI-use disclosure (`SMD.aiDisclosureText`); prefills reporting checklists (`strobe`, `consort2025`, `prisma2020`, `care`, `stard2015`); and runs deterministic format checks.
+- **MaiK Token Estimator & Submission Package Export (`estimateAutoCost`, `buildCoverLetter`, `buildChecklistPdfBytes`, `buildReferencesRis`, `buildSubmissionPackageFiles`)**:
+  - Shows pre-run MaiK token estimate using `MT_PER_INR = 2000`.
+  - Exports `.zip` archive via `SMD.zipStore` / local CRC32 ZIP writer containing: `01-title-page.docx`, `02-manuscript.docx` (with OOXML `<w:lnNumType>` when `journal.lineNumbers` is set and XML 1.0 control chars stripped), `03-tables.docx`, `04-cover-letter.docx`, `05-reporting-checklist.docx`, `05-reporting-checklist.pdf` (`%PDF-1.4`), `06-references.ris`, and `submission-manifest.txt` (`Approved: No` until user clicks Approve).
 
-### Part 1 Benchmarks (Chrome Headless 390x844, 4x CPU Throttling, 1200 ms per AI call)
-
-| Thesis Fixture | Pages | Chapters (Excluded) | Rust `lines()` (ms) | Tree + Map (ms) | Read + Split Total (ms) | Brief J Seq Calls / Wall Time | Brief K Calls / Parallel Wall Time | Speedup vs Brief J |
-| --- | ---: | ---: | ---: | ---: | ---: | --- | --- | ---: |
-| Synthetic 100p thesis | 100 | 10 (3) | 207.6 | 31.1 | **238.7 ms** | 20 calls / 24,000 ms | 20 calls / **10,866.2 ms** | **2.21x** |
-| Real RCT (`rct-lehr-2022-spinal-fusion.pdf`, 13.7 MB) | 175 | 17 (9) | 325.5 | 76.9 | **402.4 ms** | 23 calls / 27,600 ms | 17 calls / **8,435.6 ms** | **3.27x** |
-| Real Cohort (`obs-campbell-2017-heart-failure.pdf`, 9.97 MB) | 341 | 18 (7) | 846.5 | 181.6 | **1,028.1 ms** | 44 calls / 52,800 ms | 20 calls / **12,080.5 ms** | **4.37x** |
-
-- Target check: Read+split of 100p PDF is **238.7 ms** (12.6x under `< 3,000 ms` target). Parallel wall time is **2.21x–4.37x** faster than Brief J sequential drafting (`>= 2x` target met on all three).
-
----
-
-## Part 2: Speed Audit (Measured on Chrome 390px 4x CPU Throttle + Python Backend)
-
-### Top 15 Measured Hotspots
-
-Recurrence classifications:  
-`(a)` algorithmic fix in place · `(b)` offload to Web Worker · `(c)` existing Rust API (`SMD_RUST_PDF` / `rust/research-stats`) · `(d)` new Rust port proposal
-
-| # | Hotspot | Input Size & Frequency | Before (ms) | After (ms) | Blocks UI? | Rec | Notes & Fix Summary |
-| ---: | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | Pure-JS SHA-256 fallback (`research-ondevice-pdf.js`) | 25 MB PDF; per upload when `crypto.subtle` absent | 1,153.1 (1,327.0) | 1,153.1 | Yes | `(b)` | Normal devices use async WebCrypto (`74.8 ms`). Move pure-JS fallback into a Web Worker if targeting insecure/legacy WebViews. |
-| 2 | Rust WASM `SMD_RUST_PDF.lines()` on 341p thesis (`vendor/rust-pdf/rust-pdf.js`) | 341p / 9.97 MB; once per PDF upload | 777.3–846.5 | 777.3–846.5 | Yes | `(c)` / `(b)` | Already uses Rust WASM `(c)`; wrap calls in a dedicated Web Worker `(b)` to keep 60fps scroll uninterrupted on 300+ page theses. |
-| 3 | JS Cox PH + Schoenfeld (`research-stats.js` `coxPartial`, `schoenfeld`) | 10k rows: 365 ties (4x Chrome) / 2k unique ties (Node) | **544.7** (4x 365t) / **908.4** (Node 2kt) | **40.8** (4x 365t) / **16.0 + 9.4** (Node 2kt) | Main in fallback/Node | **`(a)` FIXED** | Replaced O(B * N) risk-set rescan with O(N) backward suffix cumulative scan when `eta span <= 600`: **13.4x–56.8x speedup**. |
-| 4 | pdf.js text extraction (`syn100` / `lehr175`) | 100p / 175p PDF; fallback when Rust skips (`>500p`) | 393.6 / 329.2 | 393.6 / 329.2 | Partial | `(c)` | Decodes in pdf.js worker; bypassed on text PDFs `<= 500p` by `SMD_RUST_PDF.lines()`. |
-| 5 | Rust WASM `SMD_RUST_PDF.lines()` on 175p thesis | 175p / 13.7 MB; once per upload | 215.6–325.5 | 215.6–325.5 | Yes | `(c)` / `(b)` | Move Rust WASM execution to a Web Worker `(b)` (proposal). |
-| 6 | Chapter tree + mapping on 341p thesis (`buildChapterTree`, `mapChaptersToJournal`) | 341p (~12k lines); once per upload | 129.7–181.6 | 129.7–181.6 | Yes | `(b)` | Single-pass over lines; co-locate in the PDF Web Worker if moved off main thread. |
-| 7 | Client ROC + DeLong CI (`research-stats.js` `roc` + `research-screen-masterchart.js` `runRoc`) | 10,000 rows x 2 markers; per ROC click | **85.0–106.7** UI block | **7.3 UI block** (147.8 Worker) | Was Yes | **`(b)` FIXED** | Added `roc`/`aucBand` to `research-stats-worker.js`, synced stale `?v=` importScripts token, added `SMD_RMD_ONDEVICE_STATS.roc()`, offloaded `rows >= 250` cleanly. |
-| 8 | Python Cox PH + Schoenfeld (`backend/research/stats/survival.py`) | 10k rows x 3 covs (365 ties / 2k unique ties) | **106.13** (365t) | **69.01** (365t) / **88.95** (2kt) | No (server) | **`(a)` FIXED** | Added vectorized `np.cumsum` suffix cumulative scan in `_efron_terms` and `_schoenfeld_ph_test` replacing `X[start:]` per-block slice loops. |
-| 9 | JS Table 1 summary (`research-stats.js` `table1`) | 10k rows x 6 variables; per Table 1 click | 104.7 (Node) | 104.7 | Yes | `(b)` | `table1` is already allowlisted in `research-stats-worker.js`; route `>= 500` row runs off main thread in a follow-up. |
-| 10 | JS Logistic IRLS (`research-stats.js` `logistic`) | 10k rows x 5 predictors; per regression run | 93.7–138.2 | 93.7–138.2 | Worker when OD on | `(d)` | Runs in `research-stats-worker.js` when `onDeviceV2` is active; propose Rust linear-algebra port in `rust/research-stats` for 50k–100k cohorts. |
-| 11 | Client/Worker WebCrypto `sha256` (`research-ondevice-pdf.js` / `research-ondevice-stats.js`) | 25 MB buffer; once per upload/job | 74.8–76.0 | 74.8–76.0 | No (async) | `(a)` FIXED | Added `TextEncoder` fast path in `research-ondevice-stats.js` before `crypto.subtle.digest` to skip JS byte-array growth on big CSV strings. |
-| 12 | Python PHI scanner (`po_adapter/phi.py` `scan`) | 300k chars; per cloud job | 58.55–67.98 | 58.55–67.98 | No (server) | `(a)` / `(d)` | Combine rule regexes into a fast prefilter or propose Rust Aho-Corasick binding for multi-MB corpora. |
-| 13 | Thesis number grounder (`research-screen-thesis.js` `verifyNumbers`, `findNumber`) | 2k-word draft (500 tokens) vs 341p Campbell | **46.7** (4x Chrome) | **7.8** (4x Chrome) | Yes | **`(a)` FIXED** | Added per-call `tokCache` for duplicate tokens plus binary-search cached table offsets in `findNumber`: **6.0x speedup**. |
-| 14 | Record deduplication (`functions/api/research/_dedup.js` `dedupRecords`) | 5,000 RIS records; per search merge | 46.0–94.8 | 46.0–94.8 | No (CF Worker) | `(a)` / `(d)` | Flatten inner `[key, seen]` array allocations, or propose Rust WASM dedup+parser for 20k+ Systematic Review imports. |
-| 15 | Client DOCX ZIP parse (`parseDocx`, 12 MB) & Python `docx_export` (10k words) | 12 MB client `.docx` / 10k-word export | 43.7–46.9 / 33.45–43.06 | 43.7–46.9 / 33.45–43.06 | Client parse yes | `(d)` | Fast today; propose Rust WASM streaming ZIP+XML extractor only if targeting 50+ MB `.docx` theses with embedded media on memory-tight devices. |
-
-*(Additional fast baselines measured `< 30 ms`: `po_gates_scanPhi_user_300k` `27.9–36.1 ms`, `po_gates_scanPhi_strict_300k` `21.2–25.7 ms`, `linear_10k` `18.8 ms` Node, `client_docx_export_10k` `11.6–13.6 ms`, `research_phi_scan_300k` `12.2–17.2 ms`, `py_po_adapter.latex_to_manuscript_10k` `10.17–12.46 ms`, `stats_km_10k` `6.8–9.8 ms`, `stats_logrank_10k` `7.6–8.3 ms`, `meta_analysis_100_studies` `6.4–11.9 ms`, `gate_manuscript_10k` `5.3–5.5 ms`, `parseCsv_10k` `5.0 ms` Node, `forest_plot_svg_100` `2.1–2.2 ms`, `prisma_render` `1.1–2.2 ms`.)*
-
-### Proposals for New Rust Ports (`(d)` — Not Implemented Here)
-1. **`rust/research-stats` WASM completion**: Port `logistic`, `roc` (DeLong), and `table1`, and ship compiled WASM alongside `cox`/`schoenfeld` for 50k–100k row clinical cohorts inside `research-stats-worker.js`.
-2. **Systematic Review WASM parser + dedup + Aho-Corasick PHI**: Handle 20k+ RIS/PubMed records and 300k+ char PHI multi-pattern scans in a single zero-GC Rust pass under Cloudflare Worker CPU limits.
-3. **Mobile `.docx` streaming ZIP/XML + image-stripping reader**: Avoid holding large compressed media entries in JS `ArrayBuffer` memory on low-RAM phones.
+### 2. One-Tap Screen & Orchestration (`research-screen-thesis.js`, `research.js`, `research-screen-manuscript.js`, `index.html`, `sw.js`)
+- **Primary Upload Action (`renderUpload`)**: Shows `#rmdThesisAutoEstimate` before starting and `#rmdMakeJournalPaper` (`Make my journal paper`, switching to `Continue journal paper` when paused or `Review journal paper` when ready), while retaining the step-by-step path (`Edit step by step`) and enforcing the PHI consent gate (`openConsentSheet`) before navigating to `"thesis-auto"` with `{ autoStart: true }`.
+- **Resilient Pipeline Execution (`renderThesisAuto`, `runAutoChain`, `runSingleAutoStep`, `orchestrateThesisDraft`)**:
+  - `orchestrateThesisDraft` supports `resume` (skips already completed sections), `shouldStop()` (pauses cleanly), and deterministic `joinNotesFallback` if a multi-part section merge truncates on huge chapters (caught live on Campbell 341p Results & Lehr 175p Discussion).
+  - Server `409 consent_needed` mid-pipeline opens `#rmdThesisConsentSheet` and automatically resumes `runAutoChain` at the draft step upon confirmation (caught live on synthetic 100p `.docx`).
+  - `ts.auto` persists to `localStorage smd_rmd_thesis_v1` per project so Stop/Continue and full app restarts preserve completed steps and succeeded token counters.
+  - Succeeded AI calls accumulate in `actualAiCalls`/`actualCostInr`/`actualMaikTokens`; 5xx/empty-draft failures never charge tokens and preserve any existing draft.
+  - `429` / `402` / cap errors pause cleanly with progress intact.
+- **Review & Approve + Journal Switching + Export**:
+  - Stops once at `"Review and approve"` (`status = "review"`), collapsing the 12-step detail list inside `<details id="rmdAutoStepsDetails">` so the Target Journal switcher and Amber/Green readiness cards appear immediately on 390px screens.
+  - Switching among Top 3 target journals re-runs steps `5..12` locally/online with zero additional AI calls.
+  - Inline inputs and explicit confirmation checkboxes (`[data-rmd-auto-confirm]`) transition Author list, IEC/Ethics, Declarations/CRediT, and Unverified References from Amber (`Amber: Confirm`) to Green (`Green: Ready`).
+  - Only clicking `#rmdAutoApproveBtn` (`Approve and mark final`) syncs sections and calls `POST /v1/projects/:id/manuscript/approval/approve`, marking `approved = true`.
+  - `#rmdAutoExportPackBtn` exports the `.zip` package through `SMD.p2.downloadBytes` (`SMD.p2.saveFile` Capacitor Share sheet on native mobile), alongside individual file download buttons.
+- **Cache-busting & Wiring**: Added `/research-thesis-auto.js?v=rmd1-scil1` to `index.html`, bumped `?v=` tokens on `research-screen-thesis.js`, `research-screen-manuscript.js`, and `research.js`, appended `-scil1` to `CACHE` in `sw.js`, and exported `SMD.aiDisclosureText` + `SMD.zipStore` on `research-screen-manuscript.js`.
 
 ---
 
-## Verification & Compliance
-- **Unit suites**:
-  - `test/research-thesis-chapters.test.mjs`, `test/research-thesis.test.mjs`, `test/research-thesis-render.test.mjs` — 24/24 passed after final edit.
-  - `test/research-stats-survival.test.mjs`, `test/research-ondevice-stats.test.mjs`, `test/rust-pdf-reader.test.mjs` — passed (including 600-row unique-time Cox + Schoenfeld test and `OD.roc` Web Worker test).
-  - `backend/research/tests/test_stats_survival.py` — 12/12 passed (`uv run ... pytest -o addopts="" --noconftest`).
-  - Full `npm test`: note `test/no-side-stripes.test.mjs` fails only on `"scanned the app source"` when run from a path containing spaces (`/Volumes/WD BLACK...`) because `new URL("..", import.meta.url).pathname` keeps `%20`; a direct regex scan confirmed zero side-stripe hits in all modified UI files.
-- **UI harness suites**: All **35** ResearchMD UI harness scripts (`test/run-research-*-ui.mjs` + `test/run-research-ui.mjs`) passed in headless Chrome (extending `test/run-research-thesis-ui.mjs` for chapter mapping overrides, multi-chapter bounded parallel drafting, single-section retry, `44px` targets, zero overflow, zero em/en dashes, and zero page errors).
-- **Live `www/` bundle verification**: Rebuilt `www/` via `scripts/build-www.sh` (`build: #1407`), served on `127.0.0.1:8812`, drove headless Chrome on `CDP_PORT=9473` across live `-scik1` scripts, ROC Web Worker execution, and real 175p Lehr PDF chapter mapping at 390px in both light and dark modes (zero overflow, zero dashes).
+## Live E2E Metrics (`http://127.0.0.1:8812` + `CDP_PORT=9473 ANY_USER=1`)
 
-### Modern Web Guidance (UI Checks)
-- **Accessibility**: Interactive chapter mapping toggle (`#rmdChapterMapToggle`), chapter destination selects (`[data-rmd-chapter-id]` with explicit `<label for="rmdChSel_...">`), and per-section retry buttons (`[data-rmd-retry-section]`) all meet `>= 44px` tap targets, preserve semantic focus/button roles, maintain `>= 4.5:1` contrast in light & dark themes, and respect `@media (prefers-reduced-motion: reduce)`.
-- **Forms**: Labels sit directly with their `<select>` controls inside `.rmd-chapter-row` with `overflow-wrap: anywhere`, explicit status feedback (`#rmdExcludedSummary`, `#rmdDraftProgressList` with `tabular-nums`), and non-destructive per-chapter adjustment before AI drafting.
+Outputs saved under `/Users/mkk/prep-data/assessment/rmd-live/e2e/outputs/thesis-auto-{1,2,3}` (including `.zip`, 8 individual package files, `metrics.json`, `editorial-review.txt`, and `390px` light/dark + `1024px` iPad screenshots):
+
+| Run | Thesis Fixture (Pages) | Detected Type & Preselected Journal | Wall Time (ms) | Est. / Actual AI Calls | Actual MaiK Tokens | Main / Abstract Words | Tables Kept | Refs Cited (Verified) | Verbatim Numbers Checked (Missing) |
+| --- | --- | --- | ---: | ---: | ---: | --- | ---: | --- | --- |
+| `thesis-auto-1` | `obs-campbell-2017-heart-failure.pdf` (341p) | Cohort -> Indian Heart Journal (3,500w / 250w) | 61,185 | 17 / 18 | 5,860 MT | 2,738 / 250 | 5 | 8 (5 / 62.5% Crossref) | 244 (0 missing) |
+| `thesis-auto-2` | `rct-lehr-2022-spinal-fusion.pdf` (175p) | RCT -> Indian J Orthopaedics (4,000w / 250w) | 74,395 | 18 / 20 | 7,360 MT | 2,892 / 200 | 6 | 14 (14 / 100.0% Crossref) | 295 (0 missing) |
+| `thesis-auto-3` | `stewardmd-synthetic-100p-thesis.docx` (96p extracted / 100p doc) | Cohort -> Indian J Crit Care Med (3,000w / 350w) | 41,253 | 10 / 10 | 1,840 MT | 747 / 223 | 6 | 8 (6 / 75.0% Crossref) | 196 (0 missing) |
+
+Note: After observing `thesis-auto-3` during editorial review, fixed `supRe` in `research-thesis-auto.js` so decimal numbers like `0.17` are not parsed as superscript citations, and re-verified on `thesis-auto-3` section text that `extractCitationsFromText` returns `[1..7]` only (excluding uncited ref #8).
+
+---
+
+## Automated Verification Summary
+
+- **Syntax checks**: `node --check` passed on `research-thesis-auto.js`, `research-screen-thesis.js`, `research-screen-manuscript.js`, `research.js`, and `sw.js`.
+- **Unit tests**:
+  - `test/research-thesis-auto.test.mjs` (9 tests covering ranking, table condensation, bib parsing/renumbering, online ref verification, MeSH keywords, declarations/CRediT, checklists, format check, cost estimation, `.docx`/`.pdf`/`.ris`/`.zip` builders, ES5/dash/side-stripe invariants) — passed after final edit.
+  - `test/research-thesis.test.mjs`, `test/research-thesis-chapters.test.mjs`, `test/research-thesis-render.test.mjs`, `test/research-journey.test.mjs`, `test/research-tutorial-cost-copy.test.mjs` — all passed (`0` failures) after final edit.
+  - Note on repo-wide `npm test` run (executed prior to the final 1-line `supRe` fix): 9 pre-existing suite failures in unrelated/worktree-path tests (`test/no-side-stripes.test.mjs` fails scanning 0 files when the worktree path contains spaces due to un-decoded `%20` in `new URL`, plus pre-existing `build-slim.test.mjs`, `edge-schemas.test.mjs`, `narke-drills.test.mjs`, `remote-media.test.mjs`, `tokos-drill-core.test.mjs`, `tokos-learn-gyA.test.mjs`, `wardsynq-i18n-unwrapped.test.mjs`, `wardsynq-reachability.test.mjs`). Direct regex scan inside `test/research-thesis-auto.test.mjs` verified zero CSS side stripes (`>= 2px`) and zero em/en dashes in `research-thesis-auto.js` and `research-screen-thesis.js`.
+- **Headless UI harnesses (`test/run-research-*-ui.mjs`)**:
+  - `test/run-research-thesis-auto-ui.mjs`: All **30** checks passed after final edit (upload token estimate, Stop & Continue, reload persistence, 500 non-charge, single-step Re-run, journal switch with 0 AI calls, Amber->Green checklist, manual Approve & `.zip` export, 390px light/dark & 1024px iPad zero overflow, >=44px touch targets, 0 dashes, 0 page errors).
+  - `test/run-research-thesis-ui.mjs`: All checks passed (`0` failures) after final edit.
+  - All 34 other `test/run-research-*-ui.mjs` scripts passed (`EXIT=0`) when run sequentially (after re-running `run-research-compliance-ui.mjs` & `run-research-ipad-ui.mjs` standalone cleanly: `COMPLIANCE=0`, `IPAD=0`).
+- **Bundle assembly**: `scripts/build-www.sh` (`build: #1414`, 17,285 files) assembled `www/` cleanly after final edit.
+
+### Modern Web Guidance (UI Compliance)
+- **Progress (`progress`)**: `#rmdAutoStepsList` uses a semantic ordered list with `role="progressbar"` (`aria-valuemin`, `aria-valuemax`, `aria-valuenow`, `aria-valuetext`), live status badges, tabular numbers (`font-variant-numeric: tabular-nums`), non-jarring layout without full-page blocking after completion, and `@media (prefers-reduced-motion: reduce)` disabling bar transitions.
+- **Accessibility (`accessibility`)**: Explicit `<label for="...">` bindings on every title page / declaration input and confirmation checkbox, `aria-pressed` on Top-3 journal selection buttons, `>= 44px` minimum interactive touch targets (`min-height: 47px` rule yielding `~44.6px` rendered height), high-contrast light/dark palette (`#136d45`/`#e6f5ec` light, `#42cdb5`/`#103239` dark on `#0a1230`/`#111c44`), `1px` full borders without side stripes, and verified `0` horizontal overflow at `390px` and `1024px`.
